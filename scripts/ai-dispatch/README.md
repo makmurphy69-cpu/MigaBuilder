@@ -2,7 +2,7 @@
 
 Makes Gemini the third reviewer next to Claude and ChatGPT (see
 `AI-COLLABORATION.md`). Anything that tags `@gemini` is sent to Gemini
-(`gemini-2.5-flash` through the `@google/genai` SDK), and the answer is posted
+(`gemini-3.8-flash` through the `@google/genai` SDK), and the answer is posted
 back where the question was asked.
 
 | Where you tag `@gemini` | How it runs | Where the answer goes |
