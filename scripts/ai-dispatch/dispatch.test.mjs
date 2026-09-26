@@ -73,3 +73,17 @@ test('comment events: only trusted humans who tag @gemini', () => {
   assert.equal(parseCommentEvent(event({ user: { login: 'github-actions[bot]', type: 'Bot' } })), null);
   assert.equal(parseCommentEvent(event({ body: 'no mention' })), null);
 });
+
+test('retries busy/rate-limited Gemini calls, not other errors', async () => {
+  const { withRetry } = await import('./gemini.mjs');
+  const fail = status => Object.assign(new Error('x'), { status });
+  let n = 0;
+  assert.equal(await withRetry(async () => { if (++n < 3) throw fail(503); return 'ok'; }, { delays: [0, 0, 0], log() {} }), 'ok');
+  assert.equal(n, 3);
+  n = 0;
+  await assert.rejects(withRetry(async () => { n++; throw fail(404); }, { delays: [0, 0, 0], log() {} }));
+  assert.equal(n, 1);
+  n = 0;
+  await assert.rejects(withRetry(async () => { n++; throw fail(429); }, { delays: [0, 0], log() {} }));
+  assert.equal(n, 3);
+});
