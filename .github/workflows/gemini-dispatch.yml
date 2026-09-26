@@ -1,0 +1,66 @@
+name: Gemini dispatcher
+
+# Routes @gemini mentions to Gemini (scripts/ai-dispatch/dispatch.mjs):
+# - a comment by the owner/a collaborator on an issue or pull request that
+#   tags @gemini gets a reply comment from Gemini;
+# - running this workflow by hand answers every unanswered @gemini mention in
+#   AI-REVIEW.md and commits the replies to the branch it was run on.
+# Needs the GEMINI_API_KEY repository secret.
+on:
+  issue_comment:
+    types: [created]
+  pull_request_review_comment:
+    types: [created]
+  workflow_dispatch:
+
+concurrency:
+  group: gemini-dispatch-${{ github.event.issue.number || github.event.pull_request.number || github.ref }}
+
+jobs:
+  comment:
+    if: >-
+      github.event_name != 'workflow_dispatch' &&
+      contains(github.event.comment.body, '@gemini') &&
+      contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      # Default branch only: pull request code is never checked out or run here.
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+        working-directory: scripts/ai-dispatch
+      - name: Ask Gemini and reply
+        run: node scripts/ai-dispatch/dispatch.mjs comment
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  review-log:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci --no-audit --no-fund
+        working-directory: scripts/ai-dispatch
+      - name: Answer @gemini mentions in AI-REVIEW.md
+        run: node scripts/ai-dispatch/dispatch.mjs log
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      - name: Commit Gemini's replies
+        run: |
+          if git diff --quiet -- AI-REVIEW.md; then echo "No new replies"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Add Gemini's replies to AI-REVIEW.md" -- AI-REVIEW.md
+          git push origin HEAD:${{ github.ref_name }}
