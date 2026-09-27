@@ -57,7 +57,7 @@
     'text-compare.html':['Text Compare','paste the original text on the left and the changed version on the right','Compare','review the highlighted additions, removals and changes, then download the report'],
     'exam-checker.html':['Exam Checker','build the exam, choose the question types and tap the correct answers — or press Load demo exam to try it','Load demo exam','print one sheet per student from the class list, test the reader with a photo of the correct answers, drop in every student\'s photo in any order, press Next answer to check, then download the results'],
     'flashcard-forge.html':['Flashcard Forge','create a deck and add cards by typing, pasting a list or letting AI write them from your notes','Make cards','study the due cards, grade how well you remembered each one, then take a test'],
-    '3d-cartoon.html':['3D Cartoon','press play to start the cel-shaded 3D cartoon scene','PLAY 3D CARTOON','watch the scene, then create your own story in Cartoon Forge'],
+    '3d-cartoon.html':['3D Cartoon','describe your story in the Story idea box','Make my 3D cartoon','press play to watch it, tick Voices to hear it, or download it as a video'],
     'background-forge.html':['Background Forge','choose a photo with a clear subject','Remove background','check the cut-out edges and download the transparent PNG'],
     'big-five.html':['Big Five Personality','read how the private 50-question test works','Start private test','answer honestly, then read your report across the five dimensions'],
     'design-forge.html':['Design Forge','choose a thumbnail, meme or collage and add your images and text','Create design','check the preview and download the PNG'],
