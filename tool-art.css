@@ -1,0 +1,68 @@
+/* Decorative, original abstract artwork shared by the tool pages. */
+header.masthead.miga-art {
+  --art-a: #6fd1e0;
+  --art-b: #e2a63b;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 146px;
+  padding-right: clamp(105px, 18vw, 220px);
+  background-color: #0e2a47;
+  background-image:
+    radial-gradient(ellipse at 83% 25%, color-mix(in srgb, var(--art-a) 32%, transparent), transparent 36%),
+    radial-gradient(ellipse at 25% 100%, color-mix(in srgb, var(--art-b) 17%, transparent), transparent 48%),
+    linear-gradient(120deg, #081826, #0e2a47 55%, #142d42);
+}
+header.masthead.miga-art::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: .26;
+  background: repeating-radial-gradient(ellipse at 81% 42%, transparent 0 21px, var(--art-a) 22px 23px, transparent 24px 48px);
+  mask-image: linear-gradient(to right, transparent 35%, black 90%);
+}
+header.masthead.miga-art[data-art='2']::before { transform: rotate(-12deg) scale(1.25); }
+header.masthead.miga-art[data-art='3']::before { transform: rotate(18deg) scale(1.35); }
+header.masthead.miga-art > :not(.miga-figure) { position: relative; z-index: 1; }
+header.masthead.miga-art .miga-figure {
+  position: absolute;
+  z-index: 1;
+  right: clamp(20px, 5vw, 64px);
+  top: 50%;
+  width: clamp(64px, 10vw, 102px);
+  height: auto;
+  transform: translateY(-50%);
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.3));
+  pointer-events: none;
+}
+section#start.card.miga-art {
+  --art-a: #6fd1e0;
+  --art-b: #e2a63b;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+section#start.card.miga-art::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 auto;
+  height: 160px;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 86% 15%, color-mix(in srgb, var(--art-a) 26%, transparent), transparent 55%),
+    radial-gradient(ellipse at 20% 0, color-mix(in srgb, var(--art-b) 12%, transparent), transparent 65%);
+}
+section#start.card.miga-art .miga-figure {
+  position: absolute;
+  top: 15px;
+  right: 16px;
+  width: 62px;
+  height: auto;
+  pointer-events: none;
+}
+section#start.card.miga-art h1 { padding-right: 70px; }
+@media (max-width: 600px) {
+  header.masthead.miga-art { min-height: 110px; padding-right: 90px; }
+  header.masthead.miga-art .miga-figure { width: 58px; right: 15px; }
+}
