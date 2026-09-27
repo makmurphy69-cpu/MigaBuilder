@@ -1,4 +1,4 @@
-/* Tool page artwork (see tool-art.js): an artist-style background, a creature and a credit line. */
+/* Tool page artwork (see tool-art.js): an artist-style background, a creature and an "About the art" arrow. */
 header.masthead.miga-art {
   position: relative; /* some pages leave the masthead static; the art must stay inside it */
   isolation: isolate;
@@ -6,7 +6,7 @@ header.masthead.miga-art {
   min-height: 150px;
   padding-right: clamp(110px, 18vw, 230px);
 }
-.miga-art > :not(.miga-art-bg):not(.miga-figure):not(.miga-art-credit) { position: relative; z-index: 2; }
+.miga-art > :not(.miga-art-bg):not(.miga-figure):not(.miga-art-info) { position: relative; z-index: 2; }
 .miga-art-bg {
   position: absolute;
   z-index: 0;
@@ -28,28 +28,103 @@ header.masthead.miga-art {
   filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
   pointer-events: none;
 }
-.miga-art-credit {
-  position: absolute;
-  z-index: 2;
-  right: calc(clamp(12px, 4vw, 56px) + clamp(84px, 11vw, 124px) + 6px); /* just left of the figure */
-  bottom: 8px;
-  padding: 2px 8px;
+/* "About the art": an arrow just under the picture's right corner that spins up a card. */
+.miga-art-info {
+  position: relative;
+  z-index: 30;
+  display: flex;
+  justify-content: flex-end;
+  margin: 4px clamp(8px, 2vw, 16px) 6px 0;
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+.miga-art-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px 3px 10px;
+  border: 1px solid rgba(8,24,38,.18);
   border-radius: 999px;
-  background: rgba(8,24,38,.72);
+  background: rgba(8,24,38,.82);
   color: #edeae0;
-  font: 600 10.5px/1.5 'IBM Plex Sans', system-ui, sans-serif;
+  font: 600 11px/1.4 inherit;
   letter-spacing: .02em;
-  pointer-events: none;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,.18);
+}
+.miga-art-toggle:hover { background: rgba(8,24,38,.95); }
+.miga-art-toggle:focus-visible { outline: 2px solid #f2c42a; outline-offset: 2px; }
+.miga-art-toggle svg {
+  width: 20px; height: 20px;
+  padding: 2px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+  transition: transform .45s cubic-bezier(.3,1.4,.5,1);
+}
+.miga-art-info.open .miga-art-toggle svg { transform: rotate(180deg); }
+.miga-art-card {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: min(380px, calc(100vw - 32px));
+  max-height: min(70vh, 460px);
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 14px 16px 12px;
+  border-radius: 14px;
+  background: #fbf8f0;
+  color: #1c2530;
+  box-shadow: 0 18px 40px rgba(0,0,0,.32), 0 0 0 1px rgba(8,24,38,.08);
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-align: left;
+  transform-origin: 50% 0;
+  transform: perspective(900px) rotateX(100deg) rotateZ(6deg) scale(.6);
+  opacity: 0;
+  transition: transform .5s cubic-bezier(.2,1.2,.4,1), opacity .3s ease;
+}
+.miga-art-card.in { transform: none; opacity: 1; }
+/* each line of text spins up into place, one after another */
+.miga-art-card.in > * { animation: miga-spin-up .55s cubic-bezier(.2,1.3,.4,1) both; }
+.miga-art-card.in > :nth-child(2) { animation-delay: .06s; }
+.miga-art-card.in > :nth-child(3) { animation-delay: .12s; }
+.miga-art-card.in > :nth-child(4) { animation-delay: .18s; }
+.miga-art-card.in > :nth-child(5) { animation-delay: .24s; }
+.miga-art-card.in > :nth-child(6) { animation-delay: .30s; }
+.miga-art-card.in > :nth-child(7) { animation-delay: .36s; }
+.miga-art-card.in > :nth-child(8) { animation-delay: .42s; }
+@keyframes miga-spin-up {
+  from { opacity: 0; transform: perspective(500px) translateY(14px) rotateX(-80deg); }
+  to { opacity: 1; transform: none; }
+}
+.miga-art-card[hidden] { display: none; }
+.miga-art-card .miga-art-kicker { margin: 0 0 2px; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a6a24; }
+.miga-art-card h2, .miga-art-card h3 { font-family: 'IBM Plex Sans', system-ui, sans-serif; }
+.miga-art-card h2 { margin: 0; font-size: 17px; line-height: 1.3; color: #0e1a26; }
+.miga-art-card .miga-art-style { margin: 2px 0 8px; font-weight: 600; color: #2f5fa7; }
+.miga-art-card h3 { margin: 10px 0 2px; font-size: 11.5px; letter-spacing: .04em; text-transform: uppercase; color: #5a6470; }
+.miga-art-card p { margin: 0; }
+.miga-art-card .miga-art-by { margin-top: 12px; padding-top: 8px; border-top: 1px solid rgba(8,24,38,.12); font-size: 12px; color: #4a5560; font-style: italic; }
+@media (prefers-color-scheme: dark) {
+  .miga-art-card { background: #17222d; color: #e4e8ec; box-shadow: 0 18px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); }
+  .miga-art-card h2 { color: #fff; }
+  .miga-art-card .miga-art-kicker { color: #e8c35c; }
+  .miga-art-card .miga-art-style { color: #8ab8e8; }
+  .miga-art-card h3 { color: #9aa6b2; }
+  .miga-art-card .miga-art-by { color: #aab4be; border-top-color: rgba(255,255,255,.12); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .miga-art-card, .miga-art-toggle svg { transition: opacity .2s ease; }
+  .miga-art-card { transform: none; }
+  .miga-art-card.in > * { animation: none; }
 }
 section#start.card.miga-art { position: relative; overflow: hidden; isolation: isolate; }
 section#start.card.miga-art .miga-art-bg { height: 170px; bottom: auto; }
 section#start.card.miga-art .miga-figure { top: 26px; bottom: auto; right: 16px; width: 84px; }
 section#start.card.miga-art h1 { padding-right: 96px; }
-section#start.card.miga-art .miga-art-credit { top: 8px; bottom: auto; right: 112px; }
+.miga-art-info.in-card { position: absolute; top: 176px; right: 12px; margin: 0; }
+.miga-art-info.in-card .miga-art-card { width: min(380px, calc(100vw - 64px)); } /* the start card clips its overflow */
 @media (max-width: 600px) {
   header.masthead.miga-art { min-height: 124px; padding-right: 92px; }
   .miga-art .miga-figure { width: 76px; right: 8px; }
   .miga-art-bg { -webkit-mask-image: linear-gradient(to right, transparent 45%, #000 85%); mask-image: linear-gradient(to right, transparent 45%, #000 85%); }
-  .miga-art-credit { right: 8px; bottom: 4px; font-size: 9px; padding: 1px 6px; max-width: 60%; }
-  section#start.card.miga-art .miga-art-credit { display: none; }
 }
