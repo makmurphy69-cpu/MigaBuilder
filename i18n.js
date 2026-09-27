@@ -25,6 +25,9 @@
  *
  * Any UI string a page's own JavaScript needs to look up dynamically (e.g.
  * to build dynamic content) can call I18N.t('key').
+ *
+ * Strings may contain {name} placeholders, filled from opts.vars passed to
+ * I18N.init(pageStrings, { vars: { n: 58 } }).
  */
 (function (window, document) {
   "use strict";
@@ -114,11 +117,20 @@
     });
   }
 
+  // Values for {name} placeholders in strings, e.g. { n: 58 } for "{n} free tools".
+  var vars = {};
+
+  function fill(text) {
+    return typeof text === 'string' ? text.replace(/\{(\w+)\}/g, function (m, name) {
+      return Object.prototype.hasOwnProperty.call(vars, name) ? String(vars[name]) : m;
+    }) : text;
+  }
+
   function t(key) {
     var dict = strings[currentLang] || {};
-    if (Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+    if (Object.prototype.hasOwnProperty.call(dict, key)) return fill(dict[key]);
     var fallbackDict = strings[FALLBACK_LANG] || {};
-    return Object.prototype.hasOwnProperty.call(fallbackDict, key) ? fallbackDict[key] : key;
+    return Object.prototype.hasOwnProperty.call(fallbackDict, key) ? fill(fallbackDict[key]) : key;
   }
 
   function applyToDom() {
@@ -161,6 +173,7 @@
       '.i18n-rtl { direction: rtl; }',
       '.i18n-rtl .lang-switcher { direction: ltr; }', // keep the dropdown itself left-to-right (language names read naturally either way, and it avoids the arrow flipping oddly on some browsers)
       '.lang-switcher select {',
+      '  width: auto; max-width: 100%; margin: 0;',
       '  font-family: inherit; font-size: 13px; padding: 6px 10px; border-radius: 3px;',
       '  border: 1px solid rgba(111, 209, 224, 0.4); background: rgba(8, 24, 38, 0.6); color: #EDEAE0; cursor: pointer;',
       '}',
@@ -218,8 +231,9 @@
   }
 
   window.I18N = {
-    init: function (pageStrings) {
+    init: function (pageStrings, opts) {
       window.__I18N_PAGE_STRINGS = pageStrings || {};
+      vars = (opts && opts.vars) || {};
       mergeDicts();
       injectRtlStyles();
       buildSwitcher();
