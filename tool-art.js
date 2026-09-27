@@ -159,6 +159,79 @@
     bow: function (x, y, k) { return p('M' + x + ' ' + y + ' L' + (x - 14) + ' ' + (y - 8) + ' L' + (x - 14) + ' ' + (y + 8) + 'Z M' + x + ' ' + y + ' L' + (x + 14) + ' ' + (y - 8) + ' L' + (x + 14) + ' ' + (y + 8) + 'Z', k[3], k[4], 2) + c(x, y, 3.5, k[3]); }
   };
 
+  /* About-the-art notes for the flip-up panel: s = style or movement, a = the artist,
+   * l = how this page's background borrows from that style. */
+  var INFO = {
+    giotto: { s: 'Early Italian Renaissance (Proto-Renaissance)', a: 'A Florentine painter who broke from flat medieval icons and gave figures weight, emotion and real space, most famously in the Scrovegni Chapel frescoes in Padua.', l: 'The deep lapis-blue ground, gilded arches and glowing gold halos echo his chapel frescoes.' },
+    vaneyck: { s: 'Early Netherlandish painting', a: 'A Flemish master who perfected oil painting, reaching jewel-like detail in works such as the Ghent Altarpiece and the Arnolfini Portrait.', l: 'The round convex mirror with its ring of small gold beads nods to the famous mirror in the Arnolfini Portrait, set in a dark green interior.' },
+    botticelli: { s: 'Italian Early Renaissance', a: 'A painter of the Medici court in Florence, loved for graceful, flowing figures in The Birth of Venus and Primavera.', l: 'The pale sea-green water, rippling waves and scallop shell recall The Birth of Venus.' },
+    leonardo: { s: 'High Renaissance', a: 'Painter, engineer and inventor behind the Mona Lisa and The Last Supper, who filled notebooks with sepia studies of machines, anatomy and nature.', l: 'Sepia ink on parchment, a circle inside a square and cross-hatched notes echo his notebooks and the Vitruvian Man.' },
+    michelangelo: { s: 'High Renaissance', a: 'Sculptor of David and painter of the Sistine Chapel ceiling, famous for powerful, heroic human figures.', l: 'Painted ceiling panels and two reaching arms that almost touch in a blue sky recall The Creation of Adam.' },
+    raphael: { s: 'High Renaissance', a: 'An Italian painter admired for calm harmony and perfect composition, above all in The School of Athens.', l: 'Grand arches and floor lines that run to a single vanishing point echo the architecture of The School of Athens.' },
+    durer: { s: 'Northern Renaissance', a: 'A German painter and printmaker who raised woodcuts and engravings to fine art, with works such as Melencolia I.', l: 'Dense parallel lines and cross-hatching in black ink on cream paper imitate his engravings.' },
+    bosch: { s: 'Early Netherlandish painting', a: 'A Dutch painter of strange, crowded dream-worlds full of odd creatures, best known for The Garden of Earthly Delights.', l: 'The pink fantasy tower with a blue glass globe, strange eggs and red berries on green fields recalls the Garden of Earthly Delights.' },
+    bruegel: { s: 'Northern Renaissance', a: 'A Flemish painter of peasant life and wide landscapes, such as Hunters in the Snow.', l: 'The snowy hills, frozen pond and tiny skaters come straight from his winter scenes.' },
+    titian: { s: 'Venetian Renaissance', a: 'The leading painter of Renaissance Venice, famous for rich, glowing colour and loose, expressive brushwork.', l: 'The blue-to-gold sky and the sweep of deep red drapery echo his colour and his flowing cloth.' },
+    elgreco: { s: 'Mannerism', a: 'A Greek-born painter who worked in Toledo, Spain, known for stretched, flickering figures and stormy skies, as in View of Toledo.', l: 'Tall, wavering strokes of green and white over a jagged skyline recall his View of Toledo.' },
+    caravaggio: { s: 'Baroque (tenebrism)', a: 'An Italian painter of dramatic realism who lit figures with a single hard beam of light against deep darkness.', l: 'A near-black room cut by one diagonal shaft of warm light is his trademark chiaroscuro.' },
+    rembrandt: { s: 'Dutch Golden Age (Baroque)', a: 'A Dutch master of light, shadow and deep human feeling in portraits and in The Night Watch.', l: 'A warm golden glow fading into brown-black darkness recalls his candle-lit interiors.' },
+    vermeer: { s: 'Dutch Golden Age', a: 'A painter from Delft of quiet domestic scenes lit by soft window light, such as The Milkmaid and Girl with a Pearl Earring.', l: 'Daylight falling from a window on the left, ultramarine blue cloth and a single pearl nod to his interiors.' },
+    velazquez: { s: 'Spanish Golden Age (Baroque)', a: 'The court painter of Philip IV of Spain, whose Las Meninas plays games with mirrors, frames and who is looking at whom.', l: 'The dim, tall room, the open doorway and the small framed mirror echo the setting of Las Meninas.' },
+    gentileschi: { s: 'Baroque (Caravaggisti)', a: 'One of the first women accepted into Florence\'s Academy of Arts, known for bold heroines painted with dramatic light.', l: 'Deep darkness and sweeping crimson drapery with gold highlights echo her theatrical Baroque scenes.' },
+    canaletto: { s: 'Rococo veduta (view painting)', a: 'A Venetian painter of detailed, sunlit city views of the Grand Canal and its palaces.', l: 'A row of pastel palaces with little windows above blue canal water and a gondola recalls his views of Venice.' },
+    goya: { s: 'Romanticism', a: 'A Spanish court painter whose late Black Paintings turned dark, haunted and deeply personal.', l: 'Dark brown hills, a pale moon and drifting sparks under a night sky echo the mood of his Black Paintings.' },
+    hokusai: { s: 'Ukiyo-e (Japanese woodblock print)', a: 'A Japanese printmaker whose The Great Wave off Kanagawa is one of the most recognised images in the world.', l: 'The curling Prussian-blue wave with white claw-like foam and a small mountain is a homage to The Great Wave.' },
+    hiroshige: { s: 'Ukiyo-e (Japanese woodblock print)', a: 'A Japanese printmaker of poetic landscapes and weather, including One Hundred Famous Views of Edo.', l: 'The indigo-to-dawn sky gradient and arched wooden bridge over water recall his famous bridge prints.' },
+    turner: { s: 'Romanticism', a: 'An English painter of light, storms and sea, whose hazy, glowing canvases pointed the way towards Impressionism.', l: 'A blazing sun dissolving into golden haze, with swirling light over the water, captures his luminous style.' },
+    constable: { s: 'Romanticism (English landscape)', a: 'An English landscape painter of the countryside of Suffolk, famous for The Hay Wain and his careful studies of clouds.', l: 'Billowing white clouds over green meadows and a dark tree echo his English country scenes.' },
+    friedrich: { s: 'German Romanticism', a: 'A German painter of lonely, spiritual landscapes such as Wanderer above the Sea of Fog.', l: 'Misty grey-blue ridges and a dark rocky foreground seen from above recall his sea of fog.' },
+    monet: { s: 'Impressionism', a: 'A founder of French Impressionism, who painted the same scenes again and again to catch changing light, above all his water lilies at Giverny.', l: 'Short dabs of blue and green on water with floating lily pads are his Water Lilies.' },
+    renoir: { s: 'Impressionism', a: 'A French Impressionist of joyful, sunlit scenes of people dancing, eating and relaxing.', l: 'Soft, feathery dabs of warm pink, yellow and green recall the dappled sunlight in his paintings.' },
+    degas: { s: 'Impressionism', a: 'A French artist famous for ballet dancers in rehearsal, painted from unusual angles in pastel and oil.', l: 'A row of ballerinas in white tutus on a warm wooden stage comes from his dance studio scenes.' },
+    cezanne: { s: 'Post-Impressionism', a: 'A French painter who built landscapes from blocks of colour and paved the way for Cubism; he painted Mont Sainte-Victoire many times.', l: 'Small tilted patches of colour building up a mountain landscape imitate his constructive brushstrokes.' },
+    vangogh: { s: 'Post-Impressionism', a: 'A Dutch painter of intense colour and swirling, energetic brushwork who made The Starry Night and Sunflowers.', l: 'Swirling blue sky, glowing yellow stars and a crescent moon are a homage to The Starry Night.' },
+    gauguin: { s: 'Post-Impressionism (Synthetism)', a: 'A French painter who worked in Tahiti with flat areas of bold, non-natural colour.', l: 'Flat bands of orange, pink and green with a tropical palm echo his Tahitian paintings.' },
+    seurat: { s: 'Neo-Impressionism (Pointillism)', a: 'A French painter who built pictures from thousands of tiny dots of pure colour, as in A Sunday Afternoon on the Island of La Grande Jatte.', l: 'The whole background is made of small coloured dots that blend in the eye: pointillism.' },
+    lautrec: { s: 'Post-Impressionism (poster art)', a: 'A French artist who captured Paris nightlife at the Moulin Rouge in bold posters and lithographs.', l: 'Flat yellow ground, a black silhouette and big red "BAL" lettering echo his cabaret posters.' },
+    klimt: { s: 'Vienna Secession (Art Nouveau)', a: 'An Austrian painter famous for The Kiss and his "golden period" of gold leaf and ornament.', l: 'A gold ground scattered with spirals, circles and little squares recalls his gold-leaf patterns.' },
+    munch: { s: 'Expressionism', a: 'A Norwegian painter of anxiety and emotion, known worldwide for The Scream.', l: 'Wavy bands of blood-orange sky over dark blue water and a diagonal bridge rail come from The Scream.' },
+    rousseau: { s: 'Naïve art (Post-Impressionism)', a: 'A self-taught French painter of imagined jungles full of layered leaves and hidden animals.', l: 'Dense layers of stylised jungle leaves under a red sun recall his jungle paintings.' },
+    matisse: { s: 'Fauvism (late paper cut-outs)', a: 'A French artist of bold colour who, late in life, "painted with scissors" in large paper cut-outs.', l: 'Simple flat shapes of blue, yellow and red on a white ground are like his cut-outs.' },
+    picasso: { s: 'Cubism', a: 'A Spanish artist who co-founded Cubism with Braque, breaking subjects into flat, angular planes seen from several viewpoints at once.', l: 'Overlapping angular planes of colour, with a face shown from more than one side, are Cubist.' },
+    braque: { s: 'Cubism', a: 'A French painter who invented Cubism with Picasso and brought in collage and musical instruments.', l: 'Muted brown planes, a guitar sound-hole and strings recall his Cubist still lifes.' },
+    kandinsky: { s: 'Abstract art (Bauhaus)', a: 'A Russian painter and one of the pioneers of pure abstraction, who linked colour and shape to music.', l: 'Concentric circles, crossing lines and floating geometric shapes echo his compositions such as Composition VIII.' },
+    klee: { s: 'Expressionism / Bauhaus', a: 'A Swiss-German artist and Bauhaus teacher who made playful, poetic pictures from colour grids and signs.', l: 'A patchwork grid of soft coloured squares with a small red sun recalls his magic squares.' },
+    mondrian: { s: 'De Stijl (Neoplasticism)', a: 'A Dutch painter who reduced art to black lines and blocks of primary colour.', l: 'Thick black lines dividing white, red, blue and yellow rectangles are his Compositions.' },
+    malevich: { s: 'Suprematism', a: 'A Russian painter who painted the Black Square and founded Suprematism, art of pure geometric feeling.', l: 'A black square and tilted coloured bars floating on white are a Suprematist composition.' },
+    delaunay: { s: 'Orphism', a: 'A Ukrainian-French artist who explored colour in rhythmic circles across paintings, fashion and textiles.', l: 'Rings of contrasting colour spinning side by side echo her "simultaneous contrasts".' },
+    chagall: { s: 'Modernism (dreamlike folk art)', a: 'A Russian-French painter of floating lovers, fiddlers and village houses under deep blue night skies.', l: 'Colourful little village houses under a moonlit deep-blue sky recall his dream villages.' },
+    duchamp: { s: 'Dada', a: 'A French artist who challenged what art can be with "readymades", after painting Nude Descending a Staircase, No. 2.', l: 'Repeated, overlapping zigzag strokes in browns show motion, like Nude Descending a Staircase.' },
+    dali: { s: 'Surrealism', a: 'A Spanish Surrealist of dream images, most famously the melting clocks in The Persistence of Memory.', l: 'A soft, melting clock draped over a bare branch in a desert light is from The Persistence of Memory.' },
+    magritte: { s: 'Surrealism', a: 'A Belgian Surrealist who made ordinary things puzzling: bowler hats, clouds, apples and pipes.', l: 'White clouds in a blue sky with a floating bowler hat and a green apple are his motifs.' },
+    miro: { s: 'Surrealism', a: 'A Catalan artist of playful, childlike signs, stars and biomorphic shapes in primary colours.', l: 'Black wandering lines, stars and dots of red, blue and yellow on a cream ground echo his paintings.' },
+    kahlo: { s: 'Mexican modernism (Surrealist-adjacent)', a: 'A Mexican painter of vivid, honest self-portraits framed by leaves, flowers and animals.', l: 'A lush wall of green leaves with bright flowers recalls the backgrounds of her self-portraits.' },
+    rivera: { s: 'Mexican Muralism', a: 'A Mexican muralist who painted huge public walls about work, history and everyday people.', l: 'Rows of white calla lilies on warm earth colours come from his flower-seller paintings.' },
+    okeeffe: { s: 'American Modernism', a: 'An American painter of huge close-up flowers and the desert landscapes of New Mexico.', l: 'Soft nested pink petals seen close up recall her large flower paintings.' },
+    lempicka: { s: 'Art Deco', a: 'A Polish painter of glamorous, polished portraits in the style of 1920s Art Deco.', l: 'Metallic grey pillars and a sweep of glossy red fabric echo her smooth, sculpted Art Deco look.' },
+    hopper: { s: 'American Realism', a: 'An American painter of quiet, lonely city scenes, most famously Nighthawks.', l: 'A brightly lit diner window glowing in a dark night street is a homage to Nighthawks.' },
+    escher: { s: 'Graphic art (mathematical)', a: 'A Dutch printmaker of impossible buildings and interlocking tessellations.', l: 'Interlocking black and grey tiles that fit together perfectly are his tessellations.' },
+    pollock: { s: 'Abstract Expressionism (action painting)', a: 'An American painter who dripped and poured paint onto canvases laid on the floor.', l: 'Tangled drips and splatters of black, white, red and blue are his drip paintings.' },
+    rothko: { s: 'Abstract Expressionism (colour field)', a: 'An American painter of large, softly glowing rectangles of colour meant to be felt more than read.', l: 'Blurry-edged stacked rectangles of red, orange and dark maroon are his colour fields.' },
+    lichtenstein: { s: 'Pop Art', a: 'An American Pop artist who blew up comic-strip panels with Ben-Day dots and speech bubbles.', l: 'Red Ben-Day dots and a thick-outlined comic speech bubble come from his comic paintings.' },
+    warhol: { s: 'Pop Art', a: 'An American Pop artist of repeated, brightly coloured silk-screen images like the Marilyn Diptych and Campbell\'s Soup Cans.', l: 'A grid of the same piece of fruit repeated in clashing neon colours is his silk-screen style.' },
+    hockney: { s: 'Pop Art (British)', a: 'A British painter famous for sunny Californian swimming pools such as A Bigger Splash.', l: 'A bright blue pool with wavy light lines and a white splash is from A Bigger Splash.' },
+    riley: { s: 'Op Art', a: 'A British artist whose black-and-white patterns seem to move and vibrate.', l: 'Rows of wavy black lines that make the surface ripple are Op Art.' },
+    vasarely: { s: 'Op Art', a: 'A Hungarian-French artist, the "father of Op Art", known for grids that seem to bulge in 3D.', l: 'A grid of dots that swell towards the centre creates his bulging optical effect.' },
+    kusama: { s: 'Contemporary art (pop / avant-garde)', a: 'A Japanese artist obsessed with polka dots, infinity rooms and giant yellow pumpkins.', l: 'White polka dots on red and a big black-spotted yellow pumpkin are her signature motifs.' },
+    haring: { s: 'Pop Art / street art', a: 'An American artist whose bold outlined dancing figures began as chalk drawings in the New York subway.', l: 'Thick black-outlined dancing figures with motion lines on a bright background are his style.' },
+    basquiat: { s: 'Neo-Expressionism', a: 'An American artist who mixed graffiti, words, crowns and raw energy into powerful paintings.', l: 'A scrawled three-point crown, the letters "ABC ©" and bold scribbles are his marks.' },
+    hundertwasser: { s: 'Vienna modernism (organic architecture)', a: 'An Austrian artist and architect who hated straight lines and loved spirals, colour and onion domes.', l: 'Brightly coloured houses with round domes, round windows and wavy lines echo his buildings.' },
+    murakami: { s: 'Superflat (Japanese contemporary)', a: 'A Japanese artist who blends anime, pop and traditional art, famous for his smiling flowers.', l: 'Rows of rainbow-petalled smiling flowers on white are his Superflat flowers.' },
+    rodchenko: { s: 'Russian Constructivism', a: 'A Russian designer and photographer who made bold posters with diagonals, red and black.', l: 'A sharp red diagonal, a black circle and black bars on cream are Constructivist design.' },
+    modigliani: { s: 'École de Paris (modernism)', a: 'An Italian painter in Paris known for portraits with long faces, long necks and almond eyes.', l: 'A long oval face and neck against warm terracotta walls recall his portraits.' },
+    banksy: { s: 'Street art (stencil graffiti)', a: 'An anonymous British street artist known for witty stencils on city walls, such as Girl with Balloon.', l: 'A brick wall with paint drips and a stencilled NO PHOTOS sign is street art; the black stencil figure with a red balloon nods to Girl with Balloon.' }
+  };
+
   /* One artist, creature, prop and hat per page. Every artist is used once. */
   var TOOLS = {
     '3d-cartoon': ['murakami', 'furball', 'clap'],
@@ -237,7 +310,7 @@
     var prop = P[pick[2]] ? P[pick[2]](k) : '';
     var defs = '<defs><filter id="mgStencil" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.08  0 0 0 0 0.08  0 0 0 0 0.08  0 0 0 30 0"/></filter></defs>';
     var figure = defs + '<ellipse cx="60" cy="126" rx="34" ry="5" fill="#000" opacity=".25"/>' + (art.t === 'stencil' ? '<g filter="url(#mgStencil)">' + fig + hat + '</g>' : fig + hat) + prop; // Banksy: a black stencil, only the prop keeps its colour
-    return { artist: art, key: pick[0], creature: pick[1], bg: art.b(seeded(h)), figure: figure };
+    return { artist: art, key: pick[0], creature: pick[1], prop: pick[2], bg: art.b(seeded(h)), figure: figure };
   }
 
   function decorate() {
@@ -255,13 +328,56 @@
     fig.setAttribute('class', 'miga-figure'); fig.setAttribute('viewBox', '-4 -8 128 140');
     fig.setAttribute('aria-hidden', 'true'); fig.setAttribute('focusable', 'false');
     fig.innerHTML = a.figure;
-    var credit = document.createElement('span');
-    credit.className = 'miga-art-credit';
-    credit.textContent = 'Art in the style of ' + a.artist.n + (/^\d|^c\./.test(a.artist.y) ? ' (' + a.artist.y + ')' : '');
     header.insertBefore(bg, header.firstChild);
-    header.appendChild(fig); header.appendChild(credit);
+    header.appendChild(fig);
+    addInfo(header, a);
   }
-  window.MigaArt = { build: build, tools: TOOLS, artists: A };
+
+  var NAMES = { furball: 'fluffy furball', mushroom: 'mushroom creature', jelly: 'jellyfish', nessie: 'little sea monster' };
+  var PROP_NAMES = { clap: 'film clapperboard', note: 'music note', lens: 'magnifying glass', bubble: 'speech bubble', gamepad: 'game controller', flask: 'science flask', bulb: 'light bulb', chart: 'bar chart', car: 'toy car', coin: 'pile of coins', scissors: 'pair of scissors', palette: 'paint palette' };
+
+  /* A small arrow in the right corner just under the picture. Pressing it spins up a card
+   * about the artist, their style and how the picture links to it, so no text covers the art. */
+  function addInfo(header, a) {
+    var info = INFO[a.key], art = a.artist;
+    if (!info) return;
+    var years = /^\d|^c\./.test(art.y) ? ' (' + art.y + ')' : '';
+    var prop = a.prop ? (PROP_NAMES[a.prop] || a.prop) : '';
+    var wrap = document.createElement('div');
+    wrap.className = 'miga-art-info';
+    var id = 'miga-art-card';
+    wrap.innerHTML =
+      '<div class="miga-art-card" id="' + id + '" role="region" aria-label="About this art" hidden>' +
+        '<p class="miga-art-kicker">About this art</p>' +
+        '<h2></h2><p class="miga-art-style"></p>' +
+        '<h3>The artist</h3><p class="miga-art-about"></p>' +
+        '<h3>How this picture links to it</h3><p class="miga-art-link"></p>' +
+        '<p class="miga-art-by">Made by Claude, an AI by Anthropic: an original homage drawn in code. Nothing is copied from real paintings.</p>' +
+      '</div>' +
+      '<button type="button" class="miga-art-toggle" aria-expanded="false" aria-controls="' + id + '">' +
+        '<span class="miga-art-label">About the art</span>' +
+        '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</button>';
+    var card = wrap.firstChild, btn = wrap.lastChild;
+    card.querySelector('h2').textContent = art.n + years;
+    card.querySelector('.miga-art-style').textContent = info.s;
+    card.querySelector('.miga-art-about').textContent = info.a;
+    card.querySelector('.miga-art-link').textContent = info.l + ' In front stands an original ' + (NAMES[a.creature] || a.creature) +
+      ' drawn in the same colours' + (prop ? ', holding a ' + prop + ' that fits this tool.' : '.');
+    btn.setAttribute('title', 'Art in the style of ' + art.n + ' \u2013 click for more');
+    function set(open) {
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      wrap.classList.toggle('open', open);
+      if (open) { card.hidden = false; void card.offsetWidth; card.classList.add('in'); }
+      else { card.classList.remove('in'); setTimeout(function () { if (!wrap.classList.contains('open')) card.hidden = true; }, 450); }
+    }
+    btn.addEventListener('click', function () { set(!wrap.classList.contains('open')); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && wrap.classList.contains('open')) { set(false); btn.focus(); } });
+    document.addEventListener('click', function (e) { if (wrap.classList.contains('open') && !wrap.contains(e.target)) set(false); });
+    if (header.tagName === 'SECTION') { wrap.classList.add('in-card'); header.appendChild(wrap); } // assessment start cards: the art is the card's top band
+    else header.parentNode.insertBefore(wrap, header.nextSibling);
+  }
+  window.MigaArt = { build: build, tools: TOOLS, artists: A, info: INFO };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', decorate);
   else decorate();
 })();
