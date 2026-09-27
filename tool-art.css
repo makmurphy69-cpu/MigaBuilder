@@ -1,70 +1,55 @@
-/* Decorative, original abstract artwork shared by the tool pages. */
+/* Tool page artwork (see tool-art.js): an artist-style background, a creature and a credit line. */
 header.masthead.miga-art {
-  /* Some pages leave the masthead static; the art and figure must stay inside it. */
-  position: relative;
-  --art-a: #6fd1e0;
-  --art-b: #e2a63b;
+  position: relative; /* some pages leave the masthead static; the art must stay inside it */
   isolation: isolate;
   overflow: hidden;
-  min-height: 146px;
-  padding-right: clamp(105px, 18vw, 220px);
-  background-color: #0e2a47;
-  background-image:
-    radial-gradient(ellipse at 83% 25%, color-mix(in srgb, var(--art-a) 32%, transparent), transparent 36%),
-    radial-gradient(ellipse at 25% 100%, color-mix(in srgb, var(--art-b) 17%, transparent), transparent 48%),
-    linear-gradient(120deg, #081826, #0e2a47 55%, #142d42);
+  min-height: 150px;
+  padding-right: clamp(110px, 18vw, 230px);
 }
-header.masthead.miga-art::before {
-  content: '';
+.miga-art > :not(.miga-art-bg):not(.miga-figure):not(.miga-art-credit) { position: relative; z-index: 2; }
+.miga-art-bg {
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
-  opacity: .26;
-  background: repeating-radial-gradient(ellipse at 81% 42%, transparent 0 21px, var(--art-a) 22px 23px, transparent 24px 48px);
-  mask-image: linear-gradient(to right, transparent 35%, black 90%);
+  /* the painting fades out towards the title so the text stays readable */
+  -webkit-mask-image: linear-gradient(to right, transparent 30%, rgba(0,0,0,.55) 55%, #000 78%);
+  mask-image: linear-gradient(to right, transparent 30%, rgba(0,0,0,.55) 55%, #000 78%);
 }
-header.masthead.miga-art[data-art='2']::before { transform: rotate(-12deg) scale(1.25); }
-header.masthead.miga-art[data-art='3']::before { transform: rotate(18deg) scale(1.35); }
-header.masthead.miga-art > :not(.miga-figure) { position: relative; z-index: 1; }
-header.masthead.miga-art .miga-figure {
+.miga-art .miga-figure {
   position: absolute;
   z-index: 1;
-  right: clamp(20px, 5vw, 64px);
-  top: 50%;
-  width: clamp(64px, 10vw, 102px);
+  right: clamp(12px, 4vw, 56px);
+  bottom: 8px;
+  width: clamp(84px, 11vw, 124px);
   height: auto;
-  transform: translateY(-50%);
-  filter: drop-shadow(0 8px 14px rgba(0,0,0,.3));
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
   pointer-events: none;
 }
-section#start.card.miga-art {
-  --art-a: #6fd1e0;
-  --art-b: #e2a63b;
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-}
-section#start.card.miga-art::before {
-  content: '';
+.miga-art-credit {
   position: absolute;
-  z-index: -1;
-  inset: 0 0 auto;
-  height: 160px;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 86% 15%, color-mix(in srgb, var(--art-a) 26%, transparent), transparent 55%),
-    radial-gradient(ellipse at 20% 0, color-mix(in srgb, var(--art-b) 12%, transparent), transparent 65%);
-}
-section#start.card.miga-art .miga-figure {
-  position: absolute;
-  top: 15px;
-  right: 16px;
-  width: 62px;
-  height: auto;
+  z-index: 2;
+  right: calc(clamp(12px, 4vw, 56px) + clamp(84px, 11vw, 124px) + 6px); /* just left of the figure */
+  bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(8,24,38,.72);
+  color: #edeae0;
+  font: 600 10.5px/1.5 'IBM Plex Sans', system-ui, sans-serif;
+  letter-spacing: .02em;
   pointer-events: none;
 }
-section#start.card.miga-art h1 { padding-right: 70px; }
+section#start.card.miga-art { position: relative; overflow: hidden; isolation: isolate; }
+section#start.card.miga-art .miga-art-bg { height: 170px; bottom: auto; }
+section#start.card.miga-art .miga-figure { top: 26px; bottom: auto; right: 16px; width: 84px; }
+section#start.card.miga-art h1 { padding-right: 96px; }
+section#start.card.miga-art .miga-art-credit { top: 8px; bottom: auto; right: 112px; }
 @media (max-width: 600px) {
-  header.masthead.miga-art { min-height: 110px; padding-right: 90px; }
-  header.masthead.miga-art .miga-figure { width: 58px; right: 15px; }
+  header.masthead.miga-art { min-height: 124px; padding-right: 92px; }
+  .miga-art .miga-figure { width: 76px; right: 8px; }
+  .miga-art-bg { -webkit-mask-image: linear-gradient(to right, transparent 45%, #000 85%); mask-image: linear-gradient(to right, transparent 45%, #000 85%); }
+  .miga-art-credit { right: 8px; bottom: 4px; font-size: 9px; padding: 1px 6px; max-width: 60%; }
+  section#start.card.miga-art .miga-art-credit { display: none; }
 }

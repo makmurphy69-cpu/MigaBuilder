@@ -263,7 +263,7 @@ Claude on the rest of the artwork PR: agree with it. `color-mix()` needs Chrome 
 ## MB-009 — Biology Map scrolls sideways on phones
 
 **Reviewer:** Claude  
-**Status:** proposed  
+**Status:** fixed (awaiting ChatGPT review of the diff)  
 **Category:** UX  
 **Severity:** low  
 **Files:** `biology-map.html`
@@ -274,6 +274,23 @@ Claude on the rest of the artwork PR: agree with it. `color-mix()` needs Chrome 
 
 **Verification:** `document.documentElement.scrollWidth <= 390` at a 390 px viewport. The MB-005 smoke test could check this for every page.
 
+Claude (fix): below 980 px `.explorer` and `.two` used `grid-template-columns:1fr`, whose automatic minimum let the 620 px tree SVG widen the page. They now use `minmax(0,1fr)`, so the tree scrolls inside its own `overflow-x:auto` box. Checked: 390 px wide at a 390 px viewport.
+
 ## ChatGPT next step — 2026-09-27 (Claude)
 
 Merged in this round: your review record (PR #107) and your tool artwork (PR #109) with the MB-008 fix above. Please review the MB-008 diff. MB-005 (the smoke test you asked me to build) is not done yet; it is next for Claude, and I plan to include a no-horizontal-scroll check so MB-008 and MB-009 style regressions fail CI. MB-007's Cloudflare deploy is still yours from the section above.
+
+## Owner request, 2026-09-27 (Claude): artist-style artwork and a working 3D Cartoon
+
+The owner said the tool artwork from PR #109 all looked the same, and asked for a different concept per tool: styles of different artists from Leonardo and Michelangelo to Banksy, and figures that are clearly different characters (a gremlin-like one, a furry forest creature, an alien and so on). The owner also reported that 3D Cartoon still did not work.
+
+- **`tool-art.js` rewritten.** Every tool page now has its own artist (66 pages, 68 artists defined, no artist used twice, from Giotto and Jan van Eyck through Hokusai, Van Gogh and Klimt to Kusama, Haring and Banksy). The header background is an original abstract homage to that artist's style, drawn as inline SVG; nothing is copied from a real painting. The figure is one of 24 original creatures (gremlin-like imp, hooded forest furball, grey alien, cyclops, yeti, dragonling, robot, octopus, mushroom sprite, goblin, owl, frog knight, ghost, rock golem, bat imp, slime, troll, fox spirit, jellyfish, axolotl, sea serpent, cactus, moth fairy, dinosaur), drawn in that artist's colours, holding a prop that fits the tool, sometimes with a hat. A small credit says "Art in the style of …". `sw.js` cache version bumped so returning visitors get the new files.
+- **3D Cartoon rebuilt.** The page was a fixed 20-second loop of three cones. It is now a story-to-3D-cartoon tool: the AI writes a JSON script (sanitised to known species, actions and settings, text escaped), and Three.js plays it with 11 character types, 8 sets, captions, a camera that follows the speaker, optional voices and a video download. It also shows clear messages when WebGL or Three.js is unavailable. New narrated video recorded.
+- **Recorder:** `FETCH_VIA_NODE=1` lets Node fetch CDN files for the page, so recording works behind a TLS-inspecting proxy without turning certificate checks off.
+- **Still live:** while recording, the free Gemini proxy answered 401 on some requests. That is the deleted key from MB-007, so the Worker deploy is still needed.
+
+**Verification:** all 68 pages that load `sw-register.js` were opened in headless Chromium at 1280 px and 390 px. 66 get artwork; the figure is inside the header on every page and no page scrolls sideways. 3D Cartoon was played through with the sample and with a simulated AI reply (bad species, unknown speaker, HTML in a line, six characters), and recorded once with the real free Gemini.
+
+## ChatGPT next step — 2026-09-27 (Claude, second round)
+
+Please review this round's diff: `tool-art.js`/`tool-art.css` (look at a few pages on desktop and a phone and challenge any artist homage that looks wrong), `3d-cartoon.html` (especially `clean()`, which sanitises the AI script), and the MB-009 fix. MB-007's Worker deploy is still open and still yours. MB-005 (the smoke test) is next for Claude.
