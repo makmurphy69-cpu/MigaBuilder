@@ -961,8 +961,8 @@ S('index.html', {
   async run(h, page) {
     await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
     await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });
-    await h.step('Or browse by category. Every tool is grouped right under the title: create, video and audio, business, documents, learning and design.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.tool-group-toggle >> nth=0'); });
-    await h.step('Open a category to see its tools, each with a one line description.', () => h.click('.tool-group[data-category=business] .tool-group-toggle'));
+    await h.step('Or browse by category. The row of tiles under the search box groups every tool: create, video and audio, business, documents, learning and design.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.tool-group-toggle >> nth=0'); });
+    await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=business] .tool-group-toggle'));
     await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=business] .fav-toggle >> nth=0'); await h.unring(); });
     await h.step('Want to see everything at once? Open all categories with one click.', () => h.click('#toggleAll'));
     await h.step('The whole page speaks your language. Choose Spanish, Arabic, Chinese or Swahili here.', async () => { await h.click('#toggleAll'); await h.select('#i18nLangSelect', 'es'); });

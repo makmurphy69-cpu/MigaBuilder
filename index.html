@@ -629,6 +629,20 @@
   .tour-copy h2 { margin:0 0 8px; font:700 clamp(20px,2.4vw,26px) 'Space Grotesk',sans-serif; }
   .tour-video { width:100%; aspect-ratio:16/9; border-radius:8px; background:#050f18; border:1px solid rgba(111,209,224,.2); }
   @media(max-width:760px){ .tour-inner { grid-template-columns:1fr; } .hero-lang { justify-content:center; margin-top:0; } .cta-build, .cta-install { flex:1 1 100%; } }
+
+  /* ---- Categories as a horizontal row of tiles; the chosen category's tools open in a panel underneath ---- */
+  .tool-groups { grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+  .tool-group { display:contents; }
+  .tool-group-toggle { order:0; flex-direction:column; align-items:center; justify-content:center; gap:7px; min-height:122px; padding:16px 10px; text-align:center; background:rgba(8,24,38,.8); border:1px solid var(--line-cyan-dim); border-radius:12px; transition:transform .15s ease, border-color .15s ease, background .15s ease; }
+  .tool-group-toggle:hover { transform:translateY(-2px); border-color:rgba(111,209,224,.65); background:rgba(111,209,224,.08); }
+  .tool-group-toggle .cat-icon { font-size:30px; }
+  .tool-group-toggle .cat-name { flex:none; font-size:12.5px; line-height:1.3; letter-spacing:.06em; }
+  .tool-group-toggle .chevron { display:none; }
+  .tool-group.open .tool-group-toggle, .tool-group.search-open .tool-group-toggle { border-color:var(--line-cyan); background:rgba(111,209,224,.15); box-shadow:inset 0 0 0 1px var(--line-cyan), 0 6px 18px rgba(0,0,0,.25); }
+  .tool-group-list { order:1; grid-column:1/-1; background:rgba(8,24,38,.82); border:1px solid rgba(111,209,224,.45); border-radius:12px; padding:14px 18px 16px; }
+  .list-title { grid-column:1/-1; display:flex; gap:8px; align-items:center; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid rgba(111,209,224,.14); color:var(--line-cyan); font:700 13px 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+  @media(max-width:900px){ .tool-groups { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media(max-width:520px){ .tool-groups { grid-template-columns:repeat(2,minmax(0,1fr)); } .tool-group-toggle { min-height:100px; padding:12px 8px; } .tool-group-toggle .cat-icon { font-size:26px; } }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -787,8 +801,9 @@
     while(heading.nextSibling)list.appendChild(heading.nextSibling);
     button.type='button';button.className='tool-group-toggle';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',list.id);const name=document.createElement('span');name.className='cat-name';name.textContent=heading.textContent.trim();name.setAttribute('data-i18n',heading.getAttribute('data-i18n'));
     button.innerHTML='<span class="cat-icon" aria-hidden="true">'+(g.dataset.icon||'')+'</span><span class="cat-count">'+list.querySelectorAll('.tool-card').length+'</span><span class="chevron" aria-hidden="true">⌄</span>';button.insertBefore(name,button.children[1]);
+    const title=document.createElement('div');title.className='list-title';title.innerHTML='<span aria-hidden="true">'+(g.dataset.icon||'')+'</span>';const titleName=document.createElement('span');titleName.textContent=name.textContent;titleName.setAttribute('data-i18n',name.getAttribute('data-i18n'));title.appendChild(titleName);list.insertBefore(title,list.firstChild);
     heading.replaceWith(button);g.appendChild(list);
-    button.addEventListener('click',()=>{g.classList.toggle('open');button.setAttribute('aria-expanded',String(g.classList.contains('open')));syncToggleAll()});
+    button.addEventListener('click',()=>{const willOpen=!g.classList.contains('open');groups.forEach(x=>{x.classList.toggle('open',x===g&&willOpen);x.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(x===g&&willOpen))});syncToggleAll();if(willOpen){const r=list.getBoundingClientRect();if(r.top>innerHeight-120)list.scrollIntoView({behavior:'smooth',block:'nearest'})}});
   });
   const toggleAll=document.getElementById('toggleAll');
   function syncToggleAll(){const allOpen=groups.every(g=>g.classList.contains('open'));toggleAll.setAttribute('data-i18n',allOpen?'collapseAll':'expandAll');toggleAll.textContent=window.I18N?I18N.t(allOpen?'collapseAll':'expandAll'):(allOpen?'Close all categories':'Open all categories')}

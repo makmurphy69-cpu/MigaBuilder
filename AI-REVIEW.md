@@ -162,11 +162,48 @@ Claude: both pages now start with `<!DOCTYPE html>`. The restored Cartoon Forge 
 
 ---
 
+## MB-007 — A deleted key in the Gemini proxy's key pool fails visitors' requests
+
+**Reviewer:** Claude  
+**Status:** code fixed in `main`; **not deployed** (assigned to ChatGPT, see *ChatGPT next step*)  
+**Category:** Reliability  
+**Severity:** medium  
+**Files:** `cloudflare-worker/gemini-proxy.js` (deployed as the Cloudflare Worker `migabuilder-gemini`)
+
+**Evidence:**
+
+The owner deleted one of the 9 keys pooled in the Worker secret `GEMINI_API_KEY` (a comma-separated list) in Google AI Studio, and does not know which one. The proxy picks a random key per request. The live version only moves on to another key after a 403 or 429. For a deleted key, Google answers `400 API_KEY_INVALID`, and the live Worker returns that error to the visitor. So about 1 in 9 free Gemini requests on the site fail.
+
+**Proposed solution:**
+
+Merged in PR #105: a key-invalid answer (400 with `API_KEY_INVALID` / "API key not valid" / "API key expired", or 401) is treated like a rate limit. The proxy tries the next key, remembers the bad key for the life of the Worker instance, and logs `Gemini key ...abcd is invalid` with only its last 4 characters. PR #106 added the live Worker's `RATE_LIMITER` check to the repo copy, so deploying the repo file keeps the rate limit. Claude could not deploy it: the session's permission policy blocks production deploys.
+
+**Other-model review:**
+
+**Verification:**
+
+Claude: a mocked-Google simulation with 9 keys, 1 of them deleted: 0 of 300 requests failed and the dead key was tried once in total. Only one other difference exists between the repo file and the live Worker, the fix itself; checked with a diff against the deployed script.
+
+---
+
 ## Claude next step
 
 Please independently review MB-001 through MB-005. Challenge anything that is overstated or incorrect. Add your response under **Other-model review** or append new findings using the same format. Do not implement a security change until its expected behavior and test are clear.
 
 ## ChatGPT next step
+
+**New task from the owner, 2026-09-27: please take over the Cloudflare dashboard side of MB-007.** You have access to the owner's Cloudflare account; Claude's session is not allowed to deploy to production (its permission policy blocked the deploy). The owner does not know which of the 9 Gemini keys is the deleted one. Cloudflare never shows a secret's value after it is saved, so the key has to be identified from the Worker's own log.
+
+1. **Deploy the fix.** Go to Workers & Pages → `migabuilder-gemini` → Edit code. Replace everything with `cloudflare-worker/gemini-proxy.js` from `main` and press Deploy. Leave Settings → Variables and Secrets as they are: the `GEMINI_API_KEY` secret and the `RATE_LIMITER` binding (20 requests / 60 s) stay.
+2. **Find the dead key.** Open the Worker's Logs (Observability / real-time logs) and make a few free-Gemini requests on migabuilder.com, for example with Website Builder → Turn this into a full plan. Within about 9 requests you should see `Gemini key ...abcd is invalid`; the 4 characters are the end of the dead key. Match them against the keys listed in Google AI Studio (aistudio.google.com/apikey). The deleted key will be missing from that list, so any pooled key that ends in those characters and isn't listed is the one.
+3. **Remove it.** Edit the `GEMINI_API_KEY` secret. Paste the list without the dead key, and add the owner's new key if they want it pooled. Keys go comma-separated with no spaces. Save, which redeploys.
+4. **Check.** After saving, the log line should not come back, and free Gemini requests on the site should succeed every time.
+
+Never write any key, or more than its last 4 characters, into this file, a commit, an issue, a comment or a prompt (rule 6 in `AI-COLLABORATION.md`). When you are done, mark MB-007 verified with what you saw in the logs, and tell the owner.
+
+**Also in this round (Claude):** the homepage categories are now a horizontal row of six tiles under the search box; picking one opens its tools in a panel underneath, one at a time. The tour video (`videos/index.mp4`) was re-recorded to match. The review request from the previous round below still stands.
+
+### Previous round
 
 Claude, round of 2026-09-27. The owner asked for these changes, and they are in one pull request:
 
