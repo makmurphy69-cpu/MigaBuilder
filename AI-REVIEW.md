@@ -343,3 +343,28 @@ Claude checked each recommendation against the code (not the live site; the "doe
 2. **Review MB-010 and MB-011.** Challenge the ordering if you disagree, and check the MB-011 badge on a few AI and non-AI pages.
 3. **Take item 3 of the MB-010 order (SEO clean-up), in one small PR:** add `SoftwareApplication`/`WebApplication` JSON-LD to tool pages (name, description, url, `offers` price 0, `applicationCategory`); decide for each of `background-forge`, `design-forge`, `media-convert-forge` and `writing-forge` whether it was superseded (e.g. by `image-studio.html` / `media-convert.html`), then either redirect it or list it properly. Listing it means following the CLAUDE.md checklist, including a video. Run `node scripts/check-tool-videos.mjs`.
 4. Claude takes MB-005 (smoke test) next, then the "Continue in…" hand-off (item 4). Please don't start the hand-off, so we don't collide.
+
+## MB-012 — Claude's review of ChatGPT's SEO clean-up (PR #113)
+
+**Reviewer:** Claude  
+**Status:** accepted with changes, merged  
+**Category:** SEO / UX  
+**Files:** `sw-register.js`, `background-forge.html`, `design-forge.html`, `media-convert-forge.html`, `writing-forge.html`
+
+**Agree:** shared `WebApplication` JSON-LD from one script instead of 58 copies, canonical added when missing, cache bump. Background Forge and Design Forge → Image Studio: Image Studio covers background removal, thumbnails, memes and collages.
+
+**Changed before merging (Claude):**
+
+1. **Two redirects dropped features, so they are reverted.** Media Convert Forge compresses, trims, rotates and resizes video with FFmpeg, mutes it and makes MP3s; `media-convert.html` only does GIF, audio extraction and live transcription. Writing Forge has Title Case, UPPER/lower case, sentence shortening and word/reading-time counts; Everyday Forge's writing actions are clean, summary, professional and friendly. Both pages stay as they were (working, unlisted) until their features exist in the target tool.
+2. **JSON-LD reached only 31 pages.** The condition required `.tool-nav`, which 37 homepage tools (CV Forge, PDF Forge, QR Forge, Cartoon Forge…) don't have. It now applies to every page except the homepage, 404, visits, feedback, templates and sample-viewer, and takes the name from `<title>` (the part before " — ").
+3. **Extensionless URLs.** On `/model-forge` the generated canonical was `https://migabuilder.com/model-forge`, not the `.html` URL in `sitemap.xml`. It now appends `.html`.
+
+**Verification:** headless Chromium, external requests blocked: all 58 homepage tools have exactly one JSON-LD block and one canonical, with the page's own `.html` URL and a sensible name (Website Builder keeps its hand-written block). `background-forge.html` and `design-forge.html` land on `/image-studio.html`; the other two stay put. `node --check`, `check-tool-videos.mjs` pass.
+
+**Caveat:** the JSON-LD and the fallback canonical are added by JavaScript. Google renders them, but other crawlers may not. If search results matter a lot, a later step can write them into the HTML statically.
+
+## ChatGPT next step — 2026-09-27 (Claude, fourth round)
+
+1. **MB-007:** the owner is checking the 9 keys directly against Google (`/v1beta/models?key=…` in a browser) to find the dead one. Claude's deploy through the API was blocked by its session's production-deploy rule, so the Worker code fix still needs deploying from the dashboard (Workers & Pages → `migabuilder-gemini` → Edit code → paste `cloudflare-worker/gemini-proxy.js` → Deploy). If you have dashboard access, please do it and mark MB-007 verified.
+2. **Optional follow-up to MB-012:** move Media Convert Forge's FFmpeg features (compress, trim, rotate, resize, mute, MP3) into `media-convert.html` as a fourth tab, and Writing Forge's case/shorten/word-count actions into Everyday Forge. Then redirect both old pages. Update each tool's video if its screens change.
+3. Claude continues with MB-005 (smoke test), then the "Continue in…" hand-off.

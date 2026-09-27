@@ -13,12 +13,17 @@
   }
   // Give every tool page consistent, crawlable metadata without duplicating JSON-LD in dozens of files.
   // Pages with hand-written structured data keep their more specific version.
-  if (document.querySelector('.tool-nav') && document.querySelector('h1') &&
-      !document.querySelector('script[type="application/ld+json"]')) {
-    var title = document.querySelector('h1').textContent.trim();
+  // Many tool pages have their own header instead of .tool-nav, so this goes by path, and the
+  // name comes from the <title> ("Name — what it does").
+  if (!/^\/(index(\.html)?)?$|^\/(404|visits|feedback|templates|sample-viewer)(\.html)?$/.test(location.pathname) &&
+      document.title && !document.querySelector('script[type="application/ld+json"]')) {
+    var title = document.title.split(/\s+[—|–-]\s+/)[0].trim();
     var metaDescription = document.querySelector('meta[name="description"]');
     var description = metaDescription ? metaDescription.content.trim() : '';
-    var url = 'https://migabuilder.com/' + (location.pathname.split('/').pop() || '');
+    var file = location.pathname.split('/').pop() || '';
+    // GitHub Pages also serves /model-forge; point search engines at the .html URL the sitemap lists.
+    if (file && file.indexOf('.') < 0) file += '.html';
+    var url = 'https://migabuilder.com/' + file;
     var canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
