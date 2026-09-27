@@ -1,5 +1,7 @@
 /* Decorative, original abstract artwork shared by the tool pages. */
 header.masthead.miga-art {
+  /* Some pages leave the masthead static; the art and figure must stay inside it. */
+  position: relative;
   --art-a: #6fd1e0;
   --art-b: #e2a63b;
   isolation: isolate;

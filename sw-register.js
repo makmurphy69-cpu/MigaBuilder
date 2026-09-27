@@ -1,8 +1,8 @@
 (function () {
   'use strict';
   // Tool page artwork is loaded through the shared page script so new tools inherit it.
-  if (location.pathname.endsWith('.html') && location.pathname !== '/index.html' &&
-      location.pathname !== '/404.html') {
+  // Pages can also be opened without ".html" (/model-forge), so skip only the homepage and 404.
+  if (!/^\/(index(\.html)?)?$|^\/404(\.html)?$/.test(location.pathname)) {
     var artStyle = document.createElement('link');
     artStyle.rel = 'stylesheet';
     artStyle.href = '/tool-art.css';
