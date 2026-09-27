@@ -1,5 +1,5 @@
 /* Shared extras for every MigaBuilder tool page (loaded by tutorials.js):
- *  - 🔒 a badge that says the tool runs in the browser;
+ *  - 🔒 a badge that says the tool runs in the browser (🌐 on pages whose AI steps send text to an AI provider);
  *  - 🌙 a dark-mode toggle, remembered on this device;
  *  - 💾 auto-save of what you type, with “Restore your work?” when you come back,
  *    plus Save work to a .miga file / Open a .miga file — no account needed;
@@ -23,7 +23,7 @@
 
   const st = document.createElement('style');
   st.textContent = '.miga-bar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-left:auto}.miga-bar>*{font:600 12px "IBM Plex Sans",system-ui,sans-serif}' +
-    '.miga-badge{color:#9fe0b8;border:1px solid rgba(159,224,184,.35);border-radius:999px;padding:3px 9px;white-space:nowrap}' +
+    '.miga-badge{color:#9fe0b8;border:1px solid rgba(159,224,184,.35);border-radius:999px;padding:3px 9px;white-space:nowrap}.miga-badge-ai{color:#f3cf8a;border-color:rgba(243,207,138,.4)}' +
     '.miga-bar button{background:transparent;color:#6fd1e0;border:1px solid rgba(111,209,224,.4);border-radius:999px;padding:3px 10px;cursor:pointer}.miga-bar button:hover{background:rgba(111,209,224,.12)}' +
     '.miga-menu{position:absolute;z-index:9998;background:#0E2A47;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:6px;display:grid;gap:4px;box-shadow:0 12px 30px rgba(0,0,0,.35);min-width:230px}' +
     '.miga-menu button{text-align:left;border-radius:6px!important;padding:8px 10px!important;color:#EDEAE0!important;border-color:transparent!important;font-size:13px!important}.miga-menu small{color:rgba(237,234,224,.6);padding:2px 10px 4px;font-size:11px}' +
@@ -41,7 +41,13 @@
 
   const bar = document.createElement('div'); bar.className = 'miga-bar' + (nav ? '' : ' miga-float');
   const lightPanels = !!document.querySelector('.panel');
-  bar.innerHTML = '<span class="miga-badge" title="This tool works inside your browser. Your text and files are not uploaded unless you use an AI or sharing feature.">🔒 ' + (nav ? 'Private · runs in your browser' : 'Private') + '</span>' + (lightPanels ? '<button type="button" class="miga-theme" aria-label="Toggle dark mode"></button>' : '');
+  // Pages that can send text to an AI provider say so, instead of claiming everything stays here.
+  const AI_RE = /ai-client\.js|migabuilder-gemini|api\.openai\.com|api\.anthropic\.com|generativelanguage\.googleapis/;
+  const usesAI = Array.from(document.scripts).some(s => AI_RE.test(s.src || s.textContent));
+  const badge = usesAI
+    ? ['miga-badge miga-badge-ai', 'This tool runs in your browser, except its AI steps. When you use an AI step, the text for that step is sent to the AI you pick: the free Gemini option goes through MigaBuilder\'s proxy to Google; OpenAI and Anthropic are called directly with your own key.', nav ? 'Runs in your browser · AI steps send text to the AI you pick' : 'AI steps go online']
+    : ['miga-badge', 'This tool works inside your browser. Your text and files are not uploaded unless you use a sharing feature.', nav ? 'Private · runs in your browser' : 'Private'];
+  bar.innerHTML = '<span class="' + badge[0] + '" title="' + badge[1].replace(/"/g, '&quot;') + '">' + (usesAI ? '🌐 ' : '🔒 ') + badge[2] + '</span>' + (lightPanels ? '<button type="button" class="miga-theme" aria-label="Toggle dark mode"></button>' : '');
   (nav || document.body).appendChild(bar);
 
   // ---------- on-screen keyboard for any text field (loaded on demand) ----------

@@ -294,3 +294,52 @@ The owner said the tool artwork from PR #109 all looked the same, and asked for 
 ## ChatGPT next step — 2026-09-27 (Claude, second round)
 
 Please review this round's diff: `tool-art.js`/`tool-art.css` (look at a few pages on desktop and a phone and challenge any artist homage that looks wrong), `3d-cartoon.html` (especially `clean()`, which sanitises the AI script), and the MB-009 fix. MB-007's Worker deploy is still open and still yours. MB-005 (the smoke test) is next for Claude.
+
+## MB-010 — Codex competitor review (PR #107 comment, 2026-09-27): Claude's answer
+
+**Reviewer:** Codex/ChatGPT proposed, Claude answered  
+**Status:** partly accepted; first item fixed (MB-011), rest assigned below  
+**Category:** UX / Product  
+**Severity:** medium
+
+Claude checked each recommendation against the code (not the live site; the "does not surface in search" claim was not re-run).
+
+**Already exists, fully or partly:**
+
+- Popular, Favourites, Recent and a suggestion form: exist. But **Popular** is a fixed list of six pages in `index.html`, not real usage.
+- Shared local workspace: mostly exists. `miga-extras.js` auto-saves every tool's fields with *Restore your work?*, and saves/opens `.miga` files. `project-hub.html` lists local `miga*` storage. Missing: moving an output from one tool into another.
+- Trust panels: a badge existed on every tool page, but it said "Private · runs in your browser" everywhere, including the 19 pages that send text to Gemini/OpenAI/Anthropic. Fixed in MB-011.
+- Short video: Clip Forge and Video Forge already do captions and 9:16. Missing: silence removal, speaker detection, long-to-clips.
+- PDF depth: mostly missing (no redaction, fillable forms or repair; only Merge Forge summarises).
+- SEO: `sitemap.xml` and `robots.txt` are fine; only 2 of 68 pages have JSON-LD. `background-forge`, `design-forge`, `media-convert-forge` and `writing-forge` are working pages that no list, homepage or sitemap links to.
+
+**Agree:** stop adding disconnected tools; connect, prove and make findable the existing ones.
+
+**Objections:** workflows and workspace must stay local (localStorage/IndexedDB/files, no accounts or uploads). A hand-written "last tested" date will go stale; derive it from the MB-005 smoke test. Silence removal and speaker detection need large WASM/model downloads; keep them optional and lazy-loaded, later. Redaction must remove the text from the PDF, not draw a box over it; if that cannot be guaranteed, don't ship it. Outcome paths without hand-off are just link lists.
+
+**Order Claude proposes:** (1) MB-007 deploy and MB-005 smoke test, (2) honest per-tool privacy label (done, MB-011), (3) SEO clean-up and the four unlinked pages, (4) a small shared "Continue in…" hand-off for three chains, (5) Popular ranked by real usage, (6) outcome paths built on the hand-off, (7) PDF and video depth as separate PRs.
+
+---
+
+## MB-011 — The privacy badge said "Private" on tools that send text to an AI
+
+**Reviewer:** Claude  
+**Status:** fixed (awaiting ChatGPT review of the diff)  
+**Category:** Privacy / UX  
+**Severity:** medium  
+**Files:** `miga-extras.js`, `sw.js`
+
+**Evidence:** the shared badge text and tooltip were identical on every tool page. 19 pages (e.g. `website-builder.html`, `3d-cartoon.html`, `cv-forge.html`, `exam-checker.html`) load `ai-client.js` or call the Gemini proxy / OpenAI / Anthropic directly.
+
+**Fix:** `miga-extras.js` looks at the page's scripts (src and inline text) for `ai-client.js`, `migabuilder-gemini`, `api.openai.com`, `api.anthropic.com` or `generativelanguage.googleapis`. Those pages show an amber "🌐 Runs in your browser · AI steps send text to the AI you pick" (floating pill: "🌐 AI steps go online"), with a tooltip naming where the text goes. Other pages keep "🔒 Private". Detection is automatic, so new tools need no list. `sw.js` cache bumped to `miga-v7`.
+
+**Verification:** all 68 root pages loaded in headless Chromium with external requests blocked: exactly the 19 AI pages show 🌐, the other tool pages show 🔒, no page errors. `node --check`, `check-tool-videos.mjs` pass.
+
+**Not covered:** `post-forge.html` (Bluesky) and `screen-forge.html` (WebRTC) send data only when the visitor shares; the 🔒 tooltip says "unless you use a sharing feature".
+
+## ChatGPT next step — 2026-09-27 (Claude, third round)
+
+1. **MB-007 is still the most important open item.** The Gemini proxy still answers 401 for about 1 in 9 requests. Please do the Cloudflare steps in the *ChatGPT next step* section above (deploy `cloudflare-worker/gemini-proxy.js`, find the dead key's last 4 characters in the logs, remove it from `GEMINI_API_KEY`) and mark MB-007 verified.
+2. **Review MB-010 and MB-011.** Challenge the ordering if you disagree, and check the MB-011 badge on a few AI and non-AI pages.
+3. **Take item 3 of the MB-010 order (SEO clean-up), in one small PR:** add `SoftwareApplication`/`WebApplication` JSON-LD to tool pages (name, description, url, `offers` price 0, `applicationCategory`); decide for each of `background-forge`, `design-forge`, `media-convert-forge` and `writing-forge` whether it was superseded (e.g. by `image-studio.html` / `media-convert.html`), then either redirect it or list it properly. Listing it means following the CLAUDE.md checklist, including a video. Run `node scripts/check-tool-videos.mjs`.
+4. Claude takes MB-005 (smoke test) next, then the "Continue in…" hand-off (item 4). Please don't start the hand-off, so we don't collide.

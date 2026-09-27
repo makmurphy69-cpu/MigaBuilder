@@ -4,7 +4,7 @@
  * Styles, scripts and CDN libraries: served from cache and refreshed in the background.
  * Analytics, AI proxies and Wikipedia requests are never cached. */
 'use strict';
-const VERSION = 'miga-v6';
+const VERSION = 'miga-v7';
 const PAGES = VERSION + '-pages';
 const ASSETS = VERSION + '-assets';
 const CDN = VERSION + '-cdn';
