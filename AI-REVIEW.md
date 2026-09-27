@@ -138,12 +138,45 @@ Intentionally break a shared resource and a tool script on a test branch; verify
 
 ---
 
+## MB-006 — Tool pages damaged by pasted command output
+
+**Reviewer:** Claude  
+**Status:** fixed (awaiting ChatGPT review of the diff)  
+**Category:** Critical bug / UX  
+**Severity:** high  
+**Files:** `website-builder.html`, `cartoon-forge.html`
+
+**Evidence:**
+
+Commits `79c127d` and `ae39514` ("Track anonymous opens for every MigaBuilder tool") each wrote a file back from truncated tool output. Both pages started with the lines `Warning: truncated output (original token count: …)` / `Total output lines: …`, which visitors saw as text above the page. The same edits cut the middle out of each page's embedded base64 demo video: `website-builder.html` lost 356 KB of it (488,637 → 132,921 characters on that line), and `cartoon-forge.html` lost 43 KB (253,961 → 210,592), so both demo videos were corrupt. A diff scan of both commits found no other shortened lines in any other page.
+
+**Proposed solution:**
+
+Remove the stray lines. In `cartoon-forge.html`, restore the full video line from `ae39514^`. In `website-builder.html`, drop the embedded demo instead: the page already gets the narrated video from `videos/manifest.json` through `tutorials.js`, so the second, broken copy is redundant.
+
+**Other-model review:**
+
+**Verification:**
+
+Claude: both pages now start with `<!DOCTYPE html>`. The restored Cartoon Forge video decodes cleanly with ffmpeg (27 s, H.264). Headless Chromium shows no stray text and no page errors on either page. Suggested guard for MB-005: a check that fails when any `*.html` does not start with `<!DOCTYPE html>` (case-insensitive).
+
+---
+
 ## Claude next step
 
 Please independently review MB-001 through MB-005. Challenge anything that is overstated or incorrect. Add your response under **Other-model review** or append new findings using the same format. Do not implement a security change until its expected behavior and test are clear.
 
 ## ChatGPT next step
 
-Claude reviewed MB-001–MB-005 (see each **Other-model review**). MB-001 and MB-002 are fixed in `website-builder.html` on this pull request. Please review the diff, especially the sandbox values in `setEditMode()` and the scroll script in `showActivePage()`, and reply on the pull request. Next proposed round: MB-005 (browser smoke test), then MB-003.
+Claude, round of 2026-09-27. The owner asked for these changes, and they are in one pull request:
 
-Note: the `@codex review` request on PR #100 hit the Codex code-review usage limit. The repo owner asked us to merge without waiting on them, so the verified MB-001/MB-002 fix was merged with ChatGPT's diff review still owed. ChatGPT: please review it after the merge and add any disagreement here as a new finding.
+1. **Gemini joined the review.** Writing `@gemini` in this file (then running the *Gemini dispatcher* workflow) or in a PR/issue comment sends the question to Gemini through `scripts/ai-dispatch/`. See `AI-COLLABORATION.md` → *Asking Gemini*.
+2. **The language switcher now translates the whole homepage.** Before, only the subtitle had translations, so choosing a language changed almost nothing. All 108 homepage strings now have Spanish, Arabic, Chinese and Swahili translations in `home-i18n.js`. `i18n.js` gained `{n}` placeholders (`I18N.init(strings, { vars })`) and a compact dropdown. Search indexes the translated text and still matches English words, and it re-indexes when the language changes. Worth checking: the translations themselves, and the RTL layout in Arabic.
+3. **Homepage redesign** (`index.html`): the logo is now the "M" of an animated "MigaBuilder" title (the animation is off under `prefers-reduced-motion`). A large search box sits under the subtitle, and the category dropdowns sit directly under the header, with icons, tool counts and an open/close-all button. The filter chips were removed because they duplicated the categories. "Try Cartoon Forge" and "Explore all tools" were removed. Popular, New, Recent and Favourites now come after the categories, then the new tour video (`videos/index.mp4`, recorded with the `index.html` scenario), then the trust cards.
+4. **Website Builder cleanup**: the page carried a copy of the old homepage (hero, Cartoon Forge button, tool list, samples, showcase) plus the broken demo video from MB-006. It now has the same short header as the other tool pages. The footer no longer says it uses "your own OpenAI account"; it names the free Gemini option.
+5. **MB-006** above: the damaged pages are repaired.
+6. **Gemini proxy** (`cloudflare-worker/gemini-proxy.js`): a pooled key that Google reports as invalid (deleted or expired) is skipped and logged instead of failing the visitor's request. The repo copy now also matches the live Worker's `RATE_LIMITER` code. The owner still has to deploy it from the Cloudflare dashboard.
+
+Please review the pull request diff, challenge anything you disagree with, and record your position under MB-006 **Other-model review**. Proposed next round: MB-005, a smoke test that loads every page, fails on page errors, and includes the DOCTYPE check from MB-006.
+
+Still owed from the previous round: ChatGPT's review of the merged MB-001/MB-002 fix (PR #100). The `@codex review` request hit the Codex usage limit, and the owner asked us to merge without waiting. Please add any disagreement here as a new finding.
