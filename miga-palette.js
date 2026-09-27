@@ -10,7 +10,7 @@
     ["website-builder.html", "🌐", "Website Builder", "Generate a complete multi-page business site.", ""],
     ["game-forge.html", "🥷", "Game Forge", "Turn a prompt into a playable browser game.", ""],
     ["cartoon-forge.html", "🎞️", "Cartoon Forge", "Create an animated story and record it as video.", ""],
-    ["3d-cartoon.html", "🧸", "3D Cartoon", "Watch a cel-shaded 3D cartoon scene play in your browser.", "3d cartoon animation cel shaded toon movie three.js"],
+    ["3d-cartoon.html", "🧸", "3D Cartoon", "Describe a story and watch it play as a 3D cartoon with talking characters.", "3d cartoon animation cel shaded toon movie three.js story characters ai video"],
     ["app-forge.html", "📱", "App Forge", "Build a self-contained browser app.", ""],
     ["bot-forge.html", "🤖", "Bot Forge", "Make a website FAQ and chat widget.", ""],
     ["bug-scanner.html", "🐞", "Bug Scanner", "Find, explain and fix bugs in any code — and preview what it builds.", "bug scanner code checker debug debugger error fix code review syntax python javascript html java c++ security lint"],

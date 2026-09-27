@@ -933,13 +933,18 @@ S('sim-forge.html', {
 });
 
 S('3d-cartoon.html', {
-  title: '3D Cartoon', subtitle: 'A cel-shaded 3D cartoon scene',
-  intro: 'Welcome to 3D Cartoon, a short cel shaded cartoon scene that plays right in your browser.',
-  async run(h) {
-    await h.step('Press play to start the scene.', () => h.click('#startBtn'));
-    await h.step('Sit back and watch. Everything is drawn live in 3D, in your browser.', () => h.wait(8000));
-    await h.sampleShot('body', 'Scene from this video');
-    await h.step('Want to make your own story? Try Cartoon Forge, which animates any idea you describe.', () => h.wait(500));
+  title: '3D Cartoon', subtitle: 'Your story as a cel-shaded 3D cartoon',
+  intro: 'Welcome to 3D Cartoon. Describe a story, and watch it play as a 3D cartoon with talking characters, right in your browser.',
+  async run(h, page) {
+    await h.step('Write your story idea here. Say who is in it and what happens.', () => h.type('#story', 'A shy robot and a grumpy alien get lost in the forest, and a furry little forest creature helps them find the way home.'));
+    await h.step('Pick how long it should be and the tone. The free Gemini AI needs no key.', () => h.select('#tone', 'funny'));
+    await h.step('Press Make my 3D cartoon. The AI writes the script and picks the characters and places.', () => h.click('#makeBtn'));
+    await h.skip('Writing the script', () => page.waitForFunction(() => /ready/i.test(document.getElementById('status').textContent) || /Could not/.test(document.getElementById('status').textContent), null, { timeout: 120000 }));
+    await h.step('Here is the cast and the script. There are eleven kinds of characters, from robots and aliens to dragons, ghosts and a big eared gremlin imp.', () => h.point('#cast'));
+    await h.step('Press play to watch it.', async () => { await h.scroll('.stage-wrap', 'center'); await h.click('#startBtn'); });
+    await h.step('Every character moves, talks and reacts, and the camera follows whoever is speaking.', () => h.wait(9000));
+    await h.sampleShot('#stage', 'Scene from this video');
+    await h.step('Tick Voices to hear the characters speak, or press Download video to save the whole cartoon as a video file.', () => h.point('#recBtn'));
   }
 });
 
