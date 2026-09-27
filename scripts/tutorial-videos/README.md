@@ -27,6 +27,11 @@ node scripts/tutorial-videos/record.mjs bug-scanner qr-forge # just these
 ```
 
 The voice model (about 110 MB) is downloaded into `.cache/` on the first run.
+Behind a proxy, set `BROWSER_PROXY=http://host:port` (and `IGNORE_CERTS=1` if it
+uses its own certificate) so pages can load their CDN scripts and fonts. If Node
+already trusts that proxy (for example through `NODE_EXTRA_CA_CERTS`), set
+`FETCH_VIA_NODE=1` instead: Node then fetches the CDN files for the page and
+certificate checks stay on.
 AI requests go to the site's own Gemini proxy and are cached in
 `.cache/ai/`, so recording again does not use the free daily quota.
 
@@ -54,6 +59,11 @@ Each `h.step(text, action)` speaks and captions `text` while running
 `sampleDownload`, `sampleShot` (screenshot of an element) and `sampleFile`.
 Then run the script for that tool, and commit the new files in `videos/` and
 `samples/`.
+
+**Every new tool must have a video.** `node scripts/check-tool-videos.mjs`
+fails when a tool card on the homepage has no scenario, manifest entry, video
+or poster, and the *Tool explanation videos* GitHub check runs it on every
+pull request.
 
 ## Posting to YouTube
 

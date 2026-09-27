@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chemistry Map — interactive periodic table, compounds, materials and quizzes | MigaBuilder</title>
+<meta name="description" content="An interactive periodic table of all 118 elements: click an element to see its atom, where it is found, its forms, uses and compounds. Mix elements to see how they bond and what they make, discover which elements build steel, glass, plastics, batteries and chips, work out molar masses and play chemistry quizzes. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/chemistry-map.html">
+<meta property="og:title" content="Chemistry Map — the periodic table, how elements combine and what they make | MigaBuilder">
+<meta property="og:description" content="Click any of the 118 elements to see its atom, forms, uses and compounds. Mix elements, explore materials and play chemistry quizzes.">
+<meta property="og:url" content="https://migabuilder.com/chemistry-map.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<script src="chemistry-data.js"></script>
+<style>
+main{max-width:1320px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.toolbar input{flex:1 1 240px;padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px 'IBM Plex Sans',sans-serif}
+.chip.active{background:var(--cyan);color:#081826;border-color:var(--cyan)}
+.panel .chip{background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)}.panel .chip.active{background:#0E2A47;color:#fff}
+.modes{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.tablebox{background:#0a2238;border:1px solid var(--line);border-radius:6px;padding:10px;overflow-x:auto}
+#ptable{display:grid;grid-template-columns:repeat(18,minmax(46px,1fr));gap:3px;min-width:880px;position:relative}
+.el{position:relative;aspect-ratio:1/1.08;border:0;border-radius:4px;padding:3px 4px;text-align:left;cursor:pointer;color:#10202e;background:#6aa9e0;font-family:'IBM Plex Sans',sans-serif;display:flex;flex-direction:column;justify-content:space-between;transition:opacity .2s,transform .12s;overflow:hidden}
+.el:hover,.el:focus-visible{transform:scale(1.12);z-index:3;box-shadow:0 0 0 2px #fff}
+.el .z{font-size:9px;font-weight:600;opacity:.8;line-height:1}.el .s{font:700 17px/1 'Space Grotesk';align-self:center}.el .n{font-size:8px;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.el.sel{box-shadow:0 0 0 3px #fff,0 0 12px #fff;z-index:2}
+.el.dim{opacity:.18}.el.hl{box-shadow:0 0 0 3px #E2A63B;z-index:2}.el.inbowl{outline:3px dashed #E2A63B;outline-offset:-2px}.el.inbowl::after{content:'🧺';position:absolute;right:1px;top:0;font-size:10px}
+.el.seen .z::after{content:' ✓'}
+.fgap{grid-column:1/-1;height:8px}
+.fmark{grid-column:3;display:flex;align-items:center;justify-content:center;font-size:10px;color:rgba(237,234,224,.6);text-align:center;border:1px dashed rgba(111,209,224,.3);border-radius:4px}
+#key{grid-column:3/13;grid-row:1/4;display:flex;flex-direction:column;justify-content:flex-start;gap:6px;padding:4px 10px;color:var(--paper);font-size:12px;pointer-events:none}
+#key .kbig{display:flex;gap:10px;align-items:center;pointer-events:auto}
+#keyTile{width:74px;height:80px;border-radius:5px;display:flex;flex-direction:column;justify-content:space-between;padding:4px 6px;color:#10202e;flex:0 0 auto}
+#keyTile b{font:700 28px/1 'Space Grotesk';align-self:center}#keyTile small{font-size:10px;text-align:center}
+.legend{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:12px;color:rgba(237,234,224,.85);margin-top:8px}.legend i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.legend button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:2px 0}.legend button:hover{text-decoration:underline}
+.grad{height:10px;border-radius:5px;flex:1 1 200px;min-width:160px}
+.temp{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 0;color:var(--paper);font-size:13px}.temp input{flex:1 1 240px;accent-color:#E2A63B}
+.temp b{font:700 16px 'Space Grotesk';min-width:110px}
+.explorer{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:16px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button{flex:1 1 auto;border:1px solid var(--line);background:rgba(8,24,38,.7);color:var(--paper);padding:10px 12px;border-radius:4px;cursor:pointer;font:700 13px 'Space Grotesk'}
+.tabs button.active{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.ehead{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.tile{width:92px;height:100px;border-radius:6px;display:flex;flex-direction:column;justify-content:space-between;padding:6px 8px;color:#10202e;flex:0 0 auto}
+.tile .z{font-size:12px;font-weight:700}.tile b{font:700 38px/1 'Space Grotesk';align-self:center}.tile small{font-size:11px;text-align:center}
+.info h2{font:700 26px 'Space Grotesk';margin:0}.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#10202e;margin:0 6px 6px 0}
+.atomrow{display:grid;grid-template-columns:200px 1fr;gap:14px;align-items:center;margin-top:10px}
+#atom{width:200px;height:200px}
+.shell{fill:none;stroke:rgba(14,42,71,.25)}.eorb{transform-origin:100px 100px;animation:spin linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.eorb{animation:none}}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fact{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12.5px}.fact b{display:block;font-size:11px;color:rgba(22,32,43,.6);font-weight:600}.fact span{font-weight:700;font-size:14px}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.sect p,.sect li{font-size:14px;line-height:1.5}.sect ul{margin:0;padding-left:20px}
+.cpd{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:7px 10px;margin-bottom:6px;font-size:13.5px;line-height:1.45}
+.cpd .f{font:700 14px 'Space Grotesk';color:#0E2A47;flex:0 0 auto;min-width:74px}
+.go{display:inline-block;padding:3px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.25);color:#0E2A47;font-size:12.5px;font-weight:600;cursor:pointer;margin:2px 3px 2px 0;font-family:inherit}
+.go:hover{border-color:#0E2A47}
+.dyk{background:rgba(226,166,59,.12);border-left:3px solid #E2A63B;padding:8px 12px;font-size:14px;line-height:1.5}
+.empty{color:rgba(22,32,43,.6);text-align:center;padding:30px 10px}
+.bowl{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-height:52px;background:#fff;border:2px dashed rgba(14,42,71,.3);border-radius:6px;padding:8px}
+.bchip{display:inline-flex;align-items:center;gap:6px;border-radius:5px;padding:5px 8px;font:700 16px 'Space Grotesk';color:#10202e;border:0;cursor:pointer}
+.bchip small{font:600 11px 'IBM Plex Sans'}
+.meter{position:relative;height:14px;border-radius:7px;background:linear-gradient(90deg,#6aa9e0 0%,#6aa9e0 12%,#8fc27a 12%,#8fc27a 52%,#e8735a 52%,#e8735a 100%);margin:6px 0 2px}
+.meter i{position:absolute;top:-4px;width:4px;height:22px;background:#0E2A47;border-radius:2px}
+.mlab{display:flex;justify-content:space-between;font-size:11px;color:rgba(22,32,43,.7)}
+.ccard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:6px;padding:10px 12px;margin-bottom:8px;font-size:13.5px;line-height:1.5}
+.ccard h4{margin:0 0 3px;font:700 16px 'Space Grotesk'}.ccard .fx{font:700 19px 'Space Grotesk';color:#0E2A47;margin-right:8px}
+.type{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:999px;color:#fff;vertical-align:2px}
+.t-ionic{background:#c0563f}.t-covalent{background:#3d7fb8}.t-network{background:#6b5aa8}.t-metallic{background:#8a7412}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.mcard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:5px;padding:8px 10px;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
+.mcard b{display:block;font:700 14px 'Space Grotesk'}.mcard small{font-size:11.5px;color:rgba(22,32,43,.62)}.mcard.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
+.mdet{background:#fff;border:1px solid rgba(22,32,43,.13);border-left:4px solid #E2A63B;border-radius:5px;padding:10px 12px;margin:10px 0;font-size:14px;line-height:1.5}
+.mdet p{margin:4px 0}
+.mm{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}.mm td,.mm th{padding:5px 7px;border-bottom:1px solid rgba(22,32,43,.12);text-align:left}.mm th{font-size:12px;color:rgba(22,32,43,.6)}
+.cbar{display:flex;height:20px;border-radius:4px;overflow:hidden;margin-top:8px}.cbar span{display:block;height:100%}
+.big{font:700 26px 'Space Grotesk';color:#0E2A47}
+.learn h3{font:700 16px 'Space Grotesk';margin:14px 0 4px}.learn p{font-size:14px;line-height:1.55;margin:4px 0}
+.lsvg{width:100%;max-width:420px;height:auto;display:block;margin:6px 0;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:6px}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 12px}.checks label{display:flex;gap:6px;align-items:center;font-size:14px}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px;margin:6px 0}
+.timer{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden}.timer i{display:block;height:100%;background:#4E9E73;transition:width .25s linear}
+.quiz-q{font:600 19px 'Space Grotesk';margin:12px 0;line-height:1.35}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:#0E2A47}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;font-size:14px;line-height:1.5}
+.pop{font:700 16px 'Space Grotesk';color:#2f6b49}
+.review li{margin-bottom:8px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.field input.bad{border-color:#D8604A}
+.hidden{display:none!important}
+@media(max-width:980px){.explorer{grid-template-columns:1fr}.qgrid,.opts{grid-template-columns:1fr}}
+@media(max-width:560px){.atomrow{grid-template-columns:1fr;justify-items:center}.facts{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Chemistry Map</span></nav>
+<header class="masthead"><div><h1>Chemistry Map</h1><p>Click any of the 118 elements to see its atom, where it is found, its forms, uses and compounds — then mix elements to see how they bond, discover what materials they build, work out molar masses and test yourself.</p></div></header>
+<main>
+<div class="toolbar">
+  <input id="search" list="elList" placeholder="Search an element or a use, e.g. iron, Na, 26, battery, glass…" aria-label="Search elements"><datalist id="elList"></datalist>
+</div>
+<div class="modes" id="modes" aria-label="Colour the table by"></div>
+<section class="tablebox">
+  <div id="ptable" role="grid" aria-label="Periodic table of the elements"></div>
+  <div class="temp hidden" id="tempBox"><b id="tempVal">20 °C</b><input type="range" id="temp" min="-273" max="6000" step="1" value="20" aria-label="Temperature in °C"><button class="chip" data-t="-196">Liquid nitrogen −196 °C</button><button class="chip" data-t="20">Room 20 °C</button><button class="chip" data-t="100">Boiling water 100 °C</button><button class="chip" data-t="1538">Molten iron 1,538 °C</button><button class="chip" data-t="5500">Sun’s surface 5,500 °C</button></div>
+  <div class="legend" id="legend"></div>
+  <p style="margin:6px 0 0;font-size:12px;color:rgba(237,234,224,.7)">Explored: <b id="seenCount">0</b>/118 · <span id="hint">Tap an element to open it.</span></p>
+</section>
+
+<section class="explorer">
+  <article class="panel info" id="info" aria-live="polite"><div class="empty">⚛️<br><strong>Pick an element in the table</strong><br>or search above. Everything you open is added to your explored list for the quiz.</div></article>
+  <div>
+    <div class="tabs" role="tablist">
+      <button class="active" data-tab="lab" role="tab">⚗️ Mix elements</button>
+      <button data-tab="mat" role="tab">🏭 Materials</button>
+      <button data-tab="calc" role="tab">🧮 Formula calculator</button>
+      <button data-tab="learn" role="tab">📘 How atoms bond</button>
+    </div>
+    <article class="panel" id="labPanel">
+      <h2>Mix elements — what do they make?</h2>
+      <p>Put elements in the mixing bowl to see how they bond, the formula they are likely to form, and real compounds and materials made from them.</p>
+      <label style="display:flex;gap:8px;align-items:center;font-size:14px;font-weight:600;margin-bottom:8px"><input type="checkbox" id="addMode" checked> Tapping the table adds the element to the bowl</label>
+      <div class="bowl" id="bowl"></div>
+      <div class="actions" style="margin:8px 0"><button class="secondary" id="clearBowl">Empty the bowl</button></div>
+      <p class="muted" style="margin:0 0 4px">Try a classic:</p>
+      <div class="actions" id="presets"></div>
+      <div id="labOut" style="margin-top:12px"></div>
+    </article>
+    <article class="panel hidden" id="matPanel">
+      <h2>What can be made from the elements?</h2>
+      <p>Tap a material to light up the elements it is made from and see how it is produced.</p>
+      <div id="matDet"></div>
+      <div id="matList"></div>
+    </article>
+    <article class="panel hidden" id="calcPanel">
+      <h2>Formula calculator</h2>
+      <p>Type a chemical formula to get its molar mass (the mass of one mole — 6.022 × 10²³ particles) and what share of it each element makes up.</p>
+      <div class="field"><label for="formula">Formula</label><input id="formula" placeholder="e.g. H2O, C6H12O6, Ca(OH)2, CuSO4·5H2O" autocomplete="off" spellcheck="false"></div>
+      <div class="actions" id="fx"></div>
+      <div id="calcOut" style="margin-top:10px"></div>
+    </article>
+    <article class="panel learn hidden" id="learnPanel"></article>
+  </div>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🏆 Chemistry quiz</h2>
+  <p>Test yourself on symbols, atomic numbers, families, uses, compounds and materials. <b>Challenge mode</b> gives 20 seconds per question with bonus points for speed and streaks.</p>
+  <div class="qgrid">
+    <div class="field"><label for="qSource">Questions about</label><select id="qSource"></select></div>
+    <div class="field"><label for="qCount">Number of questions</label><select id="qCount"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+    <div class="field"><label for="qMode">Mode</label><select id="qMode"><option value="challenge">Challenge — timed, points &amp; streaks</option><option value="practice">Practice — no timer</option></select></div>
+  </div>
+  <div class="checks" id="qTypes">
+    <label><input type="checkbox" value="symbol" checked> Symbols</label>
+    <label><input type="checkbox" value="name" checked> Names</label>
+    <label><input type="checkbox" value="number" checked> Atomic numbers</label>
+    <label><input type="checkbox" value="family" checked> Families</label>
+    <label><input type="checkbox" value="use" checked> Uses</label>
+    <label><input type="checkbox" value="state" checked> States</label>
+    <label><input type="checkbox" value="compound" checked> Compounds</label>
+    <label><input type="checkbox" value="material" checked> Materials</label>
+  </div>
+  <div class="actions"><button class="primary" id="makeQuiz" data-primary>Generate quiz</button><button class="secondary" id="printQuiz">⬇ Printable quiz + answers</button></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">🤖 AI quiz on any chemistry topic</summary>
+    <p class="muted">Type any topic (e.g. “acids and bases for 12-year-olds”, “the halogens”, “balancing equations”). The AI writes the questions; check anything surprising against a textbook.</p>
+    <div class="grid"><div class="field"><label for="aiTopic">Topic</label><input id="aiTopic" placeholder="e.g. Why metals conduct electricity"></div><div class="field"><label for="aiLevel">Level</label><select id="aiLevel"><option>beginner</option><option selected>intermediate</option><option>advanced</option></select></div></div>
+    <div id="aiBox"></div><button class="secondary" id="aiQuiz">Generate AI quiz</button><p class="status" id="aiStatus"></p>
+  </details>
+  <p class="muted" id="bestLine" style="margin-top:10px"></p>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="hud"><span id="qProg"></span><span id="qStreak"></span><span id="qScore"></span></div>
+    <div class="timer" id="timerBar"><i id="timerFill"></i></div>
+    <div class="quiz-q" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:10px"><button class="primary hidden" id="qNext">Next question →</button><button class="secondary" id="qQuit">End quiz</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px">
+    <h3 id="doneTitle" style="font:700 22px 'Space Grotesk';margin:0 0 6px"></h3><p id="doneSub"></p>
+    <ol class="review" id="review"></ol>
+    <div class="actions"><button class="primary" id="newQuiz">New quiz</button><button class="secondary" id="retryWrong">Retry the ones I missed</button></div>
+  </div>
+</section>
+</main>
+<footer>Chemistry Map · MigaBuilder · For learning. Many elements and compounds are toxic, corrosive or reactive — never experiment without proper supervision and safety equipment.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+MigaAI.mount($('aiBox'));
+const CATS=window.ELEMENT_CATS,TXT=window.ELEMENT_TEXT,YEARS=window.ELEMENT_YEARS,OX=window.ELEMENT_OX,CPDS=window.COMPOUNDS,MATS=window.MATERIALS;
+const EL=window.ELEMENTS_RAW.map((r,i)=>{const t=TXT[r[1]];return {z:r[0],sym:r[1],name:r[2],mass:r[3],cat:r[4],group:r[5],period:r[6],col:r[7],row:r[8],shells:r[9],conf:r[10],en:r[11],mp:r[12],bp:r[13],den:r[14],phase:r[15],by:r[16],block:r[17],year:YEARS[i],
+  found:t[0],uses:t[1],forms:t[2].split('|').filter(Boolean),cp:t[3].split('|').map(x=>{const k=x.indexOf('=');return [x.slice(0,k),x.slice(k+1)]}).filter(x=>x[0]!=='—'),fact:t[4]}});
+const BY=Object.fromEntries(EL.map(e=>[e.sym,e]));
+let seen=new Set(store.get('chemSeen',[]).filter(s=>BY[s])),selected=null,mode='family',temp=20,bowl=[],highlight=null,tab='lab';
+$('elList').innerHTML=EL.map(e=>'<option value="'+e.name+'">').join('');
+
+// ---------- helpers ----------
+const SUB='₀₁₂₃₄₅₆₇₈₉';
+const fmt=f=>esc(f).replace(/([A-Za-z)\]])(\d+)/g,(m,a,d)=>a+d.split('').map(c=>SUB[+c]).join(''));
+const looksFormula=f=>/^[A-Z(][A-Za-z0-9()·.]*n?$/.test(f)&&/\d|[A-Z][a-z]?[A-Z]/.test(f);
+function parseFormula(f){
+  f=String(f).replace(/\s+/g,'').replace(/[·.*•]/g,'·');
+  const total={};let ok=true;
+  f.split('·').forEach(part=>{const m=part.match(/^(\d+)(.*)$/);let mult=1;if(m){mult=+m[1];part=m[2]}
+    let i=0;const stack=[{}];
+    while(i<part.length){const c=part[i];
+      if(c==='('||c==='['){stack.push({});i++}
+      else if(c===')'||c===']'){i++;let n='';while(/\d/.test(part[i]||''))n+=part[i++];if(part[i]==='n'){i++}const top=stack.pop();if(!stack.length){ok=false;break}const k=n?+n:1;Object.entries(top).forEach(([s,v])=>stack[stack.length-1][s]=(stack[stack.length-1][s]||0)+v*k)}
+      else{const m2=part.slice(i).match(/^([A-Z][a-z]?)(\d*)/);if(!m2||!BY[m2[1]]){ok=false;break}const s=m2[1];stack[stack.length-1][s]=(stack[stack.length-1][s]||0)+(m2[2]?+m2[2]:1);i+=m2[0].length}}
+    if(stack.length!==1)ok=false;Object.entries(stack[0]||{}).forEach(([s,v])=>total[s]=(total[s]||0)+v*mult)});
+  return ok&&Object.keys(total).length?total:null}
+CPDS.forEach(c=>{c.els=parseFormula(c[0])||{};c.set=Object.keys(c.els).sort().join(',')});
+const cpdByFormula=Object.fromEntries(CPDS.map(c=>[c[0],c]));
+const metal=e=>['alkali','alkaline','transition','post','lanthanide','actinide'].includes(e.cat);
+const tempTxt=v=>v==null?'unknown':(Math.round(v*10)/10).toLocaleString()+' °C';
+function stateAt(e,t){if(e.mp==null&&e.bp==null)return e.phase==='?'?'?':({S:'S',L:'L',G:'G'}[e.phase]||'?');if(e.sym==='He')return t<-268.9?'L':'G';
+  if(e.mp!=null&&t<e.mp)return 'S';if(e.bp!=null&&t>=e.bp)return 'G';if(e.mp!=null&&e.bp!=null&&e.mp===e.bp)return t<e.mp?'S':'G';return e.mp==null?'?':'L'}
+const STATE={S:['Solid','#9fb4c8'],L:['Liquid','#5fb6e0'],G:['Gas','#f0c75e'],'?':['Unknown','#55636f']};
+const lerp=(a,b,f)=>Math.round(a+(b-a)*f);
+function heat(f){f=Math.max(0,Math.min(1,f));const s=[[46,90,160],[80,180,190],[240,210,90],[230,110,70]],i=Math.min(2,Math.floor(f*3)),g=f*3-i;return 'rgb('+[0,1,2].map(k=>lerp(s[i][k],s[i+1][k],g)).join(',')+')'}
+const BLOCK={s:['s-block','#e8735a'],p:['p-block','#6aa9e0'],d:['d-block','#d9c25b'],f:['f-block','#e07fb3']};
+
+// ---------- colour modes ----------
+const MODES={
+ family:{label:'🎨 Families',color:e=>CATS[e.cat][1],legend:()=>Object.entries(CATS).map(([k,v])=>'<button data-cat="'+k+'"><i style="background:'+v[1]+'"></i>'+esc(v[0])+'</button>').join(''),hint:'Colours show element families. Tap a family name to highlight it.'},
+ state:{label:'🌡️ Solid, liquid or gas',color:e=>STATE[stateAt(e,temp)][1],legend:()=>['S','L','G','?'].map(k=>'<span><i style="background:'+STATE[k][1]+'"></i>'+STATE[k][0]+' ('+EL.filter(e=>stateAt(e,temp)===k).length+')</span>').join(''),hint:'Drag the temperature to see elements melt and boil.'},
+ en:{label:'🧲 Electronegativity',color:e=>e.en==null?'#55636f':heat((e.en-.7)/3.28),legend:()=>'<span>0.7 — gives electrons away</span><span class="grad" style="background:linear-gradient(90deg,'+heat(0)+','+heat(.33)+','+heat(.66)+','+heat(1)+')"></span><span>4.0 — pulls electrons hard</span><span><i style="background:#55636f"></i>no value</span>',hint:'Electronegativity = how strongly an atom pulls shared electrons. It rises to the top right (fluorine).'},
+ den:{label:'⚖️ Density',color:e=>e.den==null?'#55636f':heat(Math.log10(e.den/0.00009)/Math.log10(22.6/0.00009)),legend:()=>'<span>Lightest (hydrogen gas)</span><span class="grad" style="background:linear-gradient(90deg,'+heat(0)+','+heat(.33)+','+heat(.66)+','+heat(1)+')"></span><span>Densest (osmium 22.6 g/cm³)</span>',hint:'Density on a log scale: gases on the left, heavy metals like osmium and iridium are densest.'},
+ mp:{label:'🔥 Melting point',color:e=>e.mp==null?'#55636f':heat((e.mp+273)/(3642+273)),legend:()=>'<span>−272 °C (helium)</span><span class="grad" style="background:linear-gradient(90deg,'+heat(0)+','+heat(.33)+','+heat(.66)+','+heat(1)+')"></span><span>3,642 °C (carbon)</span>',hint:'Carbon and tungsten need the most heat to melt; the noble gases the least.'},
+ year:{label:'📅 Discovery',color:e=>e.year===0?'#b98a52':heat((e.year-1650)/(2010-1650)),legend:()=>'<span><i style="background:#b98a52"></i>Known since ancient times</span><span>1650</span><span class="grad" style="background:linear-gradient(90deg,'+heat(0)+','+heat(.33)+','+heat(.66)+','+heat(1)+')"></span><span>2010</span>',hint:'Metals like gold, copper and iron were known in ancient times; the heaviest were made after 1940.'},
+ block:{label:'🧩 Blocks (s p d f)',color:e=>BLOCK[e.block][1],legend:()=>Object.values(BLOCK).map(v=>'<span><i style="background:'+v[1]+'"></i>'+v[0]+'</span>').join('')+'<span>The block is the type of orbital the outer electrons fill.</span>',hint:'The table’s shape comes from how electrons fill s, p, d and f orbitals.'}
+};
+$('modes').innerHTML=Object.entries(MODES).map(([k,v])=>'<button class="chip'+(k===mode?' active':'')+'" data-mode="'+k+'">'+v.label+'</button>').join('');
+$('modes').querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
+function setMode(m){mode=m;$('modes').querySelectorAll('[data-mode]').forEach(b=>b.classList.toggle('active',b.dataset.mode===m));$('tempBox').classList.toggle('hidden',m!=='state');paint()}
+$('temp').oninput=()=>{temp=+$('temp').value;$('tempVal').textContent=temp.toLocaleString()+' °C';paint()};
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{$('temp').value=b.dataset.t;$('temp').oninput()});
+
+// ---------- the table ----------
+let cells={};
+function buildTable(){
+  const t=$('ptable');let html='<div id="key"><div class="kbig"><div id="keyTile"></div><div id="keyText" style="line-height:1.4"></div></div></div>';
+  EL.forEach(e=>{const r=e.row;html+='<button class="el" id="el-'+e.sym+'" data-s="'+e.sym+'" style="grid-column:'+e.col+';grid-row:'+r+'" aria-label="'+e.z+' '+e.name+'"><span class="z">'+e.z+'</span><span class="s">'+e.sym+'</span><span class="n">'+e.name+'</span></button>'});
+  html+='<div class="fgap" style="grid-row:8"></div><div class="fmark" style="grid-row:6">57–71</div><div class="fmark" style="grid-row:7">89–103</div>';
+  t.innerHTML=html;
+  t.querySelectorAll('.el').forEach(b=>{cells[b.dataset.s]=b;
+    b.onclick=()=>{const s=b.dataset.s;if(tab==='lab'&&$('addMode').checked&&!$('labPanel').classList.contains('hidden'))addBowl(s);select(s,{noScroll:tab==='lab'&&$('addMode').checked})};
+    b.onmouseenter=()=>showKey(BY[b.dataset.s]);b.onfocus=()=>showKey(BY[b.dataset.s])});
+}
+function showKey(e){if(!e)return;const c=MODES[mode].color(e);$('keyTile').style.background=c;$('keyTile').innerHTML='<span style="font-size:11px;font-weight:700">'+e.z+'</span><b>'+e.sym+'</b><small>'+esc(e.name)+'<br>'+e.mass+'</small>';
+  const extra={state:'At '+temp.toLocaleString()+' °C: <b>'+STATE[stateAt(e,temp)][0]+'</b> (melts '+tempTxt(e.mp)+', boils '+tempTxt(e.bp)+')',en:'Electronegativity: <b>'+(e.en==null?'—':e.en)+'</b>',den:'Density: <b>'+(e.den==null?'unknown':e.den+(e.phase==='G'?' g/L':' g/cm³'))+'</b>',mp:'Melting point: <b>'+tempTxt(e.mp)+'</b>',year:'Discovered: <b>'+(e.year?e.year:'ancient times')+'</b>',block:'<b>'+BLOCK[e.block][0]+'</b> · '+esc(e.conf)}[mode]||'<b>'+esc(CATS[e.cat][0])+'</b>';
+  $('keyText').innerHTML='<b style="font:700 16px \'Space Grotesk\'">'+esc(e.name)+'</b><br>'+extra+'<br><span style="opacity:.75">'+esc(e.uses.split(/[;.]/)[0])+'</span>'}
+function paint(){
+  const M=MODES[mode];
+  EL.forEach(e=>{const b=cells[e.sym];b.style.background=M.color(e);
+    b.classList.toggle('sel',e.sym===selected);b.classList.toggle('dim',!!(highlight&&!highlight.has(e.sym)));b.classList.toggle('hl',!!(highlight&&highlight.has(e.sym)));
+    b.classList.toggle('inbowl',bowl.includes(e.sym));b.classList.toggle('seen',seen.has(e.sym))});
+  $('legend').innerHTML=M.legend()+(highlight?'<button id="clearHl" style="color:#E2A63B;font-weight:700">✕ Clear highlight</button>':'');
+  $('legend').querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{const k=b.dataset.cat;setHighlight(EL.filter(e=>e.cat===k).map(e=>e.sym),CATS[k][0]+': '+CATS[k][2])});
+  if($('clearHl'))$('clearHl').onclick=()=>setHighlight(null);
+  if(!highlight)$('hint').textContent=tab==='lab'&&bowl.length?'🧺 In the bowl: '+bowl.map(s=>BY[s].name).join(', ')+' (dashed outline)':M.hint;
+  if(selected)showKey(BY[selected]);else showKey(BY.C);
+}
+function setHighlight(list,text){highlight=list&&list.length?new Set(list):null;$('hint').textContent=text||MODES[mode].hint;paint()}
+
+// ---------- element detail ----------
+function atomSVG(e){
+  const n=e.shells.length,R=i=>18+i*(78/Math.max(n,1));const neutrons=Math.round(typeof e.mass==='number'?e.mass:e.z*2.5)-e.z;
+  let s='<circle cx="100" cy="100" r="14" fill="#E2A63B"/><text x="100" y="98" text-anchor="middle" font-size="7.5" font-weight="700" fill="#3b2a0b">'+e.z+'p</text><text x="100" y="107" text-anchor="middle" font-size="7" fill="#3b2a0b">'+neutrons+'n</text>';
+  e.shells.forEach((k,i)=>{const r=R(i+1);s+='<circle class="shell" cx="100" cy="100" r="'+r+'"/><g class="eorb" style="animation-duration:'+(6+i*4)+'s">';
+    for(let j=0;j<k;j++){const a=j/k*Math.PI*2;s+='<circle cx="'+(100+r*Math.cos(a)).toFixed(1)+'" cy="'+(100+r*Math.sin(a)).toFixed(1)+'" r="'+(k>18?2.2:3)+'" fill="'+(i===n-1?'#3d7fb8':'#8fb2cf')+'"/>'}s+='</g>'});
+  return '<svg id="atom" viewBox="0 0 200 200" role="img" aria-label="Atom of '+esc(e.name)+': '+e.z+' protons, '+neutrons+' neutrons, electrons in shells '+e.shells.join(', ')+'">'+s+'</svg>'}
+const go=(s,label)=>'<button class="go" data-go="'+s+'">'+esc(label||BY[s].name)+'</button>';
+function select(sym,opts){const e=BY[sym];if(!e)return;opts=opts||{};selected=sym;seen.add(sym);store.set('chemSeen',[...seen]);$('seenCount').textContent=seen.size;
+  const col=CATS[e.cat][1],outer=e.shells[e.shells.length-1],mats=MATS.filter(m=>m[4].includes(sym));
+  $('info').innerHTML='<div class="ehead"><div class="tile" style="background:'+col+'"><span class="z">'+e.z+'</span><b>'+e.sym+'</b><small>'+e.mass+'</small></div><div><span class="badge" style="background:'+col+'">'+esc(CATS[e.cat][0])+'</span><span class="badge" style="background:'+BLOCK[e.block][1]+'">'+BLOCK[e.block][0]+'</span><h2>'+esc(e.name)+'</h2><div class="muted">Atomic number '+e.z+' · '+(e.group?'group '+e.group+' · ':'')+'period '+e.period+'</div></div></div>'+
+   '<div class="atomrow">'+atomSVG(e)+'<div class="facts">'+
+    '<div class="fact"><b>Electrons per shell</b><span>'+e.shells.join(' · ')+'</span></div>'+
+    '<div class="fact"><b>Outer electrons</b><span>'+outer+'</span></div>'+
+    '<div class="fact"><b>At room temperature</b><span>'+STATE[stateAt(e,20)][0]+'</span></div>'+
+    '<div class="fact"><b>Electronegativity</b><span>'+(e.en==null?'—':e.en)+'</span></div>'+
+    '<div class="fact"><b>Melts / boils</b><span>'+(e.mp!=null&&e.mp===e.bp?'turns to gas at '+tempTxt(e.mp):tempTxt(e.mp)+' / '+tempTxt(e.bp))+'</span></div>'+
+    '<div class="fact"><b>Density</b><span>'+(e.den==null?'unknown':e.den+(e.phase==='G'?' g/L':' g/cm³'))+'</span></div>'+
+    '<div class="fact" style="grid-column:1/-1"><b>Electron configuration</b><span>'+esc(e.conf)+'</span></div>'+
+    '<div class="fact" style="grid-column:1/-1"><b>Discovered</b><span>'+(e.year?e.year:'Ancient times')+(e.by&&!/^Ancient|^Middle|prehistoric/i.test(e.by)?' — '+esc(e.by):'')+'</span></div>'+
+   '</div></div>'+
+   '<p class="muted" style="margin:6px 0 0">The nucleus holds '+e.z+' protons (that number makes it '+esc(e.name.toLowerCase())+') and about '+(Math.round(e.mass)-e.z)+' neutrons. Its '+outer+' outer electron'+(outer>1?'s decide':' decides')+' how it reacts.</p>'+
+   '<div class="sect"><h3>📍 Where it is found</h3><p style="margin:0">'+esc(e.found)+'</p></div>'+
+   '<div class="sect"><h3>🛠️ What it is used for</h3><p style="margin:0">'+esc(e.uses)+'</p></div>'+
+   '<div class="sect"><h3>🔷 Forms</h3><ul>'+e.forms.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul></div>'+
+   '<div class="sect"><h3>⚗️ Compounds it makes</h3>'+(e.cp.length?e.cp.map(([f,t])=>{const c=cpdByFormula[f];return '<div class="cpd"><span class="f">'+(looksFormula(f)?fmt(f):esc(f))+'</span><span>'+esc(t)+(c?' <button class="go" data-cpd="'+esc(f)+'">Open in the mixer →</button>':'')+'</span></div>'}).join(''):'<p class="muted">No well-known compounds — '+esc(e.cp.length?'':'it barely reacts, or only a few atoms have ever been made.')+'</p>')+'</div>'+
+   (mats.length?'<div class="sect"><h3>🏭 Materials made with it</h3>'+mats.map(m=>'<button class="go" data-mat="'+m[0]+'">'+m[1]+' '+esc(m[2])+'</button>').join('')+'</div>':'')+
+   '<div class="sect"><h3>💡 Did you know?</h3><div class="dyk">'+esc(e.fact)+'</div></div>'+
+   '<div class="sect"><h3>👪 Its family: '+esc(CATS[e.cat][0])+'</h3><p style="margin:0 0 6px">'+esc(CATS[e.cat][2])+'</p>'+EL.filter(x=>x.cat===e.cat&&x.sym!==sym).slice(0,14).map(x=>go(x.sym)).join('')+'</div>'+
+   '<div class="actions" style="margin-top:12px"><button class="primary" id="addThis">🧺 Add to the mixing bowl</button><button class="secondary" id="quizThis">🏆 Quiz me on its family</button><button class="secondary" id="sheetThis">⬇ Fact sheet</button><button class="secondary" id="askAi">🤖 Explain it simply</button></div><div id="aiAns" class="explain hidden"></div>';
+  $('info').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>select(b.dataset.go));
+  $('info').querySelectorAll('[data-cpd]').forEach(b=>b.onclick=()=>{const c=cpdByFormula[b.dataset.cpd];setTab('lab');bowl=Object.keys(c.els);renderBowl(c[0]);$('labPanel').scrollIntoView({behavior:'smooth',block:'start'})});
+  $('info').querySelectorAll('[data-mat]').forEach(b=>b.onclick=()=>{setTab('mat');showMat(b.dataset.mat);$('matPanel').scrollIntoView({behavior:'smooth',block:'start'})});
+  $('addThis').onclick=()=>{setTab('lab');addBowl(sym);$('labPanel').scrollIntoView({behavior:'smooth',block:'start'})};
+  $('quizThis').onclick=()=>{$('qSource').value='cat:'+e.cat;start(generate());$('quizPanel').scrollIntoView({behavior:'smooth'})};
+  $('sheetThis').onclick=()=>factSheet(e);$('askAi').onclick=()=>askAi(e);
+  paint();
+  if(!opts.noScroll&&matchMedia('(max-width:980px)').matches)$('info').scrollIntoView({behavior:'smooth'});
+  try{history.replaceState(null,'','#'+sym)}catch(err){}
+}
+async function askAi(e){const box=$('aiAns');box.classList.remove('hidden');box.textContent='Asking the AI…';
+  try{const t=await MigaAI.ask('You are an accurate, friendly chemistry teacher. Use simple words and everyday comparisons. Plain text only, no markdown.','Explain the element '+e.name+' ('+e.sym+', atomic number '+e.z+') to a curious 12-year-old in about 150 words: what its atoms are like, why it behaves the way it does, what it is used for and one surprising fact. Mention any safety warning if it is dangerous.');box.textContent=t.trim()}catch(err){box.textContent=err.message}}
+function download(name,html){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+const PAGE_CSS='body{font:15px/1.5 Georgia,serif;max-width:780px;margin:30px auto;padding:0 20px;color:#16202B}h1{font-family:Arial,sans-serif}h2{font-family:Arial,sans-serif;font-size:18px;border-bottom:2px solid #0E2A47;padding-bottom:3px;margin-top:22px}li{margin-bottom:6px}td{padding:3px 12px 3px 0}';
+function factSheet(e){
+  const body='<h1>'+esc(e.name)+' ('+e.sym+')</h1><p><i>'+esc(CATS[e.cat][0])+' · atomic number '+e.z+' · atomic mass '+e.mass+'</i></p><table><tr><td>Electrons per shell</td><td>'+e.shells.join(', ')+'</td></tr><tr><td>Electron configuration</td><td>'+esc(e.conf)+'</td></tr><tr><td>State at 20 °C</td><td>'+STATE[stateAt(e,20)][0]+'</td></tr><tr><td>Melting / boiling point</td><td>'+tempTxt(e.mp)+' / '+tempTxt(e.bp)+'</td></tr><tr><td>Density</td><td>'+(e.den==null?'unknown':e.den)+'</td></tr><tr><td>Electronegativity</td><td>'+(e.en==null?'—':e.en)+'</td></tr><tr><td>Discovered</td><td>'+(e.year||'Ancient times')+' '+esc(e.by)+'</td></tr></table>'+
+   '<h2>Where it is found</h2><p>'+esc(e.found)+'</p><h2>Uses</h2><p>'+esc(e.uses)+'</p><h2>Forms</h2><ul>'+e.forms.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul><h2>Compounds</h2><ul>'+e.cp.map(([f,t])=>'<li><b>'+fmt(f)+'</b> — '+esc(t)+'</li>').join('')+'</ul><h2>Did you know?</h2><p>'+esc(e.fact)+'</p><p><small>Made with MigaBuilder Chemistry Map · migabuilder.com/chemistry-map.html</small></p>';
+  download(e.name.toLowerCase()+'-fact-sheet.html','<!doctype html><html><head><meta charset="utf-8"><title>'+esc(e.name)+' — fact sheet</title><style>'+PAGE_CSS+'</style></head><body>'+body+'</body></html>')}
+
+// ---------- search ----------
+$('search').addEventListener('change',()=>{const q=$('search').value.trim();if(!q){setHighlight(null);return}const ql=q.toLowerCase();
+  const hit=EL.find(e=>e.name.toLowerCase()===ql||e.sym.toLowerCase()===ql&&q.length<=2||String(e.z)===q);
+  if(hit){select(hit.sym);setHighlight(null);$('search').value='';return}
+  const c=CPDS.find(c=>c[0].toLowerCase()===ql||c[1].toLowerCase().includes(ql));
+  const list=EL.filter(e=>(e.name+' '+e.uses+' '+e.found+' '+e.forms.join(' ')+' '+e.cp.map(x=>x.join(' ')).join(' ')).toLowerCase().includes(ql)).map(e=>e.sym);
+  if(list.length){setHighlight(list,list.length+' element'+(list.length>1?'s':'')+' mention “'+q+'”. Tap one to read more.');if(list.length===1)select(list[0])}
+  else if(c){setTab('lab');bowl=Object.keys(c.els);renderBowl(c[0])}
+  else{$('search').setCustomValidity('Nothing found');$('search').reportValidity();setTimeout(()=>$('search').setCustomValidity(''),1500)}});
+
+// ---------- tabs ----------
+function setTab(t){tab=t;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  ['lab','mat','calc','learn'].forEach(k=>$(k+'Panel').classList.toggle('hidden',k!==t));
+  if(t==='lab')renderBowl();else if(t==='mat'){if(!curMat)setHighlight(null)}else if(t==='calc')calc();else setHighlight(null)}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+// ---------- mixing bowl ----------
+function addBowl(s){if(bowl.includes(s))bowl=bowl.filter(x=>x!==s);else{if(bowl.length>=6)bowl.shift();bowl.push(s)}renderBowl()}
+$('clearBowl').onclick=()=>{bowl=[];renderBowl()};
+const PRESETS=[['Na','Cl'],['H','O'],['C','O'],['Fe','O'],['C','H'],['N','H'],['Ca','C','O'],['Cu','Zn'],['Si','O'],['Mg','O']];
+$('presets').innerHTML=PRESETS.map((p,i)=>'<button class="chip" data-p="'+i+'">'+p.join(' + ')+'</button>').join('');
+$('presets').querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{bowl=PRESETS[+b.dataset.p].slice();renderBowl()});
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+function bondType(a,b){if(metal(a)&&metal(b))return ['metallic','Both are metals, so they do not form a compound in the usual way — they mix into an alloy. Their outer electrons float freely in a “sea”, holding the atoms together.'];
+  if(a.en==null||b.en==null)return a.cat==='noble'||b.cat==='noble'?['none','Noble gases have full outer shells, so they almost never bond.']:['unknown','Not enough is known to predict the bond.'];
+  const d=Math.abs(a.en-b.en);
+  if(d>1.7)return ['ionic','Big difference ('+d.toFixed(2)+'): '+(a.en<b.en?a:b).name.toLowerCase()+' gives electrons to '+(a.en<b.en?b:a).name.toLowerCase()+'. The atoms become charged ions that attract each other — an ionic bond, usually forming a crystal like salt.'];
+  if(d>=0.4)return ['covalent','Medium difference ('+d.toFixed(2)+'): the atoms share electrons, but '+(a.en<b.en?b:a).name.toLowerCase()+' pulls them closer — a polar covalent bond (like in water).'];
+  return ['covalent','Small difference ('+d.toFixed(2)+'): the atoms share electrons almost equally — a non-polar covalent bond (like in methane or O₂).']}
+function predict(a,b){let m=a,n=b;if(OX[m.sym]==null||OX[n.sym]==null)return null;if(OX[m.sym]<0&&OX[n.sym]>0){m=b;n=a}
+  const p=OX[m.sym],q=-OX[n.sym];if(!(p>0&&q>0))return null;const l=p*q/gcd(p,q),x=l/p,y=l/q;
+  const f=m.sym+(x>1?x:'')+n.sym+(y>1?y:'');
+  return {f,text:m.name+' usually forms '+m.sym+(p>1?p:'')+'+ ions and '+n.name.toLowerCase()+' forms '+n.sym+(q>1?q:'')+'− ions. To balance the charges you need '+x+' × '+m.sym+' ('+(x*p)+'+) and '+y+' × '+n.sym+' ('+(y*q)+'−).'}}
+function cpdCard(c,open){const els=Object.keys(c.els);return '<div class="ccard"><h4><span class="fx">'+fmt(c[0])+'</span>'+esc(c[1])+' <span class="type t-'+c[2]+'">'+c[2]+'</span></h4><p style="margin:4px 0">'+esc(c[3])+'</p><p style="margin:4px 0"><b>Used for:</b> '+esc(c[4])+'</p><p style="margin:4px 0"><b>Made:</b> '+esc(c[5])+'</p><div>'+els.map(s=>go(s,s+' ×'+c.els[s])).join('')+' <button class="go" data-calc="'+esc(c[0])+'">🧮 Molar mass</button></div></div>'}
+function renderBowl(focusFormula){
+  $('bowl').innerHTML=bowl.length?bowl.map(s=>'<button class="bchip" data-rm="'+s+'" style="background:'+CATS[BY[s].cat][1]+'" title="Remove">'+s+' <small>'+esc(BY[s].name)+' ✕</small></button>').join(''):'<span class="muted">Empty — tap elements in the table (or a classic below) to add them.</span>';
+  $('bowl').querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>addBowl(b.dataset.rm));
+  if(tab==='lab')highlight=null;
+  let out='';
+  if(bowl.length>=2){
+    const E=bowl.map(s=>BY[s]);
+    if(bowl.length===2){const [a,b]=E,bt=bondType(a,b);
+      out+='<div class="ccard"><h4>🔗 How '+esc(a.name)+' and '+esc(b.name)+' bond</h4>'+(a.en!=null&&b.en!=null&&bt[0]!=='metallic'?'<div class="meter"><i style="left:calc('+Math.min(100,Math.abs(a.en-b.en)/3.3*100)+'% - 2px)"></i></div><div class="mlab"><span>Non-polar covalent</span><span>Polar covalent</span><span>Ionic</span></div>':'')+'<p style="margin:6px 0 0"><span class="type t-'+(bt[0]==='none'||bt[0]==='unknown'?'network':bt[0])+'">'+bt[0]+'</span> '+esc(bt[1])+'</p>';
+      const pr=bt[0]==='ionic'||bt[0]==='covalent'?predict(a,b):null;
+      if(pr)out+='<p style="margin:8px 0 0"><b>Likely formula: <span class="fx" style="font:700 18px \'Space Grotesk\'">'+fmt(pr.f)+'</span></b><br>'+esc(pr.text)+'</p>';
+      out+='</div>'}
+    else out+='<div class="ccard"><h4>🔗 Bonds between these elements</h4><ul style="margin:0;padding-left:18px">'+E.flatMap((a,i)=>E.slice(i+1).map(b=>'<li><b>'+a.sym+'–'+b.sym+':</b> '+bondType(a,b)[0]+'</li>')).join('')+'</ul></div>';
+    const key=bowl.slice().sort().join(','),exact=CPDS.filter(c=>c.set===key),more=CPDS.filter(c=>c.set!==key&&bowl.every(s=>c.els[s])).slice(0,6);
+    exact.sort((x,y)=>(y[0]===focusFormula)-(x[0]===focusFormula));
+    out+='<h3 style="font:700 16px \'Space Grotesk\';margin:12px 0 6px">⚗️ Real compounds made of exactly these elements ('+exact.length+')</h3>'+(exact.length?exact.map(c=>cpdCard(c)).join(''):'<p class="muted">None in our list — try another combination.</p>');
+    if(more.length)out+='<h3 style="font:700 16px \'Space Grotesk\';margin:12px 0 6px">➕ With extra elements</h3>'+more.map(c=>cpdCard(c)).join('');
+    const mats=MATS.filter(m=>bowl.every(s=>m[4].includes(s)));
+    if(mats.length)out+='<h3 style="font:700 16px \'Space Grotesk\';margin:12px 0 6px">🏭 Materials that use them</h3>'+mats.map(m=>'<button class="go" data-mat="'+m[0]+'">'+m[1]+' '+esc(m[2])+'</button>').join('');
+  }else if(bowl.length===1){const e=BY[bowl[0]];out='<p>Add one more element. '+esc(e.name)+' appears in:</p>'+CPDS.filter(c=>c.els[e.sym]).slice(0,8).map(c=>cpdCard(c)).join('')}
+  $('labOut').innerHTML=out;
+  $('labOut').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>select(b.dataset.go.replace(/ .*/,''),{noScroll:true}));
+  $('labOut').querySelectorAll('[data-calc]').forEach(b=>b.onclick=()=>{setTab('calc');$('formula').value=b.dataset.calc;calc()});
+  $('labOut').querySelectorAll('[data-mat]').forEach(b=>b.onclick=()=>{setTab('mat');showMat(b.dataset.mat)});
+  paint()}
+
+// ---------- materials ----------
+let curMat=null;
+function drawMats(){const groups=[...new Set(MATS.map(m=>m[3]))];
+  $('matList').innerHTML=groups.map(g=>'<h3 style="font:700 15px \'Space Grotesk\';margin:14px 0 6px">'+esc(g)+'</h3><div class="mgrid">'+MATS.filter(m=>m[3]===g).map(m=>'<button class="mcard'+(m[0]===curMat?' on':'')+'" data-m="'+m[0]+'"><b>'+m[1]+' '+esc(m[2])+'</b><small>'+m[4].join(' · ')+'</small></button>').join('')+'</div>').join('');
+  $('matList').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>showMat(b.dataset.m))}
+function showMat(id){const m=MATS.find(x=>x[0]===id);if(!m)return;curMat=id;
+  $('matDet').innerHTML='<div class="mdet"><h3 style="font:700 19px \'Space Grotesk\';margin:0 0 4px">'+m[1]+' '+esc(m[2])+'</h3><p><b>Key elements:</b> '+m[4].map(s=>go(s,s+' '+BY[s].name)).join('')+'</p><p><b>Made from:</b> '+esc(m[5])+'</p><p><b>How it is made:</b> '+esc(m[6])+'</p><p><b>Used for:</b> '+esc(m[7])+'</p><div class="actions" style="margin-top:6px"><button class="secondary" id="matMix">🧺 Put these elements in the bowl</button></div></div>';
+  $('matDet').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>select(b.dataset.go,{noScroll:true}));
+  $('matMix').onclick=()=>{bowl=m[4].slice(0,6);setTab('lab')};
+  setHighlight(m[4],m[2]+' is made mainly from: '+m[4].map(s=>BY[s].name).join(', '));drawMats();
+  if(matchMedia('(max-width:980px)').matches)document.querySelector('.tablebox').scrollIntoView({behavior:'smooth'})}
+drawMats();
+
+// ---------- formula calculator ----------
+const FX=['H2O','CO2','NaCl','C6H12O6','CaCO3','H2SO4','C8H10N4O2','CuSO4·5H2O','Ca(OH)2','Fe2O3'];
+$('fx').innerHTML=FX.map(f=>'<button class="chip" data-f="'+f+'">'+fmt(f)+'</button>').join('');
+$('fx').querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{$('formula').value=b.dataset.f;calc()});
+$('formula').oninput=calc;
+function calc(){const f=$('formula').value.trim();if(!f){$('calcOut').innerHTML='';$('formula').classList.remove('bad');if(tab==='calc')setHighlight(null);return}
+  const p=parseFormula(f);$('formula').classList.toggle('bad',!p);
+  if(!p){$('calcOut').innerHTML='<p class="muted">Not a formula I can read yet. Use element symbols with capital first letters, numbers after them, and brackets for groups — e.g. Al2(SO4)3.</p>';return}
+  const rows=Object.entries(p).map(([s,n])=>({s,n,m:n*(typeof BY[s].mass==='number'?BY[s].mass:0)})),tot=rows.reduce((a,r)=>a+r.m,0);
+  const c=CPDS.find(c=>c[0].replace(/[()]/g,'')===f.replace(/[()]/g,'')||parseFormula(c[0])&&JSON.stringify(Object.entries(parseFormula(c[0])).sort())===JSON.stringify(Object.entries(p).sort()));
+  $('calcOut').innerHTML='<div class="big">'+fmt(f)+' = '+tot.toFixed(2)+' g/mol</div>'+(c?'<p style="margin:4px 0">That is <b>'+esc(c[1])+'</b>. '+esc(c[3].split('. ')[0])+'.</p>':'')+
+   '<div class="cbar">'+rows.map(r=>'<span title="'+r.s+' '+(r.m/tot*100).toFixed(1)+'%" style="width:'+(r.m/tot*100)+'%;background:'+CATS[BY[r.s].cat][1]+'"></span>').join('')+'</div>'+
+   '<table class="mm"><tr><th>Element</th><th>Atoms</th><th>Atomic mass</th><th>Mass</th><th>Share</th></tr>'+rows.map(r=>'<tr><td>'+go(r.s,r.s+' '+BY[r.s].name)+'</td><td>'+r.n+'</td><td>'+BY[r.s].mass+'</td><td>'+r.m.toFixed(2)+'</td><td><b>'+(r.m/tot*100).toFixed(1)+'%</b></td></tr>').join('')+'</table>'+
+   '<p class="muted">Example: '+tot.toFixed(1)+' g of '+esc(f)+' contains 6.022 × 10²³ '+(Object.keys(p).length>1?'molecules or formula units':'atoms')+'.</p>';
+  $('calcOut').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>select(b.dataset.go,{noScroll:true}));
+  if(tab==='calc'){highlight=new Set(Object.keys(p));$('hint').textContent='Elements in '+f;paint()}}
+
+// ---------- how atoms bond ----------
+const ring=(cx,cy,r,n,col)=>{let s='<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#9fb4c8"/>';for(let i=0;i<n;i++){const a=i/n*6.283-1.57;s+='<circle cx="'+(cx+r*Math.cos(a)).toFixed(1)+'" cy="'+(cy+r*Math.sin(a)).toFixed(1)+'" r="4" fill="'+col+'"/>'}return s};
+$('learnPanel').innerHTML='<h2>How atoms are built and why they bond</h2>'+
+ '<h3>⚛️ Inside an atom</h3><p>Every atom has a tiny <b>nucleus</b> of <b>protons</b> (+) and <b>neutrons</b>, surrounded by <b>electrons</b> (−) in shells. The number of protons — the <b>atomic number</b> — decides which element it is: 1 proton is hydrogen, 6 is carbon, 79 is gold. Atoms of the same element with different numbers of neutrons are <b>isotopes</b>.</p>'+
+ '<svg class="lsvg" viewBox="0 0 420 150" role="img" aria-label="Carbon atom with 6 protons and 6 neutrons in the nucleus, 2 electrons in the inner shell and 4 in the outer shell"><circle cx="90" cy="75" r="16" fill="#E2A63B"/><text x="90" y="79" text-anchor="middle" font-size="10" font-weight="700" fill="#3b2a0b">6p 6n</text>'+ring(90,75,34,2,'#8fb2cf')+ring(90,75,58,4,'#3d7fb8')+'<text x="170" y="40" font-size="13" fill="#16202B" font-weight="700">Carbon</text><text x="170" y="62" font-size="12" fill="#16202B">Nucleus: 6 protons + 6 neutrons</text><text x="170" y="82" font-size="12" fill="#16202B">Inner shell: 2 electrons</text><text x="170" y="102" font-size="12" fill="#16202B">Outer shell: 4 electrons → makes 4 bonds</text></svg>'+
+ '<h3>🧩 Why the table has this shape</h3><p>Each <b>row (period)</b> adds a new electron shell. Elements in the same <b>column (group)</b> have the same number of outer electrons, so they behave alike: group 1 metals all fizz in water, group 17 halogens all grab one electron, group 18 noble gases have full shells and hardly react.</p>'+
+ '<h3>🤝 Why atoms bond</h3><p>Atoms are most stable with a full outer shell (usually 8 electrons, 2 for hydrogen and helium). They get there by giving, taking or sharing electrons. <b>Electronegativity</b> — how hard an atom pulls on electrons — decides which.</p>'+
+ '<h3>1. Ionic bond — give and take</h3><p>A metal gives electrons to a non-metal. Both become charged <b>ions</b> that stick together in a crystal. Example: sodium gives 1 electron to chlorine → Na⁺Cl⁻ (salt). Ionic compounds have high melting points and conduct electricity when melted or dissolved.</p>'+
+ '<svg class="lsvg" viewBox="0 0 420 110" role="img" aria-label="Sodium gives its outer electron to chlorine, forming Na plus and Cl minus"><circle cx="70" cy="55" r="26" fill="#e8735a"/><text x="70" y="60" text-anchor="middle" font-size="16" font-weight="700" fill="#10202e">Na</text><circle cx="112" cy="55" r="5" fill="#3d7fb8"/><path d="M122,55 C160,20 220,20 262,48" fill="none" stroke="#0E2A47" stroke-width="2" marker-end="url(#ar)"/><defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#0E2A47"/></marker></defs><circle cx="300" cy="55" r="30" fill="#6aa9e0"/><text x="300" y="60" text-anchor="middle" font-size="16" font-weight="700" fill="#10202e">Cl</text><text x="70" y="102" text-anchor="middle" font-size="12" fill="#16202B">Na⁺ (lost 1)</text><text x="300" y="102" text-anchor="middle" font-size="12" fill="#16202B">Cl⁻ (gained 1)</text></svg>'+
+ '<h3>2. Covalent bond — sharing</h3><p>Two non-metals share pairs of electrons. This makes <b>molecules</b> like H₂O, CO₂ and CH₄. If one atom pulls harder (like oxygen in water), the bond is <b>polar</b>. Some covalent substances form giant networks — diamond and quartz — which are extremely hard.</p>'+
+ '<svg class="lsvg" viewBox="0 0 420 120" role="img" aria-label="Water molecule: oxygen shares one electron pair with each of two hydrogens"><circle cx="210" cy="50" r="30" fill="#e8735a" opacity=".9"/><text x="210" y="56" text-anchor="middle" font-size="18" font-weight="700" fill="#10202e">O</text><circle cx="150" cy="90" r="18" fill="#9fc7ea"/><text x="150" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#10202e">H</text><circle cx="270" cy="90" r="18" fill="#9fc7ea"/><text x="270" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#10202e">H</text><circle cx="176" cy="72" r="4" fill="#3d7fb8"/><circle cx="182" cy="80" r="4" fill="#3d7fb8"/><circle cx="244" cy="72" r="4" fill="#3d7fb8"/><circle cx="238" cy="80" r="4" fill="#3d7fb8"/><text x="330" y="40" font-size="12" fill="#16202B">shared pairs</text><text x="330" y="58" font-size="12" fill="#16202B">O pulls harder →</text><text x="330" y="76" font-size="12" fill="#16202B">polar molecule</text></svg>'+
+ '<h3>3. Metallic bond — a sea of electrons</h3><p>In metals the outer electrons are free to roam between positive metal ions. That is why metals conduct electricity and heat, shine, and can be bent without breaking. Mixing metals makes <b>alloys</b> like steel, bronze and brass.</p>'+
+ '<h3>⚖️ Balancing charges</h3><p>Ions combine so the charges cancel out: Mg²⁺ + 2 Cl⁻ → MgCl₂; 2 Al³⁺ + 3 O²⁻ → Al₂O₃. Try it in the mixer — it predicts the formula for you.</p>'+
+ '<h3>🔥 Reactions</h3><p>In a chemical reaction, bonds break and new ones form, but atoms are never created or destroyed — so equations must balance. Burning methane: CH₄ + 2O₂ → CO₂ + 2H₂O. Rusting: 4Fe + 3O₂ → 2Fe₂O₃. Photosynthesis: 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂.</p>'+
+ '<h3>🌡️ Solid, liquid, gas</h3><p>Heat makes particles move faster. When they move fast enough to slip past each other a solid <b>melts</b>; faster still and they fly apart as a gas (<b>boiling</b>). Pick <i>Solid, liquid or gas</i> above the table and drag the temperature to watch it happen.</p>';
+
+// ---------- quiz ----------
+const rnd=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function pickDistinct(pool,n,avoid){const out=[],s=new Set(avoid.map(x=>String(x).toLowerCase()));shuffle(pool.slice()).forEach(v=>{if(out.length<n&&!s.has(String(v).toLowerCase())){s.add(String(v).toLowerCase());out.push(v)}});return out}
+const mask=(t,e)=>t.replace(new RegExp('\\b('+[e.name,e.name.replace(/ium$/,'')].map(x=>x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')\\w*','gi'),'___').replace(new RegExp('\\b'+e.sym+'\\b','g'),'__');
+const common=EL.filter(e=>e.z<=56||[74,78,79,80,82,86,88,92,94,95].includes(e.z));
+function makeQ(type,e){
+  const names=pool=>pool.map(x=>x.name);
+  if(type==='symbol')return {q:'What is the chemical symbol for '+e.name.toLowerCase()+'?',a:e.sym,opts:pickDistinct(EL.filter(x=>x.sym[0]===e.sym[0]||x.name[0]===e.name[0]).map(x=>x.sym).concat(EL.map(x=>x.sym)).slice(0,40),3,[e.sym]),why:e.name+' = '+e.sym+(e.sym[0]!==e.name[0]?' (from its old or Latin name)':'')+'.',el:e.sym};
+  if(type==='name')return {q:'Which element has the symbol '+e.sym+'?',a:e.name,opts:pickDistinct(names(EL.filter(x=>x.sym[0]===e.sym[0]&&x!==e)).concat(names(common)),3,[e.name]),why:e.sym+' is '+e.name+', atomic number '+e.z+'.',el:e.sym};
+  if(type==='number')return {q:'Which element has atomic number '+e.z+' ('+e.z+' protons)?',a:e.name,opts:pickDistinct(names(EL.filter(x=>Math.abs(x.z-e.z)<=4&&x!==e)),3,[e.name]),why:e.name+' has '+e.z+' protons in every atom.',el:e.sym};
+  if(type==='family')return {q:'Which family does '+e.name.toLowerCase()+' belong to?',a:CATS[e.cat][0],opts:pickDistinct(Object.keys(CATS).filter(k=>k!==e.cat&&k!=='unknown').map(k=>CATS[k][0]),3,[CATS[e.cat][0]]),why:e.name+': '+CATS[e.cat][0]+' — '+CATS[e.cat][2],el:e.sym};
+  if(type==='use'){if(e.uses==='Research only.')return null;return {q:'Which element is this? Used for: “'+mask(e.uses.split(';').slice(0,3).join(';'),e)+'”',a:e.name,opts:pickDistinct(names(common.filter(x=>x!==e&&x.uses!=='Research only.')),3,[e.name]),why:e.name+': '+e.uses,el:e.sym}}
+  if(type==='state'){const st=STATE[stateAt(e,20)][0];if(st==='Unknown')return null;return {q:'Is '+e.name.toLowerCase()+' a solid, liquid or gas at room temperature (20 °C)?',a:st,opts:['Solid','Liquid','Gas'].filter(x=>x!==st),why:e.name+' melts at '+tempTxt(e.mp)+' and boils at '+tempTxt(e.bp)+'.',el:e.sym}}
+  if(type==='compound'){const cs=CPDS.filter(c=>c.els[e.sym]);if(!cs.length)return null;const c=rnd(cs);
+    if(Math.random()<.5)return {q:'What is the common name of '+c[0].replace(/(\d+)/g,m=>m.split('').map(d=>SUB[+d]).join(''))+'?',a:c[1],opts:pickDistinct(CPDS.filter(x=>x!==c).map(x=>x[1]),3,[c[1]]),why:c[1]+': '+c[3],el:e.sym};
+    return {q:'What is the chemical formula of '+c[1].replace(/ \(.*\)/,'').toLowerCase()+'?',a:fmtPlain(c[0]),opts:pickDistinct(CPDS.filter(x=>x!==c).map(x=>fmtPlain(x[0])),3,[fmtPlain(c[0])]),why:c[1]+' = '+fmtPlain(c[0])+'. Used for: '+c[4],el:e.sym}}
+  if(type==='material'){const ms=MATS.filter(m=>m[4].includes(e.sym));if(!ms.length)return null;const m=rnd(ms);
+    return {q:'Which element is a key ingredient of '+m[2].toLowerCase()+'?',a:e.name,opts:pickDistinct(names(common.filter(x=>!m[4].includes(x.sym))),3,[e.name]),why:m[2]+' is made from '+m[4].map(s=>BY[s].name).join(', ')+'. '+m[6],el:e.sym}}
+  return null}
+function fmtPlain(f){return f.replace(/(\d+)/g,m=>m.split('').map(d=>SUB[+d]).join(''))}
+$('qSource').innerHTML='<option value="common">Common elements (1–56 + famous heavy ones)</option><option value="first20">The first 20 elements</option><option value="all">All 118 elements</option><option value="seen">Elements I explored</option><optgroup label="One family">'+Object.entries(CATS).filter(([k])=>k!=='unknown').map(([k,v])=>'<option value="cat:'+k+'">'+esc(v[0])+'</option>').join('')+'</optgroup>';
+function sourceEls(s){if(s==='seen'){const l=EL.filter(e=>seen.has(e.sym));return l.length>=3?l:null}if(s==='first20')return EL.slice(0,20);if(s==='all')return EL;if(s.startsWith('cat:'))return EL.filter(e=>e.cat===s.slice(4));return common}
+function buildQuestions(src,n,types){const els=sourceEls(src);if(!els||!types.length)return null;const out=[],keys=new Set();let guard=0;
+  while(out.length<n&&guard++<900){const q=makeQ(rnd(types),rnd(els));if(!q||q.opts.length<2)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
+  return out.length?out:null}
+function generate(){const src=$('qSource').value;if(src==='seen'&&!sourceEls('seen')){alert('Explore at least 3 elements first, or choose another topic.');return null}
+  const types=[...document.querySelectorAll('#qTypes input:checked')].map(c=>c.value);if(!types.length){alert('Tick at least one question type.');return null}
+  const qs=buildQuestions(src,+$('qCount').value,types);if(!qs)alert('No questions match — tick more question types.');return qs}
+let quiz=[],qi=0,score=0,points=0,streak=0,bestStreak=0,answered=false,missed=[],timer=null,left=0,challenge=true;
+function start(qs){if(!qs)return;quiz=qs;qi=0;score=0;points=0;streak=0;bestStreak=0;missed=[];challenge=$('qMode').value==='challenge';
+  $('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');$('timerBar').classList.toggle('hidden',!challenge);show()}
+const mult=()=>streak>=5?2:streak>=3?1.5:1;
+function show(){const q=quiz[qi];answered=false;
+  $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
+  $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
+  $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
+  clearInterval(timer);if(challenge){left=20;$('timerFill').style.width='100%';$('timerFill').style.background='#4E9E73';timer=setInterval(()=>{left-=.25;$('timerFill').style.width=Math.max(0,left/20*100)+'%';if(left<6)$('timerFill').style.background='#D8604A';if(left<=0){clearInterval(timer);answer(null,null)}},250)}}
+function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer);const q=quiz[qi],ok=choice===q.a;let gained=0;
+  if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
+  q.ok=ok;q.given=choice;
+  $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why||'The answer is '+q.a+'.')+(q.el?' <a data-go="'+q.el+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(BY[q.el].name)+' →</a>':'');$('qExplain').classList.remove('hidden');
+  const g=$('qExplain').querySelector('[data-go]');if(g)g.onclick=()=>{select(g.dataset.go,{noScroll:true});$('info').scrollIntoView({behavior:'smooth'})};
+  $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
+  $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+$('qNext').onclick=()=>{if(++qi<quiz.length)show();else finish()};
+$('qQuit').onclick=()=>{clearInterval(timer);quiz=quiz.slice(0,qi+(answered?1:0));if(!quiz.length){$('quizArea').classList.add('hidden');return}finish()};
+const RANKS=[[90,'Nobel chemist 🏅'],[75,'Lab scientist 🧪'],[55,'Chemistry student 📘'],[0,'Lab assistant 🥽']];
+function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
+  const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];const best=store.get('chemBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
+  if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('chemBest',best);
+  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
+  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('retryWrong').classList.toggle('hidden',!missed.length);showBest();$('quizDone').scrollIntoView({behavior:'smooth',block:'nearest'})}
+$('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
+$('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})));
+function showBest(){const b=store.get('chemBest',null);$('bestLine').textContent=b?'Your best: '+b.points+' points in challenge mode · '+b.pct+'% accuracy':''}
+showBest();
+$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;const title='Chemistry quiz';
+  const body='<h1>'+title+'</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">Answer key</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+' — <small>'+esc(q.why||'')+'</small></li>').join('')+'</ol><p><small>Made with MigaBuilder Chemistry Map · migabuilder.com/chemistry-map.html</small></p>';
+  download('chemistry-quiz.html','<!doctype html><html><head><meta charset="utf-8"><title>'+title+'</title><style>'+PAGE_CSS+'</style></head><body>'+body+'</body></html>')};
+$('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$('aiTopic').focus();return}
+  const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your quiz…';$('aiQuiz').disabled=true;
+  try{const d=MigaAI.json(await MigaAI.ask('You write accurate multiple-choice chemistry quizzes. Reply with ONE JSON array only.',
+    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
+    const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
+    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(err){st.textContent='Could not create the quiz: '+err.message}$('aiQuiz').disabled=false};
+
+// ---------- start ----------
+buildTable();$('seenCount').textContent=seen.size;renderBowl();paint();
+const h=decodeURIComponent(location.hash.slice(1));if(BY[h])setTimeout(()=>select(h,{noScroll:true}),150);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

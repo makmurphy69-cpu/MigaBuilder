@@ -1,0 +1,17 @@
+{
+  "name": "migabuilder-ai-dispatch",
+  "private": true,
+  "type": "module",
+  "description": "Routes @gemini mentions in AI-REVIEW.md and GitHub comments to Gemini and posts the reply back.",
+  "scripts": {
+    "log": "node dispatch.mjs log",
+    "comment": "node dispatch.mjs comment",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@google/genai": "^2.24.0"
+  }
+}

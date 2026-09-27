@@ -1,0 +1,746 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Body Map — how every body part works, its illnesses and care, digestion, fasting and quizzes | MigaBuilder</title>
+<meta name="description" content="An interactive human body map with organs, skeleton, muscles, tendons and skin layers: click any part to learn how it works, how it connects to other parts, its common illnesses and the best ways to treat and prevent them. Follow food and drinks through the body, see what happens hour by hour when you fast, and play or make your own body quizzes. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/body-map.html">
+<meta property="og:title" content="Body Map — how the human body works, part by part | MigaBuilder">
+<meta property="og:description" content="Click any body part to learn how it works, its connections, illnesses, treatments and care. Follow a meal through the body, explore fasting and make your own quiz.">
+<meta property="og:url" content="https://migabuilder.com/body-map.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="ai-client.js"></script>
+<script src="body-data.js"></script>
+<style>
+main{max-width:1320px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.toolbar input{flex:1 1 220px;padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px 'IBM Plex Sans',sans-serif}
+.chip.active{background:var(--cyan);color:#081826;border-color:var(--cyan)}
+.chip i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:0}
+.panel .chip{background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)}.panel .chip.active{background:#0E2A47;color:#fff}
+.systems{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.explorer{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,1.15fr);gap:16px;align-items:start}
+.explorer>div:first-child{position:sticky;top:10px}
+.viewbox{background:#0a2238;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
+#body{display:block;width:100%;height:680px;touch-action:manipulation}
+.part{cursor:pointer;transition:opacity .25s}.part:focus{outline:none}
+.part:hover>*,.part:focus-visible>*{filter:brightness(1.25)}
+.part.sel>*{filter:drop-shadow(0 0 4px #fff) brightness(1.15)}
+.part.glow>*{filter:drop-shadow(0 0 5px #E2A63B) brightness(1.2)}
+.part.near>*{filter:drop-shadow(0 0 2px #6FD1E0)}
+.part.dim{opacity:.16}.part.base.dim{opacity:.4}
+.layers{display:flex;gap:6px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line)}
+.lbl{font:600 10.5px 'IBM Plex Sans',sans-serif;fill:#EDEAE0;paint-order:stroke;stroke:#0a2238;stroke-width:3px;pointer-events:none}
+.hit{stroke:transparent;fill:none;stroke-width:12}
+#tip{position:absolute;pointer-events:none;background:rgba(8,24,38,.94);color:#fff;border:1px solid var(--line);padding:5px 9px;border-radius:4px;font:600 12.5px 'IBM Plex Sans';display:none;white-space:nowrap;z-index:3}
+.legend{display:flex;gap:12px;flex-wrap:wrap;padding:8px 12px;font-size:12px;color:rgba(237,234,224,.8)}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.map-note{padding:6px 12px 0;pointer-events:none;font-size:12px;color:rgba(237,234,224,.75);line-height:1.35}
+#net{display:block;width:100%;height:680px;cursor:grab;touch-action:none}
+.node circle{stroke:#0a2238;stroke-width:2;cursor:pointer}.node text{fill:#EDEAE0;font:600 12px 'IBM Plex Sans';pointer-events:none;paint-order:stroke;stroke:#0a2238;stroke-width:3px}
+.link{stroke:rgba(111,209,224,.35);stroke-width:1.3}.dim-n{opacity:.18}.hl circle{stroke:#fff;stroke-width:3}
+.map-tools{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px}.map-tools button{width:36px;height:36px;border-radius:4px;border:1px solid var(--line);background:rgba(8,24,38,.85);color:var(--paper);font-size:18px;cursor:pointer}
+.list{padding:10px;max-height:680px;overflow:auto}.list h4{color:#6FD1E0;font:700 13px 'Space Grotesk';margin:10px 0 6px}
+.list .row{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.lcard{background:#fff;color:var(--ink);border-radius:4px;padding:9px 11px;cursor:pointer;border-left:5px solid #3d6b8c;text-align:left;font:inherit}
+.lcard b{display:block;font:700 14px 'Space Grotesk'}.lcard small{color:rgba(22,32,43,.62)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button{flex:1 1 auto;border:1px solid var(--line);background:rgba(8,24,38,.7);color:var(--paper);padding:10px 12px;border-radius:4px;cursor:pointer;font:700 13px 'Space Grotesk'}
+.tabs button.active{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.info h2{font:700 25px 'Space Grotesk';margin:0}.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#10202e;margin:0 6px 6px 0}
+.info .meta{color:rgba(22,32,43,.65);font-size:13px;margin:4px 0 10px}
+.job{font-weight:600;font-size:15px;margin:0 0 8px;line-height:1.45}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.sect ul,.sect ol{margin:0;padding-left:20px;line-height:1.5;font-size:14px}.sect li{margin-bottom:4px}
+.conn{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.45;margin-bottom:6px}
+.conn a,.go{flex:0 0 auto;display:inline-block;padding:3px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.25);color:#0E2A47;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none}
+details.ill{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;margin-bottom:6px}
+details.ill summary{cursor:pointer;padding:9px 11px;font-weight:700;font-size:14px;list-style:none;display:flex;justify-content:space-between;gap:8px}
+details.ill summary::-webkit-details-marker{display:none}details.ill summary:after{content:'+';color:#0E2A47}details.ill[open] summary:after{content:'−'}
+details.ill .b{padding:0 12px 10px;font-size:13.5px;line-height:1.5}.b p{margin:4px 0}
+.urgent{display:inline-block;background:#D8604A;color:#fff;font-size:10.5px;padding:2px 7px;border-radius:999px;margin-left:6px;vertical-align:1px}
+.tip-list li::marker{content:'✓  ';color:#2f6b49}
+.facts{background:rgba(226,166,59,.12);border-left:3px solid #E2A63B;padding:8px 12px;font-size:13.5px;line-height:1.5}
+.disclaimer{font-size:12px;color:rgba(22,32,43,.7);background:rgba(216,96,74,.08);border-left:3px solid #D8604A;padding:8px 10px;margin-top:12px;line-height:1.45}
+.empty{color:rgba(22,32,43,.6);text-align:center;padding:30px 10px}
+.steps{list-style:none;padding:0;margin:8px 0;display:flex;flex-wrap:wrap;gap:5px}
+.steps li{padding:5px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.2);font-size:12px;cursor:pointer}
+.steps li.on{background:#0E2A47;color:#fff}.steps li.done{background:rgba(78,158,115,.16)}
+.stepcard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:6px;padding:12px 14px;margin:8px 0}
+.stepcard .t{font-size:12px;font-weight:700;color:#8a5a0f;text-transform:uppercase;letter-spacing:.04em}
+.stepcard h3{font:700 19px 'Space Grotesk';margin:3px 0 6px}.stepcard p{margin:0;line-height:1.55;font-size:14.5px}
+.ncards{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.ncard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;padding:9px 11px;font-size:13px;line-height:1.45;cursor:pointer;text-align:left;color:var(--ink);font-family:inherit}
+.ncard b{font:700 14px 'Space Grotesk';display:block;margin-bottom:3px}.ncard.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.35)}
+.fastbox{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:6px;padding:12px 14px}
+.fastbox input[type=range]{width:100%;accent-color:#0E2A47}
+.hours{font:700 30px 'Space Grotesk'}.stage{font:700 17px 'Space Grotesk';color:#0E2A47}
+.fuel{display:flex;height:22px;border-radius:4px;overflow:hidden;margin:8px 0 4px;background:#eee}.fuel span{display:block;height:100%;transition:width .3s}
+.fleg{display:flex;flex-wrap:wrap;gap:10px;font-size:12px}.fleg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.note{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;padding:9px 11px;font-size:13px;line-height:1.45}.note b{display:block;font:700 14px 'Space Grotesk';margin-bottom:3px}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 12px}.checks label{display:flex;gap:6px;align-items:center;font-size:14px}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px;margin:6px 0}
+.timer{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden}.timer i{display:block;height:100%;background:#4E9E73;transition:width .25s linear}
+.quiz-q{font:600 19px 'Space Grotesk';margin:12px 0;line-height:1.35}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:#0E2A47}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;font-size:14px;line-height:1.5}
+.pop{font:700 16px 'Space Grotesk';color:#2f6b49}
+.review li{margin-bottom:8px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.qtabs{display:flex;gap:6px;margin:4px 0 14px;flex-wrap:wrap}
+.mq{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:10px 12px;margin-bottom:8px}
+.mq textarea{width:100%;min-height:52px;padding:8px;border:1px solid rgba(22,32,43,.25);border-radius:3px;font:inherit;resize:vertical}
+.mq .o{display:flex;gap:6px;align-items:center;margin-top:5px}.mq .o input[type=text],.mq input.why{flex:1;padding:7px;border:1px solid rgba(22,32,43,.25);border-radius:3px;font:inherit;width:100%}
+.mq .top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:13px;margin-bottom:5px}
+.mq .del{border:0;background:none;color:#9b3322;cursor:pointer;font-weight:700}
+.shared{background:rgba(226,166,59,.15);border-left:3px solid #E2A63B;padding:10px 12px;margin-bottom:12px}
+.habits{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.habit{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;padding:9px 11px}
+.habit input{width:20px;height:20px;margin-top:2px;accent-color:#2f6b49}.habit b{font-size:14px}.habit .go{font-size:11px;padding:1px 7px;margin:3px 3px 0 0}
+.habit.done{background:#e9f5ee;border-color:#4E9E73}
+.week{display:flex;gap:6px;align-items:flex-end;height:70px;margin:10px 0}.week div{flex:1;text-align:center;font-size:11px}.week span{display:block;background:#4E9E73;border-radius:3px 3px 0 0;margin:0 auto 3px;width:70%;min-height:2px}
+.hidden{display:none!important}
+@media(max-width:980px){.explorer{grid-template-columns:1fr}.explorer>div:first-child{position:static}#body,#net{height:560px}.qgrid,.opts,.ncards,.notes,.habits{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Body Map</span></nav>
+<header class="masthead"><div><h1>Body Map</h1><p>Click any organ, bone, muscle, tendon or layer of skin to see how it works, how it connects to the rest, its common illnesses and how to treat and prevent them — then follow a meal through the body, explore fasting, and play or make your own quiz.</p></div></header>
+<main>
+<div class="toolbar">
+  <input id="search" list="partList" placeholder="Search a body part or illness, e.g. liver, asthma, migraine…" aria-label="Search"><datalist id="partList"></datalist>
+  <button class="chip active" data-view="body">🧍 Body</button><button class="chip" data-view="net">🕸️ Connections map</button><button class="chip" data-view="list">📚 List</button>
+</div>
+<div class="systems" id="systems"></div>
+<section class="explorer">
+  <div>
+    <div class="viewbox" id="viewBody">
+      <div class="layers" id="layers" aria-label="Body layers"></div>
+      <svg id="body" viewBox="0 0 300 680" role="img" aria-label="Human body. Click an organ or body part to read about it."></svg>
+      <div class="map-note" id="mapNote">Tap an organ. Tap the skin for skin, hair &amp; nails.</div>
+      <div id="tip"></div>
+      <div class="legend">Explored: <b id="seenCount">0</b>/<span id="totalCount"></span> · <span id="legendHint">Highlighted outlines = connected parts</span></div>
+    </div>
+    <div class="viewbox hidden" id="viewNet"><svg id="net" role="img" aria-label="Map of how body parts work together. Click a circle to read about it."></svg>
+      <div class="map-tools"><button id="zIn" aria-label="Zoom in">+</button><button id="zOut" aria-label="Zoom out">−</button><button id="zReset" aria-label="Reset view">⟲</button></div>
+      <div class="legend" id="netLegend"></div>
+    </div>
+    <div class="viewbox hidden" id="viewList"><div class="list" id="list"></div></div>
+  </div>
+  <div>
+    <div class="tabs" role="tablist">
+      <button class="active" data-tab="part" role="tab">🫀 Body part</button>
+      <button data-tab="food" role="tab">🍎 Eating &amp; drinking</button>
+      <button data-tab="fast" role="tab">⏳ Fasting</button>
+    </div>
+    <article class="panel info" id="info" aria-live="polite"><div class="empty">🫁<br><strong>Pick a body part on the map</strong><br>or search above. Everything you open is added to your explored list for the quiz.</div></article>
+
+    <article class="panel hidden" id="foodPanel">
+      <h2>What happens when we eat and drink</h2>
+      <p>Follow a meal or a drink through the body step by step. The moving dot on the map shows where it is; organs light up as they join in.</p>
+      <div class="actions"><button class="chip active" data-journey="food">🍽️ A meal</button><button class="chip" data-journey="drink">🥤 A drink</button></div>
+      <ol class="steps" id="stepList"></ol>
+      <div class="stepcard" id="stepCard"></div>
+      <div class="actions"><button class="secondary" id="prevStep">◀ Back</button><button class="primary" id="playJourney">▶ Play the journey</button><button class="secondary" id="nextStep">Next ▶</button></div>
+      <div class="sect"><h3>What happens to…</h3><p class="muted" style="margin-top:0">Tap a card to light up the parts that handle it.</p><div class="ncards" id="nutrients"></div></div>
+    </article>
+
+    <article class="panel hidden" id="fastPanel">
+      <h2>What happens when we fast</h2>
+      <p>Drag the slider to see how the body changes its fuel, hour by hour, after the last meal. Active organs glow on the map.</p>
+      <div class="fastbox">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap"><span class="hours" id="fastHours">0 h</span><span class="stage" id="fastStage"></span></div>
+        <input type="range" id="fastSlider" min="0" max="96" step="1" value="0" aria-label="Hours since the last meal">
+        <div class="presets"><button class="chip" data-h="3">After a meal</button><button class="chip" data-h="12">Overnight (12 h)</button><button class="chip" data-h="16">16:8 fast</button><button class="chip" data-h="24">1 day</button><button class="chip" data-h="48">2 days</button><button class="chip" data-h="72">3 days</button></div>
+        <p id="fastText" style="line-height:1.55;margin:6px 0"></p>
+        <b style="font-size:13px">Where the energy comes from (rough share)</b>
+        <div class="fuel" id="fuel"></div><div class="fleg" id="fleg"></div>
+        <p class="muted">Approximate — it varies with body size, activity, diet and health. <span id="fastParts"></span></p>
+      </div>
+      <div class="notes" id="fastNotes"></div>
+    </article>
+  </div>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🏆 Body quiz</h2>
+  <div class="qtabs"><button class="chip active" data-qtab="play">Play a quiz</button><button class="chip" data-qtab="make">✏️ Make your own quiz</button></div>
+  <div id="qPlay">
+    <p>Make a quiz about the whole body, one body system, one body part, or digestion and fasting. <b>Challenge mode</b> gives 20 seconds per question with bonus points for speed and streaks.</p>
+    <div class="qgrid">
+      <div class="field"><label for="qSource">Questions about</label><select id="qSource"></select></div>
+      <div class="field"><label for="qCount">Number of questions</label><select id="qCount"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+      <div class="field"><label for="qMode">Mode</label><select id="qMode"><option value="challenge">Challenge — timed, points &amp; streaks</option><option value="practice">Practice — no timer</option></select></div>
+    </div>
+    <div class="checks" id="qTypes">
+      <label><input type="checkbox" value="job" checked> What it does</label>
+      <label><input type="checkbox" value="system" checked> Body systems</label>
+      <label><input type="checkbox" value="illness" checked> Illnesses</label>
+      <label><input type="checkbox" value="signs" checked> Signs &amp; symptoms</label>
+      <label><input type="checkbox" value="treat" checked> Treatment</label>
+      <label><input type="checkbox" value="connection" checked> Connections</label>
+      <label><input type="checkbox" value="fact" checked> Facts</label>
+      <label><input type="checkbox" value="digest" checked> Eating &amp; drinking</label>
+      <label><input type="checkbox" value="fast" checked> Fasting</label>
+    </div>
+    <div class="actions"><button class="primary" id="makeQuiz" data-primary>Generate quiz</button><button class="secondary" id="printQuiz">⬇ Printable quiz + answers</button></div>
+    <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">🤖 AI quiz on any body topic</summary>
+      <p class="muted">Type any topic (e.g. “the heart for 10-year-olds”, “vitamins”, “the immune system”). The AI writes the questions; check anything surprising against a trusted health source.</p>
+      <div class="grid"><div class="field"><label for="aiTopic">Topic</label><input id="aiTopic" placeholder="e.g. How vaccines work"></div><div class="field"><label for="aiLevel">Level</label><select id="aiLevel"><option>beginner</option><option selected>intermediate</option><option>advanced</option></select></div></div>
+      <div id="aiBox"></div><button class="secondary" id="aiQuiz">Generate AI quiz</button><p class="status" id="aiStatus"></p>
+    </details>
+  </div>
+  <div id="qMake" class="hidden">
+    <div id="sharedNote" class="shared hidden"></div>
+    <p>Build a quiz for a class, a friend or yourself. Start from suggested questions for any body part, edit them, add your own, then play it, print it or share it as a link.</p>
+    <div class="qgrid">
+      <div class="field"><label for="mkTitle">Quiz title</label><input id="mkTitle" placeholder="e.g. The heart — Year 7 quiz"></div>
+      <div class="field"><label for="mkPart">Suggest questions about</label><select id="mkPart"></select></div>
+      <div class="field"><label for="mkSaved">My saved quizzes</label><select id="mkSaved"><option value="">— choose —</option></select></div>
+    </div>
+    <div class="actions" style="margin-bottom:10px"><button class="secondary" id="mkSuggest">✨ Add 5 suggested questions</button><button class="secondary" id="mkAdd">＋ Add my own question</button><button class="secondary" id="mkClear">Clear</button><button class="danger" id="mkDelete">Delete saved quiz</button></div>
+    <div id="mkList"></div>
+    <p class="muted" id="mkCount"></p>
+    <div class="actions"><button class="primary" id="mkPlay">▶ Play my quiz</button><button class="secondary" id="mkSave">💾 Save</button><button class="secondary" id="mkPrint">⬇ Printable</button><button class="secondary" id="mkShare">🔗 Copy share link</button></div>
+    <p class="status" id="mkStatus"></p>
+  </div>
+  <p class="muted" id="bestLine" style="margin-top:10px"></p>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="hud"><span id="qProg"></span><span id="qStreak"></span><span id="qScore"></span></div>
+    <div class="timer" id="timerBar"><i id="timerFill"></i></div>
+    <div class="quiz-q" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:10px"><button class="primary hidden" id="qNext">Next question →</button><button class="secondary" id="qQuit">End quiz</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px">
+    <h3 id="doneTitle" style="font:700 22px 'Space Grotesk';margin:0 0 6px"></h3><p id="doneSub"></p>
+    <ol class="review" id="review"></ol>
+    <div class="actions"><button class="primary" id="newQuiz">New quiz</button><button class="secondary" id="retryWrong">Retry the ones I missed</button></div>
+  </div>
+</section>
+
+<section class="panel" id="habitPanel">
+  <h2>✅ Daily body care checklist</h2>
+  <p>Tick what you did today. Each habit shows which body parts it helps — tap one to read about it. Your ticks are kept only in this browser.</p>
+  <div class="hud"><span id="habitScore"></span><span id="habitStreak"></span></div>
+  <div class="habits" id="habits"></div>
+  <b style="display:block;margin-top:14px;font-size:13px">Your last 7 days</b>
+  <div class="week" id="week"></div>
+</section>
+</main>
+<footer>Body Map · MigaBuilder · For learning only — not medical advice. For symptoms or health decisions, talk to a doctor, nurse or pharmacist. In an emergency, call your local emergency number.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+MigaAI.mount($('aiBox'));
+const PARTS=window.BODY_PARTS,SYS=window.BODY_SYSTEMS,BY=Object.fromEntries(PARTS.map(p=>[p.id,p]));
+const sysColor=p=>SYS[p.systems[0]][1];
+const short=p=>p.name.replace(/ \(.*\)$/,'').replace(/,.*$/,'').replace(/ & .*$/,'');
+// every connection works both ways
+PARTS.forEach(p=>{p.near=new Set(p.links.map(l=>l[0]))});
+PARTS.forEach(p=>p.links.forEach(([o])=>BY[o].near.add(p.id)));
+let seen=new Set(store.get('bodySeen',[]).filter(id=>BY[id])),selected=null,sysFilter='',tab='part';
+$('totalCount').textContent=PARTS.length;
+$('partList').innerHTML=PARTS.map(p=>'<option value="'+esc(p.name)+'">').join('')+PARTS.flatMap(p=>p.ills.map(i=>'<option value="'+esc(i[0])+'">')).join('');
+
+// ---------- body drawing ----------
+const SK='url(#skinG)';
+const SHAPES={
+ skin:`<g><ellipse cx="150" cy="60" rx="36" ry="44" fill="${SK}"/><rect x="133" y="94" width="34" height="40" rx="8" fill="${SK}"/>
+  <path d="M108,130 Q150,122 192,130 Q226,136 232,160 L226,206 Q212,236 208,280 Q204,320 214,350 Q216,372 206,388 L94,388 Q84,372 86,350 Q96,320 92,280 Q88,236 74,206 L68,160 Q74,136 108,130 Z" fill="${SK}"/>
+  <path id="armL" d="M72,146 Q52,154 50,196 L40,300 Q34,350 34,396 L54,398 Q56,352 62,306 L78,214 Z" fill="${SK}"/>
+  <path d="M228,146 Q248,154 250,196 L260,300 Q266,350 266,396 L246,398 Q244,352 238,306 L222,214 Z" fill="${SK}"/>
+  <ellipse cx="44" cy="414" rx="12" ry="20" fill="${SK}"/><ellipse cx="256" cy="414" rx="12" ry="20" fill="${SK}"/>
+  <path d="M94,378 L148,378 L146,470 Q144,520 140,560 L136,640 L110,640 L106,560 Q100,520 100,470 Q92,420 94,378 Z" fill="${SK}"/>
+  <path d="M206,378 L152,378 L154,470 Q156,520 160,560 L164,640 L190,640 L194,560 Q200,520 200,470 Q208,420 206,378 Z" fill="${SK}"/>
+  <ellipse cx="121" cy="648" rx="19" ry="8" fill="${SK}"/><ellipse cx="179" cy="648" rx="19" ry="8" fill="${SK}"/></g>`,
+ vessels:`<path d="M68,272 Q52,330 42,396 M232,272 Q248,330 258,396 M140,392 L140,470 Q138,540 132,632 M160,392 L160,470 Q162,540 168,632" stroke="#d8453c" stroke-width="2.6" fill="none"/>
+  <path d="M74,274 Q58,332 49,396 M226,274 Q242,332 251,396 M145,396 L144,470 Q142,540 138,632 M155,396 L156,470 Q158,540 162,632" stroke="#4b6fd6" stroke-width="2.6" fill="none"/>
+  <path class="hit" d="M71,273 Q55,331 45,396 M229,273 Q245,331 255,396 M142,394 L142,470 Q140,540 135,632 M158,394 L158,470 Q160,540 165,632"/>`,
+ nerves:`<path d="M150,104 L150,372 M104,392 Q104,500 114,636 M196,392 Q196,500 186,636 M150,150 Q104,146 80,160 M150,150 Q196,146 220,160" stroke="#f0d34a" stroke-width="2.2" fill="none" stroke-dasharray="5 3"/>
+  <path class="hit" d="M104,392 Q104,500 114,636 M196,392 Q196,500 186,636"/>`,
+ bones:`<path d="M117,392 q5,-6 10,0 l2,100 q4,6 -2,10 h-9 q-6,-4 -2,-10 Z M173,392 q5,-6 10,0 l-2,100 q4,6 -2,10 h-9 q-6,-4 -2,-10 Z M118,516 h10 l-1,110 h-8 Z M172,516 h10 l-1,110 h-8 Z" fill="#e9e3d2" stroke="#b6ac93" stroke-width="1"/>`,
+ joints:`<circle cx="123" cy="508" r="8"/><circle cx="177" cy="508" r="8"/><circle cx="60" cy="266" r="7"/><circle cx="240" cy="266" r="7"/><circle cx="80" cy="154" r="7"/><circle cx="220" cy="154" r="7"/>`.replace(/<circle/g,'<circle fill="#8fd0c8" stroke="#3e8f86" stroke-width="1.5"'),
+ muscles:`<path d="M60,176 q16,-2 14,40 q-2,34 -12,40 q-12,-6 -10,-40 q0,-38 8,-40 Z M240,176 q-16,-2 -14,40 q2,34 12,40 q12,-6 10,-40 q0,-38 -8,-40 Z" fill="#c9503f" stroke="#8e2f24" stroke-width="1"/>
+  <path d="M63,186 q4,30 0,62 M237,186 q-4,30 0,62" stroke="#e98a7a" stroke-width="1" fill="none"/>`,
+ lungs:`<path d="M141,140 Q116,136 104,160 Q93,192 96,238 Q120,244 143,232 Z M159,140 Q184,136 196,160 Q207,192 204,238 Q180,244 157,232 Z" fill="#e79aa6" stroke="#a9505f" stroke-width="1.2"/>
+  <path d="M150,132 L150,150 M150,150 L136,166 M150,150 L164,166 M136,166 L124,190 M136,166 L134,200 M164,166 L176,190 M164,166 L166,200" stroke="#a9505f" stroke-width="2" fill="none"/>`,
+ esophagus:`<rect x="146" y="124" width="8" height="124" rx="4" fill="#d9866f" stroke="#9c4f3c" stroke-width="1"/>`,
+ heart:`<path d="M161,226 C140,214 134,194 145,185 C153,178 160,183 163,190 C167,181 178,178 183,187 C190,200 179,214 161,226 Z" fill="#d23b3b" stroke="#7e1717" stroke-width="1.4"/><path d="M158,184 q-2,-10 4,-16 M168,182 q2,-9 8,-12" stroke="#7e1717" stroke-width="3" fill="none"/>`,
+ liver:`<path d="M96,244 Q130,232 168,246 Q162,262 140,268 Q112,277 98,266 Q92,256 96,244 Z" fill="#8b3a2b" stroke="#57211a" stroke-width="1.2"/>`,
+ spleen:`<ellipse cx="203" cy="252" rx="6" ry="12" fill="#7a2f5a" stroke="#4b1a37" stroke-width="1"/>`,
+ stomach:`<path d="M170,244 Q190,238 197,256 Q202,280 182,290 Q164,294 156,284 Q168,280 172,270 Q176,256 170,244 Z" fill="#e38f86" stroke="#9c4b44" stroke-width="1.2"/>`,
+ gallbladder:`<ellipse cx="136" cy="271" rx="5.5" ry="8" fill="#4f9a4a" stroke="#2c5e2a" stroke-width="1"/>`,
+ pancreas:`<path d="M132,291 Q160,283 190,289 Q189,297 162,297 Q142,299 132,297 Z" fill="#e6c07a" stroke="#a5813b" stroke-width="1"/>`,
+ kidneys:`<path d="M106,286 q10,0 10,14 q0,6 -4,6 q-3,0 -3,5 q0,7 -3,9 q-10,0 -10,-17 q0,-17 10,-17 Z M194,286 q-10,0 -10,14 q0,6 4,6 q3,0 3,5 q0,7 3,9 q10,0 10,-17 q0,-17 -10,-17 Z" fill="#a8453c" stroke="#6b2720" stroke-width="1"/>
+  <path d="M110,312 Q126,340 142,362 M190,312 Q174,340 158,362" stroke="#e0c24a" stroke-width="1.6" fill="none"/>`,
+ adrenals:`<path d="M99,285 L106,275 L114,285 Z M186,285 L194,275 L201,285 Z" fill="#e2a33b" stroke="#8a5a0f" stroke-width="1"/>`,
+ largeint:`<path d="M126,370 L124,316 Q124,303 137,303 L165,303 Q178,303 178,316 L178,352 Q176,370 158,373 L150,380" stroke="#b9794c" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M126,370 L124,316 Q124,303 137,303 L165,303 Q178,303 178,316 L178,352" stroke="#8c5431" stroke-width="1" stroke-dasharray="2 5" fill="none"/><path d="M126,368 q-6,6 -2,12" stroke="#b9794c" stroke-width="3" fill="none"/>`,
+ smallint:`<ellipse cx="151" cy="334" rx="22" ry="25" fill="#f2b8a2" opacity=".55"/><path d="M136,314 Q150,306 166,314 Q172,322 160,326 Q144,326 138,334 Q134,344 148,344 Q164,342 168,350 Q160,360 140,356" stroke="#e39a80" stroke-width="7" fill="none" stroke-linecap="round"/>`,
+ bladder:`<ellipse cx="150" cy="365" rx="12" ry="9" fill="#e0c24a" stroke="#9b8420" stroke-width="1.2"/>`,
+ reproductive:`<path d="M142,380 Q150,376 158,380 L155,394 Q150,398 145,394 Z" fill="#e07fb3" stroke="#9b3f73" stroke-width="1"/><circle cx="133" cy="383" r="4" fill="#e07fb3" stroke="#9b3f73"/><circle cx="167" cy="383" r="4" fill="#e07fb3" stroke="#9b3f73"/>`,
+ brain:`<path d="M121,56 Q118,24 150,20 Q182,24 179,56 Q170,66 150,64 Q130,66 121,56 Z" fill="#e9a6b8" stroke="#a45a70" stroke-width="1.2"/><path d="M150,22 L150,62 M130,32 q8,6 2,14 q-6,6 4,10 M170,32 q-8,6 -2,14 q6,6 -4,10 M140,26 q6,8 -2,14 M160,26 q-6,8 2,14" stroke="#a45a70" stroke-width="1.1" fill="none"/>`,
+ pituitary:`<circle cx="150" cy="70" r="4" fill="#d9669a" stroke="#fff" stroke-width="1"/>`,
+ eyes:`<ellipse cx="136" cy="72" rx="6.5" ry="4" fill="#fff" stroke="#3a4a5a"/><circle cx="136" cy="72" r="2.6" fill="#3d7fb8"/><ellipse cx="164" cy="72" rx="6.5" ry="4" fill="#fff" stroke="#3a4a5a"/><circle cx="164" cy="72" r="2.6" fill="#3d7fb8"/>`,
+ ears:`<ellipse cx="113" cy="68" rx="5" ry="10" fill="#d99a72" stroke="#9a6440"/><ellipse cx="187" cy="68" rx="5" ry="10" fill="#d99a72" stroke="#9a6440"/>`,
+ nose:`<path d="M150,72 L144,86 Q150,90 156,86 Z" fill="#dca07a" stroke="#9a6440"/>`,
+ mouth:`<path d="M140,94 Q150,101 160,94 Q150,97 140,94 Z" fill="#b8434a" stroke="#7a2228"/>`,
+ throat:`<rect x="143" y="100" width="14" height="22" rx="6" fill="#d98b8b" stroke="#95504f"/>`,
+ thyroid:`<path d="M150,127 Q144,120 139,124 Q136,131 143,133 Q148,133 150,129 Q152,133 157,133 Q164,131 161,124 Q156,120 150,127 Z" fill="#d9669a" stroke="#8e2f5c"/>`,
+ lymph:`<g fill="#58b97a" stroke="#256b3f" stroke-width="1"><circle cx="136" cy="116" r="3.5"/><circle cx="164" cy="116" r="3.5"/><circle cx="86" cy="170" r="4"/><circle cx="214" cy="170" r="4"/><circle cx="112" cy="378" r="4"/><circle cx="188" cy="378" r="4"/><ellipse cx="150" cy="140" rx="6" ry="4"/></g>`
+};
+const ORDER=['skin','vessels','nerves','bones','joints','muscles','esophagus','lungs','heart','liver','spleen','stomach','gallbladder','pancreas','kidneys','adrenals','largeint','smallint','bladder','reproductive','brain','pituitary','eyes','ears','nose','mouth','throat','thyroid','lymph'];
+// ---------- skeleton, muscle and skin-layer drawings ----------
+const mirror=x=>'<g transform="matrix(-1 0 0 1 300 0)">'+x+'</g>',both=x=>x+mirror(x);
+const ghost=(fill,stroke)=>SHAPES.skin.split('fill="url(#skinG)"').join('fill="'+fill+'" stroke="'+stroke+'" stroke-width="1"');
+const BF='#ece5d0',BS='#a2977c';
+const bone=(x1,y1,x2,y2,w)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${BS}" stroke-width="${w+2}" stroke-linecap="round"/><circle cx="${x1}" cy="${y1}" r="${w*.8}" fill="${BF}" stroke="${BS}"/><circle cx="${x2}" cy="${y2}" r="${w*.8}" fill="${BF}" stroke="${BS}"/><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${BF}" stroke-width="${w}" stroke-linecap="round"/>`;
+const curve=(d,w)=>`<path d="${d}" fill="none" stroke="${BS}" stroke-width="${w+1.6}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${BF}" stroke-width="${w}" stroke-linecap="round"/>`;
+let vert='';for(let y=100;y<340;y+=8.6)vert+=`<rect x="145" y="${y.toFixed(1)}" width="10" height="6.6" rx="2"/>`;
+let ribs='';for(let i=0;i<12;i++){const y=146+i*8.5,sp=i<5?44+i*4:i<9?64-(i-5)*3:44-(i-9)*8,ex=150-sp;ribs+=curve(`M148,${y} C${150-sp*.75},${y-7} ${ex-6},${y+9} ${ex+2+(i>9?10:0)},${y+22+(i>9?-8:0)}`,3)}
+const SKEL={
+ bones:ghost('rgba(111,209,224,.07)','rgba(111,209,224,.35)'),
+ skull:`<path d="M120,52 Q118,16 150,14 Q182,16 180,52 Q181,72 171,82 L169,96 Q150,104 131,96 L129,82 Q119,72 120,52 Z" fill="${BF}" stroke="${BS}" stroke-width="1.4"/><ellipse cx="137" cy="58" rx="8" ry="7" fill="#24384c"/><ellipse cx="163" cy="58" rx="8" ry="7" fill="#24384c"/><path d="M150,66 L145,78 L155,78 Z" fill="#24384c"/><path d="M136,88 H164 M140,84 V92 M145,84 V92 M150,84 V92 M155,84 V92 M160,84 V92" stroke="${BS}" stroke-width="1"/><path d="M126,40 Q150,30 174,40" stroke="${BS}" fill="none" stroke-dasharray="3 3"/>`,
+ spine:`<g fill="${BF}" stroke="${BS}" stroke-width="1">${vert}<path d="M141,344 L159,344 L153,380 L147,380 Z"/><path d="M148,382 L152,382 L150,392 Z"/></g>`,
+ shoulder:both(`<path d="M90,146 L114,150 L102,198 Z" fill="${BF}" opacity=".55" stroke="${BS}"/>`+bone(146,134,90,144,4.5)),
+ ribs:both(ribs)+`<rect x="145" y="136" width="10" height="82" rx="4" fill="${BF}" stroke="${BS}" stroke-width="1.2"/>`,
+ armbones:both(bone(86,152,64,258,8)+bone(58,270,40,384,4.5)+bone(66,270,49,384,4.5)),
+ joints:both(`<circle cx="62" cy="264" r="6" fill="#8fd0c8" stroke="#3e8f86" stroke-width="1.5"/>`),
+ hand:both(`<g fill="${BF}" stroke="${BS}"><circle cx="40" cy="392" r="3"/><circle cx="46" cy="391" r="3"/><circle cx="51" cy="394" r="3"/><circle cx="43" cy="398" r="3"/><circle cx="49" cy="399" r="3"/></g>`+[[32,414,28,436],[38,416,36,440],[44,417,44,442],[50,416,52,438],[55,404,62,424]].map(([a,b,c,d],i)=>curve(`M${44+i*2-4},400 L${a},${b} L${c},${d}`,2.4)).join('')),
+ pelvis:both(`<path d="M145,352 Q122,350 104,338 Q95,362 112,382 L130,393 Q141,393 149,389 L147,374 Z" fill="${BF}" stroke="${BS}" stroke-width="1.3"/><ellipse cx="131" cy="379" rx="5" ry="6" fill="#24384c"/>`),
+ femur:both(bone(118,386,125,398,7)+bone(123,396,127,496,9)+`<ellipse cx="126" cy="508" rx="6" ry="7" fill="${BF}" stroke="${BS}" stroke-width="1.3"/>`),
+ shin:both(bone(125,520,123,624,7)+bone(136,524,133,622,3.5)),
+ foot:both(`<circle cx="124" cy="634" r="5" fill="${BF}" stroke="${BS}"/>`+[108,114,120,126,132].map(x=>curve(`M124,637 L${x},656`,2.6)).join(''))
+};
+const MF='#c14a3a',MS='#7a2419',TW='#f3efe6',TS='#b8ae98';
+const mus=(d,lines)=>`<path d="${d}" fill="${MF}" stroke="${MS}" stroke-width="1.1"/>`+(lines?`<path d="${lines}" stroke="#e0806e" stroke-width=".9" fill="none"/>`:'');
+const ten=d=>`<path d="${d}" fill="none" stroke="${TS}" stroke-width="5.4" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${TW}" stroke-width="3.6" stroke-linecap="round"/>`;
+const MBASE=ghost('rgba(193,74,58,.16)','rgba(224,128,110,.45)');
+const quad='M98,390 Q94,446 110,498 L140,498 Q150,444 146,392 Q122,382 98,390 Z';
+const DELT=both(mus('M92,140 Q68,140 60,176 Q70,184 82,180 Q86,158 100,150 Z','M72,150 Q70,165 70,178 M82,146 Q78,162 78,178'));
+const UARM=both(mus('M62,184 q16,-2 14,38 q-2,32 -12,38 q-12,-6 -10,-38 q0,-36 8,-38 Z','M66,190 q4,30 0,62'));
+const FARM=both(mus('M58,268 Q70,300 58,380 L46,382 Q40,320 52,270 Z','M54,276 Q58,320 50,378'));
+const MFRONT={
+ muscles:MBASE,
+ face:`${mus('M126,38 Q150,26 174,38 L172,50 Q150,43 128,50 Z','M140,34 V47 M150,31 V45 M160,34 V47')}${both(`<ellipse cx="128" cy="86" rx="6" ry="11" fill="${MF}" stroke="${MS}"/><circle cx="136" cy="68" r="8" fill="none" stroke="${MF}" stroke-width="3.2"/>`)}<ellipse cx="150" cy="94" rx="12" ry="6" fill="none" stroke="${MF}" stroke-width="3.2"/>`,
+ neckm:both(mus('M132,98 L150,136 L142,138 L128,102 Z')+mus('M136,122 Q112,130 90,140 L96,146 Q118,138 142,132 Z')),
+ deltoid:DELT,
+ rotator:both(ten('M98,148 Q89,154 91,167')),
+ chest:both(mus('M148,140 Q118,134 98,150 Q100,184 120,192 Q140,194 148,186 Z','M146,150 Q120,150 102,160 M146,164 Q122,166 104,172 M146,178 Q126,180 110,184')),
+ upperarm:UARM, forearm:FARM,
+ wristtendons:both(ten('M48,378 L44,402')+ten('M53,377 L51,402')+ten('M57,375 L57,398')),
+ core:[0,1,2,3].map(r=>`<rect x="136" y="${198+r*26}" width="13" height="22" rx="4" fill="${MF}" stroke="${MS}"/><rect x="151" y="${198+r*26}" width="13" height="22" rx="4" fill="${MF}" stroke="${MS}"/>`).join('')+both(mus('M104,200 Q94,262 102,334 L128,326 L130,206 Z','M110,214 L126,236 M106,244 L126,266 M106,276 L126,296')),
+ thigh:both(mus(quad,'M110,400 Q108,450 118,494 M124,392 Q126,446 128,496 M138,396 Q140,446 136,496')),
+ patellar:both(ten('M125,500 L125,520')+`<ellipse cx="125" cy="506" rx="6" ry="7" fill="${BF}" stroke="${BS}"/>`),
+ calf:both(mus('M108,522 Q102,572 114,628 L126,628 Q120,572 132,522 Z','M118,530 Q114,576 120,622'))
+};
+const MBACK={
+ muscles:MBASE,
+ neckm:mus('M150,100 L96,142 L150,236 L204,142 Z','M150,104 V232 M110,140 L150,190 M190,140 L150,190'),
+ deltoid:DELT,
+ rotator:both(ten('M104,158 Q122,168 138,166')+ten('M104,172 Q120,180 136,180')),
+ upperarm:UARM, forearm:FARM,
+ backm:both(mus('M100,196 Q92,258 112,308 L140,300 L140,244 Q124,208 100,196 Z','M104,214 Q110,256 118,300 M114,206 Q124,250 132,298'))+`<g fill="${MF}" stroke="${MS}"><rect x="141" y="236" width="8" height="110" rx="4"/><rect x="151" y="236" width="8" height="110" rx="4"/></g>`,
+ glutes:both(mus('M100,346 Q94,392 148,398 L148,352 Q126,338 100,346 Z','M108,358 Q124,380 146,386')),
+ thigh:both(mus(quad,'M112,398 Q116,450 122,496 M132,394 Q130,446 130,496')),
+ calf:both(mus('M104,520 Q96,566 118,604 L130,604 Q148,566 142,520 Q122,510 104,520 Z','M123,516 V600')),
+ achilles:both(ten('M124,600 L124,634'))
+};
+let fat='';for(let y=418;y<520;y+=26)for(let x=34+((y/26)%2)*13;x<272;x+=27)fat+=`<circle cx="${x}" cy="${y}" r="12"/>`;
+let coll='';for(let y=206;y<396;y+=22)coll+=`<path d="M22,${y} q10,-6 20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t20,0 t18,0"/>`;
+const lbl=(x,y,t,a)=>`<text x="${x}" y="${y}" text-anchor="${a||'end'}" class="lbl">${t}</text>`;
+const SKINX={
+ skin:`<path d="M24,604 L196,604 Q244,606 248,636 Q244,668 196,668 L24,668 Z" fill="#e8b48f" stroke="#b07b55"/>`+lbl(28,596,'Fingertip — tap for the skin overview','start'),
+ subcut:`<rect x="20" y="400" width="260" height="130" fill="#f5dc98"/><g fill="#f9e7b5" stroke="#d8b85e">${fat}</g>`,
+ dermis:`<rect x="20" y="190" width="260" height="210" fill="#eea08e"/><g stroke="#d97f6c" stroke-width="1.1" fill="none">${coll}</g>`,
+ epidermis:`<path d="M20,150 Q45,142 70,150 T120,150 T170,150 T220,150 T270,150 L280,150 L280,190 L20,190 Z" fill="#f3cfae" stroke="#b98763"/><path d="M20,158 Q45,151 70,158 T120,158 T170,158 T220,158 T270,158" stroke="#d6a47e" fill="none"/><g fill="#8a5a3c">${[40,110,170,236].map(x=>`<circle cx="${x}" cy="186" r="2.4"/>`).join('')}</g>`,
+ muscles:`<rect x="20" y="530" width="260" height="42" fill="${MF}"/><path d="M20,542 H280 M20,552 H280 M20,562 H280" stroke="#e0806e"/>`,
+ vessels:`<path d="M20,330 Q80,318 140,338 T280,328 M140,338 Q150,260 172,196 M60,324 Q70,260 64,196" stroke="#d8453c" stroke-width="3.2" fill="none"/><path d="M20,342 Q80,330 140,350 T280,340 M150,346 Q160,270 182,196" stroke="#4b6fd6" stroke-width="3.2" fill="none"/><path d="M20,470 Q150,456 280,472" stroke="#d8453c" stroke-width="4" fill="none"/>`,
+ nerves:`<path d="M20,384 Q100,372 160,386 T280,380 M160,386 Q150,300 150,214 M240,384 Q240,300 242,214" stroke="#f0d34a" stroke-width="2.4" fill="none"/><g fill="#f0d34a" stroke="#8a7412"><ellipse cx="150" cy="210" rx="5" ry="7"/><ellipse cx="242" cy="210" rx="5" ry="7"/><circle cx="234" cy="300" r="7"/></g>`,
+ hair:`<path d="M74,150 L72,462 Q81,482 90,462 L88,150 Z" fill="#e4b48f" stroke="#a97650"/><path d="M81,470 L78,300 L70,60" stroke="#3a2a1f" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M89,330 L124,196" stroke="${MF}" stroke-width="3"/>`,
+ sebaceous:`<g fill="#f6e27a" stroke="#b89a2a"><circle cx="100" cy="250" r="9"/><circle cx="108" cy="264" r="8"/><circle cx="97" cy="270" r="7"/></g><path d="M92,258 L88,252" stroke="#b89a2a" stroke-width="2"/>`,
+ sweat:`<path d="M206,146 L206,410 q-14,6 0,12 q14,6 0,12 q-14,6 0,12 q14,6 0,12 q-14,6 0,12" stroke="#5fb6e0" stroke-width="3.4" fill="none"/><circle cx="206" cy="148" r="3.5" fill="#fff" stroke="#5fb6e0" stroke-width="1.5"/>`,
+ nails:`<path d="M120,600 L205,600 Q234,602 240,624 L212,614 L120,612 Z" fill="#f5ede6" stroke="#b3a59a" stroke-width="1.3"/><path d="M122,600 Q130,606 122,612" stroke="#fff" stroke-width="2" fill="none"/>`,
+ _labels:lbl(150,42,'Cut-through view of the skin','middle')+lbl(276,176,'Epidermis')+lbl(276,214,'Dermis')+lbl(276,420,'Fat layer (hypodermis)')+lbl(276,566,'Muscle')+lbl(64,70,'Hair','end')+lbl(214,140,'Sweat pore','start')+lbl(124,246,'Oil gland','start')+lbl(250,300,'Touch sensors','start')
+};
+const VIEWS={
+ organs:{label:'🫀 Organs',shapes:SHAPES,order:ORDER,note:'Tap an organ. Tap the skin for skin, hair &amp; nails.'},
+ skeleton:{label:'🦴 Skeleton',shapes:SKEL,order:['bones','spine','shoulder','ribs','armbones','joints','hand','pelvis','femur','shin','foot','skull'],note:'Tap a bone. Tap the outline for bones in general.'},
+ muscles:{label:'💪 Muscles &amp; tendons',shapes:MFRONT,order:['muscles','face','neckm','chest','deltoid','rotator','upperarm','forearm','wristtendons','core','thigh','patellar','calf'],note:'Front view. Red = muscle, white = tendon.'},
+ musclesBack:{label:'',shapes:MBACK,order:['muscles','neckm','backm','deltoid','rotator','upperarm','forearm','glutes','thigh','calf','achilles'],note:'Back view. Red = muscle, white = tendon.'},
+ skin:{label:'🧴 Skin layers',shapes:SKINX,order:['skin','subcut','dermis','vessels','nerves','epidermis','muscles','hair','sebaceous','sweat','nails','_labels'],note:'Tap a layer or structure.'}
+};
+const layerOf=v=>v==='musclesBack'?'muscles':v;
+let view='organs',partEls=[];
+const svg=$('body'),tip=$('tip');
+$('layers').innerHTML=['organs','skeleton','muscles','skin'].map(v=>'<button class="chip" data-layer="'+v+'">'+VIEWS[v].label+'</button>').join('')+'<button class="chip hidden" id="flip">↺ Back view</button>';
+$('layers').querySelectorAll('[data-layer]').forEach(b=>b.onclick=()=>{if(tab!=='part')setTab('part');setView(b.dataset.layer)});
+$('flip').onclick=()=>setView(view==='muscles'?'musclesBack':'muscles');
+function viewFor(id){if(VIEWS[view].shapes[id])return view;const same=Object.keys(VIEWS).find(v=>layerOf(v)===layerOf(view)&&VIEWS[v].shapes[id]);if(same)return same;const p=BY[id];return p&&p.layer&&VIEWS[p.layer]&&VIEWS[p.layer].shapes[id]?p.layer:Object.keys(VIEWS).find(v=>VIEWS[v].shapes[id])||view}
+function setView(v){view=v;const V=VIEWS[v];
+  svg.innerHTML='<defs><radialGradient id="skinG" cx="50%" cy="35%" r="70%"><stop offset="0" stop-color="#5d7f9c"/><stop offset="1" stop-color="#3b5b78"/></radialGradient></defs>'+
+    V.order.map((id,i)=>id.startsWith('_')?'<g style="pointer-events:none">'+V.shapes[id]+'</g>':'<g class="part'+(i===0?' base':'')+'" id="p-'+id+'" data-id="'+id+'" tabindex="0" role="button" aria-label="'+esc(BY[id].name)+'">'+V.shapes[id]+'</g>').join('')+
+    '<polyline id="trail" fill="none" stroke="#E2A63B" stroke-width="2" stroke-dasharray="3 3" opacity=".8"/><circle id="blood" r="5" fill="#ff6b5e" stroke="#fff" stroke-width="1.5" style="display:none"/><circle id="marker" r="6.5" fill="#E2A63B" stroke="#fff" stroke-width="2" style="display:none"/>';
+  partEls=[...svg.querySelectorAll('.part')];
+  partEls.forEach(g=>{const p=BY[g.dataset.id];
+    g.addEventListener('click',e=>{e.stopPropagation();select(p.id)});
+    g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(p.id)}});
+    g.addEventListener('mousemove',e=>{const r=$('viewBody').getBoundingClientRect();tip.style.display='block';tip.textContent=p.name;tip.style.left=Math.min(r.width-tip.offsetWidth-6,e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top-30)+'px';e.stopPropagation()});
+    g.addEventListener('mouseleave',()=>{tip.style.display='none'})});
+  $('layers').querySelectorAll('[data-layer]').forEach(b=>b.classList.toggle('active',b.dataset.layer===layerOf(v)));
+  $('flip').classList.toggle('hidden',layerOf(v)!=='muscles');$('flip').textContent=v==='musclesBack'?'↺ Front view':'↺ Back view';
+  $('mapNote').innerHTML=V.note;$('body').setAttribute('aria-label',VIEWS[layerOf(v)].label.replace(/&amp;/g,'&').replace(/^\S+ /,'')+' diagram. Click a part to read about it.');
+  paintBody()}
+function paintBody(){
+  const focus=tab==='fast'?new Set(fastParts):tab==='food'?new Set(foodParts):null;
+  const near=tab==='part'&&selected?BY[selected].near:null;
+  partEls.forEach(g=>{const id=g.dataset.id,p=BY[id];
+    const inSys=!sysFilter||p.systems.includes(sysFilter);
+    g.classList.toggle('sel',tab==='part'&&id===selected);
+    g.classList.toggle('near',!!(near&&near.has(id)));
+    g.classList.toggle('glow',!!(focus&&focus.has(id)));
+    g.classList.toggle('dim',focus?!focus.has(id)&&!g.classList.contains('base'):!inSys);
+  });
+}
+
+// ---------- system filter ----------
+$('systems').innerHTML='<button class="chip active" data-sys="">All systems</button>'+Object.entries(SYS).map(([k,v])=>'<button class="chip" data-sys="'+k+'"><i style="background:'+v[1]+'"></i>'+esc(v[0])+'</button>').join('');
+$('systems').querySelectorAll('[data-sys]').forEach(b=>b.onclick=()=>{sysFilter=b.dataset.sys;if(tab!=='part')setTab('part');if(sysFilter){const lv={skeletal:'skeleton',muscular:'muscles',skin:'skin'}[sysFilter]||'organs';if(layerOf(view)!==lv)setView(lv)}$('systems').querySelectorAll('[data-sys]').forEach(x=>x.classList.toggle('active',x===b));paintBody();highlightNet();drawList()});
+
+// ---------- connections map ----------
+// d3 comes from a CDN; the rest of the page works without it.
+let nodeSel=null,linkSel=null;
+function initNet(){
+const nsvg=d3.select('#net'),W=620,H=680;nsvg.attr('viewBox',[0,0,W,H]);
+const zoomG=nsvg.append('g');
+const links=[],lk=new Set();PARTS.forEach(p=>p.links.forEach(([o])=>{const k=[p.id,o].sort().join('|');if(!lk.has(k)){lk.add(k);links.push({source:p.id,target:o})}}));
+const nodes=PARTS.map(p=>({id:p.id,d:p,r:6+Math.sqrt(p.near.size)*2.4}));
+const sysY={nervous:.08,sensory:.16,endocrine:.25,respiratory:.3,circulatory:.38,immune:.46,digestive:.54,urinary:.62,reproductive:.62,muscular:.72,skeletal:.83,skin:.93};
+linkSel=zoomG.append('g').selectAll('line').data(links).join('line').attr('class','link');
+nodeSel=zoomG.append('g').selectAll('g').data(nodes).join('g').attr('class','node').attr('tabindex',0).attr('role','button').attr('aria-label',n=>n.d.name)
+  .on('click',(e,n)=>select(n.id)).on('keydown',(e,n)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id)}});
+nodeSel.append('circle').attr('r',n=>n.r).attr('fill',n=>sysColor(n.d));
+nodeSel.append('text').attr('text-anchor','middle').attr('dy',n=>n.r+13).text(n=>short(n.d));
+nodeSel.append('title').text(n=>n.d.name+' — '+n.d.job);
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(n=>n.id).distance(70).strength(.12))
+  .force('charge',d3.forceManyBody().strength(-150))
+  .force('y',d3.forceY(n=>H*(sysY[n.d.systems[0]]||.5)).strength(.18))
+  .force('x',d3.forceX(W/2).strength(.05))
+  .force('collide',d3.forceCollide(n=>n.r+14))
+  .on('tick',()=>{nodes.forEach(n=>{n.x=Math.max(30,Math.min(W-30,n.x));n.y=Math.max(20,Math.min(H-30,n.y))});
+    linkSel.attr('x1',l=>l.source.x).attr('y1',l=>l.source.y).attr('x2',l=>l.target.x).attr('y2',l=>l.target.y);
+    nodeSel.attr('transform',n=>'translate('+n.x+','+n.y+')')});
+nodeSel.call(d3.drag().on('start',(e,n)=>{if(!e.active)sim.alphaTarget(.2).restart();n.fx=n.x;n.fy=n.y}).on('drag',(e,n)=>{n.fx=e.x;n.fy=e.y}).on('end',(e,n)=>{if(!e.active)sim.alphaTarget(0);n.fx=null;n.fy=null}));
+const zoom=d3.zoom().scaleExtent([.5,4]).on('zoom',e=>zoomG.attr('transform',e.transform));nsvg.call(zoom);
+$('zIn').onclick=()=>nsvg.transition().call(zoom.scaleBy,1.4);$('zOut').onclick=()=>nsvg.transition().call(zoom.scaleBy,1/1.4);$('zReset').onclick=()=>nsvg.transition().call(zoom.transform,d3.zoomIdentity);
+$('netLegend').innerHTML=Object.values(SYS).map(v=>'<span><i style="background:'+v[1]+'"></i>'+esc(v[0].replace(/ \(.*\)/,''))+'</span>').join('')+'<span>Lines = parts that work together</span>';
+}
+if(window.d3)initNet();else document.querySelector('[data-view=net]').classList.add('hidden');
+function highlightNet(){
+  if(!nodeSel)return;
+  const vis=n=>!sysFilter||n.d.systems.includes(sysFilter);
+  const near=selected?new Set([selected,...BY[selected].near]):null;
+  nodeSel.classed('dim-n',n=>!vis(n)||(near&&!near.has(n.id))).classed('hl',n=>n.id===selected);
+  linkSel.classed('dim-n',l=>!(vis(l.source)&&vis(l.target))||(near&&!(l.source.id===selected||l.target.id===selected)));
+}
+
+// ---------- list ----------
+function drawList(){
+  $('list').innerHTML=Object.entries(SYS).filter(([k])=>!sysFilter||k===sysFilter).map(([k,v])=>{const ps=PARTS.filter(p=>p.systems.includes(k));if(!ps.length)return '';
+    return '<h4>'+esc(v[0])+'</h4><div class="row">'+ps.map(p=>'<button class="lcard" data-id="'+p.id+'" style="border-left-color:'+v[1]+'"><b>'+(seen.has(p.id)?'✓ ':'')+esc(p.name)+'</b><small>'+esc(p.job)+'</small></button>').join('')+'</div>'}).join('');
+  $('list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>select(b.dataset.id));
+}
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));
+  $('viewBody').classList.toggle('hidden',b.dataset.view!=='body');$('viewNet').classList.toggle('hidden',b.dataset.view!=='net');$('viewList').classList.toggle('hidden',b.dataset.view!=='list');
+  if(b.dataset.view!=='body'&&tab!=='part')setTab('part')});
+
+// ---------- part detail ----------
+function go(id,label){return '<a class="go" data-go="'+id+'">'+esc(label||short(BY[id]))+'</a>'}
+function select(id,opts){
+  const p=BY[id];if(!p)return;opts=opts||{};selected=id;seen.add(id);store.set('bodySeen',[...seen]);$('seenCount').textContent=seen.size;
+  if(tab!=='part')setTab('part');
+  const v=viewFor(id);if(v!==view)setView(v);
+  $('info').innerHTML=p.systems.map(s=>'<span class="badge" style="background:'+SYS[s][1]+'">'+esc(SYS[s][0])+'</span>').join('')+'<h2>'+esc(p.name)+'</h2><div class="meta">📍 '+esc(p.where)+'</div>'+
+   '<p class="job">'+esc(p.job)+'</p><p style="line-height:1.55;margin:0">'+esc(p.summary)+'</p>'+
+   '<div class="sect"><h3>⚙️ How it works</h3><ol>'+p.how.map(h=>'<li>'+esc(h)+'</li>').join('')+'</ol></div>'+
+   '<div class="sect"><h3>🔗 Connections to other body parts</h3>'+p.links.map(([o,t])=>'<div class="conn">'+go(o)+'<span>'+esc(t)+'</span></div>').join('')+
+     ([...p.near].filter(o=>!p.links.some(l=>l[0]===o)).length?'<p class="muted" style="margin:6px 0 0">Also works with: '+[...p.near].filter(o=>!p.links.some(l=>l[0]===o)).map(o=>go(o)).join(' ')+'</p>':'')+'</div>'+
+   '<div class="sect"><h3>🩺 Illnesses and how to treat them</h3><p class="muted" style="margin:0 0 6px">The most common and important conditions. Tap one to open it.</p>'+p.ills.map((i,n)=>'<details class="ill" data-ill="'+n+'"><summary><span>'+esc(i[0])+(i[5]?'<span class="urgent">🚨 can be an emergency</span>':'')+'</span></summary><div class="b"><p><b>What it is:</b> '+esc(i[1])+'</p><p><b>Signs:</b> '+esc(i[2])+'</p><p><b>Best way to treat it:</b> '+esc(i[3])+'</p><p><b>How to prevent it:</b> '+esc(i[4])+'</p></div></details>').join('')+'</div>'+
+   '<div class="sect"><h3>💪 How to keep it healthy</h3><ul class="tip-list">'+p.health.map(h=>'<li>'+esc(h)+'</li>').join('')+'</ul></div>'+
+   '<div class="sect"><h3>💡 Did you know?</h3><div class="facts">'+p.facts.map(esc).join('<br>')+'</div></div>'+
+   '<div class="disclaimer">For learning only — not a diagnosis. If you have symptoms, talk to a doctor, nurse or pharmacist. In an emergency call your local emergency number.</div>'+
+   '<div class="actions" style="margin-top:12px"><button class="primary" id="quizThis">🏆 Quiz me on this part</button><button class="secondary" id="makeThis">✏️ Make a quiz about it</button><button class="secondary" id="sheetThis">⬇ Fact sheet</button><button class="secondary" id="askAi">🤖 Explain it simply</button></div><div id="aiAns" class="explain hidden"></div>';
+  $('info').querySelectorAll('[data-go]').forEach(a=>a.onclick=()=>select(a.dataset.go));
+  $('quizThis').onclick=()=>{$('qSource').value='part:'+id;qtab('play');start(generate());$('quizPanel').scrollIntoView({behavior:'smooth'})};
+  $('makeThis').onclick=()=>{qtab('make');$('mkPart').value=id;if(!$('mkTitle').value)$('mkTitle').value=p.name+' quiz';suggest(5);$('quizPanel').scrollIntoView({behavior:'smooth'})};
+  $('sheetThis').onclick=()=>factSheet(p);
+  $('askAi').onclick=()=>askAi(p);
+  if(opts.ill!=null){const d=$('info').querySelector('[data-ill="'+opts.ill+'"]');if(d){d.open=true;setTimeout(()=>d.scrollIntoView({behavior:'smooth',block:'center'}),100)}}
+  paintBody();highlightNet();drawList();
+  if(!opts.noScroll&&opts.ill==null&&matchMedia('(max-width:980px)').matches)$('info').scrollIntoView({behavior:'smooth'});
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+}
+async function askAi(p){const box=$('aiAns');box.classList.remove('hidden');box.textContent='Asking the AI…';
+  try{const t=await MigaAI.ask('You are an accurate, friendly health and biology teacher. Use simple words. Never diagnose; suggest seeing a health professional for symptoms. Plain text only, no markdown.','Explain the '+p.name+' to a curious 12-year-old in about 150 words: what it does, a simple everyday comparison, how it works with other body parts, and the three best ways to keep it healthy.');box.textContent=t.trim()}catch(e){box.textContent=e.message}}
+function download(name,html){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+const PAGE_CSS='body{font:15px/1.5 Georgia,serif;max-width:780px;margin:30px auto;padding:0 20px;color:#16202B}h1{font-family:Arial,sans-serif}h2{font-family:Arial,sans-serif;font-size:18px;border-bottom:2px solid #0E2A47;padding-bottom:3px;margin-top:22px}li{margin-bottom:6px}.ill{border:1px solid #ccc;padding:8px 12px;margin-bottom:8px;break-inside:avoid}.u{color:#b3261e;font-weight:bold}';
+function factSheet(p){
+  const body='<h1>'+esc(p.name)+'</h1><p><i>'+esc(p.systems.map(s=>SYS[s][0]).join(' · '))+' — '+esc(p.where)+'</i></p><p><b>'+esc(p.job)+'</b></p><p>'+esc(p.summary)+'</p>'+
+   '<h2>How it works</h2><ol>'+p.how.map(h=>'<li>'+esc(h)+'</li>').join('')+'</ol>'+
+   '<h2>Connections</h2><ul>'+p.links.map(([o,t])=>'<li><b>'+esc(BY[o].name)+':</b> '+esc(t)+'</li>').join('')+'</ul>'+
+   '<h2>Illnesses, treatment and prevention</h2>'+p.ills.map(i=>'<div class="ill"><b>'+esc(i[0])+'</b>'+(i[5]?' <span class="u">— can be an emergency</span>':'')+'<br>'+esc(i[1])+'<br><b>Signs:</b> '+esc(i[2])+'<br><b>Treatment:</b> '+esc(i[3])+'<br><b>Prevention:</b> '+esc(i[4])+'</div>').join('')+
+   '<h2>Keep it healthy</h2><ul>'+p.health.map(h=>'<li>'+esc(h)+'</li>').join('')+'</ul><h2>Did you know?</h2><ul>'+p.facts.map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul>'+
+   '<p><small>For learning only — not medical advice. Made with MigaBuilder Body Map · migabuilder.com/body-map.html</small></p>';
+  download(p.id+'-fact-sheet.html','<!doctype html><html><head><meta charset="utf-8"><title>'+esc(p.name)+' — fact sheet</title><style>'+PAGE_CSS+'</style></head><body>'+body+'</body></html>');
+}
+
+// ---------- search ----------
+$('search').addEventListener('change',()=>{const q=$('search').value.trim().toLowerCase();if(!q)return;
+  let hit=PARTS.find(p=>p.name.toLowerCase()===q),ill=null;
+  if(!hit)PARTS.some(p=>p.ills.some((i,n)=>{if(i[0].toLowerCase()===q){hit=p;ill=n;return true}}));
+  if(!hit)hit=PARTS.find(p=>p.name.toLowerCase().includes(q));
+  if(!hit)PARTS.some(p=>p.ills.some((i,n)=>{if(i[0].toLowerCase().includes(q)||i[1].toLowerCase().includes(q)){hit=p;ill=n;return true}}));
+  if(!hit)hit=PARTS.find(p=>(p.summary+' '+p.job+' '+p.where).toLowerCase().includes(q));
+  if(hit){select(hit.id,{ill});$('search').value=''}else{$('search').setCustomValidity('Nothing found');$('search').reportValidity();setTimeout(()=>$('search').setCustomValidity(''),1500)}});
+
+// ---------- tabs ----------
+let foodParts=[],fastParts=[];
+function setTab(t){tab=t;if(t!=='part'&&view!=='organs')setView('organs');document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  $('info').classList.toggle('hidden',t!=='part');$('foodPanel').classList.toggle('hidden',t!=='food');$('fastPanel').classList.toggle('hidden',t!=='fast');
+  if(t!=='food'){stopJourney();cancelAnims();$('marker').style.display='none';$('blood').style.display='none';$('trail').setAttribute('points','')}
+  if(t==='food')showStep(stepIdx,true);if(t==='fast')renderFast();
+  $('legendHint').textContent=t==='part'?'Highlighted outlines = connected parts':t==='food'?'Glowing = working on the food right now':'Glowing = busiest organs at this stage';
+  if(t!=='part'){document.querySelector('[data-view=body]').click()}
+  paintBody()}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+// ---------- food & drink journey ----------
+const ROUTE=[[150,95],[150,112],[150,132],[150,200],[150,244],[178,262],[176,284],[162,294],[136,314],[166,316],[160,326],[140,334],[148,344],[168,350],[140,356],[126,368],[124,306],[178,304],[178,352],[158,372],[150,380]];
+const STOP={mouth:0,throat:1,esophagus:3,stomach:5,duodenum:7,smallint:11,largeint:17,rectum:20};
+const OFF={liver:[126,256],pancreas:[160,293],heart:[161,203],kidneys:[106,300],bladder:[150,365],brain:[150,42]};
+let journey='food',stepIdx=0,gutAt=0,anim=null,playTimer=null;
+const J=()=>journey==='food'?window.FOOD_JOURNEY:window.DRINK_JOURNEY;
+function cancelAnims(){if(anim)Object.values(anim).forEach(cancelAnimationFrame);anim={}}
+function setMarker(el,[x,y]){el.setAttribute('cx',x);el.setAttribute('cy',y);el.style.display=''}
+function animate(el,pts,ms,done){cancelAnimationFrame(anim&&anim[el.id]||0);anim=anim||{};
+  const seg=[],tot=pts.slice(1).reduce((s,p,i)=>{const l=Math.hypot(p[0]-pts[i][0],p[1]-pts[i][1]);seg.push(l);return s+l},0);
+  if(!tot){setMarker(el,pts[pts.length-1]);done&&done();return}
+  const t0=performance.now();const tick=now=>{let d=Math.min(1,(now-t0)/ms)*tot,i=0;while(i<seg.length-1&&d>seg[i]){d-=seg[i];i++}
+    const f=seg[i]?Math.min(1,d/seg[i]):1,a=pts[i],b=pts[i+1];setMarker(el,[a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f]);
+    if(now-t0<ms)anim[el.id]=requestAnimationFrame(tick);else{setMarker(el,pts[pts.length-1]);done&&done()}};
+  anim[el.id]=requestAnimationFrame(tick)}
+function showStep(i,instant){
+  const list=J();stepIdx=Math.max(0,Math.min(list.length-1,i));const s=list[stepIdx];
+  $('stepList').innerHTML=list.map((x,n)=>'<li data-n="'+n+'" class="'+(n===stepIdx?'on':n<stepIdx?'done':'')+'">'+(n+1)+'. '+esc(x.title)+'</li>').join('');
+  $('stepList').querySelectorAll('li').forEach(li=>li.onclick=()=>{stopJourney();showStep(+li.dataset.n)});
+  $('stepCard').innerHTML='<div class="t">Step '+(stepIdx+1)+' of '+list.length+' · '+esc(s.time)+'</div><h3>'+esc(s.title)+'</h3><p>'+esc(s.text)+'</p><p style="margin-top:8px">'+go(s.part,'Open '+short(BY[s.part])+' →')+'</p>';
+  $('stepCard').querySelector('[data-go]').onclick=()=>select(s.part);
+  foodParts=[s.part];if(s.part==='pancreas'&&s.at==='duodenum')foodParts.push('gallbladder','smallint');if(s.part==='vessels')foodParts.push('heart');if(s.part==='pituitary')foodParts.push('brain');
+  const marker=$('marker'),blood=$('blood');marker.setAttribute('fill',journey==='food'?'#E2A63B':'#5fb6e0');
+  // where the food/drink itself is (on the gut route) at this step
+  let g=0;for(let n=0;n<=stepIdx;n++){const a=list[n].at;if(a in STOP)g=STOP[a]}
+  const from=instant?g:gutAt;
+  $('trail').setAttribute('points',ROUTE.slice(0,g+1).map(p=>p.join(',')).join(' '));
+  if(g>=from)animate(marker,ROUTE.slice(from,g+1),instant?1:Math.min(2200,300+(g-from)*260));else setMarker(marker,ROUTE[g]);
+  gutAt=g;
+  if(s.at in OFF){animate(blood,[ROUTE[g],OFF[s.at]],instant?1:900)}else blood.style.display='none';
+  $('nutrients').querySelectorAll('.ncard').forEach(c=>c.classList.remove('on'));
+  paintBody();
+}
+function stopJourney(){clearTimeout(playTimer);playTimer=null;$('playJourney').textContent='▶ Play the journey'}
+$('playJourney').onclick=()=>{if(playTimer){stopJourney();return}if(stepIdx>=J().length-1){gutAt=0;showStep(0)}$('playJourney').textContent='⏸ Pause';
+  const next=()=>{playTimer=setTimeout(()=>{if(stepIdx<J().length-1){showStep(stepIdx+1);next()}else stopJourney()},Math.max(4200,J()[stepIdx].text.length*42))};next()};
+$('prevStep').onclick=()=>{stopJourney();showStep(stepIdx-1)};$('nextStep').onclick=()=>{stopJourney();showStep(stepIdx+1)};
+document.querySelectorAll('[data-journey]').forEach(b=>b.onclick=()=>{stopJourney();journey=b.dataset.journey;document.querySelectorAll('[data-journey]').forEach(x=>x.classList.toggle('active',x===b));gutAt=0;showStep(0)});
+$('nutrients').innerHTML=window.NUTRIENTS.map((n,i)=>'<button class="ncard" data-n="'+i+'"><b>'+n[0]+' '+esc(n[1])+'</b>'+esc(n[2])+'</button>').join('');
+$('nutrients').querySelectorAll('.ncard').forEach(c=>c.onclick=()=>{stopJourney();const n=window.NUTRIENTS[+c.dataset.n];foodParts=n[3];$('nutrients').querySelectorAll('.ncard').forEach(x=>x.classList.toggle('on',x===c));paintBody();if(matchMedia('(max-width:980px)').matches)$('viewBody').scrollIntoView({behavior:'smooth'})});
+
+// ---------- fasting ----------
+const FUEL=[['Food just eaten','#E2A63B'],['Stored glycogen (sugar)','#d9669a'],['Body fat','#5fb6e0'],['Ketones (made from fat)','#8a6cc0'],['Protein (muscle)','#c9503f']];
+$('fleg').innerHTML=FUEL.map(f=>'<span><i style="background:'+f[1]+'"></i>'+f[0]+'</span>').join('');
+$('fastNotes').innerHTML=window.FASTING_NOTES.map(n=>'<div class="note"><b>'+n[0]+' '+esc(n[1])+'</b>'+esc(n[2])+'</div>').join('');
+function fuelAt(h){const F=window.FASTING,mids=F.map(s=>(s.from+Math.min(s.to,96))/2);
+  if(h<=mids[0])return F[0].fuel;for(let i=1;i<F.length;i++)if(h<=mids[i]){const f=(h-mids[i-1])/(mids[i]-mids[i-1]);return F[i].fuel.map((v,k)=>F[i-1].fuel[k]+(v-F[i-1].fuel[k])*f)}return F[F.length-1].fuel}
+function renderFast(){const h=+$('fastSlider').value,st=window.FASTING.find(s=>h>=s.from&&h<s.to)||window.FASTING[window.FASTING.length-1];
+  $('fastHours').textContent=h+' h'+(h>=24?' ('+(h/24).toFixed(h%24?1:0)+' day'+(h>=48?'s':'')+')':'');$('fastStage').textContent=st.name;$('fastText').textContent=st.text;
+  const f=fuelAt(h),tot=f.reduce((a,b)=>a+b,0);$('fuel').innerHTML=f.map((v,i)=>'<span title="'+FUEL[i][0]+': '+Math.round(v/tot*100)+'%" style="width:'+(v/tot*100)+'%;background:'+FUEL[i][1]+'"></span>').join('');
+  fastParts=st.parts;$('fastParts').innerHTML='Busiest now: '+st.parts.map(id=>go(id)).join(' ');$('fastParts').querySelectorAll('[data-go]').forEach(a=>a.onclick=()=>select(a.dataset.go));
+  paintBody()}
+$('fastSlider').oninput=renderFast;
+document.querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{$('fastSlider').value=b.dataset.h;renderFast()});
+
+// ---------- quiz generator ----------
+const rnd=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function pickDistinct(pool,n,avoid){const out=[],s=new Set(avoid.map(x=>x.toLowerCase()));shuffle(pool.slice()).forEach(v=>{if(out.length<n&&!s.has(v.toLowerCase())){s.add(v.toLowerCase());out.push(v)}});return out}
+const STOPW=new Set(['and','the','with','system','body','gland','glands','including','type','food','pipe','small','large']);
+function mask(text,names){let t=text;names.forEach(n=>String(n).split(/[\s,()&/]+/).map(w=>w.replace(/[^A-Za-zÀ-ÿ’'-]/g,'')).filter(w=>w.length>3&&!STOPW.has(w.toLowerCase())).forEach(w=>{const stem=w.replace(/s$/i,'');t=t.replace(new RegExp('\\b'+stem.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+(stem.length>=5?'\\w*':'(s|es)?\\b'),'gi'),'___')}));return t}
+const partNames=excl=>PARTS.filter(o=>!excl.includes(o.id)).map(o=>o.name);
+const allIlls=PARTS.flatMap(p=>p.ills.map(i=>({i,p})));
+function makeQ(type,p){
+  if(type==='job')return {q:'Which body part does this job? “'+mask(p.job,[p.name])+'”',a:p.name,opts:pickDistinct(partNames([p.id]),3,[p.name]),why:p.name+': '+p.job,part:p.id};
+  if(type==='system'){const own=p.systems.map(s=>SYS[s][0]);return {q:'Which body system is the '+p.name.toLowerCase()+' part of?',a:own[0],opts:pickDistinct(Object.keys(SYS).filter(k=>!p.systems.includes(k)).map(k=>SYS[k][0]),3,own),why:'The '+p.name.toLowerCase()+' belongs to: '+own.join(' and ')+'.',part:p.id}}
+  if(type==='illness'){const i=rnd(p.ills);const bad=new Set(allIlls.filter(x=>x.i[0]===i[0]).map(x=>x.p.id));return {q:'Which body part does “'+i[0]+'” mainly affect?',a:p.name,opts:pickDistinct(partNames([...bad,...p.near]),3,[p.name]),why:i[0]+': '+i[1],part:p.id}}
+  if(type==='signs'||type==='treat'){const i=rnd(p.ills),text=type==='signs'?i[2]:i[3];
+    let pool=p.ills.filter(x=>x!==i).map(x=>x[0]);if(pool.length<3)pool=pool.concat(allIlls.filter(x=>x.p.id!==p.id).map(x=>x.i[0]));
+    return {q:(type==='signs'?'Which condition has these signs? “':'Which condition is treated like this? “')+mask(text,[i[0]])+'”',a:i[0],opts:pickDistinct(pool,3,[i[0]]),why:i[0]+' ('+p.name+') — '+(type==='signs'?'treatment: '+i[3]:'signs: '+i[2]),part:p.id}}
+  if(type==='connection'){const [o,t]=rnd(p.links),y=BY[o];return {q:'The '+p.name.toLowerCase()+' works together with which body part? “'+mask(t,[y.name])+'”',a:y.name,opts:pickDistinct(partNames([p.id,...p.near]),3,[y.name]),why:p.name+' + '+y.name+': '+t,part:p.id}}
+  if(type==='fact'){const f=rnd(p.facts);return {q:'Which body part is this fact about? “'+mask(f,[p.name])+'”',a:p.name,opts:pickDistinct(partNames([p.id]),3,[p.name]),why:f,part:p.id}}
+  if(type==='digest'){
+    if(Math.random()<.35){const n=rnd(window.NUTRIENTS);return {q:'Which food or drink is this about? “'+mask(n[2],[n[1]])+'”',a:n[1],opts:pickDistinct(window.NUTRIENTS.map(x=>x[1]),3,[n[1]]),why:n[1]+': '+n[2]}}
+    const s=rnd(window.FOOD_JOURNEY.concat(window.DRINK_JOURNEY)),y=BY[s.part],txt=mask(s.title+' — '+s.text,[y.name]);
+    const mentioned=PARTS.filter(o=>o.id!==y.id&&(s.title+' '+s.text).toLowerCase().includes(short(o).toLowerCase().split(' ')[0].slice(0,6))).map(o=>o.id);
+    return {q:'Where in the body does this happen? “'+txt+'”',a:y.name,opts:pickDistinct(partNames([y.id,...mentioned]),3,[y.name]),why:s.title+' ('+s.time+'): '+s.text,part:y.id}}
+  if(type==='fast'){const F=window.FASTING,s=rnd(F),lab=x=>x.to>96?x.from+'+ hours':x.from+'–'+x.to+' hours';
+    if(Math.random()<.5)return {q:'Roughly how long after the last meal does this happen? “'+s.text+'”',a:lab(s),opts:pickDistinct(F.map(lab),3,[lab(s)]),why:s.name+' ('+lab(s)+'): '+s.text};
+    return {q:'What is this fasting stage called? “'+s.text+'”',a:s.name,opts:pickDistinct(F.map(x=>x.name),3,[s.name]),why:s.name+' ('+lab(s)+').'}}
+  return null;
+}
+$('qSource').innerHTML='<option value="all">The whole body</option><option value="seen">Parts I explored</option><option value="digestfast">Eating, drinking &amp; fasting</option><optgroup label="A body system">'+Object.entries(SYS).map(([k,v])=>'<option value="sys:'+k+'">'+esc(v[0])+'</option>').join('')+'</optgroup><optgroup label="One body part">'+PARTS.map(p=>'<option value="part:'+p.id+'">'+esc(p.name)+'</option>').join('')+'</optgroup>';
+$('mkPart').innerHTML='<option value="">Any body part</option><option value="digestfast">Eating, drinking &amp; fasting</option>'+PARTS.map(p=>'<option value="'+p.id+'">'+esc(p.name)+'</option>').join('');
+function sourceParts(s){
+  if(s==='seen'){const l=PARTS.filter(p=>seen.has(p.id));return l.length>=3?l:null}
+  if(s.startsWith('sys:'))return PARTS.filter(p=>p.systems.includes(s.slice(4)));
+  if(s.startsWith('part:'))return [BY[s.slice(5)]];
+  return PARTS.slice()}
+function buildQuestions(src,n,types){
+  const out=[],keys=new Set();let guard=0;
+  if(src==='digestfast')types=types.filter(t=>t==='digest'||t==='fast'),types=types.length?types:['digest','fast'];
+  else if(src!=='all')types=types.filter(t=>t!=='digest'&&t!=='fast'||src==='all');
+  const ps=src==='digestfast'?PARTS:sourceParts(src);if(!ps||!types.length)return null;
+  while(out.length<n&&guard++<800){const q=makeQ(rnd(types),rnd(ps));if(!q||q.opts.length<3)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
+  return out.length?out:null}
+function generate(){const src=$('qSource').value;
+  if(src==='seen'&&!sourceParts('seen')){alert('Explore at least 3 body parts first, or choose another topic.');return null}
+  const types=[...document.querySelectorAll('#qTypes input:checked')].map(c=>c.value);if(!types.length){alert('Tick at least one question type.');return null}
+  const qs=buildQuestions(src,+$('qCount').value,types);if(!qs)alert('No questions match — tick more question types.');return qs}
+
+// ---------- quiz play ----------
+let lastCustom=null,quiz=[],qi=0,score=0,points=0,streak=0,bestStreak=0,answered=false,missed=[],timer=null,left=0,challenge=true;
+function start(qs,opts){if(!qs)return;if(!(opts&&opts.keep))lastCustom=opts&&opts.custom||null;quiz=qs;qi=0;score=0;points=0;streak=0;bestStreak=0;missed=[];challenge=opts&&opts.practice?false:$('qMode').value==='challenge';
+  $('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');$('timerBar').classList.toggle('hidden',!challenge);show()}
+function mult(){return streak>=5?2:streak>=3?1.5:1}
+function show(){const q=quiz[qi];answered=false;
+  $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
+  $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
+  $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
+  clearInterval(timer);if(challenge){left=20;$('timerFill').style.width='100%';$('timerFill').style.background='#4E9E73';timer=setInterval(()=>{left-=.25;$('timerFill').style.width=Math.max(0,left/20*100)+'%';if(left<6)$('timerFill').style.background='#D8604A';if(left<=0){clearInterval(timer);answer(null,null)}},250)}
+}
+function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer);const q=quiz[qi],ok=choice===q.a;
+  let gained=0;if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
+  q.ok=ok;q.given=choice;
+  $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why||('The answer is '+q.a+'.'))+(q.part&&BY[q.part]?' <a data-go="'+q.part+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(short(BY[q.part]))+' →</a>':'');$('qExplain').classList.remove('hidden');
+  const g=$('qExplain').querySelector('[data-go]');if(g)g.onclick=()=>{select(g.dataset.go,{noScroll:true});$('info').scrollIntoView({behavior:'smooth'})};
+  $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
+  $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+$('qNext').onclick=()=>{if(++qi<quiz.length)show();else finish()};
+$('qQuit').onclick=()=>{clearInterval(timer);quiz=quiz.slice(0,qi+(answered?1:0));if(!quiz.length){$('quizArea').classList.add('hidden');return}finish()};
+const RANKS=[[90,'Chief surgeon 🩺'],[75,'Doctor 🧑‍⚕️'],[55,'Medical student 📘'],[0,'First-aider 🩹']];
+function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
+  const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];
+  const best=store.get('bodyBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
+  if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('bodyBest',best);
+  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
+  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('retryWrong').classList.toggle('hidden',!missed.length);showBest();$('quizDone').scrollIntoView({behavior:'smooth',block:'nearest'})}
+$('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>{if(lastCustom)start(lastCustom());else start(generate())};
+$('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})),{keep:true});
+function showBest(){const b=store.get('bodyBest',null);$('bestLine').textContent=b?'Your best: '+b.points+' points in challenge mode · '+b.pct+'% accuracy':''}
+showBest();
+function printable(title,qs){
+  const body='<h1>'+esc(title)+'</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">Answer key</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+(q.why?' — <small>'+esc(q.why)+'</small>':'')+'</li>').join('')+'</ol><p><small>Made with MigaBuilder Body Map · migabuilder.com/body-map.html</small></p>';
+  download((title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'body-quiz')+'.html','<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+PAGE_CSS+'</style></head><body>'+body+'</body></html>')}
+$('printQuiz').onclick=()=>{const qs=generate();if(qs)printable('Human body quiz',qs)};
+$('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$('aiTopic').focus();return}
+  const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your quiz…';$('aiQuiz').disabled=true;
+  try{const d=MigaAI.json(await MigaAI.ask('You write accurate multiple-choice quizzes about human biology and health, following mainstream medical consensus. Reply with ONE JSON array only.',
+    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
+    const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
+    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(e){st.textContent='Could not create the quiz: '+e.message}$('aiQuiz').disabled=false};
+
+// ---------- quiz maker ----------
+function qtab(t){document.querySelectorAll('[data-qtab]').forEach(b=>b.classList.toggle('active',b.dataset.qtab===t));$('qPlay').classList.toggle('hidden',t!=='play');$('qMake').classList.toggle('hidden',t!=='make')}
+document.querySelectorAll('[data-qtab]').forEach(b=>b.onclick=()=>qtab(b.dataset.qtab));
+let mk=store.get('bodyQuizDraft',{title:'',qs:[]});
+function mkSync(){store.set('bodyQuizDraft',mk);$('mkCount').textContent=mk.qs.length?mk.qs.length+' question'+(mk.qs.length>1?'s':'')+' · saved automatically as you type':'No questions yet — add suggested ones or write your own.'}
+function mkRender(){
+  $('mkTitle').value=mk.title||'';
+  $('mkList').innerHTML=mk.qs.map((q,i)=>'<div class="mq" data-i="'+i+'"><div class="top"><span>Question '+(i+1)+'</span><button class="del" data-del="'+i+'" aria-label="Delete question '+(i+1)+'">✕ Remove</button></div>'+
+    '<textarea data-f="q" placeholder="Write the question">'+esc(q.q)+'</textarea>'+
+    q.opts.map((o,k)=>'<label class="o"><input type="radio" name="c'+i+'" value="'+k+'"'+(q.c===k?' checked':'')+' title="Correct answer"><input type="text" data-o="'+k+'" value="'+esc(o)+'" placeholder="Answer '+'ABCD'[k]+(k===0?' (tick the circle next to the correct one)':'')+'"></label>').join('')+
+    '<div class="o"><input class="why" data-f="why" value="'+esc(q.why||'')+'" placeholder="Explanation shown after answering (optional)"></div></div>').join('');
+  $('mkList').querySelectorAll('.mq').forEach(box=>{const q=mk.qs[+box.dataset.i];
+    box.querySelector('[data-f=q]').oninput=e=>{q.q=e.target.value;mkSync()};
+    box.querySelector('[data-f=why]').oninput=e=>{q.why=e.target.value;mkSync()};
+    box.querySelectorAll('[data-o]').forEach(inp=>inp.oninput=()=>{q.opts[+inp.dataset.o]=inp.value;mkSync()});
+    box.querySelectorAll('input[type=radio]').forEach(r=>r.onchange=()=>{q.c=+r.value;mkSync()});
+    box.querySelector('[data-del]').onclick=()=>{mk.qs.splice(+box.dataset.i,1);mkRender()}});
+  mkSync()}
+$('mkTitle').oninput=()=>{mk.title=$('mkTitle').value;mkSync()};
+function suggest(n){const v=$('mkPart').value,src=v==='digestfast'?'digestfast':v?'part:'+v:'all';
+  const types=v==='digestfast'?['digest','fast']:['job','system','illness','signs','treat','connection','fact'];
+  const have=new Set(mk.qs.map(q=>q.q));const qs=(buildQuestions(src,n+6,types)||[]).filter(q=>!have.has(q.q)).slice(0,n);
+  qs.forEach(q=>mk.qs.push({q:q.q,opts:q.opts.slice(),c:q.opts.indexOf(q.a),why:q.why||''}));
+  if(!mk.title){const p=BY[v];mk.title=p?p.name+' quiz':v==='digestfast'?'Eating, drinking & fasting quiz':'Human body quiz'}
+  mkRender();setMk(qs.length?'Added '+qs.length+' questions — edit anything you like.':'No new questions found for that choice — try another body part.')}
+$('mkSuggest').onclick=()=>suggest(5);
+$('mkAdd').onclick=()=>{mk.qs.push({q:'',opts:['','','',''],c:0,why:''});mkRender();const t=$('mkList').querySelectorAll('textarea');t[t.length-1].focus()};
+$('mkClear').onclick=()=>{if(mk.qs.length&&!confirm('Clear this quiz?'))return;mk={title:'',qs:[]};mkRender()};
+function setMk(t){const s=$('mkStatus');s.textContent=t;s.classList.add('show')}
+function mkValid(){const qs=mk.qs.filter(q=>q.q.trim()&&q.opts.filter(o=>o.trim()).length>=2&&q.opts[q.c]&&q.opts[q.c].trim());if(!qs.length){setMk('Add at least one question with a correct answer ticked and at least two answers.');return null}return qs}
+const toPlay=qs=>qs.map(q=>{const opts=q.opts.map(o=>o.trim()).filter(Boolean);return {q:q.q.trim(),a:q.opts[q.c].trim(),opts:shuffle(opts),why:q.why||''}});
+$('mkPlay').onclick=()=>{const qs=mkValid();if(!qs)return;const fn=()=>toPlay(qs);start(fn(),{custom:fn});$('quizArea').scrollIntoView({behavior:'smooth'})};
+$('mkPrint').onclick=()=>{const qs=mkValid();if(qs)printable(mk.title||'My body quiz',toPlay(qs))};
+function savedList(){return store.get('bodyQuizzes',{})}
+function refreshSaved(){const s=savedList();$('mkSaved').innerHTML='<option value="">— choose —</option>'+Object.keys(s).sort().map(k=>'<option>'+esc(k)+'</option>').join('')}
+$('mkSave').onclick=()=>{if(!mkValid())return;const name=(mk.title||'My body quiz').trim();const s=savedList();s[name]=mk;store.set('bodyQuizzes',s);refreshSaved();$('mkSaved').value=name;setMk('Saved “'+name+'” in this browser.')};
+$('mkSaved').onchange=()=>{const s=savedList()[$('mkSaved').value];if(s){mk=JSON.parse(JSON.stringify(s));mkRender();setMk('Loaded “'+$('mkSaved').value+'”.')}};
+$('mkDelete').onclick=()=>{const k=$('mkSaved').value;if(!k){setMk('Choose a saved quiz to delete.');return}if(!confirm('Delete “'+k+'”?'))return;const s=savedList();delete s[k];store.set('bodyQuizzes',s);refreshSaved();setMk('Deleted.')};
+const b64e=s=>btoa(String.fromCharCode(...new TextEncoder().encode(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const b64d=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0)));
+$('mkShare').onclick=async()=>{const qs=mkValid();if(!qs)return;const url=location.origin+location.pathname+'#quiz='+b64e(JSON.stringify({t:mk.title,q:qs.map(q=>[q.q,q.opts,q.c,q.why||''])}));
+  try{await navigator.clipboard.writeText(url);setMk('Link copied! Anyone who opens it can play your quiz. ('+Math.round(url.length/100)/10+'k characters)')}catch(e){prompt('Copy this link:',url)}};
+function loadShared(){const m=location.hash.match(/^#quiz=(.+)$/);if(!m)return false;
+  try{const d=JSON.parse(b64d(m[1]));const qs=d.q.map(x=>({q:x[0],opts:x[1],c:x[2],why:x[3]}));
+    qtab('make');mk={title:d.t||'Shared quiz',qs};mkRender();
+    $('sharedNote').innerHTML='📩 Someone shared the quiz <b>'+esc(mk.title)+'</b> with you ('+qs.length+' questions). <button class="primary" id="playShared">▶ Play it now</button>';$('sharedNote').classList.remove('hidden');
+    $('playShared').onclick=()=>$('mkPlay').click();setTimeout(()=>$('quizPanel').scrollIntoView({behavior:'smooth'}),300);return true}catch(e){return false}}
+
+// ---------- daily habits ----------
+const HAB=window.BODY_HABITS,pad=n=>String(n).padStart(2,'0'),dayKey=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+function renderHabits(){const log=store.get('bodyHabits',{}),today=dayKey(new Date()),done=new Set(log[today]||[]);
+  $('habits').innerHTML=HAB.map((h,i)=>'<label class="habit'+(done.has(i)?' done':'')+'"><input type="checkbox" data-h="'+i+'"'+(done.has(i)?' checked':'')+'><span><b>'+h[0]+' '+esc(h[1])+'</b><br>'+h[2].map(id=>go(id)).join('')+'</span></label>').join('');
+  $('habits').querySelectorAll('input').forEach(c=>c.onchange=()=>{const l=store.get('bodyHabits',{}),s=new Set(l[today]||[]);c.checked?s.add(+c.dataset.h):s.delete(+c.dataset.h);l[today]=[...s];store.set('bodyHabits',l);renderHabits()});
+  $('habits').querySelectorAll('[data-go]').forEach(a=>a.onclick=e=>{e.preventDefault();select(a.dataset.go,{noScroll:true});$('info').scrollIntoView({behavior:'smooth'})});
+  $('habitScore').textContent='Today: '+done.size+' / '+HAB.length+(done.size===HAB.length?' 🎉 perfect day!':'');
+  const half=Math.ceil(HAB.length/2),d=new Date();let streak=0;if(done.size<half)d.setDate(d.getDate()-1);
+  while((log[dayKey(d)]||[]).length>=half&&streak<366){streak++;d.setDate(d.getDate()-1)}
+  $('habitStreak').textContent=streak?'🔥 '+streak+'-day streak (half or more habits)':'';
+  const days=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d});
+  $('week').innerHTML=days.map(d=>{const n=(log[dayKey(d)]||[]).length;return '<div><span style="height:'+Math.round(n/HAB.length*50)+'px"></span>'+d.toLocaleDateString(undefined,{weekday:'short'})+'<br><b>'+n+'</b></div>'}).join('')}
+renderHabits();
+
+// ---------- start ----------
+$('seenCount').textContent=seen.size;drawList();refreshSaved();mkRender();setView('organs');
+if(!loadShared()){const h=location.hash.slice(1);if(BY[h])setTimeout(()=>select(h,{noScroll:true}),200)}
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -1,203 +1,591 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saturday Morning Romance - 3D Cartoon</title>
-<style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: #111;
-    font-family: 'Comic Sans MS', sans-serif;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-  .cartoon-container {
-    position: relative;
-    width: 100%;
-    max-width: 960px;
-    background: #000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  #webglCanvas {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
-  .overlay-screen {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    transition: opacity 0.3s;
-  }
-  .overlay-screen.hidden { opacity: 0; pointer-events: none; }
-  .start-btn {
-    background: #ff3366;
-    color: white;
-    border: none;
-    padding: 16px 40px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow: 0 6px 0 #b3002d;
-  }
-  .back-link {
-    position: fixed; top: 12px; left: 16px; z-index: 20;
-    color: #fff; text-decoration: none; font-family: sans-serif; font-size: 15px;
-    background: rgba(255,255,255,0.12); padding: 8px 14px; border-radius: 20px;
-  }
-  .caption-box {
-    position: absolute;
-    bottom: 8%;
-    width: 100%;
-    text-align: center;
-    font-size: clamp(15px, 3.5vw, 26px);
-    font-weight: bold;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-    pointer-events: none;
-    z-index: 5;
-  }
-</style>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3D Cartoon — describe a story, watch it as a 3D cartoon | MigaBuilder</title>
+<meta name="description" content="Describe a story and watch it play as a cel-shaded 3D cartoon with talking characters, sets and captions, right in your browser. Download it as a video. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/3d-cartoon.html">
+<meta property="og:title" content="3D Cartoon — your story as a 3D cartoon | MigaBuilder">
+<meta property="og:description" content="Describe a story and watch it play as a cel-shaded 3D cartoon in your browser.">
+<meta property="og:url" content="https://migabuilder.com/3d-cartoon.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<link rel="stylesheet" href="tutorials.css">
-<script src="usage-counter.js" defer></script>
-<script src="/web-analytics.js" defer></script>
+<script>window.THREE || document.write('<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"><\/script>');</script>
+<script src="ai-client.js"></script>
+<style>
+main{max-width:1280px;display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:18px;align-items:start}
+.stage-wrap{background:#081826;border:1px solid var(--line);border-radius:6px;padding:12px}
+.stage{position:relative;width:100%;aspect-ratio:16/9;background:#000;border-radius:4px;overflow:hidden}
+.stage canvas{display:block;width:100%;height:100%}
+.caption{position:absolute;left:4%;right:4%;bottom:6%;text-align:center;font:700 clamp(14px,2.3vw,24px)/1.3 'IBM Plex Sans',sans-serif;color:#fff;text-shadow:2px 2px 0 #000,-2px -2px 0 #000,2px -2px 0 #000,-2px 2px 0 #000;pointer-events:none}
+.caption b{color:#ffd166}
+.title-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(8,24,38,.82);text-align:center;padding:16px;transition:opacity .3s}
+.title-card.hidden{opacity:0;pointer-events:none}
+.title-card h2{font:700 clamp(20px,3.4vw,34px) 'Space Grotesk';margin:0;color:#fff}
+.title-card p{margin:0;color:rgba(237,234,224,.75);max-width:520px}
+.play-big{background:#ff3366;color:#fff;border:0;padding:14px 34px;font:700 clamp(16px,2.4vw,22px) 'Space Grotesk';border-radius:40px;cursor:pointer;box-shadow:0 5px 0 #b3002d}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.controls button{padding:8px 12px;border-radius:3px;border:1px solid var(--line);background:#0e2a47;color:var(--paper);cursor:pointer;font-weight:600}
+.controls button:disabled{opacity:.45;cursor:default}
+.controls label{display:flex;gap:6px;align-items:center;font-size:13px;color:rgba(237,234,224,.8)}
+.progress{flex:1;min-width:120px;height:6px;background:rgba(111,209,224,.2);border-radius:3px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--amber)}
+.cast{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
+.cast span{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:999px;padding:3px 10px;font-size:12.5px}
+.script{margin-top:12px;max-height:260px;overflow:auto;font-size:13px;background:#fff;border:1px solid rgba(22,32,43,.14);padding:8px 10px}
+.script div{padding:3px 0;border-bottom:1px dashed rgba(22,32,43,.12)}
+.script div.now{background:#fff7e6}
+.script em{color:rgba(22,32,43,.55);font-style:normal}
+.nogl{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--paper);background:#081826}
+.nogl.show{display:flex}
+@media(max-width:880px){main{grid-template-columns:1fr}.stage-wrap{order:-1}}
+</style>
 </head>
 <body>
-<a class="back-link" href="index.html#tools">← All tools</a>
-
-<div class="cartoon-container">
-  <div id="overlay" class="overlay-screen">
-    <button class="start-btn" id="startBtn">▶ PLAY 3D CARTOON</button>
-  </div>
-
-  <div id="caption" class="caption-box">OH LA LA! Look who walked into the party!</div>
-  <canvas id="webglCanvas"></canvas>
-</div>
+<header class="masthead"><div><h1>3D Cartoon</h1><p>Describe a story and watch it play as a cel-shaded 3D cartoon, then download it as a video.</p></div></header>
+<main>
+  <section class="panel">
+    <h2>Your story</h2>
+    <p>Say who is in it and what happens. The AI writes the script and picks the characters and places.</p>
+    <div class="field"><label for="story">Story idea</label><textarea id="story" placeholder="e.g. A shy robot and a grumpy alien get lost in the forest and a furry little forest creature helps them find the way home."></textarea></div>
+    <div class="grid">
+      <div class="field"><label for="length">Length</label><select id="length"><option value="8">Short (about 30 s)</option><option value="14" selected>Medium (about 50 s)</option><option value="22">Long (about 80 s)</option></select></div>
+      <div class="field"><label for="tone">Tone</label><select id="tone"><option>funny</option><option>adventurous</option><option>sweet</option><option>spooky but kind</option><option>silly</option></select></div>
+    </div>
+    <div id="aiBox"></div>
+    <div class="actions"><button class="primary" id="makeBtn">🎬 Make my 3D cartoon</button><button class="secondary" id="sampleBtn">Play the sample</button></div>
+    <p class="status" id="status" role="status"></p>
+    <div class="cast" id="cast"></div>
+    <div class="script" id="script" aria-label="Script"></div>
+    <p class="muted">Characters: kid, robot, alien, furry forest creature, gremlin imp, cat, bear, dragon, ghost, frog and cyclops monster. Places: park, forest, city, space, beach, living room, night street and castle.</p>
+  </section>
+  <section class="stage-wrap">
+    <div class="stage" id="stage">
+      <canvas id="gl" aria-label="3D cartoon"></canvas>
+      <div class="caption" id="caption" aria-live="polite"></div>
+      <div class="title-card" id="titleCard"><h2 id="titleText">The Lost Moon Cookie</h2><p id="titleSub">A sample cartoon. Press play, or write your own story.</p><button class="play-big" id="startBtn">▶ PLAY 3D CARTOON</button></div>
+      <div class="nogl" id="nogl"></div>
+    </div>
+    <div class="controls">
+      <button id="playBtn" disabled>⏸ Pause</button>
+      <button id="restartBtn">↻ Restart</button>
+      <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+      <label><input type="checkbox" id="voices"> Voices</label>
+      <button id="recBtn" title="Plays the cartoon from the start and saves it as a video file">⬇ Download video</button>
+    </div>
+  </section>
+</main>
+<footer>Everything is drawn live in your browser with Three.js. Your story is sent only to the AI provider you pick.</footer>
 
 <script>
-const canvas = document.getElementById('webglCanvas');
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x12021a);
+(function () {
+'use strict';
+const $ = id => document.getElementById(id);
+const status = (msg, err) => { const s = $('status'); s.textContent = msg; s.classList.toggle('show', !!msg); s.style.background = err ? 'rgba(216,96,74,.14)' : ''; };
+MigaAI.mount($('aiBox'));
 
-const camera = new THREE.PerspectiveCamera(45, 16 / 9, 0.1, 1000);
-camera.position.set(0, 3, 12);
+const SPECIES = ['kid', 'robot', 'alien', 'forest', 'gremlin', 'cat', 'bear', 'dragon', 'ghost', 'frog', 'cyclops'];
+const SETTINGS = ['park', 'forest', 'city', 'space', 'beach', 'room', 'night', 'castle'];
+const ACTIONS = ['talk', 'walk', 'jump', 'wave', 'dance', 'spin', 'laugh', 'sad', 'surprised', 'enter', 'exit', 'fly'];
 
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-renderer.setSize(960, 540, false);
+const SAMPLE = {
+  title: 'The Lost Moon Cookie',
+  characters: [
+    { name: 'Zib', species: 'alien', color: '#7ee081' },
+    { name: 'Bolt', species: 'robot', color: '#8fb8de' },
+    { name: 'Wicket', species: 'forest', color: '#9b6a3c' },
+    { name: 'Snag', species: 'gremlin', color: '#5fae4e' }
+  ],
+  beats: [
+    { setting: 'space', who: 'Zib', action: 'surprised', line: 'Oh no! My moon cookie fell all the way down to Earth!' },
+    { who: 'Bolt', action: 'talk', line: 'Calculating... it landed in a forest. Probably.' },
+    { who: 'Zib', action: 'jump', line: 'Then we are going to the forest. Hold on to your bolts!' },
+    { setting: 'forest', who: 'Wicket', action: 'enter', line: 'Who goes there? This is my forest!' },
+    { who: 'Zib', action: 'wave', line: 'Hello! We are looking for a cookie. It glows a little.' },
+    { who: 'Wicket', action: 'laugh', line: 'A glowing cookie? Ha! Snag has been hiding something shiny all day.' },
+    { who: 'Snag', action: 'enter', line: 'Mine! Finders keepers!' },
+    { who: 'Bolt', action: 'walk', to: 'Snag', line: 'Excuse me. Sharing is ninety-nine percent more fun. I measured it.' },
+    { who: 'Snag', action: 'sad', line: 'Nobody ever wants to share with me...' },
+    { who: 'Zib', action: 'talk', to: 'Snag', line: 'Then let us share it together. It is big enough for four.' },
+    { setting: 'night', who: 'Snag', action: 'dance', line: 'Cookie party! Cookie party!' },
+    { who: 'Wicket', action: 'dance', line: 'Best night in the forest ever!' },
+    { who: 'Zib', action: 'fly', line: 'Come visit the moon next time. I will bake more!' }
+  ]
+};
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
-scene.add(ambientLight);
-
-const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-dirLight.position.set(5, 10, 7);
-scene.add(dirLight);
-
-function createToonMaterial(color) {
-  return new THREE.MeshToonMaterial({ color: color });
-}
-
-function addOutline(mesh, thickness = 0.04) {
-  const outlineMaterial = new THREE.MeshBasicMaterial({
-    color: 0x000000,
-    side: THREE.BackSide
+// ---------- sanitising a script (from the AI or the sample) ----------
+function clean(s) {
+  const txt = (v, n) => String(v == null ? '' : v).replace(/\s+/g, ' ').trim().slice(0, n);
+  const out = { title: txt(s.title, 60) || 'My 3D Cartoon', characters: [], beats: [] };
+  const seen = new Set();
+  (Array.isArray(s.characters) ? s.characters : []).slice(0, 5).forEach((c, i) => {
+    let name = txt(c && c.name, 18) || 'Pal ' + (i + 1);
+    while (seen.has(name.toLowerCase())) name += '!';
+    seen.add(name.toLowerCase());
+    const sp = String(c && c.species || '').toLowerCase();
+    const color = /^#[0-9a-f]{6}$/i.test(c && c.color) ? c.color : null;
+    out.characters.push({ name, species: SPECIES.includes(sp) ? sp : SPECIES[i % SPECIES.length], color });
   });
-  const outlineMesh = new THREE.Mesh(mesh.geometry, outlineMaterial);
-  outlineMesh.scale.multiplyScalar(1 + thickness);
-  mesh.add(outlineMesh);
+  if (!out.characters.length) throw new Error('The script had no characters.');
+  const byName = n => out.characters.find(c => c.name.toLowerCase() === String(n || '').toLowerCase().trim());
+  (Array.isArray(s.beats) ? s.beats : []).slice(0, 30).forEach(b => {
+    const who = byName(b && b.who) || out.characters[0];
+    const action = ACTIONS.includes(String(b && b.action).toLowerCase()) ? String(b.action).toLowerCase() : 'talk';
+    const setting = SETTINGS.includes(String(b && b.setting).toLowerCase()) ? String(b.setting).toLowerCase() : null;
+    const to = byName(b && b.to);
+    out.beats.push({ who: who.name, action, line: txt(b && b.line, 160), setting, to: to && to !== who ? to.name : null });
+  });
+  if (!out.beats.length) throw new Error('The script had no scenes.');
+  if (!out.beats[0].setting) out.beats[0].setting = 'park';
+  return out;
 }
 
-function buildCharacter(bodyColor, headColor) {
-  const group = new THREE.Group();
+// ---------- 3D setup ----------
+const canvas = $('gl');
+function noGL(msg) {
+  const n = $('nogl'); n.textContent = msg; n.classList.add('show'); $('titleCard').classList.add('hidden');
+  // The rest of this script needs 3D, so these buttons would otherwise do nothing when pressed.
+  $('makeBtn').onclick = $('sampleBtn').onclick = () => status(msg, true);
+  status(msg, true);
+}
+if (!window.THREE) { noGL('The 3D engine could not load. Check your connection and reload the page.'); return; }
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true }); }
+catch (e) { noGL('This browser or device has 3D graphics (WebGL) turned off, so the cartoon cannot play here. Try another browser, or turn on hardware acceleration in your browser settings.'); return; }
+renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(42, 16 / 9, 0.1, 400);
+camera.position.set(0, 3, 12);
+const camLook = new THREE.Vector3(0, 1.3, 0), camPos = camera.position.clone(), camLookGoal = camLook.clone();
+scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 0.55));
+const sun = new THREE.DirectionalLight(0xffffff, 0.75); sun.position.set(5, 10, 7); scene.add(sun);
 
-  const headGeo = new THREE.SphereGeometry(0.8, 32, 32);
-  const headMat = createToonMaterial(headColor);
-  const head = new THREE.Mesh(headGeo, headMat);
-  head.position.y = 2.2;
-  addOutline(head);
-  group.add(head);
+function resize() {
+  const w = canvas.clientWidth || 640, h = Math.round(w * 9 / 16);
+  renderer.setSize(w, h, false);
+}
+resize(); window.addEventListener('resize', resize);
 
-  const bodyGeo = new THREE.ConeGeometry(0.9, 2.2, 32);
-  const bodyMat = createToonMaterial(bodyColor);
-  const body = new THREE.Mesh(bodyGeo, bodyMat);
-  body.position.y = 0.8;
-  addOutline(body);
-  group.add(body);
+const gradient = (() => { const d = new Uint8Array([90, 170, 255]); const t = new THREE.DataTexture(d, 3, 1, THREE.LuminanceFormat); t.minFilter = t.magFilter = THREE.NearestFilter; t.needsUpdate = true; return t; })();
+const mat = (c, extra) => new THREE.MeshToonMaterial(Object.assign({ color: c, gradientMap: gradient }, extra || {}));
+const black = new THREE.MeshBasicMaterial({ color: 0x111111 });
+const white = new THREE.MeshBasicMaterial({ color: 0xffffff });
+const outlineMat = new THREE.MeshBasicMaterial({ color: 0x0b0b12, side: THREE.BackSide });
+function mesh(geo, material, x, y, z, outline) {
+  const m = new THREE.Mesh(geo, material); m.position.set(x || 0, y || 0, z || 0);
+  if (outline !== false) { const o = new THREE.Mesh(geo, outlineMat); o.scale.setScalar(1.06); m.add(o); }
+  return m;
+}
+const S = (r, w, h) => new THREE.SphereGeometry(r, w || 24, h || 18);
+const Cyl = (rt, rb, h, n) => new THREE.CylinderGeometry(rt, rb, h, n || 16);
+const Cone = (r, h, n) => new THREE.ConeGeometry(r, h, n || 16);
+const Box = (w, h, d) => new THREE.BoxGeometry(w, h, d);
 
-  return group;
+// ---------- characters ----------
+const DEFAULT_COLORS = { kid: '#ff7b54', robot: '#9fb4c7', alien: '#8be07a', forest: '#8a5a33', gremlin: '#5ea94d', cat: '#f2a65a', bear: '#9a6b47', dragon: '#d9534f', ghost: '#f4f6ff', frog: '#57b35a', cyclops: '#8e6bd8' };
+const SKIN = ['#f1c7a3', '#d9a07a', '#a86b45', '#6e4630'];
+
+function eyes(head, y, z, spread, r, opts) {
+  const o = opts || {}, group = new THREE.Group();
+  [-1, 1].forEach(s => {
+    const w = mesh(S(r), o.whiteMat || white, s * spread, y, z, false);
+    if (o.scaleY) w.scale.y = o.scaleY;
+    const p = mesh(S(r * (o.pupil || 0.5)), o.pupilMat || black, 0, 0, r * 0.75, false);
+    if (o.slit) p.scale.set(0.35, 1.3, 0.5);
+    w.add(p); group.add(w);
+  });
+  head.add(group); return group;
+}
+function mouth(head, y, z, w, color) {
+  const m = mesh(new THREE.TorusGeometry(w, w * 0.28, 8, 16, Math.PI), new THREE.MeshBasicMaterial({ color: color || 0x3a1010 }), 0, y, z, false);
+  m.rotation.z = Math.PI; head.add(m); return m;
+}
+function limbs(ch, bodyMat, o) {
+  const armLen = o.armLen || 0.8, legLen = o.legLen || 0.75, shoulderY = o.shoulderY || 1.5, hipX = o.hipX || 0.25, shoulderX = o.shoulderX || 0.6;
+  ch.arms = [-1, 1].map(s => {
+    const pivot = new THREE.Group(); pivot.position.set(s * shoulderX, shoulderY, 0);
+    pivot.add(mesh(Cyl(0.09, 0.08, armLen), o.armMat || bodyMat, 0, -armLen / 2, 0));
+    pivot.add(mesh(S(o.hand || 0.13), o.handMat || bodyMat, 0, -armLen, 0));
+    pivot.rotation.z = s * 0.25; ch.root.add(pivot); return pivot;
+  });
+  if (o.noLegs) { ch.legs = []; return; }
+  ch.legs = [-1, 1].map(s => {
+    const pivot = new THREE.Group(); pivot.position.set(s * hipX, legLen, 0);
+    pivot.add(mesh(Cyl(0.12, 0.1, legLen), o.legMat || bodyMat, 0, -legLen / 2, 0));
+    pivot.add(mesh(S(0.16), o.footMat || o.legMat || bodyMat, 0, -legLen + 0.05, 0.08));
+    ch.root.add(pivot); return pivot;
+  });
 }
 
-const roxie = buildCharacter(0xff3366, 0xffcc80);
-roxie.position.set(-2.5, 0, 0);
-scene.add(roxie);
-
-const lexi = buildCharacter(0x33ccff, 0xffcc80);
-lexi.position.set(2.5, 0, 0);
-scene.add(lexi);
-
-const brad = buildCharacter(0x3366cc, 0xffe0b2);
-brad.position.set(0, 0, -1);
-scene.add(brad);
-
-const floorGeo = new THREE.PlaneGeometry(20, 20);
-const floorMat = createToonMaterial(0x2b0933);
-const floor = new THREE.Mesh(floorGeo, floorMat);
-floor.rotation.x = -Math.PI / 2;
-scene.add(floor);
-
-let clock = new THREE.Clock();
-let isPlaying = false;
-
-document.getElementById('startBtn').addEventListener('click', () => {
-  document.getElementById('overlay').classList.add('hidden');
-  isPlaying = true;
-  clock.start();
-});
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  if (isPlaying) {
-    const t = clock.getElapsedTime();
-
-    roxie.position.y = Math.sin(t * 4) * 0.15;
-    roxie.rotation.y = Math.sin(t * 2) * 0.2;
-
-    lexi.position.y = Math.cos(t * 4) * 0.15;
-    lexi.rotation.y = -Math.sin(t * 2) * 0.2;
-
-    brad.rotation.y = t * 0.5;
-
-    camera.position.x = Math.sin(t * 0.5) * 3;
-    camera.position.z = 10 + Math.cos(t * 0.5) * 2;
-    camera.lookAt(0, 1.5, 0);
-
-    const captionBox = document.getElementById('caption');
-    if (t > 15.0) {
-      captionBox.textContent = "💥 BAM! 3D CELL-SHADED ACTION! 💥";
-    } else if (t > 7.0) {
-      captionBox.textContent = "BRAD BROUGHT HIS LEGENDARY BIG ENERGY!";
+function buildCharacter(spec, index) {
+  const color = new THREE.Color(spec.color || DEFAULT_COLORS[spec.species]);
+  const body = mat(color), dark = mat(color.clone().multiplyScalar(0.6)), light = mat(color.clone().lerp(new THREE.Color('#ffffff'), 0.45));
+  const ch = { name: spec.name, species: spec.species, root: new THREE.Group(), fig: new THREE.Group(), base: 0, facing: 0 };
+  const R = ch.fig; ch.root.add(R); ch.root = R; // limbs attach to the figure so the whole body bobs together
+  const head = new THREE.Group(); ch.head = head; R.add(head);
+  switch (spec.species) {
+    case 'kid': {
+      const skin = mat(SKIN[index % SKIN.length]);
+      R.add(mesh(Cyl(0.45, 0.55, 0.95), body, 0, 1.2, 0));
+      head.position.y = 2.1; head.add(mesh(S(0.55), skin));
+      const hair = mesh(new THREE.SphereGeometry(0.58, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2.1), mat(['#3b2416', '#e8c15a', '#1b1b1b', '#b5462d'][index % 4]), 0, 0.05, -0.02);
+      head.add(hair);
+      ch.eyes = eyes(head, 0.08, 0.46, 0.2, 0.11); ch.mouth = mouth(head, -0.2, 0.5, 0.13);
+      limbs(ch, body, { handMat: skin, legMat: mat('#2f4a7a'), shoulderY: 1.6, legLen: 0.75 });
+      break;
+    }
+    case 'robot': {
+      R.add(mesh(Box(1.1, 1.1, 0.8), body, 0, 1.3, 0));
+      R.add(mesh(Box(0.5, 0.3, 0.05), mat('#ffd166', { emissive: 0x553300 }), 0, 1.4, 0.42, false));
+      head.position.y = 2.25; head.add(mesh(Box(0.9, 0.75, 0.75), light));
+      head.add(mesh(Cyl(0.03, 0.03, 0.4), dark, 0, 0.55, 0));
+      ch.bulb = mesh(S(0.1), new THREE.MeshBasicMaterial({ color: 0xff4d6d }), 0, 0.78, 0, false); head.add(ch.bulb);
+      ch.eyes = new THREE.Group(); [-1, 1].forEach(s => ch.eyes.add(mesh(Box(0.2, 0.14, 0.05), new THREE.MeshBasicMaterial({ color: 0x5ff2ff }), s * 0.2, 0.08, 0.39, false))); head.add(ch.eyes);
+      ch.mouth = mesh(Box(0.4, 0.06, 0.05), black, 0, -0.18, 0.39, false); head.add(ch.mouth);
+      limbs(ch, dark, { shoulderX: 0.68, shoulderY: 1.7, legLen: 0.75, hand: 0.15 });
+      break;
+    }
+    case 'alien': {
+      R.add(mesh(Cyl(0.28, 0.42, 1.0), body, 0, 1.2, 0));
+      head.position.y = 2.25; const h = mesh(S(0.6), body); h.scale.set(1, 1.2, 0.95); head.add(h);
+      ch.eyes = new THREE.Group();
+      [-1, 1].forEach(s => { const e = mesh(S(0.2), black, s * 0.25, 0.05, 0.47, false); e.scale.set(0.7, 1.25, 0.4); e.rotation.z = s * -0.5; ch.eyes.add(e); });
+      head.add(ch.eyes);
+      [-1, 1].forEach(s => { const a = mesh(Cyl(0.025, 0.025, 0.55), dark, s * 0.22, 0.8, 0); a.rotation.z = s * -0.35; head.add(a); head.add(mesh(S(0.08), light, s * 0.33, 1.05, 0)); });
+      ch.mouth = mouth(head, -0.35, 0.47, 0.08);
+      limbs(ch, body, { shoulderX: 0.38, shoulderY: 1.6, armLen: 0.9, legLen: 0.72, hipX: 0.18 });
+      break;
+    }
+    case 'forest': { // furry little forest creature in a hood
+      const fur = body, face = mat(color.clone().lerp(new THREE.Color('#e8c89a'), 0.55)), hood = mat(['#c8743a', '#a33b2c', '#6b7f3a'][index % 3]);
+      const b = mesh(S(0.6), fur, 0, 1.0, 0); b.scale.set(1, 1.1, 0.95); R.add(b);
+      head.position.y = 1.85; head.add(mesh(S(0.55), fur));
+      const h = mesh(new THREE.SphereGeometry(0.6, 24, 16, 0, Math.PI * 2, 0, Math.PI * 0.62), hood, 0, 0.02, -0.04); h.rotation.x = -0.35; head.add(h);
+      const f = mesh(S(0.36), face, 0, -0.08, 0.3, false); f.scale.z = 0.6; head.add(f);
+      ch.eyes = eyes(head, 0.02, 0.5, 0.16, 0.1, { whiteMat: black, pupilMat: white, pupil: 0.3 });
+      head.add(mesh(S(0.08), black, 0, -0.12, 0.55, false));
+      [-1, 1].forEach(s => head.add(mesh(S(0.14), fur, s * 0.42, 0.45, 0.05)));
+      ch.mouth = mouth(head, -0.27, 0.5, 0.08);
+      const spear = mesh(Cyl(0.03, 0.03, 1.9), mat('#6b4a2b'), 0, -0.3, 0.1); spear.add(mesh(Cone(0.08, 0.25), mat('#bbbbbb'), 0, 1.05, 0));
+      limbs(ch, fur, { shoulderX: 0.55, shoulderY: 1.3, armLen: 0.55, legLen: 0.45, hand: 0.12 });
+      ch.arms[1].add(spear); spear.position.set(0, -0.55, 0.12);
+      break;
+    }
+    case 'gremlin': { // mischievous imp: huge pointy ears, yellow slit eyes, toothy grin
+      R.add(mesh(S(0.45), body, 0, 1.05, 0));
+      head.position.y = 1.75; const h = mesh(S(0.5), body); h.scale.set(1.15, 0.95, 1); head.add(h);
+      [-1, 1].forEach(s => { const ear = mesh(Cone(0.28, 1.1, 12), body, s * 0.85, 0.2, -0.05); ear.rotation.z = s * -1.25; ear.scale.z = 0.35; head.add(ear); const inner = mesh(Cone(0.17, 0.8, 12), mat('#e98a8a'), s * 0.84, 0.2, 0.02, false); inner.rotation.z = s * -1.25; inner.scale.z = 0.2; head.add(inner); });
+      ch.eyes = eyes(head, 0.12, 0.4, 0.2, 0.15, { whiteMat: new THREE.MeshBasicMaterial({ color: 0xffd23f }), slit: true, pupil: 0.55 });
+      ch.mouth = mouth(head, -0.18, 0.45, 0.22, 0x2a0a0a);
+      for (let i = -2; i <= 2; i++) { const t = mesh(Cone(0.035, 0.1, 6), white, i * 0.075, -0.2, 0.5, false); t.rotation.x = Math.PI; head.add(t); }
+      limbs(ch, body, { shoulderX: 0.45, shoulderY: 1.25, armLen: 0.7, legLen: 0.6, hipX: 0.2, hand: 0.12 });
+      ch.arms.forEach(a => [-1, 0, 1].forEach(k => { const c = mesh(Cone(0.03, 0.14, 6), white, k * 0.06, -0.85, 0.05, false); c.rotation.x = Math.PI; a.add(c); }));
+      break;
+    }
+    case 'cat': {
+      R.add(mesh(Cyl(0.35, 0.5, 1.0), body, 0, 1.15, 0));
+      head.position.y = 2.0; head.add(mesh(S(0.52), body));
+      [-1, 1].forEach(s => { const e = mesh(Cone(0.2, 0.4, 4), body, s * 0.3, 0.5, 0); e.rotation.z = s * -0.25; head.add(e); });
+      ch.eyes = eyes(head, 0.08, 0.43, 0.19, 0.12, { whiteMat: new THREE.MeshBasicMaterial({ color: 0x9be36b }), slit: true });
+      head.add(mesh(S(0.06), mat('#ff8fa3'), 0, -0.08, 0.52, false));
+      [-1, 1].forEach(s => [0.03, -0.05].forEach(dy => { const w = mesh(Cyl(0.008, 0.008, 0.45), black, s * 0.3, -0.12 + dy, 0.45, false); w.rotation.z = Math.PI / 2 + s * dy * 3; head.add(w); }));
+      ch.mouth = mouth(head, -0.2, 0.47, 0.07);
+      const tail = new THREE.Group(); tail.position.set(0, 0.9, -0.45); const tm = mesh(Cyl(0.07, 0.05, 1.0), body, 0, 0.45, 0); tail.add(tm); tail.rotation.x = -0.6; R.add(tail); ch.tail = tail;
+      limbs(ch, body, { shoulderX: 0.45, shoulderY: 1.55, legLen: 0.7 });
+      break;
+    }
+    case 'bear': {
+      const b = mesh(S(0.7), body, 0, 1.2, 0); b.scale.set(1, 1.15, 0.9); R.add(b);
+      R.add(mesh(S(0.45), light, 0, 1.15, 0.35, false));
+      head.position.y = 2.25; head.add(mesh(S(0.55), body));
+      [-1, 1].forEach(s => head.add(mesh(S(0.18), body, s * 0.42, 0.42, 0)));
+      const snout = mesh(S(0.22), light, 0, -0.12, 0.45); snout.scale.z = 0.7; head.add(snout);
+      head.add(mesh(S(0.08), black, 0, -0.05, 0.62, false));
+      ch.eyes = eyes(head, 0.12, 0.45, 0.2, 0.08, { whiteMat: black, pupilMat: white, pupil: 0.3 });
+      ch.mouth = mouth(head, -0.27, 0.55, 0.07);
+      limbs(ch, body, { shoulderX: 0.7, shoulderY: 1.7, armLen: 0.8, legLen: 0.6, hipX: 0.35, hand: 0.18 });
+      break;
+    }
+    case 'dragon': {
+      const b = mesh(S(0.6), body, 0, 1.15, 0); b.scale.set(0.95, 1.1, 1); R.add(b);
+      R.add(mesh(S(0.4), mat('#ffd28a'), 0, 1.1, 0.3, false));
+      head.position.y = 2.05; head.add(mesh(S(0.48), body));
+      const snout = mesh(S(0.3), body, 0, -0.12, 0.42); snout.scale.set(1, 0.7, 1.1); head.add(snout);
+      [-1, 1].forEach(s => { const h = mesh(Cone(0.08, 0.4), mat('#fff1c1'), s * 0.25, 0.48, -0.1); h.rotation.x = -0.4; head.add(h); head.add(mesh(S(0.03), black, s * 0.1, -0.05, 0.72, false)); });
+      ch.eyes = eyes(head, 0.15, 0.38, 0.2, 0.11, { whiteMat: new THREE.MeshBasicMaterial({ color: 0xfff27a }), slit: true });
+      ch.mouth = mouth(head, -0.25, 0.62, 0.12);
+      ch.wings = [-1, 1].map(s => { const g = new THREE.Group(); g.position.set(s * 0.35, 1.55, -0.35); const w = mesh(new THREE.ShapeGeometry(new THREE.Shape([new THREE.Vector2(0, 0), new THREE.Vector2(s * 1.1, 0.7), new THREE.Vector2(s * 0.9, -0.2), new THREE.Vector2(s * 0.5, -0.1)])), mat(color.clone().multiplyScalar(0.75), { side: THREE.DoubleSide }), 0, 0, 0, false); g.add(w); g.rotation.y = s * 0.5; R.add(g); return g; });
+      const tail = new THREE.Group(); tail.position.set(0, 0.8, -0.5); tail.add(mesh(Cone(0.18, 1.2), body, 0, 0, -0.5)); tail.children[0].rotation.x = -Math.PI / 2; R.add(tail); ch.tail = tail;
+      limbs(ch, body, { shoulderX: 0.5, shoulderY: 1.45, armLen: 0.55, legLen: 0.6, hipX: 0.3 });
+      break;
+    }
+    case 'ghost': {
+      const ghostMat = mat(color, { transparent: true, opacity: 0.88 });
+      const b = mesh(new THREE.SphereGeometry(0.7, 24, 18, 0, Math.PI * 2, 0, Math.PI * 0.62), ghostMat, 0, 1.5, 0); R.add(b);
+      R.add(mesh(Cyl(0.7 * Math.sin(Math.PI * 0.62), 0.78, 1.1, 20), ghostMat, 0, 0.75, 0));
+      for (let i = 0; i < 6; i++) { const a = i / 6 * Math.PI * 2; R.add(mesh(S(0.17), ghostMat, Math.cos(a) * 0.62, 0.2, Math.sin(a) * 0.62, false)); }
+      head.position.y = 1.55;
+      ch.eyes = eyes(head, 0.1, 0.62, 0.22, 0.13, { whiteMat: black, pupilMat: white, pupil: 0.3 });
+      ch.mouth = mesh(S(0.12), black, 0, -0.25, 0.64, false); ch.mouth.scale.set(0.8, 1.2, 0.3); head.add(ch.mouth);
+      limbs(ch, ghostMat, { shoulderX: 0.72, shoulderY: 1.2, armLen: 0.45, noLegs: true, hand: 0.1 });
+      ch.floats = true;
+      break;
+    }
+    case 'frog': {
+      const b = mesh(S(0.6), body, 0, 1.0, 0); b.scale.set(1.1, 1, 0.9); R.add(b);
+      R.add(mesh(S(0.42), mat('#e8f2a0'), 0, 0.95, 0.28, false));
+      head.position.y = 1.7; const h = mesh(S(0.55), body); h.scale.set(1.3, 0.75, 1); head.add(h);
+      ch.eyes = new THREE.Group(); [-1, 1].forEach(s => { const bump = mesh(S(0.2), body, s * 0.35, 0.35, 0.15); ch.eyes.add(bump); const w = mesh(S(0.15), white, 0, 0.05, 0.1, false); w.add(mesh(S(0.07), black, 0, 0, 0.12, false)); bump.add(w); }); head.add(ch.eyes);
+      ch.mouth = mouth(head, -0.08, 0.5, 0.35);
+      limbs(ch, body, { shoulderX: 0.6, shoulderY: 1.2, armLen: 0.6, legLen: 0.5, hipX: 0.4, hand: 0.14 });
+      break;
+    }
+    default: { // cyclops monster
+      const b = mesh(S(0.75), body, 0, 1.35, 0); b.scale.set(1, 1.1, 0.95); R.add(b);
+      head.position.y = 1.6;
+      const eye = mesh(S(0.32), white, 0, 0.3, 0.55, false); eye.add(mesh(S(0.15), new THREE.MeshBasicMaterial({ color: 0x3a8dde }), 0, 0, 0.24, false)); eye.children[0].add(mesh(S(0.08), black, 0, 0, 0.1, false));
+      ch.eyes = new THREE.Group(); ch.eyes.add(eye); head.add(ch.eyes);
+      [-1, 1].forEach(s => { const h = mesh(Cone(0.12, 0.5), mat('#f5e6b8'), s * 0.45, 0.85, 0); h.rotation.z = s * -0.4; head.add(h); });
+      ch.mouth = mouth(head, -0.25, 0.7, 0.2);
+      [-1, 1].forEach(s => { const t = mesh(Cone(0.05, 0.14, 6), white, s * 0.12, -0.22, 0.72, false); t.rotation.x = Math.PI; head.add(t); });
+      limbs(ch, body, { shoulderX: 0.78, shoulderY: 1.55, armLen: 0.85, legLen: 0.55, hipX: 0.35, hand: 0.17 });
     }
   }
-
-  renderer.render(scene, camera);
+  ch.group = R.parent; // the outer group that moves around the set
+  return ch;
 }
 
-animate();
+// ---------- sets ----------
+const sets = {};
+function makeSet(name) {
+  const g = new THREE.Group(); let sky = 0x87ceeb, fog = null;
+  const ground = (c, size) => { const m = mesh(new THREE.CircleGeometry(size || 40, 48), mat(c), 0, 0, 0, false); m.rotation.x = -Math.PI / 2; g.add(m); };
+  const tree = (x, z, s, pine) => { const t = new THREE.Group(); t.add(mesh(Cyl(0.15, 0.22, 1.4), mat('#7a5230'), 0, 0.7, 0)); t.add(pine ? mesh(Cone(1.0, 2.4), mat('#2f7d46'), 0, 2.4, 0) : mesh(S(1.0), mat('#4caf50'), 0, 2.1, 0)); t.position.set(x, 0, z); t.scale.setScalar(s || 1); g.add(t); };
+  const stars = (n, r) => { const p = new Float32Array(n * 3); for (let i = 0; i < n; i++) { const a = Math.random() * Math.PI * 2, b = Math.random() * Math.PI * 0.5; p[i * 3] = Math.cos(a) * Math.cos(b) * r; p[i * 3 + 1] = Math.sin(b) * r + 2; p[i * 3 + 2] = Math.sin(a) * Math.cos(b) * r - 10; } const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(p, 3)); g.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: 0xffffff, size: 0.35 }))); };
+  const orb = (c, x, y, z, r) => g.add(mesh(S(r || 1.5), new THREE.MeshBasicMaterial({ color: c }), x, y, z, false));
+  switch (name) {
+    case 'park': ground('#7ccf6a'); [[-7, -6], [7, -7], [-10, -12], [4, -14], [11, -3]].forEach(([x, z]) => tree(x, z, 1.2)); orb(0xffe066, 12, 13, -30, 2.5); g.add(mesh(Box(3, 0.15, 0.8), mat('#a0522d'), 5, 0.8, -3)); break;
+    case 'forest': sky = 0x9fd3b0; fog = [0x9fd3b0, 12, 45]; ground('#3f7d3a'); for (let i = 0; i < 26; i++) tree(-19 + i * 1.5 + (i % 3) * 0.4, -4 - (i * 7 % 4) * 3, 1 + (i % 3) * 0.3, true); break; // trees stay behind the characters break;
+    case 'city': sky = 0xb5d8ff; ground('#8e949b'); for (let i = 0; i < 12; i++) { const h = 4 + (i * 37 % 7); const b = mesh(Box(2.6, h, 2.6), mat(['#e07a5f', '#3d5a80', '#f2cc8f', '#81b29a'][i % 4]), -15 + i * 2.8, h / 2, -12 - (i % 2) * 3); for (let y = 1; y < h - 0.5; y += 1.2) b.add(mesh(Box(1.8, 0.4, 0.05), new THREE.MeshBasicMaterial({ color: 0xfff3b0 }), 0, y - h / 2, 1.31, false)); g.add(b); } break;
+    case 'space': sky = 0x05030f; ground('#9a9aa8', 30); for (let i = 0; i < 9; i++) { const c = mesh(new THREE.RingGeometry(0.4, 0.9, 20), mat('#6f6f7d'), (i * 53 % 20) - 10, 0.02, -(i * 29 % 14) - 2, false); c.rotation.x = -Math.PI / 2; g.add(c); } stars(500, 80); { const p = mesh(S(4), mat('#4f7cff'), -14, 12, -40, false); const ring = mesh(new THREE.RingGeometry(5, 7, 40), mat('#f2c57c', { side: THREE.DoubleSide }), 0, 0, 0, false); ring.rotation.x = 1.2; p.add(ring); g.add(p); } break;
+    case 'beach': sky = 0x8fd8ff; ground('#f3dca2'); { const sea = mesh(new THREE.PlaneGeometry(120, 40), mat('#2e9fd8'), 0, 0.05, -30, false); sea.rotation.x = -Math.PI / 2; g.add(sea); } { const t = new THREE.Group(); t.add(mesh(Cyl(0.15, 0.25, 4), mat('#9c6b3c'), 0, 2, 0)); for (let i = 0; i < 6; i++) { const l = mesh(Box(2.2, 0.08, 0.5), mat('#3aa655'), 0, 4, 0); l.rotation.y = i; l.rotation.z = -0.4; l.geometry.translate(1.1, 0, 0); t.add(l); } t.position.set(-6, 0, -4); g.add(t); } orb(0xffd166, 10, 10, -40, 3); break;
+    case 'room': sky = 0xf5e6c8; ground('#c08a5a', 14); g.add(mesh(Box(30, 10, 0.3), mat('#f2d7b6'), 0, 5, -6)); g.add(mesh(Box(4, 3, 0.1), mat('#9fd8ff'), -5, 4.5, -5.8)); g.add(mesh(Box(4, 1, 1.4), mat('#c0392b'), 4.5, 0.5, -4.5)); g.add(mesh(Box(4, 1.3, 0.4), mat('#c0392b'), 4.5, 1.1, -5.1)); g.add(mesh(Cyl(0.05, 0.05, 2.6), mat('#333333'), -8, 1.3, -4)); g.add(mesh(Cone(0.5, 0.6), mat('#ffe8a3', { emissive: 0x554400 }), -8, 2.8, -4)); break;
+    case 'night': sky = 0x101a3a; ground('#26402f'); stars(350, 70); orb(0xf7f3d0, -10, 12, -30, 2); for (let i = 0; i < 5; i++) { const h = new THREE.Group(); h.add(mesh(Box(2.4, 2, 2), mat('#51607a'), 0, 1, 0)); const roof = mesh(Cone(1.9, 1.2, 4), mat('#7a3b3b'), 0, 2.6, 0); roof.rotation.y = Math.PI / 4; h.add(roof); h.add(mesh(Box(0.6, 0.6, 0.05), new THREE.MeshBasicMaterial({ color: 0xffd966 }), 0.5, 1.2, 1.01, false)); h.position.set(-12 + i * 6, 0, -12); g.add(h); } break;
+    case 'castle': sky = 0xc7b8ff; ground('#9aa77c'); { const stone = mat('#b9b4a8'); g.add(mesh(Box(14, 5, 1.5), stone, 0, 2.5, -14)); [-7, 7].forEach(x => { g.add(mesh(Cyl(1.4, 1.4, 8), stone, x, 4, -14)); g.add(mesh(Cone(1.8, 2.5), mat('#6c4ab6'), x, 9.2, -14)); }); g.add(mesh(Box(2.4, 3, 0.2), mat('#5a3b22'), 0, 1.5, -13.2)); } break;
+  }
+  g.userData = { sky, fog }; g.visible = false; scene.add(g); return g;
+}
+function showSet(name) {
+  if (!sets[name]) sets[name] = makeSet(name);
+  Object.keys(sets).forEach(k => sets[k].visible = k === name);
+  const u = sets[name].userData; scene.background = new THREE.Color(u.sky);
+  scene.fog = u.fog ? new THREE.Fog(u.fog[0], u.fog[1], u.fog[2]) : null;
+}
+
+// ---------- the show ----------
+let script = null, cast = [], timeline = [], total = 0, t0 = 0, playing = false, pausedAt = 0, beatIndex = -1, finished = false;
+let recorder = null, recChunks = [];
+function beatLength(b) { return Math.max(2.8, 1.2 + b.line.split(' ').length * 0.34); }
+
+function load(s) {
+  cast.forEach(c => scene.remove(c.group));
+  script = clean(s);
+  cast = script.characters.map((c, i) => { const ch = buildCharacter(c, i); scene.add(ch.group); return ch; });
+  const n = cast.length;
+  cast.forEach((c, i) => { c.home = (i - (n - 1) / 2) * 2.4; c.group.position.set(c.home, 0, 0); c.x = c.home; c.visible = true; });
+  // characters whose first appearance is an "enter" start off stage
+  const firstBeat = {}; script.beats.forEach((b, i) => { if (!(b.who in firstBeat)) firstBeat[b.who] = b; });
+  cast.forEach(c => { const f = firstBeat[c.name]; c.startsOff = !!(f && f.action === 'enter'); });
+  let at = 0; timeline = script.beats.map(b => { const e = { b, start: at, len: beatLength(b) }; at += e.len; return e; });
+  total = at + 1.5;
+  $('titleText').textContent = script.title;
+  $('cast').innerHTML = cast.map(c => '<span>' + esc(c.name) + ' · ' + label(c.species) + '</span>').join('');
+  $('script').innerHTML = timeline.map((e, i) => '<div data-i="' + i + '">' + (e.b.setting ? '<em>[' + e.b.setting + ']</em> ' : '') + '<b>' + esc(e.b.who) + '</b> <em>(' + e.b.action + ')</em> ' + esc(e.b.line) + '</div>').join('');
+  reset();
+}
+const label = sp => ({ forest: 'forest creature', gremlin: 'gremlin imp', cyclops: 'cyclops monster' })[sp] || sp;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+function reset() {
+  playing = false; finished = false; beatIndex = -1; pausedAt = 0;
+  showSet(script.beats[0].setting);
+  cast.forEach(c => { c.x = c.startsOff ? (c.home < 0 ? -14 : 14) : c.home; c.group.position.set(c.x, 0, 0); c.group.visible = true; c.group.rotation.set(0, 0, 0); c.fig.position.y = 0; });
+  $('caption').innerHTML = ''; $('bar').style.width = '0';
+  camPos.set(0, 3.2, 12); camLookGoal.set(0, 1.3, 0); camera.position.copy(camPos); camLook.copy(camLookGoal);
+  $('playBtn').disabled = true; $('playBtn').textContent = '⏸ Pause';
+  window.speechSynthesis && speechSynthesis.cancel();
+}
+function play() {
+  $('titleCard').classList.add('hidden');
+  if (finished) reset();
+  t0 = performance.now() / 1000 - pausedAt; playing = true;
+  $('playBtn').disabled = false; $('playBtn').textContent = '⏸ Pause';
+  if (window.speechSynthesis && pausedAt) speechSynthesis.resume();
+}
+function pause() {
+  playing = false; pausedAt = performance.now() / 1000 - t0; $('playBtn').textContent = '▶ Play';
+  window.speechSynthesis && speechSynthesis.pause();
+}
+function finish() {
+  playing = false; finished = true; $('caption').innerHTML = '';
+  $('titleSub').textContent = 'The end! Watch again, or write a new story.';
+  $('startBtn').textContent = '↻ WATCH AGAIN'; $('titleCard').classList.remove('hidden');
+  $('playBtn').disabled = true;
+  if (recorder && recorder.state === 'recording') recorder.stop();
+}
+
+const voices = () => (window.speechSynthesis ? speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang)) : []);
+const PITCH = { kid: 1.4, robot: 0.6, alien: 1.8, forest: 1.6, gremlin: 1.9, cat: 1.5, bear: 0.5, dragon: 0.7, ghost: 1.2, frog: 0.9, cyclops: 0.4 };
+function speak(e) {
+  if (!$('voices').checked || !window.speechSynthesis || !e.b.line) return;
+  const u = new SpeechSynthesisUtterance(e.b.line), c = cast.find(x => x.name === e.b.who), vs = voices();
+  if (vs.length) u.voice = vs[cast.indexOf(c) % vs.length];
+  u.pitch = PITCH[c.species] || 1; u.rate = 1.05; speechSynthesis.speak(u);
+}
+
+function startBeat(i) {
+  beatIndex = i; const e = timeline[i], b = e.b, c = cast.find(x => x.name === b.who);
+  if (b.setting) { showSet(b.setting); cast.forEach(x => { if (x !== c && x.group.visible && x.x > -12 && x.x < 12) x.x = x.home; }); }
+  if (b.action === 'enter') { c.group.visible = true; c.x = c.home; }
+  if (b.action === 'exit') c.x = c.home < 0 ? -16 : 16;
+  if (b.action === 'walk') { const t = cast.find(x => x.name === b.to); c.x = t ? t.x + (t.x > c.group.position.x ? -1.6 : 1.6) : c.home + (Math.random() < 0.5 ? -2 : 2); }
+  const who = esc(b.who), line = esc(b.line);
+  $('caption').innerHTML = line ? '<b>' + who + ':</b> ' + line : '';
+  document.querySelectorAll('#script div').forEach(d => d.classList.toggle('now', +d.dataset.i === i));
+  const now = document.querySelector('#script div.now'); if (now) now.scrollIntoView({ block: 'nearest' });
+  // camera: a wide shot when the place changes, otherwise a close shot on the speaker
+  if (b.setting || i === 0) { camPos.set(0, 3.4, 12.5); camLookGoal.set(0, 1.4, 0); e.wide = true; }
+  else { const side = (i % 2 ? 1 : -1) * 1.6; camPos.set(c.x + side, 2.6, 6.8); camLookGoal.set(c.x, 1.7, 0); }
+  speak(e);
+}
+
+function animateChar(c, t, e, local, dt) {
+  const acting = e && e.b.who === c.name, act = acting ? e.b.action : 'idle', p = acting ? Math.min(local / e.len, 1) : 0;
+  const pos = c.group.position, dx = c.x - pos.x, moving = Math.abs(dx) > 0.05;
+  pos.x += Math.sign(dx) * Math.min(Math.abs(dx), dt * (act === 'exit' || act === 'enter' ? 6 : 3.6));
+  let bob = c.floats ? 0.35 + Math.sin(t * 2 + c.home) * 0.15 : Math.abs(Math.sin(t * 2 + c.home)) * 0.03;
+  let turn = moving ? Math.sign(dx) * 1.2 : 0, swing = moving ? Math.sin(t * 10) * 0.7 : 0, armL = 0, armR = 0, lean = 0, headTilt = 0;
+  if (acting) {
+    if (e.b.to) { const tg = cast.find(x => x.name === e.b.to); if (tg && !moving) turn = Math.sign(tg.group.position.x - pos.x) * 0.6; }
+    switch (act) {
+      case 'jump': bob += Math.max(0, Math.sin(p * Math.PI * 3)) * 1.1; armL = armR = -2.6 * Math.max(0, Math.sin(p * Math.PI * 3)); break;
+      case 'wave': armR = -2.6 + Math.sin(t * 9) * 0.35; break;
+      case 'dance': bob += Math.abs(Math.sin(t * 7)) * 0.35; turn = Math.sin(t * 3.5) * 0.9; armL = -1.6 + Math.sin(t * 7) * 0.8; armR = -1.6 - Math.sin(t * 7) * 0.8; break;
+      case 'spin': turn = p * Math.PI * 4; break;
+      case 'laugh': lean = Math.sin(t * 14) * 0.08 - 0.1; headTilt = -0.25; break;
+      case 'sad': headTilt = 0.45; lean = 0.08; armL = armR = 0.1; break;
+      case 'surprised': bob += p < 0.2 ? Math.sin(p / 0.2 * Math.PI) * 0.6 : 0; armL = armR = -2.2; break;
+      case 'fly': bob += Math.min(p * 2, 1) * 2.2; armL = armR = -1.4 + Math.sin(t * 8) * 0.5; break;
+      default: armR = Math.sin(t * 3) * 0.3 - 0.3;
+    }
+  }
+  c.fig.position.y = bob; c.group.rotation.y += (turn - c.group.rotation.y) * (act === 'spin' ? 1 : Math.min(1, dt * 7));
+  c.fig.rotation.x = lean;
+  if (c.head) c.head.rotation.x = headTilt + (acting && act === 'talk' ? Math.sin(t * 6) * 0.05 : 0);
+  c.legs.forEach((l, i) => l.rotation.x = i ? swing : -swing);
+  if (c.arms[0]) { c.arms[0].rotation.x = (moving ? -swing * 0.8 : 0) + armL; c.arms[1].rotation.x = (moving ? swing * 0.8 : 0) + armR; }
+  if (c.mouth) { const talking = acting && e.b.line && p < 0.92; c.mouth.scale.y = talking ? 0.5 + Math.abs(Math.sin(t * 14)) * 1.3 : 1; }
+  if (c.eyes) { const blink = (t + c.home * 1.7) % 3.6 < 0.12; c.eyes.scale.y = blink ? 0.1 : act === 'surprised' && acting ? 1.4 : 1; }
+  if (c.wings) c.wings.forEach((w, i) => w.rotation.y = (i ? -1 : 1) * (0.5 + Math.sin(t * (act === 'fly' && acting ? 14 : 3)) * 0.35));
+  if (c.tail) c.tail.rotation.y = Math.sin(t * 2.5) * 0.4;
+  if (c.bulb) c.bulb.material.color.setHSL((t * 0.3) % 1, 0.9, 0.6);
+  if (act === 'exit' && acting && p > 0.95) c.group.visible = false;
+}
+
+// A second canvas that combines the 3D picture and the caption, used for the video download.
+const rec = document.createElement('canvas'); rec.width = 1280; rec.height = 720; const rc = rec.getContext('2d');
+function drawRecording() {
+  rc.drawImage(canvas, 0, 0, rec.width, rec.height);
+  const e = timeline[beatIndex]; if (!e || !e.b.line || finished) return;
+  rc.font = 'bold 34px sans-serif'; rc.textAlign = 'center'; rc.lineJoin = 'round';
+  const words = (e.b.who + ': ' + e.b.line).split(' '), lines = []; let cur = '';
+  words.forEach(w => { const test = cur ? cur + ' ' + w : w; if (rc.measureText(test).width > 1120) { lines.push(cur); cur = w; } else cur = test; }); lines.push(cur);
+  lines.forEach((l, i) => { const y = rec.height - 50 - (lines.length - 1 - i) * 42; rc.lineWidth = 7; rc.strokeStyle = '#000'; rc.strokeText(l, rec.width / 2, y); rc.fillStyle = '#fff'; rc.fillText(l, rec.width / 2, y); });
+}
+
+let lastFrame = performance.now() / 1000;
+function frame() {
+  requestAnimationFrame(frame);
+  const now = performance.now() / 1000, t = playing ? now - t0 : pausedAt;
+  const dt = Math.min(0.1, now - lastFrame); lastFrame = now; // time-based, so slow devices keep up with the captions
+  let e = null, local = 0;
+  if (script) {
+    if (playing) {
+      let i = timeline.findIndex(x => t >= x.start && t < x.start + x.len);
+      if (i === -1 && t >= timeline[timeline.length - 1].start) i = timeline.length - 1;
+      if (i !== beatIndex && i >= 0 && t < total - 1.5) startBeat(i);
+      $('bar').style.width = Math.min(100, t / total * 100) + '%';
+      if (t >= total) finish();
+    }
+    e = timeline[beatIndex]; local = e ? t - e.start : 0;
+    cast.forEach(c => animateChar(c, now, playing || pausedAt ? e : null, local, dt));
+    if (playing && e && !e.wide) { const c = cast.find(x => x.name === e.b.who); camLookGoal.x += (c.group.position.x - camLookGoal.x) * Math.min(1, dt * 3); }
+    if (!playing && !pausedAt) camPos.set(Math.sin(now * 0.3) * 3, 3.2, 12);
+  }
+  camera.position.lerp(camPos, Math.min(1, dt * 2.4)); camLook.lerp(camLookGoal, Math.min(1, dt * 3.6)); camera.lookAt(camLook);
+  renderer.render(scene, camera);
+  if (recorder && recorder.state === 'recording') drawRecording();
+}
+
+// ---------- AI ----------
+async function make() {
+  const idea = $('story').value.trim();
+  if (!idea) { status('Write a story idea first, or press "Play the sample".', true); $('story').focus(); return; }
+  $('makeBtn').disabled = true; status('Writing your cartoon script…');
+  try {
+    const sys = 'You write scripts for short 3D cartoons that play in a browser. Reply with ONE JSON object only, no markdown.';
+    const user = 'Story idea: ' + idea.slice(0, 2000) + '\nTone: ' + $('tone').value + '.\n' +
+      'Write about ' + $('length').value + ' beats. Use 2 to 5 characters.\n' +
+      'Each character has a short name, a "species" from exactly this list: ' + SPECIES.join(', ') + ' (forest = a small furry hooded forest creature, gremlin = a mischievous big-eared imp), and a bright "color" as #rrggbb. Pick species that fit the story and make them look different from each other.\n' +
+      'Each beat: {"who": a character name, "action": one of ' + ACTIONS.join(', ') + ', "line": what they say (max 20 words, can be empty for pure action), optional "to": the name of who they talk to or walk to, optional "setting": one of ' + SETTINGS.join(', ') + ' when the place changes}. The first beat must have a setting. Use "enter" the first time a character arrives in the middle of the story.\n' +
+      'Give it a clear beginning, a problem, and a happy ending. Keep it kind and suitable for all ages.\n' +
+      'Format: {"title":"...","characters":[{"name":"...","species":"...","color":"#..."}],"beats":[{"setting":"park","who":"...","action":"talk","line":"..."}]}';
+    let data = null;
+    for (let attempt = 0; attempt < 2 && !data; attempt++) { // the free AI is sometimes busy for a moment, so try twice
+      try { data = MigaAI.json(await MigaAI.ask(sys, user, { maxTokens: 6000 })); }
+      catch (err) { if (attempt) throw err; status('The AI is busy, trying again…'); await new Promise(r => setTimeout(r, 2500)); }
+    }
+    if (!data) throw new Error('The AI did not return a script. Try again.');
+    load(data);
+    status('Your cartoon is ready. Press play!');
+    $('titleSub').textContent = 'Your cartoon. Press play.'; $('startBtn').textContent = '▶ PLAY 3D CARTOON'; $('titleCard').classList.remove('hidden');
+    try { localStorage.setItem('miga3dLast', JSON.stringify(script)); } catch (err) { /* private mode */ }
+  } catch (err) { status('Could not make the cartoon: ' + err.message, true); }
+  finally { $('makeBtn').disabled = false; }
+}
+
+function download() {
+  if (!rec.captureStream || !window.MediaRecorder) { status('This browser cannot save videos. Try Chrome, Edge or Firefox.', true); return; }
+  const types = ['video/mp4;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm'];
+  const type = types.find(t => MediaRecorder.isTypeSupported(t)) || '';
+  recChunks = []; recorder = new MediaRecorder(rec.captureStream(30), type ? { mimeType: type, videoBitsPerSecond: 5e6 } : undefined);
+  recorder.ondataavailable = ev => ev.data.size && recChunks.push(ev.data);
+  recorder.onstop = () => {
+    const blob = new Blob(recChunks, { type: recorder.mimeType || 'video/webm' }), a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = (script.title || '3d-cartoon').replace(/[^\w-]+/g, '-').toLowerCase() + (/mp4/.test(blob.type) ? '.mp4' : '.webm'); a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 5000); $('recBtn').disabled = false; status('Video saved to your downloads.');
+    recorder = null;
+  };
+  reset(); recorder.start(); play(); $('recBtn').disabled = true;
+  status('Recording… the video downloads when the cartoon ends.');
+}
+
+$('startBtn').onclick = play;
+$('playBtn').onclick = () => (playing ? pause() : play());
+$('restartBtn').onclick = () => { if (recorder && recorder.state === 'recording') { recorder.onstop = null; recorder.stop(); recorder = null; $('recBtn').disabled = false; } reset(); play(); };
+$('recBtn').onclick = download;
+$('makeBtn').onclick = make;
+$('sampleBtn').onclick = () => { load(SAMPLE); play(); status(''); };
+
+let start = SAMPLE;
+try { const last = JSON.parse(localStorage.getItem('miga3dLast')); if (last && last.beats) start = last; } catch (e) { /* none saved */ }
+try { load(start); } catch (e) { load(SAMPLE); }
+if (start !== SAMPLE) $('titleSub').textContent = 'Your last cartoon. Press play, or write a new story.';
+frame();
+})();
 </script>
 <script src="tutorials.js" defer></script>
 </body>

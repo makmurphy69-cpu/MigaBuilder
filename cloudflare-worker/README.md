@@ -39,6 +39,11 @@ tier is hitting that limit under real traffic, you can pool several keys
   triples your effective throughput.
 - This is fully backward-compatible: a single key with no commas behaves
   exactly as before, no other changes needed.
+- If you delete one of the keys in Google AI Studio but leave it in the
+  list, the Worker notices Google's "API key not valid" answer, skips that
+  key and uses the next one, so visitors don't see errors. It logs
+  `Gemini key ...abcd is invalid` (the key's last 4 characters) in the
+  Worker's **Logs** tab; remove that key from the list when you can.
 
 # Screen share signaling relay — deploy steps
 

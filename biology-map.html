@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biology Map — tree of life, DNA, gene expression, mutations, evolution and human diversity | MigaBuilder</title>
+<meta name="description" content="An interactive biology map: explore the tree of life and see how closely humans are related to 40+ living things and how much DNA we share, learn what DNA is and how it is built, follow a gene being turned into a protein, make mutations in a real gene, run an evolution simulator and discover how human populations spread and adapted. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/biology-map.html">
+<meta property="og:title" content="Biology Map — the tree of life, DNA and evolution | MigaBuilder">
+<meta property="og:description" content="How are humans related to chimps, mice, bananas and bacteria? Explore the tree of life, DNA, gene expression, mutations, evolution and human diversity.">
+<meta property="og:url" content="https://migabuilder.com/biology-map.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script src="ai-client.js"></script>
+<script src="biology-data.js"></script>
+<style>
+main{max-width:1320px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.toolbar input{flex:1 1 240px;padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px 'IBM Plex Sans',sans-serif}
+.chip.active{background:var(--cyan);color:#081826;border-color:var(--cyan)}
+.panel .chip{background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)}.panel .chip.active{background:#0E2A47;color:#fff}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tabs button{flex:1 1 auto;border:1px solid var(--line);background:rgba(8,24,38,.7);color:var(--paper);padding:11px 12px;border-radius:4px;cursor:pointer;font:700 14px 'Space Grotesk'}
+.tabs button.active{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.explorer{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:16px;align-items:start}
+.explorer>div:first-child{position:sticky;top:10px}
+.viewbox{background:#0a2238;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
+.vtools{display:flex;gap:6px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--line);align-items:center}
+#tree{display:block;width:100%;min-width:620px;height:auto}
+.leaf{cursor:pointer}.leaf text{fill:#EDEAE0;font:600 11.5px 'IBM Plex Sans';paint-order:stroke;stroke:#0a2238;stroke-width:3px}
+.leaf:hover text,.leaf:focus-visible text{fill:#fff;text-decoration:underline}.leaf:focus{outline:none}
+.leaf.sel text{fill:#E2A63B}.leaf.hum text{fill:#6FD1E0}
+.edge{fill:none;stroke:rgba(111,209,224,.35);stroke-width:1.4}.edge.on{stroke:#E2A63B;stroke-width:3}.edge.onh{stroke:#6FD1E0;stroke-width:3}
+.node{cursor:pointer}.node circle{fill:#0a2238;stroke:rgba(111,209,224,.7);stroke-width:1.5}.node:hover circle,.node.sel circle{fill:#E2A63B;stroke:#fff}
+.node.lca circle{fill:#E2A63B;stroke:#fff;stroke-width:2}
+.axis text{fill:rgba(237,234,224,.7);font:600 10px 'IBM Plex Sans'}.axis line{stroke:rgba(111,209,224,.18)}
+.nowline{stroke:#ff9f6b;stroke-width:2;stroke-dasharray:4 3}
+.timebox{padding:8px 12px;border-top:1px solid var(--line);color:var(--paper);font-size:13px}.timebox input{width:100%;accent-color:#E2A63B}
+.timebox .ev{min-height:38px;line-height:1.4}
+.legend{display:flex;gap:6px 12px;flex-wrap:wrap;padding:8px 12px;font-size:12px;color:rgba(237,234,224,.85);align-items:center}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.grad{height:10px;border-radius:5px;width:140px;display:inline-block}
+.info h2{font:700 25px 'Space Grotesk';margin:0}.latin{font-style:italic;color:rgba(22,32,43,.6);font-size:13px}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.sect p,.sect li{font-size:14px;line-height:1.5}.sect ul,.sect ol{margin:0;padding-left:20px}
+.simbar{height:22px;border-radius:4px;background:rgba(22,32,43,.1);overflow:hidden;margin:6px 0 3px}.simbar span{display:block;height:100%;background:linear-gradient(90deg,#4E9E73,#6FD1E0)}
+.stat{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.stat div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12px}.stat b{display:block;font:700 15px 'Space Grotesk'}
+.big{font:700 30px 'Space Grotesk';color:#0E2A47}
+.dyk{background:rgba(226,166,59,.12);border-left:3px solid #E2A63B;padding:8px 12px;font-size:14px;line-height:1.5}
+.go{display:inline-block;padding:3px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.25);color:#0E2A47;font-size:12.5px;font-weight:600;cursor:pointer;margin:2px 3px 2px 0;font-family:inherit}
+.inn li{margin-bottom:5px}.inn b{color:#0E2A47}
+.empty{color:rgba(22,32,43,.6);text-align:center;padding:30px 10px}
+.rank{display:grid;grid-template-columns:130px 1fr 52px;gap:6px 8px;align-items:center;font-size:13px}.rank .bar{height:14px;border-radius:3px;background:linear-gradient(90deg,#4E9E73,#6FD1E0)}
+.rank button{background:none;border:0;text-align:left;font:600 13px 'IBM Plex Sans';cursor:pointer;color:var(--ink);padding:0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.card{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:5px;padding:10px 12px;font-size:13.5px;line-height:1.5;color:var(--ink)}
+.card b{display:block;font:700 15px 'Space Grotesk';margin-bottom:3px}
+button.card{text-align:left;cursor:pointer;font-family:inherit}button.card.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
+#helix{display:block;width:100%;height:auto;background:#0a2238;border-radius:6px}
+.levels{display:flex;flex-direction:column;gap:5px}
+.lvl{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:5px;padding:7px 10px;cursor:pointer;text-align:left;font-family:inherit;color:var(--ink)}
+.lvl .e{font-size:22px;width:30px;text-align:center}.lvl b{font:700 14px 'Space Grotesk'}.lvl small{color:rgba(22,32,43,.6);display:block}
+.lvl.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
+.lvltext{background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;padding:10px 12px;margin-top:8px;font-size:14px;line-height:1.55}
+.seq{font:500 15px 'IBM Plex Mono',monospace;letter-spacing:.5px;word-break:break-all;line-height:1.9}
+.b{display:inline-block;width:20px;text-align:center;border-radius:3px;color:#fff;margin:1px 0;font-weight:700}
+.bA{background:#d8604a}.bT{background:#e2a63b;color:#3b2a0b}.bG{background:#4e9e73}.bC{background:#3d7fb8}.bU{background:#8a6cc0}
+.codons{display:flex;flex-wrap:wrap;gap:4px}.cod{border:1px solid rgba(22,32,43,.2);border-radius:4px;background:#fff;padding:3px 4px;text-align:center;min-width:52px}
+.cod .t{font:500 12px 'IBM Plex Mono',monospace}.cod .a{font:700 12px 'Space Grotesk';color:#0E2A47}.cod.start{border-color:#4E9E73;background:#e9f5ee}.cod.stop{border-color:#D8604A;background:#f8dcd6}.cod.chg{border-color:#E2A63B;background:#fff4dc;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
+.seqin{width:100%;padding:9px;border:1px solid rgba(22,32,43,.28);border-radius:3px;font:500 14px 'IBM Plex Mono',monospace}
+.steps{list-style:none;padding:0;margin:8px 0;display:flex;flex-wrap:wrap;gap:5px}
+.steps li{padding:5px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.2);font-size:12px;cursor:pointer}
+.steps li.on{background:#0E2A47;color:#fff}.steps li.done{background:rgba(78,158,115,.16)}
+.stepcard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:6px;padding:12px 14px;margin:8px 0}
+.stepcard .t{font-size:12px;font-weight:700;color:#8a5a0f;text-transform:uppercase;letter-spacing:.04em}
+.stepcard h3{font:700 19px 'Space Grotesk';margin:3px 0 6px}.stepcard p{margin:0;line-height:1.55;font-size:14.5px}
+#dogma{width:100%;height:auto;display:block;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px}
+.gene{font:500 15px 'IBM Plex Mono',monospace;line-height:2.1;word-break:break-all}
+.gene span{display:inline-block;width:14px;text-align:center;cursor:pointer;border-radius:2px}.gene span:hover{background:rgba(226,166,59,.35)}
+.gene span.pos{background:#0E2A47;color:#fff}.gene span.mut{background:#E2A63B;color:#3b2a0b;font-weight:700}.gene i{display:inline-block;width:6px}
+.verdict{padding:10px 12px;border-radius:5px;margin-top:10px;font-size:14px;line-height:1.5}
+.v-good{background:#e9f5ee;border-left:4px solid #4E9E73}.v-mid{background:#fff4dc;border-left:4px solid #E2A63B}.v-bad{background:#f8dcd6;border-left:4px solid #D8604A}
+.prot{font:600 13px 'IBM Plex Mono',monospace;word-break:break-all;line-height:1.8}.prot span{padding:1px 2px;border-radius:2px}.prot .d{background:#E2A63B;color:#3b2a0b}.prot .x{background:#D8604A;color:#fff}
+#sim{display:block;width:100%;height:auto;border-radius:6px;background:#8a8f86}
+#chart{display:block;width:100%;height:auto;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px}
+.slid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.slid label{font-size:12.5px;font-weight:600}.slid input{width:100%;accent-color:#0E2A47}
+.tl{display:flex;flex-direction:column;gap:4px;max-height:520px;overflow:auto}
+.tl div{display:grid;grid-template-columns:92px 28px 1fr;gap:6px;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:4px;padding:6px 8px;font-size:13px;line-height:1.4}
+.tl .y{font:700 12.5px 'Space Grotesk';color:#0E2A47}
+#world{display:block;width:100%;height:auto;background:#0a2238}
+.land{fill:#2f5673;stroke:#0a2238;stroke-width:.4}.grat{fill:none;stroke:rgba(111,209,224,.12)}
+.route{fill:none;stroke:#E2A63B;stroke-width:2.2;stroke-linecap:round}
+.pin{cursor:pointer}.pin circle{fill:#fff;stroke:#0E2A47;stroke-width:1.5}.pin text{font-size:13px}.pin:hover circle,.pin.on circle{fill:#E2A63B}
+.mapcap{position:absolute;left:10px;bottom:10px;right:10px;background:rgba(8,24,38,.9);color:#fff;border:1px solid var(--line);border-radius:5px;padding:8px 10px;font-size:13px;line-height:1.45;pointer-events:none}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 12px}.checks label{display:flex;gap:6px;align-items:center;font-size:14px}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px;margin:6px 0}
+.timer{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden}.timer i{display:block;height:100%;background:#4E9E73;transition:width .25s linear}
+.quiz-q{font:600 19px 'Space Grotesk';margin:12px 0;line-height:1.35}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:#0E2A47}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;font-size:14px;line-height:1.5}
+.pop{font:700 16px 'Space Grotesk';color:#2f6b49}
+.review li{margin-bottom:8px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.hidden{display:none!important}
+@media(max-width:980px){.explorer,.two{grid-template-columns:minmax(0,1fr)}.explorer>div:first-child{position:static}.qgrid,.opts{grid-template-columns:1fr}}
+@media(max-width:560px){.stat{grid-template-columns:1fr 1fr}.slid{grid-template-columns:1fr}.rank{grid-template-columns:100px 1fr 44px}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Biology Map</span></nav>
+<header class="masthead"><div><h1>Biology Map</h1><p>How are we related to chimps, mice, bananas and bacteria — and how much DNA do we share? Explore the tree of life, learn what DNA is and how genes become proteins, make mutations in a real gene, run evolution yourself and see how humans spread across the world.</p></div></header>
+<main>
+<div class="toolbar">
+  <input id="search" list="orgList" placeholder="Search a living thing, e.g. chimpanzee, dog, banana, yeast…" aria-label="Search living things"><datalist id="orgList"></datalist>
+</div>
+<div class="tabs" role="tablist">
+  <button class="active" data-tab="tree" role="tab">🌳 Tree of life</button>
+  <button data-tab="dna" role="tab">🧬 What DNA is</button>
+  <button data-tab="expr" role="tab">⚙️ Gene expression</button>
+  <button data-tab="mut" role="tab">🔀 Mutations</button>
+  <button data-tab="evo" role="tab">🦋 Evolution</button>
+  <button data-tab="div" role="tab">🌍 Human diversity</button>
+</div>
+
+<section id="p-tree" class="explorer">
+  <div>
+    <div class="viewbox">
+      <div class="vtools"><button class="chip active" data-tv="tree">🌳 Family tree</button><button class="chip" data-tv="rank">📊 DNA similarity ranking</button><span style="font-size:12px;color:rgba(237,234,224,.75);margin-left:auto">Tap a living thing or a branch point</span></div>
+      <div id="treeWrap"><div style="overflow-x:auto"><svg id="tree" role="img" aria-label="Tree of life showing how humans are related to other living things. Tap a name to read about it."></svg></div>
+        <div class="timebox"><b>⏳ Travel back in time:</b> <span id="timeLbl"></span><input type="range" id="time" min="0" max="1000" value="0" aria-label="Time before present"><div class="ev" id="timeEv"></div></div>
+        <div class="legend">Colour = how long ago it shared an ancestor with us: <span class="grad" id="gradKey"></span> <span>recent → ancient</span><span><i style="background:#E2A63B"></i>its line</span><span><i style="background:#6FD1E0"></i>human line</span></div>
+      </div>
+      <div id="rankWrap" class="hidden" style="background:#fff;padding:12px"></div>
+    </div>
+  </div>
+  <div>
+    <article class="panel info" id="info" aria-live="polite"><div class="empty">🌳<br><strong>Pick a living thing on the tree</strong><br>to see how long ago we shared an ancestor, how much DNA we share and what we both inherited.</div></article>
+  </div>
+</section>
+
+<section id="p-dna" class="hidden">
+  <div class="two">
+    <article class="panel">
+      <h2>What is DNA?</h2>
+      <p>DNA (deoxyribonucleic acid) is the instruction book of life. It is written with just four chemical letters — <b>A</b>, <b>T</b>, <b>G</b> and <b>C</b> — and the order of those letters tells cells which proteins to build, when and where. Every living thing uses the same code.</p>
+      <svg id="helix" viewBox="0 0 560 200" role="img" aria-label="Rotating DNA double helix with coloured base pairs"></svg>
+      <div class="actions" style="margin-top:8px"><button class="secondary" id="helixPause">⏸ Pause</button><span class="muted" style="align-self:center"><b style="color:#d8604a">A</b>–<b style="color:#c8901e">T</b> and <b style="color:#4e9e73">G</b>–<b style="color:#3d7fb8">C</b> always pair up</span></div>
+      <div class="sect"><h3>🔢 DNA in numbers</h3><div class="cards" id="dnaNums"></div></div>
+    </article>
+    <article class="panel">
+      <h2>How DNA is built up — zoom in</h2>
+      <p>Tap each level, from your whole body down to a single letter.</p>
+      <div class="levels" id="levels"></div>
+      <div class="lvltext" id="lvlText"></div>
+    </article>
+  </div>
+  <article class="panel">
+    <h2>Build a DNA strand</h2>
+    <p>Type letters (A, T, G, C). The matching strand appears automatically — this is how cells copy DNA: each strand is a template for the other.</p>
+    <input class="seqin" id="strandIn" value="ATGGTGCATCTGACTCCTGAG" maxlength="120" aria-label="DNA letters" spellcheck="false">
+    <div class="actions" style="margin:8px 0"><button class="chip" id="rndStrand">🎲 Random</button><button class="chip" id="toExpr">⚙️ Translate it into a protein →</button></div>
+    <div class="seq" id="strandOut"></div>
+    <p class="muted" id="strandStats"></p>
+  </article>
+</section>
+
+<section id="p-expr" class="hidden">
+  <div class="two">
+    <article class="panel">
+      <h2>From gene to protein</h2>
+      <p>Genes do nothing until they are <b>expressed</b>: copied into RNA and translated into protein. Step through how it happens.</p>
+      <svg id="dogma" viewBox="0 0 520 190" role="img" aria-label="Diagram: DNA in the nucleus is transcribed to messenger RNA, which leaves the nucleus and is translated by a ribosome into a protein"></svg>
+      <ol class="steps" id="eSteps"></ol>
+      <div class="stepcard" id="eCard"></div>
+      <div class="actions"><button class="secondary" id="ePrev">◀ Back</button><button class="primary" id="ePlay">▶ Play</button><button class="secondary" id="eNext">Next ▶</button></div>
+    </article>
+    <article class="panel">
+      <h2>Codon translator</h2>
+      <p>Paste or type a DNA sequence. It is transcribed into mRNA and read three letters at a time using the real genetic code.</p>
+      <input class="seqin" id="codeIn" value="ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCTAA" aria-label="DNA sequence to translate" spellcheck="false">
+      <label style="display:flex;gap:6px;align-items:center;font-size:13px;margin:8px 0"><input type="checkbox" id="fromAtg" checked> Start reading at the first ATG (start codon)</label>
+      <div class="actions" style="margin-bottom:8px"><button class="chip" data-code="ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCTAA">Haemoglobin (start)</button><button class="chip" data-code="ATGGCCCTGTGGATGCGCCTCCTGCCCCTGCTGGCGCTGCTGGCCCTCTGGGGACCTGACCCAGCCGCAGCCTAG">Insulin (start)</button><button class="chip" data-code="ATGAGTAAAGGAGAAGAACTTTTCACTGGAGTTGTCCCAATTCTTGTTTAA">Jellyfish GFP (start)</button></div>
+      <div id="codeOut"></div>
+      <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">📖 The full genetic code (64 codons)</summary><div id="codeTable" style="margin-top:8px"></div></details>
+    </article>
+  </div>
+  <article class="panel">
+    <h2>Same DNA, different cells</h2>
+    <p>Your cells all carry the same DNA. What makes a nerve cell different from a skin cell is which genes are switched on.</p>
+    <div class="cards" id="cellTypes"></div>
+  </article>
+</section>
+
+<section id="p-mut" class="hidden">
+  <article class="panel">
+    <h2>🧪 Mutation lab — change a real gene</h2>
+    <p>This is the start of the human <b>HBB</b> gene, which makes the β-chain of haemoglobin. Tap a letter, then change, insert or delete it — and see what happens to the protein. Or try a real mutation.</p>
+    <div class="actions" style="margin-bottom:8px" id="mPresets"></div>
+    <div class="gene" id="gene" aria-label="Gene letters — tap one to select it"></div>
+    <div class="actions" style="margin:8px 0" id="mTools"><span class="muted" id="mPos" style="align-self:center">Tap a letter first.</span><button class="chip" data-sub="A">→ A</button><button class="chip" data-sub="T">→ T</button><button class="chip" data-sub="G">→ G</button><button class="chip" data-sub="C">→ C</button><button class="chip" id="mIns">＋ Insert a letter after</button><button class="chip" id="mDel">✕ Delete it</button><button class="chip" id="mReset">↺ Reset gene</button></div>
+    <div id="mOut"></div>
+  </article>
+  <div class="two">
+    <article class="panel"><h2>Kinds of mutation</h2><p>A mutation is any change in the DNA sequence. Tap one to try it in the lab.</p><div class="cards" id="mTypes"></div></article>
+    <article class="panel"><h2>Where mutations come from</h2><div class="cards" id="mCauses"></div></article>
+  </div>
+</section>
+
+<section id="p-evo" class="hidden">
+  <div class="two">
+    <article class="panel">
+      <h2>🦋 Evolution simulator — the peppered moth</h2>
+      <p>In 1800s England, soot blackened the trees and dark moths became common because birds could not see them. Run it yourself: choose the bark colour, how hungry the birds are and how often mutations happen, then watch natural selection work.</p>
+      <svg id="sim" viewBox="0 0 480 220" role="img" aria-label="Tree bark with light and dark moths"></svg>
+      <div class="slid" style="margin-top:8px">
+        <div><label for="bark">Tree bark: <span id="barkL"></span></label><input type="range" id="bark" min="0" max="100" value="85"></div>
+        <div><label for="pred">Bird hunting pressure: <span id="predL"></span></label><input type="range" id="pred" min="0" max="60" value="30"></div>
+        <div><label for="mu">Mutation rate: <span id="muL"></span></label><input type="range" id="mu" min="0" max="50" value="5"></div>
+        <div><label for="popN">Population size: <span id="popL"></span></label><input type="range" id="popN" min="20" max="400" step="10" value="200"></div>
+      </div>
+      <div class="actions" style="margin-top:8px"><button class="primary" id="simRun">▶ Run 50 generations</button><button class="secondary" id="simStep">+1 generation</button><button class="secondary" id="simReset">↺ Reset</button></div>
+      <svg id="chart" viewBox="0 0 480 160" role="img" aria-label="Share of dark moths over generations" style="margin-top:10px"></svg>
+      <p class="muted" id="simTxt"></p>
+    </article>
+    <article class="panel">
+      <h2>How evolution works</h2>
+      <div class="cards" id="evoHow"></div>
+      <h3 style="font:700 16px 'Space Grotesk';margin:16px 0 6px">📜 The history of life</h3>
+      <div class="tl" id="timeline"></div>
+    </article>
+  </div>
+</section>
+
+<section id="p-div" class="hidden">
+  <article class="panel" style="padding:0;overflow:hidden">
+    <div style="padding:16px 18px 6px"><h2>How humans spread across the world — and adapted</h2><p style="margin:4px 0">Tap <b>Play the journey</b> to follow our ancestors out of Africa, or tap a pin to see how a population adapted to where it lived.</p>
+      <div class="actions" style="margin:8px 0"><button class="primary" id="playMig">▶ Play the journey</button><button class="secondary" id="showAll">Show all routes</button></div></div>
+    <div style="position:relative"><svg id="world" viewBox="0 0 960 420" role="img" aria-label="World map with human migration routes and pins for local adaptations"></svg><div class="mapcap" id="mapCap">Tap a pin 📍 or play the journey.</div></div>
+  </article>
+  <article class="panel">
+    <h2>What DNA says about human differences</h2>
+    <div class="cards" id="divFacts"></div>
+    <div class="dyk" style="margin-top:12px">Adaptations shown on the map are real, well-studied examples. They affect a few specific traits — they do not make any group “more evolved”. Every living population has been evolving for exactly the same amount of time.</div>
+  </article>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🏆 Biology quiz</h2>
+  <p>Test yourself on the tree of life, DNA, gene expression, mutations, evolution and human diversity. <b>Challenge mode</b> gives 20 seconds per question with bonus points for speed and streaks.</p>
+  <div class="qgrid">
+    <div class="field"><label for="qSource">Questions about</label><select id="qSource"><option value="all">Everything</option><option value="tree">Tree of life &amp; relatives</option><option value="dna">What DNA is</option><option value="expression">Gene expression</option><option value="mutation">Mutations</option><option value="evolution">Evolution</option><option value="diversity">Human diversity</option></select></div>
+    <div class="field"><label for="qCount">Number of questions</label><select id="qCount"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+    <div class="field"><label for="qMode">Mode</label><select id="qMode"><option value="challenge">Challenge — timed, points &amp; streaks</option><option value="practice">Practice — no timer</option></select></div>
+  </div>
+  <div class="actions"><button class="primary" id="makeQuiz" data-primary>Generate quiz</button><button class="secondary" id="printQuiz">⬇ Printable quiz + answers</button></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">🤖 AI quiz on any biology topic</summary>
+    <p class="muted">Type any topic (e.g. “cells for 10-year-olds”, “CRISPR”, “photosynthesis”). The AI writes the questions; check anything surprising against a textbook.</p>
+    <div class="grid"><div class="field"><label for="aiTopic">Topic</label><input id="aiTopic" placeholder="e.g. How vaccines teach the immune system"></div><div class="field"><label for="aiLevel">Level</label><select id="aiLevel"><option>beginner</option><option selected>intermediate</option><option>advanced</option></select></div></div>
+    <div id="aiBox"></div><button class="secondary" id="aiQuiz">Generate AI quiz</button><p class="status" id="aiStatus"></p>
+  </details>
+  <p class="muted" id="bestLine" style="margin-top:10px"></p>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="hud"><span id="qProg"></span><span id="qStreak"></span><span id="qScore"></span></div>
+    <div class="timer" id="timerBar"><i id="timerFill"></i></div>
+    <div class="quiz-q" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:10px"><button class="primary hidden" id="qNext">Next question →</button><button class="secondary" id="qQuit">End quiz</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px">
+    <h3 id="doneTitle" style="font:700 22px 'Space Grotesk';margin:0 0 6px"></h3><p id="doneSub"></p>
+    <ol class="review" id="review"></ol>
+    <div class="actions"><button class="primary" id="newQuiz">New quiz</button><button class="secondary" id="retryWrong">Retry the ones I missed</button></div>
+  </div>
+</section>
+</main>
+<footer>Biology Map · MigaBuilder · Split times and DNA figures are approximate estimates from published research and differ depending on how they are measured.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const NS='http://www.w3.org/2000/svg';
+MigaAI.mount($('aiBox'));
+const ORG=window.ORGANISMS,TREE=window.LIFE_TREE;
+const mya=a=>a>=1000?(a/1000).toLocaleString(undefined,{maximumFractionDigits:1})+' billion years ago':a>=1?a.toLocaleString(undefined,{maximumFractionDigits:1})+' million years ago':Math.round(a*1000).toLocaleString()+',000 years ago';
+const myaShort=a=>a>=1000?(a/1000)+' bn':a>=1?a+' m':Math.round(a*1000)+' k';
+
+// ---------- tabs ----------
+let tab='tree';
+function setTab(t){tab=t;document.querySelectorAll('[data-tab]').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));
+  ['tree','dna','expr','mut','evo','div'].forEach(k=>$('p-'+k).classList.toggle('hidden',k!==t));
+  if(t==='div')initMap();if(t==='evo')drawSim();
+  try{history.replaceState(null,'','#'+t)}catch(e){}}
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
+
+// ---------- tree of life ----------
+const NODES={},LEAVES=[],parent={};
+(function walk(n,p){NODES[n.id]=n;if(p)parent[n.id]=p.id;if(n.kids)n.kids.forEach(k=>walk(k,n));else{n.age=0;n.leaf=true;LEAVES.push(n.id)}})(TREE,null);
+const path=id=>{const out=[];while(id){out.push(id);id=parent[id]}return out};
+function lca(a,b){const pa=new Set(path(a));return path(b).find(x=>pa.has(x))}
+const W=720,ROW=17,TOP=14,H=TOP+LEAVES.length*ROW+40,X0=16,X1=520;
+const LMAX=Math.log10(4001);
+const xOf=a=>X0+(1-Math.log10(a+1)/LMAX)*(X1-X0);
+const ageWithHuman=id=>NODES[lca(id,'human')].age;
+function heat(f){f=Math.max(0,Math.min(1,f));const s=[[111,209,224],[78,158,115],[226,166,59],[216,96,74]],i=Math.min(2,Math.floor(f*3)),g=f*3-i;return 'rgb('+[0,1,2].map(k=>Math.round(s[i][k]+(s[i+1][k]-s[i][k])*g)).join(',')+')'}
+const colOf=id=>id==='human'?'#6FD1E0':heat(Math.log10(ageWithHuman(id)+1)/LMAX);
+$('gradKey').style.background='linear-gradient(90deg,'+[0,.33,.66,1].map(heat).join(',')+')';
+(function layout(n){if(n.leaf){n.y=TOP+LEAVES.indexOf(n.id)*ROW+8}else{n.kids.forEach(layout);n.y=(n.kids[0].y+n.kids[n.kids.length-1].y)/2}n.x=xOf(n.age)})(TREE);
+const svg=$('tree');svg.setAttribute('viewBox','0 0 '+W+' '+H);
+let sHtml='<g class="axis">';[4000,1000,500,100,50,10,1].forEach(a=>{const x=xOf(a);sHtml+='<line x1="'+x+'" y1="'+TOP+'" x2="'+x+'" y2="'+(H-30)+'"/><text x="'+x+'" y="'+(H-16)+'" text-anchor="middle">'+myaShort(a)+'</text>'});
+sHtml+='<text x="'+X1+'" y="'+(H-16)+'" text-anchor="middle">now</text><text x="'+X0+'" y="'+(H-3)+'">← longer ago (log scale) · today →</text></g><g id="edges">';
+Object.values(NODES).forEach(n=>{if(!n.kids)return;n.kids.forEach(k=>{sHtml+='<path class="edge" data-e="'+k.id+'" d="M'+n.x.toFixed(1)+','+n.y+' V'+k.y+' H'+k.x.toFixed(1)+'"/>'})});
+sHtml+='</g><line id="nowLine" class="nowline" y1="'+TOP+'" y2="'+(H-30)+'" style="display:none"/><g id="nodes">';
+Object.values(NODES).filter(n=>n.kids).forEach(n=>{sHtml+='<g class="node" data-n="'+n.id+'" tabindex="0" role="button" aria-label="'+esc(n.name)+', '+esc(mya(n.age))+'"><title>'+esc(n.name)+' · '+esc(mya(n.age))+'</title><circle cx="'+n.x.toFixed(1)+'" cy="'+n.y+'" r="4.5"/></g>'});
+sHtml+='</g><g id="leaves">';
+LEAVES.forEach(id=>{const n=NODES[id],o=ORG[id];sHtml+='<g class="leaf'+(id==='human'?' hum':'')+'" data-l="'+id+'" tabindex="0" role="button" aria-label="'+esc(o[1])+'"><circle cx="'+X1+'" cy="'+n.y+'" r="5" fill="'+colOf(id)+'" stroke="#0a2238"/><text x="'+(X1+10)+'" y="'+(n.y+4)+'">'+o[0]+' '+esc(o[1])+'</text></g>'});
+sHtml+='</g>';svg.innerHTML=sHtml;
+svg.querySelectorAll('.leaf').forEach(g=>{const f=()=>selectOrg(g.dataset.l);g.onclick=f;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}});
+svg.querySelectorAll('.node').forEach(g=>{const f=()=>selectNode(g.dataset.n);g.onclick=f;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}});
+function paintTree(onA,onH,lcaId,selNode){
+  svg.querySelectorAll('.edge').forEach(e=>{const id=e.dataset.e;e.classList.toggle('on',!!(onA&&onA.has(id)));e.classList.toggle('onh',!!(onH&&onH.has(id)&&!(onA&&onA.has(id))))});
+  svg.querySelectorAll('.node').forEach(g=>{g.classList.toggle('lca',g.dataset.n===lcaId);g.classList.toggle('sel',g.dataset.n===selNode)});
+  svg.querySelectorAll('.leaf').forEach(g=>g.classList.toggle('sel',!!(onA&&onA.has(g.dataset.l))))}
+let seen=new Set(store.get('bioSeen',[]).filter(id=>ORG[id])),curOrg=null;
+$('orgList').innerHTML=LEAVES.map(id=>'<option value="'+esc(ORG[id][1])+'">').join('');
+const go=(id,label)=>'<button class="go" data-org="'+id+'">'+ORG[id][0]+' '+esc(label||ORG[id][1])+'</button>';
+function simHtml(o){const s=o[3];return s[0]!=null?'<div class="big">'+s[0]+'%</div><div class="simbar"><span style="width:'+s[0]+'%"></span></div><p class="muted" style="margin:0">'+esc(s[1])+'</p>':'<p style="margin:0">'+esc(s[1])+'.</p>'}
+function selectOrg(id,cmp){const o=ORG[id];if(!o)return;curOrg=id;seen.add(id);store.set('bioSeen',[...seen]);
+  const other=cmp||'human',L=lca(id,other),ln=NODES[L];
+  const pA=path(id),pH=path(other),stop=pA.indexOf(L);
+  const onA=new Set(pA.slice(0,stop)),onH=new Set(pH.slice(0,pH.indexOf(L)));
+  paintTree(onA,onH,L);
+  const shared=path(L).reverse().map(x=>NODES[x]).filter(n=>n.evolved);
+  const ours=pH.slice(0,pH.indexOf(L)).reverse().map(x=>NODES[x]).filter(n=>n.kids&&n.evolved);
+  const theirs=pA.slice(0,stop).reverse().map(x=>NODES[x]).filter(n=>n.kids&&n.evolved);
+  const cmpOpts=LEAVES.filter(x=>x!==id).map(x=>'<option value="'+x+'"'+(x===other?' selected':'')+'>'+esc(ORG[x][1])+'</option>').join('');
+  $('info').innerHTML='<div style="font-size:40px;line-height:1">'+o[0]+'</div><h2>'+esc(o[1])+'</h2><div class="latin">'+esc(o[2])+'</div>'+
+   (id==='human'?'':'<div class="sect"><h3>🧬 How much DNA do we share?</h3>'+(other==='human'?simHtml(o):'<p style="margin:0">Comparing with <b>'+esc(ORG[other][1])+'</b>.</p>')+'</div>')+
+   '<div class="sect"><h3>🌳 Common ancestor'+(other==='human'?' with humans':' with the '+esc(ORG[other][1].toLowerCase()))+'</h3>'+(id===other?'<p>That is itself!</p>':'<div class="big" style="font-size:24px">'+esc(mya(ln.age))+'</div><p style="margin:4px 0">Our lines meet at <b>'+esc(ln.name)+'</b>. Its line is gold on the tree, '+(other==='human'?'ours':'the other')+' is blue.</p>')+
+   '<label class="muted" style="display:block;margin-top:6px">Compare it with: <select id="cmpSel" style="padding:5px;border-radius:3px;border:1px solid rgba(22,32,43,.3)">'+cmpOpts+'</select></label></div>'+
+   '<div class="stat"><div>Genome<b>'+esc(o[4])+'</b>letters</div><div>Protein genes<b>'+esc(o[5])+'</b></div><div>Chromosomes<b>'+esc(o[6])+'</b></div></div>'+
+   '<div class="sect"><h3>📖 About</h3><p style="margin:0">'+esc(o[7])+'</p></div>'+
+   (id!==other?'<div class="sect"><h3>🤝 What we both inherited</h3><ul class="inn">'+shared.slice(-5).reverse().map(n=>'<li><b>'+esc(n.name)+'</b> ('+esc(myaShort(n.age))+'): '+esc(n.evolved)+'</li>').join('')+'</ul>'+(shared.length>5?'<details><summary style="cursor:pointer;font-weight:600;font-size:13px">…and '+(shared.length-5)+' older inheritances, back to the first cells</summary><ul class="inn">'+shared.slice(0,-5).reverse().map(n=>'<li><b>'+esc(n.name)+'</b> ('+esc(myaShort(n.age))+'): '+esc(n.evolved)+'</li>').join('')+'</ul></details>':'')+'</div>'+
+   (ours.length?'<div class="sect"><h3>🔵 Evolved on the '+(other==='human'?'human':esc(ORG[other][1].toLowerCase()))+' line since then</h3><ul class="inn">'+ours.map(n=>'<li><b>'+esc(n.name)+'</b>: '+esc(n.evolved)+'</li>').join('')+'</ul></div>':'')+
+   (theirs.length?'<div class="sect"><h3>🟡 Evolved on its own line</h3><ul class="inn">'+theirs.map(n=>'<li><b>'+esc(n.name)+'</b>: '+esc(n.evolved)+'</li>').join('')+'</ul></div>':''):'')+
+   '<div class="sect"><h3>💡 Did you know?</h3><div class="dyk">'+esc(o[8])+'</div></div>'+
+   '<div class="actions" style="margin-top:12px"><button class="primary" id="quizTree">🏆 Quiz me on relatives</button><button class="secondary" id="askAi">🤖 Explain it simply</button></div><div id="aiAns" class="explain hidden"></div>';
+  $('cmpSel').onchange=()=>selectOrg(id,$('cmpSel').value);
+  $('quizTree').onclick=()=>{$('qSource').value='tree';start(generate());$('quizPanel').scrollIntoView({behavior:'smooth'})};
+  $('askAi').onclick=async()=>{const b=$('aiAns');b.classList.remove('hidden');b.textContent='Asking the AI…';try{b.textContent=(await MigaAI.ask('You are an accurate, friendly biology teacher. Follow mainstream science. Plain text only, no markdown.','In about 150 words for a curious 12-year-old: how is the '+o[1]+' ('+o[2]+') related to humans, what do we share in our DNA and bodies, and one surprising fact.')).trim()}catch(e){b.textContent=e.message}};
+  if(matchMedia('(max-width:980px)').matches)$('info').scrollIntoView({behavior:'smooth'});
+  try{history.replaceState(null,'','#'+id)}catch(e){}}
+function selectNode(nid){const n=NODES[nid];paintTree(new Set(path(nid)),null,null,nid);
+  const below=[];(function f(x){if(x.leaf)below.push(x.id);else x.kids.forEach(f)})(n);
+  const hasHuman=below.includes('human');
+  $('info').innerHTML='<div style="font-size:34px">🌿</div><h2>'+esc(n.name)+'</h2><div class="latin">Branch point · '+esc(mya(n.age))+'</div>'+
+   '<div class="sect"><h3>🧬 What evolved here</h3><p style="margin:0">'+esc(n.evolved||'The two branches below split at this point.')+'</p></div>'+
+   '<div class="sect"><h3>👪 Descendants on this map ('+below.length+')</h3>'+below.map(x=>go(x)).join('')+'</div>'+
+   '<div class="dyk" style="margin-top:12px">'+(hasHuman?'Humans descend from this ancestor too — so everything listed above is part of our own family history.':'Humans are not in this group: our line had already split off earlier.')+'</div>';}
+$('rankWrap').addEventListener('click',e=>{const b=e.target.closest('[data-org]');if(b)selectOrg(b.dataset.org)});
+$('info').addEventListener('click',e=>{const b=e.target.closest('[data-org]');if(b)selectOrg(b.dataset.org)});
+// time travel
+const TL=window.LIFE_TIMELINE;
+$('time').oninput=()=>{const v=+$('time').value;if(!v){$('nowLine').style.display='none';$('timeLbl').textContent='today';$('timeEv').textContent='Drag the slider to go back in time and see which branches had already split.';return}
+  const a=Math.pow(10,v/1000*Math.log10(4541))-1,x=xOf(Math.min(a,4000));const nl=$('nowLine');nl.style.display='';nl.setAttribute('x1',x);nl.setAttribute('x2',x);
+  $('timeLbl').textContent=mya(Math.max(a,0.001));const ev=TL.reduce((b,t)=>Math.abs(Math.log10(t[0]+1)-Math.log10(a+1))<Math.abs(Math.log10(b[0]+1)-Math.log10(a+1))?t:b);
+  $('timeEv').innerHTML='Nearest event: <b>'+ev[1]+' '+esc(ev[2])+'</b> ('+esc(mya(ev[0]))+') — '+esc(ev[3])};
+$('time').oninput();
+// ranking
+function drawRank(){const rows=LEAVES.filter(id=>id!=='human'&&ORG[id][3][0]!=null).sort((a,b)=>ORG[b][3][0]-ORG[a][3][0]);
+  $('rankWrap').innerHTML='<h3 style="font:700 16px \'Space Grotesk\';margin:0 0 4px;color:#16202B">How much DNA do we share?</h3><p class="muted" style="margin:0 0 10px">⚠️ These numbers measure different things. For close relatives it is the share of DNA letters that are identical; for distant ones it is the share of genes with a matching gene. So “60% like a banana” does <b>not</b> mean 60% of our DNA letters match — it means many of the same genes, for basic cell jobs.</p><div class="rank">'+
+   rows.map(id=>'<button data-org="'+id+'">'+ORG[id][0]+' '+esc(ORG[id][1])+'</button><div title="'+esc(ORG[id][3][1])+'"><div class="bar" style="width:'+ORG[id][3][0]+'%;background:'+(ORG[id][3][1].includes('letters')?'linear-gradient(90deg,#4E9E73,#6FD1E0)':'linear-gradient(90deg,#b98a52,#E2A63B)')+'"></div></div><b>'+ORG[id][3][0]+'%</b>').join('')+
+   '</div><p class="muted" style="margin-top:10px"><span style="display:inline-block;width:12px;height:12px;background:#4E9E73;border-radius:2px"></span> identical DNA letters &nbsp; <span style="display:inline-block;width:12px;height:12px;background:#E2A63B;border-radius:2px"></span> share of genes with a counterpart</p>'}
+drawRank();
+document.querySelectorAll('[data-tv]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tv]').forEach(x=>x.classList.toggle('active',x===b));$('treeWrap').classList.toggle('hidden',b.dataset.tv!=='tree');$('rankWrap').classList.toggle('hidden',b.dataset.tv!=='rank')});
+// search
+$('search').addEventListener('change',()=>{const q=$('search').value.trim().toLowerCase();if(!q)return;
+  const id=LEAVES.find(id=>ORG[id][1].toLowerCase()===q)||LEAVES.find(id=>(ORG[id][1]+' '+ORG[id][2]).toLowerCase().includes(q));
+  if(id){setTab('tree');selectOrg(id);$('search').value=''}else{$('search').setCustomValidity('Not on the map');$('search').reportValidity();setTimeout(()=>$('search').setCustomValidity(''),1500)}});
+
+// ---------- DNA ----------
+const BCOL={A:'#d8604a',T:'#e2a63b',G:'#4e9e73',C:'#3d7fb8',U:'#8a6cc0'},PAIR={A:'T',T:'A',G:'C',C:'G'};
+let helixT=0,helixOn=!matchMedia('(prefers-reduced-motion:reduce)').matches;const HSEQ='ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCC';
+function drawHelix(){const n=HSEQ.length;let s='';
+  for(let i=0;i<n;i++){const x=20+i*16.5,ph=i*0.55+helixT,y1=100+60*Math.sin(ph),y2=100-60*Math.sin(ph),front=Math.cos(ph)>0,b=HSEQ[i];
+    s+='<line x1="'+x+'" y1="'+y1.toFixed(1)+'" x2="'+x+'" y2="'+((y1+y2)/2).toFixed(1)+'" stroke="'+BCOL[b]+'" stroke-width="4" opacity="'+(front?1:.55)+'"/><line x1="'+x+'" y1="'+((y1+y2)/2).toFixed(1)+'" x2="'+x+'" y2="'+y2.toFixed(1)+'" stroke="'+BCOL[PAIR[b]]+'" stroke-width="4" opacity="'+(front?.55:1)+'"/>'}
+  const rail=sign=>{let d='';for(let i=0;i<=n*4;i++){const t=i/4,x=20+t*16.5,y=100+sign*60*Math.sin(t*0.55+helixT);d+=(i?'L':'M')+x.toFixed(1)+','+y.toFixed(1)}return d};
+  s+='<path d="'+rail(1)+'" stroke="#EDEAE0" stroke-width="3.5" fill="none"/><path d="'+rail(-1)+'" stroke="#6FD1E0" stroke-width="3.5" fill="none"/>';
+  s+='<text x="10" y="18" fill="#EDEAE0" font-size="12" font-weight="600">sugar–phosphate backbone</text><text x="370" y="196" fill="#6FD1E0" font-size="12" font-weight="600">base pairs = the letters</text>';
+  $('helix').innerHTML=s}
+function helixLoop(){if(helixOn&&tab==='dna'){helixT+=0.02;drawHelix()}requestAnimationFrame(helixLoop)}
+drawHelix();requestAnimationFrame(helixLoop);
+$('helixPause').onclick=()=>{helixOn=!helixOn;$('helixPause').textContent=helixOn?'⏸ Pause':'▶ Spin'};
+$('dnaNums').innerHTML=[['📏','2 metres','of DNA in each cell, folded into a nucleus 6 micrometres wide.'],['🔤','3.1 billion','letter pairs in one set — two sets in each cell.'],['📚','1–2%','of your DNA are protein recipes (genes); the rest includes switches and spacers.'],['🌍','About 70 billion km','of DNA in your whole body, end to end — enough to reach the Sun and back over 200 times.'],['⏱️','98 years','to read your DNA aloud at one letter per second.'],['🧍','99.9%','the same in any two people.']].map(c=>'<div class="card"><b>'+c[0]+' '+c[1]+'</b>'+esc(c[2])+'</div>').join('');
+const LV=window.DNA_LEVELS;
+$('levels').innerHTML=LV.map((l,i)=>'<button class="lvl" data-lv="'+i+'"><span class="e">'+l[0]+'</span><span><b>'+esc(l[1])+'</b><small>'+esc(l[2])+'</small></span></button>').join('');
+function showLevel(i){$('levels').querySelectorAll('.lvl').forEach(b=>b.classList.toggle('on',+b.dataset.lv===i));$('lvlText').innerHTML='<b>'+LV[i][0]+' '+esc(LV[i][1])+'</b> — '+esc(LV[i][3])}
+$('levels').querySelectorAll('.lvl').forEach(b=>b.onclick=()=>showLevel(+b.dataset.lv));showLevel(0);
+const clean=s=>s.toUpperCase().replace(/U/g,'T').replace(/[^ATGC]/g,'');
+const bases=s=>s.split('').map(c=>'<span class="b b'+c+'">'+c+'</span>').join('');
+function strand(){const s=clean($('strandIn').value);const c=s.split('').map(x=>PAIR[x]).join('');
+  $('strandOut').innerHTML='<div>5′ '+bases(s)+' 3′</div><div style="padding-left:20px">'+s.split('').map(()=>'<span class="b" style="background:none;color:#16202B">|</span>').join('')+'</div><div>3′ '+bases(c)+' 5′</div>';
+  const gc=s?Math.round(s.split('').filter(x=>x==='G'||x==='C').length/s.length*100):0;
+  $('strandStats').textContent=s.length+' letters · GC content '+gc+'% (G–C pairs have 3 hydrogen bonds, A–T pairs have 2, so GC-rich DNA holds together more tightly) · mRNA copy: '+s.replace(/T/g,'U')}
+$('strandIn').oninput=strand;strand();
+$('rndStrand').onclick=()=>{$('strandIn').value=Array.from({length:24},()=>'ATGC'[Math.floor(Math.random()*4)]).join('');strand()};
+$('toExpr').onclick=()=>{$('codeIn').value=clean($('strandIn').value);$('fromAtg').checked=false;setTab('expr');translate();$('codeOut').scrollIntoView({behavior:'smooth',block:'center'})};
+
+// ---------- genetic code ----------
+const AA={F:'Phe',L:'Leu',I:'Ile',M:'Met',V:'Val',S:'Ser',P:'Pro',T:'Thr',A:'Ala',Y:'Tyr',H:'His',Q:'Gln',N:'Asn',K:'Lys',D:'Asp',E:'Glu',C:'Cys',W:'Trp',R:'Arg',G:'Gly','*':'STOP'};
+const AAN={F:'phenylalanine',L:'leucine',I:'isoleucine',M:'methionine',V:'valine',S:'serine',P:'proline',T:'threonine',A:'alanine',Y:'tyrosine',H:'histidine',Q:'glutamine',N:'asparagine',K:'lysine',D:'aspartic acid',E:'glutamic acid',C:'cysteine',W:'tryptophan',R:'arginine',G:'glycine','*':'stop'};
+const CODE={};(function(){const b='TCAG',a='FFLLSSSSYY**CC*WLLLLPPPPHHQQRRRRIIIMTTTTNNKKSSRRVVVVAAAADDEEGGGG';let k=0;for(const x of b)for(const y of b)for(const z of b)CODE[x+y+z]=a[k++]})();
+function readCodons(s,fromAtg){let i=0;if(fromAtg){const k=s.indexOf('ATG');if(k>=0)i=k}const out=[];for(;i+3<=s.length;i+=3){const c=s.slice(i,i+3),a=CODE[c];out.push([c,a]);if(a==='*')break}return out}
+function translate(){const s=clean($('codeIn').value),cs=readCodons(s,$('fromAtg').checked);
+  if(!cs.length){$('codeOut').innerHTML='<p class="muted">Type at least three letters.</p>';return}
+  const prot=cs.filter(c=>c[1]!=='*').map(c=>c[1]).join('');
+  $('codeOut').innerHTML='<p style="margin:4px 0"><b>mRNA:</b> <span class="seq" style="font-size:13px">'+esc(cs.map(c=>c[0].replace(/T/g,'U')).join(' '))+'</span></p><div class="codons">'+cs.map((c,i)=>'<div class="cod'+(i===0&&c[1]==='M'?' start':'')+(c[1]==='*'?' stop':'')+'" title="'+esc(AAN[c[1]])+'"><div class="t">'+c[0].replace(/T/g,'U')+'</div><div class="a">'+AA[c[1]]+'</div></div>').join('')+'</div>'+
+   '<p style="margin:8px 0 0"><b>Protein ('+prot.length+' amino acids):</b> <span class="prot">'+esc(prot)+'</span></p><p class="muted">'+(cs[cs.length-1][1]==='*'?'The ribosome stopped at a STOP codon.':'No stop codon yet — a real protein would continue.')+' One-letter codes: M = methionine, V = valine, H = histidine…</p>'}
+$('codeIn').oninput=translate;$('fromAtg').onchange=translate;
+document.querySelectorAll('[data-code]').forEach(b=>b.onclick=()=>{$('codeIn').value=b.dataset.code;$('fromAtg').checked=true;translate()});translate();
+$('codeTable').innerHTML='<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font:500 11.5px \'IBM Plex Mono\',monospace">'+Object.entries(CODE).map(([c,a])=>'<div style="background:'+(a==='*'?'#f8dcd6':a==='M'?'#e9f5ee':'#fff')+';border:1px solid rgba(22,32,43,.12);border-radius:3px;padding:2px 4px">'+c.replace(/T/g,'U')+' '+AA[a]+'</div>').join('')+'</div><p class="muted">61 codons code for 20 amino acids, so most amino acids have several codons — which is why some mutations are silent.</p>';
+$('cellTypes').innerHTML=window.CELL_TYPES.map(c=>'<div class="card"><b>'+c[0]+' '+esc(c[1])+'</b><small style="color:#8a5a0f;font-weight:700">ON: '+esc(c[2])+'</small><br>'+esc(c[3])+'</div>').join('');
+
+// ---------- expression steps ----------
+const ES=window.EXPRESSION_STEPS;let eIdx=0,ePlay=null;
+function dogma(i){const hl=(k,col)=>i===k?col:'#cdd5dc';
+  $('dogma').innerHTML='<ellipse cx="150" cy="95" rx="140" ry="82" fill="#eef3f7" stroke="#0E2A47" stroke-dasharray="5 4"/><text x="40" y="30" font-size="12" font-weight="700" fill="#0E2A47">Nucleus</text>'+
+   '<path d="M40,80 q15,-18 30,0 t30,0 t30,0 t30,0 t30,0" stroke="'+(i<=1?'#3d7fb8':'#8fb2cf')+'" stroke-width="5" fill="none"/><path d="M40,96 q15,18 30,0 t30,0 t30,0 t30,0 t30,0" stroke="'+(i<=1?'#6FD1E0':'#b8d4e6')+'" stroke-width="5" fill="none"/><text x="60" y="126" font-size="11" fill="#16202B">DNA (gene)</text>'+
+   (i===0?'<circle cx="75" cy="88" r="9" fill="#E2A63B"/><text x="90" y="62" font-size="11" fill="#8a5a0f" font-weight="700">switch proteins land</text>':'')+
+   (i>=1?'<path d="M110,145 h'+(i===2?50:90)+'" stroke="'+hl(1,'#8a6cc0')+'" stroke-width="6" stroke-linecap="round"/>'+(i===2?'<path d="M165,145 h30" stroke="#d8604a" stroke-width="6" stroke-dasharray="3 3"/><text x="160" y="165" font-size="10" fill="#d8604a">intron cut out</text>':'')+'<text x="110" y="165" font-size="11" fill="#16202B">'+(i===1?'mRNA copy':'')+'</text>':'')+
+   (i===3?'<path d="M280,95 h60" stroke="#8a6cc0" stroke-width="6" stroke-linecap="round" marker-end="url(#da)"/>':'')+
+   '<defs><marker id="da" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0L10,5L0,10Z" fill="#8a6cc0"/></marker></defs>'+
+   (i>=4?'<path d="M320,120 h150" stroke="#8a6cc0" stroke-width="6" stroke-linecap="round"/><ellipse cx="'+(i===4?380:440)+'" cy="112" rx="26" ry="20" fill="'+hl(4,'#4e9e73')+'" opacity=".9"/><text x="'+(i===4?380:440)+'" y="116" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">ribosome</text>':'')+
+   (i>=4?'<g>'+Array.from({length:i===4?5:8},(_,k)=>'<circle cx="'+(i>=5?400+18*Math.cos(k*0.8):370-k*12)+'" cy="'+(i>=5?50+14*Math.sin(k*0.8):80-k*6)+'" r="6" fill="'+['#d8604a','#e2a63b','#3d7fb8','#4e9e73','#8a6cc0'][k%5]+'"/>').join('')+'</g><text x="340" y="28" font-size="11" fill="#16202B">'+(i===4?'amino acid chain':'folded protein')+'</text>':'')+
+   (i===6?'<text x="400" y="100" font-size="26">🛠️</text>':'')+(i===7?'<text x="205" y="70" font-size="20">🏷️</text><text x="185" y="40" font-size="11" fill="#8a5a0f" font-weight="700">epigenetic tags</text>':'')}
+function showE(i){eIdx=Math.max(0,Math.min(ES.length-1,i));const s=ES[eIdx];
+  $('eSteps').innerHTML=ES.map((x,n)=>'<li data-n="'+n+'" class="'+(n===eIdx?'on':n<eIdx?'done':'')+'">'+(n+1)+'. '+esc(x[0])+'</li>').join('');
+  $('eSteps').querySelectorAll('li').forEach(li=>li.onclick=()=>{stopE();showE(+li.dataset.n)});
+  $('eCard').innerHTML='<div class="t">Step '+(eIdx+1)+' of '+ES.length+' · '+esc(s[1])+'</div><h3>'+esc(s[0])+'</h3><p>'+esc(s[2])+'</p>';dogma(eIdx)}
+function stopE(){clearTimeout(ePlay);ePlay=null;$('ePlay').textContent='▶ Play'}
+$('ePlay').onclick=()=>{if(ePlay){stopE();return}if(eIdx>=ES.length-1)showE(0);$('ePlay').textContent='⏸ Pause';const nx=()=>{ePlay=setTimeout(()=>{if(eIdx<ES.length-1){showE(eIdx+1);nx()}else stopE()},4500)};nx()};
+$('ePrev').onclick=()=>{stopE();showE(eIdx-1)};$('eNext').onclick=()=>{stopE();showE(eIdx+1)};showE(0);
+
+// ---------- mutation lab ----------
+const HBB='ATGGTGCATCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGGTAA';
+let gene=HBB.split('').map(c=>({c,m:false})),mPos=null,lastKind=null;
+const MPRE=[['🩸 Sickle cell (missense)',()=>{reset();sub(19,'T')}],['🤫 Silent change',()=>{reset();sub(32,'T')}],['🛑 Nonsense (early stop)',()=>{reset();sub(51,'T');}],['↪️ Frameshift (delete 1)',()=>{reset();del(24)}],['✂️ In-frame deletion (3 letters)',()=>{reset();del(24);del(24);del(24)}],['➕ Insertion',()=>{reset();ins(15,'A')}]];
+$('mPresets').innerHTML=MPRE.map((p,i)=>'<button class="chip" data-mp="'+i+'">'+p[0]+'</button>').join('');
+$('mPresets').querySelectorAll('[data-mp]').forEach(b=>b.onclick=()=>{MPRE[+b.dataset.mp][1]();drawGene()});
+function reset(){gene=HBB.split('').map(c=>({c,m:false}));mPos=null}
+function sub(i,c){if(gene[i].c!==c){gene[i]={c,m:true}}}
+function del(i){gene.splice(i,1)}
+function ins(i,c){gene.splice(i+1,0,{c,m:true})}
+function drawGene(){
+  $('gene').innerHTML=gene.map((g,i)=>(i&&i%3===0?'<i></i>':'')+'<span data-i="'+i+'" class="'+(g.m?'mut':'')+(i===mPos?' pos':'')+'">'+g.c+'</span>').join('');
+  $('gene').querySelectorAll('span').forEach(s=>s.onclick=()=>{mPos=+s.dataset.i;drawGene()});
+  $('mPos').textContent=mPos==null?'Tap a letter first.':'Letter '+(mPos+1)+' ('+gene[mPos].c+'), in codon '+(Math.floor(mPos/3)+1)+':';
+  const cur=gene.map(g=>g.c).join(''),a=readCodons(HBB,false).map(c=>c[1]),b=readCodons(cur,false).map(c=>c[1]);
+  const pa=a.filter(x=>x!=='*'),pb=[];for(const x of b){if(x==='*')break;pb.push(x)}
+  let diff=0;for(let i=0;i<Math.max(pa.length,pb.length);i++)if(pa[i]!==pb[i])diff++;
+  const dl=HBB.length-cur.length,firstDiff=pa.findIndex((x,i)=>x!==pb[i]);
+  let kind,cls,txt;
+  if(cur===HBB){kind='none';cls='v-good';txt='The gene is unchanged. It makes the normal β-globin chain of haemoglobin, which carries oxygen in your red blood cells.'}
+  else if(dl%3!==0){kind='frameshift';cls='v-bad';txt='<b>Frameshift!</b> '+Math.abs(dl)+' letter'+(Math.abs(dl)>1?'s were':' was')+' '+(dl>0?'deleted':'inserted')+', which is not a multiple of 3. Every codon after it is read wrongly, the amino acids change from position '+(firstDiff+1)+' and a stop codon appears in the wrong place. This protein would not work — mutations like this cause β-thalassaemia.'}
+  else if(dl!==0){kind='inframe';cls='v-mid';txt='<b>In-frame '+(dl>0?'deletion':'insertion')+'.</b> '+Math.abs(dl)+' letters = '+Math.abs(dl/3)+' codon'+(Math.abs(dl)>3?'s':'')+', so one amino acid is '+(dl>0?'missing':'added')+' but the rest is read correctly. The protein may still fold — or may not (the common cystic fibrosis mutation is like this).'}
+  else if(pb.length<pa.length){kind='nonsense';cls='v-bad';txt='<b>Nonsense mutation.</b> A STOP codon appeared, so the protein ends after only '+pb.length+' of '+pa.length+' amino acids. A chopped-off protein like this usually cannot work.'}
+  else if(diff===0){kind='silent';cls='v-good';txt='<b>Silent mutation.</b> The DNA changed but the protein did not — the new codon codes for the same amino acid. The genetic code has spare codons, which protects us from many mutations.'}
+  else{kind='missense';cls='v-mid';const i=firstDiff;txt='<b>Missense mutation.</b> Amino acid '+(i+1)+' changed from '+AAN[pa[i]]+' ('+pa[i]+') to '+AAN[pb[i]]+' ('+pb[i]+').'+(i===6&&pa[i]==='E'&&pb[i]==='V'?' <b>This is exactly the sickle-cell mutation.</b> The sticky valine makes haemoglobin clump when oxygen is low, bending red cells into sickles. One copy protects against malaria; two copies cause sickle-cell disease.':' Whether this matters depends on where it is and how different the new amino acid is.')}
+  lastKind=kind;
+  const show=(p,o)=>p.map((x,i)=>'<span class="'+(o&&o[i]!==x?(x==='*'?'x':'d'):'')+'">'+x+'</span>').join('');
+  $('mOut').innerHTML='<p style="margin:6px 0 2px"><b>Normal protein:</b></p><div class="prot">'+show(pa)+'</div><p style="margin:6px 0 2px"><b>Your version:</b></p><div class="prot">'+show(pb,pa)+(pb.length<pa.length?'<span class="x"> ■ STOP</span>':'')+'</div><div class="verdict '+cls+'">'+txt+'</div>'}
+document.querySelectorAll('[data-sub]').forEach(b=>b.onclick=()=>{if(mPos==null)return;sub(mPos,b.dataset.sub);drawGene()});
+$('mIns').onclick=()=>{if(mPos==null)return;ins(mPos,'ATGC'[Math.floor(Math.random()*4)]);drawGene()};
+$('mDel').onclick=()=>{if(mPos==null)return;del(mPos);mPos=Math.min(mPos,gene.length-1);drawGene()};
+$('mReset').onclick=()=>{reset();drawGene()};drawGene();
+const MT=window.MUTATION_TYPES,MTP={silent:1,missense:0,nonsense:2,frameshift:3,inframe:4};
+$('mTypes').innerHTML=MT.map(m=>'<button class="card" data-mt="'+m[0]+'"><b>'+esc(m[1])+'</b>'+esc(m[2])+'<br><small><i>Example:</i> '+esc(m[3])+'</small><br><small><i>Effect:</i> '+esc(m[4])+'</small>'+(m[0] in MTP?'<br><small style="color:#0E2A47;font-weight:700">▶ Try it in the lab</small>':'')+'</button>').join('');
+$('mTypes').querySelectorAll('[data-mt]').forEach(b=>b.onclick=()=>{const k=MTP[b.dataset.mt];if(k==null)return;MPRE[k][1]();drawGene();$('gene').scrollIntoView({behavior:'smooth',block:'center'})});
+$('mCauses').innerHTML=window.MUTATION_CAUSES.map(c=>'<div class="card"><b>'+c[0]+' '+esc(c[1])+'</b>'+esc(c[2])+'</div>').join('');
+
+// ---------- evolution simulator ----------
+let moths=[],hist=[],gen=0,simTimer=null;
+const sv=id=>+$(id).value;
+function simLabels(){$('barkL').textContent=sv('bark')>60?'dark (sooty)':sv('bark')<40?'light (lichen)':'medium';$('predL').textContent=sv('pred')+'% extra risk if seen';$('muL').textContent=(sv('mu')/10).toFixed(1)+'% per birth';$('popL').textContent=sv('popN')+' moths'}
+function simReset(){const N=sv('popN');moths=Array.from({length:N},()=>Math.random()<.05?1:0);hist=[moths.filter(x=>x).length/N];gen=0;drawSim()}
+function simGen(){const N=sv('popN'),b=sv('bark')/100,s=sv('pred')/100,mu=sv('mu')/1000;
+  const surv=moths.filter(m=>Math.random()>s*(m?1-b:b)*1.6);
+  if(!surv.length){simReset();return}
+  moths=Array.from({length:N},()=>{let m=surv[Math.floor(Math.random()*surv.length)];if(Math.random()<mu)m=1-m;return m});
+  gen++;hist.push(moths.filter(x=>x).length/N);if(hist.length>200)hist.shift();drawSim()}
+function drawSim(){if(!moths.length)return;const b=sv('bark')/100,bg=Math.round(225-190*b);
+  let s='<rect width="480" height="220" fill="rgb('+bg+','+(bg+4)+','+(bg-6)+')"/>';
+  for(let i=0;i<14;i++)s+='<path d="M'+(i*36+8)+',0 q'+(i%2?10:-10)+',110 0,220" stroke="rgba(0,0,0,.12)" stroke-width="6" fill="none"/>';
+  const show=moths.slice(0,90);let seed=7;const r=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  show.forEach(m=>{const x=20+r()*440,y=16+r()*190,c=m?'#2a2622':'#ebe6d8';s+='<g transform="translate('+x.toFixed(0)+','+y.toFixed(0)+')"><path d="M0,0 L-11,-6 L-9,5 Z M0,0 L11,-6 L9,5 Z" fill="'+c+'" stroke="rgba(0,0,0,.35)" stroke-width=".6"/><ellipse rx="1.6" ry="5" fill="#3a332c"/></g>'});
+  $('sim').innerHTML=s;
+  let c='<rect width="480" height="160" fill="#fff"/><line x1="40" y1="130" x2="470" y2="130" stroke="#999"/><line x1="40" y1="10" x2="40" y2="130" stroke="#999"/><text x="6" y="14" font-size="10" fill="#555">100%</text><text x="12" y="133" font-size="10" fill="#555">0%</text><text x="44" y="150" font-size="10" fill="#555">generations →</text><text x="300" y="150" font-size="10" fill="#555">share of dark moths</text>';
+  if(hist.length>1)c+='<polyline fill="none" stroke="#0E2A47" stroke-width="2.4" points="'+hist.map((v,i)=>(40+i*(430/Math.max(50,hist.length-1))).toFixed(1)+','+(130-v*120).toFixed(1)).join(' ')+'"/>';
+  $('chart').innerHTML=c;const p=Math.round(hist[hist.length-1]*100);
+  $('simTxt').textContent='Generation '+gen+': '+p+'% dark moths. '+(p>80&&b>.6?'Dark moths won — they are hidden on sooty bark.':p<20&&b<.4?'Light moths are winning on pale bark — dark ones are spotted and eaten.':'Try changing the bark colour and watch the balance shift. With no hunting, only chance (genetic drift) changes the numbers.')}
+['bark','pred','mu','popN'].forEach(id=>$(id).addEventListener('input',()=>{simLabels();if(id==='popN')simReset();else drawSim()}));
+$('simStep').onclick=simGen;$('simReset').onclick=()=>{clearInterval(simTimer);simTimer=null;$('simRun').textContent='▶ Run 50 generations';simReset()};
+$('simRun').onclick=()=>{if(simTimer){clearInterval(simTimer);simTimer=null;$('simRun').textContent='▶ Run 50 generations';return}let n=0;$('simRun').textContent='⏸ Pause';simTimer=setInterval(()=>{simGen();if(++n>=50){clearInterval(simTimer);simTimer=null;$('simRun').textContent='▶ Run 50 more'}},120)};
+simLabels();simReset();
+$('evoHow').innerHTML=[['🎲','1. Variation','Mutations and the mixing of genes in every baby make individuals different.'],['👪','2. Inheritance','Parents pass their gene versions to their children.'],['🦅','3. Selection','Some versions help survival or having babies in a given place — those become more common over generations.'],['⏳','4. Time','Small changes add up. Over millions of years populations split and become new species.'],['🎰','Genetic drift','In small groups, pure chance can make a gene version common or lost.'],['🔎','The evidence','Fossils, shared DNA, the same bones in arms, wings and flippers, embryos, and evolution we watch today — like bacteria becoming resistant to antibiotics.']].map(c=>'<div class="card"><b>'+c[0]+' '+c[1]+'</b>'+esc(c[2])+'</div>').join('');
+$('timeline').innerHTML=TL.map(t=>'<div><span class="y">'+esc(mya(t[0]))+'</span><span>'+t[1]+'</span><span><b>'+esc(t[2])+'</b> — '+esc(t[3])+'</span></div>').join('');
+
+// ---------- human diversity map ----------
+let mapReady=false,proj=null,migTimer=null;
+function initMap(){if(mapReady)return;mapReady=true;const s=$('world');s.setAttribute('viewBox','0 0 960 375');
+  const P=(lon,lat)=>[(lon+180)/360*960,(80-lat)/140*373.3];
+  proj=window.d3?d3.geoEquirectangular().scale(960/(2*Math.PI)).translate([480,960/(2*Math.PI)*80*Math.PI/180]):null;
+  const pt=(lon,lat)=>proj?proj([lon,lat]):P(lon,lat);
+  let g='<rect width="960" height="375" fill="#0a2238"/><g id="landG"></g><g>';for(let lon=-150;lon<=180;lon+=30){const a=pt(lon,80),b=pt(lon,-60);g+='<line class="grat" x1="'+a[0]+'" y1="0" x2="'+b[0]+'" y2="375"/>'}
+  for(let lat=-60;lat<=60;lat+=30){const a=pt(-180,lat);g+='<line class="grat" x1="0" y1="'+a[1]+'" x2="960" y2="'+a[1]+'"/>'}g+='</g><g id="routes"></g><g id="pins"></g>';s.innerHTML=g;
+  const seg=pts=>{let d='',up=true;for(let i=0;i<pts.length;i++){if(!pts[i]){up=true;continue}const p=pt(...pts[i]);if(up){d+='M'+p[0].toFixed(1)+','+p[1].toFixed(1);up=false;continue}if(Math.abs(pts[i][0]-pts[i-1][0])>180){const q=pt(...pts[i-1]);d+='L'+(pts[i][0]<0?960:0)+','+q[1].toFixed(1)+'M'+(pts[i][0]<0?0:960)+','+p[1].toFixed(1)}d+='L'+p[0].toFixed(1)+','+p[1].toFixed(1)}return d};
+  $('routes').innerHTML=window.MIGRATION.map((m,i)=>'<path class="route" data-r="'+i+'" d="'+seg(m.pts)+'"/>').join('')+[[36,4,9],[-8.9,31.9,5],[35.9,5.3,5]].map(([lo,la,r])=>{const o=pt(lo,la);return '<circle cx="'+o[0].toFixed(1)+'" cy="'+o[1].toFixed(1)+'" r="'+r+'" fill="#E2A63B" stroke="#fff" stroke-width="2"><title>Early Homo sapiens fossils</title></circle>'}).join('');
+  $('routes').querySelectorAll('.route').forEach(p=>{const L=p.getTotalLength();p.style.strokeDasharray=L;p.style.strokeDashoffset=0;p.dataset.len=L});
+  $('pins').innerHTML=window.ADAPTATIONS.map((a,i)=>{const p=pt(a.lon,a.lat);return '<g class="pin" data-pin="'+i+'" tabindex="0" role="button" aria-label="'+esc(a.name)+'" transform="translate('+p[0].toFixed(1)+','+p[1].toFixed(1)+')"><circle r="11"/><text text-anchor="middle" y="5">'+a.emoji+'</text></g>'}).join('');
+  $('pins').querySelectorAll('.pin').forEach(g=>{const f=()=>{stopMig();const a=window.ADAPTATIONS[+g.dataset.pin];$('pins').querySelectorAll('.pin').forEach(x=>x.classList.toggle('on',x===g));$('mapCap').innerHTML='<b>'+a.emoji+' '+esc(a.name)+'</b><br>'+esc(a.text)};g.onclick=f;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}}});
+  if(window.d3&&window.topojson)d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json').then(w=>{$('landG').innerHTML='<path class="land" d="'+d3.geoPath(proj)(topojson.feature(w,w.objects.land))+'"/>'}).catch(()=>{});
+}
+function stopMig(){clearTimeout(migTimer);migTimer=null;$('playMig').textContent='▶ Play the journey'}
+$('showAll').onclick=()=>{stopMig();document.querySelectorAll('#routes .route').forEach(p=>{p.style.transition='none';p.style.strokeDashoffset=0});$('mapCap').textContent='All routes: from Africa to every continent in about 60,000 years.'};
+$('playMig').onclick=()=>{if(migTimer){stopMig();return}const rs=[...document.querySelectorAll('#routes .route')];rs.forEach(p=>{p.style.transition='none';p.style.strokeDashoffset=p.dataset.len});
+  $('playMig').textContent='⏸ Pause';let i=0;const nx=()=>{if(i>=rs.length){stopMig();$('mapCap').innerHTML='<b>Humans reached every continent except Antarctica.</b> Along the way small groups adapted to local sun, food, disease and altitude — tap the pins.';return}
+    const m=window.MIGRATION[i],p=rs[i];void p.getBoundingClientRect();p.style.transition='stroke-dashoffset 2.2s ease';p.style.strokeDashoffset=0;$('mapCap').innerHTML='<b>'+esc(m.name)+'</b> — '+esc(m.when);i++;migTimer=setTimeout(nx,2800)};nx()};
+$('divFacts').innerHTML=window.DIVERSITY_FACTS.map(f=>'<div class="card"><b>'+f[0]+' '+esc(f[1])+'</b>'+esc(f[2])+'</div>').join('');
+
+// ---------- quiz ----------
+const rnd=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function pickDistinct(pool,n,avoid){const out=[],s=new Set(avoid.map(x=>String(x).toLowerCase()));shuffle(pool.slice()).forEach(v=>{if(out.length<n&&!s.has(String(v).toLowerCase())){s.add(String(v).toLowerCase());out.push(v)}});return out}
+const others=LEAVES.filter(x=>x!=='human');
+function treeQ(){const k=Math.random();
+  if(k<.4){let a,b;do{a=rnd(others);b=rnd(others)}while(ageWithHuman(a)===ageWithHuman(b));const c=ageWithHuman(a)<ageWithHuman(b)?a:b;
+    return {q:'Which is more closely related to humans?',a:ORG[c][1],opts:[ORG[a===c?b:a][1]],why:'We shared an ancestor with the '+ORG[a][1].toLowerCase()+' '+mya(ageWithHuman(a))+' and with the '+ORG[b][1].toLowerCase()+' '+mya(ageWithHuman(b))+'.',org:c}}
+  if(k<.7){const o=rnd(others),ag=ageWithHuman(o),ages=[...new Set(others.map(ageWithHuman))];
+    return {q:'Roughly when did humans and the '+ORG[o][1].toLowerCase()+' last share a common ancestor?',a:mya(ag),opts:pickDistinct(ages.filter(x=>x!==ag&&(x>ag*2||x<ag/2)).map(mya),3,[mya(ag)]),why:'Our lines meet at: '+NODES[lca(o,'human')].name+'.',org:o}}
+  if(k<.85){const ns=Object.values(NODES).filter(n=>n.kids&&n.evolved&&n.evolved.length>30),n=rnd(ns);
+    return {q:'Which group first evolved this? “'+n.evolved.split('. ')[0]+'”',a:n.name,opts:pickDistinct(ns.filter(x=>x!==n).map(x=>x.name),3,[n.name]),why:n.name+' ('+mya(n.age)+'): '+n.evolved}}
+  const o=rnd(others.filter(x=>/^\d+$/.test(ORG[x][6])));return {q:'How many chromosomes does a '+ORG[o][1].toLowerCase()+' have in each body cell?',a:ORG[o][6],opts:pickDistinct(['46','48','40','78','38','60','8','64','20','50','24','12'],3,[ORG[o][6]]),why:ORG[o][1]+': '+ORG[o][6]+' chromosomes. Chromosome number says little about complexity.',org:o}}
+const BQ=window.BIO_QUESTIONS;
+function buildQuestions(src,n){const out=[],keys=new Set();let guard=0;
+  const pool=src==='all'?BQ:BQ.filter(q=>q[4]===src);
+  while(out.length<n&&guard++<600){let q;
+    if(src==='tree'||(src==='all'&&Math.random()<.35))q=treeQ();else{const x=rnd(pool);if(!x)break;q={q:x[0],a:x[1],opts:x[2].slice(),why:x[3]}}
+    if(!q||!q.opts.length)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
+  return out.length?out:null}
+const generate=()=>buildQuestions($('qSource').value,+$('qCount').value);
+let quiz=[],qi=0,score=0,points=0,streak=0,bestStreak=0,answered=false,missed=[],timer=null,left=0,challenge=true;
+function start(qs){if(!qs)return;quiz=qs;qi=0;score=0;points=0;streak=0;bestStreak=0;missed=[];challenge=$('qMode').value==='challenge';
+  $('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');$('timerBar').classList.toggle('hidden',!challenge);show()}
+const mult=()=>streak>=5?2:streak>=3?1.5:1;
+function show(){const q=quiz[qi];answered=false;
+  $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
+  $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
+  $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
+  clearInterval(timer);if(challenge){left=20;$('timerFill').style.width='100%';$('timerFill').style.background='#4E9E73';timer=setInterval(()=>{left-=.25;$('timerFill').style.width=Math.max(0,left/20*100)+'%';if(left<6)$('timerFill').style.background='#D8604A';if(left<=0){clearInterval(timer);answer(null,null)}},250)}}
+function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer);const q=quiz[qi],ok=choice===q.a;let gained=0;
+  if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
+  q.ok=ok;q.given=choice;
+  $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why||'The answer is '+q.a+'.')+(q.org?' <a data-o="'+q.org+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(ORG[q.org][1])+' →</a>':'');$('qExplain').classList.remove('hidden');
+  const g=$('qExplain').querySelector('[data-o]');if(g)g.onclick=()=>{setTab('tree');selectOrg(g.dataset.o);$('info').scrollIntoView({behavior:'smooth'})};
+  $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
+  $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+$('qNext').onclick=()=>{if(++qi<quiz.length)show();else finish()};
+$('qQuit').onclick=()=>{clearInterval(timer);quiz=quiz.slice(0,qi+(answered?1:0));if(!quiz.length){$('quizArea').classList.add('hidden');return}finish()};
+const RANKS=[[90,'Nobel biologist 🏅'],[75,'Geneticist 🧬'],[55,'Biology student 📘'],[0,'Nature explorer 🔍']];
+function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
+  const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];const best=store.get('bioBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
+  if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('bioBest',best);
+  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
+  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('retryWrong').classList.toggle('hidden',!missed.length);showBest();$('quizDone').scrollIntoView({behavior:'smooth',block:'nearest'})}
+$('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
+$('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})));
+function showBest(){const b=store.get('bioBest',null);$('bestLine').textContent=b?'Your best: '+b.points+' points in challenge mode · '+b.pct+'% accuracy':''}
+showBest();
+const PAGE_CSS='body{font:15px/1.5 Georgia,serif;max-width:780px;margin:30px auto;padding:0 20px;color:#16202B}h1,h2{font-family:Arial,sans-serif}li{margin-bottom:6px}';
+function download(name,html){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;const title='Biology quiz';
+  download('biology-quiz.html','<!doctype html><html><head><meta charset="utf-8"><title>'+title+'</title><style>'+PAGE_CSS+'</style></head><body><h1>'+title+'</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">Answer key</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+' — <small>'+esc(q.why||'')+'</small></li>').join('')+'</ol><p><small>Made with MigaBuilder Biology Map · migabuilder.com/biology-map.html</small></p></body></html>')};
+$('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$('aiTopic').focus();return}
+  const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your quiz…';$('aiQuiz').disabled=true;
+  try{const d=MigaAI.json(await MigaAI.ask('You write accurate multiple-choice biology quizzes following mainstream scientific consensus. Reply with ONE JSON array only.',
+    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
+    const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
+    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(err){st.textContent='Could not create the quiz: '+err.message}$('aiQuiz').disabled=false};
+
+// ---------- start ----------
+const h=decodeURIComponent(location.hash.slice(1));
+if(['dna','expr','mut','evo','div'].includes(h))setTab(h);else if(ORG[h])setTimeout(()=>selectOrg(h),150);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

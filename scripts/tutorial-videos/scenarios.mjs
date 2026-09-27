@@ -292,6 +292,116 @@ S('idea-atlas.html', {
   }
 });
 
+S('exam-checker.html', {
+  title: 'Exam Checker', subtitle: 'Mark a whole class from photos of answer sheets',
+  intro: 'Welcome to Exam Checker. Build an exam, print an answer sheet for every student, drop in photos of all the sheets at once, and download everyone\u2019s marks.',
+  async run(h, page) {
+    await h.step('The How to use box at the top lists the six steps. Press Load demo exam to see a finished example with a class of six.', async () => { await h.point('#howto summary'); await h.click('#demoExam'); });
+    // Written-answer OCR loads Tesseract from a CDN; keep the recording offline and quick.
+    await page.evaluate(() => { const o = document.querySelector('#ocrOn'); o.checked = false; o.dispatchEvent(new Event('input', { bubbles: true })); document.querySelector('#howto').open = false; });
+    await h.step('Step one: build the exam. Each question has a type: multiple choice, choose all that apply, true or false, a short answer or an open answer, with its points.', () => h.point('.qcard >> nth=0'));
+    await h.step('Paste your class list here, one student per line, with their ID and name.', async () => { await h.click('#t-build details.box >> nth=1 >> summary'); await h.point('#exRoster'); });
+    await h.step('Step two is the answer key. Tap the correct bubble for each question, or read the key from a photo of a filled-in sheet.', async () => { await h.click('[data-tab=key]'); await h.point('#keyList'); });
+    await h.step('Step three: press Print one sheet per student. Every sheet has the student\u2019s name, their ID and a code printed on it.', async () => { await h.click('[data-tab=sheet]'); await h.select('#prevWhich', 'personal'); await h.point('#printPersonal'); });
+    await h.step('The code along the bottom edge tells the checker whose sheet it is, so nobody has to type names, and the photos can be in any order.', () => h.point('#sheetPrev svg >> nth=0', { block: 'end' }));
+    await h.step('Step four tests the reader. Photograph a sheet with the correct answers, and the checker compares every answer with your key. Here we use a test photo.', async () => { await h.click('[data-tab=check]'); await h.click('#checkDemo'); await page.waitForSelector('#checkOut .tile', { timeout: 60000 }); });
+    await h.step('Every answer matches, and it even knows whose sheet it is. Now you are ready to mark the class.', () => h.point('#checkOut .tile >> nth=0'));
+    await h.step('Step five: drop in the photos of all the sheets at once, in any order. Here we add demo photos: they are shuffled, one sheet is photographed twice, and one student is missing.', async () => { await h.click('[data-tab=students]'); await h.click('#stuDemo'); });
+    await h.skip('Reading the answer sheets', () => page.waitForFunction(() => /Done/.test(document.querySelector('#stuProg').textContent), null, { timeout: 180000 }));
+    await h.step('Every photo went to the right student. The sheet photographed twice was counted only once, and the class list shows who is not marked yet.', () => h.point('#classCheck'));
+    await h.step('Find a student, show only the ones that need checking, or sort by score.', async () => { await h.select('#stuFilter', 'check'); await h.select('#stuSort', 'high'); });
+    await h.step('Press Next answer to check. It opens the next student with something for you to look at: a faint mark, two filled bubbles, or a written answer.', async () => { await h.click('#stuFlagged'); await h.wait(900); await h.point('#review h2'); });
+    await h.step('Correct answers are circled in green and wrong ones in red. Tap a bubble to fix an answer.', () => h.point('#rvImgs canvas'));
+    await h.step('Written answers are shown as pictures. Type what the student wrote, and it is marked automatically.', async () => { await h.type('#rvAns [data-sq][data-sf=text] >> nth=0', 'H2O'); await h.wait(1200); });
+    await h.step('Step six shows the results: the average, the spread of scores, every student\u2019s answers, and which questions most students missed.', () => h.click('[data-tab=results]'));
+    await h.step('Download everyone\u2019s answers as Excel or CSV, a class report, or printable result slips for each student.', () => h.point('#dlXlsx'));
+    await h.sampleDownload('#dlCsv', 'Class results spreadsheet made in this video');
+  }
+});
+
+S('body-map.html', {
+  title: 'Body Map', subtitle: 'How every part of the body works',
+  intro: 'Welcome to Body Map. Learn how every organ, bone, muscle and layer of skin works, what can go wrong with it, and how to keep it healthy.',
+  async run(h, page) {
+    await h.step('The map shows the main organs and body parts. Hover over one to see its name, and click to open it. Let us open the heart.', () => h.click('#p-heart'));
+    await h.step('You see what it does, where it is, and how it works, step by step.', () => h.scroll('#info .sect >> nth=0', 'center'));
+    await h.step('Connections show how it works with other parts of the body. The connected parts light up on the map.', () => h.point('#info .conn >> nth=0'));
+    await h.step('Every part lists its common illnesses. Open one to see the signs, the best way to treat it, and how to prevent it. Possible emergencies are clearly marked.', () => h.click('#info details.ill >> nth=0 >> summary'));
+    await h.step('Below that are the best ways to keep it healthy, and some surprising facts.', () => h.scroll('#info .tip-list', 'center'));
+    await h.step('Use the coloured buttons to show one body system, like digestion, then click any organ in it, like the liver.', async () => { await h.click('[data-sys=digestive]'); await h.click('#p-liver'); });
+    await h.step('The connections map shows how every part works together with the others.', async () => { await h.click('[data-sys=""]'); await h.click('[data-view=net]'); });
+    await h.wait(1500);
+    await h.step('The layer buttons switch between organs, the skeleton, muscles and tendons, and a cut-through view of the skin. Here is the skeleton. Let us open the spine.', async () => { await h.click('[data-view=body]'); await h.click('[data-layer=skeleton]'); await h.point('#p-spine'); await page.locator('#p-spine').dispatchEvent('click'); });
+    await h.step('Muscles and tendons have a front and a back view. Muscles are red and tendons are white, like the Achilles tendon at the back of the ankle.', async () => { await h.click('[data-layer=muscles]'); await h.click('#flip'); await h.point('#p-achilles'); await page.locator('#p-achilles').dispatchEvent('click'); });
+    await h.step('The skin layers view shows the outer skin, the dermis and the fat layer, with hair, oil glands and sweat glands. Tap any of them.', async () => { await h.click('[data-layer=skin]'); await h.point('#p-sweat'); await page.locator('#p-sweat').dispatchEvent('click'); });
+    await h.step('Now, what happens when we eat? Open Eating and drinking. The dot follows a meal through the body.', async () => { await h.click('[data-view=body]'); await h.click('[data-tab=food]'); for (let i = 0; i < 4; i++) { await h.click('#nextStep', { after: 700 }); } });
+    await h.step('The stomach churns the food with acid, the pancreas and gallbladder add their juices, and the small intestine absorbs the nutrients into the blood.', async () => { for (let i = 0; i < 3; i++) { await h.click('#nextStep', { after: 1400 }); } });
+    await h.step('Switch to a drink to see how water reaches the blood, the kidneys and the bladder.', async () => { await h.click('[data-journey=drink]'); for (let i = 0; i < 6; i++) { await h.click('#nextStep', { after: 500 }); } });
+    await h.step('Tap a card to see which organs handle carbohydrates, fats, caffeine or alcohol.', () => h.click('.ncard >> nth=7'));
+    await h.step('The Fasting tab shows what happens hour by hour after your last meal. Drag the slider, or pick a fast like sixteen hours.', async () => { await h.click('[data-tab=fast]'); await h.click('[data-h="16"]'); });
+    await h.step('After about a day, the liver has used up its stored sugar. The body burns more fat and makes ketones, and the bar shows where the energy comes from.', async () => { await h.click('[data-h="24"]'); await h.point('#fuel'); });
+    await h.step('Safety notes explain why you must keep drinking water, and who should not fast without a doctor.', () => h.scroll('#fastNotes', 'center'));
+    await h.step('Now test yourself. Choose the whole body, one body system or one body part, and press Generate quiz.', async () => { await h.scroll('#quizPanel'); await h.select('#qSource', 'sys:circulatory'); await h.click('#makeQuiz'); });
+    await h.step('Pick an answer. You get an explanation every time, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.step('You can also make your own quiz. Give it a title, choose a body part, and add suggested questions. Then edit them, or write your own.', async () => { await h.click('[data-qtab=make]'); await h.type('#mkTitle', 'The heart quiz'); await h.select('#mkPart', 'heart'); await h.click('#mkSuggest'); });
+    await h.step('Play it, save it, print it with an answer key, or copy a link to share it with a class or a friend.', () => h.point('#mkShare'));
+    await h.sampleDownload('#mkPrint', 'Printable quiz made in this video');
+    await h.step('Finally, the daily checklist shows which healthy habits help which parts of your body.', async () => { await h.scroll('#habitPanel'); await h.click('#habits .habit >> nth=0'); });
+  }
+});
+
+S('biology-map.html', {
+  title: 'Biology Map', subtitle: 'The tree of life, DNA and evolution',
+  intro: 'Welcome to Biology Map. See how humans are related to other living things, how much DNA we share, and how DNA, genes, mutations and evolution work.',
+  async run(h, page) {
+    await h.step('The tree of life shows forty-three living things, from bacteria to humans. Every branch point is a common ancestor. Let us open the chimpanzee.', () => h.click('[data-l=chimp]'));
+    await h.step('Chimpanzees share about ninety-nine percent of our DNA letters, and our lines split about six and a half million years ago. The gold and blue lines show both paths back to that ancestor.', () => h.point('#info .simbar'));
+    await h.step('You also see what we both inherited, and what evolved on each line since the split.', () => h.scroll('#info .inn', 'center'));
+    await h.step('Now a distant relative: the banana. We shared an ancestor over one and a half billion years ago.', async () => { await h.scroll('#tree'); await h.click('[data-l=banana]'); });
+    await h.step('Sixty percent of banana genes have a human counterpart — but that does not mean sixty percent of our DNA letters match. The tool always says what each number measures.', () => h.point('#info .sect >> nth=0'));
+    await h.step('The ranking compares all the figures side by side.', () => h.click('[data-tv=rank]'));
+    await h.step('Tap any branch point to see what evolved there, like the first mammals, with hair and milk.', async () => { await h.click('[data-tv=tree]'); await h.click('[data-n=mammals]'); });
+    await h.step('Drag the time slider to travel back and see the key events in the history of life.', async () => { await h.point('#time'); await page.locator('#time').evaluate(e => { e.value = 620; e.dispatchEvent(new Event('input')); }); await h.point('#timeEv'); });
+    await h.step('What DNA is: a double helix written with four letters, A, T, G and C. Tap each level to zoom from your body down to a single letter.', async () => { await h.click('[data-tab=dna]'); await h.click('.lvl >> nth=2'); await h.click('.lvl >> nth=5'); });
+    await h.step('Type letters to build a DNA strand. The matching strand appears, because A always pairs with T, and G with C.', () => h.type('#strandIn', 'ATGGCTAGCTTAG'));
+    await h.step('Gene expression shows, step by step, how a gene is copied into RNA and translated into a protein.', async () => { await h.click('[data-tab=expr]'); await h.click('#eNext', { after: 900 }); await h.click('#eNext', { after: 900 }); await h.click('#eNext', { after: 900 }); await h.click('#eNext', { after: 900 }); });
+    await h.step('The codon translator reads real DNA three letters at a time. Here is the start of the insulin gene.', () => h.click('[data-code^=ATGGCCCTG]'));
+    await h.step('In the mutation lab you can change a real human gene. Try the sickle cell mutation: one letter changes, and one amino acid in haemoglobin changes with it.', async () => { await h.click('[data-tab=mut]'); await h.click('[data-mp="0"]'); await h.point('#mOut .verdict'); });
+    await h.step('Delete a single letter and the whole reading frame shifts — a frameshift that breaks the protein.', async () => { await h.click('[data-mp="3"]'); await h.point('#mOut .verdict'); });
+    await h.step('The evolution simulator shows natural selection. On dark bark, dark moths are hidden from birds, and in a few dozen generations they take over.', async () => { await h.click('[data-tab=evo]'); await h.click('#simRun'); await h.wait(6500); await h.point('#chart'); });
+    await h.step('Human diversity follows our ancestors out of Africa to every continent.', async () => { await h.click('[data-tab=div]'); await h.click('#playMig'); await h.wait(7000); });
+    await h.step('Tap a pin to see how a population adapted, like Tibetans living at high altitude with a gene they got from Denisovans.', async () => { await h.click('#showAll'); await h.click('[data-pin="0"]'); });
+    await h.step('The facts explain that any two people share about 99.9 percent of their DNA, and that most variation is found within groups, not between them.', () => h.scroll('#divFacts', 'center'));
+    await h.step('Finally, test yourself. Choose a topic and press Generate quiz.', async () => { await h.scroll('#quizPanel'); await h.select('#qSource', 'tree'); await h.click('#makeQuiz'); });
+    await h.step('Pick an answer to see the explanation. You can also print a quiz with an answer key.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+  }
+});
+
+S('chemistry-map.html', {
+  title: 'Chemistry Map', subtitle: 'The periodic table and what elements make',
+  intro: 'Welcome to Chemistry Map. Explore all one hundred and eighteen elements, see how they combine, and discover what materials they make.',
+  async run(h, page) {
+    await h.step('Every element has its own square, coloured by its family. Hover over one for a quick summary.', async () => { await h.point('#el-Na'); await h.point('#el-Fe'); });
+    await h.step('Open an element, like carbon. You see its atom, with protons and neutrons in the nucleus and electrons in shells.', async () => { await page.locator('#addMode').setChecked(false); await h.click('#el-C'); await h.point('#atom'); });
+    await h.step('Then where it is found, what it is used for, and its different forms — carbon can be diamond, graphite or graphene.', () => h.scroll('#info .sect >> nth=2', 'center'));
+    await h.step('It lists the compounds it makes and the materials made with it.', () => h.scroll('#info .cpd >> nth=0', 'center'));
+    await h.step('The colour buttons show patterns. Solid, liquid or gas shows each element at the temperature you choose. At room temperature only mercury and bromine are liquid.', async () => { await h.scroll('#modes'); await h.click('[data-mode=state]'); await h.point('#el-Hg'); });
+    await h.step('Heat it to the surface of the Sun, and almost everything boils.', async () => { await h.click('[data-t="5500"]'); await h.wait(800); });
+    await h.step('Electronegativity shows which atoms pull electrons hardest — fluorine, at the top right.', async () => { await h.click('[data-mode=en]'); await h.point('#el-F'); });
+    await h.step('Now mix elements. With this box ticked, tapping the table puts elements in the bowl. Add sodium and chlorine.', async () => { await h.click('[data-mode=family]'); await page.locator('#addMode').setChecked(true); await h.click('#el-Na'); await h.click('#el-Cl'); });
+    await h.step('The mixer explains the bond — sodium gives an electron to chlorine, an ionic bond — predicts the formula, NaCl, and shows the real compound: table salt.', () => h.point('#labOut .ccard >> nth=1'));
+    await h.step('Try a classic like calcium, carbon and oxygen, which make limestone, chalk and seashells.', async () => { await h.click('[data-p="6"]'); await h.point('#labOut .ccard >> nth=1'); });
+    await h.step('Materials shows what the elements build. Tap one, like a lithium-ion battery, and its elements light up in the table.', async () => { await h.click('[data-tab=mat]'); await h.click('[data-m=liion]'); await h.scroll('#ptable', 'center'); await h.wait(1200); });
+    await h.step('The formula calculator works out molar mass and what share each element makes up. Here is glucose.', async () => { await h.click('[data-tab=calc]'); await h.type('#formula', 'C6H12O6'); await h.point('#calcOut'); });
+    await h.step('How atoms bond explains atoms, shells, and ionic, covalent and metallic bonds with diagrams.', () => h.click('[data-tab=learn]'));
+    await h.step('Search for any use, like battery, to light up every element that is used in batteries.', async () => { await h.type('#search', 'battery'); await page.locator('#search').dispatchEvent('change'); await h.scroll('#ptable', 'center'); await h.wait(1200); });
+    await h.step('Finally, test yourself. Choose the elements and question types, then press Generate quiz.', async () => { await h.scroll('#quizPanel'); await h.select('#qSource', 'first20'); await h.click('#makeQuiz'); });
+    await h.step('Pick an answer and you get an explanation, with a link to open that element.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+  }
+});
+
 S('alphabet-forge.html', {
   title: 'Alphabet Forge', subtitle: 'Hear, learn and write the world’s alphabets',
   intro: 'Welcome to Alphabet Forge. Learn to read, say and write alphabets from around the world.',
@@ -823,13 +933,18 @@ S('sim-forge.html', {
 });
 
 S('3d-cartoon.html', {
-  title: '3D Cartoon', subtitle: 'A cel-shaded 3D cartoon scene',
-  intro: 'Welcome to 3D Cartoon, a short cel shaded cartoon scene that plays right in your browser.',
-  async run(h) {
-    await h.step('Press play to start the scene.', () => h.click('#startBtn'));
-    await h.step('Sit back and watch. Everything is drawn live in 3D, in your browser.', () => h.wait(8000));
-    await h.sampleShot('body', 'Scene from this video');
-    await h.step('Want to make your own story? Try Cartoon Forge, which animates any idea you describe.', () => h.wait(500));
+  title: '3D Cartoon', subtitle: 'Your story as a cel-shaded 3D cartoon',
+  intro: 'Welcome to 3D Cartoon. Describe a story, and watch it play as a 3D cartoon with talking characters, right in your browser.',
+  async run(h, page) {
+    await h.step('Write your story idea here. Say who is in it and what happens.', () => h.type('#story', 'A shy robot and a grumpy alien get lost in the forest, and a furry little forest creature helps them find the way home.'));
+    await h.step('Pick how long it should be and the tone. The free Gemini AI needs no key.', () => h.select('#tone', 'funny'));
+    await h.step('Press Make my 3D cartoon. The AI writes the script and picks the characters and places.', () => h.click('#makeBtn'));
+    await h.skip('Writing the script', () => page.waitForFunction(() => /ready/i.test(document.getElementById('status').textContent) || /Could not/.test(document.getElementById('status').textContent), null, { timeout: 120000 }));
+    await h.step('Here is the cast and the script. There are eleven kinds of characters, from robots and aliens to dragons, ghosts and a big eared gremlin imp.', () => h.point('#cast'));
+    await h.step('Press play to watch it.', async () => { await h.scroll('.stage-wrap', 'center'); await h.click('#startBtn'); });
+    await h.step('Every character moves, talks and reacts, and the camera follows whoever is speaking.', () => h.wait(9000));
+    await h.sampleShot('#stage', 'Scene from this video');
+    await h.step('Tick Voices to hear the characters speak, or press Download video to save the whole cartoon as a video file.', () => h.point('#recBtn'));
   }
 });
 
@@ -840,5 +955,25 @@ S('templates.html', {
     await h.step('Browse the templates and pick the result you want to create.', () => h.point('main'));
     await h.step('Open a template, and it loads in the right tool, ready for you to change the words, pictures and colours.', () => h.point('main a >> nth=0'));
     await h.sampleShot('main', 'Template gallery');
+  }
+});
+
+// The home page tour (shown in the "Tour MigaBuilder" section of index.html).
+S('index.html', {
+  title: 'MigaBuilder', subtitle: 'Find the right free tool in one minute',
+  outroSay: 'Now it is your turn. Pick a tool and try it yourself. It is free, and there is nothing to sign up for.',
+  intro: 'Welcome to MigaBuilder: fifty eight free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
+  async run(h, page) {
+    await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
+    await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });
+    await h.step('Or browse by category. The row of tiles under the search box groups every tool: create, video and audio, business, documents, learning and design.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.tool-group-toggle >> nth=0'); });
+    await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=business] .tool-group-toggle'));
+    await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=business] .fav-toggle >> nth=0'); await h.unring(); });
+    await h.step('Want to see everything at once? Open all categories with one click.', () => h.click('#toggleAll'));
+    await h.step('The whole page speaks your language. Choose Spanish, Arabic, Chinese or Swahili here.', async () => { await h.click('#toggleAll'); await h.select('#i18nLangSelect', 'es'); });
+    await h.step('Switch back at any time. Your choice is remembered on every page.', () => h.select('#i18nLangSelect', 'en'));
+    await h.step('Below the categories you will find the popular tools, and the newest ones.', async () => { await h.unring(); await h.scroll('#popularTools', 'center'); });
+    await h.step('Ready to start? Press Build a website, or pick any tool. Every tool has its own narrated video like this one.', async () => { await h.scroll('header', 'start'); await h.point('.cta-build'); });
+    await page.evaluate(() => { try { localStorage.removeItem('migabuilder-tool-favourites'); localStorage.removeItem('migabuilderLang'); } catch (e) {} });
   }
 });

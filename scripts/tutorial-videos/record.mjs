@@ -149,6 +149,17 @@ async function record(browser, file, sc, baseUrl) {
     }
     route.fulfill({ status: 200, headers: Object.assign({ 'Content-Type': 'application/json' }, cors()), body: text });
   });
+  // FETCH_VIA_NODE=1: let Node fetch CDN scripts and fonts for the page. Useful behind a
+  // TLS-inspecting proxy that Node trusts (NODE_EXTRA_CA_CERTS) but Chromium does not.
+  if (process.env.FETCH_VIA_NODE) {
+    await ctx.route(url => !url.href.startsWith(baseUrl) && !url.href.startsWith(PROXY) && /^https?:/.test(url.protocol), async route => {
+      const req = route.request();
+      try {
+        const r = await fetch(req.url(), { method: req.method(), headers: { 'User-Agent': 'Mozilla/5.0 MigaBuilder tutorial recorder' }, body: req.method() === 'GET' ? undefined : req.postDataBuffer() || undefined });
+        route.fulfill({ status: r.status, headers: { 'Content-Type': r.headers.get('content-type') || 'application/octet-stream', 'Access-Control-Allow-Origin': '*' }, body: Buffer.from(await r.arrayBuffer()) });
+      } catch (e) { route.abort(); }
+    });
+  }
   const page = await ctx.newPage();
   const t0 = Date.now();
   const now = () => (Date.now() - t0) / 1000;
@@ -287,7 +298,7 @@ if (!list.length) { console.log('No matching scenarios. Available:', Object.keys
 await ensureVoice();
 const { chromium } = await loadPlaywright();
 const exe = process.env.CHROMIUM || (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome') ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' : undefined);
-const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required', '--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', ...(process.env.IGNORE_CERTS ? ['--ignore-certificate-errors'] : [])] });
+const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required', '--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', ...(process.env.IGNORE_CERTS ? ['--ignore-certificate-errors'] : []), ...(process.env.BROWSER_PROXY ? ['--proxy-server=' + process.env.BROWSER_PROXY] : [])] });
 const srv = await serve();
 const baseUrl = 'http://127.0.0.1:' + srv.address().port;
 await ensureAssets(browser, FFMPEG, path.join(HERE, 'assets'));

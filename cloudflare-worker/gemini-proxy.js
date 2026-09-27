@@ -9,6 +9,11 @@
  * from separate free-tier Google accounts) to multiply the effective rate
  * limit: each request picks a random starting key and, if that one comes
  * back rate-limited, automatically retries the next one before giving up.
+ * A key Google reports as invalid (deleted, expired or mistyped) is skipped
+ * the same way, and remembered so later requests don't try it first.
+ *
+ * Optional RATE_LIMITER binding (Workers rate limiting) caps requests per
+ * visitor IP, since the Origin check alone can be faked outside a browser.
  *
  * Deploy steps are in cloudflare-worker/README.md.
  */
@@ -45,6 +50,19 @@ function json(body, status, origin) {
 // not a key problem, so it's returned immediately without trying more keys.
 const RETRYABLE_STATUSES = [403, 429];
 
+// Google answers a deleted, expired or mistyped key with 400 and reason
+// API_KEY_INVALID (or 401). That's a problem with this one key, not with the
+// request, so try the next key instead of failing the visitor's request.
+function isInvalidKey(status, text) {
+  return status === 401 || (status === 400 && /API_KEY_INVALID|API key not valid|API key expired/i.test(text));
+}
+
+// Keys found invalid while this Worker instance is running. They are tried
+// last (not dropped) so a key that starts working again is not lost forever.
+const invalidKeys = new Set();
+
+const keyLabel = key => '...' + key.slice(-4);
+
 function parseApiKeys(raw) {
   return (raw || '').split(',').map(key => key.trim()).filter(Boolean);
 }
@@ -68,6 +86,13 @@ export default {
     }
     if (!ALLOWED_ORIGINS.includes(origin)) {
       return json({ error: 'Origin not allowed' }, 403, origin);
+    }
+    if (env.RATE_LIMITER) {
+      const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+      const { success } = await env.RATE_LIMITER.limit({ key: ip });
+      if (!success) {
+        return json({ error: 'Too many AI requests in a short time. Wait a minute and try again.' }, 429, origin);
+      }
     }
     const apiKeys = parseApiKeys(env.GEMINI_API_KEY);
     if (!apiKeys.length) {
@@ -100,7 +125,9 @@ export default {
 
     let lastText = '';
     let lastStatus = 500;
-    for (const key of rotate(apiKeys)) {
+    const rotated = rotate(apiKeys);
+    const ordered = rotated.filter(key => !invalidKeys.has(key)).concat(rotated.filter(key => invalidKeys.has(key)));
+    for (const key of ordered) {
       const upstream = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
@@ -108,6 +135,12 @@ export default {
       });
       lastStatus = upstream.status;
       lastText = await upstream.text();
+      if (isInvalidKey(upstream.status, lastText)) {
+        if (!invalidKeys.has(key)) console.warn('Gemini key ' + keyLabel(key) + ' is invalid (deleted or expired?); remove it from GEMINI_API_KEY. Trying the next key.');
+        invalidKeys.add(key);
+        continue;
+      }
+      invalidKeys.delete(key);
       if (!RETRYABLE_STATUSES.includes(upstream.status)) break; // success, or a non-key-related error
     }
 

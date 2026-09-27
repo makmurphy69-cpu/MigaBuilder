@@ -3,3 +3,5 @@
 package/
 world-countries-*.tgz
 __pycache__/
+# AI dispatcher dependencies (scripts/ai-dispatch)
+node_modules/

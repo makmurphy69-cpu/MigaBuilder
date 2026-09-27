@@ -1,0 +1,55 @@
+/* Tool page artwork (see tool-art.js): an artist-style background, a creature and a credit line. */
+header.masthead.miga-art {
+  position: relative; /* some pages leave the masthead static; the art must stay inside it */
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 150px;
+  padding-right: clamp(110px, 18vw, 230px);
+}
+.miga-art > :not(.miga-art-bg):not(.miga-figure):not(.miga-art-credit) { position: relative; z-index: 2; }
+.miga-art-bg {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* the painting fades out towards the title so the text stays readable */
+  -webkit-mask-image: linear-gradient(to right, transparent 30%, rgba(0,0,0,.55) 55%, #000 78%);
+  mask-image: linear-gradient(to right, transparent 30%, rgba(0,0,0,.55) 55%, #000 78%);
+}
+.miga-art .miga-figure {
+  position: absolute;
+  z-index: 1;
+  right: clamp(12px, 4vw, 56px);
+  bottom: 8px;
+  width: clamp(84px, 11vw, 124px);
+  height: auto;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.35));
+  pointer-events: none;
+}
+.miga-art-credit {
+  position: absolute;
+  z-index: 2;
+  right: calc(clamp(12px, 4vw, 56px) + clamp(84px, 11vw, 124px) + 6px); /* just left of the figure */
+  bottom: 8px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(8,24,38,.72);
+  color: #edeae0;
+  font: 600 10.5px/1.5 'IBM Plex Sans', system-ui, sans-serif;
+  letter-spacing: .02em;
+  pointer-events: none;
+}
+section#start.card.miga-art { position: relative; overflow: hidden; isolation: isolate; }
+section#start.card.miga-art .miga-art-bg { height: 170px; bottom: auto; }
+section#start.card.miga-art .miga-figure { top: 26px; bottom: auto; right: 16px; width: 84px; }
+section#start.card.miga-art h1 { padding-right: 96px; }
+section#start.card.miga-art .miga-art-credit { top: 8px; bottom: auto; right: 112px; }
+@media (max-width: 600px) {
+  header.masthead.miga-art { min-height: 124px; padding-right: 92px; }
+  .miga-art .miga-figure { width: 76px; right: 8px; }
+  .miga-art-bg { -webkit-mask-image: linear-gradient(to right, transparent 45%, #000 85%); mask-image: linear-gradient(to right, transparent 45%, #000 85%); }
+  .miga-art-credit { right: 8px; bottom: 4px; font-size: 9px; padding: 1px 6px; max-width: 60%; }
+  section#start.card.miga-art .miga-art-credit { display: none; }
+}

@@ -17,25 +17,25 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MigaBuilder — 54 Free Private Browser Tools</title>
-<meta name="description" content="Create websites, videos and business assets, convert files, check grammar and extract text with 54 free browser tools. No signup, no watermark and no surprise paywall.">
+<title>MigaBuilder — 58 Free Private Browser Tools</title>
+<meta name="description" content="Create websites, videos and business assets, convert files, check grammar and extract text with 58 free browser tools. No signup, no watermark and no surprise paywall.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://migabuilder.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MigaBuilder">
-<meta property="og:title" content="MigaBuilder — 54 Free Private Browser Tools">
-<meta property="og:description" content="Create, convert and check files with 54 free local-first browser tools. No signup or surprise paywall.">
+<meta property="og:title" content="MigaBuilder — 58 Free Private Browser Tools">
+<meta property="og:description" content="Create, convert and check files with 58 free local-first browser tools. No signup or surprise paywall.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
 <meta property="og:url" content="https://migabuilder.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MigaBuilder — 54 Free Private Browser Tools">
-<meta name="twitter:description" content="Create, convert and check files with 54 free local-first browser tools. No signup or surprise paywall.">
+<meta name="twitter:title" content="MigaBuilder — 58 Free Private Browser Tools">
+<meta name="twitter:description" content="Create, convert and check files with 58 free local-first browser tools. No signup or surprise paywall.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 54 free local-first browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
+    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 58 free local-first browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
     {"@type":"SoftwareApplication","@id":"https://migabuilder.com/#app","name":"MigaBuilder","url":"https://migabuilder.com/","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"A local-first toolkit for websites, files, documents, video and business assets.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI website builder","Local project hub","PDF toolkit","Private OCR","Website checkup","File utilities","Content repurposing","Form generator","Group video meetings","CV and résumé generator"]}
   ]
 }
@@ -589,119 +589,179 @@
   .home-tour{max-width:1240px;margin:18px auto 0;padding:0 48px}.home-tour details{border:1px solid rgba(111,209,224,.25);background:rgba(8,24,38,.76);border-radius:8px;padding:14px 18px}.home-tour summary{cursor:pointer;font-weight:700}.home-tour p{color:rgba(237,234,224,.72);line-height:1.55}
   @media(max-width:900px){.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:620px){.home-tour{padding:0 20px}.quick-grid{grid-template-columns:1fr}.tool-card small{font-size:13px}}
+
+  /* ---- Home hero: logo as the "M", animated title, search, categories right below ---- */
+  header.masthead.home-hero { display:block; padding:30px clamp(20px,4vw,48px) 22px; text-align:center; overflow:hidden; }
+  header.masthead.home-hero::before { content:""; position:absolute; inset:-40% -10% auto; height:420px; background:radial-gradient(closest-side, rgba(111,209,224,.20), transparent 70%), radial-gradient(closest-side at 70% 60%, rgba(226,166,59,.14), transparent 70%); pointer-events:none; z-index:0; }
+  .home-hero > * { position:relative; z-index:1; }
+  .hero-lang { display:flex; justify-content:flex-end; margin:-12px 0 6px; }
+  .brand-title { display:inline-flex; align-items:center; gap:0; margin:4px 0 0; line-height:1; direction:ltr; }
+  header.masthead.home-hero h1.brand-title { font-size:clamp(44px,8.5vw,92px); letter-spacing:-.035em; background:none; color:inherit; }
+  .brand-m { width:1.06em; height:1.06em; flex:none; margin-right:.02em; transform:translateY(.02em); filter:drop-shadow(0 0 14px rgba(111,209,224,.55)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); animation:brandPulse 4.5s ease-in-out infinite; }
+  .brand-word { font-family:'Space Grotesk',sans-serif; font-weight:700; background:linear-gradient(100deg,#EDEAE0 0%,#6FD1E0 28%,#E2A63B 52%,#6FD1E0 76%,#EDEAE0 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:brandShine 7s linear infinite; text-shadow:0 0 34px rgba(111,209,224,.22); }
+  @keyframes brandShine { from { background-position:0% 50%; } to { background-position:220% 50%; } }
+  @keyframes brandPulse { 0%,100% { filter:drop-shadow(0 0 10px rgba(111,209,224,.45)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); } 50% { filter:drop-shadow(0 0 22px rgba(226,166,59,.6)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); } }
+  @media (prefers-reduced-motion: reduce) { .brand-m, .brand-word { animation:none; } }
+  header.masthead.home-hero p.hero-copy { max-width:720px; margin:14px auto 0; font-size:clamp(15px,1.6vw,18px); color:rgba(237,234,224,.78); line-height:1.5; }
+  .home-hero .trust-row { justify-content:center; margin-top:14px; }
+  .hero-search { position:relative; display:flex; gap:10px; max-width:760px; margin:20px auto 0; flex-wrap:wrap; }
+  .hero-search .search-icon { position:absolute; left:16px; top:14px; font-size:22px; line-height:1; color:var(--line-cyan); pointer-events:none; }
+  .hero-search .tool-search { flex:1 1 320px; width:auto; min-height:52px; padding:12px 16px 12px 46px; font-size:16px; border-radius:12px; border:1.5px solid rgba(111,209,224,.55); background:rgba(8,24,38,.85); box-shadow:0 0 0 4px rgba(111,209,224,.07), 0 10px 30px rgba(0,0,0,.25); }
+  .hero-search .tool-search:focus { border-color:var(--line-cyan); box-shadow:0 0 0 4px rgba(111,209,224,.22); outline:none; }
+  .cta-build, .cta-install { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 20px; border-radius:12px; font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap; }
+  .cta-build { background:var(--amber); color:var(--amber-ink); box-shadow:0 8px 24px rgba(226,166,59,.28); }
+  .cta-build:hover { filter:brightness(1.07); }
+  .cta-install { border:1px solid var(--line-cyan-dim); color:var(--line-cyan); }
+  .cta-install[hidden] { display:none; }
+  [dir=rtl] .hero-search .search-icon { left:auto; right:16px; }
+  [dir=rtl] .hero-search .tool-search { padding:12px 46px 12px 16px; }
+  .search-hint { margin:10px auto 0 !important; font-size:13px !important; color:rgba(237,234,224,.55) !important; }
+  .tool-hub { padding-top:16px; }
+  .hub-bar { display:flex; justify-content:flex-end; margin:0 0 8px; }
+  .toggle-all { background:none; border:0; color:var(--line-cyan); font:600 13px inherit; cursor:pointer; text-decoration:underline; padding:4px 2px; }
+  .tool-group-toggle { justify-content:flex-start; }
+  .tool-group-toggle .cat-icon { font-size:20px; line-height:1; }
+  .tool-group-toggle .cat-name { flex:1; }
+  .tool-group-toggle .cat-count { min-width:28px; padding:2px 8px; border-radius:999px; background:rgba(111,209,224,.12); color:rgba(237,234,224,.75); font:600 12px 'IBM Plex Mono',monospace; letter-spacing:0; }
+  .quick-wrap { padding:6px clamp(20px,4vw,48px) 0; }
+  .home-tour { max-width:none; padding:18px clamp(20px,4vw,48px) 0; }
+  .tour-inner { display:grid; grid-template-columns:minmax(220px,.8fr) minmax(0,1.4fr); gap:24px; align-items:center; padding:20px; border:1px solid rgba(111,209,224,.25); background:rgba(8,24,38,.76); border-radius:8px; }
+  .tour-copy h2 { margin:0 0 8px; font:700 clamp(20px,2.4vw,26px) 'Space Grotesk',sans-serif; }
+  .tour-video { width:100%; aspect-ratio:16/9; border-radius:8px; background:#050f18; border:1px solid rgba(111,209,224,.2); }
+  @media(max-width:760px){ .tour-inner { grid-template-columns:1fr; } .hero-lang { justify-content:center; margin-top:0; } .cta-build, .cta-install { flex:1 1 100%; } }
+
+  /* ---- Categories as a horizontal row of tiles; the chosen category's tools open in a panel underneath ---- */
+  .tool-groups { grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+  .tool-group { display:contents; }
+  .tool-group-toggle { order:0; flex-direction:column; align-items:center; justify-content:center; gap:7px; min-height:122px; padding:16px 10px; text-align:center; background:rgba(8,24,38,.8); border:1px solid var(--line-cyan-dim); border-radius:12px; transition:transform .15s ease, border-color .15s ease, background .15s ease; }
+  .tool-group-toggle:hover { transform:translateY(-2px); border-color:rgba(111,209,224,.65); background:rgba(111,209,224,.08); }
+  .tool-group-toggle .cat-icon { font-size:30px; }
+  .tool-group-toggle .cat-name { flex:none; font-size:12.5px; line-height:1.3; letter-spacing:.06em; }
+  .tool-group-toggle .chevron { display:none; }
+  .tool-group.open .tool-group-toggle, .tool-group.search-open .tool-group-toggle { border-color:var(--line-cyan); background:rgba(111,209,224,.15); box-shadow:inset 0 0 0 1px var(--line-cyan), 0 6px 18px rgba(0,0,0,.25); }
+  .tool-group-list { order:1; grid-column:1/-1; background:rgba(8,24,38,.82); border:1px solid rgba(111,209,224,.45); border-radius:12px; padding:14px 18px 16px; }
+  .list-title { grid-column:1/-1; display:flex; gap:8px; align-items:center; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid rgba(111,209,224,.14); color:var(--line-cyan); font:700 13px 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+  @media(max-width:900px){ .tool-groups { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media(max-width:520px){ .tool-groups { grid-template-columns:repeat(2,minmax(0,1fr)); } .tool-group-toggle { min-height:100px; padding:12px 8px; } .tool-group-toggle .cat-icon { font-size:26px; } }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
 <body>
 
-<header class="masthead">
-  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<header class="masthead home-hero">
+  <div class="hero-lang" data-i18n-switcher></div>
+  <h1 class="brand-title" aria-label="MigaBuilder"><svg class="brand-m" aria-hidden="true" focusable="false" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
     <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
     <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
-  </svg>
-  <div>
-    <h1>MigaBuilder</h1>
-    <p class="hero-copy" data-i18n="heroSubtitle">Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.</p>
-    <div class="hero-actions"><a class="primary-link" href="website-builder.html">Build a website</a><a href="#tools">Explore all tools</a><a href="cartoon-forge.html">Try Cartoon Forge</a><a href="#" id="installApp" hidden title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
-    <div class="trust-row"><span>54 free tools</span><span>No signup</span><span>No watermark</span><span>No surprise paywall</span><span>Open source</span></div>
-    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
+  <p class="hero-copy" data-i18n="heroSubtitle">Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.</p>
+  <div class="trust-row"><span data-i18n="trustTools">58 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
+  <div class="hero-search">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
+    <a class="cta-build" href="website-builder.html" data-i18n="ctaBuild">Build a website</a>
+    <a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a>
   </div>
+  <p class="search-hint" data-i18n="searchHint">Try “pdf”, “video”, “cv” or “logo” — or open a category below.</p>
 </header>
 
-<section class="trust-explainer" aria-label="Why use MigaBuilder">
-  <div class="trust-card"><strong>Private by default</strong><span>File tools process on your device whenever possible. AI tools clearly tell you when an outside AI service is used.</span></div>
-  <div class="trust-card"><strong>Free without the trap</strong><span>Start, finish and download without creating an account or reaching a payment screen at the last step.</span></div>
-  <div class="trust-card"><strong>Built to be checked</strong><span>Preview the result before downloading, follow a narrated walkthrough, and inspect the open-source code.</span></div>
+<section class="tool-hub" id="tools" aria-label="All tools">
+  <div class="hub-bar"><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
+  <p class="search-empty" id="searchEmpty" hidden data-i18n="searchEmpty">No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
+  <div class="tool-groups" id="toolGroups">
+    <div class="tool-group" data-category="create" data-icon="✨"><h3 data-i18n="catCreate">Create</h3>
+      <a class="tool-card" href="website-builder.html"><span class="tool-icon">🌐</span><span><strong>Website Builder</strong><small data-i18n="d:website-builder">Generate a complete multi-page business site.</small></span></a>
+      <a class="tool-card" href="game-forge.html"><span class="tool-icon">🥷</span><span><strong>Game Forge</strong><small data-i18n="d:game-forge">Turn a prompt into a playable browser game.</small></span></a>
+      <a class="tool-card" href="cartoon-forge.html"><span class="tool-icon">🎞️</span><span><strong>Cartoon Forge</strong><small data-i18n="d:cartoon-forge">Create an animated story and record it as video.</small></span></a>
+      <a class="tool-card" href="3d-cartoon.html" data-keywords="3d cartoon animation cel shaded toon movie three.js story characters ai video"><span class="tool-icon">🧸</span><span><strong>3D Cartoon</strong><small data-i18n="d:3d-cartoon">Describe a story and watch it play as a 3D cartoon with talking characters.</small></span></a>
+      <a class="tool-card" href="app-forge.html"><span class="tool-icon">📱</span><span><strong>App Forge</strong><small data-i18n="d:app-forge">Build a self-contained browser app.</small></span></a>
+      <a class="tool-card" href="bot-forge.html"><span class="tool-icon">🤖</span><span><strong>Bot Forge</strong><small data-i18n="d:bot-forge">Make a website FAQ and chat widget.</small></span></a>
+      <a class="tool-card" href="bug-scanner.html" data-keywords="bug scanner code checker debug debugger error fix code review syntax python javascript html java c++ security lint"><span class="tool-icon">🐞</span><span><strong>Bug Scanner</strong><small data-i18n="d:bug-scanner">Find, explain and fix bugs in any code — and preview what it builds.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="video" data-icon="🎬"><h3 data-i18n="catVideo">Video &amp; audio</h3>
+      <a class="tool-card" href="video-forge.html"><span class="tool-icon">🎬</span><span><strong>Video Forge</strong><small data-i18n="d:video-forge">Turn drawings and images into motion.</small></span></a>
+      <a class="tool-card" href="talk-forge.html"><span class="tool-icon">🗣️</span><span><strong>Talk Forge</strong><small data-i18n="d:talk-forge">Make a photo speak with your audio.</small></span></a>
+      <a class="tool-card" href="clip-forge.html"><span class="tool-icon">✂️</span><span><strong>Clip Forge</strong><small data-i18n="d:clip-forge">Trim, caption and translate video.</small></span></a>
+      <a class="tool-card" href="merge-forge.html"><span class="tool-icon">🧩</span><span><strong>Merge Forge</strong><small data-i18n="d:merge-forge">Combine clips, images, text and music.</small></span></a>
+      <a class="tool-card" href="music-forge.html"><span class="tool-icon">🎵</span><span><strong>Music Forge</strong><small data-i18n="d:music-forge">Generate original browser-made music.</small></span></a>
+      <a class="tool-card" href="record-forge.html"><span class="tool-icon">⏺️</span><span><strong>Record Forge</strong><small data-i18n="d:record-forge">Record your screen with narration.</small></span></a>
+      <a class="tool-card" href="media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small data-i18n="d:media-convert">Turn video into GIF, extract audio and transcribe speech.</small></span></a>
+      <a class="tool-card" href="audio-forge.html" data-keywords="audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"><span class="tool-icon">🎚️</span><span><strong>Audio Forge</strong><small data-i18n="d:audio-forge">Trim, join, fade, speed up and convert audio to MP3 or WAV.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="business" data-icon="💼"><h3 data-i18n="catBusiness">Business</h3>
+      <a class="tool-card" href="logo-forge.html"><span class="tool-icon">🎨</span><span><strong>Logo Forge</strong><small data-i18n="d:logo-forge">Create a logo, favicon and brand kit.</small></span></a>
+      <a class="tool-card" href="slide-forge.html"><span class="tool-icon">📊</span><span><strong>Slide Forge</strong><small data-i18n="d:slide-forge">Generate a downloadable PowerPoint.</small></span></a>
+      <a class="tool-card" href="invoice-forge.html"><span class="tool-icon">🧾</span><span><strong>Invoice Forge</strong><small data-i18n="d:invoice-forge">Make quotes and printable invoices.</small></span></a>
+      <a class="tool-card" href="contract-forge.html"><span class="tool-icon">📜</span><span><strong>Contract Forge</strong><small data-i18n="d:contract-forge">Draft straightforward agreements.</small></span></a>
+      <a class="tool-card" href="cv-forge.html"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small data-i18n="d:cv-forge">Create a professional CV and download it as PDF.</small></span></a>
+      <a class="tool-card" href="name-forge.html"><span class="tool-icon">✨</span><span><strong>Name Forge</strong><small data-i18n="d:name-forge">Find business names and domains.</small></span></a>
+      <a class="tool-card" href="post-forge.html"><span class="tool-icon">📣</span><span><strong>Post Forge</strong><small data-i18n="d:post-forge">Prepare and publish social posts.</small></span></a>
+      <a class="tool-card" href="repurpose-forge.html"><span class="tool-icon">♻️</span><span><strong>Repurpose Forge</strong><small data-i18n="d:repurpose-forge">Turn one idea into a complete publishing pack.</small></span></a>
+      <a class="tool-card" href="form-forge.html"><span class="tool-icon">📝</span><span><strong>Form Forge</strong><small data-i18n="d:form-forge">Create private downloadable forms and surveys.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="documents" data-icon="📄"><h3 data-i18n="catDocuments">Documents &amp; PDFs</h3>
+      <a class="tool-card" href="document-forge.html"><span class="tool-icon">📄</span><span><strong>Document Forge</strong><small data-i18n="d:document-forge">Convert documents, images and PDFs privately.</small></span></a>
+      <a class="tool-card" href="pdf-forge.html"><span class="tool-icon">📕</span><span><strong>PDF Forge</strong><small data-i18n="d:pdf-forge">Merge, split, number, watermark and create PDFs.</small></span></a>
+      <a class="tool-card" href="pdf-edit-forge.html"><span class="tool-icon">✍️</span><span><strong>Sign Documents</strong><small data-i18n="d:pdf-edit-forge">Sign PDFs, Word files and photos — draw, type or upload your signature.</small></span></a>
+      <a class="tool-card" href="pdf-compress.html"><span class="tool-icon">🗜️</span><span><strong>Compress PDF</strong><small data-i18n="d:pdf-compress">Shrink PDFs for email and upload limits.</small></span></a>
+      <a class="tool-card" href="ocr-forge.html"><span class="tool-icon">🔎</span><span><strong>OCR Forge</strong><small data-i18n="d:ocr-forge">Extract editable text from images privately.</small></span></a>
+      <a class="tool-card" href="grammar-forge.html"><span class="tool-icon">✓</span><span><strong>Grammar Forge</strong><small data-i18n="d:grammar-forge">Check writing privately in six languages with actionable suggestions.</small></span></a>
+      <a class="tool-card" href="text-compare.html" data-keywords="text compare diff checker difference compare documents versions changes contract"><span class="tool-icon">⚖️</span><span><strong>Text Compare</strong><small data-i18n="d:text-compare">See exactly what changed between two versions of a text.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="learn" data-icon="🎓"><h3 data-i18n="catLearn">Learn &amp; test yourself</h3>
+      <a class="tool-card" href="geo-forge.html"><span class="tool-icon">🗺️</span><span><strong>Geography Forge</strong><small data-i18n="d:geo-forge">Explore every country on a world map, then generate a quiz.</small></span></a>
+      <a class="tool-card" href="sim-forge.html"><span class="tool-icon">🚦</span><span><strong>Vehicle Simulator</strong><small data-i18n="d:sim-forge">Learn to drive, ride and steer, and fly a 3D plane or helicopter with a real instrument panel.</small></span></a>
+      <a class="tool-card" href="reasoning-test.html"><span class="tool-icon">🧠</span><span><strong>Reasoning Test</strong><small data-i18n="d:reasoning-test">Practice progressive reasoning questions with worked explanations.</small></span></a>
+      <a class="tool-card" href="pattern-lab.html"><span class="tool-icon">🔷</span><span><strong>Work Pattern Test</strong><small data-i18n="d:pattern-lab">Practise employer-style patterns and learn from worked explanations.</small></span></a>
+      <a class="tool-card" href="strength-compass.html"><span class="tool-icon">🧭</span><span><strong>Strength Compass</strong><small data-i18n="d:strength-compass">Discover your top five personal strengths privately.</small></span></a>
+      <a class="tool-card" href="big-five.html"><span class="tool-icon">🧩</span><span><strong>Big Five Personality</strong><small data-i18n="d:big-five">Explore five personality dimensions with a private 50-question report.</small></span></a>
+      <a class="tool-card" href="code-forge.html"><span class="tool-icon">🧑‍💻</span><span><strong>Code Forge</strong><small data-i18n="d:code-forge">Learn Python and JavaScript.</small></span></a>
+      <a class="tool-card" href="alphabet-forge.html" data-keywords="alphabet letters writing script language learn thai arabic chinese mandarin japanese hiragana katakana korean hangul greek russian cyrillic hebrew hindi devanagari georgian pronunciation keyboard typing on-screen keyboard"><span class="tool-icon">🔤</span><span><strong>Alphabet Forge</strong><small data-i18n="d:alphabet-forge">Hear, learn, write and type the world’s alphabets — with an on-screen keyboard.</small></span></a>
+      <a class="tool-card" href="idea-atlas.html" data-keywords="philosophy politics ideology history thinkers quiz game liberalism socialism conservatism stoicism marxism feminism"><span class="tool-icon">🏛️</span><span><strong>Idea Atlas</strong><small data-i18n="d:idea-atlas">Explore philosophies and ideologies, their thinkers and connections, then play the quiz.</small></span></a>
+      <a class="tool-card" href="biology-map.html" data-keywords="biology dna genes genetics evolution tree of life species animals human chimpanzee similarity gene expression protein codon mutation natural selection ancestry ethnic groups human diversity migration out of africa neanderthal quiz"><span class="tool-icon">🧬</span><span><strong>Biology Map</strong><small data-i18n="d:biology-map">Tree of life and shared DNA, how DNA is built, gene expression, mutations, evolution and human diversity.</small></span></a>
+      <a class="tool-card" href="chemistry-map.html" data-keywords="chemistry periodic table elements atoms atomic number symbols compounds molecules bonds ionic covalent metals materials alloys steel glass plastic battery molar mass formula calculator science quiz"><span class="tool-icon">⚗️</span><span><strong>Chemistry Map</strong><small data-i18n="d:chemistry-map">Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.</small></span></a>
+      <a class="tool-card" href="body-map.html" data-keywords="human body anatomy skeleton bones muscles tendons skin organs biology health illness disease symptoms treatment heart brain lungs liver digestion fasting nutrition quiz"><span class="tool-icon">🫀</span><span><strong>Body Map</strong><small data-i18n="d:body-map">Explore organs, bones, muscles, tendons and skin: how they work, illnesses and care, digestion, fasting and quizzes.</small></span></a>
+      <a class="tool-card" href="flashcard-forge.html" data-keywords="flashcards flash cards study spaced repetition memorize revise quiz anki quizlet vocabulary cloze matching game stats share"><span class="tool-icon">🗂️</span><span><strong>Flashcard Forge</strong><small data-i18n="d:flashcard-forge">AI flashcards, Anki-style spaced repetition, games, stats and share links.</small></span></a>
+      <a class="tool-card" href="exam-checker.html" data-keywords="exam checker test marking grading grade answer sheet bubble sheet omr scan photo teacher quiz multiple choice zipgrade gradescope results excel"><span class="tool-icon">📝</span><span><strong>Exam Checker</strong><small data-i18n="d:exam-checker">Print answer sheets, photograph each student's paper and download everyone's marks.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="utilities" data-icon="🛠️"><h3 data-i18n="catUtilities">Design &amp; utilities</h3>
+      <a class="tool-card" href="paint-forge.html"><span class="tool-icon">🖌️</span><span><strong>Paint Forge</strong><small data-i18n="d:paint-forge">Edit images with layers in the browser.</small></span></a>
+      <a class="tool-card" href="file-forge.html"><span class="tool-icon">🖼️</span><span><strong>Image Forge</strong><small data-i18n="d:file-forge">Batch-convert, resize, compress and clean image metadata.</small></span></a>
+      <a class="tool-card" href="image-studio.html"><span class="tool-icon">🪄</span><span><strong>Image Studio</strong><small data-i18n="d:image-studio">Remove backgrounds with AI, make collages, memes and thumbnails.</small></span></a>
+      <a class="tool-card" href="everyday-forge.html"><span class="tool-icon">📈</span><span><strong>Everyday Forge</strong><small data-i18n="d:everyday-forge">Create charts, improve writing, generate passwords and convert values.</small></span></a>
+      <a class="tool-card" href="utility-forge.html"><span class="tool-icon">🧰</span><span><strong>Utility Forge</strong><small data-i18n="d:utility-forge">Convert CSV/JSON, combine text and verify files.</small></span></a>
+      <a class="tool-card" href="site-checkup.html"><span class="tool-icon">✅</span><span><strong>Website Checkup</strong><small data-i18n="d:site-checkup">Check HTML for SEO and accessibility problems.</small></span></a>
+      <a class="tool-card" href="project-hub.html"><span class="tool-icon">🗂️</span><span><strong>Project Hub</strong><small data-i18n="d:project-hub">Manage and back up projects stored on this device.</small></span></a>
+      <a class="tool-card" href="model-forge.html"><span class="tool-icon">🧊</span><span><strong>Model Forge</strong><small data-i18n="d:model-forge">Design 3D models and printable forms.</small></span></a>
+      <a class="tool-card" href="cad-forge.html" data-keywords="cad house building design floor plan architecture walls roof framing elevation dxf blueprint"><span class="tool-icon">🏠</span><span><strong>CAD Forge</strong><small data-i18n="d:cad-forge">Draw a floor plan and get a 3D house, drawings and a material list.</small></span></a>
+      <a class="tool-card" href="palette-forge.html"><span class="tool-icon">🌈</span><span><strong>Palette Forge</strong><small data-i18n="d:palette-forge">Build accessible color systems.</small></span></a>
+      <a class="tool-card" href="qr-forge.html"><span class="tool-icon">▦</span><span><strong>QR Forge</strong><small data-i18n="d:qr-forge">Create downloadable QR codes.</small></span></a>
+      <a class="tool-card" href="screen-forge.html"><span class="tool-icon">🤝</span><span><strong>Screen Share Forge</strong><small data-i18n="d:screen-forge">Get live remote help.</small></span></a>
+      <a class="tool-card" href="meet-forge.html"><span class="tool-icon">👥</span><span><strong>Meet Forge</strong><small data-i18n="d:meet-forge">Host group video rooms and topic communities.</small></span></a>
+    </div>
+  </div>
 </section>
 
-<section class="home-tour"><details><summary>Tour MigaBuilder — find the right tool in one minute</summary><p>Search by task, browse a category, or start with a popular tool. Your recently opened and favourite tools are stored only in this browser.</p></details></section>
+<section class="quick-wrap" aria-label="Quick picks">
+  <div class="quick-tools" id="recentSection" hidden><h3 data-i18n="qRecent">Recently used</h3><div class="quick-grid" id="recentTools"></div></div>
+  <div class="quick-tools" id="favouriteSection" hidden><h3 data-i18n="qFavourites">Favourites</h3><div class="quick-grid" id="favouriteTools"></div></div>
+  <div class="quick-tools"><h3 data-i18n="qPopular">Popular tools</h3><div class="quick-grid" id="popularTools"></div></div>
+  <div class="quick-tools"><h3 data-i18n="qNew">New</h3><div class="quick-grid" id="newTools"></div></div>
+</section>
 
-<section class="tool-hub" id="tools">
-  <div class="tool-hub-head"><div><h2>What do you want to make?</h2><p>Choose one task and start immediately.</p></div><input class="tool-search" id="toolSearch" type="search" placeholder="Search 54 tools…" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match"></div>
-  <div class="hub-controls" aria-label="Tool categories">
-    <button class="filter-chip active" data-filter="all">All tools</button>
-    <button class="filter-chip" data-filter="create">Create</button>
-    <button class="filter-chip" data-filter="video">Video &amp; audio</button>
-    <button class="filter-chip" data-filter="business">Business</button>
-    <button class="filter-chip" data-filter="documents">Documents &amp; PDFs</button>
-    <button class="filter-chip" data-filter="learn">Learn &amp; tests</button>
-    <button class="filter-chip" data-filter="utilities">Design &amp; utilities</button>
+<section class="home-tour" id="tour" aria-labelledby="tourTitle">
+  <div class="tour-inner">
+    <div class="tour-copy"><h2 id="tourTitle" data-i18n="tourTitle">Tour MigaBuilder — find the right tool in one minute</h2><p data-i18n="tourText">Search by task, open a category, or start with a popular tool. Your recently opened and favourite tools are stored only in this browser.</p></div>
+    <video class="tour-video" controls playsinline preload="none" poster="videos/index.jpg" aria-label="Narrated tour of the MigaBuilder home page"><source src="videos/index.mp4" type="video/mp4"></video>
   </div>
-  <div class="quick-tools"><h3>New</h3><div class="quick-grid" id="newTools"></div></div>
-  <div class="quick-tools"><h3>Popular tools</h3><div class="quick-grid" id="popularTools"></div></div>
-  <div class="quick-tools" id="recentSection" hidden><h3>Recently used</h3><div class="quick-grid" id="recentTools"></div></div>
-  <div class="quick-tools" id="favouriteSection" hidden><h3>Favourites</h3><div class="quick-grid" id="favouriteTools"></div></div>
-  <p class="search-empty" id="searchEmpty" hidden>No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
-  <div class="tool-groups" id="toolGroups">
-    <div class="tool-group"><h3>Create</h3>
-      <a class="tool-card" href="website-builder.html"><span class="tool-icon">🌐</span><span><strong>Website Builder</strong><small>Generate a complete multi-page business site.</small></span></a>
-      <a class="tool-card" href="game-forge.html"><span class="tool-icon">🥷</span><span><strong>Game Forge</strong><small>Turn a prompt into a playable browser game.</small></span></a>
-      <a class="tool-card" href="cartoon-forge.html"><span class="tool-icon">🎞️</span><span><strong>Cartoon Forge</strong><small>Create an animated story and record it as video.</small></span></a>
-      <a class="tool-card" href="3d-cartoon.html" data-keywords="3d cartoon animation cel shaded toon movie three.js"><span class="tool-icon">🧸</span><span><strong>3D Cartoon</strong><small>Watch a cel-shaded 3D cartoon scene play in your browser.</small></span></a>
-      <a class="tool-card" href="app-forge.html"><span class="tool-icon">📱</span><span><strong>App Forge</strong><small>Build a self-contained browser app.</small></span></a>
-      <a class="tool-card" href="bot-forge.html"><span class="tool-icon">🤖</span><span><strong>Bot Forge</strong><small>Make a website FAQ and chat widget.</small></span></a>
-      <a class="tool-card" href="bug-scanner.html" data-keywords="bug scanner code checker debug debugger error fix code review syntax python javascript html java c++ security lint"><span class="tool-icon">🐞</span><span><strong>Bug Scanner</strong><small>Find, explain and fix bugs in any code — and preview what it builds.</small></span></a>
-    </div>
-    <div class="tool-group"><h3>Video &amp; audio</h3>
-      <a class="tool-card" href="video-forge.html"><span class="tool-icon">🎬</span><span><strong>Video Forge</strong><small>Turn drawings and images into motion.</small></span></a>
-      <a class="tool-card" href="talk-forge.html"><span class="tool-icon">🗣️</span><span><strong>Talk Forge</strong><small>Make a photo speak with your audio.</small></span></a>
-      <a class="tool-card" href="clip-forge.html"><span class="tool-icon">✂️</span><span><strong>Clip Forge</strong><small>Trim, caption and translate video.</small></span></a>
-      <a class="tool-card" href="merge-forge.html"><span class="tool-icon">🧩</span><span><strong>Merge Forge</strong><small>Combine clips, images, text and music.</small></span></a>
-      <a class="tool-card" href="music-forge.html"><span class="tool-icon">🎵</span><span><strong>Music Forge</strong><small>Generate original browser-made music.</small></span></a>
-      <a class="tool-card" href="record-forge.html"><span class="tool-icon">⏺️</span><span><strong>Record Forge</strong><small>Record your screen with narration.</small></span></a>
-      <a class="tool-card" href="media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small>Turn video into GIF, extract audio and transcribe speech.</small></span></a>
-      <a class="tool-card" href="audio-forge.html" data-keywords="audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"><span class="tool-icon">🎚️</span><span><strong>Audio Forge</strong><small>Trim, join, fade, speed up and convert audio to MP3 or WAV.</small></span></a>
-    </div>
-    <div class="tool-group"><h3>Business</h3>
-      <a class="tool-card" href="logo-forge.html"><span class="tool-icon">🎨</span><span><strong>Logo Forge</strong><small>Create a logo, favicon and brand kit.</small></span></a>
-      <a class="tool-card" href="slide-forge.html"><span class="tool-icon">📊</span><span><strong>Slide Forge</strong><small>Generate a downloadable PowerPoint.</small></span></a>
-      <a class="tool-card" href="invoice-forge.html"><span class="tool-icon">🧾</span><span><strong>Invoice Forge</strong><small>Make quotes and printable invoices.</small></span></a>
-      <a class="tool-card" href="contract-forge.html"><span class="tool-icon">📜</span><span><strong>Contract Forge</strong><small>Draft straightforward agreements.</small></span></a>
-      <a class="tool-card" href="cv-forge.html"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small>Create a professional CV and download it as PDF.</small></span></a>
-      <a class="tool-card" href="name-forge.html"><span class="tool-icon">✨</span><span><strong>Name Forge</strong><small>Find business names and domains.</small></span></a>
-      <a class="tool-card" href="post-forge.html"><span class="tool-icon">📣</span><span><strong>Post Forge</strong><small>Prepare and publish social posts.</small></span></a>
-      <a class="tool-card" href="repurpose-forge.html"><span class="tool-icon">♻️</span><span><strong>Repurpose Forge</strong><small>Turn one idea into a complete publishing pack.</small></span></a>
-      <a class="tool-card" href="form-forge.html"><span class="tool-icon">📝</span><span><strong>Form Forge</strong><small>Create private downloadable forms and surveys.</small></span></a>
-    </div>
-    <div class="tool-group"><h3>Documents &amp; PDFs</h3>
-      <a class="tool-card" href="document-forge.html"><span class="tool-icon">📄</span><span><strong>Document Forge</strong><small>Convert documents, images and PDFs privately.</small></span></a>
-      <a class="tool-card" href="pdf-forge.html"><span class="tool-icon">📕</span><span><strong>PDF Forge</strong><small>Merge, split, number, watermark and create PDFs.</small></span></a>
-      <a class="tool-card" href="pdf-edit-forge.html"><span class="tool-icon">✍️</span><span><strong>Sign Documents</strong><small>Sign PDFs, Word files and photos — draw, type or upload your signature.</small></span></a>
-      <a class="tool-card" href="pdf-compress.html"><span class="tool-icon">🗜️</span><span><strong>Compress PDF</strong><small>Shrink PDFs for email and upload limits.</small></span></a>
-      <a class="tool-card" href="ocr-forge.html"><span class="tool-icon">🔎</span><span><strong>OCR Forge</strong><small>Extract editable text from images privately.</small></span></a>
-      <a class="tool-card" href="grammar-forge.html"><span class="tool-icon">✓</span><span><strong>Grammar Forge</strong><small>Check writing privately in six languages with actionable suggestions.</small></span></a>
-      <a class="tool-card" href="text-compare.html" data-keywords="text compare diff checker difference compare documents versions changes contract"><span class="tool-icon">⚖️</span><span><strong>Text Compare</strong><small>See exactly what changed between two versions of a text.</small></span></a>
-    </div>
-    <div class="tool-group"><h3>Learn &amp; test yourself</h3>
-      <a class="tool-card" href="geo-forge.html"><span class="tool-icon">🗺️</span><span><strong>Geography Forge</strong><small>Explore every country on a world map, then generate a quiz.</small></span></a>
-      <a class="tool-card" href="sim-forge.html"><span class="tool-icon">🚦</span><span><strong>Vehicle Simulator</strong><small>Learn to drive, ride and steer, and fly a 3D plane or helicopter with a real instrument panel.</small></span></a>
-      <a class="tool-card" href="reasoning-test.html"><span class="tool-icon">🧠</span><span><strong>Reasoning Test</strong><small>Practice progressive reasoning questions with worked explanations.</small></span></a>
-      <a class="tool-card" href="pattern-lab.html"><span class="tool-icon">🔷</span><span><strong>Work Pattern Test</strong><small>Practise employer-style patterns and learn from worked explanations.</small></span></a>
-      <a class="tool-card" href="strength-compass.html"><span class="tool-icon">🧭</span><span><strong>Strength Compass</strong><small>Discover your top five personal strengths privately.</small></span></a>
-      <a class="tool-card" href="big-five.html"><span class="tool-icon">🧩</span><span><strong>Big Five Personality</strong><small>Explore five personality dimensions with a private 50-question report.</small></span></a>
-      <a class="tool-card" href="code-forge.html"><span class="tool-icon">🧑‍💻</span><span><strong>Code Forge</strong><small>Learn Python and JavaScript.</small></span></a>
-      <a class="tool-card" href="alphabet-forge.html" data-keywords="alphabet letters writing script language learn thai arabic chinese mandarin japanese hiragana katakana korean hangul greek russian cyrillic hebrew hindi devanagari georgian pronunciation keyboard typing on-screen keyboard"><span class="tool-icon">🔤</span><span><strong>Alphabet Forge</strong><small>Hear, learn, write and type the world’s alphabets — with an on-screen keyboard.</small></span></a>
-      <a class="tool-card" href="idea-atlas.html" data-keywords="philosophy politics ideology history thinkers quiz game liberalism socialism conservatism stoicism marxism feminism"><span class="tool-icon">🏛️</span><span><strong>Idea Atlas</strong><small>Explore philosophies and ideologies, their thinkers and connections, then play the quiz.</small></span></a>
-      <a class="tool-card" href="flashcard-forge.html" data-keywords="flashcards flash cards study spaced repetition memorize revise quiz anki quizlet vocabulary cloze matching game stats share"><span class="tool-icon">🗂️</span><span><strong>Flashcard Forge</strong><small>AI flashcards, Anki-style spaced repetition, games, stats and share links.</small></span></a>
-    </div>
-    <div class="tool-group"><h3>Design &amp; utilities</h3>
-      <a class="tool-card" href="paint-forge.html"><span class="tool-icon">🖌️</span><span><strong>Paint Forge</strong><small>Edit images with layers in the browser.</small></span></a>
-      <a class="tool-card" href="file-forge.html"><span class="tool-icon">🖼️</span><span><strong>Image Forge</strong><small>Batch-convert, resize, compress and clean image metadata.</small></span></a>
-      <a class="tool-card" href="image-studio.html"><span class="tool-icon">🪄</span><span><strong>Image Studio</strong><small>Remove backgrounds with AI, make collages, memes and thumbnails.</small></span></a>
-      <a class="tool-card" href="everyday-forge.html"><span class="tool-icon">📈</span><span><strong>Everyday Forge</strong><small>Create charts, improve writing, generate passwords and convert values.</small></span></a>
-      <a class="tool-card" href="utility-forge.html"><span class="tool-icon">🧰</span><span><strong>Utility Forge</strong><small>Convert CSV/JSON, combine text and verify files.</small></span></a>
-      <a class="tool-card" href="site-checkup.html"><span class="tool-icon">✅</span><span><strong>Website Checkup</strong><small>Check HTML for SEO and accessibility problems.</small></span></a>
-      <a class="tool-card" href="project-hub.html"><span class="tool-icon">🗂️</span><span><strong>Project Hub</strong><small>Manage and back up projects stored on this device.</small></span></a>
-      <a class="tool-card" href="model-forge.html"><span class="tool-icon">🧊</span><span><strong>Model Forge</strong><small>Design 3D models and printable forms.</small></span></a>
-      <a class="tool-card" href="cad-forge.html" data-keywords="cad house building design floor plan architecture walls roof framing elevation dxf blueprint"><span class="tool-icon">🏠</span><span><strong>CAD Forge</strong><small>Draw a floor plan and get a 3D house, drawings and a material list.</small></span></a>
-      <a class="tool-card" href="palette-forge.html"><span class="tool-icon">🌈</span><span><strong>Palette Forge</strong><small>Build accessible color systems.</small></span></a>
-      <a class="tool-card" href="qr-forge.html"><span class="tool-icon">▦</span><span><strong>QR Forge</strong><small>Create downloadable QR codes.</small></span></a>
-      <a class="tool-card" href="screen-forge.html"><span class="tool-icon">🤝</span><span><strong>Screen Share Forge</strong><small>Get live remote help.</small></span></a>
-      <a class="tool-card" href="meet-forge.html"><span class="tool-icon">👥</span><span><strong>Meet Forge</strong><small>Host group video rooms and topic communities.</small></span></a>
-    </div>
-  </div>
+</section>
+
+<section class="trust-explainer" aria-label="Why use MigaBuilder">
+  <div class="trust-card"><strong data-i18n="trust1Title">Private by default</strong><span data-i18n="trust1Text">File tools process on your device whenever possible. AI tools clearly tell you when an outside AI service is used.</span></div>
+  <div class="trust-card"><strong data-i18n="trust2Title">Free without the trap</strong><span data-i18n="trust2Text">Start, finish and download without creating an account or reaching a payment screen at the last step.</span></div>
+  <div class="trust-card"><strong data-i18n="trust3Title">Built to be checked</strong><span data-i18n="trust3Text">Preview the result before downloading, follow a narrated walkthrough, and inspect the open-source code.</span></div>
 </section>
 
 <div class="showcase">
@@ -709,12 +769,12 @@
     <h2 data-i18n="samplesHeading">Samples — what MigaBuilder can make</h2>
   </div>
   <div class="showcase-grid" id="sampleGrid">
-    <a class="showcase-card" href="pdf-forge.html"><strong>Organised PDF</strong><span>Merge, split, number or watermark pages</span></a>
-    <a class="showcase-card" href="image-studio.html"><strong>Finished image</strong><span>Remove a background or make a thumbnail</span></a>
-    <a class="showcase-card" href="cv-forge.html"><strong>Professional CV</strong><span>Complete it and download a real PDF</span></a>
-    <a class="showcase-card" href="website-builder.html"><strong>Business website</strong><span>Build and preview a multi-page site</span></a>
-    <a class="showcase-card" href="grammar-forge.html"><strong>Improved writing</strong><span>Private suggestions in six languages</span></a>
-    <a class="showcase-card" href="ocr-forge.html"><strong>Editable text</strong><span>Extract writing from a photo or scan</span></a>
+    <a class="showcase-card" href="pdf-forge.html"><strong data-i18n="s1Title">Organised PDF</strong><span data-i18n="s1Text">Merge, split, number or watermark pages</span></a>
+    <a class="showcase-card" href="image-studio.html"><strong data-i18n="s2Title">Finished image</strong><span data-i18n="s2Text">Remove a background or make a thumbnail</span></a>
+    <a class="showcase-card" href="cv-forge.html"><strong data-i18n="s3Title">Professional CV</strong><span data-i18n="s3Text">Complete it and download a real PDF</span></a>
+    <a class="showcase-card" href="website-builder.html"><strong data-i18n="s4Title">Business website</strong><span data-i18n="s4Text">Build and preview a multi-page site</span></a>
+    <a class="showcase-card" href="grammar-forge.html"><strong data-i18n="s5Title">Improved writing</strong><span data-i18n="s5Text">Private suggestions in six languages</span></a>
+    <a class="showcase-card" href="ocr-forge.html"><strong data-i18n="s6Title">Editable text</strong><span data-i18n="s6Text">Extract writing from a photo or scan</span></a>
   </div>
 </div>
 
@@ -724,27 +784,31 @@
     <a href="#" id="showcaseSubmitLink" style="color: var(--line-cyan);" data-i18n="submitSiteLink">Submit your site →</a>
   </div>
   <div class="showcase-grid" id="showcaseGrid"></div>
-  <div class="community-callout" id="showcaseEmpty">Built something useful with MigaBuilder? Submit it for the community showcase. Personal details are never added without your approval.</div>
+  <div class="community-callout" id="showcaseEmpty" data-i18n="communityText">Built something useful with MigaBuilder? Submit it for the community showcase. Personal details are never added without your approval.</div>
 </div>
 
-<footer>54 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</footer>
+<footer data-i18n="footerText">58 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</footer>
 <script>
 (function(){
   const search=document.getElementById('toolSearch');
   const groups=[...document.querySelectorAll('.tool-group')];
   const cards=[...document.querySelectorAll('#toolGroups .tool-card')];
-  search.placeholder='Search '+cards.length+' tools…';
-  const categoryFor=g=>{const h=(g.querySelector('h3')?.textContent||'').toLowerCase();return h.includes('video')?'video':h.includes('business')?'business':h.includes('document')?'documents':h.includes('learn')?'learn':h.includes('design')?'utilities':'create'};
+  // English text of every card, so English words keep working when the page is shown in another language.
+  cards.forEach(c=>{c.dataset.en=c.textContent.replace(/\s+/g,' ').trim()});
   groups.forEach((g,index)=>{
-    g.dataset.category=categoryFor(g);
-    const heading=g.querySelector('h3'),label=heading.textContent.trim(),list=document.createElement('div'),button=document.createElement('button');
+    const heading=g.querySelector('h3'),list=document.createElement('div'),button=document.createElement('button');
     list.className='tool-group-list';list.id='tool-category-'+index;
     while(heading.nextSibling)list.appendChild(heading.nextSibling);
-    button.type='button';button.className='tool-group-toggle';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',list.id);button.innerHTML='<span>'+label+'</span><span class="chevron" aria-hidden="true">⌄</span>';
+    button.type='button';button.className='tool-group-toggle';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',list.id);const name=document.createElement('span');name.className='cat-name';name.textContent=heading.textContent.trim();name.setAttribute('data-i18n',heading.getAttribute('data-i18n'));
+    button.innerHTML='<span class="cat-icon" aria-hidden="true">'+(g.dataset.icon||'')+'</span><span class="cat-count">'+list.querySelectorAll('.tool-card').length+'</span><span class="chevron" aria-hidden="true">⌄</span>';button.insertBefore(name,button.children[1]);
+    const title=document.createElement('div');title.className='list-title';title.innerHTML='<span aria-hidden="true">'+(g.dataset.icon||'')+'</span>';const titleName=document.createElement('span');titleName.textContent=name.textContent;titleName.setAttribute('data-i18n',name.getAttribute('data-i18n'));title.appendChild(titleName);list.insertBefore(title,list.firstChild);
     heading.replaceWith(button);g.appendChild(list);
-    button.addEventListener('click',()=>{g.classList.toggle('open');button.setAttribute('aria-expanded',String(g.classList.contains('open')))});
+    button.addEventListener('click',()=>{const willOpen=!g.classList.contains('open');groups.forEach(x=>{x.classList.toggle('open',x===g&&willOpen);x.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(x===g&&willOpen))});syncToggleAll();if(willOpen){const r=list.getBoundingClientRect();if(r.top>innerHeight-120)list.scrollIntoView({behavior:'smooth',block:'nearest'})}});
   });
-  let active='all';
+  const toggleAll=document.getElementById('toggleAll');
+  function syncToggleAll(){const allOpen=groups.every(g=>g.classList.contains('open'));toggleAll.setAttribute('data-i18n',allOpen?'collapseAll':'expandAll');toggleAll.textContent=window.I18N?I18N.t(allOpen?'collapseAll':'expandAll'):(allOpen?'Close all categories':'Open all categories')}
+  toggleAll.addEventListener('click',()=>{const open=!groups.every(g=>g.classList.contains('open'));groups.forEach(g=>{g.classList.toggle('open',open);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(open))});syncToggleAll()});
+  const active='all';
   function apply(){
     const q=(search.value||'').trim().toLowerCase();
     const words=q.split(/\s+/).filter(Boolean);let total=0;
@@ -756,8 +820,8 @@
   // Fuzzy search: exact words score highest, then everyday synonyms ("site" → website,
   // "resume" → CV), then prefixes, then small typos ("vidoe", "invocie").
   const SYNONYMS={site:'website web page',homepage:'website',resume:'cv',résumé:'cv',photo:'image picture',pic:'image',picture:'image',movie:'video',film:'video',clip:'video',mp4:'video',mp3:'audio',sound:'audio music',song:'music',voice:'audio record talk',sign:'signature pdf',signature:'sign',scan:'ocr',text:'ocr writing',bill:'invoice',quote:'invoice',receipt:'invoice',deck:'slide powerpoint',presentation:'slide powerpoint',ppt:'slide powerpoint',pptx:'slide',word:'document docx',docx:'document',excel:'csv',spreadsheet:'csv',colour:'color palette',color:'palette',brand:'logo',font:'logo design',animation:'cartoon video',anime:'cartoon',chatbot:'bot',chat:'bot',faq:'bot',flashcards:'flashcard',study:'flashcard quiz learn',exam:'quiz test',test:'quiz',typing:'keyboard alphabet',language:'alphabet translate',translate:'clip grammar',spelling:'grammar',compress:'pdf image',shrink:'compress',diff:'compare',debug:'bug',code:'bug code',house:'cad',floorplan:'cad',plan:'cad',print:'3d model',map:'geography',country:'geography',car:'vehicle simulator',drive:'vehicle simulator',meeting:'meet',call:'meet',share:'screen',remote:'screen',form:'survey',survey:'form',cv:'resume'};
-  const tokenCache=new WeakMap();
-  function tokensOf(c){if(!tokenCache.has(c)){const text=(c.textContent+' '+(c.dataset.keywords||'')).toLowerCase();tokenCache.set(c,{text,title:(c.querySelector('strong')?.textContent||'').toLowerCase(),tokens:text.split(/[^\p{L}\p{N}+#]+/u).filter(Boolean)})}return tokenCache.get(c)}
+  const tokenCache=new Map();
+  function tokensOf(c){if(!tokenCache.has(c)){const text=(c.textContent+' '+(c.dataset.en||'')+' '+(c.dataset.keywords||'')).toLowerCase();tokenCache.set(c,{text,title:(c.querySelector('strong')?.textContent||'').toLowerCase(),tokens:text.split(/[^\p{L}\p{N}+#]+/u).filter(Boolean)})}return tokenCache.get(c)}
   function editDistance(a,b){const d=[];for(let i=0;i<=a.length;i++){d[i]=[i];for(let j=1;j<=b.length;j++)d[i][j]=i?Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1),i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]?d[i-2][j-2]+1:99):j}return d[a.length][b.length]}
   function wordScore(w,t){
     if(t.title.split(/\s+/).some(x=>x.startsWith(w)))return 10;
@@ -776,7 +840,6 @@
   search.addEventListener('input',apply);
   search.addEventListener('keydown',e=>{if(e.key==='Enter'&&best){e.preventDefault();best.card.click()}else if(e.key==='Escape'){search.value='';apply()}});
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!/^(input|textarea|select)$/i.test(document.activeElement?.tagName||'')&&!document.activeElement?.isContentEditable){e.preventDefault();search.focus();search.select()}});
-  document.querySelectorAll('.filter-chip').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter-chip').forEach(x=>x.classList.toggle('active',x===b));active=b.dataset.filter;apply()}));
   const key='migabuilder-tool-history',favKey='migabuilder-tool-favourites';
   const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return[]}};
   const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
@@ -786,112 +849,24 @@
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
     const popular=['pdf-forge.html','image-studio.html','grammar-forge.html','cv-forge.html','website-builder.html','ocr-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
-    document.getElementById('newTools').replaceChildren(...['bug-scanner.html','alphabet-forge.html','idea-atlas.html','audio-forge.html','flashcard-forge.html','text-compare.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['biology-map.html','chemistry-map.html','exam-checker.html','body-map.html','alphabet-forge.html','idea-atlas.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));
   }
-  cards.forEach(c=>{const href=c.getAttribute('href');const star=document.createElement('span');star.className='fav-toggle';star.setAttribute('role','button');star.setAttribute('tabindex','0');star.setAttribute('aria-label','Add to favourites');const sync=()=>star.textContent=read(favKey).includes(href)?'★':'☆';const toggle=e=>{e.preventDefault();e.stopPropagation();let a=read(favKey);a=a.includes(href)?a.filter(x=>x!==href):[href,...a];write(favKey,a.slice(0,12));sync();render()};star.addEventListener('click',toggle);star.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){toggle(e)}});c.appendChild(star);sync();c.addEventListener('click',e=>{if(e.defaultPrevented)return;let a=read(key).filter(x=>x!==href);write(key,[href,...a].slice(0,8))})});
+  cards.forEach(c=>{const href=c.getAttribute('href');const star=document.createElement('span');star.className='fav-toggle';star.setAttribute('role','button');star.setAttribute('tabindex','0');star.setAttribute('aria-label','Add to favourites');star.setAttribute('data-i18n-title','favAdd');const sync=()=>star.textContent=read(favKey).includes(href)?'★':'☆';const toggle=e=>{e.preventDefault();e.stopPropagation();let a=read(favKey);a=a.includes(href)?a.filter(x=>x!==href):[href,...a];write(favKey,a.slice(0,12));sync();render()};star.addEventListener('click',toggle);star.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){toggle(e)}});c.appendChild(star);sync();c.addEventListener('click',e=>{if(e.defaultPrevented)return;let a=read(key).filter(x=>x!==href);write(key,[href,...a].slice(0,8))})});
   render();apply();
+  // Translated text changes what the search matches, so rebuild the search index on a language change.
+  document.addEventListener('i18n:change',()=>{tokenCache.clear();apply();syncToggleAll();document.querySelectorAll('.fav-toggle').forEach(x=>x.setAttribute('aria-label',I18N.t('favAdd')))});
   // Offer "Install the app" once the browser says MigaBuilder can be installed (see miga-palette.js).
   const installLink=document.getElementById('installApp');
   installLink.addEventListener('click',e=>{e.preventDefault();window.MigaInstall&&window.MigaInstall.install()});
   document.addEventListener('miga-installable',()=>{installLink.hidden=!(window.MigaInstall&&window.MigaInstall.available())});
 })();
 </script>
+<script src="home-i18n.js"></script>
 <script>
-I18N.init({
-  en: {
-    heroSubtitle: 'Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.',
-    navSlide: '📊 PowerPoint generator', navFile: '🖼️ Image converter', navPaint: '🖌️ Layered image editor',
-    navQr: '▦ QR code generator', navLogo: '🎨 Logo & favicon maker', navGame: '🥷 AI game generator',
-    navVideo: '🎬 Drawing-to-video generator', navTalk: '🗣️ Make a photo talk', navBot: '🤖 Website chat/FAQ widget',
-    navApp: '📱 App generator', navPost: '📣 Post to Discord/Bluesky/Mastodon', navScreen: '🤝 Screen share / remote help',
-    navRecord: '⏺️ Screen recorder with voice narration', navMusic: '🎵 Music generator',
-    navClip: '✂️ Video trimmer, captions & translation', navMerge: '🧩 Merge images, clips & music into one video',
-    navInvoice: '🧾 Quote & invoice generator', navContract: '📜 Contract generator', navCode: '🧑‍💻 Learn Python & JavaScript',
-    navModel: '🧊 3D model & 3D-print designer',
-    navPalette: '🎨 Color palette generator',
-    navName: '✨ Business name generator',
-    navFeedback: '💬 Feedback & suggestions',
-    samplesHeading: 'Samples — what MigaBuilder can make', builtHeading: "See what's been built",
-    submitSiteLink: 'Submit your site →',
-    showcaseEmpty: 'No customer sites submitted yet — email yours in using the link above, or see SHOWCASE_SITES near the top of the script.',
-    footerText: 'MigaBuilder generates real HTML pages per request using your own OpenAI account. Buy buttons link to your own Stripe payment links — no card data ever passes through this tool. Review generated content and links before publishing.'
-  },
-  es: {
-    heroSubtitle: 'Crea sitios web, juegos, dibujos animados, vídeos, música y recursos empresariales prácticos con IA, directamente en tu navegador.',
-    navSlide: '📊 Generador de PowerPoint', navFile: '🖼️ Conversor de imágenes', navPaint: '🖌️ Editor de imágenes por capas',
-    navQr: '▦ Generador de códigos QR', navLogo: '🎨 Creador de logotipos y favicons', navGame: '🥷 Generador de juegos con IA',
-    navVideo: '🎬 Generador de dibujos a video', navTalk: '🗣️ Haz que una foto hable', navBot: '🤖 Widget de chat/FAQ para tu web',
-    navApp: '📱 Generador de aplicaciones', navPost: '📣 Publicar en Discord/Bluesky/Mastodon', navScreen: '🤝 Compartir pantalla / ayuda remota',
-    navRecord: '⏺️ Grabador de pantalla con narración de voz', navMusic: '🎵 Generador de música',
-    navClip: '✂️ Recortador de video, subtítulos y traducción', navMerge: '🧩 Combina imágenes, clips y música en un solo video',
-    navInvoice: '🧾 Generador de cotizaciones y facturas', navContract: '📜 Generador de contratos', navCode: '🧑‍💻 Aprende Python y JavaScript',
-    navModel: '🧊 Diseñador de modelos 3D e impresión 3D',
-    navPalette: '🎨 Generador de paletas de colores',
-    navName: '✨ Generador de nombres de negocios',
-    navFeedback: '💬 Comentarios y sugerencias',
-    samplesHeading: 'Ejemplos — lo que MigaBuilder puede crear', builtHeading: 'Mira lo que se ha creado',
-    submitSiteLink: 'Envía tu sitio →',
-    showcaseEmpty: 'Aún no se han enviado sitios de clientes — envía el tuyo usando el enlace de arriba, o consulta SHOWCASE_SITES cerca del inicio del script.',
-    footerText: 'MigaBuilder genera páginas HTML reales para cada solicitud usando tu propia cuenta de OpenAI. Los botones de compra enlazan a tus propios enlaces de pago de Stripe — ningún dato de tarjeta pasa nunca por esta herramienta. Revisa el contenido y los enlaces generados antes de publicar.'
-  },
-  ar: {
-    heroSubtitle: 'أنشئ مواقع وألعابًا ورسومًا متحركة وفيديوهات وموسيقى وأدوات عملية للأعمال بالذكاء الاصطناعي — مباشرة في متصفحك.',
-    navSlide: '📊 مولد عروض PowerPoint', navFile: '🖼️ محول الصور', navPaint: '🖌️ محرر صور بطبقات',
-    navQr: '▦ مولد رمز QR', navLogo: '🎨 صانع الشعارات وأيقونات المفضلة', navGame: '🥷 مولد ألعاب بالذكاء الاصطناعي',
-    navVideo: '🎬 تحويل الرسومات إلى فيديو', navTalk: '🗣️ اجعل الصورة تتحدث', navBot: '🤖 أداة دردشة/أسئلة شائعة للموقع',
-    navApp: '📱 مولد التطبيقات', navPost: '📣 النشر على Discord/Bluesky/Mastodon', navScreen: '🤝 مشاركة الشاشة / مساعدة عن بُعد',
-    navRecord: '⏺️ تسجيل الشاشة مع تعليق صوتي', navMusic: '🎵 مولد الموسيقى',
-    navClip: '✂️ قص الفيديو والترجمة والتعليقات', navMerge: '🧩 دمج الصور والمقاطع والموسيقى في فيديو واحد',
-    navInvoice: '🧾 مولد عروض الأسعار والفواتير', navContract: '📜 مولد العقود', navCode: '🧑‍💻 تعلم Python وJavaScript',
-    navModel: '🧊 مصمم نماذج ثلاثية الأبعاد وطباعة ثلاثية الأبعاد',
-    navPalette: '🎨 مولد لوحات الألوان',
-    navName: '✨ مولد أسماء الأعمال',
-    navFeedback: '💬 الملاحظات والاقتراحات',
-    samplesHeading: 'نماذج — ما يمكن لـ MigaBuilder إنشاءه', builtHeading: 'شاهد ما تم إنشاؤه',
-    submitSiteLink: 'أرسل موقعك ←',
-    showcaseEmpty: 'لم يتم إرسال أي مواقع عملاء بعد — أرسل موقعك عبر الرابط أعلاه، أو راجع SHOWCASE_SITES بالقرب من أعلى الكود.',
-    footerText: 'ينشئ MigaBuilder صفحات HTML حقيقية لكل طلب باستخدام حساب OpenAI الخاص بك. تؤدي أزرار الشراء إلى روابط الدفع الخاصة بك على Stripe — لا تمر أي بيانات بطاقة عبر هذه الأداة أبدًا. راجع المحتوى والروابط التي تم إنشاؤها قبل النشر.'
-  },
-  zh: {
-    heroSubtitle: '使用 AI 创建网站、游戏、动画、视频、音乐和实用商业素材——直接在浏览器中完成。',
-    navSlide: '📊 PowerPoint 生成器', navFile: '🖼️ 图片转换器', navPaint: '🖌️ 分层图像编辑器',
-    navQr: '▦ 二维码生成器', navLogo: '🎨 徽标与网站图标制作工具', navGame: '🥷 AI 游戏生成器',
-    navVideo: '🎬 手绘转视频生成器', navTalk: '🗣️ 让照片开口说话', navBot: '🤖 网站聊天/常见问题小部件',
-    navApp: '📱 应用生成器', navPost: '📣 发布到 Discord/Bluesky/Mastodon', navScreen: '🤝 屏幕共享 / 远程协助',
-    navRecord: '⏺️ 带语音讲解的屏幕录制', navMusic: '🎵 音乐生成器',
-    navClip: '✂️ 视频剪辑、字幕与翻译', navMerge: '🧩 将图片、视频片段与音乐合并为一个视频',
-    navInvoice: '🧾 报价单与发票生成器', navContract: '📜 合同生成器', navCode: '🧑‍💻 学习 Python 与 JavaScript',
-    navModel: '🧊 3D 建模与 3D 打印设计工具',
-    navPalette: '🎨 配色方案生成器',
-    navName: '✨ 企业名称生成器',
-    navFeedback: '💬 反馈与建议',
-    samplesHeading: '示例——MigaBuilder 能做什么', builtHeading: '看看大家做了什么',
-    submitSiteLink: '提交你的网站 →',
-    showcaseEmpty: '目前还没有客户提交网站——请使用上方链接提交你的网站，或查看脚本顶部附近的 SHOWCASE_SITES。',
-    footerText: 'MigaBuilder 使用你自己的 OpenAI 账户为每个请求生成真实的 HTML 页面。购买按钮链接到你自己的 Stripe 支付链接——任何卡片数据都不会经过此工具。发布前请检查生成的内容和链接。'
-  },
-  sw: {
-    heroSubtitle: 'Tengeneza tovuti, michezo, katuni, video, muziki na nyenzo za biashara kwa AI — moja kwa moja kwenye kivinjari chako.',
-    navSlide: '📊 Kitengenezea PowerPoint', navFile: '🖼️ Kibadilishaji picha', navPaint: '🖌️ Kihariri picha chenye tabaka',
-    navQr: '▦ Kitengenezea msimbo wa QR', navLogo: '🎨 Kitengenezea nembo na favicon', navGame: '🥷 Kitengenezea michezo kwa AI',
-    navVideo: '🎬 Kigeuzi cha michoro kuwa video', navTalk: '🗣️ Fanya picha izungumze', navBot: '🤖 Kifaa cha mazungumzo/maswali ya tovuti',
-    navApp: '📱 Kitengenezea programu', navPost: '📣 Chapisha kwenye Discord/Bluesky/Mastodon', navScreen: '🤝 Kushiriki skrini / msaada wa mbali',
-    navRecord: '⏺️ Kinasa skrini chenye maelezo ya sauti', navMusic: '🎵 Kitengenezea muziki',
-    navClip: '✂️ Kipunguzaji video, manukuu na tafsiri', navMerge: '🧩 Unganisha picha, video na muziki kuwa video moja',
-    navInvoice: '🧾 Kitengenezea nukuu na ankara', navContract: '📜 Kitengenezea mikataba', navCode: '🧑‍💻 Jifunze Python na JavaScript',
-    navModel: '🧊 Kitengenezea miundo ya 3D na uchapishaji wa 3D',
-    navPalette: '🎨 Kitengenezea mchanganyiko wa rangi',
-    navName: '✨ Kitengenezea majina ya biashara',
-    navFeedback: '💬 Maoni na mapendekezo',
-    samplesHeading: 'Mifano — MigaBuilder inaweza kutengeneza nini', builtHeading: 'Angalia kilichotengenezwa',
-    submitSiteLink: 'Wasilisha tovuti yako →',
-    showcaseEmpty: 'Hakuna tovuti za wateja zilizowasilishwa bado — tuma yako kwa kutumia kiungo hapo juu, au angalia SHOWCASE_SITES karibu na sehemu ya juu ya script.',
-    footerText: 'MigaBuilder hutengeneza kurasa halisi za HTML kwa kila ombi kwa kutumia akaunti yako ya OpenAI. Vitufe vya ununuzi vinaunganishwa na viungo vyako vya malipo vya Stripe — hakuna data ya kadi inayopita kwenye zana hii. Kagua maudhui na viungo vilivyotengenezwa kabla ya kuchapisha.'
-  }
-});
+I18N.init(window.HOME_I18N, { vars: { n: document.querySelectorAll('#toolGroups .tool-card').length } });
 </script>
 </body>
 </html>

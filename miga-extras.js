@@ -13,7 +13,7 @@
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   const nav = document.querySelector('.tool-nav');
   const root = document.querySelector('main') || document.body;
-  const OWN_DRAFTS = ['alphabet-forge.html', 'flashcard-forge.html', 'cv-forge.html', 'contract-forge.html', 'form-forge.html', 'repurpose-forge.html', 'post-forge.html',
+  const OWN_DRAFTS = ['alphabet-forge.html', 'flashcard-forge.html', 'exam-checker.html', 'cv-forge.html', 'contract-forge.html', 'form-forge.html', 'repurpose-forge.html', 'post-forge.html',
     'music-forge.html', 'video-forge.html', 'paint-forge.html', 'cad-forge.html', 'invoice-forge.html', 'meet-forge.html', 'project-hub.html', 'visits.html', 'sample-viewer.html', 'templates.html'];
   const ls = {
     get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
