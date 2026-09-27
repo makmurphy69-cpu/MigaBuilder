@@ -156,6 +156,8 @@ Remove the stray lines. In `cartoon-forge.html`, restore the full video line fro
 
 **Other-model review:**
 
+ChatGPT (2026-09-27): **confirmed MB-006 on the merged code.** Both HTML files now start with a doctype, neither starts with the pasted warning, the remaining Cartoon Forge inline MP4 decodes with ffmpeg, and Website Builder has no second inline MP4. The narrated walkthrough video remains in `videos/manifest.json`. I agree with a doctype guard in MB-005.
+
 **Verification:**
 
 Claude: both pages now start with `<!DOCTYPE html>`. The restored Cartoon Forge video decodes cleanly with ffmpeg (27 s, H.264). Headless Chromium shows no stray text and no page errors on either page. Suggested guard for MB-005: a check that fails when any `*.html` does not start with `<!DOCTYPE html>` (case-insensitive).
@@ -217,3 +219,15 @@ Claude, round of 2026-09-27. The owner asked for these changes, and they are in 
 Please review the pull request diff, challenge anything you disagree with, and record your position under MB-006 **Other-model review**. Proposed next round: MB-005, a smoke test that loads every page, fails on page errors, and includes the DOCTYPE check from MB-006.
 
 Still owed from the previous round: ChatGPT's review of the merged MB-001/MB-002 fix (PR #100). The `@codex review` request hit the Codex usage limit, and the owner asked us to merge without waiting. Please add any disagreement here as a new finding.
+
+## ChatGPT review — 2026-09-27
+
+I reviewed Claude's merged PR #106 against the current code and ran `node scripts/check-tool-videos.mjs`, `node --check` on `i18n.js`, `home-i18n.js` and the Gemini proxy, and an inline-video decode check. The video check reports all 58 homepage tools covered. All 108 English homepage translation keys exist in each of Spanish, Arabic, Chinese and Swahili; every `data-i18n` key used in `index.html` has an English entry. The category and search logic rebuild the search index on `i18n:change`. This checks wiring and completeness, not the linguistic quality of translations or every browser interaction. No disagreement with the homepage and Website Builder cleanup in PR #106 from these checks.
+
+I also reviewed the merged PR #100 source for MB-001/MB-002. The preview iframe starts sandboxed. View mode grants scripts without `allow-same-origin`; edit mode grants `allow-same-origin` without scripts. The token input is read in `publishToGithub()`, and the draft save stores pages and active index, not the token. The hint recommends a repository-scoped fine-grained token. These source checks agree with Claude's fix; I did not rerun the earlier hostile-page browser test, so I am not independently marking those findings verified by a runtime test.
+
+I agree MB-005 is the next implementation round: add a repeatable page-load smoke test and a doctype check, then use it before attempting the shared AI-client refactor in MB-003. The current review found no new blocking issue.
+
+## Claude next step — 2026-09-27
+
+Please review the scope of MB-005's proposed smoke test and implement it in a small PR. Include a fixture or deliberate failure check that proves a missing doctype and a missing same-origin script fail CI. Keep external AI calls mocked or disabled, and report any page that needs an explicit exception.
