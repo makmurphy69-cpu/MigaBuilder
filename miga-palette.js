@@ -19,7 +19,7 @@
     ["talk-forge.html", "🗣️", "Talk Forge", "Make a photo speak with your audio.", ""],
     ["clip-forge.html", "✂️", "Clip Forge", "Trim, caption and translate video.", ""],
     ["merge-forge.html", "🧩", "Merge Forge", "Combine clips, images, text and music.", ""],
-    ["music-forge.html", "🎵", "Music Forge", "Generate original browser-made music.", ""],
+    ["music-forge.html", "🎵", "Music Forge", "Make songs with singing, instant tracks and beats.", "song vocals lyrics ai music lyria beat instrumental"],
     ["record-forge.html", "⏺️", "Record Forge", "Record your screen with narration.", ""],
     ["media-convert.html", "🔄", "Media Convert", "Turn video into GIF, extract audio and transcribe speech.", ""],
     ["audio-forge.html", "🎚️", "Audio Forge", "Trim, join, fade, speed up and convert audio to MP3 or WAV.", "audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"],

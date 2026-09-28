@@ -147,6 +147,7 @@
     gear: function (k) { return c(102, 76, 11, 'none', ' stroke="' + k[1] + '" stroke-width="6" stroke-dasharray="4 3"') + c(102, 76, 5, k[1]); },
     palette: function (k) { return p('M86 80 Q86 60 104 60 Q122 60 120 76 Q118 86 108 84 Q100 82 100 90 Q98 96 90 92 Q86 88 86 80Z', '#e8c898', k[4], 2) + c(96, 70, 3, '#e8352a') + c(106, 67, 3, '#2a6ae8') + c(114, 74, 3, '#f2c42a') + c(94, 80, 3, '#2ab04a'); },
     balloon: function (k) { return p('M96 118 Q92 100 102 82', null, k[4], 1.5) + p('M102 82 Q86 76 88 60 Q92 46 104 48 Q116 50 114 64 Q112 78 102 82Z', '#e8252a'); },
+    mic: function (k) { return p('M100 76 L92 104', null, '#333', 5) + '<ellipse cx="103" cy="66" rx="9" ry="12" fill="#9aa4b0" stroke="' + k[4] + '" stroke-width="2"/>' + p('M96 62 h14 M95 67 h16 M96 72 h14', null, '#5a646e', 1.2) + p('M112 50 q6 -6 4 -12 M116 58 q9 -4 10 -12', null, k[3], 2) + c(118, 36, 3, k[3]); },
     car: function (k) { return p('M84 88 V80 L92 72 H110 L118 80 V88Z', k[3], k[4], 2) + c(92, 90, 4.5, '#222') + c(112, 90, 4.5, '#222') + rc(95, 75, 12, 5, '#bfe6ff'); }
   };
 
@@ -278,7 +279,7 @@
     'memory-forge': ['okeeffe', 'alien', 'bulb', 'wizard'],
     'merge-forge': ['braque', 'golem', 'scissors'],
     'model-forge': ['cezanne', 'dino', 'wrench'],
-    'music-forge': ['degas', 'frog', 'note', 'bow'],
+    'music-forge': ['degas', 'frog', 'mic', 'bow'],
     'name-forge': ['magritte', 'troll', 'bubble', 'bowler'],
     'ocr-forge': ['vermeer', 'owl', 'lens'],
     'paint-forge': ['pollock', 'yeti', 'brush', 'beret'],
