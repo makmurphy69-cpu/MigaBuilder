@@ -453,3 +453,33 @@ The owner said ChatGPT had left a message about a new Music Forge. Claude found 
 - The free Quick presets and Tracker are unchanged; `#ai-song` / `#tracker` deep-link to the modes. The header art's frog now holds a microphone. The video was re-recorded; it uses a locally rendered demo tune, so no credit is spent.
 
 **Verification:** headless Chromium with Google mocked. Checked: no-key message, lyrics helper through the proxy, billing error message, full-song request (URL, `x-goog-api-key`, model `lyria-3.5`, prompt contents), response parsing from `steps[].content[]` (audio + lyrics text), download, library, waveform, 390 px without sideways scroll, and that the free preset generator still works. No page errors. **Not verified:** a real Lyria call (no billed key). The response parser follows Google's documented `steps[].content[]` / `output_audio` shapes and falls back to any base64 `audio/*` block.
+
+## MB-015 — Complete review of Music Forge (owner request, 2026-09-28)
+
+**Reviewer:** Claude  
+**Status:** fixed and merged (owner asked for improvements); ChatGPT review welcome  
+**Category:** Reliability / UX / Cost / Privacy  
+**Files:** `music-engine.js` (new), `music-forge.html`, `sw-register.js`, `sw.js`, listings, video
+
+**Tested as a first-time user** (headless Chromium, desktop 1280 px, tablet 820 px, phone 390 px): every tab, button, chip, slider, download and hand-off; audio measured sample by sample (peak, clipped samples, loudness, silence, endings, pitch-class fingerprint for similarity) and viewed as waveforms and spectrograms; downloads decoded with ffmpeg. Lyria calls were mocked, because no billed key was available.
+
+**Found (before this change):**
+1. *Quick presets ignored instructions.* Six fixed presets, always in A, two chord progressions; all major presets had pitch fingerprints with similarity 0.87–0.96, and all minor ones 0.94–0.96. No way to describe the music without a paid key.
+2. *Regenerate did nothing* for Calm and Cinematic (identical audio, no randomness in the pad style).
+3. *Quiet output* (peak 0.3–0.5, no normalisation) and *abrupt endings* (e.g. Chiptune -18 dB in the last 100 ms).
+4. *Tracker export clipped* badly with several tracks: 50,608 clipped samples at peak 1.0.
+5. Tracker: no drum sounds without uploading files, an empty grid "played" silently, playback kept running after leaving the tab, uploaded samples kept ringing after Stop, and editing notes needed a right-click (not possible on phones).
+6. The three mode buttons took a whole phone screen; "View source" appeared twice.
+7. AI song: no cost limit, no retry after an error, no artist-imitation check, no 18+ note, AI songs could not be trimmed or passed to other tools.
+
+**Fixed / added:**
+- **`music-engine.js`**: describe music in plain words → original track. 14 styles, 10 moods, tempo, exact length, key, 8 instruments, drums on/off, shapes (song with intro/verse/chorus/bridge/ending, seamless loop, intro/jingle, outro, build-up, steady background), seeded variation. It uses several progressions per style, a motif-based melody, and sections with fills and crashes. Mixing: compressor, reverb, loudness levelling (-16 dBFS RMS, -19 for quiet styles), a look-ahead limiter at -1 dBFS, and fade-out endings. Bars are scheduled while rendering (suspend/resume), so render time is linear (90 s pop: 28.6 s → 4.2 s). 13-prompt test: 0 clipped samples, lengths exact (6–90 s), 0.2–3 s per track, pitch-fingerprint similarity median 0.54 (min 0.02).
+- **Make music tab** (default, free): description box that shows "I understood: …", quick ideas, optional style/mood/length chips, "Match my video" (reads only the length), one-tap changes (new version, faster, slower, happier, darker, calmer, more energy, drums on/off, shorter, longer), 10 free sound effects.
+- **Finish & use** (all tabs): waveform, play/pause/restart/loop/seek, trim start/end, fade in/out, volume, even-out volume. Downloads: WAV, MP3 (lamejs from cdnjs, loaded on demand) and stems as a ZIP. "Use it in" hands the WAV to Clip Forge, Video Forge, Merge Forge, Game Forge or Audio Forge through IndexedDB; `sw-register.js` puts it into that tool's own file input (verified in all five).
+- **Beat maker**: built-in drum sounds, example beat, empty-grid hint, compressor on preview, stop on tab change and Stop ends samples, press-and-hold editing on touch screens, export levelled + limited (worst case now 0 clipped samples) and opened in Finish & use.
+- **AI song**: price on the button, per-device daily safety limit (default 10 songs ≈ $0.80, counted only after a successful song, numbers only), retry button, a check that blocks real artist/song names (tested against false positives like "sounds like rain"), 18+ note, honest Stop message (Google may still count a started song), "Trim, fade & use" into Finish & use, and an opt-out for keeping AI songs in the browser.
+- **Can I use this music?** table: free tracks, sound effects and beats are the visitor's for any use, including commercial, with no credit. AI songs follow the Gemini API terms: Google won't claim ownership, the user is responsible, Google may make similar output for others, there is no indemnity, a SynthID watermark is added, and purely AI output may not be copyrightable in some countries. There is also a note on uploaded samples. Not legal advice.
+
+**Still limited:** Lyria is not verified live. Vocal/instrument separation of AI songs would need a large ML model in the browser. Soundtrack-from-video matches length only, not scene changes. There is no multi-track timeline. The new UI text is English-only (tab names are translated).
+
+**Next version ideas:** music for scenes (read a video's scene cuts and put section changes there); "extend this track"; a lighter AI plan step (free text model → engine spec) for descriptions the word list misses; direct music pickers inside Cartoon Forge, 3D Cartoon and 3D Game Forge (they have no audio input yet); ducking under a voice-over in Clip Forge; translate the new strings.

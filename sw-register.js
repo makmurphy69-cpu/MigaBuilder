@@ -55,6 +55,41 @@
     document.head.appendChild(schema);
   }
 
+  // Hand-off from Music Forge ("Use it in …"): the finished track waits in IndexedDB and is put
+  // into this page's own audio file input, exactly as if the visitor had chosen the file.
+  var AUDIO_INPUT = { 'clip-forge': 'musicInput', 'video-forge': 'soundInput', 'merge-forge': 'soundInput', 'game-forge': 'audioUploadInput', 'audio-forge': 'file' };
+  var handoffPage = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
+  if (/[?&]handoff=audio\b/.test(location.search) && AUDIO_INPUT[handoffPage] && window.indexedDB && window.DataTransfer) {
+    var takeAudio = function () {
+      var req = indexedDB.open('miga-handoff', 1);
+      req.onupgradeneeded = function () { req.result.createObjectStore('files', { keyPath: 'id' }); };
+      req.onsuccess = function () {
+        var db = req.result, tx = db.transaction('files', 'readwrite'), store = tx.objectStore('files'), get = store.get('audio');
+        get.onsuccess = function () {
+          var item = get.result, input = document.getElementById(AUDIO_INPUT[handoffPage]);
+          if (!item || !item.blob || !input) return;
+          store.delete('audio');
+          var dt = new DataTransfer();
+          dt.items.add(new File([item.blob], item.name || 'music.wav', { type: item.blob.type || 'audio/wav' }));
+          input.files = dt.files;
+          input.dispatchEvent(new Event('change', { bubbles: true }));
+          var note = document.createElement('div');
+          note.setAttribute('role', 'status');
+          note.textContent = '🎵 Your Music Forge track "' + (item.name || 'music') + '" was added here.';
+          note.style.cssText = 'position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:9999;background:#0E2A47;color:#EDEAE0;border:1px solid #6FD1E0;padding:10px 16px;border-radius:6px;font:600 14px system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.35);max-width:90vw';
+          document.body.appendChild(note);
+          setTimeout(function () { note.remove(); }, 6000);
+          var label = input.id && document.querySelector('label[for="' + input.id + '"]');
+          if (label && label.scrollIntoView) label.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          if (history.replaceState) history.replaceState(null, '', location.pathname);
+        };
+        tx.oncomplete = function () { db.close(); };
+      };
+    };
+    // Wait until the page's own scripts have attached their listeners.
+    window.addEventListener('load', function () { setTimeout(takeAudio, 400); });
+  }
+
   // Offline support. Registration failures (private windows, old browsers) are harmless.
   if (!('serviceWorker' in navigator) || location.protocol !== 'https:' && location.hostname !== 'localhost') return;
   window.addEventListener('load', function () {

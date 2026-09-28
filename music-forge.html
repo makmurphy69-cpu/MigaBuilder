@@ -33,6 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="i18n.js"></script>
 <script src="media-utils.js"></script>
+<script src="music-engine.js"></script>
 
 <style>
   :root {
@@ -320,7 +321,53 @@
   .ai-biglink { display: inline-block; margin: 6px 0; padding: 10px 14px; background: var(--navy); color: #fff !important; border-radius: 3px; font-weight: 700; text-decoration: none; }
   .ai-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   @media (max-width: 860px) { .ai-layout { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { .ai-row, .ai-actions { grid-template-columns: 1fr; } .ai-go { flex-direction: column; } .mode-toggle { flex-wrap: wrap; } .mode-btn { flex: 1 1 100%; } }
+  @media (max-width: 480px) { .ai-row, .ai-actions { grid-template-columns: 1fr; } .ai-go { flex-direction: column; } }
+  /* ===== Make music (free) + Finish & use ===== */
+  .ai-privacy.mf-free { background: rgba(78,158,115,.13); border-left-color: var(--success); }
+  .ai-privacy a, .mf-next a, .fn-rights a { color: #1d6f86; }
+  .mf-opt { font: 400 12px 'IBM Plex Sans', system-ui, sans-serif; color: rgba(22,32,43,.55); }
+  .mf-ideas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .mf-understood { min-height: 18px; margin: 8px 0 0; font-size: 13px; color: #2b6a46; }
+  .mf-result { min-height: 260px; }
+  .mf-plan { font-size: 13px; color: rgba(237,234,224,.75); margin: 0 0 12px; }
+  .mf-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mf-quick-h { width: 100%; margin: 0 0 2px; font-size: 13px; color: rgba(237,234,224,.8); }
+  .mf-next { margin: 14px 0 0; font-size: 13px; color: rgba(237,234,224,.8); }
+  .mf-next a { color: var(--line-cyan); }
+  .mf-sfx { margin-top: 14px; }
+  .mf-sfx h3, .fn-export h3, .fn-use h3 { font: 700 15px 'Space Grotesk', system-ui, sans-serif; margin: 0 0 8px; color: var(--ink); }
+  .mf-sfx h3 small { font: 400 12px 'IBM Plex Sans', system-ui, sans-serif; color: rgba(22,32,43,.55); }
+  .mf-sfx-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .mf-h2 { font: 700 20px 'Space Grotesk', system-ui, sans-serif; margin: 0 0 4px; }
+  .mf-track { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+  #fnWave { width: 100%; height: 110px; display: block; background: #0b2136; border-radius: 4px; cursor: pointer; }
+  .fn-transport { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+  .fn-transport .draft-btn { width: auto; min-width: 120px; padding: 11px 16px; }
+  .fn-loop { margin: 0; }
+  .fn-time { margin-left: auto; font: 600 14px ui-monospace, monospace; }
+  .fn-seek { width: 100%; margin: 8px 0 4px; accent-color: var(--amber); }
+  .fn-edits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px 16px; margin-top: 8px; }
+  .fn-edits input[type=range] { width: 100%; accent-color: var(--amber); }
+  .fn-norm { display: flex; flex-direction: column; gap: 6px; justify-content: center; }
+  .fn-norm .ai-check { margin: 0; }
+  .fn-export, .fn-use { margin-top: 16px; }
+  .fn-export { display: flex; flex-wrap: wrap; gap: 8px; align-items: stretch; }
+  .fn-export h3 { width: 100%; }
+  .fn-export .draft-btn { width: auto; flex: 1 1 180px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .fn-export small, .fn-use small { display: block; font-weight: 400; font-size: 11.5px; opacity: .75; }
+  .fn-use-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 8px; }
+  .fn-use-grid .ai-btn { text-align: left; }
+  .fn-rights { font-size: 13px; margin: 14px 0 0; }
+  .mf-table-wrap { overflow-x: auto; }
+  .mf-table { width: 100%; min-width: 540px; border-collapse: collapse; font-size: 13.5px; margin: 8px 0; }
+  .mf-table th, .mf-table td { border: 1px solid rgba(22,32,43,.16); padding: 8px; text-align: left; vertical-align: top; }
+  .mf-table th { background: rgba(14,42,71,.06); }
+  .mode-btn small { display: block; font-weight: 400; font-size: 11px; opacity: .8; }
+  @media (max-width: 760px) { .fn-edits { grid-template-columns: 1fr 1fr; } .mf-table { font-size: 12.5px; } }
+  @media (max-width: 480px) {
+    .fn-edits { grid-template-columns: 1fr; }
+    .mode-toggle { flex-wrap: nowrap; gap: 4px; } .mode-btn { flex: 1 1 0; padding: 9px 4px; font-size: 12.5px; } .mode-btn small { display: none; }
+  }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -342,9 +389,9 @@
 
 <div class="mode-toggle-wrap">
   <div class="mode-toggle">
-    <button type="button" class="mode-btn" id="aiModeBtn">🎤 AI song with singing</button>
-    <button type="button" class="mode-btn active" id="presetModeBtn" data-i18n="presetModeLabel">🎹 Quick presets</button>
-    <button type="button" class="mode-btn" id="trackerModeBtn" data-i18n="trackerModeLabel">🎛️ Tracker (advanced)</button>
+    <button type="button" class="mode-btn active" id="presetModeBtn"><span data-i18n="presetModeLabel">🎵 Make music</span><small>free · instant</small></button>
+    <button type="button" class="mode-btn" id="aiModeBtn">🎤 AI song<small>with singing · your key</small></button>
+    <button type="button" class="mode-btn" id="trackerModeBtn"><span data-i18n="trackerModeLabel">🎛️ Beat maker</span><small>advanced</small></button>
   </div>
 </div>
 
@@ -411,6 +458,9 @@
             <div class="ai-chips" id="aiInstruments"></div>
             <div class="ai-row" style="margin-top:10px">
               <div><label for="aiModel" class="ai-label">AI model</label><select id="aiModel" class="ai-input"><option value="">Match the length</option><option value="lyria-3-clip-preview">Lyria 3 Clip (30 s)</option><option value="lyria-3.5">Lyria 3.5 (full song)</option><option value="lyria-3-pro-preview">Lyria 3 Pro (full song)</option></select></div>
+              <div><label for="aiLimit" class="ai-label">Daily safety limit</label><select id="aiLimit" class="ai-input"><option value="5">5 songs a day (≤ $0.40)</option><option value="10" selected>10 songs a day (≤ $0.80)</option><option value="25">25 songs a day (≤ $2)</option><option value="50">50 songs a day (≤ $4)</option></select></div>
+            </div>
+            <div class="ai-row">
               <div><label for="aiAvoid" class="ai-label">Leave out</label><input type="text" id="aiAvoid" class="ai-input" maxlength="160" placeholder="e.g. drums, electric guitar"></div>
             </div>
             <label class="ai-label" style="margin-top:10px">Pictures for inspiration <small>(optional, up to 3)</small></label>
@@ -428,15 +478,17 @@
           </ol>
           <label for="aiApiKey" class="ai-sr">Your Gemini API key</label>
           <div class="ai-keyrow"><input id="aiApiKey" type="password" class="ai-input" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini key (starts with AIza…)"><button type="button" class="ai-btn small" id="aiTestKey">Test</button></div>
+          <p class="ai-hint" style="margin:0 0 8px">Google requires you to be 18 or older to create and use a Gemini API key.</p>
           <label class="ai-check"><input type="checkbox" id="aiRemember"><span>Remember the key on this device <small>Stored only in this browser (shared with Picture Forge). Don’t tick this on a shared computer.</small></span></label>
           <button type="button" class="ai-btn small" id="aiForget" hidden>Forget my key</button>
         </div>
 
         <div class="ai-go">
-          <button type="button" class="draft-btn" id="aiMake">🎤 Make my song</button>
+          <button type="button" class="draft-btn" id="aiMake">🎤 Make my song <small id="aiPrice">≈ $0.04</small></button>
           <button type="button" class="draft-btn secondary" id="aiStop" hidden>Stop</button>
         </div>
-        <p class="ai-hint">Tip: Ctrl + Enter (⌘ + Enter on a Mac) makes the song. A clip takes about 20–40 seconds, a full song up to 2 minutes.</p>
+        <p class="ai-hint" id="aiUsage"></p>
+        <p class="ai-hint">Tip: Ctrl + Enter (⌘ + Enter on a Mac) makes the song. A clip takes about 20–40 seconds, a full song up to 2 minutes. No key or budget? <b>🎵 Make music</b> is free and instant.</p>
         <div class="ai-status" id="aiStatus" role="status" aria-live="polite"></div>
       </div>
 
@@ -452,6 +504,7 @@
               <button type="button" class="draft-btn secondary" id="aiDlWav">⬇ Download WAV</button>
               <button type="button" class="draft-btn secondary" id="aiAgain">↻ Another version</button>
               <button type="button" class="draft-btn secondary" id="aiCopyLyrics" hidden>📋 Copy lyrics</button>
+              <button type="button" class="draft-btn secondary" id="aiEdit">✂️ Trim, fade &amp; use in other tools</button>
             </div>
             <pre class="ai-lyrics" id="aiLyricsOut" hidden></pre>
           </div>
@@ -459,6 +512,7 @@
         </div>
         <div class="ai-library" id="aiLibraryWrap" hidden>
           <h3>Your recent songs <button type="button" class="ai-btn small" id="aiClearLib">Clear</button></h3>
+          <label class="ai-check" style="margin:0 0 8px"><input type="checkbox" id="aiKeepSongs" checked><span>Keep my AI songs in this browser <small>So a paid song isn’t lost if you close the tab. Only on this device; untick to stop keeping new ones.</small></span></label>
           <div id="aiLibrary"></div>
           <p class="ai-hint">Kept only in this browser, never uploaded.</p>
         </div>
@@ -519,46 +573,85 @@
   </section>
 </div>
 
-<div class="solo-wrap" id="presetModeWrap">
-  <div class="panel">
-    <div class="field">
-      <label data-i18n="moodLabel">Mood</label>
-      <div class="preset-grid" id="presetGrid"></div>
-    </div>
+<div class="ai-wrap" id="presetModeWrap">
+  <section class="ai-panel">
+    <p class="ai-privacy mf-free">🎵 <b>Free, private and yours.</b> Music is composed right here in your browser from what you describe. No account, no key, no upload, no limit, and every track is yours to use anywhere, even in commercial videos. <a href="#mfRights">What can I do with it?</a></p>
+    <div class="ai-layout">
+      <div>
+        <div class="ai-step"><b>1</b>Describe the music</div>
+        <label for="mfPrompt" class="ai-sr">Describe the music you want</label>
+        <textarea id="mfPrompt" class="ai-input" maxlength="500" rows="3" placeholder="Example: upbeat pop for my travel vlog, 30 seconds, with piano and drums"></textarea>
+        <div class="mf-ideas" id="mfIdeas" aria-label="Quick ideas"></div>
+        <p class="mf-understood" id="mfUnderstood" aria-live="polite"></p>
 
-    <div class="field">
-      <div class="row-2">
-        <div>
-          <label for="durationInput" data-i18n="lengthSecondsLabel">Length (seconds)</label>
-          <input type="number" id="durationInput" value="24" min="5" max="180" step="1">
+        <div class="ai-step"><b>2</b>Style <small class="mf-opt">optional</small></div>
+        <div class="ai-chips" id="mfGenres" role="radiogroup" aria-label="Style"></div>
+        <div class="ai-step"><b>3</b>Mood <small class="mf-opt">optional</small></div>
+        <div class="ai-chips" id="mfMoods" role="radiogroup" aria-label="Mood"></div>
+        <div class="ai-step"><b>4</b>Length</div>
+        <div class="ai-chips" id="mfLengths" role="radiogroup" aria-label="Length">
+          <label class="ai-chip"><input type="radio" name="mfLen" value="" checked><span>Auto</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="6"><span>6 s intro</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="15"><span>15 s</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="30"><span>30 s</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="60"><span>1 min</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="120"><span>2 min</span></label>
+          <label class="ai-chip"><input type="radio" name="mfLen" value="video" id="mfLenVideo"><span>🎬 Match my video</span></label>
         </div>
-        <div>
-          <label for="tempoInput" data-i18n="tempoBpmLabel">Tempo (BPM)</label>
-          <input type="number" id="tempoInput" value="100" min="40" max="200" step="1">
+        <input type="file" id="mfVideo" accept="video/*,audio/*" hidden>
+        <p class="ai-hint" id="mfVideoNote" hidden></p>
+
+        <details class="ai-more" id="mfMore">
+          <summary>⚙️ More options</summary>
+          <div>
+            <div class="ai-row">
+              <div><label for="mfTempo" class="ai-label">Speed: <span id="mfTempoOut">automatic</span></label><input type="range" id="mfTempo" min="45" max="190" step="1" value="45"></div>
+              <div><label for="mfShape" class="ai-label">Shape</label><select id="mfShape" class="ai-input"><option value="">Automatic</option><option value="song">Song (intro, verse, chorus, ending)</option><option value="loop">Seamless loop (games, streams)</option><option value="intro">Intro / jingle</option><option value="outro">Outro / credits</option><option value="build">Builds up to a big ending</option><option value="steady">Steady background (under a voice)</option></select></div>
+            </div>
+            <div class="ai-row">
+              <div><label for="mfDrums" class="ai-label">Drums</label><select id="mfDrums" class="ai-input"><option value="">Automatic</option><option value="on">With drums</option><option value="off">No drums</option></select></div>
+              <div><label for="mfKey" class="ai-label">Key</label><select id="mfKey" class="ai-input"><option value="">Automatic</option></select></div>
+            </div>
+            <label class="ai-label">Instruments <small>(pick any)</small></label>
+            <div class="ai-chips" id="mfInstruments"></div>
+          </div>
+        </details>
+
+        <div class="ai-go"><button type="button" class="draft-btn" id="mfMake">🎵 Make my music</button></div>
+        <p class="ai-hint">Takes a few seconds. Free and unlimited. Tip: Ctrl + Enter also works.</p>
+        <div class="ai-status" id="mfStatus" role="status" aria-live="polite"></div>
+      </div>
+
+      <div>
+        <div class="ai-result mf-result" id="mfResult">
+          <div class="ai-empty" id="mfEmpty"><span>🎼</span><strong>Your music will appear here</strong><p>Describe it, or just tap a quick idea on the left, then press <b>Make my music</b>.</p></div>
+          <div id="mfDone" hidden>
+            <div class="ai-title" id="mfTitle"></div>
+            <p class="mf-plan" id="mfPlan"></p>
+            <div class="mf-quick" aria-label="Change it">
+              <p class="mf-quick-h">Not quite right? Change it:</p>
+              <button type="button" class="ai-btn small" data-change="new">↻ New version</button>
+              <button type="button" class="ai-btn small" data-change="faster">⏩ Faster</button>
+              <button type="button" class="ai-btn small" data-change="slower">⏪ Slower</button>
+              <button type="button" class="ai-btn small" data-change="happy">😄 Happier</button>
+              <button type="button" class="ai-btn small" data-change="dark">🌑 Darker</button>
+              <button type="button" class="ai-btn small" data-change="calm">😌 Calmer</button>
+              <button type="button" class="ai-btn small" data-change="energy">⚡ More energy</button>
+              <button type="button" class="ai-btn small" data-change="drums">🥁 Drums on/off</button>
+              <button type="button" class="ai-btn small" data-change="shorter">➖ Shorter</button>
+              <button type="button" class="ai-btn small" data-change="longer">➕ Longer</button>
+            </div>
+            <p class="mf-next">Listen, trim and download in <a href="#finisher">Finish &amp; use</a> below ↓</p>
+          </div>
+          <div class="ai-progress" id="mfProgress" hidden><div class="ai-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><strong>Composing your music…</strong><p><span id="mfElapsed">0</span> s</p></div>
+        </div>
+        <div class="mf-sfx">
+          <h3>🔔 Sound effects <small>free, tap to hear</small></h3>
+          <div class="mf-sfx-grid" id="mfSfx"></div>
         </div>
       </div>
-      <p class="hint" data-i18n="tempoHint">Tempo defaults to a good fit for the mood you pick — feel free to override it.</p>
     </div>
-
-    <div class="field">
-      <label class="hint" style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-        <input type="checkbox" id="drumsOverride" style="width:auto;"> <span data-i18n="forceDrumsLabel">Force a simple drum beat on (even for ambient moods)</span>
-      </label>
-    </div>
-
-    <button type="button" class="draft-btn" id="generateBtn" data-i18n="generateBtnLabel">🎵 Generate track</button>
-    <div class="error-box" id="errorBox"></div>
-  </div>
-
-  <div class="result-card" id="resultCard">
-    <div class="result-label" id="resultLabel" data-i18n="resultLabelDefault">Your track</div>
-    <div class="result-sub" id="resultSub"></div>
-    <audio id="resultAudio" controls></audio>
-    <div class="btn-grid">
-      <button type="button" class="draft-btn secondary" id="regenerateBtn" data-i18n="regenerateBtnLabel">🔁 Regenerate (new variation)</button>
-      <button type="button" class="draft-btn secondary" id="downloadBtn" data-i18n="downloadWavLabel">⬇ Download .wav</button>
-    </div>
-  </div>
+  </section>
 </div>
 
 <main class="tracker-main" id="trackerModeWrap" style="display:none;">
@@ -578,6 +671,7 @@
       <button type="button" class="draft-btn secondary" id="undoBtn" disabled data-i18n="undoLabel">↶ Undo</button>
       <button type="button" class="draft-btn secondary" id="saveProjectBtn" data-i18n="saveProjectLabel">💾 Save project</button>
     </div>
+    <button type="button" class="draft-btn" id="exampleBeatBtn" style="margin-top:8px;width:100%;">🥁 Load an example beat</button>
     <label class="upload-btn" for="loadProjectInput" style="display:block;margin-top:8px;" data-i18n="loadProjectLabel">📂 Load project (.json)</label>
     <input type="file" id="loadProjectInput" accept="application/json" style="display:none;">
     <p class="hint" data-i18n="projectHint">Save your whole session — tracks, patterns, song order, and uploaded sounds — to one file, or load one back later. Undo steps back through your last ~40 edits (Ctrl+Z also works).</p>
@@ -635,7 +729,7 @@
     <div class="transport-row">
       <button type="button" id="playSongBtn" data-i18n="playSongLabel">▶ Play song</button>
       <button type="button" id="stopBtn" disabled data-i18n="stopLabel">■ Stop</button>
-      <button type="button" id="exportWavBtn" class="primary" data-i18n="exportWavLabel">⬇ Export song as .wav</button>
+      <button type="button" id="exportWavBtn" class="primary">✂️ Finish &amp; download song</button>
     </div>
     <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n="playbackHint">Playback uses the song arrangement on the left (or just the current pattern, looped, if the song is empty). Export renders the whole arrangement to a real .wav file.</p>
   </section>
@@ -656,6 +750,61 @@
   </div>
 </div>
 
+<div class="ai-wrap" id="finisherWrap" hidden>
+  <section class="ai-panel" id="finisher" aria-labelledby="fnHeading">
+    <h2 id="fnHeading" class="mf-h2">✂️ Finish &amp; use your track</h2>
+    <p class="mf-track" id="fnTitle"></p>
+    <canvas id="fnWave" width="1000" height="130" aria-label="Waveform. The bright part is what you keep. Click to jump there." role="img"></canvas>
+    <div class="fn-transport">
+      <button type="button" class="draft-btn" id="fnPlay" aria-label="Play">▶ Play</button>
+      <button type="button" class="ai-btn" id="fnRestart" title="Back to the start">⏮ Restart</button>
+      <label class="ai-check fn-loop"><input type="checkbox" id="fnLoop"><span>🔁 Loop</span></label>
+      <span class="fn-time" id="fnTime">0:00 / 0:00</span>
+    </div>
+    <input type="range" id="fnSeek" class="fn-seek" min="0" max="1000" value="0" aria-label="Position">
+    <audio id="fnAudio" preload="auto"></audio>
+    <div class="fn-edits">
+      <div><label for="fnStart" class="ai-label">Start at <span id="fnStartOut">0:00</span></label><input type="range" id="fnStart" min="0" max="100" step="0.1" value="0"></div>
+      <div><label for="fnEnd" class="ai-label">End at <span id="fnEndOut">0:00</span></label><input type="range" id="fnEnd" min="0" max="100" step="0.1" value="100"></div>
+      <div><label for="fnFadeIn" class="ai-label">Fade in <span id="fnFadeInOut">0 s</span></label><input type="range" id="fnFadeIn" min="0" max="5" step="0.1" value="0"></div>
+      <div><label for="fnFadeOut" class="ai-label">Fade out <span id="fnFadeOutOut">0 s</span></label><input type="range" id="fnFadeOut" min="0" max="10" step="0.1" value="0"></div>
+      <div><label for="fnVol" class="ai-label">Volume <span id="fnVolOut">0 dB</span></label><input type="range" id="fnVol" min="-18" max="6" step="1" value="0"></div>
+      <div class="fn-norm"><label class="ai-check"><input type="checkbox" id="fnNorm" checked><span>Even out the volume <small>Makes it as loud as possible without distortion.</small></span></label><button type="button" class="ai-btn small" id="fnReset">Undo all edits</button></div>
+    </div>
+    <div class="fn-export">
+      <h3>⬇ Download</h3>
+      <button type="button" class="draft-btn" id="fnMp3">⬇ MP3 <small>small, plays everywhere</small></button>
+      <button type="button" class="draft-btn secondary" id="fnWav">⬇ WAV <small>best quality, for editing</small></button>
+      <button type="button" class="draft-btn secondary" id="fnStems" hidden>⬇ Stems (ZIP) <small>drums, bass, chords, melody</small></button>
+    </div>
+    <div class="fn-use">
+      <h3>➜ Use it in another MigaBuilder tool</h3>
+      <div class="fn-use-grid">
+        <button type="button" class="ai-btn" data-use="clip-forge">🎬 Clip Forge <small>background music for a video</small></button>
+        <button type="button" class="ai-btn" data-use="video-forge">🎞️ Video Forge <small>music for an animation</small></button>
+        <button type="button" class="ai-btn" data-use="merge-forge">🧩 Merge Forge <small>add to a slideshow</small></button>
+        <button type="button" class="ai-btn" data-use="game-forge">🎮 Game Forge <small>sound for a game</small></button>
+        <button type="button" class="ai-btn" data-use="audio-forge">🎧 Audio Forge <small>more editing</small></button>
+      </div>
+    </div>
+    <p class="fn-rights" id="fnRights"></p>
+    <div class="ai-status" id="fnStatus" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="ai-panel ai-help" id="mfRights">
+    <h2>Can I use this music?</h2>
+    <div class="mf-table-wrap"><table class="mf-table">
+      <tr><th></th><th>🎵 Make music · 🔔 sound effects · 🎛️ Beat maker</th><th>🎤 AI song (Google Lyria)</th></tr>
+      <tr><td>Who made it</td><td>Composed in your browser by MigaBuilder’s own open-source code from music rules. No samples of existing songs.</td><td>Google’s Lyria model, with your own Gemini key.</td></tr>
+      <tr><td>YouTube, TikTok, Instagram, podcasts</td><td>✅ Yes, free, no credit needed.</td><td>✅ Allowed by Google’s terms. Google adds an inaudible SynthID watermark. Some platforms ask you to label realistic AI content.</td></tr>
+      <tr><td>Games, apps, ads, client work, selling</td><td>✅ Yes, including commercial use.</td><td>✅ Google says it won’t claim ownership, but you are responsible for how you use it, Google may make similar music for others, and there is no legal protection if a claim arises.</td></tr>
+      <tr><td>Copyright / Content ID</td><td>Each track is generated fresh, so there is nothing to be claimed. MigaBuilder claims no rights.</td><td>Purely AI-made music may not be protected by copyright in some countries (for example the US), so others might reuse it. Don’t register AI songs with Content ID systems as your own composition.</td></tr>
+      <tr><td>Sounds you upload to the Beat maker</td><td colspan="2">Only use sounds you recorded yourself or have permission to use.</td></tr>
+    </table></div>
+    <p class="ai-hint">Never ask for a real artist’s voice or copy a real song; describe the style instead (“90s rock”, not a band name). This is general information, not legal advice. Google’s rules: <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Gemini API terms</a> and <a href="https://policies.google.com/terms/generative-ai/use-policy" target="_blank" rel="noopener">prohibited use policy</a>.</p>
+  </section>
+</div>
+
 <footer id="presetFooter" data-i18n-html="presetFooterHtml">
   Part of <a href="index.html">MigaBuilder</a>. Every track is an original algorithmic composition generated on the
   spot from simple music-theory rules — not a sample, loop, or clip of existing music — so it's yours to use however
@@ -666,7 +815,6 @@
   Part of <a href="index.html">MigaBuilder</a>. Sounds you upload and everything you compose stay in your browser —
   nothing is uploaded anywhere. Uploaded sounds are pitch-shifted by playback speed to match each step's note, the
   same way classic trackers played samples. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
-<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/music-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
 
 <script>
 (function () {
@@ -690,9 +838,10 @@
     presetModeWrap.style.display = isPresets ? 'flex' : 'none';
     trackerModeWrap.style.display = isTracker ? 'grid' : 'none';
     aiModeWrap.style.display = isAi ? 'flex' : 'none';
+    document.querySelector('.mode-toggle').setAttribute('data-mode', mode);
     presetFooter.style.display = isPresets ? 'block' : 'none';
     trackerFooter.style.display = isTracker ? 'block' : 'none';
-    if (isTracker) renderAll();
+    if (isTracker) renderAll(); else if (typeof stopPlayback === 'function' && isPlaying) stopPlayback();
     if (history.replaceState) history.replaceState(null, '', isAi ? '#ai-song' : isTracker ? '#tracker' : location.pathname + location.search);
   }
   presetModeBtn.addEventListener('click', () => setMode('presets'));
@@ -700,215 +849,6 @@
   aiModeBtn.addEventListener('click', () => setMode('ai'));
   if (/^#ai/.test(location.hash)) setTimeout(() => setMode('ai'));
   else if (location.hash === '#tracker') setTimeout(() => setMode('tracker'));
-
-  // ================= preset mode (unchanged) =================
-  const presetGrid = document.getElementById('presetGrid');
-  const durationInput = document.getElementById('durationInput');
-  const tempoInput = document.getElementById('tempoInput');
-  const drumsOverride = document.getElementById('drumsOverride');
-  const generateBtn = document.getElementById('generateBtn');
-  const errorBox = document.getElementById('errorBox');
-  const resultCard = document.getElementById('resultCard');
-  const resultLabel = document.getElementById('resultLabel');
-  const resultSub = document.getElementById('resultSub');
-  const resultAudio = document.getElementById('resultAudio');
-  const regenerateBtn = document.getElementById('regenerateBtn');
-  const downloadBtn = document.getElementById('downloadBtn');
-
-  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
-  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
-
-  const ROOT_FREQ = 220; // A3
-  const PROGRESSIONS = {
-    major: { offsets: [0, 7, 9, 5], qualities: ['maj', 'maj', 'min', 'maj'] }, // I V vi IV
-    minor: { offsets: [0, 8, 3, 10], qualities: ['min', 'maj', 'maj', 'maj'] } // i VI III VII
-  };
-  const TRIADS = { maj: [0, 4, 7], min: [0, 3, 7] };
-
-  const PRESETS = [
-    { id: 'cheerful', labelKey: 'presetCheerfulLabel', subKey: 'presetCheerfulSub', mode: 'major', wave: 'triangle', bpm: 120, style: 'arp', stepsPerChord: 4, drums: true },
-    { id: 'calm', labelKey: 'presetCalmLabel', subKey: 'presetCalmSub', mode: 'major', wave: 'sine', bpm: 66, style: 'pad', drums: false },
-    { id: 'cinematic', labelKey: 'presetCinematicLabel', subKey: 'presetCinematicSub', mode: 'minor', wave: 'sawtooth', bpm: 76, style: 'pad', drums: false },
-    { id: 'lofi', labelKey: 'presetLofiLabel', subKey: 'presetLofiSub', mode: 'minor', wave: 'triangle', bpm: 84, style: 'arp', stepsPerChord: 6, drums: true, swing: true },
-    { id: 'chiptune', labelKey: 'presetChiptuneLabel', subKey: 'presetChiptuneSub', mode: 'major', wave: 'square', bpm: 150, style: 'arp', stepsPerChord: 8, drums: true },
-    { id: 'piano', labelKey: 'presetPianoLabel', subKey: 'presetPianoSub', mode: 'minor', wave: 'triangle', bpm: 60, style: 'arp', stepsPerChord: 3, drums: false, soft: true }
-  ];
-
-  let activePreset = PRESETS[0];
-  let lastBuffer = null;
-  let lastResult = null; // {presetLabelKey, durationSec, bpm}
-
-  function renderPresetGrid() {
-    presetGrid.innerHTML = '';
-    PRESETS.forEach(preset => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'preset-btn' + (preset.id === activePreset.id ? ' active' : '');
-      btn.innerHTML = I18N.t(preset.labelKey) + '<span class="sub">' + I18N.t(preset.subKey) + '</span>';
-      btn.addEventListener('click', () => {
-        activePreset = preset;
-        tempoInput.value = preset.bpm;
-        renderPresetGrid();
-      });
-      presetGrid.appendChild(btn);
-    });
-  }
-  renderPresetGrid();
-
-  function midiFreq(semitoneOffset) {
-    return ROOT_FREQ * Math.pow(2, semitoneOffset / 12);
-  }
-
-  function makeNoiseBuffer(ctx, durationSec) {
-    const buffer = ctx.createBuffer(1, Math.ceil(ctx.sampleRate * durationSec), ctx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
-    return buffer;
-  }
-
-  function playNote(ctx, dest, freq, start, dur, wave, peakGain, longEnvelope) {
-    const osc = ctx.createOscillator();
-    osc.type = wave;
-    osc.frequency.value = freq;
-    const gain = ctx.createGain();
-    const attack = longEnvelope ? Math.min(0.3, dur * 0.2) : Math.min(0.02, dur * 0.3);
-    const release = longEnvelope ? Math.min(0.5, dur * 0.3) : Math.min(dur * 0.4, 0.15);
-    const holdStart = Math.max(start + attack, start + dur - release);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(peakGain, start + attack);
-    gain.gain.setValueAtTime(peakGain, holdStart);
-    gain.gain.linearRampToValueAtTime(0, start + dur);
-    osc.connect(gain).connect(dest);
-    osc.start(start);
-    osc.stop(start + dur + 0.02);
-  }
-
-  function playKick(ctx, dest, t) {
-    const osc = ctx.createOscillator();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(150, t);
-    osc.frequency.exponentialRampToValueAtTime(45, t + 0.12);
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.5, t);
-    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.15);
-    osc.connect(gain).connect(dest);
-    osc.start(t);
-    osc.stop(t + 0.16);
-  }
-
-  function playHihat(ctx, dest, noiseBuffer, t) {
-    const src = ctx.createBufferSource();
-    src.buffer = noiseBuffer;
-    const filter = ctx.createBiquadFilter();
-    filter.type = 'highpass';
-    filter.frequency.value = 7000;
-    const gain = ctx.createGain();
-    gain.gain.setValueAtTime(0.12, t);
-    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
-    src.connect(filter).connect(gain).connect(dest);
-    src.start(t);
-    src.stop(t + 0.06);
-  }
-
-  async function generateMusic(preset, durationSec, bpm, forceDrums) {
-    const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-    const sampleRate = 44100;
-    const ctx = new AC(2, Math.ceil(sampleRate * durationSec), sampleRate);
-    const masterGain = ctx.createGain();
-    masterGain.gain.value = 0.8;
-    masterGain.connect(ctx.destination);
-
-    const prog = PROGRESSIONS[preset.mode];
-    const secPerBeat = 60 / Math.max(20, bpm);
-    const chordDur = secPerBeat * 4; // one chord per 4-beat bar
-    const useDrums = forceDrums || preset.drums;
-    const noiseBuffer = useDrums ? makeNoiseBuffer(ctx, 0.2) : null;
-
-    let t = 0, chordIndex = 0;
-    while (t < durationSec) {
-      const rootOffset = prog.offsets[chordIndex % prog.offsets.length];
-      const quality = prog.qualities[chordIndex % prog.qualities.length];
-      const triad = TRIADS[quality];
-      const dur = Math.min(chordDur, durationSec - t);
-
-      playNote(ctx, masterGain, midiFreq(rootOffset - 12), t, dur, 'sine', 0.18, true);
-
-      if (preset.style === 'pad') {
-        triad.forEach(iv => playNote(ctx, masterGain, midiFreq(rootOffset + iv), t, dur, preset.wave, 0.14, true));
-      } else {
-        const steps = preset.stepsPerChord || 4;
-        const stepDur = dur / steps;
-        for (let s = 0; s < steps; s++) {
-          if (Math.random() < 0.12) continue;
-          const octaveUp = Math.random() < 0.3 ? 12 : 0;
-          const tone = triad[Math.floor(Math.random() * triad.length)];
-          const swingOffset = preset.swing && s % 2 === 1 ? stepDur * 0.15 : 0;
-          const noteStart = Math.min(t + s * stepDur + swingOffset, t + dur - 0.05);
-          playNote(ctx, masterGain, midiFreq(rootOffset + tone + octaveUp), noteStart, stepDur * 0.85, preset.wave, preset.soft ? 0.22 : 0.26, false);
-        }
-      }
-
-      if (useDrums && noiseBuffer) {
-        const eighth = secPerBeat / 2;
-        const hits = Math.round(dur / eighth);
-        for (let b = 0; b < hits; b++) {
-          const bt = t + b * eighth;
-          if (bt >= durationSec) break;
-          if (b % 4 === 0) playKick(ctx, masterGain, bt);
-          else playHihat(ctx, masterGain, noiseBuffer, bt);
-        }
-      }
-
-      t += dur;
-      chordIndex++;
-    }
-
-    return ctx.startRendering();
-  }
-
-  async function runGenerate() {
-    clearError();
-    if (!(window.OfflineAudioContext || window.webkitOfflineAudioContext)) {
-      showError(I18N.t('errorNoAudioSupport'));
-      return;
-    }
-    const durationSec = Math.min(180, Math.max(5, parseFloat(durationInput.value) || 24));
-    const bpm = Math.min(200, Math.max(40, parseInt(tempoInput.value, 10) || activePreset.bpm));
-    generateBtn.disabled = true;
-    generateBtn.textContent = I18N.t('generatingLabel');
-    try {
-      const buffer = await generateMusic(activePreset, durationSec, bpm, drumsOverride.checked);
-      lastBuffer = buffer;
-      const blob = MediaUtils.audioBufferToWav(buffer);
-      const url = URL.createObjectURL(blob);
-      resultAudio.src = url;
-      lastResult = { presetLabelKey: activePreset.labelKey, durationSec: Math.round(durationSec), bpm: bpm };
-      resultLabel.textContent = I18N.t(lastResult.presetLabelKey) + ' — ' + lastResult.durationSec + 's at ' + lastResult.bpm + ' BPM';
-      resultSub.textContent = I18N.t('resultSubText');
-      resultCard.classList.add('show');
-    } catch (err) {
-      showError(I18N.t('errorCouldNotGenerate') + ' ' + err.message);
-    } finally {
-      generateBtn.disabled = false;
-      generateBtn.textContent = I18N.t('generateBtnLabel');
-    }
-  }
-
-  generateBtn.addEventListener('click', runGenerate);
-  regenerateBtn.addEventListener('click', runGenerate);
-
-  downloadBtn.addEventListener('click', function () {
-    if (!lastBuffer) return;
-    const blob = MediaUtils.audioBufferToWav(lastBuffer);
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'music-forge-' + activePreset.id + '.wav';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 4000);
-  });
 
   // ================= tracker mode =================
   const NUM_TRACKS = 8;
@@ -1292,6 +1232,12 @@
           uploadWrap.appendChild(nameSpan);
         }
         controls.appendChild(uploadWrap);
+        // Built-in drum sounds, so a beat needs no uploaded files.
+        const builtIn = document.createElement('select');
+        builtIn.setAttribute('aria-label', 'Built-in sound');
+        builtIn.innerHTML = '<option value="">…or pick a built-in sound</option>' + Object.entries(MigaMusic.HITS).map(([k, v]) => '<option value="' + k + '">' + v + '</option>').join('');
+        builtIn.addEventListener('change', async () => { if (!builtIn.value) return; pushHistory(); await setBuiltIn(track, builtIn.value); renderTracksList(); });
+        controls.appendChild(builtIn);
 
         if (track.sampleName) {
           const baseLabel = document.createElement('span');
@@ -1340,6 +1286,36 @@
       tracksList.appendChild(row);
     });
   }
+
+  async function setBuiltIn(track, name) {
+    const buf = await MigaMusic.hit(name);
+    track.type = 'sample'; track.sampleBuffer = buf; track.sampleName = MigaMusic.HITS[name] + ' (built-in)'; track.baseNote = 0;
+    const blob = MigaMusic.toWav(buf);
+    track.sampleDataUrl = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(blob); });
+  }
+  document.getElementById('exampleBeatBtn').addEventListener('click', async function () {
+    pushHistory();
+    const btn = this; btn.disabled = true;
+    try {
+      const kit = [['Kick', 'kick'], ['Snare', 'snare'], ['Hi-hat', 'hat'], ['Clap', 'clap']];
+      for (let i = 0; i < kit.length; i++) { tracks[i].name = kit[i][0]; await setBuiltIn(tracks[i], kit[i][1]); tracks[i].volume = [0.95, 0.8, 0.55, 0.6][i]; }
+      Object.assign(tracks[4], { name: 'Bass', type: 'synth', wave: 'triangle', volume: 0.9 });
+      Object.assign(tracks[5], { name: 'Chords', type: 'synth', wave: 'square', volume: 0.35 });
+      Object.assign(tracks[6], { name: 'Melody', type: 'synth', wave: 'sine', volume: 0.6 });
+      stepsPerPattern = 16; stepsPerPatternSelect.value = '16'; trackerBpmInput.value = 96;
+      const row = (str, note) => str.split('').map(c => c === 'x' ? { note, velocity: 0.85 } : null);
+      const cells = tracks.map(() => new Array(16).fill(null));
+      cells[0] = row('x.....x...x.....', 0); cells[1] = row('....x.......x...', 0); cells[2] = row('x.x.x.x.x.x.x.x.', 0); cells[3] = row('............x...', 0);
+      cells[4] = row('x.....x...x.....', -24);
+      [[0, 0], [4, 4], [8, 7], [12, 4]].forEach(([st, n]) => { cells[5][st] = { note: n, velocity: 0.7 }; });
+      [[0, 12], [3, 14], [6, 16], [10, 19], [12, 16]].forEach(([st, n]) => { cells[6][st] = { note: n, velocity: 0.75 }; });
+      const verse = { id: ++patternIdCounter, name: 'Example beat', cells };
+      const fill = { id: ++patternIdCounter, name: 'Example fill', cells: cells.map((r, i) => i === 1 ? row('....x.......x.xx', 0) : i === 6 ? r.map(c => c ? { note: c.note + 2, velocity: c.velocity } : null) : r.map(c => c ? Object.assign({}, c) : null)) };
+      patterns = [verse, fill]; activePatternId = verse.id; songOrder = [verse.id, verse.id, verse.id, fill.id];
+      renderAll(); scheduleAutosave();
+      showTrackerSuccess('Example beat loaded: drums, bass, chords and a melody at 96 BPM. Press ▶ Play song, click squares to change it, or press and hold (right-click on a computer) a square to change its note.');
+    } catch (e) { showTrackerError('Could not load the example: ' + e.message); } finally { btn.disabled = false; }
+  });
 
   // ---------- pattern tabs ----------
   function renderPatternTabs() {
@@ -1465,7 +1441,12 @@
           velBar.style.height = Math.round(cellData.velocity * 100) + '%';
           cell.appendChild(velBar);
         }
+        // Press and hold opens the note/velocity editor on phones and tablets (no right-click there).
+        let holdTimer = null, held = false;
+        cell.addEventListener('pointerdown', (e) => { if (e.pointerType === 'mouse') return; held = false; const pt = { clientX: e.clientX, clientY: e.clientY, preventDefault() {} }; holdTimer = setTimeout(() => { held = true; cell.dispatchEvent(new MouseEvent('contextmenu', { bubbles: true, clientX: pt.clientX, clientY: pt.clientY })); }, 450); });
+        ['pointerup', 'pointerleave', 'pointercancel'].forEach(t => cell.addEventListener(t, () => clearTimeout(holdTimer)));
         cell.addEventListener('click', () => {
+          if (held) { held = false; return; }
           pushHistory();
           if (pattern.cells[trackIdx][s]) {
             pattern.cells[trackIdx][s] = null;
@@ -1551,6 +1532,7 @@
       gain.gain.value = cellData.velocity * track.volume;
       src.connect(gain).connect(output);
       src.start(when);
+      if (ctx === previewCtx) { liveSources.push(src); src.onended = () => { liveSources = liveSources.filter(x => x !== src); }; }
     } else if (track.type === 'synth') {
       const osc = ctx.createOscillator();
       osc.type = track.wave;
@@ -1575,7 +1557,7 @@
   }
 
   // ---------- real-time preview ----------
-  let previewCtx = null;
+  let previewCtx = null, previewBus = null, liveSources = [];
   let schedulerTimer = null;
   let isPlaying = false;
   let songSteps = []; // flattened {pattern, stepIndexInPattern}
@@ -1603,7 +1585,7 @@
       stepStartTimes[songPos % songSteps.length] = nextStepTime;
       tracks.forEach((track, trackIdx) => {
         const cellData = entry.pattern.cells[trackIdx][entry.step];
-        if (cellData) triggerStep(previewCtx, previewCtx.destination, track, cellData, nextStepTime);
+        if (cellData) triggerStep(previewCtx, previewBus, track, cellData, nextStepTime);
       });
       nextStepTime += stepDurationSec();
       songPos++;
@@ -1638,7 +1620,8 @@
     if (isPlaying) return;
     songSteps = buildSongSteps();
     if (!songSteps.length) { showTrackerError(I18N.t('errorNothingToPlay')); return; }
-    if (!previewCtx) previewCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (!songSteps.some(st => st.pattern.cells.some((r, ti) => r[st.step] && !tracks[ti].muted))) { showTrackerError('Nothing to hear yet: click some squares in the grid, or press 🥁 Load an example beat.'); return; }
+    if (!previewCtx) { previewCtx = new (window.AudioContext || window.webkitAudioContext)(); previewBus = previewCtx.createDynamicsCompressor(); previewBus.threshold.value = -10; previewBus.ratio.value = 12; previewBus.connect(previewCtx.destination); }
     if (previewCtx.state === 'suspended') previewCtx.resume();
     songPos = 0;
     nextStepTime = previewCtx.currentTime + 0.05;
@@ -1653,6 +1636,7 @@
 
   function stopPlayback() {
     isPlaying = false;
+    liveSources.forEach(src => { try { src.stop(); } catch (e) {} }); liveSources = [];
     if (schedulerTimer) { clearInterval(schedulerTimer); schedulerTimer = null; }
     if (highlightRaf) { cancelAnimationFrame(highlightRaf); highlightRaf = null; }
     document.querySelectorAll('.step-cell.playing').forEach(el => el.classList.remove('playing'));
@@ -1683,7 +1667,8 @@
       const ctx = new AC(2, Math.ceil(44100 * totalDuration), 44100);
       const master = ctx.createGain();
       master.gain.value = 0.9;
-      master.connect(ctx.destination);
+      const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4;
+      master.connect(comp).connect(ctx.destination);
 
       let t = 0;
       songPatterns.forEach(pattern => {
@@ -1697,39 +1682,29 @@
       });
 
       const rendered = await ctx.startRendering();
-      const blob = MediaUtils.audioBufferToWav(rendered);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'music-forge-tracker-song.wav';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      // Level it and catch any peaks, so many tracks playing at once cannot distort the file.
+      const g = MigaMusic.loudGain(rendered, -16); for (let c = 0; c < rendered.numberOfChannels; c++) { const d = rendered.getChannelData(c); for (let k = 0; k < d.length; k++) d[k] *= g; }
+      MigaMusic.limit(rendered, 0.89);
+      await window.MusicFinisher.load(rendered, { title: 'Beat maker song', source: 'free' });
       const patternKey = songPatterns.length === 1 ? 'exportedPatternOne' : 'exportedPatternsMany';
-      showTrackerSuccess(I18N.t('exportedPrefix').replace('{sec}', Math.round(totalDuration)) + ' ' + songPatterns.length + ' ' + I18N.t(patternKey));
+      showTrackerSuccess('Your song (' + Math.round(totalDuration) + ' s, ' + songPatterns.length + ' pattern' + (songPatterns.length === 1 ? '' : 's') + ') is ready below in Finish & use: listen, trim, and download WAV or MP3.');
     } catch (err) {
       showTrackerError(I18N.t('errorCouldNotExport') + ' ' + err.message);
     } finally {
       exportWavBtn.disabled = false;
-      exportWavBtn.textContent = I18N.t('exportWavLabel');
+      exportWavBtn.textContent = '✂️ Finish & download song';
     }
   });
 
   I18N.onChange(function () {
-    renderPresetGrid();
-    if (resultCard.classList.contains('show') && lastResult) {
-      resultLabel.textContent = I18N.t(lastResult.presetLabelKey) + ' — ' + lastResult.durationSec + 's at ' + lastResult.bpm + ' BPM';
-      resultSub.textContent = I18N.t('resultSubText');
-    }
     renderAll();
   });
 
   I18N.init({
     en: {
       heroSubtitle: 'Make a real song with singing from a sentence, pick a mood for an instant free track, or build your own beat in the Tracker.',
-      presetModeLabel: '🎹 Quick presets',
-      trackerModeLabel: '🎛️ Tracker (advanced)',
+      presetModeLabel: '🎵 Make music',
+      trackerModeLabel: '🎛️ Beat maker',
       moodLabel: 'Mood',
       lengthSecondsLabel: 'Length (seconds)',
       tempoBpmLabel: 'Tempo (BPM)',
@@ -1830,8 +1805,8 @@
     },
     es: {
       heroSubtitle: 'Crea una canción real con voz a partir de una frase, elige un ambiente para una pista gratis al instante, o construye tu propio ritmo en el Tracker.',
-      presetModeLabel: '🎹 Preajustes rápidos',
-      trackerModeLabel: '🎛️ Tracker (avanzado)',
+      presetModeLabel: '🎵 Crear música',
+      trackerModeLabel: '🎛️ Creador de ritmos',
       moodLabel: 'Ambiente',
       lengthSecondsLabel: 'Duración (segundos)',
       tempoBpmLabel: 'Tempo (BPM)',
@@ -1932,8 +1907,8 @@
     },
     ar: {
       heroSubtitle: 'اصنع أغنية حقيقية بالغناء من جملة واحدة، أو اختر مزاجًا لمقطوعة مجانية فورية، أو ابنِ إيقاعك في وضع Tracker.',
-      presetModeLabel: '🎹 إعدادات سريعة',
-      trackerModeLabel: '🎛️ Tracker (متقدم)',
+      presetModeLabel: '🎵 اصنع موسيقى',
+      trackerModeLabel: '🎛️ صانع الإيقاعات',
       moodLabel: 'المزاج',
       lengthSecondsLabel: 'المدة (ثوانٍ)',
       tempoBpmLabel: 'الإيقاع (BPM)',
@@ -2034,8 +2009,8 @@
     },
     zh: {
       heroSubtitle: '用一句话生成带演唱的真实歌曲，选择情绪立即免费生成曲目，或在 Tracker 中自己制作节拍。',
-      presetModeLabel: '🎹 快速预设',
-      trackerModeLabel: '🎛️ Tracker（高级）',
+      presetModeLabel: '🎵 制作音乐',
+      trackerModeLabel: '🎛️ 节拍制作',
       moodLabel: '情绪',
       lengthSecondsLabel: '长度（秒）',
       tempoBpmLabel: '速度（BPM）',
@@ -2136,8 +2111,8 @@
     },
     sw: {
       heroSubtitle: 'Tengeneza wimbo halisi wenye uimbaji kutoka sentensi moja, chagua hali ya moyo kwa wimbo wa bure papo hapo, au tengeneza mdundo wako katika Tracker.',
-      presetModeLabel: '🎹 Mipangilio ya haraka',
-      trackerModeLabel: '🎛️ Tracker (ya kina)',
+      presetModeLabel: '🎵 Tengeneza muziki',
+      trackerModeLabel: '🎛️ Kitengeneza midundo',
       moodLabel: 'Hali ya moyo',
       lengthSecondsLabel: 'Urefu (sekunde)',
       tempoBpmLabel: 'Kasi (BPM)',
@@ -2240,6 +2215,229 @@
 
   renderAll();
   checkForSavedDraft();
+})();
+</script>
+<script>
+/* Free music maker (MigaMusic engine), sound effects, and the shared "Finish & use" panel that
+ * every mode sends its track to: trim, fades, volume, loop, WAV/MP3/stems, and hand-off to
+ * other MigaBuilder tools. Nothing here leaves the browser. */
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const M = window.MigaMusic;
+  const IDEAS = [
+    ['🎒 Vlog', 'Upbeat pop for a travel vlog, 30 seconds'],
+    ['📚 Study', 'Calm lo-fi beats for studying, 1 minute, seamless loop'],
+    ['🎬 Trailer', 'Epic cinematic trailer music with strings that builds up, 40 seconds'],
+    ['🧢 Beat', 'Hip-hop beat, 90 BPM, dark'],
+    ['🧸 Kids', "Happy children's song with bells, 30 seconds"],
+    ['🎙️ Podcast', 'Soft steady background music for a podcast, 1 minute'],
+    ['👾 Game', '8-bit video game music, seamless loop, 20 seconds'],
+    ['▶️ Intro', 'Short energetic intro jingle for my YouTube channel, 6 seconds'],
+    ['🧘 Relax', 'Calm ambient music for meditation, 2 minutes, no drums'],
+    ['🎸 Rock', 'Rock anthem with electric guitars, fast, 45 seconds']
+  ];
+  const prompt = $('mfPrompt');
+  let spec = null, overrides = {}, lastPlan = null, busy = false;
+
+  function chips(el, name, items, multi, first) {
+    el.innerHTML = (first ? [first] : []).concat(items).map((it, i) => '<label class="ai-chip"><input type="' + (multi ? 'checkbox' : 'radio') + '" name="' + name + '" value="' + it[0] + '"' + (!multi && i === 0 ? ' checked' : '') + '><span>' + it[1] + '</span></label>').join('');
+  }
+  chips($('mfGenres'), 'mfGenre', Object.entries(M.GENRES).map(([k, g]) => [k, g.emoji + ' ' + g.label]), false, ['', '✨ From my words']);
+  chips($('mfMoods'), 'mfMood', Object.entries(M.MOODS).map(([k, m]) => [k, m.emoji + ' ' + m.label]), false, ['', '✨ From my words']);
+  chips($('mfInstruments'), 'mfInst', Object.entries(M.INSTRUMENTS), true);
+  $('mfIdeas').innerHTML = IDEAS.map((it, i) => '<button type="button" class="ai-btn small" data-idea="' + i + '">' + it[0] + '</button>').join('');
+  ['C', 'C#', 'D', 'Eb', 'E', 'F', 'F#', 'G', 'Ab', 'A', 'Bb', 'B'].forEach((k, i) => ['major', 'minor'].forEach(s => { const o = document.createElement('option'); o.value = i + ' ' + s; o.textContent = k + ' ' + s; $('mfKey').appendChild(o); }));
+  const radio = n => (document.querySelector('input[name="' + n + '"]:checked') || {}).value || '';
+  function note(el, msg, kind) { el.textContent = msg; el.className = 'ai-status show' + (kind ? ' ' + kind : ''); }
+
+  // Words first, then any chip or option the user picked on top (a picked chip always wins).
+  function currentSpec() {
+    const parsed = M.parse(prompt.value), s = Object.assign({}, parsed.spec);
+    if (radio('mfGenre')) s.genre = radio('mfGenre');
+    if (radio('mfMood')) s.mood = radio('mfMood');
+    const len = radio('mfLen');
+    if (len === 'video') { if (videoSeconds) s.seconds = videoSeconds; } else if (len) s.seconds = +len;
+    if (len === '6' && !s.structure) s.structure = 'intro';
+    if (+$('mfTempo').value > 45) { s.bpm = +$('mfTempo').value; delete s.bpmShift; }
+    if ($('mfShape').value) s.structure = $('mfShape').value;
+    if ($('mfDrums').value) s.drums = $('mfDrums').value;
+    if ($('mfKey').value) { const [k, sc] = $('mfKey').value.split(' '); s.key = +k; s.scale = sc; }
+    const inst = Array.from(document.querySelectorAll('input[name="mfInst"]:checked')).map(i => i.value);
+    if (inst.length) s.instruments = inst;
+    return { spec: s, understood: parsed.understood };
+  }
+  function showUnderstood() {
+    const { understood } = currentSpec();
+    $('mfUnderstood').textContent = prompt.value.trim() ? (understood.length ? '✓ I understood: ' + understood.join(' · ') : 'Tip: mention a style, a mood, a speed or a length, e.g. “calm piano, 1 minute”.') : '';
+  }
+  prompt.addEventListener('input', showUnderstood);
+  // Any new choice starts fresh; only the "Change it" buttons build on the last track.
+  $('presetModeWrap').addEventListener('change', e => { if (!e.target.closest('.mf-quick')) overrides = {}; });
+  prompt.addEventListener('input', () => { overrides = {}; });
+  $('mfIdeas').addEventListener('click', e => { const b = e.target.closest('[data-idea]'); if (!b) return; prompt.value = IDEAS[+b.dataset.idea][1]; overrides = {}; resetChips(); showUnderstood(); make(); });
+  function resetChips() { ['mfGenre', 'mfMood', 'mfLen'].forEach(n => { const f = document.querySelector('input[name="' + n + '"]'); if (f) f.checked = true; }); }
+  $('mfTempo').addEventListener('input', () => { $('mfTempoOut').textContent = +$('mfTempo').value > 45 ? $('mfTempo').value + ' BPM' : 'automatic'; });
+
+  // "Match my video": read only the length of a video on this device.
+  let videoSeconds = 0;
+  $('mfLenVideo').addEventListener('change', () => $('mfVideo').click());
+  $('mfVideo').addEventListener('change', e => {
+    const f = e.target.files[0]; if (!f) return;
+    const v = document.createElement(/^audio/.test(f.type) ? 'audio' : 'video'), url = URL.createObjectURL(f);
+    v.preload = 'metadata'; v.onloadedmetadata = () => { videoSeconds = Math.max(3, Math.min(300, Math.round(v.duration))); URL.revokeObjectURL(url); $('mfVideoNote').hidden = false; $('mfVideoNote').textContent = '🎬 ' + f.name + ': ' + M.fmtTime(videoSeconds) + '. The music will be exactly this long and end with the video. Nothing is uploaded.' + (v.duration > 300 ? ' (Longer than 5 minutes, so it is capped at 5.)' : ''); showUnderstood(); };
+    v.onerror = () => { URL.revokeObjectURL(url); note($('mfStatus'), 'Could not read the length of that file. Pick a length instead.', 'warn'); };
+    v.src = url; e.target.value = '';
+  });
+
+  async function make(extra) {
+    if (busy) return;
+    const cur = currentSpec();
+    spec = Object.assign({}, cur.spec, overrides, extra || {}, { seed: Math.floor(Math.random() * 1e9) });
+    if (radio('mfLen') === 'video' && !videoSeconds) { note($('mfStatus'), 'Choose your video first (🎬 Match my video), or pick another length.', 'warn'); return; }
+    busy = true; $('mfMake').disabled = true; $('mfProgress').hidden = false; $('mfStatus').className = 'ai-status';
+    const t0 = Date.now(), tick = setInterval(() => { $('mfElapsed').textContent = Math.round((Date.now() - t0) / 1000); }, 300);
+    try {
+      const buf = await M.render(spec);
+      lastPlan = buf.__spec;
+      $('mfEmpty').hidden = true; $('mfDone').hidden = false;
+      const g = M.GENRES[lastPlan.genre], m = M.MOODS[lastPlan.mood];
+      const words = prompt.value.trim().split(/[,.;!?]/)[0].split(/\s+/).filter(Boolean);
+      $('mfTitle').textContent = '🎵 ' + (words.length ? words.slice(0, 6).join(' ').replace(/^./, c => c.toUpperCase()) : (m ? m.label + ' ' : '') + g.label + ' track');
+      $('mfPlan').textContent = M.describe(spec);
+      window.MusicFinisher.load(buf, { title: $('mfTitle').textContent.replace(/^🎵\s*/, ''), source: 'free', spec: Object.assign({}, spec) });
+      note($('mfStatus'), '✓ Made in ' + ((Date.now() - t0) / 1000).toFixed(1) + ' s. It is playing below in Finish & use.');
+      if (window.MigaUsage) window.MigaUsage.action('music-made');
+    } catch (e) {
+      note($('mfStatus'), 'Could not make the music: ' + e.message + ' Try again, or pick a shorter length.', 'error');
+    } finally { clearInterval(tick); busy = false; $('mfMake').disabled = false; $('mfProgress').hidden = true; }
+  }
+  $('mfMake').onclick = () => { overrides = {}; make(); };
+  document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && $('presetModeWrap').style.display !== 'none') { e.preventDefault(); overrides = {}; make(); } });
+  // Quick changes keep everything else and adjust one thing.
+  document.querySelector('.mf-quick').addEventListener('click', e => {
+    const b = e.target.closest('[data-change]'); if (!b || !lastPlan) return;
+    const p = lastPlan, c = b.dataset.change, o = overrides;
+    o.genre = p.genre; o.key = p.key; o.scale = p.scale; o.structure = p.structure; o.seconds = p.seconds; o.bpmSoft = Math.round(p.bpm); delete o.bpm;
+    if (c === 'faster') o.bpmSoft = Math.min(190, Math.round(p.bpm) + 14);
+    if (c === 'slower') o.bpmSoft = Math.max(50, Math.round(p.bpm) - 14);
+    if (c === 'happy') { o.mood = 'happy'; o.scale = 'major'; }
+    if (c === 'dark') { o.mood = 'dark'; o.scale = 'minor'; }
+    if (c === 'calm') { o.mood = 'calm'; o.bpmSoft = Math.max(50, Math.round(p.bpm) - 10); o.energy = Math.min(0, (o.energy || 0) - 0.15); }
+    if (c === 'energy') { o.mood = 'energetic'; o.energy = (o.energy || 0) + 0.2; o.drums = 'on'; }
+    if (c === 'drums') o.drums = p.drums === 'none' ? 'on' : 'off';
+    if (c === 'shorter') o.seconds = Math.max(5, Math.round(p.seconds / 2));
+    if (c === 'longer') o.seconds = Math.min(300, Math.round(p.seconds * 2));
+    if (c === 'new') { delete o.key; }
+    make();
+  });
+
+  // Sound effects
+  $('mfSfx').innerHTML = Object.entries(M.SFX).map(([k, label]) => '<button type="button" class="ai-btn small" data-sfx="' + k + '">' + label + '</button>').join('');
+  $('mfSfx').addEventListener('click', async e => {
+    const b = e.target.closest('[data-sfx]'); if (!b) return;
+    try { const buf = await M.sfx(b.dataset.sfx); window.MusicFinisher.load(buf, { title: 'Sound effect: ' + b.textContent, source: 'free', autoplay: true, noScroll: true }); }
+    catch (err) { note($('mfStatus'), 'Could not make that sound: ' + err.message, 'error'); }
+  });
+
+  /* ================= Finish & use ================= */
+  const F = { buf: null, meta: null, edited: null, url: '', timer: null };
+  const audio = $('fnAudio');
+  const fmt = s => { s = Math.max(0, s); return Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0'); };
+  const fmtLen = s => s < 10 ? s.toFixed(1) + ' s' : fmt(s);
+  const slug = t => (t || 'music').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'music';
+  function edits() { return { start: +$('fnStart').value, end: +$('fnEnd').value, fadeIn: +$('fnFadeIn').value, fadeOut: +$('fnFadeOut').value, gainDb: +$('fnVol').value, normalize: $('fnNorm').checked }; }
+  function labels() {
+    const e = edits();
+    $('fnStartOut').textContent = fmt(e.start); $('fnEndOut').textContent = fmt(e.end);
+    $('fnFadeInOut').textContent = e.fadeIn.toFixed(1) + ' s'; $('fnFadeOutOut').textContent = e.fadeOut.toFixed(1) + ' s'; $('fnVolOut').textContent = (e.gainDb > 0 ? '+' : '') + e.gainDb + ' dB';
+  }
+  async function rebuild(keepPos) {
+    if (!F.buf) return;
+    const e = edits(), pos = audio.currentTime, playing = !audio.paused;
+    F.edited = await M.finish(F.buf, e);
+    if (F.url) URL.revokeObjectURL(F.url);
+    F.url = URL.createObjectURL(M.toWav(F.edited));
+    audio.src = F.url; audio.loop = $('fnLoop').checked;
+    if (keepPos) { audio.currentTime = Math.min(pos, F.edited.duration - 0.05); if (playing) audio.play().catch(() => {}); }
+    drawWave(); timeLabel();
+  }
+  const schedule = () => { labels(); clearTimeout(F.timer); F.timer = setTimeout(() => rebuild(true), 220); };
+  ['fnStart', 'fnEnd', 'fnFadeIn', 'fnFadeOut', 'fnVol'].forEach(id => $(id).addEventListener('input', () => {
+    if (+$('fnEnd').value - +$('fnStart').value < 0.5) { if (id === 'fnStart') $('fnStart').value = +$('fnEnd').value - 0.5; else $('fnEnd').value = +$('fnStart').value + 0.5; }
+    schedule();
+  }));
+  $('fnNorm').addEventListener('change', schedule);
+  $('fnLoop').addEventListener('change', () => { audio.loop = $('fnLoop').checked; });
+  $('fnReset').onclick = () => { resetEdits(); rebuild(false); };
+  function resetEdits() { const d = F.buf.duration; ['fnStart', 'fnEnd'].forEach(id => { $(id).max = d.toFixed(1); }); $('fnStart').value = 0; $('fnEnd').value = d.toFixed(1); $('fnFadeIn').value = 0; $('fnFadeOut').value = 0; $('fnVol').value = 0; $('fnNorm').checked = true; labels(); }
+
+  // Playback
+  function playIcon() { $('fnPlay').textContent = audio.paused ? '▶ Play' : '⏸ Pause'; $('fnPlay').setAttribute('aria-label', audio.paused ? 'Play' : 'Pause'); }
+  $('fnPlay').onclick = () => { if (audio.paused) audio.play().catch(() => note($('fnStatus'), 'Press Play again to start the sound (your browser blocked autoplay).', 'warn')); else audio.pause(); };
+  $('fnRestart').onclick = () => { audio.currentTime = 0; audio.play().catch(() => {}); };
+  audio.addEventListener('play', playIcon); audio.addEventListener('pause', playIcon); audio.addEventListener('ended', playIcon);
+  function timeLabel() { const d = F.edited ? F.edited.duration : 0; $('fnTime').textContent = fmt(audio.currentTime) + ' / ' + fmt(d); $('fnSeek').value = d ? Math.round(audio.currentTime / d * 1000) : 0; }
+  audio.addEventListener('timeupdate', () => { timeLabel(); drawWave(); });
+  $('fnSeek').addEventListener('input', () => { if (F.edited) audio.currentTime = +$('fnSeek').value / 1000 * F.edited.duration; });
+
+  // Waveform of the whole original track: the kept part is bright, the playhead shows where you are.
+  let peaks = null;
+  function computePeaks() { const d = F.buf.getChannelData(0), n = 400, step = Math.max(1, Math.floor(d.length / n)); peaks = []; for (let i = 0; i < n; i++) { let m = 0; for (let j = i * step, e = Math.min(d.length, j + step); j < e; j += 8) { const v = Math.abs(d[j]); if (v > m) m = v; } peaks.push(m); } }
+  function drawWave() {
+    const c = $('fnWave'), x = c.getContext('2d'), W = c.width, H = c.height; x.clearRect(0, 0, W, H); if (!peaks) return;
+    const D = F.buf.duration, e = edits(), a = e.start / D, b = e.end / D, bw = W / peaks.length, max = Math.max(...peaks) || 1, ph = (e.start + audio.currentTime) / D;
+    peaks.forEach((p, i) => { const f = i / peaks.length, h = Math.max(2, p / max * (H - 14)); x.fillStyle = f < a || f > b ? 'rgba(111,209,224,.22)' : f < ph ? '#E2A63B' : 'rgba(111,209,224,.85)'; x.fillRect(i * bw + 0.5, (H - h) / 2, Math.max(1, bw - 1), h); });
+    x.fillStyle = '#EDEAE0'; x.fillRect(Math.round(ph * W), 0, 2, H);
+  }
+  $('fnWave').addEventListener('click', ev => { if (!F.buf) return; const r = ev.currentTarget.getBoundingClientRect(), t = (ev.clientX - r.left) / r.width * F.buf.duration, e = edits(); audio.currentTime = Math.max(0, Math.min(t, e.end) - e.start); drawWave(); });
+
+  // Downloads
+  function save(blob, name) { const a = document.createElement('a'), u = URL.createObjectURL(blob); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 5000); note($('fnStatus'), '✓ Saved ' + name + ' (' + (blob.size / 1048576).toFixed(1) + ' MB). Look in your Downloads folder (on iPhone: the Files app).'); }
+  $('fnWav').onclick = () => { if (F.edited) save(M.toWav(F.edited), slug(F.meta.title) + '.wav'); };
+  $('fnMp3').onclick = async () => {
+    if (!F.edited) return; const b = $('fnMp3'); b.disabled = true; note($('fnStatus'), 'Making the MP3…');
+    try { save(await M.toMp3(F.edited), slug(F.meta.title) + '.mp3'); } catch (e) { note($('fnStatus'), e.message, 'error'); } finally { b.disabled = false; }
+  };
+  $('fnStems').onclick = async () => {
+    if (!F.meta || !F.meta.spec) return; const b = $('fnStems'); b.disabled = true;
+    try {
+      note($('fnStatus'), 'Making stems (4 separate tracks)…');
+      if (!window.JSZip) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = ok; s.onerror = () => no(new Error('Could not load the ZIP helper. Check your internet connection.')); document.head.appendChild(s); });
+      const zip = new JSZip(), e = Object.assign(edits(), { normalize: false }), base = slug(F.meta.title);
+      for (const part of ['drums', 'bass', 'chords', 'melody']) {
+        const stem = await M.render(F.meta.spec, { only: part, gain: F.buf.__gain });
+        if (M.peakOf(stem) < 0.001) continue; // this style has no such part
+        zip.file(base + '-' + part + '.wav', M.toWav(await M.finish(stem, e)));
+      }
+      zip.file('README.txt', 'Stems from MigaBuilder Music Forge: ' + F.meta.title + '\nPlay them together, starting at the same time, to hear the full track. Each part keeps its level in the mix.\nMade in your browser; yours to use anywhere, including commercially.\n');
+      save(await zip.generateAsync({ type: 'blob' }), base + '-stems.zip');
+    } catch (err) { note($('fnStatus'), 'Could not make stems: ' + err.message, 'error'); } finally { b.disabled = false; }
+  };
+
+  // Hand-off: the finished WAV waits in IndexedDB and the other tool picks it up (sw-register.js).
+  $('finisher').querySelector('.fn-use-grid').addEventListener('click', async ev => {
+    const b = ev.target.closest('[data-use]'); if (!b || !F.edited) return;
+    try {
+      const blob = M.toWav(F.edited), name = slug(F.meta.title) + '.wav';
+      await new Promise((ok, no) => { const r = indexedDB.open('miga-handoff', 1); r.onupgradeneeded = () => r.result.createObjectStore('files', { keyPath: 'id' }); r.onerror = () => no(r.error); r.onsuccess = () => { const d = r.result, t = d.transaction('files', 'readwrite'); t.objectStore('files').put({ id: 'audio', blob, name, from: 'music-forge', at: Date.now() }); t.oncomplete = () => { d.close(); ok(); }; t.onerror = () => { d.close(); no(t.error); }; }; });
+      location.href = b.dataset.use + '.html?handoff=audio';
+    } catch (e) { note($('fnStatus'), 'Could not pass the track on. Download it and add it in the other tool instead.', 'warn'); }
+  });
+
+  window.MusicFinisher = {
+    async load(buf, meta) {
+      audio.pause(); F.buf = buf; F.meta = meta || {}; computePeaks(); resetEdits();
+      $('finisherWrap').hidden = false; $('fnTitle').textContent = '🎵 ' + (F.meta.title || 'Your track') + ' · ' + fmtLen(buf.duration);
+      $('fnStems').hidden = !F.meta.spec;
+      $('fnRights').innerHTML = F.meta.source === 'ai' ? '🎤 Made by Google Lyria with your key. See <a href="#mfRights">Can I use this music?</a> for what Google allows.' : '✅ Made in your browser by MigaBuilder: yours to use anywhere, including YouTube, TikTok, games, podcasts and ads. No credit needed.';
+      $('fnStatus').className = 'ai-status';
+      await rebuild(false);
+      if (!F.meta.noScroll) $('finisher').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (F.meta.autoplay !== false) audio.play().catch(() => {});
+    },
+    current: () => F.edited
+  };
 })();
 </script>
 <script>
@@ -2430,8 +2628,30 @@
   }
   $('aiStop').onclick = () => { if (busy) busy.ctrl.abort(); };
 
+  /* ---------- cost safety: a per-day count on this device (numbers only, no song content) ---------- */
+  const PRICE = { 'lyria-3-clip-preview': 0.04, 'lyria-3.5': 0.08, 'lyria-3-pro-preview': 0.08 };
+  const today = () => new Date().toISOString().slice(0, 10);
+  function usage() { try { const u = JSON.parse(localStorage.getItem('migaLyriaUsage') || '{}'); return u.day === today() ? u : { day: today(), n: 0, usd: 0 }; } catch (e) { return { day: today(), n: 0, usd: 0 }; } }
+  function addUsage(usd) { const u = usage(); u.n++; u.usd = Math.round((u.usd + usd) * 100) / 100; try { localStorage.setItem('migaLyriaUsage', JSON.stringify(u)); } catch (e) { /* private mode */ } showUsage(); }
+  function showUsage() {
+    const u = usage(), p = PRICE[model()] || 0.08;
+    $('aiPrice').textContent = '≈ $' + p.toFixed(2);
+    $('aiUsage').textContent = u.n ? 'Today on this device: ' + u.n + ' song' + (u.n === 1 ? '' : 's') + ', about $' + u.usd.toFixed(2) + ' (limit ' + $('aiLimit').value + ' a day, change it under More options).' : '';
+  }
+  try { const l = localStorage.getItem('migaLyriaLimit'); if (l) $('aiLimit').value = l; } catch (e) { /* private mode */ }
+  $('aiLimit').addEventListener('change', () => { try { localStorage.setItem('migaLyriaLimit', $('aiLimit').value); } catch (e) { /* private mode */ } showUsage(); });
+  ['aiModel'].forEach(id => $(id).addEventListener('change', showUsage));
+  document.querySelectorAll('input[name="aiLength"]').forEach(r => r.addEventListener('change', showUsage));
+  showUsage();
+  // Real artists' names invite copies of their voice or songs, which Google refuses anyway.
+  const ARTIST = /\b(?:in the style of|sung by|voice of|cover of|by the band|sounds? like|like)\s+(?:the\s+)?[A-Z][a-z]+/;
+  function retryButton() { const b = document.createElement('button'); b.type = 'button'; b.className = 'ai-btn small'; b.style.marginLeft = '8px'; b.textContent = '↻ Try again'; b.onclick = make; status.appendChild(b); }
+
   async function make() {
     if (busy) return;
+    const u = usage();
+    if (u.n >= +$('aiLimit').value) { note('You reached today’s safety limit of ' + $('aiLimit').value + ' AI songs on this device (about $' + u.usd.toFixed(2) + '). Raise it under ⚙️ More options if you really want more, or use the free 🎵 Make music tab.', 'warn'); $('aiMore').open = true; return; }
+    if (ARTIST.test(prompt.value)) { note('Please describe the style instead of naming a real artist or song (for example “90s rock with big guitars”). Google blocks copies of real artists, and it keeps your song original.', 'warn'); prompt.focus(); return; }
     if (prompt.value.trim().length < 5) { note('Describe the song in a few more words, or press 🎲 Surprise me.', 'warn'); prompt.focus(); return; }
     if (radio('aiVocals') === 'mine' && $('aiLyrics').value.trim().length < 10) { note('Write your lyrics first, or press ✍️ Write them for me.', 'warn'); $('aiLyrics').focus(); return; }
     if (!apiKey()) { note('Paste your Gemini key in step 6 first. Get one at aistudio.google.com/apikey (the guide below shows how).', 'warn'); $('aiApiKey').focus(); $('aiKeyGuide').open = true; return; }
@@ -2452,10 +2672,12 @@
       if (!got) throw new Error('Google sent back no music. Try a clearer description, or remove artist names and lyrics you did not write.');
       const title = prompt.value.trim().split(/\s+/).slice(0, 8).join(' ');
       await show({ blob: got.blob, lyrics: got.lyrics || (radio('aiVocals') === 'mine' ? $('aiLyrics').value.trim() : ''), title, url: URL.createObjectURL(got.blob) }, true);
-      note('Your song is ready. Listen, download it, or make another version.');
+      addUsage(PRICE[model()] || 0.08);
+      note('Your song is ready. Listen, download it, trim it, or make another version.');
       if (window.MigaUsage) window.MigaUsage.action('ai-song-generated');
     } catch (e) {
-      note(signal.aborted ? 'Stopped. Nothing was made.' : (e.message || 'Could not make the song. Please try again.'), signal.aborted ? 'warn' : 'error');
+      note(signal.aborted ? 'Stopped. If Google had already started the song it may still count it, so check before trying again.' : (e.message || 'Could not make the song. Please try again.'), signal.aborted ? 'warn' : 'error');
+      if (!signal.aborted) retryButton();
     } finally { clearTimeout(timeout); setBusy(false); }
   }
   $('aiMake').onclick = make; $('aiAgain').onclick = make;
@@ -2512,7 +2734,15 @@
   /* ---------- recent songs (IndexedDB, this browser only) ---------- */
   function db() { return new Promise((ok, no) => { const r = indexedDB.open('music-forge-ai', 1); r.onupgradeneeded = () => r.result.createObjectStore('songs', { keyPath: 'id' }); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); }); }
   async function tx(fn, rw) { const d = await db(); return new Promise((ok, no) => { const t = d.transaction('songs', rw ? 'readwrite' : 'readonly'), q = fn(t.objectStore('songs')); t.oncomplete = () => { d.close(); ok(q && q.result); }; t.onerror = () => { d.close(); no(t.error); }; }); }
+  try { if (localStorage.getItem('migaKeepSongs') === '0') $('aiKeepSongs').checked = false; } catch (e) { /* private mode */ }
+  $('aiKeepSongs').addEventListener('change', () => { try { localStorage.setItem('migaKeepSongs', $('aiKeepSongs').checked ? '1' : '0'); } catch (e) { /* private mode */ } });
+  $('aiEdit').onclick = async () => {
+    if (!current) return;
+    try { const AC = window.AudioContext || window.webkitAudioContext, ac = new AC(); const buf = current.buffer || await ac.decodeAudioData(await current.blob.arrayBuffer()); ac.close && ac.close(); await window.MusicFinisher.load(buf, { title: current.title, source: 'ai' }); }
+    catch (e) { note('This browser could not open the song for editing. Download it instead.', 'warn'); }
+  };
   async function saveSong(s) {
+    if (!$('aiKeepSongs').checked) return;
     s.id = Date.now() + '-' + Math.random().toString(36).slice(2, 7);
     try { await tx(st => st.put({ id: s.id, blob: s.blob, title: s.title, lyrics: s.lyrics, at: Date.now() }), true); await loadLibrary(); } catch (e) { /* optional */ }
   }
