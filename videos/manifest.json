@@ -21,6 +21,29 @@
    "kind": "image"
   }
  },
+ "3d-game-forge.html": {
+  "title": "3D Game Forge",
+  "video": "videos/3d-game-forge.mp4",
+  "poster": "videos/3d-game-forge.jpg",
+  "duration": 195,
+  "transcript": [
+   "Welcome to 3D Game Forge. Describe a 3D game, play it straight away, then change anything you like.",
+   "Describe the game you want in one sentence. Here, a fox collects gems in a snowy forest at night while ghosts chase it.",
+   "Press Make my 3D game. The AI picks the kind of game, the world, the hero, the enemies and the rules.",
+   "Press Play. The arrow keys or W A S D move, Space jumps, and on a phone you get buttons on the screen.",
+   "Or start from a template. The endless runner has three lanes: jump the hurdles and dodge the walls.",
+   "The kart racer has rivals, laps and boost stars. There are also a first-person maze, a platformer and an arena.",
+   "Change the world, the time of day, the hero and the enemies from the menus, and tune speed, jumping and enemies with sliders.",
+   "Paint your own level: pick a tile such as a wall, then click or drag on the grid. The game restarts with your level.",
+   "Copy a share link that holds the whole game, or download it as one HTML file that works on any website.",
+   "Now it is your turn. Open 3D Game Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/3d-game-forge.html",
+   "label": "3D game made in this video",
+   "kind": "html"
+  }
+ },
  "alphabet-forge.html": {
   "title": "Alphabet Forge",
   "video": "videos/alphabet-forge.mp4",

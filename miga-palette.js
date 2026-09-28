@@ -9,6 +9,7 @@
   const TOOLS = [
     ["website-builder.html", "🌐", "Website Builder", "Generate a complete multi-page business site.", ""],
     ["game-forge.html", "🥷", "Game Forge", "Turn a prompt into a playable browser game.", ""],
+    ["3d-game-forge.html", "🕹️", "3D Game Forge", "Describe a 3D game and play it: runner, racer, maze, platformer, arena or open world — edit the level and share it.", "3d game maker 3d game generator ai game three.js endless runner racing kart racer maze first person platformer arena shooter open world level editor share game no code"],
     ["cartoon-forge.html", "🎞️", "Cartoon Forge", "Create an animated story and record it as video.", ""],
     ["3d-cartoon.html", "🧸", "3D Cartoon", "Describe a story and watch it play as a 3D cartoon with talking characters.", "3d cartoon animation cel shaded toon movie three.js story characters ai video"],
     ["app-forge.html", "📱", "App Forge", "Build a self-contained browser app.", ""],

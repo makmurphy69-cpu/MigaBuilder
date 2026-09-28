@@ -15,6 +15,7 @@
     'document-forge.html':['Document Forge','drop in a document, image, or PDF and choose the output format','Convert & download','check the preview and open the converted download'],
     'file-forge.html':['File Forge','upload an image and choose the new format or size','Convert file','check the preview and download the converted file'],
     'game-forge.html':['Game Forge','describe the game, controls, goal, art style, and difficulty','Generate game','play-test it, request changes, and download the finished game'],
+    '3d-game-forge.html':['3D Game Forge','describe your game in a sentence, or pick a template such as the endless runner, kart racer or maze','Make my 3D game','press Play, then change the world, hero, enemies and sliders, paint your own level, and copy the share link or download the game'],
     'invoice-forge.html':['Invoice Forge','enter the seller, customer, line items, prices, and payment terms','Create invoice','verify the totals and download or print the invoice'],
     'image-studio.html':['Image Studio','choose one or more images and select the background, collage, meme, thumbnail, or upscale tab','Apply background effect','check the live canvas and download the finished PNG'],
     'everyday-forge.html':['Everyday Forge','choose the everyday calculator or helper you need and enter its details','Calculate','review the result and copy or use it'],
