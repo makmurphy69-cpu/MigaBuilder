@@ -26,11 +26,20 @@ const ALLOWED_ORIGINS = [
 const ALLOWED_MODELS = [
   'gemini-3.5-flash-lite',
   'gemini-3.5-flash',
-  'gemini-3.1-flash-image'
+  'gemini-3.1-flash-image',
+  'gemini-3.1-flash-lite-image'
 ];
 
-const IMAGE_ASPECTS = ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '21:9'];
-const IMAGE_SIZES = ['1K', '2K', '4K'];
+// Picture Forge. The site owner pays for every picture made through this
+// Worker, so it allows only the two cheaper image models, up to 2K (4K and
+// the Pro model need the visitor's own key, which never comes here), and at
+// most 3 small reference photos per request.
+const IMAGE_MODELS = ['gemini-3.1-flash-image', 'gemini-3.1-flash-lite-image'];
+const IMAGE_ASPECTS = ['1:1', '4:5', '5:4', '3:4', '4:3', '2:3', '3:2', '9:16', '16:9', '21:9'];
+const IMAGE_SIZES = ['1K', '2K'];
+const IMAGE_MIME = ['image/png', 'image/jpeg', 'image/webp'];
+const MAX_IMAGES = 3;
+const MAX_IMAGE_B64 = 2800000; // about 2 MB per photo; the page shrinks photos to 1536 px first
 
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -122,18 +131,32 @@ export default {
       return json({ error: 'Missing userPrompt' }, 400, origin);
     }
 
+    const images = isImage && Array.isArray(payload.images) ? payload.images : [];
     if (isImage) {
       const prompt = payload && payload.prompt;
-      if (model !== 'gemini-3.1-flash-image') return json({ error: 'Unsupported image model' }, 400, origin);
-      if (typeof prompt !== 'string' || prompt.trim().length < 8 || prompt.length > 2400) return json({ error: 'Image prompt must be between 8 and 2,400 characters.' }, 400, origin);
+      if (!IMAGE_MODELS.includes(model)) return json({ error: 'Unsupported image model' }, 400, origin);
+      if (typeof prompt !== 'string' || prompt.trim().length < 8 || prompt.length > 2800) return json({ error: 'Image prompt must be between 8 and 2,800 characters.' }, 400, origin);
       if (!IMAGE_ASPECTS.includes(payload.aspectRatio)) return json({ error: 'Unsupported image shape' }, 400, origin);
       if (!IMAGE_SIZES.includes(payload.imageSize)) return json({ error: 'Unsupported image resolution' }, 400, origin);
-    } else if (model === 'gemini-3.1-flash-image') {
+      if (model === 'gemini-3.1-flash-lite-image' && payload.imageSize !== '1K') return json({ error: 'The Lite image model makes 1K pictures only' }, 400, origin);
+      if (images.length > MAX_IMAGES) return json({ error: 'Up to 3 photos per picture' }, 400, origin);
+      for (const img of images) {
+        if (!img || !IMAGE_MIME.includes(img.mimeType) || typeof img.data !== 'string' || img.data.length > MAX_IMAGE_B64 || !/^[A-Za-z0-9+/=]+$/.test(img.data)) {
+          return json({ error: 'Each photo must be a PNG, JPEG or WebP under 2 MB' }, 400, origin);
+        }
+      }
+      // Pictures cost real money, so an optional second, stricter limiter
+      // (e.g. 4 requests / 60 s per IP) can be bound as IMAGE_RATE_LIMITER.
+      if (env.IMAGE_RATE_LIMITER) {
+        const { success } = await env.IMAGE_RATE_LIMITER.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+        if (!success) return json({ error: 'Too many AI requests in a short time. Wait a minute and try again.' }, 429, origin);
+      }
+    } else if (IMAGE_MODELS.includes(model)) {
       return json({ error: 'Image model requires an image request' }, 400, origin);
     }
 
     const requestBody = JSON.stringify(isImage ? {
-      contents: [{ parts: [{ text: payload.prompt.trim() }] }],
+      contents: [{ role: 'user', parts: images.map(img => ({ inlineData: { mimeType: img.mimeType, data: img.data } })).concat([{ text: payload.prompt.trim() }]) }],
       generationConfig: {
         responseModalities: ['TEXT', 'IMAGE'],
         imageConfig: { aspectRatio: payload.aspectRatio, imageSize: payload.imageSize }

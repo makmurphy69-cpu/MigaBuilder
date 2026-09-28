@@ -4,8 +4,12 @@
  * `container` and remembers the choice (never the key) in localStorage.
  * MigaAI.ask(system, user) sends one request with whatever the visitor picked:
  *   - Gemini goes through MigaBuilder's free proxy (no key needed),
- *   - OpenAI and Anthropic are called directly from the browser with the
- *     visitor's own key, which is kept only in memory.
+ *   - "Gemini (your own key)", OpenAI and Anthropic are called directly from
+ *     the browser with the visitor's own key, kept only in memory. (Picture
+ *     Forge can remember a Gemini key on the device if the visitor ticks
+ *     "Remember"; it is then prefilled here too.) The own-key Gemini option
+ *     also makes the tools work on a downloaded copy of the site, where the
+ *     proxy refuses requests from other origins.
  * MigaAI.json(text) pulls the first JSON object or array out of a reply.
  */
 (function (window, document) {
@@ -15,6 +19,10 @@
     gemini: [
       ['gemini-3.5-flash', 'Gemini 3.5 Flash (free)'],
       ['gemini-3.5-flash-lite', 'Gemini 3.5 Flash-Lite (free, faster)']
+    ],
+    geminikey: [
+      ['gemini-3.5-flash', 'Gemini 3.5 Flash'],
+      ['gemini-3.5-flash-lite', 'Gemini 3.5 Flash-Lite (faster)']
     ],
     openai: [
       ['gpt-4o-mini', 'gpt-4o-mini (fast, cheap)'],
@@ -37,18 +45,20 @@
     container.innerHTML =
       '<div class="grid ai-grid">' +
       '<div class="field"><label for="aiProvider">AI provider</label><select id="aiProvider">' +
-      '<option value="gemini">Gemini — free, no key needed</option><option value="openai">OpenAI (your key)</option><option value="anthropic">Anthropic Claude (your key)</option></select></div>' +
+      '<option value="gemini">Gemini — free, no key needed</option><option value="geminikey">Gemini (your own key)</option><option value="openai">OpenAI (your key)</option><option value="anthropic">Anthropic Claude (your key)</option></select></div>' +
       '<div class="field"><label for="aiModel">Model</label><select id="aiModel"></select></div>' +
       '</div>' +
       '<div class="field" id="aiKeyField" hidden><label for="aiKey">Your API key</label><input id="aiKey" type="password" autocomplete="off" placeholder="sk-...">' +
-      '<small>Sent only to the provider you chose, straight from this browser. Never stored.</small></div>' +
+      '<small>Sent only to the provider you chose, straight from this browser. Never stored.</small>' +
+      '<small id="aiKeyHelp" hidden> Free key: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> → Create API key → Copy.</small></div>' +
       '<p class="muted" id="aiFreeNote">Free Gemini shares a limited daily capacity. If it stops answering, switch to your own OpenAI or Anthropic key.</p>';
     els = {
       provider: container.querySelector('#aiProvider'),
       model: container.querySelector('#aiModel'),
       key: container.querySelector('#aiKey'),
       keyField: container.querySelector('#aiKeyField'),
-      free: container.querySelector('#aiFreeNote')
+      free: container.querySelector('#aiFreeNote'),
+      help: container.querySelector('#aiKeyHelp')
     };
     const saved = store.get('migaAiProvider');
     if (saved && MODELS[saved]) els.provider.value = saved;
@@ -59,7 +69,9 @@
       if (savedModel && MODELS[p].some(([v]) => v === savedModel)) els.model.value = savedModel;
       els.keyField.hidden = p === 'gemini';
       els.free.hidden = p !== 'gemini';
-      els.key.placeholder = p === 'openai' ? 'sk-...' : 'sk-ant-...';
+      els.key.placeholder = p === 'openai' ? 'sk-...' : p === 'geminikey' ? 'AIza...' : 'sk-ant-...';
+      els.help.hidden = p !== 'geminikey';
+      if (p === 'geminikey' && !els.key.value) els.key.value = store.get('migaGeminiKey') || '';
       store.set('migaAiProvider', p);
     };
     els.provider.addEventListener('change', apply);
@@ -81,7 +93,7 @@
   async function ask(system, user, opts) {
     const s = Object.assign(settings(), opts || {});
     const signal = opts && opts.signal;
-    if (s.provider !== 'gemini' && !s.key) throw new Error('Add your ' + (s.provider === 'openai' ? 'OpenAI' : 'Anthropic') + ' API key first, or switch back to free Gemini.');
+    if (s.provider !== 'gemini' && !s.key) throw new Error('Add your ' + ({ openai: 'OpenAI', anthropic: 'Anthropic', geminikey: 'Gemini' }[s.provider]) + ' API key first, or switch back to free Gemini.');
     let text = '';
     if (s.provider === 'gemini') {
       const r = await fetch(GEMINI_PROXY_URL, { method: 'POST', signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: s.model, systemPrompt: system, userPrompt: user }) });
@@ -89,6 +101,14 @@
       const d = await r.json();
       const parts = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
       text = parts ? parts.map(p => p.text || '').join('') : '';
+    } else if (s.provider === 'geminikey') {
+      const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + s.model + ':generateContent', { method: 'POST', signal,
+        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': s.key },
+        body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ parts: [{ text: user }] }] }) });
+      if (!r.ok) throw await errorFrom(r, 'Gemini request failed');
+      const d = await r.json();
+      const parts = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
+      text = parts ? parts.filter(p => !p.thought).map(p => p.text || '').join('') : '';
     } else if (s.provider === 'anthropic') {
       const r = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', signal,
         headers: { 'Content-Type': 'application/json', 'x-api-key': s.key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
