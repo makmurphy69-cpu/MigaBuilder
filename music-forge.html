@@ -575,7 +575,7 @@
 
 <div class="ai-wrap" id="presetModeWrap">
   <section class="ai-panel">
-    <p class="ai-privacy mf-free">🎵 <b>Free, private and yours.</b> Music is composed right here in your browser from what you describe. No account, no key, no upload, no limit, and every track is yours to use anywhere, even in commercial videos. <a href="#mfRights">What can I do with it?</a></p>
+    <p class="ai-privacy mf-free">🎵 <b>Free, private and yours.</b> Music is composed right here in your browser from what you describe. No account, no key, no upload, no limit, and every track is yours to use anywhere, even in commercial videos. (Only if you press ✨ Ask AI is your description sent to Google’s free AI.) <a href="#mfRights">What can I do with it?</a></p>
     <div class="ai-layout">
       <div>
         <div class="ai-step"><b>1</b>Describe the music</div>
@@ -600,6 +600,7 @@
         </div>
         <input type="file" id="mfVideo" accept="video/*,audio/*" hidden>
         <p class="ai-hint" id="mfVideoNote" hidden></p>
+        <label class="ai-check" id="mfCuesRow" hidden><input type="checkbox" id="mfCues" checked><span>Change the music where the scenes change <small id="mfCuesNote"></small></span></label>
 
         <details class="ai-more" id="mfMore">
           <summary>⚙️ More options</summary>
@@ -784,6 +785,9 @@
         <button type="button" class="ai-btn" data-use="video-forge">🎞️ Video Forge <small>music for an animation</small></button>
         <button type="button" class="ai-btn" data-use="merge-forge">🧩 Merge Forge <small>add to a slideshow</small></button>
         <button type="button" class="ai-btn" data-use="game-forge">🎮 Game Forge <small>sound for a game</small></button>
+        <button type="button" class="ai-btn" data-use="3d-cartoon">🎭 3D Cartoon <small>music for a cartoon</small></button>
+        <button type="button" class="ai-btn" data-use="cartoon-forge">🖍️ Cartoon Forge <small>music for a cartoon video</small></button>
+        <button type="button" class="ai-btn" data-use="3d-game-forge">🕹️ 3D Game Forge <small>music while you play</small></button>
         <button type="button" class="ai-btn" data-use="audio-forge">🎧 Audio Forge <small>more editing</small></button>
       </div>
     </div>
@@ -2257,7 +2261,7 @@
     if (radio('mfGenre')) s.genre = radio('mfGenre');
     if (radio('mfMood')) s.mood = radio('mfMood');
     const len = radio('mfLen');
-    if (len === 'video') { if (videoSeconds) s.seconds = videoSeconds; } else if (len) s.seconds = +len;
+    if (len === 'video') { if (videoSeconds) s.seconds = videoSeconds; if (videoCues.length && $('mfCues').checked) { s.cues = videoCues.slice(); if (s.structure === 'loop') delete s.structure; } } else if (len) s.seconds = +len;
     if (len === '6' && !s.structure) s.structure = 'intro';
     if (+$('mfTempo').value > 45) { s.bpm = +$('mfTempo').value; delete s.bpmShift; }
     if ($('mfShape').value) s.structure = $('mfShape').value;
@@ -2269,9 +2273,43 @@
   }
   function showUnderstood() {
     const { understood } = currentSpec();
-    $('mfUnderstood').textContent = prompt.value.trim() ? (understood.length ? '✓ I understood: ' + understood.join(' · ') : 'Tip: mention a style, a mood, a speed or a length, e.g. “calm piano, 1 minute”.') : '';
+    const cueNote = radio('mfLen') === 'video' && videoCues.length && $('mfCues').checked ? ' · follows ' + videoCues.length + ' scene change' + (videoCues.length > 1 ? 's' : '') : '';
+    $('mfUnderstood').textContent = prompt.value.trim() ? (understood.length ? '✓ I understood: ' + understood.join(' · ') + cueNote : 'Tip: mention a style, a mood, a speed or a length, e.g. “calm piano, 1 minute”.') : '';
+    const words = prompt.value.trim().split(/\s+/).filter(Boolean).length;
+    if (words >= 3 && !M.parse(prompt.value).spec.genre && !radio('mfGenre')) {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'ai-btn small'; b.id = 'mfAskAi'; b.style.marginLeft = '6px'; b.textContent = '✨ Ask AI to read it';
+      b.title = 'Sends only your description to Google’s free AI, which picks a style, mood and speed for it';
+      b.onclick = askAi; $('mfUnderstood').appendChild(b);
+    }
   }
   prompt.addEventListener('input', showUnderstood);
+  $('mfCues').addEventListener('change', showUnderstood);
+  // Optional, only when pressed: Google's free text AI turns an unusual description ("a dragon
+  // flying over a frozen castle") into settings the music engine understands. It sets the chips,
+  // so the result stays visible and editable, and the music itself is still made in the browser.
+  async function askAi() {
+    const b = $('mfAskAi'); if (b) { b.disabled = true; b.textContent = '✨ Reading…'; }
+    const allowed = { genre: Object.keys(M.GENRES), mood: Object.keys(M.MOODS), structure: ['song', 'loop', 'intro', 'outro', 'build', 'steady'], instruments: Object.keys(M.INSTRUMENTS) };
+    const system = 'You pick music settings for a description. Reply with JSON only: {"genre": one of ' + JSON.stringify(allowed.genre) + ', "mood": one of ' + JSON.stringify(allowed.mood) + ', "bpm": number 50-190, "structure": one of ' + JSON.stringify(allowed.structure) + ', "drums": "on" or "off", "instruments": array from ' + JSON.stringify(allowed.instruments) + '}';
+    try {
+      const r = await fetch('https://migabuilder-gemini.makmurphy69.workers.dev', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'gemini-3.5-flash-lite', systemPrompt: system, userPrompt: prompt.value.trim().slice(0, 500) }) });
+      if (!r.ok) throw new Error(r.status === 403 ? 'origin' : 'busy');
+      const d = await r.json(), text = ((d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts) || []).map(p => p.text || '').join('');
+      const j = JSON.parse(text.replace(/^[^{]*/, '').replace(/[^}]*$/, ''));
+      const set = (name, v) => { const el = document.querySelector('input[name="' + name + '"][value="' + v + '"]'); if (el) el.checked = true; };
+      const got = [];
+      if (allowed.genre.includes(j.genre)) { set('mfGenre', j.genre); got.push(M.GENRES[j.genre].label); }
+      if (allowed.mood.includes(j.mood)) { set('mfMood', j.mood); got.push(M.MOODS[j.mood].label); }
+      if (+j.bpm >= 50 && +j.bpm <= 190) { $('mfTempo').value = Math.round(j.bpm); $('mfTempo').dispatchEvent(new Event('input')); got.push(Math.round(j.bpm) + ' BPM'); }
+      if (allowed.structure.includes(j.structure) && !$('mfShape').value) $('mfShape').value = j.structure;
+      if (j.drums === 'on' || j.drums === 'off') $('mfDrums').value = j.drums;
+      (Array.isArray(j.instruments) ? j.instruments : []).filter(i => allowed.instruments.includes(i)).slice(0, 3).forEach(i => { const el = document.querySelector('input[name="mfInst"][value="' + i + '"]'); if (el) el.checked = true; });
+      overrides = {};
+      $('mfUnderstood').textContent = got.length ? '✨ AI read it as: ' + got.join(' · ') + '. The chips below are set; change any, then press Make my music.' : 'The AI could not pick settings. Choose a style and a mood below.';
+    } catch (e) {
+      $('mfUnderstood').textContent = e.message === 'origin' ? 'The AI helper only works on migabuilder.com. Pick a style and a mood below instead.' : 'The AI helper is busy right now. Pick a style and a mood below, or try again in a minute.';
+    }
+  }
   // Any new choice starts fresh; only the "Change it" buttons build on the last track.
   $('presetModeWrap').addEventListener('change', e => { if (!e.target.closest('.mf-quick')) overrides = {}; });
   prompt.addEventListener('input', () => { overrides = {}; });
@@ -2279,13 +2317,31 @@
   function resetChips() { ['mfGenre', 'mfMood', 'mfLen'].forEach(n => { const f = document.querySelector('input[name="' + n + '"]'); if (f) f.checked = true; }); }
   $('mfTempo').addEventListener('input', () => { $('mfTempoOut').textContent = +$('mfTempo').value > 45 ? $('mfTempo').value + ' BPM' : 'automatic'; });
 
-  // "Match my video": read only the length of a video on this device.
-  let videoSeconds = 0;
+  // "Match my video": read the length of a video on this device, and find its scene changes by
+  // comparing small snapshots of the frames. Nothing is uploaded.
+  let videoSeconds = 0, videoCues = [];
+  async function findScenes(url, dur) {
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.preload = 'auto'; v.src = url;
+    await new Promise((ok, no) => { v.onloadeddata = ok; v.onerror = () => no(new Error('unreadable')); });
+    const c = document.createElement('canvas'); c.width = 48; c.height = 27; const x = c.getContext('2d', { willReadFrequently: true });
+    const step = Math.max(0.4, dur / 240), diffs = []; let prev = null;
+    for (let t = 0; t < dur; t += step) {
+      await new Promise(ok => { v.onseeked = ok; v.currentTime = Math.min(t, dur - 0.05); });
+      x.drawImage(v, 0, 0, 48, 27); const d = x.getImageData(0, 0, 48, 27).data;
+      if (prev) { let sum = 0; for (let i = 0; i < d.length; i += 4) sum += Math.abs(d[i] - prev[i]) + Math.abs(d[i + 1] - prev[i + 1]) + Math.abs(d[i + 2] - prev[i + 2]); diffs.push([t, sum / (d.length / 4) / 3]); }
+      prev = d; $('mfCuesNote').textContent = 'Looking for scene changes… ' + Math.round(t / dur * 100) + '%';
+    }
+    const vals = diffs.map(d => d[1]), mean = vals.reduce((a, b) => a + b, 0) / (vals.length || 1), sd = Math.sqrt(vals.reduce((a, b) => a + (b - mean) * (b - mean), 0) / (vals.length || 1));
+    const cues = [];
+    diffs.filter(d => d[1] > Math.max(14, mean + 2.2 * sd)).sort((a, b) => b[1] - a[1]).forEach(d => { if (cues.length < 12 && cues.every(c => Math.abs(c - d[0]) > 2.5) && d[0] > 1.5 && d[0] < dur - 1.5) cues.push(+d[0].toFixed(2)); });
+    return cues.sort((a, b) => a - b);
+  }
   $('mfLenVideo').addEventListener('change', () => $('mfVideo').click());
   $('mfVideo').addEventListener('change', e => {
     const f = e.target.files[0]; if (!f) return;
     const v = document.createElement(/^audio/.test(f.type) ? 'audio' : 'video'), url = URL.createObjectURL(f);
-    v.preload = 'metadata'; v.onloadedmetadata = () => { videoSeconds = Math.max(3, Math.min(300, Math.round(v.duration))); URL.revokeObjectURL(url); $('mfVideoNote').hidden = false; $('mfVideoNote').textContent = '🎬 ' + f.name + ': ' + M.fmtTime(videoSeconds) + '. The music will be exactly this long and end with the video. Nothing is uploaded.' + (v.duration > 300 ? ' (Longer than 5 minutes, so it is capped at 5.)' : ''); showUnderstood(); };
+    v.preload = 'metadata'; videoCues = []; $('mfCuesRow').hidden = true; v.onloadedmetadata = () => { videoSeconds = Math.max(3, Math.min(300, Math.round(v.duration)));
+      if (v.tagName === 'VIDEO' && v.duration > 6) { $('mfCuesRow').hidden = false; $('mfCuesNote').textContent = 'Looking for scene changes…'; findScenes(url, Math.min(300, v.duration)).then(c => { videoCues = c; $('mfCuesNote').textContent = c.length ? '(found ' + c.length + ': ' + c.map(t => M.fmtTime(t)).join(', ') + ')' : '(no clear scene changes found)'; showUnderstood(); }).catch(() => { $('mfCuesNote').textContent = '(could not read the frames of this video)'; }).finally(() => URL.revokeObjectURL(url)); } else URL.revokeObjectURL(url); $('mfVideoNote').hidden = false; $('mfVideoNote').textContent = '🎬 ' + f.name + ': ' + M.fmtTime(videoSeconds) + '. The music will be exactly this long and end with the video. Nothing is uploaded.' + (v.duration > 300 ? ' (Longer than 5 minutes, so it is capped at 5.)' : ''); showUnderstood(); };
     v.onerror = () => { URL.revokeObjectURL(url); note($('mfStatus'), 'Could not read the length of that file. Pick a length instead.', 'warn'); };
     v.src = url; e.target.value = '';
   });
@@ -2419,7 +2475,10 @@
   $('finisher').querySelector('.fn-use-grid').addEventListener('click', async ev => {
     const b = ev.target.closest('[data-use]'); if (!b || !F.edited) return;
     try {
-      const blob = M.toWav(F.edited), name = slug(F.meta.title) + '.wav';
+      // Games embed the music in the downloaded file, so they get a small MP3 (WAV if the encoder can't load).
+      let blob = null, name = slug(F.meta.title) + '.wav';
+      if (b.dataset.use === '3d-game-forge') { try { note($('fnStatus'), 'Making a small MP3 for your game…'); blob = await M.toMp3(F.edited, 160); name = slug(F.meta.title) + '.mp3'; } catch (e) { blob = null; } }
+      if (!blob) blob = M.toWav(F.edited);
       await new Promise((ok, no) => { const r = indexedDB.open('miga-handoff', 1); r.onupgradeneeded = () => r.result.createObjectStore('files', { keyPath: 'id' }); r.onerror = () => no(r.error); r.onsuccess = () => { const d = r.result, t = d.transaction('files', 'readwrite'); t.objectStore('files').put({ id: 'audio', blob, name, from: 'music-forge', at: Date.now() }); t.oncomplete = () => { d.close(); ok(); }; t.onerror = () => { d.close(); no(t.error); }; }; });
       location.href = b.dataset.use + '.html?handoff=audio';
     } catch (e) { note($('fnStatus'), 'Could not pass the track on. Download it and add it in the other tool instead.', 'warn'); }
@@ -2436,7 +2495,8 @@
       if (!F.meta.noScroll) $('finisher').scrollIntoView({ behavior: 'smooth', block: 'start' });
       if (F.meta.autoplay !== false) audio.play().catch(() => {});
     },
-    current: () => F.edited
+    current: () => F.edited,
+    meta: () => F.meta
   };
 })();
 </script>

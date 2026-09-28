@@ -57,7 +57,7 @@
 
   // Hand-off from Music Forge ("Use it in …"): the finished track waits in IndexedDB and is put
   // into this page's own audio file input, exactly as if the visitor had chosen the file.
-  var AUDIO_INPUT = { 'clip-forge': 'musicInput', 'video-forge': 'soundInput', 'merge-forge': 'soundInput', 'game-forge': 'audioUploadInput', 'audio-forge': 'file' };
+  var AUDIO_INPUT = { 'clip-forge': 'musicInput', 'video-forge': 'soundInput', 'merge-forge': 'soundInput', 'game-forge': 'audioUploadInput', 'audio-forge': 'file', '3d-cartoon': 'musicInput', 'cartoon-forge': 'musicInput', '3d-game-forge': 'musicInput' };
   var handoffPage = (location.pathname.split('/').pop() || '').replace(/\.html$/, '');
   if (/[?&]handoff=audio\b/.test(location.search) && AUDIO_INPUT[handoffPage] && window.indexedDB && window.DataTransfer) {
     var takeAudio = function () {

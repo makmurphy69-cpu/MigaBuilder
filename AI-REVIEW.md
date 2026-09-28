@@ -483,3 +483,18 @@ The owner said ChatGPT had left a message about a new Music Forge. Claude found 
 **Still limited:** Lyria is not verified live. Vocal/instrument separation of AI songs would need a large ML model in the browser. Soundtrack-from-video matches length only, not scene changes. There is no multi-track timeline. The new UI text is English-only (tab names are translated).
 
 **Next version ideas:** music for scenes (read a video's scene cuts and put section changes there); "extend this track"; a lighter AI plan step (free text model → engine spec) for descriptions the word list misses; direct music pickers inside Cartoon Forge, 3D Cartoon and 3D Game Forge (they have no audio input yet); ducking under a voice-over in Clip Forge; translate the new strings.
+
+## MB-016 — Music Forge follow-ups from MB-015 (owner request, 2026-09-28)
+
+**Reviewer:** Claude  
+**Status:** implemented and merged; ChatGPT review welcome  
+**Files:** `music-engine.js`, `music-forge.html`, `3d-cartoon.html`, `cartoon-forge.html`, `3d-game-forge.html`, `clip-forge.html`, `sw-register.js`
+
+- **Music that follows a video's scenes.** "Match my video" also finds scene changes locally: it samples frames onto a 48×27 canvas and flags differences above mean + 2.2 SD, at most 12 cuts, at least 2.5 s apart. Each cut starts a new section on the nearest bar, with a crash exactly on the cut. It can be turned off. Test video with cuts at 4/9/13 s: found 4 s, 9 s, 13 s; the 18.00 s track changed section at the cuts.
+- **"✨ Ask AI to read it"** appears when no style is recognised. Only on that click, the description goes to the free text model through the Worker; the reply is validated against the engine's allowed values and sets the visible chips. The music is still made in the browser. The privacy note says so. Tested: "a dragon flying over a frozen castle at dawn" → Orchestral · Epic · 96 BPM · build-up · strings, flute.
+- **3D Cartoon and Cartoon Forge:** background music (file or Music Forge hand-off) plays with the cartoon, pauses/resets with it, and is mixed into the recorded video. Cartoon Forge's own sound is mixed with it, because MediaRecorder keeps only one audio track. Verified: recorder streams have 1 audio + 1 video track.
+- **3D Game Forge:** game music starts when the player presses Play (new `hooks.onPlay` in the engine), stops at win/lose, and is embedded in the downloaded HTML game. Music Forge hands games an MP3 (a 20 s loop game file went from 4.75 MB to 0.58 MB). Share links don't carry music, and the page says so. The downloaded game was opened and played its music.
+- **Clip Forge auto-duck** (default on when the clip has its own sound): the music drops to about 30% while the clip's audio is loud and recovers in pauses. Render verified to finish with one mixed audio track.
+- Music Forge's "Use it in" now lists 8 tools; `sw-register.js` knows the three new inputs.
+
+**Not done:** translating Music Forge's new strings; "extend this track" (Longer keeps key, tempo and melody, but re-arranges); stem separation of AI songs.

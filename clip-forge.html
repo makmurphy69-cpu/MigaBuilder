@@ -275,6 +275,8 @@
       <label for="musicVolume" data-i18n="musicVolumeLabel">Music volume</label>
       <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.8">
       <label class="check-row" style="margin-top:8px;"><input type="checkbox" id="musicLoopCheckbox" checked><span data-i18n="musicLoopLabel">Loop if shorter than the clip</span></label>
+      <label class="check-row" style="margin-top:8px;"><input type="checkbox" id="musicDuckCheckbox" checked><span>Lower the music while people talk (auto-duck)</span></label>
+      <p class="hint" style="margin-top:4px;">Make free background music that fits your clip in <a href="music-forge.html">Music Forge</a> (🎬 Match my video), then choose Use it in → Clip Forge.</p>
       <button type="button" class="draft-btn secondary" id="removeMusicBtn" style="margin-top:8px;" data-i18n="removeMusicLabel">✕ Remove music</button>
     </div>
 
@@ -463,6 +465,7 @@
   const musicOptions = document.getElementById('musicOptions');
   const musicVolume = document.getElementById('musicVolume');
   const musicLoopCheckbox = document.getElementById('musicLoopCheckbox');
+  let duckTimer = null;
   const removeMusicBtn = document.getElementById('removeMusicBtn');
   const musicAudioEl = document.getElementById('musicAudioEl');
   const aspectSelect = document.getElementById('aspectSelect');
@@ -923,6 +926,17 @@
       const musicGainNode = audioCtx.createGain();
       musicGainNode.gain.value = parseFloat(musicVolume.value) || 0.8;
       musicAudioSourceNode.connect(musicGainNode).connect(dest);
+      // Auto-duck: while the clip's own sound (usually speech) is loud, the music drops to about a
+      // third of its level, then comes back smoothly in the pauses.
+      if (hasOriginalAudio && document.getElementById('musicDuckCheckbox').checked && mediaElementSourceNode) {
+        const analyser = audioCtx.createAnalyser(); analyser.fftSize = 1024; mediaElementSourceNode.connect(analyser);
+        const buf = new Float32Array(analyser.fftSize), base = musicGainNode.gain.value;
+        duckTimer = setInterval(() => {
+          analyser.getFloatTimeDomainData(buf); let e = 0; for (let i = 0; i < buf.length; i++) e += buf[i] * buf[i];
+          const loud = Math.sqrt(e / buf.length) > 0.035;
+          musicGainNode.gain.setTargetAtTime(loud ? base * 0.3 : base, audioCtx.currentTime, loud ? 0.08 : 0.45);
+        }, 60);
+      }
       musicAudioEl.loop = musicLoopCheckbox.checked;
       musicAudioEl.currentTime = 0;
       musicAudioEl.muted = true; // routed through the Web Audio graph above, not the element itself
@@ -952,6 +966,7 @@
     let rafId = null;
 
     function finish() {
+      if (duckTimer) { clearInterval(duckTimer); duckTimer = null; }
       progressWrap.classList.remove('show');
       cancelRenderBtn.style.display = 'none';
       renderBtn.disabled = false;
