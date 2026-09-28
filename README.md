@@ -11,6 +11,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - Multi-page business websites
 - Playable browser games, including 3D games made from one sentence
 - Animated cartoons that can be recorded as video
+- Songs with singing and lyrics from one sentence, plus free instant tracks and beats
 - Videos, captions, music and merged media
 - Original AI pictures from a written description, changed afterwards with plain words
 - Logos, palettes, QR codes and layered image edits
@@ -36,6 +37,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Game Forge** — turn a prompt into a playable browser game, then tune gravity, jump height and speed with sliders, drop in your own player and background pictures or a whole sprite sheet (cut into Idle, Walk and Jump animations), pick 8-bit sound effects generated with the Web Audio API, copy one embed block to put the game on any site, or download it as an installable offline app (`manifest.json`, icons and a service worker in one `.zip`)
 - **3D Game Forge** — describe a 3D game in a sentence and the AI designs it for a built-in three.js engine, or start from a template: open-world collect, first-person maze, jump platformer, three-lane endless runner, kart racer with rivals and laps, or top-down arena with zapping; pick the camera (third person, first person, top-down), the world (meadow, forest, desert, snow, neon city, space, beach, volcano, candy), time of day, hero, pick-ups and enemies, tune speed, jump, gravity, enemies, time limit and lives with sliders, paint your own level tile by tile, play with keyboard, mouse or touch buttons, then copy a share link that holds the whole game or download it as one HTML file
 - **Picture Forge** — describe a picture and Google Gemini (Nano Banana) makes it: pick one of 15 looks (photo, watercolour, storybook, anime, 3D clay, pixel art…) and one of 10 shapes, add up to 3 of your own photos to edit them or keep the same person, pet or product, let the AI improve a short idea into a full description, then change the result with plain words ("make it night"), make several versions, and download PNG, JPG or WebP, copy it, or pass it to Image Studio; recent pictures stay in your browser
+- **Music Forge** — describe a song and Google's Lyria AI makes a real track with singing, using your own Gemini key: pick one of 18 styles and 10 moods, choose no singing, AI-written words or your own lyrics (with [Verse]/[Chorus] tags, voice and 13 languages), a 30-second clip or a full song, and fine-tune tempo, key, instruments and song shape, or add a picture for the music to match; the free writing helper improves your description or writes lyrics for you; listen with a clickable waveform, download MP3 or WAV, copy the lyrics, and find earlier songs in your browser. Free with no key: instant mood-based tracks and a multi-pattern tracker
 - **Video Forge** — animate drawings and images
 - **Paint Forge** — edit images with layers
 - **Slide Forge** — generate a downloadable PowerPoint
@@ -72,8 +74,8 @@ MigaBuilder is plain HTML, CSS and JavaScript with no build step, so a downloade
 3. **Get a Gemini key for the AI tools.** The free shared AI only answers requests from migabuilder.com, so a downloaded copy needs your own key:
    1. Open **[Google AI Studio → API keys](https://aistudio.google.com/apikey)** and sign in with any Google account.
    2. Press **Create API key** (pick the suggested project or create one), then **Copy**. The key usually starts with `AIza`.
-   3. In any AI tool choose **Gemini (your own key)** as the AI provider and paste the key. In Picture Forge choose **My own Gemini key** and press **Test**.
-   4. Text answers have a free tier. **Pictures do not:** Google's image models need billing turned on for the key's project ([billing guide](https://ai.google.dev/gemini-api/docs/billing), about US$0.03–0.24 per picture, see [pricing](https://ai.google.dev/gemini-api/docs/pricing)). Setting a budget alert in Google Cloud Billing is a good idea.
+   3. In any AI tool choose **Gemini (your own key)** as the AI provider and paste the key. In Picture Forge choose **My own Gemini key**; in Music Forge open **AI song with singing**. Press **Test**.
+   4. Text answers have a free tier. **Pictures and songs do not:** Google's image and Lyria music models need billing turned on for the key's project ([billing guide](https://ai.google.dev/gemini-api/docs/billing); about US$0.03–0.24 per picture and $0.04 per 30-second clip or $0.08 per full song, see [pricing](https://ai.google.dev/gemini-api/docs/pricing)). Setting a budget alert in Google Cloud Billing is a good idea.
 4. **Keep the key safe.** It goes straight from your browser to Google and never to MigaBuilder. Don't commit it to a repository or put it in a page's source. If it leaks, delete it on the same API keys page and create a new one.
 
 To give *your* visitors free AI without them needing a key, host the site and deploy the small Gemini proxy Worker in [`cloudflare-worker/README.md`](cloudflare-worker/README.md); it keeps your key in a Cloudflare secret.

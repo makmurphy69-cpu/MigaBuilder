@@ -918,15 +918,22 @@ S('video-forge.html', {
 });
 
 S('music-forge.html', {
-  title: 'Music Forge', subtitle: 'Original music made in your browser',
-  intro: 'Welcome to Music Forge. It creates original music for your videos, free to use.',
+  title: 'Music Forge', subtitle: 'Songs with singing, instant tracks and beats',
+  intro: 'Welcome to Music Forge. Describe a song and Google’s music AI makes it, with singing and lyrics. Or make free music instantly, with no key at all.',
   async run(h, page) {
-    await h.step('Choose a mood. Each preset sets the tempo, chords and instruments.', () => h.click('button:has-text("Lo-fi")'));
-    await h.step('Set the length and tempo, then press Generate track.', async () => { await h.fill('#durationInput', '20'); await h.click('#generateBtn'); });
-    await h.wait(1500);
-    await h.step('Listen to it, or press Regenerate for a new variation. Advanced users can edit every note in the tracker.', () => h.point('#regenerateBtn').catch(() => {}));
-    await h.step('Download the music as a WAV audio file, free to use in your videos.', () => h.point('#downloadBtn'));
-    await h.skip('Saving the track', async () => { await h.sampleDownload('#downloadBtn', 'Music made in this video'); });
+    await h.step('Open AI song with singing. Step one: describe your song. Improve my words turns a short idea into a full description.', async () => { await h.click('#aiModeBtn'); await h.type('#aiPrompt', 'A happy song about best friends on a summer road trip, windows down, sunset at the beach', { visible: 55 }); await h.point('#aiImprove'); });
+    await h.step('Pick a style and a mood. Tap once, that is all.', async () => { await h.click('#aiGenres .ai-chip:nth-child(2)'); await h.click('#aiMoods .ai-chip:nth-child(2)'); });
+    await h.step('Choose the singing: no singing, words written by the AI, or your own lyrics. Write them for me writes lyrics you can change.', async () => { await h.click('#aiVocals .ai-chip:nth-child(3)'); await h.point('#aiWriteLyrics'); await page.fill('#aiLyrics', '[Verse]\nWindows down, the radio on,\nsinging every word of our summer song.\n[Chorus]\nWe are driving into summer, nothing in our way!'); });
+    await h.step('Pick a voice and a language, and a 30-second clip or a full song.', async () => { await h.select('#aiVoice', 'a female lead vocal'); await h.click('#aiLength .ai-chip:nth-child(1)'); });
+    await h.step('More options holds the speed, key, instruments, song shape, and pictures for the music to match.', async () => { await h.click('#aiMore summary'); await h.point('#aiInstruments'); await h.click('#aiMore summary'); });
+    await h.step('AI songs use your own Gemini key from Google AI Studio. The link and three short steps are right here, and the key goes only to Google.', () => h.point('.ai-keybox a'));
+    await h.step('Paste the key, and press Make my song. For this walkthrough we play a sample, so no AI credit is spent.', async () => { await h.point('#aiMake'); await page.evaluate(() => window.musicForgeDemo()); });
+    await h.wait(800);
+    await h.step('Listen here. Click the waveform to jump around, and read the lyrics underneath.', async () => { await h.point('#aiWave'); await page.evaluate(() => document.getElementById('aiAudio').play().catch(() => {})); });
+    await h.step('Download it as MP3 for phones and videos, or WAV for editing. Earlier songs stay in Your recent songs.', () => h.point('#aiDlMp3'));
+    await h.sampleDownload('#aiDlMp3', 'Music made in this video');
+    await h.step('No key? Quick presets makes a free instrumental track instantly, and the Tracker lets you build your own beat.', async () => { await page.evaluate(() => document.getElementById('aiAudio').pause()); await h.click('#presetModeBtn'); await h.point('#generateBtn'); });
+    await h.step('The help section explains getting a Gemini key, downloading, tips and costs.', async () => { await h.click('#aiModeBtn'); await h.click('#aiKeyGuide summary'); await h.point('#aiKeyGuide .ai-biglink'); });
   }
 });
 

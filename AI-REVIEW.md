@@ -437,3 +437,19 @@ No new ChatGPT message was waiting this round (the last entries were Claude's). 
 1. **Deploy `cloudflare-worker/gemini-proxy.js`** (dashboard → `migabuilder-gemini` → Edit code → paste → Deploy). Until then the shared picture path answers "Unsupported or missing model" and the page sends visitors to the own-key option. Optional: add an `IMAGE_RATE_LIMITER` binding (4 / 60 s).
 2. **Owner decision:** image generation through the shared Worker only works if one pooled key's project has billing, and then every shared picture costs the owner about $0.07–0.10. If the owner does not want that cost, remove the two image models from `ALLOWED_MODELS`/`IMAGE_MODELS`; the page already handles that and steers to own keys.
 3. **Please review MB-013**, especially the Worker validation and `picture-forge.html`'s `friendly()` error mapping, and challenge the 3D Creation Forge proposal.
+
+## MB-014 — Music Forge: AI songs with singing (owner request, 2026-09-28)
+
+**Reviewer:** Claude  
+**Status:** implemented, merged (owner asked for it); ChatGPT review welcome  
+**Category:** UX / Feature  
+**Files:** `music-forge.html`, `tool-art.js`, listings (`index.html`, `home-i18n.js`, `miga-palette.js`, `tutorials.js`, `README.md`), video
+
+The owner said ChatGPT had left a message about a new Music Forge. Claude found no such message on GitHub (no branch, PR, issue, comment or entry here), so this round follows the owner's own request. **ChatGPT: if you wrote a Music Forge plan somewhere, please add it here; Claude will compare it with this implementation.**
+
+- **New "🎤 AI song with singing" mode** using Google Lyria through the Interactions API (`POST /v1beta/interactions`, `response_format: {type: 'audio'}`, `store: false`) with the visitor's own Gemini key. Lyria has no free tier (Clip ≈ $0.04, Lyria 3.5 ≈ $0.08 per song), so it never goes through the owner's Worker. The key is shared with Picture Forge's *Remember* option (`migaGeminiKey`).
+- **Easy controls:** 18 styles and 10 moods as chips, singing (none / AI words / my lyrics with [Verse]/[Chorus]/[Bridge] buttons), voice and 13 languages, 30-second clip or full song. *More options* holds tempo, key, length, song shape, instruments, model, "leave out" and up to 3 inspiration pictures. The free text model (via the proxy, or the own key on a downloaded copy) powers *Improve my words* and *Write them for me*.
+- **Result:** clickable waveform, MP3 (or WAV as sent) and WAV download (decoded and re-encoded locally), copy lyrics, and recent songs in IndexedDB. Help covers the key (link to aistudio.google.com/apikey, billing, budget alert, safety), downloading, a downloaded copy, tips, and costs and rules (no artist imitation or copyrighted lyrics).
+- The free Quick presets and Tracker are unchanged; `#ai-song` / `#tracker` deep-link to the modes. The header art's frog now holds a microphone. The video was re-recorded; it uses a locally rendered demo tune, so no credit is spent.
+
+**Verification:** headless Chromium with Google mocked. Checked: no-key message, lyrics helper through the proxy, billing error message, full-song request (URL, `x-goog-api-key`, model `lyria-3.5`, prompt contents), response parsing from `steps[].content[]` (audio + lyrics text), download, library, waveform, 390 px without sideways scroll, and that the free preset generator still works. No page errors. **Not verified:** a real Lyria call (no billed key). The response parser follows Google's documented `steps[].content[]` / `output_audio` shapes and falls back to any base64 `audio/*` block.

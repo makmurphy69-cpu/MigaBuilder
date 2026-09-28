@@ -17,16 +17,16 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Music Forge — generate original instrumental music</title>
-<meta name="description" content="Pick a mood and generate an instrumental track instantly, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<title>Music Forge — make songs with singing, instant tracks and beats</title>
+<meta name="description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Music Forge — generate original instrumental music">
-<meta property="og:description" content="Pick a mood and generate an instrumental track instantly, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<meta property="og:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/music-forge.jpg">
 <meta property="og:url" content="https://migabuilder.com/music-forge.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Music Forge — generate original instrumental music">
-<meta name="twitter:description" content="Pick a mood and generate an instrumental track instantly, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<meta name="twitter:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/music-forge.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,6 +239,88 @@
 
   footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 1100px; margin: 0 auto; }
   footer a { color: rgba(237, 234, 224, 0.7); }
+  /* ===== AI song mode (Lyria) ===== */
+  .ai-wrap { max-width: 1100px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) 40px; display: flex; flex-direction: column; gap: 18px; }
+  .ai-wrap [hidden] { display: none !important; }
+  .ai-panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px; }
+  .ai-privacy { margin: 0 0 16px; padding: 10px 12px; background: rgba(226,166,59,.14); border-left: 3px solid var(--amber); font-size: 13px; line-height: 1.5; }
+  .ai-layout { display: grid; grid-template-columns: minmax(290px, 430px) minmax(0, 1fr); gap: 22px; align-items: start; }
+  .ai-step { display: flex; align-items: center; gap: 8px; font: 700 15px 'Space Grotesk', system-ui, sans-serif; margin: 16px 0 8px; }
+  .ai-step:first-child { margin-top: 0; }
+  .ai-step b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--navy); color: #fff; font-size: 12px; flex: none; }
+  .ai-input { width: 100%; font: inherit; font-size: 14px; padding: 10px 11px; border: 1px solid rgba(22,32,43,.28); border-radius: var(--radius); background: #fff; color: var(--ink); }
+  textarea.ai-input { resize: vertical; min-height: 90px; line-height: 1.45; }
+  .ai-label { display: block; font-size: 12.5px; font-weight: 600; margin: 8px 0 5px; }
+  .ai-label small, .ai-chip small { font-weight: 400; opacity: .7; }
+  .ai-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .ai-row input[type=range] { width: 100%; margin-top: 10px; accent-color: var(--amber); }
+  .ai-tools { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 6px; }
+  .ai-count { margin-right: auto; font-size: 12px; color: rgba(22,32,43,.6); }
+  .ai-btn { font: inherit; background: #fff; color: var(--ink); border: 1px solid rgba(22,32,43,.28); border-radius: var(--radius); padding: 8px 11px; font-weight: 600; cursor: pointer; }
+  .ai-btn.small { font-size: 12.5px; padding: 6px 9px; }
+  .ai-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .ai-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .ai-chip { position: relative; display: inline-block; }
+  .ai-chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .ai-chip span { display: inline-flex; gap: 5px; align-items: center; padding: 7px 10px; border: 1px solid rgba(22,32,43,.25); border-radius: 999px; background: #fff; font-size: 13px; line-height: 1.1; user-select: none; }
+  .ai-chip input:checked + span { background: var(--navy); color: #fff; border-color: var(--navy); }
+  .ai-chip input:focus-visible + span { outline: 2px solid #2a8fa0; outline-offset: 2px; }
+  .ai-more { margin-top: 14px; border: 1px solid rgba(22,32,43,.18); border-radius: 4px; background: rgba(255,255,255,.5); }
+  .ai-more > summary { cursor: pointer; padding: 10px 12px; font-weight: 700; font-size: 14px; }
+  .ai-more > div { padding: 0 12px 12px; }
+  .ai-drop { display: block; border: 2px dashed rgba(22,32,43,.3); border-radius: 6px; padding: 10px; text-align: center; background: rgba(255,255,255,.55); cursor: pointer; font-size: 13px; }
+  .ai-drop.over { border-color: #2a8fa0; background: #e6f7fa; }
+  .ai-drop input { display: none; }
+  .ai-refs { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+  .ai-ref { position: relative; width: 58px; height: 58px; border-radius: 4px; overflow: hidden; border: 1px solid rgba(22,32,43,.2); }
+  .ai-ref img { width: 100%; height: 100%; object-fit: cover; }
+  .ai-ref button { position: absolute; top: 2px; right: 2px; width: 20px; height: 20px; border-radius: 50%; border: 0; background: rgba(8,24,38,.8); color: #fff; cursor: pointer; line-height: 1; }
+  .ai-keybox { margin-top: 14px; border: 1px solid rgba(22,32,43,.18); border-radius: 4px; padding: 12px; background: #fff; }
+  .ai-keybox ol { margin: 4px 0 10px 18px; padding: 0; font-size: 13px; line-height: 1.5; }
+  .ai-keyrow { display: flex; gap: 6px; }
+  .ai-keyrow input { font-family: ui-monospace, monospace; min-width: 0; }
+  .ai-check { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; margin-top: 8px; cursor: pointer; }
+  .ai-check input { margin-top: 3px; }
+  .ai-check small { display: block; color: rgba(22,32,43,.6); }
+  .ai-go { display: flex; gap: 8px; margin-top: 16px; }
+  .ai-go .draft-btn { flex: 1; width: auto; }
+  .ai-go #aiMake { font-size: 16px; padding: 14px; }
+  .ai-hint { font-size: 12px; color: rgba(22,32,43,.6); margin: 6px 0 0; }
+  .ai-status { display: none; padding: 10px; margin-top: 10px; font-size: 13px; background: rgba(78,158,115,.13); border-radius: 3px; }
+  .ai-status.show { display: block; }
+  .ai-status.error { background: rgba(216,96,74,.14); color: #6E2418; }
+  .ai-status.warn { background: #fff1d0; color: #5a3d08; }
+  .ai-result { position: relative; min-height: 360px; background: linear-gradient(135deg, #102f4c, #071520); border-radius: 4px; padding: 18px; color: var(--paper); border: 1px solid rgba(111,209,224,.25); }
+  .ai-empty { text-align: center; padding: 70px 20px; color: rgba(237,234,224,.72); }
+  .ai-empty span { font-size: 56px; display: block; margin-bottom: 10px; }
+  .ai-title { font: 700 18px 'Space Grotesk', system-ui, sans-serif; margin-bottom: 10px; }
+  #aiWave { width: 100%; height: 120px; display: block; background: rgba(0,0,0,.25); border-radius: 4px; cursor: pointer; }
+  #aiAudio { width: 100%; margin-top: 10px; }
+  .ai-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .ai-actions .draft-btn { width: auto; font-size: 14px; padding: 11px; }
+  .ai-lyrics { white-space: pre-wrap; font: 14px/1.55 'IBM Plex Sans', system-ui, sans-serif; background: rgba(237,234,224,.08); padding: 12px; border-radius: 4px; margin: 12px 0 0; max-height: 320px; overflow: auto; }
+  .ai-progress { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; background: rgba(8,24,38,.9); border-radius: 4px; z-index: 2; }
+  .ai-eq { display: flex; gap: 5px; justify-content: center; height: 40px; align-items: flex-end; margin-bottom: 12px; }
+  .ai-eq i { width: 7px; background: var(--line-cyan); border-radius: 2px; animation: aiEq 1s ease-in-out infinite; }
+  .ai-eq i:nth-child(2) { animation-delay: .2s; } .ai-eq i:nth-child(3) { animation-delay: .4s; } .ai-eq i:nth-child(4) { animation-delay: .1s; } .ai-eq i:nth-child(5) { animation-delay: .3s; }
+  @keyframes aiEq { 0%, 100% { height: 8px; } 50% { height: 40px; } }
+  @media (prefers-reduced-motion: reduce) { .ai-eq i { animation: none; height: 24px; } }
+  .ai-library { margin-top: 14px; }
+  .ai-library h3 { font: 700 15px 'Space Grotesk', system-ui, sans-serif; margin: 0 0 8px; display: flex; justify-content: space-between; align-items: center; color: var(--ink); }
+  .ai-song { display: flex; gap: 8px; align-items: center; padding: 8px; background: #fff; border: 1px solid rgba(22,32,43,.14); border-radius: 4px; margin-bottom: 6px; font-size: 13px; }
+  .ai-song span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ai-song.on { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+  .ai-help h2 { font: 700 20px 'Space Grotesk', system-ui, sans-serif; margin: 0 0 6px; }
+  .ai-help details { border-top: 1px solid rgba(22,32,43,.14); padding: 10px 0; }
+  .ai-help details:first-of-type { border-top: 0; }
+  .ai-help summary { cursor: pointer; font-weight: 700; font-size: 15px; }
+  .ai-help ol, .ai-help ul { line-height: 1.6; font-size: 14px; padding-left: 22px; }
+  .ai-help p { font-size: 14px; line-height: 1.55; }
+  .ai-help a, .ai-keybox a { color: #1d6f86; }
+  .ai-biglink { display: inline-block; margin: 6px 0; padding: 10px 14px; background: var(--navy); color: #fff !important; border-radius: 3px; font-weight: 700; text-decoration: none; }
+  .ai-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  @media (max-width: 860px) { .ai-layout { grid-template-columns: 1fr; } }
+  @media (max-width: 480px) { .ai-row, .ai-actions { grid-template-columns: 1fr; } .ai-go { flex-direction: column; } .mode-toggle { flex-wrap: wrap; } .mode-btn { flex: 1 1 100%; } }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -253,16 +335,188 @@
   </svg>
   <div>
     <h1>Music Forge</h1>
-    <p data-i18n="heroSubtitle">Pick a mood for an instant track, or switch to Tracker mode and build your own beat.</p>
+    <p data-i18n="heroSubtitle">Make a real song with singing from a sentence, pick a mood for an instant free track, or build your own beat in the Tracker.</p>
     <div data-i18n-switcher style="margin-top:10px;"></div>
   </div>
 </header>
 
 <div class="mode-toggle-wrap">
   <div class="mode-toggle">
+    <button type="button" class="mode-btn" id="aiModeBtn">🎤 AI song with singing</button>
     <button type="button" class="mode-btn active" id="presetModeBtn" data-i18n="presetModeLabel">🎹 Quick presets</button>
     <button type="button" class="mode-btn" id="trackerModeBtn" data-i18n="trackerModeLabel">🎛️ Tracker (advanced)</button>
   </div>
+</div>
+
+<div class="ai-wrap" id="aiModeWrap" style="display:none;">
+  <section class="ai-panel">
+    <p class="ai-privacy">🎤 AI songs are made by Google’s Lyria music AI with <b>your own Gemini key</b>. Your words go straight from this browser to Google; MigaBuilder never sees them or your key. No key? The <b>Quick presets</b> and <b>Tracker</b> tabs make free music with no key at all.</p>
+    <div class="ai-layout">
+      <div>
+        <div class="ai-step"><b>1</b>Describe your song</div>
+        <label for="aiPrompt" class="ai-sr">What should the song be about?</label>
+        <textarea id="aiPrompt" class="ai-input" maxlength="1500" rows="4" placeholder="Example: a happy summer song about a road trip with friends, windows down, sunset at the beach"></textarea>
+        <div class="ai-tools">
+          <span class="ai-count"><span id="aiCount">0</span>/1500</span>
+          <button type="button" class="ai-btn small" id="aiImprove" title="The AI turns a short idea into a detailed music description">✨ Improve my words</button>
+          <button type="button" class="ai-btn small" id="aiSurprise">🎲 Surprise me</button>
+        </div>
+
+        <div class="ai-step"><b>2</b>Pick a style</div>
+        <div class="ai-chips" id="aiGenres" role="radiogroup" aria-label="Style"></div>
+        <div class="ai-step"><b>3</b>Pick a mood</div>
+        <div class="ai-chips" id="aiMoods" role="radiogroup" aria-label="Mood"></div>
+
+        <div class="ai-step"><b>4</b>Singing</div>
+        <div class="ai-chips" id="aiVocals" role="radiogroup" aria-label="Singing">
+          <label class="ai-chip"><input type="radio" name="aiVocals" value="none" checked><span>🎹 No singing</span></label>
+          <label class="ai-chip"><input type="radio" name="aiVocals" value="auto"><span>🎤 AI writes the words</span></label>
+          <label class="ai-chip"><input type="radio" name="aiVocals" value="mine"><span>✍️ My own words</span></label>
+        </div>
+        <div id="aiVoiceBox" hidden>
+          <div class="ai-row">
+            <div><label for="aiVoice" class="ai-label">Voice</label><select id="aiVoice" class="ai-input"><option value="">Any voice</option><option value="a female lead vocal">Female</option><option value="a male lead vocal">Male</option><option value="a male and female duet">Duet</option><option value="a choir">Choir</option><option value="a child-like, playful vocal">Playful</option><option value="rap vocals">Rap</option></select></div>
+            <div><label for="aiLang" class="ai-label">Language</label><select id="aiLang" class="ai-input"><option>English</option><option>Spanish</option><option>French</option><option>German</option><option>Portuguese</option><option>Italian</option><option>Swedish</option><option>Arabic</option><option>Hindi</option><option>Japanese</option><option>Korean</option><option>Mandarin Chinese</option><option>Swahili</option></select></div>
+          </div>
+        </div>
+        <div id="aiLyricsBox" hidden>
+          <label for="aiLyrics" class="ai-label">Your words (lyrics)</label>
+          <textarea id="aiLyrics" class="ai-input" maxlength="3000" rows="7" placeholder="[Verse]&#10;Windows down, the radio on…&#10;[Chorus]&#10;We’re driving into summer…"></textarea>
+          <div class="ai-tools">
+            <button type="button" class="ai-btn small" data-tag="[Verse]">+ Verse</button>
+            <button type="button" class="ai-btn small" data-tag="[Chorus]">+ Chorus</button>
+            <button type="button" class="ai-btn small" data-tag="[Bridge]">+ Bridge</button>
+            <button type="button" class="ai-btn small" id="aiWriteLyrics">✍️ Write them for me</button>
+          </div>
+        </div>
+
+        <div class="ai-step"><b>5</b>How long?</div>
+        <div class="ai-chips" id="aiLength" role="radiogroup" aria-label="Length">
+          <label class="ai-chip"><input type="radio" name="aiLength" value="clip" checked><span>⚡ 30-second clip <small>≈ $0.04</small></span></label>
+          <label class="ai-chip"><input type="radio" name="aiLength" value="song"><span>🎶 Full song <small>≈ $0.08</small></span></label>
+        </div>
+
+        <details class="ai-more" id="aiMore">
+          <summary>⚙️ More options</summary>
+          <div>
+            <div class="ai-row">
+              <div><label for="aiTempo" class="ai-label">Speed: <span id="aiTempoOut">automatic</span></label><input type="range" id="aiTempo" min="0" max="180" step="5" value="0" aria-describedby="aiTempoOut"></div>
+              <div><label for="aiKey" class="ai-label">Key</label><select id="aiKey" class="ai-input"><option value="">Automatic</option><option>C major</option><option>G major</option><option>D major</option><option>A major</option><option>E major</option><option>F major</option><option>B-flat major</option><option>A minor</option><option>E minor</option><option>D minor</option><option>C minor</option><option>F-sharp minor</option></select></div>
+            </div>
+            <div class="ai-row">
+              <div><label for="aiMinutes" class="ai-label">Full-song length</label><select id="aiMinutes" class="ai-input"><option value="">Automatic</option><option value="about 1 minute">About 1 minute</option><option value="about 2 minutes">About 2 minutes</option><option value="about 3 minutes">About 3 minutes</option></select></div>
+              <div><label for="aiStructure" class="ai-label">Shape</label><select id="aiStructure" class="ai-input"><option value="">Automatic</option><option value="Structure: intro, verse, chorus, verse, chorus, bridge, final chorus, outro.">Classic pop song</option><option value="Make it a seamless loop that can repeat without a gap.">Seamless loop</option><option value="Build slowly from quiet to a big, powerful ending.">Slow build to a big ending</option><option value="Keep an even, steady energy with no big changes, good as background music.">Steady background</option></select></div>
+            </div>
+            <label class="ai-label">Instruments <small>(pick any)</small></label>
+            <div class="ai-chips" id="aiInstruments"></div>
+            <div class="ai-row" style="margin-top:10px">
+              <div><label for="aiModel" class="ai-label">AI model</label><select id="aiModel" class="ai-input"><option value="">Match the length</option><option value="lyria-3-clip-preview">Lyria 3 Clip (30 s)</option><option value="lyria-3.5">Lyria 3.5 (full song)</option><option value="lyria-3-pro-preview">Lyria 3 Pro (full song)</option></select></div>
+              <div><label for="aiAvoid" class="ai-label">Leave out</label><input type="text" id="aiAvoid" class="ai-input" maxlength="160" placeholder="e.g. drums, electric guitar"></div>
+            </div>
+            <label class="ai-label" style="margin-top:10px">Pictures for inspiration <small>(optional, up to 3)</small></label>
+            <label class="ai-drop" id="aiDrop" tabindex="0"><input type="file" id="aiImgInput" accept="image/png,image/jpeg,image/webp" multiple>🖼️ Add a photo or drawing and the music will match its feeling</label>
+            <div class="ai-refs" id="aiRefs"></div>
+          </div>
+        </details>
+
+        <div class="ai-keybox" data-no-autosave>
+          <div class="ai-step" style="margin-top:0"><b>6</b>Your Gemini key</div>
+          <ol>
+            <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio → API keys</a> and sign in with a Google account.</li>
+            <li>Press <b>Create API key</b>, then <b>Copy</b>.</li>
+            <li>Paste it below. Songs need <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener">billing turned on</a> for that key (4–8 US cents per song). <a href="#aiKeyGuide">Full guide ↓</a></li>
+          </ol>
+          <label for="aiApiKey" class="ai-sr">Your Gemini API key</label>
+          <div class="ai-keyrow"><input id="aiApiKey" type="password" class="ai-input" autocomplete="off" spellcheck="false" placeholder="Paste your Gemini key (starts with AIza…)"><button type="button" class="ai-btn small" id="aiTestKey">Test</button></div>
+          <label class="ai-check"><input type="checkbox" id="aiRemember"><span>Remember the key on this device <small>Stored only in this browser (shared with Picture Forge). Don’t tick this on a shared computer.</small></span></label>
+          <button type="button" class="ai-btn small" id="aiForget" hidden>Forget my key</button>
+        </div>
+
+        <div class="ai-go">
+          <button type="button" class="draft-btn" id="aiMake">🎤 Make my song</button>
+          <button type="button" class="draft-btn secondary" id="aiStop" hidden>Stop</button>
+        </div>
+        <p class="ai-hint">Tip: Ctrl + Enter (⌘ + Enter on a Mac) makes the song. A clip takes about 20–40 seconds, a full song up to 2 minutes.</p>
+        <div class="ai-status" id="aiStatus" role="status" aria-live="polite"></div>
+      </div>
+
+      <div>
+        <div class="ai-result" id="aiResult">
+          <div class="ai-empty" id="aiEmpty"><span>🎧</span><strong>Your song will appear here</strong><p>Describe it, pick a style and a mood, and press <b>Make my song</b>.</p></div>
+          <div id="aiPlayer" hidden>
+            <div class="ai-title" id="aiTitle"></div>
+            <canvas id="aiWave" width="900" height="140" aria-label="Song waveform. Click to jump to a point." role="img"></canvas>
+            <audio id="aiAudio" controls></audio>
+            <div class="ai-actions">
+              <button type="button" class="draft-btn" id="aiDlMp3">⬇ Download MP3</button>
+              <button type="button" class="draft-btn secondary" id="aiDlWav">⬇ Download WAV</button>
+              <button type="button" class="draft-btn secondary" id="aiAgain">↻ Another version</button>
+              <button type="button" class="draft-btn secondary" id="aiCopyLyrics" hidden>📋 Copy lyrics</button>
+            </div>
+            <pre class="ai-lyrics" id="aiLyricsOut" hidden></pre>
+          </div>
+          <div class="ai-progress" id="aiProgress" hidden><div class="ai-eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><strong id="aiProgressText">Composing your song…</strong><p><span id="aiElapsed">0</span> s</p></div>
+        </div>
+        <div class="ai-library" id="aiLibraryWrap" hidden>
+          <h3>Your recent songs <button type="button" class="ai-btn small" id="aiClearLib">Clear</button></h3>
+          <div id="aiLibrary"></div>
+          <p class="ai-hint">Kept only in this browser, never uploaded.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-panel ai-help" id="aiHelp">
+    <h2>Help</h2>
+    <details id="aiKeyGuide">
+      <summary>🔑 How to get your own Gemini key (step by step)</summary>
+      <p>A Gemini API key is a password-like code from Google that lets this page ask Google’s music AI (Lyria) for songs on your own account. The same key works in Picture Forge and in every MigaBuilder AI tool.</p>
+      <a class="ai-biglink" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Open Google AI Studio → Get API key ↗</a>
+      <ol>
+        <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and sign in with any Google account (the one you use for Gmail or YouTube works).</li>
+        <li>Accept Google’s terms if it asks.</li>
+        <li>Press <b>Create API key</b>. If it asks for a project, pick the suggested one or press <b>Create project</b>.</li>
+        <li>Press <b>Copy</b>. The key is a long code that usually starts with <code>AIza</code>.</li>
+        <li>Back here, paste it in step 6 and press <b>Test</b>.</li>
+        <li><b>Turn on billing for music.</b> Google’s music models have no free tier. In AI Studio open <a href="https://aistudio.google.com/usage" target="_blank" rel="noopener">Usage &amp; billing</a> (or follow <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener">Google’s billing guide</a>) and link a billing account to the key’s project. New Google Cloud accounts often get free trial credit.</li>
+        <li>Smart extra step: set a <b>budget alert</b> in Google Cloud Billing (for example 5 USD) so Google emails you before you spend more than planned.</li>
+      </ol>
+      <p><b>Is it safe?</b> The key goes straight from your browser to Google, never to MigaBuilder. Unless you tick <i>Remember</i>, it is forgotten when you close the tab. Anyone with your key can spend on your account, so don’t share it. If it leaks, delete it on the same <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">API keys page</a> and create a new one.</p>
+    </details>
+    <details>
+      <summary>⬇ How to download your song</summary>
+      <ol>
+        <li>When the song is ready, press <b>⬇ Download MP3</b> for a small file that plays everywhere (phones, cars, WhatsApp, video editors).</li>
+        <li>Press <b>⬇ Download WAV</b> for an uncompressed file, best for further editing in <a href="audio-forge.html">Audio Forge</a> or a music program. It is about ten times bigger.</li>
+        <li>On a computer the file goes to your <i>Downloads</i> folder. On an iPhone or iPad tap <b>Download</b> in the pop-up and find it in the <i>Files</i> app. On Android it goes to <i>Downloads</i>.</li>
+        <li><b>📋 Copy lyrics</b> copies the words the AI sang, for a video description or a lyric sheet.</li>
+        <li>Earlier songs stay under <b>Your recent songs</b> in this browser; press ▶ to hear one again or ⬇ to download it.</li>
+      </ol>
+      <p>Google adds an inaudible <a href="https://deepmind.google/models/synthid/" target="_blank" rel="noopener">SynthID</a> watermark to every AI song so it can be recognised as AI-made. You can’t hear it.</p>
+    </details>
+    <details>
+      <summary>💾 Using a downloaded copy of MigaBuilder</summary>
+      <ol>
+        <li>On <a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar" target="_blank" rel="noopener">the GitHub page</a> press <b>Code → Download ZIP</b> and unzip it.</li>
+        <li>In that folder run <code>python3 -m http.server 8000</code> and open <code>http://localhost:8000/music-forge.html</code>. (Double-clicking the file is not enough: the pages load shared files from the site root.)</li>
+        <li>AI songs work the same with your own key. The Quick presets and Tracker tabs need no key and work offline.</li>
+      </ol>
+    </details>
+    <details>
+      <summary>💡 Tips for great songs</summary>
+      <ul>
+        <li>Say what the song is about, where it plays and how it should feel: “a cosy rainy-day café song, soft piano and brushed drums”.</li>
+        <li>Short idea? Press <b>✨ Improve my words</b>. Want to sing along? Choose <b>My own words</b> and press <b>✍️ Write them for me</b>, then change any line.</li>
+        <li>Mark parts of your lyrics with <b>[Verse]</b>, <b>[Chorus]</b> and <b>[Bridge]</b> so the AI knows what to repeat.</li>
+        <li>Try a 30-second clip first, then make the full song once you like the sound.</li>
+        <li>For video background music, pick <b>No singing</b> and the <i>Steady background</i> or <i>Seamless loop</i> shape.</li>
+      </ul>
+    </details>
+    <details>
+      <summary>💰 Costs, rights and rules</summary>
+      <p>With your own key Google charges your account about <b>$0.04 per 30-second clip</b> and <b>$0.08 per full song</b> (see <a href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="noopener">Google’s price list</a>; prices can change). Google refuses requests that copy a real artist’s voice or copyrighted lyrics; describe the style instead (“90s grunge”, not a band name). Check <a href="https://ai.google.dev/gemini-api/terms" target="_blank" rel="noopener">Google’s terms</a> before using songs commercially. Music from the free Quick presets and Tracker tabs is yours with no conditions.</p>
+    </details>
+  </section>
 </div>
 
 <div class="solo-wrap" id="presetModeWrap">
@@ -426,18 +680,26 @@
   const presetFooter = document.getElementById('presetFooter');
   const trackerFooter = document.getElementById('trackerFooter');
 
+  const aiModeBtn = document.getElementById('aiModeBtn');
+  const aiModeWrap = document.getElementById('aiModeWrap');
   function setMode(mode) {
-    const isTracker = mode === 'tracker';
-    presetModeBtn.classList.toggle('active', !isTracker);
+    const isTracker = mode === 'tracker', isAi = mode === 'ai', isPresets = !isTracker && !isAi;
+    presetModeBtn.classList.toggle('active', isPresets);
     trackerModeBtn.classList.toggle('active', isTracker);
-    presetModeWrap.style.display = isTracker ? 'none' : 'flex';
+    aiModeBtn.classList.toggle('active', isAi);
+    presetModeWrap.style.display = isPresets ? 'flex' : 'none';
     trackerModeWrap.style.display = isTracker ? 'grid' : 'none';
-    presetFooter.style.display = isTracker ? 'none' : 'block';
+    aiModeWrap.style.display = isAi ? 'flex' : 'none';
+    presetFooter.style.display = isPresets ? 'block' : 'none';
     trackerFooter.style.display = isTracker ? 'block' : 'none';
     if (isTracker) renderAll();
+    if (history.replaceState) history.replaceState(null, '', isAi ? '#ai-song' : isTracker ? '#tracker' : location.pathname + location.search);
   }
   presetModeBtn.addEventListener('click', () => setMode('presets'));
   trackerModeBtn.addEventListener('click', () => setMode('tracker'));
+  aiModeBtn.addEventListener('click', () => setMode('ai'));
+  if (/^#ai/.test(location.hash)) setTimeout(() => setMode('ai'));
+  else if (location.hash === '#tracker') setTimeout(() => setMode('tracker'));
 
   // ================= preset mode (unchanged) =================
   const presetGrid = document.getElementById('presetGrid');
@@ -1465,7 +1727,7 @@
 
   I18N.init({
     en: {
-      heroSubtitle: 'Pick a mood for an instant track, or switch to Tracker mode and build your own beat.',
+      heroSubtitle: 'Make a real song with singing from a sentence, pick a mood for an instant free track, or build your own beat in the Tracker.',
       presetModeLabel: '🎹 Quick presets',
       trackerModeLabel: '🎛️ Tracker (advanced)',
       moodLabel: 'Mood',
@@ -1567,7 +1829,7 @@
       clearDraftConfirm: 'Clear the autosaved draft? This only removes the saved copy in this browser — anything currently on screen is untouched.'
     },
     es: {
-      heroSubtitle: 'Elige un ambiente para una pista instantánea, o cambia al modo Tracker y construye tu propio ritmo.',
+      heroSubtitle: 'Crea una canción real con voz a partir de una frase, elige un ambiente para una pista gratis al instante, o construye tu propio ritmo en el Tracker.',
       presetModeLabel: '🎹 Preajustes rápidos',
       trackerModeLabel: '🎛️ Tracker (avanzado)',
       moodLabel: 'Ambiente',
@@ -1669,7 +1931,7 @@
       clearDraftConfirm: 'Borrar el borrador autoguardado? Esto solo elimina la copia guardada en este navegador — todo lo que está actualmente en pantalla no se ve afectado.'
     },
     ar: {
-      heroSubtitle: 'اختر مزاجًا للحصول على مقطوعة فورية، أو انتقل إلى وضع Tracker وابنِ إيقاعك الخاص.',
+      heroSubtitle: 'اصنع أغنية حقيقية بالغناء من جملة واحدة، أو اختر مزاجًا لمقطوعة مجانية فورية، أو ابنِ إيقاعك في وضع Tracker.',
       presetModeLabel: '🎹 إعدادات سريعة',
       trackerModeLabel: '🎛️ Tracker (متقدم)',
       moodLabel: 'المزاج',
@@ -1771,7 +2033,7 @@
       clearDraftConfirm: 'مسح المسودة المحفوظة تلقائيًا؟ هذا يزيل فقط النسخة المحفوظة في هذا المتصفح — أي شيء معروض حاليًا على الشاشة لن يتأثر.'
     },
     zh: {
-      heroSubtitle: '选择一种情绪立即生成曲目，或切换到 Tracker 模式自己制作节拍。',
+      heroSubtitle: '用一句话生成带演唱的真实歌曲，选择情绪立即免费生成曲目，或在 Tracker 中自己制作节拍。',
       presetModeLabel: '🎹 快速预设',
       trackerModeLabel: '🎛️ Tracker（高级）',
       moodLabel: '情绪',
@@ -1873,7 +2135,7 @@
       clearDraftConfirm: '清除自动保存的草稿？这只会移除此浏览器中保存的副本——当前屏幕上的任何内容不受影响。'
     },
     sw: {
-      heroSubtitle: 'Chagua hali ya moyo kwa wimbo wa papo hapo, au badilisha kwenda hali ya Tracker na utengeneze mdundo wako mwenyewe.',
+      heroSubtitle: 'Tengeneza wimbo halisi wenye uimbaji kutoka sentensi moja, chagua hali ya moyo kwa wimbo wa bure papo hapo, au tengeneza mdundo wako katika Tracker.',
       presetModeLabel: '🎹 Mipangilio ya haraka',
       trackerModeLabel: '🎛️ Tracker (ya kina)',
       moodLabel: 'Hali ya moyo',
@@ -1978,6 +2240,311 @@
 
   renderAll();
   checkForSavedDraft();
+})();
+</script>
+<script>
+/* AI song mode: Google Lyria through the visitor's own Gemini key (Interactions API).
+ * The key goes straight from this browser to Google; the free Quick presets and
+ * Tracker modes above need no key at all. */
+(function () {
+  'use strict';
+  const GOOGLE = 'https://generativelanguage.googleapis.com/v1beta/';
+  const PROXY = 'https://migabuilder-gemini.makmurphy69.workers.dev';
+  const TEXT_MODEL = 'gemini-3.5-flash';
+  const KEY_STORE = 'migaGeminiKey';
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* private mode */ } },
+    del(k) { try { localStorage.removeItem(k); } catch (e) { /* private mode */ } }
+  };
+  const GENRES = [['', '🎯 As I describe'], ['pop', '🎤 Pop'], ['rock', '🎸 Rock'], ['hip-hop', '🧢 Hip-hop'], ['lo-fi hip-hop', '☕ Lo-fi'], ['electronic dance music', '🪩 Dance'], ['jazz', '🎷 Jazz'], ['orchestral film score', '🎻 Orchestral'], ['acoustic folk', '🪕 Folk'], ['reggae', '🌴 Reggae'], ['afrobeats', '🥁 Afrobeats'], ['country', '🤠 Country'], ['R&B soul', '💜 R&B'], ['80s synthwave', '🌆 Synthwave'], ['heavy metal', '🤘 Metal'], ['children’s song', '🧸 Kids'], ['latin reggaeton', '💃 Latin'], ['ambient', '🌫️ Ambient']];
+  const MOODS = [['', 'Any mood'], ['happy and upbeat', '😄 Happy'], ['calm and relaxing', '😌 Calm'], ['epic and powerful', '🏔️ Epic'], ['sad and emotional', '😢 Sad'], ['romantic', '❤️ Romantic'], ['energetic', '⚡ Energetic'], ['dreamy', '💭 Dreamy'], ['dark and mysterious', '🌑 Dark'], ['funny and silly', '🤪 Funny']];
+  const INSTRUMENTS = ['piano', 'acoustic guitar', 'electric guitar', 'bass', 'drums', 'strings', 'synthesizer', 'saxophone', 'trumpet', 'flute', 'ukulele', 'violin', '808 bass', 'choir'];
+  const SURPRISES = [
+    'A song about a dog who dreams of becoming an astronaut',
+    'Background music for a cosy rainy-day café video',
+    'A victory anthem for a school football team',
+    'A lullaby about the moon watching over a sleepy town',
+    'Upbeat music for a cooking video, fresh and fun',
+    'A song about best friends on a summer road trip',
+    'Mysterious music for exploring an ancient temple in a video game',
+    'A birthday song for grandma, warm and joyful',
+    'A motivational workout track that keeps building energy',
+    'A calm study-session loop with rain sounds'
+  ];
+  const prompt = $('aiPrompt'), status = $('aiStatus'), audio = $('aiAudio');
+  let refs = [], current = null, busy = null, libUrls = [];
+
+  function chips(el, name, items, multi) {
+    el.innerHTML = items.map((it, i) => '<label class="ai-chip"><input type="' + (multi ? 'checkbox' : 'radio') + '" name="' + name + '" value="' + i + '"' + (!multi && i === 0 ? ' checked' : '') + '><span>' + it + '</span></label>').join('');
+  }
+  chips($('aiGenres'), 'aiGenre', GENRES.map(g => g[1]));
+  chips($('aiMoods'), 'aiMood', MOODS.map(m => m[1]));
+  chips($('aiInstruments'), 'aiInst', INSTRUMENTS, true);
+  const radio = name => document.querySelector('input[name="' + name + '"]:checked').value;
+  function note(msg, kind) { status.textContent = msg; status.className = 'ai-status show' + (kind ? ' ' + kind : ''); }
+  const apiKey = () => $('aiApiKey').value.trim();
+  const slug = t => (t || 'song').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'song';
+  function b64ToBlob(b64, mime) { const bin = atob(b64), bytes = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i); return new Blob([bytes], { type: mime }); }
+  function blobToB64(blob) { return new Promise((ok, no) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.onerror = no; r.readAsDataURL(blob); }); }
+
+  /* ---------- inputs ---------- */
+  const count = () => { $('aiCount').textContent = prompt.value.length; };
+  prompt.addEventListener('input', count);
+  $('aiSurprise').onclick = () => { prompt.value = SURPRISES[Math.floor(Math.random() * SURPRISES.length)]; count(); prompt.focus(); };
+  function vocalsChanged() { const v = radio('aiVocals'); $('aiVoiceBox').hidden = v === 'none'; $('aiLyricsBox').hidden = v !== 'mine'; }
+  document.querySelectorAll('input[name="aiVocals"]').forEach(r => r.addEventListener('change', vocalsChanged));
+  document.querySelectorAll('#aiLyricsBox [data-tag]').forEach(b => b.onclick = () => { const t = $('aiLyrics'); t.value = (t.value.trim() ? t.value.replace(/\s*$/, '\n\n') : '') + b.dataset.tag + '\n'; t.focus(); });
+  const tempoOut = () => { $('aiTempoOut').textContent = +$('aiTempo').value < 40 ? 'automatic' : $('aiTempo').value + ' BPM'; };
+  $('aiTempo').addEventListener('input', tempoOut); tempoOut();
+
+  async function shrink(file) {
+    const url = URL.createObjectURL(file);
+    try {
+      const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = () => no(new Error('That file is not a picture this browser can open.')); i.src = url; });
+      const k = Math.min(1, 1024 / Math.max(img.naturalWidth, img.naturalHeight)), c = document.createElement('canvas');
+      c.width = Math.round(img.naturalWidth * k); c.height = Math.round(img.naturalHeight * k); c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+      const out = await new Promise(ok => c.toBlob(ok, 'image/jpeg', 0.88));
+      return { mime: 'image/jpeg', data: await blobToB64(out), url: URL.createObjectURL(out) };
+    } finally { URL.revokeObjectURL(url); }
+  }
+  async function addRefs(files) {
+    for (const f of Array.from(files || [])) {
+      if (refs.length >= 3) { note('Up to 3 pictures. Remove one to add another.', 'warn'); break; }
+      if (/^image\//.test(f.type)) { try { refs.push(await shrink(f)); } catch (e) { note(e.message, 'error'); } }
+    }
+    renderRefs();
+  }
+  function renderRefs() {
+    $('aiRefs').innerHTML = '';
+    refs.forEach((r, i) => { const d = document.createElement('div'); d.className = 'ai-ref'; d.innerHTML = '<img alt="Inspiration picture ' + (i + 1) + '"><button type="button" aria-label="Remove picture ' + (i + 1) + '">×</button>'; d.firstChild.src = r.url; d.lastChild.onclick = () => { URL.revokeObjectURL(r.url); refs.splice(i, 1); renderRefs(); }; $('aiRefs').appendChild(d); });
+  }
+  const drop = $('aiDrop');
+  $('aiImgInput').onchange = e => { addRefs(e.target.files); e.target.value = ''; };
+  drop.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('aiImgInput').click(); } });
+  ['dragenter', 'dragover'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(t => drop.addEventListener(t, e => { e.preventDefault(); drop.classList.remove('over'); }));
+  drop.addEventListener('drop', e => addRefs(e.dataTransfer.files));
+
+  /* ---------- key ---------- */
+  const saved = store.get(KEY_STORE);
+  if (saved) { $('aiApiKey').value = saved; $('aiRemember').checked = true; $('aiForget').hidden = false; }
+  $('aiApiKey').addEventListener('input', () => { if ($('aiRemember').checked) store.set(KEY_STORE, apiKey()); });
+  $('aiRemember').addEventListener('change', () => { if ($('aiRemember').checked && apiKey()) { store.set(KEY_STORE, apiKey()); $('aiForget').hidden = false; } else if (!$('aiRemember').checked) store.del(KEY_STORE); });
+  $('aiForget').onclick = () => { store.del(KEY_STORE); $('aiApiKey').value = ''; $('aiRemember').checked = false; $('aiForget').hidden = true; note('Your key was removed from this browser.'); };
+  async function errText(r) { const t = await r.text().catch(() => ''); try { const d = JSON.parse(t); return (d.error && (d.error.message || d.error)) || t; } catch (e) { return t; } }
+  function friendly(code, msg) {
+    msg = String(msg || '');
+    if (/API key not valid|API_KEY_INVALID|expired/i.test(msg)) return 'Google says this key is not valid. Copy the whole key again from aistudio.google.com/apikey.';
+    if (/billing|limit: ?0|free[_ ]tier|FreeTier/i.test(msg) || (code === 403 && /permission/i.test(msg))) return 'Your key works, but Google needs billing turned on for music. Open AI Studio → Usage & billing and link a billing account (see the key guide below).';
+    if (/artist|copyright|recitation/i.test(msg)) return 'Google does not allow copying a real artist or copyrighted lyrics. Describe the style instead, like “90s rock” rather than a band name.';
+    if (/safety|blocked|prohibited/i.test(msg)) return 'Google’s safety filter blocked this song. Try describing it differently.';
+    if (code === 429) return 'Google says you made too many songs in a short time. Wait a minute and try again.';
+    if (code === 404) return 'This music model is not available for your key yet. Choose another model under More options.';
+    if (code >= 500) return 'Google’s music service is busy. Try again in a moment.';
+    return msg || ('The request failed (HTTP ' + code + ').');
+  }
+  $('aiTestKey').onclick = async () => {
+    if (!apiKey()) { note('Paste your key first. Get one at aistudio.google.com/apikey.', 'warn'); $('aiApiKey').focus(); return; }
+    note('Checking your key with Google…');
+    try {
+      const r = await fetch(GOOGLE + 'models?pageSize=1', { headers: { 'x-goog-api-key': apiKey() } });
+      if (r.ok) note('✓ Your key works. Songs also need billing turned on for its Google project (see the guide below).');
+      else note(friendly(r.status, await errText(r)), 'error');
+    } catch (e) { note('Could not reach Google. Check your internet connection.', 'error'); }
+  };
+
+  /* ---------- free text helpers (improve description, write lyrics) ---------- */
+  async function askText(system, user) {
+    let r;
+    if (apiKey()) r = await fetch(GOOGLE + 'models/' + TEXT_MODEL + ':generateContent', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey() }, body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ parts: [{ text: user }] }] }) });
+    else r = await fetch(PROXY, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: TEXT_MODEL, systemPrompt: system, userPrompt: user }) });
+    if (!r.ok) throw new Error(r.status === 429 ? 'The writing helper is busy. Wait a minute and try again.' : 'The writing helper is not available right now' + (apiKey() ? '.' : ' (on a downloaded copy it needs your key).'));
+    const d = await r.json(), parts = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
+    const text = (parts || []).filter(p => !p.thought).map(p => p.text || '').join('').trim();
+    if (!text) throw new Error('The writing helper sent back nothing. Try again.');
+    return text;
+  }
+  $('aiImprove').onclick = async () => {
+    const idea = prompt.value.trim();
+    if (idea.length < 3) { note('Write a short idea first, like “song about my cat”, then press Improve.', 'warn'); prompt.focus(); return; }
+    $('aiImprove').disabled = true; note('Writing a fuller description…');
+    try { prompt.value = (await askText('You turn short song ideas into one vivid music-generation prompt: genre, mood, instruments, tempo feel, and what the song is about, in 30 to 60 words. Never name real artists or songs. Plain text only, no lists, no quotes.', idea)).replace(/^["“]|["”]$/g, '').slice(0, 1500); count(); note('Description improved. Change anything you like, then press Make my song.'); }
+    catch (e) { note(e.message, 'error'); } finally { $('aiImprove').disabled = false; }
+  };
+  $('aiWriteLyrics').onclick = async () => {
+    const idea = prompt.value.trim() || 'a happy song';
+    $('aiWriteLyrics').disabled = true; note('Writing lyrics…');
+    try {
+      const len = radio('aiLength') === 'clip' ? 'one short verse and one chorus (about 30 seconds of singing)' : 'two verses, a chorus that repeats, and a bridge';
+      $('aiLyrics').value = (await askText('You write original, singable song lyrics. Use section tags on their own lines: [Verse], [Chorus], [Bridge]. Rhyme naturally, keep lines short. Never copy existing songs. Write in ' + $('aiLang').value + '. Output only the lyrics.', 'Song idea: ' + idea + '. Style: ' + (GENRES[+radio('aiGenre')][0] || 'any') + '. Mood: ' + (MOODS[+radio('aiMood')][0] || 'any') + '. Length: ' + len + '.')).slice(0, 3000);
+      note('Lyrics written. Change any line you like, then press Make my song.');
+    } catch (e) { note(e.message, 'error'); } finally { $('aiWriteLyrics').disabled = false; }
+  };
+
+  /* ---------- building the request ---------- */
+  function buildPrompt() {
+    const L = [prompt.value.trim()], g = GENRES[+radio('aiGenre')][0], m = MOODS[+radio('aiMood')][0], v = radio('aiVocals');
+    if (g) L.push('Genre: ' + g + '.');
+    if (m) L.push('Mood: ' + m + '.');
+    const inst = Array.from(document.querySelectorAll('input[name="aiInst"]:checked')).map(i => INSTRUMENTS[+i.value]);
+    if (inst.length) L.push('Instruments: ' + inst.join(', ') + '.');
+    if (+$('aiTempo').value >= 40) L.push('Tempo: ' + $('aiTempo').value + ' BPM.');
+    if ($('aiKey').value) L.push('Key: ' + $('aiKey').value + '.');
+    if ($('aiStructure').value) L.push($('aiStructure').value);
+    if (radio('aiLength') === 'song' && $('aiMinutes').value) L.push('Length: ' + $('aiMinutes').value + '.');
+    if ($('aiAvoid').value.trim()) L.push('Do not use: ' + $('aiAvoid').value.trim() + '.');
+    if (refs.length) L.push('Match the mood and atmosphere of the attached picture' + (refs.length > 1 ? 's' : '') + '.');
+    if (v === 'none') L.push('Instrumental only, no vocals.');
+    else {
+      const who = $('aiVoice').value ? ' with ' + $('aiVoice').value : '';
+      if (v === 'auto') L.push('With vocals' + who + ', singing original lyrics in ' + $('aiLang').value + '.');
+      else L.push('With vocals' + who + ' in ' + $('aiLang').value + ', singing exactly these lyrics:\n' + $('aiLyrics').value.trim());
+    }
+    return L.join('\n');
+  }
+  const model = () => $('aiModel').value || (radio('aiLength') === 'clip' ? 'lyria-3-clip-preview' : 'lyria-3.5');
+  // Lyria answers through the Interactions API. Look for the audio in the documented places
+  // (steps[].content[] and output_audio) and fall back to any {data, mime_type: audio/*} block.
+  function extract(d) {
+    let audioPart = d && d.output_audio && d.output_audio.data ? d.output_audio : null; const texts = [];
+    (function walk(o, depth) {
+      if (!o || typeof o !== 'object' || depth > 8) return;
+      if (Array.isArray(o)) { o.forEach(x => walk(x, depth + 1)); return; }
+      const mime = o.mime_type || o.mimeType || '';
+      if (!audioPart && typeof o.data === 'string' && o.data.length > 1000 && (o.type === 'audio' || /^audio\//.test(mime))) audioPart = o;
+      if (o.type === 'text' && typeof o.text === 'string') texts.push(o.text);
+      Object.keys(o).forEach(k => { if (k !== 'data') walk(o[k], depth + 1); });
+    })(d, 0);
+    if (!audioPart) return null;
+    const mime = audioPart.mime_type || audioPart.mimeType || 'audio/mpeg';
+    return { blob: b64ToBlob(audioPart.data, mime), lyrics: (texts.join('\n').trim() || (d && d.output_text) || '').trim() };
+  }
+
+  function setBusy(on, label) {
+    ['aiMake', 'aiAgain', 'aiImprove', 'aiWriteLyrics'].forEach(id => { $(id).disabled = on; });
+    $('aiStop').hidden = !on; $('aiProgress').hidden = !on;
+    if (on) { $('aiProgressText').textContent = label; const t0 = Date.now(); $('aiElapsed').textContent = '0'; busy = { ctrl: new AbortController(), timer: setInterval(() => { $('aiElapsed').textContent = Math.round((Date.now() - t0) / 1000); }, 500) }; }
+    else if (busy) { clearInterval(busy.timer); busy = null; }
+  }
+  $('aiStop').onclick = () => { if (busy) busy.ctrl.abort(); };
+
+  async function make() {
+    if (busy) return;
+    if (prompt.value.trim().length < 5) { note('Describe the song in a few more words, or press 🎲 Surprise me.', 'warn'); prompt.focus(); return; }
+    if (radio('aiVocals') === 'mine' && $('aiLyrics').value.trim().length < 10) { note('Write your lyrics first, or press ✍️ Write them for me.', 'warn'); $('aiLyrics').focus(); return; }
+    if (!apiKey()) { note('Paste your Gemini key in step 6 first. Get one at aistudio.google.com/apikey (the guide below shows how).', 'warn'); $('aiApiKey').focus(); $('aiKeyGuide').open = true; return; }
+    const text = buildPrompt();
+    const input = refs.length ? [{ type: 'text', text }].concat(refs.map(r => ({ type: 'image', mime_type: r.mime, data: r.data }))) : text;
+    setBusy(true, radio('aiLength') === 'clip' ? 'Composing your 30-second clip…' : 'Composing your full song… this can take a minute or two');
+    note('Google’s Lyria AI is composing…');
+    const signal = busy.ctrl.signal, timeout = setTimeout(() => busy && busy.ctrl.abort(), 300000);
+    try {
+      let r, tries = 0;
+      do {
+        r = await fetch(GOOGLE + 'interactions', { method: 'POST', signal, headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey() }, body: JSON.stringify({ model: model(), input, response_format: { type: 'audio' }, store: false }) });
+        if (r.status !== 503 || ++tries > 1) break;
+        await new Promise(ok => setTimeout(ok, 3000));
+      } while (true);
+      if (!r.ok) throw new Error(friendly(r.status, await errText(r)));
+      const got = extract(await r.json());
+      if (!got) throw new Error('Google sent back no music. Try a clearer description, or remove artist names and lyrics you did not write.');
+      const title = prompt.value.trim().split(/\s+/).slice(0, 8).join(' ');
+      await show({ blob: got.blob, lyrics: got.lyrics || (radio('aiVocals') === 'mine' ? $('aiLyrics').value.trim() : ''), title, url: URL.createObjectURL(got.blob) }, true);
+      note('Your song is ready. Listen, download it, or make another version.');
+      if (window.MigaUsage) window.MigaUsage.action('ai-song-generated');
+    } catch (e) {
+      note(signal.aborted ? 'Stopped. Nothing was made.' : (e.message || 'Could not make the song. Please try again.'), signal.aborted ? 'warn' : 'error');
+    } finally { clearTimeout(timeout); setBusy(false); }
+  }
+  $('aiMake').onclick = make; $('aiAgain').onclick = make;
+  document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && !$('aiModeWrap').hidden && $('aiModeWrap').style.display !== 'none') { e.preventDefault(); make(); } });
+
+  /* ---------- result, waveform, downloads ---------- */
+  let peaks = null;
+  async function drawWave(blob) {
+    const c = $('aiWave'), x = c.getContext('2d'); peaks = null;
+    x.clearRect(0, 0, c.width, c.height);
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext, ac = new AC();
+      const buf = await ac.decodeAudioData(await blob.arrayBuffer()); ac.close && ac.close();
+      const ch = buf.getChannelData(0), n = 300, step = Math.floor(ch.length / n); peaks = [];
+      for (let i = 0; i < n; i++) { let m = 0; for (let j = i * step, e = j + step; j < e; j += 16) { const v = Math.abs(ch[j]); if (v > m) m = v; } peaks.push(m); }
+      current && (current.buffer = buf);
+    } catch (e) { /* the waveform is optional */ }
+    paintWave();
+  }
+  function paintWave() {
+    const c = $('aiWave'), x = c.getContext('2d'), W = c.width, H = c.height;
+    x.clearRect(0, 0, W, H);
+    if (!peaks) return;
+    const played = audio.duration ? audio.currentTime / audio.duration : 0, bw = W / peaks.length, max = Math.max(...peaks) || 1;
+    peaks.forEach((p, i) => { const h = Math.max(2, p / max * (H - 16)); x.fillStyle = i / peaks.length < played ? '#E2A63B' : 'rgba(111,209,224,.75)'; x.fillRect(i * bw + 1, (H - h) / 2, Math.max(1, bw - 2), h); });
+  }
+  audio.addEventListener('timeupdate', paintWave);
+  $('aiWave').addEventListener('click', e => { if (!audio.duration) return; const r = e.currentTarget.getBoundingClientRect(); audio.currentTime = (e.clientX - r.left) / r.width * audio.duration; paintWave(); });
+
+  async function show(song, fresh) {
+    current = song;
+    $('aiEmpty').hidden = true; $('aiPlayer').hidden = false;
+    $('aiTitle').textContent = '🎵 ' + (song.title || 'Your song');
+    audio.src = song.url;
+    const ext = /wav/.test(song.blob.type) ? 'WAV' : 'MP3';
+    $('aiDlMp3').textContent = '⬇ Download ' + ext; $('aiDlWav').hidden = ext === 'WAV';
+    $('aiLyricsOut').hidden = !song.lyrics; $('aiLyricsOut').textContent = song.lyrics || ''; $('aiCopyLyrics').hidden = !song.lyrics;
+    await drawWave(song.blob);
+    if (fresh) await saveSong(song);
+    document.querySelectorAll('#aiLibrary .ai-song').forEach(el => el.classList.toggle('on', el.dataset.id === song.id));
+    if (matchMedia('(max-width:860px)').matches) $('aiResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function save(blob, name) { const a = document.createElement('a'), u = URL.createObjectURL(blob); a.href = u; a.download = name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(u), 4000); note('Downloaded ' + name + '. Look in your Downloads folder (on iPhone: the Files app).'); }
+  $('aiDlMp3').onclick = () => { if (current) save(current.blob, slug(current.title) + (/wav/.test(current.blob.type) ? '.wav' : '.mp3')); };
+  $('aiDlWav').onclick = async () => {
+    if (!current) return;
+    try {
+      if (!current.buffer) { const AC = window.AudioContext || window.webkitAudioContext, ac = new AC(); current.buffer = await ac.decodeAudioData(await current.blob.arrayBuffer()); }
+      save(MediaUtils.audioBufferToWav(current.buffer), slug(current.title) + '.wav');
+    } catch (e) { note('This browser could not convert the song to WAV. Download the MP3 instead.', 'warn'); }
+  };
+  $('aiCopyLyrics').onclick = async () => { try { await navigator.clipboard.writeText(current.lyrics); note('Lyrics copied.'); } catch (e) { note('Could not copy. Select the lyrics and copy them by hand.', 'warn'); } };
+
+  /* ---------- recent songs (IndexedDB, this browser only) ---------- */
+  function db() { return new Promise((ok, no) => { const r = indexedDB.open('music-forge-ai', 1); r.onupgradeneeded = () => r.result.createObjectStore('songs', { keyPath: 'id' }); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); }); }
+  async function tx(fn, rw) { const d = await db(); return new Promise((ok, no) => { const t = d.transaction('songs', rw ? 'readwrite' : 'readonly'), q = fn(t.objectStore('songs')); t.oncomplete = () => { d.close(); ok(q && q.result); }; t.onerror = () => { d.close(); no(t.error); }; }); }
+  async function saveSong(s) {
+    s.id = Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+    try { await tx(st => st.put({ id: s.id, blob: s.blob, title: s.title, lyrics: s.lyrics, at: Date.now() }), true); await loadLibrary(); } catch (e) { /* optional */ }
+  }
+  async function loadLibrary() {
+    let items = [];
+    try { items = (await tx(st => st.getAll())) || []; } catch (e) { return; }
+    items.sort((a, b) => b.at - a.at);
+    const extra = items.slice(20); if (extra.length) tx(st => extra.forEach(x => st.delete(x.id)), true).catch(() => {});
+    libUrls.forEach(u => { if (!current || current.url !== u) URL.revokeObjectURL(u); }); libUrls = [];
+    const box = $('aiLibrary'); box.innerHTML = '';
+    items.slice(0, 20).forEach(it => {
+      const row = document.createElement('div'); row.className = 'ai-song' + (current && current.id === it.id ? ' on' : ''); row.dataset.id = it.id;
+      row.innerHTML = '<button type="button" class="ai-btn small" aria-label="Play">▶</button><span></span><button type="button" class="ai-btn small" aria-label="Download">⬇</button>';
+      row.children[1].textContent = it.title || 'Song'; row.children[1].title = it.title || '';
+      const open = () => { const same = current && current.id === it.id; if (same) return current; const u = URL.createObjectURL(it.blob); libUrls.push(u); return { id: it.id, blob: it.blob, title: it.title, lyrics: it.lyrics, url: u }; };
+      row.children[0].onclick = async () => { await show(open(), false); audio.play().catch(() => {}); };
+      row.children[2].onclick = () => save(it.blob, slug(it.title) + (/wav/.test(it.blob.type) ? '.wav' : '.mp3'));
+      box.appendChild(row);
+    });
+    $('aiLibraryWrap').hidden = !items.length;
+  }
+  $('aiClearLib').onclick = async () => { try { await tx(st => st.clear(), true); } catch (e) { /* ignore */ } loadLibrary(); note('Recent songs cleared from this browser.'); };
+  loadLibrary();
+
+  // Used only by the narrated walkthrough: renders a short local tune so recording spends no AI credit.
+  window.musicForgeDemo = async function () {
+    const buf = await MediaUtils.generateStockTrack({ duration: 14, wave: 'triangle', noteDur: 0.25, bass: 110, notes: [440, 554.37, 659.25, 554.37, 493.88, 587.33, 739.99, 587.33, 392, 493.88, 587.33, 493.88, 440, 554.37, 659.25, 880] });
+    const blob = MediaUtils.audioBufferToWav(buf);
+    const song = { blob, buffer: buf, title: prompt.value.trim().split(/\s+/).slice(0, 8).join(' ') || 'Road trip song', url: URL.createObjectURL(blob), lyrics: '[Verse]\nWindows down, the radio on,\nsinging every word of our summer song.\n[Chorus]\nWe’re driving into summer, nothing in our way,\nchasing down the sunset on the open highway.' };
+    await show(song, true);
+    note('Your song is ready. (Walkthrough sample — a real song comes from Google’s Lyria AI.)');
+  };
 })();
 </script>
 <script src="tutorials.js" defer></script>

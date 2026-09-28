@@ -39,7 +39,7 @@
     'cad-forge.html':['CAD Forge','set the wall height, wall thickness and roof, then draw walls, doors and windows on the plan','Load sample house','check the 3D house and timber frame, then download the drawings, material list and DXF file'],
     'boat-forge.html':['Boat Forge','pick a starting boat such as a skiff, canoe or sailboat, then shape the hull with the size and shape sliders','Add-ons','add people, an engine, a mast or a cabin, watch it float in 3D, then check the lines plan, stability and plywood panels and download the files'],
     'model-forge.html':['Model Forge','describe the 3D object and set its measurements and shape','Generate model','inspect it from every angle and export the printable model'],
-    'music-forge.html':['Music Forge','choose the mood, tempo, instruments, and length','Generate music','listen, adjust the arrangement, and download the track'],
+    'music-forge.html':['Music Forge','for a song with singing open AI song, describe it and pick a style, mood, singing and length (or pick a mood in Quick presets for a free instant track)','Make my song','listen, read the lyrics, and download the song as MP3 or WAV'],
     'name-forge.html':['Name Forge','describe the business, audience, tone, and useful keywords','Generate names','shortlist the strongest names and check their domains'],
     'paint-forge.html':['Paint Forge','open an image or blank canvas and choose the editing tools','Apply edit','work with layers, compare the result, and export the image'],
     'palette-forge.html':['Palette Forge','choose a starting color or describe the brand mood','Build palette','check contrast and copy or download the accessible colors'],
