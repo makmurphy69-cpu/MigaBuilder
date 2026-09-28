@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Boat Forge — design and build a boat: 3D hull, lines plan, stability and plywood panels | MigaBuilder</title>
+<meta name="description" content="Free boat design tool in your browser: start from a dinghy, skiff, V-hull runabout, dory, canoe, kayak, sailboat, catamaran, pontoon or trawler, shape the hull with sliders, add seats, cabin, mast, engine and crew, and see it float in 3D. Get the lines plan, hydrostatics, stability curve, speed estimate, plywood panel layouts, station molds and DXF, SVG, OBJ and STL files.">
+<link rel="canonical" href="https://migabuilder.com/boat-forge.html">
+<meta property="og:title" content="Boat Forge — free boat design tool | MigaBuilder">
+<meta property="og:description" content="Shape a hull, see it float in 3D, check its stability and speed, and download lines, plywood panels and 3D files.">
+<meta property="og:url" content="https://migabuilder.com/boat-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+main.boat-main{max-width:1400px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px;align-items:start}
+.side{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;padding:16px}
+.side h3{font:700 13px 'Space Grotesk';text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:#35516b;border-top:1px solid rgba(22,32,43,.12);padding-top:12px}
+.side h3:first-of-type{border-top:0;padding-top:0;margin-top:4px}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.presets button{background:#fff;border:1.5px solid rgba(22,32,43,.15);border-radius:6px;padding:7px 6px;text-align:left;font-size:12.5px;cursor:pointer;color:var(--ink);line-height:1.2}
+.presets button b{font-size:18px;margin-right:3px}.presets button.active{border-color:var(--amber);background:#fff7e6}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin-bottom:8px;font-size:12.5px}
+.sl label{font-weight:600}.sl output{font:500 12px 'IBM Plex Mono';color:#35516b}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:#0E2A47}
+.sl2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sel{margin-bottom:8px;font-size:12.5px}.sel label{display:block;font-weight:600;margin-bottom:3px}.sel select,.sel input{width:100%;padding:6px;border:1px solid rgba(22,32,43,.25);border-radius:4px;background:#fff}
+.viewtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.viewtabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 13px;font-weight:700;cursor:pointer;color:var(--ink);font-size:13px}
+.viewtabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+#view3d{position:relative;height:min(62vh,560px);min-height:340px;border-radius:6px;overflow:hidden;background:linear-gradient(#bfe0f2,#eaf6fb)}
+#view3d canvas{display:block;width:100%;height:100%}
+.ov{position:absolute;left:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.ov button,.ov label{background:rgba(255,255,255,.9);border:1px solid rgba(22,32,43,.2);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink);display:flex;gap:5px;align-items:center}
+.heel{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:8px;padding:8px 10px;font-size:12px;z-index:2;width:220px}
+.heel input{width:100%}
+.no3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#35516b}
+.svgbox{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;overflow:auto;min-height:300px}
+.svgbox svg{display:block;width:100%;height:auto}
+.hydro{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.hv{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px}
+.hv b{display:block;font:700 18px 'Space Grotesk'}.hv span{font-size:11.5px;color:rgba(22,32,43,.62)}.hv i{font-style:normal;font-size:11px;color:#35516b}
+.checks{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.checks li{padding:8px 10px;border-radius:5px;font-size:13px;line-height:1.4}
+.checks .ok{background:#eef8f1;border-left:4px solid #4E9E73}.checks .warn{background:#fff6e0;border-left:4px solid #E2A63B}.checks .bad{background:#fdeeea;border-left:4px solid #D8604A}
+table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}table.t th,table.t td{border:1px solid rgba(22,32,43,.14);padding:5px 7px;text-align:right}table.t th{background:#f1efe8;text-align:center}table.t td:first-child{text-align:left}
+.tablewrap{overflow:auto;max-height:520px}
+.explain{font-size:13px;line-height:1.55;color:rgba(22,32,43,.78)}
+.addons{display:grid;gap:6px}
+.addons label.chk{display:flex;gap:6px;align-items:center;font-size:12.5px;font-weight:600}
+@media(max-width:980px){main.boat-main{grid-template-columns:1fr}.side{position:static;max-height:none}}
+@media print{.tool-nav,.masthead,.side,.viewtabs,.ov,.heel,footer,.miga-bar,.miga-float{display:none!important}body{background:#fff}main.boat-main{display:block}.panel{box-shadow:none}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Boat Forge</span></nav>
+<header class="masthead"><div><h1>Boat Forge</h1><p>Design a boat like a naval architect: shape the hull, add a cabin, mast, engine and crew, and see it float. Get the lines plan, stability, speed, plywood panels and 3D files.</p></div></header>
+<main class="boat-main">
+<aside class="panel side" aria-label="Boat design controls">
+  <h3>1 · Start from a boat</h3>
+  <div class="presets" id="presets"></div>
+  <h3>2 · Main size</h3>
+  <div id="sizeSliders"></div>
+  <h3>3 · Hull shape</h3>
+  <div class="sel"><label for="p_section">Section shape</label><select id="p_section"><option value="hard">Hard chine (plywood, planing)</option><option value="round">Round bilge (classic, displacement)</option><option value="tube">Tubes (pontoon)</option></select></div>
+  <div class="sel"><label for="p_hulls">Hulls</label><select id="p_hulls"><option value="1">One hull (monohull)</option><option value="2">Two hulls (catamaran / pontoon)</option></select></div>
+  <div id="shapeSliders"></div>
+  <h3>4 · Build and add-ons</h3>
+  <div class="sl2">
+    <div class="sel"><label for="p_material">Material</label><select id="p_material"></select></div>
+    <div class="sel"><label for="p_deck">Deck</label><select id="p_deck"><option value="open">Open boat</option><option value="half">Foredeck</option><option value="full">Full deck</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel"><label for="p_keel">Keel</label><select id="p_keel"><option value="none">None</option><option value="skeg">Skeg</option><option value="fin">Fin keel + ballast</option><option value="full">Long keel</option></select></div>
+    <div class="sel"><label for="p_engineType">Engine</label><select id="p_engineType"><option value="none">None (paddle / oars / sail)</option><option value="outboard">Outboard</option><option value="inboard">Inboard diesel</option></select></div>
+  </div>
+  <div id="addonSliders"></div>
+  <div class="addons">
+    <label class="chk"><input type="checkbox" id="p_console"> Steering console</label>
+    <label class="chk"><input type="checkbox" id="p_rudder"> Rudder</label>
+  </div>
+  <div class="sl2" style="margin-top:8px">
+    <div class="sel"><label for="p_color">Hull colour</label><input type="color" id="p_color"></div>
+    <div class="sel"><label for="p_water">Water</label><select id="p_water"><option value="1025">Sea (salt)</option><option value="1000">Lake / river (fresh)</option></select></div>
+  </div>
+  <h3>5 · Save</h3>
+  <div class="actions"><button class="secondary" id="saveJson">💾 Save design</button><label class="secondary" style="cursor:pointer">📂 Open<input type="file" id="openJson" accept=".json,.boat" hidden></label><button class="secondary" id="resetBtn">↺ Reset</button></div>
+  <p class="privacy" style="margin-top:10px">🔒 Everything is calculated in your browser and saved on this device.</p>
+</aside>
+
+<div>
+  <section class="panel">
+    <div class="viewtabs" role="tablist">
+      <button class="active" data-view="v3d" id="tab3d">🛥️ 3D</button>
+      <button data-view="vlines" id="tabLines">📐 Lines plan</button>
+      <button data-view="vstab" id="tabStab">⚖️ Stability</button>
+      <button data-view="vpanels" id="tabPanels">🪚 Panels &amp; molds</button>
+      <button data-view="voffsets" id="tabOffsets">📋 Offsets</button>
+      <button data-view="vweights" id="tabWeights">🏋️ Weights</button>
+    </div>
+    <div id="v3d" class="view">
+      <div id="view3d"><div class="ov"><button id="camSide">Side</button><button id="camTop">Top</button><button id="camFront">Front</button><button id="cam34">3/4</button><label><input type="checkbox" id="waves" checked> Waves</label><label><input type="checkbox" id="showWater" checked> Water</label></div>
+        <div class="heel"><b>Heel test:</b> <span id="heelOut">0°</span><input type="range" id="heel" min="0" max="60" value="0" aria-label="Heel angle"><span id="heelGz" class="muted"></span></div></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlOBJ">⬇ OBJ</button><button class="secondary" id="dlSTL">⬇ STL (3D print)</button><button class="secondary" id="dlPNG">⬇ Picture</button><button class="secondary" id="printBtn">🖨 Build sheet</button></div>
+    </div>
+    <div id="vlines" class="view hidden">
+      <p class="explain">The classic <b>lines plan</b>: <b>profile</b> (side), <b>half-breadth plan</b> (top, one side) and <b>body plan</b> (cross-sections — bow half on the right, stern half on the left). The blue line is the waterline for your load.</p>
+      <div class="svgbox" id="linesBox"></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlLinesSVG">⬇ Lines SVG</button><button class="secondary" id="dlLinesDXF">⬇ Lines DXF (CAD)</button></div>
+    </div>
+    <div id="vstab" class="view hidden">
+      <p class="explain">The <b>righting-arm (GZ) curve</b> shows how hard the boat pushes back upright when it heels. Above zero it rights itself; where the curve crosses zero again it would capsize (angle of vanishing stability). It assumes the hull and deck are watertight and the load stays in place.</p>
+      <div class="svgbox" id="gzBox"></div>
+    </div>
+    <div id="vpanels" class="view hidden">
+      <p class="explain" id="panelsIntro"></p>
+      <div class="svgbox" id="panelsBox"></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlPanelsDXF">⬇ Panels DXF (full size, mm)</button><button class="secondary" id="dlMoldsDXF">⬇ Station molds DXF</button></div>
+      <div id="materialsBox" style="margin-top:12px"></div>
+    </div>
+    <div id="voffsets" class="view hidden">
+      <p class="explain">Offsets are the measurements a builder lofts full size: at each station, the height above the baseline and the half-breadth from the centreline, in millimetres.</p>
+      <div class="tablewrap" id="offsetsBox"></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlCSV">⬇ Offsets CSV</button></div>
+    </div>
+    <div id="vweights" class="view hidden">
+      <p class="explain">Every weight and where it sits. The boat trims until the centre of buoyancy is right under the centre of gravity (LCG). Move crew and gear to level it.</p>
+      <div class="tablewrap" id="weightsBox"></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2 id="boatTitle">Hydrostatics</h2>
+    <div class="hydro" id="hydro"></div>
+    <ul class="checks" id="checks"></ul>
+  </section>
+  <section class="panel">
+    <h2>How Boat Forge works</h2>
+    <div class="explain">
+      <p><b>Shape:</b> the hull is built from about 60 cross-sections. Length, beam and depth set the size; the shape sliders control how full the bow is, where the widest point sits, the transom width, the V of the bottom (deadrise), how much the bottom curves up at the ends (rocker), the rise of the deck line (sheer) and how far the sides lean out (flare).</p>
+      <p><b>Floating:</b> it adds up the weight of the hull (from its surface area and material), deck, engine, fuel, crew, gear, cabin, rig and ballast, then sinks the hull until it displaces that weight of water (Archimedes), and tilts it until it is balanced. From that it works out draft, freeboard, the waterline, form coefficients and the metacentric height (GM).</p>
+      <p><b>Speed:</b> planing hulls use Crouch’s formula; displacement hulls are limited by their <i>hull speed</i> (1.34 × √waterline length in feet, in knots). Sailboats get sail-area/displacement and displacement/length ratios. These are estimates for comparing designs — a real boat also needs a professional structural design and must meet your country’s rules (e.g. ISO 12217 stability, CE/RCD, USCG).</p>
+    </div>
+  </section>
+</div>
+</main>
+<footer>Boat Forge is a design and learning tool. Check any boat you build with a qualified designer and test it in safe, shallow water with buoyancy aids.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/STLExporter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const DEG=Math.PI/180,NS=60;
+
+// ------------------------------------------------------------------ presets
+const BASE={name:'My boat',type:'dinghy',L:3.2,B:1.4,D:0.55,maxPos:0.45,bowFull:1.8,transom:0.55,deadT:8,deadB:30,rocker:0.12,rockerAft:0.05,forefoot:0.2,sheerF:0.18,sheerA:0.08,flare:18,bilge:2.6,
+  section:'round',hulls:1,demiB:0.6,keel:'skeg',keelDepth:0.15,keelChord:1.0,keelX:0.4,ballast:0,deck:'open',material:'ply6',crew:2,crewX:0.45,gear:20,engineType:'none',hp:0,fuel:0,
+  mast:0,sail:0,cabinL:0,cabinH:0.8,cabinX:0.5,seats:2,console:false,rudder:false,color:'#2f6f9f',water:1025};
+const PRESETS={
+  dinghy:{ico:'🚣',label:'Rowing dinghy',p:{}},
+  skiff:{ico:'🛶',label:'Flat-bottom skiff',p:{L:4.8,B:1.7,D:0.55,maxPos:0.45,bowFull:2.2,transom:0.72,deadT:0,deadB:6,rocker:0.24,rockerAft:0.02,forefoot:0.12,sheerF:0.2,sheerA:0.04,flare:15,section:'hard',keel:'skeg',keelDepth:0.08,material:'ply9',crew:2,engineType:'outboard',hp:15,fuel:20,seats:2}},
+  runabout:{ico:'🚤',label:'V-hull runabout',p:{L:5.5,B:2.2,D:1.0,maxPos:0.42,bowFull:2.1,transom:0.9,deadT:18,deadB:45,rocker:0.12,rockerAft:0,forefoot:0.26,sheerF:0.25,sheerA:0.04,flare:12,section:'hard',keel:'none',deck:'half',material:'grp',crew:4,crewX:0.4,gear:60,engineType:'outboard',hp:90,fuel:80,seats:2,console:true}},
+  dory:{ico:'🚣',label:'Plywood dory',p:{L:4.9,B:1.5,D:0.6,maxPos:0.48,bowFull:1.6,transom:0.45,deadT:0,deadB:8,rocker:0.16,rockerAft:0.1,forefoot:0.15,sheerF:0.35,sheerA:0.2,flare:20,section:'hard',keel:'skeg',keelDepth:0.08,material:'ply6',crew:2,engineType:'none',seats:3}},
+  canoe:{ico:'🛶',label:'Canoe',p:{L:4.9,B:0.9,D:0.35,maxPos:0.5,bowFull:1.6,transom:0,deadT:4,deadB:15,rocker:0.05,rockerAft:0.05,forefoot:0.13,sheerF:0.16,sheerA:0.16,flare:6,bilge:2.2,section:'round',keel:'none',material:'strip',crew:2,crewX:0.5,gear:25,seats:2}},
+  kayak:{ico:'🛶',label:'Sea kayak',p:{L:5.0,B:0.62,D:0.32,maxPos:0.47,bowFull:1.5,transom:0,deadT:6,deadB:20,rocker:0.05,rockerAft:0.04,forefoot:0.14,sheerF:0.09,sheerA:0.06,flare:4,bilge:3,section:'round',keel:'none',deck:'full',material:'strip',crew:1,crewX:0.47,gear:15,seats:0,rudder:true}},
+  sailboat:{ico:'⛵',label:'Keel sailboat',p:{L:7.5,B:2.5,D:1.1,maxPos:0.52,bowFull:1.8,transom:0.6,deadT:8,deadB:25,rocker:0.2,rockerAft:0.14,forefoot:0.24,sheerF:0.25,sheerA:0.1,flare:10,bilge:3,section:'round',keel:'fin',keelDepth:1.1,keelChord:0.9,keelX:0.47,ballast:700,deck:'full',material:'grp',crew:3,crewX:0.35,gear:120,engineType:'outboard',hp:6,fuel:12,mast:10,sail:25,cabinL:2.6,cabinH:0.6,cabinX:0.5,seats:0,rudder:true}},
+  catamaran:{ico:'⛵',label:'Catamaran',p:{L:6.0,B:3.0,D:0.8,maxPos:0.5,bowFull:1.5,transom:0.35,deadT:10,deadB:30,rocker:0.08,rockerAft:0.05,forefoot:0.18,sheerF:0.18,sheerA:0.05,flare:4,bilge:2.2,section:'round',hulls:2,demiB:0.62,keel:'skeg',keelDepth:0.2,keelChord:0.9,deck:'full',material:'ply9',crew:3,crewX:0.45,gear:80,mast:9,sail:20,seats:0,rudder:true}},
+  pontoon:{ico:'🛥️',label:'Pontoon boat',p:{L:6.5,B:2.4,D:0.63,maxPos:0.25,bowFull:2.6,transom:0.97,deadT:0,deadB:0,rocker:0,rockerAft:0,forefoot:0.08,sheerF:0,sheerA:0,flare:0,section:'tube',hulls:2,demiB:0.63,keel:'none',deck:'full',material:'alu3',crew:6,crewX:0.5,gear:80,engineType:'outboard',hp:60,fuel:60,seats:2,console:true}},
+  trawler:{ico:'🛳️',label:'Motor trawler',p:{L:10,B:3.5,D:1.8,maxPos:0.5,bowFull:1.9,transom:0.7,deadT:12,deadB:30,rocker:0.3,rockerAft:0.2,forefoot:0.25,sheerF:0.45,sheerA:0.12,flare:12,bilge:3.2,section:'round',keel:'full',keelDepth:0.45,keelChord:3.5,keelX:0.4,ballast:1500,deck:'full',material:'grp',crew:4,crewX:0.45,gear:1200,engineType:'inboard',hp:120,fuel:600,cabinL:4.5,cabinH:1.8,cabinX:0.45,seats:0,rudder:true}}
+};
+const MATERIALS={ply6:['Plywood 6 mm + epoxy/glass',4.2],ply9:['Plywood 9 mm + epoxy/glass',6.0],ply12:['Plywood 12 mm + epoxy/glass',8.0],strip:['Cedar strip 6 mm + glass',3.3],grp:['Fibreglass (GRP) ~5 mm',7.5],alu3:['Aluminium 3 mm',8.1],alu5:['Aluminium 5 mm',13.5],hdpe:['HDPE plastic 6 mm',5.7],steel:['Steel 4 mm',31.4]};
+$('p_material').innerHTML=Object.entries(MATERIALS).map(([k,v])=>'<option value="'+k+'">'+v[0]+'</option>').join('');
+
+// ------------------------------------------------------------------ sliders
+const SLIDERS={
+  sizeSliders:[['L','Length overall',2,20,0.05,'m'],['B','Beam (widest, overall)',0.4,8,0.02,'m'],['D','Depth (keel to deck, middle)',0.2,3,0.01,'m'],['demiB','Width of each hull',0.2,2,0.01,'m',P=>P.hulls==2]],
+  shapeSliders:[['maxPos','Widest point (from stern)',0.25,0.65,0.01,'×L'],['bowFull','Bow fullness',1.2,4,0.05,''],['transom','Transom width (0 = pointed stern)',0,1,0.01,'×beam'],
+    ['deadT','Deadrise at stern (bottom V)',0,35,0.5,'°'],['deadB','Deadrise at bow',0,60,0.5,'°'],['bilge','Bilge fullness (round sections)',1.6,5,0.05,'',P=>P.section==='round'],
+    ['rocker','Rocker at bow (bottom curve)',0,0.8,0.01,'m'],['rockerAft','Rocker at stern',0,0.5,0.01,'m'],['forefoot','Bow cut-away (forefoot)',0.05,0.4,0.01,'×L'],
+    ['sheerF','Sheer rise at bow',0,1,0.01,'m'],['sheerA','Sheer rise at stern',0,0.6,0.01,'m'],['flare','Side flare',-5,35,0.5,'°']],
+  addonSliders:[['crew','People on board',0,20,1,''],['crewX','Where people sit (from stern)',0.1,0.9,0.01,'×L'],['gear','Gear and supplies',0,3000,5,'kg'],['seats','Seats / thwarts',0,6,1,''],
+    ['hp','Engine power',1,600,1,'hp',P=>P.engineType!=='none'],['fuel','Fuel',0,2000,5,'L',P=>P.engineType!=='none'],
+    ['keelDepth','Keel depth below hull',0.05,3,0.01,'m',P=>P.keel!=='none'],['keelChord','Keel length (chord)',0.2,8,0.05,'m',P=>P.keel==='fin'||P.keel==='full'],['keelX','Keel position (from stern)',0.2,0.8,0.01,'×L',P=>P.keel!=='none'],['ballast','Ballast in keel',0,10000,10,'kg',P=>P.keel==='fin'||P.keel==='full'],
+    ['mast','Mast height (0 = none)',0,25,0.1,'m'],['sail','Sail area',0,150,0.5,'m²',P=>P.mast>0],
+    ['cabinL','Cabin length (0 = none)',0,12,0.05,'m'],['cabinH','Cabin height',0.3,2.5,0.05,'m',P=>P.cabinL>0],['cabinX','Cabin position (from stern)',0.2,0.8,0.01,'×L',P=>P.cabinL>0]]
+};
+let P;
+function loadP(){try{const s=JSON.parse(localStorage.getItem('miga-boat-v1'));if(s&&s.L)return Object.assign({},BASE,s)}catch(e){}return Object.assign({},BASE)}
+P=loadP();
+function saveP(){try{localStorage.setItem('miga-boat-v1',JSON.stringify(P))}catch(e){}}
+function fmt(v,step){const d=step<0.01?3:step<0.1?2:step<1?1:0;return (+v).toFixed(d)}
+function buildSliders(){
+  for(const box in SLIDERS){$(box).innerHTML=SLIDERS[box].map(([k,lab,mn,mx,st,u,show])=>'<div class="sl" id="row_'+k+'"'+(show&&!show(P)?' hidden':'')+'><label for="p_'+k+'">'+lab+'</label><output id="o_'+k+'">'+fmt(P[k],st)+' '+u+'</output><input type="range" id="p_'+k+'" min="'+mn+'" max="'+mx+'" step="'+st+'" value="'+P[k]+'"></div>').join('');
+    SLIDERS[box].forEach(([k,,,,st,u])=>{const el=$('p_'+k);el.oninput=()=>{P[k]=+el.value;$('o_'+k).textContent=fmt(P[k],st)+' '+u;P.type='custom';markPreset();schedule()}})}
+}
+function refreshVisibility(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,,,show])=>{const r=$('row_'+k);if(r)r.hidden=!!(show&&!show(P))})}
+const SEL=['section','hulls','material','deck','keel','engineType','water'];
+function syncControls(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,st,u])=>{$('p_'+k).value=P[k];$('o_'+k).textContent=fmt(P[k],st)+' '+u});
+  SEL.forEach(k=>$('p_'+k).value=String(P[k]));$('p_console').checked=!!P.console;$('p_rudder').checked=!!P.rudder;$('p_color').value=P.color;refreshVisibility();markPreset()}
+SEL.forEach(k=>$('p_'+k).onchange=()=>{const v=$('p_'+k).value;P[k]=/^\d+$/.test(v)?+v:v;if(k==='engineType'&&v!=='none'&&P.hp<1)P.hp=10;P.type='custom';refreshVisibility();markPreset();schedule()});
+$('p_console').onchange=()=>{P.console=$('p_console').checked;schedule()};$('p_rudder').onchange=()=>{P.rudder=$('p_rudder').checked;schedule()};
+$('p_color').oninput=()=>{P.color=$('p_color').value;schedule()};
+function renderPresets(){$('presets').innerHTML=Object.entries(PRESETS).map(([k,v])=>'<button data-p="'+k+'" id="preset-'+k+'"><b>'+v.ico+'</b>'+v.label+'</button>').join('');
+  $('presets').querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=b.dataset.p;P=Object.assign({},BASE,PRESETS[k].p,{type:k,name:PRESETS[k].label,color:P.color});syncControls();update();fitCamera()})}
+function markPreset(){$('presets').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.p===P.type))}
+let tmr=0;function schedule(){clearTimeout(tmr);tmr=setTimeout(update,40)}
+
+// ------------------------------------------------------------------ geometry
+function sheerZ(u){return P.D+(u>0.5?P.sheerF*Math.pow((u-0.5)/0.5,2):P.sheerA*Math.pow((0.5-u)/0.5,2))}
+function halfBeamFactor(u){const m=P.maxPos;
+  if(u>m){const s=(u-m)/(1-m);return Math.pow(Math.max(0,1-Math.pow(s,P.bowFull)),0.75)}
+  if(P.transom<0.02){const s=(m-u)/m;return Math.pow(Math.max(0,1-Math.pow(s,Math.max(1.3,P.bowFull*0.9))),0.75)}
+  const s=u/m;return P.transom+(1-P.transom)*(1-Math.pow(1-s,2.2))}
+function keelZ(u){const um=P.maxPos;let z=u>um?P.rocker*Math.pow((u-um)/(1-um),2):P.rockerAft*Math.pow((um-u)/um,2);
+  const ff=P.forefoot;if(u>1-ff)z+=(sheerZ(1)-P.rocker)*0.93*Math.pow((u-(1-ff))/ff,2.2);
+  if(P.transom<0.02&&u<ff)z+=(sheerZ(0)-P.rockerAft)*0.93*Math.pow((ff-u)/ff,2.2);
+  return Math.min(z,sheerZ(u)-0.005)}
+function hullHalf(){return P.hulls==2?Math.min(P.demiB,P.B*0.48)/2:P.B/2}
+function hullOffset(){return P.hulls==2?P.B/2-hullHalf():0}
+// A section: points [y,z] of one half, from the centreline at the keel up to the sheer (or back to the centreline for tubes).
+function section(u){
+  const hs=hullHalf()*halfBeamFactor(u),zk=keelZ(u),zs=sheerZ(u),b=zs-zk,pts=[];let chine=-1;
+  if(P.section==='hard'){
+    const beta=(P.deadT+(P.deadB-P.deadT)*Math.pow(u,1.3))*DEG,tb=Math.tan(beta),tf=Math.tan(P.flare*DEG);
+    let hc=(hs-b*tf)/Math.max(0.2,1-tb*tf);hc=Math.max(0,Math.min(hs,hc));let zc=zk+hc*tb;
+    if(zc>zs-0.002){zc=zs-0.002;hc=tb>0?Math.min(hs,(zc-zk)/tb):hs}
+    for(let j=0;j<=5;j++){const t=j/5;pts.push([hc*t,zk+(zc-zk)*t])}chine=5;
+    for(let j=1;j<=5;j++){const t=j/5;pts.push([hc+(hs-hc)*t,zc+(zs-zc)*t])}
+  } else if(P.section==='tube'){
+    const zc=(zk+zs)/2,rz=b/2;for(let j=0;j<=16;j++){const th=j/16*Math.PI;pts.push([hs*Math.sin(th),zc-rz*Math.cos(th)])}
+  } else {
+    const m=P.maxPos;let bell;if(P.transom<0.02)bell=Math.pow(Math.sin(Math.PI*u),0.8);else bell=u>m?Math.pow(Math.sin((1-(u-m)/(1-m))*Math.PI/2),0.8):1-0.2*Math.pow(1-u/m,2);
+    const n=1.6+(P.bilge-1.6)*bell,fk=Math.max(0,Math.min(0.6,Math.tan(P.flare*DEG)*b/Math.max(hs,0.01)*0.8)),beta=(P.deadT+(P.deadB-P.deadT)*u)*DEG;
+    for(let j=0;j<=15;j++){const th=j/15*Math.PI/2;let y=hs*Math.pow(Math.sin(th),2/n),z=zs-b*Math.pow(Math.cos(th),2/n);
+      y*=1-fk*(1-(z-zk)/Math.max(b,1e-6));z+=y*Math.tan(beta)*0.35*Math.pow(1-(z-zk)/Math.max(b,1e-6),1.5);pts.push([Math.max(0,y),Math.min(zs,z)])}
+    for(let j=1;j<pts.length;j++)if(pts[j][1]<pts[j-1][1])pts[j][1]=pts[j-1][1];
+  }
+  return {u,x:u*P.L,hs,zk,zs,pts,chine};
+}
+function geometry(){const secs=[];for(let i=0;i<=NS;i++)secs.push(section(i/NS));return secs}
+
+// ------------------------------------------------------------------ polygon helpers
+function clipBelow(poly,h){const out=[];for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length],ia=a[1]<=h,ib=b[1]<=h;
+  if(ia)out.push(a);if(ia!==ib){const t=(h-a[1])/(b[1]-a[1]);out.push([a[0]+(b[0]-a[0])*t,h])}}return out}
+function areaCentroid(poly){let A=0,cx=0,cy=0;for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length],cr=a[0]*b[1]-b[0]*a[1];A+=cr;cx+=(a[0]+b[0])*cr;cy+=(a[1]+b[1])*cr}
+  if(Math.abs(A)<1e-12)return {A:0,y:0,z:0};return {A:Math.abs(A)/2,y:cx/(3*A),z:cy/(3*A)}}
+function fullPolys(sec){const s=hullOffset(),star=sec.pts,polys=[];
+  const demi=off=>star.map(p=>[off+p[0],p[1]]).concat(star.slice().reverse().map(p=>[off-p[0],p[1]]));
+  if(P.hulls==2){polys.push(demi(s),demi(-s))}else polys.push(demi(0));return polys}
+const rot=(poly,ph)=>{const c=Math.cos(ph),s=Math.sin(ph);return poly.map(p=>[p[0]*c+p[1]*s,-p[0]*s+p[1]*c])};
+function wlHalf(sec,zw){const p=sec.pts;for(let j=1;j<p.length;j++){const a=p[j-1],b=p[j];if((a[1]-zw)*(b[1]-zw)<=0&&b[1]!==a[1]){return a[0]+(b[0]-a[0])*(zw-a[1])/(b[1]-a[1])}}return zw>p[p.length-1][1]?Math.max(...p.map(q=>q[0])):0}
+function girthBelow(sec,zw){let g=0;const p=sec.pts;for(let j=1;j<p.length;j++){let a=p[j-1],b=p[j];if(a[1]>zw&&b[1]>zw)continue;if(b[1]>zw){const t=(zw-a[1])/(b[1]-a[1]);b=[a[0]+(b[0]-a[0])*t,zw]}else if(a[1]>zw){const t=(zw-b[1])/(a[1]-b[1]);a=[b[0]+(a[0]-b[0])*t,zw]}g+=Math.hypot(b[0]-a[0],b[1]-a[1])}return g}
+
+// ------------------------------------------------------------------ weights
+function keelProps(secs){if(P.keel==='none')return null;const chord=P.keel==='skeg'?Math.min(P.L*0.3,1.2):P.keelChord,d=P.keelDepth,x=P.keelX*P.L,zk=keelZ(P.keelX);
+  const t=P.keel==='skeg'?0.025:P.keel==='full'?0.18*Math.min(1,d):0.12*chord;return {chord,d,x,zk,t,V:0.7*chord*d*t,zc:zk-d*0.45}}
+function shellArea(secs){let A=0,ax=0,az=0;const n=P.hulls==2?2:1;
+  for(let i=0;i<NS;i++){const a=secs[i],b=secs[i+1];for(let j=1;j<a.pts.length;j++){const p1=[a.x,a.pts[j-1][0],a.pts[j-1][1]],p2=[a.x,a.pts[j][0],a.pts[j][1]],p3=[b.x,b.pts[j][0],b.pts[j][1]],p4=[b.x,b.pts[j-1][0],b.pts[j-1][1]];
+    const q=triA(p1,p2,p3)+triA(p1,p3,p4),cx=(p1[0]+p3[0])/2,cz=(p1[2]+p2[2]+p3[2]+p4[2])/4;A+=q;ax+=q*cx;az+=q*cz}}
+  const tr=secs[0],trA=P.transom>=0.02?areaCentroid(fullPolys(tr)[0]).A/2:0;A+=trA;az+=trA*(tr.zk+tr.zs)/2;
+  return {A:A*2*n,x:ax/A,z:az/A}}
+function triA(a,b,c){const u=[b[0]-a[0],b[1]-a[1],b[2]-a[2]],v=[c[0]-a[0],c[1]-a[1],c[2]-a[2]];return 0.5*Math.hypot(u[1]*v[2]-u[2]*v[1],u[2]*v[0]-u[0]*v[2],u[0]*v[1]-u[1]*v[0])}
+function deckArea(secs){let A=0,ax=0;const n=P.hulls==2?2:1;for(let i=0;i<=NS;i++){const w=(i===0||i===NS?0.5:1)*P.L/NS,a=2*secs[i].hs*w*n;A+=a;ax+=a*secs[i].x}
+  let bridge=0;if(P.hulls==2&&P.section!=='tube'){bridge=Math.max(0,P.B-2*hullHalf()*2)*P.L*0.6;}if(P.hulls==2&&P.section==='tube'){bridge=Math.max(0,P.B-4*hullHalf())*P.L*0.92}
+  return {A:A+bridge,x:(ax+bridge*P.L*0.52)/(A+bridge)}}
+function weights(secs,keel){
+  const W=[],mat=MATERIALS[P.material]||MATERIALS.ply6,sh=shellArea(secs),dk=deckArea(secs);const midSheer=sheerZ(0.5),zk=keelZ(0.5);
+  W.push({n:'Hull shell ('+sh.A.toFixed(1)+' m² × '+mat[1]+' kg/m²)',w:sh.A*mat[1],x:sh.x,z:sh.z});
+  W.push({n:'Frames, stringers, gunwales',w:sh.A*mat[1]*0.3,x:sh.x,z:sh.z+0.1*P.D});
+  const df=P.deck==='full'?1:P.deck==='half'?0.45:0.12;  W.push({n:'Deck ('+(dk.A*df).toFixed(1)+' m²)',w:dk.A*df*mat[1]*(P.material==='steel'?0.8:0.9),x:P.deck==='half'?P.L*0.78:dk.x,z:midSheer});
+  if(P.seats>0)W.push({n:P.seats+' seat'+(P.seats>1?'s':''),w:P.seats*Math.max(3,P.B*(P.hulls==2?1.5:3)),x:P.L*0.5,z:zk+0.33});
+  if(P.console)W.push({n:'Steering console',w:25+P.L*3,x:P.L*0.5,z:midSheer+0.4});
+  if(P.cabinL>0){const ca=P.cabinL*P.cabinH*2+P.cabinL*P.B*0.75*1.2+P.B*0.75*P.cabinH*2;W.push({n:'Cabin ('+P.cabinL.toFixed(1)+' m) and fit-out',w:ca*mat[1]*0.9+P.cabinL*P.B*18,x:P.cabinX*P.L,z:midSheer+P.cabinH*0.4})}
+  if(P.engineType==='outboard'){W.push({n:'Outboard '+P.hp+' hp',w:12+1.9*Math.pow(P.hp,0.93),x:-0.15,z:sheerZ(0)})}
+  if(P.engineType==='inboard'){W.push({n:'Inboard diesel '+P.hp+' hp + shaft',w:60+3.2*P.hp,x:P.L*0.33,z:zk+0.35*P.D})}
+  if(P.engineType!=='none'&&P.fuel>0)W.push({n:'Fuel '+P.fuel+' L',w:P.fuel*0.75,x:P.engineType==='outboard'?P.L*0.15:P.L*0.35,z:zk+0.25*P.D});
+  if(P.mast>0){W.push({n:'Mast, boom and rigging',w:P.mast*(1.6+P.mast*0.15),x:P.L*0.62,z:midSheer+P.mast*0.45});W.push({n:'Sails ('+P.sail+' m²)',w:P.sail*0.35,x:P.L*0.55,z:midSheer+P.mast*0.4})}
+  if(keel){W.push({n:(P.keel==='skeg'?'Skeg':'Keel structure'),w:keel.V*(P.material==='steel'?7850:900)*(P.keel==='skeg'?1:0.5),x:keel.x,z:keel.zk-keel.d*0.4});
+    if(P.ballast>0&&P.keel!=='skeg')W.push({n:'Ballast (lead/iron) in keel',w:P.ballast,x:keel.x,z:keel.zk-keel.d*(P.keel==='fin'?0.85:0.6)})}
+  if(P.rudder)W.push({n:'Rudder and tiller',w:4+P.L*1.2,x:0,z:zk});
+  if(P.crew>0)W.push({n:P.crew+' '+(P.crew>1?'people':'person')+' × 80 kg',w:P.crew*80,x:P.crewX*P.L,z:keelZ(P.crewX)+(P.deck==='full'&&P.cabinL===0&&P.type==='kayak'?0.3:Math.min(P.D*0.9,0.55))});
+  if(P.gear>0)W.push({n:'Gear, water, food',w:P.gear,x:P.L*0.5,z:zk+0.2*P.D});
+  const tot=W.reduce((a,b)=>a+b.w,0),lcg=W.reduce((a,b)=>a+b.w*b.x,0)/tot,kg=W.reduce((a,b)=>a+b.w*b.z,0)/tot;
+  const light=W.filter(w=>!/people|Gear|Fuel/.test(w.n)).reduce((a,b)=>a+b.w,0);
+  return {list:W,total:tot,lcg,kg,light,shell:sh,deck:dk}
+}
+
+// ------------------------------------------------------------------ hydrostatics
+function immersed(secs,T,th,ph){let V=0,mx=0,my=0,mz=0;const L=P.L,tt=Math.tan(th);
+  for(let i=0;i<=NS;i++){const s=secs[i],w=(i===0||i===NS?0.5:1)*L/NS,h=T+(s.x-L/2)*tt;let A=0,ay=0,az=0;
+    for(let poly of fullPolys(s)){if(ph)poly=rot(poly,ph);const c=areaCentroid(clipBelow(poly,h));A+=c.A;ay+=c.A*c.y;az+=c.A*c.z}
+    V+=A*w;mx+=A*w*s.x;my+=ay*w;mz+=az*w}
+  return {V,lcb:V?mx/V:L/2,y:V?my/V:0,z:V?mz/V:0}}
+function solveDraft(secs,Vh,th){const zmax=Math.max(...secs.map(s=>s.zs))+Math.abs(Math.tan(th))*P.L/2;let lo=-Math.abs(Math.tan(th))*P.L/2-0.01,hi=zmax;
+  if(immersed(secs,hi,th,0).V<Vh)return {T:hi,sunk:true};for(let k=0;k<40;k++){const m=(lo+hi)/2;if(immersed(secs,m,th,0).V<Vh)lo=m;else hi=m}return {T:(lo+hi)/2,sunk:false}}
+function hydro(secs,wt,keel){
+  const rho=+P.water,Vt=wt.total/rho,Vk=keel?keel.V:0,Vh=Math.max(1e-6,Vt-Vk);
+  const lcbAt=th=>{const d=solveDraft(secs,Vh,th),im=immersed(secs,d.T,th,0);const lcb=(im.lcb*im.V+(keel?keel.x*Vk:0))/(im.V+Vk);return {th,T:d.T,sunk:d.sunk,lcb,im}};
+  let a=lcbAt(0),b=lcbAt(0.01);for(let k=0;k<25&&Math.abs(b.lcb-wt.lcg)>0.0005;k++){const d=(b.lcb-a.lcb);if(Math.abs(d)<1e-9)break;let th=b.th-(b.lcb-wt.lcg)*(b.th-a.th)/d;th=Math.max(-0.25,Math.min(0.25,th));a=b;b=lcbAt(th)}
+  const sol=b,T=sol.T,th=sol.th,tt=Math.tan(th),L=P.L,n=P.hulls==2?2:1,s0=hullOffset();
+  let Awp=0,mxw=0,It=0,Il0=0,WS=0,xa=1e9,xf=-1e9,bwl=0,ymax=0;
+  for(let i=0;i<=NS;i++){const s=secs[i],w=(i===0||i===NS?0.5:1)*L/NS,h=T+(s.x-L/2)*tt,yw=h>s.zk?wlHalf(s,h):0;
+    if(yw>0){xa=Math.min(xa,s.x);xf=Math.max(xf,s.x);bwl=Math.max(bwl,2*yw);ymax=Math.max(ymax,yw)}
+    const a=2*yw*w*n;Awp+=a;mxw+=a*s.x;It+=n*(2/3*Math.pow(yw,3)+2*yw*s0*s0)*w;Il0+=a*s.x*s.x;WS+=2*n*girthBelow(s,h)*w}
+  if(xa>xf){xa=0;xf=L}
+  const lcf=Awp?mxw/Awp:L/2,Il=Il0-Awp*lcf*lcf,im=sol.im,Vtot=im.V+Vk,kb=(im.z*im.V+(keel?keel.zc*Vk:0))/Vtot,bm=It/Vtot,bml=Il/Vtot,gm=kb+bm-wt.kg;
+  const lwl=xf-xa;if(keel)WS+=2*keel.chord*keel.d;
+  const midS=secs[NS/2],amid=fullPolys(midS).reduce((acc,pl)=>acc+areaCentroid(clipBelow(pl,T)).A,0),tMid=T-midS.zk;
+  const Cb=Vtot/(Math.max(lwl,1e-6)*Math.max(bwl,1e-6)*n*Math.max(tMid,1e-6)),Cm=amid/(Math.max(bwl,1e-6)*n*Math.max(tMid,1e-6)),Cp=Cm?Cb/Cm:0,Cwp=Awp/(Math.max(lwl,1e-6)*Math.max(bwl,1e-6)*n);
+  const fbAt=u=>sheerZ(u)-(T+(u*L-L/2)*tt),fbMin=Math.min(...[0,0.1,0.25,0.5,0.75,0.9,1].map(fbAt));
+  const draftMax=Math.max(...secs.map(s=>T+(s.x-L/2)*tt-s.zk),0)+(keel?keel.d:0);
+  return {rho,V:Vtot,T,th,sunk:sol.sunk,lcb:sol.lcb,Awp,lcf,kb,bm,bml,gm,lwl,bwl,WS,Cb,Cm,Cp,Cwp,fbMid:fbAt(0.5),fbBow:fbAt(1),fbStern:fbAt(0),fbMin,draftMax,tMid,Vh,xa,xf,
+    tpc:Awp*rho/100,mct:wt.total*bml/(100*L)};
+}
+function gzCurve(secs,h,wt,keel){const out=[],tt=Math.tan(h.th),L=P.L;const zmax=Math.max(...secs.map(s=>s.zs)),span=Math.max(P.B,zmax)*1.6+L*Math.abs(tt);
+  for(let deg=0;deg<=180;deg+=5){const ph=deg*DEG;let lo=-span,hi=span;for(let k=0;k<34;k++){const m=(lo+hi)/2;if(immersed(secs,m,h.th,ph).V<h.Vh)lo=m;else hi=m}
+    const im=immersed(secs,(lo+hi)/2,h.th,ph);let yb=im.y*im.V,V=im.V;if(keel){const zc=keel.zc;yb+=keel.V*(zc*Math.sin(ph));V+=keel.V}yb/=V;
+    out.push([deg,yb-wt.kg*Math.sin(ph)])}return out}
+
+// ------------------------------------------------------------------ speed
+function speed(h,wt){const lft=h.lwl*3.281,hull=1.34*Math.sqrt(Math.max(lft,0.1)),lb=wt.total*2.2046;let v=0,how='';
+  const planing=(P.section==='hard'&&P.deadT<=26&&P.engineType!=='none')||(P.hulls==2&&P.engineType!=='none')||P.section==='tube';
+  let hp=P.engineType!=='none'?P.hp:0;
+  if(hp>0&&planing){const C={skiff:120,runabout:150,dory:110,pontoon:95,catamaran:160}[P.type]||(P.section==='tube'?95:P.hulls==2?160:135);v=C/Math.sqrt(lb/hp);if(v<hull){const slr=Math.min(1.4,10.665/Math.cbrt(lb/hp));v=slr*Math.sqrt(lft)}how='planing (Crouch C='+C+')'}
+  else if(hp>0){const slr=Math.min(1.5,10.665/Math.cbrt(lb/hp));v=slr*Math.sqrt(lft);how='displacement (limited by hull speed)'}
+  else if(P.crew>0&&P.mast===0){hp=0.1*P.crew;const slr=Math.min(1.34,10.665/Math.cbrt(lb/hp));v=slr*Math.sqrt(lft);how='paddling/rowing ('+P.crew+' × 0.1 hp)'}
+  let sad=0,dl=0;const dispFt3=h.V*35.315;if(P.mast>0&&P.sail>0){sad=P.sail*10.764/Math.pow(dispFt3*(h.rho/1025),2/3);v=Math.max(v,Math.min(hull*1.1,hull*(0.55+sad/60)));how=how||'sailing in a good breeze'}
+  dl=(wt.total/1016)/Math.pow(0.01*lft,3);
+  return {v,hull,how,planing,sad,dl}}
+
+// ------------------------------------------------------------------ main update
+let G=null;
+function compute(){const secs=geometry(),keel=keelProps(secs),wt=weights(secs,keel),h=hydro(secs,wt,keel),sp=speed(h,wt);return {secs,keel,wt,h,sp}}
+function update(){P.hp=Math.max(1,P.hp);saveP();G=compute();G.gz=null;renderHydro();build3D();const v=activeView();if(v==='vlines')renderLines();if(v==='vstab')renderStab();if(v==='vpanels')renderPanels();if(v==='voffsets')renderOffsets();if(v==='vweights')renderWeights()}
+const m2ft=v=>(v*3.281).toFixed(1)+' ft',kg2lb=v=>Math.round(v*2.2046).toLocaleString()+' lb';
+function renderHydro(){const {h,wt,sp}=G,L=P.L;$('boatTitle').textContent=(PRESETS[P.type]?PRESETS[P.type].label:'Custom boat')+' — '+L.toFixed(2)+' m ('+m2ft(L)+')';
+  const hv=(v,l,sub)=>'<div class="hv"><b>'+v+'</b><span>'+l+'</span>'+(sub?'<br><i>'+sub+'</i>':'')+'</div>';
+  const trimDeg=Math.atan(Math.tan(h.th))/DEG;
+  if(!G.gz)G.gz=gzCurve(G.secs,h,wt,G.keel);const gz=G.gz,mx=gz.reduce((a,b)=>b[1]>a[1]?b:a,[0,-1]),avs=(gz.find((p,i)=>i>1&&p[1]<=0)||[180])[0];G.avs=avs;G.gzMax=mx;
+  const persons=P.hulls==1&&L<6.1?Math.max(1,Math.floor(L*3.281*P.B*3.281/15)):null;
+  const maxLoad=maxLoadKg();G.maxLoad=maxLoad;
+  $('hydro').innerHTML=[hv(Math.round(wt.total).toLocaleString()+' kg','Loaded displacement',kg2lb(wt.total)),hv(Math.round(wt.light).toLocaleString()+' kg','Empty boat (light ship)',kg2lb(wt.light)),
+    hv((h.draftMax*100).toFixed(0)+' cm','Draft (deepest point)',m2ft(h.draftMax)),hv((h.fbMid*100).toFixed(0)+' cm','Freeboard amidships','bow '+(h.fbBow*100).toFixed(0)+' · stern '+(h.fbStern*100).toFixed(0)+' cm'),
+    hv((Math.abs(trimDeg)<0.05?'level':(Math.abs(trimDeg).toFixed(1)+'° '+(trimDeg>0?'bow down':'stern down'))),'Trim',''),hv(h.lwl.toFixed(2)+' m','Waterline length',m2ft(h.lwl)),hv((h.bwl).toFixed(2)+' m','Waterline beam'+(P.hulls==2?' (each hull)':''),''),
+    hv(h.gm.toFixed(2)+' m','GM (initial stability)','KB '+h.kb.toFixed(2)+' + BM '+h.bm.toFixed(2)+' − KG '+wt.kg.toFixed(2)),hv(mx[1].toFixed(2)+' m @ '+mx[0]+'°','Max righting arm','vanishes at '+(avs>=180?'>180':avs)+'°'),
+    hv(sp.v.toFixed(1)+' kn','Estimated top speed',(sp.v*1.852).toFixed(0)+' km/h · '+esc(sp.how||'no propulsion')),hv(sp.hull.toFixed(1)+' kn','Hull speed','1.34 × √LWL(ft)'),
+    hv(h.Cb.toFixed(2)+' / '+h.Cp.toFixed(2),'Block / prismatic coeff.','Cm '+h.Cm.toFixed(2)+' · Cwp '+h.Cwp.toFixed(2)),hv(h.WS.toFixed(1)+' m²','Wetted surface',(h.WS*10.764).toFixed(0)+' ft²'),
+    hv(h.tpc.toFixed(1)+' kg/cm','Weight to sink 1 cm','LCB '+(h.lcb/L*100).toFixed(1)+'% · LCF '+(h.lcf/L*100).toFixed(1)+'% from stern'),
+    hv(Math.max(0,Math.round(maxLoad)).toLocaleString()+' kg','Max load (keeps '+Math.round(minFreeboard()*100)+' cm freeboard)',persons?'US rule of thumb: '+persons+' people':''),
+    sp.sad?hv(sp.sad.toFixed(1),'Sail area / displacement',sp.sad<14?'cruising, easy':sp.sad<18?'lively':'very powerful'):'',hv(sp.dl.toFixed(0),'Displacement / length',sp.dl<100?'ultra light':sp.dl<200?'light':sp.dl<300?'moderate':'heavy')].join('');
+  const C=[];const add=(k,t)=>C.push('<li class="'+k+'">'+t+'</li>');
+  if(h.sunk)add('bad','❌ Overloaded: the boat cannot carry '+Math.round(wt.total)+' kg — it would sink. Make it bigger or lighter.');
+  else if(h.fbMin<0)add('bad','❌ Water comes over the deck edge. Reduce the load, move weight, or add depth.');
+  else if(h.fbMid<minFreeboard())add('warn','⚠️ Low freeboard ('+(h.fbMid*100).toFixed(0)+' cm). Fine on flat water only; more depth or less load makes it safer.');
+  else add('ok','✅ Freeboard '+(h.fbMid*100).toFixed(0)+' cm amidships.');
+  if(Math.abs(trimDeg)>2.5)add('warn','⚠️ Trimmed '+Math.abs(trimDeg).toFixed(1)+'° '+(trimDeg>0?'bow down — move people or gear aft':'stern down — move people or gear forward')+' (LCG is at '+(wt.lcg/L*100).toFixed(0)+'% of length).');
+  else add('ok','✅ Trim is close to level.');
+  const gmMin=P.hulls==2?0.8:Math.max(0.15,0.06*P.B*2);
+  if(h.gm<0)add('bad','❌ Negative GM: the boat would roll over. Lower the weights, add ballast or beam.');
+  else if(h.gm<gmMin)add('warn','⚠️ GM '+h.gm.toFixed(2)+' m is tender — it will feel tippy. Add beam, ballast, or keep weight low.');
+  else if(h.gm>P.B*0.9&&P.hulls==1)add('warn','⚠️ Very stiff (GM '+h.gm.toFixed(2)+' m): stable but it may roll with a quick, jerky motion.');
+  else add('ok','✅ Initial stability GM '+h.gm.toFixed(2)+' m.');
+  if(P.mast>0&&P.hulls==1&&avs<100)add('warn','⚠️ The stability curve vanishes at '+avs+'° — for a sailing monohull aim for more than 110–120°. Add ballast or a deeper keel.');
+  if(P.mast>0&&P.hulls==1&&P.keel==='none')add('warn','⚠️ A sailboat without a keel or centreboard will slide sideways. Add a fin keel or skeg.');
+  if(P.engineType!=='none'&&sp.planing&&wt.total/P.hp>60)add('warn','⚠️ '+Math.round(wt.total/P.hp)+' kg per hp: probably too little power to plane. More power or less weight helps.');
+  if(P.engineType==='outboard'&&persons&&P.hp>Math.max(3,(L*3.281*P.B*3.281*2-90)))add('warn','⚠️ The engine may be more than a boat this size should carry — check the capacity plate rules in your country.');
+  if(P.section==='hard'&&(P.material==='ply6'||P.material==='ply9'||P.material==='ply12'))add('ok','🪚 Plywood panels for stitch-and-glue are in the Panels tab.');
+  $('checks').innerHTML=C.join('');
+  if(heelDeg)updateHeelLabel();
+}
+function minFreeboard(){return Math.max(0.1,Math.min(0.5,0.06*P.L+0.02))}
+function maxLoadKg(){const {secs,wt,keel}=G,rho=+P.water;const zw=Math.min(...[0.05,0.25,0.5,0.75,0.95].map(sheerZ))-minFreeboard();const im=immersed(secs,zw,0,0);return (im.V+(keel?keel.V:0))*rho-wt.light}
+
+// ------------------------------------------------------------------ views
+function activeView(){const b=document.querySelector('.viewtabs button.active');return b?b.dataset.view:'v3d'}
+document.querySelectorAll('.viewtabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtabs button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.view));update();if(b.dataset.view==='v3d')resize3D()});
+
+// ---- lines plan
+function linesData(){const {secs,h}=G,L=P.L,s0=hullOffset(),tt=Math.tan(h.th);
+  const prof={sheer:secs.map(s=>[s.x,s.zs]),keel:secs.map(s=>[s.x,s.zk]),chine:P.section==='hard'?secs.map(s=>[s.x,s.pts[s.chine][1]]):null,wl:[[h.xa,h.T+(h.xa-L/2)*tt],[h.xf,h.T+(h.xf-L/2)*tt]]};
+  const zTop=Math.max(...secs.map(s=>s.zs)),wlz=[0.25,0.5,0.75,1.0].map(f=>h.T*f).concat([h.T+(zTop-h.T)*0.5]);
+  const plan={sheer:secs.map(s=>[s.x,s0+s.hs]),chine:P.section==='hard'?secs.map(s=>[s.x,s0+s.pts[s.chine][0]]):null,wls:wlz.map(z=>secs.filter(s=>z>s.zk&&z<s.zs).map(s=>[s.x,s0+wlHalf(s,z)]))};
+  if(P.hulls==2)plan.inner=secs.map(s=>[s.x,s0-s.hs]);
+  const stations=[];for(let i=0;i<=10;i++){const s=secs[i*NS/10];stations.push(s)}
+  return {prof,plan,stations,wlz}}
+function renderLines(){const d=linesData(),{h}=G,L=P.L,zTop=Math.max(...G.secs.map(s=>s.zs)),keelD=G.keel?G.keel.d:0,halfB=P.B/2;
+  const W=1100,pad=40,bodyW=Math.max(260,Math.min(420,(P.B*1.15)/(L)*760)),sc=(W-pad*3-bodyW)/L,profH=(zTop+keelD+0.1)*sc,planH=halfB*1.05*sc,H=pad*3+profH+planH+40;
+  const bsc=Math.min(bodyW/(P.B*1.1),(profH+planH)/(zTop+keelD+0.2)*0.9),oyP=pad+zTop*sc+10,oyPl=oyP+keelD*sc+pad+10,bx=pad*2+L*sc+bodyW/2,by=pad+(zTop+0.05)*bsc+10;
+  const PX=x=>pad+x*sc,path=(pts,fx,fy)=>pts.length?'M'+pts.map(p=>fx(p).toFixed(1)+' '+fy(p).toFixed(1)).join(' L'):'';
+  let s='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+W+' '+H+'" font-family="IBM Plex Sans,Arial" font-size="11"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  // stations grid
+  d.stations.forEach((st,i)=>{s+='<line x1="'+PX(st.x)+'" y1="'+(oyP-zTop*sc-8)+'" x2="'+PX(st.x)+'" y2="'+(oyPl+planH)+'" stroke="#d6dde3" stroke-width="1"/><text x="'+PX(st.x)+'" y="'+(oyPl+planH+14)+'" text-anchor="middle" fill="#6a7a88">'+i+'</text>'});
+  s+='<text x="'+pad+'" y="'+(pad-14)+'" font-weight="700" fill="#16202b">PROFILE</text><text x="'+pad+'" y="'+(oyPl-6)+'" font-weight="700" fill="#16202b">HALF-BREADTH PLAN</text><text x="'+(bx-bodyW/2)+'" y="'+(pad-14)+'" font-weight="700" fill="#16202b">BODY PLAN</text>';
+  // profile
+  const fyP=p=>oyP-p[1]*sc;s+='<line x1="'+PX(0)+'" y1="'+oyP+'" x2="'+PX(L)+'" y2="'+oyP+'" stroke="#9aa8b4" stroke-dasharray="6 4"/>';
+  s+='<path d="'+path(d.prof.sheer,p=>PX(p[0]),fyP)+'" fill="none" stroke="#16202b" stroke-width="2"/><path d="'+path(d.prof.keel,p=>PX(p[0]),fyP)+'" fill="none" stroke="#16202b" stroke-width="2"/>';
+  s+='<path d="M'+PX(0)+' '+fyP([0,G.secs[0].zk])+' L'+PX(0)+' '+fyP([0,G.secs[0].zs])+'" stroke="#16202b" stroke-width="2"/>';
+  if(d.prof.chine)s+='<path d="'+path(d.prof.chine,p=>PX(p[0]),fyP)+'" fill="none" stroke="#c0781e" stroke-width="1.4"/>';
+  s+='<path d="'+path(d.prof.wl,p=>PX(p[0]),fyP)+'" stroke="#2b8ad8" stroke-width="2"/><text x="'+(PX(h.xf)+4)+'" y="'+(fyP(d.prof.wl[1])+4)+'" fill="#2b8ad8">DWL</text>';
+  if(G.keel){const k=G.keel;s+='<path d="M'+PX(k.x-k.chord/2)+' '+fyP([0,k.zk])+' L'+PX(k.x-k.chord/2+k.chord*0.2)+' '+fyP([0,k.zk-k.d])+' L'+PX(k.x+k.chord/2-k.chord*0.1)+' '+fyP([0,k.zk-k.d])+' L'+PX(k.x+k.chord/2)+' '+fyP([0,k.zk])+'" fill="#e8edf1" stroke="#16202b" stroke-width="1.5"/>'}
+  // plan
+  const fyPl=p=>oyPl+p[1]*sc;s+='<line x1="'+PX(0)+'" y1="'+oyPl+'" x2="'+PX(L)+'" y2="'+oyPl+'" stroke="#9aa8b4" stroke-dasharray="6 4"/>';
+  s+='<path d="'+path(d.plan.sheer,p=>PX(p[0]),fyPl)+'" fill="none" stroke="#16202b" stroke-width="2"/>';if(d.plan.inner)s+='<path d="'+path(d.plan.inner,p=>PX(p[0]),fyPl)+'" fill="none" stroke="#16202b" stroke-width="2"/>';
+  if(d.plan.chine)s+='<path d="'+path(d.plan.chine,p=>PX(p[0]),fyPl)+'" fill="none" stroke="#c0781e" stroke-width="1.4"/>';
+  d.plan.wls.forEach((w,i)=>{s+='<path d="'+path(w,p=>PX(p[0]),fyPl)+'" fill="none" stroke="'+(i===3?'#2b8ad8':'#7aa7c7')+'" stroke-width="'+(i===3?2:1)+'"/>'});
+  // body plan
+  const s0=hullOffset();s+='<line x1="'+bx+'" y1="'+(by-zTop*bsc-10)+'" x2="'+bx+'" y2="'+(by+keelD*bsc+10)+'" stroke="#9aa8b4" stroke-dasharray="6 4"/>';
+  d.wlz.forEach((z,i)=>{s+='<line x1="'+(bx-bodyW/2)+'" y1="'+(by-z*bsc)+'" x2="'+(bx+bodyW/2)+'" y2="'+(by-z*bsc)+'" stroke="'+(i===3?'#2b8ad8':'#d6dde3')+'"/>'});
+  s+='<line x1="'+(bx-bodyW/2)+'" y1="'+by+'" x2="'+(bx+bodyW/2)+'" y2="'+by+'" stroke="#9aa8b4"/>';
+  d.stations.forEach((st,i)=>{const side=st.u>=0.5?1:-1;if(i===5){}const pts=st.pts.map(p=>[bx+side*(s0+p[0])*bsc,by-p[1]*bsc]);s+='<path d="M'+pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L')+'" fill="none" stroke="'+(i===5?'#c8402e':'#16202b')+'" stroke-width="'+(i===5?1.8:1.1)+'"/>';
+    if(P.hulls==2){const p2=st.pts.map(p=>[bx+side*(s0-p[0])*bsc,by-p[1]*bsc]);s+='<path d="M'+p2.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' L')+'" fill="none" stroke="#16202b" stroke-width="1.1"/>'}});
+  s+='<text x="'+(bx+6)+'" y="'+(by+keelD*bsc+24)+'" fill="#6a7a88">bow →</text><text x="'+(bx-50)+'" y="'+(by+keelD*bsc+24)+'" fill="#6a7a88">← stern</text>';
+  // title block
+  s+='<text x="'+pad+'" y="'+(H-12)+'" fill="#35516b">'+esc(P.name||'Boat')+' · LOA '+L.toFixed(2)+' m · beam '+P.B.toFixed(2)+' m · depth '+P.D.toFixed(2)+' m · displacement '+Math.round(G.wt.total)+' kg · stations 0–10 every '+(L/10).toFixed(2)+' m · Boat Forge, migabuilder.com</text></svg>';
+  $('linesBox').innerHTML=s;G.linesSVG=s}
+// ---- stability
+function renderStab(){const gz=G.gz,W=900,H=360,pl=60,pr=20,pt=20,pb=46,mx=Math.max(0.05,...gz.map(p=>p[1])),mn=Math.min(0,...gz.map(p=>p[1]));
+  const X=d=>pl+d/180*(W-pl-pr),Y=v=>pt+(mx-v)/(mx-mn)*(H-pt-pb);let s='<svg viewBox="0 0 '+W+' '+H+'" font-family="IBM Plex Sans,Arial" font-size="11"><rect width="'+W+'" height="'+H+'" fill="#fff"/>';
+  for(let d=0;d<=180;d+=15)s+='<line x1="'+X(d)+'" y1="'+pt+'" x2="'+X(d)+'" y2="'+(H-pb)+'" stroke="#eef1f4"/><text x="'+X(d)+'" y="'+(H-pb+16)+'" text-anchor="middle" fill="#6a7a88">'+d+'°</text>';
+  const step=(mx-mn)>1?0.2:(mx-mn)>0.4?0.1:0.05;for(let v=Math.ceil(mn/step)*step;v<=mx+1e-9;v+=step)s+='<line x1="'+pl+'" y1="'+Y(v)+'" x2="'+(W-pr)+'" y2="'+Y(v)+'" stroke="#eef1f4"/><text x="'+(pl-6)+'" y="'+(Y(v)+4)+'" text-anchor="end" fill="#6a7a88">'+v.toFixed(2)+'</text>';
+  s+='<line x1="'+pl+'" y1="'+Y(0)+'" x2="'+(W-pr)+'" y2="'+Y(0)+'" stroke="#16202b"/>';
+  const pos=gz.map(p=>X(p[0]).toFixed(1)+' '+Y(Math.max(0,p[1])).toFixed(1));s+='<path d="M'+X(0)+' '+Y(0)+' L'+pos.join(' L')+' L'+X(180)+' '+Y(0)+'Z" fill="rgba(78,158,115,.18)"/>';
+  s+='<path d="M'+gz.map(p=>X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' L')+'" fill="none" stroke="#0E2A47" stroke-width="2.5"/>';
+  const gm=G.h.gm,rad=57.3;s+='<line x1="'+X(0)+'" y1="'+Y(0)+'" x2="'+X(rad)+'" y2="'+Y(gm)+'" stroke="#c0781e" stroke-dasharray="5 4"/><text x="'+(X(rad)+4)+'" y="'+(Y(gm)-4)+'" fill="#c0781e">GM = '+gm.toFixed(2)+' m (slope at 0°)</text>';
+  s+='<circle cx="'+X(G.gzMax[0])+'" cy="'+Y(G.gzMax[1])+'" r="5" fill="#4E9E73"/><text x="'+(X(G.gzMax[0])+8)+'" y="'+(Y(G.gzMax[1])-6)+'" fill="#2f6b4a">max GZ '+G.gzMax[1].toFixed(2)+' m at '+G.gzMax[0]+'°</text>';
+  if(G.avs<180)s+='<circle cx="'+X(G.avs)+'" cy="'+Y(0)+'" r="5" fill="#D8604A"/><text x="'+X(G.avs)+'" y="'+(Y(0)-10)+'" text-anchor="middle" fill="#a3382a">capsizes past '+G.avs+'°</text>';
+  s+='<text x="'+(W/2)+'" y="'+(H-8)+'" text-anchor="middle" fill="#35516b">Heel angle</text><text x="14" y="'+(H/2)+'" transform="rotate(-90 14 '+(H/2)+')" text-anchor="middle" fill="#35516b">Righting arm GZ (m)</text></svg>';
+  const rm=G.gzMax[1]*G.wt.total;$('gzBox').innerHTML=s+'<p class="explain" style="padding:0 12px">Largest righting moment: <b>'+Math.round(rm).toLocaleString()+' kg·m</b> ('+Math.round(rm*9.81/1000).toLocaleString()+' kN·m). '+(P.mast>0?'Wind heeling on '+P.sail+' m² of sail at 15 knots is roughly '+Math.round(0.5*1.2*Math.pow(7.7,2)*P.sail*1.1*(P.mast*0.45+G.h.T*0.5)/9.81).toLocaleString()+' kg·m upright.':'')+'</p>'}
+// ---- panels & molds
+function unfoldStrip(A,B){const D3=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);
+  const tri=(p,q,dp,dq,side)=>{const d=Math.hypot(q[0]-p[0],q[1]-p[1]);if(d<1e-7)return [p[0]-side*dp,p[1]];const a=(dp*dp-dq*dq+d*d)/(2*d),hh=Math.sqrt(Math.max(0,dp*dp-a*a)),ex=[(q[0]-p[0])/d,(q[1]-p[1])/d];
+    const base=[p[0]+ex[0]*a,p[1]+ex[1]*a];return [base[0]-side*ex[1]*hh,base[1]+side*ex[0]*hh]};
+  // start at the widest station (ends can have zero width) and unroll towards both ends
+  const n=A.length;let i0=0;for(let i=1;i<n;i++)if(D3(A[i],B[i])>D3(A[i0],B[i0]))i0=i;
+  const a2=new Array(n),b2=new Array(n);a2[i0]=[0,0];b2[i0]=[0,D3(A[i0],B[i0])];
+  for(let i=i0;i<n-1;i++){a2[i+1]=tri(a2[i],b2[i],D3(A[i],A[i+1]),D3(B[i],A[i+1]),-1);b2[i+1]=tri(a2[i+1],b2[i],D3(A[i+1],B[i+1]),D3(B[i],B[i+1]),-1)}
+  for(let i=i0;i>0;i--){a2[i-1]=tri(a2[i],b2[i],D3(A[i],A[i-1]),D3(B[i],A[i-1]),1);b2[i-1]=tri(a2[i-1],b2[i],D3(A[i-1],B[i-1]),D3(B[i],B[i-1]),1)}
+  return {a:a2,b:b2}}
+function panelsData(){const {secs}=G;if(P.section!=='hard')return null;const k=secs.map(s=>[s.x,0,s.zk]),c=secs.map(s=>[s.x,s.pts[s.chine][0],s.pts[s.chine][1]]),sh=secs.map(s=>[s.x,s.hs,s.zs]);
+  const flat=P.deadT<0.5&&P.deadB<0.5,bottom=unfoldStrip(k,c),side=unfoldStrip(c,sh);const out=[];
+  if(flat){const top=bottom.b,bot=top.map(p=>[p[0],-p[1]]);out.push({name:'Bottom (one piece, flat)',n:1,poly:top.concat(bot.slice().reverse()),marks:bottom.a})}
+  else out.push({name:'Bottom panel',n:2,poly:bottom.a.concat(bottom.b.slice().reverse()),marks:null});
+  out.push({name:'Side panel',n:2,poly:side.a.concat(side.b.slice().reverse())});
+  if(P.transom>=0.02){const t=secs[0],pts=t.pts;out.push({name:'Transom',n:1,poly:pts.map(p=>[p[0],t.zk-p[1]]).concat(pts.slice().reverse().map(p=>[-p[0],t.zk-p[1]]))})}
+  out.forEach(p=>{const xs=p.poly.map(q=>q[0]),ys=p.poly.map(q=>q[1]);p.minx=Math.min(...xs);p.miny=Math.min(...ys);p.w=Math.max(...xs)-p.minx;p.h=Math.max(...ys)-p.miny;p.area=areaCentroid(p.poly).A});
+  return out}
+function moldsData(){const {secs}=G,out=[];for(let i=1;i<10;i++){const s=secs[i*NS/10];out.push({i,x:s.x,poly:s.pts.concat(s.pts.slice().reverse().map(p=>[-p[0],p[1]])),hs:s.hs,zk:s.zk,zs:s.zs})}return out}
+function renderPanels(){const pd=panelsData(),molds=moldsData(),W=1000;let s='',y=20;
+  if(pd){$('panelsIntro').innerHTML='<b>Stitch-and-glue panels</b> unrolled flat from the hull (the hard-chine surfaces are developable). Cut them from plywood, stitch the edges with wire or ties, fillet and tape the seams with epoxy and glass. Grey rectangles are 2440 × 1220 mm sheets for scale. Ticks mark stations 0–10.';
+    const maxW=Math.max(...pd.map(p=>p.w),2.44),sc=(W-60)/maxW;let body='';
+    pd.forEach(p=>{const hh=p.h*sc;body+='<g transform="translate(30,'+(y+14)+')"><text x="0" y="-4" font-weight="700" fill="#16202b">'+esc(p.name)+' × '+p.n+' — '+(p.w*1000).toFixed(0)+' × '+(p.h*1000).toFixed(0)+' mm</text>';
+      for(let sx=0;sx<p.w;sx+=2.44)body+='<rect x="'+(sx*sc)+'" y="2" width="'+(Math.min(2.44,p.w-sx+0.05)*sc)+'" height="'+(Math.min(1.22,p.h+0.05)*sc)+'" fill="#f3f1ea" stroke="#cfcab8" stroke-dasharray="4 3"/>';
+      body+='<path d="M'+p.poly.map(q=>((q[0]-p.minx)*sc).toFixed(1)+' '+((q[1]-p.miny)*sc+4).toFixed(1)).join(' L')+'Z" fill="rgba(226,166,59,.22)" stroke="#8a5a1a" stroke-width="1.6"/>';
+      if(p.name!=='Transom'){for(let i=0;i<=10;i++){const q=p.poly[i*NS/10];body+='<circle cx="'+((q[0]-p.minx)*sc).toFixed(1)+'" cy="'+((q[1]-p.miny)*sc+4).toFixed(1)+'" r="2.5" fill="#16202b"/>'}}
+      body+='</g>';y+=hh+46});
+    s+=body}else $('panelsIntro').innerHTML='<b>Round-bilge hulls</b> are not made of flat panels. Build them over <b>station molds</b> (below) with cedar strips, cold-moulded veneers or planks — or switch Section shape to Hard chine to get flat plywood panels.';
+  const msc=Math.min(150/(P.B/(P.hulls==2?2:1)+0.01),110/(Math.max(...G.secs.map(q=>q.zs))+0.01));let mx=30;s+='<text x="30" y="'+(y+6)+'" font-weight="700" fill="#16202b">Station molds (one side of centreline shown doubled, heights from baseline)</text>';y+=20;
+  let rowH=0;molds.forEach(m=>{const w=(2*hullHalf())*msc+20;if(mx+w>W-20){mx=30;y+=rowH+30;rowH=0}const base=y+Math.max(...G.secs.map(q=>q.zs))*msc+10;
+    s+='<path d="M'+m.poly.map(q=>(mx+w/2+q[0]*msc).toFixed(1)+' '+(base-q[1]*msc).toFixed(1)).join(' L')+'Z" fill="rgba(111,209,224,.18)" stroke="#0E2A47" stroke-width="1.3"/><line x1="'+(mx+w/2)+'" y1="'+(base+4)+'" x2="'+(mx+w/2)+'" y2="'+(base-m.zs*msc-4)+'" stroke="#9aa8b4" stroke-dasharray="3 3"/><text x="'+(mx+w/2)+'" y="'+(base+16)+'" text-anchor="middle" fill="#35516b">St '+m.i+' · '+(m.x*1000).toFixed(0)+' mm</text>';
+    rowH=Math.max(rowH,base-y+20);mx+=w+14});y+=rowH+30;
+  $('panelsBox').innerHTML='<svg viewBox="0 0 '+W+' '+y+'" font-family="IBM Plex Sans,Arial" font-size="11"><rect width="'+W+'" height="'+y+'" fill="#fff"/>'+s+'</svg>';
+  // materials
+  const sh=G.wt.shell.A,seams=pd?G.secs.reduce((a,s,i)=>{if(!i)return a;const p=G.secs[i-1];return a+Math.hypot(s.x-p.x,s.zk-p.zk)+2*Math.hypot(s.x-p.x,s.pts[s.chine][0]-p.pts[p.chine][0],s.pts[s.chine][1]-p.pts[p.chine][1])},0)*(P.hulls==2?2:1):0;
+  const panelArea=pd?pd.reduce((a,p)=>a+p.area*p.n,0)*(P.hulls==2?2:1):sh;const sheets=Math.ceil(panelArea*1.35/(2.44*1.22));
+  $('materialsBox').innerHTML='<table class="t"><tr><th>Material estimate</th><th>Quantity</th></tr>'+(pd?'<tr><td>Plywood sheets 2440 × 1220 mm (with offcuts)</td><td>'+sheets+'</td></tr><tr><td>Seams to stitch, fillet and tape (keel + chines, both sides)</td><td>'+seams.toFixed(1)+' m</td></tr><tr><td>Glass tape 75–100 mm (inside and outside)</td><td>'+(seams*2.1).toFixed(0)+' m</td></tr>':'<tr><td>Strips or planking for the hull surface</td><td>'+sh.toFixed(1)+' m²</td></tr><tr><td>Station molds to cut</td><td>9 + stem and transom</td></tr>')+
+    '<tr><td>Glass cloth to sheath the outside (200 g/m²)</td><td>'+(sh*1.1).toFixed(1)+' m²</td></tr><tr><td>Epoxy resin (sheathing, coats, fillets)</td><td>'+(sh*0.9+seams*0.25).toFixed(1)+' kg</td></tr><tr><td>Paint (2 coats, primer + topcoat, outside)</td><td>'+(sh*2*0.12).toFixed(1)+' L</td></tr><tr><td>Hull surface area (outside)</td><td>'+sh.toFixed(1)+' m²</td></tr></table>';
+  G.panels=pd;G.molds=molds}
+// ---- offsets
+function offsetsRows(){const {secs,h}=G,wl=[0.5,1].map(f=>h.T*f).concat([h.T+(P.D-h.T)*0.5]),rows=[];
+  for(let i=0;i<=10;i++){const s=secs[i*NS/10];const r=[i,Math.round(s.x*1000),Math.round(s.zk*1000),P.section==='hard'?Math.round(s.pts[s.chine][0]*1000):'',P.section==='hard'?Math.round(s.pts[s.chine][1]*1000):'',Math.round(s.hs*1000),Math.round(s.zs*1000)];
+    wl.forEach(z=>r.push(z>s.zk&&z<s.zs?Math.round(wlHalf(s,z)*1000):0));rows.push(r)}
+  return {head:['Station','From stern','Keel height','Chine half-breadth','Chine height','Sheer half-breadth','Sheer height'].concat(wl.map(z=>'Half-breadth at WL '+Math.round(z*1000))),rows}}
+function renderOffsets(){const o=offsetsRows();$('offsetsBox').innerHTML='<table class="t"><tr>'+o.head.map(hh=>'<th>'+esc(hh)+'</th>').join('')+'</tr>'+o.rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</table>'+(P.hulls==2?'<p class="muted">Half-breadths are for one hull, measured from its own centreline; the hull centrelines are '+(hullOffset()*1000).toFixed(0)+' mm either side of the boat’s centreline.</p>':'')}
+function renderWeights(){const {wt,h}=G,L=P.L;$('weightsBox').innerHTML='<table class="t"><tr><th>Item</th><th>Weight kg</th><th>From stern m</th><th>Height above keel m</th></tr>'+wt.list.map(w=>'<tr><td>'+esc(w.n)+'</td><td>'+w.w.toFixed(1)+'</td><td>'+w.x.toFixed(2)+'</td><td>'+w.z.toFixed(2)+'</td></tr>').join('')+
+  '<tr><th style="text-align:left">Total</th><th>'+wt.total.toFixed(0)+'</th><th>LCG '+wt.lcg.toFixed(2)+' ('+(wt.lcg/L*100).toFixed(0)+'%)</th><th>KG '+wt.kg.toFixed(2)+'</th></tr></table><p class="muted">Centre of buoyancy LCB '+h.lcb.toFixed(2)+' m from the stern · volume '+h.V.toFixed(2)+' m³ of '+(P.water==1000?'fresh':'sea')+' water.</p>'}
+
+// ------------------------------------------------------------------ 3D
+let R=null,heelDeg=0;
+function init3D(){if(!window.THREE){$('view3d').insertAdjacentHTML('beforeend','<div class="no3d">The 3D view needs WebGL and the three.js library, which could not load. The lines plan, stability, panels and all numbers still work.</div>');return}
+  const el=$('view3d'),renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));el.appendChild(renderer.domElement);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0xcfe8f5);scene.fog=new THREE.Fog(0xcfe8f5,40,140);
+  const cam=new THREE.PerspectiveCamera(40,1,0.05,500);const ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;ctl.target.set(0,0.3,0);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x557799,0.75));const sun=new THREE.DirectionalLight(0xffffff,0.8);sun.position.set(8,14,6);scene.add(sun);
+  const wg=new THREE.PlaneGeometry(200,200,120,120);wg.rotateX(-Math.PI/2);const water=new THREE.Mesh(wg,new THREE.MeshPhongMaterial({color:0x2f7fb0,transparent:true,opacity:0.62,shininess:90,side:THREE.DoubleSide}));scene.add(water);
+  const pivot=new THREE.Group();scene.add(pivot);R={renderer,scene,cam,ctl,water,pivot,boat:null,t0:performance.now()};
+  window.addEventListener('resize',resize3D);resize3D();animate()}
+function resize3D(){if(!R)return;const el=$('view3d'),w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;R.renderer.setSize(w,h,false);R.cam.aspect=w/h;R.cam.updateProjectionMatrix()}
+function animate(){requestAnimationFrame(animate);if(!R)return;const t=(performance.now()-R.t0)/1000,wav=$('waves').checked,amp=wav?Math.min(0.12,0.02*P.L):0;
+  const pos=R.water.geometry.attributes.position;for(let i=0;i<pos.count;i++){const x=pos.getX(i),z=pos.getZ(i);pos.setY(i,amp*(Math.sin(x*0.6+t*1.6)+0.6*Math.sin(z*0.9+t*1.1)))}pos.needsUpdate=true;
+  R.water.visible=$('showWater').checked;
+  if(R.boat){R.pivot.position.y=amp*0.8*Math.sin(t*1.6);R.pivot.rotation.x=-heelDeg*DEG+(wav?0.02*Math.sin(t*1.1):0);R.pivot.rotation.z=-G.h.th+(wav?0.01*Math.sin(t*1.6+1):0)}
+  R.ctl.update();R.renderer.render(R.scene,R.cam)}
+function disposeGroup(g){g.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose())})}
+function build3D(){if(!R)return;if(R.boat){R.pivot.remove(R.boat);disposeGroup(R.boat)}
+  const {secs,h}=G,L=P.L,T=h.T,tt=Math.tan(h.th),s0=hullOffset(),boat=new THREE.Group();boat.position.y=-T;boat.userData.export=true;
+  const V=(x,y,z)=>new THREE.Vector3(x-L/2,z,y);// hull coords (x along, y beam, z up) -> three (X along, Y up, Z beam)
+  const hullCol=new THREE.Color(P.color),bottomCol=new THREE.Color(0x8a2a22),stripe=new THREE.Color(0xf4f4f0),inside=new THREE.Color(0xd9c49a);
+  const colorAt=(x,z)=>{const zw=T+(x-L/2)*tt;return z<zw+0.01?bottomCol:z<zw+0.04+0.005*L?stripe:hullCol};
+  const outer=[],oc=[],inner=[];
+  const tri=(a,b,c,centre)=>{const n=new THREE.Vector3().subVectors(b,a).cross(new THREE.Vector3().subVectors(c,a)),mid=a.clone().add(b).add(c).multiplyScalar(1/3),out=mid.clone().sub(centre);
+    if(n.dot(out)<0){const t=b;b=c;c=t}[a,b,c].forEach(p=>{outer.push(p.x,p.y,p.z);const col=colorAt(p.x+L/2,p.y);oc.push(col.r,col.g,col.b)});[a,c,b].forEach(p=>inner.push(p.x,p.y,p.z))};
+  const offs=P.hulls==2?[s0,-s0]:[0];
+  offs.forEach(off=>{[1,-1].forEach(side=>{for(let i=0;i<NS;i++){const a=secs[i],b=secs[i+1];for(let j=1;j<a.pts.length;j++){
+    const p1=V(a.x,off+side*a.pts[j-1][0],a.pts[j-1][1]),p2=V(a.x,off+side*a.pts[j][0],a.pts[j][1]),p3=V(b.x,off+side*b.pts[j][0],b.pts[j][1]),p4=V(b.x,off+side*b.pts[j-1][0],b.pts[j-1][1]);
+    const c=V((a.x+b.x)/2,off,(a.zk+a.zs)/2);tri(p1,p2,p3,c);tri(p1,p3,p4,c)}}});
+    if(P.transom>=0.02){const t=secs[0],c=V(t.x+1,off,(t.zk+t.zs)/2);const ring=t.pts.map(p=>V(0,off+p[0],p[1])).concat(t.pts.slice().reverse().map(p=>V(0,off-p[0],p[1])));const cen=V(0,off,(t.zk+t.zs)/2);
+      for(let k=0;k<ring.length-1;k++){const a=ring[k],b=ring[k+1],n=new THREE.Vector3().subVectors(a,cen).cross(new THREE.Vector3().subVectors(b,cen));let A=cen,B=a,C=b;if(n.x>0){B=b;C=a}[A,B,C].forEach(p=>{outer.push(p.x,p.y,p.z);const col=colorAt(0,p.y);oc.push(col.r,col.g,col.b)});[A,C,B].forEach(p=>inner.push(p.x,p.y,p.z))}}});
+  const g1=new THREE.BufferGeometry();g1.setAttribute('position',new THREE.Float32BufferAttribute(outer,3));g1.setAttribute('color',new THREE.Float32BufferAttribute(oc,3));g1.computeVertexNormals();
+  boat.add(new THREE.Mesh(g1,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.45,metalness:P.material.startsWith('alu')?0.5:0.05,side:THREE.FrontSide})));
+  const g2=new THREE.BufferGeometry();g2.setAttribute('position',new THREE.Float32BufferAttribute(inner,3));g2.computeVertexNormals();boat.add(new THREE.Mesh(g2,new THREE.MeshStandardMaterial({color:inside,roughness:0.8,side:THREE.FrontSide})));
+  // invisible lid over the hull opening: writes depth only, so the see-through water is not drawn inside the boat
+  const lid=[];offs.forEach(off=>{for(let i=0;i<NS;i++){const a=secs[i],b=secs[i+1],q=[V(a.x,off+a.hs,a.zs-0.005),V(b.x,off+b.hs,b.zs-0.005),V(b.x,off-b.hs,b.zs-0.005),V(a.x,off-a.hs,a.zs-0.005)];[q[0],q[1],q[2],q[0],q[2],q[3]].forEach(p=>lid.push(p.x,p.y,p.z))}});
+  const lg=new THREE.BufferGeometry();lg.setAttribute('position',new THREE.Float32BufferAttribute(lid,3));const lidM=new THREE.Mesh(lg,new THREE.MeshBasicMaterial({colorWrite:false,side:THREE.DoubleSide}));lidM.renderOrder=5;lidM.userData.noExport=true;boat.add(lidM);
+  // deck
+  const deckMat=new THREE.MeshStandardMaterial({color:0xe8dcc0,roughness:0.8,side:THREE.DoubleSide}),darkMat=new THREE.MeshStandardMaterial({color:0x3a4250,roughness:0.6}),whiteMat=new THREE.MeshStandardMaterial({color:0xf4f4f0,roughness:0.5}),sailMat=new THREE.MeshStandardMaterial({color:0xfbf8ef,roughness:0.9,side:THREE.DoubleSide});
+  const deckStrip=(off,from,to,widthFn)=>{const pos=[];for(let i=Math.floor(from*NS);i<Math.ceil(to*NS);i++){const a=secs[i],b=secs[i+1],wa=widthFn(a),wb=widthFn(b);
+      const q=[V(a.x,off+a.hs,a.zs),V(b.x,off+b.hs,b.zs),V(b.x,off+b.hs-wb,b.zs),V(a.x,off+a.hs-wa,a.zs)],q2=[V(a.x,off-a.hs,a.zs),V(b.x,off-b.hs,b.zs),V(b.x,off-b.hs+wb,b.zs),V(a.x,off-a.hs+wa,a.zs)];
+      [q,q2].forEach(r=>{[r[0],r[1],r[2],r[0],r[2],r[3]].forEach(p=>pos.push(p.x,p.y+0.003,p.z))})}
+    const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.computeVertexNormals();boat.add(new THREE.Mesh(g,deckMat))};
+  offs.forEach(off=>{if(P.deck==='full')deckStrip(off,0,1,s=>s.hs);else{deckStrip(off,0,1,s=>Math.min(s.hs,0.05+0.01*L));if(P.deck==='half')deckStrip(off,0.62,1,s=>s.hs)}});
+  const box=(w,hgt,d,mat,x,y,z)=>{const m=new THREE.Mesh(new THREE.BoxGeometry(w,hgt,d),mat);m.position.copy(V(x,y,z));boat.add(m);return m};
+  const zS=u=>sheerZ(u);
+  if(P.hulls==2){if(P.section==='tube')box(L*0.94,0.08,P.B,deckMat,L*0.5,0,zS(0.5)+0.04);else box(L*0.62,0.1,2*s0,deckMat,L*0.55,0,zS(0.5)-0.02);
+    if(P.section==='tube'){const railM=new THREE.MeshStandardMaterial({color:0xb8c2cc,metalness:0.6,roughness:0.3});[[1],[-1]].forEach(([sd])=>{box(L*0.8,0.04,0.04,railM,L*0.5,sd*(P.B/2-0.05),zS(0.5)+0.85);box(L*0.8,0.5,0.02,new THREE.MeshStandardMaterial({color:0x2a4a6a}),L*0.5,sd*(P.B/2-0.05),zS(0.5)+0.4)})}}
+  if(P.type==='kayak'||(P.deck==='full'&&P.cabinL===0&&P.hulls==1&&P.mast===0)){const cr=new THREE.Mesh(new THREE.TorusGeometry(0.25,0.03,8,24),darkMat);cr.scale.set(1.8,1,1);cr.rotation.x=Math.PI/2;cr.position.copy(V(P.crewX*L,0,zS(P.crewX)+0.03));boat.add(cr)}
+  // seats
+  for(let k=0;k<P.seats;k++){const u=P.seats===1?0.5:0.22+k*(0.56/(P.seats-1)),s=section(u),zz=Math.min(s.zs-0.08,s.zk+0.3),hb=wlHalf(s,zz);if(P.hulls==2&&P.section==='tube')box(0.5,0.45,1.6,new THREE.MeshStandardMaterial({color:0xd8d0c0}),u*L,0,zS(0.5)+0.3);else if(P.hulls==1)box(0.22,0.03,Math.max(0.1,2*hb),deckMat,u*L,0,zz)}
+  if(P.console){const c=box(0.55,0.95,0.6,whiteMat,L*0.5,P.hulls==1?0:0.5,zS(0.5)-0.25+0.47);const ws=box(0.05,0.3,0.6,new THREE.MeshStandardMaterial({color:0x9fd0e8,transparent:true,opacity:0.5}),L*0.5+0.3,P.hulls==1?0:0.5,zS(0.5)+0.35);ws.rotation.z=0.5}
+  if(P.cabinL>0){const u=P.cabinX,s=section(u),w=(P.hulls==2?P.B*0.8:2*s.hs*0.78),cab=new THREE.Group();const b1=new THREE.Mesh(new THREE.BoxGeometry(P.cabinL,P.cabinH,w),whiteMat);cab.add(b1);
+    const win=new THREE.Mesh(new THREE.BoxGeometry(P.cabinL*0.7,P.cabinH*0.25,w+0.01),new THREE.MeshStandardMaterial({color:0x223344}));win.position.y=P.cabinH*0.15;cab.add(win);
+    const roof=new THREE.Mesh(new THREE.BoxGeometry(P.cabinL*1.04,0.05,w*1.04),deckMat);roof.position.y=P.cabinH/2;cab.add(roof);cab.position.copy(V(u*L,0,sheerZ(u)+P.cabinH/2-0.02));boat.add(cab)}
+  if(P.mast>0){const ux=0.62,base=V(ux*L,0,zS(ux)),mast=new THREE.Mesh(new THREE.CylinderGeometry(0.04+P.mast*0.004,0.05+P.mast*0.005,P.mast,10),new THREE.MeshStandardMaterial({color:0xc8ccd0,metalness:0.6,roughness:0.3}));
+    mast.position.set(base.x,base.y+P.mast/2,0);boat.add(mast);const boomL=Math.min(L*0.45,Math.sqrt(P.sail*2*0.62/Math.max(P.mast*0.85,1))*1.2),by=base.y+0.9;
+    const main=new THREE.BufferGeometry();main.setAttribute('position',new THREE.Float32BufferAttribute([base.x,by,0,base.x,base.y+P.mast*0.95,0,base.x-boomL,by,0],3));main.computeVertexNormals();boat.add(new THREE.Mesh(main,sailMat));
+    box(boomL,0.06,0.06,new THREE.MeshStandardMaterial({color:0xc8ccd0}),ux*L-boomL/2,0,zS(ux)+0.9);const bow=V(L,0,zS(1));
+    const jib=new THREE.BufferGeometry();jib.setAttribute('position',new THREE.Float32BufferAttribute([bow.x-0.1,bow.y+0.2,0,base.x+0.05,base.y+P.mast*0.8,0,base.x-0.3,bow.y+0.3,0],3));jib.computeVertexNormals();boat.add(new THREE.Mesh(jib,sailMat))}
+  if(P.engineType==='outboard'){const sz=0.25+Math.cbrt(P.hp)*0.08,eng=new THREE.Group(),zt=zS(0),c=new THREE.Color(0x1d2733);
+    const head=new THREE.Mesh(new THREE.BoxGeometry(sz*0.9,sz*1.1,sz*0.7),new THREE.MeshStandardMaterial({color:c,roughness:0.4}));head.position.y=sz*0.4;eng.add(head);
+    const leg=new THREE.Mesh(new THREE.BoxGeometry(sz*0.25,zt-keelZ(0)+sz*0.8,sz*0.2),new THREE.MeshStandardMaterial({color:0x2a3440}));leg.position.y=-(zt-keelZ(0))/2-sz*0.1;eng.add(leg);
+    const prop=new THREE.Mesh(new THREE.CylinderGeometry(sz*0.35,sz*0.35,0.03,12),new THREE.MeshStandardMaterial({color:0x888888,metalness:0.8}));prop.rotation.z=Math.PI/2;prop.position.set(-0.06,-(zt-keelZ(0))-sz*0.3,0);eng.add(prop);
+    if(P.hulls==2&&P.section!=='tube'){}eng.position.copy(V(-sz*0.35,0,zt));boat.add(eng)}
+  if(P.engineType==='inboard'){const prop=new THREE.Mesh(new THREE.CylinderGeometry(0.2+P.hp*0.0008,0.2+P.hp*0.0008,0.05,14),new THREE.MeshStandardMaterial({color:0xc8a040,metalness:0.8}));prop.rotation.z=Math.PI/2;prop.position.copy(V(L*0.08,0,keelZ(0.08)+0.12));boat.add(prop)}
+  if(G.keel){const k=G.keel,geo=new THREE.BoxGeometry(k.chord,k.d,Math.max(0.02,k.t));const posA=geo.attributes.position;for(let i=0;i<posA.count;i++){if(posA.getY(i)<0){posA.setX(i,posA.getX(i)*0.75-k.chord*0.05)}}geo.computeVertexNormals();
+    offs.forEach(off=>{const m=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({color:0x6a2a22,roughness:0.6}));m.position.copy(V(k.x,off,k.zk-k.d/2+0.02));boat.add(m);
+      if(P.ballast>0&&P.keel==='fin'){const bulb=new THREE.Mesh(new THREE.SphereGeometry(Math.max(0.08,Math.cbrt(P.ballast/11300)*0.9),16,10),new THREE.MeshStandardMaterial({color:0x333a40,metalness:0.5}));bulb.scale.set(3,1,1);bulb.position.copy(V(k.x-k.chord*0.1,off,k.zk-k.d));boat.add(bulb)}})}
+  if(P.rudder){offs.forEach(off=>{const rd=Math.max(0.3,G.h.draftMax*0.8),r=box(0.35+L*0.02,rd,0.03,new THREE.MeshStandardMaterial({color:0x6a2a22}),-0.12,off,keelZ(0)+sheerZ(0)*0.3-rd/2+0.2);})}
+  // crew
+  const skin=new THREE.MeshStandardMaterial({color:0xe0b088}),shirt=[0xd8604a,0x2b6cb0,0x4e9e73,0xe2a63b,0x8a3ab8,0x0f8b8d];
+  for(let k=0;k<Math.min(P.crew,12);k++){const spread=P.crew>1?(k-(P.crew-1)/2)*Math.min(0.7,L*0.6/P.crew):0,u=Math.max(0.1,Math.min(0.9,P.crewX+spread/L)),s=section(u),
+      seatZ=P.hulls==2?sheerZ(u)+0.05:(P.type==='kayak'||P.deck==='full'&&P.cabinL===0&&P.mast===0)?s.zk+0.12:P.deck==='full'?s.zs+0.02:Math.min(s.zs-0.05,s.zk+0.3),side=P.hulls==2?((k%2)?-1:1)*Math.min(P.B*0.3,0.6):((P.crew>2&&k%2)?0.25*s.hs:(-0.25*s.hs*(P.crew>2?1:0)));
+    const bodyM=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.18,0.55,10),new THREE.MeshStandardMaterial({color:shirt[k%6]}));bodyM.position.copy(V(u*L,side,seatZ+0.3));boat.add(bodyM);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(0.11,12,10),skin);head.position.copy(V(u*L,side,seatZ+0.68));boat.add(head)}
+  R.pivot.add(boat);R.boat=boat}
+function fitCamera(view){if(!R)return;const L=P.L,d=Math.max(L,P.B*2)*1.25;const v=view||'34';R.ctl.target.set(0,0.3,0);
+  if(v==='side')R.cam.position.set(0,0.3,d*1.3);else if(v==='top')R.cam.position.set(0,d*1.5,0.01);else if(v==='front')R.cam.position.set(d*1.3,0.4,0);else R.cam.position.set(d*0.8,d*0.45,d*0.9);R.cam.lookAt(0,0.3,0)}
+$('camSide').onclick=()=>fitCamera('side');$('camTop').onclick=()=>fitCamera('top');$('camFront').onclick=()=>fitCamera('front');$('cam34').onclick=()=>fitCamera('34');
+function updateHeelLabel(){$('heelOut').textContent=heelDeg+'°';if(!G||!G.gz)return;const a=G.gz,i=Math.min(a.length-1,Math.round(heelDeg/5)),gz=a[i][1];$('heelGz').textContent=' GZ '+gz.toFixed(2)+' m → '+(gz>0?'pushes back upright with '+Math.round(gz*G.wt.total)+' kg·m':'capsizing!')}
+$('heel').oninput=()=>{heelDeg=+$('heel').value;updateHeelLabel()};
+
+// ------------------------------------------------------------------ exports
+function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:type||'text/plain'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const slug=()=>(P.name||'boat').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'boat';
+function dxf(polys){let s='0\nSECTION\n2\nHEADER\n9\n$INSUNITS\n70\n4\n0\nENDSEC\n0\nSECTION\n2\nENTITIES\n';polys.forEach(({pts,layer,closed,text})=>{if(text){s+='0\nTEXT\n8\n'+layer+'\n10\n'+text[0].toFixed(1)+'\n20\n'+text[1].toFixed(1)+'\n30\n0\n40\n'+(text[3]||40)+'\n1\n'+text[2]+'\n';return}
+  const n=pts.length;for(let i=0;i<n-(closed?0:1);i++){const a=pts[i],b=pts[(i+1)%n];s+='0\nLINE\n8\n'+layer+'\n10\n'+a[0].toFixed(1)+'\n20\n'+a[1].toFixed(1)+'\n30\n0\n11\n'+b[0].toFixed(1)+'\n21\n'+b[1].toFixed(1)+'\n31\n0\n'}});return s+'0\nENDSEC\n0\nEOF\n'}
+const mm=p=>[p[0]*1000,p[1]*1000];
+$('dlLinesSVG').onclick=()=>{renderLines();download(slug()+'-lines.svg',G.linesSVG,'image/svg+xml')};
+$('dlLinesDXF').onclick=()=>{const d=linesData(),L=P.L,off=-(P.B*1000+600),polys=[];const add=(pts,layer,dy)=>pts&&pts.length>1&&polys.push({pts:pts.map(p=>{const q=mm(p);return [q[0],q[1]+(dy||0)]}),layer});
+  add(d.prof.sheer,'PROFILE');add(d.prof.keel,'PROFILE');add(d.prof.chine,'CHINE');add(d.prof.wl,'WATERLINE');add(d.plan.sheer,'PLAN',off);add(d.plan.chine,'CHINE',off);add(d.plan.inner,'PLAN',off);d.plan.wls.forEach(w=>add(w,'WATERLINES',off));
+  const bx=L*1000+1500;d.stations.forEach(st=>{const side=st.u>=0.5?1:-1;polys.push({pts:st.pts.map(p=>[bx+side*(hullOffset()+p[0])*1000,p[1]*1000]),layer:'BODYPLAN'})});
+  polys.push({layer:'TEXT',text:[0,-P.B*1000-1200,esc(P.name||'Boat')+' lines, mm',80]});download(slug()+'-lines.dxf',dxf(polys),'application/dxf')};
+$('dlPanelsDXF').onclick=()=>{renderPanels();if(!G.panels){alert('Panels are only made for hard-chine hulls. Switch Section shape to Hard chine, or download the station molds instead.');return}let y=0;const polys=[];
+  G.panels.forEach(p=>{const pts=p.poly.map(q=>[(q[0]-p.minx)*1000,(q[1]-p.miny)*1000+y]);polys.push({pts,layer:'PANELS',closed:true});polys.push({layer:'TEXT',text:[0,y-120,p.name+' x'+p.n,60]});
+    if(p.name!=='Transom')for(let i=0;i<=10;i++){const q=p.poly[i*NS/10];const x=(q[0]-p.minx)*1000,yy=(q[1]-p.miny)*1000+y;polys.push({pts:[[x,yy-25],[x,yy+25]],layer:'STATIONS'})}y+=p.h*1000+400});
+  download(slug()+'-panels.dxf',dxf(polys),'application/dxf')};
+$('dlMoldsDXF').onclick=()=>{const ms=moldsData();let x=0;const polys=[];ms.forEach(m=>{const w=(2*hullHalf())*1000+200;polys.push({pts:m.poly.map(q=>[x+w/2+q[0]*1000,q[1]*1000]),layer:'MOLDS',closed:true});polys.push({pts:[[x+w/2,-50],[x+w/2,m.zs*1000+50]],layer:'CENTRELINE'});polys.push({layer:'TEXT',text:[x+50,-150,'Station '+m.i+' at '+Math.round(m.x*1000)+' mm',50]});x+=w+200});
+  download(slug()+'-station-molds.dxf',dxf(polys),'application/dxf')};
+$('dlCSV').onclick=()=>{const o=offsetsRows();download(slug()+'-offsets.csv',[o.head].concat(o.rows).map(r=>r.join(',')).join('\n'),'text/csv')};
+function exportGroup(){if(!R||!R.boat)return null;const g=R.boat.clone();g.position.set(0,0,0);const drop=[];g.traverse(o=>{if(o.userData.noExport)drop.push(o)});drop.forEach(o=>o.parent.remove(o));g.updateMatrixWorld(true);return g}
+$('dlOBJ').onclick=()=>{const g=exportGroup();if(!g||!THREE.OBJExporter)return alert('3D export needs the 3D view.');download(slug()+'.obj',new THREE.OBJExporter().parse(g),'text/plain')};
+$('dlSTL').onclick=()=>{const g=exportGroup();if(!g||!THREE.STLExporter)return alert('3D export needs the 3D view.');download(slug()+'.stl',new THREE.STLExporter().parse(g,{binary:true}),'model/stl')};
+$('dlPNG').onclick=()=>{if(!R)return;R.renderer.render(R.scene,R.cam);R.renderer.domElement.toBlob(b=>download(slug()+'.png',b),'image/png')};
+$('printBtn').onclick=()=>{renderLines();const w=window.open('','_blank');if(!w)return alert('Allow pop-ups to print the build sheet.');
+  w.document.write('<!doctype html><title>'+esc(P.name)+' — build sheet</title><style>body{font:13px Arial;margin:24px;color:#16202b}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #ccc;padding:4px 6px;text-align:left}.g{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.g div{border:1px solid #ddd;padding:6px}.g b{display:block;font-size:15px}</style><h1>'+esc(P.name)+' — Boat Forge build sheet</h1>'+
+    '<div class="g">'+$('hydro').innerHTML+'</div><h2>Checks</h2><ul>'+$('checks').innerHTML+'</ul><h2>Lines plan</h2>'+G.linesSVG+'<h2>Weights</h2>'+(renderWeights(),$('weightsBox').innerHTML)+'<h2>Offsets (mm)</h2>'+(renderOffsets(),$('offsetsBox').innerHTML)+'<p>Made with Boat Forge — migabuilder.com. Estimates for design and learning; have a qualified designer check any boat before building.</p>');w.document.close();setTimeout(()=>w.print(),400)};
+$('saveJson').onclick=()=>download(slug()+'.boat.json',JSON.stringify(Object.assign({app:'MigaBuilder Boat Forge',version:1},P),null,1),'application/json');
+$('openJson').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const d=JSON.parse(await f.text());if(!d.L)throw new Error('not a Boat Forge design');P=Object.assign({},BASE,d);delete P.app;delete P.version;syncControls();update();fitCamera()}catch(err){alert('Could not open this file: '+err.message)}};
+$('resetBtn').onclick=()=>{P=Object.assign({},BASE);syncControls();update();fitCamera()};
+
+// ------------------------------------------------------------------ start
+renderPresets();buildSliders();syncControls();init3D();update();fitCamera();
+window.BoatForge={get P(){return P},get G(){return G},update};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

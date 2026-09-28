@@ -44,7 +44,7 @@
     constable: { n: 'John Constable', y: '1776–1837', f: ['#7aa04a', '#2e4a1e', '#e8f0d0', '#c8563a', '#1c2e12'], b: function (r) { return rc(0, 0, W, H, '#8fbde0') + rep(7, function () { var x = 300 + r() * 280, y = 20 + r() * 40; return c(x, y, 16 + r() * 14, '#f4f6f8', ' opacity=".9"') + c(x + 20, y + 6, 14, '#dde4ea'); }) + p('M0 110 Q300 90 600 105 V160 H0Z', '#5e8a3a') + c(400, 100, 26, '#2e5a24') + rc(396, 100, 8, 30, '#4a3220') + rc(480, 108, 40, 22, '#e8dcc4') + p('M476 108 L500 94 L524 108', '#9a4a32'); } },
     friedrich: { n: 'Caspar David Friedrich', y: '1774–1840', f: ['#e8ecf0', '#3a4250', '#ffffff', '#6a7a90', '#1e2430'], b: function () { return '<defs>' + lg('fr', '#e8d8c0', '#9aa8b8', true) + '</defs>' + rc(0, 0, W, H, 'url(#fr)') + p('M300 100 L360 70 L420 95 L480 60 L540 90 L600 75 V160 H300Z', '#b8c2cc') + p('M300 120 Q450 105 600 125 V160 H300Z', '#e8ecf0') + p('M500 160 L520 120 L560 110 L600 130 V160Z', '#3a4250'); } },
     monet: { n: 'Claude Monet', y: '1840–1926', f: ['#8ac0a8', '#2e5a5a', '#e0f2ea', '#e89ab8', '#1e3a3a'], b: function (r) { return rc(0, 0, W, H, '#6a9ab8') + rep(160, function () { return '<ellipse cx="' + (r() * 600).toFixed(0) + '" cy="' + (r() * 160).toFixed(0) + '" rx="' + (6 + r() * 8).toFixed(0) + '" ry="3" fill="' + ['#8ac0d8', '#4a7a9a', '#a8d0c8', '#5a8a7a'][Math.floor(r() * 4)] + '" opacity=".8"/>'; }) + rep(7, function () { var x = 320 + r() * 260, y = 30 + r() * 110; return '<ellipse cx="' + x.toFixed(0) + '" cy="' + y.toFixed(0) + '" rx="22" ry="8" fill="#5a9a4a"/>' + c(x, y - 2, 5, '#f4a8c0'); }); } },
-    renoir: { n: 'Pierre-Auguste Renoir', y: '1841–1919', f: ['#f0a878', '#8a4a3a', '#fbe4d4', '#5a8ac0', '#4a2418'], b: function (r) { return rc(0, 0, W, H, '#c8d8a8') + rep(140, function () { return c(r() * 600, r() * 160, 3 + r() * 8, ['#f8e8b0', '#e8b8a0', '#a8c890', '#f0d0d8'][Math.floor(r() * 4)], ' opacity=".65"'); }); } },
+    renoir: { n: 'Pierre-Auguste Renoir', y: '1841–1919', f: ['#f0a878', '#8a4a3a', '#fbe4d4', '#5a8ac0', '#4a2418'], b: function (r) { return rc(0, 0, W, H, '#c8d8a8') + rc(0, 108, W, 52, '#8ab8d0') + rep(140, function () { var y = r() * 160; return c(r() * 600, y, 3 + r() * 8, y > 108 ? ['#b8d8e8', '#f8e8b0', '#6a9ab8'][Math.floor(r() * 3)] : ['#f8e8b0', '#e8b8a0', '#a8c890', '#f0d0d8'][Math.floor(r() * 4)], ' opacity=".65"'); }) + rep(3, function (i) { var x = 330 + i * 90, y = 124 + (i % 2) * 12; return p('M' + x + ' ' + y + ' h54 l-10 12 h-34Z', ['#f4ecdc', '#c8563a', '#f0c060'][i], '#4a2418', 1.5) + p('M' + (x + 27) + ' ' + y + ' v-34 l18 28Z', '#fbf4e6', '#4a2418', 1); }); } },
     degas: { n: 'Edgar Degas', y: '1834–1917', f: ['#f0c8b8', '#7a4a5a', '#fff0ea', '#6ab0b8', '#3a2430'], b: function () { return rc(0, 0, W, H, '#c8a878') + rc(0, 100, W, 60, '#b88858') + rep(6, function (i) { var x = 340 + i * 44; return p('M' + (x - 22) + ' 96 Q' + x + ' 80 ' + (x + 22) + ' 96 Q' + x + ' 104 ' + (x - 22) + ' 96Z', '#f4f0f4', '#c8a8b8', 1.5) + p('M' + x + ' 86 v-26 M' + (x - 4) + ' 100 l-6 26 M' + (x + 4) + ' 100 l6 26', null, '#e8c8b0', 3) + c(x, 54, 6, '#e8c8b0'); }); } },
     cezanne: { n: 'Paul Cézanne', y: '1839–1906', f: ['#d88a3a', '#5a4a2a', '#f4dcb8', '#4a7aa0', '#2a2214'], b: function (r) { return rc(0, 0, W, H, '#a8c8d8') + p('M300 120 L400 50 L470 80 L520 40 L600 100 V160 H300Z', '#8a9ab8') + rep(60, function () { return rc(300 + r() * 300, 90 + r() * 70, 14, 10, ['#b8a060', '#7a9a5a', '#d8a868', '#9ab070'][Math.floor(r() * 4)], ' transform="rotate(' + (r() * 40 - 20).toFixed(0) + ')" opacity=".85"'); }); } },
     vangogh: { n: 'Vincent van Gogh', y: '1853–1890', f: ['#f2c640', '#1f3a7a', '#fff2b0', '#3a8ab8', '#101e40'], b: function (r) { return rc(0, 0, W, H, '#1f3a7a') + rep(5, function (i) { var x = 330 + i * 60, y = 40 + (i % 2) * 30; return p('M' + (x - 30) + ' ' + y + ' q15 -25 30 0 t30 0 q-10 20 -30 10 q-20 -8 -10 -20', null, '#8ab8e8', 4); }) + rep(8, function () { var x = 320 + r() * 270, y = 15 + r() * 90; return c(x, y, 10, '#f2d650', ' opacity=".35"') + c(x, y, 5, '#fff2b0'); }) + p('M330 160 Q345 80 340 20 Q355 90 360 160Z', '#12240f') + c(560, 30, 14, '#f2c640'); } },
@@ -186,7 +186,7 @@
     constable: { s: 'Romanticism (English landscape)', a: 'An English landscape painter of the countryside of Suffolk, famous for The Hay Wain and his careful studies of clouds.', l: 'Billowing white clouds over green meadows and a dark tree echo his English country scenes.' },
     friedrich: { s: 'German Romanticism', a: 'A German painter of lonely, spiritual landscapes such as Wanderer above the Sea of Fog.', l: 'Misty grey-blue ridges and a dark rocky foreground seen from above recall his sea of fog.' },
     monet: { s: 'Impressionism', a: 'A founder of French Impressionism, who painted the same scenes again and again to catch changing light, above all his water lilies at Giverny.', l: 'Short dabs of blue and green on water with floating lily pads are his Water Lilies.' },
-    renoir: { s: 'Impressionism', a: 'A French Impressionist of joyful, sunlit scenes of people dancing, eating and relaxing.', l: 'Soft, feathery dabs of warm pink, yellow and green recall the dappled sunlight in his paintings.' },
+    renoir: { s: 'Impressionism', a: 'A French Impressionist of joyful, sunlit scenes of people dancing, eating and relaxing.', l: 'Soft, feathery dabs of warm pink, yellow and green over a river with small sailing boats recall the dappled sunlight of his riverside boating scenes.' },
     degas: { s: 'Impressionism', a: 'A French artist famous for ballet dancers in rehearsal, painted from unusual angles in pastel and oil.', l: 'A row of ballerinas in white tutus on a warm wooden stage comes from his dance studio scenes.' },
     cezanne: { s: 'Post-Impressionism', a: 'A French painter who built landscapes from blocks of colour and paved the way for Cubism; he painted Mont Sainte-Victoire many times.', l: 'Small tilted patches of colour building up a mountain landscape imitate his constructive brushstrokes.' },
     vangogh: { s: 'Post-Impressionism', a: 'A Dutch painter of intense colour and swirling, energetic brushwork who made The Starry Night and Sunflowers.', l: 'Swirling blue sky, glowing yellow stars and a crescent moon are a homage to The Starry Night.' },
@@ -242,6 +242,7 @@
     'big-five': ['klee', 'owl', 'chart'],
     'biology-map': ['rousseau', 'axolotl', 'lens'],
     'body-map': ['michelangelo', 'yeti', 'book'],
+    'boat-forge': ['renoir', 'nessie', 'wrench', 'cap'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
     'cad-forge': ['leonardo', 'golem', 'pencil'],
@@ -269,6 +270,7 @@
     'media-convert-forge': ['riley', 'slime', 'gear'],
     'media-convert': ['dali', 'bat', 'gear'],
     'meet-forge': ['chagall', 'moth', 'bubble'],
+    'memory-forge': ['okeeffe', 'alien', 'bulb', 'wizard'],
     'merge-forge': ['braque', 'golem', 'scissors'],
     'model-forge': ['cezanne', 'dino', 'wrench'],
     'music-forge': ['degas', 'frog', 'note', 'bow'],
@@ -304,7 +306,7 @@
   var ARTIST_KEYS = Object.keys(A), CREATURE_KEYS = Object.keys(C), PROP_KEYS = Object.keys(P);
 
   function build(slug) {
-    var h = hash(slug), pick = TOOLS[slug] || [ARTIST_KEYS[h % ARTIST_KEYS.length], CREATURE_KEYS[(h >> 5) % CREATURE_KEYS.length], PROP_KEYS[(h >> 10) % PROP_KEYS.length]];
+    var h = hash(slug), pick = TOOLS[slug] || [ARTIST_KEYS[h % ARTIST_KEYS.length], CREATURE_KEYS[(h >>> 5) % CREATURE_KEYS.length], PROP_KEYS[(h >>> 10) % PROP_KEYS.length]];
     var art = A[pick[0]], k = art.f, drawn = C[pick[1]](k), fig = drawn[0];
     var hat = pick[3] && HAT[pick[3]] ? HAT[pick[3]](drawn[1][0], drawn[1][1], k) : '';
     var prop = P[pick[2]] ? P[pick[2]](k) : '';

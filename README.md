@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**58 free, open-source browser tools for websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**60 free, open-source browser tools for websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -17,6 +17,8 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - Merged, split, compressed and signed PDFs, Word files and photos
 - Interactive world geography lessons and quizzes
 - Driving, boating and flying practice in a vehicle simulator
+- Boat designs with a 3D hull, lines plan, stability check and plywood panels
+- Memory training with levels, number and symbol cards, timed or untimed
 - Browser apps, FAQ bots and social posts
 - House floor plans, 3D building models, construction drawings and material lists
 - 3D models and beginner coding projects
@@ -39,12 +41,14 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Sign Documents** — sign PDFs, Word files and photos with a drawn, typed or uploaded signature
 - **Geography Forge** — click any country for its history, currency, languages, customs and government, then take a quiz
 - **CAD Forge** — draw walls, doors and windows on a floor plan, then get a 3D house with roof and timber framing, plan and elevation drawings, a material list and DXF, OBJ and STL exports
+- **Boat Forge** — start from a dinghy, flat-bottom skiff, V-hull runabout, plywood dory, canoe, sea kayak, keel sailboat, catamaran, pontoon or trawler, shape the hull with sliders (beam, depth, bow fullness, transom, deadrise, rocker, sheer, flare), add people, engine, fuel, keel and ballast, mast and sail, cabin and seats, and watch it float and heel in 3D; get the lines plan, hydrostatics (draft, trim, freeboard, GM, form coefficients), a righting-arm stability curve, speed estimates, unrolled stitch-and-glue plywood panels, station molds and offsets, with DXF, SVG, CSV, OBJ and STL downloads
 - **Bug Scanner** — paste code or drop a whole project in 30+ languages to see what it builds, what is wrong and exactly how to fix it
 - **Alphabet Forge** — tap any Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi or Georgian symbol to hear it, learn a word and why it sounds that way, then practise writing it — and type it with the built-in on-screen keyboard (Korean syllables join as you type, Japanese from romaji, Mandarin from pinyin), plus a typing challenge
 - **Idea Atlas** — explore the history, key thinkers and connections of 37 philosophies and ideologies, then play a timed quiz game
 - **Biology Map** — explore a tree of life with 43 living things to see how long ago we shared an ancestor, how much DNA we share (and what each figure really measures) and what we both inherited; zoom from the body down to a single DNA letter, build a DNA strand, follow a gene being expressed and translate DNA with the real genetic code, make mutations in the human haemoglobin gene (including sickle cell), run a peppered-moth natural-selection simulator, follow humans out of Africa on a world map with local adaptations, then play a scored quiz
 - **Chemistry Map** — an interactive periodic table of all 118 elements, coloured by family, state at any temperature, electronegativity, density, melting point, discovery date or block; open any element for its animated atom, where it is found, its forms, uses and compounds; put elements in a mixing bowl to see how they bond and the formula they form, see which elements build steel, glass, plastics, batteries, chips and more, work out molar masses, then play a scored quiz
 - **Body Map** — switch between organs, the skeleton, muscles and tendons (front and back), and a cut-through view of the skin, then click any part to learn how it works, how it connects to the rest of the body, its common illnesses with the best treatment and prevention, and how to keep it healthy; follow a meal or a drink through the body step by step, drag a slider to see what happens hour by hour when you fast, then play a scored quiz or make and share your own
+- **Memory Forge** — train your memory with number and symbol cards (all at once or one at a time, seen or read aloud), the chimp test, pairs, dual n-back and Corsi sequences; 30 levels for each game with stars, played with or without a clock, or set your own number of cards and symbols, study time and answer time; plus memory techniques (chunking, memory palace, Major system), a day streak, progress chart and CSV of your results
 - **Flashcard Forge** — AI-made or pasted decks, an Anki-style (SM-2) scheduler, fill-in-the-blank and image cards, a matching game, listening and speaking tests, streaks and stats, and decks shared as a link
 - **Exam Checker** — build an exam with multiple-choice, multi-select, true/false, short and open answers; print one answer sheet per student from the class list (name and a code printed on it) or blank bubble sheets with optional student-ID bubbles; test the reader with a photo of the correct answers; drop in every student's photos at once, in any order and at any angle — each page is matched to its student, a sheet photographed twice is counted once, and the class list shows who is still missing; with unclear marks flagged for review, OCR for written answers and AI or key-word point suggestions for essays; then see question analysis and download everyone's answers as Excel or CSV, a class report or printable result slips
 - **Audio Forge** and **Text Compare** — edit audio and compare texts
@@ -52,7 +56,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert Forge** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 58 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 60 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 
