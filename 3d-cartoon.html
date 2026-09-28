@@ -538,9 +538,15 @@ async function make() {
       'Give it a clear beginning, a problem, and a happy ending. Keep it kind and suitable for all ages.\n' +
       'Format: {"title":"...","characters":[{"name":"...","species":"...","color":"#..."}],"beats":[{"setting":"park","who":"...","action":"talk","line":"..."}]}';
     let data = null;
-    for (let attempt = 0; attempt < 2 && !data; attempt++) { // the free AI is sometimes busy for a moment, so try twice
+    for (let attempt = 0; attempt < 3 && !data; attempt++) { // the free AI is sometimes busy or rate-limited for a moment, so try three times
       try { data = MigaAI.json(await MigaAI.ask(sys, user, { maxTokens: 6000 })); }
-      catch (err) { if (attempt) throw err; status('The AI is busy, trying again…'); await new Promise(r => setTimeout(r, 2500)); }
+      catch (err) {
+        if (attempt === 2) throw err;
+        const wait = /too many|wait a minute|429/i.test(err.message) ? 30 : 4 + attempt * 6;
+        status('The AI did not answer (' + err.message + '). Trying again in ' + wait + ' seconds… (' + (attempt + 2) + ' of 3)');
+        await new Promise(r => setTimeout(r, wait * 1000));
+        status('Writing your cartoon script… (try ' + (attempt + 2) + ' of 3)');
+      }
     }
     if (!data) throw new Error('The AI did not return a script. Try again.');
     load(data);
