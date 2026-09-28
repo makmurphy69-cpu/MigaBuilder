@@ -533,6 +533,29 @@ S('game-forge.html', {
   }
 });
 
+S('3d-game-forge.html', {
+  title: '3D Game Forge', subtitle: 'Make a 3D game from one sentence',
+  intro: 'Welcome to 3D Game Forge. Describe a 3D game, play it straight away, then change anything you like.',
+  async run(h, page) {
+    const hold = async (key, ms) => { await page.keyboard.down(key); await h.wait(ms); await page.keyboard.up(key); };
+    const play = async () => { await h.click('#stage button', { force: true }); await h.wait(400); };
+    await h.step('Describe the game you want in one sentence. Here, a fox collects gems in a snowy forest at night while ghosts chase it.', () => h.fill('#prompt', 'A fox collects glowing gems in a snowy forest at night while friendly ghosts chase it'));
+    await h.step('Press Make my 3D game. The AI picks the kind of game, the world, the hero, the enemies and the rules.', () => h.click('#makeBtn'));
+    await h.skip('Skipping ahead while the AI designs the game', () => page.waitForFunction(() => /ready|Could not|did not/.test(document.querySelector('#status').textContent), null, { timeout: 180000 }));
+    await h.step('Press Play. The arrow keys or W A S D move, Space jumps, and on a phone you get buttons on the screen.', async () => { await play(); await hold('w', 1800); await hold('a', 500); await hold('w', 1500); });
+    await h.step('Or start from a template. The endless runner has three lanes: jump the hurdles and dodge the walls.', async () => { await h.click('#tpl-runner'); await play(); await hold('ArrowLeft', 150); await h.wait(1200); await hold(' ', 200); await h.wait(1500); await hold('ArrowRight', 150); await h.wait(1200); });
+    await h.step('The kart racer has rivals, laps and boost stars. There are also a first-person maze, a platformer and an arena.', async () => { await h.click('#tpl-racer'); await play(); await hold('ArrowUp', 4500); });
+    await h.step('Change the world, the time of day, the hero and the enemies from the menus, and tune speed, jumping and enemies with sliders.', async () => { await h.click('#tpl-explore'); await h.select('#f_env', 'candy'); await h.select('#f_player', 'ball'); await h.select('#f_enemy', 'ghost'); });
+    await h.step('Paint your own level: pick a tile such as a wall, then click or drag on the grid. The game restarts with your level.', async () => {
+      await h.click('#tile-5'); const g = await page.locator('#grid').boundingBox();
+      await page.mouse.move(g.x + g.width * 0.2, g.y + g.height * 0.35); await page.mouse.down(); await page.mouse.move(g.x + g.width * 0.7, g.y + g.height * 0.35, { steps: 12 }); await page.mouse.up(); await h.wait(800);
+    });
+    await h.scroll('#stage', 'center');
+    await h.step('Copy a share link that holds the whole game, or download it as one HTML file that works on any website.', () => h.point('#shareBtn'));
+    await h.sampleDownload('#dlBtn', '3D game made in this video');
+  }
+});
+
 S('app-forge.html', {
   title: 'App Forge', subtitle: 'Build a small app that works on any phone',
   intro: 'Welcome to App Forge. Describe an app, and get it built as an app people can install on their phone.',

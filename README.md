@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**60 free, open-source browser tools for websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**61 free, open-source browser tools for websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -9,7 +9,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 ## What you can create
 
 - Multi-page business websites
-- Playable browser games
+- Playable browser games, including 3D games made from one sentence
 - Animated cartoons that can be recorded as video
 - Videos, captions, music and merged media
 - Logos, palettes, QR codes and layered image edits
@@ -33,6 +33,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Website Builder** — turn one business brief into a complete multi-page site, or start from a ready-made landing page; click in ready-made responsive blocks (hero, pricing cards, FAQ, contact form, footer…), check the page at phone, tablet and desktop width, click any text to edit it with the code shown live beside it, paste a free Formspree or Formcarry ID so contact forms really send email, and download a tidy `.zip` with `style.css` and an `images/` folder
 - **Cartoon Forge** — create an animated story and record it as video
 - **Game Forge** — turn a prompt into a playable browser game, then tune gravity, jump height and speed with sliders, drop in your own player and background pictures or a whole sprite sheet (cut into Idle, Walk and Jump animations), pick 8-bit sound effects generated with the Web Audio API, copy one embed block to put the game on any site, or download it as an installable offline app (`manifest.json`, icons and a service worker in one `.zip`)
+- **3D Game Forge** — describe a 3D game in a sentence and the AI designs it for a built-in three.js engine, or start from a template: open-world collect, first-person maze, jump platformer, three-lane endless runner, kart racer with rivals and laps, or top-down arena with zapping; pick the camera (third person, first person, top-down), the world (meadow, forest, desert, snow, neon city, space, beach, volcano, candy), time of day, hero, pick-ups and enemies, tune speed, jump, gravity, enemies, time limit and lives with sliders, paint your own level tile by tile, play with keyboard, mouse or touch buttons, then copy a share link that holds the whole game or download it as one HTML file
 - **Video Forge** — animate drawings and images
 - **Paint Forge** — edit images with layers
 - **Slide Forge** — generate a downloadable PowerPoint
@@ -56,7 +57,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert Forge** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 60 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 61 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 

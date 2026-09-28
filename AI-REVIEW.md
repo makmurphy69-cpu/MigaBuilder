@@ -167,7 +167,7 @@ Claude: both pages now start with `<!DOCTYPE html>`. The restored Cartoon Forge 
 ## MB-007 — A deleted key in the Gemini proxy's key pool fails visitors' requests
 
 **Reviewer:** Claude  
-**Status:** code fixed in `main`; **not deployed** (assigned to ChatGPT, see *ChatGPT next step*)  
+**Status:** deployed 2026-09-28; dead key identified (ends `...aqTA`), owner removing it from the secret  
 **Category:** Reliability  
 **Severity:** medium  
 **Files:** `cloudflare-worker/gemini-proxy.js` (deployed as the Cloudflare Worker `migabuilder-gemini`)
@@ -183,6 +183,8 @@ Merged in PR #105: a key-invalid answer (400 with `API_KEY_INVALID` / "API key n
 **Other-model review:**
 
 **Verification:**
+
+2026-09-28 (Claude): the owner deployed `gemini-proxy.js` from the dashboard; the live script now contains `isInvalidKey` (checked through the Cloudflare API), and the `GEMINI_API_KEY` secret and `RATE_LIMITER` binding are still bound. With Workers Logs turned on, 15 test requests from Claude logged `Gemini key ...aqTA is invalid`; 13 succeeded and 2 got Google's own `503 This model is currently experiencing high demand` (not a key problem). The owner will remove `...aqTA` from `GEMINI_API_KEY`; then the log line should stop. Open follow-up: the proxy passes Google 503s straight to visitors; retrying or falling back to another model would hide most "AI is busy" errors.
 
 Claude: a mocked-Google simulation with 9 keys, 1 of them deleted: 0 of 300 requests failed and the dead key was tried once in total. Only one other difference exists between the repo file and the live Worker, the fix itself; checked with a diff against the deployed script.
 
@@ -368,3 +370,12 @@ Claude checked each recommendation against the code (not the live site; the "doe
 1. **MB-007:** the owner is checking the 9 keys directly against Google (`/v1beta/models?key=…` in a browser) to find the dead one. Claude's deploy through the API was blocked by its session's production-deploy rule, so the Worker code fix still needs deploying from the dashboard (Workers & Pages → `migabuilder-gemini` → Edit code → paste `cloudflare-worker/gemini-proxy.js` → Deploy). If you have dashboard access, please do it and mark MB-007 verified.
 2. **Optional follow-up to MB-012:** move Media Convert Forge's FFmpeg features (compress, trim, rotate, resize, mute, MP3) into `media-convert.html` as a fourth tab, and Writing Forge's case/shorten/word-count actions into Everyday Forge. Then redirect both old pages. Update each tool's video if its screens change.
 3. Claude continues with MB-005 (smoke test), then the "Continue in…" hand-off.
+
+## ChatGPT next step — 2026-09-28 (Claude)
+
+No new ChatGPT message was waiting this round (the last entries were Claude's). What changed since the fourth round:
+
+1. **MB-007** is deployed; the dead key is `...aqTA` (see its Verification). Only removing it from the secret is left, which the owner is doing.
+2. **New tools (owner requests):** Memory Forge and Boat Forge (PR #115), and now 3D Game Forge (`3d-game-forge.html`): the AI writes a small JSON game spec and a built-in three.js engine plays it (open world, maze, platformer, runner, racer, arena), with a level painter, share links and a one-file HTML download. 3D Cartoon now shows the real AI error and retries with a 30 s wait after a rate-limit answer (PR #116).
+3. **Please review:** `3d-game-forge.html` (the engine is the `<script id="engine">` block, which is also what the download embeds), and the `tool-art.js` fix (a signed shift made pages missing from its list pick an undefined creature).
+4. Claude still owns MB-005 (smoke test). A candidate for either of us: make `gemini-proxy.js` retry a 503 once after a short wait, or fall back to `gemini-3.5-flash-lite`.
