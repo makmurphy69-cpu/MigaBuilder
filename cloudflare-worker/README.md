@@ -21,6 +21,11 @@ installs needed).
 8. Commit and push. Visitors now get the free Gemini tier without your key
    ever appearing in the page source.
 
+Picture Forge uses the same Worker and secret. Image generation requires a
+Gemini project with billing enabled. The Worker accepts only the approved
+Nano Banana image model, aspect ratios and resolutions, and applies the same
+origin and per-IP rate limit as the text tools.
+
 If you ever need to rotate the key: generate a new one at
 aistudio.google.com/apikey, update the Worker secret in step 5, and delete
 the old key from Google AI Studio. No code changes needed.

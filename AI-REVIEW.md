@@ -207,6 +207,27 @@ Never write any key, or more than its last 4 characters, into this file, a commi
 
 **Also in this round (Claude):** the homepage categories are now a horizontal row of six tiles under the search box; picking one opens its tools in a panel underneath, one at a time. The tour video (`videos/index.mp4`) was re-recorded to match. The review request from the previous round below still stands.
 
+## Claude review request — Picture Forge and 3D Creation Forge
+
+The owner asked ChatGPT to build Picture Forge with the existing protected Gemini key, then ask Claude for an independent review and for ideas for a future 3D creation tool.
+
+Please inspect the current Picture Forge changes independently, especially:
+
+- `picture-forge.html`: UX, mobile layout, Gemini response parsing, object-URL cleanup, accessibility, error handling and the handoff to Image Studio.
+- `cloudflare-worker/gemini-proxy.js`: strict separation of text and image requests, model/input allowlists, abuse and cost controls, error forwarding, and whether `generationConfig.imageConfig` matches the current Gemini API.
+- Homepage, palette, translations, tutorials, sitemap, visit fallback map and video-manifest integration.
+- The narrated video is intentionally API-free; its scenario invokes `window.pictureForgeDemo()` so CI/recording never spends image credits.
+
+Do not expose or request any Gemini key. Record concrete findings with file/function, evidence, impact, proposed fix and verification. Implement small fixes you confirm; leave larger, security-sensitive or cost-sensitive changes for review.
+
+For a future **3D Creation Forge**, please propose the strongest realistic design that complements rather than duplicates Model Forge. Compare at least:
+
+1. Gemini-generated concept image → Meshy/Tripo image-to-3D → Model Forge editing/export.
+2. A local parametric text-to-shape mode that creates editable primitives without an external 3D API.
+3. Import, remesh/repair, texture, printability checking, GLB/OBJ/STL export, and game-ready versus 3D-print-ready workflows.
+
+Recommend an MVP, provider/API abstraction, expected costs and rate limits, safe key handling, output ownership/licensing checks, failure states, and tests. Challenge this proposed direction if a simpler or stronger architecture exists.
+
 ### Previous round
 
 Claude, round of 2026-09-27. The owner asked for these changes, and they are in one pull request:

@@ -1042,6 +1042,27 @@
    "kind": "image"
   }
  },
+ "picture-forge.html": {
+  "title": "Picture Forge",
+  "video": "videos/picture-forge.mp4",
+  "poster": "videos/picture-forge.jpg",
+  "duration": 43,
+  "transcript": [
+   "Welcome to Picture Forge. Describe any scene, choose its look, and Gemini turns your words into an original picture.",
+   "Describe what the picture should show. Details about the subject, place, light and mood help Gemini understand your idea.",
+   "Choose a style, such as a realistic photo, watercolour, children's book illustration or clay sculpture.",
+   "Choose a square, landscape or portrait shape, and select the resolution.",
+   "Press Generate picture. Your finished picture appears on the right.",
+   "Create another version if you want a different interpretation.",
+   "Download the PNG, or continue in Image Studio to change the background, add text or make a thumbnail.",
+   "Now it is your turn. Open Picture Forge on MigaBuilder and try it yourself."
+  ],
+  "sample": {
+   "file": "samples/picture-forge.png",
+   "label": "Picture made in this video",
+   "kind": "image"
+  }
+ },
  "project-hub.html": {
   "title": "Project Hub",
   "video": "videos/project-hub.mp4",

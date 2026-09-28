@@ -694,6 +694,21 @@ S('image-studio.html', {
   }
 });
 
+S('picture-forge.html', {
+  title: 'Picture Forge', subtitle: 'Turn words into an original picture',
+  intro: 'Welcome to Picture Forge. Describe any scene, choose its look, and Gemini turns your words into an original picture.',
+  async run(h, page) {
+    await h.step('Describe what the picture should show. Details about the subject, place, light and mood help Gemini understand your idea.', () => h.type('#prompt', 'A tiny red cottage beside a frozen Swedish lake at blue hour, warm golden light in the windows, snow-covered pine trees reflected in the ice.', { visible: 70 }));
+    await h.step('Choose a style, such as a realistic photo, watercolour, children’s book illustration or clay sculpture.', () => h.select('#style', 'digital illustration'));
+    await h.step('Choose a square, landscape or portrait shape, and select the resolution.', async () => { await h.select('#aspect', '16:9'); await h.point('#resolution'); });
+    await h.step('Press Generate picture. For this walkthrough we show a sample without spending an AI credit.', () => page.evaluate(() => window.pictureForgeDemo()));
+    await h.wait(1200);
+    await h.step('Your finished picture appears here. Create another version if you want a different interpretation.', () => h.point('#result'));
+    await h.sampleDownload('#downloadBtn', 'Picture made in this video');
+    await h.step('Download the PNG, or continue in Image Studio to change the background, add text or make a thumbnail.', () => h.point('a[href="image-studio.html"]'));
+  }
+});
+
 S('design-forge.html', {
   title: 'Design Forge', subtitle: 'Thumbnails, memes and collages',
   intro: 'Welcome to Design Forge. Make thumbnails, social posts and collages in seconds.',
@@ -1033,7 +1048,7 @@ S('templates.html', {
 S('index.html', {
   title: 'MigaBuilder', subtitle: 'Find the right free tool in one minute',
   outroSay: 'Now it is your turn. Pick a tool and try it yourself. It is free, and there is nothing to sign up for.',
-  intro: 'Welcome to MigaBuilder: fifty eight free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
+  intro: 'Welcome to MigaBuilder: sixty two free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
   async run(h, page) {
     await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
     await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });

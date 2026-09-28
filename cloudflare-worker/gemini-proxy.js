@@ -25,8 +25,12 @@ const ALLOWED_ORIGINS = [
 
 const ALLOWED_MODELS = [
   'gemini-3.5-flash-lite',
-  'gemini-3.5-flash'
+  'gemini-3.5-flash',
+  'gemini-3.1-flash-image'
 ];
+
+const IMAGE_ASPECTS = ['1:1', '16:9', '9:16', '4:3', '3:4', '3:2', '2:3', '21:9'];
+const IMAGE_SIZES = ['1K', '2K', '4K'];
 
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -107,17 +111,34 @@ export default {
     }
 
     const model = payload && payload.model;
+    const isImage = payload && payload.kind === 'image';
     const systemPrompt = (payload && payload.systemPrompt) || '';
     const userPrompt = payload && payload.userPrompt;
 
     if (!ALLOWED_MODELS.includes(model)) {
       return json({ error: 'Unsupported or missing model' }, 400, origin);
     }
-    if (typeof userPrompt !== 'string' || !userPrompt.trim()) {
+    if (!isImage && (typeof userPrompt !== 'string' || !userPrompt.trim())) {
       return json({ error: 'Missing userPrompt' }, 400, origin);
     }
 
-    const requestBody = JSON.stringify({
+    if (isImage) {
+      const prompt = payload && payload.prompt;
+      if (model !== 'gemini-3.1-flash-image') return json({ error: 'Unsupported image model' }, 400, origin);
+      if (typeof prompt !== 'string' || prompt.trim().length < 8 || prompt.length > 2400) return json({ error: 'Image prompt must be between 8 and 2,400 characters.' }, 400, origin);
+      if (!IMAGE_ASPECTS.includes(payload.aspectRatio)) return json({ error: 'Unsupported image shape' }, 400, origin);
+      if (!IMAGE_SIZES.includes(payload.imageSize)) return json({ error: 'Unsupported image resolution' }, 400, origin);
+    } else if (model === 'gemini-3.1-flash-image') {
+      return json({ error: 'Image model requires an image request' }, 400, origin);
+    }
+
+    const requestBody = JSON.stringify(isImage ? {
+      contents: [{ parts: [{ text: payload.prompt.trim() }] }],
+      generationConfig: {
+        responseModalities: ['TEXT', 'IMAGE'],
+        imageConfig: { aspectRatio: payload.aspectRatio, imageSize: payload.imageSize }
+      }
+    } : {
       systemInstruction: { parts: [{ text: systemPrompt }] },
       contents: [{ parts: [{ text: userPrompt }] }]
     });
