@@ -155,6 +155,31 @@
    "kind": "html"
   }
  },
+ "boat-forge.html": {
+  "title": "Boat Forge",
+  "video": "videos/boat-forge.mp4",
+  "poster": "videos/boat-forge.jpg",
+  "duration": 151,
+  "transcript": [
+   "Welcome to Boat Forge. Design a boat hull, see it float in 3D, and get the plans to build it.",
+   "Start from a boat: a dinghy, skiff, runabout, dory, canoe, kayak, sailboat, catamaran, pontoon or trawler. Here we pick a flat-bottom skiff.",
+   "Shape it with the sliders. We make it a little longer and wider.",
+   "Deadrise gives the bottom a V, and flare makes the sides lean out.",
+   "Add people and a bigger engine. The boat sinks until it displaces its own weight of water, then trims until it balances.",
+   "Try the heel test to see how hard the boat pushes itself back upright.",
+   "Below the 3D view you get the weight, draft, freeboard, stability and estimated speed, with checks written in plain language.",
+   "The lines plan draws the profile, the half-breadth plan and the body plan, ready to download for CAD.",
+   "The stability curve shows the righting arm at every angle of heel.",
+   "For plywood boats, the panels are unrolled flat so you can cut them from sheets, with station molds and a material list.",
+   "Download the panels full size as a DXF file for cutting, and the lines, offsets, 3D model and a printable build sheet from the other tabs.",
+   "Now it is your turn. Open Boat Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/boat-forge.png",
+   "label": "Plywood panels made in this video",
+   "kind": "image"
+  }
+ },
  "body-map.html": {
   "title": "Body Map",
   "video": "videos/body-map.mp4",
@@ -740,6 +765,32 @@
   "sample": {
    "file": "samples/meet-forge.png",
    "label": "Meeting setup from this video",
+   "kind": "image"
+  }
+ },
+ "memory-forge.html": {
+  "title": "Memory Forge",
+  "video": "videos/memory-forge.mp4",
+  "poster": "videos/memory-forge.jpg",
+  "duration": 132,
+  "transcript": [
+   "Welcome to Memory Forge. Train your memory with number and symbol cards and other games, level by level.",
+   "Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back and sequences each train a different kind of memory.",
+   "Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.",
+   "There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.",
+   "Press Start and memorise the cards from left to right.",
+   "When you are ready, press I have memorised them, and put the cards back in order with the keypad.",
+   "Check shows which cards were right, your stars, and a button for the next level.",
+   "In Custom you decide how many numbers and how many symbols there are, how long each card is shown, and how long you have to answer.",
+   "With the clock on, the cards hide by themselves when the time bar runs out.",
+   "Now tap the numbers and symbols in the right order before the answer clock runs out.",
+   "Every card is checked, and your result is added to your progress.",
+   "Your levels, day streak and a chart of your games are saved only in this browser, with memory techniques that help you remember more.",
+   "Now it is your turn. Open Memory Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/memory-forge.png",
+   "label": "Memory game result from this video",
    "kind": "image"
   }
  },

@@ -428,6 +428,34 @@ S('alphabet-forge.html', {
   }
 });
 
+S('memory-forge.html', {
+  title: 'Memory Forge', subtitle: 'Memory training with levels, cards and a clock',
+  intro: 'Welcome to Memory Forge. Train your memory with number and symbol cards and other games, level by level.',
+  async run(h, page) {
+    const answer = async () => {
+      const ids = await page.evaluate(() => (window.__memSeq || []).map(v => { const b = [...document.querySelectorAll('#palette button')].find(x => x.textContent === v); return b ? '#' + b.id : null; }));
+      for (const id of ids) if (id) await h.click(id);
+    };
+    const remember = () => page.evaluate(() => { window.__memSeq = [...document.querySelectorAll('#studyCards .mcard span:not(.ix)')].map(s => s.textContent); });
+    await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back and sequences each train a different kind of memory.', () => h.point('#modes'));
+    await h.step('Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.', async () => { await h.click('#mode-numbers'); await h.click('#timedOff'); });
+    await h.step('There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.', () => h.point('#levels'));
+    await h.step('Press Start and memorise the cards from left to right.', async () => { await h.click('#startBtn'); await remember(); });
+    await h.step('When you are ready, press I have memorised them, and put the cards back in order with the keypad.', async () => { await h.click('#readyBtn'); await answer(); });
+    await h.step('Check shows which cards were right, your stars, and a button for the next level.', () => h.click('#checkBtn'));
+    await h.step('In Custom you decide how many numbers and how many symbols there are, how long each card is shown, and how long you have to answer.', async () => {
+      await h.click('#tabCustom'); await h.click('#mode-mixed'); await h.click('#timedOn');
+      await h.fill('#c_numCount', '4'); await h.fill('#c_symCount', '3'); await h.fill('#c_studySec', '1.5'); await h.fill('#c_recallSec', '60');
+    });
+    await h.step('With the clock on, the cards hide by themselves when the time bar runs out.', async () => { await h.click('#startBtn'); await remember(); });
+    await h.skip('Skipping ahead to the answer', () => page.waitForSelector('#palette', { timeout: 30000 }));
+    await h.step('Now tap the numbers and symbols in the right order before the answer clock runs out.', answer);
+    await h.step('Every card is checked, and your result is added to your progress.', () => h.click('#checkBtn'));
+    await h.sampleShot('#playPanel', 'Memory game result from this video');
+    await h.step('Your levels, day streak and a chart of your games are saved only in this browser, with memory techniques that help you remember more.', () => h.scroll('#stats', 'center'));
+  }
+});
+
 S('flashcard-forge.html', {
   title: 'Flashcard Forge', subtitle: 'Remember anything with spaced repetition',
   intro: 'Welcome to Flashcard Forge. Make flashcards in seconds and remember them for good.',
@@ -679,6 +707,26 @@ S('model-forge.html', {
     await h.click('#wireframeBtn');
     await h.sampleShot('canvas', 'Model made in this video');
     await h.step('Export it as an STL or OBJ file for your 3D printer.', () => h.point('#exportStlBtn'));
+  }
+});
+
+S('boat-forge.html', {
+  title: 'Boat Forge', subtitle: 'Design a boat and see it float',
+  intro: 'Welcome to Boat Forge. Design a boat hull, see it float in 3D, and get the plans to build it.',
+  async run(h, page) {
+    const slide = async (sel, v) => { await h.point(sel); await page.$eval(sel, (e, v) => { e.value = v; e.dispatchEvent(new Event('input')); }, String(v)); await h.wait(500); };
+    await h.step('Start from a boat: a dinghy, skiff, runabout, dory, canoe, kayak, sailboat, catamaran, pontoon or trawler. Here we pick a flat-bottom skiff.', async () => { await h.point('#presets'); await h.click('#preset-skiff'); });
+    await h.step('Shape it with the sliders. We make it a little longer and wider.', async () => { await slide('#p_L', 5.4); await slide('#p_B', 1.9); });
+    await h.step('Deadrise gives the bottom a V, and flare makes the sides lean out.', async () => { await slide('#p_deadT', 10); await slide('#p_flare', 20); });
+    await h.step('Add people and a bigger engine. The boat sinks until it displaces its own weight of water, then trims until it balances.', async () => { await slide('#p_crew', 3); await slide('#p_hp', 25); });
+    await h.step('Try the heel test to see how hard the boat pushes itself back upright.', async () => { await h.scroll('.viewtabs', 'start'); await slide('#heel', 25); });
+    await h.step('Below the 3D view you get the weight, draft, freeboard, stability and estimated speed, with checks written in plain language.', () => h.scroll('#hydro', 'center'));
+    await h.scroll('.viewtabs', 'start');
+    await h.step('The lines plan draws the profile, the half-breadth plan and the body plan, ready to download for CAD.', () => h.click('#tabLines'));
+    await h.step('The stability curve shows the righting arm at every angle of heel.', () => h.click('#tabStab'));
+    await h.step('For plywood boats, the panels are unrolled flat so you can cut them from sheets, with station molds and a material list.', () => h.click('#tabPanels'));
+    await h.sampleShot('#panelsBox', 'Plywood panels made in this video');
+    await h.step('Download the panels full size as a DXF file for cutting, and the lines, offsets, 3D model and a printable build sheet from the other tabs.', () => h.point('#dlPanelsDXF'));
   }
 });
 

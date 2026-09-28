@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Memory Forge — memory training with levels, number and symbol cards | MigaBuilder</title>
+<meta name="description" content="Free memory training in your browser: number and symbol memory cards with 30 levels, timed or untimed, your own card counts and study times, plus the chimp test, pairs, dual n-back, Corsi sequences, memory techniques and progress stats. No signup.">
+<link rel="canonical" href="https://migabuilder.com/memory-forge.html">
+<meta property="og:title" content="Memory Forge — free memory training with levels | MigaBuilder">
+<meta property="og:description" content="Number and symbol memory cards, chimp test, pairs, n-back and sequences — 30 levels, timed or untimed, private in your browser.">
+<meta property="og:url" content="https://migabuilder.com/memory-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.mode{background:#fff;border:2px solid rgba(22,32,43,.12);border-radius:8px;padding:12px;text-align:left;cursor:pointer;color:var(--ink)}
+.mode b{display:block;font:700 15px 'Space Grotesk';margin-top:4px}.mode small{color:rgba(22,32,43,.62);font-size:12px;line-height:1.35;display:block;margin-top:3px}
+.mode .ico{font-size:24px}.mode.active{border-color:var(--amber);background:#fff7e6}
+.tabs{display:flex;gap:4px;border-bottom:2px solid rgba(22,32,43,.15);margin:4px 0 14px;flex-wrap:wrap}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:700;cursor:pointer;color:rgba(22,32,43,.65);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button.active{color:var(--ink);border-bottom-color:var(--amber)}
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.lvl{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:8px 4px;cursor:pointer;text-align:center;font-weight:700;color:var(--ink)}
+.lvl small{display:block;font-size:11px;color:#b7831d;letter-spacing:1px;min-height:14px}
+.lvl.sel{outline:3px solid var(--amber)}.lvl.locked{opacity:.4;cursor:not-allowed}.lvl.done{background:#eef8f1;border-color:#4E9E73}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.switch{display:inline-flex;border:1px solid rgba(22,32,43,.25);border-radius:999px;overflow:hidden;background:#fff}
+.switch button{border:0;background:none;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--ink)}.switch button.on{background:var(--navy);color:#fff}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px}
+.cgrid .field{margin:0}.cgrid .hint{font-size:11.5px;color:rgba(22,32,43,.6);margin-top:3px}
+.summary{font-size:13.5px;background:#fff;border:1px dashed rgba(22,32,43,.25);border-radius:6px;padding:10px 12px;margin:12px 0}
+#arena{min-height:120px}
+.hud{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
+.hud .pill{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:999px;padding:5px 12px;font:600 13px 'IBM Plex Mono'}
+.timebar{height:8px;background:#d9d7cd;border-radius:999px;overflow:hidden;margin-bottom:14px}.timebar i{display:block;height:100%;width:100%;background:var(--amber);transform-origin:left;transition:transform .1s linear}
+.cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.mcard{width:74px;height:98px;border-radius:10px;background:#fff;border:2px solid rgba(22,32,43,.16);display:flex;align-items:center;justify-content:center;font:700 40px 'Space Grotesk';box-shadow:0 4px 12px rgba(8,24,38,.12);position:relative;user-select:none}
+.mcard .ix{position:absolute;top:4px;left:7px;font:500 10px 'IBM Plex Mono';color:rgba(22,32,43,.45)}
+.mcard.big{width:150px;height:200px;font-size:92px}
+.mcard.slot{cursor:pointer;background:#f6f4ee;border-style:dashed}.mcard.slot.active{border-color:var(--amber);border-style:solid;background:#fff7e6}
+.mcard.ok{border-color:#4E9E73;background:#eef8f1}.mcard.bad{border-color:#D8604A;background:#fdeeea}
+.mcard .was{position:absolute;bottom:3px;right:6px;font-size:18px;opacity:.8}
+.palette{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0 6px}
+.palette button{min-width:52px;height:52px;border-radius:8px;border:1px solid rgba(22,32,43,.2);background:#fff;font:700 24px 'Space Grotesk';cursor:pointer;color:var(--ink)}
+.palette button.fn{font-size:14px;padding:0 12px;background:#f1efe8}
+.center{text-align:center}
+.bigmsg{font:700 26px 'Space Grotesk';margin:8px 0}
+.stars{font-size:30px;letter-spacing:4px;color:#e2a63b}
+.chimp{display:grid;gap:6px;margin:0 auto;max-width:640px}
+.chimp div{aspect-ratio:1;border-radius:8px;background:rgba(22,32,43,.05)}
+.chimp button{aspect-ratio:1;width:100%;border-radius:8px;border:0;background:#fff;box-shadow:0 2px 6px rgba(8,24,38,.18);font:700 24px 'Space Grotesk';cursor:pointer;color:var(--ink)}
+.chimp button.cover{background:var(--navy);color:transparent}.chimp button.gone{visibility:hidden}.chimp button.wrong{background:#D8604A;color:#fff}
+.pairs{display:grid;gap:8px;margin:0 auto;max-width:640px}
+.pc{aspect-ratio:3/4;border-radius:10px;border:0;cursor:pointer;font:700 30px 'Space Grotesk';background:var(--navy);color:transparent;box-shadow:0 3px 8px rgba(8,24,38,.2);transition:transform .2s}
+.pc.up{background:#fff;color:var(--ink);transform:rotateY(0)}.pc.matched{background:#eef8f1;color:#4E9E73;cursor:default}
+.nb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(330px,90%);margin:0 auto}
+.nb div{aspect-ratio:1;border-radius:10px;background:rgba(22,32,43,.07);display:flex;align-items:center;justify-content:center;font:700 44px 'Space Grotesk'}
+.nb div.on{background:var(--navy);color:#fff}
+.nbbtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.nbbtns button{padding:14px 18px;font-weight:700;border-radius:8px;border:2px solid var(--navy);background:#fff;cursor:pointer;color:var(--ink)}
+.nbbtns button.hit{background:#4E9E73;color:#fff;border-color:#4E9E73}.nbbtns button.miss{background:#D8604A;color:#fff;border-color:#D8604A}
+.corsi{display:grid;gap:8px;margin:0 auto;max-width:420px}
+.corsi button{aspect-ratio:1;border-radius:10px;border:0;background:#5a7390;cursor:pointer}
+.corsi button.lit{background:#f2c640;box-shadow:0 0 18px #f2c640}.corsi button.tap{background:#6fd1e0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.62)}
+.tech{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tech details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}
+.tech summary{font-weight:700;cursor:pointer}.tech p,.tech li{font-size:13.5px;line-height:1.5}
+table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px solid rgba(22,32,43,.15);padding:4px 8px;text-align:center}
+@media(max-width:620px){.mcard{width:56px;height:76px;font-size:30px}.mcard.big{width:120px;height:160px;font-size:70px}.palette button{min-width:44px;height:46px}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Memory Forge</span></nav>
+<header class="masthead"><div><h1>Memory Forge</h1><p>Train your memory with number and symbol cards, the chimp test, pairs, n-back and sequences — 30 levels, timed or untimed, or your own settings.</p></div></header>
+<main>
+
+<section class="panel">
+  <h2>1. Choose a memory game</h2>
+  <p>Each game trains a different kind of memory. Card games train short-term memory for order; the chimp test and sequences train visual–spatial memory; n-back trains working memory.</p>
+  <div class="modes" id="modes"></div>
+</section>
+
+<section class="panel" id="setupPanel">
+  <h2>2. Pick a level or set it up yourself</h2>
+  <div class="tabs" role="tablist"><button class="active" data-tab="levels" id="tabLevels">🏆 Levels</button><button data-tab="custom" id="tabCustom">⚙️ Custom</button></div>
+  <div class="row"><span style="font-weight:700;font-size:13px">Clock:</span>
+    <div class="switch" id="timeSwitch"><button data-timed="1" class="on" id="timedOn">⏱ With time</button><button data-timed="0" id="timedOff">🧘 Without time</button></div>
+    <span class="muted" id="timeHint"></span></div>
+  <div id="levelsBox">
+    <p class="muted">Pass a level (90% or more) to unlock the next. Stars: ★ 70% · ★★ 90% · ★★★ perfect. Timed and untimed progress are kept separately.</p>
+    <div class="levels" id="levels"></div>
+  </div>
+  <div id="customBox" class="hidden">
+    <div class="cgrid" id="customFields"></div>
+  </div>
+  <div class="summary" id="summary"></div>
+  <div class="actions"><button class="primary" id="startBtn">▶ Start</button><label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="soundOn" checked> Sounds</label></div>
+</section>
+
+<section class="panel hidden" id="playPanel">
+  <div class="hud"><strong id="hudTitle"></strong><span><span class="pill" id="hudInfo"></span> <span class="pill" id="hudClock">—</span></span><button class="secondary" id="quitBtn">✕ Stop</button></div>
+  <div class="timebar hidden" id="timebar"><i id="timefill"></i></div>
+  <div id="arena"></div>
+</section>
+
+<section class="panel">
+  <h2>Your progress</h2>
+  <div class="stat-grid" id="stats"></div>
+  <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 6px">Last 30 games (accuracy)</h3>
+  <div id="chart"></div>
+  <div class="actions" style="margin-top:10px"><button class="secondary" id="exportBtn">⬇ Download my results (CSV)</button><button class="danger" id="resetBtn">Reset progress</button></div>
+  <p class="privacy" style="margin-top:12px">🔒 Everything runs and is saved only in this browser. Nothing is uploaded.</p>
+</section>
+
+<section class="panel">
+  <h2>Memory techniques that work</h2>
+  <p>World memory champions are not born with special memories — they use techniques like these. Try one in the Custom tab with more cards than feels comfortable.</p>
+  <div class="tech">
+    <details open><summary>🧩 Chunking</summary><p>Group items into small blocks. “7 4 1 9 2 6” is six things; “741 · 926” is two. Most people can hold about four chunks at once, so bigger chunks mean more items.</p></details>
+    <details><summary>🏛️ Memory palace (method of loci)</summary><p>Picture a place you know well — your home. Walk a fixed route and leave one vivid image at each spot: the front door, the hall mirror, the sofa… To recall, walk the route again. It works because the brain is very good at remembering places.</p></details>
+    <details><summary>🔤 Major system for numbers</summary><p>Turn digits into consonant sounds, then add vowels to make words you can picture: 32 = M-N = “moon”, 94 = B-R = “bear”.</p>
+      <table class="major"><tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>s z</td><td>t d</td><td>n</td><td>m</td><td>r</td><td>l</td><td>j sh ch</td><td>k g</td><td>f v</td><td>p b</td></tr></table></details>
+    <details><summary>🎭 Story (link) method</summary><p>Link each item to the next in a strange, moving little story: a ★ star falls on a ● ball that rolls into a ▲ tent… Silly, exaggerated and emotional images stick best.</p></details>
+    <details><summary>🗣️ Say it and see it</summary><p>Use two senses. Quietly say each card as you look at it, or switch Presentation to “See and hear”. Rhythm helps too: read numbers in a beat, like a phone number.</p></details>
+    <details><summary>📅 Little and often</summary><p>Ten minutes a day beats an hour once a week. Sleep fixes memories, so practise, sleep, then try again the next day. Games like these train the skill you practise; the techniques are what carry over to real life.</p></details>
+  </div>
+</section>
+</main>
+<footer>Memory Forge is a free practice tool, not a medical or cognitive assessment.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MAXL=30;
+const MODES={
+  numbers:{ico:'🔢',name:'Number cards',d:'Memorise a row of number cards, then put them back in order.'},
+  symbols:{ico:'🔣',name:'Symbol cards',d:'Memorise shapes, emoji, arrows or letters in order.'},
+  mixed:{ico:'🔀',name:'Numbers + symbols',d:'A mixed row of number and symbol cards.'},
+  chimp:{ico:'🐒',name:'Chimp test',d:'Numbers flash on a grid — tap them in order once they are hidden.'},
+  pairs:{ico:'🃏',name:'Pairs',d:'Turn cards two at a time and find every matching pair.'},
+  nback:{ico:'🔁',name:'N-back',d:'Does this match the one N steps back? Trains working memory.'},
+  corsi:{ico:'🟨',name:'Sequence',d:'Squares light up one by one — repeat the pattern (Corsi blocks).'}
+};
+const SETS={
+  shapes:{name:'Coloured shapes',items:[['●','#D8604A','circle'],['■','#2b6cb0','square'],['▲','#4E9E73','triangle'],['◆','#8a3ab8','diamond'],['★','#e2a63b','star'],['♥','#d6336c','heart'],['✚','#16202b','cross'],['☾','#3a7ab8','moon'],['⬟','#c0781e','pentagon'],['⬢','#0f8b8d','hexagon'],['✿','#b83280','flower'],['⚑','#5a3b2c','flag']]},
+  emoji:{name:'Pictures',items:[['🍎','','apple'],['🐶','','dog'],['🚗','','car'],['⚽','','ball'],['🌙','','moon'],['🎈','','balloon'],['🔑','','key'],['🌵','','cactus'],['🐟','','fish'],['🎸','','guitar'],['☂️','','umbrella'],['🍕','','pizza']]},
+  arrows:{name:'Arrows',items:[['↑','#2b6cb0','up'],['→','#4E9E73','right'],['↓','#D8604A','down'],['←','#8a3ab8','left'],['↗','#e2a63b','up right'],['↘','#0f8b8d','down right'],['↙','#d6336c','down left'],['↖','#5a3b2c','up left']]},
+  greek:{name:'Greek letters',items:[['α','#2b6cb0','alpha'],['β','#4E9E73','beta'],['γ','#D8604A','gamma'],['δ','#8a3ab8','delta'],['λ','#e2a63b','lambda'],['π','#0f8b8d','pi'],['σ','#d6336c','sigma'],['Ω','#16202b','omega'],['Φ','#c0781e','phi'],['Ψ','#3a7ab8','psi'],['θ','#b83280','theta'],['μ','#5a3b2c','mu']]},
+  letters:{name:'Letters',items:'ABCDEFGHJKLMNPRSTUVWXYZ'.split('').slice(0,12).map(l=>[l,'#16202b',l])}
+};
+
+// ---------- storage ----------
+const KEY='miga-memory-v1';
+let store;try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
+store.stars=store.stars||{};store.history=store.history||[];store.days=store.days||[];store.settings=store.settings||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+
+const DEF={mode:'numbers',tab:'levels',timed:true,level:1,sound:true,
+  numCount:7,symCount:5,numDigits:1,symSet:'shapes',symVariety:8,studyMode:'all',studySec:1.2,recallSec:0,present:'see',
+  chimpCount:6,chimpHideSec:3,pairsCount:8,pairsKind:'symbols',previewSec:3,pairsLimit:90,
+  nbackN:2,nbackDual:true,nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false};
+const S=Object.assign({},DEF,store.settings);
+function persist(){store.settings=S;save()}
+
+// ---------- level design ----------
+function starKey(){return S.mode+':'+(S.timed?'t':'u')}
+function levelCfg(mode,L,timed){
+  const c={level:L,timed};
+  const study=Math.max(0.5,1.6-0.035*L);
+  if(mode==='numbers'){Object.assign(c,{numCount:2+L,symCount:0,numDigits:L>20?2:1,studySec:study,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(8+3*(2+L)):0})}
+  else if(mode==='symbols'){Object.assign(c,{numCount:0,symCount:2+L,symVariety:Math.min(12,4+Math.floor(L/3)),studySec:study+0.2,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(10+3*(2+L)):0})}
+  else if(mode==='mixed'){const t=3+L;Object.assign(c,{numCount:Math.ceil(t/2),symCount:Math.floor(t/2),symVariety:Math.min(12,5+Math.floor(L/4)),numDigits:1,studySec:study+0.2,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(10+3*t):0})}
+  else if(mode==='chimp'){Object.assign(c,{chimpCount:Math.min(40,3+L),chimpHideSec:Math.max(0.8,(3+L)*0.45-L*0.05)})}
+  else if(mode==='pairs'){const p=Math.min(18,2+L);Object.assign(c,{pairsCount:p,pairsKind:L%2?'symbols':'numbers',previewSec:timed?Math.max(0,4-L*0.15):0,pairsLimit:timed?Math.round(p*7):0})}
+  else if(mode==='nback'){Object.assign(c,{nbackN:Math.ceil(L/2),nbackDual:L%2===0,nbackTrials:20+Math.ceil(L/2)*2,nbackInterval:timed?Math.max(1.8,3-L*0.04):0})}
+  else if(mode==='corsi'){Object.assign(c,{corsiLen:2+L,corsiGrid:L<=4?3:L<=14?4:5,corsiSpeed:timed?Math.max(0.35,0.9-0.02*L):0.9,corsiReverse:L>20&&L%2===1})}
+  return c;
+}
+function currentCfg(){
+  if(S.tab==='levels'){const c=levelCfg(S.mode,S.level,S.timed);return Object.assign({},DEF,{symSet:S.symSet,present:S.present},c)}
+  const c=Object.assign({},S,{level:0});
+  if(!S.timed){c.recallSec=0;c.pairsLimit=0;c.previewSec=S.previewSec;c.nbackInterval=0}
+  if(S.mode==='numbers')c.symCount=0;if(S.mode==='symbols')c.numCount=0;
+  return c;
+}
+
+// ---------- UI: modes, tabs, levels, custom ----------
+function renderModes(){$('modes').innerHTML=Object.entries(MODES).map(([k,m])=>'<button class="mode'+(k===S.mode?' active':'')+'" data-mode="'+k+'" id="mode-'+k+'"><span class="ico">'+m.ico+'</span><b>'+m.name+'</b><small>'+m.d+'</small></button>').join('');
+  $('modes').querySelectorAll('.mode').forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;S.level=Math.min(S.level,unlocked());persist();renderAll()})}
+function unlocked(){const st=store.stars[starKey()]||{};let u=1;for(let L=1;L<=MAXL;L++){if((st[L]||0)>=2)u=L+1}return Math.min(MAXL,u)}
+function renderLevels(){const st=store.stars[starKey()]||{},u=unlocked();if(S.level>u)S.level=u;
+  $('levels').innerHTML=Array.from({length:MAXL},(_,i)=>{const L=i+1,s=st[L]||0;return '<button class="lvl'+(L>u?' locked':'')+(s>=2?' done':'')+(L===S.level?' sel':'')+'" data-l="'+L+'" id="lvl-'+L+'"'+(L>u?' disabled title="Pass level '+(L-1)+' first"':'')+'>'+L+'<small>'+'★'.repeat(s)+'</small></button>'}).join('');
+  $('levels').querySelectorAll('.lvl:not(.locked)').forEach(b=>b.onclick=()=>{S.level=+b.dataset.l;persist();renderLevels();renderSummary()})}
+function f(id,label,html,hint){return '<div class="field"><label for="'+id+'">'+label+'</label>'+html+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>'}
+function num(id,min,max,step){return '<input type="number" id="c_'+id+'" data-k="'+id+'" min="'+min+'" max="'+max+'" step="'+(step||1)+'" value="'+S[id]+'">'}
+function sel(id,opts){return '<select id="c_'+id+'" data-k="'+id+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(String(S[id])===String(o[0])?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'}
+const setOpts=()=>Object.entries(SETS).map(([k,v])=>[k,v.name]);
+function renderCustom(){
+  const m=S.mode,T=S.timed;let h='';
+  if(m==='numbers'||m==='mixed')h+=f('c_numCount','How many numbers',num('numCount',0,60),'Number cards to memorise')+f('c_numDigits','Digits on each card',sel('numDigits',[[1,'One digit (0–9)'],[2,'Two digits (00–99)'],[3,'Three digits (000–999)']]));
+  if(m==='symbols'||m==='mixed')h+=f('c_symCount','How many symbols',num('symCount',0,60),'Symbol cards to memorise')+f('c_symVariety','Different symbols to choose from',num('symVariety',2,12),'Fewer = easier');
+  if(m==='symbols'||m==='mixed'||m==='pairs')h+=f('c_symSet','Symbol set',sel('symSet',setOpts()));
+  if(m==='numbers'||m==='symbols'||m==='mixed'){
+    h+=f('c_studyMode','How cards are shown',sel('studyMode',[['all','All at once'],['flash','One at a time']]));
+    if(T)h+=f('c_studySec','Seconds to look at each card',num('studySec',0.2,30,0.1),'All at once: total time = this × number of cards');
+    if(T)h+=f('c_recallSec','Seconds to answer (0 = no limit)',num('recallSec',0,900));
+    h+=f('c_present','Presentation',sel('present',[['see','See the cards'],['hear','Hear them read aloud'],['both','See and hear']]));
+  }
+  if(m==='chimp'){h+=f('c_chimpCount','How many numbers',num('chimpCount',3,40));if(T)h+=f('c_chimpHideSec','Seconds before they hide',num('chimpHideSec',0.3,60,0.1),'Without time they hide when you tap 1')}
+  if(m==='pairs'){h+=f('c_pairsCount','How many pairs',num('pairsCount',2,18))+f('c_pairsKind','Cards show',sel('pairsKind',[['symbols','Symbols'],['numbers','Numbers'],['mixed','Numbers and symbols']]))+f('c_previewSec','Peek at all cards first (seconds)',num('previewSec',0,30,0.5));if(T)h+=f('c_pairsLimit','Time limit in seconds (0 = none)',num('pairsLimit',0,900))}
+  if(m==='nback'){h+=f('c_nbackN','N (how many steps back)',num('nbackN',1,9))+f('c_nbackDual','Track',sel('nbackDual',[['false','Card only'],['true','Card and position (dual)']]))+f('c_nbackTrials','Rounds',num('nbackTrials',10,100));if(T)h+=f('c_nbackInterval','Seconds per round',num('nbackInterval',1,10,0.1),'Without time each round waits for your answer')}
+  if(m==='corsi'){h+=f('c_corsiLen','Sequence length',num('corsiLen',2,30))+f('c_corsiGrid','Grid size',sel('corsiGrid',[[3,'3 × 3'],[4,'4 × 4'],[5,'5 × 5']]))+f('c_corsiSpeed','Seconds each square stays lit',num('corsiSpeed',0.2,3,0.05))+f('c_corsiReverse','Order',sel('corsiReverse',[['false','Same order'],['true','Backwards (harder)']]))}
+  $('customFields').innerHTML=h;
+  $('customFields').querySelectorAll('[data-k]').forEach(el=>el.onchange=el.oninput=()=>{const k=el.dataset.k;let v=el.value;if(el.type==='number'){v=parseFloat(v);if(isNaN(v))return;v=Math.max(+el.min,Math.min(+el.max,v))}else if(v==='true'||v==='false')v=v==='true';else if(/^\d+$/.test(v))v=+v;S[k]=v;persist();renderSummary()});
+}
+function describe(c){
+  const m=S.mode,parts=[];
+  if(m==='numbers'||m==='symbols'||m==='mixed'){
+    if(c.numCount)parts.push(c.numCount+' number card'+(c.numCount>1?'s':'')+(c.numDigits>1?' ('+c.numDigits+' digits each)':''));
+    if(c.symCount)parts.push(c.symCount+' symbol card'+(c.symCount>1?'s':'')+' from '+(c.symVariety||8)+' '+SETS[c.symSet||'shapes'].name.toLowerCase());
+    parts.push(c.studyMode==='flash'?'shown one at a time':'shown all at once');
+    parts.push(c.timed?(c.studySec.toFixed(1)+' s per card'+(c.recallSec?', '+c.recallSec+' s to answer':', no answer limit')):'look as long as you like, then answer with no clock');
+  } else if(m==='chimp')parts.push(c.chimpCount+' numbers on the grid',c.timed?'hidden after '+c.chimpHideSec.toFixed(1)+' s':'hidden when you tap 1');
+  else if(m==='pairs')parts.push(c.pairsCount+' pairs ('+c.pairsCount*2+' cards) of '+c.pairsKind,c.previewSec?'peek '+(+c.previewSec).toFixed(1)+' s':'no peek',c.timed&&c.pairsLimit?c.pairsLimit+' s limit':'no time limit');
+  else if(m==='nback')parts.push(c.nbackN+'-back',c.nbackDual?'card + position (dual)':'card only',c.nbackTrials+' rounds',c.timed&&c.nbackInterval?c.nbackInterval.toFixed(1)+' s each':'each round waits for you');
+  else if(m==='corsi')parts.push(c.corsiLen+' squares on a '+c.corsiGrid+'×'+c.corsiGrid+' grid',c.corsiReverse?'repeat it backwards':'repeat in the same order',(+c.corsiSpeed).toFixed(2)+' s per square',c.timed?'':'you may replay it once');
+  return parts.filter(Boolean).join(' · ');
+}
+function renderSummary(){const c=currentCfg();$('summary').innerHTML='<b>'+MODES[S.mode].ico+' '+MODES[S.mode].name+(S.tab==='levels'?' — Level '+S.level:' — Custom')+':</b> '+esc(describe(c));
+  $('timeHint').textContent=S.timed?'Cards hide after a set time, and you answer against the clock.':'No clock: study as long as you like, then answer when ready.'}
+function renderAll(){renderModes();document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===S.tab));
+  $('levelsBox').classList.toggle('hidden',S.tab!=='levels');$('customBox').classList.toggle('hidden',S.tab!=='custom');
+  document.querySelectorAll('#timeSwitch button').forEach(b=>b.classList.toggle('on',(b.dataset.timed==='1')===S.timed));
+  renderLevels();renderCustom();renderSummary();renderStats()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;persist();renderAll()});
+document.querySelectorAll('#timeSwitch button').forEach(b=>b.onclick=()=>{S.timed=b.dataset.timed==='1';persist();renderAll()});
+$('soundOn').checked=S.sound;$('soundOn').onchange=()=>{S.sound=$('soundOn').checked;persist()};
+
+// ---------- sound & speech ----------
+let actx;function beep(freq,dur,type){if(!S.sound)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type=type||'sine';o.frequency.value=freq;g.gain.setValueAtTime(.12,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+dur);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+dur)}catch(e){}}
+const good=()=>beep(880,.12),bad=()=>beep(180,.25,'square'),tick=()=>beep(520,.05);
+function say(t){try{if(!('speechSynthesis' in window))return;const u=new SpeechSynthesisUtterance(t);u.rate=1.1;speechSynthesis.speak(u)}catch(e){}}
+
+// ---------- game plumbing ----------
+let timers=[],running=null;
+function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
+function every(fn,ms){const t=setInterval(fn,ms);timers.push(t);return t}
+function clearTimers(){timers.forEach(t=>{clearTimeout(t);clearInterval(t)});timers=[];try{speechSynthesis.cancel()}catch(e){}document.onkeydown=null}
+function clock(txt){$('hudClock').textContent=txt}
+function bar(frac){$('timebar').classList.toggle('hidden',frac==null);if(frac!=null)$('timefill').style.transform='scaleX('+Math.max(0,Math.min(1,frac))+')'}
+function countdown(sec,onEnd,label){const t0=performance.now();bar(1);const id=every(()=>{const left=sec-(performance.now()-t0)/1000;bar(left/sec);clock((label||'')+Math.max(0,left).toFixed(1)+' s');if(left<=0){clearInterval(id);bar(null);onEnd()}},100);return id}
+function stopwatch(label){const t0=performance.now();const id=every(()=>clock((label||'')+((performance.now()-t0)/1000).toFixed(1)+' s'),100);return ()=>{clearInterval(id);return performance.now()-t0}}
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const rnd=n=>Math.floor(Math.random()*n);
+function symItems(c){return SETS[c.symSet||'shapes'].items.slice(0,Math.max(2,Math.min(c.symVariety||8,SETS[c.symSet||'shapes'].items.length)))}
+function glyph(it){return it.t==='n'?'<span>'+esc(it.v)+'</span>':'<span style="color:'+(it.col||'inherit')+'">'+esc(it.v)+'</span>'}
+
+function start(){
+  clearTimers();const c=currentCfg();running={cfg:c,mode:S.mode,t0:Date.now()};
+  $('playPanel').classList.remove('hidden');$('hudTitle').textContent=MODES[S.mode].ico+' '+MODES[S.mode].name+(c.level?' · Level '+c.level:' · Custom');
+  $('hudInfo').textContent=S.timed?'⏱ timed':'🧘 untimed';clock('—');bar(null);
+  $('playPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  ({numbers:cardGame,symbols:cardGame,mixed:cardGame,chimp:chimpGame,pairs:pairsGame,nback:nbackGame,corsi:corsiGame})[S.mode](c);
+}
+$('startBtn').onclick=start;
+$('quitBtn').onclick=()=>{clearTimers();running=null;$('playPanel').classList.add('hidden');bar(null)};
+
+function finish(acc,detailHtml,extra){
+  clearTimers();bar(null);const c=running.cfg,stars=acc>=100?3:acc>=90?2:acc>=70?1:0;
+  const rec={t:Date.now(),mode:S.mode,level:c.level,timed:c.timed,acc:Math.round(acc),stars,ms:Date.now()-running.t0,items:extra&&extra.items||0};
+  store.history.push(rec);if(store.history.length>500)store.history=store.history.slice(-500);
+  const day=new Date().toISOString().slice(0,10);if(!store.days.includes(day))store.days.push(day);
+  let next='';
+  if(c.level){const k=starKey();store.stars[k]=store.stars[k]||{};store.stars[k][c.level]=Math.max(store.stars[k][c.level]||0,stars);
+    if(stars>=2&&c.level<MAXL){S.level=c.level+1;next='<button class="primary" id="nextBtn">▶ Level '+(c.level+1)+'</button>'}}
+  save();persist();
+  if(stars>=2)good();else bad();
+  $('arena').innerHTML='<div class="center"><div class="stars">'+('★'.repeat(stars)+'☆'.repeat(3-stars))+'</div><div class="bigmsg" id="resultMsg">'+(stars===3?'Perfect!':stars===2?'Level passed!':stars===1?'Nearly — try again':'Keep practising')+' '+Math.round(acc)+'%</div>'+(detailHtml||'')+
+    '<div class="actions" style="justify-content:center;margin-top:14px">'+next+'<button class="secondary" id="againBtn">↻ Try again</button><button class="secondary" id="setupBtn">⚙ Change settings</button></div></div>';
+  if($('nextBtn'))$('nextBtn').onclick=()=>{renderAll();start()};
+  $('againBtn').onclick=()=>{if(c.level)S.level=c.level;renderAll();start()};
+  $('setupBtn').onclick=()=>{renderAll();$('setupPanel').scrollIntoView({behavior:'smooth'})};
+  renderAll();
+}
+
+// ---------- 1. number / symbol cards ----------
+function makeSeq(c){
+  const out=[],syms=symItems(c),mx=Math.pow(10,c.numDigits||1);
+  for(let i=0;i<(c.numCount||0);i++){out.push({t:'n',v:String(rnd(mx)).padStart(c.numDigits||1,'0')})}
+  for(let i=0;i<(c.symCount||0);i++){const s=syms[rnd(syms.length)];out.push({t:'s',v:s[0],col:s[1],name:s[2]})}
+  return shuffle(out);
+}
+function cardGame(c){
+  const seq=makeSeq(c);if(!seq.length){$('arena').innerHTML='<p class="center">Add at least one number or symbol card in Custom.</p>';return}
+  running.seq=seq;const see=c.present!=='hear',hear=c.present!=='see';
+  const speak=it=>it.t==='n'?it.v.split('').join(' '):it.name;
+  if(c.studyMode==='flash'){
+    $('arena').innerHTML='<p class="center muted" id="flashInfo">Card <b id="fi">1</b> of '+seq.length+'</p><div class="cards"><div class="mcard big" id="flashCard"></div></div>'+(c.timed?'':'<div class="actions" style="justify-content:center;margin-top:14px"><button class="primary" id="nextCard">Next card →</button></div>');
+    let i=0;const show=()=>{const it=seq[i];$('fi').textContent=i+1;$('flashCard').innerHTML=see?glyph(it):'🔊';if(hear)say(speak(it));tick()};
+    const step=()=>{i++;if(i>=seq.length){recall(c,seq);return}show()};
+    show();
+    if(c.timed){const ms=Math.max(200,c.studySec*1000);const loop=()=>later(()=>{$('flashCard').innerHTML='';later(()=>{step();if(i<seq.length)loop()},120)},ms);loop();clock('studying')}
+    else{const stop=stopwatch('study ');$('nextCard').onclick=()=>{if(i===seq.length-1){stop();recall(c,seq)}else step()}}
+    return;
+  }
+  $('arena').innerHTML='<p class="center muted">Memorise these '+seq.length+' cards, left to right.</p><div class="cards" id="studyCards">'+seq.map((it,i)=>'<div class="mcard"><span class="ix">'+(i+1)+'</span>'+(see?glyph(it):'?')+'</div>').join('')+'</div>'+
+    (c.timed?'':'<div class="actions" style="justify-content:center;margin-top:16px"><button class="primary" id="readyBtn">I’ve memorised them →</button></div>');
+  if(hear){seq.forEach((it,i)=>later(()=>say(speak(it)),i*900))}
+  if(c.timed){const total=Math.max(1,c.studySec*seq.length+(hear?seq.length*0.4:0));countdown(total,()=>recall(c,seq),'study ')}
+  else{const stop=stopwatch('study ');$('readyBtn').onclick=()=>{stop();try{speechSynthesis.cancel()}catch(e){}recall(c,seq)}}
+}
+function recall(c,seq){
+  clearTimers();bar(null);const ans=seq.map(()=>null);let cur=0,partial='';const digits=c.numDigits||1;
+  const hasN=seq.some(x=>x.t==='n'),syms=seq.some(x=>x.t==='s')?symItems(c):[];
+  $('arena').innerHTML='<p class="center muted">Put the cards back in order. Tap a slot to change it; type digits on your keyboard too.</p><div class="cards" id="slots"></div><div class="palette" id="palette"></div><div class="actions" style="justify-content:center"><button class="primary" id="checkBtn">✓ Check</button></div>';
+  const pal=[];if(hasN)for(let d=0;d<10;d++)pal.push('<button data-n="'+d+'" id="key-'+d+'">'+d+'</button>');
+  syms.forEach((s,i)=>pal.push('<button data-s="'+i+'" id="sym-'+i+'" title="'+esc(s[2])+'" style="color:'+(s[1]||'inherit')+'">'+esc(s[0])+'</button>'));
+  pal.push('<button class="fn" data-f="back" id="keyBack">⌫ Back</button><button class="fn" data-f="clear">Clear</button>');
+  $('palette').innerHTML=pal.join('');
+  const draw=()=>{$('slots').innerHTML=ans.map((a,i)=>'<div class="mcard slot'+(i===cur?' active':'')+'" data-i="'+i+'"><span class="ix">'+(i+1)+'</span>'+(i===cur&&partial?'<span>'+partial+'</span>':a?glyph(a):'')+'</div>').join('');
+    $('slots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{cur=+s.dataset.i;partial='';draw()})};
+  const put=it=>{ans[cur]=it;partial='';cur=Math.min(ans.length-1,cur+1);tick();draw()};
+  const digit=d=>{partial+=d;if(partial.length>=digits)put({t:'n',v:partial});else draw()};
+  $('palette').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.n!=null)digit(b.dataset.n);else if(b.dataset.s!=null){const s=syms[+b.dataset.s];put({t:'s',v:s[0],col:s[1],name:s[2]})}
+    else if(b.dataset.f==='back'){if(partial)partial=partial.slice(0,-1);else{if(!ans[cur]&&cur>0)cur--;ans[cur]=null}draw()}else{ans.fill(null);cur=0;partial='';draw()}});
+  document.onkeydown=e=>{if(/^\d$/.test(e.key)&&hasN){digit(e.key);e.preventDefault()}else if(e.key==='Backspace'){$('keyBack').click();e.preventDefault()}else if(e.key==='ArrowLeft'){cur=Math.max(0,cur-1);partial='';draw()}else if(e.key==='ArrowRight'){cur=Math.min(ans.length-1,cur+1);partial='';draw()}else if(e.key==='Enter'){check()}};
+  draw();
+  const stop=c.timed&&c.recallSec?null:stopwatch('answer ');
+  if(c.timed&&c.recallSec)countdown(c.recallSec,()=>check(),'answer ');
+  function check(){if(stop)stop();let ok=0;const res=seq.map((it,i)=>{const a=ans[i],r=a&&a.t===it.t&&a.v===it.v;if(r)ok++;return '<div class="mcard '+(r?'ok':'bad')+'"><span class="ix">'+(i+1)+'</span>'+glyph(it)+(r?'':'<span class="was">'+(a?esc(a.v):'–')+'</span>')+'</div>'}).join('');
+    finish(ok/seq.length*100,'<p>'+ok+' of '+seq.length+' cards in the right place. Red cards show the right card; the small mark is what you chose.</p><div class="cards">'+res+'</div>',{items:seq.length})}
+  $('checkBtn').onclick=check;
+}
+
+// ---------- 2. chimp test ----------
+function chimpGame(c){
+  const cols=c.chimpCount>24?8:c.chimpCount>12?7:5,rows=Math.ceil(Math.max(c.chimpCount*1.6,cols*3)/cols),cells=shuffle(Array.from({length:cols*rows},(_,i)=>i)).slice(0,c.chimpCount);
+  const pos={};cells.forEach((cell,i)=>pos[cell]=i+1);
+  $('arena').innerHTML='<p class="center muted">'+(c.timed?'Remember where each number is. They hide in a moment.':'Remember the numbers, then tap 1 — the rest hide.')+' Tap them from 1 upwards.</p><div class="chimp" id="chimp" style="grid-template-columns:repeat('+cols+',1fr)">'+Array.from({length:cols*rows},(_,i)=>pos[i]?'<button data-v="'+pos[i]+'" id="chimp-'+pos[i]+'">'+pos[i]+'</button>':'<div></div>').join('')+'</div>';
+  let next=1,hidden=false,errors=0;const hide=()=>{hidden=true;$('chimp').querySelectorAll('button').forEach(b=>b.classList.add('cover'))};
+  if(c.timed)countdown(c.chimpHideSec,hide,'hide in ');
+  const stop=stopwatch();
+  $('chimp').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;
+    if(v===next){if(!hidden&&!c.timed&&v===1)hide();if(!hidden&&c.timed)hide();b.classList.add('gone');tick();next++;if(next>c.chimpCount){const ms=stop();finish(100,'<p>All '+c.chimpCount+' in '+(ms/1000).toFixed(1)+' s.</p>',{items:c.chimpCount})}}
+    else{errors++;b.classList.add('wrong');b.classList.remove('cover');stop();$('chimp').querySelectorAll('button').forEach(x=>x.classList.remove('cover'));const acc=(next-1)/c.chimpCount*100;later(()=>finish(acc,'<p>You got '+(next-1)+' of '+c.chimpCount+' before tapping '+v+' instead of '+next+'.</p>',{items:c.chimpCount}),900)}});
+}
+
+// ---------- 3. pairs ----------
+function pairsGame(c){
+  const n=c.pairsCount,faces=[],syms=SETS[c.symSet||'shapes'].items;
+  const used=new Set();while(faces.length<n){let f;const kind=c.pairsKind==='mixed'?(faces.length%2?'numbers':'symbols'):c.pairsKind;
+    if(kind==='symbols'&&faces.filter(x=>x.t==='s').length<syms.length){const s=syms[rnd(syms.length)];f={t:'s',v:s[0],col:s[1]}}else f={t:'n',v:String(rnd(n>9||c.pairsKind!=='numbers'?100:10))};
+    if(used.has(f.v))continue;used.add(f.v);faces.push(f)}
+  const deck=shuffle(faces.concat(faces).map((f,i)=>Object.assign({id:i},f)));
+  const cols=deck.length<=8?4:deck.length<=20?5:6;
+  $('arena').innerHTML='<p class="center muted">Find all '+n+' pairs. <span id="pairInfo">Moves: 0</span></p><div class="pairs" id="pairs" style="grid-template-columns:repeat('+cols+',1fr)">'+deck.map((d,i)=>'<button class="pc" data-i="'+i+'" id="pc-'+i+'">'+glyph(d)+'</button>').join('')+'</div>';
+  const btns=[...$('pairs').querySelectorAll('.pc')];let open=[],moves=0,found=0,lock=true,stop;
+  const go=()=>{btns.forEach(b=>b.classList.remove('up'));lock=false;stop=stopwatch();if(c.timed&&c.pairsLimit)countdown(c.pairsLimit,()=>end(false),'left ')};
+  if(c.previewSec>0){btns.forEach(b=>b.classList.add('up'));clock('peek');later(go,c.previewSec*1000)}else go();
+  const end=done=>{const ms=stop?stop():0;const par=Math.ceil(n*1.6),acc=done?Math.min(100,par/moves*100):found/n*60;
+    finish(Math.min(100,acc),'<p>'+(done?'All pairs found in '+moves+' moves and '+(ms/1000).toFixed(1)+' s. A perfect score needs about '+par+' moves or fewer.':'Time is up: '+found+' of '+n+' pairs found.')+'</p>',{items:n})};
+  btns.forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('up')||b.classList.contains('matched'))return;b.classList.add('up');tick();open.push(b);
+    if(open.length===2){moves++;$('pairInfo').textContent='Moves: '+moves;const [a,d]=open.map(x=>deck[+x.dataset.i]);
+      if(a.v===d.v){open.forEach(x=>x.classList.add('matched'));open=[];found++;good();if(found===n)later(()=>end(true),400)}
+      else{lock=true;later(()=>{open.forEach(x=>x.classList.remove('up'));open=[];lock=false},800)}}});
+}
+
+// ---------- 4. n-back ----------
+function nbackGame(c){
+  const N=c.nbackN,T=c.nbackTrials+N,dual=c.nbackDual,letters=['1','2','3','4','5','6','7','8'];
+  const seq=[];for(let i=0;i<T;i++){let p=rnd(9),l=letters[rnd(8)];
+    if(i>=N){if(Math.random()<0.3)l=seq[i-N].l;if(dual&&Math.random()<0.3)p=seq[i-N].p}seq.push({p,l})}
+  $('arena').innerHTML='<p class="center muted">Press <b>Card match</b> (key L) when the number is the same as '+N+' step'+(N>1?'s':'')+' back'+(dual?', and <b>Position match</b> (key A) when the square is in the same place as '+N+' back':'')+'.'+(c.timed&&c.nbackInterval?'':' Press <b>Next</b> (Space) to move on.')+'</p><div class="nb" id="nb">'+Array.from({length:9},(_,i)=>'<div id="nb-'+i+'"></div>').join('')+'</div>'+
+    '<div class="nbbtns">'+(dual?'<button id="posBtn">Position match (A)</button>':'')+'<button id="cardBtn">Card match (L)</button>'+(c.timed&&c.nbackInterval?'':'<button id="nextNb" style="background:var(--amber);border-color:var(--amber)">Next (Space)</button>')+'</div>';
+  let i=-1,resp={p:false,l:false};const score={hit:0,miss:0,fa:0,cr:0};
+  const judge=()=>{if(i<N)return;const s=seq[i],tl=s.l===seq[i-N].l,tp=s.p===seq[i-N].p;
+    [['l',tl]].concat(dual?[['p',tp]]:[]).forEach(([k,t])=>{const r=resp[k];if(t&&r)score.hit++;else if(t)score.miss++;else if(r)score.fa++;else score.cr++})};
+  const show=()=>{judge();i++;resp={p:false,l:false};['posBtn','cardBtn'].forEach(id=>$(id)&&($(id).className=''));
+    document.querySelectorAll('#nb div').forEach(d=>{d.className='';d.textContent=''});
+    if(i>=T){const tot=score.hit+score.miss+score.fa+score.cr,acc=tot?(score.hit+score.cr)/tot*100:0;
+      finish(acc,'<p>Matches caught: '+score.hit+' · missed: '+score.miss+' · false alarms: '+score.fa+' · correct rejections: '+score.cr+'.</p>',{items:T});return}
+    const s=seq[i],cell=$('nb-'+s.p);cell.className='on';cell.textContent=s.l;tick();clock('round '+(i+1)+'/'+T);
+    if(c.timed&&c.nbackInterval)later(()=>{cell.className='';cell.textContent=''},c.nbackInterval*1000*0.6)};
+  const press=k=>{if(i<0||i>=T||resp[k])return;resp[k]=true;const t=i>=N&&(k==='l'?seq[i].l===seq[i-N].l:seq[i].p===seq[i-N].p);const b=$(k==='l'?'cardBtn':'posBtn');if(b)b.className=t?'hit':'miss'};
+  $('cardBtn').onclick=()=>press('l');if(dual)$('posBtn').onclick=()=>press('p');
+  document.onkeydown=e=>{const k=e.key.toLowerCase();if(k==='l'){press('l');e.preventDefault()}else if(k==='a'&&dual){press('p');e.preventDefault()}else if(k===' '&&$('nextNb')){show();e.preventDefault()}};
+  if(c.timed&&c.nbackInterval){later(()=>{show();every(show,c.nbackInterval*1000)},800)}else{$('nextNb').onclick=show;show()}
+}
+
+// ---------- 5. Corsi sequence ----------
+function corsiGame(c){
+  const g=+c.corsiGrid,len=c.corsiLen,seq=[];for(let i=0;i<len;i++){let x;do{x=rnd(g*g)}while(x===seq[i-1]);seq.push(x)}
+  $('arena').innerHTML='<p class="center muted" id="corsiMsg">Watch the squares light up…</p><div class="corsi" id="corsi" style="grid-template-columns:repeat('+g+',1fr)">'+Array.from({length:g*g},(_,i)=>'<button data-i="'+i+'" id="cb-'+i+'"></button>').join('')+'</div><div class="actions" style="justify-content:center;margin-top:12px"><button class="secondary hidden" id="replayBtn">↻ Show again (once)</button></div>';
+  const bs=[...$('corsi').querySelectorAll('button')];let accept=false,pos=0,replays=0;const target=c.corsiReverse?seq.slice().reverse():seq;
+  const play=()=>{accept=false;$('corsiMsg').textContent='Watch…';const ms=c.corsiSpeed*1000;
+    seq.forEach((x,k)=>{later(()=>{bs[x].classList.add('lit');tick()},k*(ms+250)+400);later(()=>bs[x].classList.remove('lit'),k*(ms+250)+400+ms)});
+    later(()=>{accept=true;$('corsiMsg').textContent='Now tap the squares '+(c.corsiReverse?'in REVERSE order':'in the same order')+'.';if(!c.timed&&!replays)$('replayBtn').classList.remove('hidden')},len*(ms+250)+400)};
+  $('replayBtn').onclick=()=>{replays++;$('replayBtn').classList.add('hidden');pos=0;play()};
+  bs.forEach(b=>b.onclick=()=>{if(!accept)return;const i=+b.dataset.i;b.classList.add('tap');later(()=>b.classList.remove('tap'),200);
+    if(i===target[pos]){pos++;tick();if(pos===len)finish(replays?95:100,'<p>You repeated all '+len+' squares'+(replays?' (with one replay)':'')+'.</p>',{items:len})}
+    else{accept=false;bs[target[pos]].classList.add('lit');finish(pos/len*100,'<p>'+pos+' of '+len+' correct. The lit square was the next one.</p>',{items:len})}});
+  play();
+}
+
+// ---------- stats ----------
+function renderStats(){
+  const h=store.history,best={};h.forEach(r=>{if(r.stars>=2&&r.level){const k=r.mode;best[k]=Math.max(best[k]||0,r.level)}});
+  const span=Math.max(0,...h.filter(r=>(r.mode==='numbers')&&r.acc===100).map(r=>r.items||0));
+  const days=store.days.slice().sort();let streak=0;{let d=new Date();for(;;){const s=d.toISOString().slice(0,10);if(days.includes(s)){streak++;d.setDate(d.getDate()-1)}else break}}
+  const avg=h.length?Math.round(h.slice(-20).reduce((a,r)=>a+r.acc,0)/Math.min(20,h.length)):0;
+  $('stats').innerHTML='<div class="stat"><b>'+h.length+'</b><span>games played</span></div><div class="stat"><b>'+streak+' 🔥</b><span>day streak</span></div><div class="stat"><b>'+avg+'%</b><span>average (last 20)</span></div><div class="stat"><b>'+(span||'—')+'</b><span>longest perfect number row</span></div>'+
+    Object.keys(MODES).map(k=>'<div class="stat"><b>'+(best[k]?'Lv '+best[k]:'—')+'</b><span>'+MODES[k].ico+' best '+MODES[k].name+'</span></div>').join('');
+  const last=h.slice(-30);
+  $('chart').innerHTML=last.length?'<svg viewBox="0 0 600 110" width="100%" height="110" role="img" aria-label="Accuracy of the last games"><line x1="0" y1="100" x2="600" y2="100" stroke="#bbb"/><line x1="0" y1="10" x2="600" y2="10" stroke="#e5e2d8" stroke-dasharray="4 4"/>'+
+    last.map((r,i)=>{const w=600/30,hgt=r.acc*0.9;return '<rect x="'+(i*w+2)+'" y="'+(100-hgt)+'" width="'+(w-4)+'" height="'+hgt+'" rx="2" fill="'+(r.stars>=2?'#4E9E73':r.stars?'#e2a63b':'#D8604A')+'"><title>'+MODES[r.mode].name+(r.level?' L'+r.level:' custom')+': '+r.acc+'%</title></rect>'}).join('')+'</svg>':'<p class="muted">Play a game to see your progress here.</p>';
+}
+$('exportBtn').onclick=()=>{const rows=[['date','game','level','timed','accuracy','stars','seconds','items']].concat(store.history.map(r=>[new Date(r.t).toISOString(),MODES[r.mode].name,r.level||'custom',r.timed?'yes':'no',r.acc,r.stars,Math.round(r.ms/1000),r.items]));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));a.download='memory-forge-results.csv';a.click()};
+$('resetBtn').onclick=()=>{if(!confirm('Delete all your Memory Forge levels, stars and history?'))return;store.stars={};store.history=[];store.days=[];save();S.level=1;persist();renderAll()};
+
+renderAll();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
