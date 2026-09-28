@@ -175,7 +175,8 @@
       bass: spec.noBass ? 'none' : g.bass, chords: chordVoice, lead: leadVoice, pad: g.pad || !!mood.pad,
       reverb: clamp(g.reverb + (mood.reverb || 0), 0, 0.8), swing: g.swing, lofi: !!g.lofi, dark: !!mood.dark,
       sevenths: !!(g.sevenths || mood.sevenths), bouncy: !!mood.bouncy,
-      prog: pick(r, progPool), bridgeProg: pick(r, progPool), seed: spec.seed || 1
+      prog: pick(r, progPool), bridgeProg: pick(r, progPool), seed: spec.seed || 1,
+      cues: Array.isArray(spec.cues) ? spec.cues.filter(c => c > 1 && c < seconds - 1).sort((a, b) => a - b) : []
     };
   }
   function describe(spec) {
@@ -274,6 +275,17 @@
     if (x.structure === 'intro' || x.structure === 'outro') { for (let i = 0; i < bars; i++) S.push({ kind: 'A', e: x.structure === 'intro' ? clamp(x.energy * (0.55 + 0.45 * (i + 1) / bars), 0.3, 1) : clamp(x.energy * (1 - 0.5 * i / bars), 0.3, 1), prog: 'main', last: i === bars - 1 }); return { bars, barSec, S }; }
     if (x.structure === 'build') { for (let i = 0; i < bars; i++) S.push({ kind: i < bars / 2 ? 'A' : 'B', e: clamp(0.2 + 0.85 * i / Math.max(1, bars - 1), 0.2, 1), prog: 'main', last: i === bars - 1 }); return { bars, barSec, S }; }
     if (x.structure === 'steady' || bars < 6) { for (let i = 0; i < bars; i++) S.push({ kind: i % 8 < 4 ? 'A' : 'B', e: bars < 6 && i === 0 ? x.energy * 0.7 : x.energy * 0.85, prog: 'main', last: i === bars - 1 }); return { bars, barSec, S }; }
+    // Following a video: a new section (with a crash) starts on the bar nearest each scene change.
+    if (x.cues && x.cues.length && x.structure !== 'loop') {
+      const starts = [0];
+      x.cues.forEach(c => { const b = Math.round(c / barSec); if (b > starts[starts.length - 1] && b < bars - 1) starts.push(b); });
+      const kinds = ['verse', 'chorus', 'bridge', 'chorus', 'verse', 'chorus'];
+      for (let k = 0; k < starts.length; k++) {
+        const end = k + 1 < starts.length ? starts[k + 1] : bars, kind = k === 0 && end <= 2 ? 'intro' : kinds[(k - (starts[1] <= 2 ? 1 : 0) + kinds.length) % kinds.length];
+        for (let i = starts[k]; i < end; i++) S.push({ kind, e: kind === 'intro' ? x.energy * 0.5 : kind === 'chorus' ? Math.min(1, x.energy + 0.2) : kind === 'bridge' ? x.energy * 0.6 : x.energy * 0.8, prog: kind === 'bridge' ? 'bridge' : 'main', cue: i === starts[k] && k > 0, last: i === bars - 1 });
+      }
+      return { bars, barSec, S };
+    }
     // A song: intro, verse, chorus (and a bridge when there is room), ending.
     const intro = bars >= 16 && barSec < 3 ? 2 : 1, outro = bars >= 12 ? 2 : 1; let body = bars - intro - outro;
     for (let i = 0; i < intro; i++) S.push({ kind: 'intro', e: x.energy * 0.45, prog: 'main' });
@@ -385,8 +397,10 @@
         }
         // A crash or big hit at the start of each chorus and on the final chord.
         const prev = P.S[bar - 1];
-        if ((sec.kind === 'chorus' && (!prev || prev.kind !== 'chorus')) || final) DRUMS.crash(ctx, G.drums, t0, final ? 0.55 : 0.9, nb);
+        if ((sec.kind === 'chorus' && (!prev || prev.kind !== 'chorus')) || sec.cue || final) DRUMS.crash(ctx, G.drums, t0, final ? 0.55 : 0.9, nb);
         if (final && x.drums === 'epic') DRUMS.boom(ctx, G.drums, t0, 1, nb);
+        // A crash exactly on each scene change of the video (the section itself starts on the nearest bar).
+        (x.cues || []).forEach(c => { if (c >= t0 && c < t0 + P.barSec) DRUMS.crash(ctx, G.drums, c, 0.85, nb); });
         // Small fill into a new section.
         const next = P.S[bar + 1];
         if (next && next.kind !== sec.kind && !loop && x.drums !== 'epic' && x.drums !== 'soft') [12, 13, 14, 15].forEach(s => DRUMS.snare(ctx, G.drums, t0 + s * step, 0.35 + 0.1 * (s - 12), nb));
@@ -527,5 +541,5 @@
     else if (name === 'b808') BASS.b808(ctx, d, 48, t, 0.9, 1); else DRUMS[name](ctx, d, t, 1, nb);
     const buf = await ctx.startRendering(); scale(buf, normGain(buf, 0.8)); return buf;
   }
-  window.MigaMusic = { parse, resolve, describe, render, sfx, hit, HITS, finish, toWav, toMp3, peakOf, limit, loudGain, GENRES, MOODS, INSTRUMENTS, SFX: Object.fromEntries(Object.entries(SFX).map(([k, v]) => [k, v[0]])), fmtTime };
+  window.MigaMusic = { parse, resolve, plan: spec => plan(resolve(spec)), describe, render, sfx, hit, HITS, finish, toWav, toMp3, peakOf, limit, loudGain, GENRES, MOODS, INSTRUMENTS, SFX: Object.fromEntries(Object.entries(SFX).map(([k, v]) => [k, v[0]])), fmtTime };
 })(window);

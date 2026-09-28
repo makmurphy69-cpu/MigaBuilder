@@ -98,6 +98,11 @@ main.g3-main{max-width:1400px;display:grid;grid-template-columns:360px minmax(0,
       <button class="secondary" id="shareBtn">🔗 Copy share link</button>
       <button class="secondary" id="dlBtn">⬇ Download game (HTML)</button>
       <button class="secondary" id="shotBtn">📸 Screenshot</button>
+      <style>.music-btn{cursor:pointer;display:inline-flex;gap:4px;align-items:center}.music-make{font-size:12.5px;align-self:center}</style>
+      <label class="secondary music-btn" title="Background music that loops while you play; it is also saved in the downloaded game">🎵 <span id="musicName">Game music</span><input type="file" id="musicInput" accept="audio/*" hidden></label>
+      <input type="range" id="musicVol" min="0" max="1" step="0.05" value="0.5" aria-label="Music volume" title="Music volume" hidden>
+      <button class="secondary" id="musicOff" hidden>✕</button>
+      <a href="music-forge.html" class="music-make" title="Make a free seamless game loop in Music Forge, then Use it in → 3D Game Forge">Make a game loop ↗</a>
       <button class="secondary" id="saveBtn">💾 Save</button>
       <label class="secondary" style="cursor:pointer">📂 Open<input type="file" id="openFile" accept=".json" hidden></label>
     </div>
@@ -365,7 +370,7 @@ function start(container,spec,hooks){
   function hudText(){var ico={coin:'🪙',gem:'💎',star:'⭐',fruit:'🍎'}[spec.item];var l='Score '+score;
     if(T==='runner')l+=' · '+Math.floor(R.dist)+(spec.goal==='distance'&&spec.distance?' / '+spec.distance:'')+' m';else if(T==='racer')l+=' · Lap '+Math.min(K.lap+1,spec.laps)+'/'+spec.laps+' · '+(['1st','2nd','3rd','4th','5th','6th','7th'][(K.place||1)-1]);else if(totalItems)l+=' · '+ico+' '+got+'/'+totalItems;
     L.textContent=l;var rt='❤️'.repeat(Math.max(0,lives));if(spec.timeLimit)rt+='  ⏱ '+Math.max(0,Math.ceil(spec.timeLimit-time))+'s';else rt+='  ⏱ '+Math.floor(time)+'s';Rr.textContent=rt}
-  function begin(){if(state==='play')return;if(state!=='ready'){hooks.restart?hooks.restart():null;return}state='play';Mm.style.display='none';renderer.domElement.focus();sfx.jump()}
+  function begin(){if(state==='play')return;if(state!=='ready'){hooks.restart?hooks.restart():null;return}state='play';Mm.style.display='none';renderer.domElement.focus();sfx.jump();hooks.onPlay&&hooks.onPlay()}
   function win(why){if(state!=='play')return;state='won';var bonus=spec.timeLimit?Math.max(0,Math.round((spec.timeLimit-time)*2)):Math.max(0,Math.round(300-time*2));score+=bonus;sfx.win();overlay('🏆 '+why,'Score '+score+(bonus?' (time bonus '+bonus+')':'')+' · '+Math.floor(time)+' s','↻ Play again');hooks.onEnd&&hooks.onEnd({won:true,score,time})}
   function lose(why,soft){if(state!=='play')return;state='lost';overlay((soft?'🏁 ':'💥 ')+why,'Score '+score+' · '+Math.floor(time)+' s','↻ Try again');hooks.onEnd&&hooks.onEnd({won:false,score,time})}
   var last=performance.now();
@@ -414,7 +419,15 @@ function syncUI(){Object.entries(FIELDS).forEach(([id,k])=>{$(id).value=spec[k]}
   [...$('f_goal').options].forEach(o=>o.hidden=(t==='runner'?!['distance','survive'].includes(o.value):t==='racer'?o.value!=='laps':['distance','laps'].includes(o.value)));
   $('editorBox').hidden=!grid;$('tpls').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.t===t));if(grid)drawGrid();save()}
 function setSpec(s){spec=G3.normalize(s);syncUI();play()}
-function play(){if(game)game.stop();game=G3.start($('stage'),spec,{restart:()=>play()});window.__g3=game}
+// Background music: starts when the player presses Play in the game, stops when the game ends.
+const bgm=new Audio();bgm.loop=true;let bgmUrl='',bgmData='',bgmName='';
+function play(){if(game)game.stop();bgm.pause();game=G3.start($('stage'),spec,{restart:()=>play(),onPlay:()=>{if(bgmUrl){bgm.currentTime=0;bgm.volume=+$('musicVol').value;bgm.play().catch(()=>{})}},onEnd:()=>bgm.pause()});window.__g3=game}
+$('musicInput').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f)return;if(bgmUrl)URL.revokeObjectURL(bgmUrl);bgmUrl=URL.createObjectURL(f);bgm.src=bgmUrl;bgmName=f.name;
+  $('musicName').textContent=f.name.length>18?f.name.slice(0,16)+'…':f.name;$('musicVol').hidden=false;$('musicOff').hidden=false;
+  const r=new FileReader();r.onload=()=>{bgmData=r.result};r.readAsDataURL(f);
+  setStatus('🎵 Music added. It plays when you press Play in the game'+(f.size>8e6?' — it is a big file, so the downloaded game will be big too (an MP3 from Music Forge is much smaller).':', and it is saved in the downloaded game.'))};
+$('musicVol').oninput=()=>{bgm.volume=+$('musicVol').value};
+$('musicOff').onclick=()=>{bgm.pause();bgm.removeAttribute('src');bgm.load();if(bgmUrl)URL.revokeObjectURL(bgmUrl);bgmUrl='';bgmData='';$('musicName').textContent='Game music';$('musicVol').hidden=true;$('musicOff').hidden=true};
 $('playBtn').onclick=()=>play();
 
 // ---------- level editor
@@ -460,11 +473,11 @@ const b64u={enc:b=>{let s='';new Uint8Array(b).forEach(x=>s+=String.fromCharCode
 async function pack(o){const raw=new TextEncoder().encode(JSON.stringify(o));if(!('CompressionStream' in window))return 'j'+b64u.enc(raw);return 'z'+b64u.enc(await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer())}
 async function unpack(s){const b=b64u.dec(s.slice(1));if(s[0]==='z')return JSON.parse(new TextDecoder().decode(await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer()));return JSON.parse(new TextDecoder().decode(b))}
 const shareSpec=()=>{const s=Object.assign({},spec);if(!s.edited)delete s.level;return s};
-$('shareBtn').onclick=async()=>{const url=location.origin+location.pathname+'#g='+await pack(shareSpec());try{await navigator.clipboard.writeText(url);$('shareOut').textContent='✅ Link copied. Anyone who opens it can play “'+spec.title+'” and remix it.'}catch(e){$('shareOut').textContent=url}};
+$('shareBtn').onclick=async()=>{const url=location.origin+location.pathname+'#g='+await pack(shareSpec());try{await navigator.clipboard.writeText(url);$('shareOut').textContent='✅ Link copied. Anyone who opens it can play “'+spec.title+'” and remix it.'+(bgmUrl?' (Music is too big for a link: download the game to include it.)':'')}catch(e){$('shareOut').textContent=url}};
 function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
 const slug=()=>(spec.title||'game').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'game';
 $('dlBtn').onclick=()=>{const eng=$('engine').textContent,t=spec.title.replace(/[<&]/g,'');
-  const html='<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+t+'</title>\n<style>html,body{margin:0;height:100%;background:#081826;overflow:hidden}#g{position:fixed;inset:0}</style></head><body><div id="g"></div>\n<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>\n<script>'+eng.replace(/<\/script/gi,'<\\/script')+'<\/script>\n<script>(function(){var spec='+JSON.stringify(spec).replace(/</g,'\\u003c')+';function go(){if(window.__g)window.__g.stop();window.__g=MigaGame3D.start(document.getElementById("g"),spec,{restart:go})}go()})();<\/script>\n<!-- Made with 3D Game Forge — https://migabuilder.com/3d-game-forge.html -->\n</body></html>';
+  const html='<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+t+'</title>\n<style>html,body{margin:0;height:100%;background:#081826;overflow:hidden}#g{position:fixed;inset:0}</style></head><body><div id="g"></div>\n'+(bgmData?'<audio id="bgm" loop preload="auto" src="'+bgmData+'"></audio>\n':'')+'<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>\n<script>'+eng.replace(/<\/script/gi,'<\\/script')+'<\/script>\n<script>(function(){var spec='+JSON.stringify(spec).replace(/</g,'\\u003c')+';'+(bgmData?'var bgm=document.getElementById("bgm");bgm.volume='+(+$('musicVol').value)+';':'var bgm=null;')+'function go(){if(window.__g)window.__g.stop();if(bgm)bgm.pause();window.__g=MigaGame3D.start(document.getElementById("g"),spec,{restart:go,onPlay:function(){if(bgm){bgm.currentTime=0;bgm.play().catch(function(){})}},onEnd:function(){if(bgm)bgm.pause()}})}go()})();<\/script>\n<!-- Made with 3D Game Forge — https://migabuilder.com/3d-game-forge.html -->\n</body></html>';
   download(slug()+'.html',html,'text/html')};
 $('shotBtn').onclick=()=>{if(!game||!game.canvas)return;game.render();game.canvas.toBlob(b=>download(slug()+'.png',b))};
 $('saveBtn').onclick=()=>download(slug()+'.game.json',JSON.stringify(Object.assign({app:'MigaBuilder 3D Game Forge'},spec),null,1),'application/json');

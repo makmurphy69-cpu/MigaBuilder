@@ -30,6 +30,9 @@ main{max-width:1280px;display:grid;grid-template-columns:minmax(280px,380px) 1fr
 .controls button{padding:8px 12px;border-radius:3px;border:1px solid var(--line);background:#0e2a47;color:var(--paper);cursor:pointer;font-weight:600}
 .controls button:disabled{opacity:.45;cursor:default}
 .controls label{display:flex;gap:6px;align-items:center;font-size:13px;color:rgba(237,234,224,.8)}
+.controls .music-btn{cursor:pointer;padding:7px 10px;border:1px solid var(--line);border-radius:3px;background:#0e2a47;font-weight:600;color:var(--paper)}
+.controls .music-make{font-size:12.5px;color:var(--cyan,#6fd1e0)}
+.controls input[type=range]{width:90px}
 .progress{flex:1;min-width:120px;height:6px;background:rgba(111,209,224,.2);border-radius:3px;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--amber)}
 .cast{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0}
@@ -73,6 +76,10 @@ main{max-width:1280px;display:grid;grid-template-columns:minmax(280px,380px) 1fr
       <button id="restartBtn">↻ Restart</button>
       <div class="progress" aria-hidden="true"><i id="bar"></i></div>
       <label><input type="checkbox" id="voices"> Voices</label>
+      <label class="music-btn" title="Add background music (it plays with the cartoon and goes into the downloaded video)">🎵 <span id="musicName">Music</span><input type="file" id="musicInput" accept="audio/*" hidden></label>
+      <input type="range" id="musicVol" min="0" max="1" step="0.05" value="0.6" aria-label="Music volume" title="Music volume" hidden>
+      <button id="musicOff" title="Remove the music" hidden>✕</button>
+      <a href="music-forge.html" class="music-make" title="Make free music for your cartoon in Music Forge, then use Use it in → 3D Cartoon">Make music ↗</a>
       <button id="recBtn" title="Plays the cartoon from the start and saves it as a video file">⬇ Download video</button>
     </div>
   </section>
@@ -411,6 +418,7 @@ function reset() {
   camPos.set(0, 3.2, 12); camLookGoal.set(0, 1.3, 0); camera.position.copy(camPos); camLook.copy(camLookGoal);
   $('playBtn').disabled = true; $('playBtn').textContent = '⏸ Pause';
   window.speechSynthesis && speechSynthesis.cancel();
+  bgm.pause(); if (bgmUrl) bgm.currentTime = 0;
 }
 function play() {
   $('titleCard').classList.add('hidden');
@@ -418,13 +426,37 @@ function play() {
   t0 = performance.now() / 1000 - pausedAt; playing = true;
   $('playBtn').disabled = false; $('playBtn').textContent = '⏸ Pause';
   if (window.speechSynthesis && pausedAt) speechSynthesis.resume();
+  bgmPlay();
 }
 function pause() {
   playing = false; pausedAt = performance.now() / 1000 - t0; $('playBtn').textContent = '▶ Play';
   window.speechSynthesis && speechSynthesis.pause();
+  bgm.pause();
 }
+// Background music: plays with the cartoon and is mixed into the downloaded video.
+const bgm = new Audio(); bgm.loop = true; let bgmUrl = '', bgmCtx = null, bgmGain = null, bgmOut = null;
+function bgmRoute() {
+  if (bgmCtx) return;
+  try {
+    bgmCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = bgmCtx.createMediaElementSource(bgm); bgmGain = bgmCtx.createGain(); bgmGain.gain.value = +$('musicVol').value;
+    bgmOut = bgmCtx.createMediaStreamDestination(); src.connect(bgmGain); bgmGain.connect(bgmCtx.destination); bgmGain.connect(bgmOut);
+  } catch (e) { bgmCtx = null; }
+}
+function bgmPlay() { if (!bgmUrl) return; bgmRoute(); if (bgmCtx && bgmCtx.state === 'suspended') bgmCtx.resume(); bgm.play().catch(() => {}); }
+$('musicInput').addEventListener('change', e => {
+  const f = e.target.files[0]; if (!f) return;
+  if (bgmUrl) URL.revokeObjectURL(bgmUrl); bgmUrl = URL.createObjectURL(f); bgm.src = bgmUrl;
+  $('musicName').textContent = f.name.length > 18 ? f.name.slice(0, 16) + '…' : f.name; $('musicVol').hidden = false; $('musicOff').hidden = false;
+  status('Music added. It plays with the cartoon and goes into the downloaded video.');
+  if (playing) { bgm.currentTime = 0; bgmPlay(); }
+  e.target.value = '';
+});
+$('musicVol').addEventListener('input', () => { if (bgmGain) bgmGain.gain.value = +$('musicVol').value; else bgm.volume = +$('musicVol').value; });
+$('musicOff').onclick = () => { bgm.pause(); bgm.removeAttribute('src'); bgm.load(); if (bgmUrl) URL.revokeObjectURL(bgmUrl); bgmUrl = ''; $('musicName').textContent = 'Music'; $('musicVol').hidden = true; $('musicOff').hidden = true; };
 function finish() {
   playing = false; finished = true; $('caption').innerHTML = '';
+  bgm.pause();
   $('titleSub').textContent = 'The end! Watch again, or write a new story.';
   $('startBtn').textContent = '↻ WATCH AGAIN'; $('titleCard').classList.remove('hidden');
   $('playBtn').disabled = true;
@@ -559,9 +591,12 @@ async function make() {
 
 function download() {
   if (!rec.captureStream || !window.MediaRecorder) { status('This browser cannot save videos. Try Chrome, Edge or Firefox.', true); return; }
-  const types = ['video/mp4;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm'];
+  // With music the file needs an audio codec too.
+  const types = bgmUrl ? ['video/mp4;codecs=avc1,mp4a.40.2', 'video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'] : ['video/mp4;codecs=avc1', 'video/webm;codecs=vp9', 'video/webm'];
   const type = types.find(t => MediaRecorder.isTypeSupported(t)) || '';
-  recChunks = []; recorder = new MediaRecorder(rec.captureStream(30), type ? { mimeType: type, videoBitsPerSecond: 5e6 } : undefined);
+  const recStream = rec.captureStream(30);
+  if (bgmUrl) { bgmRoute(); if (bgmOut) bgmOut.stream.getAudioTracks().forEach(t => recStream.addTrack(t)); }
+  recChunks = []; recorder = new MediaRecorder(recStream, type ? { mimeType: type, videoBitsPerSecond: 5e6 } : undefined);
   recorder.ondataavailable = ev => ev.data.size && recChunks.push(ev.data);
   recorder.onstop = () => {
     const blob = new Blob(recChunks, { type: recorder.mimeType || 'video/webm' }), a = document.createElement('a');
