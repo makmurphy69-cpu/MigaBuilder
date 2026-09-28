@@ -57,6 +57,7 @@
     ["paint-forge.html", "🖌️", "Paint Forge", "Edit images with layers in the browser.", ""],
     ["file-forge.html", "🖼️", "Image Forge", "Batch-convert, resize, compress and clean image metadata.", ""],
     ["image-studio.html", "🪄", "Image Studio", "Remove backgrounds with AI, make collages, memes and thumbnails.", ""],
+    ["picture-forge.html", "🌄", "Picture Forge", "Turn a written description into an original AI picture.", "text to image art photo illustration gemini"],
     ["everyday-forge.html", "📈", "Everyday Forge", "Create charts, improve writing, generate passwords and convert values.", ""],
     ["utility-forge.html", "🧰", "Utility Forge", "Convert CSV/JSON, combine text and verify files.", ""],
     ["site-checkup.html", "✅", "Website Checkup", "Check HTML for SEO and accessibility problems.", ""],

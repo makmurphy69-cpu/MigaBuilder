@@ -694,6 +694,29 @@ S('image-studio.html', {
   }
 });
 
+S('picture-forge.html', {
+  title: 'Picture Forge', subtitle: 'Turn words into an original picture',
+  intro: 'Welcome to Picture Forge. Describe any picture, pick a look and a shape, and Google Gemini paints it for you. Then change it with plain words.',
+  async run(h, page) {
+    await h.step('Step one: describe your picture. Say what is in it, where it is, and the mood. Short idea? Improve my words writes a fuller description for you.', async () => { await h.type('#prompt', 'A tiny red cottage beside a frozen lake at blue hour, warm golden light in the windows, snowy pine trees reflected in the ice.', { visible: 60 }); await h.point('#improveBtn'); });
+    await h.step('Step two: pick a look, like photo, watercolour, storybook, anime or 3D clay.', () => h.click('#styles .chip:nth-child(4)'));
+    await h.step('Step three: pick a shape. Square for posts, Story for phones, Wide for screens and videos.', () => h.click('#shapes .chip:nth-child(8)'));
+    await h.step('You can also add your own photos, to edit them or to keep the same person, pet or product in a new scene.', () => h.point('#drop'));
+    await h.step('More options holds the size, the AI model, framing, light, colours, and how many versions to make.', async () => { await h.click('#more summary'); await h.point('#quality'); });
+    await h.step('Step four: choose who makes the picture. The shared AI needs no setup. With your own Gemini key from Google AI Studio you get every size and several versions.', async () => { await h.click('#more summary'); await h.click('input[name=who][value=own]'); await h.point('#keyBox a'); });
+    await h.step('Paste the key here and press Test. The key goes straight from your browser to Google, never to MigaBuilder. The full step by step guide is at the bottom of the page.', async () => { await h.point('#apiKey'); await h.click('input[name=who][value=shared]'); });
+    await h.step('Now press Make my picture. For this walkthrough we show a sample, so no AI credit is spent.', async () => { await h.point('#generateBtn'); await page.evaluate(() => window.pictureForgeDemo()); });
+    await h.wait(800);
+    await h.step('Here is your picture. Not quite right? Tell it what to change, and everything else stays the same.', async () => { await h.point('#result'); await h.type('#changeText', 'make it night with stars'); });
+    await h.step('Press Change it.', async () => { await h.point('#changeBtn'); await page.evaluate(() => window.pictureForgeDemo('night')); });
+    await h.wait(900);
+    await h.step('Pick PNG, JPG or WebP, and press Download. Copy puts it on your clipboard, and Edit in Image Studio adds text, memes or a new background.', () => h.select('#format', 'png'));
+    await h.sampleDownload('#downloadBtn', 'Picture made in this video');
+    await h.step('Every picture you make is kept under Your recent pictures, only in this browser.', () => h.point('#galleryWrap'));
+    await h.step('And the help section explains how to get your own Gemini key, how downloading works, and what pictures cost.', async () => { await h.click('#keyGuide summary'); await h.point('#keyGuide .big-link'); });
+  }
+});
+
 S('design-forge.html', {
   title: 'Design Forge', subtitle: 'Thumbnails, memes and collages',
   intro: 'Welcome to Design Forge. Make thumbnails, social posts and collages in seconds.',
@@ -1033,7 +1056,7 @@ S('templates.html', {
 S('index.html', {
   title: 'MigaBuilder', subtitle: 'Find the right free tool in one minute',
   outroSay: 'Now it is your turn. Pick a tool and try it yourself. It is free, and there is nothing to sign up for.',
-  intro: 'Welcome to MigaBuilder: fifty eight free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
+  intro: 'Welcome to MigaBuilder: sixty two free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
   async run(h, page) {
     await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
     await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });

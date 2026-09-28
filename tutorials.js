@@ -18,6 +18,7 @@
     '3d-game-forge.html':['3D Game Forge','describe your game in a sentence, or pick a template such as the endless runner, kart racer or maze','Make my 3D game','press Play, then change the world, hero, enemies and sliders, paint your own level, and copy the share link or download the game'],
     'invoice-forge.html':['Invoice Forge','enter the seller, customer, line items, prices, and payment terms','Create invoice','verify the totals and download or print the invoice'],
     'image-studio.html':['Image Studio','choose one or more images and select the background, collage, meme, thumbnail, or upscale tab','Apply background effect','check the live canvas and download the finished PNG'],
+    'picture-forge.html':['Picture Forge','describe the picture and choose its style, shape and resolution','Generate picture','download the result or continue editing it in Image Studio'],
     'everyday-forge.html':['Everyday Forge','choose the everyday calculator or helper you need and enter its details','Calculate','review the result and copy or use it'],
     'grammar-forge.html':['Grammar Forge','choose a language and paste or type the writing you want to improve','Check writing','review each explanation, accept the useful fixes, and copy the corrected text'],
     'templates.html':['Template Gallery','browse the ready-made starting points and choose the result you want to create','Open template','customise the selected template in its Forge tool'],

@@ -21,6 +21,20 @@ installs needed).
 8. Commit and push. Visitors now get the free Gemini tier without your key
    ever appearing in the page source.
 
+Picture Forge uses the same Worker and secret. **Image generation requires a
+Gemini project with billing enabled** (Google has no free API tier for image
+models; with free-tier keys every picture request fails and the page tells
+visitors to use their own key). The owner pays for each picture made through
+the Worker (about US$0.07 at 1K, $0.10 at 2K), so the Worker accepts only
+Nano Banana 2 and Nano Banana 2 Lite, 1K and 2K, the listed shapes, and at
+most 3 reference photos of up to about 2 MB each. 4K and Nano Banana Pro are
+only possible with a visitor's own key, which goes straight to Google and
+never passes through the Worker. Requests get the same origin check and
+per-IP `RATE_LIMITER` as the text tools. Recommended: also add a second
+rate-limit binding named `IMAGE_RATE_LIMITER` (for example 4 requests per
+60 seconds) under **Settings → Bindings**, and set a budget alert in Google
+Cloud Billing.
+
 If you ever need to rotate the key: generate a new one at
 aistudio.google.com/apikey, update the Worker secret in step 5, and delete
 the old key from Google AI Studio. No code changes needed.

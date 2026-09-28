@@ -1024,6 +1024,34 @@
    "kind": "pdf"
   }
  },
+ "picture-forge.html": {
+  "title": "Picture Forge",
+  "video": "videos/picture-forge.mp4",
+  "poster": "videos/picture-forge.jpg",
+  "duration": 118,
+  "transcript": [
+   "Welcome to Picture Forge. Describe any picture, pick a look and a shape, and Google Gemini paints it for you. Then change it with plain words.",
+   "Step one: describe your picture. Say what is in it, where it is, and the mood. Short idea? Improve my words writes a fuller description for you.",
+   "Step two: pick a look, like photo, watercolour, storybook, anime or 3D clay.",
+   "Step three: pick a shape. Square for posts, Story for phones, Wide for screens and videos.",
+   "You can also add your own photos, to edit them or to keep the same person, pet or product in a new scene.",
+   "More options holds the size, the AI model, framing, light, colours, and how many versions to make.",
+   "Step four: choose who makes the picture. The shared AI needs no setup. With your own Gemini key from Google AI Studio you get every size and several versions.",
+   "Paste the key here and press Test. The key goes straight from your browser to Google, never to MigaBuilder. The full step by step guide is at the bottom of the page.",
+   "Now press Make my picture. For this walkthrough we show a sample, so no AI credit is spent.",
+   "Here is your picture. Not quite right? Tell it what to change, and everything else stays the same.",
+   "Press Change it.",
+   "Pick PNG, JPG or WebP, and press Download. Copy puts it on your clipboard, and Edit in Image Studio adds text, memes or a new background.",
+   "Every picture you make is kept under Your recent pictures, only in this browser.",
+   "And the help section explains how to get your own Gemini key, how downloading works, and what pictures cost.",
+   "Now it is your turn. Open Picture Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/picture-forge.png",
+   "label": "Picture made in this video",
+   "kind": "image"
+  }
+ },
  "post-forge.html": {
   "title": "Post Forge",
   "video": "videos/post-forge.mp4",
