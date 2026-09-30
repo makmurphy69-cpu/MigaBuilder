@@ -10,6 +10,12 @@ Usage (from the repository root):
     npm pack world-countries && tar xzf world-countries-*.tgz
     python3 scripts/build-geo-data.py package/countries.json
 
+The *Geography data* workflow (.github/workflows/geo-data.yml) runs this every
+month. Before overwriting geo-data.json the new data is compared with the old
+file; if it looks broken (places or leaders missing, e.g. because Wikidata was
+down), nothing is written and the script exits with an error. It also writes
+geo-data-meta.json, whose date Geography Forge shows as "Data updated".
+
 Wikidata responses are cached in .geo-cache/ so an interrupted run can resume.
 Wikimedia rate-limits heavy use, so the script is deliberately slow and polite.
 """
@@ -143,7 +149,8 @@ def main(countries_path):
         if ps:
             best=sorted(ps,key=when)[-1];dv=best['mainsnak'].get('datavalue')
             if dv: pop=float(dv['value']['amount'])
-        popy=when(best)[1:5] or None
+            # (before: this ran for every place, so a place without population statements got the previous place's year)
+            popy=when(best)[1:5] or None
         drive=None
         for q2 in ids(d['claims'],'P1622'): drive=label(q2)
         hist=ids(d['claims'],'P2184');cult=ids(d['claims'],'P2596')
@@ -156,8 +163,44 @@ def main(countries_path):
           'nm':{'es':c['translations'].get('spa',{}).get('common'),'ar':c['translations'].get('ara',{}).get('common'),'zh':c['translations'].get('zho',{}).get('common'),'sw':(d['labels'].get('sw') or {}).get('value')}}
         if rec['ind'] is False: rec['st']='Dependent territory'
         out[k]={a:b for a,b in rec.items() if b not in (None,[],{},'')}
+    problems = sanity_check(out)
+    if problems:
+        raise SystemExit('Not writing %s, the new data looks wrong:\n  ' % OUT + '\n  '.join(problems))
+    changed = describe_changes(out)
     json.dump(out, open(OUT, 'w'), ensure_ascii=False, separators=(',', ':'))
+    json.dump({'updated': time.strftime('%Y-%m-%d', time.gmtime()), 'places': len(out),
+               'sources': ['world-countries (mledoze/countries, ODbL)', 'Wikidata (CC0)']},
+              open('geo-data-meta.json', 'w'), indent=1)
     print('Wrote %d places to %s (%d without Wikidata)' % (len(out), OUT, missing))
+    for line in changed: print('  ' + line)
+
+
+def sanity_check(new):
+    """Refuse data that lost a lot compared with the committed file (a Wikidata outage, a changed API...)."""
+    problems = []
+    if len(new) < 240: problems.append('only %d places (expected about 250)' % len(new))
+    try: old = json.load(open(OUT))
+    except (OSError, ValueError): return problems
+    if len(new) < len(old) - 3: problems.append('%d places, was %d' % (len(new), len(old)))
+    for field, what in (('hs', 'heads of state'), ('hg', 'heads of government'), ('pop', 'populations'), ('g', 'government types'), ('c', 'capitals')):
+        was = sum(1 for c in old.values() if c.get(field)); now = sum(1 for c in new.values() if c.get(field))
+        if now < was * 0.9: problems.append('%s: %d, was %d' % (what, now, was))
+    return problems
+
+
+def describe_changes(new):
+    """Short human-readable list of what changed, for the workflow log and commit message."""
+    try: old = json.load(open(OUT))
+    except (OSError, ValueError): return []
+    lines = []
+    for k, c in sorted(new.items()):
+        o = old.get(k)
+        if not o: lines.append('%s: new place' % c['n']); continue
+        for field, what in (('hs', 'head of state'), ('hg', 'head of government'), ('c', 'capital'), ('g', 'government')):
+            if o.get(field) != c.get(field):
+                lines.append('%s %s: %s -> %s' % (c['n'], what, ', '.join(o.get(field) or ['-']), ', '.join(c.get(field) or ['-'])))
+    for k in sorted(set(old) - set(new)): lines.append('%s: removed' % old[k]['n'])
+    return lines
 
 
 if __name__ == '__main__':

@@ -88,7 +88,7 @@ main{max-width:1320px}
   <div id="quizDone" class="hidden" style="margin-top:14px"><h3 id="doneTitle" style="font:700 20px 'Space Grotesk';margin:0 0 8px"></h3><ol class="review" id="review"></ol><div class="actions"><button class="primary" id="retryWrong">Retry the ones I missed</button><button class="secondary" id="newQuiz">New quiz</button></div></div>
 </section>
 </main>
-<footer>Part of <a href="index.html">MigaBuilder</a>. Country facts: <a href="https://github.com/mledoze/countries">mledoze/countries</a> (ODbL) and <a href="https://www.wikidata.org/">Wikidata</a> (CC0), compiled September 2026 — leaders and populations change, so check current sources for anything important. Articles load live from <a href="https://www.wikipedia.org/">Wikipedia</a> (CC BY-SA). Map: <a href="https://github.com/topojson/world-atlas">Natural Earth / world-atlas</a>. Borders shown are not an endorsement of any territorial claim.</footer>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Country facts: <a href="https://github.com/mledoze/countries">mledoze/countries</a> (ODbL) and <a href="https://www.wikidata.org/">Wikidata</a> (CC0), <span id="geoUpdated">updated September 2026</span> and refreshed automatically every week — check current sources for anything important. Articles load live from <a href="https://www.wikipedia.org/">Wikipedia</a> (CC BY-SA). Map: <a href="https://github.com/topojson/world-atlas">Natural Earth / world-atlas</a>. Borders shown are not an endorsement of any territorial claim.</footer>
 <script>
 (function(){
 'use strict';
@@ -135,6 +135,7 @@ Promise.all([fetch('geo-data.json').then(r=>{if(!r.ok)throw new Error('data');re
     .on('mousemove',(e,d)=>showTip(e,d.f+' '+d.n)).on('mouseleave',()=>tip.style.display='none').on('click',(e,d)=>onPick(d.code)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onPick(d.code)}});
   $('countryList').innerHTML=Object.values(DATA).sort((a,b)=>a.n.localeCompare(b.n)).map(c=>'<option value="'+esc(c.n)+'">'+esc((c.c||[]).join(', '))+'</option>').join('');
   paintSeen();saveSeen();
+  fetch('geo-data-meta.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&/^\d{4}-\d\d-\d\d$/.test(m.updated))$('geoUpdated').textContent='updated '+new Date(m.updated+'T12:00:00Z').toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})}).catch(()=>{});
   const hash=decodeURIComponent(location.hash.slice(1)).toUpperCase();if(DATA[hash])select(hash,true);
 }).catch(()=>{$('emptyInfo').innerHTML='⚠️<br><strong>The map could not load.</strong><br>Check your internet connection and refresh.'});
 

@@ -72,7 +72,7 @@ window.HOME_I18N = {
     'd:chemistry-map': 'Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.',
     'd:body-map': 'Explore organs, bones, muscles, tendons and skin: how they work, illnesses and care, digestion, fasting and quizzes.',
     'd:flashcard-forge': 'AI flashcards, Anki-style spaced repetition, games, stats and share links.',
-    'd:memory-forge': 'Memory training with levels: number and symbol cards, timed or untimed, chimp test, pairs and n-back.',
+    'd:memory-forge': 'Memory training with levels, a word list for the memory palace, and a guide to techniques that work.',
     'd:exam-checker': 'Print answer sheets, photograph each student’s paper and download everyone’s marks.',
     'd:paint-forge': 'Edit images with layers in the browser.',
     'd:file-forge': 'Batch-convert, resize, compress and clean image metadata.',

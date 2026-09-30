@@ -437,7 +437,7 @@ S('memory-forge.html', {
       for (const id of ids) if (id) await h.click(id);
     };
     const remember = () => page.evaluate(() => { window.__memSeq = [...document.querySelectorAll('#studyCards .mcard span:not(.ix)')].map(s => s.textContent); });
-    await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back and sequences each train a different kind of memory.', () => h.point('#modes'));
+    await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back, sequences and word lists each train a different kind of memory.', () => h.point('#modes'));
     await h.step('Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.', async () => { await h.click('#mode-numbers'); await h.click('#timedOff'); });
     await h.step('There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.', () => h.point('#levels'));
     await h.step('Press Start and memorise the cards from left to right.', async () => { await h.click('#startBtn'); await remember(); });
@@ -452,7 +452,10 @@ S('memory-forge.html', {
     await h.step('Now tap the numbers and symbols in the right order before the answer clock runs out.', answer);
     await h.step('Every card is checked, and your result is added to your progress.', () => h.click('#checkBtn'));
     await h.sampleShot('#playPanel', 'Memory game result from this video');
-    await h.step('Your levels, day streak and a chart of your games are saved only in this browser, with memory techniques that help you remember more.', () => h.scroll('#stats', 'center'));
+    await h.step('Your levels, day streak and a chart of your games are saved only in this browser.', () => h.scroll('#stats', 'center'));
+    await h.step('Below them is a guide to the techniques memory champions use: the memory palace, stories, pegs, the Major system, names and faces, and a four week plan to master them.', () => h.scroll('#techniques', 'start'));
+    await h.step('Practise with the trainers. Write the spots of a route you know, press Random words and Place them, then picture each word at its spot.', async () => { await h.scroll('#palaceTrainer', 'start'); await h.click('#palRandom'); await h.click('#palPlace'); });
+    await h.step('The Major system trainer turns any number into picture words, and the review planner puts your next reviews in your calendar.', async () => { await h.scroll('#majorTrainer', 'start'); await h.fill('#majNum', '31415926'); });
   }
 });
 

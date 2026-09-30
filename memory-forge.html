@@ -4,7 +4,7 @@
 <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Memory Forge — memory training with levels, number and symbol cards | MigaBuilder</title>
-<meta name="description" content="Free memory training in your browser: number and symbol memory cards with 30 levels, timed or untimed, your own card counts and study times, plus the chimp test, pairs, dual n-back, Corsi sequences, memory techniques and progress stats. No signup.">
+<meta name="description" content="Free memory training in your browser: number and symbol memory cards with 30 levels, timed or untimed, your own card counts and study times, plus the chimp test, pairs, dual n-back, Corsi sequences, word lists, a memory techniques guide with a 4-week plan, memory palace and Major system trainers, and progress stats. No signup.">
 <link rel="canonical" href="https://migabuilder.com/memory-forge.html">
 <meta property="og:title" content="Memory Forge — free memory training with levels | MigaBuilder">
 <meta property="og:description" content="Number and symbol memory cards, chimp test, pairs, n-back and sequences — 30 levels, timed or untimed, private in your browser.">
@@ -66,9 +66,24 @@
 .corsi button.lit{background:#f2c640;box-shadow:0 0 18px #f2c640}.corsi button.tap{background:#6fd1e0}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.62)}
+.wordlist{columns:3 150px;font:600 17px 'IBM Plex Sans';line-height:1.9;max-width:700px;margin:6px auto;padding-left:28px}
+.wordlist li.ok{color:#2f7a52}.wordlist li.bad{color:#b8432e}.wordlist small{font-weight:400;color:rgba(22,32,43,.6)}
 .tech{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
 .tech details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}
 .tech summary{font-weight:700;cursor:pointer}.tech p,.tech li{font-size:13.5px;line-height:1.5}
+h3.tech-h{font:700 16px 'Space Grotesk';margin:18px 0 8px}
+.tech ul,.tech ol{margin:6px 0 0;padding-left:20px}
+.plan{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}.plan>div{background:#fff;border:1px solid rgba(22,32,43,.12);border-left:4px solid var(--amber);border-radius:6px;padding:10px 12px;font-size:13.5px}.plan ul{margin:6px 0 0;padding-left:18px;line-height:1.5}
+.tech-more{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px;margin-top:10px;font-size:13.5px}
+table.milestones{border-collapse:collapse;font-size:13px;margin-top:8px;width:100%}table.milestones td,table.milestones th{border:1px solid rgba(22,32,43,.15);padding:5px 8px;text-align:left}
+.trainer{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:8px;padding:12px 14px;margin:0 0 14px}.trainer h3{font:700 16px 'Space Grotesk';margin:0 0 6px}
+.trainer textarea,.trainer input{width:100%;box-sizing:border-box}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pal-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}.pal-table td{border-bottom:1px solid rgba(22,32,43,.1);padding:6px 4px;vertical-align:middle}.pal-table td:first-child{color:rgba(22,32,43,.6);width:40%}
+.pal-table input{padding:6px 8px}.pal-table .ok{color:#2f7a52;font-weight:700}.pal-table .bad{color:#b8432e;font-weight:700}
+.maj-out{font-size:15px;line-height:1.8}.maj-out span{display:inline-block;background:#fff7e6;border:1px solid #e9c77c;border-radius:6px;padding:2px 8px;margin:2px}
+.maj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px;font-size:13px;margin-top:8px}.maj-grid div{background:#f6f4ee;border-radius:4px;padding:3px 6px}.maj-grid b{font-family:'IBM Plex Mono';margin-right:4px}
+.rev-list{list-style:none;padding:0;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px}.rev-list li{background:#eef4fb;border:1px solid #c6d8ee;border-radius:999px;padding:4px 12px;font-size:13px}
 table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px solid rgba(22,32,43,.15);padding:4px 8px;text-align:center}
 @media(max-width:620px){.mcard{width:56px;height:76px;font-size:30px}.mcard.big{width:120px;height:160px;font-size:70px}.palette button{min-width:44px;height:46px}}
 </style>
@@ -80,7 +95,7 @@ table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px so
 
 <section class="panel">
   <h2>1. Choose a memory game</h2>
-  <p>Each game trains a different kind of memory. Card games train short-term memory for order; the chimp test and sequences train visual–spatial memory; n-back trains working memory.</p>
+  <p>Each game trains a different kind of memory. Card games train short-term memory for order; the chimp test and sequences train visual–spatial memory; n-back trains working memory; the word list is where you practise memory techniques.</p>
   <div class="modes" id="modes"></div>
 </section>
 
@@ -116,18 +131,77 @@ table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px so
   <p class="privacy" style="margin-top:12px">🔒 Everything runs and is saved only in this browser. Nothing is uploaded.</p>
 </section>
 
-<section class="panel">
+<section class="panel" id="techniques">
   <h2>Memory techniques that work</h2>
-  <p>World memory champions are not born with special memories — they use techniques like these. Try one in the Custom tab with more cards than feels comfortable.</p>
+  <p>World memory champions are not born with special memories — they use techniques like these. In one study, ordinary people who practised the memory palace for about 30 minutes a day for six weeks more than doubled how many words they could remember, and kept most of the gain four months later (Dresler et al., <i>Neuron</i>, 2017). Pick one technique, practise it with the <b>📝 Word list</b> game or the trainers below, then add the next.</p>
+  <h3 class="tech-h">Ways to remember things</h3>
   <div class="tech">
-    <details open><summary>🧩 Chunking</summary><p>Group items into small blocks. “7 4 1 9 2 6” is six things; “741 · 926” is two. Most people can hold about four chunks at once, so bigger chunks mean more items.</p></details>
-    <details><summary>🏛️ Memory palace (method of loci)</summary><p>Picture a place you know well — your home. Walk a fixed route and leave one vivid image at each spot: the front door, the hall mirror, the sofa… To recall, walk the route again. It works because the brain is very good at remembering places.</p></details>
-    <details><summary>🔤 Major system for numbers</summary><p>Turn digits into consonant sounds, then add vowels to make words you can picture: 32 = M-N = “moon”, 94 = B-R = “bear”.</p>
-      <table class="major"><tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>s z</td><td>t d</td><td>n</td><td>m</td><td>r</td><td>l</td><td>j sh ch</td><td>k g</td><td>f v</td><td>p b</td></tr></table></details>
-    <details><summary>🎭 Story (link) method</summary><p>Link each item to the next in a strange, moving little story: a ★ star falls on a ● ball that rolls into a ▲ tent… Silly, exaggerated and emotional images stick best.</p></details>
-    <details><summary>🗣️ Say it and see it</summary><p>Use two senses. Quietly say each card as you look at it, or switch Presentation to “See and hear”. Rhythm helps too: read numbers in a beat, like a phone number.</p></details>
-    <details><summary>📅 Little and often</summary><p>Ten minutes a day beats an hour once a week. Sleep fixes memories, so practise, sleep, then try again the next day. Games like these train the skill you practise; the techniques are what carry over to real life.</p></details>
+    <details open><summary>🧩 Chunking</summary><p>Group items into small blocks. “7 4 1 9 2 6” is six things; “741 · 926” is two. Most people can hold about four chunks at once, so bigger chunks mean more items. Phone numbers, card numbers and postcodes are already chunked for this reason.</p></details>
+    <details><summary>🏛️ Memory palace (method of loci)</summary><p>The strongest general technique. Pick a place you know well — your home — and a fixed route through it: front door, doormat, hall mirror, sofa… Put one vivid image of each item on each spot, then walk the route again to recall.</p>
+      <ul><li>Start with 10 spots in one room or house; add more palaces later (school, work, a street).</li><li>Make each image <b>interact</b> with its spot: the banana is squashed in the door, the dog is licking the mirror.</li><li>One or two items per spot. Keep the route in the same direction every time.</li><li>Wait a day before reusing a palace for new things, so old images fade.</li></ul>
+      <p><a href="#palaceTrainer">Try the memory palace trainer ↓</a></p></details>
+    <details><summary>🎭 Story (link) method</summary><p>Link each item to the next in a strange, moving little story: a ★ star falls on a ● ball that rolls into a ▲ tent… Great for short lists when you have no palace ready. Its weakness: if one link breaks, the rest of the story can go with it.</p></details>
+    <details><summary>🖐️ Peg systems</summary><p>Learn a fixed picture for each number once, then hook new items onto the pegs — useful when you need “what was number 7?”.</p>
+      <p><b>Rhyme pegs:</b> 1 bun · 2 shoe · 3 tree · 4 door · 5 hive · 6 sticks · 7 heaven · 8 gate · 9 line · 10 hen.<br><b>Shape pegs:</b> 1 candle · 2 swan · 3 handcuffs · 4 sailboat · 5 hook · 6 golf club · 7 cliff · 8 snowman · 9 balloon on a string · 10 bat and ball.</p>
+      <p>To remember “milk” as item 5, picture bees in a hive pouring milk.</p></details>
+    <details><summary>🔤 Major system for numbers</summary><p>Turn digits into consonant sounds, then add vowels to make words you can picture: 32 = M-N = “moon”, 94 = B-R = “bear”. Vowels and the letters w, h, y don't count; go by sound, not spelling (“knife” = N-F = 28).</p>
+      <table class="major"><tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>s z</td><td>t d</td><td>n</td><td>m</td><td>r</td><td>l</td><td>j sh ch</td><td>k g</td><td>f v</td><td>p b</td></tr></table>
+      <p>Memory hooks: <b>t</b> has 1 down-stroke, <b>n</b> 2, <b>m</b> 3; fou<b>r</b> ends in r; <b>L</b> is the Roman 50; a mirrored <b>J</b> looks like 6; a <b>K</b> is two 7s; a cursive <b>f</b> looks like 8; <b>P</b> is a mirrored 9; <b>z</b>ero starts with z. <a href="#majorTrainer">Major system trainer ↓</a></p></details>
+    <details><summary>🧑‍🎤 PAO and the Dominic system</summary><p>For long numbers and playing cards. Give every two-digit number a <b>P</b>erson, an <b>A</b>ction and an <b>O</b>bject (07 = James Bond · shooting · a tuxedo). Six digits then become one scene: the person from the first pair doing the action of the second pair with the object of the third. The <b>Dominic system</b> finds the people by turning digits into letters (1 = A, 2 = B … 9 = N, 0 = O), so 15 = A.E. = Albert Einstein. Build it slowly: 10 new people a day.</p></details>
+    <details><summary>👋 Names and faces</summary><ol><li>Really listen, then say the name back: “Nice to meet you, Maya.”</li><li>Pick one feature of the face (curly hair, big smile).</li><li>Turn the name into a picture (Maya → a <i>mayor</i>'s chain) and fix it to that feature.</li><li>Use the name once more before you leave, and review new names that evening.</li></ol></details>
+    <details><summary>🌍 Keyword method for languages</summary><p>Find an English word that sounds like the foreign word and link it to the meaning in one image. Spanish <i>pato</i> (duck) sounds like “pot” → a duck sitting in a cooking pot. Swahili <i>kitabu</i> (book) → a cat reading a book. Then say the real word aloud a few times.</p></details>
+    <details><summary>🔠 Acronyms and first-letter sentences</summary><p>Make a word or sentence from first letters: ROY G BIV for the rainbow, “My Very Educated Mother Just Served Us Nachos” for the planets. Best for short, fixed lists you need in order.</p></details>
+    <details><summary>✨ Make images that stick</summary><p>Plain pictures fade. Make them <b>big</b> or tiny, <b>moving</b>, <b>colourful</b>, loud, smelly, funny or a little absurd, and put yourself in the scene. Link items by action (the cat <i>kicks</i> the drum) rather than just placing them side by side.</p></details>
   </div>
+  <h3 class="tech-h">Learn so it lasts</h3>
+  <div class="tech">
+    <details open><summary>🧪 Test yourself (retrieval practice)</summary><p>Trying to recall is what makes memories stronger — much more than reading again. Close the book and write down what you remember, then check. A big review of learning research (Dunlosky et al., 2013) rated practice testing and spaced practice the two most useful study methods, and rereading and highlighting among the least. <a href="flashcard-forge.html">Flashcard Forge</a> does this for you.</p></details>
+    <details><summary>📅 Space it out</summary><p>Review just before you would forget: after about 1 day, 3 days, 1 week, 2 weeks and 1 month. Each review takes less time than the last. The <a href="#reviewPlanner">review planner ↓</a> puts those dates in your calendar.</p></details>
+    <details><summary>🔀 Mix topics (interleaving)</summary><p>Instead of 30 minutes of one kind of problem, mix two or three kinds. It feels harder, but you learn to tell them apart and remember better.</p></details>
+    <details><summary>💬 Explain it simply</summary><p>Ask yourself “why?” and “how does this connect to what I know?”, or explain it out loud as if to a 10-year-old. Gaps in your explanation show you what to review.</p></details>
+    <details><summary>🖼️ Words + pictures</summary><p>Put the same idea in words and in a drawing, diagram or timeline. Two routes to one memory make it easier to find again. Quietly saying things aloud helps too.</p></details>
+    <details><summary>😴 Sleep, move, focus</summary><p>Sleep is when the brain stores the day's learning — practise, sleep, then test yourself the next day. Regular exercise helps memory, and one thing at a time beats multitasking: phones away while you learn.</p></details>
+  </div>
+  <h3 class="tech-h">How to master them: a 4-week plan</h3>
+  <p>About 15–20 minutes a day. Always <b>test first, then look</b>, and write your score down (your results are saved below).</p>
+  <div class="plan">
+    <div><b>Week 1 — Stories and chunks</b><ul><li>📝 Word list, 10 words, <i>untimed</i>: link them in a story.</li><li>🔢 Number cards: read them in chunks of 2–3.</li><li>Next morning: write yesterday's list without looking.</li></ul></div>
+    <div><b>Week 2 — Build memory palaces</b><ul><li>Write two routes of 10 spots in the <a href="#palaceTrainer">palace trainer</a>.</li><li>Place 10, then 15, then 20 words.</li><li>Use a palace for a real shopping list.</li></ul></div>
+    <div><b>Week 3 — Numbers into pictures</b><ul><li>Learn 10 Major-system words a day with the <a href="#majorTrainer">trainer</a>.</li><li>🔢 Two-digit number cards: see the word, not the number.</li><li>Remember a phone number or PIN hint this way.</li></ul></div>
+    <div><b>Week 4 — Combine and speed up</b><ul><li>Put Major words into your palaces: 20, then 40 digits.</li><li>📝 Word list levels, now <i>timed</i>.</li><li>Real life: 5 new names, a short speech, 10 words in another language.</li></ul></div>
+  </div>
+  <details class="tech-more"><summary><b>Milestones to aim for</b></summary><table class="milestones"><tr><th></th><th>Words (in order)</th><th>Digits</th><th>Other</th></tr><tr><td>Starting out</td><td>7–10</td><td>7–9</td><td>Remember 3 new names in a day</td></tr><tr><td>After 4 weeks</td><td>20–30</td><td>30–40 in 5 min</td><td>A 20-item shopping list</td></tr><tr><td>Strong</td><td>50+</td><td>80+ in 5 min</td><td>A deck of cards in under 10 min</td></tr></table><p class="muted">Memory competitors go much further (hundreds of digits in 5 minutes), but they train daily for months with exactly these methods.</p></details>
+  <details class="tech-more"><summary><b>Common mistakes</b></summary><ul><li>Images too plain or too similar — make each one strange and different.</li><li>Too many items on one spot of a palace.</li><li>Only rereading instead of testing yourself.</li><li>Never reviewing: without a review after a day, most of a new list is gone within a week.</li><li>Training only games: they train the skill you play; use the techniques on real things to feel the benefit.</li></ul></details>
+</section>
+
+<section class="panel" id="trainers">
+  <h2>Technique trainers</h2>
+  <div class="trainer" id="palaceTrainer">
+    <h3>🏛️ Memory palace trainer</h3>
+    <p class="muted">Write the spots of a route you know, one per line, in walking order. They stay in this browser.</p>
+    <div class="grid2">
+      <div class="field"><label for="palSpots">Your route (spots)</label><textarea id="palSpots" rows="8"></textarea></div>
+      <div class="field"><label for="palItems">Things to remember (one per line)</label><textarea id="palItems" rows="8" placeholder="Leave empty to get random words"></textarea></div>
+    </div>
+    <div class="actions"><button class="primary" id="palPlace">1. Place them</button><button class="secondary" id="palRandom">🎲 Random words</button><button class="secondary" id="palTest" disabled>2. Hide and test me</button></div>
+    <div id="palOut"></div>
+  </div>
+  <div class="trainer" id="majorTrainer">
+    <h3>🔤 Major system trainer</h3>
+    <div class="row"><div class="field" style="margin:0;flex:1;min-width:200px"><label for="majNum">Turn a number into pictures</label><input id="majNum" inputmode="numeric" placeholder="e.g. 3141592653" autocomplete="off"></div></div>
+    <p id="majOut" class="maj-out"></p>
+    <div class="actions"><button class="secondary" id="majQuiz">🎯 Quiz me (00–99)</button><button class="secondary" id="majTable">Show all 100 words</button></div>
+    <div id="majQuizBox"></div>
+    <div id="majTableBox" class="hidden"></div>
+  </div>
+  <div class="trainer" id="reviewPlanner">
+    <h3>📅 Review planner (spaced repetition)</h3>
+    <p class="muted">What did you learn today? Get review dates at 1, 3, 7, 14 and 30 days, and add them to your calendar.</p>
+    <div class="row"><div class="field" style="margin:0;flex:1;min-width:200px"><label for="revWhat">What to review</label><input id="revWhat" placeholder="e.g. Spanish words, chapter 3" maxlength="120"></div><div class="field" style="margin:0"><label for="revDate">Learned on</label><input id="revDate" type="date"></div></div>
+    <ul id="revList" class="rev-list"></ul>
+    <div class="actions"><button class="secondary" id="revIcs">⬇ Add to my calendar (.ics)</button></div>
+  </div>
+  <p class="privacy">🔒 Trainers run only in this browser. Nothing is uploaded.</p>
 </section>
 </main>
 <footer>Memory Forge is a free practice tool, not a medical or cognitive assessment.</footer>
@@ -145,8 +219,11 @@ const MODES={
   chimp:{ico:'🐒',name:'Chimp test',d:'Numbers flash on a grid — tap them in order once they are hidden.'},
   pairs:{ico:'🃏',name:'Pairs',d:'Turn cards two at a time and find every matching pair.'},
   nback:{ico:'🔁',name:'N-back',d:'Does this match the one N steps back? Trains working memory.'},
-  corsi:{ico:'🟨',name:'Sequence',d:'Squares light up one by one — repeat the pattern (Corsi blocks).'}
+  corsi:{ico:'🟨',name:'Sequence',d:'Squares light up one by one — repeat the pattern (Corsi blocks).'},
+  words:{ico:'📝',name:'Word list',d:'Memorise a list of words, then type them back. Practise the story and memory palace methods here.'}
 };
+// Concrete, easy-to-picture words: the techniques below work best with things you can see.
+const WORDS='apple anchor balloon banana barrel basket bell bicycle blanket boat bone book boot bottle bowl box bread brick bridge broom bucket butterfly button cactus cake camel camera candle car carpet carrot castle cat chain chair cheese cherry chimney clock cloud coin comb cow crown cup curtain diamond dog doll dolphin door dragon drum duck eagle egg elephant envelope feather fence fire fish flag flower flute fork fox frog garden ghost giraffe glove goat guitar hammer hat helmet honey horse igloo island jacket jelly kangaroo kettle key kite knife ladder lamp leaf lemon lion lizard lock map mask mirror monkey moon mountain mouse mushroom nail necklace nest octopus onion orange owl paint pan parrot peach pencil penguin piano pillow pineapple pizza planet potato pumpkin queen rabbit rainbow ring robot rocket rope rose ruler sandwich saw scarf scissors shark sheep shell shoe snail snake snowman sock sofa spider spoon star statue strawberry sun swan sword table teapot telescope tent tiger toast tomato tooth torch tractor train tree trumpet turtle umbrella unicorn vase violin volcano wagon wallet watch whale wheel window wolf zebra'.split(' ');
 const SETS={
   shapes:{name:'Coloured shapes',items:[['●','#D8604A','circle'],['■','#2b6cb0','square'],['▲','#4E9E73','triangle'],['◆','#8a3ab8','diamond'],['★','#e2a63b','star'],['♥','#d6336c','heart'],['✚','#16202b','cross'],['☾','#3a7ab8','moon'],['⬟','#c0781e','pentagon'],['⬢','#0f8b8d','hexagon'],['✿','#b83280','flower'],['⚑','#5a3b2c','flag']]},
   emoji:{name:'Pictures',items:[['🍎','','apple'],['🐶','','dog'],['🚗','','car'],['⚽','','ball'],['🌙','','moon'],['🎈','','balloon'],['🔑','','key'],['🌵','','cactus'],['🐟','','fish'],['🎸','','guitar'],['☂️','','umbrella'],['🍕','','pizza']]},
@@ -164,7 +241,8 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
 const DEF={mode:'numbers',tab:'levels',timed:true,level:1,sound:true,
   numCount:7,symCount:5,numDigits:1,symSet:'shapes',symVariety:8,studyMode:'all',studySec:1.2,recallSec:0,present:'see',
   chimpCount:6,chimpHideSec:3,pairsCount:8,pairsKind:'symbols',previewSec:3,pairsLimit:90,
-  nbackN:2,nbackDual:true,nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false};
+  nbackN:2,nbackDual:true,nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false,
+  wordCount:10,wordStudySec:3,wordOrder:'any',wordRecallSec:0};
 const S=Object.assign({},DEF,store.settings);
 function persist(){store.settings=S;save()}
 
@@ -180,12 +258,13 @@ function levelCfg(mode,L,timed){
   else if(mode==='pairs'){const p=Math.min(18,2+L);Object.assign(c,{pairsCount:p,pairsKind:L%2?'symbols':'numbers',previewSec:timed?Math.max(0,4-L*0.15):0,pairsLimit:timed?Math.round(p*7):0})}
   else if(mode==='nback'){Object.assign(c,{nbackN:Math.ceil(L/2),nbackDual:L%2===0,nbackTrials:20+Math.ceil(L/2)*2,nbackInterval:timed?Math.max(1.8,3-L*0.04):0})}
   else if(mode==='corsi'){Object.assign(c,{corsiLen:2+L,corsiGrid:L<=4?3:L<=14?4:5,corsiSpeed:timed?Math.max(0.35,0.9-0.02*L):0.9,corsiReverse:L>20&&L%2===1})}
+  else if(mode==='words'){const n=3+L;Object.assign(c,{wordCount:n,wordStudySec:Math.max(1.5,4-0.08*L),studyMode:L%5===0?'flash':'all',wordOrder:L>15?'exact':'any',wordRecallSec:timed?Math.round(20+6*n):0})}
   return c;
 }
 function currentCfg(){
   if(S.tab==='levels'){const c=levelCfg(S.mode,S.level,S.timed);return Object.assign({},DEF,{symSet:S.symSet,present:S.present},c)}
   const c=Object.assign({},S,{level:0});
-  if(!S.timed){c.recallSec=0;c.pairsLimit=0;c.previewSec=S.previewSec;c.nbackInterval=0}
+  if(!S.timed){c.recallSec=0;c.pairsLimit=0;c.previewSec=S.previewSec;c.nbackInterval=0;c.wordRecallSec=0}
   if(S.mode==='numbers')c.symCount=0;if(S.mode==='symbols')c.numCount=0;
   return c;
 }
@@ -216,6 +295,8 @@ function renderCustom(){
   if(m==='pairs'){h+=f('c_pairsCount','How many pairs',num('pairsCount',2,18))+f('c_pairsKind','Cards show',sel('pairsKind',[['symbols','Symbols'],['numbers','Numbers'],['mixed','Numbers and symbols']]))+f('c_previewSec','Peek at all cards first (seconds)',num('previewSec',0,30,0.5));if(T)h+=f('c_pairsLimit','Time limit in seconds (0 = none)',num('pairsLimit',0,900))}
   if(m==='nback'){h+=f('c_nbackN','N (how many steps back)',num('nbackN',1,9))+f('c_nbackDual','Track',sel('nbackDual',[['false','Card only'],['true','Card and position (dual)']]))+f('c_nbackTrials','Rounds',num('nbackTrials',10,100));if(T)h+=f('c_nbackInterval','Seconds per round',num('nbackInterval',1,10,0.1),'Without time each round waits for your answer')}
   if(m==='corsi'){h+=f('c_corsiLen','Sequence length',num('corsiLen',2,30))+f('c_corsiGrid','Grid size',sel('corsiGrid',[[3,'3 × 3'],[4,'4 × 4'],[5,'5 × 5']]))+f('c_corsiSpeed','Seconds each square stays lit',num('corsiSpeed',0.2,3,0.05))+f('c_corsiReverse','Order',sel('corsiReverse',[['false','Same order'],['true','Backwards (harder)']]))}
+  if(m==='words'){h+=f('c_wordCount','How many words',num('wordCount',3,80))+f('c_studyMode','How words are shown',sel('studyMode',[['all','All at once'],['flash','One at a time']]))+f('c_wordOrder','Scoring',sel('wordOrder',[['any','Any order'],['exact','Exact order (harder)']]));
+    if(T)h+=f('c_wordStudySec','Seconds per word',num('wordStudySec',0.5,30,0.5),'All at once: total time = this × number of words')+f('c_wordRecallSec','Seconds to answer (0 = no limit)',num('wordRecallSec',0,900))}
   $('customFields').innerHTML=h;
   $('customFields').querySelectorAll('[data-k]').forEach(el=>el.onchange=el.oninput=()=>{const k=el.dataset.k;let v=el.value;if(el.type==='number'){v=parseFloat(v);if(isNaN(v))return;v=Math.max(+el.min,Math.min(+el.max,v))}else if(v==='true'||v==='false')v=v==='true';else if(/^\d+$/.test(v))v=+v;S[k]=v;persist();renderSummary()});
 }
@@ -230,6 +311,7 @@ function describe(c){
   else if(m==='pairs')parts.push(c.pairsCount+' pairs ('+c.pairsCount*2+' cards) of '+c.pairsKind,c.previewSec?'peek '+(+c.previewSec).toFixed(1)+' s':'no peek',c.timed&&c.pairsLimit?c.pairsLimit+' s limit':'no time limit');
   else if(m==='nback')parts.push(c.nbackN+'-back',c.nbackDual?'card + position (dual)':'card only',c.nbackTrials+' rounds',c.timed&&c.nbackInterval?c.nbackInterval.toFixed(1)+' s each':'each round waits for you');
   else if(m==='corsi')parts.push(c.corsiLen+' squares on a '+c.corsiGrid+'×'+c.corsiGrid+' grid',c.corsiReverse?'repeat it backwards':'repeat in the same order',(+c.corsiSpeed).toFixed(2)+' s per square',c.timed?'':'you may replay it once');
+  else if(m==='words')parts.push(c.wordCount+' words',c.studyMode==='flash'?'shown one at a time':'shown all at once',c.wordOrder==='exact'?'exact order counts':'any order',c.timed?(+c.wordStudySec).toFixed(1)+' s per word'+(c.wordRecallSec?', '+c.wordRecallSec+' s to answer':''):'no clock');
   return parts.filter(Boolean).join(' · ');
 }
 function renderSummary(){const c=currentCfg();$('summary').innerHTML='<b>'+MODES[S.mode].ico+' '+MODES[S.mode].name+(S.tab==='levels'?' — Level '+S.level:' — Custom')+':</b> '+esc(describe(c));
@@ -266,7 +348,7 @@ function start(){
   $('playPanel').classList.remove('hidden');$('hudTitle').textContent=MODES[S.mode].ico+' '+MODES[S.mode].name+(c.level?' · Level '+c.level:' · Custom');
   $('hudInfo').textContent=S.timed?'⏱ timed':'🧘 untimed';clock('—');bar(null);
   $('playPanel').scrollIntoView({behavior:'smooth',block:'start'});
-  ({numbers:cardGame,symbols:cardGame,mixed:cardGame,chimp:chimpGame,pairs:pairsGame,nback:nbackGame,corsi:corsiGame})[S.mode](c);
+  ({numbers:cardGame,symbols:cardGame,mixed:cardGame,chimp:chimpGame,pairs:pairsGame,nback:nbackGame,corsi:corsiGame,words:wordGame})[S.mode](c);
 }
 $('startBtn').onclick=start;
 $('quitBtn').onclick=()=>{clearTimers();running=null;$('playPanel').classList.add('hidden');bar(null)};
@@ -408,6 +490,38 @@ function corsiGame(c){
   play();
 }
 
+// ---------- 6. word list ----------
+// Plurals count: "boxes" matches box, "horses" matches horse.
+const WORDSET=new Set(WORDS);
+const norm=w=>{const n=w.toLowerCase().replace(/[^a-z]/g,'');return n.endsWith('es')&&WORDSET.has(n.slice(0,-2))?n.slice(0,-2):n.endsWith('s')&&!WORDSET.has(n)?n.slice(0,-1):n};
+function wordGame(c){
+  const list=shuffle(WORDS.slice()).slice(0,Math.min(WORDS.length,c.wordCount));running.seq=list;
+  if(c.studyMode==='flash'){
+    $('arena').innerHTML='<p class="center muted">Word <b id="wi">1</b> of '+list.length+' — make a picture for each one.</p><div class="cards"><div class="mcard big" id="wordCard" style="width:min(320px,90%);font-size:34px"></div></div>'+(c.timed?'':'<div class="actions" style="justify-content:center;margin-top:14px"><button class="primary" id="nextWord">Next word →</button></div>');
+    let i=0;const show=()=>{$('wi').textContent=i+1;$('wordCard').textContent=list[i];tick()};show();
+    if(c.timed){const loop=()=>later(()=>{i++;if(i>=list.length){wordRecall(c,list);return}show();loop()},Math.max(300,c.wordStudySec*1000));loop();clock('studying')}
+    else{const stop=stopwatch('study ');$('nextWord').onclick=()=>{if(i>=list.length-1){stop();wordRecall(c,list)}else{i++;show()}}}
+    return;
+  }
+  $('arena').innerHTML='<p class="center muted">Memorise these '+list.length+' words'+(c.wordOrder==='exact'?' in order':'')+'. Tip: link them in a story, or put each one on a spot in your memory palace.</p><ol class="wordlist" id="wordList">'+list.map(w=>'<li>'+esc(w)+'</li>').join('')+'</ol>'+
+    (c.timed?'':'<div class="actions" style="justify-content:center;margin-top:16px"><button class="primary" id="readyBtn">I’ve memorised them →</button></div>');
+  if(c.timed)countdown(Math.max(2,c.wordStudySec*list.length),()=>wordRecall(c,list),'study ');
+  else{const stop=stopwatch('study ');$('readyBtn').onclick=()=>{stop();wordRecall(c,list)}}
+}
+function wordRecall(c,list){
+  clearTimers();bar(null);
+  $('arena').innerHTML='<p class="center muted">Type every word you remember — one per line, or separated by commas'+(c.wordOrder==='exact'?', in the same order':'')+'.</p><textarea id="wordAnswer" rows="8" style="width:100%;font:16px \'IBM Plex Mono\',monospace" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Words you remember"></textarea><div class="actions" style="justify-content:center"><button class="primary" id="checkBtn">✓ Check</button></div>';
+  $('wordAnswer').focus();
+  const stop=c.timed&&c.wordRecallSec?null:stopwatch('answer ');
+  if(c.timed&&c.wordRecallSec)countdown(c.wordRecallSec,()=>check(),'answer ');
+  function check(){if(stop)stop();
+    const typed=$('wordAnswer').value.split(/[\n,;]+/).map(w=>w.trim()).filter(Boolean),tn=typed.map(norm);let ok=0;
+    const rows=list.map((w,i)=>{const hit=c.wordOrder==='exact'?tn[i]===norm(w):tn.includes(norm(w));if(hit)ok++;return '<li class="'+(hit?'ok':'bad')+'">'+esc(w)+(hit?' ✓':c.wordOrder==='exact'&&typed[i]?' <small>(you wrote '+esc(typed[i])+')</small>':' ✗')+'</li>'}).join('');
+    const extra=typed.filter(t=>!list.some(w=>norm(w)===norm(t)));
+    finish(ok/list.length*100,'<p>'+ok+' of '+list.length+' words'+(c.wordOrder==='exact'?' in the right place':'')+'.'+(extra.length?' Not on the list: '+esc(extra.slice(0,8).join(', '))+'.':'')+'</p><ol class="wordlist">'+rows+'</ol>',{items:list.length})}
+  $('checkBtn').onclick=check;
+}
+
 // ---------- stats ----------
 function renderStats(){
   const h=store.history,best={};h.forEach(r=>{if(r.stars>=2&&r.level){const k=r.mode;best[k]=Math.max(best[k]||0,r.level)}});
@@ -423,6 +537,68 @@ function renderStats(){
 $('exportBtn').onclick=()=>{const rows=[['date','game','level','timed','accuracy','stars','seconds','items']].concat(store.history.map(r=>[new Date(r.t).toISOString(),MODES[r.mode].name,r.level||'custom',r.timed?'yes':'no',r.acc,r.stars,Math.round(r.ms/1000),r.items]));
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));a.download='memory-forge-results.csv';a.click()};
 $('resetBtn').onclick=()=>{if(!confirm('Delete all your Memory Forge levels, stars and history?'))return;store.stars={};store.history=[];store.days=[];save();S.level=1;persist();renderAll()};
+
+// ---------- technique trainers ----------
+// Memory palace: pair each spot on the visitor's route with one item, then test spot by spot.
+const PAL_KEY='miga-memory-palace';
+const PAL_DEFAULT='Front door\nDoormat\nHall mirror\nCoat hooks\nKitchen table\nFridge\nSink\nSofa\nTV\nWindow';
+let palSpotsSaved='';try{palSpotsSaved=localStorage.getItem(PAL_KEY)||''}catch(e){}
+$('palSpots').value=palSpotsSaved||PAL_DEFAULT;
+$('palSpots').oninput=()=>{try{localStorage.setItem(PAL_KEY,$('palSpots').value)}catch(e){}};
+const lines=v=>v.split('\n').map(x=>x.trim()).filter(Boolean).slice(0,60);
+let palPairs=[];
+$('palRandom').onclick=()=>{const n=Math.max(3,lines($('palSpots').value).length);$('palItems').value=shuffle(WORDS.slice()).slice(0,n).join('\n')};
+$('palPlace').onclick=()=>{
+  const spots=lines($('palSpots').value);if(spots.length<3){$('palOut').innerHTML='<p class="muted">Write at least 3 spots of your route first.</p>';return}
+  let items=lines($('palItems').value);if(!items.length){$('palRandom').click();items=lines($('palItems').value)}
+  palPairs=spots.slice(0,items.length).map((s,i)=>[s,items[i]]);
+  $('palOut').innerHTML='<p>Walk the route slowly. At each spot, make a big, strange, moving picture of the item <b>doing something</b> to the spot. Take your time, then press “Hide and test me”.</p><table class="pal-table">'+palPairs.map(([s,it])=>'<tr><td>'+esc(s)+'</td><td><b>'+esc(it)+'</b></td></tr>').join('')+'</table>'+(items.length>spots.length?'<p class="muted">Only the first '+spots.length+' items fit your route. Add more spots for more items.</p>':'');
+  $('palTest').disabled=false;
+};
+$('palTest').onclick=()=>{
+  if(!palPairs.length)return;
+  $('palOut').innerHTML='<p>Walk your route. What was at each spot?</p><table class="pal-table">'+palPairs.map(([s],i)=>'<tr><td>'+esc(s)+'</td><td><input id="palA'+i+'" autocomplete="off" autocapitalize="off" aria-label="Item at '+esc(s)+'"></td></tr>').join('')+'</table><div class="actions"><button class="primary" id="palCheck">✓ Check</button></div>';
+  $('palA0').focus();
+  $('palOut').querySelectorAll('input').forEach((inp,i,all)=>inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(all[i+1])all[i+1].focus();else $('palCheck').click()}});
+  $('palCheck').onclick=()=>{let ok=0;palPairs.forEach(([s,it],i)=>{const inp=$('palA'+i),hit=norm(inp.value)===norm(it);if(hit)ok++;const td=inp.parentNode;td.innerHTML=hit?'<span class="ok">✓ '+esc(it)+'</span>':'<span class="bad">✗ '+esc(it)+'</span>'+(inp.value.trim()?' <small class="muted">(you wrote '+esc(inp.value.trim())+')</small>':'')});
+    $('palOut').insertAdjacentHTML('beforeend','<p class="bigmsg" style="font-size:20px">'+ok+' of '+palPairs.length+' remembered'+(ok===palPairs.length?' — perfect! Try more items or a timed Word list.':'. Make the missed pictures stranger and try again tomorrow.')+'</p>');
+    if(ok===palPairs.length)good();$('palTest').disabled=true};
+};
+
+// Major system: digits to consonant sounds, with one picture word for every pair 00-99.
+const MAJOR='sauce seat sun sumo zero seal sash sock sofa soap toes dad tuna dome tire towel dish duck dove tuba nose net nun gnome Nero nail notch neck knife knob mouse mat moon mummy mower mail match mug movie mop rose rat rain ram rower roll roach rock roof rope lace light lion lime lorry lily leash log lava lip cheese sheet chain jam chair jail judge shack chef ship case cat coin comb car coal cage cake cave cap face foot fan foam fire file fish fog fife fob bus bat bone bomb bear bell beach book beef pipe'.split(' ');
+const MAJOR1=['zoo','tie','knee','ham','ray','owl','shoe','key','ivy','bee'];
+const SOUNDS=['s/z','t/d','n','m','r','l','j/sh/ch','k/g','f/v','p/b'];
+function majorWords(d){const out=[];for(let i=0;i<d.length;i+=2){const p=d.slice(i,i+2);out.push([p,p.length===2?MAJOR[+p]:MAJOR1[+p]])}return out}
+$('majNum').oninput=()=>{const d=$('majNum').value.replace(/\D/g,'').slice(0,60);
+  $('majOut').innerHTML=d?majorWords(d).map(([p,w])=>'<span><b>'+p+'</b> '+w+'</span>').join(' ')+'<br><small class="muted">Sounds: '+d.split('').map(x=>SOUNDS[+x]).join(' · ')+'. Link the pictures in a story or put them in your palace.</small>':''};
+$('majTable').onclick=()=>{const box=$('majTableBox');if(!box.innerHTML)box.innerHTML='<div class="maj-grid">'+MAJOR.map((w,i)=>'<div><b>'+String(i).padStart(2,'0')+'</b>'+w+'</div>').join('')+'</div><p class="muted">Single digits: '+MAJOR1.map((w,i)=>i+' '+w).join(' · ')+'. Swap any word for one you picture more easily — your own words stick best.</p>';
+  box.classList.toggle('hidden');$('majTable').textContent=box.classList.contains('hidden')?'Show all 100 words':'Hide the list'};
+let majScore=[0,0];
+function majQuestion(){const n=rnd(100),p=String(n).padStart(2,'0');
+  $('majQuizBox').innerHTML='<div class="row"><b style="font:700 28px \'IBM Plex Mono\'">'+p+'</b><input id="majGuess" placeholder="Your picture word" style="max-width:220px" autocomplete="off" autocapitalize="off"><button class="primary" id="majCheck">Check</button><span class="muted">'+majScore[0]+' / '+majScore[1]+'</span></div><p id="majFeedback" class="muted"></p>';
+  $('majGuess').focus();
+  const check=()=>{const g=$('majGuess').value.trim();if(!g)return;const right=norm(g)===norm(MAJOR[n]);majScore[1]++;if(right)majScore[0]++;
+    $('majFeedback').innerHTML=(right?'✓ Yes — ':'The list word is ')+'<b>'+MAJOR[n]+'</b> ('+p.split('').map(x=>SOUNDS[+x]).join(' + ')+').'+(right?'':' Your own word is fine if its consonant sounds match.')+' <button class="secondary" id="majNext">Next →</button>';
+    if(right)good();$('majNext').onclick=majQuestion;$('majNext').focus()};
+  $('majCheck').onclick=check;$('majGuess').onkeydown=e=>{if(e.key==='Enter')check()}}
+$('majQuiz').onclick=majQuestion;
+
+// Review planner: spaced reviews at 1, 3, 7, 14 and 30 days, downloadable as calendar events.
+const GAPS=[1,3,7,14,30];
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+$('revDate').value=ymd(new Date());
+function reviewDates(){const base=new Date(($('revDate').value||ymd(new Date()))+'T12:00:00');return GAPS.map(g=>{const d=new Date(base);d.setDate(d.getDate()+g);return [g,d]})}
+function renderReviews(){$('revList').innerHTML=reviewDates().map(([g,d])=>'<li>+'+g+' day'+(g>1?'s':'')+': <b>'+d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})+'</b></li>').join('')}
+$('revDate').onchange=renderReviews;renderReviews();
+$('revIcs').onclick=()=>{
+  const what=($('revWhat').value.trim()||'what I learned').replace(/[\;,]/g,m=>'\\'+m).replace(/[\r\n]+/g,' ');
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  const ev=reviewDates().map(([g,d],i)=>{const a=ymd(d).replace(/-/g,''),e=new Date(d);e.setDate(e.getDate()+1);
+    return ['BEGIN:VEVENT','UID:memory-forge-'+stamp+'-'+i+'@migabuilder.com','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+a,'DTEND;VALUE=DATE:'+ymd(e).replace(/-/g,''),'SUMMARY:Review: '+what+' (+'+g+' day'+(g>1?'s':'')+')','DESCRIPTION:Test yourself first\\, then check. Memory Forge – migabuilder.com/memory-forge.html','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Review: '+what,'TRIGGER:PT9H','END:VALARM','END:VEVENT'].join('\r\n')}).join('\r\n');
+  const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MigaBuilder//Memory Forge//EN\r\n'+ev+'\r\nEND:VCALENDAR\r\n';
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='memory-reviews.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 
 renderAll();
 })();
