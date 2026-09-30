@@ -213,7 +213,7 @@
 
   <section class="table">
     <div class="title-block"><span data-i18n="previewTitle">CONTRACT FORGE — LIVE PREVIEW</span></div>
-    <div class="preview-wrap"><iframe id="previewFrame" title="Document preview"></iframe></div>
+    <div class="preview-wrap"><iframe id="previewFrame" title="Document preview" sandbox></iframe></div>
   </section>
 </main>
 
@@ -313,14 +313,16 @@
   function buildDocument() {
     const type = contractType.value;
     const typeWord = docTypeWord(type);
-    const bizName = bizNameInput.value.trim() || I18N.t('defaultBizName');
-    const other = otherParty.value.trim() || I18N.t('defaultOtherParty');
-    const scopeText = scope.value.trim() || I18N.t('defaultScopeText');
-    const termsText = terms.value.trim();
-    const governingLawText = governingLawInput.value.trim();
+    // Typed text is shown as text, never as HTML ("R&D <Team>" stays readable and pasted markup cannot run).
+    const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const bizName = esc(bizNameInput.value.trim() || I18N.t('defaultBizName'));
+    const other = esc(otherParty.value.trim() || I18N.t('defaultOtherParty'));
+    const scopeText = esc(scope.value.trim() || I18N.t('defaultScopeText'));
+    const termsText = esc(terms.value.trim());
+    const governingLawText = esc(governingLawInput.value.trim());
 
     const date = new Date().toLocaleDateString();
-    const effectiveDateText = effectiveDateInput.value.trim() || date;
+    const effectiveDateText = esc(effectiveDateInput.value.trim() || date);
     const docNumber = 'C-' + Date.now().toString().slice(-6);
     const isNda = type === 'NDA';
 

@@ -1,0 +1,54 @@
+name: Geography data
+
+# Keeps Geography Forge current: every week this rebuilds geo-data.json from the
+# latest world-countries package and Wikidata (leaders, government, population...)
+# with scripts/build-geo-data.py, and commits it to main when something changed.
+# The script refuses to write data that lost places or leaders compared with the
+# committed file, so a Wikidata outage fails this run instead of breaking the site.
+# A changed head of state/government is published only when two weekly runs agree
+# (geo-data-pending.json), and a person Wikidata lists as deceased never is, so a
+# vandalised Wikidata entry does not reach the page.
+# The history and culture texts are not in the file: the page reads them live
+# from Wikipedia, so they are always current.
+on:
+  schedule:
+    - cron: '23 4 * * 1'   # Mondays 04:23 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: geo-data
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download the latest world-countries package
+        run: npm pack world-countries --silent && tar xzf world-countries-*.tgz
+      - name: Rebuild geo-data.json (fresh from Wikidata)
+        run: python3 scripts/build-geo-data.py package/countries.json | tee geo-build.log
+      - name: Commit when the data changed
+        run: |
+          git add -N geo-data-pending.json
+          if git diff --quiet -- geo-data.json geo-data-pending.json; then echo "No changes in the country data"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          {
+            echo "Geography data: automatic update $(date -u +%Y-%m-%d)"
+            echo
+            tail -n +2 geo-build.log | head -60
+          } > commit-message.txt
+          git add geo-data.json geo-data-meta.json geo-data-pending.json
+          git commit -F commit-message.txt
+          git push origin HEAD:main

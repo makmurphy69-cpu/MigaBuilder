@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Focus Forge — free Pomodoro focus timer with tasks and calm sounds | MigaBuilder</title>
+<meta name="description" content="Free Pomodoro timer in your browser: focus and break sessions (25/5, 50/10 or your own), a task list with session counts, rain and noise sounds made on your device, desktop alerts, daily focus stats and streaks. No signup, nothing uploaded.">
+<link rel="canonical" href="https://migabuilder.com/focus-forge.html">
+<meta property="og:title" content="Focus Forge — free Pomodoro focus timer | MigaBuilder">
+<meta property="og:description" content="Focus sessions and breaks, a task list, calm background sounds and focus stats — private in your browser.">
+<meta property="og:url" content="https://migabuilder.com/focus-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.timer-wrap{display:grid;grid-template-columns:minmax(260px,1fr) minmax(260px,1fr);gap:18px;align-items:start}
+.phases{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px}
+.phases button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--ink)}
+.phases button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.dial{position:relative;width:min(300px,78vw);aspect-ratio:1;margin:6px auto 14px}
+.dial svg{width:100%;height:100%;transform:rotate(-90deg)}
+.dial circle{fill:none;stroke-width:12}.dial .track{stroke:rgba(22,32,43,.1)}.dial .prog{stroke:var(--amber);stroke-linecap:round;transition:stroke-dashoffset .4s linear}
+.dial.break .prog{stroke:var(--success)}
+.dial .readout{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dial .time{font:700 clamp(46px,13vw,68px) 'IBM Plex Mono';letter-spacing:-1px}
+.dial .label{font:600 14px 'Space Grotesk';color:rgba(22,32,43,.62);text-transform:uppercase;letter-spacing:1px}
+.dial .task-now{font-size:13px;color:rgba(22,32,43,.7);max-width:75%;text-align:center;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.controls .primary{min-width:140px;font-size:17px}
+.dots{display:flex;gap:6px;justify-content:center;margin:12px 0 0}.dots i{width:12px;height:12px;border-radius:50%;background:rgba(22,32,43,.15)}.dots i.done{background:var(--amber)}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px 12px}
+.cgrid .field{margin:0}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 12px}.presets button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:6px 10px;cursor:pointer;font-weight:600;color:var(--ink)}.presets button.on{border-color:var(--amber);background:#fff7e6}
+.checks{display:flex;flex-direction:column;gap:6px;margin-top:10px;font-size:14px}.checks label{display:flex;gap:8px;align-items:center}
+.task-add{display:flex;gap:6px;flex-wrap:wrap}.task-add input[type=text]{flex:1;min-width:160px;padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px}.task-add input[type=number]{width:74px;padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px}
+.tasks{list-style:none;padding:0;margin:12px 0 0}
+.tasks li{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px;margin-bottom:6px;cursor:pointer}
+.tasks li.current{border-color:var(--amber);box-shadow:inset 4px 0 0 var(--amber)}
+.tasks li.done .name{text-decoration:line-through;color:rgba(22,32,43,.5)}
+.tasks .name{flex:1;overflow-wrap:anywhere}.tasks .count{font:500 13px 'IBM Plex Mono';color:rgba(22,32,43,.62);white-space:nowrap}
+.tasks button{border:0;background:none;cursor:pointer;font-size:16px;color:rgba(22,32,43,.55);padding:2px 4px}
+.sounds{display:flex;gap:6px;flex-wrap:wrap}.sounds button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:600;color:var(--ink)}.sounds button.on{background:var(--navy);color:#fff}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.62)}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}.tips details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.tips summary{font-weight:700;cursor:pointer}.tips p,.tips li{font-size:13.5px;line-height:1.5}
+body.focusing .panel.side{opacity:.55;transition:opacity .3s}body.focusing .panel.side:hover{opacity:1}
+@media(max-width:760px){.timer-wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Focus Forge</span></nav>
+<header class="masthead"><div><h1>Focus Forge</h1><p>A Pomodoro focus timer with a task list, calm sounds and your focus stats — free and private in your browser.</p></div></header>
+<main>
+<div class="timer-wrap">
+  <section class="panel" id="timerPanel">
+    <div class="phases" role="tablist" aria-label="Session type">
+      <button data-phase="focus" id="phaseFocus" class="on">🎯 Focus</button><button data-phase="short" id="phaseShort">☕ Short break</button><button data-phase="long" id="phaseLong">🌿 Long break</button>
+    </div>
+    <div class="dial" id="dial">
+      <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="track" cx="60" cy="60" r="52"/><circle class="prog" id="prog" cx="60" cy="60" r="52"/></svg>
+      <div class="readout"><div class="label" id="phaseLabel">Focus</div><div class="time" id="time" role="timer" aria-live="off">25:00</div><div class="task-now" id="taskNow"></div></div>
+    </div>
+    <div class="controls"><button class="primary" id="startBtn">▶ Start</button><button class="secondary" id="resetBtn" title="Reset (R)">↺ Reset</button><button class="secondary" id="skipBtn" title="Skip (S)">⏭ Skip</button></div>
+    <div class="dots" id="dots" aria-label="Focus sessions in this round"></div>
+    <p class="muted" style="text-align:center;font-size:12.5px;margin:10px 0 0">Keys: <b>Space</b> start/pause · <b>R</b> reset · <b>S</b> skip</p>
+  </section>
+
+  <section class="panel side" id="tasksPanel">
+    <h2>Tasks</h2>
+    <p>Pick what you are working on. Each finished focus session is counted on the selected task.</p>
+    <form class="task-add" id="taskForm"><input type="text" id="taskName" placeholder="What do you want to get done?" maxlength="120" aria-label="New task"><input type="number" id="taskEst" min="1" max="20" value="2" title="Estimated focus sessions" aria-label="Estimated focus sessions"><button class="primary" id="taskAddBtn">Add</button></form>
+    <ul class="tasks" id="tasks"></ul>
+    <div class="actions"><button class="secondary" id="clearDoneBtn">Clear finished tasks</button></div>
+  </section>
+</div>
+
+<section class="panel side" id="settingsPanel">
+  <h2>Timer settings</h2>
+  <div class="presets" id="presets"></div>
+  <div class="cgrid">
+    <div class="field"><label for="focusMin">Focus (minutes)</label><input type="number" id="focusMin" min="1" max="180"></div>
+    <div class="field"><label for="shortMin">Short break (minutes)</label><input type="number" id="shortMin" min="1" max="60"></div>
+    <div class="field"><label for="longMin">Long break (minutes)</label><input type="number" id="longMin" min="1" max="90"></div>
+    <div class="field"><label for="longEvery">Long break after</label><select id="longEvery"><option value="2">2 sessions</option><option value="3">3 sessions</option><option value="4">4 sessions</option><option value="5">5 sessions</option><option value="6">6 sessions</option></select></div>
+  </div>
+  <div class="checks">
+    <label><input type="checkbox" id="autoBreak"> Start breaks automatically</label>
+    <label><input type="checkbox" id="autoFocus"> Start the next focus session automatically</label>
+    <label><input type="checkbox" id="chime" checked> Chime when a session ends</label>
+    <label><input type="checkbox" id="notify"> Desktop alert when a session ends</label>
+  </div>
+  <h2 style="margin-top:18px">Background sound</h2>
+  <p>Made on your device while you focus — nothing is streamed.</p>
+  <div class="sounds" id="sounds"></div>
+  <div class="field" style="max-width:280px;margin-top:10px"><label for="vol">Volume</label><input type="range" id="vol" min="0" max="1" step="0.01" value="0.35"></div>
+  <label class="checks" style="margin:0"><span><input type="checkbox" id="soundBreaks"> Keep playing during breaks</span></label>
+</section>
+
+<section class="panel side" id="statsPanel">
+  <h2>Your focus</h2>
+  <div class="stat-grid" id="stats"></div>
+  <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 6px">Last 7 days (focus minutes)</h3>
+  <div id="chart"></div>
+  <div class="actions" style="margin-top:10px"><button class="secondary" id="exportBtn">⬇ Download my sessions (CSV)</button><button class="danger" id="resetStatsBtn">Reset stats</button></div>
+  <p class="privacy" style="margin-top:12px">🔒 Your tasks, settings and stats are saved only in this browser. Nothing is uploaded.</p>
+</section>
+
+<section class="panel side">
+  <h2>How to focus better</h2>
+  <div class="tips">
+    <details open><summary>🍅 How the Pomodoro method works</summary><ol><li>Pick one task.</li><li>Focus for one session (25 minutes) — no email, no phone.</li><li>Take a 5-minute break: stand up, look away from the screen.</li><li>After four sessions, take a longer break of 15–30 minutes.</li></ol><p>If a thought pops up, write it in the task list and get back to work.</p></details>
+    <details><summary>⏱️ Which length to pick</summary><p><b>25/5</b> is a good start and suits tasks you avoid. <b>50/10</b> suits deep work like writing or coding once you are in the flow. <b>90/20</b> matches a long deep-work block; use it once or twice a day. Shorter sessions (15/3) help on tired days or with young learners.</p></details>
+    <details><summary>📵 Protect the session</summary><p>Put your phone in another room or face down, close tabs you don't need, and tell people when you'll be free. Keep a notepad for “later” thoughts instead of acting on them.</p></details>
+    <details><summary>☕ Use breaks well</summary><p>Move, drink water, look out of a window. Skip social media: it makes it harder to start again. After a long break, first reread your task list.</p></details>
+    <details><summary>📚 Studying?</summary><p>Spend focus sessions testing yourself rather than rereading — try <a href="flashcard-forge.html">Flashcard Forge</a> and the techniques in <a href="memory-forge.html#techniques">Memory Forge</a>. Use a break to write down what you remember from the last session.</p></details>
+    <details><summary>📈 Estimate and learn</summary><p>Guess how many sessions each task needs. Comparing guesses with the real count, week after week, makes your plans more honest.</p></details>
+  </div>
+</section>
+</main>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Focus Forge runs entirely in your browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='miga-focus-v1';
+let store;try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
+store.settings=Object.assign({focus:25,short:5,long:15,every:4,autoBreak:false,autoFocus:false,chime:true,notify:false,sound:'off',vol:0.35,soundBreaks:false},store.settings||{});
+store.tasks=Array.isArray(store.tasks)?store.tasks:[];store.log=Array.isArray(store.log)?store.log:[];
+const S=store.settings;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+
+// ---------- timer ----------
+// The end time is stored as a timestamp, so the timer stays right in background tabs and after a reload.
+const PHASE={focus:{label:'Focus',key:'focus'},short:{label:'Short break',key:'short'},long:{label:'Long break',key:'long'}};
+let phase=store.phase&&PHASE[store.phase]?store.phase:'focus',endAt=store.endAt||0,remaining=store.remaining||0,round=store.round||0,tick=0;
+const running=()=>endAt>0;
+const phaseSec=p=>Math.max(60,Math.round(S[PHASE[p].key]*60));
+if(!remaining||remaining>phaseSec(phase))remaining=phaseSec(phase);
+const C=2*Math.PI*52;$('prog').style.strokeDasharray=C;
+function fmt(sec){sec=Math.max(0,Math.ceil(sec));const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return (h?h+':'+String(m).padStart(2,'0'):String(m).padStart(2,'0'))+':'+String(s).padStart(2,'0')}
+function left(){return running()?(endAt-Date.now())/1000:remaining}
+function draw(){
+  const l=left(),total=phaseSec(phase);
+  $('time').textContent=fmt(l);$('phaseLabel').textContent=PHASE[phase].label;
+  $('prog').style.strokeDashoffset=C*(1-Math.max(0,Math.min(1,l/total)));
+  $('dial').classList.toggle('break',phase!=='focus');
+  document.querySelectorAll('.phases button').forEach(b=>b.classList.toggle('on',b.dataset.phase===phase));
+  $('startBtn').textContent=running()?'⏸ Pause':(l<total?'▶ Resume':'▶ Start');
+  document.title=running()?fmt(l)+' · '+(phase==='focus'?'Focus':'Break')+' — Focus Forge':'Focus Forge — free Pomodoro focus timer with tasks and calm sounds | MigaBuilder';
+  document.body.classList.toggle('focusing',running()&&phase==='focus');
+  const cur=store.tasks.find(t=>t.id===store.current&&!t.done);$('taskNow').textContent=phase==='focus'&&cur?'▸ '+cur.name:'';
+  $('dots').innerHTML=Array.from({length:S.every},(_,i)=>'<i class="'+(i<round?'done':'')+'"></i>').join('');
+}
+function persist(){store.phase=phase;store.endAt=endAt;store.remaining=remaining;store.round=round;save()}
+function start(){if(running())return;endAt=Date.now()+remaining*1000;unlockAudio();loop();ambient();persist();draw()}
+function pause(){if(!running())return;remaining=Math.max(1,left());endAt=0;clearInterval(tick);ambient();persist();draw()}
+function loop(){clearInterval(tick);tick=setInterval(()=>{if(left()<=0)complete();else draw()},250)}
+function setPhase(p,autoStart){clearInterval(tick);phase=p;endAt=0;remaining=phaseSec(p);persist();ambient();draw();if(autoStart)start()}
+function complete(){
+  clearInterval(tick);const was=phase,mins=S[PHASE[was].key];
+  if(was==='focus'){
+    const task=store.tasks.find(t=>t.id===store.current&&!t.done);if(task)task.count=(task.count||0)+1;
+    store.log.push({t:Date.now(),min:mins,task:task?task.name:''});if(store.log.length>3000)store.log=store.log.slice(-3000);
+    round++;
+  }
+  const next=was==='focus'?(round>=S.every?'long':'short'):'focus';
+  if(was==='long')round=0;
+  if(S.chime)chime(was==='focus');
+  alertDone(was==='focus'?'Focus session done — time for a '+(next==='long'?'long':'short')+' break.':'Break over — ready to focus?');
+  setPhase(next,next==='focus'?S.autoFocus:S.autoBreak);
+  renderTasks();renderStats();
+}
+$('startBtn').onclick=()=>running()?pause():start();
+$('resetBtn').onclick=()=>setPhase(phase,false);
+$('skipBtn').onclick=()=>{const next=phase==='focus'?(round+1>=S.every?'long':'short'):'focus';if(phase==='focus')round++;if(phase==='long')round=0;setPhase(next,false)};
+document.querySelectorAll('.phases button').forEach(b=>b.onclick=()=>{if(b.dataset.phase==='long')round=0;setPhase(b.dataset.phase,false)});
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||e.target.closest('input,textarea,select,[contenteditable]'))return;if(e.key===' '&&e.target.closest('button'))return; // a focused button handles Space itself
+ 
+  if(e.key===' '){e.preventDefault();$('startBtn').click()}else if(e.key==='r'||e.key==='R')$('resetBtn').click();else if(e.key==='s'||e.key==='S')$('skipBtn').click()});
+
+// ---------- sound ----------
+let actx=null,master=null,noiseNode=null,rainTimer=0;
+function unlockAudio(){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();if(!master){master=actx.createGain();master.connect(actx.destination)}}catch(e){}}
+function chime(focusDone){unlockAudio();if(!actx)return;const notes=focusDone?[660,880,1320]:[880,660];notes.forEach((f,i)=>{const o=actx.createOscillator(),g=actx.createGain(),t=actx.currentTime+i*0.22;o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.25,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+1.1);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+1.2)})}
+function noiseBuffer(kind){const len=actx.sampleRate*4,buf=actx.createBuffer(2,len,actx.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=buf.getChannelData(ch);let b0=0,b1=0,b2=0,last=0;
+    for(let i=0;i<len;i++){const w=Math.random()*2-1;
+      if(kind==='pink'){b0=.99765*b0+w*.099046;b1=.963*b1+w*.2965164;b2=.57*b2+w*1.0526913;d[i]=(b0+b1+b2+w*.1848)*.11}
+      else if(kind==='brown'||kind==='rain'){last=(last+.02*w)/1.02;d[i]=last*3.5}
+      else d[i]=w*.35}}
+  return buf}
+const SOUNDS=[['off','🔇 Off'],['rain','🌧️ Rain'],['brown','🌊 Brown noise'],['pink','🌬️ Pink noise'],['white','📻 White noise']];
+function stopNoise(){if(noiseNode){try{noiseNode.stop()}catch(e){}noiseNode.disconnect();noiseNode=null}clearInterval(rainTimer)}
+function ambient(){
+  const want=S.sound!=='off'&&running()&&(phase==='focus'||S.soundBreaks);
+  if(!want){stopNoise();return}
+  unlockAudio();if(!actx)return;
+  if(noiseNode&&noiseNode._kind===S.sound)return;
+  stopNoise();
+  const src=actx.createBufferSource();src.buffer=noiseBuffer(S.sound);src.loop=true;src._kind=S.sound;
+  const g=actx.createGain();g.gain.value=S.vol;
+  if(S.sound==='rain'){const hp=actx.createBiquadFilter();hp.type='highpass';hp.frequency.value=400;const lp=actx.createBiquadFilter();lp.type='lowpass';lp.frequency.value=5200;src.connect(hp).connect(lp).connect(g);
+    // Soft drops on top of the steady rain.
+    rainTimer=setInterval(()=>{if(!actx)return;const o=actx.createBufferSource(),dg=actx.createGain(),bp=actx.createBiquadFilter(),t=actx.currentTime;o.buffer=src.buffer;bp.type='bandpass';bp.frequency.value=1500+Math.random()*3500;bp.Q.value=6;dg.gain.setValueAtTime(S.vol*.6*Math.random(),t);dg.gain.exponentialRampToValueAtTime(.0001,t+.06);o.connect(bp).connect(dg).connect(master);o.start(t,Math.random()*3,.08)},90)}
+  else src.connect(g);
+  g.connect(master);src._gain=g;src.start();noiseNode=src;
+}
+$('sounds').innerHTML=SOUNDS.map(([k,l])=>'<button type="button" data-sound="'+k+'" id="sound-'+k+'">'+l+'</button>').join('');
+function drawSounds(){document.querySelectorAll('#sounds button').forEach(b=>b.classList.toggle('on',b.dataset.sound===S.sound))}
+document.querySelectorAll('#sounds button').forEach(b=>b.onclick=()=>{S.sound=b.dataset.sound;save();stopNoise();drawSounds();if(S.sound!=='off'&&!running()){unlockAudio();previewSound()}else ambient()});
+let previewTimer=0;function previewSound(){const was=endAt;endAt=Date.now()+4000;ambient();endAt=was;clearTimeout(previewTimer);previewTimer=setTimeout(()=>{if(!running())stopNoise()},3000)}
+$('vol').value=S.vol;$('vol').oninput=()=>{S.vol=+$('vol').value;if(noiseNode&&noiseNode._gain)noiseNode._gain.gain.value=S.vol;save()};
+$('soundBreaks').checked=S.soundBreaks;$('soundBreaks').onchange=()=>{S.soundBreaks=$('soundBreaks').checked;save();ambient()};
+drawSounds();
+
+// ---------- alerts ----------
+function alertDone(text){if(S.notify&&'Notification' in window&&Notification.permission==='granted'){try{new Notification('Focus Forge',{body:text,icon:'/assets/icon-192.png',tag:'focus-forge'})}catch(e){}}}
+$('notify').onchange=async()=>{if($('notify').checked&&'Notification' in window){let p=Notification.permission;if(p==='default')p=await Notification.requestPermission();if(p!=='granted'){$('notify').checked=false;alert('Alerts are blocked for this site in your browser settings.')}}S.notify=$('notify').checked;save()};
+
+// ---------- settings ----------
+const PRESETS=[[25,5,15,'25 / 5 classic'],[50,10,20,'50 / 10 deep work'],[90,20,30,'90 / 20 long block'],[15,3,10,'15 / 3 gentle']];
+function drawPresets(){$('presets').innerHTML=PRESETS.map((p,i)=>'<button type="button" data-p="'+i+'" id="preset-'+i+'" class="'+(S.focus===p[0]&&S.short===p[1]&&S.long===p[2]?'on':'')+'">'+p[3]+'</button>').join('');
+  $('presets').querySelectorAll('button').forEach(b=>b.onclick=()=>{const p=PRESETS[+b.dataset.p];S.focus=p[0];S.short=p[1];S.long=p[2];applySettings()})}
+function applySettings(){save();['focus','short','long'].forEach(k=>$(k+'Min').value=S[k]);$('longEvery').value=S.every;drawPresets();if(!running())remaining=phaseSec(phase);persist();draw()}
+[['focusMin','focus',180],['shortMin','short',60],['longMin','long',90]].forEach(([id,k,max])=>$(id).onchange=()=>{const v=Math.round(+$(id).value);if(v>=1&&v<=max){S[k]=v;applySettings()}else $(id).value=S[k]});
+$('longEvery').onchange=()=>{S.every=+$('longEvery').value;applySettings()};
+['autoBreak','autoFocus','chime'].forEach(k=>{$(k).checked=S[k];$(k).onchange=()=>{S[k]=$(k).checked;save()}});
+$('notify').checked=S.notify&&'Notification' in window&&Notification.permission==='granted';
+applySettings();
+
+// ---------- tasks ----------
+function renderTasks(){
+  const t=store.tasks;
+  $('tasks').innerHTML=t.length?t.map(x=>'<li data-id="'+x.id+'" class="'+(x.id===store.current&&!x.done?'current ':'')+(x.done?'done':'')+'"><input type="checkbox" aria-label="Finished" '+(x.done?'checked':'')+'><span class="name">'+esc(x.name)+'</span><span class="count" title="Focus sessions done / estimated">'+(x.count||0)+' / '+x.est+' 🍅</span><button type="button" data-del title="Delete task" aria-label="Delete task">✕</button></li>').join(''):'<li style="cursor:default;color:rgba(22,32,43,.6)">No tasks yet — add one above, or just press Start.</li>';
+  $('tasks').querySelectorAll('li[data-id]').forEach(li=>{const x=t.find(y=>y.id===li.dataset.id);
+    li.onclick=e=>{if(e.target.matches('input,button'))return;store.current=x.id;save();renderTasks();draw()};
+    li.querySelector('input').onchange=e=>{x.done=e.target.checked;if(x.done&&store.current===x.id){const n=t.find(y=>!y.done);store.current=n?n.id:null}save();renderTasks();draw()};
+    li.querySelector('[data-del]').onclick=()=>{store.tasks=t.filter(y=>y!==x);if(store.current===x.id)store.current=null;save();renderTasks();draw()}});
+}
+$('taskForm').onsubmit=e=>{e.preventDefault();const name=$('taskName').value.trim();if(!name)return;const est=Math.max(1,Math.min(20,Math.round(+$('taskEst').value)||1));
+  const x={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),name,est,count:0,done:false};store.tasks.push(x);if(!store.current||!store.tasks.some(y=>y.id===store.current&&!y.done))store.current=x.id;$('taskName').value='';save();renderTasks();draw()};
+$('clearDoneBtn').onclick=()=>{store.tasks=store.tasks.filter(x=>!x.done);save();renderTasks()};
+
+// ---------- stats ----------
+const dayKey=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+function renderStats(){
+  const byDay={};store.log.forEach(r=>{const k=dayKey(r.t);byDay[k]=(byDay[k]||0)+r.min});
+  const today=dayKey(Date.now()),todays=store.log.filter(r=>dayKey(r.t)===today);
+  let streak=0;{const d=new Date();if(!byDay[dayKey(d)])d.setDate(d.getDate()-1);while(byDay[dayKey(d)]){streak++;d.setDate(d.getDate()-1)}}
+  const week=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return [d,byDay[dayKey(d)]||0]});
+  const total=store.log.reduce((a,r)=>a+r.min,0);
+  const h=m=>m>=60?Math.floor(m/60)+' h'+(m%60?' '+m%60+' min':''):m+' min';
+  $('stats').innerHTML='<div class="stat"><b>'+h(todays.reduce((a,r)=>a+r.min,0))+'</b><span>focused today</span></div><div class="stat"><b>'+todays.length+' 🍅</b><span>sessions today</span></div><div class="stat"><b>'+streak+' 🔥</b><span>day streak</span></div><div class="stat"><b>'+h(week.reduce((a,x)=>a+x[1],0))+'</b><span>this week</span></div><div class="stat"><b>'+h(total)+'</b><span>all time</span></div>';
+  const max=Math.max(60,...week.map(x=>x[1]));
+  $('chart').innerHTML='<svg viewBox="0 0 700 130" width="100%" height="130" role="img" aria-label="Focus minutes in the last 7 days">'+week.map(([d,m],i)=>{const bh=Math.round(m/max*90),x=i*100+20;return '<rect x="'+x+'" y="'+(100-bh)+'" width="60" height="'+bh+'" rx="3" fill="'+(i===6?'#E2A63B':'#0E2A47')+'"><title>'+m+' min</title></rect><text x="'+(x+30)+'" y="118" text-anchor="middle" font-size="13" fill="#16202B">'+d.toLocaleDateString(undefined,{weekday:'short'})+'</text>'+(m?'<text x="'+(x+30)+'" y="'+(94-bh)+'" text-anchor="middle" font-size="12" fill="#16202B">'+m+'</text>':'')}).join('')+'<line x1="0" y1="100" x2="700" y2="100" stroke="#bbb"/></svg>';
+}
+$('exportBtn').onclick=()=>{const q=v=>'"'+String(v).replace(/"/g,'""')+'"';const rows=[['finished','minutes','task']].concat(store.log.map(r=>[new Date(r.t).toISOString(),r.min,q(r.task||'')]));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));a.download='focus-forge-sessions.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('resetStatsBtn').onclick=()=>{if(!confirm('Delete all your focus history?'))return;store.log=[];save();renderStats()};
+
+renderTasks();renderStats();draw();
+if(running()){if(left()<=0)complete();else loop()}
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

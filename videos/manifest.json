@@ -558,6 +558,28 @@
    "kind": "text"
   }
  },
+ "focus-forge.html": {
+  "title": "Focus Forge",
+  "video": "videos/focus-forge.mp4",
+  "poster": "videos/focus-forge.jpg",
+  "duration": 100,
+  "transcript": [
+   "Welcome to Focus Forge. Work in focused sessions with short breaks, and watch your focus time add up.",
+   "First, write what you want to get done, guess how many sessions it needs, and press Add.",
+   "Pick a session length. Twenty five minutes of focus and a five minute break is the classic Pomodoro.",
+   "Choose a calm background sound. Rain and noise are made on your device, nothing is streamed.",
+   "Press Start. The ring counts down, and the tab title shows the time left, even in another tab.",
+   "When the session ends you hear a chime, the session is counted on your task, and your break begins.",
+   "Your focus minutes, sessions and day streak are saved only in this browser, with a chart of the last seven days.",
+   "Below are tips for focusing better, and how to use your sessions for studying.",
+   "Now it is your turn. Open Focus Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/focus-forge.png",
+   "label": "Focus stats from this video",
+   "kind": "image"
+  }
+ },
  "form-forge.html": {
   "title": "Form Forge",
   "video": "videos/form-forge.mp4",
@@ -795,10 +817,10 @@
   "title": "Memory Forge",
   "video": "videos/memory-forge.mp4",
   "poster": "videos/memory-forge.jpg",
-  "duration": 132,
+  "duration": 212,
   "transcript": [
    "Welcome to Memory Forge. Train your memory with number and symbol cards and other games, level by level.",
-   "Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back and sequences each train a different kind of memory.",
+   "Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back, sequences and word lists each train a different kind of memory.",
    "Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.",
    "There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.",
    "Press Start and memorise the cards from left to right.",
@@ -808,7 +830,10 @@
    "With the clock on, the cards hide by themselves when the time bar runs out.",
    "Now tap the numbers and symbols in the right order before the answer clock runs out.",
    "Every card is checked, and your result is added to your progress.",
-   "Your levels, day streak and a chart of your games are saved only in this browser, with memory techniques that help you remember more.",
+   "Your levels, day streak and a chart of your games are saved only in this browser.",
+   "Below them is a guide to the techniques memory champions use: the memory palace, stories, pegs, the Major system, names and faces, and a four week plan to master them.",
+   "Practise with the trainers. Write the spots of a route you know, press Random words and Place them, then picture each word at its spot.",
+   "The Major system trainer turns any number into picture words, and the review planner puts your next reviews in your calendar.",
    "Now it is your turn. Open Memory Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
@@ -941,13 +966,15 @@
   "title": "Palette Forge",
   "video": "videos/palette-forge.mp4",
   "poster": "videos/palette-forge.jpg",
-  "duration": 43,
+  "duration": 84,
   "transcript": [
    "Welcome to Palette Forge. It builds a colour palette for your brand that is easy to read.",
    "Pick a base colour for your brand.",
    "Choose a harmony, such as complementary or triadic, and press Generate palette.",
    "Each colour shows its code and how readable text is on it.",
    "Copy the colour codes, or copy them as ready made CSS for your website.",
+   "The contrast checker tests text on a background against the accessibility guidelines. Grey on white only just fails for normal text.",
+   "Press Fix the text colour, and it finds the closest colour that passes. Below are the readable pairs in your palette.",
    "Now it is your turn. Open Palette Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {

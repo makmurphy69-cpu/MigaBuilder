@@ -45,6 +45,13 @@ function sanitizePageName(raw) {
   return name.slice(0, MAX_PAGE_NAME_LENGTH).replace(/[^a-zA-Z0-9._/-]/g, '_');
 }
 
+// Pages send their file name ("geo-forge.html"). Anything else is counted as "other",
+// so a script cannot fill KV (and the stats page) with made-up page names.
+function pageKey(raw) {
+  const name = sanitizePageName(raw);
+  return /^[a-z0-9][a-z0-9-]{0,50}\.html$/.test(name) ? name : 'other';
+}
+
 // KV has no atomic increment, so a read-modify-write can occasionally lose a
 // concurrent write under heavy simultaneous traffic. That's an acceptable
 // trade-off for an approximate visit counter (not a billing meter).
@@ -62,7 +69,7 @@ async function handleHit(request, env, origin) {
   } catch (e) {
     payload = {};
   }
-  const page = sanitizePageName(payload && payload.page);
+  const page = pageKey(payload && payload.page);
   const day = todayKey();
 
   await incrementKV(env.VISITS_KV, 'views:total', 1);
@@ -75,7 +82,7 @@ async function handleHit(request, env, origin) {
 async function handleEvent(request, env, origin) {
   let payload;
   try { payload = await request.json(); } catch (e) { payload = {}; }
-  const page = sanitizePageName(payload && payload.page);
+  const page = pageKey(payload && payload.page);
   const event = sanitizePageName(payload && payload.event).replace(/[/.]/g, '_').slice(0, 40);
   const allowed = ['tool_action', 'helpful_yes', 'helpful_no'];
   if (!allowed.includes(event)) return json({ error: 'Unsupported aggregate event.' }, 400, origin);

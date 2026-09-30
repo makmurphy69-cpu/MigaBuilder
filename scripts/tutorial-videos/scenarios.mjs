@@ -188,6 +188,8 @@ S('palette-forge.html', {
     await h.step('Each colour shows its code and how readable text is on it.', () => h.point('#swatches'));
     await h.sampleShot('#swatches', 'Palette made in this video');
     await h.step('Copy the colour codes, or copy them as ready made CSS for your website.', () => h.point('#copyCssBtn'));
+    await h.step('The contrast checker tests text on a background against the accessibility guidelines. Grey on white only just fails for normal text.', async () => { await h.scroll('#contrastPanel', 'start'); await h.fill('#ccFgHex', '#777777'); await h.fill('#ccBgHex', '#FFFFFF'); });
+    await h.step('Press Fix the text colour, and it finds the closest colour that passes. Below are the readable pairs in your palette.', async () => { await h.click('#ccFix'); await h.point('#ccPairs'); });
   }
 });
 
@@ -428,6 +430,23 @@ S('alphabet-forge.html', {
   }
 });
 
+S('focus-forge.html', {
+  title: 'Focus Forge', subtitle: 'A Pomodoro focus timer',
+  intro: 'Welcome to Focus Forge. Work in focused sessions with short breaks, and watch your focus time add up.',
+  async run(h, page) {
+    await h.step('First, write what you want to get done, guess how many sessions it needs, and press Add.', async () => { await h.type('#taskName', 'Finish the history essay'); await h.fill('#taskEst', '3'); await h.click('#taskAddBtn'); });
+    await h.step('Pick a session length. Twenty five minutes of focus and a five minute break is the classic Pomodoro.', async () => { await h.scroll('#settingsPanel', 'start'); await h.click('#preset-0'); });
+    await h.step('Choose a calm background sound. Rain and noise are made on your device, nothing is streamed.', async () => { await h.click('#sound-rain'); await h.point('#vol'); });
+    await h.step('Press Start. The ring counts down, and the tab title shows the time left, even in another tab.', async () => { await h.scroll('#timerPanel', 'start'); await h.click('#startBtn'); await h.wait(1500); });
+    await h.skip('Skipping ahead to the end of the session', () => page.evaluate(() => { const real = Date.now.bind(Date), jump = 25 * 60 * 1000; Date.now = () => real() + jump; }));
+    await h.wait(800);
+    await h.step('When the session ends you hear a chime, the session is counted on your task, and your break begins.', () => h.point('#tasks'));
+    await h.step('Your focus minutes, sessions and day streak are saved only in this browser, with a chart of the last seven days.', () => h.scroll('#statsPanel', 'start'));
+    await h.sampleShot('#statsPanel', 'Focus stats from this video');
+    await h.step('Below are tips for focusing better, and how to use your sessions for studying.', () => h.scrollBy(500));
+  }
+});
+
 S('memory-forge.html', {
   title: 'Memory Forge', subtitle: 'Memory training with levels, cards and a clock',
   intro: 'Welcome to Memory Forge. Train your memory with number and symbol cards and other games, level by level.',
@@ -437,7 +456,7 @@ S('memory-forge.html', {
       for (const id of ids) if (id) await h.click(id);
     };
     const remember = () => page.evaluate(() => { window.__memSeq = [...document.querySelectorAll('#studyCards .mcard span:not(.ix)')].map(s => s.textContent); });
-    await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back and sequences each train a different kind of memory.', () => h.point('#modes'));
+    await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back, sequences and word lists each train a different kind of memory.', () => h.point('#modes'));
     await h.step('Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.', async () => { await h.click('#mode-numbers'); await h.click('#timedOff'); });
     await h.step('There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.', () => h.point('#levels'));
     await h.step('Press Start and memorise the cards from left to right.', async () => { await h.click('#startBtn'); await remember(); });
@@ -452,7 +471,10 @@ S('memory-forge.html', {
     await h.step('Now tap the numbers and symbols in the right order before the answer clock runs out.', answer);
     await h.step('Every card is checked, and your result is added to your progress.', () => h.click('#checkBtn'));
     await h.sampleShot('#playPanel', 'Memory game result from this video');
-    await h.step('Your levels, day streak and a chart of your games are saved only in this browser, with memory techniques that help you remember more.', () => h.scroll('#stats', 'center'));
+    await h.step('Your levels, day streak and a chart of your games are saved only in this browser.', () => h.scroll('#stats', 'center'));
+    await h.step('Below them is a guide to the techniques memory champions use: the memory palace, stories, pegs, the Major system, names and faces, and a four week plan to master them.', () => h.scroll('#techniques', 'start'));
+    await h.step('Practise with the trainers. Write the spots of a route you know, press Random words and Place them, then picture each word at its spot.', async () => { await h.scroll('#palaceTrainer', 'start'); await h.click('#palRandom'); await h.click('#palPlace'); });
+    await h.step('The Major system trainer turns any number into picture words, and the review planner puts your next reviews in your calendar.', async () => { await h.scroll('#majorTrainer', 'start'); await h.fill('#majNum', '31415926'); });
   }
 });
 
