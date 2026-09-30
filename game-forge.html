@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="i18n.js"></script>
+<script src="sandbox-frame.js"></script>
 
 <style>
   :root {
@@ -295,7 +296,7 @@
         <strong data-i18n="sheetEmptyStrong">Nothing here yet.</strong>
         <span data-i18n="sheetEmptyText">Describe a game on the left and click Generate — it'll show up here, ready to play.</span>
       </div>
-      <iframe id="preview" style="display:none;" title="Generated game preview"></iframe>
+      <iframe id="preview" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-pointer-lock allow-downloads" allow="autoplay; fullscreen; gamepad" style="display:none;" title="Generated game preview"></iframe>
     </div>
 
     <div class="tune" id="tunePanel">
@@ -774,7 +775,9 @@
   const tuneStatus = document.getElementById('tuneStatus');
   let tuneDefaults = null;
   let tuneSaveTimer = 0;
-  function gameWindow() { try { return preview.contentWindow; } catch (e) { return null; } }
+  // The preview is sandboxed (no access to this page), so live values go through MigaSandbox messages.
+  let liveConfig = null;
+  const toGame = (op, args) => MigaSandbox.call(preview, op, args).catch(() => null);
   function guessRange(v) {
     const abs = Math.abs(v) || 1;
     const max = v <= 0 ? 10 : Number.isInteger(v) && v <= 10 ? Math.max(10, v * 3) : v * 3;
@@ -783,9 +786,10 @@
   }
   function prettyLabel(key) { return key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]+/g, ' ').replace(/^./, c => c.toUpperCase()); }
   function formatValue(v, step) { const d = String(step).includes('.') ? String(step).split('.')[1].length : 0; return Number(v).toFixed(Math.min(d, 3)); }
-  function readTuning() {
-    const w = gameWindow();
-    const cfg = w && w.GAME_CONFIG && typeof w.GAME_CONFIG === 'object' ? w.GAME_CONFIG : null;
+  async function readTuning() {
+    const got = await toGame('get', { name: 'GAME_CONFIG' });
+    const cfg = got && typeof got === 'object' && !Array.isArray(got) ? got : null;
+    liveConfig = cfg;
     const keys = cfg ? Object.keys(cfg).filter(k => typeof cfg[k] === 'number' && isFinite(cfg[k])) : [];
     tuneSliders.innerHTML = '';
     addHooksBtn.hidden = !!keys.length;
@@ -795,7 +799,8 @@
       tuneSliders.innerHTML = '<p class="tune-empty">This game has no tuning sliders yet. Click “✨ Add sliders &amp; picture slots” below and the AI will add them.</p>';
       return;
     }
-    const ui = (w.GAME_CONFIG_UI && typeof w.GAME_CONFIG_UI === 'object') ? w.GAME_CONFIG_UI : {};
+    const gotUi = await toGame('get', { name: 'GAME_CONFIG_UI' });
+    const ui = (gotUi && typeof gotUi === 'object') ? gotUi : {};
     if (!tuneDefaults) tuneDefaults = Object.assign({}, cfg);
     keys.forEach(function (k) {
       const meta = Object.assign(guessRange(tuneDefaults[k] != null ? tuneDefaults[k] : cfg[k]), ui[k] || {});
@@ -808,9 +813,9 @@
       input.min = Math.min(meta.min, cfg[k]); input.max = Math.max(meta.max, cfg[k]); input.step = meta.step || 'any'; input.value = cfg[k];
       out.textContent = formatValue(cfg[k], input.step);
       input.addEventListener('input', function () {
-        const live = gameWindow() && gameWindow().GAME_CONFIG;
         const v = Number(input.value);
-        if (live) live[k] = v;
+        if (liveConfig) liveConfig[k] = v;
+        toGame('set', { name: 'GAME_CONFIG', key: k, value: v });
         out.textContent = formatValue(v, input.step);
         scheduleTuneSave();
       });
@@ -821,20 +826,17 @@
   function scheduleTuneSave() {
     clearTimeout(tuneSaveTimer);
     tuneSaveTimer = setTimeout(function () {
-      const w = gameWindow();
-      if (!w || !w.GAME_CONFIG) return;
-      const json = JSON.stringify(w.GAME_CONFIG);
+      if (!liveConfig) return;
+      const json = JSON.stringify(liveConfig);
       const updated = currentGameHtml.replace(/(window\.GAME_CONFIG\s*=\s*)\{[\s\S]*?\}(\s*;)/, function (_, a, b) { return a + json + b; });
       if (updated !== currentGameHtml) { currentGameHtml = updated; sourceText.value = updated; }
     }, 250);
   }
   preview.addEventListener('load', function () { if (currentGameHtml) readTuning(); });
   resetTuneBtn.addEventListener('click', function () {
-    const w = gameWindow();
-    if (!tuneDefaults || !w || !w.GAME_CONFIG) return;
-    Object.assign(w.GAME_CONFIG, tuneDefaults);
-    readTuning();
-    scheduleTuneSave();
+    if (!tuneDefaults || !liveConfig) return;
+    Object.assign(liveConfig, tuneDefaults);
+    toGame('assign', { name: 'GAME_CONFIG', value: tuneDefaults }).then(readTuning).then(scheduleTuneSave);
   });
   addHooksBtn.addEventListener('click', function () {
     refineInput.value = 'Add the TUNING HOOKS (a <script id="game-config"> block with window.GAME_CONFIG and window.GAME_CONFIG_UI) and the PICTURE SLOTS (use gameImage("player") and gameImage("background") when drawing), reading the config values every frame. Do not change how the game plays otherwise.';
@@ -844,8 +846,7 @@
   // Picture drop zones: FileReader turns the image into a data URL that lives inside the game file.
   function setAsset(name, dataUrl) {
     gameAssets[name] = dataUrl || '';
-    const w = gameWindow();
-    if (w) { w.GAME_ASSETS = w.GAME_ASSETS || {}; w.GAME_ASSETS[name] = gameAssets[name]; }
+    toGame('assets', { name: name, value: gameAssets[name] });
     if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; }
     renderAssetDrops();
   }
@@ -956,8 +957,7 @@
   function syncSfx() {
     window.GAME_SFX = gameSfx;
     try { localStorage.setItem('miga-game-sfx', JSON.stringify(gameSfx)); } catch (e) {}
-    const w = gameWindow();
-    if (w && w.GAME_SFX) Object.assign(w.GAME_SFX, clone(gameSfx));
+    toGame('assign', { name: 'GAME_SFX', value: clone(gameSfx) });
     if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; }
     renderSfx();
   }
@@ -1127,7 +1127,7 @@
   function applySheet(sheet) {
     gameSheet = sheet;
     clearSheetBtn.disabled = !sheet;
-    if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; preview.srcdoc = currentGameHtml; }
+    if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; preview.srcdoc = MigaSandbox.prepare(currentGameHtml); }
   }
   useSheetBtn.addEventListener('click', () => {
     if (!sheetImg) return;
@@ -1219,7 +1219,7 @@
     embedBtn.disabled = false;
     sheetEmpty.style.display = 'none';
     preview.style.display = 'block';
-    preview.srcdoc = html;
+    preview.srcdoc = MigaSandbox.prepare(html);
     sourceText.value = html;
     viewSourceBtn.disabled = false;
     downloadBtn.disabled = false;

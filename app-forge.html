@@ -33,6 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="i18n.js"></script>
+<script src="sandbox-frame.js"></script>
 
 <style>
   :root {
@@ -265,7 +266,7 @@
           <span data-i18n="stageEmptyText">Describe your app on the left and click Generate.</span>
         </div>
       </div>
-      <iframe id="previewFrame" title="App preview" style="display:none;"></iframe>
+      <iframe id="previewFrame" title="App preview" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-pointer-lock allow-downloads" allow="autoplay; fullscreen" style="display:none;"></iframe>
     </div>
 
     <div class="refine-row" id="refineRow" style="display:none;">
@@ -473,7 +474,7 @@
     currentAppHtml = html;
     stageEmpty.style.display = 'none';
     previewFrame.style.display = 'block';
-    previewFrame.srcdoc = html;
+    previewFrame.srcdoc = MigaSandbox.prepare(html);
     refineRow.style.display = 'flex';
     downloadBtn.disabled = false;
   }

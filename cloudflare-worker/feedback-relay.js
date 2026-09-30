@@ -89,6 +89,12 @@ export default {
     if (request.method !== 'POST') {
       return json({ error: 'Method not allowed' }, 405, origin);
     }
+    // The Origin header can be faked outside a browser, so an optional RATE_LIMITER
+    // binding (e.g. 3 requests / 60 s per IP) stops scripts from flooding the repo with issues.
+    if (env.RATE_LIMITER) {
+      const { success } = await env.RATE_LIMITER.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+      if (!success) return json({ error: 'Too many messages in a short time. Wait a minute and try again.' }, 429, origin);
+    }
 
     let payload;
     try {
@@ -117,13 +123,15 @@ export default {
       return json({ error: 'Description is required and must be under ' + MAX_DESCRIPTION + ' characters.' }, 400, origin);
     }
 
+    // "@name" in a public issue notifies that GitHub user; break the mention so the form cannot be used to ping people.
+    const noMentions = text => text.replace(/@(?=[A-Za-z0-9-])/g, '@\u200b');
     const typePrefix = type === 'bug' ? 'Bug' : type === 'suggestion' ? 'Suggestion' : 'Feedback';
-    const issueTitle = '[' + typePrefix + ': ' + tool + '] ' + title;
+    const issueTitle = '[' + typePrefix + ': ' + tool + '] ' + noMentions(title);
     const issueBody =
       '**Tool:** ' + tool + '\n' +
       '**Type:** ' + typePrefix + '\n\n' +
-      description +
-      (contact ? '\n\n---\n_Contact left by submitter: ' + contact + '_' : '') +
+      noMentions(description) +
+      (contact ? '\n\n---\n_Contact left by submitter: ' + noMentions(contact) + '_' : '') +
       '\n\n---\n_Submitted via the feedback form on the site._';
 
     const createResp = await fetch(apiBase + '/issues', {
@@ -137,8 +145,9 @@ export default {
     });
 
     if (!createResp.ok) {
-      const errText = await createResp.text();
-      return json({ error: 'Could not submit feedback right now.', detail: errText.slice(0, 300) }, 502, origin);
+      // GitHub's error text stays in the Worker log; it can name the repo or token scopes.
+      console.warn('GitHub issue create failed', createResp.status, (await createResp.text()).slice(0, 300));
+      return json({ error: 'Could not submit feedback right now.' }, 502, origin);
     }
 
     const created = await createResp.json();

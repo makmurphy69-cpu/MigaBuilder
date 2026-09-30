@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/cartoon-forge.html">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<script src="usage-counter.js" defer></script>
+<script src="usage-counter.js" defer></script><script src="sandbox-frame.js"></script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cartoon Forge — free AI cartoon generator</title>
@@ -58,7 +58,7 @@
   <section class="stage">
     <div class="status" id="status">CARTOON FORGE — NOTHING GENERATED YET</div>
     <div class="format-tabs" id="formatTabs" hidden></div>
-    <div class="screen"><div class="empty" id="empty"><strong>Your cartoon will appear here.</strong>Describe the story and click Generate cartoon.</div><iframe id="preview" title="Generated cartoon preview" sandbox="allow-scripts allow-same-origin allow-modals" style="display:none"></iframe></div>
+    <div class="screen"><div class="empty" id="empty"><strong>Your cartoon will appear here.</strong>Describe the story and click Generate cartoon.</div><iframe id="preview" title="Generated cartoon preview" sandbox="allow-scripts allow-modals" allow="autoplay" style="display:none"></iframe></div>
     <div class="actions"><button class="action" id="replayBtn" disabled>Replay</button><button class="action" id="recordBtn" disabled>Record WebM</button><button class="action" id="shareBtn" disabled>Share video</button><button class="action" id="saveVideoBtn" disabled>Download video</button><button class="action" id="downloadBtn" disabled>Download HTML</button><button class="action" id="sourceBtn" disabled>View source</button></div>
     <style>.cf-music{align-items:center;margin-top:6px}.cf-music a{font-size:12.5px;color:#6fd1e0}.cf-music input[type=range]{width:100px}</style>
     <div class="actions cf-music"><label class="action" title="Background music plays with the cartoon and goes into the recorded video">🎵 <span id="musicName">Add music</span><input type="file" id="musicInput" accept="audio/*" hidden></label><input type="range" id="musicVol" min="0" max="1" step="0.05" value="0.6" aria-label="Music volume" title="Music volume" hidden><button class="action" id="musicOff" hidden>✕ Remove music</button><a href="music-forge.html" title="Make free music in Music Forge, then Use it in → Cartoon Forge">Make free music ↗</a></div>
@@ -102,11 +102,11 @@
   function requestText(){return ['STORY: '+$('brief').value.trim(),'STYLE: '+$('style').value,'AUDIENCE: '+$('audience').value,'FORMAT: '+$('format').value,'TARGET DURATION: '+$('duration').value+' seconds','CAPTIONS: '+($('captions').checked?'yes':'no'),'VOICE NARRATION: '+($('narration').checked?'yes, browser speechSynthesis':'no'),'PROCEDURAL SOUND: '+($('sound').checked?'yes':'no'),'Create 3 to 7 scenes depending on duration. Keep recurring characters visually consistent.'].join('\n')}
   function socialPackage(){const story=$('brief').value.trim(),clean=story.replace(/\s+/g,' '),first=(clean.split(/[.!?]/)[0]||'My animated story').slice(0,70),words=(clean.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(w=>w.length>4).slice(0,3);$('socialTitle').value=first.charAt(0).toUpperCase()+first.slice(1);$('socialDescription').value=clean+'\n\nCreated with MigaBuilder Cartoon Forge.';$('socialTags').value=['#MigaBuilder','#Cartoon','#Animation'].concat(words.map(w=>'#'+w.charAt(0).toUpperCase()+w.slice(1))).join(' ')}
   function renderFormatTabs(){const labels={'landscape 16:9':'YouTube 16:9','portrait 9:16':'Shorts/Reels 9:16','square 1:1':'Square 1:1'},keys=Object.keys(versions);formatTabs.hidden=!keys.length;formatTabs.innerHTML='';keys.forEach(key=>{const b=document.createElement('button');b.type='button';b.className='format-tab'+($('format').value===key?' active':'');b.textContent=labels[key];b.onclick=()=>{$('format').value=key;show(versions[key],false)};formatTabs.appendChild(b)})}
-  function show(html,save=true){if(!/<!doctype html>/i.test(html)||!/<canvas[\s>]/i.test(html))throw new Error('The model did not return a valid canvas cartoon. Try Generate again.');currentHtml=html;if(save)versions[$('format').value]=html;lastVideoBlob=null;if(lastVideoUrl){URL.revokeObjectURL(lastVideoUrl);lastVideoUrl=''}shareBtn.disabled=true;saveVideoBtn.disabled=true;preview.srcdoc=html;preview.style.display='block';empty.style.display='none';source.value=html;['replayBtn','recordBtn','downloadBtn','sourceBtn','refineBtn'].forEach(id=>$(id).disabled=false);socialPackage();sharePanel.classList.add('show');renderFormatTabs();status.textContent='CARTOON FORGE — READY TO PLAY'}
+  function show(html,save=true){if(!/<!doctype html>/i.test(html)||!/<canvas[\s>]/i.test(html))throw new Error('The model did not return a valid canvas cartoon. Try Generate again.');currentHtml=html;if(save)versions[$('format').value]=html;lastVideoBlob=null;if(lastVideoUrl){URL.revokeObjectURL(lastVideoUrl);lastVideoUrl=''}shareBtn.disabled=true;saveVideoBtn.disabled=true;preview.srcdoc=MigaSandbox.prepare(html);preview.style.display='block';empty.style.display='none';source.value=html;['replayBtn','recordBtn','downloadBtn','sourceBtn','refineBtn'].forEach(id=>$(id).disabled=false);socialPackage();sharePanel.classList.add('show');renderFormatTabs();status.textContent='CARTOON FORGE — READY TO PLAY'}
   generateBtn.onclick=async()=>{clearError();if(!$('brief').value.trim()){fail('Describe the cartoon you want.');return}generateBtn.disabled=true;generateBtn.textContent='Animating…';status.textContent='CARTOON FORGE — WRITING THE STORY…';const started=Date.now(),progress=setInterval(()=>{const seconds=Math.floor((Date.now()-started)/1000);status.textContent=seconds<25?'CARTOON FORGE — WRITING THE STORY…':seconds<60?'CARTOON FORGE — DRAWING SCENES…':'CARTOON FORGE — FINISHING THE ANIMATION… ('+seconds+'s)'},1000);try{show(await callAI(systemPrompt(),requestText()))}catch(e){fail(e.message||String(e));status.textContent='CARTOON FORGE — GENERATION FAILED'}finally{clearInterval(progress);generateBtn.disabled=false;generateBtn.textContent='Generate cartoon'}};
   packBtn.onclick=async()=>{clearError();if(!$('brief').value.trim()){fail('Describe the cartoon you want.');return}const formats=['landscape 16:9','portrait 9:16','square 1:1'],original=$('format').value;packBtn.disabled=true;generateBtn.disabled=true;try{for(let i=0;i<formats.length;i++){$('format').value=formats[i];status.textContent='CARTOON FORGE — GENERATING FORMAT '+(i+1)+' OF 3…';show(await callAI(systemPrompt(),requestText()))}status.textContent='CARTOON FORGE — 3-FORMAT PACK READY'}catch(e){fail(e.message||String(e));status.textContent='CARTOON FORGE — FORMAT PACK STOPPED'}finally{if(!versions[$('format').value]&&versions[original]){$('format').value=original;show(versions[original],false)}packBtn.disabled=false;generateBtn.disabled=false}};
   refineBtn.onclick=async()=>{clearError();const instruction=$('refine').value.trim();if(!currentHtml||!instruction){fail(!currentHtml?'Generate a cartoon first.':'Describe the change you want.');return}refineBtn.disabled=true;refineBtn.textContent='Applying…';status.textContent='CARTOON FORGE — APPLYING CHANGE…';try{const prompt='Here is the current complete HTML cartoon:\n\n'+currentHtml+'\n\nCHANGE REQUEST:\n'+instruction+'\n\nReturn the entire updated HTML document only. Preserve all working features and window.cartoonController.';show(await callAI(systemPrompt(),prompt))}catch(e){fail(e.message||String(e));status.textContent='CARTOON FORGE — CHANGE FAILED'}finally{refineBtn.disabled=false;refineBtn.textContent='Apply change'}};
-  $('replayBtn').onclick=()=>{window.cfMusic&&cfMusic.start();try{const w=preview.contentWindow;if(w?.cartoonController?.replay)w.cartoonController.replay();else preview.srcdoc=currentHtml}catch(e){preview.srcdoc=currentHtml}};
+  $('replayBtn').onclick=()=>{window.cfMusic&&cfMusic.start();MigaSandbox.call(preview,'call',{name:'cartoonController.replay'}).catch(()=>{preview.srcdoc=MigaSandbox.prepare(currentHtml)})};
   $('downloadBtn').onclick=()=>{const blob=new Blob([currentHtml],{type:'text/html'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='migabuilder-cartoon.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
   $('sourceBtn').onclick=()=>{const visible=source.style.display==='block';source.style.display=visible?'none':'block';$('sourceBtn').textContent=visible?'View source':'Hide source'};
   function videoFile(){return lastVideoBlob?new File([lastVideoBlob],'migabuilder-cartoon.webm',{type:lastVideoBlob.type||'video/webm'}):null}
@@ -115,33 +115,32 @@
   shareBtn.onclick=async()=>{clearError();const file=videoFile();if(!file){fail('Record the cartoon first.');return}try{if(navigator.share&&(!navigator.canShare||navigator.canShare({files:[file]}))){await navigator.share({title:'My MigaBuilder cartoon',text:'Created with MigaBuilder Cartoon Forge',files:[file]});status.textContent='CARTOON FORGE — SHARE SHEET OPENED'}else{downloadVideo();sharePanel.classList.add('show');fail('Direct file sharing is not supported in this browser. The video was downloaded; choose a channel below and upload it there.')}}catch(e){if(e?.name!=='AbortError')fail('Sharing could not start. Download the video and use one of the upload links below.')}};
   $('copySocialBtn').onclick=async()=>{const text=[$('socialTitle').value,$('socialDescription').value,$('socialTags').value].join('\n\n');try{await navigator.clipboard.writeText(text);$('copySocialBtn').textContent='Copied';setTimeout(()=>$('copySocialBtn').textContent='Copy title, description & hashtags',1600)}catch(e){fail('Copy was blocked. Select the fields and copy them manually.')}};
 
-  recordBtn.onclick=async()=>{clearError();try{const w=preview.contentWindow,controller=w?.cartoonController,canvas=controller?.getCanvas?.()||preview.contentDocument?.querySelector('canvas');if(!canvas?.captureStream)throw new Error('This browser cannot record the generated canvas. Try Chrome or Edge.');const canvasStream=canvas.captureStream(30),stream=new MediaStream(canvasStream.getVideoTracks()),audioStream=controller?.getAudioStream?.();(window.cfMusic&&cfMusic.has()?cfMusic.mix(audioStream):(audioStream?.getAudioTracks?audioStream.getAudioTracks():[])).forEach(track=>stream.addTrack(track));const mime=MediaRecorder.isTypeSupported('video/webm;codecs=vp9,opus')?'video/webm;codecs=vp9,opus':'video/webm',rec=new MediaRecorder(stream,{mimeType:mime}),chunks=[];rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};rec.onstop=()=>{window.cfMusic&&cfMusic.stop();lastVideoBlob=new Blob(chunks,{type:'video/webm'});if(lastVideoUrl){URL.revokeObjectURL(lastVideoUrl);lastVideoUrl=''}shareBtn.disabled=false;saveVideoBtn.disabled=false;sharePanel.classList.add('show');recordBtn.disabled=false;recordBtn.textContent='Record again';status.textContent='CARTOON FORGE — VIDEO READY TO SHARE'};recordBtn.disabled=true;recordBtn.textContent='Recording…';status.textContent='CARTOON FORGE — RECORDING IN REAL TIME…';controller?.replay?.();window.cfMusic&&cfMusic.start();rec.start(250);const seconds=Number(controller?.getDuration?.())||Number($('duration').value);setTimeout(()=>{if(rec.state!=='inactive')rec.stop()},(seconds+1)*1000)}catch(e){recordBtn.disabled=false;recordBtn.textContent='Record WebM';fail(e.message||String(e))}};
+  // The cartoon runs in a sandbox without access to this page, so it records itself (canvas, its own sound and the
+  // background music, which is sent to it as a file) and hands the finished video back.
+  recordBtn.onclick=async()=>{clearError();const finish=()=>{recordBtn.disabled=false};try{recordBtn.disabled=true;recordBtn.textContent='Recording…';status.textContent='CARTOON FORGE — RECORDING IN REAL TIME…';window.cfMusic&&cfMusic.stop();const music=window.cfMusic&&cfMusic.has()?await cfMusic.blob():null,seconds=Number($('duration').value)||20;const blob=await MigaSandbox.call(preview,'record',{music,volume:window.cfMusic?cfMusic.volume():1,seconds},(Math.min(600,seconds*3)+30)*1000);if(!(blob instanceof Blob)||!blob.size)throw new Error('The recording came back empty. Try Record again.');lastVideoBlob=new Blob([blob],{type:'video/webm'});if(lastVideoUrl){URL.revokeObjectURL(lastVideoUrl);lastVideoUrl=''}shareBtn.disabled=false;saveVideoBtn.disabled=false;sharePanel.classList.add('show');recordBtn.textContent='Record again';status.textContent='CARTOON FORGE — VIDEO READY TO SHARE'}catch(e){recordBtn.textContent='Record WebM';fail(e.message||String(e));status.textContent='CARTOON FORGE — RECORDING FAILED'}finally{finish()}};
 })();
 </script>
 
 <script src="tutorials.js" defer></script>
 <script>
-/* Background music for the cartoon: plays on Replay and Record, and is mixed with the cartoon's own
- * sound into the recorded video (MediaRecorder keeps only one audio track, so they are mixed). */
+/* Background music for the cartoon: plays here on Replay. For Record, the file is sent to the sandboxed
+ * cartoon, which mixes it with its own sound into the video (MediaRecorder keeps only one audio track). */
 (function () {
   'use strict';
   const $ = id => document.getElementById(id), bgm = new Audio(); bgm.loop = true;
-  let url = '', ctx = null, gain = null, out = null;
+  let url = '', ctx = null, gain = null;
   function route() {
     if (ctx) return;
     ctx = new (window.AudioContext || window.webkitAudioContext)();
     const src = ctx.createMediaElementSource(bgm); gain = ctx.createGain(); gain.gain.value = +$('musicVol').value;
-    out = ctx.createMediaStreamDestination(); src.connect(gain); gain.connect(ctx.destination); gain.connect(out);
+    src.connect(gain); gain.connect(ctx.destination);
   }
   window.cfMusic = {
     has: () => !!url,
     start() { if (!url) return; route(); if (ctx.state === 'suspended') ctx.resume(); bgm.currentTime = 0; bgm.play().catch(() => {}); },
     stop() { bgm.pause(); },
-    mix(cartoonStream) {
-      route();
-      if (cartoonStream && cartoonStream.getAudioTracks && cartoonStream.getAudioTracks().length) { try { ctx.createMediaStreamSource(cartoonStream).connect(out); } catch (e) { /* cartoon sound unavailable */ } }
-      return out.stream.getAudioTracks();
-    }
+    blob: () => fetch(url).then(r => r.blob()),
+    volume: () => +$('musicVol').value
   };
   $('musicInput').addEventListener('change', e => {
     const f = e.target.files[0]; if (!f) return;

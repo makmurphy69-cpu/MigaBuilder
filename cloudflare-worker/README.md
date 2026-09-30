@@ -126,7 +126,15 @@ back so the page reads like a small public community board.
    labels ahead of time so they show their intended colors: `feedback`,
    `bug`, `enhancement`. GitHub will still accept the labels without this
    step, just in a default color.
-7. Commit and push.
+7. Recommended: under **Settings → Bindings** add a rate-limit binding
+   named `RATE_LIMITER` (for example 3 requests per 60 seconds). The Worker
+   uses it, when present, to stop scripts from flooding the repo with issues
+   (the Origin check alone can be faked outside a browser).
+8. Commit and push.
+
+The Worker also breaks `@name` mentions in submitted text (so the form can't
+be used to ping GitHub users) and keeps GitHub's error details in the Worker
+log instead of sending them to the browser.
 
 Two things worth knowing:
 - This lets **any anonymous visitor** create an issue on your repo through
@@ -172,7 +180,8 @@ anywhere on the site — bookmark the URL yourself).
 9. Commit and push.
 
 **Adding new tools needs no Cloudflare changes.** The Worker counts any page
-name it receives, and `visits.html` reads the tool list straight from the
+name of the form `some-tool.html` (anything else is counted as `other`, so a
+script can't fill KV with made-up names), and `visits.html` reads the tool list straight from the
 homepage (`#toolGroups` in `index.html`) every time it loads. So once a new
 tool page includes `usage-counter.js` (or the inline visit snippet) and has a
 card on the homepage, it shows up in the dashboard automatically — no
