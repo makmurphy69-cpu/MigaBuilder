@@ -14,6 +14,8 @@
  */
 
 const TTL_SECONDS = 600; // a code and its offer/answer expire after 10 minutes
+const MAX_BODY_BYTES = 128 * 1024;
+const MAX_SDP_CHARS = 120_000;
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -24,24 +26,44 @@ const CORS_HEADERS = {
 function json(data, status) {
   return new Response(JSON.stringify(data), {
     status: status || 200,
-    headers: Object.assign({ 'Content-Type': 'application/json' }, CORS_HEADERS)
+    headers: Object.assign({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff'
+    }, CORS_HEADERS)
   });
 }
 
 function isValidCode(code) {
-  return typeof code === 'string' && /^[A-Za-z0-9]{4,16}$/.test(code);
+  // New sessions use ten Web-Crypto-generated characters. Accept older
+  // six-character codes during the ten-minute rolling deployment window.
+  return typeof code === 'string' && /^[2-9A-HJ-KMNP-Z]{6,16}$/.test(code);
+}
+
+async function isLimited(binding, request) {
+  if (!binding) return null;
+  const result = await binding.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+  return !result.success;
+}
+
+async function readJson(request) {
+  const headerLength = Number(request.headers.get('Content-Length'));
+  if (Number.isFinite(headerLength) && headerLength > MAX_BODY_BYTES) return { tooLarge: true };
+  const text = await request.text();
+  if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) return { tooLarge: true };
+  try { return { value: JSON.parse(text) }; } catch (e) { return { invalid: true }; }
 }
 
 export default {
   async fetch(request, env) {
-    if (request.method === 'OPTIONS') return new Response(null, { headers: CORS_HEADERS });
+    if (request.method === 'OPTIONS') return new Response(null, { headers: Object.assign({ 'Cache-Control': 'no-store' }, CORS_HEADERS) });
 
     const url = new URL(request.url);
     const parts = url.pathname.split('/').filter(Boolean); // [code, "offer"|"answer"]
     const code = parts[0];
     const kind = parts[1];
 
-    if (!isValidCode(code) || (kind !== 'offer' && kind !== 'answer')) {
+    if (parts.length !== 2 || !isValidCode(code) || (kind !== 'offer' && kind !== 'answer')) {
       return json({ error: 'Not found' }, 404);
     }
     if (!env.SIGNAL_KV) {
@@ -50,22 +72,40 @@ export default {
     const key = kind + ':' + code;
 
     if (request.method === 'PUT') {
-      let body;
-      try { body = await request.json(); } catch (e) { return json({ error: 'Invalid JSON body' }, 400); }
-      if (!body || typeof body.sdp !== 'string' || typeof body.type !== 'string') {
-        return json({ error: 'Body must include sdp and type' }, 400);
+      const limited = await isLimited(env.SIGNAL_WRITE_LIMITER, request);
+      if (limited === null) return json({ error: 'Worker is missing the SIGNAL_WRITE_LIMITER binding.' }, 503);
+      if (limited) {
+        return json({ error: 'Too many signaling updates. Wait a minute and try again.' }, 429);
+      }
+      const parsed = await readJson(request);
+      if (parsed.tooLarge) return json({ error: 'Signaling message is too large.' }, 413);
+      if (parsed.invalid) return json({ error: 'Invalid JSON body' }, 400);
+      const body = parsed.value;
+      if (!body || typeof body.sdp !== 'string' || body.sdp.length < 1 || body.sdp.length > MAX_SDP_CHARS ||
+          body.type !== kind || !/^v=0(?:\r?\n|$)/.test(body.sdp)) {
+        return json({ error: 'Body must include a valid offer or answer SDP under 120 KB.' }, 400);
       }
       await env.SIGNAL_KV.put(key, JSON.stringify({ sdp: body.sdp, type: body.type }), { expirationTtl: TTL_SECONDS });
       return json({ ok: true });
     }
 
     if (request.method === 'GET') {
+      const limited = await isLimited(env.SIGNAL_READ_LIMITER, request);
+      if (limited === null) return json({ error: 'Worker is missing the SIGNAL_READ_LIMITER binding.' }, 503);
+      if (limited) {
+        return json({ error: 'Too many signaling checks. Wait a minute and try again.' }, 429);
+      }
       const stored = await env.SIGNAL_KV.get(key);
       if (!stored) return json({ error: 'Not ready yet' }, 404);
       return json(JSON.parse(stored));
     }
 
     if (request.method === 'DELETE') {
+      const limited = await isLimited(env.SIGNAL_WRITE_LIMITER, request);
+      if (limited === null) return json({ error: 'Worker is missing the SIGNAL_WRITE_LIMITER binding.' }, 503);
+      if (limited) {
+        return json({ error: 'Too many signaling updates. Wait a minute and try again.' }, 429);
+      }
       await env.SIGNAL_KV.delete('offer:' + code);
       await env.SIGNAL_KV.delete('answer:' + code);
       return json({ ok: true });

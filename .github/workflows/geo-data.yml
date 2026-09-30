@@ -2,12 +2,13 @@ name: Geography data
 
 # Keeps Geography Forge current: every week this rebuilds geo-data.json from the
 # latest world-countries package and Wikidata (leaders, government, population...)
-# with scripts/build-geo-data.py, and commits it to main when something changed.
+# with scripts/build-geo-data.py, and opens or updates a pull request when data changes.
 # The script refuses to write data that lost places or leaders compared with the
 # committed file, so a Wikidata outage fails this run instead of breaking the site.
 # A changed head of state/government is published only when two weekly runs agree
 # (geo-data-pending.json), and a person Wikidata lists as deceased never is, so a
-# vandalised Wikidata entry does not reach the page.
+# vandalised Wikidata entry does not reach the page. A human reviews each
+# generated change before it reaches the live site.
 # The history and culture texts are not in the file: the page reads them live
 # from Wikipedia, so they are always current.
 on:
@@ -24,6 +25,7 @@ jobs:
     timeout-minutes: 120
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,7 +40,9 @@ jobs:
         run: npm pack world-countries --silent && tar xzf world-countries-*.tgz
       - name: Rebuild geo-data.json (fresh from Wikidata)
         run: python3 scripts/build-geo-data.py package/countries.json | tee geo-build.log
-      - name: Commit when the data changed
+      - name: Open or update a review pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           git add -N geo-data-pending.json
           if git diff --quiet -- geo-data.json geo-data-pending.json; then echo "No changes in the country data"; exit 0; fi
@@ -51,4 +55,23 @@ jobs:
           } > commit-message.txt
           git add geo-data.json geo-data-meta.json geo-data-pending.json
           git commit -F commit-message.txt
-          git push origin HEAD:main
+          branch="automation/geography-data"
+          git push --force-with-lease origin "HEAD:refs/heads/$branch"
+          title="Geography data update $(date -u +%Y-%m-%d)"
+          {
+            echo "## Weekly Geography Forge data review"
+            echo
+            echo "This update is not live until the pull request is reviewed and merged."
+            echo
+            echo "### Generated change summary"
+            tail -n +2 geo-build.log | head -60
+            echo
+            echo "### Review notes"
+            echo "Check leadership and government changes against the linked sources before merging. The build script holds changed leaders for two weekly runs and rejects unusually incomplete data."
+          } > pr-body.md
+          pr_number=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$pr_number" ]; then
+            gh pr edit "$pr_number" --title "$title" --body-file pr-body.md
+          else
+            gh pr create --base main --head "$branch" --title "$title" --body-file pr-body.md
+          fi

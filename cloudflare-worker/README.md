@@ -67,26 +67,35 @@ anything. The video itself travels directly between the two browsers
 (peer-to-peer, via WebRTC) — this Worker's only job is to briefly relay the
 one-time "connection handshake" (an offer and an answer) between them, since
 two browsers on different networks otherwise have no way to find each
-other. It never sees the video, audio, or chat.
+other. The Worker temporarily holds the SDP handshake, which can include
+network-candidate metadata, for up to 10 minutes. It never receives the video,
+audio, or chat.
 
 1. Go to https://dash.cloudflare.com and sign in (or create a free account).
 2. In the sidebar, go to **Workers & Pages** → **Create** → **Create Worker**.
 3. Give it a name (e.g. `migabuilder-screenshare`) and click **Deploy** to
    create the placeholder Worker.
-4. Click **Edit code**. Delete the sample code and paste in the contents of
-   `screenshare-signal.js` from this folder. Click **Deploy**.
-5. Go to the Worker's **Settings → Bindings** → **Add binding** →
+4. Go to the Worker's **Settings → Bindings** → **Add binding** →
    **KV Namespace**. Create a new namespace (e.g. `SIGNAL_KV`) and bind it
    to the variable name `SIGNAL_KV`. Save.
-6. Copy the Worker's URL (shown at the top of its page, looks like
+5. Add two **Rate Limiting** bindings:
+   - `SIGNAL_READ_LIMITER`: 80 requests per 60 seconds.
+   - `SIGNAL_WRITE_LIMITER`: 10 requests per 60 seconds.
+   These limits use the request IP only as the Cloudflare limiter key. The
+   Worker returns `503` for the corresponding operation when a binding is
+   missing, so deploys fail closed instead of leaving session codes unthrottled.
+6. Click **Edit code**. Delete the sample code and paste in the contents of
+   `screenshare-signal.js` from this folder. Click **Deploy**.
+7. Copy the Worker's URL (shown at the top of its page, looks like
    `https://migabuilder-screenshare.<your-subdomain>.workers.dev`).
-7. Paste that URL into `screen-forge.html` as the value of `SIGNAL_URL`
+8. Paste that URL into `screen-forge.html` as the value of `SIGNAL_URL`
    (near the top of the `<script>` block — currently a placeholder).
-8. Commit and push.
+9. Commit and push.
 
-This all runs on Cloudflare's free plan — each session only needs two tiny
-writes (the offer and the answer), well within the free tier's daily KV
-write limit. Codes expire after 10 minutes whether or not anyone connects.
+New sessions use a ten-character cryptographically random code. Older
+six-character codes remain accepted for one 10-minute expiry window during
+deployment. Signaling bodies are capped at 128 KB, and codes expire after 10
+minutes whether or not anyone connects.
 
 Note: peer-to-peer connections can fail to establish directly on some
 restrictive corporate or public Wi-Fi networks (this needs a TURN relay
@@ -126,10 +135,10 @@ back so the page reads like a small public community board.
    labels ahead of time so they show their intended colors: `feedback`,
    `bug`, `enhancement`. GitHub will still accept the labels without this
    step, just in a default color.
-7. Recommended: under **Settings → Bindings** add a rate-limit binding
-   named `RATE_LIMITER` (for example 3 requests per 60 seconds). The Worker
-   uses it, when present, to stop scripts from flooding the repo with issues
-   (the Origin check alone can be faked outside a browser).
+7. Under **Settings → Bindings**, add a **Rate Limiting** binding named
+   `RATE_LIMITER` (3 requests per 60 seconds). The Worker refuses to create
+   issues if this binding is missing; the Origin check alone can be faked
+   outside a browser.
 8. Commit and push.
 
 The Worker also breaks `@name` mentions in submitted text (so the form can't
@@ -138,10 +147,9 @@ log instead of sending them to the browser.
 
 Two things worth knowing:
 - This lets **any anonymous visitor** create an issue on your repo through
-  a shared token — there's a honeypot field to deter basic bots, and
-  reasonable length limits on submissions, but no CAPTCHA. If it ever gets
-  abused, the simplest fix is deleting the spam issues and, if it keeps
-  happening, rotating out the Worker's token to shut it off entirely.
+  a shared token — there's a honeypot and per-IP rate limit, but no CAPTCHA.
+  If it ever gets abused, delete spam issues and rotate the Worker's token if
+  needed.
 - Submitted feedback is genuinely public — it's a real GitHub issue anyone
   can read, comment on, or react to. Don't put anything in the form you
   wouldn't want visible on a public issue tracker.

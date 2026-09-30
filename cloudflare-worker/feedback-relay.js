@@ -21,6 +21,7 @@ const TYPE_LABELS = { bug: 'bug', suggestion: 'enhancement', other: 'feedback' }
 const MAX_TITLE = 150;
 const MAX_DESCRIPTION = 4000;
 const MAX_CONTACT = 200;
+const MAX_BODY_BYTES = 8192;
 
 function corsHeaders(origin) {
   const allow = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
@@ -35,8 +36,20 @@ function corsHeaders(origin) {
 function json(body, status, origin) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: Object.assign({ 'Content-Type': 'application/json' }, corsHeaders(origin))
+    headers: Object.assign({
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff'
+    }, corsHeaders(origin))
   });
+}
+
+async function readJson(request) {
+  const headerLength = Number(request.headers.get('Content-Length'));
+  if (Number.isFinite(headerLength) && headerLength > MAX_BODY_BYTES) return { tooLarge: true };
+  const text = await request.text();
+  if (new TextEncoder().encode(text).byteLength > MAX_BODY_BYTES) return { tooLarge: true };
+  try { return { value: JSON.parse(text) }; } catch (e) { return { invalid: true }; }
 }
 
 function githubHeaders(token) {
@@ -89,19 +102,16 @@ export default {
     if (request.method !== 'POST') {
       return json({ error: 'Method not allowed' }, 405, origin);
     }
-    // The Origin header can be faked outside a browser, so an optional RATE_LIMITER
-    // binding (e.g. 3 requests / 60 s per IP) stops scripts from flooding the repo with issues.
-    if (env.RATE_LIMITER) {
-      const { success } = await env.RATE_LIMITER.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
-      if (!success) return json({ error: 'Too many messages in a short time. Wait a minute and try again.' }, 429, origin);
-    }
+    // Origin is not authentication: scripts can forge it. Fail closed until
+    // the per-IP binding is configured, so public issue creation is never left unthrottled.
+    if (!env.RATE_LIMITER) return json({ error: 'Feedback rate limiting is not configured.' }, 503, origin);
+    const { success } = await env.RATE_LIMITER.limit({ key: request.headers.get('CF-Connecting-IP') || 'unknown' });
+    if (!success) return json({ error: 'Too many messages in a short time. Wait a minute and try again.' }, 429, origin);
 
-    let payload;
-    try {
-      payload = await request.json();
-    } catch (e) {
-      return json({ error: 'Invalid JSON body' }, 400, origin);
-    }
+    const parsed = await readJson(request);
+    if (parsed.tooLarge) return json({ error: 'Feedback message is too large.' }, 413, origin);
+    if (parsed.invalid) return json({ error: 'Invalid JSON body' }, 400, origin);
+    const payload = parsed.value;
 
     // Honeypot: a hidden field real visitors never fill in. If it's filled,
     // pretend success without actually creating anything, so bots don't
