@@ -188,6 +188,8 @@ S('palette-forge.html', {
     await h.step('Each colour shows its code and how readable text is on it.', () => h.point('#swatches'));
     await h.sampleShot('#swatches', 'Palette made in this video');
     await h.step('Copy the colour codes, or copy them as ready made CSS for your website.', () => h.point('#copyCssBtn'));
+    await h.step('The contrast checker tests text on a background against the accessibility guidelines. Grey on white only just fails for normal text.', async () => { await h.scroll('#contrastPanel', 'start'); await h.fill('#ccFgHex', '#777777'); await h.fill('#ccBgHex', '#FFFFFF'); });
+    await h.step('Press Fix the text colour, and it finds the closest colour that passes. Below are the readable pairs in your palette.', async () => { await h.click('#ccFix'); await h.point('#ccPairs'); });
   }
 });
 
@@ -425,6 +427,23 @@ S('alphabet-forge.html', {
     });
     await h.step('When you are ready, take the listening quiz: hear a sound and pick the right symbol.', async () => { await h.scroll('#quizPanel'); await h.point('#quizListen'); });
     await h.sampleShot('#practice', 'Writing practice from this video');
+  }
+});
+
+S('focus-forge.html', {
+  title: 'Focus Forge', subtitle: 'A Pomodoro focus timer',
+  intro: 'Welcome to Focus Forge. Work in focused sessions with short breaks, and watch your focus time add up.',
+  async run(h, page) {
+    await h.step('First, write what you want to get done, guess how many sessions it needs, and press Add.', async () => { await h.type('#taskName', 'Finish the history essay'); await h.fill('#taskEst', '3'); await h.click('#taskAddBtn'); });
+    await h.step('Pick a session length. Twenty five minutes of focus and a five minute break is the classic Pomodoro.', async () => { await h.scroll('#settingsPanel', 'start'); await h.click('#preset-0'); });
+    await h.step('Choose a calm background sound. Rain and noise are made on your device, nothing is streamed.', async () => { await h.click('#sound-rain'); await h.point('#vol'); });
+    await h.step('Press Start. The ring counts down, and the tab title shows the time left, even in another tab.', async () => { await h.scroll('#timerPanel', 'start'); await h.click('#startBtn'); await h.wait(1500); });
+    await h.skip('Skipping ahead to the end of the session', () => page.evaluate(() => { const real = Date.now.bind(Date), jump = 25 * 60 * 1000; Date.now = () => real() + jump; }));
+    await h.wait(800);
+    await h.step('When the session ends you hear a chime, the session is counted on your task, and your break begins.', () => h.point('#tasks'));
+    await h.step('Your focus minutes, sessions and day streak are saved only in this browser, with a chart of the last seven days.', () => h.scroll('#statsPanel', 'start'));
+    await h.sampleShot('#statsPanel', 'Focus stats from this video');
+    await h.step('Below are tips for focusing better, and how to use your sessions for studying.', () => h.scrollBy(500));
   }
 });
 
