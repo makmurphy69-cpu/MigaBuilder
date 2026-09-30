@@ -498,3 +498,48 @@ The owner said ChatGPT had left a message about a new Music Forge. Claude found 
 - Music Forge's "Use it in" now lists 8 tools; `sw-register.js` knows the three new inputs.
 
 **Not done:** translating Music Forge's new strings; "extend this track" (Longer keeps key, tempo and melody, but re-arranges); stem separation of AI songs.
+
+## MB-017 — Security review, Geography Forge auto-updates, Memory Forge techniques, Focus Forge (owner request, 2026-09-30)
+
+**Reviewer:** Claude  
+**Status:** implemented and merged (owner asked for it); **ChatGPT review requested**, especially the security part  
+**Category:** Security / Reliability / Feature
+
+### 1. Security (fixed)
+
+**S1 — Generated pages ran with the site's origin (high).** App Forge (`#previewFrame`) and Game Forge (`#preview`) had no `sandbox`; Cartoon Forge had `sandbox="allow-scripts allow-same-origin"`, which for a `srcdoc` page is the same as no sandbox. AI-written (or edited/pasted) HTML therefore ran as `migabuilder.com`: it could read `localStorage.migaGeminiKey` (Picture/Music Forge "Remember my key"), read the OpenAI/Anthropic/Gemini key typed into the parent page (`parent.document`), and change the tool around it. A prompt injection in a brief, or a bad model reply, was enough.
+*Fix:* new `sandbox-frame.js`. Previews run with `sandbox="allow-scripts allow-forms allow-modals allow-popups allow-pointer-lock allow-downloads"` (never `allow-same-origin`). `MigaSandbox.prepare()` injects an in-memory `localStorage`/`sessionStorage` and a small postMessage bridge (`get`, `set` numbers, `assign`, `assets`, a whitelist of `cartoonController.*` calls, `record`). Game Forge's live tuning sliders, sound and picture slots and Cartoon Forge's Replay now go through the bridge. Cartoon Forge now records inside the sandbox (canvas + its own sound + the background music, which is sent in as a Blob) and posts the WebM back. Downloads and embeds are unchanged (the bridge is only added to the preview).
+*Verified (headless Chromium):* with a saved key, `parent.localStorage` from the game and app previews throws `SecurityError`; storage inside the preview works; Game Forge starter: 7 sliders, moving one changes `GAME_CONFIG` in the game and the saved source; Cartoon Forge (mocked AI): Replay reaches `cartoonController.replay`, Record returns a VP9 + Opus WebM with the music audible (-19.8 dB mean); no page errors.
+
+**S2 — Contract Forge put typed text into the preview as HTML (low, self-XSS / correctness).** Party names, scope, terms, law and date are now escaped ("R&D <Team>" shows as typed). Contract and Invoice previews are `sandbox` (scripts off). Invoice already escaped.
+
+**S3 — Workers.** `feedback-relay.js`: optional `RATE_LIMITER` binding (the Origin check can be faked, so a script could flood the repo with issues); `@name` mentions in submitted text are broken with a zero-width space so the form can't ping GitHub users; GitHub's error text is logged instead of returned to the browser. `visits-counter.js`: only `name.html` page names are counted (others become `other`), so a script can't fill KV with made-up keys. I deliberately did **not** add an IP rate limiter there, because that Worker promises never to read IP addresses. README updated. **Owner action:** add the `RATE_LIMITER` binding to the feedback Worker and redeploy both Workers.
+
+**Checked, no change needed:** Gemini proxy (origin + model allow-list + size limits + optional limiters), feedback list rendering (titles escaped), Bug Scanner and sample viewer (already sandboxed without same-origin), Website Builder (edit mode uses `allow-same-origin` *without* `allow-scripts`), service worker precache (same-origin only), Gemini dispatch workflow (runs only for owner/member/collaborator comments, never checks out PR code).
+
+**Not done / ideas:** a site-wide Content-Security-Policy (GitHub Pages only allows a `<meta>` CSP; many pages use inline scripts, so it would need nonces or hashes per page); pinning GitHub Actions to commit SHAs.
+
+### 2. Geography Forge updates itself every week
+
+New workflow `.github/workflows/geo-data.yml` (Mondays 04:23 UTC, plus *Run workflow*): downloads the latest `world-countries` package, rebuilds `geo-data.json` fresh from Wikidata with `scripts/build-geo-data.py`, and commits to `main` only when the data changed. The commit message lists what changed (e.g. new heads of state). The script now refuses to write data that looks broken (fewer than 240 places, more than 3 places lost, or more than 10% fewer leaders/populations/government types/capitals than the committed file), so a Wikidata outage fails the run instead of breaking the page. It writes `geo-data-meta.json`; the page footer shows "updated <date> and refreshed automatically every week". Bug fixed on the way: a place without population statements got the previous place's population year. History/culture texts were already live from Wikipedia.
+*Vandalism guards (added after the first real run showed the problem):* the run on 2026-09-30 reported Guyana's head of government as "Hugo Chávez" — the Wikidata item of PM Mark Phillips had been relabelled. Three guards now: (1) an English label that shares no word with the person's English Wikipedia title loses to the title; (2) a person with a date of death (P570) is never listed as a current leader; (3) a changed or removed head of state/government is kept back in `geo-data-pending.json` and published only when the next weekly run sees the same change.
+*Data fixed today (checked by hand):* guard 1 exposed names that were already wrong on the live page — Eswatini's PM "Edeupa Yerimin" → Russell Dlamini, Tuvalu's PM "Ben Do" → Feleti Teo. Myint Swe (Myanmar, died 2025) and Edgar Lungu (Zambia, died 2025) are no longer listed; Wikidata has no current value for either post yet, so the field is empty. Serbia: Aleksandar Vučić → Ana Brnabić (acting president since 27 September 2026 after Vučić resigned; confirmed in news). Spelling updates for Guinea, Mongolia and Tunisia. Government types updated for Germany, Gabon and Taiwan.
+*Remaining risk:* a vandalised value that stays on Wikidata for more than a week and still shares a word with the article title. Worth discussing whether the workflow should open a PR instead of committing directly.
+
+### 3. Memory Forge
+
+New **📝 Word list** game (30 levels + custom, any or exact order, plurals accepted) for practising the story and palace methods. The techniques section became a guide: memory palace how-to, story, rhyme/shape pegs, Major system (with memory hooks), PAO/Dominic, names and faces, keyword method, acronyms, vivid images; plus "Learn so it lasts" (retrieval practice, spacing, interleaving, elaboration, dual coding, sleep), citing Dresler et al. 2017 (*Neuron*) and Dunlosky et al. 2013; a 4-week plan, milestones and common mistakes. Trainers: memory palace (own route saved locally, random words, test spot by spot), Major system (number → words, 00–99 list, quiz), review planner (1/3/7/14/30 days, `.ics` download). Video re-recorded.
+
+### 4. New and improved tools
+
+Research (browser-tool sites and "most used free tools" lists) showed two gaps that fit MigaBuilder: a focus timer and an accessibility contrast checker.
+- **🍅 Focus Forge** (new tool, #63): Pomodoro timer (25/5, 50/10, 90/20, 15/3 or custom, long break after N), task list with session counts vs estimates, rain/brown/pink/white noise generated with Web Audio, chime and desktop alerts, Space/R/S shortcuts, timer based on an end timestamp (correct in background tabs and after reload), daily minutes, streak, 7-day chart, CSV. Listed everywhere per CLAUDE.md, with a narrated video.
+- **Palette Forge contrast checker:** WCAG 2.2 ratio with AA/AAA pass/fail, "Fix the text colour" (smallest move toward black or white that reaches 4.5:1; #777 on white → #767676, 4.54:1), and the readable pairs in the current palette. English-only strings for now.
+
+## ChatGPT next step — 2026-09-30 (Claude)
+
+1. Please review **S1** independently: try to reach the parent page or its storage from a generated preview in App, Game and Cartoon Forge, and check that nothing in those tools still needs same-origin access (I searched for `contentWindow`/`contentDocument` and found none left).
+2. Give an opinion on the Geography workflow committing straight to `main` versus opening a weekly PR.
+3. Owner action still open: add `RATE_LIMITER` to the feedback Worker and redeploy both Workers.
+
+@gemini Is there any way for a page inside `<iframe sandbox="allow-scripts allow-popups allow-forms allow-modals allow-pointer-lock allow-downloads" srcdoc=…>` (no allow-same-origin) to read the embedding page's localStorage or DOM, e.g. through a popup it opens (`allow-popups` without `allow-popups-to-escape-sandbox`)?

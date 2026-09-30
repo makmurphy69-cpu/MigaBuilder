@@ -13,7 +13,9 @@ Usage (from the repository root):
 The *Geography data* workflow (.github/workflows/geo-data.yml) runs this every
 month. Before overwriting geo-data.json the new data is compared with the old
 file; if it looks broken (places or leaders missing, e.g. because Wikidata was
-down), nothing is written and the script exits with an error. It also writes
+down), nothing is written and the script exits with an error. A changed head of
+state or government is held in geo-data-pending.json and only published when
+the next weekly run sees the same change (protection against Wikidata vandalism). It also writes
 geo-data-meta.json, whose date Geography Forge shows as "Data updated".
 
 Wikidata responses are cached in .geo-cache/ so an interrupted run can resume.
@@ -24,7 +26,7 @@ import json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
 UA = {'User-Agent': 'MigaBuilderGeoBuild/1.0 (https://migabuilder.com)'}
 CACHE = '.geo-cache'
 OUT = 'geo-data.json'
-PROPS = ('P122', 'P35', 'P6', 'P194', 'P1082', 'P1622', 'P2184', 'P2596')
+PROPS = ('P122', 'P35', 'P6', 'P194', 'P1082', 'P1622', 'P2184', 'P2596', 'P570')
 LANGS = ('en', 'es', 'ar', 'zh', 'sw')
 # English Wikipedia titles where the common name is ambiguous or differs.
 TITLES = {'GE': 'Georgia (country)', 'CG': 'Republic of the Congo', 'CD': 'Democratic Republic of the Congo', 'IE': 'Republic of Ireland',
@@ -108,14 +110,26 @@ def label(q, lang='en'):
     if not e: return None
     v = (e['labels'].get(lang) or e['labels'].get('en') or e['labels'].get('mul') or {}).get('value')
     # Wikidata increasingly keeps names in a shared 'mul' label; fall back to the English Wikipedia title.
-    if not v and e.get('sitelinks', {}).get('enwiki'):
-        v = re.sub(r' \([^)]*\)$', '', e['sitelinks']['enwiki'])
+    title = re.sub(r' \([^)]*\)$', '', e['sitelinks']['enwiki']) if e.get('sitelinks', {}).get('enwiki') else None
+    if not v: return title
+    # A label that shares no word with the Wikipedia title is usually vandalism (seen September 2026: Guyana's
+    # prime minister Mark Phillips labelled "Hugo Chávez"), so the article title wins then.
+    words = lambda t: {w for w in re.findall(r'\w+', t.lower()) if len(w) > 2}
+    if lang == 'en' and title and words(v) and words(title) and not words(v) & words(title):
+        return title
     return v
+
+
+def alive(q):
+    """False when Wikidata gives the person a date of death (P570): a dead person is never a current leader."""
+    e = entity(q)
+    return not (e and e.get('claims', {}).get('P570'))
 
 
 def labels(d, p):
     out = []
     for q in ids(d['claims'], p):
+        if p in ('P35', 'P6') and not alive(q): continue
         v = label(q)
         if v and v not in out: out.append(v)
     return out
@@ -163,6 +177,7 @@ def main(countries_path):
           'nm':{'es':c['translations'].get('spa',{}).get('common'),'ar':c['translations'].get('ara',{}).get('common'),'zh':c['translations'].get('zho',{}).get('common'),'sw':(d['labels'].get('sw') or {}).get('value')}}
         if rec['ind'] is False: rec['st']='Dependent territory'
         out[k]={a:b for a,b in rec.items() if b not in (None,[],{},'')}
+    held = hold_new_leaders(out)
     problems = sanity_check(out)
     if problems:
         raise SystemExit('Not writing %s, the new data looks wrong:\n  ' % OUT + '\n  '.join(problems))
@@ -173,6 +188,37 @@ def main(countries_path):
               open('geo-data-meta.json', 'w'), indent=1)
     print('Wrote %d places to %s (%d without Wikidata)' % (len(out), OUT, missing))
     for line in changed: print('  ' + line)
+    for line in held: print('  held for a week: ' + line)
+
+
+PENDING = 'geo-data-pending.json'
+
+
+def hold_new_leaders(new):
+    """Publish a new head of state/government only when two runs in a row (a week apart) agree.
+
+    Anyone can edit Wikidata, and vandalism is usually reverted within days, so a
+    changed leader is first stored in geo-data-pending.json and the old value is
+    kept. If the next run sees the same new value, it is published."""
+    try: old = json.load(open(OUT))
+    except (OSError, ValueError): return []
+    try: pending = json.load(open(PENDING))
+    except (OSError, ValueError): pending = {}
+    still, held = {}, []
+    for k, c in new.items():
+        o = old.get(k)
+        if not o: continue
+        for field in ('hs', 'hg'):
+            now = c.get(field) or []
+            if now == (o.get(field) or []): continue
+            if pending.get(k, {}).get(field) == now: continue  # seen last run too: publish (removals too)
+            still.setdefault(k, {})[field] = now
+            held.append('%s %s: %s (keeping %s)' % (c['n'], 'head of state' if field == 'hs' else 'head of government',
+                                                  ', '.join(c.get(field) or ['-']), ', '.join(o.get(field) or ['-'])))
+            if o.get(field): c[field] = o[field]
+            else: c.pop(field, None)
+    json.dump(still, open(PENDING, 'w'), ensure_ascii=False, indent=1, sort_keys=True)
+    return held
 
 
 def sanity_check(new):
