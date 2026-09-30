@@ -384,7 +384,17 @@
   }
   function generateCode(len) {
     let s = '';
-    for (let i = 0; i < len; i++) s += CODE_ALPHABET[Math.floor(Math.random() * CODE_ALPHABET.length)];
+    const alphabetSize = CODE_ALPHABET.length;
+    const limit = Math.floor(0x100000000 / alphabetSize) * alphabetSize;
+    while (s.length < len) {
+      const values = new Uint32Array(Math.max(16, (len - s.length) * 2));
+      crypto.getRandomValues(values);
+      for (const value of values) {
+        if (value >= limit) continue; // rejection sampling avoids modulo bias
+        s += CODE_ALPHABET[value % alphabetSize];
+        if (s.length === len) break;
+      }
+    }
     return s;
   }
 
@@ -596,7 +606,7 @@
     helperChatSlot.innerHTML = '';
     helperStatus.textContent = I18N.t('statusSettingUp');
 
-    const code = generateCode(6);
+    const code = generateCode(10);
     currentCode = code;
     const shareUrl = location.origin + location.pathname + '?code=' + code;
     helperCodeEl.textContent = code;
