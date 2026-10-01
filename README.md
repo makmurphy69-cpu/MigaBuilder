@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**63 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**Free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -62,7 +62,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert Forge** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 63 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all the tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 
