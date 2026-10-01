@@ -4,7 +4,7 @@
 <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Jam Forge — free split-screen music collab and duet video maker | MigaBuilder</title>
-<meta name="description" content="Record several video clips and put them side by side or one after another: a band split screen, a duet, a conversation, or a talk with a cartoon frog. Count-in, play-along, clap sync, layouts and export — free and private in your browser.">
+<meta name="description" content="Record several video clips and put them side by side or one after another: a band split screen, a duet, a conversation, or a talk with a cartoon frog. Loop and layer, count-in, play-along, clap sync, layouts and export — free and private in your browser.">
 <link rel="canonical" href="https://migabuilder.com/jam-forge.html">
 <meta property="og:title" content="Jam Forge — split-screen collab and duet videos | MigaBuilder">
 <meta property="og:description" content="Record clips, line them up side by side or one after another, sync them with a clap and download one video — private in your browser.">
@@ -20,7 +20,7 @@
 .transport{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
 .transport input[type=range]{flex:1;min-width:140px}
 .transport .time{font:500 14px 'IBM Plex Mono';min-width:96px;text-align:right}
-.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 12px}
+.modes{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin:0 0 12px}
 .modes button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:9px 8px;cursor:pointer;color:var(--ink);text-align:left;line-height:1.3}
 .modes button b{display:block;font:700 14px 'Space Grotesk'}.modes button small{color:rgba(22,32,43,.62);font-size:12px}
 .modes button.on{border-color:var(--amber);background:#fff7e6;box-shadow:inset 0 0 0 1px var(--amber)}
@@ -62,12 +62,15 @@
 .clip.dragging{opacity:.45}.clip.drop-before{box-shadow:0 -3px 0 var(--amber)}.clip.drop-after{box-shadow:0 3px 0 var(--amber)}
 .clip.off{opacity:.55;border-left-style:dashed}.clip-head .use{display:flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:rgba(22,32,43,.75)}
 .tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}.tips details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.tips summary{font-weight:700;cursor:pointer}.tips p,.tips li{font-size:13.5px;line-height:1.5}
+.loop-box{background:#f2fbfc;border:1px solid rgba(111,209,224,.6);border-radius:6px;padding:10px 12px;margin:10px 0;font-size:14px;line-height:1.5}
+.loop-box input[type=number]{width:64px;padding:4px 6px}.loop-box select{width:auto;padding:4px 6px}
+body:not(.loop-on) .loop-only,body.loop-on .not-loop{display:none!important}
 @media(max-width:860px){.jam-top{grid-template-columns:1fr}.modes{grid-template-columns:1fr}.join-opts{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Jam Forge</span></nav>
-<header class="masthead"><div><h1>Jam Forge</h1><p>Record several clips — or join videos you already have — and put them together: side by side like a band, one after another like a story, or taking turns like a conversation — even with a talking cartoon frog. Free and private in your browser.</p></div></header>
+<header class="masthead"><div><h1>Jam Forge</h1><p>Record several clips — or join videos you already have — and put them together: side by side like a band, one after another like a story, as loops you record over until the song is done, or taking turns like a conversation — even with a talking cartoon frog. Free and private in your browser.</p></div></header>
 <main>
 
 <section class="panel" id="ideasPanel">
@@ -94,6 +97,7 @@
       <button type="button" id="mode-together" data-mode="together" role="radio"><b>🎸 At the same time</b><small>Split screen: every clip plays together, like a band.</small></button>
       <button type="button" id="mode-sequence" data-mode="sequence" role="radio"><b>🎞️ One after another</b><small>Full screen, clip after clip, like a story.</small></button>
       <button type="button" id="mode-conversation" data-mode="conversation" role="radio"><b>💬 Taking turns</b><small>Everyone on screen, one talks at a time.</small></button>
+      <button type="button" id="mode-loop" data-mode="loop" role="radio"><b>🔁 Loop and layer</b><small>Record a loop, let it repeat and record more parts over it.</small></button>
     </div>
     <div class="stage" id="stage"><canvas id="canvas" width="1280" height="720" aria-label="Preview of the combined video"></canvas></div>
     <div class="transport">
@@ -102,6 +106,7 @@
       <input type="range" id="scrub" min="0" max="1000" value="0" aria-label="Position">
       <span class="time" id="time">0:00.0 / 0:00.0</span>
     </div>
+    <div class="loop-box loop-only" id="loopSong">🔁 <b>Song:</b> play the loop <input type="number" id="loopRounds" min="1" max="200" value="4" aria-label="Rounds in the song"> times <span class="muted" id="loopInfo"></span><br><small class="muted">The first clip sets the loop length. Every clip repeats with it. Use <b>In from round</b> on a clip to make it come in later, so the song builds up.</small></div>
     <div class="field" style="margin-top:12px"><label>Layout</label><div class="chips" id="layouts"></div></div>
   </section>
 
@@ -120,8 +125,17 @@
       <div class="field"><label for="recName">Name on screen</label><input id="recName" placeholder="e.g. Drums — Sam" maxlength="40"></div>
       <div class="field" id="charField"><label for="recChar">Character</label><select id="recChar"></select></div>
     </div>
+    <div class="loop-box loop-only" id="loopRec">
+      <b>🔁 Loop and layer</b> — <span id="loopRecHint"></span>
+      <div class="checks" style="margin:6px 0 0">
+        <label><span>Record over the loop for <select id="loopTake"><option value="1">1 round</option><option value="2">2 rounds</option><option value="4">4 rounds</option><option value="0">until I press Stop</option></select></span></label>
+        <label><input type="checkbox" id="loopSnap" checked> <span>Make the first loop exactly whole bars (uses the beats a minute and clicks below)</span></label>
+        <label><input type="checkbox" id="loopBuild" checked> <span>Build the song up: each new part comes in one round after the last one</span></label>
+        <label><span>Sound delay fix <input type="number" id="loopLatency" min="0" max="500" step="5" placeholder="auto"> ms <small class="muted">(raise it if new parts sound late, lower it if they sound early)</small></span></label>
+      </div>
+    </div>
     <div class="checks">
-      <label><input type="checkbox" id="playAlong" checked> <span>Play the other clips while I record, so I can play along <small class="muted">(use headphones, or the speakers end up in your recording)</small></span></label>
+      <label class="not-loop"><input type="checkbox" id="playAlong" checked> <span>Play the other clips while I record, so I can play along <small class="muted">(use headphones, or the speakers end up in your recording)</small></span></label>
       <label><input type="checkbox" id="countIn" checked> <span>Count in: <input type="number" id="bpm" value="100" min="40" max="240" style="width:62px"> beats a minute, <input type="number" id="beats" value="4" min="1" max="8" style="width:46px"> clicks before it starts</span></label>
       <label><input type="checkbox" id="clickTrack"> <span>Keep clicking the beat while I record <small class="muted">(headphones only)</small></span></label>
       <label><input type="checkbox" id="rawAudio" checked> <span>Music mode: turn off echo cancelling and noise removal, so instruments sound natural</span></label>
@@ -177,6 +191,7 @@
   <div class="tips">
     <details open><summary>🎧 Playing together from different places</summary><p>Record the first clip (often drums or a click track), send the idea to your friends, and each person records their part while listening to the others in headphones. Add all the clips here, then press <b>Sync by clap</b>.</p></details>
     <details><summary>👏 Why clap?</summary><p>Every recording starts at a slightly different moment. Clap once, clearly, at the start of each clip. Jam Forge finds the clap in each sound track and lines the clips up, usually to within a hundredth of a second. Fine-tune with the ±0.05 s buttons.</p></details>
+    <details><summary>🔁 Building a song from loops</summary><p>Choose <b>Loop and layer</b>. Record the first part (a beat, chords, a bass line). It becomes the loop. Record the next part: the loop keeps repeating in your headphones, and the new part is cut to fit the loop exactly and added on top. Keep going until the song is done, then set how many times the loop plays and press <b>Make the video</b>.</p></details>
     <details><summary>💬 Conversations and sketches</summary><p>Record each line as its own clip — you can play both people yourself. Choose <b>Taking turns</b>: everyone stays on screen and the speaker lights up. Use a small negative start to make someone interrupt.</p></details>
     <details><summary>🐸 Talking to a frog (or a robot)</summary><p>Pick <b>Voice for a cartoon</b>, choose a character and record the voice. The character's mouth moves with the sound. Change your voice, or ask a friend, for the best effect.</p></details>
     <details><summary>🔒 Private</summary><p>Your camera, clips and the finished video never leave this device. Clips are kept in this browser (IndexedDB) so a reload does not lose your takes; <b>Remove all clips</b> deletes them.</p></details>
@@ -197,11 +212,12 @@ const IDEAS=[
   {id:'duet',t:'🎤 Duet',d:'Two people side by side singing or playing together.',mode:'together',layout:'row',aspect:'1280x720'},
   {id:'talk',t:'💬 Two people talking',d:'Each line is its own clip; they take turns on a split screen.',mode:'conversation',layout:'row',aspect:'1280x720'},
   {id:'frog',t:'🐸 Talking to a frog',d:'You on camera, a cartoon frog that talks back with a recorded voice.',mode:'conversation',layout:'row',aspect:'1280x720',char:'frog'},
+  {id:'loop',t:'🔁 Loop song',d:'Record a loop, let it repeat, and keep recording new parts over it until the song is done.',mode:'loop',layout:'auto',aspect:'1280x720'},
   {id:'join',t:'🎬 Join my videos',d:'Put videos you already made into one, in the order you choose.',mode:'sequence',layout:'auto',aspect:'1280x720',join:true},
   {id:'story',t:'🎞️ Story in scenes',d:'Clips play one after another, full screen.',mode:'sequence',layout:'auto',aspect:'1280x720'},
   {id:'short',t:'📱 Reaction for Shorts',d:'Tall video: the main clip big, the others small on top.',mode:'together',layout:'pip',aspect:'720x1280'}
 ];
-const S=Object.assign({mode:'together',layout:'auto',aspect:'1280x720',bg:'#0e2a47',gap:8,title:'',showNames:true,rounded:true,fit:false,fade:false},(()=>{try{return JSON.parse(localStorage.getItem('jamForgeSettings'))||{}}catch(e){return {}}})());
+const S=Object.assign({loopRounds:4,loopLatency:null,mode:'together',layout:'auto',aspect:'1280x720',bg:'#0e2a47',gap:8,title:'',showNames:true,rounded:true,fit:false,fade:false},(()=>{try{return JSON.parse(localStorage.getItem('jamForgeSettings'))||{}}catch(e){return {}}})());
 const saveSettings=()=>{try{localStorage.setItem('jamForgeSettings',JSON.stringify(S))}catch(e){}};
 let clips=[];
 const canvas=$('canvas');let g=canvas.getContext('2d');
@@ -217,7 +233,7 @@ function audio(){
 // ---------- IndexedDB (keeps takes across reloads) ----------
 let dbp=null;
 function db(){if(!dbp)dbp=new Promise((res,rej)=>{const r=indexedDB.open('jam-forge',1);r.onupgradeneeded=()=>r.result.createObjectStore('clips',{keyPath:'id'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});return dbp}
-const PERSIST=['id','name','kind','char','blob','type','duration','offset','trimIn','trimOut','vol','mute','mirror','color','order','off','fileDate'];
+const PERSIST=['id','name','kind','char','blob','type','duration','offset','trimIn','trimOut','vol','mute','mirror','color','order','off','fileDate','enter','exit'];
 async function persist(c){try{const d=await db();const o={};PERSIST.forEach(k=>o[k]=c[k]);d.transaction('clips','readwrite').objectStore('clips').put(o)}catch(e){}}
 async function unpersist(id){try{const d=await db();d.transaction('clips','readwrite').objectStore('clips').delete(id)}catch(e){}}
 function persistAll(){clips.forEach((c,i)=>{c.order=i;persist(c)})}
@@ -233,7 +249,7 @@ function mediaDuration(el){return new Promise(res=>{
   if(el.readyState>=1)ready();else{el.addEventListener('loadedmetadata',ready,{once:true});el.addEventListener('error',()=>res(0),{once:true})}
 })}
 async function addClip(opts){
-  const c=Object.assign({id:uid(),name:'Clip',kind:'video',char:'frog',blob:null,type:'',duration:0,offset:0,trimIn:0,trimOut:0,vol:1,mute:false,mirror:false,fileDate:Date.now(),color:COLORS[clips.length%COLORS.length]},opts);
+  const c=Object.assign({id:uid(),name:'Clip',kind:'video',char:'frog',blob:null,type:'',duration:0,offset:0,trimIn:0,trimOut:0,vol:1,mute:false,mirror:false,enter:1,exit:0,fileDate:Date.now(),color:COLORS[clips.length%COLORS.length]},opts);
   await attach(c);
   if(!c.duration)c.duration=opts.fallbackDuration||4;
   if(!c.trimOut||c.trimOut>c.duration)c.trimOut=c.duration;
@@ -294,18 +310,33 @@ const len=c=>Math.max(0.05,c.trimOut-c.trimIn);
 function timeline(){
   // clips with "In the video" unticked get no start, so they never play or show
   const starts=clips.map(()=>null);
+  if(S.mode==='loop'){
+    // the first clip in the video sets the loop length; every clip repeats on it
+    const base=clips.find(c=>!c.off),L=base?len(base):0;
+    clips.forEach((c,i)=>{if(!c.off)starts[i]=0});
+    return {starts,total:L?Math.max(1,S.loopRounds|0)*L:0,loop:L};
+  }
   if(S.mode==='together'){const m=Math.min(0,...clips.filter(c=>!c.off).map(c=>c.offset));clips.forEach((c,i)=>{if(!c.off)starts[i]=c.offset-m})}
   else{let end=0,first=true;clips.forEach((c,i)=>{if(c.off)return;const s=Math.max(0,(first?0:end)+c.offset);first=false;starts[i]=s;end=Math.max(end,s+len(c))})}
   const total=clips.reduce((a,c,i)=>starts[i]==null?a:Math.max(a,starts[i]+len(c)),0);
   return {starts,total};
 }
-let TL={starts:[],total:0};
+let TL={starts:[],total:0,loop:0};
+// loop mode: where clip i is inside its own repeat at time t, or null when it is silent
+function loopLocal(i,t){
+  const c=clips[i],L=TL.loop;if(c.off||!L)return null;
+  const enter=Math.max(1,c.enter|0),r=Math.floor(t/L)+1;
+  if(!endless&&(r<enter||(c.exit&&r>c.exit)))return null;
+  const P=Math.max(1,Math.round(len(c)/L))*L,x=(((t-(enter-1)*L-c.offset)%P)+P)%P;
+  return x<len(c)?x:null;
+}
 function refresh(){TL=timeline();if(!playing)setTime(Math.min(pos,TL.total));updateTime();draw(pos)}
 
 // ---------- playback engine ----------
-let playing=false,pos=0,t0=0,raf=0,onEnd=null;
+let playing=false,pos=0,t0=0,raf=0,onEnd=null,endless=false;
 const fmt=s=>{s=Math.max(0,s);const m=Math.floor(s/60);return m+':'+(s%60).toFixed(1).padStart(4,'0')};
-function updateTime(){$('time').textContent=fmt(pos)+' / '+fmt(TL.total);$('scrub').value=TL.total?Math.round(pos/TL.total*1000):0}
+function updateTime(){$('time').textContent=fmt(pos)+' / '+fmt(TL.total);
+  if(S.mode==='loop'){const L=TL.loop,R=Math.max(1,S.loopRounds|0);$('loopInfo').textContent=L?'— the loop is '+L.toFixed(2)+' s, the song '+fmt(TL.total)+(pos>0?' · now round '+Math.min(R,Math.floor(pos/L)+1)+' of '+R:''):'— record or add the first clip'}$('scrub').value=TL.total?Math.round(pos/TL.total*1000):0}
 function now(){return playing?(performance.now()-t0)/1000:pos}
 function play(from){
   if(!clips.length)return;audio();
@@ -318,22 +349,22 @@ function pause(){playing=false;clips.forEach(c=>c.el&&c.el.pause());$('playBtn')
 function setTime(t){pos=Math.max(0,Math.min(t,TL.total));if(playing)t0=performance.now()-pos*1000;syncMedia(pos,true)}
 function loop(){
   pos=now();
-  if(pos>=TL.total){pos=TL.total;syncMedia(pos);draw(pos);pause();if(onEnd){const f=onEnd;onEnd=null;f()}return}
+  if(pos>=TL.total&&!endless){pos=TL.total;syncMedia(pos);draw(pos);pause();if(onEnd){const f=onEnd;onEnd=null;f()}return}
   syncMedia(pos);draw(pos);updateTime();raf=requestAnimationFrame(loop);
 }
-function activeAt(i,t){const s=TL.starts[i];return s!=null&&t>=s&&t<s+len(clips[i])}
+function activeAt(i,t){if(S.mode==='loop')return TL.starts[i]!=null&&loopLocal(i,t)!=null;const s=TL.starts[i];return s!=null&&t>=s&&t<s+len(clips[i])}
 function syncMedia(t,hard){
   clips.forEach((c,i)=>{
     const el=c.el;if(!el)return;const s=TL.starts[i];
     if(s==null){if(!el.paused)el.pause();return}
-    const on=playing&&activeAt(i,t);
+    const lx=S.mode==='loop'?loopLocal(i,t):null,on=playing&&activeAt(i,t);
     if(on){
-      const local=t-s+c.trimIn;
+      const local=(S.mode==='loop'?lx:t-s)+c.trimIn;
       if(el.paused){if(Math.abs(el.currentTime-local)>0.03)el.currentTime=local;el.playbackRate=1;el.play().catch(()=>{})}
       else{const drift=el.currentTime-local;if(Math.abs(drift)>0.25||hard)el.currentTime=local;else el.playbackRate=Math.max(0.95,Math.min(1.05,1-drift*0.5))}
     }else{
       if(!el.paused)el.pause();
-      const want=t<s?c.trimIn:(t>=s+len(c)?Math.max(c.trimIn,c.trimOut-0.04):t-s+c.trimIn);
+      const want=S.mode==='loop'?c.trimIn+(lx||0):t<s?c.trimIn:(t>=s+len(c)?Math.max(c.trimIn,c.trimOut-0.04):t-s+c.trimIn);
       if((hard||Math.abs(el.currentTime-want)>0.2)&&!el.seeking)el.currentTime=want;
     }
   });
@@ -379,7 +410,7 @@ function draw(t){
     else if(c.kind==='character')drawChar(c.char,x,y,w,h,level(c),t+i);
     else{g.fillStyle='#111c28';g.fillRect(x,y,w,h)}
     g.restore();
-    if(S.mode==='conversation'&&!on&&clips.length>1){g.save();rr(x,y,w,h,rad);g.fillStyle='rgba(8,24,38,.42)';g.fill();g.restore()}
+    if((S.mode==='conversation'||S.mode==='loop')&&!on&&clips.length>1){g.save();rr(x,y,w,h,rad);g.fillStyle='rgba(8,24,38,.42)';g.fill();g.restore()}
     if(S.mode==='conversation'&&on&&clips.length>1){g.save();rr(x+2,y+2,w-4,h-4,rad);g.lineWidth=Math.max(3,W/240);g.strokeStyle=c.color;g.stroke();g.restore()}
     if(S.showNames&&c.name){const fs=Math.max(13,Math.round(Math.min(W,H)/(show.length>4?34:26)));g.font='700 '+fs+'px "Space Grotesk","IBM Plex Sans",sans-serif';const tw=g.measureText(c.name).width,px=x+fs*0.6,py=y+h-fs*0.6;
       g.fillStyle='rgba(8,24,38,.72)';rr(px-fs*0.45,py-fs*1.2,tw+fs*0.9,fs*1.6,fs*0.4);g.fill();g.fillStyle=c.color;g.fillRect(px-fs*0.45,py-fs*1.2,fs*0.22,fs*1.6);g.fillStyle='#fff';g.fillText(c.name,px+fs*0.05,py)}
@@ -440,7 +471,7 @@ function drawChar(kind,x,y,w,h,lv,t){
 // ---------- clip list UI ----------
 let dragFrom=-1;
 function renderClips(){
-  const box=$('clips');$('clipCount').textContent=clips.length?'('+clips.length+')':'';
+  loopHint();const box=$('clips');$('clipCount').textContent=clips.length?'('+clips.length+')':'';
   if(!clips.length){box.innerHTML='<div class="empty">No clips yet. Record one above, or add video and audio files.</div>';return}
   box.innerHTML='';
   clips.forEach((c,i)=>{
@@ -453,15 +484,19 @@ function renderClips(){
       '<label>End at (s)<input type="number" step="0.1" min="0" data-f="trimOut"></label>'+
       '<label>Volume <input type="range" min="0" max="2" step="0.05" data-f="vol"></label>'+
       (c.kind==='character'?'<label>Character<select data-f="char"></select></label>':'<label class="inline-check"><input type="checkbox" data-f="mirror"> Mirror</label>')+
-      '<label class="inline-check"><input type="checkbox" data-f="mute"> Mute</label></div>';
+      '<label class="inline-check"><input type="checkbox" data-f="mute"> Mute</label>'+
+      '<label class="loop-only">In from round<input type="number" step="1" min="1" data-f="enter"></label>'+
+      '<label class="loop-only">Out after round <small>(0 = to the end)</small><input type="number" step="1" min="0" data-f="exit"></label></div>';
     const q=s=>d.querySelector(s);
     q('.name').value=c.name;q('.kind').textContent=(c.kind==='video'?'🎥 video':'🎙 '+(CHARS[c.char]||'').replace(/^\S+\s/,'').toLowerCase())+' · '+len(c).toFixed(1)+' s';
     q('.name').oninput=e=>{c.name=e.target.value;persist(c);draw(pos)};
     d.querySelectorAll('[data-f]').forEach(inp=>{const f=inp.dataset.f;
       if(f==='char'){inp.innerHTML=Object.entries(CHARS).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('')}
+      if(f==='enter')c.enter=Math.max(1,c.enter|0);if(f==='exit')c.exit=Math.max(0,c.exit|0);
       if(inp.type==='checkbox')inp.checked=!!c[f];else inp.value=typeof c[f]==='number'?+c[f].toFixed(2):c[f];
       if(f==='trimIn'||f==='trimOut')inp.max=c.duration.toFixed(2);
       inp.oninput=()=>{let v=inp.type==='checkbox'?inp.checked:(inp.type==='number'||inp.type==='range'?parseFloat(inp.value):inp.value);if(typeof v==='number'&&!isFinite(v))return;
+        if(f==='enter')v=Math.max(1,Math.round(v));if(f==='exit')v=Math.max(0,Math.round(v));
         if(f==='trimIn')v=Math.max(0,Math.min(v,c.trimOut-0.1));if(f==='trimOut')v=Math.max(c.trimIn+0.1,Math.min(v,c.duration));
         c[f]=v;applyGain(c);persist(c);refresh();q('.kind').textContent=(c.kind==='video'?'🎥 video':'🎙 '+(CHARS[c.char]||'').replace(/^\S+\s/,'').toLowerCase())+' · '+len(c).toFixed(1)+' s'}});
     d.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{c.offset=Math.round((c.offset+parseFloat(b.dataset.n))*100)/100;q('[data-f=offset]').value=c.offset;persist(c);refresh()});
@@ -511,7 +546,7 @@ $('clearBtn').onclick=()=>{if(!clips.length||!confirm('Remove all clips from thi
 function msg(t){const s=$('syncStatus');s.textContent=t;s.classList.toggle('show',!!t)}
 
 // ---------- modes, layouts, settings ----------
-function setMode(m){S.mode=m;saveSettings();document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('on',b.dataset.mode===m);b.setAttribute('aria-checked',b.dataset.mode===m)});refresh()}
+function setMode(m){if(m==='loop'&&S.mode!=='loop'&&playing)pause();S.mode=m;saveSettings();document.body.classList.toggle('loop-on',m==='loop');loopHint();document.querySelectorAll('[data-mode]').forEach(b=>{b.classList.toggle('on',b.dataset.mode===m);b.setAttribute('aria-checked',b.dataset.mode===m)});refresh()}
 document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 $('layouts').innerHTML=Object.entries(LAYOUTS).map(([k,v])=>'<button type="button" data-layout="'+k+'" id="layout-'+k+'">'+v+'</button>').join('');
 function setLayout(l){S.layout=l;saveSettings();document.querySelectorAll('[data-layout]').forEach(b=>b.classList.toggle('on',b.dataset.layout===l));draw(pos)}
@@ -525,6 +560,12 @@ $('showNames').onchange=e=>{S.showNames=e.target.checked;saveSettings();draw(pos
 $('rounded').onchange=e=>{S.rounded=e.target.checked;saveSettings();draw(pos)};
 function setFit(v){S.fit=!!v;$('fit').checked=S.fit;saveSettings();draw(pos)}
 $('fit').onchange=e=>setFit(e.target.checked);
+$('loopRounds').value=S.loopRounds;if(S.loopLatency!=null)$('loopLatency').value=S.loopLatency;
+$('loopRounds').oninput=e=>{const v=parseInt(e.target.value,10);if(v>=1){S.loopRounds=Math.min(200,v);saveSettings();refresh()}};
+$('loopLatency').oninput=e=>{const v=parseFloat(e.target.value);S.loopLatency=isFinite(v)?Math.max(0,Math.min(500,v)):null;saveSettings()};
+function loopHint(){const has=clips.some(c=>!c.off);$('loopRecHint').textContent=has?'press Record: the loop plays on repeat and your new part is added on top, cut to fit the loop.':'press Record and play your first part, then press Stop. That becomes the loop.'}
+// estimated time from speaker to microphone, so a part recorded over the loop lands on the beat
+function loopDelay(){if(S.loopLatency!=null)return S.loopLatency/1000;const ctx=audio();return Math.min(0.3,(ctx.outputLatency||0)+(ctx.baseLatency||0)+0.02)}
 $('fade').onchange=e=>{S.fade=e.target.checked;saveSettings();draw(pos)};
 $('bg').value=S.bg;$('gap').value=S.gap;$('title').value=S.title;$('showNames').checked=S.showNames;$('rounded').checked=S.rounded;$('fit').checked=S.fit;$('fade').checked=S.fade;
 $('recChar').innerHTML=Object.entries(CHARS).map(([k,v])=>'<option value="'+k+'">'+v+'</option>').join('');
@@ -536,7 +577,7 @@ const FORMATS=[['video/mp4;codecs=avc1.42E01E,mp4a.40.2','MP4 (plays everywhere)
 const seenExt=new Set();$('format').innerHTML=FORMATS.filter(f=>!seenExt.has(f[2])&&seenExt.add(f[2])).map(f=>'<option value="'+f[0]+'">'+f[1]+'</option>').join('')||'<option value="">Not supported in this browser</option>';
 
 // ---------- recording ----------
-let playAlongUsed=false,stream=null,recKind='video',recorder=null,recChunks=[],recStart=0,recTimer=0,meterRaf=0,clickTimer=0,recording=false;
+let loopTakeTimer=0,loopLayer=null,playAlongUsed=false,stream=null,recKind='video',recorder=null,recChunks=[],recStart=0,recTimer=0,meterRaf=0,clickTimer=0,recording=false;
 function setRecKind(k){recKind=k;document.querySelectorAll('#recKind [data-kind]').forEach(b=>b.classList.toggle('on',b.dataset.kind===k));$('charField').classList.toggle('hidden',k!=='character');$('camSelect').disabled=k!=='video';$('camBtn').textContent=k==='video'?'📷 Turn on camera':'🎙 Turn on microphone';
   $('charPreview').classList.toggle('hidden',k!=='character');$('camVideo').classList.toggle('hidden',k!=='video'||!stream);if(k==='character')drawCharPreview();if(stream)startStream()}
 document.querySelectorAll('#recKind [data-kind]').forEach(b=>b.onclick=()=>setRecKind(b.dataset.kind));
@@ -570,20 +611,42 @@ $('recBtn').onclick=async()=>{
     recChunks=[];recorder=new MediaRecorder(recKind==='video'?stream:new MediaStream(stream.getAudioTracks()),mime?{mimeType:mime}:{});
     recorder.ondataavailable=e=>e.data.size&&recChunks.push(e.data);
     recorder.onstop=finishRecording;recorder.start(250);recStart=performance.now();
-    playAlongUsed=$('playAlong').checked&&clips.length>0;if(playAlongUsed){refresh();play(0)}
+    loopLayer=null;
+    if(S.mode==='loop'){refresh();if(TL.loop){
+      // layering: the loop repeats for as long as we record, then the take is cut to whole rounds
+      const rounds=+$('loopTake').value,dl=loopDelay();loopLayer={L:TL.loop,delay:dl};
+      endless=true;playAlongUsed=true;play(0);
+      if(rounds)loopTakeTimer=setTimeout(stopRecording,(rounds*TL.loop+dl+0.15)*1000);
+    }else playAlongUsed=false}
+    else{playAlongUsed=$('playAlong').checked&&clips.length>0;if(playAlongUsed){refresh();play(0)}}
     if($('clickTrack').checked){let k=0;const tick=()=>{beep(audio().currentTime+0.01,k++%4===0)};tick();clickTimer=setInterval(tick,beat*1000)}
-    $('recBadge').classList.remove('hidden');recTimer=setInterval(()=>{$('recBadge').textContent='● REC '+fmt((performance.now()-recStart)/1000).replace(/\.\d$/,'')},250);
+    $('recBadge').classList.remove('hidden');recTimer=setInterval(()=>{const el=(performance.now()-recStart)/1000;$('recBadge').textContent='● REC '+fmt(el).replace(/\.\d$/,'')+(loopLayer?' · round '+(Math.floor(el/loopLayer.L)+1):'')},250);
   },(0.15+n*beat)*1000);
 };
 $('recStopBtn').onclick=stopRecording;
-function stopRecording(){if(!recording)return;recording=false;clearInterval(clickTimer);clearInterval(recTimer);$('recBadge').classList.add('hidden');$('countDisplay').classList.add('hidden');$('recStopBtn').classList.add('hidden');$('recBtn').disabled=false;if(recorder&&recorder.state!=='inactive')recorder.stop();pause()}
+function stopRecording(){if(!recording)return;recording=false;endless=false;clearTimeout(loopTakeTimer);clearInterval(clickTimer);clearInterval(recTimer);$('recBadge').classList.add('hidden');$('countDisplay').classList.add('hidden');$('recStopBtn').classList.add('hidden');$('recBtn').disabled=false;if(recorder&&recorder.state!=='inactive')recorder.stop();pause()}
 async function finishRecording(){
   const took=(performance.now()-recStart)/1000,type=recorder.mimeType||(recKind==='video'?'video/webm':'audio/webm');
   const blob=new Blob(recChunks,{type});if(!blob.size)return;
   // a take recorded while playing along started at the timeline's 0, which is the earliest start
   const along=playAlongUsed&&S.mode==='together'?Math.min(0,...clips.map(c=>c.offset)):0;
-  const name=$('recName').value.trim()||(recKind==='video'?'Take '+(clips.length+1):(CHARS[$('recChar').value]||'Voice').replace(/^\S+\s/,''));
-  await addClip({name,kind:recKind,char:$('recChar').value,blob,type,offset:along,fallbackDuration:took});
+  const name=$('recName').value.trim()||(recKind==='video'?(S.mode==='loop'?'Part ':'Take ')+(clips.length+1):(CHARS[$('recChar').value]||'Voice').replace(/^\S+\s/,''));
+  const extra={};
+  if(S.mode==='loop'){
+    if(loopLayer){
+      // skip the speaker-to-mic delay, then keep whole rounds so the part loops seamlessly
+      const {L,delay}=loopLayer,k=Math.max(1,Math.floor((took-delay)/L+0.25));
+      extra.trimIn=Math.min(delay,Math.max(0,took-0.1));extra.trimOut=extra.trimIn+k*L;
+      if($('loopBuild').checked){const used=clips.filter(c=>!c.off);extra.enter=Math.max(1,...used.map(c=>Math.max(1,c.enter|0)))+1;
+        if(S.loopRounds<extra.enter+1){S.loopRounds=extra.enter+1;$('loopRounds').value=S.loopRounds;saveSettings()}}
+    }else if($('loopSnap').checked){
+      const bar=Math.max(1,Math.min(8,+$('beats').value||4))*60/Math.max(40,Math.min(240,+$('bpm').value||100));
+      let n=Math.round(took/bar);if(n*bar>took+0.05)n=Math.floor(took/bar);
+      if(n>=1)extra.trimOut=n*bar;
+    }
+  }
+  loopLayer=null;
+  await addClip(Object.assign({name,kind:recKind,char:$('recChar').value,blob,type,offset:along,fallbackDuration:took},extra));loopHint();
   $('recName').value='';
 }
 
