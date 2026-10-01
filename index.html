@@ -617,9 +617,7 @@
   [dir=rtl] .hero-search .tool-search { padding:12px 46px 12px 16px; }
   .search-hint { margin:10px auto 0 !important; font-size:13px !important; color:rgba(237,234,224,.55) !important; }
   .tool-hub { padding-top:16px; }
-  .hub-bar { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
-  .role-chips { display:flex; gap:6px; flex-wrap:wrap; }
-  .role-chips .filter-chip { padding:7px 12px; font-size:13px; }
+  .hub-bar { display:flex; justify-content:flex-end; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
   .toggle-all { background:none; border:0; color:var(--line-cyan); font:600 13px inherit; cursor:pointer; text-decoration:underline; padding:4px 2px; }
   .tool-group-toggle { justify-content:flex-start; }
   .tool-group-toggle .cat-icon { font-size:20px; line-height:1; }
@@ -670,7 +668,7 @@
 </header>
 
 <section class="tool-hub" id="tools" aria-label="All tools">
-  <div class="hub-bar"><div class="role-chips" id="roleChips" role="group" aria-label="Show tools for"><button type="button" class="filter-chip active" data-role="all" data-i18n="roleAll">Everyone</button><button type="button" class="filter-chip" data-role="dev" data-i18n="roleDev">💻 Developers</button><button type="button" class="filter-chip" data-role="creator" data-i18n="roleCreator">🎨 Creators</button><button type="button" class="filter-chip" data-role="student" data-i18n="roleStudent">🎓 Students &amp; teachers</button><button type="button" class="filter-chip" data-role="business" data-i18n="roleBusiness">💼 Business</button></div><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
+  <div class="hub-bar"><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
   <p class="search-empty" id="searchEmpty" hidden data-i18n="searchEmpty">No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
   <div class="tool-groups" id="toolGroups">
     <div class="tool-group" data-category="create" data-icon="✨"><h3 data-i18n="catCreate">Create</h3>
@@ -819,21 +817,11 @@
   function syncToggleAll(){const allOpen=groups.every(g=>g.classList.contains('open'));toggleAll.setAttribute('data-i18n',allOpen?'collapseAll':'expandAll');toggleAll.textContent=window.I18N?I18N.t(allOpen?'collapseAll':'expandAll'):(allOpen?'Close all categories':'Open all categories')}
   toggleAll.addEventListener('click',()=>{const open=!groups.every(g=>g.classList.contains('open'));groups.forEach(g=>{g.classList.toggle('open',open);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(open))});syncToggleAll()});
   const active='all';
-  // Role filter: a quick way to see the tools that fit what you do.
-  const ROLES={
-    dev:['website-builder','app-forge','bot-forge','bug-scanner','code-forge','game-forge','3d-game-forge','redact-forge','policy-forge','site-checkup','project-hub','utility-forge','text-compare','palette-forge','qr-forge','form-forge','screen-forge','file-forge','record-forge','logo-forge','model-forge'],
-    creator:['picture-forge','image-studio','paint-forge','cartoon-forge','3d-cartoon','video-forge','talk-forge','clip-forge','merge-forge','jam-forge','music-forge','record-forge','media-convert','media-convert-forge','audio-forge','logo-forge','palette-forge','post-forge','repurpose-forge','writing-forge','game-forge','3d-game-forge','background-forge','model-forge','slide-forge'],
-    student:['code-forge','flashcard-forge','memory-forge','focus-forge','exam-checker','grammar-forge','ocr-forge','geo-forge','biology-map','chemistry-map','body-map','idea-atlas','alphabet-forge','reasoning-test','sim-forge','slide-forge','pdf-forge','document-forge','text-compare','cv-forge','big-five','strength-compass','pattern-lab','writing-forge','everyday-forge'],
-    business:['website-builder','logo-forge','slide-forge','invoice-forge','contract-forge','policy-forge','cv-forge','name-forge','post-forge','repurpose-forge','form-forge','bot-forge','pdf-forge','pdf-edit-forge','pdf-compress','document-forge','site-checkup','meet-forge','qr-forge','redact-forge','project-hub','pattern-lab','strength-compass']
-  };
-  let role='all';
-  const inRole=c=>role==='all'||ROLES[role].includes((c.getAttribute('href')||'').replace(/\.html$/,''));
-  document.querySelectorAll('#roleChips [data-role]').forEach(b=>b.addEventListener('click',()=>{role=b.dataset.role;document.querySelectorAll('#roleChips [data-role]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});apply()}));
   function apply(){
     const q=(search.value||'').trim().toLowerCase();
     const words=q.split(/\s+/).filter(Boolean);let total=0;
     best=null;
-    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK&&inRole(c)?matchScore(c,words):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all'||role!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
+    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK?matchScore(c,words):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
     if(best)best.card.classList.add('best-match');
     document.getElementById('searchEmpty').hidden=total>0;
   }
