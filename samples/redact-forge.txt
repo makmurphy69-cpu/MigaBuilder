@@ -1,0 +1,12 @@
+2026-10-01 09:14:02 INFO  [api] POST /v1/orders from [IP_1] user=[EMAIL_1]
+2026-10-01 09:14:02 DEBUG [http] Authorization: Bearer [JWT_1]
+2026-10-01 09:14:03 ERROR [db] could not connect to postgres://[URL_LOGIN_1]@[IP_2]:5432/[NAME_1]
+2026-10-01 09:14:03 WARN  [pay] card [CARD_1] declined for customer [PHONE_1]
+2026-10-01 09:14:04 DEBUG [cfg] loaded /home/[USERNAME_1]/projects/[NAME_1]/.env
+  OPENAI_API_KEY=[AI_KEY_1]
+  STRIPE_KEY=[SERVICE_KEY_1]
+  AWS_ACCESS_KEY_ID=[AWS_KEY_1]
+  DB_PASSWORD="[SECRET_1]"
+2026-10-01 09:14:05 INFO  [mail] sent receipt to [EMAIL_2] via webhook [WEBHOOK_1]
+2026-10-01 09:14:06 INFO  [kyc] verified personnummer [ID_NUMBER_1], IBAN [IBAN_1]
+2026-10-01 09:14:07 TRACE [net] client [IPV6_1] mac [MAC_1]

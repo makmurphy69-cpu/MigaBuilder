@@ -17,25 +17,25 @@
 })();
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MigaBuilder — 63 Free Private Browser Tools</title>
-<meta name="description" content="Create pictures, websites, videos and business assets, convert files, check grammar and extract text with 63 free browser tools. No signup, no watermark and no surprise paywall.">
+<title>MigaBuilder — 66 Free Private Browser Tools</title>
+<meta name="description" content="Create pictures, websites, videos and business assets, convert files, check grammar and extract text with 66 free browser tools. No signup, no watermark and no surprise paywall.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://migabuilder.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MigaBuilder">
-<meta property="og:title" content="MigaBuilder — 63 Free Private Browser Tools">
-<meta property="og:description" content="Create, convert and check files with 63 free browser tools. No signup or surprise paywall.">
+<meta property="og:title" content="MigaBuilder — 66 Free Private Browser Tools">
+<meta property="og:description" content="Create, convert and check files with 66 free browser tools. No signup or surprise paywall.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
 <meta property="og:url" content="https://migabuilder.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MigaBuilder — 63 Free Private Browser Tools">
-<meta name="twitter:description" content="Create, convert and check files with 63 free browser tools. No signup or surprise paywall.">
+<meta name="twitter:title" content="MigaBuilder — 66 Free Private Browser Tools">
+<meta name="twitter:description" content="Create, convert and check files with 66 free browser tools. No signup or surprise paywall.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 63 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
+    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 66 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
     {"@type":"SoftwareApplication","@id":"https://migabuilder.com/#app","name":"MigaBuilder","url":"https://migabuilder.com/","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"A local-first toolkit for websites, files, documents, video and business assets.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI website builder","Local project hub","PDF toolkit","Private OCR","Website checkup","File utilities","Content repurposing","Form generator","Group video meetings","CV and résumé generator"]}
   ]
 }
@@ -617,7 +617,9 @@
   [dir=rtl] .hero-search .tool-search { padding:12px 46px 12px 16px; }
   .search-hint { margin:10px auto 0 !important; font-size:13px !important; color:rgba(237,234,224,.55) !important; }
   .tool-hub { padding-top:16px; }
-  .hub-bar { display:flex; justify-content:flex-end; margin:0 0 8px; }
+  .hub-bar { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
+  .role-chips { display:flex; gap:6px; flex-wrap:wrap; }
+  .role-chips .filter-chip { padding:7px 12px; font-size:13px; }
   .toggle-all { background:none; border:0; color:var(--line-cyan); font:600 13px inherit; cursor:pointer; text-decoration:underline; padding:4px 2px; }
   .tool-group-toggle { justify-content:flex-start; }
   .tool-group-toggle .cat-icon { font-size:20px; line-height:1; }
@@ -657,7 +659,7 @@
     <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
   </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
   <p class="hero-copy" data-i18n="heroSubtitle">Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.</p>
-  <div class="trust-row"><span data-i18n="trustTools">63 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
+  <div class="trust-row"><span data-i18n="trustTools">66 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
@@ -668,7 +670,7 @@
 </header>
 
 <section class="tool-hub" id="tools" aria-label="All tools">
-  <div class="hub-bar"><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
+  <div class="hub-bar"><div class="role-chips" id="roleChips" role="group" aria-label="Show tools for"><button type="button" class="filter-chip active" data-role="all" data-i18n="roleAll">Everyone</button><button type="button" class="filter-chip" data-role="dev" data-i18n="roleDev">💻 Developers</button><button type="button" class="filter-chip" data-role="creator" data-i18n="roleCreator">🎨 Creators</button><button type="button" class="filter-chip" data-role="student" data-i18n="roleStudent">🎓 Students &amp; teachers</button><button type="button" class="filter-chip" data-role="business" data-i18n="roleBusiness">💼 Business</button></div><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
   <p class="search-empty" id="searchEmpty" hidden data-i18n="searchEmpty">No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
   <div class="tool-groups" id="toolGroups">
     <div class="tool-group" data-category="create" data-icon="✨"><h3 data-i18n="catCreate">Create</h3>
@@ -689,6 +691,7 @@
       <a class="tool-card" href="music-forge.html" data-keywords="song singing vocals lyrics AI music generator Lyria beat instrumental background music"><span class="tool-icon">🎵</span><span><strong>Music Forge</strong><small data-i18n="d:music-forge">Describe music and get a free track, songs with singing, beats.</small></span></a>
       <a class="tool-card" href="record-forge.html"><span class="tool-icon">⏺️</span><span><strong>Record Forge</strong><small data-i18n="d:record-forge">Record your screen with narration.</small></span></a>
       <a class="tool-card" href="media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small data-i18n="d:media-convert">Turn video into GIF, extract audio and transcribe speech.</small></span></a>
+      <a class="tool-card" href="jam-forge.html" data-keywords="split screen collab music video band duet acapella multitrack record several videos together side by side one after another sequence conversation sketch dialogue talking frog cartoon character clap sync count in metronome play along tiktok duet reels shorts collage"><span class="tool-icon">🎸</span><span><strong>Jam Forge</strong><small data-i18n="d:jam-forge">Record several clips and play them side by side or one after another — a band, a duet or a conversation.</small></span></a>
       <a class="tool-card" href="audio-forge.html" data-keywords="audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"><span class="tool-icon">🎚️</span><span><strong>Audio Forge</strong><small data-i18n="d:audio-forge">Trim, join, fade, speed up and convert audio to MP3 or WAV.</small></span></a>
     </div>
     <div class="tool-group" data-category="business" data-icon="💼"><h3 data-i18n="catBusiness">Business</h3>
@@ -696,6 +699,7 @@
       <a class="tool-card" href="slide-forge.html"><span class="tool-icon">📊</span><span><strong>Slide Forge</strong><small data-i18n="d:slide-forge">Generate a downloadable PowerPoint.</small></span></a>
       <a class="tool-card" href="invoice-forge.html"><span class="tool-icon">🧾</span><span><strong>Invoice Forge</strong><small data-i18n="d:invoice-forge">Make quotes and printable invoices.</small></span></a>
       <a class="tool-card" href="contract-forge.html"><span class="tool-icon">📜</span><span><strong>Contract Forge</strong><small data-i18n="d:contract-forge">Draft straightforward agreements.</small></span></a>
+      <a class="tool-card" href="policy-forge.html" data-keywords="privacy policy generator gdpr cookie policy cookie banner consent ccpa terms of use terms and conditions disclaimer affiliate disclosure impressum accessibility statement website legal compliance dpa google analytics meta pixel"><span class="tool-icon">⚖️</span><span><strong>Policy Forge</strong><small data-i18n="d:policy-forge">Scan your site and get a privacy policy, cookie policy, consent banner, terms and disclosures.</small></span></a>
       <a class="tool-card" href="cv-forge.html"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small data-i18n="d:cv-forge">Create a professional CV and download it as PDF.</small></span></a>
       <a class="tool-card" href="name-forge.html"><span class="tool-icon">✨</span><span><strong>Name Forge</strong><small data-i18n="d:name-forge">Find business names and domains.</small></span></a>
       <a class="tool-card" href="post-forge.html"><span class="tool-icon">📣</span><span><strong>Post Forge</strong><small data-i18n="d:post-forge">Prepare and publish social posts.</small></span></a>
@@ -736,6 +740,7 @@
       <a class="tool-card" href="picture-forge.html" data-keywords="ai image generator text to image words picture art photo illustration Gemini Nano Banana"><span class="tool-icon">🌄</span><span><strong>Picture Forge</strong><small data-i18n="d:picture-forge">Turn a written description into an original AI picture.</small></span></a>
       <a class="tool-card" href="everyday-forge.html"><span class="tool-icon">📈</span><span><strong>Everyday Forge</strong><small data-i18n="d:everyday-forge">Create charts, improve writing, generate passwords and convert values.</small></span></a>
       <a class="tool-card" href="utility-forge.html"><span class="tool-icon">🧰</span><span><strong>Utility Forge</strong><small data-i18n="d:utility-forge">Convert CSV/JSON, combine text and verify files.</small></span></a>
+      <a class="tool-card" href="redact-forge.html" data-keywords="redact anonymize anonymise log sanitizer remove api keys secrets tokens passwords personal data pii gdpr email ip address mask scrub before chatgpt claude bug report stack trace env file"><span class="tool-icon">🕶️</span><span><strong>Redact Forge</strong><small data-i18n="d:redact-forge">Hide API keys, passwords and personal data in logs before you share them or paste them into an AI.</small></span></a>
       <a class="tool-card" href="site-checkup.html"><span class="tool-icon">✅</span><span><strong>Website Checkup</strong><small data-i18n="d:site-checkup">Check HTML for SEO and accessibility problems.</small></span></a>
       <a class="tool-card" href="project-hub.html"><span class="tool-icon">🗂️</span><span><strong>Project Hub</strong><small data-i18n="d:project-hub">Manage and back up projects stored on this device.</small></span></a>
       <a class="tool-card" href="model-forge.html"><span class="tool-icon">🧊</span><span><strong>Model Forge</strong><small data-i18n="d:model-forge">Design 3D models and printable forms.</small></span></a>
@@ -792,7 +797,7 @@
   <div class="community-callout" id="showcaseEmpty" data-i18n="communityText">Built something useful with MigaBuilder? Submit it for the community showcase. Personal details are never added without your approval.</div>
 </div>
 
-<footer data-i18n="footerText">63 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</footer>
+<footer data-i18n="footerText">66 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</footer>
 <script>
 (function(){
   const search=document.getElementById('toolSearch');
@@ -814,11 +819,21 @@
   function syncToggleAll(){const allOpen=groups.every(g=>g.classList.contains('open'));toggleAll.setAttribute('data-i18n',allOpen?'collapseAll':'expandAll');toggleAll.textContent=window.I18N?I18N.t(allOpen?'collapseAll':'expandAll'):(allOpen?'Close all categories':'Open all categories')}
   toggleAll.addEventListener('click',()=>{const open=!groups.every(g=>g.classList.contains('open'));groups.forEach(g=>{g.classList.toggle('open',open);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(open))});syncToggleAll()});
   const active='all';
+  // Role filter: a quick way to see the tools that fit what you do.
+  const ROLES={
+    dev:['website-builder','app-forge','bot-forge','bug-scanner','code-forge','game-forge','3d-game-forge','redact-forge','policy-forge','site-checkup','project-hub','utility-forge','text-compare','palette-forge','qr-forge','form-forge','screen-forge','file-forge','record-forge','logo-forge','model-forge'],
+    creator:['picture-forge','image-studio','paint-forge','cartoon-forge','3d-cartoon','video-forge','talk-forge','clip-forge','merge-forge','jam-forge','music-forge','record-forge','media-convert','media-convert-forge','audio-forge','logo-forge','palette-forge','post-forge','repurpose-forge','writing-forge','game-forge','3d-game-forge','background-forge','model-forge','slide-forge'],
+    student:['code-forge','flashcard-forge','memory-forge','focus-forge','exam-checker','grammar-forge','ocr-forge','geo-forge','biology-map','chemistry-map','body-map','idea-atlas','alphabet-forge','reasoning-test','sim-forge','slide-forge','pdf-forge','document-forge','text-compare','cv-forge','big-five','strength-compass','pattern-lab','writing-forge','everyday-forge'],
+    business:['website-builder','logo-forge','slide-forge','invoice-forge','contract-forge','policy-forge','cv-forge','name-forge','post-forge','repurpose-forge','form-forge','bot-forge','pdf-forge','pdf-edit-forge','pdf-compress','document-forge','site-checkup','meet-forge','qr-forge','redact-forge','project-hub','pattern-lab','strength-compass']
+  };
+  let role='all';
+  const inRole=c=>role==='all'||ROLES[role].includes((c.getAttribute('href')||'').replace(/\.html$/,''));
+  document.querySelectorAll('#roleChips [data-role]').forEach(b=>b.addEventListener('click',()=>{role=b.dataset.role;document.querySelectorAll('#roleChips [data-role]').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});apply()}));
   function apply(){
     const q=(search.value||'').trim().toLowerCase();
     const words=q.split(/\s+/).filter(Boolean);let total=0;
     best=null;
-    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK?matchScore(c,words):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
+    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK&&inRole(c)?matchScore(c,words):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all'||role!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
     if(best)best.card.classList.add('best-match');
     document.getElementById('searchEmpty').hidden=total>0;
   }
@@ -854,7 +869,7 @@
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
     const popular=['pdf-forge.html','image-studio.html','grammar-forge.html','cv-forge.html','website-builder.html','ocr-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
-    document.getElementById('newTools').replaceChildren(...['focus-forge.html','3d-game-forge.html','memory-forge.html','boat-forge.html','biology-map.html','chemistry-map.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['jam-forge.html','policy-forge.html','redact-forge.html','focus-forge.html','3d-game-forge.html','memory-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));
