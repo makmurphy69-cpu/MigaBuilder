@@ -13,7 +13,7 @@ A tool is not finished until **all** of these are done, in the same pull request
 2. Listed everywhere tools are listed: a `tool-card` in `index.html` (and the
    *New* row), `miga-palette.js`, `tutorials.js` (walkthrough entry),
    `sitemap.xml`, the name map in `visits.html`, and `README.md`. Update the
-   tool count ("56 free tools") in `index.html` and `README.md`.
+   tool count ("66 free tools") in `index.html` and `README.md`.
 3. **A narrated explanation video — always, for every new tool.** Add a
    scenario to `scripts/tutorial-videos/scenarios.mjs` and record it:
 
@@ -28,6 +28,10 @@ A tool is not finished until **all** of these are done, in the same pull request
 4. Run `node scripts/check-tool-videos.mjs`. It must pass — the
    *Tool explanation videos* GitHub check runs it on every pull request and
    fails when any homepage tool is missing its video.
+5. Run `node scripts/smoke-test.mjs <tool>` (or with no argument for every
+   page). It opens the page in Chromium and fails on JavaScript errors or
+   missing files; the *Page smoke test* GitHub check runs it on every pull
+   request.
 
 When a tool changes in a way that makes its video wrong, update the scenario
 and record the video again.
