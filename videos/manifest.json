@@ -702,12 +702,13 @@
   "title": "MigaBuilder",
   "video": "videos/index.mp4",
   "poster": "videos/index.jpg",
-  "duration": 102,
+  "duration": 148,
   "transcript": [
-   "Welcome to MigaBuilder: fifty eight free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.",
+   "Welcome to MigaBuilder: sixty six free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.",
    "Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.",
    "Small typos are fine, and everyday words work too, such as resume for the CV maker.",
    "Or browse by category. The row of tiles under the search box groups every tool: create, video and audio, business, documents, learning and design.",
+   "Not sure where to start? Pick who you are, such as Developers or Students and teachers, to see the tools made for you.",
    "Pick a tile, and its tools open right underneath, each with a one line description.",
    "Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.",
    "Want to see everything at once? Open all categories with one click.",
@@ -737,6 +738,32 @@
    "file": "samples/invoice-forge.html",
    "label": "Invoice made in this video",
    "kind": "html"
+  }
+ },
+ "jam-forge.html": {
+  "title": "Jam Forge",
+  "video": "videos/jam-forge.mp4",
+  "poster": "videos/jam-forge.jpg",
+  "duration": 108,
+  "transcript": [
+   "Welcome to Jam Forge. Record several clips and put them together into one video: a band playing together, a duet, or two people talking.",
+   "Pick what you want to make. Band split screen sets up a grid where every clip plays at the same time.",
+   "Sam recorded the drums and Ali the guitar, each at home. Add their clips with Add video or audio files, or drop them on the page.",
+   "Each of them clapped once at the start. Press Sync by clap, and the clips line up on the clap.",
+   "Now record your own part. Turn on the camera, write your name, and keep Play along on, so you hear the band in your headphones while you record.",
+   "Press Record. After the count in, the band starts and you play along. Press Stop when you are done.",
+   "Want a talking character? Add a recorded voice and choose a frog. Its mouth moves with the sound.",
+   "Press Play to watch all four at once.",
+   "Taking turns keeps everyone on screen and lights up whoever is talking. It is perfect for a conversation, or a chat with a frog.",
+   "Back to At the same time. Choose a layout, such as one big clip with the others beside it.",
+   "Choose a wide, tall or square video, add a title, and press Make the video. It is made on your device, in real time.",
+   "Download it and share it. Your clips are kept in this browser, so you can come back and change it.",
+   "Now it is your turn. Open Jam Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/jam-forge.mp4",
+   "label": "Video made in this video",
+   "kind": "video"
   }
  },
  "logo-forge.html": {
@@ -1086,6 +1113,31 @@
    "kind": "image"
   }
  },
+ "policy-forge.html": {
+  "title": "Policy Forge",
+  "video": "videos/policy-forge.mp4",
+  "poster": "videos/policy-forge.jpg",
+  "duration": 128,
+  "transcript": [
+   "Welcome to Policy Forge. Find out what your website must tell its visitors, and get the privacy policy, cookie policy and banner it needs.",
+   "First, say who runs the site, how to reach you about privacy, and where you are based.",
+   "Then open your website, press Control U to see its code, copy it and paste it here. We use an example bakery site.",
+   "Policy Forge finds the services hidden in the code: Google Analytics, the Meta pixel, Stripe, YouTube, Google Maps and more.",
+   "Tick what the code cannot show, such as visitors from California, or a newsletter tool.",
+   "What you need lists what the law asks of this site, from a cookie banner to self-hosted fonts and a Do not sell link.",
+   "The privacy policy is written from your answers: what you collect, why, who receives it, and the visitor’s rights.",
+   "The cookie policy lists every cookie with who sets it and how long it lasts.",
+   "Cookie banner gives you ready code that blocks tracking until the visitor says yes, with Reject as easy as Accept.",
+   "There are also terms of use, and disclosures for affiliate links, AI, an Impressum or an accessibility statement.",
+   "Copy any document, or download it as a ready web page. Remember, it is a starting point, not legal advice.",
+   "Now it is your turn. Open Policy Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/policy-forge.html",
+   "label": "Privacy policy made in this video",
+   "kind": "html"
+  }
+ },
  "post-forge.html": {
   "title": "Post Forge",
   "video": "videos/post-forge.mp4",
@@ -1175,6 +1227,29 @@
    "file": "samples/record-forge.png",
    "label": "Recording settings from this video",
    "kind": "image"
+  }
+ },
+ "redact-forge.html": {
+  "title": "Redact Forge",
+  "video": "videos/redact-forge.mp4",
+  "poster": "videos/redact-forge.jpg",
+  "duration": 103,
+  "transcript": [
+   "Welcome to Redact Forge. Before you paste a log or an error into an AI or a bug report, hide the keys, passwords and personal data in it.",
+   "Paste a log, an error message or a config file, or open a file. Here is an example log full of keys and personal data.",
+   "On the right is the safe version. Every key, password, email, IP address, card number and ID number is replaced, and highlighted so you can check it.",
+   "Below, you see what was found, and how many of each.",
+   "Choose how to replace things. Realistic fakes keep the log looking real.",
+   "Numbered labels keep the same value as the same label everywhere, so the log still makes sense.",
+   "Add your own words, such as names, projects or server names, and they are hidden too.",
+   "Press Copy, and paste the safe text into ChatGPT, Claude or your bug report.",
+   "When the answer comes back with the labels, paste it here, and the real values are put back, only on your device.",
+   "Now it is your turn. Open Redact Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/redact-forge.txt",
+   "label": "Cleaned log from this video",
+   "kind": "text"
   }
  },
  "repurpose-forge.html": {

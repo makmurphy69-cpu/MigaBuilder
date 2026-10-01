@@ -55,6 +55,29 @@ const DRAW = {
     hill('#8a5a83',[[0,560],[260,380],[480,520],[760,330],[1040,540],[1300,400],[1600,560]]);
     hill('#5d3f73',[[0,700],[300,560],[620,690],[900,540],[1200,700],[1600,600]]);
     hill('#2e2446',[[0,860],[400,760],[800,860],[1200,780],[1600,880]]);`],
+  // Two cartoon musicians for Jam Forge (each clip claps first, at a different moment)
+  'jam-drummer.png': [1280, 720, `
+    g.fillStyle='#ffe2b8';g.fillRect(0,0,1280,720);g.fillStyle='#f6c98a';g.fillRect(0,520,1280,200);
+    g.fillStyle='#3d6fb6';g.beginPath();g.ellipse(640,640,230,90,0,0,Math.PI*2);g.fill();
+    g.fillStyle='#e9b48f';g.beginPath();g.arc(640,250,95,0,Math.PI*2);g.fill();
+    g.fillStyle='#2b1a10';g.beginPath();g.ellipse(640,175,100,50,0,Math.PI,0);g.fill();
+    g.fillStyle='#2b1a10';g.beginPath();g.arc(605,250,11,0,Math.PI*2);g.arc(675,250,11,0,Math.PI*2);g.fill();
+    g.strokeStyle='#a3413a';g.lineWidth=8;g.lineCap='round';g.beginPath();g.arc(640,285,30,0.2,Math.PI-0.2);g.stroke();
+    g.fillStyle='#d8604a';g.fillRect(560,345,160,180);
+    g.fillStyle='#fafafa';g.strokeStyle='#555';g.lineWidth=6;[[420,500,120],[860,500,120]].forEach(([x,y,r])=>{g.beginPath();g.ellipse(x,y,r,38,0,0,Math.PI*2);g.fill();g.stroke()});
+    g.fillStyle='#e2a63b';[[330,380],[950,370]].forEach(([x,y])=>{g.beginPath();g.ellipse(x,y,110,18,-0.1,0,Math.PI*2);g.fill()});
+    g.strokeStyle='#8d5a2b';g.lineWidth=12;[[560,400,430,470],[720,400,850,470]].forEach(([a,b,c,d])=>{g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke()});
+    g.fillStyle='#16202b';g.font='bold 54px sans-serif';g.fillText('Sam — drums',40,80);`],
+  'jam-guitarist.png': [1280, 720, `
+    g.fillStyle='#cdeee6';g.fillRect(0,0,1280,720);g.fillStyle='#9fd8c8';g.fillRect(0,540,1280,180);
+    g.fillStyle='#e0a37a';g.beginPath();g.arc(640,240,95,0,Math.PI*2);g.fill();
+    g.fillStyle='#e2a63b';g.beginPath();g.ellipse(640,160,110,55,0,Math.PI,0);g.fill();g.fillRect(530,160,40,150);g.fillRect(710,160,40,150);
+    g.fillStyle='#2b1a10';g.beginPath();g.arc(605,240,11,0,Math.PI*2);g.arc(675,240,11,0,Math.PI*2);g.fill();
+    g.strokeStyle='#a3413a';g.lineWidth=8;g.lineCap='round';g.beginPath();g.arc(640,275,28,0.2,Math.PI-0.2);g.stroke();
+    g.fillStyle='#6f4bb3';g.fillRect(550,335,180,220);
+    g.save();g.translate(640,470);g.rotate(-0.35);g.fillStyle='#b5651d';g.beginPath();g.ellipse(-60,0,120,90,0,0,Math.PI*2);g.fill();g.fillStyle='#3b2412';g.beginPath();g.arc(-50,0,28,0,Math.PI*2);g.fill();
+    g.fillStyle='#5d3a1a';g.fillRect(40,-14,330,28);g.strokeStyle='#eee';g.lineWidth=2;for(let i=0;i<6;i++){g.beginPath();g.moveTo(-140,-12+i*5);g.lineTo(370,-12+i*5);g.stroke()}g.restore();
+    g.fillStyle='#16202b';g.font='bold 54px sans-serif';g.fillText('Ali — guitar',40,80);`],
   // Photo-like texture (large as PNG, so PDF compression has something to shrink)
   'photo-field.png': [1600, 1100, `
     const sky=g.createLinearGradient(0,0,0,600);sky.addColorStop(0,'#5b9bd5');sky.addColorStop(1,'#cfe6f7');g.fillStyle=sky;g.fillRect(0,0,1600,1100);
@@ -102,6 +125,18 @@ export async function ensureAssets(browser, ffmpeg, dir) {
       '-f', 'lavfi', '-t', '8', '-i', 'sine=frequency=330:sample_rate=44100,volume=0.15',
       '-filter_complex', '[0:v]scale=1280:720,zoompan=z=\'min(zoom+0.0015,1.2)\':d=100:s=1280x720:fps=25[a];[1:v]scale=1280:720,zoompan=z=\'min(zoom+0.0015,1.2)\':d=100:s=1280x720:fps=25[b];[a][b]concat=n=2:v=1:a=0,format=yuv420p[v]',
       '-map', '[v]', '-map', '2:a', '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '40', '-deadline', 'realtime', '-cpu-used', '8', '-c:a', 'libopus', '-shortest', clip]);
+  }
+  // Jam Forge: a drummer and a guitarist. Each clip claps once (at 0.6 s and 1.1 s), then plays at 120 bpm.
+  const jam = [['jam-drums.webm', 'jam-drummer.png', 0.6, "0.9*exp(-60*abs(t-0.6))*(random(0)*2-1)+if(gt(t,1),0.7*sin(2*PI*55*t)*exp(-14*mod(t-1,0.5))+0.18*(random(1)*2-1)*exp(-45*mod(t-0.75,0.5)),0)"],
+    ['jam-guitar.webm', 'jam-guitarist.png', 1.1, "0.9*exp(-60*abs(t-1.1))*(random(0)*2-1)+if(gt(t,1.5),0.16*(sin(2*PI*196*t)+sin(2*PI*247*t)+sin(2*PI*294*t)+0.6*sin(2*PI*392*t))*exp(-2.5*mod(t-1.5,1)),0)"]];
+  for (const [name, png, , expr] of jam) {
+    const out = path.join(dir, name);
+    if (fs.existsSync(out)) continue;
+    execFileSync(ffmpeg, ['-y', '-hide_banner', '-loglevel', 'error',
+      '-loop', '1', '-t', '7', '-i', path.join(dir, png),
+      '-f', 'lavfi', '-t', '7', '-i', "aevalsrc='" + expr + "':s=44100",
+      '-filter_complex', "[0:v]scale=1400:788,crop=1280:720:60+50*sin(2*PI*t):34+20*abs(sin(2*PI*t)),fps=25,format=yuv420p[v]",
+      '-map', '[v]', '-map', '1:a', '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-deadline', 'realtime', '-cpu-used', '8', '-c:a', 'libopus', '-shortest', out]);
   }
   // A spoken recording for the audio editor.
   const voice = path.join(dir, 'voice.wav');

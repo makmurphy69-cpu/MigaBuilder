@@ -36,7 +36,9 @@
     // Pages with their own design get a small floating pill instead of the nav bar.
     '.miga-float{position:fixed;left:10px;bottom:10px;z-index:60;margin:0;background:rgba(8,24,38,.88);padding:4px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:.85}.miga-float:hover{opacity:1}' +
     '.miga-float .miga-badge{border:0;padding:3px 6px}' +
-    '@media(max-width:620px){.miga-badge{display:none}}';
+    '.miga-badge{cursor:help;position:relative}.miga-badge .s{display:none}.miga-pop{position:absolute;z-index:9999;top:calc(100% + 6px);right:0;width:min(300px,80vw);white-space:normal;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:10px 12px;font:400 12.5px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35)}.miga-float .miga-pop{top:auto;bottom:calc(100% + 6px);left:0;right:auto}' +
+    '.miga-local-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.72}' +
+    '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}}';
   document.head.appendChild(st);
 
   const bar = document.createElement('div'); bar.className = 'miga-bar' + (nav ? '' : ' miga-float');
@@ -47,8 +49,29 @@
   const badge = usesAI
     ? ['miga-badge miga-badge-ai', 'This tool runs in your browser, except its AI steps. When you use an AI step, the text for that step is sent to the AI you pick: the free Gemini option goes through MigaBuilder\'s proxy to Google; OpenAI and Anthropic are called directly with your own key.', nav ? 'Runs in your browser · AI steps send text to the AI you pick' : 'AI steps go online']
     : ['miga-badge', 'This tool works inside your browser. Your text and files are not uploaded unless you use a sharing feature.', nav ? 'Private · runs in your browser' : 'Private'];
-  bar.innerHTML = '<span class="' + badge[0] + '" title="' + badge[1].replace(/"/g, '&quot;') + '">' + (usesAI ? '🌐 ' : '🔒 ') + badge[2] + '</span>' + (lightPanels ? '<button type="button" class="miga-theme" aria-label="Toggle dark mode"></button>' : '');
+  bar.innerHTML = '<span class="' + badge[0] + '" tabindex="0" role="button" aria-expanded="false" title="' + badge[1].replace(/"/g, '&quot;') + '">' + (usesAI ? '🌐 ' : '🔒 ') + '<span class="l">' + badge[2] + '</span><span class="s">' + (usesAI ? 'AI goes online' : 'Private') + '</span></span>' + (lightPanels ? '<button type="button" class="miga-theme" aria-label="Toggle dark mode"></button>' : '');
   (nav || document.body).appendChild(bar);
+  // Tooltips do not work on phones, so tapping the badge shows the explanation.
+  const badgeEl = bar.querySelector('.miga-badge');
+  const togglePop = () => { const open = badgeEl.querySelector('.miga-pop'); if (open) { open.remove(); badgeEl.setAttribute('aria-expanded', 'false'); return; } const pop = document.createElement('span'); pop.className = 'miga-pop'; pop.textContent = badge[1]; badgeEl.appendChild(pop); if (badgeEl.getBoundingClientRect().left < innerWidth / 2) { pop.style.left = '0'; pop.style.right = 'auto'; } badgeEl.setAttribute('aria-expanded', 'true'); };
+  badgeEl.addEventListener('click', e => { if (!e.target.closest('.miga-pop')) togglePop(); });
+  badgeEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePop(); } else if (e.key === 'Escape' && badgeEl.querySelector('.miga-pop')) togglePop(); });
+  document.addEventListener('click', e => { if (!badgeEl.contains(e.target) && badgeEl.querySelector('.miga-pop')) togglePop(); });
+
+  // A plain note under file pickers on tools that open files only on this device.
+  const UPLOADS = ['meet-forge.html', 'screen-forge.html', 'feedback.html', 'post-forge.html', 'clip-forge.html', 'record-forge.html', 'video-forge.html', 'visits.html'];
+  if (!usesAI && !UPLOADS.includes(file)) {
+    const said = /not uploaded|never (?:leaves?|uploaded)|stays? on (?:your|this) device|on your device|in your browser|locally/i;
+    const seen = new Set();
+    document.querySelectorAll('input[type=file]').forEach(inp => {
+      const box = inp.closest('.panel, section, .card') || inp.parentElement;
+      if (!box || seen.has(box) || said.test(box.textContent)) return;
+      seen.add(box);
+      const note = document.createElement('small'); note.className = 'miga-local-note';
+      note.textContent = '🔒 Files you choose are opened on this device and are not uploaded.';
+      box.appendChild(note);
+    });
+  }
 
   // ---------- on-screen keyboard for any text field (loaded on demand) ----------
   let lastField = null;

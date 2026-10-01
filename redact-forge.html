@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Redact Forge — remove API keys, passwords and personal data from logs before sharing | MigaBuilder</title>
+<meta name="description" content="Free log and code anonymizer: hide API keys, tokens, passwords, emails, IP addresses, phone numbers, card numbers and personal ID numbers before you paste into ChatGPT, Claude, a bug report or a forum. Consistent placeholders and one-click restore. Runs only in your browser.">
+<link rel="canonical" href="https://migabuilder.com/redact-forge.html">
+<meta property="og:title" content="Redact Forge — clean secrets and personal data out of logs | MigaBuilder">
+<meta property="og:description" content="Hide API keys, passwords, emails and IPs before you share a log or paste it into an AI. Nothing leaves your browser.">
+<meta property="og:url" content="https://migabuilder.com/redact-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.io{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.io textarea,.io .outbox{width:100%;min-height:340px;max-height:60vh;font:500 12.5px/1.55 'IBM Plex Mono',monospace;padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff;color:var(--ink);resize:vertical;overflow:auto;white-space:pre-wrap;word-break:break-all}
+.outbox mark{border-radius:3px;padding:0 2px;background:var(--mk,#fde68a);color:#16202b}
+.inbox-wrap{position:relative}
+.io h3{font:700 14px 'Space Grotesk';margin:0 0 6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.chips span{background:#fff;border:1px solid rgba(22,32,43,.15);border-left:5px solid var(--mk);border-radius:4px;padding:4px 9px;font-size:12.5px}
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 16px}
+.opts fieldset{border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:8px 12px;margin:0}
+.opts legend{font:700 13px 'Space Grotesk';padding:0 4px}
+.opts label{display:flex;gap:7px;align-items:center;font-size:13.5px;padding:2px 0}
+.opts label i{width:10px;height:10px;border-radius:2px;background:var(--mk);flex:none}
+.styles{display:flex;gap:6px;flex-wrap:wrap}.styles button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600;color:var(--ink);font-size:13px}.styles button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.styles button small{font:500 11px 'IBM Plex Mono';opacity:.75;margin-left:4px}
+.warn{padding:10px 12px;background:rgba(226,166,59,.14);border-left:3px solid var(--amber);font-size:13px;margin-top:10px}
+.drop{outline:3px dashed var(--amber);outline-offset:3px}
+.maptable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}.maptable td,.maptable th{border-bottom:1px solid rgba(22,32,43,.1);padding:5px 6px;text-align:left;font-family:'IBM Plex Mono',monospace;word-break:break-all}.maptable th{font-family:'Space Grotesk';font-size:12px}
+@media(max-width:820px){.io{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Redact Forge</span></nav>
+<header class="masthead"><div><h1>Redact Forge</h1><p>Hide API keys, passwords, tokens and personal data in logs, code and error messages before you share them — with ChatGPT, Claude, a bug report or a forum. Everything happens in your browser.</p></div></header>
+<main>
+<section class="panel" id="mainPanel">
+  <div class="actions" style="margin-bottom:12px">
+    <button class="secondary" id="exampleBtn">🧪 Try an example log</button>
+    <label class="secondary" style="display:inline-block;cursor:pointer"><input type="file" id="fileInput" hidden accept=".log,.txt,.json,.env,.yaml,.yml,.xml,.csv,.ini,.conf,.cfg,.toml,.properties,.js,.ts,.py,.java,.cs,.go,.rb,.php,.sh,.sql,.har,.md,text/*">📂 Open a file</label>
+    <button class="secondary" id="clearBtn">Clear</button>
+  </div>
+  <div class="io">
+    <div><h3><span>Your text</span><span class="muted" id="inStats"></span></h3><textarea id="input" spellcheck="false" placeholder="Paste a log, stack trace, config file, HTTP request or code here — or drop a file."></textarea></div>
+    <div><h3><span>Safe to share</span><span class="actions"><button class="primary" id="copyBtn" style="padding:6px 12px">📋 Copy</button><button class="secondary" id="downloadBtn" style="padding:6px 12px">⬇ Download</button></span></h3><div class="outbox" id="output" tabindex="0" aria-live="polite"></div></div>
+  </div>
+  <div class="chips" id="counts"></div>
+  <div class="warn">Automatic detection catches most secrets and personal data, but not everything — for example names in free text. Read the result before you share it, and add any words it missed under <b>Also hide these words</b>. If a real key was ever pasted somewhere public, <b>revoke it</b>; hiding it later does not make it safe.</div>
+</section>
+
+<section class="panel" id="optionsPanel">
+  <h2>What to hide</h2>
+  <div class="field"><label>Replace with</label>
+    <div class="styles" id="styles">
+      <button type="button" data-style="numbered" id="style-numbered">Numbered labels<small>[EMAIL_1]</small></button>
+      <button type="button" data-style="fake" id="style-fake">Realistic fakes<small>user1@example.com</small></button>
+      <button type="button" data-style="label" id="style-label">Plain labels<small>[EMAIL]</small></button>
+      <button type="button" data-style="mask" id="style-mask">Partly masked<small>j•••om</small></button>
+    </div>
+    <p class="muted" style="margin:6px 0 0">Numbered labels and fakes keep the same value as the same label everywhere, so the log still makes sense — and you can put the real values back later.</p>
+  </div>
+  <div class="opts" id="opts"></div>
+  <div class="checks" style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:14px">
+    <label><input type="checkbox" id="keepLocal"> Leave localhost and private network addresses (127.0.0.1, 10.x, 192.168.x, 172.16–31.x)</label>
+  </div>
+  <div class="grid" style="margin-top:12px">
+    <div class="field"><label for="words">Also hide these words (names, company, project, server names — one per line or comma separated)</label><textarea id="words" style="min-height:90px" placeholder="Anna Svensson&#10;Acme AB&#10;prod-db-01"></textarea></div>
+    <div class="field"><label for="patterns">Your own patterns (regular expressions, one per line)</label><textarea id="patterns" style="min-height:90px;font-family:'IBM Plex Mono',monospace;font-size:12.5px" placeholder="ORDER-\d{6}&#10;cust_[a-z0-9]+"></textarea><small class="muted" id="patErr"></small></div>
+  </div>
+</section>
+
+<section class="panel" id="restorePanel">
+  <h2>Put the real values back</h2>
+  <p>Got an answer from an AI or a colleague that uses the labels? Paste it here and the original values are filled in again — on this device only.</p>
+  <div class="io">
+    <div><h3>Answer with labels</h3><textarea id="restoreIn" spellcheck="false" style="min-height:160px" placeholder="e.g. The login for [EMAIL_1] fails because [IP_2] is blocked…"></textarea></div>
+    <div><h3><span>With real values</span><button class="secondary" id="restoreCopy" style="padding:6px 12px">📋 Copy</button></h3><div class="outbox" id="restoreOut" style="min-height:160px"></div></div>
+  </div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">Show the list of replacements <span class="muted" id="mapCount"></span></summary>
+    <table class="maptable" id="mapTable"></table>
+    <div class="actions" style="margin-top:8px"><button class="secondary" id="mapDownload">⬇ Download the list (JSON)</button></div>
+    <p class="muted">This list contains the real secrets. Keep it private, and never share it together with the redacted text.</p>
+  </details>
+</section>
+
+<section class="panel">
+  <h2>What it finds</h2>
+  <div class="tips" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;font-size:13.5px;line-height:1.5">
+    <div><b>🔑 Keys and tokens</b><br>AWS, GitHub, GitLab, OpenAI, Anthropic, Google, Stripe, Slack, Discord and Slack webhooks, SendGrid, Twilio, npm, Hugging Face, Shopify, JWTs, private key blocks, Bearer and Basic headers, cookies, passwords in URLs and connection strings, and <code>password=</code>, <code>token:</code> or <code>api_key</code> values in .env, JSON and YAML.</div>
+    <div><b>👤 Personal data</b><br>Email addresses, phone numbers, IPv4 and IPv6 addresses, MAC addresses, card numbers (checked with the Luhn test), IBANs (checksum checked), Swedish personal ID numbers, US social security numbers, and user names in file paths like <code>/home/anna</code> or <code>C:\Users\anna</code>.</div>
+    <div><b>🔒 Private</b><br>Your text is never uploaded. The checks run in this page with JavaScript, so it also works offline once the page has loaded.</div>
+  </div>
+</section>
+</main>
+<footer>Redact Forge · part of MigaBuilder · your text never leaves this device</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const luhn=d=>{let s=0,alt=false;for(let i=d.length-1;i>=0;i--){let n=+d[i];if(alt){n*=2;if(n>9)n-=9}s+=n;alt=!alt}return s%10===0};
+const ibanOK=s=>{s=s.replace(/\s/g,'').toUpperCase();if(s.length<15||s.length>34)return false;const r=s.slice(4)+s.slice(0,4);let m=0;for(const ch of r){const v=/[A-Z]/.test(ch)?ch.charCodeAt(0)-55:+ch;for(const dd of String(v))m=(m*10+ +dd)%97}return m===1};
+const pnrOK=s=>{const d=s.replace(/\D/g,'').slice(-10);if(d.length!==10)return false;const mm=+d.slice(2,4),dd=+d.slice(4,6);return mm>=1&&mm<=12&&((dd>=1&&dd<=31)||(dd>=61&&dd<=91))&&luhn(d)};
+const isPrivateIP=ip=>/^(127\.|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|0\.0\.0\.0$|169\.254\.)/.test(ip);
+const KV='(?:pass(?:word|wd)?|pwd|secret|token|api[_-]?key|apikey|access[_-]?key|private[_-]?key|client[_-]?secret|auth(?:orization)?|credentials?|session(?:[_-]?id)?|signature)';
+// Rules run in this order; when two matches overlap, the earlier rule wins.
+const RULES=[
+  {id:'privkey',g:'secrets',label:'Private key blocks',tag:'PRIVATE_KEY',re:/-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----/g},
+  {id:'urlcreds',g:'secrets',label:'Passwords in URLs and connection strings',tag:'URL_LOGIN',re:/\b[a-z][a-z0-9+.\-]*:\/\/(?<v>[^\s:@\/?#]+:[^\s@\/?#]+)@/gi},
+  {id:'webhook',g:'secrets',label:'Slack and Discord webhooks',tag:'WEBHOOK',re:/https:\/\/(?:hooks\.slack\.com\/services\/[A-Za-z0-9\/]+|(?:ptb\.|canary\.)?discord(?:app)?\.com\/api\/webhooks\/\d+\/[\w-]+)/g},
+  {id:'aws',g:'secrets',label:'AWS access keys',tag:'AWS_KEY',re:/\b(?:AKIA|ASIA|AGPA|AIDA|AROA)[0-9A-Z]{16}\b/g},
+  {id:'github',g:'secrets',label:'GitHub and GitLab tokens',tag:'GIT_TOKEN',re:/\b(?:gh[pousr]_[A-Za-z0-9]{30,255}|github_pat_[A-Za-z0-9_]{22,255}|glpat-[A-Za-z0-9_\-]{20,})\b/g},
+  {id:'ai',g:'secrets',label:'OpenAI, Anthropic, Hugging Face keys',tag:'AI_KEY',re:/\b(?:sk-ant-[A-Za-z0-9_\-]{20,}|sk-(?:proj-|svcacct-|admin-)?[A-Za-z0-9_\-]{20,}|hf_[A-Za-z0-9]{30,})/g},
+  {id:'google',g:'secrets',label:'Google API keys',tag:'GOOGLE_KEY',re:/\bAIza[0-9A-Za-z_\-]{35}\b/g},
+  {id:'stripe',g:'secrets',label:'Stripe, Shopify, SendGrid, Twilio, npm, Slack',tag:'SERVICE_KEY',re:/\b(?:(?:sk|pk|rk)_(?:live|test)_[A-Za-z0-9]{16,}|shp(?:at|ca|pa|ss)_[a-fA-F0-9]{32}|SG\.[\w-]{16,}\.[\w-]{16,}|SK[0-9a-fA-F]{32}|npm_[A-Za-z0-9]{36}|xox[abposr]-[A-Za-z0-9-]{10,})\b/g},
+  {id:'jwt',g:'secrets',label:'JSON web tokens (JWT)',tag:'JWT',re:/\beyJ[A-Za-z0-9_-]{8,}\.eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\b/g},
+  {id:'bearer',g:'secrets',label:'Bearer and Basic auth headers',tag:'AUTH',re:/\b(?:Bearer|Basic|Token)\s+(?<v>[A-Za-z0-9\-._~+\/]{12,}=*)/g},
+  {id:'cookie',g:'secrets',label:'Cookie headers',tag:'COOKIE',re:/^[ \t>"']*(?:Set-)?Cookie:\s*(?<v>[^\r\n]+)/gim},
+  {id:'azure',g:'secrets',label:'Azure storage keys',tag:'AZURE_KEY',re:/AccountKey=(?<v>[A-Za-z0-9+\/=]{30,})/g},
+  {id:'query',g:'secrets',label:'Secrets in links (?token=, ?key=)',tag:'URL_SECRET',re:/[?&](?:token|key|api_?key|access_token|auth|sig|signature|secret|password|code|session)=(?<v>[^&\s#"'<>]+)/gi},
+  {id:'kv',g:'secrets',label:'password= / token: / api_key values',tag:'SECRET',re:new RegExp('(?:^|[\\s{,;(&"\'])["\']?[\\w.\\-]*'+KV+'[\\w.\\-]*["\']?\\s*[:=]\\s*(?<v>"[^"\\n]{3,}"|\'[^\'\\n]{3,}\'|[^\\s,;}\\]"\'&]{3,})','gim'),skip:v=>/^["']?(?:bearer|basic|token|true|false|null|none|undefined|\*+|•+|\[[A-Z_0-9]+\]|redacted|xxx+|changeme|<[^>]*>|\$\{[^}]*\}|%[^%]*%)["']?$/i.test(v)},
+  {id:'email',g:'personal',label:'Email addresses',tag:'EMAIL',re:/[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}/g},
+  {id:'mac',g:'personal',label:'MAC addresses',tag:'MAC',re:/\b(?:[0-9A-Fa-f]{2}[:-]){5}[0-9A-Fa-f]{2}\b/g},
+  {id:'ipv6',g:'personal',label:'IPv6 addresses',tag:'IPV6',re:/(?<![\w:])(?:[0-9a-fA-F]{1,4}:){1,7}(?::|(?::[0-9a-fA-F]{1,4}){1,7}|[0-9a-fA-F]{1,4})(?![\w:])|::1\b/g,ok:m=>m==='::1'||(m.match(/:/g)||[]).length>=4||/::/.test(m)&&m.replace(/:/g,'').length>=4},
+  {id:'ipv4',g:'personal',label:'IPv4 addresses',tag:'IP',re:/\b(?:25[0-5]|2[0-4]\d|1?\d?\d)(?:\.(?:25[0-5]|2[0-4]\d|1?\d?\d)){3}\b/g},
+  {id:'card',g:'personal',label:'Card numbers',tag:'CARD',re:/\b\d(?:[ -]?\d){12,18}\b/g,ok:m=>{const d=m.replace(/\D/g,'');return d.length>=13&&d.length<=19&&!/^(\d)\1+$/.test(d)&&luhn(d)}},
+  {id:'iban',g:'personal',label:'Bank account numbers (IBAN)',tag:'IBAN',re:/\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]){11,30}\b/g,ok:ibanOK},
+  {id:'pnr',g:'personal',label:'Swedish personal ID numbers',tag:'ID_NUMBER',re:/\b(?:19|20)?\d{6}[-+]\d{4}\b|\b(?:19|20)\d{10}\b/g,ok:pnrOK},
+  {id:'ssn',g:'personal',label:'US social security numbers',tag:'SSN',re:/\b(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}\b/g},
+  {id:'phone',g:'personal',label:'Phone numbers',tag:'PHONE',re:/(?<![\w.:\/-])(?:(?:\+|00)\d{1,3}[ \-.]?(?:\(\d{1,4}\)[ \-.]?)?\d[\d \-.]{5,}\d|\(?0\d{1,4}\)?[ \-]\d{2,4}(?:[ \-]\d{2,4}){1,3})(?![\w.:\/-])/g,ok:m=>{const n=m.replace(/\D/g,'').length;return n>=8&&n<=15}},
+  {id:'homeuser',g:'personal',label:'User names in file paths',tag:'USERNAME',re:/(?:\/home\/|\/Users\/|[A-Za-z]:\\(?:Users|Documents and Settings)\\)(?<v>[^\/\\\s"':*?<>|]+)/g,skip:v=>/^(?:shared|public|default|all users|runner|root|\$user|%username%|<[^>]+>)$/i.test(v)},
+  {id:'uuid',g:'other',label:'UUIDs and request IDs',tag:'UUID',re:/\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b/g,off:true},
+  {id:'domain',g:'other',label:'Domain and host names',tag:'HOST',re:/\b(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+(?:com|net|org|io|dev|app|ai|cloud|se|no|dk|fi|de|uk|co|eu|us|internal|local|corp|lan|intra)\b/gi,off:true,skip:v=>/(^|\.)example\.(com|org|net)$/i.test(v)}
+];
+const GROUPS={secrets:'🔑 Keys, tokens and passwords',personal:'👤 Personal data',other:'🧩 Extra (off by default)'};
+const COLORS={secrets:'#fca5a5',personal:'#fde68a',other:'#bfdbfe',custom:'#c4b5fd'};
+const ST=(()=>{try{return JSON.parse(localStorage.getItem('redactForge'))||{}}catch(e){return {}}})();
+const on=Object.assign(Object.fromEntries(RULES.map(r=>[r.id,!r.off])),ST.on||{});
+let style=ST.style||'numbered';
+const save=()=>{try{localStorage.setItem('redactForge',JSON.stringify({on,style,keepLocal:$('keepLocal').checked,words:$('words').value,patterns:$('patterns').value}))}catch(e){}};
+
+// options UI
+$('opts').innerHTML=Object.entries(GROUPS).map(([g,t])=>'<fieldset><legend>'+t+'</legend>'+RULES.filter(r=>r.g===g).map(r=>'<label style="--mk:'+COLORS[g]+'"><input type="checkbox" data-rule="'+r.id+'" id="rule-'+r.id+'"><i></i>'+esc(r.label)+'</label>').join('')+'</fieldset>').join('');
+document.querySelectorAll('[data-rule]').forEach(c=>{c.checked=on[c.dataset.rule];c.onchange=()=>{on[c.dataset.rule]=c.checked;save();run()}});
+document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{style=b.dataset.style;save();syncStyle();run()});
+function syncStyle(){document.querySelectorAll('[data-style]').forEach(b=>b.classList.toggle('on',b.dataset.style===style))}
+$('keepLocal').checked=!!ST.keepLocal;$('words').value=ST.words||'';$('patterns').value=ST.patterns||'';
+['keepLocal','words','patterns'].forEach(id=>$(id).addEventListener('input',()=>{save();run()}));
+
+// replacement
+const FAKE={EMAIL:n=>'user'+n+'@example.com',IP:n=>'192.0.2.'+(n%254||254),IPV6:n=>'2001:db8::'+n.toString(16),MAC:n=>'00:00:5e:00:53:'+(n%256).toString(16).padStart(2,'0'),PHONE:n=>'+1 555 01'+String(n%100).padStart(2,'0'),CARD:n=>'4000 0000 0000 '+String(n).padStart(4,'0'),IBAN:n=>'XX00 TEST 0000 '+String(n).padStart(4,'0'),ID_NUMBER:n=>'000101-'+String(n).padStart(4,'0'),SSN:n=>'000-00-'+String(n).padStart(4,'0'),USERNAME:n=>'user'+n,UUID:n=>'00000000-0000-4000-8000-'+String(n).padStart(12,'0'),HOST:n=>'host'+n+'.example.com',NAME:n=>'Person '+n};
+let map=new Map(),rev=new Map();
+function label(tag,orig){
+  if(style==='label')return '['+tag+']';
+  if(style==='mask'){if(/KEY|TOKEN|SECRET|AUTH|JWT|COOKIE|WEBHOOK|LOGIN/.test(tag))return orig.slice(0,Math.min(4,Math.floor(orig.length/4)))+'••••••';return orig.length<=4?'••••':orig[0]+'•••'+orig.slice(-2)}
+  const key=tag+'\u0000'+orig;if(map.has(key))return map.get(key);
+  const n=[...map.keys()].filter(k=>k.startsWith(tag+'\u0000')).length+1;
+  const out=style==='fake'&&FAKE[tag]?FAKE[tag](n):(style==='fake'?tag+'_REDACTED_'+n:'['+tag+'_'+n+']');
+  map.set(key,out);rev.set(out,orig);return out;
+}
+function customRules(){
+  const out=[];$('patErr').textContent='';
+  const words=$('words').value.split(/[\n,]/).map(w=>w.trim()).filter(w=>w.length>1).sort((a,b)=>b.length-a.length);
+  if(words.length)out.push({id:'words',g:'custom',tag:'NAME',re:new RegExp('(?<![\\p{L}\\p{N}_])(?:'+words.map(w=>w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')+')(?![\\p{L}\\p{N}_])','giu')});
+  $('patterns').value.split('\n').map(p=>p.trim()).filter(Boolean).forEach((p,i)=>{try{const re=new RegExp(p,'g');if(re.test(''))throw new Error('matches empty text');out.push({id:'pat'+i,g:'custom',tag:'CUSTOM',re})}catch(e){$('patErr').textContent='Pattern '+(i+1)+' skipped: '+e.message}});
+  return out;
+}
+function findSpans(text){
+  const rules=[...customRules(),...RULES.filter(r=>on[r.id])],spans=[];
+  rules.forEach((r,pri)=>{
+    const re=new RegExp(r.re.source,r.re.flags.includes('d')?r.re.flags:r.re.flags+'d');let m,guard=0;
+    while((m=re.exec(text))&&guard++<20000){
+      if(m[0]==='') {re.lastIndex++;continue}
+      let s=m.index,e=s+m[0].length,val=m[0];
+      if(m.groups&&m.groups.v!=null&&m.indices.groups.v){[s,e]=m.indices.groups.v;val=m.groups.v;if(/^(["']).*\1$/.test(val)&&val.length>2){s++;e--;val=val.slice(1,-1)}}
+      if(r.skip&&r.skip(val))continue;if(r.ok&&!r.ok(val))continue;
+      if((r.id==='ipv4')&&$('keepLocal').checked&&isPrivateIP(val))continue;
+      if(r.id==='ipv6'&&$('keepLocal').checked&&/^(::1|fe80:|fc|fd)/i.test(val))continue;
+      spans.push({s,e,pri,r,val});
+    }
+  });
+  spans.sort((a,b)=>a.pri-b.pri||a.s-b.s);
+  const taken=[];
+  for(const sp of spans){if(!taken.some(t=>sp.s<t.e&&t.s<sp.e))taken.push(sp)}
+  return taken.sort((a,b)=>a.s-b.s);
+}
+let lastOut='',lastIn=null,lastStyle=null;
+function run(){
+  const text=$('input').value;
+  if(lastStyle!==style){map=new Map();rev=new Map();lastStyle=style}
+  const spans=findSpans(text);let out='',html='',p=0;const counts={};
+  for(const sp of spans){const rep=label(sp.r.tag,sp.val);out+=text.slice(p,sp.s)+rep;html+=esc(text.slice(p,sp.s))+'<mark style="--mk:'+COLORS[sp.r.g]+'" title="'+esc(sp.r.label||'Your words')+'">'+esc(rep)+'</mark>';p=sp.e;const k=sp.r.label||(sp.r.tag==='NAME'?'Your words':'Your patterns');counts[k]=counts[k]||{n:0,g:sp.r.g};counts[k].n++}
+  out+=text.slice(p);html+=esc(text.slice(p));lastOut=out;
+  $('output').innerHTML=html||'<span class="muted">The cleaned text appears here.</span>';
+  const total=spans.length;
+  $('counts').innerHTML=total?'<span style="--mk:#4E9E73"><b>'+total+'</b> replaced</span>'+Object.entries(counts).map(([k,v])=>'<span style="--mk:'+COLORS[v.g]+'">'+esc(k)+': <b>'+v.n+'</b></span>').join(''):(text?'<span style="--mk:#4E9E73">Nothing found to hide</span>':'');
+  $('inStats').textContent=text?text.split('\n').length+' lines':'';
+  renderMap();restore();
+}
+function renderMap(){
+  const rows=[...rev.entries()];$('mapCount').textContent=rows.length?'('+rows.length+')':'';
+  $('mapTable').innerHTML=rows.length?'<tr><th>Label</th><th>Real value</th></tr>'+rows.map(([a,b])=>'<tr><td>'+esc(a)+'</td><td>'+esc(b.length>120?b.slice(0,120)+'…':b)+'</td></tr>').join(''):'<tr><td class="muted">Choose Numbered labels or Realistic fakes to keep a list you can restore from.</td></tr>';
+}
+function restore(){
+  const t=$('restoreIn').value;if(!t){$('restoreOut').innerHTML='';return}
+  const keys=[...rev.keys()].sort((a,b)=>b.length-a.length);
+  if(!keys.length){$('restoreOut').textContent=t;return}
+  const re=new RegExp(keys.map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g');
+  let html='',p=0,m;while((m=re.exec(t))){html+=esc(t.slice(p,m.index))+'<mark style="--mk:#bbf7d0">'+esc(rev.get(m[0]))+'</mark>';p=m.index+m[0].length}
+  html+=esc(t.slice(p));$('restoreOut').innerHTML=html;
+}
+let tmr=0;$('input').addEventListener('input',()=>{clearTimeout(tmr);tmr=setTimeout(run,120)});
+$('restoreIn').addEventListener('input',restore);
+const copy=(txt,btn)=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}).finally(()=>{const o=btn.textContent;btn.textContent='✓ Copied';setTimeout(()=>btn.textContent=o,1400)})};
+$('copyBtn').onclick=()=>copy(lastOut,$('copyBtn'));
+$('restoreCopy').onclick=()=>copy($('restoreOut').textContent,$('restoreCopy'));
+const dl=(name,txt,type)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:type||'text/plain'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)};
+let fname='redacted.txt';
+$('downloadBtn').onclick=()=>dl(fname,lastOut);
+$('mapDownload').onclick=()=>dl('redact-forge-replacements.json',JSON.stringify(Object.fromEntries(rev),null,2),'application/json');
+$('clearBtn').onclick=()=>{$('input').value='';$('restoreIn').value='';map=new Map();rev=new Map();run()};
+async function openFile(f){if(!f)return;if(f.size>20*1048576&&!confirm('This file is '+(f.size/1048576).toFixed(0)+' MB. Large files can make the page slow. Continue?'))return;$('input').value=await f.text();fname=f.name.replace(/(\.[^.]+)?$/,'.redacted$1');map=new Map();rev=new Map();run()}
+$('fileInput').onchange=e=>{openFile(e.target.files[0]);e.target.value=''};
+const box=$('mainPanel');
+addEventListener('dragover',e=>{if([...e.dataTransfer.types].includes('Files')){e.preventDefault();box.classList.add('drop')}});
+addEventListener('dragleave',e=>{if(!e.relatedTarget)box.classList.remove('drop')});
+addEventListener('drop',e=>{if(!e.dataTransfer.files.length)return;e.preventDefault();box.classList.remove('drop');openFile(e.dataTransfer.files[0])});
+// Example values are built at run time so no secret-looking strings sit in the page source.
+$('exampleBtn').onclick=()=>{
+  const r=(n,set)=>{let s='';const a=set||'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789';for(let i=0;i<n;i++)s+=a[(i*7+n*3+s.length*11)%a.length];return s};
+  $('input').value=[
+    '2026-10-01 09:14:02 INFO  [api] POST /v1/orders from 84.216.12.77 user=anna.svensson@acme.se',
+    '2026-10-01 09:14:02 DEBUG [http] Authorization: Bearer '+['eyJhbGciOiJIUzI1NiJ9','eyJzdWIiOiJhbm5hIn0',r(22)].join('.'),
+    '2026-10-01 09:14:03 ERROR [db] could not connect to postgres://app_user:'+r(14)+'@10.0.4.12:5432/shop',
+    '2026-10-01 09:14:03 WARN  [pay] card 4111 1111 1111 1111 declined for customer +46 70 123 45 67',
+    '2026-10-01 09:14:04 DEBUG [cfg] loaded /home/anna/projects/shop/.env',
+    '  OPENAI_API_KEY='+'sk-'+'proj-'+r(40),
+    '  STRIPE_KEY='+'sk'+'_live_'+r(24,'abcdefghijklmnopqrstuvwxyz0123456789'),
+    '  AWS_ACCESS_KEY_ID='+'AKIA'+'IOSFODNN7'+'EXAMPLE',
+    '  DB_PASSWORD="'+r(12)+'"',
+    '2026-10-01 09:14:05 INFO  [mail] sent receipt to daniel.m@example.org via webhook https://hooks.slack.com/services/'+r(9,'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')+'/'+r(11,'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789')+'/'+r(24),
+    '2026-10-01 09:14:06 INFO  [kyc] verified personnummer 19121212-1212, IBAN SE45 5000 0000 0583 9825 7466',
+    '2026-10-01 09:14:07 TRACE [net] client 2a02:aa1:1023:6b00:1d2c:8e9f:4a1b:9c3d mac 3c:22:fb:9a:10:c4'
+  ].join('\n');
+  map=new Map();rev=new Map();run();
+};
+syncStyle();run();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -430,6 +430,61 @@ S('alphabet-forge.html', {
   }
 });
 
+S('jam-forge.html', {
+  title: 'Jam Forge', subtitle: 'Split-screen collabs, duets and conversations',
+  intro: 'Welcome to Jam Forge. Record several clips and put them together into one video: a band playing together, a duet, or two people talking.',
+  async run(h, page) {
+    await h.step('Pick what you want to make. Band split screen sets up a grid where every clip plays at the same time.', () => h.click('#idea-band'));
+    await h.step('Sam recorded the drums and Ali the guitar, each at home. Add their clips with Add video or audio files, or drop them on the page.', async () => { await h.scroll('#recordPanel', 'center'); await h.point('label:has(#fileInput)'); await h.upload('#fileInput', ['jam-drums.webm', 'jam-guitar.webm']); await page.waitForFunction(() => document.querySelectorAll('.clip').length === 2); await h.fill('#clip-0 .name', 'Sam — drums'); await h.fill('#clip-1 .name', 'Ali — guitar'); });
+    await h.step('Each of them clapped once at the start. Press Sync by clap, and the clips line up on the clap.', async () => { await h.scroll('#clipsPanel', 'start'); await h.click('#clapBtn'); await h.wait(1800); await h.point('#syncStatus'); });
+    await h.step('Now record your own part. Turn on the camera, write your name, and keep Play along on, so you hear the band in your headphones while you record.', async () => { await h.scroll('#recordPanel', 'start'); await h.click('#camBtn'); await h.type('#recName', 'Vocals — Mia'); await h.point('#playAlong'); });
+    await h.step('Press Record. After the count in, the band starts and you play along. Press Stop when you are done.', async () => { await h.click('#recBtn'); await h.wait(5200); await h.click('#recStopBtn'); await page.waitForFunction(() => document.querySelectorAll('.clip').length === 3); });
+    await h.step('Want a talking character? Add a recorded voice and choose a frog. Its mouth moves with the sound.', async () => { await h.upload('#fileInput', 'voice.wav'); await page.waitForFunction(() => document.querySelectorAll('.clip').length === 4); await h.scroll('#clip-3', 'center'); await h.select('#clip-3 [data-f=char]', 'frog'); await h.fill('#clip-3 .name', 'Frog'); });
+    await h.step('Press Play to watch all four at once.', async () => { await h.scroll('#previewPanel', 'start'); await h.click('#stopBtn'); await h.click('#playBtn'); await h.wait(3500); });
+    await h.step('Taking turns keeps everyone on screen and lights up whoever is talking. It is perfect for a conversation, or a chat with a frog.', async () => { await h.click('#playBtn'); await h.click('#mode-conversation'); await h.scroll('#stage', 'center'); await h.click('#stopBtn'); await h.click('#playBtn'); await h.wait(3500); await h.click('#playBtn'); });
+    await h.step('Back to At the same time. Choose a layout, such as one big clip with the others beside it.', async () => { await h.click('#mode-together'); await h.click('#layout-spotlight'); });
+    await h.step('Choose a wide, tall or square video, add a title, and press Make the video. It is made on your device, in real time.', async () => { await h.scroll('#exportPanel', 'start'); await h.point('#aspect'); await h.type('#title', 'Sunday jam'); await h.click('#exportBtn'); });
+    await h.skip('Skipping ahead while the video is made', () => page.waitForSelector('#downloadLink', { timeout: 180000 }));
+    await h.step('Download it and share it. Your clips are kept in this browser, so you can come back and change it.', () => h.point('#downloadLink'));
+    await h.sampleDownload('#downloadLink', 'Video made in this video');
+  }
+});
+
+S('redact-forge.html', {
+  title: 'Redact Forge', subtitle: 'Hide secrets and personal data before you share a log',
+  intro: 'Welcome to Redact Forge. Before you paste a log or an error into an AI or a bug report, hide the keys, passwords and personal data in it.',
+  async run(h, page) {
+    await h.step('Paste a log, an error message or a config file, or open a file. Here is an example log full of keys and personal data.', () => h.click('#exampleBtn'));
+    await h.step('On the right is the safe version. Every key, password, email, IP address, card number and ID number is replaced, and highlighted so you can check it.', () => h.point('#output'));
+    await h.step('Below, you see what was found, and how many of each.', () => h.point('#counts'));
+    await h.step('Choose how to replace things. Realistic fakes keep the log looking real.', async () => { await h.scroll('#optionsPanel', 'start'); await h.click('#style-fake'); });
+    await h.step('Numbered labels keep the same value as the same label everywhere, so the log still makes sense.', () => h.click('#style-numbered'));
+    await h.step('Add your own words, such as names, projects or server names, and they are hidden too.', async () => { await h.type('#words', 'shop'); await h.scroll('#mainPanel', 'start'); await h.point('#output'); });
+    await h.step('Press Copy, and paste the safe text into ChatGPT, Claude or your bug report.', () => h.click('#copyBtn'));
+    await h.step('When the answer comes back with the labels, paste it here, and the real values are put back, only on your device.', async () => { await h.scroll('#restorePanel', 'start'); await h.type('#restoreIn', 'The login for [EMAIL_1] fails because the database at [IP_2] refused the password.'); await h.point('#restoreOut'); });
+    await h.scroll('#mainPanel', 'start');
+    await h.sampleDownload('#downloadBtn', 'Cleaned log from this video');
+  }
+});
+
+S('policy-forge.html', {
+  title: 'Policy Forge', subtitle: 'Privacy policy, cookies and disclosures for your website',
+  intro: 'Welcome to Policy Forge. Find out what your website must tell its visitors, and get the privacy policy, cookie policy and banner it needs.',
+  async run(h, page) {
+    await h.step('First, say who runs the site, how to reach you about privacy, and where you are based.', async () => { await h.type('#siteName', 'Sunrise Bakery'); await h.type('#owner', 'Sunrise Bakery AB'); await h.type('#email', 'privacy@sunrisebakery.com'); await h.select('#country', 'SE'); await h.select('#hosting', 'Cloudflare|Cloudflare, Inc.|USA'); });
+    await h.step('Then open your website, press Control U to see its code, copy it and paste it here. We use an example bakery site.', async () => { await h.scroll('#scanPanel', 'start'); await h.click('#exampleBtn'); });
+    await h.step('Policy Forge finds the services hidden in the code: Google Analytics, the Meta pixel, Stripe, YouTube, Google Maps and more.', () => h.point('#foundList'));
+    await h.step('Tick what the code cannot show, such as visitors from California, or a newsletter tool.', async () => { await h.scroll('#aboutPanel', 'end'); await h.check('#v-ca'); });
+    await h.step('What you need lists what the law asks of this site, from a cookie banner to self-hosted fonts and a Do not sell link.', async () => { await h.scroll('#resultPanel', 'start'); await h.point('#doc'); });
+    await h.step('The privacy policy is written from your answers: what you collect, why, who receives it, and the visitor’s rights.', async () => { await h.click('#tab-privacy'); await page.locator('#doc').evaluate(e => e.scrollTo({ top: 420, behavior: 'smooth' })); await h.wait(800); });
+    await h.step('The cookie policy lists every cookie with who sets it and how long it lasts.', () => h.click('#tab-cookies'));
+    await h.step('Cookie banner gives you ready code that blocks tracking until the visitor says yes, with Reject as easy as Accept.', () => h.click('#tab-banner'));
+    await h.step('There are also terms of use, and disclosures for affiliate links, AI, an Impressum or an accessibility statement.', () => h.click('#tab-disc'));
+    await h.step('Copy any document, or download it as a ready web page. Remember, it is a starting point, not legal advice.', async () => { await h.click('#tab-privacy'); await h.point('#dlHtml'); });
+    await h.sampleDownload('#dlHtml', 'Privacy policy made in this video');
+  }
+});
+
 S('focus-forge.html', {
   title: 'Focus Forge', subtitle: 'A Pomodoro focus timer',
   intro: 'Welcome to Focus Forge. Work in focused sessions with short breaks, and watch your focus time add up.',
@@ -1085,11 +1140,12 @@ S('templates.html', {
 S('index.html', {
   title: 'MigaBuilder', subtitle: 'Find the right free tool in one minute',
   outroSay: 'Now it is your turn. Pick a tool and try it yourself. It is free, and there is nothing to sign up for.',
-  intro: 'Welcome to MigaBuilder: sixty two free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
+  intro: 'Welcome to MigaBuilder: sixty six free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
   async run(h, page) {
     await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
     await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });
     await h.step('Or browse by category. The row of tiles under the search box groups every tool: create, video and audio, business, documents, learning and design.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.tool-group-toggle >> nth=0'); });
+    await h.step('Not sure where to start? Pick who you are, such as Developers or Students and teachers, to see the tools made for you.', async () => { await h.click('[data-role=student]'); await h.wait(600); await h.click('[data-role=all]'); });
     await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=business] .tool-group-toggle'));
     await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=business] .fav-toggle >> nth=0'); await h.unring(); });
     await h.step('Want to see everything at once? Open all categories with one click.', () => h.click('#toggleAll'));

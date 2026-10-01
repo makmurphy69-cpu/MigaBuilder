@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Policy Forge — free privacy policy, cookie policy and GDPR generator for your website | MigaBuilder</title>
+<meta name="description" content="Free privacy policy and cookie policy generator. Paste your site's code to detect Google Analytics, Meta Pixel, Stripe, YouTube and 30+ services, then get a GDPR, UK GDPR and CCPA-ready privacy policy, cookie table, consent banner, terms of use, affiliate and AI disclosures, Impressum and accessibility statement. No signup, runs in your browser.">
+<link rel="canonical" href="https://migabuilder.com/policy-forge.html">
+<meta property="og:title" content="Policy Forge — privacy policy, cookie policy and GDPR checklist | MigaBuilder">
+<meta property="og:description" content="Find out what your website must disclose, and generate the policies, cookie table and consent banner — free and private.">
+<meta property="og:url" content="https://migabuilder.com/policy-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.steps{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.svc{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:4px 12px}
+.svc fieldset,.feat fieldset{border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:8px 12px;margin:0 0 8px}
+.svc legend,.feat legend{font:700 13px 'Space Grotesk';padding:0 4px}
+.svc label,.feat label{display:flex;gap:7px;align-items:flex-start;font-size:13.5px;padding:2px 0;line-height:1.35}
+.svc label.found{font-weight:700}.svc label.found::after{content:'found';font:600 10px 'IBM Plex Mono';background:#4E9E73;color:#fff;border-radius:3px;padding:1px 4px;margin-left:auto;align-self:center}
+.feat{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 12px}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid rgba(22,32,43,.12);margin-bottom:12px}
+.tabs button{border:0;background:none;padding:9px 12px;cursor:pointer;font:700 14px 'Space Grotesk';color:rgba(22,32,43,.62);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button.on{color:var(--ink);border-bottom-color:var(--amber)}
+.doc{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:4px;padding:18px 22px;max-height:70vh;overflow:auto;line-height:1.6;font-size:14.5px;color:var(--ink)}
+.doc h1{font:700 24px 'Space Grotesk';margin:0 0 4px}.doc h2{font:700 18px 'Space Grotesk';margin:20px 0 6px}.doc h3{font:700 15px 'Space Grotesk';margin:14px 0 4px}
+.doc table{border-collapse:collapse;width:100%;font-size:13px;margin:8px 0}.doc td,.doc th{border:1px solid rgba(22,32,43,.15);padding:6px 8px;text-align:left;vertical-align:top}.doc th{background:#f4f6f8}
+.doc pre{background:#0b1622;color:#e6edf3;padding:12px;border-radius:4px;overflow:auto;font:500 12px/1.5 'IBM Plex Mono',monospace;white-space:pre}
+.doc .meta{color:rgba(22,32,43,.6);font-size:13px}
+.check{list-style:none;padding:0;margin:0}.check li{display:flex;gap:10px;padding:10px 12px;border:1px solid rgba(22,32,43,.12);border-left:5px solid var(--c);border-radius:5px;margin-bottom:8px;background:#fff}
+.check li b{display:block}.check li span.ic{font-size:18px;line-height:1.2}.check li small{color:rgba(22,32,43,.7);font-size:13px;line-height:1.45;display:block;margin-top:2px}
+.warn{padding:10px 12px;background:rgba(226,166,59,.14);border-left:3px solid var(--amber);font-size:13px;margin-top:10px}
+.found-list{font-size:13px;margin-top:6px;color:rgba(22,32,43,.75)}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Policy Forge</span></nav>
+<header class="masthead"><div><h1>Policy Forge</h1><p>Find out what your website or app must tell its visitors, and generate the privacy policy, cookie policy, consent banner, terms and disclosures — based on what is actually on your site. Free and private.</p></div></header>
+<main>
+<div class="steps">
+  <section class="panel" id="aboutPanel">
+    <h2>1. About you and your site</h2>
+    <div class="grid">
+      <div class="field"><label for="siteName">Website or app name</label><input id="siteName" placeholder="Sunrise Bakery"></div>
+      <div class="field"><label for="siteUrl">Address</label><input id="siteUrl" placeholder="https://sunrisebakery.com"></div>
+      <div class="field"><label for="owner">Who runs it (company or full name)</label><input id="owner" placeholder="Sunrise Bakery AB"></div>
+      <div class="field"><label for="orgNo">Company / registration number (optional)</label><input id="orgNo" placeholder="559123-4567"></div>
+      <div class="field"><label for="email">Contact email for privacy questions</label><input id="email" type="email" placeholder="privacy@sunrisebakery.com"></div>
+      <div class="field"><label for="address">Postal address</label><input id="address" placeholder="Storgatan 1, 111 22 Stockholm, Sweden"></div>
+      <div class="field"><label for="country">Where you are based</label><select id="country"></select></div>
+      <div class="field"><label for="hosting">Where the site is hosted</label><select id="hosting"></select></div>
+    </div>
+    <div class="feat" style="margin-top:4px"><fieldset><legend>Visitors also come from</legend>
+      <label><input type="checkbox" id="v-eu"> the EU / EEA</label><label><input type="checkbox" id="v-uk"> the United Kingdom</label><label><input type="checkbox" id="v-ca"> California, USA</label><label><input type="checkbox" id="v-us"> the rest of the USA</label>
+    </fieldset></div>
+  </section>
+
+  <section class="panel" id="scanPanel">
+    <h2>2. Scan your site's code</h2>
+    <p>Open your website, press <b>Ctrl+U</b> (⌘+Option+U on a Mac) to see its code, copy everything and paste it here. Do this for a few pages, such as the home page, contact page and checkout. Nothing is uploaded.</p>
+    <div class="field"><textarea id="html" spellcheck="false" style="min-height:190px;font:500 12px/1.5 'IBM Plex Mono',monospace" placeholder="&lt;html&gt; … paste the page code here …"></textarea></div>
+    <div class="actions"><button class="primary" id="scanBtn">🔎 Find services</button><button class="secondary" id="exampleBtn">🧪 Try an example site</button></div>
+    <div class="found-list" id="foundList"></div>
+  </section>
+</div>
+
+<section class="panel" id="usesPanel">
+  <h2>3. What your site uses and does</h2>
+  <p>Tick everything that applies. The scan ticks what it finds; add what it cannot see, such as your newsletter tool or a payment provider used on another page.</p>
+  <div class="feat" id="features"></div>
+  <div class="svc" id="services"></div>
+</section>
+
+<section class="panel" id="resultPanel">
+  <h2>4. Your documents</h2>
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <div class="doc" id="doc" tabindex="0"></div>
+  <div class="actions" style="margin-top:12px">
+    <button class="primary" id="copyHtml">📋 Copy as HTML</button>
+    <button class="secondary" id="copyText">📋 Copy as text</button>
+    <button class="secondary" id="dlHtml">⬇ Download web page (.html)</button>
+    <button class="secondary" id="dlMd">⬇ Download Markdown (.md)</button>
+  </div>
+  <div class="warn">Policy Forge writes clear, plain-language drafts based on common requirements of the GDPR, UK GDPR, the ePrivacy rules on cookies, California's CCPA/CPRA and similar laws. It is <b>not legal advice</b>. Laws change and every business is different — check the result against what you really do, and ask a lawyer if you handle sensitive data, children's data or large amounts of personal data.</div>
+</section>
+</main>
+<footer>Policy Forge · part of MigaBuilder · everything you enter stays on this device</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+// ---------- data ----------
+const EU_AUTH={SE:['Sweden','Integritetsskyddsmyndigheten (IMY)','https://www.imy.se'],DE:['Germany','the data protection authority of your federal state, or the BfDI','https://www.bfdi.bund.de'],AT:['Austria','Datenschutzbehörde (DSB)','https://www.dsb.gv.at'],FR:['France','Commission nationale de l’informatique et des libertés (CNIL)','https://www.cnil.fr'],ES:['Spain','Agencia Española de Protección de Datos (AEPD)','https://www.aepd.es'],IT:['Italy','Garante per la protezione dei dati personali','https://www.garanteprivacy.it'],NL:['Netherlands','Autoriteit Persoonsgegevens (AP)','https://www.autoriteitpersoonsgegevens.nl'],IE:['Ireland','Data Protection Commission (DPC)','https://www.dataprotection.ie'],DK:['Denmark','Datatilsynet','https://www.datatilsynet.dk'],FI:['Finland','Office of the Data Protection Ombudsman','https://tietosuoja.fi'],NO:['Norway','Datatilsynet','https://www.datatilsynet.no'],PL:['Poland','Urząd Ochrony Danych Osobowych (UODO)','https://uodo.gov.pl'],BE:['Belgium','Data Protection Authority (APD/GBA)','https://www.dataprotectionauthority.be'],PT:['Portugal','Comissão Nacional de Proteção de Dados (CNPD)','https://www.cnpd.pt'],EU:['another EU/EEA country','the data protection authority in your country','https://edpb.europa.eu/about-edpb/about-edpb/members_en']};
+const COUNTRIES=[...Object.entries(EU_AUTH).map(([k,v])=>[k,v[0][0].toUpperCase()+v[0].slice(1),'eu']),['UK','United Kingdom','uk'],['US-CA','USA — California','ca'],['US','USA — another state','us'],['CA','Canada','canada'],['AU','Australia','au'],['BR','Brazil','br'],['KE','Kenya','ke'],['ZA','South Africa','za'],['IN','India','in'],['OTHER','Another country','other']];
+const HOSTS=[['','Not sure / skip'],['GitHub Pages|GitHub, Inc.|USA','GitHub Pages'],['Cloudflare|Cloudflare, Inc.|USA','Cloudflare Pages'],['Netlify|Netlify, Inc.|USA','Netlify'],['Vercel|Vercel Inc.|USA','Vercel'],['WordPress.com|Automattic Inc.|USA','WordPress.com'],['Wix|Wix.com Ltd.|Israel','Wix'],['Squarespace|Squarespace, Inc.|USA','Squarespace'],['Shopify|Shopify Inc.|Canada','Shopify'],['Hostinger|Hostinger International Ltd.|Cyprus/EU','Hostinger'],['one.com|one.com Group AB|Denmark/EU','one.com'],['Loopia|Loopia AB|Sweden/EU','Loopia'],['Hetzner|Hetzner Online GmbH|Germany/EU','Hetzner'],['AWS|Amazon Web Services, Inc.|USA (or the EU region you chose)','Amazon Web Services'],['Google Cloud / Firebase Hosting|Google LLC|USA','Google Cloud / Firebase'],['our own servers|us|—','Our own server']];
+// Services: id, name, category, provider, country, cookies [name, lifetime], purpose, consent (needs opt-in in EU/UK), detect, extra notes
+const SVC=[
+ ['ga','Google Analytics','analytics','Google Ireland Ltd. / Google LLC','USA',[['_ga','2 years'],['_ga_<container-id>','2 years']],'measure visits and how pages are used',true,/googletagmanager\.com\/gtag\/js|google-analytics\.com|gtag\(\s*['"]config['"]\s*,\s*['"]G-/i],
+ ['gtm','Google Tag Manager','analytics','Google Ireland Ltd. / Google LLC','USA',[],'load and manage other tracking tags',true,/googletagmanager\.com\/gtm\.js|['"]GTM-[A-Z0-9]+['"]/i],
+ ['matomo','Matomo (with cookies)','analytics','Matomo / self-hosted','where you host it',[['_pk_id.*','13 months'],['_pk_ses.*','30 minutes']],'measure visits',true,/matomo\.js|piwik\.js|_paq\.push/i],
+ ['plausible','Plausible Analytics','analytics-free','Plausible Insights OÜ','Estonia/EU',[],'count visits without cookies',false,/plausible\.io\/js/i],
+ ['fathom','Fathom Analytics','analytics-free','Conva Ventures Inc.','Canada (EU isolation)',[],'count visits without cookies',false,/usefathom\.com/i],
+ ['cfa','Cloudflare Web Analytics','analytics-free','Cloudflare, Inc.','USA',[],'count visits without cookies',false,/cloudflareinsights\.com/i],
+ ['umami','Umami / Simple Analytics','analytics-free','the analytics provider','see provider',[],'count visits without cookies',false,/umami\.is|data-website-id|simpleanalyticscdn|scripts\.simpleanalytics/i],
+ ['hotjar','Hotjar','analytics','Hotjar Ltd.','Malta/EU',[['_hjSessionUser_<id>','1 year'],['_hjSession_<id>','30 minutes']],'heatmaps and session recordings',true,/static\.hotjar\.com|hjid/i],
+ ['clarity','Microsoft Clarity','analytics','Microsoft Corporation','USA',[['_clck','1 year'],['_clsk','1 day'],['CLID','1 year']],'heatmaps and session recordings',true,/clarity\.ms/i],
+ ['metapixel','Meta (Facebook) Pixel','ads','Meta Platforms Ireland Ltd.','Ireland / USA',[['_fbp','3 months'],['fr','3 months']],'measure and target advertising',true,/connect\.facebook\.net\/[^"']*fbevents\.js|fbq\(\s*['"]init/i],
+ ['linkedin','LinkedIn Insight Tag','ads','LinkedIn Ireland Unlimited Co.','Ireland / USA',[['li_sugr','3 months'],['bcookie','1 year'],['lidc','1 day']],'measure and target advertising',true,/snap\.licdn\.com|_linkedin_partner_id/i],
+ ['tiktok','TikTok Pixel','ads','TikTok Technology Ltd.','Ireland / Singapore / USA',[['_ttp','13 months']],'measure and target advertising',true,/analytics\.tiktok\.com|ttq\.load/i],
+ ['adsense','Google AdSense / Ad Manager','ads','Google Ireland Ltd. / Google LLC','USA',[['__gads','13 months'],['__gpi','13 months'],['IDE','13 months']],'show and measure advertising',true,/pagead2\.googlesyndication\.com|adsbygoogle|securepubads/i],
+ ['gads','Google Ads conversion tracking','ads','Google Ireland Ltd. / Google LLC','USA',[['_gcl_au','3 months']],'measure advertising results',true,/googleadservices\.com|['"]AW-\d+/i],
+ ['stripe','Stripe','payments','Stripe Payments Europe Ltd. / Stripe, Inc.','Ireland / USA',[['__stripe_mid','1 year'],['__stripe_sid','30 minutes']],'take payments and prevent fraud',false,/js\.stripe\.com|buy\.stripe\.com|checkout\.stripe\.com/i],
+ ['paypal','PayPal','payments','PayPal (Europe) S.à r.l. et Cie, S.C.A.','Luxembourg / USA',[],'take payments',false,/paypal\.com\/sdk|paypalobjects\.com/i],
+ ['klarna','Klarna','payments','Klarna Bank AB','Sweden/EU',[],'offer invoice and part payment',false,/klarna/i],
+ ['swish','Swish','payments','Getswish AB','Sweden/EU',[],'take mobile payments',false,/swish/i],
+ ['shopify','Shopify','payments','Shopify International Ltd.','Ireland / Canada',[['_shopify_y','1 year'],['cart','2 weeks']],'run the online shop',false,/cdn\.shopify\.com|myshopify\.com/i],
+ ['mailchimp','Mailchimp','email','The Rocket Science Group LLC (Intuit)','USA',[],'send the newsletter',false,/list-manage\.com|chimpstatic\.com|mailchimp/i],
+ ['brevo','Brevo / MailerLite / ConvertKit','email','the newsletter provider','see provider',[],'send the newsletter',false,/sibforms\.com|brevo|mailerlite|convertkit|kit\.com\/forms/i],
+ ['formspree','Form service (Formspree, Netlify Forms, Google Forms)','forms','the form provider','USA',[],'receive messages sent through forms',false,/formspree\.io|data-netlify|netlify-honeypot|docs\.google\.com\/forms/i],
+ ['youtube','YouTube videos','embeds','Google Ireland Ltd. / Google LLC','USA',[['YSC','session'],['VISITOR_INFO1_LIVE','6 months']],'show embedded videos',true,/youtube\.com\/embed|youtube-nocookie\.com\/embed/i],
+ ['vimeo','Vimeo videos','embeds','Vimeo.com, Inc.','USA',[['vuid','2 years']],'show embedded videos',true,/player\.vimeo\.com/i],
+ ['gmaps','Google Maps','embeds','Google Ireland Ltd. / Google LLC','USA',[['NID','6 months']],'show a map',true,/maps\.googleapis\.com|google\.[a-z.]+\/maps\/embed/i],
+ ['social','Social media buttons or feeds (Instagram, X, Facebook)','embeds','the social network','USA / Ireland',[],'show posts and share buttons',true,/platform\.twitter\.com|instagram\.com\/embed|connect\.facebook\.net\/[^"']*sdk\.js|elfsight/i],
+ ['gfonts','Google Fonts (loaded from Google)','fonts','Google Ireland Ltd. / Google LLC','USA',[],'show the website’s fonts',false,/fonts\.googleapis\.com|fonts\.gstatic\.com/i],
+ ['recaptcha','Google reCAPTCHA','security','Google Ireland Ltd. / Google LLC','USA',[['_GRECAPTCHA','6 months']],'stop spam and bots',false,/google\.com\/recaptcha|gstatic\.com\/recaptcha|grecaptcha/i],
+ ['hcaptcha','hCaptcha / Cloudflare Turnstile','security','Intuition Machines, Inc. / Cloudflare, Inc.','USA',[],'stop spam and bots',false,/hcaptcha\.com|challenges\.cloudflare\.com\/turnstile/i],
+ ['intercom','Live chat (Intercom, Crisp, Tawk.to, Tidio)','chat','the chat provider','USA / EU',[['intercom-id-*, crisp-client/*, twk_*','up to 9 months']],'answer questions in a chat window',false,/widget\.intercom\.io|intercomSettings|client\.crisp\.chat|embed\.tawk\.to|code\.tidio\.co/i],
+ ['disqus','Disqus comments','embeds','Disqus, Inc.','USA',[['disqus_unique','1 year']],'show comments',true,/disqus\.com|disqus_config/i],
+ ['sentry','Sentry error tracking','errors','Functional Software, Inc. (Sentry)','USA / EU',[],'find and fix errors',false,/sentry-cdn\.com|ingest\.sentry\.io|Sentry\.init/i],
+ ['firebase','Firebase / Supabase / Auth0 (log-in and database)','auth','Google LLC / Supabase, Inc. / Okta, Inc.','USA / EU',[],'run user accounts and store data',false,/firebasejs|firebaseio\.com|supabase\.co|auth0\.com/i],
+ ['openai','AI services (OpenAI, Google Gemini, Anthropic)','ai','OpenAI, L.L.C. / Google LLC / Anthropic, PBC','USA',[],'answer questions and generate content with AI',false,/api\.openai\.com|generativelanguage\.googleapis|api\.anthropic\.com/i],
+ ['amazon','Amazon affiliate links','affiliate','Amazon Europe Core S.à r.l. / Amazon.com, Inc.','Luxembourg / USA',[],'earn a commission on purchases',false,/amazon\.[a-z.]+\/[^"'\s]*[?&]tag=|amzn\.to\//i]
+];
+const CAT={analytics:'📊 Analytics with cookies','analytics-free':'📈 Cookie-free analytics',ads:'📣 Advertising and tracking pixels',payments:'💳 Payments and shop',email:'✉️ Newsletter',forms:'📝 Forms',embeds:'▶️ Embedded content',fonts:'🔤 Fonts',security:'🛡️ Spam protection',chat:'💬 Chat',errors:'🐞 Error tracking',auth:'🔐 Accounts and database',ai:'🤖 AI',affiliate:'🔗 Affiliate links'};
+const FEATURES=[
+ ['contact','Contact form or email links','contact'],['newsletter','Newsletter sign-up','newsletter'],['accounts','User accounts / log-in','accounts'],['shop','Sells products or services online','shop'],['ugc','Comments, reviews or uploads by users','ugc'],['ai','AI features (chatbot, generated text or images)','ai'],['affiliate','Affiliate links (earns commission)','affiliate'],['sponsored','Sponsored posts or paid partnerships','sponsored'],['children','Aimed at children, or children are likely to use it','children'],['logs','Server logs (most hosts keep IP addresses)','logs'],['localstore','Saves settings in the browser (local storage)','localstore'],['jobs','Job applications','jobs']
+];
+
+// ---------- state ----------
+const F=['siteName','siteUrl','owner','orgNo','email','address','country','hosting','v-eu','v-uk','v-ca','v-us'];
+let st=(()=>{try{return JSON.parse(localStorage.getItem('policyForge'))||{}}catch(e){return {}}})();
+st.svc=st.svc||{};st.feat=st.feat||{logs:true,contact:true};st.found=st.found||[];
+const save=()=>{F.forEach(id=>{const e=$(id);st[id]=e.type==='checkbox'?e.checked:e.value});try{localStorage.setItem('policyForge',JSON.stringify(st))}catch(e){}};
+$('country').innerHTML=COUNTRIES.map(c=>'<option value="'+c[0]+'">'+esc(c[1])+'</option>').join('');
+$('hosting').innerHTML=HOSTS.map(h=>'<option value="'+esc(h[0])+'">'+esc(h[1])+'</option>').join('');
+F.forEach(id=>{const e=$(id);if(st[id]!=null){if(e.type==='checkbox')e.checked=st[id];else e.value=st[id]}e.addEventListener('input',()=>{save();render()});e.addEventListener('change',()=>{save();render()})});
+if(!st.country)$('country').value='SE';
+$('features').innerHTML='<fieldset style="grid-column:1/-1"><legend>Your site</legend><div class="feat">'+FEATURES.map(f=>'<label><input type="checkbox" data-feat="'+f[0]+'" id="feat-'+f[0]+'"> '+esc(f[1])+'</label>').join('')+'</div></fieldset>';
+const cats=[...new Set(SVC.map(s=>s[2]))];
+$('services').innerHTML=cats.map(c=>'<fieldset><legend>'+CAT[c]+'</legend>'+SVC.filter(s=>s[2]===c).map(s=>'<label id="lab-'+s[0]+'"><input type="checkbox" data-svc="'+s[0]+'" id="svc-'+s[0]+'"> '+esc(s[1])+'</label>').join('')+'</fieldset>').join('');
+document.querySelectorAll('[data-feat]').forEach(c=>{c.checked=!!st.feat[c.dataset.feat];c.onchange=()=>{st.feat[c.dataset.feat]=c.checked;save();render()}});
+document.querySelectorAll('[data-svc]').forEach(c=>{c.checked=!!st.svc[c.dataset.svc];c.onchange=()=>{st.svc[c.dataset.svc]=c.checked;save();render()}});
+function markFound(){document.querySelectorAll('[data-svc]').forEach(c=>$('lab-'+c.dataset.svc).classList.toggle('found',st.found.includes(c.dataset.svc)))}
+
+// ---------- scan ----------
+function scan(){
+  const h=$('html').value;if(!h.trim()){$('foundList').textContent='Paste some page code first.';return}
+  const found=SVC.filter(s=>s[8].test(h)).map(s=>s[0]);
+  st.found=[...new Set([...st.found,...found])];found.forEach(id=>{st.svc[id]=true;$('svc-'+id).checked=true});
+  const feats=[];const setF=(k,cond)=>{if(cond){st.feat[k]=true;$('feat-'+k).checked=true;feats.push(FEATURES.find(f=>f[0]===k)[1])}};
+  setF('contact',/<form\b|mailto:/i.test(h));setF('newsletter',/newsletter|subscribe|nyhetsbrev/i.test(h)&&/<form\b|<input/i.test(h));
+  setF('accounts',/type=["']password["']|log ?in|sign ?in|logga in/i.test(h));setF('shop',/add to cart|checkout|lägg i varukorg|kassa|price|pris|\bcart\b/i.test(h));
+  setF('affiliate',found.includes('amazon')||/rel=["'][^"']*sponsored/i.test(h));setF('ai',found.includes('openai'));setF('localstore',/localStorage/.test(h));
+  const names=found.map(id=>SVC.find(s=>s[0]===id)[1]);
+  const m=h.match(/<title>([^<]{2,80})<\/title>/i);if(m&&!$('siteName').value)$('siteName').value=m[1].split(/[|–—-]/)[0].trim();
+  const u=h.match(/<link[^>]+rel=["']canonical["'][^>]+href=["'](https?:\/\/[^\/"']+)/i)||h.match(/<meta[^>]+property=["']og:url["'][^>]+content=["'](https?:\/\/[^\/"']+)/i);if(u&&!$('siteUrl').value)$('siteUrl').value=u[1];
+  $('foundList').innerHTML=(names.length?'<b>Found '+names.length+' service'+(names.length>1?'s':'')+':</b> '+esc(names.join(', ')):'<b>No known third-party services found.</b> ')+(feats.length?'<br><b>Looks like the site has:</b> '+esc(feats.join(', ').toLowerCase()):'')+'<br>Check the boxes below and add anything the code does not show.';
+  markFound();save();render();
+}
+$('scanBtn').onclick=scan;
+$('exampleBtn').onclick=()=>{
+  $('html').value='<!doctype html><html><head><title>Sunrise Bakery | Fresh bread in Stockholm</title><link rel="canonical" href="https://sunrisebakery.com/">\n<link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">\n<script async src="https://www.googletagmanager.com/gtag/js?id=G-ABC123"></'+'script><script>gtag("config","G-ABC123")</'+'script>\n<script>!function(f,b,e,v,n,t,s){}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");fbq("init","1234")</'+'script>\n</head><body>\n<a href="/shop">Shop</a> <button>Add to cart</button>\n<iframe src="https://www.youtube.com/embed/abc"></iframe>\n<iframe src="https://www.google.com/maps/embed?pb=1"></iframe>\n<form action="https://formspree.io/f/xyz"><input name="email"><button>Subscribe to our newsletter</button></form>\n<script src="https://js.stripe.com/v3/"></'+'script>\n<a href="mailto:hello@sunrisebakery.com">Contact</a>\n</body></html>';
+  if(!$('owner').value){$('owner').value='Sunrise Bakery AB';$('orgNo').value='559123-4567';$('email').value='privacy@sunrisebakery.com';$('address').value='Storgatan 1, 111 22 Stockholm, Sweden';$('country').value='SE';$('hosting').value=HOSTS[2][0]}
+  scan();
+};
+
+// ---------- helpers for documents ----------
+function ctx(){
+  const v=id=>($(id).value||'').trim();
+  const c=COUNTRIES.find(x=>x[0]===v('country'))||COUNTRIES[0];
+  const svcs=SVC.filter(s=>st.svc[s[0]]);
+  const f=k=>!!st.feat[k];
+  const eu=c[2]==='eu'||$('v-eu').checked,uk=c[2]==='uk'||$('v-uk').checked,ca=c[2]==='ca'||$('v-ca').checked,us=ca||c[2]==='us'||$('v-us').checked;
+  const host=v('hosting')?v('hosting').split('|'):null;
+  const consentSvcs=svcs.filter(s=>s[7]);
+  const name=v('siteName')||'this website',owner=v('owner')||'[your name or company]',email=v('email')||'[contact email]';
+  return {v,c,svcs,f,eu,uk,ca,us,gdpr:eu||uk,host,consentSvcs,name,owner,email,url:v('siteUrl'),addr:v('address'),org:v('orgNo'),date:new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),ads:svcs.some(s=>s[2]==='ads'),de:['DE','AT'].includes(c[0])};
+}
+// documents are lists of blocks: ['h1',text] ['h2',text] ['p',text] ['ul',[...]] ['table',[[head...],[row...]]] ['pre',code] ['meta',text]
+function authority(x){
+  const out=[];
+  if(x.c[2]==='eu'){const a=EU_AUTH[x.c[0]]||EU_AUTH.EU;out.push(a[1]+' ('+a[2]+')')}else if(x.eu)out.push('the data protection authority in the EU/EEA country where you live or work');
+  if(x.uk)out.push('the Information Commissioner’s Office (ICO, https://ico.org.uk)');
+  return out;
+}
+function privacy(x){
+  const B=[['h1','Privacy policy for '+x.name],['meta','Last updated: '+x.date]];
+  B.push(['p','This policy explains what personal data '+x.owner+' ("we", "us") collects when you use '+x.name+(x.url?' ('+x.url+')':'')+', why we collect it, who we share it with, how long we keep it and what rights you have. We only collect what we need, and we never sell your personal data'+(x.ads?' for money; see "Advertising" below for how advertising partners receive data':'')+'.']);
+  B.push(['h2','Who is responsible for your data']);
+  B.push(['p',x.owner+(x.org?' (registration number '+x.org+')':'')+(x.addr?', '+x.addr:'')+' is the '+(x.gdpr?'data controller':'business responsible')+' for the personal data described here. Contact us about privacy at '+x.email+'.']);
+  const rows=[['What','Data','Why','Legal basis'+(x.gdpr?' (GDPR)':''),'How long']];
+  if(x.f('logs'))rows.push(['Visiting the site','IP address, browser type, pages visited, date and time (server logs)','To deliver the site, keep it secure and fix problems','Legitimate interest','Usually up to 30 days, longer only to investigate an attack']);
+  if(x.f('contact'))rows.push(['Contacting us','Name, email address, your message and anything you choose to include','To answer you','Legitimate interest, or steps before a contract','Up to 12 months after the conversation ends']);
+  if(x.f('newsletter'))rows.push(['Newsletter','Email address, name if given, sign-up date, whether emails were opened','To send the newsletter you asked for','Consent — you can unsubscribe at any time','Until you unsubscribe']);
+  if(x.f('accounts'))rows.push(['Your account','Name, email address, password (stored encrypted), settings and activity','To give you an account and keep it safe','Contract','While the account exists; deleted within 30 days after you close it']);
+  if(x.f('shop'))rows.push(['Orders and payments','Name, address, email, phone, order details, payment status (card details are handled by the payment provider)','To deliver your order, handle returns and keep accounts','Contract, and legal obligation for bookkeeping','As long as accounting law requires (often 7 years), otherwise until any claims expire']);
+  if(x.f('ugc'))rows.push(['Comments, reviews and uploads','Name or nickname, what you write or upload, date','To publish your content and moderate it','Consent, or contract if you have an account','Until you or we remove it']);
+  if(x.f('ai'))rows.push(['AI features','The text, files or prompts you send to the AI feature and its answers','To give you the AI result you asked for','Contract, or consent','Not stored by us unless the feature says so; see the AI provider below']);
+  if(x.f('jobs'))rows.push(['Job applications','CV, cover letter, contact details and interview notes','To consider your application','Steps before a contract, or consent to keep it for future jobs','Up to 2 years after the recruitment ends, or as long as you agree']);
+  const ana=x.svcs.filter(s=>s[2]==='analytics'),free=x.svcs.filter(s=>s[2]==='analytics-free');
+  if(ana.length)rows.push(['Statistics','Pages visited, device and browser, approximate location, an ID stored in a cookie','To understand how the site is used and improve it','Consent'+(x.gdpr?' (via the cookie banner)':''),'See the cookie table']);
+  if(free.length)rows.push(['Cookie-free statistics','Pages visited, referring site, country, device type — no cookies and no personal profile','To count visits','Legitimate interest','Only as anonymous totals']);
+  if(x.ads)rows.push(['Advertising','Cookie IDs, pages visited, actions such as purchases, IP address','To measure our ads and show relevant ads','Consent'+(x.gdpr?' (via the cookie banner)':''),'See the cookie table']);
+  if(x.svcs.some(s=>s[2]==='embeds'))rows.push(['Embedded videos, maps and posts','IP address and cookies set by the provider when the content loads','To show content from other sites','Consent'+(x.gdpr?' — the content only loads after you accept':''),'Set by the provider']);
+  if(x.svcs.some(s=>s[2]==='security'))rows.push(['Spam protection','IP address, browser and interaction data','To stop spam and automated abuse','Legitimate interest','Set by the provider']);
+  if(x.svcs.some(s=>s[2]==='errors'))rows.push(['Error reports','Technical details of an error, browser, page, sometimes the IP address','To find and fix bugs','Legitimate interest','Up to 90 days']);
+  B.push(['h2','What we collect and why'],['table',rows]);
+  if(x.f('children'))B.push(['h2','Children'],['p','Parts of this site may be used by children. We ask for as little information as possible. '+(x.gdpr?'Where we rely on consent and a child is under the age set by law in their country (13–16 in the EU, 13 in Sweden and the UK), we ask a parent or guardian to agree. ':'')+(x.us?'We do not knowingly collect personal information from children under 13 without verifiable parental consent, as required by the US COPPA rule. ':'')+'A parent can contact us at '+x.email+' to see or delete a child’s data.']);
+  else B.push(['h2','Children'],['p',x.name+' is not aimed at children'+(x.us?' under 13':'')+', and we do not knowingly collect their data. If you think a child has given us personal data, contact us and we will delete it.']);
+  // recipients
+  const rec=[];
+  if(x.host&&x.host[1]!=='us')rec.push(x.host[1]+' — hosting the website ('+x.host[2]+')');
+  x.svcs.forEach(s=>rec.push(s[3]+' — '+s[1]+': to '+s[6]+' ('+s[4]+')'));
+  B.push(['h2','Who we share data with']);
+  B.push(['p',rec.length?'We use these service providers. They handle data on our behalf'+(x.gdpr?' under a data processing agreement, or as independent controllers where stated in their own privacy policies (for example for advertising and embedded content)':'')+':':'We do not share your data with other companies, except where the law requires it.']);
+  if(rec.length)B.push(['ul',rec]);
+  B.push(['p','We may also share data when the law requires it, to protect our rights, or with a buyer if the business is sold — in that case this policy continues to apply.']);
+  if(x.gdpr){
+    const abroad=x.svcs.filter(s=>/USA|Canada|Singapore|Israel/.test(s[4]))||[];const hostAbroad=x.host&&/USA|Canada|Israel/.test(x.host[2]);
+    if(abroad.length||hostAbroad)B.push(['h2','Transfers outside the EU/EEA'+(x.uk?' and UK':'')],['p','Some providers ('+[...new Set([...(hostAbroad?[x.host[0]]:[]),...abroad.map(s=>s[1])])].join(', ')+') may process data in countries outside the EU/EEA, mainly the USA. We only use such providers when the transfer is protected: the provider is certified under the EU–US Data Privacy Framework'+(x.uk?' (and its UK Extension)':'')+', or we have signed the European Commission’s Standard Contractual Clauses with extra safeguards where needed. Contact us for a copy of these safeguards.']);
+  }
+  B.push(['h2','Cookies and similar technology']);
+  B.push(['p',(x.svcs.some(s=>s[5].length)||x.consentSvcs.length?'We use cookies. Read our cookie policy for the full list and how to change your choice. ':'We only use cookies and browser storage that are needed for the site to work. ')+(x.f('localstore')?'Some settings are saved in your browser’s local storage; they stay on your device and are not sent to us. ':'')]);
+  B.push(['h2','How we protect your data'],['p','We use encrypted connections (HTTPS), limit who can access personal data, use strong passwords and two-factor log-in for our accounts, and choose providers with good security. No system is perfectly secure; if a data breach is likely to put you at risk, we will tell you and the authorities as the law requires.']);
+  // rights
+  B.push(['h2','Your rights']);
+  if(x.gdpr){B.push(['p','Under the '+(x.eu&&x.uk?'GDPR and UK GDPR':x.uk?'UK GDPR':'GDPR')+' you have the right to:'],['ul',['get a copy of the personal data we hold about you (access)','have wrong data corrected','have your data deleted ("right to be forgotten")','limit how we use your data','object to processing based on legitimate interest, and always to direct marketing','get your data in a common, machine-readable format (portability)','withdraw consent at any time — this does not affect what we did before','complain to a supervisory authority: '+authority(x).join(', or ')]])}
+  if(x.ca){B.push(['h3','California residents (CCPA/CPRA)'],['p','You have the right to know what personal information we collect, use and disclose; to delete it; to correct it; to opt out of the "sale" or "sharing" of personal information for cross-context behavioural advertising; to limit the use of sensitive personal information; and not to be treated differently for using these rights. '+(x.ads?'Our advertising cookies may count as "sharing" under California law. Use the "Do Not Sell or Share My Personal Information" link on our site or turn off advertising cookies; we also honour the Global Privacy Control (GPC) signal from your browser.':'We do not sell or share personal information.')+' In the last 12 months we collected the categories described in "What we collect and why" (identifiers, internet activity, commercial information where you bought something). You or an authorised agent can make a request at '+x.email+'. We will verify your request and answer within 45 days.'])}
+  if(x.us&&!x.ca)B.push(['h3','US residents'],['p','Depending on the state where you live (for example Colorado, Connecticut, Virginia, Texas or Oregon), you may have the right to access, correct, delete and get a copy of your personal data, and to opt out of targeted advertising, sale of data and profiling. Contact us at '+x.email+'; if we turn down your request you can appeal by replying to our answer.']);
+  const k=x.c[2];
+  if(k==='canada')B.push(['p','Under PIPEDA you can ask to see and correct your personal information, and withdraw consent. You can complain to the Office of the Privacy Commissioner of Canada (priv.gc.ca).']);
+  if(k==='au')B.push(['p','Under the Australian Privacy Principles you can ask to access and correct your personal information. If you are not happy with our answer you can complain to the Office of the Australian Information Commissioner (oaic.gov.au).']);
+  if(k==='br')B.push(['p','Under Brazil’s LGPD you can confirm whether we process your data, and access, correct, anonymise, port or delete it, and withdraw consent. You can complain to the ANPD (gov.br/anpd).']);
+  if(k==='ke')B.push(['p','Under Kenya’s Data Protection Act 2019 you have the right to be informed, to access, correct and delete your data, and to object. You can complain to the Office of the Data Protection Commissioner (odpc.go.ke).']);
+  if(k==='za')B.push(['p','Under South Africa’s POPIA you can ask to access, correct and delete your personal information, and object to its processing. You can complain to the Information Regulator (inforegulator.org.za).']);
+  if(k==='in')B.push(['p','Under India’s Digital Personal Data Protection Act you can access, correct and erase your data, nominate someone to act for you, and raise a grievance with us; if it is not resolved you can approach the Data Protection Board of India.']);
+  if(!x.gdpr&&!x.us&&['other'].includes(k))B.push(['p','You can ask to see, correct or delete the personal data we hold about you, and withdraw consent at any time.']);
+  B.push(['p','To use your rights, email '+x.email+'. We answer within one month'+(x.ca?' (45 days for California requests)':'')+' and may need to confirm who you are first. It is free.']);
+  B.push(['h2','Changes to this policy'],['p','If we change how we handle personal data, we update this page and the date at the top. If the change is important, we will tell you on the site or by email.']);
+  B.push(['h2','Contact'],['p',x.owner+(x.addr?', '+x.addr:'')+'. Email: '+x.email+'.']);
+  return B;
+}
+function cookieRows(x){
+  const rows=[['Cookie','Set by','Purpose','Lasts','Type']];
+  rows.push(['cookie_consent',''+x.name,'Remembers your cookie choice','6 months','Necessary']);
+  x.svcs.forEach(s=>s[5].forEach(c=>rows.push([c[0],s[1]+' ('+s[3]+')','To '+s[6],c[1],s[7]?(s[2]==='ads'?'Marketing':s[2]==='embeds'?'Embedded content':'Statistics'):'Necessary'])));
+  if(x.host&&/Cloudflare/.test(x.host[0]))rows.push(['__cf_bm','Cloudflare','Tells people and bots apart to protect the site','30 minutes','Necessary']);
+  return rows;
+}
+function cookies(x){
+  const B=[['h1','Cookie policy for '+x.name],['meta','Last updated: '+x.date]];
+  B.push(['p','Cookies are small text files a website saves in your browser. Similar technology includes local storage and tracking pixels. This page lists what '+x.name+' uses and why.']);
+  const need=x.consentSvcs;
+  B.push(['h2','Your choice'],['p',need.length?(x.gdpr?'We only use necessary cookies until you choose. Statistics, marketing and embedded content ('+need.map(s=>s[1]).join(', ')+') only load if you click "Accept" or turn them on in the cookie settings. You can change your mind at any time with the "Cookie settings" link at the bottom of every page.':'You can turn off non-essential cookies with the "Cookie settings" link at the bottom of every page, or in your browser settings.'):'We only use cookies that are needed for the site to work, so we do not need to ask for your consent. You can still block or delete cookies in your browser settings.']);
+  B.push(['h2','Cookies we use'],['table',cookieRows(x)]);
+  if(x.svcs.some(s=>s[2]==='analytics-free'))B.push(['p','Our visitor statistics ('+x.svcs.filter(s=>s[2]==='analytics-free').map(s=>s[1]).join(', ')+') do not use cookies and do not follow you across sites.']);
+  if(x.svcs.find(s=>s[0]==='gfonts'))B.push(['p','Fonts from Google Fonts do not set cookies, but your browser sends your IP address to Google when it downloads them.']);
+  if(x.f('localstore'))B.push(['h2','Local storage'],['p','Some settings, such as your language or saved work, are kept in your browser’s local storage. They never leave your device and you can clear them in the browser settings.']);
+  B.push(['h2','How to remove cookies'],['p','You can delete and block cookies in your browser settings — search for "clear cookies" plus the name of your browser. If you block necessary cookies, parts of the site may not work.']);
+  B.push(['p','Questions? Contact '+x.email+'. Read more in our privacy policy.']);
+  return B;
+}
+function banner(x){
+  const cats=[['statistics','Statistics',x.consentSvcs.filter(s=>s[2]==='analytics')],['marketing','Marketing',x.consentSvcs.filter(s=>s[2]==='ads')],['media','Embedded content',x.consentSvcs.filter(s=>s[2]==='embeds')]].filter(c=>c[2].length);
+  const B=[['h1','Cookie consent banner'],['p',cats.length?'You use '+x.consentSvcs.map(s=>s[1]).join(', ')+'. '+(x.gdpr?'In the EU and UK these may only load after the visitor says yes, and saying no must be as easy as saying yes.':'This banner lets visitors turn them off.')+' Copy the code below into every page, just before </body>. It has no outside dependencies and does not track anyone.':'Your site only uses necessary cookies, so you do not need a consent banner. Keep it that way, or come back when you add analytics, ads or embedded videos.']];
+  if(!cats.length)return B;
+  B.push(['h2','Step 1 — stop the scripts from loading by themselves'],['p','Change each tracking script so the browser does not run it until there is consent: change type="text/javascript" (or no type) to type="text/plain" and add data-consent with the category. For iframes such as YouTube and maps, rename src to data-src.'],
+    ['pre',cats.map(c=>'<!-- '+c[1]+': '+c[2].map(s=>s[1]).join(', ')+' -->\n<script type="text/plain" data-consent="'+c[0]+'" src="…the script address you have now…"></'+'script>'+(c[0]==='media'?'\n<iframe data-consent="media" data-src="https://www.youtube-nocookie.com/embed/VIDEO_ID" width="560" height="315"></iframe>':'')).join('\n\n')]);
+  const code='<div id="cc-banner" role="dialog" aria-live="polite" aria-label="Cookie choices" hidden style="position:fixed;left:16px;right:16px;bottom:16px;max-width:560px;margin:auto;z-index:9999;background:#fff;color:#16202b;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.25);padding:18px;font:15px/1.5 system-ui,sans-serif">\n  <p style="margin:0 0 10px"><b>Cookies on '+esc(x.name)+'</b><br>We use necessary cookies to make the site work. With your permission we also use cookies for '+cats.map(c=>c[1].toLowerCase()).join(', ')+'. <a href="/cookies.html">Cookie policy</a></p>\n'+
+    cats.map(c=>'  <label style="display:block;margin:4px 0"><input type="checkbox" data-cc="'+c[0]+'"> '+c[1]+' ('+esc(c[2].map(s=>s[1]).join(', '))+')</label>').join('\n')+
+    '\n  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">\n    <button id="cc-reject" style="flex:1;padding:10px;border-radius:6px;border:1px solid #16202b;background:#fff;cursor:pointer">Reject all</button>\n    <button id="cc-save" style="flex:1;padding:10px;border-radius:6px;border:1px solid #16202b;background:#fff;cursor:pointer">Save choices</button>\n    <button id="cc-accept" style="flex:1;padding:10px;border-radius:6px;border:0;background:#16202b;color:#fff;cursor:pointer">Accept all</button>\n  </div>\n</div>\n<a href="#" id="cc-open">Cookie settings</a>\n<script>\n(function(){\n  var KEY="cookie_consent",cats='+JSON.stringify(cats.map(c=>c[0]))+',b=document.getElementById("cc-banner");\n  function read(){var m=document.cookie.match(/(?:^|; )cookie_consent=([^;]*)/);try{return m?JSON.parse(decodeURIComponent(m[1])):null}catch(e){return null}}\n  function apply(c){document.querySelectorAll("[data-consent]").forEach(function(el){if(!c[el.dataset.consent]||el.dataset.done)return;el.dataset.done=1;\n    if(el.tagName==="SCRIPT"){var s=document.createElement("script");[].forEach.call(el.attributes,function(a){if(a.name!=="type")s.setAttribute(a.name,a.value)});s.text=el.text;el.replaceWith(s)}else if(el.dataset.src){el.src=el.dataset.src}})}\n  function store(c){document.cookie=KEY+"="+encodeURIComponent(JSON.stringify(c))+"; max-age="+(182*24*3600)+"; path=/; SameSite=Lax";b.hidden=true;apply(c)}\n  function pick(all){var c={};cats.forEach(function(k){var box=b.querySelector("[data-cc="+k+"]");c[k]=all===undefined?box.checked:all});return c}\n  document.getElementById("cc-accept").onclick=function(){store(pick(true))};\n  document.getElementById("cc-reject").onclick=function(){store(pick(false))};\n  document.getElementById("cc-save").onclick=function(){store(pick())};\n  document.getElementById("cc-open").onclick=function(e){e.preventDefault();var c=read()||{};cats.forEach(function(k){b.querySelector("[data-cc="+k+"]").checked=!!c[k]});b.hidden=false};\n  var saved=read();\n  if(navigator.globalPrivacyControl&&!saved){saved=pick(false);'+(x.ca?'store(saved);':'')+'}\n  if(saved&&Object.keys(saved).length)apply(saved);else b.hidden=false;\n})();\n</'+'script>';
+  B.push(['h2','Step 2 — add the banner'],['pre',code],['p','Put the "Cookie settings" link in your footer so people can change their mind. The banner remembers the choice for 6 months, has no pre-ticked boxes, and treats Reject all and Accept all equally'+(x.ca?'. It also honours the Global Privacy Control signal for California visitors':'')+'.']);
+  return B;
+}
+function terms(x){
+  const B=[['h1','Terms of use for '+x.name],['meta','Last updated: '+x.date]];
+  B.push(['p','These terms apply when you use '+x.name+(x.url?' ('+x.url+')':'')+', run by '+x.owner+(x.org?' (registration number '+x.org+')':'')+'. By using the site you accept them. If you do not agree, please do not use the site.']);
+  B.push(['h2','Using the site'],['ul',['Use the site lawfully, and do not try to break, overload or get around its security.','Do not copy large parts of the site or use automated tools to collect its content without our permission.',x.f('accounts')?'Keep your log-in details secret. You are responsible for what happens in your account. You must be at least '+(x.us?'13':'16')+' years old (or have a parent’s permission) to create an account.':'We may change, pause or stop the site or parts of it at any time.']]);
+  if(x.f('ugc'))B.push(['h2','What you post'],['p','You keep the rights to what you post, but give us a free, worldwide licence to show it on the site. Do not post anything illegal, hateful, misleading, private information about others, or content you do not have the rights to. We may remove content and close accounts that break these rules. Report problems to '+x.email+'.']);
+  if(x.f('ai'))B.push(['h2','AI features'],['p','Some features use artificial intelligence. AI answers can be wrong, incomplete or out of date — check important information yourself, and do not rely on AI output for medical, legal or financial decisions. Do not enter sensitive personal data into AI features. You are responsible for how you use the results.']);
+  if(x.f('shop'))B.push(['h2','Buying from us'],['p','Prices are shown including '+(x.eu||x.uk?'VAT':'applicable taxes')+' and any delivery costs before you pay. A contract is made when we confirm your order by email. '+(x.eu||x.uk?'If you are a consumer you have a 14-day right to withdraw from most purchases, counted from the day you receive the goods. Tell us within 14 days at '+x.email+' (you can use the standard withdrawal form) and return the goods within 14 days after that; we refund the payment, including standard delivery, within 14 days. The right does not apply to, for example, custom-made or perishable goods, or digital content you agreed to receive straight away. ':'')+'Faulty goods are covered by your legal rights as a consumer.'+(x.eu?' You can also use the EU’s consumer dispute resolution bodies in your country.':'')]);
+  B.push(['h2','Our content'],['p','The texts, pictures, logos and code on the site belong to us or our licensors, unless stated otherwise. You may share links to the site freely.']);
+  B.push(['h2','Liability'],['p','We work to keep the site correct and available, but we provide it "as is" and cannot promise it will always be error-free. To the extent the law allows, we are not liable for indirect losses. Nothing in these terms limits rights you have as a consumer that cannot be limited by law.']);
+  B.push(['h2','Links to other sites'],['p','We are not responsible for the content or privacy practices of websites we link to.']);
+  B.push(['h2','Changes and law'],['p','We may update these terms; the date at the top shows the latest version. These terms are governed by the laws of '+(x.c[2]==='eu'?(EU_AUTH[x.c[0]]||EU_AUTH.EU)[0]:x.c[1])+'. If you are a consumer, you also keep the protection of the law where you live.']);
+  B.push(['h2','Contact'],['p',x.owner+(x.addr?', '+x.addr:'')+' — '+x.email]);
+  return B;
+}
+function disclosures(x){
+  const B=[['h1','Disclosures and other notices'],['p','Short notices you may need to show, depending on what your site does. Copy the ones that apply.']];
+  if(x.f('affiliate')||x.svcs.find(s=>s[0]==='amazon'))B.push(['h2','Affiliate links'],['p',x.name+' contains affiliate links. If you buy something through them, we may earn a commission at no extra cost to you. This does not change our opinions.'+(x.svcs.find(s=>s[0]==='amazon')?' As an Amazon Associate we earn from qualifying purchases.':'')],['p','💡 Place a short notice close to the links (not only in the footer), and mark the links with rel="sponsored".']);
+  if(x.f('sponsored'))B.push(['h2','Sponsored content'],['p','Mark every paid post clearly at the top, before the content: "Advertisement — paid partnership with [brand]". On social media use the platform’s own paid-partnership label as well.']);
+  if(x.f('ai'))B.push(['h2','AI disclosure'],['p','Some features on '+x.name+' use artificial intelligence. When you chat with our assistant you are talking to an AI, not a person. Images, audio, video or text that were generated or changed by AI are labelled as such. AI can make mistakes — please check important information.'],['p','💡 Under the EU AI Act (Article 50, applying from 2 August 2026) people must be told when they interact with an AI system, and AI-generated or manipulated content such as deepfakes must be marked.']);
+  if(x.de||x.c[0]==='AT')B.push(['h2',x.c[0]==='AT'?'Impressum (Offenlegung)':'Impressum'],['p','Angaben gemäß § 5 DDG'+(x.c[0]==='AT'?' / § 5 ECG und § 25 MedienG':'')+':'],['ul',[x.owner,x.addr||'[Straße, PLZ Ort]','E-Mail: '+x.email,'Telefon: [Telefonnummer]',x.org?'Registernummer: '+x.org:'[Handelsregister und Registernummer, falls vorhanden]','[Umsatzsteuer-Identifikationsnummer, falls vorhanden]','Verantwortlich für den Inhalt: [Name, Anschrift]']]);
+  if(x.f('shop')&&x.eu)B.push(['h2','Accessibility statement'],['p','We want '+x.name+' to be usable by everyone. We aim to meet WCAG 2.1 level AA. Known problems: [list any parts that are not yet accessible, and when you plan to fix them]. If something does not work for you, contact '+x.email+' and we will help you another way and fix it.'],['p','💡 Since 28 June 2025 the European Accessibility Act requires most online shops to be accessible and to publish this kind of information. Micro-businesses (under 10 staff and under €2 million turnover) selling services are exempt.']);
+  if(x.ca&&x.ads)B.push(['h2','"Do Not Sell or Share My Personal Information"'],['p','Add a footer link with exactly this wording that opens your cookie settings with marketing turned off, and honour the Global Privacy Control signal.']);
+  B.push(['h2','Footer links'],['p','Link these on every page, usually in the footer: Privacy policy'+(cookieRows(x).length>2||x.consentSvcs.length?' · Cookie policy · Cookie settings':'')+' · Terms of use'+(x.de?' · Impressum':'')+(x.ca&&x.ads?' · Do Not Sell or Share My Personal Information':'')+'.']);
+  return B;
+}
+function checklist(x){
+  const L=[];const add=(lvl,t,d)=>L.push([lvl,t,d]);
+  add('must','Publish a privacy policy and link it on every page','Every site that collects any personal data — even IP addresses in server logs or a contact email — needs one. Use the Privacy policy tab.');
+  if(x.consentSvcs.length&&x.gdpr)add('must','Ask before loading '+x.consentSvcs.map(s=>s[1]).join(', '),'In the EU/UK, cookies and trackers that are not strictly necessary may only be used after the visitor agrees. "Reject" must be as easy as "Accept", with no pre-ticked boxes. Use the Cookie banner tab.');
+  else if(x.consentSvcs.length)add('should','Let visitors turn off tracking','Offer a cookie settings link and respect the Global Privacy Control signal.');
+  if(x.svcs.find(s=>s[0]==='gfonts')&&x.gdpr)add('should','Host Google Fonts on your own server','Loading fonts from Google sends every visitor’s IP address to Google. In 2022 a German court ordered a site owner to pay damages to a visitor for this. Download the font files and serve them yourself.');
+  if(x.svcs.find(s=>s[0]==='youtube')&&x.gdpr)add('should','Use youtube-nocookie.com and load videos after consent','Change youtube.com/embed to youtube-nocookie.com/embed, or show a "click to load" image first.');
+  if(x.svcs.find(s=>s[0]==='ga')&&x.gdpr)add('should','Turn on Google Consent Mode, or switch to cookie-free analytics','With consent mode Google Analytics waits for the banner. Cookie-free tools such as Plausible or Cloudflare Web Analytics usually need no banner.');
+  if(x.svcs.some(s=>s[2]==='analytics'||s[2]==='ads')&&x.gdpr)add('should','Sign data processing agreements (DPAs)','Most providers offer one in their account settings. Keep a copy.');
+  if(x.ca&&x.ads)add('must','Add a "Do Not Sell or Share My Personal Information" link','Advertising pixels count as "sharing" under California law. Honour the Global Privacy Control signal too.');
+  if(x.de)add('must','Publish an Impressum','German and Austrian sites that are not purely private must show the owner’s name, address and contact details, easy to find from every page. See the Disclosures tab.');
+  if(x.f('newsletter'))add('must','Use opt-in for the newsletter and an unsubscribe link in every email','Do not pre-tick the box. Double opt-in (a confirmation email) is the safest way to prove consent.');
+  if(x.f('shop')&&(x.eu||x.uk))add('must','Show shop information and the 14-day right of withdrawal','Show prices with VAT, delivery costs, your company name, registration number and address, and explain how to cancel. Use the Terms tab.');
+  if(x.f('shop')&&x.eu)add('should','Check the European Accessibility Act','Most online shops must meet accessibility requirements since 28 June 2025 and publish an accessibility statement.');
+  if(x.f('accounts'))add('should','Let people delete their account themselves','It makes the right to erasure easy and saves you work.');
+  if(x.f('ai'))add('must','Tell people when they talk to an AI or see AI-made content','The EU AI Act transparency rules apply from 2 August 2026. Also tell users in the privacy policy which AI provider receives their text.');
+  if(x.f('affiliate')||x.svcs.find(s=>s[0]==='amazon'))add('must','Disclose affiliate links near the links','Consumer law (and the FTC in the USA) require a clear notice where the links are, not only in the footer.');
+  if(x.f('sponsored'))add('must','Label sponsored posts as advertising','Put the label at the top, before the content.');
+  if(x.f('children'))add('must','Get parental consent for young children','Children under 13 (USA, Sweden, UK) or up to 16 (some EU countries) need a parent’s consent where you rely on consent.');
+  if(x.f('contact'))add('tip','Only ask for what you need in forms','Name, email and message are usually enough. Add spam protection that does not track, such as a honeypot field.');
+  if(x.f('jobs'))add('tip','Delete job applications you no longer need','Set a reminder to delete applications after the recruitment, unless the person agreed that you keep them.');
+  if(!x.svcs.length&&!st.found.length)add('tip','Scan your site’s code to find hidden services','Paste the code of a few pages in step 2. Many sites use trackers their owners do not know about.');
+  add('tip','Keep a simple record of your data processing','Write down what data you collect, why, where it is stored and for how long. The GDPR requires this for most businesses, and it makes questions easy to answer.');
+  const C={must:['#D8604A','⚠️','You need to'],should:['#E2A63B','👉','You should'],tip:['#4E9E73','✅','Good practice']};
+  return [['h1','What '+x.name+' needs'],['p','Based on what you ticked'+(x.gdpr?' and visitors from the EU/UK':'')+(x.ca?' and California':'')+'.'],['check',L.map(([l,t,d])=>({c:C[l][0],i:C[l][1],k:C[l][2],t,d}))]];
+}
+const TABS=[['check','✅ What you need',checklist],['privacy','Privacy policy',privacy],['cookies','Cookie policy',cookies],['banner','Cookie banner',banner],['terms','Terms of use',terms],['disc','Disclosures',disclosures]];
+let tab='check',blocks=[];
+$('tabs').innerHTML=TABS.map(t=>'<button type="button" role="tab" data-tab="'+t[0]+'" id="tab-'+t[0]+'">'+t[1]+'</button>').join('');
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{tab=b.dataset.tab;render()});
+function toHTML(B){return B.map(([t,c])=>t==='h1'||t==='h2'||t==='h3'?'<'+t+'>'+esc(c)+'</'+t+'>':t==='p'?'<p>'+esc(c)+'</p>':t==='meta'?'<p class="meta">'+esc(c)+'</p>':t==='ul'?'<ul>'+c.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul>':t==='pre'?'<pre><code>'+esc(c)+'</code></pre>':t==='table'?'<table><thead><tr>'+c[0].map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr></thead><tbody>'+c.slice(1).map(r=>'<tr>'+r.map(d=>'<td>'+esc(d)+'</td>').join('')+'</tr>').join('')+'</tbody></table>':t==='check'?'<ul class="check">'+c.map(i=>'<li style="--c:'+i.c+'"><span class="ic">'+i.i+'</span><div><b>'+esc(i.k)+': '+esc(i.t)+'</b><small>'+esc(i.d)+'</small></div></li>').join('')+'</ul>':'').join('\n')}
+function toMD(B){return B.map(([t,c])=>t==='h1'?'# '+c:t==='h2'?'## '+c:t==='h3'?'### '+c:t==='p'?c:t==='meta'?'_'+c+'_':t==='ul'?c.map(i=>'- '+i).join('\n'):t==='pre'?'```html\n'+c+'\n```':t==='table'?['| '+c[0].join(' | ')+' |','|'+c[0].map(()=>' --- |').join(''),...c.slice(1).map(r=>'| '+r.map(d=>String(d).replace(/\|/g,'\\|')).join(' | ')+' |')].join('\n'):t==='check'?c.map(i=>'- **'+i.k+': '+i.t+'** — '+i.d).join('\n'):'').join('\n\n')+'\n'}
+function toText(B){return B.map(([t,c])=>t==='ul'?c.map(i=>'• '+i).join('\n'):t==='pre'?c:t==='table'?c.map(r=>r.join(' — ')).join('\n'):t==='check'?c.map(i=>'• '+i.k+': '+i.t+' — '+i.d).join('\n'):c).join('\n\n')}
+function render(){
+  const x=ctx(),T=TABS.find(t=>t[0]===tab);blocks=T[2](x);
+  document.querySelectorAll('[data-tab]').forEach(b=>{b.classList.toggle('on',b.dataset.tab===tab);b.setAttribute('aria-selected',b.dataset.tab===tab)});
+  $('doc').innerHTML=toHTML(blocks);
+}
+const copy=(txt,btn)=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}).finally(()=>{const o=btn.textContent;btn.textContent='✓ Copied';setTimeout(()=>btn.textContent=o,1400)})};
+const dl=(name,txt,type)=>{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)};
+const slug=()=>({check:'what-you-need',privacy:'privacy',cookies:'cookies',banner:'cookie-banner',terms:'terms',disc:'disclosures'})[tab];
+$('copyHtml').onclick=()=>copy(toHTML(blocks),$('copyHtml'));
+$('copyText').onclick=()=>copy(toText(blocks),$('copyText'));
+$('dlMd').onclick=()=>dl(slug()+'.md',toMD(blocks),'text/markdown');
+$('dlHtml').onclick=()=>{const title=blocks[0][1];dl(slug()+'.html','<!doctype html>\n<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(title)+'</title>\n<style>body{font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;max-width:760px;margin:40px auto;padding:0 20px;color:#16202b}h1{line-height:1.2}h2{margin-top:2em}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #ccd;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f4f6f8}.meta{color:#667}pre{background:#0b1622;color:#e6edf3;padding:12px;overflow:auto;border-radius:4px}.check{list-style:none;padding:0}.check li{border-left:5px solid var(--c);padding:8px 12px;margin:8px 0;background:#fafafa}.check small{display:block}</style></head><body>\n'+toHTML(blocks)+'\n</body></html>\n','text/html')};
+markFound();render();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
