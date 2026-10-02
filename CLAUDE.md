@@ -13,7 +13,7 @@ A tool is not finished until **all** of these are done, in the same pull request
 2. Listed everywhere tools are listed: a `tool-card` in `index.html` (and the
    *New* row), `miga-palette.js`, `tutorials.js` (walkthrough entry),
    `sitemap.xml`, the name map in `visits.html`, and `README.md`. Update the
-   tool count ("69 free tools") in `index.html` and `README.md`.
+   tool count ("70 free tools") in `index.html` and `README.md`.
 3. **A narrated explanation video — always, for every new tool.** Add a
    scenario to `scripts/tutorial-videos/scenarios.mjs` and record it:
 
