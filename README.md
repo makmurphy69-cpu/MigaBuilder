@@ -63,6 +63,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Vector Forge** — turn a PNG or JPG logo, icon, drawing or signature into a sharp SVG vector in the browser: pick the number of colors, remove the background, recolor and download SVG or a big PNG
 - **Regex Forge** — test regular expressions with live highlighting and capture groups, read a plain-English explanation of every part, try find and replace, copy code for JavaScript, Python, PHP, C# and Java, or describe what you want and let AI write the pattern
 - **Audio Forge** and **Text Compare** — edit audio and compare texts (Text Compare can format and sort JSON before comparing)
+- **Remove hidden data** — PDF Forge strips author, program, dates and XMP metadata from PDFs; Media Convert Forge removes GPS location and camera data from videos without re-encoding
 - **OCR Forge** — read text from photos and scans in 20 languages with Tesseract.js, then download it as text or as a searchable PDF
 - **Media Convert Forge** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
