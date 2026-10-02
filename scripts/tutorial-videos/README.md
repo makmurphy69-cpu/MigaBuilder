@@ -18,7 +18,8 @@ reads `videos/manifest.json` and adds the video, the transcript and a
 
 The videos and posters live in their own repository,
 [makmurphy69-cpu/migabuilder-videos](https://github.com/makmurphy69-cpu/migabuilder-videos),
-served by GitHub Pages at `https://makmurphy69-cpu.github.io/migabuilder-videos/`.
+served at `https://videos.migabuilder.com/` by the `migabuilder-videos`
+Cloudflare Worker, which deploys automatically on every push to that repository.
 That keeps this repository small when videos are recorded again.
 | `samples/<tool>.*` | What the tool made in the video (website, game, PDF, image, audio…) |
 
@@ -64,8 +65,8 @@ Each `h.step(text, action)` speaks and captions `text` while running
 `scroll`, `scrollBy`, `wait`, `skip` (cut a wait from the video),
 `sampleDownload`, `sampleShot` (screenshot of an element) and `sampleFile`.
 Then run the script for that tool. Commit and push the new `<tool>.mp4` and
-`<tool>.jpg` in the videos repository first (wait a minute for GitHub Pages to
-publish them), then commit `videos/manifest.json` and `samples/` here.
+`<tool>.jpg` in the videos repository first (wait a minute or two for Cloudflare to
+deploy them), then commit `videos/manifest.json` and `samples/` here.
 
 **Every new tool must have a video.** `node scripts/check-tool-videos.mjs`
 fails when a tool card on the homepage has no scenario, manifest entry, video

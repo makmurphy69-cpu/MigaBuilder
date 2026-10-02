@@ -15,7 +15,7 @@
  *
  * The videos and posters go into a clone of makmurphy69-cpu/migabuilder-videos
  * (../migabuilder-videos next to this repository, or VIDEOS_REPO=/path), which
- * GitHub Pages serves at VIDEO_BASE; the manifest links to them there.
+ * a Cloudflare Worker serves at VIDEO_BASE; the manifest links to them there.
  *
  * Requirements: Node 18+, Playwright with Chromium, Python 3 with `piper-tts`
  * and `imageio-ffmpeg` (pip install piper-tts imageio-ffmpeg). The voice model
@@ -35,7 +35,7 @@ const ROOT = path.resolve(HERE, '../..');
 const CACHE = path.join(HERE, '.cache');
 // Videos live in their own repository so re-recording does not grow this one.
 const VIDEOS = path.resolve(process.env.VIDEOS_REPO || path.join(ROOT, '..', 'migabuilder-videos'));
-const VIDEO_BASE = 'https://makmurphy69-cpu.github.io/migabuilder-videos/';
+const VIDEO_BASE = 'https://videos.migabuilder.com/';
 if (!fs.existsSync(path.join(VIDEOS, '.git'))) { console.error('Clone the videos repository first:\n  git clone https://github.com/makmurphy69-cpu/migabuilder-videos ' + VIDEOS + '\n(or set VIDEOS_REPO=/path/to/clone)'); process.exit(1); }
 const SAMPLES = path.join(ROOT, 'samples');
 const PROXY = 'https://migabuilder-gemini.makmurphy69.workers.dev';

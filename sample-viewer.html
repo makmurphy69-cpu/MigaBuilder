@@ -49,7 +49,7 @@ video.guide{display:block;width:100%;max-width:960px;aspect-ratio:16/9;backgroun
 'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const safePath=p=>typeof p==='string'&&/^(samples\/|https:\/\/makmurphy69-cpu\.github\.io\/migabuilder-videos\/)[\w.-]+$/.test(p);
+const safePath=p=>typeof p==='string'&&/^(samples\/|https:\/\/videos\.migabuilder\.com\/)[\w.-]+$/.test(p);
 fetch('videos/manifest.json').then(r=>r.json()).then(m=>{
   const list=Object.entries(m).filter(([,v])=>v.sample&&safePath(v.sample.file)).sort((a,b)=>a[1].title.localeCompare(b[1].title));
   const want=new URLSearchParams(location.search).get('tool');

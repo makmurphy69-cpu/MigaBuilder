@@ -7,7 +7,7 @@
  *   - a scenario in scripts/tutorial-videos/scenarios.mjs,
  *   - an entry in videos/manifest.json with a transcript,
  *   - the video and poster that entry points to, published in the
- *     makmurphy69-cpu/migabuilder-videos repository (GitHub Pages).
+ *     makmurphy69-cpu/migabuilder-videos repository (videos.migabuilder.com).
  * Record a missing video with: node scripts/tutorial-videos/record.mjs <tool>
  * (see scripts/tutorial-videos/README.md). Runs in CI on every pull request.
  */
