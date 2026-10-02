@@ -5,3 +5,6 @@ world-countries-*.tgz
 __pycache__/
 # AI dispatcher dependencies (scripts/ai-dispatch)
 node_modules/
+# Tool videos live in makmurphy69-cpu/migabuilder-videos (only manifest.json stays here)
+videos/*.mp4
+videos/*.jpg

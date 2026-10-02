@@ -1,0 +1,23 @@
+name: Page smoke test
+
+# Opens every page in Chromium and fails on JavaScript errors or missing files.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright and Chromium
+        run: |
+          npm install -g playwright@1.56.1
+          playwright install --with-deps chromium
+      - name: Every page loads without JavaScript errors
+        run: node scripts/smoke-test.mjs

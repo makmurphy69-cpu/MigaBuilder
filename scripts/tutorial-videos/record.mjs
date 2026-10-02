@@ -8,10 +8,14 @@
  * performs the steps with a visible pointer, highlight and captions, speaks
  * each caption with the Piper text-to-speech voice, cuts out long waits (for
  * example while the AI writes a website), and writes:
- *   videos/<tool>.mp4        narrated video (H.264 + AAC)
- *   videos/<tool>.jpg        poster frame
+ *   <videos repo>/<tool>.mp4 narrated video (H.264 + AAC)
+ *   <videos repo>/<tool>.jpg poster frame
  *   samples/<tool>.*         the result made in the video
  *   videos/manifest.json     what tutorials.js and sample-viewer.html read
+ *
+ * The videos and posters go into a clone of makmurphy69-cpu/migabuilder-videos
+ * (../migabuilder-videos next to this repository, or VIDEOS_REPO=/path), which
+ * a Cloudflare Worker serves at VIDEO_BASE; the manifest links to them there.
  *
  * Requirements: Node 18+, Playwright with Chromium, Python 3 with `piper-tts`
  * and `imageio-ffmpeg` (pip install piper-tts imageio-ffmpeg). The voice model
@@ -29,7 +33,10 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const CACHE = path.join(HERE, '.cache');
-const VIDEOS = path.join(ROOT, 'videos');
+// Videos live in their own repository so re-recording does not grow this one.
+const VIDEOS = path.resolve(process.env.VIDEOS_REPO || path.join(ROOT, '..', 'migabuilder-videos'));
+const VIDEO_BASE = 'https://videos.migabuilder.com/';
+if (!fs.existsSync(path.join(VIDEOS, '.git'))) { console.error('Clone the videos repository first:\n  git clone https://github.com/makmurphy69-cpu/migabuilder-videos ' + VIDEOS + '\n(or set VIDEOS_REPO=/path/to/clone)'); process.exit(1); }
 const SAMPLES = path.join(ROOT, 'samples');
 const PROXY = 'https://migabuilder-gemini.makmurphy69.workers.dev';
 const VOICE = process.env.PIPER_VOICE || path.join(CACHE, 'voices', 'en_US-lessac-high.onnx');
@@ -44,6 +51,9 @@ async function loadPlaywright() {
 const FFMPEG = process.env.FFMPEG || execFileSync('python3', ['-c', 'import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())']).toString().trim();
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const sha = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 16);
+// Browsers and Cloudflare cache videos for a day; a content hash in the URL makes a
+// re-recorded video load at once instead of the cached old one.
+const fileVersion = name => crypto.createHash('sha1').update(fs.readFileSync(path.join(VIDEOS, name))).digest('hex').slice(0, 8);
 
 // ---------------------------------------------------------------- static server
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.mp4': 'video/mp4', '.webm': 'video/webm', '.wav': 'audio/wav', '.mp3': 'audio/mpeg', '.pdf': 'application/pdf', '.txt': 'text/plain', '.wasm': 'application/wasm', '.webmanifest': 'application/manifest+json', '.ico': 'image/x-icon' };
@@ -124,12 +134,42 @@ const OVERLAY = `(() => {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', add); else add();
 })();`;
 
+// The recording Chromium has no speech voices, so voice pickers came out empty and
+// "Preview" never spoke (Talk Forge's lips stayed still). Give it a few named voices
+// and silent speech that fires the usual start/boundary/end events at speaking pace.
+// The narration is added separately, so nothing needs to be audible.
+const SPEECH = `(() => {
+  if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return;
+  const mk = (name, lang, def) => ({ name, lang, voiceURI: name, localService: true, default: !!def });
+  const voices = [mk('Google US English', 'en-US', 1), mk('Google UK English Female', 'en-GB'), mk('Google español', 'es-ES'), mk('Google 普通话（中国大陆）', 'zh-CN'), mk('Microsoft Zira - English (United States)', 'en-US')];
+  const P = SpeechSynthesisUtterance.prototype, d = Object.getOwnPropertyDescriptor(P, 'voice');
+  Object.defineProperty(P, 'voice', { configurable: true, get() { return this.__tvVoice || null; }, set(v) { this.__tvVoice = v; try { if (v instanceof SpeechSynthesisVoice) d.set.call(this, v); } catch (e) {} } });
+  let queue = [], current = null, timers = [];
+  const fire = (u, type, extra) => { const ev = Object.assign(new Event(type), { utterance: u, charIndex: 0, elapsedTime: 0, name: 'word' }, extra || {}); u.dispatchEvent(ev); };
+  function next() {
+    current = queue.shift(); if (!current) return;
+    const u = current, words = [...String(u.text || '').matchAll(/\\S+/g)], ms = 60000 / (165 * (u.rate || 1));
+    timers.push(setTimeout(() => fire(u, 'start'), 30));
+    words.forEach((w, i) => timers.push(setTimeout(() => fire(u, 'boundary', { charIndex: w.index, elapsedTime: i * ms / 1000 }), 40 + i * ms)));
+    timers.push(setTimeout(() => { current = null; fire(u, 'end'); next(); }, 60 + Math.max(1, words.length) * ms));
+  }
+  const synth = { speaking: false, pending: false, paused: false, onvoiceschanged: null,
+    getVoices: () => voices.slice(),
+    speak(u) { queue.push(u); if (!current) next(); },
+    cancel() { timers.forEach(clearTimeout); timers = []; queue = []; current = null; },
+    pause() {}, resume() {},
+    addEventListener() {}, removeEventListener() {}, dispatchEvent() { return true; } };
+  Object.defineProperty(synth, 'speaking', { get: () => !!current });
+  Object.defineProperty(window, 'speechSynthesis', { configurable: true, get: () => synth });
+})();`;
+
 // ---------------------------------------------------------------- one recording
 async function record(browser, file, sc, baseUrl) {
   const tool = file.replace(/\.html$/, '');
   const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1, recordVideo: { dir: path.join(CACHE, 'raw'), size: { width: W, height: H } }, acceptDownloads: true, permissions: ['microphone', 'camera', 'clipboard-read', 'clipboard-write'] });
   await ctx.addInitScript(OVERLAY);
   await ctx.addInitScript(() => { try { localStorage.setItem('migabuilderLang', 'en'); } catch (e) {} });
+  await ctx.addInitScript(SPEECH);
   // never count recording sessions as visits
   await ctx.route(/migabuilder-visits|migabuilder-feedback/, r => r.fulfill({ status: 204, body: '' }));
   await ctx.route(PROXY + '/**', async route => {
@@ -262,7 +302,7 @@ async function record(browser, file, sc, baseUrl) {
   if (error && !process.env.KEEP_FAILED) { fs.rmSync(raw, { force: true }); return { tool, error: error.message }; }
   const info = await encode(tool, raw, clips, skips, total);
   fs.rmSync(raw, { force: true });
-  return { tool, title: sc.title, video: 'videos/' + tool + '.mp4', poster: 'videos/' + tool + '.jpg', duration: Math.round(info.duration), transcript, sample, error: error && error.message };
+  return { tool, title: sc.title, video: VIDEO_BASE + tool + '.mp4?v=' + fileVersion(tool + '.mp4'), poster: VIDEO_BASE + tool + '.jpg?v=' + fileVersion(tool + '.jpg'), duration: Math.round(info.duration), transcript, sample, error: error && error.message };
 }
 function cors() { return { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Methods': 'POST, OPTIONS' }; }
 function kindOf(ext) { ext = ext.toLowerCase(); return ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg'].includes(ext) ? 'image' : ['.html', '.htm'].includes(ext) ? 'html' : ext === '.pdf' ? 'pdf' : ['.mp3', '.wav', '.ogg', '.m4a'].includes(ext) ? 'audio' : ['.mp4', '.webm'].includes(ext) ? 'video' : ['.txt', '.md', '.csv', '.json'].includes(ext) ? 'text' : 'download'; }
@@ -302,7 +342,7 @@ const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-
 const srv = await serve();
 const baseUrl = 'http://127.0.0.1:' + srv.address().port;
 await ensureAssets(browser, FFMPEG, path.join(HERE, 'assets'));
-const manifestFile = process.env.MANIFEST || path.join(VIDEOS, 'manifest.json');
+const manifestFile = process.env.MANIFEST || path.join(ROOT, 'videos', 'manifest.json');
 const failed = [];
 for (const f of list) {
   const r = await record(browser, f, SCENARIOS[f], baseUrl);
