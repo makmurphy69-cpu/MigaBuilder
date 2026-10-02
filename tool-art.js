@@ -285,6 +285,7 @@
     'redact-forge': ['holzer', 'ghost', 'pen'],
     'vector-forge': ['albers', 'alien', 'pencil'],
     'regex-forge': ['stella', 'octopus', 'lens', 'cap'],
+    'virus-check-forge': ['bosch', 'goblin', 'gear'],
     'flashcard-forge': ['kusama', 'mushroom', 'book'],
     'form-forge': ['rodchenko', 'cactus', 'pencil'],
     'game-forge': ['miro', 'dragon', 'gamepad'],

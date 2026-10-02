@@ -1,0 +1,51 @@
+Virus Check Forge report — 10/2/2026, 1:15:47 AM
+Checked in the browser at https://migabuilder.com/virus-check-forge.html
+“No warning signs” does not prove a file is safe.
+
+== holiday-photo.jpg (5.2 KB, really a JPEG image)
+Result: ✅ No warning signs
+  SHA-256: 64accb7908d1e16b6104f1bfde272abb65263b53fc9f8c35e4628beef83967b2
+  VirusTotal: https://www.virustotal.com/gui/file/64accb7908d1e16b6104f1bfde272abb65263b53fc9f8c35e4628beef83967b2
+
+== eicar-test-file.txt (68 bytes, really a plain text file)
+Result: ⛔ Dangerous
+  [bad] This is the EICAR antivirus test file. — It is harmless — it exists so people can check that antivirus works. Real antivirus will flag it as a virus on purpose.
+  SHA-256: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+  VirusTotal: https://www.virustotal.com/gui/file/275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+
+== Order form.pdf (455 bytes, really a PDF document)
+Result: ⚠️ Be careful
+  [warn] The PDF runs JavaScript automatically when it opens. — Some forms use this, but it is also how booby-trapped PDFs attack PDF readers. Open it in your browser’s built-in viewer, not in Adobe Reader, or not at all.
+  [info] It contains 1 link. — Paste them into Check links below: http://paypa1-account-verify.com/login
+  SHA-256: a5f372fd6b413bcb08bec1e8b34145f9cb833520787f20138c9a99c50eaff68e
+  VirusTotal: https://www.virustotal.com/gui/file/a5f372fd6b413bcb08bec1e8b34145f9cb833520787f20138c9a99c50eaff68e
+
+== Scan_0042.zip (336 bytes, really a zip archive)
+Result: ⛔ Dangerous
+  [info] The zip contains 1 file. — Scan_0042.pdf.js
+  [bad] Inside the zip, “Scan_0042.pdf.js”: Double extension: it looks like a .pdf but really ends in .js. — Windows hides the last part by default, so “Scan_0042.pdf” is what you see. This is a classic malware trick.
+  [bad] Inside the zip, “Scan_0042.pdf.js”: This is a script (.js) that runs when you double-click it. — Scripts inside zip files are one of the most common ways malware is spread by email.
+  [bad] Inside the zip, “Scan_0042.pdf.js”: opens a hidden window so you don’t see what runs. — Found: -w hidden
+  [bad] Inside the zip, “Scan_0042.pdf.js”: runs code it builds or downloads at run time (Invoke-Expression). — Found: IEX
+  [bad] Inside the zip, “Scan_0042.pdf.js”: downloads something from the internet. — Found: Net.WebClient
+  [bad] Inside the zip, “Scan_0042.pdf.js”: can start other programs (Windows Script Host). — Found: WScript.Shell
+  SHA-256: 637262d21070e2a789aadf0c31df9608f2c8d7840101e6028063d21cfaac5b5a
+  VirusTotal: https://www.virustotal.com/gui/file/637262d21070e2a789aadf0c31df9608f2c8d7840101e6028063d21cfaac5b5a
+
+== Quarterly report.docm (895 bytes, really an Office document)
+Result: ⛔ Dangerous
+  [warn] The document contains macros. — Macros are small programs. Never press “Enable content” or “Enable editing” on a document you were sent.
+  [bad] Macro: Runs a hidden, encoded PowerShell command. — Found: powershell -w hidden -enc V3JpdGUtT3V0cHV0ICJleGFtcGxlIG9ubHkiQQBBAEEA
+  [bad] Macro: Opens a hidden window so you don’t see what runs. — Found: -w hidden
+  [bad] Macro: Can start other programs (Windows Script Host). — Found: CreateObject("WScript
+  [bad] Macro: Macro starts by itself when the document opens. — Found: AutoOpen
+  SHA-256: 34e5f43c12d1a41cabf2b503508057e4645c10c5c978a09d93a91a78c6330a25
+  VirusTotal: https://www.virustotal.com/gui/file/34e5f43c12d1a41cabf2b503508057e4645c10c5c978a09d93a91a78c6330a25
+
+== Invoice_2026-0912.pdf (1.0 KB, really a Windows program)
+Result: ⛔ Dangerous
+  [bad] The name says “.pdf”, but the file is really a Windows program. — A program dressed up as a document or picture is almost always malware. Don’t open it.
+  [warn] This is a Windows program. — A program can do anything on your computer. Run it only if you expected it and trust where it came from.
+  [warn] It is not digitally signed. — Most real software from companies is signed. Unsigned programs from an email or an unknown website are risky.
+  SHA-256: ef3dda42b3dba229c9b32a96e974d92e3fa22850db8469e641c4fb54bfabc2ab
+  VirusTotal: https://www.virustotal.com/gui/file/ef3dda42b3dba229c9b32a96e974d92e3fa22850db8469e641c4fb54bfabc2ab

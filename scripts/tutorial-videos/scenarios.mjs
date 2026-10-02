@@ -519,6 +519,25 @@ S('regex-forge.html', {
   }
 });
 
+S('virus-check-forge.html', {
+  title: 'Virus Check Forge', subtitle: 'Is this file or link safe to open?',
+  intro: 'Welcome to Virus Check Forge. Before you open an email attachment, a download or a link, check it for the tricks that malware uses.',
+  async run(h, page) {
+    await h.step('Drop your files here, or press Choose files. They are checked inside your browser, and never uploaded.', () => h.point('#dropZone'));
+    await h.step('We use six example files, made right here in the browser. None of them can do any harm.', async () => { await h.click('#exampleBtn'); await page.waitForFunction(() => document.querySelectorAll('#results .fcard:not(.busy)').length === 6); });
+    await h.step('Each file gets a clear answer, and the reasons why.', () => h.point('#summary'));
+    await h.step('This invoice is called dot P D F, but it is really a Windows program. That is a classic trick, so it is marked dangerous.', () => h.point('#results .fcard:has-text("Invoice_2026")'));
+    await h.step('This report has a macro that starts by itself and runs a hidden PowerShell command. Never press Enable content on a file you were sent.', () => h.point('#results .fcard:has-text("Quarterly report")'));
+    await h.step('Zip files are opened too. Inside this one, a script pretends to be a PDF.', () => h.point('#results .fcard:has-text("Scan_0042.zip")'));
+    await h.step('The holiday photo is a real picture, with no warning signs. That does not prove a file is safe, so you can also look up its fingerprint on VirusTotal.', async () => { await h.point('#results .fcard:has-text("holiday-photo")'); await h.point('#results .fcard:has-text("holiday-photo") .vt'); });
+    await h.step('Links can be checked too. Paste a link, or a whole message, and press Check links. The link is never opened.', async () => { await h.scroll('#linkPanel', 'start'); await h.type('#urlInput', 'Your account is locked! Verify now: http://paypa1-account-verify.com/login\nhttps://www.paypal.com/signin', { visible: 120, delay: 14 }); await h.click('#urlBtn'); });
+    await h.step('The first one uses the PayPal name, but it is not PayPal. The second is the real PayPal site.', () => h.point('#url-0'));
+    await h.step('Think your computer or phone already has a virus? No website can clean it. Here are the steps for the tools already on your device.', async () => { await h.scroll('#helpPanel', 'start'); await h.point('#help-windows'); });
+    await h.step('Finally, you can download a report of every file you checked.', async () => { await h.scroll('#filePanel', 'start'); });
+    await h.sampleDownload('#reportBtn', 'Report from this video');
+  }
+});
+
 S('policy-forge.html', {
   title: 'Policy Forge', subtitle: 'Privacy policy, cookies and disclosures for your website',
   intro: 'Welcome to Policy Forge. Find out what your website must tell its visitors, and get the privacy policy, cookie policy and banner it needs.',
