@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Voice Forge — free text to speech, download MP3 or WAV | MigaBuilder</title>
+<meta name="description" content="Free text to speech that runs in your browser: paste a script, pick a natural voice in one of 35+ languages including English, Swedish, Spanish, Arabic, Chinese and Swahili, and download the voice-over as MP3 or WAV. No account, no limits, your text never leaves your device.">
+<link rel="canonical" href="https://migabuilder.com/voice-forge.html">
+<meta property="og:title" content="Voice Forge — private text to speech in your browser | MigaBuilder">
+<meta property="og:description" content="Turn a script into a natural voice-over and download it as MP3. Free, unlimited and private.">
+<meta property="og:url" content="https://migabuilder.com/voice-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script type="importmap">{"imports":{"onnxruntime-web/wasm":"https://cdn.jsdelivr.net/npm/onnxruntime-web@1.18.0/dist/esm/ort.wasm.min.js"}}</script>
+<style>
+.hidden{display:none!important}
+#script{min-height:220px;font-size:15px;line-height:1.6}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.bar{height:10px;border-radius:999px;background:rgba(22,32,43,.12);overflow:hidden;margin:8px 0 4px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--amber),#f2c85a);transition:width .2s}
+.voiceinfo{font-size:13px;color:#4c5966;margin-top:4px}
+audio{width:100%;margin:8px 0}
+.saved{list-style:none;padding:0;margin:8px 0 0;font-size:14px}
+.saved li{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(22,32,43,.1)}
+.saved button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:4px;padding:4px 9px;cursor:pointer;font-size:13px}
+.tip{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;font-size:13.5px;line-height:1.5}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Voice Forge</span></nav>
+<header class="masthead"><div><h1>Voice Forge</h1><p>Paste a script, choose a natural voice in one of 35+ languages, and download the voice-over as MP3 or WAV. The voice runs inside your browser — free, unlimited and private.</p></div></header>
+<main>
+<section class="panel" id="scriptPanel">
+  <div class="field"><div class="row"><label for="script">Your script</label><span class="muted" id="stats"></span></div>
+    <textarea id="script" placeholder="Paste or type what the voice should say. Empty lines become pauses."></textarea></div>
+  <div class="actions"><button class="secondary" id="exampleBtn">🧪 Try an example script</button><button class="secondary" id="clearBtn">Clear</button></div>
+</section>
+
+<section class="panel" id="voicePanel">
+  <h2>Voice</h2>
+  <div class="grid">
+    <div class="field"><label for="lang">Language</label><select id="lang"><option>Loading voices…</option></select></div>
+    <div class="field"><label for="voice">Voice</label><select id="voice"></select><div class="voiceinfo" id="voiceInfo"></div></div>
+    <div class="field"><label for="pause">Pause between paragraphs</label><select id="pause"><option value="0.25">Short</option><option value="0.6" selected>Normal</option><option value="1.2">Long</option></select></div>
+  </div>
+  <div class="actions"><button class="primary" id="speakBtn" disabled>🔊 Make the voice-over</button><button class="secondary" id="previewBtn" disabled>▶ Hear a sample</button><button class="secondary hidden" id="stopBtn">Stop</button></div>
+  <div id="progress" class="hidden"><div class="bar"><i id="barFill"></i></div><div class="muted" id="progressText"></div></div>
+  <p class="muted" id="firstNote">The first time you use a voice, it is downloaded once (about 20–110 MB) and kept on this device, so next time it starts at once — even offline.</p>
+</section>
+
+<section class="panel hidden" id="resultPanel">
+  <h2>Your voice-over</h2>
+  <audio id="player" controls></audio>
+  <div class="row"><span class="muted" id="resultInfo"></span></div>
+  <div class="grid" style="margin-top:8px">
+    <div class="field"><label for="fname">File name</label><input id="fname" value="voice-over"></div>
+    <div class="field"><label for="kbps">MP3 quality</label><select id="kbps"><option value="64">Small (64 kbps)</option><option value="128" selected>Good (128 kbps)</option><option value="192">High (192 kbps)</option></select></div>
+  </div>
+  <div class="actions"><button class="primary" id="mp3Btn">⬇ Download MP3</button><button class="secondary" id="wavBtn">⬇ Download WAV</button></div>
+  <p class="muted">Use it in <a href="merge-forge.html">Merge Forge</a> or <a href="clip-forge.html">Clip Forge</a> as narration, in <a href="talk-forge.html">Talk Forge</a> to make a photo speak, or trim it in <a href="audio-forge.html">Audio Forge</a>.</p>
+</section>
+
+<section class="panel" id="savedPanel">
+  <div class="row"><h2 style="margin:0">Voices on this device</h2><button class="secondary" id="refreshSaved" style="padding:5px 11px">↻</button></div>
+  <ul class="saved" id="saved"><li class="muted">None yet.</li></ul>
+</section>
+
+<section class="panel">
+  <h2>Tips</h2>
+  <div class="tip">
+    <div><b>🗣️ Sounds natural</b><br>Write the way you speak: short sentences, numbers as words when it matters (“twenty twenty-six”), and commas where you would breathe.</div>
+    <div><b>⏸️ Pauses</b><br>An empty line between paragraphs adds a pause. Choose how long under <i>Pause between paragraphs</i>.</div>
+    <div><b>🔒 Private and free</b><br>The open-source Piper voices run in this page with WebAssembly. Your text is never uploaded, and there is no word limit. Voices are licensed for free use; check the voice’s model card for commercial terms.</div>
+  </div>
+</section>
+</main>
+<footer>Voice Forge · part of MigaBuilder · your text never leaves this device</footer>
+<script type="module">
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const EXAMPLES={
+  en:'Welcome to Sunrise Bakery.\n\nEvery morning at six, we bake sourdough, cinnamon buns and our famous carrot cake with local flour.\n\nStop by for a fresh coffee, or order online and pick it up on your way to work. See you soon!',
+  sv:'Välkommen till Sunrise Bageri.\n\nVarje morgon klockan sex bakar vi surdegsbröd, kanelbullar och vår berömda morotskaka med mjöl från trakten.\n\nTitta in på en nybryggd kaffe, eller beställ på nätet och hämta på vägen till jobbet. Vi ses!',
+  es:'Bienvenidos a Sunrise Bakery.\n\nCada mañana a las seis horneamos pan de masa madre, rollos de canela y nuestro famoso pastel de zanahoria.\n\nPasa por un café recién hecho, o haz tu pedido en línea y recógelo de camino al trabajo. ¡Hasta pronto!',
+  de:'Willkommen bei Sunrise Bakery.\n\nJeden Morgen um sechs backen wir Sauerteigbrot, Zimtschnecken und unseren berühmten Karottenkuchen.\n\nKomm auf einen frischen Kaffee vorbei, oder bestell online und hol es auf dem Weg zur Arbeit ab. Bis bald!',
+  fr:'Bienvenue à Sunrise Bakery.\n\nChaque matin à six heures, nous préparons du pain au levain, des roulés à la cannelle et notre célèbre gâteau aux carottes.\n\nPassez prendre un café, ou commandez en ligne et récupérez votre commande en allant au travail. À bientôt !',
+  ar:'مرحبًا بكم في مخبز صن رايز.\n\nكل صباح في الساعة السادسة نخبز خبز العجين المخمر ولفائف القرفة وكعكة الجزر الشهيرة.\n\nتفضلوا لتناول قهوة طازجة، أو اطلبوا عبر الإنترنت واستلموا طلبكم في طريقكم إلى العمل.',
+  zh:'欢迎来到日出面包店。\n\n每天早上六点，我们用本地面粉烤制酸面包、肉桂卷和著名的胡萝卜蛋糕。\n\n欢迎进来喝一杯新鲜咖啡，或者在网上下单，上班路上顺便取走。',
+  sw:'Karibu Sunrise Bakery.\n\nKila asubuhi saa kumi na mbili tunaoka mkate, mikate ya mdalasini na keki yetu maarufu ya karoti.\n\nPita upate kahawa safi, au agiza mtandaoni uchukue ukienda kazini. Tutaonana!'
+};
+const SAMPLE={en:'Hello! This is how I sound.',sv:'Hej! Så här låter jag.',es:'¡Hola! Así suena mi voz.',de:'Hallo! So klinge ich.',fr:'Bonjour ! Voici ma voix.',ar:'مرحبًا! هكذا يبدو صوتي.',zh:'你好！这是我的声音。',sw:'Habari! Hivi ndivyo sauti yangu ilivyo.'};
+const QUALITY={x_low:'fastest',low:'fast',medium:'natural',high:'most natural'};
+let tts=null,voiceList=[],sessions=new Map(),busy=false,stopFlag=false,lastPcm=null,lastRate=22050,audioUrl='';
+
+function updateStats(){const t=$('script').value.trim(),w=t?t.split(/\s+/).length:0;$('stats').textContent=t?w+' words · about '+Math.max(1,Math.round(w/2.4))+' s':''}
+$('script').addEventListener('input',()=>{updateStats();store.set('voiceForgeText',$('script').value.slice(0,20000))});
+$('clearBtn').onclick=()=>{$('script').value='';updateStats()};
+$('exampleBtn').onclick=()=>{const fam=($('lang').value||'en').split('_')[0];$('script').value=EXAMPLES[fam]||EXAMPLES.en;updateStats()};
+$('script').value=store.get('voiceForgeText')||'';updateStats();
+
+function progress(on,frac,text){$('progress').classList.toggle('hidden',!on);if(on){$('barFill').style.width=Math.round((frac||0)*100)+'%';$('progressText').textContent=text||''}}
+const mb=b=>(b/1048576).toFixed(b<10485760?1:0)+' MB';
+const sizeOf=v=>{const k=Object.keys(v.files||{}).find(f=>f.endsWith('.onnx'));return k?v.files[k].size_bytes:0};
+
+async function loadLib(){
+  try{tts=await import('https://cdn.jsdelivr.net/npm/@mintplex-labs/piper-tts-web@1.0.5/dist/piper-tts-web.js')}
+  catch(e){$('lang').innerHTML='<option>Could not load the voice engine</option>';progress(true,0,'Could not load the voice engine. Check your connection and reload the page.');return}
+  let list=[];try{list=await tts.voices()}catch(e){}
+  voiceList=list.filter(v=>tts.PATH_MAP[v.key]).sort((a,b)=>a.language.name_english.localeCompare(b.language.name_english)||a.language.code.localeCompare(b.language.code));
+  const langs=new Map();voiceList.forEach(v=>{if(!langs.has(v.language.code))langs.set(v.language.code,v.language)});
+  $('lang').innerHTML=[...langs.entries()].map(([c,l])=>'<option value="'+c+'">'+esc(l.name_english+' ('+l.country_english+')'+(l.name_native&&l.name_native!==l.name_english?' — '+l.name_native:''))+'</option>').join('');
+  const saved=store.get('voiceForgeLang'),nav=(navigator.language||'en-US').replace('-','_');
+  $('lang').value=langs.has(saved)?saved:langs.has(nav)?nav:[...langs.keys()].find(c=>c.startsWith(nav.split('_')[0]+'_'))||'en_US';
+  fillVoices();await refreshSaved();
+}
+function fillVoices(){
+  const code=$('lang').value,vs=voiceList.filter(v=>v.language.code===code);
+  const rank={medium:0,high:1,low:2,x_low:3};vs.sort((a,b)=>(rank[a.quality]-rank[b.quality])||a.name.localeCompare(b.name));
+  $('voice').innerHTML=vs.map(v=>'<option value="'+esc(v.key)+'">'+esc(v.name.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase()))+' — '+(QUALITY[v.quality]||v.quality)+' · '+mb(sizeOf(v))+'</option>').join('');
+  const sv=store.get('voiceForgeVoice');if(sv&&vs.some(v=>v.key===sv))$('voice').value=sv;
+  store.set('voiceForgeLang',code);voiceInfo();
+}
+async function voiceInfo(){
+  const v=voiceList.find(x=>x.key===$('voice').value);if(!v)return;store.set('voiceForgeVoice',v.key);
+  let have=[];try{have=await tts.stored()}catch(e){}
+  $('voiceInfo').textContent=(have.includes(v.key)?'✓ On this device — starts at once.':'Downloads '+mb(sizeOf(v))+' the first time.')+(v.num_speakers>1?' Uses the default speaker.':'');
+  $('speakBtn').disabled=$('previewBtn').disabled=busy;
+}
+$('lang').onchange=fillVoices;$('voice').onchange=voiceInfo;
+
+async function session(id){
+  if(sessions.has(id))return sessions.get(id);
+  const v=voiceList.find(x=>x.key===id),total=sizeOf(v)||1;
+  progress(true,0,'Getting the voice ready…');
+  const s=await tts.TtsSession.create({voiceId:id,progress:p=>{if(/\.onnx$/.test(p.url))progress(true,p.loaded/(p.total||total),'Downloading the voice once: '+mb(p.loaded)+' of '+mb(p.total||total))}});
+  sessions.set(id,s);refreshSaved();voiceInfo();return s;
+}
+// Piper returns 16-bit mono WAV; read its samples so paragraphs can be joined with pauses.
+async function pcmOf(blob){const b=await blob.arrayBuffer(),dv=new DataView(b);let o=12,rate=22050;
+  while(o<dv.byteLength-8){const id=String.fromCharCode(dv.getUint8(o),dv.getUint8(o+1),dv.getUint8(o+2),dv.getUint8(o+3)),len=dv.getUint32(o+4,true);
+    if(id==='fmt ')rate=dv.getUint32(o+12,true);if(id==='data'){const n=Math.min(len,dv.byteLength-o-8)>>1,out=new Float32Array(n);for(let i=0;i<n;i++)out[i]=dv.getInt16(o+8+i*2,true)/32768;return {pcm:out,rate}}o+=8+len+(len&1)}
+  throw new Error('The voice returned no audio.')}
+function wavOf(pcm,rate){const v=new DataView(new ArrayBuffer(44+pcm.length*2)),w=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};
+  w(0,'RIFF');v.setUint32(4,36+pcm.length*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,pcm.length*2,true);
+  for(let i=0;i<pcm.length;i++){const s=Math.max(-1,Math.min(1,pcm[i]));v.setInt16(44+i*2,s<0?s*0x8000:s*0x7fff,true)}return new Blob([v],{type:'audio/wav'})}
+
+async function speak(text,isSample){
+  if(busy)return;const id=$('voice').value;if(!tts||!id)return;
+  const paras=text.split(/\n\s*\n/).map(p=>p.replace(/\s+/g,' ').trim()).filter(Boolean);
+  if(!paras.length){$('script').focus();progress(true,0,'Type or paste a script first.');return}
+  busy=true;stopFlag=false;$('speakBtn').disabled=$('previewBtn').disabled=true;$('stopBtn').classList.remove('hidden');
+  try{const s=await session(id),parts=[];let rate=22050;const t0=performance.now();
+    for(let i=0;i<paras.length;i++){if(stopFlag)throw new Error('Stopped.');
+      progress(true,i/paras.length,'Speaking paragraph '+(i+1)+' of '+paras.length+'…');await new Promise(r=>setTimeout(r,20));
+      const r=await pcmOf(await s.predict(paras[i]));rate=r.rate;parts.push(r.pcm);
+      if(i<paras.length-1)parts.push(new Float32Array(Math.round(rate*+$('pause').value)))}
+    const len=parts.reduce((n,p)=>n+p.length,0),pcm=new Float32Array(len);let o=0;parts.forEach(p=>{pcm.set(p,o);o+=p.length});
+    lastPcm=pcm;lastRate=rate;if(audioUrl)URL.revokeObjectURL(audioUrl);audioUrl=URL.createObjectURL(wavOf(pcm,rate));
+    $('player').src=audioUrl;$('resultPanel').classList.remove('hidden');
+    const secs=len/rate;$('resultInfo').textContent=Math.floor(secs/60)+':'+String(Math.round(secs%60)).padStart(2,'0')+' long · made in '+((performance.now()-t0)/1000).toFixed(1)+' s'+(isSample?' · sample':'');
+    progress(false);$('player').play().catch(()=>{});if(!isSample)$('resultPanel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }catch(e){progress(true,0,e.message==='Stopped.'?'Stopped.':'Something went wrong: '+(e.message||e)+'. Try again, or pick another voice.')}
+  finally{busy=false;$('speakBtn').disabled=$('previewBtn').disabled=false;$('stopBtn').classList.add('hidden')}
+}
+$('speakBtn').onclick=()=>speak($('script').value,false);
+$('previewBtn').onclick=()=>speak(SAMPLE[($('lang').value||'en').split('_')[0]]||SAMPLE.en,true);
+$('stopBtn').onclick=()=>{stopFlag=true;$('progressText').textContent='Stopping after this paragraph…'};
+
+let lameReady=null;
+function loadLame(){return lameReady=lameReady||new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js';s.onload=res;s.onerror=()=>{lameReady=null;rej(new Error('Could not load the MP3 encoder. Check your connection or download WAV.'))};document.head.appendChild(s)})}
+async function mp3(){await loadLame();const enc=new lamejs.Mp3Encoder(1,lastRate,+$('kbps').value),parts=[],B=1152,I=new Int16Array(lastPcm.length);
+  for(let i=0;i<I.length;i++){const v=Math.max(-1,Math.min(1,lastPcm[i]));I[i]=v<0?v*0x8000:v*0x7fff}
+  for(let i=0;i<I.length;i+=B){const m=enc.encodeBuffer(I.subarray(i,i+B));if(m.length)parts.push(new Uint8Array(m))}
+  const e=enc.flush();if(e.length)parts.push(new Uint8Array(e));return new Blob(parts,{type:'audio/mpeg'})}
+const name=()=>($('fname').value.trim()||'voice-over').replace(/[\\/:*?"<>|]+/g,'-');
+const dl=(blob,n)=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=n;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+$('mp3Btn').onclick=async()=>{if(!lastPcm)return;$('mp3Btn').disabled=true;try{dl(await mp3(),name()+'.mp3')}catch(e){alert(e.message)}finally{$('mp3Btn').disabled=false}};
+$('wavBtn').onclick=()=>{if(lastPcm)dl(wavOf(lastPcm,lastRate),name()+'.wav')};
+
+async function refreshSaved(){
+  let have=[];try{have=await tts.stored()}catch(e){}
+  $('saved').innerHTML=have.length?have.map(k=>{const v=voiceList.find(x=>x.key===k);return '<li><span>'+esc(v?v.language.name_english+' — '+v.name.replace(/_/g,' ')+' ('+(QUALITY[v.quality]||v.quality)+')':k)+(v?' <span class="muted">'+mb(sizeOf(v))+'</span>':'')+'</span><button type="button" data-rm="'+esc(k)+'">Remove</button></li>'}).join(''):'<li class="muted">None yet. Voices you use are kept here so they start at once next time.</li>';
+  $('saved').querySelectorAll('[data-rm]').forEach(b=>b.onclick=async()=>{await tts.remove(b.dataset.rm);sessions.delete(b.dataset.rm);refreshSaved();voiceInfo()});
+}
+$('refreshSaved').onclick=refreshSaved;
+loadLib();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

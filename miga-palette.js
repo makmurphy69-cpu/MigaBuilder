@@ -22,6 +22,7 @@
     ["music-forge.html", "🎵", "Music Forge", "Describe music and get a free track, songs with singing, beats.", "song vocals lyrics ai music lyria beat instrumental background soundtrack sound effects loop jingle"],
     ["record-forge.html", "⏺️", "Record Forge", "Record your screen with narration.", ""],
     ["media-convert.html", "🔄", "Media Convert", "Turn video into GIF, extract audio and transcribe speech.", ""],
+    ["voice-forge.html", "🎙️", "Voice Forge", "Turn a script into a natural voice-over in 35+ languages and download it as MP3.", "text to speech tts voice generator voice over voiceover narration read aloud ai voice mp3 wav speech synthesis piper swedish spanish arabic chinese swahili offline free"],
     ["audio-forge.html", "🎚️", "Audio Forge", "Trim, join, fade, speed up and convert audio to MP3 or WAV.", "audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"],
     ["logo-forge.html", "🎨", "Logo Forge", "Create a logo, favicon and brand kit.", ""],
     ["slide-forge.html", "📊", "Slide Forge", "Generate a downloadable PowerPoint.", ""],

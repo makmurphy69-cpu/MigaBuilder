@@ -1505,6 +1505,28 @@
    "kind": "video"
   }
  },
+ "voice-forge.html": {
+  "title": "Voice Forge",
+  "video": "videos/voice-forge.mp4",
+  "poster": "videos/voice-forge.jpg",
+  "duration": 89,
+  "transcript": [
+   "Welcome to Voice Forge. Paste a script, choose a voice, and download a natural voice-over as an MP3, for free and without uploading anything.",
+   "Paste or type your script. Here is a short advert for a bakery. An empty line between paragraphs becomes a pause.",
+   "Choose the language. There are more than thirty-five, from English and Swedish to Arabic, Chinese and Swahili.",
+   "Then pick a voice. Natural voices sound best, and fast ones are smaller to download.",
+   "Press Make the voice-over. The first time, the voice is downloaded once and kept on your device, so next time it starts at once, even offline.",
+   "Here is your voice-over. Listen to it right here.",
+   "Download it as an MP3 or a WAV file, and use it as narration in your videos, slides or podcast.",
+   "Voices you have used are listed here, and you can remove them to free up space.",
+   "Now it is your turn. Open Voice Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/voice-forge.mp3",
+   "label": "Voice-over made in this video",
+   "kind": "audio"
+  }
+ },
  "website-builder.html": {
   "title": "Website Builder",
   "video": "videos/website-builder.mp4",

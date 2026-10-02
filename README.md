@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**68 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**69 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -62,13 +62,14 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Jam Forge** — record several clips with your camera (or add video and audio files) and put them together: all at once in a split screen like a band or a duet, one after another like a story, or taking turns like a conversation with the speaker highlighted; a count-in and click, play-along while you record, automatic sync on a clap, **Join videos you already have** (pick several files, order them by the order you picked, file name or date, drag to reorder, leave clips out, show the whole picture and fade between clips), cartoon characters (frog, cat, robot, alien, dog) whose mouths move with a recorded voice, five layouts, wide, tall and square shapes, names and a title, then one video downloaded as MP4 or WebM — all on your device
 - **Vector Forge** — turn a PNG or JPG logo, icon, drawing or signature into a sharp SVG vector in the browser: pick the number of colors, remove the background, recolor and download SVG or a big PNG
 - **Regex Forge** — test regular expressions with live highlighting and capture groups, read a plain-English explanation of every part, try find and replace, copy code for JavaScript, Python, PHP, C# and Java, or describe what you want and let AI write the pattern
+- **Voice Forge** — free, unlimited text to speech in the browser: paste a script, pick one of 100+ open-source Piper voices in 35+ languages (English, Swedish, Spanish, Arabic, Chinese, Swahili and more), and download the voice-over as MP3 or WAV; each voice downloads once and then works offline
 - **Audio Forge** and **Text Compare** — edit audio and compare texts (Text Compare can format and sort JSON before comparing)
 - **Remove hidden data** — PDF Forge strips author, program, dates and XMP metadata from PDFs; Media Convert Forge removes GPS location and camera data from videos without re-encoding
 - **OCR Forge** — read text from photos and scans in 20 languages with Tesseract.js, then download it as text or as a searchable PDF
 - **Media Convert Forge** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 68 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 69 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 

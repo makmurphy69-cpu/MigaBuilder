@@ -468,6 +468,22 @@ S('redact-forge.html', {
   }
 });
 
+S('voice-forge.html', {
+  title: 'Voice Forge', subtitle: 'Turn a script into a natural voice-over',
+  intro: 'Welcome to Voice Forge. Paste a script, choose a voice, and download a natural voice-over as an MP3, for free and without uploading anything.',
+  async run(h, page) {
+    await h.step('Paste or type your script. Here is a short advert for a bakery. An empty line between paragraphs becomes a pause.', async () => { await page.waitForSelector('#lang option[value="en_US"]', { state: 'attached', timeout: 60000 }); await h.click('#exampleBtn'); });
+    await h.step('Choose the language. There are more than thirty-five, from English and Swedish to Arabic, Chinese and Swahili.', () => h.point('#lang'));
+    await h.step('Then pick a voice. Natural voices sound best, and fast ones are smaller to download.', async () => { await h.select('#voice', 'en_US-lessac-medium'); });
+    await h.step('Press Make the voice-over. The first time, the voice is downloaded once and kept on your device, so next time it starts at once, even offline.', () => h.click('#speakBtn'));
+    await h.skip('Skipping ahead while the voice downloads and speaks', () => page.waitForSelector('#resultPanel:not(.hidden)', { timeout: 300000 }));
+    await h.step('Here is your voice-over. Listen to it right here.', () => h.point('#player'));
+    await h.step('Download it as an MP3 or a WAV file, and use it as narration in your videos, slides or podcast.', () => h.point('#mp3Btn'));
+    await h.sampleDownload('#mp3Btn', 'Voice-over made in this video');
+    await h.step('Voices you have used are listed here, and you can remove them to free up space.', async () => { await h.scroll('#savedPanel', 'center'); await h.point('#saved'); });
+  }
+});
+
 S('vector-forge.html', {
   title: 'Vector Forge', subtitle: 'Turn a PNG or JPG logo into a sharp SVG',
   intro: 'Welcome to Vector Forge. It turns a logo, icon or drawing saved as a picture into a sharp vector that stays crisp at any size.',
