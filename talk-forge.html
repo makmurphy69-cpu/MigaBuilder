@@ -163,7 +163,10 @@
     margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
   }
   .stage-wrap { background: #000; border-radius: 2px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex: 1; position: relative; }
-  #stageCanvas, #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  /* width:auto + max-width/max-height keeps the photo's shape when the height cap applies
+     (width:100% stretched it sideways on wide screens). Clicks map with separate x/y scales. */
+  #stageCanvas { width: auto; height: auto; max-width: 100%; max-height: 62vh; display: block; margin: 0 auto; }
   .sheet-empty { margin: auto; text-align: center; color: rgba(237,234,224,0.45); font-size: 14px; max-width: 340px; padding: 40px 20px; }
   .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(237,234,224,0.75); margin-bottom: 6px; }
   .manual-hint {
@@ -369,6 +372,7 @@
         manualAddBtn.disabled = false;
         renderSceneStrip();
         renderFacesList();
+        adoptLines();
         renderLinesList();
         refreshActionButtons();
       };
@@ -498,11 +502,12 @@
     if (!scene) return;
     const id = ++faceIdCounter;
     scene.faces.push({
-      id, label: I18N.t('faceNumbered').replace('{n}', scene.faces.length),
+      id, label: I18N.t('faceNumbered').replace('{n}', scene.faces.length + 1),
       mouth: boxesInImageSpace.mouth, leftEye: boxesInImageSpace.leftEye, rightEye: boxesInImageSpace.rightEye,
       nextBlinkAt: performance.now() + 1500 + Math.random() * 3000, blinkUntil: 0
     });
     renderFacesList();
+    adoptLines();
     renderLinesList();
     drawFrame();
     refreshActionButtons();
@@ -670,11 +675,23 @@
     const resolvedSceneId = scene ? scene.id : (scenes[0] ? scenes[0].id : null);
     const resolvedScene = scenes.find(s => s.id === resolvedSceneId);
     const resolvedFaceId = faceId !== undefined ? faceId : (resolvedScene && resolvedScene.faces[0] ? resolvedScene.faces[0].id : 'narrator');
-    lines.push({ id: ++lineIdCounter, sceneId: resolvedSceneId, faceId: resolvedFaceId, text: text || '' });
+    lines.push({ id: ++lineIdCounter, sceneId: resolvedSceneId, faceId: resolvedFaceId, autoFace: faceId === undefined, text: text || '' });
     renderLinesList();
     refreshActionButtons();
   }
   addLineBtn.addEventListener('click', () => addLine());
+
+  // The first line is created before any photo exists. Move lines without a valid scene onto
+  // the active photo, and give lines whose speaker was never picked by hand that photo's first
+  // face, so typing a line and pressing Preview makes the face talk.
+  function adoptLines() {
+    const fallback = activeScene() || scenes[0];
+    lines.forEach(line => {
+      if (fallback && !scenes.some(sc => sc.id === line.sceneId)) line.sceneId = fallback.id;
+      const scene = scenes.find(sc => sc.id === line.sceneId);
+      if (line.autoFace && line.faceId === 'narrator' && scene && scene.faces[0]) line.faceId = scene.faces[0].id;
+    });
+  }
 
   function renderLinesList() {
     linesList.innerHTML = '';
@@ -725,7 +742,7 @@
         line.faceId = scene && scene.faces[0] ? scene.faces[0].id : 'narrator';
         populateFaceSelect();
       });
-      faceSelect.addEventListener('change', () => { line.faceId = faceSelect.value === 'narrator' ? 'narrator' : Number(faceSelect.value); });
+      faceSelect.addEventListener('change', () => { line.faceId = faceSelect.value === 'narrator' ? 'narrator' : Number(faceSelect.value); line.autoFace = false; });
 
       const removeBtn = document.createElement('button');
       removeBtn.type = 'button'; removeBtn.textContent = '✕';
