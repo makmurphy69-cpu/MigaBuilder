@@ -33,7 +33,7 @@
     ["repurpose-forge.html", "♻️", "Repurpose Forge", "Turn one idea into a complete publishing pack.", ""],
     ["form-forge.html", "📝", "Form Forge", "Create private downloadable forms and surveys.", ""],
     ["document-forge.html", "📄", "Document Forge", "Convert documents, images and PDFs privately.", ""],
-    ["pdf-forge.html", "📕", "PDF Forge", "Merge, split, number, watermark and create PDFs.", ""],
+    ["pdf-forge.html", "📕", "PDF Forge", "Merge, split, number, watermark and create PDFs.", "remove pdf metadata author hidden data clean pdf privacy"],
     ["pdf-edit-forge.html", "✍️", "Sign Documents", "Sign PDFs, Word files and photos — draw, type or upload your signature.", ""],
     ["pdf-compress.html", "🗜️", "Compress PDF", "Shrink PDFs for email and upload limits.", ""],
     ["ocr-forge.html", "🔎", "OCR Forge", "Extract editable text from images privately.", ""],
@@ -75,7 +75,7 @@
     ["qr-forge.html", "▦", "QR Forge", "Create downloadable QR codes.", ""],
     ["screen-forge.html", "🤝", "Screen Share Forge", "Get live remote help.", ""],
     ["meet-forge.html", "👥", "Meet Forge", "Host group video rooms and topic communities.", ""],
-    ["media-convert-forge.html", "🎞️", "Media Convert Forge", "Trim, rotate, resize and compress video, or make a GIF or MP3.", "ffmpeg video compress trim cut rotate gif mp3 resize"],
+    ["media-convert-forge.html", "🎞️", "Media Convert Forge", "Trim, rotate, resize and compress video, or make a GIF or MP3.", "ffmpeg video compress trim cut rotate gif mp3 resize remove video metadata gps location exif strip camera data privacy"],
     ["templates.html", "🧰", "Templates", "Ready-made starting points for the tools.", "templates starter examples"],
     ["sample-viewer.html", "🎬", "Samples & video guides", "Watch every tool being used and open the sample it made.", "samples videos tutorials guides help"],
     ["feedback.html", "💬", "Send feedback", "Report a bug or suggest an idea.", "feedback bug report idea contact help"]
