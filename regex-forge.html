@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Regex Forge — test, explain and write regular expressions | MigaBuilder</title>
+<meta name="description" content="Free regex tester: see every match and capture group highlighted live, read a plain-English explanation of any regular expression, test find and replace, copy ready code for JavaScript, Python and more, or describe what you want and let AI write the pattern.">
+<link rel="canonical" href="https://migabuilder.com/regex-forge.html">
+<meta property="og:title" content="Regex Forge — regex tester with plain-English explanations | MigaBuilder">
+<meta property="og:description" content="Test regular expressions live, understand them in plain English, and let AI write one from a description.">
+<meta property="og:url" content="https://migabuilder.com/regex-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<style>
+main{max-width:1320px}
+.hidden{display:none!important}
+.mono{font:500 13px/1.55 'IBM Plex Mono',monospace}
+.patrow{display:flex;align-items:stretch;border:1px solid rgba(22,32,43,.28);border-radius:4px;background:#fff;overflow:hidden}
+.patrow span{font:500 18px 'IBM Plex Mono',monospace;color:#8a97a3;padding:9px 8px;background:#f5f6f7}
+.patrow input{flex:1;border:none;font:500 16px 'IBM Plex Mono',monospace;padding:9px 6px;min-width:0;outline:none;background:transparent}
+.patrow.bad{border-color:var(--error);box-shadow:0 0 0 2px rgba(216,96,74,.2)}
+.flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.flags label{display:flex;flex-direction:row;white-space:nowrap;margin:0;font-weight:500;gap:5px;align-items:center;border:1px solid rgba(22,32,43,.18);background:#fff;border-radius:999px;padding:4px 10px;font-size:13px;cursor:pointer}
+.flags b{font-family:'IBM Plex Mono',monospace}
+.err{color:#9a2f1f;font-size:13px;min-height:18px;margin-top:6px}
+.io{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.io h3{font:700 14px 'Space Grotesk';margin:0 0 6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.io textarea,.outbox{width:100%;min-height:220px;max-height:55vh;font:500 13px/1.6 'IBM Plex Mono',monospace;padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff;color:var(--ink);resize:vertical;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.outbox mark{border-radius:3px;padding:0 1px;color:#16202b;background:#fde68a;box-shadow:inset 0 -2px 0 #e2a63b}
+.outbox mark.alt{background:#bfdbfe;box-shadow:inset 0 -2px 0 #3b82f6}
+.outbox mark.empty{padding:0;border-left:2px solid #e2a63b;background:none}
+.outbox mark.sel{outline:2px solid var(--navy)}
+.outbox ins{background:#bbf7d0;text-decoration:none;border-radius:3px}
+.count{font-weight:700}
+.mt{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}.mt td,.mt th{border-bottom:1px solid rgba(22,32,43,.1);padding:5px 6px;text-align:left;vertical-align:top}.mt td{font-family:'IBM Plex Mono',monospace;word-break:normal;overflow-wrap:break-word;white-space:nowrap}.mt td:nth-child(2),.mt td:last-child{white-space:normal}.mt th{font:700 12px 'Space Grotesk'}
+.mt tr{cursor:pointer}.mt tr:hover td{background:#f6f7f8}
+.explain{list-style:none;margin:0;padding:0;font-size:14px}
+.explain li{display:flex;gap:10px;padding:4px 0;border-bottom:1px dashed rgba(22,32,43,.1)}
+.explain code{font:500 13px 'IBM Plex Mono',monospace;background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:3px;padding:1px 6px;white-space:pre;flex:none;max-width:45%;overflow:hidden;text-overflow:ellipsis}
+.explain .g{color:#1f5a3a;font-weight:600}
+.lib{display:flex;gap:6px;flex-wrap:wrap}.lib button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:6px 11px;cursor:pointer;font-weight:600;color:var(--ink);font-size:13px}
+.lib button:hover{border-color:var(--navy)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}.tabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:4px;padding:5px 10px;cursor:pointer;font-weight:600;font-size:13px;color:var(--ink)}.tabs button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+pre.code{background:#0f1b27;color:#e8eef3;padding:12px;border-radius:4px;overflow:auto;font:500 12.5px/1.55 'IBM Plex Mono',monospace;margin:0;white-space:pre-wrap;word-break:break-all}
+.aibox{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:12px;font-size:14px;line-height:1.55;margin-top:10px}
+.aibox p{margin:.3em 0}
+.cheat{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:4px 16px;font-size:13px}
+.cheat div{display:flex;gap:8px}.cheat code{font:500 12.5px 'IBM Plex Mono',monospace;min-width:62px;color:#0e2a47;font-weight:700}
+@media(max-width:820px){.io{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Regex Forge</span></nav>
+<header class="masthead"><div><h1>Regex Forge</h1><p>Test a regular expression live, read what it does in plain English, try find and replace, and copy ready code. Stuck? Describe what you want to match and let AI write it.</p></div></header>
+<main>
+<section class="panel" id="patternPanel">
+  <div class="field"><label for="pattern">Regular expression</label>
+    <div class="patrow" id="patrow"><span>/</span><input id="pattern" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="e.g. \b\d{4}-\d{2}-\d{2}\b"><span id="flagText">/g</span></div>
+    <div class="flags" id="flags">
+      <label title="Find every match, not just the first"><input type="checkbox" data-flag="g" checked><b>g</b> all matches</label>
+      <label title="A and a count as the same letter"><input type="checkbox" data-flag="i" id="flag-i"><b>i</b> ignore case</label>
+      <label title="^ and $ match at the start and end of every line"><input type="checkbox" data-flag="m" id="flag-m"><b>m</b> each line</label>
+      <label title="The dot also matches line breaks"><input type="checkbox" data-flag="s"><b>s</b> dot matches newline</label>
+      <label title="Full Unicode: emoji, \p{L} letter classes"><input type="checkbox" data-flag="u"><b>u</b> unicode</label>
+    </div>
+    <div class="err" id="err" role="status"></div>
+  </div>
+  <div class="field"><label>Start from a common pattern</label><div class="lib" id="lib"></div></div>
+</section>
+
+<section class="panel" id="testPanel">
+  <div class="io">
+    <div><h3><span>Test text</span><span class="muted" id="inStats"></span></h3><textarea id="text" spellcheck="false" placeholder="Paste text to test against — a log, a list of emails, a CSV, some code…"></textarea></div>
+    <div><h3><span>Matches <span class="count" id="count"></span></span><span class="muted">click a match for details</span></h3><div class="outbox" id="hl" tabindex="0" aria-live="polite"></div></div>
+  </div>
+  <div class="grid" style="margin-top:12px">
+    <div class="field"><label for="replace">Replace with <small class="muted">— use $1, $2 or $&lt;name&gt; for groups, $&amp; for the whole match</small></label><input id="replace" class="mono" spellcheck="false" placeholder="Leave empty to only find"></div>
+  </div>
+  <div id="replaceWrap" class="hidden"><h3 style="font:700 14px 'Space Grotesk';margin:8px 0 6px;display:flex;justify-content:space-between">Result after replacing <button class="secondary" id="copyResult" style="padding:5px 11px">📋 Copy result</button></h3><div class="outbox" id="replaced" style="min-height:120px"></div></div>
+</section>
+
+<section class="panel" id="detailPanel">
+  <div class="io">
+    <div><h2 style="margin-top:0">What it means</h2><ul class="explain" id="explain"></ul></div>
+    <div><h2 style="margin-top:0">Match details</h2><div id="tableWrap" style="max-height:420px;overflow:auto"><table class="mt" id="table"></table></div></div>
+  </div>
+</section>
+
+<section class="panel" id="aiPanel">
+  <h2>Ask the AI</h2>
+  <div class="field"><label for="describe">Describe what you want to match, in any language</label><textarea id="describe" style="min-height:70px" placeholder="e.g. Swedish postal codes like 123 45 or 12345, but not longer numbers"></textarea></div>
+  <div class="actions"><button class="primary" id="writeBtn">✨ Write the regex for me</button><button class="secondary" id="explainBtn">💬 Explain my regex with AI</button><button class="secondary" id="cancelAi" hidden>Stop</button></div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">AI settings</summary><div id="aiBox"></div></details>
+  <div class="aibox hidden" id="aiOut" aria-live="polite"></div>
+  <p class="muted" style="margin-top:8px">Only your pattern, the description and the first 1,500 characters of the test text are sent to the AI you choose. Testing, highlighting and the explanation above never leave your browser.</p>
+</section>
+
+<section class="panel" id="codePanel">
+  <h2>Use it in code</h2>
+  <div class="tabs" id="langTabs"></div>
+  <pre class="code" id="codeOut"></pre>
+  <div class="actions" style="margin-top:8px"><button class="secondary" id="copyCode">📋 Copy code</button><button class="secondary" id="shareBtn">🔗 Copy a share link</button></div>
+</section>
+
+<section class="panel">
+  <h2>Cheat sheet</h2>
+  <div class="cheat">
+    <div><code>.</code>any character</div><div><code>\d \D</code>digit / not digit</div><div><code>\w \W</code>letter, digit, _ / not</div><div><code>\s \S</code>space / not space</div>
+    <div><code>\b</code>word edge</div><div><code>^ $</code>start / end</div><div><code>[abc]</code>a, b or c</div><div><code>[^abc]</code>not a, b or c</div>
+    <div><code>[a-z]</code>a to z</div><div><code>a|b</code>a or b</div><div><code>(…)</code>capture group</div><div><code>(?:…)</code>group, no capture</div>
+    <div><code>(?&lt;n&gt;…)</code>named group</div><div><code>*</code>0 or more</div><div><code>+</code>1 or more</div><div><code>?</code>optional</div>
+    <div><code>{3}</code>exactly 3</div><div><code>{2,5}</code>2 to 5</div><div><code>*? +?</code>as few as possible</div><div><code>(?=…)</code>followed by</div>
+    <div><code>(?!…)</code>not followed by</div><div><code>(?&lt;=…)</code>preceded by</div><div><code>\1</code>same as group 1</div><div><code>\. \( \\</code>a literal . ( \</div>
+  </div>
+</section>
+</main>
+<footer>Regex Forge · part of MigaBuilder · testing runs only in your browser</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LIB=[
+  ['Email','[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}','g','Contact anna.svensson@example.com or sales@shop.co.uk.\nNot an email: anna@ or @example.com'],
+  ['Web link','https?:\\/\\/[^\\s/$.?#][^\\s]*','gi','Read https://migabuilder.com/regex-forge.html and http://example.org/a?b=1 today.'],
+  ['Date (2026-10-01)','\\b(?<year>\\d{4})-(?<month>0[1-9]|1[0-2])-(?<day>0[1-9]|[12]\\d|3[01])\\b','g','Invoice 2026-10-01, due 2026-10-31. Wrong: 2026-13-01, 2026-10-32.'],
+  ['Phone number','(?:\\+|00)?\\d{1,3}[ \\-]?\\(?\\d{1,4}\\)?(?:[ \\-]?\\d{2,4}){2,3}','g','Call +46 70 123 45 67 or 0046-8-555 12 34, or (555) 0199 in the office.'],
+  ['IPv4 address','\\b(?:(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\.){3}(?:25[0-5]|2[0-4]\\d|1?\\d?\\d)\\b','g','Server 192.168.1.20 talked to 8.8.8.8; 999.1.1.1 is not valid.'],
+  ['Hex color','#(?:[0-9a-fA-F]{3}){1,2}\\b','g','color: #0E2A47; background: #fff; border: #abcd (not valid);'],
+  ['Price','(?<currency>[$€£]|USD|EUR|SEK)\\s?(?<amount>\\d{1,3}(?:[ ,]\\d{3})*(?:\\.\\d{2})?)','gi','Total $1,249.00, shipping €12.50 and SEK 349.'],
+  ['Time (24 h)','\\b(?:[01]\\d|2[0-3]):[0-5]\\d\\b','g','Open 07:30–18:00, closed at 24:00 and 9:65.'],
+  ['Repeated word','\\b(\\w+)\\s+\\1\\b','gi','This is is a sentence with the the repeated words.'],
+  ['Strong password','^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\w\\s]).{12,}$','gm','password\nSunrise-Bakery-2026!\nShort1!\nalllowercaseandlong123!'],
+  ['Log line','^(?<date>\\S+) (?<time>\\S+) (?<level>ERROR|WARN|INFO|DEBUG)\\s+\\[(?<module>[^\\]]+)\\] (?<message>.*)$','gm','2026-10-01 09:14:02 INFO  [api] POST /v1/orders 201\n2026-10-01 09:14:03 ERROR [db] connection refused\n2026-10-01 09:14:04 WARN  [pay] card declined']
+];
+const ST=(()=>{try{return JSON.parse(localStorage.getItem('regexForge'))||{}}catch(e){return {}}})();
+const save=()=>{try{localStorage.setItem('regexForge',JSON.stringify({p:$('pattern').value,f:flags(),t:$('text').value.slice(0,20000),r:$('replace').value,lang}))}catch(e){}};
+let lang=ST.lang||'js',last=null,selected=-1;
+
+$('lib').innerHTML=LIB.map((l,i)=>'<button type="button" data-lib="'+i+'" id="lib-'+i+'">'+esc(l[0])+'</button>').join('');
+$('lib').querySelectorAll('[data-lib]').forEach(b=>b.onclick=()=>{const l=LIB[+b.dataset.lib];load(l[1],l[2],l[3],'')});
+function flags(){return [...document.querySelectorAll('[data-flag]')].filter(c=>c.checked).map(c=>c.dataset.flag).join('')}
+function setFlags(f){document.querySelectorAll('[data-flag]').forEach(c=>c.checked=f.includes(c.dataset.flag))}
+function load(p,f,t,r){$('pattern').value=p;setFlags(f);if(t!=null)$('text').value=t;if(r!=null)$('replace').value=r;run()}
+
+// ---------------------------------------------------------------- matching in a worker, so a runaway pattern cannot freeze the page
+const WORKER_SRC='onmessage=e=>{const {id,p,f,t,r}=e.data;let re;try{re=new RegExp(p,f+"d")}catch(x){postMessage({id,error:x.message});return}'+
+ 'const out=[];const all=f.includes("g");let m,n=0;if(all){re.lastIndex=0;while((m=re.exec(t))&&n<5000){out.push(pack(m));n++;if(m[0]==="")re.lastIndex+=(f.includes("u")&&t.codePointAt(re.lastIndex)>0xffff)?2:1}}else{m=re.exec(t);if(m)out.push(pack(m))}'+
+ 'let replaced=null;if(r!=null){try{replaced=t.replace(new RegExp(p,f),r)}catch(x){}}postMessage({id,matches:out,capped:n>=5000,replaced})};'+
+ 'function pack(m){return {i:m.index,s:m[0],g:m.slice(1),n:m.groups?Object.assign({},m.groups):null}}';
+let worker=null,seq=0,current=null;
+// Only the newest request counts: an older one is resolved with null so its caller just stops.
+function test(p,f,t,r){
+  if(current){clearTimeout(current.kill);current.res(null);current=null}
+  if(!worker){worker=new Worker(URL.createObjectURL(new Blob([WORKER_SRC],{type:'text/javascript'})));
+    worker.onmessage=e=>{if(current&&e.data.id===current.id){clearTimeout(current.kill);const c=current;current=null;c.res(e.data)}}}
+  return new Promise(res=>{const id=++seq;
+    current={id,res,kill:setTimeout(()=>{worker.terminate();worker=null;current=null;res({timeout:true})},1500)};
+    worker.postMessage({id,p,f,t,r});});
+}
+async function run(){
+  const p=$('pattern').value,f=flags(),t=$('text').value,r=$('replace').value;
+  $('flagText').textContent='/'+f;save();renderExplain(p);renderCode(p,f,r);
+  $('inStats').textContent=t?t.length.toLocaleString()+' characters':'';
+  if(!p){$('err').textContent='';$('patrow').classList.remove('bad');$('hl').innerHTML='<span class="muted">Type a pattern above, or pick a common one.</span>';$('count').textContent='';$('table').innerHTML='';$('replaceWrap').classList.add('hidden');last=null;return}
+  try{new RegExp(p,f)}catch(e){$('err').textContent='⚠ '+e.message.replace(/^Invalid regular expression: \/[\s\S]*\/[a-z]*: /,'');$('patrow').classList.add('bad');return}
+  $('err').textContent='';$('patrow').classList.remove('bad');
+  const res=await test(p,f,t,r!==''?r:null);if(res==null)return;
+  if(res.timeout){$('err').textContent='⚠ This pattern takes too long on this text (catastrophic backtracking). Look for nested repeats like (a+)+ or (.*)*.';$('patrow').classList.add('bad');return}
+  if(res.error){$('err').textContent='⚠ '+res.error;return}
+  last=res;selected=-1;render(t,res,r);
+}
+function render(t,res,r){
+  const ms=res.matches;$('count').textContent=ms.length?'('+ms.length+(res.capped?'+':'')+')':'(none)';
+  let h='',p=0;ms.forEach((m,k)=>{if(m.i<p)return;h+=esc(t.slice(p,m.i));h+=m.s===''?'<mark class="empty" data-k="'+k+'"></mark>':'<mark data-k="'+k+'"'+(k%2?' class="alt"':'')+' title="Match '+(k+1)+'">'+esc(m.s)+'</mark>';p=m.i+m.s.length});
+  h+=esc(t.slice(p));$('hl').innerHTML=t?h:'<span class="muted">Add some test text on the left.</span>';
+  $('hl').querySelectorAll('mark').forEach(mk=>mk.onclick=()=>select(+mk.dataset.k));
+  renderTable(ms);
+  if(r!==''&&res.replaced!=null){$('replaceWrap').classList.remove('hidden');$('replaced').textContent=res.replaced}else $('replaceWrap').classList.add('hidden');
+}
+function renderTable(ms){
+  if(!ms.length){$('table').innerHTML='<tr><td class="muted" style="font-family:inherit">No matches yet.</td></tr>';return}
+  const names=groupNames($('pattern').value);
+  const heads=ms[0].g.map((x,i)=>'$'+(i+1)+(names[i]?' '+names[i]:''));
+  $('table').innerHTML='<tr><th>#</th><th>Match</th><th>At</th>'+heads.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr>'+ms.slice(0,500).map((m,k)=>'<tr data-k="'+k+'" id="row-'+k+'"><td>'+(k+1)+'</td><td>'+(m.s===''?'<i class="muted">empty</i>':esc(m.s))+'</td><td>'+m.i+'</td>'+m.g.map(g=>'<td>'+(g===undefined?'<i class="muted">–</i>':esc(g))+'</td>').join('')+'</tr>').join('')+(ms.length>500?'<tr><td colspan="9" class="muted">Showing the first 500.</td></tr>':'');
+  $('table').querySelectorAll('tr[data-k]').forEach(tr=>tr.onclick=()=>select(+tr.dataset.k));
+}
+// Names of the capturing groups in order (null for unnamed ones).
+function groupNames(p){const out=[];let inClass=false;for(let i=0;i<p.length;i++){const c=p[i];if(c==='\\'){i++;continue}if(inClass){if(c===']')inClass=false;continue}if(c==='['){inClass=true;continue}
+  if(c==='('){if(p[i+1]!=='?')out.push(null);else{const m=p.slice(i).match(/^\(\?<([A-Za-z_$][\w$]*)>/);if(m)out.push(m[1])}}}return out}
+function select(k){selected=k;$('hl').querySelectorAll('mark').forEach(m=>m.classList.toggle('sel',+m.dataset.k===k));
+  const mk=$('hl').querySelector('mark[data-k="'+k+'"]');if(mk)mk.scrollIntoView({block:'nearest'});
+  $('table').querySelectorAll('tr[data-k]').forEach(tr=>tr.style.background=+tr.dataset.k===k?'#fff5d6':'');const row=$('row-'+k);if(row)row.scrollIntoView({block:'nearest'})}
+
+// ---------------------------------------------------------------- plain-English explanation (local, no AI)
+const ESC={d:'a digit 0–9',D:'any character except a digit',w:'a letter, digit or _',W:'any character except a letter, digit or _',s:'a space, tab or line break',S:'any character except whitespace',b:'a word boundary (the edge of a word)',B:'not a word boundary',n:'a line break',r:'a carriage return',t:'a tab',f:'a form feed',v:'a vertical tab',0:'a null character'};
+function quant(q){let m;const lazy=q.endsWith('?')&&q.length>1,base=lazy?q.slice(0,-1):q;let s;
+  if(base==='*')s='zero or more times';else if(base==='+')s='one or more times';else if(base==='?')s='optional (zero or one time)';
+  else if((m=base.match(/^\{(\d+)\}$/)))s='exactly '+m[1]+' time'+(m[1]==='1'?'':'s');else if((m=base.match(/^\{(\d+),\}$/)))s=m[1]+' or more times';else if((m=base.match(/^\{(\d+),(\d+)\}$/)))s='between '+m[1]+' and '+m[2]+' times';else s=base;
+  return s+(lazy?', as few as possible':'');}
+function classText(body){
+  const neg=body[0]==='^';if(neg)body=body.slice(1);const parts=[];let i=0;
+  const one=()=>{if(body[i]==='\\'){const c=body[i+1];i+=2;if(c==='p'||c==='P'){const m=body.slice(i).match(/^\{[^}]*\}/);if(m){i+=m[0].length;return {t:(c==='P'?'not ':'')+'Unicode '+m[0].slice(1,-1)}}}if(c==='u'||c==='x'){const m=body.slice(i).match(/^(\{[0-9a-fA-F]+\}|[0-9a-fA-F]{4}|[0-9a-fA-F]{2})/);if(m){i+=m[0].length;return {c:String.fromCodePoint(parseInt(m[0].replace(/[{}]/g,''),16))}}}return ESC[c]&&/[dDwWsS]/.test(c)?{t:ESC[c]}:{c:c==='n'?'line break':c==='t'?'tab':c}}const ch=[...body.slice(i)][0];i+=ch.length;return {c:ch}};
+  while(i<body.length){const a=one();if(a.c!=null&&body[i]==='-'&&i+1<body.length){i++;const b=one();parts.push((a.c)+' to '+(b.c!=null?b.c:b.t))}else parts.push(a.t||('"'+a.c+'"'))}
+  return (neg?'any character except ':'one of: ')+parts.join(', ');
+}
+function explainList(p){
+  const out=[];let i=0,depth=0,group=0;const stack=[];
+  const push=(code,text)=>out.push({code,text,depth});
+  while(i<p.length){
+    const c=p[i];let code='',text='';
+    if(c==='\\'){const n=p[i+1];code=p.slice(i,i+2);i+=2;
+      if(/[1-9]/.test(n)){while(/\d/.test(p[i]||'')){code+=p[i];i++}text='the same text that group '+code.slice(1)+' matched'}
+      else if(n==='k'&&p[i]==='<'){const e=p.indexOf('>',i);code+=p.slice(i,e+1);text='the same text that group "'+p.slice(i+1,e)+'" matched';i=e+1}
+      else if((n==='p'||n==='P')&&p[i]==='{'){const e=p.indexOf('}',i);code+=p.slice(i,e+1);text=(n==='P'?'a character that is not ':'a character in Unicode ')+p.slice(i+1,e);i=e+1}
+      else if(n==='u'||n==='x'){const m=p.slice(i).match(/^(\{[0-9a-fA-F]+\}|[0-9a-fA-F]{4}|[0-9a-fA-F]{2})/);if(m){code+=m[0];i+=m[0].length;text='the character "'+String.fromCodePoint(parseInt(m[0].replace(/[{}]/g,''),16))+'"'}else text='the letter '+n}
+      else text=ESC[n]||'a literal "'+n+'"';}
+    else if(c==='['){let j=i+1;if(p[j]==='^')j++;if(p[j]===']')j++;while(j<p.length&&p[j]!==']'){if(p[j]==='\\')j++;j++}code=p.slice(i,j+1);text=classText(p.slice(i+1,j));i=j+1}
+    else if(c==='('){let kind,len=1;
+      if(p.startsWith('(?:',i)){kind='Group (not captured):';len=3}
+      else if(p.startsWith('(?=',i)){kind='Only if followed by:';len=3}
+      else if(p.startsWith('(?!',i)){kind='Only if NOT followed by:';len=3}
+      else if(p.startsWith('(?<=',i)){kind='Only if preceded by:';len=4}
+      else if(p.startsWith('(?<!',i)){kind='Only if NOT preceded by:';len=4}
+      else if(p.startsWith('(?<',i)){const e=p.indexOf('>',i);group++;kind='Group '+group+' named "'+p.slice(i+3,e)+'" — captures:';len=e-i+1}
+      else{group++;kind='Group '+group+' — captures:'}
+      code=p.slice(i,i+len);i+=len;push(code,'<span class="g">'+esc(kind)+'</span>');stack.push(out.length-1);depth++;continue}
+    else if(c===')'){i++;depth=Math.max(0,depth-1);const open=stack.pop();const m=p.slice(i).match(/^(\*\?|\+\?|\?\?|\*|\+|\?|\{\d+(?:,\d*)?\}\??)/);
+      if(m){i+=m[0].length;if(open!=null)out[open].text=out[open].text.replace(/:<\/span>$/,'</span> <i>— the whole group '+esc(quant(m[0]))+':</i>');push(')'+m[0],'end of group')}else push(')','end of group');continue}
+    else if(c==='|'){i++;push('|','<b>or</b>');continue}
+    else if(c==='^'){i++;text='the start of the text (or of a line with the m flag)';code='^'}
+    else if(c==='$'){i++;text='the end of the text (or of a line with the m flag)';code='$'}
+    else if(c==='.'){i++;text='any character'+(flags().includes('s')?'':' except a line break');code='.'}
+    else{const cp=[...p.slice(i)];let lit='';for(const ch of cp){if('\\[](){}|^$.*+?'.includes(ch))break;lit+=ch}
+      // keep the last character apart if a quantifier follows, so "abc+" reads "ab" then "c one or more times"
+      const nx=p[i+lit.length];if(lit.length>1&&/[*+?{]/.test(nx||'')&&!(nx==='{'&&!/^\{\d+(,\d*)?\}/.test(p.slice(i+lit.length))))lit=lit.slice(0,-[...lit].pop().length);
+      if(!lit){lit=cp[0];}code=lit;i+=lit.length;text=lit.length>1?'the text "'+lit+'"':(lit===' '?'a space':'the character "'+lit+'"')}
+    const q=p.slice(i).match(/^(\*\?|\+\?|\?\?|\*|\+|\?|\{\d+(?:,\d*)?\}\??)/);
+    if(q){i+=q[0].length;code+=q[0];text+=' — '+quant(q[0])}
+    push(code,esc(text));
+  }
+  return out;
+}
+function renderExplain(p){
+  if(!p){$('explain').innerHTML='<li class="muted">The meaning of each part appears here.</li>';return}
+  let items;try{items=explainList(p)}catch(e){items=[]}
+  const f=flags(),fl=[f.includes('g')?'finds every match':'stops at the first match',f.includes('i')?'ignores upper/lower case':'',f.includes('m')?'^ and $ work on each line':'',f.includes('s')?'the dot also matches line breaks':'',f.includes('u')?'full Unicode':''].filter(Boolean);
+  $('explain').innerHTML=items.map(it=>'<li style="padding-left:'+(it.depth*18)+'px"><code>'+esc(it.code)+'</code><span>'+it.text+'</span></li>').join('')+'<li><code>/'+esc(f)+'</code><span>Settings: '+esc(fl.join(', '))+'.</span></li>';
+}
+
+// ---------------------------------------------------------------- code snippets
+const LANGS={
+  js:['JavaScript',(p,f,r)=>{const lit='/'+p.replace(/\//g,'\\/')+'/'+f;return r?'const result = text.replace('+lit+', '+JSON.stringify(r)+');':(f.includes('g')?'const matches = [...text.matchAll('+lit+')];\nfor (const m of matches) {\n  console.log(m.index, m[0]'+(/\(\?<\w+>/.test(p)?', m.groups':'')+');\n}':'const m = text.match('+lit+');\nif (m) console.log(m[0]);')}],
+  py:['Python',(p,f,r)=>{const fl=[f.includes('i')&&'re.IGNORECASE',f.includes('m')&&'re.MULTILINE',f.includes('s')&&'re.DOTALL'].filter(Boolean);const pp=p.replace(/\(\?<(?![=!])/g,'(?P<').replace(/\\k<(\w+)>/g,'(?P=$1)');const raw=/'/.test(pp)?'r"'+pp+'"':"r'"+pp+"'";const fa=fl.length?', '+fl.join(' | '):'';
+    return 'import re\n\npattern = re.compile('+raw+fa+')\n'+(r?'result = pattern.sub('+JSON.stringify(r.replace(/\$<(\w+)>/g,'\\g<$1>').replace(/\$(\d)/g,'\\$1').replace(/\$&/g,'\\g<0>'))+', text'+(f.includes('g')?'':', count=1')+')':(f.includes('g')?'for m in pattern.finditer(text):\n    print(m.start(), m.group(0)'+(/\(\?<\w+>/.test(p)?', m.groupdict()':'')+')':'m = pattern.search(text)\nif m:\n    print(m.group(0))'))}],
+  php:['PHP',(p,f,r)=>{const d="'/"+p.replace(/\//g,'\\/').replace(/'/g,"\\'")+'/'+f.replace(/[gy]/g,'')+(f.includes('u')?'':'')+"'";return r?'$result = preg_replace('+d+", '"+r.replace(/\$<(\w+)>/g,'${$1}').replace(/'/g,"\\'")+"', $text"+(f.includes('g')?'':', 1')+');':(f.includes('g')?'preg_match_all('+d+', $text, $matches, PREG_SET_ORDER);\nforeach ($matches as $m) echo $m[0], "\\n";':'if (preg_match('+d+', $text, $m)) echo $m[0];')}],
+  cs:['C#',(p,f,r)=>{const o=[f.includes('i')&&'RegexOptions.IgnoreCase',f.includes('m')&&'RegexOptions.Multiline',f.includes('s')&&'RegexOptions.Singleline'].filter(Boolean);const lit='@"'+p.replace(/"/g,'""')+'"',oa=o.length?', '+o.join(' | '):'';
+    return 'using System.Text.RegularExpressions;\n\nvar re = new Regex('+lit+oa+');\n'+(r?'var result = re.Replace(text, '+JSON.stringify(r.replace(/\$<(\w+)>/g,'${$1}'))+(f.includes('g')?'':', 1')+');':(f.includes('g')?'foreach (Match m in re.Matches(text))\n    Console.WriteLine($"{m.Index}: {m.Value}");':'var m = re.Match(text);\nif (m.Success) Console.WriteLine(m.Value);'))}],
+  java:['Java',(p,f,r)=>{const o=[f.includes('i')&&'Pattern.CASE_INSENSITIVE',f.includes('m')&&'Pattern.MULTILINE',f.includes('s')&&'Pattern.DOTALL',f.includes('u')&&'Pattern.UNICODE_CHARACTER_CLASS'].filter(Boolean);const lit=JSON.stringify(p),oa=o.length?', '+o.join(' | '):'';
+    return 'import java.util.regex.*;\n\nPattern pattern = Pattern.compile('+lit+oa+');\nMatcher m = pattern.matcher(text);\n'+(r?'String result = m.'+(f.includes('g')?'replaceAll':'replaceFirst')+'('+JSON.stringify(r.replace(/\$<(\w+)>/g,'${$1}'))+');':(f.includes('g')?'while (m.find()) {\n    System.out.println(m.start() + ": " + m.group());\n}':'if (m.find()) System.out.println(m.group());'))}]
+};
+$('langTabs').innerHTML=Object.entries(LANGS).map(([k,v])=>'<button type="button" data-lang="'+k+'" id="lang-'+k+'">'+v[0]+'</button>').join('');
+$('langTabs').querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;save();renderCode($('pattern').value,flags(),$('replace').value)});
+function renderCode(p,f,r){$('langTabs').querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('on',b.dataset.lang===lang));$('codeOut').textContent=p?LANGS[lang][1](p,f,r):'// Type a pattern first.'}
+
+// ---------------------------------------------------------------- AI
+MigaAI.mount($('aiBox'));
+let abort=null;
+const SYS_WRITE='You write regular expressions for JavaScript (ECMAScript 2022). Reply with JSON only: {"pattern":"…","flags":"g…","explanation":"two or three short sentences in the user\'s language","test":"5-8 lines of example text: lines that should match and lines that should not","replace":""}. The pattern must be valid in new RegExp(pattern, flags) with no surrounding slashes. Prefer readable patterns, \\b word boundaries, named groups for parts the user mentions, and avoid catastrophic backtracking. Fill "replace" only if the user asks to replace or reformat something, using $1 or $<name>.';
+const SYS_EXPLAIN='You explain regular expressions to non-experts. Answer in the same language as the user\'s description if one is given, otherwise in English. Use short paragraphs and a bulleted list: first one sentence saying what the whole pattern is for, then each important part, then any surprises or bugs (for example text it would wrongly match or miss) with a fixed pattern if needed. Plain text, no Markdown headings, no code fences. Keep it under 220 words.';
+function aiBusy(on,label){$('writeBtn').disabled=$('explainBtn').disabled=on;$('cancelAi').hidden=!on;if(on){$('aiOut').classList.remove('hidden');$('aiOut').innerHTML='<span class="muted">'+esc(label)+'</span>'}}
+$('cancelAi').onclick=()=>{if(abort)abort.abort()};
+$('writeBtn').onclick=async()=>{
+  const d=$('describe').value.trim();if(!d){$('describe').focus();$('aiOut').classList.remove('hidden');$('aiOut').textContent='First describe what you want to match.';return}
+  abort=new AbortController();aiBusy(true,'Writing your regex…');
+  try{const reply=await MigaAI.ask(SYS_WRITE,'What to match: '+d+($('text').value.trim()?'\n\nSome of my text:\n'+$('text').value.slice(0,1500):''),{signal:abort.signal});
+    const j=MigaAI.json(reply);if(!j||!j.pattern)throw new Error('The AI did not send a pattern. Try describing it differently.');
+    const f=String(j.flags||'g').replace(/[^gimsuy]/g,'');new RegExp(j.pattern,f);
+    load(j.pattern,f,$('text').value.trim()?null:String(j.test||''),j.replace?String(j.replace):null);
+    $('aiOut').innerHTML='<p><b>Pattern:</b> <code class="mono">/'+esc(j.pattern)+'/'+esc(f)+'</code></p><p>'+esc(j.explanation||'')+'</p><p class="muted">It is loaded above — check the highlighted matches before you use it.</p>';
+  }catch(e){$('aiOut').innerHTML=e.name==='AbortError'?'<span class="muted">Stopped.</span>':'⚠ '+esc(e.message)}
+  finally{aiBusy(false);abort=null}
+};
+$('explainBtn').onclick=async()=>{
+  const p=$('pattern').value;if(!p){$('aiOut').classList.remove('hidden');$('aiOut').textContent='Type or load a pattern first.';return}
+  abort=new AbortController();aiBusy(true,'Explaining…');
+  try{const reply=await MigaAI.ask(SYS_EXPLAIN,'Pattern: /'+p+'/'+flags()+($('describe').value.trim()?'\nWhat I want it to do: '+$('describe').value.trim():'')+($('text').value.trim()?'\nSample text:\n'+$('text').value.slice(0,1500):''),{signal:abort.signal});
+    $('aiOut').innerHTML=esc(reply.replace(/```[a-z]*\n?|```/g,'').replace(/\*\*(.+?)\*\*/g,'$1').trim()).split(/\n{2,}/).map(par=>'<p>'+par.replace(/\n/g,'<br>')+'</p>').join('');
+  }catch(e){$('aiOut').innerHTML=e.name==='AbortError'?'<span class="muted">Stopped.</span>':'⚠ '+esc(e.message)}
+  finally{aiBusy(false);abort=null}
+};
+
+// ---------------------------------------------------------------- wiring
+let deb=0;['pattern','text','replace'].forEach(id=>$(id).addEventListener('input',()=>{clearTimeout(deb);deb=setTimeout(run,id==='pattern'?80:150)}));
+document.querySelectorAll('[data-flag]').forEach(c=>c.onchange=run);
+const copy=(txt,btn)=>{(navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).catch(()=>{const ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove()}).finally(()=>{const o=btn.textContent;btn.textContent='✓ Copied';setTimeout(()=>btn.textContent=o,1400)})};
+$('copyCode').onclick=()=>copy($('codeOut').textContent,$('copyCode'));
+$('copyResult').onclick=()=>copy($('replaced').textContent,$('copyResult'));
+$('shareBtn').onclick=()=>{const q=new URLSearchParams({p:$('pattern').value,f:flags()});if($('replace').value)q.set('r',$('replace').value);if($('text').value.length<=1500)q.set('t',$('text').value);copy(location.origin+location.pathname+'#'+q.toString(),$('shareBtn'))};
+const hash=new URLSearchParams(location.hash.slice(1));
+if(hash.has('p'))load(hash.get('p'),hash.get('f')||'g',hash.get('t')||'',hash.get('r')||'');
+else if(ST.p!=null)load(ST.p,ST.f||'g',ST.t||'',ST.r||'');
+else{const l=LIB[2];load(l[1],l[2],l[3],'')}
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -468,6 +468,57 @@ S('redact-forge.html', {
   }
 });
 
+S('voice-forge.html', {
+  title: 'Voice Forge', subtitle: 'Turn a script into a natural voice-over',
+  intro: 'Welcome to Voice Forge. Paste a script, choose a voice, and download a natural voice-over as an MP3, for free and without uploading anything.',
+  async run(h, page) {
+    await h.step('Paste or type your script. Here is a short advert for a bakery. An empty line between paragraphs becomes a pause.', async () => { await page.waitForSelector('#lang option[value="en_US"]', { state: 'attached', timeout: 60000 }); await h.click('#exampleBtn'); });
+    await h.step('Choose the language. There are more than thirty-five, from English and Swedish to Arabic, Chinese and Swahili.', () => h.point('#lang'));
+    await h.step('Then pick a voice. Natural voices sound best, and fast ones are smaller to download.', async () => { await h.select('#voice', 'en_US-lessac-medium'); });
+    await h.step('Press Make the voice-over. The first time, the voice is downloaded once and kept on your device, so next time it starts at once, even offline.', () => h.click('#speakBtn'));
+    await h.skip('Skipping ahead while the voice downloads and speaks', () => page.waitForSelector('#resultPanel:not(.hidden)', { timeout: 300000 }));
+    await h.step('Here is your voice-over. Listen to it right here.', () => h.point('#player'));
+    await h.step('Download it as an MP3 or a WAV file, and use it as narration in your videos, slides or podcast.', () => h.point('#mp3Btn'));
+    await h.sampleDownload('#mp3Btn', 'Voice-over made in this video');
+    await h.step('Voices you have used are listed here, and you can remove them to free up space.', async () => { await h.scroll('#savedPanel', 'center'); await h.point('#saved'); });
+  }
+});
+
+S('vector-forge.html', {
+  title: 'Vector Forge', subtitle: 'Turn a PNG or JPG logo into a sharp SVG',
+  intro: 'Welcome to Vector Forge. It turns a logo, icon or drawing saved as a picture into a sharp vector that stays crisp at any size.',
+  async run(h, page) {
+    await h.step('Open a PNG or JPG, drop it on the page, or paste it. Here is a small, slightly blurry logo, like one saved from a website.', async () => { await h.click('#exampleBtn'); await page.waitForSelector('#svgStage svg'); });
+    await h.step('On the right is the vector version. It is made of smooth shapes instead of pixels.', () => h.point('#svgStage'));
+    await h.step('Zoom in to compare. The picture gets blurry, but the vector stays sharp.', () => h.click('#zoomBtn'));
+    await h.wait(1200);
+    await h.click('#zoomBtn');
+    await h.step('Choose a starting point: a logo, black and white, a drawing or signature, a detailed picture, or a poster effect.', async () => { await h.scroll('#settingsPanel', 'start'); await h.click('#preset-bw'); await h.wait(900); await h.click('#preset-logo'); });
+    await h.step('Fewer colors give a cleaner, smaller file. Detail decides how closely it follows the edges, and Remove specks clears away dust.', () => h.point('#colors'));
+    await h.step('Tick Remove the background, and the logo can sit on any color.', () => h.check('#removeBg'));
+    await h.step('Every color in the vector is listed here. Click one to change it, or leave it out.', () => h.point('#swatches'));
+    await h.scroll('#mainPanel', 'start');
+    await h.step('Download the SVG for websites, printing or cutting machines, copy its code, or save a big PNG.', () => h.point('#downloadBtn'));
+    await h.sampleDownload('#downloadBtn', 'SVG made in this video');
+  }
+});
+
+S('regex-forge.html', {
+  title: 'Regex Forge', subtitle: 'Test, understand and write regular expressions',
+  intro: 'Welcome to Regex Forge. Regular expressions find patterns in text, like dates, emails or prices. Here you can test them, understand them, and even have one written for you.',
+  async run(h, page) {
+    await h.step('Type a pattern, or start from a common one. Let us pick Price.', () => h.click('#lib-6'));
+    await h.step('Every match in the test text lights up instantly, and the count is shown at the top.', () => h.point('#hl'));
+    await h.step('What it means explains each part of the pattern in plain English, and Match details lists every match with its groups.', async () => { await h.scroll('#detailPanel', 'start'); await h.point('#explain'); await h.wait(600); await h.point('#table'); });
+    await h.step('To find and replace, type a replacement. Here we move the amount in front of the currency.', async () => { await h.scroll('#testPanel', 'start'); await h.type('#replace', '$<amount> $<currency>'); await h.point('#replaced'); });
+    await h.step('Do not know how to write it? Describe what you want, in any language, and press Write the regex for me.', async () => { await h.fill('#replace', ''); await h.fill('#text', ''); await h.scroll('#aiPanel', 'start'); await h.type('#describe', 'Swedish postal codes like 123 45 or 12345, but not longer numbers'); await h.click('#writeBtn'); });
+    await h.skip('Skipping ahead while the AI writes the pattern', () => page.waitForSelector('#writeBtn:not([disabled])', { timeout: 120000 }));
+    await h.step('The AI writes the pattern, explains it, and loads it with example text, so you can check the matches yourself.', () => h.point('#aiOut'));
+    await h.step('Finally, copy ready code for JavaScript, Python, PHP, C sharp or Java.', async () => { await h.scroll('#codePanel', 'start'); await h.click('#lang-py'); });
+    await h.sampleShot('#codePanel', 'Code made in this video');
+  }
+});
+
 S('virus-check-forge.html', {
   title: 'Virus Check Forge', subtitle: 'Is this file or link safe to open?',
   intro: 'Welcome to Virus Check Forge. Before you open an email attachment, a download or a link, check it for the tricks that malware uses.',
