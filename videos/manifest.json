@@ -1253,6 +1253,28 @@
    "kind": "text"
   }
  },
+ "regex-forge.html": {
+  "title": "Regex Forge",
+  "video": "videos/regex-forge.mp4",
+  "poster": "videos/regex-forge.jpg",
+  "duration": 93,
+  "transcript": [
+   "Welcome to Regex Forge. Regular expressions find patterns in text, like dates, emails or prices. Here you can test them, understand them, and even have one written for you.",
+   "Type a pattern, or start from a common one. Let us pick Price.",
+   "Every match in the test text lights up instantly, and the count is shown at the top.",
+   "What it means explains each part of the pattern in plain English, and Match details lists every match with its groups.",
+   "To find and replace, type a replacement. Here we move the amount in front of the currency.",
+   "Do not know how to write it? Describe what you want, in any language, and press Write the regex for me.",
+   "The AI writes the pattern, explains it, and loads it with example text, so you can check the matches yourself.",
+   "Finally, copy ready code for JavaScript, Python, PHP, C sharp or Java.",
+   "Now it is your turn. Open Regex Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/regex-forge.png",
+   "label": "Code made in this video",
+   "kind": "image"
+  }
+ },
  "repurpose-forge.html": {
   "title": "Repurpose Forge",
   "video": "https://videos.migabuilder.com/repurpose-forge.mp4",
@@ -1441,6 +1463,29 @@
    "kind": "text"
   }
  },
+ "vector-forge.html": {
+  "title": "Vector Forge",
+  "video": "videos/vector-forge.mp4",
+  "poster": "videos/vector-forge.jpg",
+  "duration": 103,
+  "transcript": [
+   "Welcome to Vector Forge. It turns a logo, icon or drawing saved as a picture into a sharp vector that stays crisp at any size.",
+   "Open a PNG or JPG, drop it on the page, or paste it. Here is a small, slightly blurry logo, like one saved from a website.",
+   "On the right is the vector version. It is made of smooth shapes instead of pixels.",
+   "Zoom in to compare. The picture gets blurry, but the vector stays sharp.",
+   "Choose a starting point: a logo, black and white, a drawing or signature, a detailed picture, or a poster effect.",
+   "Fewer colors give a cleaner, smaller file. Detail decides how closely it follows the edges, and Remove specks clears away dust.",
+   "Tick Remove the background, and the logo can sit on any color.",
+   "Every color in the vector is listed here. Click one to change it, or leave it out.",
+   "Download the SVG for websites, printing or cutting machines, copy its code, or save a big PNG.",
+   "Now it is your turn. Open Vector Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/vector-forge.svg",
+   "label": "SVG made in this video",
+   "kind": "image"
+  }
+ },
  "video-forge.html": {
   "title": "Video Forge",
   "video": "https://videos.migabuilder.com/video-forge.mp4",
@@ -1458,6 +1503,28 @@
    "file": "samples/video-forge.webm",
    "label": "Video made in this video",
    "kind": "video"
+  }
+ },
+ "voice-forge.html": {
+  "title": "Voice Forge",
+  "video": "videos/voice-forge.mp4",
+  "poster": "videos/voice-forge.jpg",
+  "duration": 89,
+  "transcript": [
+   "Welcome to Voice Forge. Paste a script, choose a voice, and download a natural voice-over as an MP3, for free and without uploading anything.",
+   "Paste or type your script. Here is a short advert for a bakery. An empty line between paragraphs becomes a pause.",
+   "Choose the language. There are more than thirty-five, from English and Swedish to Arabic, Chinese and Swahili.",
+   "Then pick a voice. Natural voices sound best, and fast ones are smaller to download.",
+   "Press Make the voice-over. The first time, the voice is downloaded once and kept on your device, so next time it starts at once, even offline.",
+   "Here is your voice-over. Listen to it right here.",
+   "Download it as an MP3 or a WAV file, and use it as narration in your videos, slides or podcast.",
+   "Voices you have used are listed here, and you can remove them to free up space.",
+   "Now it is your turn. Open Voice Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/voice-forge.mp3",
+   "label": "Voice-over made in this video",
+   "kind": "audio"
   }
  },
  "website-builder.html": {

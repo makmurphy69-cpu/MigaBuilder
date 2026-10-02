@@ -44,8 +44,9 @@ textarea.src{min-height:240px;font:13px/1.5 'IBM Plex Mono',monospace}
     <label><input type="checkbox" id="ic"> Ignore upper/lower case</label>
     <label><input type="checkbox" id="iw"> Ignore extra spaces</label>
     <label><input type="checkbox" id="only"> Show changed lines only</label>
+    <label title="Pretty-prints both sides and sorts object keys, so only real data changes show up"><input type="checkbox" id="json"> JSON: format and sort keys first</label>
   </div>
-  <div class="actions"><button class="primary" id="go" data-primary>Compare</button><button class="secondary" id="swap">⇄ Swap</button><button class="secondary" id="ex">Load example</button><button class="secondary" id="clr">Clear</button></div>
+  <div class="actions"><button class="primary" id="go" data-primary>Compare</button><button class="secondary" id="swap">⇄ Swap</button><button class="secondary" id="ex">Load example</button><button class="secondary" id="exJson">Load JSON example</button><button class="secondary" id="fmt" title="Pretty-print the JSON in both boxes">{ } Format JSON</button><button class="secondary" id="clr">Clear</button></div>
   <p class="privacy" style="margin-top:12px">Nothing is uploaded — the comparison runs in your browser.</p>
 </section>
 <section class="panel hidden" id="out">
@@ -69,6 +70,9 @@ function diff(A,B,eq){
 function back(trace,A,B,max,D){const out=[];let x=A.length,y=B.length;
   for(let d=D;d>0;d--){const v=trace[d],k=x-y,pk=(k===-d||(k!==d&&v[k-1+max]<v[k+1+max]))?k+1:k-1,px=v[pk+max],py=px-pk;while(x>px&&y>py){out.push([' ',A[--x],B[--y]])}if(x===px)out.push(['+',null,B[--y]]);else out.push(['-',A[--x],null])}
   while(x>0&&y>0)out.push([' ',A[--x],B[--y]]);return out.reverse()}
+// JSON with sorted keys and 2-space indentation; null when the text is not JSON.
+function sortKeys(v){return Array.isArray(v)?v.map(sortKeys):v&&typeof v==='object'?Object.keys(v).sort().reduce((o,k)=>(o[k]=sortKeys(v[k]),o),{}):v}
+function prettyJSON(t,sort){try{const v=JSON.parse(t);return JSON.stringify(sort?sortKeys(v):v,null,2)}catch(e){return null}}
 function norm(s){if($('ic').checked)s=s.toLowerCase();if($('iw').checked)s=s.replace(/\s+/g,' ').trim();return s}
 const eqL=(a,b)=>norm(a)===norm(b);
 function words(s){return s.match(/\s+|[\p{L}\p{N}_]+|[^\s\p{L}\p{N}_]/gu)||[]}
@@ -76,10 +80,12 @@ function inline(a,b){const ops=diff(words(a),words(b),(x,y)=>norm(x)===norm(y));
   ops.forEach(([o,x,y])=>{if(o===' '){L+=esc(x);R+=esc(y)}else if(o==='-')L+='<del>'+esc(x)+'</del>';else R+='<ins>'+esc(y)+'</ins>'});return [L,R]}
 let lastOps=null;
 function compare(){
-  const A=$('a').value.replace(/\r\n?/g,'\n'),B=$('b').value.replace(/\r\n?/g,'\n');if(!A&&!B)return;
+  let A=$('a').value.replace(/\r\n?/g,'\n'),B=$('b').value.replace(/\r\n?/g,'\n');if(!A&&!B)return;
+  let note='';if($('json').checked){const ja=A.trim()?prettyJSON(A,true):'',jb=B.trim()?prettyJSON(B,true):'';
+    if(ja==null||jb==null)note='<span class="s-del">'+(ja==null&&jb==null?'Neither side is':ja==null?'The original is not':'The changed version is not')+' valid JSON, so it is compared as plain text</span>';else{A=ja;B=jb;note='<span class="s-same">JSON formatted, keys sorted</span>'}}
   const view=document.querySelector('[name=view]:checked').value;$('out').classList.remove('hidden');
   if(view==='prose'){const ops=diff(words(A),words(B),(x,y)=>norm(x)===norm(y));let h='',ad=0,dl=0;ops.forEach(([o,x,y])=>{if(o===' ')h+=esc(y);else if(o==='-'){h+='<del>'+esc(x)+'</del>';if(x.trim())dl++}else{h+='<ins>'+esc(y)+'</ins>';if(y.trim())ad++}});
-    $('sum').innerHTML='<span class="s-add">+'+ad+' words added</span><span class="s-del">−'+dl+' words removed</span>';$('diff').innerHTML='<div class="prose">'+h+'</div>';lastOps=null;return}
+    $('sum').innerHTML='<span class="s-add">+'+ad+' words added</span><span class="s-del">−'+dl+' words removed</span>'+note;$('diff').innerHTML='<div class="prose">'+h+'</div>';lastOps=null;return}
   const la=A.split('\n'),lb=B.split('\n');if(la.length*lb.length>5e7&&Math.abs(la.length-lb.length)>20000){alert('These texts are too different and too long to compare line by line.');return}
   let ops=diff(la,lb,eqL);
   // pair up adjacent deletions and additions as "changed" lines for word-level highlighting
@@ -88,7 +94,7 @@ function compare(){
     else{rows.push({t:ops[i][0]==='+'?'add':'same',a:ops[i][1],b:ops[i][2]});i++}}
   let na=0,nb=0;rows.forEach(r=>{if(r.a!=null)r.na=++na;if(r.b!=null)r.nb=++nb});
   const c={add:0,del:0,chg:0,same:0};rows.forEach(r=>c[r.t]++);
-  $('sum').innerHTML='<span class="s-add">+'+c.add+' added</span><span class="s-del">−'+c.del+' removed</span><span class="s-chg">~'+c.chg+' changed</span><span class="s-same">'+c.same+' unchanged</span>'+(c.add+c.del+c.chg===0?'<span class="s-same">✓ The texts are identical'+($('ic').checked||$('iw').checked?' (with your ignore settings)':'')+'</span>':'');
+  $('sum').innerHTML='<span class="s-add">+'+c.add+' added</span><span class="s-del">−'+c.del+' removed</span><span class="s-chg">~'+c.chg+' changed</span><span class="s-same">'+c.same+' unchanged</span>'+(c.add+c.del+c.chg===0?'<span class="s-same">✓ The texts are identical'+($('ic').checked||$('iw').checked?' (with your ignore settings)':'')+'</span>':'')+note;
   const only=$('only').checked;let shown=rows;if(only){const keep=new Set();rows.forEach((r,i)=>{if(r.t!=='same')for(let k=i-2;k<=i+2;k++)keep.add(k)});shown=rows.filter((r,i)=>keep.has(i))}
   let h='<table>';
   shown.forEach(r=>{let L=r.a!=null?esc(r.a):'',R=r.b!=null?esc(r.b):'';if(r.t==='chg')[L,R]=inline(r.a,r.b);
@@ -98,10 +104,14 @@ function compare(){
       if(r.b!=null&&r.t!=='same')h+='<tr class="add"><td class="n"></td><td class="n">'+r.nb+'</td><td class="sign">+</td><td class="t">'+R+'</td></tr>'}});
   $('diff').innerHTML=h+'</table>';lastOps=rows;
 }
-$('go').onclick=compare;document.querySelectorAll('[name=view],#ic,#iw,#only').forEach(e=>e.onchange=()=>{if(!$('out').classList.contains('hidden'))compare()});
+$('go').onclick=compare;document.querySelectorAll('[name=view],#ic,#iw,#only,#json').forEach(e=>e.onchange=()=>{if(!$('out').classList.contains('hidden'))compare()});
+$('fmt').onclick=()=>{const bad=[];[['a','Original'],['b','Changed']].forEach(([id,n])=>{const v=$(id).value;if(!v.trim())return;const j=prettyJSON(v,false);if(j==null)bad.push(n);else $(id).value=j});if(bad.length)alert(bad.join(' and ')+(bad.length>1?' are':' is')+' not valid JSON.');else compare()};
+$('exJson').onclick=()=>{$('a').value='{"name":"Sunrise Bakery","plan":"basic","price":9,"features":["website","menu"],"owner":{"email":"anna@example.com","phone":"+46 70 123 45 67"}}';
+  $('b').value='{\n  "owner": {"phone": "+46 70 123 45 67", "email": "anna@sunrisebakery.com"},\n  "price": 12,\n  "name": "Sunrise Bakery",\n  "plan": "pro",\n  "features": ["website", "menu", "online orders"]\n}';
+  $('json').checked=true;compare()};
 $('swap').onclick=()=>{const t=$('a').value;$('a').value=$('b').value;$('b').value=t;compare()};
 $('clr').onclick=()=>{$('a').value=$('b').value='';$('out').classList.add('hidden')};
-$('ex').onclick=()=>{$('a').value='Rental agreement\n\nThe tenant will pay 800 USD rent on the 1st day of each month.\nThe deposit is two months of rent.\nPets are not allowed.\nThe agreement lasts 12 months.';$('b').value='Rental agreement\n\nThe tenant will pay 850 USD rent on the 5th day of each month.\nThe deposit is two months of rent.\nThe agreement lasts 12 months and renews automatically.\nThe landlord must give 30 days notice before visits.';compare()};
+$('ex').onclick=()=>{$('json').checked=false;$('a').value='Rental agreement\n\nThe tenant will pay 800 USD rent on the 1st day of each month.\nThe deposit is two months of rent.\nPets are not allowed.\nThe agreement lasts 12 months.';$('b').value='Rental agreement\n\nThe tenant will pay 850 USD rent on the 5th day of each month.\nThe deposit is two months of rent.\nThe agreement lasts 12 months and renews automatically.\nThe landlord must give 30 days notice before visits.';compare()};
 [['fa','a'],['fb','b']].forEach(([f,t])=>{$(f).onchange=async e=>{const x=e.target.files[0];if(x)$(t).value=await x.text()};const ta=$(t);ta.addEventListener('dragover',e=>e.preventDefault());ta.addEventListener('drop',async e=>{const x=e.dataTransfer.files[0];if(x){e.preventDefault();ta.value=await x.text()}})});
 $('dl').onclick=()=>{const html='<!doctype html><html><head><meta charset="utf-8"><title>Text comparison</title><style>body{font:14px sans-serif;margin:20px}table{border-collapse:collapse;width:100%;font:13px monospace}td{vertical-align:top;padding:1px 8px;white-space:pre-wrap}.n{color:#999;text-align:right}.del{background:#fdecea}.add{background:#e9f7ee}ins{background:#a8e2bd;text-decoration:none}del{background:#f4b3a7}.prose{line-height:1.8;white-space:pre-wrap}</style></head><body><h1>Text comparison</h1><p>'+$('sum').innerText+'</p>'+$('diff').innerHTML+'<p><small>Made with MigaBuilder Text Compare</small></p></body></html>';
   const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download='text-comparison.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)};
