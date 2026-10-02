@@ -1019,17 +1019,29 @@ S('talk-forge.html', {
   title: 'Talk Forge', subtitle: 'Make a photo talk',
   intro: 'Welcome to Talk Forge. Make a photo speak, with moving lips.',
   async run(h, page) {
-    await h.step('Add a photo. Faces are found automatically, or you can place the mouth yourself.', () => h.upload('#photoInput', 'portrait.png'));
-    await h.step('Here we place it by hand: press Place manually, then click on the mouth.', async () => {
+    await h.step('Add a photo. Faces are found automatically, or you can place a face yourself.', () => h.upload('#photoInput', 'portrait.png'));
+    await h.step('Here we place it by hand: press Place manually, then click the left eye, the right eye and the mouth.', async () => {
       await h.click('#manualAddBtn');
-      const hs = await page.locator('canvas:visible, img:visible').evaluateAll(cs => cs.map((c, i) => { const r = c.getBoundingClientRect(); return [r.width * r.height, i]; }));
-      hs.sort((a, b) => b[0] - a[0]); const target = page.locator('canvas:visible, img:visible').nth(hs[0][1]); const bb = await target.boundingBox();
-      const x = bb.x + bb.width * 0.5, y = bb.y + bb.height * 0.61;
-      await page.evaluate(([x, y]) => { window.__tv.cursor(x, y); window.__tv.click(x, y); }, [x, y]); await page.mouse.click(x, y);
+      // portrait.png is 800×800: eyes at (338, 370) and (465, 370), mouth at (400, 498).
+      await page.locator('#stageCanvas').scrollIntoViewIfNeeded();
+      const box = await page.locator('#stageCanvas').boundingBox();
+      for (const [ix, iy] of [[338, 370], [465, 370], [400, 498]]) {
+        const x = box.x + ix * box.width / 800, y = box.y + iy * box.height / 800;
+        await page.evaluate(([x, y]) => { window.__tv.cursor(x, y); window.__tv.click(x, y); }, [x, y]);
+        await page.mouse.click(x, y); await h.wait(700);
+      }
     });
-    await h.step('Type what the person says, or record your own voice.', () => h.type('textarea:visible', 'Hello! Welcome to Sunrise Bakery. Fresh bread every morning!'));
-    await h.step('Pick a voice, and press Preview to watch the lips move.', () => h.click('#previewBtn', { timeout: 8000 }).catch(() => h.point('#previewBtn')));
-    await h.wait(2500);
+    await h.step('Choose who says the line, then type what they say, or record your own voice.', async () => {
+      await h.select('.line-face-select', { index: 0 });
+      await h.type('textarea:visible', 'Hello! Welcome to Sunrise Bakery. We bake fresh bread, warm rolls and sweet cakes every single morning. Come and say hello!');
+    });
+    await h.step('Pick a voice, and press Preview to watch the lips move.', async () => {
+      await h.select('#voiceSelect', '1');
+      await h.click('#previewBtn', { timeout: 8000 }).catch(() => h.point('#previewBtn'));
+      // Bring the photo back into view so the moving lips are visible.
+      await h.scroll('#stageCanvas', 'center');
+    });
+    await h.wait(1500);
     await h.sampleShot('#previewBtn >> xpath=ancestor::*[self::section or self::main or self::div][3]', 'Talking photo set up in this video').catch(() => h.sampleShot('body', 'Talking photo set up in this video'));
     await h.step('When you are happy, record it and download the video.', () => h.point('#recordBtn'));
   }
