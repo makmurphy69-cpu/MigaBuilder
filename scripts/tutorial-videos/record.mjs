@@ -8,10 +8,14 @@
  * performs the steps with a visible pointer, highlight and captions, speaks
  * each caption with the Piper text-to-speech voice, cuts out long waits (for
  * example while the AI writes a website), and writes:
- *   videos/<tool>.mp4        narrated video (H.264 + AAC)
- *   videos/<tool>.jpg        poster frame
+ *   <videos repo>/<tool>.mp4 narrated video (H.264 + AAC)
+ *   <videos repo>/<tool>.jpg poster frame
  *   samples/<tool>.*         the result made in the video
  *   videos/manifest.json     what tutorials.js and sample-viewer.html read
+ *
+ * The videos and posters go into a clone of makmurphy69-cpu/migabuilder-videos
+ * (../migabuilder-videos next to this repository, or VIDEOS_REPO=/path), which
+ * GitHub Pages serves at VIDEO_BASE; the manifest links to them there.
  *
  * Requirements: Node 18+, Playwright with Chromium, Python 3 with `piper-tts`
  * and `imageio-ffmpeg` (pip install piper-tts imageio-ffmpeg). The voice model
@@ -29,7 +33,10 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../..');
 const CACHE = path.join(HERE, '.cache');
-const VIDEOS = path.join(ROOT, 'videos');
+// Videos live in their own repository so re-recording does not grow this one.
+const VIDEOS = path.resolve(process.env.VIDEOS_REPO || path.join(ROOT, '..', 'migabuilder-videos'));
+const VIDEO_BASE = 'https://makmurphy69-cpu.github.io/migabuilder-videos/';
+if (!fs.existsSync(path.join(VIDEOS, '.git'))) { console.error('Clone the videos repository first:\n  git clone https://github.com/makmurphy69-cpu/migabuilder-videos ' + VIDEOS + '\n(or set VIDEOS_REPO=/path/to/clone)'); process.exit(1); }
 const SAMPLES = path.join(ROOT, 'samples');
 const PROXY = 'https://migabuilder-gemini.makmurphy69.workers.dev';
 const VOICE = process.env.PIPER_VOICE || path.join(CACHE, 'voices', 'en_US-lessac-high.onnx');
@@ -262,7 +269,7 @@ async function record(browser, file, sc, baseUrl) {
   if (error && !process.env.KEEP_FAILED) { fs.rmSync(raw, { force: true }); return { tool, error: error.message }; }
   const info = await encode(tool, raw, clips, skips, total);
   fs.rmSync(raw, { force: true });
-  return { tool, title: sc.title, video: 'videos/' + tool + '.mp4', poster: 'videos/' + tool + '.jpg', duration: Math.round(info.duration), transcript, sample, error: error && error.message };
+  return { tool, title: sc.title, video: VIDEO_BASE + tool + '.mp4', poster: VIDEO_BASE + tool + '.jpg', duration: Math.round(info.duration), transcript, sample, error: error && error.message };
 }
 function cors() { return { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Allow-Methods': 'POST, OPTIONS' }; }
 function kindOf(ext) { ext = ext.toLowerCase(); return ['.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg'].includes(ext) ? 'image' : ['.html', '.htm'].includes(ext) ? 'html' : ext === '.pdf' ? 'pdf' : ['.mp3', '.wav', '.ogg', '.m4a'].includes(ext) ? 'audio' : ['.mp4', '.webm'].includes(ext) ? 'video' : ['.txt', '.md', '.csv', '.json'].includes(ext) ? 'text' : 'download'; }
@@ -302,7 +309,7 @@ const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-
 const srv = await serve();
 const baseUrl = 'http://127.0.0.1:' + srv.address().port;
 await ensureAssets(browser, FFMPEG, path.join(HERE, 'assets'));
-const manifestFile = process.env.MANIFEST || path.join(VIDEOS, 'manifest.json');
+const manifestFile = process.env.MANIFEST || path.join(ROOT, 'videos', 'manifest.json');
 const failed = [];
 for (const f of list) {
   const r = await record(browser, f, SCENARIOS[f], baseUrl);

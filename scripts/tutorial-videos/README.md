@@ -12,14 +12,20 @@ reads `videos/manifest.json` and adds the video, the transcript and a
 
 | File | What it is |
 | --- | --- |
-| `videos/<tool>.mp4` | The narrated video (1280×720, H.264 + AAC) |
-| `videos/<tool>.jpg` | Poster frame |
-| `videos/manifest.json` | Title, length, transcript and sample for every tool |
+| `<tool>.mp4` in the videos repository | The narrated video (1280×720, H.264 + AAC) |
+| `<tool>.jpg` in the videos repository | Poster frame |
+| `videos/manifest.json` (this repository) | Title, length, transcript, sample, and the links to the video and poster |
+
+The videos and posters live in their own repository,
+[makmurphy69-cpu/migabuilder-videos](https://github.com/makmurphy69-cpu/migabuilder-videos),
+served by GitHub Pages at `https://makmurphy69-cpu.github.io/migabuilder-videos/`.
+That keeps this repository small when videos are recorded again.
 | `samples/<tool>.*` | What the tool made in the video (website, game, PDF, image, audio…) |
 
 ## Re-recording
 
 ```bash
+git clone https://github.com/makmurphy69-cpu/migabuilder-videos ../migabuilder-videos   # once; or set VIDEOS_REPO=/path
 pip install piper-tts imageio-ffmpeg        # voice + ffmpeg
 npm install -g playwright                   # or a local install; Chromium is required
 node scripts/tutorial-videos/record.mjs                      # every tool
@@ -57,8 +63,9 @@ Each `h.step(text, action)` speaks and captions `text` while running
 (files from `assets/`), `point` (move the pointer and highlight),
 `scroll`, `scrollBy`, `wait`, `skip` (cut a wait from the video),
 `sampleDownload`, `sampleShot` (screenshot of an element) and `sampleFile`.
-Then run the script for that tool, and commit the new files in `videos/` and
-`samples/`.
+Then run the script for that tool. Commit and push the new `<tool>.mp4` and
+`<tool>.jpg` in the videos repository first (wait a minute for GitHub Pages to
+publish them), then commit `videos/manifest.json` and `samples/` here.
 
 **Every new tool must have a video.** `node scripts/check-tool-videos.mjs`
 fails when a tool card on the homepage has no scenario, manifest entry, video

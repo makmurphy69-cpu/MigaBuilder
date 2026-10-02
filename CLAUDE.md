@@ -18,16 +18,20 @@ A tool is not finished until **all** of these are done, in the same pull request
    scenario to `scripts/tutorial-videos/scenarios.mjs` and record it:
 
    ```bash
+   git clone https://github.com/makmurphy69-cpu/migabuilder-videos ../migabuilder-videos
    pip install piper-tts imageio-ffmpeg
    node scripts/tutorial-videos/record.mjs <tool>
    ```
 
-   Commit `videos/<tool>.mp4`, `videos/<tool>.jpg`, `samples/<tool>.*` and the
-   updated `videos/manifest.json`. Watch a few frames before committing. See
+   The video and poster are written to the **migabuilder-videos** repository
+   (served by GitHub Pages), not this one. Watch a few frames, then commit and
+   push `<tool>.mp4` and `<tool>.jpg` there first. Then commit `samples/<tool>.*`
+   and the updated `videos/manifest.json` here. See
    `scripts/tutorial-videos/README.md`.
 4. Run `node scripts/check-tool-videos.mjs`. It must pass — the
    *Tool explanation videos* GitHub check runs it on every pull request and
-   fails when any homepage tool is missing its video.
+   fails when any homepage tool is missing its video (it checks that the video
+   and poster are published on GitHub Pages).
 5. Run `node scripts/smoke-test.mjs <tool>` (or with no argument for every
    page). It opens the page in Chromium and fails on JavaScript errors or
    missing files; the *Page smoke test* GitHub check runs it on every pull
