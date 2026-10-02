@@ -276,6 +276,7 @@
     'jam-forge': ['bearden', 'frog', 'mic', 'headphones'],
     'policy-forge': ['lewitt', 'owl', 'scroll', 'bowler'],
     'redact-forge': ['holzer', 'ghost', 'pen'],
+    'virus-check-forge': ['bosch', 'octopus', 'lens'],
     'flashcard-forge': ['kusama', 'mushroom', 'book'],
     'form-forge': ['rodchenko', 'cactus', 'pencil'],
     'game-forge': ['miro', 'dragon', 'gamepad'],

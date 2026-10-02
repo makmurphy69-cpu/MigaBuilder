@@ -657,7 +657,7 @@
     <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
   </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
   <p class="hero-copy" data-i18n="heroSubtitle">Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.</p>
-  <div class="trust-row"><span data-i18n="trustTools">66 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
+  <div class="trust-row"><span data-i18n="trustTools">67 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
@@ -739,6 +739,7 @@
       <a class="tool-card" href="everyday-forge.html"><span class="tool-icon">📈</span><span><strong>Everyday Forge</strong><small data-i18n="d:everyday-forge">Create charts, improve writing, generate passwords and convert values.</small></span></a>
       <a class="tool-card" href="utility-forge.html"><span class="tool-icon">🧰</span><span><strong>Utility Forge</strong><small data-i18n="d:utility-forge">Convert CSV/JSON, combine text and verify files.</small></span></a>
       <a class="tool-card" href="redact-forge.html" data-keywords="redact anonymize anonymise log sanitizer remove api keys secrets tokens passwords personal data pii gdpr email ip address mask scrub before chatgpt claude bug report stack trace env file"><span class="tool-icon">🕶️</span><span><strong>Redact Forge</strong><small data-i18n="d:redact-forge">Hide API keys, passwords and personal data in logs before you share them or paste them into an AI.</small></span></a>
+      <a class="tool-card" href="virus-check-forge.html" data-keywords="virus check scan virus scanner malware checker antivirus online is this file safe attachment email download suspicious file exe disguised macro docm pdf javascript zip phishing link checker url scanner scam link fake website virustotal remove virus infected computer"><span class="tool-icon">🛡️</span><span><strong>Virus Check Forge</strong><small data-i18n="d:virus-check-forge">Check attachments, downloads and links for disguised programs, macros and phishing tricks.</small></span></a>
       <a class="tool-card" href="site-checkup.html"><span class="tool-icon">✅</span><span><strong>Website Checkup</strong><small data-i18n="d:site-checkup">Check HTML for SEO and accessibility problems.</small></span></a>
       <a class="tool-card" href="project-hub.html"><span class="tool-icon">🗂️</span><span><strong>Project Hub</strong><small data-i18n="d:project-hub">Manage and back up projects stored on this device.</small></span></a>
       <a class="tool-card" href="model-forge.html"><span class="tool-icon">🧊</span><span><strong>Model Forge</strong><small data-i18n="d:model-forge">Design 3D models and printable forms.</small></span></a>
@@ -857,7 +858,7 @@
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
     const popular=['pdf-forge.html','image-studio.html','grammar-forge.html','cv-forge.html','website-builder.html','ocr-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
-    document.getElementById('newTools').replaceChildren(...['jam-forge.html','policy-forge.html','redact-forge.html','focus-forge.html','3d-game-forge.html','memory-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['virus-check-forge.html','jam-forge.html','policy-forge.html','redact-forge.html','focus-forge.html','3d-game-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));
