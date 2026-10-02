@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vector Forge — convert PNG or JPG to SVG, vectorize a logo | MigaBuilder</title>
+<meta name="description" content="Free image to SVG converter: turn a PNG or JPG logo, icon, drawing or signature into a sharp, scalable SVG vector. Choose colors, remove the background, recolor and download. Runs only in your browser — nothing is uploaded.">
+<link rel="canonical" href="https://migabuilder.com/vector-forge.html">
+<meta property="og:title" content="Vector Forge — image to SVG in your browser | MigaBuilder">
+<meta property="og:description" content="Vectorize a logo, icon or drawing into a crisp SVG. Private, free and instant.">
+<meta property="og:url" content="https://migabuilder.com/vector-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="https://cdn.jsdelivr.net/npm/imagetracerjs@1.2.6/imagetracer_v1.2.6.js"></script>
+<style>
+main{max-width:1320px}
+.hidden{display:none!important}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.views h3{font:700 14px 'Space Grotesk';margin:0 0 6px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.stage{position:relative;height:420px;border:1px solid rgba(22,32,43,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;
+  background:#fff conic-gradient(#eef0f2 25%,#fff 0 50%,#eef0f2 0 75%,#fff 0) 0 0/20px 20px}
+.stage img,.stage svg{width:100%;height:100%;object-fit:contain}
+.stage .empty{color:#6b7782;font-size:14px;text-align:center;padding:20px}
+.stage.zoom img,.stage.zoom svg{width:300%;height:300%}
+.stage.zoom{overflow:auto;display:block}
+.presets{display:flex;gap:6px;flex-wrap:wrap}.presets button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600;color:var(--ink);font-size:13px}
+.presets button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.sliders{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 18px;margin-top:12px}
+.sliders label{display:flex;justify-content:space-between;font-size:13.5px;font-weight:600}.sliders input[type=range]{width:100%}
+.sliders small{display:block;color:#6b7782;font-size:12px;margin-top:-2px}
+.swatches{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.swatch{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:4px 8px;font:500 12px 'IBM Plex Mono',monospace}
+.swatch input[type=color]{width:28px;height:24px;border:none;padding:0;background:none;cursor:pointer}
+.swatch.off{opacity:.45;text-decoration:line-through}
+.swatch button{border:none;background:none;cursor:pointer;font-size:14px;padding:0 2px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.stats span{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:999px;padding:4px 10px;font-size:12.5px}
+.drop{outline:3px dashed var(--amber);outline-offset:3px}
+.busy{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.75);font-weight:700}
+.code{width:100%;min-height:120px;font:500 12px/1.5 'IBM Plex Mono',monospace}
+@media(max-width:820px){.views{grid-template-columns:1fr}.stage{height:300px}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Vector Forge</span></nav>
+<header class="masthead"><div><h1>Vector Forge</h1><p>Turn a PNG or JPG logo, icon, drawing or signature into a sharp SVG vector that stays crisp at any size. Everything happens in your browser.</p></div></header>
+<main>
+<section class="panel" id="mainPanel">
+  <div class="actions" style="margin-bottom:12px">
+    <label class="primary" style="display:inline-block;cursor:pointer"><input type="file" id="fileInput" hidden accept="image/png,image/jpeg,image/webp,image/gif,image/bmp">📂 Open an image</label>
+    <button class="secondary" id="exampleBtn">🧪 Try an example logo</button>
+    <button class="secondary" id="zoomBtn" aria-pressed="false">🔍 Zoom in to compare</button>
+  </div>
+  <div class="views">
+    <div><h3><span>Your image</span><span class="muted" id="inInfo"></span></h3><div class="stage" id="srcStage"><div class="empty">Open or drop a PNG, JPG or WebP here.<br>Logos, icons, clip art, line drawings and signatures work best.</div></div></div>
+    <div><h3><span>SVG vector</span><span class="muted" id="outInfo"></span></h3><div class="stage" id="svgStage"><div class="empty">The vector version appears here.</div></div></div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <div class="actions"><button class="primary" id="downloadBtn" disabled>⬇ Download SVG</button><button class="secondary" id="copyBtn" disabled>📋 Copy SVG code</button><button class="secondary" id="pngBtn" disabled>⬇ Download big PNG</button></div>
+</section>
+
+<section class="panel" id="settingsPanel">
+  <h2>Settings</h2>
+  <div class="field"><label>Start from</label>
+    <div class="presets" id="presets">
+      <button type="button" data-preset="logo" id="preset-logo">Logo or icon</button>
+      <button type="button" data-preset="bw" id="preset-bw">Black and white</button>
+      <button type="button" data-preset="sketch" id="preset-sketch">Drawing or signature</button>
+      <button type="button" data-preset="detailed" id="preset-detailed">Detailed picture</button>
+      <button type="button" data-preset="poster" id="preset-poster">Poster effect</button>
+    </div>
+  </div>
+  <div class="sliders">
+    <div><label for="colors">Colors <output id="colorsV"></output></label><input type="range" id="colors" min="2" max="32" step="1"><small>Fewer colors give a cleaner, smaller file.</small></div>
+    <div><label for="detail">Detail <output id="detailV"></output></label><input type="range" id="detail" min="0" max="10" step="1"><small>Higher follows the edges more closely.</small></div>
+    <div><label for="speckle">Remove specks <output id="speckleV"></output></label><input type="range" id="speckle" min="0" max="64" step="1"><small>Drops tiny shapes and noise.</small></div>
+    <div><label for="smooth">Smooth first <output id="smoothV"></output></label><input type="range" id="smooth" min="0" max="5" step="1"><small>Blurs JPG noise before tracing.</small></div>
+  </div>
+  <div style="margin-top:12px;display:flex;flex-direction:column;gap:6px;font-size:14px">
+    <label><input type="checkbox" id="removeBg"> Remove the background (makes it transparent)</label>
+    <label><input type="checkbox" id="straight"> Straight lines only (sharper corners, good for pixel art and geometric logos)</label>
+  </div>
+  <div class="field" style="margin-top:12px"><label>Colors in the SVG — click a color to change it, or ✕ to leave it out</label><div class="swatches" id="swatches"><span class="muted">Open an image first.</span></div></div>
+</section>
+
+<section class="panel" id="codePanel">
+  <details><summary style="cursor:pointer;font-weight:700">Show the SVG code</summary>
+    <textarea class="code" id="code" readonly spellcheck="false" style="margin-top:8px"></textarea>
+  </details>
+</section>
+
+<section class="panel">
+  <h2>Tips</h2>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;font-size:13.5px;line-height:1.5">
+    <div><b>🎯 Best results</b><br>Flat logos, icons and drawings with clear edges trace beautifully. Use the biggest, sharpest copy you have. Photos turn into a painted, poster-like look rather than an exact copy.</div>
+    <div><b>✂️ Clean files</b><br>Start with few colors, then add more only if parts are missing. Raise <i>Remove specks</i> if you see dust, and use <i>Smooth first</i> for blurry or compressed JPGs.</div>
+    <div><b>🔒 Private</b><br>Your image is never uploaded. Tracing runs in this page with the open-source ImageTracer library, so it also works offline once loaded.</div>
+  </div>
+</section>
+</main>
+<footer>Vector Forge · part of MigaBuilder · your images never leave this device</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const PRESETS={
+  logo:{colors:4,detail:6,speckle:8,smooth:0,straight:false},
+  bw:{colors:2,detail:6,speckle:8,smooth:0,straight:false},
+  sketch:{colors:2,detail:8,speckle:4,smooth:1,straight:false},
+  detailed:{colors:24,detail:8,speckle:2,smooth:1,straight:false},
+  poster:{colors:8,detail:3,speckle:16,smooth:3,straight:false}
+};
+const MAX_SIDE=1200;
+let src=null,srcName='image',trace=null,svgText='',preset='logo',hidden=new Set(),bgIndex=-1,timer=0,job=0;
+
+function setPreset(p){preset=p;const v=PRESETS[p];$('colors').value=v.colors;$('detail').value=v.detail;$('speckle').value=v.speckle;$('smooth').value=v.smooth;$('straight').checked=v.straight;
+  document.querySelectorAll('[data-preset]').forEach(b=>b.classList.toggle('on',b.dataset.preset===p));labels();schedule()}
+function labels(){$('colorsV').textContent=$('colors').value;$('detailV').textContent=$('detail').value+'/10';$('speckleV').textContent=$('speckle').value;$('smoothV').textContent=+$('smooth').value?$('smooth').value:'off'}
+document.querySelectorAll('[data-preset]').forEach(b=>b.onclick=()=>setPreset(b.dataset.preset));
+['colors','detail','speckle','smooth'].forEach(id=>$(id).addEventListener('input',()=>{labels();document.querySelectorAll('[data-preset]').forEach(b=>b.classList.remove('on'));schedule()}));
+$('straight').onchange=schedule;
+$('removeBg').onchange=()=>{hidden.clear();render()};
+
+function options(){
+  const d=+$('detail').value; // 0..10 -> error thresholds 3..0.1
+  const thr=Math.max(.1,2.6-d*.25);
+  const blur=+$('smooth').value;
+  return {numberofcolors:+$('colors').value,colorsampling:2,colorquantcycles:3,mincolorratio:0,
+    ltres:$('straight').checked?thr*2:thr,qtres:$('straight').checked?1e9:thr,rightangleenhance:true,pathomit:+$('speckle').value,
+    blurradius:blur,blurdelta:blur?64:20,strokewidth:1,linefilter:+$('speckle').value>0,
+    scale:1,roundcoords:1,viewbox:true,desc:false,layering:0};
+}
+function schedule(){clearTimeout(timer);if(!src)return;timer=setTimeout(run,200)}
+function busy(on){let b=$('svgStage').querySelector('.busy');if(on&&!b){b=document.createElement('div');b.className='busy';b.textContent='Tracing…';$('svgStage').appendChild(b)}else if(!on&&b)b.remove()}
+async function run(){
+  if(!src||!window.ImageTracer){if(!window.ImageTracer)$('stats').innerHTML='<span>Could not load the tracing library. Check your connection and reload.</span>';return}
+  const my=++job;busy(true);await new Promise(r=>setTimeout(r,30));if(my!==job)return;
+  const t0=performance.now();
+  const opts=options();opts.pal=preset==='bw'?[{r:0,g:0,b:0,a:255},{r:255,g:255,b:255,a:255}]:palette(src.data,opts.numberofcolors);opts.colorquantcycles=1;
+  let td;try{td=ImageTracer.imagedataToTracedata(src.data,opts)}catch(e){busy(false);$('stats').innerHTML='<span>Tracing failed: '+e.message+'</span>';return}
+  if(my!==job)return;
+  trace={td,opts,ms:performance.now()-t0};hidden.clear();bgIndex=findBackground(td);render();busy(false);
+}
+// k-means++ palette on sampled pixels: keeps small but distinct colors (like dark text on a light logo)
+// that ImageTracer's own sampling tends to merge away.
+function palette(img,k){
+  const d=img.data,n=img.width*img.height,step=Math.max(1,Math.floor(n/40000)),pts=[];
+  // Sample only pixels that match their neighbours: anti-aliased edges are blends, not real colors.
+  const w=img.width,flat=o=>{for(const q of [o+4,o-4,o+w*4,o-w*4]){if(q<0||q>=d.length)continue;if(Math.abs(d[o]-d[q])+Math.abs(d[o+1]-d[q+1])+Math.abs(d[o+2]-d[q+2])+Math.abs(d[o+3]-d[q+3])>48)return false}return true};
+  for(let i=0;i<n;i+=step){const o=i*4;if(flat(o))pts.push([d[o],d[o+1],d[o+2],d[o+3]])}
+  if(pts.length<k*20)for(let i=0;i<n;i+=step){const o=i*4;pts.push([d[o],d[o+1],d[o+2],d[o+3]])}
+  const dist=(a,b)=>{const r=a[0]-b[0],g=a[1]-b[1],bl=a[2]-b[2],al=a[3]-b[3];return r*r+g*g+bl*bl+al*al*2};
+  let seed=12345;const rnd=()=>(seed=(seed*1103515245+12345)&0x7fffffff)/0x7fffffff;
+  const cs=[pts[Math.floor(rnd()*pts.length)].slice()],best=new Float64Array(pts.length).fill(Infinity);
+  while(cs.length<k){let sum=0;const c=cs[cs.length-1];for(let i=0;i<pts.length;i++){const v=dist(pts[i],c);if(v<best[i])best[i]=v;sum+=best[i]}
+    if(sum===0)break;let t=rnd()*sum,i=0;for(;i<pts.length-1;i++){t-=best[i];if(t<=0)break}cs.push(pts[i].slice())}
+  const as=new Int32Array(pts.length);
+  for(let it=0;it<12;it++){const acc=cs.map(()=>[0,0,0,0,0]);
+    for(let i=0;i<pts.length;i++){let bi=0,bv=Infinity;for(let j=0;j<cs.length;j++){const v=dist(pts[i],cs[j]);if(v<bv){bv=v;bi=j}}as[i]=bi;const a=acc[bi];a[0]+=pts[i][0];a[1]+=pts[i][1];a[2]+=pts[i][2];a[3]+=pts[i][3];a[4]++}
+    acc.forEach((a,j)=>{if(a[4])cs[j]=[a[0]/a[4],a[1]/a[4],a[2]/a[4],a[3]/a[4]]})}
+  // Snap each center to its cluster's most common color, so anti-aliased edge pixels
+  // do not drag a crisp logo color toward grey.
+  const hist=cs.map(()=>new Map());
+  for(let i=0;i<pts.length;i++){const p=pts[i],key=(p[0]>>4)<<12|(p[1]>>4)<<8|(p[2]>>4)<<4|(p[3]>>4),h=hist[as[i]],e=h.get(key);if(e){e[0]++;e[1]+=p[0];e[2]+=p[1];e[3]+=p[2];e[4]+=p[3]}else h.set(key,[1,p[0],p[1],p[2],p[3]])}
+  return cs.map((c,j)=>{let top=null;hist[j].forEach(e=>{if(!top||e[0]>top[0])top=e});if(top)c=[top[1]/top[0],top[2]/top[0],top[3]/top[0],top[4]/top[0]];
+    return {r:Math.round(c[0]),g:Math.round(c[1]),b:Math.round(c[2]),a:Math.round(c[3])}});
+}
+// The background is the palette color closest to the image's corner pixels.
+function findBackground(td){
+  const d=src.data,w=d.width,h=d.height,px=[0,w-1,(h-1)*w,(h-1)*w+w-1];let best=-1,bd=1e9;
+  const corners=px.map(i=>[d.data[i*4],d.data[i*4+1],d.data[i*4+2],d.data[i*4+3]]);
+  td.palette.forEach((c,k)=>{const dist=corners.reduce((s,q)=>s+Math.abs(q[0]-c.r)+Math.abs(q[1]-c.g)+Math.abs(q[2]-c.b)+Math.abs(q[3]-c.a),0);if(dist<bd){bd=dist;best=k}});
+  return best;
+}
+const hex=c=>'#'+[c.r,c.g,c.b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
+function render(){
+  if(!trace)return;
+  const {td,opts}=trace;
+  const skip=new Set(hidden);if($('removeBg').checked&&bgIndex>=0)skip.add(bgIndex);
+  // Fully transparent palette entries are never drawn.
+  td.palette.forEach((c,k)=>{if(c.a<8)skip.add(k)});
+  const view={layers:td.layers.map((l,k)=>skip.has(k)?[]:l),palette:td.palette,width:td.width,height:td.height};
+  svgText=ImageTracer.getsvgstring(view,opts);
+  $('svgStage').innerHTML=svgText;
+  $('code').value=svgText;
+  const paths=(svgText.match(/<path /g)||[]).length,kb=new Blob([svgText]).size/1024;
+  $('outInfo').textContent=td.width+' × '+td.height+' · scales to any size';
+  $('stats').innerHTML='<span><b>'+paths+'</b> shapes</span><span><b>'+(kb<1024?kb.toFixed(1)+' KB':(kb/1024).toFixed(2)+' MB')+'</b> SVG</span><span><b>'+td.palette.filter((c,k)=>!skip.has(k)).length+'</b> colors</span><span>traced in '+(trace.ms/1000).toFixed(1)+' s</span>'+(kb>1500?'<span>Large file — try fewer colors or more speck removal</span>':'');
+  ['downloadBtn','copyBtn','pngBtn'].forEach(id=>$(id).disabled=false);
+  swatches(skip);
+}
+function swatches(skip){
+  const {td}=trace;const counts=td.layers.map(l=>l.length);
+  const order=td.palette.map((c,k)=>k).filter(k=>td.palette[k].a>=8&&counts[k]).sort((a,b)=>counts[b]-counts[a]);
+  $('swatches').innerHTML=order.map(k=>{const c=td.palette[k],off=skip.has(k);return '<span class="swatch'+(off?' off':'')+'"><input type="color" data-k="'+k+'" value="'+hex(c)+'" aria-label="Color '+(k+1)+'">'+hex(c)+(k===bgIndex?' <i class="muted">background</i>':'')+'<button type="button" data-hide="'+k+'" title="'+(off?'Put this color back':'Leave this color out')+'">'+(off?'↺':'✕')+'</button></span>'}).join('')||'<span class="muted">No colors found.</span>';
+  $('swatches').querySelectorAll('input[type=color]').forEach(inp=>inp.oninput=()=>{const c=td.palette[+inp.dataset.k],v=inp.value;c.r=parseInt(v.slice(1,3),16);c.g=parseInt(v.slice(3,5),16);c.b=parseInt(v.slice(5,7),16);c.a=255;clearTimeout(timer);timer=setTimeout(render,60)});
+  $('swatches').querySelectorAll('[data-hide]').forEach(b=>b.onclick=()=>{const k=+b.dataset.hide;if(k===bgIndex&&$('removeBg').checked){$('removeBg').checked=false;render();return}hidden.has(k)?hidden.delete(k):hidden.add(k);render()});
+}
+
+function loadImage(url,name){
+  return new Promise((res,rej)=>{const img=new Image();img.onload=()=>res(img);img.onerror=()=>rej(new Error('This file could not be opened as an image.'));img.src=url}).then(img=>{
+    const long=Math.max(img.naturalWidth,img.naturalHeight),s=Math.min(MAX_SIDE/long,Math.max(1,800/long)) /* small images are enlarged first: smoother curves */,w=Math.max(1,Math.round(img.naturalWidth*s)),h=Math.max(1,Math.round(img.naturalHeight*s));
+    const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.imageSmoothingQuality='high';x.drawImage(img,0,0,w,h);
+    src={data:x.getImageData(0,0,w,h),url};srcName=(name||'image').replace(/\.[^.]+$/,'');
+    $('srcStage').innerHTML='';const shown=new Image();shown.src=url;shown.alt='Your image';$('srcStage').appendChild(shown);
+    $('inInfo').textContent=img.naturalWidth+' × '+img.naturalHeight+(s!==1?' (traced at '+w+' × '+h+')':'');
+    run();
+  }).catch(e=>alert(e.message));
+}
+async function openFile(f){if(!f)return;if(!/^image\//.test(f.type)&&!/\.(png|jpe?g|webp|gif|bmp)$/i.test(f.name)){alert('Please choose a PNG, JPG, WebP, GIF or BMP image. (SVG files are already vectors.)');return}
+  const rd=new FileReader();rd.onload=()=>loadImage(rd.result,f.name);rd.readAsDataURL(f)}
+$('fileInput').onchange=e=>{openFile(e.target.files[0]);e.target.value=''};
+const box=$('mainPanel');
+addEventListener('dragover',e=>{if([...e.dataTransfer.types].includes('Files')){e.preventDefault();box.classList.add('drop')}});
+addEventListener('dragleave',e=>{if(!e.relatedTarget)box.classList.remove('drop')});
+addEventListener('drop',e=>{if(!e.dataTransfer.files.length)return;e.preventDefault();box.classList.remove('drop');openFile(e.dataTransfer.files[0])});
+addEventListener('paste',e=>{const it=[...(e.clipboardData||{}).items||[]].find(i=>i.type.startsWith('image/'));if(it)openFile(it.getAsFile())});
+
+// The example is drawn at run time as a small, slightly blurry raster logo, like a typical web download.
+$('exampleBtn').onclick=()=>{
+  const c=document.createElement('canvas');c.width=360;c.height=240;const x=c.getContext('2d');
+  x.fillStyle='#fffdf7';x.fillRect(0,0,360,240);
+  x.fillStyle='#f2a93b';x.beginPath();x.arc(110,104,62,0,Math.PI*2);x.fill();
+  x.fillStyle='#fffdf7';x.beginPath();x.arc(132,88,50,0,Math.PI*2);x.fill();
+  x.fillStyle='#1f6f8b';x.beginPath();x.moveTo(40,170);x.quadraticCurveTo(110,120,180,170);x.quadraticCurveTo(250,220,320,170);x.lineTo(320,200);x.quadraticCurveTo(250,250,180,200);x.quadraticCurveTo(110,150,40,200);x.closePath();x.fill();
+  x.fillStyle='#16202b';x.font='bold 40px Georgia, serif';x.fillText('Sunrise',176,92);x.font='600 18px Arial, sans-serif';x.fillText('B A K E R Y',184,124);
+  const small=document.createElement('canvas');small.width=360;small.height=240;const sx=small.getContext('2d');sx.filter='blur(0.6px)';sx.drawImage(c,0,0);
+  loadImage(small.toDataURL('image/jpeg',.82),'sunrise-logo');
+};
+$('zoomBtn').onclick=()=>{const z=!$('svgStage').classList.contains('zoom');['srcStage','svgStage'].forEach(id=>$(id).classList.toggle('zoom',z));$('zoomBtn').setAttribute('aria-pressed',z);$('zoomBtn').textContent=z?'🔍 Fit to box':'🔍 Zoom in to compare'};
+// keep the two zoomed views scrolled together
+['srcStage','svgStage'].forEach((id,i,arr)=>$(id).addEventListener('scroll',()=>{const a=$(id),b=$(arr[1-i]);if(a._sync){a._sync=false;return}b._sync=true;b.scrollTop=a.scrollTop;b.scrollLeft=a.scrollLeft}));
+
+const dl=(name,blob)=>{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)};
+$('downloadBtn').onclick=()=>dl(srcName+'.svg',new Blob([svgText],{type:'image/svg+xml'}));
+$('copyBtn').onclick=()=>{const b=$('copyBtn');(navigator.clipboard?navigator.clipboard.writeText(svgText):Promise.reject()).catch(()=>{$('code').select();document.execCommand('copy')}).finally(()=>{b.textContent='✓ Copied';setTimeout(()=>b.textContent='📋 Copy SVG code',1400)})};
+$('pngBtn').onclick=()=>{const td=trace.td,scale=Math.max(1,Math.ceil(2400/Math.max(td.width,td.height)));const img=new Image();
+  img.onload=()=>{const c=document.createElement('canvas');c.width=td.width*scale;c.height=td.height*scale;c.getContext('2d').drawImage(img,0,0,c.width,c.height);c.toBlob(b=>dl(srcName+'-'+c.width+'px.png',b),'image/png')};
+  img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svgText.replace('<svg ','<svg width="'+td.width+'" height="'+td.height+'" '))};
+
+setPreset('logo');
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
