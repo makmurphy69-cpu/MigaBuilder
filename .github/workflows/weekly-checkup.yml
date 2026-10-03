@@ -1,0 +1,128 @@
+name: Weekly check-up
+
+# Every Monday this runs scripts/weekly-checkup.mjs on main:
+# - safe library upgrades (newer release of the same major version, file present
+#   on the CDN) are applied, tested with the page smoke test and the tool result
+#   tests, and proposed as a pull request "Weekly library upgrades". Nothing
+#   reaches migabuilder.com until that pull request is merged.
+# - retired Gemini models, broken external/affiliate links and live pages that do
+#   not load are reported in the issue "Weekly check-up" (one issue, a comment
+#   per week with findings; closed again when a week comes back clean).
+# Needs the GEMINI_API_KEY secret for the model check (skipped without it) and
+# Settings -> Actions -> General -> "Allow GitHub Actions to create and approve
+# pull requests" for the upgrade pull request.
+# Pull requests opened by this workflow do not start the other checks by
+# themselves (a GitHub rule), so the tests run here before the pull request
+# is opened and their result is written in it.
+on:
+  schedule:
+    - cron: '37 6 * * 1'   # Mondays 06:37 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: weekly-checkup
+
+jobs:
+  checkup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check libraries, Gemini models, links and the live site
+        run: node scripts/weekly-checkup.mjs --apply --report "$RUNNER_TEMP/check-up.md"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Did any library change?
+        id: changed
+        run: |
+          pages=$(git diff --name-only -- '*.html' | sed 's/\.html$//' | tr '\n' ' ')
+          echo "pages=$pages" >> "$GITHUB_OUTPUT"
+          if git diff --quiet; then echo "any=false" >> "$GITHUB_OUTPUT"; else echo "any=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Install Playwright and Chromium
+        if: steps.changed.outputs.any == 'true'
+        run: |
+          npm install -g playwright@1.56.1
+          playwright install --with-deps chromium
+
+      - name: Upgraded pages load without JavaScript errors
+        id: smoke
+        if: steps.changed.outputs.any == 'true'
+        continue-on-error: true
+        run: node scripts/smoke-test.mjs ${{ steps.changed.outputs.pages }} 2>&1 | tee "$RUNNER_TEMP/smoke.log"; exit ${PIPESTATUS[0]}
+
+      - name: Main tools still produce the right files
+        id: results
+        if: steps.changed.outputs.any == 'true'
+        continue-on-error: true
+        run: node scripts/result-tests.mjs 2>&1 | tee "$RUNNER_TEMP/results.log"; exit ${PIPESTATUS[0]}
+
+      - name: Write the pull request text
+        if: steps.changed.outputs.any == 'true'
+        run: |
+          {
+            echo "Automatic weekly upgrade of CDN libraries to the newest release of the same major version."
+            echo
+            node -e 'for (const u of require(process.env.RUNNER_TEMP + "/check-up.json").upgrades) console.log(`- **${u.name}** ${u.from} → ${u.to} (${u.files.join(", ")})`)'
+            echo
+            echo "Tested in the weekly run before this pull request was opened:"
+            echo "- Page smoke test on the changed pages: **${{ steps.smoke.outcome }}**"
+            echo "- Tool result tests: **${{ steps.results.outcome }}**"
+            echo
+            echo "Merge to publish on migabuilder.com, or close to skip this week (next Monday proposes it again)."
+            echo "Full report: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } > "$RUNNER_TEMP/pr-body.md"
+
+      - name: Open or update the upgrade pull request
+        id: pr
+        if: steps.changed.outputs.any == 'true' && steps.smoke.outcome == 'success' && steps.results.outcome == 'success'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: weekly-library-upgrades
+          delete-branch: true
+          title: Weekly library upgrades
+          commit-message: Weekly library upgrades (same major version, tested)
+          body-path: ${{ runner.temp }}/pr-body.md
+          add-paths: |
+            *.html
+            *.js
+
+      - name: Report on the issue
+        uses: actions/github-script@v7
+        env:
+          UPGRADES_CHANGED: ${{ steps.changed.outputs.any }}
+          TESTS_OK: ${{ steps.smoke.outcome == 'success' && steps.results.outcome == 'success' }}
+          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
+        with:
+          script: |
+            const fs = require('fs');
+            const tmp = process.env.RUNNER_TEMP;
+            const data = JSON.parse(fs.readFileSync(`${tmp}/check-up.json`, 'utf8'));
+            let report = fs.readFileSync(`${tmp}/check-up.md`, 'utf8');
+            const upgradesFailed = process.env.UPGRADES_CHANGED === 'true' && process.env.TESTS_OK !== 'true';
+            const run = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            if (upgradesFailed) report = `**The library upgrades below failed the tests, so no pull request was opened.** See the test logs: ${run}\n\n` + report;
+            if (process.env.PR_URL) report = `Upgrade pull request: ${process.env.PR_URL}\n\n` + report;
+            await core.summary.addRaw(report).write();
+
+            const needsLook = data.problems.length > 0 || upgradesFailed;
+            const { data: open } = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', labels: 'weekly-checkup', per_page: 1 });
+            const body = report.length > 60000 ? report.slice(0, 60000) + `\n\n…cut; full report: ${run}` : report;
+            if (needsLook) {
+              if (open.length) await github.rest.issues.createComment({ ...context.repo, issue_number: open[0].number, body });
+              else await github.rest.issues.create({ ...context.repo, title: 'Weekly check-up', labels: ['weekly-checkup'], body });
+            } else if (open.length) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: open[0].number, body: `All clear this week ✅ Closing until something needs a look.\n\n${run}` });
+              await github.rest.issues.update({ ...context.repo, issue_number: open[0].number, state: 'closed', state_reason: 'completed' });
+            }

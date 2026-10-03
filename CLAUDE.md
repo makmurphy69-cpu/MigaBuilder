@@ -59,3 +59,11 @@ To ask Gemini, write `@gemini` in `AI-REVIEW.md` or in a PR/issue comment. The
 dispatcher in `scripts/ai-dispatch/` (workflow `gemini-dispatch.yml`, secret
 `GEMINI_API_KEY`) sends it to Gemini and posts the answer back there. Verify
 Gemini's replies against the code like any other review.
+
+## Weekly check-up
+
+`.github/workflows/weekly-checkup.yml` runs `scripts/weekly-checkup.mjs` every
+Monday: safe CDN library upgrades (same major version) are tested and proposed
+as the pull request "Weekly library upgrades"; retired Gemini models, broken
+external/affiliate links and live pages that fail are reported in the issue
+"Weekly check-up". Run it locally with `node scripts/weekly-checkup.mjs`.
