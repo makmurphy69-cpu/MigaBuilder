@@ -33,7 +33,7 @@ window.HOME_I18N = {
     'd:bug-scanner': 'Find, explain and fix bugs in any code — and preview what it builds.',
     'd:video-forge': 'Turn drawings and images into motion.',
     'd:talk-forge': 'Make a photo speak with your audio.',
-    'd:clip-forge': 'Trim, caption and translate video.',
+    'd:clip-forge': 'Trim, caption and translate video, or auto-edit several clips into one.',
     'd:merge-forge': 'Combine clips, images, text and music.',
     'd:music-forge': 'Describe music and get a free track, songs with singing, beats.',
     'd:record-forge': 'Record your screen with narration.',
