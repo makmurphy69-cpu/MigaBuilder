@@ -126,15 +126,16 @@
     }) : text;
   }
 
-  function t(key) {
+  function t(key, missing) {
     var dict = strings[currentLang] || {};
     if (Object.prototype.hasOwnProperty.call(dict, key)) return fill(dict[key]);
     var fallbackDict = strings[FALLBACK_LANG] || {};
-    return Object.prototype.hasOwnProperty.call(fallbackDict, key) ? fill(fallbackDict[key]) : key;
+    return Object.prototype.hasOwnProperty.call(fallbackDict, key) ? fill(fallbackDict[key]) : (missing != null ? missing : key);
   }
 
   function applyToDom() {
-    document.querySelectorAll('[data-i18n]').forEach(function (el) { el.textContent = t(el.getAttribute('data-i18n')); });
+    // A key missing from a stale cached strings file keeps the text written in the page, never the key name.
+    document.querySelectorAll('[data-i18n]').forEach(function (el) { if (el.dataset.i18nDefault == null) el.dataset.i18nDefault = el.textContent; el.textContent = t(el.getAttribute('data-i18n'), el.dataset.i18nDefault); });
     document.querySelectorAll('[data-i18n-html]').forEach(function (el) { el.innerHTML = t(el.getAttribute('data-i18n-html')); });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function (el) { el.setAttribute('placeholder', t(el.getAttribute('data-i18n-placeholder'))); });
     document.querySelectorAll('[data-i18n-title]').forEach(function (el) { el.setAttribute('title', t(el.getAttribute('data-i18n-title'))); });

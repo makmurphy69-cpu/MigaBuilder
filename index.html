@@ -616,10 +616,6 @@
   [dir=rtl] .hero-search .search-icon { left:auto; right:16px; }
   [dir=rtl] .hero-search .tool-search { padding:12px 46px 12px 16px; }
   .search-hint { margin:10px auto 0 !important; font-size:13px !important; color:rgba(237,234,224,.7) !important; }
-  .task-starts { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; max-width:860px; margin:16px auto 0; font-size:14px; }
-  .task-starts span { color:rgba(237,234,224,.78); }
-  .task-starts a { color:var(--paper); background:rgba(8,24,38,.75); border:1px solid rgba(111,209,224,.45); border-radius:999px; padding:7px 13px; text-decoration:none; }
-  .task-starts a:hover { border-color:var(--amber); color:#fff; }
   .tool-hub { padding-top:16px; }
   .hub-bar { display:flex; justify-content:flex-end; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
   .toggle-all { background:none; border:0; color:var(--line-cyan); font:600 13px inherit; cursor:pointer; text-decoration:underline; padding:4px 2px; }
@@ -657,11 +653,6 @@
   .cta-tour:hover { border-color:var(--amber); background:rgba(226,166,59,.08); }
   @keyframes tourPulse { 0%{box-shadow:0 0 0 0 rgba(226,166,59,.5)} 70%,100%{box-shadow:0 0 0 12px rgba(226,166,59,0)} }
   @media (prefers-reduced-motion: reduce) { .cta-tour .play { animation:none; } }
-  .task-starts { gap:10px !important; margin-top:20px !important; }
-  .task-starts a { transition:transform .15s, border-color .15s, background .15s; }
-  .task-starts a:hover { transform:translateY(-2px); background:rgba(111,209,224,.12); }
-  .task-starts a.task-hot { background:var(--amber); color:var(--amber-ink); border-color:var(--amber); font-weight:700; }
-  .task-starts a.task-hot:hover { background:#ecb653; color:var(--amber-ink); }
   .quick-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
   .quick-grid .tool-card { min-height:0; margin:0; padding:12px 14px; border:1px solid rgba(111,209,224,.2); background:rgba(8,24,38,.62); border-radius:10px; }
   .quick-grid .tool-card:hover { border-color:rgba(111,209,224,.6); background:rgba(111,209,224,.08); }
@@ -692,6 +683,11 @@
   .foot-links a:hover { color:var(--paper); text-decoration:underline; }
   @media(max-width:900px){ .quick-grid, .results-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
   @media(max-width:620px){ .quick-grid { grid-template-columns:1fr !important; } .quick-grid .tool-card { padding:10px 12px; } .results-grid { grid-template-columns:1fr 1fr !important; gap:10px; } .result-text { padding:10px 12px 12px; } .result-text span { display:none; } .result-go { display:none; } .cta-tour { flex:1 1 100%; justify-content:center; } }
+  .hero-mini { display:flex; gap:8px; max-width:760px; margin:10px auto 0; justify-content:flex-start; flex-wrap:wrap; }
+  .hero-mini .cta-tour, .hero-mini .cta-install { min-height:0; padding:5px 12px 5px 5px; border-radius:999px; font-size:13px; font-weight:600; gap:7px; flex:none !important; border:1px solid rgba(111,209,224,.4); background:rgba(8,24,38,.6); color:var(--paper); }
+  .hero-mini .cta-install { padding:5px 12px; }
+  .hero-mini .cta-tour .play { width:22px; height:22px; font-size:9px; }
+  [dir=rtl] .hero-mini { justify-content:flex-start; }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -710,10 +706,8 @@
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
-    <a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">1-minute tour</span></a>
-    <a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a>
   </div>
-  <nav class="task-starts" aria-label="Popular tasks"><span data-i18n="taskLead">Start with a task:</span><a class="task-hot" href="website-builder.html" data-i18n="taskSite">🌐 Build a website</a><a href="pdf-forge.html" data-i18n="taskPdf">📕 Edit a PDF</a><a href="cv-forge.html" data-i18n="taskCv">📄 Make a CV</a><a href="background-forge.html" data-i18n="taskBg">🪄 Remove a background</a><a href="invoice-forge.html" data-i18n="taskInvoice">🧾 Make an invoice</a><a href="pdf-compress.html" data-i18n="taskCompress">🗜️ Compress a PDF</a><a href="ocr-forge.html" data-i18n="taskOcr">🔎 Copy text from an image</a></nav>
+  <div class="hero-mini"><a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">Tour site</span></a><a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
 </header>
 
 <section class="tool-hub" id="tools" aria-label="All tools">
@@ -812,7 +806,7 @@
 </section>
 
 <section class="results" aria-labelledby="resultsTitle">
-  <div class="results-head"><h2 id="resultsTitle" data-i18n="samplesHeading">Real results, made with these tools</h2><p data-i18n="samplesLead">Every one of these was made on camera in a tool's video guide. Open one to see exactly what you get.</p></div>
+  <div class="results-head"><h2 id="resultsTitle" data-i18n="samplesHeading">Real results, made with these tools</h2></div>
   <div class="results-grid">
     <a class="result-card" href="sample-viewer.html?tool=website-builder.html"><span class="result-thumb"><img src="assets/results/website-builder.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s1Title">A business website</strong><span data-i18n="s1Text">Every page drafted, ready to publish</span></span><span class="result-go" aria-hidden="true">→</span></a>
     <a class="result-card" href="sample-viewer.html?tool=cartoon-forge.html"><span class="result-thumb"><img src="assets/results/cartoon-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s2Title">A cartoon you can play</strong><span data-i18n="s2Text">Story, scenes and voices from one idea</span></span><span class="result-go" aria-hidden="true">→</span></a>
@@ -918,7 +912,7 @@
   document.addEventListener('miga-installable',()=>{installLink.hidden=!(window.MigaInstall&&window.MigaInstall.available())});
 })();
 </script>
-<script src="home-i18n.js"></script>
+<script src="home-i18n.js?v=2"></script>
 <script>
 I18N.init(window.HOME_I18N, { vars: { n: document.querySelectorAll('#toolGroups .tool-card').length } });
 </script>
