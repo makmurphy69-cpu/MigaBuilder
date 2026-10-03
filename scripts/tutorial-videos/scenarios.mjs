@@ -1006,13 +1006,19 @@ S('media-convert-forge.html', {
 });
 
 S('clip-forge.html', {
-  title: 'Clip Forge', subtitle: 'Trim, caption and resize video',
-  intro: 'Welcome to Clip Forge. Trim a video, add captions, change the shape, and download it.',
+  title: 'Clip Forge', subtitle: 'Trim, caption, resize and auto-edit video',
+  intro: 'Welcome to Clip Forge. Edit one video, or let Auto Edit turn several clips into one.',
   async run(h, page) {
     await h.step('Upload a video. It plays right here in your browser.', () => h.upload('#videoInput', 'clip.webm'));
-    await h.step('Set where the clip should start and end.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); });
-    await h.step('Change the shape, for example square for Instagram, and add a text overlay.', async () => { await h.select('#aspectSelect', '1:1'); await h.type('#captionTextInput', 'Art week!'); await h.click('#addCaptionBtn'); });
-    await h.step('Press Render video.', () => h.click('#renderBtn'));
+    await h.step('Set where it starts and ends, pick a shape, add text and music, then press Render video.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); await h.point('#renderBtn'); });
+    await h.step('Have several clips? Open Auto Edit, and it edits them into one video for you.', async () => { await page.locator('section.panel').evaluate(el => el.scrollTo(0, 0)); await h.click('#autoEditBox summary'); });
+    await h.step('Add your clips. Clip Forge watches each one for movement, light, focus and sound.', () => h.upload('#aeClipsInput', ['clip.webm', 'jam-drums.webm', 'jam-guitar.webm']));
+    await h.skip('Skipping ahead while it measures the clips', () => page.waitForFunction(() => /clips measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 120000 }));
+    await h.step('Choose what it is for, say what it is about, and how it should end.', async () => { await h.select('#aeGoal', 'ad'); await h.type('#aeAbout', 'Our band plays live this Friday'); await h.type('#aeCta', 'Get tickets now'); });
+    await h.step('Press Plan the edit. The AI picks the best moments, opens on a hook, and keeps shots short.', () => h.click('#aePlanBtn'));
+    await h.skip('Skipping ahead while it plans', () => page.waitForSelector('#aeShotList .ae-item', { timeout: 120000 }));
+    await h.step('Every cut is listed. Watch, move or remove any of them.', () => h.point('#aeShotList'));
+    await h.step('Press Render the edit.', () => h.click('#aeRenderBtn'));
     await h.skip('Skipping ahead while the video renders', () => page.waitForSelector('#downloadVideoBtn:not([disabled]):visible', { timeout: 180000 }));
     await h.step('Preview the result, then download it.', () => h.point('#downloadVideoBtn'));
     await h.sampleDownload('#downloadVideoBtn', 'Video made in this video');
