@@ -21,7 +21,7 @@
     ["merge-forge.html", "🧩", "Merge Forge", "Combine clips, images, text and music.", ""],
     ["music-forge.html", "🎵", "Music Forge", "Describe music and get a free track, songs with singing, beats.", "song vocals lyrics ai music lyria beat instrumental background soundtrack sound effects loop jingle"],
     ["record-forge.html", "⏺️", "Record Forge", "Record your screen with narration.", ""],
-    ["media-convert.html", "🔄", "Media Convert", "Turn video into GIF, extract audio and transcribe speech.", ""],
+    ["media-convert.html", "🔄", "Media Convert", "Compress, trim and convert video, make GIFs and MP3s, extract audio and transcribe speech.", "ffmpeg video compress trim cut rotate gif mp3 resize remove video metadata gps location exif strip camera data privacy transcribe speech"],
     ["voice-forge.html", "🎙️", "Voice Forge", "Turn a script into a natural voice-over in 35+ languages and download it as MP3.", "text to speech tts voice generator voice over voiceover narration read aloud ai voice mp3 wav speech synthesis piper swedish spanish arabic chinese swahili offline free"],
     ["audio-forge.html", "🎚️", "Audio Forge", "Trim, join, fade, speed up and convert audio to MP3 or WAV.", "audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"],
     ["logo-forge.html", "🎨", "Logo Forge", "Create a logo, favicon and brand kit.", ""],
@@ -76,7 +76,6 @@
     ["qr-forge.html", "▦", "QR Forge", "Create downloadable QR codes.", ""],
     ["screen-forge.html", "🤝", "Screen Share Forge", "Get live remote help.", ""],
     ["meet-forge.html", "👥", "Meet Forge", "Host group video rooms and topic communities.", ""],
-    ["media-convert-forge.html", "🎞️", "Media Convert Forge", "Trim, rotate, resize and compress video, or make a GIF or MP3.", "ffmpeg video compress trim cut rotate gif mp3 resize remove video metadata gps location exif strip camera data privacy"],
     ["templates.html", "🧰", "Templates", "Ready-made starting points for the tools.", "templates starter examples"],
     ["sample-viewer.html", "🎬", "Samples & video guides", "Watch every tool being used and open the sample it made.", "samples videos tutorials guides help"],
     ["feedback.html", "💬", "Send feedback", "Report a bug or suggest an idea.", "feedback bug report idea contact help"]

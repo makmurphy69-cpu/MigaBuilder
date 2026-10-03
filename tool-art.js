@@ -294,7 +294,6 @@
     'image-studio': ['seurat', 'axolotl', 'camera', 'beret'],
     'invoice-forge': ['canaletto', 'troll', 'coin'],
     'logo-forge': ['lempicka', 'gremlin', 'star', 'crown'],
-    'media-convert-forge': ['riley', 'slime', 'gear'],
     'media-convert': ['dali', 'bat', 'gear'],
     'meet-forge': ['chagall', 'moth', 'bubble'],
     'memory-forge': ['okeeffe', 'alien', 'bulb', 'wizard'],

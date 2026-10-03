@@ -36,6 +36,12 @@ A tool is not finished until **all** of these are done, in the same pull request
    page). It opens the page in Chromium and fails on JavaScript errors or
    missing files; the *Page smoke test* GitHub check runs it on every pull
    request.
+6. If the tool produces a file, add a test to `scripts/result-tests.mjs` that
+   drives it with a small file from `scripts/fixtures/` (or canned AI answers)
+   and checks the download, then run `node scripts/result-tests.mjs <tool>`.
+   The *Tool result tests* GitHub check runs them on every pull request. Long
+   jobs should use the shared `miga-progress.js` panel (progress, time left,
+   Cancel, what to try when it fails).
 
 When a tool changes in a way that makes its video wrong, update the scenario
 and record the video again.

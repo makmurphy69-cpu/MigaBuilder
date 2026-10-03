@@ -38,6 +38,7 @@
     '.miga-float .miga-badge{border:0;padding:3px 6px}' +
     '.miga-badge{cursor:help;position:relative}.miga-badge .s{display:none}.miga-pop{position:absolute;z-index:9999;top:calc(100% + 6px);right:0;width:min(300px,80vw);white-space:normal;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:10px 12px;font:400 12.5px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35)}.miga-float .miga-pop{top:auto;bottom:calc(100% + 6px);left:0;right:auto}' +
     '.miga-local-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.72}' +
+    '.miga-card strong{display:block;color:#6FD1E0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 3px}.miga-card strong:first-child{margin-top:0}.miga-card ul{margin:0;padding-left:16px}.miga-card li{margin:2px 0}.miga-card{width:min(340px,86vw);max-height:70vh;overflow:auto;cursor:auto}' +
     '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}}';
   document.head.appendChild(st);
 
@@ -46,6 +47,49 @@
   // Pages that can send text to an AI provider say so, instead of claiming everything stays here.
   const AI_RE = /ai-client\.js|migabuilder-gemini|api\.openai\.com|api\.anthropic\.com|generativelanguage\.googleapis/;
   const usesAI = Array.from(document.scripts).some(s => AI_RE.test(s.src || s.textContent));
+  // What else this page does beyond the badge: big downloads, device permissions and outside services.
+  // Found from the page's own code, so new tools are covered without a list to keep up to date.
+  const pageCode = Array.from(document.scripts).map(s => (s.src || '') + '\n' + (s.src ? '' : s.textContent)).join('\n') +
+    Array.from(document.querySelectorAll('link[href]')).map(l => l.href).join('\n');
+  const FACTS = [
+    ['dl', /tesseract/i, 'A text-recognition model for each language you use (a few MB) downloads once, the first time you read text.'],
+    ['dl', /@ffmpeg\//, 'The video engine (about 31 MB) downloads once, the first time you convert a file.'],
+    ['dl', /transformers|huggingface|@imgly/i, 'Optional on-device AI models download only when you turn them on — the page says how big each one is (some are hundreds of MB).'],
+    ['dl', /onnxruntime|piper/i, 'Each voice downloads once (tens of MB, up to about 110 MB) and is then kept on this device.'],
+    ['dl', /three(\.module)?(\.min)?\.js|\/three@/, 'A 3D graphics engine loads with the page.'],
+    ['perm', /getUserMedia/, 'Asks for your camera and/or microphone only when you start recording. Recordings stay on this device.'],
+    ['perm', /getDisplayMedia/, 'Asks which screen, window or tab to share only when you start. Nothing is shared until you choose.'],
+    ['perm', /SpeechRecognition/, 'Speech-to-text uses your browser\'s speech recognition: in Chrome and Edge the audio is sent to Google or Microsoft to be turned into text.'],
+    ['perm', /Notification\.requestPermission/, 'Asks to show notifications only if you turn on desktop alerts.'],
+    ['net', /RTCPeerConnection/, 'Sharing connects your browser directly to the people you invite; a small MigaBuilder server only introduces you.'],
+    ['net', /meet\.jit\.si/, 'Meetings run on Jitsi Meet (meet.jit.si): audio, video and chat go through Jitsi\'s servers.'],
+    ['net', /bsky|atproto/, 'Posting to Bluesky sends your post and login to Bluesky, only when you press post.'],
+    ['net', /wikipedia/i, 'Some facts are loaded from Wikipedia.'],
+    ['net', /loremflickr/, 'Stock photos, if you choose them, are loaded from LoremFlickr.']
+  ];
+  const facts = { dl: [], perm: [], net: [] };
+  FACTS.forEach(([kind, re, text]) => { if (re.test(pageCode)) facts[kind].push(text); });
+  const usesCdn = /cdnjs\.cloudflare\.com|cdn\.jsdelivr\.net|unpkg\.com|fonts\.googleapis\.com/.test(pageCode);
+  function buildCard() {
+    const card = document.createElement('span');
+    card.className = 'miga-pop miga-card';
+    const sec = (title, lines) => {
+      if (!lines.length) return;
+      const h = document.createElement('strong'); h.textContent = title; card.appendChild(h);
+      const ul = document.createElement('ul');
+      lines.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+      card.appendChild(ul);
+    };
+    sec('Your files and text', [usesAI
+      ? 'Everything is worked on in your browser, except AI steps: when you use one, the text for that step goes to the AI you pick (free Gemini via MigaBuilder\'s proxy to Google; OpenAI or Anthropic directly with your own key).'
+      : 'Worked on in your browser and not uploaded to MigaBuilder.']);
+    sec('Downloads', facts.dl);
+    sec('Permissions', facts.perm);
+    sec('Other services', facts.net);
+    sec('Good to know', ['No account needed. Drafts you type are saved only in this browser.',
+      'MigaBuilder counts page visits without cookies or identifiers.'].concat(usesCdn ? ['Libraries and fonts come from public CDNs (they see your IP address, never your files).'] : []));
+    return card;
+  }
   const badge = usesAI
     ? ['miga-badge miga-badge-ai', 'This tool runs in your browser, except its AI steps. When you use an AI step, the text for that step is sent to the AI you pick: the free Gemini option goes through MigaBuilder\'s proxy to Google; OpenAI and Anthropic are called directly with your own key.', nav ? 'Runs in your browser · AI steps send text to the AI you pick' : 'AI steps go online']
     : ['miga-badge', 'This tool works inside your browser. Your text and files are not uploaded unless you use a sharing feature.', nav ? 'Private · runs in your browser' : 'Private'];
@@ -53,7 +97,7 @@
   (nav || document.body).appendChild(bar);
   // Tooltips do not work on phones, so tapping the badge shows the explanation.
   const badgeEl = bar.querySelector('.miga-badge');
-  const togglePop = () => { const open = badgeEl.querySelector('.miga-pop'); if (open) { open.remove(); badgeEl.setAttribute('aria-expanded', 'false'); return; } const pop = document.createElement('span'); pop.className = 'miga-pop'; pop.textContent = badge[1]; badgeEl.appendChild(pop); if (badgeEl.getBoundingClientRect().left < innerWidth / 2) { pop.style.left = '0'; pop.style.right = 'auto'; } badgeEl.setAttribute('aria-expanded', 'true'); };
+  const togglePop = () => { const open = badgeEl.querySelector('.miga-pop'); if (open) { open.remove(); badgeEl.setAttribute('aria-expanded', 'false'); return; } const pop = buildCard(); badgeEl.appendChild(pop); if (badgeEl.getBoundingClientRect().left < innerWidth / 2) { pop.style.left = '0'; pop.style.right = 'auto'; } badgeEl.setAttribute('aria-expanded', 'true'); };
   badgeEl.addEventListener('click', e => { if (!e.target.closest('.miga-pop')) togglePop(); });
   badgeEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePop(); } else if (e.key === 'Escape' && badgeEl.querySelector('.miga-pop')) togglePop(); });
   document.addEventListener('click', e => { if (!badgeEl.contains(e.target) && badgeEl.querySelector('.miga-pop')) togglePop(); });
