@@ -47,7 +47,7 @@ Use independent reviews to improve the code without letting one model merely rei
 
 ## When this runs: only when the owner asks
 
-Nothing here runs on a schedule or automatically. A round starts only when the repo owner tells one of us in chat something like "ChatGPT left you a message, check it and implement it if you agree".
+Nothing here runs on a schedule or automatically. (The one scheduled exception is the weekly feature scout in `FEATURE-SCOUT.md`; its pull requests stay drafts and only the owner merges them — step 4 below does not apply to them.) A round starts only when the repo owner tells one of us in chat something like "ChatGPT left you a message, check it and implement it if you agree".
 
 When asked, the model:
 

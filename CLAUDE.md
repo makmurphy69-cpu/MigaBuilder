@@ -67,3 +67,10 @@ Monday: safe CDN library upgrades (same major version) are tested and proposed
 as the pull request "Weekly library upgrades"; retired Gemini models, broken
 external/affiliate links and live pages that fail are reported in the issue
 "Weekly check-up". Run it locally with `node scripts/weekly-checkup.mjs`.
+
+## Weekly feature scout
+
+A scheduled Claude Routine ("MigaBuilder feature scout") runs weekly and
+follows `FEATURE-SCOUT.md`: it researches improvement ideas, posts them as a
+"Feature scout: <date>" issue, and builds at most one as a **draft** pull
+request. Never merge a scout pull request yourself — only the owner does.
