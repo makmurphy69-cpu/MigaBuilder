@@ -5,6 +5,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
 
+// Talk to yourself: one sofa, the same person sitting on the left (take 1) or the right (take 2).
+const SOFA = (side, talk) => `
+    const x=${side === 'left' ? 330 : 950}, look=${side === 'left' ? 9 : -9};
+    g.fillStyle='#ece4d2';g.fillRect(0,0,1280,720);g.fillStyle='#c9b48f';g.fillRect(0,610,1280,110);
+    g.fillStyle='#7a8fb0';g.fillRect(530,90,220,160);g.fillStyle='#bcd3ee';g.fillRect(545,105,190,130);
+    g.fillStyle='#4e9e73';g.beginPath();g.moveTo(560,225);g.lineTo(610,150);g.lineTo(650,225);g.fill();
+    g.fillStyle='#5b7c99';g.fillRect(140,330,1000,190);g.fillStyle='#4a6a86';g.fillRect(110,440,1060,170);
+    g.fillRect(80,390,110,220);g.fillRect(1090,390,110,220);g.fillStyle='#3a5670';g.fillRect(150,610,30,40);g.fillRect(1100,610,30,40);
+    g.fillStyle='#e2a63b';g.fillRect(x-80,370,160,170);
+    g.fillStyle='#2d3e50';g.fillRect(x-70,520,60,120);g.fillRect(x+10,520,60,120);
+    g.fillStyle='#e9b48f';g.beginPath();g.arc(x,295,74,0,Math.PI*2);g.fill();
+    g.fillStyle='#2b1a10';g.beginPath();g.ellipse(x,240,78,40,0,Math.PI,0);g.fill();
+    g.beginPath();g.arc(x-24+look,290,9,0,Math.PI*2);g.arc(x+24+look,290,9,0,Math.PI*2);g.fill();
+    ${talk ? "g.fillStyle='#7a2a24';g.beginPath();g.ellipse(x+look/2,330,20,15,0,0,Math.PI*2);g.fill();"
+           : "g.strokeStyle='#a3413a';g.lineWidth=7;g.lineCap='round';g.beginPath();g.arc(x+look/2,318,20,0.25,Math.PI-0.25);g.stroke();"}`;
+
 const DRAW = {
   // A friendly cartoon portrait on a plain background (background removal, talking photo)
   'portrait.png': [800, 800, `
@@ -56,6 +72,10 @@ const DRAW = {
     hill('#5d3f73',[[0,700],[300,560],[620,690],[900,540],[1200,700],[1600,600]]);
     hill('#2e2446',[[0,860],[400,760],[800,860],[1200,780],[1600,880]]);`],
   // Two cartoon musicians for Jam Forge (each clip claps first, at a different moment)
+  'sofa-a.png': [1280, 720, SOFA('left', false)],
+  'sofa-a-talk.png': [1280, 720, SOFA('left', true)],
+  'sofa-b.png': [1280, 720, SOFA('right', false)],
+  'sofa-b-talk.png': [1280, 720, SOFA('right', true)],
   'jam-drummer.png': [1280, 720, `
     g.fillStyle='#ffe2b8';g.fillRect(0,0,1280,720);g.fillStyle='#f6c98a';g.fillRect(0,520,1280,200);
     g.fillStyle='#3d6fb6';g.beginPath();g.ellipse(640,640,230,90,0,0,Math.PI*2);g.fill();
@@ -143,5 +163,21 @@ export async function ensureAssets(browser, ffmpeg, dir) {
   if (!fs.existsSync(voice)) {
     const piper = spawnSync('python3', ['-m', 'piper', '-m', process.env.PIPER_VOICE || path.join(dir, '..', '.cache', 'voices', 'en_US-lessac-high.onnx'), '-f', voice], { input: 'Umm, hello everyone. Welcome to the Sunrise Bakery podcast. Today we talk about baking sourdough bread at home, step by step.' });
     if (piper.status !== 0) throw new Error('Could not make voice.wav: ' + piper.stderr);
+  }
+  // Talk to yourself: take 1 asks and then listens; take 2, filmed later, waits and answers.
+  const takes = [['sofa-take-1.webm', 'sofa-a', 'Did you eat the last cookie?', 0.5, 3.4],
+    ['sofa-take-2.webm', 'sofa-b', 'Me? No. Well... maybe one.', 1.4, 0.8]];
+  for (const [name, png, line, lead, tail] of takes) {
+    const out = path.join(dir, name);
+    if (fs.existsSync(out)) continue;
+    const wav = path.join(dir, name.replace('.webm', '.wav'));
+    const said = spawnSync('python3', ['-m', 'piper', '-m', process.env.PIPER_VOICE || path.join(dir, '..', '.cache', 'voices', 'en_US-lessac-high.onnx'), '-f', wav], { input: line });
+    if (said.status !== 0) throw new Error('Could not make ' + wav + ': ' + said.stderr);
+    const buf = fs.readFileSync(wav), data = buf.indexOf('data'), len = buf.readUInt32LE(data + 4) / buf.readUInt32LE(28);
+    const D = (lead + len + tail).toFixed(2), a = lead.toFixed(2), b = (lead + len).toFixed(2), ms = Math.round(lead * 1000);
+    execFileSync(ffmpeg, ['-y', '-hide_banner', '-loglevel', 'error',
+      '-loop', '1', '-t', D, '-i', path.join(dir, png + '.png'), '-loop', '1', '-t', D, '-i', path.join(dir, png + '-talk.png'), '-i', wav,
+      '-filter_complex', "[0:v][1:v]overlay=enable='between(t," + a + ',' + b + ")*lt(mod(t,0.26),0.13)',fps=25,format=yuv420p[v];[2:a]adelay=" + ms + '|' + ms + ',apad,atrim=0:' + D + '[a]',
+      '-map', '[v]', '-map', '[a]', '-c:v', 'libvpx-vp9', '-b:v', '0', '-crf', '42', '-deadline', 'realtime', '-cpu-used', '8', '-c:a', 'libopus', '-t', D, out]);
   }
 }

@@ -1006,25 +1006,45 @@ S('media-convert-forge.html', {
 });
 
 S('clip-forge.html', {
-  title: 'Clip Forge', subtitle: 'Trim, caption, resize and auto-edit video',
-  intro: 'Welcome to Clip Forge. Edit one video, or let Auto Edit turn several clips into one.',
+  title: 'Clip Forge', subtitle: 'Edit, auto-edit, and talk to yourself',
+  intro: 'Welcome to Clip Forge. Edit one video, let Auto Edit cut several clips into one, and even talk to yourself.',
   async run(h, page) {
+    const top = () => page.locator('section.panel').evaluate(el => el.scrollTo(0, 0));
     await h.step('Upload a video. It plays right here in your browser.', () => h.upload('#videoInput', 'clip.webm'));
-    await h.step('Set where it starts and ends, pick a shape, add text and music, then press Render video.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); await h.point('#renderBtn'); });
-    await h.step('Have several clips? Open Auto Edit, and it edits them into one video for you.', async () => { await page.locator('section.panel').evaluate(el => el.scrollTo(0, 0)); await h.click('#autoEditBox summary'); });
-    await h.step('Add your clips. Clip Forge watches each one for movement, light, focus and sound.', () => h.upload('#aeClipsInput', ['clip.webm', 'jam-drums.webm', 'jam-guitar.webm']));
-    await h.skip('Skipping ahead while it measures the clips', () => page.waitForFunction(() => /clips measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 120000 }));
-    await h.step('Choose what it is for, say what it is about, and how it should end.', async () => { await h.select('#aeGoal', 'ad'); await h.type('#aeAbout', 'Our band plays live this Friday'); await h.type('#aeCta', 'Get tickets now'); });
-    await h.step('Press Plan the edit. The AI picks the best moments, opens on a hook, and keeps shots short.', () => h.click('#aePlanBtn'));
+    await h.step('Trim it, pick a shape, add text and music, then press Render video.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); await h.point('#renderBtn'); });
+    // Talk to yourself
+    await h.step('Now the fun part: talk to yourself. Open Talk to yourself.', async () => { await top(); await h.click('#cloneBox summary'); });
+    await h.step('Film yourself on one side of the sofa asking something, with the camera standing still. Add it as take 1.', () => h.upload('#cloneInputA', 'sofa-take-1.webm'));
+    await h.step('Then sit on the other side and answer. Add that as take 2.', () => h.upload('#cloneInputB', 'sofa-take-2.webm'));
+    await h.skip('Skipping ahead while it listens to both takes', () => page.waitForSelector('#cloneOptions', { state: 'visible', timeout: 60000 }));
+    await h.step('Clip Forge listens to both takes and times them, so you take turns instead of talking over each other.', () => h.point('#cloneStatus'));
+    await h.step('Press Preview. Move the join into the empty space between you, and soften its edge.', async () => { await h.click('#clonePreviewBtn'); await h.wait(5800); });
+    await h.step('Press Make the video.', () => h.click('#cloneRenderBtn'));
+    await h.skip('Skipping ahead while the video renders', () => page.waitForSelector('#cloneToAeBtn:visible', { timeout: 120000 }));
+    await h.step('There are two of you. Download it, or add it to Auto Edit for text, effects and music.', () => h.click('#cloneToAeBtn'));
+    // Auto Edit
+    await h.step('Auto Edit turns several clips into one video. Add more clips. It watches each for movement, light, focus and sound.', () => h.upload('#aeClipsInput', ['jam-drums.webm', 'jam-guitar.webm']));
+    await h.skip('Skipping ahead while it measures the clips', () => page.waitForFunction(() => /3 clips measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 120000 }));
+    await h.step('Choose what it is for, what it is about, and how it should end.', async () => { await h.select('#aeGoal', 'ad'); await h.type('#aeAbout', 'Cookie thief caught on camera'); await h.type('#aeCta', 'Follow for part two'); });
+    await h.step('Add music and every cut lands on its beat. Add a video you like, and Auto Edit copies its rhythm.', () => h.point('label[for="aeRefInput"]'));
+    await h.step('Press Plan the edit. The AI picks the best moments, opens on a hook, and keeps the shots short.', () => h.click('#aePlanBtn'));
     await h.skip('Skipping ahead while it plans', () => page.waitForSelector('#aeShotList .ae-item', { timeout: 120000 }));
-    await h.step('Every cut is listed. Watch, move or remove any of them, and give any shot its own text, effect and sound.', () => h.point('#aeShotList'));
-    await h.step('Or let the AI pick text, effects and sounds that fit. Surprise me rolls the dice instead.', () => h.click('#aeFxAiBtn'));
+    await h.step('Every cut is listed. Watch, move or remove any of them.', () => h.point('#aeShotList'));
+    await h.step('Let the AI pick text, effects and sounds that fit.', () => h.click('#aeFxAiBtn'));
     await h.skip('Skipping ahead while the AI picks', () => page.waitForFunction(() => /picked|random/.test(document.querySelector('#aeFxStatus').textContent), null, { timeout: 120000 }));
+    await h.step('Or press Surprise me for a fresh mix.', async () => { await page.evaluate(() => { document.querySelector('#aeFxStatus').textContent = ''; }); await h.click('#aeFxRandomBtn'); });
+    await h.skip('Skipping ahead while it picks again', () => page.waitForFunction(() => /picked|random|Rolled/.test(document.querySelector('#aeFxStatus').textContent), null, { timeout: 120000 }));
+    await h.step('Change anything yourself: an effect, a sound, or your own text on any shot.', async () => {
+      const shot = page.locator('#aeShotList .ae-item').nth(1);
+      await shot.locator('select[data-f="fx"]').selectOption('punch');
+      await shot.locator('select[data-f="sfx"]').selectOption('whoosh');
+      await shot.locator('input[data-f="text"]').fill('Caught!');
+      await h.point('#aeShotList .ae-item:nth-child(2)');
+    });
     await h.step('Press Render the edit.', () => h.click('#aeRenderBtn'));
     await h.skip('Skipping ahead while the video renders', () => page.waitForSelector('#downloadVideoBtn:not([disabled]):visible', { timeout: 180000 }));
     await h.step('Preview the result, then download it.', () => h.point('#downloadVideoBtn'));
     await h.sampleDownload('#downloadVideoBtn', 'Video made in this video');
-    await h.step('Want two of you on one sofa? Film one take on each side, add them under Talk to yourself, and Clip Forge joins them.', async () => { await page.locator('section.panel').evaluate(el => el.scrollTo(0, 0)); await h.point('#cloneBox summary'); });
   }
 });
 
