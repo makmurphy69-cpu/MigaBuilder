@@ -683,11 +683,11 @@
   .foot-links a:hover { color:var(--paper); text-decoration:underline; }
   @media(max-width:900px){ .quick-grid, .results-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
   @media(max-width:620px){ .quick-grid { grid-template-columns:1fr !important; } .quick-grid .tool-card { padding:10px 12px; } .results-grid { grid-template-columns:1fr 1fr !important; gap:10px; } .result-text { padding:10px 12px 12px; } .result-text span { display:none; } .result-go { display:none; } .cta-tour { flex:1 1 100%; justify-content:center; } }
-  .hero-mini { display:flex; gap:8px; max-width:760px; margin:10px auto 0; justify-content:flex-start; flex-wrap:wrap; }
+  .hero-mini { display:flex; gap:8px; max-width:760px; margin:16px auto 0; justify-content:center; flex-wrap:wrap; }
   .hero-mini .cta-tour, .hero-mini .cta-install { min-height:0; padding:5px 12px 5px 5px; border-radius:999px; font-size:13px; font-weight:600; gap:7px; flex:none !important; border:1px solid rgba(111,209,224,.4); background:rgba(8,24,38,.6); color:var(--paper); }
   .hero-mini .cta-install { padding:5px 12px; }
   .hero-mini .cta-tour .play { width:22px; height:22px; font-size:9px; }
-  [dir=rtl] .hero-mini { justify-content:flex-start; }
+  [dir=rtl] .hero-mini { justify-content:center; }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -702,12 +702,12 @@
     <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
   </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
   <p class="hero-copy" data-i18n="heroSubtitle">Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.</p>
-  <div class="trust-row"><span data-i18n="trustTools">69 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustOpen">Open source</span></div>
+  <div class="hero-mini"><a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">Tour site</span></a><a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
+  <div class="trust-row"><span data-i18n="trustSignup">No signup</span><span data-i18n="trustOpen">Open source</span></div>
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
   </div>
-  <div class="hero-mini"><a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">Tour site</span></a><a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
 </header>
 
 <section class="tool-hub" id="tools" aria-label="All tools">
@@ -831,7 +831,7 @@
 </section>
 
 <footer class="site-foot">
-  <div class="foot-brand"><strong>MigaBuilder</strong><p data-i18n="footerText">69 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</p></div>
+  <div class="foot-brand"><strong>MigaBuilder</strong><p data-i18n="footerText">Free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</p></div>
   <nav class="foot-links" aria-label="Site links"><a href="#tools" data-i18n="footTools">All tools</a><a href="#tour" data-i18n="footTour">1-minute tour</a><a href="feedback.html" data-i18n="footFeedback">Feedback &amp; ideas</a><a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener" data-i18n="footSource">Open source on GitHub</a></nav>
 </footer>
 <script>
