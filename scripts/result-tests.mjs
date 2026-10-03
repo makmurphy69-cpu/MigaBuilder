@@ -109,6 +109,25 @@ test('media-convert: cancel stops the job and the next one still works', 'media-
   expect(/\.mp3$/.test(out.name), 'expected an .mp3 after cancelling, got ' + out.name);
 }, { timeout: 300000 });
 
+test('media-convert: cancel while the engine downloads stops the job', 'media-convert.html', async (page, ctx) => {
+  // Hold the engine download so Cancel lands while it is still coming in.
+  await ctx.route(/@ffmpeg\/core/, async route => { await new Promise(r => setTimeout(r, 4000)); await route.continue(); });
+  let downloads = 0;
+  page.on('download', () => downloads++);
+  await page.click('.tab[data-mode="convert"]');
+  await page.setInputFiles('#ffFile', path.join(FIX, 'clip.mp4'));
+  await page.click('#ffConvert');
+  await page.waitForFunction(() => /Downloading the conversion engine/.test(document.querySelector('#ffProgress').textContent), null, { timeout: 60000 });
+  await page.click('#ffProgress .mp-cancel');
+  await page.waitForFunction(() => !document.querySelector('#ffConvert').disabled, null, { timeout: 60000 });
+  await page.waitForTimeout(3000);
+  expect(/Cancelled/.test(await page.textContent('#ffProgress')), 'the panel no longer says Cancelled: ' + (await page.textContent('#ffProgress')).slice(0, 120));
+  expect(downloads === 0, 'the cancelled job still made a file');
+  await page.selectOption('#ffMode', 'mp3');
+  const out = await downloadOf(page, () => page.click('#ffConvert'), 240000);
+  expect(/\.mp3$/.test(out.name), 'expected an .mp3 after cancelling, got ' + out.name);
+}, { timeout: 300000 });
+
 test('ocr-forge: read two images with one engine and join a searchable PDF', 'ocr-forge.html', async (page) => {
   let workers = 0;
   page.on('worker', () => workers++);

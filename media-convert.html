@@ -29,19 +29,21 @@ function secs(v){v=String(v||'').trim();if(!v)return null;const parts=v.split(':
 function fmt(t){const m=Math.floor(t/60),s=(t%60).toFixed(1);return m+':'+(s<10?'0':'')+s}
 function loadScript(src){return new Promise((ok,no)=>{if(window.FFmpegWASM)return ok();const el=document.createElement('script');el.src=src;el.onload=ok;el.onerror=()=>no(new Error('Failed to fetch the conversion engine'));document.head.appendChild(el)})}
 async function blobUrl(url,type,onBytes){const r=await fetch(url);if(!r.ok)throw new Error('Failed to fetch '+url.split('/').pop());const total=+r.headers.get('content-length')||0;if(!r.body||!total||!onBytes)return URL.createObjectURL(new Blob([await r.arrayBuffer()],{type}));const reader=r.body.getReader(),parts=[];let got=0;for(;;){const {done,value}=await reader.read();if(done)break;parts.push(value);got+=value.length;onBytes(got/total)}return URL.createObjectURL(new Blob(parts,{type}))}
+// Progress from the engine download stays quiet once the visitor has cancelled.
+const say=(f,t)=>{if(!cancelled)job.update(f,t)};
 async function engine(){
   if(ffmpeg)return ffmpeg;
   await loadScript(FF+'umd/ffmpeg.js');
   if(!urls){
-    job.update(0,'Downloading the conversion engine (once)…');
+    say(0,'Downloading the conversion engine (once)…');
     // The library starts its worker as a module, so use its ESM worker with the two relative imports pointed at blob: copies.
     const dep=async n=>blobUrl(FF+'esm/'+n,'text/javascript');
     const constUrl=await dep('const.js'),errorsUrl=await dep('errors.js');
     const r=await fetch(FF+'esm/worker.js');if(!r.ok)throw new Error('Failed to fetch the conversion engine');
     const workerJs=(await r.text()).replace(/(["'])\.\/const\.js\1/g,JSON.stringify(constUrl)).replace(/(["'])\.\/errors\.js\1/g,JSON.stringify(errorsUrl));
-    urls={worker:URL.createObjectURL(new Blob([workerJs],{type:'text/javascript'})),core:await blobUrl(CORE+'ffmpeg-core.js','text/javascript'),wasm:await blobUrl(CORE+'ffmpeg-core.wasm','application/wasm',f=>job.update(f,'Downloading the conversion engine (once)… '+Math.round(f*100)+'%'))};
+    urls={worker:URL.createObjectURL(new Blob([workerJs],{type:'text/javascript'})),core:await blobUrl(CORE+'ffmpeg-core.js','text/javascript'),wasm:await blobUrl(CORE+'ffmpeg-core.wasm','application/wasm',f=>say(f,'Downloading the conversion engine (once)… '+Math.round(f*100)+'%'))};
   }
-  job.update(null,'Starting the conversion engine…');
+  say(null,'Starting the conversion engine…');
   const ff=new FFmpegWASM.FFmpeg();
   await ff.load({classWorkerURL:urls.worker,coreURL:urls.core,wasmURL:urls.wasm});
   ffmpeg=ff;return ff;
@@ -58,6 +60,7 @@ async function run(){
   const ext=(f.name.split('.').pop()||'mp4').replace(/[^a-z0-9]/gi,'')||'mp4',input='input.'+ext;let out='';
   try{
     const ff=await engine();
+    if(cancelled)return; // Cancel was pressed while the engine was still downloading
     const mode=$('ffMode').value,base=f.name.replace(/\.[^.]+$/,'').replace(/[^\w-]+/g,'-').slice(0,40)||'migabuilder';
     const trim=(start?['-ss',String(start)]:[]),dur=end!==null?['-t',String(end-start)]:[];
     const rot={90:'transpose=1',180:'transpose=1,transpose=1',270:'transpose=2'}[$('ffRotate').value],w=+$('ffWidth').value;let args,type;
