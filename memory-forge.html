@@ -241,7 +241,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
 const DEF={mode:'numbers',tab:'levels',timed:true,level:1,sound:true,
   numCount:7,symCount:5,numDigits:1,symSet:'shapes',symVariety:8,studyMode:'all',studySec:1.2,recallSec:0,present:'see',
   chimpCount:6,chimpHideSec:3,pairsCount:8,pairsKind:'symbols',previewSec:3,pairsLimit:90,
-  nbackN:2,nbackDual:true,nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false,
+  nbackN:2,nbackDual:true,nbackPresent:'see',nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false,
   wordCount:10,wordStudySec:3,wordOrder:'any',wordRecallSec:0};
 const S=Object.assign({},DEF,store.settings);
 function persist(){store.settings=S;save()}
@@ -262,7 +262,7 @@ function levelCfg(mode,L,timed){
   return c;
 }
 function currentCfg(){
-  if(S.tab==='levels'){const c=levelCfg(S.mode,S.level,S.timed);return Object.assign({},DEF,{symSet:S.symSet,present:S.present},c)}
+  if(S.tab==='levels'){const c=levelCfg(S.mode,S.level,S.timed);return Object.assign({},DEF,{symSet:S.symSet,present:S.present,nbackPresent:S.nbackPresent},c)}
   const c=Object.assign({},S,{level:0});
   if(!S.timed){c.recallSec=0;c.pairsLimit=0;c.previewSec=S.previewSec;c.nbackInterval=0;c.wordRecallSec=0}
   if(S.mode==='numbers')c.symCount=0;if(S.mode==='symbols')c.numCount=0;
@@ -293,7 +293,7 @@ function renderCustom(){
   }
   if(m==='chimp'){h+=f('c_chimpCount','How many numbers',num('chimpCount',3,40));if(T)h+=f('c_chimpHideSec','Seconds before they hide',num('chimpHideSec',0.3,60,0.1),'Without time they hide when you tap 1')}
   if(m==='pairs'){h+=f('c_pairsCount','How many pairs',num('pairsCount',2,18))+f('c_pairsKind','Cards show',sel('pairsKind',[['symbols','Symbols'],['numbers','Numbers'],['mixed','Numbers and symbols']]))+f('c_previewSec','Peek at all cards first (seconds)',num('previewSec',0,30,0.5));if(T)h+=f('c_pairsLimit','Time limit in seconds (0 = none)',num('pairsLimit',0,900))}
-  if(m==='nback'){h+=f('c_nbackN','N (how many steps back)',num('nbackN',1,9))+f('c_nbackDual','Track',sel('nbackDual',[['false','Card only'],['true','Card and position (dual)']]))+f('c_nbackTrials','Rounds',num('nbackTrials',10,100));if(T)h+=f('c_nbackInterval','Seconds per round',num('nbackInterval',1,10,0.1),'Without time each round waits for your answer')}
+  if(m==='nback'){h+=f('c_nbackN','N (how many steps back)',num('nbackN',1,9))+f('c_nbackDual','Track',sel('nbackDual',[['false','Card only'],['true','Card and position (dual)']]))+f('c_nbackPresent','Numbers are',sel('nbackPresent',[['see','Shown in the square'],['hear','Read aloud (classic dual n-back)'],['both','Shown and read aloud']]),'Read aloud keeps the number and the square on separate senses')+f('c_nbackTrials','Rounds',num('nbackTrials',10,100));if(T)h+=f('c_nbackInterval','Seconds per round',num('nbackInterval',1,10,0.1),'Without time each round waits for your answer')}
   if(m==='corsi'){h+=f('c_corsiLen','Sequence length',num('corsiLen',2,30))+f('c_corsiGrid','Grid size',sel('corsiGrid',[[3,'3 × 3'],[4,'4 × 4'],[5,'5 × 5']]))+f('c_corsiSpeed','Seconds each square stays lit',num('corsiSpeed',0.2,3,0.05))+f('c_corsiReverse','Order',sel('corsiReverse',[['false','Same order'],['true','Backwards (harder)']]))}
   if(m==='words'){h+=f('c_wordCount','How many words',num('wordCount',3,80))+f('c_studyMode','How words are shown',sel('studyMode',[['all','All at once'],['flash','One at a time']]))+f('c_wordOrder','Scoring',sel('wordOrder',[['any','Any order'],['exact','Exact order (harder)']]));
     if(T)h+=f('c_wordStudySec','Seconds per word',num('wordStudySec',0.5,30,0.5),'All at once: total time = this × number of words')+f('c_wordRecallSec','Seconds to answer (0 = no limit)',num('wordRecallSec',0,900))}
@@ -309,7 +309,7 @@ function describe(c){
     parts.push(c.timed?(c.studySec.toFixed(1)+' s per card'+(c.recallSec?', '+c.recallSec+' s to answer':', no answer limit')):'look as long as you like, then answer with no clock');
   } else if(m==='chimp')parts.push(c.chimpCount+' numbers on the grid',c.timed?'hidden after '+c.chimpHideSec.toFixed(1)+' s':'hidden when you tap 1');
   else if(m==='pairs')parts.push(c.pairsCount+' pairs ('+c.pairsCount*2+' cards) of '+c.pairsKind,c.previewSec?'peek '+(+c.previewSec).toFixed(1)+' s':'no peek',c.timed&&c.pairsLimit?c.pairsLimit+' s limit':'no time limit');
-  else if(m==='nback')parts.push(c.nbackN+'-back',c.nbackDual?'card + position (dual)':'card only',c.nbackTrials+' rounds',c.timed&&c.nbackInterval?c.nbackInterval.toFixed(1)+' s each':'each round waits for you');
+  else if(m==='nback')parts.push(c.nbackN+'-back',c.nbackDual?'card + position (dual)':'card only',c.nbackPresent==='hear'?'numbers read aloud':c.nbackPresent==='both'?'numbers shown and read aloud':'',c.nbackTrials+' rounds',c.timed&&c.nbackInterval?c.nbackInterval.toFixed(1)+' s each':'each round waits for you');
   else if(m==='corsi')parts.push(c.corsiLen+' squares on a '+c.corsiGrid+'×'+c.corsiGrid+' grid',c.corsiReverse?'repeat it backwards':'repeat in the same order',(+c.corsiSpeed).toFixed(2)+' s per square',c.timed?'':'you may replay it once');
   else if(m==='words')parts.push(c.wordCount+' words',c.studyMode==='flash'?'shown one at a time':'shown all at once',c.wordOrder==='exact'?'exact order counts':'any order',c.timed?(+c.wordStudySec).toFixed(1)+' s per word'+(c.wordRecallSec?', '+c.wordRecallSec+' s to answer':''):'no clock');
   return parts.filter(Boolean).join(' · ');
@@ -455,19 +455,20 @@ function pairsGame(c){
 
 // ---------- 4. n-back ----------
 function nbackGame(c){
-  const N=c.nbackN,T=c.nbackTrials+N,dual=c.nbackDual,letters=['1','2','3','4','5','6','7','8'];
+  const N=c.nbackN,T=c.nbackTrials+N,dual=c.nbackDual,hear=c.nbackPresent&&c.nbackPresent!=='see'&&'speechSynthesis' in window,see=!hear||c.nbackPresent==='both',letters=['1','2','3','4','5','6','7','8'];
   const seq=[];for(let i=0;i<T;i++){let p=rnd(9),l=letters[rnd(8)];
     if(i>=N){if(Math.random()<0.3)l=seq[i-N].l;if(dual&&Math.random()<0.3)p=seq[i-N].p}seq.push({p,l})}
-  $('arena').innerHTML='<p class="center muted">Press <b>Card match</b> (key L) when the number is the same as '+N+' step'+(N>1?'s':'')+' back'+(dual?', and <b>Position match</b> (key A) when the square is in the same place as '+N+' back':'')+'.'+(c.timed&&c.nbackInterval?'':' Press <b>Next</b> (Space) to move on.')+'</p><div class="nb" id="nb">'+Array.from({length:9},(_,i)=>'<div id="nb-'+i+'"></div>').join('')+'</div>'+
+  $('arena').innerHTML='<p class="center muted">Press <b>Card match</b> (key L) when the number you '+(see?'see':'hear')+' is the same as '+N+' step'+(N>1?'s':'')+' back'+(dual?', and <b>Position match</b> (key A) when the square is in the same place as '+N+' back':'')+'.'+(c.timed&&c.nbackInterval?'':' Press <b>Next</b> (Space) to move on.')+'</p><div class="nb" id="nb">'+Array.from({length:9},(_,i)=>'<div id="nb-'+i+'"></div>').join('')+'</div>'+
     '<div class="nbbtns">'+(dual?'<button id="posBtn">Position match (A)</button>':'')+'<button id="cardBtn">Card match (L)</button>'+(c.timed&&c.nbackInterval?'':'<button id="nextNb" style="background:var(--amber);border-color:var(--amber)">Next (Space)</button>')+'</div>';
   let i=-1,resp={p:false,l:false};const score={hit:0,miss:0,fa:0,cr:0};
   const judge=()=>{if(i<N)return;const s=seq[i],tl=s.l===seq[i-N].l,tp=s.p===seq[i-N].p;
     [['l',tl]].concat(dual?[['p',tp]]:[]).forEach(([k,t])=>{const r=resp[k];if(t&&r)score.hit++;else if(t)score.miss++;else if(r)score.fa++;else score.cr++})};
   const show=()=>{judge();i++;resp={p:false,l:false};['posBtn','cardBtn'].forEach(id=>$(id)&&($(id).className=''));
     document.querySelectorAll('#nb div').forEach(d=>{d.className='';d.textContent=''});
-    if(i>=T){const tot=score.hit+score.miss+score.fa+score.cr,acc=tot?(score.hit+score.cr)/tot*100:0;
-      finish(acc,'<p>Matches caught: '+score.hit+' · missed: '+score.miss+' · false alarms: '+score.fa+' · correct rejections: '+score.cr+'.</p>',{items:T});return}
-    const s=seq[i],cell=$('nb-'+s.p);cell.className='on';cell.textContent=s.l;tick();clock('round '+(i+1)+'/'+T);
+    if(i>=T){// average of the match and no-match rates, so never pressing (or always pressing) scores 50%, not 60–70%
+      const rate=(a,b)=>a+b?a/(a+b):1,acc=(rate(score.hit,score.miss)+rate(score.cr,score.fa))/2*100;
+      finish(acc,'<p>Matches caught: '+score.hit+' · missed: '+score.miss+' · false alarms: '+score.fa+' · correct rejections: '+score.cr+'.</p><p class="muted">Score = average of matches caught and non-matches left alone, so guessing gets 50%.</p>',{items:T});return}
+    const s=seq[i],cell=$('nb-'+s.p);cell.className='on';if(see)cell.textContent=s.l;if(hear){try{speechSynthesis.cancel()}catch(e){}say(s.l)}else tick();clock('round '+(i+1)+'/'+T);
     if(c.timed&&c.nbackInterval)later(()=>{cell.className='';cell.textContent=''},c.nbackInterval*1000*0.6)};
   const press=k=>{if(i<0||i>=T||resp[k])return;resp[k]=true;const t=i>=N&&(k==='l'?seq[i].l===seq[i-N].l:seq[i].p===seq[i-N].p);const b=$(k==='l'?'cardBtn':'posBtn');if(b)b.className=t?'hit':'miss'};
   $('cardBtn').onclick=()=>press('l');if(dual)$('posBtn').onclick=()=>press('p');
