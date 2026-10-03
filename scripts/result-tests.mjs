@@ -96,8 +96,11 @@ test('media-convert: remove location data keeps the video', 'media-convert.html'
 
 test('media-convert: cancel stops the job and the next one still works', 'media-convert.html', async (page) => {
   await page.click('.tab[data-mode="convert"]');
-  await page.setInputFiles('#ffFile', path.join(FIX, 'clip.mp4'));
+  // A 30-second clip, and Cancel only once converting has begun: on a fast runner the
+  // 3-second clip finished before the click landed, so the test saw "Finished".
+  await page.setInputFiles('#ffFile', path.join(FIX, 'clip-long.mp4'));
   await page.click('#ffConvert');
+  await page.waitForFunction(() => /Converting/.test(document.querySelector('#ffProgress').textContent), null, { timeout: 120000 });
   await page.click('#ffProgress .mp-cancel');
   await page.waitForFunction(() => /Cancelled/.test(document.querySelector('#ffProgress').textContent));
   await page.waitForFunction(() => !document.querySelector('#ffConvert').disabled, null, { timeout: 60000 });
