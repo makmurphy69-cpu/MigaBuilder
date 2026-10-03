@@ -52,7 +52,7 @@ main{max-width:1240px}
 .drop input{display:none}
 .progress{font-size:14px;margin-top:8px;min-height:20px}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:10px 0}
-.tile{background:#fff;border:1px solid rgba(22,32,43,.13);padding:12px;border-radius:4px}.tile b{display:block;font:700 24px 'Space Grotesk'}.tile span{font-size:12px;color:rgba(22,32,43,.65)}
+.tile{background:#fff;border:1px solid rgba(22,32,43,.13);padding:12px;border-radius:4px}.tile b{display:block;font:700 24px 'Space Grotesk'}.tile span{font-size:12px;color:rgba(22,32,43,.72)}
 .big{font:700 44px 'Space Grotesk';line-height:1}
 .tw{overflow:auto;max-height:70vh;border:1px solid rgba(22,32,43,.15);background:#fff}
 table.res{border-collapse:collapse;width:100%;font-size:13px}
@@ -168,7 +168,7 @@ details.box summary{cursor:pointer;font-weight:700}
     <button class="secondary" data-add="open">+ Open answer</button>
   </div>
   <div class="row"><label>Add <input id="bulkN" type="number" min="1" max="100" value="10" class="inline" style="width:70px"></label>
-    <select id="bulkT" class="inline"><option value="mc">multiple-choice</option><option value="tf">true / false</option><option value="multi">multi-select</option><option value="short">short-answer</option><option value="open">open-answer</option></select>
+    <select id="bulkT" class="inline" aria-label="Question type"><option value="mc">multiple-choice</option><option value="tf">true / false</option><option value="multi">multi-select</option><option value="short">short-answer</option><option value="open">open-answer</option></select>
     <label>with <select id="bulkO" class="inline"><option>3</option><option selected>4</option><option>5</option><option>6</option></select> options</label>
     <button class="secondary" id="bulkAdd">Add questions</button>
     <span class="note" id="qCount"></span></div>

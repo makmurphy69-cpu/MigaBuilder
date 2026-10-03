@@ -40,7 +40,7 @@ main.boat-main{max-width:1400px;display:grid;grid-template-columns:340px minmax(
 .svgbox svg{display:block;width:100%;height:auto}
 .hydro{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
 .hv{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px}
-.hv b{display:block;font:700 18px 'Space Grotesk'}.hv span{font-size:11.5px;color:rgba(22,32,43,.62)}.hv i{font-style:normal;font-size:11px;color:#35516b}
+.hv b{display:block;font:700 18px 'Space Grotesk'}.hv span{font-size:11.5px;color:rgba(22,32,43,.72)}.hv i{font-style:normal;font-size:11px;color:#35516b}
 .checks{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
 .checks li{padding:8px 10px;border-radius:5px;font-size:13px;line-height:1.4}
 .checks .ok{background:#eef8f1;border-left:4px solid #4E9E73}.checks .warn{background:#fff6e0;border-left:4px solid #E2A63B}.checks .bad{background:#fdeeea;border-left:4px solid #D8604A}
@@ -91,7 +91,7 @@ table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}tab
 
 <div>
   <section class="panel">
-    <div class="viewtabs" role="tablist">
+    <div class="viewtabs" role="group" aria-label="View">
       <button class="active" data-view="v3d" id="tab3d">🛥️ 3D</button>
       <button data-view="vlines" id="tabLines">📐 Lines plan</button>
       <button data-view="vstab" id="tabStab">⚖️ Stability</button>

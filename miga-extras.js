@@ -37,7 +37,7 @@
     '.miga-float{position:fixed;left:10px;bottom:10px;z-index:60;margin:0;background:rgba(8,24,38,.88);padding:4px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:.85}.miga-float:hover{opacity:1}' +
     '.miga-float .miga-badge{border:0;padding:3px 6px}' +
     '.miga-badge{cursor:help;position:relative}.miga-badge .s{display:none}.miga-pop{position:absolute;z-index:9999;top:calc(100% + 6px);right:0;width:min(300px,80vw);white-space:normal;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:10px 12px;font:400 12.5px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35)}.miga-float .miga-pop{top:auto;bottom:calc(100% + 6px);left:0;right:auto}' +
-    '.miga-local-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.72}' +
+    '.miga-local-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.88}' +
     '.miga-card strong{display:block;color:#6FD1E0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 3px}.miga-card strong:first-child{margin-top:0}.miga-card ul{margin:0;padding-left:16px}.miga-card li{margin:2px 0}.miga-card{width:min(340px,86vw);max-height:70vh;overflow:auto;cursor:auto}' +
     '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}}';
   document.head.appendChild(st);

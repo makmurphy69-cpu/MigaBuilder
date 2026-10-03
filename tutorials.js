@@ -127,7 +127,8 @@
     const mins=Math.floor((v.duration||0)/60)+':'+String((v.duration||0)%60).padStart(2,'0');
     const sampleHref='sample-viewer.html?tool='+encodeURIComponent(file);
     const sum=box.querySelector('summary');
-    sum.innerHTML='<span><b>VIDEO GUIDE · '+mins+'</b><span>Watch how '+esc(tool[0])+' works — with voice</span><span id="mt-title" hidden></span></span><span class="miga-sum-actions">'+(v.sample?'<a class="miga-sample-link" href="'+sampleHref+'">See the sample made in this video</a>':'')+'<span>▶ Watch</span></span>';
+    // No links inside <summary> (a control inside a control confuses screen readers); the sample link is in the opened guide.
+    sum.innerHTML='<span><b>VIDEO GUIDE · '+mins+'</b><span>Watch how '+esc(tool[0])+' works — with voice</span><span id="mt-title" hidden></span></span><span class="miga-sum-actions">'+(v.sample?'<span class="miga-sample-link">Includes the sample made in this video</span>':'')+'<span>▶ Watch</span></span>';
     const sec=document.createElement('div');sec.className='miga-video';
     sec.innerHTML='<video controls preload="none" playsinline poster="'+esc(v.poster)+'"><source src="'+esc(v.video)+'" type="video/mp4">Your browser cannot play this video.</video>'+
       '<div class="miga-video-actions">'+(v.sample?'<a class="miga-sample-btn" href="'+sampleHref+'">👀 See the sample made in this video</a>':'')+'<a class="miga-video-dl" href="'+esc(v.video)+'" download>⬇ Download video</a></div>'+

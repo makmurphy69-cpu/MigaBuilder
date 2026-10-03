@@ -54,7 +54,7 @@ main{max-width:1320px}
 .shell{fill:none;stroke:rgba(14,42,71,.25)}.eorb{transform-origin:100px 100px;animation:spin linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.eorb{animation:none}}
-.facts{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fact{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12.5px}.fact b{display:block;font-size:11px;color:rgba(22,32,43,.6);font-weight:600}.fact span{font-weight:700;font-size:14px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:6px}.fact{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12.5px}.fact b{display:block;font-size:11px;color:rgba(22,32,43,.72);font-weight:600}.fact span{font-weight:700;font-size:14px}
 .sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
 .sect p,.sect li{font-size:14px;line-height:1.5}.sect ul{margin:0;padding-left:20px}
 .cpd{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:7px 10px;margin-bottom:6px;font-size:13.5px;line-height:1.45}
@@ -62,7 +62,7 @@ main{max-width:1320px}
 .go{display:inline-block;padding:3px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.25);color:#0E2A47;font-size:12.5px;font-weight:600;cursor:pointer;margin:2px 3px 2px 0;font-family:inherit}
 .go:hover{border-color:#0E2A47}
 .dyk{background:rgba(226,166,59,.12);border-left:3px solid #E2A63B;padding:8px 12px;font-size:14px;line-height:1.5}
-.empty{color:rgba(22,32,43,.6);text-align:center;padding:30px 10px}
+.empty{color:rgba(22,32,43,.72);text-align:center;padding:30px 10px}
 .bowl{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-height:52px;background:#fff;border:2px dashed rgba(14,42,71,.3);border-radius:6px;padding:8px}
 .bchip{display:inline-flex;align-items:center;gap:6px;border-radius:5px;padding:5px 8px;font:700 16px 'Space Grotesk';color:#10202e;border:0;cursor:pointer}
 .bchip small{font:600 11px 'IBM Plex Sans'}
@@ -75,10 +75,10 @@ main{max-width:1320px}
 .t-ionic{background:#c0563f}.t-covalent{background:#3d7fb8}.t-network{background:#6b5aa8}.t-metallic{background:#8a7412}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
 .mcard{background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:5px;padding:8px 10px;text-align:left;cursor:pointer;font-family:inherit;color:var(--ink)}
-.mcard b{display:block;font:700 14px 'Space Grotesk'}.mcard small{font-size:11.5px;color:rgba(22,32,43,.62)}.mcard.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
+.mcard b{display:block;font:700 14px 'Space Grotesk'}.mcard small{font-size:11.5px;color:rgba(22,32,43,.72)}.mcard.on{border-color:#E2A63B;box-shadow:0 0 0 2px rgba(226,166,59,.4)}
 .mdet{background:#fff;border:1px solid rgba(22,32,43,.13);border-left:4px solid #E2A63B;border-radius:5px;padding:10px 12px;margin:10px 0;font-size:14px;line-height:1.5}
 .mdet p{margin:4px 0}
-.mm{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}.mm td,.mm th{padding:5px 7px;border-bottom:1px solid rgba(22,32,43,.12);text-align:left}.mm th{font-size:12px;color:rgba(22,32,43,.6)}
+.mm{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:8px}.mm td,.mm th{padding:5px 7px;border-bottom:1px solid rgba(22,32,43,.12);text-align:left}.mm th{font-size:12px;color:rgba(22,32,43,.72)}
 .cbar{display:flex;height:20px;border-radius:4px;overflow:hidden;margin-top:8px}.cbar span{display:block;height:100%}
 .big{font:700 26px 'Space Grotesk';color:#0E2A47}
 .learn h3{font:700 16px 'Space Grotesk';margin:14px 0 4px}.learn p{font-size:14px;line-height:1.55;margin:4px 0}
@@ -108,7 +108,7 @@ main{max-width:1320px}
 </div>
 <div class="modes" id="modes" aria-label="Colour the table by"></div>
 <section class="tablebox">
-  <div id="ptable" role="grid" aria-label="Periodic table of the elements"></div>
+  <div id="ptable" role="group" aria-label="Periodic table of the elements"></div>
   <div class="temp hidden" id="tempBox"><b id="tempVal">20 °C</b><input type="range" id="temp" min="-273" max="6000" step="1" value="20" aria-label="Temperature in °C"><button class="chip" data-t="-196">Liquid nitrogen −196 °C</button><button class="chip" data-t="20">Room 20 °C</button><button class="chip" data-t="100">Boiling water 100 °C</button><button class="chip" data-t="1538">Molten iron 1,538 °C</button><button class="chip" data-t="5500">Sun’s surface 5,500 °C</button></div>
   <div class="legend" id="legend"></div>
   <p style="margin:6px 0 0;font-size:12px;color:rgba(237,234,224,.7)">Explored: <b id="seenCount">0</b>/118 · <span id="hint">Tap an element to open it.</span></p>

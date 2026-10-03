@@ -24,7 +24,7 @@
 .dial.break .prog{stroke:var(--success)}
 .dial .readout{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .dial .time{font:700 clamp(46px,13vw,68px) 'IBM Plex Mono';letter-spacing:-1px}
-.dial .label{font:600 14px 'Space Grotesk';color:rgba(22,32,43,.62);text-transform:uppercase;letter-spacing:1px}
+.dial .label{font:600 14px 'Space Grotesk';color:rgba(22,32,43,.72);text-transform:uppercase;letter-spacing:1px}
 .dial .task-now{font-size:13px;color:rgba(22,32,43,.7);max-width:75%;text-align:center;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .controls{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .controls .primary{min-width:140px;font-size:17px}
@@ -37,12 +37,12 @@
 .tasks{list-style:none;padding:0;margin:12px 0 0}
 .tasks li{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px;margin-bottom:6px;cursor:pointer}
 .tasks li.current{border-color:var(--amber);box-shadow:inset 4px 0 0 var(--amber)}
-.tasks li.done .name{text-decoration:line-through;color:rgba(22,32,43,.5)}
-.tasks .name{flex:1;overflow-wrap:anywhere}.tasks .count{font:500 13px 'IBM Plex Mono';color:rgba(22,32,43,.62);white-space:nowrap}
-.tasks button{border:0;background:none;cursor:pointer;font-size:16px;color:rgba(22,32,43,.55);padding:2px 4px}
+.tasks li.done .name{text-decoration:line-through;color:rgba(22,32,43,.72)}
+.tasks .name{flex:1;overflow-wrap:anywhere}.tasks .count{font:500 13px 'IBM Plex Mono';color:rgba(22,32,43,.72);white-space:nowrap}
+.tasks button{border:0;background:none;cursor:pointer;font-size:16px;color:rgba(22,32,43,.72);padding:2px 4px}
 .sounds{display:flex;gap:6px;flex-wrap:wrap}.sounds button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:8px 12px;cursor:pointer;font-weight:600;color:var(--ink)}.sounds button.on{background:var(--navy);color:#fff}
 .stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
-.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.62)}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.72)}
 .tips{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}.tips details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.tips summary{font-weight:700;cursor:pointer}.tips p,.tips li{font-size:13.5px;line-height:1.5}
 body.focusing .panel.side{opacity:.55;transition:opacity .3s}body.focusing .panel.side:hover{opacity:1}
 @media(max-width:760px){.timer-wrap{grid-template-columns:1fr}}
@@ -54,7 +54,7 @@ body.focusing .panel.side{opacity:.55;transition:opacity .3s}body.focusing .pane
 <main>
 <div class="timer-wrap">
   <section class="panel" id="timerPanel">
-    <div class="phases" role="tablist" aria-label="Session type">
+    <div class="phases" role="group" aria-label="Session type">
       <button data-phase="focus" id="phaseFocus" class="on">🎯 Focus</button><button data-phase="short" id="phaseShort">☕ Short break</button><button data-phase="long" id="phaseLong">🌿 Long break</button>
     </div>
     <div class="dial" id="dial">
@@ -62,7 +62,7 @@ body.focusing .panel.side{opacity:.55;transition:opacity .3s}body.focusing .pane
       <div class="readout"><div class="label" id="phaseLabel">Focus</div><div class="time" id="time" role="timer" aria-live="off">25:00</div><div class="task-now" id="taskNow"></div></div>
     </div>
     <div class="controls"><button class="primary" id="startBtn">▶ Start</button><button class="secondary" id="resetBtn" title="Reset (R)">↺ Reset</button><button class="secondary" id="skipBtn" title="Skip (S)">⏭ Skip</button></div>
-    <div class="dots" id="dots" aria-label="Focus sessions in this round"></div>
+    <div class="dots" id="dots" role="img" aria-label="Focus sessions in this round"></div>
     <p class="muted" style="text-align:center;font-size:12.5px;margin:10px 0 0">Keys: <b>Space</b> start/pause · <b>R</b> reset · <b>S</b> skip</p>
   </section>
 
@@ -234,7 +234,7 @@ applySettings();
 // ---------- tasks ----------
 function renderTasks(){
   const t=store.tasks;
-  $('tasks').innerHTML=t.length?t.map(x=>'<li data-id="'+x.id+'" class="'+(x.id===store.current&&!x.done?'current ':'')+(x.done?'done':'')+'"><input type="checkbox" aria-label="Finished" '+(x.done?'checked':'')+'><span class="name">'+esc(x.name)+'</span><span class="count" title="Focus sessions done / estimated">'+(x.count||0)+' / '+x.est+' 🍅</span><button type="button" data-del title="Delete task" aria-label="Delete task">✕</button></li>').join(''):'<li style="cursor:default;color:rgba(22,32,43,.6)">No tasks yet — add one above, or just press Start.</li>';
+  $('tasks').innerHTML=t.length?t.map(x=>'<li data-id="'+x.id+'" class="'+(x.id===store.current&&!x.done?'current ':'')+(x.done?'done':'')+'"><input type="checkbox" aria-label="Finished" '+(x.done?'checked':'')+'><span class="name">'+esc(x.name)+'</span><span class="count" title="Focus sessions done / estimated">'+(x.count||0)+' / '+x.est+' 🍅</span><button type="button" data-del title="Delete task" aria-label="Delete task">✕</button></li>').join(''):'<li style="cursor:default;color:rgba(22,32,43,.72)">No tasks yet — add one above, or just press Start.</li>';
   $('tasks').querySelectorAll('li[data-id]').forEach(li=>{const x=t.find(y=>y.id===li.dataset.id);
     li.onclick=e=>{if(e.target.matches('input,button'))return;store.current=x.id;save();renderTasks();draw()};
     li.querySelector('input').onchange=e=>{x.done=e.target.checked;if(x.done&&store.current===x.id){const n=t.find(y=>!y.done);store.current=n?n.id:null}save();renderTasks();draw()};

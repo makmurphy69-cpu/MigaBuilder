@@ -96,7 +96,7 @@
 
   .section-title {
     font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-    color: rgba(22, 32, 43, 0.5); margin: 18px 0 10px;
+    color: rgba(22, 32, 43, 0.72); margin: 18px 0 10px;
   }
   .section-title:first-of-type { margin-top: 0; }
 
@@ -114,7 +114,7 @@
   .prompt-card { background: #fff; color: var(--ink); border: 1px solid rgba(22,32,43,0.18); border-radius: var(--radius); padding: 14px 16px; margin-top: 4px; }
   .prompt-card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; margin: 0 0 8px; color: var(--ink); }
   .prompt-card p { font-size: 13.5px; line-height: 1.55; margin: 0 0 8px; color: rgba(22,32,43,0.85); }
-  .prompt-card .harness-note { font-size: 12.5px; color: rgba(22,32,43,0.6); font-style: italic; }
+  .prompt-card .harness-note { font-size: 12.5px; color: rgba(22,32,43,0.72); font-style: italic; }
 
   .hints-wrap { margin-top: 10px; }
   .hint-line { background: rgba(226,166,59,0.14); border: 1px solid rgba(226,166,59,0.4); border-radius: var(--radius); padding: 8px 10px; font-size: 12.5px; margin-top: 6px; color: #4A3410; }
@@ -130,7 +130,7 @@
   .key-row { display: flex; gap: 8px; margin-top: 8px; }
   .key-row input { flex: 1; }
   .toggle-key { background: transparent; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); padding: 0 12px; font-size: 12px; cursor: pointer; }
-  .provider-hint { font-size: 12px; color: rgba(22,32,43,0.6); margin-top: 6px; line-height: 1.4; }
+  .provider-hint { font-size: 12px; color: rgba(22,32,43,0.72); margin-top: 6px; line-height: 1.4; }
 
   .table {
     background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
@@ -259,7 +259,7 @@
 
     <div class="editor-wrap" style="margin-top:16px;">
       <div class="editor-gutter" id="editorGutter">1</div>
-      <textarea id="codeEditor" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+      <textarea id="codeEditor" aria-label="Code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
     </div>
 
     <div class="run-row">
