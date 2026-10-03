@@ -34,8 +34,8 @@ textarea.src{min-height:240px;font:13px/1.5 'IBM Plex Mono',monospace}
 <main>
 <section class="panel">
   <div class="grid">
-    <div class="field"><label for="a">Original</label><textarea id="a" class="src" placeholder="Paste the original text, or drop a file here"></textarea><input type="file" id="fa" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
-    <div class="field"><label for="b">Changed</label><textarea id="b" class="src" placeholder="Paste the new version, or drop a file here"></textarea><input type="file" id="fb" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
+    <div class="field"><label for="a">Original</label><textarea id="a" class="src" placeholder="Paste the original text, or drop a file here"></textarea><input type="file" id="fa" aria-label="Open the original from a file" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
+    <div class="field"><label for="b">Changed</label><textarea id="b" class="src" placeholder="Paste the new version, or drop a file here"></textarea><input type="file" id="fb" aria-label="Open the changed version from a file" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
   </div>
   <div class="opts">
     <label><input type="radio" name="view" value="split" checked> Side by side</label>

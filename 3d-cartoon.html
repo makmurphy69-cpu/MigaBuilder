@@ -40,7 +40,7 @@ main{max-width:1280px;display:grid;grid-template-columns:minmax(280px,380px) 1fr
 .script{margin-top:12px;max-height:260px;overflow:auto;font-size:13px;background:#fff;border:1px solid rgba(22,32,43,.14);padding:8px 10px}
 .script div{padding:3px 0;border-bottom:1px dashed rgba(22,32,43,.12)}
 .script div.now{background:#fff7e6}
-.script em{color:rgba(22,32,43,.55);font-style:normal}
+.script em{color:rgba(22,32,43,.72);font-style:normal}
 .nogl{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:20px;color:var(--paper);background:#081826}
 .nogl.show{display:flex}
 @media(max-width:880px){main{grid-template-columns:1fr}.stage-wrap{order:-1}}
@@ -61,7 +61,7 @@ main{max-width:1280px;display:grid;grid-template-columns:minmax(280px,380px) 1fr
     <div class="actions"><button class="primary" id="makeBtn">🎬 Make my 3D cartoon</button><button class="secondary" id="sampleBtn">Play the sample</button></div>
     <p class="status" id="status" role="status"></p>
     <div class="cast" id="cast"></div>
-    <div class="script" id="script" aria-label="Script"></div>
+    <div class="script" id="script" aria-label="Script" tabindex="0"></div>
     <p class="muted">Characters: kid, robot, alien, furry forest creature, gremlin imp, cat, bear, dragon, ghost, frog and cyclops monster. Places: park, forest, city, space, beach, living room, night street and castle.</p>
   </section>
   <section class="stage-wrap">

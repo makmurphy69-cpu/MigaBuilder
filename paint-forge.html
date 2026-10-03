@@ -85,13 +85,13 @@
 
   .section-title {
     font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-    color: rgba(22, 32, 43, 0.5); margin: 16px 0 10px; padding-top: 14px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+    color: rgba(22, 32, 43, 0.72); margin: 16px 0 10px; padding-top: 14px; border-top: 1px solid rgba(22, 32, 43, 0.14);
   }
   .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
 
   .field { margin-bottom: 12px; }
   .field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
-  .field .hint { font-size: 11px; color: rgba(22, 32, 43, 0.6); margin-top: 4px; line-height: 1.4; }
+  .field .hint { font-size: 11px; color: rgba(22, 32, 43, 0.72); margin-top: 4px; line-height: 1.4; }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
   input[type="text"], input[type="number"], select {
@@ -210,7 +210,7 @@
 
     <div class="section-title" data-i18n="colorHeading">Color</div>
     <div class="field">
-      <input type="color" id="colorPicker" value="#0E2A47">
+      <input type="color" id="colorPicker" value="#0E2A47" aria-label="Colour">
       <div class="swatch-grid" id="swatchGrid"></div>
     </div>
 
@@ -240,7 +240,7 @@
       <span id="zoomLabel">100%</span>
       <button type="button" id="zoomInBtn">+</button>
     </div>
-    <div class="canvas-scroll">
+    <div class="canvas-scroll" tabindex="0" role="region" aria-label="Canvas">
       <canvas id="viewCanvas" width="900" height="600"></canvas>
     </div>
     <div class="btn-row" style="margin-top:12px;">
@@ -272,19 +272,19 @@
 
     <div class="section-title" data-i18n="adjustmentsHeading">Adjustments (active layer)</div>
     <div class="field">
-      <label><span data-i18n="brightnessLabel">Brightness</span> <span id="brightnessVal">0</span></label>
+      <label for="brightnessSlider"><span data-i18n="brightnessLabel">Brightness</span> <span id="brightnessVal">0</span></label>
       <input type="range" id="brightnessSlider" min="-100" max="100" value="0">
     </div>
     <div class="field">
-      <label><span data-i18n="contrastLabel">Contrast</span> <span id="contrastVal">0</span></label>
+      <label for="contrastSlider"><span data-i18n="contrastLabel">Contrast</span> <span id="contrastVal">0</span></label>
       <input type="range" id="contrastSlider" min="-100" max="100" value="0">
     </div>
     <div class="field">
-      <label><span data-i18n="saturationLabel">Saturation</span> <span id="saturationVal">0</span></label>
+      <label for="saturationSlider"><span data-i18n="saturationLabel">Saturation</span> <span id="saturationVal">0</span></label>
       <input type="range" id="saturationSlider" min="-100" max="100" value="0">
     </div>
     <div class="field">
-      <label><span data-i18n="blurLabel">Blur</span> <span id="blurVal">0px</span></label>
+      <label for="blurSlider"><span data-i18n="blurLabel">Blur</span> <span id="blurVal">0px</span></label>
       <input type="range" id="blurSlider" min="0" max="10" value="0">
     </div>
     <label class="check-row"><input type="checkbox" id="grayscaleCheck"> <span data-i18n="grayscaleLabel">Grayscale</span></label>
@@ -533,6 +533,7 @@
       label.textContent = labelText;
       const input = document.createElement('input');
       input.type = 'range'; input.min = min; input.max = max; input.step = step || 1; input.value = val;
+      input.id = 'toolOpt' + toolOptionsEl.children.length; label.htmlFor = input.id;
       input.addEventListener('input', () => onInput(parseFloat(input.value)));
       wrap.appendChild(label); wrap.appendChild(input);
       toolOptionsEl.appendChild(wrap);
@@ -564,6 +565,7 @@
       sizeWrap.appendChild(sizeLabelEl);
       const sizeInput = document.createElement('input');
       sizeInput.type = 'number'; sizeInput.min = '8'; sizeInput.max = '200'; sizeInput.value = textFontSize;
+      sizeInput.id = 'textFontSize'; sizeLabelEl.htmlFor = sizeInput.id;
       sizeInput.addEventListener('input', () => { textFontSize = parseInt(sizeInput.value, 10) || 36; });
       sizeWrap.appendChild(sizeInput);
       toolOptionsEl.appendChild(sizeWrap);
@@ -574,6 +576,7 @@
       fontLabelEl.textContent = I18N.t('fontLabel');
       fontWrap.appendChild(fontLabelEl);
       const fontSelect = document.createElement('select');
+      fontSelect.id = 'textFontFamily'; fontLabelEl.htmlFor = fontSelect.id;
       [['IBM Plex Sans, sans-serif', 'fontSansSerif'], ['Georgia, serif', 'fontSerif'], ['IBM Plex Mono, monospace', 'fontMonospace']].forEach(([val, labelKey]) => {
         const opt = document.createElement('option'); opt.value = val; opt.textContent = I18N.t(labelKey);
         if (val === textFontFamily) opt.selected = true;
@@ -903,19 +906,20 @@
       const row = document.createElement('div');
       row.className = 'layer-row' + (idx === activeLayerIndex ? ' active' : '');
       const visCheckbox = document.createElement('input');
-      visCheckbox.type = 'checkbox'; visCheckbox.checked = layer.visible; visCheckbox.style.width = 'auto';
+      visCheckbox.type = 'checkbox'; visCheckbox.setAttribute('aria-label', 'Show layer'); visCheckbox.checked = layer.visible; visCheckbox.style.width = 'auto';
       visCheckbox.addEventListener('click', e => e.stopPropagation());
       visCheckbox.addEventListener('change', (e) => { e.stopPropagation(); layer.visible = visCheckbox.checked; renderComposite(); scheduleAutosave(); });
       const thumb = document.createElement('img');
       thumb.src = layer.canvas.toDataURL();
+      thumb.alt = '';
       const info = document.createElement('div');
       info.className = 'layer-info';
       const nameInput = document.createElement('input');
-      nameInput.type = 'text'; nameInput.value = layer.name;
+      nameInput.type = 'text'; nameInput.setAttribute('aria-label', 'Layer name'); nameInput.value = layer.name;
       nameInput.addEventListener('click', e => e.stopPropagation());
       nameInput.addEventListener('input', () => { layer.name = nameInput.value; scheduleAutosave(); });
       const opacitySlider = document.createElement('input');
-      opacitySlider.type = 'range'; opacitySlider.min = '0'; opacitySlider.max = '1'; opacitySlider.step = '0.05'; opacitySlider.value = layer.opacity;
+      opacitySlider.type = 'range'; opacitySlider.setAttribute('aria-label', 'Layer opacity'); opacitySlider.min = '0'; opacitySlider.max = '1'; opacitySlider.step = '0.05'; opacitySlider.value = layer.opacity;
       opacitySlider.addEventListener('click', e => e.stopPropagation());
       opacitySlider.addEventListener('input', () => { layer.opacity = parseFloat(opacitySlider.value); renderComposite(); scheduleAutosave(); });
       info.appendChild(nameInput); info.appendChild(opacitySlider);

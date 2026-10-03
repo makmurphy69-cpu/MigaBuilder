@@ -87,13 +87,13 @@
 
   .section-title {
     font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-    color: rgba(22, 32, 43, 0.5); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
   }
   .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
 
   .field { margin-bottom: 14px; }
   .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .field .hint { font-size: 12px; color: rgba(22, 32, 43, 0.62); margin-top: 5px; line-height: 1.45; }
+  .field .hint { font-size: 12px; color: rgba(22, 32, 43, 0.72); margin-top: 5px; line-height: 1.45; }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
   input[type="text"], input[type="number"], select, textarea {
@@ -137,7 +137,7 @@
   .face-item input[type="text"] { flex: 1; font-size: 12.5px; padding: 5px 7px; }
   .face-item button { background: transparent; border: none; cursor: pointer; font-size: 12px; padding: 2px 5px; color: var(--ink); }
   .face-item button.remove { color: var(--error); }
-  .faces-empty { font-size: 12.5px; color: rgba(22,32,43,0.55); padding: 6px 0; }
+  .faces-empty { font-size: 12.5px; color: rgba(22,32,43,0.72); padding: 6px 0; }
   .scene-tab {
     display: flex; align-items: center; gap: 6px; background: #fff; border: 2px solid transparent; border-radius: var(--radius);
     padding: 4px 8px 4px 4px; cursor: pointer; font-size: 12px;
@@ -236,11 +236,11 @@
     </div>
     <div class="row-2">
       <div class="field">
-        <label><span data-i18n="rateLabel">Rate</span> <span id="rateVal">1.0</span></label>
+        <label for="rateSlider"><span data-i18n="rateLabel">Rate</span> <span id="rateVal">1.0</span></label>
         <input type="range" id="rateSlider" min="0.6" max="1.6" step="0.05" value="1">
       </div>
       <div class="field">
-        <label><span data-i18n="pitchLabel">Pitch</span> <span id="pitchVal">1.0</span></label>
+        <label for="pitchSlider"><span data-i18n="pitchLabel">Pitch</span> <span id="pitchVal">1.0</span></label>
         <input type="range" id="pitchSlider" min="0.5" max="1.8" step="0.05" value="1">
       </div>
     </div>
@@ -704,6 +704,7 @@
       const sceneSelect = document.createElement('select');
       sceneSelect.style.flex = 'none';
       sceneSelect.style.width = '90px';
+      sceneSelect.setAttribute('aria-label', 'Photo for this line');
       if (!scenes.length) {
         const opt = document.createElement('option');
         opt.value = ''; opt.textContent = I18N.t('noPhotoOption');
@@ -720,6 +721,7 @@
 
       const faceSelect = document.createElement('select');
       faceSelect.className = 'line-face-select';
+      faceSelect.setAttribute('aria-label', 'Who says this line');
       function populateFaceSelect() {
         faceSelect.innerHTML = '';
         const scene = scenes.find(s => s.id === line.sceneId);

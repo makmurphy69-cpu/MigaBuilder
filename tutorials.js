@@ -72,8 +72,7 @@
     'background-forge.html':['Background Forge','choose a photo with a clear subject','Remove background','check the cut-out edges and download the transparent PNG'],
     'big-five.html':['Big Five Personality','read how the private 50-question test works','Start private test','answer honestly, then read your report across the five dimensions'],
     'design-forge.html':['Design Forge','choose a thumbnail, meme or collage and add your images and text','Create design','check the preview and download the PNG'],
-    'media-convert.html':['Media Convert','choose a video or audio file and pick GIF, audio extraction or live transcription','Create and download GIF','check the result, then download it or copy the transcript'],
-    'media-convert-forge.html':['Media Convert Forge','choose a video and the output format','Convert and download','check the converted file after it downloads'],
+    'media-convert.html':['Media Convert','choose a video or audio file and pick GIF, audio extraction, live transcription, or compress, trim and convert','Create and download GIF','check the result, then download it or copy the transcript'],
     'pattern-lab.html':['Work Pattern Test','read the instructions and start when you are ready','Start work-pattern practice','answer each pattern question, then read the worked explanations and print your report'],
     'reasoning-test.html':['Reasoning Test','read how the private reasoning test works','Start private test','answer the questions, then study the worked explanations and print your report'],
     'strength-compass.html':['Strength Compass','read how the private assessment works','Begin private assessment','choose between each pair of statements, then read your top five strengths'],
@@ -128,7 +127,8 @@
     const mins=Math.floor((v.duration||0)/60)+':'+String((v.duration||0)%60).padStart(2,'0');
     const sampleHref='sample-viewer.html?tool='+encodeURIComponent(file);
     const sum=box.querySelector('summary');
-    sum.innerHTML='<span><b>VIDEO GUIDE · '+mins+'</b><span>Watch how '+esc(tool[0])+' works — with voice</span><span id="mt-title" hidden></span></span><span class="miga-sum-actions">'+(v.sample?'<a class="miga-sample-link" href="'+sampleHref+'">See the sample made in this video</a>':'')+'<span>▶ Watch</span></span>';
+    // No links inside <summary> (a control inside a control confuses screen readers); the sample link is in the opened guide.
+    sum.innerHTML='<span><b>VIDEO GUIDE · '+mins+'</b><span>Watch how '+esc(tool[0])+' works — with voice</span><span id="mt-title" hidden></span></span><span class="miga-sum-actions">'+(v.sample?'<span class="miga-sample-link">Includes the sample made in this video</span>':'')+'<span>▶ Watch</span></span>';
     const sec=document.createElement('div');sec.className='miga-video';
     sec.innerHTML='<video controls preload="none" playsinline poster="'+esc(v.poster)+'"><source src="'+esc(v.video)+'" type="video/mp4">Your browser cannot play this video.</video>'+
       '<div class="miga-video-actions">'+(v.sample?'<a class="miga-sample-btn" href="'+sampleHref+'">👀 See the sample made in this video</a>':'')+'<a class="miga-video-dl" href="'+esc(v.video)+'" download>⬇ Download video</a></div>'+

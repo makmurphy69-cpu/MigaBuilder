@@ -1,0 +1,25 @@
+name: Tool result tests
+
+# Drives the main tools with small sample files and checks the files they produce
+# (MP4/MP3, OCR text and searchable PDF, PDF order and split, QR scan-back, CV PDF text,
+# compressed PDF, Website Builder ZIP and App Forge self-fix with canned AI answers).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright and Chromium
+        run: |
+          npm install -g playwright@1.56.1
+          playwright install --with-deps chromium
+      - name: Main tools produce the right files
+        run: node scripts/result-tests.mjs

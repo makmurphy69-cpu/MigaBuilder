@@ -182,7 +182,7 @@
 
   .field .hint {
     font-size: 12.5px;
-    color: rgba(22, 32, 43, 0.62);
+    color: rgba(22, 32, 43, 0.72);
     margin-top: 6px;
     line-height: 1.45;
   }
@@ -193,7 +193,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: rgba(22, 32, 43, 0.5);
+    color: rgba(22, 32, 43, 0.72);
     margin: 22px 0 12px;
     padding-top: 18px;
     border-top: 1px solid rgba(22, 32, 43, 0.14);
@@ -272,14 +272,14 @@
   .stage .num {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    color: rgba(22, 32, 43, 0.42);
+    color: rgba(22, 32, 43, 0.72);
     width: 20px;
     flex: none;
   }
   .stage.active .num { color: var(--amber-ink); }
   .stage.active span:last-child { font-weight: 600; }
   .stage.done .num::after { content: " ✓"; }
-  .stage.done { color: rgba(22, 32, 43, 0.55); }
+  .stage.done { color: rgba(22, 32, 43, 0.72); }
 
   .error-box {
     margin-top: 16px;
@@ -306,7 +306,7 @@
     display: block;
     font-weight: 400;
     font-size: 12px;
-    color: rgba(22, 32, 43, 0.6);
+    color: rgba(22, 32, 43, 0.72);
   }
 
   /* image mode radios */
@@ -314,7 +314,7 @@
   .radio-option { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; }
   .radio-option input { margin-top: 3px; flex: none; }
   .radio-option .opt-label { font-weight: 600; }
-  .radio-option .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.6); }
+  .radio-option .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.72); }
 
   .upload-btn {
     display: inline-block;
@@ -544,7 +544,7 @@
     min-width: 160px;
   }
   .showcase-card strong { font-size: 13.5px; }
-  .showcase-card span { font-size: 11.5px; color: rgba(22,32,43,0.6); }
+  .showcase-card span { font-size: 11.5px; color: rgba(22,32,43,0.72); }
   .showcase-empty {
     font-size: 13px;
     color: rgba(237, 234, 224, 0.5);
@@ -1262,7 +1262,7 @@
       const list = arr => '<ul style="margin:4px 0 12px;padding-left:18px;">' + arr.map(i => '<li>' + i + '</li>').join('') + '</ul>';
       starterResult.innerHTML =
         '<strong style="font-family:\'Space Grotesk\',sans-serif;font-size:15px;">' + plan.businessName + '</strong>' +
-        '<div style="color:rgba(22,32,43,0.6);margin-bottom:10px;">' + plan.slogan + '</div>' +
+        '<div style="color:rgba(22,32,43,.72);margin-bottom:10px;">' + plan.slogan + '</div>' +
         '<strong>Services</strong>' + list(plan.services) +
         '<strong>Pricing ideas</strong>' + list(plan.pricingIdeas) +
         '<strong>Launch checklist</strong>' + list(plan.launchChecklist);

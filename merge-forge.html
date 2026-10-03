@@ -90,12 +90,12 @@
 
   .field { margin-bottom: 16px; }
   .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.62); margin-top: 6px; line-height: 1.45; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
   .section-title {
     font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
-    color: rgba(22, 32, 43, 0.5); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
   }
   .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
 
@@ -138,13 +138,13 @@
   .item-row img.thumb { object-fit: cover; }
   .item-meta { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
   .item-meta .item-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .item-controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.6); }
+  .item-controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
   .item-controls input[type="number"] { width: 52px; padding: 4px 6px; font-size: 11.5px; }
   .item-controls input[type="range"] { width: 60px; }
   .item-actions { display: flex; flex-direction: column; gap: 3px; }
   .item-actions button { background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; color: var(--ink); }
   .item-actions button.remove { color: var(--error); }
-  .items-empty { font-size: 12.5px; color: rgba(22,32,43,0.55); padding: 10px 0; }
+  .items-empty { font-size: 12.5px; color: rgba(22,32,43,0.72); padding: 10px 0; }
 
   .clip-row {
     display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: start;
@@ -153,7 +153,7 @@
   .clip-icon { width: 34px; height: 34px; border-radius: 2px; background: var(--paper-dim); display: flex; align-items: center; justify-content: center; font-size: 15px; flex: none; }
   .clip-meta { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
   .clip-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .clip-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.6); }
+  .clip-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
   .clip-controls > label { display: flex; align-items: center; gap: 4px; }
   .clip-controls select, .clip-controls input[type="number"] { width: auto; padding: 4px 6px; font-size: 11.5px; }
   .clip-controls input[type="range"] { width: 70px; }
@@ -239,7 +239,7 @@
 
     <div class="section-title" data-i18n="transitionHeading">Transition between images</div>
     <div class="field">
-      <select id="transitionSelect">
+      <select id="transitionSelect" aria-label="Transition between images">
         <option value="fade" selected data-i18n="transitionCrossfade">Crossfade</option>
         <option value="none" data-i18n="transitionHardCut">Hard cut</option>
       </select>

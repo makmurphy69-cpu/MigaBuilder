@@ -76,7 +76,7 @@
   .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; }
   .field { margin-bottom: 18px; }
   .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.62); margin-top: 6px; line-height: 1.45; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
   .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
   select { width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 11px; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink); }
@@ -114,7 +114,7 @@
 .cc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
 .cc-pick{display:flex;gap:6px;align-items:center}.cc-pick input[type=color]{width:48px;height:40px;padding:2px;flex:none}.cc-pick input[type=text]{flex:1;min-width:0;font-family:'IBM Plex Mono',monospace;text-transform:uppercase}
 .cc-sample{border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:6px;border:1px solid rgba(22,32,43,.15);font-size:16px}.cc-big{font:700 24px 'Space Grotesk'}
-.cc-ratio{display:flex;align-items:baseline;gap:8px;margin:12px 0 6px}.cc-ratio b{font:700 34px 'IBM Plex Mono'}.cc-ratio span{color:rgba(22,32,43,.62)}
+.cc-ratio{display:flex;align-items:baseline;gap:8px;margin:12px 0 6px}.cc-ratio b{font:700 34px 'IBM Plex Mono'}.cc-ratio span{color:rgba(22,32,43,.72)}
 .cc-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}.cc-checks div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:6px 10px;font-size:13px}.cc-checks b{margin-right:4px}.cc-checks .pass b{color:#2f7a52}.cc-checks .fail b{color:#b8432e}
 .cc-pairs{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}.cc-pairs td,.cc-pairs th{padding:5px 6px;border-bottom:1px solid rgba(22,32,43,.1);text-align:left}.cc-pairs .chip{display:inline-block;padding:3px 8px;border-radius:4px;font-weight:700;cursor:pointer;border:1px solid rgba(22,32,43,.15)}
 </style>
@@ -481,7 +481,7 @@
     $('ccRatio').textContent = rr.toFixed(2) + ' : 1';
     var checks = [['AA', 'normal text', 4.5], ['AA', 'large text', 3], ['AAA', 'normal text', 7], ['AAA', 'large text', 4.5], ['AA', 'icons & borders', 3]];
     $('ccChecks').innerHTML = checks.map(function (c) { var ok = r >= c[2]; return '<div class="' + (ok ? 'pass' : 'fail') + '"><b>' + (ok ? '✓ Pass' : '✗ Fail') + '</b>' + c[0] + ' ' + c[1] + ' <small>(' + c[2] + ')</small></div>'; }).join('') +
-      '<div style="grid-column:1/-1;background:none;border:0;padding:2px 0;color:rgba(22,32,43,.62)">Large text = at least 24 px, or 18.7 px bold.</div>';
+      '<div style="grid-column:1/-1;background:none;border:0;padding:2px 0;color:rgba(22,32,43,.72)">Large text = at least 24 px, or 18.7 px bold.</div>';
     $('ccFix').disabled = r >= 4.5;
   }
   // Move the text color toward black or white (whichever can reach 4.5:1) by the smallest step that passes.
