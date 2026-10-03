@@ -793,7 +793,7 @@
     <div class="error-box" id="errorBox"></div>
 
     <div class="stages" id="stages">
-      <div class="stage" data-stage="0"><span class="num">01</span><span>Planning the pages</span></div>
+      <div class="stage" data-stage="0"><span class="num">01</span><span>Planning pages &amp; design</span></div>
       <div class="stage" data-stage="1"><span class="num">02</span><span>Drafting each page</span></div>
       <div class="stage" data-stage="2"><span class="num">03</span><span>Sourcing images</span></div>
       <div class="stage" data-stage="3"><span class="num">04</span><span>Ready to inspect</span></div>
@@ -1326,7 +1326,7 @@
         },
         body: JSON.stringify({
           model: model,
-          max_tokens: 8000,
+          max_tokens: 16000,
           system: systemPrompt,
           messages: [{ role: 'user', content: userPrompt }]
         })
@@ -1453,14 +1453,17 @@
   // ---------- plan pages ----------
   async function planPages(apiKey, model, brief, bookingOn, products, contactFormOn, dsProducts) {
     const rules = [
-      'You are an information architect for small-business websites.',
-      'Given a business brief, decide a sensible page structure.',
+      'You are an information architect and brand designer for small-business websites.',
+      'Given a business brief, decide a sensible page structure AND one visual direction the whole site will share.',
       'Respond with ONLY valid JSON, no markdown fences, in exactly this shape:',
-      '{"siteName": "...", "tagline": "...", "pages": [{"slug": "index", "navLabel": "Home", "purpose": "one sentence"}]}',
+      '{"siteName": "...", "tagline": "...", "pages": [{"slug": "index", "navLabel": "Home", "purpose": "one sentence"}],',
+      ' "design": {"mood": "warm|bold|minimal|elegant|playful|corporate|natural|tech", "primary": "#rrggbb", "accent": "#rrggbb", "theme": "light|dark", "headingFont": "...", "bodyFont": "...", "corners": "sharp|soft|round", "ctaLabel": "2-3 word main call to action, e.g. Book a table"}}',
       'Rules:',
       '- 3 to 5 pages total, always including exactly one page with slug "index" as the homepage.',
       '- Pick pages that fit this specific type of business (e.g. a restaurant might need "menu"; a plumber might need "services").',
-      '- Slugs must be lowercase, hyphenated, filesystem-safe, no spaces or special characters.'
+      '- Slugs must be lowercase, hyphenated, filesystem-safe, no spaces or special characters.',
+      '- Design: choose colours and fonts that fit THIS business and any style words in the brief. primary must be dark or saturated enough for white text on it; accent should contrast with primary. Use "dark" theme only if the brief asks for a dark, night or luxury look.',
+      '- headingFont must be one of: ' + Object.keys(SITE_FONTS).join(', ') + '. bodyFont must be one of: ' + BODY_FONTS.join(', ') + '.'
     ];
     if (bookingOn) rules.push('- Include exactly one page with slug "booking" for scheduling requests.');
     if (contactFormOn) rules.push('- Include exactly one page with slug "contact" for questions and contact info.');
@@ -1477,25 +1480,262 @@
     if (!plan.pages || !plan.pages.some(p => p.slug === 'index')) {
       throw new Error('The page plan was missing a homepage. Try again.');
     }
+    plan.pages = plan.pages.map(p => Object.assign({}, p, { slug: String(p.slug || '').toLowerCase().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '') || 'page', navLabel: String(p.navLabel || p.slug), purpose: String(p.purpose || '') }));
+    plan.design = normalizeDesign(plan.design);
     return plan;
+  }
+
+  // ---------- design system: one look shared by every page ----------
+  // The AI only picks a direction (colours, fonts, corners); the CSS itself is written here, so every
+  // page gets the same polished components and the tidy .zip turns it into one shared style.css.
+  const SITE_FONTS = {
+    'Inter': 'Inter:wght@400;500;600;700;800', 'Plus Jakarta Sans': 'Plus+Jakarta+Sans:wght@400;500;600;700;800',
+    'Space Grotesk': 'Space+Grotesk:wght@400;500;600;700', 'Outfit': 'Outfit:wght@400;500;600;700;800',
+    'Sora': 'Sora:wght@400;600;700;800', 'Manrope': 'Manrope:wght@400;500;600;700;800',
+    'DM Serif Display': 'DM+Serif+Display', 'Playfair Display': 'Playfair+Display:wght@500;600;700;800',
+    'Fraunces': 'Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700', 'Cormorant Garamond': 'Cormorant+Garamond:wght@500;600;700',
+    'Bricolage Grotesque': 'Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800', 'Archivo Black': 'Archivo+Black',
+    'Baloo 2': 'Baloo+2:wght@500;600;700;800', 'Poppins': 'Poppins:wght@400;500;600;700;800'
+  };
+  const BODY_FONTS = ['Inter', 'Plus Jakarta Sans', 'Manrope', 'Outfit', 'Poppins', 'DM Sans', 'Lato', 'Source Sans 3', 'Nunito'];
+  const BODY_FONT_QUERY = { 'DM Sans': 'DM+Sans:wght@400;500;700', 'Lato': 'Lato:wght@400;700', 'Source Sans 3': 'Source+Sans+3:wght@400;600;700', 'Nunito': 'Nunito:wght@400;600;700' };
+  const SERIF_FONTS = ['DM Serif Display', 'Playfair Display', 'Fraunces', 'Cormorant Garamond'];
+
+  function normalizeDesign(d) {
+    d = d && typeof d === 'object' ? d : {};
+    const hex = (v, fallback) => /^#[0-9a-f]{6}$/i.test(String(v || '').trim()) ? String(v).trim().toLowerCase() : fallback;
+    return {
+      mood: String(d.mood || 'warm'),
+      primary: hex(d.primary, '#1f6f6b'),
+      accent: hex(d.accent, '#f2a541'),
+      theme: d.theme === 'dark' ? 'dark' : 'light',
+      headingFont: SITE_FONTS[d.headingFont] ? d.headingFont : 'Plus Jakarta Sans',
+      bodyFont: BODY_FONTS.includes(d.bodyFont) ? d.bodyFont : 'Inter',
+      corners: ['sharp', 'soft', 'round'].includes(d.corners) ? d.corners : 'soft',
+      ctaLabel: String(d.ctaLabel || '').trim().slice(0, 28)
+    };
+  }
+  function hexToRgb(hex) { const n = parseInt(hex.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function luminance(hex) {
+    return hexToRgb(hex).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); })
+      .reduce((sum, v, i) => sum + v * [0.2126, 0.7152, 0.0722][i], 0);
+  }
+  function mixHex(a, b, t) { const x = hexToRgb(a), y = hexToRgb(b); return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); }
+  // Text on a coloured button: white unless the colour is very light.
+  const inkOn = hex => luminance(hex) > 0.45 ? '#111418' : '#ffffff';
+
+  function designFontsLink(d) {
+    const families = [SITE_FONTS[d.headingFont]];
+    if (d.bodyFont !== d.headingFont) families.push(SITE_FONTS[d.bodyFont] || BODY_FONT_QUERY[d.bodyFont]);
+    return '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' +
+      '<link href="https://fonts.googleapis.com/css2?' + families.filter(Boolean).map(f => 'family=' + f).join('&') + '&display=swap" rel="stylesheet">';
+  }
+
+  function designCss(d) {
+    const dark = d.theme === 'dark';
+    // A very light primary would vanish on a light page, so darken it for text and buttons.
+    const primary = !dark && luminance(d.primary) > 0.5 ? mixHex(d.primary, '#000000', 0.45) : d.primary;
+    const r = { sharp: ['4px', '6px', '6px'], soft: ['12px', '20px', '12px'], round: ['18px', '28px', '999px'] }[d.corners];
+    const bg = dark ? '#0d1117' : mixHex('#ffffff', primary, 0.025);
+    const surface = dark ? '#151b24' : '#ffffff';
+    const surface2 = dark ? '#1b2330' : mixHex('#ffffff', primary, 0.06);
+    const text = dark ? '#e9edf3' : '#14181f';
+    const muted = dark ? '#9aa6b5' : '#5a6575';
+    const border = dark ? 'rgba(255,255,255,.1)' : mixHex('#ffffff', primary, 0.14);
+    const deep = mixHex(primary, '#000000', dark ? 0.55 : 0.6);
+    const headFamily = "'" + d.headingFont + "', " + (SERIF_FONTS.includes(d.headingFont) ? 'Georgia, serif' : 'system-ui, sans-serif');
+    return [
+      ':root{--brand:' + primary + ';--primary:' + primary + ';--primary-ink:' + inkOn(primary) + ';--primary-soft:' + (dark ? mixHex(primary, '#0d1117', 0.7) : mixHex('#ffffff', primary, 0.1)) + ';--accent:' + d.accent + ';--accent-ink:' + inkOn(d.accent) + ';--deep:' + deep + ';',
+      '--bg:' + bg + ';--surface:' + surface + ';--surface-2:' + surface2 + ';--text:' + text + ';--muted:' + muted + ';--border:' + border + ';',
+      '--radius:' + r[0] + ';--radius-lg:' + r[1] + ';--radius-btn:' + r[2] + ';--font-head:' + headFamily + ";--font-body:'" + d.bodyFont + "', system-ui, sans-serif;",
+      '--shadow-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.08);--shadow:0 10px 30px -12px rgba(16,24,40,.18);--shadow-lg:0 30px 60px -20px rgba(16,24,40,.28);--maxw:1160px;color-scheme:' + (dark ? 'dark' : 'light') + '}',
+      '*,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}',
+      'body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}',
+      'img,video,iframe{max-width:100%;display:block}img{height:auto}a{color:var(--primary)}',
+      'h1,h2,h3,h4{font-family:var(--font-head);line-height:1.12;letter-spacing:-.02em;margin:0 0 .5em;color:var(--text);text-wrap:balance}',
+      'h1{font-size:clamp(2.4rem,5.6vw,4.1rem);font-weight:800}h2{font-size:clamp(1.9rem,3.6vw,2.75rem);font-weight:750}h3{font-size:1.25rem;font-weight:700;letter-spacing:-.01em}',
+      'p{margin:0 0 1em}.lead{font-size:clamp(1.08rem,1.6vw,1.25rem);color:var(--muted);max-width:62ch}.muted{color:var(--muted)}',
+      '.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}',
+      '.section{padding:clamp(64px,9vw,112px) 0}.section-alt{background:var(--surface-2)}',
+      '.section-dark{background:var(--deep);color:#fff}.section-dark h2,.section-dark h3{color:#fff}.section-dark .lead,.section-dark .muted{color:rgba(255,255,255,.75)}',
+      '.section-head{max-width:720px;margin:0 auto clamp(36px,5vw,56px);text-align:center}.section-head .lead{margin:0 auto}',
+      '.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.8rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--primary);margin-bottom:14px}',
+      '.eyebrow::before{content:"";width:18px;height:2px;background:var(--accent);border-radius:2px}',
+      '.section-dark .eyebrow,.hero-image .eyebrow{color:var(--accent)}',
+      '.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:var(--radius-btn);font:600 1rem/1.2 var(--font-body);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;white-space:nowrap}',
+      '.btn:hover{transform:translateY(-2px)}.btn-lg{padding:16px 30px;font-size:1.06rem}',
+      '.btn-primary{background:var(--primary);color:var(--primary-ink);box-shadow:0 10px 24px -10px var(--primary)}.btn-primary:hover{box-shadow:0 16px 30px -12px var(--primary)}',
+      '.btn-accent{background:var(--accent);color:var(--accent-ink)}',
+      '.btn-secondary{background:var(--surface);color:var(--text);border-color:var(--border);box-shadow:var(--shadow-sm)}',
+      '.btn-ghost{background:transparent;color:inherit;border-color:currentColor}',
+      '.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}',
+      '.grid{display:grid;gap:24px}.grid-2{grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))}.grid-3{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}.grid-4{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}',
+      '.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;box-shadow:var(--shadow-sm);transition:transform .25s ease,box-shadow .25s ease}',
+      '.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.card p:last-child{margin-bottom:0}.card .muted{font-size:.97rem}',
+      '.card-media{padding:0;overflow:hidden}.card-media img{width:100%;aspect-ratio:4/3;object-fit:cover}.card-media .card-body{padding:22px 24px 26px}',
+      '.icon-badge{width:52px;height:52px;border-radius:var(--radius);display:grid;place-items:center;font-size:1.5rem;background:var(--primary-soft);margin-bottom:18px}',
+      '.pill{display:inline-block;padding:5px 12px;border-radius:999px;background:var(--primary-soft);color:var(--primary);font-size:.82rem;font-weight:700}',
+      '.hero{position:relative;overflow:hidden;padding:clamp(72px,11vw,140px) 0 clamp(64px,9vw,120px);background:radial-gradient(1100px 520px at 85% -10%,' + (dark ? mixHex(primary, '#0d1117', 0.35) : mixHex('#ffffff', primary, 0.22)) + ',transparent 60%),radial-gradient(800px 420px at -5% 110%,' + (dark ? mixHex(d.accent, '#0d1117', 0.7) : mixHex('#ffffff', d.accent, 0.22)) + ',transparent 60%),var(--bg)}',
+      '.hero h1{max-width:16ch}.hero .lead{font-size:clamp(1.12rem,1.8vw,1.35rem)}.hero-center{text-align:center}.hero-center h1,.hero-center .lead{margin-left:auto;margin-right:auto}.hero-center .actions{justify-content:center}',
+      '.hero-split .container{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,64px);align-items:center}',
+      '.hero-media{position:relative;isolation:isolate}.hero-media img{width:100%;aspect-ratio:4/3.4;object-fit:cover;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg)}',
+      '.hero-media::before{content:"";position:absolute;inset:auto -18px -18px auto;width:60%;height:60%;border-radius:var(--radius-lg);background:var(--accent);opacity:.35;z-index:-1}',
+      '.hero-image{color:#fff;background-size:cover;background-position:center}.hero-image::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.65))}.hero-image .container{position:relative}.hero-image h1{color:#fff}.hero-image .lead{color:rgba(255,255,255,.88)}',
+      '.page-hero{padding:clamp(56px,8vw,96px) 0 clamp(40px,6vw,64px)}.page-hero h1{font-size:clamp(2.1rem,4.6vw,3.3rem)}',
+      '.trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:28px;color:var(--muted);font-size:.95rem}.trust span{display:inline-flex;align-items:center;gap:6px}',
+      '.split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,5vw,72px);align-items:center}.split img{width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow);aspect-ratio:5/4;object-fit:cover}',
+      '.split.reverse>:first-child{order:2}',
+      '.check-list{list-style:none;padding:0;margin:20px 0}.check-list li{position:relative;padding:6px 0 6px 32px}.check-list li::before{content:"✓";position:absolute;left:0;top:7px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;font-weight:800;background:var(--primary-soft);color:var(--primary)}',
+      '.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:24px;text-align:center}.stat strong{display:block;font-family:var(--font-head);font-size:clamp(2.2rem,4.5vw,3.2rem);line-height:1.05;color:var(--primary)}.section-dark .stat strong{color:var(--accent)}.stat span{color:var(--muted)}.section-dark .stat span{color:rgba(255,255,255,.75)}',
+      '.price-card{display:flex;flex-direction:column}.price-card.featured{border:2px solid var(--primary);box-shadow:var(--shadow-lg);position:relative}.price-card.featured .pill{position:absolute;top:-13px;left:24px;background:var(--primary);color:var(--primary-ink)}',
+      '.price{font-family:var(--font-head);font-size:2.6rem;font-weight:800;margin:6px 0 4px;letter-spacing:-.03em}.price small{font-size:1rem;color:var(--muted);font-weight:500}.price-card .check-list{flex:1}',
+      '.testimonial{display:flex;flex-direction:column;gap:16px}.testimonial blockquote{margin:0;font-size:1.06rem}.stars{color:#f5a524;letter-spacing:2px}',
+      '.person{display:flex;align-items:center;gap:12px}.avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--primary);color:var(--primary-ink);flex:none;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.person small{display:block;color:var(--muted)}',
+      '.steps{counter-reset:step}.step{position:relative;padding-top:58px}.step::before{counter-increment:step;content:counter(step);position:absolute;top:0;left:0;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--primary);color:var(--primary-ink)}',
+      '.faq{max-width:780px;margin:0 auto}.faq details{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-bottom:12px}.faq summary{cursor:pointer;font-weight:700;list-style:none;display:flex;justify-content:space-between;gap:16px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";font-size:1.4rem;line-height:1;color:var(--primary)}.faq details[open] summary::after{content:"–"}.faq details p{margin:12px 0 0;color:var(--muted)}',
+      '.cta-band{border-radius:var(--radius-lg);padding:clamp(40px,6vw,72px);text-align:center;color:var(--primary-ink);background:radial-gradient(600px 300px at 90% 0%,' + mixHex(primary, '#ffffff', 0.25) + ',transparent 70%),linear-gradient(135deg,var(--primary),' + deep + ')}',
+      '.cta-band h2{color:inherit}.cta-band p{opacity:.88;max-width:56ch;margin:0 auto}.cta-band .actions{justify-content:center}',
+      '.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:14px}.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:var(--radius);transition:transform .3s ease}.gallery img:hover{transform:scale(1.02)}',
+      '.form{display:grid;gap:16px}.form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}.form label{display:grid;gap:6px;font-weight:600;font-size:.95rem}',
+      '.form input,.form textarea,.form select{font:inherit;width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);transition:border-color .2s,box-shadow .2s}',
+      '.form input:focus,.form textarea:focus,.form select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}.form textarea{min-height:140px;resize:vertical}',
+      '.info-list{list-style:none;padding:0;margin:0;display:grid;gap:14px}.info-list li{display:flex;gap:12px;align-items:flex-start}',
+      '.map{border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}.map iframe{width:100%;height:340px;border:0}',
+      '.site-header{position:sticky;top:0;z-index:50;background:' + (dark ? 'rgba(13,17,23,.78)' : 'rgba(255,255,255,.82)') + ';-webkit-backdrop-filter:saturate(180%) blur(14px);backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--border)}',
+      '.nav-wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:72px}',
+      '.brand{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-head);font-weight:800;font-size:1.2rem;letter-spacing:-.02em;color:var(--text);text-decoration:none}',
+      '.brand-mark{width:36px;height:36px;border-radius:var(--radius);display:grid;place-items:center;background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;font-size:1.05rem}.brand img{height:40px;width:auto}',
+      '.nav{display:flex;align-items:center;gap:4px}.nav a{padding:9px 14px;border-radius:var(--radius-btn);color:var(--muted);text-decoration:none;font-weight:600;font-size:.97rem;transition:color .2s,background .2s}',
+      '.nav a:hover,.nav a[aria-current=page]{color:var(--text);background:var(--surface-2)}.nav .btn{margin-left:10px;color:var(--primary-ink);background:var(--primary);padding:10px 18px}.nav .btn:hover{background:var(--primary);color:var(--primary-ink)}',
+      '.nav-toggle{position:absolute;opacity:0;pointer-events:none}.nav-burger{display:none;width:44px;height:44px;border-radius:var(--radius);border:1px solid var(--border);cursor:pointer;place-items:center}',
+      '.nav-burger span,.nav-burger span::before,.nav-burger span::after{content:"";display:block;width:18px;height:2px;background:var(--text);border-radius:2px;position:relative}.nav-burger span::before{position:absolute;top:-6px}.nav-burger span::after{position:absolute;top:6px}',
+      '.site-footer{background:var(--deep);color:rgba(255,255,255,.78);padding:64px 0 28px;font-size:.96rem}.site-footer a{color:rgba(255,255,255,.78);text-decoration:none}.site-footer a:hover{color:#fff}',
+      '.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:36px}.site-footer .brand{color:#fff;margin-bottom:12px}.site-footer h4{color:#fff;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}',
+      '.footer-links{list-style:none;padding:0;margin:0;display:grid;gap:8px}.footer-bottom{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.86rem;opacity:.75}',
+      '@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}.hero .container>*{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}.hero .container>:nth-child(2){animation-delay:.08s}.hero .container>:nth-child(3){animation-delay:.16s}',
+      // Scroll-driven lift only moves things, never hides them, so screenshots, printing and edit mode always show everything.
+      '@keyframes lift{from{transform:translateY(22px)}to{transform:none}}@supports (animation-timeline:view()){.section .card,.section .split>*,.section .stat{animation:lift linear both;animation-timeline:view();animation-range:entry 0% entry 30%}}',
+      '@media (max-width:900px){.hero-split .container,.split,.footer-grid{grid-template-columns:1fr}.split.reverse>:first-child{order:0}',
+      '.nav-burger{display:grid}.nav{position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:2px;padding:12px 16px 18px;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:var(--shadow);display:none}',
+      '.nav-toggle:checked~.nav{display:flex}.nav .btn{margin:8px 0 0}}',
+      '@media (max-width:560px){body{font-size:16px}.container{padding:0 18px}.form .row{grid-template-columns:1fr}.actions .btn{flex:1 1 auto}}',
+      '@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}'
+    ].join('\n');
+  }
+
+  const escHtml = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+
+  // The page the main button in the header should open: booking, then contact, then anything that sounds like it.
+  function ctaPage(plan) {
+    return plan.pages.find(p => p.slug === 'booking') || plan.pages.find(p => p.slug === 'contact') ||
+      plan.pages.find(p => /contact|book|order|quote|visit/i.test(p.slug + ' ' + p.navLabel)) || null;
+  }
+
+  function siteHeader(plan, activeSlug) {
+    const logo = uploadedImages.find(img => /logo/i.test(img.label || ''));
+    const cta = ctaPage(plan);
+    const links = plan.pages.filter(p => !cta || p.slug !== cta.slug).map(p =>
+      '<a href="' + p.slug + '.html"' + (p.slug === activeSlug ? ' aria-current="page"' : '') + '>' + escHtml(p.navLabel) + '</a>').join('');
+    const ctaLink = cta ? '<a class="btn" href="' + cta.slug + '.html"' + (cta.slug === activeSlug ? ' aria-current="page"' : '') + '>' + escHtml(plan.design.ctaLabel || cta.navLabel) + '</a>' : '';
+    const mark = logo ? '<img src="{{' + logo.id + '}}" alt="' + escHtml(plan.siteName) + ' logo">' : '<span class="brand-mark">' + escHtml((plan.siteName || 'S').trim().charAt(0).toUpperCase()) + '</span>';
+    return '<header class="site-header"><div class="container nav-wrap">' +
+      '<a class="brand" href="index.html">' + mark + (logo ? '' : '<span>' + escHtml(plan.siteName) + '</span>') + '</a>' +
+      '<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open the menu"><label for="nav-toggle" class="nav-burger" title="Menu"><span></span></label>' +
+      '<nav class="nav" aria-label="Main">' + links + ctaLink + '</nav></div></header>';
+  }
+
+  function siteFooter(plan, contact) {
+    const contactItems = [
+      contact.email ? '<li><a href="mailto:' + escHtml(contact.email) + '">' + escHtml(contact.email) + '</a></li>' : '',
+      contact.phone ? '<li><a href="tel:' + escHtml(contact.phone.replace(/[^\d+]/g, '')) + '">' + escHtml(contact.phone) + '</a></li>' : '',
+      contact.address ? '<li>' + escHtml(contact.address) + '</li>' : ''
+    ].join('');
+    return '<footer class="site-footer"><div class="container"><div class="footer-grid">' +
+      '<div><a class="brand" href="index.html"><span class="brand-mark">' + escHtml((plan.siteName || 'S').trim().charAt(0).toUpperCase()) + '</span><span>' + escHtml(plan.siteName) + '</span></a><p>' + escHtml(plan.tagline) + '</p></div>' +
+      '<div><h4>Pages</h4><ul class="footer-links">' + plan.pages.map(p => '<li><a href="' + p.slug + '.html">' + escHtml(p.navLabel) + '</a></li>').join('') + '</ul></div>' +
+      (contactItems ? '<div><h4>Contact</h4><ul class="footer-links">' + contactItems + '</ul></div>' : '<div></div>') +
+      '</div><div class="footer-bottom"><span>© ' + new Date().getFullYear() + ' ' + escHtml(plan.siteName) + '. All rights reserved.</span><span>' + escHtml(plan.tagline) + '</span></div></div></footer>';
+  }
+
+  // Section patterns the AI composes pages from. Every class here is defined by designCss().
+  const SECTION_COOKBOOK = [
+    'DESIGN SYSTEM — the page already has a complete stylesheet. Build ONLY with these classes; do not restyle them.',
+    'Layout: .container (centred width) inside every section; <section class="section"> for normal bands, add "section-alt" for a tinted band or "section-dark" for a deep brand-coloured band. Alternate them so neighbouring sections never look the same.',
+    'Text: .section-head (centred heading block) containing <span class="eyebrow">short label</span><h2>…</h2><p class="lead">…</p>. Use .muted for secondary text.',
+    'Buttons: <a class="btn btn-primary"> (main action), .btn-secondary, .btn-accent, .btn-ghost (on dark backgrounds), add .btn-lg in heroes; group in <div class="actions">.',
+    'Grids: <div class="grid grid-2|grid-3|grid-4">. Cards: <article class="card"><div class="icon-badge">emoji</div><h3>…</h3><p class="muted">…</p></article>; picture cards: <article class="card card-media"><img …><div class="card-body">…</div></article>.',
+    'Patterns (copy the structure, write your own words):',
+    'HERO with picture — <section class="hero hero-split"><div class="container"><div><span class="eyebrow">…</span><h1>…</h1><p class="lead">…</p><div class="actions"><a class="btn btn-primary btn-lg" href="…">…</a><a class="btn btn-secondary btn-lg" href="…">…</a></div><div class="trust"><span>★ 4.9 from 200+ reviews</span><span>✓ …</span></div></div><div class="hero-media"><img …></div></div></section>',
+    'HERO centred (no picture) — <section class="hero hero-center"><div class="container">eyebrow, h1, lead, actions, trust</div></section>',
+    'PAGE HERO (pages other than home) — <section class="hero page-hero"><div class="container"><span class="eyebrow">…</span><h1>…</h1><p class="lead">…</p></div></section>',
+    'FEATURES — section-head + <div class="grid grid-3"> of 3 or 6 icon cards.',
+    'SPLIT story — <div class="split"><img …><div><span class="eyebrow">…</span><h2>…</h2><p>…</p><ul class="check-list"><li>…</li></ul><a class="btn btn-primary">…</a></div></div> (add "reverse" to swap sides).',
+    'STATS — <div class="stats"><div class="stat"><strong>12k+</strong><span>loaves baked</span></div>…</div> (good inside section-dark).',
+    'STEPS — <div class="grid grid-3 steps"><div class="step"><h3>…</h3><p class="muted">…</p></div>…</div>',
+    'PRICING — grid-3 of <div class="card price-card"> (middle one also "featured" with <span class="pill">Most popular</span>), each with <h3>, <div class="price">$49<small>/month</small></div>, <ul class="check-list">, and a full-width button.',
+    'TESTIMONIALS — grid-3 of <figure class="card testimonial"><div class="stars">★★★★★</div><blockquote>“…”</blockquote><figcaption class="person"><span class="avatar">A</span><span><strong>Name</strong><small>Role or town</small></span></figcaption></figure>',
+    'GALLERY — <div class="gallery"> of <img> tags.',
+    'FAQ — <div class="faq"><details><summary>Question?</summary><p>Answer.</p></details>…</div>',
+    'CTA band (near the end of every page) — <section class="section"><div class="container"><div class="cta-band"><h2>…</h2><p>…</p><div class="actions"><a class="btn btn-accent btn-lg">…</a></div></div></div></section>',
+    'CONTACT — <div class="split"> with an <ul class="info-list"> of contact details on one side and <form class="form"> (use <div class="row"> for two fields side by side, <label>Name<input …></label>, a <button class="btn btn-primary btn-lg" type="submit">) on the other.',
+    'Map — wrap the map iframe in <div class="map">.'
+  ].join('\n');
+
+  // Split the AI's answer into title, description, page-only styles and the <main> element.
+  function parsePageParts(raw) {
+    const text = String(raw || '');
+    const title = (/<title[^>]*>([\s\S]*?)<\/title>/i.exec(text) || [])[1];
+    const descTag = /<meta[^>]+name\s*=\s*["']description["'][^>]*>/i.exec(text);
+    const description = descTag ? (/content\s*=\s*(["'])([\s\S]*?)\1/i.exec(descTag[0]) || [])[2] : '';
+    let main = (/<main\b[\s\S]*<\/main>/i.exec(text) || [])[0];
+    if (!main) {
+      // The model wrote a whole page instead: keep its body, minus any header, nav or footer of its own.
+      let body = (/<body\b[^>]*>([\s\S]*)<\/body>/i.exec(text) || [])[1] || text.replace(/<head\b[\s\S]*?<\/head>/i, '').replace(/<\/?(html|body)\b[^>]*>|<!doctype[^>]*>|<title[\s\S]*?<\/title>|<meta[^>]*>/gi, '');
+      body = body.replace(/<header\b[\s\S]*?<\/header>/i, '').replace(/<footer\b[\s\S]*<\/footer>/i, '');
+      main = '<main>' + body.replace(/<style\b[\s\S]*?<\/style>/gi, '').trim() + '</main>';
+    }
+    const styles = [];
+    text.replace(/<style\b[^>]*>([\s\S]*?)<\/style>/gi, (all, css) => { if (main.indexOf(all) < 0 && css.trim()) styles.push(css.trim()); return all; });
+    return { title: title ? title.trim() : '', description: (description || '').trim(), styles: styles, main: main };
+  }
+
+  function assemblePage(plan, pageMeta, parts, contact) {
+    const d = plan.design;
+    const title = parts.title || (pageMeta.slug === 'index' ? plan.siteName + ' — ' + plan.tagline : pageMeta.navLabel + ' — ' + plan.siteName);
+    const description = parts.description || plan.tagline;
+    return '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n' +
+      '<title>' + escHtml(title) + '</title>\n<meta name="description" content="' + escHtml(description) + '">\n' +
+      '<meta property="og:title" content="' + escHtml(title) + '">\n<meta property="og:description" content="' + escHtml(description) + '">\n' +
+      '<meta name="theme-color" content="' + d.primary + '">\n' + designFontsLink(d) + '\n' +
+      '<style>\n' + designCss(d) + '\n</style>\n' +
+      (parts.styles.length ? '<style>\n' + parts.styles.join('\n') + '\n</style>\n' : '') +
+      '</head>\n<body>\n' + siteHeader(plan, pageMeta.slug) + '\n' + parts.main + '\n' + siteFooter(plan, contact) + '\n</body>\n</html>';
   }
 
   // ---------- draft one page ----------
   async function draftPage(apiKey, model, plan, pageMeta, mode, bookingOn, products, contact, contactFormOn, dsProducts, testimonials) {
     const navList = plan.pages.map(p => '"' + p.navLabel + '" -> ' + p.slug + '.html').join(', ');
+    const d = plan.design;
     const rules = [
-      'You are an expert web designer and front-end developer, building ONE page of a multi-page small-business website.',
-      'Site name: "' + plan.siteName + '". Tagline: "' + plan.tagline + '".',
+      'You are a senior product designer and front-end developer at a top studio, writing ONE page of a polished multi-page website for a small business. The result must look like a premium, modern, hand-crafted site — not a template.',
+      'Site name: "' + plan.siteName + '". Tagline: "' + plan.tagline + '". Visual mood: ' + d.mood + '.',
       'This page: "' + pageMeta.navLabel + '" (' + pageMeta.purpose + ').',
-      'Full site navigation (use these exact relative links in a consistent header nav and footer on every page): ' + navList + '.',
-      'Requirements:',
-      '- Valid, complete HTML5 document starting with <!DOCTYPE html>.',
-      '- All CSS inline in one <style> tag in <head>. No external stylesheets/scripts except an optional Google Fonts link.',
-      '- Consistent header nav (linking to every page above by its .html filename) and footer across the site.',
-      '- Write real, specific copy for THIS page — no placeholder text, no "[Business Name]".',
-      '- Fully responsive to mobile widths.',
-      '- In <head>, include a specific <title> and a one-sentence <meta name="description"> for THIS page, plus matching og:title and og:description tags.',
-      '- Output ONLY the raw HTML document, nothing else.',
+      'Pages of the site (link between them with these exact relative links): ' + navList + '.',
+      'The header with the navigation and the footer are added automatically — do NOT write a <header>, <nav> or <footer>.',
+      'OUTPUT FORMAT — exactly these three parts and nothing else (no <html>, <head>, <body>, no markdown fences, no commentary):',
+      '<title>specific page title</title>',
+      '<meta name="description" content="one specific sentence for this page">',
+      '<main> …the page sections… </main>',
+      SECTION_COOKBOOK,
+      'Quality bar:',
+      pageMeta.slug === 'index'
+        ? '- Home page: start with a HERO (with picture if pictures are allowed), then 5 to 7 varied sections (e.g. features, split story, stats, testimonials or steps, FAQ), ending with a CTA band.'
+        : '- Start with a PAGE HERO, then 3 to 5 sections that fully cover this page\'s purpose, ending with a CTA band.',
+      '- Write real, specific, persuasive copy for THIS business: concrete details, numbers, names of products and services. Never use placeholder text, lorem ipsum or "[Business Name]".',
+      '- Headlines are short and punchy (under 10 words); paragraphs are 1-3 sentences.',
+      '- Every button links somewhere real: another page from the list above, a #section id on this page, mailto: or tel:.',
+      '- Use one fitting emoji per icon-badge. Do not use inline style attributes for colours or spacing; the design system handles that.',
+      '- No <script> tags. If something truly needs extra CSS, add a small <style> before <main> that only uses the variables var(--primary), var(--accent), var(--surface), var(--surface-2), var(--text), var(--muted), var(--border), var(--radius), var(--radius-lg).',
       imageSystemInstructions(mode)
     ];
 
@@ -1531,13 +1771,14 @@
     }
 
     if (contact.address && (pageMeta.slug === 'contact' || pageMeta.slug === 'index' || pageMeta.purpose.toLowerCase().includes('contact'))) {
-      rules.push('Include the business address "' + contact.address + '" and an embedded map: <iframe src="https://www.google.com/maps?q=' + encodeURIComponent(contact.address) + '&output=embed" style="border:0;width:100%;height:300px;" loading="lazy"></iframe>');
+      rules.push('Include the business address "' + contact.address + '" and an embedded map: <div class="map"><iframe src="https://www.google.com/maps?q=' + encodeURIComponent(contact.address) + '&output=embed" loading="lazy" title="Map"></iframe></div>');
     }
     if (contact.email || contact.phone) {
-      rules.push('Include in the footer: ' + [contact.email, contact.phone].filter(Boolean).join(' · '));
+      rules.push('Contact details (already in the footer; use them in buttons and contact sections where useful): ' + [contact.email, contact.phone].filter(Boolean).join(' · '));
     }
 
-    return callChat(apiKey, model, rules.join('\n\n'), 'Write the "' + pageMeta.navLabel + '" page now.');
+    const raw = await callChat(apiKey, model, rules.join('\n\n'), 'Write the "' + pageMeta.navLabel + '" page now.');
+    return assemblePage(plan, pageMeta, parsePageParts(raw), contact);
   }
 
   // ---------- preview / tabs ----------
@@ -1804,18 +2045,37 @@
     refineBtn.disabled = true;
     refineBtn.textContent = 'Applying…';
 
-    const rules = [
+    // Pages built on the design system are edited one <main> at a time, so the shared header,
+    // footer and stylesheet can't drift. Changes about those (or older pages) rewrite the whole page.
+    const SITE_WIDE_CHANGE = /\b(header|nav|navigation|menu|footer|colou?rs?|fonts?|theme|logo|brand(ing)?|style ?sheet)\b/i;
+    const currentMain = /<main\b[\s\S]*<\/main>/i.exec(page.html);
+    const mainOnly = !!currentMain && /class="site-header"/.test(page.html) && !SITE_WIDE_CHANGE.test(instruction);
+    const rules = mainOnly ? [
+      'You are editing the <main> part of one page of a polished website. The header, footer and stylesheet are kept as they are.',
+      'Apply ONLY the requested change. Keep every other section exactly the same unless the change requires it to differ.',
+      'Output ONLY the complete updated <main>…</main> element — no markdown fences, no commentary, no <header>, <footer> or <head>.',
+      SECTION_COOKBOOK,
+      imageSystemInstructions(mode)
+    ].join('\n') : [
       'You are editing an existing website page.',
       'Below is the current complete HTML document, followed by a requested change.',
       'Apply ONLY the requested change. Keep everything else on the page the same unless the change requires it to differ.',
+      'If the page uses design-system classes (.section, .card, .btn, .hero …) and CSS variables (--primary, --accent …), keep using them; for a colour or font change, change the variables in :root.',
       'Output ONLY the complete updated HTML document — no markdown fences, no commentary.',
       imageSystemInstructions(mode)
     ].join('\n');
 
-    const userMsg = 'CURRENT PAGE HTML:\n' + page.html + '\n\nREQUESTED CHANGE:\n' + instruction;
+    const userMsg = mainOnly
+      ? 'CURRENT <main>:\n' + currentMain[0] + '\n\nREQUESTED CHANGE:\n' + instruction
+      : 'CURRENT PAGE HTML:\n' + page.html + '\n\nREQUESTED CHANGE:\n' + instruction;
 
     try {
       let updatedHtml = await callChat(key, model, rules, userMsg);
+      if (mainOnly) {
+        const parts = parsePageParts(updatedHtml);
+        updatedHtml = page.html.replace(currentMain[0], () => parts.main);
+        if (parts.styles.length) updatedHtml = updatedHtml.replace(/<\/head>/i, () => '<style>\n' + parts.styles.join('\n') + '\n</style>\n</head>');
+      }
       updatedHtml = await resolvePlaceholdersInHtml(updatedHtml, imageKey, mode);
       page.html = updatedHtml;
       showActivePage();
