@@ -410,8 +410,81 @@
     });
   }
 
+  // ---------- finishing touches: text, effects and sounds per shot ----------
+  const FX = {
+    none: 'No effect', punch: 'Zoom punch-in', slowzoom: 'Slow zoom', shake: 'Camera shake', flash: 'White flash',
+    fade: 'Fade in from black', glitch: 'Glitch', slowmo: 'Slow motion (half speed)'
+  };
+  const LOOKS = { none: 'Natural', vivid: 'Vivid colours', warm: 'Warm film', cool: 'Cool blue', bw: 'Black and white' };
+  const LOOK_FILTERS = { none: 'none', vivid: 'saturate(1.6) contrast(1.12)', warm: 'sepia(0.45) saturate(1.25) contrast(1.05)', cool: 'hue-rotate(-12deg) saturate(1.15) brightness(1.03)', bw: 'grayscale(1) contrast(1.15)' };
+  const TEXT_STYLES = { bold: 'Bold outline (TikTok style)', box: 'White on a dark box', pop: 'Pops in', type: 'Typewriter', neon: 'Neon glow' };
+  // Sound names match MigaMusic.sfx in music-engine.js.
+  const SOUNDS = { none: 'No sound', whoosh: 'Whoosh', impact: 'Impact (boom)', riser: 'Riser (builds up to the cut)', click: 'Click', coin: 'Coin', jump: 'Boing', notify: 'Ding', success: 'Ta-da', drumroll: 'Drum roll', fail: 'Sad trombone' };
+  const SPEED = { slowmo: 0.5 };
+  const shotLength = s => (s.out - s.in) / (SPEED[s.fx] || 1);
+
+  function fxPrompt(shots, names, opts) {
+    const list = o => Object.keys(o).map(k => k + ' (' + o[k] + ')').join(', ');
+    const system = 'You are a short-form video editor adding the finishing touches to an edit: on-screen text, effects and sound effects. Taste rules:\n' +
+      '- Less is more: an effect or sound on about a third of the shots, never on every cut. A sound should mark a moment (the hook, a reveal, the ending).\n' +
+      '- The hook (shot 1) earns the strongest touch, e.g. a zoom punch-in or flash with a whoosh or impact. The last shot can land with a ta-da, ding or coin.\n' +
+      '- Use slow motion only for a short, visually striking action. Use glitch and shake only for energetic content.\n' +
+      '- Shot text: at most 6 words, only on shots where words add meaning (a point, a step, a price, a punchline). Shot 1 and the last shot already get the hook and call to action, so leave their text empty.\n' +
+      '- One look and one text style for the whole video, matching its mood.\n' +
+      'Allowed effects: ' + list(FX) + '.\nAllowed sounds: ' + list(SOUNDS) + '.\nLooks: ' + list(LOOKS) + '.\nText styles: ' + list(TEXT_STYLES) + '.\n' +
+      'Answer with JSON only: {"look":"...","textStyle":"...","shots":[{"n":shot number,"effect":"...","sound":"...","text":"..."}]}.' +
+      (opts.surprise ? ' Be playful and surprising this time, but keep it watchable.' : '');
+    const user = 'Video: ' + (opts.goalLabel || 'social video') + (opts.about ? '. About: ' + opts.about : '') + (opts.cta ? '. Ending: ' + opts.cta : '') + '\nShots:\n' +
+      shots.map((s, i) => (i + 1) + '. "' + names[i] + '" ' + round2(shotLength(s)) + ' s' + (s.why ? ' — ' + s.why : '')).join('\n');
+    return { system, user };
+  }
+  function fxFromAi(answer, shots) {
+    if (!answer || !Array.isArray(answer.shots)) return null;
+    const out = shots.map(() => ({ fx: 'none', sfx: 'none', text: '' }));
+    answer.shots.forEach(a => {
+      const i = parseInt(a && a.n, 10) - 1;
+      if (!(i >= 0 && i < out.length)) return;
+      if (FX[a.effect]) out[i].fx = a.effect;
+      if (SOUNDS[a.sound]) out[i].sfx = a.sound;
+      if (a.text && i > 0 && i < out.length - 1) out[i].text = String(a.text).split(/\s+/).slice(0, 8).join(' ');
+    });
+    return { shots: out, look: LOOKS[answer.look] ? answer.look : 'none', textStyle: TEXT_STYLES[answer.textStyle] ? answer.textStyle : 'bold' };
+  }
+  // Without AI: the same taste rules with a dice roll, so "Surprise me" gives a new mix each time.
+  function fxRandom(shots, rand) {
+    rand = rand || Math.random;
+    const pick = a => a[Math.floor(rand() * a.length)];
+    const out = shots.map((s, i) => {
+      if (i === 0) return { fx: pick(['punch', 'flash', 'shake']), sfx: pick(['whoosh', 'impact']), text: '' };
+      if (i === shots.length - 1 && shots.length > 1) return { fx: pick(['slowzoom', 'none']), sfx: pick(['success', 'notify', 'coin']), text: '' };
+      const r = rand();
+      if (r < 0.2) return { fx: pick(['punch', 'glitch', 'flash']), sfx: pick(['whoosh', 'click']), text: '' };
+      if (r < 0.45) return { fx: pick(['slowzoom', 'punch']), sfx: 'none', text: '' };
+      if (r < 0.52 && s.out - s.in < 3) return { fx: 'slowmo', sfx: 'none', text: '' };
+      return { fx: 'none', sfx: 'none', text: '' };
+    });
+    return { shots: out, look: pick(['none', 'none', 'vivid', 'warm', 'cool', 'bw']), textStyle: pick(Object.keys(TEXT_STYLES)) };
+  }
+
+  // ---------- talk to yourself ----------
+  // Best start time for take 2 (seconds after take 1 starts): the two takes should talk in turns,
+  // so pick the offset where both speak at the same time the least, preferring small shifts.
+  function bestOffset(levelA, levelB, range) {
+    if (!levelA || !levelB || !levelA.length || !levelB.length) return 0;
+    const talk = lv => { const ref = percentile(lv, 0.95) || 0.01; return lv.map(v => v > ref * 0.3 ? 1 : 0); };
+    const A = talk(levelA), B = talk(levelB), R = Math.round((range || 8) * 10);
+    let best = { off: 0, score: Infinity };
+    for (let k = -R; k <= R; k++) {
+      let both = 0;
+      for (let i = 0; i < B.length; i++) { const j = i + k; if (j >= 0 && j < A.length && A[j] && B[i]) both++; }
+      const score = both + Math.abs(k) * 0.02;
+      if (score < best.score) best = { off: k / 10, score };
+    }
+    return best.off;
+  }
+
   window.AutoEdit = {
-    TASTE, STYLES, analyzeClip, analyzeReference, detectBeats, moments, planLocal, aiPrompt, planFromAi, framesFor, snapToBeats,
+    TASTE, STYLES, FX, LOOKS, LOOK_FILTERS, TEXT_STYLES, SOUNDS, SPEED, shotLength, fxPrompt, fxFromAi, fxRandom, bestOffset, analyzeClip, analyzeReference, detectBeats, moments, planLocal, aiPrompt, planFromAi, framesFor, snapToBeats,
     _test: { rhythmFrom, findCuts, beatsFromSamples, fitLength }
   };
 })(window, document);

@@ -210,6 +210,7 @@ const SITE_PAGE = '<title>Sunrise Bakery</title>\n<meta name="description" conte
 test('clip-forge: Auto Edit plans two clips with the AI and renders one video', 'clip-forge.html', async (page, ctx) => {
   let asked = '';
   await fakeAi(ctx, body => {
+    if (/finishing touches/.test(body.systemPrompt || '')) return JSON.stringify({ look: 'warm', textStyle: 'pop', shots: [{ n: 1, effect: 'punch', sound: 'whoosh', text: '' }, { n: 2, effect: 'slowzoom', sound: 'success', text: '' }] });
     asked = body.userPrompt || '';
     const ids = (asked.match(/^#(\d+) /gm) || []).map(x => parseInt(x.slice(1), 10));
     return JSON.stringify({ hook: 'Two places, one day', cta: 'Follow for more', shots: [{ id: ids[ids.length - 1], why: 'busy start' }, { id: ids[0], why: 'calm ending' }] });
@@ -227,6 +228,12 @@ test('clip-forge: Auto Edit plans two clips with the AI and renders one video', 
   expect(/AI picked/.test(summary), 'the AI plan was not used: ' + summary);
   expect(/city\.webm/.test(await page.textContent('#aeShotList .ae-item')), 'the first shot should be the AI\'s hook from city.webm');
   expect(/Two places, one day/.test(await page.textContent('#captionsList')), 'the hook text was not added as a text overlay');
+  await page.click('#aeFxAiBtn');
+  await page.waitForFunction(() => /AI picked these/.test(document.querySelector('#aeFxStatus').textContent), null, { timeout: 30000 });
+  const fx = await page.$$eval('#aeShotList select[data-f="fx"]', s => s.map(x => x.value));
+  expect(fx[0] === 'punch' && fx[1] === 'slowzoom', 'the AI effects were not applied: ' + fx);
+  expect(await page.inputValue('#aeLook') === 'warm', 'the AI look was not applied');
+  await page.locator('#aeShotList input[data-f="text"]').nth(1).fill('Over here');
   const out = await downloadOf(page, async () => {
     await page.click('#aeRenderBtn');
     await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
@@ -234,6 +241,25 @@ test('clip-forge: Auto Edit plans two clips with the AI and renders one video', 
   }, 90000);
   expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
   expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+}, { timeout: 150000 });
+
+test('clip-forge: talk to yourself joins two takes into one video', 'clip-forge.html', async (page) => {
+  const clip = fs.readFileSync(path.join(FIX, 'clip.webm'));
+  await page.click('#cloneBox summary');
+  await page.setInputFiles('#cloneInputA', { name: 'take-1.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForFunction(() => /✓/.test(document.querySelector('#cloneHintA').textContent), null, { timeout: 30000 });
+  await page.setInputFiles('#cloneInputB', { name: 'take-2.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForSelector('#cloneOptions', { state: 'visible', timeout: 30000 });
+  await page.fill('#cloneOffset', '1');
+  const out = await downloadOf(page, async () => {
+    await page.click('#cloneRenderBtn');
+    await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
+    await page.click('#downloadVideoBtn');
+  }, 90000);
+  expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
+  expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+  await page.click('#cloneToAeBtn');
+  await page.waitForFunction(() => /1 clip measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 60000 });
 }, { timeout: 150000 });
 
 test('website-builder: AI site has a shared design and downloads as a tidy ZIP', 'website-builder.html', async (page) => {

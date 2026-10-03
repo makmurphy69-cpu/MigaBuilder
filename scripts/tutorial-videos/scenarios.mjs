@@ -1017,11 +1017,14 @@ S('clip-forge.html', {
     await h.step('Choose what it is for, say what it is about, and how it should end.', async () => { await h.select('#aeGoal', 'ad'); await h.type('#aeAbout', 'Our band plays live this Friday'); await h.type('#aeCta', 'Get tickets now'); });
     await h.step('Press Plan the edit. The AI picks the best moments, opens on a hook, and keeps shots short.', () => h.click('#aePlanBtn'));
     await h.skip('Skipping ahead while it plans', () => page.waitForSelector('#aeShotList .ae-item', { timeout: 120000 }));
-    await h.step('Every cut is listed. Watch, move or remove any of them.', () => h.point('#aeShotList'));
+    await h.step('Every cut is listed. Watch, move or remove any of them, and give any shot its own text, effect and sound.', () => h.point('#aeShotList'));
+    await h.step('Or let the AI pick text, effects and sounds that fit. Surprise me rolls the dice instead.', () => h.click('#aeFxAiBtn'));
+    await h.skip('Skipping ahead while the AI picks', () => page.waitForFunction(() => /picked|random/.test(document.querySelector('#aeFxStatus').textContent), null, { timeout: 120000 }));
     await h.step('Press Render the edit.', () => h.click('#aeRenderBtn'));
     await h.skip('Skipping ahead while the video renders', () => page.waitForSelector('#downloadVideoBtn:not([disabled]):visible', { timeout: 180000 }));
     await h.step('Preview the result, then download it.', () => h.point('#downloadVideoBtn'));
     await h.sampleDownload('#downloadVideoBtn', 'Video made in this video');
+    await h.step('Want two of you on one sofa? Film one take on each side, add them under Talk to yourself, and Clip Forge joins them.', async () => { await page.locator('section.panel').evaluate(el => el.scrollTo(0, 0)); await h.point('#cloneBox summary'); });
   }
 });
 
