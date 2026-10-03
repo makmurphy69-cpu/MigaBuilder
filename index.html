@@ -647,6 +647,51 @@
   .list-title { grid-column:1/-1; display:flex; gap:8px; align-items:center; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid rgba(111,209,224,.14); color:var(--line-cyan); font:700 13px 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
   @media(max-width:900px){ .tool-groups { grid-template-columns:repeat(3,minmax(0,1fr)); } }
   @media(max-width:520px){ .tool-groups { grid-template-columns:repeat(2,minmax(0,1fr)); } .tool-group-toggle { min-height:100px; padding:12px 8px; } .tool-group-toggle .cat-icon { font-size:26px; } }
+
+  /* ---- 2026 homepage refresh ---- */
+  .home-hero::before { content:""; position:absolute; inset:-40px 0 auto; height:520px; pointer-events:none; z-index:-1;
+    background:radial-gradient(ellipse 50% 60% at 30% 20%, rgba(111,209,224,.16), transparent 70%), radial-gradient(ellipse 40% 50% at 72% 30%, rgba(226,166,59,.13), transparent 70%); }
+  .home-hero { isolation:isolate; }
+  .cta-tour { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 18px 0 8px; border-radius:12px; border:1.5px solid rgba(111,209,224,.45); background:rgba(8,24,38,.6); color:var(--paper); font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap; transition:border-color .15s, background .15s; }
+  .cta-tour .play { display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:var(--amber); color:var(--amber-ink); font-size:13px; padding-left:2px; box-shadow:0 0 0 0 rgba(226,166,59,.55); animation:tourPulse 2.6s ease-out infinite; }
+  .cta-tour:hover { border-color:var(--amber); background:rgba(226,166,59,.08); }
+  @keyframes tourPulse { 0%{box-shadow:0 0 0 0 rgba(226,166,59,.5)} 70%,100%{box-shadow:0 0 0 12px rgba(226,166,59,0)} }
+  @media (prefers-reduced-motion: reduce) { .cta-tour .play { animation:none; } }
+  .task-starts { gap:10px !important; margin-top:20px !important; }
+  .task-starts a { transition:transform .15s, border-color .15s, background .15s; }
+  .task-starts a:hover { transform:translateY(-2px); background:rgba(111,209,224,.12); }
+  .task-starts a.task-hot { background:var(--amber); color:var(--amber-ink); border-color:var(--amber); font-weight:700; }
+  .task-starts a.task-hot:hover { background:#ecb653; color:var(--amber-ink); }
+  .quick-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+  .quick-grid .tool-card { min-height:0; margin:0; padding:12px 14px; border:1px solid rgba(111,209,224,.2); background:rgba(8,24,38,.62); border-radius:10px; }
+  .quick-grid .tool-card:hover { border-color:rgba(111,209,224,.6); background:rgba(111,209,224,.08); }
+  .results { padding:34px clamp(20px,4vw,48px) 30px; }
+  .results-head { display:flex; justify-content:space-between; align-items:end; gap:8px 24px; flex-wrap:wrap; margin-bottom:16px; }
+  .results-head h2 { margin:0; font:700 clamp(22px,2.6vw,30px) 'Space Grotesk',sans-serif; }
+  .results-head p { margin:0; max-width:520px; color:rgba(237,234,224,.78); line-height:1.5; }
+  .results-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .result-card { position:relative; display:flex; flex-direction:column; overflow:hidden; border-radius:12px; border:1px solid rgba(111,209,224,.22); background:rgba(8,24,38,.78); color:var(--paper); text-decoration:none; transition:transform .18s, border-color .18s, box-shadow .18s; }
+  .result-card:hover { transform:translateY(-3px); border-color:rgba(226,166,59,.7); box-shadow:0 14px 34px rgba(0,0,0,.35); }
+  .result-thumb { display:block; aspect-ratio:16/9; overflow:hidden; background:repeating-conic-gradient(#12324f 0 25%, #0d2740 0 50%) 0 0/18px 18px; }
+  .result-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .result-card:hover .result-thumb img { transform:scale(1.04); }
+  .result-text { display:grid; gap:3px; padding:12px 44px 14px 14px; }
+  .result-text strong { font-size:15px; }
+  .result-text span { font-size:13px; color:rgba(237,234,224,.72); }
+  .result-go { position:absolute; right:14px; bottom:14px; color:var(--amber); font-weight:700; transition:transform .18s; }
+  .result-card:hover .result-go { transform:translateX(3px); }
+  .home-tour .tour-inner { max-width:1080px; margin:0 auto; grid-template-columns:minmax(220px,1fr) minmax(0,1.25fr); }
+  .trust-explainer { padding-bottom:10px; }
+  @media(max-width:760px){ .home-tour .tour-inner { grid-template-columns:1fr; } }
+  .site-foot { display:flex; justify-content:space-between; align-items:flex-start; gap:18px 40px; flex-wrap:wrap; padding:28px clamp(20px,4vw,48px) 90px !important; margin-top:28px; color:rgba(237,234,224,.78) !important; font-size:13.5px !important; background:rgba(8,24,38,.55); }
+  .foot-brand { max-width:560px; }
+  .foot-brand strong { font:700 18px 'Space Grotesk',sans-serif; color:var(--paper); }
+  .foot-brand p { margin:6px 0 0; line-height:1.55; }
+  .foot-links { display:flex; flex-wrap:wrap; gap:10px 22px; }
+  .foot-links a { color:var(--line-cyan); text-decoration:none; font-weight:600; }
+  .foot-links a:hover { color:var(--paper); text-decoration:underline; }
+  @media(max-width:900px){ .quick-grid, .results-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
+  @media(max-width:620px){ .quick-grid { grid-template-columns:1fr !important; } .quick-grid .tool-card { padding:10px 12px; } .results-grid { grid-template-columns:1fr 1fr !important; gap:10px; } .result-text { padding:10px 12px 12px; } .result-text span { display:none; } .result-go { display:none; } .cta-tour { flex:1 1 100%; justify-content:center; } }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -661,15 +706,14 @@
     <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
   </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
   <p class="hero-copy" data-i18n="heroSubtitle">Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.</p>
-  <div class="trust-row"><span data-i18n="trustTools">69 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustWatermark">No watermark</span><span data-i18n="trustPaywall">No surprise paywall</span><span data-i18n="trustOpen">Open source</span></div>
+  <div class="trust-row"><span data-i18n="trustTools">69 free tools</span><span data-i18n="trustSignup">No signup</span><span data-i18n="trustOpen">Open source</span></div>
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
-    <a class="cta-build" href="website-builder.html" data-i18n="ctaBuild">Build a website</a>
+    <a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">1-minute tour</span></a>
     <a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a>
   </div>
-  <nav class="task-starts" aria-label="Popular tasks"><span data-i18n="taskLead">Start with a task:</span><a href="pdf-forge.html" data-i18n="taskPdf">📕 Edit a PDF</a><a href="cv-forge.html" data-i18n="taskCv">📄 Make a CV</a><a href="background-forge.html" data-i18n="taskBg">🪄 Remove a background</a><a href="invoice-forge.html" data-i18n="taskInvoice">🧾 Make an invoice</a><a href="pdf-compress.html" data-i18n="taskCompress">🗜️ Compress a PDF</a><a href="ocr-forge.html" data-i18n="taskOcr">🔎 Copy text from an image</a></nav>
-  <p class="search-hint" data-i18n="searchHint">Try “pdf”, “video”, “cv” or “logo” — or open a category below.</p>
+  <nav class="task-starts" aria-label="Popular tasks"><span data-i18n="taskLead">Start with a task:</span><a class="task-hot" href="website-builder.html" data-i18n="taskSite">🌐 Build a website</a><a href="pdf-forge.html" data-i18n="taskPdf">📕 Edit a PDF</a><a href="cv-forge.html" data-i18n="taskCv">📄 Make a CV</a><a href="background-forge.html" data-i18n="taskBg">🪄 Remove a background</a><a href="invoice-forge.html" data-i18n="taskInvoice">🧾 Make an invoice</a><a href="pdf-compress.html" data-i18n="taskCompress">🗜️ Compress a PDF</a><a href="ocr-forge.html" data-i18n="taskOcr">🔎 Copy text from an image</a></nav>
 </header>
 
 <section class="tool-hub" id="tools" aria-label="All tools">
@@ -767,10 +811,15 @@
   <div class="quick-tools"><h3 data-i18n="qNew">New</h3><div class="quick-grid" id="newTools"></div></div>
 </section>
 
-<section class="home-tour" id="tour" aria-labelledby="tourTitle">
-  <div class="tour-inner">
-    <div class="tour-copy"><h2 id="tourTitle" data-i18n="tourTitle">Tour MigaBuilder — find the right tool in one minute</h2><p data-i18n="tourText">Search by task, open a category, or start with a popular tool. Your recently opened and favourite tools are stored only in this browser.</p></div>
-    <video class="tour-video" controls playsinline preload="none" poster="https://videos.migabuilder.com/index.jpg" aria-label="Narrated tour of the MigaBuilder home page"><source src="https://videos.migabuilder.com/index.mp4" type="video/mp4"></video>
+<section class="results" aria-labelledby="resultsTitle">
+  <div class="results-head"><h2 id="resultsTitle" data-i18n="samplesHeading">Real results, made with these tools</h2><p data-i18n="samplesLead">Every one of these was made on camera in a tool's video guide. Open one to see exactly what you get.</p></div>
+  <div class="results-grid">
+    <a class="result-card" href="sample-viewer.html?tool=website-builder.html"><span class="result-thumb"><img src="assets/results/website-builder.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s1Title">A business website</strong><span data-i18n="s1Text">Every page drafted, ready to publish</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=cartoon-forge.html"><span class="result-thumb"><img src="assets/results/cartoon-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s2Title">A cartoon you can play</strong><span data-i18n="s2Text">Story, scenes and voices from one idea</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=game-forge.html"><span class="result-thumb"><img src="assets/results/game-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s3Title">A game you can share</strong><span data-i18n="s3Text">Describe it, then play it in the browser</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=background-forge.html"><span class="result-thumb"><img src="assets/results/background-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s4Title">Background removed</strong><span data-i18n="s4Text">A photo cut out in seconds</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=cv-forge.html"><span class="result-thumb"><img src="assets/results/cv-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s5Title">A finished CV</strong><span data-i18n="s5Text">Filled in and downloaded as a real PDF</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=pdf-forge.html"><span class="result-thumb"><img src="assets/results/pdf-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s6Title">An organised PDF</strong><span data-i18n="s6Text">Merged, numbered and watermarked</span></span><span class="result-go" aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -780,30 +829,17 @@
   <div class="trust-card"><strong data-i18n="trust3Title">Built to be checked</strong><span data-i18n="trust3Text">Preview the result before downloading, follow a narrated walkthrough, and inspect the open-source code.</span></div>
 </section>
 
-<div class="showcase">
-  <div class="showcase-header">
-    <h2 data-i18n="samplesHeading">Samples — what MigaBuilder can make</h2>
+<section class="home-tour" id="tour" aria-labelledby="tourTitle">
+  <div class="tour-inner">
+    <div class="tour-copy"><h2 id="tourTitle" data-i18n="tourTitle">Tour MigaBuilder — find the right tool in one minute</h2><p data-i18n="tourText">Search by task, open a category, or start with a popular tool. Your recently opened and favourite tools are stored only in this browser.</p></div>
+    <video class="tour-video" controls playsinline preload="none" poster="https://videos.migabuilder.com/index.jpg" aria-label="Narrated tour of the MigaBuilder home page"><source src="https://videos.migabuilder.com/index.mp4" type="video/mp4"></video>
   </div>
-  <div class="showcase-grid" id="sampleGrid">
-    <a class="showcase-card" href="pdf-forge.html"><strong data-i18n="s1Title">Organised PDF</strong><span data-i18n="s1Text">Merge, split, number or watermark pages</span></a>
-    <a class="showcase-card" href="image-studio.html"><strong data-i18n="s2Title">Finished image</strong><span data-i18n="s2Text">Remove a background or make a thumbnail</span></a>
-    <a class="showcase-card" href="cv-forge.html"><strong data-i18n="s3Title">Professional CV</strong><span data-i18n="s3Text">Complete it and download a real PDF</span></a>
-    <a class="showcase-card" href="website-builder.html"><strong data-i18n="s4Title">Business website</strong><span data-i18n="s4Text">Build and preview a multi-page site</span></a>
-    <a class="showcase-card" href="grammar-forge.html"><strong data-i18n="s5Title">Improved writing</strong><span data-i18n="s5Text">Private suggestions in six languages</span></a>
-    <a class="showcase-card" href="ocr-forge.html"><strong data-i18n="s6Title">Editable text</strong><span data-i18n="s6Text">Extract writing from a photo or scan</span></a>
-  </div>
-</div>
+</section>
 
-<div class="showcase">
-  <div class="showcase-header">
-    <h2 data-i18n="builtHeading">See what's been built</h2>
-    <a href="#" id="showcaseSubmitLink" style="color: var(--line-cyan);" data-i18n="submitSiteLink">Submit your site →</a>
-  </div>
-  <div class="showcase-grid" id="showcaseGrid"></div>
-  <div class="community-callout" id="showcaseEmpty" data-i18n="communityText">Built something useful with MigaBuilder? Submit it for the community showcase. Personal details are never added without your approval.</div>
-</div>
-
-<footer data-i18n="footerText">69 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</footer>
+<footer class="site-foot">
+  <div class="foot-brand"><strong>MigaBuilder</strong><p data-i18n="footerText">69 free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</p></div>
+  <nav class="foot-links" aria-label="Site links"><a href="#tools" data-i18n="footTools">All tools</a><a href="#tour" data-i18n="footTour">1-minute tour</a><a href="feedback.html" data-i18n="footFeedback">Feedback &amp; ideas</a><a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener" data-i18n="footSource">Open source on GitHub</a></nav>
+</footer>
 <script>
 (function(){
   const search=document.getElementById('toolSearch');
@@ -863,7 +899,7 @@
   function cloneFor(item){const a=document.createElement('a');a.className='tool-card';a.href=item.href;a.innerHTML=item.html;return a}
   function render(){
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
-    const popular=['pdf-forge.html','image-studio.html','grammar-forge.html','cv-forge.html','website-builder.html','ocr-forge.html'].map(x=>map.get(x)).filter(Boolean);
+    const popular=['image-studio.html','grammar-forge.html','slide-forge.html','contract-forge.html','music-forge.html','cartoon-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
     document.getElementById('newTools').replaceChildren(...['voice-forge.html','vector-forge.html','regex-forge.html','jam-forge.html','policy-forge.html','redact-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
@@ -875,6 +911,8 @@
   // Translated text changes what the search matches, so rebuild the search index on a language change.
   document.addEventListener('i18n:change',()=>{tokenCache.clear();apply();syncToggleAll();document.querySelectorAll('.fav-toggle').forEach(x=>x.setAttribute('aria-label',I18N.t('favAdd')))});
   // Offer "Install the app" once the browser says MigaBuilder can be installed (see miga-palette.js).
+  // The hero's tour button scrolls to the tour and starts it.
+  document.getElementById('tourBtn').addEventListener('click',e=>{e.preventDefault();const t=document.getElementById('tour');t.scrollIntoView({behavior:'smooth',block:'center'});const v=t.querySelector('video');v&&v.play().catch(()=>{})});
   const installLink=document.getElementById('installApp');
   installLink.addEventListener('click',e=>{e.preventDefault();window.MigaInstall&&window.MigaInstall.install()});
   document.addEventListener('miga-installable',()=>{installLink.hidden=!(window.MigaInstall&&window.MigaInstall.available())});
