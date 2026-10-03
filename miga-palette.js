@@ -17,7 +17,7 @@
     ["bug-scanner.html", "🐞", "Bug Scanner", "Find, explain and fix bugs in any code — and preview what it builds.", "bug scanner code checker debug debugger error fix code review syntax python javascript html java c++ security lint"],
     ["video-forge.html", "🎬", "Video Forge", "Turn drawings and images into motion.", ""],
     ["talk-forge.html", "🗣️", "Talk Forge", "Make a photo speak with your audio.", ""],
-    ["clip-forge.html", "✂️", "Clip Forge", "Trim, caption and translate video.", ""],
+    ["clip-forge.html", "✂️", "Clip Forge", "Trim, caption and translate video, or auto-edit several clips into one.", "auto edit"],
     ["merge-forge.html", "🧩", "Merge Forge", "Combine clips, images, text and music.", ""],
     ["music-forge.html", "🎵", "Music Forge", "Describe music and get a free track, songs with singing, beats.", "song vocals lyrics ai music lyria beat instrumental background soundtrack sound effects loop jingle"],
     ["record-forge.html", "⏺️", "Record Forge", "Record your screen with narration.", ""],

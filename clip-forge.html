@@ -18,15 +18,15 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Clip Forge — trim, caption, and translate your videos</title>
-<meta name="description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, adjust speed and volume, then export or upload straight to YouTube — all in your browser.">
+<meta name="description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, then export or upload straight to YouTube. Or let Auto Edit turn several clips into one video that opens on a hook, cuts on the beat and adds text, effects and sounds — or join two takes so you can talk to yourself. All in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Clip Forge — trim, caption, and translate your videos">
-<meta property="og:description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, adjust speed and volume, then export or upload straight to YouTube — all in your browser.">
+<meta property="og:description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, then export or upload straight to YouTube. Or let Auto Edit turn several clips into one video that opens on a hook, cuts on the beat and adds text, effects and sounds — or join two takes so you can talk to yourself. All in your browser.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/clip-forge.jpg">
 <meta property="og:url" content="https://migabuilder.com/clip-forge.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Clip Forge — trim, caption, and translate your videos">
-<meta name="twitter:description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, adjust speed and volume, then export or upload straight to YouTube — all in your browser.">
+<meta name="twitter:description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, then export or upload straight to YouTube. Or let Auto Edit turn several clips into one video that opens on a hook, cuts on the beat and adds text, effects and sounds — or join two takes so you can talk to yourself. All in your browser.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/clip-forge.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +35,8 @@
 <script src="i18n.js"></script>
 <script src="media-utils.js"></script>
 <script src="youtube-upload.js"></script>
+<script src="music-engine.js"></script>
+<script src="auto-edit.js"></script>
 
 <style>
   :root {
@@ -200,6 +202,28 @@
 
   footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
   footer a { color: rgba(237, 234, 224, 0.7); }
+  .ae-box { background: #fff7e6; border: 1px solid var(--amber); border-radius: 6px; padding: 10px 12px; margin-bottom: 18px; }
+  .ae-box > summary { cursor: pointer; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 15px; color: var(--amber-ink); }
+  .ae-box > summary small { display: block; font-family: 'IBM Plex Sans', sans-serif; font-weight: 400; font-size: 12.5px; color: rgba(22,32,43,0.75); margin-top: 2px; }
+  .ae-box[open] > summary { margin-bottom: 12px; }
+  .ae-list { display: grid; gap: 6px; margin-top: 8px; }
+  .ae-item { display: grid; grid-template-columns: 64px 1fr auto; gap: 8px; align-items: center; background: #fff; border: 1px solid rgba(22,32,43,0.14); border-radius: 4px; padding: 6px; font-size: 12.5px; }
+  .ae-item img, .ae-item .ae-ph { width: 64px; height: 36px; object-fit: cover; border-radius: 2px; background: #0b1622; display: block; cursor: pointer; }
+  .ae-item b { display: block; font-size: 13px; overflow-wrap: anywhere; }
+  .ae-item .ae-meta { color: rgba(22,32,43,0.72); }
+  .ae-item .ae-btns { display: flex; gap: 3px; }
+  .ae-item .ae-btns button { border: 1px solid rgba(22,32,43,0.2); background: #fff; border-radius: 3px; padding: 3px 6px; cursor: pointer; color: var(--ink); font-size: 12px; }
+  .ae-item .ae-times { display: flex; gap: 4px; margin-top: 4px; align-items: center; }
+  .ae-item .ae-times input { width: 64px; padding: 3px 5px; font-size: 12px; }
+  .ae-item.hook { border-color: var(--amber); box-shadow: inset 3px 0 0 var(--amber); }
+  .ae-status { font-size: 12.5px; color: rgba(22,32,43,0.8); margin: 8px 0 0; line-height: 1.45; }
+  .ae-bar { height: 6px; background: rgba(22,32,43,0.12); border-radius: 3px; overflow: hidden; margin-top: 6px; display: none; }
+  .ae-bar i { display: block; height: 100%; width: 0; background: var(--amber); transition: width .2s; }
+  .ae-box textarea { width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 8px 10px; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); min-height: 54px; resize: vertical; }
+  .ae-fx { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
+  .ae-fx select, .ae-fx input { padding: 3px 5px; font-size: 12px; }
+  .ae-fx input { grid-column: 1 / -1; }
+  .clone-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -221,6 +245,137 @@
 
 <main>
   <section class="panel">
+
+    <details class="ae-box" id="autoEditBox">
+      <summary>✨ Auto Edit: turn several clips into one video<small>Clip Forge measures your clips, picks the best moments, opens on a hook and cuts on the beat. You can change every cut.</small></summary>
+      <div class="field">
+        <label class="upload-btn" for="aeClipsInput">+ Add the clips to edit</label>
+        <input type="file" id="aeClipsInput" accept="video/*" multiple style="display:none;">
+        <div class="ae-list" id="aeClipList"></div>
+        <div class="ae-bar" id="aeBar"><i></i></div>
+        <p class="ae-status" id="aeStatus">Add two or more clips. They stay on this device.</p>
+      </div>
+      <div id="aeOptions" style="display:none;">
+        <div class="field">
+          <label for="aeGoal">What is it for?</label>
+          <select id="aeGoal">
+            <option value="ad" data-len="15" data-aspect="9:16">Ad for TikTok / Reels / Shorts (about 15 s, vertical)</option>
+            <option value="short" data-len="30" data-aspect="9:16" selected>Social post (about 30 s, vertical)</option>
+            <option value="reel" data-len="60" data-aspect="16:9">Highlight reel (about 60 s, widescreen)</option>
+            <option value="youtube" data-len="20" data-aspect="16:9">YouTube intro or trailer (about 20 s)</option>
+          </select>
+        </div>
+        <div class="row-2 field">
+          <div><label for="aeLength">Length (s)</label><input type="number" id="aeLength" value="30" min="3" max="600" step="1"></div>
+          <div><label for="aeStyle">Pace</label>
+            <select id="aeStyle">
+              <option value="fast">Fast and punchy</option>
+              <option value="balanced" selected>Balanced</option>
+              <option value="calm">Calm and cinematic</option>
+              <option value="reference" disabled>Like my example video</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="aeAbout">What is the video about? (optional)</label>
+          <textarea id="aeAbout" placeholder="e.g. Our new running shoe: light, waterproof, 20% off this week"></textarea>
+        </div>
+        <div class="field">
+          <label for="aeCta">Ending call to action (optional)</label>
+          <input type="text" id="aeCta" placeholder="e.g. Shop now, link in bio">
+        </div>
+        <div class="field">
+          <label class="upload-btn" for="aeRefInput">+ Example video whose editing you like (optional)</label>
+          <input type="file" id="aeRefInput" accept="video/*" style="display:none;">
+          <p class="hint" id="aeRefHint">Auto Edit measures how often it cuts and copies that rhythm.</p>
+        </div>
+        <div class="field">
+          <label class="upload-btn" for="musicInput">+ Music to cut on the beat (optional)</label>
+          <p class="hint" id="aeBeatHint">Uses the music under Speed &amp; audio below. Make your own in <a href="music-forge.html">Music Forge</a>.</p>
+        </div>
+        <div class="field">
+          <label for="aeFraming">Framing</label>
+          <select id="aeFraming">
+            <option value="fill" selected>Fill the frame (crop the edges)</option>
+            <option value="fit">Show the whole picture (blurred background)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="aeSound">Sound</label>
+          <select id="aeSound">
+            <option value="both" selected>The clips' own sound, plus the music</option>
+            <option value="music">Music only</option>
+            <option value="clips">The clips' own sound only</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="check-row"><input type="checkbox" id="aeUseAi" checked><span>Let the AI choose the moments and write the opening and closing text (uses the AI provider under Translation)</span></label>
+          <p class="hint" id="aeAiHint">Free Gemini decides from the measurements. With your own key, the AI also looks at a frame from every moment.</p>
+        </div>
+        <button type="button" class="draft-btn" id="aePlanBtn">✨ Plan the edit</button>
+        <div id="aePlan" style="display:none;">
+          <div class="section-title" style="margin-top:16px;">Your edit</div>
+          <p class="hint" id="aePlanSummary" style="margin-top:0;font-size:12.5px;"></p>
+          <div class="ae-list" id="aeShotList"></div>
+          <p class="hint">Click a picture to watch that moment. Each shot can get its own text, effect and sound. Shape, watermark and text overlays from below are used too.</p>
+          <div class="section-title" style="margin-top:14px;">Text, effects and sounds</div>
+          <div class="row-2 field">
+            <div><label for="aeLook">Look (colours)</label><select id="aeLook"></select></div>
+            <div><label for="aeTextStyle">Text style</label><select id="aeTextStyle"></select></div>
+          </div>
+          <div class="field">
+            <label for="aeSfxVol">Sound effects volume</label>
+            <input type="range" id="aeSfxVol" min="0" max="1" step="0.05" value="0.7">
+          </div>
+          <div class="btn-row" style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="draft-btn" id="aeFxAiBtn" style="flex:1 1 100%;">🎲 Let the AI pick text, effects and sounds</button>
+            <button type="button" class="draft-btn secondary" id="aeFxRandomBtn">🎉 Surprise me</button>
+            <button type="button" class="draft-btn secondary" id="aeFxClearBtn">✕ Clear them</button>
+          </div>
+          <p class="ae-status" id="aeFxStatus"></p>
+          <div class="btn-row" style="display:flex;gap:8px;margin-top:10px;">
+            <button type="button" class="draft-btn" id="aeRenderBtn">🎬 Render the edit</button>
+            <button type="button" class="draft-btn secondary" id="aeReplanBtn">↻ Plan again</button>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details class="ae-box" id="cloneBox">
+      <summary>🪞 Talk to yourself: two takes, one frame<small>Film yourself on one side of the sofa talking, then on the other side answering. Clip Forge joins the two takes so there are two of you.</small></summary>
+      <ol class="hint" style="margin:0 0 12px;padding-left:18px;">
+        <li>Put the camera on a tripod or prop it up. <b>Don't move it</b> between takes, and keep the light the same.</li>
+        <li>Take 1: sit on one side and say your line, then stay still and "listen" for as long as the answer will take.</li>
+        <li>Take 2: sit on the other side, wait, then answer. Don't cross the middle of the picture.</li>
+        <li>Making a TikTok, Reel or Short? Film upright, so you both fit in a tall picture.</li>
+      </ol>
+      <div class="row-2 field">
+        <div><label class="upload-btn" for="cloneInputA">+ Take 1</label><input type="file" id="cloneInputA" accept="video/*" style="display:none;"><p class="hint" id="cloneHintA">The one who talks first.</p></div>
+        <div><label class="upload-btn" for="cloneInputB">+ Take 2</label><input type="file" id="cloneInputB" accept="video/*" style="display:none;"><p class="hint" id="cloneHintB">The one who answers.</p></div>
+      </div>
+      <div id="cloneOptions" style="display:none;">
+        <div class="row-2 field">
+          <div><label for="cloneSide">Take 1 sits on the</label><select id="cloneSide"><option value="left" selected>Left</option><option value="right">Right</option></select></div>
+          <div><label for="cloneOffset">Take 2 starts after (s)</label><input type="number" id="cloneOffset" value="0" step="0.1" min="-30" max="60"></div>
+        </div>
+        <button type="button" class="draft-btn secondary" id="cloneTimingBtn">⏱ Find the timing from the speech</button>
+        <div class="field" style="margin-top:12px;">
+          <label for="cloneSeam">Where the two takes meet</label>
+          <input type="range" id="cloneSeam" min="15" max="85" step="1" value="50">
+        </div>
+        <div class="field">
+          <label for="cloneSoft">Soft edge (hides the join)</label>
+          <input type="range" id="cloneSoft" min="0" max="25" step="1" value="8">
+          <p class="hint">Press Preview and move the join into the empty space between the two of you.</p>
+        </div>
+        <div class="btn-row" style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="draft-btn secondary" id="clonePreviewBtn">▶ Preview</button>
+          <button type="button" class="draft-btn" id="cloneRenderBtn">🎬 Make the video</button>
+          <button type="button" class="draft-btn secondary" id="cloneToAeBtn" style="display:none;flex:1 1 100%;">➕ Add it to Auto Edit for text, effects and music</button>
+        </div>
+        <p class="ae-status" id="cloneStatus"></p>
+      </div>
+    </details>
 
     <div class="section-title" data-i18n="videoHeading">Your video</div>
     <div class="field">
@@ -320,6 +475,7 @@
       <label for="provider" data-i18n="providerLabel">AI provider</label>
       <select id="provider">
         <option value="gemini" selected data-i18n="providerGemini">Gemini — free, no key needed</option>
+        <option value="geminikey">Gemini (your own key)</option>
         <option value="openai" data-i18n="providerOpenai">OpenAI</option>
         <option value="anthropic" data-i18n="providerAnthropic">Anthropic (Claude)</option>
       </select>
@@ -375,6 +531,7 @@
       <canvas id="stageCanvas" style="display:none;"></canvas>
       <video id="resultVideo" controls style="display:none;"></video>
       <audio id="musicAudioEl" style="display:none;"></audio>
+      <video id="aePreview" controls playsinline style="display:none;"></video>
     </div>
 
     <div class="progress-wrap" id="progressWrap">
@@ -560,6 +717,7 @@
     videoObjectUrl = URL.createObjectURL(file);
     sourceVideo.src = videoObjectUrl;
     sourceVideo.style.display = 'block';
+    document.getElementById('aePreview').style.display = 'none';
     stageEmpty.style.display = 'none';
     resultVideo.style.display = 'none';
     downloadVideoBtn.disabled = true;
@@ -635,8 +793,8 @@
     } else {
       apiKeyField.style.display = 'block';
       freeNoticeField.style.display = 'none';
-      apiKeyLabel.textContent = provider === 'openai' ? I18N.t('apiKeyLabelOpenai') : I18N.t('apiKeyLabelAnthropic');
-      apiKeyInput.placeholder = provider === 'openai' ? 'sk-...' : 'sk-ant-...';
+      apiKeyLabel.textContent = provider === 'geminikey' ? 'Your Gemini API key (free at aistudio.google.com/apikey)' : provider === 'openai' ? I18N.t('apiKeyLabelOpenai') : I18N.t('apiKeyLabelAnthropic');
+      apiKeyInput.placeholder = provider === 'geminikey' ? 'AIza...' : provider === 'openai' ? 'sk-...' : 'sk-ant-...';
     }
   }
   providerSelect.addEventListener('change', applyProvider);
@@ -672,12 +830,17 @@
       return stripCodeFence(raw);
     }
 
+    if (provider === 'geminikey') {
+      if (!apiKey) throw new Error('Add your Gemini API key first.');
+      return stripCodeFence(await callGeminiKey(apiKey, systemPrompt, [{ text: userPrompt }]));
+    }
+
     if (provider === 'anthropic') {
       if (!apiKey) throw new Error('Add your Anthropic API key first.');
       const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({ model: 'claude-sonnet-5', max_tokens: 500, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] })
+        body: JSON.stringify({ model: 'claude-sonnet-5', max_tokens: 2000, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] })
       });
       if (!response.ok) {
         const errBody = await response.json().catch(() => null);
@@ -703,6 +866,23 @@
     const raw = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
     if (!raw) throw new Error('The model returned an empty response.');
     return stripCodeFence(raw);
+  }
+
+  async function callGeminiKey(apiKey, systemPrompt, parts) {
+    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify({ systemInstruction: { parts: [{ text: systemPrompt }] }, contents: [{ parts: parts }] })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => null);
+      throw new Error((errBody && errBody.error && errBody.error.message) || ('Request failed with status ' + response.status));
+    }
+    const data = await response.json();
+    const got = data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts;
+    const raw = got ? got.filter(p => !p.thought).map(p => p.text || '').join('') : '';
+    if (!raw) throw new Error('The model returned an empty response.');
+    return raw;
   }
 
   // ---------- captions ----------
@@ -898,6 +1078,7 @@
     stageCanvas.width = cw; stageCanvas.height = ch;
     sourceVideo.style.display = 'none';
     resultVideo.style.display = 'none';
+    document.getElementById('aePreview').style.display = 'none';
     stageCanvas.style.display = 'block';
     downloadVideoBtn.disabled = true;
     renderedVideoBlob = null;
@@ -1039,6 +1220,739 @@
     a.click();
     document.body.removeChild(a);
     setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  // ---------- Auto Edit (several clips → one edited video; engine in auto-edit.js) ----------
+  const aeEl = id => document.getElementById(id);
+  const aeClipsInput = aeEl('aeClipsInput'), aeClipList = aeEl('aeClipList'), aeStatus = aeEl('aeStatus'), aeBar = aeEl('aeBar');
+  const aeOptions = aeEl('aeOptions'), aeGoal = aeEl('aeGoal'), aeLength = aeEl('aeLength'), aeStyle = aeEl('aeStyle');
+  const aeAbout = aeEl('aeAbout'), aeCta = aeEl('aeCta'), aeRefInput = aeEl('aeRefInput'), aeRefHint = aeEl('aeRefHint');
+  const aeBeatHint = aeEl('aeBeatHint'), aeSound = aeEl('aeSound'), aeUseAi = aeEl('aeUseAi');
+  const aePlanBtn = aeEl('aePlanBtn'), aeReplanBtn = aeEl('aeReplanBtn'), aeRenderBtn = aeEl('aeRenderBtn');
+  const aePlanBox = aeEl('aePlan'), aePlanSummary = aeEl('aePlanSummary'), aeShotList = aeEl('aeShotList'), aePreview = aeEl('aePreview');
+  let aeClips = [];        // {id, file, name, url, info}
+  let aeIdCounter = 0;
+  let aeShots = [];        // {clipId, in, out, why}
+  let aeRhythm = null, aeMusicFile = null, aeBeats = null, aeBusy = false, aePlayers = null, aePreviewOut = 0;
+  const aeEsc = t => String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  const aeFmt = t => (Math.round(t * 10) / 10).toFixed(1);
+  const aeClipById = id => aeClips.find(c => c.id === id);
+
+  function aeSetStatus(text, frac) {
+    aeStatus.textContent = text;
+    aeBar.style.display = frac == null ? 'none' : 'block';
+    if (frac != null) aeBar.firstElementChild.style.width = Math.round(frac * 100) + '%';
+  }
+  function aeThumbAt(clip, t) {
+    const s = clip.info && clip.info.samples;
+    if (!s || !s.length) return '';
+    return s.reduce((a, x) => Math.abs(x.t - t) < Math.abs(a.t - t) ? x : a, s[0]).thumb || '';
+  }
+
+  function aeRenderClipList() {
+    aeClipList.innerHTML = aeClips.map((c, i) => {
+      const th = c.info ? aeThumbAt(c, c.info.duration / 3) : '';
+      return '<div class="ae-item" data-id="' + c.id + '">' + (th ? '<img alt="" src="' + th + '">' : '<span class="ae-ph"></span>') +
+        '<div><b>' + (i + 1) + '. ' + aeEsc(c.name) + '</b><span class="ae-meta">' + (c.info ? aeFmt(c.info.duration) + ' s · ' + c.info.width + '×' + c.info.height + (c.info.level ? '' : ' · no sound') : c.error ? '⚠ ' + aeEsc(c.error) : 'Waiting to be measured…') + '</span></div>' +
+        '<div class="ae-btns"><button type="button" data-act="up" title="Earlier">↑</button><button type="button" data-act="down" title="Later">↓</button><button type="button" data-act="del" title="Remove">✕</button></div></div>';
+    }).join('');
+    const show = aeClips.some(c => c.info);
+    if (show && aeOptions.style.display === 'none') aeApplyGoal(); // the shape follows the goal once Auto Edit is in use
+    aeOptions.style.display = show ? 'block' : 'none';
+  }
+  aeClipList.addEventListener('click', function (e) {
+    const b = e.target.closest('button'); if (!b || aeBusy) return;
+    const id = Number(b.closest('.ae-item').dataset.id), i = aeClips.findIndex(c => c.id === id);
+    if (b.dataset.act === 'del') { URL.revokeObjectURL(aeClips[i].url); aeClips.splice(i, 1); aeShots = aeShots.filter(s => s.clipId !== id); aeRenderShots(); }
+    else if (b.dataset.act === 'up' && i > 0) aeClips.splice(i - 1, 0, aeClips.splice(i, 1)[0]);
+    else if (b.dataset.act === 'down' && i < aeClips.length - 1) aeClips.splice(i + 1, 0, aeClips.splice(i, 1)[0]);
+    aeRenderClipList();
+  });
+
+  aeClipsInput.addEventListener('change', function (e) {
+    const files = Array.from(e.target.files || []).filter(f => /^video\//.test(f.type) || /\.(mp4|webm|mov|mkv|m4v)$/i.test(f.name));
+    aeClipsInput.value = '';
+    aeAddFiles(files);
+  });
+  async function aeAddFiles(files) {
+    if (!files.length) return;
+    files.forEach(f => aeClips.push({ id: ++aeIdCounter, file: f, name: f.name, url: URL.createObjectURL(f), info: null }));
+    aeRenderClipList();
+    if (aeBusy) return;
+    aeBusy = true;
+    try {
+      let todo;
+      while ((todo = aeClips.filter(c => !c.info && !c.error)).length) {
+        const c = todo[0], n = aeClips.indexOf(c) + 1;
+        try {
+          c.info = await AutoEdit.analyzeClip(c.file, { onProgress: f => aeSetStatus('Watching clip ' + n + ' of ' + aeClips.length + ': movement, light, focus and sound…', f) });
+        } catch (err) { c.error = err.message || 'Could not read this video.'; }
+        aeRenderClipList();
+      }
+      const ok = aeClips.filter(c => c.info).length;
+      aeSetStatus(ok ? ok + ' clip' + (ok === 1 ? '' : 's') + ' measured. Choose what the video is for, then press Plan the edit.' : 'None of these files could be read. Try MP4 or WebM videos.');
+    } finally { aeBusy = false; }
+  }
+
+  function aeApplyGoal() {
+    const o = aeGoal.selectedOptions[0];
+    aeLength.value = o.dataset.len;
+    aspectSelect.value = o.dataset.aspect;
+    if (aeGoal.value === 'ad' && aeStyle.value === 'calm') aeStyle.value = 'balanced';
+  }
+  aeGoal.addEventListener('change', aeApplyGoal);
+
+  aeRefInput.addEventListener('change', async function (e) {
+    const f = (e.target.files || [])[0];
+    aeRefInput.value = '';
+    if (!f || aeBusy) return;
+    aeBusy = true;
+    aeRefHint.textContent = 'Measuring how "' + f.name + '" is cut…';
+    try {
+      aeRhythm = await AutoEdit.analyzeReference(f, { onProgress: fr => aeSetStatus('Studying the editing of your example video…', fr) });
+      aeSetStatus('');
+      if (!aeRhythm || aeRhythm.cuts < 1) {
+        aeRefHint.textContent = 'No cuts found in "' + f.name + '"; it looks like one long shot. Pick a pace instead.';
+        aeRhythm = null;
+      } else {
+        aeRefHint.textContent = '✓ "' + f.name + '" cuts ' + aeRhythm.cuts + ' times in ' + aeFmt(aeRhythm.duration) + ' s, about every ' + aeFmt(aeRhythm.average) + ' s (first shot ' + aeFmt(aeRhythm.first) + ' s). Your edit will copy this rhythm.';
+        aeStyle.querySelector('option[value="reference"]').disabled = false;
+        aeStyle.value = 'reference';
+      }
+    } catch (err) { aeRefHint.textContent = '⚠ ' + err.message; aeRhythm = null; aeSetStatus(''); }
+    finally { aeBusy = false; }
+  });
+
+  musicInput.addEventListener('change', function (e) {
+    aeMusicFile = (e.target.files || [])[0] || null; aeBeats = null;
+    if (aeMusicFile) aeBeatHint.textContent = '✓ ' + aeMusicFile.name + ' — cuts will land on its beat.';
+  });
+  removeMusicBtn.addEventListener('click', function () {
+    aeMusicFile = null; aeBeats = null;
+    aeBeatHint.innerHTML = 'Uses the music under Speed &amp; audio below. Make your own in <a href="music-forge.html">Music Forge</a>.';
+  });
+
+  // The AI answers with JSON; take the first {...} block out of whatever it wrote around it.
+  function aeJson(text) {
+    const t = String(text), a = t.indexOf('{'), b = t.lastIndexOf('}');
+    if (a < 0 || b <= a) throw new Error('The AI did not answer with a plan.');
+    return JSON.parse(t.slice(a, b + 1));
+  }
+  async function aeAskAi(system, user, frames) {
+    const provider = providerSelect.value, apiKey = apiKeyInput.value.trim();
+    if (provider === 'gemini' || !frames.length) return callChat(system, user);
+    if (!apiKey) throw new Error('Add your API key under Translation first.');
+    if (provider === 'geminikey') {
+      const parts = [{ text: user }];
+      frames.forEach(f => { parts.push({ text: 'Moment #' + f.id }); parts.push({ inlineData: { mimeType: 'image/jpeg', data: f.data } }); });
+      return callGeminiKey(apiKey, system, parts);
+    }
+    if (provider === 'anthropic') {
+      const content = [{ type: 'text', text: user }];
+      frames.forEach(f => { content.push({ type: 'text', text: 'Moment #' + f.id }); content.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: f.data } }); });
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-5', max_tokens: 2000, system: system, messages: [{ role: 'user', content: content }] })
+      });
+      const d = await r.json().catch(() => null);
+      if (!r.ok) throw new Error((d && d.error && d.error.message) || ('Request failed with status ' + r.status));
+      return ((d && d.content) || []).filter(x => x.type === 'text').map(x => x.text).join('');
+    }
+    const content = [{ type: 'text', text: user }];
+    frames.forEach(f => { content.push({ type: 'text', text: 'Moment #' + f.id }); content.push({ type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + f.data, detail: 'low' } }); });
+    const r = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+      body: JSON.stringify({ model: 'gpt-4o-mini', temperature: 0.3, messages: [{ role: 'system', content: system }, { role: 'user', content: content }] })
+    });
+    const d = await r.json().catch(() => null);
+    if (!r.ok) throw new Error((d && d.error && d.error.message) || ('Request failed with status ' + r.status));
+    return d.choices && d.choices[0] && d.choices[0].message ? d.choices[0].message.content : '';
+  }
+
+  async function aePlan() {
+    clearError();
+    const ready = aeClips.filter(c => c.info);
+    if (!ready.length || aeBusy) return;
+    aeBusy = true; aePlanBtn.disabled = aeReplanBtn.disabled = true;
+    try {
+      const infos = ready.map(c => c.info), names = ready.map(c => c.name);
+      const opts = {
+        length: Math.max(3, parseFloat(aeLength.value) || 15), style: aeStyle.value, rhythm: aeRhythm,
+        about: aeAbout.value.trim(), cta: aeCta.value.trim(), goalLabel: aeGoal.selectedOptions[0].textContent
+      };
+      if (opts.style === 'reference' && !aeRhythm) opts.style = 'balanced';
+      if (aeMusicFile && !aeBeats) {
+        aeSetStatus('Listening for the beat of the music…');
+        aeBeats = await AutoEdit.detectBeats(aeMusicFile);
+      }
+      opts.beats = aeBeats;
+      let shots = null, hook = '', cta = opts.cta, note = '';
+      if (aeUseAi.checked) {
+        try {
+          const seeing = providerSelect.value !== 'gemini' && !!apiKeyInput.value.trim();
+          let frames = [];
+          const pr = AutoEdit.aiPrompt(infos, names, Object.assign({ withImages: seeing }, opts));
+          if (seeing) {
+            aeSetStatus('Taking a picture of every moment for the AI…');
+            const best = pr.moments.slice().sort((a, b) => b.score - a.score).slice(0, 30);
+            frames = await AutoEdit.framesFor(ready.map(c => c.file), best, 256);
+          }
+          aeSetStatus('The AI is choosing the moments…');
+          const r = AutoEdit.planFromAi(aeJson(await aeAskAi(pr.system, pr.user, frames)), pr.moments, infos, opts);
+          if (r) { shots = r.shots; hook = r.hook; cta = cta || r.cta; note = seeing ? 'The AI watched a frame of every moment and picked these.' : 'The AI picked these from the measurements.'; }
+          else note = 'The AI answer did not fit the clips, so the built-in editor planned it.';
+        } catch (err) { note = 'The AI could not plan it (' + err.message + '), so the built-in editor did.'; }
+      }
+      if (!shots) {
+        shots = AutoEdit.planLocal(infos, opts);
+        if (!note) note = 'Planned by the built-in editor from the measurements.';
+        if (opts.about) hook = opts.about.split(/[.!?,:;\n]/)[0].split(/\s+/).slice(0, 7).join(' ');
+      }
+      if (aeBeats) { shots = AutoEdit.snapToBeats(shots, aeBeats, infos); note += ' Cuts are on the beat (' + aeBeats.bpm + ' BPM).'; }
+      aeShots = shots.map(s => ({ clipId: ready[s.clip].id, in: s.in, out: s.out, why: s.why, fx: 'none', sfx: 'none', text: '' }));
+      aeFxStatus.textContent = '';
+      aeSetAutoCaptions(hook, cta);
+      aePlanBox.style.display = 'block';
+      aeRenderShots(note);
+      aeSetStatus('Plan ready. Check it below, then press Render the edit.');
+    } catch (err) {
+      aeSetStatus('');
+      showError(err.message);
+    } finally { aeBusy = false; aePlanBtn.disabled = aeReplanBtn.disabled = false; }
+  }
+  aePlanBtn.addEventListener('click', aePlan);
+  aeReplanBtn.addEventListener('click', aePlan);
+
+  const aeTotal = () => aeShots.reduce((a, s) => a + AutoEdit.shotLength(s), 0);
+  const aeOptionsHtml = (map, sel) => Object.keys(map).map(k => '<option value="' + k + '"' + (k === sel ? ' selected' : '') + '>' + map[k] + '</option>').join('');
+  // The opening hook and closing call to action become normal text overlays, so they can be edited and translated.
+  function aeSetAutoCaptions(hook, cta) {
+    captions = captions.filter(c => !c.auto);
+    const total = aeTotal();
+    if (hook) captions.push({ id: ++captionIdCounter, auto: 'hook', text: hook, start: 0, duration: Math.min(2.5, Math.max(1, total * 0.3)), position: 'top', translatedText: '', translatedLang: '' });
+    if (cta) captions.push({ id: ++captionIdCounter, auto: 'cta', text: cta, start: Math.max(0, Math.round((total - 2.5) * 10) / 10), duration: 2.5, position: 'middle', translatedText: '', translatedLang: '' });
+    renderCaptionsList();
+  }
+  function aeMoveCta() {
+    const c = captions.find(x => x.auto === 'cta');
+    if (c) { c.start = Math.max(0, Math.round((aeTotal() - c.duration) * 10) / 10); renderCaptionsList(); }
+  }
+
+  function aeRenderShots(note) {
+    if (!aeShots.length) { aePlanBox.style.display = 'none'; return; }
+    const total = aeTotal();
+    if (note != null) aePlanSummary.dataset.note = note;
+    aePlanSummary.textContent = aeShots.length + ' shots, ' + aeFmt(total) + ' s in all. ' + (aePlanSummary.dataset.note || '');
+    let at = 0;
+    aeShotList.innerHTML = aeShots.map((s, i) => {
+      const c = aeClipById(s.clipId), th = aeThumbAt(c, (s.in + s.out) / 2), from = at;
+      at += AutoEdit.shotLength(s);
+      return '<div class="ae-item' + (i === 0 ? ' hook' : '') + '" data-i="' + i + '">' + (th ? '<img alt="Watch this moment" title="Watch this moment" data-act="play" src="' + th + '">' : '<span class="ae-ph" data-act="play"></span>') +
+        '<div><b>' + (i + 1) + (i === 0 ? ' · Hook' : '') + ' · ' + aeEsc(c.name) + '</b><span class="ae-meta">at ' + aeFmt(from) + ' s · ' + aeEsc(s.why || '') + '</span>' +
+        '<div class="ae-times"><input type="number" step="0.1" min="0" data-f="in" value="' + s.in + '" aria-label="From (s)"> → <input type="number" step="0.1" min="0" data-f="out" value="' + s.out + '" aria-label="To (s)"> <span class="ae-meta">' + aeFmt(AutoEdit.shotLength(s)) + ' s</span></div>' +
+        '<div class="ae-fx"><select data-f="fx" aria-label="Effect">' + aeOptionsHtml(AutoEdit.FX, s.fx) + '</select><select data-f="sfx" aria-label="Sound">' + aeOptionsHtml(AutoEdit.SOUNDS, s.sfx) + '</select>' +
+        '<input type="text" data-f="text" maxlength="80" value="' + aeEsc(s.text || '') + '" placeholder="' + (i === 0 ? 'Text (the hook is already added)' : 'Text on this shot (optional)') + '" aria-label="Text on this shot"></div></div>' +
+        '<div class="ae-btns"><button type="button" data-act="up" title="Earlier">↑</button><button type="button" data-act="down" title="Later">↓</button><button type="button" data-act="del" title="Remove">✕</button></div></div>';
+    }).join('');
+  }
+  aeShotList.addEventListener('click', function (e) {
+    const t = e.target.closest('[data-act]'); if (!t) return;
+    const i = Number(t.closest('.ae-item').dataset.i), s = aeShots[i];
+    if (t.dataset.act === 'play') { aePreviewShot(s); return; }
+    if (t.dataset.act === 'del') aeShots.splice(i, 1);
+    else if (t.dataset.act === 'up' && i > 0) aeShots.splice(i - 1, 0, aeShots.splice(i, 1)[0]);
+    else if (t.dataset.act === 'down' && i < aeShots.length - 1) aeShots.splice(i + 1, 0, aeShots.splice(i, 1)[0]);
+    aeRenderShots(); aeMoveCta();
+  });
+  aeShotList.addEventListener('input', function (e) {
+    const inp = e.target.closest('input[data-f="text"]'); if (!inp) return;
+    aeShots[Number(inp.closest('.ae-item').dataset.i)].text = inp.value;
+  });
+  aeShotList.addEventListener('change', function (e) {
+    const sel = e.target.closest('select[data-f]');
+    if (sel) {
+      const s = aeShots[Number(sel.closest('.ae-item').dataset.i)];
+      s[sel.dataset.f] = sel.value;
+      if (sel.dataset.f === 'sfx') aePlaySfxNow(sel.value);
+      if (sel.dataset.f === 'fx') { aeRenderShots(); aeMoveCta(); }
+      return;
+    }
+    const inp = e.target.closest('input[data-f="in"], input[data-f="out"]'); if (!inp) return;
+    const s = aeShots[Number(inp.closest('.ae-item').dataset.i)], dur = aeClipById(s.clipId).info.duration;
+    const v = Math.max(0, Math.min(dur, parseFloat(inp.value) || 0));
+    if (inp.dataset.f === 'in') s.in = Math.min(v, s.out - 0.2); else s.out = Math.max(v, s.in + 0.2);
+    aeRenderShots(); aeMoveCta();
+  });
+
+  function aePreviewShot(s) {
+    const c = aeClipById(s.clipId);
+    sourceVideo.pause(); sourceVideo.style.display = 'none'; resultVideo.style.display = 'none'; stageCanvas.style.display = 'none'; stageEmpty.style.display = 'none';
+    aePreview.style.display = 'block';
+    aePreviewOut = s.out;
+    const go = () => { aePreview.currentTime = s.in; aePreview.play().catch(() => {}); };
+    if (aePreview.dataset.url !== c.url) { aePreview.dataset.url = c.url; aePreview.src = c.url; aePreview.onloadeddata = () => { aePreview.onloadeddata = null; go(); }; }
+    else go();
+  }
+  aePreview.addEventListener('timeupdate', function () { if (aePreviewOut && aePreview.currentTime >= aePreviewOut) { aePreview.pause(); aePreviewOut = 0; } });
+
+  // ---------- Auto Edit: text, effects and sounds ----------
+  const aeLook = aeEl('aeLook'), aeTextStyle = aeEl('aeTextStyle'), aeSfxVol = aeEl('aeSfxVol'), aeFxStatus = aeEl('aeFxStatus');
+  aeLook.innerHTML = aeOptionsHtml(AutoEdit.LOOKS, 'none');
+  aeTextStyle.innerHTML = aeOptionsHtml(AutoEdit.TEXT_STYLES, 'bold');
+  const aeSfxCache = {};
+  function aeSfxBuffer(name) {
+    if (!name || name === 'none' || !window.MigaMusic) return Promise.resolve(null);
+    if (!aeSfxCache[name]) aeSfxCache[name] = MigaMusic.sfx(name).catch(() => null);
+    return aeSfxCache[name];
+  }
+  function aeAudioCtx() {
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (sharedAudioCtx.state === 'suspended') sharedAudioCtx.resume().catch(() => {});
+    return sharedAudioCtx;
+  }
+  function aePlayBuffer(buf, dest, when) {
+    if (!buf) return;
+    const ac = aeAudioCtx(), src = ac.createBufferSource(), g = ac.createGain();
+    src.buffer = buf; g.gain.value = parseFloat(aeSfxVol.value) || 0;
+    src.connect(g).connect(dest || ac.destination);
+    src.start(Math.max(ac.currentTime, when || 0));
+  }
+  async function aePlaySfxNow(name) { aePlayBuffer(await aeSfxBuffer(name)); }
+
+  function aeApplyTouches(r, note) {
+    r.shots.forEach((t, i) => { if (aeShots[i]) Object.assign(aeShots[i], t); });
+    aeLook.value = r.look; aeTextStyle.value = r.textStyle;
+    aeRenderShots(); aeMoveCta();
+    const n = r.shots.filter(t => t.fx !== 'none' || t.sfx !== 'none' || t.text).length;
+    aeFxStatus.textContent = note + ' ' + n + ' of ' + r.shots.length + ' shots got something; look: ' + AutoEdit.LOOKS[r.look] + ', text: ' + AutoEdit.TEXT_STYLES[r.textStyle] + '. Change anything above.';
+  }
+  async function aePickTouches(surprise) {
+    if (!aeShots.length || aeBusy) return;
+    if (surprise && !aeUseAi.checked) { aeApplyTouches(AutoEdit.fxRandom(aeShots), '🎉 Rolled the dice.'); return; }
+    aeBusy = true; aeFxAiBtn.disabled = aeFxRandomBtn.disabled = true;
+    aeFxStatus.textContent = 'The AI is choosing text, effects and sounds…';
+    try {
+      const names = aeShots.map(s => aeClipById(s.clipId).name);
+      const pr = AutoEdit.fxPrompt(aeShots, names, { surprise, about: aeAbout.value.trim(), cta: aeCta.value.trim(), goalLabel: aeGoal.selectedOptions[0].textContent });
+      const r = AutoEdit.fxFromAi(aeJson(await callChat(pr.system, pr.user)), aeShots);
+      if (!r) throw new Error('the answer did not fit the shots');
+      aeApplyTouches(r, '✓ The AI picked these.');
+    } catch (err) {
+      aeApplyTouches(AutoEdit.fxRandom(aeShots), 'The AI could not answer (' + err.message + '), so they were picked at random using the same rules.');
+    } finally { aeBusy = false; aeFxAiBtn.disabled = aeFxRandomBtn.disabled = false; }
+  }
+  const aeFxAiBtn = aeEl('aeFxAiBtn'), aeFxRandomBtn = aeEl('aeFxRandomBtn');
+  aeFxAiBtn.addEventListener('click', () => aePickTouches(false));
+  aeFxRandomBtn.addEventListener('click', () => aePickTouches(true));
+  aeEl('aeFxClearBtn').addEventListener('click', function () {
+    aeShots.forEach(s => { s.fx = 'none'; s.sfx = 'none'; s.text = ''; });
+    aeLook.value = 'none'; aeFxStatus.textContent = '';
+    aeRenderShots(); aeMoveCta();
+  });
+
+  // One frame of a shot with its effect, at `local` seconds into the shot (output time).
+  function aeDrawShot(g, v, s, local, cw, ch, look, fit) {
+    const vw = v.videoWidth, vh = v.videoHeight;
+    if (!vw || !vh) return;
+    const len = AutoEdit.shotLength(s);
+    let r = cropRectForOutput(vw, vh, cw, ch), box = { x: 0, y: 0, w: cw, h: ch };
+    if (fit && Math.abs(vw / vh - cw / ch) > 0.02) {
+      // Whole picture in the middle, the same picture blurred behind it.
+      g.filter = 'blur(' + Math.round(cw / 30) + 'px) brightness(0.55)';
+      g.drawImage(v, r.sx, r.sy, r.sw, r.sh, -cw * 0.05, -ch * 0.05, cw * 1.1, ch * 1.1);
+      g.filter = 'none';
+      const k = Math.min(cw / vw, ch / vh);
+      box = { w: vw * k, h: vh * k }; box.x = (cw - box.w) / 2; box.y = (ch - box.h) / 2;
+      r = { sx: 0, sy: 0, sw: vw, sh: vh };
+    }
+    let z = 1, dx = 0, dy = 0;
+    if (s.fx === 'punch') z = local < 0.18 ? 1 + 0.15 * (local / 0.18) : 1.15;
+    else if (s.fx === 'slowzoom') z = 1 + 0.12 * Math.min(1, local / Math.max(0.5, len));
+    else if (s.fx === 'shake') { const a = Math.max(0, 1 - local / 0.6) * cw * 0.025; z = 1.08; dx = (Math.random() * 2 - 1) * a; dy = (Math.random() * 2 - 1) * a; }
+    const sw = r.sw / z, sh = r.sh / z;
+    g.filter = AutoEdit.LOOK_FILTERS[look] || 'none';
+    g.drawImage(v, r.sx + (r.sw - sw) / 2, r.sy + (r.sh - sh) / 2, sw, sh, box.x + dx, box.y + dy, box.w, box.h);
+    g.filter = 'none';
+    if (s.fx === 'glitch' && local < 0.4) {
+      for (let k = 0; k < 7; k++) {
+        const y = Math.random() * ch, h = ch * (0.02 + Math.random() * 0.06), off = (Math.random() * 2 - 1) * cw * 0.06;
+        g.drawImage(g.canvas, 0, y, cw, h, off, y, cw, h);
+      }
+      g.save(); g.globalCompositeOperation = 'screen'; g.fillStyle = 'rgba(255,0,80,0.12)'; g.fillRect(0, 0, cw, ch); g.restore();
+    }
+    if (s.fx === 'flash' && local < 0.3) { g.fillStyle = 'rgba(255,255,255,' + (0.9 * (1 - local / 0.3)) + ')'; g.fillRect(0, 0, cw, ch); }
+    if (s.fx === 'fade' && local < 0.45) { g.fillStyle = 'rgba(0,0,0,' + (1 - local / 0.45) + ')'; g.fillRect(0, 0, cw, ch); }
+  }
+
+  // The shot's own text, in the lower third, in the chosen style.
+  function aeDrawShotText(g, text, style, local, cw, ch) {
+    if (!text) return;
+    if (style === 'type') text = text.slice(0, Math.max(1, Math.floor(local * 22)));
+    const size = Math.round(Math.min(ch * 0.065, cw * 0.085));
+    g.save();
+    g.font = '800 ' + size + 'px "Space Grotesk", "IBM Plex Sans", sans-serif';
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round';
+    const lines = wrapCanvasText(g, text, cw * 0.84), lh = size * 1.18, y0 = ch * 0.74 - (lines.length - 1) * lh / 2;
+    if (style === 'pop') {
+      const p = Math.min(1, local / 0.22), k = p < 1 ? 0.5 + 0.62 * p - 0.12 * Math.sin(p * Math.PI) : 1;
+      g.translate(cw / 2, ch * 0.74); g.scale(k, k); g.translate(-cw / 2, -ch * 0.74);
+    }
+    lines.forEach((line, i) => {
+      const y = y0 + i * lh;
+      if (style === 'box') {
+        const w = g.measureText(line).width;
+        g.fillStyle = 'rgba(0,0,0,0.62)'; g.fillRect(cw / 2 - w / 2 - size * 0.35, y - lh / 2, w + size * 0.7, lh);
+        g.fillStyle = '#fff'; g.fillText(line, cw / 2, y);
+      } else if (style === 'neon') {
+        g.shadowColor = '#6FD1E0'; g.shadowBlur = size * 0.6; g.fillStyle = '#e8fdff'; g.fillText(line, cw / 2, y); g.fillText(line, cw / 2, y);
+      } else {
+        g.lineWidth = size * 0.16; g.strokeStyle = '#000'; g.strokeText(line, cw / 2, y);
+        g.fillStyle = style === 'pop' ? '#FFE15A' : '#fff'; g.fillText(line, cw / 2, y);
+      }
+    });
+    g.restore();
+  }
+
+  function aeWait(el, ev, ms) {
+    return new Promise((resolve, reject) => {
+      const t = setTimeout(() => { done(); resolve(); }, ms || 8000);
+      function ok() { done(); resolve(); }
+      function bad() { done(); reject(new Error('A clip could not be played.')); }
+      function done() { clearTimeout(t); el.removeEventListener(ev, ok); el.removeEventListener('error', bad); }
+      el.addEventListener(ev, ok); el.addEventListener('error', bad);
+    });
+  }
+  async function aePrime(p, shot) {
+    const c = aeClipById(shot.clipId);
+    if (p.dataset.url !== c.url) { p.dataset.url = c.url; p.src = c.url; await aeWait(p, 'loadeddata', 20000); }
+    p.currentTime = shot.in;
+    await aeWait(p, 'seeked');
+  }
+
+  aeRenderBtn.addEventListener('click', async function () {
+    clearError();
+    const shots = aeShots.filter(s => aeClipById(s.clipId) && s.out - s.in > 0.05);
+    if (!shots.length) { showError('Plan the edit first.'); return; }
+    if (cloneRun) cloneRun.stop();
+    if (renderState || aeBusy) return;
+    if (!window.MediaRecorder || !stageCanvas.captureStream) { showError(I18N.t('errorNoRecordingSupport')); return; }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoVideoFormat')); return; }
+
+    const first = aeClipById(shots[0].clipId).info;
+    const dims = outputDimensions(first.width || 1280, first.height || 720, aspectSelect.value);
+    const k = Math.min(1, 1920 / Math.max(dims.width, dims.height));
+    const cw = Math.max(2, Math.round(dims.width * k / 2) * 2), ch = Math.max(2, Math.round(dims.height * k / 2) * 2);
+    stageCanvas.width = cw; stageCanvas.height = ch;
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, cw, ch);
+    sourceVideo.pause(); aePreview.pause();
+    sourceVideo.style.display = 'none'; resultVideo.style.display = 'none'; aePreview.style.display = 'none'; stageEmpty.style.display = 'none';
+    stageCanvas.style.display = 'block';
+    downloadVideoBtn.disabled = true;
+    renderedVideoBlob = null;
+
+    if (!aePlayers) aePlayers = [0, 1].map(() => { const v = document.createElement('video'); v.playsInline = true; v.preload = 'auto'; return v; });
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = sharedAudioCtx;
+    if (audioCtx.state === 'suspended') { try { await audioCtx.resume(); } catch (e) {} }
+    const dest = audioCtx.createMediaStreamDestination();
+    const clipSound = aeSound.value !== 'music', useMusic = aeSound.value !== 'clips' && !!musicObjectUrl;
+    const clipVol = muteCheckbox.checked ? 0 : (parseFloat(volumeInput.value) || 1);
+    const gains = aePlayers.map(p => {
+      if (!p.aeNode) p.aeNode = audioCtx.createMediaElementSource(p);
+      p.aeNode.disconnect();
+      const g = audioCtx.createGain(); g.gain.value = 0;
+      p.aeNode.connect(g).connect(dest);
+      return g;
+    });
+    let musicGainNode = null;
+    if (useMusic) {
+      if (!musicAudioSourceNode) musicAudioSourceNode = audioCtx.createMediaElementSource(musicAudioEl);
+      musicAudioSourceNode.disconnect();
+      musicGainNode = audioCtx.createGain();
+      musicGainNode.gain.value = parseFloat(musicVolume.value) || 0.8;
+      musicAudioSourceNode.connect(musicGainNode).connect(dest);
+      if (clipSound && clipVol > 0 && document.getElementById('musicDuckCheckbox').checked) {
+        const analyser = audioCtx.createAnalyser(); analyser.fftSize = 1024;
+        gains.forEach(g => g.connect(analyser));
+        const buf = new Float32Array(analyser.fftSize), base = musicGainNode.gain.value;
+        duckTimer = setInterval(() => {
+          analyser.getFloatTimeDomainData(buf); let e = 0; for (let i = 0; i < buf.length; i++) e += buf[i] * buf[i];
+          const loud = Math.sqrt(e / buf.length) > 0.035;
+          musicGainNode.gain.setTargetAtTime(loud ? base * 0.3 : base, audioCtx.currentTime, loud ? 0.08 : 0.45);
+        }, 60);
+      }
+      musicAudioEl.loop = true;
+      musicAudioEl.currentTime = 0;
+    } else if (musicAudioSourceNode) musicAudioSourceNode.disconnect();
+
+    const total = shots.reduce((a, s) => a + AutoEdit.shotLength(s), 0);
+    const look = aeLook.value, textStyle = aeTextStyle.value, fit = aeEl('aeFraming').value === 'fit';
+    const sfxBufs = {};
+    for (const s of shots) if (s.sfx && s.sfx !== 'none' && !(s.sfx in sfxBufs)) sfxBufs[s.sfx] = await aeSfxBuffer(s.sfx);
+    const risersFired = new Set();
+    const canvasStream = stageCanvas.captureStream(30);
+    const recorder = new MediaRecorder(new MediaStream([...canvasStream.getVideoTracks(), ...dest.stream.getAudioTracks()]), { mimeType, videoBitsPerSecond: 8000000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+
+    let cancelled = false, rafId = null, idx = 0, outBase = 0, switching = false;
+    let cur = aePlayers[0], nxt = aePlayers[1], curGain = gains[0], nxtGain = gains[1], nextReady = null;
+    renderBtn.disabled = aeRenderBtn.disabled = aePlanBtn.disabled = aeReplanBtn.disabled = true;
+    cancelRenderBtn.style.display = 'inline-block';
+    progressWrap.classList.add('show');
+    progressLabel.textContent = I18N.t('progressRendering');
+    titleBlockRight.textContent = I18N.t('statusRendering');
+
+    function finish() {
+      if (duckTimer) { clearInterval(duckTimer); duckTimer = null; }
+      aePlayers.forEach(p => { p.pause(); p.playbackRate = p.defaultPlaybackRate = 1; });
+      progressWrap.classList.remove('show');
+      cancelRenderBtn.style.display = 'none';
+      renderBtn.disabled = aeRenderBtn.disabled = aePlanBtn.disabled = aeReplanBtn.disabled = false;
+      musicAudioEl.pause();
+      renderState = null;
+    }
+    recorder.onstop = function () {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (cancelled) { finish(); titleBlockRight.textContent = I18N.t('statusCancelled'); return; }
+      renderedVideoBlob = new Blob(chunks, { type: 'video/webm' });
+      resultVideo.src = URL.createObjectURL(renderedVideoBlob);
+      resultVideo.style.display = 'block';
+      stageCanvas.style.display = 'none';
+      downloadVideoBtn.disabled = false;
+      titleBlockRight.textContent = I18N.t('statusRenderComplete');
+      finish();
+      refreshUploadEnabled();
+    };
+
+    // A shot's sound plays on its cut; a riser starts early so it peaks on the cut.
+    function soundFor(i) {
+      const n = shots[i] && shots[i].sfx;
+      if (n && n !== 'none' && !(n === 'riser' && risersFired.has(i))) aePlayBuffer(sfxBufs[n], dest);
+    }
+    function startShot(i) {
+      const rate = AutoEdit.SPEED[shots[i].fx] || 1;
+      cur.playbackRate = rate; cur.defaultPlaybackRate = rate;
+      soundFor(i);
+    }
+    async function advance() {
+      switching = true;
+      const s = shots[idx];
+      cur.pause(); curGain.gain.value = 0;
+      outBase += AutoEdit.shotLength(s);
+      idx++;
+      if (idx >= shots.length || cancelled) { recorder.stop(); return; }
+      try { await nextReady; } catch (e) { /* draw what we can */ }
+      [cur, nxt] = [nxt, cur]; [curGain, nxtGain] = [nxtGain, curGain];
+      curGain.gain.value = clipSound ? clipVol : 0;
+      startShot(idx);
+      try { await cur.play(); } catch (e) { /* keep going; the frame stays on screen */ }
+      nextReady = shots[idx + 1] ? aePrime(nxt, shots[idx + 1]) : null;
+      switching = false;
+    }
+    function step() {
+      if (cancelled) { recorder.stop(); return; }
+      if (!switching) {
+        const s = shots[idx];
+        const local = Math.max(0, Math.min(s.out, cur.currentTime) - s.in) / (AutoEdit.SPEED[s.fx] || 1);
+        aeDrawShot(ctx, cur, s, local, cw, ch, look, fit);
+        const outT = outBase + local;
+        aeDrawShotText(ctx, s.text, textStyle, local, cw, ch);
+        drawWatermark(ctx, cw, ch);
+        drawCaptionsAt(ctx, cw, ch, outT);
+        const nextS = shots[idx + 1], left = AutoEdit.shotLength(s) - local;
+        if (nextS && nextS.sfx === 'riser' && !risersFired.has(idx + 1) && left <= 2.9 && sfxBufs.riser) {
+          risersFired.add(idx + 1);
+          const ac = aeAudioCtx(), src = ac.createBufferSource(), g = ac.createGain();
+          src.buffer = sfxBufs.riser; g.gain.value = parseFloat(aeSfxVol.value) || 0;
+          src.connect(g).connect(dest); src.start(ac.currentTime, Math.max(0, 2.9 - left));
+        }
+        const pct = Math.min(100, Math.round(outT / total * 100));
+        progressFill.style.width = pct + '%';
+        progressPct.textContent = pct + '%';
+        if (cur.currentTime >= s.out - 0.02 || cur.ended) advance();
+      }
+      rafId = requestAnimationFrame(step);
+    }
+
+    renderState = { cancel: function () { cancelled = true; } };
+    try {
+      progressFill.style.width = '0%'; progressPct.textContent = '0%';
+      await aePrime(cur, shots[0]);
+      nextReady = shots[1] ? aePrime(nxt, shots[1]) : null;
+      curGain.gain.value = clipSound ? clipVol : 0;
+      recorder.start();
+      startShot(0);
+      await cur.play();
+      if (useMusic) { try { await musicAudioEl.play(); } catch (e) {} }
+      rafId = requestAnimationFrame(step);
+    } catch (err) {
+      showError(I18N.t('errorCouldNotStartRendering') + ' ' + err.message);
+      cancelled = true;
+      if (recorder.state !== 'inactive') recorder.stop(); else finish();
+    }
+  });
+
+  // ---------- Talk to yourself: two takes from a fixed camera, joined down the middle ----------
+  const cloneEls = ['cloneInputA', 'cloneInputB', 'cloneHintA', 'cloneHintB', 'cloneOptions', 'cloneSide', 'cloneOffset', 'cloneTimingBtn', 'cloneSeam', 'cloneSoft', 'clonePreviewBtn', 'cloneRenderBtn', 'cloneToAeBtn', 'cloneStatus'].reduce((o, id) => (o[id] = aeEl(id), o), {});
+  const cloneTakes = [null, null]; // {file, url, info}
+  const cloneVids = [0, 1].map(() => { const v = document.createElement('video'); v.playsInline = true; v.preload = 'auto'; return v; });
+  const cloneMask = document.createElement('canvas');
+  let cloneRun = null, cloneBlob = null;
+
+  async function cloneLoad(i, file) {
+    if (!file) return;
+    const hint = i ? cloneEls.cloneHintB : cloneEls.cloneHintA;
+    hint.textContent = 'Reading "' + file.name + '"…';
+    if (cloneTakes[i]) URL.revokeObjectURL(cloneTakes[i].url);
+    const take = { file, url: URL.createObjectURL(file), info: null };
+    cloneTakes[i] = take;
+    try {
+      take.info = await AutoEdit.analyzeClip(file);
+      cloneVids[i].src = take.url;
+      await aeWait(cloneVids[i], 'loadeddata', 20000);
+      hint.textContent = '✓ ' + file.name + ' (' + aeFmt(take.info.duration) + ' s)';
+    } catch (err) { hint.textContent = '⚠ ' + err.message; cloneTakes[i] = null; return; }
+    if (cloneTakes[0] && cloneTakes[1] && cloneTakes[0].info && cloneTakes[1].info) {
+      cloneEls.cloneOptions.style.display = 'block';
+      const a = cloneTakes[0].info, b = cloneTakes[1].info;
+      if (Math.abs(a.width / a.height - b.width / b.height) > 0.02) cloneEls.cloneStatus.textContent = '⚠ The two takes have different shapes. Film both with the same camera and setting.';
+      cloneFindTiming();
+      await cloneSeekStill();
+    }
+  }
+  cloneEls.cloneInputA.addEventListener('change', e => { cloneLoad(0, e.target.files[0]); e.target.value = ''; });
+  cloneEls.cloneInputB.addEventListener('change', e => { cloneLoad(1, e.target.files[0]); e.target.value = ''; });
+
+  function cloneFindTiming() {
+    const off = AutoEdit.bestOffset(cloneTakes[0].info.level, cloneTakes[1].info.level, 10);
+    cloneEls.cloneOffset.value = off;
+    cloneEls.cloneStatus.textContent = cloneTakes[0].info.level && cloneTakes[1].info.level
+      ? '⏱ Take 2 starts ' + (off >= 0 ? aeFmt(off) + ' s after' : aeFmt(-off) + ' s before') + ' take 1, so the two of you take turns. Fine-tune it if you like.'
+      : 'One take has no sound, so the timing could not be found. Set it by hand.';
+  }
+  cloneEls.cloneTimingBtn.addEventListener('click', cloneFindTiming);
+
+  function cloneDims() {
+    const a = cloneTakes[0].info, k = Math.min(1, 1920 / Math.max(a.width, a.height));
+    return { cw: Math.max(2, Math.round(a.width * k / 2) * 2), ch: Math.max(2, Math.round(a.height * k / 2) * 2) };
+  }
+  // Take 1 everywhere, take 2 laid over its half with a soft edge at the join.
+  function cloneDraw(g, cw, ch, guide) {
+    const [A, B] = cloneVids;
+    if (A.videoWidth) { const r = cropRectForOutput(A.videoWidth, A.videoHeight, cw, ch); g.drawImage(A, r.sx, r.sy, r.sw, r.sh, 0, 0, cw, ch); }
+    if (!B.videoWidth) return;
+    if (cloneMask.width !== cw || cloneMask.height !== ch) { cloneMask.width = cw; cloneMask.height = ch; }
+    const m = cloneMask.getContext('2d'), r = cropRectForOutput(B.videoWidth, B.videoHeight, cw, ch);
+    m.globalCompositeOperation = 'source-over';
+    m.clearRect(0, 0, cw, ch);
+    m.drawImage(B, r.sx, r.sy, r.sw, r.sh, 0, 0, cw, ch);
+    const x = cw * (parseFloat(cloneEls.cloneSeam.value) || 50) / 100, soft = Math.max(1, cw * (parseFloat(cloneEls.cloneSoft.value) || 0) / 100);
+    const grad = m.createLinearGradient(x - soft / 2, 0, x + soft / 2, 0), bRight = cloneEls.cloneSide.value === 'left';
+    grad.addColorStop(0, bRight ? 'rgba(0,0,0,0)' : '#000');
+    grad.addColorStop(1, bRight ? '#000' : 'rgba(0,0,0,0)');
+    m.globalCompositeOperation = 'destination-in';
+    m.fillStyle = grad; m.fillRect(0, 0, cw, ch);
+    g.drawImage(cloneMask, 0, 0);
+    if (guide) { g.save(); g.setLineDash([8, 8]); g.strokeStyle = 'rgba(226,166,59,0.9)'; g.lineWidth = 2; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, ch); g.stroke(); g.restore(); }
+  }
+  function cloneShowStage() {
+    const { cw, ch } = cloneDims();
+    stageCanvas.width = cw; stageCanvas.height = ch;
+    sourceVideo.pause(); aePreview.pause();
+    sourceVideo.style.display = 'none'; resultVideo.style.display = 'none'; aePreview.style.display = 'none'; stageEmpty.style.display = 'none';
+    stageCanvas.style.display = 'block';
+    return { cw, ch };
+  }
+  async function cloneSeekStill() {
+    const { cw, ch } = cloneShowStage(), off = parseFloat(cloneEls.cloneOffset.value) || 0;
+    const t = Math.min(cloneTakes[0].info.duration / 2, 2);
+    cloneVids[0].currentTime = t; cloneVids[1].currentTime = Math.max(0, t - off);
+    await Promise.all(cloneVids.map(v => aeWait(v, 'seeked', 4000).catch(() => {})));
+    cloneDraw(ctx, cw, ch, true);
+  }
+  ['cloneSeam', 'cloneSoft', 'cloneSide'].forEach(id => cloneEls[id].addEventListener('input', () => { if (!cloneRun && cloneTakes[0]) { const { cw, ch } = cloneDims(); cloneDraw(ctx, cw, ch, true); } }));
+  cloneEls.cloneSide.addEventListener('change', () => cloneEls.cloneSeam.dispatchEvent(new Event('input')));
+  cloneEls.cloneOffset.addEventListener('change', () => { if (!cloneRun) cloneSeekStill(); });
+
+  // Plays both takes together on the stage; with `record`, also records the result.
+  async function clonePlay(record) {
+    if (cloneRun) { cloneRun.stop(); return; }
+    if (renderState || aeBusy) return;
+    clearError();
+    const { cw, ch } = cloneShowStage();
+    const off = parseFloat(cloneEls.cloneOffset.value) || 0, [A, B] = cloneVids;
+    const durA = cloneTakes[0].info.duration, durB = cloneTakes[1].info.duration;
+    const total = Math.max(durA, off + durB); // a negative start skips the beginning of take 2
+    const ac = aeAudioCtx(), dest = record ? ac.createMediaStreamDestination() : ac.destination;
+    cloneVids.forEach(v => { if (!v.cfNode) v.cfNode = ac.createMediaElementSource(v); v.cfNode.disconnect(); v.cfNode.connect(dest); });
+    let recorder = null, chunks = [];
+    if (record) {
+      const mimeType = MediaUtils.pickMimeType();
+      if (!window.MediaRecorder || !stageCanvas.captureStream || !mimeType) { showError(I18N.t('errorNoRecordingSupport')); return; }
+      recorder = new MediaRecorder(new MediaStream([...stageCanvas.captureStream(30).getVideoTracks(), ...dest.stream.getAudioTracks()]), { mimeType, videoBitsPerSecond: 8000000 });
+      recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+    }
+    A.currentTime = 0; B.currentTime = Math.max(0, -off);
+    await Promise.all(cloneVids.map(v => aeWait(v, 'seeked', 4000).catch(() => {})));
+    let rafId = null, bStarted = off <= 0, stopped = false, cancelled = false;
+    const btn = record ? cloneEls.cloneRenderBtn : cloneEls.clonePreviewBtn, label = btn.textContent;
+    btn.textContent = record ? '✕ Cancel' : '■ Stop';
+    (record ? cloneEls.clonePreviewBtn : cloneEls.cloneRenderBtn).disabled = true;
+    if (record) { progressWrap.classList.add('show'); progressLabel.textContent = I18N.t('progressRendering'); titleBlockRight.textContent = I18N.t('statusRendering'); downloadVideoBtn.disabled = true; }
+    function stop(cancel) {
+      if (stopped) return; stopped = true; cancelled = !!cancel;
+      cancelAnimationFrame(rafId); cloneVids.forEach(v => v.pause());
+      btn.textContent = label; cloneEls.clonePreviewBtn.disabled = cloneEls.cloneRenderBtn.disabled = false;
+      cloneRun = null; renderState = null;
+      if (recorder && recorder.state !== 'inactive') recorder.stop();
+      else if (!record) cloneDraw(ctx, cw, ch, true);
+    }
+    cloneRun = { stop: () => stop(true) };
+    if (record) {
+      renderState = { cancel: () => stop(true) };
+      recorder.onstop = function () {
+        progressWrap.classList.remove('show');
+        if (cancelled) { titleBlockRight.textContent = I18N.t('statusCancelled'); return; }
+        cloneBlob = renderedVideoBlob = new Blob(chunks, { type: 'video/webm' });
+        resultVideo.src = URL.createObjectURL(renderedVideoBlob);
+        resultVideo.style.display = 'block'; stageCanvas.style.display = 'none';
+        downloadVideoBtn.disabled = false;
+        titleBlockRight.textContent = I18N.t('statusRenderComplete');
+        cloneEls.cloneToAeBtn.style.display = 'block';
+        cloneEls.cloneStatus.textContent = '✓ Done. Download it, or add it to Auto Edit for text, effects and music.';
+        refreshUploadEnabled();
+      };
+      recorder.start();
+    }
+    const t0 = performance.now(); // take 1 always starts at 0
+    try { await A.play(); if (bStarted) await B.play(); } catch (e) { /* the frames still draw */ }
+    function step() {
+      if (stopped) return;
+      const t = (performance.now() - t0) / 1000;
+      if (!bStarted && t >= off) { bStarted = true; B.play().catch(() => {}); }
+      // Keep both takes on the shared clock.
+      if (t < durA && !A.paused && Math.abs(A.currentTime - t) > 0.2) A.currentTime = t;
+      const tb = t - off;
+      if (bStarted && tb < durB && !B.paused && Math.abs(B.currentTime - tb) > 0.2) B.currentTime = tb;
+      cloneDraw(ctx, cw, ch, !record);
+      if (record) { const pct = Math.min(100, Math.round(t / total * 100)); progressFill.style.width = pct + '%'; progressPct.textContent = pct + '%'; }
+      if (t >= total) { stop(false); return; }
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+  }
+  cloneEls.clonePreviewBtn.addEventListener('click', () => clonePlay(false));
+  cloneEls.cloneRenderBtn.addEventListener('click', () => clonePlay(true));
+  cloneEls.cloneToAeBtn.addEventListener('click', function () {
+    if (!cloneBlob) return;
+    aeEl('autoEditBox').open = true;
+    aeEl('aeFraming').value = 'fit'; // keeps both of you in the picture when the edit is taller than the takes
+    aeAddFiles([new File([cloneBlob], 'talking-to-myself.webm', { type: 'video/webm' })]);
+    aeEl('autoEditBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   // ---------- YouTube upload (shared module; same flow as Record Forge / Video Forge) ----------

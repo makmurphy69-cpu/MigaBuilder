@@ -96,11 +96,33 @@ test('media-convert: remove location data keeps the video', 'media-convert.html'
 
 test('media-convert: cancel stops the job and the next one still works', 'media-convert.html', async (page) => {
   await page.click('.tab[data-mode="convert"]');
-  await page.setInputFiles('#ffFile', path.join(FIX, 'clip.mp4'));
+  // A 30-second clip, and Cancel only once converting has begun: on a fast runner the
+  // 3-second clip finished before the click landed, so the test saw "Finished".
+  await page.setInputFiles('#ffFile', path.join(FIX, 'clip-long.mp4'));
   await page.click('#ffConvert');
+  await page.waitForFunction(() => /Converting/.test(document.querySelector('#ffProgress').textContent), null, { timeout: 120000 });
   await page.click('#ffProgress .mp-cancel');
   await page.waitForFunction(() => /Cancelled/.test(document.querySelector('#ffProgress').textContent));
   await page.waitForFunction(() => !document.querySelector('#ffConvert').disabled, null, { timeout: 60000 });
+  await page.selectOption('#ffMode', 'mp3');
+  const out = await downloadOf(page, () => page.click('#ffConvert'), 240000);
+  expect(/\.mp3$/.test(out.name), 'expected an .mp3 after cancelling, got ' + out.name);
+}, { timeout: 300000 });
+
+test('media-convert: cancel while the engine downloads stops the job', 'media-convert.html', async (page, ctx) => {
+  // Hold the engine download so Cancel lands while it is still coming in.
+  await ctx.route(/@ffmpeg\/core/, async route => { await new Promise(r => setTimeout(r, 4000)); await route.continue(); });
+  let downloads = 0;
+  page.on('download', () => downloads++);
+  await page.click('.tab[data-mode="convert"]');
+  await page.setInputFiles('#ffFile', path.join(FIX, 'clip.mp4'));
+  await page.click('#ffConvert');
+  await page.waitForFunction(() => /Downloading the conversion engine/.test(document.querySelector('#ffProgress').textContent), null, { timeout: 60000 });
+  await page.click('#ffProgress .mp-cancel');
+  await page.waitForFunction(() => !document.querySelector('#ffConvert').disabled, null, { timeout: 60000 });
+  await page.waitForTimeout(3000);
+  expect(/Cancelled/.test(await page.textContent('#ffProgress')), 'the panel no longer says Cancelled: ' + (await page.textContent('#ffProgress')).slice(0, 120));
+  expect(downloads === 0, 'the cancelled job still made a file');
   await page.selectOption('#ffMode', 'mp3');
   const out = await downloadOf(page, () => page.click('#ffConvert'), 240000);
   expect(/\.mp3$/.test(out.name), 'expected an .mp3 after cancelling, got ' + out.name);
@@ -207,6 +229,61 @@ test('pdf-compress: output is a valid PDF with every page', 'pdf-compress.html',
 
 const SITE_PLAN = { siteName: 'Sunrise Bakery', tagline: 'Fresh bread every morning', pages: [{ slug: 'index', navLabel: 'Home', purpose: 'Homepage' }, { slug: 'menu', navLabel: 'Menu', purpose: 'Breads and cakes' }, { slug: 'contact', navLabel: 'Contact', purpose: 'Contact details and a form' }], design: { mood: 'warm', primary: '#b4530f', accent: '#f4b942', theme: 'light', headingFont: 'Fraunces', bodyFont: 'Inter', corners: 'round', ctaLabel: 'Order today' } };
 const SITE_PAGE = '<title>Sunrise Bakery</title>\n<meta name="description" content="Fresh bread.">\n<main><section class="hero hero-center"><div class="container"><h1>Real sourdough</h1><p class="lead">Baked at 4am.</p><div class="actions"><a class="btn btn-primary" href="menu.html">See the menu</a></div></div></section><section class="section"><div class="container"><div class="grid grid-3"><article class="card"><h3>Local flour</h3></article></div></div></section></main>';
+test('clip-forge: Auto Edit plans two clips with the AI and renders one video', 'clip-forge.html', async (page, ctx) => {
+  let asked = '';
+  await fakeAi(ctx, body => {
+    if (/finishing touches/.test(body.systemPrompt || '')) return JSON.stringify({ look: 'warm', textStyle: 'pop', shots: [{ n: 1, effect: 'punch', sound: 'whoosh', text: '' }, { n: 2, effect: 'slowzoom', sound: 'success', text: '' }] });
+    asked = body.userPrompt || '';
+    const ids = (asked.match(/^#(\d+) /gm) || []).map(x => parseInt(x.slice(1), 10));
+    return JSON.stringify({ hook: 'Two places, one day', cta: 'Follow for more', shots: [{ id: ids[ids.length - 1], why: 'busy start' }, { id: ids[0], why: 'calm ending' }] });
+  });
+  const clip = fs.readFileSync(path.join(FIX, 'clip.webm')); // WebM: test Chromium has no H.264
+  await page.click('#autoEditBox summary');
+  await page.setInputFiles('#aeClipsInput', [{ name: 'beach.webm', mimeType: 'video/webm', buffer: clip }, { name: 'city.webm', mimeType: 'video/webm', buffer: clip }]);
+  await page.waitForFunction(() => /2 clips measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 60000 });
+  await page.fill('#aeLength', '4');
+  await page.selectOption('#aeStyle', 'fast');
+  await page.click('#aePlanBtn');
+  await page.waitForFunction(() => document.querySelectorAll('#aeShotList .ae-item').length >= 2, null, { timeout: 30000 });
+  expect(/"beach\.webm"/.test(asked) && /"city\.webm"/.test(asked), 'the AI was not told about both clips');
+  const summary = await page.textContent('#aePlanSummary');
+  expect(/AI picked/.test(summary), 'the AI plan was not used: ' + summary);
+  expect(/city\.webm/.test(await page.textContent('#aeShotList .ae-item')), 'the first shot should be the AI\'s hook from city.webm');
+  expect(/Two places, one day/.test(await page.textContent('#captionsList')), 'the hook text was not added as a text overlay');
+  await page.click('#aeFxAiBtn');
+  await page.waitForFunction(() => /AI picked these/.test(document.querySelector('#aeFxStatus').textContent), null, { timeout: 30000 });
+  const fx = await page.$$eval('#aeShotList select[data-f="fx"]', s => s.map(x => x.value));
+  expect(fx[0] === 'punch' && fx[1] === 'slowzoom', 'the AI effects were not applied: ' + fx);
+  expect(await page.inputValue('#aeLook') === 'warm', 'the AI look was not applied');
+  await page.locator('#aeShotList input[data-f="text"]').nth(1).fill('Over here');
+  const out = await downloadOf(page, async () => {
+    await page.click('#aeRenderBtn');
+    await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
+    await page.click('#downloadVideoBtn');
+  }, 90000);
+  expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
+  expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+}, { timeout: 150000 });
+
+test('clip-forge: talk to yourself joins two takes into one video', 'clip-forge.html', async (page) => {
+  const clip = fs.readFileSync(path.join(FIX, 'clip.webm'));
+  await page.click('#cloneBox summary');
+  await page.setInputFiles('#cloneInputA', { name: 'take-1.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForFunction(() => /✓/.test(document.querySelector('#cloneHintA').textContent), null, { timeout: 30000 });
+  await page.setInputFiles('#cloneInputB', { name: 'take-2.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForSelector('#cloneOptions', { state: 'visible', timeout: 30000 });
+  await page.fill('#cloneOffset', '1');
+  const out = await downloadOf(page, async () => {
+    await page.click('#cloneRenderBtn');
+    await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
+    await page.click('#downloadVideoBtn');
+  }, 90000);
+  expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
+  expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+  await page.click('#cloneToAeBtn');
+  await page.waitForFunction(() => /1 clip measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 60000 });
+}, { timeout: 150000 });
+
 test('website-builder: AI site has a shared design and downloads as a tidy ZIP', 'website-builder.html', async (page) => {
   await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
   await page.click('#draftBtn');
