@@ -88,7 +88,15 @@
     sw:{label:'Kiswahili',voice:'sw-KE',watch:'Mwongozo halisi',hint:'Fuata vidhibiti halisi vya ukurasa huu kwa manukuu na sauti.',play:'Anza mwongozo',pause:'Sitisha',restart:'Rudia',mute:'Sauti imewashwa',unmute:'Sauti imezimwa',step:'Hatua',steps:[n=>`Karibu kwenye ${n}. Mwongozo huu unatumia vidhibiti halisi vya zana kwenye ukurasa huu.`,()=>`Kwanza, weka maelezo kwa uwazi kwenye sehemu iliyoangaziwa.`,(_,a,b)=>`Kisha chagua mipangilio na utumie ${b}. Kidhibiti halisi kimeangaziwa.`,(_,a,b,c)=>`Mwisho, ${c}. Kagua matokeo kabla ya kuyachapisha au kuyashiriki.`]}
   };
   const box=document.createElement('details');box.className='miga-tutorial real-walkthrough';box.open=false;box.innerHTML='<summary><span><b>REAL WALKTHROUGH</b><span id="mt-title"></span></span><span>▶ actual controls</span></summary><div class="miga-tutorial-body"><div class="miga-tutorial-copy"><p id="mt-hint"></p><div class="miga-tutorial-controls"><select id="mt-lang" aria-label="Walkthrough language"></select><button type="button" data-primary id="mt-play"></button><button type="button" id="mt-voice"></button></div><small>Nothing is uploaded. The walkthrough only points to controls already on this page.</small></div><div class="miga-tutorial-screen" aria-live="polite"><span class="miga-tutorial-badge" id="mt-badge"></span><h3 id="mt-heading"></h3><p id="mt-caption"></p><div class="miga-tutorial-progress"><span id="mt-progress"></span></div><div class="miga-tutorial-dots" id="mt-dots"></div></div></div>';
-  const anchor=document.querySelector('header')||document.body.firstElementChild;anchor.insertAdjacentElement('afterend',box);
+  // The tool comes first: guides sit below it, with a one-line link to them under the header.
+  const anchor=document.querySelector('header')||document.body.firstElementChild;
+  const jump=document.createElement('a');jump.className='miga-guide-jump';jump.href='#miga-guide';jump.textContent='New here? See how '+tool[0]+' works ↓';
+  anchor.insertAdjacentElement('afterend',jump);
+  const guides=document.createElement('section');guides.id='miga-guide';guides.className='miga-guides';guides.setAttribute('aria-label','How to use '+tool[0]);
+  document.querySelectorAll('.real-demo').forEach(d=>guides.appendChild(d));guides.appendChild(box);
+  const foot=document.querySelector('body > footer'),main=document.querySelector('body > main');
+  if(foot)foot.before(guides);else if(main)main.after(guides);else document.body.appendChild(guides);
+  jump.onclick=e=>{e.preventDefault();box.open=true;guides.scrollIntoView({behavior:'smooth',block:'start'})};
   const q=id=>box.querySelector('#'+id),langSel=q('mt-lang');Object.entries(languages).forEach(([k,v])=>{const o=document.createElement('option');o.value=k;o.textContent=v.label;langSel.appendChild(o)});
   let index=0,timer=null,playing=false,voice=true,activeTarget=null;
   const visible=el=>el&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden';
@@ -127,7 +135,7 @@
       (v.transcript&&v.transcript.length?'<details class="miga-transcript"><summary>Read the transcript</summary><p>'+v.transcript.map(esc).join('</p><p>')+'</p></details>':'')+
       '<p class="miga-video-note">Prefer to follow along on this page? The interactive walkthrough below points to the real controls.</p>';
     const body=box.querySelector('.miga-tutorial-body');body.parentNode.insertBefore(sec,body);
-    box.classList.add('has-video');
+    box.classList.add('has-video');jump.textContent='▶ New here? Watch the '+mins+' video guide ↓';
     const video=sec.querySelector('video');
     video.addEventListener('play',()=>{if(playing)stop()});
     box.addEventListener('toggle',()=>{if(!box.open)video.pause()});
