@@ -5,7 +5,8 @@
  */
 window.HOME_I18N = {
   en: {
-    heroSubtitle: 'Create websites, games, cartoons, videos, music and practical business assets with AI — directly in your browser.',
+    heroSubtitle: 'Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.',
+    taskLead: 'Start with a task:', taskPdf: '📕 Edit a PDF', taskCv: '📄 Make a CV', taskBg: '🪄 Remove a background', taskInvoice: '🧾 Make an invoice', taskCompress: '🗜️ Compress a PDF', taskOcr: '🔎 Copy text from an image',
     ctaBuild: 'Build a website', ctaInstall: '📲 Install the app',
     trustTools: '{n} free tools', trustSignup: 'No signup', trustWatermark: 'No watermark', trustPaywall: 'No surprise paywall', trustOpen: 'Open source',
     searchPlaceholder: 'What do you want to make?', searchHint: 'Try “pdf”, “video”, “cv” or “logo” — or open a category below.',
@@ -98,7 +99,8 @@ window.HOME_I18N = {
     'd:meet-forge': 'Host group video rooms and topic communities.'
   },
   es: {
-    heroSubtitle: 'Crea sitios web, juegos, dibujos animados, vídeos, música y recursos empresariales prácticos con IA, directamente en tu navegador.',
+    heroSubtitle: 'Herramientas gratuitas que funcionan en tu navegador, sin cuenta. Edita PDF, crea un CV o una factura, retoca imágenes y crea sitios web, vídeos y más.',
+    taskLead: 'Empieza con una tarea:', taskPdf: '📕 Editar un PDF', taskCv: '📄 Crear un CV', taskBg: '🪄 Quitar un fondo', taskInvoice: '🧾 Crear una factura', taskCompress: '🗜️ Comprimir un PDF', taskOcr: '🔎 Copiar texto de una imagen',
     ctaBuild: 'Crear un sitio web', ctaInstall: '📲 Instalar la app',
     trustTools: '{n} herramientas gratis', trustSignup: 'Sin registro', trustWatermark: 'Sin marca de agua', trustPaywall: 'Sin pagos sorpresa', trustOpen: 'Código abierto',
     searchPlaceholder: '¿Qué quieres crear?', searchHint: 'Prueba «pdf», «vídeo», «cv» o «logo», o abre una categoría abajo.',
@@ -191,7 +193,8 @@ window.HOME_I18N = {
     'd:meet-forge': 'Organiza videollamadas en grupo y comunidades por temas.'
   },
   ar: {
-    heroSubtitle: 'أنشئ مواقع وألعابًا ورسومًا متحركة وفيديوهات وموسيقى وأدوات عملية للأعمال بالذكاء الاصطناعي — مباشرة في متصفحك.',
+    heroSubtitle: 'أدوات مجانية تعمل مباشرة في متصفحك — دون حساب. عدّل ملفات PDF، وأنشئ سيرة ذاتية أو فاتورة، وحسّن الصور، وأنشئ مواقع وفيديوهات والمزيد.',
+    taskLead: 'ابدأ بمهمة:', taskPdf: '📕 تعديل ملف PDF', taskCv: '📄 إنشاء سيرة ذاتية', taskBg: '🪄 إزالة الخلفية', taskInvoice: '🧾 إنشاء فاتورة', taskCompress: '🗜️ ضغط ملف PDF', taskOcr: '🔎 نسخ النص من صورة',
     ctaBuild: 'أنشئ موقعًا', ctaInstall: '📲 ثبّت التطبيق',
     trustTools: '{n} أداة مجانية', trustSignup: 'بدون تسجيل', trustWatermark: 'بدون علامة مائية', trustPaywall: 'بدون دفع مفاجئ', trustOpen: 'مفتوح المصدر',
     searchPlaceholder: 'ماذا تريد أن تصنع؟', searchHint: 'جرّب «pdf» أو «فيديو» أو «سيرة ذاتية» أو «شعار» — أو افتح فئة أدناه.',
@@ -284,7 +287,8 @@ window.HOME_I18N = {
     'd:meet-forge': 'استضف غرف فيديو جماعية ومجتمعات حسب الموضوع.'
   },
   zh: {
-    heroSubtitle: '使用 AI 创建网站、游戏、动画、视频、音乐和实用商业素材——直接在浏览器中完成。',
+    heroSubtitle: '免费工具，直接在浏览器中使用——无需注册。编辑 PDF、制作简历或发票、处理图片，还能创建网站、视频等。',
+    taskLead: '从一个任务开始：', taskPdf: '📕 编辑 PDF', taskCv: '📄 制作简历', taskBg: '🪄 去除背景', taskInvoice: '🧾 制作发票', taskCompress: '🗜️ 压缩 PDF', taskOcr: '🔎 从图片复制文字',
     ctaBuild: '创建网站', ctaInstall: '📲 安装应用',
     trustTools: '{n} 款免费工具', trustSignup: '无需注册', trustWatermark: '无水印', trustPaywall: '无意外收费', trustOpen: '开源',
     searchPlaceholder: '你想做什么？', searchHint: '试试“pdf”“视频”“简历”或“标志”——或打开下面的分类。',
@@ -377,7 +381,8 @@ window.HOME_I18N = {
     'd:meet-forge': '举办多人视频会议和主题社区。'
   },
   sw: {
-    heroSubtitle: 'Tengeneza tovuti, michezo, katuni, video, muziki na nyenzo za biashara kwa AI — moja kwa moja kwenye kivinjari chako.',
+    heroSubtitle: 'Zana za bure zinazofanya kazi moja kwa moja kwenye kivinjari chako — bila akaunti. Hariri PDF, tengeneza CV au ankara, rekebisha picha, na unda tovuti, video na zaidi.',
+    taskLead: 'Anza na kazi:', taskPdf: '📕 Hariri PDF', taskCv: '📄 Tengeneza CV', taskBg: '🪄 Ondoa mandharinyuma', taskInvoice: '🧾 Tengeneza ankara', taskCompress: '🗜️ Punguza ukubwa wa PDF', taskOcr: '🔎 Nakili maandishi kutoka picha',
     ctaBuild: 'Tengeneza tovuti', ctaInstall: '📲 Sakinisha programu',
     trustTools: 'Zana {n} za bure', trustSignup: 'Bila kujisajili', trustWatermark: 'Bila alama ya maji', trustPaywall: 'Bila malipo ya kushtukiza', trustOpen: 'Chanzo huria',
     searchPlaceholder: 'Unataka kutengeneza nini?', searchHint: 'Jaribu “pdf”, “video”, “cv” au “nembo” — au fungua kundi hapa chini.',

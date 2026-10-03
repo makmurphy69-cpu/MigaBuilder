@@ -209,7 +209,7 @@ async function record(browser, file, sc, baseUrl) {
   const h = {
     page, ctx, baseUrl, tool,
     asset: name => path.join(HERE, 'assets', name),
-    async go(url) { await page.goto(baseUrl + '/' + (url || file), { waitUntil: 'load' }); await page.evaluate(() => window.__tv && window.__tv.add()); await page.addStyleTag({ content: '.miga-tutorial{display:none!important}#voiceNote,.voice-note{display:none!important}' }); },
+    async go(url) { await page.goto(baseUrl + '/' + (url || file), { waitUntil: 'load' }); await page.evaluate(() => window.__tv && window.__tv.add()); await page.addStyleTag({ content: '.miga-tutorial,.miga-guides,.miga-guide-jump{display:none!important}#voiceNote,.voice-note{display:none!important}' }); },
     async step(text, fn) {
       const wav = await tts(text); const dur = wavSeconds(wav);
       clips.push({ t: now() + 0.15, wav }); transcript.push(text);
