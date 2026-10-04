@@ -37,6 +37,7 @@
 <script src="youtube-upload.js"></script>
 <script src="music-engine.js"></script>
 <script src="auto-edit.js"></script>
+<script src="clip-layers.js"></script>
 
 <style>
   :root {
@@ -224,6 +225,51 @@
   .ae-fx select, .ae-fx input { padding: 3px 5px; font-size: 12px; }
   .ae-fx input { grid-column: 1 / -1; }
   .clone-stage { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  /* Layers, keyframes and colour grade */
+  .ly-add { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+  .ly-add .upload-btn, .ly-add button { padding: 9px 4px; font-size: 12.5px; width: 100%; }
+  .ly-add button { background: #fff; border: 1px dashed rgba(22,32,43,0.35); border-radius: var(--radius); cursor: pointer; color: var(--ink); font-family: inherit; }
+  .ly-list { display: grid; gap: 4px; margin-top: 8px; }
+  .ly-item { display: flex; align-items: center; gap: 6px; background: #fff; border: 1px solid rgba(22,32,43,0.16); border-radius: 4px; padding: 5px 6px; font-size: 12.5px; cursor: pointer; }
+  .ly-item.sel { border-color: var(--amber); box-shadow: inset 3px 0 0 var(--amber); }
+  .ly-item .ly-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .ly-item button { border: 1px solid rgba(22,32,43,0.2); background: #fff; border-radius: 3px; padding: 2px 6px; cursor: pointer; color: var(--ink); font-size: 11.5px; }
+  .ly-editor { background: #fff; border: 1px solid rgba(22,32,43,0.18); border-radius: 6px; padding: 10px; margin: 8px 0 16px; font-size: 12.5px; }
+  .ly-editor h4 { margin: 0 0 8px; font-family: 'Space Grotesk', sans-serif; font-size: 14px; }
+  .ly-editor label { display: block; font-size: 12px; font-weight: 600; margin: 6px 0 3px; }
+  .ly-editor input[type="number"], .ly-editor select, .ly-editor textarea { padding: 5px 7px; font-size: 12.5px; }
+  .ly-editor textarea { width: 100%; min-height: 46px; font-family: inherit; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); }
+  .ly-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 10px; }
+  .ly-prop { display: grid; grid-template-columns: 84px 1fr 40px; gap: 6px; align-items: center; margin: 3px 0; }
+  .ly-prop span { font-size: 12px; font-weight: 600; white-space: nowrap; }
+  .ly-prop output { font-family: 'IBM Plex Mono', monospace; font-size: 11px; text-align: right; }
+  .ly-prop.kf span::after { content: ' ◆'; color: var(--amber); }
+  .ly-kfs { display: grid; gap: 4px; margin-top: 6px; }
+  .ly-kf { display: grid; grid-template-columns: 70px 1fr auto auto; gap: 4px; align-items: center; }
+  .ly-kf input, .ly-kf select { padding: 3px 5px !important; font-size: 12px !important; }
+  .ly-kf button, .gr-row button { border: 1px solid rgba(22,32,43,0.2); background: #fff; border-radius: 3px; padding: 3px 6px; cursor: pointer; color: var(--ink); font-size: 11.5px; }
+  .gr-row { display: grid; grid-template-columns: auto 1fr auto auto auto; gap: 5px; align-items: center; background: #fff; border: 1px solid rgba(22,32,43,0.16); border-radius: 4px; padding: 5px 6px; margin-top: 4px; font-size: 12px; }
+  .gr-row .gr-name { display: flex; justify-content: space-between; gap: 6px; font-weight: 600; }
+  .gr-row input[type="range"] { width: 100%; grid-column: 2 / 3; }
+  .gr-row.off { opacity: 0.55; }
+  .tl { margin-top: 10px; background: #0b1724; border: 1px solid var(--line-cyan-dim); border-radius: 4px; padding: 8px; font-size: 12px; color: rgba(237,234,224,0.8); user-select: none; }
+  .tl-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 6px; }
+  .tl-bar button { background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 5px 12px; cursor: pointer; font-size: 13px; }
+  .tl-bar input[type="range"] { flex: 1; min-width: 120px; accent-color: var(--amber); }
+  .tl-bar .tl-time { font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; min-width: 96px; }
+  .tl-bar label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+  .tl-row { display: grid; grid-template-columns: 96px 1fr; gap: 6px; align-items: center; margin-top: 3px; }
+  .tl-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; padding: 3px 4px; border-radius: 3px; }
+  .tl-name.sel { background: rgba(226,166,59,0.25); color: var(--paper); }
+  .tl-lane { position: relative; height: 24px; background: rgba(237,234,224,0.06); border-radius: 3px; cursor: pointer; touch-action: none; }
+  .tl-clip { position: absolute; top: 2px; bottom: 2px; border-radius: 3px; background: rgba(111,209,224,0.45); border: 1px solid var(--line-cyan); cursor: grab; overflow: hidden; font-size: 10.5px; line-height: 18px; padding: 0 8px; white-space: nowrap; color: #fff; box-sizing: border-box; }
+  .tl-clip.base { background: rgba(78,158,115,0.4); border-color: #4E9E73; cursor: default; }
+  .tl-clip.cap { background: rgba(226,166,59,0.4); border-color: var(--amber); }
+  .tl-clip.sel { box-shadow: 0 0 0 2px var(--amber); }
+  .tl-h { position: absolute; top: 0; bottom: 0; width: 7px; cursor: ew-resize; background: rgba(255,255,255,0.25); }
+  .tl-h.l { left: 0; } .tl-h.r { right: 0; }
+  .tl-kf { position: absolute; top: 50%; width: 9px; height: 9px; margin: -5px 0 0 -5px; background: var(--amber); transform: rotate(45deg); pointer-events: none; }
+  .tl-ph { position: absolute; top: -2px; bottom: -2px; width: 2px; margin-left: -1px; background: #ff5a5a; pointer-events: none; }
 </style>
 <link rel="stylesheet" href="tutorials.css">
 </head>
@@ -470,6 +516,36 @@
       <button type="button" class="draft-btn secondary" id="removeWatermarkBtn" style="margin-top:8px;" data-i18n="removeWatermarkLabel">✕ Remove watermark</button>
     </div>
 
+    <div class="section-title">Layers, keyframes &amp; colour grade (optional)</div>
+    <div class="field">
+      <p class="hint" style="margin-top:0;">Stack more video, pictures and text over your clip, each on its own track. Move and trim them on the timeline under the preview, animate them with keyframes, and give the whole video a colour grade.</p>
+      <div class="ly-add">
+        <label class="upload-btn" for="lyVideoInput">+ Video</label>
+        <label class="upload-btn" for="lyImageInput">+ Picture</label>
+        <button type="button" id="lyTextBtn">+ Text</button>
+      </div>
+      <input type="file" id="lyVideoInput" accept="video/*" style="display:none;">
+      <input type="file" id="lyImageInput" accept="image/*" style="display:none;">
+      <div class="ly-list" id="lyList"></div>
+      <p class="hint">The top of the list is drawn on top. Pick a track (or the main video) to change its timing, blend, transitions and keyframes.</p>
+    </div>
+    <div class="ly-editor" id="lyEditor" style="display:none;"></div>
+
+    <div class="field">
+      <label for="grTarget">Colour grade</label>
+      <select id="grTarget">
+        <option value="base" selected>Grade the main video only</option>
+        <option value="all">Grade the whole picture (layers too)</option>
+      </select>
+      <div class="row-2" style="margin-top:8px;">
+        <select id="grPreset"><option value="">Start from a look…</option></select>
+        <select id="grAdd"><option value="">+ Add an adjustment…</option></select>
+      </div>
+      <div id="grList"></div>
+      <p class="hint" id="grEmpty">No grade yet. Adjustments are applied from top to bottom, so their order changes the result.</p>
+      <label class="check-row" style="margin-top:6px;"><input type="checkbox" id="grBypass"><span>Show the original (compare before and after)</span></label>
+    </div>
+
     <div class="section-title" data-i18n="translationHeading">Translation (optional, for captions below)</div>
     <div class="field">
       <label for="provider" data-i18n="providerLabel">AI provider</label>
@@ -533,6 +609,15 @@
       <audio id="musicAudioEl" style="display:none;"></audio>
       <video id="aePreview" controls playsinline style="display:none;"></video>
     </div>
+    <div class="tl" id="tlWrap" style="display:none;">
+      <div class="tl-bar">
+        <button type="button" id="tlPlay" aria-label="Play or pause the edit">▶</button>
+        <span class="tl-time" id="tlTime">0.0 / 0.0 s</span>
+        <input type="range" id="tlScrub" min="0" max="1000" value="0" aria-label="Playhead">
+        <label><input type="checkbox" id="tlShowEdit"> Show the edit</label>
+      </div>
+      <div id="tlTracks"></div>
+    </div>
 
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-label"><span id="progressLabel" data-i18n="progressRendering">Rendering…</span><span id="progressPct">0%</span></div>
@@ -544,7 +629,6 @@
       <button type="button" id="downloadVideoBtn" disabled class="primary" data-i18n="downloadVideoLabel">⬇ Download video (.webm)</button>
     </div>
     <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n-html="renderDisclaimerHtml">Rendering happens in real time in your browser (a 20-second clip takes about 20 seconds, divided by your chosen speed) — nothing is uploaded. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari's support is limited. Got several clips to stitch together, or slides to combine with one? Try <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.</p>
-    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 6px;" data-i18n-html="goodToKnowHtml"><strong>Good to know:</strong> Clip Forge is a quick editor, not a full timeline editor — there are no multi-track layers, colour-grading stack or keyframed transitions, so for heavy YouTube productions a desktop editor like CapCut or DaVinci Resolve suits better. Processing is local: your video, music, watermark and captions stay in your browser. Only the text you choose to translate, or the Auto Edit plan request, is sent to the AI provider you picked.</p>
 
     <div class="yt-panel">
       <h2 data-i18n="ytHeading">Upload straight to YouTube</h2>
@@ -1056,6 +1140,482 @@
     g.restore();
   }
 
+  // ---------- layers, keyframes and colour grade ----------
+  // Tracks are drawn by clip-layers.js. Times are in the exported video
+  // (after trimming and speed), like the captions. layers[] is in drawing
+  // order: the last one is on top.
+  const CL = window.ClipLayers;
+  const lyEl = id => document.getElementById(id);
+  const lyList = lyEl('lyList'), lyEditor = lyEl('lyEditor');
+  const grTarget = lyEl('grTarget'), grPreset = lyEl('grPreset'), grAdd = lyEl('grAdd'), grList = lyEl('grList'), grEmpty = lyEl('grEmpty'), grBypass = lyEl('grBypass');
+  const tlWrap = lyEl('tlWrap'), tlPlay = lyEl('tlPlay'), tlTime = lyEl('tlTime'), tlScrub = lyEl('tlScrub'), tlShowEdit = lyEl('tlShowEdit'), tlTracks = lyEl('tlTracks');
+  const layers = [];
+  const base = { id: 'base', name: 'Main video', x: 50, y: 50, scale: 100, rotation: 0, opacity: 100, keyframes: [], transIn: { type: 'none', dur: 0.5 }, transOut: { type: 'none', dur: 0.5 } };
+  let grade = []; // {id, type, amount, on}
+  let layerIdCounter = 0, gradeIdCounter = 0, selectedId = null, previewOn = false, previewRaf = null, drawQueued = false;
+  const KIND_ICON = { video: '🎞', image: '🖼', text: 'T' };
+  const PROP_RANGE = { x: [-50, 150, 'X (%)'], y: [-50, 150, 'Y (%)'], scale: [5, 300, 'Size (%)'], rotation: [-180, 180, 'Rotate (°)'], opacity: [0, 100, 'Opacity'] };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const optionsHtml = (map, sel) => Object.keys(map).map(k => '<option value="' + k + '"' + (k === sel ? ' selected' : '') + '>' + esc(map[k].label || map[k]) + '</option>').join('');
+
+  function editDuration() {
+    if (!videoDuration) return 0;
+    const s = Math.max(0, parseFloat(trimStartInput.value) || 0);
+    const e = Math.min(videoDuration, parseFloat(trimEndInput.value) || videoDuration);
+    return Math.max(0, (e - s) / (parseFloat(speedSelect.value) || 1));
+  }
+  function playhead() {
+    const s = Math.max(0, parseFloat(trimStartInput.value) || 0);
+    return Math.max(0, Math.min(editDuration(), (sourceVideo.currentTime - s) / (parseFloat(speedSelect.value) || 1)));
+  }
+  function seekTo(t) {
+    if (!videoDuration) return;
+    t = Math.max(0, Math.min(editDuration(), t));
+    sourceVideo.currentTime = Math.max(0, parseFloat(trimStartInput.value) || 0) + t * (parseFloat(speedSelect.value) || 1);
+    CL.syncVideos(layers, t, false);
+    updateHead(t);
+    requestDraw();
+  }
+  function itemById(id) { return id === 'base' ? base : layers.find(L => L.id === id) || null; }
+  function itemStart(it) { return it === base ? 0 : it.start; }
+  function itemLength(it) { return it === base ? editDuration() : it.end - it.start; }
+  const busy = () => renderBtn.disabled || !!renderState;
+
+  // ----- preview: the stage canvas shows the edit while the main video drives the time -----
+  function setPreview(on) {
+    previewOn = on && !!videoObjectUrl;
+    tlShowEdit.checked = previewOn;
+    if (busy()) return;
+    if (previewOn) {
+      sourceVideo.style.display = 'none'; resultVideo.style.display = 'none';
+      document.getElementById('aePreview').style.display = 'none';
+      stageCanvas.style.display = 'block';
+      drawPreview();
+    } else if (videoObjectUrl && stageCanvas.style.display === 'block') {
+      stageCanvas.style.display = 'none'; sourceVideo.style.display = 'block';
+    }
+  }
+  function drawEditFrame(g, cw, ch, t, crop, bypass) {
+    CL.drawBase(g, sourceVideo, crop, cw, ch, base, t, editDuration());
+    if (!bypass && grTarget.value === 'base') CL.applyGrade(g, cw, ch, grade);
+    layers.forEach(L => CL.drawLayer(g, L, t, cw, ch));
+    if (!bypass && grTarget.value === 'all') CL.applyGrade(g, cw, ch, grade);
+    drawWatermark(g, cw, ch);
+    drawCaptionsAt(g, cw, ch, t);
+  }
+  function drawPreview() {
+    if (!previewOn || busy() || stageCanvas.style.display !== 'block' || !sourceVideo.videoWidth) return;
+    const d = outputDimensions(sourceVideo.videoWidth, sourceVideo.videoHeight, aspectSelect.value);
+    const k = Math.min(1, 1280 / d.width);
+    const w = Math.max(2, Math.round(d.width * k / 2) * 2), h = Math.max(2, Math.round(d.height * k / 2) * 2);
+    if (stageCanvas.width !== w || stageCanvas.height !== h) { stageCanvas.width = w; stageCanvas.height = h; }
+    drawEditFrame(ctx, w, h, playhead(), cropRectForOutput(sourceVideo.videoWidth, sourceVideo.videoHeight, w, h), grBypass.checked);
+  }
+  function requestDraw() {
+    if (drawQueued) return;
+    drawQueued = true;
+    requestAnimationFrame(() => { drawQueued = false; drawPreview(); });
+  }
+  function tick() {
+    previewRaf = null;
+    if (busy()) return;
+    const t = playhead();
+    const trimEnd = Math.min(videoDuration, parseFloat(trimEndInput.value) || videoDuration);
+    if (!sourceVideo.paused && (sourceVideo.currentTime >= trimEnd - 0.02 || t >= editDuration() - 0.01)) sourceVideo.pause();
+    const playing = !sourceVideo.paused;
+    CL.syncVideos(layers, t, playing);
+    drawPreview();
+    updateHead(t);
+    if (playing) previewRaf = requestAnimationFrame(tick);
+  }
+  sourceVideo.addEventListener('play', () => { if (!busy() && !previewRaf) previewRaf = requestAnimationFrame(tick); tlPlay.textContent = '❚❚'; });
+  sourceVideo.addEventListener('pause', () => { tlPlay.textContent = '▶'; if (!busy()) { CL.syncVideos(layers, playhead(), false); updateHead(); } });
+  sourceVideo.addEventListener('seeked', () => { if (!busy()) { updateHead(); requestDraw(); } });
+  sourceVideo.addEventListener('timeupdate', () => { if (!busy() && sourceVideo.paused) updateHead(); });
+  sourceVideo.addEventListener('loadedmetadata', () => setTimeout(() => {
+    tlWrap.style.display = 'block';
+    renderTimeline(); renderEditor();
+    setPreview(previewOn);
+  }, 0));
+  tlPlay.addEventListener('click', () => {
+    if (!videoObjectUrl || busy()) return;
+    if (!sourceVideo.paused) { sourceVideo.pause(); return; }
+    if (hasEdit()) setPreview(true);
+    if (playhead() >= editDuration() - 0.05) seekTo(0);
+    sourceVideo.playbackRate = parseFloat(speedSelect.value) || 1;
+    sourceVideo.play().catch(() => {});
+  });
+  tlScrub.addEventListener('input', () => { if (hasEdit()) setPreview(true); seekTo(tlScrub.value / 1000 * editDuration()); });
+  tlShowEdit.addEventListener('change', () => setPreview(tlShowEdit.checked));
+  function hasEdit() {
+    return layers.length > 0 || grade.length > 0 || base.keyframes.length > 0 || base.transIn.type !== 'none' || base.transOut.type !== 'none' ||
+      CL.PROPS.some(p => base[p] !== CL.DEFAULTS[p]);
+  }
+  function edited() { setPreview(true); requestDraw(); }
+
+  // ----- adding layers -----
+  function newLayer(kind, extra) {
+    const D = editDuration(), t = playhead();
+    const start = D - t < 0.5 ? 0 : Math.round(t * 10) / 10;
+    const L = Object.assign({
+      id: 'L' + (++layerIdCounter), kind: kind, start: start, end: D ? Math.min(D, start + 5) : start + 5,
+      x: 50, y: 50, scale: 40, rotation: 0, opacity: 100, blend: 'source-over', keyframes: [],
+      transIn: { type: 'fade', dur: 0.4 }, transOut: { type: 'fade', dur: 0.4 }, hidden: false
+    }, extra);
+    if (L.end - L.start < 0.5) L.end = L.start + 0.5;
+    layers.push(L);
+    selectedId = L.id;
+    refreshLayers();
+    edited();
+    return L;
+  }
+  lyEl('lyVideoInput').addEventListener('change', e => {
+    const f = (e.target.files || [])[0];
+    e.target.value = '';
+    if (!f) return;
+    const el = document.createElement('video');
+    el.muted = true; el.playsInline = true; el.preload = 'auto'; el.crossOrigin = 'anonymous';
+    el.src = URL.createObjectURL(f);
+    const L = newLayer('video', { name: f.name, el: el, srcIn: 0, volume: 0, x: 72, y: 30, scale: 38 });
+    el.addEventListener('loadedmetadata', () => {
+      if (el.duration && isFinite(el.duration)) L.end = Math.min(editDuration() || Infinity, L.start + el.duration);
+      if (L.end - L.start < 0.2) L.end = L.start + Math.min(5, el.duration || 5);
+      refreshLayers();
+    });
+    el.addEventListener('loadeddata', () => { CL.syncVideos(layers, playhead(), false); requestDraw(); });
+    el.addEventListener('seeked', requestDraw);
+  });
+  lyEl('lyImageInput').addEventListener('change', e => {
+    const f = (e.target.files || [])[0];
+    e.target.value = '';
+    if (!f) return;
+    const img = new Image();
+    img.onload = requestDraw;
+    img.src = URL.createObjectURL(f);
+    newLayer('image', { name: f.name, el: img, x: 50, y: 50, scale: 30 });
+  });
+  lyEl('lyTextBtn').addEventListener('click', () => {
+    newLayer('text', { name: 'Text', text: 'Your text here', color: '#ffffff', box: false, scale: 30, y: 30, transIn: { type: 'slide-up', dur: 0.5 } });
+  });
+
+  function refreshLayers() { renderLayerList(); renderEditor(); renderTimeline(); }
+
+  function renderLayerList() {
+    const rows = layers.slice().reverse().map(L =>
+      '<div class="ly-item' + (L.id === selectedId ? ' sel' : '') + '" data-id="' + L.id + '">' +
+      '<span>' + KIND_ICON[L.kind] + '</span><span class="ly-name">' + esc(L.kind === 'text' ? (L.text || 'Text') : L.name) + '</span>' +
+      '<button type="button" data-act="hide" title="Show or hide">' + (L.hidden ? '🙈' : '👁') + '</button>' +
+      '<button type="button" data-act="up" title="Move up (drawn more on top)">↑</button>' +
+      '<button type="button" data-act="down" title="Move down">↓</button>' +
+      '<button type="button" data-act="del" title="Remove">✕</button></div>');
+    rows.push('<div class="ly-item' + (selectedId === 'base' ? ' sel' : '') + '" data-id="base"><span>🎬</span><span class="ly-name">Main video (motion, keyframes, fades)</span></div>');
+    lyList.innerHTML = rows.join('');
+  }
+  lyList.addEventListener('click', e => {
+    const row = e.target.closest('.ly-item');
+    if (!row) return;
+    const id = row.dataset.id, act = e.target.dataset.act, i = layers.findIndex(L => L.id === id);
+    if (act && i >= 0) {
+      const L = layers[i];
+      if (act === 'del') {
+        layers.splice(i, 1);
+        if (L.el && L.kind === 'video') { L.el.pause(); }
+        if (L.el && L.el.src) URL.revokeObjectURL(L.el.src);
+        if (selectedId === id) selectedId = null;
+      } else if (act === 'up' && i < layers.length - 1) { layers.splice(i, 1); layers.splice(i + 1, 0, L); }
+      else if (act === 'down' && i > 0) { layers.splice(i, 1); layers.splice(i - 1, 0, L); }
+      else if (act === 'hide') { L.hidden = !L.hidden; }
+      refreshLayers(); edited();
+      return;
+    }
+    select(id);
+  });
+  function select(id) { selectedId = id; renderLayerList(); renderEditor(); renderTimeline(); }
+
+  // ----- the editor for the selected track -----
+  function renderEditor() {
+    const it = itemById(selectedId);
+    if (!it) { lyEditor.style.display = 'none'; lyEditor.innerHTML = ''; return; }
+    const isBase = it === base, h = [];
+    h.push('<h4>' + (isBase ? '🎬 Main video' : KIND_ICON[it.kind] + ' ' + esc(it.kind === 'text' ? 'Text layer' : it.name)) + '</h4>');
+    if (!isBase) {
+      if (it.kind === 'text') {
+        h.push('<label>Text</label><textarea data-f="text">' + esc(it.text) + '</textarea>');
+        h.push('<div class="ly-grid"><div><label>Colour</label><input type="color" data-f="color" value="' + esc(it.color) + '"></div>' +
+          '<div><label class="check-row" style="margin-top:22px;"><input type="checkbox" data-f="box"' + (it.box ? ' checked' : '') + '><span>Dark box behind</span></label></div></div>');
+      }
+      h.push('<div class="ly-grid"><div><label>Starts at (s)</label><input type="number" data-f="start" min="0" step="0.1" value="' + it.start.toFixed(2) + '"></div>' +
+        '<div><label>Ends at (s)</label><input type="number" data-f="end" min="0" step="0.1" value="' + it.end.toFixed(2) + '"></div></div>');
+      if (it.kind === 'video') {
+        h.push('<div class="ly-grid"><div><label>Start inside this clip (s)</label><input type="number" data-f="srcIn" min="0" step="0.1" value="' + (it.srcIn || 0).toFixed(2) + '"></div>' +
+          '<div><label>Its sound</label><input type="range" data-f="volume" min="0" max="1" step="0.05" value="' + (it.volume || 0) + '"></div></div>');
+      }
+      h.push('<label>Blend</label><select data-f="blend">' + optionsHtml(CL.BLENDS, it.blend) + '</select>');
+    }
+    const trans = Object.assign({}, CL.TRANSITIONS);
+    h.push('<div class="ly-grid"><div><label>' + (isBase ? 'Opening' : 'Comes in') + '</label><select data-f="transIn.type">' + optionsHtml(trans, it.transIn.type) + '</select></div>' +
+      '<div><label>Seconds</label><input type="number" data-f="transIn.dur" min="0.1" max="5" step="0.1" value="' + it.transIn.dur + '"></div>' +
+      '<div><label>' + (isBase ? 'Ending' : 'Goes out') + '</label><select data-f="transOut.type">' + optionsHtml(trans, it.transOut.type) + '</select></div>' +
+      '<div><label>Seconds</label><input type="number" data-f="transOut.dur" min="0.1" max="5" step="0.1" value="' + it.transOut.dur + '"></div></div>');
+    h.push('<label style="margin-top:10px;">Position and look at the playhead</label>');
+    CL.PROPS.forEach(p => {
+      const r = PROP_RANGE[p], min = p === 'scale' && isBase ? 10 : r[0], max = p === 'scale' && isBase ? 400 : r[1];
+      h.push('<div class="ly-prop" data-prop-row="' + p + '"><span>' + r[2] + '</span><input type="range" data-p="' + p + '" min="' + min + '" max="' + max + '" step="1"><output></output></div>');
+    });
+    h.push('<button type="button" class="draft-btn secondary" data-act="addkf" style="margin-top:8px;padding:8px;font-size:13px;"></button>');
+    h.push('<div class="ly-kfs" id="lyKfs"></div>');
+    h.push('<p class="hint" style="font-size:12px;margin:8px 0 0;">Keyframes animate it: move the playhead, set the sliders, and add a keyframe; do it again at another time. Once it has keyframes, the sliders change the keyframe under the playhead (a new one is added if there is none). The easing says how it moves to the next keyframe.</p>');
+    lyEditor.innerHTML = h.join('');
+    lyEditor.style.display = 'block';
+    renderKeyframes();
+    updateEditorValues();
+  }
+  function renderKeyframes() {
+    const it = itemById(selectedId), box = document.getElementById('lyKfs');
+    if (!it || !box) return;
+    const s = itemStart(it);
+    box.innerHTML = it.keyframes.map((k, i) =>
+      '<div class="ly-kf"><input type="number" data-kf="' + i + '" data-f="t" step="0.1" min="0" value="' + (s + k.t).toFixed(2) + '" title="Time in the video (s)">' +
+      '<select data-kf="' + i + '" data-f="ease">' + optionsHtml(CL.EASES, k.ease) + '</select>' +
+      '<button type="button" data-act="gokf" data-kf="' + i + '" title="Move the playhead here">Go</button>' +
+      '<button type="button" data-act="delkf" data-kf="' + i + '" title="Remove this keyframe">✕</button></div>').join('');
+  }
+  function keyframeAtPlayhead(it) {
+    const local = playhead() - itemStart(it);
+    return it.keyframes.find(k => Math.abs(k.t - local) < 0.05) || null;
+  }
+  function updateEditorValues() {
+    const it = itemById(selectedId);
+    if (!it || lyEditor.style.display === 'none') return;
+    const local = Math.max(0, Math.min(itemLength(it), playhead() - itemStart(it)));
+    const v = CL.valuesAt(it, local), onKf = keyframeAtPlayhead(it);
+    lyEditor.querySelectorAll('input[data-p]').forEach(inp => {
+      const p = inp.dataset.p, val = Math.round(v[p]);
+      if (document.activeElement !== inp) inp.value = val;
+      inp.nextElementSibling.textContent = val;
+      inp.parentElement.classList.toggle('kf', !!onKf);
+    });
+    const btn = lyEditor.querySelector('[data-act="addkf"]');
+    if (btn) btn.textContent = onKf ? '◆ Keyframe at ' + playhead().toFixed(2) + 's (the sliders change it)' : '◆ Add a keyframe at ' + playhead().toFixed(2) + 's';
+  }
+  function addKeyframe(it) {
+    const local = Math.max(0, Math.min(itemLength(it), playhead() - itemStart(it)));
+    let kf = keyframeAtPlayhead(it);
+    if (!kf) {
+      kf = Object.assign({ t: Math.round(local * 100) / 100, ease: 'inout' }, CL.valuesAt(it, local));
+      it.keyframes.push(kf);
+      it.keyframes.sort((a, b) => a.t - b.t);
+    }
+    return kf;
+  }
+  function setField(it, f, val) {
+    if (f.indexOf('.') > 0) { const [a, b] = f.split('.'); it[a][b] = b === 'dur' ? Math.max(0.1, parseFloat(val) || 0.5) : val; return; }
+    if (f === 'start' || f === 'end' || f === 'srcIn') {
+      let n = Math.max(0, parseFloat(val) || 0);
+      if (f === 'start') { const len = it.end - it.start; it.start = n; it.end = n + len; }
+      else if (f === 'end') it.end = Math.max(it.start + 0.2, n);
+      else it.srcIn = n;
+      return;
+    }
+    if (f === 'volume') { it.volume = parseFloat(val) || 0; if (it.el && !it.node) { it.el.muted = it.volume === 0; it.el.volume = it.volume; } if (it.gain) it.gain.gain.value = it.volume; return; }
+    if (f === 'box') { it.box = !!val; return; }
+    it[f] = val;
+  }
+  lyEditor.addEventListener('input', e => {
+    const it = itemById(selectedId), t = e.target;
+    if (!it) return;
+    if (t.dataset.p) {
+      const p = t.dataset.p, val = parseFloat(t.value);
+      const count = it.keyframes.length;
+      if (count) addKeyframe(it)[p] = val; else it[p] = val;
+      t.nextElementSibling.textContent = Math.round(val);
+      if (it.keyframes.length !== count) renderKeyframes();
+      renderTimeline(); updateEditorValues(); edited();
+      return;
+    }
+    if (t.dataset.kf != null) return; // keyframe rows apply on change
+    if (t.dataset.f && t.type !== 'number') {
+      setField(it, t.dataset.f, t.type === 'checkbox' ? t.checked : t.value);
+      if (t.dataset.f === 'text' || t.dataset.f === 'volume') renderLayerList();
+      edited();
+    }
+  });
+  lyEditor.addEventListener('change', e => {
+    const it = itemById(selectedId), t = e.target;
+    if (!it) return;
+    if (t.dataset.kf != null) {
+      const k = it.keyframes[+t.dataset.kf];
+      if (!k) return;
+      if (t.dataset.f === 't') k.t = Math.max(0, Math.min(itemLength(it), (parseFloat(t.value) || 0) - itemStart(it)));
+      else k.ease = t.value;
+      it.keyframes.sort((a, b) => a.t - b.t);
+      renderKeyframes(); renderTimeline(); updateEditorValues(); edited();
+      return;
+    }
+    if (t.dataset.f && t.type === 'number') {
+      setField(it, t.dataset.f, t.value);
+      renderEditor(); renderTimeline();
+      CL.syncVideos(layers, playhead(), false);
+      edited();
+    }
+  });
+  lyEditor.addEventListener('click', e => {
+    const it = itemById(selectedId), act = e.target.dataset.act;
+    if (!it || !act) return;
+    if (act === 'addkf') {
+      if (it !== base && (playhead() < it.start || playhead() > it.end)) seekTo(it.start);
+      addKeyframe(it);
+    } else if (act === 'gokf') {
+      const k = it.keyframes[+e.target.dataset.kf];
+      if (k) seekTo(itemStart(it) + k.t);
+    } else if (act === 'delkf') {
+      it.keyframes.splice(+e.target.dataset.kf, 1);
+    } else return;
+    renderKeyframes(); renderTimeline(); updateEditorValues(); edited();
+  });
+
+  // ----- colour grade -----
+  grPreset.innerHTML += optionsHtml(CL.GRADE_PRESETS, '');
+  grAdd.innerHTML += optionsHtml(CL.GRADE, '');
+  grPreset.addEventListener('change', () => {
+    const p = CL.GRADE_PRESETS[grPreset.value];
+    grPreset.value = '';
+    if (!p) return;
+    grade = p.items.map(([type, amount]) => ({ id: ++gradeIdCounter, type: type, amount: amount, on: true }));
+    renderGrade(); edited();
+  });
+  grAdd.addEventListener('change', () => {
+    const def = CL.GRADE[grAdd.value];
+    if (def) grade.push({ id: ++gradeIdCounter, type: grAdd.value, amount: def.def, on: true });
+    grAdd.value = '';
+    renderGrade(); edited();
+  });
+  function renderGrade() {
+    grEmpty.style.display = grade.length ? 'none' : 'block';
+    grList.innerHTML = grade.map((it, i) => {
+      const def = CL.GRADE[it.type];
+      return '<div class="gr-row' + (it.on ? '' : ' off') + '" data-i="' + i + '">' +
+        '<input type="checkbox" data-f="on"' + (it.on ? ' checked' : '') + ' title="On or off">' +
+        '<div class="gr-name"><span>' + esc(def.label) + '</span><output>' + it.amount + '</output></div>' +
+        '<button type="button" data-act="up" title="Apply earlier">↑</button><button type="button" data-act="down" title="Apply later">↓</button><button type="button" data-act="del" title="Remove">✕</button>' +
+        '<span></span><input type="range" data-f="amount" min="' + def.min + '" max="' + def.max + '" step="1" value="' + it.amount + '"></div>';
+    }).join('');
+  }
+  grList.addEventListener('input', e => {
+    const row = e.target.closest('.gr-row');
+    if (!row) return;
+    const it = grade[+row.dataset.i];
+    if (e.target.dataset.f === 'amount') { it.amount = parseFloat(e.target.value) || 0; row.querySelector('output').textContent = it.amount; }
+    else if (e.target.dataset.f === 'on') { it.on = e.target.checked; row.classList.toggle('off', !it.on); }
+    edited();
+  });
+  grList.addEventListener('click', e => {
+    const row = e.target.closest('.gr-row'), act = e.target.dataset.act;
+    if (!row || !act) return;
+    const i = +row.dataset.i, it = grade[i];
+    if (act === 'del') grade.splice(i, 1);
+    else if (act === 'up' && i > 0) { grade.splice(i, 1); grade.splice(i - 1, 0, it); }
+    else if (act === 'down' && i < grade.length - 1) { grade.splice(i, 1); grade.splice(i + 1, 0, it); }
+    renderGrade(); edited();
+  });
+  grTarget.addEventListener('change', edited);
+  grBypass.addEventListener('change', edited);
+
+  // ----- the timeline: one row per track, drag to move, drag the ends to trim -----
+  function timelineSpan() {
+    let D = editDuration();
+    layers.forEach(L => { D = Math.max(D, L.end); });
+    captions.forEach(c => { D = Math.max(D, c.start + c.duration); });
+    return Math.max(D, 1);
+  }
+  function renderTimeline() {
+    if (tlWrap.style.display === 'none') return;
+    const D = timelineSpan(), pct = t => (t / D * 100).toFixed(3) + '%', rows = [];
+    const diamonds = it => it.keyframes.map(k => '<i class="tl-kf" style="left:' + pct(itemStart(it) + k.t) + '"></i>').join('');
+    layers.slice().reverse().forEach(L => {
+      rows.push('<div class="tl-row"><div class="tl-name' + (L.id === selectedId ? ' sel' : '') + '" data-id="' + L.id + '">' + KIND_ICON[L.kind] + ' ' + esc(L.kind === 'text' ? (L.text || 'Text') : L.name) + '</div>' +
+        '<div class="tl-lane" data-id="' + L.id + '"><div class="tl-clip' + (L.id === selectedId ? ' sel' : '') + '" data-id="' + L.id + '" style="left:' + pct(L.start) + ';width:' + pct(L.end - L.start) + ';' + (L.hidden ? 'opacity:.4;' : '') + '">' +
+        '<span class="tl-h l" data-edge="l"></span>' + esc(L.kind === 'text' ? L.text : L.name) + '<span class="tl-h r" data-edge="r"></span></div>' + diamonds(L) + '<i class="tl-ph"></i></div></div>');
+    });
+    rows.push('<div class="tl-row"><div class="tl-name' + (selectedId === 'base' ? ' sel' : '') + '" data-id="base">🎬 Main video</div>' +
+      '<div class="tl-lane" data-id="base"><div class="tl-clip base' + (selectedId === 'base' ? ' sel' : '') + '" data-id="base" style="left:0;width:' + pct(editDuration()) + '">Main video</div>' + diamonds(base) + '<i class="tl-ph"></i></div></div>');
+    if (captions.length) {
+      rows.push('<div class="tl-row"><div class="tl-name">💬 Captions</div><div class="tl-lane" data-id="caps">' +
+        captions.map(c => '<div class="tl-clip cap" data-id="c' + c.id + '" style="left:' + pct(c.start) + ';width:' + pct(c.duration) + '"><span class="tl-h l" data-edge="l"></span>' + esc(c.text) + '<span class="tl-h r" data-edge="r"></span></div>').join('') +
+        '<i class="tl-ph"></i></div></div>');
+    }
+    tlTracks.innerHTML = rows.join('');
+    updateHead();
+  }
+  function updateHead(t) {
+    if (t == null) t = playhead();
+    const D = editDuration();
+    tlTime.textContent = t.toFixed(1) + ' / ' + D.toFixed(1) + ' s';
+    if (document.activeElement !== tlScrub) tlScrub.value = D ? Math.round(t / D * 1000) : 0;
+    const left = (t / timelineSpan() * 100).toFixed(3) + '%';
+    tlTracks.querySelectorAll('.tl-ph').forEach(ph => { ph.style.left = left; });
+    updateEditorValues();
+  }
+  let drag = null;
+  tlTracks.addEventListener('pointerdown', e => {
+    const name = e.target.closest('.tl-name');
+    if (name) { if (name.dataset.id) select(name.dataset.id); return; }
+    const lane = e.target.closest('.tl-lane');
+    if (!lane) return;
+    const rect = lane.getBoundingClientRect(), D = timelineSpan();
+    const clip = e.target.closest('.tl-clip');
+    const id = clip && clip.dataset.id;
+    if (clip && id !== 'base') {
+      const cap = id[0] === 'c' ? captions.find(c => 'c' + c.id === id) : null;
+      const L = cap ? null : itemById(id);
+      if (!cap && !L) return;
+      if (L) select(L.id);
+      drag = { cap: cap, L: L, edge: e.target.dataset.edge || 'move', x0: e.clientX, w: rect.width, D: D,
+        s0: cap ? cap.start : L.start, e0: cap ? cap.start + cap.duration : L.end };
+      tlTracks.setPointerCapture(e.pointerId);
+      e.preventDefault();
+      return;
+    }
+    if (lane.dataset.id && lane.dataset.id !== 'caps' && lane.dataset.id !== selectedId) select(lane.dataset.id);
+    if (hasEdit()) setPreview(true);
+    seekTo((e.clientX - rect.left) / rect.width * D);
+  });
+  tlTracks.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const dt = (e.clientX - drag.x0) / drag.w * drag.D;
+    let s = drag.s0, en = drag.e0;
+    if (drag.edge === 'move') { s = Math.max(0, drag.s0 + dt); en = s + (drag.e0 - drag.s0); }
+    else if (drag.edge === 'l') s = Math.max(0, Math.min(drag.e0 - 0.2, drag.s0 + dt));
+    else en = Math.max(drag.s0 + 0.2, drag.e0 + dt);
+    s = Math.round(s * 20) / 20; en = Math.round(en * 20) / 20;
+    if (drag.cap) { drag.cap.start = s; drag.cap.duration = Math.max(0.2, en - s); }
+    else {
+      // Trimming the start keeps the video layer's picture where it was in time.
+      if (drag.edge === 'l' && drag.L.kind === 'video') drag.L.srcIn = Math.max(0, (drag.srcIn0 == null ? (drag.srcIn0 = drag.L.srcIn || 0) : drag.srcIn0) + (s - drag.s0));
+      drag.L.start = s; drag.L.end = en;
+    }
+    drag.moved = true;
+    renderTimeline(); requestDraw();
+  });
+  function endDrag() {
+    if (!drag) return;
+    const d = drag;
+    drag = null;
+    if (!d.moved) return;
+    if (d.cap) renderCaptionsList(); else renderEditor();
+    CL.syncVideos(layers, playhead(), false);
+    edited();
+  }
+  tlTracks.addEventListener('pointerup', endDrag);
+  tlTracks.addEventListener('pointercancel', endDrag);
+
+  // Anything else on the left (trim, speed, crop, watermark, captions) redraws the preview and timeline.
+  document.querySelector('.panel').addEventListener('input', e => { if (!e.target.closest('#lyEditor, #grList')) { requestDraw(); renderTimeline(); } });
+  document.querySelector('.panel').addEventListener('change', e => { if (!e.target.closest('#lyEditor, #grList')) { requestDraw(); renderTimeline(); } });
+  new MutationObserver(() => { renderTimeline(); requestDraw(); }).observe(captionsListEl, { childList: true });
+  renderLayerList();
+  renderGrade();
+
   // ---------- render ----------
   renderBtn.addEventListener('click', async function () {
     clearError();
@@ -1126,7 +1686,20 @@
       musicAudioSourceNode.disconnect();
     }
 
-    if (hasOriginalAudio || hasMusic) audioTracks = dest.stream.getAudioTracks();
+    // Video layers with their sound turned up are mixed in too.
+    const soundLayers = layers.filter(L => L.kind === 'video' && !L.hidden && L.volume > 0);
+    layers.forEach(L => {
+      if (L.kind !== 'video') return;
+      L.el.pause();
+      if (L.gain) L.gain.disconnect();
+      if (soundLayers.indexOf(L) < 0) { L.el.muted = !L.node; return; }
+      if (!L.node) { L.node = audioCtx.createMediaElementSource(L.el); L.gain = audioCtx.createGain(); L.node.connect(L.gain); }
+      L.el.muted = false; L.el.volume = 1;
+      L.gain.gain.value = L.volume;
+      L.gain.connect(dest);
+    });
+
+    if (hasOriginalAudio || hasMusic || soundLayers.length) audioTracks = dest.stream.getAudioTracks();
 
     sourceVideo.muted = true; // audio now routes through the Web Audio graph above (or is silent if muted), not the element itself
     sourceVideo.playbackRate = speed;
@@ -1156,6 +1729,13 @@
       sourceVideo.playbackRate = 1;
       musicAudioEl.pause();
       musicAudioEl.muted = false;
+      // Back to normal playback: the clip and the layers are heard through the speakers again.
+      if (mediaElementSourceNode) { mediaElementSourceNode.disconnect(); mediaElementSourceNode.connect(audioCtx.destination); }
+      layers.forEach(L => {
+        if (L.kind !== 'video') return;
+        L.el.pause();
+        if (L.gain) { L.gain.disconnect(); L.gain.connect(audioCtx.destination); }
+      });
       renderState = null;
     }
 
@@ -1179,10 +1759,9 @@
       function step() {
         if (cancelled) { recorder.stop(); return; }
         if (sourceVideo.currentTime >= trimEnd || sourceVideo.ended) { recorder.stop(); return; }
-        ctx.drawImage(sourceVideo, cropRect.sx, cropRect.sy, cropRect.sw, cropRect.sh, 0, 0, cw, ch);
         const outT = (sourceVideo.currentTime - trimStart) / speed;
-        drawWatermark(ctx, cw, ch);
-        drawCaptionsAt(ctx, cw, ch, outT);
+        CL.syncVideos(layers, outT, true);
+        drawEditFrame(ctx, cw, ch, outT, cropRect, false);
         const pct = Math.min(100, Math.round((outT / outputDuration) * 100));
         progressFill.style.width = pct + '%';
         progressPct.textContent = pct + '%';
@@ -2034,7 +2613,6 @@
       cancelRenderLabel: '✕ Cancel render',
       downloadVideoLabel: '⬇ Download video (.webm)',
       renderDisclaimerHtml: 'Rendering happens in real time in your browser (a 20-second clip takes about 20 seconds, divided by your chosen speed) — nothing is uploaded. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari\'s support is limited. Got several clips to stitch together, or slides to combine with one? Try <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
-      goodToKnowHtml: '<strong>Good to know:</strong> Clip Forge is a quick editor, not a full timeline editor — there are no multi-track layers, colour-grading stack or keyframed transitions, so for heavy YouTube productions a desktop editor like CapCut or DaVinci Resolve suits better. Processing is local: your video, music, watermark and captions stay in your browser. Only the text you choose to translate, or the Auto Edit plan request, is sent to the AI provider you picked.',
       ytHeading: 'Upload straight to YouTube',
       ytClientIdLabel: 'Your Google OAuth Client ID',
       ytClientIdHint: 'This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Clip Forge only sends it to Google, never anywhere else.',
@@ -2168,7 +2746,6 @@
       cancelRenderLabel: '✕ Cancelar renderizado',
       downloadVideoLabel: '⬇ Descargar video (.webm)',
       renderDisclaimerHtml: 'El renderizado ocurre en tiempo real en tu navegador (un clip de 20 segundos tarda unos 20 segundos, dividido por la velocidad elegida) — no se sube nada. La mayoría de los navegadores de escritorio (Chrome, Edge, Firefox) lo admiten; el soporte de Safari es limitado. ¿Tienes varios clips para unir, o diapositivas para combinar con uno? Prueba <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
-      goodToKnowHtml: '<strong>Bueno saberlo:</strong> Clip Forge es un editor rápido, no un editor de línea de tiempo completo: no tiene capas multipista, etalonaje de color por capas ni transiciones con fotogramas clave, así que para producciones pesadas de YouTube conviene un editor de escritorio como CapCut o DaVinci Resolve. El procesamiento es local: tu vídeo, música, marca de agua y subtítulos se quedan en tu navegador. Solo el texto que eliges traducir, o la petición del plan de Edición automática, se envía al proveedor de IA que elegiste.',
       ytHeading: 'Subir directamente a YouTube',
       ytClientIdLabel: 'Tu ID de cliente OAuth de Google',
       ytClientIdHint: 'Este es un identificador público de tu propio proyecto de Google Cloud, no un secreto — consulta los pasos de configuración abajo. Clip Forge solo lo envía a Google, nunca a ningún otro lugar.',
@@ -2302,7 +2879,6 @@
       cancelRenderLabel: '✕ إلغاء العرض',
       downloadVideoLabel: '⬇ تنزيل الفيديو (.webm)',
       renderDisclaimerHtml: 'يحدث العرض في الوقت الفعلي في متصفحك (يستغرق مقطع مدته 20 ثانية حوالي 20 ثانية، مقسومة على السرعة التي اخترتها) — لا يُرفع شيء. تدعم معظم متصفحات سطح المكتب (Chrome وEdge وFirefox) ذلك؛ دعم Safari محدود. لديك عدة مقاطع لدمجها معًا، أو شرائح لدمجها مع مقطع؟ جرّب <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
-      goodToKnowHtml: '<strong>معلومة مفيدة:</strong> Clip Forge محرر سريع وليس محرر خط زمني كاملاً — لا توجد طبقات متعددة المسارات ولا طبقات لتصحيح الألوان ولا انتقالات بإطارات مفتاحية، لذا للإنتاجات الثقيلة على YouTube يناسبك أكثر محرر سطح مكتب مثل CapCut أو DaVinci Resolve. المعالجة محلية: يبقى الفيديو والموسيقى والعلامة المائية والتسميات التوضيحية في متصفحك. يُرسل فقط النص الذي تختار ترجمته، أو طلب خطة التحرير التلقائي، إلى مزوّد الذكاء الاصطناعي الذي اخترته.',
       ytHeading: 'الرفع مباشرة إلى YouTube',
       ytClientIdLabel: 'معرّف عميل OAuth من Google الخاص بك',
       ytClientIdHint: 'هذا معرّف عام لمشروع Google Cloud الخاص بك، وليس سرًا — راجع خطوات الإعداد أدناه. يرسله Clip Forge فقط إلى Google، ولا يرسله إلى أي مكان آخر أبدًا.',
@@ -2436,7 +3012,6 @@
       cancelRenderLabel: '✕ 取消渲染',
       downloadVideoLabel: '⬇ 下载视频（.webm）',
       renderDisclaimerHtml: '渲染会在浏览器中实时进行（一个 20 秒的片段大约需要 20 秒，除以你选择的速度）——不会上传任何内容。大多数桌面浏览器（Chrome、Edge、Firefox）都支持此功能；Safari 的支持有限。有多个片段要拼接，或者想把幻灯片和一个片段合并？试试 <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>。',
-      goodToKnowHtml: '<strong>须知：</strong>Clip Forge 是快速编辑器，而不是完整的时间线编辑器——没有多轨图层、分层调色或关键帧转场，所以制作复杂的 YouTube 视频时，CapCut 或 DaVinci Resolve 等桌面编辑器更合适。处理在本地进行：你的视频、音乐、水印和字幕都留在浏览器中。只有你选择翻译的文字，或自动剪辑的方案请求，会发送给你选择的 AI 服务商。',
       ytHeading: '直接上传到 YouTube',
       ytClientIdLabel: '你的 Google OAuth 客户端 ID',
       ytClientIdHint: '这是你自己 Google Cloud 项目的公开标识符，不是秘密——请参阅下方的设置步骤。Clip Forge 只会将其发送给 Google，绝不发送到其他任何地方。',
@@ -2570,7 +3145,6 @@
       cancelRenderLabel: '✕ Ghairi utoaji',
       downloadVideoLabel: '⬇ Pakua video (.webm)',
       renderDisclaimerHtml: 'Utoaji hufanyika kwa wakati halisi kwenye kivinjari chako (klipu ya sekunde 20 huchukua sekunde 20 hivi, ikigawanywa na kasi uliyochagua) — hakuna kinachopakiwa. Vivinjari vingi vya kompyuta (Chrome, Edge, Firefox) vinaunga mkono hili; msaada wa Safari ni mdogo. Una klipu kadhaa za kuunganisha, au slaidi za kuchanganya na moja? Jaribu <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
-      goodToKnowHtml: '<strong>Vizuri kujua:</strong> Clip Forge ni kihariri cha haraka, si kihariri kamili cha ratiba ya muda — hakuna tabaka za nyimbo nyingi, tabaka za kurekebisha rangi wala mipito ya fremu-funguo, kwa hiyo kwa video nzito za YouTube kihariri cha kompyuta kama CapCut au DaVinci Resolve kinafaa zaidi. Uchakataji ni wa ndani: video, muziki, alama ya maji na manukuu yako hubaki kwenye kivinjari chako. Ni maandishi tu unayochagua kutafsiri, au ombi la mpango wa Kuhariri Kiotomatiki, yanayotumwa kwa mtoa huduma wa AI uliyemchagua.',
       ytHeading: 'Pakia moja kwa moja kwenye YouTube',
       ytClientIdLabel: 'Kitambulisho chako cha Mteja wa Google OAuth',
       ytClientIdHint: 'Hiki ni kitambulisho cha umma cha mradi wako mwenyewe wa Google Cloud, si siri — angalia hatua za usanidi hapa chini. Clip Forge hukituma tu kwa Google, kamwe si mahali pengine popote.',
