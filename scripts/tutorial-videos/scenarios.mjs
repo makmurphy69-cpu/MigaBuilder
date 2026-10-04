@@ -1006,12 +1006,36 @@ S('media-convert-forge.html', {
 });
 
 S('clip-forge.html', {
-  title: 'Clip Forge', subtitle: 'Edit, auto-edit, and talk to yourself',
-  intro: 'Welcome to Clip Forge. Edit one video, let Auto Edit cut several clips into one, and even talk to yourself.',
+  title: 'Clip Forge', subtitle: 'Edit with layers and colour, auto-edit, and talk to yourself',
+  intro: 'Welcome to Clip Forge. Edit one video with layers, keyframes and a colour grade, let Auto Edit cut several clips into one, and even talk to yourself.',
   async run(h, page) {
     const top = () => page.locator('section.panel').evaluate(el => el.scrollTo(0, 0));
     await h.step('Upload a video. It plays right here in your browser.', () => h.upload('#videoInput', 'clip.webm'));
-    await h.step('Trim it, pick a shape, add text and music, then press Render video.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); await h.point('#renderBtn'); });
+    await h.step('Trim it, pick a shape, and add text and music.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); });
+    // Layers, keyframes and colour grade. showStage scrolls the page so the whole preview and timeline are in view.
+    const showStage = () => page.evaluate(() => window.scrollTo({ top: document.querySelector('section.table').getBoundingClientRect().top + window.scrollY - 8, behavior: 'smooth' })).then(() => h.wait(500));
+    await h.step('Stack more on top, each on its own track: video, pictures and text. Add a picture.', async () => {
+      await h.upload('#lyImageInput', 'drawing-rocket.png');
+      await h.fill('#lyEditor input[data-p="x"]', '27'); await h.fill('#lyEditor input[data-p="y"]', '72');
+      await showStage();
+    });
+    await h.step('Add a text layer and type your words.', async () => { await h.click('#lyTextBtn'); await h.fill('#lyEditor textarea[data-f="text"]', 'To the moon!'); await showStage(); });
+    await h.step('Animate it with keyframes. Add one near the start.', async () => {
+      await h.fill('#tlScrub', '120');
+      await h.fill('#lyEditor input[data-p="x"]', '35'); await h.fill('#lyEditor input[data-p="y"]', '30');
+      await h.click('#lyEditor [data-act="addkf"]');
+      await showStage();
+    });
+    await h.step('Move the playhead, drag the sliders, and it glides between the keyframes.', async () => {
+      await h.fill('#tlScrub', '750');
+      await h.fill('#lyEditor input[data-p="x"]', '68');
+      await h.fill('#lyEditor input[data-p="rotation"]', '-12');
+      await h.fill('#lyEditor input[data-p="scale"]', '45');
+      await showStage();
+    });
+    await h.step('Every track sits on the timeline under the preview. Drag a bar to move it, or drag its ends to trim it.', async () => { await showStage(); await h.point('#tlTracks'); });
+    await h.step('Give it a colour grade. Start from a look, then fine-tune, reorder or switch off each adjustment.', async () => { await h.select('#grPreset', 'vintage'); await h.point('#grList'); await showStage(); });
+    await h.step('Press play to watch the edit, then press Render video.', async () => { await h.fill('#tlScrub', '0'); await showStage(); await h.click('#tlPlay'); await h.wait(5000); await h.point('#renderBtn'); });
     // Talk to yourself
     await h.step('Now the fun part: talk to yourself. Open Talk to yourself.', async () => { await top(); await h.click('#cloneBox summary'); });
     await h.step('Film yourself on one side of the sofa asking something, with the camera standing still. Add it as take 1.', () => h.upload('#cloneInputA', 'sofa-take-1.webm'));

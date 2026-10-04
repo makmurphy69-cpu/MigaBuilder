@@ -284,6 +284,44 @@ test('clip-forge: talk to yourself joins two takes into one video', 'clip-forge.
   await page.waitForFunction(() => /1 clip measured/.test(document.querySelector('#aeStatus').textContent), null, { timeout: 60000 });
 }, { timeout: 150000 });
 
+test('clip-forge: layers, keyframes and a colour grade render into the video', 'clip-forge.html', async (page) => {
+  const clip = fs.readFileSync(path.join(FIX, 'clip.webm'));
+  await page.setInputFiles('#videoInput', { name: 'main.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForSelector('#tlWrap', { state: 'visible', timeout: 30000 });
+  // A picture layer and a text layer on their own tracks.
+  await page.setInputFiles('#lyImageInput', path.join(FIX, 'text-1.png'));
+  await page.click('#lyTextBtn');
+  await page.fill('#lyEditor textarea[data-f="text"]', 'Hello layers');
+  expect(await page.locator('#tlTracks .tl-row').count() === 3, 'expected 3 timeline tracks (text, picture, main video)');
+  // Keyframes: at 0 s on the left, at 1.5 s on the right; halfway it is in between.
+  await page.click('#lyEditor [data-act="addkf"]');
+  await page.evaluate(() => { const v = document.getElementById('sourceVideo'); v.currentTime = 1.5; return new Promise(r => v.addEventListener('seeked', r, { once: true })); });
+  await page.click('#lyEditor [data-act="addkf"]');
+  await page.locator('#lyEditor input[data-p="x"]').fill('80');
+  expect(await page.locator('#lyKfs .ly-kf').count() === 2, 'expected two keyframes');
+  const mid = await page.evaluate(() => { const kfs = [{ t: 0, x: 20, ease: 'linear' }, { t: 2, x: 80 }]; return ClipLayers.valuesAt({ keyframes: kfs }, 1).x; });
+  expect(Math.abs(mid - 50) < 0.01, 'keyframes should interpolate to 50 halfway, got ' + mid);
+  // A black and white grade turns the preview grey.
+  await page.selectOption('#grPreset', 'bw');
+  expect(await page.locator('#grList .gr-row').count() === 3, 'the black and white look should add 3 adjustments');
+  await page.waitForTimeout(300);
+  const grey = await page.evaluate(() => {
+    const c = document.getElementById('stageCanvas'), d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data;
+    let diff = 0, n = 0;
+    for (let i = 0; i < d.length; i += 4 * 97) { diff += Math.abs(d[i] - d[i + 1]) + Math.abs(d[i + 1] - d[i + 2]); n++; }
+    return { shown: getComputedStyle(c).display !== 'none', diff: diff / n };
+  });
+  expect(grey.shown, 'the edit preview is not shown');
+  expect(grey.diff < 4, 'the black and white grade did not make the preview grey (colour difference ' + grey.diff.toFixed(1) + ')');
+  const out = await downloadOf(page, async () => {
+    await page.click('#renderBtn');
+    await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
+    await page.click('#downloadVideoBtn');
+  }, 90000);
+  expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
+  expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+}, { timeout: 150000 });
+
 test('website-builder: AI site has a shared design and downloads as a tidy ZIP', 'website-builder.html', async (page) => {
   await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
   await page.click('#draftBtn');
