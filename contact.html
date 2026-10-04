@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="/miga-palette.js" defer></script><link rel="canonical" href="https://migabuilder.com/contact.html">
+<script>
+(function () {
+  try {
+    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
+    var page = location.pathname.split('/').pop() || 'index.html';
+    var body = JSON.stringify({ page: page });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'application/json' }));
+    } else {
+      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
+    }
+  } catch (e) { /* visit counting must never break the page */ }
+})();
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact MigaBuilder</title>
+<meta name="description" content="Get in touch with MigaBuilder — questions, partnerships, press or help with a tool. Email contact@migabuilder.com.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact MigaBuilder">
+<meta property="og:description" content="Get in touch with MigaBuilder — questions, partnerships, press or help with a tool.">
+<meta property="og:url" content="https://migabuilder.com/contact.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact MigaBuilder">
+<meta name="twitter:description" content="Get in touch with MigaBuilder — questions, partnerships, press or help with a tool.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px); opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .solo-wrap { max-width: 640px; margin: 0 auto; padding: 28px clamp(20px, 4vw, 48px) 56px; display: flex; flex-direction: column; gap: 22px; }
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; }
+  .panel h2 { font-family: 'Space Grotesk', sans-serif; font-size: 16px; margin: 0 0 4px; }
+  .panel .sub { font-size: 13px; color: rgba(22,32,43,0.72); margin: 0 0 18px; line-height: 1.5; }
+  .panel a { color: #0B5E6E; }
+  .email-btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 12px 18px; border-radius: var(--radius);
+    background: var(--amber); color: var(--amber-ink) !important; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px;
+    text-decoration: none; word-break: break-all;
+  }
+  .email-btn:hover { filter: brightness(1.06); }
+  .note { font-size: 12.5px; color: rgba(22,32,43,0.72); margin: 14px 0 0; line-height: 1.5; }
+  .panel ul { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; }
+
+  footer { padding: 0 clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 640px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1 data-i18n="pageTitle">Contact</h1>
+    <p data-i18n="heroSubtitle">Questions, partnerships, press or help with a tool — we read every message.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main class="solo-wrap">
+  <section class="panel">
+    <h2 data-i18n="emailHeading">Email us</h2>
+    <p class="sub" data-i18n="emailSub">Write to us in English or Swedish and we will usually reply within a few days.</p>
+    <a class="email-btn" href="mailto:contact@migabuilder.com">✉ contact@migabuilder.com</a>
+    <p class="note" data-i18n="emailNote">Please don't send passwords, API keys or other sensitive information by email.</p>
+  </section>
+
+  <section class="panel">
+    <h2 data-i18n="otherHeading">Other ways to reach us</h2>
+    <ul>
+      <li data-i18n-html="otherFeedback">Found a bug or have an idea for a tool? Use the <a href="feedback.html">feedback page</a> — everyone can follow it there.</li>
+      <li data-i18n-html="otherGithub">Developers can open an issue on <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>.</li>
+    </ul>
+  </section>
+</main>
+
+<footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a> — free browser tools, no account required.</footer>
+
+<script>
+  I18N.init({
+    en: {
+      pageTitle: 'Contact',
+      heroSubtitle: 'Questions, partnerships, press or help with a tool — we read every message.',
+      emailHeading: 'Email us',
+      emailSub: 'Write to us in English or Swedish and we will usually reply within a few days.',
+      emailNote: "Please don't send passwords, API keys or other sensitive information by email.",
+      otherHeading: 'Other ways to reach us',
+      otherFeedback: 'Found a bug or have an idea for a tool? Use the <a href="feedback.html">feedback page</a> — everyone can follow it there.',
+      otherGithub: 'Developers can open an issue on <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a> — free browser tools, no account required.'
+    },
+    es: {
+      pageTitle: 'Contacto',
+      heroSubtitle: 'Preguntas, colaboraciones, prensa o ayuda con una herramienta: leemos todos los mensajes.',
+      emailHeading: 'Escríbenos',
+      emailSub: 'Escríbenos en inglés o sueco; normalmente respondemos en pocos días.',
+      emailNote: 'No envíes contraseñas, claves de API ni otra información sensible por correo.',
+      otherHeading: 'Otras formas de contactarnos',
+      otherFeedback: '¿Encontraste un error o tienes una idea para una herramienta? Usa la <a href="feedback.html">página de opiniones</a>; allí todos pueden seguirla.',
+      otherGithub: 'Los desarrolladores pueden abrir un issue en <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>: herramientas gratis en el navegador, sin cuenta.'
+    },
+    ar: {
+      pageTitle: 'اتصل بنا',
+      heroSubtitle: 'أسئلة أو شراكات أو صحافة أو مساعدة في أداة — نقرأ كل رسالة.',
+      emailHeading: 'راسلنا عبر البريد',
+      emailSub: 'اكتب لنا بالإنجليزية أو السويدية، وعادةً نرد خلال أيام قليلة.',
+      emailNote: 'يُرجى عدم إرسال كلمات المرور أو مفاتيح API أو أي معلومات حساسة عبر البريد.',
+      otherHeading: 'طرق أخرى للتواصل',
+      otherFeedback: 'وجدت خطأ أو لديك فكرة لأداة؟ استخدم <a href="feedback.html">صفحة الملاحظات</a> — يمكن للجميع متابعتها هناك.',
+      otherGithub: 'يمكن للمطورين فتح بلاغ على <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a> — أدوات مجانية في المتصفح بدون حساب.'
+    },
+    zh: {
+      pageTitle: '联系我们',
+      heroSubtitle: '问题、合作、媒体或工具使用帮助——每条消息我们都会阅读。',
+      emailHeading: '发送邮件',
+      emailSub: '请用英语或瑞典语写信，我们通常会在几天内回复。',
+      emailNote: '请不要通过邮件发送密码、API 密钥或其他敏感信息。',
+      otherHeading: '其他联系方式',
+      otherFeedback: '发现错误或有工具创意？请使用<a href="feedback.html">反馈页面</a>——所有人都可以在那里跟进。',
+      otherGithub: '开发者可以在 <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a> 上提交 issue。',
+      footerText: '<a href="index.html">MigaBuilder</a> 的一部分——免费浏览器工具，无需账户。'
+    },
+    sw: {
+      pageTitle: 'Wasiliana nasi',
+      heroSubtitle: 'Maswali, ushirikiano, vyombo vya habari au msaada kuhusu zana — tunasoma kila ujumbe.',
+      emailHeading: 'Tutumie barua pepe',
+      emailSub: 'Tuandikie kwa Kiingereza au Kiswidi; kwa kawaida tunajibu ndani ya siku chache.',
+      emailNote: 'Tafadhali usitume manenosiri, funguo za API au taarifa nyingine nyeti kwa barua pepe.',
+      otherHeading: 'Njia nyingine za kutufikia',
+      otherFeedback: 'Umepata hitilafu au una wazo la zana? Tumia <a href="feedback.html">ukurasa wa maoni</a> — kila mtu anaweza kufuatilia hapo.',
+      otherGithub: 'Wasanidi programu wanaweza kufungua suala kwenye <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a> — zana za bure kwenye kivinjari, bila akaunti.'
+    }
+  });
+</script>
+</body>
+</html>

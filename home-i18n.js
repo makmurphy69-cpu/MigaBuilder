@@ -7,7 +7,7 @@ window.HOME_I18N = {
   en: {
     heroSubtitle: 'Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.',
     s1Title: 'A business website', s1Text: 'Every page drafted, ready to publish', s2Title: 'A cartoon you can play', s2Text: 'Story, scenes and voices from one idea', s3Title: 'A game you can share', s3Text: 'Describe it, then play it in the browser', s4Title: 'Background removed', s4Text: 'A photo cut out in seconds', s5Title: 'A finished CV', s5Text: 'Filled in and downloaded as a real PDF', s6Title: 'An organised PDF', s6Text: 'Merged, numbered and watermarked',
-    tourBtn: 'Tour site', samplesHeading: 'Real results, made with these tools', footTools: 'All tools', footTour: '1-minute tour', footFeedback: 'Feedback & ideas', footSource: 'Open source on GitHub',
+    tourBtn: 'Tour site', samplesHeading: 'Real results, made with these tools', footTools: 'All tools', footTour: '1-minute tour', footFeedback: 'Feedback & ideas', footContact: 'Contact', footSource: 'Open source on GitHub',
     ctaBuild: 'Build a website', ctaInstall: '📲 Install the app',
     trustTools: '{n} free tools', trustSignup: 'No signup', trustWatermark: 'No watermark', trustPaywall: 'No surprise paywall', trustOpen: 'Open source',
     searchPlaceholder: 'What do you want to make?', searchHint: 'Try “pdf”, “video”, “cv” or “logo” — or open a category below.',
@@ -96,7 +96,7 @@ window.HOME_I18N = {
   es: {
     heroSubtitle: 'Herramientas gratuitas que funcionan en tu navegador, sin cuenta. Edita PDF, crea un CV o una factura, retoca imágenes y crea sitios web, vídeos y más.',
     s1Title: 'Un sitio web de empresa', s1Text: 'Todas las páginas redactadas, listas para publicar', s2Title: 'Un dibujo animado que puedes reproducir', s2Text: 'Historia, escenas y voces a partir de una idea', s3Title: 'Un juego para compartir', s3Text: 'Descríbelo y juégalo en el navegador', s4Title: 'Fondo eliminado', s4Text: 'Una foto recortada en segundos', s5Title: 'Un CV terminado', s5Text: 'Completado y descargado como PDF real', s6Title: 'Un PDF organizado', s6Text: 'Unido, numerado y con marca de agua',
-    tourBtn: 'Recorrido', samplesHeading: 'Resultados reales, hechos con estas herramientas', footTools: 'Todas las herramientas', footTour: 'Recorrido de 1 minuto', footFeedback: 'Opiniones e ideas', footSource: 'Código abierto en GitHub',
+    tourBtn: 'Recorrido', samplesHeading: 'Resultados reales, hechos con estas herramientas', footTools: 'Todas las herramientas', footTour: 'Recorrido de 1 minuto', footFeedback: 'Opiniones e ideas', footContact: 'Contacto', footSource: 'Código abierto en GitHub',
     ctaBuild: 'Crear un sitio web', ctaInstall: '📲 Instalar la app',
     trustTools: '{n} herramientas gratis', trustSignup: 'Sin registro', trustWatermark: 'Sin marca de agua', trustPaywall: 'Sin pagos sorpresa', trustOpen: 'Código abierto',
     searchPlaceholder: '¿Qué quieres crear?', searchHint: 'Prueba «pdf», «vídeo», «cv» o «logo», o abre una categoría abajo.',
@@ -185,7 +185,7 @@ window.HOME_I18N = {
   ar: {
     heroSubtitle: 'أدوات مجانية تعمل مباشرة في متصفحك — دون حساب. عدّل ملفات PDF، وأنشئ سيرة ذاتية أو فاتورة، وحسّن الصور، وأنشئ مواقع وفيديوهات والمزيد.',
     s1Title: 'موقع لنشاط تجاري', s1Text: 'كل الصفحات مكتوبة وجاهزة للنشر', s2Title: 'رسوم متحركة يمكنك تشغيلها', s2Text: 'قصة ومشاهد وأصوات من فكرة واحدة', s3Title: 'لعبة يمكنك مشاركتها', s3Text: 'صِفها ثم العبها في المتصفح', s4Title: 'إزالة الخلفية', s4Text: 'صورة مقصوصة في ثوانٍ', s5Title: 'سيرة ذاتية جاهزة', s5Text: 'مكتملة ومنزّلة كملف PDF حقيقي', s6Title: 'ملف PDF منظَّم', s6Text: 'مدموج ومرقَّم وبعلامة مائية',
-    tourBtn: 'جولة في الموقع', samplesHeading: 'نتائج حقيقية صُنعت بهذه الأدوات', footTools: 'كل الأدوات', footTour: 'جولة في دقيقة', footFeedback: 'الملاحظات والأفكار', footSource: 'مفتوح المصدر على GitHub',
+    tourBtn: 'جولة في الموقع', samplesHeading: 'نتائج حقيقية صُنعت بهذه الأدوات', footTools: 'كل الأدوات', footTour: 'جولة في دقيقة', footFeedback: 'الملاحظات والأفكار', footContact: 'اتصل بنا', footSource: 'مفتوح المصدر على GitHub',
     ctaBuild: 'أنشئ موقعًا', ctaInstall: '📲 ثبّت التطبيق',
     trustTools: '{n} أداة مجانية', trustSignup: 'بدون تسجيل', trustWatermark: 'بدون علامة مائية', trustPaywall: 'بدون دفع مفاجئ', trustOpen: 'مفتوح المصدر',
     searchPlaceholder: 'ماذا تريد أن تصنع؟', searchHint: 'جرّب «pdf» أو «فيديو» أو «سيرة ذاتية» أو «شعار» — أو افتح فئة أدناه.',
@@ -274,7 +274,7 @@ window.HOME_I18N = {
   zh: {
     heroSubtitle: '免费工具，直接在浏览器中使用——无需注册。编辑 PDF、制作简历或发票、处理图片，还能创建网站、视频等。',
     s1Title: '企业网站', s1Text: '每个页面都已写好，可直接发布', s2Title: '可以播放的动画', s2Text: '一个想法生成故事、场景和配音', s3Title: '可以分享的游戏', s3Text: '描述一下，就能在浏览器里玩', s4Title: '去除背景', s4Text: '几秒钟抠出一张照片', s5Title: '完成的简历', s5Text: '填写完毕并下载为真正的 PDF', s6Title: '整理好的 PDF', s6Text: '已合并、加页码并添加水印',
-    tourBtn: '网站导览', samplesHeading: '真实成果，均由这些工具制作', footTools: '全部工具', footTour: '1 分钟导览', footFeedback: '反馈与建议', footSource: '在 GitHub 上开源',
+    tourBtn: '网站导览', samplesHeading: '真实成果，均由这些工具制作', footTools: '全部工具', footTour: '1 分钟导览', footFeedback: '反馈与建议', footContact: '联系我们', footSource: '在 GitHub 上开源',
     ctaBuild: '创建网站', ctaInstall: '📲 安装应用',
     trustTools: '{n} 款免费工具', trustSignup: '无需注册', trustWatermark: '无水印', trustPaywall: '无意外收费', trustOpen: '开源',
     searchPlaceholder: '你想做什么？', searchHint: '试试“pdf”“视频”“简历”或“标志”——或打开下面的分类。',
@@ -363,7 +363,7 @@ window.HOME_I18N = {
   sw: {
     heroSubtitle: 'Zana za bure zinazofanya kazi moja kwa moja kwenye kivinjari chako — bila akaunti. Hariri PDF, tengeneza CV au ankara, rekebisha picha, na unda tovuti, video na zaidi.',
     s1Title: 'Tovuti ya biashara', s1Text: 'Kurasa zote zimeandikwa, tayari kuchapishwa', s2Title: 'Katuni unayoweza kucheza', s2Text: 'Hadithi, matukio na sauti kutoka wazo moja', s3Title: 'Mchezo wa kushiriki', s3Text: 'Ueleze, kisha uucheze kwenye kivinjari', s4Title: 'Mandharinyuma yameondolewa', s4Text: 'Picha imekatwa kwa sekunde', s5Title: 'CV iliyokamilika', s5Text: 'Imejazwa na kupakuliwa kama PDF halisi', s6Title: 'PDF iliyopangwa', s6Text: 'Imeunganishwa, ina namba na alama ya maji',
-    tourBtn: 'Ziara ya tovuti', samplesHeading: 'Matokeo halisi, yaliyotengenezwa kwa zana hizi', footTools: 'Zana zote', footTour: 'Ziara ya dakika 1', footFeedback: 'Maoni na mawazo', footSource: 'Chanzo huria kwenye GitHub',
+    tourBtn: 'Ziara ya tovuti', samplesHeading: 'Matokeo halisi, yaliyotengenezwa kwa zana hizi', footTools: 'Zana zote', footTour: 'Ziara ya dakika 1', footFeedback: 'Maoni na mawazo', footContact: 'Wasiliana nasi', footSource: 'Chanzo huria kwenye GitHub',
     ctaBuild: 'Tengeneza tovuti', ctaInstall: '📲 Sakinisha programu',
     trustTools: 'Zana {n} za bure', trustSignup: 'Bila kujisajili', trustWatermark: 'Bila alama ya maji', trustPaywall: 'Bila malipo ya kushtukiza', trustOpen: 'Chanzo huria',
     searchPlaceholder: 'Unataka kutengeneza nini?', searchHint: 'Jaribu “pdf”, “video”, “cv” au “nembo” — au fungua kundi hapa chini.',
