@@ -544,6 +544,7 @@
       <button type="button" id="downloadVideoBtn" disabled class="primary" data-i18n="downloadVideoLabel">⬇ Download video (.webm)</button>
     </div>
     <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n-html="renderDisclaimerHtml">Rendering happens in real time in your browser (a 20-second clip takes about 20 seconds, divided by your chosen speed) — nothing is uploaded. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari's support is limited. Got several clips to stitch together, or slides to combine with one? Try <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.</p>
+    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 6px;" data-i18n-html="goodToKnowHtml"><strong>Good to know:</strong> Clip Forge is a quick editor, not a full timeline editor — there are no multi-track layers, colour-grading stack or keyframed transitions, so for heavy YouTube productions a desktop editor like CapCut or DaVinci Resolve suits better. Processing is local: your video, music, watermark and captions stay in your browser. Only the text you choose to translate, or the Auto Edit plan request, is sent to the AI provider you picked.</p>
 
     <div class="yt-panel">
       <h2 data-i18n="ytHeading">Upload straight to YouTube</h2>
@@ -2033,6 +2034,7 @@
       cancelRenderLabel: '✕ Cancel render',
       downloadVideoLabel: '⬇ Download video (.webm)',
       renderDisclaimerHtml: 'Rendering happens in real time in your browser (a 20-second clip takes about 20 seconds, divided by your chosen speed) — nothing is uploaded. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari\'s support is limited. Got several clips to stitch together, or slides to combine with one? Try <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
+      goodToKnowHtml: '<strong>Good to know:</strong> Clip Forge is a quick editor, not a full timeline editor — there are no multi-track layers, colour-grading stack or keyframed transitions, so for heavy YouTube productions a desktop editor like CapCut or DaVinci Resolve suits better. Processing is local: your video, music, watermark and captions stay in your browser. Only the text you choose to translate, or the Auto Edit plan request, is sent to the AI provider you picked.',
       ytHeading: 'Upload straight to YouTube',
       ytClientIdLabel: 'Your Google OAuth Client ID',
       ytClientIdHint: 'This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Clip Forge only sends it to Google, never anywhere else.',
@@ -2166,6 +2168,7 @@
       cancelRenderLabel: '✕ Cancelar renderizado',
       downloadVideoLabel: '⬇ Descargar video (.webm)',
       renderDisclaimerHtml: 'El renderizado ocurre en tiempo real en tu navegador (un clip de 20 segundos tarda unos 20 segundos, dividido por la velocidad elegida) — no se sube nada. La mayoría de los navegadores de escritorio (Chrome, Edge, Firefox) lo admiten; el soporte de Safari es limitado. ¿Tienes varios clips para unir, o diapositivas para combinar con uno? Prueba <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
+      goodToKnowHtml: '<strong>Bueno saberlo:</strong> Clip Forge es un editor rápido, no un editor de línea de tiempo completo: no tiene capas multipista, etalonaje de color por capas ni transiciones con fotogramas clave, así que para producciones pesadas de YouTube conviene un editor de escritorio como CapCut o DaVinci Resolve. El procesamiento es local: tu vídeo, música, marca de agua y subtítulos se quedan en tu navegador. Solo el texto que eliges traducir, o la petición del plan de Edición automática, se envía al proveedor de IA que elegiste.',
       ytHeading: 'Subir directamente a YouTube',
       ytClientIdLabel: 'Tu ID de cliente OAuth de Google',
       ytClientIdHint: 'Este es un identificador público de tu propio proyecto de Google Cloud, no un secreto — consulta los pasos de configuración abajo. Clip Forge solo lo envía a Google, nunca a ningún otro lugar.',
@@ -2299,6 +2302,7 @@
       cancelRenderLabel: '✕ إلغاء العرض',
       downloadVideoLabel: '⬇ تنزيل الفيديو (.webm)',
       renderDisclaimerHtml: 'يحدث العرض في الوقت الفعلي في متصفحك (يستغرق مقطع مدته 20 ثانية حوالي 20 ثانية، مقسومة على السرعة التي اخترتها) — لا يُرفع شيء. تدعم معظم متصفحات سطح المكتب (Chrome وEdge وFirefox) ذلك؛ دعم Safari محدود. لديك عدة مقاطع لدمجها معًا، أو شرائح لدمجها مع مقطع؟ جرّب <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
+      goodToKnowHtml: '<strong>معلومة مفيدة:</strong> Clip Forge محرر سريع وليس محرر خط زمني كاملاً — لا توجد طبقات متعددة المسارات ولا طبقات لتصحيح الألوان ولا انتقالات بإطارات مفتاحية، لذا للإنتاجات الثقيلة على YouTube يناسبك أكثر محرر سطح مكتب مثل CapCut أو DaVinci Resolve. المعالجة محلية: يبقى الفيديو والموسيقى والعلامة المائية والتسميات التوضيحية في متصفحك. يُرسل فقط النص الذي تختار ترجمته، أو طلب خطة التحرير التلقائي، إلى مزوّد الذكاء الاصطناعي الذي اخترته.',
       ytHeading: 'الرفع مباشرة إلى YouTube',
       ytClientIdLabel: 'معرّف عميل OAuth من Google الخاص بك',
       ytClientIdHint: 'هذا معرّف عام لمشروع Google Cloud الخاص بك، وليس سرًا — راجع خطوات الإعداد أدناه. يرسله Clip Forge فقط إلى Google، ولا يرسله إلى أي مكان آخر أبدًا.',
@@ -2432,6 +2436,7 @@
       cancelRenderLabel: '✕ 取消渲染',
       downloadVideoLabel: '⬇ 下载视频（.webm）',
       renderDisclaimerHtml: '渲染会在浏览器中实时进行（一个 20 秒的片段大约需要 20 秒，除以你选择的速度）——不会上传任何内容。大多数桌面浏览器（Chrome、Edge、Firefox）都支持此功能；Safari 的支持有限。有多个片段要拼接，或者想把幻灯片和一个片段合并？试试 <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>。',
+      goodToKnowHtml: '<strong>须知：</strong>Clip Forge 是快速编辑器，而不是完整的时间线编辑器——没有多轨图层、分层调色或关键帧转场，所以制作复杂的 YouTube 视频时，CapCut 或 DaVinci Resolve 等桌面编辑器更合适。处理在本地进行：你的视频、音乐、水印和字幕都留在浏览器中。只有你选择翻译的文字，或自动剪辑的方案请求，会发送给你选择的 AI 服务商。',
       ytHeading: '直接上传到 YouTube',
       ytClientIdLabel: '你的 Google OAuth 客户端 ID',
       ytClientIdHint: '这是你自己 Google Cloud 项目的公开标识符，不是秘密——请参阅下方的设置步骤。Clip Forge 只会将其发送给 Google，绝不发送到其他任何地方。',
@@ -2565,6 +2570,7 @@
       cancelRenderLabel: '✕ Ghairi utoaji',
       downloadVideoLabel: '⬇ Pakua video (.webm)',
       renderDisclaimerHtml: 'Utoaji hufanyika kwa wakati halisi kwenye kivinjari chako (klipu ya sekunde 20 huchukua sekunde 20 hivi, ikigawanywa na kasi uliyochagua) — hakuna kinachopakiwa. Vivinjari vingi vya kompyuta (Chrome, Edge, Firefox) vinaunga mkono hili; msaada wa Safari ni mdogo. Una klipu kadhaa za kuunganisha, au slaidi za kuchanganya na moja? Jaribu <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>.',
+      goodToKnowHtml: '<strong>Vizuri kujua:</strong> Clip Forge ni kihariri cha haraka, si kihariri kamili cha ratiba ya muda — hakuna tabaka za nyimbo nyingi, tabaka za kurekebisha rangi wala mipito ya fremu-funguo, kwa hiyo kwa video nzito za YouTube kihariri cha kompyuta kama CapCut au DaVinci Resolve kinafaa zaidi. Uchakataji ni wa ndani: video, muziki, alama ya maji na manukuu yako hubaki kwenye kivinjari chako. Ni maandishi tu unayochagua kutafsiri, au ombi la mpango wa Kuhariri Kiotomatiki, yanayotumwa kwa mtoa huduma wa AI uliyemchagua.',
       ytHeading: 'Pakia moja kwa moja kwenye YouTube',
       ytClientIdLabel: 'Kitambulisho chako cha Mteja wa Google OAuth',
       ytClientIdHint: 'Hiki ni kitambulisho cha umma cha mradi wako mwenyewe wa Google Cloud, si siri — angalia hatua za usanidi hapa chini. Clip Forge hukituma tu kwa Google, kamwe si mahali pengine popote.',
