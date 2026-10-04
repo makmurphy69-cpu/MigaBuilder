@@ -9,7 +9,7 @@
     var body = JSON.stringify({ page: page });
 
     if (navigator.sendBeacon) {
-      navigator.sendBeacon(endpoint + "/hit", new Blob([body], { type: "application/json" }));
+      navigator.sendBeacon(endpoint + "/hit", new Blob([body], { type: "text/plain" }));
     } else {
       fetch(endpoint + "/hit", {
         method: "POST",

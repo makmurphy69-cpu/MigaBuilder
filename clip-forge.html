@@ -9,7 +9,7 @@
     var page = location.pathname.split('/').pop() || 'index.html';
     var body = JSON.stringify({ page: page });
     if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'application/json' }));
+      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
     } else {
       fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
     }
