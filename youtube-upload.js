@@ -29,6 +29,32 @@
     var accessToken = null;
     var tokenClient = null;
 
+    // Check the Client ID's shape as it is typed, so a pasted secret or project
+    // ID is caught here instead of after a trip through Google's sign-in. This
+    // only checks the format; Google still decides whether the ID works.
+    var clientIdCheck = document.createElement('p');
+    clientIdCheck.className = 'yt-hint';
+    clientIdCheck.id = 'ytClientIdCheck';
+    clientIdCheck.setAttribute('aria-live', 'polite');
+    ytClientId.insertAdjacentElement('afterend', clientIdCheck);
+
+    function clientIdProblem(id) {
+      if (/^GOCSPX-/i.test(id)) return I18N.t('ytClientIdIsSecret', 'That is your client secret. Paste the Client ID instead: it ends in .apps.googleusercontent.com. Keep the secret private.');
+      if (/^AIza/.test(id)) return I18N.t('ytClientIdIsApiKey', 'That is an API key. Paste the OAuth Client ID instead: it ends in .apps.googleusercontent.com.');
+      if (/\s/.test(id)) return I18N.t('ytClientIdHasSpaces', 'The Client ID has spaces in it. Copy it again from Google Cloud Console.');
+      if (!/^[0-9]+-[a-z0-9]+\.apps\.googleusercontent\.com$/i.test(id)) return I18N.t('ytClientIdBadFormat', 'That doesn\'t look like a Client ID. It should look like 1234567890-abc123….apps.googleusercontent.com.');
+      return '';
+    }
+    function checkClientId() {
+      var id = ytClientId.value.trim();
+      var problem = id ? clientIdProblem(id) : '';
+      clientIdCheck.textContent = !id ? '' : problem ? '⚠ ' + problem : '✓ ' + I18N.t('ytClientIdLooksRight', 'The format looks right. Connect to check it with Google.');
+      clientIdCheck.style.color = problem ? '#f0a35e' : '#7fd49a';
+      return problem;
+    }
+    ytClientId.addEventListener('input', checkClientId);
+    checkClientId();
+
     function refreshUploadEnabled() {
       uploadYtBtn.disabled = !(getBlob() && accessToken);
     }
@@ -60,6 +86,8 @@
     connectYtBtn.addEventListener('click', function () {
       clearYtError();
       if (!ytClientId.value.trim()) { showYtError(I18N.t('ytErrorNoClientId')); return; }
+      var problem = checkClientId();
+      if (problem) { showYtError(problem); return; }
       var client = ensureTokenClient();
       if (!client) { showYtError(I18N.t('ytErrorLibraryNotLoaded')); return; }
       client.requestAccessToken({ prompt: accessToken ? '' : 'consent' });

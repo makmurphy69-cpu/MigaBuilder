@@ -11,8 +11,11 @@
 
   // Picks the best MediaRecorder mimeType this browser actually supports,
   // preferring vp9 for smaller files, falling back to vp8, then plain webm.
-  function pickMimeType() {
+  // Pages that name their download from the result can pass { allowMp4: true }
+  // to fall back to MP4 as well, which is what Safari records.
+  function pickMimeType(opts) {
     const candidates = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'];
+    if (opts && opts.allowMp4) candidates.push('video/mp4;codecs=avc1.42E01E,mp4a.40.2', 'video/mp4;codecs=avc1,mp4a', 'video/mp4');
     for (const c of candidates) { if (window.MediaRecorder && MediaRecorder.isTypeSupported(c)) return c; }
     return '';
   }
