@@ -276,6 +276,7 @@
   .tl-ph { position: absolute; top: -2px; bottom: -2px; width: 2px; margin-left: -1px; background: #ff5a5a; pointer-events: none; }
 </style>
 <link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Clip Forge","url":"https://migabuilder.com/clip-forge.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any modern web browser","description":"Free browser video editor: trim, crop for any platform, add styled and translated captions, layers, colour grades and music, or let Auto Edit cut several clips into one video.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
 <body>
 
@@ -502,6 +503,12 @@
       <p class="hint" data-i18n="aspectHint">Cropping is centered on the frame.</p>
       <div id="safeZoneRow" style="display:none;margin-top:8px;">
         <label class="check-row"><input type="checkbox" id="safeZoneCheckbox"><span>Show where TikTok, Reels and Shorts cover the picture</span></label>
+        <select id="safeZoneApp" aria-label="Which app's buttons to show" style="margin-top:6px;">
+          <option value="all" selected>All three apps (safest)</option>
+          <option value="tiktok">TikTok</option>
+          <option value="reels">Instagram Reels</option>
+          <option value="shorts">YouTube Shorts</option>
+        </select>
         <p class="hint" style="margin-top:4px;">Draws a rough guide on the preview only; it is never in the video. Keep faces and text inside the dashed box. Each app's buttons move now and then, so treat it as a guide.</p>
       </div>
     </div>
@@ -588,12 +595,21 @@
         <div><label for="captionStartInput" data-i18n="captionStartLabel">Starts at (s)</label><input type="number" id="captionStartInput" value="0" min="0" step="0.5"></div>
         <div><label for="captionDurationInput" data-i18n="captionDurationLabel">Duration (s)</label><input type="number" id="captionDurationInput" value="3" min="0.5" step="0.5"></div>
       </div>
-      <label for="captionPositionInput" style="margin-top:8px;" data-i18n="captionPositionLabel">Position</label>
-      <select id="captionPositionInput">
-        <option value="bottom" selected data-i18n="positionBottom">Bottom</option>
-        <option value="middle" data-i18n="positionMiddle">Middle</option>
-        <option value="top" data-i18n="positionTop">Top</option>
-      </select>
+      <div class="row-2" style="margin-top:8px;">
+        <div><label for="captionPositionInput" data-i18n="captionPositionLabel">Position</label>
+          <select id="captionPositionInput">
+            <option value="bottom" selected data-i18n="positionBottom">Bottom</option>
+            <option value="middle" data-i18n="positionMiddle">Middle</option>
+            <option value="top" data-i18n="positionTop">Top</option>
+          </select></div>
+        <div><label for="captionStyleInput" data-i18n="captionStyleLabel">Style</label>
+          <select id="captionStyleInput">
+            <option value="box" selected data-i18n="styleBox">White on a dark box</option>
+            <option value="bold" data-i18n="styleBold">Bold outline (TikTok style)</option>
+            <option value="highlight" data-i18n="styleHighlight">Big words, key word in yellow</option>
+            <option value="subtitle" data-i18n="styleSubtitle">Plain subtitle</option>
+          </select></div>
+      </div>
       <p class="hint" data-i18n="captionTimingHint">Timing is measured in the final exported video (after trimming and speed changes).</p>
       <button type="button" class="draft-btn secondary" id="addCaptionBtn" style="margin-top:8px;" data-i18n="addCaptionBtnLabel">+ Add text overlay</button>
     </div>
@@ -743,6 +759,7 @@
   const captionStartInput = document.getElementById('captionStartInput');
   const captionDurationInput = document.getElementById('captionDurationInput');
   const captionPositionInput = document.getElementById('captionPositionInput');
+  const captionStyleInput = document.getElementById('captionStyleInput');
   const addCaptionBtn = document.getElementById('addCaptionBtn');
   const captionsListEl = document.getElementById('captionsList');
   const captionsEmpty = document.getElementById('captionsEmpty');
@@ -767,7 +784,7 @@
   let videoObjectUrl = null;
   let videoDuration = 0;
   let watermarkImg = null;
-  let captions = []; // {id, text, start, duration, position, translatedText, translatedLang}
+  let captions = []; // {id, text, start, duration, position, style, translatedText, translatedLang}
   let captionIdCounter = 0;
   let renderedVideoBlob = null;
   let renderState = null;
@@ -994,6 +1011,7 @@
       start: Math.max(0, parseFloat(captionStartInput.value) || 0),
       duration: Math.max(0.5, parseFloat(captionDurationInput.value) || 3),
       position: captionPositionInput.value,
+      style: captionStyleInput.value,
       translatedText: '',
       translatedLang: ''
     });
@@ -1022,6 +1040,9 @@
             '<option value="middle"' + (cap.position === 'middle' ? ' selected' : '') + '>' + I18N.t('positionMiddle') + '</option>' +
             '<option value="top"' + (cap.position === 'top' ? ' selected' : '') + '>' + I18N.t('positionTop') + '</option>' +
           '</select></label>' +
+          '<label>' + I18N.t('captionStyleLabel') + ' <select class="cap-style" data-id="' + cap.id + '">' +
+            CAPTION_STYLES.map(k => '<option value="' + k + '"' + ((cap.style || 'box') === k ? ' selected' : '') + '>' + I18N.t(CAPTION_STYLE_KEYS[k]) + '</option>').join('') +
+          '</select></label>' +
         '</div>' +
         '<div class="caption-translate-row">' +
           '<select class="cap-lang" data-id="' + cap.id + '">' + languageOptionsHtml() + '</select>' +
@@ -1044,6 +1065,10 @@
     captionsListEl.querySelectorAll('.cap-position').forEach(sel => sel.addEventListener('change', () => {
       const cap = captions.find(c => c.id === Number(sel.dataset.id));
       if (cap) cap.position = sel.value;
+    }));
+    captionsListEl.querySelectorAll('.cap-style').forEach(sel => sel.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(sel.dataset.id));
+      if (cap) cap.style = sel.value;
     }));
     captionsListEl.querySelectorAll('.cap-remove').forEach(btn => btn.addEventListener('click', () => {
       captions = captions.filter(c => c.id !== Number(btn.dataset.id));
@@ -1090,48 +1115,90 @@
     return lines;
   }
 
+  // Caption looks. 'box' is the original look and the default for captions without a style.
+  const CAPTION_STYLES = ['box', 'bold', 'highlight', 'subtitle'];
+  const CAPTION_STYLE_KEYS = { box: 'styleBox', bold: 'styleBold', highlight: 'styleHighlight', subtitle: 'styleSubtitle' };
+  const CAPTION_LOOKS = {
+    box: { weight: 700, scale: 1, family: '"IBM Plex Sans", sans-serif' },
+    bold: { weight: 800, scale: 1.15, family: '"Space Grotesk", "IBM Plex Sans", sans-serif' },
+    highlight: { weight: 800, scale: 1.3, family: '"Space Grotesk", "IBM Plex Sans", sans-serif', upper: true },
+    subtitle: { weight: 600, scale: 0.85, family: '"IBM Plex Sans", sans-serif' }
+  };
+
   function drawCaptionsAt(g, cw, ch, t) {
     const active = captions.filter(c => t >= c.start && t < c.start + c.duration);
     if (!active.length) return;
-    const fontSize = Math.round(ch * 0.045);
-    const smallFontSize = Math.round(fontSize * 0.78);
-    const maxWidth = cw * 0.86;
+    const baseSize = Math.round(ch * 0.045);
     active.forEach(cap => {
-      g.font = '700 ' + fontSize + 'px "IBM Plex Sans", sans-serif';
-      const primaryLines = wrapCanvasText(g, cap.text, maxWidth);
+      const style = CAPTION_LOOKS[cap.style] ? cap.style : 'box', look = CAPTION_LOOKS[style];
+      const maxWidth = cw * (look.scale > 1 ? 0.74 : 0.86);
+      const fontSize = Math.round(Math.min(baseSize * look.scale, cw * 0.09));
+      const smallFontSize = Math.round(fontSize * 0.78);
+      const font = size => look.weight + ' ' + size + 'px ' + look.family;
+      const text = look.upper ? cap.text.toUpperCase() : cap.text;
+      const translated = cap.translatedText ? (look.upper ? cap.translatedText.toUpperCase() : cap.translatedText) : '';
+      g.font = font(fontSize);
+      const primaryLines = wrapCanvasText(g, text, maxWidth);
       let secondaryLines = [];
-      if (cap.translatedText) {
-        g.font = '700 ' + smallFontSize + 'px "IBM Plex Sans", sans-serif';
-        secondaryLines = wrapCanvasText(g, cap.translatedText, maxWidth);
+      if (translated) {
+        g.font = font(smallFontSize);
+        secondaryLines = wrapCanvasText(g, translated, maxWidth);
       }
-      const lineHeight = fontSize * 1.3;
+      const lineHeight = fontSize * (look.upper ? 1.15 : 1.3);
       const smallLineHeight = smallFontSize * 1.3;
       const blockHeight = primaryLines.length * lineHeight + secondaryLines.length * smallLineHeight;
       const anchorY = cap.position === 'top' ? ch * 0.14 : cap.position === 'bottom' ? ch * 0.86 : ch * 0.5;
-      let maxLineWidth = 0;
-      g.font = '700 ' + fontSize + 'px "IBM Plex Sans", sans-serif';
-      primaryLines.forEach(l => { maxLineWidth = Math.max(maxLineWidth, g.measureText(l).width); });
-      g.font = '700 ' + smallFontSize + 'px "IBM Plex Sans", sans-serif';
-      secondaryLines.forEach(l => { maxLineWidth = Math.max(maxLineWidth, g.measureText(l).width); });
 
       g.save();
       g.textAlign = 'center';
       g.textBaseline = 'top';
-      const padX = 18, padY = 12;
-      g.fillStyle = 'rgba(0, 0, 0, 0.55)';
-      g.fillRect(cw / 2 - maxLineWidth / 2 - padX, anchorY - blockHeight / 2 - padY, maxLineWidth + padX * 2, blockHeight + padY * 2);
+      g.lineJoin = 'round';
+      if (style === 'box') {
+        let maxLineWidth = 0;
+        g.font = font(fontSize);
+        primaryLines.forEach(l => { maxLineWidth = Math.max(maxLineWidth, g.measureText(l).width); });
+        g.font = font(smallFontSize);
+        secondaryLines.forEach(l => { maxLineWidth = Math.max(maxLineWidth, g.measureText(l).width); });
+        const padX = 18, padY = 12;
+        g.fillStyle = 'rgba(0, 0, 0, 0.55)';
+        g.fillRect(cw / 2 - maxLineWidth / 2 - padX, anchorY - blockHeight / 2 - padY, maxLineWidth + padX * 2, blockHeight + padY * 2);
+      }
+      // The key word for 'highlight': the caption's longest word.
+      const bare = w => w.replace(/[^\p{L}\p{N}]/gu, '');
+      const keyWord = style === 'highlight' ? text.split(/\s+/).reduce((best, w) => bare(w).length > bare(best).length ? w : best, '') : '';
+      const drawLine = (line, y, size, fill) => {
+        if (style === 'subtitle') {
+          g.shadowColor = 'rgba(0,0,0,0.9)'; g.shadowBlur = size * 0.25; g.shadowOffsetY = size * 0.06;
+        } else if (style !== 'box') {
+          g.lineWidth = size * 0.16; g.strokeStyle = '#000';
+        }
+        if (style !== 'highlight' || !keyWord || fill !== '#fff') {
+          if (style === 'bold' || style === 'highlight') g.strokeText(line, cw / 2, y);
+          g.fillStyle = fill; g.fillText(line, cw / 2, y);
+          return;
+        }
+        // Word by word so the key word can be yellow, still centred as one line.
+        const words = line.split(' '), space = g.measureText(' ').width;
+        let x = cw / 2 - g.measureText(line).width / 2;
+        g.textAlign = 'left';
+        words.forEach(w => {
+          g.strokeText(w, x, y);
+          g.fillStyle = w === keyWord ? '#FFE15A' : '#fff'; g.fillText(w, x, y);
+          x += g.measureText(w).width + space;
+        });
+        g.textAlign = 'center';
+      };
       let y = anchorY - blockHeight / 2;
-      g.fillStyle = '#fff';
-      g.font = '700 ' + fontSize + 'px "IBM Plex Sans", sans-serif';
-      primaryLines.forEach(line => { g.fillText(line, cw / 2, y); y += lineHeight; });
+      g.font = font(fontSize);
+      primaryLines.forEach(line => { drawLine(line, y, fontSize, '#fff'); y += lineHeight; });
       if (secondaryLines.length) {
-        g.fillStyle = '#6FD1E0';
-        g.font = '700 ' + smallFontSize + 'px "IBM Plex Sans", sans-serif';
-        secondaryLines.forEach(line => { g.fillText(line, cw / 2, y); y += smallLineHeight; });
+        g.font = font(smallFontSize);
+        secondaryLines.forEach(line => { drawLine(line, y, smallFontSize, '#6FD1E0'); y += smallLineHeight; });
       }
       g.restore();
     });
   }
+
 
   function drawWatermark(g, cw, ch) {
     if (!watermarkImg) return;
@@ -1227,9 +1294,17 @@
   }
   // A rough phone safe area for vertical video: the apps put the account name
   // and caption along the bottom, the like/comment/share buttons down the
-  // right, and tabs or a search bar across the top. Preview only.
-  const SAFE = { top: 0.13, bottom: 0.22, left: 0.05, right: 0.15 };
+  // right, and tabs or a search bar across the top. Preview only. Each app
+  // covers a little differently; 'all' is roughly the union of the three.
+  // Reels follows Meta's guide (keep the top 14% and bottom 35% clear).
+  const SAFE_ZONES = {
+    all: { top: 0.13, bottom: 0.22, left: 0.05, right: 0.15, labels: ['Tabs and search', 'Name and caption', 'Like, comment, share'] },
+    tiktok: { top: 0.10, bottom: 0.21, left: 0.05, right: 0.13, labels: ['Following and For You', 'Name, caption and sound', 'Like, comment, share'] },
+    reels: { top: 0.14, bottom: 0.35, left: 0.06, right: 0.10, labels: ['Reels and camera', 'Name, caption and sound', 'Buttons'] },
+    shorts: { top: 0.08, bottom: 0.20, left: 0.05, right: 0.17, labels: ['Search and menu', 'Channel, title and subscribe', 'Like, comment, share'] }
+  };
   function drawSafeZone(g, w, h) {
+    const SAFE = SAFE_ZONES[safeZoneApp.value] || SAFE_ZONES.all;
     const x = w * SAFE.left, y = h * SAFE.top, sw = w * (1 - SAFE.left - SAFE.right), sh = h * (1 - SAFE.top - SAFE.bottom);
     g.save();
     g.fillStyle = 'rgba(0,0,0,0.38)';
@@ -1247,16 +1322,17 @@
       const k = Math.min(1, room / g.measureText(text).width);
       g.save(); g.translate(cx, cy); g.scale(k, k); g.fillText(text, 0, 0); g.restore();
     };
-    label('Name and caption', w / 2, y + sh + (h - y - sh) / 2, w * 0.9);
-    label('Tabs and search', w / 2, y / 2, w * 0.9);
+    label(SAFE.labels[1], w / 2, y + sh + (h - y - sh) / 2, w * 0.9);
+    label(SAFE.labels[0], w / 2, y / 2, w * 0.9);
     g.translate(x + sw + (w - x - sw) / 2, y + sh / 2); g.rotate(Math.PI / 2);
-    label('Like, comment, share', 0, 0, sh * 0.9);
+    label(SAFE.labels[2], 0, 0, sh * 0.9);
     g.restore();
   }
-  const safeZoneRow = document.getElementById('safeZoneRow'), safeZoneCheckbox = document.getElementById('safeZoneCheckbox');
+  const safeZoneRow = document.getElementById('safeZoneRow'), safeZoneCheckbox = document.getElementById('safeZoneCheckbox'), safeZoneApp = document.getElementById('safeZoneApp');
   function updateSafeZoneRow() { safeZoneRow.style.display = aspectSelect.value === '9:16' ? 'block' : 'none'; }
   aspectSelect.addEventListener('change', updateSafeZoneRow);
   safeZoneCheckbox.addEventListener('change', () => { if (safeZoneCheckbox.checked) setPreview(true); requestDraw(); });
+  safeZoneApp.addEventListener('change', () => { safeZoneCheckbox.checked = true; setPreview(true); requestDraw(); });
   updateSafeZoneRow();
   function requestDraw() {
     if (drawQueued) return;
@@ -2698,6 +2774,11 @@
       positionBottom: 'Bottom',
       positionMiddle: 'Middle',
       positionTop: 'Top',
+      captionStyleLabel: 'Style',
+      styleBox: 'White on a dark box',
+      styleBold: 'Bold outline (TikTok style)',
+      styleHighlight: 'Big words, key word in yellow',
+      styleSubtitle: 'Plain subtitle',
       captionTimingHint: 'Timing is measured in the final exported video (after trimming and speed changes).',
       addCaptionBtnLabel: '+ Add text overlay',
       captionsEmptyText: 'No text overlays added.',
@@ -2831,6 +2912,11 @@
       positionBottom: 'Abajo',
       positionMiddle: 'Medio',
       positionTop: 'Arriba',
+      captionStyleLabel: 'Estilo',
+      styleBox: 'Blanco sobre caja oscura',
+      styleBold: 'Contorno grueso (estilo TikTok)',
+      styleHighlight: 'Letras grandes, palabra clave en amarillo',
+      styleSubtitle: 'Subtítulo simple',
       captionTimingHint: 'El tiempo se mide en el video final exportado (después de recortes y cambios de velocidad).',
       addCaptionBtnLabel: '+ Agregar superposición de texto',
       captionsEmptyText: 'No se agregaron superposiciones de texto.',
@@ -2964,6 +3050,11 @@
       positionBottom: 'أسفل',
       positionMiddle: 'وسط',
       positionTop: 'أعلى',
+      captionStyleLabel: 'النمط',
+      styleBox: 'أبيض على مربع داكن',
+      styleBold: 'حدود عريضة (أسلوب تيك توك)',
+      styleHighlight: 'كلمات كبيرة، الكلمة الأساسية بالأصفر',
+      styleSubtitle: 'ترجمة بسيطة',
       captionTimingHint: 'يُقاس التوقيت في الفيديو النهائي المُصدَّر (بعد القص وتغييرات السرعة).',
       addCaptionBtnLabel: '+ إضافة تراكب نصي',
       captionsEmptyText: 'لم تتم إضافة أي تراكبات نصية.',
@@ -3097,6 +3188,11 @@
       positionBottom: '底部',
       positionMiddle: '居中',
       positionTop: '顶部',
+      captionStyleLabel: '样式',
+      styleBox: '深色底框白字',
+      styleBold: '粗描边（TikTok 风格）',
+      styleHighlight: '大字，关键词黄色',
+      styleSubtitle: '普通字幕',
       captionTimingHint: '时间是在最终导出的视频中测量的（剪辑和速度更改之后）。',
       addCaptionBtnLabel: '+ 添加文字叠加',
       captionsEmptyText: '尚未添加文字叠加。',
@@ -3230,6 +3326,11 @@
       positionBottom: 'Chini',
       positionMiddle: 'Katikati',
       positionTop: 'Juu',
+      captionStyleLabel: 'Mtindo',
+      styleBox: 'Nyeupe kwenye kisanduku cheusi',
+      styleBold: 'Mstari mnene (mtindo wa TikTok)',
+      styleHighlight: 'Maneno makubwa, neno kuu kwa njano',
+      styleSubtitle: 'Manukuu ya kawaida',
       captionTimingHint: 'Muda hupimwa katika video ya mwisho iliyohamishwa (baada ya kukata na mabadiliko ya kasi).',
       addCaptionBtnLabel: '+ Ongeza maandishi ya juu',
       captionsEmptyText: 'Hakuna maandishi ya juu yaliyoongezwa.',

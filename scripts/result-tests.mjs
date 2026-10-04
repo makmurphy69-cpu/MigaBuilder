@@ -322,6 +322,37 @@ test('clip-forge: layers, keyframes and a colour grade render into the video', '
   expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
 }, { timeout: 150000 });
 
+test('clip-forge: caption styles and the per-app safe zone show in the preview and render', 'clip-forge.html', async (page) => {
+  const clip = fs.readFileSync(path.join(FIX, 'clip.webm'));
+  await page.setInputFiles('#videoInput', { name: 'main.webm', mimeType: 'video/webm', buffer: clip });
+  await page.waitForSelector('#tlWrap', { state: 'visible', timeout: 30000 });
+  // Picking an app turns the safe-zone guide (and the live preview) on.
+  await page.selectOption('#aspectSelect', '9:16');
+  await page.selectOption('#safeZoneApp', 'reels');
+  expect(await page.isChecked('#safeZoneCheckbox'), 'choosing an app should switch the safe-zone guide on');
+  await page.fill('#captionTextInput', 'Watch this amazing trick');
+  await page.selectOption('#captionPositionInput', 'middle');
+  await page.click('#addCaptionBtn');
+  // Yellow pixels in the middle of the preview: none with the dark box, plenty once the key word turns yellow.
+  const yellow = () => page.waitForTimeout(300).then(() => page.evaluate(() => {
+    const c = document.getElementById('stageCanvas'), d = c.getContext('2d').getImageData(0, c.height * 0.3, c.width, c.height * 0.4).data;
+    let n = 0;
+    for (let i = 0; i < d.length; i += 4) if (d[i] > 200 && d[i + 1] > 190 && d[i + 2] < 140) n++;
+    return n;
+  }));
+  const before = await yellow();
+  await page.selectOption('#captionsList .cap-style', 'highlight');
+  const after = await yellow();
+  expect(after > before + 200, 'the highlight style did not draw a yellow key word (' + before + ' -> ' + after + ' yellow pixels)');
+  const out = await downloadOf(page, async () => {
+    await page.click('#renderBtn');
+    await page.waitForSelector('#downloadVideoBtn:not([disabled])', { timeout: 60000 });
+    await page.click('#downloadVideoBtn');
+  }, 90000);
+  expect(magic(out.buf, 0x1a, 0x45, 0xdf, 0xa3), 'download is not a WebM video');
+  expect(out.buf.length > 5000, 'video is suspiciously small: ' + out.buf.length);
+}, { timeout: 150000 });
+
 test('website-builder: AI site has a shared design and downloads as a tidy ZIP', 'website-builder.html', async (page) => {
   await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
   await page.click('#draftBtn');

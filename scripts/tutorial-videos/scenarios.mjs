@@ -1014,6 +1014,14 @@ S('clip-forge.html', {
     await h.step('Trim it, pick a shape, and add text and music.', async () => { await h.fill('#trimStartInput', '1'); await h.fill('#trimEndInput', '7'); await h.select('#aspectSelect', '1:1'); });
     // Layers, keyframes and colour grade. showStage scrolls the page so the whole preview and timeline are in view.
     const showStage = () => page.evaluate(() => window.scrollTo({ top: document.querySelector('section.table').getBoundingClientRect().top + window.scrollY - 8, behavior: 'smooth' })).then(() => h.wait(500));
+    await h.step('Add a caption and pick its style: a dark box, a bold outline, or big words with the key word in yellow.', async () => {
+      await h.type('#captionTextInput', 'Watch this amazing trick');
+      await h.select('#captionPositionInput', 'top');
+      await h.select('#captionStyleInput', 'highlight');
+      await h.click('#addCaptionBtn');
+      await h.click('#tlShowEdit');
+      await showStage();
+    });
     await h.step('Stack more on top, each on its own track: video, pictures and text. Add a picture.', async () => {
       await h.upload('#lyImageInput', 'drawing-rocket.png');
       await h.fill('#lyEditor input[data-p="x"]', '27'); await h.fill('#lyEditor input[data-p="y"]', '72');
