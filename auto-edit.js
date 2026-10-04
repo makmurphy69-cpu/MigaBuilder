@@ -164,7 +164,20 @@
     let buf;
     try { buf = await audioCtx().decodeAudioData(await file.arrayBuffer()); } catch (e) { return null; }
     const data = buf.getChannelData(0), sr = buf.sampleRate;
-    return beatsFromSamples(data.subarray(0, Math.min(data.length, sr * 90)), sr, buf.duration);
+    const found = beatsFromSamples(data.subarray(0, Math.min(data.length, sr * 90)), sr, buf.duration);
+    if (found) Object.assign(found, { peaks: peaksOf(data, sr, PEAK_RATE), peakRate: PEAK_RATE, duration: buf.duration });
+    return found;
+  }
+  // The loudest sample in every 1/PEAK_RATE of a second, for drawing the waveform.
+  const PEAK_RATE = 20;
+  function peaksOf(data, sr, rate) {
+    const step = Math.max(1, Math.round(sr / rate)), out = new Float32Array(Math.ceil(data.length / step));
+    for (let i = 0; i < out.length; i++) {
+      let m = 0;
+      for (let k = i * step, end = Math.min(data.length, k + step); k < end; k += 4) { const v = Math.abs(data[k]); if (v > m) m = v; }
+      out[i] = m;
+    }
+    return out;
   }
   function beatsFromSamples(data, sr, totalDuration) {
     const hop = 256, env = [];
