@@ -19,15 +19,15 @@
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Music Forge — make songs with singing, instant tracks and beats</title>
-<meta name="description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<meta name="description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or open the Beat maker studio: step grid and piano roll, effects on every track, record your voice over the beat, MIDI import, export and keyboards, and stems — free, right in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Music Forge — generate original instrumental music">
-<meta property="og:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<meta property="og:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or open the Beat maker studio: step grid and piano roll, effects on every track, record your voice over the beat, MIDI import, export and keyboards, and stems — free, right in your browser.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/music-forge.jpg">
 <meta property="og:url" content="https://migabuilder.com/music-forge.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Music Forge — generate original instrumental music">
-<meta name="twitter:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or switch to Tracker mode and build your own multi-pattern beat with synth instruments and your own uploaded sounds — free, right in your browser.">
+<meta name="twitter:description" content="Describe a song and get a real track with singing and lyrics from Google Lyria using your own Gemini key, or pick a mood for an instant instrumental track, or open the Beat maker studio: step grid and piano roll, effects on every track, record your voice over the beat, MIDI import, export and keyboards, and stems — free, right in your browser.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/music-forge.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,6 +35,7 @@
 <script src="i18n.js"></script>
 <script src="media-utils.js"></script>
 <script src="music-engine.js"></script>
+<script src="music-midi.js"></script>
 
 <style>
   :root {
@@ -230,6 +231,41 @@
   .cell-popover-actions { display: flex; gap: 6px; }
   .cell-popover-actions button { flex: 1; font-size: 11.5px; padding: 6px; border-radius: var(--radius); border: 1px solid rgba(22,32,43,0.25); background: #fff; cursor: pointer; }
 
+  .step-grid .grid-row-label { cursor: pointer; }
+  .step-grid .grid-row-label.sel { color: var(--line-cyan); font-weight: 600; }
+  .step-cell.cursor, .roll-cell.cursor { box-shadow: inset 0 0 0 2px rgba(237,234,224,0.65); }
+  .audio-lane { height: 24px; border-radius: 2px; background: repeating-linear-gradient(90deg, rgba(226,136,176,0.55) 0 3px, rgba(226,136,176,0.25) 3px 6px); border: 1px solid rgba(226,136,176,0.7); font-size: 10.5px; color: #fff; display: flex; align-items: center; padding: 0 6px; white-space: nowrap; overflow: hidden; }
+  .view-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; font-size: 12px; color: rgba(237,234,224,0.75); }
+  .view-toggle { display: flex; gap: 4px; }
+  .view-toggle button { background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 6px 10px; font-size: 12px; cursor: pointer; }
+  .view-toggle button.active { background: var(--line-cyan); color: var(--navy-deep); border-color: var(--line-cyan); font-weight: 600; }
+  .view-track select { width: auto; padding: 4px 6px; font-size: 12px; margin-left: 4px; }
+  .roll-hint { font-size: 11.5px; color: rgba(237,234,224,0.6); margin: -4px 0 10px; }
+  .step-grid[hidden], .piano-roll[hidden], .ai-check[hidden] { display: none; }
+  .piano-roll { display: grid; gap: 1px; min-width: max-content; max-height: 440px; overflow-y: auto; position: relative; }
+  .roll-key { font: 10px 'IBM Plex Mono', monospace; height: 14px; line-height: 14px; padding: 0 6px; background: #EDEAE0; color: #16202B; cursor: pointer; position: sticky; left: 0; z-index: 1; }
+  .roll-key.black { background: #16202B; color: #EDEAE0; }
+  .roll-cell { height: 14px; width: 24px; background: rgba(237,234,224,0.06); cursor: pointer; position: relative; touch-action: none; }
+  .roll-cell.black-row { background: rgba(0,0,0,0.22); }
+  .roll-cell.beat-start { border-left: 1px solid rgba(111,209,224,0.35); }
+  .roll-cell.c-row { border-bottom: 1px solid rgba(111,209,224,0.25); }
+  .roll-cell.playing { background: rgba(111,209,224,0.22); }
+  .roll-note { position: absolute; left: 0; top: 0; height: 14px; border-radius: 2px; z-index: 2; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.35); cursor: ew-resize; }
+  .fx-box { margin-top: 8px; border-top: 1px dashed rgba(22,32,43,0.18); padding-top: 6px; font-size: 11.5px; }
+  .fx-box summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+  .fx-grid { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 8px; align-items: center; margin-top: 6px; }
+  .fx-grid input[type="range"] { width: 100%; }
+  .fx-grid output { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; min-width: 42px; text-align: right; }
+  .fx-presets { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .fx-presets button { font-size: 11px; padding: 3px 7px; border: 1px solid rgba(22,32,43,0.25); border-radius: var(--radius); background: #fff; cursor: pointer; color: var(--ink); }
+  .rec-box label { font-size: 12px; }
+  .rec-btn { width: 100%; margin-top: 8px; background: #C0392B !important; border-color: #C0392B !important; color: #fff !important; }
+  .rec-btn.recording { animation: recPulse 1s ease-in-out infinite; }
+  @keyframes recPulse { 50% { opacity: 0.65; } }
+  @media (prefers-reduced-motion: reduce) { .rec-btn.recording { animation: none; } }
+  .rec-meter { height: 8px; background: rgba(22,32,43,0.12); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .rec-meter i { display: block; height: 100%; width: 0; background: #4E9E73; transition: width 60ms linear; }
+  .track-del { background: transparent; border: none; cursor: pointer; font-size: 13px; padding: 2px 4px; color: rgba(22,32,43,0.72); }
   .transport-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
   .transport-row button {
     background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
@@ -371,7 +407,7 @@
   }
 </style>
 <link rel="stylesheet" href="tutorials.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Music Forge","url":"https://migabuilder.com/music-forge.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any modern web browser","description":"Free browser music creator for AI songs, instrumental tracks and custom multi-pattern beats.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Music Forge","url":"https://migabuilder.com/music-forge.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any modern web browser","description":"Free browser music creator for AI songs, instrumental tracks, and a beat maker studio with a piano roll, track effects, voice recording, MIDI and stems.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
 <body>
 
@@ -715,6 +751,27 @@
     <div class="song-list" id="songList"></div>
     <p class="song-empty" id="songEmpty" data-i18n="songEmptyText">Song is empty — add patterns above to build a playback/export order.</p>
 
+    <div class="section-title">🎙️ Record your voice or instrument</div>
+    <div class="rec-box">
+      <div class="row-2">
+        <div><label for="recCountIn">Count-in</label><select id="recCountIn"><option value="0">None</option><option value="4" selected>1 bar</option><option value="8">2 bars</option></select></div>
+        <div><label class="ai-check" style="margin-top:22px;"><input type="checkbox" id="recClick" checked><span>Metronome click</span></label></div>
+      </div>
+      <button type="button" class="draft-btn rec-btn" id="recBtn">● Record a take</button>
+      <div class="rec-meter" id="recMeter" hidden><i id="recMeterBar"></i></div>
+      <p class="hint" id="recStatus">The song plays while you sing or play along, and your take becomes a new track you can mix, add effects to and nudge into time. Use headphones so the beat is not recorded too.</p>
+    </div>
+
+    <div class="section-title">🎹 MIDI</div>
+    <div class="btn-row">
+      <label class="upload-btn" for="midiImportInput" style="flex:1;">📥 Import MIDI (.mid)</label>
+      <button type="button" class="draft-btn secondary" id="midiExportBtn" style="flex:1;">📤 Export MIDI</button>
+    </div>
+    <input type="file" id="midiImportInput" accept=".mid,.midi,.rmi,audio/midi,audio/x-midi" style="display:none;">
+    <button type="button" class="draft-btn secondary" id="midiKeyboardBtn" style="margin-top:8px;width:100%;">🎹 Connect a MIDI keyboard</button>
+    <label class="ai-check" id="midiWriteWrap" hidden style="margin-top:8px;"><input type="checkbox" id="midiWrite" checked><span>Write the notes I play into the pattern</span></label>
+    <p class="hint" id="midiStatus">Import a MIDI file from any music app to turn it into patterns, or export your song to finish it in a full music program (GarageBand, FL Studio, Cakewalk, Ableton…). A USB MIDI keyboard plays the track picked above the grid (Chrome and Edge).</p>
+
     <div class="error-box" id="trackerErrorBox"></div>
     <div class="error-box" id="trackerSuccessBox" style="background: rgba(78, 158, 115, 0.14); border-color: rgba(78, 158, 115, 0.4); color: #275238;"></div>
   </section>
@@ -724,9 +781,19 @@
       <span><span data-i18n="trackerLabelPrefix">TRACKER —</span> <span id="activePatternLabel">PATTERN 1</span></span>
       <span id="trackerStatus" data-i18n="statusStopped">STOPPED</span>
     </div>
+    <div class="view-row">
+      <div class="view-toggle" role="group" aria-label="Editor view">
+        <button type="button" id="viewStepsBtn" class="active">▦ Steps</button>
+        <button type="button" id="viewRollBtn">🎹 Piano roll</button>
+      </div>
+      <label class="view-track">Track <select id="rollTrack" aria-label="Track to edit in the piano roll and play with a MIDI keyboard"></select></label>
+      <label class="view-track" id="rollLenWrap" hidden>New note length <select id="rollLen"><option value="1">1 step</option><option value="2">2 steps</option><option value="4" selected>1 beat</option><option value="8">2 beats</option><option value="16">1 bar</option></select></label>
+    </div>
+    <p class="roll-hint" id="rollHint" hidden>Click to add a note, click a note to remove it, drag a note sideways to make it longer or shorter. Click a key on the left to hear it. Several notes on the same step make a chord.</p>
 
     <div class="grid-scroll">
-      <div id="stepGrid"></div>
+      <div id="stepGrid" class="step-grid"></div>
+      <div id="pianoRoll" class="piano-roll" hidden></div>
     </div>
 
     <div class="transport-row">
@@ -734,7 +801,7 @@
       <button type="button" id="stopBtn" disabled data-i18n="stopLabel">■ Stop</button>
       <button type="button" id="exportWavBtn" class="primary">✂️ Finish &amp; download song</button>
     </div>
-    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n="playbackHint">Playback uses the song arrangement on the left (or just the current pattern, looped, if the song is empty). Export renders the whole arrangement to a real .wav file.</p>
+    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n="playbackHint">Playback uses the song arrangement on the left (or just the current pattern, looped, if the song is empty). Finish &amp; download renders the whole arrangement, with your recordings and effects, to WAV or MP3, or to stems: one file per track.</p>
   </section>
 </main>
 
@@ -901,6 +968,14 @@
   const popoverClearBtn = document.getElementById('popoverClearBtn');
   const popoverCloseBtn = document.getElementById('popoverCloseBtn');
   const undoBtn = document.getElementById('undoBtn');
+  const pianoRollEl = document.getElementById('pianoRoll');
+  const rollTrackSelect = document.getElementById('rollTrack');
+  const rollLenSelect = document.getElementById('rollLen');
+  const viewStepsBtn = document.getElementById('viewStepsBtn');
+  const viewRollBtn = document.getElementById('viewRollBtn');
+  const recBtn = document.getElementById('recBtn');
+  const recStatus = document.getElementById('recStatus');
+  const midiStatus = document.getElementById('midiStatus');
 
   function showTrackerError(msg) { trackerSuccessBox.classList.remove('show'); trackerErrorBox.textContent = msg; trackerErrorBox.classList.add('show'); }
   function clearTrackerError() { trackerErrorBox.textContent = ''; trackerErrorBox.classList.remove('show'); }
@@ -912,9 +987,25 @@
   for (let i = 0; i < NUM_TRACKS; i++) {
     tracks.push({
       id: ++trackIdCounter, name: 'Track ' + (i + 1), type: 'synth', wave: ['triangle', 'square', 'sawtooth', 'sine'][i % 4],
-      sampleBuffer: null, sampleName: '', sampleDataUrl: '', baseNote: 0, penNote: 0, volume: 0.8, pan: 0, muted: false
+      sampleBuffer: null, sampleName: '', sampleDataUrl: '', baseNote: 0, penNote: 0, volume: 0.8, pan: 0, muted: false, fx: defaultFx(), nudge: 0
     });
   }
+
+  // Track effects (reverb and echo sends, a two-band EQ, a compressor) and recorded-take timing.
+  function defaultFx() { return { reverb: 0, echo: 0, bass: 0, treble: 0, comp: false }; }
+  function normTrack(t) { t.fx = Object.assign(defaultFx(), t.fx || {}); t.nudge = +t.nudge || 0; t.pan = t.pan || 0; return t; }
+  // A step: { note, velocity, len (steps, optional), chord (extra notes played with it, optional) }.
+  function copyCell(c) {
+    if (!c) return null;
+    const o = { note: c.note, velocity: c.velocity };
+    if (c.len > 1) o.len = Math.min(64, Math.round(c.len));
+    if (c.chord && c.chord.length) o.chord = c.chord.slice();
+    return o;
+  }
+  function cellNotes(c) { return c ? [c.note].concat(c.chord || []) : []; }
+  // Sounds and recordings survive undo even after their track was deleted.
+  const sampleCache = new Map();
+  function rememberSamples() { tracks.forEach(t => { if (t.sampleBuffer) sampleCache.set(t.id, { b: t.sampleBuffer, u: t.sampleDataUrl }); }); }
 
   function emptyCells() {
     return tracks.map(() => new Array(stepsPerPattern).fill(null));
@@ -940,8 +1031,8 @@
   // ---------- undo history ----------
   function serializeState() {
     return {
-      tracks: tracks.map(t => ({ id: t.id, name: t.name, type: t.type, wave: t.wave, sampleName: t.sampleName, baseNote: t.baseNote, penNote: t.penNote, volume: t.volume, pan: t.pan || 0, muted: t.muted })),
-      patterns: patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(c => c ? { note: c.note, velocity: c.velocity } : null)) })),
+      tracks: tracks.map(t => ({ id: t.id, name: t.name, type: t.type, wave: t.wave, sampleName: t.sampleName, hit: t.hit || '', baseNote: t.baseNote, penNote: t.penNote, volume: t.volume, pan: t.pan || 0, muted: t.muted, fx: Object.assign({}, t.fx), nudge: t.nudge || 0 })),
+      patterns: patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(copyCell)) })),
       activePatternId: activePatternId,
       songOrder: songOrder.slice(),
       stepsPerPattern: stepsPerPattern,
@@ -954,11 +1045,11 @@
   function applyState(state) {
     const bufferById = {}, dataUrlById = {};
     tracks.forEach(t => { bufferById[t.id] = t.sampleBuffer; dataUrlById[t.id] = t.sampleDataUrl; });
-    tracks = state.tracks.map(t => Object.assign({}, t, {
-      sampleBuffer: bufferById.hasOwnProperty(t.id) ? bufferById[t.id] : null,
-      sampleDataUrl: dataUrlById.hasOwnProperty(t.id) ? dataUrlById[t.id] : ''
-    }));
-    patterns = state.patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(c => c ? { note: c.note, velocity: c.velocity } : null)) }));
+    tracks = state.tracks.map(t => normTrack(Object.assign({}, t, {
+      sampleBuffer: bufferById.hasOwnProperty(t.id) ? bufferById[t.id] : (sampleCache.has(t.id) ? sampleCache.get(t.id).b : null),
+      sampleDataUrl: dataUrlById.hasOwnProperty(t.id) ? dataUrlById[t.id] : (sampleCache.has(t.id) ? sampleCache.get(t.id).u : '')
+    })));
+    patterns = state.patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(copyCell)) }));
     activePatternId = patterns.some(p => p.id === state.activePatternId) ? state.activePatternId : patterns[0].id;
     songOrder = state.songOrder.filter(id => patterns.some(p => p.id === id));
     stepsPerPattern = state.stepsPerPattern;
@@ -973,6 +1064,7 @@
   const MAX_UNDO = 40;
   function updateUndoBtn() { undoBtn.disabled = !undoStack.length; }
   function pushHistory() {
+    rememberSamples();
     undoStack.push(JSON.stringify(serializeState()));
     if (undoStack.length > MAX_UNDO) undoStack.shift();
     updateUndoBtn();
@@ -1016,11 +1108,11 @@
       activePatternId: activePatternId,
       songOrder: songOrder.slice(),
       tracks: tracks.map(t => ({
-        id: t.id, name: t.name, type: t.type, wave: t.wave, sampleName: t.sampleName,
+        id: t.id, name: t.name, type: t.type, wave: t.wave, sampleName: t.sampleName, hit: t.hit || '',
         sampleDataUrl: t.sampleDataUrl || '', baseNote: t.baseNote, penNote: t.penNote,
-        volume: t.volume, pan: t.pan || 0, muted: t.muted
+        volume: t.volume, pan: t.pan || 0, muted: t.muted, fx: Object.assign({}, t.fx), nudge: t.nudge || 0
       })),
-      patterns: patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(c => c ? { note: c.note, velocity: c.velocity } : null)) }))
+      patterns: patterns.map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(copyCell)) }))
     };
   }
 
@@ -1038,23 +1130,24 @@
     const decodeCtx = new (window.AudioContext || window.webkitAudioContext)();
     const loadedTracks = await Promise.all((data.tracks || []).map(async t => {
       let sampleBuffer = null;
-      if (t.type === 'sample' && t.sampleDataUrl) {
+      if ((t.type === 'sample' || t.type === 'audio') && t.sampleDataUrl) {
         try {
           const resp = await fetch(t.sampleDataUrl);
           const arrayBuffer = await resp.arrayBuffer();
           sampleBuffer = await decodeCtx.decodeAudioData(arrayBuffer);
         } catch (e) {}
       }
-      return Object.assign({}, t, { sampleBuffer: sampleBuffer });
+      return normTrack(Object.assign({}, t, { sampleBuffer: sampleBuffer }));
     }));
     decodeCtx.close();
     tracks = loadedTracks;
+    if (!tracks.length) throw new Error('The file has no tracks.');
     stepsPerPattern = data.stepsPerPattern || 16;
     stepsPerPatternSelect.value = String(stepsPerPattern);
     trackerBpmInput.value = data.bpm || 120;
     trackIdCounter = data.trackIdCounter || trackIdCounter;
     patternIdCounter = data.patternIdCounter || patternIdCounter;
-    patterns = (data.patterns || []).map(p => ({ id: p.id, name: p.name, cells: p.cells.map(row => row.map(c => c ? { note: c.note, velocity: c.velocity } : null)) }));
+    patterns = (data.patterns || []).map(p => ({ id: p.id, name: p.name, cells: tracks.map((t, i) => { const row = (p.cells[i] || []).slice(0, stepsPerPattern).map(copyCell); while (row.length < stepsPerPattern) row.push(null); return row; }) }));
     if (!patterns.length) patterns = [{ id: ++patternIdCounter, name: 'Pattern 1', cells: emptyCells() }];
     activePatternId = patterns.some(p => p.id === data.activePatternId) ? data.activePatternId : patterns[0].id;
     songOrder = (data.songOrder || []).filter(id => patterns.some(p => p.id === id));
@@ -1088,12 +1181,21 @@
   }
 
   function saveDraft() {
+    const state = { version: 1, savedAt: Date.now(), project: serializeProject() };
     try {
-      const state = { version: 1, savedAt: Date.now(), project: serializeProject() };
       localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
       autosaveStatus.textContent = I18N.t('savedJustNowText');
     } catch (err) {
-      autosaveStatus.textContent = I18N.t('autosaveFailedText');
+      // Recordings can be too big for the browser's draft storage: keep everything else.
+      const hasTakes = state.project.tracks.some(t => t.type === 'audio');
+      try {
+        if (!hasTakes) throw err;
+        state.project.tracks = state.project.tracks.map(t => t.type === 'audio' ? Object.assign({}, t, { sampleDataUrl: '' }) : t);
+        localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+        autosaveStatus.textContent = 'Saved, but without your recordings (too big for the browser). Press 💾 Save project to keep them.';
+      } catch (e2) {
+        autosaveStatus.textContent = I18N.t('autosaveFailedText');
+      }
     }
   }
 
@@ -1187,7 +1289,15 @@
       synthBtn.addEventListener('click', () => { pushHistory(); track.type = 'synth'; renderTracksList(); });
       sampleBtn.addEventListener('click', () => { pushHistory(); track.type = 'sample'; renderTracksList(); });
       typeToggle.appendChild(synthBtn); typeToggle.appendChild(sampleBtn);
-      head.appendChild(dot); head.appendChild(nameInput); head.appendChild(typeToggle);
+      head.appendChild(dot); head.appendChild(nameInput);
+      if (track.type === 'audio') {
+        const tag = document.createElement('span');
+        tag.className = 'sample-name'; tag.textContent = '🎙️ ' + (track.sampleBuffer ? track.sampleBuffer.duration.toFixed(1) + ' s' : 'missing');
+        const del = document.createElement('button');
+        del.type = 'button'; del.className = 'track-del'; del.textContent = '🗑'; del.title = 'Delete this recording'; del.setAttribute('aria-label', 'Delete ' + track.name);
+        del.addEventListener('click', () => { pushHistory(); tracks.splice(idx, 1); patterns.forEach(p => p.cells.splice(idx, 1)); renderAll(); });
+        head.appendChild(tag); head.appendChild(del);
+      } else head.appendChild(typeToggle);
       row.appendChild(head);
 
       const controls = document.createElement('div');
@@ -1203,6 +1313,20 @@
         });
         waveSelect.addEventListener('change', () => { pushHistory(); track.wave = waveSelect.value; });
         controls.appendChild(waveSelect);
+      } else if (track.type === 'audio') {
+        // Nudge the take earlier or later if it does not sit in time with the beat.
+        const nLabel = document.createElement('span');
+        nLabel.textContent = 'Timing:';
+        const nSlider = document.createElement('input');
+        nSlider.type = 'range'; nSlider.min = '-250'; nSlider.max = '250'; nSlider.step = '5'; nSlider.value = track.nudge || 0;
+        nSlider.setAttribute('aria-label', 'Move the recording earlier or later (milliseconds)'); nSlider.style.width = '110px';
+        const nOut = document.createElement('output');
+        const nText = () => { const v = track.nudge || 0; nOut.textContent = v === 0 ? 'in time' : (v > 0 ? v + ' ms later' : (-v) + ' ms earlier'); };
+        let nPushed = false;
+        nSlider.addEventListener('pointerdown', () => { nPushed = false; });
+        nSlider.addEventListener('input', () => { if (!nPushed) { pushHistory(); nPushed = true; } track.nudge = parseInt(nSlider.value, 10); nText(); });
+        nText();
+        controls.appendChild(nLabel); controls.appendChild(nSlider); controls.appendChild(nOut);
       } else {
         const uploadWrap = document.createElement('div');
         uploadWrap.className = 'sample-upload-row';
@@ -1222,7 +1346,7 @@
             const buf = await decodeCtx.decodeAudioData(arrayBuffer);
             decodeCtx.close();
             track.sampleBuffer = buf;
-            track.sampleName = file.name;
+            track.sampleName = file.name; track.hit = '';
             track.sampleDataUrl = await fileToDataUrl(file);
             renderTracksList();
           } catch (err) {
@@ -1255,12 +1379,14 @@
         }
       }
 
-      const penLabel = document.createElement('span');
-      penLabel.textContent = I18N.t('penNoteLabel');
-      const penStepper = document.createElement('span');
-      buildNoteStepper(penStepper, () => track.penNote, v => { track.penNote = v; }, null, pushHistory);
-      controls.appendChild(penLabel);
-      controls.appendChild(penStepper);
+      if (track.type !== 'audio') {
+        const penLabel = document.createElement('span');
+        penLabel.textContent = I18N.t('penNoteLabel');
+        const penStepper = document.createElement('span');
+        buildNoteStepper(penStepper, () => track.penNote, v => { track.penNote = v; }, null, pushHistory);
+        controls.appendChild(penLabel);
+        controls.appendChild(penStepper);
+      }
 
       const volLabel = document.createElement('span');
       volLabel.textContent = I18N.t('volLabel');
@@ -1277,7 +1403,7 @@
       panSlider.type = 'range'; panSlider.min = '-1'; panSlider.max = '1'; panSlider.step = '0.1'; panSlider.value = track.pan || 0;
       let panHistoryPushed = false;
       panSlider.addEventListener('pointerdown', () => { panHistoryPushed = false; });
-      panSlider.addEventListener('input', () => { if (!panHistoryPushed) { pushHistory(); panHistoryPushed = true; } track.pan = parseFloat(panSlider.value); });
+      panSlider.addEventListener('input', () => { if (!panHistoryPushed) { pushHistory(); panHistoryPushed = true; } track.pan = parseFloat(panSlider.value); updateLiveChannel(track); });
       controls.appendChild(panLabel); controls.appendChild(panSlider);
 
       const muteLabel = document.createElement('label');
@@ -1289,13 +1415,72 @@
       controls.appendChild(muteLabel);
 
       row.appendChild(controls);
+      row.appendChild(buildFxBox(track));
       tracksList.appendChild(row);
     });
   }
 
+  // ---------- track effects panel ----------
+  const openFx = new Set();
+  const FX_PRESETS = {
+    'Dry': defaultFx(),
+    'Room': { reverb: 0.25, echo: 0, bass: 0, treble: 1, comp: false },
+    'Hall': { reverb: 0.6, echo: 0, bass: -2, treble: 2, comp: false },
+    'Echo': { reverb: 0.15, echo: 0.45, bass: 0, treble: 0, comp: false },
+    'Punchy': { reverb: 0.05, echo: 0, bass: 4, treble: 2, comp: true },
+    'Vocal': { reverb: 0.3, echo: 0.15, bass: -3, treble: 3, comp: true }
+  };
+  function buildFxBox(track) {
+    const box = document.createElement('details');
+    box.className = 'fx-box';
+    box.open = openFx.has(track.id);
+    box.addEventListener('toggle', () => { if (box.open) openFx.add(track.id); else openFx.delete(track.id); });
+    const fx = track.fx;
+    const on = fx.reverb > 0 || fx.echo > 0 || fx.bass !== 0 || fx.treble !== 0 || fx.comp;
+    box.innerHTML = '<summary>🎚️ Effects' + (on ? ' · on' : '') + '</summary>';
+    const presets = document.createElement('div');
+    presets.className = 'fx-presets';
+    Object.keys(FX_PRESETS).forEach(name => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.textContent = name;
+      b.addEventListener('click', () => { pushHistory(); track.fx = Object.assign(defaultFx(), FX_PRESETS[name]); openFx.add(track.id); updateLiveChannel(track); renderTracksList(); });
+      presets.appendChild(b);
+    });
+    box.appendChild(presets);
+    const grid = document.createElement('div');
+    grid.className = 'fx-grid';
+    const sliders = [
+      ['reverb', 'Reverb', 0, 1, 0.05, v => Math.round(v * 100) + '%'],
+      ['echo', 'Echo', 0, 1, 0.05, v => Math.round(v * 100) + '%'],
+      ['bass', 'Bass', -12, 12, 1, v => (v > 0 ? '+' : '') + v + ' dB'],
+      ['treble', 'Treble', -12, 12, 1, v => (v > 0 ? '+' : '') + v + ' dB']
+    ];
+    sliders.forEach(([key, label, min, max, step, fmt]) => {
+      const l = document.createElement('span'); l.textContent = label;
+      const r = document.createElement('input');
+      r.type = 'range'; r.min = min; r.max = max; r.step = step; r.value = fx[key];
+      r.setAttribute('aria-label', label + ' for ' + track.name); r.dataset.fx = key;
+      const o = document.createElement('output'); o.textContent = fmt(fx[key]);
+      let pushed = false;
+      r.addEventListener('pointerdown', () => { pushed = false; });
+      r.addEventListener('input', () => { if (!pushed) { pushHistory(); pushed = true; } fx[key] = parseFloat(r.value); o.textContent = fmt(fx[key]); updateLiveChannel(track); });
+      r.addEventListener('change', () => { pushed = false; scheduleAutosave(); });
+      grid.appendChild(l); grid.appendChild(r); grid.appendChild(o);
+    });
+    box.appendChild(grid);
+    const compLabel = document.createElement('label');
+    compLabel.style.cssText = 'display:inline-flex;align-items:center;gap:4px;margin-top:6px;';
+    const comp = document.createElement('input');
+    comp.type = 'checkbox'; comp.style.width = 'auto'; comp.checked = fx.comp; comp.dataset.fx = 'comp';
+    comp.addEventListener('change', () => { pushHistory(); fx.comp = comp.checked; updateLiveChannel(track); });
+    compLabel.appendChild(comp); compLabel.appendChild(document.createTextNode('Compressor (evens out loud and quiet, adds punch)'));
+    box.appendChild(compLabel);
+    return box;
+  }
+
   async function setBuiltIn(track, name) {
     const buf = await MigaMusic.hit(name);
-    track.type = 'sample'; track.sampleBuffer = buf; track.sampleName = MigaMusic.HITS[name] + ' (built-in)'; track.baseNote = 0;
+    track.type = 'sample'; track.sampleBuffer = buf; track.sampleName = MigaMusic.HITS[name] + ' (built-in)'; track.baseNote = 0; track.hit = name;
     const blob = MigaMusic.toWav(buf);
     track.sampleDataUrl = await new Promise(ok => { const r = new FileReader(); r.onload = () => ok(r.result); r.readAsDataURL(blob); });
   }
@@ -1316,7 +1501,7 @@
       [[0, 0], [4, 4], [8, 7], [12, 4]].forEach(([st, n]) => { cells[5][st] = { note: n, velocity: 0.7 }; });
       [[0, 12], [3, 14], [6, 16], [10, 19], [12, 16]].forEach(([st, n]) => { cells[6][st] = { note: n, velocity: 0.75 }; });
       const verse = { id: ++patternIdCounter, name: 'Example beat', cells };
-      const fill = { id: ++patternIdCounter, name: 'Example fill', cells: cells.map((r, i) => i === 1 ? row('....x.......x.xx', 0) : i === 6 ? r.map(c => c ? { note: c.note + 2, velocity: c.velocity } : null) : r.map(c => c ? Object.assign({}, c) : null)) };
+      const fill = { id: ++patternIdCounter, name: 'Example fill', cells: cells.map((r, i) => i === 1 ? row('....x.......x.xx', 0) : i === 6 ? r.map(c => c ? { note: c.note + 2, velocity: c.velocity } : null) : r.map(copyCell)) };
       patterns = [verse, fill]; activePatternId = verse.id; songOrder = [verse.id, verse.id, verse.id, fill.id];
       renderAll(); scheduleAutosave();
       showTrackerSuccess('Example beat loaded: drums, bass, chords and a melody at 96 BPM. Press ▶ Play song, click squares to change it, or press and hold (right-click on a computer) a square to change its note.');
@@ -1348,7 +1533,7 @@
     const src = activePattern();
     if (!src) return;
     pushHistory();
-    const copy = { id: ++patternIdCounter, name: src.name + ' ' + I18N.t('copySuffix'), cells: src.cells.map(row => row.map(c => c ? Object.assign({}, c) : null)) };
+    const copy = { id: ++patternIdCounter, name: src.name + ' ' + I18N.t('copySuffix'), cells: src.cells.map(row => row.map(copyCell)) };
     patterns.push(copy);
     activePatternId = copy.id;
     renderPatternTabs(); renderStepGrid();
@@ -1405,14 +1590,47 @@
     renderSongList();
   });
 
-  // ---------- step grid ----------
+  // ---------- step grid + piano roll ----------
   let popoverTarget = null; // {trackIdx, step}
+  let viewMode = 'steps';
+  let rollTrackId = null; // the track shown in the piano roll and played by a MIDI keyboard
+  let rollScrolled = false;
+  let stepCursor = 0; // where the next MIDI-keyboard note goes while stopped
+  let midiOn = false;
+  let lastPlayingStep = -1;
 
   function closePopover() { cellPopover.classList.remove('show'); popoverTarget = null; }
+  function trackColor(idx) { return TRACK_COLORS[idx % TRACK_COLORS.length]; }
+  function rollTrack() {
+    let t = tracks.find(x => x.id === rollTrackId && x.type !== 'audio');
+    if (!t) { t = tracks.find(x => x.type === 'synth') || tracks.find(x => x.type !== 'audio'); rollTrackId = t ? t.id : null; }
+    return t || null;
+  }
+  function addNote(pattern, ti, st, n, vel, len) {
+    const cur = pattern.cells[ti][st];
+    if (!cur) { const c = { note: n, velocity: vel }; if (len > 1) c.len = len; pattern.cells[ti][st] = c; return c; }
+    if (!cellNotes(cur).includes(n)) (cur.chord = cur.chord || []).push(n);
+    return cur;
+  }
+  function removeNote(pattern, ti, st, n) {
+    const cur = pattern.cells[ti][st];
+    if (!cur) return;
+    if (cur.note === n) {
+      if (cur.chord && cur.chord.length) { cur.note = cur.chord.shift(); if (!cur.chord.length) delete cur.chord; } else pattern.cells[ti][st] = null;
+    } else if (cur.chord) { cur.chord = cur.chord.filter(x => x !== n); if (!cur.chord.length) delete cur.chord; }
+  }
 
+  // Draws whichever editor is showing (step grid or piano roll).
   function renderStepGrid() {
+    lastPlayingStep = -1;
+    renderRollTrackSelect();
+    if (viewMode === 'roll') drawPianoRoll(); else drawStepGrid();
+  }
+
+  function drawStepGrid() {
     const pattern = activePattern();
     if (!pattern) return;
+    const selTrack = rollTrack();
     stepGridEl.style.gridTemplateColumns = '90px repeat(' + stepsPerPattern + ', 24px)';
     stepGridEl.innerHTML = '';
 
@@ -1430,22 +1648,36 @@
 
     tracks.forEach((track, trackIdx) => {
       const labelEl = document.createElement('div');
-      labelEl.className = 'grid-row-label';
+      labelEl.className = 'grid-row-label' + (track === selTrack ? ' sel' : '');
       labelEl.textContent = track.name + (track.muted ? ' (' + I18N.t('mutedSuffix') + ')' : '');
       labelEl.style.opacity = track.muted ? '0.4' : '1';
       stepGridEl.appendChild(labelEl);
 
+      if (track.type === 'audio') {
+        const lane = document.createElement('div');
+        lane.className = 'audio-lane';
+        lane.style.gridColumn = 'span ' + stepsPerPattern;
+        lane.textContent = track.sampleBuffer ? '🎙️ Recording, ' + track.sampleBuffer.duration.toFixed(1) + ' s · plays from the start of the song' : '🎙️ Recording missing: load the project file that has it';
+        stepGridEl.appendChild(lane);
+        return;
+      }
+      labelEl.title = 'Edit this track in the piano roll and play it with a MIDI keyboard';
+      labelEl.addEventListener('click', () => { rollTrackId = track.id; rollScrolled = false; renderStepGrid(); });
+
       for (let s = 0; s < stepsPerPattern; s++) {
         const cell = document.createElement('div');
         cell.className = 'step-cell' + (s % 4 === 0 ? ' beat-start' : '');
+        cell.dataset.step = s;
+        if (midiOn && !isPlaying && track === selTrack && s === stepCursor) cell.classList.add('cursor');
         const cellData = pattern.cells[trackIdx][s];
         if (cellData) {
           cell.classList.add('active');
-          cell.style.background = TRACK_COLORS[trackIdx % TRACK_COLORS.length];
+          cell.style.background = trackColor(trackIdx);
           const velBar = document.createElement('div');
           velBar.className = 'vel-bar';
           velBar.style.height = Math.round(cellData.velocity * 100) + '%';
           cell.appendChild(velBar);
+          cell.title = cellNotes(cellData).map(noteName).join(' + ') + (cellData.len > 1 ? ' · ' + cellData.len + ' steps long' : '');
         }
         // Press and hold opens the note/velocity editor on phones and tablets (no right-click there).
         let holdTimer = null, held = false;
@@ -1476,6 +1708,117 @@
       }
     });
   }
+
+  function renderRollTrackSelect() {
+    const t = rollTrack();
+    rollTrackSelect.innerHTML = '';
+    tracks.forEach(x => {
+      if (x.type === 'audio') return;
+      const o = document.createElement('option');
+      o.value = x.id; o.textContent = x.name; o.selected = !!t && x.id === t.id;
+      rollTrackSelect.appendChild(o);
+    });
+  }
+  rollTrackSelect.addEventListener('change', () => { rollTrackId = parseInt(rollTrackSelect.value, 10); rollScrolled = false; renderStepGrid(); });
+
+  const ROLL_TOP = 26, ROLL_BOTTOM = -24; // D6 down to C2
+  const BLACK_KEYS = [1, 3, 6, 8, 10];
+  function drawPianoRoll() {
+    const pattern = activePattern(), track = rollTrack();
+    if (!pattern || !track) { pianoRollEl.innerHTML = ''; return; }
+    const ti = tracks.indexOf(track), color = trackColor(ti), keep = pianoRollEl.scrollTop;
+    pianoRollEl.style.gridTemplateColumns = '44px repeat(' + stepsPerPattern + ', 24px)';
+    const frag = document.createDocumentFragment();
+    for (let n = ROLL_TOP; n >= ROLL_BOTTOM; n--) {
+      const pc = ((n % 12) + 12) % 12, black = BLACK_KEYS.includes(pc);
+      const key = document.createElement('div');
+      key.className = 'roll-key' + (black ? ' black' : '');
+      key.textContent = noteName(n); key.dataset.note = n;
+      frag.appendChild(key);
+      for (let st = 0; st < stepsPerPattern; st++) {
+        const c = document.createElement('div');
+        c.className = 'roll-cell' + (black ? ' black-row' : '') + (st % 4 === 0 ? ' beat-start' : '') + (pc === 0 ? ' c-row' : '');
+        c.dataset.step = st; c.dataset.note = n;
+        if (midiOn && !isPlaying && st === stepCursor) c.classList.add('cursor');
+        const cell = pattern.cells[ti][st];
+        if (cell && cellNotes(cell).includes(n)) {
+          const len = cell.len || 1, nd = document.createElement('div');
+          nd.className = 'roll-note';
+          nd.style.width = (len * 25 - 1) + 'px';
+          nd.style.background = color;
+          nd.style.opacity = String(0.45 + 0.55 * cell.velocity);
+          nd.dataset.step = st; nd.dataset.note = n;
+          nd.title = noteName(n) + (len > 1 ? ', ' + len + ' steps' : '') + ' · click to remove, drag sideways to change the length';
+          c.appendChild(nd);
+        }
+        frag.appendChild(c);
+      }
+    }
+    pianoRollEl.innerHTML = '';
+    pianoRollEl.appendChild(frag);
+    if (!rollScrolled) {
+      const notes = [];
+      pattern.cells[ti].forEach(c => notes.push.apply(notes, cellNotes(c)));
+      const center = notes.length ? (Math.max.apply(null, notes) + Math.min.apply(null, notes)) / 2 : track.penNote;
+      pianoRollEl.scrollTop = Math.max(0, (ROLL_TOP - center) * 15 - 200);
+      rollScrolled = true;
+    } else pianoRollEl.scrollTop = keep;
+  }
+
+  // Piano roll: click an empty square to add a note, click a note to remove it, drag a note to resize it.
+  let rollDrag = null;
+  pianoRollEl.addEventListener('click', (e) => {
+    const track = rollTrack();
+    if (!track) return;
+    const key = e.target.closest('.roll-key');
+    if (key) { previewNote(track, parseInt(key.dataset.note, 10)); return; }
+    if (e.target.closest('.roll-note')) return;
+    const c = e.target.closest('.roll-cell');
+    if (!c) return;
+    const st = parseInt(c.dataset.step, 10), n = parseInt(c.dataset.note, 10);
+    pushHistory();
+    addNote(activePattern(), tracks.indexOf(track), st, n, 0.85, track.type === 'synth' ? parseInt(rollLenSelect.value, 10) : 1);
+    previewNote(track, n);
+    renderStepGrid();
+  });
+  pianoRollEl.addEventListener('pointerdown', (e) => {
+    const noteEl = e.target.closest('.roll-note'), track = rollTrack();
+    if (!noteEl || !track) return;
+    const st = parseInt(noteEl.dataset.step, 10), cell = activePattern().cells[tracks.indexOf(track)][st];
+    if (!cell) return;
+    rollDrag = { el: noteEl, st: st, note: parseInt(noteEl.dataset.note, 10), cell: cell, x0: e.clientX, len0: cell.len || 1, moved: false };
+    try { noteEl.setPointerCapture(e.pointerId); } catch (err) {}
+    e.preventDefault();
+  });
+  pianoRollEl.addEventListener('pointermove', (e) => {
+    if (!rollDrag) return;
+    const len = Math.max(1, Math.min(64, rollDrag.len0 + Math.round((e.clientX - rollDrag.x0) / 25)));
+    if (len === (rollDrag.cell.len || 1)) return;
+    if (!rollDrag.moved) { pushHistory(); rollDrag.moved = true; }
+    if (len > 1) rollDrag.cell.len = len; else delete rollDrag.cell.len;
+    rollDrag.el.style.width = (len * 25 - 1) + 'px';
+  });
+  pianoRollEl.addEventListener('pointerup', () => {
+    if (!rollDrag) return;
+    const d = rollDrag; rollDrag = null;
+    if (!d.moved) { pushHistory(); removeNote(activePattern(), tracks.indexOf(rollTrack()), d.st, d.note); }
+    renderStepGrid(); scheduleAutosave();
+  });
+  pianoRollEl.addEventListener('pointercancel', () => { rollDrag = null; renderStepGrid(); });
+
+  function setView(v) {
+    viewMode = v;
+    viewStepsBtn.classList.toggle('active', v === 'steps');
+    viewRollBtn.classList.toggle('active', v === 'roll');
+    stepGridEl.hidden = v === 'roll';
+    pianoRollEl.hidden = v !== 'roll';
+    document.getElementById('rollHint').hidden = v !== 'roll';
+    document.getElementById('rollLenWrap').hidden = v !== 'roll';
+    rollScrolled = false;
+    renderStepGrid();
+  }
+  viewStepsBtn.addEventListener('click', () => setView('steps'));
+  viewRollBtn.addEventListener('click', () => setView('roll'));
 
   function openPopover(evt, trackIdx, step) {
     const pattern = activePattern();
@@ -1510,51 +1853,121 @@
     renderStepGrid();
   }
 
-  // ---------- audio scheduling (shared by preview + export) ----------
+  // ---------- mixer: a channel strip per track (EQ, compressor, pan, reverb and echo sends) ----------
   function stepDurationSec() {
     const bpm = Math.min(240, Math.max(40, parseInt(trackerBpmInput.value, 10) || 120));
     return (60 / bpm) / 4; // steps are 16th notes
   }
 
-  function panNodeFor(ctx, track) {
-    if (ctx.createStereoPanner) {
-      const panner = ctx.createStereoPanner();
-      panner.pan.value = track.pan || 0;
-      return panner;
-    }
-    return null;
+  function makeImpulse(ctx, secs) {
+    const len = Math.round(ctx.sampleRate * secs), buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    let seed = 12345; // fixed noise, so the same song always renders the same file
+    const rnd = () => { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x3fffffff - 1; };
+    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = rnd() * Math.pow(1 - i / len, 3); }
+    return buf;
+  }
+  function buildMixer(ctx, dest) {
+    const m = { ctx: ctx, dest: dest, ch: new Map() };
+    m.reverb = ctx.createConvolver();
+    m.reverb.buffer = makeImpulse(ctx, 2.6);
+    m.reverb.connect(dest);
+    m.delay = ctx.createDelay(2.5);
+    m.delay.delayTime.value = Math.min(2.4, stepDurationSec() * 3); // a dotted eighth, in time with the song
+    m.delayFb = ctx.createGain(); m.delayFb.gain.value = 0.38;
+    m.delayTone = ctx.createBiquadFilter(); m.delayTone.type = 'lowpass'; m.delayTone.frequency.value = 3200;
+    m.delay.connect(m.delayTone); m.delayTone.connect(m.delayFb); m.delayFb.connect(m.delay); m.delayTone.connect(dest);
+    return m;
+  }
+  function channelFor(m, track) {
+    let c = m.ch.get(track.id);
+    if (c) return c;
+    const ctx = m.ctx;
+    c = {
+      input: ctx.createGain(), low: ctx.createBiquadFilter(), high: ctx.createBiquadFilter(), comp: ctx.createDynamicsCompressor(),
+      makeup: ctx.createGain(), pan: ctx.createStereoPanner ? ctx.createStereoPanner() : ctx.createGain(), rev: ctx.createGain(), echo: ctx.createGain()
+    };
+    c.low.type = 'lowshelf'; c.low.frequency.value = 220;
+    c.high.type = 'highshelf'; c.high.frequency.value = 3500;
+    c.comp.knee.value = 6; c.comp.attack.value = 0.005; c.comp.release.value = 0.15;
+    c.input.connect(c.low).connect(c.high).connect(c.comp).connect(c.makeup).connect(c.pan).connect(m.dest);
+    c.pan.connect(c.rev).connect(m.reverb);
+    c.pan.connect(c.echo).connect(m.delay);
+    m.ch.set(track.id, c);
+    applyChannel(c, track);
+    return c;
+  }
+  function applyChannel(c, track) {
+    const fx = track.fx || defaultFx();
+    c.low.gain.value = fx.bass;
+    c.high.gain.value = fx.treble;
+    // Off = ratio 1 (no change). The compressor adds its own make-up gain, so the extra gain is a trim.
+    c.comp.threshold.value = fx.comp ? -18 : 0;
+    c.comp.ratio.value = fx.comp ? 4 : 1;
+    c.makeup.gain.value = fx.comp ? 0.6 : 1;
+    if (c.pan.pan) c.pan.pan.value = track.pan || 0;
+    c.rev.gain.value = fx.reverb * 0.7;
+    c.echo.gain.value = fx.echo * 0.55;
+  }
+  function updateLiveChannel(track) { if (previewMixer) applyChannel(channelFor(previewMixer, track), track); }
+
+  function triggerStep(ctx, mixer, track, cellData, when) {
+    if (!cellData || track.muted || track.type === 'audio') return;
+    const out = channelFor(mixer, track).input;
+    const notes = cellNotes(cellData), dur = stepDurationSec() * (cellData.len || 1) * 0.92;
+    const voice = notes.length > 1 ? 1 / Math.sqrt(notes.length) : 1;
+    notes.forEach(note => {
+      if (track.type === 'sample' && track.sampleBuffer) {
+        const src = ctx.createBufferSource();
+        src.buffer = track.sampleBuffer;
+        src.playbackRate.value = Math.pow(2, (note - track.baseNote) / 12);
+        const gain = ctx.createGain();
+        gain.gain.value = cellData.velocity * track.volume * voice;
+        src.connect(gain).connect(out);
+        src.start(when);
+        if (ctx === previewCtx) keepLive(src);
+      } else if (track.type === 'synth') {
+        const osc = ctx.createOscillator();
+        osc.type = track.wave;
+        osc.frequency.value = noteFreq(note);
+        const gain = ctx.createGain();
+        const peak = cellData.velocity * track.volume * 0.5 * voice;
+        const attack = Math.min(0.01, dur * 0.2);
+        const release = Math.min(dur * 0.5, 0.12);
+        gain.gain.setValueAtTime(0, when);
+        gain.gain.linearRampToValueAtTime(peak, when + attack);
+        gain.gain.setValueAtTime(peak, Math.max(when + attack, when + dur - release));
+        gain.gain.linearRampToValueAtTime(0, when + dur);
+        osc.connect(gain).connect(out);
+        osc.start(when);
+        osc.stop(when + dur + 0.02);
+        if (ctx === previewCtx) keepLive(osc);
+      }
+    });
   }
 
-  function triggerStep(ctx, dest, track, cellData, when) {
-    if (!cellData || track.muted) return;
-    const dur = stepDurationSec() * 0.92;
-    const panner = panNodeFor(ctx, track);
-    const output = panner ? (panner.connect(dest), panner) : dest;
-    if (track.type === 'sample' && track.sampleBuffer) {
-      const src = ctx.createBufferSource();
-      src.buffer = track.sampleBuffer;
-      src.playbackRate.value = Math.pow(2, (cellData.note - track.baseNote) / 12);
-      const gain = ctx.createGain();
-      gain.gain.value = cellData.velocity * track.volume;
-      src.connect(gain).connect(output);
-      src.start(when);
-      if (ctx === previewCtx) { liveSources.push(src); src.onended = () => { liveSources = liveSources.filter(x => x !== src); }; }
-    } else if (track.type === 'synth') {
-      const osc = ctx.createOscillator();
-      osc.type = track.wave;
-      osc.frequency.value = noteFreq(cellData.note);
-      const gain = ctx.createGain();
-      const peak = cellData.velocity * track.volume * 0.5;
-      const attack = Math.min(0.01, dur * 0.2);
-      const release = Math.min(dur * 0.5, 0.12);
-      gain.gain.setValueAtTime(0, when);
-      gain.gain.linearRampToValueAtTime(peak, when + attack);
-      gain.gain.setValueAtTime(peak, Math.max(when + attack, when + dur - release));
-      gain.gain.linearRampToValueAtTime(0, when + dur);
-      osc.connect(gain).connect(output);
-      osc.start(when);
-      osc.stop(when + dur + 0.02);
-    }
+  // A recorded take plays from the start of the song (moved by its Timing slider).
+  function playTake(ctx, mixer, track, songStart, stopAt) {
+    if (track.type !== 'audio' || track.muted || !track.sampleBuffer) return null;
+    const shift = (track.nudge || 0) / 1000, when = songStart + Math.max(0, shift), offset = Math.max(0, -shift);
+    if (offset >= track.sampleBuffer.duration) return null;
+    const src = ctx.createBufferSource();
+    src.buffer = track.sampleBuffer;
+    const g = ctx.createGain();
+    g.gain.value = track.volume;
+    src.connect(g).connect(channelFor(mixer, track).input);
+    src.start(when, offset);
+    if (stopAt) src.stop(Math.max(when + 0.01, stopAt));
+    return src;
+  }
+
+  function clickAt(ctx, when, accent) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.frequency.value = accent ? 1760 : 1175;
+    g.gain.setValueAtTime(0.0001, when);
+    g.gain.exponentialRampToValueAtTime(accent ? 0.45 : 0.25, when + 0.002);
+    g.gain.exponentialRampToValueAtTime(0.0001, when + 0.05);
+    o.connect(g).connect(ctx.destination);
+    o.start(when); o.stop(when + 0.06);
   }
 
   function flattenedSong() {
@@ -1563,7 +1976,7 @@
   }
 
   // ---------- real-time preview ----------
-  let previewCtx = null, previewBus = null, liveSources = [];
+  let previewCtx = null, previewBus = null, previewMixer = null, liveSources = [];
   let schedulerTimer = null;
   let isPlaying = false;
   let songSteps = []; // flattened {pattern, stepIndexInPattern}
@@ -1571,10 +1984,26 @@
   let nextStepTime = 0;
   const SCHEDULE_AHEAD = 0.12;
   const LOOKAHEAD_MS = 25;
-  let scheduledMarks = []; // {time, trackIdx, step} for UI highlight cleanup (not required but kept simple)
   let highlightRaf = null;
   let stepStartTimes = []; // parallel to songSteps, the absolute audioCtx time each step is scheduled to start
-  let loopBase = 0;
+  let playOnce = false, clickOn = false;
+
+  function keepLive(src) { liveSources.push(src); src.onended = () => { liveSources = liveSources.filter(x => x !== src); }; }
+  function ensurePreview() {
+    if (!previewCtx) {
+      previewCtx = new (window.AudioContext || window.webkitAudioContext)();
+      previewBus = previewCtx.createDynamicsCompressor(); previewBus.threshold.value = -10; previewBus.ratio.value = 12;
+      previewBus.connect(previewCtx.destination);
+    }
+    if (!previewMixer) previewMixer = buildMixer(previewCtx, previewBus);
+    if (previewCtx.state === 'suspended') previewCtx.resume();
+    return previewCtx;
+  }
+  function previewNote(track, note) {
+    if (!track) return;
+    const ctx = ensurePreview();
+    triggerStep(ctx, previewMixer, track, { note: note, velocity: 0.85 }, ctx.currentTime + 0.01);
+  }
 
   function buildSongSteps() {
     const songPatterns = flattenedSong();
@@ -1587,72 +2016,122 @@
 
   function schedulerTick() {
     while (nextStepTime < previewCtx.currentTime + SCHEDULE_AHEAD) {
-      const entry = songSteps[songPos % songSteps.length];
-      stepStartTimes[songPos % songSteps.length] = nextStepTime;
+      if (playOnce && songPos >= songSteps.length) return;
+      const idx = songPos % songSteps.length, entry = songSteps[idx];
+      if (idx === 0) {
+        const loopEnd = nextStepTime + songSteps.length * stepDurationSec();
+        tracks.forEach(t => { const src = playTake(previewCtx, previewMixer, t, nextStepTime, playOnce ? 0 : loopEnd); if (src) keepLive(src); });
+      }
+      stepStartTimes[idx] = nextStepTime;
+      if (clickOn && entry.step % 4 === 0) clickAt(previewCtx, nextStepTime, entry.step % 16 === 0);
       tracks.forEach((track, trackIdx) => {
-        const cellData = entry.pattern.cells[trackIdx][entry.step];
-        if (cellData) triggerStep(previewCtx, previewBus, track, cellData, nextStepTime);
+        const row = entry.pattern.cells[trackIdx], cellData = row && row[entry.step];
+        if (cellData) triggerStep(previewCtx, previewMixer, track, cellData, nextStepTime);
       });
       nextStepTime += stepDurationSec();
       songPos++;
     }
   }
 
+  // Index into songSteps of the step sounding now (or the nearest one, for MIDI notes).
+  function currentSongIndex(slack) {
+    const now = previewCtx.currentTime + (slack || 0);
+    let best = -1, bestT = -Infinity;
+    for (let i = 0; i < stepStartTimes.length; i++) {
+      const t = stepStartTimes[i];
+      if (t !== undefined && t <= now && t > bestT) { best = i; bestT = t; }
+    }
+    return best;
+  }
+
   function highlightLoop() {
     if (!isPlaying) return;
-    const now = previewCtx.currentTime;
-    let currentIdx = -1;
-    for (let i = 0; i < stepStartTimes.length; i++) {
-      if (stepStartTimes[i] !== undefined && stepStartTimes[i] <= now) currentIdx = i;
+    const idx = currentSongIndex(0), entry = idx >= 0 ? songSteps[idx] : null;
+    const step = entry && entry.pattern.id === activePatternId ? entry.step : -1;
+    if (step !== lastPlayingStep) {
+      document.querySelectorAll('.step-cell.playing, .roll-cell.playing').forEach(el => el.classList.remove('playing'));
+      if (step >= 0) (viewMode === 'roll' ? pianoRollEl : stepGridEl).querySelectorAll('.step-cell[data-step="' + step + '"], .roll-cell[data-step="' + step + '"]').forEach(el => el.classList.add('playing'));
+      lastPlayingStep = step;
     }
-    document.querySelectorAll('.step-cell.playing').forEach(el => el.classList.remove('playing'));
-    if (currentIdx >= 0 && songSteps[currentIdx % songSteps.length]) {
-      const entry = songSteps[currentIdx % songSteps.length];
-      if (entry.pattern.id === activePatternId) {
-        const cells = stepGridEl.querySelectorAll('.step-cell');
-        // cells are laid out row-major per track after the header row; compute index
-        tracks.forEach((track, trackIdx) => {
-          const cellIndex = trackIdx * stepsPerPattern + entry.step;
-          const el = cells[cellIndex];
-          if (el) el.classList.add('playing');
-        });
-      }
-    }
+    if (playOnce && !rec && songPos >= songSteps.length && previewCtx.currentTime > nextStepTime + 0.3) { stopPlayback(); return; }
     highlightRaf = requestAnimationFrame(highlightLoop);
+  }
+
+  function startPlayback(opts) {
+    opts = opts || {};
+    songSteps = buildSongSteps();
+    ensurePreview();
+    previewMixer.delay.delayTime.value = Math.min(2.4, stepDurationSec() * 3);
+    tracks.forEach(updateLiveChannel);
+    songPos = 0;
+    nextStepTime = opts.at || previewCtx.currentTime + 0.05;
+    stepStartTimes = [];
+    playOnce = !!opts.once; clickOn = !!opts.click;
+    isPlaying = true;
+    lastPlayingStep = -1;
+    trackerStatus.textContent = I18N.t('statusPlaying');
+    playSongBtn.disabled = true;
+    stopBtn.disabled = false;
+    schedulerTimer = setInterval(schedulerTick, LOOKAHEAD_MS);
+    schedulerTick();
+    highlightLoop();
+    renderStepGrid();
   }
 
   playSongBtn.addEventListener('click', function () {
     clearTrackerError();
     if (isPlaying) return;
-    songSteps = buildSongSteps();
-    if (!songSteps.length) { showTrackerError(I18N.t('errorNothingToPlay')); return; }
-    if (!songSteps.some(st => st.pattern.cells.some((r, ti) => r[st.step] && !tracks[ti].muted))) { showTrackerError('Nothing to hear yet: click some squares in the grid, or press 🥁 Load an example beat.'); return; }
-    if (!previewCtx) { previewCtx = new (window.AudioContext || window.webkitAudioContext)(); previewBus = previewCtx.createDynamicsCompressor(); previewBus.threshold.value = -10; previewBus.ratio.value = 12; previewBus.connect(previewCtx.destination); }
-    if (previewCtx.state === 'suspended') previewCtx.resume();
-    songPos = 0;
-    nextStepTime = previewCtx.currentTime + 0.05;
-    stepStartTimes = [];
-    isPlaying = true;
-    trackerStatus.textContent = I18N.t('statusPlaying');
-    playSongBtn.disabled = true;
-    stopBtn.disabled = false;
-    schedulerTimer = setInterval(schedulerTick, LOOKAHEAD_MS);
-    highlightLoop();
+    const steps = buildSongSteps();
+    if (!steps.length) { showTrackerError(I18N.t('errorNothingToPlay')); return; }
+    const hasTakes = tracks.some(t => t.type === 'audio' && !t.muted && t.sampleBuffer);
+    if (!hasTakes && !steps.some(st => st.pattern.cells.some((r, ti) => r[st.step] && !tracks[ti].muted))) { showTrackerError('Nothing to hear yet: click some squares in the grid, or press 🥁 Load an example beat.'); return; }
+    startPlayback();
   });
 
   function stopPlayback() {
     isPlaying = false;
+    playOnce = false; clickOn = false;
     liveSources.forEach(src => { try { src.stop(); } catch (e) {} }); liveSources = [];
     if (schedulerTimer) { clearInterval(schedulerTimer); schedulerTimer = null; }
     if (highlightRaf) { cancelAnimationFrame(highlightRaf); highlightRaf = null; }
-    document.querySelectorAll('.step-cell.playing').forEach(el => el.classList.remove('playing'));
+    document.querySelectorAll('.step-cell.playing, .roll-cell.playing').forEach(el => el.classList.remove('playing'));
     trackerStatus.textContent = I18N.t('statusStopped');
     playSongBtn.disabled = false;
     stopBtn.disabled = true;
+    if (midiOn) renderStepGrid();
   }
-  stopBtn.addEventListener('click', stopPlayback);
+  stopBtn.addEventListener('click', () => { if (rec) finishRecording(true); else stopPlayback(); });
 
-  // ---------- export to WAV ----------
+  // ---------- export to WAV (whole song, and one file per track for stems) ----------
+  async function renderSong(onlyId) {
+    const songPatterns = flattenedSong();
+    const stepDur = stepDurationSec(), songLen = songPatterns.length * stepsPerPattern * stepDur;
+    const used = tracks.filter(t => onlyId == null || t.id === onlyId);
+    const wet = used.some(t => !t.muted && (t.fx.reverb > 0 || t.fx.echo > 0));
+    const total = songLen + (wet ? 3 : 1); // tail for release, reverb and echo
+    const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const ctx = new AC(2, Math.ceil(44100 * total), 44100);
+    const master = ctx.createGain();
+    master.gain.value = 0.9;
+    if (onlyId == null) { const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4; master.connect(comp).connect(ctx.destination); }
+    else master.connect(ctx.destination);
+    const mixer = buildMixer(ctx, master);
+    used.forEach(t => playTake(ctx, mixer, t, 0, songLen + 1));
+    let t = 0;
+    songPatterns.forEach(pattern => {
+      for (let s = 0; s < stepsPerPattern; s++) {
+        tracks.forEach((track, trackIdx) => {
+          if (onlyId != null && track.id !== onlyId) return;
+          const cellData = pattern.cells[trackIdx][s];
+          if (cellData) triggerStep(ctx, mixer, track, cellData, t);
+        });
+        t += stepDur;
+      }
+    });
+    return ctx.startRendering();
+  }
+  function scaleBuffer(buf, g) { for (let c = 0; c < buf.numberOfChannels; c++) { const d = buf.getChannelData(c); for (let k = 0; k < d.length; k++) d[k] *= g; } }
+
   exportWavBtn.addEventListener('click', async function () {
     clearTrackerError();
     trackerSuccessBox.classList.remove('show');
@@ -1662,38 +2141,21 @@
       showTrackerError(I18N.t('errorNoAudioSupport'));
       return;
     }
-    const stepDur = stepDurationSec();
-    const totalSteps = songPatterns.length * stepsPerPattern;
-    const totalDuration = totalSteps * stepDur + 1.0; // tail for release/sample ring-out
-
     exportWavBtn.disabled = true;
     exportWavBtn.textContent = I18N.t('renderingLabel');
     try {
-      const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
-      const ctx = new AC(2, Math.ceil(44100 * totalDuration), 44100);
-      const master = ctx.createGain();
-      master.gain.value = 0.9;
-      const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4;
-      master.connect(comp).connect(ctx.destination);
-
-      let t = 0;
-      songPatterns.forEach(pattern => {
-        for (let s = 0; s < stepsPerPattern; s++) {
-          tracks.forEach((track, trackIdx) => {
-            const cellData = pattern.cells[trackIdx][s];
-            if (cellData) triggerStep(ctx, master, track, cellData, t);
-          });
-          t += stepDur;
-        }
-      });
-
-      const rendered = await ctx.startRendering();
+      const rendered = await renderSong(null);
       // Level it and catch any peaks, so many tracks playing at once cannot distort the file.
-      const g = MigaMusic.loudGain(rendered, -16); for (let c = 0; c < rendered.numberOfChannels; c++) { const d = rendered.getChannelData(c); for (let k = 0; k < d.length; k++) d[k] *= g; }
+      const g = MigaMusic.loudGain(rendered, -16); scaleBuffer(rendered, g);
       MigaMusic.limit(rendered, 0.89);
-      await window.MusicFinisher.load(rendered, { title: 'Beat maker song', source: 'free' });
-      const patternKey = songPatterns.length === 1 ? 'exportedPatternOne' : 'exportedPatternsMany';
-      showTrackerSuccess('Your song (' + Math.round(totalDuration) + ' s, ' + songPatterns.length + ' pattern' + (songPatterns.length === 1 ? '' : 's') + ') is ready below in Finish & use: listen, trim, and download WAV or MP3.');
+      const stemTracks = tracks.filter((t, ti) => !t.muted && (t.type === 'audio' ? !!t.sampleBuffer : songPatterns.some(p => p.cells[ti].some(Boolean))));
+      const stems = stemTracks.length > 1 ? async () => {
+        const out = [];
+        for (const tr of stemTracks) { const b = await renderSong(tr.id); scaleBuffer(b, g); out.push({ name: tr.name, buffer: b }); }
+        return out;
+      } : null;
+      await window.MusicFinisher.load(rendered, { title: 'Beat maker song', source: 'free', stems: stems, stemsLabel: stemTracks.length + ' tracks, one WAV each' });
+      showTrackerSuccess('Your song (' + Math.round(rendered.duration) + ' s, ' + songPatterns.length + ' pattern' + (songPatterns.length === 1 ? '' : 's') + ') is ready below in Finish & use: listen, trim, and download WAV, MP3 or stems (one file per track).');
     } catch (err) {
       showTrackerError(I18N.t('errorCouldNotExport') + ' ' + err.message);
     } finally {
@@ -1701,6 +2163,331 @@
       exportWavBtn.textContent = '✂️ Finish & download song';
     }
   });
+
+  // ---------- record a take from the microphone ----------
+  // An AudioWorklet hands over the microphone samples with the exact audio-clock time they arrived,
+  // so the take lines up with the beat that was playing.
+  const CAPTURE_CODE = "registerProcessor('miga-capture', class extends AudioWorkletProcessor { constructor() { super(); this.buf = new Float32Array(2048); this.n = 0; this.t = 0; } process(inputs) { const ch = inputs[0] && inputs[0][0]; if (ch) { if (this.n === 0) this.t = currentTime; this.buf.set(ch, this.n); this.n += ch.length; if (this.n >= 2048) { this.port.postMessage({ t: this.t, d: this.buf.slice(0, this.n) }); this.n = 0; } } return true; } });";
+  async function makeCapture(ctx, source, onChunk) {
+    const mute = ctx.createGain();
+    mute.gain.value = 0;
+    mute.connect(ctx.destination);
+    if (ctx.audioWorklet && window.AudioWorkletNode) {
+      try {
+        if (!ctx.__migaCapture) { const url = URL.createObjectURL(new Blob([CAPTURE_CODE], { type: 'text/javascript' })); await ctx.audioWorklet.addModule(url); ctx.__migaCapture = true; }
+        const node = new AudioWorkletNode(ctx, 'miga-capture', { numberOfInputs: 1, numberOfOutputs: 1, channelCount: 1, channelCountMode: 'explicit' });
+        node.port.onmessage = e => onChunk(e.data.t, e.data.d);
+        source.connect(node); node.connect(mute);
+        return () => { node.port.onmessage = null; try { source.disconnect(); node.disconnect(); mute.disconnect(); } catch (e) {} };
+      } catch (err) { /* older browser: fall back below */ }
+    }
+    const sp = ctx.createScriptProcessor(4096, 1, 1);
+    sp.onaudioprocess = e => onChunk(ctx.currentTime - 4096 / ctx.sampleRate, e.inputBuffer.getChannelData(0).slice(0));
+    source.connect(sp); sp.connect(mute);
+    return () => { sp.onaudioprocess = null; try { source.disconnect(); sp.disconnect(); mute.disconnect(); } catch (e) {} };
+  }
+
+  let rec = null;
+  recBtn.addEventListener('click', () => { if (rec) finishRecording(true); else beginRecording(); });
+  async function beginRecording() {
+    clearTrackerError();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { showTrackerError('This browser cannot record from a microphone.'); return; }
+    if (isPlaying) stopPlayback();
+    if (!activePattern()) return;
+    if (!songOrder.length) {
+      // Recording needs room: an empty song becomes four times the current pattern.
+      pushHistory();
+      songOrder = [activePatternId, activePatternId, activePatternId, activePatternId];
+      renderSongList();
+    }
+    recBtn.disabled = true;
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    } catch (err) {
+      recBtn.disabled = false;
+      showTrackerError('Could not use the microphone: ' + (err.message || err.name) + '. Allow microphone access for this site and try again.');
+      return;
+    }
+    const ctx = ensurePreview();
+    try { await ctx.resume(); } catch (e) {}
+    const source = ctx.createMediaStreamSource(stream), chunks = [];
+    let level = 0;
+    const release = await makeCapture(ctx, source, (t, d) => {
+      chunks.push({ t: t, d: d });
+      let p = 0; for (let i = 0; i < d.length; i++) { const a = d[i] < 0 ? -d[i] : d[i]; if (a > p) p = a; }
+      level = Math.max(p, level * 0.8);
+    });
+    const beat = stepDurationSec() * 4, countIn = parseInt(document.getElementById('recCountIn').value, 10) || 0;
+    const t0 = ctx.currentTime + 0.25;
+    for (let i = 0; i < countIn; i++) clickAt(ctx, t0 + i * beat, i % 4 === 0);
+    const songStart = t0 + countIn * beat;
+    startPlayback({ once: true, click: document.getElementById('recClick').checked, at: songStart });
+    const songEnd = songStart + songSteps.length * stepDurationSec();
+    const mic = stream.getAudioTracks()[0], settings = mic && mic.getSettings ? mic.getSettings() : {};
+    rec = { stream: stream, release: release, chunks: chunks, songStart: songStart, songEnd: songEnd, inLatency: typeof settings.latency === 'number' ? settings.latency : 0.01 };
+    recBtn.disabled = false;
+    recBtn.textContent = '■ Stop recording';
+    recBtn.classList.add('recording');
+    const meter = document.getElementById('recMeter'), bar = document.getElementById('recMeterBar');
+    meter.hidden = false;
+    rec.timer = setInterval(() => {
+      const now = ctx.currentTime;
+      bar.style.width = Math.min(100, Math.round(level * 140)) + '%';
+      bar.style.background = level > 0.95 ? '#C0392B' : '#4E9E73';
+      if (now < songStart) recStatus.textContent = 'Get ready… ' + Math.ceil((songStart - now) / beat);
+      else recStatus.textContent = '🔴 Recording ' + MigaMusic.fmtTime(now - songStart) + ' / ' + MigaMusic.fmtTime(songEnd - songStart) + '. Press ■ Stop recording when you are done.';
+      if (now > songEnd + 0.5) finishRecording(true);
+    }, 80);
+  }
+
+  async function finishRecording(keep) {
+    if (!rec) return;
+    const r = rec; rec = null;
+    clearInterval(r.timer);
+    r.release();
+    r.stream.getTracks().forEach(t => t.stop());
+    stopPlayback();
+    recBtn.textContent = '● Record a take';
+    recBtn.classList.remove('recording');
+    document.getElementById('recMeter').hidden = true;
+    if (!keep) return;
+    const ctx = previewCtx, sr = ctx.sampleRate;
+    // What you heard left the speakers late, and your voice reached the page late: undo both.
+    const latency = (ctx.outputLatency || 0) + (ctx.baseLatency || 0) + r.inLatency;
+    const from = r.songStart + latency;
+    let end = 0;
+    r.chunks.forEach(c => { end = Math.max(end, c.t + c.d.length / sr); });
+    const len = Math.round((Math.min(end, r.songEnd + 0.5 + latency) - from) * sr);
+    if (len < sr * 0.5) { recStatus.textContent = 'The recording was too short. Press ● Record a take and play along until the song ends, or press ■ Stop recording when you are done.'; return; }
+    const data = new Float32Array(len);
+    r.chunks.forEach(c => { const at = Math.round((c.t - from) * sr); for (let i = 0; i < c.d.length; i++) { const k = at + i; if (k >= 0 && k < len) data[k] = c.d[i]; } });
+    let peak = 0;
+    for (let i = 0; i < len; i++) { const a = data[i] < 0 ? -data[i] : data[i]; if (a > peak) peak = a; }
+    if (peak > 0.0005 && peak < 0.7) { const g = 0.7 / peak; for (let i = 0; i < len; i++) data[i] *= g; } // lift quiet microphones
+    const buf = ctx.createBuffer(1, len, sr);
+    buf.copyToChannel(data, 0);
+    pushHistory();
+    const n = tracks.filter(t => t.type === 'audio').length + 1;
+    const track = normTrack({ id: ++trackIdCounter, name: 'Take ' + n, type: 'audio', wave: 'sine', sampleBuffer: buf, sampleName: 'Take ' + n, sampleDataUrl: '', hit: '', baseNote: 0, penNote: 0, volume: 0.9, pan: 0, muted: false });
+    track.sampleDataUrl = await fileToDataUrl(MigaMusic.toWav(buf));
+    tracks.push(track);
+    patterns.forEach(p => p.cells.push(new Array(stepsPerPattern).fill(null)));
+    renderAll();
+    scheduleAutosave();
+    recStatus.textContent = peak < 0.003
+      ? '⚠️ Take ' + n + ' is almost silent. Check that the right microphone is picked in your browser, then record again.'
+      : '✅ Take ' + n + ' is now a track. Press ▶ Play song to hear it with the beat. If it sounds early or late, move its Timing slider; open 🎚️ Effects for reverb and echo.';
+  }
+
+  // ---------- MIDI files ----------
+  const GM_DRUMS = { kick: 36, snare: 38, clap: 39, hat: 42, openhat: 46, rim: 37, shaker: 70, boom: 35, crash: 49 };
+  function hitOf(track) {
+    if (track.hit) return track.hit;
+    const m = /^(.*) \(built-in\)$/.exec(track.sampleName || '');
+    return m ? (Object.keys(MigaMusic.HITS).find(k => MigaMusic.HITS[k] === m[1]) || '') : '';
+  }
+  function drumHitFor(gm) {
+    if (gm === 35 || gm === 36) return 'kick';
+    if (gm === 38 || gm === 40) return 'snare';
+    if (gm === 39) return 'clap';
+    if (gm === 37) return 'rim';
+    if (gm === 42 || gm === 44) return 'hat';
+    if (gm === 46 || gm === 51 || gm === 53 || gm === 59) return 'openhat';
+    if (gm === 49 || gm === 52 || gm === 55 || gm === 57) return 'crash';
+    if (gm >= 41 && gm <= 50) return 'boom'; // toms
+    return 'shaker';
+  }
+  function waveFor(program) {
+    if (program == null) return 'triangle';
+    if (program === 80) return 'square';
+    if (program >= 16 && program <= 23) return 'square';
+    if ((program >= 24 && program <= 31) || (program >= 40 && program <= 63) || program === 81) return 'sawtooth';
+    if ((program >= 64 && program <= 79) || (program >= 88 && program <= 95)) return 'sine';
+    return 'triangle';
+  }
+  function saveBlob(blob, name) {
+    const url = URL.createObjectURL(blob), a = document.createElement('a');
+    a.href = url; a.download = name;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  document.getElementById('midiExportBtn').addEventListener('click', () => {
+    clearTrackerError();
+    const pats = flattenedSong(), out = [];
+    let ch = 0;
+    tracks.forEach((t, ti) => {
+      if (t.type === 'audio') return;
+      const notes = [];
+      pats.forEach((p, pi) => p.cells[ti].forEach((c, s) => {
+        if (!c) return;
+        cellNotes(c).forEach(n => notes.push({ tick: (pi * stepsPerPattern + s) * 24, dur: (c.len || 1) * 24, note: 60 + n, vel: Math.round(c.velocity * 127) }));
+      }));
+      if (!notes.length) return;
+      const hit = t.type === 'sample' ? hitOf(t) : '';
+      if (hit && GM_DRUMS[hit]) { notes.forEach(n => { n.note = GM_DRUMS[hit]; }); out.push({ name: t.name, channel: 9, notes: notes }); return; }
+      if (ch === 9) ch++;
+      const avg = notes.reduce((a, n) => a + n.note, 0) / notes.length;
+      const program = avg < 48 ? 38 : t.type === 'synth' ? ({ sine: 4, triangle: 0, square: 80, sawtooth: 81 }[t.wave] || 0) : 0;
+      out.push({ name: t.name, channel: Math.min(15, ch++), program: program, notes: notes });
+    });
+    if (!out.length) { showTrackerError('Nothing to export yet: add some notes first, or press 🥁 Load an example beat.'); return; }
+    const bpm = Math.min(240, Math.max(40, parseInt(trackerBpmInput.value, 10) || 120));
+    saveBlob(new Blob([MigaMidi.write({ bpm: bpm, ppq: 96, title: 'Music Forge song', tracks: out })], { type: 'audio/midi' }), 'music-forge-song.mid');
+    const takes = tracks.some(t => t.type === 'audio');
+    showTrackerSuccess('MIDI file saved: ' + out.length + ' track' + (out.length === 1 ? '' : 's') + ', ' + pats.length + ' pattern' + (pats.length === 1 ? '' : 's') + ' at ' + bpm + ' BPM.' + (takes ? ' Recordings are sound, not notes, so they are not in a MIDI file: use ✂️ Finish & download song → Stems for those.' : ''));
+  });
+
+  document.getElementById('midiImportInput').addEventListener('change', async (e) => {
+    const file = (e.target.files || [])[0];
+    e.target.value = '';
+    if (!file) return;
+    clearTrackerError();
+    if (isPlaying) stopPlayback();
+    try {
+      const data = MigaMidi.read(await file.arrayBuffer());
+      const q = data.ppq / 4; // ticks per 16th-note step
+      const sources = new Map();
+      data.tracks.forEach((tr, i) => {
+        if (tr.channel === 9) {
+          // Drums: one track per drum sound, using the built-in kit.
+          tr.notes.forEach(n => {
+            const hit = drumHitFor(n.note), key = 'hit:' + hit;
+            if (!sources.has(key)) sources.set(key, { hit: hit, name: MigaMusic.HITS[hit], notes: [] });
+            sources.get(key).notes.push(Object.assign({}, n, { note: 60 }));
+          });
+        } else sources.set('mel:' + i + ':' + tr.channel, { name: tr.name || '', program: tr.program, notes: tr.notes.map(n => Object.assign({}, n)) });
+      });
+      let list = Array.from(sources.values()).filter(x => x.notes.length).sort((a, b) => b.notes.length - a.notes.length);
+      if (!list.length) throw new Error('there are no notes in this file.');
+      const dropped = Math.max(0, list.length - NUM_TRACKS);
+      list = list.slice(0, NUM_TRACKS);
+      let maxStep = 0;
+      list.forEach(src => src.notes.forEach(n => { n.step = Math.round(n.tick / q); n.len = Math.max(1, Math.min(64, Math.round(n.dur / q))); if (n.step > maxStep) maxStep = n.step; }));
+      const MAX_BARS = 128, bars = Math.min(MAX_BARS, Math.floor(maxStep / 16) + 1), cut = Math.floor(maxStep / 16) + 1 > MAX_BARS;
+      pushHistory();
+      const takes = tracks.filter(t => t.type === 'audio'), fresh = [];
+      for (let i = 0; i < NUM_TRACKS; i++) {
+        const src = list[i];
+        const t = normTrack({ id: ++trackIdCounter, name: 'Track ' + (i + 1), type: 'synth', wave: ['triangle', 'square', 'sawtooth', 'sine'][i % 4], sampleBuffer: null, sampleName: '', sampleDataUrl: '', hit: '', baseNote: 0, penNote: 0, volume: 0.8, pan: 0, muted: false });
+        if (src && src.hit) { await setBuiltIn(t, src.hit); t.name = src.name; t.volume = { kick: 0.95, snare: 0.8, hat: 0.55, clap: 0.6 }[src.hit] || 0.7; }
+        else if (src) {
+          const sorted = src.notes.map(n => n.note).sort((a, b) => a - b);
+          t.name = (src.name || 'Part ' + (i + 1)).slice(0, 30); t.wave = waveFor(src.program); t.volume = 0.7;
+          t.penNote = sorted[Math.floor(sorted.length / 2)] - 60;
+        }
+        fresh.push(t);
+      }
+      tracks = fresh.concat(takes);
+      stepsPerPattern = 16; stepsPerPatternSelect.value = '16';
+      trackerBpmInput.value = Math.max(40, Math.min(240, Math.round(data.bpm)));
+      // One pattern per bar; bars that repeat share a pattern, so the song order shows the shape.
+      const seen = new Map();
+      patterns = []; songOrder = [];
+      for (let b = 0; b < bars; b++) {
+        const cells = tracks.map(() => new Array(16).fill(null));
+        list.forEach((src, ti) => src.notes.forEach(n => {
+          if (n.step < b * 16 || n.step >= b * 16 + 16) return;
+          const st = n.step - b * 16, semis = n.note - 60, cur = cells[ti][st];
+          if (!cur) { const c = { note: semis, velocity: Math.max(0.1, Math.min(1, n.vel / 127)) }; if (!src.hit && n.len > 1) c.len = n.len; cells[ti][st] = c; }
+          else if (!src.hit && !cellNotes(cur).includes(semis)) (cur.chord = cur.chord || []).push(semis);
+        }));
+        const key = JSON.stringify(cells);
+        if (!seen.has(key)) {
+          const i = seen.size, p = { id: ++patternIdCounter, name: 'Part ' + (i < 26 ? String.fromCharCode(65 + i) : i + 1), cells: cells };
+          seen.set(key, p.id); patterns.push(p);
+        }
+        songOrder.push(seen.get(key));
+      }
+      activePatternId = patterns[0].id;
+      rollTrackId = null; rollScrolled = false;
+      renderAll();
+      scheduleAutosave();
+      showTrackerSuccess('Imported "' + file.name + '": ' + list.length + ' track' + (list.length === 1 ? '' : 's') + ', ' + bars + ' bar' + (bars === 1 ? '' : 's') + ' in ' + patterns.length + ' pattern' + (patterns.length === 1 ? '' : 's') + ' at ' + trackerBpmInput.value + ' BPM. Press ▶ Play song.' + (dropped ? ' ' + dropped + ' smaller part' + (dropped === 1 ? ' was' : 's were') + ' left out (8 tracks at most).' : '') + (cut ? ' Only the first ' + MAX_BARS + ' bars were imported.' : ''));
+    } catch (err) {
+      showTrackerError('Could not import the MIDI file: ' + err.message);
+    }
+  });
+
+  // ---------- MIDI keyboard (Web MIDI) ----------
+  const heldNotes = new Map();
+  let lastNoteOn = { t: 0, step: -1, pattern: null };
+  const midiWriteBox = document.getElementById('midiWrite'), midiWriteWrap = document.getElementById('midiWriteWrap');
+  document.getElementById('midiKeyboardBtn').addEventListener('click', async () => {
+    if (!navigator.requestMIDIAccess) { midiStatus.textContent = 'This browser cannot use MIDI keyboards. Use Chrome or Edge on a computer or an Android tablet.'; return; }
+    try {
+      const access = await navigator.requestMIDIAccess();
+      const hook = () => {
+        const names = [];
+        access.inputs.forEach(inp => { inp.onmidimessage = onMidiMessage; names.push(inp.name); });
+        midiOn = names.length > 0;
+        midiWriteWrap.hidden = !midiOn;
+        midiStatus.textContent = midiOn
+          ? '🎹 Connected: ' + names.join(', ') + '. Keys play the track picked above the grid. While stopped, notes are written one after another from the outlined step; while the song plays, they land where you play them.'
+          : 'No MIDI keyboard found. Plug one in by USB; it connects by itself.';
+        renderStepGrid();
+      };
+      access.onstatechange = hook;
+      hook();
+    } catch (err) {
+      midiStatus.textContent = 'MIDI access was blocked (' + (err.message || err.name) + '). Allow MIDI for this site in the browser and try again.';
+    }
+  });
+  function onMidiMessage(e) {
+    const d = e.data;
+    if (!d || d.length < 3) return;
+    const kind = d[0] & 0xf0;
+    if (kind === 0x90 && d[2] > 0) midiNoteOn(d[1], d[2] / 127);
+    else if (kind === 0x80 || (kind === 0x90 && d[2] === 0)) midiNoteOff(d[1]);
+  }
+  function playLive(track, note, vel) {
+    const ctx = ensurePreview(), now = ctx.currentTime, out = channelFor(previewMixer, track).input;
+    if (track.type === 'sample') { triggerStep(ctx, previewMixer, track, { note: note, velocity: vel }, now); return null; }
+    const osc = ctx.createOscillator(), g = ctx.createGain(), peak = vel * track.volume * 0.5;
+    osc.type = track.wave; osc.frequency.value = noteFreq(note);
+    g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(peak, now + 0.01);
+    osc.connect(g).connect(out);
+    osc.start(now); osc.stop(now + 10); // a stuck key goes quiet by itself
+    return () => { const t = ctx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + 0.12); try { osc.stop(t + 0.15); } catch (err) {} };
+  }
+  function midiNoteOn(midi, vel) {
+    const track = rollTrack();
+    if (!track) return;
+    const ti = tracks.indexOf(track), semis = midi - 60;
+    const stop = playLive(track, semis, Math.max(0.1, vel));
+    let cellRef = null;
+    if (midiWriteBox.checked) {
+      let pattern, step;
+      const len = track.type === 'synth' ? parseInt(rollLenSelect.value, 10) : 1;
+      const chord = performance.now() - lastNoteOn.t < 80; // keys pressed together make a chord
+      if (isPlaying) {
+        const idx = currentSongIndex(stepDurationSec() / 2), entry = songSteps[Math.max(0, idx) % songSteps.length];
+        pattern = entry.pattern; step = entry.step;
+      } else {
+        pattern = activePattern();
+        if (chord && lastNoteOn.pattern === pattern) step = lastNoteOn.step;
+        else { step = stepCursor; stepCursor = (stepCursor + len) % stepsPerPattern; }
+      }
+      pushHistory();
+      if (!isPlaying && !(chord && lastNoteOn.step === step)) pattern.cells[ti][step] = null; // step input overwrites
+      cellRef = addNote(pattern, ti, step, semis, Math.max(0.1, vel), isPlaying ? 1 : len);
+      lastNoteOn = { t: performance.now(), step: step, pattern: pattern };
+      renderStepGrid();
+    }
+    heldNotes.set(midi, { stop: stop, cellRef: cellRef, t0: previewCtx.currentTime, synth: track.type === 'synth' });
+  }
+  function midiNoteOff(midi) {
+    const h = heldNotes.get(midi);
+    if (!h) return;
+    heldNotes.delete(midi);
+    if (h.stop) h.stop();
+    // While the song plays, a held key makes a longer note.
+    if (isPlaying && h.cellRef && h.synth) {
+      const len = Math.round((previewCtx.currentTime - h.t0) / stepDurationSec());
+      if (len > 1) { h.cellRef.len = Math.min(64, len); renderStepGrid(); }
+    }
+  }
 
   I18N.onChange(function () {
     renderAll();
@@ -1761,7 +2548,7 @@
       playSongLabel: '▶ Play song',
       stopLabel: '■ Stop',
       exportWavLabel: '⬇ Export song as .wav',
-      playbackHint: 'Playback uses the song arrangement on the left (or just the current pattern, looped, if the song is empty). Export renders the whole arrangement to a real .wav file.',
+      playbackHint: 'Playback uses the song arrangement on the left (or just the current pattern, looped, if the song is empty). Finish & download renders the whole arrangement, with your recordings and effects, to WAV or MP3, or to stems: one file per track.',
       noteLabel: 'Note',
       velocityLabel: 'Velocity',
       clearStepLabel: 'Clear step',
@@ -2458,12 +3245,20 @@
     try { save(await M.toMp3(F.edited), slug(F.meta.title) + '.mp3'); } catch (e) { note($('fnStatus'), e.message, 'error'); } finally { b.disabled = false; }
   };
   $('fnStems').onclick = async () => {
-    if (!F.meta || !F.meta.spec) return; const b = $('fnStems'); b.disabled = true;
+    if (!F.meta || !(F.meta.spec || F.meta.stems)) return; const b = $('fnStems'); b.disabled = true;
     try {
-      note($('fnStatus'), 'Making stems (4 separate tracks)…');
+      note($('fnStatus'), F.meta.stems ? 'Making stems (one file per track)…' : 'Making stems (4 separate tracks)…');
       if (!window.JSZip) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = ok; s.onerror = () => no(new Error('Could not load the ZIP helper. Check your internet connection.')); document.head.appendChild(s); });
       const zip = new JSZip(), e = Object.assign(edits(), { normalize: false }), base = slug(F.meta.title);
-      for (const part of ['drums', 'bass', 'chords', 'melody']) {
+      if (F.meta.stems) {
+        // Beat maker: one file per track, each keeping its level, effects and place in the song.
+        const used = {};
+        for (const st of await F.meta.stems()) {
+          if (M.peakOf(st.buffer) < 0.0005) continue;
+          let name = slug(st.name) || 'track'; while (used[name]) name += '-2'; used[name] = 1;
+          zip.file(base + '-' + name + '.wav', M.toWav(await M.finish(st.buffer, e)));
+        }
+      } else for (const part of ['drums', 'bass', 'chords', 'melody']) {
         const stem = await M.render(F.meta.spec, { only: part, gain: F.buf.__gain });
         if (M.peakOf(stem) < 0.001) continue; // this style has no such part
         zip.file(base + '-' + part + '.wav', M.toWav(await M.finish(stem, e)));
@@ -2490,7 +3285,8 @@
     async load(buf, meta) {
       audio.pause(); F.buf = buf; F.meta = meta || {}; computePeaks(); resetEdits();
       $('finisherWrap').hidden = false; $('fnTitle').textContent = '🎵 ' + (F.meta.title || 'Your track') + ' · ' + fmtLen(buf.duration);
-      $('fnStems').hidden = !F.meta.spec;
+      $('fnStems').hidden = !(F.meta.spec || F.meta.stems);
+      $('fnStems').querySelector('small').textContent = F.meta.stemsLabel || 'drums, bass, chords, melody';
       $('fnRights').innerHTML = F.meta.source === 'ai' ? '🎤 Made by Google Lyria with your key. See <a href="#mfRights">Can I use this music?</a> for what Google allows.' : '✅ Made in your browser by MigaBuilder: yours to use anywhere, including YouTube, TikTok, games, podcasts and ads. No credit needed.';
       $('fnStatus').className = 'ai-status';
       await rebuild(false);

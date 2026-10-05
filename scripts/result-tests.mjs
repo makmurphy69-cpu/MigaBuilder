@@ -386,6 +386,60 @@ test('app-forge: a broken app is fixed automatically and downloads as an install
   expect(JSON.parse(files['manifest.json']).name === 'Tally', 'manifest has the wrong name');
 }, { expectErrors: /missingFunction/, setup: (() => { let calls = 0; return ctx => { calls = 0; return fakeAi(ctx, () => APP(++calls === 1)); }; })() });
 
+test('music-forge: beat maker imports MIDI, adds effects and exports the song, stems and MIDI', 'music-forge.html', async (page) => {
+  await page.click('#trackerModeBtn');
+  await page.setInputFiles('#midiImportInput', path.join(FIX, 'groove.mid'));
+  await page.waitForFunction(() => /Imported/.test(document.querySelector('#trackerSuccessBox').textContent), null, { timeout: 30000 });
+  const said = await page.textContent('#trackerSuccessBox');
+  // groove.mid: piano + drums, 3 bars at 100 BPM; bars 1 and 3 are the same, so 2 patterns.
+  expect(/4 tracks, 3 bars in 2 patterns at 100 BPM/.test(said), 'unexpected import result: ' + said);
+  expect(await page.$$eval('.song-chip', e => e.length) === 3, 'the song should have 3 bars in its order');
+  // The C major chord on the first step shows as 3 notes in the piano roll.
+  await page.click('#viewRollBtn');
+  await page.selectOption('#rollTrack', { label: 'Piano' });
+  expect(await page.$$eval('.roll-note[data-step="0"]', e => e.length) === 3, 'the chord on step 1 should show 3 notes');
+  // Add a note in the piano roll, then reverb on the piano.
+  await page.click('.roll-cell[data-step="2"][data-note="12"]');
+  expect(await page.$$eval('.roll-note[data-step="2"]', e => e.length) === 1, 'clicking the piano roll should add a note');
+  await page.$$eval('.fx-box', els => { els[1].open = true; });
+  await page.locator('.fx-box').nth(1).locator('button', { hasText: 'Hall' }).click();
+  // MIDI export: a type-1 file with a tempo track and one track per instrument.
+  const mid = await downloadOf(page, () => page.click('#midiExportBtn'));
+  expect(/\.mid$/.test(mid.name), 'expected a .mid, got ' + mid.name);
+  expect(ascii(mid.buf, 0, 'MThd') && mid.buf.readUInt16BE(10) === 5, 'MIDI file should have a tempo track and 4 instrument tracks');
+  // Whole song as WAV through Finish & use.
+  await page.click('#exportWavBtn');
+  await page.waitForSelector('#finisherWrap:not([hidden])', { timeout: 60000 });
+  const wav = await downloadOf(page, () => page.click('#fnWav'));
+  expect(ascii(wav.buf, 0, 'RIFF') && ascii(wav.buf, 8, 'WAVE'), 'song download is not a WAV file');
+  const secs = (wav.buf.length - 44) / (44100 * 4);
+  expect(secs > 7 && secs < 13, 'song should be about 7 s plus the reverb tail, got ' + secs.toFixed(1) + ' s');
+  // Stems: one WAV per track in a ZIP.
+  const zip = await downloadOf(page, () => page.click('#fnStems'));
+  expect(magic(zip.buf, 0x50, 0x4b) && /stems\.zip$/.test(zip.name), 'stems download is not a ZIP: ' + zip.name);
+  const names = zip.buf.toString('latin1').match(/[a-z0-9-]+\.wav/g) || [];
+  ['piano', 'kick', 'snare', 'hi-hat'].forEach(n => expect(names.some(x => x.endsWith('-' + n + '.wav')), 'stems ZIP has no ' + n + ' track: ' + [...new Set(names)].join(', ')));
+}, { timeout: 180000 });
+
+test('music-forge: beat maker records a microphone take as a new track', 'music-forge.html', async (page) => {
+  await page.click('#trackerModeBtn');
+  await page.click('#exampleBeatBtn');
+  await page.waitForFunction(() => document.querySelectorAll('.step-cell.active').length > 10);
+  await page.selectOption('#recCountIn', '0');
+  await page.click('#recBtn');
+  await page.waitForFunction(() => /Recording/.test(document.querySelector('#recStatus').textContent), null, { timeout: 15000 });
+  await page.waitForTimeout(2500);
+  await page.click('#recBtn');
+  await page.waitForFunction(() => /Take 1/.test(document.querySelector('#recStatus').textContent), null, { timeout: 15000 });
+  expect(await page.$$eval('.audio-lane', e => e.length) === 1, 'the take should show as a recording lane in the grid');
+  // The fake microphone plays a beep, so the take must not be silent.
+  expect(!/almost silent/.test(await page.textContent('#recStatus')), 'the take is silent: ' + await page.textContent('#recStatus'));
+  await page.click('#exportWavBtn');
+  await page.waitForSelector('#finisherWrap:not([hidden])', { timeout: 60000 });
+  const wav = await downloadOf(page, () => page.click('#fnWav'));
+  expect(ascii(wav.buf, 0, 'RIFF'), 'song with the take is not a WAV file');
+}, { timeout: 120000 });
+
 // ---------- runner ----------
 const words = process.argv.slice(2).map(w => w.toLowerCase());
 const chosen = TESTS.filter(t => !words.length || words.every(w => t.name.toLowerCase().includes(w)));
@@ -395,7 +449,7 @@ const srv = await serve();
 const base = 'http://127.0.0.1:' + srv.address().port;
 const { chromium } = await loadPlaywright();
 const exe = process.env.CHROMIUM || (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome') ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' : undefined);
-const browser = await chromium.launch({ executablePath: exe, args: [...(process.env.IGNORE_CERTS ? ['--ignore-certificate-errors'] : []), ...(process.env.BROWSER_PROXY ? ['--proxy-server=' + process.env.BROWSER_PROXY] : [])] });
+const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', ...(process.env.IGNORE_CERTS ? ['--ignore-certificate-errors'] : []), ...(process.env.BROWSER_PROXY ? ['--proxy-server=' + process.env.BROWSER_PROXY] : [])] });
 
 const failed = [];
 for (const t of chosen) {
