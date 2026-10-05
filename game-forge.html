@@ -1143,7 +1143,7 @@
     if (window.JSZip) return Promise.resolve(window.JSZip);
     return new Promise((resolve, reject) => {
       const sc = document.createElement('script');
-      sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js';
       sc.onload = () => resolve(window.JSZip); sc.onerror = () => reject(new Error('The zip library could not load — check your connection.'));
       document.head.appendChild(sc);
     });

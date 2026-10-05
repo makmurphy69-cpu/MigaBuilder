@@ -980,7 +980,7 @@ const HELI_ORIGIN={x:-700,z:-600};
 const W3={ready:false,failed:false,view:'chase'};
 let threePromise=null;
 function loadThree(){if(window.THREE)return Promise.resolve(window.THREE);
-  if(!threePromise)threePromise=new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js';s.onload=()=>window.THREE?res(window.THREE):rej(new Error('no THREE'));s.onerror=rej;document.head.appendChild(s)});
+  if(!threePromise)threePromise=new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.min.js';s.onload=()=>window.THREE?res(window.THREE):rej(new Error('no THREE'));s.onerror=rej;document.head.appendChild(s)});
   return threePromise}
 function webglOK(){try{const c=document.createElement('canvas');return!!(window.WebGLRenderingContext&&(c.getContext('webgl2')||c.getContext('webgl')))}catch(e){return false}}
 function canvasTex(w,h,draw,repeat){const c=document.createElement('canvas');c.width=w;c.height=h;draw(c.getContext('2d'),w,h);const t=new THREE.CanvasTexture(c);if(repeat){t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(repeat[0],repeat[1])}t.anisotropy=4;return t}

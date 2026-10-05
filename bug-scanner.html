@@ -188,7 +188,7 @@ async function addFiles(list){
   let total=files.reduce((a,f)=>a+f.text.length,0),skipped=0;
   for(const file of list){
     if(/\.zip$/i.test(file.name)){
-      jszipReady=jszipReady||loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+      jszipReady=jszipReady||loadScript('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js');
       await jszipReady;const zip=await JSZip.loadAsync(file);
       const entries=Object.values(zip.files).filter(e=>!e.dir&&!SKIP.test('/'+e.name)&&!BINARY.test(e.name)&&!/(^|\/)\./.test(e.name));
       for(const e of entries){const text=await e.async('string');if(text.length>MAX_FILE||total+text.length>MAX_TOTAL||text.includes('\u0000')){skipped++;continue}files.push({name:e.name,text});total+=text.length}
@@ -320,7 +320,7 @@ function htmlCheck(f){
 }
 let acornReady=null;
 async function jsCheck(f,offset,code){
-  acornReady=acornReady||loadScript('https://cdn.jsdelivr.net/npm/acorn@8.12.1/dist/acorn.min.js');
+  acornReady=acornReady||loadScript('https://cdn.jsdelivr.net/npm/acorn@8.18.0/dist/acorn.min.js');
   try{await acornReady}catch(e){return []}
   for(const sourceType of ['module','script']){
     try{acorn.parse(code,{ecmaVersion:'latest',sourceType,allowHashBang:true,allowReturnOutsideFunction:true,allowAwaitOutsideFunction:true});return []}

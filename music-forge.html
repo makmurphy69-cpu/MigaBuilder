@@ -2461,7 +2461,7 @@
     if (!F.meta || !F.meta.spec) return; const b = $('fnStems'); b.disabled = true;
     try {
       note($('fnStatus'), 'Making stems (4 separate tracks)…');
-      if (!window.JSZip) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js'; s.onload = ok; s.onerror = () => no(new Error('Could not load the ZIP helper. Check your internet connection.')); document.head.appendChild(s); });
+      if (!window.JSZip) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.2/jszip.min.js'; s.onload = ok; s.onerror = () => no(new Error('Could not load the ZIP helper. Check your internet connection.')); document.head.appendChild(s); });
       const zip = new JSZip(), e = Object.assign(edits(), { normalize: false }), base = slug(F.meta.title);
       for (const part of ['drums', 'bass', 'chords', 'melody']) {
         const stem = await M.render(F.meta.spec, { only: part, gain: F.buf.__gain });
