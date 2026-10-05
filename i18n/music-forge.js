@@ -7,8 +7,11 @@ I18N.phrases({
   "Italian": { es: "Italiano", ar: "الإيطالية", zh: "意大利语", sw: "Kiitaliano", sv: "Italienska" },
   "Hindi": { es: "Hindi", ar: "الهندية", zh: "印地语", sw: "Kihindi", sv: "Hindi" },
   "Korean": { es: "Coreano", ar: "الكورية", zh: "韩语", sw: "Kikorea", sv: "Koreanska" },
+  "Mandarin Chinese": { es: "Chino mandarín", ar: "الصينية الماندرينية", zh: "普通话", sw: "Kichina cha Mandarin", sv: "Mandarinkinesiska" },
+  "Swahili": { es: "Suajili", ar: "السواحيلية", zh: "斯瓦希里语", sw: "Kiswahili", sv: "Swahili" },
   "⚙️ More options": { es: "⚙️ Más opciones", ar: "⚙️ خيارات أخرى", zh: "⚙️ 更多选项", sw: "⚙️ Chaguo zaidi", sv: "⚙️ Fler alternativ" },
   "Speed:": { es: "Velocidad:", ar: "السرعة:", zh: "速度：", sw: "Kasi:", sv: "Hastighet:" },
+  "Key": { es: "Clave", ar: "المفتاح", zh: "答案", sw: "Ufunguo", sv: "Facit" },
   "Automatic": { es: "Automático", ar: "تلقائي", zh: "自动", sw: "Kiotomatiki", sv: "Automatiskt" },
   "Shape": { es: "Formato", ar: "الشكل", zh: "尺寸比例", sw: "Umbo", sv: "Format" },
   "AI model": { es: "Modelo de IA", ar: "نموذج الذكاء الاصطناعي", zh: "AI 模型", sw: "Modeli ya AI", sv: "AI-modell" },
@@ -47,6 +50,11 @@ I18N.phrases({
   "Google’s price list": { es: "la lista de precios de Google", ar: "قائمة أسعار Google", zh: "Google 的价目表", sw: "orodha ya bei ya Google", sv: "Googles prislista" },
   "Style": { es: "Estilo", ar: "النمط", zh: "样式", sw: "Mtindo", sv: "Stil" },
   "optional": { es: "opcional", ar: "اختياري", zh: "可选", sw: "si lazima", sv: "valfritt" },
+  "{0} min": { es: "{0} min", ar: "{0} د", zh: "{0} 分钟", sw: "dak {0}", sv: "{0} min" },
+  "Notification": { es: "Notificación", ar: "إشعار", zh: "通知", sw: "Arifa", sv: "Avisering" },
+  "Volume": { es: "Volumen", ar: "مستوى الصوت", zh: "音量", sw: "Sauti", sv: "Volym" },
   "Paste your Gemini key (starts with AIza…)": { es: "Pega tu clave de Gemini (empieza por AIza…)", ar: "الصق مفتاح Gemini (يبدأ بـ AIza…)", zh: "粘贴你的 Gemini 密钥（以 AIza… 开头）", sw: "Bandika ufunguo wako wa Gemini (unaanza na AIza…)", sv: "Klistra in din Gemini-nyckel (börjar med AIza…)" },
-  "Change it": { es: "Cambiarla", ar: "غيّرها", zh: "修改", sw: "Ibadilishe", sv: "Ändra den" }
+  "Change it": { es: "Cambiarla", ar: "غيّرها", zh: "修改", sw: "Ibadilishe", sv: "Ändra den" },
+  "Back to the start": { es: "Volver al principio", ar: "عد إلى البداية", zh: "回到开头", sw: "Rudi mwanzo", sv: "Tillbaka till början" },
+  "Position": { es: "Posición", ar: "الموضع", zh: "位置", sw: "Nafasi", sv: "Position" }
 });

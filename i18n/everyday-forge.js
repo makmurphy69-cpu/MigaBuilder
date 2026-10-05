@@ -4,6 +4,7 @@ I18N.phrases({
   "Line": { es: "Línea", ar: "السطر", zh: "行", sw: "Mstari", sv: "Rad" },
   "Title": { es: "Título", ar: "العنوان", zh: "标题", sw: "Kichwa", sv: "Titel" },
   "Your text": { es: "Tu texto", ar: "نصك", zh: "你的文字", sw: "Maandishi yako", sv: "Din text" },
+  "Volume": { es: "Volumen", ar: "مستوى الصوت", zh: "音量", sw: "Sauti", sv: "Volym" },
   "From": { es: "Desde", ar: "من", zh: "从", sw: "Kuanzia", sv: "Från" },
   "To": { es: "Hasta", ar: "إلى", zh: "至", sw: "Hadi", sv: "Till" },
   "Strong": { es: "Fuerte", ar: "قوي", zh: "强力", sw: "Kali", sv: "Stark" }
