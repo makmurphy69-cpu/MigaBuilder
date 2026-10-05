@@ -39,7 +39,8 @@
     { code: 'es', label: 'Español', rtl: false },
     { code: 'ar', label: 'العربية', rtl: true },
     { code: 'zh', label: '中文', rtl: false },
-    { code: 'sw', label: 'Kiswahili', rtl: false }
+    { code: 'sw', label: 'Kiswahili', rtl: false },
+    { code: 'sv', label: 'Svenska', rtl: false }
   ];
 
   // Strings genuinely repeated, verbatim, across most pages.
@@ -103,6 +104,18 @@
       moreLanguagesLabel: '🌐 Lugha zaidi (Google Translate)',
       languageAriaLabel: 'Lugha',
       viewSourceLink: 'Tazama msimbo chanzo kwenye GitHub (leseni ya MIT) →'
+    },
+    sv: {
+      feedbackLink: 'Hittat en bugg eller har en idé? Skicka feedback →',
+      partOf: 'En del av',
+      show: 'Visa',
+      hide: 'Dölj',
+      providerGemini: 'Gemini — gratis, ingen nyckel behövs',
+      providerOpenai: 'OpenAI',
+      providerAnthropic: 'Anthropic (Claude)',
+      moreLanguagesLabel: '🌐 Fler språk (Google Översätt)',
+      languageAriaLabel: 'Språk',
+      viewSourceLink: 'Visa källkoden på GitHub (MIT-licens) →'
     }
   };
 
