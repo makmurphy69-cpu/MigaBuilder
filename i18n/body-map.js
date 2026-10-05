@@ -12,5 +12,6 @@ I18N.phrases({
   "Sat": { es: "sáb", ar: "السبت", zh: "周六", sw: "Jmo", sv: "lör" },
   "Sun": { es: "dom", ar: "الأحد", zh: "周日", sw: "Jpi", sv: "sön" },
   "Mon": { es: "lun", ar: "الإثنين", zh: "周一", sw: "Jtt", sv: "mån" },
-  "Added": { es: "Añadidas", ar: "أُضيفت", zh: "已添加", sw: "Imeongezwa", sv: "Tillagda" }
+  "Added": { es: "Añadidas", ar: "أُضيفت", zh: "已添加", sw: "Imeongezwa", sv: "Tillagda" },
+  "Copy this link:": { es: "Copia este enlace:", ar: "انسخ هذا الرابط:", zh: "复制此链接：", sw: "Nakili kiungo hiki:", sv: "Kopiera den här länken:" }
 });
