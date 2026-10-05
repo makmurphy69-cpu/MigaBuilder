@@ -324,7 +324,7 @@ document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
 });
 function finishDrill(){const d=drill;drill=null;$('padTarget').innerHTML='<p class="result-score">Drill finished: '+d.score+' / '+d.list.length+' written well</p><ul>'+d.results.map(([it,s])=>'<li><span style="font-size:22px;font-family:'+fontOf(it)+'">'+esc(it.g)+'</span> '+esc(it.r||'')+' — '+s+'/100</li>').join('')+'</ul>';$('padResult').innerHTML='';strokes=[];redraw()}
 // Chinese stroke order via Hanzi Writer (loaded only when needed)
-let hwReady=null;function loadHW(){hwReady=hwReady||new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hanzi-writer@3.7.2/dist/hanzi-writer.min.js';s.onload=res;s.onerror=()=>rej(new Error('Could not load stroke-order data.'));document.head.appendChild(s)});return hwReady}
+let hwReady=null;function loadHW(){hwReady=hwReady||new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hanzi-writer@3.7.3/dist/hanzi-writer.min.js';s.onload=res;s.onerror=()=>rej(new Error('Could not load stroke-order data.'));document.head.appendChild(s)});return hwReady}
 async function hanzi(kind){
   try{await loadHW()}catch(e){$('padResult').textContent=e.message;return}
   const box=$('hanzi');box.innerHTML='';box.classList.remove('hidden');$('ink').style.display='none';guide.getContext('2d').clearRect(0,0,guide.width,guide.height);
