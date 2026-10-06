@@ -1108,6 +1108,33 @@
    "kind": "pdf"
   }
  },
+ "physics-map.html": {
+  "title": "Physics Map",
+  "video": "https://videos.migabuilder.com/physics-map.mp4?v=e6c96cd7",
+  "poster": "https://videos.migabuilder.com/physics-map.jpg?v=b1c3ba42",
+  "duration": 121,
+  "transcript": [
+   "Welcome to Physics Map. Watch the planets move, travel through the history of the universe, look inside black holes, and see how the big ideas of physics fit together.",
+   "This is the Solar System on today’s date. The planets move at the speed you choose, each on its real orbit.",
+   "Press Pause to stop them, then tap a planet, like Saturn, to see its mass, gravity, day and year, its atmosphere and a surprising fact. Saturn would float in water.",
+   "Inner planets spreads out Mercury, Venus, Earth and Mars, and True sizes shows how small Earth is next to Jupiter and the Sun.",
+   "The history of the universe runs from the first instant after the Big Bang to the far future. Each step to the right is ten times longer.",
+   "The cosmic calendar squeezes 13.8 billion years into one year. Earth forms in September, and modern humans appear twelve minutes before midnight on the 31st of December.",
+   "Black holes shows the parts of a black hole and famous ones, like M87 star, the first black hole ever photographed. Its event horizon is wider than Neptune’s orbit.",
+   "The theory map shows how physics grew, from Newton to quantum mechanics and string theory. Lines show which ideas each theory builds on.",
+   "How well tested colours each theory: green is established, amber has strong evidence, and red is still speculative.",
+   "The calculators work out real numbers. Here is your weight on every world: 60 kilograms on Earth reads under 10 on the Moon.",
+   "Time dilation shows how a fast traveller ages more slowly. At ninety per cent of light speed, a trip to the nearest star takes under five years for Earth, and only two for the crew.",
+   "Finally, test yourself. Choose a topic and press Generate quiz.",
+   "Pick an answer and you get an explanation, with a link to open that planet on the map.",
+   "Now it is your turn. Open Physics Map on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/physics-map.html",
+   "label": "Printable quiz made in this video",
+   "kind": "html"
+  }
+ },
  "picture-forge.html": {
   "title": "Picture Forge",
   "video": "https://videos.migabuilder.com/picture-forge.mp4",

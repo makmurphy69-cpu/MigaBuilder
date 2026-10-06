@@ -403,6 +403,25 @@ S('chemistry-map.html', {
     await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
   }
 });
+S('physics-map.html', {
+  title: 'Physics Map', subtitle: 'Planets, the universe, black holes and theories',
+  intro: 'Welcome to Physics Map. Watch the planets move, travel through the history of the universe, look inside black holes, and see how the big ideas of physics fit together.',
+  async run(h, page) {
+    await h.step('This is the Solar System on today’s date. The planets move at the speed you choose, each on its real orbit.', async () => { await h.scroll('#todayBtn', 'center'); await h.click('#todayBtn'); await h.point('[data-k="body:jupiter"]'); await h.point('[data-k="body:saturn"]'); });
+    await h.step('Press Pause to stop them, then tap a planet, like Saturn, to see its mass, gravity, day and year, its atmosphere and a surprising fact. Saturn would float in water.', async () => { await h.scroll('#playBtn', 'center'); await h.click('#playBtn'); await h.click('[data-k="body:saturn"]'); await h.point('#info .dyk'); });
+    await h.step('Inner planets spreads out Mercury, Venus, Earth and Mars, and True sizes shows how small Earth is next to Jupiter and the Sun.', async () => { await h.scroll('.mapbox'); await h.click('#zoomBtn'); await h.wait(1500); await h.click('#sizesBtn'); await h.wait(1200); });
+    await h.step('The history of the universe runs from the first instant after the Big Bang to the far future. Each step to the right is ten times longer.', async () => { await h.click('[data-view=time]'); await h.point('#timeSvg'); });
+    await h.step('The cosmic calendar squeezes 13.8 billion years into one year. Earth forms in September, and modern humans appear twelve minutes before midnight on the 31st of December.', async () => { await h.click('[data-scale=cal]'); await h.click('[data-ev=humans]'); await h.point('#info .facts'); });
+    await h.step('Black holes shows the parts of a black hole and famous ones, like M87 star, the first black hole ever photographed. Its event horizon is wider than Neptune’s orbit.', async () => { await h.scroll('.mapbox'); await h.click('[data-view=bh]'); await h.click('[data-bh=m87]'); await h.point('#info .facts'); });
+    await h.step('The theory map shows how physics grew, from Newton to quantum mechanics and string theory. Lines show which ideas each theory builds on.', async () => { await h.scroll('.mapbox'); await h.click('[data-view=theory]'); await h.click('[data-k="theory:general"]'); await h.point('#info .eq'); });
+    await h.step('How well tested colours each theory: green is established, amber has strong evidence, and red is still speculative.', async () => { await h.scroll('.mapbox'); await h.click('[data-tcol=status]'); await h.wait(1200); });
+    await h.step('The calculators work out real numbers. Here is your weight on every world: 60 kilograms on Earth reads under 10 on the Moon.', async () => { await h.scroll('#calcPanel'); await h.point('#calcOut'); });
+    await h.step('Time dilation shows how a fast traveller ages more slowly. At ninety per cent of light speed, a trip to the nearest star takes under five years for Earth, and only two for the crew.', async () => { await h.select('#calcSel', 'time'); await h.point('#calcOut'); });
+    await h.step('Finally, test yourself. Choose a topic and press Generate quiz.', async () => { await h.scroll('#quizPanel'); await h.select('#qSource', 'solar'); await h.click('#makeQuiz'); });
+    await h.step('Pick an answer and you get an explanation, with a link to open that planet on the map.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+  }
+});
 
 S('alphabet-forge.html', {
   title: 'Alphabet Forge', subtitle: 'Hear, learn and write the world’s alphabets',
