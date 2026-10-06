@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#081826"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thank You: Your MigaBuilder Download</title><meta name="description" content="Download the templates you bought from the MigaBuilder shop."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="local-tools.css">
+</head><body>
+<header class="masthead"><div><h1>Thank you!</h1><p>Your order from the MigaBuilder shop.</p></div></header>
+<main>
+<section class="panel" aria-live="polite">
+  <h2 id="heading">Checking your order…</h2>
+  <p id="message" class="muted">This takes a second.</p>
+  <div id="items"></div>
+  <p class="muted" id="help" hidden>Keep this page bookmarked: the download link works for 30 days. Problems? Email <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a> or reply to your Stripe receipt.</p>
+  <p class="muted" id="next" hidden>Next: open <strong>START-HERE.html</strong> in the zip. It walks you through editing and publishing your site.</p>
+</section>
+</main>
+<footer><a href="shop.html">Back to the shop</a> · <a href="index.html">All free tools</a></footer>
+<script>
+(function () {
+  const SHOP_API_URL = (typeof window !== 'undefined' && window.__SHOP_API_URL_OVERRIDE) || 'https://migabuilder-shop.makmurphy69.workers.dev';
+  const heading = document.getElementById('heading');
+  const message = document.getElementById('message');
+  const itemsBox = document.getElementById('items');
+  const help = document.getElementById('help');
+
+  function fail(text) {
+    heading.textContent = 'We could not load your download';
+    message.textContent = text;
+    help.hidden = false;
+  }
+
+  const sessionId = new URLSearchParams(location.search).get('session_id') || '';
+  if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) {
+    fail('This page needs the link from your checkout. Use the link in your receipt email, or contact us.');
+    return;
+  }
+
+  fetch(SHOP_API_URL + '/order?session_id=' + encodeURIComponent(sessionId))
+    .then(function (res) { return res.json().catch(function () { return { ok: false }; }); })
+    .then(function (data) {
+      if (!data.ok) { fail(data.error || 'Something went wrong. Please reload in a minute.'); return; }
+      if (!data.items || !data.items.length) { fail('Your payment went through, but we could not match the product. Contact us and we will send it.'); return; }
+      heading.textContent = 'Your download is ready';
+      message.textContent = data.email ? 'A receipt was sent to ' + data.email + '.' : 'Your receipt is on its way by email.';
+      data.items.forEach(function (item) {
+        const row = document.createElement('div');
+        row.className = 'item';
+        const name = document.createElement('strong');
+        name.textContent = item.name;
+        const link = document.createElement('a');
+        link.className = 'primary';
+        link.style.textDecoration = 'none';
+        link.href = item.download;
+        link.textContent = 'Download zip';
+        row.append(name, link);
+        itemsBox.append(row);
+      });
+      help.hidden = false;
+      document.getElementById('next').hidden = false;
+    })
+    .catch(function () { fail('Could not reach the download server. Check your connection and reload.'); });
+})();
+</script>
+</body></html>
