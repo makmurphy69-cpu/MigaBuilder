@@ -54,5 +54,9 @@ I18N.phrases({
   "What comes next?": { es: "¿Qué viene después?", ar: "ما الذي يأتي بعده؟", zh: "下一个是什么？", sw: "Nini kinafuata?", sv: "Vad kommer härnäst?" },
   "Author": { es: "Autor", ar: "المؤلف", zh: "作者", sw: "Mwandishi", sv: "Författare" },
   "Music": { es: "Música", ar: "الموسيقى", zh: "音乐", sw: "Muziki", sv: "Musik" },
-  "✓ Correct": { es: "✓ Correcto", ar: "✓ صحيح", zh: "✓ 正确", sw: "✓ Sahihi", sv: "✓ Rätt" }
+  "Temperature": { es: "Temperatura", ar: "درجة الحرارة", zh: "温度", sw: "Joto", sv: "Temperatur" },
+  "Time": { es: "Tiempo", ar: "الوقت", zh: "时间", sw: "Muda", sv: "Tid" },
+  "None": { es: "Ninguno", ar: "لا شيء", zh: "无", sw: "Hakuna", sv: "Ingen" },
+  "✓ Correct": { es: "✓ Correcto", ar: "✓ صحيح", zh: "✓ 正确", sw: "✓ Sahihi", sv: "✓ Rätt" },
+  "Building": { es: "Edificio", ar: "المبنى", zh: "建筑", sw: "Jengo", sv: "Byggnad" }
 });

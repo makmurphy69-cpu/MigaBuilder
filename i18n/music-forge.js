@@ -1,5 +1,6 @@
 /* music-forge.html — translations of this page's text, matched by the English original (see i18n.js). */
 I18N.phrases({
+  "Impressionism": { es: "Impresionismo", ar: "الانطباعية", zh: "印象派", sw: "Uimpresionisti", sv: "Impressionism" },
   "✨ Improve my words": { es: "✨ Mejorar mis palabras", ar: "✨ حسّن كلماتي", zh: "✨ 润色我的描述", sw: "✨ Boresha maneno yangu", sv: "✨ Förbättra mina ord" },
   "🎲 Surprise me": { es: "🎲 Sorpréndeme", ar: "🎲 فاجئني", zh: "🎲 给我惊喜", sw: "🎲 Nishangaze", sv: "🎲 Överraska mig" },
   "🎯 As I describe": { es: "🎯 Tal como lo describo", ar: "🎯 كما أصف", zh: "🎯 按我的描述", sw: "🎯 Kama ninavyoeleza", sv: "🎯 Som jag beskriver" },
@@ -51,6 +52,7 @@ I18N.phrases({
   "Style": { es: "Estilo", ar: "النمط", zh: "样式", sw: "Mtindo", sv: "Stil" },
   "optional": { es: "opcional", ar: "اختياري", zh: "可选", sw: "si lazima", sv: "valfritt" },
   "{0} min": { es: "{0} min", ar: "{0} د", zh: "{0} 分钟", sw: "dak {0}", sv: "{0} min" },
+  "Click": { es: "Haz clic en", ar: "انقر على", zh: "点击", sw: "Bofya", sv: "Klicka på" },
   "Notification": { es: "Notificación", ar: "إشعار", zh: "通知", sw: "Arifa", sv: "Avisering" },
   "Volume": { es: "Volumen", ar: "مستوى الصوت", zh: "音量", sw: "Sauti", sv: "Volym" },
   "Paste your Gemini key (starts with AIza…)": { es: "Pega tu clave de Gemini (empieza por AIza…)", ar: "الصق مفتاح Gemini (يبدأ بـ AIza…)", zh: "粘贴你的 Gemini 密钥（以 AIza… 开头）", sw: "Bandika ufunguo wako wa Gemini (unaanza na AIza…)", sv: "Klistra in din Gemini-nyckel (börjar med AIza…)" },

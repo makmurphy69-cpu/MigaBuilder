@@ -55,6 +55,7 @@ I18N.phrases({
   "Line": { es: "Línea", ar: "السطر", zh: "行", sw: "Mstari", sv: "Rad" },
   "Mismatched brackets": { es: "Corchetes que no coinciden", ar: "أقواس غير متطابقة", zh: "括号不匹配", sw: "Mabano yasiyolingana", sv: "Parenteser som inte matchar" },
   "Bracket": { es: "Corchete", ar: "قوس", zh: "括号", sw: "Bano", sv: "Parentes" },
+  "The": { es: "La", ar: "إن", zh: "", sw: "", sv: "Den" },
   "Image has no alt text": { es: "La imagen no tiene texto alternativo", ar: "الصورة بلا نص بديل", zh: "图片缺少替代文字", sw: "Picha haina maandishi mbadala", sv: "Bilden saknar alternativtext" },
   "Screen readers cannot describe this image and search engines cannot understand it.": { es: "Los lectores de pantalla no pueden describir esta imagen y los buscadores no pueden entenderla.", ar: "لا تستطيع قارئات الشاشة وصف هذه الصورة ولا تستطيع محركات البحث فهمها.", zh: "屏幕阅读器无法描述这张图片，搜索引擎也无法理解它。", sw: "Visomaji skrini haviwezi kueleza picha hii na injini za utafutaji haziwezi kuielewa.", sv: "Skärmläsare kan inte beskriva bilden och sökmotorer kan inte förstå den." },
   "Accessibility": { es: "Accesibilidad", ar: "سهولة الوصول", zh: "无障碍", sw: "Ufikivu", sv: "Tillgänglighet" },

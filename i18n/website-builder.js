@@ -7,6 +7,7 @@ I18N.phrases({
   "Address": { es: "Dirección", ar: "العنوان", zh: "地址", sw: "Anwani", sv: "Adress" },
   "↶ Undo": { es: "↶ Deshacer", ar: "↶ تراجع", zh: "↶ 撤销", sw: "↶ Tendua", sv: "↶ Ångra" },
   "Hero": { es: "Héroe", ar: "البطل", zh: "主角", sw: "Shujaa", sv: "Hjälte" },
+  "Numbers": { es: "Números", ar: "أرقام", zh: "数字", sw: "Namba", sv: "Siffror" },
   "Call to action": { es: "Llamada a la acción", ar: "دعوة إلى اتخاذ إجراء", zh: "行动号召", sw: "Wito wa kuchukua hatua", sv: "Uppmaning" },
   "Apply change": { es: "Aplicar cambio", ar: "تطبيق التغيير", zh: "应用修改", sw: "Tumia mabadiliko", sv: "Verkställ ändring" },
   "View source": { es: "Ver código fuente", ar: "عرض الشيفرة المصدرية", zh: "查看源代码", sw: "Tazama msimbo chanzo", sv: "Visa källkod" },
