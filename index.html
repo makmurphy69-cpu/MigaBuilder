@@ -604,6 +604,9 @@
   @media (prefers-reduced-motion: reduce) { .brand-m, .brand-word { animation:none; } }
   header.masthead.home-hero p.hero-copy { max-width:720px; margin:14px auto 0; font-size:clamp(15px,1.6vw,18px); color:rgba(237,234,224,.78); line-height:1.5; }
   .home-hero .trust-row { justify-content:center; margin-top:14px; }
+  header.masthead.home-hero p.hero-contact { margin:10px 0 0; font-size:13px; color:rgba(237,234,224,.72); }
+  .hero-contact a { color:var(--cyan); font-weight:600; text-decoration:none; }
+  .hero-contact a:hover { text-decoration:underline; }
   .hero-search { position:relative; display:flex; gap:10px; max-width:760px; margin:20px auto 0; flex-wrap:wrap; }
   .hero-search .search-icon { position:absolute; left:16px; top:14px; font-size:22px; line-height:1; color:var(--line-cyan); pointer-events:none; }
   .hero-search .tool-search { flex:1 1 320px; width:auto; min-height:52px; padding:12px 16px 12px 46px; font-size:16px; border-radius:12px; border:1.5px solid rgba(111,209,224,.55); background:rgba(8,24,38,.85); box-shadow:0 0 0 4px rgba(111,209,224,.07), 0 10px 30px rgba(0,0,0,.25); }
@@ -704,6 +707,7 @@
   <p class="hero-copy" data-i18n="heroSubtitle">Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.</p>
   <div class="hero-mini"><a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">Tour site</span></a><a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
   <div class="trust-row"><span data-i18n="trustSignup">No signup</span><span data-i18n="trustOpen">Open source</span></div>
+  <p class="hero-contact"><span data-i18n="heroContact">Contact</span>: <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a></p>
   <div class="hero-search">
     <span class="search-icon" aria-hidden="true">⌕</span>
     <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
