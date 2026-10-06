@@ -464,6 +464,7 @@ I18N.phrases({
   "Which element has the symbol": { es: "¿Qué elemento tiene el símbolo", ar: "أي عنصر رمزه", zh: "哪种元素的符号是", sw: "Ni elementi gani yenye alama", sv: "Vilket grundämne har beteckningen" },
   "Which element has atomic number": { es: "¿Qué elemento tiene el número atómico", ar: "أي عنصر عدده الذري", zh: "哪种元素的原子序数是", sw: "Ni elementi gani yenye namba ya atomiki", sv: "Vilket grundämne har atomnummer" },
   "Which family does": { es: "¿A qué familia pertenece", ar: "إلى أي عائلة ينتمي", zh: "以下元素属于哪个类别：", sw: "Ni familia gani inayojumuisha", sv: "Vilken familj tillhör" },
+  "Research only.": { es: "Solo para investigación.", ar: "للأبحاث فقط.", zh: "仅用于研究。", sw: "Kwa utafiti tu.", sv: "Endast för forskning." },
   "Which element is this? Used for: “": { es: "¿Qué elemento es? Se usa para: “", ar: "ما هذا العنصر؟ يُستخدم في: “", zh: "这是哪种元素？用途：“", sw: "Hii ni elementi gani? Hutumika kwa: “", sv: "Vilket grundämne är det här? Används till: “" },
   "What is the common name of": { es: "¿Cuál es el nombre común de", ar: "ما الاسم الشائع لـ", zh: "以下物质的俗名是什么：", sw: "Jina la kawaida la", sv: "Vad är det vardagliga namnet på" },
   "What is the chemical formula of": { es: "¿Cuál es la fórmula química de", ar: "ما الصيغة الكيميائية لـ", zh: "以下物质的化学式是什么：", sw: "Fomula ya kikemia ya", sv: "Vilken är den kemiska formeln för" },

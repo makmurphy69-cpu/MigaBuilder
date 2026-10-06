@@ -56,6 +56,7 @@ I18N.phrases({
   "Music": { es: "Música", ar: "الموسيقى", zh: "音乐", sw: "Muziki", sv: "Musik" },
   "Temperature": { es: "Temperatura", ar: "درجة الحرارة", zh: "温度", sw: "Joto", sv: "Temperatur" },
   "Time": { es: "Tiempo", ar: "الوقت", zh: "时间", sw: "Muda", sv: "Tid" },
+  "Cow": { es: "Vaca", ar: "البقرة", zh: "牛", sw: "Ng'ombe", sv: "Ko" },
   "None": { es: "Ninguno", ar: "لا شيء", zh: "无", sw: "Hakuna", sv: "Ingen" },
   "✓ Correct": { es: "✓ Correcto", ar: "✓ صحيح", zh: "✓ 正确", sw: "✓ Sahihi", sv: "✓ Rätt" },
   "Building": { es: "Edificio", ar: "المبنى", zh: "建筑", sw: "Jengo", sv: "Byggnad" }
