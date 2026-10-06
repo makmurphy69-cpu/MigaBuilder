@@ -33,6 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="i18n.js"></script>
+<script src="i18n/file-forge.js"></script>
 
 <style>
   :root {
@@ -580,6 +581,37 @@
       errorConversionFailed: 'Kugeuza kumeshindwa kwa {name}', errorCouldNotRead: 'Imeshindwa kusoma {name} — huenda imeharibika au ina aina isiyotumika.',
       errorZipBuild: 'Imeshindwa kutengeneza faili ya .zip: {message}', errorSomeFailed: 'Faili {count} hazikuweza kugeuzwa — angalia hali karibu na kila faili.',
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Picha zako haziondoki kwenye kifaa chako kamwe — kila kitu hufanyika ndani ya kivinjari. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Konvertera bilder mellan PNG, JPG och WebP — helt i din webbläsare.",
+      yourImagesHeading: "Dina bilder",
+      uploadDropStrong: "Klicka för att välja filer, eller dra hit dem",
+      uploadDropSub: "PNG, JPG, WebP, GIF eller BMP — så många du vill",
+      convertToHeading: "Konvertera till",
+      formatLabel: "Utdataformat",
+      formatPng: "PNG — förlustfri, stöder transparens",
+      formatJpg: "JPG — mindre, ingen transparens",
+      formatWebp: "WebP — ännu mindre, stöder transparens",
+      qualityLabelPrefix: "Kvalitet: ",
+      qualityHint: "Lägre kvalitet ger en mindre fil. 100 % behåller flest detaljer.",
+      resizeLabel: "Ändra storlek — största bredd eller höjd (valfritt)",
+      resizeKeep: "Behåll originalstorlek",
+      resize4k: "3840 px (4K)",
+      resizeHint: "Skalar ner den längre sidan om bilden är större — den kortare sidan följer med så proportionerna behålls. Skalar aldrig upp.",
+      zipCheckboxLabel: "Samla resultaten i en .zip-fil",
+      zipHint: "Avstängt laddar ner varje fil separat — praktiskt för bara en eller två bilder.",
+      convertBtnLabel: "Konvertera & ladda ner alla",
+      convertBtnLoading: "Konverterar…",
+      removeTitle: "Ta bort",
+      statusConverting: "Konverterar…",
+      statusDone: "✓ Klar",
+      statusFailed: "✗ Misslyckades",
+      errorNoImages: "Välj bildfiler (PNG, JPG, WebP, GIF eller BMP).",
+      errorConversionFailed: "Konverteringen misslyckades för {name}",
+      errorCouldNotRead: "Kunde inte läsa {name} — filen kan vara skadad eller i ett format som inte stöds.",
+      errorZipBuild: "Kunde inte skapa .zip-filen: {message}",
+      errorSomeFailed: "{count} fil(er) kunde inte konverteras — se status bredvid varje fil.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Dina bilder lämnar aldrig din enhet — allt sker lokalt i webbläsaren. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     }
   });
 })();

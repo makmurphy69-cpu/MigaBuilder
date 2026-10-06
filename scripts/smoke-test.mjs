@@ -10,7 +10,8 @@
  * reported as warnings, since they depend on the network, not on our code.
  * Runs in CI on every pull request (workflow smoke-test.yml).
  *
- * Env: CHROMIUM=/path/to/chrome, BROWSER_PROXY=http://host:port, IGNORE_CERTS=1
+ * Env: CHROMIUM=/path/to/chrome, BROWSER_PROXY=http://host:port, IGNORE_CERTS=1,
+ *      SMOKE_LANG=sv (open every page with that site language chosen, e.g. es, ar, zh, sw, sv)
  */
 import http from 'node:http';
 import fs from 'node:fs';
@@ -55,6 +56,7 @@ const isOurs = u => typeof u === 'string' && u.startsWith(base);
 const failed = [], warned = [];
 for (const file of pages) {
   const ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  if (process.env.SMOKE_LANG) await ctx.addInitScript(l => { try { localStorage.setItem('migabuilderLang', l); } catch (e) {} }, process.env.SMOKE_LANG);
   const page = await ctx.newPage();
   const errors = [], warnings = [];
   let externalFailed = false;

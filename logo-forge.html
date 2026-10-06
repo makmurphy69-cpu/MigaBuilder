@@ -32,6 +32,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="i18n.js"></script>
+<script src="i18n/logo-forge.js"></script>
 
 <style>
   :root {
@@ -709,6 +710,45 @@
       errorFullPng: 'Imeshindwa kuonyesha PNG ya ubora wa juu.', errorSocialBanner: 'Imeshindwa kuonyesha bango la mitandao ya kijamii.',
       errorFaviconSize: 'Imeshindwa kuonyesha ukubwa huo wa favicon.',
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Hakuna unachoandika hapa kinachohifadhiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Beskriv ett företag. Få en logotyp, en färgpalett, ett visitkort och favicon-filer — skapade direkt i din webbläsare.",
+      connectionHeading: "Anslutning",
+      apiKeyLabelOpenai: "Din OpenAI API-nyckel",
+      apiKeyLabelAnthropic: "Din Anthropic API-nyckel",
+      apiKeyHint: "Används bara för att anropa leverantören ovan direkt från din webbläsare. Sparas aldrig och skickas aldrig någon annanstans.",
+      freeNoticeHint: "✓ Gratis att använda — webbplatsen har en delad nyckel med begränsad daglig kapacitet. Om den slutar fungera har den troligen nått gränsen för dagen; försök igen i morgon, eller byt till OpenAI/Anthropic ovan med din egen nyckel.",
+      modelLabel: "Textmodell",
+      businessHeading: "Företaget",
+      briefLabel: "Beskriv företaget",
+      briefPlaceholder: "t.ex. Ett familjeägt VVS-företag i Göteborg. Vänlig men rak ton.",
+      bizNameLabel: "Företagsnamn (valfritt)",
+      bizNamePlaceholder: "Lämna tomt så föreslår AI:n ett i logotypen",
+      brandKitBtnLabel: "Skapa logotyp & varumärkespaket",
+      brandKitBtnLoading: "Designar…",
+      swatchHint: "Klicka på en färgruta för att byta färg på logotypen direkt — inget AI-anrop behövs.",
+      regenerateBtnLabel: "🔁 Skapa nya (nya designer)",
+      downloadsHeading: "Nedladdningar",
+      downloadSvgLabel: "Logotyp (.svg)",
+      downloadCardLabel: "Visitkort (.html)",
+      downloadFullPngLabel: "PNG i full upplösning (1024×1024)",
+      downloadSocialLabel: "Banner för sociala medier (1200×630)",
+      faviconHeading: "Favicon-storlekar",
+      favicon32: "32×32 (webbläsarflik)",
+      favicon180: "180×180 (Apple touch)",
+      favicon192: "192×192 (Android)",
+      favicon512: "512×512 (PWA / appbutik)",
+      faviconHint: "Varje knapp laddar ner en PNG i exakt den storleken. För en ikon i webbläsarfliken, spara 32×32-filen som <code>favicon.png</code> och lägg till <code>&lt;link rel=\"icon\" href=\"favicon.png\"&gt;</code> i webbplatsens <code>&lt;head&gt;</code>.",
+      errorNoKey: "Lägg till din API-nyckel först.",
+      errorNoBrief: "Beskriv företaget först.",
+      errorNoDesigns: "Modellen returnerade inga logotypförslag.",
+      errorGenericBrandKit: "Kunde inte skapa ett varumärkespaket.",
+      errorNoLogoYet: "Skapa en logotyp först.",
+      errorRenderLogo: "Kunde inte rita logotypen.",
+      errorFullPng: "Kunde inte skapa PNG-filen i full upplösning.",
+      errorSocialBanner: "Kunde inte skapa bannern för sociala medier.",
+      errorFaviconSize: "Kunde inte skapa den favicon-storleken.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Ingenting du skriver här sparas någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     }
   });
   applyProvider();

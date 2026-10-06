@@ -4,7 +4,7 @@
 
 [Try MigaBuilder](https://migabuilder.com/)
 
-MigaBuilder is a practical creation suite that runs directly in the browser. There is no signup, files stay in the browser, and the interface supports English, Spanish, Arabic, Chinese and Kiswahili.
+MigaBuilder is a practical creation suite that runs directly in the browser. There is no signup, files stay in the browser, and the interface supports English, Spanish, Arabic, Chinese, Kiswahili and Swedish on every page.
 
 ## What you can create
 

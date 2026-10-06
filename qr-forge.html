@@ -33,6 +33,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="i18n.js"></script>
+<script src="i18n/qr-forge.js"></script>
 
 <style>
   :root {
@@ -519,6 +520,58 @@
       previewEmpty: 'Jaza sehemu zilizo hapo juu kuona msimbo',
       errorReadImage: 'Imeshindwa kusoma picha hiyo.', errorGenerate: 'Imeshindwa kutengeneza msimbo wa QR kwa ingizo hilo — jaribu maandishi mafupi zaidi.', errorNothingToDownload: 'Hakuna bado cha kupakua.',
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu hutengenezwa ndani ya kivinjari chako — hakuna unachoandika kinachotumwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Gör om valfri länk eller text till en QR-kod som du kan ladda ner — direkt, i din webbläsare.",
+      contentHeading: "Innehåll",
+      typeLabel: "Typ",
+      typeOptText: "Länk eller vanlig text",
+      typeOptWifi: "Wi-Fi-nätverk",
+      typeOptVcard: "Kontaktkort (vCard)",
+      typeOptPhone: "Telefonnummer",
+      typeOptEmail: "E-postadress",
+      qrTextLabel: "Länk eller text att koda",
+      qrTextHint: "Fungerar för webbadresser, telefonnummer, vanlig text — allt som en QR-läsare kan läsa.",
+      wifiSsidLabel: "Nätverksnamn (SSID)",
+      wifiSecurityLabel: "Säkerhet",
+      wifiSecWpa: "WPA/WPA2",
+      wifiSecWep: "WEP",
+      wifiSecNone: "Ingen (öppet nätverk)",
+      wifiPasswordLabel: "Lösenord",
+      wifiPasswordPlaceholder: "Lämna tomt om öppet",
+      wifiHint: "När koden skannas ansluter telefonen direkt till nätverket — inget skrivande behövs.",
+      vcardNameLabel: "Fullständigt namn",
+      vcardPhoneLabel: "Telefon",
+      vcardEmailLabel: "E-post",
+      vcardHint: "När koden skannas sparas detta som en ny kontakt.",
+      phoneNumberLabel: "Telefonnummer",
+      phoneHint: "När koden skannas ringer telefonen numret direkt.",
+      emailAddressLabel: "E-postadress",
+      emailHint: "När koden skannas öppnas ett nytt mejl till den här adressen.",
+      logoHeading: "Logotyp i mitten (valfritt)",
+      logoUploadInitial: "+ Lägg till en logotyp i mitten",
+      logoUploadReplace: "Byt logotyp",
+      logoHint: "Felkorrigeringen ställs automatiskt på Hög så att koden fortfarande kan skannas när mitten är täckt.",
+      removeLogoBtnLabel: "Ta bort logotyp",
+      styleHeading: "Stil",
+      sizeLabel: "Storlek",
+      size200: "200 × 200 (webb)",
+      size400: "400 × 400 (standard)",
+      size800: "800 × 800 (tryck)",
+      levelLabel: "Felkorrigering",
+      levelL: "Låg — minsta mönstret",
+      levelM: "Medel — rekommenderas",
+      levelQ: "Kvartil — tåligare",
+      levelH: "Hög — bäst med logotyp",
+      levelForcedHint: "Låst till Hög medan en logotyp används.",
+      darkLabel: "Kodens färg",
+      lightLabel: "Bakgrundsfärg",
+      downloadBtnLabel: "Ladda ner PNG",
+      previewEmpty: "Fyll i fälten ovan för att se koden",
+      errorReadImage: "Kunde inte läsa den bilden.",
+      errorGenerate: "Kunde inte skapa en QR-kod av det — prova med kortare text.",
+      errorNothingToDownload: "Inget att ladda ner ännu.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt skapas lokalt — ingenting du skriver skickas någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     }
   });
   render();
