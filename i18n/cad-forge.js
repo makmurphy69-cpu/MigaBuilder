@@ -195,3 +195,97 @@ I18N.phrases({
   "The exporter could not load. Check your connection and reload the page.": { es: "No se pudo cargar el exportador. Revisa tu conexión y recarga la página.", ar: "تعذّر تحميل أداة التصدير. تحقق من اتصالك وأعد تحميل الصفحة.", zh: "无法加载导出器。请检查网络并重新加载页面。", sw: "Kihamishaji hakikuweza kupakiwa. Angalia muunganisho wako na upakie ukurasa upya.", sv: "Exportören kunde inte laddas. Kontrollera anslutningen och ladda om sidan." },
   "The 3D view is not available here.": { es: "La vista 3D no está disponible aquí.", ar: "العرض ثلاثي الأبعاد غير متاح هنا.", zh: "此处无法使用 3D 视图。", sw: "Mwonekano wa 3D haupatikani hapa.", sv: "3D-vyn är inte tillgänglig här." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "CAD Forge turns a floor plan into a 3D house: draw walls, doors and windows, and it builds the roof and timber framing, plan and elevation drawings and a material list.": {
+  "es": "CAD Forge convierte un plano de planta en una casa 3D: dibuja muros, puertas y ventanas, y construye el tejado y el entramado de madera, los planos de planta y alzado y una lista de materiales.",
+  "ar": "يحوّل CAD Forge مخطط الطابق إلى منزل ثلاثي الأبعاد: ارسم الجدران والأبواب والنوافذ، فيبني السقف والهيكل الخشبي ومخططات المسقط والواجهات وقائمة المواد.",
+  "zh": "CAD Forge 把平面图变成 3D 房屋：画出墙、门和窗，它就会生成屋顶和木框架、平面图和立面图以及材料清单。",
+  "sw": "CAD Forge hugeuza mpango wa sakafu kuwa nyumba ya 3D: chora kuta, milango na madirisha, nayo hujenga paa na fremu ya mbao, michoro ya mpango na mwinuko na orodha ya vifaa.",
+  "sv": "CAD Forge gör en planritning till ett hus i 3D: rita väggar, dörrar och fönster så bygger det taket och trästommen, plan- och fasadritningar och en materiallista."
+ },
+ "Set the wall height, wall thickness and roof, then draw walls, doors and windows on the plan.": {
+  "es": "Ajusta la altura y el grosor de los muros y el tejado, y dibuja muros, puertas y ventanas en el plano.",
+  "ar": "اضبط ارتفاع الجدار وسماكته والسقف، ثم ارسم الجدران والأبواب والنوافذ على المخطط.",
+  "zh": "设置墙高、墙厚和屋顶，然后在平面图上画墙、门和窗。",
+  "sw": "Weka urefu wa ukuta, unene wa ukuta na paa, kisha chora kuta, milango na madirisha kwenye mpango.",
+  "sv": "Ställ in vägghöjd, väggtjocklek och tak och rita sedan väggar, dörrar och fönster på planen."
+ },
+ "Press “Load sample house”.": {
+  "es": "Pulsa «Cargar casa de ejemplo».",
+  "ar": "اضغط «حمّل منزلًا نموذجيًا».",
+  "zh": "点击“加载示例房屋”。",
+  "sw": "Bonyeza “Pakia nyumba ya mfano”.",
+  "sv": "Tryck på ”Ladda exempelhus”."
+ },
+ "Check the 3D house and timber frame, then download the drawings, material list and DXF file.": {
+  "es": "Revisa la casa 3D y el entramado de madera y descarga los planos, la lista de materiales y el archivo DXF.",
+  "ar": "تفقّد المنزل ثلاثي الأبعاد والهيكل الخشبي، ثم نزّل المخططات وقائمة المواد وملف DXF.",
+  "zh": "检查 3D 房屋和木框架，然后下载图纸、材料清单和 DXF 文件。",
+  "sw": "Kagua nyumba ya 3D na fremu ya mbao, kisha pakua michoro, orodha ya vifaa na faili la DXF.",
+  "sv": "Granska huset i 3D och trästommen och ladda sedan ner ritningarna, materiallistan och DXF-filen."
+ },
+ "Which files can I download?": {
+  "es": "¿Qué archivos puedo descargar?",
+  "ar": "ما الملفات التي يمكنني تنزيلها؟",
+  "zh": "我可以下载哪些文件？",
+  "sw": "Ninaweza kupakua faili zipi?",
+  "sv": "Vilka filer kan jag ladda ner?"
+ },
+ "Plan and elevation drawings, a material list, and DXF, SVG, OBJ and STL files.": {
+  "es": "Planos de planta y alzado, una lista de materiales y archivos DXF, SVG, OBJ y STL.",
+  "ar": "مخططات المسقط والواجهات، وقائمة المواد، وملفات DXF وSVG وOBJ وSTL.",
+  "zh": "平面图和立面图、材料清单，以及 DXF、SVG、OBJ 和 STL 文件。",
+  "sw": "Michoro ya mpango na mwinuko, orodha ya vifaa, na faili za DXF, SVG, OBJ na STL.",
+  "sv": "Plan- och fasadritningar, en materiallista och DXF-, SVG-, OBJ- och STL-filer."
+ },
+ "About CAD Forge": {
+  "es": "Acerca de CAD Forge",
+  "ar": "عن CAD Forge",
+  "zh": "关于 CAD Forge",
+  "sw": "Kuhusu CAD Forge",
+  "sv": "Om CAD Forge"
+ },
+ "How to use CAD Forge": {
+  "es": "Cómo usar CAD Forge",
+  "ar": "طريقة استخدام CAD Forge",
+  "zh": "如何使用 CAD Forge",
+  "sw": "Jinsi ya kutumia CAD Forge",
+  "sv": "Så använder du CAD Forge"
+ },
+ "Is CAD Forge free?": {
+  "es": "¿CAD Forge es gratis?",
+  "ar": "هل CAD Forge مجاني؟",
+  "zh": "CAD Forge 免费吗？",
+  "sw": "Je, CAD Forge ni bure?",
+  "sv": "Är CAD Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

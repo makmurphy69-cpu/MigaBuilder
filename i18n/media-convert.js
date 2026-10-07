@@ -139,3 +139,97 @@ I18N.phrases({
   "Listening privately on this device… allow microphone access if asked.": { es: "Escuchando en privado en este dispositivo… permite el acceso al micrófono si se te pide.", ar: "جارٍ الاستماع بخصوصية على هذا الجهاز… اسمح بالوصول إلى الميكروفون إذا طُلب منك.", zh: "正在本设备上私密识别…如有提示请允许使用麦克风。", sw: "Inasikiliza kwa faragha kwenye kifaa hiki… ruhusu kipaza sauti ukiulizwa.", sv: "Lyssnar privat på den här enheten… tillåt mikrofonen om du blir tillfrågad." },
   "Listening with the online speech service… allow microphone access if asked.": { es: "Escuchando con el servicio de voz en línea… permite el acceso al micrófono si se te pide.", ar: "جارٍ الاستماع عبر خدمة الكلام على الإنترنت… اسمح بالوصول إلى الميكروفون إذا طُلب منك.", zh: "正在使用在线语音服务识别…如有提示请允许使用麦克风。", sw: "Inasikiliza kwa huduma ya sauti ya mtandaoni… ruhusu kipaza sauti ukiulizwa.", sv: "Lyssnar med taltjänsten online… tillåt mikrofonen om du blir tillfrågad." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Media Convert compresses, trims, rotates and resizes video, makes GIFs and MP3s, removes location data, extracts audio and transcribes speech.": {
+  "es": "Media Convert comprime, recorta, gira y redimensiona vídeos, crea GIF y MP3, elimina los datos de ubicación, extrae el audio y transcribe la voz.",
+  "ar": "يضغط Media Convert الفيديو ويقصّه ويدوّره ويغيّر حجمه، ويصنع GIF وMP3، ويزيل بيانات الموقع، ويستخرج الصوت ويفرّغ الكلام نصًا.",
+  "zh": "Media Convert 可以压缩、裁剪、旋转和缩放视频，制作 GIF 和 MP3，删除位置信息，提取音频并把语音转成文字。",
+  "sw": "Media Convert hubana, hupunguza, huzungusha na kubadilisha ukubwa wa video, hutengeneza GIF na MP3, huondoa data za mahali, huchota sauti na kunakili hotuba kuwa maandishi.",
+  "sv": "Media Convert komprimerar, trimmar, roterar och ändrar storlek på video, gör GIF:ar och MP3:or, tar bort platsdata, extraherar ljud och transkriberar tal."
+ },
+ "Choose a video or audio file and pick GIF, audio extraction, live transcription, or compress, trim and convert.": {
+  "es": "Elige un archivo de vídeo o audio y escoge GIF, extracción de audio, transcripción en directo, o comprimir, recortar y convertir.",
+  "ar": "اختر ملف فيديو أو صوت، ثم اختر GIF أو استخراج الصوت أو التفريغ المباشر أو الضغط والقص والتحويل.",
+  "zh": "选择一个视频或音频文件，然后选择 GIF、提取音频、实时转写，或压缩、裁剪和转换。",
+  "sw": "Chagua faili la video au sauti na uchague GIF, uchotaji wa sauti, unukuzi wa moja kwa moja, au kubana, kupunguza na kugeuza.",
+  "sv": "Välj en video- eller ljudfil och välj GIF, ljudextrahering, livetranskribering eller komprimera, trimma och konvertera."
+ },
+ "Press “Create and download GIF”.": {
+  "es": "Pulsa «Crear y descargar GIF».",
+  "ar": "اضغط «إنشاء GIF وتنزيله».",
+  "zh": "点击“生成并下载 GIF”。",
+  "sw": "Bonyeza “Tengeneza na upakue GIF”.",
+  "sv": "Tryck på ”Skapa och ladda ner GIF”."
+ },
+ "Check the result, then download it or copy the transcript.": {
+  "es": "Comprueba el resultado y descárgalo o copia la transcripción.",
+  "ar": "تحقّق من النتيجة، ثم نزّلها أو انسخ النص المفرَّغ.",
+  "zh": "检查结果，然后下载或复制转写文字。",
+  "sw": "Kagua matokeo, kisha uyapakue au unakili manukuu.",
+  "sv": "Kontrollera resultatet och ladda sedan ner det eller kopiera transkriptionen."
+ },
+ "Can I make a GIF from a video?": {
+  "es": "¿Puedo hacer un GIF a partir de un vídeo?",
+  "ar": "هل يمكنني صنع GIF من فيديو؟",
+  "zh": "我可以用视频做 GIF 吗？",
+  "sw": "Je, ninaweza kutengeneza GIF kutoka kwa video?",
+  "sv": "Kan jag göra en GIF av en video?"
+ },
+ "Yes. Choose the video, pick the part you want, and create and download the GIF.": {
+  "es": "Sí. Elige el vídeo, selecciona la parte que quieres y crea y descarga el GIF.",
+  "ar": "نعم. اختر الفيديو وحدّد الجزء الذي تريده، ثم أنشئ GIF ونزّله.",
+  "zh": "可以。选择视频，挑出想要的片段，然后生成并下载 GIF。",
+  "sw": "Ndiyo. Chagua video, chagua sehemu unayotaka, na utengeneze na upakue GIF.",
+  "sv": "Ja. Välj videon, välj den del du vill ha och skapa och ladda ner GIF:en."
+ },
+ "About Media Convert": {
+  "es": "Acerca de Media Convert",
+  "ar": "عن Media Convert",
+  "zh": "关于 Media Convert",
+  "sw": "Kuhusu Media Convert",
+  "sv": "Om Media Convert"
+ },
+ "How to use Media Convert": {
+  "es": "Cómo usar Media Convert",
+  "ar": "طريقة استخدام Media Convert",
+  "zh": "如何使用 Media Convert",
+  "sw": "Jinsi ya kutumia Media Convert",
+  "sv": "Så använder du Media Convert"
+ },
+ "Is Media Convert free?": {
+  "es": "¿Media Convert es gratis?",
+  "ar": "هل Media Convert مجاني؟",
+  "zh": "Media Convert 免费吗？",
+  "sw": "Je, Media Convert ni bure?",
+  "sv": "Är Media Convert gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

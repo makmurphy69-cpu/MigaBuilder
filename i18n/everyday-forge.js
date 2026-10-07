@@ -70,3 +70,97 @@ I18N.phrases({
   "Latest available reference rate (": { es: "Último tipo de referencia disponible (", ar: "أحدث سعر مرجعي متاح (", zh: "最新参考汇率（", sw: "Kiwango cha karibuni cha marejeo (", sv: "Senaste tillgängliga referenskurs (" },
   "Could not load the rate. Check your connection.": { es: "No se pudo cargar el tipo. Revisa tu conexión.", ar: "تعذّر تحميل السعر. تحقق من اتصالك.", zh: "无法加载汇率。请检查网络连接。", sw: "Haikuweza kupakia kiwango. Angalia muunganisho wako.", sv: "Kunde inte hämta kursen. Kontrollera din anslutning." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Everyday Forge collects everyday helpers: charts, writing improvements, password generation, unit conversion and current currency rates.": {
+  "es": "Everyday Forge reúne ayudas para el día a día: gráficos, mejoras de redacción, generación de contraseñas, conversión de unidades y tipos de cambio actuales.",
+  "ar": "يجمع Everyday Forge أدوات للحياة اليومية: رسوم بيانية، وتحسين الكتابة، وتوليد كلمات المرور، وتحويل الوحدات، وأسعار العملات الحالية.",
+  "zh": "Everyday Forge 汇集了日常小帮手：图表、写作润色、密码生成、单位换算和实时汇率。",
+  "sw": "Everyday Forge hukusanya wasaidizi wa kila siku: chati, kuboresha uandishi, kutengeneza nywila, kubadilisha vipimo na viwango vya sasa vya fedha.",
+  "sv": "Everyday Forge samlar vardagshjälpare: diagram, bättre texter, lösenordsgenerering, enhetsomvandling och aktuella valutakurser."
+ },
+ "Choose the everyday calculator or helper you need and enter its details.": {
+  "es": "Elige la calculadora o ayuda que necesitas e introduce sus datos.",
+  "ar": "اختر الحاسبة أو الأداة اليومية التي تحتاجها وأدخل تفاصيلها.",
+  "zh": "选择你需要的日常计算器或小帮手，并输入相关信息。",
+  "sw": "Chagua kikokotoo au msaidizi wa kila siku unaohitaji na uingize maelezo yake.",
+  "sv": "Välj den vardagsräknare eller hjälpare du behöver och fyll i uppgifterna."
+ },
+ "Press “Calculate”.": {
+  "es": "Pulsa «Calcular».",
+  "ar": "اضغط «احسب».",
+  "zh": "点击“计算”。",
+  "sw": "Bonyeza “Hesabu”.",
+  "sv": "Tryck på ”Beräkna”."
+ },
+ "Review the result and copy or use it.": {
+  "es": "Revisa el resultado y cópialo o úsalo.",
+  "ar": "راجع النتيجة وانسخها أو استخدمها.",
+  "zh": "查看结果，然后复制或使用它。",
+  "sw": "Kagua matokeo na uyanakili au uyatumie.",
+  "sv": "Granska resultatet och kopiera eller använd det."
+ },
+ "Are the generated passwords private?": {
+  "es": "¿Son privadas las contraseñas generadas?",
+  "ar": "هل كلمات المرور المولَّدة خاصة؟",
+  "zh": "生成的密码是私密的吗？",
+  "sw": "Je, nywila zinazotengenezwa ni za faragha?",
+  "sv": "Är de genererade lösenorden privata?"
+ },
+ "Yes. Passwords are generated in your browser and never sent anywhere.": {
+  "es": "Sí. Las contraseñas se generan en tu navegador y nunca se envían a ningún sitio.",
+  "ar": "نعم. تُولَّد كلمات المرور في متصفحك ولا تُرسل إلى أي مكان.",
+  "zh": "是的。密码在你的浏览器中生成，绝不会发送到任何地方。",
+  "sw": "Ndiyo. Nywila hutengenezwa kwenye kivinjari chako na hazitumwi popote.",
+  "sv": "Ja. Lösenorden skapas i webbläsaren och skickas aldrig någonstans."
+ },
+ "About Everyday Forge": {
+  "es": "Acerca de Everyday Forge",
+  "ar": "عن Everyday Forge",
+  "zh": "关于 Everyday Forge",
+  "sw": "Kuhusu Everyday Forge",
+  "sv": "Om Everyday Forge"
+ },
+ "How to use Everyday Forge": {
+  "es": "Cómo usar Everyday Forge",
+  "ar": "طريقة استخدام Everyday Forge",
+  "zh": "如何使用 Everyday Forge",
+  "sw": "Jinsi ya kutumia Everyday Forge",
+  "sv": "Så använder du Everyday Forge"
+ },
+ "Is Everyday Forge free?": {
+  "es": "¿Everyday Forge es gratis?",
+  "ar": "هل Everyday Forge مجاني؟",
+  "zh": "Everyday Forge 免费吗？",
+  "sw": "Je, Everyday Forge ni bure?",
+  "sv": "Är Everyday Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

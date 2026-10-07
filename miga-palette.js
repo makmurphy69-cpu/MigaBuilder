@@ -52,6 +52,7 @@
     ["exam-checker.html", "📝", "Exam Checker", "Print answer sheets, photograph each student's paper and download everyone's marks.", "exam checker test marking grading grade answer sheet bubble sheet omr scan photo teacher quiz multiple choice zipgrade gradescope results excel"],
     ["biology-map.html", "🧬", "Biology Map", "Tree of life and shared DNA, how DNA is built, gene expression, mutations, evolution and human diversity.", "biology dna genes genetics evolution tree of life species animals human chimpanzee similarity gene expression protein codon mutation natural selection ancestry ethnic groups human diversity migration neanderthal quiz"],
     ["chemistry-map.html", "⚗️", "Chemistry Map", "Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.", "chemistry periodic table elements atoms atomic number symbols compounds molecules bonds ionic covalent metals materials alloys steel glass plastic battery molar mass formula calculator science quiz"],
+    ["physics-map.html", "🪐", "Physics Map", "Planets in motion, the history of the universe, black holes and physics theories, with calculators and quizzes.", "physics astronomy space planets solar system universe big bang black holes relativity einstein newton gravity quantum string theory dark matter weight on mars speed of light e=mc2 time dilation calculator science quiz"],
     ["body-map.html", "🫀", "Body Map", "Explore organs, bones, muscles, tendons and skin: how they work, illnesses and care, digestion, fasting and quizzes.", "human body anatomy skeleton bones muscles tendons skin organs biology health illness disease symptoms treatment heart brain lungs liver digestion fasting nutrition quiz"],
     ["flashcard-forge.html", "🗂️", "Flashcard Forge", "AI flashcards, Anki-style spaced repetition, games, stats and share links.", "flashcards flash cards study spaced repetition memorize revise quiz anki quizlet vocabulary cloze matching game stats share"],
     ["jam-forge.html", "🎸", "Jam Forge", "Record several clips and play them side by side or one after another: a band, a duet or a conversation.", "join combine merge existing videos order split screen collab music video band duet acapella multitrack sequence conversation talking frog cartoon clap sync count in play along"],
@@ -229,4 +230,109 @@
     if ((e.ctrlKey || e.metaKey) && !e.altKey && !e.shiftKey && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); back ? close() : open(); }
   });
   window.MigaPalette = { open, close };
+
+  // ---------- "What to try next" after a download ----------
+  // When a tool hands the visitor a file, suggest the tools people usually need next
+  // (an invoice → a contract or a logo). Shown once per page visit, closes itself.
+  const NEXT = {
+    'website-builder.html': ['logo-forge.html', 'policy-forge.html', 'site-checkup.html'],
+    'game-forge.html': ['3d-game-forge.html', 'music-forge.html', 'picture-forge.html'],
+    '3d-game-forge.html': ['game-forge.html', 'music-forge.html', 'model-forge.html'],
+    'cartoon-forge.html': ['3d-cartoon.html', 'voice-forge.html', 'merge-forge.html'],
+    '3d-cartoon.html': ['cartoon-forge.html', 'music-forge.html', 'clip-forge.html'],
+    'app-forge.html': ['bug-scanner.html', 'website-builder.html', 'logo-forge.html'],
+    'bot-forge.html': ['website-builder.html', 'policy-forge.html', 'site-checkup.html'],
+    'bug-scanner.html': ['code-forge.html', 'regex-forge.html', 'redact-forge.html'],
+    'video-forge.html': ['music-forge.html', 'clip-forge.html', 'merge-forge.html'],
+    'talk-forge.html': ['voice-forge.html', 'clip-forge.html', 'post-forge.html'],
+    'clip-forge.html': ['media-convert.html', 'post-forge.html', 'music-forge.html'],
+    'merge-forge.html': ['clip-forge.html', 'music-forge.html', 'media-convert.html'],
+    'music-forge.html': ['audio-forge.html', 'merge-forge.html', 'video-forge.html'],
+    'record-forge.html': ['clip-forge.html', 'media-convert.html', 'voice-forge.html'],
+    'media-convert.html': ['clip-forge.html', 'audio-forge.html', 'merge-forge.html'],
+    'voice-forge.html': ['audio-forge.html', 'talk-forge.html', 'merge-forge.html'],
+    'audio-forge.html': ['music-forge.html', 'voice-forge.html', 'media-convert.html'],
+    'logo-forge.html': ['palette-forge.html', 'website-builder.html', 'invoice-forge.html'],
+    'slide-forge.html': ['picture-forge.html', 'pdf-forge.html', 'record-forge.html'],
+    'invoice-forge.html': ['contract-forge.html', 'logo-forge.html', 'pdf-edit-forge.html'],
+    'contract-forge.html': ['pdf-edit-forge.html', 'invoice-forge.html', 'policy-forge.html'],
+    'cv-forge.html': ['writing-forge.html', 'grammar-forge.html', 'pattern-lab.html'],
+    'name-forge.html': ['logo-forge.html', 'website-builder.html', 'palette-forge.html'],
+    'post-forge.html': ['repurpose-forge.html', 'picture-forge.html', 'image-studio.html'],
+    'repurpose-forge.html': ['post-forge.html', 'voice-forge.html', 'slide-forge.html'],
+    'form-forge.html': ['policy-forge.html', 'qr-forge.html', 'utility-forge.html'],
+    'document-forge.html': ['pdf-forge.html', 'pdf-compress.html', 'ocr-forge.html'],
+    'pdf-forge.html': ['pdf-compress.html', 'pdf-edit-forge.html', 'ocr-forge.html'],
+    'pdf-edit-forge.html': ['pdf-forge.html', 'pdf-compress.html', 'contract-forge.html'],
+    'pdf-compress.html': ['pdf-forge.html', 'pdf-edit-forge.html', 'document-forge.html'],
+    'ocr-forge.html': ['grammar-forge.html', 'document-forge.html', 'text-compare.html'],
+    'grammar-forge.html': ['text-compare.html', 'writing-forge.html', 'voice-forge.html'],
+    'text-compare.html': ['grammar-forge.html', 'redact-forge.html', 'utility-forge.html'],
+    'geo-forge.html': ['flashcard-forge.html', 'idea-atlas.html', 'physics-map.html'],
+    'reasoning-test.html': ['pattern-lab.html', 'memory-forge.html', 'big-five.html'],
+    'pattern-lab.html': ['reasoning-test.html', 'cv-forge.html', 'strength-compass.html'],
+    'strength-compass.html': ['big-five.html', 'cv-forge.html', 'focus-forge.html'],
+    'big-five.html': ['strength-compass.html', 'reasoning-test.html', 'focus-forge.html'],
+    'code-forge.html': ['bug-scanner.html', 'regex-forge.html', 'app-forge.html'],
+    'alphabet-forge.html': ['flashcard-forge.html', 'voice-forge.html', 'memory-forge.html'],
+    'idea-atlas.html': ['geo-forge.html', 'flashcard-forge.html', 'physics-map.html'],
+    'exam-checker.html': ['flashcard-forge.html', 'form-forge.html', 'pdf-forge.html'],
+    'biology-map.html': ['body-map.html', 'chemistry-map.html', 'physics-map.html'],
+    'chemistry-map.html': ['physics-map.html', 'biology-map.html', 'flashcard-forge.html'],
+    'physics-map.html': ['chemistry-map.html', 'biology-map.html', 'flashcard-forge.html'],
+    'body-map.html': ['biology-map.html', 'chemistry-map.html', 'flashcard-forge.html'],
+    'flashcard-forge.html': ['memory-forge.html', 'focus-forge.html', 'exam-checker.html'],
+    'jam-forge.html': ['merge-forge.html', 'clip-forge.html', 'audio-forge.html'],
+    'redact-forge.html': ['bug-scanner.html', 'text-compare.html', 'policy-forge.html'],
+    'policy-forge.html': ['website-builder.html', 'contract-forge.html', 'site-checkup.html'],
+    'memory-forge.html': ['flashcard-forge.html', 'reasoning-test.html', 'focus-forge.html'],
+    'paint-forge.html': ['image-studio.html', 'file-forge.html', 'vector-forge.html'],
+    'file-forge.html': ['image-studio.html', 'vector-forge.html', 'pdf-forge.html'],
+    'vector-forge.html': ['logo-forge.html', 'palette-forge.html', 'file-forge.html'],
+    'image-studio.html': ['picture-forge.html', 'file-forge.html', 'post-forge.html'],
+    'picture-forge.html': ['image-studio.html', 'video-forge.html', 'vector-forge.html'],
+    'everyday-forge.html': ['slide-forge.html', 'utility-forge.html', 'qr-forge.html'],
+    'utility-forge.html': ['everyday-forge.html', 'text-compare.html', 'redact-forge.html'],
+    'site-checkup.html': ['website-builder.html', 'policy-forge.html', 'palette-forge.html'],
+    'model-forge.html': ['cad-forge.html', '3d-game-forge.html', 'boat-forge.html'],
+    'cad-forge.html': ['model-forge.html', 'boat-forge.html', 'pdf-forge.html'],
+    'boat-forge.html': ['cad-forge.html', 'model-forge.html', 'physics-map.html'],
+    'palette-forge.html': ['logo-forge.html', 'website-builder.html', 'site-checkup.html'],
+    'qr-forge.html': ['logo-forge.html', 'form-forge.html', 'invoice-forge.html'],
+    'meet-forge.html': ['screen-forge.html', 'record-forge.html', 'slide-forge.html']
+  };
+  const POPULAR = ['pdf-forge.html', 'cv-forge.html', 'image-studio.html', 'invoice-forge.html', 'media-convert.html'];
+  let nextShown = false;
+  function showNext() {
+    if (nextShown || !TOOLS.some(t => t[0] === here) || here === 'project-hub.html' || here === 'index.html') return;
+    nextShown = true;
+    const picks = (NEXT[here] || POPULAR).concat(POPULAR).filter((x, i, a) => x !== here && a.indexOf(x) === i)
+      .map(x => TOOLS.find(t => t[0] === x)).filter(Boolean).slice(0, 3);
+    if (!picks.length) return;
+    const st = document.createElement('style');
+    st.textContent = '.mn-card{position:fixed;right:14px;bottom:14px;z-index:9990;width:min(330px,calc(100vw - 28px));background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.4);border-radius:10px;padding:12px 14px;box-shadow:0 14px 34px rgba(0,0,0,.4);font:14px "IBM Plex Sans",system-ui,sans-serif;animation:mnIn .25s ease-out}' +
+      '@keyframes mnIn{from{transform:translateY(16px);opacity:0}}@media (prefers-reduced-motion:reduce){.mn-card{animation:none}}' +
+      '.mn-card h2{font:700 15px "Space Grotesk",system-ui,sans-serif;margin:0 26px 8px 0;color:#EDEAE0}.mn-card a{display:flex;gap:10px;align-items:center;padding:7px 8px;border-radius:7px;color:#EDEAE0;text-decoration:none}' +
+      '.mn-card a:hover,.mn-card a:focus-visible{background:rgba(111,209,224,.14)}.mn-card a span{font-size:20px;width:26px;text-align:center}.mn-card a b{display:block;font-size:13.5px}.mn-card a small{display:block;font-size:11.5px;color:rgba(237,234,224,.72);line-height:1.3}' +
+      '.mn-card .mn-x{position:absolute;right:8px;top:6px;background:none;border:0;color:#EDEAE0;font-size:18px;cursor:pointer;padding:2px 6px}';
+    document.head.appendChild(st);
+    const card = document.createElement('aside'); card.className = 'mn-card'; card.setAttribute('aria-label', 'What to try next');
+    const e = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    card.innerHTML = '<button type="button" class="mn-x" aria-label="Close">×</button><h2>✅ File ready — what next?</h2>' +
+      picks.map(t => '<a href="' + t[0] + '" data-next="' + t[0] + '"><span>' + e(t[1]) + '</span><span style="width:auto;font-size:inherit;text-align:left"><b>' + e(t[2]) + '</b><small>' + e(t[3]) + '</small></span></a>').join('');
+    card.querySelector('.mn-x').onclick = () => card.remove();
+    document.body.appendChild(card);
+    let idle = setTimeout(() => card.remove(), 25000);
+    card.addEventListener('mouseenter', () => clearTimeout(idle));
+  }
+  // Tools save files by clicking a (usually detached) <a download>, so watch both kinds of click.
+  // Work files (.miga) and the tour's own sample links don't count as a finished result.
+  const isResult = a => a && a.hasAttribute && a.hasAttribute('download') && !/\.miga$/i.test(a.getAttribute('download') || '');
+  const later = () => setTimeout(showNext, 900);
+  const origClick = HTMLAnchorElement.prototype.click;
+  HTMLAnchorElement.prototype.click = function () { if (isResult(this)) later(); return origClick.apply(this, arguments); };
+  const origDispatch = HTMLAnchorElement.prototype.dispatchEvent;
+  HTMLAnchorElement.prototype.dispatchEvent = function (ev) { if (ev && ev.type === 'click' && isResult(this)) later(); return origDispatch.apply(this, arguments); };
+  document.addEventListener('click', ev => { const a = ev.target.closest && ev.target.closest('a[download]'); if (isResult(a) && !a.closest('.tut-box,.tutorial,[data-tut]')) later(); }, true);
+  window.MigaPalette.next = showNext;
 })();

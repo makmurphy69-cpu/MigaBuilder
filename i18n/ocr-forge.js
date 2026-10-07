@@ -53,3 +53,97 @@ I18N.phrases({
   "Extract text first.": { es: "Primero extrae el texto.", ar: "استخرج النص أولًا.", zh: "请先提取文字。", sw: "Toa maandishi kwanza.", sv: "Extrahera texten först." },
   "Text copied.": { es: "Texto copiado.", ar: "تم نسخ النص.", zh: "文字已复制。", sw: "Maandishi yamenakiliwa.", sv: "Texten har kopierats." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "OCR Forge reads the text in photos and scans and turns it into editable text, without uploading the images.": {
+  "es": "OCR Forge lee el texto de fotos y escaneos y lo convierte en texto editable, sin subir las imágenes.",
+  "ar": "يقرأ OCR Forge النص في الصور والمستندات الممسوحة ويحوّله إلى نص قابل للتحرير، دون رفع الصور.",
+  "zh": "OCR Forge 识别照片和扫描件中的文字，把它变成可编辑的文本，而不会上传图片。",
+  "sw": "OCR Forge husoma maandishi kwenye picha na nakala zilizochanganuliwa na kuyageuza kuwa maandishi yanayoharirika, bila kupakia picha.",
+  "sv": "OCR Forge läser texten i foton och skanningar och gör om den till redigerbar text, utan att ladda upp bilderna."
+ },
+ "Choose a clear image and select the document language.": {
+  "es": "Elige una imagen nítida y selecciona el idioma del documento.",
+  "ar": "اختر صورة واضحة وحدّد لغة المستند.",
+  "zh": "选择一张清晰的图片，并选择文档语言。",
+  "sw": "Chagua picha iliyo wazi na uchague lugha ya hati.",
+  "sv": "Välj en tydlig bild och ange dokumentets språk."
+ },
+ "Press “Extract text”.": {
+  "es": "Pulsa «Extraer texto».",
+  "ar": "اضغط «استخراج النص».",
+  "zh": "点击“提取文字”。",
+  "sw": "Bonyeza “Toa maandishi”.",
+  "sv": "Tryck på ”Extrahera text”."
+ },
+ "Check names and numbers, then copy or download the text.": {
+  "es": "Comprueba nombres y números y copia o descarga el texto.",
+  "ar": "تحقّق من الأسماء والأرقام، ثم انسخ النص أو نزّله.",
+  "zh": "核对姓名和数字，然后复制或下载文字。",
+  "sw": "Kagua majina na namba, kisha nakili au upakue maandishi.",
+  "sv": "Kontrollera namn och siffror och kopiera eller ladda sedan ner texten."
+ },
+ "Which languages can it read?": {
+  "es": "¿Qué idiomas puede leer?",
+  "ar": "ما اللغات التي يمكنه قراءتها؟",
+  "zh": "它能识别哪些语言？",
+  "sw": "Linaweza kusoma lugha zipi?",
+  "sv": "Vilka språk kan den läsa?"
+ },
+ "Choose the document's language before you start. The language model downloads once and is then kept in your browser.": {
+  "es": "Elige el idioma del documento antes de empezar. El modelo de ese idioma se descarga una vez y luego se guarda en tu navegador.",
+  "ar": "اختر لغة المستند قبل البدء. يُنزَّل نموذج اللغة مرة واحدة ثم يُحفظ في متصفحك.",
+  "zh": "开始前请选择文档语言。语言模型只需下载一次，之后会保存在你的浏览器中。",
+  "sw": "Chagua lugha ya hati kabla ya kuanza. Modeli ya lugha hupakuliwa mara moja kisha huhifadhiwa kwenye kivinjari chako.",
+  "sv": "Välj dokumentets språk innan du börjar. Språkmodellen laddas ner en gång och sparas sedan i webbläsaren."
+ },
+ "About OCR Forge": {
+  "es": "Acerca de OCR Forge",
+  "ar": "عن OCR Forge",
+  "zh": "关于 OCR Forge",
+  "sw": "Kuhusu OCR Forge",
+  "sv": "Om OCR Forge"
+ },
+ "How to use OCR Forge": {
+  "es": "Cómo usar OCR Forge",
+  "ar": "طريقة استخدام OCR Forge",
+  "zh": "如何使用 OCR Forge",
+  "sw": "Jinsi ya kutumia OCR Forge",
+  "sv": "Så använder du OCR Forge"
+ },
+ "Is OCR Forge free?": {
+  "es": "¿OCR Forge es gratis?",
+  "ar": "هل OCR Forge مجاني؟",
+  "zh": "OCR Forge 免费吗？",
+  "sw": "Je, OCR Forge ni bure?",
+  "sv": "Är OCR Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

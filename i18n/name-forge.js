@@ -14,3 +14,97 @@ I18N.phrases({
   "How to use Name Forge": { es: "Cómo usar Name Forge", ar: "كيفية استخدام Name Forge", zh: "如何使用 Name Forge", sw: "Jinsi ya kutumia Name Forge", sv: "Så använder du Name Forge" },
   "Name Forge — free business name generator": { es: "Name Forge — generador de nombres de negocio gratis", ar: "Name Forge — منشئ أسماء تجارية مجاني", zh: "Name Forge — 免费商业名称生成器", sw: "Name Forge — kitengeneza majina ya biashara cha bure", sv: "Name Forge — gratis generator för företagsnamn" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Name Forge gives you instant business name ideas from what your business does: prefixes, suffixes and brandable blends.": {
+  "es": "Name Forge te da ideas de nombres de empresa al instante a partir de lo que hace tu negocio: prefijos, sufijos y mezclas con gancho.",
+  "ar": "يقدّم لك Name Forge أفكارًا فورية لأسماء تجارية انطلاقًا مما يفعله نشاطك: بادئات ولواحق ومزج مميزة.",
+  "zh": "Name Forge 根据你的业务即时给出公司名称创意：前缀、后缀和易于品牌化的组合词。",
+  "sw": "Name Forge hukupa mawazo ya papo hapo ya majina ya biashara kutokana na kile biashara yako inachofanya: viambishi awali, viambishi tamati na michanganyiko inayofaa chapa.",
+  "sv": "Name Forge ger dig direkt namnförslag för företaget utifrån vad det gör: förled, efterled och slagkraftiga sammansättningar."
+ },
+ "Describe the business, audience, tone, and useful keywords.": {
+  "es": "Describe el negocio, el público, el tono y palabras clave útiles.",
+  "ar": "صف النشاط التجاري والجمهور والأسلوب والكلمات المفتاحية المفيدة.",
+  "zh": "描述业务、受众、语气以及有用的关键词。",
+  "sw": "Eleza biashara, hadhira, mtindo na maneno muhimu.",
+  "sv": "Beskriv verksamheten, målgruppen, tonen och användbara nyckelord."
+ },
+ "Press “Generate names”.": {
+  "es": "Pulsa «Generar nombres».",
+  "ar": "اضغط «أنشئ الأسماء».",
+  "zh": "点击“生成名称”。",
+  "sw": "Bonyeza “Tengeneza majina”.",
+  "sv": "Tryck på ”Skapa namn”."
+ },
+ "Shortlist the strongest names and check their domains.": {
+  "es": "Elige los nombres más fuertes y comprueba sus dominios.",
+  "ar": "اختر أقوى الأسماء وتحقّق من نطاقاتها.",
+  "zh": "挑出最好的名字，并查看它们的域名。",
+  "sw": "Chagua majina bora na ukague vikoa vyake.",
+  "sv": "Välj ut de starkaste namnen och kontrollera deras domäner."
+ },
+ "Can I check if a domain is free?": {
+  "es": "¿Puedo comprobar si un dominio está libre?",
+  "ar": "هل يمكنني التحقق من توفّر نطاق؟",
+  "zh": "我可以查看域名是否可用吗？",
+  "sw": "Je, ninaweza kukagua kama kikoa kiko wazi?",
+  "sv": "Kan jag kolla om en domän är ledig?"
+ },
+ "Shortlist the names you like, then check that the domain and social media names are free before you decide.": {
+  "es": "Haz una lista con los nombres que te gusten y comprueba que el dominio y los nombres en redes sociales estén libres antes de decidir.",
+  "ar": "اختر الأسماء التي تعجبك، ثم تحقّق من توفّر النطاق وأسماء الحسابات على وسائل التواصل قبل أن تقرّر.",
+  "zh": "把喜欢的名字列入候选，然后在决定前确认域名和社交媒体账号名都还可用。",
+  "sw": "Orodhesha majina unayopenda, kisha hakikisha kikoa na majina ya mitandao ya kijamii yako wazi kabla ya kuamua.",
+  "sv": "Gör en lista över namnen du gillar och kontrollera sedan att domänen och namnen på sociala medier är lediga innan du bestämmer dig."
+ },
+ "About Name Forge": {
+  "es": "Acerca de Name Forge",
+  "ar": "عن Name Forge",
+  "zh": "关于 Name Forge",
+  "sw": "Kuhusu Name Forge",
+  "sv": "Om Name Forge"
+ },
+ "How to use Name Forge": {
+  "es": "Cómo usar Name Forge",
+  "ar": "طريقة استخدام Name Forge",
+  "zh": "如何使用 Name Forge",
+  "sw": "Jinsi ya kutumia Name Forge",
+  "sv": "Så använder du Name Forge"
+ },
+ "Is Name Forge free?": {
+  "es": "¿Name Forge es gratis?",
+  "ar": "هل Name Forge مجاني؟",
+  "zh": "Name Forge 免费吗？",
+  "sw": "Je, Name Forge ni bure?",
+  "sv": "Är Name Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

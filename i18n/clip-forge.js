@@ -161,3 +161,97 @@ I18N.phrases({
   "How to use Clip Forge": { es: "Cómo usar Clip Forge", ar: "كيفية استخدام Clip Forge", zh: "如何使用 Clip Forge", sw: "Jinsi ya kutumia Clip Forge", sv: "Så använder du Clip Forge" },
   "Clip Forge — trim, caption, and translate your videos": { es: "Clip Forge — recorta, subtitula y traduce tus vídeos", ar: "Clip Forge — قصّ مقاطع الفيديو وأضف لها تعليقات وترجمها", zh: "Clip Forge — 剪辑、加字幕并翻译你的视频", sw: "Clip Forge — kata, weka maelezo, na utafsiri video zako", sv: "Clip Forge — trimma, texta och översätt dina videor" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Clip Forge is a video editor in your browser: trim, add music, crop for any platform, add timed text and translated captions, stamp a watermark, or let Auto Edit turn several clips into one video.": {
+  "es": "Clip Forge es un editor de vídeo en tu navegador: recorta, añade música, adapta el formato a cualquier plataforma, añade textos con tiempo y subtítulos traducidos, pon una marca de agua o deja que Auto Edit convierta varios clips en un solo vídeo.",
+  "ar": "Clip Forge محرر فيديو في متصفحك: قصّ، وأضف موسيقى، واقتطع الإطار لأي منصة، وأضف نصوصًا موقوتة وترجمات، وضع علامة مائية، أو دع Auto Edit يحوّل عدة مقاطع إلى فيديو واحد.",
+  "zh": "Clip Forge 是浏览器里的视频编辑器：裁剪、加音乐、为任意平台调整画幅、添加定时文字和翻译字幕、加水印，或让 Auto Edit 把多个片段剪成一个视频。",
+  "sw": "Clip Forge ni kihariri video kwenye kivinjari chako: punguza, ongeza muziki, kata kwa jukwaa lolote, ongeza maandishi yenye muda na manukuu yaliyotafsiriwa, weka alama ya maji, au acha Auto Edit igeuze klipu kadhaa kuwa video moja.",
+  "sv": "Clip Forge är en videoredigerare i webbläsaren: trimma, lägg till musik, beskär för valfri plattform, lägg till tidsatt text och översatta undertexter, stämpla en vattenstämpel eller låt Auto Edit göra flera klipp till en video."
+ },
+ "Upload a video and choose the cut, captions, or translation.": {
+  "es": "Sube un vídeo y elige el corte, los subtítulos o la traducción.",
+  "ar": "ارفع فيديو واختر القصّ أو الترجمة المكتوبة أو الترجمة إلى لغة أخرى.",
+  "zh": "上传视频，选择剪辑、字幕或翻译。",
+  "sw": "Pakia video na uchague ukataji, manukuu au tafsiri.",
+  "sv": "Ladda upp en video och välj klippning, undertexter eller översättning."
+ },
+ "Press “Process clip”.": {
+  "es": "Pulsa «Procesar clip».",
+  "ar": "اضغط «عالج المقطع».",
+  "zh": "点击“处理片段”。",
+  "sw": "Bonyeza “Chakata klipu”.",
+  "sv": "Tryck på ”Bearbeta klipp”."
+ },
+ "Preview the edit and download the finished clip.": {
+  "es": "Previsualiza la edición y descarga el clip terminado.",
+  "ar": "عاين التعديل ونزّل المقطع النهائي.",
+  "zh": "预览剪辑效果并下载完成的片段。",
+  "sw": "Hakiki uhariri na upakue klipu iliyokamilika.",
+  "sv": "Förhandsgranska redigeringen och ladda ner det färdiga klippet."
+ },
+ "What does Auto Edit do?": {
+  "es": "¿Qué hace Auto Edit?",
+  "ar": "ماذا يفعل Auto Edit؟",
+  "zh": "Auto Edit 能做什么？",
+  "sw": "Auto Edit hufanya nini?",
+  "sv": "Vad gör Auto Edit?"
+ },
+ "Auto Edit turns several clips into one video that opens on a hook, cuts on the beat and adds text, effects and sounds. It can also join two takes so you can talk to yourself.": {
+  "es": "Auto Edit convierte varios clips en un vídeo que empieza con un gancho, corta al ritmo de la música y añade texto, efectos y sonidos. También puede unir dos tomas para que hables contigo mismo.",
+  "ar": "يحوّل Auto Edit عدة مقاطع إلى فيديو يبدأ بلقطة جاذبة، ويقطع على الإيقاع، ويضيف نصوصًا ومؤثرات وأصواتًا. ويمكنه أيضًا دمج لقطتين لتتحدث مع نفسك.",
+  "zh": "Auto Edit 把多个片段剪成一个视频：以吸引人的开头开场、踩着节拍剪辑，并添加文字、特效和音效。它还能把两条录像拼在一起，让你和自己对话。",
+  "sw": "Auto Edit hugeuza klipu kadhaa kuwa video moja inayoanza kwa kivutio, hukata kwa mdundo na kuongeza maandishi, athari na sauti. Pia inaweza kuunganisha rekodi mbili ili uzungumze na nafsi yako.",
+  "sv": "Auto Edit gör flera klipp till en video som börjar med en krok, klipper i takt med musiken och lägger till text, effekter och ljud. Den kan också foga ihop två tagningar så att du kan prata med dig själv."
+ },
+ "About Clip Forge": {
+  "es": "Acerca de Clip Forge",
+  "ar": "عن Clip Forge",
+  "zh": "关于 Clip Forge",
+  "sw": "Kuhusu Clip Forge",
+  "sv": "Om Clip Forge"
+ },
+ "How to use Clip Forge": {
+  "es": "Cómo usar Clip Forge",
+  "ar": "طريقة استخدام Clip Forge",
+  "zh": "如何使用 Clip Forge",
+  "sw": "Jinsi ya kutumia Clip Forge",
+  "sv": "Så använder du Clip Forge"
+ },
+ "Is Clip Forge free?": {
+  "es": "¿Clip Forge es gratis?",
+  "ar": "هل Clip Forge مجاني؟",
+  "zh": "Clip Forge 免费吗？",
+  "sw": "Je, Clip Forge ni bure?",
+  "sv": "Är Clip Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

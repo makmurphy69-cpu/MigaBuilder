@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/cartoon-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/cartoon-forge.jpg">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <script src="usage-counter.js" defer></script><script src="sandbox-frame.js"></script>
 
@@ -31,6 +32,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Cartoon Forge","url":"https://migabuilder.com/cartoon-forge.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any modern web browser","description":"Free AI cartoon generator for creating playable animated cartoons from a story description in your browser.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script src="i18n.js"></script>
 <script src="i18n/cartoon-forge.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I turn the cartoon into a video?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Record it as a WebM video right in the page, or download the cartoon as an HTML file."}}, {"@type": "Question", "name": "Is Cartoon Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
 </head>
 <body><nav aria-label="Tool navigation" style="max-width:1120px;margin:16px auto 0;padding:0 20px;display:flex;justify-content:space-between;gap:12px"><a href="index.html" style="color:#6FD1E0;font-weight:700;text-decoration:none">← All tools</a><span></span></nav>
 <header class="masthead">
@@ -69,6 +71,20 @@
     <textarea class="source" id="source" readonly></textarea>
   </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Cartoon Forge</h2>
+  <p>Cartoon Forge turns a story into a playable animated cartoon. Describe the characters, setting and dialogue, refine the scenes, then download it or record it as a video.</p>
+  <h3>How to use Cartoon Forge</h3>
+  <ol><li>Describe the characters, setting, story, dialogue, and ending.</li><li>Press “Generate cartoon”.</li><li>Play the cartoon, refine scenes, then record or download it.</li></ol>
+  <h3>Can I turn the cartoon into a video?</h3>
+  <p>Yes. Record it as a WebM video right in the page, or download the cartoon as an HTML file.</p>
+  <h3>Is Cartoon Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="3d-cartoon.html">3D Cartoon</a> · <a href="voice-forge.html">Voice Forge</a> · <a href="merge-forge.html">Merge Forge</a></p>
+</section>
+
 <footer>Part of <a href="index.html">MigaBuilder</a>. Cartoons are generated as self-contained HTML using Canvas, CSS and JavaScript. Recording uses your browser's built-in WebM recorder and works best in Chrome or Edge. <a href="feedback.html">Send feedback →</a></footer>
 <script>
 (function(){

@@ -108,3 +108,90 @@ I18N.phrases({
   "The AI did not send a pattern. Try describing it differently.": { es: "La IA no envió un patrón. Prueba a describirlo de otra forma.", ar: "لم يرسل الذكاء الاصطناعي نمطًا. جرّب وصفه بطريقة مختلفة.", zh: "AI 没有给出模式。请换一种描述方式。", sw: "AI haikutuma mpangilio. Jaribu kuueleza kwa njia tofauti.", sv: "AI:n skickade inget mönster. Prova att beskriva det på ett annat sätt." },
   "Type or load a pattern first.": { es: "Primero escribe o carga un patrón.", ar: "اكتب نمطًا أو حمّله أولًا.", zh: "请先输入或载入一个模式。", sw: "Andika au pakia mpangilio kwanza.", sv: "Skriv eller ladda ett mönster först." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Regex Forge is a regular expression tester: see every match and capture group highlighted live, read a plain-English explanation, test find and replace, or let AI write the pattern.": {
+  "es": "Regex Forge es un probador de expresiones regulares: ve cada coincidencia y grupo de captura resaltados en vivo, lee una explicación en lenguaje sencillo, prueba buscar y reemplazar o deja que la IA escriba el patrón.",
+  "ar": "Regex Forge أداة لاختبار التعابير النمطية: شاهد كل تطابق ومجموعة التقاط مميّزة مباشرة، واقرأ شرحًا بلغة بسيطة، وجرّب البحث والاستبدال، أو دع الذكاء الاصطناعي يكتب النمط.",
+  "zh": "Regex Forge 是正则表达式测试工具：实时高亮每个匹配和捕获组，用通俗语言解释，测试查找替换，或让 AI 帮你写出模式。",
+  "sw": "Regex Forge ni kijaribu cha regex: ona kila mlinganisho na kikundi cha kunasa kikiangaziwa moja kwa moja, soma maelezo kwa lugha rahisi, jaribu tafuta na badilisha, au acha AI iandike mpangilio.",
+  "sv": "Regex Forge testar reguljära uttryck: se varje träff och fångstgrupp markerad direkt, läs en förklaring på vanlig svenska, testa sök och ersätt eller låt AI skriva mönstret."
+ },
+ "Type a regular expression or pick a common pattern, and paste some test text.": {
+  "es": "Escribe una expresión regular o elige un patrón común y pega un texto de prueba.",
+  "ar": "اكتب تعبيرًا نمطيًا أو اختر نمطًا شائعًا، والصق نصًا للتجربة.",
+  "zh": "输入一个正则表达式或选择常用模式，并粘贴一些测试文字。",
+  "sw": "Andika regex au chagua mpangilio wa kawaida, na ubandike maandishi ya majaribio.",
+  "sv": "Skriv ett reguljärt uttryck eller välj ett vanligt mönster och klistra in lite testtext."
+ },
+ "Press “Write the regex for me”.": {
+  "es": "Pulsa «Escríbeme la regex».",
+  "ar": "اضغط «اكتب التعبير لي».",
+  "zh": "点击“帮我写正则”。",
+  "sw": "Bonyeza “Niandikie regex”.",
+  "sv": "Tryck på ”Skriv regexen åt mig”."
+ },
+ "Check the highlighted matches and the plain-English explanation, then copy the code for your language.": {
+  "es": "Revisa las coincidencias resaltadas y la explicación sencilla y copia el código para tu lenguaje.",
+  "ar": "تفقّد التطابقات المميّزة والشرح البسيط، ثم انسخ الشيفرة للغة البرمجة التي تستخدمها.",
+  "zh": "检查高亮的匹配和通俗解释，然后复制适合你编程语言的代码。",
+  "sw": "Kagua milinganisho iliyoangaziwa na maelezo rahisi, kisha nakili msimbo wa lugha yako.",
+  "sv": "Kontrollera de markerade träffarna och den enkla förklaringen och kopiera sedan koden för ditt språk."
+ },
+ "Can it give me code for my language?": {
+  "es": "¿Puede darme código para mi lenguaje?",
+  "ar": "هل يمكنه أن يعطيني شيفرة للغتي البرمجية؟",
+  "zh": "它能给出适合我编程语言的代码吗？",
+  "sw": "Je, inaweza kunipa msimbo kwa lugha yangu?",
+  "sv": "Kan den ge mig kod för mitt programspråk?"
+ },
+ "Yes. Copy ready-to-use code for JavaScript, Python and other languages.": {
+  "es": "Sí. Copia código listo para usar en JavaScript, Python y otros lenguajes.",
+  "ar": "نعم. انسخ شيفرة جاهزة للاستخدام في JavaScript وPython ولغات أخرى.",
+  "zh": "可以。复制可直接使用的 JavaScript、Python 及其他语言的代码。",
+  "sw": "Ndiyo. Nakili msimbo ulio tayari kutumika kwa JavaScript, Python na lugha nyingine.",
+  "sv": "Ja. Kopiera färdig kod för JavaScript, Python och andra språk."
+ },
+ "About Regex Forge": {
+  "es": "Acerca de Regex Forge",
+  "ar": "عن Regex Forge",
+  "zh": "关于 Regex Forge",
+  "sw": "Kuhusu Regex Forge",
+  "sv": "Om Regex Forge"
+ },
+ "How to use Regex Forge": {
+  "es": "Cómo usar Regex Forge",
+  "ar": "طريقة استخدام Regex Forge",
+  "zh": "如何使用 Regex Forge",
+  "sw": "Jinsi ya kutumia Regex Forge",
+  "sv": "Så använder du Regex Forge"
+ },
+ "Is Regex Forge free?": {
+  "es": "¿Regex Forge es gratis?",
+  "ar": "هل Regex Forge مجاني؟",
+  "zh": "Regex Forge 免费吗？",
+  "sw": "Je, Regex Forge ni bure?",
+  "sv": "Är Regex Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

@@ -17,3 +17,97 @@ I18N.phrases({
   "How to use Record Forge": { es: "Cómo usar Record Forge", ar: "كيفية استخدام Record Forge", zh: "如何使用 Record Forge", sw: "Jinsi ya kutumia Record Forge", sv: "Så använder du Record Forge" },
   "Record Forge — screen recording with voice narration": { es: "Record Forge — grabación de pantalla con narración de voz", ar: "Record Forge — تسجيل الشاشة مع تعليق صوتي", zh: "Record Forge — 带语音讲解的屏幕录制", sw: "Record Forge — kurekodi skrini pamoja na masimulizi ya sauti", sv: "Record Forge — skärminspelning med berättarröst" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Record Forge records your screen with live voice narration, right in your browser, so you can make tutorials and demos without installing anything.": {
+  "es": "Record Forge graba tu pantalla con narración de voz en directo, en tu navegador, para hacer tutoriales y demostraciones sin instalar nada.",
+  "ar": "يسجّل Record Forge شاشتك مع تعليق صوتي مباشر داخل متصفحك، لتصنع شروحات وعروضًا توضيحية دون تثبيت أي شيء.",
+  "zh": "Record Forge 直接在浏览器中录制屏幕并同步录入语音解说，无需安装任何软件就能制作教程和演示。",
+  "sw": "Record Forge hurekodi skrini yako pamoja na maelezo ya sauti moja kwa moja kwenye kivinjari chako, ili utengeneze mafunzo na maonyesho bila kusakinisha chochote.",
+  "sv": "Record Forge spelar in skärmen med direkt berättarröst i webbläsaren, så att du kan göra guider och demor utan att installera något."
+ },
+ "Choose the screen or tab, microphone, and recording quality.": {
+  "es": "Elige la pantalla o la pestaña, el micrófono y la calidad de grabación.",
+  "ar": "اختر الشاشة أو التبويب والميكروفون وجودة التسجيل.",
+  "zh": "选择屏幕或标签页、麦克风和录制质量。",
+  "sw": "Chagua skrini au kichupo, maikrofoni na ubora wa kurekodi.",
+  "sv": "Välj skärm eller flik, mikrofon och inspelningskvalitet."
+ },
+ "Press “Start recording”.": {
+  "es": "Pulsa «Empezar a grabar».",
+  "ar": "اضغط «ابدأ التسجيل».",
+  "zh": "点击“开始录制”。",
+  "sw": "Bonyeza “Anza kurekodi”.",
+  "sv": "Tryck på ”Starta inspelning”."
+ },
+ "Demonstrate the task, stop the recording, and download the WebM file.": {
+  "es": "Haz la demostración, detén la grabación y descarga el archivo WebM.",
+  "ar": "اعرض المهمة، وأوقف التسجيل، ونزّل ملف WebM.",
+  "zh": "演示操作，停止录制，然后下载 WebM 文件。",
+  "sw": "Onyesha kazi, simamisha kurekodi, na upakue faili la WebM.",
+  "sv": "Visa uppgiften, stoppa inspelningen och ladda ner WebM-filen."
+ },
+ "What can I do with the recording?": {
+  "es": "¿Qué puedo hacer con la grabación?",
+  "ar": "ماذا يمكنني أن أفعل بالتسجيل؟",
+  "zh": "录好的视频可以做什么？",
+  "sw": "Ninaweza kufanya nini na rekodi?",
+  "sv": "Vad kan jag göra med inspelningen?"
+ },
+ "Trim it, download it as a WebM video, upload it to YouTube, or combine it with other clips in Merge Forge.": {
+  "es": "Recortarla, descargarla como vídeo WebM, subirla a YouTube o combinarla con otros clips en Merge Forge.",
+  "ar": "قصّه، أو نزّله كفيديو WebM، أو ارفعه إلى YouTube، أو ادمجه مع مقاطع أخرى في Merge Forge.",
+  "zh": "裁剪它、下载为 WebM 视频、上传到 YouTube，或在 Merge Forge 中与其他片段合并。",
+  "sw": "Ipunguze, ipakue kama video ya WebM, ipakie YouTube, au iunganishe na klipu nyingine katika Merge Forge.",
+  "sv": "Trimma den, ladda ner den som WebM-video, ladda upp den till YouTube eller kombinera den med andra klipp i Merge Forge."
+ },
+ "About Record Forge": {
+  "es": "Acerca de Record Forge",
+  "ar": "عن Record Forge",
+  "zh": "关于 Record Forge",
+  "sw": "Kuhusu Record Forge",
+  "sv": "Om Record Forge"
+ },
+ "How to use Record Forge": {
+  "es": "Cómo usar Record Forge",
+  "ar": "طريقة استخدام Record Forge",
+  "zh": "如何使用 Record Forge",
+  "sw": "Jinsi ya kutumia Record Forge",
+  "sv": "Så använder du Record Forge"
+ },
+ "Is Record Forge free?": {
+  "es": "¿Record Forge es gratis?",
+  "ar": "هل Record Forge مجاني؟",
+  "zh": "Record Forge 免费吗？",
+  "sw": "Je, Record Forge ni bure?",
+  "sv": "Är Record Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

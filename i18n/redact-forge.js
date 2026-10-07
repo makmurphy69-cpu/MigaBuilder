@@ -93,3 +93,97 @@ I18N.phrases({
   "This file is": { es: "Este archivo ocupa", ar: "حجم هذا الملف", zh: "此文件大小为", sw: "Faili hii ina", sv: "Filen är" },
   "MB. Large files can make the page slow. Continue?": { es: "MB. Los archivos grandes pueden ralentizar la página. ¿Continuar?", ar: "ميغابايت. قد تجعل الملفات الكبيرة الصفحة بطيئة. هل تريد المتابعة؟", zh: "MB。大文件可能会让页面变慢。继续吗？", sw: "MB. Faili kubwa zinaweza kufanya ukurasa uwe polepole. Endelea?", sv: "MB. Stora filer kan göra sidan långsam. Fortsätta?" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Redact Forge hides API keys, tokens, passwords, emails, IP addresses, phone and card numbers in logs and code before you paste them into an AI chat, a bug report or a forum.": {
+  "es": "Redact Forge oculta claves de API, tokens, contraseñas, correos, direcciones IP y números de teléfono y de tarjeta en registros y código antes de pegarlos en un chat de IA, un informe de errores o un foro.",
+  "ar": "يخفي Redact Forge مفاتيح API والرموز وكلمات المرور ورسائل البريد وعناوين IP وأرقام الهواتف والبطاقات في السجلات والشيفرة قبل لصقها في محادثة ذكاء اصطناعي أو تقرير خطأ أو منتدى.",
+  "zh": "Redact Forge 在你把日志和代码粘贴到 AI 聊天、错误报告或论坛之前，隐藏其中的 API 密钥、令牌、密码、邮箱、IP 地址、电话号码和卡号。",
+  "sw": "Redact Forge huficha funguo za API, tokeni, nywila, barua pepe, anwani za IP, namba za simu na kadi kwenye kumbukumbu na msimbo kabla hujazibandika kwenye mazungumzo ya AI, ripoti ya hitilafu au jukwaa.",
+  "sv": "Redact Forge döljer API-nycklar, token, lösenord, e-postadresser, IP-adresser, telefon- och kortnummer i loggar och kod innan du klistrar in dem i en AI-chatt, en felrapport eller ett forum."
+ },
+ "Paste a log, error message or config file, or press Try an example log.": {
+  "es": "Pega un registro, un mensaje de error o un archivo de configuración, o pulsa Probar un registro de ejemplo.",
+  "ar": "الصق سجلًا أو رسالة خطأ أو ملف إعدادات، أو اضغط «جرّب سجلًا نموذجيًا».",
+  "zh": "粘贴日志、错误信息或配置文件，或点击“试试示例日志”。",
+  "sw": "Bandika kumbukumbu, ujumbe wa hitilafu au faili la usanidi, au bonyeza Jaribu kumbukumbu ya mfano.",
+  "sv": "Klistra in en logg, ett felmeddelande eller en konfigurationsfil, eller tryck på Prova en exempellogg."
+ },
+ "Press “Copy”.": {
+  "es": "Pulsa «Copiar».",
+  "ar": "اضغط «نسخ».",
+  "zh": "点击“复制”。",
+  "sw": "Bonyeza “Nakili”.",
+  "sv": "Tryck på ”Kopiera”."
+ },
+ "Check the highlighted replacements, copy the safe text, and paste the answer you get back into Put the real values back.": {
+  "es": "Revisa los reemplazos resaltados, copia el texto seguro y pega la respuesta que recibas en Restaurar los valores reales.",
+  "ar": "راجع الاستبدالات المميّزة، وانسخ النص الآمن، والصق الإجابة التي تتلقاها في «أعِد القيم الحقيقية».",
+  "zh": "检查高亮的替换内容，复制安全的文字，再把收到的回复粘贴到“还原真实值”中。",
+  "sw": "Kagua mabadilisho yaliyoangaziwa, nakili maandishi salama, na ubandike jibu unalopata kwenye Rudisha thamani halisi.",
+  "sv": "Kontrollera de markerade ersättningarna, kopiera den säkra texten och klistra in svaret du får i Sätt tillbaka de riktiga värdena."
+ },
+ "Can I get the real values back?": {
+  "es": "¿Puedo recuperar los valores reales?",
+  "ar": "هل يمكنني استعادة القيم الحقيقية؟",
+  "zh": "我能把真实值换回来吗？",
+  "sw": "Je, ninaweza kurudisha thamani halisi?",
+  "sv": "Kan jag få tillbaka de riktiga värdena?"
+ },
+ "Yes. Paste the answer you get back into Put the real values back, and the placeholders are swapped for your real values.": {
+  "es": "Sí. Pega la respuesta que recibas en Restaurar los valores reales y los marcadores se cambian por tus valores reales.",
+  "ar": "نعم. الصق الإجابة التي تتلقاها في «أعِد القيم الحقيقية» فتُستبدل العناصر النائبة بقيمك الحقيقية.",
+  "zh": "可以。把收到的回复粘贴到“还原真实值”中，占位符就会换回你的真实值。",
+  "sw": "Ndiyo. Bandika jibu unalopata kwenye Rudisha thamani halisi, na vishika nafasi vitabadilishwa kwa thamani zako halisi.",
+  "sv": "Ja. Klistra in svaret du får i Sätt tillbaka de riktiga värdena så byts platshållarna ut mot dina riktiga värden."
+ },
+ "About Redact Forge": {
+  "es": "Acerca de Redact Forge",
+  "ar": "عن Redact Forge",
+  "zh": "关于 Redact Forge",
+  "sw": "Kuhusu Redact Forge",
+  "sv": "Om Redact Forge"
+ },
+ "How to use Redact Forge": {
+  "es": "Cómo usar Redact Forge",
+  "ar": "طريقة استخدام Redact Forge",
+  "zh": "如何使用 Redact Forge",
+  "sw": "Jinsi ya kutumia Redact Forge",
+  "sv": "Så använder du Redact Forge"
+ },
+ "Is Redact Forge free?": {
+  "es": "¿Redact Forge es gratis?",
+  "ar": "هل Redact Forge مجاني؟",
+  "zh": "Redact Forge 免费吗？",
+  "sw": "Je, Redact Forge ni bure?",
+  "sv": "Är Redact Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

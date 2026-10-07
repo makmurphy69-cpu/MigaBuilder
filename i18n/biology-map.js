@@ -607,3 +607,97 @@ I18N.phrases({
   "Nature explorer 🔍": { es: "Explorador de la naturaleza 🔍", ar: "مستكشف الطبيعة 🔍", zh: "自然探索者 🔍", sw: "Mvumbuzi wa maumbile 🔍", sv: "Naturutforskare 🔍" },
   "Biology quiz": { es: "Cuestionario de biología", ar: "اختبار الأحياء", zh: "生物测验", sw: "Jaribio la biolojia", sv: "Biologiquiz" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Biology Map explores the tree of life and how much DNA we share with 40+ living things, how DNA is built, how a gene becomes a protein, mutations, evolution and human diversity.": {
+  "es": "Biology Map explora el árbol de la vida y cuánto ADN compartimos con más de 40 seres vivos, cómo está construido el ADN, cómo un gen se convierte en proteína, las mutaciones, la evolución y la diversidad humana.",
+  "ar": "تستكشف Biology Map شجرة الحياة ومقدار الحمض النووي الذي نتشاركه مع أكثر من 40 كائنًا حيًا، وكيف يُبنى الحمض النووي، وكيف يتحول الجين إلى بروتين، والطفرات، والتطور، والتنوع البشري.",
+  "zh": "Biology Map 带你探索生命之树：我们与 40 多种生物共享多少 DNA、DNA 的结构、基因如何变成蛋白质、突变、进化以及人类的多样性。",
+  "sw": "Biology Map huchunguza mti wa uhai na kiasi cha DNA tunachoshiriki na viumbe hai zaidi ya 40, jinsi DNA ilivyojengwa, jinsi jeni inavyokuwa protini, mabadiliko ya jeni, mageuko na utofauti wa binadamu.",
+  "sv": "Biology Map utforskar livets träd och hur mycket DNA vi delar med över 40 levande varelser, hur DNA är uppbyggt, hur en gen blir ett protein, mutationer, evolution och mänsklig mångfald."
+ },
+ "Tap any living thing on the tree of life to see how long ago we shared an ancestor and how much DNA we share.": {
+  "es": "Toca cualquier ser vivo del árbol de la vida para ver hace cuánto compartimos un antepasado y cuánto ADN compartimos.",
+  "ar": "اضغط على أي كائن حي في شجرة الحياة لترى متى اشتركنا في سلف واحد ومقدار الحمض النووي المشترك بيننا.",
+  "zh": "点击生命之树上的任意生物，看看我们多久以前有共同祖先、共享多少 DNA。",
+  "sw": "Gusa kiumbe hai chochote kwenye mti wa uhai kuona tulishiriki babu mmoja lini na tunashiriki DNA kiasi gani.",
+  "sv": "Tryck på valfri levande varelse i livets träd för att se hur länge sedan vi hade en gemensam förfader och hur mycket DNA vi delar."
+ },
+ "Press “Generate quiz”.": {
+  "es": "Pulsa «Generar cuestionario».",
+  "ar": "اضغط «أنشئ اختبارًا».",
+  "zh": "点击“生成测验”。",
+  "sw": "Bonyeza “Tengeneza chemsha bongo”.",
+  "sv": "Tryck på ”Skapa quiz”."
+ },
+ "Explore DNA, gene expression, mutations, evolution and human diversity in the tabs, then play a quiz.": {
+  "es": "Explora el ADN, la expresión génica, las mutaciones, la evolución y la diversidad humana en las pestañas y luego haz un cuestionario.",
+  "ar": "استكشف الحمض النووي والتعبير الجيني والطفرات والتطور والتنوع البشري في التبويبات، ثم العب اختبارًا.",
+  "zh": "在各个标签页中探索 DNA、基因表达、突变、进化和人类多样性，然后做一次测验。",
+  "sw": "Chunguza DNA, utendaji wa jeni, mabadiliko, mageuko na utofauti wa binadamu kwenye vichupo, kisha fanya chemsha bongo.",
+  "sv": "Utforska DNA, genuttryck, mutationer, evolution och mänsklig mångfald i flikarna och gör sedan ett quiz."
+ },
+ "How much DNA do humans share with chimpanzees?": {
+  "es": "¿Cuánto ADN compartimos los humanos con los chimpancés?",
+  "ar": "كم من الحمض النووي يتشاركه البشر مع الشمبانزي؟",
+  "zh": "人类和黑猩猩共享多少 DNA？",
+  "sw": "Binadamu na sokwe wanashiriki DNA kiasi gani?",
+  "sv": "Hur mycket DNA delar människor med schimpanser?"
+ },
+ "About 98–99% of comparable DNA. Tap the chimpanzee on the tree of life to see what that figure means and how long ago we shared an ancestor.": {
+  "es": "Alrededor del 98–99 % del ADN comparable. Toca el chimpancé en el árbol de la vida para ver qué significa esa cifra y hace cuánto compartimos un antepasado.",
+  "ar": "نحو 98–99% من الحمض النووي القابل للمقارنة. اضغط على الشمبانزي في شجرة الحياة لترى ما تعنيه هذه النسبة ومتى اشتركنا في سلف واحد.",
+  "zh": "可比较的 DNA 中约有 98–99% 相同。点击生命之树上的黑猩猩，看看这个数字意味着什么，以及我们多久以前有共同祖先。",
+  "sw": "Takriban 98–99% ya DNA inayolinganishwa. Gusa sokwe kwenye mti wa uhai kuona tarakimu hiyo inamaanisha nini na tulishiriki babu mmoja lini.",
+  "sv": "Ungefär 98–99 % av det jämförbara DNA:t. Tryck på schimpansen i livets träd för att se vad siffran betyder och hur länge sedan vi hade en gemensam förfader."
+ },
+ "About Biology Map": {
+  "es": "Acerca de Biology Map",
+  "ar": "عن Biology Map",
+  "zh": "关于 Biology Map",
+  "sw": "Kuhusu Biology Map",
+  "sv": "Om Biology Map"
+ },
+ "How to use Biology Map": {
+  "es": "Cómo usar Biology Map",
+  "ar": "طريقة استخدام Biology Map",
+  "zh": "如何使用 Biology Map",
+  "sw": "Jinsi ya kutumia Biology Map",
+  "sv": "Så använder du Biology Map"
+ },
+ "Is Biology Map free?": {
+  "es": "¿Biology Map es gratis?",
+  "ar": "هل Biology Map مجاني؟",
+  "zh": "Biology Map 免费吗？",
+  "sw": "Je, Biology Map ni bure?",
+  "sv": "Är Biology Map gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

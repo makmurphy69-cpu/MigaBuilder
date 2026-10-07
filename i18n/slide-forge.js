@@ -17,3 +17,97 @@ I18N.phrases({
   "How to use Slide Forge": { es: "Cómo usar Slide Forge", ar: "كيفية استخدام Slide Forge", zh: "如何使用 Slide Forge", sw: "Jinsi ya kutumia Slide Forge", sv: "Så använder du Slide Forge" },
   "Slide Forge — free PowerPoint generator": { es: "Slide Forge — generador de PowerPoint gratis", ar: "Slide Forge — منشئ عروض PowerPoint مجاني", zh: "Slide Forge — 免费 PowerPoint 生成器", sw: "Slide Forge — kitengeneza PowerPoint cha bure", sv: "Slide Forge — gratis PowerPoint-generator" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Slide Forge writes a presentation from a description. Choose the number of slides, add your own photos and videos to specific slides, and download a real PowerPoint file.": {
+  "es": "Slide Forge escribe una presentación a partir de una descripción. Elige el número de diapositivas, añade tus fotos y vídeos a diapositivas concretas y descarga un archivo de PowerPoint real.",
+  "ar": "يكتب Slide Forge عرضًا تقديميًا من وصف. اختر عدد الشرائح، وأضف صورك وفيديوهاتك إلى شرائح محددة، ونزّل ملف PowerPoint حقيقيًا.",
+  "zh": "Slide Forge 根据描述撰写演示文稿。选择幻灯片数量，把你自己的照片和视频加到指定页面，然后下载真正的 PowerPoint 文件。",
+  "sw": "Slide Forge huandika wasilisho kutokana na maelezo. Chagua idadi ya slaidi, ongeza picha na video zako kwenye slaidi maalum, na upakue faili halisi la PowerPoint.",
+  "sv": "Slide Forge skriver en presentation utifrån en beskrivning. Välj antal bilder, lägg till egna foton och videor på vissa bilder och ladda ner en riktig PowerPoint-fil."
+ },
+ "Describe the topic, audience, purpose, and number of slides.": {
+  "es": "Describe el tema, el público, el objetivo y el número de diapositivas.",
+  "ar": "صف الموضوع والجمهور والغرض وعدد الشرائح.",
+  "zh": "描述主题、受众、目的和幻灯片数量。",
+  "sw": "Eleza mada, hadhira, lengo na idadi ya slaidi.",
+  "sv": "Beskriv ämnet, publiken, syftet och antalet bilder."
+ },
+ "Press “Generate presentation”.": {
+  "es": "Pulsa «Generar presentación».",
+  "ar": "اضغط «أنشئ العرض التقديمي».",
+  "zh": "点击“生成演示文稿”。",
+  "sw": "Bonyeza “Tengeneza wasilisho”.",
+  "sv": "Tryck på ”Skapa presentation”."
+ },
+ "Review each slide and download the PowerPoint file.": {
+  "es": "Revisa cada diapositiva y descarga el archivo de PowerPoint.",
+  "ar": "راجع كل شريحة ونزّل ملف PowerPoint.",
+  "zh": "检查每一页幻灯片，然后下载 PowerPoint 文件。",
+  "sw": "Pitia kila slaidi na upakue faili la PowerPoint.",
+  "sv": "Granska varje bild och ladda ner PowerPoint-filen."
+ },
+ "Does it make a real PowerPoint file?": {
+  "es": "¿Crea un archivo de PowerPoint real?",
+  "ar": "هل يصنع ملف PowerPoint حقيقيًا؟",
+  "zh": "它生成的是真正的 PowerPoint 文件吗？",
+  "sw": "Je, hutengeneza faili halisi la PowerPoint?",
+  "sv": "Blir det en riktig PowerPoint-fil?"
+ },
+ "Yes. You download a .pptx file that opens in PowerPoint, Keynote and Google Slides.": {
+  "es": "Sí. Descargas un archivo .pptx que se abre en PowerPoint, Keynote y Google Slides.",
+  "ar": "نعم. تنزّل ملف ‎.pptx يُفتح في PowerPoint وKeynote وGoogle Slides.",
+  "zh": "是的。你下载的是 .pptx 文件，可以在 PowerPoint、Keynote 和 Google 幻灯片中打开。",
+  "sw": "Ndiyo. Unapakua faili la .pptx linalofunguka kwenye PowerPoint, Keynote na Google Slides.",
+  "sv": "Ja. Du laddar ner en .pptx-fil som öppnas i PowerPoint, Keynote och Google Presentationer."
+ },
+ "About Slide Forge": {
+  "es": "Acerca de Slide Forge",
+  "ar": "عن Slide Forge",
+  "zh": "关于 Slide Forge",
+  "sw": "Kuhusu Slide Forge",
+  "sv": "Om Slide Forge"
+ },
+ "How to use Slide Forge": {
+  "es": "Cómo usar Slide Forge",
+  "ar": "طريقة استخدام Slide Forge",
+  "zh": "如何使用 Slide Forge",
+  "sw": "Jinsi ya kutumia Slide Forge",
+  "sv": "Så använder du Slide Forge"
+ },
+ "Is Slide Forge free?": {
+  "es": "¿Slide Forge es gratis?",
+  "ar": "هل Slide Forge مجاني؟",
+  "zh": "Slide Forge 免费吗？",
+  "sw": "Je, Slide Forge ni bure?",
+  "sv": "Är Slide Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**69 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**70 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -52,6 +52,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Idea Atlas** — explore the history, key thinkers and connections of 37 philosophies and ideologies, then play a timed quiz game
 - **Biology Map** — explore a tree of life with 43 living things to see how long ago we shared an ancestor, how much DNA we share (and what each figure really measures) and what we both inherited; zoom from the body down to a single DNA letter, build a DNA strand, follow a gene being expressed and translate DNA with the real genetic code, make mutations in the human haemoglobin gene (including sickle cell), run a peppered-moth natural-selection simulator, follow humans out of Africa on a world map with local adaptations, then play a scored quiz
 - **Chemistry Map** — an interactive periodic table of all 118 elements, coloured by family, state at any temperature, electronegativity, density, melting point, discovery date or block; open any element for its animated atom, where it is found, its forms, uses and compounds; put elements in a mixing bowl to see how they bond and the formula they form, see which elements build steel, glass, plastics, batteries, chips and more, work out molar masses, then play a scored quiz
+- **Physics Map** — watch the planets move around the Sun on today’s date (or see them to true scale), travel through the history of the universe from the Big Bang to the far future on a log scale, to scale or as a cosmic calendar, open famous black holes from Gaia BH1 to M87* and the parts of a black hole, and follow a map of physics theories from Newton to string theory marked by how well tested they are; calculators for your weight on other worlds, light travel time, orbits, black-hole size, E = mc², time dilation, gravity and Kepler’s law, fact sheets, and timed or printable quizzes
 - **Body Map** — switch between organs, the skeleton, muscles and tendons (front and back), and a cut-through view of the skin, then click any part to learn how it works, how it connects to the rest of the body, its common illnesses with the best treatment and prevention, and how to keep it healthy; follow a meal or a drink through the body step by step, drag a slider to see what happens hour by hour when you fast, then play a scored quiz or make and share your own
 - **Memory Forge** — train your memory with number and symbol cards (all at once or one at a time, seen or read aloud), the chimp test, pairs, dual n-back, Corsi sequences and word lists; 30 levels for each game with stars, played with or without a clock, or set your own number of cards and symbols, study time and answer time; plus a techniques guide (memory palace, story, pegs, Major system, PAO/Dominic, names and faces, keyword method, retrieval and spaced practice) with a 4-week mastery plan, a memory palace trainer, a Major system trainer, a spaced-review planner with calendar export, a day streak, progress chart and CSV of your results
 - **Redact Forge** — hide API keys, tokens, passwords, cookies, emails, IP and MAC addresses, phone and card numbers, IBANs, personal ID numbers and user names in logs, code and error messages before you share them or paste them into an AI; numbered labels or realistic fakes that stay consistent, your own words and patterns, and one click to put the real values back into the answer you get
@@ -71,7 +72,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 69 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 70 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 

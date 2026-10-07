@@ -16,3 +16,97 @@ I18N.phrases({
   "How to use File Forge": { es: "Cómo usar File Forge", ar: "كيفية استخدام File Forge", zh: "如何使用 File Forge", sw: "Jinsi ya kutumia File Forge", sv: "Så använder du File Forge" },
   "Image Forge — private batch image converter": { es: "Image Forge — conversor privado de imágenes por lotes", ar: "Image Forge — محوّل صور خاص للدفعات", zh: "Image Forge — 私密的批量图片转换器", sw: "Image Forge — kigeuzi cha faragha cha picha kwa makundi", sv: "Image Forge — privat batchkonverterare för bilder" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Image Forge converts, resizes and compresses images and removes their hidden metadata.": {
+  "es": "Image Forge convierte, redimensiona y comprime imágenes y elimina sus metadatos ocultos.",
+  "ar": "يحوّل Image Forge الصور ويغيّر حجمها ويضغطها ويزيل بياناتها الوصفية المخفية.",
+  "zh": "Image Forge 可转换、缩放和压缩图片，并删除其中隐藏的元数据。",
+  "sw": "Image Forge hugeuza, hubadilisha ukubwa na hubana picha, na huondoa metadata zake zilizofichwa.",
+  "sv": "Image Forge konverterar, ändrar storlek på och komprimerar bilder och tar bort deras dolda metadata."
+ },
+ "Upload an image and choose the new format or size.": {
+  "es": "Sube una imagen y elige el nuevo formato o tamaño.",
+  "ar": "ارفع صورة واختر الصيغة أو الحجم الجديد.",
+  "zh": "上传图片，选择新的格式或尺寸。",
+  "sw": "Pakia picha na uchague muundo au ukubwa mpya.",
+  "sv": "Ladda upp en bild och välj nytt format eller ny storlek."
+ },
+ "Press “Convert file”.": {
+  "es": "Pulsa «Convertir archivo».",
+  "ar": "اضغط «حوّل الملف».",
+  "zh": "点击“转换文件”。",
+  "sw": "Bonyeza “Geuza faili”.",
+  "sv": "Tryck på ”Konvertera fil”."
+ },
+ "Check the preview and download the converted file.": {
+  "es": "Revisa la vista previa y descarga el archivo convertido.",
+  "ar": "تفقّد المعاينة ونزّل الملف المحوَّل.",
+  "zh": "查看预览并下载转换后的文件。",
+  "sw": "Kagua onyesho na upakue faili lililogeuzwa.",
+  "sv": "Kontrollera förhandsvisningen och ladda ner den konverterade filen."
+ },
+ "Which formats can I convert between?": {
+  "es": "¿Entre qué formatos puedo convertir?",
+  "ar": "بين أي الصيغ يمكنني التحويل؟",
+  "zh": "可以在哪些格式之间转换？",
+  "sw": "Ninaweza kugeuza kati ya miundo gani?",
+  "sv": "Mellan vilka format kan jag konvertera?"
+ },
+ "PNG, JPG and WebP. Choose the new format or size and download the converted file.": {
+  "es": "PNG, JPG y WebP. Elige el nuevo formato o tamaño y descarga el archivo convertido.",
+  "ar": "PNG وJPG وWebP. اختر الصيغة أو الحجم الجديد ونزّل الملف المحوَّل.",
+  "zh": "PNG、JPG 和 WebP。选择新的格式或尺寸，然后下载转换后的文件。",
+  "sw": "PNG, JPG na WebP. Chagua muundo au ukubwa mpya na upakue faili lililogeuzwa.",
+  "sv": "PNG, JPG och WebP. Välj nytt format eller ny storlek och ladda ner den konverterade filen."
+ },
+ "About Image Forge": {
+  "es": "Acerca de Image Forge",
+  "ar": "عن Image Forge",
+  "zh": "关于 Image Forge",
+  "sw": "Kuhusu Image Forge",
+  "sv": "Om Image Forge"
+ },
+ "How to use Image Forge": {
+  "es": "Cómo usar Image Forge",
+  "ar": "طريقة استخدام Image Forge",
+  "zh": "如何使用 Image Forge",
+  "sw": "Jinsi ya kutumia Image Forge",
+  "sv": "Så använder du Image Forge"
+ },
+ "Is Image Forge free?": {
+  "es": "¿Image Forge es gratis?",
+  "ar": "هل Image Forge مجاني؟",
+  "zh": "Image Forge 免费吗？",
+  "sw": "Je, Image Forge ni bure?",
+  "sv": "Är Image Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

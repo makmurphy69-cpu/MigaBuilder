@@ -479,3 +479,97 @@ I18N.phrases({
   "Lab assistant 🥽": { es: "Ayudante de laboratorio 🥽", ar: "مساعد مختبر 🥽", zh: "实验室助手 🥽", sw: "Msaidizi wa maabara 🥽", sv: "Laboratorieassistent 🥽" },
   "Chemistry quiz": { es: "Cuestionario de química", ar: "اختبار الكيمياء", zh: "化学测验", sw: "Jaribio la kemia", sv: "Kemiquiz" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Chemistry Map is an interactive periodic table of all 118 elements, with each element's atom, uses and compounds, a mixing bowl that shows how elements bond, materials, a molar-mass calculator and quizzes.": {
+  "es": "Chemistry Map es una tabla periódica interactiva de los 118 elementos, con el átomo, los usos y los compuestos de cada uno, un recipiente para mezclar que muestra cómo se enlazan, materiales, una calculadora de masa molar y cuestionarios.",
+  "ar": "Chemistry Map جدول دوري تفاعلي لجميع العناصر الـ118، يعرض ذرة كل عنصر واستخداماته ومركباته، ووعاء خلط يبيّن كيف ترتبط العناصر، والمواد، وحاسبة للكتلة المولية، واختبارات.",
+  "zh": "Chemistry Map 是包含全部 118 种元素的交互式元素周期表，展示每种元素的原子、用途和化合物，还有显示元素如何成键的混合碗、材料、摩尔质量计算器和测验。",
+  "sw": "Chemistry Map ni jedwali shirikishi la elementi zote 118, lenye atomu, matumizi na michanganyiko ya kila elementi, bakuli la kuchanganya linaloonyesha jinsi elementi zinavyoungana, nyenzo, kikokotoo cha masi ya mole na chemsha bongo.",
+  "sv": "Chemistry Map är ett interaktivt periodiskt system med alla 118 grundämnen, med varje ämnes atom, användning och föreningar, en blandningsskål som visar hur ämnen binds, material, en molmassaräknare och quiz."
+ },
+ "Tap any element in the periodic table to see its atom, forms, uses and compounds.": {
+  "es": "Toca cualquier elemento de la tabla periódica para ver su átomo, sus formas, usos y compuestos.",
+  "ar": "اضغط على أي عنصر في الجدول الدوري لترى ذرته وأشكاله واستخداماته ومركباته.",
+  "zh": "点击周期表中的任意元素，查看它的原子、形态、用途和化合物。",
+  "sw": "Gusa elementi yoyote kwenye jedwali la vipindi kuona atomu yake, maumbo, matumizi na michanganyiko.",
+  "sv": "Tryck på valfritt grundämne i periodiska systemet för att se dess atom, former, användning och föreningar."
+ },
+ "Press “Generate quiz”.": {
+  "es": "Pulsa «Generar cuestionario».",
+  "ar": "اضغط «أنشئ اختبارًا».",
+  "zh": "点击“生成测验”。",
+  "sw": "Bonyeza “Tengeneza chemsha bongo”.",
+  "sv": "Tryck på ”Skapa quiz”."
+ },
+ "Mix elements in the bowl, explore materials and the formula calculator, then play a quiz.": {
+  "es": "Mezcla elementos en el recipiente, explora los materiales y la calculadora de fórmulas y haz un cuestionario.",
+  "ar": "اخلط العناصر في الوعاء، واستكشف المواد وحاسبة الصيغ، ثم العب اختبارًا.",
+  "zh": "在碗里混合元素，探索材料和化学式计算器，然后做一次测验。",
+  "sw": "Changanya elementi kwenye bakuli, chunguza nyenzo na kikokotoo cha fomula, kisha fanya chemsha bongo.",
+  "sv": "Blanda grundämnen i skålen, utforska material och formelräknaren och gör sedan ett quiz."
+ },
+ "Can it calculate molar mass?": {
+  "es": "¿Puede calcular la masa molar?",
+  "ar": "هل يمكنه حساب الكتلة المولية؟",
+  "zh": "它能计算摩尔质量吗？",
+  "sw": "Je, kinaweza kuhesabu masi ya mole?",
+  "sv": "Kan den räkna ut molmassa?"
+ },
+ "Yes. Type a formula such as H2O or C6H12O6 into the formula calculator to get its molar mass and what share each element makes up.": {
+  "es": "Sí. Escribe una fórmula como H2O o C6H12O6 en la calculadora para obtener su masa molar y qué parte aporta cada elemento.",
+  "ar": "نعم. اكتب صيغة مثل H2O أو C6H12O6 في حاسبة الصيغ لتحصل على كتلتها المولية ونسبة كل عنصر فيها.",
+  "zh": "可以。在化学式计算器中输入 H2O 或 C6H12O6 这样的化学式，即可得到摩尔质量以及每种元素所占的比例。",
+  "sw": "Ndiyo. Andika fomula kama H2O au C6H12O6 kwenye kikokotoo cha fomula upate masi yake ya mole na sehemu ya kila elementi.",
+  "sv": "Ja. Skriv en formel som H2O eller C6H12O6 i formelräknaren för att få molmassan och hur stor andel varje grundämne utgör."
+ },
+ "About Chemistry Map": {
+  "es": "Acerca de Chemistry Map",
+  "ar": "عن Chemistry Map",
+  "zh": "关于 Chemistry Map",
+  "sw": "Kuhusu Chemistry Map",
+  "sv": "Om Chemistry Map"
+ },
+ "How to use Chemistry Map": {
+  "es": "Cómo usar Chemistry Map",
+  "ar": "طريقة استخدام Chemistry Map",
+  "zh": "如何使用 Chemistry Map",
+  "sw": "Jinsi ya kutumia Chemistry Map",
+  "sv": "Så använder du Chemistry Map"
+ },
+ "Is Chemistry Map free?": {
+  "es": "¿Chemistry Map es gratis?",
+  "ar": "هل Chemistry Map مجاني؟",
+  "zh": "Chemistry Map 免费吗？",
+  "sw": "Je, Chemistry Map ni bure?",
+  "sv": "Är Chemistry Map gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

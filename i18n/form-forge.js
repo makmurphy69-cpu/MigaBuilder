@@ -26,3 +26,97 @@ I18N.phrases({
   "How to use Form Forge": { es: "Cómo usar Form Forge", ar: "كيفية استخدام Form Forge", zh: "如何使用 Form Forge", sw: "Jinsi ya kutumia Form Forge", sv: "Så använder du Form Forge" },
   "Form Forge — private form and survey generator": { es: "Form Forge — generador privado de formularios y encuestas", ar: "Form Forge — منشئ نماذج واستبيانات خاص", zh: "Form Forge — 私密的表单和问卷生成器", sw: "Form Forge — kitengeneza fomu na tafiti cha faragha", sv: "Form Forge — privat formulär- och enkätgenerator" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Form Forge builds forms, surveys and quizzes as downloadable files that work without a server, so answers are never sent to MigaBuilder.": {
+  "es": "Form Forge crea formularios, encuestas y cuestionarios como archivos descargables que funcionan sin servidor, así que las respuestas nunca se envían a MigaBuilder.",
+  "ar": "يبني Form Forge النماذج والاستبيانات والاختبارات كملفات قابلة للتنزيل تعمل دون خادم، فلا تُرسل الإجابات إلى MigaBuilder أبدًا.",
+  "zh": "Form Forge 把表单、问卷和测验做成无需服务器即可使用的下载文件，答案绝不会发送给 MigaBuilder。",
+  "sw": "Form Forge hutengeneza fomu, dodoso na chemsha bongo kama faili zinazopakuliwa zinazofanya kazi bila seva, hivyo majibu hayatumwi kwa MigaBuilder kamwe.",
+  "sv": "Form Forge bygger formulär, enkäter och quiz som nedladdningsbara filer som fungerar utan server, så svaren skickas aldrig till MigaBuilder."
+ },
+ "Add a title and list each question with its response type.": {
+  "es": "Añade un título y escribe cada pregunta con su tipo de respuesta.",
+  "ar": "أضف عنوانًا واكتب كل سؤال مع نوع إجابته.",
+  "zh": "添加标题，并列出每个问题及其回答类型。",
+  "sw": "Ongeza kichwa na uorodheshe kila swali pamoja na aina ya jibu lake.",
+  "sv": "Lägg till en rubrik och skriv varje fråga med dess svarstyp."
+ },
+ "Press “Download form HTML”.": {
+  "es": "Pulsa «Descargar formulario HTML».",
+  "ar": "اضغط «تنزيل النموذج بصيغة HTML».",
+  "zh": "点击“下载表单 HTML”。",
+  "sw": "Bonyeza “Pakua HTML ya fomu”.",
+  "sv": "Tryck på ”Ladda ner formulärets HTML”."
+ },
+ "Preview the form and share the self-contained downloaded file.": {
+  "es": "Previsualiza el formulario y comparte el archivo descargado, que funciona por sí solo.",
+  "ar": "عاين النموذج وشارك الملف المنزَّل الذي يعمل وحده.",
+  "zh": "预览表单，然后分享这个可独立使用的下载文件。",
+  "sw": "Hakiki fomu na ushiriki faili lililopakuliwa linalojitosheleza.",
+  "sv": "Förhandsgranska formuläret och dela den nedladdade filen, som fungerar på egen hand."
+ },
+ "Where do the answers go?": {
+  "es": "¿Adónde van las respuestas?",
+  "ar": "إلى أين تذهب الإجابات؟",
+  "zh": "答案会去哪里？",
+  "sw": "Majibu huenda wapi?",
+  "sv": "Vart tar svaren vägen?"
+ },
+ "Answers stay with the person filling in the form file; nothing is sent to MigaBuilder.": {
+  "es": "Las respuestas se quedan con quien rellena el archivo del formulario; no se envía nada a MigaBuilder.",
+  "ar": "تبقى الإجابات لدى الشخص الذي يملأ ملف النموذج؛ ولا يُرسل شيء إلى MigaBuilder.",
+  "zh": "答案留在填写表单文件的人那里；不会发送任何内容给 MigaBuilder。",
+  "sw": "Majibu hubaki kwa mtu anayejaza faili la fomu; hakuna kinachotumwa kwa MigaBuilder.",
+  "sv": "Svaren stannar hos den som fyller i formulärfilen; inget skickas till MigaBuilder."
+ },
+ "About Form Forge": {
+  "es": "Acerca de Form Forge",
+  "ar": "عن Form Forge",
+  "zh": "关于 Form Forge",
+  "sw": "Kuhusu Form Forge",
+  "sv": "Om Form Forge"
+ },
+ "How to use Form Forge": {
+  "es": "Cómo usar Form Forge",
+  "ar": "طريقة استخدام Form Forge",
+  "zh": "如何使用 Form Forge",
+  "sw": "Jinsi ya kutumia Form Forge",
+  "sv": "Så använder du Form Forge"
+ },
+ "Is Form Forge free?": {
+  "es": "¿Form Forge es gratis?",
+  "ar": "هل Form Forge مجاني؟",
+  "zh": "Form Forge 免费吗？",
+  "sw": "Je, Form Forge ni bure?",
+  "sv": "Är Form Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

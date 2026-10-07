@@ -22,3 +22,97 @@ I18N.phrases({
   "How to use App Forge": { es: "Cómo usar App Forge", ar: "كيفية استخدام App Forge", zh: "如何使用 App Forge", sw: "Jinsi ya kutumia App Forge", sv: "Så använder du App Forge" },
   "App Forge — free app generator": { es: "App Forge — generador de apps gratis", ar: "App Forge — منشئ تطبيقات مجاني", zh: "App Forge — 免费应用生成器", sw: "App Forge — kitengeneza programu cha bure", sv: "App Forge — gratis appgenerator" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "App Forge builds a working app from a description: an installable web app, a small utility tool or a starter project for a real Android or iOS app.": {
+  "es": "App Forge crea una aplicación que funciona a partir de una descripción: una app web instalable, una pequeña utilidad o un proyecto inicial para una app real de Android o iOS.",
+  "ar": "يبني App Forge تطبيقًا يعمل انطلاقًا من وصف: تطبيق ويب قابل للتثبيت، أو أداة صغيرة، أو مشروع بداية لتطبيق أندرويد أو iOS حقيقي.",
+  "zh": "App Forge 根据描述构建可运行的应用：可安装的网页应用、小工具，或真正的安卓/iOS 应用的起步项目。",
+  "sw": "App Forge hujenga programu inayofanya kazi kutokana na maelezo: programu ya wavuti inayosakinishwa, zana ndogo, au mradi wa kuanzia wa programu halisi ya Android au iOS.",
+  "sv": "App Forge bygger en fungerande app utifrån en beskrivning: en installerbar webbapp, ett litet verktyg eller ett startprojekt för en riktig Android- eller iOS-app."
+ },
+ "Describe the browser app and the result it should produce.": {
+  "es": "Describe la app web y el resultado que debe producir.",
+  "ar": "صف تطبيق المتصفح والنتيجة التي ينبغي أن يقدّمها.",
+  "zh": "描述这个浏览器应用以及它应该产生的结果。",
+  "sw": "Eleza programu ya kivinjari na matokeo inayopaswa kutoa.",
+  "sv": "Beskriv webbappen och vilket resultat den ska ge."
+ },
+ "Press “Generate app”.": {
+  "es": "Pulsa «Generar app».",
+  "ar": "اضغط «أنشئ التطبيق».",
+  "zh": "点击“生成应用”。",
+  "sw": "Bonyeza “Tengeneza programu”.",
+  "sv": "Tryck på ”Skapa app”."
+ },
+ "Test the app, refine it, and download the finished HTML.": {
+  "es": "Prueba la app, mejórala y descarga el HTML terminado.",
+  "ar": "جرّب التطبيق وحسّنه ونزّل ملف HTML النهائي.",
+  "zh": "测试应用、加以完善，然后下载完成的 HTML。",
+  "sw": "Jaribu programu, iboreshe, na upakue HTML iliyokamilika.",
+  "sv": "Testa appen, förbättra den och ladda ner den färdiga HTML-filen."
+ },
+ "Can I install the app on my phone?": {
+  "es": "¿Puedo instalar la app en mi móvil?",
+  "ar": "هل يمكنني تثبيت التطبيق على هاتفي؟",
+  "zh": "我可以把应用安装到手机上吗？",
+  "sw": "Je, ninaweza kusakinisha programu kwenye simu yangu?",
+  "sv": "Kan jag installera appen på mobilen?"
+ },
+ "Web apps you make can be downloaded as an installable package, so they can be added to a phone's home screen like a normal app.": {
+  "es": "Las apps web que crees se pueden descargar como paquete instalable, para añadirlas a la pantalla de inicio del móvil como una app normal.",
+  "ar": "يمكن تنزيل تطبيقات الويب التي تصنعها كحزمة قابلة للتثبيت، لتضيفها إلى الشاشة الرئيسية للهاتف مثل أي تطبيق عادي.",
+  "zh": "你做的网页应用可以下载为可安装的安装包，像普通应用一样添加到手机主屏幕。",
+  "sw": "Programu za wavuti unazotengeneza zinaweza kupakuliwa kama kifurushi kinachosakinishwa, ili ziongezwe kwenye skrini ya mwanzo ya simu kama programu ya kawaida.",
+  "sv": "Webbappar du gör kan laddas ner som ett installerbart paket och läggas till på mobilens hemskärm som en vanlig app."
+ },
+ "About App Forge": {
+  "es": "Acerca de App Forge",
+  "ar": "عن App Forge",
+  "zh": "关于 App Forge",
+  "sw": "Kuhusu App Forge",
+  "sv": "Om App Forge"
+ },
+ "How to use App Forge": {
+  "es": "Cómo usar App Forge",
+  "ar": "طريقة استخدام App Forge",
+  "zh": "如何使用 App Forge",
+  "sw": "Jinsi ya kutumia App Forge",
+  "sv": "Så använder du App Forge"
+ },
+ "Is App Forge free?": {
+  "es": "¿App Forge es gratis?",
+  "ar": "هل App Forge مجاني؟",
+  "zh": "App Forge 免费吗？",
+  "sw": "Je, App Forge ni bure?",
+  "sv": "Är App Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});
