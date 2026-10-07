@@ -20,6 +20,15 @@ jobs:
       - name: Install Playwright and Chromium
         run: |
           npm install -g playwright@1.56.1
-          playwright install --with-deps chromium
+          # Ubuntu's package servers sometimes stall (no output for 20 minutes), so give
+          # apt network timeouts and retry the install instead of losing the whole job.
+          echo 'Acquire::http::Timeout "30"; Acquire::https::Timeout "30"; Acquire::Retries "3";' | sudo tee /etc/apt/apt.conf.d/99-timeouts
+          for i in 1 2 3; do
+            timeout 300 playwright install --with-deps chromium && break
+            [ "$i" = 3 ] && exit 1
+            echo "::warning::Browser install stalled or failed (try $i of 3); retrying"
+            sudo pkill -f apt-get || true
+            sleep 10
+          done
       - name: Main tools produce the right files
         run: node scripts/result-tests.mjs

@@ -66,9 +66,10 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Regex Forge** — test regular expressions with live highlighting and capture groups, read a plain-English explanation of every part, try find and replace, copy code for JavaScript, Python, PHP, C# and Java, or describe what you want and let AI write the pattern
 - **Voice Forge** — free, unlimited text to speech in the browser: paste a script, pick one of 100+ open-source Piper voices in 35+ languages (English, Swedish, Spanish, Arabic, Chinese, Swahili and more), and download the voice-over as MP3 or WAV; each voice downloads once and then works offline
 - **Audio Forge** and **Text Compare** — edit audio and compare texts (Text Compare can format and sort JSON before comparing)
+- **iPhone photos (HEIC)** — File Forge, Image Studio, Background Forge, Paint Forge, PDF Forge, Sign Documents, OCR Forge, Exam Checker, Vector Forge and Picture Forge open HEIC/HEIF photos; they are converted to JPEG on your device first
 - **Remove hidden data** — PDF Forge strips author, program, dates and XMP metadata from PDFs; Media Convert removes GPS location and camera data from videos without re-encoding
 - **OCR Forge** — read text from photos and scans in 20 languages with Tesseract.js, then download it as text or as a searchable PDF
-- **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction and live transcription
+- **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
 Explore all 70 tools at **[migabuilder.com](https://migabuilder.com/)**.

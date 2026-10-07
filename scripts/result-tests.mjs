@@ -128,6 +128,34 @@ test('media-convert: cancel while the engine downloads stops the job', 'media-co
   expect(/\.mp3$/.test(out.name), 'expected an .mp3 after cancelling, got ' + out.name);
 }, { timeout: 300000 });
 
+test('media-convert: transcribe a spoken file into SRT and VTT subtitles', 'media-convert.html', async (page) => {
+  await page.click('.tab[data-mode="filetx"]');
+  await page.setInputFiles('#txFile', path.join(FIX, 'speech.mp3'));
+  await page.selectOption('#txModel', 'onnx-community/whisper-tiny');
+  await page.selectOption('#txLang', 'en');
+  await page.click('#txStart');
+  await page.waitForFunction(() => !document.querySelector('#txSrt').disabled, null, { timeout: 280000 });
+  const srt = (await downloadOf(page, () => page.click('#txSrt'))).buf.toString('utf8');
+  expect(/^1\n00:00:0\d,\d{3} --> 00:00:\d\d,\d{3}\n/.test(srt), 'not an SRT file: ' + srt.slice(0, 80));
+  expect(/weather|welcome|recording/i.test(srt), 'the spoken words are missing: ' + srt.slice(0, 200));
+  const vtt = (await downloadOf(page, () => page.click('#txVtt'))).buf.toString('utf8');
+  expect(/^WEBVTT\n\n00:00:0\d\.\d{3} --> /.test(vtt), 'not a VTT file: ' + vtt.slice(0, 80));
+}, { timeout: 300000 });
+
+test('media-convert: cancel a transcription and start again', 'media-convert.html', async (page) => {
+  await page.click('.tab[data-mode="filetx"]');
+  await page.setInputFiles('#txFile', path.join(FIX, 'speech.mp3'));
+  await page.selectOption('#txModel', 'onnx-community/whisper-tiny');
+  await page.click('#txStart');
+  await page.waitForFunction(() => /Starting|Downloading|Listening/.test(document.querySelector('#txProgress').textContent), null, { timeout: 60000 });
+  await page.click('#txProgress .mp-cancel');
+  await page.waitForFunction(() => !document.querySelector('#txStart').disabled, null, { timeout: 30000 });
+  expect(/Cancelled/.test(await page.textContent('#txProgress')), 'the panel does not say Cancelled');
+  await page.click('#txStart');
+  await page.waitForFunction(() => !document.querySelector('#txTxt').disabled, null, { timeout: 280000 });
+  expect(/weather|welcome|recording/i.test(await page.inputValue('#txText')), 'no transcript after starting again');
+}, { timeout: 300000 });
+
 test('ocr-forge: read two images with one engine and join a searchable PDF', 'ocr-forge.html', async (page) => {
   let workers = 0;
   page.on('worker', () => workers++);
@@ -176,6 +204,28 @@ test('pdf-forge: split pages into a ZIP', 'pdf-forge.html', async (page) => {
   const names = (out.buf.toString('latin1').match(/page-\d{3}\.pdf/g) || []);
   expect(new Set(names).size === 3, 'ZIP should hold 3 page PDFs, found ' + new Set(names).size);
 });
+
+test('heic: a picked iPhone photo (HEIC) becomes a JPEG page in PDF Forge', 'pdf-forge.html', async (page) => {
+  await page.setInputFiles('#images', path.join(FIX, 'photo.heic'));
+  await page.waitForFunction(() => /\.jpg$/.test((document.querySelector('#images').files[0] || {}).name || ''), null, { timeout: 60000 });
+  const out = await downloadOf(page, () => page.click('#imagesPdf'));
+  expect(ascii(out.buf, 0, '%PDF'), 'download is not a PDF');
+  expect(out.buf.includes('/DCTDecode'), 'the PDF holds no JPEG image');
+}, { timeout: 120000 });
+
+test('heic: a dropped iPhone photo (HEIC) converts in File Forge', 'file-forge.html', async (page) => {
+  const b64 = fs.readFileSync(path.join(FIX, 'photo.heic')).toString('base64');
+  await page.evaluate(b64 => {
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), dt = new DataTransfer();
+    dt.items.add(new File([bytes], 'photo.heic', { type: 'image/heic' }));
+    document.querySelector('#dropZone').dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer: dt }));
+  }, b64);
+  await page.waitForFunction(() => !document.querySelector('#convertBtn').disabled, null, { timeout: 60000 });
+  await page.uncheck('#zipOutput');
+  const out = await downloadOf(page, () => page.click('#convertBtn'));
+  expect(/^photo\./.test(out.name), 'expected a converted photo, got ' + out.name);
+  expect(magic(out.buf, 0xff, 0xd8) || magic(out.buf, 0x89, 0x50, 0x4e, 0x47) || ascii(out.buf, 8, 'WEBP'), 'download is not a JPEG, PNG or WebP image');
+}, { timeout: 120000 });
 
 test('qr-forge: the downloaded QR code scans back to the text', 'qr-forge.html', async (page) => {
   await page.fill('#qrText', 'https://migabuilder.com/qr-test');
