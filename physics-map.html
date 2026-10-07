@@ -78,6 +78,7 @@ main{max-width:1320px}
 @media (max-width:480px){.facts,.row2{grid-template-columns:1fr}}
 </style>
 <script src="i18n.js"></script>
+<script src="i18n/physics-map.js"></script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Physics Map</span></nav>
@@ -103,7 +104,7 @@ main{max-width:1320px}
       <b id="dateLbl"></b>
     </div>
     <div class="svgwrap"><svg id="solarSvg" viewBox="0 0 1000 520" role="group" aria-label="The Solar System, seen from above at an angle"></svg></div>
-    <p style="margin:4px 0 0;font-size:12px;color:rgba(237,234,224,.7)" id="solarNote">Positions are approximate for the date shown. Distances are squeezed (square-root scale) and planets are drawn much bigger than real so everything fits — press <b>True sizes</b> to compare them to scale.</p>
+    <p style="margin:4px 0 0;font-size:12px;color:rgba(237,234,224,.7)" id="solarNote">Positions are approximate for the date shown. Distances are squeezed (square-root scale) and planets are drawn much bigger than real so everything fits — press True sizes to compare them to scale.</p>
   </div>
   <div id="timeView" class="hidden">
     <div class="ctl"><span>Scale:</span>
@@ -159,7 +160,7 @@ main{max-width:1320px}
 
 <section class="panel" id="quizPanel" style="margin-top:18px">
   <h2>🏆 Physics quiz</h2>
-  <p>Test yourself on the planets, the history of the universe, black holes, theories and the constants of nature. <b>Challenge mode</b> gives 20 seconds per question with bonus points for speed and streaks.</p>
+  <p>Test yourself on the planets, the history of the universe, black holes, theories and the constants of nature. Challenge mode gives 20 seconds per question with bonus points for speed and streaks.</p>
   <div class="qgrid">
     <div class="field"><label for="qSource">Questions about</label><select id="qSource">
       <option value="all">Everything</option><option value="solar">The Solar System</option><option value="time">History of the universe</option><option value="bh">Black holes</option><option value="theory">Physics theories</option><option value="const">Constants, forces and calculations</option><option value="seen">Things I explored</option>
@@ -193,7 +194,7 @@ main{max-width:1320px}
   <h2>About Physics Map</h2>
   <p>Physics Map is a free, visual way to explore physics in your browser — for school, for curiosity, or to check a number. There is nothing to install and no account.</p>
   <h3>How to use it</h3>
-  <ol><li>Pick a view: the <b>Solar System</b>, the <b>history of the universe</b>, <b>black holes</b> or the <b>theory map</b>.</li><li>Tap anything to open its facts, its numbers and a “did you know”. Download a fact sheet or ask the AI to explain it simply.</li><li>Use the <b>calculators</b> to work out your weight on other planets, light travel times, orbits, E = mc², time dilation or the size of a black hole.</li><li>Finish with a <b>quiz</b>, or print one with an answer key for a class.</li></ol>
+  <ol><li>Pick a view: the Solar System, the history of the universe, black holes or the theory map.</li><li>Tap anything to open its facts, its numbers and a “did you know”. Download a fact sheet or ask the AI to explain it simply.</li><li>Use the calculators to work out your weight on other planets, light travel times, orbits, E = mc², time dilation or the size of a black hole.</li><li>Finish with a quiz, or print one with an answer key for a class.</li></ol>
   <h3>Questions</h3>
   <p><b>How much would I weigh on Mars?</b> About 38% of your Earth weight: a person who weighs 60 kg on Earth would read about 23 kg on a scale on Mars.</p>
   <p><b>How big is a black hole?</b> Its event horizon grows with its mass: about 3 km across for every Sun of mass it holds (radius 2.95 km per solar mass).</p>
@@ -201,7 +202,7 @@ main{max-width:1320px}
   <p><b>Is the data accurate?</b> Planet data follows NASA’s planetary fact sheets, rounded. Speculative ideas such as string theory and the multiverse are marked as untested.</p>
 </section>
 </main>
-<footer>Physics Map · MigaBuilder · For learning — numbers are rounded, and planet positions are approximate (circular orbits).<br><small><strong>Sources and limits:</strong> planet data from the <a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/">NASA Planetary Fact Sheets</a>; the age of the universe from Planck 2018; constants from <a href="https://physics.nist.gov/cuu/Constants/">CODATA (NIST)</a>; black-hole masses from the Gaia, LIGO, Hubble and Event Horizon Telescope results named on each. Science moves on — moon counts and some measurements change as new results come in.</small></footer>
+<footer>Physics Map · MigaBuilder · For learning — numbers are rounded, and planet positions are approximate (circular orbits).<br><small>Sources and limits: planet data from the NASA Planetary Fact Sheets; the age of the universe from Planck 2018; constants from CODATA (NIST); black-hole masses from the Gaia, LIGO, Hubble and Event Horizon Telescope results named on each. Science moves on — moon counts and some measurements change as new results come in.<br><a href="https://nssdc.gsfc.nasa.gov/planetary/factsheet/">NASA Planetary Fact Sheets</a> · <a href="https://physics.nist.gov/cuu/Constants/">CODATA constants (NIST)</a></small></footer>
 
 <script>
 (function(){
@@ -213,6 +214,15 @@ MigaAI.mount($('aiBox'));
 const G=6.674e-11,C=299792458,HBAR=1.054571817e-34,KB=1.380649e-23,MSUN=1.989e30,AU=1.495978707e11,LY=9.4607e15,YEAR=3.15576e7,G0=9.80665;
 const NS='http://www.w3.org/2000/svg';
 
+// ---------- translation ----------
+// i18n/physics-map.js gives every English phrase its translations (window.PHYS_I18N) and hands them to the shared
+// runtime, which translates the fixed text of the page. Everything this script builds from pieces — numbers with units,
+// questions, results — goes through tr() so it is written straight in the chosen language, and is redrawn when it changes.
+const lang=()=>(window.I18N&&I18N.getLang&&I18N.getLang())||'en';
+function tr(s){const row=window.PHYS_I18N&&window.PHYS_I18N[s];const out=(row&&row[lang()])||s;const a=arguments;return out.replace(/\{(\d+)\}/g,(m,i)=>a[+i+1]!=null?a[+i+1]:m)}
+const LOCALE={en:'en-GB',es:'es',ar:'ar',zh:'zh-CN',sw:'sw',sv:'sv'};
+const LANGNAME={en:'English',es:'Spanish',ar:'Arabic',zh:'Simplified Chinese',sw:'Swahili',sv:'Swedish'};
+
 // ---------- data ----------
 const BODIES=window.PHYS_BODIES.map(r=>({id:r[0],name:r[1],icon:r[2],kind:r[3],color:r[4],mass:r[5],diam:r[6],g:r[7],esc:r[8],day:r[9],dist:r[10],period:r[11],temp:r[12],moons:r[13],rings:r[14],air:r[15],about:r[16],fact:r[17],L0:r[18]}));
 const EVENTS=window.PHYS_TIMELINE.map(r=>({id:r[0],name:r[1],t:r[2],ago:r[3],group:r[4],text:r[5],ahead:r[6]}));
@@ -222,25 +232,28 @@ const THEORIES=window.PHYS_THEORIES.map(r=>({id:r[0],name:r[1],year:r[2],who:r[3
 const B=Object.fromEntries(BODIES.map(b=>[b.id,b])),E=Object.fromEntries(EVENTS.map(e=>[e.id,e])),BH=Object.fromEntries(BHS.map(b=>[b.id,b])),T=Object.fromEntries(THEORIES.map(t=>[t.id,t]));
 const PLANETS=BODIES.filter(b=>b.kind==='planet');
 const ALL=[].concat(BODIES.map(b=>'body:'+b.id),EVENTS.map(e=>'event:'+e.id),BHS.map(b=>'bh:'+b.id),THEORIES.map(t=>'theory:'+t.id));
-const nameOf=k=>{const [t,id]=k.split(':');return t==='body'?B[id].name:t==='event'?E[id].name:t==='bh'?BH[id].name:T[id].name};
+const enName=k=>{const [t,id]=k.split(':');return t==='body'?B[id].name:t==='event'?E[id].name:t==='bh'?BH[id].name:T[id].name};
+const nameOf=k=>tr(enName(k));
 let seen=new Set(store.get('physSeen',[]).filter(k=>ALL.includes(k))),selected=null,view='solar',tab='calc';
 $('totalCount').textContent=ALL.length;$('seenCount').textContent=seen.size;
-$('itemList').innerHTML=ALL.map(k=>'<option value="'+esc(nameOf(k))+'">').join('');
 
 // ---------- number formatting ----------
 const SUP={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
 function sci(v,d){if(v===0)return '0';if(!isFinite(v))return '∞';const a=Math.abs(v);if(a>=1e-3&&a<1e7)return nice(v,d);const ex=Math.floor(Math.log10(a));let m=v/Math.pow(10,ex);m=+m.toFixed(d==null?2:d);return m+' × 10'+String(ex).split('').map(c=>SUP[c]).join('')}
 function nice(v,d){const a=Math.abs(v);const p=d!=null?d:a>=100?0:a>=10?1:a>=1?2:3;return (+v.toFixed(p)).toLocaleString('en-US',{maximumFractionDigits:p})}
-function big(v){const a=Math.abs(v);if(a>=1e15)return sci(v);if(a>=1e12)return nice(v/1e12,a>=1e14?0:1)+' trillion';if(a>=1e9)return nice(v/1e9,a>=1e11?0:1)+' billion';if(a>=1e6)return nice(v/1e6,a>=1e8?0:1)+' million';if(a>=1e4)return nice(+v.toPrecision(3));return nice(v)}
-function dur(sec){const a=Math.abs(sec);if(a<1e-6)return sci(sec)+' s';if(a<1e-3)return nice(sec*1e6)+' microseconds';if(a<1)return nice(sec*1e3)+' milliseconds';if(a<60)return nice(sec)+' seconds';if(a<3600)return nice(sec/60)+' minutes';if(a<86400*2)return nice(sec/3600)+' hours';if(a<YEAR)return nice(sec/86400)+' days';return big(sec/YEAR)+' years'}
-const hours=h=>h<48?nice(h)+' hours':nice(h/24)+' Earth days';
-const days=d=>d<730?nice(d)+' Earth days':nice(d/365.25)+' Earth years';
-function sinceBB(e){if(e.t<YEAR)return dur(e.t)+' after the Big Bang';return big(e.t/YEAR)+' years after the Big Bang'}
-function when(e){if(e.ahead)return 'In about '+big(e.ahead)+' years';if(e.ago===0)return 'Now — 13.8 billion years after the Big Bang';if(e.ago)return big(e.ago)+' years ago';return sinceBB(e)}
+// Big numbers in words; Chinese counts in 万 (10⁴) and 亿 (10⁸) instead of thousands, millions and billions.
+function big(v){const a=Math.abs(v);if(a>=1e15)return sci(v);
+  if(lang()==='zh'){if(a>=1e12)return nice(v/1e12,a>=1e14?0:1)+'万亿';if(a>=1e8)return nice(v/1e8,a>=1e10?0:1)+'亿';if(a>=1e4)return nice(v/1e4,a>=1e6?0:1)+'万';return nice(v)}
+  if(a>=1e12)return tr('{0} trillion',nice(v/1e12,a>=1e14?0:1));if(a>=1e9)return tr('{0} billion',nice(v/1e9,a>=1e11?0:1));if(a>=1e6)return tr('{0} million',nice(v/1e6,a>=1e8?0:1));if(a>=1e4)return nice(+v.toPrecision(3));return nice(v)}
+function dur(sec){const a=Math.abs(sec);if(a<1e-6)return sci(sec)+' s';if(a<1e-3)return tr('{0} microseconds',nice(sec*1e6));if(a<1)return tr('{0} milliseconds',nice(sec*1e3));if(a<60)return tr('{0} seconds',nice(sec));if(a<3600)return tr('{0} minutes',nice(sec/60));if(a<86400*2)return tr('{0} hours',nice(sec/3600));if(a<YEAR)return tr('{0} days',nice(sec/86400));return tr('{0} years',big(sec/YEAR))}
+const hours=h=>h<48?tr('{0} hours',nice(h)):tr('{0} Earth days',nice(h/24));
+const days=d=>d<730?tr('{0} Earth days',nice(d)):tr('{0} Earth years',nice(d/365.25));
+function when(e){if(e.ahead)return tr('In about {0} years',big(e.ahead));if(e.ago===0)return tr('Now — 13.8 billion years after the Big Bang');if(e.ago)return tr('{0} years ago',big(e.ago));
+  return e.t<YEAR?tr('{0} after the Big Bang',dur(e.t)):tr('{0} years after the Big Bang',big(e.t/YEAR))}
 // The cosmic calendar: 13.8 billion years squeezed into one year (Big Bang = 1 January 00:00, now = midnight on 31 December).
-function cosmicDate(e){if(e.ahead!=null)return null;if(e.ago===0)return '31 December, midnight';
-  const f=e.ago!=null?1-e.ago/13.8e9:e.t/YEAR/13.8e9,ms=f*365*86400000;if(ms<1000)return '1 January, in the very first instant';
-  const d=new Date(Date.UTC(2025,0,1)+ms);let s=d.toLocaleDateString('en-GB',{day:'numeric',month:'long',timeZone:'UTC'});
+function cosmicDate(e){if(e.ahead!=null)return null;if(e.ago===0)return tr('31 December, midnight');
+  const f=e.ago!=null?1-e.ago/13.8e9:e.t/YEAR/13.8e9,ms=f*365*86400000;if(ms<1000)return tr('1 January, in the very first instant');
+  const d=new Date(Date.UTC(2025,0,1)+ms);let s=d.toLocaleDateString(LOCALE[lang()]||'en-GB',{day:'numeric',month:'long',timeZone:'UTC'});
   if(f<0.003||f>0.99)s+=', '+d.toISOString().slice(11,f>0.9999?19:16);return s}
 
 // ---------- views ----------
@@ -248,11 +261,11 @@ document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>setView(b.data
 function setView(v){view=v;document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
   ['solar','time','bh','theory'].forEach(k=>$(k+'View').classList.toggle('hidden',k!==v));legend();
   if(v==='solar')startAnim();else stopAnim()}
-function legend(){let h='';
-  if(view==='solar')h='<span><i style="background:#f5b642"></i>Star</span><span><i style="background:#4f8fd6"></i>Planet</span><span><i style="background:#c8a98c"></i>Dwarf planet</span><span><i style="background:#c9c6bf"></i>Moon</span>';
-  if(view==='time')h=Object.values(TLG).map(g=>'<span><i style="background:'+g[1]+'"></i>'+esc(g[0])+'</span>').join('');
-  if(view==='bh')h='<span>Sizes in the diagram are not to scale. The calculator works out the real sizes for any mass.</span>';
-  if(view==='theory')h=tcol==='lane'?Object.values(LANES).map(l=>'<span><i style="background:'+l[1]+'"></i>'+esc(l[0])+'</span>').join(''):Object.values(STATUS).map(s=>'<span><i style="background:'+s[1]+'"></i>'+esc(s[0])+'</span>').join('');
+function legend(){let h='';const dot=(c,t)=>'<span><i style="background:'+c+'"></i>'+esc(tr(t))+'</span>';
+  if(view==='solar')h=dot('#f5b642','Star')+dot('#4f8fd6','Planet')+dot('#c8a98c','Dwarf planet')+dot('#c9c6bf','Moon');
+  if(view==='time')h=Object.values(TLG).map(g=>dot(g[1],g[0])).join('');
+  if(view==='bh')h='<span>'+esc(tr('Sizes in the diagram are not to scale. The calculator works out the real sizes for any mass.'))+'</span>';
+  if(view==='theory')h=tcol==='lane'?Object.values(LANES).map(l=>dot(l[1],l[0])).join(''):Object.values(STATUS).map(s=>dot(s[1],s[0])).join('');
   $('legend').innerHTML=h}
 function el(tag,attrs,parent){const n=document.createElementNS(NS,tag);for(const k in attrs)n.setAttribute(k,attrs[k]);if(parent)parent.appendChild(n);return n}
 function hitGroup(parent,key,label){const g=el('g',{class:'hit',tabindex:'0',role:'button','aria-label':label,'data-k':key},parent);
@@ -275,7 +288,7 @@ function buildSolar(){const s=$('solarSvg');s.innerHTML='';
   BODIES.filter(b=>b.kind!=='moon'&&b.id!=='sun'&&vis(b)).forEach(b=>{const r=orbitR(b);el('ellipse',{class:'orbit',cx:CX,cy:CY,rx:r,ry:r*TILT,'stroke-dasharray':b.kind==='dwarf'?'4 4':''},s)});
   const defs=el('defs',{},s),sg=el('radialGradient',{id:'sunGlow'},defs);[[0,'rgba(255,214,120,.55)'],[1,'rgba(245,182,66,0)']].forEach(([o,c])=>el('stop',{offset:o,'stop-color':c},sg));
   const moonR=zoom?34:16;
-  BODIES.filter(vis).forEach(b=>{const g=hitGroup(s,'body:'+b.id,b.name);const r=dotR(b);el('title',{},g).textContent=b.name;
+  BODIES.filter(vis).forEach(b=>{const g=hitGroup(s,'body:'+b.id,tr(b.name));const r=dotR(b);el('title',{},g).textContent=tr(b.name);
     if(b.id==='sun'){el('circle',{cx:0,cy:0,r:44,fill:'url(#sunGlow)'},g)}
     if(b.id==='earth'){el('circle',{class:'orbit',cx:0,cy:0,r:moonR},g)}
     if(b.id==='saturn')el('ellipse',{cx:0,cy:0,rx:r*2.1,ry:r*.7,fill:'none',stroke:'#e6cf8f','stroke-width':2.2,opacity:.85},g);
@@ -283,7 +296,7 @@ function buildSolar(){const s=$('solarSvg');s.innerHTML='';
     el('circle',{class:'ring',cx:0,cy:0,r:r,fill:b.color,stroke:'rgba(0,0,0,.35)','stroke-width':1},g);
     if(b.id==='moon')g.querySelector('.ring').setAttribute('r',3.2);
     // In the whole view the inner worlds sit too close for labels; hovering shows their names and Inner planets spreads them out.
-    if(zoom||!['mercury','venus','moon'].includes(b.id)){const t=el('text',{class:'lbl'+(b.kind==='moon'?' small':''),x:0,y:(b.id==='moon'?-7:r+13),'text-anchor':'middle'},g);t.textContent=b.name}
+    if(zoom||!['mercury','venus','moon'].includes(b.id)){const t=el('text',{class:'lbl'+(b.kind==='moon'?' small':''),x:0,y:(b.id==='moon'?-7:r+13),'text-anchor':'middle'},g);t.textContent=tr(b.name)}
     // A moving target is hard to tap, so everything holds still while the pointer is on a world.
     g.addEventListener('pointerenter',()=>hold=true);g.addEventListener('pointerleave',()=>hold=false);
     sNodes[b.id]=g});
@@ -294,22 +307,22 @@ function placeBodies(){if(trueSizes)return;
     if(b.id==='moon'){const e=B.earth,a=angle(e),ma=2*Math.PI*simDays/27.32;const mr=zoom?34:16;x=CX+orbitR(e)*Math.cos(a)+mr*Math.cos(ma);y=CY-orbitR(e)*TILT*Math.sin(a)+mr*TILT*Math.sin(ma)}
     else if(b.id!=='sun'){const a=angle(b),r=orbitR(b);x=CX+r*Math.cos(a);y=CY-r*TILT*Math.sin(a)}
     g.setAttribute('transform','translate('+x.toFixed(1)+','+y.toFixed(1)+')')});
-  const d=new Date(J2000+simDays*86400000);$('dateLbl').textContent=d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}
+  const d=new Date(J2000+simDays*86400000);$('dateLbl').textContent=d.toLocaleDateString(LOCALE[lang()]||'en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'UTC'})}
 function drawTrueSizes(s){const sun=B.sun,scale=400/sun.diam*2;let x=-sun.diam/2*scale+150;
   el('circle',{cx:x,cy:260,r:sun.diam/2*scale,fill:'#f5b642',opacity:.95},s);
-  const t0=el('text',{class:'lbl',x:40,y:40},s);t0.textContent='Sun (diameter 1,392,700 km)';
+  const t0=el('text',{class:'lbl',x:40,y:40},s);t0.textContent=tr('Sun (diameter {0} km)','1,392,700');
   let px=180;const list=BODIES.filter(b=>b.id!=='sun');
-  list.forEach(b=>{const r=Math.max(.6,b.diam/2*scale);const g=hitGroup(s,'body:'+b.id,b.name);g.setAttribute('transform','translate('+(px+r)+',260)');
+  list.forEach(b=>{const r=Math.max(.6,b.diam/2*scale);const g=hitGroup(s,'body:'+b.id,tr(b.name));g.setAttribute('transform','translate('+(px+r)+',260)');
     el('circle',{class:'ring',cx:0,cy:0,r:r,fill:b.color},g);if(b.id==='saturn')el('ellipse',{cx:0,cy:0,rx:r*2.2,ry:r*.5,fill:'none',stroke:'#e6cf8f','stroke-width':2},g);
-    const lb=el('text',{class:'lbl small',x:0,y:(list.indexOf(b)%2?-r-8:r+16),'text-anchor':'middle'},g);lb.textContent=b.name;px+=2*r+(b.id==='jupiter'||b.id==='saturn'?48:14)});
-  const n=el('text',{class:'lbl small',x:180,y:470},s);n.textContent='Sizes to scale: 109 Earths fit across the Sun, and 11 across Jupiter. Distances are not shown.';markSel()}
+    const lb=el('text',{class:'lbl small',x:0,y:(list.indexOf(b)%2?-r-8:r+16),'text-anchor':'middle'},g);lb.textContent=tr(b.name);px+=2*r+(b.id==='jupiter'||b.id==='saturn'?48:14)});
+  const n=el('text',{class:'lbl small',x:180,y:470},s);n.textContent=tr('Sizes to scale: 109 Earths fit across the Sun, and 11 across Jupiter. Distances are not shown.');markSel()}
 function frame(t){if(!lastT)lastT=t;const dt=Math.min(.1,(t-lastT)/1000);lastT=t;if(playing&&!hold){simDays+=dt*+$('speed').value;placeBodies()}raf=requestAnimationFrame(frame)}
 function startAnim(){if(!raf&&!trueSizes){lastT=0;raf=requestAnimationFrame(frame)}}
 function stopAnim(){cancelAnimationFrame(raf);raf=0}
-$('playBtn').onclick=()=>{playing=!playing;$('playBtn').textContent=playing?'⏸ Pause':'▶ Play'};
-$('playBtn').textContent=playing?'⏸ Pause':'▶ Play';
+const solarButtons=()=>{$('playBtn').textContent=playing?'⏸ '+tr('Pause'):'▶ '+tr('Play');$('zoomBtn').textContent=zoom?'🔭 '+tr('Whole Solar System'):'🔍 '+tr('Inner planets')};
+$('playBtn').onclick=()=>{playing=!playing;solarButtons()};
 $('todayBtn').onclick=()=>{simDays=(Date.now()-J2000)/86400000;placeBodies()};
-$('zoomBtn').onclick=()=>{zoom=!zoom;$('zoomBtn').classList.toggle('active',zoom);$('zoomBtn').textContent=zoom?'🔭 Whole Solar System':'🔍 Inner planets';if(trueSizes){trueSizes=false;$('sizesBtn').classList.remove('active')}stopAnim();buildSolar();startAnim()};
+$('zoomBtn').onclick=()=>{zoom=!zoom;$('zoomBtn').classList.toggle('active',zoom);solarButtons();if(trueSizes){trueSizes=false;$('sizesBtn').classList.remove('active')}stopAnim();buildSolar();startAnim()};
 $('sizesBtn').onclick=()=>{trueSizes=!trueSizes;$('sizesBtn').classList.toggle('active',trueSizes);stopAnim();buildSolar();if(!trueSizes)startAnim()};
 
 // ---------- History of the universe ----------
@@ -318,25 +331,27 @@ document.querySelectorAll('[data-scale]').forEach(b=>b.onclick=()=>{scale=b.data
 function buildTime(){const s=$('timeSvg');s.innerHTML='';const X0=40,X1=960,AY=170;
   let evs=EVENTS,xOf,ticks=[];
   if(scale==='log'){const lo=-44,hi=108;xOf=e=>X0+(Math.log10(e.t)-lo)/(hi-lo)*(X1-X0);
-    [[-43,'10⁻⁴³ s'],[-30,'10⁻³⁰ s'],[-12,'10⁻¹² s'],[0,'1 s'],[Math.log10(YEAR),'1 year'],[Math.log10(4.355e17),'today'],[Math.log10(YEAR*1e40),'10⁴⁰ yrs'],[Math.log10(YEAR*1e100),'10¹⁰⁰ yrs']].forEach(([v,l])=>ticks.push([X0+(v-lo)/(hi-lo)*(X1-X0),l]));
-    $('timeNote').textContent='Logarithmic scale: each step to the right is 10 times longer than the one before, so the first second gets as much room as billions of years. Today sits less than halfway along — most of time is still to come.'}
+    [[-43,'10⁻⁴³ s'],[-30,'10⁻³⁰ s'],[-12,'10⁻¹² s'],[0,'1 s'],[Math.log10(YEAR),tr('1 year')],[Math.log10(4.355e17),tr('today')],[Math.log10(YEAR*1e40),tr('{0} yrs','10⁴⁰')],[Math.log10(YEAR*1e100),tr('{0} yrs','10¹⁰⁰')]].forEach(([v,l])=>ticks.push([X0+(v-lo)/(hi-lo)*(X1-X0),l]));
+    $('timeNote').textContent=tr('Logarithmic scale: each step to the right is 10 times longer than the one before, so the first second gets as much room as billions of years. Today sits less than halfway along — most of time is still to come.')}
   else{evs=EVENTS.filter(e=>e.ahead==null);const span=4.355e17;xOf=e=>X0+e.t/span*(X1-X0);
-    if(scale==='lin'){for(let g=0;g<=13;g+=1)ticks.push([X0+g*1e9*YEAR/span*(X1-X0),g===0?'Big Bang':g+' bn']);ticks.push([X1,'today']);
-      $('timeNote').textContent='To scale: the first 9 billion years have no Earth at all, and everything from the dinosaurs to now is squeezed into the last hair-thin sliver.'}
-    else{['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].forEach((m,i)=>ticks.push([X0+i/12*(X1-X0),m]));
-      $('timeNote').textContent='The cosmic calendar squeezes 13.8 billion years into one year: the Big Bang is the first moment of 1 January and now is midnight on 31 December. Each day is 38 million years; all of human history fits in the last few seconds of the year.'}}
+    if(scale==='lin'){for(let g=0;g<=13;g+=1)ticks.push([X0+g*1e9*YEAR/span*(X1-X0),g===0?tr('Big Bang'):tr('{0} bn',g)]);ticks.push([X1,tr('today')]);
+      $('timeNote').textContent=tr('To scale: the first 9 billion years have no Earth at all, and everything from the dinosaurs to now is squeezed into the last hair-thin sliver.')}
+    else{for(let i=0;i<12;i++)ticks.push([X0+i/12*(X1-X0),new Date(Date.UTC(2025,i,1)).toLocaleDateString(LOCALE[lang()]||'en-GB',{month:'short',timeZone:'UTC'})]);
+      $('timeNote').textContent=tr('The cosmic calendar squeezes 13.8 billion years into one year: the Big Bang is the first moment of 1 January and now is midnight on 31 December. Each day is 38 million years; all of human history fits in the last few seconds of the year.')}}
   el('line',{x1:X0,y1:AY,x2:X1,y2:AY,stroke:'rgba(237,234,224,.5)','stroke-width':2},s);
   ticks.forEach(([x,l])=>{el('line',{x1:x,y1:AY-5,x2:x,y2:AY+5,stroke:'rgba(237,234,224,.6)'},s);const t=el('text',{class:'lbl small',x:x,y:AY+22,'text-anchor':'middle'},s);t.textContent=l});
   if(scale==='log'){const nx=X0+(Math.log10(4.355e17)+44)/152*(X1-X0);el('rect',{x:nx,y:AY-60,width:X1-nx,height:70,fill:'rgba(181,138,224,.08)'},s)}
   const rows=[[],[],[],[],[],[]];const RY=[AY-30,AY-58,AY-86,AY-114,AY-142,AY+48];
-  evs.forEach(e=>{const x=xOf(e),col=TLG[e.group][1];const g=hitGroup(s,'event:'+e.id,e.name+' — '+when(e));
-    const w=e.name.length*6.1;let row=-1;
+  // Chinese characters are about twice as wide as Latin letters.
+  const cw=lang()==='zh'?11.5:6.1;
+  evs.forEach(e=>{const x=xOf(e),col=TLG[e.group][1],name=tr(e.name);const g=hitGroup(s,'event:'+e.id,name+' — '+when(e));
+    const w=name.length*cw;let row=-1;
     const lx=Math.max(w/2+4,Math.min(1000-w/2-4,x));
-    if(row<0)for(let r=0;r<rows.length;r++){if(!rows[r].length||rows[r][rows[r].length-1]<lx-w/2-6){row=r;break}}
-    if(row>=0){rows[row].push(lx+w/2);const y=RY[row];el('line',{x1:x,y1:AY,x2:x,y2:y+(row===5?-12:4),stroke:col,'stroke-opacity':.45},g);const t=el('text',{class:'lbl small',x:lx,y:y,'text-anchor':'middle'},g);t.textContent=e.name}
-    el('title',{},g).textContent=e.name+' — '+when(e);
+    for(let r=0;r<rows.length;r++){if(!rows[r].length||rows[r][rows[r].length-1]<lx-w/2-6){row=r;break}}
+    if(row>=0){rows[row].push(lx+w/2);const y=RY[row];el('line',{x1:x,y1:AY,x2:x,y2:y+(row===5?-12:4),stroke:col,'stroke-opacity':.45},g);const t=el('text',{class:'lbl small',x:lx,y:y,'text-anchor':'middle'},g);t.textContent=name}
+    el('title',{},g).textContent=name+' — '+when(e);
     el('circle',{class:'ring',cx:x,cy:AY,r:6,fill:col,stroke:'#06121f','stroke-width':1.5},g)});
-  $('evList').innerHTML=evs.map(e=>'<button class="ev" data-ev="'+e.id+'"><i style="background:'+TLG[e.group][1]+'"></i>'+esc(e.name)+'<small>'+esc(scale==='cal'&&cosmicDate(e)?cosmicDate(e):when(e))+'</small></button>').join('');
+  $('evList').innerHTML=evs.map(e=>'<button class="ev" data-ev="'+e.id+'"><i style="background:'+TLG[e.group][1]+'"></i>'+esc(tr(e.name))+'<small>'+esc(scale==='cal'&&cosmicDate(e)?cosmicDate(e):when(e))+'</small></button>').join('');
   $('evList').querySelectorAll('[data-ev]').forEach(b=>b.onclick=()=>select('event:'+b.dataset.ev));markSel()}
 
 // ---------- Black holes ----------
@@ -351,14 +366,17 @@ function buildBH(){const s=$('bhSvg');s.innerHTML='';const cx=200,cy=165;
   el('circle',{cx:cx,cy:cy,r:2.5,fill:'#E2A63B'},s);
   // [part, point on the drawing, label position] — labels run top to bottom in the same order as their points, so the lines don't cross.
   const labels=[[5,cx+4,40,390,36],[3,cx+45,cy-45,390,84],[2,cx+34,cy-34,390,128],[1,cx+23,cy-23,390,172],[0,cx+2,cy,390,216],[6,cx+24,cy+24,390,260],[4,cx+150,cy+12,390,304]];
-  labels.forEach(([i,ax,ay,lx,ly])=>{const g=el('g',{class:'hit',tabindex:'0',role:'button','aria-label':PARTS[i][0]},s);
-    el('line',{x1:ax,y1:ay,x2:lx-4,y2:ly-4,stroke:'rgba(237,234,224,.45)'},g);const r=el('rect',{class:'ring',x:lx-2,y:ly-16,width:122,height:22,rx:5,fill:'rgba(8,24,38,.85)',stroke:'rgba(111,209,224,.4)'},g);
-    const t=el('text',{class:'lbl small',x:lx+4,y:ly-1},g);t.textContent=PARTS[i][0];
+  labels.forEach(([i,ax,ay,lx,ly])=>{const name=tr(PARTS[i][0]);const g=el('g',{class:'hit',tabindex:'0',role:'button','aria-label':name},s);
+    el('line',{x1:ax,y1:ay,x2:lx-4,y2:ly-4,stroke:'rgba(237,234,224,.45)'},g);el('rect',{class:'ring',x:lx-2,y:ly-16,width:126,height:22,rx:5,fill:'rgba(8,24,38,.85)',stroke:'rgba(111,209,224,.4)'},g);
+    // Long translated names are squeezed to fit their box.
+    const t=el('text',name.length>19?{class:'lbl small',x:lx+4,y:ly-1,textLength:116,lengthAdjust:'spacingAndGlyphs'}:{class:'lbl small',x:lx+4,y:ly-1},g);t.textContent=name;
     const open=()=>showPart(i);g.addEventListener('click',open);g.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();open()}})});
-  $('bhCards').innerHTML=BHS.map(b=>'<button class="ev" data-bh="'+b.id+'">🕳️ '+esc(b.name)+'<small>'+esc(b.type)+' · '+big(b.mass)+' Suns</small></button>').join('');
+  $('bhCards').innerHTML=BHS.map(b=>'<button class="ev" data-bh="'+b.id+'">🕳️ '+esc(tr(b.name))+'<small>'+esc(tr(b.type))+' · '+esc(tr('{0} Suns',big(b.mass)))+'</small></button>').join('');
   $('bhCards').querySelectorAll('[data-bh]').forEach(x=>x.onclick=()=>select('bh:'+x.dataset.bh))}
-function showPart(i){$('info').innerHTML='<div class="ehead"><div class="orb" style="background:#000;color:#f5b642">🕳️</div><div><span class="badge" style="background:#f0c75e">Part of a black hole</span><h2>'+esc(PARTS[i][0])+'</h2></div></div><div class="sect"><p>'+esc(PARTS[i][1])+'</p></div><div class="sect"><h3>The other parts</h3>'+PARTS.map((p,j)=>j===i?'':'<button class="go" data-part="'+j+'">'+esc(p[0])+'</button>').join('')+'</div><div class="actions" style="margin-top:12px"><button class="secondary" id="bhCalcBtn">🧮 Work out a black hole’s size</button></div>';
-  $('info').querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>showPart(+b.dataset.part));$('bhCalcBtn').onclick=()=>openCalc('bh',1);scrollInfo()}
+let partShown=null;
+function showPart(i,noScroll){partShown=i;selected=null;markSel();
+  $('info').innerHTML='<div class="ehead"><div class="orb" style="background:#000;color:#f5b642">🕳️</div><div><span class="badge" style="background:#f0c75e">'+esc(tr('Part of a black hole'))+'</span><h2>'+esc(tr(PARTS[i][0]))+'</h2></div></div><div class="sect"><p>'+esc(tr(PARTS[i][1]))+'</p></div><div class="sect"><h3>'+esc(tr('The other parts'))+'</h3>'+PARTS.map((p,j)=>j===i?'':'<button class="go" data-part="'+j+'">'+esc(tr(p[0]))+'</button>').join('')+'</div><div class="actions" style="margin-top:12px"><button class="secondary" id="bhCalcBtn">🧮 '+esc(tr('Work out a black hole’s size'))+'</button></div>';
+  $('info').querySelectorAll('[data-part]').forEach(b=>b.onclick=()=>showPart(+b.dataset.part));$('bhCalcBtn').onclick=()=>openCalc('bh',1);if(!noScroll)scrollInfo()}
 
 // ---------- Theory map ----------
 let tcol='lane';
@@ -368,24 +386,25 @@ const SHORT={newton:'Newton’s laws',gravity:'Gravity (Newton)',thermo:'Thermod
 const yearX=y=>y<1900?160+(y-1650)/250*160:320+(y-1900)/100*640;
 function buildTheory(){const s=$('theorySvg');s.innerHTML='';const lanes=Object.keys(LANES),LY0=72,LSP=68;
   [1700,1800,1900,1925,1950,1975,2000].forEach(y=>{const x=yearX(y);el('line',{x1:x,y1:20,x2:x,y2:430,stroke:'rgba(237,234,224,.12)'},s);const t=el('text',{class:'lbl small',x:x,y:16,'text-anchor':'middle'},s);t.textContent=y});
-  lanes.forEach((l,i)=>{const t=el('text',{class:'lbl small',x:6,y:LY0+i*LSP-20,fill:LANES[l][1]},s);t.textContent=LANES[l][0];t.style.fill=LANES[l][1];t.setAttribute('y',LY0+i*LSP-28)});
+  lanes.forEach((l,i)=>{const t=el('text',{class:'lbl small',x:6,y:LY0+i*LSP-28},s);t.textContent=tr(LANES[l][0]);t.style.fill=LANES[l][1]});
   // Neighbours in a lane that are close in time take turns: one nudged up with its label above, the next down with its label below.
   const pos={},last={};THEORIES.slice().sort((a,b)=>a.year-b.year).forEach(t=>{const x=yearX(t.year),li=lanes.indexOf(t.lane);const p=last[t.lane];let up=false,dy=0;
     if(p&&x-p.x<120){up=!p.up;dy=x-p.x<40?(up?-12:12):0;if(x-p.x<40&&!p.dy){p.dy=up?12:-12;pos[p.id].y+=p.dy;pos[p.id].up=!up}}
     last[t.lane]={x:x,up:up,dy:dy,id:t.id};pos[t.id]={x:x,y:LY0+li*LSP+dy,up:up}});
   THEORIES.forEach(t=>t.from.forEach(f=>{const a=pos[f],b=pos[t.id];if(!a||!b)return;const mx=(a.x+b.x)/2;el('path',{d:'M'+a.x+' '+a.y+' C'+mx+' '+a.y+' '+mx+' '+b.y+' '+b.x+' '+b.y,fill:'none',stroke:'rgba(237,234,224,.22)','stroke-width':1.3},s)}));
-  THEORIES.forEach(t=>{const p=pos[t.id],g=hitGroup(s,'theory:'+t.id,t.name+', '+t.year);g.setAttribute('transform','translate('+p.x+','+p.y+')');
+  THEORIES.forEach(t=>{const p=pos[t.id],g=hitGroup(s,'theory:'+t.id,tr(t.name)+', '+t.year);g.setAttribute('transform','translate('+p.x+','+p.y+')');
     const fill=tcol==='lane'?LANES[t.lane][1]:STATUS[t.status][1];el('circle',{class:'ring',cx:0,cy:0,r:9,fill:fill,stroke:STATUS[t.status][1],'stroke-width':tcol==='lane'?2.5:1.5},g);
-    const lb=el('text',{class:'lbl small',x:0,y:p.up?-14:22,'text-anchor':'middle'},g);lb.textContent=SHORT[t.id]||t.name;el('title',{},g).textContent=t.name+' ('+t.year+')'});
+    const lb=el('text',{class:'lbl small',x:0,y:p.up?-14:22,'text-anchor':'middle'},g);lb.textContent=tr(SHORT[t.id]||t.name);el('title',{},g).textContent=tr(t.name)+' ('+t.year+')'});
   markSel()}
 
 // ---------- detail panel ----------
 const go=k=>'<button class="go" data-go="'+esc(k)+'">'+esc(nameOf(k))+'</button>';
+const H3=t=>'<h3>'+esc(tr(t))+'</h3>';
+const fact=(label,value)=>'<div class="fact"><b>'+esc(tr(label))+'</b><span>'+esc(value)+'</span></div>';
 function scrollInfo(){if(innerWidth<900)$('info').scrollIntoView({behavior:'smooth',block:'start'})}
-function select(k,opts){if(!ALL.includes(k))return;opts=opts||{};selected=k;seen.add(k);store.set('physSeen',[...seen]);$('seenCount').textContent=seen.size;
-  const [type,id]=k.split(':');let html='';
-  if(type==='body')html=bodyHTML(B[id]);if(type==='event')html=eventHTML(E[id]);if(type==='bh')html=bhHTML(BH[id]);if(type==='theory')html=theoryHTML(T[id]);
-  html+='<div class="actions" style="margin-top:12px"><button class="secondary" id="sheetBtn">⬇ Fact sheet</button><button class="secondary" id="askBtn">🤖 Explain it simply (AI)</button><button class="secondary" id="quizThis">🏆 Quiz me on this topic</button></div><div class="dyk hidden" id="aiAns" style="margin-top:10px;white-space:pre-wrap"></div>';
+function select(k,opts){if(!ALL.includes(k))return;opts=opts||{};selected=k;partShown=null;seen.add(k);store.set('physSeen',[...seen]);$('seenCount').textContent=seen.size;
+  const [type,id]=k.split(':');
+  const html=detailHTML(k)+'<div class="actions" style="margin-top:12px"><button class="secondary" id="sheetBtn">⬇ '+esc(tr('Fact sheet'))+'</button><button class="secondary" id="askBtn">🤖 '+esc(tr('Explain it simply (AI)'))+'</button><button class="secondary" id="quizThis">🏆 '+esc(tr('Quiz me on this topic'))+'</button></div><div class="dyk hidden" id="aiAns" style="margin-top:10px;white-space:pre-wrap"></div>';
   $('info').innerHTML=html;
   $('info').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const g=b.dataset.go;showOnMap(g);select(g)});
   $('sheetBtn').onclick=()=>factSheet(k);$('askBtn').onclick=()=>askAi(k);
@@ -393,52 +412,57 @@ function select(k,opts){if(!ALL.includes(k))return;opts=opts||{};selected=k;seen
   const w=$('wInfo');if(w)w.oninput=()=>{$('wOut').textContent=nice(+w.value*B[id].g/G0,1)+' kg'};
   const bc=$('bhCalcBtn');if(bc)bc.onclick=()=>{openCalc('bh',1);$('bhMass').value=BH[id].mass;calc()};
   markSel();if(!opts.noScroll)scrollInfo()}
+function detailHTML(k){const [type,id]=k.split(':');return type==='body'?bodyHTML(B[id]):type==='event'?eventHTML(E[id]):type==='bh'?bhHTML(BH[id]):theoryHTML(T[id])}
 function showOnMap(k){const v={body:'solar',event:'time',bh:'bh',theory:'theory'}[k.split(':')[0]];if(v!==view)setView(v)}
-function bodyHTML(b){const isSun=b.id==='sun',isMoon=b.id==='moon';
-  const kind={star:'Star',planet:'Planet',dwarf:'Dwarf planet',moon:'Moon of Earth'}[b.kind];const order=PLANETS.indexOf(b);
-  const facts=[['Mass',sci(b.mass)+' kg'+(b.id!=='earth'?' ('+(b.mass/B.earth.mass>=0.1?nice(b.mass/B.earth.mass):sci(b.mass/B.earth.mass,2))+' × Earth)':'')],['Diameter',nice(b.diam,0)+' km'+(b.id!=='earth'?' ('+nice(b.diam/B.earth.diam)+' × Earth)':'')],
+function bodyHTML(b){const isSun=b.id==='sun',isMoon=b.id==='moon',name=tr(b.name);
+  const kind=tr({star:'Star',planet:'Planet',dwarf:'Dwarf planet',moon:'Moon of Earth'}[b.kind]);const order=PLANETS.indexOf(b);
+  const xE=v=>tr('{0} × Earth',v);
+  const facts=[['Mass',sci(b.mass)+' kg'+(b.id!=='earth'?' ('+xE(b.mass/B.earth.mass>=0.1?nice(b.mass/B.earth.mass):sci(b.mass/B.earth.mass,2))+')':'')],['Diameter',nice(b.diam,0)+' km'+(b.id!=='earth'?' ('+xE(nice(b.diam/B.earth.diam))+')':'')],
     ['Surface gravity',nice(b.g)+' m/s² ('+nice(b.g/9.8)+' g)'],['Escape velocity',nice(b.esc)+' km/s'],[isSun?'Spins once in':'Length of a day',hours(b.day)],
     [isMoon?'Distance from Earth':'Distance from the Sun',isSun?'—':isMoon?'384,400 km':big(b.dist*1e6)+' km ('+nice(b.dist/149.6)+' AU)'],
     [isMoon?'Orbits Earth in':'Length of a year',isSun?'—':days(b.period)],[isSun?'Surface temperature':'Average temperature',nice(b.temp,0)+' °C'],
-    ['Known moons',isSun?'— (8 planets)':b.moons+(b.moons>50?' (still rising)':'')],['Rings',b.rings?'Yes':'No']];
+    ['Known moons',isSun?tr('— (8 planets)'):b.moons+(b.moons>50?' '+tr('(still rising)'):'')],['Rings',tr(b.rings?'Yes':'No')]];
   const lightS=isSun?0:(isMoon?3.844e8:b.dist*1e9)/C;
-  return '<div class="ehead"><div class="orb" style="background:'+b.color+'">'+b.icon+'</div><div><span class="badge" style="background:'+b.color+'">'+kind+(order>=0?' · '+(order+1)+(['st','nd','rd'][order]||'th')+' from the Sun':'')+'</span><h2>'+esc(b.name)+'</h2></div></div>'+
-   '<div class="facts">'+facts.map(f=>'<div class="fact"><b>'+f[0]+'</b><span>'+esc(f[1])+'</span></div>').join('')+'</div>'+
-   '<div class="sect"><h3>About</h3><p>'+esc(b.about)+'</p></div><div class="sect"><h3>Atmosphere</h3><p>'+esc(b.air)+'</p></div>'+
-   (isSun?'':'<div class="sect"><h3>Light from '+(isMoon?'the Moon to Earth':'the Sun')+'</h3><p>Sunlight takes <b>'+dur(lightS)+'</b> to get '+(isMoon?'from the Moon to Earth':'here')+'.</p></div>')+
-   (isSun?'':'<div class="sect"><h3>Your weight here</h3><p>If you weigh <input id="wInfo" type="number" value="60" min="1" style="width:70px"> kg on Earth, a scale on '+esc(b.name)+' would read <b id="wOut">'+nice(60*b.g/G0,1)+' kg</b>.</p></div>')+
-   '<div class="sect"><h3>Did you know?</h3><div class="dyk">'+esc(b.fact)+'</div></div>'}
+  return '<div class="ehead"><div class="orb" style="background:'+b.color+'">'+b.icon+'</div><div><span class="badge" style="background:'+b.color+'">'+esc(kind+(order>=0?' · '+tr('number {0} from the Sun',order+1):''))+'</span><h2>'+esc(name)+'</h2></div></div>'+
+   '<div class="facts">'+facts.map(f=>fact(f[0],f[1])).join('')+'</div>'+
+   '<div class="sect">'+H3('About')+'<p>'+esc(tr(b.about))+'</p></div><div class="sect">'+H3('Atmosphere')+'<p>'+esc(tr(b.air))+'</p></div>'+
+   (isSun?'':'<div class="sect">'+H3(isMoon?'Light from the Moon to Earth':'Light from the Sun')+'<p>'+tr(isMoon?'Moonlight takes {0} to reach Earth.':'Sunlight takes {0} to get here.','<b>'+esc(dur(lightS))+'</b>')+'</p></div>')+
+   (isSun?'':'<div class="sect">'+H3('Your weight here')+'<p>'+tr('If you weigh {0} kg on Earth, a scale on {1} would read {2}.','<input id="wInfo" type="number" value="60" min="1" style="width:70px">',esc(name),'<b id="wOut">'+nice(60*b.g/G0,1)+' kg</b>')+'</p></div>')+
+   '<div class="sect">'+H3('Did you know?')+'<div class="dyk">'+esc(tr(b.fact))+'</div></div>'}
 function eventHTML(e){const i=EVENTS.indexOf(e),prev=EVENTS[i-1],next=EVENTS[i+1],cd=cosmicDate(e);
-  return '<div class="ehead"><div class="orb" style="background:'+TLG[e.group][1]+'">'+({early:'💥',stars:'✨',solar:'☀️',life:'🌱',now:'📍',future:'🔮'}[e.group])+'</div><div><span class="badge" style="background:'+TLG[e.group][1]+'">'+esc(TLG[e.group][0])+'</span><h2>'+esc(e.name)+'</h2></div></div>'+
-   '<div class="facts"><div class="fact"><b>When</b><span>'+esc(when(e))+'</span></div><div class="fact"><b>Time since the Big Bang</b><span>'+esc(e.t<YEAR?dur(e.t):big(e.t/YEAR)+' years')+'</span></div>'+(cd?'<div class="fact"><b>On the cosmic calendar</b><span>'+esc(cd)+'</span></div>':'')+'</div>'+
-   '<div class="sect"><p>'+esc(e.text)+'</p></div><div class="sect"><h3>Before and after</h3>'+(prev?'← '+go('event:'+prev.id):'')+(next?' '+go('event:'+next.id)+' →':'')+'</div>'}
+  return '<div class="ehead"><div class="orb" style="background:'+TLG[e.group][1]+'">'+({early:'💥',stars:'✨',solar:'☀️',life:'🌱',now:'📍',future:'🔮'}[e.group])+'</div><div><span class="badge" style="background:'+TLG[e.group][1]+'">'+esc(tr(TLG[e.group][0]))+'</span><h2>'+esc(tr(e.name))+'</h2></div></div>'+
+   '<div class="facts">'+fact('When',when(e))+fact('Time since the Big Bang',e.t<YEAR?dur(e.t):tr('{0} years',big(e.t/YEAR)))+(cd?fact('On the cosmic calendar',cd):'')+'</div>'+
+   '<div class="sect"><p>'+esc(tr(e.text))+'</p></div><div class="sect">'+H3('Before and after')+(prev?'← '+go('event:'+prev.id):'')+(next?' '+go('event:'+next.id)+' →':'')+'</div>'}
 function bhNums(M){const m=M*MSUN,rs=2*G*m/C/C,dens=m/(4/3*Math.PI*rs*rs*rs),Th=HBAR*C*C*C/(8*Math.PI*G*m*KB),tev=5120*Math.PI*G*G*m*m*m/(HBAR*Math.pow(C,4))/YEAR,tide=2*G*m*2/Math.pow(rs,3)/G0;return {rs,dens,Th,tev,tide}}
 // Compare a diameter (km) with something familiar: "about the size of a big city", "about 18 × the Sun".
-function sizeLike(km){if(km<0.001)return 'smaller than a grain of sand';if(km<0.05)return 'about the size of a house';if(km<2)return 'about the size of a few city blocks';if(km<20)return 'about the size of a small town';if(km<200)return 'about the size of a big city';if(km<2500)return 'about the size of a country';
-  const L=[[3475,'the Moon'],[12756,'Earth'],[139820,'Jupiter'],[1392700,'the Sun'],[2.99e8,'Earth’s orbit'],[9e9,'Neptune’s orbit']];let best=L[0];L.forEach(l=>{if(km>=l[0]*0.7)best=l});const r=km/best[0];return r<1.6?'about the size of '+best[1]:'about '+nice(r,r<10?1:0)+' × '+best[1]}
+function sizeLike(km){if(km<0.001)return tr('smaller than a grain of sand');if(km<0.05)return tr('about the size of a house');if(km<2)return tr('about the size of a few city blocks');if(km<20)return tr('about the size of a small town');if(km<200)return tr('about the size of a big city');if(km<2500)return tr('about the size of a country');
+  const L=[[3475,'the Moon'],[12756,'Earth'],[139820,'Jupiter'],[1392700,'the Sun'],[2.99e8,'Earth’s orbit'],[9e9,'Neptune’s orbit']];let best=L[0];L.forEach(l=>{if(km>=l[0]*0.7)best=l});const r=km/best[0];
+  return r<1.6?tr('about the size of '+best[1]):tr('about {0} × '+best[1],nice(r,r<10?1:0))}
 function bhHTML(b){const n=bhNums(b.mass),dkm=2*n.rs/1000;
-  return '<div class="ehead"><div class="orb" style="background:radial-gradient(circle,#000 38%,#f5b642 40%,#d0643e 55%,#0E2A47 70%);color:transparent">●</div><div><span class="badge" style="background:#f0c75e">'+esc(b.type)+' black hole</span><h2>'+esc(b.name)+'</h2></div></div>'+
-   '<div class="facts"><div class="fact"><b>Mass</b><span>'+big(b.mass)+' Suns</span></div><div class="fact"><b>Distance</b><span>'+big(b.dist)+' light-years</span></div>'+
-   '<div class="fact"><b>Event horizon diameter</b><span>'+(dkm<1e6?nice(dkm,0)+' km':big(dkm)+' km ('+nice(dkm*1000/AU)+' AU)')+'</span></div><div class="fact"><b>Compared with</b><span>'+sizeLike(dkm)+'</span></div>'+
-   '<div class="fact"><b>Hawking temperature</b><span>'+sci(n.Th)+' K</span></div><div class="fact"><b>Would evaporate in</b><span>'+sci(n.tev,1)+' years</span></div></div>'+
-   '<div class="sect"><h3>How it was found</h3><p>'+esc(b.found)+'</p></div><div class="sect"><h3>About</h3><p>'+esc(b.text)+'</p></div>'+
-   '<div class="sect"><h3>Falling in</h3><p>'+(n.tide>1e3?'At the horizon the stretch between your head and feet would be about <b>'+big(n.tide)+' g</b> — you would be “spaghettified” before reaching it.':'At the horizon the head-to-foot stretch is only about <b>'+(n.tide<0.01?sci(n.tide):nice(n.tide))+' g</b> — you could cross it without noticing, and nothing would ever let you back out.')+'</p><button class="go" id="bhCalcBtn">🧮 Open it in the black-hole calculator</button></div>'}
+  return '<div class="ehead"><div class="orb" style="background:radial-gradient(circle,#000 38%,#f5b642 40%,#d0643e 55%,#0E2A47 70%);color:transparent">●</div><div><span class="badge" style="background:#f0c75e">'+esc(tr('{0} black hole',tr(b.type)))+'</span><h2>'+esc(tr(b.name))+'</h2></div></div>'+
+   '<div class="facts">'+fact('Mass',tr('{0} Suns',big(b.mass)))+fact('Distance',tr('{0} light-years',big(b.dist)))+
+   fact('Event horizon diameter',dkm<1e6?nice(dkm,0)+' km':big(dkm)+' km ('+nice(dkm*1000/AU)+' AU)')+fact('Compared with',sizeLike(dkm))+
+   fact('Hawking temperature',sci(n.Th)+' K')+fact('Would evaporate in',tr('{0} years',sci(n.tev,1)))+'</div>'+
+   '<div class="sect">'+H3('How it was found')+'<p>'+esc(tr(b.found))+'</p></div><div class="sect">'+H3('About')+'<p>'+esc(tr(b.text))+'</p></div>'+
+   '<div class="sect">'+H3('Falling in')+'<p>'+(n.tide>1e3?tr('At the horizon the stretch between your head and feet would be about {0} — you would be “spaghettified” before reaching it.','<b>'+big(n.tide)+' g</b>'):tr('At the horizon the head-to-foot stretch is only about {0} — you could cross it without noticing, and nothing would ever let you back out.','<b>'+(n.tide<0.01?sci(n.tide):nice(n.tide))+' g</b>'))+'</p><button class="go" id="bhCalcBtn">🧮 '+esc(tr('Open it in the black-hole calculator'))+'</button></div>'}
 function theoryHTML(t){const kids=THEORIES.filter(x=>x.from.includes(t.id));
-  return '<div class="ehead"><div class="orb" style="background:'+LANES[t.lane][1]+'">'+({mech:'🍎',light:'⚡',heat:'🔥',quant:'⚛️',cosmo:'🌌',unify:'🧵'}[t.lane])+'</div><div><span class="badge" style="background:'+LANES[t.lane][1]+'">'+esc(LANES[t.lane][0])+'</span><span class="badge" style="background:'+STATUS[t.status][1]+';color:#fff">'+esc(STATUS[t.status][0])+'</span><h2>'+esc(t.name)+'</h2><p class="muted" style="margin:2px 0 0">'+t.year+' · '+esc(t.who)+'</p></div></div>'+
-   '<div class="eq">'+esc(t.eq)+'</div><div class="sect"><h3>The idea</h3><p>'+esc(t.idea)+'</p></div><div class="sect"><h3>Evidence and what it explains</h3><p>'+esc(t.evidence)+'</p></div>'+
-   (t.from.length?'<div class="sect"><h3>Builds on</h3>'+t.from.map(f=>go('theory:'+f)).join('')+'</div>':'')+(kids.length?'<div class="sect"><h3>Led to</h3>'+kids.map(x=>go('theory:'+x.id)).join('')+'</div>':'')}
-function plainOf(k){const [type,id]=k.split(':');const tmp=document.createElement('div');tmp.innerHTML={body:bodyHTML,event:eventHTML,bh:bhHTML,theory:theoryHTML}[type]({body:B,event:E,bh:BH,theory:T}[type][id]);tmp.querySelectorAll('#wInfo').forEach(x=>x.closest('.sect').remove());tmp.querySelectorAll('button,input').forEach(x=>x.remove());return tmp}
-async function askAi(k){const box=$('aiAns');box.classList.remove('hidden');box.textContent='Asking the AI…';
-  try{const t=await MigaAI.ask('You are an accurate, friendly physics teacher. Use simple words and everyday comparisons. Plain text only, no markdown.','Explain “'+nameOf(k)+'” to a curious 12-year-old in about 150 words: what it is, why it matters, how we know, and one surprising fact. If parts are still unproven, say so.');box.textContent=t.trim()}catch(err){box.textContent=err.message}}
+  return '<div class="ehead"><div class="orb" style="background:'+LANES[t.lane][1]+'">'+({mech:'🍎',light:'⚡',heat:'🔥',quant:'⚛️',cosmo:'🌌',unify:'🧵'}[t.lane])+'</div><div><span class="badge" style="background:'+LANES[t.lane][1]+'">'+esc(tr(LANES[t.lane][0]))+'</span><span class="badge" style="background:'+STATUS[t.status][1]+';color:#fff">'+esc(tr(STATUS[t.status][0]))+'</span><h2>'+esc(tr(t.name))+'</h2><p class="muted" style="margin:2px 0 0">'+t.year+' · '+esc(tr(t.who))+'</p></div></div>'+
+   '<div class="eq">'+esc(tr(t.eq))+'</div><div class="sect">'+H3('The idea')+'<p>'+esc(tr(t.idea))+'</p></div><div class="sect">'+H3('Evidence and what it explains')+'<p>'+esc(tr(t.evidence))+'</p></div>'+
+   (t.from.length?'<div class="sect">'+H3('Builds on')+t.from.map(f=>go('theory:'+f)).join('')+'</div>':'')+(kids.length?'<div class="sect">'+H3('Led to')+kids.map(x=>go('theory:'+x.id)).join('')+'</div>':'')}
+async function askAi(k){const box=$('aiAns');box.classList.remove('hidden');box.textContent=tr('Asking the AI…');
+  try{const t=await MigaAI.ask('You are an accurate, friendly physics teacher. Use simple words and everyday comparisons. Plain text only, no markdown. Answer in '+(LANGNAME[lang()]||'English')+'.','Explain “'+enName(k)+'” to a curious 12-year-old in about 150 words: what it is, why it matters, how we know, and one surprising fact. If parts are still unproven, say so.');box.textContent=t.trim()}catch(err){box.textContent=err.message}}
 function download(name,html){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
 const PAGE_CSS='body{font:15px/1.5 Georgia,serif;max-width:780px;margin:30px auto;padding:0 20px;color:#16202B}h1,h2,h3{font-family:Arial,sans-serif}h2{font-size:24px}h3{font-size:16px;border-bottom:2px solid #0E2A47;padding-bottom:3px;margin-top:20px}li{margin-bottom:6px}.facts{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px}.fact b{display:block;font:12px Arial,sans-serif;color:#555}.badge{font:12px Arial,sans-serif;margin-right:8px}.orb{display:none}.eq{font:700 18px Arial,sans-serif;margin:10px 0}';
-function factSheet(k){const node=plainOf(k);const title=nameOf(k);
-  download(title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-fact-sheet.html','<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+' — fact sheet</title><style>'+PAGE_CSS+'</style></head><body>'+node.innerHTML+'<p><small>Made with MigaBuilder Physics Map · migabuilder.com/physics-map.html</small></p></body></html>')}
+const docHead=title=>'<!doctype html><html lang="'+lang()+'"'+(lang()==='ar'?' dir="rtl"':'')+'><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+PAGE_CSS+'</style></head><body>';
+function factSheet(k){const tmp=document.createElement('div');tmp.innerHTML=detailHTML(k);tmp.querySelectorAll('#wInfo').forEach(x=>x.closest('.sect').remove());tmp.querySelectorAll('button,input').forEach(x=>x.remove());
+  download(enName(k).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'-fact-sheet.html',docHead(tr('{0} — fact sheet',nameOf(k)))+tmp.innerHTML+'<p><small>'+esc(tr('Made with MigaBuilder Physics Map'))+' · migabuilder.com/physics-map.html</small></p></body></html>')}
 
 // ---------- search ----------
+function fillSearchList(){$('itemList').innerHTML=ALL.map(k=>'<option value="'+esc(nameOf(k))+'">').join('')}
 $('search').addEventListener('change',()=>{const q=$('search').value.trim().toLowerCase();if(!q)return;
-  const hit=ALL.find(k=>nameOf(k).toLowerCase()===q)||ALL.find(k=>nameOf(k).toLowerCase().includes(q))||ALL.find(k=>{const [t,id]=k.split(':');const o={body:B,event:E,bh:BH,theory:T}[t][id];return JSON.stringify(o).toLowerCase().includes(q)});
-  if(hit){showOnMap(hit);select(hit)}else{$('hint').textContent='Nothing matches “'+$('search').value+'” — try a planet, a black hole, an event or a theory.'}});
+  const names=k=>[enName(k),nameOf(k)].map(x=>x.toLowerCase());
+  const hit=ALL.find(k=>names(k).includes(q))||ALL.find(k=>names(k).some(x=>x.includes(q)))||ALL.find(k=>(detailHTML(k).replace(/<[^>]+>/g,' ')+' '+JSON.stringify({body:B,event:E,bh:BH,theory:T}[k.split(':')[0]][k.split(':')[1]])).toLowerCase().includes(q));
+  if(hit){showOnMap(hit);select(hit)}else{$('hint').textContent=tr('Nothing matches “{0}” — try a planet, a black hole, an event or a theory.',$('search').value)}});
 
 // ---------- tabs ----------
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));
@@ -446,135 +470,149 @@ function setTab(t){tab=t;document.querySelectorAll('[data-tab]').forEach(b=>b.cl
 
 // ---------- calculators ----------
 const opt=(list,sel)=>list.map(([v,l])=>'<option value="'+esc(v)+'"'+(String(v)===String(sel)?' selected':'')+'>'+esc(l)+'</option>').join('');
-const bodyOpts=sel=>opt(BODIES.map(b=>[b.id,b.icon+' '+b.name]),sel);
+const bodyOpts=sel=>opt(BODIES.map(b=>[b.id,b.icon+' '+tr(b.name)]),sel);
+const lab=(id,t)=>'<label for="'+id+'">'+esc(tr(t))+'</label>';
+const chip=(attr,val,t)=>'<button class="chip" '+attr+'="'+val+'">'+esc(tr(t))+'</button>';
 const FORMS={
- weight:()=>'<div class="field"><label for="wKg">Your weight on Earth (kg on a bathroom scale)</label><input id="wKg" type="number" value="60" min="1"></div>',
- light:()=>'<div class="field"><label for="lPlace">From Earth to</label><select id="lPlace">'+opt(window.PHYS_PLACES.map((p,i)=>[i,p[0]]),1)+'<option value="custom">A distance I type…</option></select></div><div class="field hidden" id="lCustomBox"><label for="lKm">Distance in km</label><input id="lKm" type="number" value="1000000"></div>',
- orbit:()=>'<div class="row2"><div class="field"><label for="oBody">Around</label><select id="oBody">'+bodyOpts('earth')+'</select></div><div class="field"><label for="oAlt">Height above the surface (km)</label><input id="oAlt" type="number" value="400" min="0"></div></div>',
- bh:()=>'<div class="field"><label for="bhMass">Mass, in Suns</label><input id="bhMass" type="number" value="1" min="0" step="any"></div><div class="actions" id="bhPre"><button class="chip" data-m="0.000003003">Earth squeezed</button><button class="chip" data-m="1">The Sun</button><button class="chip" data-m="62">GW150914</button><button class="chip" data-m="4300000">Sagittarius A*</button><button class="chip" data-m="6500000000">M87*</button></div><div class="field"><label for="bhR">How far from the centre? (times the horizon radius)</label><input id="bhR" type="number" value="2" min="1.0001" step="0.1"></div>',
- emc:()=>'<div class="row2"><div class="field"><label for="eM">Mass</label><input id="eM" type="number" value="1" min="0" step="any"></div><div class="field"><label for="eU">Unit</label><select id="eU"><option value="0.001" selected>grams</option><option value="1">kilograms</option><option value="1e-6">milligrams</option></select></div></div>',
- time:()=>'<div class="field"><label for="tV">Speed: <b id="tVLbl"></b> of the speed of light</label><input id="tV" type="range" min="0" max="1000" value="900" style="width:100%"></div><div class="actions" id="tPre"><button class="chip" data-v="0.0000255">ISS</button><button class="chip" data-v="0.5">50%</button><button class="chip" data-v="0.9">90%</button><button class="chip" data-v="0.99">99%</button><button class="chip" data-v="0.9999">99.99%</button></div><div class="field"><label for="tD">Trip distance (light-years)</label><input id="tD" type="number" value="4.25" min="0" step="any"></div>',
- gravity:()=>'<div class="row2"><div class="field"><label for="gM1">Mass 1 (kg)</label><input id="gM1" type="text" value="70"></div><div class="field"><label for="gM2">Mass 2 (kg)</label><input id="gM2" type="text" value="70"></div></div><div class="field"><label for="gR">Distance between their centres (m)</label><input id="gR" type="text" value="1"></div><div class="actions" id="gPre"><button class="chip" data-g="70|70|1">Two people 1 m apart</button><button class="chip" data-g="5.97e24|7.35e22|3.844e8">Earth and Moon</button><button class="chip" data-g="1.989e30|5.97e24|1.496e11">Sun and Earth</button><button class="chip" data-g="5.97e24|70|6.371e6">You and Earth</button></div><p class="muted">You can type numbers like 5.97e24 (5.97 × 10²⁴).</p>',
- kepler:()=>'<div class="field"><label for="kA">Average distance from the Sun (AU — 1 AU is Earth’s distance)</label><input id="kA" type="number" value="5.2" min="0.01" step="any"></div><p class="muted">Kepler’s third law: the square of the year equals the cube of the distance (P² = a³).</p>'
+ weight:()=>'<div class="field">'+lab('wKg','Your weight on Earth (kg on a bathroom scale)')+'<input id="wKg" type="number" value="60" min="1"></div>',
+ light:()=>'<div class="field">'+lab('lPlace','From Earth to')+'<select id="lPlace">'+opt(window.PHYS_PLACES.map((p,i)=>[i,tr(p[0])]),1)+'<option value="custom">'+esc(tr('A distance I type…'))+'</option></select></div><div class="field hidden" id="lCustomBox">'+lab('lKm','Distance in km')+'<input id="lKm" type="number" value="1000000"></div>',
+ orbit:()=>'<div class="row2"><div class="field">'+lab('oBody','Around')+'<select id="oBody">'+bodyOpts('earth')+'</select></div><div class="field">'+lab('oAlt','Height above the surface (km)')+'<input id="oAlt" type="number" value="400" min="0"></div></div>',
+ bh:()=>'<div class="field">'+lab('bhMass','Mass, in Suns')+'<input id="bhMass" type="number" value="1" min="0" step="any"></div><div class="actions" id="bhPre">'+chip('data-m','0.000003003','Earth squeezed')+chip('data-m','1','The Sun')+chip('data-m','62','GW150914')+chip('data-m','4300000','Sagittarius A*')+chip('data-m','6500000000','M87*')+'</div><div class="field">'+lab('bhR','How far from the centre? (times the horizon radius)')+'<input id="bhR" type="number" value="2" min="1.0001" step="0.1"></div>',
+ emc:()=>'<div class="row2"><div class="field">'+lab('eM','Mass')+'<input id="eM" type="number" value="1" min="0" step="any"></div><div class="field">'+lab('eU','Unit')+'<select id="eU">'+opt([['0.001',tr('grams')],['1',tr('kilograms')],['1e-6',tr('milligrams')]],'0.001')+'</select></div></div>',
+ time:()=>'<div class="field"><label for="tV">'+tr('Speed: {0} of the speed of light','<b id="tVLbl"></b>')+'</label><input id="tV" type="range" min="0" max="1000" value="900" style="width:100%"></div><div class="actions" id="tPre">'+chip('data-v','0.0000255','ISS')+chip('data-v','0.5','50%')+chip('data-v','0.9','90%')+chip('data-v','0.99','99%')+chip('data-v','0.9999','99.99%')+'</div><div class="field">'+lab('tD','Trip distance (light-years)')+'<input id="tD" type="number" value="4.25" min="0" step="any"></div>',
+ gravity:()=>'<div class="row2"><div class="field">'+lab('gM1','Mass 1 (kg)')+'<input id="gM1" type="text" value="70"></div><div class="field">'+lab('gM2','Mass 2 (kg)')+'<input id="gM2" type="text" value="70"></div></div><div class="field">'+lab('gR','Distance between their centres (m)')+'<input id="gR" type="text" value="1"></div><div class="actions" id="gPre">'+chip('data-g','70|70|1','Two people 1 m apart')+chip('data-g','5.97e24|7.35e22|3.844e8','Earth and Moon')+chip('data-g','1.989e30|5.97e24|1.496e11','Sun and Earth')+chip('data-g','5.97e24|70|6.371e6','You and Earth')+'</div><p class="muted">'+esc(tr('You can type numbers like 5.97e24 (5.97 × 10²⁴).'))+'</p>',
+ kepler:()=>'<div class="field">'+lab('kA','Average distance from the Sun (AU — 1 AU is Earth’s distance)')+'<input id="kA" type="number" value="5.2" min="0.01" step="any"></div><p class="muted">'+esc(tr('Kepler’s third law: the square of the year equals the cube of the distance (P² = a³).'))+'</p>'
 };
 let curCalc='weight';
-function openCalc(c,go){curCalc=c;$('calcSel').value=c;$('calcForm').innerHTML=FORMS[c]();
+function openCalc(c,go){const keep={};$('calcForm').querySelectorAll('input,select').forEach(i=>keep[i.id]=i.value);
+  curCalc=c;$('calcSel').value=c;$('calcForm').innerHTML=FORMS[c]();
+  // Redrawing the same calculator (for a new language) keeps what was typed.
+  if(go==='redraw')Object.keys(keep).forEach(id=>{if($(id))$(id).value=keep[id]});
   $('calcForm').querySelectorAll('input,select').forEach(i=>{i.addEventListener('input',calc);i.addEventListener('change',calc)});
   $('calcForm').querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{$('bhMass').value=b.dataset.m;calc()});
   $('calcForm').querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{$('tV').value=Math.round(vToSlider(+b.dataset.v));$('tV').dataset.exact=b.dataset.v;calc()});
   $('calcForm').querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{const p=b.dataset.g.split('|');$('gM1').value=p[0];$('gM2').value=p[1];$('gR').value=p[2];calc()});
-  if(go){setTab('calc');$('calcPanel').scrollIntoView({behavior:'smooth',block:'start'})}calc()}
+  if(go===1){setTab('calc');$('calcPanel').scrollIntoView({behavior:'smooth',block:'start'})}calc()}
 $('calcSel').onchange=()=>openCalc($('calcSel').value);
 // The speed slider is stretched near light speed so 99.99% is reachable.
 const sliderToV=s=>s<=900?s/900*0.9:1-0.1*Math.pow(10,-(s-900)/25);
 const vToSlider=v=>v<=0.9?v/0.9*900:900+25*Math.log10(0.1/(1-v));
 const num=id=>{const v=parseFloat(String($(id).value).replace(/[,\s]/g,'').replace(/×10\^?/,'e'));return isFinite(v)?v:NaN};
+const P=(t,...a)=>'<p>'+tr(t,...a)+'</p>';
+const Bd=s=>'<b>'+s+'</b>';
 function calc(){const o=$('calcOut');const c=curCalc;let h='';
   if(c==='weight'){const kg=num('wKg');if(!(kg>0)){o.innerHTML='';return}const max=Math.max(...BODIES.filter(b=>b.id!=='sun').map(b=>b.g));
-    h='<table class="mm"><tr><th>World</th><th>Scale reads</th><th></th><th>A 50 cm jump becomes</th></tr>'+BODIES.map(b=>'<tr><td>'+b.icon+' '+esc(b.name)+'</td><td class="n"><b>'+nice(kg*b.g/G0,1)+' kg</b></td><td>'+(b.id==='sun'?'':'<span class="bar" style="width:'+Math.round(b.g/max*90)+'px"></span>')+'</td><td class="n">'+(b.id==='sun'?'— (no surface)':nice(0.5*9.8/b.g,2)+' m')+'</td></tr>').join('')+'</table><p class="muted">Your mass stays '+nice(kg)+' kg everywhere; only the pull of gravity (your weight) changes.</p>'}
+    h='<table class="mm"><tr><th>'+esc(tr('World'))+'</th><th>'+esc(tr('Scale reads'))+'</th><th></th><th>'+esc(tr('A 50 cm jump becomes'))+'</th></tr>'+BODIES.map(b=>'<tr><td>'+b.icon+' '+esc(tr(b.name))+'</td><td class="n"><b>'+nice(kg*b.g/G0,1)+' kg</b></td><td>'+(b.id==='sun'?'':'<span class="bar" style="width:'+Math.round(b.g/max*90)+'px"></span>')+'</td><td class="n">'+(b.id==='sun'?esc(tr('— (no surface)')):nice(0.5*9.8/b.g,2)+' m')+'</td></tr>').join('')+'</table><p class="muted">'+esc(tr('Your mass stays {0} kg everywhere; only the pull of gravity (your weight) changes.',nice(kg)))+'</p>'}
   if(c==='light'){$('lCustomBox').classList.toggle('hidden',$('lPlace').value!=='custom');const m=$('lPlace').value==='custom'?num('lKm')*1000:window.PHYS_PLACES[+$('lPlace').value][1];if(!(m>0)){o.innerHTML='';return}
-    const s=m/C;h='<div class="out"><p>Light takes</p><p class="big">'+dur(s)+'</p><p>Distance: '+(m<1e13?big(m/1000)+' km':nice(m/LY)+' light-years ('+big(m/1000)+' km)')+'</p><p>A car at 100 km/h would take <b>'+dur(m/1000/100*3600)+'</b>; the fastest spacecraft so far (Parker Solar Probe, about 690,000 km/h) <b>'+dur(m/1000/690000*3600)+'</b>.</p>'+(s>60?'<p>So when you look at it, you see it as it was '+dur(s)+' ago.</p>':'')+'</div>'}
-  if(c==='orbit'){const b=B[$('oBody').value],alt=num('oAlt');if(!(alt>=0)){o.innerHTML='';return}const r=b.diam/2*1000+alt*1000,M=b.mass,v=Math.sqrt(G*M/r),P=2*Math.PI*r/v,ve=Math.sqrt(2*G*M/r);
-    h='<div class="out"><p>At '+nice(alt,0)+' km above '+esc(b.name)+':</p><p>Orbital speed <span class="big">'+nice(v/1000,2)+' km/s</span> ('+big(v*3.6)+' km/h)</p><p>One orbit takes <b>'+dur(P)+'</b></p><p>Escape velocity there: <b>'+nice(ve/1000,2)+' km/s</b> — throw faster than this and you never fall back.</p>'+(b.id==='earth'&&Math.abs(alt-400)<30?'<p>That is the International Space Station: about 16 sunrises a day.</p>':'')+(b.id==='earth'&&Math.abs(alt-35786)<300?'<p>This is the geostationary orbit: one orbit per day, so the satellite stays over the same spot.</p>':'')+'</div>'}
+    const s=m/C;h='<div class="out">'+P('Light takes')+'<p class="big">'+dur(s)+'</p>'+P('Distance: {0}',m<1e13?big(m/1000)+' km':tr('{0} light-years',nice(m/LY))+' ('+big(m/1000)+' km)')+P('A car at 100 km/h would take {0}; the fastest spacecraft so far (Parker Solar Probe, about 690,000 km/h) {1}.',Bd(dur(m/1000/100*3600)),Bd(dur(m/1000/690000*3600)))+(s>60?P('So when you look at it, you see it as it was {0} ago.',dur(s)):'')+'</div>'}
+  if(c==='orbit'){const b=B[$('oBody').value],alt=num('oAlt');if(!(alt>=0)){o.innerHTML='';return}const r=b.diam/2*1000+alt*1000,M=b.mass,v=Math.sqrt(G*M/r),Pd=2*Math.PI*r/v,ve=Math.sqrt(2*G*M/r);
+    h='<div class="out">'+P('At {0} km above {1}:',nice(alt,0),esc(tr(b.name)))+P('Orbital speed {0} ({1} km/h)','<span class="big">'+nice(v/1000,2)+' km/s</span>',big(v*3.6))+P('One orbit takes {0}',Bd(dur(Pd)))+P('Escape velocity there: {0} — throw faster than this and you never fall back.',Bd(nice(ve/1000,2)+' km/s'))+(b.id==='earth'&&Math.abs(alt-400)<30?P('That is the International Space Station: about 16 sunrises a day.'):'')+(b.id==='earth'&&Math.abs(alt-35786)<300?P('This is the geostationary orbit: one orbit per day, so the satellite stays over the same spot.'):'')+'</div>'}
   if(c==='bh'){const M=num('bhMass'),k=Math.max(1.0001,num('bhR')||2);if(!(M>0)){o.innerHTML='';return}const n=bhNums(M),dkm=2*n.rs/1000,rate=Math.sqrt(1-1/k);
-    h='<div class="out"><p>Event horizon radius (Schwarzschild radius r = 2GM/c²)</p><p class="big">'+(n.rs<1?sci(n.rs*1000,2)+' mm':n.rs<1e6?nice(n.rs/1000,2)+' km':big(n.rs/1000)+' km')+'</p><p>Its diameter is <b>'+sizeLike(dkm)+'</b>.</p><table class="mm"><tr><td>Average density inside the horizon</td><td class="n">'+sci(n.dens)+' kg/m³ ('+(n.dens>1000?sci(n.dens/1000)+' × water':sci(n.dens/1000)+' × water — less than water!')+')</td></tr><tr><td>Hawking temperature</td><td class="n">'+sci(n.Th)+' K</td></tr><tr><td>Time to evaporate</td><td class="n">'+sci(n.tev,1)+' years</td></tr><tr><td>Head-to-foot stretch at the horizon (2 m person)</td><td class="n">'+(n.tide>=1e3?big(n.tide):n.tide<0.01?sci(n.tide):nice(n.tide))+' g</td></tr><tr><td>Clock at '+nice(k,2)+' × the horizon radius</td><td class="n">1 hour there = '+dur(3600/rate)+' far away</td></tr></table><p class="muted">For a non-spinning black hole. The bigger the black hole, the gentler its horizon — and the colder and longer-lived it is.</p></div>'}
+    h='<div class="out">'+P('Event horizon radius (Schwarzschild radius r = 2GM/c²)')+'<p class="big">'+(n.rs<1?sci(n.rs*1000,2)+' mm':n.rs<1e6?nice(n.rs/1000,2)+' km':big(n.rs/1000)+' km')+'</p>'+P('Its diameter is {0}.',Bd(sizeLike(dkm)))+'<table class="mm"><tr><td>'+esc(tr('Average density inside the horizon'))+'</td><td class="n">'+sci(n.dens)+' kg/m³ ('+esc(n.dens>1000?tr('{0} × water',sci(n.dens/1000)):tr('{0} × water — less than water!',sci(n.dens/1000)))+')</td></tr><tr><td>'+esc(tr('Hawking temperature'))+'</td><td class="n">'+sci(n.Th)+' K</td></tr><tr><td>'+esc(tr('Time to evaporate'))+'</td><td class="n">'+esc(tr('{0} years',sci(n.tev,1)))+'</td></tr><tr><td>'+esc(tr('Head-to-foot stretch at the horizon (2 m person)'))+'</td><td class="n">'+(n.tide>=1e3?big(n.tide):n.tide<0.01?sci(n.tide):nice(n.tide))+' g</td></tr><tr><td>'+esc(tr('Clock at {0} × the horizon radius',nice(k,2)))+'</td><td class="n">'+esc(tr('1 hour there = {0} far away',dur(3600/rate)))+'</td></tr></table><p class="muted">'+esc(tr('For a non-spinning black hole. The bigger the black hole, the gentler its horizon — and the colder and longer-lived it is.'))+'</p></div>'}
   if(c==='emc'){const kg=num('eM')*+$('eU').value;if(!(kg>=0)){o.innerHTML='';return}const J=kg*C*C,kwh=J/3.6e6,tnt=J/4.184e9;
-    h='<div class="out"><p>E = mc² = '+nice(kg,6)+' kg × (299,792,458 m/s)²</p><p class="big">'+sci(J)+' joules</p><p>= '+big(kwh)+' kWh — enough to run a home using 4,000 kWh a year for <b>'+big(kwh/4000)+' years</b>.</p><p>= '+big(tnt)+' tonnes of TNT ('+nice(tnt/15000,2)+' × the Hiroshima bomb).</p><p class="muted">Real reactions release only a small part of this: fission turns about 0.1% of the mass into energy, fusion in the Sun about 0.7%, matter meeting antimatter 100%.</p></div>'}
+    h='<div class="out"><p>E = mc² = '+nice(kg,6)+' kg × (299,792,458 m/s)²</p><p class="big">'+esc(tr('{0} joules',sci(J)))+'</p>'+P('= {0} kWh — enough to run a home using 4,000 kWh a year for {1}.',big(kwh),Bd(tr('{0} years',big(kwh/4000))))+P('= {0} tonnes of TNT ({1} × the Hiroshima bomb).',big(tnt),nice(tnt/15000,2))+'<p class="muted">'+esc(tr('Real reactions release only a small part of this: fission turns about 0.1% of the mass into energy, fusion in the Sun about 0.7%, matter meeting antimatter 100%.'))+'</p></div>'}
   if(c==='time'){let v=$('tV').dataset.exact?+$('tV').dataset.exact:sliderToV(+$('tV').value);if(Math.abs(vToSlider(v)-+$('tV').value)>1){delete $('tV').dataset.exact;v=sliderToV(+$('tV').value)}
     $('tVLbl').textContent=(v*100).toPrecision(v>0.999?6:3)+'%';const g=1/Math.sqrt(1-v*v),d=num('tD');const te=v>0?d/v:Infinity,ts=te/g;
-    h='<div class="out"><p>Lorentz factor γ = 1/√(1 − v²/c²)</p><p class="big">γ = '+(g<1.001?g.toFixed(12):nice(g,3))+'</p><p>While 1 year passes on Earth, <b>'+(g<1.001?dur(YEAR/g)+' (you age '+sci((1-1/g)*YEAR)+' s less)':dur(YEAR/g))+'</b> passes for the traveller.</p>'+(d>0&&v>0?'<p>A trip of '+nice(d)+' light-years: <b>'+dur(te*YEAR)+'</b> as seen from Earth, but only <b>'+dur(ts*YEAR)+'</b> for the people on board.</p>':'')+'<p>To the traveller the distance shrinks to '+nice(d/g,3)+' light-years (length contraction).</p><p class="muted">Getting a 1-tonne ship to this speed needs '+sci((g-1)*1000*C*C)+' J of kinetic energy.</p></div>'}
+    h='<div class="out"><p>'+esc(tr('Lorentz factor'))+' γ = 1/√(1 − v²/c²)</p><p class="big">γ = '+(g<1.001?g.toFixed(12):nice(g,3))+'</p>'+P('While 1 year passes on Earth, {0} passes for the traveller.',Bd(g<1.001?dur(YEAR/g)+' '+tr('(you age {0} s less)',sci((1-1/g)*YEAR)):dur(YEAR/g)))+(d>0&&v>0?P('A trip of {0} light-years: {1} as seen from Earth, but only {2} for the people on board.',nice(d),Bd(dur(te*YEAR)),Bd(dur(ts*YEAR))):'')+P('To the traveller the distance shrinks to {0} light-years (length contraction).',nice(d/g,3))+'<p class="muted">'+esc(tr('Getting a 1-tonne ship to this speed needs {0} J of kinetic energy.',sci((g-1)*1000*C*C)))+'</p></div>'}
   if(c==='gravity'){const m1=num('gM1'),m2=num('gM2'),r=num('gR');if(!(m1>0&&m2>0&&r>0)){o.innerHTML='';return}const F=G*m1*m2/r/r;
-    h='<div class="out"><p>F = G·m₁·m₂ / r²</p><p class="big">'+sci(F)+' newtons</p><p>That is the weight of about <b>'+(F/G0>=1?big(F/G0)+' kg':sci(F/G0*1000)+' grams')+'</b> here on Earth.</p><p>Mass 1 would accelerate at '+sci(F/m1)+' m/s², mass 2 at '+sci(F/m2)+' m/s².</p></div>'}
-  if(c==='kepler'){const a=num('kA');if(!(a>0)){o.innerHTML='';return}const P=Math.pow(a,1.5);const near=PLANETS.concat([B.pluto]).reduce((x,b)=>Math.abs(b.dist/149.6-a)<Math.abs(x.dist/149.6-a)?b:x);
-    h='<div class="out"><p>P = a^1.5 = '+nice(a,3)+'^1.5</p><p class="big">'+(P<1?nice(P*365.25,1)+' days':nice(P,2)+' years')+'</p><p>Average orbital speed: <b>'+nice(29.78/Math.sqrt(a),2)+' km/s</b> (Earth: 29.78 km/s).</p><p>Closest real world: '+near.icon+' '+esc(near.name)+' at '+nice(near.dist/149.6,2)+' AU, with a year of '+days(near.period)+'.</p></div>'}
+    h='<div class="out"><p>F = G·m₁·m₂ / r²</p><p class="big">'+esc(tr('{0} newtons',sci(F)))+'</p>'+P('That is the weight of about {0} here on Earth.',Bd(F/G0>=1?big(F/G0)+' kg':tr('{0} grams',sci(F/G0*1000))))+P('Mass 1 would accelerate at {0} m/s², mass 2 at {1} m/s².',sci(F/m1),sci(F/m2))+'</div>'}
+  if(c==='kepler'){const a=num('kA');if(!(a>0)){o.innerHTML='';return}const Py=Math.pow(a,1.5);const near=PLANETS.concat([B.pluto]).reduce((x,b)=>Math.abs(b.dist/149.6-a)<Math.abs(x.dist/149.6-a)?b:x);
+    h='<div class="out"><p>P = a^1.5 = '+nice(a,3)+'^1.5</p><p class="big">'+(Py<1?tr('{0} days',nice(Py*365.25,1)):tr('{0} years',nice(Py,2)))+'</p>'+P('Average orbital speed: {0} (Earth: 29.78 km/s).',Bd(nice(29.78/Math.sqrt(a),2)+' km/s'))+P('Closest real world: {0} at {1} AU, with a year of {2}.',near.icon+' '+esc(tr(near.name)),nice(near.dist/149.6,2),days(near.period))+'</div>'}
   o.innerHTML=h}
 
 // ---------- constants & learn ----------
-$('constPanel').innerHTML='<h2>Constants of nature</h2><p>The numbers that set how our universe behaves.</p><table class="mm"><tr><th>Symbol</th><th>Name</th><th>Value</th><th>In plain words</th></tr>'+window.PHYS_CONSTANTS.map(c=>'<tr><td><b>'+esc(c[0])+'</b></td><td>'+esc(c[1])+'</td><td>'+sci(c[2],c[2]>1e3||c[2]<1e-3?4:2)+' '+esc(c[3])+'</td><td>'+esc(c[4])+'</td></tr>').join('')+'</table>'+
- '<h2 style="margin-top:18px">The four fundamental forces</h2><table class="mm"><tr><th>Force</th><th>Strength</th><th>Range</th><th>Carried by</th><th>What it does</th></tr>'+window.PHYS_FORCES.map(f=>'<tr><td><b>'+esc(f[0])+'</b></td><td>'+esc(f[1])+'</td><td>'+esc(f[2])+'</td><td>'+esc(f[3])+'</td><td>'+esc(f[4])+'</td></tr>').join('')+'</table>';
 const SCALE=[['Planck length',1.6e-35],['Proton',1.7e-15],['Atom',1e-10],['Virus',1e-7],['Human hair (width)',8e-5],['Person',1.7],['Mount Everest',8849],['Earth',1.2756e7],['Sun',1.3927e9],['Earth’s orbit',3e11],['Solar System (to Neptune)',9e12],['Light-year',9.46e15],['Milky Way',1e21],['Observable universe',8.8e26]];
-$('learnPanel').innerHTML='<h2>Physics basics</h2>'+
- '<h3>Newton’s three laws</h3><ol><li>An object keeps doing what it is doing — resting or moving in a straight line — unless a force acts on it.</li><li>Force = mass × acceleration (F = ma). Push twice as hard and it speeds up twice as fast; twice the mass needs twice the force.</li><li>Every action has an equal and opposite reaction: a rocket pushes gas back and the gas pushes the rocket forward.</li></ol>'+
- '<h3>Mass and weight</h3><p>Mass is how much stuff something is made of (kilograms). Weight is the pull of gravity on that mass (newtons). Your mass is the same on the Moon; your weight is one sixth.</p>'+
- '<h3>Energy</h3><p>Energy is never made or destroyed, only changed from one form to another — movement, heat, light, chemical, nuclear. Einstein showed mass is energy too: E = mc². Because c² is enormous, a little mass is a lot of energy.</p>'+
- '<h3>Why orbits work</h3><p>An orbit is falling while moving sideways so fast that the ground curves away beneath you. At 7.7 km/s, 400 km up, the International Space Station keeps falling around Earth and never hits it.</p>'+
- '<svg viewBox="0 0 300 150" style="width:100%;max-width:420px;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:6px" role="img" aria-label="A cannonball fired faster and faster: it lands farther each time until it falls all the way around the Earth"><circle cx="150" cy="150" r="90" fill="#4f8fd6"/><path d="M150 60 Q175 62 185 92" fill="none" stroke="#d0643e" stroke-width="2"/><path d="M150 60 Q205 66 222 118" fill="none" stroke="#d0643e" stroke-width="2"/><circle cx="150" cy="150" r="104" fill="none" stroke="#E2A63B" stroke-width="2" stroke-dasharray="5 4"/><rect x="144" y="50" width="12" height="8" fill="#16202B"/><text x="232" y="40" font-size="11" fill="#16202B">fast enough =</text><text x="232" y="53" font-size="11" fill="#16202B">orbit</text></svg>'+
- '<h3>Light</h3><p>Light is a wave of electric and magnetic fields — and also a stream of particles called photons. Radio, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays are all the same thing with different wavelengths. In empty space all of them travel at 299,792 km/s.</p>'+
- '<h3>How we know about the Big Bang</h3><ul><li>Galaxies are rushing apart, and the farther they are the faster they go — so everything was once together.</li><li>The whole sky glows with faint microwaves: the leftover heat of the young universe.</li><li>The oldest gas is about 75% hydrogen and 25% helium, exactly what the first minutes should have made.</li></ul>'+
- '<h3>The scale of everything</h3><table class="mm">'+SCALE.map(s=>'<tr><td>'+esc(s[0])+'</td><td class="n">'+(s[1]>=1e3&&s[1]<1e7?nice(s[1]/1000,0)+' km':sci(s[1],1)+' m')+'</td><td><span class="bar" style="width:'+Math.round((Math.log10(s[1])+35)/62*160)+'px"></span></td></tr>').join('')+'</table><p class="muted">Each row of the bar is on a logarithmic scale: from the smallest meaningful length to the edge of what we can see is about 62 powers of ten.</p>';
+const th=list=>'<tr>'+list.map(x=>'<th>'+esc(tr(x))+'</th>').join('')+'</tr>';
+function drawPanels(){
+$('constPanel').innerHTML='<h2>'+esc(tr('Constants of nature'))+'</h2><p>'+esc(tr('The numbers that set how our universe behaves.'))+'</p><table class="mm">'+th(['Symbol','Name','Value','In plain words'])+window.PHYS_CONSTANTS.map(c=>'<tr><td><b>'+esc(c[0])+'</b></td><td>'+esc(tr(c[1]))+'</td><td>'+sci(c[2],c[2]>1e3||c[2]<1e-3?4:2)+' '+esc(tr(c[3]))+'</td><td>'+esc(tr(c[4]))+'</td></tr>').join('')+'</table>'+
+ '<h2 style="margin-top:18px">'+esc(tr('The four fundamental forces'))+'</h2><table class="mm">'+th(['Force','Strength','Range','Carried by','What it does'])+window.PHYS_FORCES.map(f=>'<tr><td><b>'+esc(tr(f[0]))+'</b></td><td>'+esc(f[1])+'</td><td>'+esc(tr(f[2]))+'</td><td>'+esc(tr(f[3]))+'</td><td>'+esc(tr(f[4]))+'</td></tr>').join('')+'</table>';
+const h3=t=>'<h3>'+esc(tr(t))+'</h3>',p=t=>'<p>'+esc(tr(t))+'</p>',li=t=>'<li>'+esc(tr(t))+'</li>';
+$('learnPanel').innerHTML='<h2>'+esc(tr('Physics basics'))+'</h2>'+
+ h3('Newton’s three laws')+'<ol>'+li('An object keeps doing what it is doing — resting or moving in a straight line — unless a force acts on it.')+li('Force = mass × acceleration (F = ma). Push twice as hard and it speeds up twice as fast; twice the mass needs twice the force.')+li('Every action has an equal and opposite reaction: a rocket pushes gas back and the gas pushes the rocket forward.')+'</ol>'+
+ h3('Mass and weight')+p('Mass is how much stuff something is made of (kilograms). Weight is the pull of gravity on that mass (newtons). Your mass is the same on the Moon; your weight is one sixth.')+
+ h3('Energy')+p('Energy is never made or destroyed, only changed from one form to another — movement, heat, light, chemical, nuclear. Einstein showed mass is energy too: E = mc². Because c² is enormous, a little mass is a lot of energy.')+
+ h3('Why orbits work')+p('An orbit is falling while moving sideways so fast that the ground curves away beneath you. At 7.7 km/s, 400 km up, the International Space Station keeps falling around Earth and never hits it.')+
+ '<svg viewBox="0 0 300 150" style="width:100%;max-width:420px;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:6px" role="img" aria-label="'+esc(tr('A cannonball fired faster and faster: it lands farther each time until it falls all the way around the Earth'))+'"><circle cx="150" cy="150" r="90" fill="#4f8fd6"/><path d="M150 60 Q175 62 185 92" fill="none" stroke="#d0643e" stroke-width="2"/><path d="M150 60 Q205 66 222 118" fill="none" stroke="#d0643e" stroke-width="2"/><circle cx="150" cy="150" r="104" fill="none" stroke="#E2A63B" stroke-width="2" stroke-dasharray="5 4"/><rect x="144" y="50" width="12" height="8" fill="#16202B"/><text x="296" y="40" font-size="11" fill="#16202B" text-anchor="end">'+esc(tr('fast enough = orbit'))+'</text></svg>'+
+ h3('Light')+p('Light is a wave of electric and magnetic fields — and also a stream of particles called photons. Radio, microwaves, infrared, visible light, ultraviolet, X-rays and gamma rays are all the same thing with different wavelengths. In empty space all of them travel at 299,792 km/s.')+
+ h3('How we know about the Big Bang')+'<ul>'+li('Galaxies are rushing apart, and the farther they are the faster they go — so everything was once together.')+li('The whole sky glows with faint microwaves: the leftover heat of the young universe.')+li('The oldest gas is about 75% hydrogen and 25% helium, exactly what the first minutes should have made.')+'</ul>'+
+ h3('The scale of everything')+'<table class="mm">'+SCALE.map(s=>'<tr><td>'+esc(tr(s[0]))+'</td><td class="n">'+(s[1]>=1e3&&s[1]<1e7?nice(s[1]/1000,0)+' km':sci(s[1],1)+' m')+'</td><td><span class="bar" style="width:'+Math.round((Math.log10(s[1])+35)/62*160)+'px"></span></td></tr>').join('')+'</table>'+'<p class="muted">'+esc(tr('Each row of the bar is on a logarithmic scale: from the smallest meaningful length to the edge of what we can see is about 62 powers of ten.'))+'</p>'}
 
 // ---------- quiz ----------
+// Questions are written in the language that is chosen when the quiz is made.
 const rnd=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 function pickDistinct(pool,n,avoid){const out=[],s=new Set(avoid.map(x=>String(x).toLowerCase()));shuffle(pool.slice()).forEach(v=>{if(out.length<n&&!s.has(String(v).toLowerCase())){s.add(String(v).toLowerCase());out.push(v)}});return out}
 const maskName=(t,name)=>t.replace(new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/’/g,'[’\']'),'gi'),'___');
-const ORD=['first','second','third','fourth','fifth','sixth','seventh','eighth'];
 const pastEv=EVENTS.filter(e=>e.ahead==null&&e.id!=='today');
+const nm=x=>tr(x.name);
+const fixed=(q,a,wrong,why,k)=>({q:tr(q),a:tr(a),opts:wrong.map(x=>tr(x)),why:tr(why),k:k});
 const Q={
  solar:[
-  ()=>{const i=Math.floor(Math.random()*8),p=PLANETS[i];return {q:'Which planet is '+ORD[i]+' from the Sun?',a:p.name,opts:pickDistinct(PLANETS.map(x=>x.name),3,[p.name]),why:'In order: '+PLANETS.map(x=>x.name).join(', ')+'.',k:'body:'+p.id}},
-  ()=>{const b=rnd(BODIES.filter(x=>x.id!=='sun'));return {q:'Which world is this? “'+maskName(b.about,b.name)+'”',a:b.name,opts:pickDistinct(BODIES.filter(x=>x.id!=='sun').map(x=>x.name),3,[b.name]),why:b.name+': '+b.fact,k:'body:'+b.id}},
-  ()=>{const b=rnd(BODIES.filter(x=>x.id!=='sun'));return {q:'Did you know? “'+maskName(b.fact,b.name)+'” — which world is it?',a:b.name,opts:pickDistinct(BODIES.filter(x=>x.id!=='sun').map(x=>x.name),3,[b.name]),why:b.fact,k:'body:'+b.id}},
-  ()=>{const set=shuffle(BODIES.filter(x=>x.id!=='sun').slice()).slice(0,4);const lo=set.reduce((a,b)=>b.g<a.g?b:a);return {q:'On which of these would you weigh the least?',a:lo.name,opts:set.filter(x=>x!==lo).map(x=>x.name),why:'Surface gravity: '+set.map(x=>x.name+' '+x.g+' m/s²').join(', ')+'.',k:'body:'+lo.id}},
-  ()=>{const set=shuffle(PLANETS.slice()).slice(0,4);const hi=set.reduce((a,b)=>b.temp>a.temp?b:a);return {q:'Which of these planets is the hottest on average?',a:hi.name,opts:set.filter(x=>x!==hi).map(x=>x.name),why:set.map(x=>x.name+' '+x.temp+' °C').join(', ')+'. Venus is hotter than Mercury because of its thick greenhouse atmosphere.',k:'body:'+hi.id}},
-  ()=>({q:'Which planet has the most known moons?',a:'Saturn',opts:['Jupiter','Uranus','Neptune'],why:'Saturn has 274 known moons (2025), far more than Jupiter.',k:'body:saturn'}),
-  ()=>({q:'How long does sunlight take to reach Earth?',a:'About 8 minutes',opts:['About 8 seconds','About 8 hours','About 1 second'],why:'150 million km ÷ 300,000 km/s ≈ 500 s = 8 min 20 s.',k:'body:sun'}),
-  ()=>{const p=rnd(PLANETS.filter(x=>x.id!=='earth'));const v=p.period<730?Math.round(p.period)+' Earth days':Math.round(p.period/365.25)+' Earth years';const vs=PLANETS.filter(x=>x!==p&&x.id!=='earth').map(x=>x.period<730?Math.round(x.period)+' Earth days':Math.round(x.period/365.25)+' Earth years');return {q:'How long is a year on '+p.name+' (one orbit of the Sun)?',a:v,opts:pickDistinct(vs,3,[v]),why:p.name+' orbits the Sun in '+days(p.period)+'. The farther out, the longer the year.',k:'body:'+p.id}},
-  ()=>({q:'Which planet is tipped on its side, rolling around the Sun?',a:'Uranus',opts:['Neptune','Saturn','Mars'],why:'Uranus’s axis is tilted 98°.',k:'body:uranus'}),
-  ()=>({q:'Why is Pluto no longer called a planet?',a:'It has not cleared its orbit of other objects',opts:['It is made of ice','It has no moons','It is too far from the Sun'],why:'In 2006 the IAU said a planet must have cleared its orbital neighbourhood; Pluto shares the Kuiper Belt with many similar bodies.',k:'body:pluto'})
+  ()=>{const i=Math.floor(Math.random()*8),p=PLANETS[i];return {q:tr('Which planet is number {0} counting out from the Sun?',i+1),a:nm(p),opts:pickDistinct(PLANETS.map(nm),3,[nm(p)]),why:tr('In order: {0}.',PLANETS.map(nm).join(', ')),k:'body:'+p.id}},
+  ()=>{const b=rnd(BODIES.filter(x=>x.id!=='sun'));return {q:tr('Which world is this? “{0}”',maskName(tr(b.about),nm(b))),a:nm(b),opts:pickDistinct(BODIES.filter(x=>x.id!=='sun').map(nm),3,[nm(b)]),why:nm(b)+': '+tr(b.fact),k:'body:'+b.id}},
+  ()=>{const b=rnd(BODIES.filter(x=>x.id!=='sun'));return {q:tr('Did you know? “{0}” — which world is it?',maskName(tr(b.fact),nm(b))),a:nm(b),opts:pickDistinct(BODIES.filter(x=>x.id!=='sun').map(nm),3,[nm(b)]),why:tr(b.fact),k:'body:'+b.id}},
+  ()=>{const set=shuffle(BODIES.filter(x=>x.id!=='sun').slice()).slice(0,4);const lo=set.reduce((a,b)=>b.g<a.g?b:a);return {q:tr('On which of these would you weigh the least?'),a:nm(lo),opts:set.filter(x=>x!==lo).map(nm),why:tr('Surface gravity: {0}.',set.map(x=>nm(x)+' '+x.g+' m/s²').join(', ')),k:'body:'+lo.id}},
+  ()=>{const set=shuffle(PLANETS.slice()).slice(0,4);const hi=set.reduce((a,b)=>b.temp>a.temp?b:a);return {q:tr('Which of these planets is the hottest on average?'),a:nm(hi),opts:set.filter(x=>x!==hi).map(nm),why:set.map(x=>nm(x)+' '+x.temp+' °C').join(', ')+'. '+tr('Venus is hotter than Mercury because of its thick greenhouse atmosphere.'),k:'body:'+hi.id}},
+  ()=>fixed('Which planet has the most known moons?','Saturn',['Jupiter','Uranus','Neptune'],'Saturn has 274 known moons (2025), far more than Jupiter.','body:saturn'),
+  ()=>fixed('How long does sunlight take to reach Earth?','About 8 minutes',['About 8 seconds','About 8 hours','About 1 second'],'150 million km ÷ 300,000 km/s ≈ 500 s = 8 min 20 s.','body:sun'),
+  ()=>{const yr=x=>x.period<730?tr('{0} Earth days',Math.round(x.period)):tr('{0} Earth years',Math.round(x.period/365.25));const p=rnd(PLANETS.filter(x=>x.id!=='earth'));const v=yr(p);return {q:tr('How long is a year on {0} (one orbit of the Sun)?',nm(p)),a:v,opts:pickDistinct(PLANETS.filter(x=>x!==p&&x.id!=='earth').map(yr),3,[v]),why:tr('{0} orbits the Sun in {1}. The farther out, the longer the year.',nm(p),days(p.period)),k:'body:'+p.id}},
+  ()=>fixed('Which planet is tipped on its side, rolling around the Sun?','Uranus',['Neptune','Saturn','Mars'],'Uranus’s axis is tilted 98°.','body:uranus'),
+  ()=>fixed('Why is Pluto no longer called a planet?','It has not cleared its orbit of other objects',['It is made of ice','It has no moons','It is too far from the Sun'],'In 2006 the IAU said a planet must have cleared its orbital neighbourhood; Pluto shares the Kuiper Belt with many similar bodies.','body:pluto')
  ],
  time:[
-  ()=>{const set=shuffle(pastEv.slice()).slice(0,4);const first=set.reduce((a,b)=>b.t<a.t?b:a);return {q:'Which of these happened first?',a:first.name,opts:set.filter(x=>x!==first).map(x=>x.name),why:set.slice().sort((a,b)=>a.t-b.t).map(x=>x.name+' ('+when(x)+')').join(' → '),k:'event:'+first.id}},
-  ()=>{const e=rnd(EVENTS.filter(x=>x.id!=='today'));const a=when(e);return {q:'When: “'+e.name+'”?',a:a,opts:pickDistinct(EVENTS.filter(x=>x!==e&&x.id!=='today').map(when),3,[a]),why:e.text,k:'event:'+e.id}},
-  ()=>({q:'How old is the universe?',a:'13.8 billion years',opts:['4.6 billion years','100 billion years','6,000 years'],why:'Measured from the cosmic microwave background (Planck 2018). 4.6 billion years is the age of the Sun.',k:'event:today'}),
-  ()=>({q:'What is the cosmic microwave background?',a:'Light released when the first atoms formed',opts:['Radio signals from aliens','Light from the first stars','Heat from the Sun'],why:'At 380,000 years the universe became transparent; that light, stretched to microwaves, still fills the sky.',k:'event:cmb'}),
-  ()=>({q:'Which two elements were made in the first minutes after the Big Bang?',a:'Hydrogen and helium',opts:['Carbon and oxygen','Iron and gold','Oxygen and nitrogen'],why:'About 75% hydrogen and 25% helium by mass, plus a trace of lithium. Heavier elements were made later in stars.',k:'event:bbn'}),
-  ()=>({q:'What will happen to the Sun in about 5 billion years?',a:'It will swell into a red giant, then become a white dwarf',opts:['It will explode as a supernova','It will become a black hole','It will turn into a neutron star'],why:'The Sun is too light to become a supernova or black hole.',k:'event:redgiant'}),
-  ()=>{const e=rnd(pastEv.filter(x=>x.ago));const cd=cosmicDate(e);if(!cd)return null;const others=pastEv.filter(x=>x!==e&&x.ago&&cosmicDate(x)).map(cosmicDate);return {q:'On the cosmic calendar (13.8 billion years squeezed into one year), when does “'+e.name+'” happen?',a:cd,opts:pickDistinct(others,3,[cd]),why:e.name+': '+when(e)+'.',k:'event:'+e.id}}
+  ()=>{const set=shuffle(pastEv.slice()).slice(0,4);const first=set.reduce((a,b)=>b.t<a.t?b:a);return {q:tr('Which of these happened first?'),a:nm(first),opts:set.filter(x=>x!==first).map(nm),why:set.slice().sort((a,b)=>a.t-b.t).map(x=>nm(x)+' ('+when(x)+')').join(' → '),k:'event:'+first.id}},
+  ()=>{const e=rnd(EVENTS.filter(x=>x.id!=='today'));const a=when(e);return {q:tr('When: “{0}”?',nm(e)),a:a,opts:pickDistinct(EVENTS.filter(x=>x!==e&&x.id!=='today').map(when),3,[a]),why:tr(e.text),k:'event:'+e.id}},
+  ()=>fixed('How old is the universe?','13.8 billion years',['4.6 billion years','100 billion years','6,000 years'],'Measured from the cosmic microwave background (Planck 2018). 4.6 billion years is the age of the Sun.','event:today'),
+  ()=>fixed('What is the cosmic microwave background?','Light released when the first atoms formed',['Radio signals from aliens','Light from the first stars','Heat from the Sun'],'At 380,000 years the universe became transparent; that light, stretched to microwaves, still fills the sky.','event:cmb'),
+  ()=>fixed('Which two elements were made in the first minutes after the Big Bang?','Hydrogen and helium',['Carbon and oxygen','Iron and gold','Oxygen and nitrogen'],'About 75% hydrogen and 25% helium by mass, plus a trace of lithium. Heavier elements were made later in stars.','event:bbn'),
+  ()=>fixed('What will happen to the Sun in about 5 billion years?','It will swell into a red giant, then become a white dwarf',['It will explode as a supernova','It will become a black hole','It will turn into a neutron star'],'The Sun is too light to become a supernova or black hole.','event:redgiant'),
+  ()=>{const e=rnd(pastEv.filter(x=>x.ago));const cd=cosmicDate(e);if(!cd)return null;const others=pastEv.filter(x=>x!==e&&x.ago&&cosmicDate(x)).map(cosmicDate);return {q:tr('On the cosmic calendar (13.8 billion years squeezed into one year), when does “{0}” happen?',nm(e)),a:cd,opts:pickDistinct(others,3,[cd]),why:nm(e)+': '+when(e)+'.',k:'event:'+e.id}}
  ],
  bh:[
-  ()=>{const b=rnd(BHS);return {q:'Which black hole is this? “'+maskName(b.text,b.name)+'”',a:b.name,opts:pickDistinct(BHS.map(x=>x.name),3,[b.name]),why:b.name+': '+b.found+'.',k:'bh:'+b.id}},
-  ()=>{const i=Math.floor(Math.random()*PARTS.length),p=PARTS[i];return {q:'Which part of a black hole is this? “'+maskName(p[1],p[0])+'”',a:p[0],opts:pickDistinct(PARTS.map(x=>x[0]),3,[p[0]]),why:p[0]+': '+p[1]}},
-  ()=>({q:'What is the black hole at the centre of our Milky Way called?',a:'Sagittarius A*',opts:['M87*','Cygnus X-1','TON 618'],why:'Sagittarius A* holds 4.3 million Suns and was imaged in 2022.',k:'bh:sgra'}),
-  ()=>({q:'About how wide would the event horizon be if the Sun were squeezed into a black hole?',a:'About 6 km',opts:['About 6 mm','About 6,000 km','About 1.4 million km'],why:'Its Schwarzschild radius would be 2.95 km, so about 6 km across.'}),
-  ()=>({q:'Which was the first black hole ever photographed (2019)?',a:'M87*',opts:['Sagittarius A*','Gaia BH1','Cygnus X-1'],why:'The Event Horizon Telescope released the image of M87* in April 2019.',k:'bh:m87'}),
-  ()=>({q:'How were gravitational waves first detected in 2015?',a:'From two black holes merging',opts:['From the Big Bang','From the Sun','From a neutron star in our galaxy'],why:'LIGO caught GW150914: black holes of 36 and 29 Suns merging 1.3 billion light-years away.',k:'bh:gw150914'}),
-  ()=>({q:'Why would you be “spaghettified” falling into a small black hole?',a:'Gravity at your feet pulls much harder than at your head',opts:['The heat melts you','You would spin too fast','Time stops for you'],why:'The difference in pull (tidal force) stretches you. For huge black holes the horizon is gentle.'}),
-  ()=>({q:'Who predicted that black holes slowly glow and evaporate?',a:'Stephen Hawking',opts:['Albert Einstein','Isaac Newton','Roger Penrose'],why:'Hawking radiation, 1974 — still not observed.',k:'theory:hawking'})
+  ()=>{const b=rnd(BHS);return {q:tr('Which black hole is this? “{0}”',maskName(tr(b.text),nm(b))),a:nm(b),opts:pickDistinct(BHS.map(nm),3,[nm(b)]),why:nm(b)+': '+tr(b.found)+'.',k:'bh:'+b.id}},
+  ()=>{const p=rnd(PARTS),n=tr(p[0]);return {q:tr('Which part of a black hole is this? “{0}”',maskName(tr(p[1]),n)),a:n,opts:pickDistinct(PARTS.map(x=>tr(x[0])),3,[n]),why:n+': '+tr(p[1])}},
+  ()=>fixed('What is the black hole at the centre of our Milky Way called?','Sagittarius A*',['M87*','Cygnus X-1','TON 618'],'Sagittarius A* holds 4.3 million Suns and was imaged in 2022.','bh:sgra'),
+  ()=>fixed('About how wide would the event horizon be if the Sun were squeezed into a black hole?','About 6 km',['About 6 mm','About 6,000 km','About 1.4 million km'],'Its Schwarzschild radius would be 2.95 km, so about 6 km across.'),
+  ()=>fixed('Which was the first black hole ever photographed (2019)?','M87*',['Sagittarius A*','Gaia BH1','Cygnus X-1'],'The Event Horizon Telescope released the image of M87* in April 2019.','bh:m87'),
+  ()=>fixed('How were gravitational waves first detected in 2015?','From two black holes merging',['From the Big Bang','From the Sun','From a neutron star in our galaxy'],'LIGO caught GW150914: black holes of 36 and 29 Suns merging 1.3 billion light-years away.','bh:gw150914'),
+  ()=>fixed('Why would you be “spaghettified” falling into a small black hole?','Gravity at your feet pulls much harder than at your head',['The heat melts you','You would spin too fast','Time stops for you'],'The difference in pull (tidal force) stretches you. For huge black holes the horizon is gentle.'),
+  ()=>fixed('Who predicted that black holes slowly glow and evaporate?','Stephen Hawking',['Albert Einstein','Isaac Newton','Roger Penrose'],'Hawking radiation, 1974 — still not observed.','theory:hawking')
  ],
  theory:[
-  ()=>{const t=rnd(THEORIES);const w=t.who.split(/,| and /)[0].replace(/\s*\(.*$/,'').trim();const others=THEORIES.filter(x=>x!==t&&!x.who.includes(w)).map(x=>x.who.split(/,| and /)[0].replace(/\s*\(.*$/,'').trim());return {q:'Who is behind “'+t.name+'”?',a:w,opts:pickDistinct(others,3,[w]),why:t.name+' ('+t.year+'): '+t.who+'.',k:'theory:'+t.id}},
-  ()=>{const t=rnd(THEORIES.filter(x=>x.eq!=='—'));return {q:'Which theory is summed up by: '+t.eq+' ?',a:t.name,opts:pickDistinct(THEORIES.filter(x=>x!==t).map(x=>x.name),3,[t.name]),why:t.idea,k:'theory:'+t.id}},
-  ()=>{const t=rnd(THEORIES);return {q:'Which idea is this? “'+maskName(t.idea,t.name)+'”',a:t.name,opts:pickDistinct(THEORIES.filter(x=>x!==t&&x.lane===t.lane).map(x=>x.name).concat(THEORIES.filter(x=>x!==t).map(x=>x.name)),3,[t.name]),why:t.evidence,k:'theory:'+t.id}},
-  ()=>{const t=rnd(THEORIES);const a=STATUS[t.status][0].split(' — ')[0];return {q:'How well tested is “'+t.name+'”?',a:a,opts:Object.values(STATUS).map(s=>s[0].split(' — ')[0]).filter(x=>x!==a),why:STATUS[t.status][0]+'. '+t.evidence,k:'theory:'+t.id}},
-  ()=>{const t=rnd(THEORIES);const c=Math.floor(t.year/100)+1;const a=c+'th century';return {q:'In which century did “'+t.name+'” appear?',a:a,opts:['17th century','18th century','19th century','20th century'].filter(x=>x!==a).slice(0,3),why:t.name+': '+t.year+'.',k:'theory:'+t.id}},
-  ()=>({q:'According to general relativity, what is gravity?',a:'The curving of space-time by mass and energy',opts:['A force carried by light','Magnetism between planets','Air pressure pushing down'],why:'Einstein, 1915.',k:'theory:general'}),
-  ()=>({q:'Which everyday technology must correct for relativity to work?',a:'GPS satellite navigation',opts:['Microwave ovens','Refrigerators','Electric kettles'],why:'GPS clocks tick 38 microseconds a day fast compared to clocks on the ground; without correction positions would drift about 10 km a day.',k:'theory:general'})
+  ()=>{const t=rnd(THEORIES);const first=x=>x.who.split(/,| and /)[0].replace(/\s*\(.*$/,'').trim();const w=first(t);return {q:tr('Who is behind “{0}”?',nm(t)),a:w,opts:pickDistinct(THEORIES.filter(x=>x!==t&&!x.who.includes(w)).map(first),3,[w]),why:nm(t)+' ('+t.year+'): '+tr(t.who)+'.',k:'theory:'+t.id}},
+  ()=>{const t=rnd(THEORIES.filter(x=>x.eq!=='—'));return {q:tr('Which theory is summed up by: {0} ?',tr(t.eq)),a:nm(t),opts:pickDistinct(THEORIES.filter(x=>x!==t).map(nm),3,[nm(t)]),why:tr(t.idea),k:'theory:'+t.id}},
+  ()=>{const t=rnd(THEORIES);return {q:tr('Which idea is this? “{0}”',maskName(tr(t.idea),nm(t))),a:nm(t),opts:pickDistinct(THEORIES.filter(x=>x!==t&&x.lane===t.lane).map(nm).concat(THEORIES.filter(x=>x!==t).map(nm)),3,[nm(t)]),why:tr(t.evidence),k:'theory:'+t.id}},
+  ()=>{const t=rnd(THEORIES);const short=s=>tr(s[0].split(' — ')[0]);const a=short(STATUS[t.status]);return {q:tr('How well tested is “{0}”?',nm(t)),a:a,opts:Object.values(STATUS).map(short).filter(x=>x!==a),why:tr(STATUS[t.status][0])+'. '+tr(t.evidence),k:'theory:'+t.id}},
+  ()=>{const t=rnd(THEORIES);const cen=c=>tr('{0}th century',c);const c=Math.floor(t.year/100)+1;const a=cen(c);return {q:tr('In which century did “{0}” appear?',nm(t)),a:a,opts:[17,18,19,20].map(cen).filter(x=>x!==a).slice(0,3),why:nm(t)+': '+t.year+'.',k:'theory:'+t.id}},
+  ()=>fixed('According to general relativity, what is gravity?','The curving of space-time by mass and energy',['A force carried by light','Magnetism between planets','Air pressure pushing down'],'Einstein, 1915.','theory:general'),
+  ()=>fixed('Which everyday technology must correct for relativity to work?','GPS satellite navigation',['Microwave ovens','Refrigerators','Electric kettles'],'GPS clocks tick 38 microseconds a day fast compared to clocks on the ground; without correction positions would drift about 10 km a day.','theory:general')
  ],
  const:[
-  ()=>({q:'How fast does light travel in empty space?',a:'About 300,000 km per second',opts:['About 300 km per second','About 300,000 km per hour','About 3,000 km per second'],why:'Exactly 299,792,458 m/s.'}),
-  ()=>({q:'Which is the weakest of the four fundamental forces?',a:'Gravity',opts:['Electromagnetism','The strong nuclear force','The weak nuclear force'],why:'Gravity is about 10³⁹ times weaker than the strong force — a fridge magnet beats the whole Earth’s pull on a paper clip.'}),
-  ()=>{const f=rnd(window.PHYS_FORCES);return {q:'Which force is carried by '+f[3].replace(/\s*\(.*$/,'').replace('?','')+'?',a:f[0],opts:window.PHYS_FORCES.filter(x=>x!==f).map(x=>x[0]),why:f[0]+': '+f[4]}},
-  ()=>{const kg=rnd([50,60,70,80]),b=rnd(BODIES.filter(x=>['moon','mars','jupiter','mercury'].includes(x.id)));const a=Math.round(kg*b.g/G0)+' kg';const opts=pickDistinct([Math.round(kg*b.g/G0*2),Math.round(kg*b.g/G0/2),kg,Math.round(kg*1.5)].map(v=>v+' kg'),3,[a]);return {q:'Someone who weighs '+kg+' kg on Earth stands on a scale on '+b.name+'. About what does it read?',a:a,opts:opts,why:b.name+'’s gravity is '+nice(b.g/9.8)+' times Earth’s: '+kg+' × '+nice(b.g/9.8)+' ≈ '+a+'.',k:'body:'+b.id}},
-  ()=>({q:'In E = mc², what does c stand for?',a:'The speed of light',opts:['The speed of sound','A constant equal to 1','The charge of an electron'],why:'c is the speed of light; squaring it makes the energy in a small mass enormous.',k:'theory:special'}),
-  ()=>({q:'What is a light-year?',a:'A distance — how far light goes in a year',opts:['A unit of time','How bright a star is','The age of a star'],why:'About 9.46 trillion km.'}),
-  ()=>({q:'What happens to time for someone moving close to the speed of light?',a:'Their clocks run slower than ours',opts:['Their clocks run faster','Time stops completely','Nothing changes'],why:'Time dilation from special relativity: at 99% of light speed, 1 year for them is 7 years for us.',k:'theory:special'}),
-  ()=>({q:'Your mass is 60 kg on Earth. What is your mass on the Moon?',a:'60 kg',opts:['10 kg','0 kg','360 kg'],why:'Mass does not change; only weight (the pull of gravity) does.'})
+  ()=>fixed('How fast does light travel in empty space?','About 300,000 km per second',['About 300 km per second','About 300,000 km per hour','About 3,000 km per second'],'Exactly 299,792,458 m/s.'),
+  ()=>fixed('Which is the weakest of the four fundamental forces?','Gravity',['Electromagnetism','Strong nuclear force','Weak nuclear force'],'Gravity is about 10³⁹ times weaker than the strong force — a fridge magnet beats the whole Earth’s pull on a paper clip.'),
+  ()=>{const f=rnd(window.PHYS_FORCES);return {q:tr('Which force is carried by {0}?',tr(f[3])),a:tr(f[0]),opts:window.PHYS_FORCES.filter(x=>x!==f).map(x=>tr(x[0])),why:tr(f[0])+': '+tr(f[4])}},
+  ()=>{const kg=rnd([50,60,70,80]),b=rnd(BODIES.filter(x=>['moon','mars','jupiter','mercury'].includes(x.id)));const w=v=>Math.round(v)+' kg';const a=w(kg*b.g/G0);return {q:tr('Someone who weighs {0} kg on Earth stands on a scale on {1}. About what does it read?',kg,nm(b)),a:a,opts:pickDistinct([kg*b.g/G0*2,kg*b.g/G0/2,kg,kg*1.5].map(w),3,[a]),why:tr('{0}’s gravity is {1} times Earth’s: {2} × {1} ≈ {3}.',nm(b),nice(b.g/9.8),kg,a),k:'body:'+b.id}},
+  ()=>fixed('In E = mc², what does c stand for?','The speed of light',['The speed of sound','A constant equal to 1','The charge of an electron'],'c is the speed of light; squaring it makes the energy in a small mass enormous.','theory:special'),
+  ()=>fixed('What is a light-year?','A distance — how far light goes in a year',['A unit of time','How bright a star is','The age of a star'],'About 9.46 trillion km.'),
+  ()=>fixed('What happens to time for someone moving close to the speed of light?','Their clocks run slower than ours',['Their clocks run faster','Time stops completely','Nothing changes'],'Time dilation from special relativity: at 99% of light speed, 1 year for them is 7 years for us.','theory:special'),
+  ()=>fixed('Your mass is 60 kg on Earth. What is your mass on the Moon?','60 kg',['10 kg','0 kg','360 kg'],'Mass does not change; only weight (the pull of gravity) does.')
  ]
 };
-function sourceGens(src){if(src==='all')return [].concat(Q.solar,Q.time,Q.bh,Q.theory,Q.const);if(src==='seen')return null;return Q[src]}
+function sourceGens(src){if(src==='all')return [].concat(Q.solar,Q.time,Q.bh,Q.theory,Q.const);return Q[src]}
 function seenQs(n){const items=[...seen];if(items.length<3)return null;const out=[],keys=new Set();let guard=0;
-  while(out.length<n&&guard++<600){const k=rnd(items),[t,id]=k.split(':');const gens={body:Q.solar,event:Q.time,bh:Q.bh,theory:Q.theory}[t];const q=rnd(gens)();if(!q||q.k!==k)continue;const key=q.q+'|'+q.a;if(keys.has(key))continue;keys.add(key);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
+  while(out.length<n&&guard++<600){const k=rnd(items),[t]=k.split(':');const gens={body:Q.solar,event:Q.time,bh:Q.bh,theory:Q.theory}[t];const q=rnd(gens)();if(!q||q.k!==k)continue;const key=q.q+'|'+q.a;if(keys.has(key))continue;keys.add(key);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
   if(out.length<n){const extra=buildQuestions('all',n-out.length,keys);if(extra)out.push(...extra)}return out}
 function buildQuestions(src,n,keys){keys=keys||new Set();const gens=sourceGens(src);const out=[];let guard=0;
   while(out.length<n&&guard++<900){const q=rnd(gens)();if(!q||q.opts.length<2)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
   return out.length?out:null}
-function generate(){const src=$('qSource').value,n=+$('qCount').value;if(src==='seen'){const qs=seenQs(n);if(!qs){alert('Explore at least 3 things on the map first, or choose another topic.');return null}return qs}return buildQuestions(src,n)}
+function generate(){const src=$('qSource').value,n=+$('qCount').value;if(src==='seen'){const qs=seenQs(n);if(!qs){alert(tr('Explore at least 3 things on the map first, or choose another topic.'));return null}return qs}return buildQuestions(src,n)}
 let quiz=[],qi=0,score=0,points=0,streak=0,bestStreak=0,answered=false,missed=[],timer=null,left=0,challenge=true;
 function start(qs){if(!qs)return;quiz=qs;qi=0;score=0;points=0;streak=0;bestStreak=0;missed=[];challenge=$('qMode').value==='challenge';
   $('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');$('timerBar').classList.toggle('hidden',!challenge);show()}
 const mult=()=>streak>=5?2:streak>=3?1.5:1;
+const scoreTxt=()=>challenge?'⭐ '+tr('{0} points',points):tr('Score: {0}',score);
+const streakTxt=x=>streak>=2?'🔥 '+tr('Streak {0}',streak)+(x&&challenge&&mult()>1?' · ×'+mult():''):'';
 function show(){const q=quiz[qi];answered=false;
-  $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
+  $('qProg').textContent=tr('Question {0} / {1}',qi+1,quiz.length);$('qScore').textContent=scoreTxt();$('qStreak').textContent=streakTxt(1);
   $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
   $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
   $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
@@ -583,37 +621,40 @@ function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer
   if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
   q.ok=ok;q.given=choice;
   $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
-  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why||'The answer is '+q.a+'.')+(q.k&&ALL.includes(q.k)?' <a data-go="'+esc(q.k)+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(nameOf(q.k))+' →</a>':'');$('qExplain').classList.remove('hidden');
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ '+esc(tr('Correct'))+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ '+esc(tr('Time is up.'))+' ':'❌ ')+esc(q.why||tr('The answer is {0}.',q.a))+(q.k&&ALL.includes(q.k)?' <a data-go="'+esc(q.k)+'" style="cursor:pointer;font-weight:600;color:#0E2A47">'+esc(tr('Open {0} →',nameOf(q.k)))+'</a>':'');$('qExplain').classList.remove('hidden');
   const g=$('qExplain').querySelector('[data-go]');if(g)g.onclick=()=>{showOnMap(g.dataset.go);select(g.dataset.go,{noScroll:true});$('info').scrollIntoView({behavior:'smooth'})};
-  $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
-  $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+  $('qScore').textContent=scoreTxt();$('qStreak').textContent=streakTxt();
+  $('qNext').textContent=qi<quiz.length-1?tr('Next question →'):tr('See results');$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
 $('qNext').onclick=()=>{if(++qi<quiz.length)show();else finish()};
 $('qQuit').onclick=()=>{clearInterval(timer);quiz=quiz.slice(0,qi+(answered?1:0));if(!quiz.length){$('quizArea').classList.add('hidden');return}finish()};
 const RANKS=[[90,'Nobel physicist 🏅'],[75,'Astrophysicist 🔭'],[55,'Physics student 📘'],[0,'Stargazer ✨']];
 function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
-  const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];const best=store.get('physBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
+  const pct=Math.round(score/quiz.length*100),rank=tr(RANKS.find(r=>pct>=r[0])[1]);const best=store.get('physBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
   if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('physBest',best);
-  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
-  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
-  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('doneTitle').textContent=tr('{0} / {1} correct ({2}%) — {3}',score,quiz.length,pct,rank);
+  $('doneSub').innerHTML=(challenge?'<b>'+esc(tr('{0} points',points))+'</b> · '+esc(tr('best streak {0}',bestStreak))+' · ':'')+esc(newBest?'🎉 '+tr('New personal best!'):tr('Personal best: {0}',challenge?tr('{0} points',best.points):best.pct+'%'));
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>'+esc(tr('Answer: {0}',q.a))+(q.ok?'':' · '+esc(tr('you chose: {0}',q.given==null?tr('(no answer)'):q.given)))+'</small></li>').join('');
   $('retryWrong').classList.toggle('hidden',!missed.length);showBest();$('quizDone').scrollIntoView({behavior:'smooth',block:'nearest'})}
 $('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
 $('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})));
-function showBest(){const b=store.get('physBest',null);$('bestLine').textContent=b?'Your best: '+b.points+' points in challenge mode · '+b.pct+'% accuracy':''}
-showBest();
-$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;const title='Physics quiz';
-  const body='<h1>'+title+'</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">Answer key</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+' — <small>'+esc(q.why||'')+'</small></li>').join('')+'</ol><p><small>Made with MigaBuilder Physics Map · migabuilder.com/physics-map.html</small></p>';
-  download('physics-quiz.html','<!doctype html><html><head><meta charset="utf-8"><title>'+title+'</title><style>'+PAGE_CSS+'</style></head><body>'+body+'</body></html>')};
+function showBest(){const b=store.get('physBest',null);$('bestLine').textContent=b?tr('Your best: {0} points in challenge mode · {1}% accuracy',b.points,b.pct):''}
+$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;const title=tr('Physics quiz');
+  const body='<h1>'+esc(title)+'</h1><p>'+esc(tr('Name:'))+' ______________________ &nbsp; '+esc(tr('Date:'))+' ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">'+esc(tr('Answer key'))+'</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+' — <small>'+esc(q.why||'')+'</small></li>').join('')+'</ol><p><small>'+esc(tr('Made with MigaBuilder Physics Map'))+' · migabuilder.com/physics-map.html</small></p>';
+  download('physics-quiz.html',docHead(title)+body+'</body></html>')};
 $('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$('aiTopic').focus();return}
-  const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your quiz…';$('aiQuiz').disabled=true;
+  const st=$('aiStatus');st.classList.add('show');st.textContent=tr('Writing your quiz…');$('aiQuiz').disabled=true;
   try{const d=MigaAI.json(await MigaAI.ask('You write accurate multiple-choice physics quizzes. Reply with ONE JSON array only.',
-    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
+    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about: '+topic+'.\nWrite the questions, options and explanations in '+(LANGNAME[lang()]||'English')+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
     const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
-    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
-  catch(err){st.textContent='Could not create the quiz: '+err.message}$('aiQuiz').disabled=false};
+    if(!qs.length)throw new Error(tr('The AI did not return usable questions. Try again.'));st.textContent=tr('Quiz ready — {0} AI questions. Good luck!',qs.length);start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(err){st.textContent=tr('Could not create the quiz: {0}',err.message)}$('aiQuiz').disabled=false};
 
-// ---------- start ----------
-buildSolar();buildTime();buildBH();buildTheory();legend();openCalc('weight');startAnim();
+// ---------- start, and redraw in the new language when it changes ----------
+function drawAll(){solarButtons();stopAnim();buildSolar();buildTime();buildBH();buildTheory();legend();drawPanels();fillSearchList();openCalc(curCalc,'redraw');showBest();
+  if(selected)select(selected,{noScroll:true});else if(partShown!=null)showPart(partShown,1);
+  if(view==='solar')startAnim()}
+drawAll();
+if(window.I18N&&I18N.onChange)I18N.onChange(drawAll);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAnim();else if(view==='solar')startAnim()});
 const h=decodeURIComponent(location.hash.slice(1));const hk=ALL.find(k=>k.split(':')[1]===h);if(hk)setTimeout(()=>{showOnMap(hk);select(hk,{noScroll:true})},150);
 })();
