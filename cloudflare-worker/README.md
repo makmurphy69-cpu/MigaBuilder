@@ -200,3 +200,42 @@ This runs entirely on Cloudflare's free plan. Privacy notes: no cookies, no
 fingerprinting, unique-person tracking, or customer-content storage. The
 Worker never reads or hashes IP addresses. Counts are approximate and are
 intended for product prioritisation, not billing or security decisions.
+
+# Shop downloads — deploy steps
+
+`shop-download.js` delivers the files people buy on `shop.html`. Stripe
+(Managed Payments) takes the payment, handles VAT and sends the receipt;
+this Worker checks the order with Stripe and hands over the zip from a
+private R2 bucket. Do this once:
+
+1. **R2 bucket:** in https://dash.cloudflare.com go to **R2** → **Create
+   bucket**, name it `migabuilder-shop-files`. Leave public access **off**.
+   Upload each product zip named after its Stripe product's `sku` metadata,
+   e.g. `website-pack-v1.zip`.
+2. **Worker:** **Workers & Pages** → **Create** → **Create Worker**, name it
+   `migabuilder-shop`, click **Deploy**, then **Edit code**, paste
+   `shop-download.js` and **Deploy**. Its URL should be
+   `https://migabuilder-shop.makmurphy69.workers.dev` (that is what
+   `thanks.html` calls; change `SHOP_API_URL` there if yours differs).
+3. **Settings → Bindings → Add → R2 bucket:** variable name
+   `PRODUCT_FILES`, bucket `migabuilder-shop-files`.
+4. **Settings → Variables and Secrets → Add → Secret:** name
+   `STRIPE_SECRET_KEY`. Best practice is a **restricted key** (Stripe →
+   Developers → API keys → Create restricted key) with only
+   **Checkout Sessions: Read** and **Products: Read**. Use the test key
+   (`sk_test_`/`rk_test_`) while testing, the live one when you go live.
+   Test orders only work with a test key and live orders only with a live key.
+5. Optional: add a rate-limit binding named `RATE_LIMITER`
+   (e.g. 20 requests per 60 seconds) and a variable `DOWNLOAD_DAYS`
+   (default 30).
+
+**Each product in Stripe** needs: a tax code eligible for Managed Payments
+(templates use `txcd_10202003`, downloadable software, business use),
+metadata `sku` matching the zip name, and a Payment Link with **Managed
+Payments** enabled and, under **After payment**, "Don't show confirmation
+page → Redirect customers to your website":
+`https://migabuilder.com/thanks.html?session_id={CHECKOUT_SESSION_ID}`.
+Paste the Payment Link URL into `SHOP_LINKS` in `shop.html`; the Buy button
+appears automatically (it shows "Coming soon" while the link is empty).
+
+Test with card `4242 4242 4242 4242`, any future date and CVC.
