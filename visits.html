@@ -2,20 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="/miga-palette.js" defer></script>
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Site Visits — MigaBuilder</title>
 <meta name="description" content="Private aggregate tool-usage and page-view dashboard for MigaBuilder.">
@@ -148,6 +134,7 @@
       <button type="button" id="loadStatsBtn">Load stats</button>
     </div>
     <p class="hint">Saved only in this browser's local storage, and sent only to your own Worker over HTTPS to unlock the /stats endpoint.</p>
+    <p class="hint">Once the stats load here, your own visits from this browser are no longer counted — load them once on each device you use. Refreshes and repeat opens in the same tab are never counted.</p>
     <div class="error-box" id="errorBox"></div>
   </div>
 

@@ -2,20 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/clip-forge.html">
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
+<script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Clip Forge — trim, caption, and translate your videos</title>
 <meta name="description" content="Upload a video, trim it, add music, crop it for any platform, add timed text overlays and translated captions, stamp a watermark, then export or upload straight to YouTube. Or let Auto Edit turn several clips into one video that opens on a hook, cuts on the beat and adds text, effects and sounds — or join two takes so you can talk to yourself. All in your browser.">
