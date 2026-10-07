@@ -17,3 +17,97 @@ I18N.phrases({
   "How to use QR Forge": { es: "Cómo usar QR Forge", ar: "كيفية استخدام QR Forge", zh: "如何使用 QR Forge", sw: "Jinsi ya kutumia QR Forge", sv: "Så använder du QR Forge" },
   "QR Forge — free QR code generator": { es: "QR Forge — generador de códigos QR gratis", ar: "QR Forge — منشئ رموز QR مجاني", zh: "QR Forge — 免费二维码生成器", sw: "QR Forge — kitengeneza msimbo wa QR cha bure", sv: "QR Forge — gratis QR-kodgenerator" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "QR Forge turns any link or text into a QR code you can download.": {
+  "es": "QR Forge convierte cualquier enlace o texto en un código QR que puedes descargar.",
+  "ar": "يحوّل QR Forge أي رابط أو نص إلى رمز QR يمكنك تنزيله.",
+  "zh": "QR Forge 把任何链接或文字变成可下载的二维码。",
+  "sw": "QR Forge hugeuza kiungo au maandishi yoyote kuwa msimbo wa QR unaoweza kupakua.",
+  "sv": "QR Forge gör vilken länk eller text som helst till en QR-kod som du kan ladda ner."
+ },
+ "Paste the destination link or text and choose the QR style.": {
+  "es": "Pega el enlace o el texto de destino y elige el estilo del QR.",
+  "ar": "الصق الرابط أو النص المقصود واختر نمط رمز QR.",
+  "zh": "粘贴目标链接或文字，并选择二维码样式。",
+  "sw": "Bandika kiungo au maandishi ya kulengwa na uchague mtindo wa QR.",
+  "sv": "Klistra in länken eller texten och välj QR-stil."
+ },
+ "Press “Create QR code”.": {
+  "es": "Pulsa «Crear código QR».",
+  "ar": "اضغط «أنشئ رمز QR».",
+  "zh": "点击“生成二维码”。",
+  "sw": "Bonyeza “Tengeneza msimbo wa QR”.",
+  "sv": "Tryck på ”Skapa QR-kod”."
+ },
+ "Scan-test it and download the final code.": {
+  "es": "Pruébalo escaneándolo y descarga el código final.",
+  "ar": "جرّب مسحه ضوئيًا ونزّل الرمز النهائي.",
+  "zh": "扫码测试，然后下载最终的二维码。",
+  "sw": "Ujaribu kwa kuuchanganua na upakue msimbo wa mwisho.",
+  "sv": "Testskanna den och ladda ner den slutliga koden."
+ },
+ "Do the QR codes expire?": {
+  "es": "¿Caducan los códigos QR?",
+  "ar": "هل تنتهي صلاحية رموز QR؟",
+  "zh": "二维码会过期吗？",
+  "sw": "Je, misimbo ya QR huisha muda?",
+  "sv": "Slutar QR-koderna att fungera?"
+ },
+ "No. The QR code holds your link or text directly, so it keeps working for as long as the link does.": {
+  "es": "No. El código QR contiene tu enlace o texto directamente, así que funciona mientras funcione el enlace.",
+  "ar": "لا. يحمل رمز QR رابطك أو نصك مباشرة، فيبقى يعمل ما دام الرابط يعمل.",
+  "zh": "不会。二维码直接包含你的链接或文字，只要链接有效，它就一直可用。",
+  "sw": "Hapana. Msimbo wa QR hubeba kiungo au maandishi yako moja kwa moja, hivyo huendelea kufanya kazi muda wote kiungo kinapofanya kazi.",
+  "sv": "Nej. QR-koden innehåller din länk eller text direkt, så den fungerar så länge länken gör det."
+ },
+ "About QR Forge": {
+  "es": "Acerca de QR Forge",
+  "ar": "عن QR Forge",
+  "zh": "关于 QR Forge",
+  "sw": "Kuhusu QR Forge",
+  "sv": "Om QR Forge"
+ },
+ "How to use QR Forge": {
+  "es": "Cómo usar QR Forge",
+  "ar": "طريقة استخدام QR Forge",
+  "zh": "如何使用 QR Forge",
+  "sw": "Jinsi ya kutumia QR Forge",
+  "sv": "Så använder du QR Forge"
+ },
+ "Is QR Forge free?": {
+  "es": "¿QR Forge es gratis?",
+  "ar": "هل QR Forge مجاني؟",
+  "zh": "QR Forge 免费吗？",
+  "sw": "Je, QR Forge ni bure?",
+  "sv": "Är QR Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

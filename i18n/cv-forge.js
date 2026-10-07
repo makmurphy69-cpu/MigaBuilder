@@ -120,3 +120,97 @@ I18N.phrases({
   "✓ Loaded": { es: "✓ Cargado", ar: "✓ تم التحميل", zh: "✓ 已加载", sw: "✓ Imepakiwa", sv: "✓ Inläst" },
   "Could not read that file:": { es: "No se pudo leer ese archivo:", ar: "تعذّرت قراءة هذا الملف:", zh: "无法读取该文件：", sw: "Imeshindwa kusoma faili hiyo:", sv: "Kunde inte läsa filen:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "CV Forge creates a professional CV or résumé. Choose a design, see it update live as you type, and download a PDF.": {
+  "es": "CV Forge crea un currículum profesional. Elige un diseño, mira cómo se actualiza mientras escribes y descarga un PDF.",
+  "ar": "ينشئ CV Forge سيرة ذاتية احترافية. اختر تصميمًا، وشاهده يتحدّث مباشرة أثناء الكتابة، ثم نزّله بصيغة PDF.",
+  "zh": "CV Forge 帮你制作专业的简历。选择一种设计，边输入边实时预览，然后下载 PDF。",
+  "sw": "CV Forge hutengeneza CV ya kitaalamu. Chagua muundo, uone ikibadilika moja kwa moja unapoandika, na upakue PDF.",
+  "sv": "CV Forge skapar ett professionellt CV. Välj en design, se den uppdateras medan du skriver och ladda ner en PDF."
+ },
+ "Enter your contact details, summary, experience, education, and strongest skills.": {
+  "es": "Introduce tus datos de contacto, resumen, experiencia, formación y tus mejores habilidades.",
+  "ar": "أدخل بيانات التواصل والملخص والخبرة والتعليم وأقوى مهاراتك.",
+  "zh": "填写联系方式、个人简介、工作经历、教育背景和最强的技能。",
+  "sw": "Ingiza maelezo yako ya mawasiliano, muhtasari, uzoefu, elimu na ujuzi wako bora.",
+  "sv": "Fyll i kontaktuppgifter, sammanfattning, erfarenhet, utbildning och dina starkaste färdigheter."
+ },
+ "Press “Download PDF”.": {
+  "es": "Pulsa «Descargar PDF».",
+  "ar": "اضغط «تنزيل PDF».",
+  "zh": "点击“下载 PDF”。",
+  "sw": "Bonyeza “Pakua PDF”.",
+  "sv": "Tryck på ”Ladda ner PDF”."
+ },
+ "Check the live preview, proofread every detail, and download or print the CV.": {
+  "es": "Revisa la vista previa, corrige cada detalle y descarga o imprime el currículum.",
+  "ar": "تفقّد المعاينة الحية وراجع كل تفصيلة، ثم نزّل السيرة الذاتية أو اطبعها.",
+  "zh": "查看实时预览，校对每个细节，然后下载或打印简历。",
+  "sw": "Kagua onyesho la moja kwa moja, sahihisha kila undani, na upakue au uchapishe CV.",
+  "sv": "Kontrollera förhandsvisningen, korrläs varje detalj och ladda ner eller skriv ut CV:t."
+ },
+ "Can I download my CV as a PDF?": {
+  "es": "¿Puedo descargar mi currículum en PDF?",
+  "ar": "هل يمكنني تنزيل سيرتي الذاتية بصيغة PDF؟",
+  "zh": "我可以把简历下载为 PDF 吗？",
+  "sw": "Je, ninaweza kupakua CV yangu kama PDF?",
+  "sv": "Kan jag ladda ner mitt CV som PDF?"
+ },
+ "Yes. Press Download PDF for a PDF whose text can be selected and read by recruiters' systems, or print it.": {
+  "es": "Sí. Pulsa Descargar PDF para obtener un PDF cuyo texto se puede seleccionar y que pueden leer los sistemas de selección de personal, o imprímelo.",
+  "ar": "نعم. اضغط تنزيل PDF لتحصل على ملف PDF يمكن تحديد نصه وتقرؤه أنظمة التوظيف، أو اطبعه.",
+  "zh": "可以。点击“下载 PDF”即可得到文字可选中、招聘系统能读取的 PDF，也可以直接打印。",
+  "sw": "Ndiyo. Bonyeza Pakua PDF upate PDF ambayo maandishi yake yanaweza kuchaguliwa na kusomwa na mifumo ya waajiri, au uichapishe.",
+  "sv": "Ja. Tryck på Ladda ner PDF för en PDF vars text går att markera och läsas av rekryteringssystem, eller skriv ut det."
+ },
+ "About CV Forge": {
+  "es": "Acerca de CV Forge",
+  "ar": "عن CV Forge",
+  "zh": "关于 CV Forge",
+  "sw": "Kuhusu CV Forge",
+  "sv": "Om CV Forge"
+ },
+ "How to use CV Forge": {
+  "es": "Cómo usar CV Forge",
+  "ar": "طريقة استخدام CV Forge",
+  "zh": "如何使用 CV Forge",
+  "sw": "Jinsi ya kutumia CV Forge",
+  "sv": "Så använder du CV Forge"
+ },
+ "Is CV Forge free?": {
+  "es": "¿CV Forge es gratis?",
+  "ar": "هل CV Forge مجاني؟",
+  "zh": "CV Forge 免费吗？",
+  "sw": "Je, CV Forge ni bure?",
+  "sv": "Är CV Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

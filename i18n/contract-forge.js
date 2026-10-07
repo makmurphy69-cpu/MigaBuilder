@@ -22,3 +22,97 @@ I18N.phrases({
   "How to use Contract Forge": { es: "Cómo usar Contract Forge", ar: "كيفية استخدام Contract Forge", zh: "如何使用 Contract Forge", sw: "Jinsi ya kutumia Contract Forge", sv: "Så använder du Contract Forge" },
   "Contract Forge — free contract & NDA generator": { es: "Contract Forge — generador de contratos y acuerdos de confidencialidad gratis", ar: "Contract Forge — منشئ عقود واتفاقيات عدم إفصاح مجاني", zh: "Contract Forge — 免费合同和保密协议生成器", sw: "Contract Forge — kitengeneza mikataba na NDA cha bure", sv: "Contract Forge — gratis generator för avtal och sekretessavtal" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Contract Forge drafts plain-language agreements: a service agreement, an NDA or a contractor agreement.": {
+  "es": "Contract Forge redacta acuerdos en lenguaje claro: un contrato de servicios, un acuerdo de confidencialidad o un contrato con un autónomo.",
+  "ar": "يصوغ Contract Forge اتفاقيات بلغة واضحة: اتفاقية خدمات، أو اتفاقية عدم إفصاح، أو اتفاقية مع متعاقد مستقل.",
+  "zh": "Contract Forge 用通俗易懂的语言起草协议：服务协议、保密协议或承包商协议。",
+  "sw": "Contract Forge huandaa makubaliano kwa lugha rahisi: makubaliano ya huduma, NDA au makubaliano ya mkandarasi.",
+  "sv": "Contract Forge skriver avtal på klarspråk: ett tjänsteavtal, ett sekretessavtal eller ett uppdragsavtal."
+ },
+ "Choose the agreement type and enter the real parties and terms.": {
+  "es": "Elige el tipo de acuerdo e introduce las partes y las condiciones reales.",
+  "ar": "اختر نوع الاتفاقية وأدخل الأطراف والشروط الحقيقية.",
+  "zh": "选择协议类型，并填写真实的双方信息和条款。",
+  "sw": "Chagua aina ya makubaliano na uingize wahusika na masharti halisi.",
+  "sv": "Välj avtalstyp och fyll i de verkliga parterna och villkoren."
+ },
+ "Press “Draft contract”.": {
+  "es": "Pulsa «Redactar contrato».",
+  "ar": "اضغط «صُغ العقد».",
+  "zh": "点击“起草合同”。",
+  "sw": "Bonyeza “Andaa mkataba”.",
+  "sv": "Tryck på ”Skriv avtal”."
+ },
+ "Review every clause carefully, edit it, and export the document.": {
+  "es": "Revisa con cuidado cada cláusula, edítala y exporta el documento.",
+  "ar": "راجع كل بند بعناية وعدّله، ثم صدّر المستند.",
+  "zh": "仔细审阅每一条款并加以修改，然后导出文件。",
+  "sw": "Pitia kila kifungu kwa makini, kihariri, na uhamishe hati.",
+  "sv": "Granska varje klausul noga, redigera den och exportera dokumentet."
+ },
+ "Is the contract legal advice?": {
+  "es": "¿El contrato es asesoramiento legal?",
+  "ar": "هل العقد استشارة قانونية؟",
+  "zh": "这份合同算法律意见吗？",
+  "sw": "Je, mkataba huu ni ushauri wa kisheria?",
+  "sv": "Är avtalet juridisk rådgivning?"
+ },
+ "No. It gives you a clear starting draft. Read every clause and have a lawyer check anything important before you sign.": {
+  "es": "No. Te da un borrador claro para empezar. Lee cada cláusula y pide a un abogado que revise lo importante antes de firmar.",
+  "ar": "لا. إنه مسودة واضحة للبداية. اقرأ كل بند واطلب من محامٍ مراجعة أي أمر مهم قبل التوقيع.",
+  "zh": "不算。它只是一份清晰的起始草稿。签署前请阅读每一条款，重要内容请让律师把关。",
+  "sw": "Hapana. Inakupa rasimu ya kuanzia iliyo wazi. Soma kila kifungu na umwombe wakili akague jambo lolote muhimu kabla ya kusaini.",
+  "sv": "Nej. Det ger dig ett tydligt utkast att utgå från. Läs varje klausul och låt en jurist granska det viktiga innan du skriver under."
+ },
+ "About Contract Forge": {
+  "es": "Acerca de Contract Forge",
+  "ar": "عن Contract Forge",
+  "zh": "关于 Contract Forge",
+  "sw": "Kuhusu Contract Forge",
+  "sv": "Om Contract Forge"
+ },
+ "How to use Contract Forge": {
+  "es": "Cómo usar Contract Forge",
+  "ar": "طريقة استخدام Contract Forge",
+  "zh": "如何使用 Contract Forge",
+  "sw": "Jinsi ya kutumia Contract Forge",
+  "sv": "Så använder du Contract Forge"
+ },
+ "Is Contract Forge free?": {
+  "es": "¿Contract Forge es gratis?",
+  "ar": "هل Contract Forge مجاني؟",
+  "zh": "Contract Forge 免费吗？",
+  "sw": "Je, Contract Forge ni bure?",
+  "sv": "Är Contract Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

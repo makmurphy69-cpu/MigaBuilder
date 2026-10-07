@@ -79,3 +79,97 @@ I18N.phrases({
   "Preparing your signed document locally…": { es: "Preparando tu documento firmado localmente…", ar: "جارٍ تجهيز مستندك الموقّع محليًا…", zh: "正在本地准备已签署的文档…", sw: "Inaandaa hati yako iliyosainiwa ndani ya kifaa…", sv: "Förbereder ditt signerade dokument lokalt…" },
   "Could not create the signed file:": { es: "No se pudo crear el archivo firmado:", ar: "تعذّر إنشاء الملف الموقّع:", zh: "无法创建已签署的文件：", sw: "Imeshindwa kuunda faili iliyosainiwa:", sv: "Kunde inte skapa den signerade filen:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Sign Documents lets you sign a PDF, a Word document or a photo of a paper document. Draw your signature with a finger or mouse, type it, or upload and crop an image of it.": {
+  "es": "Sign Documents te permite firmar un PDF, un documento de Word o la foto de un documento en papel. Dibuja tu firma con el dedo o el ratón, escríbela, o sube y recorta una imagen de ella.",
+  "ar": "يتيح لك Sign Documents توقيع ملف PDF أو مستند Word أو صورة لمستند ورقي. ارسم توقيعك بإصبعك أو بالفأرة، أو اكتبه، أو ارفع صورة له واقتطعها.",
+  "zh": "Sign Documents 让你签署 PDF、Word 文档或纸质文件的照片。用手指或鼠标画出签名、打字输入，或上传并裁剪签名图片。",
+  "sw": "Sign Documents hukuwezesha kusaini PDF, hati ya Word au picha ya hati ya karatasi. Chora sahihi yako kwa kidole au kipanya, iandike, au pakia na ukate picha yake.",
+  "sv": "Sign Documents låter dig signera en PDF, ett Word-dokument eller ett foto av ett pappersdokument. Rita din namnteckning med fingret eller musen, skriv den, eller ladda upp och beskär en bild av den."
+ },
+ "Choose a PDF, Word file or photo of a document, then draw, type or upload your signature and press Use this signature.": {
+  "es": "Elige un PDF, un archivo de Word o la foto de un documento, dibuja, escribe o sube tu firma y pulsa Usar esta firma.",
+  "ar": "اختر ملف PDF أو Word أو صورة لمستند، ثم ارسم توقيعك أو اكتبه أو ارفعه واضغط «استخدم هذا التوقيع».",
+  "zh": "选择 PDF、Word 文件或文件照片，然后画出、输入或上传签名，并点击“使用此签名”。",
+  "sw": "Chagua PDF, faili la Word au picha ya hati, kisha chora, andika au pakia sahihi yako na ubonyeze Tumia sahihi hii.",
+  "sv": "Välj en PDF, en Word-fil eller ett foto av ett dokument, rita, skriv eller ladda upp din namnteckning och tryck på Använd den här namnteckningen."
+ },
+ "Press “+ Signature”.": {
+  "es": "Pulsa «+ Firma».",
+  "ar": "اضغط «+ توقيع».",
+  "zh": "点击“+ 签名”。",
+  "sw": "Bonyeza “+ Sahihi”.",
+  "sv": "Tryck på ”+ Namnteckning”."
+ },
+ "Drag it into place, add the date if needed and download the signed document.": {
+  "es": "Arrástrala a su sitio, añade la fecha si hace falta y descarga el documento firmado.",
+  "ar": "اسحبه إلى مكانه، وأضف التاريخ إن لزم، ونزّل المستند الموقَّع.",
+  "zh": "把它拖到合适位置，如有需要添加日期，然后下载已签署的文件。",
+  "sw": "Iburute mahali pake, ongeza tarehe ikihitajika na upakue hati iliyosainiwa.",
+  "sv": "Dra den på plats, lägg till datum vid behov och ladda ner det signerade dokumentet."
+ },
+ "Is the signed document uploaded anywhere?": {
+  "es": "¿Se sube a algún sitio el documento firmado?",
+  "ar": "هل يُرفع المستند الموقَّع إلى أي مكان؟",
+  "zh": "签好的文件会被上传到任何地方吗？",
+  "sw": "Je, hati iliyosainiwa inapakiwa popote?",
+  "sv": "Laddas det signerade dokumentet upp någonstans?"
+ },
+ "No. The document and your signature stay in your browser; you download the signed copy directly.": {
+  "es": "No. El documento y tu firma se quedan en tu navegador; descargas la copia firmada directamente.",
+  "ar": "لا. يبقى المستند وتوقيعك في متصفحك؛ وتنزّل النسخة الموقَّعة مباشرة.",
+  "zh": "不会。文件和你的签名都留在浏览器中；你直接下载签好的副本。",
+  "sw": "Hapana. Hati na sahihi yako hubaki kwenye kivinjari chako; unapakua nakala iliyosainiwa moja kwa moja.",
+  "sv": "Nej. Dokumentet och din namnteckning stannar i webbläsaren; du laddar ner den signerade kopian direkt."
+ },
+ "About Sign Documents": {
+  "es": "Acerca de Sign Documents",
+  "ar": "عن Sign Documents",
+  "zh": "关于 Sign Documents",
+  "sw": "Kuhusu Sign Documents",
+  "sv": "Om Sign Documents"
+ },
+ "How to use Sign Documents": {
+  "es": "Cómo usar Sign Documents",
+  "ar": "طريقة استخدام Sign Documents",
+  "zh": "如何使用 Sign Documents",
+  "sw": "Jinsi ya kutumia Sign Documents",
+  "sv": "Så använder du Sign Documents"
+ },
+ "Is Sign Documents free?": {
+  "es": "¿Sign Documents es gratis?",
+  "ar": "هل Sign Documents مجاني؟",
+  "zh": "Sign Documents 免费吗？",
+  "sw": "Je, Sign Documents ni bure?",
+  "sv": "Är Sign Documents gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

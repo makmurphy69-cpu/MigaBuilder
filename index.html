@@ -2,40 +2,27 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="/miga-palette.js" defer></script>
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
+<script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MigaBuilder — 69 Free Private Browser Tools</title>
-<meta name="description" content="Create pictures, websites, videos and business assets, convert files, check grammar and extract text with 69 free browser tools. No signup, no watermark and no surprise paywall.">
+<title>MigaBuilder — 70 Free Private Browser Tools</title>
+<meta name="description" content="Create pictures, websites, videos and business assets, convert files, check grammar and extract text with 70 free browser tools. No signup, no watermark and no surprise paywall.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://migabuilder.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MigaBuilder">
-<meta property="og:title" content="MigaBuilder — 69 Free Private Browser Tools">
-<meta property="og:description" content="Create, convert and check files with 69 free browser tools. No signup or surprise paywall.">
+<meta property="og:title" content="MigaBuilder — 70 Free Private Browser Tools">
+<meta property="og:description" content="Create, convert and check files with 70 free browser tools. No signup or surprise paywall.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
 <meta property="og:url" content="https://migabuilder.com/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MigaBuilder — 69 Free Private Browser Tools">
-<meta name="twitter:description" content="Create, convert and check files with 69 free browser tools. No signup or surprise paywall.">
+<meta name="twitter:title" content="MigaBuilder — 70 Free Private Browser Tools">
+<meta name="twitter:description" content="Create, convert and check files with 70 free browser tools. No signup or surprise paywall.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 69 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
+    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 70 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
     {"@type":"SoftwareApplication","@id":"https://migabuilder.com/#app","name":"MigaBuilder","url":"https://migabuilder.com/","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"A local-first toolkit for websites, files, documents, video and business assets.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI website builder","Local project hub","PDF toolkit","Private OCR","Website checkup","File utilities","Content repurposing","Form generator","Group video meetings","CV and résumé generator"]}
   ]
 }
@@ -736,7 +723,7 @@
       <a class="tool-card" href="merge-forge.html"><span class="tool-icon">🧩</span><span><strong>Merge Forge</strong><small data-i18n="d:merge-forge">Combine clips, images, text and music.</small></span></a>
       <a class="tool-card" href="music-forge.html" data-keywords="song singing vocals lyrics AI music generator Lyria beat instrumental background music"><span class="tool-icon">🎵</span><span><strong>Music Forge</strong><small data-i18n="d:music-forge">Describe music and get a free track, songs with singing, beats.</small></span></a>
       <a class="tool-card" href="record-forge.html"><span class="tool-icon">⏺️</span><span><strong>Record Forge</strong><small data-i18n="d:record-forge">Record your screen with narration.</small></span></a>
-      <a class="tool-card" href="media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small data-i18n="d:media-convert">Compress, trim and convert video, make GIFs and MP3s, extract audio and transcribe speech.</small></span></a>
+      <a class="tool-card" href="media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small data-i18n="d:media-convert">Compress, trim and convert video, make GIFs and MP3s, extract audio, and turn recordings into text and subtitles privately.</small></span></a>
       <a class="tool-card" href="jam-forge.html" data-keywords="join videos combine merge clips stitch upload existing videos in order split screen collab music video band duet acapella multitrack record several videos together side by side one after another sequence conversation sketch dialogue talking frog cartoon character clap sync count in metronome play along tiktok duet reels shorts collage"><span class="tool-icon">🎸</span><span><strong>Jam Forge</strong><small data-i18n="d:jam-forge">Record several clips and play them side by side or one after another — a band, a duet or a conversation.</small></span></a>
       <a class="tool-card" href="voice-forge.html" data-keywords="text to speech tts voice generator voice over voiceover narration read aloud ai voice mp3 wav speech synthesis piper swedish spanish arabic chinese swahili offline free"><span class="tool-icon">🎙️</span><span><strong>Voice Forge</strong><small data-i18n="d:voice-forge">Turn a script into a natural voice-over in 35+ languages and download it as MP3.</small></span></a>
       <a class="tool-card" href="audio-forge.html" data-keywords="audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"><span class="tool-icon">🎚️</span><span><strong>Audio Forge</strong><small data-i18n="d:audio-forge">Trim, join, fade, speed up and convert audio to MP3 or WAV.</small></span></a>
@@ -774,6 +761,7 @@
       <a class="tool-card" href="idea-atlas.html" data-keywords="philosophy politics ideology history thinkers quiz game liberalism socialism conservatism stoicism marxism feminism"><span class="tool-icon">🏛️</span><span><strong>Idea Atlas</strong><small data-i18n="d:idea-atlas">Explore philosophies and ideologies, their thinkers and connections, then play the quiz.</small></span></a>
       <a class="tool-card" href="biology-map.html" data-keywords="biology dna genes genetics evolution tree of life species animals human chimpanzee similarity gene expression protein codon mutation natural selection ancestry ethnic groups human diversity migration out of africa neanderthal quiz"><span class="tool-icon">🧬</span><span><strong>Biology Map</strong><small data-i18n="d:biology-map">Tree of life and shared DNA, how DNA is built, gene expression, mutations, evolution and human diversity.</small></span></a>
       <a class="tool-card" href="chemistry-map.html" data-keywords="chemistry periodic table elements atoms atomic number symbols compounds molecules bonds ionic covalent metals materials alloys steel glass plastic battery molar mass formula calculator science quiz"><span class="tool-icon">⚗️</span><span><strong>Chemistry Map</strong><small data-i18n="d:chemistry-map">Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.</small></span></a>
+      <a class="tool-card" href="physics-map.html" data-keywords="physics astronomy space planets solar system sun moon mars jupiter saturn universe big bang cosmic timeline black holes event horizon relativity einstein newton gravity quantum mechanics string theory dark matter dark energy weight on mars light year speed of light e=mc2 time dilation calculator science quiz"><span class="tool-icon">🪐</span><span><strong>Physics Map</strong><small data-i18n="d:physics-map">Planets in motion, the history of the universe, black holes and physics theories, with calculators and quizzes.</small></span></a>
       <a class="tool-card" href="body-map.html" data-keywords="human body anatomy skeleton bones muscles tendons skin organs biology health illness disease symptoms treatment heart brain lungs liver digestion fasting nutrition quiz"><span class="tool-icon">🫀</span><span><strong>Body Map</strong><small data-i18n="d:body-map">Explore organs, bones, muscles, tendons and skin: how they work, illnesses and care, digestion, fasting and quizzes.</small></span></a>
       <a class="tool-card" href="flashcard-forge.html" data-keywords="flashcards flash cards study spaced repetition memorize revise quiz anki quizlet vocabulary cloze matching game stats share"><span class="tool-icon">🗂️</span><span><strong>Flashcard Forge</strong><small data-i18n="d:flashcard-forge">AI flashcards, Anki-style spaced repetition, games, stats and share links.</small></span></a>
       <a class="tool-card" href="memory-forge.html" data-keywords="memory training brain game memorize numbers symbols cards digit span chimp test n-back dual n-back pairs concentration corsi sequence levels timer working memory memory palace method of loci major system peg system spaced repetition word list mnemonics"><span class="tool-icon">🧠</span><span><strong>Memory Forge</strong><small data-i18n="d:memory-forge">Memory training with levels, a word list for the memory palace, and a guide to techniques that work.</small></span></a>
@@ -900,7 +888,7 @@
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
     const popular=['image-studio.html','grammar-forge.html','slide-forge.html','contract-forge.html','music-forge.html','cartoon-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
-    document.getElementById('newTools').replaceChildren(...['voice-forge.html','vector-forge.html','regex-forge.html','jam-forge.html','policy-forge.html','redact-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['physics-map.html','voice-forge.html','vector-forge.html','regex-forge.html','jam-forge.html','policy-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));

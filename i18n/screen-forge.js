@@ -14,3 +14,90 @@ I18N.phrases({
   "How to use Screen Share Forge": { es: "Cómo usar Screen Share Forge", ar: "كيفية استخدام Screen Share Forge", zh: "如何使用 Screen Share Forge", sw: "Jinsi ya kutumia Screen Share Forge", sv: "Så använder du Screen Share Forge" },
   "Screen Share Forge — help someone by watching their screen live": { es: "Screen Share Forge — ayuda a alguien viendo su pantalla en directo", ar: "Screen Share Forge — ساعد شخصًا بمشاهدة شاشته مباشرة", zh: "Screen Share Forge — 实时观看对方屏幕来帮助他们", sw: "Screen Share Forge — msaidie mtu kwa kutazama skrini yake moja kwa moja", sv: "Screen Share Forge — hjälp någon genom att se deras skärm live" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Screen Share Forge gives live remote help: send a link, get a code, watch the other person's screen and chat while you help.": {
+  "es": "Screen Share Forge ofrece ayuda remota en directo: envía un enlace, recibe un código, mira la pantalla de la otra persona y chatea mientras ayudas.",
+  "ar": "يقدّم Screen Share Forge مساعدة مباشرة عن بُعد: أرسل رابطًا، واحصل على رمز، وشاهد شاشة الشخص الآخر وتحدّث معه أثناء المساعدة.",
+  "zh": "Screen Share Forge 提供实时远程协助：发送链接、获取代码，一边看对方的屏幕一边聊天帮忙。",
+  "sw": "Screen Share Forge hutoa msaada wa moja kwa moja wa mbali: tuma kiungo, pata msimbo, tazama skrini ya mtu mwingine na uzungumze unapomsaidia.",
+  "sv": "Screen Share Forge ger fjärrhjälp i realtid: skicka en länk, få en kod, se den andra personens skärm och chatta medan du hjälper."
+ },
+ "Create a support session and choose what you want to share.": {
+  "es": "Crea una sesión de soporte y elige qué quieres compartir.",
+  "ar": "أنشئ جلسة دعم واختر ما تريد مشاركته.",
+  "zh": "创建一次协助会话，选择要共享的内容。",
+  "sw": "Unda kikao cha msaada na uchague unachotaka kushiriki.",
+  "sv": "Skapa en supportsession och välj vad du vill dela."
+ },
+ "Press “Start session”.": {
+  "es": "Pulsa «Iniciar sesión».",
+  "ar": "اضغط «ابدأ الجلسة».",
+  "zh": "点击“开始会话”。",
+  "sw": "Bonyeza “Anza kikao”.",
+  "sv": "Tryck på ”Starta session”."
+ },
+ "Share the link safely and end the session when help is finished.": {
+  "es": "Comparte el enlace de forma segura y cierra la sesión cuando termines de ayudar.",
+  "ar": "شارك الرابط بأمان وأنهِ الجلسة عند انتهاء المساعدة.",
+  "zh": "安全地分享链接，帮助完成后结束会话。",
+  "sw": "Shiriki kiungo kwa usalama na umalize kikao msaada ukikamilika.",
+  "sv": "Dela länken på ett säkert sätt och avsluta sessionen när hjälpen är klar."
+ },
+ "Does the other person need to install anything?": {
+  "es": "¿La otra persona tiene que instalar algo?",
+  "ar": "هل يحتاج الشخص الآخر إلى تثبيت أي شيء؟",
+  "zh": "对方需要安装什么吗？",
+  "sw": "Je, mtu mwingine anahitaji kusakinisha chochote?",
+  "sv": "Behöver den andra personen installera något?"
+ },
+ "No. Both of you only need a web browser; you share a link and a code.": {
+  "es": "No. Los dos solo necesitáis un navegador; compartes un enlace y un código.",
+  "ar": "لا. يحتاج كلاكما إلى متصفح فقط؛ وتشارك رابطًا ورمزًا.",
+  "zh": "不需要。你们双方只需要浏览器；你分享一个链接和一个代码即可。",
+  "sw": "Hapana. Nyote wawili mnahitaji kivinjari tu; unashiriki kiungo na msimbo.",
+  "sv": "Nej. Ni behöver bara en webbläsare var; du delar en länk och en kod."
+ },
+ "About Screen Share Forge": {
+  "es": "Acerca de Screen Share Forge",
+  "ar": "عن Screen Share Forge",
+  "zh": "关于 Screen Share Forge",
+  "sw": "Kuhusu Screen Share Forge",
+  "sv": "Om Screen Share Forge"
+ },
+ "How to use Screen Share Forge": {
+  "es": "Cómo usar Screen Share Forge",
+  "ar": "طريقة استخدام Screen Share Forge",
+  "zh": "如何使用 Screen Share Forge",
+  "sw": "Jinsi ya kutumia Screen Share Forge",
+  "sv": "Så använder du Screen Share Forge"
+ },
+ "Is Screen Share Forge free?": {
+  "es": "¿Screen Share Forge es gratis?",
+  "ar": "هل Screen Share Forge مجاني؟",
+  "zh": "Screen Share Forge 免费吗？",
+  "sw": "Je, Screen Share Forge ni bure?",
+  "sv": "Är Screen Share Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "The screen and chat travel directly between the two browsers. Nothing is installed and nothing is recorded.": {
+  "es": "La pantalla y el chat viajan directamente entre los dos navegadores. No se instala nada y no se graba nada.",
+  "ar": "تنتقل الشاشة والدردشة مباشرة بين المتصفحين. لا يُثبَّت شيء ولا يُسجَّل شيء.",
+  "zh": "屏幕和聊天内容直接在两个浏览器之间传输。无需安装任何东西，也不会录制任何内容。",
+  "sw": "Skrini na mazungumzo husafiri moja kwa moja kati ya vivinjari viwili. Hakuna kinachosakinishwa na hakuna kinachorekodiwa.",
+  "sv": "Skärmen och chatten går direkt mellan de två webbläsarna. Inget installeras och inget spelas in."
+ }
+});

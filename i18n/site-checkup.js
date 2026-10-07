@@ -48,3 +48,97 @@ I18N.phrases({
   "MigaBuilder Website Checkup Score:": { es: "Puntuación de Website Checkup de MigaBuilder:", ar: "درجة Website Checkup من MigaBuilder:", zh: "MigaBuilder Website Checkup 得分：", sw: "Alama ya Website Checkup ya MigaBuilder:", sv: "MigaBuilder Website Checkup-betyg:" },
   "Checkup complete. Nothing was uploaded.": { es: "Revisión completada. No se subió nada.", ar: "اكتمل الفحص. لم يُرفع شيء.", zh: "检查完成，未上传任何内容。", sw: "Ukaguzi umekamilika. Hakuna kilichopakiwa.", sv: "Kontrollen är klar. Ingenting laddades upp." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Website Checkup reviews HTML for common SEO, accessibility and mobile problems and explains how to fix them.": {
+  "es": "Website Checkup revisa el HTML en busca de problemas comunes de SEO, accesibilidad y móvil y explica cómo solucionarlos.",
+  "ar": "يراجع Website Checkup شيفرة HTML بحثًا عن مشكلات شائعة في تحسين محركات البحث وسهولة الوصول والعرض على الهاتف، ويشرح كيفية إصلاحها.",
+  "zh": "Website Checkup 检查 HTML 中常见的 SEO、无障碍和移动端问题，并说明如何修复。",
+  "sw": "Website Checkup hukagua HTML kutafuta matatizo ya kawaida ya SEO, ufikivu na simu, na hueleza jinsi ya kuyarekebisha.",
+  "sv": "Website Checkup granskar HTML efter vanliga problem med SEO, tillgänglighet och mobil och förklarar hur de åtgärdas."
+ },
+ "Upload or paste the HTML you want to review.": {
+  "es": "Sube o pega el HTML que quieres revisar.",
+  "ar": "ارفع أو الصق شيفرة HTML التي تريد مراجعتها.",
+  "zh": "上传或粘贴你要检查的 HTML。",
+  "sw": "Pakia au bandika HTML unayotaka kukagua.",
+  "sv": "Ladda upp eller klistra in den HTML du vill granska."
+ },
+ "Press “Run website checkup”.": {
+  "es": "Pulsa «Revisar la web».",
+  "ar": "اضغط «افحص الموقع».",
+  "zh": "点击“运行网站检查”。",
+  "sw": "Bonyeza “Kagua tovuti”.",
+  "sv": "Tryck på ”Kör webbplatskontrollen”."
+ },
+ "Work through the SEO and accessibility fixes, then download the report.": {
+  "es": "Aplica las correcciones de SEO y accesibilidad y descarga el informe.",
+  "ar": "نفّذ إصلاحات تحسين محركات البحث وسهولة الوصول، ثم نزّل التقرير.",
+  "zh": "逐项完成 SEO 和无障碍修复，然后下载报告。",
+  "sw": "Shughulikia marekebisho ya SEO na ufikivu, kisha pakua ripoti.",
+  "sv": "Gå igenom åtgärderna för SEO och tillgänglighet och ladda sedan ner rapporten."
+ },
+ "What does it check?": {
+  "es": "¿Qué revisa?",
+  "ar": "ماذا يفحص؟",
+  "zh": "它检查什么？",
+  "sw": "Hukagua nini?",
+  "sv": "Vad kontrollerar den?"
+ },
+ "Common SEO, accessibility and mobile problems such as page titles, image descriptions and mobile settings. Download the report when you are done.": {
+  "es": "Problemas comunes de SEO, accesibilidad y móvil, como los títulos de página, las descripciones de imágenes y los ajustes para móvil. Descarga el informe cuando termines.",
+  "ar": "مشكلات شائعة في تحسين محركات البحث وسهولة الوصول والعرض على الهاتف، مثل عناوين الصفحات وأوصاف الصور وإعدادات الهاتف. نزّل التقرير عندما تنتهي.",
+  "zh": "常见的 SEO、无障碍和移动端问题，例如页面标题、图片描述和移动端设置。完成后下载报告。",
+  "sw": "Matatizo ya kawaida ya SEO, ufikivu na simu kama vichwa vya kurasa, maelezo ya picha na mipangilio ya simu. Pakua ripoti ukimaliza.",
+  "sv": "Vanliga problem med SEO, tillgänglighet och mobil, som sidtitlar, bildbeskrivningar och mobilinställningar. Ladda ner rapporten när du är klar."
+ },
+ "About Website Checkup": {
+  "es": "Acerca de Website Checkup",
+  "ar": "عن Website Checkup",
+  "zh": "关于 Website Checkup",
+  "sw": "Kuhusu Website Checkup",
+  "sv": "Om Website Checkup"
+ },
+ "How to use Website Checkup": {
+  "es": "Cómo usar Website Checkup",
+  "ar": "طريقة استخدام Website Checkup",
+  "zh": "如何使用 Website Checkup",
+  "sw": "Jinsi ya kutumia Website Checkup",
+  "sv": "Så använder du Website Checkup"
+ },
+ "Is Website Checkup free?": {
+  "es": "¿Website Checkup es gratis?",
+  "ar": "هل Website Checkup مجاني؟",
+  "zh": "Website Checkup 免费吗？",
+  "sw": "Je, Website Checkup ni bure?",
+  "sv": "Är Website Checkup gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

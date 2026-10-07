@@ -138,3 +138,97 @@ I18N.phrases({
   "Paste some page code first.": { es: "Primero pega el código de alguna página.", ar: "الصق شيفرة صفحة أولًا.", zh: "请先粘贴页面代码。", sw: "Bandika msimbo wa ukurasa kwanza.", sv: "Klistra in lite sidkod först." },
   "Type": { es: "Tipo", ar: "النوع", zh: "题型", sw: "Aina", sv: "Typ" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Policy Forge writes a privacy policy and cookie policy for your website. Paste your site's code to detect Google Analytics, Meta Pixel, Stripe, YouTube and 30+ other services.": {
+  "es": "Policy Forge redacta una política de privacidad y una política de cookies para tu web. Pega el código de tu sitio para detectar Google Analytics, Meta Pixel, Stripe, YouTube y más de 30 servicios.",
+  "ar": "يكتب Policy Forge سياسة خصوصية وسياسة ملفات تعريف الارتباط لموقعك. الصق شيفرة موقعك لاكتشاف Google Analytics وMeta Pixel وStripe وYouTube وأكثر من 30 خدمة أخرى.",
+  "zh": "Policy Forge 为你的网站撰写隐私政策和 Cookie 政策。粘贴网站代码，即可检测 Google Analytics、Meta Pixel、Stripe、YouTube 等 30 多种服务。",
+  "sw": "Policy Forge huandika sera ya faragha na sera ya vidakuzi kwa tovuti yako. Bandika msimbo wa tovuti yako kugundua Google Analytics, Meta Pixel, Stripe, YouTube na huduma nyingine zaidi ya 30.",
+  "sv": "Policy Forge skriver en integritetspolicy och en cookiepolicy för din webbplats. Klistra in sajtens kod för att hitta Google Analytics, Meta Pixel, Stripe, YouTube och över 30 andra tjänster."
+ },
+ "Fill in who runs the site and paste your page code, or press Try an example site.": {
+  "es": "Indica quién gestiona el sitio y pega el código de tu página, o pulsa Probar un sitio de ejemplo.",
+  "ar": "املأ بيانات من يدير الموقع والصق شيفرة صفحتك، أو اضغط «جرّب موقعًا نموذجيًا».",
+  "zh": "填写网站运营者信息并粘贴页面代码，或点击“试试示例网站”。",
+  "sw": "Jaza nani anaendesha tovuti na ubandike msimbo wa ukurasa wako, au bonyeza Jaribu tovuti ya mfano.",
+  "sv": "Fyll i vem som driver webbplatsen och klistra in sidans kod, eller tryck på Prova en exempelsajt."
+ },
+ "Press “Find services”.": {
+  "es": "Pulsa «Buscar servicios».",
+  "ar": "اضغط «ابحث عن الخدمات».",
+  "zh": "点击“查找服务”。",
+  "sw": "Bonyeza “Tafuta huduma”.",
+  "sv": "Tryck på ”Hitta tjänster”."
+ },
+ "Read What you need, then copy or download the privacy policy, cookie policy, cookie banner, terms and disclosures.": {
+  "es": "Lee Lo que necesitas y copia o descarga la política de privacidad, la de cookies, el aviso de cookies, las condiciones y los avisos legales.",
+  "ar": "اقرأ «ما تحتاجه»، ثم انسخ أو نزّل سياسة الخصوصية وسياسة ملفات تعريف الارتباط ولافتة الموافقة والشروط والإفصاحات.",
+  "zh": "阅读“你需要什么”，然后复制或下载隐私政策、Cookie 政策、Cookie 横幅、使用条款和各项声明。",
+  "sw": "Soma Unachohitaji, kisha nakili au pakua sera ya faragha, sera ya vidakuzi, bango la vidakuzi, masharti na matamko.",
+  "sv": "Läs Det här behöver du och kopiera eller ladda sedan ner integritetspolicyn, cookiepolicyn, cookiebannern, villkoren och upplysningarna."
+ },
+ "Which laws does the privacy policy cover?": {
+  "es": "¿Qué leyes cubre la política de privacidad?",
+  "ar": "ما القوانين التي تغطيها سياسة الخصوصية؟",
+  "zh": "隐私政策涵盖哪些法规？",
+  "sw": "Sera ya faragha inashughulikia sheria zipi?",
+  "sv": "Vilka lagar täcker integritetspolicyn?"
+ },
+ "It is written for the GDPR, UK GDPR and CCPA, and adds a cookie table, consent banner, terms of use and other disclosures. Have a lawyer check it for your business.": {
+  "es": "Está redactada para el RGPD, el RGPD del Reino Unido y la CCPA, y añade una tabla de cookies, un aviso de consentimiento, condiciones de uso y otros avisos. Pide a un abogado que la revise para tu negocio.",
+  "ar": "كُتبت لتوافق اللائحة العامة لحماية البيانات (GDPR) ونظيرتها البريطانية وقانون CCPA، وتضيف جدولًا لملفات تعريف الارتباط ولافتة موافقة وشروط استخدام وإفصاحات أخرى. اطلب من محامٍ مراجعتها لنشاطك.",
+  "zh": "它按 GDPR、英国 GDPR 和 CCPA 撰写，并附带 Cookie 表、同意横幅、使用条款和其他声明。请让律师结合你的业务审核。",
+  "sw": "Imeandikwa kwa ajili ya GDPR, GDPR ya Uingereza na CCPA, na huongeza jedwali la vidakuzi, bango la ridhaa, masharti ya matumizi na matamko mengine. Mwombe wakili aikague kwa biashara yako.",
+  "sv": "Den är skriven för GDPR, brittiska GDPR och CCPA och lägger till en cookietabell, en samtyckesbanner, användarvillkor och andra upplysningar. Låt en jurist granska den för ditt företag."
+ },
+ "About Policy Forge": {
+  "es": "Acerca de Policy Forge",
+  "ar": "عن Policy Forge",
+  "zh": "关于 Policy Forge",
+  "sw": "Kuhusu Policy Forge",
+  "sv": "Om Policy Forge"
+ },
+ "How to use Policy Forge": {
+  "es": "Cómo usar Policy Forge",
+  "ar": "طريقة استخدام Policy Forge",
+  "zh": "如何使用 Policy Forge",
+  "sw": "Jinsi ya kutumia Policy Forge",
+  "sv": "Så använder du Policy Forge"
+ },
+ "Is Policy Forge free?": {
+  "es": "¿Policy Forge es gratis?",
+  "ar": "هل Policy Forge مجاني؟",
+  "zh": "Policy Forge 免费吗？",
+  "sw": "Je, Policy Forge ni bure?",
+  "sv": "Är Policy Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

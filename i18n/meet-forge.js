@@ -64,3 +64,97 @@ I18N.phrases({
   "Meeting link copied": { es: "Enlace de la reunión copiado", ar: "تم نسخ رابط الاجتماع", zh: "会议链接已复制", sw: "Kiungo cha mkutano kimenakiliwa", sv: "Möteslänken har kopierats" },
   "Invitation copied": { es: "Invitación copiada", ar: "تم نسخ الدعوة", zh: "邀请已复制", sw: "Mwaliko umenakiliwa", sv: "Inbjudan har kopierats" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Meet Forge creates group video rooms, sends invitations by email and builds always-open communities with topic rooms.": {
+  "es": "Meet Forge crea salas de vídeo para grupos, envía invitaciones por correo y construye comunidades siempre abiertas con salas por temas.",
+  "ar": "ينشئ Meet Forge غرف فيديو جماعية، ويرسل الدعوات بالبريد الإلكتروني، ويبني مجتمعات مفتوحة دائمًا بغرف للموضوعات.",
+  "zh": "Meet Forge 创建群组视频房间，通过邮件发送邀请，并建立始终开放、按主题分房间的社区。",
+  "sw": "Meet Forge huunda vyumba vya video vya vikundi, hutuma mialiko kwa barua pepe na hujenga jumuiya zilizo wazi kila wakati zenye vyumba vya mada.",
+  "sv": "Meet Forge skapar videorum för grupper, skickar inbjudningar via e-post och bygger alltid öppna gemenskaper med ämnesrum."
+ },
+ "Enter your name and create a meeting or an always-open community.": {
+  "es": "Escribe tu nombre y crea una reunión o una comunidad siempre abierta.",
+  "ar": "أدخل اسمك وأنشئ اجتماعًا أو مجتمعًا مفتوحًا دائمًا.",
+  "zh": "输入你的名字，创建一场会议或一个始终开放的社区。",
+  "sw": "Ingiza jina lako na uunde mkutano au jumuiya iliyo wazi kila wakati.",
+  "sv": "Skriv ditt namn och skapa ett möte eller en alltid öppen gemenskap."
+ },
+ "Press “Create new meeting”.": {
+  "es": "Pulsa «Crear nueva reunión».",
+  "ar": "اضغط «أنشئ اجتماعًا جديدًا».",
+  "zh": "点击“创建新会议”。",
+  "sw": "Bonyeza “Unda mkutano mpya”.",
+  "sv": "Tryck på ”Skapa nytt möte”."
+ },
+ "Invite people, use the video room, or start separate topic discussions.": {
+  "es": "Invita a gente, usa la sala de vídeo o abre debates por temas.",
+  "ar": "ادعُ الأشخاص، واستخدم غرفة الفيديو، أو ابدأ نقاشات منفصلة حسب الموضوع.",
+  "zh": "邀请他人，使用视频房间，或开启单独的主题讨论。",
+  "sw": "Alika watu, tumia chumba cha video, au anzisha majadiliano tofauti ya mada.",
+  "sv": "Bjud in personer, använd videorummet eller starta separata ämnesdiskussioner."
+ },
+ "Do guests need an account?": {
+  "es": "¿Los invitados necesitan una cuenta?",
+  "ar": "هل يحتاج الضيوف إلى حساب؟",
+  "zh": "访客需要账号吗？",
+  "sw": "Je, wageni wanahitaji akaunti?",
+  "sv": "Behöver gästerna ett konto?"
+ },
+ "No. Guests join from the invitation link in their browser.": {
+  "es": "No. Los invitados entran desde el enlace de la invitación en su navegador.",
+  "ar": "لا. ينضم الضيوف من رابط الدعوة في متصفحهم.",
+  "zh": "不需要。访客在浏览器中通过邀请链接加入。",
+  "sw": "Hapana. Wageni hujiunga kupitia kiungo cha mwaliko kwenye kivinjari chao.",
+  "sv": "Nej. Gästerna ansluter via inbjudningslänken i sin webbläsare."
+ },
+ "About Meet Forge": {
+  "es": "Acerca de Meet Forge",
+  "ar": "عن Meet Forge",
+  "zh": "关于 Meet Forge",
+  "sw": "Kuhusu Meet Forge",
+  "sv": "Om Meet Forge"
+ },
+ "How to use Meet Forge": {
+  "es": "Cómo usar Meet Forge",
+  "ar": "طريقة استخدام Meet Forge",
+  "zh": "如何使用 Meet Forge",
+  "sw": "Jinsi ya kutumia Meet Forge",
+  "sv": "Så använder du Meet Forge"
+ },
+ "Is Meet Forge free?": {
+  "es": "¿Meet Forge es gratis?",
+  "ar": "هل Meet Forge مجاني؟",
+  "zh": "Meet Forge 免费吗？",
+  "sw": "Je, Meet Forge ni bure?",
+  "sv": "Är Meet Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "Video calls run through the Jitsi Meet video service (meet.jit.si) in your browser; MigaBuilder does not record them.": {
+  "es": "Las videollamadas funcionan a través del servicio de vídeo Jitsi Meet (meet.jit.si) en tu navegador; MigaBuilder no las graba.",
+  "ar": "تعمل مكالمات الفيديو عبر خدمة الفيديو Jitsi Meet ‏(meet.jit.si) في متصفحك؛ ولا يسجّلها MigaBuilder.",
+  "zh": "视频通话通过 Jitsi Meet 视频服务（meet.jit.si）在你的浏览器中进行；MigaBuilder 不会录制。",
+  "sw": "Simu za video hupita kupitia huduma ya video ya Jitsi Meet (meet.jit.si) kwenye kivinjari chako; MigaBuilder haizirekodi.",
+  "sv": "Videosamtalen går via videotjänsten Jitsi Meet (meet.jit.si) i webbläsaren; MigaBuilder spelar inte in dem."
+ }
+});

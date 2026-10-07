@@ -2,20 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/app-forge.html">
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
+<script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>App Forge — free app generator</title>
 <meta name="description" content="Describe an app and get it built — as an installable web app, a small utility tool, or a starter project for a real Android/iOS app — free, right in your browser.">
@@ -166,6 +153,7 @@
   footer a { color: rgba(237, 234, 224, 0.7); }
 </style>
 <link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I install the app on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "Web apps you make can be downloaded as an installable package, so they can be added to a phone's home screen like a normal app."}}, {"@type": "Question", "name": "Is App Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
 </head>
 <body>
 
@@ -282,6 +270,20 @@
     <p class="hint" id="modeHint" style="color: rgba(237,234,224,0.55); margin-top: 8px;"></p>
   </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About App Forge</h2>
+  <p>App Forge builds a working app from a description: an installable web app, a small utility tool or a starter project for a real Android or iOS app.</p>
+  <h3>How to use App Forge</h3>
+  <ol><li>Describe the browser app and the result it should produce.</li><li>Press “Generate app”.</li><li>Test the app, refine it, and download the finished HTML.</li></ol>
+  <h3>Can I install the app on my phone?</h3>
+  <p>Web apps you make can be downloaded as an installable package, so they can be added to a phone&#x27;s home screen like a normal app.</p>
+  <h3>Is App Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="bug-scanner.html">Bug Scanner</a> · <a href="website-builder.html">Website Builder</a> · <a href="logo-forge.html">Logo Forge</a></p>
+</section>
+
 
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a> — free to use, no account needed. Nothing you type here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
 <p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/app-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>

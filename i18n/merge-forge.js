@@ -18,3 +18,97 @@ I18N.phrases({
   "How to use Merge Forge": { es: "Cómo usar Merge Forge", ar: "كيفية استخدام Merge Forge", zh: "如何使用 Merge Forge", sw: "Jinsi ya kutumia Merge Forge", sv: "Så använder du Merge Forge" },
   "Merge Forge — combine images, clips and music into one video": { es: "Merge Forge — combina imágenes, clips y música en un solo vídeo", ar: "Merge Forge — ادمج الصور والمقاطع والموسيقى في فيديو واحد", zh: "Merge Forge — 把图片、片段和音乐合成一个视频", sw: "Merge Forge — unganisha picha, klipu na muziki kuwa video moja", sv: "Merge Forge — kombinera bilder, klipp och musik till en video" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Merge Forge joins slide images, video clips, music and text overlays into one video, with smooth audio fades and a live preview.": {
+  "es": "Merge Forge une imágenes de diapositivas, clips de vídeo, música y textos superpuestos en un solo vídeo, con fundidos de audio suaves y vista previa en vivo.",
+  "ar": "يدمج Merge Forge صور الشرائح ومقاطع الفيديو والموسيقى والنصوص المتراكبة في فيديو واحد، مع تلاشٍ صوتي سلس ومعاينة حية.",
+  "zh": "Merge Forge 把幻灯片图片、视频片段、音乐和文字叠加合成一个视频，带有平滑的音频淡入淡出和实时预览。",
+  "sw": "Merge Forge huunganisha picha za slaidi, klipu za video, muziki na maandishi ya juu kuwa video moja, yenye ufifishaji laini wa sauti na onyesho la moja kwa moja.",
+  "sv": "Merge Forge fogar ihop bildspelsbilder, videoklipp, musik och textöverlägg till en video, med mjuka ljudtoningar och liveförhandsvisning."
+ },
+ "Add clips, images, text, and music in the order you want.": {
+  "es": "Añade clips, imágenes, texto y música en el orden que quieras.",
+  "ar": "أضف المقاطع والصور والنصوص والموسيقى بالترتيب الذي تريده.",
+  "zh": "按你想要的顺序添加片段、图片、文字和音乐。",
+  "sw": "Ongeza klipu, picha, maandishi na muziki kwa mpangilio unaotaka.",
+  "sv": "Lägg till klipp, bilder, text och musik i den ordning du vill."
+ },
+ "Press “Merge media”.": {
+  "es": "Pulsa «Unir medios».",
+  "ar": "اضغط «ادمج الوسائط».",
+  "zh": "点击“合并媒体”。",
+  "sw": "Bonyeza “Unganisha midia”.",
+  "sv": "Tryck på ”Slå ihop media”."
+ },
+ "Preview the timeline and export the combined video.": {
+  "es": "Previsualiza la línea de tiempo y exporta el vídeo combinado.",
+  "ar": "عاين الخط الزمني وصدّر الفيديو المدمج.",
+  "zh": "预览时间线并导出合成的视频。",
+  "sw": "Hakiki mstari wa wakati na uhamishe video iliyounganishwa.",
+  "sv": "Förhandsgranska tidslinjen och exportera den sammanfogade videon."
+ },
+ "Can I combine clips from other MigaBuilder tools?": {
+  "es": "¿Puedo combinar clips de otras herramientas de MigaBuilder?",
+  "ar": "هل يمكنني دمج مقاطع من أدوات MigaBuilder الأخرى؟",
+  "zh": "我可以合并其他 MigaBuilder 工具做的片段吗？",
+  "sw": "Je, ninaweza kuunganisha klipu kutoka zana nyingine za MigaBuilder?",
+  "sv": "Kan jag kombinera klipp från andra MigaBuilder-verktyg?"
+ },
+ "Yes. Add videos made in Video Forge, Record Forge or Clip Forge together with images and music, put them in order and export one video.": {
+  "es": "Sí. Añade vídeos hechos en Video Forge, Record Forge o Clip Forge junto con imágenes y música, ordénalos y exporta un solo vídeo.",
+  "ar": "نعم. أضف فيديوهات صُنعت في Video Forge أو Record Forge أو Clip Forge مع الصور والموسيقى، ورتّبها وصدّر فيديو واحدًا.",
+  "zh": "可以。把在 Video Forge、Record Forge 或 Clip Forge 中做的视频与图片和音乐一起加入，排好顺序，导出成一个视频。",
+  "sw": "Ndiyo. Ongeza video zilizotengenezwa kwa Video Forge, Record Forge au Clip Forge pamoja na picha na muziki, zipange na uhamishe video moja.",
+  "sv": "Ja. Lägg till videor gjorda i Video Forge, Record Forge eller Clip Forge tillsammans med bilder och musik, sätt dem i ordning och exportera en video."
+ },
+ "About Merge Forge": {
+  "es": "Acerca de Merge Forge",
+  "ar": "عن Merge Forge",
+  "zh": "关于 Merge Forge",
+  "sw": "Kuhusu Merge Forge",
+  "sv": "Om Merge Forge"
+ },
+ "How to use Merge Forge": {
+  "es": "Cómo usar Merge Forge",
+  "ar": "طريقة استخدام Merge Forge",
+  "zh": "如何使用 Merge Forge",
+  "sw": "Jinsi ya kutumia Merge Forge",
+  "sv": "Så använder du Merge Forge"
+ },
+ "Is Merge Forge free?": {
+  "es": "¿Merge Forge es gratis?",
+  "ar": "هل Merge Forge مجاني؟",
+  "zh": "Merge Forge 免费吗？",
+  "sw": "Je, Merge Forge ni bure?",
+  "sv": "Är Merge Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

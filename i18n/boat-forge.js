@@ -215,3 +215,97 @@ I18N.phrases({
   "Allow pop-ups to print the build sheet.": { es: "Permite las ventanas emergentes para imprimir la hoja de construcción.", ar: "اسمح بالنوافذ المنبثقة لطباعة ورقة البناء.", zh: "请允许弹出窗口以打印建造图纸。", sw: "Ruhusu madirisha ibukizi kuchapisha karatasi ya ujenzi.", sv: "Tillåt popup-fönster för att skriva ut byggbladet." },
   "Could not open this file:": { es: "No se pudo abrir este archivo:", ar: "تعذّر فتح هذا الملف:", zh: "无法打开此文件：", sw: "Imeshindwa kufungua faili hii:", sv: "Kunde inte öppna filen:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Boat Forge is a boat design tool: start from a dinghy, skiff, canoe, kayak, sailboat, catamaran or other hull, shape it with sliders and see it float in 3D.": {
+  "es": "Boat Forge es una herramienta de diseño de barcos: parte de un bote, un esquife, una canoa, un kayak, un velero, un catamarán u otro casco, dale forma con controles deslizantes y míralo flotar en 3D.",
+  "ar": "Boat Forge أداة لتصميم القوارب: ابدأ من زورق صغير أو قارب سكيف أو كانو أو كاياك أو مركب شراعي أو قارب مزدوج أو هيكل آخر، وشكّله بالمنزلقات وشاهده يطفو بشكل ثلاثي الأبعاد.",
+  "zh": "Boat Forge 是一款船舶设计工具：从小艇、平底小船、独木舟、皮划艇、帆船、双体船等船体开始，用滑块调整形状，并看它在 3D 中漂浮。",
+  "sw": "Boat Forge ni zana ya kubuni boti: anza na dingi, skiff, mtumbwi, kayak, mashua ya tanga, katamarani au umbo jingine, liunde kwa vitelezi na ulione likielea katika 3D.",
+  "sv": "Boat Forge är ett verktyg för båtkonstruktion: börja från en jolle, eka, kanot, kajak, segelbåt, katamaran eller annat skrov, forma det med reglage och se det flyta i 3D."
+ },
+ "Pick a starting boat such as a skiff, canoe or sailboat, then shape the hull with the size and shape sliders.": {
+  "es": "Elige un barco inicial, como un esquife, una canoa o un velero, y da forma al casco con los controles de tamaño y forma.",
+  "ar": "اختر قاربًا للبداية مثل السكيف أو الكانو أو المركب الشراعي، ثم شكّل الهيكل بمنزلقات الحجم والشكل.",
+  "zh": "选择一艘起始船型，例如平底小船、独木舟或帆船，然后用尺寸和形状滑块调整船体。",
+  "sw": "Chagua boti ya kuanzia kama skiff, mtumbwi au mashua ya tanga, kisha unda umbo kwa vitelezi vya ukubwa na umbo.",
+  "sv": "Välj en startbåt som en eka, kanot eller segelbåt och forma sedan skrovet med reglagen för storlek och form."
+ },
+ "Press “Add-ons”.": {
+  "es": "Pulsa «Complementos».",
+  "ar": "اضغط «الإضافات».",
+  "zh": "点击“附加组件”。",
+  "sw": "Bonyeza “Viongezi”.",
+  "sv": "Tryck på ”Tillägg”."
+ },
+ "Add people, an engine, a mast or a cabin, watch it float in 3D, then check the lines plan, stability and plywood panels and download the files.": {
+  "es": "Añade personas, un motor, un mástil o una cabina, míralo flotar en 3D, revisa el plano de formas, la estabilidad y los paneles de contrachapado y descarga los archivos.",
+  "ar": "أضف أشخاصًا أو محركًا أو صاريًا أو مقصورة، وشاهده يطفو بشكل ثلاثي الأبعاد، ثم راجع مخطط الخطوط والثبات وألواح الخشب الرقائقي ونزّل الملفات.",
+  "zh": "添加人员、发动机、桅杆或船舱，看它在 3D 中漂浮，然后查看型线图、稳性和胶合板板件，并下载文件。",
+  "sw": "Ongeza watu, injini, mlingoti au kabati, litazame likielea katika 3D, kisha kagua mpango wa mistari, uthabiti na paneli za plywood na upakue faili.",
+  "sv": "Lägg till personer, motor, mast eller ruff, se båten flyta i 3D, kontrollera linjeritning, stabilitet och plywoodpaneler och ladda ner filerna."
+ },
+ "Can I build the boat from plywood?": {
+  "es": "¿Puedo construir el barco con contrachapado?",
+  "ar": "هل يمكنني بناء القارب من الخشب الرقائقي؟",
+  "zh": "我能用胶合板造这艘船吗？",
+  "sw": "Je, ninaweza kujenga boti kwa plywood?",
+  "sv": "Kan jag bygga båten av plywood?"
+ },
+ "Boat Forge gives plywood panel layouts, station molds, a lines plan and DXF, SVG, OBJ and STL files. Check the design with an experienced builder before going on the water.": {
+  "es": "Boat Forge da la disposición de los paneles de contrachapado, las cuadernas, un plano de formas y archivos DXF, SVG, OBJ y STL. Revisa el diseño con un constructor experimentado antes de salir al agua.",
+  "ar": "يقدّم Boat Forge تخطيطات ألواح الخشب الرقائقي وقوالب المقاطع ومخطط الخطوط وملفات DXF وSVG وOBJ وSTL. راجع التصميم مع صانع قوارب متمرّس قبل النزول إلى الماء.",
+  "zh": "Boat Forge 提供胶合板板件排版、站位模板、型线图以及 DXF、SVG、OBJ 和 STL 文件。下水之前，请让有经验的造船者检查设计。",
+  "sw": "Boat Forge hutoa mipangilio ya paneli za plywood, fomu za vituo, mpango wa mistari na faili za DXF, SVG, OBJ na STL. Kagua muundo pamoja na mjenzi mwenye uzoefu kabla ya kwenda majini.",
+  "sv": "Boat Forge ger plywoodpanelernas utläggning, spantmallar, en linjeritning och DXF-, SVG-, OBJ- och STL-filer. Låt en erfaren båtbyggare granska konstruktionen innan du ger dig ut på vattnet."
+ },
+ "About Boat Forge": {
+  "es": "Acerca de Boat Forge",
+  "ar": "عن Boat Forge",
+  "zh": "关于 Boat Forge",
+  "sw": "Kuhusu Boat Forge",
+  "sv": "Om Boat Forge"
+ },
+ "How to use Boat Forge": {
+  "es": "Cómo usar Boat Forge",
+  "ar": "طريقة استخدام Boat Forge",
+  "zh": "如何使用 Boat Forge",
+  "sw": "Jinsi ya kutumia Boat Forge",
+  "sv": "Så använder du Boat Forge"
+ },
+ "Is Boat Forge free?": {
+  "es": "¿Boat Forge es gratis?",
+  "ar": "هل Boat Forge مجاني؟",
+  "zh": "Boat Forge 免费吗？",
+  "sw": "Je, Boat Forge ni bure?",
+  "sv": "Är Boat Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

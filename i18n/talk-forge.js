@@ -21,3 +21,97 @@ I18N.phrases({
   "How to use Talk Forge": { es: "Cómo usar Talk Forge", ar: "كيفية استخدام Talk Forge", zh: "如何使用 Talk Forge", sw: "Jinsi ya kutumia Talk Forge", sv: "Så använder du Talk Forge" },
   "Talk Forge — make a photo talk from a script": { es: "Talk Forge — haz que una foto hable a partir de un guion", ar: "Talk Forge — اجعل صورة تتكلم من نص مكتوب", zh: "Talk Forge — 根据脚本让照片说话", sw: "Talk Forge — fanya picha iongee kutoka kwa hati", sv: "Talk Forge — få ett foto att prata utifrån ett manus" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Talk Forge makes a photo speak: upload a photo of one or more people, write a script, and their mouths move and eyes blink in sync with speech generated in your browser.": {
+  "es": "Talk Forge hace hablar a una foto: sube la foto de una o varias personas, escribe un guion y sus bocas se mueven y sus ojos parpadean al ritmo de una voz generada en tu navegador.",
+  "ar": "يجعل Talk Forge الصورة تتكلم: ارفع صورة لشخص أو أكثر، واكتب نصًا، فتتحرك أفواههم وترمش عيونهم بتزامن مع كلام يُولَّد في متصفحك.",
+  "zh": "Talk Forge 让照片开口说话：上传一人或多人的照片，写好台词，他们的嘴巴和眼睛就会随浏览器中生成的语音同步开合和眨动。",
+  "sw": "Talk Forge hufanya picha iongee: pakia picha ya mtu mmoja au zaidi, andika hati, na midomo yao husogea na macho kupepesa sambamba na hotuba inayotengenezwa kwenye kivinjari chako.",
+  "sv": "Talk Forge får ett foto att prata: ladda upp ett foto av en eller flera personer, skriv ett manus, så rör sig munnarna och ögonen blinkar i takt med tal som skapas i webbläsaren."
+ },
+ "Upload a photo and add or record the spoken audio.": {
+  "es": "Sube una foto y añade o graba el audio hablado.",
+  "ar": "ارفع صورة وأضف الصوت المنطوق أو سجّله.",
+  "zh": "上传照片，添加或录制语音。",
+  "sw": "Pakia picha na uongeze au urekodi sauti ya kuzungumza.",
+  "sv": "Ladda upp ett foto och lägg till eller spela in talet."
+ },
+ "Press “Create talking photo”.": {
+  "es": "Pulsa «Crear foto parlante».",
+  "ar": "اضغط «اصنع صورة متكلمة».",
+  "zh": "点击“生成会说话的照片”。",
+  "sw": "Bonyeza “Tengeneza picha inayoongea”.",
+  "sv": "Tryck på ”Skapa talande foto”."
+ },
+ "Preview the lip movement and export the finished video.": {
+  "es": "Previsualiza el movimiento de los labios y exporta el vídeo terminado.",
+  "ar": "عاين حركة الشفاه وصدّر الفيديو النهائي.",
+  "zh": "预览嘴型动作，然后导出完成的视频。",
+  "sw": "Hakiki msogeo wa midomo na uhamishe video iliyokamilika.",
+  "sv": "Förhandsgranska läpprörelserna och exportera den färdiga videon."
+ },
+ "Does Talk Forge use an AI video model?": {
+  "es": "¿Talk Forge usa un modelo de vídeo con IA?",
+  "ar": "هل يستخدم Talk Forge نموذج فيديو بالذكاء الاصطناعي؟",
+  "zh": "Talk Forge 使用 AI 视频模型吗？",
+  "sw": "Je, Talk Forge hutumia modeli ya video ya AI?",
+  "sv": "Använder Talk Forge en AI-videomodell?"
+ },
+ "No. The lip movement and the speech are made right in your browser, so no account or AI video service is needed.": {
+  "es": "No. El movimiento de los labios y la voz se crean en tu navegador, así que no hace falta cuenta ni servicio de vídeo con IA.",
+  "ar": "لا. تُصنع حركة الشفاه والكلام داخل متصفحك، لذا لا حاجة إلى حساب أو خدمة فيديو بالذكاء الاصطناعي.",
+  "zh": "不使用。嘴型动作和语音都直接在浏览器中生成，因此不需要账号，也不需要 AI 视频服务。",
+  "sw": "Hapana. Msogeo wa midomo na hotuba hutengenezwa moja kwa moja kwenye kivinjari chako, hivyo hakuna haja ya akaunti wala huduma ya video ya AI.",
+  "sv": "Nej. Läpprörelserna och talet skapas direkt i webbläsaren, så inget konto eller AI-videotjänst behövs."
+ },
+ "About Talk Forge": {
+  "es": "Acerca de Talk Forge",
+  "ar": "عن Talk Forge",
+  "zh": "关于 Talk Forge",
+  "sw": "Kuhusu Talk Forge",
+  "sv": "Om Talk Forge"
+ },
+ "How to use Talk Forge": {
+  "es": "Cómo usar Talk Forge",
+  "ar": "طريقة استخدام Talk Forge",
+  "zh": "如何使用 Talk Forge",
+  "sw": "Jinsi ya kutumia Talk Forge",
+  "sv": "Så använder du Talk Forge"
+ },
+ "Is Talk Forge free?": {
+  "es": "¿Talk Forge es gratis?",
+  "ar": "هل Talk Forge مجاني؟",
+  "zh": "Talk Forge 免费吗？",
+  "sw": "Je, Talk Forge ni bure?",
+  "sv": "Är Talk Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

@@ -117,3 +117,90 @@ I18N.phrases({
   "Min": { es: "min", ar: "دقيقة", zh: "分钟", sw: "Dak", sv: "min" },
   "Delete all your focus history?": { es: "¿Borrar todo tu historial de concentración?", ar: "هل تريد حذف كل سجل تركيزك؟", zh: "删除所有专注记录？", sw: "Futa historia yako yote ya umakini?", sv: "Radera hela din fokushistorik?" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Focus Forge is a Pomodoro timer with focus and break sessions, a task list, rain and noise sounds made on your device, desktop alerts and daily focus stats.": {
+  "es": "Focus Forge es un temporizador Pomodoro con sesiones de concentración y descanso, una lista de tareas, sonidos de lluvia y ruido creados en tu dispositivo, avisos en el escritorio y estadísticas diarias.",
+  "ar": "Focus Forge مؤقّت بومودورو بجلسات تركيز واستراحة، وقائمة مهام، وأصوات مطر وضجيج تُصنع على جهازك، وتنبيهات على سطح المكتب، وإحصاءات تركيز يومية.",
+  "zh": "Focus Forge 是一款番茄钟，带专注和休息时段、任务清单、在你设备上生成的雨声和白噪音、桌面提醒以及每日专注统计。",
+  "sw": "Focus Forge ni kipima muda cha Pomodoro chenye vipindi vya umakini na mapumziko, orodha ya kazi, sauti za mvua na kelele zinazotengenezwa kwenye kifaa chako, arifa za kompyuta na takwimu za kila siku.",
+  "sv": "Focus Forge är en Pomodoro-timer med fokus- och pauspass, en uppgiftslista, regn- och brusljud som skapas på din enhet, skrivbordsaviseringar och daglig fokusstatistik."
+ },
+ "Add what you want to work on to the task list and pick a session length such as 25 / 5.": {
+  "es": "Añade a la lista lo que quieres hacer y elige una duración de sesión, como 25 / 5.",
+  "ar": "أضف ما تريد العمل عليه إلى قائمة المهام واختر طول الجلسة مثل 25 / 5.",
+  "zh": "把要做的事加入任务清单，并选择时段长度，例如 25 / 5。",
+  "sw": "Ongeza unachotaka kufanyia kazi kwenye orodha ya kazi na uchague urefu wa kipindi kama 25 / 5.",
+  "sv": "Lägg till det du vill jobba med i uppgiftslistan och välj passlängd, till exempel 25 / 5."
+ },
+ "Press “Start”.": {
+  "es": "Pulsa «Empezar».",
+  "ar": "اضغط «ابدأ».",
+  "zh": "点击“开始”。",
+  "sw": "Bonyeza “Anza”.",
+  "sv": "Tryck på ”Starta”."
+ },
+ "Work until the chime, take the short break, and see your focus minutes add up in Your focus.": {
+  "es": "Trabaja hasta que suene el aviso, toma el descanso corto y mira cómo suman tus minutos de concentración.",
+  "ar": "اعمل حتى يرنّ الجرس، وخذ الاستراحة القصيرة، وشاهد دقائق تركيزك تتراكم.",
+  "zh": "专注工作直到提示音响起，休息一小会儿，看你的专注分钟数不断增加。",
+  "sw": "Fanya kazi hadi kengele ilie, pumzika kidogo, na uone dakika zako za umakini zikiongezeka.",
+  "sv": "Jobba tills signalen hörs, ta den korta pausen och se dina fokusminuter växa."
+ },
+ "Can I change the session length?": {
+  "es": "¿Puedo cambiar la duración de las sesiones?",
+  "ar": "هل يمكنني تغيير طول الجلسة؟",
+  "zh": "可以修改时段长度吗？",
+  "sw": "Je, ninaweza kubadilisha urefu wa kipindi?",
+  "sv": "Kan jag ändra passlängden?"
+ },
+ "Yes. Choose 25 / 5, 50 / 10 or set your own focus and break times.": {
+  "es": "Sí. Elige 25 / 5, 50 / 10 o pon tus propios tiempos de concentración y descanso.",
+  "ar": "نعم. اختر 25 / 5 أو 50 / 10، أو حدّد أوقات التركيز والاستراحة بنفسك.",
+  "zh": "可以。选择 25 / 5、50 / 10，或自行设定专注和休息时长。",
+  "sw": "Ndiyo. Chagua 25 / 5, 50 / 10 au weka muda wako mwenyewe wa umakini na mapumziko.",
+  "sv": "Ja. Välj 25 / 5, 50 / 10 eller ställ in egna fokus- och paustider."
+ },
+ "About Focus Forge": {
+  "es": "Acerca de Focus Forge",
+  "ar": "عن Focus Forge",
+  "zh": "关于 Focus Forge",
+  "sw": "Kuhusu Focus Forge",
+  "sv": "Om Focus Forge"
+ },
+ "How to use Focus Forge": {
+  "es": "Cómo usar Focus Forge",
+  "ar": "طريقة استخدام Focus Forge",
+  "zh": "如何使用 Focus Forge",
+  "sw": "Jinsi ya kutumia Focus Forge",
+  "sv": "Så använder du Focus Forge"
+ },
+ "Is Focus Forge free?": {
+  "es": "¿Focus Forge es gratis?",
+  "ar": "هل Focus Forge مجاني؟",
+  "zh": "Focus Forge 免费吗？",
+  "sw": "Je, Focus Forge ni bure?",
+  "sv": "Är Focus Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

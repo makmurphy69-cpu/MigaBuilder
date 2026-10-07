@@ -287,3 +287,97 @@ I18N.phrases({
   "The list word is": { es: "La palabra de la lista es", ar: "كلمة القائمة هي", zh: "清单中的单词是", sw: "Neno la orodha ni", sv: "Ordet i listan är" },
   "Your own word is fine if its consonant sounds match.": { es: "Tu propia palabra vale si sus sonidos consonánticos coinciden.", ar: "كلمتك الخاصة مقبولة إذا تطابقت أصواتها الساكنة.", zh: "如果辅音发音一致，你自己的单词也可以。", sw: "Neno lako mwenyewe linakubalika kama sauti zake za konsonanti zinalingana.", sv: "Ditt eget ord går bra om konsonantljuden stämmer." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Memory Forge trains your memory with number and symbol cards across 30 levels, the chimp test, pairs, dual n-back, Corsi sequences and word lists, plus a guide to memory techniques.": {
+  "es": "Memory Forge entrena tu memoria con tarjetas de números y símbolos en 30 niveles, el test del chimpancé, parejas, dual n-back, secuencias de Corsi y listas de palabras, además de una guía de técnicas de memoria.",
+  "ar": "يدرّب Memory Forge ذاكرتك ببطاقات الأرقام والرموز عبر 30 مستوى، واختبار الشمبانزي، والأزواج، وdual n-back، وتسلسلات كورسي، وقوائم الكلمات، إضافة إلى دليل لتقنيات الذاكرة.",
+  "zh": "Memory Forge 用 30 个等级的数字和符号卡片、黑猩猩测试、配对、双重 n-back、Corsi 序列和单词表训练你的记忆，并附有记忆技巧指南。",
+  "sw": "Memory Forge hufunza kumbukumbu yako kwa kadi za namba na alama katika viwango 30, jaribio la sokwe, jozi, dual n-back, mfuatano wa Corsi na orodha za maneno, pamoja na mwongozo wa mbinu za kumbukumbu.",
+  "sv": "Memory Forge tränar ditt minne med siffer- och symbolkort i 30 nivåer, schimpanstestet, par, dual n-back, Corsi-sekvenser och ordlistor, plus en guide till minnestekniker."
+ },
+ "Choose a game such as Number cards, the Chimp test or the Word list, pick a level or set your own card counts and times, and choose with or without a clock.": {
+  "es": "Elige un juego, como las tarjetas de números, el test del chimpancé o la lista de palabras, escoge un nivel o pon tus propias cantidades y tiempos, y elige con o sin reloj.",
+  "ar": "اختر لعبة مثل بطاقات الأرقام أو اختبار الشمبانزي أو قائمة الكلمات، واختر مستوى أو حدّد عدد البطاقات والأوقات بنفسك، واختر مع المؤقت أو دونه.",
+  "zh": "选择一个游戏，例如数字卡片、黑猩猩测试或单词表，选择等级或自行设定卡片数量和时间，并选择计时或不计时。",
+  "sw": "Chagua mchezo kama Kadi za namba, Jaribio la sokwe au Orodha ya maneno, chagua kiwango au weka idadi na muda wako mwenyewe, na uchague ukiwa na saa au bila.",
+  "sv": "Välj ett spel som Sifferkort, Schimpanstestet eller Ordlistan, välj en nivå eller ställ in egna antal kort och tider, och välj med eller utan klocka."
+ },
+ "Press “Start”.": {
+  "es": "Pulsa «Empezar».",
+  "ar": "اضغط «ابدأ».",
+  "zh": "点击“开始”。",
+  "sw": "Bonyeza “Anza”.",
+  "sv": "Tryck på ”Starta”."
+ },
+ "Memorise the cards, put them back in order, check your stars and move on to the next level.": {
+  "es": "Memoriza las tarjetas, ponlas de nuevo en orden, mira tus estrellas y pasa al siguiente nivel.",
+  "ar": "احفظ البطاقات، وأعدها إلى ترتيبها، وتفقّد نجومك، وانتقل إلى المستوى التالي.",
+  "zh": "记住卡片，把它们按顺序放回，查看你获得的星星，然后进入下一级。",
+  "sw": "Kariri kadi, zirudishe kwa mpangilio, angalia nyota zako na uendelee kwenye kiwango kinachofuata.",
+  "sv": "Lär dig korten utantill, lägg tillbaka dem i ordning, kolla dina stjärnor och gå vidare till nästa nivå."
+ },
+ "Does it teach memory techniques?": {
+  "es": "¿Enseña técnicas de memoria?",
+  "ar": "هل يعلّم تقنيات الذاكرة؟",
+  "zh": "它会教记忆技巧吗？",
+  "sw": "Je, hufundisha mbinu za kumbukumbu?",
+  "sv": "Lär den ut minnestekniker?"
+ },
+ "Yes. A techniques guide with a 4-week plan, plus memory palace and Major system trainers.": {
+  "es": "Sí. Una guía de técnicas con un plan de 4 semanas, además de entrenadores del palacio de la memoria y del sistema mayor.",
+  "ar": "نعم. دليل للتقنيات مع خطة من 4 أسابيع، إضافة إلى مدرّبين لقصر الذاكرة والنظام الرئيسي.",
+  "zh": "会。有一份附带 4 周计划的技巧指南，还有记忆宫殿和数字编码（Major 系统）训练。",
+  "sw": "Ndiyo. Mwongozo wa mbinu wenye mpango wa wiki 4, pamoja na wakufunzi wa jumba la kumbukumbu na mfumo wa Major.",
+  "sv": "Ja. En teknikguide med en 4-veckorsplan, plus tränare för minnespalatset och Major-systemet."
+ },
+ "About Memory Forge": {
+  "es": "Acerca de Memory Forge",
+  "ar": "عن Memory Forge",
+  "zh": "关于 Memory Forge",
+  "sw": "Kuhusu Memory Forge",
+  "sv": "Om Memory Forge"
+ },
+ "How to use Memory Forge": {
+  "es": "Cómo usar Memory Forge",
+  "ar": "طريقة استخدام Memory Forge",
+  "zh": "如何使用 Memory Forge",
+  "sw": "Jinsi ya kutumia Memory Forge",
+  "sv": "Så använder du Memory Forge"
+ },
+ "Is Memory Forge free?": {
+  "es": "¿Memory Forge es gratis?",
+  "ar": "هل Memory Forge مجاني؟",
+  "zh": "Memory Forge 免费吗？",
+  "sw": "Je, Memory Forge ni bure?",
+  "sv": "Är Memory Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

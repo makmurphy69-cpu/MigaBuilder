@@ -120,3 +120,97 @@ I18N.phrases({
   "CARTOON FORGE — VIDEO READY TO SHARE": { es: "CARTOON FORGE — VÍDEO LISTO PARA COMPARTIR", ar: "CARTOON FORGE — الفيديو جاهز للمشاركة", zh: "CARTOON FORGE — 视频可以分享了", sw: "CARTOON FORGE — VIDEO IKO TAYARI KUSHIRIKIWA", sv: "CARTOON FORGE — VIDEON ÄR KLAR ATT DELA" },
   "CARTOON FORGE — RECORDING FAILED": { es: "CARTOON FORGE — LA GRABACIÓN FALLÓ", ar: "CARTOON FORGE — فشل التسجيل", zh: "CARTOON FORGE — 录制失败", sw: "CARTOON FORGE — KUREKODI KUMESHINDWA", sv: "CARTOON FORGE — INSPELNINGEN MISSLYCKADES" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Cartoon Forge turns a story into a playable animated cartoon. Describe the characters, setting and dialogue, refine the scenes, then download it or record it as a video.": {
+  "es": "Cartoon Forge convierte una historia en unos dibujos animados que se pueden reproducir. Describe los personajes, el escenario y los diálogos, mejora las escenas y descárgalos o grábalos como vídeo.",
+  "ar": "يحوّل Cartoon Forge القصة إلى رسوم متحركة قابلة للتشغيل. صف الشخصيات والمكان والحوار، وحسّن المشاهد، ثم نزّلها أو سجّلها كفيديو.",
+  "zh": "Cartoon Forge 把一个故事变成可播放的动画片。描述角色、场景和对白，完善各个镜头，然后下载或录制成视频。",
+  "sw": "Cartoon Forge hugeuza hadithi kuwa katuni inayochezwa. Eleza wahusika, mazingira na mazungumzo, boresha matukio, kisha ipakue au irekodi kama video.",
+  "sv": "Cartoon Forge gör en berättelse till en tecknad film som kan spelas upp. Beskriv figurer, miljö och repliker, finslipa scenerna och ladda sedan ner den eller spela in den som video."
+ },
+ "Describe the characters, setting, story, dialogue, and ending.": {
+  "es": "Describe los personajes, el escenario, la historia, los diálogos y el final.",
+  "ar": "صف الشخصيات والمكان والقصة والحوار والنهاية.",
+  "zh": "描述角色、场景、故事、对白和结局。",
+  "sw": "Eleza wahusika, mazingira, hadithi, mazungumzo na mwisho.",
+  "sv": "Beskriv figurerna, miljön, handlingen, replikerna och slutet."
+ },
+ "Press “Generate cartoon”.": {
+  "es": "Pulsa «Generar dibujos animados».",
+  "ar": "اضغط «أنشئ الرسوم المتحركة».",
+  "zh": "点击“生成动画片”。",
+  "sw": "Bonyeza “Tengeneza katuni”.",
+  "sv": "Tryck på ”Skapa tecknad film”."
+ },
+ "Play the cartoon, refine scenes, then record or download it.": {
+  "es": "Reproduce los dibujos, mejora las escenas y grábalos o descárgalos.",
+  "ar": "شغّل الرسوم المتحركة وحسّن المشاهد، ثم سجّلها أو نزّلها.",
+  "zh": "播放动画片、完善镜头，然后录制或下载。",
+  "sw": "Cheza katuni, boresha matukio, kisha irekodi au uipakue.",
+  "sv": "Spela upp filmen, finslipa scenerna och spela sedan in eller ladda ner den."
+ },
+ "Can I turn the cartoon into a video?": {
+  "es": "¿Puedo convertir los dibujos en un vídeo?",
+  "ar": "هل يمكنني تحويل الرسوم المتحركة إلى فيديو؟",
+  "zh": "我可以把动画片变成视频吗？",
+  "sw": "Je, ninaweza kugeuza katuni kuwa video?",
+  "sv": "Kan jag göra den tecknade filmen till en video?"
+ },
+ "Yes. Record it as a WebM video right in the page, or download the cartoon as an HTML file.": {
+  "es": "Sí. Grábalos como vídeo WebM en la propia página o descárgalos como archivo HTML.",
+  "ar": "نعم. سجّلها كفيديو WebM داخل الصفحة نفسها، أو نزّلها كملف HTML.",
+  "zh": "可以。直接在页面里录制为 WebM 视频，或把动画片下载为 HTML 文件。",
+  "sw": "Ndiyo. Irekodi kama video ya WebM moja kwa moja kwenye ukurasa, au ipakue kama faili la HTML.",
+  "sv": "Ja. Spela in den som WebM-video direkt på sidan eller ladda ner den som HTML-fil."
+ },
+ "About Cartoon Forge": {
+  "es": "Acerca de Cartoon Forge",
+  "ar": "عن Cartoon Forge",
+  "zh": "关于 Cartoon Forge",
+  "sw": "Kuhusu Cartoon Forge",
+  "sv": "Om Cartoon Forge"
+ },
+ "How to use Cartoon Forge": {
+  "es": "Cómo usar Cartoon Forge",
+  "ar": "طريقة استخدام Cartoon Forge",
+  "zh": "如何使用 Cartoon Forge",
+  "sw": "Jinsi ya kutumia Cartoon Forge",
+  "sv": "Så använder du Cartoon Forge"
+ },
+ "Is Cartoon Forge free?": {
+  "es": "¿Cartoon Forge es gratis?",
+  "ar": "هل Cartoon Forge مجاني؟",
+  "zh": "Cartoon Forge 免费吗？",
+  "sw": "Je, Cartoon Forge ni bure?",
+  "sv": "Är Cartoon Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

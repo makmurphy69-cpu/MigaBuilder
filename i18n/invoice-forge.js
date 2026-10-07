@@ -22,3 +22,97 @@ I18N.phrases({
   "How to use Invoice Forge": { es: "Cómo usar Invoice Forge", ar: "كيفية استخدام Invoice Forge", zh: "如何使用 Invoice Forge", sw: "Jinsi ya kutumia Invoice Forge", sv: "Så använder du Invoice Forge" },
   "Invoice Forge — free quote & invoice generator": { es: "Invoice Forge — generador de presupuestos y facturas gratis", ar: "Invoice Forge — منشئ عروض أسعار وفواتير مجاني", zh: "Invoice Forge — 免费报价单和发票生成器", sw: "Invoice Forge — kitengeneza nukuu za bei na ankara cha bure", sv: "Invoice Forge — gratis generator för offerter och fakturor" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Invoice Forge makes clean quotes and invoices. Enter your business, your client and the line items, and it adds up the tax and totals.": {
+  "es": "Invoice Forge crea presupuestos y facturas limpios. Introduce tu empresa, tu cliente y las líneas, y suma los impuestos y los totales.",
+  "ar": "يصنع Invoice Forge عروض أسعار وفواتير أنيقة. أدخل نشاطك التجاري وعميلك والبنود، فيحسب الضرائب والإجماليات.",
+  "zh": "Invoice Forge 制作整洁的报价单和发票。填写你的公司、客户和明细项目，它会算出税费和合计。",
+  "sw": "Invoice Forge hutengeneza nukuu na ankara safi. Ingiza biashara yako, mteja wako na vipengee, nayo hujumlisha kodi na jumla.",
+  "sv": "Invoice Forge gör snygga offerter och fakturor. Fyll i ditt företag, din kund och raderna så räknar den ut moms och summor."
+ },
+ "Enter the seller, customer, line items, prices, and payment terms.": {
+  "es": "Introduce el vendedor, el cliente, las líneas, los precios y las condiciones de pago.",
+  "ar": "أدخل البائع والعميل والبنود والأسعار وشروط الدفع.",
+  "zh": "填写卖方、客户、明细项目、价格和付款条件。",
+  "sw": "Ingiza muuzaji, mteja, vipengee, bei na masharti ya malipo.",
+  "sv": "Fyll i säljare, kund, rader, priser och betalningsvillkor."
+ },
+ "Press “Create invoice”.": {
+  "es": "Pulsa «Crear factura».",
+  "ar": "اضغط «أنشئ الفاتورة».",
+  "zh": "点击“创建发票”。",
+  "sw": "Bonyeza “Unda ankara”.",
+  "sv": "Tryck på ”Skapa faktura”."
+ },
+ "Verify the totals and download or print the invoice.": {
+  "es": "Comprueba los totales y descarga o imprime la factura.",
+  "ar": "تحقّق من الإجماليات ونزّل الفاتورة أو اطبعها.",
+  "zh": "核对合计金额，然后下载或打印发票。",
+  "sw": "Hakiki jumla na upakue au uchapishe ankara.",
+  "sv": "Kontrollera summorna och ladda ner eller skriv ut fakturan."
+ },
+ "Can I save the invoice as a PDF?": {
+  "es": "¿Puedo guardar la factura en PDF?",
+  "ar": "هل يمكنني حفظ الفاتورة بصيغة PDF؟",
+  "zh": "我可以把发票保存为 PDF 吗？",
+  "sw": "Je, ninaweza kuhifadhi ankara kama PDF?",
+  "sv": "Kan jag spara fakturan som PDF?"
+ },
+ "Yes. Print it and choose Save as PDF in the print dialog, or download it as an HTML file.": {
+  "es": "Sí. Imprímela y elige Guardar como PDF en el cuadro de impresión, o descárgala como archivo HTML.",
+  "ar": "نعم. اطبعها واختر «حفظ كـ PDF» في نافذة الطباعة، أو نزّلها كملف HTML.",
+  "zh": "可以。打印时在打印对话框中选择“另存为 PDF”，或把它下载为 HTML 文件。",
+  "sw": "Ndiyo. Ichapishe na uchague Hifadhi kama PDF kwenye kidirisha cha kuchapisha, au uipakue kama faili la HTML.",
+  "sv": "Ja. Skriv ut den och välj Spara som PDF i utskriftsrutan, eller ladda ner den som HTML-fil."
+ },
+ "About Invoice Forge": {
+  "es": "Acerca de Invoice Forge",
+  "ar": "عن Invoice Forge",
+  "zh": "关于 Invoice Forge",
+  "sw": "Kuhusu Invoice Forge",
+  "sv": "Om Invoice Forge"
+ },
+ "How to use Invoice Forge": {
+  "es": "Cómo usar Invoice Forge",
+  "ar": "طريقة استخدام Invoice Forge",
+  "zh": "如何使用 Invoice Forge",
+  "sw": "Jinsi ya kutumia Invoice Forge",
+  "sv": "Så använder du Invoice Forge"
+ },
+ "Is Invoice Forge free?": {
+  "es": "¿Invoice Forge es gratis?",
+  "ar": "هل Invoice Forge مجاني؟",
+  "zh": "Invoice Forge 免费吗？",
+  "sw": "Je, Invoice Forge ni bure?",
+  "sv": "Är Invoice Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

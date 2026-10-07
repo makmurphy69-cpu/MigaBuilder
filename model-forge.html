@@ -2,20 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/model-forge.html">
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
+<script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Model Forge — free 3D model &amp; 3D-print design tool</title>
 <meta name="description" content="Build 3D shapes, combine them with union, subtract and intersect, then export a real .stl file ready for any 3D printer's slicer — right in your browser, free, no account needed.">
@@ -154,6 +141,7 @@
   footer a { color: rgba(237, 234, 224, 0.7); }
 </style>
 <link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I 3D-print the model?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Export an STL file and open it in your printer's slicer."}}, {"@type": "Question", "name": "Is Model Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head>
 <body>
 
@@ -251,6 +239,20 @@
     <p class="field hint" data-i18n="exportHint">Exports every visible shape as one file. Open the .stl in any slicer (Cura, PrusaSlicer, Bambu Studio, etc.) to print it.</p>
   </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Model Forge</h2>
+  <p>Model Forge builds 3D shapes, combines them with union, subtract and intersect, and exports a real STL file for any 3D printer&#x27;s slicer.</p>
+  <h3>How to use Model Forge</h3>
+  <ol><li>Describe the 3D object and set its measurements and shape.</li><li>Press “Generate model”.</li><li>Inspect it from every angle and export the printable model.</li></ol>
+  <h3>Can I 3D-print the model?</h3>
+  <p>Yes. Export an STL file and open it in your printer&#x27;s slicer.</p>
+  <h3>Is Model Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="cad-forge.html">CAD Forge</a> · <a href="3d-game-forge.html">3D Game Forge</a> · <a href="boat-forge.html">Boat Forge</a></p>
+</section>
+
 
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a>. Everything you build stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
 <p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/model-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>

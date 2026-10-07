@@ -35,3 +35,97 @@ I18N.phrases({
   "How to use Paint Forge": { es: "Cómo usar Paint Forge", ar: "كيفية استخدام Paint Forge", zh: "如何使用 Paint Forge", sw: "Jinsi ya kutumia Paint Forge", sv: "Så använder du Paint Forge" },
   "Paint Forge — free layered image editor": { es: "Paint Forge — editor de imágenes con capas gratis", ar: "Paint Forge — محرر صور مجاني بالطبقات", zh: "Paint Forge — 免费的分层图像编辑器", sw: "Paint Forge — kihariri picha cha bure chenye tabaka", sv: "Paint Forge — gratis bildredigerare med lager" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Paint Forge is a layered image editor with brushes, shapes, text, fill, selection, adjustments and undo/redo.": {
+  "es": "Paint Forge es un editor de imágenes por capas con pinceles, formas, texto, relleno, selección, ajustes y deshacer/rehacer.",
+  "ar": "Paint Forge محرر صور بالطبقات مع فُرش وأشكال ونصوص وتعبئة وتحديد وتعديلات وتراجع/إعادة.",
+  "zh": "Paint Forge 是一款支持图层的图像编辑器，有画笔、形状、文字、填充、选区、调整以及撤销/重做。",
+  "sw": "Paint Forge ni kihariri picha chenye matabaka, brashi, maumbo, maandishi, ujazaji, uteuzi, marekebisho na tendua/rudia.",
+  "sv": "Paint Forge är en bildredigerare med lager, penslar, former, text, fyllning, markering, justeringar och ångra/gör om."
+ },
+ "Open an image or blank canvas and choose the editing tools.": {
+  "es": "Abre una imagen o un lienzo en blanco y elige las herramientas de edición.",
+  "ar": "افتح صورة أو لوحة فارغة واختر أدوات التحرير.",
+  "zh": "打开一张图片或空白画布，选择编辑工具。",
+  "sw": "Fungua picha au turubai tupu na uchague zana za kuhariri.",
+  "sv": "Öppna en bild eller en tom duk och välj redigeringsverktyg."
+ },
+ "Press “Apply edit”.": {
+  "es": "Pulsa «Aplicar edición».",
+  "ar": "اضغط «طبّق التعديل».",
+  "zh": "点击“应用编辑”。",
+  "sw": "Bonyeza “Tumia uhariri”.",
+  "sv": "Tryck på ”Verkställ redigering”."
+ },
+ "Work with layers, compare the result, and export the image.": {
+  "es": "Trabaja con capas, compara el resultado y exporta la imagen.",
+  "ar": "اعمل بالطبقات وقارن النتيجة وصدّر الصورة.",
+  "zh": "使用图层编辑，比较效果，然后导出图片。",
+  "sw": "Fanya kazi na matabaka, linganisha matokeo, na uhamishe picha.",
+  "sv": "Arbeta med lager, jämför resultatet och exportera bilden."
+ },
+ "Does it support layers?": {
+  "es": "¿Admite capas?",
+  "ar": "هل يدعم الطبقات؟",
+  "zh": "支持图层吗？",
+  "sw": "Je, inakubali matabaka?",
+  "sv": "Stöder den lager?"
+ },
+ "Yes. Work with layers, then export the finished image.": {
+  "es": "Sí. Trabaja con capas y exporta la imagen terminada.",
+  "ar": "نعم. اعمل بالطبقات ثم صدّر الصورة النهائية.",
+  "zh": "支持。使用图层编辑，然后导出完成的图片。",
+  "sw": "Ndiyo. Fanya kazi na matabaka, kisha uhamishe picha iliyokamilika.",
+  "sv": "Ja. Arbeta med lager och exportera sedan den färdiga bilden."
+ },
+ "About Paint Forge": {
+  "es": "Acerca de Paint Forge",
+  "ar": "عن Paint Forge",
+  "zh": "关于 Paint Forge",
+  "sw": "Kuhusu Paint Forge",
+  "sv": "Om Paint Forge"
+ },
+ "How to use Paint Forge": {
+  "es": "Cómo usar Paint Forge",
+  "ar": "طريقة استخدام Paint Forge",
+  "zh": "如何使用 Paint Forge",
+  "sw": "Jinsi ya kutumia Paint Forge",
+  "sv": "Så använder du Paint Forge"
+ },
+ "Is Paint Forge free?": {
+  "es": "¿Paint Forge es gratis?",
+  "ar": "هل Paint Forge مجاني؟",
+  "zh": "Paint Forge 免费吗？",
+  "sw": "Je, Paint Forge ni bure?",
+  "sv": "Är Paint Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

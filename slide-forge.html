@@ -2,20 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/slide-forge.html">
-<script>
-(function () {
-  try {
-    var url = (typeof window !== 'undefined' && window.__VISITS_URL_OVERRIDE) || 'https://migabuilder-visits.makmurphy69.workers.dev';
-    var page = location.pathname.split('/').pop() || 'index.html';
-    var body = JSON.stringify({ page: page });
-    if (navigator.sendBeacon) {
-      navigator.sendBeacon(url + '/hit', new Blob([body], { type: 'text/plain' }));
-    } else {
-      fetch(url + '/hit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body, keepalive: true }).catch(function () {});
-    }
-  } catch (e) { /* visit counting must never break the page */ }
-})();
-</script>
+<script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Slide Forge — free PowerPoint generator</title>
 <meta name="description" content="Describe a presentation, choose how many slides you want, add your own photos and videos to specific slides, then download a real .pptx — built live in your browser, free.">
@@ -203,6 +190,7 @@
 </style>
 <link rel="stylesheet" href="tutorials.css">
 <script src="brand-kit.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it make a real PowerPoint file?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. You download a .pptx file that opens in PowerPoint, Keynote and Google Slides."}}, {"@type": "Question", "name": "Is Slide Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
 </head>
 <body>
 
@@ -303,6 +291,20 @@
     <p class="hint" data-i18n-html="mediaHint" style="color: rgba(237,234,224,0.55); margin-top: 8px;">Photos and videos you attach stay in your browser and are embedded directly into the .pptx file — nothing is uploaded anywhere. For best PowerPoint compatibility, use .mp4 video clips; .webm clips (e.g. from Record Forge or Clip Forge) often play in Google Slides but not always in Microsoft PowerPoint. Large videos make for a large file — trim clips short in <a href="clip-forge.html" style="color:var(--line-cyan);">Clip Forge</a> first if needed.</p>
   </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Slide Forge</h2>
+  <p>Slide Forge writes a presentation from a description. Choose the number of slides, add your own photos and videos to specific slides, and download a real PowerPoint file.</p>
+  <h3>How to use Slide Forge</h3>
+  <ol><li>Describe the topic, audience, purpose, and number of slides.</li><li>Press “Generate presentation”.</li><li>Review each slide and download the PowerPoint file.</li></ol>
+  <h3>Does it make a real PowerPoint file?</h3>
+  <p>Yes. You download a .pptx file that opens in PowerPoint, Keynote and Google Slides.</p>
+  <h3>Is Slide Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="picture-forge.html">Picture Forge</a> · <a href="pdf-forge.html">PDF Forge</a> · <a href="record-forge.html">Record Forge</a></p>
+</section>
+
 
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a> — free to use, no account needed. Nothing you type or attach here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
 <p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/slide-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>

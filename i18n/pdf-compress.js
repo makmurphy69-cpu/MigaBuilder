@@ -41,3 +41,97 @@ I18N.phrases({
   "This PDF is password-protected. Remove the password first.": { es: "Este PDF está protegido con contraseña. Quita primero la contraseña.", ar: "ملف PDF هذا محمي بكلمة مرور. أزل كلمة المرور أولًا.", zh: "此 PDF 受密码保护。请先移除密码。", sw: "PDF hii inalindwa kwa nenosiri. Ondoa nenosiri kwanza.", sv: "Den här PDF:en är lösenordsskyddad. Ta bort lösenordet först." },
   "Could not compress this PDF:": { es: "No se pudo comprimir este PDF:", ar: "تعذّر ضغط ملف PDF هذا:", zh: "无法压缩此 PDF：", sw: "Imeshindwa kubana PDF hii:", sv: "Kunde inte komprimera den här PDF:en:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Compress PDF makes PDF files smaller for email and upload limits. Choose strong, recommended or light compression and compare the sizes before downloading.": {
+  "es": "Compress PDF reduce el tamaño de los PDF para los límites del correo y de las subidas. Elige compresión fuerte, recomendada o ligera y compara los tamaños antes de descargar.",
+  "ar": "يصغّر Compress PDF ملفات PDF لتناسب حدود البريد الإلكتروني والرفع. اختر ضغطًا قويًا أو موصى به أو خفيفًا، وقارن الأحجام قبل التنزيل.",
+  "zh": "Compress PDF 把 PDF 文件变小，以满足邮件和上传的大小限制。选择强、推荐或轻度压缩，下载前比较文件大小。",
+  "sw": "Compress PDF hupunguza ukubwa wa faili za PDF kwa mipaka ya barua pepe na upakiaji. Chagua mbano mkali, unaopendekezwa au mwepesi na ulinganishe ukubwa kabla ya kupakua.",
+  "sv": "Compress PDF gör PDF-filer mindre för e-post- och uppladdningsgränser. Välj stark, rekommenderad eller lätt komprimering och jämför storlekarna innan du laddar ner."
+ },
+ "Choose the PDF you want to make smaller and pick a compression level.": {
+  "es": "Elige el PDF que quieres reducir y escoge un nivel de compresión.",
+  "ar": "اختر ملف PDF الذي تريد تصغيره وحدّد مستوى الضغط.",
+  "zh": "选择要压缩的 PDF，并选择压缩级别。",
+  "sw": "Chagua PDF unayotaka kupunguza na uchague kiwango cha mbano.",
+  "sv": "Välj den PDF du vill krympa och välj en komprimeringsnivå."
+ },
+ "Press “Compress PDF”.": {
+  "es": "Pulsa «Comprimir PDF».",
+  "ar": "اضغط «اضغط ملف PDF».",
+  "zh": "点击“压缩 PDF”。",
+  "sw": "Bonyeza “Bana PDF”.",
+  "sv": "Tryck på ”Komprimera PDF”."
+ },
+ "Compare the sizes and download the compressed copy.": {
+  "es": "Compara los tamaños y descarga la copia comprimida.",
+  "ar": "قارن الأحجام ونزّل النسخة المضغوطة.",
+  "zh": "比较文件大小，然后下载压缩后的副本。",
+  "sw": "Linganisha ukubwa na upakue nakala iliyobanwa.",
+  "sv": "Jämför storlekarna och ladda ner den komprimerade kopian."
+ },
+ "Will compression make my PDF blurry?": {
+  "es": "¿La compresión dejará borroso mi PDF?",
+  "ar": "هل سيجعل الضغط ملف PDF ضبابيًا؟",
+  "zh": "压缩会让 PDF 变模糊吗？",
+  "sw": "Je, mbano utafanya PDF yangu kufifia?",
+  "sv": "Blir min PDF suddig av komprimeringen?"
+ },
+ "Light compression keeps images sharp; strong compression gives the smallest file. Compare the sizes and check the result before you download.": {
+  "es": "La compresión ligera mantiene nítidas las imágenes; la fuerte da el archivo más pequeño. Compara los tamaños y revisa el resultado antes de descargar.",
+  "ar": "يحافظ الضغط الخفيف على وضوح الصور؛ ويعطي الضغط القوي أصغر ملف. قارن الأحجام وتحقّق من النتيجة قبل التنزيل.",
+  "zh": "轻度压缩能保持图片清晰；强压缩得到的文件最小。下载前请比较大小并检查效果。",
+  "sw": "Mbano mwepesi huweka picha wazi; mbano mkali hutoa faili dogo zaidi. Linganisha ukubwa na ukague matokeo kabla ya kupakua.",
+  "sv": "Lätt komprimering håller bilderna skarpa; stark komprimering ger den minsta filen. Jämför storlekarna och kontrollera resultatet innan du laddar ner."
+ },
+ "About Compress PDF": {
+  "es": "Acerca de Compress PDF",
+  "ar": "عن Compress PDF",
+  "zh": "关于 Compress PDF",
+  "sw": "Kuhusu Compress PDF",
+  "sv": "Om Compress PDF"
+ },
+ "How to use Compress PDF": {
+  "es": "Cómo usar Compress PDF",
+  "ar": "طريقة استخدام Compress PDF",
+  "zh": "如何使用 Compress PDF",
+  "sw": "Jinsi ya kutumia Compress PDF",
+  "sv": "Så använder du Compress PDF"
+ },
+ "Is Compress PDF free?": {
+  "es": "¿Compress PDF es gratis?",
+  "ar": "هل Compress PDF مجاني؟",
+  "zh": "Compress PDF 免费吗？",
+  "sw": "Je, Compress PDF ni bure?",
+  "sv": "Är Compress PDF gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

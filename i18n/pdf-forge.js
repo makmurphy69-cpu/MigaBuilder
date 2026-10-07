@@ -76,3 +76,97 @@ I18N.phrases({
   "Saved, but some information could not be removed.": { es: "Guardado, pero no se pudo eliminar parte de la información.", ar: "تم الحفظ، لكن تعذّرت إزالة بعض المعلومات.", zh: "已保存，但部分信息无法删除。", sw: "Imehifadhiwa, lakini baadhi ya taarifa hazikuweza kuondolewa.", sv: "Sparat, men viss information kunde inte tas bort." },
   "Could not clean this PDF:": { es: "No se pudo limpiar este PDF:", ar: "تعذّر تنظيف ملف PDF هذا:", zh: "无法清理此 PDF：", sw: "Imeshindwa kusafisha PDF hii:", sv: "Kunde inte rensa den här PDF:en:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "PDF Forge merges, splits, reorders, rotates, numbers and watermarks PDFs, and creates PDFs from images.": {
+  "es": "PDF Forge une, divide, reordena, gira, numera y pone marcas de agua en PDF, y crea PDF a partir de imágenes.",
+  "ar": "يدمج PDF Forge ملفات PDF ويقسّمها ويعيد ترتيبها ويدوّرها ويرقّمها ويضيف إليها علامات مائية، وينشئ ملفات PDF من الصور.",
+  "zh": "PDF Forge 可以合并、拆分、重排、旋转 PDF，添加页码和水印，还能用图片生成 PDF。",
+  "sw": "PDF Forge huunganisha, hugawanya, hupanga upya, huzungusha, huweka namba na alama za maji kwenye PDF, na hutengeneza PDF kutoka kwa picha.",
+  "sv": "PDF Forge slår ihop, delar, ordnar om, roterar, numrerar och vattenmärker PDF:er, och skapar PDF:er av bilder."
+ },
+ "Choose one or more PDF files and set the page order or rotation.": {
+  "es": "Elige uno o más archivos PDF y define el orden de las páginas o la rotación.",
+  "ar": "اختر ملف PDF واحدًا أو أكثر وحدّد ترتيب الصفحات أو اتجاهها.",
+  "zh": "选择一个或多个 PDF 文件，设置页面顺序或旋转方向。",
+  "sw": "Chagua faili moja au zaidi za PDF na uweke mpangilio wa kurasa au mzunguko.",
+  "sv": "Välj en eller flera PDF-filer och ställ in sidordning eller rotation."
+ },
+ "Press “Merge / create PDF”.": {
+  "es": "Pulsa «Unir / crear PDF».",
+  "ar": "اضغط «ادمج / أنشئ PDF».",
+  "zh": "点击“合并/创建 PDF”。",
+  "sw": "Bonyeza “Unganisha / tengeneza PDF”.",
+  "sv": "Tryck på ”Slå ihop / skapa PDF”."
+ },
+ "Download the finished PDF or split pages into a ZIP.": {
+  "es": "Descarga el PDF terminado o divide las páginas en un ZIP.",
+  "ar": "نزّل ملف PDF النهائي أو قسّم الصفحات في ملف ZIP.",
+  "zh": "下载完成的 PDF，或把页面拆分成 ZIP。",
+  "sw": "Pakua PDF iliyokamilika au gawanya kurasa kuwa ZIP.",
+  "sv": "Ladda ner den färdiga PDF:en eller dela upp sidorna i en ZIP."
+ },
+ "How do I merge PDF files?": {
+  "es": "¿Cómo uno archivos PDF?",
+  "ar": "كيف أدمج ملفات PDF؟",
+  "zh": "怎样合并 PDF 文件？",
+  "sw": "Ninaunganishaje faili za PDF?",
+  "sv": "Hur slår jag ihop PDF-filer?"
+ },
+ "Choose all the PDFs, drag the pages into the order you want, and press Merge / create PDF to download one file.": {
+  "es": "Elige todos los PDF, arrastra las páginas al orden que quieras y pulsa Unir / crear PDF para descargar un solo archivo.",
+  "ar": "اختر كل ملفات PDF، واسحب الصفحات إلى الترتيب الذي تريده، ثم اضغط «ادمج / أنشئ PDF» لتنزيل ملف واحد.",
+  "zh": "选择所有 PDF，把页面拖到你想要的顺序，然后点击“合并/创建 PDF”下载一个文件。",
+  "sw": "Chagua PDF zote, buruta kurasa kwenye mpangilio unaotaka, na ubonyeze Unganisha / tengeneza PDF kupakua faili moja.",
+  "sv": "Välj alla PDF:er, dra sidorna i den ordning du vill och tryck på Slå ihop / skapa PDF för att ladda ner en enda fil."
+ },
+ "About PDF Forge": {
+  "es": "Acerca de PDF Forge",
+  "ar": "عن PDF Forge",
+  "zh": "关于 PDF Forge",
+  "sw": "Kuhusu PDF Forge",
+  "sv": "Om PDF Forge"
+ },
+ "How to use PDF Forge": {
+  "es": "Cómo usar PDF Forge",
+  "ar": "طريقة استخدام PDF Forge",
+  "zh": "如何使用 PDF Forge",
+  "sw": "Jinsi ya kutumia PDF Forge",
+  "sv": "Så använder du PDF Forge"
+ },
+ "Is PDF Forge free?": {
+  "es": "¿PDF Forge es gratis?",
+  "ar": "هل PDF Forge مجاني؟",
+  "zh": "PDF Forge 免费吗？",
+  "sw": "Je, PDF Forge ni bure?",
+  "sv": "Är PDF Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});
