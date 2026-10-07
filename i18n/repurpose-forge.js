@@ -37,3 +37,97 @@ I18N.phrases({
   "Choose a .txt or .md file.": { es: "Elige un archivo .txt o .md.", ar: "اختر ملف .txt أو .md.", zh: "请选择 .txt 或 .md 文件。", sw: "Chagua faili ya .txt au .md.", sv: "Välj en .txt- eller .md-fil." },
   "Could not read that file.": { es: "No se pudo leer ese archivo.", ar: "تعذّرت قراءة هذا الملف.", zh: "无法读取该文件。", sw: "Faili hiyo haikuweza kusomwa.", sv: "Filen kunde inte läsas." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Repurpose Forge turns one piece of content into social posts, a newsletter, a video script, a blog outline and an advertisement.": {
+  "es": "Repurpose Forge convierte un contenido en publicaciones para redes, un boletín, un guion de vídeo, un esquema de blog y un anuncio.",
+  "ar": "يحوّل Repurpose Forge قطعة محتوى واحدة إلى منشورات اجتماعية ونشرة بريدية ونص فيديو ومخطط تدوينة وإعلان.",
+  "zh": "Repurpose Forge 把一篇内容变成社交帖子、简报、视频脚本、博客提纲和广告。",
+  "sw": "Repurpose Forge hugeuza maudhui moja kuwa machapisho ya mitandao ya kijamii, jarida, hati ya video, muhtasari wa blogu na tangazo.",
+  "sv": "Repurpose Forge gör ett innehåll till inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons."
+ },
+ "Paste one piece of content and describe its audience and call to action.": {
+  "es": "Pega un contenido y describe su público y la llamada a la acción.",
+  "ar": "الصق قطعة محتوى وصف جمهورها والدعوة إلى الإجراء.",
+  "zh": "粘贴一篇内容，并描述其受众和行动号召。",
+  "sw": "Bandika maudhui moja na ueleze hadhira yake na mwito wa kuchukua hatua.",
+  "sv": "Klistra in ett innehåll och beskriv dess målgrupp och uppmaning."
+ },
+ "Press “Create publishing pack”.": {
+  "es": "Pulsa «Crear paquete de publicación».",
+  "ar": "اضغط «إنشاء حزمة النشر».",
+  "zh": "点击“生成发布素材包”。",
+  "sw": "Bonyeza “Tengeneza kifurushi cha uchapishaji”.",
+  "sv": "Tryck på ”Skapa publiceringspaket”."
+ },
+ "Review, personalise, and copy the formats you need.": {
+  "es": "Revisa, personaliza y copia los formatos que necesites.",
+  "ar": "راجع وخصّص وانسخ الصيغ التي تحتاجها.",
+  "zh": "检查、个性化修改，然后复制你需要的格式。",
+  "sw": "Pitia, binafsisha, na unakili miundo unayohitaji.",
+  "sv": "Granska, anpassa och kopiera de format du behöver."
+ },
+ "What formats does it make?": {
+  "es": "¿Qué formatos crea?",
+  "ar": "ما الصيغ التي يصنعها؟",
+  "zh": "它能生成哪些格式？",
+  "sw": "Hutengeneza miundo gani?",
+  "sv": "Vilka format gör den?"
+ },
+ "Social posts, a newsletter, a video script, a blog outline and an advertisement, all from the one text you paste.": {
+  "es": "Publicaciones para redes, un boletín, un guion de vídeo, un esquema de blog y un anuncio, todo a partir del texto que pegas.",
+  "ar": "منشورات اجتماعية ونشرة بريدية ونص فيديو ومخطط تدوينة وإعلان، كلها من النص الواحد الذي تلصقه.",
+  "zh": "社交帖子、简报、视频脚本、博客提纲和广告，全部来自你粘贴的那一篇文字。",
+  "sw": "Machapisho ya mitandao ya kijamii, jarida, hati ya video, muhtasari wa blogu na tangazo, vyote kutoka kwa maandishi moja unayobandika.",
+  "sv": "Inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons, allt från den text du klistrar in."
+ },
+ "About Repurpose Forge": {
+  "es": "Acerca de Repurpose Forge",
+  "ar": "عن Repurpose Forge",
+  "zh": "关于 Repurpose Forge",
+  "sw": "Kuhusu Repurpose Forge",
+  "sv": "Om Repurpose Forge"
+ },
+ "How to use Repurpose Forge": {
+  "es": "Cómo usar Repurpose Forge",
+  "ar": "طريقة استخدام Repurpose Forge",
+  "zh": "如何使用 Repurpose Forge",
+  "sw": "Jinsi ya kutumia Repurpose Forge",
+  "sv": "Så använder du Repurpose Forge"
+ },
+ "Is Repurpose Forge free?": {
+  "es": "¿Repurpose Forge es gratis?",
+  "ar": "هل Repurpose Forge مجاني؟",
+  "zh": "Repurpose Forge 免费吗？",
+  "sw": "Je, Repurpose Forge ni bure?",
+  "sv": "Är Repurpose Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

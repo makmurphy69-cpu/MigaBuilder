@@ -31,3 +31,97 @@ I18N.phrases({
   "How to use Code Forge": { es: "Cómo usar Code Forge", ar: "كيفية استخدام Code Forge", zh: "如何使用 Code Forge", sw: "Jinsi ya kutumia Code Forge", sv: "Så använder du Code Forge" },
   "Code Forge — learn Python and JavaScript by doing": { es: "Code Forge — aprende Python y JavaScript practicando", ar: "Code Forge — تعلّم Python وJavaScript بالممارسة", zh: "Code Forge — 在实践中学习 Python 和 JavaScript", sw: "Code Forge — jifunze Python na JavaScript kwa vitendo", sv: "Code Forge — lär dig Python och JavaScript genom att göra" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Code Forge teaches Python and JavaScript with short exercises. Your code runs for real in your browser, with instant pass or fail feedback and an AI explanation.": {
+  "es": "Code Forge enseña Python y JavaScript con ejercicios cortos. Tu código se ejecuta de verdad en el navegador, con resultado inmediato de aprobado o suspenso y una explicación de la IA.",
+  "ar": "يعلّم Code Forge لغتي Python وJavaScript بتمارين قصيرة. تُشغَّل شيفرتك فعليًا في المتصفح، مع نتيجة فورية بالنجاح أو الإخفاق وشرح من الذكاء الاصطناعي.",
+  "zh": "Code Forge 通过简短的练习教你 Python 和 JavaScript。你的代码会在浏览器中真正运行，立即给出通过或未通过的反馈，并附上 AI 讲解。",
+  "sw": "Code Forge hufundisha Python na JavaScript kwa mazoezi mafupi. Msimbo wako huendeshwa kweli kwenye kivinjari, na matokeo ya papo hapo ya kufaulu au kushindwa pamoja na maelezo ya AI.",
+  "sv": "Code Forge lär ut Python och JavaScript med korta övningar. Din kod körs på riktigt i webbläsaren, med direkt besked om godkänt eller underkänt och en förklaring från AI:n."
+ },
+ "Choose Python or JavaScript and describe what you want to learn.": {
+  "es": "Elige Python o JavaScript y describe lo que quieres aprender.",
+  "ar": "اختر Python أو JavaScript وصف ما تريد تعلّمه.",
+  "zh": "选择 Python 或 JavaScript，并描述你想学什么。",
+  "sw": "Chagua Python au JavaScript na ueleze unachotaka kujifunza.",
+  "sv": "Välj Python eller JavaScript och beskriv vad du vill lära dig."
+ },
+ "Press “Start lesson”.": {
+  "es": "Pulsa «Empezar lección».",
+  "ar": "اضغط «ابدأ الدرس».",
+  "zh": "点击“开始课程”。",
+  "sw": "Bonyeza “Anza somo”.",
+  "sv": "Tryck på ”Starta lektion”."
+ },
+ "Run the examples, answer the exercises, and continue at your pace.": {
+  "es": "Ejecuta los ejemplos, resuelve los ejercicios y sigue a tu ritmo.",
+  "ar": "شغّل الأمثلة وأجب عن التمارين وتابع بالسرعة التي تناسبك.",
+  "zh": "运行示例、完成练习，按自己的节奏继续学习。",
+  "sw": "Endesha mifano, jibu mazoezi, na uendelee kwa kasi yako.",
+  "sv": "Kör exemplen, lös övningarna och fortsätt i din egen takt."
+ },
+ "Do I need to install Python?": {
+  "es": "¿Tengo que instalar Python?",
+  "ar": "هل أحتاج إلى تثبيت Python؟",
+  "zh": "我需要安装 Python 吗？",
+  "sw": "Je, ninahitaji kusakinisha Python?",
+  "sv": "Behöver jag installera Python?"
+ },
+ "No. Python and JavaScript both run right in your browser.": {
+  "es": "No. Tanto Python como JavaScript se ejecutan directamente en tu navegador.",
+  "ar": "لا. تعمل Python وJavaScript كلتاهما مباشرة في متصفحك.",
+  "zh": "不需要。Python 和 JavaScript 都直接在你的浏览器中运行。",
+  "sw": "Hapana. Python na JavaScript zote huendeshwa moja kwa moja kwenye kivinjari chako.",
+  "sv": "Nej. Både Python och JavaScript körs direkt i webbläsaren."
+ },
+ "About Code Forge": {
+  "es": "Acerca de Code Forge",
+  "ar": "عن Code Forge",
+  "zh": "关于 Code Forge",
+  "sw": "Kuhusu Code Forge",
+  "sv": "Om Code Forge"
+ },
+ "How to use Code Forge": {
+  "es": "Cómo usar Code Forge",
+  "ar": "طريقة استخدام Code Forge",
+  "zh": "如何使用 Code Forge",
+  "sw": "Jinsi ya kutumia Code Forge",
+  "sv": "Så använder du Code Forge"
+ },
+ "Is Code Forge free?": {
+  "es": "¿Code Forge es gratis?",
+  "ar": "هل Code Forge مجاني؟",
+  "zh": "Code Forge 免费吗？",
+  "sw": "Je, Code Forge ni bure?",
+  "sv": "Är Code Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

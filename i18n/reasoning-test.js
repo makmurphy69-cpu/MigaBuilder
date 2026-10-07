@@ -61,3 +61,97 @@ I18N.phrases({
   "✓ Correct": { es: "✓ Correcto", ar: "✓ صحيح", zh: "✓ 正确", sw: "✓ Sahihi", sv: "✓ Rätt" },
   "Building": { es: "Edificio", ar: "المبنى", zh: "建筑", sw: "Jengo", sv: "Byggnad" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Reasoning Test is a private IQ-style practice test with 1,050 original question variants, a skill breakdown and a worked explanation for every mistake.": {
+  "es": "Reasoning Test es una prueba privada de práctica tipo CI con 1050 variantes de preguntas originales, un desglose de habilidades y una explicación resuelta de cada error.",
+  "ar": "Reasoning Test اختبار تدريبي خاص على غرار اختبارات الذكاء، فيه 1,050 صيغة أصلية من الأسئلة، وتحليل للمهارات، وشرح مفصّل لكل خطأ.",
+  "zh": "Reasoning Test 是一份私密的智商风格练习测试，有 1050 种原创题目变体、技能分项分析，并为每道错题提供详细解答。",
+  "sw": "Reasoning Test ni jaribio la faragha la mazoezi la mtindo wa IQ lenye matoleo 1,050 ya maswali asilia, uchambuzi wa ujuzi na maelezo yaliyofanyiwa kazi kwa kila kosa.",
+  "sv": "Reasoning Test är ett privat övningstest i IQ-stil med 1 050 originalvarianter av frågor, en färdighetsuppdelning och en genomgången förklaring till varje miss."
+ },
+ "Read how the private reasoning test works.": {
+  "es": "Lee cómo funciona la prueba privada de razonamiento.",
+  "ar": "اقرأ كيف يعمل اختبار الاستدلال الخاص.",
+  "zh": "阅读私密推理测试的说明。",
+  "sw": "Soma jinsi jaribio la faragha la kufikiri linavyofanya kazi.",
+  "sv": "Läs hur det privata resonemangstestet fungerar."
+ },
+ "Press “Start private test”.": {
+  "es": "Pulsa «Empezar prueba privada».",
+  "ar": "اضغط «ابدأ اختبارًا خاصًا».",
+  "zh": "点击“开始私密测试”。",
+  "sw": "Bonyeza “Anza jaribio la faragha”.",
+  "sv": "Tryck på ”Starta privat prov”."
+ },
+ "Answer the questions, then study the worked explanations and print your report.": {
+  "es": "Responde a las preguntas, estudia las explicaciones resueltas e imprime tu informe.",
+  "ar": "أجب عن الأسئلة، ثم ادرس الشروح المفصّلة واطبع تقريرك.",
+  "zh": "回答问题，然后研读详细解答并打印你的报告。",
+  "sw": "Jibu maswali, kisha jifunze maelezo yaliyofanyiwa kazi na uchapishe ripoti yako.",
+  "sv": "Svara på frågorna, studera sedan de genomgångna förklaringarna och skriv ut din rapport."
+ },
+ "Is this an official IQ test?": {
+  "es": "¿Es una prueba de CI oficial?",
+  "ar": "هل هذا اختبار ذكاء رسمي؟",
+  "zh": "这是正式的智商测试吗？",
+  "sw": "Je, hili ni jaribio rasmi la IQ?",
+  "sv": "Är det här ett officiellt IQ-test?"
+ },
+ "No. It is practice: original questions with worked explanations to help you improve. Your answers stay on your device.": {
+  "es": "No. Es práctica: preguntas originales con explicaciones resueltas para ayudarte a mejorar. Tus respuestas se quedan en tu dispositivo.",
+  "ar": "لا. إنه للتدريب: أسئلة أصلية مع شروح مفصّلة لمساعدتك على التحسّن. تبقى إجاباتك على جهازك.",
+  "zh": "不是。这是练习：原创题目配有详细解答，帮助你提高。你的答案只保存在你的设备上。",
+  "sw": "Hapana. Ni mazoezi: maswali asilia yenye maelezo yaliyofanyiwa kazi kukusaidia kuboresha. Majibu yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det är övning: originalfrågor med genomgångna förklaringar som hjälper dig att bli bättre. Dina svar stannar på din enhet."
+ },
+ "About Reasoning Test": {
+  "es": "Acerca de Reasoning Test",
+  "ar": "عن Reasoning Test",
+  "zh": "关于 Reasoning Test",
+  "sw": "Kuhusu Reasoning Test",
+  "sv": "Om Reasoning Test"
+ },
+ "How to use Reasoning Test": {
+  "es": "Cómo usar Reasoning Test",
+  "ar": "طريقة استخدام Reasoning Test",
+  "zh": "如何使用 Reasoning Test",
+  "sw": "Jinsi ya kutumia Reasoning Test",
+  "sv": "Så använder du Reasoning Test"
+ },
+ "Is Reasoning Test free?": {
+  "es": "¿Reasoning Test es gratis?",
+  "ar": "هل Reasoning Test مجاني؟",
+  "zh": "Reasoning Test 免费吗？",
+  "sw": "Je, Reasoning Test ni bure?",
+  "sv": "Är Reasoning Test gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

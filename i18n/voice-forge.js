@@ -64,3 +64,97 @@ I18N.phrases({
   "Stopping after this paragraph…": { es: "Deteniendo tras este párrafo…", ar: "سيتوقف بعد هذه الفقرة…", zh: "将在本段后停止…", sw: "Itasimama baada ya aya hii…", sv: "Stoppar efter det här stycket…" },
   "Could not load the MP3 encoder. Check your connection or download WAV.": { es: "No se pudo cargar el codificador de MP3. Revisa tu conexión o descarga WAV.", ar: "تعذّر تحميل مُرمِّز MP3. تحقق من اتصالك أو نزّل WAV.", zh: "无法加载 MP3 编码器。请检查网络连接或下载 WAV。", sw: "Imeshindwa kupakia kisimbaji cha MP3. Angalia muunganisho wako au pakua WAV.", sv: "Kunde inte ladda MP3-kodaren. Kontrollera anslutningen eller ladda ner WAV." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Voice Forge is free text to speech: paste a script, pick a natural voice in one of 35+ languages, and download the voice-over.": {
+  "es": "Voice Forge es texto a voz gratuito: pega un guion, elige una voz natural en uno de más de 35 idiomas y descarga la locución.",
+  "ar": "Voice Forge تحويل مجاني للنص إلى كلام: الصق نصًا، واختر صوتًا طبيعيًا بإحدى أكثر من 35 لغة، ونزّل التعليق الصوتي.",
+  "zh": "Voice Forge 是免费的文字转语音工具：粘贴台词，从 35 种以上语言中选择自然的声音，然后下载配音。",
+  "sw": "Voice Forge ni kubadilisha maandishi kuwa sauti bure: bandika hati, chagua sauti asilia katika mojawapo ya lugha zaidi ya 35, na upakue sauti.",
+  "sv": "Voice Forge är gratis text-till-tal: klistra in ett manus, välj en naturlig röst på ett av över 35 språk och ladda ner speakerrösten."
+ },
+ "Paste your script, or press Try an example script.": {
+  "es": "Pega tu guion o pulsa Probar un guion de ejemplo.",
+  "ar": "الصق نصّك، أو اضغط «جرّب نصًا نموذجيًا».",
+  "zh": "粘贴你的台词，或点击“试试示例台词”。",
+  "sw": "Bandika hati yako, au bonyeza Jaribu hati ya mfano.",
+  "sv": "Klistra in ditt manus eller tryck på Prova ett exempelmanus."
+ },
+ "Press “Make the voice-over”.": {
+  "es": "Pulsa «Crear la locución».",
+  "ar": "اضغط «أنشئ التعليق الصوتي».",
+  "zh": "点击“生成配音”。",
+  "sw": "Bonyeza “Tengeneza sauti”.",
+  "sv": "Tryck på ”Skapa speakerrösten”."
+ },
+ "Pick a language and voice, listen, then download the voice-over as MP3 or WAV.": {
+  "es": "Elige un idioma y una voz, escucha y descarga la locución en MP3 o WAV.",
+  "ar": "اختر لغة وصوتًا، واستمع، ثم نزّل التعليق الصوتي بصيغة MP3 أو WAV.",
+  "zh": "选择语言和声音，试听后把配音下载为 MP3 或 WAV。",
+  "sw": "Chagua lugha na sauti, sikiliza, kisha pakua sauti kama MP3 au WAV.",
+  "sv": "Välj språk och röst, lyssna och ladda sedan ner speakerrösten som MP3 eller WAV."
+ },
+ "Which languages and formats are there?": {
+  "es": "¿Qué idiomas y formatos hay?",
+  "ar": "ما اللغات والصيغ المتاحة؟",
+  "zh": "有哪些语言和格式？",
+  "sw": "Kuna lugha na miundo gani?",
+  "sv": "Vilka språk och format finns?"
+ },
+ "More than 35 languages, including English, Swedish, Spanish, Arabic, Chinese and Swahili. Download the voice-over as MP3 or WAV.": {
+  "es": "Más de 35 idiomas, entre ellos inglés, sueco, español, árabe, chino y suajili. Descarga la locución en MP3 o WAV.",
+  "ar": "أكثر من 35 لغة، منها الإنجليزية والسويدية والإسبانية والعربية والصينية والسواحيلية. نزّل التعليق الصوتي بصيغة MP3 أو WAV.",
+  "zh": "超过 35 种语言，包括英语、瑞典语、西班牙语、阿拉伯语、中文和斯瓦希里语。配音可下载为 MP3 或 WAV。",
+  "sw": "Zaidi ya lugha 35, zikiwemo Kiingereza, Kiswidi, Kihispania, Kiarabu, Kichina na Kiswahili. Pakua sauti kama MP3 au WAV.",
+  "sv": "Över 35 språk, bland annat engelska, svenska, spanska, arabiska, kinesiska och swahili. Ladda ner speakerrösten som MP3 eller WAV."
+ },
+ "About Voice Forge": {
+  "es": "Acerca de Voice Forge",
+  "ar": "عن Voice Forge",
+  "zh": "关于 Voice Forge",
+  "sw": "Kuhusu Voice Forge",
+  "sv": "Om Voice Forge"
+ },
+ "How to use Voice Forge": {
+  "es": "Cómo usar Voice Forge",
+  "ar": "طريقة استخدام Voice Forge",
+  "zh": "如何使用 Voice Forge",
+  "sw": "Jinsi ya kutumia Voice Forge",
+  "sv": "Så använder du Voice Forge"
+ },
+ "Is Voice Forge free?": {
+  "es": "¿Voice Forge es gratis?",
+  "ar": "هل Voice Forge مجاني؟",
+  "zh": "Voice Forge 免费吗？",
+  "sw": "Je, Voice Forge ni bure?",
+  "sv": "Är Voice Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

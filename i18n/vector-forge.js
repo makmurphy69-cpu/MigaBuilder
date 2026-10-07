@@ -68,3 +68,97 @@ I18N.phrases({
   "Please choose a PNG, JPG, WebP, GIF or BMP image. (SVG files are already vectors.)": { es: "Elige una imagen PNG, JPG, WebP, GIF o BMP. (Los archivos SVG ya son vectores.)", ar: "اختر صورة PNG أو JPG أو WebP أو GIF أو BMP. (ملفات SVG متجهة بالفعل.)", zh: "请选择 PNG、JPG、WebP、GIF 或 BMP 图片。（SVG 文件本身就是矢量图。）", sw: "Tafadhali chagua picha ya PNG, JPG, WebP, GIF au BMP. (Faili za SVG tayari ni vekta.)", sv: "Välj en PNG-, JPG-, WebP-, GIF- eller BMP-bild. (SVG-filer är redan vektorer.)" },
   "🔍 Fit to box": { es: "🔍 Ajustar al recuadro", ar: "🔍 ملاءمة المربع", zh: "🔍 适应框", sw: "🔍 Tosheleza kisanduku", sv: "🔍 Anpassa till rutan" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Vector Forge turns a PNG or JPG logo, icon, drawing or signature into a sharp, scalable SVG vector.": {
+  "es": "Vector Forge convierte un logotipo, icono, dibujo o firma en PNG o JPG en un vector SVG nítido y escalable.",
+  "ar": "يحوّل Vector Forge شعارًا أو أيقونة أو رسمًا أو توقيعًا بصيغة PNG أو JPG إلى رسم متجهي SVG حاد وقابل للتكبير.",
+  "zh": "Vector Forge 把 PNG 或 JPG 格式的标志、图标、绘画或签名转换成清晰、可无损缩放的 SVG 矢量图。",
+  "sw": "Vector Forge hugeuza nembo, ikoni, mchoro au sahihi ya PNG au JPG kuwa vekta ya SVG iliyo wazi na inayoweza kukuzwa.",
+  "sv": "Vector Forge gör en logotyp, ikon, teckning eller namnteckning i PNG eller JPG till en skarp, skalbar SVG-vektor."
+ },
+ "Open a PNG or JPG logo, icon or drawing, or press Try an example logo.": {
+  "es": "Abre un logotipo, icono o dibujo en PNG o JPG, o pulsa Probar un logotipo de ejemplo.",
+  "ar": "افتح شعارًا أو أيقونة أو رسمًا بصيغة PNG أو JPG، أو اضغط «جرّب شعارًا نموذجيًا».",
+  "zh": "打开 PNG 或 JPG 格式的标志、图标或绘画，或点击“试试示例标志”。",
+  "sw": "Fungua nembo, ikoni au mchoro wa PNG au JPG, au bonyeza Jaribu nembo ya mfano.",
+  "sv": "Öppna en logotyp, ikon eller teckning i PNG eller JPG, eller tryck på Prova en exempellogotyp."
+ },
+ "Press “Download SVG”.": {
+  "es": "Pulsa «Descargar SVG».",
+  "ar": "اضغط «تنزيل SVG».",
+  "zh": "点击“下载 SVG”。",
+  "sw": "Bonyeza “Pakua SVG”.",
+  "sv": "Tryck på ”Ladda ner SVG”."
+ },
+ "Pick a preset, adjust colors and detail, remove the background if you like, then download the SVG.": {
+  "es": "Elige un ajuste predefinido, ajusta los colores y el detalle, quita el fondo si quieres y descarga el SVG.",
+  "ar": "اختر إعدادًا جاهزًا، واضبط الألوان والتفاصيل، وأزل الخلفية إن شئت، ثم نزّل ملف SVG.",
+  "zh": "选择预设，调整颜色和细节，需要时去除背景，然后下载 SVG。",
+  "sw": "Chagua mpangilio tayari, rekebisha rangi na undani, ondoa mandharinyuma ukipenda, kisha pakua SVG.",
+  "sv": "Välj en förinställning, justera färger och detaljer, ta bort bakgrunden om du vill och ladda sedan ner SVG:n."
+ },
+ "How do I convert a PNG to SVG?": {
+  "es": "¿Cómo convierto un PNG en SVG?",
+  "ar": "كيف أحوّل PNG إلى SVG؟",
+  "zh": "怎样把 PNG 转换成 SVG？",
+  "sw": "Ninageuzaje PNG kuwa SVG?",
+  "sv": "Hur gör jag om en PNG till SVG?"
+ },
+ "Open the PNG, pick a preset, adjust the colours and detail, remove the background if you like, and press Download SVG.": {
+  "es": "Abre el PNG, elige un ajuste predefinido, ajusta los colores y el detalle, quita el fondo si quieres y pulsa Descargar SVG.",
+  "ar": "افتح ملف PNG، واختر إعدادًا جاهزًا، واضبط الألوان والتفاصيل، وأزل الخلفية إن شئت، ثم اضغط «تنزيل SVG».",
+  "zh": "打开 PNG，选择预设，调整颜色和细节，需要时去除背景，然后点击“下载 SVG”。",
+  "sw": "Fungua PNG, chagua mpangilio tayari, rekebisha rangi na undani, ondoa mandharinyuma ukipenda, na ubonyeze Pakua SVG.",
+  "sv": "Öppna PNG:n, välj en förinställning, justera färger och detaljer, ta bort bakgrunden om du vill och tryck på Ladda ner SVG."
+ },
+ "About Vector Forge": {
+  "es": "Acerca de Vector Forge",
+  "ar": "عن Vector Forge",
+  "zh": "关于 Vector Forge",
+  "sw": "Kuhusu Vector Forge",
+  "sv": "Om Vector Forge"
+ },
+ "How to use Vector Forge": {
+  "es": "Cómo usar Vector Forge",
+  "ar": "طريقة استخدام Vector Forge",
+  "zh": "如何使用 Vector Forge",
+  "sw": "Jinsi ya kutumia Vector Forge",
+  "sv": "Så använder du Vector Forge"
+ },
+ "Is Vector Forge free?": {
+  "es": "¿Vector Forge es gratis?",
+  "ar": "هل Vector Forge مجاني؟",
+  "zh": "Vector Forge 免费吗？",
+  "sw": "Je, Vector Forge ni bure?",
+  "sv": "Är Vector Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

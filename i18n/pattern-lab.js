@@ -52,3 +52,97 @@ I18N.phrases({
   "✓ Correct": { es: "✓ Correcto", ar: "✓ صحيح", zh: "✓ 正确", sw: "✓ Sahihi", sv: "✓ Rätt" },
   "✗ Learn this rule": { es: "✗ Aprende esta regla", ar: "✗ تعلّم هذه القاعدة", zh: "✗ 学习这条规则", sw: "✗ Jifunze kanuni hii", sv: "✗ Lär dig den här regeln" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Work Pattern Test lets you practise employer-style number, symbol, matrix and rule-transformation patterns, with the correct rule and a step-by-step method for each mistake.": {
+  "es": "Work Pattern Test te permite practicar patrones de números, símbolos, matrices y transformación de reglas como los que usan las empresas, con la regla correcta y un método paso a paso para cada error.",
+  "ar": "يتيح لك Work Pattern Test التدرّب على أنماط الأرقام والرموز والمصفوفات وتحويل القواعد التي يستخدمها أصحاب العمل، مع القاعدة الصحيحة وطريقة خطوة بخطوة لكل خطأ.",
+  "zh": "Work Pattern Test 让你练习雇主常用的数字、符号、矩阵和规则变换类图形推理题，并为每道错题给出正确规则和分步解法。",
+  "sw": "Work Pattern Test hukuwezesha kujizoeza mipangilio ya namba, alama, matriki na mabadiliko ya kanuni kama ya waajiri, pamoja na kanuni sahihi na mbinu ya hatua kwa hatua kwa kila kosa.",
+  "sv": "Work Pattern Test låter dig öva på siffer-, symbol-, matris- och regelmönster av det slag arbetsgivare använder, med rätt regel och en steg-för-steg-metod för varje miss."
+ },
+ "Read the instructions and start when you are ready.": {
+  "es": "Lee las instrucciones y empieza cuando estés listo.",
+  "ar": "اقرأ التعليمات وابدأ عندما تكون مستعدًا.",
+  "zh": "阅读说明，准备好后开始。",
+  "sw": "Soma maelekezo na uanze ukiwa tayari.",
+  "sv": "Läs instruktionerna och börja när du är redo."
+ },
+ "Press “Start work-pattern practice”.": {
+  "es": "Pulsa «Empezar la práctica de patrones laborales».",
+  "ar": "اضغط «ابدأ تدريب أنماط العمل».",
+  "zh": "点击“开始工作推理练习”。",
+  "sw": "Bonyeza “Anza mazoezi ya mipangilio ya kazi”.",
+  "sv": "Tryck på ”Starta övningen i arbetsmönster”."
+ },
+ "Answer each pattern question, then read the worked explanations and print your report.": {
+  "es": "Responde a cada pregunta de patrones, lee las explicaciones resueltas e imprime tu informe.",
+  "ar": "أجب عن كل سؤال نمط، ثم اقرأ الشروح المفصّلة واطبع تقريرك.",
+  "zh": "回答每道推理题，然后阅读详细解答并打印你的报告。",
+  "sw": "Jibu kila swali la mpangilio, kisha soma maelezo yaliyofanyiwa kazi na uchapishe ripoti yako.",
+  "sv": "Svara på varje mönsterfråga, läs sedan de genomgångna förklaringarna och skriv ut din rapport."
+ },
+ "Does it help with job assessment tests?": {
+  "es": "¿Ayuda con las pruebas de selección de personal?",
+  "ar": "هل يساعد في اختبارات التقييم الوظيفي؟",
+  "zh": "它对求职测评有帮助吗？",
+  "sw": "Je, husaidia na majaribio ya tathmini ya kazi?",
+  "sv": "Hjälper det inför arbetspsykologiska test?"
+ },
+ "It practises the same kinds of pattern questions that many employers use, and shows how to solve each one.": {
+  "es": "Practica el mismo tipo de preguntas de patrones que usan muchas empresas y muestra cómo resolver cada una.",
+  "ar": "يدرّبك على النوع نفسه من أسئلة الأنماط التي يستخدمها كثير من أصحاب العمل، ويبيّن كيف تُحل كل واحدة.",
+  "zh": "它练习的正是许多雇主使用的同类推理题，并演示每道题的解法。",
+  "sw": "Hufanyisha mazoezi ya aina zilezile za maswali ya mipangilio ambayo waajiri wengi hutumia, na huonyesha jinsi ya kutatua kila moja.",
+  "sv": "Det övar samma sorts mönsterfrågor som många arbetsgivare använder och visar hur var och en löses."
+ },
+ "About Work Pattern Test": {
+  "es": "Acerca de Work Pattern Test",
+  "ar": "عن Work Pattern Test",
+  "zh": "关于 Work Pattern Test",
+  "sw": "Kuhusu Work Pattern Test",
+  "sv": "Om Work Pattern Test"
+ },
+ "How to use Work Pattern Test": {
+  "es": "Cómo usar Work Pattern Test",
+  "ar": "طريقة استخدام Work Pattern Test",
+  "zh": "如何使用 Work Pattern Test",
+  "sw": "Jinsi ya kutumia Work Pattern Test",
+  "sv": "Så använder du Work Pattern Test"
+ },
+ "Is Work Pattern Test free?": {
+  "es": "¿Work Pattern Test es gratis?",
+  "ar": "هل Work Pattern Test مجاني؟",
+  "zh": "Work Pattern Test 免费吗？",
+  "sw": "Je, Work Pattern Test ni bure?",
+  "sv": "Är Work Pattern Test gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

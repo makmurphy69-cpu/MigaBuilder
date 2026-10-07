@@ -68,3 +68,97 @@ I18N.phrases({
   "Recording… the video downloads when the cartoon ends.": { es: "Grabando… el vídeo se descarga cuando terminen los dibujos.", ar: "جارٍ التسجيل… يُنزَّل الفيديو عند انتهاء الرسوم.", zh: "正在录制…动画片结束后视频会自动下载。", sw: "Inarekodi… video itapakuliwa katuni ikiisha.", sv: "Spelar in… videon laddas ner när filmen är slut." },
   "Your last cartoon. Press play, or write a new story.": { es: "Tus últimos dibujos. Pulsa reproducir o escribe una historia nueva.", ar: "رسومك الأخيرة. اضغط تشغيل، أو اكتب قصة جديدة.", zh: "你上一次的动画片。点击播放，或写一个新故事。", sw: "Katuni yako ya mwisho. Bonyeza cheza, au andika hadithi mpya.", sv: "Din senaste film. Tryck på spela eller skriv en ny berättelse." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "3D Cartoon plays your story as a cel-shaded 3D cartoon with talking characters, sets and captions.": {
+  "es": "3D Cartoon reproduce tu historia como unos dibujos animados 3D con sombreado plano, personajes que hablan, decorados y subtítulos.",
+  "ar": "يعرض 3D Cartoon قصتك كرسوم متحركة ثلاثية الأبعاد بتظليل كرتوني، مع شخصيات تتكلم وديكورات وترجمة مكتوبة.",
+  "zh": "3D Cartoon 会把你的故事变成卡通渲染的 3D 动画片，有会说话的角色、场景和字幕。",
+  "sw": "3D Cartoon huonyesha hadithi yako kama katuni ya 3D yenye wahusika wanaozungumza, mandhari na manukuu.",
+  "sv": "3D Cartoon spelar upp din berättelse som en tecknad 3D-film med pratande figurer, kulisser och textning."
+ },
+ "Describe your story in the Story idea box.": {
+  "es": "Describe tu historia en el cuadro de la idea.",
+  "ar": "صف قصتك في خانة فكرة القصة.",
+  "zh": "在“故事构思”框中描述你的故事。",
+  "sw": "Eleza hadithi yako kwenye kisanduku cha wazo la hadithi.",
+  "sv": "Beskriv din berättelse i rutan för berättelseidén."
+ },
+ "Press “Make my 3D cartoon”.": {
+  "es": "Pulsa «Crear mis dibujos 3D».",
+  "ar": "اضغط «اصنع رسومي ثلاثية الأبعاد».",
+  "zh": "点击“制作我的 3D 动画片”。",
+  "sw": "Bonyeza “Tengeneza katuni yangu ya 3D”.",
+  "sv": "Tryck på ”Gör min tecknade 3D-film”."
+ },
+ "Press play to watch it, tick Voices to hear it, or download it as a video.": {
+  "es": "Pulsa reproducir para verlo, marca Voces para oírlo o descárgalo como vídeo.",
+  "ar": "اضغط تشغيل لمشاهدتها، وفعّل الأصوات لسماعها، أو نزّلها كفيديو.",
+  "zh": "点击播放观看，勾选“声音”收听，或下载为视频。",
+  "sw": "Bonyeza cheza kuitazama, weka alama kwenye Sauti kuisikia, au ipakue kama video.",
+  "sv": "Tryck på spela för att se den, kryssa i Röster för att höra den eller ladda ner den som video."
+ },
+ "Can the characters talk?": {
+  "es": "¿Pueden hablar los personajes?",
+  "ar": "هل يمكن للشخصيات أن تتكلم؟",
+  "zh": "角色会说话吗？",
+  "sw": "Je, wahusika wanaweza kuzungumza?",
+  "sv": "Kan figurerna prata?"
+ },
+ "Yes. Tick Voices to hear the dialogue spoken, with captions on screen, and download the cartoon as a video.": {
+  "es": "Sí. Marca Voces para oír los diálogos, con subtítulos en pantalla, y descarga los dibujos como vídeo.",
+  "ar": "نعم. فعّل الأصوات لسماع الحوار مع ترجمة على الشاشة، ونزّل الرسوم كفيديو.",
+  "zh": "会。勾选“声音”即可听到对白，屏幕上同时显示字幕，还能把动画片下载为视频。",
+  "sw": "Ndiyo. Weka alama kwenye Sauti kusikia mazungumzo, pamoja na manukuu kwenye skrini, na upakue katuni kama video.",
+  "sv": "Ja. Kryssa i Röster för att höra repliker, med text på skärmen, och ladda ner filmen som video."
+ },
+ "About 3D Cartoon": {
+  "es": "Acerca de 3D Cartoon",
+  "ar": "عن 3D Cartoon",
+  "zh": "关于 3D Cartoon",
+  "sw": "Kuhusu 3D Cartoon",
+  "sv": "Om 3D Cartoon"
+ },
+ "How to use 3D Cartoon": {
+  "es": "Cómo usar 3D Cartoon",
+  "ar": "طريقة استخدام 3D Cartoon",
+  "zh": "如何使用 3D Cartoon",
+  "sw": "Jinsi ya kutumia 3D Cartoon",
+  "sv": "Så använder du 3D Cartoon"
+ },
+ "Is 3D Cartoon free?": {
+  "es": "¿3D Cartoon es gratis?",
+  "ar": "هل 3D Cartoon مجاني؟",
+  "zh": "3D Cartoon 免费吗？",
+  "sw": "Je, 3D Cartoon ni bure?",
+  "sv": "Är 3D Cartoon gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

@@ -108,3 +108,97 @@ I18N.phrases({
   "Lower expression": { es: "Expresión baja", ar: "تعبير منخفض", zh: "较低", sw: "Kiwango cha chini", sv: "Lägre uttryck" },
   "Middle range": { es: "Rango medio", ar: "النطاق المتوسط", zh: "中等", sw: "Kiwango cha kati", sv: "Mellanläge" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Big Five Personality is a private 50-question assessment of the five big personality dimensions, with trait explanations, combinations, strengths and watch-outs.": {
+  "es": "Big Five Personality es una evaluación privada de 50 preguntas sobre las cinco grandes dimensiones de la personalidad, con explicaciones de cada rasgo, combinaciones, fortalezas y puntos de atención.",
+  "ar": "Big Five Personality تقييم خاص من 50 سؤالًا لأبعاد الشخصية الخمسة الكبرى، مع شرح للسمات وتركيباتها ونقاط القوة وما يجب الانتباه إليه.",
+  "zh": "Big Five Personality 是一份 50 题的私密测评，覆盖人格的五大维度，并附有特质解释、组合、优势和需要注意之处。",
+  "sw": "Big Five Personality ni tathmini ya faragha ya maswali 50 kuhusu vipimo vitano vikuu vya haiba, yenye maelezo ya sifa, michanganyiko, nguvu na mambo ya kuangalia.",
+  "sv": "Big Five Personality är ett privat test med 50 frågor om personlighetens fem stora dimensioner, med förklaringar av dragen, kombinationer, styrkor och saker att se upp med."
+ },
+ "Read how the private 50-question test works.": {
+  "es": "Lee cómo funciona la prueba privada de 50 preguntas.",
+  "ar": "اقرأ كيف يعمل الاختبار الخاص المكوّن من 50 سؤالًا.",
+  "zh": "阅读这份 50 题私密测试的说明。",
+  "sw": "Soma jinsi jaribio la faragha la maswali 50 linavyofanya kazi.",
+  "sv": "Läs hur det privata testet med 50 frågor fungerar."
+ },
+ "Press “Start private test”.": {
+  "es": "Pulsa «Empezar prueba privada».",
+  "ar": "اضغط «ابدأ اختبارًا خاصًا».",
+  "zh": "点击“开始私密测试”。",
+  "sw": "Bonyeza “Anza jaribio la faragha”.",
+  "sv": "Tryck på ”Starta privat prov”."
+ },
+ "Answer honestly, then read your report across the five dimensions.": {
+  "es": "Responde con sinceridad y lee tu informe sobre las cinco dimensiones.",
+  "ar": "أجب بصدق، ثم اقرأ تقريرك عن الأبعاد الخمسة.",
+  "zh": "如实作答，然后阅读你在五个维度上的报告。",
+  "sw": "Jibu kwa uaminifu, kisha soma ripoti yako kuhusu vipimo vitano.",
+  "sv": "Svara ärligt och läs sedan din rapport om de fem dimensionerna."
+ },
+ "What are the Big Five?": {
+  "es": "¿Qué son los Cinco Grandes?",
+  "ar": "ما السمات الخمس الكبرى؟",
+  "zh": "什么是“大五”人格？",
+  "sw": "Big Five ni nini?",
+  "sv": "Vad är femfaktormodellen?"
+ },
+ "Openness, conscientiousness, extraversion, agreeableness and emotional stability — the most widely used model of personality in psychology.": {
+  "es": "Apertura, responsabilidad, extraversión, amabilidad y estabilidad emocional: el modelo de personalidad más usado en psicología.",
+  "ar": "الانفتاح ويقظة الضمير والانبساط والمقبولية والاستقرار العاطفي — وهو أكثر نماذج الشخصية استخدامًا في علم النفس.",
+  "zh": "开放性、尽责性、外向性、宜人性和情绪稳定性——这是心理学中使用最广泛的人格模型。",
+  "sw": "Uwazi, uwajibikaji, uchangamfu, ukubalifu na utulivu wa hisia — modeli ya haiba inayotumika zaidi katika saikolojia.",
+  "sv": "Öppenhet, samvetsgrannhet, extraversion, vänlighet och emotionell stabilitet — den mest använda personlighetsmodellen inom psykologin."
+ },
+ "About Big Five Personality": {
+  "es": "Acerca de Big Five Personality",
+  "ar": "عن Big Five Personality",
+  "zh": "关于 Big Five Personality",
+  "sw": "Kuhusu Big Five Personality",
+  "sv": "Om Big Five Personality"
+ },
+ "How to use Big Five Personality": {
+  "es": "Cómo usar Big Five Personality",
+  "ar": "طريقة استخدام Big Five Personality",
+  "zh": "如何使用 Big Five Personality",
+  "sw": "Jinsi ya kutumia Big Five Personality",
+  "sv": "Så använder du Big Five Personality"
+ },
+ "Is Big Five Personality free?": {
+  "es": "¿Big Five Personality es gratis?",
+  "ar": "هل Big Five Personality مجاني؟",
+  "zh": "Big Five Personality 免费吗？",
+  "sw": "Je, Big Five Personality ni bure?",
+  "sv": "Är Big Five Personality gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

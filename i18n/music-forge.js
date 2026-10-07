@@ -417,3 +417,97 @@ I18N.phrases({
   "How to use Music Forge": { es: "Cómo usar Music Forge", ar: "كيفية استخدام Music Forge", zh: "如何使用 Music Forge", sw: "Jinsi ya kutumia Music Forge", sv: "Så använder du Music Forge" },
   "Music Forge — make songs with singing, instant tracks and beats": { es: "Music Forge: crea canciones con voz, pistas instantáneas y ritmos", ar: "Music Forge — اصنع أغاني مع غناء ومقطوعات فورية وإيقاعات", zh: "Music Forge——制作带演唱的歌曲、即时曲目和节拍", sw: "Music Forge — tengeneza nyimbo zenye uimbaji, nyimbo za papo hapo na midundo", sv: "Music Forge — gör låtar med sång, direkta spår och beats" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Music Forge makes music from a description: an instant instrumental from a mood, a song with singing and lyrics through Google Lyria using your own Gemini key, or your own beat in Tracker mode.": {
+  "es": "Music Forge crea música a partir de una descripción: una pieza instrumental instantánea según un estado de ánimo, una canción con voz y letra mediante Google Lyria usando tu propia clave de Gemini, o tu propio ritmo en el modo Tracker.",
+  "ar": "يصنع Music Forge الموسيقى من وصف: مقطوعة آلية فورية حسب المزاج، أو أغنية بغناء وكلمات عبر Google Lyria باستخدام مفتاح Gemini الخاص بك، أو إيقاعك الخاص في وضع Tracker.",
+  "zh": "Music Forge 根据描述生成音乐：根据情绪即时生成纯音乐，用你自己的 Gemini 密钥通过 Google Lyria 生成带演唱和歌词的歌曲，或在 Tracker 模式中做你自己的节拍。",
+  "sw": "Music Forge hutengeneza muziki kutokana na maelezo: ala za papo hapo kutokana na hisia, wimbo wenye uimbaji na maneno kupitia Google Lyria ukitumia ufunguo wako wa Gemini, au mdundo wako mwenyewe katika hali ya Tracker.",
+  "sv": "Music Forge gör musik utifrån en beskrivning: ett direkt instrumentalspår utifrån en stämning, en låt med sång och text via Google Lyria med din egen Gemini-nyckel, eller ditt eget beat i Tracker-läget."
+ },
+ "Describe the music (style, mood, speed, length) or tap a quick idea.": {
+  "es": "Describe la música (estilo, ánimo, velocidad, duración) o toca una idea rápida.",
+  "ar": "صف الموسيقى (الأسلوب، المزاج، السرعة، الطول) أو اضغط على فكرة سريعة.",
+  "zh": "描述音乐（风格、情绪、速度、时长），或点一个快速创意。",
+  "sw": "Eleza muziki (mtindo, hisia, kasi, urefu) au gusa wazo la haraka.",
+  "sv": "Beskriv musiken (stil, stämning, tempo, längd) eller tryck på en snabbidé."
+ },
+ "Press “Make my music”.": {
+  "es": "Pulsa «Crear mi música».",
+  "ar": "اضغط «اصنع موسيقاي».",
+  "zh": "点击“生成我的音乐”。",
+  "sw": "Bonyeza “Tengeneza muziki wangu”.",
+  "sv": "Tryck på ”Gör min musik”."
+ },
+ "Change it with one tap, then trim, fade and download MP3 or WAV in Finish & use, or send it to another tool.": {
+  "es": "Cámbiala con un toque, recórtala, aplica fundidos y descarga MP3 o WAV en Terminar y usar, o envíala a otra herramienta.",
+  "ar": "غيّرها بلمسة واحدة، ثم قصّها وأضف التلاشي ونزّلها بصيغة MP3 أو WAV في «الإنهاء والاستخدام»، أو أرسلها إلى أداة أخرى.",
+  "zh": "一键修改，然后在“完成并使用”中裁剪、淡入淡出并下载 MP3 或 WAV，或发送到其他工具。",
+  "sw": "Ibadilishe kwa mguso mmoja, kisha ipunguze, ifififishe na upakue MP3 au WAV katika Maliza na tumia, au itume kwa zana nyingine.",
+  "sv": "Ändra den med ett tryck, trimma, tona och ladda ner MP3 eller WAV under Slutför och använd, eller skicka den till ett annat verktyg."
+ },
+ "Which file formats can I download?": {
+  "es": "¿Qué formatos puedo descargar?",
+  "ar": "ما الصيغ التي يمكنني تنزيلها؟",
+  "zh": "我可以下载哪些格式？",
+  "sw": "Ninaweza kupakua miundo gani ya faili?",
+  "sv": "Vilka filformat kan jag ladda ner?"
+ },
+ "Trim, fade and download your track as MP3 or WAV, or send it straight to another MigaBuilder tool.": {
+  "es": "Recorta, aplica fundidos y descarga tu pista en MP3 o WAV, o envíala directamente a otra herramienta de MigaBuilder.",
+  "ar": "قصّ مقطوعتك وأضف التلاشي ونزّلها بصيغة MP3 أو WAV، أو أرسلها مباشرة إلى أداة أخرى من MigaBuilder.",
+  "zh": "裁剪、淡入淡出后把音轨下载为 MP3 或 WAV，或直接发送到其他 MigaBuilder 工具。",
+  "sw": "Punguza, fifisha na upakue wimbo wako kama MP3 au WAV, au utume moja kwa moja kwa zana nyingine ya MigaBuilder.",
+  "sv": "Trimma, tona och ladda ner ditt spår som MP3 eller WAV, eller skicka det direkt till ett annat MigaBuilder-verktyg."
+ },
+ "About Music Forge": {
+  "es": "Acerca de Music Forge",
+  "ar": "عن Music Forge",
+  "zh": "关于 Music Forge",
+  "sw": "Kuhusu Music Forge",
+  "sv": "Om Music Forge"
+ },
+ "How to use Music Forge": {
+  "es": "Cómo usar Music Forge",
+  "ar": "طريقة استخدام Music Forge",
+  "zh": "如何使用 Music Forge",
+  "sw": "Jinsi ya kutumia Music Forge",
+  "sv": "Så använder du Music Forge"
+ },
+ "Is Music Forge free?": {
+  "es": "¿Music Forge es gratis?",
+  "ar": "هل Music Forge مجاني؟",
+  "zh": "Music Forge 免费吗？",
+  "sw": "Je, Music Forge ni bure?",
+  "sv": "Är Music Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

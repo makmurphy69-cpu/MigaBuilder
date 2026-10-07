@@ -112,3 +112,97 @@ I18N.phrases({
   "✅ Copied": { es: "✅ Copiado", ar: "✅ تم النسخ", zh: "✅ 已复制", sw: "✅ Imenakiliwa", sv: "✅ Kopierat" },
   "Next word →": { es: "Siguiente palabra →", ar: "الكلمة التالية ←", zh: "下一个词 →", sw: "Neno linalofuata →", sv: "Nästa ord →" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Alphabet Forge teaches the world's writing systems: tap any letter of Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi, Georgian and more to hear it and see an example word, then practise writing it.": {
+  "es": "Alphabet Forge enseña los sistemas de escritura del mundo: toca cualquier letra del tailandés, árabe, mandarín, japonés, coreano, griego, ruso, hebreo, hindi, georgiano y más para oírla y ver una palabra de ejemplo, y luego practica cómo se escribe.",
+  "ar": "يعلّمك Alphabet Forge أنظمة الكتابة في العالم: اضغط على أي حرف من التايلاندية والعربية والصينية واليابانية والكورية واليونانية والروسية والعبرية والهندية والجورجية وغيرها لتسمعه وترى كلمة مثالًا، ثم تدرّب على كتابته.",
+  "zh": "Alphabet Forge 教你认识世界各地的文字：点击泰文、阿拉伯文、汉语、日文、韩文、希腊文、俄文、希伯来文、印地文、格鲁吉亚文等任意字母，就能听到读音、看到例词，然后练习书写。",
+  "sw": "Alphabet Forge hufundisha mifumo ya uandishi duniani: gusa herufi yoyote ya Kithai, Kiarabu, Kimandarini, Kijapani, Kikorea, Kigiriki, Kirusi, Kiebrania, Kihindi, Kijojia na zaidi kuisikia na kuona neno la mfano, kisha jizoeze kuiandika.",
+  "sv": "Alphabet Forge lär ut världens skriftsystem: tryck på valfri bokstav i thai, arabiska, mandarin, japanska, koreanska, grekiska, ryska, hebreiska, hindi, georgiska med flera för att höra den och se ett exempelord, och öva sedan på att skriva den."
+ },
+ "Choose a writing system such as Thai, Arabic or Mandarin and tap any symbol to hear it.": {
+  "es": "Elige un sistema de escritura, como el tailandés, el árabe o el mandarín, y toca cualquier símbolo para oírlo.",
+  "ar": "اختر نظام كتابة مثل التايلاندية أو العربية أو الصينية، واضغط على أي رمز لتسمعه.",
+  "zh": "选择一种文字，例如泰文、阿拉伯文或汉语，点击任意字符即可听到读音。",
+  "sw": "Chagua mfumo wa uandishi kama Kithai, Kiarabu au Kimandarini na gusa alama yoyote kuisikia.",
+  "sv": "Välj ett skriftsystem som thai, arabiska eller mandarin och tryck på valfritt tecken för att höra det."
+ },
+ "Press “Practise writing it”.": {
+  "es": "Pulsa «Practica escribirlo».",
+  "ar": "اضغط «تدرّب على كتابته».",
+  "zh": "点击“练习书写”。",
+  "sw": "Bonyeza “Fanya mazoezi ya kuiandika”.",
+  "sv": "Tryck på ”Öva på att skriva den”."
+ },
+ "Trace or copy the symbol on the writing pad, press Check for a score, then take the listening quiz.": {
+  "es": "Calca o copia el símbolo en el bloc de escritura, pulsa Comprobar para obtener una puntuación y haz el cuestionario de escucha.",
+  "ar": "شِفّ الرمز أو انسخه على لوحة الكتابة، واضغط تحقّق للحصول على درجة، ثم أجرِ اختبار الاستماع.",
+  "zh": "在书写板上描摹或照写这个字符，点击“检查”获得评分，然后做听力测验。",
+  "sw": "Fuatisha au nakili alama kwenye kibao cha kuandika, bonyeza Kagua upate alama, kisha fanya chemsha bongo ya kusikiliza.",
+  "sv": "Följ eller skriv av tecknet på skrivplattan, tryck på Kontrollera för att få poäng och gör sedan lyssningsquizet."
+ },
+ "Can I practise writing the letters?": {
+  "es": "¿Puedo practicar la escritura de las letras?",
+  "ar": "هل يمكنني التدرّب على كتابة الحروف؟",
+  "zh": "我可以练习写这些字母吗？",
+  "sw": "Je, ninaweza kujizoeza kuandika herufi?",
+  "sv": "Kan jag öva på att skriva bokstäverna?"
+ },
+ "Yes. Trace or copy each symbol on the writing pad and press Check for a score, then take the listening quiz.": {
+  "es": "Sí. Calca o copia cada símbolo en el bloc de escritura, pulsa Comprobar para obtener una puntuación y haz el cuestionario de escucha.",
+  "ar": "نعم. شِفّ كل رمز أو انسخه على لوحة الكتابة واضغط تحقّق للحصول على درجة، ثم أجرِ اختبار الاستماع.",
+  "zh": "可以。在书写板上描摹或照写每个字符，点击“检查”获得评分，然后做听力测验。",
+  "sw": "Ndiyo. Fuatisha au nakili kila alama kwenye kibao cha kuandika na ubonyeze Kagua upate alama, kisha fanya chemsha bongo ya kusikiliza.",
+  "sv": "Ja. Följ eller skriv av varje tecken på skrivplattan och tryck på Kontrollera för att få poäng, gör sedan lyssningsquizet."
+ },
+ "About Alphabet Forge": {
+  "es": "Acerca de Alphabet Forge",
+  "ar": "عن Alphabet Forge",
+  "zh": "关于 Alphabet Forge",
+  "sw": "Kuhusu Alphabet Forge",
+  "sv": "Om Alphabet Forge"
+ },
+ "How to use Alphabet Forge": {
+  "es": "Cómo usar Alphabet Forge",
+  "ar": "طريقة استخدام Alphabet Forge",
+  "zh": "如何使用 Alphabet Forge",
+  "sw": "Jinsi ya kutumia Alphabet Forge",
+  "sv": "Så använder du Alphabet Forge"
+ },
+ "Is Alphabet Forge free?": {
+  "es": "¿Alphabet Forge es gratis?",
+  "ar": "هل Alphabet Forge مجاني؟",
+  "zh": "Alphabet Forge 免费吗？",
+  "sw": "Je, Alphabet Forge ni bure?",
+  "sv": "Är Alphabet Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

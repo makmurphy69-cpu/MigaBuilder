@@ -44,3 +44,97 @@ I18N.phrases({
   "Avoid a double comparative.": { es: "Evita el comparativo doble.", ar: "تجنّب صيغة التفضيل المزدوجة.", zh: "避免双重比较级。", sw: "Epuka ulinganisho maradufu.", sv: "Undvik dubbel komparativ." },
   "Copied": { es: "Copiado", ar: "تم النسخ", zh: "已复制", sw: "Imenakiliwa", sv: "Kopierat" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Grammar Forge checks spelling and grammar in English, Swedish, Spanish, Arabic, Chinese and Kiswahili, with an explanation for each suggestion.": {
+  "es": "Grammar Forge revisa la ortografía y la gramática en inglés, sueco, español, árabe, chino y suajili, con una explicación de cada sugerencia.",
+  "ar": "يفحص Grammar Forge الإملاء والقواعد بالإنجليزية والسويدية والإسبانية والعربية والصينية والسواحيلية، مع شرح لكل اقتراح.",
+  "zh": "Grammar Forge 检查英语、瑞典语、西班牙语、阿拉伯语、中文和斯瓦希里语的拼写和语法，并解释每条建议。",
+  "sw": "Grammar Forge hukagua tahajia na sarufi kwa Kiingereza, Kiswidi, Kihispania, Kiarabu, Kichina na Kiswahili, pamoja na maelezo ya kila pendekezo.",
+  "sv": "Grammar Forge granskar stavning och grammatik på engelska, svenska, spanska, arabiska, kinesiska och swahili, med en förklaring till varje förslag."
+ },
+ "Choose a language and paste or type the writing you want to improve.": {
+  "es": "Elige un idioma y pega o escribe el texto que quieres mejorar.",
+  "ar": "اختر لغة والصق أو اكتب النص الذي تريد تحسينه.",
+  "zh": "选择一种语言，粘贴或输入想要改进的文字。",
+  "sw": "Chagua lugha na ubandike au uandike maandishi unayotaka kuboresha.",
+  "sv": "Välj ett språk och klistra in eller skriv texten du vill förbättra."
+ },
+ "Press “Check writing”.": {
+  "es": "Pulsa «Revisar texto».",
+  "ar": "اضغط «افحص النص».",
+  "zh": "点击“检查文字”。",
+  "sw": "Bonyeza “Kagua maandishi”.",
+  "sv": "Tryck på ”Granska texten”."
+ },
+ "Review each explanation, accept the useful fixes, and copy the corrected text.": {
+  "es": "Lee cada explicación, acepta las correcciones útiles y copia el texto corregido.",
+  "ar": "اقرأ كل شرح، واقبل التصحيحات المفيدة، وانسخ النص المصحَّح.",
+  "zh": "阅读每条解释，接受有用的修改，然后复制修改后的文字。",
+  "sw": "Pitia kila maelezo, kubali marekebisho yanayofaa, na unakili maandishi yaliyosahihishwa.",
+  "sv": "Läs varje förklaring, godta de användbara rättelserna och kopiera den rättade texten."
+ },
+ "Which languages does it check?": {
+  "es": "¿Qué idiomas revisa?",
+  "ar": "ما اللغات التي يفحصها؟",
+  "zh": "它能检查哪些语言？",
+  "sw": "Hukagua lugha zipi?",
+  "sv": "Vilka språk granskar den?"
+ },
+ "English, Swedish, Spanish, Arabic, Chinese and Kiswahili.": {
+  "es": "Inglés, sueco, español, árabe, chino y suajili.",
+  "ar": "الإنجليزية والسويدية والإسبانية والعربية والصينية والسواحيلية.",
+  "zh": "英语、瑞典语、西班牙语、阿拉伯语、中文和斯瓦希里语。",
+  "sw": "Kiingereza, Kiswidi, Kihispania, Kiarabu, Kichina na Kiswahili.",
+  "sv": "Engelska, svenska, spanska, arabiska, kinesiska och swahili."
+ },
+ "About Grammar Forge": {
+  "es": "Acerca de Grammar Forge",
+  "ar": "عن Grammar Forge",
+  "zh": "关于 Grammar Forge",
+  "sw": "Kuhusu Grammar Forge",
+  "sv": "Om Grammar Forge"
+ },
+ "How to use Grammar Forge": {
+  "es": "Cómo usar Grammar Forge",
+  "ar": "طريقة استخدام Grammar Forge",
+  "zh": "如何使用 Grammar Forge",
+  "sw": "Jinsi ya kutumia Grammar Forge",
+  "sv": "Så använder du Grammar Forge"
+ },
+ "Is Grammar Forge free?": {
+  "es": "¿Grammar Forge es gratis?",
+  "ar": "هل Grammar Forge مجاني؟",
+  "zh": "Grammar Forge 免费吗？",
+  "sw": "Je, Grammar Forge ni bure?",
+  "sv": "Är Grammar Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

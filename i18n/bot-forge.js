@@ -20,3 +20,97 @@ I18N.phrases({
   "How to use Bot Forge": { es: "Cómo usar Bot Forge", ar: "كيفية استخدام Bot Forge", zh: "如何使用 Bot Forge", sw: "Jinsi ya kutumia Bot Forge", sv: "Så använder du Bot Forge" },
   "Bot Forge — free website chat & FAQ widget generator": { es: "Bot Forge — generador gratis de widgets de chat y preguntas frecuentes para webs", ar: "Bot Forge — منشئ مجاني لأدوات الدردشة والأسئلة الشائعة للمواقع", zh: "Bot Forge — 免费的网站聊天和常见问题小部件生成器", sw: "Bot Forge — kitengeneza wijeti za gumzo na maswali ya mara kwa mara kwa tovuti, cha bure", sv: "Bot Forge — gratis generator för chatt- och FAQ-widgetar till webbplatser" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Bot Forge makes a chat widget for your website that answers visitors' questions from the facts you give it. There is no backend to run: you paste one snippet into your site.": {
+  "es": "Bot Forge crea un chat para tu web que responde a las preguntas de los visitantes con los datos que le das. No hay servidor que mantener: pegas un solo fragmento de código en tu sitio.",
+  "ar": "يصنع Bot Forge نافذة دردشة لموقعك تجيب عن أسئلة الزوار من المعلومات التي تعطيها. لا خادم لتشغيله: تلصق مقتطفًا واحدًا في موقعك.",
+  "zh": "Bot Forge 为你的网站制作聊天小部件，用你提供的资料回答访客的问题。无需运行后端：只需把一段代码粘贴到网站里。",
+  "sw": "Bot Forge hutengeneza kidirisha cha mazungumzo kwa tovuti yako kinachojibu maswali ya wageni kutokana na taarifa unazokipa. Hakuna seva ya kuendesha: unabandika kipande kimoja tu cha msimbo kwenye tovuti yako.",
+  "sv": "Bot Forge gör en chattruta för din webbplats som svarar på besökarnas frågor utifrån fakta du ger den. Ingen server behövs: du klistrar in ett enda kodstycke på din sajt."
+ },
+ "Add the website details and questions customers usually ask.": {
+  "es": "Añade los datos del sitio web y las preguntas que suelen hacer los clientes.",
+  "ar": "أضف تفاصيل الموقع والأسئلة التي يطرحها العملاء عادة.",
+  "zh": "添加网站信息以及客户常问的问题。",
+  "sw": "Ongeza taarifa za tovuti na maswali ambayo wateja huuliza mara nyingi.",
+  "sv": "Lägg till uppgifter om webbplatsen och frågor som kunderna brukar ställa."
+ },
+ "Press “Build bot”.": {
+  "es": "Pulsa «Crear bot».",
+  "ar": "اضغط «ابنِ الروبوت».",
+  "zh": "点击“创建机器人”。",
+  "sw": "Bonyeza “Jenga boti”.",
+  "sv": "Tryck på ”Bygg bot”."
+ },
+ "Test answers, refine them, and copy the widget to your site.": {
+  "es": "Prueba las respuestas, mejóralas y copia el widget a tu sitio.",
+  "ar": "جرّب الإجابات وحسّنها، ثم انسخ الأداة إلى موقعك.",
+  "zh": "测试回答、加以完善，然后把小部件复制到你的网站。",
+  "sw": "Jaribu majibu, yaboreshe, na unakili kidirisha kwenye tovuti yako.",
+  "sv": "Testa svaren, förbättra dem och kopiera chattrutan till din sajt."
+ },
+ "Do I need a server for the chat bot?": {
+  "es": "¿Necesito un servidor para el chat?",
+  "ar": "هل أحتاج إلى خادم لروبوت الدردشة؟",
+  "zh": "聊天机器人需要服务器吗？",
+  "sw": "Je, ninahitaji seva kwa ajili ya boti ya mazungumzo?",
+  "sv": "Behöver jag en server för chattboten?"
+ },
+ "No. The widget answers from the information you entered and runs inside your web page, so you only paste one snippet into your site.": {
+  "es": "No. El widget responde con la información que introdujiste y funciona dentro de tu página web, así que solo pegas un fragmento en tu sitio.",
+  "ar": "لا. تجيب الأداة من المعلومات التي أدخلتها وتعمل داخل صفحتك، لذا تلصق مقتطفًا واحدًا فقط في موقعك.",
+  "zh": "不需要。小部件根据你输入的信息回答，并在你的网页内运行，你只需把一段代码粘贴到网站里。",
+  "sw": "Hapana. Kidirisha hujibu kutokana na taarifa ulizoingiza na hufanya kazi ndani ya ukurasa wako wa wavuti, hivyo unabandika kipande kimoja tu kwenye tovuti yako.",
+  "sv": "Nej. Chattrutan svarar utifrån informationen du skrev in och körs inuti din webbsida, så du klistrar bara in ett kodstycke på sajten."
+ },
+ "About Bot Forge": {
+  "es": "Acerca de Bot Forge",
+  "ar": "عن Bot Forge",
+  "zh": "关于 Bot Forge",
+  "sw": "Kuhusu Bot Forge",
+  "sv": "Om Bot Forge"
+ },
+ "How to use Bot Forge": {
+  "es": "Cómo usar Bot Forge",
+  "ar": "طريقة استخدام Bot Forge",
+  "zh": "如何使用 Bot Forge",
+  "sw": "Jinsi ya kutumia Bot Forge",
+  "sv": "Så använder du Bot Forge"
+ },
+ "Is Bot Forge free?": {
+  "es": "¿Bot Forge es gratis?",
+  "ar": "هل Bot Forge مجاني؟",
+  "zh": "Bot Forge 免费吗？",
+  "sw": "Je, Bot Forge ni bure?",
+  "sv": "Är Bot Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

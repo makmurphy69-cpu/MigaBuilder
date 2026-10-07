@@ -22,3 +22,97 @@ I18N.phrases({
   "How to use Video Forge": { es: "Cómo usar Video Forge", ar: "كيفية استخدام Video Forge", zh: "如何使用 Video Forge", sw: "Jinsi ya kutumia Video Forge", sv: "Så använder du Video Forge" },
   "Video Forge — turn your drawings into a video, ready for YouTube": { es: "Video Forge — convierte tus dibujos en un vídeo listo para YouTube", ar: "Video Forge — حوّل رسوماتك إلى فيديو جاهز لـ YouTube", zh: "Video Forge — 把你的画作变成视频，可直接发布到 YouTube", sw: "Video Forge — geuza michoro yako kuwa video, tayari kwa YouTube", sv: "Video Forge — gör dina teckningar till en video, redo för YouTube" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Video Forge turns your own drawings and images into a real video, with pacing, pan and zoom, music and a title card.": {
+  "es": "Video Forge convierte tus propios dibujos e imágenes en un vídeo real, con ritmo, desplazamiento y zoom, música y un cartel de título.",
+  "ar": "يحوّل Video Forge رسوماتك وصورك إلى فيديو حقيقي، مع التحكم في الإيقاع والتحريك والتكبير والموسيقى وبطاقة عنوان.",
+  "zh": "Video Forge 把你自己的绘画和图片变成真正的视频，带有节奏、平移缩放、音乐和片头卡。",
+  "sw": "Video Forge hugeuza michoro na picha zako mwenyewe kuwa video halisi, yenye mwendo, kusogeza na kukuza, muziki na kadi ya kichwa.",
+  "sv": "Video Forge gör dina egna teckningar och bilder till en riktig video, med tempo, panorering och zoom, musik och en titelskylt."
+ },
+ "Upload drawings or images and describe how they should move.": {
+  "es": "Sube dibujos o imágenes y describe cómo deben moverse.",
+  "ar": "ارفع رسومات أو صورًا وصف كيف ينبغي أن تتحرك.",
+  "zh": "上传绘画或图片，并描述它们应该怎样动。",
+  "sw": "Pakia michoro au picha na ueleze zinavyopaswa kusogea.",
+  "sv": "Ladda upp teckningar eller bilder och beskriv hur de ska röra sig."
+ },
+ "Press “Create video”.": {
+  "es": "Pulsa «Crear vídeo».",
+  "ar": "اضغط «أنشئ الفيديو».",
+  "zh": "点击“生成视频”。",
+  "sw": "Bonyeza “Tengeneza video”.",
+  "sv": "Tryck på ”Skapa video”."
+ },
+ "Preview the motion, adjust it, and download the video.": {
+  "es": "Previsualiza el movimiento, ajústalo y descarga el vídeo.",
+  "ar": "عاين الحركة وعدّلها ونزّل الفيديو.",
+  "zh": "预览动作效果，加以调整，然后下载视频。",
+  "sw": "Hakiki mwendo, urekebishe, na upakue video.",
+  "sv": "Förhandsgranska rörelsen, justera den och ladda ner videon."
+ },
+ "Can I upload the video to YouTube?": {
+  "es": "¿Puedo subir el vídeo a YouTube?",
+  "ar": "هل يمكنني رفع الفيديو إلى YouTube؟",
+  "zh": "我可以把视频上传到 YouTube 吗？",
+  "sw": "Je, ninaweza kupakia video YouTube?",
+  "sv": "Kan jag ladda upp videon till YouTube?"
+ },
+ "Yes. Download the rendered video file, or upload it straight to your YouTube channel from the page.": {
+  "es": "Sí. Descarga el archivo de vídeo o súbelo directamente a tu canal de YouTube desde la página.",
+  "ar": "نعم. نزّل ملف الفيديو، أو ارفعه مباشرة إلى قناتك على YouTube من الصفحة.",
+  "zh": "可以。下载渲染好的视频文件，或直接从页面上传到你的 YouTube 频道。",
+  "sw": "Ndiyo. Pakua faili la video lililotengenezwa, au ulipakie moja kwa moja kwenye chaneli yako ya YouTube kutoka kwenye ukurasa.",
+  "sv": "Ja. Ladda ner den renderade videofilen eller ladda upp den direkt till din YouTube-kanal från sidan."
+ },
+ "About Video Forge": {
+  "es": "Acerca de Video Forge",
+  "ar": "عن Video Forge",
+  "zh": "关于 Video Forge",
+  "sw": "Kuhusu Video Forge",
+  "sv": "Om Video Forge"
+ },
+ "How to use Video Forge": {
+  "es": "Cómo usar Video Forge",
+  "ar": "طريقة استخدام Video Forge",
+  "zh": "如何使用 Video Forge",
+  "sw": "Jinsi ya kutumia Video Forge",
+  "sv": "Så använder du Video Forge"
+ },
+ "Is Video Forge free?": {
+  "es": "¿Video Forge es gratis?",
+  "ar": "هل Video Forge مجاني؟",
+  "zh": "Video Forge 免费吗？",
+  "sw": "Je, Video Forge ni bure?",
+  "sv": "Är Video Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

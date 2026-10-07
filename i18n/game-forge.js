@@ -87,3 +87,97 @@ I18N.phrases({
   "How to use Game Forge": { es: "Cómo usar Game Forge", ar: "كيفية استخدام Game Forge", zh: "如何使用 Game Forge", sw: "Jinsi ya kutumia Game Forge", sv: "Så använder du Game Forge" },
   "Game Forge — free AI game generator": { es: "Game Forge — generador de juegos con IA gratis", ar: "Game Forge — مولّد ألعاب مجاني بالذكاء الاصطناعي", zh: "Game Forge — 免费 AI 游戏生成器", sw: "Game Forge — kitengeneza michezo cha AI bila malipo", sv: "Game Forge — gratis AI-spelgenerator" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Game Forge turns a written idea into a playable browser game. Describe the game, its controls and goal, and the AI writes it while you watch; then play-test it and ask for changes.": {
+  "es": "Game Forge convierte una idea escrita en un juego que se puede jugar en el navegador. Describe el juego, sus controles y su objetivo, y la IA lo escribe mientras miras; luego pruébalo y pide cambios.",
+  "ar": "يحوّل Game Forge فكرة مكتوبة إلى لعبة قابلة للعب في المتصفح. صف اللعبة وأدوات التحكم والهدف، فيكتبها الذكاء الاصطناعي أمامك؛ ثم جرّبها واطلب تعديلات.",
+  "zh": "Game Forge 把文字构想变成可在浏览器中玩的游戏。描述游戏、操作方式和目标，AI 当着你的面把它写出来；然后试玩并提出修改。",
+  "sw": "Game Forge hugeuza wazo lililoandikwa kuwa mchezo unaochezwa kwenye kivinjari. Eleza mchezo, vidhibiti na lengo lake, na AI huuandika ukitazama; kisha ujaribu na uombe mabadiliko.",
+  "sv": "Game Forge gör en skriven idé till ett spel som kan spelas i webbläsaren. Beskriv spelet, styrningen och målet så skriver AI:n det medan du tittar; testa det sedan och be om ändringar."
+ },
+ "Describe the game, controls, goal, art style, and difficulty.": {
+  "es": "Describe el juego, los controles, el objetivo, el estilo gráfico y la dificultad.",
+  "ar": "صف اللعبة وأدوات التحكم والهدف وأسلوب الرسوم ومستوى الصعوبة.",
+  "zh": "描述游戏、操作、目标、美术风格和难度。",
+  "sw": "Eleza mchezo, vidhibiti, lengo, mtindo wa sanaa na ugumu.",
+  "sv": "Beskriv spelet, styrningen, målet, grafikstilen och svårighetsgraden."
+ },
+ "Press “Generate game”.": {
+  "es": "Pulsa «Generar juego».",
+  "ar": "اضغط «أنشئ اللعبة».",
+  "zh": "点击“生成游戏”。",
+  "sw": "Bonyeza “Tengeneza mchezo”.",
+  "sv": "Tryck på ”Skapa spel”."
+ },
+ "Play-test it, request changes, and download the finished game.": {
+  "es": "Pruébalo, pide cambios y descarga el juego terminado.",
+  "ar": "جرّبها واطلب تعديلات ونزّل اللعبة النهائية.",
+  "zh": "试玩、提出修改，然后下载完成的游戏。",
+  "sw": "Ujaribu, omba mabadiliko, na upakue mchezo uliokamilika.",
+  "sv": "Testa spelet, be om ändringar och ladda ner det färdiga spelet."
+ },
+ "Can I download the game I make?": {
+  "es": "¿Puedo descargar el juego que hago?",
+  "ar": "هل يمكنني تنزيل اللعبة التي أصنعها؟",
+  "zh": "我可以下载自己做的游戏吗？",
+  "sw": "Je, ninaweza kupakua mchezo ninaoutengeneza?",
+  "sv": "Kan jag ladda ner spelet jag gör?"
+ },
+ "Yes. When you are happy with it, download the finished game as an HTML file that runs in any modern browser, offline too.": {
+  "es": "Sí. Cuando estés contento, descarga el juego terminado como un archivo HTML que funciona en cualquier navegador moderno, también sin conexión.",
+  "ar": "نعم. عندما ترضى عنها، نزّل اللعبة النهائية كملف HTML يعمل في أي متصفح حديث، حتى دون اتصال.",
+  "zh": "可以。满意后，把完成的游戏下载为 HTML 文件，它能在任何现代浏览器中运行，离线也可以。",
+  "sw": "Ndiyo. Ukiridhika, pakua mchezo uliokamilika kama faili la HTML linalofanya kazi kwenye kivinjari chochote cha kisasa, hata bila mtandao.",
+  "sv": "Ja. När du är nöjd laddar du ner det färdiga spelet som en HTML-fil som fungerar i alla moderna webbläsare, även offline."
+ },
+ "About Game Forge": {
+  "es": "Acerca de Game Forge",
+  "ar": "عن Game Forge",
+  "zh": "关于 Game Forge",
+  "sw": "Kuhusu Game Forge",
+  "sv": "Om Game Forge"
+ },
+ "How to use Game Forge": {
+  "es": "Cómo usar Game Forge",
+  "ar": "طريقة استخدام Game Forge",
+  "zh": "如何使用 Game Forge",
+  "sw": "Jinsi ya kutumia Game Forge",
+  "sv": "Så använder du Game Forge"
+ },
+ "Is Game Forge free?": {
+  "es": "¿Game Forge es gratis?",
+  "ar": "هل Game Forge مجاني؟",
+  "zh": "Game Forge 免费吗？",
+  "sw": "Je, Game Forge ni bure?",
+  "sv": "Är Game Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

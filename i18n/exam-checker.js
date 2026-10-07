@@ -269,3 +269,97 @@ I18N.phrases({
   "About": { es: "Acerca de", ar: "حول", zh: "关于", sw: "Kuhusu", sv: "Om" },
   "Download the CSV instead.": { es: "Descarga el CSV en su lugar.", ar: "نزّل ملف CSV بدلًا من ذلك.", zh: "请改为下载 CSV。", sw: "Pakua CSV badala yake.", sv: "Ladda ner CSV-filen i stället." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Exam Checker builds an exam with multiple-choice, true/false, short and open answers, prints bubble answer sheets, marks photographed papers and exports everyone's marks.": {
+  "es": "Exam Checker crea un examen con preguntas tipo test, verdadero/falso, respuestas cortas y abiertas, imprime hojas de respuestas para rellenar, corrige las hojas fotografiadas y exporta las notas de todos.",
+  "ar": "ينشئ Exam Checker امتحانًا بأسئلة اختيار من متعدد وصح/خطأ وإجابات قصيرة ومفتوحة، ويطبع أوراق إجابة بالدوائر، ويصحّح الأوراق المصوَّرة ويصدّر درجات الجميع.",
+  "zh": "Exam Checker 可以出一份包含选择题、判断题、简答题和开放题的试卷，打印涂卡答题纸，批改拍照的答卷，并导出所有人的成绩。",
+  "sw": "Exam Checker huunda mtihani wenye maswali ya kuchagua, kweli/si kweli, majibu mafupi na wazi, huchapisha karatasi za majibu za kujaza viduara, husahihisha karatasi zilizopigwa picha na kuhamisha alama za kila mtu.",
+  "sv": "Exam Checker skapar ett prov med flerval, sant/falskt, korta och öppna svar, skriver ut svarsblanketter med rutor, rättar fotograferade papper och exporterar allas resultat."
+ },
+ "Build the exam with multiple-choice, true/false, short and open questions.": {
+  "es": "Crea el examen con preguntas tipo test, verdadero/falso, cortas y abiertas.",
+  "ar": "أنشئ الامتحان بأسئلة اختيار من متعدد وصح/خطأ وأسئلة قصيرة ومفتوحة.",
+  "zh": "出一份包含选择题、判断题、简答题和开放题的试卷。",
+  "sw": "Unda mtihani wenye maswali ya kuchagua, kweli/si kweli, mafupi na wazi.",
+  "sv": "Skapa provet med flervals-, sant/falskt-, korta och öppna frågor."
+ },
+ "Print the bubble answer sheets.": {
+  "es": "Imprime las hojas de respuestas para rellenar.",
+  "ar": "اطبع أوراق الإجابة بالدوائر.",
+  "zh": "打印涂卡答题纸。",
+  "sw": "Chapisha karatasi za majibu za kujaza viduara.",
+  "sv": "Skriv ut svarsblanketterna med rutor."
+ },
+ "Photograph each student's sheet and download the marks as Excel or CSV.": {
+  "es": "Fotografía la hoja de cada alumno y descarga las notas en Excel o CSV.",
+  "ar": "صوّر ورقة كل طالب ونزّل الدرجات بصيغة Excel أو CSV.",
+  "zh": "给每个学生的答题纸拍照，然后把成绩下载为 Excel 或 CSV。",
+  "sw": "Piga picha karatasi ya kila mwanafunzi na upakue alama kama Excel au CSV.",
+  "sv": "Fotografera varje elevs blankett och ladda ner resultaten som Excel eller CSV."
+ },
+ "Can I export the marks?": {
+  "es": "¿Puedo exportar las notas?",
+  "ar": "هل يمكنني تصدير الدرجات؟",
+  "zh": "我可以导出成绩吗？",
+  "sw": "Je, ninaweza kuhamisha alama?",
+  "sv": "Kan jag exportera resultaten?"
+ },
+ "Yes. Download every student's marks as an Excel or CSV file.": {
+  "es": "Sí. Descarga las notas de todos los alumnos como archivo Excel o CSV.",
+  "ar": "نعم. نزّل درجات جميع الطلاب كملف Excel أو CSV.",
+  "zh": "可以。把每个学生的成绩下载为 Excel 或 CSV 文件。",
+  "sw": "Ndiyo. Pakua alama za kila mwanafunzi kama faili la Excel au CSV.",
+  "sv": "Ja. Ladda ner alla elevers resultat som Excel- eller CSV-fil."
+ },
+ "About Exam Checker": {
+  "es": "Acerca de Exam Checker",
+  "ar": "عن Exam Checker",
+  "zh": "关于 Exam Checker",
+  "sw": "Kuhusu Exam Checker",
+  "sv": "Om Exam Checker"
+ },
+ "How to use Exam Checker": {
+  "es": "Cómo usar Exam Checker",
+  "ar": "طريقة استخدام Exam Checker",
+  "zh": "如何使用 Exam Checker",
+  "sw": "Jinsi ya kutumia Exam Checker",
+  "sv": "Så använder du Exam Checker"
+ },
+ "Is Exam Checker free?": {
+  "es": "¿Exam Checker es gratis?",
+  "ar": "هل Exam Checker مجاني؟",
+  "zh": "Exam Checker 免费吗？",
+  "sw": "Je, Exam Checker ni bure?",
+  "sv": "Är Exam Checker gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});
