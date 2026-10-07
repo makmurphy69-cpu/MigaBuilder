@@ -74,3 +74,97 @@ I18N.phrases({
   "Student 📘": { es: "Estudiante 📘", ar: "طالب 📘", zh: "学生 📘", sw: "Mwanafunzi 📘", sv: "Student 📘" },
   "Novice 🌱": { es: "Principiante 🌱", ar: "مبتدئ 🌱", zh: "新手 🌱", sw: "Mwanzilishi 🌱", sv: "Nybörjare 🌱" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Idea Atlas maps 37 philosophies and political ideologies, from Confucianism and Stoicism to liberalism, socialism and environmentalism, with their history, key thinkers and influences.": {
+  "es": "Idea Atlas reúne 37 filosofías e ideologías políticas, del confucianismo y el estoicismo al liberalismo, el socialismo y el ecologismo, con su historia, sus pensadores clave y sus influencias.",
+  "ar": "يرسم Idea Atlas خريطة لـ37 فلسفة وأيديولوجيا سياسية، من الكونفوشيوسية والرواقية إلى الليبرالية والاشتراكية والبيئية، مع تاريخها وأبرز مفكريها وتأثيراتها.",
+  "zh": "Idea Atlas 汇集了 37 种哲学和政治思想，从儒家、斯多葛主义到自由主义、社会主义和环保主义，展示它们的历史、代表人物和相互影响。",
+  "sw": "Idea Atlas huonyesha falsafa na itikadi 37 za kisiasa, kuanzia Ukonfusio na Ustoiki hadi uliberali, ujamaa na utunzaji wa mazingira, pamoja na historia, wanafikra wakuu na athari zao.",
+  "sv": "Idea Atlas kartlägger 37 filosofier och politiska ideologier, från konfucianism och stoicism till liberalism, socialism och miljöism, med deras historia, viktigaste tänkare och inflytanden."
+ },
+ "Search or click a philosophy or ideology on the connections map to read its history and key thinkers.": {
+  "es": "Busca o haz clic en una filosofía o ideología del mapa de conexiones para leer su historia y sus pensadores clave.",
+  "ar": "ابحث عن فلسفة أو أيديولوجيا أو اضغط عليها في خريطة الروابط لتقرأ تاريخها وأبرز مفكريها.",
+  "zh": "在关系图上搜索或点击某种哲学或思想，阅读它的历史和代表人物。",
+  "sw": "Tafuta au bofya falsafa au itikadi kwenye ramani ya miunganiko kusoma historia yake na wanafikra wakuu.",
+  "sv": "Sök eller klicka på en filosofi eller ideologi på kopplingskartan för att läsa om dess historia och viktigaste tänkare."
+ },
+ "Press “Generate quiz”.": {
+  "es": "Pulsa «Generar cuestionario».",
+  "ar": "اضغط «أنشئ اختبارًا».",
+  "zh": "点击“生成测验”。",
+  "sw": "Bonyeza “Tengeneza chemsha bongo”.",
+  "sv": "Tryck på ”Skapa quiz”."
+ },
+ "Answer the questions against the clock, read each explanation and try to beat your best score.": {
+  "es": "Responde contra el reloj, lee cada explicación e intenta superar tu mejor marca.",
+  "ar": "أجب عن الأسئلة في سباق مع الوقت، واقرأ كل شرح، وحاول التفوق على أفضل نتيجة لك.",
+  "zh": "限时作答，阅读每条解释，努力打破你的最好成绩。",
+  "sw": "Jibu maswali kwa kushindana na saa, soma kila maelezo na ujaribu kuvunja rekodi yako bora.",
+  "sv": "Svara mot klockan, läs varje förklaring och försök slå ditt bästa resultat."
+ },
+ "Is there a quiz?": {
+  "es": "¿Hay un cuestionario?",
+  "ar": "هل يوجد اختبار؟",
+  "zh": "有测验吗？",
+  "sw": "Je, kuna chemsha bongo?",
+  "sv": "Finns det ett quiz?"
+ },
+ "Yes. A timed, scored quiz game with an explanation after every answer, so you can try to beat your best score.": {
+  "es": "Sí. Un juego de preguntas con tiempo y puntos, con una explicación tras cada respuesta, para que intentes superar tu mejor marca.",
+  "ar": "نعم. لعبة أسئلة موقوتة بالنقاط مع شرح بعد كل إجابة، لتحاول التفوق على أفضل نتيجة لك.",
+  "zh": "有。一个限时计分的测验游戏，每题作答后都有解释，你可以努力打破自己的最好成绩。",
+  "sw": "Ndiyo. Mchezo wa chemsha bongo wenye muda na alama, wenye maelezo baada ya kila jibu, ili ujaribu kuvunja rekodi yako bora.",
+  "sv": "Ja. Ett tidsatt quizspel med poäng och en förklaring efter varje svar, så att du kan försöka slå ditt bästa resultat."
+ },
+ "About Idea Atlas": {
+  "es": "Acerca de Idea Atlas",
+  "ar": "عن Idea Atlas",
+  "zh": "关于 Idea Atlas",
+  "sw": "Kuhusu Idea Atlas",
+  "sv": "Om Idea Atlas"
+ },
+ "How to use Idea Atlas": {
+  "es": "Cómo usar Idea Atlas",
+  "ar": "طريقة استخدام Idea Atlas",
+  "zh": "如何使用 Idea Atlas",
+  "sw": "Jinsi ya kutumia Idea Atlas",
+  "sv": "Så använder du Idea Atlas"
+ },
+ "Is Idea Atlas free?": {
+  "es": "¿Idea Atlas es gratis?",
+  "ar": "هل Idea Atlas مجاني؟",
+  "zh": "Idea Atlas 免费吗？",
+  "sw": "Je, Idea Atlas ni bure?",
+  "sv": "Är Idea Atlas gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

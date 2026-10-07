@@ -145,3 +145,97 @@ I18N.phrases({
   "Choice": { es: "Elección", ar: "الاختيار", zh: "选择", sw: "Chaguo", sv: "Val" },
   "Build my report": { es: "Crear mi informe", ar: "أنشئ تقريري", zh: "生成我的报告", sw: "Tengeneza ripoti yangu", sv: "Skapa min rapport" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Strength Compass is a private personality assessment that finds your top five personal strengths and gives a practical development report.": {
+  "es": "Strength Compass es una evaluación privada de personalidad que descubre tus cinco principales fortalezas y te da un informe práctico para desarrollarlas.",
+  "ar": "Strength Compass تقييم خاص للشخصية يكشف أبرز خمس نقاط قوة لديك ويقدّم تقريرًا عمليًا لتنميتها.",
+  "zh": "Strength Compass 是一份私密的性格测评，找出你最突出的五项个人优势，并提供实用的成长报告。",
+  "sw": "Strength Compass ni tathmini ya faragha ya haiba inayopata nguvu zako tano kuu na kutoa ripoti ya vitendo ya kujiendeleza.",
+  "sv": "Strength Compass är en privat personlighetsbedömning som hittar dina fem främsta styrkor och ger en praktisk utvecklingsrapport."
+ },
+ "Read how the private assessment works.": {
+  "es": "Lee cómo funciona la evaluación privada.",
+  "ar": "اقرأ كيف يعمل التقييم الخاص.",
+  "zh": "阅读私密测评的说明。",
+  "sw": "Soma jinsi tathmini ya faragha inavyofanya kazi.",
+  "sv": "Läs hur den privata bedömningen fungerar."
+ },
+ "Press “Begin private assessment”.": {
+  "es": "Pulsa «Empezar la evaluación privada».",
+  "ar": "اضغط «ابدأ التقييم الخاص».",
+  "zh": "点击“开始私密评估”。",
+  "sw": "Bonyeza “Anza tathmini ya faragha”.",
+  "sv": "Tryck på ”Starta den privata bedömningen”."
+ },
+ "Choose between each pair of statements, then read your top five strengths.": {
+  "es": "Elige entre cada par de frases y lee tus cinco principales fortalezas.",
+  "ar": "اختر بين كل زوج من العبارات، ثم اقرأ أبرز خمس نقاط قوة لديك.",
+  "zh": "在每对陈述中做出选择，然后阅读你的五项主要优势。",
+  "sw": "Chagua kati ya kila jozi ya kauli, kisha soma nguvu zako tano kuu.",
+  "sv": "Välj mellan varje par påståenden och läs sedan om dina fem främsta styrkor."
+ },
+ "Are my answers saved anywhere?": {
+  "es": "¿Se guardan mis respuestas en algún sitio?",
+  "ar": "هل تُحفظ إجاباتي في أي مكان؟",
+  "zh": "我的答案会保存到哪里吗？",
+  "sw": "Je, majibu yangu yanahifadhiwa popote?",
+  "sv": "Sparas mina svar någonstans?"
+ },
+ "Only in your own browser. Nothing is sent to MigaBuilder, and you can print your report.": {
+  "es": "Solo en tu propio navegador. No se envía nada a MigaBuilder y puedes imprimir tu informe.",
+  "ar": "في متصفحك فقط. لا يُرسل شيء إلى MigaBuilder، ويمكنك طباعة تقريرك.",
+  "zh": "只保存在你自己的浏览器中。不会发送任何内容给 MigaBuilder，你还可以打印报告。",
+  "sw": "Kwenye kivinjari chako tu. Hakuna kinachotumwa kwa MigaBuilder, na unaweza kuchapisha ripoti yako.",
+  "sv": "Bara i din egen webbläsare. Inget skickas till MigaBuilder, och du kan skriva ut din rapport."
+ },
+ "About Strength Compass": {
+  "es": "Acerca de Strength Compass",
+  "ar": "عن Strength Compass",
+  "zh": "关于 Strength Compass",
+  "sw": "Kuhusu Strength Compass",
+  "sv": "Om Strength Compass"
+ },
+ "How to use Strength Compass": {
+  "es": "Cómo usar Strength Compass",
+  "ar": "طريقة استخدام Strength Compass",
+  "zh": "如何使用 Strength Compass",
+  "sw": "Jinsi ya kutumia Strength Compass",
+  "sv": "Så använder du Strength Compass"
+ },
+ "Is Strength Compass free?": {
+  "es": "¿Strength Compass es gratis?",
+  "ar": "هل Strength Compass مجاني؟",
+  "zh": "Strength Compass 免费吗？",
+  "sw": "Je, Strength Compass ni bure?",
+  "sv": "Är Strength Compass gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

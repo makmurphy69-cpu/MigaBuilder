@@ -20,3 +20,97 @@ I18N.phrases({
   "How to use Model Forge": { es: "Cómo usar Model Forge", ar: "كيفية استخدام Model Forge", zh: "如何使用 Model Forge", sw: "Jinsi ya kutumia Model Forge", sv: "Så använder du Model Forge" },
   "Model Forge — free 3D model & 3D-print design tool": { es: "Model Forge — herramienta gratis para diseñar modelos 3D e impresión 3D", ar: "Model Forge — أداة مجانية لتصميم النماذج ثلاثية الأبعاد والطباعة ثلاثية الأبعاد", zh: "Model Forge — 免费的 3D 模型与 3D 打印设计工具", sw: "Model Forge — zana ya bure ya kubuni modeli za 3D na uchapishaji wa 3D", sv: "Model Forge — gratis verktyg för 3D-modeller och 3D-utskrift" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Model Forge builds 3D shapes, combines them with union, subtract and intersect, and exports a real STL file for any 3D printer's slicer.": {
+  "es": "Model Forge crea formas 3D, las combina con unión, resta e intersección y exporta un archivo STL real para el laminador de cualquier impresora 3D.",
+  "ar": "يبني Model Forge أشكالًا ثلاثية الأبعاد ويدمجها بالاتحاد والطرح والتقاطع، ويصدّر ملف STL حقيقيًا لبرنامج التقطيع في أي طابعة ثلاثية الأبعاد.",
+  "zh": "Model Forge 创建 3D 形状，用合并、相减和相交组合它们，并导出可用于任何 3D 打印机切片软件的真正 STL 文件。",
+  "sw": "Model Forge hujenga maumbo ya 3D, huyaunganisha kwa muungano, kutoa na makutano, na huhamisha faili halisi la STL kwa programu ya kukata ya printa yoyote ya 3D.",
+  "sv": "Model Forge bygger 3D-former, kombinerar dem med union, subtraktion och skärning och exporterar en riktig STL-fil till vilken 3D-skrivares slicer som helst."
+ },
+ "Describe the 3D object and set its measurements and shape.": {
+  "es": "Describe el objeto 3D y define sus medidas y su forma.",
+  "ar": "صف الجسم ثلاثي الأبعاد وحدّد مقاساته وشكله.",
+  "zh": "描述这个 3D 物体，并设置它的尺寸和形状。",
+  "sw": "Eleza kitu cha 3D na uweke vipimo na umbo lake.",
+  "sv": "Beskriv 3D-objektet och ange dess mått och form."
+ },
+ "Press “Generate model”.": {
+  "es": "Pulsa «Generar modelo».",
+  "ar": "اضغط «أنشئ النموذج».",
+  "zh": "点击“生成模型”。",
+  "sw": "Bonyeza “Tengeneza modeli”.",
+  "sv": "Tryck på ”Skapa modell”."
+ },
+ "Inspect it from every angle and export the printable model.": {
+  "es": "Examínalo desde todos los ángulos y exporta el modelo imprimible.",
+  "ar": "افحصه من كل الزوايا وصدّر النموذج القابل للطباعة.",
+  "zh": "从各个角度检查，然后导出可打印的模型。",
+  "sw": "Kikague kutoka kila upande na uhamishe modeli inayochapishika.",
+  "sv": "Granska den från alla vinklar och exportera den utskrivbara modellen."
+ },
+ "Can I 3D-print the model?": {
+  "es": "¿Puedo imprimir el modelo en 3D?",
+  "ar": "هل يمكنني طباعة النموذج بطابعة ثلاثية الأبعاد؟",
+  "zh": "我可以 3D 打印这个模型吗？",
+  "sw": "Je, ninaweza kuchapisha modeli kwa 3D?",
+  "sv": "Kan jag 3D-skriva ut modellen?"
+ },
+ "Yes. Export an STL file and open it in your printer's slicer.": {
+  "es": "Sí. Exporta un archivo STL y ábrelo en el laminador de tu impresora.",
+  "ar": "نعم. صدّر ملف STL وافتحه في برنامج التقطيع الخاص بطابعتك.",
+  "zh": "可以。导出 STL 文件，并在打印机的切片软件中打开。",
+  "sw": "Ndiyo. Hamisha faili la STL na ulifungue kwenye programu ya kukata ya printa yako.",
+  "sv": "Ja. Exportera en STL-fil och öppna den i din skrivares slicer."
+ },
+ "About Model Forge": {
+  "es": "Acerca de Model Forge",
+  "ar": "عن Model Forge",
+  "zh": "关于 Model Forge",
+  "sw": "Kuhusu Model Forge",
+  "sv": "Om Model Forge"
+ },
+ "How to use Model Forge": {
+  "es": "Cómo usar Model Forge",
+  "ar": "طريقة استخدام Model Forge",
+  "zh": "如何使用 Model Forge",
+  "sw": "Jinsi ya kutumia Model Forge",
+  "sv": "Så använder du Model Forge"
+ },
+ "Is Model Forge free?": {
+  "es": "¿Model Forge es gratis?",
+  "ar": "هل Model Forge مجاني؟",
+  "zh": "Model Forge 免费吗？",
+  "sw": "Je, Model Forge ni bure?",
+  "sv": "Är Model Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

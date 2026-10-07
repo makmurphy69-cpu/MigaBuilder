@@ -444,3 +444,90 @@ I18N.phrases({
   "✗ Not quite.": { es: "✗ No exactamente.", ar: "✗ ليس تمامًا.", zh: "✗ 不太对。", sw: "✗ Si kabisa.", sv: "✗ Inte riktigt." },
   "Delete all simulator results and progress stored in this browser?": { es: "¿Borrar todos los resultados y el progreso del simulador guardados en este navegador?", ar: "هل تريد حذف كل نتائج المحاكي والتقدم المخزّن في هذا المتصفح؟", zh: "删除此浏览器中保存的所有模拟器成绩和进度？", sw: "Futa matokeo yote ya kiigaji na maendeleo yaliyohifadhiwa kwenye kivinjari hiki?", sv: "Radera alla simulatorresultat och framsteg som sparats i den här webbläsaren?" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Vehicle Simulator teaches how a car, truck, motorcycle, boat, airplane or helicopter works and what each control does, then lets you practise step-by-step missions.": {
+  "es": "Vehicle Simulator enseña cómo funcionan un coche, un camión, una moto, un barco, un avión o un helicóptero y qué hace cada mando, y luego te deja practicar misiones paso a paso.",
+  "ar": "يعلّمك Vehicle Simulator كيف تعمل السيارة والشاحنة والدراجة النارية والقارب والطائرة والمروحية وما وظيفة كل أداة تحكم، ثم يتيح لك التدرّب على مهمات خطوة بخطوة.",
+  "zh": "Vehicle Simulator 教你汽车、卡车、摩托车、船、飞机和直升机如何工作、每个操纵装置的作用，然后让你练习分步任务。",
+  "sw": "Vehicle Simulator hufundisha jinsi gari, lori, pikipiki, boti, ndege au helikopta inavyofanya kazi na kila kidhibiti kinachofanya, kisha hukuwezesha kujizoeza misheni hatua kwa hatua.",
+  "sv": "Vehicle Simulator lär dig hur en bil, lastbil, motorcykel, båt, ett flygplan eller en helikopter fungerar och vad varje reglage gör, och låter dig sedan öva på uppdrag steg för steg."
+ },
+ "Choose a vehicle, read how it works and learn its controls.": {
+  "es": "Elige un vehículo, lee cómo funciona y aprende sus mandos.",
+  "ar": "اختر مركبة، واقرأ كيف تعمل، وتعلّم أدوات التحكم فيها.",
+  "zh": "选择一种交通工具，阅读它的工作原理，学习它的操纵方式。",
+  "sw": "Chagua chombo cha usafiri, soma kinavyofanya kazi na ujifunze vidhibiti vyake.",
+  "sv": "Välj ett fordon, läs hur det fungerar och lär dig reglagen."
+ },
+ "Press “Start the simulator”.": {
+  "es": "Pulsa «Iniciar el simulador».",
+  "ar": "اضغط «شغّل المحاكي».",
+  "zh": "点击“启动模拟器”。",
+  "sw": "Bonyeza “Anzisha kiigaji”.",
+  "sv": "Tryck på ”Starta simulatorn”."
+ },
+ "Complete each mission, then take the knowledge check.": {
+  "es": "Completa cada misión y haz la prueba de conocimientos.",
+  "ar": "أكمل كل مهمة، ثم أجرِ اختبار المعرفة.",
+  "zh": "完成每项任务，然后做知识测验。",
+  "sw": "Kamilisha kila misheni, kisha fanya jaribio la maarifa.",
+  "sv": "Klara varje uppdrag och gör sedan kunskapstestet."
+ },
+ "Which vehicles can I practise?": {
+  "es": "¿Con qué vehículos puedo practicar?",
+  "ar": "على أي المركبات يمكنني التدرّب؟",
+  "zh": "我可以练习哪些交通工具？",
+  "sw": "Ninaweza kujizoeza vyombo gani?",
+  "sv": "Vilka fordon kan jag öva med?"
+ },
+ "A car, truck, motorcycle, boat, airplane and helicopter, each with its own controls, missions and knowledge check.": {
+  "es": "Un coche, un camión, una moto, un barco, un avión y un helicóptero, cada uno con sus mandos, misiones y prueba de conocimientos.",
+  "ar": "سيارة وشاحنة ودراجة نارية وقارب وطائرة ومروحية، لكل منها أدوات تحكم ومهمات واختبار معرفة خاص.",
+  "zh": "汽车、卡车、摩托车、船、飞机和直升机，每一种都有自己的操纵方式、任务和知识测验。",
+  "sw": "Gari, lori, pikipiki, boti, ndege na helikopta, kila kimoja na vidhibiti, misheni na jaribio lake la maarifa.",
+  "sv": "En bil, lastbil, motorcykel, båt, ett flygplan och en helikopter, var och en med egna reglage, uppdrag och kunskapstest."
+ },
+ "About Vehicle Simulator": {
+  "es": "Acerca de Vehicle Simulator",
+  "ar": "عن Vehicle Simulator",
+  "zh": "关于 Vehicle Simulator",
+  "sw": "Kuhusu Vehicle Simulator",
+  "sv": "Om Vehicle Simulator"
+ },
+ "How to use Vehicle Simulator": {
+  "es": "Cómo usar Vehicle Simulator",
+  "ar": "طريقة استخدام Vehicle Simulator",
+  "zh": "如何使用 Vehicle Simulator",
+  "sw": "Jinsi ya kutumia Vehicle Simulator",
+  "sv": "Så använder du Vehicle Simulator"
+ },
+ "Is Vehicle Simulator free?": {
+  "es": "¿Vehicle Simulator es gratis?",
+  "ar": "هل Vehicle Simulator مجاني؟",
+  "zh": "Vehicle Simulator 免费吗？",
+  "sw": "Je, Vehicle Simulator ni bure?",
+  "sv": "Är Vehicle Simulator gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

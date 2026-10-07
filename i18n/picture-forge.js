@@ -291,3 +291,97 @@ I18N.phrases({
   "Changed: same cottage, now at night. (Walkthrough sample — a real change uses Gemini.)": { es: "Cambiada: la misma casita, ahora de noche. (Ejemplo del recorrido: un cambio real usa Gemini.)", ar: "تم التغيير: الكوخ نفسه، الآن ليلًا. (مثال الجولة — التغيير الحقيقي يستخدم Gemini.)", zh: "已修改：同一座小屋，现在是夜晚。（演示示例——真实修改使用 Gemini。）", sw: "Imebadilishwa: kibanda kilekile, sasa usiku. (Mfano wa mwongozo — badiliko halisi linatumia Gemini.)", sv: "Ändrad: samma hus, nu på natten. (Exempel i genomgången — en riktig ändring använder Gemini.)" },
   "Your picture is ready. (Walkthrough sample — a real picture comes from Gemini and is unique.)": { es: "Tu imagen está lista. (Ejemplo del recorrido: una imagen real viene de Gemini y es única.)", ar: "صورتك جاهزة. (مثال الجولة — الصورة الحقيقية تأتي من Gemini وتكون فريدة.)", zh: "你的图片已就绪。（演示示例——真实图片来自 Gemini，且独一无二。）", sw: "Picha yako iko tayari. (Mfano wa mwongozo — picha halisi inatoka Gemini na ni ya kipekee.)", sv: "Din bild är klar. (Exempel i genomgången — en riktig bild kommer från Gemini och är unik.)" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Picture Forge creates an original picture from a written description with Google Gemini. Pick a look and shape, add your own photos to edit or copy a style, and change the result with plain words.": {
+  "es": "Picture Forge crea una imagen original a partir de una descripción escrita con Google Gemini. Elige un estilo y una forma, añade tus fotos para editarlas o copiar un estilo, y cambia el resultado con palabras sencillas.",
+  "ar": "ينشئ Picture Forge صورة أصلية من وصف مكتوب باستخدام Google Gemini. اختر مظهرًا وشكلًا، وأضف صورك لتعديلها أو لنسخ أسلوب، وغيّر النتيجة بكلمات بسيطة.",
+  "zh": "Picture Forge 用 Google Gemini 根据文字描述生成原创图片。选择风格和画幅，添加你自己的照片来编辑或借用风格，再用简单的话修改结果。",
+  "sw": "Picture Forge hutengeneza picha asilia kutokana na maelezo yaliyoandikwa kwa Google Gemini. Chagua mwonekano na umbo, ongeza picha zako kuzihariri au kunakili mtindo, na ubadilishe matokeo kwa maneno rahisi.",
+  "sv": "Picture Forge skapar en originalbild utifrån en skriven beskrivning med Google Gemini. Välj stil och format, lägg till egna foton att redigera eller låna stil från, och ändra resultatet med vanliga ord."
+ },
+ "Describe the picture and choose its style, shape and resolution.": {
+  "es": "Describe la imagen y elige su estilo, forma y resolución.",
+  "ar": "صف الصورة واختر أسلوبها وشكلها ودقتها.",
+  "zh": "描述图片，并选择风格、画幅和分辨率。",
+  "sw": "Eleza picha na uchague mtindo, umbo na ubora wake.",
+  "sv": "Beskriv bilden och välj stil, format och upplösning."
+ },
+ "Press “Generate picture”.": {
+  "es": "Pulsa «Generar imagen».",
+  "ar": "اضغط «أنشئ الصورة».",
+  "zh": "点击“生成图片”。",
+  "sw": "Bonyeza “Tengeneza picha”.",
+  "sv": "Tryck på ”Skapa bild”."
+ },
+ "Download the result or continue editing it in Image Studio.": {
+  "es": "Descarga el resultado o sigue editándolo en Image Studio.",
+  "ar": "نزّل النتيجة أو تابع تعديلها في Image Studio.",
+  "zh": "下载结果，或在 Image Studio 中继续编辑。",
+  "sw": "Pakua matokeo au endelea kuyahariri katika Image Studio.",
+  "sv": "Ladda ner resultatet eller fortsätt redigera det i Image Studio."
+ },
+ "Which formats can I download?": {
+  "es": "¿Qué formatos puedo descargar?",
+  "ar": "ما الصيغ التي يمكنني تنزيلها؟",
+  "zh": "我可以下载哪些格式？",
+  "sw": "Ninaweza kupakua miundo gani?",
+  "sv": "Vilka format kan jag ladda ner?"
+ },
+ "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": {
+  "es": "PNG, JPG o WebP. También puedes seguir editando la imagen en Image Studio.",
+  "ar": "PNG أو JPG أو WebP. ويمكنك أيضًا متابعة تعديل الصورة في Image Studio.",
+  "zh": "PNG、JPG 或 WebP。你也可以在 Image Studio 中继续编辑图片。",
+  "sw": "PNG, JPG au WebP. Unaweza pia kuendelea kuhariri picha katika Image Studio.",
+  "sv": "PNG, JPG eller WebP. Du kan också fortsätta redigera bilden i Image Studio."
+ },
+ "About Picture Forge": {
+  "es": "Acerca de Picture Forge",
+  "ar": "عن Picture Forge",
+  "zh": "关于 Picture Forge",
+  "sw": "Kuhusu Picture Forge",
+  "sv": "Om Picture Forge"
+ },
+ "How to use Picture Forge": {
+  "es": "Cómo usar Picture Forge",
+  "ar": "طريقة استخدام Picture Forge",
+  "zh": "如何使用 Picture Forge",
+  "sw": "Jinsi ya kutumia Picture Forge",
+  "sv": "Så använder du Picture Forge"
+ },
+ "Is Picture Forge free?": {
+  "es": "¿Picture Forge es gratis?",
+  "ar": "هل Picture Forge مجاني؟",
+  "zh": "Picture Forge 免费吗？",
+  "sw": "Je, Picture Forge ni bure?",
+  "sv": "Är Picture Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

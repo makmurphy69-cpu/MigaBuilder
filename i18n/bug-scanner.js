@@ -115,3 +115,97 @@ I18N.phrases({
   "The AI did not return a full fixed version. Use the corrected snippet under each problem.": { es: "La IA no devolvió una versión corregida completa. Usa el fragmento corregido de cada problema.", ar: "لم يُرجع الذكاء الاصطناعي نسخة مصححة كاملة. استخدم المقتطف المصحح تحت كل مشكلة.", zh: "AI 没有返回完整的修复版本。请使用每个问题下的修正片段。", sw: "AI haikurudisha toleo kamili lililorekebishwa. Tumia kipande kilichosahihishwa chini ya kila tatizo.", sv: "AI:n returnerade ingen komplett rättad version. Använd det rättade kodavsnittet under varje problem." },
   "No problems found.": { es: "No se encontraron problemas.", ar: "لم يُعثر على مشكلات.", zh: "未发现问题。", sw: "Hakuna matatizo yaliyopatikana.", sv: "Inga problem hittades." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Bug Scanner checks code in 30+ languages for syntax errors, logic bugs and security problems, explains each one in plain language and gives the fix. It can also show a live preview of what the code builds.": {
+  "es": "Bug Scanner revisa código en más de 30 lenguajes en busca de errores de sintaxis, fallos de lógica y problemas de seguridad, explica cada uno con palabras sencillas y da la solución. También puede mostrar una vista previa en vivo de lo que construye el código.",
+  "ar": "يفحص Bug Scanner الشيفرة بأكثر من 30 لغة بحثًا عن أخطاء الصياغة والمنطق ومشكلات الأمان، ويشرح كلًّا منها بلغة بسيطة ويقدّم الإصلاح. ويمكنه أيضًا عرض معاينة حية لما تبنيه الشيفرة.",
+  "zh": "Bug Scanner 检查 30 多种语言的代码，找出语法错误、逻辑错误和安全问题，用通俗的话解释每个问题并给出修复。它还能实时预览代码构建出的内容。",
+  "sw": "Bug Scanner hukagua msimbo katika lugha zaidi ya 30 kutafuta makosa ya sintaksia, hitilafu za mantiki na matatizo ya usalama, hueleza kila moja kwa lugha rahisi na hutoa marekebisho. Pia linaweza kuonyesha onyesho la moja kwa moja la kile msimbo unachojenga.",
+  "sv": "Bug Scanner granskar kod i över 30 språk efter syntaxfel, logiska buggar och säkerhetsproblem, förklarar vart och ett med enkla ord och ger rättelsen. Den kan också visa en liveförhandsvisning av vad koden bygger."
+ },
+ "Paste your code, open files or drop a project zip, and choose the language.": {
+  "es": "Pega tu código, abre archivos o suelta el zip de un proyecto y elige el lenguaje.",
+  "ar": "الصق شيفرتك أو افتح ملفات أو أفلت ملف zip لمشروع، واختر اللغة.",
+  "zh": "粘贴代码、打开文件或拖入项目 zip，并选择编程语言。",
+  "sw": "Bandika msimbo wako, fungua faili au dondosha zip ya mradi, na uchague lugha.",
+  "sv": "Klistra in din kod, öppna filer eller släpp en projekt-zip och välj språk."
+ },
+ "Press “Scan code”.": {
+  "es": "Pulsa «Analizar código».",
+  "ar": "اضغط «افحص الشيفرة».",
+  "zh": "点击“扫描代码”。",
+  "sw": "Bonyeza “Changanua msimbo”.",
+  "sv": "Tryck på ”Skanna koden”."
+ },
+ "Read each problem and how to fix it, check the live preview of what the code builds, then copy the fixed code.": {
+  "es": "Lee cada problema y cómo arreglarlo, mira la vista previa en vivo de lo que construye el código y copia el código corregido.",
+  "ar": "اقرأ كل مشكلة وطريقة إصلاحها، وتفقّد المعاينة الحية لما تبنيه الشيفرة، ثم انسخ الشيفرة المصحّحة.",
+  "zh": "阅读每个问题及修复方法，查看代码构建内容的实时预览，然后复制修复后的代码。",
+  "sw": "Soma kila tatizo na jinsi ya kulirekebisha, angalia onyesho la moja kwa moja la kile msimbo unachojenga, kisha nakili msimbo uliorekebishwa.",
+  "sv": "Läs varje problem och hur det åtgärdas, titta på liveförhandsvisningen av vad koden bygger och kopiera sedan den rättade koden."
+ },
+ "Can I scan a whole project?": {
+  "es": "¿Puedo analizar un proyecto entero?",
+  "ar": "هل يمكنني فحص مشروع كامل؟",
+  "zh": "我能扫描整个项目吗？",
+  "sw": "Je, ninaweza kuchanganua mradi mzima?",
+  "sv": "Kan jag skanna ett helt projekt?"
+ },
+ "Yes. Paste code, open several files or drop a project ZIP, and each problem is listed with its file, an explanation and the fixed code.": {
+  "es": "Sí. Pega código, abre varios archivos o suelta el ZIP de un proyecto, y cada problema aparece con su archivo, una explicación y el código corregido.",
+  "ar": "نعم. الصق الشيفرة أو افتح عدة ملفات أو أفلت ملف ZIP لمشروع، فتُعرض كل مشكلة مع ملفها وشرحها والشيفرة المصحّحة.",
+  "zh": "可以。粘贴代码、打开多个文件或拖入项目 ZIP，每个问题都会列出所在文件、解释和修复后的代码。",
+  "sw": "Ndiyo. Bandika msimbo, fungua faili kadhaa au dondosha ZIP ya mradi, na kila tatizo litaorodheshwa pamoja na faili lake, maelezo na msimbo uliorekebishwa.",
+  "sv": "Ja. Klistra in kod, öppna flera filer eller släpp en projekt-ZIP, så listas varje problem med sin fil, en förklaring och den rättade koden."
+ },
+ "About Bug Scanner": {
+  "es": "Acerca de Bug Scanner",
+  "ar": "عن Bug Scanner",
+  "zh": "关于 Bug Scanner",
+  "sw": "Kuhusu Bug Scanner",
+  "sv": "Om Bug Scanner"
+ },
+ "How to use Bug Scanner": {
+  "es": "Cómo usar Bug Scanner",
+  "ar": "طريقة استخدام Bug Scanner",
+  "zh": "如何使用 Bug Scanner",
+  "sw": "Jinsi ya kutumia Bug Scanner",
+  "sv": "Så använder du Bug Scanner"
+ },
+ "Is Bug Scanner free?": {
+  "es": "¿Bug Scanner es gratis?",
+  "ar": "هل Bug Scanner مجاني؟",
+  "zh": "Bug Scanner 免费吗？",
+  "sw": "Je, Bug Scanner ni bure?",
+  "sv": "Är Bug Scanner gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

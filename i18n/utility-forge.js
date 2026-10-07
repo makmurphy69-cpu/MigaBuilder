@@ -43,3 +43,97 @@ I18N.phrases({
   "Calculate a checksum first.": { es: "Primero calcula una suma de control.", ar: "احسب مجموعًا اختباريًا أولًا.", zh: "请先计算校验和。", sw: "Hesabu checksum kwanza.", sv: "Beräkna en kontrollsumma först." },
   "Checksum copied.": { es: "Suma de control copiada.", ar: "تم نسخ المجموع الاختباري.", zh: "校验和已复制。", sw: "Checksum imenakiliwa.", sv: "Kontrollsumman har kopierats." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Utility Forge converts CSV and JSON, combines text files and calculates SHA-256 checksums.": {
+  "es": "Utility Forge convierte CSV y JSON, combina archivos de texto y calcula sumas de verificación SHA-256.",
+  "ar": "يحوّل Utility Forge بين CSV وJSON، ويدمج ملفات النصوص، ويحسب بصمات SHA-256.",
+  "zh": "Utility Forge 可转换 CSV 和 JSON、合并文本文件并计算 SHA-256 校验和。",
+  "sw": "Utility Forge hugeuza CSV na JSON, huunganisha faili za maandishi na hukokotoa checksum za SHA-256.",
+  "sv": "Utility Forge konverterar CSV och JSON, slår ihop textfiler och räknar ut SHA-256-kontrollsummor."
+ },
+ "Choose CSV/JSON conversion, text combining, or a checksum.": {
+  "es": "Elige conversión CSV/JSON, combinar textos o una suma de verificación.",
+  "ar": "اختر تحويل CSV/JSON أو دمج النصوص أو بصمة التحقق.",
+  "zh": "选择 CSV/JSON 转换、合并文本或校验和。",
+  "sw": "Chagua ugeuzaji wa CSV/JSON, kuunganisha maandishi au checksum.",
+  "sv": "Välj CSV/JSON-konvertering, sammanslagning av text eller en kontrollsumma."
+ },
+ "Press “Convert”.": {
+  "es": "Pulsa «Convertir».",
+  "ar": "اضغط «حوّل».",
+  "zh": "点击“转换”。",
+  "sw": "Bonyeza “Geuza”.",
+  "sv": "Tryck på ”Konvertera”."
+ },
+ "Review the output and download or copy the result.": {
+  "es": "Revisa la salida y descarga o copia el resultado.",
+  "ar": "راجع المخرجات، ثم نزّل النتيجة أو انسخها.",
+  "zh": "检查输出，然后下载或复制结果。",
+  "sw": "Pitia matokeo na upakue au unakili.",
+  "sv": "Granska utdata och ladda ner eller kopiera resultatet."
+ },
+ "What is a SHA-256 checksum for?": {
+  "es": "¿Para qué sirve una suma SHA-256?",
+  "ar": "ما فائدة بصمة SHA-256؟",
+  "zh": "SHA-256 校验和有什么用？",
+  "sw": "Checksum ya SHA-256 inafaa kwa nini?",
+  "sv": "Vad används en SHA-256-kontrollsumma till?"
+ },
+ "It is a fingerprint of a file. If two checksums match, the files are identical, so you can check a download was not changed.": {
+  "es": "Es la huella digital de un archivo. Si dos sumas coinciden, los archivos son idénticos, así que puedes comprobar que una descarga no se modificó.",
+  "ar": "إنها بصمة للملف. إذا تطابقت بصمتان فالملفان متطابقان، فيمكنك التأكد من أن الملف المنزَّل لم يُعدَّل.",
+  "zh": "它相当于文件的指纹。如果两个校验和一致，文件就完全相同，因此可以确认下载的文件没有被改动。",
+  "sw": "Ni alama ya kidole ya faili. Checksum mbili zikilingana, faili ni sawa kabisa, hivyo unaweza kuhakikisha kuwa kilichopakuliwa hakijabadilishwa.",
+  "sv": "Det är ett fingeravtryck av en fil. Om två kontrollsummor stämmer är filerna identiska, så du kan kontrollera att en nedladdning inte har ändrats."
+ },
+ "About Utility Forge": {
+  "es": "Acerca de Utility Forge",
+  "ar": "عن Utility Forge",
+  "zh": "关于 Utility Forge",
+  "sw": "Kuhusu Utility Forge",
+  "sv": "Om Utility Forge"
+ },
+ "How to use Utility Forge": {
+  "es": "Cómo usar Utility Forge",
+  "ar": "طريقة استخدام Utility Forge",
+  "zh": "如何使用 Utility Forge",
+  "sw": "Jinsi ya kutumia Utility Forge",
+  "sv": "Så använder du Utility Forge"
+ },
+ "Is Utility Forge free?": {
+  "es": "¿Utility Forge es gratis?",
+  "ar": "هل Utility Forge مجاني؟",
+  "zh": "Utility Forge 免费吗？",
+  "sw": "Je, Utility Forge ni bure?",
+  "sv": "Är Utility Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

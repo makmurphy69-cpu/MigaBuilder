@@ -261,3 +261,97 @@ I18N.phrases({
   "This share link is damaged or incomplete.": { es: "Este enlace para compartir está dañado o incompleto.", ar: "رابط المشاركة هذا تالف أو غير مكتمل.", zh: "此分享链接已损坏或不完整。", sw: "Kiungo hiki cha kushiriki kimeharibika au hakijakamilika.", sv: "Delningslänken är skadad eller ofullständig." },
   "Could not import this file:": { es: "No se pudo importar este archivo:", ar: "تعذّر استيراد هذا الملف:", zh: "无法导入此文件：", sw: "Imeshindwa kuleta faili hii:", sv: "Kunde inte importera filen:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Flashcard Forge makes flashcard decks by typing, pasting or letting AI turn your notes into cards, and schedules reviews with Anki-style spaced repetition.": {
+  "es": "Flashcard Forge crea mazos de tarjetas escribiendo, pegando o dejando que la IA convierta tus apuntes en tarjetas, y programa los repasos con repetición espaciada al estilo Anki.",
+  "ar": "يصنع Flashcard Forge مجموعات بطاقات بالكتابة أو اللصق أو بترك الذكاء الاصطناعي يحوّل ملاحظاتك إلى بطاقات، ويجدول المراجعات بالتكرار المتباعد على طريقة Anki.",
+  "zh": "Flashcard Forge 可以通过输入、粘贴或让 AI 把笔记变成卡片来制作卡组，并用 Anki 式间隔重复安排复习。",
+  "sw": "Flashcard Forge hutengeneza vifurushi vya kadi kwa kuandika, kubandika au kuiacha AI igeuze maelezo yako kuwa kadi, na hupanga marudio kwa mtindo wa Anki wa kurudia kwa vipindi.",
+  "sv": "Flashcard Forge gör kortlekar genom att du skriver, klistrar in eller låter AI göra om dina anteckningar till kort, och schemalägger repetitioner med Anki-liknande spridd repetition."
+ },
+ "Create a deck and add cards by typing, pasting a list or letting AI write them from your notes.": {
+  "es": "Crea un mazo y añade tarjetas escribiendo, pegando una lista o dejando que la IA las escriba a partir de tus apuntes.",
+  "ar": "أنشئ مجموعة وأضف البطاقات بالكتابة أو بلصق قائمة أو بترك الذكاء الاصطناعي يكتبها من ملاحظاتك.",
+  "zh": "创建一个卡组，通过输入、粘贴列表或让 AI 根据你的笔记来添加卡片。",
+  "sw": "Unda kifurushi na uongeze kadi kwa kuandika, kubandika orodha au kuiacha AI iziandike kutoka kwa maelezo yako.",
+  "sv": "Skapa en kortlek och lägg till kort genom att skriva, klistra in en lista eller låta AI skriva dem från dina anteckningar."
+ },
+ "Press “Make cards”.": {
+  "es": "Pulsa «Crear tarjetas».",
+  "ar": "اضغط «اصنع البطاقات».",
+  "zh": "点击“生成卡片”。",
+  "sw": "Bonyeza “Tengeneza kadi”.",
+  "sv": "Tryck på ”Gör kort”."
+ },
+ "Study the due cards, grade how well you remembered each one, then take a test.": {
+  "es": "Estudia las tarjetas pendientes, valora lo bien que recordabas cada una y haz un examen.",
+  "ar": "ادرس البطاقات المستحقة، وقيّم مدى تذكّرك لكل واحدة، ثم أجرِ اختبارًا.",
+  "zh": "学习到期的卡片，为每张卡片的记忆程度打分，然后做一次测试。",
+  "sw": "Soma kadi zinazostahili, pima jinsi ulivyokumbuka kila moja, kisha fanya jaribio.",
+  "sv": "Plugga korten som är på tur, betygsätt hur väl du mindes vart och ett och gör sedan ett test."
+ },
+ "Can I share a deck?": {
+  "es": "¿Puedo compartir un mazo?",
+  "ar": "هل يمكنني مشاركة مجموعة بطاقات؟",
+  "zh": "我可以分享卡组吗？",
+  "sw": "Je, ninaweza kushiriki kifurushi?",
+  "sv": "Kan jag dela en kortlek?"
+ },
+ "Yes. Share a deck with a link, so others can study it without an account.": {
+  "es": "Sí. Comparte un mazo con un enlace para que otros lo estudien sin cuenta.",
+  "ar": "نعم. شارك المجموعة برابط ليدرسها الآخرون دون حساب.",
+  "zh": "可以。用链接分享卡组，别人无需账号就能学习。",
+  "sw": "Ndiyo. Shiriki kifurushi kwa kiungo, ili wengine wakisome bila akaunti.",
+  "sv": "Ja. Dela en kortlek med en länk så att andra kan plugga den utan konto."
+ },
+ "About Flashcard Forge": {
+  "es": "Acerca de Flashcard Forge",
+  "ar": "عن Flashcard Forge",
+  "zh": "关于 Flashcard Forge",
+  "sw": "Kuhusu Flashcard Forge",
+  "sv": "Om Flashcard Forge"
+ },
+ "How to use Flashcard Forge": {
+  "es": "Cómo usar Flashcard Forge",
+  "ar": "طريقة استخدام Flashcard Forge",
+  "zh": "如何使用 Flashcard Forge",
+  "sw": "Jinsi ya kutumia Flashcard Forge",
+  "sv": "Så använder du Flashcard Forge"
+ },
+ "Is Flashcard Forge free?": {
+  "es": "¿Flashcard Forge es gratis?",
+  "ar": "هل Flashcard Forge مجاني؟",
+  "zh": "Flashcard Forge 免费吗？",
+  "sw": "Je, Flashcard Forge ni bure?",
+  "sv": "Är Flashcard Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

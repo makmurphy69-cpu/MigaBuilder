@@ -175,3 +175,97 @@ I18N.phrases({
   "(Music is too big for a link: download the game to include it.)": { es: "(La música es demasiado grande para un enlace: descarga el juego para incluirla.)", ar: "(الموسيقى أكبر من أن تُضمَّن في رابط: نزّل اللعبة لتضمينها.)", zh: "（音乐太大，无法放入链接：下载游戏即可包含音乐。）", sw: "(Muziki ni mkubwa mno kwa kiungo: pakua mchezo ili kuujumuisha.)", sv: "(Musiken är för stor för en länk: ladda ner spelet för att få med den.)" },
   "Could not open this file:": { es: "No se pudo abrir este archivo:", ar: "تعذّر فتح هذا الملف:", zh: "无法打开此文件：", sw: "Imeshindwa kufungua faili hii:", sv: "Kunde inte öppna filen:" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "3D Game Forge is a free 3D game maker in your browser. Describe a game or start from a template such as an endless runner, kart racer, maze or arena, then change the world, hero and enemies and paint your own level.": {
+  "es": "3D Game Forge es un creador gratuito de juegos 3D en tu navegador. Describe un juego o parte de una plantilla, como un corredor infinito, carreras de karts, un laberinto o una arena, y luego cambia el mundo, el héroe y los enemigos y dibuja tu propio nivel.",
+  "ar": "3D Game Forge أداة مجانية لصنع ألعاب ثلاثية الأبعاد في متصفحك. صف لعبة أو ابدأ من قالب مثل الجري اللانهائي أو سباق الكارت أو المتاهة أو الحلبة، ثم غيّر العالم والبطل والأعداء وارسم مستواك الخاص.",
+  "zh": "3D Game Forge 是浏览器里的免费 3D 游戏制作工具。描述一个游戏，或从无尽跑酷、卡丁车、迷宫、竞技场等模板开始，然后修改世界、主角和敌人，并绘制你自己的关卡。",
+  "sw": "3D Game Forge ni kitengeneza michezo ya 3D bure kwenye kivinjari chako. Eleza mchezo au anza na kiolezo kama mbio zisizoisha, mbio za kart, mzunguko au uwanja, kisha badilisha dunia, shujaa na maadui na uchore kiwango chako.",
+  "sv": "3D Game Forge är en gratis 3D-spelskapare i webbläsaren. Beskriv ett spel eller börja från en mall som ett ändlöst löparspel, kartrace, labyrint eller arena, och ändra sedan värld, hjälte och fiender och rita din egen bana."
+ },
+ "Describe your game in a sentence, or pick a template such as the endless runner, kart racer or maze.": {
+  "es": "Describe tu juego en una frase o elige una plantilla, como el corredor infinito, las carreras de karts o el laberinto.",
+  "ar": "صف لعبتك في جملة، أو اختر قالبًا مثل الجري اللانهائي أو سباق الكارت أو المتاهة.",
+  "zh": "用一句话描述你的游戏，或选择无尽跑酷、卡丁车、迷宫等模板。",
+  "sw": "Eleza mchezo wako kwa sentensi moja, au chagua kiolezo kama mbio zisizoisha, mbio za kart au mzunguko.",
+  "sv": "Beskriv ditt spel i en mening eller välj en mall som det ändlösa löparspelet, kartracet eller labyrinten."
+ },
+ "Press “Make my 3D game”.": {
+  "es": "Pulsa «Crear mi juego 3D».",
+  "ar": "اضغط «اصنع لعبتي ثلاثية الأبعاد».",
+  "zh": "点击“制作我的 3D 游戏”。",
+  "sw": "Bonyeza “Tengeneza mchezo wangu wa 3D”.",
+  "sv": "Tryck på ”Gör mitt 3D-spel”."
+ },
+ "Press Play, then change the world, hero, enemies and sliders, paint your own level, and copy the share link or download the game.": {
+  "es": "Pulsa Jugar, cambia el mundo, el héroe, los enemigos y los controles deslizantes, dibuja tu propio nivel y copia el enlace para compartir o descarga el juego.",
+  "ar": "اضغط العب، ثم غيّر العالم والبطل والأعداء والمنزلقات، وارسم مستواك، وانسخ رابط المشاركة أو نزّل اللعبة.",
+  "zh": "点击“开始游戏”，然后修改世界、主角、敌人和滑块，绘制你自己的关卡，再复制分享链接或下载游戏。",
+  "sw": "Bonyeza Cheza, kisha badilisha dunia, shujaa, maadui na vitelezi, chora kiwango chako, na unakili kiungo cha kushiriki au upakue mchezo.",
+  "sv": "Tryck på Spela, ändra sedan värld, hjälte, fiender och reglage, rita din egen bana och kopiera delningslänken eller ladda ner spelet."
+ },
+ "Can I share my 3D game?": {
+  "es": "¿Puedo compartir mi juego 3D?",
+  "ar": "هل يمكنني مشاركة لعبتي ثلاثية الأبعاد؟",
+  "zh": "我可以分享我的 3D 游戏吗？",
+  "sw": "Je, ninaweza kushiriki mchezo wangu wa 3D?",
+  "sv": "Kan jag dela mitt 3D-spel?"
+ },
+ "Yes. Copy a share link so others can play it, or download the whole game as one HTML file.": {
+  "es": "Sí. Copia un enlace para que otros puedan jugarlo, o descarga el juego completo como un solo archivo HTML.",
+  "ar": "نعم. انسخ رابط مشاركة ليلعبها الآخرون، أو نزّل اللعبة كاملة كملف HTML واحد.",
+  "zh": "可以。复制分享链接让别人来玩，或把整个游戏下载为一个 HTML 文件。",
+  "sw": "Ndiyo. Nakili kiungo cha kushiriki ili wengine waucheze, au pakua mchezo mzima kama faili moja la HTML.",
+  "sv": "Ja. Kopiera en delningslänk så att andra kan spela, eller ladda ner hela spelet som en enda HTML-fil."
+ },
+ "About 3D Game Forge": {
+  "es": "Acerca de 3D Game Forge",
+  "ar": "عن 3D Game Forge",
+  "zh": "关于 3D Game Forge",
+  "sw": "Kuhusu 3D Game Forge",
+  "sv": "Om 3D Game Forge"
+ },
+ "How to use 3D Game Forge": {
+  "es": "Cómo usar 3D Game Forge",
+  "ar": "طريقة استخدام 3D Game Forge",
+  "zh": "如何使用 3D Game Forge",
+  "sw": "Jinsi ya kutumia 3D Game Forge",
+  "sv": "Så använder du 3D Game Forge"
+ },
+ "Is 3D Game Forge free?": {
+  "es": "¿3D Game Forge es gratis?",
+  "ar": "هل 3D Game Forge مجاني؟",
+  "zh": "3D Game Forge 免费吗？",
+  "sw": "Je, 3D Game Forge ni bure?",
+  "sv": "Är 3D Game Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": {
+  "es": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador.",
+  "ar": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك.",
+  "zh": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。",
+  "sw": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako.",
+  "sv": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+ }
+});

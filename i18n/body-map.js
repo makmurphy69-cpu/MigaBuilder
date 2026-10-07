@@ -369,3 +369,97 @@ I18N.phrases({
   "Copy this link:": { es: "Copia este enlace:", ar: "انسخ هذا الرابط:", zh: "复制此链接：", sw: "Nakili kiungo hiki:", sv: "Kopiera den här länken:" },
   "Shared quiz": { es: "Cuestionario compartido", ar: "اختبار مُشارك", zh: "共享测验", sw: "Jaribio lililoshirikiwa", sv: "Delat quiz" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Body Map is an interactive human body with organs, skeleton, muscles, tendons and skin: click any part to learn how it works, its common illnesses and how to treat and prevent them.": {
+  "es": "Body Map es un cuerpo humano interactivo con órganos, esqueleto, músculos, tendones y piel: haz clic en cualquier parte para saber cómo funciona, sus enfermedades más comunes y cómo tratarlas y prevenirlas.",
+  "ar": "Body Map جسم إنسان تفاعلي يضم الأعضاء والهيكل العظمي والعضلات والأوتار والجلد: اضغط على أي جزء لتعرف كيف يعمل وأمراضه الشائعة وكيف تُعالج وتُتّقى.",
+  "zh": "Body Map 是一个交互式人体，包含器官、骨骼、肌肉、肌腱和皮肤：点击任意部位，了解它如何工作、常见疾病以及如何治疗和预防。",
+  "sw": "Body Map ni mwili wa binadamu unaoingiliana wenye viungo, mifupa, misuli, kano na ngozi: bofya sehemu yoyote ujifunze inavyofanya kazi, magonjwa yake ya kawaida na jinsi ya kuyatibu na kuyazuia.",
+  "sv": "Body Map är en interaktiv människokropp med organ, skelett, muskler, senor och hud: klicka på valfri del för att lära dig hur den fungerar, vanliga sjukdomar och hur de behandlas och förebyggs."
+ },
+ "Pick a layer (organs, skeleton, muscles and tendons, or skin) and click any part to read how it works, its connections, illnesses and care.": {
+  "es": "Elige una capa (órganos, esqueleto, músculos y tendones, o piel) y haz clic en cualquier parte para leer cómo funciona, sus conexiones, enfermedades y cuidados.",
+  "ar": "اختر طبقة (الأعضاء، الهيكل العظمي، العضلات والأوتار، أو الجلد) واضغط على أي جزء لتقرأ كيف يعمل وصلاته وأمراضه والعناية به.",
+  "zh": "选择一个图层（器官、骨骼、肌肉与肌腱或皮肤），点击任意部位，阅读它如何工作、与其他部位的联系、疾病和护理。",
+  "sw": "Chagua tabaka (viungo, mifupa, misuli na kano, au ngozi) na ubofye sehemu yoyote kusoma inavyofanya kazi, miunganiko yake, magonjwa na utunzaji.",
+  "sv": "Välj ett lager (organ, skelett, muskler och senor eller hud) och klicka på valfri del för att läsa hur den fungerar, dess kopplingar, sjukdomar och vård."
+ },
+ "Press “Generate quiz”.": {
+  "es": "Pulsa «Generar cuestionario».",
+  "ar": "اضغط «أنشئ اختبارًا».",
+  "zh": "点击“生成测验”。",
+  "sw": "Bonyeza “Tengeneza chemsha bongo”.",
+  "sv": "Tryck på ”Skapa quiz”."
+ },
+ "Follow a meal in Eating and drinking, try the Fasting slider, then play or make your own quiz.": {
+  "es": "Sigue una comida en Comer y beber, prueba el control de Ayuno y luego haz o crea tu propio cuestionario.",
+  "ar": "تتبّع وجبة في قسم الأكل والشرب، وجرّب منزلق الصيام، ثم العب اختبارًا أو اصنع اختبارك الخاص.",
+  "zh": "在“饮食”中跟随一顿饭，试试“禁食”滑块，然后做测验或自己出题。",
+  "sw": "Fuatilia mlo katika Kula na kunywa, jaribu kitelezi cha Kufunga, kisha cheza au tengeneza chemsha bongo yako.",
+  "sv": "Följ en måltid i Äta och dricka, prova reglaget för fasta och spela eller gör sedan ditt eget quiz."
+ },
+ "Is it medical advice?": {
+  "es": "¿Es consejo médico?",
+  "ar": "هل هذه نصيحة طبية؟",
+  "zh": "这是医疗建议吗？",
+  "sw": "Je, huu ni ushauri wa kitabibu?",
+  "sv": "Är det medicinsk rådgivning?"
+ },
+ "No. It is for learning. For symptoms or treatment, talk to a doctor or nurse.": {
+  "es": "No. Es para aprender. Ante síntomas o tratamientos, habla con un médico o una enfermera.",
+  "ar": "لا. إنه للتعلّم. بخصوص الأعراض أو العلاج، تحدّث إلى طبيب أو ممرض.",
+  "zh": "不是。它仅供学习。如有症状或需要治疗，请咨询医生或护士。",
+  "sw": "Hapana. Ni kwa kujifunza. Kuhusu dalili au matibabu, zungumza na daktari au muuguzi.",
+  "sv": "Nej. Det är för lärande. Prata med en läkare eller sjuksköterska om symtom eller behandling."
+ },
+ "About Body Map": {
+  "es": "Acerca de Body Map",
+  "ar": "عن Body Map",
+  "zh": "关于 Body Map",
+  "sw": "Kuhusu Body Map",
+  "sv": "Om Body Map"
+ },
+ "How to use Body Map": {
+  "es": "Cómo usar Body Map",
+  "ar": "طريقة استخدام Body Map",
+  "zh": "如何使用 Body Map",
+  "sw": "Jinsi ya kutumia Body Map",
+  "sv": "Så använder du Body Map"
+ },
+ "Is Body Map free?": {
+  "es": "¿Body Map es gratis?",
+  "ar": "هل Body Map مجاني؟",
+  "zh": "Body Map 免费吗？",
+  "sw": "Je, Body Map ni bure?",
+  "sv": "Är Body Map gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago. La IA usa una cuota gratuita compartida; si está ocupada o ha llegado a su límite diario, inténtalo más tarde o añade tu propia clave de Gemini.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. يستخدم الذكاء الاصطناعي حصة مجانية مشتركة؛ إذا كان مشغولًا أو بلغ حدّه اليومي فحاول لاحقًا أو أضف مفتاح Gemini الخاص بك.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua. AI hutumia mgao wa bure unaoshirikiwa; ikiwa ina shughuli nyingi au imefikia kikomo cha siku, jaribu baadaye au ongeza ufunguo wako wa Gemini.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."
+ },
+ "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": {
+  "es": "Solo cuando usas sus funciones de IA: entonces el texto que das a la IA se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini. Todo lo demás se queda en tu navegador.",
+  "ar": "فقط عندما تستخدم ميزات الذكاء الاصطناعي فيه: عندها يُرسل النص الذي تعطيه للذكاء الاصطناعي إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك. أما كل شيء آخر فيبقى في متصفحك.",
+  "zh": "只有在使用 AI 功能时：你交给 AI 的文字会通过 MigaBuilder 的免费 AI 服务或你自己的 Gemini 密钥发送到 Google 的 Gemini 模型。其他一切都留在你的浏览器中。",
+  "sw": "Ni pale tu unapotumia vipengele vyake vya AI: hapo maandishi unayoipa AI hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au ufunguo wako wa Gemini. Kila kitu kingine hubaki kwenye kivinjari chako.",
+  "sv": "Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."
+ }
+});

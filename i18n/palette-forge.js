@@ -43,3 +43,97 @@ I18N.phrases({
   "How to use Palette Forge": { es: "Cómo usar Palette Forge", ar: "كيفية استخدام Palette Forge", zh: "如何使用 Palette Forge", sw: "Jinsi ya kutumia Palette Forge", sv: "Så använder du Palette Forge" },
   "Palette Forge — free color palette generator": { es: "Palette Forge — generador de paletas de colores gratis", ar: "Palette Forge — منشئ لوحات ألوان مجاني", zh: "Palette Forge — 免费配色方案生成器", sw: "Palette Forge — kitengeneza paleti za rangi cha bure", sv: "Palette Forge — gratis generator för färgpaletter" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Palette Forge builds a 5-colour palette from a starting colour and a harmony rule, with hex codes and a WCAG contrast check.": {
+  "es": "Palette Forge crea una paleta de 5 colores a partir de un color inicial y una regla de armonía, con códigos hexadecimales y una comprobación de contraste WCAG.",
+  "ar": "يبني Palette Forge لوحة من 5 ألوان انطلاقًا من لون أولي وقاعدة تناسق، مع رموز hex وفحص للتباين وفق WCAG.",
+  "zh": "Palette Forge 根据起始颜色和配色规则生成 5 色配色方案，附带十六进制色值和 WCAG 对比度检查。",
+  "sw": "Palette Forge hujenga rangi 5 kutokana na rangi ya kuanzia na kanuni ya ulinganifu, pamoja na misimbo ya hex na ukaguzi wa utofautishaji wa WCAG.",
+  "sv": "Palette Forge bygger en palett med 5 färger utifrån en startfärg och en harmoniregel, med hexkoder och kontrastkontroll enligt WCAG."
+ },
+ "Choose a starting color or describe the brand mood.": {
+  "es": "Elige un color inicial o describe el estilo de la marca.",
+  "ar": "اختر لونًا أوليًا أو صف أجواء العلامة.",
+  "zh": "选择一个起始颜色，或描述品牌氛围。",
+  "sw": "Chagua rangi ya kuanzia au ueleze hisia ya chapa.",
+  "sv": "Välj en startfärg eller beskriv varumärkets känsla."
+ },
+ "Press “Build palette”.": {
+  "es": "Pulsa «Crear paleta».",
+  "ar": "اضغط «ابنِ اللوحة».",
+  "zh": "点击“生成配色”。",
+  "sw": "Bonyeza “Jenga rangi”.",
+  "sv": "Tryck på ”Bygg palett”."
+ },
+ "Check contrast and copy or download the accessible colors.": {
+  "es": "Comprueba el contraste y copia o descarga los colores accesibles.",
+  "ar": "تحقّق من التباين، وانسخ الألوان سهلة القراءة أو نزّلها.",
+  "zh": "检查对比度，然后复制或下载无障碍配色。",
+  "sw": "Kagua utofautishaji na unakili au upakue rangi zinazofikika.",
+  "sv": "Kontrollera kontrasten och kopiera eller ladda ner de tillgängliga färgerna."
+ },
+ "Does it check accessibility?": {
+  "es": "¿Comprueba la accesibilidad?",
+  "ar": "هل يتحقق من سهولة الوصول؟",
+  "zh": "它会检查无障碍性吗？",
+  "sw": "Je, hukagua ufikivu?",
+  "sv": "Kontrollerar den tillgänglighet?"
+ },
+ "Yes. It checks text contrast against WCAG, so you can pick colours that are easy to read.": {
+  "es": "Sí. Comprueba el contraste del texto según WCAG para que elijas colores fáciles de leer.",
+  "ar": "نعم. يفحص تباين النص وفق WCAG لتختار ألوانًا سهلة القراءة.",
+  "zh": "会。它按 WCAG 检查文字对比度，帮你选出易读的颜色。",
+  "sw": "Ndiyo. Hukagua utofautishaji wa maandishi kwa WCAG, ili uchague rangi zinazosomeka kwa urahisi.",
+  "sv": "Ja. Den kontrollerar textkontrasten enligt WCAG så att du kan välja färger som är lätta att läsa."
+ },
+ "About Palette Forge": {
+  "es": "Acerca de Palette Forge",
+  "ar": "عن Palette Forge",
+  "zh": "关于 Palette Forge",
+  "sw": "Kuhusu Palette Forge",
+  "sv": "Om Palette Forge"
+ },
+ "How to use Palette Forge": {
+  "es": "Cómo usar Palette Forge",
+  "ar": "طريقة استخدام Palette Forge",
+  "zh": "如何使用 Palette Forge",
+  "sw": "Jinsi ya kutumia Palette Forge",
+  "sv": "Så använder du Palette Forge"
+ },
+ "Is Palette Forge free?": {
+  "es": "¿Palette Forge es gratis?",
+  "ar": "هل Palette Forge مجاني؟",
+  "zh": "Palette Forge 免费吗？",
+  "sw": "Je, Palette Forge ni bure?",
+  "sv": "Är Palette Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

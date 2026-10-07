@@ -85,3 +85,97 @@ I18N.phrases({
   "Label": { es: "Etiqueta", ar: "التسمية", zh: "标签", sw: "Lebo", sv: "Etikett" },
   "Downloaded a printable quiz with an answer key. Open it and print, or save as PDF.": { es: "Se descargó un cuestionario imprimible con las respuestas. Ábrelo e imprímelo, o guárdalo como PDF.", ar: "تم تنزيل اختبار قابل للطباعة مع مفتاح الإجابات. افتحه واطبعه أو احفظه بصيغة PDF.", zh: "已下载带答案的可打印测验。打开后打印，或另存为 PDF。", sw: "Jaribio la kuchapisha lenye majibu limepakuliwa. Lifungue uchapishe, au lihifadhi kama PDF.", sv: "Ett utskrivbart quiz med facit har laddats ner. Öppna och skriv ut, eller spara som PDF." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Geography Forge is an interactive world map: click any country to read its history, currency, languages, customs and political system, then play a quiz on what you explored.": {
+  "es": "Geography Forge es un mapa del mundo interactivo: haz clic en cualquier país para leer su historia, moneda, idiomas, costumbres y sistema político, y luego haz un cuestionario sobre lo que exploraste.",
+  "ar": "Geography Forge خريطة عالم تفاعلية: اضغط على أي دولة لتقرأ تاريخها وعملتها ولغاتها وعاداتها ونظامها السياسي، ثم العب اختبارًا عمّا استكشفته.",
+  "zh": "Geography Forge 是一张交互式世界地图：点击任意国家，阅读它的历史、货币、语言、习俗和政治制度，然后就你探索过的内容做测验。",
+  "sw": "Geography Forge ni ramani shirikishi ya dunia: bofya nchi yoyote kusoma historia, sarafu, lugha, desturi na mfumo wake wa kisiasa, kisha fanya chemsha bongo kuhusu ulichochunguza.",
+  "sv": "Geography Forge är en interaktiv världskarta: klicka på valfritt land för att läsa om dess historia, valuta, språk, seder och politiska system, och gör sedan ett quiz om det du utforskat."
+ },
+ "Click a country on the map or search for it to read its facts, history and customs.": {
+  "es": "Haz clic en un país del mapa o búscalo para leer sus datos, su historia y sus costumbres.",
+  "ar": "اضغط على دولة في الخريطة أو ابحث عنها لتقرأ حقائقها وتاريخها وعاداتها.",
+  "zh": "在地图上点击某个国家或搜索它，阅读它的概况、历史和习俗。",
+  "sw": "Bofya nchi kwenye ramani au uitafute kusoma ukweli, historia na desturi zake.",
+  "sv": "Klicka på ett land på kartan eller sök efter det för att läsa fakta, historia och seder."
+ },
+ "Press “Generate quiz”.": {
+  "es": "Pulsa «Generar cuestionario».",
+  "ar": "اضغط «أنشئ اختبارًا».",
+  "zh": "点击“生成测验”。",
+  "sw": "Bonyeza “Tengeneza chemsha bongo”.",
+  "sv": "Tryck på ”Skapa quiz”."
+ },
+ "Answer the questions and review the ones you missed.": {
+  "es": "Responde a las preguntas y repasa las que fallaste.",
+  "ar": "أجب عن الأسئلة وراجع ما أخطأت فيه.",
+  "zh": "回答问题，并复习答错的题目。",
+  "sw": "Jibu maswali na upitie yale uliyokosea.",
+  "sv": "Svara på frågorna och gå igenom dem du missade."
+ },
+ "Can I make a quiz for a class?": {
+  "es": "¿Puedo hacer un cuestionario para una clase?",
+  "ar": "هل يمكنني إعداد اختبار لصف دراسي؟",
+  "zh": "我可以给全班出一份测验吗？",
+  "sw": "Je, ninaweza kutengeneza chemsha bongo kwa darasa?",
+  "sv": "Kan jag göra ett quiz för en klass?"
+ },
+ "Yes. Generate a quiz from the countries you explored, answer it, and review the questions you missed.": {
+  "es": "Sí. Genera un cuestionario con los países que exploraste, respóndelo y repasa las preguntas que fallaste.",
+  "ar": "نعم. أنشئ اختبارًا من الدول التي استكشفتها، وأجب عنه، وراجع الأسئلة التي أخطأت فيها.",
+  "zh": "可以。根据你探索过的国家生成测验，作答后复习答错的题目。",
+  "sw": "Ndiyo. Tengeneza chemsha bongo kutoka nchi ulizochunguza, ijibu, na upitie maswali uliyokosea.",
+  "sv": "Ja. Skapa ett quiz från länderna du utforskat, svara på det och gå igenom frågorna du missade."
+ },
+ "About Geography Forge": {
+  "es": "Acerca de Geography Forge",
+  "ar": "عن Geography Forge",
+  "zh": "关于 Geography Forge",
+  "sw": "Kuhusu Geography Forge",
+  "sv": "Om Geography Forge"
+ },
+ "How to use Geography Forge": {
+  "es": "Cómo usar Geography Forge",
+  "ar": "طريقة استخدام Geography Forge",
+  "zh": "如何使用 Geography Forge",
+  "sw": "Jinsi ya kutumia Geography Forge",
+  "sv": "Så använder du Geography Forge"
+ },
+ "Is Geography Forge free?": {
+  "es": "¿Geography Forge es gratis?",
+  "ar": "هل Geography Forge مجاني؟",
+  "zh": "Geography Forge 免费吗？",
+  "sw": "Je, Geography Forge ni bure?",
+  "sv": "Är Geography Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

@@ -66,3 +66,97 @@ I18N.phrases({
   "YouTube thumbnail created at 1280 × 720.": { es: "Miniatura de YouTube creada a 1280 × 720.", ar: "تم إنشاء صورة YouTube المصغرة بمقاس 1280 × 720.", zh: "已生成 1280 × 720 的 YouTube 缩略图。", sw: "Picha ndogo ya YouTube imetengenezwa kwa 1280 × 720.", sv: "YouTube-miniatyren är skapad i 1280 × 720." },
   "Create an image first.": { es: "Crea primero una imagen.", ar: "أنشئ صورة أولًا.", zh: "请先生成图片。", sw: "Tengeneza picha kwanza.", sv: "Skapa en bild först." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Image Studio removes or replaces image backgrounds with on-device AI, builds collages, memes and YouTube thumbnails, and upscales photos.": {
+  "es": "Image Studio quita o cambia el fondo de las imágenes con IA en tu dispositivo, crea collages, memes y miniaturas de YouTube y amplía fotos.",
+  "ar": "يزيل Image Studio خلفيات الصور أو يستبدلها بذكاء اصطناعي يعمل على جهازك، ويصنع الكولاج والميمز وصور YouTube المصغّرة، ويكبّر الصور.",
+  "zh": "Image Studio 用在你设备上运行的 AI 去除或替换图片背景，制作拼图、表情包和 YouTube 缩略图，并放大照片。",
+  "sw": "Image Studio huondoa au kubadilisha mandharinyuma ya picha kwa AI inayoendeshwa kwenye kifaa chako, hutengeneza kolaji, memu na picha ndogo za YouTube, na kukuza picha.",
+  "sv": "Image Studio tar bort eller byter bakgrund i bilder med AI som körs på din enhet, gör collage, memes och YouTube-miniatyrer och skalar upp foton."
+ },
+ "Choose one or more images and select the background, collage, meme, thumbnail, or upscale tab.": {
+  "es": "Elige una o varias imágenes y selecciona la pestaña de fondo, collage, meme, miniatura o ampliación.",
+  "ar": "اختر صورة أو أكثر واختر تبويب الخلفية أو الكولاج أو الميم أو الصورة المصغّرة أو التكبير.",
+  "zh": "选择一张或多张图片，然后选择背景、拼图、表情包、缩略图或放大标签页。",
+  "sw": "Chagua picha moja au zaidi na uchague kichupo cha mandharinyuma, kolaji, memu, picha ndogo au ukuzaji.",
+  "sv": "Välj en eller flera bilder och välj fliken för bakgrund, collage, meme, miniatyr eller uppskalning."
+ },
+ "Press “Apply background effect”.": {
+  "es": "Pulsa «Aplicar efecto de fondo».",
+  "ar": "اضغط «تطبيق تأثير الخلفية».",
+  "zh": "点击“应用背景效果”。",
+  "sw": "Bonyeza “Tumia athari ya mandharinyuma”.",
+  "sv": "Tryck på ”Använd bakgrundseffekt”."
+ },
+ "Check the live canvas and download the finished PNG.": {
+  "es": "Revisa el lienzo en vivo y descarga el PNG terminado.",
+  "ar": "تفقّد اللوحة الحية ونزّل ملف PNG النهائي.",
+  "zh": "查看实时画布，然后下载完成的 PNG。",
+  "sw": "Kagua turubai la moja kwa moja na upakue PNG iliyokamilika.",
+  "sv": "Kontrollera liveduken och ladda ner den färdiga PNG-filen."
+ },
+ "How do I remove a background?": {
+  "es": "¿Cómo quito un fondo?",
+  "ar": "كيف أزيل الخلفية؟",
+  "zh": "怎样去除背景？",
+  "sw": "Ninaondoaje mandharinyuma?",
+  "sv": "Hur tar jag bort en bakgrund?"
+ },
+ "Open the image in the background tab and apply the effect. The AI model runs on your device, so the photo is not uploaded.": {
+  "es": "Abre la imagen en la pestaña de fondo y aplica el efecto. El modelo de IA se ejecuta en tu dispositivo, así que la foto no se sube.",
+  "ar": "افتح الصورة في تبويب الخلفية وطبّق التأثير. يعمل نموذج الذكاء الاصطناعي على جهازك، لذا لا تُرفع الصورة.",
+  "zh": "在背景标签页中打开图片并应用效果。AI 模型在你的设备上运行，所以照片不会被上传。",
+  "sw": "Fungua picha kwenye kichupo cha mandharinyuma na utumie athari. Modeli ya AI huendeshwa kwenye kifaa chako, hivyo picha haipakiwi.",
+  "sv": "Öppna bilden på bakgrundsfliken och använd effekten. AI-modellen körs på din enhet, så fotot laddas inte upp."
+ },
+ "About Image Studio": {
+  "es": "Acerca de Image Studio",
+  "ar": "عن Image Studio",
+  "zh": "关于 Image Studio",
+  "sw": "Kuhusu Image Studio",
+  "sv": "Om Image Studio"
+ },
+ "How to use Image Studio": {
+  "es": "Cómo usar Image Studio",
+  "ar": "طريقة استخدام Image Studio",
+  "zh": "如何使用 Image Studio",
+  "sw": "Jinsi ya kutumia Image Studio",
+  "sv": "Så använder du Image Studio"
+ },
+ "Is Image Studio free?": {
+  "es": "¿Image Studio es gratis?",
+  "ar": "هل Image Studio مجاني؟",
+  "zh": "Image Studio 免费吗？",
+  "sw": "Je, Image Studio ni bure?",
+  "sv": "Är Image Studio gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

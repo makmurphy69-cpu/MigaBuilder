@@ -172,3 +172,97 @@ I18N.phrases({
   "Record or add at least one clip first.": { es: "Primero graba o añade al menos un clip.", ar: "سجّل مقطعًا واحدًا على الأقل أو أضفه أولًا.", zh: "请先录制或添加至少一个片段。", sw: "Rekodi au ongeza angalau klipu moja kwanza.", sv: "Spela in eller lägg till minst ett klipp först." },
   "This browser cannot make videos. Try Chrome, Edge or Firefox.": { es: "Este navegador no puede crear vídeos. Prueba Chrome, Edge o Firefox.", ar: "لا يستطيع هذا المتصفح صنع الفيديوهات. جرّب Chrome أو Edge أو Firefox.", zh: "此浏览器无法生成视频。请尝试 Chrome、Edge 或 Firefox。", sw: "Kivinjari hiki hakiwezi kutengeneza video. Jaribu Chrome, Edge au Firefox.", sv: "Den här webbläsaren kan inte göra videor. Prova Chrome, Edge eller Firefox." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Jam Forge records several video clips and puts them side by side or one after another: a band split screen, a duet or a conversation.": {
+  "es": "Jam Forge graba varios clips de vídeo y los coloca uno al lado del otro o uno tras otro: una banda en pantalla dividida, un dúo o una conversación.",
+  "ar": "يسجّل Jam Forge عدة مقاطع فيديو ويضعها جنبًا إلى جنب أو واحدًا بعد الآخر: فرقة على شاشة مقسومة، أو ثنائي، أو محادثة.",
+  "zh": "Jam Forge 录制多个视频片段，把它们并排或依次排列：乐队分屏、二重唱或对话。",
+  "sw": "Jam Forge hurekodi klipu kadhaa za video na kuziweka kando kwa kando au moja baada ya nyingine: bendi kwenye skrini iliyogawanywa, wimbo wa watu wawili au mazungumzo.",
+  "sv": "Jam Forge spelar in flera videoklipp och lägger dem sida vid sida eller efter varandra: ett band i delad skärm, en duett eller ett samtal."
+ },
+ "Record a clip with the camera, or join videos you already have with Choose videos to join.": {
+  "es": "Graba un clip con la cámara o une vídeos que ya tienes con Elegir vídeos para unir.",
+  "ar": "سجّل مقطعًا بالكاميرا، أو ادمج فيديوهات لديك عبر «اختر فيديوهات للدمج».",
+  "zh": "用摄像头录一段，或用“选择要合并的视频”把已有视频合在一起。",
+  "sw": "Rekodi klipu kwa kamera, au unganisha video ulizonazo tayari kwa Chagua video za kuunganisha.",
+  "sv": "Spela in ett klipp med kameran eller foga ihop videor du redan har med Välj videor att foga ihop."
+ },
+ "Press “Record”.": {
+  "es": "Pulsa «Grabar».",
+  "ar": "اضغط «سجّل».",
+  "zh": "点击“录制”。",
+  "sw": "Bonyeza “Rekodi”.",
+  "sv": "Tryck på ”Spela in”."
+ },
+ "Choose At the same time, One after another or Taking turns, line the clips up with Sync by clap, pick a layout and press Make the video.": {
+  "es": "Elige A la vez, Uno tras otro o Por turnos, alinea los clips con Sincronizar por palmada, elige un diseño y pulsa Crear el vídeo.",
+  "ar": "اختر «في الوقت نفسه» أو «واحدًا تلو الآخر» أو «بالتناوب»، ونسّق المقاطع عبر «المزامنة بالتصفيق»، واختر تخطيطًا ثم اضغط «اصنع الفيديو».",
+  "zh": "选择“同时”“依次”或“轮流”，用“拍手同步”对齐片段，选择版式，然后点击“生成视频”。",
+  "sw": "Chagua Kwa wakati mmoja, Moja baada ya nyingine au Kwa zamu, panga klipu kwa Linganisha kwa kupiga makofi, chagua mpangilio na ubonyeze Tengeneza video.",
+  "sv": "Välj Samtidigt, Efter varandra eller Turvis, rada upp klippen med Synka med klapp, välj en layout och tryck på Gör videon."
+ },
+ "How do I line up the clips?": {
+  "es": "¿Cómo alineo los clips?",
+  "ar": "كيف أنسّق المقاطع؟",
+  "zh": "怎样对齐各个片段？",
+  "sw": "Ninapangaje klipu?",
+  "sv": "Hur radar jag upp klippen?"
+ },
+ "Clap at the start of each recording and use Sync by clap; Jam Forge lines the clips up for you.": {
+  "es": "Da una palmada al empezar cada grabación y usa Sincronizar por palmada; Jam Forge alinea los clips por ti.",
+  "ar": "صفّق في بداية كل تسجيل واستخدم «المزامنة بالتصفيق»؛ وسيتولى Jam Forge تنسيق المقاطع.",
+  "zh": "每次录制开始时拍一下手，然后使用“拍手同步”；Jam Forge 会帮你对齐片段。",
+  "sw": "Piga makofi mwanzoni mwa kila rekodi na utumie Linganisha kwa kupiga makofi; Jam Forge hupanga klipu kwa ajili yako.",
+  "sv": "Klappa i händerna i början av varje inspelning och använd Synka med klapp; Jam Forge radar upp klippen åt dig."
+ },
+ "About Jam Forge": {
+  "es": "Acerca de Jam Forge",
+  "ar": "عن Jam Forge",
+  "zh": "关于 Jam Forge",
+  "sw": "Kuhusu Jam Forge",
+  "sv": "Om Jam Forge"
+ },
+ "How to use Jam Forge": {
+  "es": "Cómo usar Jam Forge",
+  "ar": "طريقة استخدام Jam Forge",
+  "zh": "如何使用 Jam Forge",
+  "sw": "Jinsi ya kutumia Jam Forge",
+  "sv": "Så använder du Jam Forge"
+ },
+ "Is Jam Forge free?": {
+  "es": "¿Jam Forge es gratis?",
+  "ar": "هل Jam Forge مجاني؟",
+  "zh": "Jam Forge 免费吗？",
+  "sw": "Je, Jam Forge ni bure?",
+  "sv": "Är Jam Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

@@ -41,3 +41,97 @@ I18N.phrases({
   "Conversion complete. Your download should begin automatically.": { es: "Conversión completada. La descarga debería empezar automáticamente.", ar: "اكتمل التحويل. يجب أن يبدأ التنزيل تلقائيًا.", zh: "转换完成，下载应会自动开始。", sw: "Ubadilishaji umekamilika. Upakuaji unapaswa kuanza kiotomatiki.", sv: "Konverteringen är klar. Nedladdningen bör starta automatiskt." },
   "Conversion failed.": { es: "La conversión falló.", ar: "فشل التحويل.", zh: "转换失败。", sw: "Ubadilishaji umeshindwa.", sv: "Konverteringen misslyckades." }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Document Forge converts DOCX, text, Markdown, HTML, CSV, images and PDF files.": {
+  "es": "Document Forge convierte archivos DOCX, de texto, Markdown, HTML, CSV, imágenes y PDF.",
+  "ar": "يحوّل Document Forge ملفات DOCX والنصوص وMarkdown وHTML وCSV والصور وPDF.",
+  "zh": "Document Forge 可转换 DOCX、文本、Markdown、HTML、CSV、图片和 PDF 文件。",
+  "sw": "Document Forge hugeuza faili za DOCX, maandishi, Markdown, HTML, CSV, picha na PDF.",
+  "sv": "Document Forge konverterar DOCX-, text-, Markdown-, HTML-, CSV-, bild- och PDF-filer."
+ },
+ "Drop in a document, image, or PDF and choose the output format.": {
+  "es": "Suelta un documento, una imagen o un PDF y elige el formato de salida.",
+  "ar": "أفلت مستندًا أو صورة أو ملف PDF واختر صيغة الإخراج.",
+  "zh": "拖入文档、图片或 PDF，并选择输出格式。",
+  "sw": "Dondosha hati, picha au PDF na uchague muundo wa matokeo.",
+  "sv": "Släpp in ett dokument, en bild eller en PDF och välj utdataformat."
+ },
+ "Press “Convert & download”.": {
+  "es": "Pulsa «Convertir y descargar».",
+  "ar": "اضغط «تحويل وتنزيل».",
+  "zh": "点击“转换并下载”。",
+  "sw": "Bonyeza “Geuza na upakue”.",
+  "sv": "Tryck på ”Konvertera & ladda ner”."
+ },
+ "Check the preview and open the converted download.": {
+  "es": "Revisa la vista previa y abre el archivo convertido.",
+  "ar": "تفقّد المعاينة وافتح الملف المحوَّل.",
+  "zh": "查看预览并打开转换后的文件。",
+  "sw": "Kagua onyesho na ufungue faili lililogeuzwa.",
+  "sv": "Kontrollera förhandsvisningen och öppna den konverterade filen."
+ },
+ "Which formats can I convert?": {
+  "es": "¿Qué formatos puedo convertir?",
+  "ar": "ما الصيغ التي يمكنني تحويلها؟",
+  "zh": "可以转换哪些格式？",
+  "sw": "Ni miundo gani ninaweza kugeuza?",
+  "sv": "Vilka format kan jag konvertera?"
+ },
+ "DOCX, plain text, Markdown, HTML, CSV, images and PDF. Choose the output format and download the converted file.": {
+  "es": "DOCX, texto plano, Markdown, HTML, CSV, imágenes y PDF. Elige el formato de salida y descarga el archivo convertido.",
+  "ar": "DOCX والنص العادي وMarkdown وHTML وCSV والصور وPDF. اختر صيغة الإخراج ونزّل الملف المحوَّل.",
+  "zh": "DOCX、纯文本、Markdown、HTML、CSV、图片和 PDF。选择输出格式，然后下载转换后的文件。",
+  "sw": "DOCX, maandishi matupu, Markdown, HTML, CSV, picha na PDF. Chagua muundo wa matokeo na upakue faili lililogeuzwa.",
+  "sv": "DOCX, ren text, Markdown, HTML, CSV, bilder och PDF. Välj utdataformat och ladda ner den konverterade filen."
+ },
+ "About Document Forge": {
+  "es": "Acerca de Document Forge",
+  "ar": "عن Document Forge",
+  "zh": "关于 Document Forge",
+  "sw": "Kuhusu Document Forge",
+  "sv": "Om Document Forge"
+ },
+ "How to use Document Forge": {
+  "es": "Cómo usar Document Forge",
+  "ar": "طريقة استخدام Document Forge",
+  "zh": "如何使用 Document Forge",
+  "sw": "Jinsi ya kutumia Document Forge",
+  "sv": "Så använder du Document Forge"
+ },
+ "Is Document Forge free?": {
+  "es": "¿Document Forge es gratis?",
+  "ar": "هل Document Forge مجاني؟",
+  "zh": "Document Forge 免费吗？",
+  "sw": "Je, Document Forge ni bure?",
+  "sv": "Är Document Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

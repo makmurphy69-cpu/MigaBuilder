@@ -69,3 +69,97 @@ I18N.phrases({
   "Encoding MP3…": { es: "Codificando MP3…", ar: "جارٍ ترميز MP3…", zh: "正在编码 MP3…", sw: "Inasimba MP3…", sv: "Kodar MP3…" },
   "Downloaded": { es: "Descargado", ar: "تم التنزيل", zh: "已下载", sw: "Imepakuliwa", sv: "Nedladdad" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Audio Forge is an audio editor in your browser: trim and cut, join files, change volume and speed, fade, reverse, normalise, record your voice and export.": {
+  "es": "Audio Forge es un editor de audio en tu navegador: recorta y corta, une archivos, cambia el volumen y la velocidad, aplica fundidos, invierte, normaliza, graba tu voz y exporta.",
+  "ar": "Audio Forge محرر صوت في متصفحك: قصّ واقتطع، وادمج الملفات، وغيّر مستوى الصوت والسرعة، وأضف التلاشي، واعكس، ووحّد المستوى، وسجّل صوتك وصدّر.",
+  "zh": "Audio Forge 是浏览器中的音频编辑器：裁剪剪切、合并文件、调节音量和速度、淡入淡出、倒放、标准化、录制你的声音并导出。",
+  "sw": "Audio Forge ni kihariri sauti kwenye kivinjari chako: punguza na kata, unganisha faili, badilisha sauti na kasi, fifisha, geuza, sawazisha, rekodi sauti yako na uhamishe.",
+  "sv": "Audio Forge är en ljudredigerare i webbläsaren: trimma och klipp, slå ihop filer, ändra volym och hastighet, tona in och ut, spela baklänges, normalisera, spela in din röst och exportera."
+ },
+ "Open an audio or video file, or record from your microphone.": {
+  "es": "Abre un archivo de audio o vídeo, o graba desde tu micrófono.",
+  "ar": "افتح ملف صوت أو فيديو، أو سجّل من الميكروفون.",
+  "zh": "打开音频或视频文件，或用麦克风录音。",
+  "sw": "Fungua faili la sauti au video, au rekodi kutoka kwenye maikrofoni yako.",
+  "sv": "Öppna en ljud- eller videofil eller spela in från mikrofonen."
+ },
+ "Press “Keep selection”.": {
+  "es": "Pulsa «Conservar selección».",
+  "ar": "اضغط «الإبقاء على التحديد».",
+  "zh": "点击“保留所选部分”。",
+  "sw": "Bonyeza “Baki na uteuzi”.",
+  "sv": "Tryck på ”Behåll markeringen”."
+ },
+ "Drag across the waveform to select a part, apply fades, volume or speed, then download MP3 or WAV.": {
+  "es": "Arrastra sobre la forma de onda para seleccionar una parte, aplica fundidos, volumen o velocidad y descarga MP3 o WAV.",
+  "ar": "اسحب على الموجة لتحديد جزء، وطبّق التلاشي أو مستوى الصوت أو السرعة، ثم نزّل MP3 أو WAV.",
+  "zh": "在波形上拖动选择一段，应用淡入淡出、音量或速度，然后下载 MP3 或 WAV。",
+  "sw": "Buruta juu ya umbo la wimbi kuchagua sehemu, weka ufifishaji, sauti au kasi, kisha pakua MP3 au WAV.",
+  "sv": "Dra över vågformen för att markera en del, lägg på toningar, volym eller hastighet och ladda sedan ner MP3 eller WAV."
+ },
+ "Can I record my own voice?": {
+  "es": "¿Puedo grabar mi propia voz?",
+  "ar": "هل يمكنني تسجيل صوتي؟",
+  "zh": "我可以录制自己的声音吗？",
+  "sw": "Je, ninaweza kurekodi sauti yangu mwenyewe?",
+  "sv": "Kan jag spela in min egen röst?"
+ },
+ "Yes. Record from your microphone, edit the recording on the waveform and download it as MP3 or WAV.": {
+  "es": "Sí. Graba desde tu micrófono, edita la grabación sobre la forma de onda y descárgala como MP3 o WAV.",
+  "ar": "نعم. سجّل من الميكروفون، وحرّر التسجيل على الموجة، ونزّله بصيغة MP3 أو WAV.",
+  "zh": "可以。用麦克风录音，在波形上编辑录音，然后下载为 MP3 或 WAV。",
+  "sw": "Ndiyo. Rekodi kutoka kwenye maikrofoni yako, hariri rekodi kwenye umbo la wimbi na uipakue kama MP3 au WAV.",
+  "sv": "Ja. Spela in från mikrofonen, redigera inspelningen på vågformen och ladda ner den som MP3 eller WAV."
+ },
+ "About Audio Forge": {
+  "es": "Acerca de Audio Forge",
+  "ar": "عن Audio Forge",
+  "zh": "关于 Audio Forge",
+  "sw": "Kuhusu Audio Forge",
+  "sv": "Om Audio Forge"
+ },
+ "How to use Audio Forge": {
+  "es": "Cómo usar Audio Forge",
+  "ar": "طريقة استخدام Audio Forge",
+  "zh": "如何使用 Audio Forge",
+  "sw": "Jinsi ya kutumia Audio Forge",
+  "sv": "Så använder du Audio Forge"
+ },
+ "Is Audio Forge free?": {
+  "es": "¿Audio Forge es gratis?",
+  "ar": "هل Audio Forge مجاني؟",
+  "zh": "Audio Forge 免费吗？",
+  "sw": "Je, Audio Forge ni bure?",
+  "sv": "Är Audio Forge gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});

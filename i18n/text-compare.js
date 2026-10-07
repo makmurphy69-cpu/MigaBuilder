@@ -47,3 +47,97 @@ I18N.phrases({
   "Choose side-by-side or one-column view first.": { es: "Primero elige la vista en paralelo o en una columna.", ar: "اختر عرض جنبًا إلى جنب أو عمودًا واحدًا أولًا.", zh: "请先选择并排视图或单栏视图。", sw: "Chagua mwonekano wa kando kwa kando au safu moja kwanza.", sv: "Välj vyn sida vid sida eller en kolumn först." },
   "Copied ✓": { es: "Copiado ✓", ar: "تم النسخ ✓", zh: "已复制 ✓", sw: "Imenakiliwa ✓", sv: "Kopierat ✓" }
 });
+/* About section at the end of the page: what it does, how to use it and common questions. */
+I18N.phrases({
+ "Text Compare shows exactly what changed between two versions of a text, contract, essay or code: what was added, removed and changed, line by line and word by word.": {
+  "es": "Text Compare muestra exactamente qué cambió entre dos versiones de un texto, contrato, ensayo o código: lo añadido, lo eliminado y lo modificado, línea a línea y palabra a palabra.",
+  "ar": "يُظهر Text Compare بالضبط ما تغيّر بين نسختين من نص أو عقد أو مقال أو شيفرة: ما أُضيف وما حُذف وما عُدّل، سطرًا بسطر وكلمة بكلمة.",
+  "zh": "Text Compare 精确显示一段文字、合同、文章或代码两个版本之间的变化：逐行、逐词标出新增、删除和修改。",
+  "sw": "Text Compare huonyesha hasa kilichobadilika kati ya matoleo mawili ya maandishi, mkataba, insha au msimbo: kilichoongezwa, kuondolewa na kubadilishwa, mstari kwa mstari na neno kwa neno.",
+  "sv": "Text Compare visar exakt vad som ändrats mellan två versioner av en text, ett avtal, en uppsats eller kod: vad som lagts till, tagits bort och ändrats, rad för rad och ord för ord."
+ },
+ "Paste the original text on the left and the changed version on the right.": {
+  "es": "Pega el texto original a la izquierda y la versión modificada a la derecha.",
+  "ar": "الصق النص الأصلي على اليسار والنسخة المعدّلة على اليمين.",
+  "zh": "把原文粘贴在左边，修改后的版本粘贴在右边。",
+  "sw": "Bandika maandishi ya asili upande wa kushoto na toleo lililobadilishwa upande wa kulia.",
+  "sv": "Klistra in originaltexten till vänster och den ändrade versionen till höger."
+ },
+ "Press “Compare”.": {
+  "es": "Pulsa «Comparar».",
+  "ar": "اضغط «قارن».",
+  "zh": "点击“比较”。",
+  "sw": "Bonyeza “Linganisha”.",
+  "sv": "Tryck på ”Jämför”."
+ },
+ "Review the highlighted additions, removals and changes, then download the report.": {
+  "es": "Revisa lo añadido, eliminado y modificado resaltado y descarga el informe.",
+  "ar": "راجع الإضافات والحذف والتعديلات المميّزة، ثم نزّل التقرير.",
+  "zh": "查看高亮的新增、删除和修改，然后下载报告。",
+  "sw": "Pitia nyongeza, maondoleo na mabadiliko yaliyoangaziwa, kisha pakua ripoti.",
+  "sv": "Gå igenom de markerade tilläggen, borttagningarna och ändringarna och ladda sedan ner rapporten."
+ },
+ "Can I compare code or JSON?": {
+  "es": "¿Puedo comparar código o JSON?",
+  "ar": "هل يمكنني مقارنة شيفرة أو JSON؟",
+  "zh": "我可以比较代码或 JSON 吗？",
+  "sw": "Je, ninaweza kulinganisha msimbo au JSON?",
+  "sv": "Kan jag jämföra kod eller JSON?"
+ },
+ "Yes. Paste any two texts, including code and JSON, and download a report of the differences.": {
+  "es": "Sí. Pega dos textos cualesquiera, incluidos código y JSON, y descarga un informe de las diferencias.",
+  "ar": "نعم. الصق أي نصين، بما في ذلك الشيفرة وJSON، ونزّل تقريرًا بالفروق.",
+  "zh": "可以。粘贴任意两段文字，包括代码和 JSON，然后下载差异报告。",
+  "sw": "Ndiyo. Bandika maandishi yoyote mawili, ikiwemo msimbo na JSON, na upakue ripoti ya tofauti.",
+  "sv": "Ja. Klistra in två valfria texter, även kod och JSON, och ladda ner en rapport över skillnaderna."
+ },
+ "About Text Compare": {
+  "es": "Acerca de Text Compare",
+  "ar": "عن Text Compare",
+  "zh": "关于 Text Compare",
+  "sw": "Kuhusu Text Compare",
+  "sv": "Om Text Compare"
+ },
+ "How to use Text Compare": {
+  "es": "Cómo usar Text Compare",
+  "ar": "طريقة استخدام Text Compare",
+  "zh": "如何使用 Text Compare",
+  "sw": "Jinsi ya kutumia Text Compare",
+  "sv": "Så använder du Text Compare"
+ },
+ "Is Text Compare free?": {
+  "es": "¿Text Compare es gratis?",
+  "ar": "هل Text Compare مجاني؟",
+  "zh": "Text Compare 免费吗？",
+  "sw": "Je, Text Compare ni bure?",
+  "sv": "Är Text Compare gratis?"
+ },
+ "Are my files uploaded?": {
+  "es": "¿Se suben mis archivos?",
+  "ar": "هل تُرفع ملفاتي؟",
+  "zh": "我的文件会被上传吗？",
+  "sw": "Je, faili zangu zinapakiwa?",
+  "sv": "Laddas mina filer upp?"
+ },
+ "Related tools:": {
+  "es": "Herramientas relacionadas:",
+  "ar": "أدوات ذات صلة:",
+  "zh": "相关工具：",
+  "sw": "Zana zinazohusiana:",
+  "sv": "Relaterade verktyg:"
+ },
+ "Yes. It is free to use, with no account, no watermark and no paywall.": {
+  "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
+  "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
+  "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
+  "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+ },
+ "No. It runs entirely in your browser, so your files and text stay on your device.": {
+  "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
+  "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
+  "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
+  "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+ }
+});
