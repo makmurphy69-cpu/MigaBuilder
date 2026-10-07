@@ -6,6 +6,7 @@
 <title>Geography Forge — interactive world map and country quiz | MigaBuilder</title>
 <meta name="description" content="Click any country on an interactive world map to learn its history, currency, languages, customs and political system, then generate a geography quiz from what you explored. Free, no signup.">
 <link rel="canonical" href="https://migabuilder.com/geo-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/geo-forge.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="Geography Forge — explore every country, then quiz yourself | MigaBuilder">
 <meta property="og:description" content="Interactive world map with history, currency, languages, customs and government for every country, plus a quiz generator.">
 <meta property="og:url" content="https://migabuilder.com/geo-forge.html"><meta property="og:type" content="website">
@@ -47,6 +48,7 @@ main{max-width:1320px}
 </style>
 <script src="i18n.js"></script>
 <script src="i18n/geo-forge.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I make a quiz for a class?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Generate a quiz from the countries you explored, answer it, and review the questions you missed."}}, {"@type": "Question", "name": "Is Geography Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Geography Forge is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Geography Forge runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Geography Forge</span></nav>
@@ -90,6 +92,20 @@ main{max-width:1320px}
   <div id="quizDone" class="hidden" style="margin-top:14px"><h3 id="doneTitle" style="font:700 20px 'Space Grotesk';margin:0 0 8px"></h3><ol class="review" id="review"></ol><div class="actions"><button class="primary" id="retryWrong">Retry the ones I missed</button><button class="secondary" id="newQuiz">New quiz</button></div></div>
 </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Geography Forge</h2>
+  <p>Geography Forge is an interactive world map: click any country to read its history, currency, languages, customs and political system, then play a quiz on what you explored.</p>
+  <h3>How to use Geography Forge</h3>
+  <ol><li>Click a country on the map or search for it to read its facts, history and customs.</li><li>Press “Generate quiz”.</li><li>Answer the questions and review the ones you missed.</li></ol>
+  <h3>Can I make a quiz for a class?</h3>
+  <p>Yes. Generate a quiz from the countries you explored, answer it, and review the questions you missed.</p>
+  <h3>Is Geography Forge free?</h3>
+  <p>Yes. Geography Forge is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. Geography Forge runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="flashcard-forge.html">Flashcard Forge</a> · <a href="idea-atlas.html">Idea Atlas</a> · <a href="physics-map.html">Physics Map</a></p>
+</section>
+
 <footer>Part of <a href="index.html">MigaBuilder</a>. Country facts: <a href="https://github.com/mledoze/countries">mledoze/countries</a> (ODbL) and <a href="https://www.wikidata.org/">Wikidata</a> (CC0), <span id="geoUpdated">updated September 2026</span> and refreshed automatically every week — check current sources for anything important. Articles load live from <a href="https://www.wikipedia.org/">Wikipedia</a> (CC BY-SA). Map: <a href="https://github.com/topojson/world-atlas">Natural Earth / world-atlas</a>. Borders shown are not an endorsement of any territorial claim.</footer>
 <script>
 (function(){

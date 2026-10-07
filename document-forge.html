@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/document-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/document-forge.jpg"><meta name="twitter:card" content="summary_large_image">
 <script>
 (function(){try{var u=(typeof window!=='undefined'&&window.__VISITS_URL_OVERRIDE)||'https://migabuilder-visits.makmurphy69.workers.dev',p=location.pathname.split('/').pop()||'document-forge.html',b=JSON.stringify({page:p});if(navigator.sendBeacon)navigator.sendBeacon(u+'/hit',new Blob([b],{type:'text/plain'}));else fetch(u+'/hit',{method:'POST',headers:{'Content-Type':'application/json'},body:b,keepalive:true}).catch(function(){})}catch(e){}})();
 </script>
@@ -19,6 +20,7 @@
 </style><link rel="stylesheet" href="tutorials.css">
 <script src="i18n.js"></script>
 <script src="i18n/document-forge.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which formats can I convert?", "acceptedAnswer": {"@type": "Answer", "text": "DOCX, plain text, Markdown, HTML, CSV, images and PDF. Choose the output format and download the converted file."}}, {"@type": "Question", "name": "Is Document Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Document Forge is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Document Forge runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head>
 <body>
 <header class="masthead"><svg class="logo" viewBox="0 0 40 40" fill="none"><rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/><path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="33" cy="7" r="3" fill="#E2A63B"/></svg><div><h1>Document Forge</h1><p>Convert documents, images and PDFs without uploading your files.</p></div></header>
@@ -27,6 +29,20 @@
 <div class="file-info" id="fileInfo"></div><div class="controls"><label>Convert to<select id="output" disabled><option>Select a file first</option></select></label><button class="primary" id="convert" disabled>Convert & download</button></div><div class="status" id="status" role="status"></div>
 <div class="preview"><h2>Preview</h2><div class="preview-box" id="preview">Your document preview will appear here.</div></div>
 <div class="support"><div><strong>Documents → PDF</strong>DOCX, text, Markdown, HTML and CSV become a clean downloadable PDF.</div><div><strong>PDF → images</strong>Turn every PDF page into a PNG and download all pages in a ZIP.</div><div><strong>Other formats</strong>Extract DOCX as HTML or text, and convert text-based files between HTML and TXT.</div></div></section></main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Document Forge</h2>
+  <p>Document Forge converts DOCX, text, Markdown, HTML, CSV, images and PDF files.</p>
+  <h3>How to use Document Forge</h3>
+  <ol><li>Drop in a document, image, or PDF and choose the output format.</li><li>Press “Convert &amp; download”.</li><li>Check the preview and open the converted download.</li></ol>
+  <h3>Which formats can I convert?</h3>
+  <p>DOCX, plain text, Markdown, HTML, CSV, images and PDF. Choose the output format and download the converted file.</p>
+  <h3>Is Document Forge free?</h3>
+  <p>Yes. Document Forge is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. Document Forge runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="pdf-forge.html">PDF Forge</a> · <a href="pdf-compress.html">Compress PDF</a> · <a href="ocr-forge.html">OCR Forge</a></p>
+</section>
+
 <footer>Part of <a href="index.html">MigaBuilder</a>. Need to merge, split, reorder, rotate, or sign a PDF? Open <a href="pdf-forge.html">PDF Forge</a>. Complex Word layouts may be simplified during conversion. <a href="feedback.html">Send feedback →</a></footer>
 <script type="module">
 import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.min.mjs';

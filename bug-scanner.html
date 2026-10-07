@@ -6,6 +6,7 @@
 <title>Bug Scanner — find and explain bugs in any code | MigaBuilder</title>
 <meta name="description" content="Paste code or upload a whole project in 30+ languages. Bug Scanner finds syntax errors, logic bugs and security problems, explains each one in plain language, shows what the code builds in a live preview, and gives the fix. Free, no signup.">
 <link rel="canonical" href="https://migabuilder.com/bug-scanner.html">
+<meta property="og:image" content="https://videos.migabuilder.com/bug-scanner.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="Bug Scanner — find, explain and fix bugs in any code | MigaBuilder">
 <meta property="og:description" content="Scan large code files or whole projects, see what the code builds, and get a plain-language explanation of every bug and how to fix it.">
 <meta property="og:url" content="https://migabuilder.com/bug-scanner.html"><meta property="og:type" content="website">
@@ -62,6 +63,7 @@ iframe.preview{width:100%;height:460px;border:1px solid rgba(22,32,43,.2);backgr
 </style>
 <script src="i18n.js"></script>
 <script src="i18n/bug-scanner.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I scan a whole project?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Paste code, open several files or drop a project ZIP, and each problem is listed with its file, an explanation and the fixed code."}}, {"@type": "Question", "name": "Is Bug Scanner free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Bug Scanner is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Bug Scanner</span></nav>
@@ -126,6 +128,20 @@ iframe.preview{width:100%;height:460px;border:1px solid rgba(22,32,43,.2);backgr
   <div class="actions" style="margin-top:14px"><button class="secondary" id="reportBtn">⬇ Download report</button><button class="secondary" id="copyReport">Copy report</button></div>
 </section>
 </main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Bug Scanner</h2>
+  <p>Bug Scanner checks code in 30+ languages for syntax errors, logic bugs and security problems, explains each one in plain language and gives the fix. It can also show a live preview of what the code builds.</p>
+  <h3>How to use Bug Scanner</h3>
+  <ol><li>Paste your code, open files or drop a project zip, and choose the language.</li><li>Press “Scan code”.</li><li>Read each problem and how to fix it, check the live preview of what the code builds, then copy the fixed code.</li></ol>
+  <h3>Can I scan a whole project?</h3>
+  <p>Yes. Paste code, open several files or drop a project ZIP, and each problem is listed with its file, an explanation and the fixed code.</p>
+  <h3>Is Bug Scanner free?</h3>
+  <p>Yes. Bug Scanner is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="code-forge.html">Code Forge</a> · <a href="regex-forge.html">Regex Forge</a> · <a href="redact-forge.html">Redact Forge</a></p>
+</section>
+
 <footer>Bug Scanner · MigaBuilder · AI can miss problems or be wrong — always test the fixed code.</footer>
 
 <script>
