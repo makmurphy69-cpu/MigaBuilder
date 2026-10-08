@@ -15,7 +15,7 @@ I18N.phrases({
   "Art in the style of Piet Mondrian – click for more": { es: "Arte al estilo de Piet Mondrian: haz clic para saber más", ar: "رسم بأسلوب بيت موندريان – انقر لمعرفة المزيد", zh: "皮特·蒙德里安风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa Piet Mondrian – bofya kujua zaidi", sv: "Konst i Piet Mondrians stil – klicka för mer" },
   "Leave blank if open": { es: "Déjalo vacío si es abierta", ar: "اتركه فارغًا إذا كانت الشبكة مفتوحة", zh: "如果是开放网络请留空", sw: "Acha tupu kama mtandao uko wazi", sv: "Lämna tomt om nätet är öppet" },
   "How to use QR Forge": { es: "Cómo usar QR Forge", ar: "كيفية استخدام QR Forge", zh: "如何使用 QR Forge", sw: "Jinsi ya kutumia QR Forge", sv: "Så använder du QR Forge" },
-  "QR Forge — free QR code generator": { es: "QR Forge — generador de códigos QR gratis", ar: "QR Forge — منشئ رموز QR مجاني", zh: "QR Forge — 免费二维码生成器", sw: "QR Forge — kitengeneza msimbo wa QR cha bure", sv: "QR Forge — gratis QR-kodgenerator" }
+  "Free QR code generator — QR Forge | MigaBuilder": { es: "Generador de códigos QR gratis — QR Forge | MigaBuilder", ar: "منشئ رموز QR مجاني — QR Forge | MigaBuilder", zh: "免费二维码生成器 — QR Forge | MigaBuilder", sw: "Kitengeneza msimbo wa QR cha bure — QR Forge | MigaBuilder", sv: "Gratis QR-kodgenerator — QR Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

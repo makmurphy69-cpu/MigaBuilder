@@ -15,7 +15,7 @@ I18N.phrases({
   "e.g. A pitch deck for a plumbing business: intro, the problem, our services, why us, pricing, contact": { es: "p. ej. Una presentación para una empresa de fontanería: introducción, el problema, nuestros servicios, por qué nosotros, precios, contacto", ar: "مثلًا: عرض تقديمي لشركة سباكة: مقدمة، المشكلة، خدماتنا، لماذا نحن، الأسعار، التواصل", zh: "例如：一家水管公司的路演 PPT：简介、问题、我们的服务、为什么选我们、价格、联系方式", sw: "k.m. Wasilisho la biashara ya mabomba: utangulizi, tatizo, huduma zetu, kwa nini sisi, bei, mawasiliano", sv: "t.ex. En pitch för ett rörfirma: intro, problemet, våra tjänster, varför oss, priser, kontakt" },
   "Let the AI decide (4–10)": { es: "Que decida la IA (4–10)", ar: "دع الذكاء الاصطناعي يقرر (4–10)", zh: "让 AI 决定（4–10）", sw: "Acha AI iamue (4–10)", sv: "Låt AI:n bestämma (4–10)" },
   "How to use Slide Forge": { es: "Cómo usar Slide Forge", ar: "كيفية استخدام Slide Forge", zh: "如何使用 Slide Forge", sw: "Jinsi ya kutumia Slide Forge", sv: "Så använder du Slide Forge" },
-  "Slide Forge — free PowerPoint generator": { es: "Slide Forge — generador de PowerPoint gratis", ar: "Slide Forge — منشئ عروض PowerPoint مجاني", zh: "Slide Forge — 免费 PowerPoint 生成器", sw: "Slide Forge — kitengeneza PowerPoint cha bure", sv: "Slide Forge — gratis PowerPoint-generator" }
+  "Free PowerPoint generator — Slide Forge | MigaBuilder": { es: "Generador de PowerPoint gratis — Slide Forge | MigaBuilder", ar: "منشئ عروض PowerPoint مجاني — Slide Forge | MigaBuilder", zh: "免费 PowerPoint 生成器 — Slide Forge | MigaBuilder", sw: "Kitengeneza PowerPoint cha bure — Slide Forge | MigaBuilder", sv: "Gratis PowerPoint-generator — Slide Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

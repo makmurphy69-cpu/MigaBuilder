@@ -836,7 +836,11 @@ S('image-studio.html', {
     await h.step('Choose a picture. Then choose how to find the background, and what to do with it.', async () => { await h.upload('#images', 'portrait.png'); await h.select('#bgMethod', 'colour'); });
     await h.step('Here we replace the background with a warm colour.', async () => { await h.select('#bgAction', 'replace'); await h.page.locator('#replaceColor').evaluate(e => { e.value = '#f4b860'; e.dispatchEvent(new Event('input', { bubbles: true })); e.dispatchEvent(new Event('change', { bubbles: true })); }); await h.click('#applyBackground'); });
     await h.wait(1500);
-    await h.step('The other tabs make collages, memes, YouTube thumbnails and sharper, upscaled pictures.', () => h.point('button:has-text("Meme")'));
+    await h.step('The other tabs make collages, memes and YouTube thumbnails.', () => h.point('button:has-text("Meme")'));
+    await h.step('The Upscale tab makes a small or blurry picture bigger and sharper, with AI that runs on your device.', async () => { await h.click('.tab[data-mode="upscale"]'); await h.select('#upMethod', 'ai2'); });
+    await h.step('Press Upscale image. The first time, a small AI model downloads. Your picture is never uploaded.', () => h.click('#makeUpscale'));
+    await h.skip('Skipping ahead while the AI sharpens the picture', () => h.page.waitForFunction(() => /Sharpened to/.test(document.querySelector('#upProgress').textContent), null, { timeout: 600000 }));
+    await h.step('Done: the picture is twice as big, with crisp edges. Choose AI sharpen 4× for photos.', () => h.point('#upProgress'));
     await h.step('Download the finished picture.', () => h.point('#download'));
     await h.sampleDownload('#download', 'Picture made in this video');
   }
@@ -1280,23 +1284,50 @@ S('templates.html', {
   }
 });
 
+S('mind-map.html', {
+  title: 'Mind Map', subtitle: 'Mind maps, flowcharts and a whiteboard',
+  intro: 'Welcome to Mind Map. Brainstorm with mind maps, flowcharts, sticky notes and freehand drawing, right in your browser.',
+  async run(h, page) {
+    await page.evaluate(() => { try { localStorage.removeItem('miga-mind-map'); } catch (e) {} });
+    await h.step('Already have notes? Paste them as a list. Each indent becomes a branch.', async () => { await h.scroll('#outlineIn', 'center'); await h.fill('#outlineIn', 'Bakery plan\n- Menu\n  - Sourdough\n  - Cinnamon buns\n- Shop\n  - Rent\n  - Oven\n- Marketing\n  - Opening day\n  - Flyers'); });
+    await h.step('Press Make the map, and your list turns into a mind map.', async () => { await h.click('#fromOutline'); await h.scroll('#wrap', 'center'); });
+    await h.step('Select an idea and press Tab to add a child idea. Just type, and press Enter when you are done.', async () => {
+      await h.click('#nodes .node:has-text("Menu")', { block: 'nearest' }); await page.keyboard.press('Tab'); await h.wait(300); await page.keyboard.type('Coffee', { delay: 90 }); await page.keyboard.press('Enter'); });
+    await h.step('Press Enter again for the next idea at the same level.', async () => { await page.keyboard.press('Enter'); await h.wait(300); await page.keyboard.type('Gluten-free bread', { delay: 80 }); await page.keyboard.press('Enter'); });
+    await h.step('Pick a colour to paint a whole branch.', async () => { await h.click('#nodes .node:has-text("Marketing")', { block: 'nearest' }); await h.click('#swatches button >> nth=6', { block: 'nearest' }); });
+    await h.step('Add a sticky note anywhere: choose Note, then click the board.', async () => {
+      await h.scroll('#wrap', 'center'); await h.click('[data-tool=note]', { block: 'nearest' }); const b = await page.locator('#board').boundingBox(); await page.mouse.click(b.x + 130, b.y + b.height - 80); await h.wait(300); await page.keyboard.type('Ask the bank on Monday', { delay: 70 }); await page.keyboard.press('Enter'); });
+    await h.step('Or draw freehand with the pen, to circle what matters most.', async () => {
+      await h.scroll('#wrap', 'center'); await h.click('[data-tool=pen]', { block: 'nearest' }); const n = await page.locator('#nodes .node:has-text("Opening day")').boundingBox();
+      const cx = n.x + n.width / 2, cy = n.y + n.height / 2, rx = n.width / 2 + 22, ry = n.height / 2 + 16;
+      await page.mouse.move(cx + rx, cy); await page.mouse.down();
+      for (let i = 1; i <= 40; i++) { const a = i / 40 * Math.PI * 2.1, x = cx + Math.cos(a) * rx, y = cy + Math.sin(a) * ry; await page.mouse.move(x, y); await page.evaluate(([x, y]) => window.__tv && window.__tv.cursor(x, y), [x, y]); await h.wait(25); }
+      await page.mouse.up(); await h.click('[data-tool=select]', { block: 'nearest' }); });
+    await h.step('Flowcharts work too: start from the flowchart template, with boxes, decisions and arrows you can label Yes or No.', async () => { page.once('dialog', d => d.accept()); await h.select('#template', 'flowchart'); await h.wait(1200); });
+    await h.step('Undo brings your mind map back. It is saved in this browser as you work.', async () => { await h.click('#undo', { block: 'nearest' }); await h.wait(600); });
+    await h.step('Download it as a PNG picture, a sharp SVG, or a text outline for your notes.', () => h.point('#png'));
+    await h.sampleDownload('#png', 'Mind map made in this video');
+    await page.evaluate(() => { try { localStorage.removeItem('miga-mind-map'); } catch (e) {} });
+  }
+});
+
 // The home page tour (shown in the "Tour MigaBuilder" section of index.html).
 S('index.html', {
   title: 'MigaBuilder', subtitle: 'Find the right free tool in one minute',
   outroSay: 'Now it is your turn. Pick a tool and try it yourself. It is free, and there is nothing to sign up for.',
-  intro: 'Welcome to MigaBuilder: sixty six free tools that work right in your browser, with no signup and no watermark. Here is how to find the one you need.',
+  intro: 'Welcome to MigaBuilder: seventy one free tools that work right in your browser, with no account and no watermark. Here is how to find the one you need.',
   async run(h, page) {
     await h.step('Start with the search box. Type what you want to make, like invoice, and the best match lights up. Press Enter to open it.', () => h.type('#toolSearch', 'invoice'));
     await h.step('Small typos are fine, and everyday words work too, such as resume for the CV maker.', async () => { await page.fill('#toolSearch', ''); await h.type('#toolSearch', 'resume'); });
-    await h.step('Or browse by category. The row of tiles under the search box groups every tool: create, video and audio, business, documents, learning and design.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.tool-group-toggle >> nth=0'); });
-    await h.step('Not sure where to start? Pick who you are, such as Developers or Students and teachers, to see the tools made for you.', async () => { await h.click('[data-role=student]'); await h.wait(600); await h.click('[data-role=all]'); });
-    await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=business] .tool-group-toggle'));
-    await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=business] .fav-toggle >> nth=0'); await h.unring(); });
+    await h.step('Not sure where to begin? The Start here buttons open the most common jobs in one click: a PDF, a CV, a picture, a website, music, or memory training.', async () => { await page.fill('#toolSearch', ''); await page.dispatchEvent('#toolSearch', 'input'); await h.point('.start-here'); });
+    await h.step('Or browse by category. The tiles group every tool: create, video and audio, business, documents, learning, and design.', () => h.point('.tool-group-toggle >> nth=0'));
+    await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=create] .tool-group-toggle'));
+    await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=create] .fav-toggle >> nth=0'); await h.unring(); });
     await h.step('Want to see everything at once? Open all categories with one click.', () => h.click('#toggleAll'));
-    await h.step('The whole page speaks your language. Choose Spanish, Arabic, Chinese or Swahili here.', async () => { await h.click('#toggleAll'); await h.select('#i18nLangSelect', 'es'); });
+    await h.step('The whole site speaks your language. Choose Spanish, Arabic, Chinese, Swahili or Swedish here.', async () => { await h.click('#toggleAll'); await h.scroll('header', 'start'); await h.select('#i18nLangSelect', 'sv'); });
     await h.step('Switch back at any time. Your choice is remembered on every page.', () => h.select('#i18nLangSelect', 'en'));
     await h.step('Below the categories you will find the popular tools, and the newest ones.', async () => { await h.unring(); await h.scroll('#popularTools', 'center'); });
-    await h.step('Ready to start? Press Build a website, or pick any tool. Every tool has its own narrated video like this one.', async () => { await h.scroll('header', 'start'); await h.point('.cta-build'); });
+    await h.step('Ready to start? Type what you want to make, or press a Start here button. Every tool has its own narrated video like this one.', async () => { await h.scroll('header', 'start'); await h.point('.start-here'); });
     await page.evaluate(() => { try { localStorage.removeItem('migabuilder-tool-favourites'); localStorage.removeItem('migabuilderLang'); } catch (e) {} });
   }
 });
