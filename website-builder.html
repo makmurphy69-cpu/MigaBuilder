@@ -577,7 +577,7 @@
   .builder-intro p { margin:8px 0 0; color:rgba(237,234,224,.62); line-height:1.55; }
   @media(max-width:1050px){.tool-groups{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:620px){.tool-hub-head{align-items:stretch;flex-direction:column}.tool-search{width:100%}.tool-groups{grid-template-columns:1fr}.hero-actions a{width:100%;justify-content:center}}
- .tool-hub,.showcase{display:none!important}.builder-intro{margin-top:28px}.generator-back{max-width:1240px;margin:18px auto 0;padding:0 48px}.generator-back a{color:var(--line-cyan);font-weight:700}@media(max-width:620px){.generator-back{padding:0 20px}}
+ .tool-hub,.showcase{display:none!important}.builder-intro{margin-top:28px}.zip-site-picker{margin-top:10px}.zip-details{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px 14px;align-items:end}.zip-details .hint{grid-column:1/-1}.zip-details label{display:grid;gap:4px;font-size:12px;color:var(--paper)}.zip-details input[type=color]{height:38px;padding:2px}.zip-details button{grid-column:1/-1;justify-self:start}.zip-site-picker .hint{margin:0 0 8px;color:var(--paper)}.zip-site-picker button{margin:0 8px 8px 0;width:auto}.generator-back{max-width:1240px;margin:18px auto 0;padding:0 48px}.generator-back a{color:var(--line-cyan);font-weight:700}@media(max-width:620px){.generator-back{padding:0 20px}}
 .real-demo{max-width:1240px;margin:24px auto 0;padding:0 48px}.real-demo-inner{display:grid;grid-template-columns:minmax(240px,.75fr) minmax(0,1.4fr);gap:26px;align-items:center;padding:22px;background:rgba(8,24,38,.82);border:1px solid rgba(111,209,224,.28);border-radius:10px}.real-demo h2{margin:8px 0 10px}.real-demo p{color:rgba(237,234,224,.72);line-height:1.55}.demo-kicker{color:var(--line-cyan);font-size:12px;font-weight:800;letter-spacing:.11em}.real-demo video{display:block;width:100%;border-radius:8px;background:#000;box-shadow:0 12px 35px rgba(0,0,0,.3)}@media(max-width:800px){.real-demo{padding:0 20px}.real-demo-inner{grid-template-columns:1fr;padding:16px}}
 </style>
 <link rel="stylesheet" href="tutorials.css">
@@ -810,8 +810,9 @@
     <div class="page-tabs" id="pageTabs"></div>
 
     <div class="field" style="margin-bottom:12px;">
-      <label class="upload-btn" for="loadPageInput" style="border-color: var(--line-cyan-dim); color: var(--paper); background: transparent;">↥ Load a page you downloaded earlier</label>
-      <input type="file" id="loadPageInput" accept=".html,text/html" style="display:none;">
+      <label class="upload-btn" for="loadPageInput" style="border-color: var(--line-cyan-dim); color: var(--paper); background: transparent;">↥ Load a page (.html) or a whole website (.zip)</label>
+      <input type="file" id="loadPageInput" accept=".html,.htm,.zip,text/html,application/zip" style="display:none;">
+      <div id="zipSitePicker" class="zip-site-picker" hidden></div>
     </div>
 
     <div class="field" style="margin-bottom:12px;">
@@ -1925,6 +1926,7 @@
   loadPageInput.addEventListener('change', function (e) {
     const file = (e.target.files || [])[0];
     if (!file) return;
+    if (/\.zip$/i.test(file.name)) { loadPageInput.value = ''; loadSiteZip(file); return; }
     const reader = new FileReader();
     reader.onload = function () {
       const html = reader.result;
@@ -1945,6 +1947,241 @@
     reader.readAsText(file);
     loadPageInput.value = '';
   });
+
+  // ---------- load a whole website from a .zip (e.g. a pack bought in the MigaBuilder shop) ----------
+  // Each site folder in the zip (any folder with an index.html) can be loaded as tabs. Linked CSS, JS
+  // and pictures are folded into each page so the sandboxed preview and the tidy .zip export work.
+  // Nothing from the zip runs in this page: HTML is only parsed, and settings.js is read as data.
+  const zipSitePicker = document.getElementById('zipSitePicker');
+  const SITE_BEHAVIOUR_SCRIPT = '(function(){var t=document.querySelector(".menu-toggle"),m=document.querySelector("nav.menu");' +
+    'if(t&&m)t.addEventListener("click",function(){t.setAttribute("aria-expanded",m.classList.toggle("open"))});' +
+    'var y=new Date().getFullYear();document.querySelectorAll("[data-year]").forEach(function(e){e.textContent=y});' +
+    'var f=document.querySelector("form.contact");if(f&&!f.getAttribute("action"))f.addEventListener("submit",function(e){e.preventDefault();var d=new FormData(f),to=f.getAttribute("data-mailto")||"";' +
+    'location.href="mailto:"+to+"?subject="+encodeURIComponent("Website enquiry from "+d.get("name"))+"&body="+encodeURIComponent("Name: "+d.get("name")+"\\nEmail: "+d.get("email")+"\\nPhone: "+(d.get("phone")||"-")+"\\n\\n"+d.get("message"))})})();';
+  const IMAGE_TYPES = { png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', svg: 'image/svg+xml', avif: 'image/avif', ico: 'image/x-icon' };
+
+  function zipPath(base, ref) {
+    if (!ref || /^(?:[a-z][\w+.-]*:|\/\/|#)/i.test(ref)) return null; // external, data:, mailto:, anchors
+    try { return decodeURIComponent(new URL(ref.split(/[?#]/)[0], 'https://zip.local/' + base).pathname.slice(1)); } catch (e) { return null; }
+  }
+  async function zipDataUri(zip, path) {
+    const entry = path && zip.file(path);
+    const type = path && IMAGE_TYPES[(path.split('.').pop() || '').toLowerCase()];
+    if (!entry || !type) return null;
+    return 'data:' + type + ';base64,' + await entry.async('base64');
+  }
+  async function inlineCssUrls(zip, css, cssPath, sitePrefix) {
+    const refs = new Set();
+    css.replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/gi, (all, q, ref) => { refs.add(ref.trim()); return all; });
+    const map = new Map();
+    for (const ref of refs) {
+      const path = zipPath(cssPath, ref);
+      if (!path) continue;
+      // A picture that is not in the zip yet (e.g. hero.jpg) keeps a path from the site's root,
+      // so adding it to images/ in the downloaded site makes it appear.
+      map.set(ref, await zipDataUri(zip, path) || (sitePrefix && path.startsWith(sitePrefix) ? path.slice(sitePrefix.length) : path));
+    }
+    return css.replace(/url\(\s*(["']?)([^"')]+)\1\s*\)/gi, (all, q, ref) => map.has(ref.trim()) ? 'url("' + map.get(ref.trim()) + '")' : all);
+  }
+  // settings.js from the shop packs: read the SITE block as data (never run it).
+  function readSiteSettings(js) {
+    const start = js.indexOf('var SITE =');
+    if (start < 0) return null;
+    const open = js.indexOf('{', start);
+    let depth = 0, end = -1;
+    for (let i = open; i < js.length; i++) {
+      if (js[i] === '{') depth++;
+      else if (js[i] === '}' && --depth === 0) { end = i; break; }
+    }
+    if (end < 0) return null;
+    const literal = js.slice(open, end + 1)
+      .replace(/\/\/[^\n"]*$/gm, '')
+      .replace(/([{,]\s*)([A-Za-z_]\w*)\s*:/g, '$1"$2":')
+      .replace(/,(\s*[}\]])/g, '$1');
+    try { return JSON.parse(literal); } catch (e) { return null; }
+  }
+  function applySiteSettings(doc, site, defaultName) {
+    doc.querySelectorAll('[data-site]').forEach(el => {
+      const value = site[el.getAttribute('data-site')];
+      if (typeof value === 'string') el.textContent = value;
+    });
+    if (site.phone) doc.querySelectorAll('[data-site-href=phone]').forEach(a => a.setAttribute('href', 'tel:' + site.phone.replace(/[^+\d]/g, '')));
+    if (site.email) doc.querySelectorAll('[data-site-href=email]').forEach(a => a.setAttribute('href', 'mailto:' + site.email));
+    if (defaultName && site.name) doc.title = doc.title.split(defaultName).join(site.name);
+    const form = doc.querySelector('form.contact');
+    if (form && site.email) form.setAttribute('data-mailto', site.email);
+    if (site.colors && typeof site.colors === 'object') {
+      const vars = Object.keys(site.colors).filter(k => /^[\w-]+$/.test(k) && /^#[0-9a-f]{3,8}$/i.test(String(site.colors[k])))
+        .map(k => '--' + k + ':' + site.colors[k]).join(';');
+      if (vars) { const st = doc.createElement('style'); st.textContent = ':root{' + vars + '}'; doc.head.appendChild(st); }
+    }
+  }
+  async function buildZipSitePages(zip, folder, overrides) {
+    const prefix = folder ? folder + '/' : '';
+    const htmlPaths = Object.keys(zip.files).filter(p => !zip.files[p].dir && p.startsWith(prefix) && !p.slice(prefix.length).includes('/') && /\.html?$/i.test(p));
+    const parser = new DOMParser();
+    const pages = [];
+    let navOrder = [];
+    for (const path of htmlPaths) {
+      const doc = parser.parseFromString(await zip.file(path).async('string'), 'text/html');
+      let site = null, defaultName = '';
+      for (const link of Array.from(doc.querySelectorAll('link[rel~="stylesheet"][href]'))) {
+        const cssPath = zipPath(path, link.getAttribute('href'));
+        const entry = cssPath && zip.file(cssPath);
+        if (!entry) continue;
+        const style = doc.createElement('style');
+        style.textContent = await inlineCssUrls(zip, await entry.async('string'), cssPath, prefix);
+        link.replaceWith(style);
+      }
+      for (const script of Array.from(doc.querySelectorAll('script[src]'))) {
+        const jsPath = zipPath(path, script.getAttribute('src'));
+        const entry = jsPath && zip.file(jsPath);
+        if (!entry) continue;
+        const js = await entry.async('string');
+        const settings = readSiteSettings(js);
+        if (settings) {
+          site = Object.assign({}, settings, overrides || {});
+          if (settings.colors && overrides && overrides.colors) site.colors = Object.assign({}, settings.colors, overrides.colors);
+          const dn = /var DEFAULT_NAME = ("(?:[^"\\]|\\.)*")/.exec(js);
+          try { defaultName = dn ? JSON.parse(dn[1]) : ''; } catch (e) { defaultName = ''; }
+          script.remove();
+        } else {
+          const inline = doc.createElement('script');
+          inline.textContent = js.replace(/<\/script/gi, '<\\/script');
+          script.replaceWith(inline);
+        }
+      }
+      for (const el of Array.from(doc.querySelectorAll('img[src], link[rel~="icon"][href], source[src]'))) {
+        const attr = el.hasAttribute('src') ? 'src' : 'href';
+        const uri = await zipDataUri(zip, zipPath(path, el.getAttribute(attr)));
+        if (uri) el.setAttribute(attr, uri);
+      }
+      for (const el of Array.from(doc.querySelectorAll('[style*="url("]'))) {
+        el.setAttribute('style', await inlineCssUrls(zip, el.getAttribute('style'), path, prefix));
+      }
+      if (site) {
+        applySiteSettings(doc, site, defaultName);
+        const behaviour = doc.createElement('script');
+        behaviour.textContent = SITE_BEHAVIOUR_SCRIPT;
+        doc.body.appendChild(behaviour);
+      }
+      const file = path.slice(prefix.length);
+      const slug = file.replace(/\.html?$/i, '').toLowerCase().replace(/[^a-z0-9-]+/g, '-') || 'page';
+      if (slug === 'index') navOrder = Array.from(doc.querySelectorAll('nav a[href]')).map(a => ({ href: a.getAttribute('href'), label: a.textContent.trim() }));
+      const html = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+      pages.push({ slug, file, html });
+    }
+    const navIndex = file => navOrder.findIndex(n => n.href === file);
+    pages.sort((a, b) => {
+      if (a.slug === 'index') return -1;
+      if (b.slug === 'index') return 1;
+      const ia = navIndex(a.file), ib = navIndex(b.file);
+      if (ia !== ib) return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib);
+      return a.slug.localeCompare(b.slug);
+    });
+    return pages.map(p => {
+      const nav = navOrder.find(n => n.href === p.file);
+      const navLabel = p.slug === 'index' ? 'Home' : (nav && nav.label) || p.slug.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      return { slug: p.slug, navLabel, html: p.html };
+    });
+  }
+  // Shop packs keep the business details in js/settings.js: ask for them once, before loading,
+  // so they land on every page and the rest can be edited visually.
+  const DETAIL_LABELS = { name: 'Business name', tagline: 'Tagline', phone: 'Phone', email: 'Email', address: 'Address or area', hours: 'Opening hours' };
+  const COLOR_LABELS = { primary: 'Main colour', accent: 'Accent colour', dark: 'Text colour', light: 'Background colour' };
+  async function showZipSite(zip, folder) {
+    const prefix = folder ? folder + '/' : '';
+    const settingsPath = Object.keys(zip.files).find(p => p.startsWith(prefix) && /(^|\/)settings\.js$/i.test(p) && p.slice(prefix.length).split('/').length <= 2);
+    const settings = settingsPath ? readSiteSettings(await zip.file(settingsPath).async('string')) : null;
+    if (!settings) { loadZipSite(zip, folder, null); return; }
+    zipSitePicker.innerHTML = '';
+    const form = document.createElement('form');
+    form.className = 'zip-details';
+    const intro = document.createElement('p');
+    intro.className = 'hint';
+    intro.textContent = 'Your details go on every page at once. You can change any other text on the page afterwards.';
+    form.appendChild(intro);
+    const field = (labelText, input) => { const label = document.createElement('label'); label.textContent = labelText; label.appendChild(input); form.appendChild(label); };
+    Object.keys(settings).forEach(key => {
+      if (typeof settings[key] !== 'string') return;
+      const input = document.createElement('input');
+      input.type = key === 'email' ? 'email' : key === 'phone' ? 'tel' : 'text';
+      input.name = key;
+      input.value = settings[key];
+      field(DETAIL_LABELS[key] || key.charAt(0).toUpperCase() + key.slice(1), input);
+    });
+    const colors = settings.colors && typeof settings.colors === 'object' ? settings.colors : {};
+    Object.keys(colors).forEach(key => {
+      if (!/^#[0-9a-f]{6}$/i.test(String(colors[key]))) return;
+      const input = document.createElement('input');
+      input.type = 'color';
+      input.name = 'color:' + key;
+      input.value = colors[key];
+      field(COLOR_LABELS[key] || key, input);
+    });
+    const go = document.createElement('button');
+    go.type = 'submit';
+    go.className = 'draft-btn';
+    go.textContent = 'Load this website';
+    form.appendChild(go);
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const overrides = { colors: {} };
+      Array.from(form.elements).forEach(el => {
+        if (!el.name) return;
+        if (el.name.startsWith('color:')) overrides.colors[el.name.slice(6)] = el.value;
+        else overrides[el.name] = el.value.trim();
+      });
+      loadZipSite(zip, folder, overrides);
+    });
+    zipSitePicker.appendChild(form);
+    zipSitePicker.hidden = false;
+    const first = form.querySelector('input');
+    if (first) first.focus();
+  }
+  async function loadZipSite(zip, folder, overrides) {
+    zipSitePicker.hidden = true;
+    zipSitePicker.innerHTML = '';
+    titleBlockRight.textContent = 'LOADING WEBSITE…';
+    try {
+      const pages = await buildZipSitePages(zip, folder, overrides);
+      if (!pages.length) { showError('No pages found in that folder of the zip.'); return; }
+      generatedPages = pages;
+      activePageIndex = 0;
+      renderTabs();
+      showActivePage();
+      titleBlockRight.textContent = 'LOADED · ' + pages.length + ' page' + (pages.length === 1 ? '' : 's') + (folder ? ' · ' + folder.split('/').pop() : '');
+    } catch (err) {
+      showError('Could not read that website from the zip.');
+    }
+  }
+  async function loadSiteZip(file) {
+    clearError();
+    if (typeof JSZip === 'undefined') { showError('The zip library failed to load — check your internet connection and reload the page.'); return; }
+    let zip;
+    try { zip = await JSZip.loadAsync(file); } catch (e) { showError('That file is not a zip the builder can open.'); return; }
+    const folders = Object.keys(zip.files)
+      .filter(p => !zip.files[p].dir && /(^|\/)index\.html?$/i.test(p) && !/(^|\/)(__MACOSX|\.)/.test(p))
+      .map(p => p.replace(/\/?index\.html?$/i, ''))
+      .sort((a, b) => a.split('/').length - b.split('/').length || a.localeCompare(b));
+    if (!folders.length) { showError('No website found in that zip. It needs an index.html page.'); return; }
+    if (folders.length === 1) { showZipSite(zip, folders[0]); return; }
+    zipSitePicker.innerHTML = '';
+    const note = document.createElement('p');
+    note.className = 'hint';
+    note.textContent = 'This zip has ' + folders.length + ' websites. Pick one to load:';
+    zipSitePicker.appendChild(note);
+    folders.forEach(folder => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'draft-btn';
+      const name = (folder.split('/').pop() || 'site').replace(/[-_]/g, ' ');
+      btn.textContent = name.charAt(0).toUpperCase() + name.slice(1);
+      btn.addEventListener('click', () => showZipSite(zip, folder));
+      zipSitePicker.appendChild(btn);
+    });
+    zipSitePicker.hidden = false;
+  }
 
   // ---------- import a page from a URL ----------
   importUrlBtn.addEventListener('click', async function () {
