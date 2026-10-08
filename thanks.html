@@ -6,7 +6,7 @@
   <h2 id="heading">Checking your order…</h2>
   <p id="message" class="muted">This takes a second.</p>
   <div id="items"></div>
-  <p class="muted" id="help" hidden>Keep this page bookmarked: the download link works for 30 days. Problems? Email <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a> or reply to your Stripe receipt.</p>
+  <p class="muted" id="help" hidden>Keep this page bookmarked: the download link works for 30 days. Problems? Email <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a> with your receipt number.</p>
   <p class="muted" id="next" hidden>Next: open <strong>START-HERE.html</strong> in the zip. It walks you through editing and publishing your site.</p>
 </section>
 </main>
@@ -27,7 +27,7 @@
 
   const sessionId = new URLSearchParams(location.search).get('session_id') || '';
   if (!/^cs_(test|live)_[A-Za-z0-9]+$/.test(sessionId)) {
-    fail('This page needs the link from your checkout. Use the link in your receipt email, or contact us.');
+    fail('This page needs the link from your checkout. If you lost it, email contact@migabuilder.com with your receipt number.');
     return;
   }
 
