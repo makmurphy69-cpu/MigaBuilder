@@ -65,7 +65,7 @@
 // Stripe Payment Links (Managed Payments enabled), one per product sku.
 // Leave a link empty to show "Coming soon" instead of a Buy button.
 const SHOP_LINKS = {
-  'website-pack-v1': ''
+  'website-pack-v1': 'https://buy.stripe.com/8x25kv9lK2NO7902xx97G00'
 };
 document.querySelectorAll('[data-buy]').forEach(function (button) {
   const link = SHOP_LINKS[button.getAttribute('data-buy')];
