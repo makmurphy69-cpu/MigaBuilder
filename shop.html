@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script><link rel="canonical" href="https://migabuilder.com/shop.html"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MigaBuilder Shop: Ready-Made Website Templates</title><meta name="description" content="Ready-made, mobile-friendly small-business website templates from MigaBuilder. Pay once, download instantly, edit in minutes."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="local-tools.css">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script><link rel="canonical" href="https://migabuilder.com/shop.html"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MigaBuilder Shop: Website, CV and Business Templates</title><meta name="description" content="Ready-made templates from MigaBuilder: small-business websites, CV and cover letter designs, and invoice, quote and receipt templates. Pay once, download instantly."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="local-tools.css">
 <style>
 .product{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;align-items:start}
 .product h2{font:700 22px 'Space Grotesk';margin:0 0 8px}
@@ -49,6 +49,42 @@
     <p class="muted">Rather have it done for you? <a href="mailto:contact@migabuilder.com?subject=Website%20built%20for%20me">Ask us to build your site</a>.</p>
   </div>
 </section>
+<section class="panel product" id="cv-pack">
+  <div>
+    <h2>CV &amp; Cover Letter Pack</h2>
+    <p class="muted">Five professional CV designs, each with a matching cover letter. Word files that also open in Google Docs, LibreOffice and Pages.</p>
+    <img src="assets/shop/cv-pack.jpg" alt="Three of the five CV designs: Modern, Classic and Executive" width="1282" height="403" loading="lazy" style="width:100%;height:auto;margin-top:10px;border:1px solid rgba(22,32,43,.14)">
+    <ul class="includes">
+      <li>5 designs: Classic, Modern, Compact, Graduate and Executive</li>
+      <li>A matching cover letter for each, with prompts for what to write</li>
+      <li>ATS-friendly: one column and real text, so job-site software can read every word</li>
+      <li>PDF previews and a short guide; about 30–45 minutes for your first CV</li>
+    </ul>
+  </div>
+  <div>
+    <div class="price" data-price="cv-pack-v1">€3 <small>one-time, tax added at checkout where it applies</small></div>
+    <a class="primary buy" data-buy="cv-pack-v1" href="#" aria-disabled="true">Coming soon</a>
+    <p class="muted">Prefer a form? The free <a href="cv-forge.html">CV Forge</a> builds a CV from your answers.</p>
+  </div>
+</section>
+<section class="panel product" id="business-pack">
+  <div>
+    <h2>Small Business Paperwork Pack</h2>
+    <p class="muted">Matching invoice, quote, receipt and letterhead, plus invoice and quote spreadsheets that add up the lines, VAT and total for you.</p>
+    <img src="assets/shop/business-pack.jpg" alt="The invoice, quote and receipt templates" width="1282" height="362" loading="lazy" style="width:100%;height:auto;margin-top:10px;border:1px solid rgba(22,32,43,.14)">
+    <ul class="includes">
+      <li>Invoice, quote, receipt and letterhead in Word</li>
+      <li>Invoice and quote calculators for Excel and Google Sheets</li>
+      <li>Change the currency and VAT rate to suit your country</li>
+      <li>About 20 minutes to set up once, then a couple of minutes per invoice</li>
+    </ul>
+  </div>
+  <div>
+    <div class="price" data-price="business-pack-v1">€3 <small>one-time, tax added at checkout where it applies</small></div>
+    <a class="primary buy" data-buy="business-pack-v1" href="#" aria-disabled="true">Coming soon</a>
+    <p class="muted">Prefer a form? The free <a href="invoice-forge.html">Invoice Forge</a> makes invoices and quotes as PDFs.</p>
+  </div>
+</section>
 <section class="panel" id="how-it-works">
   <h2>Watch before you buy: how it works</h2>
   <p class="muted">A 2-minute walkthrough of what's in the pack and how to make it yours in the free Website Builder. Plan about an hour the first time.</p>
@@ -82,7 +118,9 @@
 // Stripe Payment Links (Managed Payments enabled), one per product sku.
 // Leave a link empty to show "Coming soon" instead of a Buy button.
 const SHOP_LINKS = {
-  'website-pack-v1': 'https://buy.stripe.com/8x25kv9lK2NO7902xx97G00'
+  'website-pack-v1': 'https://buy.stripe.com/8x25kv9lK2NO7902xx97G00',
+  'cv-pack-v1': '',
+  'business-pack-v1': ''
 };
 document.querySelectorAll('[data-buy]').forEach(function (button) {
   const link = SHOP_LINKS[button.getAttribute('data-buy')];
