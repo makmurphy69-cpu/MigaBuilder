@@ -19,7 +19,7 @@ I18N.phrases({
   "Who says this line": { es: "Quién dice esta frase", ar: "من يقول هذه الجملة", zh: "谁说这句台词", sw: "Nani anasema mstari huu", sv: "Vem som säger repliken" },
   "What they say…": { es: "Lo que dicen…", ar: "ما يقولونه…", zh: "对方说的话…", sw: "Wanachosema…", sv: "Vad de säger…" },
   "How to use Talk Forge": { es: "Cómo usar Talk Forge", ar: "كيفية استخدام Talk Forge", zh: "如何使用 Talk Forge", sw: "Jinsi ya kutumia Talk Forge", sv: "Så använder du Talk Forge" },
-  "Talk Forge — make a photo talk from a script": { es: "Talk Forge — haz que una foto hable a partir de un guion", ar: "Talk Forge — اجعل صورة تتكلم من نص مكتوب", zh: "Talk Forge — 根据脚本让照片说话", sw: "Talk Forge — fanya picha iongee kutoka kwa hati", sv: "Talk Forge — få ett foto att prata utifrån ett manus" }
+  "Make a photo talk from a script — Talk Forge | MigaBuilder": { es: "Haz que una foto hable a partir de un guion — Talk Forge | MigaBuilder", ar: "اجعل صورة تتكلم من نص مكتوب — Talk Forge | MigaBuilder", zh: "根据脚本让照片说话 — Talk Forge | MigaBuilder", sw: "Fanya picha iongee kutoka kwa hati — Talk Forge | MigaBuilder", sv: "Få ett foto att prata utifrån ett manus — Talk Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

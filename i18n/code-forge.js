@@ -29,7 +29,7 @@ I18N.phrases({
   "Art in the style of M. C. Escher – click for more": { es: "Arte al estilo de M. C. Escher: haz clic para saber más", ar: "رسم بأسلوب م. ك. إيشر – انقر لمعرفة المزيد", zh: "M. C. 埃舍尔风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa M. C. Escher – bofya kujua zaidi", sv: "Konst i M. C. Eschers stil – klicka för mer" },
   "Code": { es: "Código", ar: "الشيفرة", zh: "代码", sw: "Msimbo", sv: "Kod" },
   "How to use Code Forge": { es: "Cómo usar Code Forge", ar: "كيفية استخدام Code Forge", zh: "如何使用 Code Forge", sw: "Jinsi ya kutumia Code Forge", sv: "Så använder du Code Forge" },
-  "Code Forge — learn Python and JavaScript by doing": { es: "Code Forge — aprende Python y JavaScript practicando", ar: "Code Forge — تعلّم Python وJavaScript بالممارسة", zh: "Code Forge — 在实践中学习 Python 和 JavaScript", sw: "Code Forge — jifunze Python na JavaScript kwa vitendo", sv: "Code Forge — lär dig Python och JavaScript genom att göra" }
+  "Learn Python and JavaScript by doing — Code Forge | MigaBuilder": { es: "Aprende Python y JavaScript practicando — Code Forge | MigaBuilder", ar: "تعلّم Python وJavaScript بالممارسة — Code Forge | MigaBuilder", zh: "在实践中学习 Python 和 JavaScript — Code Forge | MigaBuilder", sw: "Jifunze Python na JavaScript kwa vitendo — Code Forge | MigaBuilder", sv: "Lär dig Python och JavaScript genom att göra — Code Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

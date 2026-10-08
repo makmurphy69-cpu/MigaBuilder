@@ -20,7 +20,7 @@ I18N.phrases({
   "Remove": { es: "Eliminar", ar: "إزالة", zh: "删除", sw: "Ondoa", sv: "Ta bort" },
   "Document preview": { es: "Vista previa del documento", ar: "معاينة المستند", zh: "文档预览", sw: "Uhakiki wa hati", sv: "Förhandsvisning av dokumentet" },
   "How to use Invoice Forge": { es: "Cómo usar Invoice Forge", ar: "كيفية استخدام Invoice Forge", zh: "如何使用 Invoice Forge", sw: "Jinsi ya kutumia Invoice Forge", sv: "Så använder du Invoice Forge" },
-  "Invoice Forge — free quote & invoice generator": { es: "Invoice Forge — generador de presupuestos y facturas gratis", ar: "Invoice Forge — منشئ عروض أسعار وفواتير مجاني", zh: "Invoice Forge — 免费报价单和发票生成器", sw: "Invoice Forge — kitengeneza nukuu za bei na ankara cha bure", sv: "Invoice Forge — gratis generator för offerter och fakturor" }
+  "Free quote & invoice generator — Invoice Forge | MigaBuilder": { es: "Generador de presupuestos y facturas gratis — Invoice Forge | MigaBuilder", ar: "منشئ عروض أسعار وفواتير مجاني — Invoice Forge | MigaBuilder", zh: "免费报价单和发票生成器 — Invoice Forge | MigaBuilder", sw: "Kitengeneza nukuu za bei na ankara cha bure — Invoice Forge | MigaBuilder", sv: "Gratis generator för offerter och fakturor — Invoice Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

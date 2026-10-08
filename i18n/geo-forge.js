@@ -53,7 +53,7 @@ I18N.phrases({
   "Zoom in": { es: "Acercar", ar: "تكبير", zh: "放大", sw: "Kuza", sv: "Zooma in" },
   "Zoom out": { es: "Alejar", ar: "تصغير", zh: "缩小", sw: "Punguza", sv: "Zooma ut" },
   "How to use Geography Forge": { es: "Cómo usar Geography Forge", ar: "كيفية استخدام Geography Forge", zh: "如何使用 Geography Forge", sw: "Jinsi ya kutumia Geography Forge", sv: "Så använder du Geography Forge" },
-  "Geography Forge — interactive world map and country quiz | MigaBuilder": { es: "Geography Forge — mapa del mundo interactivo y cuestionario de países | MigaBuilder", ar: "Geography Forge — خريطة عالم تفاعلية واختبار البلدان | MigaBuilder", zh: "Geography Forge — 互动世界地图和国家测验 | MigaBuilder", sw: "Geography Forge — ramani ya dunia shirikishi na jaribio la nchi | MigaBuilder", sv: "Geography Forge — interaktiv världskarta och landsquiz | MigaBuilder" },
+  "Interactive world map and country quiz — Geography Forge | MigaBuilder": { es: "Mapa del mundo interactivo y cuestionario de países — Geography Forge | MigaBuilder", ar: "خريطة عالم تفاعلية واختبار البلدان — Geography Forge | MigaBuilder", zh: "互动世界地图和国家测验 — Geography Forge | MigaBuilder", sw: "Ramani ya dunia shirikishi na jaribio la nchi — Geography Forge | MigaBuilder", sv: "Interaktiv världskarta och landsquiz — Geography Forge | MigaBuilder" },
   "N. Cyprus": { es: "Chipre del Norte", ar: "شمال قبرص", zh: "北塞浦路斯", sw: "Kupro Kaskazini", sv: "Norra Cypern" },
   "None (island or coastal only)": { es: "Ninguno (solo isla o costa)", ar: "لا يوجد (جزيرة أو ساحل فقط)", zh: "无（仅岛屿或沿海）", sw: "Hakuna (kisiwa au pwani tu)", sv: "Inga (endast ö eller kust)" },
   "Territory": { es: "Territorio", ar: "إقليم", zh: "领地", sw: "Eneo", sv: "Territorium" },

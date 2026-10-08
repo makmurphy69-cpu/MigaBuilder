@@ -12,7 +12,7 @@ I18N.phrases({
   "Art in the style of René Magritte – click for more": { es: "Arte al estilo de René Magritte: haz clic para saber más", ar: "رسم بأسلوب رينيه ماغريت – انقر لمعرفة المزيد", zh: "勒内·马格利特风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa René Magritte – bofya kujua zaidi", sv: "Konst i René Magrittes stil – klicka för mer" },
   "coffee, dog walking, web design…": { es: "café, paseo de perros, diseño web…", ar: "قهوة، تمشية الكلاب، تصميم المواقع…", zh: "咖啡、遛狗、网页设计…", sw: "kahawa, kutembeza mbwa, usanifu wa wavuti…", sv: "kaffe, hundpromenader, webbdesign…" },
   "How to use Name Forge": { es: "Cómo usar Name Forge", ar: "كيفية استخدام Name Forge", zh: "如何使用 Name Forge", sw: "Jinsi ya kutumia Name Forge", sv: "Så använder du Name Forge" },
-  "Name Forge — free business name generator": { es: "Name Forge — generador de nombres de negocio gratis", ar: "Name Forge — منشئ أسماء تجارية مجاني", zh: "Name Forge — 免费商业名称生成器", sw: "Name Forge — kitengeneza majina ya biashara cha bure", sv: "Name Forge — gratis generator för företagsnamn" }
+  "Free business name generator — Name Forge | MigaBuilder": { es: "Generador de nombres de negocio gratis — Name Forge | MigaBuilder", ar: "منشئ أسماء تجارية مجاني — Name Forge | MigaBuilder", zh: "免费商业名称生成器 — Name Forge | MigaBuilder", sw: "Kitengeneza majina ya biashara cha bure — Name Forge | MigaBuilder", sv: "Gratis generator för företagsnamn — Name Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({
