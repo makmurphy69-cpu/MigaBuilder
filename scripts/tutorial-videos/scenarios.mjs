@@ -1300,3 +1300,72 @@ S('index.html', {
     await page.evaluate(() => { try { localStorage.removeItem('migabuilder-tool-favourites'); localStorage.removeItem('migabuilderLang'); } catch (e) {} });
   }
 });
+
+// Shop: how the Small Business Website Pack works, for people deciding whether to buy and for buyers.
+// The pack is sold, so it is not in this public repository: PACK_DIR (the unzipped pack folder) and
+// PACK_ZIP (the zip) point at a local copy, served to the recording under /__pack/.
+S('shop.html', {
+  title: 'Small Business Website Pack', subtitle: 'What you get and how to make it yours',
+  intro: 'This video shows exactly what is in the Small Business Website Pack, and how to turn it into your own website. Watch it before you buy, so you know what is involved. The first time, plan about an hour.',
+  outro: 'Plan about an hour the first time.',
+  outroSay: 'So, is it worth it for you? Plan about an hour the first time: ten minutes for your details, twenty to thirty minutes for your own texts and prices, and a little time to publish. In return you get a professional website with no monthly fees. The pack is on the MigaBuilder shop page.',
+  async run(h, page) {
+    const packDir = process.env.PACK_DIR, packZip = process.env.PACK_ZIP;
+    if (!packDir || !packZip) throw new Error('Set PACK_DIR (unzipped pack folder) and PACK_ZIP (the pack zip) to record the shop video');
+    const fs = await import('node:fs'), path = await import('node:path');
+    const types = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.txt': 'text/plain' };
+    await h.ctx.route(h.baseUrl + '/__pack/**', route => {
+      const rel = decodeURIComponent(new URL(route.request().url()).pathname.replace(/^\/__pack\//, ''));
+      const file = path.join(packDir, rel);
+      if (!file.startsWith(packDir) || !fs.existsSync(file) || fs.statSync(file).isDirectory()) return route.fulfill({ status: 404, body: '' });
+      route.fulfill({ status: 200, headers: { 'Content-Type': types[path.extname(file)] || 'application/octet-stream' }, body: fs.readFileSync(file) });
+    });
+    const typeInto = async (loc, text) => {
+      await h.point(loc);
+      await loc.click();
+      await loc.evaluate(el => { const r = el.ownerDocument.createRange(); r.selectNodeContents(el); const s = el.ownerDocument.defaultView.getSelection(); s.removeAllRanges(); s.addRange(r); });
+      await page.keyboard.type(text, { delay: 45 });
+      await page.waitForTimeout(700);
+      const saved = await page.$eval('#codePane', e => e.value);
+      if (!saved.includes(text.replace(/&/g, '&amp;'))) throw new Error('edit did not reach the page: ' + text);
+    };
+    const editable = () => page.frameLocator('#preview').locator('[data-miga-edit]').first().waitFor({ timeout: 15000 });
+
+    await h.step('This is the pack in the MigaBuilder shop: five ready made websites, for a café, a tradesperson, a salon, a shop and a consultant.', () => h.point('#website-pack .niches'));
+    await h.go('__pack/START-HERE.html');
+    await h.step('After you buy, you download one zip file. Inside, a start here guide explains every step and links to all five designs.', () => h.point('ul'));
+    await h.go('__pack/salon/index.html');
+    await h.step('Each design is a complete website that already works on phones. Here is the salon design.', () => h.wait(1500));
+    await h.step('It has a home page, a page for your services and prices, an about page, and a contact page.', async () => { await h.scrollBy(650); await h.click('nav.menu a:has-text("Treatments")'); });
+    await h.go('website-builder.html');
+    await h.step('To make it yours, open the free Website Builder on MigaBuilder and load the zip file. You do not need to unzip it.', async () => {
+      await h.point('label[for=loadPageInput]');
+      await page.setInputFiles('#loadPageInput', packZip);
+      await page.waitForSelector('#zipSitePicker:not([hidden]) button');
+    });
+    await h.step('Pick the design you want.', () => h.click('#zipSitePicker button:has-text("Salon")'));
+    await h.step('Fill in your details once: your business name, phone, email, address, opening hours and colours.', async () => {
+      await h.type('#zipSitePicker input[name=name]', 'Bella Hair & Beauty');
+      await h.type('#zipSitePicker input[name=phone]', '+46 70 123 45 67');
+      await h.point('#zipSitePicker input[name="color:primary"]');
+      await page.fill('#zipSitePicker input[name="color:primary"]', '#2f6f6a');
+    });
+    await h.step('Press Load this website. Your details are now on every page.', async () => { await h.click('#zipSitePicker button[type=submit]'); await h.scroll('#preview', 'center'); });
+    await h.step('Next, write your own words. Press Edit text on the page, then click any heading, sentence or price and type.', async () => {
+      await h.click('#editModeBtn');
+      await editable();
+      await h.scroll('#preview', 'start');
+      await typeInto(page.frameLocator('#preview').locator('h1').first(), 'Beautiful hair, friendly prices');
+    });
+    await h.step('Use the tabs to switch pages. Here we change a price on the treatments page.', async () => {
+      await h.click('#pageTabs button:has-text("Treatments")');
+      await editable();
+      await h.scroll('#preview', 'start');
+      await typeInto(page.frameLocator('#preview').locator('.price').first(), 'from £39');
+    });
+    await h.step('When you are done, press Done editing, then download all the pages as one zip file. Unzip it, and that folder is your finished website.', async () => { await h.click('#editModeBtn'); await h.point('#downloadZipBtn'); });
+    await h.go('__pack/START-HERE.html');
+    await h.step('Add your own photos to the images folder: one for the top of the home page, and one for the about page. Until you do, a colour gradient shows instead.', () => h.scroll('h2:has-text("Add your photos")', 'start'));
+    await h.step('Finally, publish it for free. On Netlify Drop you drag the folder onto the page and get a live address in seconds. You can connect your own domain later.', () => h.scroll('h2:has-text("Publish it free")', 'start'));
+  }
+});

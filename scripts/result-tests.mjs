@@ -438,6 +438,33 @@ test('website-builder: AI site has a shared design and downloads as a tidy ZIP',
   });
 }, { setup: ctx => fakeAi(ctx, body => /information architect/.test(body.systemPrompt) ? JSON.stringify(SITE_PLAN) : SITE_PAGE) });
 
+test('website-builder: a site loaded from a multi-site ZIP keeps its design and settings', 'website-builder.html', async (page) => {
+  await page.setInputFiles('#loadPageInput', path.join(FIX, 'two-sites.zip'));
+  await page.waitForSelector('#zipSitePicker:not([hidden]) button', { timeout: 15000 });
+  const sites = await page.$$eval('#zipSitePicker button', bs => bs.map(b => b.textContent));
+  expect(sites.join(',') === 'Bakery,Garage', 'site picker shows ' + sites.join(','));
+  await page.click('#zipSitePicker button:has-text("Bakery")');
+  await page.waitForSelector('#zipSitePicker form.zip-details input[name=name]');
+  expect(await page.inputValue('#zipSitePicker input[name=name]') === 'Test Bakery', 'details form is not pre-filled from settings.js');
+  await page.fill('#zipSitePicker input[name=name]', 'Fixture Bakery');
+  await page.click('#zipSitePicker button[type=submit]');
+  await page.waitForFunction(() => /LOADED · 2 pages/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 15000 });
+  const tabs = await page.$$eval('#pageTabs button', bs => bs.map(b => b.textContent));
+  expect(tabs.join(',') === 'Home,Our story', 'tabs are ' + tabs.join(','));
+  const out = await downloadOf(page, () => page.click('#downloadZipBtn'));
+  expect(magic(out.buf, 0x50, 0x4b, 0x03, 0x04), 'download is not a ZIP');
+  const files = await page.evaluate(async b64 => { const zip = await JSZip.loadAsync(b64, { base64: true }); const o = {}; for (const n of Object.keys(zip.files)) if (!zip.files[n].dir) o[n] = await zip.file(n).async('string'); return o; }, out.buf.toString('base64'));
+  ['index.html', 'about.html', 'style.css'].forEach(n => expect(files[n], n + ' missing from the ZIP (has ' + Object.keys(files).join(', ') + ')'));
+  expect(/\.brand\{color:var\(--primary\)\}/.test(files['style.css']), 'the site CSS was not carried into style.css');
+  expect(/--primary:#123456/.test(files['style.css']), 'the colours from settings.js were not applied');
+  expect(Object.keys(files).some(n => /^images\/.+\.svg$/.test(n)), 'the logo picture was not exported to images/');
+  expect(/<span data-site="name">Fixture Bakery<\/span>/.test(files['index.html']) && /<span data-site="name">Fixture Bakery<\/span>/.test(files['about.html']), 'the business name from the details form was not applied to every page');
+  expect(/<title>Fixture Bakery \| Home<\/title>/.test(files['index.html']), 'the page title still has the old name');
+  expect(/href="tel:\+46701234567"/.test(files['index.html']), 'the phone link was not set from settings.js');
+  expect(!/var SITE =/.test(files['index.html']), 'settings.js code was left in the page');
+  expect(/url\("images\/hero\.jpg"\)/.test(files['style.css']), 'a picture not added yet should keep its images/ slot in style.css');
+});
+
 const APP = bug => '<!DOCTYPE html><html><head><title>Tally</title></head><body><div class="app"><header class="app-header"><div class="app-title"><span class="logo">➕</span><h1>Tally</h1></div></header><div class="card"><button class="btn btn-primary" id="inc">Add one</button> <span id="n">0</span></div></div><script>' + (bug ? 'missingFunction();' : '') + 'let n=0;document.getElementById("inc").onclick=()=>{document.getElementById("n").textContent=++n};</' + 'script></body></html>';
 test('app-forge: a broken app is fixed automatically and downloads as an installable ZIP', 'app-forge.html', async (page) => {
   await page.fill('#appName', 'Tally');

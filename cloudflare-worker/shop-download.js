@@ -13,8 +13,9 @@
  * bought, and for DOWNLOAD_DAYS after the purchase. The files live in a
  * private R2 bucket, so there is no public URL to share or guess.
  *
- * Each Stripe product needs metadata `sku`; the file served is `<sku>.zip`
- * in the bucket.
+ * Each Stripe product needs metadata `sku`; the file served is the newest
+ * `<sku>*.zip` in the bucket (so `website-pack-v1 (1).zip` works too), and
+ * buyers always get it named `<sku>.zip`.
  *
  * Bindings / settings (Settings → Variables and Secrets / Bindings):
  *   STRIPE_SECRET_KEY  secret  — sk_live_... (or sk_test_... while testing)
@@ -82,7 +83,7 @@ async function loadPaidSession(sessionId, env) {
 
   const days = Number(env.DOWNLOAD_DAYS) > 0 ? Number(env.DOWNLOAD_DAYS) : 30;
   if (Date.now() / 1000 - session.created > days * 86400) {
-    return { error: 'This download link has expired. Reply to your receipt email and we will send a new one.', status: 410 };
+    return { error: 'This download link has expired. Email contact@migabuilder.com with your receipt number and we will send a new one.', status: 410 };
   }
 
   const items = [];
@@ -106,6 +107,17 @@ async function handleOrder(url, env, origin) {
   }, 200, origin);
 }
 
+// The newest .zip whose name starts with the sku, so an update can be uploaded under any
+// name the browser gives it (e.g. "website-pack-v1 (1).zip") without renaming.
+async function latestProductFile(bucket, sku) {
+  const listed = await bucket.list({ prefix: sku, limit: 100 });
+  const name = new RegExp('^' + sku + '(?:[ _-]*\\(\\d+\\))?\\.zip$', 'i'); // sku.zip or "sku (1).zip", not sku0.zip
+  const zips = (listed.objects || []).filter(o => name.test(o.key));
+  if (!zips.length) return null;
+  zips.sort((a, b) => new Date(b.uploaded) - new Date(a.uploaded));
+  return bucket.get(zips[0].key);
+}
+
 async function handleDownload(url, env, origin) {
   const sku = url.searchParams.get('sku') || '';
   if (!SKU_RE.test(sku)) return json({ ok: false, error: 'Unknown product.' }, 400, origin);
@@ -115,10 +127,10 @@ async function handleDownload(url, env, origin) {
     return json({ ok: false, error: 'This order does not include that product.' }, 403, origin);
   }
   if (!env.PRODUCT_FILES) return json({ ok: false, error: 'The shop is not set up yet (missing file storage).' }, 500, origin);
-  const object = await env.PRODUCT_FILES.get(sku + '.zip');
+  const object = await latestProductFile(env.PRODUCT_FILES, sku);
   if (!object) {
-    console.log('Missing file in R2: ' + sku + '.zip');
-    return json({ ok: false, error: 'The file is missing on our side. Reply to your receipt email and we will send it.' }, 500, origin);
+    console.log('Missing file in R2: ' + sku + '*.zip');
+    return json({ ok: false, error: 'The file is missing on our side. Email contact@migabuilder.com with your receipt number and we will send it.' }, 500, origin);
   }
   return new Response(object.body, {
     headers: {
