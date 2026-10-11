@@ -584,7 +584,7 @@ S('memory-forge.html', {
     const remember = () => page.evaluate(() => { window.__memSeq = [...document.querySelectorAll('#studyCards .mcard span:not(.ix)')].map(s => s.textContent); });
     await h.step('Choose a game. Number cards, symbol cards, a mix of both, the chimp test, pairs, n-back, sequences and word lists each train a different kind of memory.', () => h.point('#modes'));
     await h.step('Pick Number cards, then choose with or without a clock. Without a clock you can look at the cards for as long as you like.', async () => { await h.click('#mode-numbers'); await h.click('#timedOff'); });
-    await h.step('There are thirty levels. Each one adds cards and takes away time, and passing a level unlocks the next.', () => h.point('#levels'));
+    await h.step('There are thirty levels, and you can pick any of them. Each one adds cards and takes away time, and stars show which levels you have passed.', () => h.point('#levels'));
     await h.step('Press Start and memorise the cards from left to right.', async () => { await h.click('#startBtn'); await remember(); });
     await h.step('When you are ready, press I have memorised them, and put the cards back in order with the keypad.', async () => { await h.click('#readyBtn'); await answer(); });
     await h.step('Check shows which cards were right, your stars, and a button for the next level.', () => h.click('#checkBtn'));
