@@ -6,6 +6,8 @@
  *
  * A page fails when it throws an uncaught error, logs a console error from
  * one of our own files, or a file of ours (script, style, data) is missing.
+ * It also fails when a homepage card's privacy label disagrees with the badge
+ * the tool page shows (🔒 local, 🌐 AI, 🔗 online).
  * Failures caused only by third-party hosts (CDNs, analytics, AI APIs) are
  * reported as warnings, since they depend on the network, not on our code.
  * Runs in CI on every pull request (workflow smoke-test.yml).
@@ -52,6 +54,9 @@ const { chromium } = await loadPlaywright();
 const exe = process.env.CHROMIUM || (fs.existsSync('/opt/pw-browsers/chromium-1194/chrome-linux/chrome') ? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome' : undefined);
 const browser = await chromium.launch({ executablePath: exe, args: ['--use-fake-ui-for-media-stream', '--use-fake-device-for-media-stream', '--autoplay-policy=no-user-gesture-required', '--ignore-gpu-blocklist', '--enable-unsafe-swiftshader', ...(process.env.IGNORE_CERTS ? ['--ignore-certificate-errors'] : []), ...(process.env.BROWSER_PROXY ? ['--proxy-server=' + process.env.BROWSER_PROXY] : [])] });
 
+// Each homepage card carries a privacy label (data-privacy="ai" | "online", none = runs locally);
+// it must match the badge miga-extras.js works out on the tool's own page.
+const homeLabels = new Map([...fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8').matchAll(/<a class="tool-card" href="([^"]+)"(?: data-privacy="([a-z]+)")?/g)].map(m => [m[1], m[2] || 'local']));
 const isOurs = u => typeof u === 'string' && u.startsWith(base);
 const failed = [], warned = [];
 for (const file of pages) {
@@ -83,6 +88,8 @@ for (const file of pages) {
   try {
     await page.goto(base + '/' + file, { waitUntil: 'load', timeout: 30000 });
     await page.waitForTimeout(SETTLE_MS);
+    const label = homeLabels.has(file) && await page.evaluate(() => window.MigaPrivacy && window.MigaPrivacy.label);
+    if (label && label !== homeLabels.get(file)) errors.push('privacy label: the homepage card says "' + homeLabels.get(file) + '" but the page itself says "' + label + '" — set data-privacy' + (label === 'local' ? ' off' : '="' + label + '"') + ' on its tool-card in index.html');
   } catch (e) {
     errors.push('load: ' + e.message.split('\n')[0]);
   }
