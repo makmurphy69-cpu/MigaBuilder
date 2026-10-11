@@ -15,6 +15,9 @@ A tool is not finished until **all** of these are done, in the same pull request
    `sitemap.xml`, the name map in `visits.html`, and `README.md`. Update the
    tool count ("69 free … tools") in `README.md` and the `<meta>` descriptions
    of `index.html` (the homepage itself no longer shows the number).
+   Give its `tool-card` `data-privacy="ai"` if it sends text to an AI, or
+   `data-privacy="online"` if it uses another online service; the smoke test
+   fails when the card's label disagrees with the badge on the tool page.
 3. **A narrated explanation video — always, for every new tool.** Add a
    scenario to `scripts/tutorial-videos/scenarios.mjs` and record it:
 

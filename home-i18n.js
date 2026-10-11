@@ -5,6 +5,7 @@
  */
 window.HOME_I18N = {
   en: {
+    privLegend: "🔒 Runs in your browser · 🌐 AI steps send text to an AI service · 🔗 Some features go online", privLocal: "🔒 Runs in your browser", privAi: "🌐 AI steps go online", privOnline: "🔗 Some features go online",
     heroSubtitle: 'Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.',
     s1Title: 'A business website', s1Text: 'Every page drafted, ready to publish', s2Title: 'A cartoon you can play', s2Text: 'Story, scenes and voices from one idea', s3Title: 'A game you can share', s3Text: 'Describe it, then play it in the browser', s4Title: 'Background removed', s4Text: 'A photo cut out in seconds', s5Title: 'A finished CV', s5Text: 'Filled in and downloaded as a real PDF', s6Title: 'An organised PDF', s6Text: 'Merged, numbered and watermarked',
     tourBtn: 'Tour site', samplesHeading: 'Real results, made with these tools', footTools: 'All tools', footTour: '1-minute tour', footFeedback: 'Feedback & ideas', footSource: 'Open source on GitHub',
@@ -97,6 +98,7 @@ window.HOME_I18N = {
     'd:meet-forge': 'Host group video rooms and topic communities.'
   },
   es: {
+    privLegend: "🔒 Funciona en tu navegador · 🌐 Los pasos de IA envían texto a un servicio de IA · 🔗 Algunas funciones usan internet", privLocal: "🔒 Funciona en tu navegador", privAi: "🌐 La IA usa internet", privOnline: "🔗 Algunas funciones usan internet",
     heroSubtitle: 'Herramientas gratuitas que funcionan en tu navegador, sin cuenta. Edita PDF, crea un CV o una factura, retoca imágenes y crea sitios web, vídeos y más.',
     s1Title: 'Un sitio web de empresa', s1Text: 'Todas las páginas redactadas, listas para publicar', s2Title: 'Un dibujo animado que puedes reproducir', s2Text: 'Historia, escenas y voces a partir de una idea', s3Title: 'Un juego para compartir', s3Text: 'Descríbelo y juégalo en el navegador', s4Title: 'Fondo eliminado', s4Text: 'Una foto recortada en segundos', s5Title: 'Un CV terminado', s5Text: 'Completado y descargado como PDF real', s6Title: 'Un PDF organizado', s6Text: 'Unido, numerado y con marca de agua',
     tourBtn: 'Recorrido', samplesHeading: 'Resultados reales, hechos con estas herramientas', footTools: 'Todas las herramientas', footTour: 'Recorrido de 1 minuto', footFeedback: 'Opiniones e ideas', footSource: 'Código abierto en GitHub',
@@ -189,6 +191,7 @@ window.HOME_I18N = {
     'd:meet-forge': 'Organiza videollamadas en grupo y comunidades por temas.'
   },
   ar: {
+    privLegend: "🔒 يعمل في متصفحك · 🌐 خطوات الذكاء الاصطناعي ترسل النص إلى خدمة ذكاء اصطناعي · 🔗 بعض الميزات تتصل بالإنترنت", privLocal: "🔒 يعمل في متصفحك", privAi: "🌐 الذكاء الاصطناعي يتصل بالإنترنت", privOnline: "🔗 بعض الميزات تتصل بالإنترنت",
     heroSubtitle: 'أدوات مجانية تعمل مباشرة في متصفحك — دون حساب. عدّل ملفات PDF، وأنشئ سيرة ذاتية أو فاتورة، وحسّن الصور، وأنشئ مواقع وفيديوهات والمزيد.',
     s1Title: 'موقع لنشاط تجاري', s1Text: 'كل الصفحات مكتوبة وجاهزة للنشر', s2Title: 'رسوم متحركة يمكنك تشغيلها', s2Text: 'قصة ومشاهد وأصوات من فكرة واحدة', s3Title: 'لعبة يمكنك مشاركتها', s3Text: 'صِفها ثم العبها في المتصفح', s4Title: 'إزالة الخلفية', s4Text: 'صورة مقصوصة في ثوانٍ', s5Title: 'سيرة ذاتية جاهزة', s5Text: 'مكتملة ومنزّلة كملف PDF حقيقي', s6Title: 'ملف PDF منظَّم', s6Text: 'مدموج ومرقَّم وبعلامة مائية',
     tourBtn: 'جولة في الموقع', samplesHeading: 'نتائج حقيقية صُنعت بهذه الأدوات', footTools: 'كل الأدوات', footTour: 'جولة في دقيقة', footFeedback: 'الملاحظات والأفكار', footSource: 'مفتوح المصدر على GitHub',
@@ -281,6 +284,7 @@ window.HOME_I18N = {
     'd:meet-forge': 'استضف غرف فيديو جماعية ومجتمعات حسب الموضوع.'
   },
   zh: {
+    privLegend: "🔒 在浏览器中运行 · 🌐 AI 步骤会把文字发送给 AI 服务 · 🔗 部分功能需要联网", privLocal: "🔒 在浏览器中运行", privAi: "🌐 AI 步骤需联网", privOnline: "🔗 部分功能需联网",
     heroSubtitle: '免费工具，直接在浏览器中使用——无需注册。编辑 PDF、制作简历或发票、处理图片，还能创建网站、视频等。',
     s1Title: '企业网站', s1Text: '每个页面都已写好，可直接发布', s2Title: '可以播放的动画', s2Text: '一个想法生成故事、场景和配音', s3Title: '可以分享的游戏', s3Text: '描述一下，就能在浏览器里玩', s4Title: '去除背景', s4Text: '几秒钟抠出一张照片', s5Title: '完成的简历', s5Text: '填写完毕并下载为真正的 PDF', s6Title: '整理好的 PDF', s6Text: '已合并、加页码并添加水印',
     tourBtn: '网站导览', samplesHeading: '真实成果，均由这些工具制作', footTools: '全部工具', footTour: '1 分钟导览', footFeedback: '反馈与建议', footSource: '在 GitHub 上开源',
@@ -373,6 +377,7 @@ window.HOME_I18N = {
     'd:meet-forge': '举办多人视频会议和主题社区。'
   },
   sw: {
+    privLegend: "🔒 Inafanya kazi kwenye kivinjari chako · 🌐 Hatua za AI hutuma maandishi kwa huduma ya AI · 🔗 Baadhi ya vipengele hutumia mtandao", privLocal: "🔒 Inafanya kazi kwenye kivinjari", privAi: "🌐 AI hutumia mtandao", privOnline: "🔗 Baadhi ya vipengele hutumia mtandao",
     heroSubtitle: 'Zana za bure zinazofanya kazi moja kwa moja kwenye kivinjari chako — bila akaunti. Hariri PDF, tengeneza CV au ankara, rekebisha picha, na unda tovuti, video na zaidi.',
     s1Title: 'Tovuti ya biashara', s1Text: 'Kurasa zote zimeandikwa, tayari kuchapishwa', s2Title: 'Katuni unayoweza kucheza', s2Text: 'Hadithi, matukio na sauti kutoka wazo moja', s3Title: 'Mchezo wa kushiriki', s3Text: 'Ueleze, kisha uucheze kwenye kivinjari', s4Title: 'Mandharinyuma yameondolewa', s4Text: 'Picha imekatwa kwa sekunde', s5Title: 'CV iliyokamilika', s5Text: 'Imejazwa na kupakuliwa kama PDF halisi', s6Title: 'PDF iliyopangwa', s6Text: 'Imeunganishwa, ina namba na alama ya maji',
     tourBtn: 'Ziara ya tovuti', samplesHeading: 'Matokeo halisi, yaliyotengenezwa kwa zana hizi', footTools: 'Zana zote', footTour: 'Ziara ya dakika 1', footFeedback: 'Maoni na mawazo', footSource: 'Chanzo huria kwenye GitHub',
@@ -465,6 +470,7 @@ window.HOME_I18N = {
     'd:meet-forge': 'Andaa vyumba vya video vya kikundi na jumuiya za mada.'
   },
   sv: {
+    privLegend: "🔒 Körs i webbläsaren · 🌐 AI-steg skickar text till en AI-tjänst · 🔗 Vissa funktioner går online", privLocal: "🔒 Körs i webbläsaren", privAi: "🌐 AI-steg går online", privOnline: "🔗 Vissa funktioner går online",
     heroSubtitle: "Gratis verktyg som fungerar direkt i webbläsaren — inget konto behövs. Redigera PDF:er, gör ett CV eller en faktura, fixa bilder och bygg webbplatser, videor och mycket mer.",
     s1Title: "En företagswebbplats",
     s1Text: "Varje sida skriven, redo att publicera",

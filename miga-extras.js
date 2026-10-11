@@ -69,6 +69,8 @@
   ];
   const facts = { dl: [], perm: [], net: [] };
   FACTS.forEach(([kind, re, text]) => { if (re.test(pageCode)) facts[kind].push(text); });
+  // The homepage labels each tool card the same way; the smoke test compares them with this.
+  window.MigaPrivacy = { label: usesAI ? 'ai' : facts.net.length ? 'online' : 'local' };
   const usesCdn = /cdnjs\.cloudflare\.com|cdn\.jsdelivr\.net|unpkg\.com|fonts\.googleapis\.com/.test(pageCode);
   function buildCard() {
     const card = document.createElement('span');

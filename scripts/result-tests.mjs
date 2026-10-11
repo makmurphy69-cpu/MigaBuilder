@@ -527,6 +527,47 @@ test('website-builder: a site loaded from a multi-site ZIP keeps its design and 
   expect(/url\("images\/hero\.jpg"\)/.test(files['style.css']), 'a picture not added yet should keep its images/ slot in style.css');
 });
 
+test('website-builder: Check & fix repairs a weak page, Undo restores it, the style panel restyles text', 'website-builder.html', async (page) => {
+  await page.setInputFiles('#loadPageInput', path.join(FIX, 'weak-page.html'));
+  await page.waitForFunction(() => /LOADED/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 15000 });
+  await page.click('#healthBtn');
+  const before = +(await page.textContent('#healthScore'));
+  expect(before <= 40, 'the weak page scored ' + before);
+  await page.fill('#ghRepo', 'someone/fixit-site');
+  await page.click('#healthFixBtn');
+  await page.waitForFunction(b => +document.querySelector('#healthScore').textContent > b, before, { timeout: 5000 });
+  const html = await page.$eval('#codePane', e => e.value);
+  expect(/<html lang="en"/.test(html), 'page language was not set');
+  expect(/name="viewport"/.test(html), 'viewport was not added');
+  expect((html.match(/<h1\b/g) || []).length === 1, 'still more than one h1');
+  expect(/<h3\b[^>]*>Opening hours<\/h3>/.test(html), 'the skipped heading level was not repaired');
+  expect(/alt="Bathroom renovation"/.test(html), 'the picture did not get a description from its file name');
+  expect(/<meta name="description" content="Fixit Plumbing repairs leaks/.test(html), 'meta description was not written from the page text');
+  expect(/<link rel="canonical" href="https:\/\/someone\.github\.io\/fixit-site\/weak-page\.html">/.test(html), 'canonical link was not added from the GitHub repo');
+  expect(await page.isEnabled('#healthAiBtn'), '"Ask the AI" should be offered for the vague link');
+  await page.click('#undoBlockBtn');
+  expect(!/name="viewport"/.test(await page.$eval('#codePane', e => e.value)), 'Undo did not take the fixes back');
+  await page.click('#editModeBtn');
+  const frame = page.frameLocator('#preview');
+  await frame.locator('p[data-miga-edit]').first().waitFor();
+  await frame.locator('p').first().click();
+  await page.waitForSelector('#stylePanel:not([hidden])');
+  await page.$eval('#stSize', e => { e.value = '22'; e.dispatchEvent(new Event('input')); });
+  await page.click('#stylePanel [data-align="center"]');
+  await page.waitForFunction(() => /<p style="font-size: 22px; text-align: center;">Fixit Plumbing repairs/.test(document.querySelector('#codePane').value), null, { timeout: 5000 });
+  expect(!/data-miga-(selected|edit)/.test(await page.$eval('#codePane', e => e.value)), 'edit-mode markers leaked into the page');
+});
+
+test('website-builder: the industry and style start step reaches the AI planner', 'website-builder.html', async (page) => {
+  await page.click('#industryChips [data-value="restaurant"]');
+  await page.click('#styleChips [data-value="luxury"]');
+  await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
+  await page.click('#draftBtn');
+  await page.waitForFunction(() => /READY/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 60000 });
+  expect(/Type of business: Restaurant or café/.test(plannerBrief) && /Visual style the owner picked: Luxury/.test(plannerBrief), 'the planner did not get the start-step choices: ' + plannerBrief.slice(-200));
+}, { setup: ctx => fakeAi(ctx, body => { if (/information architect/.test(body.systemPrompt)) { plannerBrief = JSON.stringify(body); return JSON.stringify(SITE_PLAN); } return SITE_PAGE; }) });
+let plannerBrief = '';
+
 const APP = bug => '<!DOCTYPE html><html><head><title>Tally</title></head><body><div class="app"><header class="app-header"><div class="app-title"><span class="logo">➕</span><h1>Tally</h1></div></header><div class="card"><button class="btn btn-primary" id="inc">Add one</button> <span id="n">0</span></div></div><script>' + (bug ? 'missingFunction();' : '') + 'let n=0;document.getElementById("inc").onclick=()=>{document.getElementById("n").textContent=++n};</' + 'script></body></html>';
 test('app-forge: a broken app is fixed automatically and downloads as an installable ZIP', 'app-forge.html', async (page) => {
   await page.fill('#appName', 'Tally');
