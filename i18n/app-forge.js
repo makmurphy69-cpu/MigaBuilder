@@ -20,7 +20,7 @@ I18N.phrases({
   "App preview": { es: "Vista previa de la app", ar: "معاينة التطبيق", zh: "应用预览", sw: "Uhakiki wa programu", sv: "Förhandsvisning av appen" },
   "Ask for a change, e.g. 'add a dark mode toggle'": { es: "Pide un cambio, p. ej., 'añade un interruptor de modo oscuro'", ar: "اطلب تغييرًا، مثلًا: 'أضف زر تبديل للوضع الداكن'", zh: "提出修改，例如“添加深色模式开关”", sw: "Omba badiliko, k.m. 'ongeza kitufe cha hali ya giza'", sv: "Be om en ändring, t.ex. 'lägg till en knapp för mörkt läge'" },
   "How to use App Forge": { es: "Cómo usar App Forge", ar: "كيفية استخدام App Forge", zh: "如何使用 App Forge", sw: "Jinsi ya kutumia App Forge", sv: "Så använder du App Forge" },
-  "App Forge — free app generator": { es: "App Forge — generador de apps gratis", ar: "App Forge — منشئ تطبيقات مجاني", zh: "App Forge — 免费应用生成器", sw: "App Forge — kitengeneza programu cha bure", sv: "App Forge — gratis appgenerator" }
+  "Free app generator — App Forge | MigaBuilder": { es: "Generador de apps gratis — App Forge | MigaBuilder", ar: "منشئ تطبيقات مجاني — App Forge | MigaBuilder", zh: "免费应用生成器 — App Forge | MigaBuilder", sw: "Kitengeneza programu cha bure — App Forge | MigaBuilder", sv: "Gratis appgenerator — App Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

@@ -15,7 +15,7 @@ I18N.phrases({
   "Screen recording made with Record Forge.": { es: "Grabación de pantalla hecha con Record Forge.", ar: "تسجيل شاشة صُنع باستخدام Record Forge.", zh: "用 Record Forge 制作的屏幕录像。", sw: "Rekodi ya skrini iliyotengenezwa kwa Record Forge.", sv: "Skärminspelning gjord med Record Forge." },
   "tutorial, screen recording, how-to": { es: "tutorial, grabación de pantalla, cómo se hace", ar: "شرح، تسجيل الشاشة، طريقة الاستخدام", zh: "教程, 屏幕录制, 使用方法", sw: "mafunzo, kurekodi skrini, jinsi ya", sv: "handledning, skärminspelning, instruktioner" },
   "How to use Record Forge": { es: "Cómo usar Record Forge", ar: "كيفية استخدام Record Forge", zh: "如何使用 Record Forge", sw: "Jinsi ya kutumia Record Forge", sv: "Så använder du Record Forge" },
-  "Record Forge — screen recording with voice narration": { es: "Record Forge — grabación de pantalla con narración de voz", ar: "Record Forge — تسجيل الشاشة مع تعليق صوتي", zh: "Record Forge — 带语音讲解的屏幕录制", sw: "Record Forge — kurekodi skrini pamoja na masimulizi ya sauti", sv: "Record Forge — skärminspelning med berättarröst" }
+  "Screen recording with voice narration — Record Forge | MigaBuilder": { es: "Grabación de pantalla con narración de voz — Record Forge | MigaBuilder", ar: "تسجيل الشاشة مع تعليق صوتي — Record Forge | MigaBuilder", zh: "带语音讲解的屏幕录制 — Record Forge | MigaBuilder", sw: "Kurekodi skrini pamoja na masimulizi ya sauti — Record Forge | MigaBuilder", sv: "Skärminspelning med berättarröst — Record Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

@@ -15,6 +15,7 @@
  */
 import http from 'node:http';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -172,6 +173,67 @@ test('ocr-forge: read two images with one engine and join a searchable PDF', 'oc
   const pages = await page.evaluate(async b64 => (await PDFLib.PDFDocument.load(Uint8Array.from(atob(b64), c => c.charCodeAt(0)))).getPageCount(), pdf.buf.toString('base64'));
   expect(pages === 2, 'searchable PDF should have 2 pages, has ' + pages);
 }, { timeout: 300000 });
+
+test('image-studio: AI sharpen 2× runs the on-device model over every tile and downloads a twice-as-big PNG', 'image-studio.html', async (page) => {
+  await page.setInputFiles('#images', path.join(FIX, 'small-photo.png'));
+  await page.click('.tab[data-mode="upscale"]');
+  await page.selectOption('#upMethod', 'ai2');
+  await page.click('#makeUpscale');
+  await page.waitForFunction(() => /Sharpened to|went wrong|could not|memory/i.test(document.querySelector('#upProgress').textContent), null, { timeout: 240000 });
+  const msg = await page.textContent('#upProgress');
+  expect(/Sharpened to 320 × 240/.test(msg), 'upscale did not finish: ' + msg.trim().slice(0, 200));
+  const png = await downloadOf(page, () => page.click('#download'));
+  expect(magic(png.buf, 0x89, 0x50, 0x4e, 0x47), 'download is not a PNG');
+  // The model really ran: its result differs from a plain browser enlargement, but still looks like the same picture.
+  const diff = await page.evaluate(async b64 => {
+    const load = src => new Promise(ok => { const i = new Image(); i.onload = () => ok(i); i.src = src; });
+    const ai = await load('data:image/png;base64,' + b64), src = await load('scripts/fixtures/small-photo.png');
+    const draw = (img, smooth) => { const c = document.createElement('canvas'); c.width = 320; c.height = 240; const g = c.getContext('2d'); g.imageSmoothingQuality = 'high'; g.drawImage(img, 0, 0, 320, 240); return g.getImageData(0, 0, 320, 240).data; };
+    const a = draw(ai), b = draw(src); let sum = 0, same = 0;
+    for (let i = 0; i < a.length; i += 4) { const d = Math.abs(a[i] - b[i]) + Math.abs(a[i + 1] - b[i + 1]) + Math.abs(a[i + 2] - b[i + 2]); sum += d; if (d === 0) same++; }
+    return { w: ai.width, h: ai.height, mean: sum / (a.length / 4) / 3, same: same / (a.length / 4) };
+  }, png.buf.toString('base64'));
+  expect(diff.w === 320 && diff.h === 240, `PNG should be 320 × 240, is ${diff.w} × ${diff.h}`);
+  expect(diff.same < 0.9, 'result is identical to a plain enlargement, so the AI did not run');
+  expect(diff.mean < 25, 'result does not look like the original picture (mean difference ' + diff.mean.toFixed(1) + ')');
+}, { timeout: 300000 });
+
+test('mind-map: a pasted list becomes a map; PNG, SVG, outline and the map file hold every idea', 'mind-map.html', async (page) => {
+  await page.fill('#outlineIn', 'Bakery plan\n- Menu\n  - Sourdough\n  - Cinnamon buns\n- Shop\n  - Rent');
+  await page.click('#fromOutline');
+  expect(await page.locator('#nodes .node').count() === 6, 'the list should make 6 ideas');
+  // Add an idea with the keyboard: select "Shop", Tab, type, Enter.
+  await page.locator('#nodes .node', { hasText: 'Shop' }).click();
+  await page.keyboard.press('Tab');
+  await page.keyboard.type('Opening day');
+  await page.keyboard.press('Enter');
+  expect(await page.locator('#nodes .node', { hasText: 'Opening day' }).count() === 1, 'the new idea was not added');
+  // A sticky note placed on the board opens for typing straight away.
+  await page.click('[data-tool=note]');
+  const bb = await page.locator('#board').boundingBox();
+  await page.mouse.click(bb.x + 90, bb.y + 60);
+  await page.keyboard.type('Call the bank');
+  await page.keyboard.press('Enter');
+  expect(await page.locator('#nodes .node', { hasText: 'Call the bank' }).count() === 1, 'the sticky note was not added');
+  const svg = (await downloadOf(page, () => page.click('#svg'))).buf.toString('utf8');
+  for (const w of ['Bakery plan', 'Cinnamon buns', 'Opening day', 'Call the bank']) expect(svg.includes(w), 'SVG is missing ' + w);
+  expect(/^<\?xml[\s\S]*<svg[^>]*viewBox=/.test(svg), 'SVG has no viewBox');
+  const png = await downloadOf(page, () => page.click('#png'));
+  expect(magic(png.buf, 0x89, 0x50, 0x4e, 0x47) && png.buf.length > 5000, 'PNG is missing or empty');
+  const outline = (await downloadOf(page, () => page.click('#outlineBtn'))).buf.toString('utf8');
+  expect(/^Bakery plan\n  - Menu\n    - Sourdough\n    - Cinnamon buns\n  - Shop\n    - Rent\n    - Opening day\nNote: Call the bank/.test(outline), 'outline is wrong:\n' + outline);
+  const file = await downloadOf(page, () => page.click('#save'));
+  const json = JSON.parse(file.buf.toString('utf8'));
+  expect(json.app === 'migabuilder-mind-map' && json.board.nodes.length === 8, 'map file should hold 8 ideas');
+  // Open the saved file again after starting an empty whiteboard.
+  page.once('dialog', d => d.accept());
+  await page.selectOption('#template', 'whiteboard');
+  expect(await page.locator('#nodes .node').count() === 0, 'the whiteboard should start empty');
+  const tmp = path.join(os.tmpdir(), 'mind-map-test.json');
+  fs.writeFileSync(tmp, file.buf);
+  await page.setInputFiles('#open', tmp);
+  await page.waitForFunction(() => document.querySelectorAll('#nodes .node').length === 8);
+});
 
 // Text of every page of a PDF, read with pdf.js inside the page (the page must load pdf.js).
 async function pdfPageTexts(page, buf) {
@@ -464,6 +526,47 @@ test('website-builder: a site loaded from a multi-site ZIP keeps its design and 
   expect(!/var SITE =/.test(files['index.html']), 'settings.js code was left in the page');
   expect(/url\("images\/hero\.jpg"\)/.test(files['style.css']), 'a picture not added yet should keep its images/ slot in style.css');
 });
+
+test('website-builder: Check & fix repairs a weak page, Undo restores it, the style panel restyles text', 'website-builder.html', async (page) => {
+  await page.setInputFiles('#loadPageInput', path.join(FIX, 'weak-page.html'));
+  await page.waitForFunction(() => /LOADED/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 15000 });
+  await page.click('#healthBtn');
+  const before = +(await page.textContent('#healthScore'));
+  expect(before <= 40, 'the weak page scored ' + before);
+  await page.fill('#ghRepo', 'someone/fixit-site');
+  await page.click('#healthFixBtn');
+  await page.waitForFunction(b => +document.querySelector('#healthScore').textContent > b, before, { timeout: 5000 });
+  const html = await page.$eval('#codePane', e => e.value);
+  expect(/<html lang="en"/.test(html), 'page language was not set');
+  expect(/name="viewport"/.test(html), 'viewport was not added');
+  expect((html.match(/<h1\b/g) || []).length === 1, 'still more than one h1');
+  expect(/<h3\b[^>]*>Opening hours<\/h3>/.test(html), 'the skipped heading level was not repaired');
+  expect(/alt="Bathroom renovation"/.test(html), 'the picture did not get a description from its file name');
+  expect(/<meta name="description" content="Fixit Plumbing repairs leaks/.test(html), 'meta description was not written from the page text');
+  expect(/<link rel="canonical" href="https:\/\/someone\.github\.io\/fixit-site\/weak-page\.html">/.test(html), 'canonical link was not added from the GitHub repo');
+  expect(await page.isEnabled('#healthAiBtn'), '"Ask the AI" should be offered for the vague link');
+  await page.click('#undoBlockBtn');
+  expect(!/name="viewport"/.test(await page.$eval('#codePane', e => e.value)), 'Undo did not take the fixes back');
+  await page.click('#editModeBtn');
+  const frame = page.frameLocator('#preview');
+  await frame.locator('p[data-miga-edit]').first().waitFor();
+  await frame.locator('p').first().click();
+  await page.waitForSelector('#stylePanel:not([hidden])');
+  await page.$eval('#stSize', e => { e.value = '22'; e.dispatchEvent(new Event('input')); });
+  await page.click('#stylePanel [data-align="center"]');
+  await page.waitForFunction(() => /<p style="font-size: 22px; text-align: center;">Fixit Plumbing repairs/.test(document.querySelector('#codePane').value), null, { timeout: 5000 });
+  expect(!/data-miga-(selected|edit)/.test(await page.$eval('#codePane', e => e.value)), 'edit-mode markers leaked into the page');
+});
+
+test('website-builder: the industry and style start step reaches the AI planner', 'website-builder.html', async (page) => {
+  await page.click('#industryChips [data-value="restaurant"]');
+  await page.click('#styleChips [data-value="luxury"]');
+  await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
+  await page.click('#draftBtn');
+  await page.waitForFunction(() => /READY/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 60000 });
+  expect(/Type of business: Restaurant or café/.test(plannerBrief) && /Visual style the owner picked: Luxury/.test(plannerBrief), 'the planner did not get the start-step choices: ' + plannerBrief.slice(-200));
+}, { setup: ctx => fakeAi(ctx, body => { if (/information architect/.test(body.systemPrompt)) { plannerBrief = JSON.stringify(body); return JSON.stringify(SITE_PLAN); } return SITE_PAGE; }) });
+let plannerBrief = '';
 
 const APP = bug => '<!DOCTYPE html><html><head><title>Tally</title></head><body><div class="app"><header class="app-header"><div class="app-title"><span class="logo">➕</span><h1>Tally</h1></div></header><div class="card"><button class="btn btn-primary" id="inc">Add one</button> <span id="n">0</span></div></div><script>' + (bug ? 'missingFunction();' : '') + 'let n=0;document.getElementById("inc").onclick=()=>{document.getElementById("n").textContent=++n};</' + 'script></body></html>';
 test('app-forge: a broken app is fixed automatically and downloads as an installable ZIP', 'app-forge.html', async (page) => {

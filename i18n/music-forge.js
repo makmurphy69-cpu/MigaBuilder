@@ -415,7 +415,7 @@ I18N.phrases({
   "Back to the start": { es: "Volver al principio", ar: "عد إلى البداية", zh: "回到开头", sw: "Rudi mwanzo", sv: "Tillbaka till början" },
   "Position": { es: "Posición", ar: "الموضع", zh: "位置", sw: "Nafasi", sv: "Position" },
   "How to use Music Forge": { es: "Cómo usar Music Forge", ar: "كيفية استخدام Music Forge", zh: "如何使用 Music Forge", sw: "Jinsi ya kutumia Music Forge", sv: "Så använder du Music Forge" },
-  "Music Forge — make songs with singing, instant tracks and beats": { es: "Music Forge: crea canciones con voz, pistas instantáneas y ritmos", ar: "Music Forge — اصنع أغاني مع غناء ومقطوعات فورية وإيقاعات", zh: "Music Forge——制作带演唱的歌曲、即时曲目和节拍", sw: "Music Forge — tengeneza nyimbo zenye uimbaji, nyimbo za papo hapo na midundo", sv: "Music Forge — gör låtar med sång, direkta spår och beats" }
+  "Make songs with singing, instant tracks and beats — Music Forge | MigaBuilder": { es: "Crea canciones con voz, pistas instantáneas y ritmos — Music Forge | MigaBuilder", ar: "اصنع أغاني مع غناء ومقطوعات فورية وإيقاعات — Music Forge | MigaBuilder", zh: "制作带演唱的歌曲、即时曲目和节拍 — Music Forge | MigaBuilder", sw: "Tengeneza nyimbo zenye uimbaji, nyimbo za papo hapo na midundo — Music Forge | MigaBuilder", sv: "Gör låtar med sång, direkta spår och beats — Music Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

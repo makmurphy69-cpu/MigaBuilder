@@ -11,12 +11,12 @@
 <link rel="canonical" href="https://migabuilder.com/website-builder.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MigaBuilder">
-<meta property="og:title" content="MigaBuilder — 38 Free Private Browser Tools">
+<meta property="og:title" content="Website Builder — Create a Complete Business Website | MigaBuilder">
 <meta property="og:description" content="Create, convert and check files with 38 free local-first browser tools. No signup.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
 <meta property="og:url" content="https://migabuilder.com/website-builder.html">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MigaBuilder — 38 Free Private Browser Tools">
+<meta name="twitter:title" content="Website Builder — Create a Complete Business Website | MigaBuilder">
 <meta name="twitter:description" content="Create, convert and check files with 38 free local-first browser tools. No signup.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
 <script type="application/ld+json">
@@ -34,6 +34,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 <script src="i18n.js"></script>
 <script src="i18n/website-builder.js"></script>
+<script src="site-checks.js"></script>
 
 <!--
   OPTIONAL: to track how many people use MigaBuilder itself (not the sites it
@@ -368,6 +369,42 @@
     margin-top: 4px;
   }
 
+  .health-panel, .style-panel { border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 12px; margin-bottom: 10px; background: rgba(8, 24, 38, .45); color: var(--paper); font-size: 13px; }
+  .health-panel [hidden], .style-panel [hidden] { display: none !important; }
+  .health-panel .hint, .style-panel .hint { color: rgba(237,234,224,.6); }
+  .health-head { display: flex; gap: 12px; align-items: center; }
+  .health-head strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 15px; }
+  .health-score { flex: none; width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center; font: 700 20px 'Space Grotesk', sans-serif; border: 3px solid var(--error); }
+  .health-score.good { border-color: var(--success); } .health-score.ok { border-color: var(--amber); }
+  .health-pages { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 6px; }
+  .health-pages button, .health-actions button, .style-panel button { background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: 999px; padding: 5px 11px; font: inherit; font-size: 12.5px; cursor: pointer; }
+  .health-pages button[aria-pressed="true"] { border-color: var(--line-cyan); color: var(--line-cyan); font-weight: 600; }
+  .health-list { list-style: none; margin: 6px 0 10px; padding: 0; display: grid; gap: 4px; }
+  .health-list li { display: flex; gap: 8px; align-items: baseline; padding: 6px 8px; border-left: 3px solid var(--success); background: rgba(237,234,224,.04); }
+  .health-list li.bad { border-left-color: var(--error); }
+  .health-list small { color: rgba(237,234,224,.65); }
+  .health-list .tag { margin-left: auto; flex: none; font-size: 11px; color: var(--line-cyan); white-space: nowrap; }
+  .health-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .health-actions .health-fix { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 700; }
+  .health-actions button:disabled { opacity: .45; cursor: default; }
+  .style-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .style-head strong { margin-right: auto; }
+  .style-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px 14px; align-items: end; }
+  .style-grid label { display: grid; gap: 4px; font-size: 12px; color: rgba(237,234,224,.8); }
+  .style-grid label > span { display: flex; gap: 6px; align-items: center; }
+  .style-grid input[type="range"] { flex: 1; min-width: 0; }
+  .style-grid output { min-width: 40px; font-size: 11.5px; color: var(--line-cyan); }
+  .style-grid input[type="color"] { width: 48px; height: 30px; padding: 0; border: 1px solid var(--line-cyan-dim); background: transparent; }
+  .style-grid select, .style-grid input[type="text"] { width: 100%; padding: 6px; font: inherit; font-size: 12.5px; }
+  .style-grid input[type="file"] { font-size: 12px; color: var(--paper); }
+  .style-row { display: flex; gap: 6px; flex-wrap: wrap; }
+  .style-row button { min-width: 36px; }
+  .style-panel button[aria-pressed="true"] { background: var(--line-cyan); color: var(--navy-deep); border-color: var(--line-cyan); }
+  .chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip-row button { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); border-radius: 999px; padding: 6px 11px; font: inherit; font-size: 12.5px; cursor: pointer; min-height: 32px; }
+  .chip-row button:hover { border-color: var(--navy); }
+  .chip-row button[aria-pressed="true"] { background: var(--navy); color: var(--paper); border-color: var(--navy); font-weight: 600; }
+
   /* ---------- Drafting table / preview ---------- */
 
   .table {
@@ -644,6 +681,30 @@
 
     <div class="section-title">The brief</div>
 
+    <div class="field start-step">
+      <label id="industryLabel">1. What kind of site is it?</label>
+      <div class="chip-row" id="industryChips" role="group" aria-labelledby="industryLabel">
+        <button type="button" data-value="restaurant" aria-pressed="false">🍽️ Restaurant &amp; café</button>
+        <button type="button" data-value="trades" aria-pressed="false">🔧 Trades &amp; contractor</button>
+        <button type="button" data-value="legal" aria-pressed="false">⚖️ Lawyer &amp; accountant</button>
+        <button type="button" data-value="consultant" aria-pressed="false">💼 Consultant &amp; agency</button>
+        <button type="button" data-value="fitness" aria-pressed="false">🏋️ Gym &amp; fitness</button>
+        <button type="button" data-value="beauty" aria-pressed="false">💇 Health &amp; beauty</button>
+        <button type="button" data-value="shop" aria-pressed="false">🛍️ Shop &amp; products</button>
+        <button type="button" data-value="personal" aria-pressed="false">👤 Personal &amp; portfolio</button>
+        <button type="button" data-value="other" aria-pressed="false">✳️ Something else</button>
+      </div>
+      <label id="styleLabel" style="margin-top:12px;">2. Pick a style</label>
+      <div class="chip-row" id="styleChips" role="group" aria-labelledby="styleLabel">
+        <button type="button" data-value="professional" aria-pressed="false">Professional</button>
+        <button type="button" data-value="modern" aria-pressed="false">Modern</button>
+        <button type="button" data-value="minimal" aria-pressed="false">Minimal</button>
+        <button type="button" data-value="luxury" aria-pressed="false">Luxury</button>
+        <button type="button" data-value="playful" aria-pressed="false">Playful</button>
+      </div>
+      <p class="hint">Both are optional — they steer which pages you get and the colours and fonts. Describe the business below in your own words (step 3).</p>
+    </div>
+
     <div class="field">
       <label for="starterIdea">Not sure where to start?</label>
       <input type="text" id="starterIdea" placeholder="e.g. window cleaning business">
@@ -654,7 +715,7 @@
     <div id="starterResult" style="display:none;margin-bottom:18px;background:#fff;border-radius:var(--radius);padding:14px;font-size:13px;line-height:1.55;color:var(--ink);"></div>
 
     <div class="field">
-      <label for="brief">Describe the business</label>
+      <label for="brief">3. Describe the business</label>
       <textarea id="brief" placeholder="e.g. A family-run plumbing company in Austin, TX. Friendly but no-nonsense tone."></textarea>
       <p class="hint">MigaBuilder will decide a sensible set of pages for this kind of business (e.g. Home, Services, About, Contact) — you don't need to list them.</p>
     </div>
@@ -829,7 +890,8 @@
       <button type="button" id="splitViewBtn" aria-pressed="false" disabled title="Show the page's HTML beside the preview — it updates as you edit">⟨/⟩ Show code beside it</button>
       <button type="button" id="starterSiteBtn" title="Load a ready-made landing page you can edit">✨ Starter template</button>
       <button type="button" id="blocksBtn" aria-expanded="false" aria-controls="blockShelf" title="Click in ready-made, responsive sections — hero, pricing, FAQ, contact form, footer…">🧩 Add a block</button>
-      <button type="button" id="undoBlockBtn" disabled title="Take back the last block you added">↶ Undo</button>
+      <button type="button" id="healthBtn" aria-expanded="false" aria-controls="healthPanel" disabled title="Score every page for SEO, accessibility and mobile problems, then fix them">🩺 Check &amp; fix</button>
+      <button type="button" id="undoBlockBtn" disabled title="Take back the last block, fix or style reset">↶ Undo</button>
       <span class="device-toggle" role="group" aria-label="Preview size">
         <button type="button" data-device="desktop" aria-pressed="true" title="Computer size">🖥️</button>
         <button type="button" data-device="tablet" aria-pressed="false" title="Tablet size (820 px)">📟</button>
@@ -844,6 +906,52 @@
         <span class="hint">Blocks pick up your page's <code>--brand</code> colour, work on phones, and can be edited like any other text.</span>
       </div>
       <div class="block-grid" id="blockGrid"></div>
+    </div>
+    <div class="health-panel" id="healthPanel" hidden>
+      <div class="health-head">
+        <span class="health-score" id="healthScore" aria-live="polite">–</span>
+        <div><strong>Website health</strong><span class="hint" id="healthSummary"></span></div>
+      </div>
+      <div class="health-pages" id="healthPages" role="group" aria-label="Score of each page"></div>
+      <ul class="health-list" id="healthList"></ul>
+      <div class="health-actions">
+        <button type="button" class="health-fix" id="healthFixBtn">✨ Fix all</button>
+        <button type="button" id="healthAiBtn">🤖 Ask the AI to fix the rest</button>
+      </div>
+      <p class="hint">The same checks as <a href="site-checkup.html">Website Checkup</a>, run in your browser. “Fix all” repairs titles, descriptions, headings, image descriptions, page language and the mobile viewport on every page — read the new wording, and ↶ Undo takes it back.</p>
+    </div>
+    <div class="style-panel" id="stylePanel" hidden>
+      <div class="style-head">
+        <strong>Style: <span id="styleTarget">—</span></strong>
+        <button type="button" id="styleParentBtn" title="Select the box around this element, e.g. to change a whole section's background">⬑ Box around it</button>
+        <button type="button" id="styleResetBtn" title="Put this element's look back to how it was">Reset</button>
+        <button type="button" id="styleCloseBtn" aria-label="Close the style panel">×</button>
+      </div>
+      <div class="style-grid">
+        <label>Text size <span><input type="range" id="stSize" min="10" max="96" step="1"><output id="stSizeOut"></output></span></label>
+        <label>Font <select id="stFont">
+          <option value="">Page font</option>
+          <option value="system-ui, -apple-system, 'Segoe UI', sans-serif">Clean sans-serif</option>
+          <option value="Georgia, 'Times New Roman', serif">Classic serif</option>
+          <option value="'Trebuchet MS', 'Arial Rounded MT Bold', sans-serif">Friendly rounded</option>
+          <option value="'Courier New', monospace">Typewriter</option>
+        </select></label>
+        <label>Text colour <input type="color" id="stColor"></label>
+        <label>Background <span><input type="color" id="stBg"><button type="button" id="stBgClear" title="No background colour">None</button></span></label>
+        <div class="style-row" role="group" aria-label="Text style">
+          <button type="button" id="stBold" aria-pressed="false" title="Bold"><b>B</b></button>
+          <button type="button" id="stItalic" aria-pressed="false" title="Italic"><i>I</i></button>
+          <button type="button" data-align="left" aria-pressed="false" title="Align left">⯇</button>
+          <button type="button" data-align="center" aria-pressed="false" title="Centre">≡</button>
+          <button type="button" data-align="right" aria-pressed="false" title="Align right">⯈</button>
+        </div>
+        <label>Space inside <span><input type="range" id="stPad" min="0" max="96" step="2"><output id="stPadOut"></output></span></label>
+        <label>Space above &amp; below <span><input type="range" id="stMargin" min="0" max="120" step="2"><output id="stMarginOut"></output></span></label>
+        <label>Rounded corners <span><input type="range" id="stRadius" min="0" max="48" step="1"><output id="stRadiusOut"></output></span></label>
+        <label id="stHrefRow" hidden>Link goes to <input type="text" id="stHref" spellcheck="false" placeholder="https://… or #contact or page.html"></label>
+        <label id="stAltRow" hidden>Picture description <input type="text" id="stAlt" placeholder="What the picture shows"></label>
+        <label id="stImgRow" hidden>Replace picture <input type="file" id="stImg" accept="image/*"></label>
+      </div>
     </div>
     <div class="sheet" id="sheet">
       <div class="sheet-empty" id="sheetEmpty">
@@ -1821,6 +1929,10 @@
     copyEmbedBtn.disabled = false;
     refineBtn.disabled = false;
     publishBtn.disabled = false;
+    const hb = document.getElementById('healthBtn');
+    if (hb) hb.disabled = false;
+    const hp = document.getElementById('healthPanel');
+    if (hp && !hp.hidden && typeof renderHealth === 'function') renderHealth();
   }
 
   function injectAnalytics(html, gaId) {
@@ -1833,11 +1945,58 @@
   }
 
   // ---------- main flow ----------
+  // ---------- start step: industry and style ----------
+  const INDUSTRIES = {
+    restaurant: { text: 'Restaurant or café — include a menu page, opening hours and a way to book a table or order.', example: 'e.g. A cosy Italian trattoria in Gothenburg with fresh pasta, a lunch menu and a small terrace.' },
+    trades: { text: 'Trades or contractor business — services with clear areas covered, trust signals (licensed, insured, guarantees) and a quick quote request.', example: 'e.g. A family-run plumbing company in Austin, TX. Emergency call-outs, bathroom renovations, friendly but no-nonsense.' },
+    legal: { text: 'Law firm or accountancy — practice areas, the people, a calm and trustworthy tone and an easy first consultation.', example: 'e.g. A two-partner law firm in Manchester helping families with wills, property and divorce.' },
+    consultant: { text: 'Consultant or agency — services, results or case studies, the process and a booking call to action.', example: 'e.g. A marketing consultant who helps local shops get more customers from Google and Instagram.' },
+    fitness: { text: 'Gym or fitness business — classes or timetable, trainers, membership prices and a free trial call to action.', example: 'e.g. A small boxing and HIIT gym in Leeds with morning classes and personal training.' },
+    beauty: { text: 'Health or beauty business — treatments with prices, the team, opening hours and online booking.', example: 'e.g. A hair and nail salon in Nairobi offering braids, colour and manicures.' },
+    shop: { text: 'Shop selling products — featured products, a shop page, delivery and returns information.', example: 'e.g. A small online shop selling handmade ceramic mugs and plates.' },
+    personal: { text: 'Personal site or portfolio — about me, selected work, and how to get in touch.', example: 'e.g. A freelance photographer in Lisbon showing weddings and portraits.' },
+    other: { text: '', example: '' }
+  };
+  const STYLES = {
+    professional: 'Professional — trustworthy and clear: mood "corporate", deep blue or green primary, light theme, clean sans-serif fonts, soft corners.',
+    modern: 'Modern — confident and fresh: mood "bold", saturated primary with a bright accent, large headings, generous spacing, round corners.',
+    minimal: 'Minimal — calm and simple: mood "minimal", mostly white or off-white with one dark primary, few colours, lots of space, sharp corners.',
+    luxury: 'Luxury — elegant and refined: mood "elegant", dark theme with a gold or champagne accent, a serif heading font, generous spacing.',
+    playful: 'Playful — friendly and warm: mood "playful", cheerful colours, rounded corners and a friendly rounded heading font.'
+  };
+  const startChoice = { industry: '', style: '' };
+  const BRIEF_PLACEHOLDER = briefInput.placeholder;
+  function wireChips(rowId, key, onChange) {
+    const row = document.getElementById(rowId);
+    row.addEventListener('click', e => {
+      const btn = e.target.closest('button[data-value]');
+      if (!btn) return;
+      const on = btn.getAttribute('aria-pressed') !== 'true';
+      row.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      btn.setAttribute('aria-pressed', String(on));
+      startChoice[key] = on ? btn.dataset.value : '';
+      if (onChange) onChange();
+    });
+  }
+  wireChips('industryChips', 'industry', () => {
+    const info = INDUSTRIES[startChoice.industry];
+    briefInput.placeholder = (info && info.example) || BRIEF_PLACEHOLDER;
+  });
+  wireChips('styleChips', 'style');
+  // What the start step adds to the brief the planner reads.
+  function startStepNotes() {
+    const lines = [];
+    const info = INDUSTRIES[startChoice.industry];
+    if (info && info.text) lines.push('Type of business: ' + info.text);
+    if (STYLES[startChoice.style]) lines.push('Visual style the owner picked: ' + STYLES[startChoice.style]);
+    return lines.length ? '\n\n' + lines.join('\n') : '';
+  }
+
   async function draftSite() {
     clearError();
     const key = currentTextApiKey();
     const imageKey = currentImageApiKey();
-    const brief = briefInput.value.trim();
+    const brief = briefInput.value.trim() ? briefInput.value.trim() + startStepNotes() : '';
     const model = modelSelect.value;
     const mode = (document.querySelector('input[name="imageMode"]:checked') || {}).value || 'stock';
     const bookingOn = bookingEnabled.checked;
@@ -2364,7 +2523,7 @@
     if (!doc || !doc.body) return;
     const style = doc.createElement('style');
     style.id = EDIT_STYLE_ID;
-    style.textContent = '[data-miga-edit]{outline:1px dashed rgba(31,111,160,.35);outline-offset:2px;cursor:text}[data-miga-edit]:hover{outline:2px dashed #1f6fa0}[data-miga-edit]:focus{outline:2px solid #E2A63B;background:rgba(226,166,59,.08)}';
+    style.textContent = '[data-miga-edit]{outline:1px dashed rgba(31,111,160,.35);outline-offset:2px;cursor:text}[data-miga-edit]:hover{outline:2px dashed #1f6fa0}[data-miga-edit]:focus{outline:2px solid #E2A63B;background:rgba(226,166,59,.08)}[data-miga-selected]{outline:3px solid #E2A63B!important;outline-offset:3px}img{cursor:pointer}';
     doc.head.appendChild(style);
     const hasText = el => Array.from(el.childNodes).some(n => n.nodeType === 3 && n.textContent.trim());
     doc.body.querySelectorAll('*').forEach(function (el) {
@@ -2377,6 +2536,13 @@
     // Links and buttons should be editable, not followed.
     doc.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a, button, form')) e.preventDefault(); }, true);
     doc.addEventListener('submit', function (e) { e.preventDefault(); }, true);
+    // Clicking (or tabbing to) anything opens the style panel for it.
+    doc.addEventListener('click', function (e) {
+      let el = e.target;
+      if (el && el.closest && el.closest('svg')) el = el.closest('svg').parentElement;
+      if (el && el.nodeType === 1) selectForStyle(el);
+    });
+    doc.addEventListener('focusin', function (e) { if (e.target.matches && e.target.matches('[data-miga-edit]')) selectForStyle(e.target); });
     doc.addEventListener('input', scheduleEditSync);
     doc.addEventListener('keydown', function (e) {
       // Enter inside a one-line element (headings, buttons, links) finishes the edit instead of adding a line.
@@ -2389,6 +2555,7 @@
     const root = doc.documentElement.cloneNode(true);
     root.querySelectorAll('#' + EDIT_STYLE_ID).forEach(n => n.remove());
     root.querySelectorAll('[data-miga-edit]').forEach(n => { n.removeAttribute('data-miga-edit'); n.removeAttribute('contenteditable'); n.removeAttribute('spellcheck'); });
+    root.querySelectorAll('[data-miga-selected]').forEach(n => n.removeAttribute('data-miga-selected'));
     root.querySelectorAll('[style=""]').forEach(n => n.removeAttribute('style'));
     const dt = doc.doctype ? '<!DOCTYPE ' + doc.doctype.name + '>\n' : '<!DOCTYPE html>\n';
     return dt + root.outerHTML;
@@ -2408,7 +2575,7 @@
     editSyncTimer = setTimeout(flushEdits, 300);
   }
   const PREVIEW_SANDBOX = preview.getAttribute('sandbox');
-  preview.addEventListener('load', function () { if (editMode) enableEditing(); });
+  preview.addEventListener('load', function () { closeStylePanel(); if (editMode) enableEditing(); });
   function setEditMode(on) {
     if (!on) flushEdits();
     editMode = on;
@@ -2416,10 +2583,100 @@
     editModeBtn.textContent = on ? '✓ Done editing' : '✏️ Edit text on the page';
     // Generated and imported pages are untrusted: they never get scripts and same-origin access together.
     preview.setAttribute('sandbox', on ? 'allow-same-origin' : PREVIEW_SANDBOX);
-    canvasNote.textContent = on ? 'Click any text in the preview and type. Animations and menus are paused while editing.' : '';
+    canvasNote.textContent = on ? 'Click any text in the preview and type, or click anything to change its size, colours and spacing. Animations and menus are paused while editing.' : '';
+    if (!on) closeStylePanel();
     showActivePage();
   }
   editModeBtn.addEventListener('click', function () { setEditMode(!editMode); });
+
+  // ---------- click-to-edit style panel ----------
+  // In edit mode the preview is same-origin, so the panel changes the clicked element's inline style
+  // directly; the normal edit sync then writes it into the page's HTML.
+  const stylePanel = document.getElementById('stylePanel');
+  const st = id => document.getElementById(id);
+  const ELEMENT_NAMES = { H1: 'Main heading', H2: 'Heading', H3: 'Small heading', H4: 'Small heading', H5: 'Small heading', H6: 'Small heading', P: 'Paragraph', A: 'Link', BUTTON: 'Button', IMG: 'Picture', SECTION: 'Section', HEADER: 'Header', FOOTER: 'Footer', NAV: 'Menu', LI: 'List item', UL: 'List', OL: 'List', DIV: 'Box', SPAN: 'Text', STRONG: 'Bold text', LABEL: 'Label', FORM: 'Form', MAIN: 'Page content', ARTICLE: 'Card', FIGURE: 'Picture box', BLOCKQUOTE: 'Quote', SMALL: 'Small text' };
+  const originalStyle = new WeakMap();
+  let styleSel = null;
+  function toHex(c) {
+    const m = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/.exec(c || '');
+    if (!m || (m[4] !== undefined && +m[4] < 0.2)) return null; // nearly see-through (e.g. the edit-mode focus tint) counts as no colour
+    return '#' + [m[1], m[2], m[3]].map(n => (+n).toString(16).padStart(2, '0')).join('');
+  }
+  function closeStylePanel() {
+    if (styleSel) { try { styleSel.removeAttribute('data-miga-selected'); } catch (e) {} }
+    styleSel = null;
+    stylePanel.hidden = true;
+  }
+  function selectForStyle(el) {
+    if (!el || /^(HTML|BODY|HEAD)$/.test(el.tagName)) return;
+    if (styleSel && styleSel !== el) styleSel.removeAttribute('data-miga-selected');
+    styleSel = el;
+    el.setAttribute('data-miga-selected', '');
+    if (!originalStyle.has(el)) originalStyle.set(el, el.getAttribute('style'));
+    fillStylePanel();
+    stylePanel.hidden = false;
+  }
+  function fillStylePanel() {
+    const el = styleSel;
+    const cs = el.ownerDocument.defaultView.getComputedStyle(el);
+    const words = (el.textContent || '').replace(/\s+/g, ' ').trim();
+    st('styleTarget').textContent = (ELEMENT_NAMES[el.tagName] || el.tagName.toLowerCase()) + (words && el.tagName !== 'IMG' ? ' “' + (words.length > 34 ? words.slice(0, 33) + '…' : words) + '”' : '');
+    const px = v => Math.round(parseFloat(v) || 0);
+    st('stSize').value = px(cs.fontSize); st('stSizeOut').textContent = px(cs.fontSize) + ' px';
+    st('stPad').value = px(cs.paddingTop); st('stPadOut').textContent = px(cs.paddingTop) + ' px';
+    st('stMargin').value = px(cs.marginTop); st('stMarginOut').textContent = px(cs.marginTop) + ' px';
+    st('stRadius').value = px(cs.borderTopLeftRadius); st('stRadiusOut').textContent = px(cs.borderTopLeftRadius) + ' px';
+    const font = st('stFont');
+    font.value = Array.from(font.options).some(o => o.value && o.value === el.style.fontFamily) ? el.style.fontFamily : '';
+    st('stColor').value = toHex(cs.color) || '#000000';
+    st('stBg').value = toHex(cs.backgroundColor) || '#ffffff';
+    st('stBold').setAttribute('aria-pressed', String((parseInt(cs.fontWeight, 10) || 400) >= 600));
+    st('stItalic').setAttribute('aria-pressed', String(cs.fontStyle === 'italic'));
+    const align = cs.textAlign === 'start' ? 'left' : cs.textAlign === 'end' ? 'right' : cs.textAlign;
+    stylePanel.querySelectorAll('[data-align]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.align === align)));
+    st('stHrefRow').hidden = el.tagName !== 'A';
+    if (el.tagName === 'A') st('stHref').value = el.getAttribute('href') || '';
+    st('stAltRow').hidden = st('stImgRow').hidden = el.tagName !== 'IMG';
+    if (el.tagName === 'IMG') st('stAlt').value = el.getAttribute('alt') || '';
+    st('styleParentBtn').disabled = !el.parentElement || /^(BODY|HTML)$/.test(el.parentElement.tagName);
+  }
+  function applyStyle(fn) {
+    if (!styleSel || !styleSel.isConnected) { closeStylePanel(); return; }
+    fn(styleSel.style, styleSel);
+    scheduleEditSync();
+  }
+  const slider = (id, out, fn) => st(id).addEventListener('input', function () { st(out).textContent = this.value + ' px'; const v = this.value; applyStyle(s => fn(s, v)); });
+  slider('stSize', 'stSizeOut', (s, v) => { s.fontSize = v + 'px'; });
+  slider('stPad', 'stPadOut', (s, v) => { s.padding = v + 'px'; });
+  slider('stMargin', 'stMarginOut', (s, v) => { s.marginTop = s.marginBottom = v + 'px'; });
+  slider('stRadius', 'stRadiusOut', (s, v) => { s.borderRadius = v + 'px'; });
+  st('stFont').addEventListener('change', function () { const v = this.value; applyStyle(s => { s.fontFamily = v; }); });
+  st('stColor').addEventListener('input', function () { const v = this.value; applyStyle(s => { s.color = v; }); });
+  st('stBg').addEventListener('input', function () { const v = this.value; applyStyle(s => { s.backgroundColor = v; }); });
+  st('stBgClear').addEventListener('click', () => applyStyle(s => { s.backgroundColor = 'transparent'; s.backgroundImage = 'none'; }));
+  st('stBold').addEventListener('click', function () { const on = this.getAttribute('aria-pressed') !== 'true'; this.setAttribute('aria-pressed', String(on)); applyStyle(s => { s.fontWeight = on ? '700' : '400'; }); });
+  st('stItalic').addEventListener('click', function () { const on = this.getAttribute('aria-pressed') !== 'true'; this.setAttribute('aria-pressed', String(on)); applyStyle(s => { s.fontStyle = on ? 'italic' : 'normal'; }); });
+  stylePanel.querySelectorAll('[data-align]').forEach(b => b.addEventListener('click', () => {
+    stylePanel.querySelectorAll('[data-align]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    applyStyle(s => { s.textAlign = b.dataset.align; });
+  }));
+  st('stHref').addEventListener('change', function () { const v = this.value.trim(); applyStyle((s, el) => { if (v) el.setAttribute('href', v); }); });
+  st('stAlt').addEventListener('input', function () { const v = this.value; applyStyle((s, el) => el.setAttribute('alt', v)); });
+  st('stImg').addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => applyStyle((s, el) => { el.setAttribute('src', reader.result); el.removeAttribute('srcset'); });
+    reader.readAsDataURL(file);
+    this.value = '';
+  });
+  st('styleResetBtn').addEventListener('click', () => applyStyle((s, el) => {
+    const was = originalStyle.get(el);
+    if (was == null) el.removeAttribute('style'); else el.setAttribute('style', was);
+    fillStylePanel();
+  }));
+  st('styleParentBtn').addEventListener('click', () => { if (styleSel && styleSel.parentElement) selectForStyle(styleSel.parentElement); });
+  st('styleCloseBtn').addEventListener('click', closeStylePanel);
   splitViewBtn.addEventListener('click', function () {
     const on = !sheet.classList.contains('split');
     sheet.classList.toggle('split', on);
@@ -2653,19 +2910,103 @@
     canvasNote.textContent = '✓ ' + def.name + ' added — click its text to change it' + (editMode ? '' : ' (turn on ✏️ Edit text first)');
   });
   undoBlockBtn.addEventListener('click', () => {
+    flushEdits();
     const last = blockUndo.pop();
-    if (!last || !generatedPages[last.index]) return;
-    generatedPages[last.index].html = last.html;
-    activePageIndex = last.index;
+    if (!last) return;
+    // An entry is one page ({ index, html }) or, for "Fix all", every page it changed ({ pages: [...] }).
+    const restore = (last.pages || [last]).filter(e => generatedPages[e.index]);
+    if (!restore.length) return;
+    restore.forEach(e => { generatedPages[e.index].html = e.html; });
+    if (!last.pages) activePageIndex = last.index;
     undoBlockBtn.disabled = !blockUndo.length;
     renderTabs();
     showActivePage();
-    canvasNote.textContent = 'Block removed.';
+    canvasNote.textContent = last.note || 'Block removed.';
   });
   preview.addEventListener('load', () => {
     if (!scrollToBlock) return;
     const id = scrollToBlock; scrollToBlock = '';
     try { const el = preview.contentDocument.querySelector('[data-mb-block="' + id + '"]'); if (el) el.scrollIntoView({ block: 'start' }); } catch (e) {}
+  });
+
+  // ---------- website health: Site Checkup's score and "Fix all" for every page ----------
+  const healthPanel = document.getElementById('healthPanel');
+  const healthBtn = document.getElementById('healthBtn');
+  // The address each page will have once it is on GitHub Pages, if the repo box below is filled in.
+  function publishedUrl(page) {
+    const m = /^([\w.-]+)\/([\w.-]+)$/.exec((document.getElementById('ghRepo').value || '').trim());
+    if (!m) return '';
+    const base = m[2].toLowerCase() === m[1].toLowerCase() + '.github.io' ? 'https://' + m[2].toLowerCase() + '/' : 'https://' + m[1].toLowerCase() + '.github.io/' + m[2] + '/';
+    return base + (page.slug === 'index' ? '' : page.slug + '.html');
+  }
+  function checkPage(page) { return MigaSiteChecks.run(MigaSiteChecks.parse(page.html)); }
+  function renderHealth() {
+    if (!generatedPages.length) return;
+    const results = generatedPages.map(checkPage);
+    const scores = results.map(r => MigaSiteChecks.score(r));
+    const items = results[activePageIndex] || [];
+    const score = scores[activePageIndex];
+    const scoreEl = document.getElementById('healthScore');
+    scoreEl.textContent = score;
+    scoreEl.className = 'health-score' + (score >= 90 ? ' good' : score >= 70 ? ' ok' : '');
+    const autoCount = results.reduce((n, r) => n + r.filter(i => i.auto).length, 0);
+    const siteScore = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
+    document.getElementById('healthSummary').textContent = (generatedPages.length > 1 ? 'This page ' + score + '/100 · whole site ' + siteScore + '/100. ' : 'Score ' + score + '/100. ') +
+      (autoCount ? autoCount + ' problem' + (autoCount === 1 ? '' : 's') + ' can be fixed automatically.' : 'Nothing left to fix automatically.');
+    const pagesEl = document.getElementById('healthPages');
+    pagesEl.hidden = generatedPages.length < 2;
+    pagesEl.innerHTML = generatedPages.map((p, i) => '<button type="button" data-page="' + i + '" aria-pressed="' + (i === activePageIndex) + '">' + escHtml(p.navLabel || p.slug) + ' · ' + scores[i] + '</button>').join('');
+    document.getElementById('healthList').innerHTML = items.map(i => {
+      const note = i.ok ? '' : i.auto ? 'Fix all repairs this' : i.id === 'canonical' ? 'Added by Fix all once the GitHub repo box below is filled in' : 'Needs your words — try “Ask the AI”';
+      return '<li class="' + (i.ok ? '' : 'bad') + '"><span>' + (i.ok ? '✓' : '✗') + '</span><span><strong>' + escHtml(i.title) + '</strong> <small>' + escHtml(i.detail) + '</small></span>' + (note ? '<span class="tag">' + note + '</span>' : '') + '</li>';
+    }).join('');
+    const canonicalFixable = results.some((r, i) => publishedUrl(generatedPages[i]) && r.some(x => x.id === 'canonical' && !x.ok));
+    document.getElementById('healthFixBtn').disabled = !autoCount && !canonicalFixable;
+    document.getElementById('healthAiBtn').disabled = !items.some(i => !i.ok && !i.auto && i.id !== 'canonical');
+  }
+  healthBtn.addEventListener('click', () => {
+    const open = healthPanel.hidden;
+    healthPanel.hidden = !open;
+    healthBtn.setAttribute('aria-expanded', String(open));
+    if (open) { flushEdits(); renderHealth(); }
+  });
+  document.getElementById('healthPages').addEventListener('click', e => {
+    const b = e.target.closest('[data-page]');
+    if (!b) return;
+    flushEdits();
+    activePageIndex = +b.dataset.page;
+    renderTabs();
+    showActivePage();
+  });
+  document.getElementById('healthFixBtn').addEventListener('click', () => {
+    flushEdits();
+    const before = generatedPages.map((p, index) => ({ index, html: p.html }));
+    let fixedCount = 0, pagesChanged = 0;
+    generatedPages.forEach(page => {
+      const doc = MigaSiteChecks.parse(page.html);
+      const fixed = MigaSiteChecks.fixAll(doc, { siteName: document.getElementById('bizName').value.trim(), url: publishedUrl(page) });
+      if (!fixed.length) return;
+      page.html = MigaSiteChecks.serialize(doc);
+      fixedCount += fixed.length;
+      pagesChanged++;
+    });
+    if (!fixedCount) { canvasNote.textContent = 'Nothing more can be fixed automatically.'; renderHealth(); return; }
+    blockUndo.push({ pages: before, note: 'Automatic fixes taken back.' });
+    if (blockUndo.length > 20) blockUndo.shift();
+    undoBlockBtn.disabled = false;
+    showActivePage();
+    canvasNote.textContent = '✓ Fixed ' + fixedCount + ' problem' + (fixedCount === 1 ? '' : 's') + ' on ' + pagesChanged + ' page' + (pagesChanged === 1 ? '' : 's') + ' — read the new titles and descriptions; ↶ Undo takes it back.';
+  });
+  document.getElementById('healthAiBtn').addEventListener('click', () => {
+    flushEdits();
+    const page = generatedPages[activePageIndex];
+    if (!page) return;
+    const left = checkPage(page).filter(i => !i.ok && !i.auto && i.id !== 'canonical');
+    if (!left.length) return;
+    refineInput.value = 'Fix these website health problems on this page, keeping the design and everything else the same:\n' + left.map(i => '- ' + i.title + ': ' + i.detail).join('\n');
+    refineInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    refineInput.focus();
+    canvasNote.textContent = 'The problems are in “Refine this page” below — press Apply change to let the AI fix them.';
   });
 
   // Open with the visitor's last site (kept in this browser) or a ready-made starter page.

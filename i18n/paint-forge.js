@@ -33,7 +33,7 @@ I18N.phrases({
   "Move up": { es: "Subir", ar: "نقل لأعلى", zh: "上移", sw: "Sogeza juu", sv: "Flytta upp" },
   "Move down": { es: "Bajar", ar: "نقل لأسفل", zh: "下移", sw: "Sogeza chini", sv: "Flytta ner" },
   "How to use Paint Forge": { es: "Cómo usar Paint Forge", ar: "كيفية استخدام Paint Forge", zh: "如何使用 Paint Forge", sw: "Jinsi ya kutumia Paint Forge", sv: "Så använder du Paint Forge" },
-  "Paint Forge — free layered image editor": { es: "Paint Forge — editor de imágenes con capas gratis", ar: "Paint Forge — محرر صور مجاني بالطبقات", zh: "Paint Forge — 免费的分层图像编辑器", sw: "Paint Forge — kihariri picha cha bure chenye tabaka", sv: "Paint Forge — gratis bildredigerare med lager" }
+  "Free layered image editor — Paint Forge | MigaBuilder": { es: "Editor de imágenes con capas gratis — Paint Forge | MigaBuilder", ar: "محرر صور مجاني بالطبقات — Paint Forge | MigaBuilder", zh: "免费的分层图像编辑器 — Paint Forge | MigaBuilder", sw: "Kihariri picha cha bure chenye tabaka — Paint Forge | MigaBuilder", sv: "Gratis bildredigerare med lager — Paint Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

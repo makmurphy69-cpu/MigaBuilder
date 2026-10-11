@@ -41,7 +41,7 @@ I18N.phrases({
   "Background color hex": { es: "Código hex del color de fondo", ar: "رمز hex للون الخلفية", zh: "背景颜色十六进制值", sw: "Hex ya rangi ya mandharinyuma", sv: "Hexkod för bakgrundsfärg" },
   "Check this pair": { es: "Comprobar esta combinación", ar: "افحص هذا الزوج", zh: "检查这组配色", sw: "Kagua jozi hii", sv: "Kontrollera det här paret" },
   "How to use Palette Forge": { es: "Cómo usar Palette Forge", ar: "كيفية استخدام Palette Forge", zh: "如何使用 Palette Forge", sw: "Jinsi ya kutumia Palette Forge", sv: "Så använder du Palette Forge" },
-  "Palette Forge — free color palette generator": { es: "Palette Forge — generador de paletas de colores gratis", ar: "Palette Forge — منشئ لوحات ألوان مجاني", zh: "Palette Forge — 免费配色方案生成器", sw: "Palette Forge — kitengeneza paleti za rangi cha bure", sv: "Palette Forge — gratis generator för färgpaletter" }
+  "Free color palette generator — Palette Forge | MigaBuilder": { es: "Generador de paletas de colores gratis — Palette Forge | MigaBuilder", ar: "منشئ لوحات ألوان مجاني — Palette Forge | MigaBuilder", zh: "免费配色方案生成器 — Palette Forge | MigaBuilder", sw: "Kitengeneza paleti za rangi cha bure — Palette Forge | MigaBuilder", sv: "Gratis generator för färgpaletter — Palette Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

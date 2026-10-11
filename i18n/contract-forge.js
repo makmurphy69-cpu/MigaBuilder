@@ -20,7 +20,7 @@ I18N.phrases({
   "e.g. State of Texas": { es: "p. ej., Estado de Texas", ar: "مثلًا: ولاية تكساس", zh: "例如：得克萨斯州", sw: "k.m. Jimbo la Texas", sv: "t.ex. delstaten Texas" },
   "Document preview": { es: "Vista previa del documento", ar: "معاينة المستند", zh: "文档预览", sw: "Uhakiki wa hati", sv: "Förhandsvisning av dokumentet" },
   "How to use Contract Forge": { es: "Cómo usar Contract Forge", ar: "كيفية استخدام Contract Forge", zh: "如何使用 Contract Forge", sw: "Jinsi ya kutumia Contract Forge", sv: "Så använder du Contract Forge" },
-  "Contract Forge — free contract & NDA generator": { es: "Contract Forge — generador de contratos y acuerdos de confidencialidad gratis", ar: "Contract Forge — منشئ عقود واتفاقيات عدم إفصاح مجاني", zh: "Contract Forge — 免费合同和保密协议生成器", sw: "Contract Forge — kitengeneza mikataba na NDA cha bure", sv: "Contract Forge — gratis generator för avtal och sekretessavtal" }
+  "Free contract & NDA generator — Contract Forge | MigaBuilder": { es: "Generador de contratos y acuerdos de confidencialidad gratis — Contract Forge | MigaBuilder", ar: "منشئ عقود واتفاقيات عدم إفصاح مجاني — Contract Forge | MigaBuilder", zh: "免费合同和保密协议生成器 — Contract Forge | MigaBuilder", sw: "Kitengeneza mikataba na NDA cha bure — Contract Forge | MigaBuilder", sv: "Gratis generator för avtal och sekretessavtal — Contract Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

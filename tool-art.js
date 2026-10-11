@@ -270,6 +270,7 @@
     'cartoon-forge': ['lichtenstein', 'gremlin', 'brush', 'cap'],
     'chemistry-map': ['vasarely', 'slime', 'flask'],
     'physics-map': ['vangogh', 'robot', 'star'],
+    'mind-map': ['kandinsky', 'octopus', 'pencil'],
     'clip-forge': ['duchamp', 'fox', 'camera'],
     'code-forge': ['escher', 'cyclops', 'laptop', 'headphones'],
     'contract-forge': ['vaneyck', 'owl', 'scroll'],

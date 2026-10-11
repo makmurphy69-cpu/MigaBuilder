@@ -16,7 +16,7 @@ I18N.phrases({
   "Transition between images": { es: "Transición entre imágenes", ar: "الانتقال بين الصور", zh: "图片之间的转场", sw: "Mpito kati ya picha", sv: "Övergång mellan bilder" },
   "e.g. Believe in yourself": { es: "p. ej., Cree en ti", ar: "مثلًا: آمن بنفسك", zh: "例如：相信你自己", sw: "k.m. Jiamini", sv: "t.ex. Tro på dig själv" },
   "How to use Merge Forge": { es: "Cómo usar Merge Forge", ar: "كيفية استخدام Merge Forge", zh: "如何使用 Merge Forge", sw: "Jinsi ya kutumia Merge Forge", sv: "Så använder du Merge Forge" },
-  "Merge Forge — combine images, clips and music into one video": { es: "Merge Forge — combina imágenes, clips y música en un solo vídeo", ar: "Merge Forge — ادمج الصور والمقاطع والموسيقى في فيديو واحد", zh: "Merge Forge — 把图片、片段和音乐合成一个视频", sw: "Merge Forge — unganisha picha, klipu na muziki kuwa video moja", sv: "Merge Forge — kombinera bilder, klipp och musik till en video" }
+  "Combine images, clips and music into one video — Merge Forge | MigaBuilder": { es: "Combina imágenes, clips y música en un solo vídeo — Merge Forge | MigaBuilder", ar: "ادمج الصور والمقاطع والموسيقى في فيديو واحد — Merge Forge | MigaBuilder", zh: "把图片、片段和音乐合成一个视频 — Merge Forge | MigaBuilder", sw: "Unganisha picha, klipu na muziki kuwa video moja — Merge Forge | MigaBuilder", sv: "Kombinera bilder, klipp och musik till en video — Merge Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

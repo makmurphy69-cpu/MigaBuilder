@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mind maps, flowcharts and a whiteboard — Mind Map | MigaBuilder</title>
+<meta name="description" content="Free mind map maker, flowchart tool and online whiteboard: add ideas with one key, draw arrows and sticky notes, sketch freehand, turn an indented list or a topic (with AI) into a map, and download PNG, SVG or an outline. No signup — your map stays in your browser.">
+<link rel="canonical" href="https://migabuilder.com/mind-map.html">
+<meta property="og:image" content="https://videos.migabuilder.com/mind-map.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Mind Map — mind maps, flowcharts and a whiteboard | MigaBuilder">
+<meta property="og:description" content="Brainstorm with mind maps, flowcharts, sticky notes and freehand drawing. Free, no signup, and your map stays in your browser.">
+<meta property="og:url" content="https://migabuilder.com/mind-map.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<style>
+main{max-width:1400px}
+.hidden{display:none!important}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.bar .sep{width:1px;height:26px;background:rgba(22,32,43,.18);margin:0 4px}
+.bar button{padding:7px 11px;font-size:14px;min-height:36px}
+.tool.active{background:#0e2a47;color:#fff;border-color:#0e2a47}
+.swatches{display:flex;gap:4px}.swatches button{width:26px;height:26px;min-height:26px;padding:0;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px rgba(22,32,43,.3)}
+.swatches button.on{box-shadow:0 0 0 2px #0e2a47}
+.board-wrap{position:relative;border:1px solid rgba(22,32,43,.18);border-radius:8px;overflow:hidden;background:#fbfaf6}
+#board{display:block;width:100%;height:68vh;min-height:420px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;
+  background-image:radial-gradient(rgba(22,32,43,.16) 1px,transparent 1px);background-size:22px 22px}
+#board.pen{cursor:crosshair}#board.connect,#board.place{cursor:copy}#board.panning{cursor:grabbing}
+#board .node{cursor:pointer}#board .node.sel .shape{stroke:#e2a63b;stroke-width:3}
+#board .link{cursor:pointer}#board .link.sel path.line{stroke:#e2a63b}
+#board text{font-family:Arial,Helvetica,sans-serif;pointer-events:none}
+#editor{position:absolute;z-index:3;display:none;font:600 15px/1.25 Arial,Helvetica,sans-serif;text-align:center;resize:none;border:2px solid #e2a63b;border-radius:6px;padding:6px;background:#fff;color:#16202b;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.zoom{position:absolute;right:10px;bottom:10px;display:flex;gap:4px;z-index:2}.zoom button{min-height:32px;padding:4px 10px;background:#fff}
+.hint{font-size:13px;opacity:.75;margin:8px 0 0}
+.side{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:820px){.side{grid-template-columns:1fr}#board{height:62vh}.bar .sep{display:none}.bar button{padding:6px 8px;font-size:13px;min-height:34px}}
+textarea.outline{min-height:150px;font:14px/1.5 'IBM Plex Sans',sans-serif}
+kbd{font:12px monospace;padding:1px 5px;border:1px solid rgba(22,32,43,.3);border-radius:4px;background:#fff}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/mind-map.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I make a flowchart too?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Use the box, decision and start/end shapes and the arrow tool, or start from the flowchart template. Click an arrow twice to write Yes or No on it."}}, {"@type": "Question", "name": "Can I turn a list into a mind map?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Paste an indented list or bullet points under “Turn a list into a map”, and each indent becomes a branch. You can also download any map as an outline."}}, {"@type": "Question", "name": "Is Mind Map free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my maps uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Your map is saved only in this browser, and you can download it as a file. Only the optional “Make a map with AI” button sends your topic to an AI service."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Mind Map</span></nav>
+<header class="masthead"><div><h1>Mind Map</h1><p>Mind maps, flowcharts, sticky notes and a whiteboard to draw on — saved in your browser.</p></div></header>
+<main>
+<section class="panel">
+  <div class="bar" role="toolbar" aria-label="Tools">
+    <button class="secondary tool active" data-tool="select" title="Select, move and edit (drag the empty board to move around)">↖ Select</button>
+    <button class="secondary tool" data-tool="pen" title="Draw freehand">✏️ Pen</button>
+    <button class="secondary tool" data-tool="note" title="Click the board to add a sticky note">🗒 Note</button>
+    <button class="secondary tool" data-tool="box" title="Click the board to add a box">▭ Box</button>
+    <button class="secondary tool" data-tool="diamond" title="Click the board to add a decision">◇ Decision</button>
+    <button class="secondary tool" data-tool="oval" title="Click the board to add a start or end shape">⬭ Start/end</button>
+    <button class="secondary tool" data-tool="connect" title="Click one shape, then another, to join them with an arrow">➝ Arrow</button>
+    <span class="sep"></span>
+    <button class="secondary" id="addChild" title="Add an idea under the selected one (Tab)">＋ Child idea</button>
+    <button class="secondary" id="addSibling" title="Add an idea next to the selected one (Enter)">＋ Sibling</button>
+    <button class="secondary" id="editBtn" title="Edit the text (double-click or F2)">✎ Edit text</button>
+    <button class="secondary" id="delBtn" title="Delete the selection (Delete)">🗑 Delete</button>
+    <span class="sep"></span>
+    <span class="swatches" id="swatches" aria-label="Colour"></span>
+    <span class="sep"></span>
+    <button class="secondary" id="undo" title="Undo (Ctrl+Z)">↶ Undo</button>
+    <button class="secondary" id="redo" title="Redo (Ctrl+Y)">↷ Redo</button>
+    <button class="secondary" id="arrange" title="Tidy the mind map branches">✨ Arrange</button>
+  </div>
+  <div class="board-wrap" id="wrap">
+    <svg id="board" data-no-i18n xmlns="http://www.w3.org/2000/svg" role="application" aria-label="Mind map board">
+      <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#4a5a6a"/></marker></defs>
+      <g id="world"><g id="strokes"></g><g id="links"></g><g id="nodes"></g><path id="draft" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </svg>
+    <textarea id="editor" aria-label="Edit text"></textarea>
+    <div class="zoom"><button class="secondary" id="zoomOut" aria-label="Zoom out">−</button><button class="secondary" id="fit" title="Show the whole map">Fit</button><button class="secondary" id="zoomIn" aria-label="Zoom in">+</button></div>
+  </div>
+  <p class="hint">Select an idea, then press <kbd>Tab</kbd> for a child idea or <kbd>Enter</kbd> for a sibling, and just type. Double-click to edit. Drag the empty board to move around, and use the mouse wheel or two fingers to zoom.</p>
+  <div class="actions" style="margin-top:12px">
+    <select id="template" aria-label="Start from"><option value="">Start a new board…</option><option value="mindmap">Mind map</option><option value="flowchart">Flowchart</option><option value="whiteboard">Empty whiteboard</option></select>
+    <button class="primary" id="png">Download PNG</button>
+    <button class="secondary" id="svg">Download SVG</button>
+    <button class="secondary" id="outlineBtn">Download outline (.txt)</button>
+    <button class="secondary" id="save">Save map file</button>
+    <label class="secondary button-like" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;padding:8px 12px;border:1px solid rgba(22,32,43,.25);border-radius:6px">Open map file<input id="open" type="file" accept=".json,application/json" hidden></label>
+  </div>
+  <div class="status" id="status"></div>
+</section>
+
+<div class="side">
+<section class="panel">
+  <h2>Turn a list into a map</h2>
+  <p class="notice">Paste notes as an indented list or bullet points. The first line becomes the centre, and every indent becomes a branch.</p>
+  <textarea class="outline" id="outlineIn" placeholder="Holiday plan
+  Travel
+    Train tickets
+    Passports
+  Packing
+    Clothes
+    Charger
+  Budget"></textarea>
+  <div class="actions"><button class="primary" id="fromOutline">Make the map</button></div>
+</section>
+<section class="panel">
+  <h2>Make a map with AI</h2>
+  <p class="notice">Type a topic, and the AI suggests the main branches and ideas. Only the topic is sent to the AI.</p>
+  <div class="field"><label for="topic">Topic</label><input id="topic" placeholder="Starting a small bakery"></div>
+  <div class="actions"><button class="primary" id="aiMake">Make a map with AI</button></div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">AI settings</summary><div id="aiBox"></div></details>
+</section>
+</div>
+</main>
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Mind Map</h2>
+  <p>Mind Map is a free mind map maker, flowchart tool and whiteboard in your browser: add ideas with one key, join shapes with arrows, add sticky notes, draw freehand, and download the result as a picture or an outline.</p>
+  <h3>How to use Mind Map</h3>
+  <ol><li>Start from a mind map, a flowchart or an empty whiteboard, or paste a list of notes.</li><li>Select an idea and press Tab or Enter to add more, or pick a shape and click the board.</li><li>Press “Download PNG” or “Download SVG”, or save the map file to keep working on it later.</li></ol>
+  <h3>Can I make a flowchart too?</h3>
+  <p>Yes. Use the box, decision and start/end shapes and the arrow tool, or start from the flowchart template. Click an arrow twice to write Yes or No on it.</p>
+  <h3>Can I turn a list into a mind map?</h3>
+  <p>Yes. Paste an indented list or bullet points under “Turn a list into a map”, and each indent becomes a branch. You can also download any map as an outline.</p>
+  <h3>Is Mind Map free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my maps uploaded?</h3>
+  <p>No. Your map is saved only in this browser, and you can download it as a file. Only the optional “Make a map with AI” button sends your topic to an AI service.</p>
+  <p class="miga-about-rel">Related tools: <a href="flashcard-forge.html">Flashcard Forge</a> · <a href="slide-forge.html">Slide Forge</a> · <a href="paint-forge.html">Paint Forge</a></p>
+</section>
+
+<footer>Mind Map · part of MigaBuilder · your maps stay in your browser</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id),NS='http://www.w3.org/2000/svg',board=$('board'),world=$('world'),gNodes=$('nodes'),gLinks=$('links'),gStrokes=$('strokes'),draft=$('draft'),editor=$('editor');
+const COLORS=['#2f6f9f','#d8604a','#4e9e73','#8a5cc2','#e2a63b','#1d8a8a','#c2477f','#16202b'],NOTE='#fff1a8',FONT='600 15px Arial,Helvetica,sans-serif',STORE='miga-mind-map';
+const meas=document.createElement('canvas').getContext('2d');meas.font=FONT;
+let S={nodes:[],links:[],strokes:[]},view={x:0,y:0,z:1},tool='select',sel=null,color=COLORS[0],undo=[],redo=[],seq=1;
+const note=t=>{const s=$('status');s.textContent=t;s.classList.add('show')};
+const uid=p=>p+(seq++).toString(36)+Math.random().toString(36).slice(2,5);
+const node=id=>S.nodes.find(n=>n.id===id);
+const kids=id=>S.links.filter(l=>l.tree&&l.from===id).map(l=>node(l.to)).filter(Boolean);
+const parentOf=id=>{const l=S.links.find(l=>l.tree&&l.to===id);return l?node(l.from):null};
+const rootOf=n=>{let p;while((p=parentOf(n.id)))n=p;return n};
+
+// ---------- history and saving ----------
+const ser=()=>JSON.stringify(S,(k,v)=>k[0]==='_'?undefined:v);
+function snap(){undo.push(ser());if(undo.length>100)undo.shift();redo=[]}
+function persist(){try{localStorage.setItem(STORE,JSON.stringify({S:JSON.parse(ser()),view}))}catch(e){}}
+function restore(json){S=JSON.parse(json);sel=null;render()}
+$('undo').onclick=()=>{if(!undo.length)return;redo.push(ser());restore(undo.pop())};
+$('redo').onclick=()=>{if(!redo.length)return;undo.push(ser());restore(redo.pop())};
+
+// ---------- sizes, text wrapping and shapes ----------
+function wrap(text){const out=[];for(const para of String(text||'').split('\n')){let row='';for(const w of para.split(/\s+/)){const t=row?row+' '+w:w;if(meas.measureText(t).width>200&&row){out.push(row);row=w}else row=t}out.push(row)}return out}
+function size(n){const lines=wrap(n.text),tw=Math.max(30,...lines.map(l=>meas.measureText(l).width)),th=lines.length*19;let w=tw+28,h=th+18;
+  if(n.shape==='root'){w+=24;h+=16}if(n.shape==='diamond'){w=w*1.5;h=h*1.7}if(n.shape==='oval'){w=w*1.2+10;h+=8}if(n.shape==='note'){w=Math.max(w,150);h=Math.max(h,110)}
+  return{lines,w,h}}
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+function shapeFor(n,g,w,h){const fill=n.shape==='root'?n.color:n.shape==='note'?NOTE:'#fff',stroke=n.shape==='note'?'#d8c25a':n.color,a={class:'shape',fill,stroke,'stroke-width':n.shape==='root'?0:2};
+  if(n.shape==='diamond')return el('path',Object.assign(a,{d:`M0 ${-h/2}L${w/2} 0L0 ${h/2}L${-w/2} 0Z`}),g);
+  if(n.shape==='oval')return el('ellipse',Object.assign(a,{rx:w/2,ry:h/2}),g);
+  if(n.shape==='note'){el('rect',{x:-w/2+4,y:-h/2+5,width:w,height:h,fill:'rgba(0,0,0,.12)',rx:3},g);return el('rect',Object.assign(a,{x:-w/2,y:-h/2,width:w,height:h,rx:3}),g)}
+  return el('rect',Object.assign(a,{x:-w/2,y:-h/2,width:w,height:h,rx:n.shape==='box'?4:Math.min(16,h/2)}),g)}
+// Where the line from the centre of n towards (tx,ty) leaves its shape.
+function edge(n,tx,ty){const dx=tx-n.x,dy=ty-n.y;if(!dx&&!dy)return[n.x,n.y];const{w,h}=n._s,hw=w/2,hh=h/2;let t;
+  if(n.shape==='diamond')t=1/(Math.abs(dx)/hw+Math.abs(dy)/hh);else if(n.shape==='oval')t=1/Math.sqrt(dx*dx/(hw*hw)+dy*dy/(hh*hh));else t=Math.min(dx?hw/Math.abs(dx):Infinity,dy?hh/Math.abs(dy):Infinity);
+  return[n.x+dx*t,n.y+dy*t]}
+
+// ---------- drawing ----------
+function render(){
+  gNodes.textContent='';gLinks.textContent='';gStrokes.textContent='';
+  for(const n of S.nodes)n._s=size(n);
+  for(const s of S.strokes){const p=el('path',{d:pathOf(s.points),fill:'none',stroke:s.color,'stroke-width':s.width,'stroke-linecap':'round','stroke-linejoin':'round',class:'stroke'+(sel&&sel.id===s.id?' sel':'')},gStrokes);p.dataset.id=s.id;if(sel&&sel.id===s.id)p.setAttribute('stroke-dasharray','8 5')}
+  for(const l of S.links){const a=node(l.from),b=node(l.to);if(!a||!b)continue;const g=el('g',{class:'link'+(sel&&sel.id===l.id?' sel':'')},gLinks);g.dataset.id=l.id;let d,mx,my;
+    if(l.tree){const dir=b.x>=a.x?1:-1,x1=a.x+dir*a._s.w/2,y1=a.y,x2=b.x-dir*b._s.w/2,y2=b.y,c=(x2-x1)/2;d=`M${x1} ${y1}C${x1+c} ${y1} ${x2-c} ${y2} ${x2} ${y2}`;mx=(x1+x2)/2;my=(y1+y2)/2;
+      el('path',{class:'line',d,fill:'none',stroke:b.color,'stroke-width':a.shape==='root'?4:2.5,'stroke-linecap':'round'},g)}
+    else{const[x1,y1]=edge(a,b.x,b.y),[x2,y2]=edge(b,a.x,a.y);d=`M${x1} ${y1}L${x2} ${y2}`;mx=(x1+x2)/2;my=(y1+y2)/2;el('path',{class:'line',d,fill:'none',stroke:'#4a5a6a','stroke-width':2,'marker-end':'url(#arrow)'},g)}
+    el('path',{d,fill:'none',stroke:'transparent','stroke-width':14},g);
+    if(l.label){const w=meas.measureText(l.label).width+12;el('rect',{x:mx-w/2,y:my-11,width:w,height:22,rx:4,fill:'#fbfaf6'},g);const t=el('text',{x:mx,y:my+5,'text-anchor':'middle','font-size':14,'font-weight':600,fill:'#16202b'},g);t.textContent=l.label}
+    l._mid=[mx,my]}
+  for(const n of S.nodes){const{lines,w,h}=n._s,g=el('g',{class:'node'+(sel&&sel.id===n.id?' sel':''),transform:`translate(${n.x} ${n.y})`},gNodes);g.dataset.id=n.id;shapeFor(n,g,w,h);
+    const t=el('text',{'text-anchor':'middle','font-size':n.shape==='root'?17:15,'font-weight':n.shape==='root'?700:600,fill:n.shape==='root'?'#fff':'#16202b'},g);
+    lines.forEach((ln,i)=>{const s=el('tspan',{x:0,y:(i-(lines.length-1)/2)*19+5},t);s.textContent=ln})}
+  applyView();persist();updateButtons()}
+function pathOf(pts){if(!pts.length)return'';let d=`M${pts[0][0]} ${pts[0][1]}`;if(pts.length===1)return d+'l0.1 0';for(let i=1;i<pts.length-1;i++){const[x,y]=pts[i],[nx,ny]=pts[i+1];d+=`Q${x} ${y} ${(x+nx)/2} ${(y+ny)/2}`}const l=pts[pts.length-1];return d+`L${l[0]} ${l[1]}`}
+function applyView(){world.setAttribute('transform',`translate(${view.x} ${view.y}) scale(${view.z})`)}
+function updateButtons(){const isNode=sel&&sel.type==='node';$('addChild').disabled=!isNode;$('addSibling').disabled=!isNode;$('editBtn').disabled=!(isNode||(sel&&sel.type==='link'));$('delBtn').disabled=!sel;$('undo').disabled=!undo.length;$('redo').disabled=!redo.length}
+
+// ---------- view: pan, zoom, fit ----------
+function toWorld(cx,cy){const r=board.getBoundingClientRect();return[(cx-r.left-view.x)/view.z,(cy-r.top-view.y)/view.z]}
+function zoomAt(f,cx,cy){const r=board.getBoundingClientRect();cx=cx==null?r.left+r.width/2:cx;cy=cy==null?r.top+r.height/2:cy;const z=Math.min(3,Math.max(.2,view.z*f)),k=z/view.z;view.x=cx-r.left-(cx-r.left-view.x)*k;view.y=cy-r.top-(cy-r.top-view.y)*k;view.z=z;applyView();placeEditor();persist()}
+function bounds(){let x0=Infinity,y0=Infinity,x1=-Infinity,y1=-Infinity;for(const n of S.nodes){const{w,h}=n._s||size(n);x0=Math.min(x0,n.x-w/2);y0=Math.min(y0,n.y-h/2);x1=Math.max(x1,n.x+w/2);y1=Math.max(y1,n.y+h/2)}
+  for(const s of S.strokes)for(const[x,y]of s.points){x0=Math.min(x0,x-s.width);y0=Math.min(y0,y-s.width);x1=Math.max(x1,x+s.width);y1=Math.max(y1,y+s.width)}return x0===Infinity?null:{x0,y0,x1,y1}}
+function fit(){const b=bounds(),r=board.getBoundingClientRect();if(!b){view={x:r.width/2,y:r.height/2,z:1};return applyView()}const pad=40,z=Math.min(1.4,(r.width-2*pad)/(b.x1-b.x0||1),(r.height-2*pad)/(b.y1-b.y0||1));view.z=Math.max(.2,z);view.x=r.width/2-(b.x0+b.x1)/2*view.z;view.y=r.height/2-(b.y0+b.y1)/2*view.z;applyView();persist()}
+$('zoomIn').onclick=()=>zoomAt(1.2);$('zoomOut').onclick=()=>zoomAt(1/1.2);$('fit').onclick=fit;
+board.addEventListener('wheel',e=>{e.preventDefault();zoomAt(Math.exp(-e.deltaY*(e.ctrlKey?.01:.0015)),e.clientX,e.clientY)},{passive:false});
+
+// ---------- tools ----------
+document.querySelectorAll('.tool').forEach(b=>b.onclick=()=>setTool(b.dataset.tool));
+function setTool(t){tool=t;connectFrom=null;document.querySelectorAll('.tool').forEach(b=>b.classList.toggle('active',b.dataset.tool===t));board.className.baseVal=t==='pen'?'pen':t==='connect'?'connect':['note','box','diamond','oval'].includes(t)?'place':'';
+  if(t==='connect')note('Click a shape, then the shape the arrow should point to.');else if(t==='pen')note('Draw on the board. Choose a colour above. Select a drawing and press Delete to remove it.')}
+COLORS.forEach((c,i)=>{const b=document.createElement('button');b.type='button';b.style.background=c;b.dataset.c=c;b.title='Colour';b.setAttribute('aria-label','Colour '+(i+1));b.onclick=()=>{color=c;document.querySelectorAll('#swatches button').forEach(x=>x.classList.toggle('on',x===b));
+  if(sel&&sel.type==='node'){snap();const n=node(sel.id);const paint=m=>{m.color=c;kids(m.id).forEach(paint)};if(n.shape==='root'||n.shape==='topic')paint(n);else n.color=c;render()}else if(sel&&sel.type==='stroke'){snap();S.strokes.find(s=>s.id===sel.id).color=c;render()}};$('swatches').appendChild(b)});
+$('swatches').firstChild.classList.add('on');
+
+// ---------- adding ideas ----------
+function addNode(props){const n=Object.assign({id:uid('n'),x:0,y:0,text:'',shape:'topic',color},props);S.nodes.push(n);return n}
+function addChild(p,text){const r=rootOf(p);let side=p.side||1;if(p.shape==='root'){const k=kids(p.id),right=k.filter(c=>c.side!==-1).length,left=k.length-right;side=right>left?-1:1}
+  const k=kids(p.id).length,col=p.shape==='root'?COLORS[1+k%(COLORS.length-2)]:p.color;
+  const c=addNode({text:text||'',x:p.x+side*(p.shape==='topic'||p.shape==='root'?200:220),y:p.y+(r.shape==='root'?0:k*90),side,color:col,shape:p.shape==='note'?'note':p.shape==='root'||p.shape==='topic'?'topic':p.shape});S.links.push({id:uid('l'),from:p.id,to:c.id,tree:true});if(r.shape==='root')arrange(r);return c}
+function newChild(){if(!sel||sel.type!=='node')return;snap();const c=addChild(node(sel.id),'');select({type:'node',id:c.id});render();edit(true)}
+function newSibling(){if(!sel||sel.type!=='node')return;const p=parentOf(sel.id);if(!p)return newChild();snap();const me=node(sel.id),c=addChild(p,'');c.side=me.side;const order=S.links.filter(l=>l.tree&&l.from===p.id);const li=S.links.findIndex(l=>l.to===c.id),mine=S.links.findIndex(l=>l.tree&&l.to===me.id);const[link]=S.links.splice(li,1);S.links.splice(mine+1,0,link);arrange(rootOf(p));select({type:'node',id:c.id});render();edit(true)}
+$('addChild').onclick=newChild;$('addSibling').onclick=newSibling;
+
+// Tidy mind-map layout: each branch of the centre goes left or right, ideas stack below each other.
+function arrange(root){if(!root||root.shape!=='root')return;for(const n of S.nodes)n._s=size(n);const GAP=14,COL=56;
+  const height=n=>{const k=kids(n.id);n._h=k.length?Math.max(n._s.h,k.reduce((s,c)=>s+height(c),0)+GAP*(k.length-1)):n._s.h;return n._h};
+  const place=(n,dir)=>{const k=kids(n.id);let y=n.y-(k.reduce((s,c)=>s+c._h,0)+GAP*(k.length-1))/2;for(const c of k){c.side=dir;c.x=n.x+dir*(n._s.w/2+COL+c._s.w/2);c.y=y+c._h/2;y+=c._h+GAP;place(c,dir)}};
+  for(const dir of[1,-1]){const k=kids(root.id).filter(c=>(c.side||1)===dir);k.forEach(height);let y=root.y-(k.reduce((s,c)=>s+c._h,0)+GAP*2*(k.length-1))/2;for(const c of k){c.side=dir;c.x=root.x+dir*(root._s.w/2+COL*1.4+c._s.w/2);c.y=y+c._h/2;y+=c._h+GAP*2;place(c,dir)}}}
+$('arrange').onclick=()=>{const roots=S.nodes.filter(n=>n.shape==='root');if(!roots.length)return note('Arrange tidies mind maps. Start one from “Start a new board…” or paste a list.');snap();roots.forEach(arrange);render();fit()};
+
+// ---------- selecting, editing, deleting ----------
+function select(s){sel=s;if(s&&s.type==='node'){const n=node(s.id);if(n&&n.color&&n.shape!=='note'){color=n.color;document.querySelectorAll('#swatches button').forEach(b=>b.classList.toggle('on',b.dataset.c===color))}}render()}
+let editing=null;
+function edit(fresh){if(!sel)return;if(sel.type==='node'){editing={type:'node',id:sel.id,fresh:fresh===true};editor.value=node(sel.id).text}else if(sel.type==='link'){editing={type:'link',id:sel.id};editor.value=S.links.find(l=>l.id===sel.id).label||''}else return;
+  editor.style.display='block';placeEditor();editor.focus();editor.select()}
+function placeEditor(){if(!editing)return;let x,y,w,h;if(editing.type==='node'){const n=node(editing.id);if(!n)return;x=n.x;y=n.y;w=Math.max(n._s.w,160);h=Math.max(n._s.h,44)}else{const l=S.links.find(l=>l.id===editing.id);if(!l||!l._mid)return;[x,y]=l._mid;w=120;h=40}
+  editor.style.width=w*view.z+'px';editor.style.height=h*view.z+'px';editor.style.fontSize=15*view.z+'px';editor.style.left=view.x+x*view.z-w*view.z/2+'px';editor.style.top=view.y+y*view.z-h*view.z/2+'px'}
+function finishEdit(keep){if(!editing)return;const e=editing;editing=null;editor.style.display='none';const v=editor.value.trim();if(e.fresh&&(!keep||!v)&&undo.length){restore(undo.pop());board.focus({preventScroll:true});return}if(keep){if(!e.fresh)snap();if(e.type==='node'){const n=node(e.id);if(n){n.text=v;const r=rootOf(n);if(r.shape==='root'&&(n.shape==='topic'||n.shape==='root'))arrange(r)}}else{const l=S.links.find(l=>l.id===e.id);if(l)l.label=v}if(!e.fresh&&undo[undo.length-1]===ser())undo.pop();render()}board.focus({preventScroll:true})}
+editor.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();finishEdit(true)}else if(e.key==='Escape'){e.preventDefault();finishEdit(false)}else if(e.key==='Tab'){e.preventDefault();finishEdit(true);newChild()}});
+editor.addEventListener('blur',()=>finishEdit(true));
+$('editBtn').onclick=edit;
+function del(){if(!sel)return;snap();if(sel.type==='node'){const gone=new Set();const walk=id=>{gone.add(id);kids(id).forEach(c=>walk(c.id))};const n=node(sel.id);if(n.shape==='root')gone.add(n.id);else walk(n.id);S.nodes=S.nodes.filter(n=>!gone.has(n.id));S.links=S.links.filter(l=>!gone.has(l.from)&&!gone.has(l.to))}
+  else if(sel.type==='link')S.links=S.links.filter(l=>l.id!==sel.id);else S.strokes=S.strokes.filter(s=>s.id!==sel.id);sel=null;render()}
+$('delBtn').onclick=del;
+board.tabIndex=0;
+document.addEventListener('keydown',e=>{if(editing||/^(input|textarea|select)$/i.test(e.target.tagName))return;const mod=e.ctrlKey||e.metaKey;
+  if(mod&&e.key.toLowerCase()==='z'){e.preventDefault();(e.shiftKey?$('redo'):$('undo')).click()}else if(mod&&e.key.toLowerCase()==='y'){e.preventDefault();$('redo').click()}
+  else if(!sel)return;else if(e.key==='Tab'){e.preventDefault();newChild()}else if(e.key==='Enter'){e.preventDefault();newSibling()}else if(e.key==='F2'){e.preventDefault();edit()}else if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();del()}else if(e.key==='Escape')select(null)
+  else if(sel.type==='node'&&e.key.length===1&&!mod){edit();editor.value=e.key;e.preventDefault()}});
+
+// ---------- pointer: select, drag, pan, pinch, draw, place, connect ----------
+const ptrs=new Map();let drag=null,connectFrom=null,lastTap={t:0,id:null};
+function hit(e){const t=e.target.closest&&e.target.closest('.node,.link,.stroke');return t?{type:t.classList.contains('node')?'node':t.classList.contains('link')?'link':'stroke',id:t.dataset.id||t.parentNode.dataset.id}:null}
+board.addEventListener('pointerdown',e=>{if(editing)finishEdit(true);
+  // Focus the board ourselves: the browser's own focus change after this event would close a text box opened here.
+  e.preventDefault();board.focus({preventScroll:true});board.setPointerCapture(e.pointerId);ptrs.set(e.pointerId,[e.clientX,e.clientY]);
+  if(ptrs.size===2){const[a,b]=[...ptrs.values()];drag={pinch:true,d:Math.hypot(a[0]-b[0],a[1]-b[1]),cx:(a[0]+b[0])/2,cy:(a[1]+b[1])/2};draft.setAttribute('d','');return}
+  const[wx,wy]=toWorld(e.clientX,e.clientY),h=hit(e);
+  if(tool==='pen'&&!h){drag={pen:[[wx,wy]]};draft.setAttribute('stroke',color);draft.setAttribute('stroke-width',4);draft.setAttribute('d',pathOf(drag.pen));return}
+  if(['note','box','diamond','oval'].includes(tool)){snap();const n=addNode({x:wx,y:wy,shape:tool,text:'',color:tool==='note'?'#16202b':color});setTool('select');select({type:'node',id:n.id});edit(true);return}
+  if(tool==='connect'){if(!h||h.type!=='node')return;if(!connectFrom){connectFrom=h.id;select(h);note('Now click the shape the arrow should point to.');return}
+    if(h.id!==connectFrom){snap();const l={id:uid('l'),from:connectFrom,to:h.id};S.links.push(l);connectFrom=null;select({type:'link',id:l.id});note('Arrow added. Click it twice to write on it, for example Yes or No.')}return}
+  if(h){const now=Date.now(),again=lastTap.id===h.id&&now-lastTap.t<400;lastTap={t:now,id:h.id};if(sel&&sel.id===h.id&&(again||h.type==='link'&&e.detail>=2))return edit();select(h);
+    if(h.type==='node'){const n=node(h.id),move=[n];if(n.shape==='topic'||n.shape==='root'){const walk=m=>kids(m.id).forEach(c=>{move.push(c);walk(c)});walk(n)}drag={nodes:move.map(m=>({n:m,x:m.x,y:m.y})),sx:wx,sy:wy,moved:false}}return}
+  select(null);drag={pan:true,sx:e.clientX,sy:e.clientY,vx:view.x,vy:view.y};board.classList.add('panning')});
+board.addEventListener('pointermove',e=>{if(!ptrs.has(e.pointerId))return;ptrs.set(e.pointerId,[e.clientX,e.clientY]);if(!drag)return;
+  if(drag.pinch&&ptrs.size===2){const[a,b]=[...ptrs.values()],d=Math.hypot(a[0]-b[0],a[1]-b[1]),cx=(a[0]+b[0])/2,cy=(a[1]+b[1])/2;view.x+=cx-drag.cx;view.y+=cy-drag.cy;drag.cx=cx;drag.cy=cy;zoomAt(d/drag.d,cx,cy);drag.d=d;return}
+  const[wx,wy]=toWorld(e.clientX,e.clientY);
+  if(drag.pen){drag.pen.push([Math.round(wx*10)/10,Math.round(wy*10)/10]);draft.setAttribute('d',pathOf(drag.pen))}
+  else if(drag.nodes){if(!drag.moved){snap();drag.moved=true}for(const m of drag.nodes){m.n.x=m.x+wx-drag.sx;m.n.y=m.y+wy-drag.sy}render()}
+  else if(drag.pan){view.x=drag.vx+e.clientX-drag.sx;view.y=drag.vy+e.clientY-drag.sy;applyView()}});
+function up(e){ptrs.delete(e.pointerId);if(!drag)return;if(drag.pinch){if(!ptrs.size)drag=null;return}
+  if(drag.pen&&drag.pen.length){snap();S.strokes.push({id:uid('s'),color,width:4,points:drag.pen});draft.setAttribute('d','');render()}
+  if(drag.nodes&&drag.moved){const r=rootOf(drag.nodes[0].n);if(r.shape==='root'&&r!==drag.nodes[0].n){const n=drag.nodes[0].n;n.side=n.x>=r.x?1:-1;const walk=m=>kids(m.id).forEach(c=>{c.side=n.side;walk(c)});walk(n)}render()}
+  if(drag.pan){board.classList.remove('panning');persist()}drag=null}
+board.addEventListener('pointerup',up);board.addEventListener('pointercancel',up);
+board.addEventListener('dblclick',e=>{if(editing)return;const h=hit(e);if(h&&h.type!=='stroke'){select(h);edit()}else if(!h&&tool==='select'){const[wx,wy]=toWorld(e.clientX,e.clientY);snap();const n=addNode({x:wx,y:wy,shape:'box',text:''});select({type:'node',id:n.id});edit(true)}});
+
+// ---------- templates, outlines and AI ----------
+function fromTree(t){S={nodes:[],links:[],strokes:[]};const r=addNode({text:t.title||'Main idea',shape:'root',color:COLORS[0]});
+  const walk=(p,list)=>(list||[]).forEach(c=>{const n=addChild(p,c.title);walk(n,c.children)});walk(r,t.children);arrange(r);sel={type:'node',id:r.id};render();fit()}
+function parseOutline(text){const rows=text.split('\n').map(l=>l.replace(/\t/g,'    ')).filter(l=>l.trim()).map(l=>({d:l.match(/^\s*/)[0].length,t:l.trim().replace(/^([-*+•]|\d+[.)])\s+/,'').replace(/^#+\s*/,'')}));
+  if(!rows.length)return null;const top={title:rows[0].t,children:[]},stack=[{d:-1,n:top}];
+  if(rows.slice(1).every(r=>r.d===rows[0].d))rows.slice(1).forEach(r=>r.d=rows[0].d+1);
+  for(const r of rows.slice(1)){while(stack.length>1&&stack[stack.length-1].d>=r.d)stack.pop();const n={title:r.t,children:[]};stack[stack.length-1].n.children.push(n);stack.push({d:r.d,n})}return top}
+function toOutline(){const roots=S.nodes.filter(n=>!parentOf(n.id)&&(kids(n.id).length||n.shape==='root'));const lines=[];const walk=(n,d)=>{lines.push('  '.repeat(d)+(d?'- ':'')+(n.text||'').replace(/\n/g,' '));kids(n.id).forEach(c=>walk(c,d+1))};roots.forEach(r=>walk(r,0));
+  S.nodes.filter(n=>!parentOf(n.id)&&!kids(n.id).length&&n.shape!=='root'&&n.text).forEach(n=>lines.push((n.shape==='note'?'Note: ':'')+n.text.replace(/\n/g,' ')));
+  S.links.filter(l=>!l.tree).forEach(l=>{const a=node(l.from),b=node(l.to);if(a&&b)lines.push(`${a.text} → ${b.text}${l.label?' ('+l.label+')':''}`)});return lines.join('\n')}
+$('fromOutline').onclick=()=>{const t=parseOutline($('outlineIn').value);if(!t)return note('Paste a list first: one idea per line, with an indent for each level.');snap();fromTree(t);note('Map made from your list. Select an idea and press Tab to add more.');board.scrollIntoView({behavior:'smooth',block:'center'})};
+// Template words in the visitor's language (the board itself is not run through the page translator).
+const TPL={en:['My big idea','Why','The problem','Who it helps','How','First step','Tools I need','When','This week','This month','Questions','What could go wrong?','Start','Get the order','In stock?','Pack and send','Order more','End','Yes','No','Then'],
+  es:['Mi gran idea','Por qué','El problema','A quién ayuda','Cómo','Primer paso','Lo que necesito','Cuándo','Esta semana','Este mes','Preguntas','¿Qué podría salir mal?','Inicio','Recibir el pedido','¿Hay existencias?','Empaquetar y enviar','Pedir más','Fin','Sí','No','Después'],
+  ar:['فكرتي الكبيرة','لماذا','المشكلة','من تساعد','كيف','الخطوة الأولى','الأدوات التي أحتاجها','متى','هذا الأسبوع','هذا الشهر','أسئلة','ما الذي قد يسوء؟','البداية','استلام الطلب','متوفر؟','التغليف والإرسال','طلب المزيد','النهاية','نعم','لا','ثم'],
+  zh:['我的好点子','为什么','问题','能帮助谁','怎么做','第一步','需要的工具','什么时候','本周','本月','问题清单','可能出什么错？','开始','接收订单','有库存吗？','打包发货','补货','结束','是','否','然后'],
+  sw:['Wazo langu kubwa','Kwa nini','Tatizo','Linamsaidia nani','Vipi','Hatua ya kwanza','Zana ninazohitaji','Lini','Wiki hii','Mwezi huu','Maswali','Nini kinaweza kwenda vibaya?','Anza','Pokea oda','Ipo stoo?','Funga na tuma','Agiza zaidi','Mwisho','Ndiyo','Hapana','Kisha'],
+  sv:['Min stora idé','Varför','Problemet','Vem det hjälper','Hur','Första steget','Verktyg jag behöver','När','Den här veckan','Den här månaden','Frågor','Vad kan gå fel?','Start','Ta emot beställningen','Finns i lager?','Packa och skicka','Beställ mer','Slut','Ja','Nej','Sedan']};
+function words(){const l=window.I18N&&I18N.getLang?I18N.getLang():'en';return TPL[l]||TPL.en}
+function template(kind){snap();const W=words();if(kind==='mindmap')return fromTree({title:W[0],children:[{title:W[1],children:[{title:W[2]},{title:W[3]}]},{title:W[4],children:[{title:W[5]},{title:W[6]}]},{title:W[7],children:[{title:W[8]},{title:W[9]}]},{title:W[10],children:[{title:W[11]}]}]});
+  S={nodes:[],links:[],strokes:[]};if(kind==='flowchart'){const a=addNode({text:W[12],shape:'oval',x:0,y:-210,color:'#4e9e73'}),b=addNode({text:W[13],shape:'box',x:0,y:-110,color:'#2f6f9f'}),c=addNode({text:W[14],shape:'diamond',x:0,y:20,color:'#e2a63b'}),d=addNode({text:W[15],shape:'box',x:-180,y:150,color:'#2f6f9f'}),f=addNode({text:W[16],shape:'box',x:180,y:150,color:'#d8604a'}),g=addNode({text:W[17],shape:'oval',x:-180,y:260,color:'#4e9e73'});
+    [[a,b],[b,c],[c,d,W[18]],[c,f,W[19]],[d,g],[f,d,W[20]]].forEach(([x,y,label])=>S.links.push({id:uid('l'),from:x.id,to:y.id,label}));setTool('select')}else setTool('pen');sel=null;render();fit()}
+$('template').onchange=()=>{const v=$('template').value;$('template').value='';if(!v)return;if((S.nodes.length||S.strokes.length)&&!confirm('Start a new board? Your current board is replaced (you can press Undo).'))return;template(v);note(v==='whiteboard'?'An empty whiteboard. Draw with the pen, or add notes and shapes.':'Template ready. Double-click any text to change it.')};
+MigaAI.mount($('aiBox'));
+const SYS='You make mind maps. Reply with JSON only: {"title":"short centre topic","children":[{"title":"branch (1-4 words)","children":[{"title":"idea (1-6 words)"}]}]}. Give 4 to 6 branches with 2 to 4 ideas each. Use the language the user writes in.';
+$('aiMake').onclick=async()=>{const t=$('topic').value.trim();if(!t)return note('Type a topic first.');const b=$('aiMake');b.disabled=true;note('The AI is making your map…');
+  try{const j=MigaAI.json(await MigaAI.ask(SYS,'Topic: '+t));if(!j||!Array.isArray(j.children))throw new Error('The AI did not send a map. Try a shorter topic.');snap();fromTree(j);note('Map made. Change anything: double-click to edit, Tab to add, Delete to remove.')}
+  catch(e){note('The AI could not make a map: '+(e.message||e)+'. You can also paste a list instead.')}finally{b.disabled=false}};
+
+// ---------- files: save, open, PNG, SVG, outline ----------
+function download(name,blob){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+const fname=ext=>{const r=S.nodes.find(n=>n.shape==='root')||S.nodes[0];return((r&&r.text)||'mind-map').toLowerCase().replace(/[^a-z0-9À-ɏ]+/gi,'-').replace(/^-|-$/g,'').slice(0,40)+'.'+ext};
+function exportSvg(){const b=bounds();if(!b)return null;const pad=30,w=Math.ceil(b.x1-b.x0+2*pad),h=Math.ceil(b.y1-b.y0+2*pad),saved=sel;sel=null;render();
+  const c=board.cloneNode(true);c.removeAttribute('class');c.removeAttribute('style');c.removeAttribute('tabindex');c.removeAttribute('role');c.setAttribute('width',w);c.setAttribute('height',h);c.setAttribute('viewBox',`${b.x0-pad} ${b.y0-pad} ${w} ${h}`);
+  c.querySelector('#world').removeAttribute('transform');c.querySelector('#draft').remove();c.insertBefore(el('rect',{x:b.x0-pad,y:b.y0-pad,width:w,height:h,fill:'#ffffff'}),c.querySelector('#world'));
+  c.querySelectorAll('text').forEach(t=>t.setAttribute('font-family','Arial, Helvetica, sans-serif'));sel=saved;render();return{svg:'<?xml version="1.0" encoding="UTF-8"?>\n'+new XMLSerializer().serializeToString(c),w,h}}
+$('svg').onclick=()=>{const r=exportSvg();if(!r)return note('The board is empty.');download(fname('svg'),new Blob([r.svg],{type:'image/svg+xml'}));note('SVG downloaded — it stays sharp at any size.')};
+$('png').onclick=()=>{const r=exportSvg();if(!r)return note('The board is empty.');const img=new Image(),scale=Math.min(2,8000/Math.max(r.w,r.h));img.onload=()=>{const c=document.createElement('canvas');c.width=Math.round(r.w*scale);c.height=Math.round(r.h*scale);const g=c.getContext('2d');g.drawImage(img,0,0,c.width,c.height);c.toBlob(b=>{download(fname('png'),b);note('PNG downloaded.')},'image/png')};img.onerror=()=>note('The picture could not be made in this browser. Try Download SVG.');img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(r.svg)};
+$('outlineBtn').onclick=()=>{const t=toOutline();if(!t)return note('The board has no text yet.');download(fname('txt'),new Blob([t+'\n'],{type:'text/plain'}));note('Outline downloaded. Paste it into a document, or back into “Turn a list into a map”.')};
+$('save').onclick=()=>{download(fname('json'),new Blob([JSON.stringify({app:'migabuilder-mind-map',version:1,board:JSON.parse(ser())},null,1)],{type:'application/json'}));note('Map file saved. Open it here later to keep working.')};
+$('open').onchange=async()=>{const f=$('open').files[0];$('open').value='';if(!f)return;try{const j=JSON.parse(await f.text()),b=j.board||j;if(!Array.isArray(b.nodes))throw 0;snap();S={nodes:b.nodes,links:b.links||[],strokes:b.strokes||[]};sel=null;render();fit();note('Map opened.')}catch(e){note('This file is not a Mind Map file.')}};
+
+// ---------- start ----------
+try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved&&saved.S&&Array.isArray(saved.S.nodes)&&(saved.S.nodes.length||saved.S.strokes.length)){S=saved.S;view=saved.view||view;render();note('Your last board is back. It is saved in this browser as you work.')}else{undo=[];template('mindmap');undo=[]}}catch(e){template('mindmap');undo=[]}
+updateButtons();
+window.addEventListener('resize',()=>placeEditor());
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

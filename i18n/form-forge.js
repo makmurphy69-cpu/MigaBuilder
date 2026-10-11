@@ -24,7 +24,7 @@ I18N.phrases({
   "Customer feedback": { es: "Opinión de clientes", ar: "آراء العملاء", zh: "客户反馈", sw: "Maoni ya wateja", sv: "Kundfeedback" },
   "Tell us about your experience": { es: "Cuéntanos tu experiencia", ar: "أخبرنا عن تجربتك", zh: "告诉我们你的体验", sw: "Tuambie kuhusu uzoefu wako", sv: "Berätta om din upplevelse" },
   "How to use Form Forge": { es: "Cómo usar Form Forge", ar: "كيفية استخدام Form Forge", zh: "如何使用 Form Forge", sw: "Jinsi ya kutumia Form Forge", sv: "Så använder du Form Forge" },
-  "Form Forge — private form and survey generator": { es: "Form Forge — generador privado de formularios y encuestas", ar: "Form Forge — منشئ نماذج واستبيانات خاص", zh: "Form Forge — 私密的表单和问卷生成器", sw: "Form Forge — kitengeneza fomu na tafiti cha faragha", sv: "Form Forge — privat formulär- och enkätgenerator" }
+  "Private form and survey generator — Form Forge | MigaBuilder": { es: "Generador privado de formularios y encuestas — Form Forge | MigaBuilder", ar: "منشئ نماذج واستبيانات خاص — Form Forge | MigaBuilder", zh: "私密的表单和问卷生成器 — Form Forge | MigaBuilder", sw: "Kitengeneza fomu na tafiti cha faragha — Form Forge | MigaBuilder", sv: "Privat formulär- och enkätgenerator — Form Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

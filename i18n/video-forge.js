@@ -20,7 +20,7 @@ I18N.phrases({
   "Made with Video Forge from my own drawings.": { es: "Hecho con Video Forge a partir de mis propios dibujos.", ar: "صُنع باستخدام Video Forge من رسوماتي الخاصة.", zh: "用 Video Forge 根据我自己的画作制作。", sw: "Imetengenezwa kwa Video Forge kutokana na michoro yangu mwenyewe.", sv: "Gjord med Video Forge av mina egna teckningar." },
   "drawing, animation, kids art": { es: "dibujo, animación, arte infantil", ar: "رسم، رسوم متحركة، فن الأطفال", zh: "绘画, 动画, 儿童艺术", sw: "mchoro, uhuishaji, sanaa ya watoto", sv: "teckning, animation, barnkonst" },
   "How to use Video Forge": { es: "Cómo usar Video Forge", ar: "كيفية استخدام Video Forge", zh: "如何使用 Video Forge", sw: "Jinsi ya kutumia Video Forge", sv: "Så använder du Video Forge" },
-  "Video Forge — turn your drawings into a video, ready for YouTube": { es: "Video Forge — convierte tus dibujos en un vídeo listo para YouTube", ar: "Video Forge — حوّل رسوماتك إلى فيديو جاهز لـ YouTube", zh: "Video Forge — 把你的画作变成视频，可直接发布到 YouTube", sw: "Video Forge — geuza michoro yako kuwa video, tayari kwa YouTube", sv: "Video Forge — gör dina teckningar till en video, redo för YouTube" }
+  "Turn your drawings into a video, ready for YouTube — Video Forge | MigaBuilder": { es: "Convierte tus dibujos en un vídeo listo para YouTube — Video Forge | MigaBuilder", ar: "حوّل رسوماتك إلى فيديو جاهز لـ YouTube — Video Forge | MigaBuilder", zh: "把你的画作变成视频，可直接发布到 YouTube — Video Forge | MigaBuilder", sw: "Geuza michoro yako kuwa video, tayari kwa YouTube — Video Forge | MigaBuilder", sv: "Gör dina teckningar till en video, redo för YouTube — Video Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({

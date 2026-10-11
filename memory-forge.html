@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Memory Forge — memory training with levels, number and symbol cards | MigaBuilder</title>
+<title>Memory training with levels, number and symbol cards — Memory Forge | MigaBuilder</title>
 <meta name="description" content="Free memory training in your browser: number and symbol memory cards with 30 levels, timed or untimed, your own card counts and study times, plus the chimp test, pairs, dual n-back, Corsi sequences, word lists, a memory techniques guide with a 4-week plan, memory palace and Major system trainers, and progress stats. No signup.">
 <link rel="canonical" href="https://migabuilder.com/memory-forge.html">
 <meta property="og:image" content="https://videos.migabuilder.com/memory-forge.jpg"><meta name="twitter:card" content="summary_large_image">
@@ -25,7 +25,7 @@
 .levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
 .lvl{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:8px 4px;cursor:pointer;text-align:center;font-weight:700;color:var(--ink)}
 .lvl small{display:block;font-size:11px;color:#b7831d;letter-spacing:1px;min-height:14px}
-.lvl.sel{outline:3px solid var(--amber)}.lvl.locked{opacity:.4;cursor:not-allowed}.lvl.done{background:#eef8f1;border-color:#4E9E73}
+.lvl.sel{outline:3px solid var(--amber)}.lvl.done{background:#eef8f1;border-color:#4E9E73}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
 .switch{display:inline-flex;border:1px solid rgba(22,32,43,.25);border-radius:999px;overflow:hidden;background:#fff}
 .switch button{border:0;background:none;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--ink)}.switch button.on{background:var(--navy);color:#fff}
@@ -110,7 +110,7 @@ table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px so
     <div class="switch" id="timeSwitch"><button data-timed="1" class="on" id="timedOn">⏱ With time</button><button data-timed="0" id="timedOff">🧘 Without time</button></div>
     <span class="muted" id="timeHint"></span></div>
   <div id="levelsBox">
-    <p class="muted">Pass a level (90% or more) to unlock the next. Stars: ★ 70% · ★★ 90% · ★★★ perfect. Timed and untimed progress are kept separately.</p>
+    <p class="muted">Pick any level — every level is open, so you can carry on where you left off on another device. Stars show how you did: ★ 70% · ★★ 90% (passed) · ★★★ perfect. Timed and untimed stars are kept separately.</p>
     <div class="levels" id="levels"></div>
   </div>
   <div id="customBox" class="hidden">
@@ -289,11 +289,10 @@ function currentCfg(){
 
 // ---------- UI: modes, tabs, levels, custom ----------
 function renderModes(){$('modes').innerHTML=Object.entries(MODES).map(([k,m])=>'<button class="mode'+(k===S.mode?' active':'')+'" data-mode="'+k+'" id="mode-'+k+'"><span class="ico">'+m.ico+'</span><b>'+m.name+'</b><small>'+m.d+'</small></button>').join('');
-  $('modes').querySelectorAll('.mode').forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;S.level=Math.min(S.level,unlocked());persist();renderAll()})}
-function unlocked(){const st=store.stars[starKey()]||{};let u=1;for(let L=1;L<=MAXL;L++){if((st[L]||0)>=2)u=L+1}return Math.min(MAXL,u)}
-function renderLevels(){const st=store.stars[starKey()]||{},u=unlocked();if(S.level>u)S.level=u;
-  $('levels').innerHTML=Array.from({length:MAXL},(_,i)=>{const L=i+1,s=st[L]||0;return '<button class="lvl'+(L>u?' locked':'')+(s>=2?' done':'')+(L===S.level?' sel':'')+'" data-l="'+L+'" id="lvl-'+L+'"'+(L>u?' disabled title="Pass level '+(L-1)+' first"':'')+'>'+L+'<small>'+'★'.repeat(s)+'</small></button>'}).join('');
-  $('levels').querySelectorAll('.lvl:not(.locked)').forEach(b=>b.onclick=()=>{S.level=+b.dataset.l;persist();renderLevels();renderSummary()})}
+  $('modes').querySelectorAll('.mode').forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;persist();renderAll()})}
+function renderLevels(){const st=store.stars[starKey()]||{};if(!(S.level>=1&&S.level<=MAXL))S.level=1;
+  $('levels').innerHTML=Array.from({length:MAXL},(_,i)=>{const L=i+1,s=st[L]||0;return '<button class="lvl'+(s>=2?' done':'')+(L===S.level?' sel':'')+'" data-l="'+L+'" id="lvl-'+L+'"'+'>'+L+'<small>'+'★'.repeat(s)+'</small></button>'}).join('');
+  $('levels').querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{S.level=+b.dataset.l;persist();renderLevels();renderSummary()})}
 function f(id,label,html,hint){return '<div class="field"><label for="'+id+'">'+label+'</label>'+html+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>'}
 function num(id,min,max,step){return '<input type="number" id="c_'+id+'" data-k="'+id+'" min="'+min+'" max="'+max+'" step="'+(step||1)+'" value="'+S[id]+'">'}
 function sel(id,opts){return '<select id="c_'+id+'" data-k="'+id+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(String(S[id])===String(o[0])?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'}

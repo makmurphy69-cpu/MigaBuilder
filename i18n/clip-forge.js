@@ -159,7 +159,7 @@ I18N.phrases({
   "Made with Clip Forge.": { es: "Hecho con Clip Forge.", ar: "صُنع باستخدام Clip Forge.", zh: "用 Clip Forge 制作。", sw: "Imetengenezwa kwa Clip Forge.", sv: "Gjord med Clip Forge." },
   "tutorial, how-to, clip": { es: "tutorial, cómo se hace, clip", ar: "شرح، طريقة الاستخدام، مقطع", zh: "教程, 使用方法, 片段", sw: "mafunzo, jinsi ya, klipu", sv: "handledning, instruktioner, klipp" },
   "How to use Clip Forge": { es: "Cómo usar Clip Forge", ar: "كيفية استخدام Clip Forge", zh: "如何使用 Clip Forge", sw: "Jinsi ya kutumia Clip Forge", sv: "Så använder du Clip Forge" },
-  "Clip Forge — trim, caption, and translate your videos": { es: "Clip Forge — recorta, subtitula y traduce tus vídeos", ar: "Clip Forge — قصّ مقاطع الفيديو وأضف لها تعليقات وترجمها", zh: "Clip Forge — 剪辑、加字幕并翻译你的视频", sw: "Clip Forge — kata, weka maelezo, na utafsiri video zako", sv: "Clip Forge — trimma, texta och översätt dina videor" }
+  "Trim, caption, and translate your videos — Clip Forge | MigaBuilder": { es: "Recorta, subtitula y traduce tus vídeos — Clip Forge | MigaBuilder", ar: "قصّ مقاطع الفيديو وأضف لها تعليقات وترجمها — Clip Forge | MigaBuilder", zh: "剪辑、加字幕并翻译你的视频 — Clip Forge | MigaBuilder", sw: "Kata, weka maelezo, na utafsiri video zako — Clip Forge | MigaBuilder", sv: "Trimma, texta och översätt dina videor — Clip Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({
