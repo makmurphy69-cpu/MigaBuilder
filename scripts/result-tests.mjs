@@ -488,11 +488,14 @@ test('website-builder: AI site has a shared design and downloads as a tidy ZIP',
   await page.fill('#brief', 'Sunrise Bakery is a neighbourhood bakery in Nairobi.');
   await page.click('#draftBtn');
   await page.waitForFunction(() => /READY/.test(document.querySelector('#titleBlockRight').textContent), null, { timeout: 60000 });
+  await page.fill('#zipSiteUrl', 'sunrisebakery.co.ke');
   const out = await downloadOf(page, () => page.click('#downloadZipBtn'));
   expect(magic(out.buf, 0x50, 0x4b, 0x03, 0x04), 'download is not a ZIP');
   const files = await page.evaluate(async b64 => { const zip = await JSZip.loadAsync(b64, { base64: true }); const o = {}; for (const n of Object.keys(zip.files)) o[n] = await zip.file(n).async('string'); return o; }, out.buf.toString('base64'));
   ['index.html', 'menu.html', 'contact.html', 'style.css'].forEach(n => expect(files[n], n + ' missing from the ZIP (has ' + Object.keys(files).join(', ') + ')'));
   expect(/--primary:#b4530f/.test(files['style.css']), 'shared style.css does not carry the planned colours');
+  expect(/Sitemap: https:\/\/sunrisebakery\.co\.ke\/sitemap\.xml/.test(files['robots.txt'] || ''), 'robots.txt missing or does not point at the sitemap');
+  expect(/<loc>https:\/\/sunrisebakery\.co\.ke\/<\/loc>/.test(files['sitemap.xml'] || '') && /<loc>https:\/\/sunrisebakery\.co\.ke\/menu\.html<\/loc>/.test(files['sitemap.xml']), 'sitemap.xml does not list the pages');
   ['index.html', 'menu.html'].forEach(n => {
     expect(/<link rel="stylesheet" href="style.css">/.test(files[n]), n + ' does not link style.css');
     expect(/class="site-header"/.test(files[n]) && /class="site-footer"/.test(files[n]) && /<main>/.test(files[n]), n + ' lacks the shared header, footer or main');

@@ -997,6 +997,7 @@
     <div class="field" style="margin-top:14px;">
       <label style="color: var(--paper);">Instant hosting, no domain needed (optional)</label>
       <button type="button" class="draft-btn" id="downloadZipBtn" disabled>⬇ Download all pages as .zip</button>
+      <label style="color: var(--paper); font-size: 13px; margin-top: 8px; display: grid; gap: 4px;">Web address once it is live (optional — adds a <code>sitemap.xml</code> for Google)<input type="url" id="zipSiteUrl" placeholder="https://www.example.com" autocomplete="url"></label>
       <label class="check-row" style="color: var(--paper); font-size: 13px; margin-top: 8px;"><input type="checkbox" id="zipSplitAssets" checked> <span>Tidy project: put styles in <code>style.css</code> and pictures in an <code>images/</code> folder</span></label>
       <p class="hint" style="color: rgba(237,234,224,0.55);">Unzip it, then drag the folder onto <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> or upload it in the <a href="https://developers.cloudflare.com/pages/get-started/direct-upload/" target="_blank" rel="noopener">Cloudflare Pages dashboard</a> — both give you a live public link in seconds, free, no domain purchase or GitHub account required.</p>
     </div>
@@ -2389,6 +2390,7 @@
     try {
       const zip = new JSZip();
       const pages = exportPages();
+      addSearchFiles(zip, pages);
       if (document.getElementById('zipSplitAssets').checked) addTidyProject(zip, pages);
       else pages.forEach(page => zip.file(page.slug + '.html', page.html));
       const blob = await zip.generateAsync({ type: 'blob' });
@@ -2686,6 +2688,28 @@
   pageTabsEl.addEventListener('click', flushEdits, true);
   [refineBtn, downloadBtn, downloadZipBtn, copyEmbedBtn, publishBtn, viewSourceBtn].forEach(b => b.addEventListener('click', flushEdits, true));
 
+  // ---------- robots.txt + sitemap.xml so search engines find every page ----------
+  function zipSiteBase() {
+    const typed = (document.getElementById('zipSiteUrl').value || '').trim();
+    if (typed) {
+      try {
+        const u = new URL(/^https?:\/\//i.test(typed) ? typed : 'https://' + typed);
+        if (/^https?:$/.test(u.protocol) && u.hostname.includes('.')) return u.origin + u.pathname.replace(/[^/]*$/, '');
+      } catch (e) {}
+    }
+    return generatedPages.length ? publishedUrl({ slug: 'index' }) : '';
+  }
+  function addSearchFiles(zip, pages) {
+    const base = zipSiteBase();
+    zip.file('robots.txt', 'User-agent: *\nAllow: /\n' + (base ? '\nSitemap: ' + base + 'sitemap.xml\n' : ''));
+    if (!base) return;
+    const xml = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const today = new Date().toISOString().slice(0, 10);
+    zip.file('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      pages.map(p => '  <url><loc>' + xml(base + (p.slug === 'index' ? '' : p.slug + '.html')) + '</loc><lastmod>' + today + '</lastmod></url>\n').join('') +
+      '</urlset>\n');
+  }
+
   // ---------- tidy .zip: shared style.css + images/ folder instead of one giant file per page ----------
   function addTidyProject(zip, pages) {
     const assetNames = new Map(); // data URI -> path
@@ -2733,6 +2757,7 @@
       '- Pages: ' + pages.map(p => p.slug + '.html').join(', ') + '\n' +
       (shared.length ? '- style.css holds the styles every page shares.\n' : '') +
       (assetNames.size ? '- Pictures and media are in the images/ and media/ folders.\n' : '') +
+      (zip.file('sitemap.xml') ? '- sitemap.xml and robots.txt help Google find every page. Submit sitemap.xml in Google Search Console once the site is live.\n' : '- robots.txt lets search engines in. Type your web address next to the download button to get a sitemap.xml too.\n') +
       '- To publish, drag this whole folder onto Netlify Drop (app.netlify.com/drop) or upload it to any web host.\n');
   }
 

@@ -554,6 +554,13 @@
   .tool-group.open .tool-group-list,.tool-group.search-open .tool-group-list { display:grid; }
   #tools [hidden] { display:none !important; }
   .search-empty { margin:12px 0; color:rgba(237,234,224,.7); }
+  .search-partial { margin:12px 0; color:rgba(237,234,224,.7); }
+  .task-recipes { display:grid; gap:12px; margin:12px 0 16px; }
+  .task-recipe { padding:14px 16px; border:1px solid var(--line-cyan-dim); border-radius:10px; background:rgba(8,24,38,.72); }
+  .task-recipe h4 { margin:0 0 8px; font-size:15px; color:var(--paper); }
+  .task-recipe h4 span { color:var(--line-cyan); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-inline-end:8px; }
+  .task-recipe ol { margin:0; padding-inline-start:22px; display:grid; gap:6px; color:rgba(237,234,224,.75); font-size:14px; }
+  .task-recipe a { color:var(--line-cyan); font-weight:700; }
   .tool-card { display:flex; align-items:flex-start; gap:10px; padding:10px; margin:0 -5px 4px; color:var(--paper); text-decoration:none; border-radius:4px; transition:background .15s,transform .15s; }
   .tool-card:hover { background:rgba(111,209,224,.09); transform:translateX(2px); }
   .tool-icon { font-size:19px; line-height:1.2; flex:none; }
@@ -715,6 +722,8 @@
 
 <section class="tool-hub" id="tools" aria-label="All tools">
   <div class="hub-bar"><p class="privacy-legend" data-i18n="privLegend">🔒 Runs in your browser · 🌐 AI steps send text to an AI service · 🔗 Some features go online</p><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
+  <div class="task-recipes" id="taskRecipes" hidden aria-live="polite"></div>
+  <p class="search-partial" id="searchPartial" hidden data-i18n="searchPartial">No tool does all of that on its own. These match part of your search:</p>
   <p class="search-empty" id="searchEmpty" hidden data-i18n="searchEmpty">No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
   <div class="tool-groups" id="toolGroups">
     <div class="tool-group" data-category="create" data-icon="✨"><h3 data-i18n="catCreate">Create</h3>
@@ -746,7 +755,7 @@
       <a class="tool-card" href="invoice-forge.html"><span class="tool-icon">🧾</span><span><strong>Invoice Forge</strong><small data-i18n="d:invoice-forge">Make quotes and printable invoices.</small></span></a>
       <a class="tool-card" href="contract-forge.html"><span class="tool-icon">📜</span><span><strong>Contract Forge</strong><small data-i18n="d:contract-forge">Draft straightforward agreements.</small></span></a>
       <a class="tool-card" href="policy-forge.html" data-keywords="privacy policy generator gdpr cookie policy cookie banner consent ccpa terms of use terms and conditions disclaimer affiliate disclosure impressum accessibility statement website legal compliance dpa google analytics meta pixel"><span class="tool-icon">⚖️</span><span><strong>Policy Forge</strong><small data-i18n="d:policy-forge">Scan your site and get a privacy policy, cookie policy, consent banner, terms and disclosures.</small></span></a>
-      <a class="tool-card" href="cv-forge.html" data-privacy="ai"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small data-i18n="d:cv-forge">Create a professional CV and download it as PDF.</small></span></a>
+      <a class="tool-card" href="cv-forge.html" data-privacy="ai" data-keywords="resume job application apply applying cover letter career"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small data-i18n="d:cv-forge">Create a professional CV and download it as PDF.</small></span></a>
       <a class="tool-card" href="name-forge.html"><span class="tool-icon">✨</span><span><strong>Name Forge</strong><small data-i18n="d:name-forge">Find business names and domains.</small></span></a>
       <a class="tool-card" href="post-forge.html" data-privacy="online"><span class="tool-icon">📣</span><span><strong>Post Forge</strong><small data-i18n="d:post-forge">Prepare and publish social posts.</small></span></a>
       <a class="tool-card" href="repurpose-forge.html"><span class="tool-icon">♻️</span><span><strong>Repurpose Forge</strong><small data-i18n="d:repurpose-forge">Turn one idea into a complete publishing pack.</small></span></a>
@@ -756,7 +765,7 @@
       <a class="tool-card" href="document-forge.html"><span class="tool-icon">📄</span><span><strong>Document Forge</strong><small data-i18n="d:document-forge">Convert documents, images and PDFs privately.</small></span></a>
       <a class="tool-card" href="pdf-forge.html" data-keywords="remove pdf metadata author hidden data clean pdf"><span class="tool-icon">📕</span><span><strong>PDF Forge</strong><small data-i18n="d:pdf-forge">Merge, split, number, watermark and create PDFs.</small></span></a>
       <a class="tool-card" href="pdf-edit-forge.html"><span class="tool-icon">✍️</span><span><strong>Sign Documents</strong><small data-i18n="d:pdf-edit-forge">Sign PDFs, Word files and photos — draw, type or upload your signature.</small></span></a>
-      <a class="tool-card" href="pdf-compress.html"><span class="tool-icon">🗜️</span><span><strong>Compress PDF</strong><small data-i18n="d:pdf-compress">Shrink PDFs for email and upload limits.</small></span></a>
+      <a class="tool-card" href="pdf-compress.html" data-keywords="shrink reduce smaller pdf size email upload limit"><span class="tool-icon">🗜️</span><span><strong>Compress PDF</strong><small data-i18n="d:pdf-compress">Shrink PDFs for email and upload limits.</small></span></a>
       <a class="tool-card" href="ocr-forge.html"><span class="tool-icon">🔎</span><span><strong>OCR Forge</strong><small data-i18n="d:ocr-forge">Extract editable text from images privately.</small></span></a>
       <a class="tool-card" href="grammar-forge.html"><span class="tool-icon">✓</span><span><strong>Grammar Forge</strong><small data-i18n="d:grammar-forge">Check writing privately in six languages with actionable suggestions.</small></span></a>
       <a class="tool-card" href="text-compare.html" data-keywords="text compare diff checker difference compare documents versions changes contract json diff compare json code"><span class="tool-icon">⚖️</span><span><strong>Text Compare</strong><small data-i18n="d:text-compare">See exactly what changed between two versions of a text.</small></span></a>
@@ -782,7 +791,7 @@
     </div>
     <div class="tool-group" data-category="utilities" data-icon="🛠️"><h3 data-i18n="catUtilities">Design &amp; utilities</h3>
       <a class="tool-card" href="paint-forge.html"><span class="tool-icon">🖌️</span><span><strong>Paint Forge</strong><small data-i18n="d:paint-forge">Edit images with layers in the browser.</small></span></a>
-      <a class="tool-card" href="file-forge.html"><span class="tool-icon">🖼️</span><span><strong>Image Forge</strong><small data-i18n="d:file-forge">Batch-convert, resize, compress and clean image metadata.</small></span></a>
+      <a class="tool-card" href="file-forge.html" data-keywords="remove exif gps location metadata photo privacy clean image resize compress shrink smaller jpg png webp heic convert"><span class="tool-icon">🖼️</span><span><strong>Image Forge</strong><small data-i18n="d:file-forge">Batch-convert, resize, compress and clean image metadata.</small></span></a>
       <a class="tool-card" href="vector-forge.html" data-keywords="vector svg image to svg png to svg jpg to svg vectorize vectorizer trace bitmap potrace logo icon scalable convert"><span class="tool-icon">✒️</span><span><strong>Vector Forge</strong><small data-i18n="d:vector-forge">Turn a PNG or JPG logo, icon or drawing into a sharp SVG vector.</small></span></a>
       <a class="tool-card" href="image-studio.html"><span class="tool-icon">🪄</span><span><strong>Image Studio</strong><small data-i18n="d:image-studio">Remove backgrounds with AI, make collages, memes and thumbnails.</small></span></a>
       <a class="tool-card" href="picture-forge.html" data-privacy="ai" data-keywords="ai image generator text to image words picture art photo illustration Gemini Nano Banana"><span class="tool-icon">🌄</span><span><strong>Picture Forge</strong><small data-i18n="d:picture-forge">Turn a written description into an original AI picture.</small></span></a>
@@ -862,11 +871,19 @@
   const active='all';
   function apply(){
     const q=(search.value||'').trim().toLowerCase();
-    const words=q.split(/\s+/).filter(Boolean);let total=0;
+    const words=contentWords(q);let total=0;
     best=null;
-    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK?matchScore(c,words):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
+    renderRecipes(words);
+    // A sentence like "shrink this pdf and hide my details" rarely fits one tool: when no tool
+    // matches every word, show the tools that match the most words instead of nothing.
+    const allCards=[...document.querySelectorAll('#toolGroups .tool-card')];
+    let partial=0;
+    if(words.length>1&&!allCards.some(c=>matchScore(c,words)>0)){partial=Math.max(0,...allCards.map(c=>matchedCount(c,words)))}
+    document.getElementById('searchPartial').hidden=!partial;
+    const scoreOf=c=>partial?(matchedCount(c,words)===partial?partialScore(c,words):0):matchScore(c,words);
+    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK?scoreOf(c):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
     if(best)best.card.classList.add('best-match');
-    document.getElementById('searchEmpty').hidden=total>0;
+    document.getElementById('searchEmpty').hidden=total>0||!document.getElementById('taskRecipes').hidden;
   }
   // Fuzzy search: exact words score highest, then everyday synonyms ("site" → website,
   // "resume" → CV), then prefixes, then small typos ("vidoe", "invocie").
@@ -887,6 +904,73 @@
     return 0;
   }
   function matchScore(c,words){if(!words.length)return 1;const t=tokensOf(c);let sum=0;for(const w of words){const s=wordScore(w,t);if(!s)return 0;sum+=s}return sum}
+  function matchedCount(c,words){const t=tokensOf(c);return words.filter(w=>wordScore(w,t)>0).length}
+  function partialScore(c,words){const t=tokensOf(c);return words.reduce((sum,w)=>sum+wordScore(w,t),0)}
+  // Filler words are dropped so whole sentences work ("I need to make a CV for a job").
+  const STOP=new Set('i im i\'m me my mine we our us you your a an the this that these those it its to of for from in on at by with without and or but into onto so some any all is are be am was can could would should will want wanted need needs please how do does get got just like help make create one two few my own'.split(' '));
+  function contentWords(q){const all=q.split(/\s+/).filter(Boolean);const kept=all.filter(w=>!STOP.has(w.replace(/[^\p{L}\p{N}'+#]/gu,'')));return kept.length?kept:all}
+  // Tasks that need several tools in a row. A recipe shows when every "need" group has a word in
+  // the search; a step with "when" only shows if one of those words is in the search too.
+  const PRIVATE=['private','privacy','personal','metadata','hidden','author','clean','anonymous','anonymise','anonymize','details','info','information','identity','gps','location','exif','hide'];
+  const SHRINK=['shrink','compress','smaller','reduce','size','email','e-mail','big','large','upload'];
+  const RECIPES=[
+    {id:'pdfSafe',title:'Share a PDF safely',need:[['pdf','pdfs'],PRIVATE],steps:[
+      {href:'pdf-compress.html',name:'Compress PDF',note:'make it small enough to email or upload',when:SHRINK},
+      {href:'pdf-forge.html#cleanPanel',name:'PDF Forge',note:'“Remove hidden data” deletes the author, program and dates stored inside'},
+      {href:'pdf-edit-forge.html',name:'Sign Documents',note:'sign it before you send it',when:['sign','signature','signed']}]},
+    {id:'photoSafe',title:'Share photos without hidden location data',need:[['photo','photos','picture','pictures','image','images','jpg','jpeg','png','heic','pic','pics'],PRIVATE],steps:[
+      {href:'file-forge.html',name:'Image Forge',note:'saves a copy without camera, GPS location and date data — and can resize and compress at the same time'},
+      {href:'image-studio.html',name:'Image Studio',note:'remove or replace the background so the room behind you is not shown',when:['background','room','behind']}]},
+    {id:'signSend',title:'Sign a document and send it',need:[['sign','signature','signed'],['pdf','document','contract','word','docx','form','agreement','letter']],steps:[
+      {href:'pdf-edit-forge.html',name:'Sign Documents',note:'draw, type or upload your signature and place it'},
+      {href:'pdf-compress.html',name:'Compress PDF',note:'shrink it for email',when:SHRINK},
+      {href:'pdf-forge.html',name:'PDF Forge',note:'merge it with other pages',when:['merge','combine','join','add','pages']}]},
+    {id:'scanPdf',title:'Turn paper or photos into a PDF',need:[['scan','scanned','paper','photographed','photo','photos','picture','pictures','image','images','jpg','png'],['pdf','pdfs']],steps:[
+      {href:'pdf-forge.html',name:'PDF Forge',note:'“Images to PDF” puts each photo on its own page'},
+      {href:'ocr-forge.html',name:'OCR Forge',note:'copy the text out so you can edit it',when:['text','edit','editable','copy','word','type','typed','searchable']},
+      {href:'pdf-compress.html',name:'Compress PDF',note:'shrink it for email',when:SHRINK}]},
+    {id:'business',title:'Start a small business',need:[['business','company','startup','start-up','shop','store','brand','side-hustle','freelance','freelancer']],steps:[
+      {href:'name-forge.html',name:'Name Forge',note:'find a name and check which domains are free'},
+      {href:'logo-forge.html',name:'Logo Forge',note:'logo, favicon and brand colours'},
+      {href:'website-builder.html',name:'Website Builder',note:'a complete site you download and own'},
+      {href:'policy-forge.html',name:'Policy Forge',note:'privacy policy, cookie banner and terms'},
+      {href:'invoice-forge.html',name:'Invoice Forge',note:'quotes and invoices for your first customers'}]},
+    {id:'website',title:'Get a website live',need:[['website','site','homepage','webpage','landing']],steps:[
+      {href:'logo-forge.html',name:'Logo Forge',note:'a logo and favicon to use on it',when:['logo','brand','favicon','icon']},
+      {href:'website-builder.html',name:'Website Builder',note:'describe it and download every page, with a sitemap for Google'},
+      {href:'policy-forge.html',name:'Policy Forge',note:'privacy policy and cookie banner',when:['policy','privacy','cookie','cookies','gdpr','terms','legal']},
+      {href:'site-checkup.html',name:'Website Checkup',note:'check it for SEO and accessibility problems',when:['seo','google','check','accessibility','fast','rank','ranking']}]},
+    {id:'job',title:'Apply for a job',need:[['job','jobs','apply','application','applying','interview','hiring','hired','career','vacancy']],steps:[
+      {href:'cv-forge.html',name:'CV Forge',note:'a professional CV as a PDF'},
+      {href:'grammar-forge.html',name:'Grammar Forge',note:'check your cover letter'},
+      {href:'pattern-lab.html',name:'Work Pattern Test',note:'practise the aptitude tests employers use'},
+      {href:'reasoning-test.html',name:'Reasoning Test',note:'more practice with worked answers',when:['test','tests','aptitude','assessment','reasoning','logic']}]},
+    {id:'aiSafe',title:'Ask an AI about your code or logs safely',need:[['log','logs','code','error','errors','stack','trace','bug','bugs','config','env'],['chatgpt','ai','claude','gemini','copilot','paste','share','secret','secrets','key','keys','password','passwords','token','tokens','safe','safely','private']],steps:[
+      {href:'redact-forge.html',name:'Redact Forge',note:'hide keys, passwords and personal data first'},
+      {href:'bug-scanner.html',name:'Bug Scanner',note:'or let it find and explain the bug for you',when:['bug','bugs','error','errors','fix','debug','broken']}]},
+    {id:'social',title:'Make a video for social media',need:[['video','videos','clip','clips','reel','reels','short','shorts'],['social','tiktok','youtube','instagram','facebook','linkedin','caption','captions','subtitle','subtitles','post','publish']],steps:[
+      {href:'clip-forge.html',name:'Clip Forge',note:'trim it and add captions'},
+      {href:'media-convert.html',name:'Media Convert',note:'compress it under the upload limit',when:SHRINK},
+      {href:'post-forge.html',name:'Post Forge',note:'write the post and publish it'}]},
+    {id:'tutorial',title:'Record a tutorial or demo',need:[['tutorial','tutorials','demo','screencast','walkthrough','explainer','how-to','lesson']],steps:[
+      {href:'record-forge.html',name:'Record Forge',note:'record your screen while you talk'},
+      {href:'voice-forge.html',name:'Voice Forge',note:'or write a script and get a natural voice-over',when:['voice','voiceover','voice-over','narration','narrate','script']},
+      {href:'clip-forge.html',name:'Clip Forge',note:'trim it and add captions'}]},
+    {id:'teacher',title:'Run a class or test',need:[['teacher','teach','teaching','class','classroom','students','pupils','school','lesson']],steps:[
+      {href:'flashcard-forge.html',name:'Flashcard Forge',note:'flashcards and games for revision'},
+      {href:'form-forge.html',name:'Form Forge',note:'a quiz or survey students fill in'},
+      {href:'exam-checker.html',name:'Exam Checker',note:'print answer sheets and mark them from photos',when:['exam','exams','test','tests','mark','marking','grade','grading','quiz']}]}
+  ];
+  function hasWord(words,list){return words.some(w=>{w=w.replace(/[^\p{L}\p{N}'+#-]/gu,'');return w&&list.some(k=>w===k||w.length>=4&&k.startsWith(w)||k.length>=4&&w.startsWith(k)&&w.length-k.length<=2)})}
+  function renderRecipes(words){
+    const box=document.getElementById('taskRecipes');
+    const t=(k,d)=>window.I18N?I18N.t(k,d):d;
+    // A recipe that would list only one tool adds nothing over the matching card below.
+    const found=words.length?RECIPES.filter(r=>r.need.every(list=>hasWord(words,list))).map(r=>({r,steps:r.steps.filter(st=>!st.when||hasWord(words,st.when))})).filter(x=>x.steps.length>1).slice(0,2):[];
+    box.hidden=!found.length;
+    box.innerHTML=found.map(({r,steps})=>'<div class="task-recipe"><h4><span>'+esc(t('recipeLabel','Step by step'))+'</span>'+esc(t('recipe:'+r.id,r.title))+'</h4><ol>'+steps.map(st=>'<li><a href="'+st.href+'">'+esc(st.name)+'</a> — '+esc(t('recipe:'+r.id+':'+st.href.replace(/\.html.*/,''),st.note))+'</li>').join('')+'</ol></div>').join('');
+  }
+  function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
   let best=null;
   search.addEventListener('input',apply);
   search.addEventListener('keydown',e=>{if(e.key==='Enter'&&best){e.preventDefault();best.card.click()}else if(e.key==='Escape'){search.value='';apply()}});
