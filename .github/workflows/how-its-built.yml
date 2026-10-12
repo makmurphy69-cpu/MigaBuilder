@@ -1,0 +1,37 @@
+name: How it's built
+
+# Keeps the numbers and the "Recently shipped" list on how-its-built.html current:
+# every week this rebuilds how-its-built.json from the git history of main with
+# scripts/build-how-its-built.mjs, and commits it to main when something changed.
+on:
+  schedule:
+    - cron: '41 5 * * 1'   # Mondays 05:41 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: how-its-built
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Rebuild how-its-built.json
+        run: node scripts/build-how-its-built.mjs
+      - name: Commit when the numbers changed
+        run: |
+          if git diff --quiet -- how-its-built.json; then echo "Nothing changed"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add how-its-built.json
+          git commit -m "How it's built: automatic update $(date -u +%Y-%m-%d)"
+          git push origin HEAD:main

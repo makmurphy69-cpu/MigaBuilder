@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="/miga-palette.js" defer></script><script src="/usage-counter.js" defer></script><link rel="canonical" href="https://migabuilder.com/how-its-built.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How MigaBuilder Is Built: One Owner, Claude and Automatic Checks</title>
+<meta name="description" content="A setup guide to how MigaBuilder is made: one owner describes each tool, Claude writes the code and records the video, automatic checks test every page, and the owner merges. Copy the setup for your own site.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How MigaBuilder is built">
+<meta property="og:description" content="One owner, Claude as the builder, and checks that catch mistakes before visitors do. A setup guide you can copy.">
+<meta property="og:url" content="https://migabuilder.com/how-its-built.html">
+<meta name="twitter:card" content="summary">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css">
+<style>
+.panel a{color:#0B6474}
+.lead{font-size:17px;line-height:1.6;max-width:760px;margin:0}
+.stats{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin:0 0 18px}
+.stat{background:var(--deep);border:1px solid var(--line);padding:14px 12px;border-radius:4px}
+.stat b{display:block;font:700 28px 'Space Grotesk';color:var(--cyan);line-height:1.1}
+.stat span{font-size:12.5px;color:rgba(237,234,224,.82)}
+.stats-note{margin:-8px 0 18px;font-size:12.5px;color:rgba(237,234,224,.7)}
+.setup{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:step}
+.setup li{background:#fff;border:1px solid rgba(22,32,43,.14);padding:16px 16px 16px 58px;position:relative;counter-increment:step;line-height:1.5;font-size:14.5px}
+.setup li::before{content:counter(step);position:absolute;left:16px;top:15px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:var(--cyan);font:700 15px/30px 'Space Grotesk';text-align:center}
+.setup strong{display:block;font:600 16px 'Space Grotesk';margin-bottom:3px}
+.setup p{margin:0;color:rgba(22,32,43,.8)}
+.setup code,.panel code{background:rgba(14,42,71,.08);padding:1px 5px;border-radius:3px;font-size:13px}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);gap:0;margin:16px 0 4px;list-style:none;padding:0}
+.flow li{position:relative;padding:14px 12px 14px;background:#fff;border:1px solid rgba(22,32,43,.14);border-right:0;font-size:13.5px;line-height:1.45;color:rgba(22,32,43,.82)}
+.flow li:last-child{border-right:1px solid rgba(22,32,43,.14);background:rgba(78,158,115,.12)}
+.flow li span{display:block;font-size:22px;margin-bottom:4px}
+.flow li strong{display:block;font:600 15px 'Space Grotesk';color:var(--ink);margin-bottom:3px}
+.flow li small{display:block;margin-top:6px;font-size:11.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#0B6474}
+.flow li:not(:last-child)::after{content:"";position:absolute;right:-9px;top:50%;width:16px;height:16px;background:#fff;border-top:1px solid rgba(22,32,43,.14);border-right:1px solid rgba(22,32,43,.14);transform:translateY(-50%) rotate(45deg);z-index:1}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.rule{background:#fff;border:1px solid rgba(22,32,43,.14);border-top:3px solid var(--amber);padding:14px 16px;font-size:14px;line-height:1.5}
+.rule strong{display:block;font:600 15px 'Space Grotesk';margin-bottom:4px}
+.rule p{margin:0;color:rgba(22,32,43,.8)}
+.changes{list-style:none;margin:12px 0 0;padding:0}
+.changes li{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px dashed rgba(22,32,43,.2);font-size:14.5px;line-height:1.45}
+.changes time{font-size:12.5px;color:rgba(22,32,43,.65);font-variant-numeric:tabular-nums}
+.changes .links{font-size:12.5px;white-space:nowrap}
+.note{background:var(--deep);color:var(--paper);border:1px solid var(--line);border-left:4px solid var(--cyan);padding:22px 24px;border-radius:4px;margin-bottom:18px}
+.note h2{font:700 20px 'Space Grotesk';margin:0 0 4px;color:var(--paper)}
+.note .label{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.note p{line-height:1.65;margin:0 0 12px;max-width:760px;color:rgba(237,234,224,.9)}
+.note p:last-child{margin:0}
+.faq dt{font-weight:600;margin-top:14px}
+.faq dd{margin:4px 0 0;color:rgba(22,32,43,.8);line-height:1.55}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.cta a{text-decoration:none}
+.panel .cta a.secondary{color:var(--ink)}
+footer.site-foot{max-width:1120px;margin:0 auto;padding:0 18px 40px;font-size:13px;color:rgba(237,234,224,.7)}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}.flow{grid-template-columns:1fr 1fr 1fr;gap:10px}.flow li{border-right:1px solid rgba(22,32,43,.14)}.flow li::after{display:none}.rules{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.stats{grid-template-columns:1fr 1fr}.setup,.rules{grid-template-columns:1fr}.flow{grid-template-columns:1fr}.changes li{grid-template-columns:1fr;gap:2px}.lead{font-size:16px}}
+</style>
+</head>
+<body>
+<header class="masthead"><div><h1>How MigaBuilder is built</h1><p>A setup guide: one owner, Claude as the builder, and checks that catch mistakes before visitors do.</p></div></header>
+<nav class="tool-nav"><a href="index.html">← All free tools</a><a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">Source on GitHub</a></nav>
+<main>
+
+<!-- The numbers below are filled in from how-its-built.json (scripts/build-how-its-built.mjs);
+     the values written here are only shown if that file cannot be loaded. -->
+<section class="stats" aria-label="MigaBuilder in numbers">
+  <div class="stat"><b data-stat="tools">71</b><span>free tools</span></div>
+  <div class="stat"><b data-stat="pullRequests">130</b><span>pull requests merged</span></div>
+  <div class="stat"><b data-stat="commits">412</b><span>commits</span></div>
+  <div class="stat"><b data-stat="videos">78</b><span>narrated video guides</span></div>
+  <div class="stat"><b data-stat="days">29</b><span>days since the first commit</span></div>
+  <div class="stat"><b data-stat="languages">6</b><span>languages on every tool page</span></div>
+</section>
+<p class="stats-note">Counted from the public code history, last updated <span data-stat="updated">2026-10-12</span>.</p>
+
+<section class="panel">
+  <h2>The idea in one paragraph</h2>
+  <p class="lead">MigaBuilder is run by one person who does not write the code by hand. The owner describes what a tool should do in a chat. <strong>Claude</strong>, Anthropic's AI, working through <strong>Claude Code</strong>, writes the code, records a narrated video guide, runs the tests and opens a pull request. The owner tries it, asks for changes and merges it, and then it is live. Everything is open source, so you can check every claim on this page against the <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pulls?q=is%3Apr+is%3Amerged" rel="noopener">history of merged pull requests</a>.</p>
+</section>
+
+<section class="panel" id="setup">
+  <h2>The setup: copy it for your own site</h2>
+  <p>Six pieces. Most of them are free, and none of them needs a server you look after yourself.</p>
+  <ol class="setup">
+    <li><strong>One GitHub repository, no build step</strong><p>Plain HTML, CSS and JavaScript, one <code>.html</code> page per tool. There is nothing to compile, so every change can be read in the pull request and tested by opening the page.</p></li>
+    <li><strong>Free hosting from the main branch</strong><p>GitHub Pages serves the <code>main</code> branch at migabuilder.com. That means merging a pull request is the same as publishing it.</p></li>
+    <li><strong>Claude Code on the web</strong><p>Claude works in a fresh cloud copy of the repository on its own branch, so the owner can start a job from a phone and come back later to a finished pull request.</p></li>
+    <li><strong>A written rulebook: <code>CLAUDE.md</code></strong><p>Claude reads it at the start of every session. It holds the checklist for a new tool: the page, every list it must appear in, a narrated video, the tests to run. A new session starts with no memory of earlier ones, so anything not written down gets forgotten.</p></li>
+    <li><strong>Automatic checks on every pull request</strong><p>GitHub Actions opens every page in a real browser, tests the files each tool makes and checks that every tool has its video. A weekly check-up looks for outdated libraries and broken links.</p></li>
+    <li><strong>Small Cloudflare Workers for server jobs</strong><p>A few short scripts do what a static page can't: keep the AI key secret, pass on feedback, count visits, connect screen-share calls and deliver shop downloads. The videos are kept in a second repository and served from videos.migabuilder.com.</p></li>
+  </ol>
+</section>
+
+<section class="panel" id="flow">
+  <h2>From idea to live tool</h2>
+  <p>Every tool goes through the same six steps, in one pull request.</p>
+  <ol class="flow">
+    <li><span aria-hidden="true">💬</span><strong>Ask</strong>The owner describes the tool in plain words, or picks an idea from the feedback.<small>Owner</small></li>
+    <li><span aria-hidden="true">🛠️</span><strong>Build</strong>Claude writes the page and adds it to the homepage, search, sitemap and README.<small>Claude</small></li>
+    <li><span aria-hidden="true">🎬</span><strong>Explain</strong>Claude scripts a walkthrough, records it with a synthetic voice and checks the frames.<small>Claude</small></li>
+    <li><span aria-hidden="true">🧪</span><strong>Check</strong>The smoke test, result tests and video check run before anyone looks at it.<small>Automatic</small></li>
+    <li><span aria-hidden="true">👀</span><strong>Review</strong>The owner tries the new tool and asks for changes until it is right.<small>Owner</small></li>
+    <li><span aria-hidden="true">🚀</span><strong>Live</strong>Merging to <code>main</code> publishes it at migabuilder.com.<small>Owner merges</small></li>
+  </ol>
+</section>
+
+<section class="panel" id="rules">
+  <h2>The rules that keep it honest</h2>
+  <div class="rules">
+    <div class="rule"><strong>A person merges</strong><p>Claude opens pull requests, but the owner decides what goes live. Ideas from the weekly feature scout always stay drafts until the owner merges them.</p></div>
+    <div class="rule"><strong>Tests decide</strong><p>A tool is not finished because the AI says so. The checks have to pass, and a failing check is fixed rather than switched off.</p></div>
+    <div class="rule"><strong>Every tool gets a video</strong><p>No tool is listed without a narrated guide. When a tool changes enough to make its video wrong, the video is recorded again.</p></div>
+    <div class="rule"><strong>Privacy labels are checked</strong><p>Each tool card says whether it runs on your device, sends text to an AI or uses another online service. The smoke test fails if the label and the tool disagree.</p></div>
+    <div class="rule"><strong>No secrets in the code</strong><p>API keys live in Cloudflare and GitHub secrets, never in the repository or a pull request.</p></div>
+    <div class="rule"><strong>A second opinion when needed</strong><p>For a tricky decision the owner sometimes asks ChatGPT too. Its suggestions are checked against the code like any other review.</p></div>
+  </div>
+</section>
+
+<section class="panel" id="recent">
+  <h2>Recently shipped</h2>
+  <p>The latest pull requests merged into the live site, each built with Claude.</p>
+  <ul class="changes" id="changes">
+    <li><time>2026-10-12</time><span>Homepage task search with step-by-step recipes; sitemap.xml and robots.txt in Website Builder zip</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/162" rel="noopener">#162</a></span></li>
+    <li><time>2026-10-12</time><span>Shop: five €3 template packs and a €9 All Templates bundle</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/158" rel="noopener">#158</a></span></li>
+    <li><time>2026-10-11</time><span>Website Builder: start step, Check &amp; fix, style panel; privacy labels on every tool card</span><span class="links"><a href="website-builder.html">Open tool</a> · <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/161" rel="noopener">#161</a></span></li>
+  </ul>
+</section>
+
+<section class="note" aria-labelledby="noteTitle">
+  <span class="label">Written by Claude</span>
+  <h2 id="noteTitle">A note from the builder</h2>
+  <p>I'm Claude, and I write most of the code on this site. I don't remember earlier sessions: each one starts with me reading <code>CLAUDE.md</code> and the code as it is today. That is why the rules on this page are written down instead of kept in anyone's head, and it turns out to be a good habit for any project. When the checklist is on paper, the seventieth tool gets the same care as the first.</p>
+  <p>The part of this setup I'd recommend most is that nothing depends on trusting me. The smoke test opens every page, the result tests check the files the tools make, and a person tries every change before it goes live. I do get things wrong. When I do, one of those catches it, and the fix is in the public history for anyone to read.</p>
+</section>
+
+<section class="panel" id="faq">
+  <h2>Questions</h2>
+  <dl class="faq">
+    <dt>Does a person check the code?</dt>
+    <dd>Yes. The automatic checks run first, then the owner tries every change and decides whether to merge it. Nothing reaches the live site without that.</dd>
+    <dt>Who decides what gets built?</dt>
+    <dd>The owner, often from ideas sent through the <a href="feedback.html">feedback page</a>. A weekly scout also suggests ideas, but only as drafts the owner can take or leave.</dd>
+    <dt>Can I see how a tool was made?</dt>
+    <dd>Yes. Every change is a public pull request on <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>, with a description of what changed and the checks it passed.</dd>
+    <dt>Can I use this setup for my own project?</dt>
+    <dd>Yes. Start with a small repository with no build step, write the rules you care about into a <code>CLAUDE.md</code>, and add one automatic check that opens your pages in a browser. You can add the rest later.</dd>
+  </dl>
+  <div class="cta">
+    <a class="primary" href="index.html">Try the free tools</a>
+    <a class="secondary" href="feedback.html">Suggest a tool</a>
+    <a class="secondary" href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">Read the source</a>
+  </div>
+</section>
+</main>
+<footer class="site-foot">MigaBuilder is an independent project. Claude is a product of Anthropic, which is not affiliated with this site.</footer>
+<script>
+(function () {
+  const REPO = 'https://github.com/makmurphy69-cpu/MigaBuilder';
+  const set = (key, value) => document.querySelectorAll('[data-stat="' + key + '"]').forEach(el => { el.textContent = value; });
+  fetch('how-its-built.json', { cache: 'no-cache' })
+    .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
+    .then(data => {
+      ['tools', 'pullRequests', 'commits', 'videos', 'languages', 'updated'].forEach(k => { if (data[k] != null) set(k, data[k]); });
+      const days = Math.round((Date.parse(data.updated) - Date.parse(data.firstCommit)) / 864e5);
+      if (days >= 0) set('days', days);
+      if (!Array.isArray(data.recent) || !data.recent.length) return;
+      const list = document.getElementById('changes');
+      list.replaceChildren(...data.recent.map(p => {
+        const li = document.createElement('li');
+        const time = document.createElement('time');
+        time.dateTime = time.textContent = p.date;
+        const title = document.createElement('span');
+        title.textContent = p.title;
+        const links = document.createElement('span');
+        links.className = 'links';
+        if (p.tool && /^[a-z0-9-]+\.html$/.test(p.tool)) {
+          const open = document.createElement('a');
+          open.href = p.tool; open.textContent = 'Open tool';
+          links.append(open, ' · ');
+        }
+        const pr = document.createElement('a');
+        pr.href = REPO + '/pull/' + Number(p.number); pr.rel = 'noopener'; pr.textContent = '#' + Number(p.number);
+        links.append(pr);
+        li.append(time, title, links);
+        return li;
+      }));
+    })
+    .catch(() => { /* keep the numbers written in the page */ });
+})();
+</script>
+</body>
+</html>
