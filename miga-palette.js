@@ -80,6 +80,7 @@
     ["meet-forge.html", "👥", "Meet Forge", "Host group video rooms and topic communities.", ""],
     ["templates.html", "🧰", "Templates", "Ready-made starting points for the tools.", "templates starter examples"],
     ["sample-viewer.html", "🎬", "Samples & video guides", "Watch every tool being used and open the sample it made.", "samples videos tutorials guides help"],
+    ["how-its-built.html", "🏗️", "How MigaBuilder is built", "The setup behind the site: one owner, Claude and automatic checks.", "about how it is built made claude ai setup guide behind the scenes open source"],
     ["feedback.html", "💬", "Send feedback", "Report a bug or suggest an idea.", "feedback bug report idea contact help"]
   ];
   const SYN = { site: 'website web page', web: 'website', homepage: 'website', resume: 'cv', photo: 'image picture', pic: 'image', movie: 'video', film: 'video', clip: 'video',

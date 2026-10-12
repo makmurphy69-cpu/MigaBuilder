@@ -109,6 +109,8 @@ To give *your* visitors free AI without them needing a key, host the site and de
 
 Try a tool and share what worked, what was confusing and what MigaBuilder should add next through the [feedback page](https://migabuilder.com/feedback.html).
 
+[How MigaBuilder is built](https://migabuilder.com/how-its-built.html) explains the setup behind the site: the owner describes each tool, Claude writes the code and records its video guide, automatic checks test every page, and the owner merges. The numbers and recent changes on that page come from `how-its-built.json`, written by `node scripts/build-how-its-built.mjs` and refreshed weekly by the *How it's built* workflow.
+
 ## License
 
 MIT
