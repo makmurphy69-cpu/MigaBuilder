@@ -4,6 +4,7 @@
  *  - 💾 auto-save of what you type, with “Restore your work?” when you come back,
  *    plus Save work to a .miga file / Open a .miga file — no account needed;
  *  - 📋 paste a picture or file (Ctrl/⌘+V) into the tool's file picker;
+ *  - ⛶ a full-screen button on games, cartoons, 3D models, maps and video previews (miga-fullscreen.js);
  *  - 🔎 Ctrl/⌘+K jumps to any tool (miga-palette.js) and 📲 installs MigaBuilder as an app.
  * Tools that already keep their own drafts are skipped for the auto-save part.
  * Everything stays in this browser.
@@ -219,6 +220,8 @@
   bar.insertBefore(kbBtn, bar.children[1] || null);
 
   // ---------- Ctrl+K tool search and "install as an app" ----------
+  // ⛶ full screen for the big players and previews (games, cartoons, 3D models, maps, video).
+  if (!document.querySelector('script[src*="miga-fullscreen.js"]')) { const fs = document.createElement('script'); fs.src = 'miga-fullscreen.js'; document.head.appendChild(fs); }
   if (!document.querySelector('script[src*="miga-palette.js"]')) { const ps = document.createElement('script'); ps.src = 'miga-palette.js'; document.head.appendChild(ps); }
   const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
   const findBtn = document.createElement('button'); findBtn.type = 'button'; findBtn.textContent = '🔎 ' + (mac ? '⌘K' : 'Ctrl K'); findBtn.title = 'Jump to any MigaBuilder tool (' + (mac ? '⌘K' : 'Ctrl+K') + ')';
