@@ -3,6 +3,7 @@
  *  - 🌙 a dark-mode toggle, remembered on this device;
  *  - 💾 auto-save of what you type, with “Restore your work?” when you come back,
  *    plus Save work to a .miga file / Open a .miga file — no account needed;
+ *  - 📋 paste a picture or file (Ctrl/⌘+V) into the tool's file picker;
  *  - 🔎 Ctrl/⌘+K jumps to any tool (miga-palette.js) and 📲 installs MigaBuilder as an app.
  * Tools that already keep their own drafts are skipped for the auto-save part.
  * Everything stays in this browser.
@@ -37,7 +38,7 @@
     '.miga-float{position:fixed;left:10px;bottom:10px;z-index:60;margin:0;background:rgba(8,24,38,.88);padding:4px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.3);opacity:.85}.miga-float:hover{opacity:1}' +
     '.miga-float .miga-badge{border:0;padding:3px 6px}' +
     '.miga-badge{cursor:help;position:relative}.miga-badge .s{display:none}.miga-pop{position:absolute;z-index:9999;top:calc(100% + 6px);right:0;width:min(300px,80vw);white-space:normal;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:10px 12px;font:400 12.5px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35)}.miga-float .miga-pop{top:auto;bottom:calc(100% + 6px);left:0;right:auto}' +
-    '.miga-local-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.88}' +
+    '.miga-local-note,.miga-paste-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.88}.miga-local-note+.miga-paste-note{margin-top:4px}' +
     '.miga-card strong{display:block;color:#6FD1E0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 3px}.miga-card strong:first-child{margin-top:0}.miga-card ul{margin:0;padding-left:16px}.miga-card li{margin:2px 0}.miga-card{width:min(340px,86vw);max-height:70vh;overflow:auto;cursor:auto}' +
     '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}}';
   document.head.appendChild(st);
@@ -117,6 +118,86 @@
       note.textContent = '🔒 Files you choose are opened on this device and are not uploaded.';
       box.appendChild(note);
     });
+  }
+
+  // ---------- paste a picture or file (Ctrl/⌘+V) into the page's file picker ----------
+  // The pasted file goes into the same <input type=file> the tool already uses, followed by the
+  // change event a pick would give, so each tool handles it exactly like a chosen file.
+  const OWN_PASTE = ['picture-forge.html', 'vector-forge.html'];
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  const PASTE_HINT = isMac ? '📋 Or paste a picture or file here with ⌘V.' : '📋 Or paste a picture or file here with Ctrl+V.';
+  if (window.I18N && I18N.phrases) I18N.phrases({
+    '📋 Or paste a picture or file here with Ctrl+V.': { es: '📋 O pega aquí una imagen o un archivo con Ctrl+V.', ar: '📋 أو الصق صورة أو ملفًا هنا باستخدام Ctrl+V.', zh: '📋 也可以用 Ctrl+V 在这里粘贴图片或文件。', sw: '📋 Au bandika picha au faili hapa kwa Ctrl+V.', sv: '📋 Eller klistra in en bild eller fil här med Ctrl+V.' },
+    '📋 Or paste a picture or file here with ⌘V.': { es: '📋 O pega aquí una imagen o un archivo con ⌘V.', ar: '📋 أو الصق صورة أو ملفًا هنا باستخدام ⌘V.', zh: '📋 也可以用 ⌘V 在这里粘贴图片或文件。', sw: '📋 Au bandika picha au faili hapa kwa ⌘V.', sv: '📋 Eller klistra in en bild eller fil här med ⌘V.' },
+    '📋 Pasted file added:': { es: '📋 Archivo pegado añadido:', ar: '📋 أُضيف الملف الملصق:', zh: '📋 已添加粘贴的文件：', sw: '📋 Faili lililobandikwa limeongezwa:', sv: '📋 Inklistrad fil tillagd:' },
+    '📋 This tool cannot open that kind of file.': { es: '📋 Esta herramienta no puede abrir ese tipo de archivo.', ar: '📋 لا تستطيع هذه الأداة فتح هذا النوع من الملفات.', zh: '📋 此工具无法打开这种类型的文件。', sw: '📋 Zana hii haiwezi kufungua aina hiyo ya faili.', sv: '📋 Det här verktyget kan inte öppna den typen av fil.' }
+  });
+  const tr = s => (window.I18N && I18N.t ? I18N.t(s, s) : s);
+  // Does this picker take the file? "image/*", "image/png" and ".png" style entries are all understood.
+  const accepts = (inp, f) => {
+    const list = (inp.getAttribute('accept') || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
+    if (!list.length) return true;
+    const type = (f.type || '').toLowerCase(), name = (f.name || '').toLowerCase();
+    return list.some(a => a[0] === '.' ? name.endsWith(a) : a.endsWith('/*') ? type.startsWith(a.slice(0, -1)) : a === type);
+  };
+  // A hidden input still counts when the button or drop zone that opens it is on screen.
+  const shown = el => !!(el && (el.offsetParent || el.getClientRects().length)) && getComputedStyle(el).visibility !== 'hidden';
+  const opener = inp => (inp.id && document.querySelector('label[for="' + CSS.escape(inp.id) + '"]')) || inp.closest('label') || inp.parentElement;
+  const usable = inp => !inp.disabled && !inp.closest('.miga-menu,.miga-toast,.mkb,[data-no-paste]') && (shown(inp) || shown(opener(inp)));
+  function pasteTarget(files) {
+    const all = Array.from(document.querySelectorAll('input[type=file]')).filter(usable);
+    const fits = all.filter(inp => files.some(f => accepts(inp, f)));
+    // Pickers that name the file types are a safer match than "anything" pickers.
+    const named = fits.filter(inp => inp.getAttribute('accept'));
+    const pool = named.length ? named : fits;
+    // Prefer the picker in view, then the first one on the page.
+    const inView = pool.find(inp => { const r = (shown(inp) ? inp : opener(inp)).getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight; });
+    return { input: inView || pool[0] || null, any: all.length > 0 };
+  }
+  function pastedName(f, i) {
+    // Screenshots arrive as "image.png"; give them a name that says where they came from.
+    if (f.name && !/^image\.(png|jpe?g|gif|webp|bmp)$/i.test(f.name)) return f;
+    const ext = ((f.type || 'image/png').split('/')[1] || 'png').replace('jpeg', 'jpg').replace(/[^a-z0-9]/gi, '');
+    const stamp = new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-');
+    return new File([f], 'pasted-' + stamp + (i ? '-' + (i + 1) : '') + '.' + ext, { type: f.type, lastModified: Date.now() });
+  }
+  let pasteNote = null;
+  function sayPaste(text) {
+    if (!pasteNote) {
+      pasteNote = document.createElement('div'); pasteNote.className = 'miga-paste-toast'; pasteNote.setAttribute('role', 'status');
+      pasteNote.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:99999;max-width:min(92vw,520px);padding:10px 16px;border-radius:10px;font:14px/1.4 system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.25);background:#0e2a47;color:#fff';
+      document.body.appendChild(pasteNote);
+    }
+    pasteNote.textContent = text; pasteNote.hidden = false;
+    clearTimeout(sayPaste.timer); sayPaste.timer = setTimeout(() => { pasteNote.hidden = true; }, 4000);
+  }
+  if (!OWN_PASTE.includes(file) && typeof DataTransfer === 'function') {
+    // Runs after the page's own paste handlers, and leaves pastes they already took alone.
+    window.addEventListener('paste', e => {
+      const cd = e.clipboardData;
+      if (e.defaultPrevented || !cd || !cd.files || !cd.files.length) return;
+      // Pasting text into a text box stays a text paste, even when the clipboard also holds a picture.
+      const t = e.target, editable = t && (t.isContentEditable || /^(INPUT|TEXTAREA)$/.test(t.tagName) && t.type !== 'file');
+      if (editable && Array.from(cd.types || []).includes('text/plain')) return;
+      const files = Array.from(cd.files);
+      const { input, any } = pasteTarget(files);
+      if (!input) { if (any) sayPaste(tr('📋 This tool cannot open that kind of file.')); return; }
+      e.preventDefault();
+      const dt = new DataTransfer();
+      files.filter(f => accepts(input, f)).slice(0, input.multiple ? files.length : 1).forEach((f, i) => dt.items.add(pastedName(f, i)));
+      try { input.files = dt.files; } catch (err) { return; }
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      sayPaste(tr('📋 Pasted file added:') + ' ' + Array.from(dt.files).map(f => f.name).join(', '));
+    });
+    // Say so once, next to the first picker, on devices with a keyboard.
+    if (matchMedia('(pointer:fine)').matches) {
+      // Skip pickers that only open the tool's own saved projects (.json, .miga…): nobody pastes those.
+      const projectOnly = inp => { const a = (inp.getAttribute('accept') || '').toLowerCase(); return !!a && a.split(',').every(x => /json|\.miga|\.boat/.test(x)); };
+      const first = Array.from(document.querySelectorAll('input[type=file]')).find(inp => usable(inp) && !projectOnly(inp));
+      const box = first && (first.closest('.panel, section, .card') || first.parentElement);
+      if (box) { const hint = document.createElement('small'); hint.className = 'miga-paste-note'; hint.textContent = PASTE_HINT; box.appendChild(hint); }
+    }
   }
 
   // ---------- on-screen keyboard for any text field (loaded on demand) ----------

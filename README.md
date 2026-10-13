@@ -104,6 +104,7 @@ To give *your* visitors free AI without them needing a key, host the site and de
 - Your work is auto-saved in the browser — restore it when you come back, or save it to a `.miga` file
 - An on-screen keyboard for 17 languages and alphabets on every tool, plus dark mode
 - Press **Ctrl+K** (⌘K on Mac) anywhere to jump to any tool
+- Paste a screenshot or a copied file with **Ctrl+V** (⌘V on Mac) into any tool that opens files
 - Install MigaBuilder as an app and save every tool for offline use
 
 ## Feedback
