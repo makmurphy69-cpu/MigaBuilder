@@ -637,6 +637,8 @@ let start = SAMPLE;
 try { const last = JSON.parse(localStorage.getItem('miga3dLast')); if (last && last.beats) start = last; } catch (e) { /* none saved */ }
 try { load(start); } catch (e) { load(SAMPLE); }
 if (start !== SAMPLE) $('titleSub').textContent = 'Your last cartoon. Press play, or write a new story.';
+// Random Forge (and other tools) can open this page with a story idea filled in: #idea=...
+try { const idea = (location.hash.match(/[#&]idea=([^&]*)/)||[])[1]; if (idea) { $('story').value = decodeURIComponent(idea).slice(0, 2000); history.replaceState(null, '', location.pathname); status('Your story idea is filled in. Press “Make my 3D cartoon”.'); } } catch (e) { /* bad link */ }
 frame();
 })();
 </script>

@@ -3049,6 +3049,12 @@
     }
   })();
 
+  // Random Forge (and other tools) can open the builder with a website idea filled in: #idea=...
+  try {
+    const idea = (location.hash.match(/[#&]idea=([^&]*)/) || [])[1];
+    if (idea) { briefInput.value = decodeURIComponent(idea).slice(0, 2000); history.replaceState(null, '', location.pathname); }
+  } catch (e) { /* bad link */ }
+
   // ---------- publish to GitHub ----------
   function base64EncodeUtf8(str) {
     return btoa(unescape(encodeURIComponent(str)));

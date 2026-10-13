@@ -1271,6 +1271,33 @@
    "kind": "image"
   }
  },
+ "random-forge.html": {
+  "title": "Random Forge",
+  "video": "https://videos.migabuilder.com/random-forge.mp4?v=c63ff312",
+  "poster": "https://videos.migabuilder.com/random-forge.jpg?v=228815fc",
+  "duration": 120,
+  "transcript": [
+   "Welcome to Random Forge. One button mixes MigaBuilder tools into a random game, picture, story, drawing, website or idea, and then you can build it.",
+   "Choose what to make: a game, a picture, an idea, a website, a drawing prompt or a story. Or leave it on Surprise me.",
+   "Pick a topic, like space, ocean or spooky. You can also type your own.",
+   "Then set how random it gets, from sensible to completely unhinged.",
+   "Now press the big button.",
+   "Here is your random game, with its world, hero, enemies, twist and soundtrack.",
+   "Like a part? Press the lock to keep it.",
+   "Reroll, and only the unlocked parts change.",
+   "Tap any single part to change just that one.",
+   "Share sends a link that shows exactly this creation. Save keeps it in your browser, and Download gives you the idea as a text file.",
+   "Every day there is a new challenge: four things that everyone gets, and a rule. Draw it, picture it, or send it to a friend.",
+   "Now the best part. Press Build it.",
+   "Your random game opens in 3D Game Forge, ready to play, with every part already set up.",
+   "Now it is your turn. Open Random Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/random-forge.png",
+   "label": "Random game made in this video",
+   "kind": "image"
+  }
+ },
  "reasoning-test.html": {
   "title": "Reasoning Test",
   "video": "https://videos.migabuilder.com/reasoning-test.mp4",

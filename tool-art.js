@@ -303,6 +303,7 @@
     'model-forge': ['cezanne', 'dino', 'wrench'],
     'music-forge': ['degas', 'frog', 'mic', 'bow'],
     'name-forge': ['magritte', 'troll', 'bubble', 'bowler'],
+    'random-forge': ['riley', 'gremlin', 'star', 'wizard'],
     'ocr-forge': ['vermeer', 'owl', 'lens'],
     'paint-forge': ['pollock', 'yeti', 'brush', 'beret'],
     'palette-forge': ['rothko', 'mushroom', 'palette'],
