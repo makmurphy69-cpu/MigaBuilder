@@ -105,6 +105,7 @@ To give *your* visitors free AI without them needing a key, host the site and de
 - An on-screen keyboard for 17 languages and alphabets on every tool, plus dark mode
 - Press **Ctrl+K** (⌘K on Mac) anywhere to jump to any tool
 - Paste a screenshot or a copied file with **Ctrl+V** (⌘V on Mac) into any tool that opens files
+- A **⛶ full-screen** button on games, cartoons, 3D models, maps, video editors and website previews — like on YouTube; on phones wide players turn sideways
 - Install MigaBuilder as an app and save every tool for offline use
 
 ## Feedback

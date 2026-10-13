@@ -499,7 +499,10 @@ function startBeat(i) {
   const who = esc(b.who), line = esc(b.line);
   $('caption').innerHTML = line ? '<b>' + who + ':</b> ' + line : '';
   document.querySelectorAll('#script div').forEach(d => d.classList.toggle('now', +d.dataset.i === i));
-  const now = document.querySelector('#script div.now'); if (now) now.scrollIntoView({ block: 'nearest' });
+  // Keep the current line in view inside the script box only: scrollIntoView would also scroll the
+  // page, which on a phone pulls the viewer away from the cartoon up to the script.
+  const now = document.querySelector('#script div.now'), box = $('script');
+  if (now) { const r = now.getBoundingClientRect(), bb = box.getBoundingClientRect(); if (r.top < bb.top || r.bottom > bb.bottom) box.scrollTop += r.top - bb.top - (bb.height - r.height) / 2; }
   // camera: a wide shot when the place changes, otherwise a close shot on the speaker
   if (b.setting || i === 0) { camPos.set(0, 3.4, 12.5); camLookGoal.set(0, 1.4, 0); e.wide = true; }
   else { const side = (i % 2 ? 1 : -1) * 1.6; camPos.set(c.x + side, 2.6, 6.8); camLookGoal.set(c.x, 1.7, 0); }
