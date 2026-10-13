@@ -182,6 +182,7 @@
 
 <main class="paint-main">
   <section class="panel">
+    <div class="status-box" id="ideaBanner"><span aria-hidden="true">✏️</span> <strong id="ideaText"></strong></div>
     <div class="status-box" id="draftBanner">
       <span id="draftBannerText"></span>
       <div class="btn-row" style="margin-top:8px;">
@@ -1829,6 +1830,12 @@
   });
 
   checkForSavedDraft();
+
+  // Random Forge (and other tools) can open Paint Forge with a drawing prompt to show: #idea=...
+  try {
+    const idea = (location.hash.match(/[#&]idea=([^&]*)/) || [])[1];
+    if (idea) { document.getElementById('ideaText').textContent = decodeURIComponent(idea).slice(0, 300); document.getElementById('ideaBanner').classList.add('show'); history.replaceState(null, '', location.pathname); }
+  } catch (e) { /* bad link */ }
 })();
 </script>
 <script src="tutorials.js" defer></script><script src="heic-support.js" defer></script>

@@ -311,6 +311,8 @@ $('open').onchange=async()=>{const f=$('open').files[0];$('open').value='';if(!f
 
 // ---------- start ----------
 try{const saved=JSON.parse(localStorage.getItem(STORE)||'null');if(saved&&saved.S&&Array.isArray(saved.S.nodes)&&(saved.S.nodes.length||saved.S.strokes.length)){S=saved.S;view=saved.view||view;render();note('Your last board is back. It is saved in this browser as you work.')}else{undo=[];template('mindmap');undo=[]}}catch(e){template('mindmap');undo=[]}
+// Random Forge (and other tools) can open a map from an indented list: #outline=...
+try{const o=(location.hash.match(/[#&]outline=([^&]*)/)||[])[1],t=o&&parseOutline(decodeURIComponent(o));if(t){snap();$('outlineIn').value=decodeURIComponent(o);fromTree(t);history.replaceState(null,'',location.pathname);note('Map made from your idea. Press Undo to get your last board back.')}}catch(e){/* bad link */}
 updateButtons();
 window.addEventListener('resize',()=>placeEditor());
 })();

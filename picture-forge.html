@@ -361,6 +361,8 @@
   /* ---------- prompt ---------- */
   function updateCount() { $('charCount').textContent = prompt.value.length; }
   prompt.addEventListener('input', updateCount);
+  // Random Forge (and other tools) can open this page with an idea filled in: #idea=...
+  try { const idea = (location.hash.match(/[#&]idea=([^&]*)/)||[])[1]; if (idea) { prompt.value = decodeURIComponent(idea).slice(0, 2000); updateCount(); history.replaceState(null, '', location.pathname); } } catch (e) { /* bad link */ }
   $('surpriseBtn').onclick = () => { prompt.value = SURPRISES[Math.floor(Math.random() * SURPRISES.length)]; setPicked('style', 1 + Math.floor(Math.random() * (STYLES.length - 1))); updateCount(); prompt.focus(); };
 
   function buildPrompt(extra) {

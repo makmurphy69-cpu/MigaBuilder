@@ -856,7 +856,10 @@
   presetModeBtn.addEventListener('click', () => setMode('presets'));
   trackerModeBtn.addEventListener('click', () => setMode('tracker'));
   aiModeBtn.addEventListener('click', () => setMode('ai'));
-  if (/^#ai/.test(location.hash)) setTimeout(() => setMode('ai'));
+  // Random Forge (and other tools) can open the AI song maker with a description filled in: #ai-song&idea=...
+  const linkedIdea = (location.hash.match(/[#&]idea=([^&]*)/) || [])[1];
+  if (linkedIdea) setTimeout(() => { setMode('ai'); try { document.getElementById('aiPrompt').value = decodeURIComponent(linkedIdea).slice(0, 1500); } catch (e) { /* bad link */ } });
+  else if (/^#ai/.test(location.hash)) setTimeout(() => setMode('ai'));
   else if (location.hash === '#tracker') setTimeout(() => setMode('tracker'));
 
   // ================= tracker mode =================

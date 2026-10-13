@@ -1284,6 +1284,27 @@ S('templates.html', {
   }
 });
 
+S('random-forge.html', {
+  title: 'Random Forge', subtitle: 'Create something completely unexpected',
+  intro: 'Welcome to Random Forge. One button mixes MigaBuilder tools into a random game, picture, story, drawing, website or idea, and then you can build it.',
+  async run(h, page) {
+    await page.evaluate(() => { try { localStorage.removeItem('miga-random-favs'); } catch (e) {} });
+    await h.step('Choose what to make: a game, a picture, an idea, a website, a drawing prompt or a story. Or leave it on Surprise me.', () => h.click('#kinds button[data-k="game"]'));
+    await h.step('Pick a topic, like space, ocean or spooky. You can also type your own.', () => h.click('#topics button[data-t="sp"]'));
+    await h.step('Then set how random it gets, from sensible to completely unhinged.', () => h.point('#chaos'));
+    await h.step('Now press the big button.', () => h.click('#rollBtn'));
+    await h.step('Here is your random game, with its world, hero, enemies, twist and soundtrack.', async () => { await h.scroll('#card', 'start'); await h.point('#slots'); });
+    await h.step('Like a part? Press the lock to keep it.', async () => { await h.click('.slot[data-n="2"] .lock', { block: 'nearest' }); await h.click('.slot[data-n="1"] .lock', { block: 'nearest' }); });
+    await h.step('Reroll, and only the unlocked parts change.', async () => { await h.click('#rerollBtn', { block: 'nearest' }); await h.wait(500); await h.click('#rerollBtn', { block: 'nearest' }); });
+    await h.step('Tap any single part to change just that one.', () => h.click('.slot[data-n="5"] .val', { block: 'nearest' }));
+    await h.sampleShot('#card', 'Random game made in this video');
+    await h.step('Share sends a link that shows exactly this creation. Save keeps it in your browser, and Download gives you the idea as a text file.', () => h.point('#shareBtn', { block: 'nearest' }));
+    await h.step('Every day there is a new challenge: four things that everyone gets, and a rule. Draw it, picture it, or send it to a friend.', async () => { await h.scroll('#daily', 'center'); await h.point('#dailyIngs'); });
+    await h.step('Now the best part. Press Build it.', async () => { await h.scroll('#card', 'start'); await h.point('#buildBtn', { block: 'nearest' }); });
+    await h.step('Your random game opens in 3D Game Forge, ready to play, with every part already set up.', async () => { await h.click('#buildBtn', { block: 'nearest' }); await page.waitForSelector('#stage canvas', { timeout: 60000 }); await h.wait(1200); await h.scroll('#stage', 'center'); });
+  }
+});
+
 S('mind-map.html', {
   title: 'Mind Map', subtitle: 'Mind maps, flowcharts and a whiteboard',
   intro: 'Welcome to Mind Map. Brainstorm with mind maps, flowcharts, sticky notes and freehand drawing, right in your browser.',

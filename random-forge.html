@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Random game, story, picture and website idea generator — Random Forge | MigaBuilder</title>
+<meta name="description" content="Free random idea generator: press one button for a random game, picture, story, drawing prompt, website or project idea, pick a topic, lock what you like and reroll the rest, then build it straight away in MigaBuilder's free tools. Daily challenge, share links, no account.">
+<link rel="canonical" href="https://migabuilder.com/random-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/random-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Random Forge — create something completely unexpected | MigaBuilder">
+<meta property="og:description" content="One click mixes MigaBuilder's tools into a random game, picture, story, drawing, website or idea. Lock, reroll, share, then build it.">
+<meta property="og:url" content="https://migabuilder.com/random-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<style>
+.hidden{display:none!important}
+main.rf{max-width:880px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{background:#fff;border:1.5px solid rgba(22,32,43,.18);border-radius:999px;padding:7px 12px;font-size:13.5px;cursor:pointer;color:var(--ink)}
+.chips button[aria-pressed="true"]{border-color:var(--amber);background:#fff3dc;font-weight:700}
+.opt-label{display:block;font:700 12px 'Space Grotesk';text-transform:uppercase;letter-spacing:.06em;color:#35516b;margin:14px 0 7px}
+.opt-label:first-child{margin-top:0}
+.topic-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.topic-row input{flex:1;min-width:200px;padding:9px 10px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff}
+.chaos{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:13px}
+.chaos input{width:100%;accent-color:#0E2A47}
+.chaos output{font-weight:700;min-width:84px;text-align:right}
+#rollBtn{display:block;width:100%;font:700 clamp(18px,3.4vw,24px) 'Space Grotesk';padding:20px;margin-top:16px;border-radius:8px;letter-spacing:.02em;box-shadow:0 4px 0 #a8761f}
+#rollBtn:active{transform:translateY(2px);box-shadow:0 2px 0 #a8761f}
+.card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.kind{font:700 12px 'Space Grotesk';text-transform:uppercase;letter-spacing:.08em;color:#35516b}
+#title{font:700 clamp(24px,4.4vw,34px) 'Space Grotesk';margin:4px 0 12px;text-transform:uppercase;line-height:1.1;word-break:break-word}
+.slots{list-style:none;padding:0;margin:0;display:grid;gap:6px}
+.slot{display:grid;grid-template-columns:30px 110px 1fr auto;align-items:center;gap:8px;background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:6px 6px 6px 10px}
+.slot.locked{border-color:var(--amber);background:#fffaf0}
+.slot .ico{font-size:20px;text-align:center}
+.slot .lab{font-size:12px;font-weight:700;color:#35516b;text-transform:uppercase;letter-spacing:.04em}
+.slot .val{background:none;border:0;text-align:left;font:600 15.5px 'IBM Plex Sans';color:var(--ink);cursor:pointer;padding:6px 4px;border-radius:4px}
+.slot .val:hover{background:rgba(226,166,59,.14)}
+.slot .lock{background:#fff;border:1px solid rgba(22,32,43,.2);border-radius:6px;font-size:16px;width:40px;height:36px;cursor:pointer}
+.slot.locked .lock{border-color:var(--amber);background:#ffe9bf}
+.slot.flash .val{animation:pop .35s ease}
+@keyframes pop{0%{opacity:.2;transform:translateY(-6px)}100%{opacity:1;transform:none}}
+.pitch{font-size:15px;line-height:1.55;margin:12px 0 0;padding:12px 14px;background:rgba(14,42,71,.06);border-left:3px solid var(--navy)}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.bar .primary{font-size:15px}
+.result{margin-top:12px}
+.daily-ings{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.daily-ings span{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:8px;padding:8px 12px;font-weight:600}
+.daily-rule{font-weight:700;margin:4px 0 0}
+.favs{list-style:none;padding:0;margin:8px 0 0}
+.favs li{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.13);padding:8px 10px;margin-top:6px;border-radius:4px}
+.favs a{color:var(--ink);font-weight:600;text-decoration:none}
+.favs a:hover{text-decoration:underline}
+.favs button{background:none;border:0;cursor:pointer;font-size:15px}
+.links a{color:#1f5f8f}
+@media(max-width:620px){.slot{grid-template-columns:26px 1fr auto}.slot .lab{grid-column:2;grid-row:1}.slot .val{grid-column:1/3;grid-row:2}.slot .lock{grid-column:3;grid-row:1/3}}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/random-forge.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What can Random Forge make?", "acceptedAnswer": {"@type": "Answer", "text": "A random game, picture, idea, website, drawing prompt or story. Press Build it to open the idea in the matching MigaBuilder tool: 3D Game Forge, Picture Forge, Mind Map, Website Builder, Paint Forge or 3D Cartoon."}}, {"@type": "Question", "name": "Can I keep the parts I like?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Press the lock next to any part and reroll the rest, or tap one part to reroll only that one."}}, {"@type": "Question", "name": "Is Random Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my ideas uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Rolling, locking, sharing and saving favourites all happen in your browser. Only when you press a button with AI is the idea sent to Google's Gemini model through MigaBuilder's free AI service, or to the AI you choose."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Random Forge</span></nav>
+<header class="masthead"><div><h1>🎲 Random Forge</h1><p>Create something completely unexpected. One click mixes MigaBuilder's tools into a unique game, picture, story, drawing, website or idea — then build it.</p></div></header>
+<main class="rf">
+<section class="panel" aria-label="What to create">
+  <span class="opt-label">Make a…</span>
+  <div class="chips" id="kinds"></div>
+  <span class="opt-label">Topic</span>
+  <div class="chips" id="topics"></div>
+  <div class="topic-row"><input id="customTopic" type="text" maxlength="80" placeholder="…or type your own topic, e.g. dinosaurs in Paris" aria-label="Your own topic"><button class="secondary hidden" id="aiFill">✨ Fill it with AI</button></div>
+  <span class="opt-label">How random?</span>
+  <div class="chaos"><span>Sensible</span><input type="range" id="chaos" min="0" max="2" step="1" value="1" aria-label="How random"><span>Unhinged</span></div>
+  <p class="muted" id="chaosNote" style="margin:4px 0 0"></p>
+  <button class="primary" id="rollBtn">🎲 CREATE SOMETHING RANDOM</button>
+  <span class="status" id="status"></span>
+</section>
+
+<section class="panel" id="card" aria-live="polite">
+  <div class="card-head"><span class="kind" id="kindLabel"></span><span class="muted">Tap a part to reroll just that one · 🔒 keeps it</span></div>
+  <h2 id="title"></h2>
+  <ul class="slots" id="slots"></ul>
+  <p class="pitch" id="pitch"></p>
+  <div class="bar">
+    <a class="primary" id="buildBtn" href="#" style="text-decoration:none">🚀 Build it</a>
+    <button class="secondary" id="rerollBtn">🎲 Reroll</button>
+    <button class="secondary" id="shareBtn">🔗 Share</button>
+    <button class="secondary" id="favBtn">⭐ Save</button>
+    <button class="secondary" id="dlBtn">⬇ Download idea</button>
+  </div>
+  <p class="muted links" id="extraLinks" style="margin:10px 0 0"></p>
+  <span class="status" id="shareOut"></span>
+</section>
+
+<section class="panel" id="planPanel">
+  <h2>✨ Turn it into a one-page plan</h2>
+  <p>The AI writes a short pitch, the main parts and the first three steps for this creation. Only the idea above is sent to the AI.</p>
+  <div class="actions"><button class="primary" id="planBtn">✨ Write the plan</button><button class="secondary hidden" id="planDl">⬇ Download plan</button></div>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-weight:700">AI settings</summary><div id="aiBox"></div></details>
+  <span class="status" id="planStatus"></span>
+  <div class="result hidden" id="plan"></div>
+</section>
+
+<section class="panel" id="daily">
+  <h2>📅 Today's challenge <span id="dailyNo"></span></h2>
+  <p>Everyone gets the same four things today. Make something that has all of them, and follow the rule.</p>
+  <div class="daily-ings" id="dailyIngs"></div>
+  <p class="daily-rule" id="dailyRule"></p>
+  <div class="bar">
+    <a class="primary" id="dailyDraw" href="#" style="text-decoration:none">✏️ Draw it</a>
+    <a class="secondary" id="dailyPicture" href="#" style="text-decoration:none">🎨 Picture with AI</a>
+    <a class="secondary" id="dailyStory" href="#" style="text-decoration:none">📖 Make it a cartoon story</a>
+    <button class="secondary" id="dailyShare">🔗 Challenge a friend</button>
+  </div>
+  <span class="status" id="dailyOut"></span>
+</section>
+
+<section class="panel" id="favPanel">
+  <h2>⭐ Your saved creations</h2>
+  <p class="muted" id="favEmpty">Press ⭐ Save on a creation you like. It is kept in this browser only.</p>
+  <ul class="favs" id="favs"></ul>
+</section>
+</main>
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Random Forge</h2>
+  <p>Random Forge is a free random idea generator that is connected to real tools. Press one button for a random game, picture, idea, website, drawing prompt or story, keep the parts you like, and open it in the MigaBuilder tool that builds it.</p>
+  <h3>How to use Random Forge</h3>
+  <ol><li>Pick what to make, or leave it on Surprise me, and choose a topic if you want one.</li><li>Press “Create something random”. Lock the parts you like and reroll the rest.</li><li>Press Build it to open the idea in the matching tool, or share, save or download it.</li></ol>
+  <h3>What can Random Forge make?</h3>
+  <p>A random game, picture, idea, website, drawing prompt or story. Press Build it to open the idea in the matching MigaBuilder tool: 3D Game Forge, Picture Forge, Mind Map, Website Builder, Paint Forge or 3D Cartoon.</p>
+  <h3>Can I keep the parts I like?</h3>
+  <p>Yes. Press the lock next to any part and reroll the rest, or tap one part to reroll only that one.</p>
+  <h3>Is it a random game idea generator?</h3>
+  <p>Yes, and more: a random game becomes a playable 3D game in one click, with its world, hero, enemies and twist already set. It is also a random drawing prompt, story prompt, picture prompt and business or website idea generator.</p>
+  <h3>Is Random Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my ideas uploaded?</h3>
+  <p>Rolling, locking, sharing and saving favourites all happen in your browser. Only when you press a button with AI is the idea sent to Google's Gemini model through MigaBuilder's free AI service, or to the AI you choose.</p>
+  <p class="miga-about-rel">Related tools: <a href="3d-game-forge.html">3D Game Forge</a> · <a href="picture-forge.html">Picture Forge</a> · <a href="mind-map.html">Mind Map</a></p>
+</section>
+
+<footer>Random Forge · part of MigaBuilder · free, no signup</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+
+// ---------- word banks ----------
+// Each entry is "text|topics|key|short". Topics: sp space, fa fantasy, oc ocean, hi history, ro robots,
+// sk spooky, sx sports, fo food; no topic = fits anything; "u" = only when the dial is on Unhinged.
+// key is what the target tool needs (3D Game Forge settings), short is used in the title.
+const TOPICS=[['sp','🚀','Space'],['fa','🐉','Fantasy'],['oc','🌊','Ocean'],['hi','🏛️','History'],['ro','🤖','Robots'],['sk','👻','Spooky'],['sx','⚽','Sports'],['fo','🍕','Food']];
+const KINDS={
+  game:{ico:'🎮',name:'Game',tool:'3D Game Forge',slots:[
+    ['genre','🕹️','Game',['Endless runner|sx ro|runner|Runner','Neon street runner|ro sp|runner|Dash','Tomb escape runner|hi sk|runner|Escape','Open-world treasure hunt|fa oc hi|explore|Quest','Collect-them-all adventure|fo|explore|Feast','First-person maze|sk hi|maze|Maze','Space station maze|sp ro|maze|Labyrinth','Jump-and-run platformer|fa|platformer|Leap','Volcano platformer|fa hi|platformer|Climb','Kart race|sx fo|racer|Rally','Hover-ship race|sp ro|racer|Grand Prix','Survive-the-waves arena|sk ro|arena|Arena','Beach arena showdown|oc sx|arena|Showdown']],
+    ['world','🌍','Where',['in a sunny meadow||meadow','on a football pitch|sx|meadow','in an enchanted forest|fa|forest','in the haunted woods|sk|forest','in the ancient Egyptian desert|hi|desert','in a Wild West canyon|hi sx|desert','in the frozen north|fa|snow','on an ice planet|sp|snow','in Neon Tokyo|ro|city','in a cyberpunk city|ro sk|city','on a space station|sp ro|space','on a moon base|sp|space','on a tropical island|oc|beach','in a pirate cove|oc hi|beach','on a volcano island|fa oc|lava',"in a dragon's lair|fa sk|lava",'in candy land|fo|candy','on a giant birthday cake|fo|candy']],
+    ['hero','🦊','Hero',['A tiny repair robot|ro|robot|Robot','A clockwork knight|hi fa|robot|Knight','An astronaut in a big suit|sp|robot|Astronaut','A cybernetic fox|ro|animal|Fox','A brave little fox|fa|animal|Fox','A fox detective|hi sk|animal|Detective','A pirate fox|oc|animal|Pirate','A rolling bowling ball|sx|ball|Ball','A runaway meatball|fo|ball|Meatball','A bouncing planet|sp|ball|Planet','A magic orb|fa|ball|Orb','A tiny race car|sx|car|Racer','An ice-cream van|fo|car|Van','A ghost-hunting car|sk|car|Hunter','A hover ship|sp ro|ship|Pilot','A flying submarine|oc|ship|Sub']],
+    ['item','💎','Collect',['Gold coins||coin','Pirate doubloons|oc hi|coin','Medals|sx|coin','Lost artifacts|hi|gem','Dragon eggs|fa|gem','Energy crystals|sp ro|gem','Sea pearls|oc|gem','Fallen stars|sp fa|star','Trophies|sx|star','Glowing spirits|sk|star','Golden tacos|fo|fruit','Magic apples|fa|fruit','Pizza slices|fo sx|fruit']],
+    ['enemy','👾','Enemies',['Grumpy slimes||slime','Jelly monsters|fo oc|slime','Security drones|ro sp|drone','Alien scouts|sp|drone','Ghost pirates|oc sk|ghost','Castle ghosts|hi sk fa|ghost','Slow zombies|sk|zombie','Mummies|hi sk|zombie','Rival team mascots|sx|zombie','Spiky sea urchins|oc|spike','Rolling boulders|hi fa|spike','Runaway pineapples|fo|spike']],
+    ['twist','🧠','Twist',['Weak gravity: every jump is a moon jump|sp|gravity:10,jump:13|Moon-Jump','Super speed: everything moves twice as fast|ro sx|speed:12,enemySpeed:5|Turbo','Only one life|sk hi|lives:1|Last-Chance','A 60-second countdown|sx fo|timeLimit:60|Countdown','Swarming with enemies|sk|enemies:14|Swarm','Treasure everywhere|fo fa|items:40|Jackpot','Peaceful: no enemies at all|oc|enemies:0|Peaceful','Mega jumps|fa|jump:16|Sky-High','Gravity is nearly switched off|u|gravity:8,jump:18|Floaty','The enemies are faster than you|u|enemySpeed:11,speed:6|Panic','Forty enemies and nine lives|u|enemies:40,lives:9|Chaos']],
+    ['time','🌅','Mood',['Bright day||day','Golden sunset||sunset','Spooky night|sk|night','Neon night|ro sp|night']],
+    ['music','🎵','Soundtrack',['8-bit chiptune','Synthwave|ro sp','Epic orchestra|fa hi','Sea shanty|oc hi','Spooky organ|sk','Stadium drums and chants|sx','Funky kitchen jazz|fo','Lo-fi beats','Kazoo symphony|u','Yodelling techno|u']]]},
+  picture:{ico:'🎨',name:'Picture',tool:'Picture Forge',slots:[
+    ['subject','🦊','Who',['A cybernetic fox|ro','An astronaut cat|sp','A tiny dragon|fa','A whale with a lighthouse on its back|oc','A Roman centurion|hi','A friendly robot|ro','A ghost librarian|sk','A basketball-playing octopus|sx oc','A walking croissant|fo','A grandmother wizard|fa','A samurai|hi','A red panda','A paper-boat captain','A giraffe made of spaghetti|u','A sofa with feelings|u']],
+    ['action','🏃','Doing',['reading a map','drinking tea|fo','fixing a spaceship|sp ro','surfing a huge wave|oc sx','guarding a treasure chest|hi fa','scoring the winning goal|sx','baking a giant pie|fo','lighting a lantern|sk','riding a bicycle','painting the stars|sp fa','conducting an orchestra of pigeons|u','arguing with the Moon|u']],
+    ['place','🌍','Where',['on a floating island|fa','on the Moon|sp','in a sunken city|oc','in ancient Rome|hi','in Neon Tokyo at night|ro','in a haunted library|sk','in a packed stadium|sx','in a giant kitchen|fo','in a misty forest','on a rooftop garden','inside a snow globe|u','on top of a sleeping giant|u']],
+    ['style','🖌️','Style',['watercolour','soft anime style','pixel art|ro','oil painting|hi','3D clay render|fo','comic book style|sx','Japanese woodblock print|hi oc','neon synthwave poster|ro sp','storybook illustration|fa','gothic ink drawing|sk']],
+    ['light','💡','Light',['at golden hour','under a full moon|sk fa','in bright noon sun|sx oc','lit by neon signs|ro','glowing with starlight|sp','on a rainy evening','in soft morning fog|sk']]]},
+  idea:{ico:'🧠',name:'Idea',tool:'Mind Map',slots:[
+    ['subject','💡','Idea',['Opening a cat café|fo','A school robot club|ro','A space-themed escape room|sp','A local history walking tour|hi','A neighbourhood football league|sx','A beach clean-up festival|oc','A haunted-house night for charity|sk','A board game about dragons|fa','A pop-up food truck|fo','A podcast about inventions|ro hi','A weekend side project','A community garden']],
+    ['twist','🌀','Twist',['on a tiny budget','run entirely by kids','that travels around town','that only opens at night|sk sp','with zero waste|oc fo','powered by volunteers','in just 30 days','where everything is upside down|u','run by a very serious goat|u']],
+    ['audience','👥','For',['for families','for teenagers','for retired people','for tourists|hi oc','for busy parents','for gamers|ro sp','for sports fans|sx','for food lovers|fo','for history buffs|hi','for people who love scary stories|sk','for fantasy fans|fa']]]},
+  website:{ico:'🌐',name:'Website',tool:'Website Builder',slots:[
+    ['business','🏪','Business',['A mobile bike-repair service|sx','A space-themed bakery|sp fo','A seaside surf school|oc sx','A robot-building workshop for kids|ro','A historical walking-tour company|hi','A haunted-mansion escape room|sk','A fantasy book shop|fa','A vegan taco truck|fo','A dog-walking club','A plant-sitting service','A sock-matching agency|u','A rental service for grumpy cats|u']],
+    ['audience','👥','For',['for busy commuters','for families with small kids','for students','for tourists|hi oc','for first-timers','for local businesses','for sci-fi fans|sp ro','for thrill-seekers|sk sx','for food lovers|fo','for fantasy fans|fa']],
+    ['feature','⚙️','Must have',['online booking','a live map','a weekly newsletter','a gallery of customer photos','a price calculator','a quiz that recommends the right package','gift cards']],
+    ['style','🎨','Look',['playful, in sunny yellow and black','minimal, in white and forest green','luxury, in black and gold','modern, in navy and coral','retro 80s neon|ro sp','ocean blues and sandy beige|oc','old parchment and ink|hi fa','dark and spooky purples|sk','bold stadium red and white|sx','warm tomato red and cream|fo']]]},
+  drawing:{ico:'✏️',name:'Drawing prompt',tool:'Paint Forge',slots:[
+    ['subject','🦈','Draw',['A shark wearing a crown|oc','A knight|hi fa','An alien|sp','A robot dog|ro','A haunted teapot|sk','A goalkeeper cat|sx','A dancing pineapple|fo','A dragon|fa','Your favourite animal','A cloud with legs|u','A fish riding a bicycle|u']],
+    ['action','🏃','Doing',['sleeping','running away from something','having a picnic|fo','flying','hiding','celebrating a victory|sx','lost and looking for the way home']],
+    ['place','🌍','Where',['under the sea|oc','on Mars|sp','in a castle|hi fa','in a robot factory|ro','in a graveyard at midnight|sk','at the Olympics|sx','in a pizza oven|fo','in your street']],
+    ['rule','📏','Rule',['Use only three colours','Draw it in 5 minutes','Use only circles and squares','Never lift the pen','Make it tiny','Draw it with your other hand','Hide one secret object in it','Black and white only','Draw it upside down|u','Every line must be wobbly|u']]]},
+  story:{ico:'📖',name:'Story',tool:'3D Cartoon',slots:[
+    ['hero','🦸','Hero',['A shy robot|ro','A retired pirate|oc hi','A young witch|fa sk','An astronaut who is afraid of the dark|sp','A goalkeeper with butterfingers|sx','A grumpy chef|fo','A kid in ancient Rome|hi','A lonely ghost|sk','A clever fox','A talking umbrella']],
+    ['place','🌍','Where',['in a sunken city|oc','on a space station|sp',"in a dragon's library|fa",'in a busy market in ancient Egypt|hi','in a haunted school|sk','at the World Cup final|sx','in a giant cake factory|fo','in a robot city|ro','in a quiet village']],
+    ['goal','🎯','Goal',['must find a lost key','wants to win the big race|sx','has to cook a feast for a king|fo hi','is trying to get home before sunrise|sk','needs to fix a broken star|sp fa','must make a new friend','has to deliver a secret message|hi','is searching for buried treasure|oc','must stop a robot uprising|ro']],
+    ['twist','🌀','Twist',['but the map keeps changing','but their best friend is the villain','but time runs backwards every hour|sp','but nobody is allowed to speak','but the ghost wants to help|sk','but it all happens underwater|oc','but every door leads back to breakfast|u','but a pigeon is secretly in charge|u']]]}
+};
+const KIND_ORDER=['game','picture','idea','website','drawing','story'];
+Object.values(KINDS).forEach(k=>k.slots=k.slots.map(([id,ico,label,list])=>({id,ico,label,items:list.map(s=>{const [text,tp='',key='',short='']=s.split('|');const tags=tp.split(' ').filter(Boolean);return{text,tags,key,short,u:tags.includes('u')}})})));
+
+// ---------- state ----------
+let kind='surprise',topic='',chaos=1,roll=null,plan='';
+const custom=()=>$('customTopic').value.trim();
+const rnd=n=>Math.floor(Math.random()*n);
+const pickOf=a=>a[rnd(a.length)];
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const noArt=s=>s.replace(/^(a|an|the|your)\s+/i,'');
+
+// The dial: Sensible keeps every part on one topic (yours, or a hidden one); Wild mixes freely;
+// Unhinged also lets in the absurd entries.
+function poolFor(slot,tp){
+  const tame=slot.items.map((e,i)=>({e,i})).filter(x=>!x.e.u),on=tame.filter(x=>x.e.tags.includes(tp)),plain=tame.filter(x=>!x.e.tags.length);
+  if(chaos===0)return on.length?on.concat(on.length<3?(plain.length?plain:tame):[]):plain.length?plain:tame;
+  if(chaos===1)return tp?(Math.random()<0.15?tame:on.concat(on,plain)):tame;
+  const wild=slot.items.map((e,i)=>({e,i})).filter(x=>x.e.u);
+  return Math.random()<0.45&&wild.length?wild:tp?on.concat(on,tame):tame;
+}
+function pickSlot(slot,tp,avoid){let p=poolFor(slot,tp);if(p.length>1&&avoid!=null){const q=p.filter(x=>x.i!==avoid);if(q.length)p=q}return pickOf(p).i}
+function valueOf(slot,i){const e=slot.items[i];return{text:e.text,key:e.key,short:e.short,i}}
+
+function newRoll(){
+  const keep=roll&&roll.locks.some(Boolean);
+  const k=keep?roll.kind:kind==='surprise'?pickOf(KIND_ORDER):kind;
+  const K=KINDS[k];
+  const hidden=topic||(chaos===0?pickOf(TOPICS)[0]:'');
+  const values=K.slots.map((s,n)=>keep&&roll.locks[n]?roll.values[n]:valueOf(s,pickSlot(s,hidden)));
+  roll={kind:k,values,tp:hidden,locks:keep?roll.locks.slice():K.slots.map(()=>false),theme:custom()&&!topicChip(custom())?custom():'',aiTitle:''};
+  plan='';render(true);
+}
+function rerollOne(n){const s=KINDS[roll.kind].slots[n];roll.values[n]=valueOf(s,pickSlot(s,roll.tp||topic,roll.values[n].i));roll.aiTitle='';plan='';render(false,n)}
+const topicChip=t=>TOPICS.find(x=>x[2].toLowerCase()===t.toLowerCase());
+
+// ---------- what each creation turns into ----------
+const V=id=>{const k=KINDS[roll.kind];const n=k.slots.findIndex(s=>s.id===id);return n<0?{text:'',key:'',short:''}:roll.values[n]};
+function titleOf(){
+  if(roll.aiTitle)return roll.aiTitle;
+  switch(roll.kind){
+    case 'game':return 'The '+(V('twist').short||'Wild').replace(/-/g,' ')+' '+(V('hero').short||'Hero');
+    case 'picture':return cap(noArt(V('subject').text));
+    case 'idea':return cap(noArt(V('subject').text));
+    case 'website':return cap(noArt(V('business').text));
+    case 'drawing':return cap(noArt(V('subject').text));
+    case 'story':return 'The tale of the '+noArt(V('hero').text).replace(/^(\w)/,c=>c.toLowerCase());
+  }
+}
+const themeBit=pre=>roll.theme?pre+roll.theme:'';
+function pitchOf(){
+  switch(roll.kind){
+    case 'game':return (/^[aeiou]/i.test(V('genre').text)?'An ':'A ')+V('genre').text.toLowerCase()+' '+V('world').text+': play as '+V('hero').text.replace(/^(\w)/,c=>c.toLowerCase())+', collect '+V('item').text.toLowerCase()+' and avoid '+V('enemy').text.toLowerCase()+'. Twist: '+V('twist').text.replace(/^(\w)/,c=>c.toLowerCase())+'. '+V('time').text+', '+V('music').text.toLowerCase()+' soundtrack.'+themeBit(' Theme: ');
+    case 'picture':return pictureText();
+    case 'idea':return V('subject').text+' '+V('twist').text+', '+V('audience').text+'.'+themeBit(' Theme: ');
+    case 'website':return websiteText();
+    case 'drawing':return drawingText();
+    case 'story':return storyText();
+  }
+}
+const pictureText=()=>V('subject').text+' '+V('action').text+' '+V('place').text+', '+V('light').text+', '+V('style').text+themeBit(', themed around ')+'.';
+const websiteText=()=>V('business').text+' '+V('audience').text+'. The website needs '+V('feature').text+'. Style: '+V('style').text+'.'+themeBit(' Theme: ');
+const drawingText=()=>'Draw '+V('subject').text.replace(/^(\w)/,c=>c.toLowerCase())+' '+V('action').text+' '+V('place').text+themeBit(' (theme: ')+(roll.theme?')':'')+'. Rule: '+V('rule').text+'.';
+const storyText=()=>V('hero').text+' '+V('place').text+' '+V('goal').text+', '+V('twist').text+'.'+themeBit(' The story is about ');
+function outlineText(){
+  const root=V('subject').text+' '+V('twist').text;
+  return [root,'  Who it is for','    '+cap(V('audience').text),'  The twist','    '+cap(V('twist').text),'  What we need','    People','    Money','    A place','  First steps','    Ask three people what they think','    Try a tiny version this week','    Write down what went wrong','  What could go wrong?'].concat(roll.theme?['  Theme','    '+roll.theme]:[]).join('\n');
+}
+function gameSpec(){
+  const s={title:titleOf().slice(0,60),template:V('genre').key,env:V('world').key,time:V('time').key,player:V('hero').key,item:V('item').key,enemy:V('enemy').key,seed:0,
+    playerColor:pickOf(['#e8742a','#6fd1e0','#ff4ad0','#e2a63b','#4ea83a','#3a8ad8']),enemyColor:pickOf(['#7a4ad8','#ff4a8a','#d8604a','#2ad0e0'])};
+  (V('twist').key||'').split(',').filter(Boolean).forEach(kv=>{const [k,v]=kv.split(':');s[k]=+v});
+  const goal={runner:'Run as far as you can!',racer:'Win the race!',maze:'Find the flag!',platformer:'Reach the flag!',arena:'Survive the waves — Space zaps!',explore:'Collect them all!'}[s.template];
+  s.intro=(V('twist').text+'. '+goal).slice(0,140);
+  return s;
+}
+const enc=t=>encodeURIComponent(t);
+function b64(json){const b=new TextEncoder().encode(JSON.stringify(json));let s='';b.forEach(x=>s+=String.fromCharCode(x));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function unb64(s){const t=atob(s.replace(/-/g,'+').replace(/_/g,'/'));return JSON.parse(new TextDecoder().decode(Uint8Array.from(t,c=>c.charCodeAt(0))))}
+function buildUrl(){
+  switch(roll.kind){
+    case 'game':return '3d-game-forge.html#g=j'+b64(gameSpec());
+    case 'picture':return 'picture-forge.html#idea='+enc(pictureText());
+    case 'idea':return 'mind-map.html#outline='+enc(outlineText());
+    case 'website':return 'website-builder.html#idea='+enc(websiteText());
+    case 'drawing':return 'paint-forge.html#idea='+enc(drawingText());
+    case 'story':return '3d-cartoon.html#idea='+enc(storyText());
+  }
+}
+
+// ---------- share links ----------
+// #r=kind.topic.dial.i-i-i… recreates a roll exactly; a roll the AI wrote travels as #j=<base64 JSON>.
+function shareHash(){
+  if(roll.values.every(v=>v.i!=null)&&!roll.aiTitle)return '#r='+[roll.kind,topic||'-',chaos,roll.values.map(v=>v.i).join('-')].join('.')+(roll.theme?'&t='+enc(roll.theme):'');
+  return '#j='+b64({k:roll.kind,t:roll.aiTitle,th:roll.theme,v:roll.values.map(v=>[v.text,v.key,v.short])});
+}
+function fromHash(h){
+  try{
+    let m=h.match(/[#&]r=([a-z]+)\.([a-z-]+)\.(\d)\.([\d-]+)/);
+    if(m&&KINDS[m[1]]){const K=KINDS[m[1]],ix=m[4].split('-').map(Number);if(ix.length!==K.slots.length||ix.some((i,n)=>!K.slots[n].items[i]))return false;
+      topic=m[2]==='-'?'':m[2];chaos=Math.min(2,+m[3]);const t=h.match(/[&]t=([^&]*)/);
+      roll={kind:m[1],values:ix.map((i,n)=>valueOf(K.slots[n],i)),locks:ix.map(()=>false),theme:t?decodeURIComponent(t[1]).slice(0,80):'',aiTitle:''};return true}
+    m=h.match(/[#&]j=([\w-]+)/);
+    if(m){const j=unb64(m[1]),K=KINDS[j.k];if(!K||!Array.isArray(j.v)||j.v.length!==K.slots.length)return false;
+      roll={kind:j.k,values:j.v.map(([text,key,short],n)=>({text:String(text).slice(0,160),key:K.slots[n].items.some(e=>e.key===key)?key:K.slots[n].items[0].key,short:String(short||'').slice(0,20),i:null})),locks:j.v.map(()=>false),theme:String(j.th||'').slice(0,80),aiTitle:String(j.t||'').slice(0,60)};return true}
+  }catch(e){/* bad link */}
+  return false;
+}
+
+// ---------- drawing it ----------
+function chips(){
+  $('kinds').innerHTML=[['surprise','🎲','Surprise me']].concat(KIND_ORDER.map(k=>[k,KINDS[k].ico,KINDS[k].name])).map(([k,i,n])=>'<button data-k="'+k+'" aria-pressed="'+(k===kind)+'">'+i+' '+n+'</button>').join('');
+  $('topics').innerHTML=[['','🎲','Any']].concat(TOPICS).map(([k,i,n])=>'<button data-t="'+k+'" aria-pressed="'+(k===topic&&!custom())+'">'+i+' '+n+'</button>').join('');
+  $('chaos').value=chaos;
+  $('chaosNote').textContent=['Sensible: every part fits one topic.','Wild: anything can meet anything.','Unhinged: anything goes — including spaghetti giraffes.'][chaos];
+  $('aiFill').classList.toggle('hidden',!custom()||!!topicChip(custom()));
+}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function render(all,one){
+  const K=KINDS[roll.kind];
+  $('kindLabel').textContent=K.ico+' Random '+K.name.toLowerCase();
+  $('title').textContent=titleOf();
+  $('slots').innerHTML=K.slots.map((s,n)=>'<li class="slot'+(roll.locks[n]?' locked':'')+((all||one===n)?' flash':'')+'" data-n="'+n+'"><span class="ico" aria-hidden="true">'+s.ico+'</span><span class="lab">'+s.label+'</span><button class="val" data-n="'+n+'" title="Reroll only this">'+esc(roll.values[n].text)+'</button><button class="lock" data-n="'+n+'" aria-pressed="'+roll.locks[n]+'" aria-label="'+(roll.locks[n]?'Unlock ':'Lock ')+s.label+'">'+(roll.locks[n]?'🔒':'🔓')+'</button></li>').join('')+
+    (roll.theme?'<li class="slot locked"><span class="ico" aria-hidden="true">🏷️</span><span class="lab">Theme</span><span class="val" style="cursor:default">'+esc(roll.theme)+'</span><span></span></li>':'');
+  $('pitch').textContent=pitchOf();
+  $('buildBtn').href=buildUrl();
+  $('buildBtn').textContent='🚀 Build it in '+K.tool;
+  const music=roll.kind==='game'?'<a href="music-forge.html#ai-song&idea='+enc(V('music').text+' game soundtrack loop for '+titleOf())+'">🎵 Make the soundtrack in Music Forge ↗</a> · ':'';
+  const pic=roll.kind==='story'||roll.kind==='drawing'?'<a href="picture-forge.html#idea='+enc(roll.kind==='story'?storyText():drawingText().replace(/ Rule:.*$/,''))+'">🎨 Make a picture of it ↗</a> · ':'';
+  $('extraLinks').innerHTML=music+pic+'<a href="mind-map.html#outline='+enc(titleOf()+'\n'+KINDS[roll.kind].slots.map((s,n)=>'  '+s.label+'\n    '+roll.values[n].text).join('\n'))+'">🧠 Plan it as a mind map ↗</a>';
+  $('plan').classList.toggle('hidden',!plan);$('planDl').classList.toggle('hidden',!plan);if(!plan)$('plan').textContent='';
+  $('shareOut').classList.remove('show');
+  try{history.replaceState(null,'',location.pathname+shareHash())}catch(e){}
+}
+
+$('kinds').onclick=e=>{const b=e.target.closest('button');if(!b)return;kind=b.dataset.k;if(roll)roll.locks=roll.locks.map(()=>false);chips();newRoll()};
+$('topics').onclick=e=>{const b=e.target.closest('button');if(!b)return;topic=b.dataset.t;$('customTopic').value='';chips();newRoll()};
+$('customTopic').oninput=()=>{const c=topicChip(custom());if(c)topic=c[0];else if(custom())topic='';chips()};
+$('customTopic').onkeydown=e=>{if(e.key==='Enter')newRoll()};
+$('chaos').oninput=()=>{chaos=+$('chaos').value;chips()};
+$('rollBtn').onclick=newRoll;
+$('rerollBtn').onclick=newRoll;
+$('slots').onclick=e=>{const b=e.target.closest('button');if(!b)return;const n=+b.dataset.n;
+  if(b.classList.contains('lock')){roll.locks[n]=!roll.locks[n];render(false)}else{if(roll.locks[n])return;rerollOne(n)}};
+
+// ---------- share, save, download ----------
+const note=(id,t,err)=>{const s=$(id);s.textContent=t;s.classList.toggle('show',!!t);s.style.background=err?'rgba(216,96,74,.14)':''};
+async function copy(text,id,ok){try{await navigator.clipboard.writeText(text);note(id,ok)}catch(e){note(id,text)}}
+const pageUrl=()=>location.origin+location.pathname;
+$('shareBtn').onclick=async()=>{const url=pageUrl()+shareHash(),text='Look what MigaBuilder made for me: “'+titleOf()+'” 🎲 Make your own → '+url;
+  if(navigator.share&&matchMedia('(pointer:coarse)').matches){try{await navigator.share({title:titleOf(),text:'Look what MigaBuilder made for me: “'+titleOf()+'” 🎲',url});return}catch(e){/* cancelled: copy instead */}}
+  copy(text,'shareOut','✅ Link copied. Whoever opens it sees exactly this creation, and can make their own.')};
+const FAV='miga-random-favs';
+const favs=()=>{try{return JSON.parse(localStorage.getItem(FAV))||[]}catch(e){return[]}};
+function setFavs(a){try{localStorage.setItem(FAV,JSON.stringify(a.slice(0,40)))}catch(e){}showFavs()}
+function showFavs(){const a=favs();$('favEmpty').classList.toggle('hidden',a.length>0);
+  $('favs').innerHTML=a.map((f,n)=>'<li><a href="'+esc(location.pathname+f.h)+'" data-n="'+n+'">'+esc(f.ico+' '+f.t)+'</a><button data-del="'+n+'" aria-label="Remove '+esc(f.t)+'">✕</button></li>').join('')}
+$('favBtn').onclick=()=>{const h=shareHash(),a=favs().filter(f=>f.h!==h);a.unshift({t:titleOf(),ico:KINDS[roll.kind].ico,h});setFavs(a);note('shareOut','⭐ Saved in this browser. Find it under “Your saved creations”.')};
+$('favs').onclick=e=>{const d=e.target.closest('[data-del]');if(d){const a=favs();a.splice(+d.dataset.del,1);setFavs(a);return}
+  const l=e.target.closest('a');if(l){e.preventDefault();const f=favs()[+l.dataset.n];if(f&&fromHash(f.h)){chips();render(true);$('card').scrollIntoView({behavior:'smooth',block:'start'})}}};
+function slug(){return titleOf().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,50)||'creation'}
+function download(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+function ideaText(){const K=KINDS[roll.kind];return [titleOf(),'Random '+K.name.toLowerCase()+' from Random Forge','',...K.slots.map((s,n)=>s.label+': '+roll.values[n].text),...(roll.theme?['Theme: '+roll.theme]:[]),'',pitchOf(),'','Build it in '+K.tool+': '+new URL(buildUrl(),location.href).href,'See it again: '+pageUrl()+shareHash()].join('\n')+'\n'}
+$('dlBtn').onclick=()=>download('random-forge-'+slug()+'.txt',ideaText()+(plan?'\n'+plan+'\n':''));
+
+// ---------- AI: fill a typed topic, write a plan ----------
+MigaAI.mount($('aiBox'));
+async function askAI(sys,user,statusId,busy){
+  for(let a=0;a<3;a++){try{return await MigaAI.ask(sys,user,{maxTokens:1800})}catch(err){if(a===2)throw err;const w=/too many|wait a minute|429/i.test(err.message)?30:4+a*6;note(statusId,'The AI did not answer ('+err.message+'). Trying again in '+w+' s… ('+(a+2)+' of 3)');await new Promise(r=>setTimeout(r,w*1000));note(statusId,busy)}}
+}
+$('aiFill').onclick=async()=>{const t=custom();if(!t)return;const k=kind==='surprise'?(roll?roll.kind:'game'):kind,K=KINDS[k];
+  const b=$('aiFill');b.disabled=true;note('status','✨ The AI is filling a '+K.name.toLowerCase()+' about “'+t+'”…');
+  const spec=K.slots.map(s=>{const keys=[...new Set(s.items.map(e=>e.key).filter(Boolean))];return '"'+s.id+'": '+s.label+' — like "'+s.items[0].text+'"'+(keys.length?'; also "key": one of '+keys.join(' | '):'')}).join('\n');
+  try{const j=MigaAI.json(await askAI('You invent fun, surprising, family-friendly creative ideas. Reply with ONE JSON object only, no markdown.',
+      'Make a random '+K.name.toLowerCase()+' idea about this topic: '+t.slice(0,80)+'\nFill each part with a short phrase (max 9 words) in the same style as the example:\n'+spec+'\nFormat: {"title":"catchy title, max 5 words","parts":{"'+K.slots[0].id+'":{"text":"...","key":"..."}, ...}}. Leave "key" out where no keys are listed.','status','✨ The AI is filling your idea…'));
+    if(!j||!j.parts)throw new Error('the AI sent no idea');
+    roll={kind:k,values:K.slots.map(s=>{const p=j.parts[s.id]||{},fallback=s.items[rnd(s.items.length)];return{text:String(p.text||fallback.text).slice(0,160),key:s.items.some(e=>e.key&&e.key===p.key)?p.key:fallback.key,short:String(j.title||'').split(' ').pop().slice(0,20)||fallback.short,i:null}}),locks:K.slots.map(()=>false),theme:t,aiTitle:String(j.title||'').slice(0,60)};
+    plan='';render(true);note('status','');}
+  catch(err){note('status','The AI could not fill it ('+err.message+'). Press 🎲 instead: your topic is still mixed in.',true)}
+  finally{b.disabled=false}};
+$('planBtn').onclick=async()=>{const b=$('planBtn');b.disabled=true;note('planStatus','✨ Writing the plan…');
+  try{const txt=await askAI('You are an upbeat creative director. Write plain text, no markdown symbols like ** or #. Family-friendly.',
+      'Turn this random '+KINDS[roll.kind].name.toLowerCase()+' idea into a one-page plan.\nTitle: '+titleOf()+'\nIdea: '+pitchOf()+'\nWrite these sections, each starting with its name in capitals on its own line: PITCH (3 sentences), THE MAIN PARTS (4-6 short lines starting with "- "), WHAT MAKES IT SPECIAL (2 sentences), FIRST THREE STEPS (3 numbered lines). Keep it under 280 words.','planStatus','✨ Writing the plan…');
+    plan=(titleOf().toUpperCase()+'\n\n'+String(txt||'').replace(/\*\*|^#+\s*/gm,'').trim());$('plan').textContent=plan;$('plan').classList.remove('hidden');$('planDl').classList.remove('hidden');note('planStatus','')}
+  catch(err){note('planStatus','Could not write the plan: '+err.message+'. Try again in a minute.',true)}
+  finally{b.disabled=false}};
+$('planDl').onclick=()=>download('random-forge-'+slug()+'-plan.txt',plan+'\n\n'+ideaText());
+
+// ---------- today's challenge ----------
+// Same for everyone on the same day (by the visitor's date), no server needed.
+const INGS=['🦈 Shark','🌙 Moon','🏰 Castle','⚡ Lightning','🐙 Octopus','🍩 Doughnut','🚀 Rocket','🌵 Cactus','👑 Crown','🎈 Balloon','🐉 Dragon','🍕 Pizza','🌈 Rainbow','🤖 Robot','🦖 Dinosaur','🎩 Top hat','🌋 Volcano','🧲 Magnet','🪐 Planet','🦉 Owl','🍄 Mushroom','⚓ Anchor','🎸 Guitar','🧊 Ice cube','🐝 Bee','🕰️ Clock','🦄 Unicorn','🌻 Sunflower','🗝️ Key','🛸 UFO','🐧 Penguin','🍌 Banana','🏆 Trophy','🌊 Wave','🕯️ Candle','🦜 Parrot','🧁 Cupcake','⛄ Snowman','🐢 Turtle','🔭 Telescope'];
+const RULES=['Use only three colours.','Everything must be smiling.','It all happens at night.','Make one of them gigantic.','Add one thing that should not be there.','It must be raining.','Tell it without any words.','Everything is upside down.','One of them is the hero.','Make it look ancient.'];
+function seeded(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const d=new Date(),dayNo=Math.round((Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())-Date.UTC(2026,9,13))/864e5)+1;
+const r=seeded(dayNo*7919),pool=INGS.slice(),ings=[];
+for(let n=0;n<4;n++)ings.push(pool.splice(Math.floor(r()*pool.length),1)[0]);
+const rule=RULES[Math.floor(r()*RULES.length)];
+const ingWords=ings.map(x=>x.replace(/^\S+\s/,'').toLowerCase());
+const ingList=ingWords.slice(0,-1).join(', ')+' and '+ingWords[3];
+$('dailyNo').textContent='#'+dayNo;
+$('dailyIngs').innerHTML=ings.map(x=>'<span>'+x+'</span>').join('');
+$('dailyRule').textContent='Rule: '+rule;
+$('dailyDraw').href='paint-forge.html#idea='+enc('Today\'s challenge #'+dayNo+': draw a '+ingList+'. Rule: '+rule);
+$('dailyPicture').href='picture-forge.html#idea='+enc('One picture with a '+ingList+'. '+rule);
+$('dailyStory').href='3d-cartoon.html#idea='+enc('A short story with a '+ingList+'. '+rule);
+$('dailyShare').onclick=()=>copy('MigaBuilder Daily #'+dayNo+' '+ings.map(x=>x.split(' ')[0]).join('')+' + one rule. Can you make something with all four? '+pageUrl()+'#daily','dailyOut','✅ Challenge copied. Paste it to a friend — they get the same four things today.');
+
+// ---------- start ----------
+const startHash=location.hash;
+showFavs();
+if(!fromHash(startHash)){chips();newRoll()}else{chips();render(true)}
+if(/#daily/.test(startHash))setTimeout(()=>$('daily').scrollIntoView({block:'start'}),50);
+window.RandomForge={get roll(){return roll},buildUrl,gameSpec};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

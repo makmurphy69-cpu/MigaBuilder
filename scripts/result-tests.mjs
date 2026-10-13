@@ -235,6 +235,36 @@ test('mind-map: a pasted list becomes a map; PNG, SVG, outline and the map file 
   await page.waitForFunction(() => document.querySelectorAll('#nodes .node').length === 8);
 });
 
+test('random-forge: a locked part survives rerolls, the idea and the AI plan download, and Build it opens a playable game', 'random-forge.html', async (page, ctx, base) => {
+  await fakeAi(ctx, () => 'PITCH\nA fox races through the frozen north.\n\nTHE MAIN PARTS\n- Ice lanes\n- Alien scouts\n\nWHAT MAKES IT SPECIAL\nTreasure everywhere.\n\nFIRST THREE STEPS\n1. Play it\n2. Tune it\n3. Share it');
+  await page.click('#kinds button[data-k="game"]');
+  const hero = await page.textContent('.slot[data-n="2"] .val');
+  await page.click('.slot[data-n="2"] .lock');
+  for (let i = 0; i < 6; i++) await page.click('#rerollBtn');
+  expect(await page.textContent('.slot[data-n="2"] .val') === hero, 'the locked hero changed on reroll');
+  const title = (await page.textContent('#title')).trim();
+  const idea = (await downloadOf(page, () => page.click('#dlBtn'))).buf.toString('utf8');
+  expect(idea.startsWith(title + '\n') && idea.includes('Hero: ' + hero) && /3d-game-forge\.html#g=j/.test(idea) && /random-forge\.html#r=game\./.test(idea), 'idea file is wrong:\n' + idea);
+  await page.click('#planBtn');
+  await page.waitForSelector('#plan:not(.hidden)');
+  const plan = (await downloadOf(page, () => page.click('#planDl'))).buf.toString('utf8');
+  expect(plan.startsWith(title.toUpperCase()) && plan.includes('FIRST THREE STEPS') && plan.includes('Hero: ' + hero), 'plan file is wrong:\n' + plan.slice(0, 300));
+  // The share link brings back exactly this creation.
+  const shared = page.url();
+  const again = await ctx.newPage();
+  await again.goto(shared);
+  expect((await again.textContent('#title')).trim() === title, 'the share link shows a different creation');
+  // Build it: 3D Game Forge opens with this game set up.
+  const spec = await page.evaluate(() => window.RandomForge.gameSpec());
+  await again.goto(base + '/' + await page.getAttribute('#buildBtn', 'href'));
+  await again.waitForFunction(() => document.getElementById('f_title').value.length > 0);
+  expect(await again.inputValue('#f_title') === spec.title && await again.inputValue('#f_env') === spec.env && await again.inputValue('#f_player') === spec.player, '3D Game Forge did not open the rolled game');
+  // Picture and story ideas arrive filled in.
+  await page.click('#kinds button[data-k="picture"]');
+  await again.goto(base + '/' + await page.getAttribute('#buildBtn', 'href'));
+  expect((await again.inputValue('#prompt')) === (await page.textContent('#pitch')).trim(), 'Picture Forge did not get the picture idea');
+});
+
 // Text of every page of a PDF, read with pdf.js inside the page (the page must load pdf.js).
 async function pdfPageTexts(page, buf) {
   if (!(await page.evaluate(() => !!window.pdfjsLib))) await page.addScriptTag({ url: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js' });
