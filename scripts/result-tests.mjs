@@ -319,6 +319,36 @@ test('heic: a dropped iPhone photo (HEIC) converts in File Forge', 'file-forge.h
   expect(magic(out.buf, 0xff, 0xd8) || magic(out.buf, 0x89, 0x50, 0x4e, 0x47) || ascii(out.buf, 8, 'WEBP'), 'download is not a JPEG, PNG or WebP image');
 }, { timeout: 120000 });
 
+// Fires the paste event a browser sends for Ctrl+V with files on the clipboard (a screenshot arrives as "image.png").
+async function pasteFile(page, file, name, type) {
+  const b64 = fs.readFileSync(path.join(FIX, file)).toString('base64');
+  await page.evaluate(([b64, name, type]) => {
+    const bytes = Uint8Array.from(atob(b64), c => c.charCodeAt(0)), dt = new DataTransfer();
+    dt.items.add(new File([bytes], name, { type }));
+    document.body.dispatchEvent(new ClipboardEvent('paste', { bubbles: true, cancelable: true, clipboardData: dt }));
+  }, [b64, name, type]);
+}
+
+test('paste: a pasted screenshot opens in File Forge and converts', 'file-forge.html', async (page) => {
+  await page.waitForSelector('.miga-paste-note', { state: 'attached', timeout: 15000 });
+  await pasteFile(page, 'small-photo.png', 'image.png', 'image/png');
+  await page.waitForFunction(() => !document.querySelector('#convertBtn').disabled, null, { timeout: 30000 });
+  await page.uncheck('#zipOutput');
+  const out = await downloadOf(page, () => page.click('#convertBtn'));
+  expect(/^pasted-/.test(out.name), 'the pasted screenshot should get a "pasted-…" name, got ' + out.name);
+  expect(magic(out.buf, 0xff, 0xd8) || magic(out.buf, 0x89, 0x50, 0x4e, 0x47) || ascii(out.buf, 8, 'WEBP'), 'download is not a JPEG, PNG or WebP image');
+});
+
+test('paste: a pasted PDF goes to PDF Forge\'s PDF picker and splits', 'pdf-forge.html', async (page) => {
+  await page.waitForSelector('.miga-paste-note', { state: 'attached', timeout: 15000 });
+  await pasteFile(page, 'three-pages.pdf', 'three-pages.pdf', 'application/pdf');
+  await page.waitForFunction(() => (document.querySelector('#files').files[0] || {}).name === 'three-pages.pdf', null, { timeout: 15000 });
+  expect(await page.evaluate(() => document.querySelector('#images').files.length === 0), 'the PDF must not land in the images picker');
+  const out = await downloadOf(page, () => page.click('#split'));
+  const names = (out.buf.toString('latin1').match(/page-\d{3}\.pdf/g) || []);
+  expect(new Set(names).size === 3, 'ZIP should hold 3 page PDFs, found ' + new Set(names).size);
+});
+
 test('qr-forge: the downloaded QR code scans back to the text', 'qr-forge.html', async (page) => {
   await page.fill('#qrText', 'https://migabuilder.com/qr-test');
   await page.waitForTimeout(500);
