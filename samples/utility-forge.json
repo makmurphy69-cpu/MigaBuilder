@@ -1,17 +1,22 @@
-[
-  {
-    "product": "Sourdough",
-    "price": "3.50",
-    "in_stock": "yes"
+{
+  "shop": "Corner Bakery",
+  "open": true,
+  "address": {
+    "street": "Mill Lane 4",
+    "city": "Bristol"
   },
-  {
-    "product": "Rye",
-    "price": "3.20",
-    "in_stock": "yes"
-  },
-  {
-    "product": "Carrot cake",
-    "price": "4.50",
-    "in_stock": "no"
-  }
-]
+  "items": [
+    {
+      "name": "Sourdough",
+      "price": 3.5
+    },
+    {
+      "name": "Rye",
+      "price": 3.2
+    },
+    {
+      "name": "Carrot cake",
+      "price": 4.5
+    }
+  ]
+}
