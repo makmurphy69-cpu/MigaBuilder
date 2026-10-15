@@ -811,6 +811,28 @@
    "kind": "image"
   }
  },
+ "markdown-forge.html": {
+  "title": "Markdown Forge",
+  "video": "https://videos.migabuilder.com/markdown-forge.mp4?v=1187c5c1",
+  "poster": "https://videos.migabuilder.com/markdown-forge.jpg?v=310e4df4",
+  "duration": 99,
+  "transcript": [
+   "Welcome to Markdown Forge. You write in Markdown on the left, and see it formatted on the right as you type.",
+   "Type a hash and a space for a heading. Everything appears formatted on the right straight away.",
+   "Select a word and press B, or Control and B, to make it bold.",
+   "Add a task list. Press Enter, and the next item starts by itself.",
+   "Tables are one click. Tick off a task right in the preview.",
+   "Copy text from Word, Google Docs or a web page and paste it here. Headings, lists, links and tables become Markdown. You can also open a Word file.",
+   "Your text is saved in this browser while you work. Download it as a Markdown file, or open More export.",
+   "Save it as a complete web page, copy it with formatting for an email or Word, or print it as a PDF.",
+   "Now it is your turn. Open Markdown Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/markdown-forge.html",
+   "label": "Web page made in this video",
+   "kind": "html"
+  }
+ },
  "media-convert-forge.html": {
   "title": "Media Convert Forge",
   "video": "https://videos.migabuilder.com/media-convert-forge.mp4",
