@@ -493,15 +493,18 @@
  },
  "everyday-forge.html": {
   "title": "Everyday Forge",
-  "video": "https://videos.migabuilder.com/everyday-forge.mp4",
-  "poster": "https://videos.migabuilder.com/everyday-forge.jpg",
-  "duration": 50,
+  "video": "https://videos.migabuilder.com/everyday-forge.mp4?v=616947a3",
+  "poster": "https://videos.migabuilder.com/everyday-forge.jpg?v=8819b938",
+  "duration": 105,
   "transcript": [
-   "Welcome to Everyday Forge. It bundles everyday helpers: charts, writing tools, passwords and converters.",
-   "Let us make a chart. Choose the chart type and give it a title.",
-   "Type one label and number per line.",
-   "Press Create chart.",
-   "Your chart is ready to download as a picture. The other tabs generate passwords and convert units and currencies.",
+   "Welcome to Everyday Forge. It bundles everyday helpers: money calculators, charts, writing tools, passwords and converters.",
+   "Let us make a chart first. Type one label and number per line, and press Create chart.",
+   "Now open the loan and savings calculators.",
+   "For a loan or a mortgage, enter the amount, the interest rate and the number of years.",
+   "You see the monthly payment, the total interest, and how each year splits between paying off the loan and paying interest.",
+   "Add a small extra payment each month, and see how much interest you save and how much sooner the loan is paid off.",
+   "The savings calculator shows how money grows with compound interest. Set a goal, and it tells you when you reach it.",
+   "There is also a price, margin and VAT calculator for your business, and quick percentage sums. The schedules download as spreadsheets.",
    "Now it is your turn. Open Everyday Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
@@ -811,6 +814,28 @@
    "kind": "image"
   }
  },
+ "markdown-forge.html": {
+  "title": "Markdown Forge",
+  "video": "https://videos.migabuilder.com/markdown-forge.mp4?v=1187c5c1",
+  "poster": "https://videos.migabuilder.com/markdown-forge.jpg?v=310e4df4",
+  "duration": 99,
+  "transcript": [
+   "Welcome to Markdown Forge. You write in Markdown on the left, and see it formatted on the right as you type.",
+   "Type a hash and a space for a heading. Everything appears formatted on the right straight away.",
+   "Select a word and press B, or Control and B, to make it bold.",
+   "Add a task list. Press Enter, and the next item starts by itself.",
+   "Tables are one click. Tick off a task right in the preview.",
+   "Copy text from Word, Google Docs or a web page and paste it here. Headings, lists, links and tables become Markdown. You can also open a Word file.",
+   "Your text is saved in this browser while you work. Download it as a Markdown file, or open More export.",
+   "Save it as a complete web page, copy it with formatting for an email or Word, or print it as a PDF.",
+   "Now it is your turn. Open Markdown Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/markdown-forge.html",
+   "label": "Web page made in this video",
+   "kind": "html"
+  }
+ },
  "media-convert-forge.html": {
   "title": "Media Convert Forge",
   "video": "https://videos.migabuilder.com/media-convert-forge.mp4",
@@ -1042,22 +1067,24 @@
  },
  "palette-forge.html": {
   "title": "Palette Forge",
-  "video": "https://videos.migabuilder.com/palette-forge.mp4",
-  "poster": "https://videos.migabuilder.com/palette-forge.jpg",
-  "duration": 84,
+  "video": "https://videos.migabuilder.com/palette-forge.mp4?v=98bd1ecd",
+  "poster": "https://videos.migabuilder.com/palette-forge.jpg?v=4d8ee13e",
+  "duration": 113,
   "transcript": [
-   "Welcome to Palette Forge. It builds a colour palette for your brand that is easy to read.",
-   "Pick a base colour for your brand.",
-   "Choose a harmony, such as complementary or triadic, and press Generate palette.",
-   "Each colour shows its code and how readable text is on it.",
-   "Copy the colour codes, or copy them as ready made CSS for your website.",
-   "The contrast checker tests text on a background against the accessibility guidelines. Grey on white only just fails for normal text.",
-   "Press Fix the text colour, and it finds the closest colour that passes. Below are the readable pairs in your palette.",
+   "Welcome to Palette Forge. It builds colour palettes that are easy to read, and turns them into CSS gradients and shadows.",
+   "Pick a base colour and a harmony, such as triadic, and press Generate palette.",
+   "Or take the colours from a photo. Choose a picture, and you get its five main colours, most used first.",
+   "Click a colour to copy it, or copy them all as ready made CSS.",
+   "The contrast checker tests text on a background against the accessibility guidelines. Press Fix the text colour, and it finds the closest colour that passes.",
+   "Now turn the palette into a CSS gradient. It starts from your colours. Choose linear, radial or conic, and set the angle.",
+   "Move a colour, add one, or reverse them. Then copy the CSS, or download the gradient as a background picture.",
+   "Last, the box shadow generator. Pick a preset, like Layered, and move the sliders until it looks right.",
+   "Copy the CSS into your website.",
    "Now it is your turn. Open Palette Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
    "file": "samples/palette-forge.png",
-   "label": "Palette made in this video",
+   "label": "Gradient made in this video",
    "kind": "image"
   }
  },
@@ -1574,20 +1601,25 @@
  },
  "utility-forge.html": {
   "title": "Utility Forge",
-  "video": "https://videos.migabuilder.com/utility-forge.mp4",
-  "poster": "https://videos.migabuilder.com/utility-forge.jpg",
-  "duration": 50,
+  "video": "https://videos.migabuilder.com/utility-forge.mp4?v=98291cf9",
+  "poster": "https://videos.migabuilder.com/utility-forge.jpg?v=63a42c4e",
+  "duration": 124,
   "transcript": [
-   "Welcome to Utility Forge. It converts data files and checks files, privately in your browser.",
-   "Choose the conversion. Here we turn a spreadsheet in CSV format into JSON for a web app.",
-   "Paste your data.",
-   "Press Convert, and the result appears below.",
-   "Download the result. The other tabs combine text files and create checksums to verify downloads.",
+   "Welcome to Utility Forge. It is a private toolbox for anyone who works with data, and everything runs in your browser.",
+   "Start with the JSON viewer. Paste some JSON. This one has a small mistake in it.",
+   "Press Format and view. It shows exactly which line is broken, and why.",
+   "Remove the extra comma and press it again. Now the JSON is neatly formatted and shown as a tree that you can open and close.",
+   "Search for any key or value. Click a key to copy its path for your code.",
+   "Download the formatted file, or minify it and sort the keys.",
+   "The next card encodes and decodes Base64 and web addresses, and reads JWT login tokens, without sending them anywhere.",
+   "Need placeholder text for a design? Choose how many paragraphs, and get lorem ipsum as text, HTML or Markdown. Unique IDs are one click away too.",
+   "And the timestamp converter turns Unix time into a readable date, and back.",
+   "CSV to JSON, combining text files and checksums are here as well.",
    "Now it is your turn. Open Utility Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
    "file": "samples/utility-forge.json",
-   "label": "Converted data from this video",
+   "label": "Formatted JSON from this video",
    "kind": "text"
   }
  },

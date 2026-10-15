@@ -648,6 +648,98 @@ test('app-forge: a broken app is fixed automatically and downloads as an install
   expect(JSON.parse(files['manifest.json']).name === 'Tally', 'manifest has the wrong name');
 }, { expectErrors: /missingFunction/, setup: (() => { let calls = 0; return ctx => { calls = 0; return fakeAi(ctx, () => APP(++calls === 1)); }; })() });
 
+test('utility-forge: the JSON viewer finds the broken line, formats and downloads; Base64, JWT and lorem ipsum work', 'utility-forge.html', async (page) => {
+  await page.fill('#jsonInput', '{"name": "Alex",\n "tags": ["a", "b",]\n}');
+  await page.click('#jsonFormat');
+  expect(/line 2/.test(await page.textContent('#jsonStatus')), 'the JSON error does not name line 2: ' + await page.textContent('#jsonStatus'));
+  await page.fill('#jsonInput', '{"b":1,"a":{"city":"Gothenburg","list":[1,2,{"deep":true}]}}');
+  await page.click('#jsonSort');
+  await page.fill('#jsonSearch', 'gothen');
+  await page.waitForSelector('#jsonTree mark');
+  const out = await downloadOf(page, () => page.click('#jsonDownload'));
+  const json = out.buf.toString('utf8');
+  expect(out.name === 'formatted.json' && json.startsWith('{\n  "a": {') && JSON.parse(json).a.list[2].deep === true, 'formatted JSON is wrong:\n' + json);
+  await page.click('.card[data-mode="encode"]');
+  await page.fill('#encInput', 'Hej världen 👋');
+  await page.click('#encRun');
+  const b64 = await page.inputValue('#encOutput');
+  await page.click('#encSwap'); await page.selectOption('#encOp', 'b64d'); await page.click('#encRun');
+  expect(await page.inputValue('#encOutput') === 'Hej världen 👋', 'Base64 did not round-trip UTF-8 text: ' + b64);
+  const enc = s => Buffer.from(JSON.stringify(s)).toString('base64url');
+  await page.selectOption('#encOp', 'jwt');
+  await page.fill('#encInput', enc({ alg: 'HS256', typ: 'JWT' }) + '.' + enc({ sub: '42', name: 'Alex', exp: 1000 }) + '.sig');
+  await page.click('#encRun');
+  expect(/"name": "Alex"/.test(await page.inputValue('#encOutput')) && /expired/.test(await page.textContent('#jwtOut')), 'the JWT payload or expiry is not shown');
+  await page.fill('#encInput', 'data:text/plain;base64,' + Buffer.from('hello file').toString('base64'));
+  const file = await downloadOf(page, () => page.click('#b64ToFile'));
+  expect(file.name === 'decoded.txt' && file.buf.toString() === 'hello file', 'Base64 to file is wrong: ' + file.name);
+  await page.click('.card[data-mode="lorem"]');
+  await page.fill('#lorCount', '4'); await page.selectOption('#lorUnit', 'p'); await page.selectOption('#lorFormat', 'html'); await page.click('#lorRun');
+  const lor = (await downloadOf(page, () => page.click('#lorDownload'))).buf.toString();
+  expect(lor.startsWith('<p>Lorem ipsum dolor sit amet') && (lor.match(/<p>/g) || []).length === 4, 'lorem ipsum HTML is wrong:\n' + lor.slice(0, 200));
+  expect(/^[0-9a-f-]{36}$/m.test(await page.textContent('#uuidOut')), 'no UUIDs generated');
+  await page.click('.card[data-mode="time"]');
+  await page.fill('#tsInput', '1700000000'); await page.click('#tsRun');
+  expect((await page.textContent('#tsOut')).includes('2023-11-14T22:13:20.000Z'), 'Unix timestamp converted wrongly');
+});
+
+test('palette-forge: a photo gives its main colours, the gradient downloads as a 1920×1080 PNG, the shadow CSS is copied', 'palette-forge.html', async (page) => {
+  await page.setInputFiles('#photoInput', path.join(FIX, 'small-photo.png'));
+  await page.waitForFunction(() => /main colors/.test(document.getElementById('photoStatus').textContent));
+  const cols = await page.$$eval('#swatches .swatch-hex', els => els.map(e => e.textContent));
+  expect(cols.length === 5 && cols.every(c => /^#[0-9A-F]{6}$/.test(c)), 'the photo did not give 5 colours: ' + cols.join(' '));
+  expect(await page.$$eval('#grStops .gr-stop', r => r.length) === 5, 'the gradient did not take the photo colours');
+  await page.selectOption('#grType', 'conic');
+  expect((await page.textContent('#grCss')).includes('conic-gradient(from 135deg'), 'gradient CSS is wrong: ' + await page.textContent('#grCss'));
+  const png = await downloadOf(page, () => page.click('#grPng'));
+  expect(png.name === 'gradient.png' && magic(png.buf, 0x89, 0x50, 0x4e, 0x47) && png.buf.readUInt32BE(16) === 1920 && png.buf.readUInt32BE(20) === 1080, 'the gradient is not a 1920×1080 PNG');
+  await page.click('#shPresets [data-p="inset"]');
+  expect(/box-shadow: inset 0px 4px 12px 0px rgba\(22, 32, 43, 0\.3\);/.test(await page.textContent('#shCss')), 'shadow CSS is wrong: ' + await page.textContent('#shCss'));
+});
+
+test('everyday-forge: the loan and savings calculators give the textbook answers and download their tables', 'everyday-forge.html', async (page) => {
+  await page.click('.tab[data-mode="finance"]');
+  await page.selectOption('#finCur', 'USD');
+  await page.fill('#lnAmount', '200000'); await page.fill('#lnRate', '6'); await page.fill('#lnYears', '30');
+  // Amounts are formatted for the browser's language, so compare the digits only.
+  const digits = async sel => (await page.textContent(sel)).replace(/[^\d]/g, '');
+  expect((await digits('#lnKpis')).startsWith('119910'), 'a 200,000 loan at 6% for 30 years should cost $1,199.10 a month: ' + await page.textContent('#lnKpis'));
+  const loan = (await downloadOf(page, () => page.click('#lnCsv'))).buf.toString();
+  const rows = loan.trim().split('\n');
+  expect(rows.length === 31 && rows[30].startsWith('30,') && rows[30].endsWith(',0.00'), 'the loan schedule should end with nothing owed after 30 years:\n' + rows.slice(-2).join('\n'));
+  await page.fill('#lnExtra', '200');
+  expect(/Interest saved/.test(await page.textContent('#lnKpis')), 'an extra payment does not show the interest saved');
+  await page.click('.fsub[data-f="save"]');
+  await page.fill('#svStart', '1000'); await page.fill('#svMonthly', '0'); await page.fill('#svRate', '10'); await page.fill('#svYears', '10'); await page.selectOption('#svComp', '1');
+  expect((await digits('#svKpis')).startsWith('2594'), '1,000 at 10% a year for 10 years should grow to $2,594: ' + await page.textContent('#svKpis'));
+  const sav = (await downloadOf(page, () => page.click('#svCsv'))).buf.toString();
+  expect(sav.startsWith('Year,Put in,Interest earned,Balance\n1,1000.00,100.00,1100.00'), 'the savings table is wrong:\n' + sav.slice(0, 120));
+  await page.click('.fsub[data-f="margin"]');
+  await page.fill('#mgCost', '60'); await page.selectOption('#mgMode', 'margin'); await page.fill('#mgValue', '40'); await page.fill('#mgVat', '25');
+  const mg = await page.textContent('#mgKpis');
+  expect(/100[.,]00/.test(mg) && /125[.,]00/.test(mg) && /66[.,]7 %/.test(mg), 'a 40% margin on a cost of 60 should be a price of 100 (125 with VAT), markup 66.7%: ' + mg);
+});
+
+test('markdown-forge: the toolbar formats text, the preview updates, Word-style HTML becomes Markdown, .md and .html download', 'markdown-forge.html', async (page) => {
+  await page.evaluate(() => { try { localStorage.removeItem('miga-markdown-doc'); } catch (e) {} });
+  await page.fill('#mdInput', '# Shopping list\n\nBuy milk');
+  await page.evaluate(() => { const t = document.getElementById('mdInput'); t.focus(); t.setSelectionRange(t.value.length - 4, t.value.length); });
+  await page.click('[data-md="bold"]');
+  expect((await page.inputValue('#mdInput')).endsWith('Buy **milk**'), 'Bold did not wrap the selection: ' + await page.inputValue('#mdInput'));
+  await page.press('#mdInput', 'End'); await page.press('#mdInput', 'Enter'); await page.click('[data-md="task"]'); await page.type('#mdInput', 'Bread');
+  await page.click('[data-md="table"]');
+  expect(await page.$eval('#mdPreview', p => !!p.querySelector('h1#shopping-list') && !!p.querySelector('strong') && !!p.querySelector('input[type=checkbox]') && !!p.querySelector('table th')), 'the preview is missing the heading, bold, task or table');
+  const md = await downloadOf(page, () => page.click('#mdDownloadMd'));
+  expect(md.name === 'shopping-list.md' && md.buf.toString().includes('- [ ] Bread') && md.buf.toString().includes('| Column 1 |'), 'the .md download is wrong: ' + md.name + '\n' + md.buf.toString().slice(0, 200));
+  await page.click('#mdMore');
+  const html = (await downloadOf(page, () => page.click('#mdDownloadHtml'))).buf.toString();
+  expect(/^<!doctype html>/.test(html) && html.includes('<title>Shopping list</title>') && html.includes('<strong>milk</strong>') && html.includes('.md-body'), 'the HTML page is wrong:\n' + html.slice(0, 300));
+  const conv = await page.evaluate(() => window.MarkdownForge.htmlToMd('<h2>Plan</h2><p>Some <b>bold</b> and a <a href="https://example.com">link</a>.</p><ul><li>One</li><li>Two</li></ul><table><tr><td>A</td><td>B</td></tr><tr><td>1</td><td>2</td></tr></table>'));
+  expect(conv.includes('## Plan') && conv.includes('**bold**') && conv.includes('[link](https://example.com)') && /-\s+One/.test(conv) && conv.includes('| A | B |'), 'HTML to Markdown is wrong:\n' + conv);
+  const safe = await page.evaluate(() => window.MarkdownForge.toHtml('<img src=x onerror="alert(1)"><script>alert(2)</script>'));
+  expect(!/onerror|<script/i.test(safe), 'the preview lets scripts through: ' + safe);
+});
+
 // ---------- runner ----------
 const words = process.argv.slice(2).map(w => w.toLowerCase());
 const chosen = TESTS.filter(t => !words.length || words.every(w => t.name.toLowerCase().includes(w)));

@@ -4,16 +4,16 @@
 <meta charset="UTF-8" /><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/palette-forge.html">
 <script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Free color palette generator — Palette Forge | MigaBuilder</title>
-<meta name="description" content="Pick a color or hit random, choose a harmony rule, and get a 5-color palette with hex codes ready to copy or export as CSS, and check text contrast against WCAG — free, instant, no account.">
+<title>Color palette, gradient and box shadow generator — Palette Forge | MigaBuilder</title>
+<meta name="description" content="Pick a color, choose a harmony rule or take the colors from a photo, and get a 5-color palette with hex codes. Check text contrast against WCAG, and build CSS gradients and box shadows — free, instant, no account.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Palette Forge — free color palette generator">
-<meta property="og:description" content="Pick a color or hit random, choose a harmony rule, and get a 5-color palette with hex codes ready to copy or export as CSS — free, instant, no account.">
+<meta property="og:description" content="Pick a color, choose a harmony rule or take the colors from a photo, and get a 5-color palette with hex codes. Check text contrast against WCAG, and build CSS gradients and box shadows — free, instant, no account.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/palette-forge.jpg">
 <meta property="og:url" content="https://migabuilder.com/palette-forge.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Palette Forge — free color palette generator">
-<meta name="twitter:description" content="Pick a color or hit random, choose a harmony rule, and get a 5-color palette with hex codes ready to copy or export as CSS — free, instant, no account.">
+<meta name="twitter:description" content="Pick a color, choose a harmony rule or take the colors from a photo, and get a 5-color palette with hex codes. Check text contrast against WCAG, and build CSS gradients and box shadows — free, instant, no account.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/palette-forge.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -105,9 +105,17 @@
 .cc-ratio{display:flex;align-items:baseline;gap:8px;margin:12px 0 6px}.cc-ratio b{font:700 34px 'IBM Plex Mono'}.cc-ratio span{color:rgba(22,32,43,.72)}
 .cc-checks{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}.cc-checks div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:6px 10px;font-size:13px}.cc-checks b{margin-right:4px}.cc-checks .pass b{color:#2f7a52}.cc-checks .fail b{color:#b8432e}
 .cc-pairs{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}.cc-pairs td,.cc-pairs th{padding:5px 6px;border-bottom:1px solid rgba(22,32,43,.1);text-align:left}.cc-pairs .chip{display:inline-block;padding:3px 8px;border-radius:4px;font-weight:700;cursor:pointer;border:1px solid rgba(22,32,43,.15)}
+.pf-h{font:700 18px 'Space Grotesk';margin:0 0 6px}
+.photo-drop{display:flex;gap:14px;align-items:center;border:1px dashed rgba(22,32,43,.35);border-radius:6px;padding:12px;background:#fff;cursor:pointer}.photo-drop img{width:96px;height:72px;object-fit:cover;border-radius:4px;background:#e2dece}.photo-drop.drag{border-color:var(--amber);background:#fff8e8}
+.gr-preview{height:200px;border-radius:8px;border:1px solid rgba(22,32,43,.15);margin-bottom:14px}
+.gr-stops{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}.gr-stop{display:grid;grid-template-columns:48px 1fr 54px 34px;gap:8px;align-items:center}.gr-stop input[type=color]{height:36px;padding:2px}.gr-stop input[type=range]{width:100%}.gr-stop span{font:12px 'IBM Plex Mono',monospace;text-align:right}.gr-stop button{height:34px;border:1px solid rgba(22,32,43,.28);background:#fff;border-radius:3px;cursor:pointer}
+.pf-range{display:grid;grid-template-columns:110px 1fr 52px;gap:8px;align-items:center;margin-bottom:8px;font-size:13px}.pf-range span{font:12px 'IBM Plex Mono',monospace;text-align:right}
+.pf-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}.pf-chips button{padding:6px 10px;border:1px solid rgba(22,32,43,.28);background:#fff;border-radius:14px;cursor:pointer;font-size:13px}
+.sh-stage{display:flex;align-items:center;justify-content:center;height:230px;border-radius:8px;border:1px solid rgba(22,32,43,.15);margin-bottom:14px;transition:background .2s}.sh-box{width:150px;height:110px;background:#fff;display:flex;align-items:center;justify-content:center;font:600 14px 'Space Grotesk';color:#16202b}
+.pf-check{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;margin:4px 0 12px}
 </style>
 <link rel="stylesheet" href="tutorials.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does it check accessibility?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It checks text contrast against WCAG, so you can pick colours that are easy to read."}}, {"@type": "Question", "name": "Is Palette Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I get a palette from a photo?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Choose or drop an image and Palette Forge finds its five main colors. The image is read in your browser and never uploaded."}}, {"@type": "Question", "name": "Can I make CSS gradients and shadows?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The gradient generator builds linear, radial and conic gradients from your palette, and the box shadow generator makes soft, layered or inset shadows. Copy the CSS, or download the gradient as a PNG."}}, {"@type": "Question", "name": "Does it check accessibility?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It checks text contrast against WCAG, so you can pick colours that are easy to read."}}, {"@type": "Question", "name": "Is Palette Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head>
 <body>
 
@@ -147,6 +155,12 @@
     </div>
   </div>
 
+  <div class="panel" id="photoPanel">
+    <h2 class="pf-h">📷 Palette from a photo</h2>
+    <p class="hint" style="margin-top:0">Pick a photo, logo or screenshot and get its main colors. The photo stays on your device.</p>
+    <label class="photo-drop" id="photoDrop"><img id="photoThumb" alt=""><span><b>Choose or drop an image</b><br><small>JPG, PNG, WebP or GIF</small></span><input type="file" id="photoInput" accept="image/*" hidden></label>
+    <div class="status-box" id="photoStatus" style="margin-top:10px"></div>
+  </div>
   <div class="panel">
     <div class="swatches" id="swatches"></div>
     <div class="btn-row" style="margin-top:14px;">
@@ -169,14 +183,44 @@
     <div class="cc-checks" id="ccChecks"></div>
     <div id="ccPairs"></div>
   </div>
+  <div class="panel" id="gradientPanel">
+    <h2 class="pf-h">🌈 CSS gradient generator</h2>
+    <p class="hint" style="margin-top:0">Build a gradient from your palette, then copy the CSS or download it as a background image.</p>
+    <div class="gr-preview" id="grPreview"></div>
+    <div class="row-2"><div class="field"><label for="grType">Type</label><select id="grType"><option value="linear">Linear</option><option value="radial">Radial</option><option value="conic">Conic</option></select></div><div class="field"><label for="grAngle">Angle: <span id="grAngleVal">135°</span></label><input type="range" id="grAngle" min="0" max="360" value="135" style="width:100%;margin-top:12px"></div></div>
+    <div class="gr-stops" id="grStops"></div>
+    <div class="pf-chips"><button type="button" id="grFromPalette">🎨 Use my palette</button><button type="button" id="grAdd">＋ Add color</button><button type="button" id="grReverse">⇄ Reverse</button><button type="button" id="grRandom">🎲 Random</button></div>
+    <div class="btn-row"><button type="button" class="draft-btn" id="grCopy">Copy CSS</button><button type="button" class="draft-btn secondary" id="grPng">Download PNG (1920×1080)</button></div>
+    <pre class="copy-box" id="grCss"></pre>
+  </div>
+  <div class="panel" id="shadowPanel">
+    <h2 class="pf-h">🔲 Box shadow generator</h2>
+    <p class="hint" style="margin-top:0">Move the sliders until it looks right, then copy the CSS.</p>
+    <div class="sh-stage" id="shStage"><div class="sh-box" id="shBox">Card</div></div>
+    <div class="pf-chips" id="shPresets"><button type="button" data-p="soft">Soft</button><button type="button" data-p="layered">Layered</button><button type="button" data-p="hard">Hard edge</button><button type="button" data-p="glow">Glow</button><button type="button" data-p="inset">Inset</button><button type="button" data-p="float">Floating</button></div>
+    <div class="pf-range"><label for="shX">Right / left</label><input type="range" id="shX" min="-60" max="60" value="0"><span id="shXv"></span></div>
+    <div class="pf-range"><label for="shY">Down / up</label><input type="range" id="shY" min="-60" max="60" value="12"><span id="shYv"></span></div>
+    <div class="pf-range"><label for="shBlur">Blur</label><input type="range" id="shBlur" min="0" max="120" value="30"><span id="shBlurv"></span></div>
+    <div class="pf-range"><label for="shSpread">Spread</label><input type="range" id="shSpread" min="-40" max="40" value="-6"><span id="shSpreadv"></span></div>
+    <div class="pf-range"><label for="shAlpha">Darkness</label><input type="range" id="shAlpha" min="0" max="100" value="22"><span id="shAlphav"></span></div>
+    <div class="pf-range"><label for="shRadius">Corner radius</label><input type="range" id="shRadius" min="0" max="60" value="14"><span id="shRadiusv"></span></div>
+    <div class="row-2"><div class="field"><label for="shColor">Shadow color</label><input type="color" id="shColor" value="#16202b"></div><div class="field"><label for="shBg">Background</label><input type="color" id="shBg" value="#edeae0"></div></div>
+    <div class="pf-check"><label><input type="checkbox" id="shInset"> Inset (inner shadow)</label><label><input type="checkbox" id="shLayers"> Smooth layers</label></div>
+    <div class="btn-row"><button type="button" class="draft-btn" id="shCopy">Copy CSS</button></div>
+    <pre class="copy-box" id="shCss"></pre>
+  </div>
 </div>
 
 
 <section class="miga-about" aria-labelledby="miga-about-h">
   <h2 id="miga-about-h">About Palette Forge</h2>
-  <p>Palette Forge builds a 5-colour palette from a starting colour and a harmony rule, with hex codes and a WCAG contrast check.</p>
+  <p>Palette Forge builds a 5-colour palette from a starting colour, a harmony rule or a photo, with hex codes and a WCAG contrast check. It also makes CSS gradients and box shadows from your colours.</p>
   <h3>How to use Palette Forge</h3>
-  <ol><li>Choose a starting color or describe the brand mood.</li><li>Press “Build palette”.</li><li>Check contrast and copy or download the accessible colors.</li></ol>
+  <ol><li>Choose a starting color and a harmony, or take the colors from a photo.</li><li>Press “Generate palette”.</li><li>Check contrast, copy the colors, and turn them into a gradient or a shadow.</li></ol>
+  <h3>Can I get a palette from a photo?</h3>
+  <p>Yes. Choose or drop an image and Palette Forge finds its five main colors. The image is read in your browser and never uploaded.</p>
+  <h3>Can I make CSS gradients and shadows?</h3>
+  <p>Yes. The gradient generator builds linear, radial and conic gradients from your palette, and the box shadow generator makes soft, layered or inset shadows. Copy the CSS, or download the gradient as a PNG.</p>
   <h3>Does it check accessibility?</h3>
   <p>Yes. It checks text contrast against WCAG, so you can pick colours that are easy to read.</p>
   <h3>Is Palette Forge free?</h3>
@@ -330,6 +374,7 @@
   function generate() {
     renderPalette(buildPalette(baseColor.value, harmonyType.value));
   }
+  window.PaletteForge = { render: renderPalette, colors: function () { return currentPalette.slice(); } };
 
   document.getElementById('generateBtn').addEventListener('click', generate);
   document.getElementById('randomBtn').addEventListener('click', function () {
@@ -540,6 +585,123 @@
   // Clicking a swatch copies it (as before) and also makes it the background here.
   $('swatches').addEventListener('click', function (e) { var row = e.target.closest('.swatch-row'); var h = row && row.querySelector('.swatch-hex'); if (h) set('bg', h.textContent); });
   pairs(); render();
+})();
+</script>
+<script>
+/* Palette from a photo, CSS gradient generator and box shadow generator. */
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  function hx(c) { return '#' + c.map(function (v) { return ('0' + Math.round(Math.max(0, Math.min(255, v))).toString(16)).slice(-2); }).join(''); }
+  function rgbOf(h) { return [1, 3, 5].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }); }
+  function copy(text) { try { navigator.clipboard.writeText(text); } catch (e) {} }
+
+  // ---------- palette from a photo: k-means on a small copy of the image ----------
+  function extract(img) {
+    var c = document.createElement('canvas'), w = 120, h = Math.max(1, Math.round(120 * img.naturalHeight / img.naturalWidth));
+    c.width = w; c.height = h; var x = c.getContext('2d', { willReadFrequently: true }); x.drawImage(img, 0, 0, w, h);
+    var d = x.getImageData(0, 0, w, h).data, px = [];
+    for (var i = 0; i < d.length; i += 4) if (d[i + 3] > 200) px.push([d[i], d[i + 1], d[i + 2]]);
+    if (px.length < 5) return null;
+    var k = 5, cent = [], dist = function (a, b) { return (a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]); };
+    cent.push(px[Math.floor(px.length / 2)]);
+    while (cent.length < k) { // k-means++ style start: the pixel furthest from the chosen centres
+      var best = 0, bi = 0; for (var j = 0; j < px.length; j += 3) { var m = Infinity; cent.forEach(function (cc) { m = Math.min(m, dist(px[j], cc)); }); if (m > best) { best = m; bi = j; } }
+      cent.push(px[bi]);
+    }
+    var counts;
+    for (var it = 0; it < 12; it++) {
+      var sums = cent.map(function () { return [0, 0, 0]; }); counts = cent.map(function () { return 0; });
+      px.forEach(function (p) { var bi = 0, bd = Infinity; cent.forEach(function (cc, ci) { var dd = dist(p, cc); if (dd < bd) { bd = dd; bi = ci; } }); sums[bi][0] += p[0]; sums[bi][1] += p[1]; sums[bi][2] += p[2]; counts[bi]++; });
+      cent = cent.map(function (cc, ci) { return counts[ci] ? sums[ci].map(function (v) { return v / counts[ci]; }) : cc; });
+    }
+    return cent.map(function (cc, i) { return { hex: hx(cc), n: counts[i] }; }).sort(function (a, b) { return b.n - a.n; }).map(function (o) { return o.hex; });
+  }
+  function loadPhoto(file) {
+    if (!file || !/^image\//.test(file.type)) { $('photoStatus').textContent = 'Choose an image file (JPG, PNG, WebP or GIF).'; $('photoStatus').classList.add('show'); return; }
+    var url = URL.createObjectURL(file), img = new Image();
+    img.onload = function () {
+      $('photoThumb').src = url;
+      var cols = extract(img);
+      $('photoStatus').textContent = cols ? 'Found the 5 main colors in ' + file.name + ', most used first. Click a color to copy it.' : 'That image is almost fully transparent, so there are no colors to take.';
+      $('photoStatus').classList.add('show');
+      if (cols) { window.PaletteForge.render(cols); $('baseColor').value = cols[0]; setStops(cols); }
+    };
+    img.onerror = function () { $('photoStatus').textContent = 'This browser cannot open that image.'; $('photoStatus').classList.add('show'); };
+    img.src = url;
+  }
+  $('photoInput').addEventListener('change', function (e) { loadPhoto(e.target.files[0]); });
+  var drop = $('photoDrop');
+  ['dragenter', 'dragover'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.add('drag'); }); });
+  ['dragleave', 'drop'].forEach(function (ev) { drop.addEventListener(ev, function (e) { e.preventDefault(); drop.classList.remove('drag'); }); });
+  drop.addEventListener('drop', function (e) { loadPhoto(e.dataTransfer.files[0]); });
+
+  // ---------- gradient ----------
+  var stops = [];
+  function setStops(cols) { var n = cols.length; stops = cols.map(function (c, i) { return { c: c.toLowerCase(), p: n > 1 ? Math.round(i * 100 / (n - 1)) : 0 }; }); drawStops(); renderGradient(); }
+  function css() {
+    var t = $('grType').value, a = $('grAngle').value, list = stops.slice().sort(function (x, y) { return x.p - y.p; }).map(function (s) { return s.c + ' ' + s.p + '%'; }).join(', ');
+    return t === 'linear' ? 'linear-gradient(' + a + 'deg, ' + list + ')' : t === 'radial' ? 'radial-gradient(circle at center, ' + list + ')' : 'conic-gradient(from ' + a + 'deg at center, ' + list + ')';
+  }
+  function renderGradient() {
+    var g = css(); $('grPreview').style.background = g; $('grAngleVal').textContent = $('grAngle').value + '°';
+    $('grAngle').disabled = $('grType').value === 'radial';
+    $('grCss').textContent = 'background: ' + stops[0].c + ';\nbackground: ' + g + ';';
+  }
+  function drawStops() {
+    var box = $('grStops'); box.innerHTML = '';
+    stops.forEach(function (s, i) {
+      var row = document.createElement('div'); row.className = 'gr-stop';
+      var col = document.createElement('input'); col.type = 'color'; col.value = s.c; col.setAttribute('aria-label', 'Color ' + (i + 1));
+      var pos = document.createElement('input'); pos.type = 'range'; pos.min = 0; pos.max = 100; pos.value = s.p; pos.setAttribute('aria-label', 'Position of color ' + (i + 1));
+      var lab = document.createElement('span'); lab.textContent = s.p + '%';
+      var del = document.createElement('button'); del.type = 'button'; del.textContent = '✕'; del.title = 'Remove this color'; del.disabled = stops.length <= 2;
+      col.oninput = function () { s.c = col.value; renderGradient(); };
+      pos.oninput = function () { s.p = +pos.value; lab.textContent = s.p + '%'; renderGradient(); };
+      del.onclick = function () { stops.splice(i, 1); drawStops(); renderGradient(); };
+      row.append(col, pos, lab, del); box.appendChild(row);
+    });
+  }
+  $('grType').onchange = renderGradient; $('grAngle').oninput = renderGradient;
+  $('grFromPalette').onclick = function () { setStops(window.PaletteForge.colors()); };
+  $('grAdd').onclick = function () { if (stops.length >= 8) return; var last = stops[stops.length - 1]; stops.push({ c: last.c, p: 100 }); if (stops.length > 1) stops.forEach(function (s, i) { s.p = Math.round(i * 100 / (stops.length - 1)); }); drawStops(); renderGradient(); };
+  $('grReverse').onclick = function () { stops.forEach(function (s) { s.p = 100 - s.p; }); stops.reverse(); drawStops(); renderGradient(); };
+  $('grRandom').onclick = function () { var h = Math.random() * 360, cols = [0, 1, 2].map(function (i) { var hh = (h + i * (25 + Math.random() * 50)) % 360, c = document.createElement('canvas').getContext('2d'); c.fillStyle = 'hsl(' + hh + ',' + (55 + Math.random() * 35) + '%,' + (45 + Math.random() * 20) + '%)'; return c.fillStyle; }); $('grAngle').value = Math.round(Math.random() * 360); setStops(cols); };
+  $('grCopy').onclick = function () { copy($('grCss').textContent); this.textContent = 'Copied ✓'; var b = this; setTimeout(function () { b.textContent = 'Copy CSS'; }, 1400); };
+  $('grPng').onclick = function () {
+    var W = 1920, H = 1080, c = document.createElement('canvas'); c.width = W; c.height = H; var x = c.getContext('2d'), t = $('grType').value, a = $('grAngle').value * Math.PI / 180, g;
+    if (t === 'linear') { // match CSS: the line runs through the centre at the angle, long enough to reach the corners
+      var dx = Math.sin(a), dy = -Math.cos(a), len = Math.abs(W * dx) + Math.abs(H * dy);
+      g = x.createLinearGradient(W / 2 - dx * len / 2, H / 2 - dy * len / 2, W / 2 + dx * len / 2, H / 2 + dy * len / 2);
+    } else if (t === 'radial') g = x.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.hypot(W, H) / 2);
+    else g = x.createConicGradient(a - Math.PI / 2, W / 2, H / 2);
+    stops.slice().sort(function (p, q) { return p.p - q.p; }).forEach(function (s) { g.addColorStop(s.p / 100, s.c); });
+    x.fillStyle = g; x.fillRect(0, 0, W, H);
+    c.toBlob(function (b) { var u = URL.createObjectURL(b), l = document.createElement('a'); l.href = u; l.download = 'gradient.png'; l.click(); setTimeout(function () { URL.revokeObjectURL(u); }, 1000); }, 'image/png');
+  };
+
+  // ---------- box shadow ----------
+  var ids = ['shX', 'shY', 'shBlur', 'shSpread', 'shAlpha', 'shRadius'];
+  var presets = { soft: [0, 12, 30, -6, 22, 14, false, false], layered: [0, 16, 40, 0, 20, 14, false, true], hard: [8, 8, 0, 0, 100, 4, false, false], glow: [0, 0, 36, 4, 60, 20, false, false], inset: [0, 4, 12, 0, 30, 12, true, false], float: [0, 30, 60, -12, 30, 18, false, true] };
+  function rgba(alpha) { var c = rgbOf($('shColor').value); return 'rgba(' + c.join(', ') + ', ' + (+alpha).toFixed(2).replace(/\.?0+$/, '') + ')'; }
+  function shadow() {
+    var v = ids.map(function (id) { return +$(id).value; }), inset = $('shInset').checked ? 'inset ' : '', a = v[4] / 100, out;
+    if ($('shLayers').checked) { // several shadows that double in size: looks smoother than one big blur
+      out = [1, 2, 4, 8, 16].map(function (f) { return inset + Math.round(v[0] * f / 16) + 'px ' + Math.round(v[1] * f / 16) + 'px ' + Math.round(v[2] * f / 16) + 'px ' + Math.round(v[3] * f / 16) + 'px ' + rgba(a / 2.2); }).join(',\n    ');
+    } else out = inset + v[0] + 'px ' + v[1] + 'px ' + v[2] + 'px ' + v[3] + 'px ' + rgba(a);
+    ids.forEach(function (id, i) { $(id + 'v').textContent = id === 'shAlpha' ? v[i] + '%' : v[i] + 'px'; });
+    $('shBox').style.boxShadow = out.replace(/\n\s*/g, ' '); $('shBox').style.borderRadius = v[5] + 'px'; $('shStage').style.background = $('shBg').value;
+    $('shCss').textContent = 'border-radius: ' + v[5] + 'px;\nbox-shadow: ' + out + ';';
+  }
+  ids.concat(['shColor', 'shBg', 'shInset', 'shLayers']).forEach(function (id) { $(id).addEventListener('input', shadow); });
+  $('shPresets').addEventListener('click', function (e) { var p = presets[e.target.dataset && e.target.dataset.p]; if (!p) return; ids.forEach(function (id, i) { $(id).value = p[i]; }); $('shInset').checked = p[6]; $('shLayers').checked = p[7]; shadow(); });
+  $('shCopy').onclick = function () { copy($('shCss').textContent); this.textContent = 'Copied ✓'; var b = this; setTimeout(function () { b.textContent = 'Copy CSS'; }, 1400); };
+
+  setStops(window.PaletteForge.colors().length ? window.PaletteForge.colors() : ['#2e6f9e', '#6fd1e0', '#e2a63b']);
+  // A new palette refreshes the gradient, unless the person already changed the gradient by hand.
+  new MutationObserver(function () { if (!$('grStops').dataset.touched) setStops(window.PaletteForge.colors()); }).observe($('swatches'), { childList: true });
+  $('grStops').addEventListener('input', function () { $('grStops').dataset.touched = '1'; });
+  shadow();
 })();
 </script>
 <script src="tutorials.js" defer></script>
