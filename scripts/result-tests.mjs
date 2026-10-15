@@ -701,7 +701,9 @@ test('everyday-forge: the loan and savings calculators give the textbook answers
   await page.click('.tab[data-mode="finance"]');
   await page.selectOption('#finCur', 'USD');
   await page.fill('#lnAmount', '200000'); await page.fill('#lnRate', '6'); await page.fill('#lnYears', '30');
-  expect((await page.textContent('#lnKpis')).includes('$1,199.10'), 'a 200,000 loan at 6% for 30 years should cost $1,199.10 a month: ' + await page.textContent('#lnKpis'));
+  // Amounts are formatted for the browser's language, so compare the digits only.
+  const digits = async sel => (await page.textContent(sel)).replace(/[^\d]/g, '');
+  expect((await digits('#lnKpis')).startsWith('119910'), 'a 200,000 loan at 6% for 30 years should cost $1,199.10 a month: ' + await page.textContent('#lnKpis'));
   const loan = (await downloadOf(page, () => page.click('#lnCsv'))).buf.toString();
   const rows = loan.trim().split('\n');
   expect(rows.length === 31 && rows[30].startsWith('30,') && rows[30].endsWith(',0.00'), 'the loan schedule should end with nothing owed after 30 years:\n' + rows.slice(-2).join('\n'));
@@ -709,13 +711,13 @@ test('everyday-forge: the loan and savings calculators give the textbook answers
   expect(/Interest saved/.test(await page.textContent('#lnKpis')), 'an extra payment does not show the interest saved');
   await page.click('.fsub[data-f="save"]');
   await page.fill('#svStart', '1000'); await page.fill('#svMonthly', '0'); await page.fill('#svRate', '10'); await page.fill('#svYears', '10'); await page.selectOption('#svComp', '1');
-  expect((await page.textContent('#svKpis')).includes('$2,594'), '1,000 at 10% a year for 10 years should grow to $2,594: ' + await page.textContent('#svKpis'));
+  expect((await digits('#svKpis')).startsWith('2594'), '1,000 at 10% a year for 10 years should grow to $2,594: ' + await page.textContent('#svKpis'));
   const sav = (await downloadOf(page, () => page.click('#svCsv'))).buf.toString();
   expect(sav.startsWith('Year,Put in,Interest earned,Balance\n1,1000.00,100.00,1100.00'), 'the savings table is wrong:\n' + sav.slice(0, 120));
   await page.click('.fsub[data-f="margin"]');
   await page.fill('#mgCost', '60'); await page.selectOption('#mgMode', 'margin'); await page.fill('#mgValue', '40'); await page.fill('#mgVat', '25');
   const mg = await page.textContent('#mgKpis');
-  expect(mg.includes('$100.00') && mg.includes('$125.00') && mg.includes('66.7 %'), 'a 40% margin on a cost of 60 should be a price of 100 (125 with VAT), markup 66.7%: ' + mg);
+  expect(/100[.,]00/.test(mg) && /125[.,]00/.test(mg) && /66[.,]7 %/.test(mg), 'a 40% margin on a cost of 60 should be a price of 100 (125 with VAT), markup 66.7%: ' + mg);
 });
 
 test('markdown-forge: the toolbar formats text, the preview updates, Word-style HTML becomes Markdown, .md and .html download', 'markdown-forge.html', async (page) => {
