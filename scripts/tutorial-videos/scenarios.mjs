@@ -156,40 +156,66 @@ S('form-forge.html', {
 });
 
 S('everyday-forge.html', {
-  title: 'Everyday Forge', subtitle: 'Charts, passwords and quick converters',
-  intro: 'Welcome to Everyday Forge. It bundles everyday helpers: charts, writing tools, passwords and converters.',
+  title: 'Everyday Forge', subtitle: 'Calculators, charts and converters',
+  intro: 'Welcome to Everyday Forge. It bundles everyday helpers: money calculators, charts, writing tools, passwords and converters.',
   async run(h) {
-    await h.step('Let us make a chart. Choose the chart type and give it a title.', async () => { await h.select('#chartType', 'bar'); await h.type('#chartTitle', 'Bread sold this week'); });
-    await h.step('Type one label and number per line.', () => h.type('#chartData', 'Monday, 42\nTuesday, 38\nWednesday, 51\nThursday, 47\nFriday, 66\nSaturday, 90', { visible: 30 }));
-    await h.step('Press Create chart.', () => h.click('#drawChart'));
-    await h.step('Your chart is ready to download as a picture. The other tabs generate passwords and convert units and currencies.', () => h.point('#saveChart'));
+    await h.step('Let us make a chart first. Type one label and number per line, and press Create chart.', async () => { await h.type('#chartTitle', 'Bread sold this week'); await h.type('#chartData', 'Monday, 42\nTuesday, 38\nWednesday, 51\nThursday, 47\nFriday, 66\nSaturday, 90', { visible: 30 }); await h.click('#drawChart'); });
     await h.sampleDownload('#saveChart', 'Chart made in this video');
+    await h.step('Now open the loan and savings calculators.', async () => { await h.scroll('main', 'start'); await h.click('.tab[data-mode="finance"]'); await h.select('#finCur', 'USD'); });
+    await h.step('For a loan or a mortgage, enter the amount, the interest rate and the number of years.', async () => { await h.fill('#lnAmount', '300000'); await h.fill('#lnRate', '5'); await h.fill('#lnYears', '30'); });
+    await h.step('You see the monthly payment, the total interest, and how each year splits between paying off the loan and paying interest.', async () => { await h.point('#lnKpis'); await h.scroll('#lnChart', 'center'); });
+    await h.step('Add a small extra payment each month, and see how much interest you save and how much sooner the loan is paid off.', async () => { await h.fill('#lnExtra', '250'); await h.point('#lnKpis'); });
+    await h.step('The savings calculator shows how money grows with compound interest. Set a goal, and it tells you when you reach it.', async () => { await h.click('.fsub[data-f="save"]'); await h.fill('#svMonthly', '300'); await h.fill('#svGoal', '150000'); await h.scroll('#svKpis', 'start'); });
+    await h.step('There is also a price, margin and VAT calculator for your business, and quick percentage sums. The schedules download as spreadsheets.', async () => { await h.click('.fsub[data-f="margin"]'); await h.point('#mgKpis'); });
   }
 });
 
 S('utility-forge.html', {
-  title: 'Utility Forge', subtitle: 'CSV, JSON, text and checksums',
-  intro: 'Welcome to Utility Forge. It converts data files and checks files, privately in your browser.',
+  title: 'Utility Forge', subtitle: 'JSON viewer, Base64, lorem ipsum and more',
+  intro: 'Welcome to Utility Forge. It is a private toolbox for anyone who works with data, and everything runs in your browser.',
   async run(h) {
-    await h.step('Choose the conversion. Here we turn a spreadsheet in CSV format into JSON for a web app.', () => h.select('#direction', 'csv-json'));
-    await h.step('Paste your data.', () => h.type('#dataInput', 'product,price,in_stock\nSourdough,3.50,yes\nRye,3.20,yes\nCarrot cake,4.50,no', { visible: 40 }));
-    await h.step('Press Convert, and the result appears below.', () => h.click('#convert'));
-    await h.step('Download the result. The other tabs combine text files and create checksums to verify downloads.', () => h.point('#downloadData'));
-    await h.sampleDownload('#downloadData', 'Converted data from this video');
+    await h.step('Start with the JSON viewer. Paste some JSON. This one has a small mistake in it.', () => h.type('#jsonInput', '{\n  "shop": "Corner Bakery",\n  "open": true,\n  "items": [\n    {"name": "Sourdough", "price": 3.5},\n    {"name": "Rye", "price": 3.2},\n  ]\n}', { visible: 60 }));
+    await h.step('Press Format and view. It shows exactly which line is broken, and why.', async () => { await h.click('#jsonFormat'); await h.point('#jsonError'); });
+    await h.step('Remove the extra comma and press it again. Now the JSON is neatly formatted and shown as a tree that you can open and close.', async () => { await h.fill('#jsonInput', '{"shop":"Corner Bakery","open":true,"address":{"street":"Mill Lane 4","city":"Bristol"},"items":[{"name":"Sourdough","price":3.5},{"name":"Rye","price":3.2},{"name":"Carrot cake","price":4.5}]}'); await h.click('#jsonFormat'); await h.scroll('#jsonStats', 'start'); });
+    await h.step('Search for any key or value. Click a key to copy its path for your code.', async () => { await h.type('#jsonSearch', 'price'); await h.point('#jsonTree mark'); });
+    await h.step('Download the formatted file, or minify it and sort the keys.', () => h.point('#jsonDownload'));
+    await h.sampleDownload('#jsonDownload', 'Formatted JSON from this video');
+    await h.step('The next card encodes and decodes Base64 and web addresses, and reads JWT login tokens, without sending them anywhere.', async () => { await h.scroll('main', 'start'); await h.click('.card[data-mode="encode"]'); await h.select('#encOp', 'jwt'); await h.fill('#encInput', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MiIsIm5hbWUiOiJBbGV4IiwiZXhwIjoxOTAwMDAwMDAwfQ.signature'); await h.click('#encRun'); await h.point('#jwtOut'); });
+    await h.step('Need placeholder text for a design? Choose how many paragraphs, and get lorem ipsum as text, HTML or Markdown. Unique IDs are one click away too.', async () => { await h.scroll('main', 'start'); await h.click('.card[data-mode="lorem"]'); await h.select('#lorFormat', 'html'); await h.click('#lorRun'); await h.point('#lorOutput'); });
+    await h.step('And the timestamp converter turns Unix time into a readable date, and back.', async () => { await h.scroll('main', 'start'); await h.click('.card[data-mode="time"]'); await h.fill('#tsInput', '1700000000'); await h.click('#tsRun'); await h.point('#tsOut'); });
+    await h.step('CSV to JSON, combining text files and checksums are here as well.', async () => { await h.scroll('main', 'start'); await h.point('.card[data-mode="csvjson"]'); });
+  }
+});
+
+S('markdown-forge.html', {
+  title: 'Markdown Forge', subtitle: 'A Markdown editor with live preview',
+  intro: 'Welcome to Markdown Forge. You write in Markdown on the left, and see it formatted on the right as you type.',
+  async run(h, page) {
+    await page.evaluate(() => { try { localStorage.removeItem('miga-markdown-doc'); } catch (e) {} });
+    await h.step('Type a hash and a space for a heading. Everything appears formatted on the right straight away.', () => h.type('#mdInput', '# Trip to Lisbon\n\nWe fly on Friday morning and stay four nights.\n\n## To pack\n', { visible: 80 }));
+    await h.step('Select a word and press B, or Control and B, to make it bold.', async () => { await page.evaluate(() => { const t = document.getElementById('mdInput'), i = t.value.indexOf('four nights'); t.focus(); t.setSelectionRange(i, i + 11); }); await h.click('[data-md="bold"]'); });
+    await h.step('Add a task list. Press Enter, and the next item starts by itself.', async () => { await page.evaluate(() => { const t = document.getElementById('mdInput'); t.focus(); t.setSelectionRange(t.value.length, t.value.length); }); await h.click('[data-md="task"]'); await page.keyboard.type('Passport', { delay: 40 }); await page.keyboard.press('Enter'); await page.keyboard.type('Sun cream', { delay: 40 }); await page.keyboard.press('Enter'); await page.keyboard.press('Enter'); });
+    await h.step('Tables are one click. Tick off a task right in the preview.', async () => { await h.click('[data-md="table"]'); await h.click('#mdPreview input[type=checkbox]'); });
+    await h.step('Copy text from Word, Google Docs or a web page and paste it here. Headings, lists, links and tables become Markdown. You can also open a Word file.', () => h.point('#mdConvertPaste'));
+    await h.step('Your text is saved in this browser while you work. Download it as a Markdown file, or open More export.', () => h.point('#mdDownloadMd'));
+    await h.step('Save it as a complete web page, copy it with formatting for an email or Word, or print it as a PDF.', async () => { await h.click('#mdMore'); await h.point('#mdDownloadHtml'); });
+    await h.sampleDownload('#mdDownloadHtml', 'Web page made in this video');
   }
 });
 
 S('palette-forge.html', {
-  title: 'Palette Forge', subtitle: 'Accessible colour palettes',
-  intro: 'Welcome to Palette Forge. It builds a colour palette for your brand that is easy to read.',
+  title: 'Palette Forge', subtitle: 'Palettes, gradients and shadows',
+  intro: 'Welcome to Palette Forge. It builds colour palettes that are easy to read, and turns them into CSS gradients and shadows.',
   async run(h) {
-    await h.step('Pick a base colour for your brand.', () => h.point('#baseColor'));
-    await h.step('Choose a harmony, such as complementary or triadic, and press Generate palette.', async () => { await h.select('#harmonyType', 'triadic'); await h.click('#generateBtn'); });
-    await h.step('Each colour shows its code and how readable text is on it.', () => h.point('#swatches'));
-    await h.sampleShot('#swatches', 'Palette made in this video');
-    await h.step('Copy the colour codes, or copy them as ready made CSS for your website.', () => h.point('#copyCssBtn'));
-    await h.step('The contrast checker tests text on a background against the accessibility guidelines. Grey on white only just fails for normal text.', async () => { await h.scroll('#contrastPanel', 'start'); await h.fill('#ccFgHex', '#777777'); await h.fill('#ccBgHex', '#FFFFFF'); });
-    await h.step('Press Fix the text colour, and it finds the closest colour that passes. Below are the readable pairs in your palette.', async () => { await h.click('#ccFix'); await h.point('#ccPairs'); });
+    await h.step('Pick a base colour and a harmony, such as triadic, and press Generate palette.', async () => { await h.select('#harmonyType', 'triadic'); await h.click('#generateBtn'); });
+    await h.step('Or take the colours from a photo. Choose a picture, and you get its five main colours, most used first.', async () => { await h.upload('#photoInput', 'landscape.jpg'); await h.point('#photoDrop'); await h.point('#swatches'); });
+    await h.step('Click a colour to copy it, or copy them all as ready made CSS.', () => h.point('#copyCssBtn'));
+    await h.step('The contrast checker tests text on a background against the accessibility guidelines. Press Fix the text colour, and it finds the closest colour that passes.', async () => { await h.scroll('#contrastPanel', 'start'); await h.fill('#ccFgHex', '#777777'); await h.fill('#ccBgHex', '#FFFFFF'); await h.click('#ccFix'); });
+    await h.step('Now turn the palette into a CSS gradient. It starts from your colours. Choose linear, radial or conic, and set the angle.', async () => { await h.scroll('#gradientPanel', 'start'); await h.select('#grType', 'linear'); await h.fill('#grAngle', '100'); });
+    await h.step('Move a colour, add one, or reverse them. Then copy the CSS, or download the gradient as a background picture.', async () => { await h.fill('#grStops .gr-stop:nth-child(2) input[type=range]', '35'); await h.point('#grCss'); });
+    await h.sampleDownload('#grPng', 'Gradient made in this video');
+    await h.step('Last, the box shadow generator. Pick a preset, like Layered, and move the sliders until it looks right.', async () => { await h.scroll('#shadowPanel', 'start'); await h.click('#shPresets [data-p="layered"]'); await h.fill('#shBlur', '70'); });
+    await h.step('Copy the CSS into your website.', () => h.point('#shCss'));
   }
 });
 
