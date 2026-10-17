@@ -740,6 +740,78 @@ test('markdown-forge: the toolbar formats text, the preview updates, Word-style 
   expect(!/onerror|<script/i.test(safe), 'the preview lets scripts through: ' + safe);
 });
 
+test('cipher-forge: every code round-trips, Crack it finds a shift, a link opens ready to decode, a picture and a password-locked photo message download', 'cipher-forge.html', async (page) => {
+  const res = await page.evaluate(() => {
+    const C = window.CipherForge, msg = 'Meet me at the tree house at four', o = { shift: 7, keyword: 'lemon', rails: 3 }, bad = [];
+    for (const c of ['caesar', 'rot13', 'atbash', 'vigenere', 'a1z26', 'morse', 'keypad', 'binary', 'reverse', 'railfence']) {
+      const e = C.encode(c, msg, o), d = C.decode(c, e, o);
+      if (e === msg || d.toUpperCase() !== msg.toUpperCase()) bad.push(c + ': ' + e + ' → ' + d);
+    }
+    return { bad, caesar: C.encode('caesar', 'Hello, World!', { shift: 3 }), morse: C.encode('morse', 'SOS'), crack: C.crack(C.encode('caesar', msg, { shift: 11 }))[0] };
+  });
+  expect(!res.bad.length, 'codes that do not round-trip:\n' + res.bad.join('\n'));
+  expect(res.caesar === 'Khoor, Zruog!' && res.morse === '... --- ...', 'wrong codes: ' + res.caesar + ' / ' + res.morse);
+  expect(res.crack.cipher === 'caesar' && res.crack.shift === 11 && res.crack.text === 'Meet me at the tree house at four', 'Crack it did not find shift 11: ' + JSON.stringify(res.crack));
+  await page.fill('#input', 'Hello friend'); await page.check('#shareKey');
+  const url = await page.evaluate(() => window.CipherForge.shareUrl());
+  await page.goto('about:blank'); await page.goto(url); await page.waitForTimeout(500);
+  expect((await page.textContent('#output')).trim() === 'Hello friend', 'the shared link did not decode: ' + await page.textContent('#output'));
+  await page.selectOption('#cipher', 'pigpen'); await page.click('[data-mode="encode"]'); await page.fill('#input', 'ABC');
+  expect(await page.$$eval('#output svg', s => s.length) === 3, 'Pigpen did not draw three symbols');
+  const pic = await downloadOf(page, () => page.click('#pictureBtn'));
+  expect(pic.name === 'secret-message.png' && magic(pic.buf, 0x89, 0x50, 0x4E, 0x47), 'the picture is not a PNG: ' + pic.name);
+  await page.setInputFiles('#hidePhoto', path.join(FIX, 'small-photo.png'));
+  await page.fill('#hideMsg', 'The key is under the mat'); await page.fill('#hidePass', 'tiger');
+  const hidden = await downloadOf(page, () => page.click('#hideBtn'));
+  expect(magic(hidden.buf, 0x89, 0x50, 0x4E, 0x47) && hidden.name.endsWith('-secret.png'), 'the photo with the hidden message is not a PNG: ' + hidden.name);
+  const tmp = path.join(os.tmpdir(), 'cipher-secret.png'); fs.writeFileSync(tmp, hidden.buf);
+  await page.setInputFiles('#revealPhoto', tmp); await page.fill('#revealPass', 'wrong'); await page.click('#revealBtn');
+  await page.waitForFunction(() => /Wrong password/.test(document.getElementById('stegoStatus').textContent), null, { timeout: 15000 });
+  await page.fill('#revealPass', 'tiger'); await page.click('#revealBtn');
+  await page.waitForFunction(() => document.getElementById('revealOut').textContent === 'The key is under the mat', null, { timeout: 15000 });
+});
+
+test('coloring-forge: AI page, tracing, Chinese stroke order, paint by numbers, maze and cover make pages, and the book downloads as one PDF', 'coloring-forge.html', async (page, ctx) => {
+  const png = fs.readFileSync(path.join(FIX, 'small-photo.png')).toString('base64');
+  let prompt = '';
+  await ctx.route(/migabuilder-gemini/, async route => {
+    prompt = JSON.parse(route.request().postData() || '{}').prompt || '';
+    await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ candidates: [{ content: { parts: [{ inlineData: { mimeType: 'image/png', data: png } }] } }] }) });
+  });
+  const pages = () => page.evaluate(() => window.ColoringForge.pages.length);
+  await page.fill('#colorPrompt', 'a smiling elephant'); await page.click('#colorMake');
+  await page.waitForFunction(() => window.ColoringForge.pages.length === 1, null, { timeout: 30000 });
+  expect(/coloring book page/.test(prompt) && prompt.includes('a smiling elephant'), 'the AI prompt is wrong: ' + prompt);
+  // The AI picture is turned into pure black and white.
+  const grey = await page.evaluate(() => { const c = window.ColoringForge.pages[0].cv, d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] > 40 && d[i] < 215 && d[i] === d[i + 1]) n++; return n / (d.length / 4); });
+  expect(grey < 0.02, 'the AI page is not black and white (' + (grey * 100).toFixed(1) + '% grey)');
+  await page.click('#addBtn');
+  await page.click('[data-tab="trace"]'); await page.selectOption('#traceKind', 'upper'); await page.click('#traceMake');
+  await page.waitForFunction(() => window.ColoringForge.pages.length >= 2, null, { timeout: 15000 });
+  const tracePages = await pages(); await page.click('#addBtn');
+  await page.click('[data-tab="hanzi"]'); await page.selectOption('#hanSet', 'han:numbers'); await page.click('#hanMake');
+  await page.waitForFunction(() => /Practice sheet ready/.test(document.getElementById('hanProgress').textContent), null, { timeout: 60000 });
+  expect(!/no stroke data/.test(await page.textContent('#hanProgress')), 'stroke order did not load: ' + await page.textContent('#hanProgress'));
+  await page.click('#addBtn');
+  await page.click('[data-tab="paint"]'); await page.setInputFiles('#paintPhoto', path.join(FIX, 'small-photo.png')); await page.selectOption('#paintColors', '6'); await page.click('#paintMake');
+  await page.waitForFunction(() => /colours and \d+ areas/.test(document.getElementById('paintProgress').textContent), null, { timeout: 60000 });
+  const used = +(await page.textContent('#paintProgress')).match(/(\d+) colours/)[1];
+  expect(used >= 2 && used <= 6 && await pages() === 2, 'paint by numbers made ' + used + ' colours / ' + await pages() + ' pages');
+  await page.click('[data-tab="maze"]'); await page.click('#mazeMake');
+  const sol = await page.evaluate(() => { const F = window.ColoringForge, m = F.makeMaze(10, 12, Math.random), p = F.solveMaze(m); return p[0] === 0 && p[p.length - 1] === 119; });
+  expect(sol && await pages() === 2, 'the maze or its answer page is missing');
+  const mazePng = await downloadOf(page, () => page.click('#pngBtn'));
+  expect(magic(mazePng.buf, 0x89, 0x50, 0x4E, 0x47) && mazePng.buf.length > 20000, 'the maze PNG is wrong: ' + mazePng.name);
+  const before = await page.evaluate(() => window.ColoringForge.book.length);
+  await page.click('[data-tab="cover"]'); await page.click('#coverMake'); await page.click('#addBtn');
+  await page.waitForFunction(n => window.ColoringForge.book.length === n + 1, before, { timeout: 15000 });
+  const total = before + 1;
+  expect(total >= 1 + tracePages + 2, 'the book has only ' + total + ' pages');
+  const pdf = await downloadOf(page, () => page.click('#pdfBtn'), 60000);
+  const pdfPages = (pdf.buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length;
+  expect(ascii(pdf.buf, 0, '%PDF') && pdf.name === 'emma-coloring-book.pdf' && pdfPages === total, 'the book PDF is wrong: ' + pdf.name + ', ' + pdfPages + ' pages, expected ' + total);
+});
+
 // ---------- runner ----------
 const words = process.argv.slice(2).map(w => w.toLowerCase());
 const chosen = TESTS.filter(t => !words.length || words.every(w => t.name.toLowerCase().includes(w)));

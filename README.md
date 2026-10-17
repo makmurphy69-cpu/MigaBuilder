@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**73 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**75 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -54,6 +54,8 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Chemistry Map** — an interactive periodic table of all 118 elements, coloured by family, state at any temperature, electronegativity, density, melting point, discovery date or block; open any element for its animated atom, where it is found, its forms, uses and compounds; put elements in a mixing bowl to see how they bond and the formula they form, see which elements build steel, glass, plastics, batteries, chips and more, work out molar masses, then play a scored quiz
 - **Mind Map** — mind maps, flowcharts and a whiteboard: select an idea and press Tab or Enter to add the next one, join boxes, decisions and start/end shapes with labelled arrows, add sticky notes, draw freehand with the pen, tidy the branches with one click, turn an indented list (or a topic, with optional AI) into a map, and download a PNG, an SVG or a text outline; the board is saved in your browser and works with touch
 - **Random Forge** — press one button for a random game, picture, idea, website, drawing prompt or story; pick a topic (space, fantasy, ocean, history, robots, spooky, sports, food or your own), set how random it gets from Sensible to Unhinged, lock the parts you like and reroll the rest, then **Build it**: the idea opens filled in, in 3D Game Forge as a playable game, Picture Forge, Mind Map, Website Builder, Paint Forge or 3D Cartoon. Share links, favourites, a daily challenge and an optional AI one-page plan
+- **Cipher Forge** — make and crack secret codes: Caesar shift, ROT13, Atbash, Vigenère, number code, Morse (with sound), Pigpen symbols, phone keypad, binary, backwards writing and rail fence, each with instructions for decoding by hand; read a coded note from a photo, crack an unknown code automatically, share a link that opens ready to decode, save the message as a picture, and hide a message (optionally locked with a password) invisibly inside a photo
+- **Coloring Forge** — printable pages for kids: AI coloring pages from a description, coloring pages from a photo, mandalas, alphabet pages and bubble-letter names, letter and name tracing worksheets, Chinese character practice with stroke order (plus Japanese, Korean, Arabic and other alphabets), paint by numbers from a photo with a colour-mixing key, and mazes with answers; collect them into a book with a cover and download one PDF or print it
 - **Markdown Forge** — a Markdown editor with a live preview: a toolbar and shortcuts for headings, lists, task lists, links, images, tables and code; a table of contents from your headings; paste from Word, Google Docs or web pages (or open a .docx or .html file) and it becomes Markdown; download .md or a complete HTML page, print to PDF, or copy formatted text for email and Word. Saved in the browser
 - **Utility Forge** — a JSON viewer, formatter and validator that shows the exact line of an error and lets you search a collapsible tree and copy any path; Base64, Base64URL and URL encoding, a JWT decoder, files ↔ Base64 data URLs; a lorem ipsum and UUID generator; a Unix timestamp converter; CSV ↔ JSON, combining text files and SHA checksums
 - **Palette Forge** — 5-colour palettes from colour harmonies or from a photo, a WCAG contrast checker, a CSS gradient generator (linear, radial, conic; download as a PNG) and a box shadow generator with presets and smooth layered shadows
@@ -78,7 +80,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 73 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 75 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 

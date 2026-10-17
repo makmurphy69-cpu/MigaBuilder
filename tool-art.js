@@ -331,6 +331,8 @@
     'text-compare': ['goya', 'troll', 'lens'],
     'utility-forge': ['constable', 'cactus', 'wrench'],
     'markdown-forge': ['morris', 'owl', 'pen'],
+    'cipher-forge': ['escher', 'goblin', 'lens', 'bowler'],
+    'coloring-forge': ['matisse', 'furball', 'pencil', 'beret'],
     'video-forge': ['caravaggio', 'dragon', 'clap'],
     'visits': ['banksy', 'furball', 'balloon'],
     'website-builder': ['hundertwasser', 'robot', 'wrench', 'cap'],

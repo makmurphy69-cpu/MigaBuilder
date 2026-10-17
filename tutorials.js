@@ -27,6 +27,8 @@
     'meet-forge.html':['Meet Forge','enter your name and create a meeting or an always-open community','Create new meeting','invite people, use the video room, or start separate topic discussions'],
     'ocr-forge.html':['OCR Forge','choose a clear image and select the document language','Extract text','check names and numbers, then copy or download the text'],
     'utility-forge.html':['Utility Forge','choose a tool: the JSON viewer, Base64, URL and JWT decoding, lorem ipsum and UUIDs, timestamps, CSV/JSON, text combining or checksums','Format & view','review the result and copy or download it'],
+    'cipher-forge.html':['Cipher Forge','pick a secret code such as the shift code and type your message — or choose Decode and paste one','Copy','copy the coded message, save it as a picture or share a link, and send the decoding instructions to your friend'],
+    'coloring-forge.html':['Coloring Forge','type your child’s name, pick a page type such as a coloring page, tracing sheet or maze and press the button','➕ Add to book','add every page you like to the book, then download the book as a PDF or print it'],
     'markdown-forge.html':['Markdown Forge','type Markdown on the left or open a file, using the toolbar for headings, lists, links and tables','Download .md','check the live preview, then download it as .md, HTML or PDF, or copy it as formatted text'],
     'site-checkup.html':['Website Checkup','upload or paste the HTML you want to review','Run website checkup','work through the SEO and accessibility fixes, then download the report'],
     'pdf-forge.html':['PDF Forge','choose one or more PDF files and set the page order or rotation','Merge / create PDF','download the finished PDF or split pages into a ZIP'],

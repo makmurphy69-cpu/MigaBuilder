@@ -355,6 +355,29 @@
    "kind": "html"
   }
  },
+ "cipher-forge.html": {
+  "title": "Cipher Forge",
+  "video": "https://videos.migabuilder.com/cipher-forge.mp4?v=d7df9556",
+  "poster": "https://videos.migabuilder.com/cipher-forge.jpg?v=695839ac",
+  "duration": 103,
+  "transcript": [
+   "Welcome to Cipher Forge. Let us write a secret message that only your friend can read.",
+   "Pick a secret code. We start with the shift code: every letter moves three places along the alphabet.",
+   "Type your message. The secret version appears on the right as you type.",
+   "Underneath you get instructions for decoding it by hand, with the alphabet key. Send them to your friend, so they can crack it with pen and paper.",
+   "There are eleven codes. In Pigpen, every letter becomes a little symbol.",
+   "Save it as a picture to send it, or share a link that opens ready to decode.",
+   "To read a message, choose Decode and paste it. Don’t know the code? Press Crack it. It tries every code and shows the answer that reads most like real words.",
+   "You can also read a coded note straight from a photo.",
+   "Last, hide a message inside a photo. It looks exactly the same, but your friend can reveal the message here, locked with a password if you like.",
+   "Now it is your turn. Open Cipher Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/cipher-forge.png",
+   "label": "Secret message made in this video",
+   "kind": "image"
+  }
+ },
  "clip-forge.html": {
   "title": "Clip Forge",
   "video": "https://videos.migabuilder.com/clip-forge.mp4?v=f944ac89",
@@ -414,6 +437,29 @@
    "file": "samples/code-forge.png",
    "label": "Lesson from this video",
    "kind": "image"
+  }
+ },
+ "coloring-forge.html": {
+  "title": "Coloring Forge",
+  "video": "https://videos.migabuilder.com/coloring-forge.mp4?v=5dfed005",
+  "poster": "https://videos.migabuilder.com/coloring-forge.jpg?v=cf90cdbe",
+  "duration": 111,
+  "transcript": [
+   "Welcome to Coloring Forge. It makes printable pages for children: coloring pages, tracing sheets, Chinese writing practice, paint by numbers and mazes, all collected into one book.",
+   "Type your child’s name. It goes on the cover and on the tracing sheets.",
+   "Start with a cover, and add it to the book.",
+   "A coloring page can be drawn by AI from a description, made from your own photo, or be a mandala. Here we make a mandala.",
+   "Letter tracing: capital letters, small letters, numbers, your own words, or your child’s name.",
+   "For Chinese, each character gets its pinyin and meaning, every stroke in the right order, grey copies to trace and empty boxes to practise.",
+   "Paint by numbers turns a photo into numbered areas. The colour key tells you how to mix every colour from red, yellow, blue, white and black.",
+   "Mazes come with a page that shows the answer.",
+   "Your book is down here. Put the pages in order, then download it as one PDF, or print it.",
+   "Now it is your turn. Open Coloring Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/coloring-forge.pdf",
+   "label": "Coloring book made in this video",
+   "kind": "pdf"
   }
  },
  "contract-forge.html": {
