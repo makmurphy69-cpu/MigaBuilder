@@ -203,6 +203,41 @@ S('markdown-forge.html', {
   }
 });
 
+S('cipher-forge.html', {
+  title: 'Cipher Forge', subtitle: 'Make and crack secret codes',
+  intro: 'Welcome to Cipher Forge. Let us write a secret message that only your friend can read.',
+  async run(h, page) {
+    await h.step('Pick a secret code. We start with the shift code: every letter moves three places along the alphabet.', () => h.select('#cipher', 'caesar'));
+    await h.step('Type your message. The secret version appears on the right as you type.', () => h.type('#input', 'Meet me at the tree house at four'));
+    await h.step('Underneath you get instructions for decoding it by hand, with the alphabet key. Send them to your friend, so they can crack it with pen and paper.', () => h.scroll('#guide', 'center'));
+    await h.step('There are eleven codes. In Pigpen, every letter becomes a little symbol.', async () => { await h.scroll('#codePanel'); await h.select('#cipher', 'pigpen'); });
+    await h.step('Save it as a picture to send it, or share a link that opens ready to decode.', () => h.point('#pictureBtn'));
+    await h.sampleDownload('#pictureBtn', 'Secret message made in this video');
+    await h.step('To read a message, choose Decode and paste it. Don’t know the code? Press Crack it. It tries every code and shows the answer that reads most like real words.', async () => { await h.select('#cipher', 'caesar'); await h.click('[data-mode="decode"]'); await h.type('#input', 'Wkh wuhdvxuh lv xqghu wkh eulgjh'); await h.click('#crackBtn'); });
+    await h.step('You can also read a coded note straight from a photo.', () => h.point('#codePanel label.btn'));
+    await h.step('Last, hide a message inside a photo. It looks exactly the same, but your friend can reveal the message here, locked with a password if you like.', async () => { await h.scroll('#stegoPanel'); await h.upload('#hidePhoto', 'landscape.jpg'); await h.fill('#hidePass', 'tiger'); await h.point('#hideBtn'); });
+  }
+});
+
+S('coloring-forge.html', {
+  title: 'Coloring Forge', subtitle: 'Printable coloring pages and worksheets',
+  intro: 'Welcome to Coloring Forge. It makes printable pages for children: coloring pages, tracing sheets, Chinese writing practice, paint by numbers and mazes, all collected into one book.',
+  async run(h, page) {
+    await h.step('Type your child’s name. It goes on the cover and on the tracing sheets.', () => h.type('#kidName', 'Emma'));
+    await h.step('Start with a cover, and add it to the book.', async () => { await h.click('[data-tab="cover"]'); await h.click('#coverMake'); await h.click('#addBtn'); });
+    await h.step('A coloring page can be drawn by AI from a description, made from your own photo, or be a mandala. Here we make a mandala.', async () => { await h.click('[data-tab="color"]'); await h.check('input[value="mandala"]'); await h.click('#colorMake'); await h.click('#addBtn'); });
+    await h.step('Letter tracing: capital letters, small letters, numbers, your own words, or your child’s name.', async () => { await h.click('[data-tab="trace"]'); await h.select('#traceKind', 'name'); await h.click('#traceMake'); await h.click('#addBtn'); });
+    await h.step('For Chinese, each character gets its pinyin and meaning, every stroke in the right order, grey copies to trace and empty boxes to practise.', async () => { await h.click('[data-tab="hanzi"]'); await h.select('#hanSet', 'han:animals'); await h.click('#hanMake'); });
+    await h.skip('Loading the stroke order', () => page.waitForFunction(() => /ready/.test(document.getElementById('hanProgress').textContent), null, { timeout: 60000 }));
+    await h.click('#addBtn');
+    await h.step('Paint by numbers turns a photo into numbered areas. The colour key tells you how to mix every colour from red, yellow, blue, white and black.', async () => { await h.click('[data-tab="paint"]'); await h.upload('#paintPhoto', 'landscape.jpg'); await h.click('#paintMake'); });
+    await h.skip('Finding the colours', () => page.waitForFunction(() => /areas to paint/.test(document.getElementById('paintProgress').textContent), null, { timeout: 60000 }));
+    await h.step('Mazes come with a page that shows the answer.', async () => { await h.click('[data-tab="maze"]'); await h.click('#mazeMake'); await h.click('#addBtn'); });
+    await h.step('Your book is down here. Put the pages in order, then download it as one PDF, or print it.', () => h.scroll('#bookPanel', 'center'));
+    await h.sampleDownload('#pdfBtn', 'Coloring book made in this video');
+  }
+});
+
 S('palette-forge.html', {
   title: 'Palette Forge', subtitle: 'Palettes, gradients and shadows',
   intro: 'Welcome to Palette Forge. It builds colour palettes that are easy to read, and turns them into CSS gradients and shadows.',

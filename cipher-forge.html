@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/cipher-forge.html">
+<meta property="og:title" content="Cipher Forge — make and crack secret codes"><meta property="og:description" content="Write secret messages in Caesar shift, Atbash, Vigenère, Morse, Pigpen, number code and more. Decode them automatically, read a coded note from a photo, crack an unknown shift, and hide a message inside a photo."><meta property="og:url" content="https://migabuilder.com/cipher-forge.html"><meta property="og:type" content="website"><meta property="og:image" content="https://videos.migabuilder.com/cipher-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<script src="usage-counter.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>Make and crack secret codes — Cipher Forge | MigaBuilder</title><meta name="description" content="Write secret messages in Caesar shift, Atbash, Vigenère, Morse, Pigpen, number code and more. Decode them automatically, read a coded note from a photo, crack an unknown shift, and hide a message inside a photo.">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="miga-progress.js"></script><script src="i18n.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which secret codes can it make?", "acceptedAnswer": {"@type": "Answer", "text": "Caesar shift (any number), ROT13, Atbash (backwards alphabet), Vigenère (keyword), number code (A=1), Morse code, Pigpen symbols, phone keypad, binary, backwards writing and the rail fence zig-zag. Each one comes with instructions for decoding it by hand."}}, {"@type": "Question", "name": "Can it decode a message when I don't know the code?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Press “Crack it” and it tries every shift and every simple code, then shows the answers that read most like real words first. Keyword codes like Vigenère need the keyword."}}, {"@type": "Question", "name": "How does hiding a message in a photo work?", "acceptedAnswer": {"@type": "Answer", "text": "The message is stored in tiny colour changes that you cannot see. The photo looks the same, but Cipher Forge can read the message back. Add a password to lock it. Send the PNG as a file: apps that compress photos destroy the hidden message."}}, {"@type": "Question", "name": "Are my messages uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything runs in your browser. Reading text from a photo downloads a recognition model once, but your photo stays on your device."}}]}</script>
+<style>
+main{max-width:1180px}
+.seg{display:inline-flex;border:1px solid rgba(22,32,43,.28);border-radius:4px;overflow:hidden}
+.seg button{border:0;background:#fff;color:var(--ink);padding:9px 16px;font-weight:700;cursor:pointer;border-radius:0}
+.seg button.on{background:var(--navy);color:#fff}
+.cf-top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-bottom:12px}
+.cf-top .field{margin:0;min-width:180px}
+.cf-io{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-io textarea{min-height:190px;font-size:16px}
+.cf-out{min-height:190px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fffdf6;padding:12px;font:17px/1.6 'IBM Plex Mono',ui-monospace,monospace;white-space:pre-wrap;word-break:break-word;color:var(--ink)}
+.cf-out.empty{color:rgba(22,32,43,.5);font-family:inherit;font-size:15px}
+.cf-out svg{vertical-align:middle;margin:2px}
+.cf-photo{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px;font-size:14px}
+.cf-photo label.btn{border:1px solid rgba(22,32,43,.28);background:#fff;padding:7px 12px;border-radius:3px;cursor:pointer;font-weight:600}
+.cf-photo select{padding:6px;width:auto!important}
+.pig-pad{display:none;flex-wrap:wrap;gap:4px;margin-top:8px}.pig-pad.show{display:flex}
+.pig-pad button{background:#fff;border:1px solid rgba(22,32,43,.25);border-radius:3px;padding:3px;cursor:pointer;line-height:0}
+.pig-pad button.txt{line-height:1;padding:6px 10px;font-weight:700}
+.cf-crack{margin-top:12px;display:none}.cf-crack.show{display:block}
+.cf-crack ol{padding-left:20px;margin:6px 0}.cf-crack li{margin:6px 0}
+.cf-crack button{font-size:12px;padding:3px 9px;margin-left:6px}
+.cf-crack code{background:#f2f0ea;padding:2px 6px;border-radius:3px;font-size:15px}
+.guide h3{margin:.2em 0 .4em;font-family:'Space Grotesk',sans-serif}
+.guide ol{padding-left:20px}.guide li{margin:4px 0}
+.ktable{border-collapse:collapse;margin:10px 0;font:14px 'IBM Plex Mono',monospace;display:block;overflow-x:auto;max-width:100%}
+.ktable td,.ktable th{border:1px solid #d6dadd;padding:4px 6px;text-align:center;min-width:24px}
+.ktable th{background:#f4f2ec;font-weight:600;text-align:left;white-space:nowrap}
+.ktable tr.code td{background:#fff7e6;font-weight:700}
+.stego{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.stego h3{margin:0 0 6px;font-family:'Space Grotesk',sans-serif}
+.stego canvas[hidden]{display:none}
+.stego canvas{max-width:100%;max-height:240px;display:block;margin-top:8px;border-radius:4px;border:1px solid rgba(22,32,43,.15)}
+.reveal-out{margin-top:10px;padding:12px;border:1px dashed #E2A63B;background:#fffaf0;border-radius:4px;white-space:pre-wrap;display:none}.reveal-out.show{display:block}
+@media(max-width:820px){.cf-io,.stego{grid-template-columns:1fr}}
+</style>
+</head>
+<body><nav class="tool-nav"><a href="index.html">← All tools</a><span>Cipher Forge</span></nav><header class="masthead"><div><h1>Cipher Forge</h1><p>Write secret messages, decode them automatically and hide them inside photos.</p></div></header><main>
+<section class="panel" id="codePanel"><p class="privacy">🔒 Your messages stay on this device. Nothing is sent to MigaBuilder.</p>
+<div class="cf-top">
+  <div class="seg" id="modeSeg" role="group" aria-label="Encode or decode"><button type="button" data-mode="encode" class="on">🔒 Make a code</button><button type="button" data-mode="decode">🔓 Decode</button></div>
+  <div class="field"><label for="cipher">Secret code</label><select id="cipher">
+    <option value="caesar">Shift code (Caesar)</option><option value="atbash">Backwards alphabet (Atbash)</option><option value="rot13">ROT13</option><option value="vigenere">Keyword code (Vigenère)</option><option value="a1z26">Number code (A=1, B=2…)</option><option value="morse">Morse code</option><option value="pigpen">Pigpen symbols</option><option value="keypad">Phone keypad</option><option value="binary">Binary (computer code)</option><option value="reverse">Backwards writing</option><option value="railfence">Zig-zag (rail fence)</option>
+  </select></div>
+  <div class="field" id="shiftField"><label for="shift">Shift by how many letters?</label><input id="shift" type="number" min="1" max="25" value="3"></div>
+  <div class="field" id="keywordField" hidden><label for="keyword">Secret keyword</label><input id="keyword" type="text" value="LEMON" autocomplete="off"></div>
+  <div class="field" id="railsField" hidden><label for="rails">Number of rows</label><input id="rails" type="number" min="2" max="10" value="3"></div>
+</div>
+<div class="cf-io">
+  <div class="field"><label for="input" id="inputLabel">Your message</label><textarea id="input" placeholder="Type your message here…">Meet me at the tree house at four</textarea>
+    <div class="cf-photo"><label class="btn" title="Take or choose a photo of a coded note — the text is read on this device">📷 Read text from a photo<input id="photoIn" type="file" accept="image/*" hidden></label><select id="ocrLang" aria-label="Language of the photo"><option value="eng">English letters</option><option value="swe">Swedish</option><option value="spa">Spanish</option><option value="deu">German</option><option value="fra">French</option></select></div>
+    <div class="pig-pad" id="pigPad" aria-label="Pigpen keyboard"></div>
+    <div id="ocrProgress"></div>
+  </div>
+  <div class="field"><label id="outputLabel">Secret message</label><div class="cf-out" id="output" aria-live="polite" data-no-i18n></div></div>
+</div>
+<div class="actions">
+  <button class="primary" id="copyBtn">Copy</button><button class="secondary" id="swapBtn" title="Use the result as the new message and switch direction">⇅ Swap</button><button class="secondary" id="shareBtn" title="A link that opens Cipher Forge ready to decode">🔗 Share link</button><button class="secondary" id="pictureBtn">🖼 Save as picture</button><button class="secondary" id="playBtn" hidden>🔊 Play Morse</button><button class="secondary" id="crackBtn" hidden title="Don't know the code? Try every simple code and shift">🕵️ Crack it</button>
+  <label style="font-size:13px;display:inline-flex;gap:6px;align-items:center"><input type="checkbox" id="shareKey"> Put the key in the link</label>
+</div>
+<div class="status" id="status" role="status"></div>
+<div class="cf-crack" id="crack"><h3 style="margin:0">Best guesses — most English-like first</h3><ol id="crackList"></ol></div>
+</section>
+
+<section class="panel guide" id="guide" aria-live="polite"></section>
+
+<section class="panel" id="stegoPanel"><h2>Hide a message inside a photo</h2>
+<p class="muted">The message is hidden in colour changes too small to see. The photo looks normal, but Cipher Forge can read it back. Send the PNG as a <b>file</b> or by email: apps that shrink photos (WhatsApp, Messenger, Instagram) destroy the hidden message.</p>
+<div class="stego">
+  <div><h3>1. Hide</h3>
+    <div class="field"><label for="hidePhoto">Photo</label><input id="hidePhoto" type="file" accept="image/*"></div>
+    <div class="field"><label for="hideMsg">Secret message</label><textarea id="hideMsg" style="min-height:90px">The treasure is under the third step.</textarea></div>
+    <div class="field"><label for="hidePass">Password (optional — locks the message)</label><input id="hidePass" type="password" autocomplete="new-password"></div>
+    <div class="actions"><button class="primary" id="hideBtn">Hide and download PNG</button></div>
+    <p class="muted" id="hideInfo"></p><canvas id="hidePreview" hidden></canvas>
+  </div>
+  <div><h3>2. Reveal</h3>
+    <div class="field"><label for="revealPhoto">Photo with a hidden message (PNG)</label><input id="revealPhoto" type="file" accept="image/png,image/*"></div>
+    <div class="field"><label for="revealPass">Password (if it has one)</label><input id="revealPass" type="password" autocomplete="off"></div>
+    <div class="actions"><button class="primary" id="revealBtn">Reveal the message</button></div>
+    <div class="reveal-out" id="revealOut" data-no-i18n></div>
+  </div>
+</div>
+<div class="status" id="stegoStatus" role="status"></div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Cipher Forge</h2>
+  <p>Cipher Forge turns messages into secret codes and back again. Pick a code, type your message and send the result, together with the decoding instructions, to a friend. It can read a coded note from a photo, crack a shift code when you don't know the number, and hide a message invisibly inside a photo.</p>
+  <h3>How to use Cipher Forge</h3>
+  <ol><li>Choose “Make a code”, pick a secret code and type your message.</li><li>Copy the result, save it as a picture, or share a link that opens ready to decode.</li><li>To read one, choose “Decode”, pick the code (or press “Crack it”) and paste the message or read it from a photo.</li></ol>
+  <h3>Which secret codes can it make?</h3>
+  <p>Caesar shift (any number), ROT13, Atbash (backwards alphabet), Vigenère (keyword), number code (A=1), Morse code, Pigpen symbols, phone keypad, binary, backwards writing and the rail fence zig-zag. Each one comes with instructions for decoding it by hand.</p>
+  <h3>Can it decode a message when I don't know the code?</h3>
+  <p>Yes. Press “Crack it” and it tries every shift and every simple code, then shows the answers that read most like real words first. Keyword codes like Vigenère need the keyword.</p>
+  <h3>How does hiding a message in a photo work?</h3>
+  <p>The message is stored in tiny colour changes that you cannot see. The photo looks the same, but Cipher Forge can read the message back. Add a password to lock it. Send the PNG as a file: apps that compress photos destroy the hidden message.</p>
+  <h3>Are these codes safe for real secrets?</h3>
+  <p>These are classic puzzle codes for fun, games and learning. Anyone patient can crack them, as the “Crack it” button shows. A photo message locked with a password uses real encryption (AES-256), so keep the password strong.</p>
+  <p class="miga-about-rel">Related tools: <a href="ocr-forge.html">OCR Forge</a> · <a href="qr-forge.html">QR Forge</a> · <a href="utility-forge.html">Utility Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. No account and no customer-file storage.</footer>
+<script>
+(function(){'use strict';
+const $=id=>document.getElementById(id);
+const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+function status(msg,id){const el=$(id||'status');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),6000)}
+function saveBlob(blob,name){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------------- the codes ---------------- */
+// Shift each letter, keeping capitals, small letters and everything else as they are.
+function shiftText(t,f){return t.replace(/[A-Za-z]/g,ch=>{const up=ch<='Z',i=ch.toUpperCase().charCodeAt(0)-65,o=A[((f(i)%26)+26)%26];return up?o:o.toLowerCase()})}
+const MORSE={A:'.-',B:'-...',C:'-.-.',D:'-..',E:'.',F:'..-.',G:'--.',H:'....',I:'..',J:'.---',K:'-.-',L:'.-..',M:'--',N:'-.',O:'---',P:'.--.',Q:'--.-',R:'.-.',S:'...',T:'-',U:'..-',V:'...-',W:'.--',X:'-..-',Y:'-.--',Z:'--..',0:'-----',1:'.----',2:'..---',3:'...--',4:'....-',5:'.....',6:'-....',7:'--...',8:'---..',9:'----.','.':'.-.-.-',',':'--..--','?':'..--..','!':'-.-.--',"'":'.----.','-':'-....-','/':'-..-.','@':'.--.-.',':':'---...'};
+const MORSE_BACK=Object.fromEntries(Object.entries(MORSE).map(([k,v])=>[v,k]));
+const KEYS=['2ABC','3DEF','4GHI','5JKL','6MNO','7PQRS','8TUV','9WXYZ'];
+const KEYPAD={};KEYS.forEach(k=>[...k.slice(1)].forEach((ch,i)=>KEYPAD[ch]=k[0].repeat(i+1)));
+const KEYPAD_BACK=Object.fromEntries(Object.entries(KEYPAD).map(([k,v])=>[v,k]));
+const cleanKey=k=>String(k||'').toUpperCase().replace(/[^A-Z]/g,'');
+function vigenere(t,key,dir){const k=cleanKey(key);if(!k)throw new Error('Type a keyword with at least one letter.');let n=0;return t.replace(/[A-Za-z]/g,ch=>{const s=(k.charCodeAt(n++%k.length)-65)*dir;return shiftText(ch,i=>i+s)})}
+function railPattern(len,rails){const p=[];let r=0,d=1;for(let i=0;i<len;i++){p.push(r);if(rails>1){if(r===0)d=1;else if(r===rails-1)d=-1;r+=d}}return p}
+function railEnc(t,rails){const ch=[...t],p=railPattern(ch.length,rails);let out='';for(let r=0;r<rails;r++)ch.forEach((c,i)=>{if(p[i]===r)out+=c});return out}
+function railDec(t,rails){const ch=[...t],p=railPattern(ch.length,rails),res=new Array(ch.length);let k=0;for(let r=0;r<rails;r++)p.forEach((pr,i)=>{if(pr===r)res[i]=ch[k++]});return res.join('')}
+const words=t=>t.trim().split(/\s+/).filter(Boolean);
+const CODES={
+  caesar:{name:'Shift code',enc:(t,o)=>shiftText(t,i=>i+o.shift),dec:(t,o)=>shiftText(t,i=>i-o.shift)},
+  rot13:{name:'ROT13',enc:t=>shiftText(t,i=>i+13),dec:t=>shiftText(t,i=>i+13)},
+  atbash:{name:'Backwards alphabet',enc:t=>shiftText(t,i=>25-i),dec:t=>shiftText(t,i=>25-i)},
+  vigenere:{name:'Keyword code',enc:(t,o)=>vigenere(t,o.keyword,1),dec:(t,o)=>vigenere(t,o.keyword,-1)},
+  a1z26:{name:'Number code',
+    enc:t=>words(t).map(w=>[...w.toUpperCase()].map(c=>A.includes(c)?A.indexOf(c)+1:(/\d/.test(c)?'#'+c:c)).filter(x=>x!=='').join('-')).join(' '),
+    dec:t=>{const ws=/-/.test(t)?t.trim().split(/\s*\/\s*|\s+/):t.trim().split(/\s*\/\s*/);return ws.map(w=>w.split(/[-\s,.]+/).filter(Boolean).map(n=>/^#\d$/.test(n)?n[1]:(/^\d+$/.test(n)&&+n>=1&&+n<=26?A[n-1]:(/^\d+$/.test(n)?'?':n))).join('')).join(' ')}},
+  morse:{name:'Morse code',
+    enc:t=>words(t).map(w=>[...w.toUpperCase()].map(c=>MORSE[c]||'').filter(Boolean).join(' ')).filter(Boolean).join(' / '),
+    dec:t=>t.replace(/[•·]/g,'.').replace(/[–—_]/g,'-').trim().split(/\s*[\/|]\s*|\s{3,}/).map(w=>w.trim().split(/\s+/).filter(Boolean).map(c=>MORSE_BACK[c]||'?').join('')).join(' ')},
+  keypad:{name:'Phone keypad',
+    enc:t=>words(t).map(w=>[...w.toUpperCase()].map(c=>KEYPAD[c]||(/\d/.test(c)?'':'')).filter(Boolean).join(' ')).filter(Boolean).join(' / '),
+    dec:t=>t.trim().split(/\s*\/\s*/).map(w=>w.trim().split(/\s+/).filter(Boolean).map(c=>KEYPAD_BACK[c]||'?').join('')).join(' ')},
+  binary:{name:'Binary',
+    enc:t=>[...new TextEncoder().encode(t)].map(b=>b.toString(2).padStart(8,'0')).join(' '),
+    dec:t=>{const bits=t.replace(/[^01]/g,'');const bytes=[];for(let i=0;i+8<=bits.length;i+=8)bytes.push(parseInt(bits.slice(i,i+8),2));return new TextDecoder().decode(new Uint8Array(bytes))}},
+  reverse:{name:'Backwards writing',enc:t=>[...t].reverse().join(''),dec:t=>[...t].reverse().join('')},
+  railfence:{name:'Zig-zag',enc:(t,o)=>railEnc(t,o.rails),dec:(t,o)=>railDec(t,o.rails)},
+  pigpen:{name:'Pigpen',enc:t=>t.toUpperCase(),dec:t=>t.toUpperCase()}
+};
+function encode(cipher,text,opts){return CODES[cipher].enc(text,Object.assign({shift:3,keyword:'',rails:3},opts||{}))}
+function decode(cipher,text,opts){return CODES[cipher].dec(text,Object.assign({shift:3,keyword:'',rails:3},opts||{}))}
+
+/* ---------------- cracking: how English-like is a text? ---------------- */
+const FREQ={E:12.7,T:9.1,A:8.2,O:7.5,I:7.0,N:6.7,S:6.3,H:6.1,R:6.0,D:4.3,L:4.0,C:2.8,U:2.8,M:2.4,W:2.4,F:2.2,G:2.0,Y:2.0,P:1.9,B:1.5,V:1.0,K:.8,J:.15,X:.15,Q:.1,Z:.07};
+const COMMON=new Set('THE AND YOU TO OF A I IN IS IT THAT FOR ON ARE WITH BE AT THIS HAVE FROM OR BY NOT BUT WHAT ALL WE CAN YOUR WAS SO IF MY ME MEET HELLO SECRET COME HERE THERE GO NOW TODAY TOMORROW AFTER SCHOOL HOUSE LOVE FRIEND WHERE WHEN DO DONT IM WILL ONE TWO THREE FOUR FIVE SEE OUT UP NO YES OK TREE BIG LITTLE HOME PARK AN AS HE SHE THEY OUR US'.split(' '));
+function englishScore(t){const L=t.toUpperCase().replace(/[^A-Z]/g,'');if(!L.length)return -99;let s=0;for(const c of L)s+=Math.log(FREQ[c]);const ws=t.toUpperCase().split(/[^A-Z]+/).filter(Boolean),hit=ws.filter(w=>COMMON.has(w)).length;const q=t.replace(/\s/g,''),odd=(q.match(/\?/g)||[]).length/Math.max(1,q.length);return s/L.length+2.2*hit/Math.max(1,ws.length)-6*odd}
+function crack(text){const t=text.trim(),c=[];if(!t)return c;
+  if(/^[\s.\-\/|•·–—_]+$/.test(t))c.push({cipher:'morse',label:'Morse code',text:decode('morse',t)});
+  if(/^[\s01]+$/.test(t)&&t.replace(/\s/g,'').length>=8)c.push({cipher:'binary',label:'Binary',text:decode('binary',t)});
+  if(/^[\d\s\-\/,.#]+$/.test(t)){c.push({cipher:'a1z26',label:'Number code (A=1)',text:decode('a1z26',t)});if(/^[2-9\s\/]+$/.test(t))c.push({cipher:'keypad',label:'Phone keypad',text:decode('keypad',t)})}
+  if(/[A-Za-z]/.test(t)){
+    for(let s=1;s<26;s++)c.push({cipher:'caesar',shift:s,label:s===13?'ROT13 (shift 13)':'Shift code, shift '+s,text:shiftText(t,i=>i-s)});
+    c.push({cipher:'atbash',label:'Backwards alphabet (Atbash)',text:decode('atbash',t)});
+    c.push({cipher:'reverse',label:'Backwards writing',text:decode('reverse',t)});
+    for(let r=2;r<=5;r++)c.push({cipher:'railfence',rails:r,label:'Zig-zag with '+r+' rows',text:railDec(t,r)});
+    c.push({cipher:'reverse+atbash',label:'Backwards and Atbash',text:decode('atbash',decode('reverse',t)),skip:true});
+  }
+  c.forEach(x=>x.score=englishScore(x.text));
+  return c.filter(x=>!x.skip).sort((a,b)=>b.score-a.score)}
+
+/* ---------------- Pigpen drawing ---------------- */
+// A–I: noughts-and-crosses grid, J–R: the same with a dot, S–V: an X, W–Z: an X with a dot.
+function pigPath(ch){const i=A.indexOf(ch);if(i<0)return null;const p=[];let dot=false;
+  if(i<18){const g=i%9;dot=i>=9;const r=Math.floor(g/3),c=g%3;if(r>0)p.push('M6 6H34');if(r<2)p.push('M6 34H34');if(c>0)p.push('M6 6V34');if(c<2)p.push('M34 6V34');return{d:p.join(''),dot,dx:20,dy:20}}
+  const x=(i-18)%4;dot=i>=22;const shapes=['M6 8L20 30L34 8','M8 6L30 20L8 34','M32 6L10 20L32 34','M6 32L20 10L34 32'],dots=[[20,15],[16,20],[24,20],[20,25]];return{d:shapes[x],dot,dx:dots[x][0],dy:dots[x][1]}}
+function pigSvg(ch,size){const s=pigPath(ch);size=size||34;if(!s)return '';return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 40 40" aria-label="'+ch+'"><path d="'+s.d+'" fill="none" stroke="#16202B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>'+(s.dot?'<circle cx="'+s.dx+'" cy="'+s.dy+'" r="3.2" fill="#16202B"/>':'')+'</svg>'}
+function pigDraw(ctx,ch,x,y,size,color){const s=pigPath(ch);if(!s)return;ctx.save();ctx.translate(x,y);ctx.scale(size/40,size/40);ctx.strokeStyle=color;ctx.fillStyle=color;ctx.lineWidth=3;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke(new Path2D(s.d));if(s.dot){ctx.beginPath();ctx.arc(s.dx,s.dy,3.2,0,7);ctx.fill()}ctx.restore()}
+
+/* ---------------- page state ---------------- */
+let mode='encode',result='';
+const opts=()=>({shift:Math.max(1,Math.min(25,parseInt($('shift').value,10)||3)),keyword:$('keyword').value,rails:Math.max(2,Math.min(10,parseInt($('rails').value,10)||3))});
+const cipher=()=>$('cipher').value;
+function render(){const c=cipher(),t=$('input').value;
+  $('shiftField').hidden=c!=='caesar';$('keywordField').hidden=c!=='vigenere';$('railsField').hidden=c!=='railfence';
+  $('playBtn').hidden=c!=='morse';$('crackBtn').hidden=mode!=='decode';
+  $('pigPad').classList.toggle('show',c==='pigpen'&&mode==='decode');
+  $('inputLabel').textContent=mode==='encode'?'Your message':(c==='pigpen'?'Click the symbols below in order — the letters appear here':'Secret message to decode');
+  $('outputLabel').textContent=mode==='encode'?'Secret message':'Decoded message';
+  const out=$('output');
+  try{result=mode==='encode'?encode(c,t,opts()):decode(c,t,opts())}catch(e){result='';out.className='cf-out empty';out.textContent=e.message;return}
+  if(!t.trim()){out.className='cf-out empty';out.textContent=mode==='encode'?'Your secret message appears here as you type.':'The decoded message appears here.';return}
+  out.className='cf-out';
+  if(c==='pigpen'&&mode==='encode'){out.innerHTML=[...result].map(ch=>ch==='\n'?'<br>':A.includes(ch)?pigSvg(ch):ch===' '?'<span style="display:inline-block;width:22px"></span>':'<span>'+esc(ch)+'</span>').join('')}
+  else out.textContent=result;
+  renderGuide()}
+$('modeSeg').addEventListener('click',e=>{const b=e.target.closest('[data-mode]');if(!b||b.dataset.mode===mode)return;setMode(b.dataset.mode)});
+function setMode(m){mode=m;$('modeSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.mode===m));$('crack').classList.remove('show');render()}
+['input','shift','keyword','rails'].forEach(id=>$(id).addEventListener('input',render));
+$('cipher').addEventListener('change',()=>{$('crack').classList.remove('show');render()});
+$('swapBtn').onclick=()=>{if(cipher()==='pigpen'){status('Pigpen is drawn as pictures. Switch to Decode and click the symbols instead.');setMode(mode==='encode'?'decode':'encode');return}$('input').value=result;setMode(mode==='encode'?'decode':'encode')};
+$('copyBtn').onclick=async()=>{if(!result)return status('Type a message first.');if(cipher()==='pigpen'&&mode==='encode')return status('Pigpen symbols cannot be copied as text. Use “Save as picture” to send them.');try{await navigator.clipboard.writeText(result);status('Copied. Paste it into a message to your friend.')}catch(e){status('Copying is blocked here. Select the text and press Ctrl+C.')}};
+
+/* Pigpen keypad for decoding */
+$('pigPad').innerHTML=[...A].map(ch=>'<button type="button" data-ch="'+ch+'" title="'+ch+'">'+pigSvg(ch,30)+'</button>').join('')+'<button type="button" class="txt" data-ch=" ">Space</button><button type="button" class="txt" data-ch="⌫">⌫</button>';
+$('pigPad').addEventListener('click',e=>{const b=e.target.closest('[data-ch]');if(!b)return;const ta=$('input');ta.value=b.dataset.ch==='⌫'?ta.value.slice(0,-1):ta.value+b.dataset.ch;render()});
+
+/* ---------------- how to decode by hand ---------------- */
+function alphaTable(map,top,bottom){return '<table class="ktable"><tr><th>'+top+'</th>'+[...A].map(c=>'<td>'+c+'</td>').join('')+'</tr><tr class="code"><th>'+bottom+'</th>'+[...A].map(c=>'<td>'+esc(map(c))+'</td>').join('')+'</tr></table>'}
+function renderGuide(){const c=cipher(),o=opts(),g=$('guide');let h='';
+  const enc=ch=>encode(c,ch,o);
+  switch(c){
+    case 'caesar':h='<h3>How to decode a shift code (shift '+o.shift+')</h3><p>Every letter was moved '+o.shift+' places forward in the alphabet. To decode, move each letter '+o.shift+' places <b>back</b>. After Z, start again at A.</p>'+alphaTable(enc,'Real letter','Coded letter')+'<ol><li>Find the coded letter in the yellow row.</li><li>Write down the real letter above it.</li><li>Spaces and punctuation stay the same.</li></ol><p class="muted">Tip: write the alphabet twice on a strip of paper and slide it by '+o.shift+' — that is a Caesar wheel. Julius Caesar used shift 3.</p>';break;
+    case 'rot13':h='<h3>How to decode ROT13</h3><p>Each letter is moved 13 places. Because the alphabet has 26 letters, doing it twice gives back the original — so decoding is exactly the same as coding.</p>'+alphaTable(enc,'Real letter','Coded letter');break;
+    case 'atbash':h='<h3>How to decode the backwards alphabet (Atbash)</h3><p>The alphabet is flipped: A becomes Z, B becomes Y, C becomes X and so on. Decoding works exactly the same way as coding.</p>'+alphaTable(enc,'Real letter','Coded letter')+'<p class="muted">Atbash is about 2,500 years old and was first used for Hebrew.</p>';break;
+    case 'vigenere':{const k=cleanKey(o.keyword)||'KEY';h='<h3>How to decode a keyword code (Vigenère)</h3><p>You need the keyword: <b>'+esc(k)+'</b>. Each letter of the keyword says how far to shift one letter of the message (A = 0, B = 1, C = 2 … Z = 25). The keyword repeats over and over, skipping spaces.</p><ol><li>Write the keyword under the coded message, letter by letter: '+esc((k.repeat(4)).slice(0,12))+'…</li><li>For each pair, move the coded letter <b>back</b> by the keyword letter’s number.</li><li>Example: coded <b>'+encode('vigenere','H',{keyword:k})+'</b> with keyword letter <b>'+k[0]+'</b> ('+(k.charCodeAt(0)-65)+') goes back to <b>H</b>.</li></ol>'+'<table class="ktable"><tr><th>Keyword letter</th>'+[...A].map(c=>'<td>'+c+'</td>').join('')+'</tr><tr class="code"><th>Shift by</th>'+[...A].map((c,i)=>'<td>'+i+'</td>').join('')+'</tr></table><p class="muted">For 300 years people called it “the unbreakable code”. Send the keyword separately from the message — never in the same text.</p>';break}
+    case 'a1z26':h='<h3>How to decode the number code</h3><p>Each number is the letter’s place in the alphabet: A = 1, B = 2 … Z = 26. Dashes separate letters and spaces separate words. A real digit is written with # in front, like #7.</p>'+alphaTable(ch=>A.indexOf(ch)+1,'Letter','Number');break;
+    case 'morse':h='<h3>How to decode Morse code</h3><p>Each letter is a pattern of short signals (dots ·) and long signals (dashes –). A space separates letters and a slash / separates words. You can tap it, flash a torch or whistle it.</p><table class="ktable">'+[0,1].map(r=>'<tr>'+[...A.slice(r*13,r*13+13)].map(c=>'<td><b>'+c+'</b><br>'+MORSE[c]+'</td>').join('')+'</tr>').join('')+'<tr>'+[...'0123456789'].map(c=>'<td><b>'+c+'</b><br>'+MORSE[c]+'</td>').join('')+'</tr></table><p class="muted">Remember SOS: ··· ––– ··· (three short, three long, three short).</p>';break;
+    case 'pigpen':h='<h3>How to decode Pigpen</h3><p>Each letter is the shape of the “pen” around it in these four grids. Letters in the second and fourth grid get a dot.</p>'+pigKeySvg()+'<ol><li>Look at a symbol’s shape and whether it has a dot.</li><li>Find the matching spot in the grids above.</li><li>Write down that letter.</li></ol><p class="muted">Pigpen was used by Freemasons in the 1700s. Draw the four grids on paper so your friend can decode it without a computer.</p>';break;
+    case 'keypad':h='<h3>How to decode the phone keypad code</h3><p>Each number is a key on an old phone keypad. Press the key once for the first letter, twice for the second and so on: 2 = A, 22 = B, 222 = C. A slash / separates words.</p><table class="ktable"><tr>'+KEYS.map(k=>'<td><b>'+k[0]+'</b><br>'+k.slice(1)+'</td>').join('')+'</tr></table>';break;
+    case 'binary':h='<h3>How to decode binary</h3><p>Computers store each letter as 8 ones and zeros (one byte). Each place is worth 128, 64, 32, 16, 8, 4, 2, 1. Add up the places that have a 1 to get the letter’s number, then look it up: 65 = A, 66 = B … 90 = Z, and 97 = a … 122 = z. 32 is a space.</p><p>Example: <b>01001000</b> = 64 + 8 = 72 = <b>H</b>.</p>';break;
+    case 'reverse':h='<h3>How to decode backwards writing</h3><p>The whole message is written from the last letter to the first. Read it from right to left, or hold it up to a mirror if you wrote it in mirror writing like Leonardo da Vinci.</p>';break;
+    case 'railfence':h='<h3>How to decode the zig-zag (rail fence, '+o.rails+' rows)</h3><p>The message was written in a zig-zag over '+o.rails+' rows, then each row was read from left to right. Here is “WE ARE FOUND” in the zig-zag:</p><pre style="background:#f4f2ec;padding:10px;border-radius:4px;overflow:auto">'+esc(railArt('WEAREFOUND',o.rails))+'</pre><ol><li>Count the letters and draw the zig-zag with that many dots.</li><li>Fill the top row with the first letters of the code, then the next row, and so on.</li><li>Read along the zig-zag.</li></ol>';break}
+  g.innerHTML=h}
+function railArt(t,rails){const p=railPattern(t.length,rails);let s='';for(let r=0;r<rails;r++){s+=[...t].map((c,i)=>p[i]===r?c:'·').join(' ')+'\n'}return s+'\nCode: '+railEnc(t,rails)}
+function pigKeySvg(){const S=300;let svg='<svg viewBox="0 0 '+(S*4+60)+' '+S+'" style="width:100%;max-width:760px;display:block;margin:10px 0" role="img" aria-label="Pigpen key">';
+  const L=(x1,y1,x2,y2)=>'<line x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'" stroke="#16202B" stroke-width="5" stroke-linecap="round"/>';
+  const T=(x,y,ch,dot)=>'<text x="'+x+'" y="'+(y+14)+'" font-size="40" font-family="Space Grotesk,sans-serif" font-weight="700" text-anchor="middle" fill="#0E2A47">'+ch+'</text>'+(dot?'<circle cx="'+x+'" cy="'+(y+36)+'" r="7" fill="#16202B"/>':'');
+  [0,1].forEach(gi=>{const ox=gi*(S+20)+20,c=(S-40)/3;svg+=L(ox+c,20,ox+c,S-20)+L(ox+2*c,20,ox+2*c,S-20)+L(ox,20+c,ox+S-40,20+c)+L(ox,20+2*c,ox+S-40,20+2*c);for(let i=0;i<9;i++)svg+=T(ox+c*(i%3)+c/2,20+c*Math.floor(i/3)+c/2-14,A[gi*9+i],gi===1)});
+  [0,1].forEach(gi=>{const ox=2*(S+20)+gi*(S+20)+20,m=S/2-10,cx=ox+(S-40)/2,cy=S/2;svg+=L(ox+10,30,ox+S-50,S-30)+L(ox+S-50,30,ox+10,S-30);const pos=[[cx,cy-85],[cx-90,cy-10],[cx+90,cy-10],[cx,cy+60]];pos.forEach((p,i)=>svg+=T(p[0],p[1],A[18+gi*4+i],gi===1))});
+  return svg+'</svg>'}
+
+/* ---------------- crack ---------------- */
+$('crackBtn').onclick=()=>{const t=$('input').value;if(!t.trim())return status('Paste the secret message first.');const list=crack(t).slice(0,6);
+  if(!list.length)return status('Nothing to try — the message has no letters, numbers or Morse signals.');
+  $('crackList').innerHTML=list.map((x,i)=>'<li><b>'+esc(x.label)+'</b><button type="button" class="secondary" data-i="'+i+'">Use this</button><br><code>'+esc(x.text.slice(0,220))+'</code></li>').join('');
+  $('crackList').onclick=e=>{const b=e.target.closest('[data-i]');if(!b)return;const x=list[b.dataset.i];$('cipher').value=x.cipher;if(x.shift)$('shift').value=x.shift;if(x.rails)$('rails').value=x.rails;$('crack').classList.remove('show');render();status('Switched to '+x.label+'.')};
+  $('crack').classList.add('show');status('Tried '+crack(t).length+' ways to decode it. The top answer is usually right; keyword codes need their keyword.')};
+
+/* ---------------- share link ---------------- */
+function shareUrl(){const c=cipher(),coded=mode==='encode'?result:$('input').value;const p=new URLSearchParams({c,m:coded});if($('shareKey').checked){if(c==='caesar')p.set('k',opts().shift);if(c==='vigenere')p.set('k',$('keyword').value);if(c==='railfence')p.set('k',opts().rails)}return location.origin+location.pathname+'#'+p.toString()}
+$('shareBtn').onclick=async()=>{const c=cipher();if(c==='pigpen')return status('Pigpen is drawn as symbols — use “Save as picture” to send it.');if(!(mode==='encode'?result:$('input').value).trim())return status('Type a message first.');const u=shareUrl();
+  try{if(navigator.share&&/Mobi|Android/i.test(navigator.userAgent)){await navigator.share({title:'A secret message for you',text:'Can you decode this?',url:u});return}await navigator.clipboard.writeText(u);status('Link copied. It opens Cipher Forge ready to decode'+($('shareKey').checked?' with the key filled in.':'. Your friend still needs to know the key.'))}catch(e){prompt('Copy this link:',u)}};
+function fromHash(){if(!location.hash)return;const p=new URLSearchParams(location.hash.slice(1));const c=p.get('c'),m=p.get('m');if(!c||!CODES[c]||m==null)return;$('cipher').value=c;$('input').value=m;const k=p.get('k');if(k){if(c==='caesar')$('shift').value=k;if(c==='vigenere')$('keyword').value=k;if(c==='railfence')$('rails').value=k}else if(c==='vigenere')$('keyword').value='';setMode('decode');status('Someone sent you a secret message in '+CODES[c].name+'.'+(k||!['caesar','vigenere','railfence'].includes(c)?'':' Fill in the key they told you.'))}
+
+/* ---------------- save as picture ---------------- */
+function noteCanvas(){const c=cipher(),W=1200,pad=70,isPig=c==='pigpen'&&mode==='encode';const cv=document.createElement('canvas'),ctx=cv.getContext('2d');
+  const body=result,font='34px "IBM Plex Mono", ui-monospace, monospace';ctx.font=font;
+  // wrap text
+  const lines=[];const maxW=W-pad*2;
+  if(isPig){const per=Math.floor(maxW/52);let cur='';words(body).forEach(w=>{if(cur&&(cur+' '+w).length>per){lines.push(cur);cur=w}else cur=(cur+' '+w).trim()});if(cur)lines.push(cur)}
+  else body.split('\n').forEach(par=>{let cur='';for(const w of par.split(/(\s+)/)){const tryL=cur+w;if(ctx.measureText(tryL).width>maxW&&cur.trim()){lines.push(cur.trimEnd());cur=w.trimStart()}else cur=tryL;while(ctx.measureText(cur).width>maxW){let n=cur.length;while(n>1&&ctx.measureText(cur.slice(0,n)).width>maxW)n--;lines.push(cur.slice(0,n));cur=cur.slice(n)}}lines.push(cur)});
+  const lh=isPig?62:50,H=Math.max(520,pad*2+150+lines.length*lh+60);cv.width=W;cv.height=H;
+  ctx.fillStyle='#f6ecd2';ctx.fillRect(0,0,W,H);ctx.strokeStyle='#c9a86a';ctx.lineWidth=6;ctx.setLineDash([18,12]);ctx.strokeRect(24,24,W-48,H-48);ctx.setLineDash([]);
+  ctx.fillStyle='#7a4b12';ctx.font='700 46px "Space Grotesk", system-ui, sans-serif';ctx.fillText('🔒 Secret message',pad,pad+50);
+  ctx.font='24px system-ui, sans-serif';ctx.fillStyle='#8a6a3a';ctx.fillText($('hintOnPic').checked?'Code: '+CODES[c].name+(c==='caesar'?' — shift '+opts().shift:c==='railfence'?' — '+opts().rails+' rows':''):'Can you crack it?',pad,pad+92);
+  ctx.fillStyle='#2a1d0a';let y=pad+160;
+  lines.forEach(l=>{if(isPig){let x=pad;[...l].forEach(ch=>{if(A.includes(ch)){pigDraw(ctx,ch,x,y-40,48,'#2a1d0a');x+=52}else x+=30});}else{ctx.font=font;ctx.fillText(l,pad,y)}y+=lh});
+  ctx.font='20px system-ui, sans-serif';ctx.fillStyle='#a08356';ctx.fillText('Made with Cipher Forge · migabuilder.com/cipher-forge.html',pad,H-50);return cv}
+$('pictureBtn').onclick=()=>{if(!result.trim())return status('Type a message first.');noteCanvas().toBlob(b=>{saveBlob(b,'secret-message.png');status('Saved secret-message.png.')},'image/png')};
+(()=>{const l=document.createElement('label');l.style.cssText='font-size:13px;display:inline-flex;gap:6px;align-items:center';l.innerHTML='<input type="checkbox" id="hintOnPic"> Write the code’s name on the picture';$('shareKey').parentNode.after(l)})();
+
+/* ---------------- Morse sound ---------------- */
+let audio=null,playing=null;
+$('playBtn').onclick=()=>{const m=mode==='encode'?result:$('input').value;if(!m.trim())return status('Type a message first.');if(playing){playing.stop();return}
+  audio=audio||new (window.AudioContext||window.webkitAudioContext)();const ctx=audio,u=0.08;let t=ctx.currentTime+0.1;const osc=ctx.createOscillator(),g=ctx.createGain();osc.frequency.value=650;g.gain.value=0;osc.connect(g).connect(ctx.destination);
+  for(const s of m){if(s==='.'||s==='-'){const d=s==='.'?u:3*u;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.5,t+.005);g.gain.setValueAtTime(.5,t+d-.005);g.gain.linearRampToValueAtTime(0,t+d);t+=d+u}else if(s===' ')t+=2*u;else if(s==='/')t+=2*u}
+  osc.start();osc.stop(t+.05);$('playBtn').textContent='■ Stop';playing={stop(){try{osc.stop()}catch(e){}}};osc.onended=()=>{playing=null;$('playBtn').textContent='🔊 Play Morse'}};
+
+/* ---------------- read text from a photo (Tesseract, loaded when needed) ---------------- */
+function loadScript(src){return new Promise((ok,no)=>{if(document.querySelector('script[src="'+src+'"]'))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load the text reader. Check your internet connection.'));document.head.appendChild(s)})}
+let ocrWorker=null,ocrLang='',ocrCancelled=false;
+const ocrJob=MigaProgress.create($('ocrProgress'),{onCancel(){ocrCancelled=true;if(ocrWorker){ocrWorker.terminate().catch(()=>{});ocrWorker=null;ocrLang=''}}});
+$('photoIn').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;ocrCancelled=false;ocrJob.start('Loading the text reader…');
+  try{await loadScript('https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js');const lang=$('ocrLang').value;
+    if(!ocrWorker||ocrLang!==lang){if(ocrWorker)await ocrWorker.terminate().catch(()=>{});ocrWorker=await Tesseract.createWorker(lang,1,{logger:m=>{if(!ocrCancelled)ocrJob.update(m.status==='recognizing text'?m.progress:null,(m.status||'Working')+'…')}});ocrLang=lang}
+    if(cipher()==='morse')await ocrWorker.setParameters({tessedit_char_whitelist:'.-/ '});else await ocrWorker.setParameters({tessedit_char_whitelist:''});
+    const r=await ocrWorker.recognize(f);if(ocrCancelled)return;const text=r.data.text.trim();
+    if(!text){ocrJob.fail(new Error('No text was found in the photo.'),['Use a sharp, straight-on photo with good light.','Write big, dark letters on plain paper.']);return}
+    $('input').value=text;if(mode!=='decode')setMode('decode');else render();ocrJob.done('Read the text from your photo. Check it for mistakes, then pick the code or press “Crack it”.')}
+  catch(err){if(!ocrCancelled)ocrJob.fail(err,['Use a sharp, straight-on photo with good light.','Check your internet connection — the text reader downloads once.'])}};
+
+/* ---------------- hide a message in a photo ---------------- */
+// Layout of the hidden bytes: "MGC1", 1 flag byte (1 = locked with a password), 4-byte length, then the message.
+// Each byte is stored one bit at a time in the lowest bit of the red, green and blue values.
+const MAGIC=[77,71,67,49];
+async function keyFrom(pass,salt){const base=await crypto.subtle.importKey('raw',new TextEncoder().encode(pass),'PBKDF2',false,['deriveKey']);return crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:150000,hash:'SHA-256'},base,{name:'AES-GCM',length:256},false,['encrypt','decrypt'])}
+async function pack(msg,pass){let body=new TextEncoder().encode(msg),flag=0;
+  if(pass){flag=1;const salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12));const ct=new Uint8Array(await crypto.subtle.encrypt({name:'AES-GCM',iv},await keyFrom(pass,salt),body));body=new Uint8Array(28+ct.length);body.set(salt);body.set(iv,16);body.set(ct,28)}
+  const out=new Uint8Array(9+body.length);out.set(MAGIC);out[4]=flag;new DataView(out.buffer).setUint32(5,body.length);out.set(body,9);return out}
+function capacity(w,h){return Math.floor(w*h*3/8)-9}
+function embed(img,bytes){const d=img.data;if(bytes.length>capacity(img.width,img.height)+9)throw new Error('The message is too long for this photo. Use a bigger photo or a shorter message.');
+  for(let i=3;i<d.length;i+=4)d[i]=255; // see-through pixels would lose their colours when saved
+  let bit=0;const total=bytes.length*8;for(let p=0;p<d.length&&bit<total;p++){if((p&3)===3)continue;const b=(bytes[bit>>3]>>(7-(bit&7)))&1;d[p]=(d[p]&254)|b;bit++}return img}
+function readBytes(d,start,count){const out=new Uint8Array(count);let bit=0,p=0,skip=start*8;for(;p<d.length&&bit<(start+count)*8;p++){if((p&3)===3)continue;if(bit>=skip){const k=bit-skip;out[k>>3]|=(d[p]&1)<<(7-(k&7))}bit++}return out}
+async function unpack(img,pass){const d=img.data,head=readBytes(d,0,9);if(!MAGIC.every((m,i)=>head[i]===m))throw new Error('No hidden message was found. Was the photo sent through an app that shrinks photos? Ask for the original PNG file.');
+  const len=new DataView(head.buffer).getUint32(5);if(len>capacity(img.width,img.height))throw new Error('The hidden message is damaged.');const body=readBytes(d,9,len);
+  if(head[4]===1){if(!pass)throw Object.assign(new Error('This message is locked. Type the password and press Reveal again.'),{locked:true});try{const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:body.slice(16,28)},await keyFrom(pass,body.slice(0,16)),body.slice(28));return new TextDecoder().decode(pt)}catch(e){throw new Error('Wrong password.')}}
+  return new TextDecoder().decode(body)}
+async function fileToImageData(file,maxSide){const bmp=await createImageBitmap(file,{colorSpaceConversion:'none',premultiplyAlpha:'none'});let w=bmp.width,h=bmp.height;if(maxSide&&Math.max(w,h)>maxSide){const s=maxSide/Math.max(w,h);w=Math.round(w*s);h=Math.round(h*s)}
+  const cv=document.createElement('canvas');cv.width=w;cv.height=h;const ctx=cv.getContext('2d',{willReadFrequently:true});ctx.drawImage(bmp,0,0,w,h);return{cv,ctx,img:ctx.getImageData(0,0,w,h)}}
+async function hide(file,msg,pass){const {cv,ctx,img}=await fileToImageData(file,3000);const bytes=await pack(msg,pass);embed(img,bytes);ctx.putImageData(img,0,0);const blob=await new Promise(ok=>cv.toBlob(ok,'image/png'));return{blob,cv,w:cv.width,h:cv.height}}
+async function reveal(file,pass){const {img}=await fileToImageData(file,0);return unpack(img,pass)}
+$('hidePhoto').onchange=async()=>{const f=$('hidePhoto').files[0];if(!f)return;try{const bmp=await createImageBitmap(f);const s=Math.min(1,3000/Math.max(bmp.width,bmp.height));$('hideInfo').textContent='This photo can hide about '+capacity(Math.round(bmp.width*s),Math.round(bmp.height*s)).toLocaleString()+' letters.'}catch(e){$('hideInfo').textContent='This file could not be opened as a picture.'}};
+$('hideBtn').onclick=async()=>{const f=$('hidePhoto').files[0],msg=$('hideMsg').value;if(!f)return status('Choose a photo first.','stegoStatus');if(!msg.trim())return status('Type the secret message first.','stegoStatus');
+  $('hideBtn').disabled=true;try{const r=await hide(f,msg,$('hidePass').value);const pv=$('hidePreview');pv.width=r.w;pv.height=r.h;pv.getContext('2d').drawImage(r.cv,0,0);pv.hidden=false;const name=(f.name.replace(/\.[^.]+$/,'')||'photo')+'-secret.png';saveBlob(r.blob,name);status('Saved '+name+'. It looks the same, but your message is inside'+($('hidePass').value?' and locked with your password.':'.')+' Send it as a file, not as a photo.','stegoStatus')}
+  catch(e){status(e.message||String(e),'stegoStatus')}finally{$('hideBtn').disabled=false}};
+$('revealBtn').onclick=async()=>{const f=$('revealPhoto').files[0];if(!f)return status('Choose the photo with the hidden message.','stegoStatus');$('revealOut').classList.remove('show');
+  try{const msg=await reveal(f,$('revealPass').value);$('revealOut').textContent=msg;$('revealOut').classList.add('show');status('Found a hidden message.','stegoStatus')}catch(e){status(e.message,'stegoStatus');if(e.locked)$('revealPass').focus()}};
+$('revealPhoto').onchange=()=>$('revealOut').classList.remove('show');
+
+window.CipherForge={encode,decode,crack,englishScore,hide,reveal,pack,embed,unpack,shareUrl};
+render();fromHash();window.addEventListener('hashchange',fromHash);
+})();
+</script><script src="tutorials.js" defer></script></body></html>

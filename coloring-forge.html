@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/coloring-forge.html">
+<meta property="og:title" content="Coloring Forge — printable coloring pages and worksheets for kids"><meta property="og:description" content="Make printable coloring pages from a description or a photo, mandalas, alphabet pages, letter tracing, Chinese character practice with stroke order, paint by numbers and mazes. Collect them into a coloring book and print or download a PDF."><meta property="og:url" content="https://migabuilder.com/coloring-forge.html"><meta property="og:type" content="website"><meta property="og:image" content="https://videos.migabuilder.com/coloring-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<script src="usage-counter.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1"><title>Printable coloring pages and worksheets for kids — Coloring Forge | MigaBuilder</title><meta name="description" content="Make printable coloring pages from a description or a photo, mandalas, alphabet pages, letter tracing, Chinese character practice with stroke order, paint by numbers and mazes. Collect them into a coloring book and print or download a PDF.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Andika:wght@400;700&family=Noto+Sans+SC:wght@400&family=Noto+Sans+JP:wght@400&family=Noto+Sans+KR:wght@400&family=Noto+Sans+Thai:wght@400&family=Noto+Naskh+Arabic:wght@400&family=Noto+Sans+Hebrew:wght@400&family=Noto+Sans+Devanagari:wght@400&family=Noto+Sans+Georgian:wght@400&family=Noto+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="miga-progress.js"></script><script src="i18n.js"></script><script src="alphabet-data.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What can I make with Coloring Forge?", "acceptedAnswer": {"@type": "Answer", "text": "Coloring pages from a description (made by AI) or from your own photo, mandalas, alphabet pages, letter and name tracing worksheets, Chinese character practice sheets with stroke order (plus Japanese, Korean, Arabic and other alphabets), paint by numbers from a photo, mazes and a cover with your child's name."}}, {"@type": "Question", "name": "How do I make a coloring book?", "acceptedAnswer": {"@type": "Answer", "text": "Make a page and press “Add to book”. Repeat for every page you want, add a cover, then download the whole book as one PDF or print it."}}, {"@type": "Question", "name": "Is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no watermark. Everything except the AI coloring pages is made on your device."}}, {"@type": "Question", "name": "Are my photos uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Photo coloring pages and paint by numbers are made in your browser. Only the words you type for an AI coloring page are sent to Google Gemini."}}]}</script>
+<style>
+main{max-width:1240px}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.tabs button{border:1px solid rgba(22,32,43,.25);background:#fff;color:var(--ink);padding:9px 14px;border-radius:999px;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.tab{display:none}.tab.on{display:block}
+.cg-layout{display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:20px;align-items:start}
+.cg-controls .field{margin-bottom:10px}
+.cg-controls h3{margin:0 0 8px;font-family:'Space Grotesk',sans-serif}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 10px}.chips button{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid rgba(22,32,43,.2);background:#fff;cursor:pointer}
+.src{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}.src label{display:inline-flex;gap:5px;align-items:center;border:1px solid rgba(22,32,43,.2);border-radius:4px;padding:6px 10px;background:#fff;cursor:pointer;font-size:14px}
+.src input{margin:0}
+.sub{display:none}.sub.on{display:block}
+.pv-wrap{background:#d9dde2;border-radius:6px;padding:14px;text-align:center;position:relative;min-height:300px}
+.pv-wrap canvas{max-width:100%;max-height:78vh;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.18)}
+.pv-nav{display:flex;justify-content:center;gap:10px;align-items:center;margin-top:8px;font-size:14px}
+.pv-empty{color:rgba(22,32,43,.6);padding:80px 20px}
+.book{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0}
+.book figure{margin:0;width:110px;text-align:center;font-size:11px}
+.book img{width:110px;border:1px solid rgba(22,32,43,.2);background:#fff;display:block}
+.book figure div{display:flex;justify-content:center;gap:2px;margin-top:3px}
+.book figure button{padding:1px 7px;font-size:12px;border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:3px;cursor:pointer}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.inline{display:inline-flex;gap:6px;align-items:center;font-size:14px;margin:4px 12px 4px 0}
+.inline input{width:auto!important}
+#printArea{display:none}
+@media(max-width:860px){.cg-layout{grid-template-columns:1fr}}
+@media print{body>*:not(#printArea){display:none!important}#printArea{display:block!important}#printArea img{display:block;width:100%;height:auto;page-break-after:always;break-after:page}}
+</style>
+</head>
+<body><nav class="tool-nav"><a href="index.html">← All tools</a><span>Coloring Forge</span></nav><header class="masthead"><div><h1>Coloring Forge</h1><p>Printable coloring pages, tracing worksheets, Chinese writing practice, paint by numbers and mazes.</p></div></header><main>
+<section class="panel" id="makePanel"><p class="privacy">🔒 Photos are turned into pages on this device. Only the words you type for an AI coloring page are sent to Google Gemini.</p>
+<div class="row2" style="max-width:640px"><div class="field"><label for="kidName">Child’s name (for the cover and name lines)</label><input id="kidName" type="text" value="Emma" autocomplete="off"></div>
+<div class="field"><label for="paper">Paper</label><select id="paper"><option value="a4">A4</option><option value="letter">US Letter</option></select></div></div>
+<div class="tabs" id="tabs" role="tablist">
+  <button type="button" data-tab="color" class="on">🎨 Coloring page</button><button type="button" data-tab="trace">✏️ Letter tracing</button><button type="button" data-tab="hanzi">汉 Chinese &amp; alphabets</button><button type="button" data-tab="paint">🖌️ Paint by numbers</button><button type="button" data-tab="maze">🌀 Maze</button><button type="button" data-tab="cover">📘 Book cover</button>
+</div>
+<div class="cg-layout"><div class="cg-controls">
+
+<div class="tab on" id="tab-color"><h3>Coloring page</h3>
+  <div class="src" id="colorSrc"><label><input type="radio" name="csrc" value="ai" checked> ✨ Describe it</label><label><input type="radio" name="csrc" value="photo"> 📷 From a photo</label><label><input type="radio" name="csrc" value="mandala"> 🌸 Mandala</label><label><input type="radio" name="csrc" value="letters"> 🔤 Alphabet &amp; names</label></div>
+  <div class="sub on" id="sub-ai">
+    <div class="field"><label for="colorPrompt">What should be on the page?</label><textarea id="colorPrompt" style="min-height:70px">a friendly dinosaur eating pizza in a park</textarea></div>
+    <div class="chips" id="ideaChips"><button type="button">a unicorn on a rainbow</button><button type="button">a fire truck</button><button type="button">ocean animals</button><button type="button">a rocket in space</button><button type="button">a princess castle</button><button type="button">farm animals</button><button type="button">a cat playing football</button></div>
+    <div class="field"><label for="colorAge">Who is it for?</label><select id="colorAge"><option value="toddler">Toddler (2–4): very big, simple shapes</option><option value="kid" selected>Child (5–8)</option><option value="older">Older child (9–12): more detail</option><option value="adult">Adult: detailed and calm</option></select></div>
+    <label class="inline" id="ownKeyWrap" hidden><input type="checkbox" id="ownKey"> Use my own Gemini key (saved in Picture Forge)</label>
+    <p class="muted">Made by Google Gemini. It takes 10–30 seconds. Free pictures are shared by everyone and can run out for the day.</p>
+  </div>
+  <div class="sub" id="sub-photo">
+    <div class="field"><label for="colorPhoto">Photo (a pet, a house, your child’s favourite toy)</label><input id="colorPhoto" type="file" accept="image/*"></div>
+    <div class="field"><label for="colorDetail">Detail: <span id="colorDetailV">5</span></label><input id="colorDetail" type="range" min="1" max="10" value="5"></div>
+    <div class="field"><label for="colorLine">Line thickness: <span id="colorLineV">2</span></label><input id="colorLine" type="range" min="1" max="5" value="2"></div>
+    <p class="muted">Photos with a clear subject and a plain background work best.</p>
+  </div>
+  <div class="sub" id="sub-mandala">
+    <div class="field"><label for="mandalaFold">Symmetry (number of repeats): <span id="mandalaFoldV">10</span></label><input id="mandalaFold" type="range" min="5" max="20" value="10"></div>
+    <div class="field"><label for="mandalaRings">Detail: <span id="mandalaRingsV">6</span></label><input id="mandalaRings" type="range" min="3" max="10" value="6"></div>
+    <p class="muted">Every press of “New design” makes a different mandala.</p>
+  </div>
+  <div class="sub" id="sub-letters">
+    <div class="field"><label for="letterText">Letter, word or name</label><input id="letterText" type="text" value="A"></div>
+    <p class="muted">One letter makes an alphabet page (“A is for Apple”) with room to draw and a tracing line. A word or name is drawn in big bubble letters.</p>
+    <div class="actions"><button class="secondary" id="alphabetAll" type="button">Add all 26 alphabet pages to the book</button></div>
+  </div>
+  <div class="field"><label for="colorTitle">Words at the bottom (optional)</label><input id="colorTitle" type="text" placeholder="e.g. Dino’s lunch"></div>
+  <label class="inline"><input type="checkbox" id="nameLine" checked> Add a “Name:” line</label>
+  <div class="actions"><button class="primary" id="colorMake" type="button">Make the page</button><button class="secondary" id="colorAgain" type="button">New design</button></div>
+  <div id="colorProgress"></div>
+</div>
+
+<div class="tab" id="tab-trace"><h3>Letter and word tracing</h3>
+  <div class="field"><label for="traceKind">What to practise</label><select id="traceKind"><option value="upper">Capital letters A–Z</option><option value="lower">Small letters a–z</option><option value="pairs">Capital and small (Aa Bb…)</option><option value="numbers">Numbers 0–20</option><option value="name">My name</option><option value="words">My own words or sentences</option></select></div>
+  <div class="field" id="traceWordsField" hidden><label for="traceWords">Words — one per line</label><textarea id="traceWords" style="min-height:90px">cat
+dog
+sun
+I love you</textarea></div>
+  <div class="row2"><div class="field"><label for="traceSize">Letter size</label><select id="traceSize"><option value="big">Big (ages 3–5)</option><option value="medium" selected>Medium (ages 5–7)</option><option value="small">Small (ages 7+)</option></select></div>
+  <div class="field"><label for="traceStyle">Letters to trace</label><select id="traceStyle"><option value="faded">Light grey</option><option value="dotted">Dotted outline</option></select></div></div>
+  <div class="actions"><button class="primary" id="traceMake" type="button">Make the worksheet</button></div>
+</div>
+
+<div class="tab" id="tab-hanzi"><h3>Chinese characters &amp; other alphabets</h3>
+  <div class="field"><label for="hanSet">Characters</label><select id="hanSet"></select></div>
+  <div class="field" id="hanCustomField" hidden><label for="hanCustom">Your characters — one per line, with pinyin and meaning if you like</label><textarea id="hanCustom" style="min-height:90px">猫 māo cat
+狗 gǒu dog
+爱 ài love</textarea></div>
+  <div class="field"><label for="hanGrid">Writing grid</label><select id="hanGrid"><option value="mi">米 grid (diagonals — best for beginners)</option><option value="tian">田 grid (cross)</option><option value="plain">Plain squares</option></select></div>
+  <label class="inline" id="hanStrokesWrap"><input type="checkbox" id="hanStrokes" checked> Show the stroke order, one stroke at a time</label>
+  <p class="muted" id="hanNote">Each character gets a big model, its stroke order, three grey copies to trace and empty boxes to write on your own. Stroke data comes from the free Make Me a Hanzi project.</p>
+  <div class="actions"><button class="primary" id="hanMake" type="button">Make the practice sheet</button></div>
+  <div id="hanProgress"></div>
+</div>
+
+<div class="tab" id="tab-paint"><h3>Paint by numbers</h3>
+  <div class="field"><label for="paintPhoto">Photo</label><input id="paintPhoto" type="file" accept="image/*"></div>
+  <div class="row2"><div class="field"><label for="paintColors">Number of colours</label><select id="paintColors"><option>6</option><option>8</option><option selected>10</option><option>12</option><option>16</option><option>20</option><option>24</option></select></div>
+  <div class="field"><label for="paintDetail">Size of the areas</label><select id="paintDetail"><option value="low">Big areas (children)</option><option value="med" selected>Medium</option><option value="high">Small areas (adults)</option></select></div></div>
+  <p class="muted">You get the numbered outline to paint, a colour key with a mixing tip for every colour (made from red, yellow, blue, white and black), and a page showing how it will look.</p>
+  <div class="actions"><button class="primary" id="paintMake" type="button">Make paint by numbers</button></div>
+  <div id="paintProgress"></div>
+</div>
+
+<div class="tab" id="tab-maze"><h3>Maze</h3>
+  <div class="field"><label for="mazeLevel">How hard?</label><select id="mazeLevel"><option value="easy">Easy (ages 3–5)</option><option value="medium" selected>Medium (ages 5–8)</option><option value="hard">Hard (ages 8+)</option><option value="expert">Expert (adults)</option></select></div>
+  <div class="field"><label for="mazeTitle">Title</label><input id="mazeTitle" type="text" value="Help the bunny find the carrot!"></div>
+  <label class="inline"><input type="checkbox" id="mazeSolution" checked> Add a page with the answer</label>
+  <div class="actions"><button class="primary" id="mazeMake" type="button">Make a maze</button></div>
+</div>
+
+<div class="tab" id="tab-cover"><h3>Book cover</h3>
+  <div class="field"><label for="coverTitle">Title</label><input id="coverTitle" type="text" placeholder="Emma’s Coloring Book"></div>
+  <div class="field"><label for="coverSub">Small line underneath</label><input id="coverSub" type="text" value="Colour me in!"></div>
+  <div class="actions"><button class="primary" id="coverMake" type="button">Make the cover</button><button class="secondary" id="coverAgain" type="button">New pattern</button></div>
+</div>
+<div class="status" id="status" role="status"></div>
+</div>
+
+<div><div class="pv-wrap" id="pvWrap"><div class="pv-empty" id="pvEmpty">Your page appears here. Choose what to make on the left and press the button.</div></div>
+  <div class="pv-nav" id="pvNav" hidden><button type="button" class="secondary" id="pvPrev">‹</button><span id="pvInfo"></span><button type="button" class="secondary" id="pvNext">›</button></div>
+  <div class="actions" style="justify-content:center"><button class="primary" id="addBtn" type="button" disabled>➕ Add to book</button><button class="secondary" id="pngBtn" type="button" disabled>Download page (PNG)</button><button class="secondary" id="pdfOneBtn" type="button" disabled>Download as PDF</button><button class="secondary" id="printOne" type="button" disabled>🖨 Print</button></div>
+</div></div>
+</section>
+
+<section class="panel" id="bookPanel"><h2>Your coloring book <small id="bookCount">(empty)</small></h2>
+<p class="muted">Add pages above, put them in order, then download one PDF or print the whole book. The book is kept until you close this tab.</p>
+<div class="book" id="book"></div>
+<div class="actions"><button class="primary" id="pdfBtn" type="button">Download book as PDF</button><button class="secondary" id="printBook" type="button">🖨 Print the book</button><button class="secondary" id="clearBook" type="button">Empty the book</button></div>
+<div id="bookProgress"></div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Coloring Forge</h2>
+  <p>Coloring Forge makes printable pages for children (and adults): coloring pages from a description or a photo, mandalas, alphabet pages, letter and name tracing, Chinese character practice with stroke order, paint by numbers and mazes. Collect them into a book with a cover and print it or save it as a PDF.</p>
+  <h3>How to use Coloring Forge</h3>
+  <ol><li>Type your child’s name and pick the paper size.</li><li>Choose a page type, set it up and press the button.</li><li>Press “Add to book” for every page you like, then download the book as a PDF or print it.</li></ol>
+  <h3>What can I make with Coloring Forge?</h3>
+  <p>Coloring pages from a description (made by AI) or from your own photo, mandalas, alphabet pages, letter and name tracing worksheets, Chinese character practice sheets with stroke order (plus Japanese, Korean, Arabic and other alphabets), paint by numbers from a photo, mazes and a cover with your child's name.</p>
+  <h3>How do I learn to write Chinese characters with it?</h3>
+  <p>Pick a set of characters, such as numbers or family words. Each character gets a big model with pinyin and meaning, every stroke in the right order, grey copies to trace in a 米 grid and empty boxes to practise. Use Alphabet Forge to hear each character and watch it being written.</p>
+  <h3>How does paint by numbers work?</h3>
+  <p>Choose a photo and the number of colours. Coloring Forge finds the main colours, splits the picture into areas big enough to paint and numbers them. The colour key tells you how to mix every colour from red, yellow, blue, white and black.</p>
+  <h3>Are my photos uploaded?</h3>
+  <p>No. Photo coloring pages and paint by numbers are made in your browser. Only the words you type for an AI coloring page are sent to Google Gemini.</p>
+  <p class="miga-about-rel">Related tools: <a href="alphabet-forge.html">Alphabet Forge</a> · <a href="picture-forge.html">Picture Forge</a> · <a href="paint-forge.html">Paint Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. No account and no customer-file storage.</footer>
+<div id="printArea" aria-hidden="true"></div>
+<script>
+(function(){'use strict';
+const $=id=>document.getElementById(id);
+const PROXY='https://migabuilder-gemini.makmurphy69.workers.dev',GOOGLE='https://generativelanguage.googleapis.com/v1beta/models/';
+const INK='#16202B';
+function status(msg){const el=$('status');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),7000)}
+function saveBlob(blob,name){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),3000)}
+function loadScript(src){return new Promise((ok,no)=>{if(document.querySelector('script[src="'+src+'"]'))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src.split('/').pop()+'. Check your internet connection.'));document.head.appendChild(s)})}
+const slug=t=>String(t||'').toLowerCase().normalize('NFKD').replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-|-$/g,'').slice(0,50);
+function rng(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+let seed=Date.now()%100000;
+const kid=()=>$('kidName').value.trim();
+async function fontsReady(spec,text){try{await document.fonts.load(spec,text||'Aa');}catch(e){}}
+
+/* ---------------- a blank printable page ---------------- */
+function newPage(){const a4=$('paper').value==='a4',W=a4?1654:1700,H=a4?2339:2200;const cv=document.createElement('canvas');cv.width=W;cv.height=H;const ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);ctx.fillStyle=INK;ctx.strokeStyle=INK;return{cv,ctx,W,H,M:Math.round(W*.06)}}
+function footer(p){const{ctx,W,H,M}=p;ctx.save();ctx.font='22px "Andika", sans-serif';ctx.fillStyle='#9aa3ad';ctx.textAlign='right';ctx.fillText('migabuilder.com',W-M,H-M*.45);ctx.restore()}
+function nameLine(p,y){const{ctx,W,M}=p;ctx.save();ctx.font='40px "Andika", sans-serif';ctx.fillStyle=INK;ctx.textAlign='left';const x=W-M-560;ctx.fillText('Name:',x,y);ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(x+130,y+6);ctx.lineTo(W-M,y+6);ctx.stroke();ctx.restore()}
+function heading(p,text,y,size){const{ctx,W}=p;ctx.save();ctx.font='700 '+(size||64)+'px "Fredoka", sans-serif';ctx.fillStyle=INK;ctx.textAlign='center';fitText(ctx,text,W-p.M*2,size||64,'700 {s}px "Fredoka", sans-serif');ctx.fillText(text,W/2,y);ctx.restore()}
+function fitText(ctx,text,maxW,size,fmt){let s=size;ctx.font=fmt.replace('{s}',s);while(s>14&&ctx.measureText(text).width>maxW){s-=2;ctx.font=fmt.replace('{s}',s)}return s}
+// Big outlined "bubble" letters children can colour in.
+function bubbleText(ctx,text,cx,cy,maxW,maxSize){ctx.save();const s=fitText(ctx,text,maxW*.94,maxSize,'700 {s}px "Fredoka", sans-serif');ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=Math.max(5,s*.075);ctx.strokeStyle=INK;ctx.strokeText(text,cx,cy);ctx.fillStyle='#fff';ctx.fillText(text,cx,cy);ctx.restore();return s}
+function bottomTitle(p){const t=$('colorTitle').value.trim();if(!t)return;const{ctx,W,H,M}=p;ctx.save();ctx.font='600 60px "Fredoka", sans-serif';fitText(ctx,t,W-M*2,60,'600 {s}px "Fredoka", sans-serif');ctx.textAlign='center';ctx.fillStyle=INK;ctx.fillText(t,W/2,H-M*1.05);ctx.restore()}
+// Area left for the picture after the name line and title.
+function pictureBox(p){const top=p.M+($('nameLine').checked?80:0),bottom=p.H-p.M-($('colorTitle').value.trim()?110:40);return{x:p.M,y:top,w:p.W-p.M*2,h:bottom-top}}
+
+/* ---------------- preview, pages and book ---------------- */
+let pages=[],idx=0,book=[];
+function show(list,msg){pages=list;idx=0;draw();['addBtn','pngBtn','pdfOneBtn','printOne'].forEach(id=>$(id).disabled=!pages.length);if(msg)status(msg)}
+function draw(){const w=$('pvWrap');if(!pages.length){w.replaceChildren($('pvEmpty'));$('pvNav').hidden=true;return}const c=pages[idx].cv;c.setAttribute('aria-label',pages[idx].label||'Page preview');w.replaceChildren(c);$('pvNav').hidden=pages.length<2;$('pvInfo').textContent='Page '+(idx+1)+' of '+pages.length}
+$('pvPrev').onclick=()=>{if(idx>0){idx--;draw()}};$('pvNext').onclick=()=>{if(idx<pages.length-1){idx++;draw()}};
+const toBlob=(cv,type,q)=>new Promise(ok=>cv.toBlob(ok,type||'image/jpeg',q||.92));
+async function addPages(list){for(const p of list){const blob=await toBlob(p.cv);book.push({blob,url:URL.createObjectURL(blob),label:p.label||'Page',w:p.cv.width,h:p.cv.height})}renderBook()}
+function renderBook(){$('bookCount').textContent=book.length?'('+book.length+(book.length===1?' page)':' pages)'):'(empty)';
+  $('book').innerHTML=book.map((b,i)=>'<figure><img src="'+b.url+'" alt=""><figcaption>'+(i+1)+'. '+b.label.replace(/[<&]/g,'')+'</figcaption><div><button type="button" data-a="l" data-i="'+i+'" title="Move earlier">←</button><button type="button" data-a="x" data-i="'+i+'" title="Remove">✕</button><button type="button" data-a="r" data-i="'+i+'" title="Move later">→</button></div></figure>').join('')}
+$('book').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const i=+b.dataset.i,a=b.dataset.a;if(a==='x'){URL.revokeObjectURL(book[i].url);book.splice(i,1)}else{const j=a==='l'?i-1:i+1;if(j<0||j>=book.length)return;[book[i],book[j]]=[book[j],book[i]]}renderBook()};
+$('addBtn').onclick=async()=>{await addPages(pages);status(pages.length>1?pages.length+' pages added to the book.':'Added to the book. Make another page, or download the book below.')};
+$('clearBook').onclick=()=>{if(book.length&&!confirm('Remove all pages from the book?'))return;book.forEach(b=>URL.revokeObjectURL(b.url));book=[];renderBook()};
+const baseName=()=>slug(pages[idx]&&pages[idx].label||'page')||'page';
+$('pngBtn').onclick=async()=>{saveBlob(await toBlob(pages[idx].cv,'image/png'),baseName()+'.png')};
+async function makePdf(items,name){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');const fmt=$('paper').value==='a4'?'a4':'letter';const doc=new window.jspdf.jsPDF({unit:'mm',format:fmt,compress:true});const pw=doc.internal.pageSize.getWidth(),ph=doc.internal.pageSize.getHeight();
+  for(let i=0;i<items.length;i++){if(i)doc.addPage(fmt,'portrait');const bytes=new Uint8Array(await items[i].blob.arrayBuffer());const r=Math.min(pw/items[i].w,ph/items[i].h),w=items[i].w*r,h=items[i].h*r;doc.addImage(bytes,'JPEG',(pw-w)/2,(ph-h)/2,w,h,undefined,'FAST')}
+  saveBlob(doc.output('blob'),name)}
+const bookJob=MigaProgress.create($('bookProgress'));
+$('pdfBtn').onclick=async()=>{if(!book.length)return status('The book is empty. Make a page and press “Add to book” first.');bookJob.start('Making the PDF…');try{const n=(slug(kid())||'my')+'-coloring-book.pdf';await makePdf(book,n);bookJob.done('Saved '+n+' with '+book.length+' pages.')}catch(e){bookJob.fail(e,['Check your internet connection — the PDF maker downloads once.','Try fewer pages at a time.'])}};
+$('pdfOneBtn').onclick=async()=>{try{const items=[];for(const p of pages)items.push({blob:await toBlob(p.cv),w:p.cv.width,h:p.cv.height});await makePdf(items,baseName()+'.pdf');status('PDF saved.')}catch(e){status(e.message)}};
+function printUrls(urls){const area=$('printArea');let st=$('pageSize');if(!st){st=document.createElement('style');st.id='pageSize';document.head.appendChild(st)}st.textContent='@page{size:'+($('paper').value==='a4'?'A4':'letter')+' portrait;margin:0}';
+  area.innerHTML=urls.map(u=>'<img src="'+u+'" alt="">').join('');Promise.all([...area.querySelectorAll('img')].map(i=>i.decode().catch(()=>{}))).then(()=>window.print())}
+$('printOne').onclick=()=>printUrls(pages.map(p=>p.cv.toDataURL('image/jpeg',.92)));
+$('printBook').onclick=()=>{if(!book.length)return status('The book is empty. Make a page and press “Add to book” first.');printUrls(book.map(b=>b.url))};
+
+/* ---------------- tabs ---------------- */
+$('tabs').onclick=e=>{const b=e.target.closest('[data-tab]');if(!b)return;document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.id==='tab-'+b.dataset.tab))};
+const csrc=()=>document.querySelector('input[name=csrc]:checked').value;
+$('colorSrc').onchange=()=>{['ai','photo','mandala','letters'].forEach(s=>$('sub-'+s).classList.toggle('on',s===csrc()));$('colorAgain').hidden=csrc()!=='mandala'&&csrc()!=='ai'};$('colorAgain').hidden=false;
+$('ideaChips').onclick=e=>{const b=e.target.closest('button');if(b)$('colorPrompt').value=b.textContent};
+[['colorDetail'],['colorLine'],['mandalaFold'],['mandalaRings']].forEach(([id])=>$(id).addEventListener('input',()=>$(id+'V').textContent=$(id).value));
+let ownKey='';try{ownKey=localStorage.getItem('migaGeminiKey')||''}catch(e){}$('ownKeyWrap').hidden=!ownKey;
+
+/* ---------------- coloring page: AI ---------------- */
+const AGE={toddler:'for toddlers aged 2 to 4: one big subject, very few very large shapes, extra thick outlines, no background details',kid:'for children aged 5 to 8: simple shapes, thick outlines, a simple background',older:'for children aged 9 to 12: more detail and a full background, medium outlines',adult:'for adults: intricate detailed line art with many small areas, fine outlines'};
+const colorJob=MigaProgress.create($('colorProgress'),{onCancel(){if(aiCtrl)aiCtrl.abort()}});let aiCtrl=null;
+async function aiPicture(desc,age,signal){const prompt='A black and white coloring book page '+AGE[age]+'. Subject: '+desc+'. Pure black outlines on a pure white background. No colour, no grey, no shading, no hatching, no text or letters. Every area is closed so it can be coloured in. The whole subject fits on the page with a white margin. Portrait page.';
+  let r;if($('ownKey').checked&&ownKey){r=await fetch(GOOGLE+'gemini-3.1-flash-image:generateContent',{method:'POST',signal,headers:{'Content-Type':'application/json','x-goog-api-key':ownKey},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:'3:4',imageSize:'1K'}}})})}
+  else r=await fetch(PROXY,{method:'POST',signal,headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'image',model:'gemini-3.1-flash-image',prompt,aspectRatio:'3:4',imageSize:'1K',images:[]})});
+  if(!r.ok){const t=await r.text().catch(()=>'');if(r.status===403&&/Origin/i.test(t))throw new Error('The shared AI only works on migabuilder.com. Use a photo, mandala or alphabet page instead.');if(r.status===429||r.status===403||r.status>=500||r.status===400)throw new Error('The free picture AI is busy or has run out for today. Try again later, or make a page from a photo, a mandala or an alphabet page — they work without AI.');throw new Error('The AI request failed ('+r.status+').')}
+  const data=await r.json();const parts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];const img=parts.find(p=>p.inlineData&&/^image\//.test(p.inlineData.mimeType||''));
+  if(!img){if(data.promptFeedback&&data.promptFeedback.blockReason)throw new Error('Google’s safety filter blocked this. Try describing it differently.');throw new Error('The AI did not return a picture. Try a clearer description.')}
+  const bin=atob(img.inlineData.data),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);return createImageBitmap(new Blob([u8],{type:img.inlineData.mimeType}))}
+// Draw a picture into the page box and make it pure black and white so it prints cleanly.
+function placeLineArt(p,src,box){const{ctx}=p,r=Math.min(box.w/src.width,box.h/src.height),w=Math.round(src.width*r),h=Math.round(src.height*r),x=Math.round(box.x+(box.w-w)/2),y=Math.round(box.y+(box.h-h)/2);ctx.imageSmoothingQuality='high';ctx.drawImage(src,x,y,w,h);
+  const im=ctx.getImageData(x,y,w,h),d=im.data;for(let i=0;i<d.length;i+=4){const g=d[i]*.3+d[i+1]*.59+d[i+2]*.11,v=g<170?0:255;d[i]=d[i+1]=d[i+2]=v;d[i+3]=255}ctx.putImageData(im,x,y)}
+function finishColorPage(p,label){if($('nameLine').checked)nameLine(p,p.M+30);bottomTitle(p);footer(p);return{cv:p.cv,label}}
+
+/* ---------------- coloring page: photo → line drawing ---------------- */
+function boxesForGauss(sigma,n){const wIdeal=Math.sqrt(12*sigma*sigma/n+1);let wl=Math.floor(wIdeal);if(wl%2===0)wl--;const wu=wl+2,m=Math.round((12*sigma*sigma-n*wl*wl-4*n*wl-3*n)/(-4*wl-4));return Array.from({length:n},(_,i)=>i<m?wl:wu)}
+function boxBlur(src,w,h,r){const tmp=new Float32Array(src.length),out=new Float32Array(src.length),k=1/(r+r+1);
+  for(let y=0;y<h;y++){const o=y*w;let acc=src[o]*(r+1);for(let j=0;j<r;j++)acc+=src[o+Math.min(j,w-1)];for(let x=0;x<w;x++){acc+=src[o+Math.min(x+r,w-1)]-src[o+Math.max(x-r-1,0)];tmp[o+x]=acc*k}}
+  for(let x=0;x<w;x++){let acc=tmp[x]*(r+1);for(let j=0;j<r;j++)acc+=tmp[Math.min(j,h-1)*w+x];for(let y=0;y<h;y++){acc+=tmp[Math.min(y+r,h-1)*w+x]-tmp[Math.max(y-r-1,0)*w+x];out[y*w+x]=acc*k}}return out}
+function gauss(a,w,h,s){let o=a;for(const b of boxesForGauss(s,3))o=boxBlur(o,w,h,(b-1)>>1);return o}
+function components(mask,w,h,keep){const lab=new Int32Array(w*h).fill(-1),sizes=[],stack=[];for(let i=0;i<w*h;i++){if(!keep(i)||lab[i]>=0)continue;const id=sizes.length;let n=0;stack.push(i);lab[i]=id;while(stack.length){const q=stack.pop();n++;const x=q%w,y=(q/w)|0;const nb=[x>0?q-1:-1,x<w-1?q+1:-1,y>0?q-w:-1,y<h-1?q+w:-1];for(const t of nb)if(t>=0&&lab[t]<0&&mask(q,t)){lab[t]=id;stack.push(t)}}sizes.push(n)}return{lab,sizes}}
+function photoToLines(bmp,detail,thick){const S=Math.min(4,1100/Math.max(bmp.width,bmp.height)),w=Math.round(bmp.width*S),h=Math.round(bmp.height*S);const cv=document.createElement('canvas');cv.width=w;cv.height=h;const c=cv.getContext('2d',{willReadFrequently:true});c.drawImage(bmp,0,0,w,h);const im=c.getImageData(0,0,w,h),d=im.data,g=new Float32Array(w*h);for(let i=0;i<w*h;i++)g[i]=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;
+  const s1=.8+(10-detail)*.22,g1=gauss(g,w,h,s1),g2=gauss(g,w,h,s1*1.6),tau=1.5+(10-detail)*.55;let edge=new Uint8Array(w*h);for(let i=0;i<w*h;i++)edge[i]=g1[i]-g2[i]<-tau?1:0;
+  const cc=components((q,t)=>edge[t]===1,w,h,i=>edge[i]===1);const minSize=Math.round(12*(11-detail)/3);for(let i=0;i<w*h;i++)if(edge[i]&&cc.sizes[cc.lab[i]]<minSize)edge[i]=0;
+  for(let t=1;t<thick;t++){const n=edge.slice();for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){const i=y*w+x;if(!edge[i]&&(edge[i-1]||edge[i+1]||edge[i-w]||edge[i+w]))n[i]=1}edge=n}
+  for(let i=0;i<w*h;i++){const v=edge[i]?0:255;d[i*4]=d[i*4+1]=d[i*4+2]=v;d[i*4+3]=255}c.putImageData(im,0,0);return cv}
+
+/* ---------------- coloring page: mandala ---------------- */
+function mandala(ctx,cx,cy,R,fold,rings,rand){ctx.save();ctx.translate(cx,cy);ctx.lineWidth=Math.max(3,R/170);ctx.lineJoin='round';ctx.lineCap='round';ctx.strokeStyle=INK;ctx.fillStyle='#fff';
+  const step=Math.PI*2/fold,circle=r=>{ctx.beginPath();ctx.arc(0,0,r,0,Math.PI*2);ctx.stroke()};
+  const r0=R*.12;circle(r0);const inner=6+Math.floor(rand()*3);for(let j=0;j<inner;j++){ctx.save();ctx.rotate(j*Math.PI*2/inner);ctx.beginPath();ctx.ellipse(r0*.5,0,r0*.42,r0*.2,0,0,Math.PI*2);ctx.stroke();ctx.restore()}
+  let r=r0;const widths=Array.from({length:rings},()=>.6+rand());const sum=widths.reduce((a,b)=>a+b,0);
+  const motifs=['petal','circles','scallop','zigzag','petal2','drops','spikes'];
+  for(let k=0;k<rings;k++){const r1=r+(R-r0)*widths[k]/sum,m=motifs[Math.floor(rand()*motifs.length)],f=k%3===2&&fold<16?fold*2:fold,st=Math.PI*2/f,mid=(r+r1)/2,band=r1-r;
+    for(let j=0;j<f;j++){ctx.save();ctx.rotate(j*st+(m==='petal2'?st/2:0));ctx.beginPath();
+      if(m==='petal'||m==='petal2'){const wd=Math.min(band*.55,mid*Math.sin(st/2)*.95);ctx.moveTo(r,0);ctx.bezierCurveTo(r+band*.3,wd,r+band*.75,wd*.8,r1,0);ctx.bezierCurveTo(r+band*.75,-wd*.8,r+band*.3,-wd,r,0);ctx.stroke();ctx.beginPath();ctx.moveTo(r+band*.18,0);ctx.bezierCurveTo(r+band*.35,wd*.45,r+band*.6,wd*.35,r+band*.78,0);ctx.bezierCurveTo(r+band*.6,-wd*.35,r+band*.35,-wd*.45,r+band*.18,0)}
+      else if(m==='circles'){const cr=Math.min(band*.42,mid*Math.sin(st/2)*.85);ctx.arc(mid,0,cr,0,Math.PI*2);ctx.stroke();ctx.beginPath();ctx.arc(mid,0,cr*.45,0,Math.PI*2)}
+      else if(m==='scallop'){const a=st/2;ctx.moveTo(r1*Math.cos(-a),r1*Math.sin(-a));ctx.quadraticCurveTo(r1+band*.0+band*.0,0,r1*Math.cos(a),r1*Math.sin(a));ctx.moveTo(r*Math.cos(-a),r*Math.sin(-a));ctx.quadraticCurveTo(mid+band*.25,0,r*Math.cos(a),r*Math.sin(a))}
+      else if(m==='zigzag'){const a=st/2;ctx.moveTo(r*Math.cos(-a),r*Math.sin(-a));ctx.lineTo(r1,0);ctx.lineTo(r*Math.cos(a),r*Math.sin(a));ctx.moveTo(r+band*.35,0);ctx.lineTo(r1-band*.12,0)}
+      else if(m==='drops'){const wd=Math.min(band*.35,mid*Math.sin(st/2)*.8);ctx.moveTo(r+band*.08,0);ctx.quadraticCurveTo(r+band*.55,wd*1.6,r1-band*.12,0);ctx.quadraticCurveTo(r+band*.55,-wd*1.6,r+band*.08,0)}
+      else{const a=st/2;ctx.moveTo(r*Math.cos(-a*.8),r*Math.sin(-a*.8));ctx.lineTo(r1*.98,0);ctx.lineTo(r*Math.cos(a*.8),r*Math.sin(a*.8));ctx.closePath()}
+      ctx.stroke();ctx.restore()}
+    circle(r1);r=r1}
+  ctx.restore()}
+
+/* ---------------- coloring page: alphabet and names ---------------- */
+const WORDS='Apple Ball Cat Dog Egg Fish Goat Hat Igloo Jellyfish Kite Lion Moon Nest Owl Pig Queen Rainbow Sun Tree Umbrella Van Whale Xylophone Yo-yo Zebra'.split(' ');
+function traceRow(ctx,x,y,w,h,items,style,modelCount){// y = top line, h = capital height
+  ctx.save();ctx.strokeStyle='#9fb3c8';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+w,y);ctx.moveTo(x,y+h);ctx.lineTo(x+w,y+h);ctx.stroke();ctx.setLineDash([12,10]);ctx.strokeStyle='#c4cfdb';ctx.beginPath();ctx.moveTo(x,y+h*.5);ctx.lineTo(x+w,y+h*.5);ctx.moveTo(x,y+h*1.38);ctx.lineTo(x+w,y+h*1.38);ctx.stroke();ctx.setLineDash([]);
+  const size=h/.72;ctx.font=size+'px "Andika", sans-serif';ctx.textBaseline='alphabetic';let cx=x+size*.15;const gap=size*.45;
+  const stopAt=x+w*(modelCount>=2?1:.72);items.forEach((t,i)=>{const tw=ctx.measureText(t).width;if(cx+tw>stopAt)return;if(i<modelCount){ctx.fillStyle='#2b3440';ctx.fillText(t,cx,y+h)}else if(style==='dotted'){ctx.save();ctx.setLineDash([1,size*.065]);ctx.lineCap='round';ctx.lineWidth=Math.max(3,size*.035);ctx.strokeStyle='#7d8894';ctx.strokeText(t,cx,y+h);ctx.restore()}else{ctx.fillStyle='#cfd5db';ctx.fillText(t,cx,y+h)}cx+=tw+gap});ctx.restore()}
+function alphabetPage(L){const p=newPage(),{ctx,W,H,M}=p,i='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(L),word=WORDS[i];if($('nameLine').checked)nameLine(p,M+30);
+  bubbleText(ctx,L+L.toLowerCase(),W/2,M+340,W-M*2,520);
+  ctx.save();ctx.font='600 66px "Fredoka", sans-serif';ctx.textAlign='center';ctx.fillStyle=INK;ctx.fillText(L+' is for',W/2,M+700);ctx.restore();
+  bubbleText(ctx,word,W/2,M+840,W-M*2,230);
+  const bx=M,by=M+990,bw=W-M*2,bh=H-by-M-330;ctx.save();ctx.setLineDash([18,12]);ctx.lineWidth=4;ctx.strokeStyle='#9aa3ad';ctx.strokeRect(bx,by,bw,bh);ctx.setLineDash([]);ctx.font='38px "Andika", sans-serif';ctx.fillStyle='#7d8894';ctx.textAlign='center';ctx.fillText('Draw something that starts with '+L,W/2,by+60);ctx.restore();
+  traceRow(ctx,M,H-M-230,W-M*2,110,Array(12).fill(L).map((x,j)=>j%2?x.toLowerCase():x),'faded',2);footer(p);return{cv:p.cv,label:L+' is for '+word}}
+function namePage(text){const p=newPage(),{ctx,W,H,M}=p;if($('nameLine').checked)nameLine(p,M+30);const box=pictureBox(p);const lines=text.split(/\s+/).filter(Boolean);const lh=box.h/Math.max(lines.length,2);
+  lines.forEach((l,i)=>bubbleText(ctx,l,W/2,box.y+lh*(i+.5)+(lines.length===1?box.h/4:0),W-M*2,Math.min(lh*.85,700)));bottomTitle(p);footer(p);return{cv:p.cv,label:text}}
+
+$('colorMake').onclick=()=>makeColor(false);$('colorAgain').onclick=()=>makeColor(true);
+async function makeColor(again){const src=csrc();await fontsReady('700 60px "Fredoka"');await fontsReady('40px "Andika"');
+  if(src==='mandala'){if(again)seed++;const p=newPage(),b=pictureBox(p);mandala(p.ctx,p.W/2,b.y+b.h/2,Math.min(b.w,b.h)/2-6,+$('mandalaFold').value,+$('mandalaRings').value,rng(seed));show([finishColorPage(p,'Mandala')],'Mandala ready. Press “New design” for another one.');return}
+  if(src==='letters'){const t=$('letterText').value.trim();if(!t)return status('Type a letter, word or name.');show([/^[A-Za-z]$/.test(t)?alphabetPage(t.toUpperCase()):namePage(t)]);return}
+  if(src==='photo'){const f=$('colorPhoto').files[0];if(!f)return status('Choose a photo first.');try{const bmp=await createImageBitmap(f);const art=photoToLines(bmp,+$('colorDetail').value,+$('colorLine').value);const p=newPage();placeLineArt(p,art,pictureBox(p));show([finishColorPage(p,'Photo coloring page')],'Too many lines? Lower the detail. Too few? Raise it.')}catch(e){console.warn(e);status('This file could not be opened as a picture.')}return}
+  const desc=$('colorPrompt').value.trim();if(!desc)return status('Describe what should be on the page.');aiCtrl=new AbortController();colorJob.start('Gemini is drawing your coloring page…');$('colorMake').disabled=$('colorAgain').disabled=true;
+  try{const bmp=await aiPicture(desc,$('colorAge').value,aiCtrl.signal);const p=newPage();placeLineArt(p,bmp,pictureBox(p));show([finishColorPage(p,desc)]);colorJob.done('Your coloring page is ready. Not quite right? Press “New design”.')}
+  catch(e){if(e.name==='AbortError')colorJob.fail(new Error('Cancelled.'),[]);else colorJob.fail(e,['Try again in a minute.','Describe one clear subject, like “a smiling elephant”.','Make a mandala, alphabet page or photo page instead — no AI needed.'])}
+  finally{aiCtrl=null;$('colorMake').disabled=$('colorAgain').disabled=false}}
+$('alphabetAll').onclick=async()=>{await fontsReady('700 60px "Fredoka"');await fontsReady('40px "Andika"');status('Making 26 pages…');const list=[];for(const L of 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'){list.push(alphabetPage(L));await new Promise(r=>setTimeout(r))}await addPages(list);show(list.slice(0,1).concat(list.slice(1)),'All 26 alphabet pages were added to the book.')};
+
+/* ---------------- tracing worksheets ---------------- */
+$('traceKind').onchange=()=>{$('traceWordsField').hidden=$('traceKind').value!=='words'};
+function traceItems(){const k=$('traceKind').value,AZ='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  if(k==='upper')return[...AZ].map(c=>({model:c,row:Array(14).fill(c)}));
+  if(k==='lower')return[...AZ.toLowerCase()].map(c=>({model:c,row:Array(14).fill(c)}));
+  if(k==='pairs')return[...AZ].map(c=>({row:Array(8).fill(c+c.toLowerCase())}));
+  if(k==='numbers')return Array.from({length:21},(_,i)=>({row:Array(i<10?14:8).fill(String(i))}));
+  const ws=k==='name'?[kid()||'Name']:$('traceWords').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  return ws.map(w=>({row:Array(6).fill(w),words:true}))}
+async function makeTrace(){await fontsReady('80px "Andika"','Aa');await fontsReady('700 60px "Fredoka"');const items=traceItems();if(!items.length)return status('Type at least one word.');
+  const sz={big:[150,5],medium:[110,7],small:[80,9]}[$('traceSize').value],h=sz[0],k=$('traceKind').value;const list=[];let p=null,y=0,rowsLeft=0;
+  const title={upper:'Capital letters',lower:'Small letters',pairs:'Capital and small letters',numbers:'Numbers',name:'Write your name',words:'Let’s write!'}[k];
+  const expand=k==='name'?Array(sz[1]).fill(items[0]):items;
+  for(const it of expand){if(!rowsLeft){p=newPage();nameLine(p,p.M+30);heading(p,title,p.M+150,72);y=p.M+250;rowsLeft=Math.floor((p.H-p.M-60-y)/(h*1.9));list.push({cv:p.cv,label:title})}
+    const row=it.row.slice();traceRow(p.ctx,p.M,y,p.W-p.M*2,h,row,$('traceStyle').value,1);y+=h*1.9;rowsLeft--}
+  list.forEach((pg,i)=>{const q={ctx:pg.cv.getContext('2d'),W:pg.cv.width,H:pg.cv.height,M:Math.round(pg.cv.width*.06)};footer(q);if(list.length>1){q.ctx.save();q.ctx.font='22px "Andika"';q.ctx.fillStyle='#9aa3ad';q.ctx.fillText((i+1)+' / '+list.length,q.M,q.H-q.M*.45);q.ctx.restore()}});
+  show(list,list.length>1?'The worksheet has '+list.length+' pages. “Add to book” adds them all.':'Worksheet ready.')}
+$('traceMake').onclick=makeTrace;
+
+/* ---------------- Chinese characters and other scripts ---------------- */
+const HAN={
+  numbers:['一 yī one','二 èr two','三 sān three','四 sì four','五 wǔ five','六 liù six','七 qī seven','八 bā eight','九 jiǔ nine','十 shí ten'],
+  family:['人 rén person','妈 mā mum','爸 bà dad','哥 gē big brother','姐 jiě big sister','弟 dì little brother','妹 mèi little sister','家 jiā home; family','我 wǒ I; me','你 nǐ you'],
+  nature:['日 rì sun; day','月 yuè moon','山 shān mountain','水 shuǐ water','火 huǒ fire','木 mù tree; wood','天 tiān sky','雨 yǔ rain','花 huā flower','土 tǔ earth'],
+  body:['口 kǒu mouth','目 mù eye','耳 ěr ear','手 shǒu hand','足 zú foot','心 xīn heart','头 tóu head','牙 yá tooth','力 lì strength','大 dà big'],
+  animals:['马 mǎ horse','牛 niú cow','羊 yáng sheep','鸟 niǎo bird','鱼 yú fish','猫 māo cat','狗 gǒu dog','虫 chóng insect','龙 lóng dragon','兔 tù rabbit'],
+  greetings:['你 nǐ you','好 hǎo good','谢 xiè thank','再 zài again','见 jiàn see','早 zǎo early; morning','上 shàng up; on','下 xià down; under','中 zhōng middle','小 xiǎo small']};
+const HAN_NAMES={numbers:'Numbers 1–10',family:'Family',nature:'Nature',body:'Body',animals:'Animals',greetings:'Greetings and opposites'};
+(()=>{let o='<optgroup label="Chinese (with stroke order)">'+Object.keys(HAN).map(k=>'<option value="han:'+k+'">Chinese — '+HAN_NAMES[k]+'</option>').join('')+'<option value="custom">Chinese — my own characters</option></optgroup>';
+  const S=(window.ALPHABETS||[]).filter(s=>!s.hanzi);if(S.length)o+='<optgroup label="Other alphabets">'+S.map(s=>s.sections.map((sec,i)=>'<option value="abc:'+s.id+':'+i+'">'+s.name+' — '+sec.title+'</option>').join('')).join('')+'</optgroup>';$('hanSet').innerHTML=o})();
+$('hanSet').onchange=()=>{const v=$('hanSet').value;$('hanCustomField').hidden=v!=='custom';$('hanStrokesWrap').hidden=v.startsWith('abc:')};
+function hanList(){const v=$('hanSet').value;const parse=l=>{const m=l.trim().match(/^(\S+)\s*([^\s]*)\s*(.*)$/);return m?{g:m[1],r:m[2]||'',m:m[3]||'',han:true}:null};
+  if(v.startsWith('han:'))return{title:'Chinese — '+HAN_NAMES[v.slice(4)],items:HAN[v.slice(4)].map(parse)};
+  if(v==='custom'){const items=[];$('hanCustom').value.split('\n').forEach(l=>{const it=parse(l);if(!it)return;if([...it.g].length>1&&!it.r)[...it.g].forEach(g=>items.push({g,r:'',m:'',han:true}));else items.push(it)});return{title:'Chinese practice',items}}
+  const[,id,si]=v.split(':'),s=window.ALPHABETS.find(x=>x.id===id),sec=s.sections[+si];return{title:s.name+' — '+sec.title,font:s.font||"'Noto Sans'",dir:s.dir,items:sec.items.filter(it=>it.g&&!/^[–-]$/.test(it.g)).map(it=>({g:String(it.g),r:it.r||'',m:it.m||it.n||''}))}}
+const strokeCache={};
+async function strokes(ch){if(strokeCache[ch]!==undefined)return strokeCache[ch];try{const r=await fetch('https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0.1/'+encodeURIComponent(ch)+'.json');strokeCache[ch]=r.ok?(await r.json()).strokes:null}catch(e){strokeCache[ch]=null}return strokeCache[ch]}
+function gridBox(ctx,x,y,s,kind){ctx.save();ctx.lineWidth=3;ctx.strokeStyle='#e08a8a';ctx.strokeRect(x,y,s,s);if(kind!=='plain'){ctx.setLineDash([8,8]);ctx.lineWidth=1.5;ctx.strokeStyle='#efb7b7';ctx.beginPath();ctx.moveTo(x+s/2,y);ctx.lineTo(x+s/2,y+s);ctx.moveTo(x,y+s/2);ctx.lineTo(x+s,y+s/2);if(kind==='mi'){ctx.moveTo(x,y);ctx.lineTo(x+s,y+s);ctx.moveTo(x+s,y);ctx.lineTo(x,y+s)}ctx.stroke()}ctx.restore()}
+// Hanzi Writer data: 1024-unit paths, y pointing up with the baseline at 900.
+function drawStrokes(ctx,paths,x,y,s,n,color,lastColor){ctx.save();ctx.translate(x+s*.06,y+s*.06);const k=s*.88/1024;ctx.scale(k,-k);ctx.translate(0,-900);paths.slice(0,n).forEach((d,i)=>{ctx.fillStyle=lastColor&&i===n-1?lastColor:color;ctx.fill(new Path2D(d))});ctx.restore()}
+function drawGlyph(ctx,g,x,y,s,color,font){ctx.save();ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='middle';const fs=fitText(ctx,g,s*.86,s*.78,'{s}px '+font);ctx.font=fs+'px '+font;ctx.fillText(g,x+s/2,y+s/2+s*.03);ctx.restore()}
+const hanJob=MigaProgress.create($('hanProgress'));
+async function makeHanzi(){const set=hanList();if(!set.items.length)return status('Type at least one character.');const useStrokes=!$('hanStrokesWrap').hidden&&$('hanStrokes').checked,font=set.font||"'Noto Sans SC'";
+  await fontsReady('700 60px "Fredoka"');await fontsReady('40px "Andika"');await fontsReady('80px '+font,set.items.map(i=>i.g).join(''));hanJob.start('Making the practice sheet…');
+  try{const data=[];for(let i=0;i<set.items.length;i++){const it=set.items[i];data.push(Object.assign({},it,{paths:it.han&&[...it.g].length===1?await strokes(it.g):null}));hanJob.update((i+1)/set.items.length,'Fetching stroke order… '+(i+1)+' / '+set.items.length)}
+    const list=[];let p=null,y=0;const cols=8;
+    for(const it of data){const P=p||newPage(),s=Math.floor((P.W-P.M*2)/cols),strokeRow=useStrokes&&it.paths?Math.ceil(it.paths.length/((P.W-P.M*2-s*1.2)/(s*.55)|0)):0,blockH=s*1.15+(strokeRow?strokeRow*s*.6:s*.15)+s*1.0+s*.35;
+      if(!p||y+blockH>P.H-P.M-40){p=newPage();nameLine(p,p.M+30);heading(p,set.title,p.M+140,62);y=p.M+200;list.push({cv:p.cv,label:set.title})}
+      const{ctx,M,W}=p;gridBox(ctx,M,y,s*1.15,$('hanGrid').value);if(it.paths)drawStrokes(ctx,it.paths,M,y,s*1.15,it.paths.length,INK);else drawGlyph(ctx,it.g,M,y,s*1.15,INK,font);
+      ctx.save();ctx.fillStyle=INK;ctx.font='700 52px "Andika", sans-serif';ctx.fillText(it.r||'',M+s*1.35,y+s*.42);ctx.font='38px "Andika", sans-serif';ctx.fillStyle='#4b5560';ctx.fillText(it.m||'',M+s*1.35,y+s*.42+52);if(it.paths){ctx.font='26px "Andika", sans-serif';ctx.fillStyle='#8a939c';ctx.fillText(it.paths.length+(it.paths.length===1?' stroke':' strokes'),M+s*1.35,y+s*.42+96)}ctx.restore();
+      let yy=y+s*1.15+s*.12;
+      if(useStrokes&&it.paths){const ss=s*.55,per=Math.floor((W-M*2)/(ss+6));for(let n=1;n<=it.paths.length;n++){const r=Math.floor((n-1)/per),c=(n-1)%per,x=M+c*(ss+6),yb=yy+r*(ss+8);gridBox(ctx,x,yb,ss,'plain');drawStrokes(ctx,it.paths,x,yb,ss,n,'#9aa3ad','#d6453a');ctx.save();ctx.font='18px "Andika"';ctx.fillStyle='#8a939c';ctx.fillText(String(n),x+4,yb+18);ctx.restore()}yy+=Math.ceil(it.paths.length/per)*(ss+8)+s*.05}
+      for(let c=0;c<cols;c++){const x=M+c*s;gridBox(ctx,x,yy,s,$('hanGrid').value);if(c<3){if(it.paths)drawStrokes(ctx,it.paths,x,yy,s,it.paths.length,c===0?'#b9c0c7':'#d9dde1');else drawGlyph(ctx,it.g,x,yy,s,c===0?'#b9c0c7':'#d9dde1',font)}}
+      y=yy+s+s*.35}
+    list.forEach(pg=>footer({ctx:pg.cv.getContext('2d'),W:pg.cv.width,H:pg.cv.height,M:Math.round(pg.cv.width*.06)}));
+    const missing=data.filter(d=>d.han&&!d.paths).length;show(list);hanJob.done('Practice sheet ready'+(list.length>1?' ('+list.length+' pages)':'')+'.'+(missing?' '+missing+' character(s) have no stroke data, so they are shown in a normal font.':''))}
+  catch(e){hanJob.fail(e,['Check your internet connection — stroke order is downloaded for each character.'])}}
+$('hanMake').onclick=makeHanzi;
+
+/* ---------------- paint by numbers ---------------- */
+function kmeans(px,n,k,rand){const pick=[];pick.push(Math.floor(rand()*n));const d2=new Float32Array(n).fill(1e12);
+  for(let c=1;c<k;c++){const last=pick[c-1]*3;let sum=0;for(let i=0;i<n;i++){const a=px[i*3]-px[last],b=px[i*3+1]-px[last+1],e=px[i*3+2]-px[last+2],v=a*a+b*b+e*e;if(v<d2[i])d2[i]=v;sum+=d2[i]}let t=rand()*sum,j=0;for(;j<n-1;j++){t-=d2[j];if(t<=0)break}pick.push(j)}
+  const C=pick.map(i=>[px[i*3],px[i*3+1],px[i*3+2]]);const lab=new Uint8Array(n);
+  for(let it=0;it<14;it++){const acc=C.map(()=>[0,0,0,0]);for(let i=0;i<n;i++){let best=0,bd=1e12;for(let c=0;c<k;c++){const a=px[i*3]-C[c][0],b=px[i*3+1]-C[c][1],e=px[i*3+2]-C[c][2],v=a*a+b*b+e*e;if(v<bd){bd=v;best=c}}lab[i]=best;const q=acc[best];q[0]+=px[i*3];q[1]+=px[i*3+1];q[2]+=px[i*3+2];q[3]++}
+    acc.forEach((q,c)=>{if(q[3])C[c]=[q[0]/q[3],q[1]/q[3],q[2]/q[3]]})}return C}
+function paintByNumbers(bmp,k,detail){const MAX={low:420,med:560,high:720}[detail],S=Math.min(1,MAX/Math.max(bmp.width,bmp.height)),w=Math.max(8,Math.round(bmp.width*S)),h=Math.max(8,Math.round(bmp.height*S)),N=w*h;
+  const cv=document.createElement('canvas');cv.width=w;cv.height=h;const c=cv.getContext('2d',{willReadFrequently:true});c.filter='blur(1px)';c.drawImage(bmp,0,0,w,h);const d=c.getImageData(0,0,w,h).data;
+  const all=new Float32Array(N*3);for(let i=0;i<N;i++){all[i*3]=d[i*4];all[i*3+1]=d[i*4+1];all[i*3+2]=d[i*4+2]}
+  const step=Math.max(1,Math.floor(N/15000)),ns=Math.floor(N/step),sample=new Float32Array(ns*3);for(let i=0;i<ns;i++){sample.set(all.subarray(i*step*3,i*step*3+3),i*3)}
+  let C=kmeans(sample,ns,Math.min(k,ns),rng(42));let lab=new Uint8Array(N);for(let i=0;i<N;i++){let best=0,bd=1e12;for(let q=0;q<C.length;q++){const a=all[i*3]-C[q][0],b=all[i*3+1]-C[q][1],e=all[i*3+2]-C[q][2],v=a*a+b*b+e*e;if(v<bd){bd=v;best=q}}lab[i]=best}
+  // Majority filter: smooth out speckles.
+  for(let pass=0;pass<2;pass++){const out=lab.slice(),cnt=new Uint16Array(C.length);for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){cnt.fill(0);let bi=lab[y*w+x],bc=0;for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){const v=lab[(y+dy)*w+x+dx];if(++cnt[v]>bc){bc=cnt[v];bi=v}}if(bc>=5)out[y*w+x]=bi}lab=out}
+  // Merge areas that are too small to paint into their biggest neighbour.
+  const minArea=Math.max(12,Math.round(N*{low:.0035,med:.0014,high:.0006}[detail]));let cc;
+  for(let round=0;round<8;round++){cc=(()=>{const L=new Int32Array(N).fill(-1),sizes=[],st=[];for(let i=0;i<N;i++){if(L[i]>=0)continue;const id=sizes.length,v=lab[i];let n=0;st.push(i);L[i]=id;while(st.length){const q=st.pop();n++;const x=q%w;if(x>0&&L[q-1]<0&&lab[q-1]===v){L[q-1]=id;st.push(q-1)}if(x<w-1&&L[q+1]<0&&lab[q+1]===v){L[q+1]=id;st.push(q+1)}if(q>=w&&L[q-w]<0&&lab[q-w]===v){L[q-w]=id;st.push(q-w)}if(q<N-w&&L[q+w]<0&&lab[q+w]===v){L[q+w]=id;st.push(q+w)}}sizes.push(n)}return{lab:L,sizes}})();
+    const small=cc.sizes.map((s,i)=>s<minArea);if(!small.some(Boolean))break;const votes=new Map();
+    for(let i=0;i<N;i++){const id=cc.lab[i];if(!small[id])continue;const x=i%w;for(const t of [x>0?i-1:-1,x<w-1?i+1:-1,i>=w?i-w:-1,i<N-w?i+w:-1]){if(t<0||cc.lab[t]===id)continue;let m=votes.get(id);if(!m){m=new Map();votes.set(id,m)}m.set(lab[t],(m.get(lab[t])||0)+(small[cc.lab[t]]?1:4))}}
+    const to=new Map();votes.forEach((m,id)=>{let b=-1,bv=-1;m.forEach((v,l)=>{if(v>bv){bv=v;b=l}});to.set(id,b)});for(let i=0;i<N;i++){const t=to.get(cc.lab[i]);if(t!==undefined&&t>=0)lab[i]=t}}
+  // Number the colours that are still used, light to dark.
+  const used=[...new Set(lab)].sort((a,b)=>(C[b][0]*.3+C[b][1]*.59+C[b][2]*.11)-(C[a][0]*.3+C[a][1]*.59+C[a][2]*.11));const remap=new Map(used.map((l,i)=>[l,i]));for(let i=0;i<N;i++)lab[i]=remap.get(lab[i]);const colors=used.map(l=>C[l].map(Math.round));
+  // Distance to the nearest edge, to put each number in the roomiest spot of its area.
+  const dist=new Float32Array(N);for(let i=0;i<N;i++){const x=i%w,y=(i/w)|0;dist[i]=(x===0||y===0||x===w-1||y===h-1||lab[i]!==lab[i-1]||lab[i]!==lab[i+1]||lab[i]!==lab[i-w]||lab[i]!==lab[i+w])?0:1e9}
+  for(let i=0;i<N;i++){const x=i%w;if(x>0)dist[i]=Math.min(dist[i],dist[i-1]+1);if(i>=w)dist[i]=Math.min(dist[i],dist[i-w]+1);if(x>0&&i>=w)dist[i]=Math.min(dist[i],dist[i-w-1]+1.4);if(x<w-1&&i>=w)dist[i]=Math.min(dist[i],dist[i-w+1]+1.4)}
+  for(let i=N-1;i>=0;i--){const x=i%w;if(x<w-1)dist[i]=Math.min(dist[i],dist[i+1]+1);if(i<N-w)dist[i]=Math.min(dist[i],dist[i+w]+1);if(x<w-1&&i<N-w)dist[i]=Math.min(dist[i],dist[i+w+1]+1.4);if(x>0&&i<N-w)dist[i]=Math.min(dist[i],dist[i+w-1]+1.4)}
+  const fin=(()=>{const L=new Int32Array(N).fill(-1),best=[],st=[];for(let i=0;i<N;i++){if(L[i]>=0)continue;const id=best.length,v=lab[i];let b=i;st.push(i);L[i]=id;while(st.length){const q=st.pop();if(dist[q]>dist[b])b=q;const x=q%w;for(const t of [x>0?q-1:-1,x<w-1?q+1:-1,q>=w?q-w:-1,q<N-w?q+w:-1])if(t>=0&&L[t]<0&&lab[t]===v){L[t]=id;st.push(t)}}best.push(b)}return best})();
+  return{w,h,lab,colors,spots:fin.map(i=>({x:i%w,y:(i/w)|0,r:dist[i],n:lab[i]}))}}
+function hsl([r,g,b]){r/=255;g/=255;b/=255;const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;let h=0,s=0;if(mx!==mn){const d=mx-mn;s=l>.5?d/(2-mx-mn):d/(mx+mn);h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;h*=60}return[h,s,l]}
+// A rough mixing recipe from the five basic paints.
+function mixTip(rgb){const[h,s,l]=hsl(rgb);if(s<.12){if(l>.9)return'white';if(l<.14)return'black';return l>.6?'white + a little black':l>.35?'white + black (equal)':'black + a little white'}
+  let base;if(h<15||h>=345)base='red';else if(h<45)base=l<.45&&s<.75?'brown: red + yellow + a little blue':'red + yellow (orange)';else if(h<70)base=l<.4?'yellow + a little black':'yellow';else if(h<160)base=h<100?'yellow + a little blue':'blue + yellow (green)';else if(h<200)base='blue + a little yellow';else if(h<255)base='blue';else if(h<290)base='red + blue (purple)';else base=l>.6?'red + a little blue (pink)':'red + a little blue';
+  let extra='';if(l>.8)extra=' + lots of white';else if(l>.62)extra=' + some white';else if(l<.2)extra=' + a little black';if(s<.35&&l>.2&&l<.85)extra+=' + a touch of grey';return base+extra}
+const paintJob=MigaProgress.create($('paintProgress'));
+async function makePaint(){const f=$('paintPhoto').files[0];if(!f)return status('Choose a photo first.');paintJob.start('Finding the main colours…');$('paintMake').disabled=true;await new Promise(r=>setTimeout(r,30));
+  try{await fontsReady('700 60px "Fredoka"');await fontsReady('40px "Andika"');const bmp=await createImageBitmap(f);const r=paintByNumbers(bmp,+$('paintColors').value,$('paintDetail').value);paintJob.update(.8,'Drawing the pages…');await new Promise(q=>setTimeout(q,20));
+    const p=newPage(),{ctx,W,H,M}=p;const nRows=Math.ceil(r.colors.length/2),legendH=110+nRows*64,box={x:M,y:M+90,w:W-M*2,h:H-M*2-90-legendH-30};const sc=Math.min(box.w/r.w,box.h/r.h),ox=box.x+(box.w-r.w*sc)/2,oy=box.y+(box.h-r.h*sc)/2;
+    nameLine(p,M+30);ctx.save();ctx.strokeStyle='#4b5560';ctx.lineWidth=1.6;ctx.lineCap='round';ctx.beginPath();const{w,h,lab}=r;
+    for(let y=0;y<h;y++){let x=0;while(x<w-1){if(lab[y*w+x]!==lab[y*w+x+1]){const sx=ox+(x+1)*sc;ctx.moveTo(sx,oy+y*sc);ctx.lineTo(sx,oy+(y+1)*sc)}x++}}
+    for(let y=0;y<h-1;y++){let x=0;while(x<w){if(lab[y*w+x]!==lab[(y+1)*w+x]){const s0=x;while(x<w&&lab[y*w+x]!==lab[(y+1)*w+x])x++;const sy=oy+(y+1)*sc;ctx.moveTo(ox+s0*sc,sy);ctx.lineTo(ox+x*sc,sy)}else x++}}
+    ctx.stroke();ctx.lineWidth=2.5;ctx.strokeStyle=INK;ctx.strokeRect(ox,oy,w*sc,h*sc);ctx.fillStyle='#5b6570';ctx.textAlign='center';ctx.textBaseline='middle';
+    r.spots.forEach(sp=>{const fs=Math.max(11,Math.min(30,sp.r*sc*1.1));ctx.font=fs+'px "Andika", sans-serif';ctx.fillText(String(sp.n+1),ox+(sp.x+.5)*sc,oy+(sp.y+.5)*sc)});ctx.restore();
+    // Colour key
+    let ly=H-M-legendH+40;ctx.save();ctx.font='700 40px "Fredoka", sans-serif';ctx.fillStyle=INK;ctx.fillText('Colour key',M,ly);ly+=30;const colW=(W-M*2)/2;
+    r.colors.forEach((c,i)=>{const col=i%2,row=Math.floor(i/2),x=M+col*colW,y=ly+row*64;ctx.beginPath();ctx.arc(x+26,y+26,24,0,7);ctx.fillStyle='rgb('+c.join(',')+')';ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='#4b5560';ctx.stroke();const[, ,L]=hsl(c);ctx.fillStyle=L>.55?INK:'#fff';ctx.font='700 26px "Andika"';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(String(i+1),x+26,y+27);ctx.textAlign='left';ctx.fillStyle=INK;ctx.font='31px "Andika"';ctx.fillText(mixTip(c),x+62,y+27,colW-70)});ctx.restore();footer(p);
+    const q=newPage();heading(q,'How it will look',q.M+90,64);const qc=document.createElement('canvas');qc.width=w;qc.height=h;const qx=qc.getContext('2d'),im=qx.createImageData(w,h);for(let i=0;i<w*h;i++){const c=r.colors[lab[i]];im.data[i*4]=c[0];im.data[i*4+1]=c[1];im.data[i*4+2]=c[2];im.data[i*4+3]=255}qx.putImageData(im,0,0);
+    const qb={x:q.M,y:q.M+160,w:q.W-q.M*2,h:q.H-q.M*2-420},qs=Math.min(qb.w/w,qb.h/h);q.ctx.imageSmoothingEnabled=false;q.ctx.drawImage(qc,q.M+(qb.w-w*qs)/2,qb.y,w*qs,h*qs);
+    q.ctx.save();q.ctx.font='34px "Andika"';q.ctx.fillStyle='#4b5560';const tips=['Tips for painting: start with the lightest colour (1) and work towards the darkest.','Mix a little more paint than you think you need, and test it on scrap paper.','Let each colour dry before you paint the area next to it.'];tips.forEach((t,i)=>q.ctx.fillText(t,q.M,q.H-q.M-210+i*58,q.W-q.M*2));q.ctx.restore();footer(q);
+    show([{cv:p.cv,label:'Paint by numbers'},{cv:q.cv,label:'Paint by numbers — how it will look'}]);paintJob.done('Ready: '+r.colors.length+' colours and '+r.spots.length+' areas to paint. Too many small areas? Choose “Big areas” or fewer colours.')}
+  catch(e){paintJob.fail(e,['Try a smaller photo.','Choose fewer colours or bigger areas.'])}finally{$('paintMake').disabled=false}}
+$('paintMake').onclick=makePaint;
+
+/* ---------------- maze ---------------- */
+function makeMaze(cols,rows,rand){const N=cols*rows,right=new Uint8Array(N).fill(1),down=new Uint8Array(N).fill(1),seen=new Uint8Array(N),st=[0];seen[0]=1;
+  while(st.length){const c=st[st.length-1],x=c%cols,y=(c/cols)|0,opts=[];if(x>0&&!seen[c-1])opts.push(c-1);if(x<cols-1&&!seen[c+1])opts.push(c+1);if(y>0&&!seen[c-cols])opts.push(c-cols);if(y<rows-1&&!seen[c+cols])opts.push(c+cols);
+    if(!opts.length){st.pop();continue}const n=opts[Math.floor(rand()*opts.length)];if(n===c+1)right[c]=0;else if(n===c-1)right[n]=0;else if(n===c+cols)down[c]=0;else down[n]=0;seen[n]=1;st.push(n)}
+  return{cols,rows,right,down}}
+function solveMaze(m){const{cols,rows,right,down}=m,N=cols*rows,prev=new Int32Array(N).fill(-1),q=[0];prev[0]=0;while(q.length){const c=q.shift();if(c===N-1)break;const x=c%cols;const nb=[];if(x<cols-1&&!right[c])nb.push(c+1);if(x>0&&!right[c-1])nb.push(c-1);if(c+cols<N&&!down[c])nb.push(c+cols);if(c>=cols&&!down[c-cols])nb.push(c-cols);nb.forEach(n=>{if(prev[n]<0){prev[n]=c;q.push(n)}})}const path=[N-1];while(path[path.length-1]!==0)path.push(prev[path[path.length-1]]);return path.reverse()}
+function drawMaze(p,m,title,path){const{ctx,W,H,M}=p;nameLine(p,M+30);heading(p,title,M+150,58);const top=M+230,bottom=H-M-120,cell=Math.min((W-M*2)/m.cols,(bottom-top)/m.rows),ox=(W-cell*m.cols)/2,oy=top;
+  ctx.save();ctx.lineWidth=Math.max(3,cell/9);ctx.lineCap='round';ctx.strokeStyle=INK;ctx.beginPath();ctx.moveTo(ox+cell,oy);ctx.lineTo(ox+cell*m.cols,oy);ctx.moveTo(ox,oy);ctx.lineTo(ox,oy+cell*m.rows);ctx.moveTo(ox,oy+cell*m.rows);ctx.lineTo(ox+cell*(m.cols-1),oy+cell*m.rows);ctx.moveTo(ox+cell*m.cols,oy);ctx.lineTo(ox+cell*m.cols,oy+cell*m.rows);
+  for(let c=0;c<m.cols*m.rows;c++){const x=c%m.cols,y=(c/m.cols)|0;if(m.right[c]&&x<m.cols-1){ctx.moveTo(ox+(x+1)*cell,oy+y*cell);ctx.lineTo(ox+(x+1)*cell,oy+(y+1)*cell)}if(m.down[c]&&y<m.rows-1){ctx.moveTo(ox+x*cell,oy+(y+1)*cell);ctx.lineTo(ox+(x+1)*cell,oy+(y+1)*cell)}}ctx.stroke();
+  if(path){ctx.strokeStyle='#d6453a';ctx.lineWidth=Math.max(3,cell/4);ctx.lineJoin='round';ctx.beginPath();ctx.moveTo(ox+cell/2,oy-cell*.4);path.forEach(c=>ctx.lineTo(ox+(c%m.cols+.5)*cell,oy+(((c/m.cols)|0)+.5)*cell));ctx.lineTo(ox+(m.cols-.5)*cell,oy+m.rows*cell+cell*.4);ctx.stroke()}
+  ctx.fillStyle=INK;ctx.font='600 36px "Fredoka", sans-serif';ctx.textAlign='center';ctx.fillText('START ↓',ox+cell/2+30,oy-14);ctx.fillText('↓ FINISH',ox+(m.cols-.5)*cell-40,oy+m.rows*cell+48);ctx.restore();footer(p)}
+async function makeMazePages(){await fontsReady('700 60px "Fredoka"');seed++;const[c,r]={easy:[8,10],medium:[14,18],hard:[22,29],expert:[32,43]}[$('mazeLevel').value];const m=makeMaze(c,r,rng(seed)),t=$('mazeTitle').value.trim()||'Find the way out!';
+  const p=newPage();drawMaze(p,m,t,null);const list=[{cv:p.cv,label:'Maze'}];if($('mazeSolution').checked){const q=newPage();drawMaze(q,m,'Answer: '+t,solveMaze(m));list.push({cv:q.cv,label:'Maze — answer'})}show(list,'Maze ready. Press the button again for a new one.')}
+$('mazeMake').onclick=makeMazePages;
+
+/* ---------------- cover ---------------- */
+async function makeCover(again){await fontsReady('700 60px "Fredoka"');await fontsReady('40px "Andika"');if(again)seed++;const p=newPage(),{ctx,W,H,M}=p,rand=rng(seed);const t=$('coverTitle').value.trim()||((kid()?kid()+'’s':'My')+' Coloring Book');
+  ctx.save();ctx.lineWidth=6;ctx.strokeStyle=INK;ctx.strokeRect(M*.6,M*.6,W-M*1.2,H-M*1.2);ctx.restore();
+  // stars around the edge
+  const star=(x,y,r)=>{ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;ctx.lineTo(x+rr*Math.cos(a),y+rr*Math.sin(a))}ctx.closePath();ctx.lineWidth=4;ctx.strokeStyle=INK;ctx.stroke()};
+  for(let i=0;i<9;i++){star(M*1.6+i*(W-M*3.2)/8,M*1.5,30+rand()*12);star(M*1.6+i*(W-M*3.2)/8,H-M*1.5,30+rand()*12)}
+  const words=t.split(/\s+/);const lines=[];let cur='';ctx.font='700 170px "Fredoka"';words.forEach(w=>{if(cur&&ctx.measureText(cur+' '+w).width>W-M*3){lines.push(cur);cur=w}else cur=(cur+' '+w).trim()});if(cur)lines.push(cur);
+  lines.forEach((l,i)=>bubbleText(ctx,l,W/2,M*3.2+i*200,W-M*3,180));const below=M*3.2+lines.length*200;
+  const sub=$('coverSub').value.trim();if(sub){ctx.save();ctx.font='600 60px "Fredoka"';ctx.textAlign='center';ctx.fillStyle=INK;ctx.fillText(sub,W/2,below+20);ctx.restore()}
+  const R=Math.min(W-M*3,H-below-M*3)/2;mandala(ctx,W/2,below+80+R,R,8+Math.floor(rand()*6),4+Math.floor(rand()*3),rand);footer(p);show([{cv:p.cv,label:'Cover'}],'Cover ready. Add it to the book, then drag it to the front with ←.')}
+$('coverMake').onclick=()=>makeCover(false);$('coverAgain').onclick=()=>makeCover(true);
+$('kidName').addEventListener('input',()=>$('coverTitle').placeholder=(kid()?kid()+'’s':'My')+' Coloring Book');
+
+window.ColoringForge={get pages(){return pages},get book(){return book},paintByNumbers,photoToLines,makeMaze,solveMaze,mixTip};
+renderBook();
+})();
+</script><script src="tutorials.js" defer></script></body></html>
