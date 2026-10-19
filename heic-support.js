@@ -12,7 +12,7 @@
  */
 (function () {
   'use strict';
-  var LIB = 'https://cdn.jsdelivr.net/npm/heic-to@1.6.5/dist/heic-to.js';
+  var LIB = 'https://cdn.jsdelivr.net/npm/heic-to@1.6.6/dist/heic-to.js';
   var EXTRA_ACCEPT = '.heic,.heif,image/heic,image/heif';
   var replayed = typeof WeakSet === 'function' ? new WeakSet() : null;
   var lib = null;
