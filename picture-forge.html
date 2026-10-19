@@ -94,14 +94,14 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Picture Forge","url":"https://migabuilder.com/picture-forge.html","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"AI picture generator and editor for creating original images from written descriptions and reference photos.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 <script src="i18n.js"></script>
 <script src="i18n/picture-forge.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which formats can I download?", "acceptedAnswer": {"@type": "Answer", "text": "PNG, JPG or WebP. You can also keep editing the picture in Image Studio."}}, {"@type": "Question", "name": "Is Picture Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which formats can I download?", "acceptedAnswer": {"@type": "Answer", "text": "PNG, JPG or WebP. You can also keep editing the picture in Image Studio."}}, {"@type": "Question", "name": "Is Picture Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The page itself is free, but Google charges for every AI picture, so pictures need your own Gemini key with billing turned on (about 7 US cents each). Google gives no free picture credit."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."}}]}</script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Picture Forge</span></nav>
 <header class="masthead"><div><h1>Picture Forge</h1><p>Describe it. Pick a look. Get an original picture — then change it with plain words.</p></div></header>
 <main>
 <section class="panel">
-  <p class="privacy">✨ Pictures are made by Google Gemini (“Nano Banana”). Your words and any photos you add go only to Google, either through MigaBuilder’s shared AI or straight from this browser with your own key. MigaBuilder never stores them.</p>
+  <p class="privacy">✨ Pictures are made by Google Gemini (“Nano Banana”). Your words and any photos you add go only to Google, straight from this browser with your own key (the Improve my words helper goes through MigaBuilder’s shared AI). MigaBuilder never stores them.</p>
   <div class="forge-layout">
     <div class="controls">
       <div class="step-h"><b>1</b>Describe your picture</div>
@@ -152,8 +152,8 @@
       <div class="who" data-no-autosave>
         <div class="step-h" style="margin-top:0"><b>4</b>Who makes the picture?</div>
         <div class="who-opts" role="radiogroup" aria-label="Who makes the picture">
-          <label class="who-opt"><input type="radio" name="who" value="shared" checked><span><b>MigaBuilder’s shared AI</b><small>Nothing to set up. One picture at a time, limited each day.</small></span></label>
-          <label class="who-opt"><input type="radio" name="who" value="own"><span><b>My own Gemini key</b><small>Every size and model, several versions at once, and it works on a downloaded copy of MigaBuilder.</small></span></label>
+          <label class="who-opt"><input type="radio" name="who" value="shared" disabled><span><b>MigaBuilder’s shared AI</b><small>Switched off for pictures: Google gives no free picture credit. The <b>Improve my words</b> helper still works without a key.</small></span></label>
+          <label class="who-opt"><input type="radio" name="who" value="own" checked><span><b>My own Gemini key</b><small>Every size and model, several versions at once, and it works on a downloaded copy of MigaBuilder.</small></span></label>
         </div>
         <div class="key-box" id="keyBox" hidden>
           <ol>
@@ -210,7 +210,7 @@
   <h2>Help</h2>
   <details id="keyGuide">
     <summary>🔑 How to get your own Gemini key (step by step)</summary>
-    <p>A Gemini API key is a password-like code from Google that lets this page ask Gemini for pictures on your own account. You only need one if the shared AI is busy, if you want bigger pictures or several versions, or if you <a href="#downloadCopy">run MigaBuilder from a downloaded copy</a>.</p>
+    <p>A Gemini API key is a password-like code from Google that lets this page ask Gemini for pictures on your own account. You need one to make pictures, because Google gives no free picture credit and MigaBuilder’s shared AI makes text only. It also works if you <a href="#downloadCopy">run MigaBuilder from a downloaded copy</a>.</p>
     <a class="big-link" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Open Google AI Studio → Get API key ↗</a>
     <ol>
       <li>Open <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a> and sign in with any Google account (the same one you use for Gmail or YouTube works).</li>
@@ -255,7 +255,7 @@
   </details>
   <details>
     <summary>💰 Costs and limits</summary>
-    <p>With the shared AI the site owner pays, so it makes one standard or high-quality picture at a time and has a daily limit. With your own key, Google charges your account roughly:</p>
+    <p>Google charges your own key’s account for each picture, roughly:</p>
     <table><tr><th>Model</th><th>1K</th><th>2K</th><th>4K</th></tr>
       <tr><td>Nano Banana 2 Lite</td><td>≈ $0.03</td><td>—</td><td>—</td></tr>
       <tr><td>Nano Banana 2</td><td>≈ $0.07</td><td>≈ $0.10</td><td>≈ $0.15</td></tr>
@@ -272,7 +272,7 @@
   <h3>Which formats can I download?</h3>
   <p>PNG, JPG or WebP. You can also keep editing the picture in Image Studio.</p>
   <h3>Is Picture Forge free?</h3>
-  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The page itself is free, but Google charges for every AI picture, so pictures need your own Gemini key with billing turned on (about 7 US cents each). Google gives no free picture credit.</p>
   <h3>Are my files uploaded?</h3>
   <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
   <p class="miga-about-rel">Related tools: <a href="image-studio.html">Image Studio</a> · <a href="video-forge.html">Video Forge</a> · <a href="vector-forge.html">Vector Forge</a></p>
@@ -479,7 +479,7 @@
     const parts = opts.images.map(i => ({ inlineData: { mimeType: i.mimeType, data: i.data } })).concat([{ text: opts.text }]);
     let r;
     if (via === 'own') {
-      if (!apiKey()) throw Object.assign(new Error('Paste your Gemini key in step 4 first. Get one free at aistudio.google.com/apikey.'), { needKey: true });
+      if (!apiKey()) throw Object.assign(new Error('Pictures need your own Gemini key — paste it in step 4. Get one at aistudio.google.com/apikey and turn on billing for it.'), { needKey: true });
       const body = { contents: [{ role: 'user', parts }], generationConfig: { responseModalities: ['TEXT', 'IMAGE'], imageConfig: { aspectRatio: opts.aspect, imageSize: opts.size } } };
       if (opts.search) body.tools = [{ google_search: {} }];
       r = await fetch(GOOGLE + opts.model + ':generateContent', { method: 'POST', signal, headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey() }, body: JSON.stringify(body) });

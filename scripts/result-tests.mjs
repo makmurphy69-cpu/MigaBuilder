@@ -774,11 +774,16 @@ test('cipher-forge: every code round-trips, Crack it finds a shift, a link opens
 test('coloring-forge: AI page, tracing, Chinese stroke order, paint by numbers, maze and cover make pages, and the book downloads as one PDF', 'coloring-forge.html', async (page, ctx) => {
   const png = fs.readFileSync(path.join(FIX, 'small-photo.png')).toString('base64');
   let prompt = '';
-  await ctx.route(/migabuilder-gemini/, async route => {
-    prompt = JSON.parse(route.request().postData() || '{}').prompt || '';
+  // Free AI pictures are off, so "Describe it" uses a Gemini key saved in Picture Forge.
+  await ctx.route(/generativelanguage\.googleapis\.com/, async route => {
+    const body = JSON.parse(route.request().postData() || '{}');
+    prompt = (body.contents && body.contents[0].parts[0].text) || '';
     await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ candidates: [{ content: { parts: [{ inlineData: { mimeType: 'image/png', data: png } }] } }] }) });
   });
   const pages = () => page.evaluate(() => window.ColoringForge.pages.length);
+  expect(await page.evaluate(() => document.querySelector('input[name=csrc]:checked').value) === 'mandala', 'without a key the page should start on Mandala');
+  await page.evaluate(() => localStorage.setItem('migaGeminiKey', 'test-key')); await page.reload();
+  await page.waitForFunction(() => window.ColoringForge && document.querySelector('input[name=csrc]:checked').value === 'ai');
   await page.fill('#colorPrompt', 'a smiling elephant'); await page.click('#colorMake');
   await page.waitForFunction(() => window.ColoringForge.pages.length === 1, null, { timeout: 30000 });
   expect(/coloring book page/.test(prompt) && prompt.includes('a smiling elephant'), 'the AI prompt is wrong: ' + prompt);
