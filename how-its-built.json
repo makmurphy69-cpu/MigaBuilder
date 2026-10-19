@@ -1,13 +1,55 @@
 {
- "updated": "2026-10-12",
+ "updated": "2026-10-19",
  "firstCommit": "2026-09-13",
- "commits": 412,
- "pullRequests": 130,
- "tools": 71,
- "videos": 78,
+ "commits": 420,
+ "pullRequests": 137,
+ "tools": 75,
+ "videos": 82,
  "languages": 6,
  "workflows": 7,
  "recent": [
+  {
+   "number": 170,
+   "title": "Turn off free shared AI pictures in Coloring Forge and Picture Forge",
+   "date": "2026-10-19",
+   "tool": null
+  },
+  {
+   "number": 169,
+   "title": "Add Cipher Forge and Coloring Forge",
+   "date": "2026-10-18",
+   "tool": null
+  },
+  {
+   "number": 168,
+   "title": "Add Markdown Forge; JSON viewer, Base64/JWT and lorem ipsum; gradients, shadows and photo palettes; loan and savings calculators",
+   "date": "2026-10-15",
+   "tool": null
+  },
+  {
+   "number": 167,
+   "title": "Full-screen button on every player; 3D Cartoon no longer scrolls the page",
+   "date": "2026-10-13",
+   "tool": null
+  },
+  {
+   "number": 166,
+   "title": "Paste a screenshot or copied file into any tool with Ctrl+V",
+   "date": "2026-10-13",
+   "tool": null
+  },
+  {
+   "number": 164,
+   "title": "Add Random Forge: one click makes a random creation you can build",
+   "date": "2026-10-13",
+   "tool": null
+  },
+  {
+   "number": 163,
+   "title": "Add \"How MigaBuilder is built\" setup guide page",
+   "date": "2026-10-12",
+   "tool": null
+  },
   {
    "number": 162,
    "title": "Homepage task search with step-by-step recipes; sitemap.xml and robots.txt in Website Builder zip",
@@ -55,48 +97,6 @@
    "title": "Add shop page, thank-you page and Stripe download Worker",
    "date": "2026-10-08",
    "tool": null
-  },
-  {
-   "number": 154,
-   "title": "Stop counting refreshes, repeat opens and the owner's own visits",
-   "date": "2026-10-07",
-   "tool": null
-  },
-  {
-   "number": 153,
-   "title": "Private file transcription with subtitles, on-device live transcription, iPhone (HEIC) photos",
-   "date": "2026-10-07",
-   "tool": null
-  },
-  {
-   "number": 151,
-   "title": "Add Physics Map, a \"what to try next\" card, and About/FAQ sections on every tool",
-   "date": "2026-10-07",
-   "tool": null
-  },
-  {
-   "number": 148,
-   "title": "Add Swedish and translate the untagged pages",
-   "date": "2026-10-06",
-   "tool": null
-  },
-  {
-   "number": 149,
-   "title": "Homepage: show contact@migabuilder.com at the top of the page",
-   "date": "2026-10-06",
-   "tool": null
-  },
-  {
-   "number": 147,
-   "title": "Clip Forge: caption styles, per-app safe zones and structured data",
-   "date": "2026-10-05",
-   "tool": "clip-forge.html"
-  },
-  {
-   "number": 146,
-   "title": "Clip Forge: Safari MP4 export, browser notice, Client ID check, safe-area guide, beat waveform",
-   "date": "2026-10-04",
-   "tool": "clip-forge.html"
   }
  ]
 }
