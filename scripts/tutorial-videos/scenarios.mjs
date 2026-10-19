@@ -916,8 +916,8 @@ S('picture-forge.html', {
     await h.step('Step three: pick a shape. Square for posts, Story for phones, Wide for screens and videos.', () => h.click('#shapes .chip:nth-child(8)'));
     await h.step('You can also add your own photos, to edit them or to keep the same person, pet or product in a new scene.', () => h.point('#drop'));
     await h.step('More options holds the size, the AI model, framing, light, colours, and how many versions to make.', async () => { await h.click('#more summary'); await h.point('#quality'); });
-    await h.step('Step four: choose who makes the picture. The shared AI needs no setup. With your own Gemini key from Google AI Studio you get every size and several versions.', async () => { await h.click('#more summary'); await h.click('input[name=who][value=own]'); await h.point('#keyBox a'); });
-    await h.step('Paste the key here and press Test. The key goes straight from your browser to Google, never to MigaBuilder. The full step by step guide is at the bottom of the page.', async () => { await h.point('#apiKey'); await h.click('input[name=who][value=shared]'); });
+    await h.step('Step four: pictures are made with your own Gemini key from Google AI Studio. Google charges a few cents for each picture, and you get every size and several versions.', async () => { await h.click('#more summary'); await h.point('#keyBox a'); });;
+    await h.step('Paste the key here and press Test. The key goes straight from your browser to Google, never to MigaBuilder. The full step by step guide is at the bottom of the page.', () => h.point('#apiKey'));
     await h.step('Now press Make my picture. For this walkthrough we show a sample, so no AI credit is spent.', async () => { await h.point('#generateBtn'); await page.evaluate(() => window.pictureForgeDemo()); });
     await h.wait(800);
     await h.step('Here is your picture. Not quite right? Tell it what to change, and everything else stays the same.', async () => { await h.point('#result'); await h.type('#changeText', 'make it night with stars'); });

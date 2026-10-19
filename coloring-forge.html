@@ -46,13 +46,12 @@ main{max-width:1240px}
 <div class="cg-layout"><div class="cg-controls">
 
 <div class="tab on" id="tab-color"><h3>Coloring page</h3>
-  <div class="src" id="colorSrc"><label><input type="radio" name="csrc" value="ai" checked> ✨ Describe it</label><label><input type="radio" name="csrc" value="photo"> 📷 From a photo</label><label><input type="radio" name="csrc" value="mandala"> 🌸 Mandala</label><label><input type="radio" name="csrc" value="letters"> 🔤 Alphabet &amp; names</label></div>
-  <div class="sub on" id="sub-ai">
+  <div class="src" id="colorSrc"><label><input type="radio" name="csrc" value="ai"> ✨ Describe it (own Gemini key)</label><label><input type="radio" name="csrc" value="photo"> 📷 From a photo</label><label><input type="radio" name="csrc" value="mandala" checked> 🌸 Mandala</label><label><input type="radio" name="csrc" value="letters"> 🔤 Alphabet &amp; names</label></div>
+  <div class="sub" id="sub-ai">
     <div class="field"><label for="colorPrompt">What should be on the page?</label><textarea id="colorPrompt" style="min-height:70px">a friendly dinosaur eating pizza in a park</textarea></div>
     <div class="chips" id="ideaChips"><button type="button">a unicorn on a rainbow</button><button type="button">a fire truck</button><button type="button">ocean animals</button><button type="button">a rocket in space</button><button type="button">a princess castle</button><button type="button">farm animals</button><button type="button">a cat playing football</button></div>
     <div class="field"><label for="colorAge">Who is it for?</label><select id="colorAge"><option value="toddler">Toddler (2–4): very big, simple shapes</option><option value="kid" selected>Child (5–8)</option><option value="older">Older child (9–12): more detail</option><option value="adult">Adult: detailed and calm</option></select></div>
-    <label class="inline" id="ownKeyWrap" hidden><input type="checkbox" id="ownKey"> Use my own Gemini key (saved in Picture Forge)</label>
-    <p class="muted">Made by Google Gemini. It takes 10–30 seconds. Free pictures are shared by everyone and can run out for the day.</p>
+    <p class="muted" id="ownKeyNote">Made by Google Gemini with your own Gemini key, in 10–30 seconds. Google gives no free picture credit, so the key needs billing turned on (about 7 US cents a picture). Save your key in <a href="picture-forge.html">Picture Forge</a> (step 4, “Remember the key”) and it is used here too. Photo, mandala and alphabet pages need no AI.</p>
   </div>
   <div class="sub" id="sub-photo">
     <div class="field"><label for="colorPhoto">Photo (a pet, a house, your child’s favourite toy)</label><input id="colorPhoto" type="file" accept="image/*"></div>
@@ -60,7 +59,7 @@ main{max-width:1240px}
     <div class="field"><label for="colorLine">Line thickness: <span id="colorLineV">2</span></label><input id="colorLine" type="range" min="1" max="5" value="2"></div>
     <p class="muted">Photos with a clear subject and a plain background work best.</p>
   </div>
-  <div class="sub" id="sub-mandala">
+  <div class="sub on" id="sub-mandala">
     <div class="field"><label for="mandalaFold">Symmetry (number of repeats): <span id="mandalaFoldV">10</span></label><input id="mandalaFold" type="range" min="5" max="20" value="10"></div>
     <div class="field"><label for="mandalaRings">Detail: <span id="mandalaRingsV">6</span></label><input id="mandalaRings" type="range" min="3" max="10" value="6"></div>
     <p class="muted">Every press of “New design” makes a different mandala.</p>
@@ -210,15 +209,19 @@ const csrc=()=>document.querySelector('input[name=csrc]:checked').value;
 $('colorSrc').onchange=()=>{['ai','photo','mandala','letters'].forEach(s=>$('sub-'+s).classList.toggle('on',s===csrc()));$('colorAgain').hidden=csrc()!=='mandala'&&csrc()!=='ai'};$('colorAgain').hidden=false;
 $('ideaChips').onclick=e=>{const b=e.target.closest('button');if(b)$('colorPrompt').value=b.textContent};
 [['colorDetail'],['colorLine'],['mandalaFold'],['mandalaRings']].forEach(([id])=>$(id).addEventListener('input',()=>$(id+'V').textContent=$(id).value));
-let ownKey='';try{ownKey=localStorage.getItem('migaGeminiKey')||''}catch(e){}$('ownKeyWrap').hidden=!ownKey;
+let ownKey='';try{ownKey=localStorage.getItem('migaGeminiKey')||''}catch(e){}
+if(ownKey){$('ownKeyNote').textContent='Made by Google Gemini with the key you saved in Picture Forge. It takes 10–30 seconds.';document.querySelector('input[name=csrc][value=ai]').checked=true;$('colorSrc').onchange()}
+// Free AI pictures through MigaBuilder's shared AI are off: Google gives the site's key no free picture credit. Set to true if billing is ever turned on for it.
+const SHARED_PICTURES=false;
 
 /* ---------------- coloring page: AI ---------------- */
 const AGE={toddler:'for toddlers aged 2 to 4: one big subject, very few very large shapes, extra thick outlines, no background details',kid:'for children aged 5 to 8: simple shapes, thick outlines, a simple background',older:'for children aged 9 to 12: more detail and a full background, medium outlines',adult:'for adults: intricate detailed line art with many small areas, fine outlines'};
 const colorJob=MigaProgress.create($('colorProgress'),{onCancel(){if(aiCtrl)aiCtrl.abort()}});let aiCtrl=null;
 async function aiPicture(desc,age,signal){const prompt='A black and white coloring book page '+AGE[age]+'. Subject: '+desc+'. Pure black outlines on a pure white background. No colour, no grey, no shading, no hatching, no text or letters. Every area is closed so it can be coloured in. The whole subject fits on the page with a white margin. Portrait page.';
-  let r;if($('ownKey').checked&&ownKey){r=await fetch(GOOGLE+'gemini-3.1-flash-image:generateContent',{method:'POST',signal,headers:{'Content-Type':'application/json','x-goog-api-key':ownKey},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:'3:4',imageSize:'1K'}}})})}
+  let r;if(ownKey){r=await fetch(GOOGLE+'gemini-3.1-flash-image:generateContent',{method:'POST',signal,headers:{'Content-Type':'application/json','x-goog-api-key':ownKey},body:JSON.stringify({contents:[{role:'user',parts:[{text:prompt}]}],generationConfig:{responseModalities:['TEXT','IMAGE'],imageConfig:{aspectRatio:'3:4',imageSize:'1K'}}})})}
+  else if(!SHARED_PICTURES)throw new Error('“Describe it” needs your own Gemini key with billing turned on: Google gives no free picture credit. Save the key in Picture Forge, or make a mandala, alphabet or photo page — they work without AI.');
   else r=await fetch(PROXY,{method:'POST',signal,headers:{'Content-Type':'application/json'},body:JSON.stringify({kind:'image',model:'gemini-3.1-flash-image',prompt,aspectRatio:'3:4',imageSize:'1K',images:[]})});
-  if(!r.ok){const t=await r.text().catch(()=>'');if(r.status===403&&/Origin/i.test(t))throw new Error('The shared AI only works on migabuilder.com. Use a photo, mandala or alphabet page instead.');if(r.status===429||r.status===403||r.status>=500||r.status===400)throw new Error('The free picture AI is busy or has run out for today. Try again later, or make a page from a photo, a mandala or an alphabet page — they work without AI.');throw new Error('The AI request failed ('+r.status+').')}
+  if(!r.ok){const t=await r.text().catch(()=>'');if(r.status===403&&/Origin/i.test(t))throw new Error('The shared AI only works on migabuilder.com. Use a photo, mandala or alphabet page instead.');if(ownKey&&(r.status===429||r.status===403||r.status===400))throw new Error(r.status===429?'Google refused the picture: your Gemini key is out of picture credit or busy. Check billing is on for the key, wait a minute, or make a mandala, alphabet or photo page instead.':'Google did not accept your Gemini key. Check it in Picture Forge (step 4, Test), or make a mandala, alphabet or photo page instead.');if(r.status===429||r.status===403||r.status>=500||r.status===400)throw new Error('The free picture AI is busy or has run out for today. Try again later, or make a page from a photo, a mandala or an alphabet page — they work without AI.');throw new Error('The AI request failed ('+r.status+').')}
   const data=await r.json();const parts=(data.candidates&&data.candidates[0]&&data.candidates[0].content&&data.candidates[0].content.parts)||[];const img=parts.find(p=>p.inlineData&&/^image\//.test(p.inlineData.mimeType||''));
   if(!img){if(data.promptFeedback&&data.promptFeedback.blockReason)throw new Error('Google’s safety filter blocked this. Try describing it differently.');throw new Error('The AI did not return a picture. Try a clearer description.')}
   const bin=atob(img.inlineData.data),u8=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u8[i]=bin.charCodeAt(i);return createImageBitmap(new Blob([u8],{type:img.inlineData.mimeType}))}
