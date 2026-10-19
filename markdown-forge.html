@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="i18n.js"></script>
 <script src="i18n/markdown-forge.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.4.17/purify.min.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is Markdown?", "acceptedAnswer": {"@type": "Answer", "text": "Markdown is a simple way to format text with ordinary characters: # for a heading, **bold**, *italic*, - for a list and [text](link) for a link. It is used on GitHub, in README files, notes apps, chat apps and many websites."}}, {"@type": "Question", "name": "Can I turn a Word document or web page into Markdown?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open a .docx file, or copy text from Word, Google Docs or a web page and paste it into the editor. Headings, lists, links, bold text and tables become Markdown."}}, {"@type": "Question", "name": "Is my text saved?", "acceptedAnswer": {"@type": "Answer", "text": "Your text is saved automatically in this browser only, so it is still there when you come back. It is never uploaded to MigaBuilder."}}, {"@type": "Question", "name": "Is Markdown Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}]}</script>
 <style>
 main{max-width:1320px}
@@ -151,7 +151,7 @@ ta.addEventListener('scroll',()=>follow(ta,$('mdPreview')));$('mdPreview').addEv
 
 /* ---------- HTML / Word → Markdown (Turndown loads when first needed) ---------- */
 function loadScript(src){return new Promise((ok,no)=>{if(document.querySelector('script[src="'+src+'"]'))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load '+src.split('/').pop()+'. Check your internet connection.'));document.head.appendChild(s)})}
-async function htmlToMd(html){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/turndown/7.1.2/turndown.min.js');await loadScript('https://cdn.jsdelivr.net/npm/turndown-plugin-gfm@1.0.2/dist/turndown-plugin-gfm.js');
+async function htmlToMd(html){await loadScript('https://cdnjs.cloudflare.com/ajax/libs/turndown/7.2.4/turndown.min.js');await loadScript('https://cdn.jsdelivr.net/npm/turndown-plugin-gfm@1.0.2/dist/turndown-plugin-gfm.js');
   const td=new TurndownService({headingStyle:'atx',codeBlockStyle:'fenced',bulletListMarker:'-',emDelimiter:'*'});if(window.turndownPluginGfm)td.use(turndownPluginGfm.gfm);
   td.remove(['style','script','meta','title']);
   // Word and Google Docs wrap everything in spans and give tables no header row; keep only what Markdown can show.
@@ -159,7 +159,7 @@ async function htmlToMd(html){await loadScript('https://cdnjs.cloudflare.com/aja
   box.querySelectorAll('b[style*="font-weight:normal"],b[style*="font-weight: normal"]').forEach(b=>b.replaceWith(...b.childNodes));
   return td.turndown(box).replace(/\n{3,}/g,'\n\n').trim()}
 ta.addEventListener('paste',async e=>{if(!$('mdConvertPaste').checked)return;const html=e.clipboardData&&e.clipboardData.getData('text/html');if(!html||!/<(h\d|ul|ol|table|strong|b|em|i|a|p)[\s>]/i.test(html))return;e.preventDefault();try{const md=await htmlToMd(html);put(md);status('Pasted as Markdown. Untick “Paste from Word or web pages as Markdown” to paste plain text instead.')}catch(err){put(e.clipboardData.getData('text/plain'));status(err.message)}});
-async function openFile(f){if(!f)return;try{let md;if(/\.docx$/i.test(f.name)){status('Reading '+f.name+'…');await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.9.0/mammoth.browser.min.js');const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});md=await htmlToMd(r.value)}else if(/\.html?$/i.test(f.name)||f.type==='text/html')md=await htmlToMd(await f.text());else md=await f.text();
+async function openFile(f){if(!f)return;try{let md;if(/\.docx$/i.test(f.name)){status('Reading '+f.name+'…');await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.13.0/mammoth.browser.min.js');const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});md=await htmlToMd(r.value)}else if(/\.html?$/i.test(f.name)||f.type==='text/html')md=await htmlToMd(await f.text());else md=await f.text();
   if(ta.value.trim()&&ta.value!==SAMPLE&&!confirm('Replace the text in the editor with '+f.name+'?'))return;ta.value=md;last='';changed();docName=f.name.replace(/\.[^.]+$/,'');status('Opened '+f.name+'.')}catch(err){status('Could not open '+f.name+': '+err.message)}}
 let docName='';
 $('mdFile').onchange=e=>{openFile(e.target.files[0]);e.target.value=''};

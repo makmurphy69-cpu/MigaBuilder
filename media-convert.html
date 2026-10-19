@@ -138,7 +138,7 @@ if(/^#(convert|compress)$/.test(location.hash)){const b=document.querySelector('
    cut, so words are not split, and each window is transcribed with timestamps for the subtitles. */
 (function(){
 const $=id=>document.getElementById(id);
-const TF='https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js';
+const TF='https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.1/dist/transformers.min.js';
 const WORKER=`let T=null,asr=null,key='';
 self.onmessage=async e=>{const d=e.data;try{
   if(d.type==='load'){

@@ -55,7 +55,7 @@ function colourMask(){const d=base.data,t=+$('tolerance').value,mask=new Uint8Cl
 let tf=null,segmenters={},gpuF16=null,aiFallback=false;
 async function hasGpuF16(){if(gpuF16!==null)return gpuF16;try{const a=navigator.gpu&&await navigator.gpu.requestAdapter();gpuF16=!!(a&&a.features.has('shader-f16'))}catch(e){gpuF16=false}return gpuF16}
 async function segmenter(kind){if(segmenters[kind])return segmenters[kind];
-  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.1/dist/transformers.min.js');
   const progress=x=>{if(x.status==='progress'&&x.total>1e6)note('Downloading the AI model (first time only): '+Math.round(x.progress)+'%')};
   const opts=kind==='any'?{device:'webgpu',dtype:'fp16',progress_callback:progress}:{device:'wasm',dtype:'q8',progress_callback:progress};
   segmenters[kind]=await tf.pipeline('background-removal',kind==='any'?'onnx-community/BiRefNet_lite-ONNX':'Xenova/modnet',opts);return segmenters[kind]}
@@ -81,7 +81,7 @@ $('upMethod').onchange=()=>{const plain=$('upMethod').value==='plain';$('plainCo
 // The graphics card (WebGPU) is many times faster; without one, or if it fails, the processor (WASM) does the work.
 async function hasGpu(){try{return !!(navigator.gpu&&await navigator.gpu.requestAdapter())}catch(e){return false}}
 async function upscaler(kind,cpuOnly){const key=kind+(cpuOnly?':cpu':'');if(upscalers[key])return upscalers[key];
-  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.1/dist/transformers.min.js');
   const progress=x=>{if(x.status==='progress'&&x.total>1e6&&upJob)upJob.update(x.progress/100*.3,'Downloading the AI model (first time only): '+Math.round(x.progress)+'%')};
   const gpu=!cpuOnly&&await hasGpu();
   try{upscalers[key]=await tf.pipeline('image-to-image',UPSCALERS[kind].model,{device:gpu?'webgpu':'wasm',dtype:'fp32',progress_callback:progress})}
