@@ -1,24 +1,24 @@
 /* bot-forge.html — translations of this page's text, matched by the English original (see i18n.js). */
 I18N.phrases({
-  "Pop Art / street art": { es: "Arte pop / arte urbano", ar: "فن البوب / فن الشارع", zh: "波普艺术 / 街头艺术", sw: "Sanaa ya Pop / sanaa ya mitaani", sv: "Popkonst / gatukonst" },
-  "An American artist whose bold outlined dancing figures began as chalk drawings in the New York subway.": { es: "Un artista estadounidense cuyas figuras danzantes de contornos marcados empezaron como dibujos con tiza en el metro de Nueva York.", ar: "فنان أمريكي بدأت شخصياته الراقصة ذات الخطوط الخارجية العريضة كرسومات بالطباشير في مترو أنفاق نيويورك.", zh: "一位美国艺术家，他那些粗线条勾勒的舞动人物最初是纽约地铁里的粉笔画。", sw: "Msanii wa Kimarekani ambaye wahusika wake wanaocheza wenye mistari mizito ya nje walianza kama michoro ya chaki katika treni ya chini ya ardhi ya New York.", sv: "En amerikansk konstnär vars kraftigt konturerade dansande figurer började som kritteckningar i New Yorks tunnelbana." },
-  "Thick black-outlined dancing figures with motion lines on a bright background are his style. In front stands an original jellyfish drawn in the same colours, holding a speech bubble that fits this tool.": { es: "Figuras danzantes con gruesos contornos negros y líneas de movimiento sobre un fondo vivo son su estilo. Delante hay una medusa original dibujada con los mismos colores, que sostiene un bocadillo de diálogo acorde con esta herramienta.", ar: "شخصيات راقصة بخطوط خارجية سوداء سميكة وخطوط حركة على خلفية زاهية هي أسلوبه. وفي المقدمة يقف قنديل بحر أصلي مرسوم بالألوان نفسها، يحمل فقاعة كلام تناسب هذه الأداة.", zh: "明亮背景上带粗黑轮廓和动感线条的舞动人物，就是他的风格。前方站着一只用同样颜色画成的原创水母，手里拿着一个与本工具相配的对话气泡。", sw: "Wahusika wanaocheza wenye mistari minene myeusi ya nje na mistari ya mwendo juu ya mandharinyuma angavu ndio mtindo wake. Mbele amesimama kiwavi-bahari (jellyfish) halisi aliyechorwa kwa rangi zilezile, akishika kiputo cha maneno kinacholingana na zana hii.", sv: "Dansande figurer med tjocka svarta konturer och rörelselinjer mot en klar bakgrund är hans stil. Framför står en egen manet tecknad i samma färger, med en pratbubbla som passar det här verktyget." },
-  "Your Gemini API key": { es: "Tu clave de API de Gemini", ar: "مفتاح Gemini API الخاص بك", zh: "你的 Gemini API 密钥", sw: "Ufunguo wako wa Gemini API", sv: "Din Gemini API-nyckel" },
-  "Watch how Bot Forge works — with voice": { es: "Mira cómo funciona Bot Forge, con voz", ar: "شاهد كيف يعمل Bot Forge — مع صوت", zh: "观看 Bot Forge 的使用方法（带语音）", sw: "Tazama jinsi Bot Forge inavyofanya kazi — kwa sauti", sv: "Se hur Bot Forge fungerar — med röst" },
-  "Welcome to Bot Forge. It makes a chat helper that answers your customers’ questions on your website.": { es: "Bienvenido a Bot Forge. Crea un asistente de chat que responde a las preguntas de tus clientes en tu sitio web.", ar: "مرحبًا بك في Bot Forge. يصنع مساعد دردشة يجيب عن أسئلة عملائك على موقعك.", zh: "欢迎使用 Bot Forge。它会制作一个聊天助手，在你的网站上回答顾客的问题。", sw: "Karibu Bot Forge. Hutengeneza msaidizi wa gumzo anayejibu maswali ya wateja wako kwenye tovuti yako.", sv: "Välkommen till Bot Forge. Den gör en chatthjälp som svarar på dina kunders frågor på din webbplats." },
-  "Enter your business name and a short description.": { es: "Escribe el nombre de tu negocio y una breve descripción.", ar: "أدخل اسم نشاطك التجاري ووصفًا قصيرًا.", zh: "输入你的商号和一段简短描述。", sw: "Weka jina la biashara yako na maelezo mafupi.", sv: "Ange ditt företagsnamn och en kort beskrivning." },
-  "The bot runs on your own website, so it uses your own free Gemini key. Paste it here. In this video we use a demo key.": { es: "El bot funciona en tu propio sitio web, así que usa tu propia clave gratuita de Gemini. Pégala aquí. En este vídeo usamos una clave de demostración.", ar: "يعمل الروبوت على موقعك الخاص، لذا يستخدم مفتاح Gemini المجاني الخاص بك. الصقه هنا. في هذا الفيديو نستخدم مفتاحًا تجريبيًا.", zh: "机器人运行在你自己的网站上，所以要用你自己的免费 Gemini 密钥。把它粘贴到这里。本视频中我们使用演示密钥。", sw: "Boti inafanya kazi kwenye tovuti yako mwenyewe, kwa hiyo inatumia ufunguo wako wa bure wa Gemini. Ubandike hapa. Katika video hii tunatumia ufunguo wa majaribio.", sv: "Botten körs på din egen webbplats, så den använder din egen gratis Gemini-nyckel. Klistra in den här. I den här videon använder vi en demonyckel." },
-  "Now the important part: everything the bot should know, like opening hours, prices and delivery.": { es: "Ahora lo importante: todo lo que el bot debe saber, como horarios, precios y envíos.", ar: "والآن الجزء المهم: كل ما يجب أن يعرفه الروبوت، مثل ساعات العمل والأسعار والتوصيل.", zh: "现在是重点：机器人需要知道的一切，比如营业时间、价格和配送。", sw: "Sasa sehemu muhimu: kila kitu boti inapaswa kujua, kama saa za kufungua, bei na usafirishaji.", sv: "Nu det viktiga: allt som botten ska veta, som öppettider, priser och leverans." },
-  "Set a welcome message and a colour, then press Build widget preview.": { es: "Define un mensaje de bienvenida y un color, y luego pulsa Crear vista previa del widget.", ar: "حدد رسالة ترحيب ولونًا، ثم اضغط إنشاء معاينة الأداة.", zh: "设置欢迎语和颜色，然后按“生成小部件预览”。", sw: "Weka ujumbe wa kukaribisha na rangi, kisha bonyeza Jenga uhakiki wa wijeti.", sv: "Ställ in ett välkomstmeddelande och en färg och tryck sedan på Bygg förhandsvisning av widgeten." },
-  "Test it like a customer would. Open the chat and ask a question.": { es: "Pruébalo como lo haría un cliente. Abre el chat y haz una pregunta.", ar: "اختبره كما يفعل العميل. افتح الدردشة واطرح سؤالًا.", zh: "像顾客一样测试它。打开聊天窗口并提一个问题。", sw: "Ijaribu kama mteja angefanya. Fungua gumzo na uulize swali.", sv: "Testa den som en kund skulle göra. Öppna chatten och ställ en fråga." },
-  "The bot answers from your information only. When you are happy, copy the embed code into your website.": { es: "El bot responde solo con tu información. Cuando estés satisfecho, copia el código para insertar en tu sitio web.", ar: "يجيب الروبوت من معلوماتك فقط. عندما تكون راضيًا، انسخ رمز التضمين إلى موقعك.", zh: "机器人只根据你提供的信息回答。满意后，把嵌入代码复制到你的网站里。", sw: "Boti hujibu kutoka kwa taarifa zako pekee. Ukiridhika, nakili msimbo wa kupachika kwenye tovuti yako.", sv: "Botten svarar bara utifrån din information. När du är nöjd kopierar du inbäddningskoden till din webbplats." },
-  "Now it is your turn. Open Bot Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for.": { es: "Ahora te toca a ti. Abre Bot Forge en MigaBuilder y pruébalo. Es gratis y no hace falta registrarse.", ar: "الآن جاء دورك. افتح Bot Forge على MigaBuilder وجرّبه بنفسك. إنه مجاني ولا يحتاج إلى تسجيل.", zh: "现在轮到你了。在 MigaBuilder 上打开 Bot Forge 亲自试试。它是免费的，无需注册。", sw: "Sasa ni zamu yako. Fungua Bot Forge kwenye MigaBuilder ujaribu mwenyewe. Ni bure, na hakuna haja ya kujisajili.", sv: "Nu är det din tur. Öppna Bot Forge på MigaBuilder och prova själv. Det är gratis och du behöver inte registrera dig." },
-  "Welcome to Bot Forge. This walkthrough uses the real tool controls on this page.": { es: "Bienvenido a Bot Forge. Este recorrido usa los controles reales de la herramienta en esta página.", ar: "مرحبًا بك في Bot Forge. تستخدم هذه الجولة عناصر التحكم الحقيقية للأداة على هذه الصفحة.", zh: "欢迎使用 Bot Forge。本演示使用本页上真实的工具控件。", sw: "Karibu Bot Forge. Mwongozo huu unatumia vidhibiti halisi vya zana kwenye ukurasa huu.", sv: "Välkommen till Bot Forge. Genomgången använder verktygets riktiga kontroller på den här sidan." },
-  "Art in the style of Keith Haring – click for more": { es: "Arte al estilo de Keith Haring: haz clic para saber más", ar: "رسم بأسلوب كيث هارينغ – انقر لمعرفة المزيد", zh: "凯斯·哈林风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa Keith Haring – bofya kujua zaidi", sv: "Konst i Keith Harings stil – klicka för mer" },
-  "e.g. A family-owned plumbing company serving Austin, TX since 2005.": { es: "p. ej. Una empresa familiar de fontanería que da servicio en Austin, TX, desde 2005.", ar: "مثلًا: شركة سباكة عائلية تخدم أوستن، تكساس منذ 2005.", zh: "例如：一家自 2005 年起服务于得州奥斯汀的家族水管公司。", sw: "k.m. Kampuni ya familia ya mabomba inayohudumia Austin, TX tangu 2005.", sv: "t.ex. Ett familjeägt rörfirma som har servat Austin, TX sedan 2005." },
-  "e.g. We're open Mon-Fri 8am-6pm. Emergency call-outs are $150. We service Austin and surrounding areas within 30 miles. We do NOT work on commercial properties.": { es: "p. ej. Abrimos de lunes a viernes de 8:00 a 18:00. Las urgencias cuestan 150 $. Damos servicio en Austin y alrededores en un radio de 30 millas. NO trabajamos en locales comerciales.", ar: "مثلًا: نعمل من الاثنين إلى الجمعة 8 ص–6 م. زيارات الطوارئ بـ150 دولارًا. نخدم أوستن والمناطق المحيطة ضمن 30 ميلًا. لا نعمل في العقارات التجارية.", zh: "例如：我们周一至周五早 8 点到晚 6 点营业。紧急上门费 150 美元。服务奥斯汀及周边 30 英里范围。我们不承接商业物业。", sw: "k.m. Tuko wazi Jumatatu–Ijumaa saa 2 asubuhi–saa 12 jioni. Huduma za dharura ni $150. Tunahudumia Austin na maeneo jirani ndani ya maili 30. HATUFANYI kazi kwenye majengo ya biashara.", sv: "t.ex. Vi har öppet mån–fre 8–18. Akututryckning kostar 150 $. Vi servar Austin med omnejd inom 30 miles. Vi arbetar INTE med kommersiella fastigheter." },
-  "How to use Bot Forge": { es: "Cómo usar Bot Forge", ar: "كيفية استخدام Bot Forge", zh: "如何使用 Bot Forge", sw: "Jinsi ya kutumia Bot Forge", sv: "Så använder du Bot Forge" },
-  "Free website chat & FAQ widget generator — Bot Forge | MigaBuilder": { es: "Generador gratis de widgets de chat y preguntas frecuentes para webs — Bot Forge | MigaBuilder", ar: "منشئ مجاني لأدوات الدردشة والأسئلة الشائعة للمواقع — Bot Forge | MigaBuilder", zh: "免费的网站聊天和常见问题小部件生成器 — Bot Forge | MigaBuilder", sw: "Kitengeneza wijeti za gumzo na maswali ya mara kwa mara kwa tovuti, cha bure — Bot Forge | MigaBuilder", sv: "Gratis generator för chatt- och FAQ-widgetar till webbplatser — Bot Forge | MigaBuilder" }
+  "Pop Art / street art": { es: "Arte pop / arte urbano", ar: "فن البوب / فن الشارع", zh: "波普艺术 / 街头艺术", sw: "Sanaa ya Pop / sanaa ya mitaani", sv: "Popkonst / gatukonst", de: "Pop-Art / Street-Art", pt: "Pop art / arte de rua", fr: "Pop art / art urbain" },
+  "An American artist whose bold outlined dancing figures began as chalk drawings in the New York subway.": { es: "Un artista estadounidense cuyas figuras danzantes de contornos marcados empezaron como dibujos con tiza en el metro de Nueva York.", ar: "فنان أمريكي بدأت شخصياته الراقصة ذات الخطوط الخارجية العريضة كرسومات بالطباشير في مترو أنفاق نيويورك.", zh: "一位美国艺术家，他那些粗线条勾勒的舞动人物最初是纽约地铁里的粉笔画。", sw: "Msanii wa Kimarekani ambaye wahusika wake wanaocheza wenye mistari mizito ya nje walianza kama michoro ya chaki katika treni ya chini ya ardhi ya New York.", sv: "En amerikansk konstnär vars kraftigt konturerade dansande figurer började som kritteckningar i New Yorks tunnelbana.", de: "Ein amerikanischer Künstler, dessen kräftig umrandete tanzende Figuren als Kreidezeichnungen in der New Yorker U-Bahn begannen.", pt: "Um artista americano cujas figuras dançantes de contorno forte começaram como desenhos a giz no metrô de Nova York.", fr: "Un artiste américain dont les silhouettes dansantes cernées de noir ont commencé comme dessins à la craie dans le métro new-yorkais." },
+  "Thick black-outlined dancing figures with motion lines on a bright background are his style. In front stands an original jellyfish drawn in the same colours, holding a speech bubble that fits this tool.": { es: "Figuras danzantes con gruesos contornos negros y líneas de movimiento sobre un fondo vivo son su estilo. Delante hay una medusa original dibujada con los mismos colores, que sostiene un bocadillo de diálogo acorde con esta herramienta.", ar: "شخصيات راقصة بخطوط خارجية سوداء سميكة وخطوط حركة على خلفية زاهية هي أسلوبه. وفي المقدمة يقف قنديل بحر أصلي مرسوم بالألوان نفسها، يحمل فقاعة كلام تناسب هذه الأداة.", zh: "明亮背景上带粗黑轮廓和动感线条的舞动人物，就是他的风格。前方站着一只用同样颜色画成的原创水母，手里拿着一个与本工具相配的对话气泡。", sw: "Wahusika wanaocheza wenye mistari minene myeusi ya nje na mistari ya mwendo juu ya mandharinyuma angavu ndio mtindo wake. Mbele amesimama kiwavi-bahari (jellyfish) halisi aliyechorwa kwa rangi zilezile, akishika kiputo cha maneno kinacholingana na zana hii.", sv: "Dansande figurer med tjocka svarta konturer och rörelselinjer mot en klar bakgrund är hans stil. Framför står en egen manet tecknad i samma färger, med en pratbubbla som passar det här verktyget.", de: "Dick schwarz umrandete tanzende Figuren mit Bewegungslinien auf leuchtendem Hintergrund sind sein Stil. Davor steht eine originale Qualle in denselben Farben, mit einer Sprechblase, die zu diesem Werkzeug passt.", pt: "Figuras dançantes com contorno preto grosso e linhas de movimento sobre um fundo vivo são o seu estilo. Na frente está uma água-viva original desenhada nas mesmas cores, segurando um balão de fala que combina com esta ferramenta.", fr: "Des silhouettes dansantes cernées de noir épais avec des traits de mouvement sur un fond vif : c'est son style. Devant se tient une méduse originale dessinée dans les mêmes couleurs, tenant une bulle de dialogue adaptée à cet outil." },
+  "Your Gemini API key": { es: "Tu clave de API de Gemini", ar: "مفتاح Gemini API الخاص بك", zh: "你的 Gemini API 密钥", sw: "Ufunguo wako wa Gemini API", sv: "Din Gemini API-nyckel", de: "Dein Gemini-API-Schlüssel", pt: "Sua chave de API do Gemini", fr: "Votre clé API Gemini" },
+  "Watch how Bot Forge works — with voice": { es: "Mira cómo funciona Bot Forge, con voz", ar: "شاهد كيف يعمل Bot Forge — مع صوت", zh: "观看 Bot Forge 的使用方法（带语音）", sw: "Tazama jinsi Bot Forge inavyofanya kazi — kwa sauti", sv: "Se hur Bot Forge fungerar — med röst", de: "Sieh dir an, wie Bot Forge funktioniert — mit Stimme", pt: "Veja como o Bot Forge funciona — com voz", fr: "Découvrez comment fonctionne Bot Forge — avec voix" },
+  "Welcome to Bot Forge. It makes a chat helper that answers your customers’ questions on your website.": { es: "Bienvenido a Bot Forge. Crea un asistente de chat que responde a las preguntas de tus clientes en tu sitio web.", ar: "مرحبًا بك في Bot Forge. يصنع مساعد دردشة يجيب عن أسئلة عملائك على موقعك.", zh: "欢迎使用 Bot Forge。它会制作一个聊天助手，在你的网站上回答顾客的问题。", sw: "Karibu Bot Forge. Hutengeneza msaidizi wa gumzo anayejibu maswali ya wateja wako kwenye tovuti yako.", sv: "Välkommen till Bot Forge. Den gör en chatthjälp som svarar på dina kunders frågor på din webbplats.", de: "Willkommen bei Bot Forge. Es erstellt einen Chat-Helfer, der die Fragen deiner Kunden auf deiner Website beantwortet.", pt: "Bem-vindo ao Bot Forge. Ele cria um assistente de chat que responde às perguntas dos seus clientes no seu site.", fr: "Bienvenue dans Bot Forge. Il crée un assistant de chat qui répond aux questions de vos clients sur votre site." },
+  "Enter your business name and a short description.": { es: "Escribe el nombre de tu negocio y una breve descripción.", ar: "أدخل اسم نشاطك التجاري ووصفًا قصيرًا.", zh: "输入你的商号和一段简短描述。", sw: "Weka jina la biashara yako na maelezo mafupi.", sv: "Ange ditt företagsnamn och en kort beskrivning.", de: "Gib deinen Firmennamen und eine kurze Beschreibung ein.", pt: "Digite o nome do seu negócio e uma descrição curta.", fr: "Saisissez le nom de votre entreprise et une courte description." },
+  "The bot runs on your own website, so it uses your own free Gemini key. Paste it here. In this video we use a demo key.": { es: "El bot funciona en tu propio sitio web, así que usa tu propia clave gratuita de Gemini. Pégala aquí. En este vídeo usamos una clave de demostración.", ar: "يعمل الروبوت على موقعك الخاص، لذا يستخدم مفتاح Gemini المجاني الخاص بك. الصقه هنا. في هذا الفيديو نستخدم مفتاحًا تجريبيًا.", zh: "机器人运行在你自己的网站上，所以要用你自己的免费 Gemini 密钥。把它粘贴到这里。本视频中我们使用演示密钥。", sw: "Boti inafanya kazi kwenye tovuti yako mwenyewe, kwa hiyo inatumia ufunguo wako wa bure wa Gemini. Ubandike hapa. Katika video hii tunatumia ufunguo wa majaribio.", sv: "Botten körs på din egen webbplats, så den använder din egen gratis Gemini-nyckel. Klistra in den här. I den här videon använder vi en demonyckel.", de: "Der Bot läuft auf deiner eigenen Website, deshalb nutzt er deinen eigenen kostenlosen Gemini-Schlüssel. Füge ihn hier ein. In diesem Video nutzen wir einen Demo-Schlüssel.", pt: "O bot roda no seu próprio site, então usa sua própria chave gratuita do Gemini. Cole-a aqui. Neste vídeo usamos uma chave de demonstração.", fr: "Le bot fonctionne sur votre propre site, il utilise donc votre propre clé Gemini gratuite. Collez-la ici. Dans cette vidéo, nous utilisons une clé de démonstration." },
+  "Now the important part: everything the bot should know, like opening hours, prices and delivery.": { es: "Ahora lo importante: todo lo que el bot debe saber, como horarios, precios y envíos.", ar: "والآن الجزء المهم: كل ما يجب أن يعرفه الروبوت، مثل ساعات العمل والأسعار والتوصيل.", zh: "现在是重点：机器人需要知道的一切，比如营业时间、价格和配送。", sw: "Sasa sehemu muhimu: kila kitu boti inapaswa kujua, kama saa za kufungua, bei na usafirishaji.", sv: "Nu det viktiga: allt som botten ska veta, som öppettider, priser och leverans.", de: "Jetzt der wichtige Teil: alles, was der Bot wissen soll, wie Öffnungszeiten, Preise und Lieferung.", pt: "Agora a parte importante: tudo o que o bot deve saber, como horário de funcionamento, preços e entrega.", fr: "Passons à l'essentiel : tout ce que le bot doit savoir, comme les horaires, les prix et la livraison." },
+  "Set a welcome message and a colour, then press Build widget preview.": { es: "Define un mensaje de bienvenida y un color, y luego pulsa Crear vista previa del widget.", ar: "حدد رسالة ترحيب ولونًا، ثم اضغط إنشاء معاينة الأداة.", zh: "设置欢迎语和颜色，然后按“生成小部件预览”。", sw: "Weka ujumbe wa kukaribisha na rangi, kisha bonyeza Jenga uhakiki wa wijeti.", sv: "Ställ in ett välkomstmeddelande och en färg och tryck sedan på Bygg förhandsvisning av widgeten.", de: "Lege eine Begrüßung und eine Farbe fest und drück dann auf Widget-Vorschau erstellen.", pt: "Defina uma mensagem de boas-vindas e uma cor, depois aperte Criar prévia do widget.", fr: "Définissez un message de bienvenue et une couleur, puis appuyez sur Créer l'aperçu du widget." },
+  "Test it like a customer would. Open the chat and ask a question.": { es: "Pruébalo como lo haría un cliente. Abre el chat y haz una pregunta.", ar: "اختبره كما يفعل العميل. افتح الدردشة واطرح سؤالًا.", zh: "像顾客一样测试它。打开聊天窗口并提一个问题。", sw: "Ijaribu kama mteja angefanya. Fungua gumzo na uulize swali.", sv: "Testa den som en kund skulle göra. Öppna chatten och ställ en fråga.", de: "Teste ihn wie ein Kunde. Öffne den Chat und stell eine Frage.", pt: "Teste como um cliente faria. Abra o chat e faça uma pergunta.", fr: "Testez-le comme un client. Ouvrez le chat et posez une question." },
+  "The bot answers from your information only. When you are happy, copy the embed code into your website.": { es: "El bot responde solo con tu información. Cuando estés satisfecho, copia el código para insertar en tu sitio web.", ar: "يجيب الروبوت من معلوماتك فقط. عندما تكون راضيًا، انسخ رمز التضمين إلى موقعك.", zh: "机器人只根据你提供的信息回答。满意后，把嵌入代码复制到你的网站里。", sw: "Boti hujibu kutoka kwa taarifa zako pekee. Ukiridhika, nakili msimbo wa kupachika kwenye tovuti yako.", sv: "Botten svarar bara utifrån din information. När du är nöjd kopierar du inbäddningskoden till din webbplats.", de: "Der Bot antwortet nur mit deinen Informationen. Wenn du zufrieden bist, kopiere den Einbettungscode in deine Website.", pt: "O bot responde só com as suas informações. Quando estiver satisfeito, copie o código de incorporação para o seu site.", fr: "Le bot répond uniquement à partir de vos informations. Quand vous êtes satisfait, copiez le code d'intégration dans votre site." },
+  "Now it is your turn. Open Bot Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for.": { es: "Ahora te toca a ti. Abre Bot Forge en MigaBuilder y pruébalo. Es gratis y no hace falta registrarse.", ar: "الآن جاء دورك. افتح Bot Forge على MigaBuilder وجرّبه بنفسك. إنه مجاني ولا يحتاج إلى تسجيل.", zh: "现在轮到你了。在 MigaBuilder 上打开 Bot Forge 亲自试试。它是免费的，无需注册。", sw: "Sasa ni zamu yako. Fungua Bot Forge kwenye MigaBuilder ujaribu mwenyewe. Ni bure, na hakuna haja ya kujisajili.", sv: "Nu är det din tur. Öppna Bot Forge på MigaBuilder och prova själv. Det är gratis och du behöver inte registrera dig.", de: "Jetzt bist du dran. Öffne Bot Forge auf MigaBuilder und probier es selbst. Es ist kostenlos, und du musst dich nirgends anmelden.", pt: "Agora é sua vez. Abra o Bot Forge no MigaBuilder e experimente. É grátis e não precisa de cadastro.", fr: "À vous maintenant. Ouvrez Bot Forge sur MigaBuilder et essayez vous-même. C'est gratuit, sans inscription." },
+  "Welcome to Bot Forge. This walkthrough uses the real tool controls on this page.": { es: "Bienvenido a Bot Forge. Este recorrido usa los controles reales de la herramienta en esta página.", ar: "مرحبًا بك في Bot Forge. تستخدم هذه الجولة عناصر التحكم الحقيقية للأداة على هذه الصفحة.", zh: "欢迎使用 Bot Forge。本演示使用本页上真实的工具控件。", sw: "Karibu Bot Forge. Mwongozo huu unatumia vidhibiti halisi vya zana kwenye ukurasa huu.", sv: "Välkommen till Bot Forge. Genomgången använder verktygets riktiga kontroller på den här sidan.", de: "Willkommen bei Bot Forge. Diese Anleitung nutzt die echten Bedienelemente auf dieser Seite.", pt: "Bem-vindo ao Bot Forge. Este passo a passo usa os controles reais desta página.", fr: "Bienvenue dans Bot Forge. Ce guide utilise les vraies commandes de cette page." },
+  "Art in the style of Keith Haring – click for more": { es: "Arte al estilo de Keith Haring: haz clic para saber más", ar: "رسم بأسلوب كيث هارينغ – انقر لمعرفة المزيد", zh: "凯斯·哈林风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa Keith Haring – bofya kujua zaidi", sv: "Konst i Keith Harings stil – klicka för mer", de: "Kunst im Stil von Keith Haring – klicken für mehr", pt: "Arte no estilo de Keith Haring – clique para saber mais", fr: "Illustration dans le style de Keith Haring – cliquez pour en savoir plus" },
+  "e.g. A family-owned plumbing company serving Austin, TX since 2005.": { es: "p. ej. Una empresa familiar de fontanería que da servicio en Austin, TX, desde 2005.", ar: "مثلًا: شركة سباكة عائلية تخدم أوستن، تكساس منذ 2005.", zh: "例如：一家自 2005 年起服务于得州奥斯汀的家族水管公司。", sw: "k.m. Kampuni ya familia ya mabomba inayohudumia Austin, TX tangu 2005.", sv: "t.ex. Ett familjeägt rörfirma som har servat Austin, TX sedan 2005.", de: "z. B. Ein Familienbetrieb für Sanitärarbeiten in Austin, TX, seit 2005.", pt: "ex.: Uma empresa familiar de encanamento que atende Austin, TX, desde 2005.", fr: "ex. : Une entreprise familiale de plomberie au service d'Austin (Texas) depuis 2005." },
+  "e.g. We're open Mon-Fri 8am-6pm. Emergency call-outs are $150. We service Austin and surrounding areas within 30 miles. We do NOT work on commercial properties.": { es: "p. ej. Abrimos de lunes a viernes de 8:00 a 18:00. Las urgencias cuestan 150 $. Damos servicio en Austin y alrededores en un radio de 30 millas. NO trabajamos en locales comerciales.", ar: "مثلًا: نعمل من الاثنين إلى الجمعة 8 ص–6 م. زيارات الطوارئ بـ150 دولارًا. نخدم أوستن والمناطق المحيطة ضمن 30 ميلًا. لا نعمل في العقارات التجارية.", zh: "例如：我们周一至周五早 8 点到晚 6 点营业。紧急上门费 150 美元。服务奥斯汀及周边 30 英里范围。我们不承接商业物业。", sw: "k.m. Tuko wazi Jumatatu–Ijumaa saa 2 asubuhi–saa 12 jioni. Huduma za dharura ni $150. Tunahudumia Austin na maeneo jirani ndani ya maili 30. HATUFANYI kazi kwenye majengo ya biashara.", sv: "t.ex. Vi har öppet mån–fre 8–18. Akututryckning kostar 150 $. Vi servar Austin med omnejd inom 30 miles. Vi arbetar INTE med kommersiella fastigheter.", de: "z. B. Wir haben Mo–Fr 8–18 Uhr geöffnet. Notfalleinsätze kosten 150 $. Wir bedienen Austin und Umgebung im Umkreis von 30 Meilen. Wir arbeiten NICHT an Gewerbeimmobilien.", pt: "ex.: Abrimos de seg. a sex., das 8h às 18h. Atendimentos de emergência custam US$ 150. Atendemos Austin e região num raio de 30 milhas. NÃO trabalhamos com imóveis comerciais.", fr: "ex. : Nous sommes ouverts du lundi au vendredi de 8 h à 18 h. Les interventions d'urgence coûtent 150 $. Nous intervenons à Austin et dans un rayon de 30 miles. Nous ne travaillons PAS sur les locaux commerciaux." },
+  "How to use Bot Forge": { es: "Cómo usar Bot Forge", ar: "كيفية استخدام Bot Forge", zh: "如何使用 Bot Forge", sw: "Jinsi ya kutumia Bot Forge", sv: "Så använder du Bot Forge", de: "So nutzt du Bot Forge", pt: "Como usar o Bot Forge", fr: "Comment utiliser Bot Forge" },
+  "Free website chat & FAQ widget generator — Bot Forge | MigaBuilder": { es: "Generador gratis de widgets de chat y preguntas frecuentes para webs — Bot Forge | MigaBuilder", ar: "منشئ مجاني لأدوات الدردشة والأسئلة الشائعة للمواقع — Bot Forge | MigaBuilder", zh: "免费的网站聊天和常见问题小部件生成器 — Bot Forge | MigaBuilder", sw: "Kitengeneza wijeti za gumzo na maswali ya mara kwa mara kwa tovuti, cha bure — Bot Forge | MigaBuilder", sv: "Gratis generator för chatt- och FAQ-widgetar till webbplatser — Bot Forge | MigaBuilder", de: "Kostenloser Generator für Website-Chat- und FAQ-Widgets — Bot Forge | MigaBuilder", pt: "Gerador gratuito de widget de chat e FAQ para sites — Bot Forge | MigaBuilder", fr: "Générateur gratuit de widget de chat et FAQ pour site — Bot Forge | MigaBuilder" }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({
@@ -27,90 +27,129 @@ I18N.phrases({
   "ar": "يصنع Bot Forge نافذة دردشة لموقعك تجيب عن أسئلة الزوار من المعلومات التي تعطيها. لا خادم لتشغيله: تلصق مقتطفًا واحدًا في موقعك.",
   "zh": "Bot Forge 为你的网站制作聊天小部件，用你提供的资料回答访客的问题。无需运行后端：只需把一段代码粘贴到网站里。",
   "sw": "Bot Forge hutengeneza kidirisha cha mazungumzo kwa tovuti yako kinachojibu maswali ya wageni kutokana na taarifa unazokipa. Hakuna seva ya kuendesha: unabandika kipande kimoja tu cha msimbo kwenye tovuti yako.",
-  "sv": "Bot Forge gör en chattruta för din webbplats som svarar på besökarnas frågor utifrån fakta du ger den. Ingen server behövs: du klistrar in ett enda kodstycke på din sajt."
+  "sv": "Bot Forge gör en chattruta för din webbplats som svarar på besökarnas frågor utifrån fakta du ger den. Ingen server behövs: du klistrar in ett enda kodstycke på din sajt.",
+  "de": "Bot Forge erstellt ein Chat-Widget für deine Website, das Besucherfragen anhand der Fakten beantwortet, die du ihm gibst. Es gibt kein Backend: Du fügst nur einen Codeschnipsel in deine Website ein.",
+  "pt": "O Bot Forge cria um widget de chat para o seu site que responde às perguntas dos visitantes com os fatos que você fornece. Não há backend para rodar: você cola um único trecho no seu site.",
+  "fr": "Bot Forge crée un widget de chat pour votre site, qui répond aux questions des visiteurs à partir des informations que vous lui donnez. Aucun serveur à faire tourner : vous collez un seul extrait dans votre site."
  },
  "Add the website details and questions customers usually ask.": {
   "es": "Añade los datos del sitio web y las preguntas que suelen hacer los clientes.",
   "ar": "أضف تفاصيل الموقع والأسئلة التي يطرحها العملاء عادة.",
   "zh": "添加网站信息以及客户常问的问题。",
   "sw": "Ongeza taarifa za tovuti na maswali ambayo wateja huuliza mara nyingi.",
-  "sv": "Lägg till uppgifter om webbplatsen och frågor som kunderna brukar ställa."
+  "sv": "Lägg till uppgifter om webbplatsen och frågor som kunderna brukar ställa.",
+  "de": "Füge die Website-Angaben und häufige Kundenfragen hinzu.",
+  "pt": "Adicione os dados do site e as perguntas que os clientes costumam fazer.",
+  "fr": "Ajoutez les informations du site et les questions que posent souvent les clients."
  },
  "Press “Build bot”.": {
   "es": "Pulsa «Crear bot».",
   "ar": "اضغط «ابنِ الروبوت».",
   "zh": "点击“创建机器人”。",
   "sw": "Bonyeza “Jenga boti”.",
-  "sv": "Tryck på ”Bygg bot”."
+  "sv": "Tryck på ”Bygg bot”.",
+  "de": "Drück auf „Bot erstellen“.",
+  "pt": "Aperte “Criar bot”.",
+  "fr": "Appuyez sur « Créer le bot »."
  },
  "Test answers, refine them, and copy the widget to your site.": {
   "es": "Prueba las respuestas, mejóralas y copia el widget a tu sitio.",
   "ar": "جرّب الإجابات وحسّنها، ثم انسخ الأداة إلى موقعك.",
   "zh": "测试回答、加以完善，然后把小部件复制到你的网站。",
   "sw": "Jaribu majibu, yaboreshe, na unakili kidirisha kwenye tovuti yako.",
-  "sv": "Testa svaren, förbättra dem och kopiera chattrutan till din sajt."
+  "sv": "Testa svaren, förbättra dem och kopiera chattrutan till din sajt.",
+  "de": "Teste die Antworten, verfeinere sie und kopiere das Widget auf deine Website.",
+  "pt": "Teste as respostas, refine-as e copie o widget para o seu site.",
+  "fr": "Testez les réponses, affinez-les et copiez le widget sur votre site."
  },
  "Do I need a server for the chat bot?": {
   "es": "¿Necesito un servidor para el chat?",
   "ar": "هل أحتاج إلى خادم لروبوت الدردشة؟",
   "zh": "聊天机器人需要服务器吗？",
   "sw": "Je, ninahitaji seva kwa ajili ya boti ya mazungumzo?",
-  "sv": "Behöver jag en server för chattboten?"
+  "sv": "Behöver jag en server för chattboten?",
+  "de": "Brauche ich einen Server für den Chatbot?",
+  "pt": "Preciso de um servidor para o chatbot?",
+  "fr": "Ai-je besoin d'un serveur pour le chatbot ?"
  },
  "No. The widget answers from the information you entered and runs inside your web page, so you only paste one snippet into your site.": {
   "es": "No. El widget responde con la información que introdujiste y funciona dentro de tu página web, así que solo pegas un fragmento en tu sitio.",
   "ar": "لا. تجيب الأداة من المعلومات التي أدخلتها وتعمل داخل صفحتك، لذا تلصق مقتطفًا واحدًا فقط في موقعك.",
   "zh": "不需要。小部件根据你输入的信息回答，并在你的网页内运行，你只需把一段代码粘贴到网站里。",
   "sw": "Hapana. Kidirisha hujibu kutokana na taarifa ulizoingiza na hufanya kazi ndani ya ukurasa wako wa wavuti, hivyo unabandika kipande kimoja tu kwenye tovuti yako.",
-  "sv": "Nej. Chattrutan svarar utifrån informationen du skrev in och körs inuti din webbsida, så du klistrar bara in ett kodstycke på sajten."
+  "sv": "Nej. Chattrutan svarar utifrån informationen du skrev in och körs inuti din webbsida, så du klistrar bara in ett kodstycke på sajten.",
+  "de": "Nein. Das Widget antwortet mit den eingegebenen Informationen und läuft in deiner Webseite, du fügst also nur einen Codeschnipsel in deine Website ein.",
+  "pt": "Não. O widget responde com as informações que você inseriu e roda dentro da sua página, então você só cola um trecho no seu site.",
+  "fr": "Non. Le widget répond à partir des informations saisies et fonctionne dans votre page web, vous ne collez donc qu'un extrait dans votre site."
  },
  "About Bot Forge": {
   "es": "Acerca de Bot Forge",
   "ar": "عن Bot Forge",
   "zh": "关于 Bot Forge",
   "sw": "Kuhusu Bot Forge",
-  "sv": "Om Bot Forge"
+  "sv": "Om Bot Forge",
+  "de": "Über Bot Forge",
+  "pt": "Sobre o Bot Forge",
+  "fr": "À propos de Bot Forge"
  },
  "How to use Bot Forge": {
   "es": "Cómo usar Bot Forge",
   "ar": "طريقة استخدام Bot Forge",
   "zh": "如何使用 Bot Forge",
   "sw": "Jinsi ya kutumia Bot Forge",
-  "sv": "Så använder du Bot Forge"
+  "sv": "Så använder du Bot Forge",
+  "de": "So nutzt du Bot Forge",
+  "pt": "Como usar o Bot Forge",
+  "fr": "Comment utiliser Bot Forge"
  },
  "Is Bot Forge free?": {
   "es": "¿Bot Forge es gratis?",
   "ar": "هل Bot Forge مجاني؟",
   "zh": "Bot Forge 免费吗？",
   "sw": "Je, Bot Forge ni bure?",
-  "sv": "Är Bot Forge gratis?"
+  "sv": "Är Bot Forge gratis?",
+  "de": "Ist Bot Forge kostenlos?",
+  "pt": "O Bot Forge é gratuito?",
+  "fr": "Bot Forge est-il gratuit ?"
  },
  "Are my files uploaded?": {
   "es": "¿Se suben mis archivos?",
   "ar": "هل تُرفع ملفاتي؟",
   "zh": "我的文件会被上传吗？",
   "sw": "Je, faili zangu zinapakiwa?",
-  "sv": "Laddas mina filer upp?"
+  "sv": "Laddas mina filer upp?",
+  "de": "Werden meine Dateien hochgeladen?",
+  "pt": "Meus arquivos são enviados?",
+  "fr": "Mes fichiers sont-ils envoyés ?"
  },
  "Related tools:": {
   "es": "Herramientas relacionadas:",
   "ar": "أدوات ذات صلة:",
   "zh": "相关工具：",
   "sw": "Zana zinazohusiana:",
-  "sv": "Relaterade verktyg:"
+  "sv": "Relaterade verktyg:",
+  "de": "Verwandte Werkzeuge:",
+  "pt": "Ferramentas relacionadas:",
+  "fr": "Outils associés :"
  },
  "Yes. It is free to use, with no account, no watermark and no paywall.": {
   "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
   "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
   "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
   "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
-  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg.",
+  "de": "Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke.",
+  "pt": "Sim. É gratuito, sem conta, sem marca d'água e sem cobrança.",
+  "fr": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."
  },
  "No. It runs entirely in your browser, so your files and text stay on your device.": {
   "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
   "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
   "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
   "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
-  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet.",
+  "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
+  "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
+  "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });

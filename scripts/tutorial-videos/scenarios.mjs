@@ -1406,7 +1406,7 @@ S('index.html', {
     await h.step('Pick a tile, and its tools open right underneath, each with a one line description.', () => h.click('.tool-group[data-category=create] .tool-group-toggle'));
     await h.step('Tap the star on any tool to keep it in your favourites. Favourites and recently used tools are saved only in this browser.', async () => { await h.click('.tool-group[data-category=create] .fav-toggle >> nth=0'); await h.unring(); });
     await h.step('Want to see everything at once? Open all categories with one click.', () => h.click('#toggleAll'));
-    await h.step('The whole site speaks your language. Choose Spanish, Arabic, Chinese, Swahili or Swedish here.', async () => { await h.click('#toggleAll'); await h.scroll('header', 'start'); await h.select('#i18nLangSelect', 'sv'); });
+    await h.step('The whole site speaks your language. Choose Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese or French here.', async () => { await h.click('#toggleAll'); await h.scroll('header', 'start'); await h.select('#i18nLangSelect', 'sv'); });
     await h.step('Switch back at any time. Your choice is remembered on every page.', () => h.select('#i18nLangSelect', 'en'));
     await h.step('Below the categories you will find the popular tools, and the newest ones.', async () => { await h.unring(); await h.scroll('#popularTools', 'center'); });
     await h.step('Ready to start? Type what you want to make, or press a Start here button. Every tool has its own narrated video like this one.', async () => { await h.scroll('header', 'start'); await h.point('.start-here'); });
