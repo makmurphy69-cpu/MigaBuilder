@@ -46,15 +46,15 @@ I18N.phrases({
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({
- "Grammar Forge checks spelling and grammar in English, Swedish, Spanish, Arabic, Chinese and Kiswahili, with an explanation for each suggestion.": {
-  "es": "Grammar Forge revisa la ortografía y la gramática en inglés, sueco, español, árabe, chino y suajili, con una explicación de cada sugerencia.",
-  "ar": "يفحص Grammar Forge الإملاء والقواعد بالإنجليزية والسويدية والإسبانية والعربية والصينية والسواحيلية، مع شرح لكل اقتراح.",
-  "zh": "Grammar Forge 检查英语、瑞典语、西班牙语、阿拉伯语、中文和斯瓦希里语的拼写和语法，并解释每条建议。",
-  "sw": "Grammar Forge hukagua tahajia na sarufi kwa Kiingereza, Kiswidi, Kihispania, Kiarabu, Kichina na Kiswahili, pamoja na maelezo ya kila pendekezo.",
-  "sv": "Grammar Forge granskar stavning och grammatik på engelska, svenska, spanska, arabiska, kinesiska och swahili, med en förklaring till varje förslag.",
-  "de": "Grammar Forge prüft Rechtschreibung und Grammatik in Englisch, Schwedisch, Spanisch, Arabisch, Chinesisch und Kiswahili, mit einer Erklärung zu jedem Vorschlag.",
-  "pt": "O Grammar Forge revisa ortografia e gramática em inglês, sueco, espanhol, árabe, chinês e suaíli, com uma explicação para cada sugestão.",
-  "fr": "Grammar Forge vérifie l'orthographe et la grammaire en anglais, suédois, espagnol, arabe, chinois et swahili, avec une explication pour chaque suggestion."
+ "Grammar Forge checks spelling and grammar in English, Swedish, German, French, Spanish, Portuguese, Arabic, Chinese and Kiswahili, with an explanation for each suggestion.": {
+  "es": "Grammar Forge revisa la ortografía y la gramática en inglés, sueco, alemán, francés, español, portugués, árabe, chino y suajili, con una explicación de cada sugerencia.",
+  "ar": "يفحص Grammar Forge الإملاء والقواعد بالإنجليزية والسويدية والألمانية والفرنسية والإسبانية والبرتغالية والعربية والصينية والسواحيلية، مع شرح لكل اقتراح.",
+  "zh": "Grammar Forge 检查英语、瑞典语、德语、法语、西班牙语、葡萄牙语、阿拉伯语、中文和斯瓦希里语的拼写和语法，并解释每条建议。",
+  "sw": "Grammar Forge hukagua tahajia na sarufi kwa Kiingereza, Kiswidi, Kijerumani, Kifaransa, Kihispania, Kireno, Kiarabu, Kichina na Kiswahili, pamoja na maelezo ya kila pendekezo.",
+  "sv": "Grammar Forge granskar stavning och grammatik på engelska, svenska, tyska, franska, spanska, portugisiska, arabiska, kinesiska och swahili, med en förklaring till varje förslag.",
+  "de": "Grammar Forge prüft Rechtschreibung und Grammatik in Englisch, Schwedisch, Deutsch, Französisch, Spanisch, Portugiesisch, Arabisch, Chinesisch und Kiswahili, mit einer Erklärung zu jedem Vorschlag.",
+  "pt": "O Grammar Forge revisa ortografia e gramática em inglês, sueco, alemão, francês, espanhol, português, árabe, chinês e suaíli, com uma explicação para cada sugestão.",
+  "fr": "Grammar Forge vérifie l'orthographe et la grammaire en anglais, suédois, allemand, français, espagnol, portugais, arabe, chinois et swahili, avec une explication pour chaque suggestion."
  },
  "Choose a language and paste or type the writing you want to improve.": {
   "es": "Elige un idioma y pega o escribe el texto que quieres mejorar.",
@@ -96,15 +96,15 @@ I18N.phrases({
   "pt": "Quais idiomas ele revisa?",
   "fr": "Quelles langues vérifie-t-il ?"
  },
- "English, Swedish, Spanish, Arabic, Chinese and Kiswahili.": {
-  "es": "Inglés, sueco, español, árabe, chino y suajili.",
-  "ar": "الإنجليزية والسويدية والإسبانية والعربية والصينية والسواحيلية.",
-  "zh": "英语、瑞典语、西班牙语、阿拉伯语、中文和斯瓦希里语。",
-  "sw": "Kiingereza, Kiswidi, Kihispania, Kiarabu, Kichina na Kiswahili.",
-  "sv": "Engelska, svenska, spanska, arabiska, kinesiska och swahili.",
-  "de": "Englisch, Schwedisch, Spanisch, Arabisch, Chinesisch und Kiswahili.",
-  "pt": "Inglês, sueco, espanhol, árabe, chinês e suaíli.",
-  "fr": "Anglais, suédois, espagnol, arabe, chinois et swahili."
+ "English, Swedish, German, French, Spanish, Portuguese, Arabic, Chinese and Kiswahili.": {
+  "es": "Inglés, sueco, alemán, francés, español, portugués, árabe, chino y suajili.",
+  "ar": "الإنجليزية والسويدية والألمانية والفرنسية والإسبانية والبرتغالية والعربية والصينية والسواحيلية.",
+  "zh": "英语、瑞典语、德语、法语、西班牙语、葡萄牙语、阿拉伯语、中文和斯瓦希里语。",
+  "sw": "Kiingereza, Kiswidi, Kijerumani, Kifaransa, Kihispania, Kireno, Kiarabu, Kichina na Kiswahili.",
+  "sv": "Engelska, svenska, tyska, franska, spanska, portugisiska, arabiska, kinesiska och swahili.",
+  "de": "Englisch, Schwedisch, Deutsch, Französisch, Spanisch, Portugiesisch, Arabisch, Chinesisch und Kiswahili.",
+  "pt": "Inglês, sueco, alemão, francês, espanhol, português, árabe, chinês e suaíli.",
+  "fr": "Anglais, suédois, allemand, français, espagnol, portugais, arabe, chinois et swahili."
  },
  "About Grammar Forge": {
   "es": "Acerca de Grammar Forge",

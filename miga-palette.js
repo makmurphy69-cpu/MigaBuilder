@@ -38,7 +38,7 @@
     ["pdf-edit-forge.html", "✍️", "Sign Documents", "Sign PDFs, Word files and photos — draw, type or upload your signature.", ""],
     ["pdf-compress.html", "🗜️", "Compress PDF", "Shrink PDFs for email and upload limits.", ""],
     ["ocr-forge.html", "🔎", "OCR Forge", "Extract editable text from images privately.", ""],
-    ["grammar-forge.html", "✓", "Grammar Forge", "Check writing privately in six languages with actionable suggestions.", ""],
+    ["grammar-forge.html", "✓", "Grammar Forge", "Check writing privately in nine languages with actionable suggestions.", ""],
     ["text-compare.html", "⚖️", "Text Compare", "See exactly what changed between two versions of a text.", "text compare diff checker difference compare documents versions changes contract json diff compare json code"],
     ["geo-forge.html", "🗺️", "Geography Forge", "Explore every country on a world map, then generate a quiz.", ""],
     ["sim-forge.html", "🚦", "Vehicle Simulator", "Learn to drive, ride and steer, and fly a 3D plane or helicopter with a real instrument panel.", ""],
