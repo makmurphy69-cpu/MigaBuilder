@@ -349,6 +349,43 @@ test('paste: a pasted PDF goes to PDF Forge\'s PDF picker and splits', 'pdf-forg
   expect(new Set(names).size === 3, 'ZIP should hold 3 page PDFs, found ' + new Set(names).size);
 });
 
+// A noisy 1600×1200 photo-like picture, made in the page, so it is hard to compress (a few hundred KB as JPG).
+async function addNoisyPhoto(page) {
+  await page.evaluate(async () => {
+    const c = document.createElement('canvas'); c.width = 1600; c.height = 1200;
+    const x = c.getContext('2d'), d = x.createImageData(c.width, c.height);
+    let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+    for (let i = 0; i < d.data.length; i += 4) { const p = i / 4, gx = p % 1600, gy = (p / 1600) | 0; d.data[i] = gx / 7 + rnd() * 90; d.data[i + 1] = gy / 5 + rnd() * 90; d.data[i + 2] = 120 + rnd() * 120; d.data[i + 3] = 255; }
+    x.putImageData(d, 0, 0);
+    const blob = await new Promise(r => c.toBlob(r, 'image/png'));
+    const dt = new DataTransfer(); dt.items.add(new File([blob], 'holiday.png', { type: 'image/png' }));
+    const input = document.querySelector('#fileInput'); input.files = dt.files; input.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await page.waitForFunction(() => !document.querySelector('#convertBtn').disabled, null, { timeout: 30000 });
+  await page.uncheck('#zipOutput');
+}
+
+test('file-forge: "keep each file under 50 KB" makes a JPG that fits the limit', 'file-forge.html', async (page) => {
+  await addNoisyPhoto(page);
+  await page.selectOption('#formatSelect', 'image/jpeg');
+  await page.fill('#targetKb', '50');
+  const out = await downloadOf(page, () => page.click('#convertBtn'));
+  expect(magic(out.buf, 0xff, 0xd8), 'download is not a JPEG');
+  expect(out.buf.length <= 50000, 'JPG should be at most 50,000 bytes, got ' + out.buf.length);
+  expect(out.buf.length > 20000, 'JPG should use most of the allowance (quality kept as high as fits), got ' + out.buf.length);
+  expect(await page.textContent('.file-status') === '✓ Done', 'status should be ✓ Done, got ' + await page.textContent('.file-status'));
+});
+
+test('file-forge: a size limit on PNG shrinks the picture until it fits', 'file-forge.html', async (page) => {
+  await addNoisyPhoto(page);
+  await page.selectOption('#formatSelect', 'image/png');
+  await page.fill('#targetKb', '150');
+  const out = await downloadOf(page, () => page.click('#convertBtn'));
+  expect(magic(out.buf, 0x89, 0x50, 0x4e, 0x47), 'download is not a PNG');
+  expect(out.buf.length <= 150000, 'PNG should be at most 150,000 bytes, got ' + out.buf.length);
+  expect(out.buf.readUInt32BE(16) < 1600, 'PNG should be smaller than the 1600 px original, width ' + out.buf.readUInt32BE(16));
+});
+
 test('qr-forge: the downloaded QR code scans back to the text', 'qr-forge.html', async (page) => {
   await page.fill('#qrText', 'https://migabuilder.com/qr-test');
   await page.waitForTimeout(500);

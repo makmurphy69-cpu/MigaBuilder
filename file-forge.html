@@ -120,7 +120,7 @@
   }
   .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
 
-  select, input[type="range"] {
+  select, input[type="range"], input[type="number"] {
     width: 100%;
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 14px;
@@ -247,6 +247,12 @@
       </select>
       <p class="hint" data-i18n="resizeHint">Scales the longer side down to fit if the image is bigger — the shorter side follows to keep proportions. Never scales up.</p>
     </div>
+    <div class="field">
+      <label for="targetKb" data-i18n="targetLabel">Keep each file under (KB) — optional</label>
+      <input type="number" id="targetKb" min="5" max="50000" step="1" list="targetKbList" placeholder="No limit" data-i18n-placeholder="targetPlaceholder" inputmode="numeric">
+      <datalist id="targetKbList"><option value="20"></option><option value="50"></option><option value="100"></option><option value="200"></option><option value="500"></option><option value="1000"></option></datalist>
+      <p class="hint" data-i18n="targetHint">For forms that only take small photos (visa, exam and job sites often say 50 or 100 KB). Lowers the quality first, then the size, until each file fits.</p>
+    </div>
     <div class="field" style="margin-bottom:8px;">
       <label style="display:flex;align-items:center;gap:8px;font-weight:400;cursor:pointer;"><input type="checkbox" id="zipOutput" checked style="width:auto;"> <span data-i18n="zipCheckboxLabel">Bundle results into one .zip file</span></label>
       <p class="hint" data-i18n="zipHint">Off downloads each file separately instead — handy for just one or two images.</p>
@@ -286,6 +292,7 @@
   const qualitySlider = document.getElementById('qualitySlider');
   const qualityValue = document.getElementById('qualityValue');
   const maxDimensionSelect = document.getElementById('maxDimension');
+  const targetKbInput = document.getElementById('targetKb');
   const zipOutputCheckbox = document.getElementById('zipOutput');
   const convertBtn = document.getElementById('convertBtn');
   const errorBox = document.getElementById('errorBox');
@@ -365,6 +372,9 @@
 
   qualitySlider.addEventListener('input', () => { qualityValue.textContent = qualitySlider.value + '%'; scheduleEstimate(); });
   maxDimensionSelect.addEventListener('change', scheduleEstimate);
+  targetKbInput.addEventListener('input', scheduleEstimate);
+  // 1 KB is counted as 1000 bytes, so the file fits whichever way a form counts kilobytes.
+  function targetBytes() { const kb = parseFloat(targetKbInput.value); return kb >= 5 ? Math.floor(kb * 1000) : 0; }
 
   function extensionFor(mime) {
     if (mime === 'image/png') return 'png';
@@ -378,28 +388,68 @@
     return { width: Math.max(1, Math.round(width * scale)), height: Math.max(1, Math.round(height * scale)) };
   }
 
-  function convertOne(entry, mime, quality, maxDimension) {
+  function loadImage(entry) {
     return new Promise((resolve, reject) => {
       const img = new Image();
-      img.onload = () => {
-        const size = scaledDimensions(img.naturalWidth, img.naturalHeight, maxDimension);
-        const canvas = document.createElement('canvas');
-        canvas.width = size.width;
-        canvas.height = size.height;
-        const ctx = canvas.getContext('2d');
-        if (mime === 'image/jpeg') {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, canvas.width, canvas.height);
-        }
-        ctx.drawImage(img, 0, 0, size.width, size.height);
-        canvas.toBlob((blob) => {
-          if (!blob) { reject(new Error(I18N.t('errorConversionFailed').replace('{name}', entry.file.name))); return; }
-          resolve(blob);
-        }, mime, quality);
-      };
+      img.onload = () => resolve(img);
       img.onerror = () => reject(new Error(I18N.t('errorCouldNotRead').replace('{name}', entry.file.name)));
       img.src = entry.previewUrl;
     });
+  }
+
+  function encode(entry, img, mime, quality, width, height) {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (mime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob((blob) => {
+        if (!blob) { reject(new Error(I18N.t('errorConversionFailed').replace('{name}', entry.file.name))); return; }
+        resolve(blob);
+      }, mime, quality);
+    });
+  }
+
+  // With a size limit: lower the quality first (JPG and WebP), then shrink the picture, until it fits.
+  // The quality slider is the highest quality used. A file that cannot fit comes back as small as possible, marked overLimit.
+  async function convertOne(entry, mime, quality, maxDimension, limit) {
+    const img = await loadImage(entry);
+    const size = scaledDimensions(img.naturalWidth, img.naturalHeight, maxDimension);
+    let w = size.width, h = size.height;
+    let blob = await encode(entry, img, mime, quality, w, h);
+    if (!limit || blob.size <= limit) return blob;
+    const lossy = mime !== 'image/png';
+    const floor = Math.min(0.3, quality);
+    let best = blob;
+    for (let round = 0; round < 12; round++) {
+      if (lossy && quality > floor) {
+        const low = await encode(entry, img, mime, floor, w, h);
+        if (low.size <= limit) {
+          let lo = floor, hi = quality, fit = low;
+          for (let i = 0; i < 6; i++) {
+            const mid = (lo + hi) / 2;
+            const b = await encode(entry, img, mime, mid, w, h);
+            if (b.size <= limit) { fit = b; lo = mid; } else hi = mid;
+          }
+          return fit;
+        }
+        if (low.size < best.size) best = low;
+      }
+      if (Math.max(w, h) <= 32) break;
+      const factor = Math.max(0.5, Math.min(0.9, Math.sqrt(limit / best.size) * 0.95));
+      w = Math.max(1, Math.round(w * factor));
+      h = Math.max(1, Math.round(h * factor));
+      blob = await encode(entry, img, mime, quality, w, h);
+      if (blob.size <= limit) return blob;
+      if (blob.size < best.size) best = blob;
+    }
+    best.overLimit = true;
+    return best;
   }
 
   let estimateTimer = null;
@@ -414,10 +464,11 @@
     const mime = formatSelect.value;
     const quality = parseInt(qualitySlider.value, 10) / 100;
     const maxDimension = parseInt(maxDimensionSelect.value, 10) || 0;
+    const limit = targetBytes();
     for (const entry of files) {
       if (token !== estimateToken) return; // superseded by a newer change
       try {
-        const blob = await convertOne(entry, mime, quality, maxDimension);
+        const blob = await convertOne(entry, mime, quality, maxDimension, limit);
         if (token !== estimateToken) return;
         entry.estimatedSize = blob.size;
       } catch (e) {
@@ -455,6 +506,7 @@
     const mime = formatSelect.value;
     const quality = parseInt(qualitySlider.value, 10) / 100;
     const maxDimension = parseInt(maxDimensionSelect.value, 10) || 0;
+    const limit = targetBytes();
     const ext = extensionFor(mime);
     const useZip = zipOutputCheckbox.checked && typeof JSZip !== 'undefined';
 
@@ -466,7 +518,7 @@
       entry.status = I18N.t('statusConverting');
       renderFileList();
       try {
-        const blob = await convertOne(entry, mime, quality, maxDimension);
+        const blob = await convertOne(entry, mime, quality, maxDimension, limit);
         const baseName = entry.file.name.replace(/\.[^.]+$/, '');
         const filename = uniqueName(baseName, ext, usedNames);
         if (zip) {
@@ -474,7 +526,8 @@
         } else {
           downloadBlob(blob, filename);
         }
-        entry.status = I18N.t('statusDone');
+        entry.estimatedSize = blob.size;
+        entry.status = blob.overLimit ? I18N.t('statusOverLimit').replace('{size}', formatBytes(blob.size)) : I18N.t('statusDone');
       } catch (err) {
         entry.status = I18N.t('statusFailed');
         failCount++;
@@ -500,6 +553,7 @@
   I18N.onChange(renderFileList);
   I18N.init({
     en: {
+      targetLabel: 'Keep each file under (KB) — optional', targetPlaceholder: 'No limit', targetHint: 'For forms that only take small photos (visa, exam and job sites often say 50 or 100 KB). Lowers the quality first, then the size, until each file fits.', statusOverLimit: '⚠ Smallest possible: {size}',
       heroSubtitle: 'Convert images between PNG, JPG, and WebP — entirely in your browser.',
       yourImagesHeading: 'Your images', uploadDropStrong: 'Click to choose files, or drag them here',
       uploadDropSub: 'PNG, JPG, WebP, GIF, or BMP — as many as you like',
@@ -517,6 +571,7 @@
       footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your images never leave your device — everything happens locally in the browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
     },
     es: {
+      targetLabel: 'Mantener cada archivo por debajo de (KB) — opcional', targetPlaceholder: 'Sin límite', targetHint: 'Para formularios que solo aceptan fotos pequeñas (las webs de visados, exámenes y empleo suelen pedir 50 o 100 KB). Baja primero la calidad y después el tamaño hasta que cada archivo cabe.', statusOverLimit: '⚠ Lo más pequeño posible: {size}',
       heroSubtitle: 'Convierte imágenes entre PNG, JPG y WebP — completamente en tu navegador.',
       yourImagesHeading: 'Tus imágenes', uploadDropStrong: 'Haz clic para elegir archivos, o arrástralos aquí',
       uploadDropSub: 'PNG, JPG, WebP, GIF o BMP — tantos como quieras',
@@ -534,6 +589,7 @@
       footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tus imágenes nunca salen de tu dispositivo — todo ocurre localmente en el navegador. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
     },
     ar: {
+      targetLabel: 'إبقاء كل ملف أقل من (كيلوبايت) — اختياري', targetPlaceholder: 'بلا حد', targetHint: 'للنماذج التي لا تقبل إلا صورًا صغيرة (مواقع التأشيرات والامتحانات والوظائف تطلب غالبًا 50 أو 100 كيلوبايت). تُخفَّض الجودة أولًا ثم الأبعاد حتى يناسب كل ملف الحد.', statusOverLimit: '⚠ أصغر حجم ممكن: {size}',
       heroSubtitle: 'حوّل الصور بين PNG وJPG وWebP — بالكامل داخل متصفحك.',
       yourImagesHeading: 'صورك', uploadDropStrong: 'انقر لاختيار الملفات، أو اسحبها هنا',
       uploadDropSub: 'PNG أو JPG أو WebP أو GIF أو BMP — بقدر ما تريد',
@@ -551,6 +607,7 @@
       footerText: 'جزء من <a href="index.html">MigaBuilder</a>. صورك لا تغادر جهازك أبدًا — كل شيء يحدث محليًا في المتصفح. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
     },
     zh: {
+      targetLabel: '每个文件不超过（KB）——可选', targetPlaceholder: '不限制', targetHint: '适用于只接受小照片的表格（签证、考试和求职网站常要求 50 或 100 KB）。先降低画质，再缩小尺寸，直到每个文件都符合要求。', statusOverLimit: '⚠ 已尽量缩小：{size}',
       heroSubtitle: '在 PNG、JPG 和 WebP 之间转换图片——完全在你的浏览器中完成。',
       yourImagesHeading: '你的图片', uploadDropStrong: '点击选择文件，或将文件拖到此处',
       uploadDropSub: 'PNG、JPG、WebP、GIF 或 BMP——数量不限',
@@ -568,6 +625,7 @@
       footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的图片绝不会离开你的设备——一切都在浏览器本地完成。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
     },
     sw: {
+      targetLabel: 'Weka kila faili chini ya (KB) — hiari', targetPlaceholder: 'Bila kikomo', targetHint: 'Kwa fomu zinazokubali picha ndogo tu (tovuti za viza, mitihani na kazi mara nyingi husema KB 50 au 100). Hupunguza ubora kwanza, kisha ukubwa, hadi kila faili litoshee.', statusOverLimit: '⚠ Ndogo kabisa iwezekanavyo: {size}',
       heroSubtitle: 'Geuza picha kati ya PNG, JPG, na WebP — yote ndani ya kivinjari chako.',
       yourImagesHeading: 'Picha zako', uploadDropStrong: 'Bofya kuchagua faili, au ziburute hapa',
       uploadDropSub: 'PNG, JPG, WebP, GIF, au BMP — nyingi kadri unavyotaka',
@@ -585,6 +643,7 @@
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Picha zako haziondoki kwenye kifaa chako kamwe — kila kitu hufanyika ndani ya kivinjari. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
     },
     sv: {
+      targetLabel: "Håll varje fil under (KB) — valfritt", targetPlaceholder: "Ingen gräns", targetHint: "För formulär som bara tar små foton (visum-, prov- och jobbsajter skriver ofta 50 eller 100 KB). Sänker först kvaliteten och sedan storleken tills varje fil får plats.", statusOverLimit: "⚠ Minsta möjliga: {size}",
       heroSubtitle: "Konvertera bilder mellan PNG, JPG och WebP — helt i din webbläsare.",
       yourImagesHeading: "Dina bilder",
       uploadDropStrong: "Klicka för att välja filer, eller dra hit dem",
