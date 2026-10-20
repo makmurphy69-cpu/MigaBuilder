@@ -1,41 +1,41 @@
 /* repurpose-forge.html — translations of this page's text, matched by the English original (see i18n.js). */
 I18N.phrases({
-  "Transform one idea into a complete publishing pack—locally.": { es: "Convierte una idea en un paquete de publicación completo, en tu dispositivo.", ar: "حوّل فكرة واحدة إلى حزمة نشر كاملة — محليًا.", zh: "把一个想法变成完整的发布素材包——在本地完成。", sw: "Geuza wazo moja kuwa kifurushi kamili cha uchapishaji — ndani ya kifaa.", sv: "Gör om en idé till ett komplett publiceringspaket — lokalt." },
-  "Cubism": { es: "Cubismo", ar: "التكعيبية", zh: "立体主义", sw: "Ukubism", sv: "Kubism" },
-  "A Spanish artist who co-founded Cubism with Braque, breaking subjects into flat, angular planes seen from several viewpoints at once.": { es: "Artista español que fundó el cubismo con Braque, descomponiendo los temas en planos planos y angulosos vistos desde varios puntos a la vez.", ar: "فنان إسباني أسّس التكعيبية مع براك، فقسّم موضوعاته إلى مستويات مسطحة حادة الزوايا تُرى من عدة زوايا في آن واحد.", zh: "西班牙艺术家，与布拉克共同创立立体主义，把对象分解为同时从多个视角看到的平面棱角块面。", sw: "Msanii wa Kihispania aliyeanzisha Ukubism pamoja na Braque, akivunja vitu kuwa sehemu bapa zenye pembe zinazoonekana kutoka pande kadhaa kwa wakati mmoja.", sv: "En spansk konstnär som grundade kubismen med Braque och delade upp motiv i platta, kantiga plan sedda från flera håll samtidigt." },
-  "Overlapping angular planes of colour, with a face shown from more than one side, are Cubist. In front stands an original fox drawn in the same colours, holding a pair of scissors that fits this tool.": { es: "Planos angulosos de color superpuestos y un rostro visto desde más de un lado son cubistas. Delante hay un zorro original dibujado con los mismos colores, sosteniendo unas tijeras que encajan con esta herramienta.", ar: "مستويات لونية متداخلة حادة الزوايا، مع وجه يُرى من أكثر من جانب، أسلوب تكعيبي. وأمامها ثعلب أصلي مرسوم بالألوان نفسها يحمل مقصًا يناسب هذه الأداة.", zh: "重叠的棱角色块，以及从多个侧面呈现的面孔，都是立体主义的特征。前面是一只用同样颜色绘制的原创狐狸，拿着一把与本工具相配的剪刀。", sw: "Sehemu za rangi zenye pembe zinazopishana, na uso unaoonyeshwa kutoka upande zaidi ya mmoja, ni Ukubism. Mbele kuna mbweha asilia aliyechorwa kwa rangi zilezile, akishika mkasi unaofaa zana hii.", sv: "Överlappande kantiga färgplan och ett ansikte som visas från mer än en sida är kubism. Framför står en egen räv i samma färger som håller en sax som passar verktyget." },
-  "🔒 Your source text never leaves this browser. This tool uses structured local templates, not a remote AI service.": { es: "🔒 Tu texto original nunca sale de este navegador. Esta herramienta usa plantillas locales estructuradas, no un servicio de IA remoto.", ar: "🔒 لا يغادر نصك الأصلي هذا المتصفح أبدًا. تستخدم هذه الأداة قوالب محلية منظمة، لا خدمة ذكاء اصطناعي بعيدة.", zh: "🔒 你的原始文字绝不会离开此浏览器。本工具使用本地结构化模板，而非远程 AI 服务。", sw: "🔒 Maandishi yako asili hayatoki kamwe kwenye kivinjari hiki. Zana hii inatumia violezo vya ndani vilivyopangwa, si huduma ya AI ya mbali.", sv: "🔒 Din källtext lämnar aldrig den här webbläsaren. Verktyget använder strukturerade lokala mallar, inte en AI-tjänst på distans." },
-  "Original content or idea": { es: "Contenido o idea original", ar: "المحتوى أو الفكرة الأصلية", zh: "原始内容或想法", sw: "Maudhui au wazo asili", sv: "Ursprungligt innehåll eller idé" },
-  "Or import a .txt or .md file (up to 1 MB; read locally)": { es: "O importa un archivo .txt o .md (hasta 1 MB; se lee localmente)", ar: "أو استورد ملف .txt أو .md (حتى 1 ميغابايت؛ يُقرأ محليًا)", zh: "或导入 .txt 或 .md 文件（最大 1 MB，本地读取）", sw: "Au leta faili ya .txt au .md (hadi MB 1; inasomwa ndani ya kifaa)", sv: "Eller importera en .txt- eller .md-fil (upp till 1 MB; läses lokalt)" },
-  "Audience": { es: "Público", ar: "الجمهور", zh: "受众", sw: "Hadhira", sv: "Målgrupp" },
-  "Call to action": { es: "Llamada a la acción", ar: "دعوة إلى اتخاذ إجراء", zh: "行动号召", sw: "Wito wa kuchukua hatua", sv: "Uppmaning" },
-  "Create publishing pack": { es: "Crear paquete de publicación", ar: "إنشاء حزمة النشر", zh: "生成发布素材包", sw: "Tengeneza kifurushi cha uchapishaji", sv: "Skapa publiceringspaket" },
-  "Publishing pack": { es: "Paquete de publicación", ar: "حزمة النشر", zh: "发布素材包", sw: "Kifurushi cha uchapishaji", sv: "Publiceringspaket" },
-  "Watch how Repurpose Forge works — with voice": { es: "Mira cómo funciona Repurpose Forge, con voz", ar: "شاهد كيف يعمل Repurpose Forge — مع صوت", zh: "观看 Repurpose Forge 的使用方法（带语音）", sw: "Tazama jinsi Repurpose Forge inavyofanya kazi — kwa sauti", sv: "Se hur Repurpose Forge fungerar — med röst" },
-  "Welcome to Repurpose Forge. It turns one piece of content into posts for every channel.": { es: "Bienvenido a Repurpose Forge. Convierte un contenido en publicaciones para cada canal.", ar: "مرحبًا بك في Repurpose Forge. يحوّل محتوى واحدًا إلى منشورات لكل قناة.", zh: "欢迎使用 Repurpose Forge。它能把一篇内容变成适合各个渠道的帖子。", sw: "Karibu Repurpose Forge. Inageuza maudhui moja kuwa machapisho kwa kila chaneli.", sv: "Välkommen till Repurpose Forge. Den gör om ett innehåll till inlägg för alla kanaler." },
-  "Paste your original content or idea.": { es: "Pega tu contenido o idea original.", ar: "الصق المحتوى أو الفكرة الأصلية.", zh: "粘贴你的原始内容或想法。", sw: "Bandika maudhui au wazo lako asili.", sv: "Klistra in ditt ursprungliga innehåll eller din idé." },
-  "Say who it is for and what you want people to do.": { es: "Indica a quién va dirigido y qué quieres que haga la gente.", ar: "حدد لمن هو وما تريد أن يفعله الناس.", zh: "说明面向谁，以及你希望大家做什么。", sw: "Sema ni kwa ajili ya nani na unataka watu wafanye nini.", sv: "Ange vem det är till och vad du vill att folk ska göra." },
-  "Press Create publishing pack.": { es: "Pulsa Crear paquete de publicación.", ar: "اضغط إنشاء حزمة النشر.", zh: "点击“生成发布素材包”。", sw: "Bonyeza Tengeneza kifurushi cha uchapishaji.", sv: "Tryck på Skapa publiceringspaket." },
-  "You get versions for social media, email and more. Personalise them, then copy the ones you need.": { es: "Obtienes versiones para redes sociales, correo y más. Personalízalas y copia las que necesites.", ar: "تحصل على نسخ لوسائل التواصل والبريد وغيرها. خصّصها، ثم انسخ ما تحتاجه.", zh: "你将获得适用于社交媒体、邮件等的版本。个性化调整后复制需要的部分。", sw: "Unapata matoleo ya mitandao ya kijamii, barua pepe na zaidi. Yabinafsishe, kisha nakili unayohitaji.", sv: "Du får versioner för sociala medier, e-post och mer. Anpassa dem och kopiera sedan de du behöver." },
-  "Now it is your turn. Open Repurpose Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for.": { es: "Ahora te toca a ti. Abre Repurpose Forge en MigaBuilder y pruébalo. Es gratis y no hace falta registrarse.", ar: "الآن جاء دورك. افتح Repurpose Forge على MigaBuilder وجرّبه بنفسك. إنه مجاني ولا يحتاج إلى تسجيل.", zh: "现在轮到你了。在 MigaBuilder 上打开 Repurpose Forge 亲自试试。它是免费的，无需注册。", sw: "Sasa ni zamu yako. Fungua Repurpose Forge kwenye MigaBuilder ujaribu mwenyewe. Ni bure, na hakuna haja ya kujisajili.", sv: "Nu är det din tur. Öppna Repurpose Forge på MigaBuilder och prova själv. Det är gratis och du behöver inte registrera dig." },
-  "Welcome to Repurpose Forge. This walkthrough uses the real tool controls on this page.": { es: "Bienvenido a Repurpose Forge. Este recorrido usa los controles reales de la herramienta en esta página.", ar: "مرحبًا بك في Repurpose Forge. تستخدم هذه الجولة عناصر التحكم الحقيقية للأداة على هذه الصفحة.", zh: "欢迎使用 Repurpose Forge。本演示使用本页上真实的工具控件。", sw: "Karibu Repurpose Forge. Mwongozo huu unatumia vidhibiti halisi vya zana kwenye ukurasa huu.", sv: "Välkommen till Repurpose Forge. Genomgången använder verktygets riktiga kontroller på den här sidan." },
-  ". Review and personalise generated drafts before publishing.": { es: ". Revisa y personaliza los borradores generados antes de publicarlos.", ar: ". راجع المسودات المُنشأة وخصّصها قبل النشر.", zh: "。发布前请检查并个性化生成的草稿。", sw: ". Kagua na ubinafsishe rasimu zilizotengenezwa kabla ya kuchapisha.", sv: ". Granska och anpassa de genererade utkasten innan du publicerar." },
-  "Art in the style of Pablo Picasso – click for more": { es: "Arte al estilo de Pablo Picasso: haz clic para saber más", ar: "رسم بأسلوب بابلو بيكاسو – انقر لمعرفة المزيد", zh: "巴勃罗·毕加索风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa Pablo Picasso – bofya kujua zaidi", sv: "Konst i Pablo Picassos stil – klicka för mer" },
-  "Paste an article, product description, lesson, announcement, or rough idea.": { es: "Pega un artículo, una descripción de producto, una lección, un anuncio o una idea en borrador.", ar: "الصق مقالًا أو وصف منتج أو درسًا أو إعلانًا أو فكرة أولية.", zh: "粘贴文章、产品描述、课程、公告或初步想法。", sw: "Bandika makala, maelezo ya bidhaa, somo, tangazo au wazo la awali.", sv: "Klistra in en artikel, produktbeskrivning, lektion, ett meddelande eller en grov idé." },
-  "Small-business owners": { es: "Propietarios de pequeñas empresas", ar: "أصحاب المشاريع الصغيرة", zh: "小企业主", sw: "Wamiliki wa biashara ndogo", sv: "Småföretagare" },
-  "Try the free tool": { es: "Prueba la herramienta gratis", ar: "جرّب الأداة المجانية", zh: "试用免费工具", sw: "Jaribu zana ya bure", sv: "Prova det kostnadsfria verktyget" },
-  "How to use Repurpose Forge": { es: "Cómo usar Repurpose Forge", ar: "كيفية استخدام Repurpose Forge", zh: "如何使用 Repurpose Forge", sw: "Jinsi ya kutumia Repurpose Forge", sv: "Så använder du Repurpose Forge" },
-  "Turn one idea into many formats — Repurpose Forge | MigaBuilder": { es: "Convierte una idea en muchos formatos — Repurpose Forge | MigaBuilder", ar: "حوّل فكرة واحدة إلى صيغ كثيرة — Repurpose Forge | MigaBuilder", zh: "把一个想法变成多种格式 — Repurpose Forge | MigaBuilder", sw: "Geuza wazo moja kuwa miundo mingi — Repurpose Forge | MigaBuilder", sv: "Gör om en idé till många format — Repurpose Forge | MigaBuilder" },
-  "LinkedIn post": { es: "Publicación de LinkedIn", ar: "منشور LinkedIn", zh: "LinkedIn 帖子", sw: "Chapisho la LinkedIn", sv: "LinkedIn-inlägg" },
-  "Short social post": { es: "Publicación corta para redes", ar: "منشور قصير لوسائل التواصل", zh: "社交短帖", sw: "Chapisho fupi la mitandao", sv: "Kort inlägg för sociala medier" },
-  "Newsletter introduction": { es: "Introducción de newsletter", ar: "مقدمة النشرة البريدية", zh: "邮件简报开头", sw: "Utangulizi wa jarida", sv: "Nyhetsbrevsinledning" },
-  "YouTube description": { es: "Descripción de YouTube", ar: "وصف YouTube", zh: "YouTube 描述", sw: "Maelezo ya YouTube", sv: "YouTube-beskrivning" },
-  "Blog outline": { es: "Esquema de blog", ar: "مخطط مدونة", zh: "博客大纲", sw: "Muhtasari wa blogu", sv: "Bloggdisposition" },
-  "Advertisement": { es: "Anuncio", ar: "إعلان", zh: "广告", sw: "Tangazo", sv: "Annons" },
-  "Learn more": { es: "Más información", ar: "اعرف المزيد", zh: "了解更多", sw: "Jifunze zaidi", sv: "Läs mer" },
-  "Choose a text file smaller than 1 MB.": { es: "Elige un archivo de texto de menos de 1 MB.", ar: "اختر ملفًا نصيًا أصغر من 1 ميغابايت.", zh: "请选择小于 1 MB 的文本文件。", sw: "Chagua faili ya maandishi iliyo ndogo kuliko MB 1.", sv: "Välj en textfil som är mindre än 1 MB." },
-  "Choose a .txt or .md file.": { es: "Elige un archivo .txt o .md.", ar: "اختر ملف .txt أو .md.", zh: "请选择 .txt 或 .md 文件。", sw: "Chagua faili ya .txt au .md.", sv: "Välj en .txt- eller .md-fil." },
-  "Could not read that file.": { es: "No se pudo leer ese archivo.", ar: "تعذّرت قراءة هذا الملف.", zh: "无法读取该文件。", sw: "Faili hiyo haikuweza kusomwa.", sv: "Filen kunde inte läsas." }
+  "Transform one idea into a complete publishing pack—locally.": { es: "Convierte una idea en un paquete de publicación completo, en tu dispositivo.", ar: "حوّل فكرة واحدة إلى حزمة نشر كاملة — محليًا.", zh: "把一个想法变成完整的发布素材包——在本地完成。", sw: "Geuza wazo moja kuwa kifurushi kamili cha uchapishaji — ndani ya kifaa.", sv: "Gör om en idé till ett komplett publiceringspaket — lokalt.", de: "Verwandle eine Idee in ein komplettes Veröffentlichungspaket — lokal.", pt: "Transforme uma ideia num pacote de publicação completo — localmente.", fr: "Transformez une idée en pack de publication complet — en local." },
+  "Cubism": { es: "Cubismo", ar: "التكعيبية", zh: "立体主义", sw: "Ukubism", sv: "Kubism", de: "Kubismus", pt: "Cubismo", fr: "Cubisme" },
+  "A Spanish artist who co-founded Cubism with Braque, breaking subjects into flat, angular planes seen from several viewpoints at once.": { es: "Artista español que fundó el cubismo con Braque, descomponiendo los temas en planos planos y angulosos vistos desde varios puntos a la vez.", ar: "فنان إسباني أسّس التكعيبية مع براك، فقسّم موضوعاته إلى مستويات مسطحة حادة الزوايا تُرى من عدة زوايا في آن واحد.", zh: "西班牙艺术家，与布拉克共同创立立体主义，把对象分解为同时从多个视角看到的平面棱角块面。", sw: "Msanii wa Kihispania aliyeanzisha Ukubism pamoja na Braque, akivunja vitu kuwa sehemu bapa zenye pembe zinazoonekana kutoka pande kadhaa kwa wakati mmoja.", sv: "En spansk konstnär som grundade kubismen med Braque och delade upp motiv i platta, kantiga plan sedda från flera håll samtidigt.", de: "Ein spanischer Künstler, der mit Braque den Kubismus begründete und Motive in flache, kantige Flächen zerlegte, aus mehreren Blickwinkeln zugleich gesehen.", pt: "Um artista espanhol que fundou o cubismo com Braque, quebrando os temas em planos chatos e angulosos vistos de vários pontos ao mesmo tempo.", fr: "Un artiste espagnol qui a cofondé le cubisme avec Braque, décomposant les sujets en plans plats et anguleux vus de plusieurs points de vue à la fois." },
+  "Overlapping angular planes of colour, with a face shown from more than one side, are Cubist. In front stands an original fox drawn in the same colours, holding a pair of scissors that fits this tool.": { es: "Planos angulosos de color superpuestos y un rostro visto desde más de un lado son cubistas. Delante hay un zorro original dibujado con los mismos colores, sosteniendo unas tijeras que encajan con esta herramienta.", ar: "مستويات لونية متداخلة حادة الزوايا، مع وجه يُرى من أكثر من جانب، أسلوب تكعيبي. وأمامها ثعلب أصلي مرسوم بالألوان نفسها يحمل مقصًا يناسب هذه الأداة.", zh: "重叠的棱角色块，以及从多个侧面呈现的面孔，都是立体主义的特征。前面是一只用同样颜色绘制的原创狐狸，拿着一把与本工具相配的剪刀。", sw: "Sehemu za rangi zenye pembe zinazopishana, na uso unaoonyeshwa kutoka upande zaidi ya mmoja, ni Ukubism. Mbele kuna mbweha asilia aliyechorwa kwa rangi zilezile, akishika mkasi unaofaa zana hii.", sv: "Överlappande kantiga färgplan och ett ansikte som visas från mer än en sida är kubism. Framför står en egen räv i samma färger som håller en sax som passar verktyget.", de: "Sich überlappende kantige Farbflächen mit einem Gesicht, das von mehr als einer Seite gezeigt wird, sind kubistisch. Davor steht ein eigener Fuchs in denselben Farben, der eine Schere hält, die zu diesem Werkzeug passt.", pt: "Planos angulosos de cor sobrepostos, com um rosto mostrado de mais de um lado, são cubistas. Na frente está uma raposa original desenhada nas mesmas cores, segurando uma tesoura que combina com esta ferramenta.", fr: "Des plans de couleur anguleux qui se chevauchent, avec un visage montré sous plusieurs angles, sont cubistes. Devant se tient un renard original dessiné dans les mêmes couleurs, tenant une paire de ciseaux qui convient à cet outil." },
+  "🔒 Your source text never leaves this browser. This tool uses structured local templates, not a remote AI service.": { es: "🔒 Tu texto original nunca sale de este navegador. Esta herramienta usa plantillas locales estructuradas, no un servicio de IA remoto.", ar: "🔒 لا يغادر نصك الأصلي هذا المتصفح أبدًا. تستخدم هذه الأداة قوالب محلية منظمة، لا خدمة ذكاء اصطناعي بعيدة.", zh: "🔒 你的原始文字绝不会离开此浏览器。本工具使用本地结构化模板，而非远程 AI 服务。", sw: "🔒 Maandishi yako asili hayatoki kamwe kwenye kivinjari hiki. Zana hii inatumia violezo vya ndani vilivyopangwa, si huduma ya AI ya mbali.", sv: "🔒 Din källtext lämnar aldrig den här webbläsaren. Verktyget använder strukturerade lokala mallar, inte en AI-tjänst på distans.", de: "🔒 Dein Ausgangstext verlässt nie diesen Browser. Dieses Werkzeug nutzt strukturierte lokale Vorlagen, keinen entfernten KI-Dienst.", pt: "🔒 Seu texto original nunca sai deste navegador. Esta ferramenta usa modelos locais estruturados, não um serviço de IA remoto.", fr: "🔒 Votre texte source ne quitte jamais ce navigateur. Cet outil utilise des modèles locaux structurés, pas un service d'IA distant." },
+  "Original content or idea": { es: "Contenido o idea original", ar: "المحتوى أو الفكرة الأصلية", zh: "原始内容或想法", sw: "Maudhui au wazo asili", sv: "Ursprungligt innehåll eller idé", de: "Ursprünglicher Inhalt oder Idee", pt: "Conteúdo original ou ideia", fr: "Contenu d'origine ou idée" },
+  "Or import a .txt or .md file (up to 1 MB; read locally)": { es: "O importa un archivo .txt o .md (hasta 1 MB; se lee localmente)", ar: "أو استورد ملف .txt أو .md (حتى 1 ميغابايت؛ يُقرأ محليًا)", zh: "或导入 .txt 或 .md 文件（最大 1 MB，本地读取）", sw: "Au leta faili ya .txt au .md (hadi MB 1; inasomwa ndani ya kifaa)", sv: "Eller importera en .txt- eller .md-fil (upp till 1 MB; läses lokalt)", de: "Oder importiere eine .txt- oder .md-Datei (bis 1 MB; lokal gelesen)", pt: "Ou importe um arquivo .txt ou .md (até 1 MB; lido localmente)", fr: "Ou importez un fichier .txt ou .md (jusqu'à 1 Mo ; lu localement)" },
+  "Audience": { es: "Público", ar: "الجمهور", zh: "受众", sw: "Hadhira", sv: "Målgrupp", de: "Zielgruppe", pt: "Público", fr: "Public" },
+  "Call to action": { es: "Llamada a la acción", ar: "دعوة إلى اتخاذ إجراء", zh: "行动号召", sw: "Wito wa kuchukua hatua", sv: "Uppmaning", de: "Handlungsaufforderung", pt: "Chamada para ação", fr: "Appel à l'action" },
+  "Create publishing pack": { es: "Crear paquete de publicación", ar: "إنشاء حزمة النشر", zh: "生成发布素材包", sw: "Tengeneza kifurushi cha uchapishaji", sv: "Skapa publiceringspaket", de: "Veröffentlichungspaket erstellen", pt: "Criar pacote de publicação", fr: "Créer le pack de publication" },
+  "Publishing pack": { es: "Paquete de publicación", ar: "حزمة النشر", zh: "发布素材包", sw: "Kifurushi cha uchapishaji", sv: "Publiceringspaket", de: "Veröffentlichungspaket", pt: "Pacote de publicação", fr: "Pack de publication" },
+  "Watch how Repurpose Forge works — with voice": { es: "Mira cómo funciona Repurpose Forge, con voz", ar: "شاهد كيف يعمل Repurpose Forge — مع صوت", zh: "观看 Repurpose Forge 的使用方法（带语音）", sw: "Tazama jinsi Repurpose Forge inavyofanya kazi — kwa sauti", sv: "Se hur Repurpose Forge fungerar — med röst", de: "Sieh dir an, wie Repurpose Forge funktioniert — mit Stimme", pt: "Veja como o Repurpose Forge funciona — com voz", fr: "Découvrez comment fonctionne Repurpose Forge — avec voix" },
+  "Welcome to Repurpose Forge. It turns one piece of content into posts for every channel.": { es: "Bienvenido a Repurpose Forge. Convierte un contenido en publicaciones para cada canal.", ar: "مرحبًا بك في Repurpose Forge. يحوّل محتوى واحدًا إلى منشورات لكل قناة.", zh: "欢迎使用 Repurpose Forge。它能把一篇内容变成适合各个渠道的帖子。", sw: "Karibu Repurpose Forge. Inageuza maudhui moja kuwa machapisho kwa kila chaneli.", sv: "Välkommen till Repurpose Forge. Den gör om ett innehåll till inlägg för alla kanaler.", de: "Willkommen bei Repurpose Forge. Es macht aus einem Inhalt Beiträge für jeden Kanal.", pt: "Bem-vindo ao Repurpose Forge. Ele transforma um conteúdo em posts para todos os canais.", fr: "Bienvenue dans Repurpose Forge. Il transforme un contenu en publications pour chaque canal." },
+  "Paste your original content or idea.": { es: "Pega tu contenido o idea original.", ar: "الصق المحتوى أو الفكرة الأصلية.", zh: "粘贴你的原始内容或想法。", sw: "Bandika maudhui au wazo lako asili.", sv: "Klistra in ditt ursprungliga innehåll eller din idé.", de: "Füge deinen ursprünglichen Inhalt oder deine Idee ein.", pt: "Cole seu conteúdo original ou ideia.", fr: "Collez votre contenu d'origine ou votre idée." },
+  "Say who it is for and what you want people to do.": { es: "Indica a quién va dirigido y qué quieres que haga la gente.", ar: "حدد لمن هو وما تريد أن يفعله الناس.", zh: "说明面向谁，以及你希望大家做什么。", sw: "Sema ni kwa ajili ya nani na unataka watu wafanye nini.", sv: "Ange vem det är till och vad du vill att folk ska göra.", de: "Sag, für wen er ist und was die Leute tun sollen.", pt: "Diga para quem é e o que você quer que as pessoas façam.", fr: "Dites à qui il s'adresse et ce que vous voulez que les gens fassent." },
+  "Press Create publishing pack.": { es: "Pulsa Crear paquete de publicación.", ar: "اضغط إنشاء حزمة النشر.", zh: "点击“生成发布素材包”。", sw: "Bonyeza Tengeneza kifurushi cha uchapishaji.", sv: "Tryck på Skapa publiceringspaket.", de: "Drück auf Veröffentlichungspaket erstellen.", pt: "Aperte Criar pacote de publicação.", fr: "Appuyez sur Créer le pack de publication." },
+  "You get versions for social media, email and more. Personalise them, then copy the ones you need.": { es: "Obtienes versiones para redes sociales, correo y más. Personalízalas y copia las que necesites.", ar: "تحصل على نسخ لوسائل التواصل والبريد وغيرها. خصّصها، ثم انسخ ما تحتاجه.", zh: "你将获得适用于社交媒体、邮件等的版本。个性化调整后复制需要的部分。", sw: "Unapata matoleo ya mitandao ya kijamii, barua pepe na zaidi. Yabinafsishe, kisha nakili unayohitaji.", sv: "Du får versioner för sociala medier, e-post och mer. Anpassa dem och kopiera sedan de du behöver.", de: "Du bekommst Versionen für soziale Medien, E-Mail und mehr. Pass sie an und kopiere dann die, die du brauchst.", pt: "Você recebe versões para redes sociais, e-mail e mais. Personalize e copie as que precisar.", fr: "Vous obtenez des versions pour les réseaux sociaux, l'e-mail et plus. Personnalisez-les, puis copiez celles dont vous avez besoin." },
+  "Now it is your turn. Open Repurpose Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for.": { es: "Ahora te toca a ti. Abre Repurpose Forge en MigaBuilder y pruébalo. Es gratis y no hace falta registrarse.", ar: "الآن جاء دورك. افتح Repurpose Forge على MigaBuilder وجرّبه بنفسك. إنه مجاني ولا يحتاج إلى تسجيل.", zh: "现在轮到你了。在 MigaBuilder 上打开 Repurpose Forge 亲自试试。它是免费的，无需注册。", sw: "Sasa ni zamu yako. Fungua Repurpose Forge kwenye MigaBuilder ujaribu mwenyewe. Ni bure, na hakuna haja ya kujisajili.", sv: "Nu är det din tur. Öppna Repurpose Forge på MigaBuilder och prova själv. Det är gratis och du behöver inte registrera dig.", de: "Jetzt bist du dran. Öffne Repurpose Forge auf MigaBuilder und probier es selbst. Es ist kostenlos, und du musst dich nirgends anmelden.", pt: "Agora é sua vez. Abra o Repurpose Forge no MigaBuilder e experimente. É grátis e não precisa de cadastro.", fr: "À vous maintenant. Ouvrez Repurpose Forge sur MigaBuilder et essayez vous-même. C'est gratuit, sans inscription." },
+  "Welcome to Repurpose Forge. This walkthrough uses the real tool controls on this page.": { es: "Bienvenido a Repurpose Forge. Este recorrido usa los controles reales de la herramienta en esta página.", ar: "مرحبًا بك في Repurpose Forge. تستخدم هذه الجولة عناصر التحكم الحقيقية للأداة على هذه الصفحة.", zh: "欢迎使用 Repurpose Forge。本演示使用本页上真实的工具控件。", sw: "Karibu Repurpose Forge. Mwongozo huu unatumia vidhibiti halisi vya zana kwenye ukurasa huu.", sv: "Välkommen till Repurpose Forge. Genomgången använder verktygets riktiga kontroller på den här sidan.", de: "Willkommen bei Repurpose Forge. Diese Anleitung nutzt die echten Bedienelemente auf dieser Seite.", pt: "Bem-vindo ao Repurpose Forge. Este passo a passo usa os controles reais desta página.", fr: "Bienvenue dans Repurpose Forge. Ce guide utilise les vraies commandes de cette page." },
+  ". Review and personalise generated drafts before publishing.": { es: ". Revisa y personaliza los borradores generados antes de publicarlos.", ar: ". راجع المسودات المُنشأة وخصّصها قبل النشر.", zh: "。发布前请检查并个性化生成的草稿。", sw: ". Kagua na ubinafsishe rasimu zilizotengenezwa kabla ya kuchapisha.", sv: ". Granska och anpassa de genererade utkasten innan du publicerar.", de: ". Prüfe und personalisiere erzeugte Entwürfe vor dem Veröffentlichen.", pt: ". Revise e personalize os rascunhos gerados antes de publicar.", fr: ". Relisez et personnalisez les brouillons générés avant de publier." },
+  "Art in the style of Pablo Picasso – click for more": { es: "Arte al estilo de Pablo Picasso: haz clic para saber más", ar: "رسم بأسلوب بابلو بيكاسو – انقر لمعرفة المزيد", zh: "巴勃罗·毕加索风格的插画——点击了解更多", sw: "Sanaa kwa mtindo wa Pablo Picasso – bofya kujua zaidi", sv: "Konst i Pablo Picassos stil – klicka för mer", de: "Kunst im Stil von Pablo Picasso – klicken für mehr", pt: "Arte no estilo de Pablo Picasso – clique para saber mais", fr: "Illustration dans le style de Pablo Picasso – cliquez pour en savoir plus" },
+  "Paste an article, product description, lesson, announcement, or rough idea.": { es: "Pega un artículo, una descripción de producto, una lección, un anuncio o una idea en borrador.", ar: "الصق مقالًا أو وصف منتج أو درسًا أو إعلانًا أو فكرة أولية.", zh: "粘贴文章、产品描述、课程、公告或初步想法。", sw: "Bandika makala, maelezo ya bidhaa, somo, tangazo au wazo la awali.", sv: "Klistra in en artikel, produktbeskrivning, lektion, ett meddelande eller en grov idé.", de: "Füge einen Artikel, eine Produktbeschreibung, eine Lektion, eine Ankündigung oder eine grobe Idee ein.", pt: "Cole um artigo, descrição de produto, aula, anúncio ou ideia solta.", fr: "Collez un article, une description de produit, une leçon, une annonce ou une idée brute." },
+  "Small-business owners": { es: "Propietarios de pequeñas empresas", ar: "أصحاب المشاريع الصغيرة", zh: "小企业主", sw: "Wamiliki wa biashara ndogo", sv: "Småföretagare", de: "Kleinunternehmer", pt: "Donos de pequenos negócios", fr: "Patrons de petites entreprises" },
+  "Try the free tool": { es: "Prueba la herramienta gratis", ar: "جرّب الأداة المجانية", zh: "试用免费工具", sw: "Jaribu zana ya bure", sv: "Prova det kostnadsfria verktyget", de: "Probier das kostenlose Werkzeug", pt: "Experimente a ferramenta grátis", fr: "Essayez l'outil gratuit" },
+  "How to use Repurpose Forge": { es: "Cómo usar Repurpose Forge", ar: "كيفية استخدام Repurpose Forge", zh: "如何使用 Repurpose Forge", sw: "Jinsi ya kutumia Repurpose Forge", sv: "Så använder du Repurpose Forge", de: "So nutzt du Repurpose Forge", pt: "Como usar o Repurpose Forge", fr: "Comment utiliser Repurpose Forge" },
+  "Turn one idea into many formats — Repurpose Forge | MigaBuilder": { es: "Convierte una idea en muchos formatos — Repurpose Forge | MigaBuilder", ar: "حوّل فكرة واحدة إلى صيغ كثيرة — Repurpose Forge | MigaBuilder", zh: "把一个想法变成多种格式 — Repurpose Forge | MigaBuilder", sw: "Geuza wazo moja kuwa miundo mingi — Repurpose Forge | MigaBuilder", sv: "Gör om en idé till många format — Repurpose Forge | MigaBuilder", de: "Eine Idee in viele Formate verwandeln — Repurpose Forge | MigaBuilder", pt: "Transforme uma ideia em vários formatos — Repurpose Forge | MigaBuilder", fr: "Transformer une idée en plusieurs formats — Repurpose Forge | MigaBuilder" },
+  "LinkedIn post": { es: "Publicación de LinkedIn", ar: "منشور LinkedIn", zh: "LinkedIn 帖子", sw: "Chapisho la LinkedIn", sv: "LinkedIn-inlägg", de: "LinkedIn-Beitrag", pt: "Post do LinkedIn", fr: "Publication LinkedIn" },
+  "Short social post": { es: "Publicación corta para redes", ar: "منشور قصير لوسائل التواصل", zh: "社交短帖", sw: "Chapisho fupi la mitandao", sv: "Kort inlägg för sociala medier", de: "Kurzer Social-Media-Beitrag", pt: "Post curto para redes sociais", fr: "Publication courte pour les réseaux" },
+  "Newsletter introduction": { es: "Introducción de newsletter", ar: "مقدمة النشرة البريدية", zh: "邮件简报开头", sw: "Utangulizi wa jarida", sv: "Nyhetsbrevsinledning", de: "Newsletter-Einleitung", pt: "Introdução de newsletter", fr: "Introduction de newsletter" },
+  "YouTube description": { es: "Descripción de YouTube", ar: "وصف YouTube", zh: "YouTube 描述", sw: "Maelezo ya YouTube", sv: "YouTube-beskrivning", de: "YouTube-Beschreibung", pt: "Descrição do YouTube", fr: "Description YouTube" },
+  "Blog outline": { es: "Esquema de blog", ar: "مخطط مدونة", zh: "博客大纲", sw: "Muhtasari wa blogu", sv: "Bloggdisposition", de: "Blog-Gliederung", pt: "Estrutura de blog", fr: "Plan d'article de blog" },
+  "Advertisement": { es: "Anuncio", ar: "إعلان", zh: "广告", sw: "Tangazo", sv: "Annons", de: "Werbeanzeige", pt: "Anúncio", fr: "Publicité" },
+  "Learn more": { es: "Más información", ar: "اعرف المزيد", zh: "了解更多", sw: "Jifunze zaidi", sv: "Läs mer", de: "Mehr erfahren", pt: "Saiba mais", fr: "En savoir plus" },
+  "Choose a text file smaller than 1 MB.": { es: "Elige un archivo de texto de menos de 1 MB.", ar: "اختر ملفًا نصيًا أصغر من 1 ميغابايت.", zh: "请选择小于 1 MB 的文本文件。", sw: "Chagua faili ya maandishi iliyo ndogo kuliko MB 1.", sv: "Välj en textfil som är mindre än 1 MB.", de: "Wähle eine Textdatei kleiner als 1 MB.", pt: "Escolha um arquivo de texto menor que 1 MB.", fr: "Choisissez un fichier texte de moins de 1 Mo." },
+  "Choose a .txt or .md file.": { es: "Elige un archivo .txt o .md.", ar: "اختر ملف .txt أو .md.", zh: "请选择 .txt 或 .md 文件。", sw: "Chagua faili ya .txt au .md.", sv: "Välj en .txt- eller .md-fil.", de: "Wähle eine .txt- oder .md-Datei.", pt: "Escolha um arquivo .txt ou .md.", fr: "Choisissez un fichier .txt ou .md." },
+  "Could not read that file.": { es: "No se pudo leer ese archivo.", ar: "تعذّرت قراءة هذا الملف.", zh: "无法读取该文件。", sw: "Faili hiyo haikuweza kusomwa.", sv: "Filen kunde inte läsas.", de: "Diese Datei konnte nicht gelesen werden.", pt: "Não foi possível ler esse arquivo.", fr: "Impossible de lire ce fichier." }
 });
 /* About section at the end of the page: what it does, how to use it and common questions. */
 I18N.phrases({
@@ -44,90 +44,129 @@ I18N.phrases({
   "ar": "يحوّل Repurpose Forge قطعة محتوى واحدة إلى منشورات اجتماعية ونشرة بريدية ونص فيديو ومخطط تدوينة وإعلان.",
   "zh": "Repurpose Forge 把一篇内容变成社交帖子、简报、视频脚本、博客提纲和广告。",
   "sw": "Repurpose Forge hugeuza maudhui moja kuwa machapisho ya mitandao ya kijamii, jarida, hati ya video, muhtasari wa blogu na tangazo.",
-  "sv": "Repurpose Forge gör ett innehåll till inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons."
+  "sv": "Repurpose Forge gör ett innehåll till inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons.",
+  "de": "Repurpose Forge macht aus einem Inhalt Social-Media-Beiträge, einen Newsletter, ein Videoskript, eine Blog-Gliederung und eine Werbeanzeige.",
+  "pt": "O Repurpose Forge transforma um conteúdo em posts para redes sociais, uma newsletter, um roteiro de vídeo, uma estrutura de blog e um anúncio.",
+  "fr": "Repurpose Forge transforme un contenu en publications sociales, une newsletter, un script vidéo, un plan de blog et une publicité."
  },
  "Paste one piece of content and describe its audience and call to action.": {
   "es": "Pega un contenido y describe su público y la llamada a la acción.",
   "ar": "الصق قطعة محتوى وصف جمهورها والدعوة إلى الإجراء.",
   "zh": "粘贴一篇内容，并描述其受众和行动号召。",
   "sw": "Bandika maudhui moja na ueleze hadhira yake na mwito wa kuchukua hatua.",
-  "sv": "Klistra in ett innehåll och beskriv dess målgrupp och uppmaning."
+  "sv": "Klistra in ett innehåll och beskriv dess målgrupp och uppmaning.",
+  "de": "Füge einen Inhalt ein und beschreibe Zielgruppe und Handlungsaufforderung.",
+  "pt": "Cole um conteúdo e descreva o público e a chamada para ação.",
+  "fr": "Collez un contenu et décrivez son public et son appel à l'action."
  },
  "Press “Create publishing pack”.": {
   "es": "Pulsa «Crear paquete de publicación».",
   "ar": "اضغط «إنشاء حزمة النشر».",
   "zh": "点击“生成发布素材包”。",
   "sw": "Bonyeza “Tengeneza kifurushi cha uchapishaji”.",
-  "sv": "Tryck på ”Skapa publiceringspaket”."
+  "sv": "Tryck på ”Skapa publiceringspaket”.",
+  "de": "Drück auf „Veröffentlichungspaket erstellen“.",
+  "pt": "Aperte “Criar pacote de publicação”.",
+  "fr": "Appuyez sur « Créer le pack de publication »."
  },
  "Review, personalise, and copy the formats you need.": {
   "es": "Revisa, personaliza y copia los formatos que necesites.",
   "ar": "راجع وخصّص وانسخ الصيغ التي تحتاجها.",
   "zh": "检查、个性化修改，然后复制你需要的格式。",
   "sw": "Pitia, binafsisha, na unakili miundo unayohitaji.",
-  "sv": "Granska, anpassa och kopiera de format du behöver."
+  "sv": "Granska, anpassa och kopiera de format du behöver.",
+  "de": "Prüfe, personalisiere und kopiere die Formate, die du brauchst.",
+  "pt": "Revise, personalize e copie os formatos de que precisa.",
+  "fr": "Relisez, personnalisez et copiez les formats dont vous avez besoin."
  },
  "What formats does it make?": {
   "es": "¿Qué formatos crea?",
   "ar": "ما الصيغ التي يصنعها؟",
   "zh": "它能生成哪些格式？",
   "sw": "Hutengeneza miundo gani?",
-  "sv": "Vilka format gör den?"
+  "sv": "Vilka format gör den?",
+  "de": "Welche Formate macht es?",
+  "pt": "Que formatos ele faz?",
+  "fr": "Quels formats crée-t-il ?"
  },
  "Social posts, a newsletter, a video script, a blog outline and an advertisement, all from the one text you paste.": {
   "es": "Publicaciones para redes, un boletín, un guion de vídeo, un esquema de blog y un anuncio, todo a partir del texto que pegas.",
   "ar": "منشورات اجتماعية ونشرة بريدية ونص فيديو ومخطط تدوينة وإعلان، كلها من النص الواحد الذي تلصقه.",
   "zh": "社交帖子、简报、视频脚本、博客提纲和广告，全部来自你粘贴的那一篇文字。",
   "sw": "Machapisho ya mitandao ya kijamii, jarida, hati ya video, muhtasari wa blogu na tangazo, vyote kutoka kwa maandishi moja unayobandika.",
-  "sv": "Inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons, allt från den text du klistrar in."
+  "sv": "Inlägg för sociala medier, ett nyhetsbrev, ett videomanus, en bloggdisposition och en annons, allt från den text du klistrar in.",
+  "de": "Social-Media-Beiträge, einen Newsletter, ein Videoskript, eine Blog-Gliederung und eine Werbeanzeige, alles aus dem einen Text, den du einfügst.",
+  "pt": "Posts para redes sociais, uma newsletter, um roteiro de vídeo, uma estrutura de blog e um anúncio, tudo a partir do único texto que você cola.",
+  "fr": "Des publications sociales, une newsletter, un script vidéo, un plan de blog et une publicité, le tout à partir du seul texte collé."
  },
  "About Repurpose Forge": {
   "es": "Acerca de Repurpose Forge",
   "ar": "عن Repurpose Forge",
   "zh": "关于 Repurpose Forge",
   "sw": "Kuhusu Repurpose Forge",
-  "sv": "Om Repurpose Forge"
+  "sv": "Om Repurpose Forge",
+  "de": "Über Repurpose Forge",
+  "pt": "Sobre o Repurpose Forge",
+  "fr": "À propos de Repurpose Forge"
  },
  "How to use Repurpose Forge": {
   "es": "Cómo usar Repurpose Forge",
   "ar": "طريقة استخدام Repurpose Forge",
   "zh": "如何使用 Repurpose Forge",
   "sw": "Jinsi ya kutumia Repurpose Forge",
-  "sv": "Så använder du Repurpose Forge"
+  "sv": "Så använder du Repurpose Forge",
+  "de": "So nutzt du Repurpose Forge",
+  "pt": "Como usar o Repurpose Forge",
+  "fr": "Comment utiliser Repurpose Forge"
  },
  "Is Repurpose Forge free?": {
   "es": "¿Repurpose Forge es gratis?",
   "ar": "هل Repurpose Forge مجاني؟",
   "zh": "Repurpose Forge 免费吗？",
   "sw": "Je, Repurpose Forge ni bure?",
-  "sv": "Är Repurpose Forge gratis?"
+  "sv": "Är Repurpose Forge gratis?",
+  "de": "Ist Repurpose Forge kostenlos?",
+  "pt": "O Repurpose Forge é grátis?",
+  "fr": "Repurpose Forge est-il gratuit ?"
  },
  "Are my files uploaded?": {
   "es": "¿Se suben mis archivos?",
   "ar": "هل تُرفع ملفاتي؟",
   "zh": "我的文件会被上传吗？",
   "sw": "Je, faili zangu zinapakiwa?",
-  "sv": "Laddas mina filer upp?"
+  "sv": "Laddas mina filer upp?",
+  "de": "Werden meine Dateien hochgeladen?",
+  "pt": "Meus arquivos são enviados?",
+  "fr": "Mes fichiers sont-ils envoyés ?"
  },
  "Related tools:": {
   "es": "Herramientas relacionadas:",
   "ar": "أدوات ذات صلة:",
   "zh": "相关工具：",
   "sw": "Zana zinazohusiana:",
-  "sv": "Relaterade verktyg:"
+  "sv": "Relaterade verktyg:",
+  "de": "Verwandte Werkzeuge:",
+  "pt": "Ferramentas relacionadas:",
+  "fr": "Outils associés :"
  },
  "Yes. It is free to use, with no account, no watermark and no paywall.": {
   "es": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago.",
   "ar": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع.",
   "zh": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。",
   "sw": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua.",
-  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+  "sv": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg.",
+  "de": "Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke.",
+  "pt": "Sim. É gratuito, sem conta, sem marca d'água e sem cobrança.",
+  "fr": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."
  },
  "No. It runs entirely in your browser, so your files and text stay on your device.": {
   "es": "No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo.",
   "ar": "لا. يعمل بالكامل في متصفحك، فتبقى ملفاتك ونصوصك على جهازك.",
   "zh": "不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。",
   "sw": "Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako.",
-  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."
+  "sv": "Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet.",
+  "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
+  "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
+  "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });

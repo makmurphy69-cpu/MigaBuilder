@@ -222,8 +222,8 @@ const NS='http://www.w3.org/2000/svg';
 // questions, results — goes through tr() so it is written straight in the chosen language, and is redrawn when it changes.
 const lang=()=>(window.I18N&&I18N.getLang&&I18N.getLang())||'en';
 function tr(s){const row=window.PHYS_I18N&&window.PHYS_I18N[s];const out=(row&&row[lang()])||s;const a=arguments;return out.replace(/\{(\d+)\}/g,(m,i)=>a[+i+1]!=null?a[+i+1]:m)}
-const LOCALE={en:'en-GB',es:'es',ar:'ar',zh:'zh-CN',sw:'sw',sv:'sv'};
-const LANGNAME={en:'English',es:'Spanish',ar:'Arabic',zh:'Simplified Chinese',sw:'Swahili',sv:'Swedish'};
+const LOCALE={en:'en-GB',es:'es',ar:'ar',zh:'zh-CN',sw:'sw',sv:'sv', de: 'de-DE', pt: 'pt-BR', fr: 'fr-FR'};
+const LANGNAME={en:'English',es:'Spanish',ar:'Arabic',zh:'Simplified Chinese',sw:'Swahili',sv:'Swedish', de: 'German', pt: 'Portuguese', fr: 'French'};
 
 // ---------- data ----------
 const BODIES=window.PHYS_BODIES.map(r=>({id:r[0],name:r[1],icon:r[2],kind:r[3],color:r[4],mass:r[5],diam:r[6],g:r[7],esc:r[8],day:r[9],dist:r[10],period:r[11],temp:r[12],moons:r[13],rings:r[14],air:r[15],about:r[16],fact:r[17],L0:r[18]}));
