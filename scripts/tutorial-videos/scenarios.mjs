@@ -225,7 +225,9 @@ S('coloring-forge.html', {
   async run(h, page) {
     await h.step('Type your child’s name. It goes on the cover and on the tracing sheets.', () => h.type('#kidName', 'Emma'));
     await h.step('Start with a cover, and add it to the book.', async () => { await h.click('[data-tab="cover"]'); await h.click('#coverMake'); await h.click('#addBtn'); });
-    await h.step('A coloring page can be drawn by AI from a description, made from your own photo, or be a mandala. Here we make a mandala.', async () => { await h.click('[data-tab="color"]'); await h.check('input[value="mandala"]'); await h.click('#colorMake'); await h.click('#addBtn'); });
+    await h.step('The picture library has more than three thousand ready coloring pictures, no AI needed. Search for a word, like dinosaur, and tap a picture.', async () => { await h.click('[data-tab="color"]'); await h.type('#libSearch', 'dinosaur'); await h.wait(500); await h.click('#libGrid button >> nth=0'); await h.click('#addBtn'); });
+    await h.step('Or browse a group, such as vehicles or flags of the world. Flags come with a small colour guide in the corner.', async () => { await h.fill('#libSearch', 'japan'); await h.wait(500); await h.click('#libGrid button >> nth=0'); await h.click('#addBtn'); });
+    await h.step('A coloring page can also be drawn by AI from a description, made from your own photo, or be a mandala.', async () => { await h.check('input[value="mandala"]'); await h.click('#colorMake'); await h.click('#addBtn'); });
     await h.step('Letter tracing: capital letters, small letters, numbers, your own words, or your child’s name.', async () => { await h.click('[data-tab="trace"]'); await h.select('#traceKind', 'name'); await h.click('#traceMake'); await h.click('#addBtn'); });
     await h.step('For Chinese, each character gets its pinyin and meaning, every stroke in the right order, grey copies to trace and empty boxes to practise.', async () => { await h.click('[data-tab="hanzi"]'); await h.select('#hanSet', 'han:animals'); await h.click('#hanMake'); });
     await h.skip('Loading the stroke order', () => page.waitForFunction(() => /ready/.test(document.getElementById('hanProgress').textContent), null, { timeout: 60000 }));
@@ -235,6 +237,23 @@ S('coloring-forge.html', {
     await h.step('Mazes come with a page that shows the answer.', async () => { await h.click('[data-tab="maze"]'); await h.click('#mazeMake'); await h.click('#addBtn'); });
     await h.step('Your book is down here. Put the pages in order, then download it as one PDF, or print it.', () => h.scroll('#bookPanel', 'center'));
     await h.sampleDownload('#pdfBtn', 'Coloring book made in this video');
+  }
+});
+
+S('noise-forge.html', {
+  title: 'Noise Forge', subtitle: 'White, pink and brown noise with rain and nature sounds',
+  intro: 'Welcome to Noise Forge. Mix white, pink and brown noise with rain, waves and other calm sounds, and learn what each one does.',
+  async run(h, page) {
+    await h.step('Start with a ready-made mix. Deep sleep is brown noise with soft rain. Every sound is made live on your device.', () => h.click('#mix-0'));
+    await h.step('Each sound has its own switch and volume slider. Add ocean waves to the mix.', async () => { await h.click('[data-tog="ocean"]'); await h.point('[data-vol="ocean"]'); });
+    await h.step('There are seven colours of noise. White is a bright hiss, pink is softer like rain, and brown is a deep rumble.', () => h.point('#chNoise'));
+    await h.step('Rain, thunder, wind, a stream, a campfire, birds, crickets, a fan and a heartbeat can all be mixed in. Some have a setting, like light or heavy rain.', async () => { await h.scroll('#chNature', 'center'); await h.point('[data-opt="rain"]'); });
+    await h.step('The live spectrum shows your mix: low notes on the left, high notes on the right.', () => h.scroll('#scope', 'center'));
+    await h.step('Set a sleep timer, and the sound fades out by itself.', async () => { await h.scroll('#mixerPanel'); await h.select('#timer', '30'); });
+    await h.sampleShot('#mixerPanel', 'Noise mix made in this video');
+    await h.step('Save your mix, copy a link to share it, or download it as a sound file that plays on any device.', async () => { await h.scroll('#savePanel'); await h.point('#dlBtn'); });
+    await h.step('Below, every colour of noise is explained: what it sounds like, what it is good for, what it does in your brain and body, and how well that has been studied.', () => h.scroll('#explain'));
+    await h.step('Finally, a quick guide to which sound to try, and how to use it safely, especially with babies.', () => h.scroll('#activate'));
   }
 });
 
@@ -492,6 +511,8 @@ S('alphabet-forge.html', {
     await h.step('Each symbol sits in its own square. Tap one to hear it.', () => h.click('.sym >> nth=0'));
     await h.step('You see a real word that uses it, and why it sounds that way. In Thai, the consonant class decides the tone of the word.', () => h.point('#detail .why'));
     await h.step('Now Arabic. Arabic letters change shape depending on where they are in a word: alone, at the start, in the middle or at the end.', async () => { await h.click('.script-card:has-text("Arabic")'); await h.click('.sym >> nth=13'); await h.point('.forms'); });
+    await h.step('Chinese has no alphabet, so Mandarin comes with a dictionary of more than seven thousand characters, the most used first, each explained in English.', async () => { await h.click('.script-card:has-text("Mandarin")'); await h.scroll('#dictPanel'); await page.waitForSelector('.dch'); });
+    await h.step('Search in English, in pinyin or with a character. Tap one to hear it, see what it means, how it is built from its parts, and common words that use it.', async () => { await h.type('#dictSearch', 'water'); await h.wait(600); await h.click('.dch >> nth=0'); await h.point('#dictDetail'); });
     await h.step('Korean letters are pictures of the mouth. This one, ㄱ, shows the back of the tongue touching the roof of the mouth, which makes the g sound.', async () => { await h.click('.script-card:has-text("Korean")'); await h.click('.sym >> nth=0'); });
     await h.step('Scroll down to practise writing. Trace mode shows a faint guide you can write over.', async () => { await h.click('#practiseThis'); await h.scroll('#pad', 'center'); });
     await h.step('Write the letter with your finger or mouse, then press Check to get a score.', async () => {

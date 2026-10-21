@@ -46,15 +46,17 @@
  },
  "alphabet-forge.html": {
   "title": "Alphabet Forge",
-  "video": "https://videos.migabuilder.com/alphabet-forge.mp4",
-  "poster": "https://videos.migabuilder.com/alphabet-forge.jpg",
-  "duration": 71,
+  "video": "https://videos.migabuilder.com/alphabet-forge.mp4?v=06f236c1",
+  "poster": "https://videos.migabuilder.com/alphabet-forge.jpg?v=7de4e0d4",
+  "duration": 122,
   "transcript": [
    "Welcome to Alphabet Forge. Learn to read, say and write alphabets from around the world.",
    "Choose a writing system: Thai, Arabic, Mandarin, Japanese, Korean and many more.",
    "Each symbol sits in its own square. Tap one to hear it.",
    "You see a real word that uses it, and why it sounds that way. In Thai, the consonant class decides the tone of the word.",
    "Now Arabic. Arabic letters change shape depending on where they are in a word: alone, at the start, in the middle or at the end.",
+   "Chinese has no alphabet, so Mandarin comes with a dictionary of more than seven thousand characters, the most used first, each explained in English.",
+   "Search in English, in pinyin or with a character. Tap one to hear it, see what it means, how it is built from its parts, and common words that use it.",
    "Korean letters are pictures of the mouth. This one, ㄱ, shows the back of the tongue touching the roof of the mouth, which makes the g sound.",
    "Scroll down to practise writing. Trace mode shows a faint guide you can write over.",
    "Write the letter with your finger or mouse, then press Check to get a score.",
@@ -441,14 +443,16 @@
  },
  "coloring-forge.html": {
   "title": "Coloring Forge",
-  "video": "https://videos.migabuilder.com/coloring-forge.mp4?v=5dfed005",
-  "poster": "https://videos.migabuilder.com/coloring-forge.jpg?v=cf90cdbe",
-  "duration": 111,
+  "video": "https://videos.migabuilder.com/coloring-forge.mp4?v=f2ad94de",
+  "poster": "https://videos.migabuilder.com/coloring-forge.jpg?v=788988b6",
+  "duration": 137,
   "transcript": [
    "Welcome to Coloring Forge. It makes printable pages for children: coloring pages, tracing sheets, Chinese writing practice, paint by numbers and mazes, all collected into one book.",
    "Type your child’s name. It goes on the cover and on the tracing sheets.",
    "Start with a cover, and add it to the book.",
-   "A coloring page can be drawn by AI from a description, made from your own photo, or be a mandala. Here we make a mandala.",
+   "The picture library has more than three thousand ready coloring pictures, no AI needed. Search for a word, like dinosaur, and tap a picture.",
+   "Or browse a group, such as vehicles or flags of the world. Flags come with a small colour guide in the corner.",
+   "A coloring page can also be drawn by AI from a description, made from your own photo, or be a mandala.",
    "Letter tracing: capital letters, small letters, numbers, your own words, or your child’s name.",
    "For Chinese, each character gets its pinyin and meaning, every stroke in the right order, grey copies to trace and empty boxes to practise.",
    "Paint by numbers turns a photo into numbered areas. The colour key tells you how to mix every colour from red, yellow, blue, white and black.",
@@ -1071,6 +1075,30 @@
   "sample": {
    "file": "samples/name-forge.png",
    "label": "Name ideas from this video",
+   "kind": "image"
+  }
+ },
+ "noise-forge.html": {
+  "title": "Noise Forge",
+  "video": "https://videos.migabuilder.com/noise-forge.mp4?v=d44dcec6",
+  "poster": "https://videos.migabuilder.com/noise-forge.jpg?v=dfa33685",
+  "duration": 124,
+  "transcript": [
+   "Welcome to Noise Forge. Mix white, pink and brown noise with rain, waves and other calm sounds, and learn what each one does.",
+   "Start with a ready-made mix. Deep sleep is brown noise with soft rain. Every sound is made live on your device.",
+   "Each sound has its own switch and volume slider. Add ocean waves to the mix.",
+   "There are seven colours of noise. White is a bright hiss, pink is softer like rain, and brown is a deep rumble.",
+   "Rain, thunder, wind, a stream, a campfire, birds, crickets, a fan and a heartbeat can all be mixed in. Some have a setting, like light or heavy rain.",
+   "The live spectrum shows your mix: low notes on the left, high notes on the right.",
+   "Set a sleep timer, and the sound fades out by itself.",
+   "Save your mix, copy a link to share it, or download it as a sound file that plays on any device.",
+   "Below, every colour of noise is explained: what it sounds like, what it is good for, what it does in your brain and body, and how well that has been studied.",
+   "Finally, a quick guide to which sound to try, and how to use it safely, especially with babies.",
+   "Now it is your turn. Open Noise Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/noise-forge.png",
+   "label": "Noise mix made in this video",
    "kind": "image"
   }
  },

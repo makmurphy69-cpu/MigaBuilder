@@ -818,9 +818,9 @@ test('coloring-forge: AI page, tracing, Chinese stroke order, paint by numbers, 
     await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ candidates: [{ content: { parts: [{ inlineData: { mimeType: 'image/png', data: png } }] } }] }) });
   });
   const pages = () => page.evaluate(() => window.ColoringForge.pages.length);
-  expect(await page.evaluate(() => document.querySelector('input[name=csrc]:checked').value) === 'mandala', 'without a key the page should start on Mandala');
+  expect(await page.evaluate(() => document.querySelector('input[name=csrc]:checked').value) === 'library', 'the page should start on the picture library');
   await page.evaluate(() => localStorage.setItem('migaGeminiKey', 'test-key')); await page.reload();
-  await page.waitForFunction(() => window.ColoringForge && document.querySelector('input[name=csrc]:checked').value === 'ai');
+  await page.waitForFunction(() => window.ColoringForge); await page.check('input[name=csrc][value=ai]');
   await page.fill('#colorPrompt', 'a smiling elephant'); await page.click('#colorMake');
   await page.waitForFunction(() => window.ColoringForge.pages.length === 1, null, { timeout: 30000 });
   expect(/coloring book page/.test(prompt) && prompt.includes('a smiling elephant'), 'the AI prompt is wrong: ' + prompt);
@@ -852,6 +852,50 @@ test('coloring-forge: AI page, tracing, Chinese stroke order, paint by numbers, 
   const pdf = await downloadOf(page, () => page.click('#pdfBtn'), 60000);
   const pdfPages = (pdf.buf.toString('latin1').match(/\/Type\s*\/Page[^s]/g) || []).length;
   expect(ascii(pdf.buf, 0, '%PDF') && pdf.name === 'emma-coloring-book.pdf' && pdfPages === total, 'the book PDF is wrong: ' + pdf.name + ', ' + pdfPages + ' pages, expected ' + total);
+});
+
+test('coloring-forge: the picture library makes pages without AI (hand-drawn, bold, flag with colour guide, four to a page)', 'coloring-forge.html', async (page) => {
+  await page.waitForFunction(() => /\d,\d{3} pictures/.test(document.getElementById('libCount').textContent), null, { timeout: 20000 });
+  const total = +(await page.textContent('#libCount')).match(/([\d,]+) pictures/)[1].replace(',', '');
+  expect(total >= 3000, 'the library has only ' + total + ' pictures');
+  const made = () => page.evaluate(() => window.ColoringForge.pages.length && window.ColoringForge.pages[0].label);
+  const ink = () => page.evaluate(() => { const c = window.ColoringForge.pages[0].cv, d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 16) if (d[i] < 100) n++; return n / (d.length / 16); });
+  await page.fill('#libSearch', 'lion'); await page.waitForTimeout(400);
+  for (const style of ['hand', 'bold']) {
+    await page.selectOption('#libStyle', style); await page.waitForTimeout(200);
+    await page.click('#libGrid button >> nth=0');
+    await page.waitForFunction(() => window.ColoringForge.pages.length === 1 && window.ColoringForge.pages[0].label === 'Lion', null, { timeout: 20000 });
+    const k = await ink(); expect(k > 0.01 && k < 0.3, style + ' lion page has ' + (k * 100).toFixed(1) + '% ink');
+  }
+  // A flag gets a colour guide: the page must contain colour.
+  await page.selectOption('#libStyle', 'all'); await page.fill('#libSearch', 'japan'); await page.waitForTimeout(400);
+  await page.click('#libGrid button >> nth=0');
+  await page.waitForFunction(() => window.ColoringForge.pages[0].label === 'Japan', null, { timeout: 20000 });
+  const red = await page.evaluate(() => { const c = window.ColoringForge.pages[0].cv, d = c.getContext('2d').getImageData(0, 0, c.width, c.height).data; let n = 0; for (let i = 0; i < d.length; i += 4) if (d[i] > 150 && d[i + 1] < 90) n++; return n; });
+  expect(red > 500, 'the flag page has no colour guide');
+  await page.fill('#libSearch', ''); await page.selectOption('#libCat', '7'); await page.selectOption('#libPer', '4'); await page.waitForTimeout(400);
+  await page.click('#libGrid button >> nth=2');
+  await page.waitForFunction(() => / and more$/.test(window.ColoringForge.pages[0].label || ''), null, { timeout: 20000 });
+  expect(/and more/.test(await made()), 'four-to-a-page did not work');
+  const png = await downloadOf(page, () => page.click('#pngBtn'));
+  expect(magic(png.buf, 0x89, 0x50, 0x4E, 0x47) && png.buf.length > 20000, 'the page PNG is wrong: ' + png.name);
+});
+
+test('noise-forge: a mix plays without errors and downloads as a WAV file', 'noise-forge.html', async (page) => {
+  await page.click('#mix-3'); // Rainy night
+  await page.waitForFunction(() => /Pause/.test(document.getElementById('playBtn').textContent));
+  expect(await page.evaluate(() => window.__noiseForge.encode()) === 'rain:60:1,thunder:55,crickets:20', 'the Rainy night mix is wrong: ' + await page.evaluate(() => window.__noiseForge.encode()));
+  await page.click('[data-tog="pink"]');
+  await page.click('#playBtn');
+  await page.selectOption('#dlLen', '0.5');
+  const out = await downloadOf(page, () => page.click('#dlBtn'), 120000);
+  expect(/^noise-forge-.*-30s\.wav$/.test(out.name), 'unexpected file name ' + out.name);
+  expect(ascii(out.buf, 0, 'RIFF') && ascii(out.buf, 8, 'WAVE'), 'download is not a WAV file');
+  const channels = out.buf.readUInt16LE(22), rate = out.buf.readUInt32LE(24), samples = (out.buf.length - 44) / 2 / channels;
+  expect(channels === 2 && rate === 44100 && Math.abs(samples - 30 * 44100) < 10, 'WAV format is wrong: ' + channels + ' ch, ' + rate + ' Hz, ' + samples + ' samples');
+  let sum = 0, peak = 0; for (let i = 44 + 44100 * 4 * 5; i < 44 + 44100 * 4 * 25; i += 2) { const v = Math.abs(out.buf.readInt16LE(i)) / 32768; sum += v * v; if (v > peak) peak = v; }
+  const rms = Math.sqrt(sum / (44100 * 2 * 20));
+  expect(rms > 0.03 && peak < 0.99, 'the sound level is wrong: rms ' + rms.toFixed(3) + ', peak ' + peak.toFixed(2));
 });
 
 // ---------- runner ----------

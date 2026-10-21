@@ -63,8 +63,9 @@ self.addEventListener('fetch', event => {
   if (url.origin === self.location.origin) {
     if (request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname === '/') {
       event.respondWith(networkFirst(request));
-    } else if (!url.pathname.startsWith('/cloudflare-worker/') && !url.pathname.startsWith('/videos/') && !url.pathname.startsWith('/samples/') && !url.pathname.startsWith('/assets/demos/')) {
+    } else if (!url.pathname.startsWith('/cloudflare-worker/') && !url.pathname.startsWith('/videos/') && !url.pathname.startsWith('/samples/') && !url.pathname.startsWith('/assets/demos/') && !url.pathname.startsWith('/coloring-library/openmoji/')) {
       // Videos and samples are large and use range requests, so they always come from the network.
+      // The thousands of coloring-library pictures use the normal browser cache instead of filling this one.
       event.respondWith(staleWhileRevalidate(event, ASSETS));
     }
   } else if (CDN_HOSTS.includes(url.hostname)) {
