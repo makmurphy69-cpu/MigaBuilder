@@ -318,7 +318,7 @@ async function encode(tool, raw, clips, skips, total) {
   const args = ['-y', '-hide_banner', '-loglevel', 'error', '-i', raw];
   clips.forEach(c => args.push('-i', c.wav));
   let fc = keep.map(([a, b], i) => `[0:v]trim=start=${a.toFixed(3)}:end=${b.toFixed(3)},setpts=PTS-STARTPTS[v${i}]`).join(';');
-  fc += ';' + keep.map((_, i) => `[v${i}]`).join('') + `concat=n=${keep.length}:v=1:a=0,fps=20,scale=${W}:${H}:flags=lanczos,format=yuv420p[v]`;
+  fc += ';' + keep.map((_, i) => `[v${i}]`).join('') + `concat=n=${keep.length}:v=1:a=0,fps=30,scale=${W}:${H}:flags=lanczos,format=yuv420p[v]`;
   fc += ';' + clips.map((c, i) => { const ms = Math.round(shift(c.t) * 1000); return `[${i + 1}:a]aresample=44100,adelay=${ms}:all=1[a${i}]`; }).join(';');
   fc += ';' + clips.map((_, i) => `[a${i}]`).join('') + `amix=inputs=${clips.length}:normalize=0:dropout_transition=0,volume=0.85,alimiter=limit=0.9,apad[a]`;
   const out = path.join(VIDEOS, tool + '.mp4');
