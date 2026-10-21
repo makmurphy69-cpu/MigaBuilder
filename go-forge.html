@@ -55,7 +55,13 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
 .compare{overflow-x:auto}.compare table{border-collapse:collapse;width:100%;background:#fff;font-size:13.5px}.compare th,.compare td{border:1px solid rgba(22,32,43,.12);padding:7px 9px;text-align:left;vertical-align:top}.compare th{background:#f6f4ee}
 .stats{font-size:13px;color:rgba(22,32,43,.75)}
 @media(max-width:620px){#setupRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}#setupRow label{flex-direction:column;align-items:stretch;gap:2px;font-size:12px}#setupRow select{width:100%;padding:7px}#setupRow #newGame{grid-column:1/-1}}
-@media(max-width:860px){.go-wrap,.lesson-body{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}.lesson-list{flex-direction:row;overflow-x:auto;max-height:none}.lesson-list button{flex:none}}
+.learn-grid>*,.lesson-body>*,.go-wrap>*{min-width:0}
+@media(max-width:620px){.tabs{gap:4px;flex-wrap:nowrap}.tabs button{flex:1 1 0;padding:8px 6px;font-size:13px;line-height:1.2}.learn-grid{gap:8px}.learn-grid h2{font-size:18px}#lessonProgress{margin:2px 0 0}.lesson-text{font-size:15px;line-height:1.5}}
+@media(max-width:860px){.go-wrap,.lesson-body{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}.lesson-list{flex-direction:row;overflow-x:auto;max-height:none;padding-bottom:6px;scroll-snap-type:x proximity}.lesson-list button{flex:none;scroll-snap-align:start}
+  /* Phones: explanation and goal first, then the board, then the answer message and buttons. */
+  .lesson-body{display:flex;flex-direction:column;gap:10px}.lesson-side{display:contents}
+  #lessonText{order:1}#exDots{order:2;margin:0}#exGoal{order:3;margin:0}.lesson-body .board-box{order:4}#exMsg{order:5;margin:0}.lesson-side .actions{order:6}
+  .lesson-side .actions button{flex:1 1 auto;min-height:44px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I learn to play Go?","acceptedAnswer":{"@type":"Answer","text":"Start with the lessons: liberties, capturing, atari, connecting, eyes, ko and counting. Each lesson has small puzzles on a real board. Then play the capture game and small 9×9 games against the easiest computer level, and press Advice or Feedback whenever you are unsure."}},{"@type":"Question","name":"Can I get hints while I play Go?","acceptedAnswer":{"@type":"Answer","text":"Yes. Press Advice for my next move to see the computer's best idea and why, or Feedback on my last move to see how good your move was and what would have been better. You can also ask the coach to warn you before a big mistake."}},{"@type":"Question","name":"Which board size should a beginner use?","acceptedAnswer":{"@type":"Answer","text":"Start on 9×9: games take about ten minutes and every principle of the big board already appears. Move to 13×13 and then 19×19 when 9×9 feels comfortable."}},{"@type":"Question","name":"Is Go Forge free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free with no account, and the computer opponent runs on your own device, so it also works offline."}}]}</script>
 </head>
@@ -78,7 +84,7 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
       <h2 id="lessonTitle"></h2>
       <div class="lesson-body">
         <div class="board-box"><svg class="goban" id="lessonBoard" role="img" aria-label="Lesson board"></svg></div>
-        <div>
+        <div class="lesson-side">
           <div class="lesson-text" id="lessonText"></div>
           <div class="ex-dots" id="exDots"></div>
           <div class="goal" id="exGoal"></div>
@@ -413,7 +419,8 @@ function exBoard(ex) {
 }
 function renderLessonList() {
   $('lessonList').innerHTML = LESSONS.map((l, i) => '<button type="button" data-l="' + i + '" class="' + (i === L.i ? 'on' : '') + '"><span class="ck">' + (progress.done[i] ? '✅' : (i + 1)) + '</span>' + esc(l.t) + '</button>').join('');
-  $('lessonList').querySelectorAll('button').forEach(btn => btn.onclick = () => openLesson(+btn.dataset.l, 0));
+  $('lessonList').querySelectorAll('button').forEach(btn => btn.onclick = () => { openLesson(+btn.dataset.l, 0); if (matchMedia('(max-width:860px)').matches) $('lessonTitle').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  const on = $('lessonList').querySelector('.on'); if (on) $('lessonList').scrollLeft = Math.max(0, on.offsetLeft - 20);
   const n = Object.keys(progress.done).length;
   $('lessonProgress').textContent = n + ' of ' + LESSONS.length + ' lessons done' + (n === LESSONS.length ? ' — you know the rules! Try a game.' : '');
 }
