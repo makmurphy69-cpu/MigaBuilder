@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>White, pink and brown noise mixer with rain and nature sounds — Noise Forge | MigaBuilder</title>
+<meta name="description" content="Free noise machine in your browser: white, pink, brown, blue, violet, grey and green noise, mixed with rain, thunder, ocean waves, wind, a stream, a campfire, birds, crickets and a heartbeat. Learn what each noise does, set a sleep timer and download your mix. No signup.">
+<link rel="canonical" href="https://migabuilder.com/noise-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/noise-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Noise Forge — mix white, pink and brown noise with rain and nature sounds | MigaBuilder">
+<meta property="og:description" content="Seven colours of noise and ten nature sounds you can mix, with plain explanations of what each one does for sleep, focus, babies and tinnitus.">
+<meta property="og:url" content="https://migabuilder.com/noise-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="miga-progress.js"></script>
+<style>
+.hidden{display:none!important}
+.transport{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.transport .primary{font-size:18px;min-width:150px}
+.transport label{font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}
+.transport input[type=range]{width:160px}
+.transport select{padding:8px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff}
+.timer-left{font:500 14px 'IBM Plex Mono';color:rgba(22,32,43,.75)}
+.mixes{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 4px}
+.mixes button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-weight:600;color:var(--ink);font-size:13.5px}
+.mixes button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.group-h{font:700 15px 'Space Grotesk';margin:18px 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap}.group-h small{font:400 12.5px 'IBM Plex Sans';color:rgba(22,32,43,.7)}
+.chans{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.chan{background:#fff;border:2px solid rgba(22,32,43,.12);border-radius:8px;padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+.chan.on{border-color:var(--amber);background:#fffaf0}
+.chan .top{display:flex;align-items:center;gap:8px}
+.chan .sw{width:18px;height:18px;border-radius:50%;flex:none;border:1px solid rgba(0,0,0,.15)}
+.chan .ic{font-size:20px;flex:none}
+.chan button.tog{flex:1;text-align:left;border:0;background:none;cursor:pointer;padding:0;color:var(--ink);font:700 14.5px 'Space Grotesk'}
+.chan button.tog small{display:block;font:400 11.5px 'IBM Plex Sans';color:rgba(22,32,43,.7)}
+.chan .state{font-size:11px;font-weight:700;border-radius:999px;padding:2px 8px;background:rgba(22,32,43,.08);color:rgba(22,32,43,.7)}
+.chan.on .state{background:var(--amber);color:#4A3410}
+.chan input[type=range]{width:100%}
+.chan .row{display:flex;gap:6px;align-items:center;font-size:12px}
+.chan .row select{flex:1;padding:4px;border:1px solid rgba(22,32,43,.25);border-radius:3px;background:#fff;font-size:12px}
+.chan a{font-size:11.5px}
+#scope{width:100%;height:120px;background:#0E2A47;border-radius:6px;display:block;margin-top:14px}
+.scope-note{font-size:12px;color:rgba(22,32,43,.7);margin:4px 0 0}
+.saved{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.saved span{display:inline-flex;border:1px solid rgba(22,32,43,.2);border-radius:999px;background:#fff;overflow:hidden}.saved span button{border:0;background:none;padding:6px 10px;cursor:pointer;color:var(--ink)}.saved span button+button{border-left:1px solid rgba(22,32,43,.15);color:rgba(22,32,43,.6)}
+.dl{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.dl select{padding:9px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff}
+.explain{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.ex{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:8px;padding:14px;border-top:6px solid var(--c,#ccc)}
+.ex h3{margin:0 0 4px;font:700 17px 'Space Grotesk';display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ex h3 button{font:600 12px 'IBM Plex Sans';padding:5px 10px}
+.ex svg{width:100%;height:60px;display:block;margin:4px 0 6px}
+.ex dl{margin:0;font-size:13.5px;line-height:1.5}.ex dt{font-weight:700;margin-top:6px}.ex dd{margin:0}
+.ev{display:inline-block;font-size:11px;font-weight:700;border-radius:999px;padding:1px 8px;margin-left:4px;vertical-align:1px}
+.ev.good{background:#dff1e6;color:#285c3f}.ev.some{background:#fff2cc;color:#6b5210}.ev.little{background:#f8dcd6;color:#7b281d}
+.how{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}.how details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.how summary{font-weight:700;cursor:pointer}.how p,.how li{font-size:13.5px;line-height:1.55}
+.table-wrap{overflow-x:auto}table.pick{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff}table.pick th,table.pick td{border:1px solid rgba(22,32,43,.12);padding:7px 9px;text-align:left;vertical-align:top}table.pick th{background:#f6f4ee}
+@media(max-width:600px){.transport input[type=range]{width:120px}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between white, pink and brown noise?", "acceptedAnswer": {"@type": "Answer", "text": "White noise has the same energy at every frequency and sounds like a bright hiss. Pink noise has less energy in the high notes, so it sounds softer, like steady rain. Brown noise has even less, so it sounds like a deep rumble, like a waterfall or strong wind."}}, {"@type": "Question", "name": "Which noise is best for sleep?", "acceptedAnswer": {"@type": "Answer", "text": "Most people find pink or brown noise, or rain, the most pleasant for sleep because they are less hissy than white noise. All of them help mainly by masking sudden sounds that wake you. Keep the volume low and use the sleep timer."}}, {"@type": "Question", "name": "Can I mix noise with rain and other sounds?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Switch on any number of noises and nature sounds, set each one's volume, save the mix, share it as a link or download it as a WAV file."}}, {"@type": "Question", "name": "Is Noise Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free, with no account. All sounds are made on your device, so nothing is streamed or uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Noise Forge</span></nav>
+<header class="masthead"><div><h1>Noise Forge</h1><p>Mix white, pink and brown noise with rain, ocean, fire and birds — and learn what each sound does for sleep, focus and calm.</p></div></header>
+<main>
+<section class="panel" id="mixerPanel">
+  <p class="privacy">🔒 Every sound is made live on your device — nothing is streamed or uploaded, and it keeps working offline.</p>
+  <div class="transport">
+    <button class="primary" id="playBtn" type="button">▶ Play</button>
+    <label for="masterVol">🔊 Volume <input type="range" id="masterVol" min="0" max="1" step="0.01" value="0.6"></label>
+    <label for="timer">⏲ Sleep timer <select id="timer"><option value="0">Off</option><option value="15">15 min</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">1 hour</option><option value="90">1½ hours</option><option value="120">2 hours</option><option value="480">8 hours</option></select></label>
+    <span class="timer-left" id="timerLeft"></span>
+  </div>
+  <div class="mixes" id="mixes" aria-label="Ready-made mixes"></div>
+  <div class="group-h"><span>🎨 Colours of noise</span><small>Each colour spreads its sound differently over low and high notes. <a href="#explain">What each one does ↓</a></small></div>
+  <div class="chans" id="chNoise"></div>
+  <div class="group-h"><span>🌧️ Nature &amp; calm sounds</span><small>Made from noise and tiny sound events, so they never loop the same way twice.</small></div>
+  <div class="chans" id="chNature"></div>
+  <div class="group-h"><span>🎧 Brainwave beats</span><small>Needs headphones. <a href="#beats">How they work ↓</a></small></div>
+  <div class="chans" id="chBeats"></div>
+  <canvas id="scope" width="1200" height="120" aria-label="Live sound spectrum: low notes on the left, high notes on the right"></canvas>
+  <p class="scope-note">Live spectrum: low notes on the left, high notes on the right. White noise looks flat, pink and brown slope down to the right, blue and violet rise.</p>
+</section>
+
+<section class="panel" id="savePanel">
+  <h2>💾 Save, share and download your mix</h2>
+  <div class="actions"><button class="secondary" id="saveMix" type="button">💾 Save this mix</button><button class="secondary" id="shareMix" type="button">🔗 Copy a link to this mix</button></div>
+  <div class="saved" id="saved"></div>
+  <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 6px">Download as a sound file</h3>
+  <p class="muted" style="margin-top:0">Plays on any phone, speaker or music app — set it to repeat. Longer files take longer to make and are bigger (about 10 MB a minute).</p>
+  <div class="dl"><select id="dlLen" aria-label="Length"><option value="0.5">30 seconds</option><option value="1" selected>1 minute</option><option value="3">3 minutes</option><option value="5">5 minutes</option></select><button class="primary" id="dlBtn" type="button">⬇ Download WAV</button></div>
+  <div id="dlProgress"></div>
+</section>
+
+<section class="panel" id="explain">
+  <h2>The colours of noise — what each one does</h2>
+  <p>“Noise” here means a steady sound with no melody or words. Its <b>colour</b> describes how its energy is spread over low and high notes, a bit like light: white light has every colour, white noise has every pitch equally. The little graph on each card shows that spread — low notes on the left, high notes on the right. The evidence badge says how well the claimed effect has been studied.</p>
+  <div class="explain" id="explainCards"></div>
+</section>
+
+<section class="panel" id="activate">
+  <h2>What does noise “activate” in the brain and body?</h2>
+  <div class="how">
+    <details open><summary>🛡️ Masking: it hides the sounds that wake you</summary><p>You are rarely woken by a noise itself, but by a <b>change</b>: a door, a car, a dog. Your brain keeps listening during sleep and reacts to sudden differences. A steady sound raises the background level, so those changes stand out less and are less likely to trigger the brain’s alarm (the “orienting response”). This is the best-supported reason noise helps.</p></details>
+    <details open><summary>🧠 Less to notice, less to think about</summary><p>Steady noise carries no information — no words, no rhythm — so the brain soon treats it as safe and tunes it out. That is why noise can be easier to work to than a busy office or music with lyrics, which keep pulling your attention.</p></details>
+    <details><summary>⚡ A little arousal for a busy brain (ADHD)</summary><p>The “moderate brain arousal” idea says that some under-stimulated brains, such as many with ADHD, work better with a bit of extra background input — like a radio signal that becomes clearer with a little static (stochastic resonance). In studies by Söderlund and colleagues, white noise improved memory and attention in inattentive children but made attentive children slightly worse. It is promising but based on small studies, and the right volume differs from person to person.</p></details>
+    <details><summary>🌊 Slow waves in deep sleep</summary><p>Deep sleep is made of slow brain waves. In lab studies, short bursts of pink noise played exactly in time with those waves made them stronger and improved memory the next morning, including in older adults (for example Ngo 2013, Papalambros 2017). That needs special equipment that reads your brain waves — continuous noise from a speaker does not do the same thing, so treat claims about it with care.</p></details>
+    <details><summary>🌿 Nature sounds and the rest-and-digest system</summary><p>A 2017 brain-scan study from Brighton and Sussex Medical School found that natural sounds, compared with artificial ones, shifted attention outward (away from worrying, inward thinking) and slightly increased “rest-and-digest” (parasympathetic) activity in the heart. Rain, waves and wind are also naturally close to pink or brown noise, which many people find soothing.</p></details>
+    <details><summary>👶 Babies and the sound of the womb</summary><p>Inside the womb it is loud — blood flow and the heartbeat make a steady whoosh. In a classic study (Spencer 1990) 80% of newborns fell asleep within five minutes with white noise, against 25% without it. Heartbeat and brown noise copy the womb most closely.</p></details>
+    <details><summary>🔔 Tinnitus (ringing in the ears)</summary><p>A sound close to the pitch of the ringing makes the contrast smaller, so the ringing is less noticeable. Some people use violet or blue noise for high-pitched ringing, others prefer grey or pink. It does not cure tinnitus; sound therapy is used alongside advice from an audiologist.</p></details>
+  </div>
+  <h3 style="font:700 16px 'Space Grotesk';margin:18px 0 8px">Quick guide: what to try</h3>
+  <div class="table-wrap"><table class="pick">
+    <tr><th>You want to…</th><th>Try</th><th>Why</th></tr>
+    <tr><td>Fall asleep in a noisy place</td><td>Brown or pink noise + rain</td><td>Deep, soft sounds mask traffic and voices without hiss.</td></tr>
+    <tr><td>Focus or study</td><td>Pink or brown noise, low volume</td><td>Hides voices and small noises; nothing to pay attention to.</td></tr>
+    <tr><td>Help a baby settle</td><td>Heartbeat + brown noise, or white noise</td><td>Close to the sounds of the womb. Keep it quiet and far from the cot.</td></tr>
+    <tr><td>Block out talking</td><td>White or grey noise</td><td>Covers the speech frequencies most strongly.</td></tr>
+    <tr><td>Relax after a long day</td><td>Ocean, stream, birds or campfire</td><td>Natural sounds help many people switch off.</td></tr>
+    <tr><td>Mask high-pitched ringing</td><td>Violet, blue or grey noise, very quietly</td><td>Covers the pitch range where tinnitus usually is.</td></tr>
+  </table></div>
+</section>
+
+<section class="panel" id="beats">
+  <h2>Brainwave (binaural) beats</h2>
+  <p>Each ear gets a slightly different tone — for example 200 Hz on the left and 206 Hz on the right. Your brain hears a slow “beat” at the difference (6 Hz). The idea is that the brain’s own rhythm drifts towards that beat: <b>delta</b> (1–4 Hz) is the rhythm of deep sleep, <b>theta</b> (4–8 Hz) of drowsiness and daydreaming, <b>alpha</b> (8–12 Hz) of relaxed alertness, <b>beta</b> (13–30 Hz) of active thinking and <b>gamma</b> (30–45 Hz) of intense focus.</p>
+  <p>The evidence is mixed: a 2019 review of many studies (Garcia-Argibay and colleagues) found small to medium effects on anxiety, memory and attention, but the studies differ a lot and some find nothing. Use headphones — without them the beat disappears. If you have epilepsy, ask your doctor first.</p>
+</section>
+
+<section class="panel" id="safety">
+  <h2>Use it safely</h2>
+  <ul>
+    <li><b>Quiet is enough.</b> Noise works best a little softer than a normal conversation. If you have to raise your voice over it, it is too loud.</li>
+    <li><b>Babies:</b> paediatricians advise keeping a sound machine at least 2 metres (7 feet) from the cot, below about 50 decibels (like a quiet dishwasher) and using a timer — some machines tested at full volume were loud enough to risk hearing damage.</li>
+    <li><b>All night?</b> Use the sleep timer if you only need help falling asleep. Your ears also rest better in quiet.</li>
+    <li><b>Headphones:</b> keep the volume low, especially for long sessions.</li>
+    <li>This page explains sounds; it is not medical advice. For tinnitus, sleep problems or ADHD, talk to a doctor or audiologist.</li>
+  </ul>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Noise Forge</h2>
+  <p>Noise Forge is a free noise machine and mixer: white, pink, brown, blue, violet, grey and green noise, rain, thunder, ocean waves, wind, a stream, a campfire, birds, crickets, a fan, a heartbeat and binaural beats, with explanations of what each one does.</p>
+  <h3>How to use Noise Forge</h3>
+  <ol><li>Pick a ready-made mix such as “Deep sleep”, or switch sounds on one by one.</li><li>Press “Play” and set each sound’s volume with its slider.</li><li>Set the sleep timer, save the mix, copy a link to it, or download it as a WAV file.</li></ol>
+  <h3>What is the difference between white, pink and brown noise?</h3>
+  <p>White noise has the same energy at every frequency and sounds like a bright hiss. Pink noise has less energy in the high notes, so it sounds softer, like steady rain. Brown noise has even less, so it sounds like a deep rumble, like a waterfall or strong wind.</p>
+  <h3>Which noise is best for sleep?</h3>
+  <p>Most people find pink or brown noise, or rain, the most pleasant for sleep because they are less hissy than white noise. All of them help mainly by masking sudden sounds that wake you. Keep the volume low and use the sleep timer.</p>
+  <h3>Can I mix noise with rain and other sounds?</h3>
+  <p>Yes. Switch on any number of noises and nature sounds, set each one's volume, save the mix, share it as a link or download it as a WAV file.</p>
+  <h3>Is Noise Forge free?</h3>
+  <p>Yes. It is free, with no account. All sounds are made on your device, so nothing is streamed or uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="focus-forge.html">Focus Forge</a> · <a href="audio-forge.html">Audio Forge</a> · <a href="music-forge.html">Music Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Noise Forge runs entirely in your browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+
+<script>
+(function(){'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function rng(seed){let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
+
+/* ================= the sounds =================
+   Every channel is build(ctx, out, rand) → {sched(t0,t1), stop(t)}.
+   Steady parts start at once; sched() places short sound events (drops, chirps, waves) between t0 and t1,
+   so the same code plays live (a little ahead of time) and renders a whole file offline. */
+const bufCache=new WeakMap();
+function noiseBuffer(ctx,kind){
+  let m=bufCache.get(ctx);if(!m){m={};bufCache.set(ctx,m)}if(m[kind])return m[kind];
+  const sr=ctx.sampleRate,len=sr*8,buf=ctx.createBuffer(2,len,sr),fade=Math.round(sr*.5);
+  for(let ch=0;ch<2;ch++){const r=rng(ch*977+kind.length*31+7),w=new Float32Array(len+fade),d=buf.getChannelData(ch);
+    let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,last=0,prev=0;
+    for(let i=0;i<len+fade;i++){const x=r()*2-1;let y;
+      if(kind==='white')y=x;
+      else if(kind==='pink'||kind==='blue'){b0=.99886*b0+x*.0555179;b1=.99332*b1+x*.0750759;b2=.969*b2+x*.153852;b3=.8665*b3+x*.3104856;b4=.55*b4+x*.5329522;b5=-.7616*b5-x*.016898;y=b0+b1+b2+b3+b4+b5+b6+x*.5362;b6=x*.115926;
+        if(kind==='blue'){const p=y;y=p-prev;prev=p}}            // blue = pink, differentiated
+      else if(kind==='brown'){last=(last+.02*x)/1.02;y=last}       // integrated (leaky) white noise
+      else if(kind==='violet'){y=x-prev;prev=x}                     // violet = white, differentiated
+      else y=x;
+      w[i]=y}
+    // Cross-fade the end into the start so the 8-second loop has no click, then even out the loudness.
+    for(let i=0;i<len;i++){if(i<fade){const k=i/fade;d[i]=w[i]*k+w[len+i]*(1-k)}else d[i]=w[i]}
+    let mean=0;for(let i=0;i<len;i++)mean+=d[i];mean/=len;let rms=0;for(let i=0;i<len;i++){d[i]-=mean;rms+=d[i]*d[i]}rms=Math.sqrt(rms/len)||1;
+    const g=.18/rms;for(let i=0;i<len;i++)d[i]=Math.max(-1,Math.min(1,d[i]*g))}
+  return m[kind]=buf}
+function loop(ctx,kind,dest){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx,kind);s.loop=true;s.loopStart=0;s.loopEnd=8;s.connect(dest);s.start(0,Math.random()*8);return s}
+function filt(ctx,type,f,q,gain){const b=ctx.createBiquadFilter();b.type=type;b.frequency.value=f;if(q!=null)b.Q.value=q;if(gain!=null)b.gain.value=gain;return b}
+function chain(...n){for(let i=0;i<n.length-1;i++)n[i].connect(n[i+1]);return n[0]}
+function gainNode(ctx,v){const g=ctx.createGain();g.gain.value=v;return g}
+function pan(ctx,v,dest){if(!ctx.createStereoPanner){return dest}const p=ctx.createStereoPanner();p.pan.value=v;p.connect(dest);return p}
+// A short burst of noise with an envelope (rain drops, crackles, thunder).
+function burst(ctx,dest,t,kind,dur,peak,attack,f,q,type,panV){const s=ctx.createBufferSource();s.buffer=noiseBuffer(ctx,kind);const g=ctx.createGain(),b=filt(ctx,type||'bandpass',f,q);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(peak,t+attack);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
+  chain(s,b,g,panV!=null?pan(ctx,panV,dest):dest);s.start(t,(t*7.31)%7,dur+.05);s.stop(t+dur+.06)}
+function tone(ctx,dest,t,f0,f1,dur,peak,type,panV){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(f1,t+dur);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(peak,t+Math.min(.012,dur/4));g.gain.exponentialRampToValueAtTime(.0001,t+dur);chain(o,g,panV!=null?pan(ctx,panV,dest):dest);o.start(t);o.stop(t+dur+.02)}
+function steady(nodes){return{sched(){},stop(t){nodes.forEach(n=>{try{n.stop(t)}catch(e){}})}}}
+
+// Simple colours: a looped buffer, sometimes through a filter.
+function colour(kind,shape){return(c,o)=>{const g=gainNode(c,1);(shape?shape(c,g):g).connect(o);return steady([loop(c,kind,g)])}}
+const CH={
+  white:{group:'noise',name:'White noise',color:'#f2f2f2',sub:'Bright, even hiss — like TV static',build:colour('white')},
+  pink:{group:'noise',name:'Pink noise',color:'#f4a7c0',sub:'Softer and fuller — like steady rain',build:colour('pink')},
+  brown:{group:'noise',name:'Brown noise',color:'#8b5a2b',sub:'Deep rumble — like a waterfall',build:colour('brown')},
+  blue:{group:'noise',name:'Blue noise',color:'#4a8fe0',sub:'Sharp hiss — like a spray of water',build:colour('blue')},
+  violet:{group:'noise',name:'Violet noise',color:'#8e5bd6',sub:'Very high, thin hiss',build:colour('violet')},
+  grey:{group:'noise',name:'Grey noise',color:'#9aa3ad',sub:'Sounds equally loud at every pitch',build:colour('white',(c,g)=>{const a=filt(c,'lowshelf',200,null,12),b=filt(c,'peaking',3500,.9,-10),d=filt(c,'highshelf',10000,null,4),v=gainNode(c,.7);chain(g,a,b,d,v);return v})},
+  green:{group:'noise',name:'Green noise',color:'#5aa469',sub:'Middle notes only — soft and natural',build:colour('pink',(c,g)=>{const a=filt(c,'bandpass',500,.55),v=gainNode(c,2.4);chain(g,a,v);return v})},
+
+  rain:{group:'nature',name:'Rain',icon:'🌧️',sub:'Steady rain with drops',opt:['Light','Steady','Heavy'],optDef:1,build(c,o,r,opt){
+    const lv=[.5,1,1.6][opt],g=gainNode(c,.55*lv),s=loop(c,'pink',chain(filt(c,'highpass',350),filt(c,'lowpass',7000+opt*1500),g));g.connect(o);
+    const every=[.09,.045,.022][opt];
+    return{sched(t0,t1){for(let t=t0;t<t1;t+=every*(.4+r()*1.2))burst(c,o,t,'white',.035+r()*.03,(.08+r()*.25)*lv,.002,1200+r()*4500,4+r()*5,'bandpass',r()*1.6-.8)},stop(t){s.stop(t)}}}},
+  thunder:{group:'nature',name:'Thunder',icon:'⛈️',sub:'Far-off rumbles every half minute or so',build(c,o,r){
+    let next=null;return{sched(t0,t1){if(next==null)next=t0+3+r()*8;while(next<t1){const t=next,big=r();
+      burst(c,o,t,'brown',4+r()*6,(.9+big*1.4),.15+r()*.6,90+r()*160,.7,'lowpass');
+      if(big>.6)burst(c,o,t+.05,'white',1.2+r(),.12,.02,2500,.6,'lowpass');
+      for(let k=0;k<3;k++)burst(c,o,t+.4+k*(.5+r()),'brown',2+r()*3,.4+r()*.5,.2,60+r()*90,.8,'lowpass');
+      next=t+15+r()*30}},stop(){}}}},
+  ocean:{group:'nature',name:'Ocean waves',icon:'🌊',sub:'Waves rolling onto a beach',build(c,o,r){
+    const g=gainNode(c,.05),lp=filt(c,'lowpass',500,.4),s1=loop(c,'brown',lp),s2=loop(c,'pink',lp);chain(lp,g,o);let next=null;
+    return{sched(t0,t1){if(next==null)next=t0;while(next<t1){const t=next,len=6+r()*6,peak=.7+r()*.6,up=len*(.3+r()*.15);
+      g.gain.setValueAtTime(.08,t);g.gain.linearRampToValueAtTime(peak,t+up);g.gain.linearRampToValueAtTime(.08,t+len);
+      lp.frequency.setValueAtTime(350,t);lp.frequency.linearRampToValueAtTime(1800+r()*1800,t+up);lp.frequency.linearRampToValueAtTime(350,t+len);next=t+len}},stop(t){s1.stop(t);s2.stop(t)}}}},
+  wind:{group:'nature',name:'Wind',icon:'🌬️',sub:'Gusts rising and falling',build(c,o,r){
+    const bp=filt(c,'bandpass',600,1.2),g=gainNode(c,.6),s=loop(c,'pink',bp);chain(bp,g,o);let next=null;
+    return{sched(t0,t1){if(next==null)next=t0;while(next<t1){const t=next,len=2+r()*4;bp.frequency.linearRampToValueAtTime(250+r()*900,t+len);g.gain.linearRampToValueAtTime(.4+r()*1.4,t+len);bp.Q.linearRampToValueAtTime(.8+r()*2.5,t+len);next=t+len}},stop(t){s.stop(t)}}}},
+  stream:{group:'nature',name:'Stream',icon:'🏞️',sub:'Water bubbling over stones',build(c,o,r){
+    const g=gainNode(c,.5),s=loop(c,'white',chain(filt(c,'bandpass',2000,.7),filt(c,'lowpass',5000),g));g.connect(o);
+    return{sched(t0,t1){for(let t=t0;t<t1;t+=.015+r()*.06){const f=300+r()*900;tone(c,o,t,f,f*(1.6+r()*1.6),.02+r()*.05,.05+r()*.12,'sine',r()*1.4-.7)}},stop(t){s.stop(t)}}}},
+  fire:{group:'nature',name:'Campfire',icon:'🔥',sub:'Crackling logs',build(c,o,r){
+    const g=gainNode(c,.5),s=loop(c,'brown',chain(filt(c,'lowpass',380),g));g.connect(o);
+    return{sched(t0,t1){for(let t=t0;t<t1;){const pop=r()<.06;burst(c,o,t,'white',pop?.06:.008+r()*.02,pop?.9:.2+r()*.5,.001,pop?900:1800+r()*4000,pop?1.5:2,'bandpass',r()*1.2-.6);t+=r()<.3?.01+r()*.04:.08+r()*.5}},stop(t){s.stop(t)}}}},
+  birds:{group:'nature',name:'Birds',icon:'🐦',sub:'Morning birdsong',build(c,o,r){
+    let next=null;const songs=Array.from({length:5},()=>({f:2000+r()*3000,up:r()<.5,n:2+Math.floor(r()*5),len:.06+r()*.12,gap:.04+r()*.1,p:r()*1.6-.8}));
+    return{sched(t0,t1){if(next==null)next=t0+r();while(next<t1){const sg=songs[Math.floor(r()*songs.length)];let t=next;
+      for(let k=0;k<sg.n;k++){const f=sg.f*(1+(r()-.5)*.08);tone(c,o,t,sg.up?f*.75:f*1.25,sg.up?f*1.25:f*.75,sg.len,.08+r()*.06,'sine',sg.p);t+=sg.len+sg.gap}
+      next=t+.6+r()*4}},stop(){}}}},
+  crickets:{group:'nature',name:'Crickets',icon:'🦗',sub:'A warm summer night',build(c,o,r){
+    const bugs=[0,1,2].map(()=>({f:4200+r()*900,p:r()*1.6-.8,next:null,gap:.45+r()*.5}));
+    return{sched(t0,t1){for(const b of bugs){if(b.next==null)b.next=t0+r();while(b.next<t1){const pulses=3+Math.floor(r()*2);for(let k=0;k<pulses;k++)tone(c,o,b.next+k*.035,b.f,b.f*1.01,.022,.035,'sine',b.p);b.next+=b.gap*(.85+r()*.3)}}},stop(){}}}},
+  fan:{group:'nature',name:'Fan',icon:'🌀',sub:'A soft electric fan hum',build(c,o){
+    const g=gainNode(c,.8),s=loop(c,'brown',chain(filt(c,'lowpass',1100),g));g.connect(o);
+    const h=c.createOscillator(),hg=gainNode(c,.012);h.type='triangle';h.frequency.value=100;chain(h,hg,o);h.start();
+    const lfo=c.createOscillator(),lg=gainNode(c,.08);lfo.frequency.value=7.5;chain(lfo,lg,g.gain);lfo.start();return steady([s,h,lfo])}},
+  heart:{group:'nature',name:'Heartbeat',icon:'💗',sub:'A calm heartbeat, like in the womb',opt:['Slow (55)','Calm (65)','Resting (75)'],optDef:1,build(c,o,r,opt){
+    const bpm=[55,65,75][opt],g=gainNode(c,.25),s=loop(c,'brown',chain(filt(c,'lowpass',260),g));g.connect(o);let next=null;
+    return{sched(t0,t1){if(next==null)next=t0;while(next<t1){tone(c,o,next,70,42,.16,.9,'sine');tone(c,o,next+.28,62,40,.13,.6,'sine');next+=60/bpm}},stop(t){s.stop(t)}}}},
+
+  beats:{group:'beats',name:'Binaural beats',icon:'🎧',sub:'A slow beat your brain makes from two tones',opt:['Delta 2 Hz — deep sleep','Theta 6 Hz — drowsy, dreamy','Alpha 10 Hz — relaxed','Beta 18 Hz — alert','Gamma 40 Hz — focused'],optDef:2,build(c,o,r,opt){
+    const beat=[2,6,10,18,40][opt],base=opt<2?150:200,m=c.createChannelMerger(2),l=c.createOscillator(),rr=c.createOscillator(),gl=gainNode(c,.12),gr=gainNode(c,.12);
+    l.frequency.value=base;rr.frequency.value=base+beat;l.connect(gl);rr.connect(gr);gl.connect(m,0,0);gr.connect(m,0,1);m.connect(o);l.start();rr.start();return steady([l,rr])}}
+};
+const ORDER=Object.keys(CH);
+
+/* ================= live mixer ================= */
+const DEF_VOL=.5;
+const mix={};ORDER.forEach(k=>mix[k]={on:false,vol:DEF_VOL,opt:CH[k].optDef||0});
+let actx=null,master=null,analyser=null,playing=false,schedTimer=0,live={};
+// A gentle limiter so several loud sounds together never distort.
+function limiter(c){const d=c.createDynamicsCompressor();d.threshold.value=-10;d.knee.value=8;d.ratio.value=12;d.attack.value=.005;d.release.value=.25;return d}
+function ensureCtx(){if(actx)return actx;const AC=window.AudioContext||window.webkitAudioContext;actx=new AC();master=actx.createGain();master.gain.value=+$('masterVol').value;analyser=actx.createAnalyser();analyser.fftSize=4096;analyser.smoothingTimeConstant=.82;const lim=limiter(actx);master.connect(lim);lim.connect(analyser);analyser.connect(actx.destination);return actx}
+function startCh(k){if(live[k]||!actx)return;const g=actx.createGain();g.gain.setValueAtTime(0,actx.currentTime);g.gain.linearRampToValueAtTime(lvl(k),actx.currentTime+1.2);g.connect(master);
+  const r=rng(Date.now()+k.length*101);let node;try{node=CH[k].build(actx,g,r,mix[k].opt)}catch(e){console.warn(e);return}
+  live[k]={g,node,until:actx.currentTime};pump()}
+function stopCh(k){const l=live[k];if(!l)return;delete live[k];const t=actx.currentTime;l.g.gain.cancelScheduledValues(t);l.g.gain.setValueAtTime(l.g.gain.value,t);l.g.gain.linearRampToValueAtTime(0,t+.5);setTimeout(()=>{try{l.node.stop(actx.currentTime)}catch(e){}l.g.disconnect()},700)}
+// Sliders feel more natural on a squared scale.
+const volCurve=v=>v*v*3;
+// Loudness of each sound at the same slider position, so a mix starts out balanced.
+const LEVEL={rain:2,wind:2.5,stream:2.5,fire:1.5,birds:6,crickets:9,heart:1.3,beats:2};
+const lvl=k=>volCurve(mix[k].vol)*(LEVEL[k]||1);
+function pump(){if(!actx)return;const now=actx.currentTime,ahead=now+3;for(const k in live){const l=live[k];if(l.until<now)l.until=now+.05;if(l.until<ahead){l.node.sched(l.until,ahead);l.until=ahead}}}
+async function play(){ensureCtx();if(actx.state==='suspended')await actx.resume();
+  if(!ORDER.some(k=>mix[k].on)){applyMix(MIXES[0].mix,true)}
+  playing=true;const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(0,t);master.gain.linearRampToValueAtTime(+$('masterVol').value,t+1.5);
+  ORDER.forEach(k=>{if(mix[k].on)startCh(k)});clearInterval(schedTimer);schedTimer=setInterval(pump,500);startTimer();drawUI();draw()}
+function pause(){playing=false;clearInterval(schedTimer);Object.keys(live).forEach(stopCh);stopTimerClock();drawUI()}
+$('playBtn').onclick=()=>playing?pause():play();
+$('masterVol').oninput=()=>{if(master){const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setTargetAtTime(+$('masterVol').value,t,.05)}save()};
+document.addEventListener('keydown',e=>{if(e.code==='Space'&&!/INPUT|SELECT|TEXTAREA|BUTTON/.test(e.target.tagName)){e.preventDefault();playing?pause():play()}});
+
+/* ---- channel cards ---- */
+function card(k){const c=CH[k];return '<div class="chan" id="ch-'+k+'"><div class="top">'+(c.color?'<span class="sw" style="background:'+c.color+'"></span>':'<span class="ic">'+c.icon+'</span>')+
+  '<button type="button" class="tog" data-tog="'+k+'" aria-pressed="false">'+esc(c.name)+'<small>'+esc(c.sub)+'</small></button><span class="state" id="st-'+k+'">off</span></div>'+
+  '<input type="range" min="0" max="1" step="0.01" data-vol="'+k+'" aria-label="'+esc(c.name)+' volume">'+
+  (c.opt?'<div class="row"><select data-opt="'+k+'" aria-label="'+esc(c.name)+' setting">'+c.opt.map((x,i)=>'<option value="'+i+'">'+esc(x)+'</option>').join('')+'</select></div>':'')+
+  (c.group==='noise'?'<a href="#ex-'+k+'">What it does ↓</a>':'')+'</div>'}
+$('chNoise').innerHTML=ORDER.filter(k=>CH[k].group==='noise').map(card).join('');
+$('chNature').innerHTML=ORDER.filter(k=>CH[k].group==='nature').map(card).join('');
+$('chBeats').innerHTML=ORDER.filter(k=>CH[k].group==='beats').map(card).join('');
+function toggle(k,on){mix[k].on=on==null?!mix[k].on:on;if(playing){mix[k].on?startCh(k):stopCh(k)}else if(mix[k].on){play();return}markMix();save();drawUI()}
+document.querySelectorAll('[data-tog]').forEach(b=>b.onclick=()=>toggle(b.dataset.tog));
+document.querySelectorAll('[data-vol]').forEach(s=>s.oninput=()=>{const k=s.dataset.vol;mix[k].vol=+s.value;if(!mix[k].on&&+s.value>0){toggle(k,true);return}const l=live[k];if(l){const t=actx.currentTime;l.g.gain.cancelScheduledValues(t);l.g.gain.setTargetAtTime(lvl(k),t,.05)}markMix();save()});
+document.querySelectorAll('[data-opt]').forEach(s=>s.onchange=()=>{const k=s.dataset.opt;mix[k].opt=+s.value;if(live[k]){stopCh(k);setTimeout(()=>startCh(k),60)}save()});
+function drawUI(){ORDER.forEach(k=>{const el=$('ch-'+k);el.classList.toggle('on',mix[k].on);$('st-'+k).textContent=mix[k].on?(playing?'on':'ready'):'off';el.querySelector('[data-tog]').setAttribute('aria-pressed',mix[k].on);el.querySelector('[data-vol]').value=mix[k].vol;const o=el.querySelector('[data-opt]');if(o)o.value=mix[k].opt});
+  $('playBtn').textContent=playing?'⏸ Pause':'▶ Play'}
+
+/* ---- ready-made mixes ---- */
+const MIXES=[
+  {name:'🌙 Deep sleep',mix:{brown:.55,rain:.45}},
+  {name:'🎯 Focus',mix:{pink:.5,rain:.25}},
+  {name:'👶 Baby sleep',mix:{heart:.6,brown:.4}},
+  {name:'⛈️ Rainy night',mix:{rain:.6,thunder:.55,crickets:.2}},
+  {name:'🏖️ Beach',mix:{ocean:.65,wind:.25,birds:.15}},
+  {name:'🏕️ Campfire',mix:{fire:.6,crickets:.35,wind:.2}},
+  {name:'🌳 Forest morning',mix:{birds:.5,stream:.4,wind:.2}},
+  {name:'🔔 Tinnitus relief',mix:{grey:.35,pink:.25}},
+  {name:'📚 Study',mix:{brown:.45,fan:.35}}
+];
+$('mixes').innerHTML=MIXES.map((m,i)=>'<button type="button" data-mix="'+i+'" id="mix-'+i+'">'+m.name+'</button>').join('');
+function applyMix(m,quiet){ORDER.forEach(k=>{const v=m[k],was=mix[k].on;mix[k].on=v!=null&&v>0;if(v!=null)mix[k].vol=v;if(playing){if(mix[k].on&&!was)startCh(k);else if(!mix[k].on&&was)stopCh(k);else if(mix[k].on&&live[k]){const t=actx.currentTime;live[k].g.gain.setTargetAtTime(lvl(k),t,.2)}}});if(!quiet)save();markMix();drawUI()}
+document.querySelectorAll('[data-mix]').forEach(b=>b.onclick=()=>{applyMix(MIXES[+b.dataset.mix].mix);if(!playing)play()});
+function current(){const o={};ORDER.forEach(k=>{if(mix[k].on)o[k]=Math.round(mix[k].vol*100)/100});return o}
+function markMix(){const cur=JSON.stringify(current());MIXES.forEach((m,i)=>$('mix-'+i).classList.toggle('on',JSON.stringify(Object.fromEntries(Object.entries(m.mix).sort((a,b)=>ORDER.indexOf(a[0])-ORDER.indexOf(b[0]))))===cur))}
+
+/* ---- remember, save and share ---- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+function save(){store.set('noiseForge',{mix,vol:+$('masterVol').value,timer:$('timer').value})}
+function encode(){return ORDER.filter(k=>mix[k].on).map(k=>k+':'+Math.round(mix[k].vol*100)+(CH[k].opt?':'+mix[k].opt:'')).join(',')}
+function decode(s){const m={};s.split(',').forEach(p=>{const [k,v,o]=p.split(':');if(CH[k]){m[k]=Math.max(0,Math.min(1,(+v||50)/100));if(o!=null&&CH[k].opt)mix[k].opt=Math.min(CH[k].opt.length-1,+o||0)}});return m}
+$('shareMix').onclick=()=>{if(!ORDER.some(k=>mix[k].on))return alert('Switch on at least one sound first.');const u=location.origin+location.pathname+'#mix='+encode();(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('shareMix').textContent='✓ Link copied';setTimeout(()=>$('shareMix').textContent='🔗 Copy a link to this mix',2500)},()=>prompt('Copy this link:',u))};
+function renderSaved(){const s=store.get('noiseForgeMixes',[]);$('saved').innerHTML=s.map((m,i)=>'<span><button type="button" data-load="'+i+'">'+esc(m.name)+'</button><button type="button" data-del="'+i+'" aria-label="Delete '+esc(m.name)+'">✕</button></span>').join('');
+  $('saved').querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{applyMix(decode(s[+b.dataset.load].code));if(!playing)play()});
+  $('saved').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{s.splice(+b.dataset.del,1);store.set('noiseForgeMixes',s);renderSaved()})}
+$('saveMix').onclick=()=>{if(!ORDER.some(k=>mix[k].on))return alert('Switch on at least one sound first.');const name=(prompt('Name this mix:','My mix')||'').trim().slice(0,40);if(!name)return;const s=store.get('noiseForgeMixes',[]);s.push({name,code:encode()});store.set('noiseForgeMixes',s);renderSaved()};
+
+/* ---- sleep timer ---- */
+let endAt=0,clockTimer=0;
+function startTimer(){const m=+$('timer').value;endAt=m&&playing?Date.now()+m*60000:0;stopTimerClock();if(endAt)clockTimer=setInterval(tick,1000);tick()}
+function stopTimerClock(){clearInterval(clockTimer);$('timerLeft').textContent=''}
+function tick(){if(!endAt||!playing){$('timerLeft').textContent='';return}const left=Math.max(0,endAt-Date.now()),s=Math.ceil(left/1000);$('timerLeft').textContent='stops in '+Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  // Fade out over the last 30 seconds.
+  if(left<=30000&&!tick.fading){tick.fading=true;const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+left/1000)}
+  if(left<=0){tick.fading=false;endAt=0;pause();$('timerLeft').textContent='Timer finished — sleep well.'}}
+$('timer').onchange=()=>{tick.fading=false;if(playing){const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(+$('masterVol').value,t)}startTimer();save()};
+
+/* ---- live spectrum ---- */
+const scope=$('scope'),sc=scope.getContext('2d');
+function draw(){if(!playing){sc.clearRect(0,0,scope.width,scope.height);return}requestAnimationFrame(draw);if(document.hidden)return;
+  const W=scope.width,H=scope.height,d=new Uint8Array(analyser.frequencyBinCount);analyser.getByteFrequencyData(d);sc.fillStyle='#0E2A47';sc.fillRect(0,0,W,H);
+  const bars=96,lo=Math.log(30),hi=Math.log(Math.min(18000,actx.sampleRate/2)),bw=W/bars,hz=actx.sampleRate/2/d.length;
+  for(let i=0;i<bars;i++){const f0=Math.exp(lo+(hi-lo)*i/bars),f1=Math.exp(lo+(hi-lo)*(i+1)/bars);let a=Math.floor(f0/hz),b=Math.max(a+1,Math.floor(f1/hz)),m=0;for(let j=a;j<b&&j<d.length;j++)m=Math.max(m,d[j]);
+    const h=m/255*(H-6);sc.fillStyle='hsl('+(200-i*1.6)+',70%,'+(45+m/12)+'%)';sc.fillRect(i*bw+1,H-h,bw-2,h)}
+  sc.fillStyle='rgba(237,234,224,.7)';sc.font='13px IBM Plex Sans';sc.fillText('low',6,14);sc.textAlign='right';sc.fillText('high',W-6,14);sc.textAlign='left'}
+
+/* ---- download the mix as a WAV file ---- */
+const dlJob=MigaProgress.create($('dlProgress'));let dlCancel=false;
+function wav(buf){const ch=buf.numberOfChannels,len=buf.length,sr=buf.sampleRate,out=new DataView(new ArrayBuffer(44+len*ch*2)),w=(o,s)=>{for(let i=0;i<s.length;i++)out.setUint8(o+i,s.charCodeAt(i))};
+  w(0,'RIFF');out.setUint32(4,36+len*ch*2,true);w(8,'WAVE');w(12,'fmt ');out.setUint32(16,16,true);out.setUint16(20,1,true);out.setUint16(22,ch,true);out.setUint32(24,sr,true);out.setUint32(28,sr*ch*2,true);out.setUint16(32,ch*2,true);out.setUint16(34,16,true);w(36,'data');out.setUint32(40,len*ch*2,true);
+  const data=[];for(let c=0;c<ch;c++)data.push(buf.getChannelData(c));let o=44;for(let i=0;i<len;i++)for(let c=0;c<ch;c++){const v=Math.max(-1,Math.min(1,data[c][i]));out.setInt16(o,v<0?v*32768:v*32767,true);o+=2}
+  return new Blob([out],{type:'audio/wav'})}
+async function render(minutes){const sr=44100,dur=Math.round(minutes*60),OC=window.OfflineAudioContext||window.webkitOfflineAudioContext,c=new OC(2,sr*dur,sr);
+  const m=c.createGain(),fade=Math.min(2,dur/10);m.gain.setValueAtTime(0,0);m.gain.linearRampToValueAtTime(+$('masterVol').value,fade);m.gain.setValueAtTime(+$('masterVol').value,dur-fade);m.gain.linearRampToValueAtTime(0,dur);const lim=limiter(c);m.connect(lim);lim.connect(c.destination);
+  const keys=ORDER.filter(k=>mix[k].on);keys.forEach((k,i)=>{const g=c.createGain();g.gain.value=lvl(k);g.connect(m);const n=CH[k].build(c,g,rng(1234+i*77),mix[k].opt);n.sched(0,dur)});
+  // Report progress every few seconds of sound where the browser allows it.
+  const step=Math.max(2,Math.round(dur/20));let canSuspend=true;
+  for(let t=step;t<dur;t+=step){try{c.suspend(t).then(()=>{dlJob.update(t/dur,'Making the sound… '+Math.round(t/dur*100)+'%');c.resume()})}catch(e){canSuspend=false;break}}
+  if(!canSuspend)dlJob.update(null,'Making the sound…');
+  return c.startRendering()}
+$('dlBtn').onclick=async()=>{if(!ORDER.some(k=>mix[k].on))return alert('Switch on at least one sound, or pick a mix, first.');const min=+$('dlLen').value;
+  dlCancel=false;dlJob.start('Making '+(min<1?'30 seconds':min+(min===1?' minute':' minutes'))+' of sound…');$('dlBtn').disabled=true;
+  try{const buf=await render(min);if(dlCancel)return;const blob=wav(buf),names=ORDER.filter(k=>mix[k].on).slice(0,3).join('-'),name='noise-forge-'+names+'-'+(min<1?'30s':min+'min')+'.wav';
+    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+    dlJob.done('Saved '+name+' ('+(blob.size/1048576).toFixed(1)+' MB). Set your player to repeat it.')}
+  catch(e){dlJob.fail(e,['Try a shorter length — long files need a lot of memory.','Close other tabs and try again.'])}
+  finally{$('dlBtn').disabled=false}};
+
+/* ---- explanation cards ---- */
+const EX=[
+  {k:'white',slope:0,c:'#e8e8e8',like:'TV static, a hair dryer, a radio between stations.',spread:'The same energy at every frequency, so the high notes stand out and it sounds bright.',good:'Blocking out talking and sudden sounds, helping babies fall asleep, masking tinnitus, concentration for some people with ADHD.',act:'It covers the whole range of hearing, so it masks the most. The steady input lowers the brain’s alarm reaction to sudden sounds.',ev:['good','Well studied for masking and newborn sleep'],tip:'Can feel harsh. If it tires you, try pink or brown.'},
+  {k:'pink',slope:-1,c:'#f4a7c0',like:'Steady rain, rustling leaves, a gentle waterfall.',spread:'Each octave (each step from a note to the same note higher up) has the same energy, so the high notes are softer than in white noise. This matches how our ears hear, so it sounds balanced.',good:'Sleep, relaxing, focus, sound-checking speakers.',act:'Masks sudden sounds like white noise but more gently. In lab studies, pink-noise pulses timed with deep-sleep brain waves strengthened deep sleep and next-day memory.',ev:['some','Small studies; the deep-sleep effect needs timed pulses'],tip:'A good first choice if you are not sure.'},
+  {k:'brown',slope:-2,c:'#8b5a2b',like:'A waterfall, strong wind, the rumble inside an aeroplane.',spread:'The energy drops steeply as the pitch rises, leaving a deep, warm rumble. It is named after the scientist Robert Brown (Brownian motion), not the colour.',good:'Sleep, calming down, focus — very popular in ADHD communities, and close to the sound of the womb.',act:'Mostly low notes, which the body hears as calm and far away; it masks low rumbles like traffic and neighbours well.',ev:['little','Popular, but hardly studied on its own'],tip:'Pair it with rain or a fan if it feels too heavy.'},
+  {k:'blue',slope:1,c:'#4a8fe0',like:'A shower spray, a hissing hose.',spread:'The energy rises with pitch — the opposite of pink. Mostly high notes.',good:'Mainly technical: smoothing digital audio and images (dithering). Some use it, very quietly, to mask high-pitched tinnitus.',act:'Covers high frequencies, where most tinnitus and many small sharp sounds sit.',ev:['little','Little research for relaxation'],tip:'Keep it quiet; it can sound piercing.'},
+  {k:'violet',slope:2,c:'#8e5bd6',like:'A very fine, high hiss.',spread:'The energy rises steeply with pitch — the opposite of brown.',good:'Masking high-pitched ringing in the ears (tinnitus) for some people.',act:'Fills in the top of the hearing range, so a high ringing contrasts less with the background.',ev:['little','Mostly personal reports'],tip:'Use at a low volume only.'},
+  {k:'grey',slope:'grey',c:'#9aa3ad',like:'A smooth, even rush.',spread:'Shaped so that every pitch sounds equally loud to human ears (our ears are less sensitive to very low and very high notes, so those are boosted).',good:'Tinnitus sound therapy, hearing research, a balanced background for focus.',act:'Gives the hearing system an even input without any pitch standing out.',ev:['some','Used in tinnitus clinics; few studies for sleep'],tip:'Feels “flatter” than white noise.'},
+  {k:'green',slope:'green',c:'#5aa469',like:'A distant waterfall or the hum of a forest.',spread:'Mostly the middle of the range (around 500 Hz), without deep rumble or hiss. The name is used by sound-machine makers, not by scientists.',good:'Relaxing and sleep for people who find brown too deep and white too bright.',act:'Masks voices in the middle range while staying soft.',ev:['little','A marketing name; not studied'],tip:'Mix it with birds or a stream for a nature feel.'}
+];
+function curve(slope){const pts=[];for(let i=0;i<=40;i++){const x=i/40;let y;if(slope==='grey')y=.55+.35*Math.pow(2*x-1,2)-.05;else if(slope==='green')y=.15+.75*Math.exp(-Math.pow((x-.42)/.17,2));else y=.5+slope*.2*(x-.5)*2;y=Math.max(.06,Math.min(.95,y));pts.push((x*300).toFixed(1)+','+(60-y*56).toFixed(1))}return pts.join(' ')}
+$('explainCards').innerHTML=EX.map(e=>'<article class="ex" id="ex-'+e.k+'" style="--c:'+e.c+'"><h3>'+esc(CH[e.k].name)+'<button type="button" class="secondary" data-solo="'+e.k+'">▶ Listen</button></h3>'+
+  '<svg viewBox="0 0 300 62" role="img" aria-label="How the energy of '+esc(CH[e.k].name)+' is spread from low to high notes"><polyline points="0,60 '+curve(e.slope)+' 300,60" fill="'+e.c+'" fill-opacity=".35" stroke="'+(e.k==='white'?'#9aa3ad':e.c)+'" stroke-width="2"/><text x="2" y="58" font-size="9" fill="#555">low</text><text x="298" y="58" font-size="9" fill="#555" text-anchor="end">high</text></svg>'+
+  '<dl><dt>Sounds like</dt><dd>'+esc(e.like)+'</dd><dt>How its sound is spread</dt><dd>'+esc(e.spread)+'</dd><dt>Good for</dt><dd>'+esc(e.good)+'</dd><dt>What it does in you</dt><dd>'+esc(e.act)+'</dd><dt>Evidence <span class="ev '+e.ev[0]+'">'+esc(e.ev[1])+'</span></dt><dt>Tip</dt><dd>'+esc(e.tip)+'</dd></dl></article>').join('')+
+  '<article class="ex" style="--c:#16202B"><h3>Black noise</h3><dl><dd>Black noise usually means <b>silence</b>, or near-silence with rare random sounds. Some people sleep best in quiet — earplugs or a quiet room are the “black noise” option. There is nothing to play here.</dd></dl></article>';
+document.querySelectorAll('[data-solo]').forEach(b=>b.onclick=()=>{const k=b.dataset.solo,m={};m[k]=.5;applyMix(m);if(!playing)play();$('mixerPanel').scrollIntoView({behavior:'smooth'})});
+
+/* ---- start ---- */
+const saved=store.get('noiseForge',null);
+if(saved&&saved.mix)ORDER.forEach(k=>{if(saved.mix[k])Object.assign(mix[k],{vol:+saved.mix[k].vol||DEF_VOL,on:!!saved.mix[k].on,opt:+saved.mix[k].opt||0})});
+if(saved){$('masterVol').value=saved.vol!=null?saved.vol:.6;$('timer').value=saved.timer||'0'}
+const hm=/#mix=([\w:,.-]+)/.exec(location.hash);if(hm){ORDER.forEach(k=>mix[k].on=false);applyMix(decode(hm[1]),true)}
+renderSaved();markMix();drawUI();
+window.__noiseForge={mix,render,encode};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

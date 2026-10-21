@@ -284,6 +284,7 @@
     'feedback': ['munch', 'ghost', 'bubble'],
     'file-forge': ['monet', 'frog', 'camera'],
     'focus-forge': ['agnesmartin', 'moth', 'bulb'],
+    'noise-forge': ['turner', 'jelly', 'headphones'],
     'jam-forge': ['bearden', 'frog', 'mic', 'headphones'],
     'policy-forge': ['lewitt', 'owl', 'scroll', 'bowler'],
     'redact-forge': ['holzer', 'ghost', 'pen'],

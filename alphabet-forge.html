@@ -4,7 +4,7 @@
 <meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hear, learn and write the world’s alphabets — Alphabet Forge | MigaBuilder</title>
-<meta name="description" content="Tap any letter of Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi, Georgian and more to hear it, see an example word, learn why it sounds that way and practise writing it. Free, no signup.">
+<meta name="description" content="Tap any letter of Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi, Georgian and more to hear it, see an example word, learn why it sounds that way and practise writing it. Includes a Chinese character dictionary: 7,700+ characters with English meanings. Free, no signup.">
 <link rel="canonical" href="https://migabuilder.com/alphabet-forge.html">
 <meta property="og:image" content="https://videos.migabuilder.com/alphabet-forge.jpg"><meta name="twitter:card" content="summary_large_image">
 <meta property="og:title" content="Alphabet Forge — the world’s alphabets you can hear and write | MigaBuilder">
@@ -63,13 +63,22 @@ main{max-width:1320px}
 .tc-row input{flex:1;min-width:200px;padding:10px;font-size:24px;border:1px solid rgba(22,32,43,.3);border-radius:4px}
 .diff span{font-size:28px;padding:0 1px;border-radius:3px}.diff .ok{background:#dff1e6}.diff .bad{background:#f8dcd6}.diff .miss{background:#fff2cc;opacity:.8}
 body.kb-open{padding-bottom:330px}
+.dict-bar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.dict-bar input,.dict-bar select{padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff;color:var(--ink)}.dict-bar input{flex:1;min-width:200px}
+.dgrid{max-height:720px;overflow:auto;padding:2px;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+.dch{background:#fff;border:1px solid rgba(22,32,43,.18);border-radius:6px;padding:6px 4px;cursor:pointer;text-align:center;color:var(--ink);font:inherit;min-width:0}
+.dch:hover,.dch:focus-visible{border-color:#0E2A47}.dch.active{background:#0E2A47;color:#fff}
+.dch b{display:block;font:400 34px/1.2 'Noto Sans SC',sans-serif}.dch i{display:block;font-style:normal;font-size:12px;font-weight:600}.dch small{display:block;font-size:11px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbig{font:400 110px/1.15 'Noto Sans SC',sans-serif;text-align:center}
+.dsec{margin:12px 0 0}.dsec h4{margin:0 0 4px;font:700 14px 'Space Grotesk';text-transform:uppercase;letter-spacing:.5px;color:rgba(22,32,43,.7)}.dsec p{margin:0;line-height:1.55}
+.dparts{display:flex;gap:6px;flex-wrap:wrap}.dparts button{background:#f6f4ee;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:4px 10px;cursor:pointer;color:var(--ink);text-align:left}.dparts button b{font:400 24px 'Noto Sans SC',sans-serif;margin-right:6px;vertical-align:middle}
+.dword{display:flex;gap:10px;align-items:center;background:#f6f4ee;border-radius:4px;padding:6px 10px;margin-top:6px}.dword b{font:400 24px 'Noto Sans SC',sans-serif}.dword span{flex:1;font-size:13.5px}
 .hidden{display:none!important}
 .rtl{direction:rtl}
 @media(max-width:980px){.layout{grid-template-columns:1fr}.layout>aside{position:static}.pad-wrap{grid-template-columns:1fr}}
 </style>
 <script src="i18n.js"></script>
 <script src="i18n/alphabet-forge.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I practise writing the letters?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Trace or copy each symbol on the writing pad and press Check for a score, then take the listening quiz."}}, {"@type": "Question", "name": "Is Alphabet Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I practise writing the letters?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Trace or copy each symbol on the writing pad and press Check for a score, then take the listening quiz."}}, {"@type": "Question", "name": "What do the Chinese characters mean?", "acceptedAnswer": {"@type": "Answer", "text": "Choose Mandarin Chinese and open the character dictionary: more than 7,700 characters, most used first, each with pinyin, its English meaning, how it is built and common words that use it."}}, {"@type": "Question", "name": "Is Alphabet Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser."}}]}</script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Alphabet Forge</span></nav>
@@ -99,6 +108,19 @@ body.kb-open{padding-bottom:330px}
   <div class="detail" id="detail" aria-live="polite"><p class="muted" style="text-align:center;padding:40px 0">Choose a symbol to see its sound, a word and how to write it.</p></div>
 </aside>
 </div>
+
+<section class="panel hidden" id="dictPanel">
+  <h2>📖 Chinese character dictionary — every character explained in English</h2>
+  <p>Chinese has no alphabet: each character is a syllable with its own meaning. Here are <b id="dictTotal">7,700+</b> characters in order of how often they are used, each with its pinyin, its English meaning, how it is built (picture, idea or sound + meaning) and common words that use it. The 1,000 most common characters cover about 90% of everyday Chinese text.</p>
+  <div class="dict-bar"><input id="dictSearch" type="search" placeholder="Search: 水, shui, water…" aria-label="Search by character, pinyin or English meaning" autocomplete="off">
+    <select id="dictLevel" aria-label="How many characters"><option value="100">100 most common</option><option value="500" selected>500 most common</option><option value="1000">1,000 most common</option><option value="2000">2,000 most common</option><option value="3500">3,500 (everyday Chinese)</option><option value="0">All characters</option></select></div>
+  <p class="muted" id="dictCount">Loading the dictionary…</p>
+  <div class="layout">
+    <div><div class="dgrid" id="dictGrid" role="list"></div><div class="actions" style="margin-top:8px"><button class="secondary" id="dictMore" hidden>Show more</button></div></div>
+    <aside class="detail" id="dictDetail" aria-live="polite"><p class="muted" style="text-align:center;padding:30px 0">Tap a character to see what it means.</p></aside>
+  </div>
+  <p class="muted" style="margin-top:10px">Meanings and how characters are built: Make Me a Hanzi (LGPL). Example words: CC-CEDICT (CC BY-SA 4.0). Order: Jun Da’s character frequency list.</p>
+</section>
 
 <section class="panel" id="practice">
   <h2>✍️ Writing practice</h2>
@@ -149,6 +171,8 @@ body.kb-open{padding-bottom:330px}
   <ol><li>Choose a writing system such as Thai, Arabic or Mandarin and tap any symbol to hear it.</li><li>Press “Practise writing it”.</li><li>Trace or copy the symbol on the writing pad, press Check for a score, then take the listening quiz.</li></ol>
   <h3>Can I practise writing the letters?</h3>
   <p>Yes. Trace or copy each symbol on the writing pad and press Check for a score, then take the listening quiz.</p>
+  <h3>What do the Chinese characters mean?</h3>
+  <p>Choose Mandarin Chinese and scroll to the character dictionary: more than 7,700 characters, most used first, each with its pinyin and tone, its English meaning, how it is built (a picture, an idea, or a sound part plus a meaning part) and common words that use it. Search by character, pinyin (with or without tones) or an English word, hear each character and practise writing it.</p>
   <h3>Is Alphabet Forge free?</h3>
   <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
   <h3>Are my files uploaded?</h3>
@@ -203,6 +227,7 @@ function choose(s){
   renderGrid();pick(items()[0],true);setPad(items()[0]);
   try{history.replaceState(null,'','#'+s.id)}catch(e){}
   prepKeyboard();if(tc){tc=null;$('tcArea').innerHTML=''}
+  dictToggle();
 }
 function renderGrid(){
   $('grid').className='grid-sym'+(cur.dir==='rtl'?' rtl':'');
@@ -354,6 +379,62 @@ async function hanzi(kind){
 }
 $('animStrokes').onclick=()=>hanzi('anim');$('quizStrokes').onclick=()=>hanzi('quiz');
 window.addEventListener('resize',()=>{if($('hanzi').classList.contains('hidden'))sizeCanvases()});
+// ---------- Chinese character dictionary (hanzi-dictionary.json, loaded when Mandarin is chosen) ----------
+// Each entry: c character, p pinyin, m meaning, f frequency rank, t type (p picture, i idea, s sound + meaning),
+// h hint, sm meaning part, ph sound part, k parts, rd radical, w example words [word, pinyin, English].
+let DICT=null,dictList=[],dictShown=0,dictSel=null;const DICT_STEP=150;
+// A link like alphabet-forge.html#mandarin-水 opens that character.
+const dictWant=(()=>{try{return decodeURIComponent((location.hash.match(/^#mandarin-(.+)$/)||[])[1]||'')}catch(e){return ''}})();
+const plain=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ü/g,'u').toLowerCase();
+function dictToggle(){const on=cur&&cur.id==='mandarin';$('dictPanel').classList.toggle('hidden',!on);if(!on)return;
+  if(!$('dictChip')){const b=document.createElement('button');b.className='chip';b.id='dictChip';b.textContent='📖 All characters (dictionary)';b.onclick=()=>$('dictPanel').scrollIntoView({behavior:'smooth'});$('sections').appendChild(b)}
+  loadDict()}
+async function loadDict(){if(DICT)return DICT;try{const r=await fetch('hanzi-dictionary.json');if(!r.ok)throw 0;DICT=(await r.json()).chars}catch(e){$('dictCount').textContent='The dictionary could not be loaded. Check your internet connection and reload the page.';return null}
+  DICT.forEach(d=>{d.pp=plain(d.p).replace(/,/g,' ');d.mm=d.m.toLowerCase()});DICT.byChar=new Map(DICT.map(d=>[d.c,d]));
+  $('dictTotal').textContent=DICT.length.toLocaleString('en');dictFilter();
+  if(dictWant&&DICT.byChar.has(dictWant)){dictPick(DICT.byChar.get(dictWant),true);setTimeout(()=>$('dictPanel').scrollIntoView(),300)}return DICT}
+function dictFilter(){if(!DICT)return;const q=$('dictSearch').value.trim(),lv=+$('dictLevel').value;
+  if(!q){dictList=lv?DICT.slice(0,lv):DICT}
+  else if(/[\u3400-\u9fff]/.test(q)){const cs=[...new Set([...q].filter(c=>DICT.byChar.has(c)))];dictList=cs.map(c=>DICT.byChar.get(c));
+    // Also characters that are built from what was typed.
+    if(cs.length===1)dictList=dictList.concat(DICT.filter(d=>d.c!==cs[0]&&(d.k||'').includes(cs[0])).slice(0,60))}
+  else{const pq=plain(q),parts=pq.split(/\s+/),re=new RegExp('\\b'+pq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    const toned=/[\u0300-\u036f]/.test(q.normalize('NFD'))&&parts.length===1?q.toLowerCase():'';
+    const score=d=>{if(toned)return d.p.split(/,\s*/).includes(toned)?0:9;if(d.pp.split(' ').includes(pq.replace(/[1-5]/g,'')))return 0;if(re.test(d.mm))return 1;if(parts.length===1&&d.pp.split(' ').some(x=>x.startsWith(pq)))return 2;if(d.mm.includes(pq))return 3;return 9};
+    dictList=DICT.map(d=>[score(d),d]).filter(x=>x[0]<9).sort((a,b)=>a[0]-b[0]||a[1].f-b[1].f).map(x=>x[1]).slice(0,600)}
+  dictShown=0;$('dictGrid').innerHTML='';dictMore();
+  $('dictCount').textContent=dictList.length?(q?dictList.length+(dictList.length===1?' character':' characters')+' found.':'The '+dictList.length.toLocaleString('en')+' most common characters, most used first.')+' Tap one to see what it means.':'Nothing found. Try a single English word, pinyin like “ma” or a character.'}
+function dictMore(){const part=dictList.slice(dictShown,dictShown+DICT_STEP),start=dictShown;dictShown+=part.length;
+  $('dictGrid').insertAdjacentHTML('beforeend',part.map((d,j)=>'<button class="dch'+(d===dictSel?' active':'')+'" role="listitem" data-d="'+(start+j)+'" aria-label="'+esc(d.c+' '+d.p+': '+d.m)+'"><b>'+esc(d.c)+'</b><i>'+esc(d.p.split(',')[0])+'</i><small>'+esc(d.m.split(/[;,]/)[0])+'</small></button>').join(''));
+  $('dictMore').hidden=dictShown>=dictList.length}
+$('dictMore').onclick=dictMore;
+let dictTimer=0;$('dictSearch').oninput=()=>{clearTimeout(dictTimer);dictTimer=setTimeout(dictFilter,250)};$('dictLevel').onchange=()=>{$('dictSearch').value='';dictFilter()};
+$('dictGrid').onclick=e=>{const b=e.target.closest('[data-d]');if(!b)return;dictPick(dictList[+b.dataset.d]);if(matchMedia('(max-width:980px)').matches)$('dictDetail').scrollIntoView({behavior:'smooth'})};
+const TONE_TXT={1:'1st tone — high and level',2:'2nd tone — rising, like a question',3:'3rd tone — dips low, then rises',4:'4th tone — sharply falling',5:'neutral tone — short and light'};
+function toneNum(p){if(/[āēīōūǖ]/.test(p))return 1;if(/[áéíóúǘ]/.test(p))return 2;if(/[ǎěǐǒǔǚ]/.test(p))return 3;if(/[àèìòùǜ]/.test(p))return 4;return 5}
+function dictItem(d){const w=(d.w||[])[0],py=d.p.split(',')[0].trim();return{g:d.c,r:py,n:py,m:d.m,say:d.c,y:d.h||'',w:w&&w[0],wr:w&&w[1],wm:w&&w[2]}}
+function builtHtml(d){const part=c=>{const x=DICT.byChar.get(c);return '<button data-goto="'+esc(c)+'"><b>'+esc(c)+'</b>'+(x?esc(x.p.split(',')[0])+' — '+esc(x.m.split(/[;,]/)[0]):'')+'</button>'};
+  let t='';if(d.t==='p')t='<b>Picture character.</b> It began as a drawing of the thing it means'+(d.h?': '+esc(d.h)+'.':'.');
+  else if(d.t==='i')t='<b>Idea character.</b> Its parts are put together to show the meaning'+(d.h?': '+esc(d.h)+'.':'.');
+  else if(d.t==='s')t='<b>Sound + meaning character.</b> '+(d.sm?'The part '+esc(d.sm)+' hints at the meaning'+(d.h?' (“'+esc(d.h)+'”)':'')+'. ':'')+(d.ph?'The part '+esc(d.ph)+' hints at the sound'+(DICT.byChar.get(d.ph)?' ('+esc(DICT.byChar.get(d.ph).p.split(',')[0])+')':'')+'.':'');
+  const parts=[...(d.k||'')];return (t?'<p>'+t+'</p>':'')+(parts.length?'<div class="dparts" style="margin-top:6px">'+parts.map(part).join('')+'</div>':'')+(d.rd?'<p class="muted" style="margin-top:6px">Radical (the part dictionaries sort it by): '+esc(d.rd)+'</p>':'')}
+function dictPick(d,quiet){if(!d)return;dictSel=d;document.querySelectorAll('.dch').forEach(b=>b.classList.toggle('active',dictList[+b.dataset.d]===d));
+  const pys=d.p.split(',').map(x=>x.trim()),built=builtHtml(d);
+  $('dictDetail').innerHTML='<div class="dbig" lang="zh-CN">'+esc(d.c)+'</div><div class="meta"><b style="font-size:20px">'+esc(d.p)+'</b><br><small>'+pys.map(p=>esc(p)+': '+TONE_TXT[toneNum(p)]).join(' · ')+'</small><br><small>No. '+d.f.toLocaleString('en')+' of the most used characters</small></div>'+
+    '<div class="say"><button class="primary" id="dSay">🔊 Hear it</button><button class="secondary" id="dSlow">🐢 Slowly</button></div><div class="voice-note hidden" id="voiceNote"></div>'+
+    '<div class="dsec"><h4>Meaning</h4><p style="font-size:17px">'+esc(d.m)+'</p></div>'+
+    (built?'<div class="dsec"><h4>How it is built</h4>'+built+'</div>':'')+
+    (d.w&&d.w.length?'<div class="dsec"><h4>Common words with '+esc(d.c)+'</h4>'+d.w.map((w,i)=>'<div class="dword"><b lang="zh-CN">'+esc(w[0])+'</b><span>'+esc(w[1])+' — '+esc(w[2])+'</span><button class="chip" data-sayw="'+i+'" aria-label="Hear '+esc(w[0])+'">🔊</button></div>').join('')+'</div>':'')+
+    '<div class="actions" style="margin-top:12px"><button class="secondary" id="dWrite">✍️ Practise writing it</button><button class="secondary" id="dStrokes">▶ Stroke order</button><button class="secondary" id="dLink">🔗 Copy link</button></div>';
+  $('dSay').onclick=()=>speak(d.c,'zh-CN');$('dSlow').onclick=()=>speak(d.c,'zh-CN',.5);
+  $('dictDetail').querySelectorAll('[data-sayw]').forEach(b=>b.onclick=()=>speak(d.w[+b.dataset.sayw][0],'zh-CN',.75));
+  $('dictDetail').querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>{const x=DICT.byChar.get(b.dataset.goto);if(x)dictPick(x)});
+  const toPad=()=>{setPad(dictItem(d));$('practice').scrollIntoView({behavior:'smooth'})};
+  $('dWrite').onclick=toPad;$('dStrokes').onclick=()=>{toPad();hanzi('anim')};
+  $('dLink').onclick=()=>{const u=location.origin+location.pathname+'#mandarin-'+encodeURIComponent(d.c);(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('dLink').textContent='✓ Link copied'},()=>prompt('Copy this link:',u))};
+  try{history.replaceState(null,'','#mandarin-'+encodeURIComponent(d.c))}catch(e){}
+  if(!quiet)speak(d.c,'zh-CN');if(!voiceFor('zh-CN')&&voices.length)noVoice('zh-CN');}
+
 
 // ---------- quizzes ----------
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
@@ -463,7 +544,7 @@ function tcEnd(){
 }
 
 // ---------- start ----------
-const start=scripts.find(s=>'#'+s.id===location.hash)||scripts[0];
+const start=scripts.find(s=>'#'+s.id===location.hash)||(dictWant?scripts.find(s=>s.id==='mandarin'):null)||scripts[0];
 renderScripts();
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>choose(start));
 })();
