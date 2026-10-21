@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Learn to play Go and play against the computer with a coach — Go Forge | MigaBuilder</title>
+<meta name="description" content="Learn the game of Go (Baduk, Weiqi) with interactive lessons, then play against the computer at six levels on 9×9, 13×13 or 19×19. Press a button for advice on your next move or feedback on the move you just made. Free, no signup, runs on your device.">
+<link rel="canonical" href="https://migabuilder.com/go-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/go-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Go Forge — learn Go and play with a coach | MigaBuilder">
+<meta property="og:description" content="Interactive Go lessons, six computer levels, advice for your next move and feedback on your last one. Free, in your browser.">
+<meta property="og:url" content="https://migabuilder.com/go-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="miga-progress.js"></script><script src="go-engine.js"></script>
+<style>
+.hidden{display:none!important}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.tabs button{border:1px solid rgba(111,209,224,.4);background:rgba(8,24,38,.6);color:var(--paper);border-radius:999px;padding:9px 16px;cursor:pointer;font:700 15px 'Space Grotesk'}
+.tabs button.on{background:var(--amber);color:#4A3410;border-color:var(--amber)}
+.go-wrap{display:grid;grid-template-columns:minmax(0,560px) minmax(0,1fr);gap:18px;align-items:start}
+.board-box{position:relative}
+svg.goban{width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 4px 14px rgba(0,0,0,.25);touch-action:manipulation;user-select:none;-webkit-user-select:none;cursor:pointer}
+.side{display:flex;flex-direction:column;gap:10px;min-width:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row label{font-size:13px;font-weight:600;display:flex;gap:6px;align-items:center}
+.row select{padding:8px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff;max-width:100%}
+.btn-big{font-size:15.5px;flex:1 1 200px}
+.coach{background:#fff;border:1px solid rgba(22,32,43,.14);border-left:5px solid var(--cyan);border-radius:6px;padding:12px 14px;line-height:1.55;font-size:14.5px;min-height:70px}
+.coach h3{margin:0 0 6px;font:700 16px 'Space Grotesk'}
+.coach p{margin:6px 0}.coach ul{margin:6px 0;padding-left:20px}
+.coach.good{border-left-color:#4E9E73}.coach.warn{border-left-color:#E2A63B}.coach.bad{border-left-color:#D8604A}
+.rate{display:inline-block;font:700 13px 'IBM Plex Sans';border-radius:999px;padding:2px 10px;margin-right:6px}
+.rate.r0{background:#d8f0e1;color:#1f5a3a}.rate.r1{background:#e6f3d9;color:#3d5a1f}.rate.r2{background:#fff2cc;color:#6b5210}.rate.r3{background:#fde0c8;color:#7a3b10}.rate.r4{background:#f8d2cc;color:#7b1d10}
+.status-line{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:14px;font-weight:600}
+.status-line .dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:-1px;margin-right:4px;border:1px solid #333}
+.nav{display:flex;gap:4px;align-items:center;font:500 13px 'IBM Plex Mono'}.nav button{padding:4px 9px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;cursor:pointer;color:var(--ink)}
+.opts{display:flex;flex-direction:column;gap:4px;font-size:13.5px}.opts label{display:flex;gap:6px;align-items:flex-start}
+details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 12px}details.box summary{cursor:pointer;font-weight:700}
+.confirm{background:#fff7e6;border:1px solid #E2A63B;border-radius:6px;padding:10px 12px;font-size:14px}
+.lesson-list{display:flex;flex-direction:column;gap:4px;max-height:540px;overflow:auto}
+.lesson-list button{text-align:left;border:1px solid rgba(22,32,43,.15);background:#fff;border-radius:6px;padding:8px 10px;cursor:pointer;color:var(--ink);font:600 14px 'IBM Plex Sans';display:flex;gap:8px;align-items:center}
+.lesson-list button.on{border-color:var(--navy);background:#eef4fa}
+.lesson-list button .ck{width:20px;flex:none;text-align:center}
+.learn-grid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+.lesson-body{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr);gap:16px;align-items:start}
+.lesson-text{line-height:1.6;font-size:15px}.lesson-text p{margin:0 0 10px}
+.goal{font:700 16px 'Space Grotesk';margin:8px 0}
+.ex-dots{display:flex;gap:5px;margin:6px 0}.ex-dots span{width:12px;height:12px;border-radius:50%;background:rgba(22,32,43,.15)}.ex-dots span.done{background:#4E9E73}.ex-dots span.cur{outline:2px solid var(--navy)}
+.msg{padding:10px 12px;border-radius:6px;margin:8px 0;font-size:14.5px;line-height:1.5;background:rgba(14,42,71,.06)}
+.msg.ok{background:#dff1e6;color:#1f4d33}.msg.no{background:#fbe3de;color:#6b2016}
+.chart{width:100%;height:120px;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px}
+.mistakes{display:flex;flex-direction:column;gap:6px}.mistakes button{text-align:left;padding:8px 10px;border:1px solid rgba(22,32,43,.15);border-radius:6px;background:#fff;cursor:pointer;color:var(--ink);font-size:14px}
+.glossary{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}.glossary div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px;font-size:14px;line-height:1.5}.glossary b{font-family:'Space Grotesk'}
+.compare{overflow-x:auto}.compare table{border-collapse:collapse;width:100%;background:#fff;font-size:13.5px}.compare th,.compare td{border:1px solid rgba(22,32,43,.12);padding:7px 9px;text-align:left;vertical-align:top}.compare th{background:#f6f4ee}
+.stats{font-size:13px;color:rgba(22,32,43,.75)}
+@media(max-width:620px){#setupRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}#setupRow label{flex-direction:column;align-items:stretch;gap:2px;font-size:12px}#setupRow select{width:100%;padding:7px}#setupRow #newGame{grid-column:1/-1}}
+@media(max-width:860px){.go-wrap,.lesson-body{grid-template-columns:1fr}.learn-grid{grid-template-columns:1fr}.lesson-list{flex-direction:row;overflow-x:auto;max-height:none}.lesson-list button{flex:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I learn to play Go?","acceptedAnswer":{"@type":"Answer","text":"Start with the lessons: liberties, capturing, atari, connecting, eyes, ko and counting. Each lesson has small puzzles on a real board. Then play the capture game and small 9×9 games against the easiest computer level, and press Advice or Feedback whenever you are unsure."}},{"@type":"Question","name":"Can I get hints while I play Go?","acceptedAnswer":{"@type":"Answer","text":"Yes. Press Advice for my next move to see the computer's best idea and why, or Feedback on my last move to see how good your move was and what would have been better. You can also ask the coach to warn you before a big mistake."}},{"@type":"Question","name":"Which board size should a beginner use?","acceptedAnswer":{"@type":"Answer","text":"Start on 9×9: games take about ten minutes and every principle of the big board already appears. Move to 13×13 and then 19×19 when 9×9 feels comfortable."}},{"@type":"Question","name":"Is Go Forge free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free with no account, and the computer opponent runs on your own device, so it also works offline."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Go Forge</span></nav>
+<header class="masthead"><div><h1>Go Forge</h1><p>Learn the game of Go step by step, then play the computer at six levels — with a coach that gives advice on your next move and feedback on the one you just made.</p></div></header>
+<main>
+<div class="tabs" role="tablist">
+  <button type="button" data-tab="learn" class="on" role="tab">🎓 Learn to play</button>
+  <button type="button" data-tab="play" role="tab">⚫ Play with a coach</button>
+  <button type="button" data-tab="guide" role="tab">📖 Rules, tips &amp; words</button>
+</div>
+
+<!-- ============================================================ LEARN -->
+<section class="panel" id="learnPanel">
+  <p class="privacy">🔒 Everything runs on your device, including the computer opponent. Your games and progress are saved in this browser only.</p>
+  <div class="learn-grid">
+    <div><h2 style="margin-bottom:8px">Lessons</h2><div class="lesson-list" id="lessonList"></div><p class="muted" id="lessonProgress"></p></div>
+    <div>
+      <h2 id="lessonTitle"></h2>
+      <div class="lesson-body">
+        <div class="board-box"><svg class="goban" id="lessonBoard" role="img" aria-label="Lesson board"></svg></div>
+        <div>
+          <div class="lesson-text" id="lessonText"></div>
+          <div class="ex-dots" id="exDots"></div>
+          <div class="goal" id="exGoal"></div>
+          <div id="exMsg" class="msg">Tap a point on the board.</div>
+          <div class="actions">
+            <button class="secondary" type="button" id="exHint">💡 Hint</button>
+            <button class="secondary" type="button" id="exShow">👀 Show the answer</button>
+            <button class="secondary" type="button" id="exReset">↺ Try again</button>
+            <button class="primary" type="button" id="exNext">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ PLAY -->
+<section class="panel hidden" id="playPanel">
+  <div class="row" id="setupRow">
+    <label>Board <select id="gSize"><option value="9" selected>9×9 (start here)</option><option value="13">13×13</option><option value="19">19×19</option></select></label>
+    <label>You play <select id="gColor"><option value="1" selected>Black (first)</option><option value="2">White</option><option value="0">Random</option></select></label>
+    <label>Level <select id="gLevel"></select></label>
+    <label>Game <select id="gMode"><option value="normal" selected>Normal Go</option><option value="capture">Capture game (first capture wins)</option></select></label>
+    <label>Handicap <select id="gHandicap"><option value="0" selected>None</option><option value="2">2 stones</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="9">9</option></select></label>
+    <button class="primary" type="button" id="newGame">▶ New game</button>
+  </div>
+  <p class="muted" id="levelInfo" style="margin:6px 0 12px"></p>
+  <div class="go-wrap">
+    <div class="board-box">
+      <svg class="goban" id="playBoard" role="img" aria-label="Go board"></svg>
+      <div class="row" style="justify-content:space-between;margin-top:8px">
+        <div class="nav" id="nav"><button type="button" id="navFirst" aria-label="First move">⏮</button><button type="button" id="navPrev" aria-label="Previous move">◀</button><span id="navPos"></span><button type="button" id="navNext" aria-label="Next move">▶</button><button type="button" id="navLast" aria-label="Back to the game">⏭</button></div>
+        <span class="muted" id="hoverName"></span>
+      </div>
+    </div>
+    <div class="side">
+      <div class="status-line"><span id="turnInfo"></span><span id="capInfo"></span></div>
+      <div class="row">
+        <button class="primary btn-big" type="button" id="adviceBtn">💡 Advice for my next move</button>
+        <button class="primary btn-big" type="button" id="feedbackBtn">🔍 Feedback on my last move</button>
+      </div>
+      <div id="confirmBox" class="confirm hidden"></div>
+      <div class="coach" id="coach"><h3>Your coach</h3><p>Choose a board and a level and press <b>New game</b>. While you play, press <b>Advice</b> before a move or <b>Feedback</b> after one.</p></div>
+      <div id="engineProgress"></div>
+      <div class="row">
+        <button class="secondary" type="button" id="undoBtn">↶ Undo</button>
+        <button class="secondary" type="button" id="passBtn">Pass</button>
+        <button class="secondary" type="button" id="aheadBtn">📊 Who is ahead?</button>
+        <button class="danger" type="button" id="resignBtn">Resign</button>
+      </div>
+      <details class="box" open><summary>Coach settings</summary>
+        <div class="opts" style="margin-top:6px">
+          <label><input type="checkbox" id="optWarn" checked> Warn me before a big mistake (stones left in atari, a missed capture, self-atari)</label>
+          <label><input type="checkbox" id="optAtari" checked> Mark stones that are in atari (one liberty left)</label>
+          <label><input type="checkbox" id="optAuto"> Give feedback on every move automatically</label>
+          <label><input type="checkbox" id="optConfirm"> Tap twice to place a stone (avoids mis-taps on phones)</label>
+          <label><input type="checkbox" id="optNumbers"> Show move numbers</label>
+          <label><input type="checkbox" id="optSound" checked> Stone sound</label>
+          <label style="align-items:center">Advice shows <select id="optHint" style="padding:4px"><option value="move">the best move and why</option><option value="hint">only a hint first</option></select></label>
+        </div>
+      </details>
+      <div id="endBox" class="hidden">
+        <div class="actions"><button class="primary" type="button" id="reviewBtn">📈 Review my whole game</button><button class="secondary" type="button" id="againBtn">↻ Play again</button></div>
+        <div id="reviewProgress"></div>
+        <div id="reviewOut"></div>
+      </div>
+      <div class="actions"><button class="secondary" type="button" id="sgfBtn">⬇ Download game (SGF)</button><label class="secondary" style="display:inline-flex;align-items:center;cursor:pointer">📂 Open SGF<input type="file" id="sgfIn" accept=".sgf,application/x-go-sgf,text/plain" hidden></label></div>
+      <p class="stats" id="stats"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ GUIDE -->
+<section class="panel hidden" id="guidePanel">
+  <h2>The rules of Go on one page</h2>
+  <div class="lesson-text">
+    <p><b>1.</b> Two players, Black and White, take turns putting one stone on an empty <b>intersection</b>. Black goes first. Stones never move.</p>
+    <p><b>2.</b> The empty points next to a stone along the lines are its <b>liberties</b>. Stones next to each other along the lines form a <b>group</b> and share their liberties.</p>
+    <p><b>3.</b> When you take a group’s last liberty, you <b>capture</b> it: remove those stones from the board.</p>
+    <p><b>4.</b> You may not play where your stone would have no liberties, unless that move captures (<b>no suicide</b>).</p>
+    <p><b>5.</b> <b>Ko</b>: you may not take back a single stone straight away if that would repeat the position. Play elsewhere first.</p>
+    <p><b>6.</b> You may <b>pass</b> instead of playing. When both players pass one after the other, the game ends. Stones that could not avoid capture are removed as <b>dead</b>.</p>
+    <p><b>7.</b> Count your <b>area</b>: your stones on the board plus the empty points only you surround. White adds <b>komi</b> (7.5 points here) for playing second. The bigger total wins.</p>
+  </div>
+  <h2 style="margin-top:18px">Ten tips for your first 20 games</h2>
+  <ol class="lesson-text">
+    <li><b>Corners first, then sides, then the centre.</b> Corners need the fewest stones to surround space.</li>
+    <li><b>Check for ataris after every move</b> — your stones and your opponent’s. Turn on “Mark stones in atari” while you learn.</li>
+    <li><b>Do not chase a stone that can escape</b>; chase it towards your own stones or the edge.</li>
+    <li><b>Keep your stones connected</b>, cut your opponent’s apart.</li>
+    <li><b>A group needs two eyes</b> (two separate inside points) to be safe forever.</li>
+    <li><b>Do not save stones that are already lost</b> — if they are caught in a ladder or a net, play elsewhere.</li>
+    <li><b>Answer a contact play</b> (a stone touching yours) — it usually starts a fight.</li>
+    <li><b>Big before small</b>: an open corner or side is worth more than one more stone in a closed area.</li>
+    <li><b>Play the “capture game” first</b> if counting feels hard: whoever captures first wins.</li>
+    <li><b>Review your games.</b> The review shows your three to five biggest mistakes — learning those is the fastest way to improve.</li>
+  </ol>
+  <h2 style="margin-top:18px">Words Go players use</h2>
+  <div class="glossary" id="glossary"></div>
+  <h2 style="margin-top:18px">How Go Forge compares</h2>
+  <p class="muted">We looked at popular ways to learn Go before building this. Go Forge combines their best beginner ideas in one free page that needs no account or app.</p>
+  <div class="compare"><table>
+    <tr><th>Where</th><th>What it does well</th><th>Go Forge</th></tr>
+    <tr><td>AI Sensei, KaTrain</td><td>Strong AI (KataGo) review of your games; mistakes ranked by points lost.</td><td>Game review with your biggest mistakes and a win-chance graph, plus instant feedback during the game. Our engine is far weaker than KataGo, so its numbers are estimates.</td></tr>
+    <tr><td>BadukPop, Online Go Server (OGS), “Hey Go”</td><td>Short interactive lessons and puzzles; many opponents.</td><td>Interactive lessons with puzzles on a real board, six computer levels and three board sizes.</td></tr>
+    <tr><td>Ancient Go</td><td>Visual hints: stones in atari, ko, snapbacks.</td><td>Atari markers and warnings before self-atari or a missed capture.</td></tr>
+    <tr><td>Most apps</td><td>Need an account, an install or a subscription.</td><td>Free, in the browser, works offline, games download as SGF for any other Go program.</td></tr>
+  </table></div>
+</section>
+</main>
+
+<script>
+(function () {
+'use strict';
+const G = window.GoEngine, BLACK = G.BLACK, WHITE = G.WHITE, PASS = G.PASS;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const store = { get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked */ } } };
+const colName = c => c === BLACK ? 'Black' : 'White';
+const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+const libsText = n => n + (n === 1 ? ' liberty' : ' liberties');
+
+/* ================================================================ board drawing */
+const SVGNS = 'http://www.w3.org/2000/svg';
+function el(tag, attrs, parent) { const e = document.createElementNS(SVGNS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; }
+
+/* Draws board b into svg. o: {marks:[{p, kind, label}], last, ghost:{p,col}, own, dead:Set, atari, numbers:Map(p→n), confirm} */
+function draw(svg, b, o) {
+  o = o || {};
+  const n = b.n;
+  svg.setAttribute('viewBox', '-1.1 -1.1 ' + (n + 1.2) + ' ' + (n + 1.2));
+  svg.innerHTML = '';
+  const defs = el('defs', {}, svg);
+  const gb = el('radialGradient', { id: svg.id + 'B', cx: '35%', cy: '30%', r: '70%' }, defs);
+  el('stop', { offset: '0%', 'stop-color': '#5a5a5a' }, gb); el('stop', { offset: '100%', 'stop-color': '#0b0b0b' }, gb);
+  const gw = el('radialGradient', { id: svg.id + 'W', cx: '35%', cy: '30%', r: '75%' }, defs);
+  el('stop', { offset: '0%', 'stop-color': '#ffffff' }, gw); el('stop', { offset: '100%', 'stop-color': '#c9c6bd' }, gw);
+  el('rect', { x: -1.1, y: -1.1, width: n + 1.2, height: n + 1.2, fill: '#DDB36B' }, svg);
+  const lines = el('g', { stroke: '#3b2a12', 'stroke-width': 0.035 }, svg);
+  for (let i = 0; i < n; i++) {
+    el('line', { x1: 0, y1: i, x2: n - 1, y2: i }, lines);
+    el('line', { x1: i, y1: 0, x2: i, y2: n - 1 }, lines);
+  }
+  for (const [x, y] of G.starPoints(n)) el('circle', { cx: x, cy: y, r: 0.1, fill: '#3b2a12' }, svg);
+  const lab = el('g', { 'font-size': 0.36, fill: '#4a3410', 'text-anchor': 'middle', 'font-family': 'IBM Plex Mono, monospace' }, svg);
+  for (let i = 0; i < n; i++) {
+    el('text', { x: i, y: n - 0.35 + 0.05 }, lab).textContent = G.LETTERS[i];
+    el('text', { x: i, y: -0.62 }, lab).textContent = G.LETTERS[i];
+    el('text', { x: -0.72, y: i + 0.13 }, lab).textContent = n - i;
+    el('text', { x: n - 0.28, y: i + 0.13 }, lab).textContent = n - i;
+  }
+  const own = o.own;
+  for (let p = 0; p < b.L; p++) {
+    const v = b.c[p];
+    if (v !== BLACK && v !== WHITE) continue;
+    const [x, y] = b.xy(p);
+    const dead = o.dead && o.dead.has(p);
+    el('circle', { cx: x + 0.04, cy: y + 0.05, r: 0.47, fill: 'rgba(0,0,0,.25)' }, svg);
+    el('circle', { cx: x, cy: y, r: 0.47, fill: 'url(#' + svg.id + (v === BLACK ? 'B' : 'W') + ')', stroke: v === WHITE ? '#8d8a80' : '#000', 'stroke-width': 0.02, opacity: dead ? 0.45 : 1 }, svg);
+    if (dead) el('path', { d: `M${x - 0.2} ${y - 0.2}L${x + 0.2} ${y + 0.2}M${x + 0.2} ${y - 0.2}L${x - 0.2} ${y + 0.2}`, stroke: '#D8604A', 'stroke-width': 0.07 }, svg);
+    if (o.atari && !dead && b.inAtari(b.g[p])) el('circle', { cx: x, cy: y, r: 0.5, fill: 'none', stroke: '#e0342a', 'stroke-width': 0.07, 'stroke-dasharray': '0.18 0.1' }, svg);
+    const num = o.numbers && o.numbers.get(p);
+    if (num) el('text', { x, y: y + 0.14, 'font-size': num > 99 ? 0.3 : 0.38, 'text-anchor': 'middle', fill: v === BLACK ? '#fff' : '#000', 'font-family': 'IBM Plex Sans' }, svg).textContent = num;
+    else if (p === o.last) el('circle', { cx: x, cy: y, r: 0.17, fill: 'none', stroke: v === BLACK ? '#fff' : '#000', 'stroke-width': 0.06 }, svg);
+  }
+  if (own) {
+    for (let p = 0; p < b.L; p++) {
+      if (b.c[p] === 3) continue;
+      const v = own[p];
+      if (Math.abs(v) < 0.3) continue;
+      const isStone = b.c[p] === BLACK || b.c[p] === WHITE;
+      if (isStone && (b.c[p] === BLACK) === (v > 0)) continue;
+      const [x, y] = b.xy(p), s = 0.18 + 0.2 * Math.min(1, Math.abs(v));
+      el('rect', { x: x - s, y: y - s, width: 2 * s, height: 2 * s, fill: v > 0 ? '#111' : '#fff', stroke: v > 0 ? '#fff' : '#000', 'stroke-width': 0.02, opacity: 0.85 }, svg);
+    }
+  }
+  const colors = { best: '#2f9e5b', alt: '#2f7bbf', bad: '#d8604a', ok: '#2f9e5b', warn: '#E2A63B', wrong: '#d8604a', hint: '#2f9e5b' };
+  for (const m of o.marks || []) {
+    if (m.p === PASS || m.p < 0) continue;
+    const [x, y] = b.xy(m.p), c = colors[m.kind] || '#2f9e5b';
+    if (m.kind === 'hint') { el('rect', { x: m.x0 - 0.5, y: m.y0 - 0.5, width: m.w, height: m.h, fill: 'rgba(47,158,91,.18)', stroke: c, 'stroke-width': 0.06, rx: 0.3 }, svg); continue; }
+    const stone = b.c[m.p] === BLACK || b.c[m.p] === WHITE;
+    el('circle', { cx: x, cy: y, r: stone ? 0.52 : 0.4, fill: stone ? 'none' : c, 'fill-opacity': stone ? 0 : 0.85, stroke: c, 'stroke-width': stone ? 0.09 : 0.04 }, svg);
+    if (m.label) el('text', { x, y: y + 0.14, 'font-size': 0.4, 'text-anchor': 'middle', fill: stone ? c : '#fff', 'font-weight': 700, 'font-family': 'IBM Plex Sans' }, svg).textContent = m.label;
+  }
+  if (o.ghost && b.c[o.ghost.p] === 0) {
+    const [x, y] = b.xy(o.ghost.p);
+    el('circle', { cx: x, cy: y, r: 0.45, fill: o.ghost.col === BLACK ? '#111' : '#fff', opacity: o.confirm ? 0.75 : 0.4, stroke: o.confirm ? '#E2A63B' : 'none', 'stroke-width': 0.08 }, svg);
+  }
+}
+/* The board point under a pointer event, or -1. */
+function pointAt(svg, b, e) {
+  const pt = svg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+  const m = svg.getScreenCTM(); if (!m) return -1;
+  const loc = pt.matrixTransform(m.inverse());
+  const x = Math.round(loc.x), y = Math.round(loc.y);
+  if (x < 0 || y < 0 || x >= b.n || y >= b.n || Math.abs(loc.x - x) > 0.5 || Math.abs(loc.y - y) > 0.5) return -1;
+  return b.pt(x, y);
+}
+
+/* ================================================================ sound */
+let audio = null;
+function click() {
+  if (!$('optSound').checked) return;
+  try {
+    audio = audio || new (window.AudioContext || window.webkitAudioContext)();
+    const t = audio.currentTime, o = audio.createOscillator(), g = audio.createGain();
+    o.type = 'triangle'; o.frequency.setValueAtTime(900, t); o.frequency.exponentialRampToValueAtTime(220, t + 0.06);
+    g.gain.setValueAtTime(0.25, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.09);
+    o.connect(g); g.connect(audio.destination); o.start(t); o.stop(t + 0.1);
+  } catch (e) { /* no audio */ }
+}
+
+/* ================================================================ explanations */
+function region(b, p) {
+  const [x, y] = b.xy(p), n = b.n, t = n / 3;
+  const v = y < t ? 'upper' : y >= n - t ? 'lower' : '', h = x < t ? 'left' : x >= n - t ? 'right' : '';
+  if (v && h) return 'the ' + v + '-' + h + ' corner';
+  if (v) return 'the ' + (v === 'upper' ? 'top' : 'bottom') + ' side';
+  if (h) return 'the ' + h + ' side';
+  return 'the centre';
+}
+/* Plain-language reasons a move is good or bad. Returns {good:[], bad:[]} */
+function reasons(b, f) {
+  const good = [], bad = [], opp = colName(3 - f.col);
+  if (f.pass) { if (f.leftInAtari.length) bad.push('passing leaves your ' + plural(f.leftInAtari[0].size, 'stone') + ' in atari'); if (f.missedCapture) bad.push('there were ' + plural(f.missedCapture.size, 'stone') + ' you could capture at ' + b.name(f.missedCapture.at)); return { good, bad }; }
+  if (f.illegal) { bad.push(f.illegal); return { good, bad }; }
+  if (f.captures) good.push('captures ' + plural(f.captures, opp.toLowerCase() + ' stone'));
+  if (f.saved && !f.savedFails) good.push('saves your ' + plural(f.saved, 'stone') + ' that were in atari');
+  if (f.saved && f.savedFails) bad.push('tries to rescue ' + plural(f.saved, 'stone') + ', but they can still be chased into a ladder and captured — adding stones only makes the loss bigger');
+  for (const a of f.atari) good.push(a.caught ? 'puts ' + plural(a.size, 'stone') + ' in atari, and they cannot escape (a ladder)' : 'puts ' + plural(a.size, 'stone') + ' in atari');
+  if (f.connects) good.push('connects ' + f.connects + ' of your groups — connected stones share liberties and are harder to capture');
+  if (f.cuts) good.push('cuts ' + opp + '’s stones apart');
+  if (f.selfAtari >= 2) bad.push('leaves your ' + plural(f.selfAtari, 'stone') + ' with only one liberty — ' + opp + ' can capture them next move');
+  else if (f.selfAtari === 1 && !f.captures) bad.push('the new stone has only one liberty, so it can be captured at once (sometimes that is a clever sacrifice, usually it is a gift)');
+  if (f.ownEye) bad.push('fills one of your own eyes — a group needs two eyes to stay alive');
+  for (const g of f.leftInAtari) bad.push('leaves your ' + plural(g.size, 'stone') + ' near ' + b.name(g.at) + ' in atari');
+  if (f.missedCapture && !f.captures) bad.push('misses the chance to capture ' + plural(f.missedCapture.size, 'stone') + ' at ' + b.name(f.missedCapture.at));
+  const opening = b.moveNo < b.n * b.n / 7;
+  if (opening && !f.contact) {
+    if (f.region === 'corner' && (f.line === 3 || f.line === 4)) good.push('takes a corner on the 3rd or 4th line — the best places to start, because corners are easiest to surround');
+    else if (f.line <= 2 && b.n >= 9) bad.push('is very close to the edge this early — it surrounds little space; the 3rd and 4th lines are better');
+    else if (f.region === 'centre' && b.n >= 13) bad.push('is in the centre early — the centre is hard to turn into territory; corners and sides come first');
+    else if (f.region === 'side' && (f.line === 3 || f.line === 4)) good.push('extends along the side on the 3rd or 4th line');
+  }
+  if (!opening && f.nearest >= 3 && b.n >= 9 && !f.captures) good.push('takes a big open area');
+  if (f.contact && !f.captures && !f.atari.length && !f.cuts && f.libs >= 3) good.push('touches ' + opp + '’s stones, which starts a fight');
+  if (f.libs === 2 && f.size >= 3 && !f.captures) bad.push('your group there has only two liberties — be careful');
+  return { good, bad };
+}
+function listHtml(arr) { return arr.length ? '<ul>' + arr.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>' : ''; }
+
+/* ================================================================ LESSONS */
+/* Exercise checks: points (answers), capture (target), escape (target, libs), atari (target), chase (ladder until captured), corner. */
+const LESSONS = [
+  { t: 'The board and the stones', text: '<p>Go is played on the <b>intersections</b> of the lines, not in the squares. Black plays first, then the players take turns, one stone at a time. Stones never move once they are placed — but they can be <b>captured</b>.</p><p>The goal is to surround more of the board than your opponent. Beginners usually play on a small 9×9 board; the full board is 19×19.</p><p>The dots are <b>star points</b>. They only help you find your way on the board.</p>',
+    ex: [
+      { size: 9, play: 'b', goal: 'Place a black stone on the star point in the middle of the board.', check: { type: 'points', a: ['E5'] }, hint: 'The middle point is E5: column E, row 5.', ok: 'Right on the centre point. That is all it takes to play a move.' },
+      { size: 9, b: 'E5', w: 'D4', play: 'b', goal: 'Now place a stone on any corner star point.', check: { type: 'points', a: ['C3', 'C7', 'G3', 'G7'] }, hint: 'The four dots near the corners: C3, C7, G3 and G7.', ok: 'Good. Most games start in the corners, because a corner is the easiest place to surround space.' }
+    ] },
+  { t: 'Liberties and capturing', text: '<p>The empty points right next to a stone, along the lines, are its <b>liberties</b>. A stone in the middle has 4, on the edge 3, in the corner only 2. Diagonal points do not count.</p><p>When you fill a stone’s <b>last</b> liberty, you <b>capture</b> it and take it off the board.</p>',
+    ex: [
+      { size: 7, b: 'D5 C4 E4', w: 'D4', play: 'b', goal: 'White has one liberty left. Capture the white stone.', check: { type: 'capture', target: 'D4' }, hint: 'Look for the one empty point next to the white stone.', ok: 'Captured! The white stone is yours as a prisoner.' },
+      { size: 7, b: 'A5 B4', w: 'A4', play: 'b', goal: 'A stone on the edge has only three liberties. Capture it.', check: { type: 'capture', target: 'A4' }, hint: 'The edge takes away one liberty. Which point is still empty next to A4?', ok: 'Yes — stones on the edge are easier to capture.' },
+      { size: 7, b: 'A2', w: 'A1', play: 'b', goal: 'A corner stone has just two liberties. Capture it.', check: { type: 'capture', target: 'A1' }, hint: 'Only one empty point touches the corner stone now.', ok: 'Captured in the corner with only two black stones.' }
+    ] },
+  { t: 'Groups share liberties', text: '<p>Stones that touch along the lines form a <b>group</b>. A group lives and dies together: it is captured only when <b>all</b> of its liberties are filled.</p><p>Count the liberties of a whole group by counting every empty point next to any of its stones.</p>',
+    ex: [
+      { size: 7, b: 'C4 F4 D5 E5 D3', w: 'D4 E4', play: 'b', goal: 'The two white stones share one last liberty. Capture both.', check: { type: 'capture', target: 'D4' }, hint: 'Look below the right-hand white stone.', ok: 'Two stones captured with one move.' },
+      { size: 7, b: 'B1 F1 C2 D2', w: 'C1 D1 E1', play: 'b', goal: 'Capture the three white stones on the edge.', check: { type: 'capture', target: 'C1' }, hint: 'One point above the white stones is still empty.', ok: 'The whole group is gone. Big groups can be captured too.' },
+      { size: 7, b: 'C5 D5 E5 B4 F4 C3 E3', w: 'C4 D4 E4 D3', play: 'b', goal: 'This white group has one liberty left. Find it.', check: { type: 'capture', target: 'D4' }, hint: 'Check the points below the white group.', ok: 'Well counted.' }
+    ] },
+  { t: 'Atari: save your stones', text: '<p>A stone or group with only <b>one liberty left</b> is in <b>atari</b> — it can be captured on the next move. Strong players check for ataris after every move.</p><p>To save stones in atari, either <b>extend</b> them so they get more liberties, or <b>capture</b> a stone that is attacking them.</p>',
+    ex: [
+      { size: 7, b: 'D4', w: 'C4 E4 D5', play: 'b', goal: 'Your stone is in atari. Save it by extending.', check: { type: 'escape', target: 'D4', libs: 3 }, hint: 'Add a stone on its last liberty, so the group gets new liberties.', ok: 'Saved: your two stones now have three liberties.' },
+      { size: 7, b: 'D4 C5 E5', w: 'C4 E4 D5 D2 C3 E3', play: 'b', goal: 'Your stone is in atari and cannot run. Save it another way.', check: { type: 'capture', target: 'D5' }, hint: 'One of the white stones is in atari too.', ok: 'Capturing an attacker is often the best way to escape.' }
+    ] },
+  { t: 'Chasing: put stones in atari', text: '<p>Putting a stone in atari forces your opponent to answer. But a stone that can simply run away is not in danger — chase it <b>towards your own stones or the edge</b>, where it runs out of liberties.</p>',
+    ex: [
+      { size: 7, b: 'D5 C4', w: 'D4', play: 'b', goal: 'Put the white stone in atari.', check: { type: 'atari', target: 'D4' }, hint: 'White has two liberties left. Take one of them.', ok: 'Atari! Now White must run or lose the stone.' },
+      { size: 7, b: 'B5 C6 C4', w: 'B4', play: 'b', goal: 'Put the white stone in atari so that it is pushed to the edge.', check: { type: 'points', a: ['B3'] }, hint: 'Leave White only the liberty on the edge (A4).', ok: 'Now White can only run along the edge, where every stone has fewer liberties.', no: { A4: 'That pushes White away from the edge, towards the open middle. Leave White the liberty on the edge instead.' } }
+    ] },
+  { t: 'Connect and cut', text: '<p>Connected stones share liberties and are hard to capture. Separated stones are weaker. Two stones on a diagonal can be <b>cut</b> on one of the two points between them — so connect when your opponent threatens to cut, and cut when you can.</p>',
+    ex: [
+      { size: 7, b: 'D4 E5', w: 'E4 F5 C3', play: 'b', goal: 'White threatens to cut your two stones apart. Connect them.', check: { type: 'points', a: ['D5'] }, hint: 'The two diagonal stones meet at two points; White already took one.', ok: 'Connected — your stones now share all their liberties.' },
+      { size: 7, b: 'E4 C5', w: 'D4 E5', play: 'b', goal: 'White’s stones are on a diagonal. Cut them apart.', check: { type: 'points', a: ['D5'] }, hint: 'Play on the empty point between the two white stones.', ok: 'Cut! Now White has two weak stones instead of one strong shape.' }
+    ] },
+  { t: 'Where you may not play, and ko', text: '<p>You may not play where your stone would have no liberties — <b>unless that move captures</b>. Capturing comes first, so the stone gets liberties back.</p><p><b>Ko</b>: when one stone captures one stone, the other player may not recapture straight away, because the game could repeat for ever. They must play elsewhere first (a “ko threat”).</p>',
+    ex: [
+      { size: 7, b: 'A3 B3 C2 C1', w: 'A2 B2 B1', play: 'b', goal: 'Black can play inside White’s point at A1 — because it captures. Do it.', check: { type: 'capture', target: 'B2' }, hint: 'The corner point A1 is White’s last liberty.', ok: 'Capturing makes the move legal, even though it looked like suicide.' },
+      { size: 9, b: 'D5 E4 E6', w: 'F4 F6 G5 E5', play: 'b', goal: 'Capture the white stone at E5. It is a ko.', steps: [
+        { check: { type: 'capture', target: 'E5' }, reply: 'C8', ok: 'Captured. White may not retake at E5 straight away, so White played elsewhere (C8).' },
+        { check: { type: 'points', a: ['E5'] }, ok: 'You filled the ko — the fight is over and your stones are safe.', goal: 'Now end the ko for good: fill the point where the white stone was.' }
+      ], hint: 'Take the last liberty of the white stone in the middle.' }
+    ] },
+  { t: 'Life and death: two eyes', text: '<p>An <b>eye</b> is an empty point surrounded by one player’s stones. White can never play inside a single eye (it would be suicide). A group with <b>two separate eyes</b> can never be captured — it is <b>alive</b>.</p><p>A group with only one eye can be captured. So the key point that makes two eyes — or stops them — is often the most important point on the board.</p>',
+    ex: [
+      { size: 7, b: 'A1 A2 B2 C2 D2 E2 E1', w: 'A3 B3 C3 D3 E3 F3 F2 F1', play: 'b', goal: 'Your group has three empty points inside. Make two eyes.', check: { type: 'points', a: ['C1'] }, hint: 'Split the three points into two separate eyes.', ok: 'Two eyes (B1 and D1): this group can never be captured.' },
+      { size: 7, b: 'A1 A2 B2 C2 D2 E2 E1', w: 'A3 B3 C3 D3 E3 F3 F2 F1', play: 'w', goal: 'You are White now. Stop Black from making two eyes.', check: { type: 'points', a: ['C1'] }, hint: 'Play on the point Black needs most.', ok: 'Black can make only one eye now, so the black group is dead.' }
+    ] },
+  { t: 'The ladder', text: '<p>A <b>ladder</b> is a chase where you put the stones in atari again and again, so they zig-zag across the board until they hit the edge and are captured. Always atari from the side that pushes them towards your stones or the edge.</p><p>If one of the runner’s stones is in the way (a “ladder breaker”), the ladder fails — so read it before you start.</p>',
+    ex: [
+      { size: 9, b: 'D5 E6 F6', w: 'E5', play: 'b', goal: 'Catch the white stone in a ladder. Keep it in atari until it is captured.', check: { type: 'chase', target: 'E5' }, hint: 'Atari from the side where White would run into your stones. Each time, leave White a liberty that leads towards the edge.', ok: 'Caught at the edge! That is a ladder.' }
+    ] },
+  { t: 'Snapback', text: '<p>Sometimes you <b>give away</b> a stone on purpose. If White captures it, White’s group ends up with only one liberty — and you capture the whole group right back. That is a <b>snapback</b>.</p>',
+    ex: [
+      { size: 7, b: 'B1 B2 C3 D3 E3 F2 F1', w: 'C1 C2 D2 E2', play: 'b', goal: 'Capture the white stones with a snapback.', steps: [
+        { check: { type: 'points', a: ['D1'] }, reply: 'E1', ok: 'White captured your stone at D1…' },
+        { check: { type: 'capture', target: 'C1' }, ok: '…and now you take five white stones back. Snapback!', goal: 'Now capture the whole white group.' }
+      ], hint: 'Throw a stone in at D1, where White can capture it.', also: { E1: 'That works here too, but try the snapback: throw a stone in at D1 first.' } }
+    ] },
+  { t: 'The end: territory and counting', text: '<p>When neither player can gain anything more, both <b>pass</b> and the game ends. Then you count your <b>area</b>: your stones plus the empty points only you surround. White gets <b>komi</b> (7.5 points) for moving second.</p><p>Before passing, close every gap in your border — open points between the two sides (“dame”) belong to nobody.</p>',
+    ex: [
+      { size: 7, b: 'D1 D2 D3 D5 D6 D7', w: 'E1 E2 E3 E4 E5 E6 E7', play: 'b', goal: 'One point of the border is still open. Close it.', check: { type: 'points', a: ['D4'] }, hint: 'Look along the line between the two sides.', ok: 'Border closed. Black has 28 points (columns A–D), White 21 + 7.5 komi = 28.5. A very close game — White wins by half a point.' }
+    ] },
+  { t: 'How to start a game', text: '<p>The opening order is: <b>corners, then sides, then the centre</b>. A corner needs the fewest stones to surround space; the centre needs the most.</p><p>Good first moves are on the 3rd and 4th lines from the edge — low enough to take territory, high enough to have influence.</p>',
+    ex: [
+      { size: 13, play: 'b', goal: 'Play a good first move on this 13×13 board.', check: { type: 'corner' }, hint: 'Pick a corner, three or four lines from both edges (for example D4 or C3).', ok: 'A classic opening move. Next, try a 9×9 game against level 1 in “Play with a coach”.' }
+    ] }
+];
+
+const progress = store.get('goForgeProgress', { done: {}, stats: {} });
+const saveProgress = () => store.set('goForgeProgress', progress);
+const L = { i: 0, e: 0, step: 0, board: null, solved: false, wrong: null, marks: [], hinted: false };
+
+function exBoard(ex) {
+  const b = new G.Board(ex.size);
+  const put = (s, col) => (s || '').split(/\s+/).filter(Boolean).forEach(x => b.setup(b.parse(x), col));
+  put(ex.b, BLACK); put(ex.w, WHITE);
+  b.turn = ex.play === 'w' ? WHITE : BLACK;
+  return b;
+}
+function renderLessonList() {
+  $('lessonList').innerHTML = LESSONS.map((l, i) => '<button type="button" data-l="' + i + '" class="' + (i === L.i ? 'on' : '') + '"><span class="ck">' + (progress.done[i] ? '✅' : (i + 1)) + '</span>' + esc(l.t) + '</button>').join('');
+  $('lessonList').querySelectorAll('button').forEach(btn => btn.onclick = () => openLesson(+btn.dataset.l, 0));
+  const n = Object.keys(progress.done).length;
+  $('lessonProgress').textContent = n + ' of ' + LESSONS.length + ' lessons done' + (n === LESSONS.length ? ' — you know the rules! Try a game.' : '');
+}
+function openLesson(i, e) {
+  L.i = i; L.e = e || 0; L.step = 0; L.solved = false; L.marks = [];
+  const l = LESSONS[i], ex = l.ex[L.e];
+  L.board = exBoard(ex);
+  $('lessonTitle').textContent = (i + 1) + '. ' + l.t;
+  $('lessonText').innerHTML = l.text;
+  $('exDots').innerHTML = l.ex.map((x, k) => '<span class="' + (k < L.e ? 'done' : '') + (k === L.e ? ' cur' : '') + '"></span>').join('');
+  $('exGoal').textContent = (ex.play === 'w' ? '⚪ ' : '⚫ ') + ex.goal;
+  setMsg('', ex.play === 'w' ? 'You play White in this one. Tap a point on the board.' : 'You play Black. Tap a point on the board.');
+  $('exNext').textContent = (L.e < l.ex.length - 1) ? 'Next exercise →' : (i < LESSONS.length - 1 ? 'Next lesson →' : 'Start playing →');
+  renderLessonList(); drawLesson();
+}
+function curStep() { const ex = LESSONS[L.i].ex[L.e]; return ex.steps ? ex.steps[L.step] : ex; }
+function setMsg(kind, html) { const m = $('exMsg'); m.className = 'msg' + (kind ? ' ' + kind : ''); m.innerHTML = html; }
+function drawLesson(extra) { draw($('lessonBoard'), L.board, { marks: L.marks.concat(extra || []), last: L.board.last > 0 ? L.board.last : -1, atari: true }); }
+
+/* Is move p a correct answer for this step? Returns [ok, message]. */
+function judge(b, p, chk, ex) {
+  const col = b.turn, name = b.name(p);
+  const why = b.whyIllegal(p, col);
+  if (why) return [false, why];
+  if (ex.also && ex.also[name] && L.step === 0) return [false, ex.also[name]];
+  if (ex.no && ex.no[name]) return [false, ex.no[name]];
+  const bb = b.clone(); const cap = bb.play(p, col);
+  const tgt = chk.target ? b.parse(chk.target) : -1;
+  switch (chk.type) {
+    case 'points': return [chk.a.includes(name), 'Not this one. ' + (ex.hint || '')];
+    case 'capture': {
+      if (bb.c[tgt] === 0 && cap > 0) return [true];
+      const libs = b.group(tgt).libs;
+      return [false, cap ? 'You captured something else. ' : 'That does not capture. The target still has ' + libsText(bb.c[tgt] ? bb.group(tgt).libs.length : libs.length) + '. '];
+    }
+    case 'escape': {
+      const n = bb.c[tgt] === col ? bb.group(tgt).libs.length : 0;
+      return [n >= chk.libs, 'After that your stones would have ' + libsText(n) + ' — not enough. '];
+    }
+    case 'atari': {
+      const g = bb.group(tgt);
+      if (bb.c[tgt] !== 3 - col) return [false, 'Just put it in atari — leave it one liberty.'];
+      if (bb.group(p).libs.length < 2) return [false, 'That puts your own stone in atari — White would capture it.'];
+      return [g.libs.length === 1, 'White still has ' + g.libs.length + ' liberties. Take away one more so only one is left.'];
+    }
+    case 'chase': {
+      if (bb.c[tgt] === 0) return [true];
+      const g = bb.group(tgt);
+      if (g.libs.length !== 1) return [false, 'That does not put White in atari, so White escapes. '];
+      if (bb.group(p).libs.length < 2) return [false, 'Your stone would be in atari itself.'];
+      if (!G.ladderCaptures(bb, tgt, false, 4000)) return [false, 'Atari — but from this side White runs into open space and escapes. Atari from the other side.'];
+      return [true, 'chase'];
+    }
+    case 'corner': {
+      const [x, y] = b.xy(p), n = b.n, lx = Math.min(x, n - 1 - x) + 1, ly = Math.min(y, n - 1 - y) + 1;
+      return [lx >= 3 && lx <= 4 && ly >= 3 && ly <= 4, lx <= 2 || ly <= 2 ? 'Too close to the edge: it surrounds very little. Go one or two lines higher.' : 'That is far from the corner. Corners come first.'];
+    }
+  }
+  return [false, ''];
+}
+function lessonClick(p) {
+  if (L.solved || p < 0 || L.busy) return;
+  const ex = LESSONS[L.i].ex[L.e], chk = curStep();
+  const [ok, msg] = judge(L.board, p, chk.check || chk, ex);
+  if (!ok) {
+    const b = L.board;
+    if (!b.whyIllegal(p, b.turn)) { const bb = b.clone(); bb.play(p, b.turn); draw($('lessonBoard'), bb, { marks: [{ p, kind: 'wrong', label: '✗' }], atari: true }); L.busy = true; setTimeout(() => { L.busy = false; drawLesson(); }, 1100); }
+    setMsg('no', '✗ ' + esc(msg || 'Not quite.'));
+    return;
+  }
+  click();
+  L.board.play(p, L.board.turn);
+  L.marks = [];
+  if (msg === 'chase') {
+    // The runner extends on its last liberty; keep chasing.
+    const tgt = L.board.parse(chk.target);
+    const lib = L.board.group(tgt).libs[0];
+    L.busy = true; drawLesson();
+    setMsg('ok', '✓ Atari! White runs…');
+    setTimeout(() => { L.busy = false; L.board.play(lib, L.board.turn); click(); drawLesson(); setMsg('', 'White ran to ' + L.board.name(lib) + '. Keep chasing: atari again.'); }, 600);
+    return;
+  }
+  const step = curStep();
+  if (ex.steps && L.step < ex.steps.length - 1) {
+    setMsg('ok', '✓ ' + esc(step.ok || 'Good.'));
+    L.busy = true; drawLesson();
+    setTimeout(() => {
+      L.busy = false;
+      if (step.reply) { L.board.play(L.board.parse(step.reply), L.board.turn); click(); }
+      L.step++;
+      const nx = ex.steps[L.step];
+      if (nx.goal) $('exGoal').textContent = (ex.play === 'w' ? '⚪ ' : '⚫ ') + nx.goal;
+      drawLesson();
+    }, 700);
+    return;
+  }
+  L.solved = true;
+  setMsg('ok', '✓ ' + esc(step.ok || ex.ok || 'Correct!'));
+  $('exDots').children[L.e].className = 'done cur';
+  if (L.e === LESSONS[L.i].ex.length - 1) { progress.done[L.i] = 1; saveProgress(); renderLessonList(); }
+  drawLesson();
+}
+function lessonAnswer() {
+  const ex = LESSONS[L.i].ex[L.e], step = curStep(), chk = step.check || step;
+  const b = L.board;
+  let ans = null;
+  for (let i = 0; i < b.eN && ans === null; i++) { const p = b.E[i]; if (judge(b, p, chk, ex)[0]) ans = p; }
+  if (ans === null) { setMsg('', ex.hint || ''); return; }
+  L.marks = [{ p: ans, kind: 'best', label: '✓' }];
+  drawLesson();
+  setMsg('', '👀 The answer is <b>' + b.name(ans) + '</b>. Tap it to continue.');
+}
+$('lessonBoard').addEventListener('click', e => lessonClick(pointAt($('lessonBoard'), L.board, e)));
+$('exHint').onclick = () => setMsg('', '💡 ' + esc(LESSONS[L.i].ex[L.e].hint || 'Look at the liberties.'));
+$('exShow').onclick = lessonAnswer;
+$('exReset').onclick = () => openLesson(L.i, L.e);
+$('exNext').onclick = () => {
+  const l = LESSONS[L.i];
+  if (L.e < l.ex.length - 1) openLesson(L.i, L.e + 1);
+  else if (L.i < LESSONS.length - 1) openLesson(L.i + 1, 0);
+  else { showTab('play'); $('gLevel').value = '1'; $('gSize').value = '9'; showLevel(); }
+};
+
+/* ================================================================ PLAY: engine */
+const LEVELS = [
+  { name: '1 · First steps', po: 0, info: 'Plays almost at random, but grabs any capture it sees. For your very first games.' },
+  { name: '2 · Beginner', po: 120, temp: 1, blunder: 0.25, info: 'Knows the basics and makes plenty of mistakes. Beat it a few times, then move up.' },
+  { name: '3 · Improving', po: 500, temp: 0.6, blunder: 0.1, info: 'Reads short fights and punishes stones left in atari.' },
+  { name: '4 · Casual', po: 1800, temp: 0.3, blunder: 0.03, info: 'A solid opponent for players who have finished the lessons and won some games.' },
+  { name: '5 · Club', po: 6000, timeMs: 5000, temp: 0, info: 'Plays its best move every time. A good challenge on 9×9.' },
+  { name: '6 · Strongest', po: 25000, timeMs: 9000, temp: 0, info: 'Thinks up to 9 seconds a move. Still well below a strong human on 19×19.' }
+];
+$('gLevel').innerHTML = LEVELS.map((l, i) => '<option value="' + (i + 1) + '">' + l.name + '</option>').join('');
+function showLevel() { const l = LEVELS[+$('gLevel').value - 1]; $('levelInfo').textContent = 'Level ' + l.name + ': ' + l.info + ($('gMode').value === 'capture' ? ' Capture game: whoever captures the first stone wins — the best way to practise ataris.' : ''); }
+$('gLevel').onchange = showLevel; $('gMode').onchange = showLevel;
+
+let worker = null, workerOk = true, reqId = 0;
+const pending = new Map();
+function makeWorker() {
+  try {
+    worker = new Worker('go-engine.js');
+    worker.onmessage = e => { const p = pending.get(e.data.id); if (!p) return; pending.delete(e.data.id); e.data.error ? p.rej(new Error(e.data.error)) : p.res(e.data.result); };
+    worker.onerror = () => { workerOk = false; };
+  } catch (e) { workerOk = false; worker = null; }
+}
+function engine(pos, opts) {
+  if (!worker && workerOk) makeWorker();
+  if (!worker) return new Promise((res, rej) => setTimeout(() => { try { res(G.search(G.fromPos(pos), Object.assign({}, opts, { playouts: Math.min(opts.playouts, 3000) }))); } catch (e) { rej(e); } }, 20));
+  return new Promise((res, rej) => { const id = ++reqId; pending.set(id, { res, rej }); worker.postMessage({ id, pos, opts }); });
+}
+function stopEngine() {
+  if (worker) { worker.terminate(); worker = null; }
+  pending.forEach(p => p.rej(new Error('cancelled'))); pending.clear();
+}
+/* Analysis strength: same for every level, so advice and feedback are always the engine's best. */
+function analysisBudget(n) { return n <= 9 ? { playouts: 12000, timeMs: 2500 } : n <= 13 ? { playouts: 9000, timeMs: 3000 } : { playouts: 7000, timeMs: 3500 }; }
+
+/* ================================================================ PLAY: game state */
+let game = null;
+let viewAt = null;          // null = live position, else number of moves shown
+let busy = false;           // computer thinking or analysis running
+let pendingMove = -1;       // first tap when "tap twice" is on
+let hover = -1;
+let overlay = null;         // {marks, own}
+let lastAnalysis = null;    // cached analysis {key, result}
+let revealNext = false;     // "Show me the move" after a hint
+
+function newGame(opts) {
+  stopEngine(); busy = false;
+  const n = +$('gSize').value, h = +$('gHandicap').value, mode = $('gMode').value;
+  let user = +$('gColor').value; if (!user) user = Math.random() < 0.5 ? BLACK : WHITE;
+  const b = new G.Board(n);
+  const hc = mode === 'capture' ? [] : G.handicapPoints(n, h).map(([x, y]) => b.pt(x, y));
+  game = { n, user, level: +$('gLevel').value, mode, handicap: hc.length, komi: mode === 'capture' ? 0 : (hc.length ? 0.5 : 7.5), setup: { b: hc, w: [] }, first: hc.length ? WHITE : BLACK, moves: [], over: false, result: '', winner: 0, dead: [], reviews: {}, date: new Date().toISOString().slice(0, 10) };
+  Object.assign(game, opts || {});
+  viewAt = null; overlay = null; lastAnalysis = null; pendingMove = -1;
+  $('endBox').classList.add('hidden'); $('reviewOut').innerHTML = '';
+  coach('', '<h3>New game</h3><p>You play <b>' + colName(game.user) + '</b> on ' + n + '×' + n + ' against level ' + game.level + '.' + (game.mode === 'capture' ? ' Capture game: the first player to capture a stone wins.' : (game.handicap ? ' You have ' + game.handicap + ' handicap stones.' : '')) + '</p><p>Press <b>💡 Advice</b> whenever you are unsure what to play.</p>');
+  save(); render();
+  maybeComputer();
+}
+function pos(upto) { return { n: game.n, setup: game.setup, first: game.first, moves: upto === undefined ? game.moves : game.moves.slice(0, upto) }; }
+function boardAt(upto) { return G.fromPos(pos(upto)); }
+function liveBoard() { return boardAt(); }
+function save() { if (game) store.set('goForgeGame', game); }
+function userTurn() { return game && !game.over && liveBoard().turn === game.user; }
+
+function render() {
+  if (!game) return;
+  const k = viewAt === null ? game.moves.length : viewAt;
+  const b = boardAt(k);
+  const numbers = $('optNumbers').checked ? new Map() : null;
+  if (numbers) { game.moves.slice(0, k).forEach(([c, p], i) => { if (p !== PASS && b.c[p] === c) numbers.set(p, i + 1); }); }
+  const live = viewAt === null;
+  const marks = (overlay && overlay.at === k && overlay.marks) || [];
+  draw($('playBoard'), b, {
+    last: b.last > 0 ? b.last : -1, marks, own: overlay && overlay.at === k ? overlay.own : null,
+    dead: game.over && live ? new Set(game.dead) : null, atari: $('optAtari').checked && !(game.over && live), numbers,
+    ghost: live && !busy && !game.over && hover > 0 && b.turn === game.user ? { p: pendingMove > 0 ? pendingMove : hover, col: game.user } : null, confirm: pendingMove > 0
+  });
+  $('navPos').textContent = 'move ' + k + '/' + game.moves.length;
+  const dot = c => '<span class="dot" style="background:' + (c === BLACK ? '#111' : '#fff') + '"></span>';
+  let t;
+  if (game.over) t = '🏁 ' + game.result;
+  else if (!live) t = '⏪ Looking at move ' + k + ' — press ⏭ to go back to the game';
+  else if (busy) t = dot(b.turn) + (b.turn === game.user ? 'Coach is thinking…' : 'Computer is thinking…');
+  else t = dot(b.turn) + (b.turn === game.user ? 'Your move (' + colName(b.turn) + ')' : colName(b.turn) + ' to play');
+  $('turnInfo').innerHTML = t;
+  $('capInfo').textContent = game.mode === 'capture' ? 'First capture wins' : 'Captured: ⚫ ' + b.caps[BLACK] + ' · ⚪ ' + b.caps[WHITE] + ' · komi ' + game.komi;
+  const canAct = live && !busy && !game.over;
+  $('adviceBtn').disabled = !(canAct && b.turn === game.user);
+  $('feedbackBtn').disabled = busy || !game.moves.some(m => m[0] === game.user);
+  $('passBtn').disabled = !(canAct && b.turn === game.user);
+  $('resignBtn').disabled = !canAct;
+  $('undoBtn').disabled = busy || !game.moves.some(m => m[0] === game.user);
+  $('aheadBtn').disabled = busy;
+  renderStats();
+}
+function coach(kind, html) { const c = $('coach'); c.className = 'coach' + (kind ? ' ' + kind : ''); c.innerHTML = html; }
+
+/* ---------------------------------------------------------------- user moves */
+$('playBoard').addEventListener('click', e => {
+  if (!game) return;
+  const b = liveBoard(), p = pointAt($('playBoard'), b, e);
+  if (p < 0) return;
+  if (game.over && viewAt === null && game.mode === 'normal') { toggleDead(p); return; }
+  if (viewAt !== null || busy || game.over || b.turn !== game.user) return;
+  if ($('optConfirm').checked && pendingMove !== p) { pendingMove = p; hover = p; render(); return; }
+  pendingMove = -1;
+  tryUserMove(p);
+});
+$('playBoard').addEventListener('pointermove', e => {
+  if (!game || e.pointerType === 'touch') return;
+  const b = boardAt(viewAt === null ? game.moves.length : viewAt), p = pointAt($('playBoard'), b, e);
+  $('hoverName').textContent = p > 0 ? b.name(p) : '';
+  if (p !== hover) { hover = p; if (viewAt === null && !busy && pendingMove < 0) render(); }
+});
+$('playBoard').addEventListener('pointerleave', () => { hover = -1; $('hoverName').textContent = ''; if (game && pendingMove < 0) render(); });
+
+function tryUserMove(p) {
+  const b = liveBoard();
+  const why = b.whyIllegal(p, game.user);
+  if (why) { coach('bad', '<h3>You cannot play ' + b.name(p) + '</h3><p>' + esc(why) + '</p>'); return; }
+  if ($('optWarn').checked && game.mode === 'normal') {
+    const f = G.moveFacts(b, p, game.user), warn = [];
+    if (f.selfAtari >= 2 && !f.captures) warn.push('your ' + plural(f.selfAtari, 'stone') + ' would have only one liberty left, so they can be captured next move');
+    const savable = G.urgent(b, game.user).filter(u => u.kind === 'mine' && u.size >= 2 && (u.canRun || u.canCaptureOut));
+    for (const u of savable) if (f.leftInAtari.some(g => g.size === u.size)) warn.push('your ' + plural(u.size, 'stone') + ' near ' + b.name(u.at) + ' are in atari and can still be saved');
+    if (f.missedCapture && f.missedCapture.size >= 2 && !f.captures) warn.push('you could capture ' + plural(f.missedCapture.size, 'stone') + ' at ' + b.name(f.missedCapture.at));
+    if (f.ownEye && b.moveNo > 4) warn.push('this fills one of your own eyes');
+    if (warn.length) { askConfirm(p, warn); return; }
+  }
+  if ($('optWarn').checked && game.mode === 'capture') {
+    const bb = b.clone(); bb.play(p, game.user);
+    const danger = G.urgent(bb, 3 - game.user).find(u => u.kind === 'theirs');
+    if (danger) { askConfirm(p, ['the computer could then capture at ' + bb.name(danger.lib) + ' and win']); return; }
+  }
+  commitMove(p);
+}
+function askConfirm(p, warn) {
+  const b = liveBoard();
+  overlay = { at: game.moves.length, marks: [{ p, kind: 'warn', label: '?' }] }; render();
+  const box = $('confirmBox');
+  box.innerHTML = '<b>⚠️ Careful with ' + b.name(p) + ':</b> ' + esc(warn.join('; ')) + '.<div class="actions" style="margin-top:8px"><button class="secondary" type="button" id="cfBack">↶ Let me think again</button><button class="primary" type="button" id="cfPlay">Play it anyway</button></div>';
+  box.classList.remove('hidden');
+  $('cfBack').onclick = () => { box.classList.add('hidden'); overlay = null; render(); };
+  $('cfPlay').onclick = () => { box.classList.add('hidden'); overlay = null; commitMove(p); };
+}
+function commitMove(p) {
+  $('confirmBox').classList.add('hidden');
+  const b = liveBoard();
+  const cap = b.play(p, game.user);
+  if (cap < 0) return;
+  click();
+  game.moves.push([game.user, p]);
+  overlay = null; lastAnalysis = null;
+  if (game.mode === 'capture' && cap > 0) { endGame(game.user, 'You captured ' + plural(cap, 'stone') + ' — you win the capture game!'); return; }
+  save(); render();
+  if ($('optAuto').checked) feedback(true).then(maybeComputer); else maybeComputer();
+}
+
+/* ---------------------------------------------------------------- computer moves */
+function quickMove(b, col) {
+  // Level 1: a capture if there is one, else a random sensible move.
+  const u = G.urgent(b, col);
+  const cap = u.find(x => x.kind === 'theirs');
+  if (cap && Math.random() < 0.8) return cap.lib;
+  const save = u.find(x => x.kind === 'mine' && x.canRun);
+  if (save && Math.random() < 0.4) return save.lib;
+  const cand = [];
+  for (let i = 0; i < b.eN; i++) {
+    const p = b.E[i];
+    if (!b.isLegal(p, col) || b.isEye(p, col)) continue;
+    if (b.line(p) === 1 && b.moveNo < b.n * b.n / 2 && Math.random() < 0.8) continue;
+    const bb = b.clone(); bb.play(p, col);
+    if (bb.group(p).libs.length < 2 && Math.random() < 0.7) continue;
+    cand.push(p);
+  }
+  return cand.length ? cand[(Math.random() * cand.length) | 0] : PASS;
+}
+function pickMove(r, lv) {
+  const ms = r.moves.filter(m => m.move !== PASS || m === r.moves[0]);
+  if (!ms.length) return PASS;
+  if (lv.blunder && Math.random() < lv.blunder && ms.length > 3) {
+    const pool = ms.slice(1, Math.min(ms.length, 12));
+    return pool[(Math.random() * pool.length) | 0].move;
+  }
+  if (!lv.temp) return ms[0].move;
+  const top = ms[0].N, cand = ms.filter(m => m.N >= Math.max(2, top * 0.04));
+  const w = cand.map(m => Math.pow(m.N, 1 / lv.temp)), sum = w.reduce((a, c) => a + c, 0);
+  let x = Math.random() * sum;
+  for (let i = 0; i < cand.length; i++) { x -= w[i]; if (x <= 0) return cand[i].move; }
+  return cand[0].move;
+}
+async function maybeComputer() {
+  if (!game || game.over || busy) return;
+  const b = liveBoard();
+  if (b.turn === game.user) return;
+  busy = true; render();
+  const col = b.turn, lv = LEVELS[game.level - 1];
+  const myGame = game;
+  let move, r = null;
+  try {
+    if (game.level === 1) { await new Promise(res => setTimeout(res, 350)); move = quickMove(b, col); }
+    else {
+      r = await engine(pos(), { playouts: lv.po, timeMs: lv.timeMs || 4000, komi: game.komi, captureWins: game.mode === 'capture' });
+      move = pickMove(r, lv);
+    }
+  } catch (e) { if (myGame === game) { busy = false; render(); } return; }
+  if (myGame !== game) return;
+  busy = false;
+  const userPassed = game.moves.length && game.moves[game.moves.length - 1][1] === PASS;
+  if (r && game.mode === 'normal') {
+    const compWin = r.win;
+    if (game.level >= 3 && compWin < 0.03 && b.moveNo > game.n * game.n * 0.45) { endGame(game.user, 'The computer resigns — you win!'); return; }
+    if (userPassed) {
+      const est = estimate(b, r.own);
+      const compLead = col === BLACK ? est.lead : -est.lead;
+      if (compLead > 0 || compWin < 0.15 || est.neutral === 0) move = PASS;
+    }
+  }
+  if (game.level === 1 && userPassed && b.moveNo > game.n * 2) move = PASS;
+  if (b.moveNo > game.n * game.n * 2) move = PASS;
+  const cap = b.play(move, col);
+  if (cap < 0) move = PASS;
+  game.moves.push([col, move]);
+  click();
+  if (game.mode === 'capture' && cap > 0) { endGame(col, 'The computer captured ' + plural(cap, 'stone') + ' at ' + b.name(move) + ' — it wins this capture game. Press Feedback to see what went wrong.'); return; }
+  if (move === PASS) {
+    if (userPassed) { save(); await scoreGame(); return; }
+    coach('', '<h3>The computer passes</h3><p>It thinks there is nothing big left to play. If you agree, press <b>Pass</b> to end the game and count. If not, keep playing.</p>');
+  }
+  save(); render();
+}
+/* Area estimate from ownership: lead = black − white − komi. */
+function estimate(b, own) {
+  let s = 0, neutral = 0;
+  for (let p = 0; p < b.L; p++) { if (b.c[p] === 3) continue; const v = own[p]; if (v > 0.33) s++; else if (v < -0.33) s--; else if (b.c[p] === 0) neutral++; }
+  return { lead: s - game.komi, neutral };
+}
+
+/* ---------------------------------------------------------------- pass, resign, undo, end */
+$('passBtn').onclick = () => {
+  if (!userTurn()) return;
+  const b = liveBoard();
+  game.moves.push([game.user, PASS]); click();
+  const compPassed = game.moves.length >= 2 && game.moves[game.moves.length - 2][1] === PASS;
+  if (game.mode === 'capture') { save(); render(); maybeComputer(); return; }
+  if (compPassed) { save(); scoreGame(); return; }
+  coach('', '<h3>You passed</h3><p>' + (b.moveNo < game.n * game.n / 3 ? 'That is early — there are usually still big points on the board. ' : '') + 'If the computer passes too, the game ends and is counted.</p>');
+  save(); render(); maybeComputer();
+};
+$('resignBtn').onclick = () => { if (game && !game.over && confirm('Resign this game?')) endGame(3 - game.user, 'You resigned. ' + colName(3 - game.user) + ' wins.'); };
+$('undoBtn').onclick = () => {
+  if (!game || busy) return;
+  if (game.over) { game.over = false; game.result = ''; game.winner = 0; game.dead = []; $('endBox').classList.add('hidden'); }
+  let i = game.moves.length - 1;
+  while (i >= 0 && game.moves[i][0] !== game.user) i--;
+  if (i < 0) return;
+  game.moves = game.moves.slice(0, i);
+  for (const k in game.reviews) if (+k >= i) delete game.reviews[k];
+  viewAt = null; overlay = null; lastAnalysis = null;
+  coach('', '<h3>Move taken back</h3><p>Your last move (and the computer’s answer) were undone. Try something else — or press <b>💡 Advice</b>.</p>');
+  save(); render(); maybeComputer();
+};
+async function scoreGame() {
+  const b = liveBoard();
+  busy = true; render();
+  coach('', '<h3>Counting…</h3><p>Both players passed. The coach is finding the dead stones.</p>');
+  let dead = [];
+  try {
+    const r = await engine(pos(), Object.assign({}, analysisBudget(game.n), { komi: game.komi }));
+    for (let p = 0; p < b.L; p++) { const v = b.c[p]; if ((v === BLACK && r.own[p] < -0.4) || (v === WHITE && r.own[p] > 0.4)) dead.push(p); }
+  } catch (e) { /* count without dead stones */ }
+  busy = false;
+  game.dead = dead;
+  finishCount();
+}
+function finishCount() {
+  const b = liveBoard(), s = b.areaScore(game.dead);
+  const diff = s.black - s.white - game.komi;
+  const winner = diff > 0 ? BLACK : WHITE;
+  game.over = true; game.winner = winner;
+  game.result = colName(winner) + ' wins by ' + Math.abs(diff) + ' point' + (Math.abs(diff) === 1 ? '' : 's');
+  game.scoreText = '⚫ Black ' + s.black + ' · ⚪ White ' + s.white + ' + ' + game.komi + ' komi = ' + (s.white + game.komi);
+  overlay = { at: game.moves.length, own: Array.from(s.own) };
+  recordResult(winner === game.user);
+  coach(winner === game.user ? 'good' : 'warn', '<h3>' + (winner === game.user ? '🎉 You win!' : 'The computer wins') + ' — ' + esc(game.result) + '</h3><p>' + esc(game.scoreText) + '. Squares show whose area each point is; crossed stones are dead.</p><p class="muted">Disagree about a dead group? Tap it to mark it dead or alive and the score updates.</p>');
+  $('endBox').classList.remove('hidden');
+  save(); render();
+}
+function toggleDead(p) {
+  const b = liveBoard();
+  if (b.c[p] !== BLACK && b.c[p] !== WHITE) return;
+  const stones = b.group(p).stones, set = new Set(game.dead), isDead = set.has(p);
+  stones.forEach(s => isDead ? set.delete(s) : set.add(s));
+  game.dead = [...set];
+  if (game.recorded) undoRecord();
+  finishCount();
+}
+function endGame(winner, text) {
+  game.over = true; game.winner = winner; game.result = text;
+  busy = false;
+  recordResult(winner === game.user);
+  coach(winner === game.user ? 'good' : 'warn', '<h3>' + (winner === game.user ? '🎉 ' : '') + esc(text) + '</h3><p>Press <b>📈 Review my whole game</b> to see your biggest mistakes, or play again.</p>');
+  $('endBox').classList.remove('hidden');
+  save(); render();
+}
+$('againBtn').onclick = () => newGame();
+$('newGame').onclick = () => { if (game && !game.over && game.moves.length > 4 && !confirm('Start a new game? The current one will be lost.')) return; newGame(); };
+
+/* ---------------------------------------------------------------- stats */
+function statKey() { return game.mode + ':' + game.n + ':' + game.level; }
+function recordResult(won) {
+  if (game.recorded) return;
+  const k = statKey(), st = progress.stats[k] || { w: 0, l: 0, streak: 0 };
+  if (won) { st.w++; st.streak = Math.max(0, st.streak) + 1; } else { st.l++; st.streak = 0; }
+  progress.stats[k] = st; game.recorded = won ? 'w' : 'l'; saveProgress();
+}
+function undoRecord() {
+  const st = progress.stats[statKey()];
+  if (st) { if (game.recorded === 'w') { st.w = Math.max(0, st.w - 1); st.streak = Math.max(0, st.streak - 1); } else st.l = Math.max(0, st.l - 1); saveProgress(); }
+  game.recorded = null;
+}
+function renderStats() {
+  if (!game) { $('stats').textContent = ''; return; }
+  const st = progress.stats[statKey()];
+  if (!st) { $('stats').textContent = 'Your record at this level and board size will appear here.'; return; }
+  let t = 'Your record (' + (game.mode === 'capture' ? 'capture game, ' : '') + game.n + '×' + game.n + ', level ' + game.level + '): ' + plural(st.w, 'win') + ', ' + st.l + (st.l === 1 ? ' loss' : ' losses') + '.';
+  if (st.streak >= 3 && game.level < 6) t += ' 🔥 ' + st.streak + ' wins in a row — time to try level ' + (game.level + 1) + '!';
+  $('stats').textContent = t;
+}
+
+/* ---------------------------------------------------------------- advice and feedback */
+const RATES = ['Best move', 'Good move', 'Inaccuracy', 'Mistake', 'Blunder'];
+const RATE_ICONS = ['🌟', '👍', '🟡', '🟠', '🔴'];
+function pct(x) { return Math.round(x * 100) + '%'; }
+function pts(x) { const v = Math.round(Math.abs(x) * 2) / 2; return v + ' point' + (v === 1 ? '' : 's'); }
+
+async function analyse(upto, force) {
+  const key = upto + ':' + force;
+  if (lastAnalysis && lastAnalysis.key === key) return lastAnalysis.r;
+  const r = await engine(pos(upto), Object.assign({}, analysisBudget(game.n), { komi: game.komi, captureWins: game.mode === 'capture', force }));
+  lastAnalysis = { key, r };
+  return r;
+}
+
+$('adviceBtn').onclick = advice;
+async function advice() {
+  if (!userTurn() || busy) return;
+  const b = liveBoard(), col = game.user, at = game.moves.length;
+  busy = true; render();
+  coach('', '<h3>💡 Thinking about your next move…</h3><p>The coach is trying out thousands of possible games.</p>');
+  let r;
+  try { r = await analyse(at, null); } catch (e) { busy = false; render(); return; }
+  busy = false;
+  if (game.moves.length !== at) { render(); return; }
+  const parts = [];
+  // Urgent things first.
+  const u = G.urgent(b, col);
+  for (const x of u.slice(0, 3)) {
+    if (x.kind === 'mine') {
+      if (x.canCaptureOut) parts.push('⚠️ Your ' + plural(x.size, 'stone') + ' near ' + b.name(x.at) + ' are in <b>atari</b>. You can rescue them by capturing at <b>' + b.name(x.canCaptureOut) + '</b>.');
+      else if (x.canRun) parts.push('⚠️ Your ' + plural(x.size, 'stone') + ' near ' + b.name(x.at) + ' are in <b>atari</b> (last liberty ' + b.name(x.lib) + '). Extend there to save them' + (x.size === 1 ? ' — if the stone matters' : '') + '.');
+      else parts.push('Your ' + plural(x.size, 'stone') + ' near ' + b.name(x.at) + ' are in atari and <b>cannot be saved</b> by running — they would be chased and captured. Do not add more stones there.');
+    } else parts.push('🎯 ' + colName(3 - col) + '’s ' + plural(x.size, 'stone') + ' near ' + b.name(x.at) + ' are in atari: you can <b>capture at ' + b.name(x.lib) + '</b>.');
+  }
+  const top = r.moves.filter(m => m.N > 0).slice(0, 3);
+  const best = top[0];
+  if (!best) { coach('', '<h3>💡 Advice</h3><p>No moves left — you can pass.</p>'); render(); return; }
+  const hintOnly = $('optHint').value === 'hint';
+  let html = '<h3>💡 Advice for ' + colName(col) + '</h3>' + parts.map(x => '<p>' + x + '</p>').join('');
+  if (best.move === PASS) {
+    html += '<p>The coach thinks the game is over: <b>pass</b>. ' + (game.mode === 'normal' ? 'Your win chance: about ' + pct(r.win) + '.' : '') + '</p>';
+    overlay = { at, marks: [] };
+  } else {
+    const f = G.moveFacts(b, best.move, col), rs = reasons(b, f);
+    const why = rs.good.length ? rs.good : ['it scores best in the coach’s simulated games'];
+    if (hintOnly && !revealNext) {
+      const [x, y] = b.xy(best.move), x0 = Math.max(0, x - 1), y0 = Math.max(0, y - 1), x1 = Math.min(b.n - 1, x + 1), y1 = Math.min(b.n - 1, y + 1);
+      html += '<p>Look at <b>' + region(b, best.move) + '</b> (the green area). A good move there ' + esc(why[0]) + '.</p><div class="actions"><button class="secondary" type="button" id="showBest">👀 Show me the move</button></div>';
+      overlay = { at, marks: [{ p: best.move, kind: 'hint', x0, y0, w: x1 - x0 + 1, h: y1 - y0 + 1 }] };
+    } else {
+      html += '<p>Best idea: <b>' + b.name(best.move) + '</b> (marked 1). It ' + esc(why.join(', and it ')) + '.</p>';
+      if (rs.bad.length) html += '<p class="muted">Watch out: it ' + esc(rs.bad.join('; ')) + '.</p>';
+      const alts = top.slice(1).filter(m => m.move !== PASS && m.N >= best.N * 0.15);
+      if (alts.length) html += '<p>Also worth considering: ' + alts.map((m, i) => '<b>' + b.name(m.move) + '</b> (' + (i + 2) + ')').join(', ') + '.</p>';
+      if (game.mode === 'normal') html += '<p class="muted">Coach’s estimate with the best move: about ' + pct(best.win) + ' win chance for you' + (Math.abs(best.score) >= 0.5 ? ', ' + (best.score > 0 ? 'ahead' : 'behind') + ' by about ' + pts(best.score) : '') + '.</p>';
+      overlay = { at, marks: [{ p: best.move, kind: 'best', label: '1' }].concat(alts.map((m, i) => ({ p: m.move, kind: 'alt', label: String(i + 2) }))) };
+    }
+  }
+  coach('good', html);
+  const sb = $('showBest');
+  if (sb) sb.onclick = () => { revealNext = true; advice().then(() => { revealNext = false; }); };
+  render();
+}
+
+$('feedbackBtn').onclick = () => feedback(false);
+/* Reviews the user's latest move. auto = called after each move automatically. */
+async function feedback(auto) {
+  if (!game || busy) return;
+  let i = game.moves.length - 1;
+  while (i >= 0 && game.moves[i][0] !== game.user) i--;
+  if (i < 0) return;
+  const p = game.moves[i][1], before = boardAt(i);
+  busy = true; render();
+  coach('', '<h3>🔍 Checking your move ' + before.name(p) + '…</h3>');
+  let rv;
+  try { rv = await reviewMove(i); } catch (e) { busy = false; render(); return; }
+  busy = false;
+  coach(['good', 'good', 'warn', 'bad', 'bad'][rv.rate], feedbackHtml(before, rv, i, auto));
+  if (auto) { viewAt = null; overlay = { at: game.moves.length, marks: rv.marks.filter(m => m.kind !== 'best' || liveBoard().c[m.p] === 0) }; }
+  else { viewAt = i; overlay = { at: i, marks: rv.marks }; }
+  save(); render();
+}
+/* Grades move i of the game. Returns {rate, loss, user, best, facts…, marks}. */
+async function reviewMove(i, budget) {
+  if (game.reviews[i] && !budget) return game.reviews[i];
+  const [col, p] = game.moves[i], b = boardAt(i);
+  const opts = Object.assign({}, budget || analysisBudget(game.n), { komi: game.komi, captureWins: game.mode === 'capture', force: p });
+  const r = budget ? await engine(pos(i), opts) : await analyse(i, p);
+  const mine = r.moves.find(m => m.move === p) || { move: p, win: 0, score: -99, N: 0 };
+  const others = r.moves.filter(m => m.move !== p);
+  // The coach's choice is its most-searched other move; yours counts as best unless that one is clearly better.
+  const alt = others[0];
+  let best = mine;
+  if (alt && (alt.win - mine.win > 0.01 || (Math.abs(alt.win - mine.win) <= 0.01 && game.mode === 'normal' && alt.score - mine.score > 1))) best = alt;
+  const loss = Math.max(0, best.win - mine.win);
+  const ptLoss = game.mode === 'normal' ? Math.max(0, best.score - mine.score) : 0;
+  const scale = game.n <= 9 ? 1 : game.n <= 13 ? 1.4 : 2;
+  let rate = best === mine || loss < 0.015 ? 0 : loss < 0.06 ? 1 : loss < 0.14 ? 2 : loss < 0.28 ? 3 : 4;
+  if (game.mode === 'normal' && best !== mine) {
+    // Points lost matter too: in a decided game the win chance barely moves. Points alone never make a blunder.
+    const pr = ptLoss < 2 * scale ? 0 : ptLoss < 4 * scale ? 2 : 3;
+    if (pr > rate) rate = pr;
+  }
+  const f = G.moveFacts(b, p, col);
+  if (f.selfAtari >= 3 && rate < 3 && loss > 0.03) rate = 3;
+  const rv = { i, move: p, rate, loss, ptLoss, myWin: mine.win, bestWin: best.win, best: best.move, myScore: mine.score };
+  rv.marks = [{ p, kind: rate <= 1 ? 'ok' : rate === 2 ? 'warn' : 'bad', label: rate <= 1 ? '✓' : '!' }];
+  if (best.move !== p && best.move !== PASS) rv.marks.push({ p: best.move, kind: 'best', label: '★' });
+  game.reviews[i] = rv;
+  return rv;
+}
+function feedbackHtml(b, rv, i, live) {
+  const col = game.moves[i][0];
+  const f = G.moveFacts(b, rv.move, col), rs = reasons(b, f);
+  let h = '<h3><span class="rate r' + rv.rate + '">' + RATE_ICONS[rv.rate] + ' ' + RATES[rv.rate] + '</span> ' + (rv.move === PASS ? 'your pass' : 'your move ' + b.name(rv.move)) + '</h3>';
+  if (rs.good.length) h += '<p>👍 It ' + esc(rs.good.join(', and it ')) + '.</p>';
+  if (rs.bad.length) h += '<p>⚠️ But it ' + esc(rs.bad.join('; ')) + '.</p>';
+  if (rv.best !== rv.move) {
+    const bf = G.moveFacts(b, rv.best, col), br = reasons(b, bf);
+    h += '<p>' + (rv.rate >= 2 ? 'Better was ' : 'The coach slightly preferred ') + '<b>' + (rv.best === PASS ? 'passing' : b.name(rv.best)) + '</b> (★)' + (br.good.length ? ': it ' + esc(br.good.slice(0, 2).join(', and it ')) : '') + '.</p>';
+    if (game.mode === 'normal') h += '<p class="muted">Coach’s estimate: your move ' + pct(rv.myWin) + ' win chance, ★ ' + pct(rv.bestWin) + (rv.ptLoss >= 0.5 ? ' — about ' + pts(rv.ptLoss) + ' lost' : '') + '.</p>';
+    else h += '<p class="muted">Coach’s estimate: your move ' + pct(rv.myWin) + ' chance to capture first, ★ ' + pct(rv.bestWin) + '.</p>';
+  } else {
+    h += '<p>That is the move the coach liked best too.' + (game.mode === 'normal' ? ' Win chance about ' + pct(rv.myWin) + '.' : '') + '</p>';
+  }
+  if (!rs.good.length && !rs.bad.length && rv.rate >= 2) h += '<p class="muted">There is no simple tactical reason — the coach’s simulated games just end better after ★. Compare the two areas: which one is bigger, or more urgent?</p>';
+  if (!live) h += '<p class="muted">The board shows the position before move ' + (i + 1) + ': ' + (rv.rate <= 1 ? '✓' : '!') + ' is where you played' + (rv.best !== rv.move && rv.best !== PASS ? ', ★ the coach’s choice' : '') + '. Press ⏭ to return to the game.</p>';
+  return h;
+}
+
+/* ---------------------------------------------------------------- who is ahead */
+$('aheadBtn').onclick = async () => {
+  if (!game || busy) return;
+  const at = viewAt === null ? game.moves.length : viewAt, b = boardAt(at);
+  busy = true; render();
+  coach('', '<h3>📊 Counting the position…</h3>');
+  let r;
+  try { r = await analyse(at, null); } catch (e) { busy = false; render(); return; }
+  busy = false;
+  if (game.mode === 'capture') {
+    coach('', '<h3>📊 Capture game</h3><p>' + colName(b.turn) + ' to play has about ' + pct(r.win) + ' chance to capture first.</p>');
+  } else {
+    const lead = b.turn === BLACK ? r.score : -r.score, ahead = lead > 0 ? BLACK : WHITE;
+    const blackWin = b.turn === BLACK ? r.win : 1 - r.win;
+    coach('', '<h3>📊 ' + (Math.abs(lead) < 1 ? 'Very close' : colName(ahead) + ' is ahead by about ' + pts(lead)) + '</h3><p>Black’s win chance: about ' + pct(blackWin) + '. The small squares show who the coach thinks will own each point at the end; bigger squares are surer. Stones with an opposite-coloured square are probably lost.</p><p class="muted">This is an estimate from simulated games — in the opening it can easily be wrong by several points.</p>');
+  }
+  overlay = { at, own: r.own };
+  render();
+};
+
+/* ---------------------------------------------------------------- navigation */
+function nav(k) { if (!game) return; k = Math.max(0, Math.min(game.moves.length, k)); viewAt = k === game.moves.length ? null : k; render(); }
+$('navFirst').onclick = () => nav(0);
+$('navPrev').onclick = () => nav((viewAt === null ? game.moves.length : viewAt) - 1);
+$('navNext').onclick = () => nav((viewAt === null ? game.moves.length : viewAt) + 1);
+$('navLast').onclick = () => nav(game ? game.moves.length : 0);
+document.addEventListener('keydown', e => {
+  if ($('playPanel').classList.contains('hidden') || /input|select|textarea/i.test(e.target.tagName)) return;
+  if (e.key === 'ArrowLeft') $('navPrev').click(); else if (e.key === 'ArrowRight') $('navNext').click();
+});
+
+/* ---------------------------------------------------------------- game review */
+$('reviewBtn').onclick = async () => {
+  if (!game || busy) return;
+  const mine = game.moves.map((m, i) => [m, i]).filter(([m]) => m[0] === game.user).map(([, i]) => i);
+  if (!mine.length) return;
+  busy = true; render();
+  let cancelled = false;
+  const job = MigaProgress.create($('reviewProgress'), { onCancel: () => { cancelled = true; stopEngine(); } });
+  job.start('Reviewing your moves…');
+  const budget = game.n <= 9 ? { playouts: 2000, timeMs: 1500 } : game.n <= 13 ? { playouts: 1600, timeMs: 1800 } : { playouts: 1300, timeMs: 2000 };
+  try {
+    for (let k = 0; k < mine.length; k++) {
+      if (cancelled) break;
+      const i = mine[k];
+      if (!game.reviews[i]) await reviewMove(i, budget);
+      job.update((k + 1) / mine.length, 'Move ' + (k + 1) + ' of ' + mine.length);
+    }
+  } catch (e) {
+    busy = false; render();
+    if (!cancelled) job.fail(e, ['Try again', 'Close other tabs to give the coach more memory']);
+    else job.done('Review stopped.');
+    return;
+  }
+  busy = false;
+  job.done('Review finished.');
+  save(); renderReview(); render();
+};
+function renderReview() {
+  const revs = Object.values(game.reviews).filter(r => game.moves[r.i] && game.moves[r.i][0] === game.user).sort((a, b) => a.i - b.i);
+  if (!revs.length) { $('reviewOut').innerHTML = ''; return; }
+  const W = 600, H = 120, n = Math.max(1, game.moves.length);
+  const ptsLine = revs.map(r => ((r.i / n) * W).toFixed(1) + ',' + (H - r.myWin * H).toFixed(1)).join(' ');
+  const counts = [0, 0, 0, 0, 0]; revs.forEach(r => counts[r.rate]++);
+  const worst = revs.filter(r => r.rate >= 2).sort((a, b) => (b.loss + b.ptLoss / 50) - (a.loss + a.ptLoss / 50)).slice(0, 5);
+  let h = '<h3 style="font:700 16px Space Grotesk;margin:12px 0 6px">Your game in numbers</h3>' +
+    '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" aria-label="Your win chance after each of your moves"><line x1="0" y1="' + H / 2 + '" x2="' + W + '" y2="' + H / 2 + '" stroke="#bbb" stroke-dasharray="4 4"/><polyline points="' + ptsLine + '" fill="none" stroke="#2f7bbf" stroke-width="2.5"/>' +
+    revs.filter(r => r.rate >= 3).map(r => '<circle cx="' + ((r.i / n) * W).toFixed(1) + '" cy="' + (H - r.myWin * H).toFixed(1) + '" r="5" fill="#d8604a"/>').join('') + '</svg>' +
+    '<p class="muted" style="margin:4px 0">Blue line: your win chance after each of your moves (top = winning). Red dots: mistakes and blunders.</p>' +
+    '<p>' + RATES.map((r, k) => RATE_ICONS[k] + ' ' + r + ': <b>' + counts[k] + '</b>').join(' · ') + '</p>';
+  h += worst.length ? '<p><b>Your biggest mistakes</b> — tap one to see it on the board:</p><div class="mistakes">' + worst.map(r => { const b = boardAt(r.i); return '<button type="button" data-i="' + r.i + '">' + RATE_ICONS[r.rate] + ' Move ' + (r.i + 1) + ': ' + (r.move === PASS ? 'pass' : b.name(r.move)) + ' — better ' + (r.best === PASS ? 'pass' : b.name(r.best)) + ' (' + (r.loss >= 0.03 ? Math.round(r.loss * 100) + '% win chance' : '') + (r.loss >= 0.03 && r.ptLoss >= 1 ? ', ' : '') + (r.ptLoss >= 1 ? 'about ' + pts(r.ptLoss) : '') + ' lost)</button>'; }).join('') + '</div>' : '<p>🎉 No big mistakes found — well played!</p>';
+  $('reviewOut').innerHTML = h;
+  $('reviewOut').querySelectorAll('[data-i]').forEach(btn => btn.onclick = () => {
+    const i = +btn.dataset.i, rv = game.reviews[i], b = boardAt(i);
+    viewAt = i; overlay = { at: i, marks: rv.marks };
+    coach(['good', 'good', 'warn', 'bad', 'bad'][rv.rate], feedbackHtml(b, rv, i));
+    render();
+    $('playBoard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+}
+
+/* ---------------------------------------------------------------- SGF */
+function toSgf() {
+  const b = new G.Board(game.n);
+  const pc = c => c === BLACK ? 'B' : 'W';
+  const lv = LEVELS[game.level - 1].name.replace(/^\d · /, '');
+  const you = 'You', comp = 'Go Forge level ' + game.level + ' (' + lv + ')';
+  let s = '(;GM[1]FF[4]CA[UTF-8]AP[Go Forge:1]SZ[' + game.n + ']KM[' + game.komi + ']RU[Chinese]DT[' + game.date + ']' +
+    'PB[' + (game.user === BLACK ? you : comp) + ']PW[' + (game.user === WHITE ? you : comp) + ']';
+  if (game.handicap) s += 'HA[' + game.handicap + ']';
+  if (game.setup.b.length) s += 'AB' + game.setup.b.map(p => '[' + G.sgfPt(b, p) + ']').join('');
+  if (game.over && game.winner && game.mode === 'normal') {
+    const m = /by ([\d.]+)/.exec(game.result);
+    s += 'RE[' + pc(game.winner) + '+' + (m ? m[1] : /resign/i.test(game.result) ? 'R' : '') + ']';
+  }
+  if (game.mode === 'capture') s += 'GC[Capture game: the first capture wins]';
+  s += '\n';
+  game.moves.forEach(([c, p], i) => {
+    s += ';' + pc(c) + '[' + G.sgfPt(b, p) + ']';
+    const rv = game.reviews[i];
+    if (rv) s += 'C[' + (RATES[rv.rate] + (rv.best !== p ? ' — coach preferred ' + b.name(rv.best) : '')).replace(/[\]\\]/g, '\\$&') + ']';
+    if ((i + 1) % 10 === 0) s += '\n';
+  });
+  return s + ')\n';
+}
+$('sgfBtn').onclick = () => {
+  if (!game) return;
+  const blob = new Blob([toSgf()], { type: 'application/x-go-sgf' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'go-forge-' + game.n + 'x' + game.n + '-' + game.date + '.sgf';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+};
+function parseSgf(text) {
+  const prop = (k) => { const m = new RegExp('(?:^|[;\\s\\]])' + k + '\\[([^\\]]*)\\]').exec(text); return m ? m[1] : null; };
+  const n = parseInt(prop('SZ') || '19', 10);
+  if (![9, 13, 19].includes(n) && !(n >= 5 && n <= 19)) throw new Error('Board size ' + n + ' is not supported.');
+  const b = new G.Board(n), setup = { b: [], w: [] };
+  const list = (k) => { const m = new RegExp('(?:^|[;\\s\\]])' + k + '((?:\\s*\\[[a-s]{2}\\])+)').exec(text); return m ? [...m[1].matchAll(/\[([a-s]{2})\]/g)].map(x => G.fromSgfPt(b, x[1])) : []; };
+  setup.b = list('AB'); setup.w = list('AW');
+  const moves = [...text.matchAll(/;\s*([BW])\[([a-s]{0,2})\]/g)].map(m => [m[1] === 'B' ? BLACK : WHITE, G.fromSgfPt(b, m[2])]);
+  const komi = parseFloat(prop('KM') || '7.5') || 0;
+  return { n, setup, moves, komi, first: moves.length ? moves[0][0] : (setup.b.length ? WHITE : BLACK) };
+}
+$('sgfIn').onchange = async e => {
+  const file = e.target.files[0]; e.target.value = '';
+  if (!file) return;
+  try {
+    const text = await file.text(), g = parseSgf(text);
+    G.fromPos(g); // validates the moves
+    stopEngine(); busy = false;
+    const pb = /PB\[You\]/.test(text), pw = /PW\[You\]/.test(text);
+    const user = pw && !pb ? WHITE : BLACK;
+    game = { n: g.n, user, level: +$('gLevel').value, mode: 'normal', handicap: g.setup.b.length, komi: g.komi, setup: g.setup, first: g.first, moves: g.moves, over: false, result: '', winner: 0, dead: [], reviews: {}, date: new Date().toISOString().slice(0, 10) };
+    viewAt = null; overlay = null; lastAnalysis = null;
+    $('endBox').classList.remove('hidden');
+    coach('', '<h3>📂 Game loaded</h3><p>' + plural(g.moves.length, 'move') + ' on ' + g.n + '×' + g.n + '. You are ' + colName(user) + '. Step through it with ◀ ▶, press <b>📈 Review my whole game</b>, or keep playing against the computer from here.</p>');
+    save(); render(); maybeComputer();
+  } catch (err) { coach('bad', '<h3>Could not open that file</h3><p>' + esc(err.message) + '</p>'); }
+};
+
+/* ---------------------------------------------------------------- settings */
+const OPT_IDS = ['optWarn', 'optAtari', 'optAuto', 'optConfirm', 'optNumbers', 'optSound', 'optHint'];
+const opts = store.get('goForgeOptions', {});
+OPT_IDS.forEach(id => { if (id in opts) { if ($(id).type === 'checkbox') $(id).checked = opts[id]; else $(id).value = opts[id]; } $(id).addEventListener('change', () => { opts[id] = $(id).type === 'checkbox' ? $(id).checked : $(id).value; store.set('goForgeOptions', opts); pendingMove = -1; render(); }); });
+if (!('optConfirm' in opts) && matchMedia('(pointer:coarse)').matches) $('optConfirm').checked = true;
+
+/* ================================================================ tabs, glossary, start */
+function showTab(t) {
+  document.querySelectorAll('[data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === t));
+  $('learnPanel').classList.toggle('hidden', t !== 'learn');
+  $('playPanel').classList.toggle('hidden', t !== 'play');
+  $('guidePanel').classList.toggle('hidden', t !== 'guide');
+  if (t === 'play' && !game) newGame();
+  else if (t === 'play') render();
+  store.set('goForgeTab', t);
+}
+document.querySelectorAll('[data-tab]').forEach(b => b.onclick = () => showTab(b.dataset.tab));
+
+const GLOSSARY = [['Liberty', 'An empty point next to a stone along the lines. A group with no liberties is captured.'], ['Atari', 'Only one liberty left: the stones can be captured next move.'], ['Group', 'Stones of one colour connected along the lines. They live or die together.'], ['Eye', 'An empty point surrounded by one player. Two separate eyes make a group alive.'], ['Alive / dead', 'Alive: cannot be captured. Dead: cannot avoid capture, even if it is still on the board.'], ['Ko', 'A one-stone capture that may not be retaken immediately.'], ['Ladder', 'A zig-zag chase of ataris that ends at the edge.'], ['Net (geta)', 'A loose move that traps stones without atari.'], ['Snapback', 'Giving a stone so you can recapture more right back.'], ['Komi', 'Points White gets for moving second: 7.5 here (0.5 with handicap).'], ['Handicap', 'Extra black stones on the star points so players of different strength can have an even game.'], ['Dame', 'A neutral point that belongs to nobody at the end.'], ['Sente / gote', 'Sente: a move your opponent must answer, so you keep the initiative. Gote: a move that lets them play elsewhere.'], ['Hoshi', 'Star point: the 4-4 point, and the marked points on the board.'], ['Joseki', 'Standard sequences in a corner that are fair for both sides.'], ['Tsumego', 'A life-and-death puzzle.'], ['Kyu / dan', 'Ranks: beginners start around 30 kyu and count down to 1 kyu; then 1 dan and up.'], ['Area scoring', 'Stones on the board plus surrounded empty points. Used here and in China.']];
+$('glossary').innerHTML = GLOSSARY.map(([t, d]) => '<div><b>' + t + '</b><br>' + d + '</div>').join('');
+
+renderLessonList();
+const firstOpen = LESSONS.findIndex((l, i) => !progress.done[i]);
+openLesson(firstOpen < 0 ? 0 : firstOpen, 0);
+const savedGame = store.get('goForgeGame', null);
+if (savedGame && savedGame.n && Array.isArray(savedGame.moves)) {
+  try {
+    G.fromPos(savedGame); game = savedGame; game.reviews = game.reviews || {};
+    $('gSize').value = String(game.n); $('gLevel').value = String(game.level); $('gMode').value = game.mode;
+    if (game.over) { $('endBox').classList.remove('hidden'); renderReview(); coach('', '<h3>Your last game</h3><p>' + esc(game.result) + '</p>'); }
+    else coach('', '<h3>Welcome back</h3><p>Your game is where you left it. Press <b>New game</b> to start over.</p>');
+  } catch (e) { game = null; }
+}
+showLevel();
+const params = new URLSearchParams(location.search);
+const startTab = params.get('tab') || (location.hash === '#play' ? 'play' : store.get('goForgeTab', 'learn'));
+showTab(['learn', 'play', 'guide'].includes(startTab) ? startTab : 'learn');
+maybeComputer();
+
+window.__goForge = {
+  get game() { return game; }, get busy() { return busy; }, LESSONS, judge, exBoard, toSgf, parseSgf, newGame, reviewMove,
+  playUser(name) { const b = liveBoard(); tryUserMove(b.parse(name)); },
+  verifyLessons() {
+    const out = [];
+    LESSONS.forEach((l, li) => l.ex.forEach((ex, ei) => {
+      try {
+        const b = exBoard(ex), steps = ex.steps || [ex];
+        steps.forEach((st, si) => {
+          const chk = st.check;
+          let found = null;
+          for (let k = 0; k < b.eN && found === null; k++) { const p = b.E[k]; L.step = si; if (judge(b, p, chk, ex)[0]) found = p; }
+          L.step = 0;
+          if (found === null) { out.push(li + '.' + ei + ' step ' + si + ': no answer'); return; }
+          if (chk.type === 'chase') {
+            const tgt = b.parse(chk.target);
+            let guard = 0;
+            while (b.c[tgt] !== 0 && guard++ < 40) {
+              let mv = null;
+              for (let k = 0; k < b.eN && mv === null; k++) { const p = b.E[k]; if (judge(b, p, chk, ex)[0]) mv = p; }
+              if (mv === null) { out.push(li + '.' + ei + ': chase stuck'); return; }
+              b.play(mv, b.turn);
+              if (b.c[tgt] !== 0) b.play(b.group(tgt).libs[0], b.turn);
+            }
+            return;
+          }
+          b.play(found, b.turn);
+          if (st.reply) b.play(b.parse(st.reply), b.turn);
+        });
+      } catch (e) { out.push(li + '.' + ei + ': ' + e.message); }
+    }));
+    return out;
+  }
+};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

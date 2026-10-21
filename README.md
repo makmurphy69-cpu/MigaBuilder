@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**76 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**77 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -65,6 +65,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Memory Forge** — train your memory with number and symbol cards (all at once or one at a time, seen or read aloud), the chimp test, pairs, dual n-back, Corsi sequences and word lists; 30 levels for each game with stars, played with or without a clock, or set your own number of cards and symbols, study time and answer time; plus a techniques guide (memory palace, story, pegs, Major system, PAO/Dominic, names and faces, keyword method, retrieval and spaced practice) with a 4-week mastery plan, a memory palace trainer, a Major system trainer, a spaced-review planner with calendar export, a day streak, progress chart and CSV of your results
 - **Redact Forge** — hide API keys, tokens, passwords, cookies, emails, IP and MAC addresses, phone and card numbers, IBANs, personal ID numbers and user names in logs, code and error messages before you share them or paste them into an AI; numbered labels or realistic fakes that stay consistent, your own words and patterns, and one click to put the real values back into the answer you get
 - **Policy Forge** — paste your site's code to find Google Analytics, Meta Pixel, Stripe, YouTube and 30+ other services, see what your site must disclose under the GDPR, UK GDPR, ePrivacy, CCPA and other laws, and get a privacy policy, cookie policy with a cookie table, a ready-made consent banner, terms of use, affiliate and AI disclosures, an Impressum and an accessibility statement as HTML or Markdown
+- **Go Forge** — learn the game of Go (Baduk, Weiqi) with 12 interactive lessons and puzzles (liberties, capturing, atari, connecting and cutting, ko, two eyes, ladders, snapback, counting, the opening), then play the computer at six levels on 9×9, 13×13 or 19×19, or the capture game; press a button for advice on your next move or feedback on your last one (rated from best move to blunder, with the better move shown), warnings before a big mistake, a who-is-ahead territory map, a full game review with your biggest mistakes, handicap stones and SGF download/upload — the engine (Monte Carlo tree search) runs on your device
 - **Noise Forge** — a noise machine and mixer: white, pink, brown, blue, violet, grey and green noise, rain, thunder, ocean waves, wind, a stream, a campfire, birds, crickets, a fan, a heartbeat and binaural beats, all generated on your device; ready-made mixes (deep sleep, focus, baby sleep…), a sleep timer with fade-out, a live spectrum, saved and shareable mixes, WAV download, and plain explanations of what each noise does and how well it is studied
 - **Focus Forge** — a Pomodoro focus timer: focus sessions and short/long breaks (25/5, 50/10, 90/20, 15/3 or your own), a task list that counts sessions against your estimate, rain and brown/pink/white noise generated on your device, chime and desktop alerts, keyboard shortcuts, and daily focus minutes, streak, a 7-day chart and a CSV of your sessions
 - **Flashcard Forge** — AI-made or pasted decks, an Anki-style (SM-2) scheduler, fill-in-the-blank and image cards, a matching game, listening and speaking tests, streaks and stats, and decks shared as a link
@@ -81,7 +82,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 76 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 77 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 
