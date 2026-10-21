@@ -714,6 +714,33 @@
    "kind": "html"
   }
  },
+ "go-forge.html": {
+  "title": "Go Forge",
+  "video": "https://videos.migabuilder.com/go-forge.mp4?v=1e6faeb0",
+  "poster": "https://videos.migabuilder.com/go-forge.jpg?v=a4085a54",
+  "duration": 133,
+  "transcript": [
+   "Welcome to Go Forge. Learn the game of Go step by step, then play the computer with a coach at your side.",
+   "Twelve short lessons teach the rules, each with puzzles on a real board.",
+   "In the lesson on liberties, the white stone has one liberty left. Take it, and the stone is captured.",
+   "Every answer is explained. Hint and Show the answer help when you are stuck.",
+   "Later lessons cover atari, ko, two eyes, ladders, counting and the opening.",
+   "Then play the computer. Choose a board size, your colour and one of six levels, and start a new game.",
+   "Tap a point to play. The computer answers straight away.",
+   "Not sure what to play? Press Advice for my next move. The coach marks its best idea, explains why, and shows other good moves.",
+   "Now we play a weak move on the edge, and press Feedback on my last move.",
+   "The move is rated from best move to blunder, with the reason, and the star shows the better move.",
+   "Who is ahead shows whose area each point will probably be. The coach can also warn you before a big mistake and mark stones in atari.",
+   "After the game, review it: a graph of your win chance and your biggest mistakes. Games download as SGF files for any Go program.",
+   "The rules on one page, ten tips for beginners and the words Go players use are one tap away.",
+   "Now it is your turn. Open Go Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/go-forge.png",
+   "label": "Coach feedback shown in this video",
+   "kind": "image"
+  }
+ },
  "grammar-forge.html": {
   "title": "Grammar Forge",
   "video": "https://videos.migabuilder.com/grammar-forge.mp4",

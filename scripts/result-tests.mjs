@@ -881,6 +881,28 @@ test('coloring-forge: the picture library makes pages without AI (hand-drawn, bo
   expect(magic(png.buf, 0x89, 0x50, 0x4E, 0x47) && png.buf.length > 20000, 'the page PNG is wrong: ' + png.name);
 });
 
+test('go-forge: every lesson can be solved, the coach reviews a move and the game downloads as SGF', 'go-forge.html', async (page) => {
+  const bad = await page.evaluate(() => window.__goForge.verifyLessons());
+  expect(bad.length === 0, 'lessons without a working answer: ' + bad.join(', '));
+  await page.click('[data-tab="play"]');
+  await page.selectOption('#gSize', '9'); await page.selectOption('#gLevel', '2'); await page.selectOption('#gColor', '1');
+  await page.click('#newGame');
+  const idle = n => page.waitForFunction(k => !window.__goForge.busy && window.__goForge.game.moves.length === k, n, { timeout: 60000 });
+  await page.evaluate(() => window.__goForge.playUser('E5')); await idle(2);
+  await page.evaluate(() => window.__goForge.playUser('C3')); await idle(4);
+  await page.click('#adviceBtn'); await page.waitForFunction(() => !window.__goForge.busy && /Best idea|pass/.test(document.getElementById('coach').textContent), null, { timeout: 60000 });
+  await page.click('#feedbackBtn'); await page.waitForFunction(() => !window.__goForge.busy && /move|Blunder|Mistake|Inaccuracy/.test(document.querySelector('#coach .rate')?.textContent || ''), null, { timeout: 60000 });
+  const out = await downloadOf(page, () => page.click('#sgfBtn'));
+  const sgf = out.buf.toString('utf8');
+  expect(/^go-forge-9x9-\d{4}-\d{2}-\d{2}\.sgf$/.test(out.name), 'unexpected file name ' + out.name);
+  expect(sgf.startsWith('(;GM[1]FF[4]') && /SZ\[9\]/.test(sgf) && /KM\[7\.5\]/.test(sgf), 'the SGF header is wrong: ' + sgf.slice(0, 120));
+  expect(/;B\[ee\]/.test(sgf) && /;B\[cg\]/.test(sgf), 'the SGF does not contain the moves E5 and C3');
+  expect((sgf.match(/;[BW]\[/g) || []).length === 4, 'the SGF should have 4 moves');
+  expect(/C\[(Best move|Good move|Inaccuracy|Mistake|Blunder)/.test(sgf), 'the coach review is missing from the SGF');
+  const back = await page.evaluate(s => window.__goForge.parseSgf(s), sgf);
+  expect(back.n === 9 && back.moves.length === 4, 'the SGF cannot be read back');
+});
+
 test('noise-forge: a mix plays without errors and downloads as a WAV file', 'noise-forge.html', async (page) => {
   await page.click('#mix-3'); // Rainy night
   await page.waitForFunction(() => /Pause/.test(document.getElementById('playBtn').textContent));

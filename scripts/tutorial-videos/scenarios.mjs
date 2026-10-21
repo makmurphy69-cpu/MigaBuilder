@@ -257,6 +257,40 @@ S('noise-forge.html', {
   }
 });
 
+S('go-forge.html', {
+  title: 'Go Forge', subtitle: 'Learn Go and play with a coach',
+  intro: 'Welcome to Go Forge. Learn the game of Go step by step, then play the computer with a coach at your side.',
+  async run(h, page) {
+    const idle = () => page.waitForFunction(() => window.__goForge && !window.__goForge.busy, null, { timeout: 60000 });
+    // Taps a board point such as "E5" with the visible pointer.
+    const tap = async (sel, name) => {
+      await page.locator(sel).evaluate(e => e.scrollIntoView({ behavior: 'smooth', block: 'center' })); await h.wait(500);
+      const [x, y] = await page.evaluate(([sel, name]) => {
+        const svg = document.querySelector(sel), vb = svg.viewBox.baseVal, r = svg.getBoundingClientRect(), n = Math.round(vb.width - 1.2);
+        const bx = 'ABCDEFGHJKLMNOPQRST'.indexOf(name[0]), by = n - parseInt(name.slice(1), 10);
+        return [r.left + (bx - vb.x) / vb.width * r.width, r.top + (by - vb.y) / vb.height * r.height];
+      }, [sel, name]);
+      await page.evaluate(([x, y]) => window.__tv.cursor(x, y), [x, y]);
+      await page.mouse.move(x, y, { steps: 8 }); await h.wait(350);
+      await page.evaluate(([x, y]) => window.__tv.click(x, y), [x, y]);
+      await page.mouse.click(x, y); await h.wait(500);
+    };
+    await h.step('Twelve short lessons teach the rules, each with puzzles on a real board.', () => h.point('#lessonList'));
+    await h.step('In the lesson on liberties, the white stone has one liberty left. Take it, and the stone is captured.', async () => { await h.click('[data-l="1"]'); await tap('#lessonBoard', 'D3'); });
+    await h.step('Every answer is explained. Hint and Show the answer help when you are stuck.', () => h.point('#exMsg'));
+    await h.step('Later lessons cover atari, ko, two eyes, ladders, counting and the opening.', async () => { await h.click('[data-l="8"]'); await h.point('#lessonBoard'); });
+    await h.step('Then play the computer. Choose a board size, your colour and one of six levels, and start a new game.', async () => { await h.click('[data-tab="play"]'); await h.select('#gLevel', '2'); await h.click('#newGame'); });
+    await h.step('Tap a point to play. The computer answers straight away.', async () => { await tap('#playBoard', 'E5'); await idle(); await tap('#playBoard', 'C3'); await idle(); });
+    await h.step('Not sure what to play? Press Advice for my next move. The coach marks its best idea, explains why, and shows other good moves.', async () => { await h.click('#adviceBtn'); await idle(); await h.point('#coach'); });
+    await h.step('Now we play a weak move on the edge, and press Feedback on my last move.', async () => { await tap('#playBoard', 'B1'); await idle(); await h.click('#feedbackBtn'); await idle(); });
+    await h.step('The move is rated from best move to blunder, with the reason, and the star shows the better move.', () => h.point('#coach'));
+    await h.sampleShot('#playBoard', 'Coach feedback shown in this video');
+    await h.step('Who is ahead shows whose area each point will probably be. The coach can also warn you before a big mistake and mark stones in atari.', async () => { await h.click('#navLast'); await h.click('#aheadBtn'); await idle(); await h.point('#optWarn'); });
+    await h.step('After the game, review it: a graph of your win chance and your biggest mistakes. Games download as SGF files for any Go program.', () => h.point('#sgfBtn'));
+    await h.step('The rules on one page, ten tips for beginners and the words Go players use are one tap away.', () => h.click('[data-tab="guide"]'));
+  }
+});
+
 S('palette-forge.html', {
   title: 'Palette Forge', subtitle: 'Palettes, gradients and shadows',
   intro: 'Welcome to Palette Forge. It builds colour palettes that are easy to read, and turns them into CSS gradients and shadows.',
