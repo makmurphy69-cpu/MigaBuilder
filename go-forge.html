@@ -627,6 +627,7 @@ function render() {
   if (game.over) t = '🏁 ' + game.result;
   else if (!live) t = '⏪ Looking at move ' + k + ' — press ⏭ to go back to the game';
   else if (busy) t = dot(b.turn) + (b.turn === game.user ? 'Coach is thinking…' : 'Computer is thinking…');
+  else if (pendingMove > 0 && b.turn === game.user) t = '👆 Tap ' + b.name(pendingMove) + ' again to place your stone';
   else t = dot(b.turn) + (b.turn === game.user ? 'Your move (' + colName(b.turn) + ')' : colName(b.turn) + ' to play');
   $('turnInfo').innerHTML = t;
   $('capInfo').textContent = game.mode === 'capture' ? 'First capture wins' : 'Captured: ⚫ ' + b.caps[BLACK] + ' · ⚪ ' + b.caps[WHITE] + ' · komi ' + game.komi;
@@ -1150,7 +1151,6 @@ $('sgfIn').onchange = async e => {
 const OPT_IDS = ['optWarn', 'optAtari', 'optAuto', 'optConfirm', 'optNumbers', 'optSound', 'optHint'];
 const opts = store.get('goForgeOptions', {});
 OPT_IDS.forEach(id => { if (id in opts) { if ($(id).type === 'checkbox') $(id).checked = opts[id]; else $(id).value = opts[id]; } $(id).addEventListener('change', () => { opts[id] = $(id).type === 'checkbox' ? $(id).checked : $(id).value; store.set('goForgeOptions', opts); pendingMove = -1; render(); }); });
-if (!('optConfirm' in opts) && matchMedia('(pointer:coarse)').matches) $('optConfirm').checked = true;
 
 /* ================================================================ tabs, glossary, start */
 function showTab(t) {
