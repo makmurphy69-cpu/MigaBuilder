@@ -229,7 +229,7 @@ function draw(svg, b, o) {
     el('line', { x1: i, y1: 0, x2: i, y2: n - 1 }, lines);
   }
   for (const [x, y] of G.starPoints(n)) el('circle', { cx: x, cy: y, r: 0.1, fill: '#3b2a12' }, svg);
-  const lab = el('g', { 'font-size': 0.36, fill: '#4a3410', 'text-anchor': 'middle', 'font-family': 'IBM Plex Mono, monospace' }, svg);
+  const lab = el('g', { 'data-no-i18n': '', 'font-size': 0.36, fill: '#4a3410', 'text-anchor': 'middle', 'font-family': 'IBM Plex Mono, monospace' }, svg);
   for (let i = 0; i < n; i++) {
     el('text', { x: i, y: n - 0.35 + 0.05 }, lab).textContent = G.LETTERS[i];
     el('text', { x: i, y: -0.62 }, lab).textContent = G.LETTERS[i];
@@ -268,7 +268,7 @@ function draw(svg, b, o) {
     if (m.kind === 'hint') { el('rect', { x: m.x0 - 0.5, y: m.y0 - 0.5, width: m.w, height: m.h, fill: 'rgba(47,158,91,.18)', stroke: c, 'stroke-width': 0.06, rx: 0.3 }, svg); continue; }
     const stone = b.c[m.p] === BLACK || b.c[m.p] === WHITE;
     el('circle', { cx: x, cy: y, r: stone ? 0.52 : 0.4, fill: stone ? 'none' : c, 'fill-opacity': stone ? 0 : 0.85, stroke: c, 'stroke-width': stone ? 0.09 : 0.04 }, svg);
-    if (m.label) el('text', { x, y: y + 0.14, 'font-size': 0.4, 'text-anchor': 'middle', fill: stone ? c : '#fff', 'font-weight': 700, 'font-family': 'IBM Plex Sans' }, svg).textContent = m.label;
+    if (m.label) el('text', { 'data-no-i18n': '', x, y: y + 0.14, 'font-size': 0.4, 'text-anchor': 'middle', fill: stone ? c : '#fff', 'font-weight': 700, 'font-family': 'IBM Plex Sans' }, svg).textContent = m.label;
   }
   if (o.ghost && b.c[o.ghost.p] === 0) {
     const [x, y] = b.xy(o.ghost.p);
@@ -1221,6 +1221,8 @@ window.__goForge = {
 };
 })();
 </script>
+<script src="i18n.js"></script>
+<script src="i18n/go-forge.js"></script>
 <script src="tutorials.js" defer></script>
 </body>
 </html>
