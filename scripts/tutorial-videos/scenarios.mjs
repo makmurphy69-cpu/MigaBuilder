@@ -422,6 +422,24 @@ S('psychology-atlas.html', {
   }
 });
 
+S('species-atlas.html', {
+  title: 'Species Atlas', subtitle: 'Photos and facts for over a million species',
+  intro: 'Welcome to Species Atlas. Look up any animal, plant, fungus or microbe, and see its photos, names, family tree, conservation status, and where it lives.',
+  async run(h, page) {
+    await h.step('The page opens at the very top of the tree of life: the kingdoms. Click any group to go further down.', () => h.point('#grid .tcard >> nth=0'));
+    await h.step('Or just search. Type an everyday name or a scientific one, and pick from the suggestions.', async () => { await h.type('#search', 'lion', { delay: 120 }); await page.waitForSelector('#sugg [data-i]'); });
+    await h.step('Here is the lion, with photos shared by nature lovers. Each photo shows who took it.', async () => { await h.click('#sugg [data-i] >> nth=0'); await page.waitForFunction(() => /Lion/.test((document.querySelector('#info h2') || {}).textContent || '')); await h.point('#heroImg'); });
+    await h.step('You get a short description, and exactly where it sits in the tree of life, from kingdom down to species.', () => h.point('.lineage', { block: 'center' }));
+    await h.step('Its conservation status. Lions are vulnerable. And the months, and the places, where people see it.', async () => { await h.scroll('#months', 'center'); await h.point('.worldmap', { block: 'center' }); });
+    await h.step('On the left are its close relatives. Click one to open it. Here is the tiger.', async () => { await h.scroll('#browse'); await h.click('#grid .tcard:has-text("Tiger")'); await page.waitForFunction(() => /Tiger/.test((document.querySelector('#info h2') || {}).textContent || '')); });
+    await h.step('Add any species to your list, for a school project or a nature walk, and download a printable list or fact sheet.', async () => { await h.click('#starBtn'); await h.point('#sheetBtn'); });
+    await h.step('Now the game. You see a real photo, and pick the right name. Challenge mode gives you twenty seconds, with bonus points for speed and streaks.', async () => { await h.select('#qGroup', '3'); await h.select('#qLevel', '4'); await h.click('#makeQuiz'); await page.waitForSelector('#qOpts .opt'); await page.waitForTimeout(1200); });
+    await h.step('Pick an answer. You learn what it is either way, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.scroll('#info');
+    await h.sampleDownload('#sheetBtn', 'Fact sheet made in this video');
+  }
+});
+
 S('exam-checker.html', {
   title: 'Exam Checker', subtitle: 'Mark a whole class from photos of answer sheets',
   intro: 'Welcome to Exam Checker. Build an exam, print an answer sheet for every student, drop in photos of all the sheets at once, and download everyone\u2019s marks.',

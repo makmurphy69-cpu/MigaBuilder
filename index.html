@@ -5,24 +5,24 @@
 <script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MigaBuilder — 75 Free Browser Tools to Create, Work and Learn</title>
-<meta name="description" content="Create pictures, websites, videos and music, work with PDFs and documents, and learn with interactive maps — 78 free browser tools. No signup, no watermark. Your files stay on your device whenever a tool can work locally.">
+<meta name="description" content="Create pictures, websites, videos and music, work with PDFs and documents, and learn with interactive maps — 79 free browser tools. No signup, no watermark. Your files stay on your device whenever a tool can work locally.">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="https://migabuilder.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MigaBuilder">
 <meta property="og:title" content="MigaBuilder — 75 Free Browser Tools to Create, Work and Learn">
-<meta property="og:description" content="Create, work and learn with 78 free browser tools. No signup, no watermark.">
+<meta property="og:description" content="Create, work and learn with 79 free browser tools. No signup, no watermark.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
 <meta property="og:url" content="https://migabuilder.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MigaBuilder — 75 Free Browser Tools to Create, Work and Learn">
-<meta name="twitter:description" content="Create, work and learn with 78 free browser tools. No signup, no watermark.">
+<meta name="twitter:description" content="Create, work and learn with 79 free browser tools. No signup, no watermark.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@graph": [
-    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 78 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
+    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 79 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
     {"@type":"SoftwareApplication","@id":"https://migabuilder.com/#app","name":"MigaBuilder","url":"https://migabuilder.com/","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"A local-first toolkit for websites, files, documents, video and business assets.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI website builder","Local project hub","PDF toolkit","Private OCR","Website checkup","File utilities","Content repurposing","Form generator","Group video meetings","CV and résumé generator"]}
   ]
 }
@@ -783,6 +783,7 @@
       <a class="tool-card" href="alphabet-forge.html" data-privacy="ai" data-keywords="alphabet letters writing script language learn thai arabic chinese mandarin japanese hiragana katakana korean hangul greek russian cyrillic hebrew hindi devanagari georgian pronunciation keyboard typing on-screen keyboard"><span class="tool-icon">🔤</span><span><strong>Alphabet Forge</strong><small data-i18n="d:alphabet-forge">Hear, learn, write and type the world’s alphabets — with an on-screen keyboard.</small></span></a>
       <a class="tool-card" href="idea-atlas.html" data-privacy="ai" data-keywords="philosophy politics ideology history thinkers quiz game liberalism socialism conservatism stoicism marxism feminism"><span class="tool-icon">🏛️</span><span><strong>Idea Atlas</strong><small data-i18n="d:idea-atlas">Explore philosophies and ideologies, their thinkers and connections, then play the quiz.</small></span></a>
       <a class="tool-card" href="psychology-atlas.html" data-privacy="ai" data-keywords="psychology history of psychology psychologists freud jung skinner pavlov piaget behaviourism behaviorism psychoanalysis cognitive cbt therapy theories quiz game"><span class="tool-icon">🧠</span><span><strong>Psychology Atlas</strong><small data-i18n="d:psychology-atlas">Explore the history of psychology — its schools, theories, therapies and psychologists — then play the quiz.</small></span></a>
+      <a class="tool-card" href="species-atlas.html" data-privacy="online" data-keywords="species animals plants fungi wildlife nature field guide identify bird mammal insect tree flower mushroom photos scientific name taxonomy classification tree of life kingdom endangered conservation status iucn inaturalist biodiversity quiz"><span class="tool-icon">🦋</span><span><strong>Species Atlas</strong><small data-i18n="d:species-atlas">Look up any animal, plant or fungus: photos, names, classification, status and where it lives, plus a photo quiz.</small></span></a>
       <a class="tool-card" href="biology-map.html" data-privacy="ai" data-keywords="biology dna genes genetics evolution tree of life species animals human chimpanzee similarity gene expression protein codon mutation natural selection ancestry ethnic groups human diversity migration out of africa neanderthal quiz"><span class="tool-icon">🧬</span><span><strong>Biology Map</strong><small data-i18n="d:biology-map">Tree of life and shared DNA, how DNA is built, gene expression, mutations, evolution and human diversity.</small></span></a>
       <a class="tool-card" href="chemistry-map.html" data-privacy="ai" data-keywords="chemistry periodic table elements atoms atomic number symbols compounds molecules bonds ionic covalent metals materials alloys steel glass plastic battery molar mass formula calculator science quiz"><span class="tool-icon">⚗️</span><span><strong>Chemistry Map</strong><small data-i18n="d:chemistry-map">Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.</small></span></a>
       <a class="tool-card" href="physics-map.html" data-privacy="ai" data-keywords="physics astronomy space planets solar system sun moon mars jupiter saturn universe big bang cosmic timeline black holes event horizon relativity einstein newton gravity quantum mechanics string theory dark matter dark energy weight on mars light year speed of light e=mc2 time dilation calculator science quiz"><span class="tool-icon">🪐</span><span><strong>Physics Map</strong><small data-i18n="d:physics-map">Planets in motion, the history of the universe, black holes and physics theories, with calculators and quizzes.</small></span></a>
@@ -996,7 +997,7 @@
     const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
     const popular=['image-studio.html','grammar-forge.html','slide-forge.html','contract-forge.html','music-forge.html','cartoon-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
-    document.getElementById('newTools').replaceChildren(...['psychology-atlas.html','go-forge.html','noise-forge.html','coloring-forge.html','cipher-forge.html','markdown-forge.html','random-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['species-atlas.html','psychology-atlas.html','go-forge.html','noise-forge.html','coloring-forge.html','cipher-forge.html','markdown-forge.html','random-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
     const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));

@@ -437,6 +437,32 @@ test('psychology-atlas: printable quiz has every question and an answer key', 'p
   expect(questions === 15 && answers === 15, 'expected 15 questions and 15 answers, got ' + questions + ' and ' + answers);
 });
 
+// Species Atlas reads iNaturalist; answer with a saved lion record so the test needs no network.
+async function fakeINat(ctx) {
+  const lion = fs.readFileSync(path.join(FIX, 'species-lion.json'), 'utf8');
+  await ctx.route(/api\.inaturalist\.org\/v1\//, route => {
+    const u = route.request().url();
+    if (/\.png/.test(u)) return route.fulfill({ status: 204, body: '' });
+    const body = /\/taxa\/41964\?/.test(u) ? lion : JSON.stringify({ total_results: 0, page: 1, per_page: 30, results: [] });
+    return route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body });
+  });
+  await ctx.route(/inaturalist-open-data|static\.inaturalist|tile\.openstreetmap/, r => r.fulfill({ status: 204, body: '' }));
+}
+test('species-atlas: fact sheet and printable species list hold the species', 'species-atlas.html', async (page, ctx, base) => {
+  await page.goto(base + '/species-atlas.html#taxon=41964');
+  await page.waitForFunction(() => /Lion/.test((document.querySelector('#info h2') || {}).textContent || ''));
+  const sheet = await downloadOf(page, () => page.click('#sheetBtn'));
+  const html = sheet.buf.toString('utf8');
+  expect(sheet.name === 'lion-fact-sheet.html', 'unexpected fact sheet name: ' + sheet.name);
+  expect(html.includes('Panthera leo') && html.includes('Vulnerable') && html.includes('Felidae'), 'fact sheet is missing the name, status or classification');
+  expect(html.includes('seasav'), 'fact sheet does not credit the photographer');
+  await page.click('#starBtn');
+  const list = await downloadOf(page, () => page.click('#dlList'));
+  expect(list.name === 'my-species-list.html', 'unexpected list name: ' + list.name);
+  const lh = list.buf.toString('utf8');
+  expect(lh.includes('My species list (1)') && lh.includes('Panthera leo'), 'species list does not hold the lion');
+}, { setup: fakeINat });
+
 test('physics-map: printable quiz has every question and an answer key; a fact sheet holds the planet data', 'physics-map.html', async (page) => {
   await page.selectOption('#qSource', 'all');
   await page.selectOption('#qCount', '15');

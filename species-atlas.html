@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Species Atlas — photos, names and facts for over a million species | MigaBuilder</title>
+<meta name="description" content="Look up any animal, plant, fungus or microbe: photos, common and scientific names, the full classification from kingdom to species, a short description, conservation status, where and when it is seen. Browse the tree of life, open a random species and play the guess-the-species photo quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/species-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/species-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Species Atlas — every living thing, with photos | MigaBuilder">
+<meta property="og:description" content="Search over a million species: photos, names, classification, conservation status and where they live. Browse the tree of life and play the photo quiz.">
+<meta property="og:url" content="https://migabuilder.com/species-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+main{max-width:1320px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.searchwrap{position:relative;flex:1 1 280px}
+.searchwrap input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px;font-size:15px}
+.sugg{position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:50;background:#fff;color:var(--ink);border-radius:6px;box-shadow:0 12px 30px rgba(0,0,0,.35);overflow:hidden;max-height:420px;overflow-y:auto}
+.sugg button{display:flex;gap:10px;align-items:center;width:100%;padding:7px 10px;border:0;border-bottom:1px solid rgba(22,32,43,.08);background:#fff;text-align:left;cursor:pointer;font:inherit;color:var(--ink)}
+.sugg button:hover,.sugg button.on{background:#eef6f8}
+.sugg img,.sugg .ph{width:40px;height:40px;object-fit:cover;border-radius:4px;flex:0 0 40px;background:#dfe7ec}
+.sugg b{display:block;font-size:14px}.sugg small{color:rgba(22,32,43,.7);font-size:12px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px 'IBM Plex Sans',sans-serif}
+.chip:hover{border-color:var(--cyan)}
+.chip.go{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.panel .chip{background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)}
+.counter{font-size:13px;color:rgba(237,234,224,.8);margin:0 0 10px}
+.explorer{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(330px,1fr);gap:16px;align-items:start}
+.explorer>*{min-width:0}
+.viewbox{background:#0a2238;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.crumbs{display:flex;flex-wrap:wrap;gap:4px;padding:10px 12px;border-bottom:1px solid var(--line);font-size:12.5px;align-items:center}
+.crumbs button{background:none;border:0;color:#6FD1E0;cursor:pointer;font:600 12.5px 'IBM Plex Sans';padding:2px 3px}
+.crumbs button:hover{text-decoration:underline}.crumbs span{color:rgba(237,234,224,.45)}.crumbs .here{color:#E2A63B;font-weight:700}
+.boxhead{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline;padding:10px 12px 0;color:var(--paper)}
+.boxhead h2{font:700 17px 'Space Grotesk';margin:0}.boxhead small{color:rgba(237,234,224,.7)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;padding:10px 12px 12px;max-height:760px;overflow:auto}
+.tcard{background:#fff;color:var(--ink);border:2px solid transparent;border-radius:6px;overflow:hidden;cursor:pointer;text-align:left;padding:0;font:inherit;display:flex;flex-direction:column}
+.tcard:hover,.tcard:focus-visible{border-color:#E2A63B;outline:none}
+.tcard .img{aspect-ratio:4/3;background:#dfe7ec center/cover no-repeat;display:flex;align-items:center;justify-content:center;font-size:30px}
+.tcard .t{padding:6px 8px 8px}.tcard b{display:block;font:700 13.5px 'Space Grotesk';line-height:1.2}.tcard i{display:block;font-size:12px;color:rgba(22,32,43,.7)}
+.tcard small{display:block;font-size:11px;color:rgba(22,32,43,.6);margin-top:2px}
+.more{margin:0 12px 12px}
+.info h2{font:700 26px 'Space Grotesk';margin:0;line-height:1.15}.sci{font-style:italic;color:rgba(22,32,43,.72);font-size:14px}
+.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;margin:0 6px 6px 0;background:#3d6b8c}
+.hero{position:relative;margin:-4px 0 10px;border-radius:6px;overflow:hidden;background:#dfe7ec}
+.hero img{display:block;width:100%;max-height:360px;object-fit:cover}
+.hero figcaption{font-size:11px;color:rgba(22,32,43,.65);padding:4px 2px 0;background:#fff}
+.thumbs{display:flex;gap:5px;overflow-x:auto;margin:6px 0 4px;padding-bottom:3px}.thumbs button{flex:0 0 54px;height:54px;border:2px solid transparent;border-radius:4px;padding:0;cursor:pointer;background:#dfe7ec center/cover}
+.thumbs button.on{border-color:#E2A63B}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.sect p{font-size:14px;line-height:1.55;margin:0}
+.lineage{list-style:none;margin:0;padding:0;font-size:13.5px}.lineage li{padding:2px 0 2px calc(var(--d)*10px)}
+.lineage .rk{display:inline-block;min-width:78px;color:rgba(22,32,43,.6);font-size:12px;text-transform:capitalize}
+.lineage a{color:#0E2A47;font-weight:600;cursor:pointer;text-decoration:none}.lineage a:hover{text-decoration:underline}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:6px}.stats div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12px}.stats b{display:block;font:700 18px 'Space Grotesk';color:#0E2A47}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:end;height:80px}.months div{background:linear-gradient(#4E9E73,#6FD1E0);border-radius:2px 2px 0 0;min-height:2px}
+.mlabels{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;font-size:10.5px;text-align:center;color:rgba(22,32,43,.65);margin-top:3px}
+.worldmap{display:grid;grid-template-columns:1fr 1fr;border-radius:4px;overflow:hidden;background:#aad3df}
+.worldmap div{position:relative;aspect-ratio:1}.worldmap img{position:absolute;inset:0;width:100%;height:100%}
+.note{font-size:11.5px;color:rgba(22,32,43,.6);margin-top:4px}
+.status-pill{display:inline-block;padding:3px 9px;border-radius:4px;font-weight:700;font-size:12.5px;color:#fff}
+.empty{color:rgba(22,32,43,.72);text-align:center;padding:40px 10px}
+.loading{opacity:.55;transition:opacity .2s}
+.err{background:#f8dcd6;border-left:3px solid #D8604A;padding:8px 12px;font-size:14px;margin:10px 12px;color:#16202B;border-radius:3px}
+.ext a{color:#0E2A47;font-weight:600}
+.mylist{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin:10px 0}
+.mylist .tcard{border-color:rgba(22,32,43,.15)}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px;margin:6px 0}
+.timer{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden}.timer i{display:block;height:100%;background:#4E9E73;transition:width .25s linear}
+.qphoto{margin:12px 0;border-radius:6px;overflow:hidden;background:#dfe7ec;text-align:center}.qphoto img{display:block;width:100%;max-height:380px;object-fit:contain;background:#16202B}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.opt small{display:block;font-style:italic;color:rgba(22,32,43,.65);font-size:12px}
+.opt:hover:not(:disabled){border-color:#0E2A47}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;font-size:14px;line-height:1.5}
+.explain a{color:#0E2A47;font-weight:700;cursor:pointer}
+.review li{margin-bottom:6px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.hidden{display:none!important}
+@media(max-width:980px){.explorer{grid-template-columns:minmax(0,1fr)}.qgrid,.opts{grid-template-columns:1fr}.grid{max-height:none}}
+@media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script src="i18n.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where do the photos and facts come from?", "acceptedAnswer": {"@type": "Answer", "text": "From iNaturalist, a free nature project run by the California Academy of Sciences and National Geographic, where millions of people share photos of the living things they find. The short descriptions come from Wikipedia and the conservation status mostly from the IUCN Red List."}}, {"@type": "Question", "name": "Is Species Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Is anything about me sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "Only the words you search for and the species you open are sent to iNaturalist to look them up. Your species list and quiz scores stay in your browser."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Species Atlas</span></nav>
+<header class="masthead"><div><h1>Species Atlas</h1><p>Look up any living thing — animals, plants, fungi and microbes. See photos, names, where it sits in the tree of life, what it is like, how endangered it is, and where and when people see it. Browse from “Life” down to a single species, open a random one, or play the photo quiz.</p></div></header>
+<main>
+<div class="toolbar">
+  <div class="searchwrap"><input id="search" type="search" autocomplete="off" placeholder="Search any species: lion, oak, honey bee, Amanita…" aria-label="Search for a species" aria-autocomplete="list" aria-controls="sugg"><div class="sugg hidden" id="sugg" role="listbox"></div></div>
+  <button class="chip go" id="randomBtn">🎲 Random species</button>
+</div>
+<div class="toolbar" id="quick" aria-label="Jump to a group"></div>
+<p class="counter" id="counter">Photos and facts come live from iNaturalist.</p>
+<section class="explorer">
+  <div class="viewbox" id="browse">
+    <nav class="crumbs" id="crumbs" aria-label="Where you are in the tree of life"></nav>
+    <div class="boxhead"><h2 id="gridTitle">Groups inside Life</h2><small id="gridNote"></small></div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+    <button class="chip more hidden" id="moreBtn">Show more</button>
+  </div>
+  <article class="panel info" id="info" aria-live="polite"><div class="empty">🔎<br><strong>Search for a species</strong><br>or click a group on the left to go down the tree of life.</div></article>
+</section>
+
+<section class="panel" id="listPanel" style="margin-top:18px">
+  <h2>⭐ My species list</h2>
+  <p>Press <b>☆ Add to my list</b> on any species to save it here — for a school project, a garden survey or a holiday checklist. It is kept in this browser.</p>
+  <div class="mylist" id="mylist"></div>
+  <div class="actions"><button class="primary" id="dlList">⬇ Printable species list</button><button class="secondary" id="clearList">Clear list</button></div>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🏆 Guess the species</h2>
+  <p>You see a real photo — pick the right name. <b>Challenge mode</b> gives 20 seconds per photo, bonus points for speed and a multiplier for streaks.</p>
+  <div class="qgrid">
+    <div class="field"><label for="qGroup">Photos of</label><select id="qGroup"></select></div>
+    <div class="field"><label for="qLevel">Difficulty</label><select id="qLevel"><option value="4">Easy — the most familiar species</option><option value="25" selected>Medium</option><option value="120">Hard — rarer species too</option></select></div>
+    <div class="field"><label for="qMode">Mode</label><select id="qMode"><option value="challenge">Challenge — timed, points &amp; streaks</option><option value="practice">Practice — no timer</option></select></div>
+  </div>
+  <div class="actions" style="margin-top:12px"><button class="primary" id="makeQuiz" data-primary>Start quiz (10 photos)</button></div>
+  <p class="status" id="quizStatus"></p>
+  <p class="muted" id="bestLine"></p>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="hud"><span id="qProg"></span><span id="qStreak"></span><span id="qScore"></span></div>
+    <div class="timer" id="timerBar"><i id="timerFill"></i></div>
+    <div class="qphoto"><img id="qImg" alt="Photo of the mystery species"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:10px"><button class="primary hidden" id="qNext">Next photo →</button><button class="secondary" id="qQuit">End quiz</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px">
+    <h3 id="doneTitle" style="font:700 22px 'Space Grotesk';margin:0 0 6px"></h3><p id="doneSub"></p>
+    <ol class="review" id="review"></ol>
+    <div class="actions"><button class="primary" id="newQuiz">New quiz</button></div>
+  </div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Species Atlas</h2>
+  <p>Species Atlas is a field guide to every living thing that people have photographed and named: over a million species of animals, plants, fungi, protists and bacteria. Each page shows photos, the common and scientific names, the full classification from kingdom to species, a short description, the conservation status, a map of sightings and the months it is seen most. Scientists have named about 2 million species so far, and estimate that around 8.7 million plants, animals and fungi exist — most are still undiscovered.</p>
+  <h3>How to use Species Atlas</h3>
+  <ol><li>Search any animal, plant or fungus by its everyday or scientific name, or click a group to go down the tree of life.</li><li>Read its photos, classification, description, conservation status, map and season, and add it to your list.</li><li>Press “Start quiz” to guess species from real photos, or download a printable list of your species.</li></ol>
+  <h3>Where do the photos and facts come from?</h3>
+  <p>From <a href="https://www.inaturalist.org/" rel="noopener" target="_blank">iNaturalist</a>, a free nature project run by the California Academy of Sciences and National Geographic, where millions of people share photos of the living things they find. The short descriptions come from Wikipedia and the conservation status mostly from the IUCN Red List. Each photo shows who took it and its licence.</p>
+  <h3>Is Species Atlas free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Is anything about me sent anywhere?</h3>
+  <p>Only the words you search for and the species you open are sent to iNaturalist to look them up. Your species list and quiz scores stay in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="biology-map.html">Biology Map</a> · <a href="flashcard-forge.html">Flashcard Forge</a> · <a href="geo-forge.html">Geo Forge</a></p>
+</section>
+
+<footer>Species Atlas · MigaBuilder · Data, photos and maps from iNaturalist (photos © their owners, shown with their licence), descriptions from Wikipedia, maps © OpenStreetMap contributors.</footer>
+<script>
+(function(){
+'use strict';
+const API='https://api.inaturalist.org/v1/';
+const LIFE=48460;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// Wikipedia summaries carry <b> and <i>; keep those, escape everything else.
+const rich=s=>esc(String(s||'').replace(/<(?!\/?(b|i)>)[^>]*>/g,'')).replace(/&lt;(\/?)(b|i)&gt;/g,'<$1$2>');
+const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):'';
+const num=n=>Number(n||0).toLocaleString('en');
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const locale=(document.documentElement.lang||'en').slice(0,2);
+
+const GROUPS=[['🐾','Animals',1],['🌿','Plants',47126],['🍄','Fungi',47170],['🐦','Birds',3],['🦁','Mammals',40151],['🦋','Insects',47158],['🐟','Fish',47178],['🦎','Reptiles',26036],['🐸','Amphibians',20978],['🕷️','Spiders',47118],['🐚','Molluscs',47115],['🦠','Bacteria',67333]];
+const ICON={Animalia:'🐾',Plantae:'🌿',Fungi:'🍄',Aves:'🐦',Mammalia:'🦁',Insecta:'🦋',Actinopterygii:'🐟',Reptilia:'🦎',Amphibia:'🐸',Arachnida:'🕷️',Mollusca:'🐚',Protozoa:'🔬',Chromista:'🌊'};
+const IUCN={LC:['Least concern','#4E9E73'],NT:['Near threatened','#8fa83a'],VU:['Vulnerable','#c9922a'],EN:['Endangered','#d8734a'],CR:['Critically endangered','#c0392b'],EW:['Extinct in the wild','#6b2f6b'],EX:['Extinct','#222'],DD:['Data deficient','#7f8c8d'],NE:['Not evaluated','#7f8c8d']};
+const MONTHS=['J','F','M','A','M','J','J','A','S','O','N','D'];
+
+// ---------- talking to iNaturalist ----------
+const cache=new Map();
+async function get(path,signal){
+  if(cache.has(path))return cache.get(path);
+  const r=await fetch(API+path+(path.includes('?')?'&':'?')+'locale='+locale,{signal});
+  if(r.status===429)throw new Error('iNaturalist is busy right now — wait a few seconds and try again.');
+  if(!r.ok)throw new Error('iNaturalist answered with error '+r.status+'. Try again in a moment.');
+  const j=await r.json();cache.set(path,j);return j;
+}
+const nameOf=t=>cap(t.preferred_common_name)||t.name;
+const isSpeciesLevel=t=>t.rank_level<=10;
+const photo=(t,size)=>{const p=t.default_photo;return p?(p[size+'_url']||p.medium_url||p.square_url):''};
+const iconFor=t=>ICON[t.name]||ICON[t.iconic_taxon_name]||'🧬';
+
+// ---------- quick group buttons ----------
+$('quick').innerHTML='<button class="chip" data-id="'+LIFE+'">🌍 All life</button>'+GROUPS.map(g=>'<button class="chip" data-id="'+g[2]+'">'+g[0]+' '+g[1]+'</button>').join('');
+$('quick').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id)});
+get('taxa?rank=species&is_active=true&photos=true&per_page=0').then(j=>{$('counter').textContent=num(j.total_results)+' species with photos to explore. Scientists have named about 2 million species, and think around 8.7 million plants, animals and fungi exist. Photos and facts come live from iNaturalist.'}).catch(()=>{});
+
+// ---------- search with suggestions ----------
+let sugCtl=null,sugTimer=0,sugItems=[],sugOn=-1;
+$('search').addEventListener('input',()=>{clearTimeout(sugTimer);const q=$('search').value.trim();if(q.length<2){hideSugg();return}sugTimer=setTimeout(()=>suggest(q),250)});
+$('search').addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'||e.key==='ArrowUp'){if(!sugItems.length)return;e.preventDefault();sugOn=(sugOn+(e.key==='ArrowDown'?1:-1)+sugItems.length)%sugItems.length;markSugg()}
+  else if(e.key==='Enter'){e.preventDefault();const t=sugItems[sugOn<0?0:sugOn];if(t)pick(t);else{const q=$('search').value.trim();if(q)suggest(q,true)}}
+  else if(e.key==='Escape')hideSugg();
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.searchwrap'))hideSugg()});
+async function suggest(q,openFirst){
+  if(sugCtl)sugCtl.abort();sugCtl=new AbortController();
+  try{
+    const j=await get('taxa/autocomplete?per_page=8&is_active=true&q='+encodeURIComponent(q),sugCtl.signal);
+    sugItems=j.results||[];sugOn=-1;
+    if(openFirst&&sugItems[0]){pick(sugItems[0]);return}
+    const box=$('sugg');
+    box.innerHTML=sugItems.length?sugItems.map((t,i)=>'<button type="button" role="option" data-i="'+i+'">'+(photo(t,'square')?'<img src="'+esc(photo(t,'square'))+'" alt="" loading="lazy">':'<span class="ph"></span>')+'<span><b>'+esc(nameOf(t))+'</b><small><i>'+esc(t.name)+'</i> · '+esc(t.rank)+(t.matched_term&&t.matched_term.toLowerCase()!==String(t.preferred_common_name||'').toLowerCase()&&t.matched_term!==t.name?' · “'+esc(t.matched_term)+'”':'')+'</small></span></button>').join(''):'<button type="button" disabled>No match — try another spelling or the scientific name</button>';
+    box.classList.remove('hidden');
+  }catch(e){if(e.name!=='AbortError'){$('sugg').innerHTML='<button type="button" disabled>'+esc(e.message)+'</button>';$('sugg').classList.remove('hidden')}}
+}
+$('sugg').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b)pick(sugItems[+b.dataset.i])});
+function markSugg(){[...$('sugg').querySelectorAll('[data-i]')].forEach((b,i)=>b.classList.toggle('on',i===sugOn))}
+function hideSugg(){$('sugg').classList.add('hidden');sugItems=[];sugOn=-1}
+function pick(t){hideSugg();$('search').value=nameOf(t);openTaxon(t.id)}
+
+// ---------- open a taxon ----------
+let current=null,openSeq=0;
+async function openTaxon(id,opts){
+  opts=opts||{};const seq=++openSeq;
+  $('info').classList.add('loading');$('browse').classList.add('loading');
+  try{
+    const j=await get('taxa/'+id);const t=j.results&&j.results[0];
+    if(!t)throw new Error('That species could not be found.');
+    if(seq!==openSeq)return;
+    current=t;showInfo(t);loadGrid(t);
+    if(!opts.noHash)try{history.replaceState(null,'','#taxon='+t.id)}catch(e){}
+    if(opts.scroll!==false&&window.innerWidth<980&&opts.fromGrid)$('info').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){
+    if(seq!==openSeq)return;
+    $('info').innerHTML='<div class="err">'+esc(e.message||'Could not reach iNaturalist. Check your connection and try again.')+'</div>';
+  }finally{if(seq===openSeq){$('info').classList.remove('loading');$('browse').classList.remove('loading')}}
+}
+
+function crumbsFor(t){
+  const anc=(t.ancestors||[]).filter(a=>a.id!==LIFE);
+  return [{id:LIFE,name:'Life'}].concat(anc).concat(t.id===LIFE?[]:[t]);
+}
+function renderCrumbs(t){
+  const c=crumbsFor(t);
+  $('crumbs').innerHTML=c.map((a,i)=>i===c.length-1?'<b class="here">'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</b>':'<button data-id="'+a.id+'">'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</button><span>›</span>').join('');
+}
+$('crumbs').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id)});
+
+// ---------- the groups / species grid ----------
+let gridParent=null,gridPage=1,gridTotal=0;
+async function loadGrid(t,more){
+  renderCrumbs(t);
+  // A species has nothing much below it, so show its relatives instead.
+  const parentId=isSpeciesLevel(t)&&t.parent_id?t.parent_id:t.id;
+  if(!more){gridParent=parentId;gridPage=1;$('grid').innerHTML=''}
+  const parentName=parentId===t.id?(t.id===LIFE?'Life':nameOf(t)):nameOf((t.ancestors||[]).find(a=>a.id===parentId)||{name:'its group'});
+  $('gridTitle').textContent=parentId===t.id?(t.id===LIFE?'The kingdoms of life':'Groups and species inside '+parentName):'Relatives — also in '+parentName;
+  try{
+    const j=await get('taxa?is_active=true&order_by=observations_count&per_page=30&page='+gridPage+'&parent_id='+parentId);
+    if(gridParent!==parentId)return;
+    gridTotal=j.total_results||0;
+    const list=j.results||[];
+    if(!list.length&&!more){$('grid').innerHTML='<p style="color:var(--paper);grid-column:1/-1">Nothing has been recorded inside this group yet.</p>'}
+    $('grid').insertAdjacentHTML('beforeend',list.map(c=>card(c,c.id===t.id)).join(''));
+    $('gridNote').textContent=gridTotal?'Most-seen first · '+num(Math.min(gridPage*30,gridTotal))+' of '+num(gridTotal):'';
+    $('moreBtn').classList.toggle('hidden',gridPage*30>=gridTotal);
+  }catch(e){$('grid').innerHTML='<div class="err" style="grid-column:1/-1">'+esc(e.message)+'</div>'}
+}
+function card(c,here){
+  const img=photo(c,'small');
+  const sub=c.rank_level>10?(c.complete_species_count?num(c.complete_species_count)+' species':cap(c.rank)):'';
+  return '<button class="tcard" data-id="'+c.id+'"'+(here?' style="border-color:#E2A63B"':'')+'><span class="img" style="'+(img?'background-image:url(&quot;'+esc(img)+'&quot;)':'')+'">'+(img?'':iconFor(c))+'</span><span class="t"><b>'+esc(nameOf(c))+'</b>'+(c.preferred_common_name?'<i>'+esc(c.name)+'</i>':'')+'<small>'+esc(cap(c.rank)+(sub&&sub!==cap(c.rank)?' · '+sub:''))+'</small></span></button>';
+}
+$('grid').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id,{fromGrid:true})});
+$('moreBtn').addEventListener('click',()=>{if(current){gridPage++;loadGrid(current,true)}});
+
+// ---------- the information panel ----------
+function statusOf(t){
+  const s=t.conservation_status;
+  if(t.extinct)return ['EX','Extinct','#222',''];
+  if(!s)return null;
+  const code=String(s.status||'').toUpperCase();
+  const known=IUCN[code];
+  return [code,known?known[0]:cap(s.status_name||s.status),known?known[1]:'#3d6b8c',(s.authority||'')+(s.place&&s.place.name?' · in '+s.place.name:'')];
+}
+function showInfo(t){
+  const photos=(t.taxon_photos||[]).map(p=>p.photo).filter(Boolean).slice(0,10);
+  const main=photos[0];
+  const st=statusOf(t);
+  const anc=crumbsFor(t).filter(a=>a.id!==LIFE&&a.rank);
+  const inList=myList.some(x=>x.id===t.id);
+  $('info').innerHTML=
+    (main?'<figure class="hero"><img id="heroImg" src="'+esc(main.medium_url)+'" alt="'+esc(nameOf(t))+'"><figcaption id="heroCap">'+esc(main.attribution)+'</figcaption></figure>':'<div class="hero" style="height:120px;display:flex;align-items:center;justify-content:center;font-size:54px">'+iconFor(t)+'</div>')+
+    (photos.length>1?'<div class="thumbs" id="thumbs">'+photos.map((p,i)=>'<button data-i="'+i+'" class="'+(i?'':'on')+'" style="background-image:url(&quot;'+esc(p.square_url)+'&quot;)" aria-label="Photo '+(i+1)+'"></button>').join('')+'</div>':'')+
+    '<span class="badge">'+esc(t.id===LIFE?'All living things':cap(t.rank))+'</span>'+(st?'<span class="badge" style="background:'+st[2]+'">'+esc(st[1])+'</span>':'')+
+    '<h2>'+esc(t.id===LIFE?'Life on Earth':nameOf(t))+'</h2>'+(t.preferred_common_name||t.id===LIFE?'<div class="sci">'+esc(t.name)+'</div>':'')+
+    '<div class="actions" style="margin-top:10px"><button class="secondary" id="starBtn">'+(inList?'★ In my list':'☆ Add to my list')+'</button><button class="secondary" id="sheetBtn">⬇ Fact sheet</button><button class="secondary" id="linkBtn">🔗 Copy link</button></div>'+
+    (t.wikipedia_summary?'<div class="sect"><h3>About</h3><p>'+rich(t.wikipedia_summary)+'</p></div>':'')+
+    '<div class="sect"><h3>Numbers</h3><div class="stats">'+
+      (t.rank_level>10&&t.complete_species_count?'<div><b>'+num(t.complete_species_count)+'</b>known species inside</div>':'')+
+      '<div><b>'+num(t.observations_count)+'</b>sightings shared</div>'+
+      (anc.length?'<div><b>'+anc.length+'</b>levels below Life</div>':'')+
+    '</div></div>'+
+    (anc.length?'<div class="sect"><h3>Where it sits in the tree of life</h3><ul class="lineage">'+anc.map((a,i)=>'<li style="--d:'+Math.min(i,8)+'"><span class="rk">'+esc(a.rank)+'</span>'+(a.id===t.id?'<b>'+esc(nameOf(a))+'</b>':'<a data-id="'+a.id+'">'+esc(nameOf(a))+'</a>')+(a.preferred_common_name?' <i style="color:rgba(22,32,43,.6);font-size:12px">'+esc(a.name)+'</i>':'')+'</li>').join('')+'</ul></div>':'')+
+    (st?'<div class="sect"><h3>Conservation status</h3><p><span class="status-pill" style="background:'+st[2]+'">'+esc(st[1])+'</span> '+(st[3]?'<span class="note">'+esc(st[3])+'</span>':'')+'</p></div>':'')+
+    (t.id!==LIFE?'<div class="sect"><h3>When people see it</h3><div class="months" id="months"></div><div class="mlabels">'+MONTHS.map(m=>'<span>'+m+'</span>').join('')+'</div><p class="note">Sightings shared on iNaturalist, by month — taller means seen more often then.</p></div>'+
+    '<div class="sect"><h3>Where it has been seen</h3><div class="worldmap">'+[[0,0],[1,0],[0,1],[1,1]].map(([x,y])=>'<div><img src="https://tile.openstreetmap.org/1/'+x+'/'+y+'.png" alt="" loading="lazy"><img src="'+API+'grid/1/'+x+'/'+y+'.png?taxon_id='+t.id+'&color=%23d8604a" alt="" loading="lazy" onerror="this.remove()"></div>').join('')+'</div><p class="note">Red squares show places where it has been photographed. Map © OpenStreetMap contributors.</p></div>':'')+
+    '<div class="sect ext"><h3>Read more</h3><p><a href="https://www.inaturalist.org/taxa/'+t.id+'" target="_blank" rel="noopener">iNaturalist page</a>'+(t.wikipedia_url?' · <a href="'+esc(t.wikipedia_url)+'" target="_blank" rel="noopener">Wikipedia</a>':'')+(t.conservation_status&&t.conservation_status.url&&/^https?:/.test(t.conservation_status.url)?' · <a href="'+esc(t.conservation_status.url)+'" target="_blank" rel="noopener">Red List assessment</a>':'')+'</p></div>';
+  if($('thumbs'))$('thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;const p=photos[+b.dataset.i];$('heroImg').src=p.medium_url;$('heroCap').textContent=p.attribution;[...$('thumbs').children].forEach(x=>x.classList.toggle('on',x===b))});
+  $('info').querySelectorAll('.lineage a').forEach(a=>a.addEventListener('click',()=>openTaxon(+a.dataset.id)));
+  $('starBtn').addEventListener('click',()=>toggleList(t));
+  $('sheetBtn').addEventListener('click',()=>downloadSheet(t));
+  $('linkBtn').addEventListener('click',()=>{const u=location.href.split('#')[0]+'#taxon='+t.id;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('linkBtn').textContent='✓ Link copied'},()=>{prompt('Copy this link:',u)})});
+  if(t.id!==LIFE)loadMonths(t.id);
+}
+async function loadMonths(id){
+  try{
+    const j=await get('observations/histogram?date_field=observed&interval=month_of_year&verifiable=true&taxon_id='+id);
+    if(!current||current.id!==id||!$('months'))return;
+    const m=(j.results&&j.results.month_of_year)||{};const vals=MONTHS.map((_,i)=>m[i+1]||0),max=Math.max(1,...vals);
+    $('months').innerHTML=vals.map((v,i)=>'<div style="height:'+Math.max(2,Math.round(v/max*100))+'%" title="'+num(v)+' sightings"></div>').join('');
+  }catch(e){if($('months'))$('months').innerHTML='<span class="note" style="grid-column:1/-1">Could not load the season chart.</span>'}
+}
+
+// ---------- my species list ----------
+let myList=store.get('speciesList',[]);
+const brief=t=>({id:t.id,name:t.name,common:t.preferred_common_name||'',rank:t.rank,photo:photo(t,'medium')||'',credit:t.default_photo?t.default_photo.attribution:'',summary:String(t.wikipedia_summary||'').replace(/<[^>]*>/g,''),status:(statusOf(t)||[])[1]||'',lineage:crumbsFor(t).filter(a=>a.rank&&a.id!==t.id&&['kingdom','phylum','class','order','family','genus'].includes(a.rank)).map(a=>[a.rank,a.name])});
+function toggleList(t){
+  const i=myList.findIndex(x=>x.id===t.id);
+  if(i>=0)myList.splice(i,1);else myList.unshift(brief(t));
+  store.set('speciesList',myList);renderList();
+  if(current&&current.id===t.id&&$('starBtn'))$('starBtn').textContent=i>=0?'☆ Add to my list':'★ In my list';
+}
+function renderList(){
+  $('mylist').innerHTML=myList.length?myList.map(x=>'<button class="tcard" data-id="'+x.id+'"><span class="img" style="'+(x.photo?'background-image:url(&quot;'+esc(x.photo)+'&quot;)':'')+'">'+(x.photo?'':'🧬')+'</span><span class="t"><b>'+esc(cap(x.common)||x.name)+'</b>'+(x.common?'<i>'+esc(x.name)+'</i>':'')+'</span></button>').join(''):'<p class="muted" style="grid-column:1/-1">Your list is empty.</p>';
+  $('dlList').disabled=!myList.length;$('clearList').disabled=!myList.length;
+}
+$('mylist').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){openTaxon(+b.dataset.id);$('search').scrollIntoView({behavior:'smooth'})}});
+$('clearList').addEventListener('click',()=>{if(confirm('Remove all '+myList.length+' species from your list?')){myList=[];store.set('speciesList',myList);renderList();if(current)showInfo(current)}});
+renderList();
+
+// ---------- printable files ----------
+const SHEET_CSS='body{font:15px/1.5 Georgia,serif;max-width:820px;margin:28px auto;padding:0 20px;color:#16202B}h1{font:700 26px Arial,sans-serif;margin:0 0 4px}.sp{display:grid;grid-template-columns:220px 1fr;gap:16px;border-top:1px solid #ccc;padding:16px 0;break-inside:avoid}.sp img{width:220px;height:170px;object-fit:cover;border-radius:4px}.sp h2{font:700 19px Arial,sans-serif;margin:0}.sci{font-style:italic;color:#555}.cr{font-size:11px;color:#777}.ln{font-size:13px;color:#444}.st{display:inline-block;font:700 12px Arial,sans-serif;padding:2px 8px;border-radius:3px;background:#eee;margin:4px 0}.foot{font-size:12px;color:#666;border-top:1px solid #ccc;padding-top:8px;margin-top:10px}@media(max-width:600px){.sp{grid-template-columns:1fr}.sp img{width:100%;height:auto}}';
+function entry(x){
+  return '<div class="sp">'+(x.photo?'<div><img src="'+esc(x.photo)+'" alt=""><div class="cr">'+esc(x.credit)+'</div></div>':'<div></div>')+'<div><h2>'+esc(cap(x.common)||x.name)+'</h2>'+(x.common?'<div class="sci">'+esc(x.name)+'</div>':'')+(x.status?'<span class="st">'+esc(x.status)+'</span>':'')+(x.lineage.length?'<div class="ln">'+x.lineage.map(l=>esc(cap(l[0]))+': '+esc(l[1])).join(' › ')+'</div>':'')+(x.summary?'<p>'+esc(x.summary.length>700?x.summary.slice(0,700).replace(/\s\S*$/,'')+'…':x.summary)+'</p>':'')+'<div class="cr">https://www.inaturalist.org/taxa/'+x.id+'</div></div></div>';
+}
+function saveHtml(name,title,body){
+  const html='<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+SHEET_CSS+'</style></head><body><h1>'+esc(title)+'</h1>'+body+'<p class="foot">Made with Species Atlas on MigaBuilder · Data and photos from iNaturalist (photos © their owners, under the licence shown) · Descriptions from Wikipedia.</p></body></html>';
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'species';
+function downloadSheet(t){const x=brief(t);saveHtml(slug(x.common||x.name)+'-fact-sheet.html',(cap(x.common)||x.name)+' — fact sheet',entry(x))}
+$('dlList').addEventListener('click',()=>{if(myList.length)saveHtml('my-species-list.html','My species list ('+myList.length+')','<p>Date: ____________ &nbsp; Place: ______________________</p>'+myList.map(entry).join(''))});
+
+// ---------- random species ----------
+$('randomBtn').addEventListener('click',async()=>{
+  const b=$('randomBtn');b.disabled=true;
+  try{
+    const page=1+Math.floor(Math.random()*200);
+    const j=await get('taxa?rank=species&is_active=true&photos=true&order_by=observations_count&per_page=30&page='+page);
+    const list=(j.results||[]).filter(t=>t.default_photo);
+    if(list.length)await openTaxon(list[Math.floor(Math.random()*list.length)].id);
+  }catch(e){$('info').innerHTML='<div class="err">'+esc(e.message)+'</div>'}finally{b.disabled=false}
+});
+
+// ---------- guess-the-species quiz ----------
+$('qGroup').innerHTML='<option value="">All life</option>'+GROUPS.filter(g=>g[2]!==67333).map(g=>'<option value="'+g[2]+'">'+g[0]+' '+g[1]+'</option>').join('');
+let Q=null,timerId=0;
+const best=()=>store.get('speciesQuizBest',0);
+function bestLine(){$('bestLine').textContent=best()?'Your best score: '+best():''}
+bestLine();
+async function startQuiz(){
+  $('quizStatus').textContent='Picking photos…';$('makeQuiz').disabled=true;
+  try{
+    const g=$('qGroup').value,pages=+$('qLevel').value;
+    const pageA=1+Math.floor(Math.random()*pages);
+    const j=await get('taxa?rank=species&is_active=true&photos=true&order_by=observations_count&per_page=50&page='+pageA+(g?'&taxon_id='+g:''));
+    const seen=new Set();
+    const pool=(j.results||[]).filter(t=>t.default_photo&&t.preferred_common_name&&!seen.has(nameOf(t).toLowerCase())&&seen.add(nameOf(t).toLowerCase()));
+    if(pool.length<6)throw new Error('Not enough photos came back — try again or pick another group.');
+    const shuffled=pool.slice().sort(()=>Math.random()-.5);
+    const qs=shuffled.slice(0,Math.min(10,pool.length)).map(t=>{
+      // Wrong answers from the same group (same class, else same kingdom) make it fairer.
+      const sameish=pool.filter(o=>o!==t&&o.iconic_taxon_name===t.iconic_taxon_name);
+      const others=(sameish.length>=3?sameish:pool.filter(o=>o!==t)).slice().sort(()=>Math.random()-.5).slice(0,3);
+      return {t,opts:others.concat([t]).sort(()=>Math.random()-.5)};
+    });
+    Q={qs,i:0,score:0,streak:0,right:0,log:[],timed:$('qMode').value==='challenge'};
+    $('quizStatus').textContent='';$('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');
+    showQ();
+  }catch(e){$('quizStatus').textContent=e.message}finally{$('makeQuiz').disabled=false}
+}
+function showQ(){
+  const q=Q.qs[Q.i];clearInterval(timerId);
+  $('qProg').textContent='Photo '+(Q.i+1)+' of '+Q.qs.length;$('qScore').textContent='Score: '+Q.score;$('qStreak').textContent=Q.streak>1?'🔥 Streak ×'+Q.streak:'';
+  $('qImg').src=photo(q.t,'medium');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(nameOf(o))+'<small>'+esc(o.name)+'</small></button>').join('');
+  $('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
+  $('timerBar').classList.toggle('hidden',!Q.timed);
+  if(Q.timed){Q.left=20;$('timerFill').style.width='100%';timerId=setInterval(()=>{Q.left-=.25;$('timerFill').style.width=Math.max(0,Q.left/20*100)+'%';if(Q.left<=0)answer(-1)},250)}
+}
+function answer(i){
+  clearInterval(timerId);const q=Q.qs[Q.i];const correct=q.opts.indexOf(q.t);const ok=i===correct;
+  [...$('qOpts').children].forEach((b,k)=>{b.disabled=true;if(k===correct)b.classList.add('right');else if(k===i)b.classList.add('wrong')});
+  let pts=0;
+  if(ok){Q.streak++;Q.right++;pts=Q.timed?Math.round((100+Math.max(0,Q.left)*5)*Math.min(3,1+(Q.streak-1)*.5)):100;Q.score+=pts}else Q.streak=0;
+  Q.log.push({t:q.t,ok,picked:i>=0?q.opts[i]:null});
+  const crumbs=crumbsFor(q.t).filter(a=>['class','order','family'].includes(a.rank)).map(a=>nameOf(a)).join(' › ');
+  $('qExplain').innerHTML=(ok?'✅ Right'+(pts?' (+'+pts+')':'')+'! ':i<0?'⏰ Time is up. ':'❌ Not quite. ')+'This is the <b>'+esc(nameOf(q.t))+'</b> (<i>'+esc(q.t.name)+'</i>)'+(crumbs?' — '+esc(crumbs):'')+'. <a data-open="'+q.t.id+'">Open it in the atlas</a><br><span class="note">Photo: '+esc(q.t.default_photo.attribution)+'</span>';
+  $('qExplain').classList.remove('hidden');$('qNext').classList.remove('hidden');$('qNext').textContent=Q.i+1<Q.qs.length?'Next photo →':'See my score';$('qScore').textContent='Score: '+Q.score;
+  $('qNext').focus();
+}
+function finish(){
+  clearInterval(timerId);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
+  const nb=Q.score>best();if(nb)store.set('speciesQuizBest',Q.score);bestLine();
+  $('doneTitle').textContent=(nb?'🎉 New best! ':'')+Q.right+' of '+Q.log.length+' right · '+Q.score+' points';
+  $('doneSub').textContent=Q.right===Q.log.length?'A perfect round — try a harder level.':'Click any name below to read about it.';
+  $('review').innerHTML=Q.log.map(l=>'<li class="'+(l.ok?'good':'bad')+'">'+(l.ok?'✓ ':'✗ ')+'<a data-open="'+l.t.id+'" style="cursor:pointer;color:inherit;font-weight:700">'+esc(nameOf(l.t))+'</a>'+(l.ok?'':l.picked?' — you said '+esc(nameOf(l.picked)):' — no answer')+'</li>').join('');
+}
+$('makeQuiz').addEventListener('click',startQuiz);$('newQuiz').addEventListener('click',startQuiz);
+$('qOpts').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b&&!b.disabled)answer(+b.dataset.i)});
+$('qNext').addEventListener('click',()=>{if(++Q.i<Q.qs.length)showQ();else finish()});
+$('qQuit').addEventListener('click',()=>{if(Q&&Q.log.length)finish();else{clearInterval(timerId);$('quizArea').classList.add('hidden')}});
+document.getElementById('quizPanel').addEventListener('click',e=>{const a=e.target.closest('[data-open]');if(a){openTaxon(+a.dataset.open);$('search').scrollIntoView({behavior:'smooth'})}});
+
+// ---------- start ----------
+const m=/taxon=(\d+)/.exec(location.hash);
+openTaxon(m?+m[1]:LIFE,{noHash:!m});
+window.addEventListener('hashchange',()=>{const h=/taxon=(\d+)/.exec(location.hash);if(h&&(!current||current.id!==+h[1]))openTaxon(+h[1],{noHash:true})});
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
