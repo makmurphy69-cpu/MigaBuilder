@@ -1,13 +1,49 @@
 {
- "updated": "2026-10-19",
+ "updated": "2026-10-26",
  "firstCommit": "2026-09-13",
- "commits": 420,
- "pullRequests": 137,
- "tools": 75,
- "videos": 82,
+ "commits": 430,
+ "pullRequests": 143,
+ "tools": 77,
+ "videos": 84,
  "languages": 6,
  "workflows": 7,
  "recent": [
+  {
+   "number": 177,
+   "title": "Go Forge: one tap plays a stone on phones",
+   "date": "2026-10-22",
+   "tool": "go-forge.html"
+  },
+  {
+   "number": 176,
+   "title": "Go Forge: fit the lessons on phone screens",
+   "date": "2026-10-22",
+   "tool": "go-forge.html"
+  },
+  {
+   "number": 175,
+   "title": "Add Go Forge: learn Go and play the computer with a coach",
+   "date": "2026-10-22",
+   "tool": null
+  },
+  {
+   "number": 174,
+   "title": "Add Noise Forge, a 3,000+ picture library in Coloring Forge and a Chinese character dictionary in Alphabet Forge",
+   "date": "2026-10-21",
+   "tool": null
+  },
+  {
+   "number": 173,
+   "title": "Add German, Portuguese and French translations",
+   "date": "2026-10-20",
+   "tool": null
+  },
+  {
+   "number": 172,
+   "title": "File Forge: keep each file under a size limit (KB)",
+   "date": "2026-10-20",
+   "tool": null
+  },
   {
    "number": 170,
    "title": "Turn off free shared AI pictures in Coloring Forge and Picture Forge",
@@ -60,42 +96,6 @@
    "number": 158,
    "title": "Shop: five €3 template packs and a €9 All Templates bundle",
    "date": "2026-10-12",
-   "tool": null
-  },
-  {
-   "number": 161,
-   "title": "Website Builder: start step, Check & fix, style panel; privacy labels on every tool card",
-   "date": "2026-10-11",
-   "tool": "website-builder.html"
-  },
-  {
-   "number": 160,
-   "title": "Memory Forge: every level can be picked, stars only show progress",
-   "date": "2026-10-11",
-   "tool": "memory-forge.html"
-  },
-  {
-   "number": 159,
-   "title": "Clearer homepage, Mind Map tool, AI upscaler and a new tour video",
-   "date": "2026-10-09",
-   "tool": null
-  },
-  {
-   "number": 157,
-   "title": "Website Builder loads whole sites from a zip; shop gets a how-to video",
-   "date": "2026-10-08",
-   "tool": "website-builder.html"
-  },
-  {
-   "number": 156,
-   "title": "Shop: live Buy button and a notice that checkout runs on Stripe",
-   "date": "2026-10-08",
-   "tool": null
-  },
-  {
-   "number": 155,
-   "title": "Add shop page, thank-you page and Stripe download Worker",
-   "date": "2026-10-08",
    "tool": null
   }
  ]
