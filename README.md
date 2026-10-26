@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**77 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**78 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -50,6 +50,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Bug Scanner** — paste code or drop a whole project in 30+ languages to see what it builds, what is wrong and exactly how to fix it
 - **Alphabet Forge** — tap any Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi or Georgian symbol to hear it, learn a word and why it sounds that way, then practise writing it — and type it with the built-in on-screen keyboard (Korean syllables join as you type, Japanese from romaji, Mandarin from pinyin), plus a typing challenge
 - **Idea Atlas** — explore the history, key thinkers and connections of 37 philosophies and ideologies, then play a timed quiz game
+- **Psychology Atlas** — the history of psychology from ancient ideas of the mind to today: 44 schools, research fields and therapies (Wundt, Freud, behaviourism, Gestalt, humanistic, cognitive, neuroscience, CBT, positive psychology, the replication crisis…) with key psychologists, timelines and how they influenced each other, then a timed quiz game
 - **Biology Map** — explore a tree of life with 43 living things to see how long ago we shared an ancestor, how much DNA we share (and what each figure really measures) and what we both inherited; zoom from the body down to a single DNA letter, build a DNA strand, follow a gene being expressed and translate DNA with the real genetic code, make mutations in the human haemoglobin gene (including sickle cell), run a peppered-moth natural-selection simulator, follow humans out of Africa on a world map with local adaptations, then play a scored quiz
 - **Chemistry Map** — an interactive periodic table of all 118 elements, coloured by family, state at any temperature, electronegativity, density, melting point, discovery date or block; open any element for its animated atom, where it is found, its forms, uses and compounds; put elements in a mixing bowl to see how they bond and the formula they form, see which elements build steel, glass, plastics, batteries, chips and more, work out molar masses, then play a scored quiz
 - **Mind Map** — mind maps, flowcharts and a whiteboard: select an idea and press Tab or Enter to add the next one, join boxes, decisions and start/end shapes with labelled arrows, add sticky notes, draw freehand with the pen, tidy the branches with one click, turn an indented list (or a topic, with optional AI) into a map, and download a PNG, an SVG or a text outline; the board is saved in your browser and works with touch
@@ -82,7 +83,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 77 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 78 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 

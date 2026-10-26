@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Psychology Atlas — the history of psychology, its schools, thinkers and theories, with a quiz | MigaBuilder</title>
+<meta name="description" content="Explore the history of psychology from ancient ideas of the mind to today — 44 schools, research fields and therapies, from Wundt, Freud and behaviourism to cognitive science, CBT and the replication crisis. See key thinkers, theories and how they influenced each other, then play a scored quiz game. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/psychology-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/psychology-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Psychology Atlas — the history of psychology, its schools and thinkers | MigaBuilder">
+<meta property="og:description" content="An interactive map of how psychology’s schools, theories and therapies connect, from ancient ideas of the mind to today, with key thinkers and a quiz game.">
+<meta property="og:url" content="https://migabuilder.com/psychology-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="ai-client.js"></script>
+<script src="psychology-data.js"></script>
+<style>
+main{max-width:1320px}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.toolbar input{flex:1 1 220px;padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px 'IBM Plex Sans',sans-serif}
+.chip.active{background:var(--cyan);color:#081826;border-color:var(--cyan)}
+.panel .chip{background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)}.panel .chip.active{background:#0E2A47;color:#fff}
+.explorer{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:16px;align-items:start}
+.explorer>div:first-child{position:sticky;top:10px}
+.viewbox{background:#0a2238;border:1px solid var(--line);border-radius:6px;overflow:hidden;position:relative}
+#net{display:block;width:100%;height:620px;cursor:grab;touch-action:none}
+.node circle{stroke:#0a2238;stroke-width:2;cursor:pointer}.node text{fill:#EDEAE0;font:600 13px 'IBM Plex Sans';pointer-events:none;paint-order:stroke;stroke:#0a2238;stroke-width:3px}
+.link{stroke:rgba(111,209,224,.35);stroke-width:1.3}.link.rival{stroke:#D8604A;stroke-dasharray:5 4;stroke-opacity:.7}
+.dim{opacity:.22}.hl circle{stroke:#fff;stroke-width:3}
+.legend{display:flex;gap:14px;flex-wrap:wrap;padding:8px 12px;font-size:12px;color:rgba(237,234,224,.8)}.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.legend .ln{width:22px;height:0;border-top:2px solid rgba(111,209,224,.6);border-radius:0}.legend .lr{width:22px;height:0;border-top:2px dashed #D8604A;border-radius:0}
+.map-tools{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px}.map-tools button{width:36px;height:36px;border-radius:4px;border:1px solid var(--line);background:rgba(8,24,38,.85);color:var(--paper);font-size:18px;cursor:pointer}
+.tl-scroll{overflow-x:auto}#tl{display:block;min-width:1500px;width:100%}
+.tl-item{cursor:pointer}.tl-item text{fill:#EDEAE0;font:600 11px 'IBM Plex Sans'}.tl-item:hover text{fill:#6FD1E0}
+.axis text{fill:rgba(237,234,224,.7);font:11px 'IBM Plex Sans'}.axis line,.axis path{stroke:rgba(111,209,224,.3)}
+.lane-label{fill:#6FD1E0;font:700 12px 'Space Grotesk'}
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;padding:10px;max-height:640px;overflow:auto}
+.lcard{background:#fff;color:var(--ink);border-radius:4px;padding:10px 12px;cursor:pointer;border-left:5px solid #3d6b8c;text-align:left;font:inherit}
+.lcard b{display:block;font:700 14px 'Space Grotesk'}.lcard small{color:rgba(22,32,43,.72)}
+.info h2{font:700 24px 'Space Grotesk';margin:0}.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;margin-right:6px}
+.info .meta{color:rgba(22,32,43,.72);font-size:13px;margin:4px 0 10px}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:10px}.sect h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.sect ul{margin:0;padding-left:18px;line-height:1.5;font-size:14px}
+.thinker{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:8px 10px;margin-bottom:6px;font-size:13.5px;line-height:1.45}.thinker b{font-size:14px}
+.hist{list-style:none;padding:0!important;margin:0;border-left:2px solid #0E2A47}.hist li{position:relative;padding:0 0 8px 14px}.hist li:before{content:'';position:absolute;left:-6px;top:5px;width:10px;height:10px;border-radius:50%;background:#E2A63B}
+.hist b{display:inline-block;min-width:74px}
+.links a{display:inline-block;margin:2px 4px 2px 0;padding:4px 9px;border-radius:999px;background:#fff;border:1px solid rgba(14,42,71,.25);color:#0E2A47;font-size:12.5px;font-weight:600;cursor:pointer;text-decoration:none}
+.links a.rv{border-color:#D8604A;color:#8e2f1f}
+.critic{font-size:13.5px;background:rgba(216,96,74,.08);border-left:3px solid #D8604A;padding:8px 10px;margin-top:8px;line-height:1.45}
+.empty{color:rgba(22,32,43,.72);text-align:center;padding:40px 10px}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 12px}.checks label{display:flex;gap:6px;align-items:center;font-size:14px}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-weight:700;font-size:14px;margin:6px 0}
+.timer{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden}.timer i{display:block;height:100%;background:#4E9E73;transition:width .25s linear}
+.quiz-q{font:600 19px 'Space Grotesk';margin:12px 0;line-height:1.35}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px;color:var(--ink)}
+.opt:hover:not(:disabled){border-color:#0E2A47}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;font-size:14px;line-height:1.5}
+.pop{font:700 16px 'Space Grotesk';color:#2f6b49}
+.review li{margin-bottom:8px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.hidden{display:none!important}
+@media(max-width:980px){.explorer{grid-template-columns:1fr}.explorer>div:first-child{position:static}#net{height:460px}.qgrid,.opts{grid-template-columns:1fr}}
+</style>
+<script src="i18n.js"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a quiz?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A timed, scored quiz game with an explanation after every answer, so you can try to beat your best score."}}, {"@type": "Question", "name": "Is Psychology Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Psychology Atlas</span></nav>
+<header class="masthead"><div><h1>Psychology Atlas</h1><p>Explore the history of psychology — from ancient ideas of the mind to today’s research — its schools, theories, therapies and the people behind them. See how ideas influenced each other, then play the quiz game.</p></div></header>
+<main>
+<div class="toolbar">
+  <input id="search" list="ideaList" placeholder="Search a school, theory, therapy or psychologist…" aria-label="Search"><datalist id="ideaList"></datalist>
+  <button class="chip active" data-kind="">All</button><button class="chip" data-kind="roots">Roots</button><button class="chip" data-kind="school">Schools</button><button class="chip" data-kind="field">Research fields</button><button class="chip" data-kind="applied">Therapy &amp; applied</button>
+  <span style="flex:0 0 12px"></span>
+  <button class="chip active" data-view="net">🕸️ Connections map</button><button class="chip" data-view="tl">🕰️ Timeline</button><button class="chip" data-view="list">📚 List</button>
+</div>
+<section class="explorer">
+  <div>
+    <div class="viewbox" id="viewNet"><svg id="net" role="img" aria-label="Map of how schools of psychology influenced each other. Click a circle to read about it."></svg>
+      <div class="map-tools"><button id="zIn" aria-label="Zoom in">+</button><button id="zOut" aria-label="Zoom out">−</button><button id="zReset" aria-label="Reset view">⟲</button></div>
+      <div class="legend"><span><i style="background:#7f97ad"></i>Philosophical roots</span><span><i style="background:#2a8fa3"></i>Schools of thought</span><span><i style="background:#c9922a"></i>Research fields</span><span><i style="background:#8a6cc0"></i>Therapy &amp; applied</span><span><i class="ln"></i>Influenced (older → newer)</span><span><i class="lr"></i>Rivals / critics</span><span>Left → right ≈ older → newer · Explored: <b id="seenCount">0</b>/<span id="totalCount"></span></span></div>
+    </div>
+    <div class="viewbox hidden" id="viewTl"><div class="tl-scroll"><svg id="tl"></svg></div><div class="legend"><span>Click any name to open it. Scroll sideways on small screens.</span></div></div>
+    <div class="viewbox hidden" id="viewList"><div class="list" id="list"></div></div>
+  </div>
+  <article class="panel info" id="info" aria-live="polite"><div class="empty">🧭<br><strong>Pick a circle on the map</strong><br>or search above. Everything you open is added to your explored list for the quiz.</div></article>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🏆 Quiz game</h2>
+  <p>Generate a quiz from what you explored, a category, or one school and its connections. <b>Challenge mode</b> gives 20 seconds per question, bonus points for speed and a multiplier for streaks.</p>
+  <div class="qgrid">
+    <div class="field"><label for="qSource">Questions about</label><select id="qSource"><option value="all">Everything</option><option value="seen">What I explored</option><option value="roots">Philosophical roots</option><option value="school">Schools of thought</option><option value="field">Research fields</option><option value="applied">Therapy &amp; applied</option><option value="selected">The selected circle and its connections</option></select></div>
+    <div class="field"><label for="qCount">Number of questions</label><select id="qCount"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+    <div class="field"><label for="qMode">Mode</label><select id="qMode"><option value="challenge">Challenge — timed, points &amp; streaks</option><option value="practice">Practice — no timer</option></select></div>
+  </div>
+  <div class="checks" id="qTypes">
+    <label><input type="checkbox" value="thinker" checked> Key psychologists</label>
+    <label><input type="checkbox" value="work" checked> Famous works</label>
+    <label><input type="checkbox" value="idea" checked> Core ideas &amp; theories</label>
+    <label><input type="checkbox" value="connection" checked> Connections</label>
+    <label><input type="checkbox" value="rival" checked> Rivals &amp; critics</label>
+    <label><input type="checkbox" value="era" checked> When it began</label>
+    <label><input type="checkbox" value="event" checked> History events</label>
+  </div>
+  <div class="actions"><button class="primary" id="makeQuiz" data-primary>Generate quiz</button><button class="secondary" id="printQuiz">⬇ Printable quiz + answers</button></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">🤖 AI quiz on any topic</summary>
+    <p class="muted">Type any psychologist, theory, experiment or period (e.g. “Freud for beginners”, “memory research”, “Milgram’s obedience study”). The AI writes the questions; check anything surprising against a trusted source.</p>
+    <div class="grid"><div class="field"><label for="aiTopic">Topic</label><input id="aiTopic" placeholder="e.g. Attachment theory"></div><div class="field"><label for="aiLevel">Level</label><select id="aiLevel"><option>beginner</option><option selected>intermediate</option><option>advanced</option></select></div></div>
+    <div id="aiBox"></div><button class="secondary" id="aiQuiz">Generate AI quiz</button><p class="status" id="aiStatus"></p>
+  </details>
+  <p class="muted" id="bestLine" style="margin-top:10px"></p>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="hud"><span id="qProg"></span><span id="qStreak"></span><span id="qScore"></span></div>
+    <div class="timer" id="timerBar"><i id="timerFill"></i></div>
+    <div class="quiz-q" id="qText"></div>
+    <div class="opts" id="qOpts"></div>
+    <div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:10px"><button class="primary hidden" id="qNext">Next question →</button><button class="secondary" id="qQuit">End quiz</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px">
+    <h3 id="doneTitle" style="font:700 22px 'Space Grotesk';margin:0 0 6px"></h3><p id="doneSub"></p>
+    <ol class="review" id="review"></ol>
+    <div class="actions"><button class="primary" id="newQuiz">New quiz</button><button class="secondary" id="retryWrong">Retry the ones I missed</button></div>
+  </div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Psychology Atlas</h2>
+  <p>Psychology Atlas maps 44 schools, research fields and therapies in the history of psychology — from Aristotle, Ibn Sina and Descartes, through Wundt’s first laboratory in 1879, Freud, behaviourism, Gestalt and humanistic psychology, to the cognitive revolution, neuroscience, CBT, positive psychology and today’s replication crisis — with key thinkers, history and influences.</p>
+  <h3>How to use Psychology Atlas</h3>
+  <ol><li>Search or click a school, theory or therapy on the connections map to read its history and key psychologists.</li><li>Press “Generate quiz”.</li><li>Answer the questions against the clock, read each explanation and try to beat your best score.</li></ol>
+  <h3>Is there a quiz?</h3>
+  <p>Yes. A timed, scored quiz game with an explanation after every answer, so you can try to beat your best score.</p>
+  <h3>Is Psychology Atlas free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="idea-atlas.html">Idea Atlas</a> · <a href="big-five.html">Big Five Personality</a> · <a href="flashcard-forge.html">Flashcard Forge</a></p>
+</section>
+
+<footer>Psychology Atlas · MigaBuilder · Short summaries for learning, not medical advice — each school contains many disagreements. Read the original researchers to go deeper.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+MigaAI.mount($('aiBox'));
+const IDEAS=window.PSYCH,BY=Object.fromEntries(IDEAS.map(x=>[x.id,x]));
+const COLOR={roots:'#7f97ad',school:'#2a8fa3',field:'#c9922a',applied:'#8a6cc0'};
+const KIND={roots:'Philosophical roots',school:'School of thought',field:'Research field',applied:'Therapy & applied'};
+const yr=y=>y<0?Math.abs(y)+' BCE':String(y);
+// derived relations
+IDEAS.forEach(x=>{x.to=[];x.rv=new Set(x.rivals)});
+IDEAS.forEach(x=>{x.from.forEach(f=>BY[f].to.push(x.id));x.rivals.forEach(r=>BY[r].rv.add(x.id))});
+let seen=new Set(store.get('psychSeen',[]));let selected=null,kindFilter='';
+$('totalCount').textContent=IDEAS.length;
+$('ideaList').innerHTML=IDEAS.map(x=>'<option value="'+esc(x.name)+'">').join('')+[...new Set(IDEAS.flatMap(x=>x.thinkers.map(t=>t[0])))].map(t=>'<option value="'+esc(t)+'">').join('');
+
+// ---------- connections map ----------
+const svg=d3.select('#net'),W=940,H=640;svg.attr('viewBox',[0,0,W,H]);
+svg.append('defs').append('marker').attr('id','arrow').attr('viewBox','0 -4 8 8').attr('refX',8).attr('refY',0).attr('markerWidth',7).attr('markerHeight',7).attr('orient','auto').append('path').attr('d','M0,-4L8,0L0,4').attr('fill','rgba(111,209,224,.6)');
+const zoomG=svg.append('g');
+const time=d3.scaleLinear().domain([-500,0,1000,1600,1800,1880,1950,2026]).range([95,120,145,175,230,310,640,870]).clamp(true);
+const LANE={roots:.14,school:.36,field:.62,applied:.86};
+const links=[];IDEAS.forEach(x=>x.from.forEach(f=>links.push({source:f,target:x.id,kind:'inf'})));
+const rp=new Set();IDEAS.forEach(x=>x.rivals.forEach(r=>{const k=[x.id,r].sort().join('|');if(!rp.has(k)){rp.add(k);links.push({source:x.id,target:r,kind:'rival'})}}));
+const nodes=IDEAS.map(x=>({id:x.id,d:x,r:9+Math.sqrt(x.from.length+x.to.length+x.rv.size)*3.2}));
+const linkSel=zoomG.append('g').selectAll('line').data(links).join('line').attr('class',l=>'link'+(l.kind==='rival'?' rival':'')).attr('marker-end',l=>l.kind==='inf'?'url(#arrow)':null);
+const nodeSel=zoomG.append('g').selectAll('g').data(nodes).join('g').attr('class','node').attr('tabindex',0).attr('role','button').attr('aria-label',n=>n.d.name)
+  .on('click',(e,n)=>select(n.id)).on('keydown',(e,n)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id)}});
+nodeSel.append('circle').attr('r',n=>n.r).attr('fill',n=>COLOR[n.d.kind]);
+nodeSel.append('text').attr('text-anchor','middle').attr('dy',n=>n.r+13).text(n=>n.d.name.replace(/ \(.*\)$/,'').replace(/ & .*$/,''));
+nodeSel.append('title').text(n=>n.d.name+' · '+n.d.era);
+const sim=d3.forceSimulation(nodes)
+  .force('link',d3.forceLink(links).id(n=>n.id).distance(l=>l.kind==='rival'?140:90).strength(l=>l.kind==='rival'?.05:.25))
+  .force('charge',d3.forceManyBody().strength(-160))
+  .force('x',d3.forceX(n=>time(n.d.start)).strength(1))
+  .force('y',d3.forceY(n=>H*LANE[n.d.kind]).strength(.4))
+  .force('collide',d3.forceCollide(n=>n.r+12))
+  .on('tick',()=>{nodes.forEach(n=>{n.y=Math.max(20,Math.min(H-30,n.y))});
+    linkSel.each(function(l){const dx=l.target.x-l.source.x,dy=l.target.y-l.source.y,len=Math.hypot(dx,dy)||1,tr=l.target.r+3;
+      d3.select(this).attr('x1',l.source.x).attr('y1',l.source.y).attr('x2',l.target.x-dx/len*(l.kind==='inf'?tr:0)).attr('y2',l.target.y-dy/len*(l.kind==='inf'?tr:0))});
+    nodeSel.attr('transform',n=>'translate('+n.x+','+n.y+')')});
+nodeSel.call(d3.drag().on('start',(e,n)=>{if(!e.active)sim.alphaTarget(.2).restart();n.fx=n.x;n.fy=n.y}).on('drag',(e,n)=>{n.fx=e.x;n.fy=e.y}).on('end',(e,n)=>{if(!e.active)sim.alphaTarget(0);n.fx=null;n.fy=null}));
+const zoom=d3.zoom().scaleExtent([.5,5]).on('zoom',e=>zoomG.attr('transform',e.transform));svg.call(zoom);
+$('zIn').onclick=()=>svg.transition().call(zoom.scaleBy,1.4);$('zOut').onclick=()=>svg.transition().call(zoom.scaleBy,1/1.4);$('zReset').onclick=()=>svg.transition().call(zoom.transform,d3.zoomIdentity);
+function highlight(){
+  const vis=n=>!kindFilter||n.d.kind===kindFilter;
+  const near=selected?new Set([selected,...BY[selected].from,...BY[selected].to,...BY[selected].rv]):null;
+  nodeSel.classed('dim',n=>!vis(n)||(near&&!near.has(n.id))).classed('hl',n=>n.id===selected);
+  linkSel.classed('dim',l=>!(vis(l.source)&&vis(l.target))||(near&&!(l.source.id===selected||l.target.id===selected)));
+}
+
+// ---------- timeline ----------
+function drawTimeline(){
+  const tl=d3.select('#tl');tl.selectAll('*').remove();
+  const w=Math.max(1500,$('viewTl').clientWidth),lanes=[['roots','Roots'],['school','Schools'],['field','Fields'],['applied','Therapy']];
+  const x=d3.scaleLinear().domain([-500,0,1000,1600,1800,1880,1950,2026]).range([90,140,190,240,w*.2,w*.3,w*.64,w-40].map(v=>Math.min(v,w-40))).clamp(true);
+  let yCursor=30;const rowH=18;
+  lanes.forEach(([k,label])=>{
+    const list=IDEAS.filter(i=>i.kind===k&&(!kindFilter||kindFilter===k)).sort((a,b)=>a.start-b.start);if(!list.length)return;
+    const rows=[];list.forEach(it=>{const px=x(it.start),wLabel=(it.name.length+7)*7+14;let r=rows.findIndex(end=>end<px);if(r<0){r=rows.length;rows.push(0)}rows[r]=px+wLabel;it._row=r;it._x=px});
+    tl.append('text').attr('class','lane-label').attr('x',8).attr('y',yCursor+12).text(label);
+    const g=tl.append('g').attr('transform','translate(0,'+yCursor+')');
+    g.append('line').attr('x1',80).attr('x2',w-20).attr('y1',rows.length*rowH+8).attr('y2',rows.length*rowH+8).attr('stroke','rgba(111,209,224,.15)');
+    const it=g.selectAll('g').data(list).join('g').attr('class','tl-item').attr('transform',d=>'translate('+d._x+','+(d._row*rowH+10)+')').on('click',(e,d)=>select(d.id));
+    it.append('circle').attr('r',5).attr('fill',d=>COLOR[d.kind]).attr('stroke',d=>seen.has(d.id)?'#fff':'none');
+    it.append('text').attr('x',8).attr('dy',4).text(d=>d.name+' · '+yr(d.start));
+    it.append('title').text(d=>d.name+' — '+d.era);
+    yCursor+=rows.length*rowH+34;
+  });
+  const ax=d3.axisBottom(x).tickValues([-500,0,500,1000,1600,1700,1800,1850,1880,1900,1925,1950,1975,2000,2025]).tickFormat(v=>v<0?(-v)+' BCE':v===0?'0':v);
+  tl.append('g').attr('class','axis').attr('transform','translate(0,'+yCursor+')').call(ax);
+  tl.attr('viewBox',[0,0,w,yCursor+30]).attr('height',yCursor+30);
+}
+
+// ---------- list ----------
+function drawList(){$('list').innerHTML=IDEAS.filter(i=>!kindFilter||i.kind===kindFilter).sort((a,b)=>a.start-b.start).map(i=>'<button class="lcard" data-id="'+i.id+'" style="border-left-color:'+COLOR[i.kind]+'"><b>'+(seen.has(i.id)?'✓ ':'')+esc(i.name)+'</b><small>'+esc(KIND[i.kind])+' · '+esc(i.era)+'</small></button>').join('');$('list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>select(b.dataset.id))}
+
+// ---------- detail ----------
+function chip(id,cls){return '<a class="'+(cls||'')+'" data-go="'+id+'">'+esc(BY[id].name)+'</a>'}
+function select(id,noScroll){
+  const x=BY[id];if(!x)return;selected=id;seen.add(id);store.set('psychSeen',[...seen]);$('seenCount').textContent=seen.size;
+  $('info').innerHTML='<span class="badge" style="background:'+COLOR[x.kind]+'">'+KIND[x.kind]+'</span><h2>'+esc(x.name)+'</h2><div class="meta">Began: '+esc(x.era)+' · '+esc(x.region)+'</div><p style="line-height:1.55;margin:0">'+esc(x.summary)+'</p>'+
+   '<div class="sect"><h3>Core ideas</h3><ul>'+x.ideas.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul></div>'+
+   '<div class="sect"><h3>Key psychologists &amp; thinkers</h3>'+x.thinkers.map(t=>'<div class="thinker"><b>'+esc(t[0])+'</b> <span class="muted">('+esc(t[1])+')</span><br>'+esc(t[2])+(t[3]&&t[3]!=='—'?'<br><i>Key work: '+esc(t[3])+'</i>':'')+'</div>').join('')+'</div>'+
+   '<div class="sect"><h3>History</h3><ul class="hist">'+x.history.map(h=>'<li><b>'+yr(h[0])+'</b> '+esc(h[1])+'</li>').join('')+'</ul></div>'+
+   '<div class="sect links"><h3>Connections</h3>'+(x.from.length?'<p style="margin:4px 0"><b>Drew on:</b> '+x.from.map(f=>chip(f)).join('')+'</p>':'')+(x.to.length?'<p style="margin:4px 0"><b>Influenced:</b> '+x.to.map(f=>chip(f)).join('')+'</p>':'')+(x.rv.size?'<p style="margin:4px 0"><b>Rivals &amp; critics:</b> '+[...x.rv].map(f=>chip(f,'rv')).join('')+'</p>':'')+'<div class="critic"><b>What critics say:</b> '+esc(x.critics)+'</div></div>'+
+   '<div class="actions" style="margin-top:12px"><button class="primary" id="quizThis">🏆 Quiz me on this and its connections</button><button class="secondary" id="askAi">🤖 Explain it simply</button></div><div id="aiAns" class="explain hidden"></div>';
+  $('info').querySelectorAll('[data-go]').forEach(a=>a.onclick=()=>select(a.dataset.go));
+  $('quizThis').onclick=()=>{$('qSource').value='selected';start(generate());$('quizPanel').scrollIntoView({behavior:'smooth'})};
+  $('askAi').onclick=()=>askAi(x);
+  highlight();drawList();if(!$('viewTl').classList.contains('hidden'))drawTimeline();
+  if(!noScroll&&matchMedia('(max-width:980px)').matches)$('info').scrollIntoView({behavior:'smooth'});
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+}
+async function askAi(x){const box=$('aiAns');box.classList.remove('hidden');box.textContent='Asking the AI…';
+  try{const t=await MigaAI.ask('You are a balanced, accurate teacher of psychology and its history. Present theories fairly, including the evidence for them and their main criticisms. Plain text only, no markdown.','Explain '+x.name+' to a curious 14-year-old in about 150 words: what it says, one everyday example, why it mattered in the history of psychology, and the main criticism of it.');box.textContent=t.trim()}catch(e){box.textContent=e.message}}
+
+// ---------- controls ----------
+document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>{kindFilter=b.dataset.kind;document.querySelectorAll('[data-kind]').forEach(x=>x.classList.toggle('active',x===b));highlight();drawList();drawTimeline()});
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-view]').forEach(x=>x.classList.toggle('active',x===b));$('viewNet').classList.toggle('hidden',b.dataset.view!=='net');$('viewTl').classList.toggle('hidden',b.dataset.view!=='tl');$('viewList').classList.toggle('hidden',b.dataset.view!=='list');if(b.dataset.view==='tl')drawTimeline()});
+$('search').addEventListener('change',()=>{const q=$('search').value.trim().toLowerCase();if(!q)return;
+  const hit=IDEAS.find(x=>x.name.toLowerCase()===q)||IDEAS.find(x=>x.thinkers.some(t=>t[0].toLowerCase()===q))||IDEAS.find(x=>x.name.toLowerCase().includes(q))||IDEAS.find(x=>x.thinkers.some(t=>t[0].toLowerCase().includes(q))||x.summary.toLowerCase().includes(q));
+  if(hit)select(hit.id);else $('search').setCustomValidity('Nothing found'),$('search').reportValidity(),setTimeout(()=>$('search').setCustomValidity(''),1500)});
+
+// ---------- quiz generator ----------
+const rnd=a=>a[Math.floor(Math.random()*a.length)],shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const thinkerIdeas=name=>IDEAS.filter(x=>x.thinkers.some(t=>t[0]===name)).map(x=>x.id);
+function pickDistinct(pool,n,avoid){const out=[],seenV=new Set(avoid);shuffle(pool.slice()).forEach(v=>{if(out.length<n&&!seenV.has(v)){seenV.add(v);out.push(v)}});return out}
+function makeQ(type,x){
+  const others=IDEAS.filter(o=>o.id!==x.id),sameKind=others.filter(o=>o.kind===x.kind);
+  const nameOpts=(excl)=>pickDistinct((sameKind.length>=3?sameKind:others).filter(o=>!excl.includes(o.id)).map(o=>o.name),3,[x.name]);
+  if(type==='thinker'){const t=rnd(x.thinkers),ids=thinkerIdeas(t[0]);return {q:'Which school, field or therapy is '+t[0]+' ('+t[1]+') a key figure of?',a:x.name,opts:nameOpts(ids),why:t[0]+' — '+t[2]+(t[3]&&t[3]!=='—'?' (key work: '+t[3]+')':'')+'.',idea:x.id}}
+  if(type==='work'){const ws=x.thinkers.filter(t=>t[3]&&t[3]!=='—'&&!/^(Wrote nothing|Teachings recorded)/.test(t[3]));if(!ws.length)return null;const t=rnd(ws);
+    const pool=IDEAS.flatMap(o=>o.thinkers.map(z=>z[0])).filter(n=>n!==t[0]);return {q:'Who wrote or is known for “'+t[3]+'”?',a:t[0],opts:pickDistinct(pool,3,[t[0]]),why:t[0]+' ('+t[1]+'), a key figure of '+x.name+': '+t[2]+'.',idea:x.id}}
+  if(type==='idea'){const i=rnd(x.ideas);return {q:'Which school, field or therapy is built around this idea: “'+i+'”?',a:x.name,opts:nameOpts([]),why:x.name+': '+x.summary,idea:x.id}}
+  if(type==='connection'){if(!x.from.length&&!x.to.length)return null;
+    if(x.from.length&&(Math.random()<.6||!x.to.length)){const f=BY[rnd(x.from)],bad=new Set([x.id,...x.from,...x.to]);return {q:'Which of these did '+x.name+' draw on?',a:f.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[f.name]),why:x.name+' drew on '+x.from.map(z=>BY[z].name).join(', ')+'.',idea:x.id}}
+    const t=BY[rnd(x.to)],bad=new Set([x.id,...x.from,...x.to]);return {q:'Which of these was influenced by '+x.name+'?',a:t.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[t.name]),why:x.name+' influenced '+x.to.map(z=>BY[z].name).join(', ')+'.',idea:x.id}}
+  if(type==='rival'){if(!x.rv.size)return null;const r=BY[rnd([...x.rv])],bad=new Set([x.id,...x.rv,...x.from,...x.to]);return {q:'Which of these was a major rival or critic of '+x.name+'?',a:r.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[r.name]),why:x.name+' — '+x.critics,idea:x.id}}
+  if(type==='era'){const pool=IDEAS.filter(o=>Math.abs(o.start-x.start)>25).map(o=>o.era);const opts=pickDistinct(pool,3,[x.era]);if(opts.length<3)return null;return {q:'When did '+x.name+' begin?',a:x.era,opts,why:x.name+' is usually dated from '+x.era+'. '+x.history[0][1]+' ('+yr(x.history[0][0])+').',idea:x.id}}
+  if(type==='event'){const h=rnd(x.history),cands=new Set();[-40,-25,-15,15,25,40,60,-60,100,-100].forEach(d=>{const y=h[0]+d;if(y!==h[0]&&y!==0&&y<=2026)cands.add(yr(y))});
+    return {q:'In what year? — '+h[1]+'.',a:yr(h[0]),opts:shuffle([...cands]).slice(0,3),why:'This happened in '+yr(h[0])+', in the history of '+x.name+'.',idea:x.id}}
+  return null;
+}
+function sourceIdeas(){const s=$('qSource').value;
+  if(s==='seen'){const l=IDEAS.filter(x=>seen.has(x.id));return l.length>=3?l:null}
+  if(KIND[s])return IDEAS.filter(x=>x.kind===s);
+  if(s==='selected'){if(!selected)return null;const x=BY[selected];return [x,...[...new Set([...x.from,...x.to,...x.rv])].map(i=>BY[i])]}
+  return IDEAS.slice();}
+function generate(){
+  const src=sourceIdeas();if(!src){alert($('qSource').value==='seen'?'Explore at least 3 circles first, or choose another source.':'Select a circle on the map first.');return null}
+  const types=[...document.querySelectorAll('#qTypes input:checked')].map(c=>c.value);if(!types.length){alert('Tick at least one question type.');return null}
+  const n=+$('qCount').value,out=[],keys=new Set();let guard=0;
+  while(out.length<n&&guard++<600){const x=$('qSource').value==='selected'&&Math.random()<.5?BY[selected]:rnd(src);const q=makeQ(rnd(types),x);if(!q||q.opts.length<3)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
+  return out.length?out:null;
+}
+
+// ---------- quiz play ----------
+let quiz=[],qi=0,score=0,points=0,streak=0,bestStreak=0,answered=false,missed=[],timer=null,left=0,challenge=true;
+function start(qs){if(!qs)return;quiz=qs;qi=0;score=0;points=0;streak=0;bestStreak=0;missed=[];challenge=$('qMode').value==='challenge';
+  $('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');$('timerBar').classList.toggle('hidden',!challenge);show()}
+function mult(){return streak>=5?2:streak>=3?1.5:1}
+function show(){const q=quiz[qi];answered=false;
+  $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
+  $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
+  $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
+  clearInterval(timer);if(challenge){left=20;$('timerFill').style.width='100%';$('timerFill').style.background='#4E9E73';timer=setInterval(()=>{left-=.25;$('timerFill').style.width=Math.max(0,left/20*100)+'%';if(left<6)$('timerFill').style.background='#D8604A';if(left<=0){clearInterval(timer);answer(null,null)}},250)}
+}
+function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer);const q=quiz[qi],ok=choice===q.a;
+  let gained=0;if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
+  q.ok=ok;q.given=choice;
+  $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why)+(q.idea?' <a data-go="'+q.idea+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(BY[q.idea].name)+' →</a>':'');$('qExplain').classList.remove('hidden');
+  const go=$('qExplain').querySelector('[data-go]');if(go)go.onclick=()=>{select(go.dataset.go,true);$('info').scrollIntoView({behavior:'smooth'})};
+  $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
+  $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+$('qNext').onclick=()=>{if(++qi<quiz.length)show();else finish()};
+$('qQuit').onclick=()=>{clearInterval(timer);quiz=quiz.slice(0,qi+(answered?1:0));if(!quiz.length){$('quizArea').classList.add('hidden');return}finish()};
+const RANKS=[[90,'Professor 🧠'],[75,'Researcher 🔬'],[55,'Student 📘'],[0,'Novice 🌱']];
+function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
+  const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];
+  const best=store.get('psychBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
+  if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('psychBest',best);
+  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
+  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('retryWrong').classList.toggle('hidden',!missed.length);showBest()}
+$('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
+$('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})));
+function showBest(){const b=store.get('psychBest',null);$('bestLine').textContent=b?'Your best: '+b.points+' points in challenge mode · '+b.pct+'% accuracy':''}
+showBest();
+$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;
+  const body='<h1>History of psychology quiz</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+qs.map(q=>'<li><p>'+esc(q.q)+'</p><ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol></li>').join('')+'</ol><h2 style="page-break-before:always">Answer key</h2><ol>'+qs.map(q=>'<li>'+String.fromCharCode(65+q.opts.indexOf(q.a))+') '+esc(q.a)+' — <small>'+esc(q.why)+'</small></li>').join('')+'</ol><p><small>Made with MigaBuilder Psychology Atlas · migabuilder.com/psychology-atlas.html</small></p>';
+  const html='<!doctype html><html><head><meta charset="utf-8"><title>History of psychology quiz</title><style>body{font:15px/1.5 Georgia,serif;max-width:760px;margin:30px auto;padding:0 20px}li{margin-bottom:10px}</style></head><body>'+body+'</body></html>';
+  const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download='psychology-quiz.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)};
+$('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$('aiTopic').focus();return}
+  const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your quiz…';$('aiQuiz').disabled=true;
+  try{const d=MigaAI.json(await MigaAI.ask('You write accurate, balanced multiple-choice quizzes about psychology, its history, theories, experiments and key researchers. Reply with ONE JSON array only.',
+    'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about psychology: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
+    const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
+    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(e){st.textContent='Could not create the quiz: '+e.message}$('aiQuiz').disabled=false};
+
+// ---------- start ----------
+$('seenCount').textContent=seen.size;drawList();
+const h=location.hash.slice(1);if(BY[h])setTimeout(()=>select(h,true),300);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

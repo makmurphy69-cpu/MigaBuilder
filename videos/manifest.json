@@ -1380,6 +1380,27 @@
    "kind": "text"
   }
  },
+ "psychology-atlas.html": {
+  "title": "Psychology Atlas",
+  "video": "https://videos.migabuilder.com/psychology-atlas.mp4?v=ee63c688",
+  "poster": "https://videos.migabuilder.com/psychology-atlas.jpg?v=48172b44",
+  "duration": 89,
+  "transcript": [
+   "Welcome to Psychology Atlas. Explore the history of psychology, from ancient ideas of the mind to today, and how its schools and theories connect.",
+   "Each circle is a school, a research field or a therapy. Older ideas are on the left and newer ones on the right, and the lines show who influenced whom.",
+   "Click a circle to read its history, core ideas and key psychologists. Let us open Behaviourism.",
+   "You see what it drew on, what it led to, its rivals, and what its critics say.",
+   "Switch to the timeline to see everything from ancient Greece to the replication crisis of today.",
+   "Now the game. Choose the questions and press Generate quiz. Challenge mode gives you twenty seconds per question, with bonus points for speed and streaks.",
+   "Pick an answer. You get an explanation every time, and your best score is saved.",
+   "Now it is your turn. Open Psychology Atlas on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/psychology-atlas.html",
+   "label": "Printable quiz made in this video",
+   "kind": "html"
+  }
+ },
  "qr-forge.html": {
   "title": "QR Forge",
   "video": "https://videos.migabuilder.com/qr-forge.mp4",
