@@ -424,6 +424,19 @@ test('invoice-forge: download holds the business and client names', 'invoice-for
   expect(html.includes('Kilimani Cafe') && html.includes('Sunrise Bakery'), 'business or client name missing from the invoice');
 });
 
+test('psychology-atlas: printable quiz has every question and an answer key', 'psychology-atlas.html', async (page) => {
+  await page.selectOption('#qSource', 'school');
+  await page.selectOption('#qCount', '15');
+  const quiz = await downloadOf(page, () => page.click('#printQuiz'));
+  const html = quiz.buf.toString('utf8');
+  expect(quiz.name === 'psychology-quiz.html', 'unexpected quiz file name: ' + quiz.name);
+  expect(html.includes('History of psychology quiz'), 'the quiz has no title');
+  const keyAt = html.indexOf('Answer key');
+  expect(keyAt > 0, 'the quiz has no answer key');
+  const questions = (html.slice(0, keyAt).match(/<li><p>/g) || []).length, answers = (html.slice(keyAt).match(/<li>[A-D]\) /g) || []).length;
+  expect(questions === 15 && answers === 15, 'expected 15 questions and 15 answers, got ' + questions + ' and ' + answers);
+});
+
 test('physics-map: printable quiz has every question and an answer key; a fact sheet holds the planet data', 'physics-map.html', async (page) => {
   await page.selectOption('#qSource', 'all');
   await page.selectOption('#qCount', '15');

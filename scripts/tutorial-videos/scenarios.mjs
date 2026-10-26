@@ -408,6 +408,20 @@ S('idea-atlas.html', {
   }
 });
 
+S('psychology-atlas.html', {
+  title: 'Psychology Atlas', subtitle: 'The history of psychology, connected',
+  intro: 'Welcome to Psychology Atlas. Explore the history of psychology, from ancient ideas of the mind to today, and how its schools and theories connect.',
+  async run(h, page) {
+    await h.step('Each circle is a school, a research field or a therapy. Older ideas are on the left and newer ones on the right, and the lines show who influenced whom.', () => h.point('#net'));
+    await h.step('Click a circle to read its history, core ideas and key psychologists. Let us open Behaviourism.', () => h.click('.node:has(title:has-text("Behaviourism")) circle', { force: true }));
+    await h.step('You see what it drew on, what it led to, its rivals, and what its critics say.', () => h.scroll('#info .links', 'center'));
+    await h.step('Switch to the timeline to see everything from ancient Greece to the replication crisis of today.', async () => { await h.scroll('.toolbar'); await h.click('[data-view=tl]'); });
+    await h.step('Now the game. Choose the questions and press Generate quiz. Challenge mode gives you twenty seconds per question, with bonus points for speed and streaks.', async () => { await h.scroll('#quizPanel'); await h.click('#makeQuiz'); });
+    await h.step('Pick an answer. You get an explanation every time, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
+    await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+  }
+});
+
 S('exam-checker.html', {
   title: 'Exam Checker', subtitle: 'Mark a whole class from photos of answer sheets',
   intro: 'Welcome to Exam Checker. Build an exam, print an answer sheet for every student, drop in photos of all the sheets at once, and download everyone\u2019s marks.',
