@@ -297,6 +297,28 @@ test('pdf-forge: split pages into a ZIP', 'pdf-forge.html', async (page) => {
   expect(new Set(names).size === 3, 'ZIP should hold 3 page PDFs, found ' + new Set(names).size);
 });
 
+test('pdf-forge: PDF to images saves every page as a JPG in a ZIP', 'pdf-forge.html', async (page) => {
+  await page.setInputFiles('#toImgFile', path.join(FIX, 'three-pages.pdf'));
+  const out = await downloadOf(page, () => page.click('#toImgBtn'), 60000);
+  expect(out.name === 'three-pages-pages.zip', 'expected three-pages-pages.zip, got ' + out.name);
+  expect(magic(out.buf, 0x50, 0x4b, 0x03, 0x04), 'download is not a ZIP');
+  const names = [...new Set(out.buf.toString('latin1').match(/three-pages-page-\d{3}\.jpg/g) || [])];
+  expect(names.length === 3, 'ZIP should hold 3 page images, found ' + names.join(', '));
+  await page.waitForSelector('#toImgProgress .mp-panel.mp-ok', { timeout: 10000 });
+});
+
+test('pdf-forge: PDF to images saves one chosen page as a sharp PNG', 'pdf-forge.html', async (page) => {
+  await page.setInputFiles('#toImgFile', path.join(FIX, 'three-pages.pdf'));
+  await page.selectOption('#toImgFormat', 'image/png');
+  await page.selectOption('#toImgDpi', '300');
+  await page.fill('#toImgPages', '2');
+  const out = await downloadOf(page, () => page.click('#toImgBtn'), 60000);
+  expect(out.name === 'three-pages-page-002.png', 'expected three-pages-page-002.png, got ' + out.name);
+  expect(magic(out.buf, 0x89, 0x50, 0x4e, 0x47), 'download is not a PNG');
+  const w = out.buf.readUInt32BE(16), h = out.buf.readUInt32BE(20);
+  expect(w > 1000 && h > 1000, '300 DPI page should be over 1000 px each way, got ' + w + '×' + h);
+});
+
 test('heic: a picked iPhone photo (HEIC) becomes a JPEG page in PDF Forge', 'pdf-forge.html', async (page) => {
   await page.setInputFiles('#images', path.join(FIX, 'photo.heic'));
   await page.waitForFunction(() => /\.jpg$/.test((document.querySelector('#images').files[0] || {}).name || ''), null, { timeout: 60000 });
