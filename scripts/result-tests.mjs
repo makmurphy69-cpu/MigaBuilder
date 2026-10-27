@@ -930,6 +930,8 @@ test('go-forge: every lesson can be solved, the coach reviews a move and the gam
   await page.evaluate(() => window.__goForge.playUser('E5')); await idle(2);
   await page.evaluate(() => window.__goForge.playUser('C3')); await idle(4);
   await page.click('#adviceBtn'); await page.waitForFunction(() => !window.__goForge.busy && /Best idea|pass/.test(document.getElementById('coach').textContent), null, { timeout: 60000 });
+  const adv = await page.$eval('#coach', e => e.textContent);
+  expect(/pass/.test(adv) || (/Why it comes up/.test(adv) && /What it exposes/.test(adv)), 'the advice does not explain its options: ' + adv.slice(0, 200));
   await page.click('#feedbackBtn'); await page.waitForFunction(() => !window.__goForge.busy && /move|Blunder|Mistake|Inaccuracy/.test(document.querySelector('#coach .rate')?.textContent || ''), null, { timeout: 60000 });
   const out = await downloadOf(page, () => page.click('#sgfBtn'));
   const sgf = out.buf.toString('utf8');

@@ -422,9 +422,12 @@
     }
     for (let i = 0; i < own.length; i++) own[i] /= Math.max(1, sims);
     const col = b.turn;
-    const moves = root.kids.filter(k => k.N > 0).map(k => ({
-      move: k.move, N: k.N, win: k.Wn / k.N, score: k.S / k.N
-    })).sort((x, y) => y.N - x.N);
+    // reply: the opponent's most-searched answer to each move (-1 when the search did not get that far).
+    const moves = root.kids.filter(k => k.N > 0).map(k => {
+      let rep = null;
+      if (k.kids) for (const g of k.kids) if (g.N > 0 && (!rep || g.N > rep.N)) rep = g;
+      return { move: k.move, N: k.N, win: k.Wn / k.N, score: k.S / k.N, reply: rep && rep.N >= 3 ? rep.move : -1 };
+    }).sort((x, y) => y.N - x.N);
     const sideScore = (col === BLACK ? 1 : -1) * scoreSum / Math.max(1, sims);
     const best = moves[0];
     return { moves, own: Array.from(own), sims, win: best ? best.win : 0.5, score: cw ? 0 : sideScore, turn: col };

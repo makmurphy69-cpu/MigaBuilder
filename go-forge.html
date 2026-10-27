@@ -29,6 +29,7 @@ svg.goban{width:100%;height:auto;display:block;border-radius:6px;box-shadow:0 4p
 .coach{background:#fff;border:1px solid rgba(22,32,43,.14);border-left:5px solid var(--cyan);border-radius:6px;padding:12px 14px;line-height:1.55;font-size:14.5px;min-height:70px}
 .coach h3{margin:0 0 6px;font:700 16px 'Space Grotesk'}
 .coach p{margin:6px 0}.coach ul{margin:6px 0;padding-left:20px}
+.coach .opt{border-top:1px solid rgba(22,32,43,.12);margin-top:10px;padding-top:8px}.coach .opt h4{margin:0 0 4px;font:700 15px 'Space Grotesk'}.coach .optn{display:inline-block;min-width:22px;height:22px;line-height:22px;border-radius:50%;background:#2f7bbf;color:#fff;text-align:center;font-size:13px;margin-right:4px}.coach .optn.first{background:#2f9e5b}.coach .opt ul{margin:4px 0}.coach button.small{padding:5px 10px;font-size:13px;margin-top:4px}.coach button.small.on{outline:2px solid #2f7bbf}
 .coach.good{border-left-color:#4E9E73}.coach.warn{border-left-color:#E2A63B}.coach.bad{border-left-color:#D8604A}
 .rate{display:inline-block;font:700 13px 'IBM Plex Sans';border-radius:999px;padding:2px 10px;margin-right:6px}
 .rate.r0{background:#d8f0e1;color:#1f5a3a}.rate.r1{background:#e6f3d9;color:#3d5a1f}.rate.r2{background:#fff2cc;color:#6b5210}.rate.r3{background:#fde0c8;color:#7a3b10}.rate.r4{background:#f8d2cc;color:#7b1d10}
@@ -315,7 +316,7 @@ function reasons(b, f) {
   if (f.pass) { if (f.leftInAtari.length) bad.push('passing leaves your ' + plural(f.leftInAtari[0].size, 'stone') + ' in atari'); if (f.missedCapture) bad.push('there were ' + plural(f.missedCapture.size, 'stone') + ' you could capture at ' + b.name(f.missedCapture.at)); return { good, bad }; }
   if (f.illegal) { bad.push(f.illegal); return { good, bad }; }
   if (f.captures) good.push('captures ' + plural(f.captures, opp.toLowerCase() + ' stone'));
-  if (f.saved && !f.savedFails) good.push('saves your ' + plural(f.saved, 'stone') + ' that were in atari');
+  if (f.saved && !f.savedFails) good.push('saves your ' + plural(f.saved, 'stone') + (f.saved === 1 ? ' that was' : ' that were') + ' in atari');
   if (f.saved && f.savedFails) bad.push('tries to rescue ' + plural(f.saved, 'stone') + ', but they can still be chased into a ladder and captured — adding stones only makes the loss bigger');
   for (const a of f.atari) good.push(a.caught ? 'puts ' + plural(a.size, 'stone') + ' in atari, and they cannot escape (a ladder)' : 'puts ' + plural(a.size, 'stone') + ' in atari');
   if (f.connects) good.push('connects ' + f.connects + ' of your groups — connected stones share liberties and are harder to capture');
@@ -336,6 +337,63 @@ function reasons(b, f) {
   if (f.contact && !f.captures && !f.atari.length && !f.cuts && f.libs >= 3) good.push('touches ' + opp + '’s stones, which starts a fight');
   if (f.libs === 2 && f.size >= 3 && !f.captures) bad.push('your group there has only two liberties — be careful');
   return { good, bad };
+}
+/* What the opponent's likely answer `rp` (on board bb, after col's move `mv`) does, in plain words. */
+function answerWhat(bb, rp, col, mv) {
+  const opp = 3 - col, them = colName(opp);
+  if (rp === PASS) return them + ' would probably pass — there is nothing urgent left for them';
+  const f = G.moveFacts(bb, rp, opp), out = [];
+  if (f.illegal) return '';
+  if (f.captures) out.push('captures ' + (f.captures === 1 ? 'one of your stones' : f.captures + ' of your stones'));
+  for (const a of f.atari) out.push('puts your ' + plural(a.size, 'stone') + ' near ' + bb.name(a.at) + ' in atari' + (a.caught ? ', and they cannot escape' : ''));
+  if (f.cuts) out.push('cuts your stones apart');
+  if (f.saved && !f.savedFails) out.push('rescues their ' + plural(f.saved, 'stone') + (f.saved === 1 ? ' that was' : ' that were') + ' in atari');
+  if (f.connects) out.push('connects their stones, so they are harder to attack');
+  if (out.length) return 'it ' + out.join(', and it ');
+  if (mv !== PASS && mv > 0) {
+    const [x, y] = bb.xy(rp), [mx, my] = bb.xy(mv), d = Math.max(Math.abs(x - mx), Math.abs(y - my));
+    if (d >= 4) return 'it does not need to answer your stone and plays ' + (/side/.test(region(bb, rp)) ? 'on ' : 'in ') + region(bb, rp) + ' instead — so your move makes no direct threat, and ' + them + ' gets the next big point';
+    if (Math.abs(x - mx) + Math.abs(y - my) === 1) return 'it pushes right against your new stone to stop it from growing';
+    if (f.contact) return 'it presses against your stones nearby and takes away liberties';
+    return 'it blocks your stone from growing towards ' + region(bb, rp);
+  }
+  return 'it plays ' + (/side/.test(region(bb, rp)) ? 'on ' : 'in ') + region(bb, rp);
+}
+/* Your groups that are short of liberties on board bb (excluding ones a capture already removed). */
+function weakGroups(bb, col) {
+  return bb.groups().filter(g => g.col === col && (g.libs.length === 1 || (g.libs.length === 2 && g.stones.length >= 2)))
+    .sort((a, c) => a.libs.length - c.libs.length || c.stones.length - a.stones.length).slice(0, 2)
+    .map(g => 'your ' + plural(g.stones.length, 'stone') + ' near ' + bb.name(g.stones[0]) + (g.libs.length === 1 ? ' would be in atari (one liberty, at ' + bb.name(g.libs[0]) + ')' : ' would have only two liberties left'));
+}
+/* One candidate move explained: why the coach considers it, what the opponent would answer, what it leaves weak. */
+function optionHtml(b, m, k, best, col, mode) {
+  const opp = 3 - col, them = colName(opp);
+  const f = G.moveFacts(b, m.move, col), rs = reasons(b, f);
+  let h = '<div class="opt"><h4><span class="optn' + (k === 1 ? ' first' : '') + '">' + k + '</span> ' + b.name(m.move) + ' <span class="muted">· ' + region(b, m.move) + '</span></h4>';
+  const why = rs.good.length ? rs.good.slice() : [];
+  if (!why.length) why.push(k === 1 ? 'has no single tactical point, but it led to the best results in the coach’s test games' : 'has no single tactical point, but it did well in the coach’s test games');
+  h += '<p><b>Why it comes up:</b> it ' + esc(why.join(', and it ')) + '.</p>';
+  const exposed = rs.bad.map(x => 'it ' + x);
+  const bb = b.clone(); bb.play(m.move, col);
+  let after = bb;
+  if (m.reply >= 0 && (m.reply === PASS || bb.isLegal(m.reply, opp))) {
+    const what = answerWhat(bb, m.reply, col, m.move);
+    if (what) exposed.unshift(m.reply === PASS ? what : 'likely answer: ' + them + ' at ' + b.name(m.reply) + ' (?) — ' + what);
+    if (m.reply !== PASS) { after = bb.clone(); after.play(m.reply, opp); }
+    if (k > 1 && m.reply === best.move) exposed.push(them + ' would then take point 1 itself — that is a big reason 1 ranks higher');
+  }
+  for (const w of weakGroups(after, col)) if (!exposed.some(e => e.includes(w.split(' would')[0]))) exposed.push('afterwards ' + w);
+  if (exposed.length) h += '<p><b>What it exposes:</b></p>' + listHtml(exposed.map(x => x.charAt(0).toUpperCase() + x.slice(1) + '.'));
+  else h += '<p><b>What it exposes:</b> nothing urgent — your stones nearby stay safe.</p>';
+  if (mode === 'normal') {
+    let t = 'Win chance about ' + pct(m.win) + (Math.abs(m.score) >= 0.5 ? ', ' + (m.score > 0 ? 'ahead' : 'behind') + ' by about ' + pts(m.score) : '');
+    if (k > 1) { const dw = best.win - m.win, ds = best.score - m.score; t += ' — ' + (dw > 0.005 ? pct(dw) + ' less than 1' : 'about the same as 1') + (ds >= 0.5 ? ', about ' + pts(ds) + ' smaller' : ''); }
+    h += '<p class="muted">' + t + '. Tested in ' + pct(m.N / Math.max(1, m.total)) + ' of the coach’s games.</p>';
+  } else {
+    h += '<p class="muted">Chance to capture first about ' + pct(m.win) + '.</p>';
+  }
+  h += '<button class="secondary small" type="button" data-opt="' + k + '">👁 Show ' + (m.reply > 0 ? 'it and the answer' : 'it') + ' on the board</button></div>';
+  return h;
 }
 function listHtml(arr) { return arr.length ? '<ul>' + arr.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>' : ''; }
 
@@ -588,6 +646,7 @@ let pendingMove = -1;       // first tap when "tap twice" is on
 let hover = -1;
 let overlay = null;         // {marks, own}
 let lastAnalysis = null;    // cached analysis {key, result}
+let advMarks = null;       // the advice options, for the per-option "Show on the board" buttons
 let revealNext = false;     // "Show me the move" after a hint
 
 function newGame(opts) {
@@ -927,15 +986,25 @@ async function advice() {
       html += '<p>Look at <b>' + region(b, best.move) + '</b> (the green area). A good move there ' + esc(why[0]) + '.</p><div class="actions"><button class="secondary" type="button" id="showBest">👀 Show me the move</button></div>';
       overlay = { at, marks: [{ p: best.move, kind: 'hint', x0, y0, w: x1 - x0 + 1, h: y1 - y0 + 1 }] };
     } else {
-      html += '<p>Best idea: <b>' + b.name(best.move) + '</b> (marked 1). It ' + esc(why.join(', and it ')) + '.</p>';
-      if (rs.bad.length) html += '<p class="muted">Watch out: it ' + esc(rs.bad.join('; ')) + '.</p>';
       const alts = top.slice(1).filter(m => m.move !== PASS && m.N >= best.N * 0.15);
-      if (alts.length) html += '<p>Also worth considering: ' + alts.map((m, i) => '<b>' + b.name(m.move) + '</b> (' + (i + 2) + ')').join(', ') + '.</p>';
-      if (game.mode === 'normal') html += '<p class="muted">Coach’s estimate with the best move: about ' + pct(best.win) + ' win chance for you' + (Math.abs(best.score) >= 0.5 ? ', ' + (best.score > 0 ? 'ahead' : 'behind') + ' by about ' + pts(best.score) : '') + '.</p>';
-      overlay = { at, marks: [{ p: best.move, kind: 'best', label: '1' }].concat(alts.map((m, i) => ({ p: m.move, kind: 'alt', label: String(i + 2) }))) };
+      const cands = [best].concat(alts);
+      cands.forEach(m => { m.total = r.sims; });
+      html += '<p>Best idea: <b>' + b.name(best.move) + '</b> (marked 1)' + (alts.length ? ', with ' + (alts.length === 1 ? 'one other option' : alts.length + ' other options') + ' worth considering' : '') + '.</p>';
+      if (alts.length) html += '<p class="muted">Why several options? The coach plays thousands of quick test games from here. The moves it keeps coming back to are the ones that work out best — 1 most often. Each option shows why it comes up, what ' + colName(3 - col) + ' would likely answer (?), and what it leaves weak.</p>';
+      html += cands.map((m, i) => optionHtml(b, m, i + 1, best, col, game.mode)).join('');
+      const allMarks = cands.map((m, i) => ({ p: m.move, kind: i ? 'alt' : 'best', label: String(i + 1) }));
+      overlay = { at, marks: allMarks };
+      advMarks = { at, all: allMarks, opts: cands };
     }
   }
   coach('good', html);
+  $('coach').querySelectorAll('[data-opt]').forEach(btn => btn.onclick = () => {
+    if (!advMarks || advMarks.at !== game.moves.length || viewAt !== null) return;
+    const k = +btn.dataset.opt, m = advMarks.opts[k - 1], on = btn.classList.toggle('on');
+    $('coach').querySelectorAll('[data-opt]').forEach(o => { if (o !== btn) o.classList.remove('on'); });
+    overlay = { at: advMarks.at, marks: on ? [{ p: m.move, kind: k === 1 ? 'best' : 'alt', label: String(k) }].concat(m.reply > 0 ? [{ p: m.reply, kind: 'bad', label: '?' }] : []) : advMarks.all };
+    render();
+  });
   const sb = $('showBest');
   if (sb) sb.onclick = () => { revealNext = true; advice().then(() => { revealNext = false; }); };
   render();
@@ -982,7 +1051,7 @@ async function reviewMove(i, budget) {
   }
   const f = G.moveFacts(b, p, col);
   if (f.selfAtari >= 3 && rate < 3 && loss > 0.03) rate = 3;
-  const rv = { i, move: p, rate, loss, ptLoss, myWin: mine.win, bestWin: best.win, best: best.move, myScore: mine.score };
+  const rv = { i, move: p, rate, loss, ptLoss, myWin: mine.win, bestWin: best.win, best: best.move, myScore: mine.score, reply: mine.reply === undefined ? -1 : mine.reply };
   rv.marks = [{ p, kind: rate <= 1 ? 'ok' : rate === 2 ? 'warn' : 'bad', label: rate <= 1 ? '✓' : '!' }];
   if (best.move !== p && best.move !== PASS) rv.marks.push({ p: best.move, kind: 'best', label: '★' });
   game.reviews[i] = rv;
@@ -994,6 +1063,13 @@ function feedbackHtml(b, rv, i, live) {
   let h = '<h3><span class="rate r' + rv.rate + '">' + RATE_ICONS[rv.rate] + ' ' + RATES[rv.rate] + '</span> ' + (rv.move === PASS ? 'your pass' : 'your move ' + b.name(rv.move)) + '</h3>';
   if (rs.good.length) h += '<p>👍 It ' + esc(rs.good.join(', and it ')) + '.</p>';
   if (rs.bad.length) h += '<p>⚠️ But it ' + esc(rs.bad.join('; ')) + '.</p>';
+  if (rv.move !== PASS && rv.reply > 0) {
+    const bb = b.clone();
+    if (bb.play(rv.move, col) >= 0 && bb.isLegal(rv.reply, 3 - col)) {
+      const what = answerWhat(bb, rv.reply, col, rv.move);
+      if (what) h += '<p>↩ What it exposes: ' + colName(3 - col) + '’s best answer is <b>' + bb.name(rv.reply) + '</b> — ' + esc(what) + '.</p>';
+    }
+  }
   if (rv.best !== rv.move) {
     const bf = G.moveFacts(b, rv.best, col), br = reasons(b, bf);
     h += '<p>' + (rv.rate >= 2 ? 'Better was ' : 'The coach slightly preferred ') + '<b>' + (rv.best === PASS ? 'passing' : b.name(rv.best)) + '</b> (★)' + (br.good.length ? ': it ' + esc(br.good.slice(0, 2).join(', and it ')) : '') + '.</p>';
@@ -1188,7 +1264,7 @@ showTab(['learn', 'play', 'guide'].includes(startTab) ? startTab : 'learn');
 maybeComputer();
 
 window.__goForge = {
-  get game() { return game; }, get busy() { return busy; }, LESSONS, judge, exBoard, toSgf, parseSgf, newGame, reviewMove,
+  get game() { return game; }, get busy() { return busy; }, LESSONS, judge, exBoard, toSgf, parseSgf, newGame, reviewMove, optionHtml,
   playUser(name) { const b = liveBoard(); tryUserMove(b.parse(name)); },
   verifyLessons() {
     const out = [];
