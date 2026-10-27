@@ -148,5 +148,6 @@ I18N.phrases({
   "de": "Nur der Text, den du der KI gibst, verlässt dein Gerät: Er wird über den kostenlosen KI-Dienst von MigaBuilder an Googles Gemini-Modell gesendet, oder über deinen eigenen Gemini-Schlüssel, wenn du einen hinzufügst. Bearbeitung, Vorschau und Downloads passieren alle in deinem Browser.",
   "pt": "Só o texto que você dá à IA sai do seu dispositivo: ele é enviado ao modelo Gemini do Google pelo serviço gratuito de IA do MigaBuilder, ou pela sua própria chave do Gemini, se você adicionar uma. Edição, prévias e downloads acontecem todos no seu navegador.",
   "fr": "Seul le texte que vous donnez à l'IA quitte votre appareil : il est envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder, ou via votre propre clé Gemini si vous en ajoutez une. L'édition, les aperçus et les téléchargements se font tous dans votre navigateur."
- }
+ },
+  "Sandro Botticelli (c. 1445–1510)": { es: "Sandro Botticelli (h. 1445–1510)", ar: "ساندرو بوتيتشيلي (نحو 1445–1510)", zh: "桑德罗·波提切利（约 1445–1510）", sw: "Sandro Botticelli (takriban 1445–1510)", sv: "Sandro Botticelli (ca 1445–1510)", de: "Sandro Botticelli (um 1445–1510)", pt: "Sandro Botticelli (c. 1445–1510)", fr: "Sandro Botticelli (v. 1445–1510)" }
 });

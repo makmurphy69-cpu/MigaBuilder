@@ -147,5 +147,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "No limit": { es: "Sin límite", ar: "بلا حد", zh: "不限制", sw: "Hakuna kikomo", sv: "Ingen gräns", de: "Kein Limit", pt: "Sem limite", fr: "Sans limite" }
 });

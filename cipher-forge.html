@@ -107,7 +107,7 @@ main{max-width:1180px}
 </section>
 <footer>Part of <a href="index.html">MigaBuilder</a>. No account and no customer-file storage.</footer>
 <script>
-(function(){'use strict';
+(function(){'use strict';const tv=(t,v)=>{let o=window.I18N&&I18N.tr?I18N.tr(t):t;return v?o.replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m):o};
 const $=id=>document.getElementById(id);
 const A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 function status(msg,id){const el=$(id||'status');el.textContent=msg;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),6000)}
@@ -242,7 +242,7 @@ $('crackBtn').onclick=()=>{const t=$('input').value;if(!t.trim())return status('
 function shareUrl(){const c=cipher(),coded=mode==='encode'?result:$('input').value;const p=new URLSearchParams({c,m:coded});if($('shareKey').checked){if(c==='caesar')p.set('k',opts().shift);if(c==='vigenere')p.set('k',$('keyword').value);if(c==='railfence')p.set('k',opts().rails)}return location.origin+location.pathname+'#'+p.toString()}
 $('shareBtn').onclick=async()=>{const c=cipher();if(c==='pigpen')return status('Pigpen is drawn as symbols — use “Save as picture” to send it.');if(!(mode==='encode'?result:$('input').value).trim())return status('Type a message first.');const u=shareUrl();
   try{if(navigator.share&&/Mobi|Android/i.test(navigator.userAgent)){await navigator.share({title:'A secret message for you',text:'Can you decode this?',url:u});return}await navigator.clipboard.writeText(u);status('Link copied. It opens Cipher Forge ready to decode'+($('shareKey').checked?' with the key filled in.':'. Your friend still needs to know the key.'))}catch(e){prompt('Copy this link:',u)}};
-function fromHash(){if(!location.hash)return;const p=new URLSearchParams(location.hash.slice(1));const c=p.get('c'),m=p.get('m');if(!c||!CODES[c]||m==null)return;$('cipher').value=c;$('input').value=m;const k=p.get('k');if(k){if(c==='caesar')$('shift').value=k;if(c==='vigenere')$('keyword').value=k;if(c==='railfence')$('rails').value=k}else if(c==='vigenere')$('keyword').value='';setMode('decode');status('Someone sent you a secret message in '+CODES[c].name+'.'+(k||!['caesar','vigenere','railfence'].includes(c)?'':' Fill in the key they told you.'))}
+function fromHash(){if(!location.hash)return;const p=new URLSearchParams(location.hash.slice(1));const c=p.get('c'),m=p.get('m');if(!c||!CODES[c]||m==null)return;$('cipher').value=c;$('input').value=m;const k=p.get('k');if(k){if(c==='caesar')$('shift').value=k;if(c==='vigenere')$('keyword').value=k;if(c==='railfence')$('rails').value=k}else if(c==='vigenere')$('keyword').value='';setMode('decode');status(tv('Someone sent you a secret message in {code}.',{code:tv(CODES[c].name)})+(k||!['caesar','vigenere','railfence'].includes(c)?'':' Fill in the key they told you.'))}
 
 /* ---------------- save as picture ---------------- */
 function noteCanvas(){const c=cipher(),W=1200,pad=70,isPig=c==='pigpen'&&mode==='encode';const cv=document.createElement('canvas'),ctx=cv.getContext('2d');

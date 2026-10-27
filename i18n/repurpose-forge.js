@@ -168,5 +168,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "60-second video script": { es: "Guion de vídeo de 60 segundos", ar: "نص فيديو مدته 60 ثانية", zh: "60 秒视频脚本", sw: "Hati ya video ya sekunde 60", sv: "Videomanus på 60 sekunder", de: "60-Sekunden-Videoskript", pt: "Roteiro de vídeo de 60 segundos", fr: "Script vidéo de 60 secondes" }
 });

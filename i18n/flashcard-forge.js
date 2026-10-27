@@ -392,5 +392,12 @@ I18N.phrases({
   "de": "Nur wenn du die KI-Funktionen nutzt: Dann wird der Text, den du der KI gibst, über den kostenlosen KI-Dienst von MigaBuilder oder deinen eigenen Gemini-Schlüssel an Googles Gemini-Modell gesendet. Alles andere bleibt in deinem Browser.",
   "pt": "Só quando você usa os recursos de IA: aí o texto que você dá à IA é enviado ao modelo Gemini do Google pelo serviço gratuito de IA do MigaBuilder ou pela sua própria chave do Gemini. Todo o resto fica no seu navegador.",
   "fr": "Seulement si vous utilisez ses fonctions d'IA : le texte que vous donnez à l'IA est alors envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder ou votre propre clé Gemini. Tout le reste reste dans votre navigateur."
- }
+ },
+  "Yayoi Kusama (1929–)": { es: "Yayoi Kusama (1929–)", ar: "يايوي كوساما (1929–)", zh: "草间弥生（1929–）", sw: "Yayoi Kusama (1929–)", sv: "Yayoi Kusama (1929–)", de: "Yayoi Kusama (1929–)", pt: "Yayoi Kusama (1929–)", fr: "Yayoi Kusama (1929–)" },
+  "africa": { es: "África", ar: "أفريقيا", zh: "非洲", sw: "Afrika", sv: "Afrika", de: "Afrika", pt: "África", fr: "Afrique" },
+  "americas": { es: "América", ar: "الأمريكتان", zh: "美洲", sw: "Amerika", sv: "Amerika", de: "Amerika", pt: "Américas", fr: "Amériques" },
+  "asia": { es: "Asia", ar: "آسيا", zh: "亚洲", sw: "Asia", sv: "Asien", de: "Asien", pt: "Ásia", fr: "Asie" },
+  "europe": { es: "Europa", ar: "أوروبا", zh: "欧洲", sw: "Ulaya", sv: "Europa", de: "Europa", pt: "Europa", fr: "Europe" },
+  "oceania": { es: "Oceanía", ar: "أوقيانوسيا", zh: "大洋洲", sw: "Oceania", sv: "Oceanien", de: "Ozeanien", pt: "Oceania", fr: "Océanie" },
+  "⬇ CSV (Excel, Quizlet)": { es: "⬇ CSV (Excel, Quizlet)", ar: "⬇ CSV (‏Excel وQuizlet)", zh: "⬇ CSV（Excel、Quizlet）", sw: "⬇ CSV (Excel, Quizlet)", sv: "⬇ CSV (Excel, Quizlet)", de: "⬇ CSV (Excel, Quizlet)", pt: "⬇ CSV (Excel, Quizlet)", fr: "⬇ CSV (Excel, Quizlet)" }
 });

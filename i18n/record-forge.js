@@ -148,5 +148,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Titian (c. 1488–1576)": { es: "Tiziano (h. 1488–1576)", ar: "تيتيان (نحو 1488–1576)", zh: "提香（约 1488–1576）", sw: "Titian (takriban 1488–1576)", sv: "Tizian (ca 1488–1576)", de: "Tizian (um 1488–1576)", pt: "Ticiano (c. 1488–1576)", fr: "Titien (v. 1488–1576)" }
 });

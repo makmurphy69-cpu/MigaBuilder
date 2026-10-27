@@ -210,5 +210,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Artemisia Gentileschi (1593–c. 1656)": { es: "Artemisia Gentileschi (1593–h. 1656)", ar: "أرتيميسيا جنتيليسكي (1593–نحو 1656)", zh: "阿尔泰米西娅·真蒂莱斯基（1593–约 1656）", sw: "Artemisia Gentileschi (1593–takriban 1656)", sv: "Artemisia Gentileschi (1593–ca 1656)", de: "Artemisia Gentileschi (1593–um 1656)", pt: "Artemisia Gentileschi (1593–c. 1656)", fr: "Artemisia Gentileschi (1593–v. 1656)" }
 });

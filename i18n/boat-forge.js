@@ -346,5 +346,13 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Max load (keeps {0} cm freeboard)": { es: "Carga máxima (mantiene {0} cm de francobordo)", ar: "أقصى حمولة (مع إبقاء {0} سم من ارتفاع الحافة)", zh: "最大载重（保持 {0} 厘米干舷）", sw: "Mzigo wa juu (inaacha sm {0} za ubavu juu ya maji)", sv: "Max last (behåller {0} cm fribord)", de: "Max. Zuladung (hält {0} cm Freibord)", pt: "Carga máxima (mantém {0} cm de borda livre)", fr: "Charge max (garde {0} cm de franc-bord)" },
+  "US rule of thumb: {0} people": { es: "Regla práctica de EE. UU.: {0} personas", ar: "القاعدة الأمريكية التقريبية: {0} أشخاص", zh: "美国经验法则：{0} 人", sw: "Kanuni ya kawaida ya Marekani: watu {0}", sv: "Amerikansk tumregel: {0} personer", de: "US-Faustregel: {0} Personen", pt: "Regra prática dos EUA: {0} pessoas", fr: "Règle empirique américaine : {0} personnes" },
+  "✅ Freeboard {0} cm amidships.": { es: "✅ Francobordo de {0} cm en el centro.", ar: "✅ ارتفاع الحافة {0} سم في منتصف القارب.", zh: "✅ 船中干舷 {0} 厘米。", sw: "✅ Ubavu juu ya maji sm {0} katikati.", sv: "✅ Fribord {0} cm midskepps.", de: "✅ Freibord {0} cm mittschiffs.", pt: "✅ Borda livre de {0} cm a meia-nau.", fr: "✅ Franc-bord de {0} cm au milieu." },
+  "vanishes at {0}°": { es: "desaparece a {0}°", ar: "يختفي عند {0}°", zh: "在 {0}° 消失", sw: "inatoweka kwenye {0}°", sv: "försvinner vid {0}°", de: "verschwindet bei {0}°", pt: "desaparece a {0}°", fr: "disparaît à {0}°" },
+  "vanishes at >180°": { es: "desaparece a >180°", ar: "يختفي عند أكثر من 180°", zh: "在 >180° 消失", sw: "inatoweka zaidi ya 180°", sv: "försvinner vid >180°", de: "verschwindet bei >180°", pt: "desaparece a >180°", fr: "disparaît au-delà de 180°" },
+  "bow {0} · stern {1} cm": { es: "proa {0} · popa {1} cm", ar: "المقدمة {0} · المؤخرة {1} سم", zh: "船首 {0} · 船尾 {1} 厘米", sw: "mbele {0} · nyuma {1} sm", sv: "för {0} · akter {1} cm", de: "Bug {0} · Heck {1} cm", pt: "proa {0} · popa {1} cm", fr: "proue {0} · poupe {1} cm" },
+  "LCB {0}% · LCF {1}% from stern": { es: "LCB {0} % · LCF {1} % desde popa", ar: "LCB {0}% · LCF {1}% من المؤخرة", zh: "LCB {0}% · LCF {1}%（自船尾起）", sw: "LCB {0}% · LCF {1}% kutoka nyuma", sv: "LCB {0} % · LCF {1} % från aktern", de: "LCB {0} % · LCF {1} % vom Heck", pt: "LCB {0}% · LCF {1}% a partir da popa", fr: "LCB {0} % · LCF {1} % depuis la poupe" },
+  "✅ Initial stability GM {0} m.": { es: "✅ Estabilidad inicial GM {0} m.", ar: "✅ الاتزان الأولي GM {0} م.", zh: "✅ 初稳性 GM {0} 米。", sw: "✅ Uthabiti wa awali GM m {0}.", sv: "✅ Initialstabilitet GM {0} m.", de: "✅ Anfangsstabilität GM {0} m.", pt: "✅ Estabilidade inicial GM {0} m.", fr: "✅ Stabilité initiale GM {0} m." }
 });

@@ -78,7 +78,7 @@ main{max-width:1320px}
 </section>
 <footer>Part of <a href="index.html">MigaBuilder</a>. No account and no customer-file storage.</footer>
 <script>
-(function(){'use strict';
+(function(){'use strict';const tv=(t,v)=>{let o=window.I18N&&I18N.tr?I18N.tr(t):t;return v?o.replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m):o};
 const $=id=>document.getElementById(id),ta=$('mdInput'),KEY='miga-markdown-doc';
 const SAMPLE=`# Project notes
 
@@ -119,7 +119,7 @@ function render(){const md=ta.value;if(md===last)return;last=md;$('mdPreview').i
   $('mdPreview').querySelectorAll('input[type=checkbox]').forEach((cb,i)=>{cb.disabled=false;cb.onclick=()=>toggleTask(i)});
   const words=(md.replace(/[#*_>`~\[\]()|-]/g,' ').match(/[\p{L}\p{N}']+/gu)||[]).length;$('mdCount').textContent=words+' words · '+md.length+' characters · '+Math.max(1,Math.round(words/220))+' min read'}
 function toggleTask(n){let i=-1;ta.value=ta.value.replace(/^(\s*[-*+] \[)([ xX])(\])/gm,(m,a,b,c)=>{i++;return i===n?a+(b===' '?'x':' ')+c:m});changed()}
-let saveT;function changed(){render();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,ta.value);$('mdSaved').textContent='Saved in this browser '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}catch(e){$('mdSaved').textContent='Not saved: this browser blocks storage. Download your text to keep it.'}},500)}
+let saveT;function changed(){render();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,ta.value);$('mdSaved').textContent=tv('Saved in this browser {time}',{time:new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})})}catch(e){$('mdSaved').textContent='Not saved: this browser blocks storage. Download your text to keep it.'}},500)}
 ta.addEventListener('input',changed);
 
 /* ---------- toolbar ---------- */
@@ -160,7 +160,7 @@ async function htmlToMd(html){await loadScript('https://cdnjs.cloudflare.com/aja
   return td.turndown(box).replace(/\n{3,}/g,'\n\n').trim()}
 ta.addEventListener('paste',async e=>{if(!$('mdConvertPaste').checked)return;const html=e.clipboardData&&e.clipboardData.getData('text/html');if(!html||!/<(h\d|ul|ol|table|strong|b|em|i|a|p)[\s>]/i.test(html))return;e.preventDefault();try{const md=await htmlToMd(html);put(md);status('Pasted as Markdown. Untick “Paste from Word or web pages as Markdown” to paste plain text instead.')}catch(err){put(e.clipboardData.getData('text/plain'));status(err.message)}});
 async function openFile(f){if(!f)return;try{let md;if(/\.docx$/i.test(f.name)){status('Reading '+f.name+'…');await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.9.0/mammoth.browser.min.js');const r=await mammoth.convertToHtml({arrayBuffer:await f.arrayBuffer()});md=await htmlToMd(r.value)}else if(/\.html?$/i.test(f.name)||f.type==='text/html')md=await htmlToMd(await f.text());else md=await f.text();
-  if(ta.value.trim()&&ta.value!==SAMPLE&&!confirm('Replace the text in the editor with '+f.name+'?'))return;ta.value=md;last='';changed();docName=f.name.replace(/\.[^.]+$/,'');status('Opened '+f.name+'.')}catch(err){status('Could not open '+f.name+': '+err.message)}}
+  if(ta.value.trim()&&ta.value!==SAMPLE&&!confirm(tv('Replace the text in the editor with {name}?',{name:f.name})))return;ta.value=md;last='';changed();docName=f.name.replace(/\.[^.]+$/,'');status('Opened '+f.name+'.')}catch(err){status('Could not open '+f.name+': '+err.message)}}
 let docName='';
 $('mdFile').onchange=e=>{openFile(e.target.files[0]);e.target.value=''};
 ['dragenter','dragover'].forEach(ev=>$('editorPanel').addEventListener(ev,e=>{if([...e.dataTransfer.types].includes('Files')){e.preventDefault();$('editorPanel').classList.add('drop-on')}}));

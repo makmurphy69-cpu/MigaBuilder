@@ -326,5 +326,7 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "3D export needs the 3D view, which is not available here.": { es: "La exportación 3D necesita la vista 3D, que no está disponible aquí.", ar: "يتطلب التصدير ثلاثي الأبعاد العرض ثلاثي الأبعاد، وهو غير متاح هنا.", zh: "3D 导出需要 3D 视图，而这里无法使用。", sw: "Uhamishaji wa 3D unahitaji mwonekano wa 3D, ambao haupatikani hapa.", sv: "3D-export kräver 3D-vyn, som inte är tillgänglig här.", de: "Der 3D-Export braucht die 3D-Ansicht, die hier nicht verfügbar ist.", pt: "A exportação 3D precisa da visão 3D, que não está disponível aqui.", fr: "L’export 3D nécessite la vue 3D, qui n’est pas disponible ici." },
+  "Shift": { es: "Mayús", ar: "Shift", zh: "Shift", sw: "Shift", sv: "Skift", de: "Umschalt", pt: "Shift", fr: "Maj" }
 });

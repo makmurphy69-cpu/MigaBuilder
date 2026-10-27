@@ -184,5 +184,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Use a sharper, straight-on photo with good light.": { es: "Usa una foto más nítida, tomada de frente y con buena luz.", ar: "استخدم صورة أوضح ملتقطة من الأمام بإضاءة جيدة.", zh: "请使用更清晰、正面拍摄且光线充足的照片。", sw: "Tumia picha iliyo wazi zaidi, iliyopigwa moja kwa moja yenye mwanga mzuri.", sv: "Använd ett skarpare foto taget rakt framifrån i bra ljus.", de: "Nimm ein schärferes, gerade aufgenommenes Foto mit gutem Licht.", pt: "Use uma foto mais nítida, tirada de frente e com boa luz.", fr: "Utilisez une photo plus nette, prise de face et bien éclairée." }
 });

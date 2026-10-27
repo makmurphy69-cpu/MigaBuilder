@@ -150,5 +150,6 @@ I18N.phrases({
   "de": "Dein Beitrag geht nur an die Dienste, die du wählst (Discord, Bluesky oder Mastodon), gesendet aus deinem Browser mit deinen eigenen Zugangsdaten. MigaBuilder postet nicht für dich.",
   "pt": "Seu post vai só para os serviços que você escolher (Discord, Bluesky ou Mastodon), enviado do seu navegador com suas próprias credenciais. O MigaBuilder não publica por você.",
   "fr": "Votre publication va uniquement aux services choisis (Discord, Bluesky ou Mastodon), envoyée depuis votre navigateur avec vos propres identifiants. MigaBuilder ne publie pas à votre place."
- }
+ },
+  "✅ Post Forge is connected to this channel.": { es: "✅ Post Forge está conectado a este canal.", ar: "✅ Post Forge متصل بهذه القناة.", zh: "✅ Post Forge 已连接到此频道。", sw: "✅ Post Forge imeunganishwa na chaneli hii.", sv: "✅ Post Forge är kopplat till den här kanalen.", de: "✅ Post Forge ist mit diesem Kanal verbunden.", pt: "✅ O Post Forge está conectado a este canal.", fr: "✅ Post Forge est connecté à ce canal." }
 });

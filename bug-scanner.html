@@ -291,6 +291,7 @@ $('exampleWeb').onclick=()=>{files=[];$('code').value=EX_WEB;$('lang').value='ht
 $('examplePy').onclick=()=>{files=[];$('code').value=EX_PY;$('lang').value='python';renderFiles()};
 
 // ---------------- local checks ----------------
+const tv=(t,v)=>{let o=window.I18N&&I18N.tr?I18N.tr(t):t;return v?o.replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m):o};
 function mk(sev,file,line,title,wrong,fix,snippet,category){return {severity:sev,file,line,title,what_is_wrong:wrong,how_to_fix:fix,fixed_snippet:snippet||'',category:category||'Syntax',source:'local'}}
 function bracketCheck(f,lang){
   const out=[],pairs={')':'(',']':'[','}':'{'},stack=[],t=f.text;let line=1,i=0,n=t.length;
@@ -307,13 +308,13 @@ function bracketCheck(f,lang){
       if(c==="'"&&['rust','haskell','ocaml'].includes(lang)){i++;continue} // lifetimes / primes
       const q=c,start=line;i++;
       while(i<n&&t[i]!==q){if(t[i]==='\\')i++;else if(t[i]==='\n'){if(q!=='`')break;line++}i++}
-      if(i>=n||t[i]!==q){if(q!=='`')out.push(mk('HIGH',f.name,start,'String is never closed','A text string starts on line '+start+' with '+q+' but the matching closing '+q+' is missing on that line.','Add the closing '+q+' at the end of the text, or escape a '+q+' that appears inside it with a backslash.'))}
+      if(i>=n||t[i]!==q){if(q!=='`')out.push(mk('HIGH',f.name,start,'String is never closed',tv('A text string starts on line {line} with {q} but the matching closing {q} is missing on that line.',{line:start,q}),tv('Add the closing {q} at the end of the text, or escape a {q} that appears inside it with a backslash.',{q})))}
       else i++;continue}
     if('([{'.includes(c))stack.push([c,line]);
-    else if(')]}'.includes(c)){const top=stack.pop();if(!top){out.push(mk('HIGH',f.name,line,'Extra closing '+c,'Line '+line+' has a closing '+c+' that has no matching opening '+pairs[c]+' before it.','Remove the extra '+c+', or add the missing '+pairs[c]+' where the block or call should begin.'))}
-      else if(top[0]!==pairs[c]){out.push(mk('HIGH',f.name,line,'Mismatched brackets','Line '+line+' closes with '+c+' but the most recent open bracket is '+top[0]+' from line '+top[1]+'.','Check the brackets between line '+top[1]+' and line '+line+': every '+top[0]+' needs its own matching closer, in the reverse order they were opened.'));}}
+    else if(')]}'.includes(c)){const top=stack.pop();if(!top){out.push(mk('HIGH',f.name,line,tv('Extra closing {c}',{c}),tv('Line {line} has a closing {c} that has no matching opening {o} before it.',{line,c,o:pairs[c]}),tv('Remove the extra {c}, or add the missing {o} where the block or call should begin.',{c,o:pairs[c]})))}
+      else if(top[0]!==pairs[c]){out.push(mk('HIGH',f.name,line,'Mismatched brackets',tv('Line {line} closes with {c} but the most recent open bracket is {o} from line {from}.',{line,c,o:top[0],from:top[1]}),tv('Check the brackets between line {from} and line {line}: every {o} needs its own matching closer, in the reverse order they were opened.',{line,o:top[0],from:top[1]})));}}
     i++}
-  stack.slice(-3).forEach(([c,l])=>out.push(mk('HIGH',f.name,l,'Bracket '+c+' is never closed','The '+c+' opened on line '+l+' has no matching closing bracket, so everything after it is read as part of the same block.','Add the matching '+({'(':')','[':']','{':'}'}[c])+' where that block, list or call should end.')));
+  stack.slice(-3).forEach(([c,l])=>out.push(mk('HIGH',f.name,l,tv('Bracket {c} is never closed',{c}),tv('The {c} opened on line {line} has no matching closing bracket, so everything after it is read as part of the same block.',{c,line:l}),tv('Add the matching {m} where that block, list or call should end.',{m:({'(':')','[':']','{':'}'}[c])}))));
   return out.slice(0,12);
 }
 const VOID=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr','!doctype']);
@@ -344,7 +345,7 @@ async function jsCheck(f,offset,code){
     try{acorn.parse(code,{ecmaVersion:'latest',sourceType,allowHashBang:true,allowReturnOutsideFunction:true,allowAwaitOutsideFunction:true});return []}
     catch(e){if(sourceType==='module'&&/import|export|strict mode|reserved/i.test(e.message))continue;
       const line=(e.loc&&e.loc.line||1)+offset;
-      return [mk('CRITICAL',f.name,line,'JavaScript syntax error: '+e.message.replace(/\s*\(\d+:\d+\)$/,''),'The JavaScript engine cannot read line '+line+(e.loc?' (column '+(e.loc.column+1)+')':'')+', so none of the code in this script will run — not even the parts before the mistake.','Look at line '+line+' and the line just before it: typical causes are a missing ) } or ], a missing comma between items, a typo in a keyword, or = used where == or === was meant.')]}
+      return [mk('CRITICAL',f.name,line,tv('JavaScript syntax error: {err}',{err:e.message.replace(/\s*\(\d+:\d+\)$/,'')}),e.loc?tv('The JavaScript engine cannot read line {line} (column {col}), so none of the code in this script will run — not even the parts before the mistake.',{line,col:e.loc.column+1}):tv('The JavaScript engine cannot read line {line}, so none of the code in this script will run — not even the parts before the mistake.',{line}),'Look at line '+line+' and the line just before it: typical causes are a missing ) } or ], a missing comma between items, a typo in a keyword, or = used where == or === was meant.')]}
   }
   return [];
 }

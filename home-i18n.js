@@ -520,6 +520,7 @@ window.HOME_I18N = {
     'd:meet-forge': 'Andaa vyumba vya video vya kikundi na jumuiya za mada.'
   },
   sv: {
+    heroContact: 'Kontakt',
     privLegend: "🔒 Körs i webbläsaren · 🌐 AI-steg skickar text till en AI-tjänst · 🔗 Vissa funktioner går online", privLocal: "🔒 Körs i webbläsaren", privAi: "🌐 AI-steg går online", privOnline: "🔗 Vissa funktioner går online",
     heroSubtitle: "Gratis verktyg som fungerar direkt i webbläsaren — inget konto behövs. Redigera PDF:er, gör ett CV eller en faktura, fixa bilder och bygg webbplatser, videor och mycket mer.",
     s1Title: "En företagswebbplats",
@@ -661,6 +662,7 @@ window.HOME_I18N = {
     'd:meet-forge': "Håll gruppvideomöten och ämnesgemenskaper."
   },
   de: {
+    heroContact: 'Kontakt',
     privLegend: "🔒 Läuft in deinem Browser · 🌐 KI-Schritte senden Text an einen KI-Dienst · 🔗 Manche Funktionen gehen online", privLocal: "🔒 Läuft in deinem Browser", privAi: "🌐 KI-Schritte gehen online", privOnline: "🔗 Manche Funktionen gehen online",
     heroSubtitle: "Kostenlose Werkzeuge, die direkt in deinem Browser funktionieren — kein Konto nötig. PDFs bearbeiten, Lebenslauf oder Rechnung erstellen, Bilder verbessern und Websites, Videos und mehr bauen.",
     s1Title: "Eine Firmen-Website",
@@ -802,6 +804,7 @@ window.HOME_I18N = {
     'd:meet-forge': "Gruppen-Videoräume und Themen-Communities hosten."
   },
   pt: {
+    heroContact: 'Contato',
     privLegend: "🔒 Roda no seu navegador · 🌐 Etapas de IA enviam texto a um serviço de IA · 🔗 Alguns recursos usam a internet", privLocal: "🔒 Roda no seu navegador", privAi: "🌐 Etapas de IA usam a internet", privOnline: "🔗 Alguns recursos usam a internet",
     heroSubtitle: "Ferramentas gratuitas que funcionam direto no seu navegador — sem precisar de conta. Edite PDFs, faça um currículo ou uma fatura, ajuste imagens e crie sites, vídeos e muito mais.",
     s1Title: "Um site para empresa",
@@ -943,6 +946,7 @@ window.HOME_I18N = {
     'd:meet-forge': "Hospede salas de vídeo em grupo e comunidades por tema."
   },
   fr: {
+    heroContact: 'Contact',
     privLegend: "🔒 Fonctionne dans votre navigateur · 🌐 Les étapes d'IA envoient du texte à un service d'IA · 🔗 Certaines fonctions vont en ligne", privLocal: "🔒 Fonctionne dans votre navigateur", privAi: "🌐 Les étapes d'IA vont en ligne", privOnline: "🔗 Certaines fonctions vont en ligne",
     heroSubtitle: "Des outils gratuits qui fonctionnent directement dans votre navigateur — sans compte. Modifiez des PDF, créez un CV ou une facture, retouchez des images et créez des sites, des vidéos et bien plus.",
     s1Title: "Un site d'entreprise",

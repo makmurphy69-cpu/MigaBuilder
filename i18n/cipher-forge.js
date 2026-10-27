@@ -195,5 +195,7 @@ I18N.phrases({
   "Copy this link:": { es: "Copia este enlace:", ar: "انسخ هذا الرابط:", zh: "复制此链接：", sw: "Nakili kiungo hiki:", sv: "Kopiera den här länken:", de: "Kopiere diesen Link:", pt: "Copie este link:", fr: "Copiez ce lien :" },
   "■ Stop": { es: "■ Detener", ar: "■ إيقاف", zh: "■ 停止", sw: "■ Simamisha", sv: "■ Stopp", de: "■ Stopp", pt: "■ Parar", fr: "■ Arrêter" },
   "Working": { es: "Procesando", ar: "جارٍ العمل", zh: "处理中", sw: "Inafanya kazi", sv: "Arbetar", de: "Arbeitet", pt: "Trabalhando", fr: "En cours" },
-  "Saved": { es: "Ahorro", ar: "الموفَّر", zh: "节省", sw: "Iliyookolewa", sv: "Sparat", de: "Gespart", pt: "Economizado", fr: "Gagné" }
+  "Saved": { es: "Ahorro", ar: "الموفَّر", zh: "节省", sw: "Iliyookolewa", sv: "Sparat", de: "Gespart", pt: "Economizado", fr: "Gagné" },
+  "Someone sent you a secret message in {code}.": { es: "Alguien te ha enviado un mensaje secreto en {code}.", ar: "أرسل إليك أحدهم رسالة سرية بـ {code}.", zh: "有人用{code}给你发了一条秘密消息。", sw: "Mtu amekutumia ujumbe wa siri kwa {code}.", sv: "Någon har skickat ett hemligt meddelande till dig på {code}.", de: "Jemand hat dir eine geheime Nachricht in {code} geschickt.", pt: "Alguém enviou uma mensagem secreta para você em {code}.", fr: "Quelqu’un vous a envoyé un message secret en {code}." },
+  "Shift code, shift {0}": { es: "Código César, desplazamiento {0}", ar: "شيفرة الإزاحة، إزاحة {0}", zh: "移位密码，移 {0} 位", sw: "Msimbo wa kuhamisha, hamisha {0}", sv: "Förskjutningskod, steg {0}", de: "Verschiebe-Code, um {0} verschoben", pt: "Código de deslocamento, desloca {0}", fr: "Code par décalage, décalage de {0}" }
 });

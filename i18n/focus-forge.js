@@ -238,5 +238,7 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Focus Forge — free Pomodoro focus timer with tasks and calm sounds | MigaBuilder": { es: "Focus Forge — temporizador Pomodoro gratuito con tareas y sonidos relajantes | MigaBuilder", ar: "Focus Forge — مؤقّت بومودورو مجاني للتركيز مع مهام وأصوات هادئة | MigaBuilder", zh: "Focus Forge — 免费番茄专注计时器，带任务和舒缓声音 | MigaBuilder", sw: "Focus Forge — kipima muda cha bure cha Pomodoro chenye kazi na sauti tulivu | MigaBuilder", sv: "Focus Forge — gratis Pomodoro-timer med uppgifter och lugna ljud | MigaBuilder", de: "Focus Forge — kostenloser Pomodoro-Fokustimer mit Aufgaben und ruhigen Klängen | MigaBuilder", pt: "Focus Forge — timer Pomodoro gratuito com tarefas e sons calmos | MigaBuilder", fr: "Focus Forge — minuteur Pomodoro gratuit avec tâches et sons apaisants | MigaBuilder" },
+  "Focus sessions done / estimated": { es: "Sesiones de concentración hechas / estimadas", ar: "جلسات التركيز المنجزة / المقدّرة", zh: "已完成 / 预计的专注时段", sw: "Vipindi vya umakini vilivyokamilika / vilivyokadiriwa", sv: "Fokuspass klara / beräknade", de: "Fokuseinheiten erledigt / geschätzt", pt: "Sessões de foco feitas / estimadas", fr: "Sessions de concentration faites / estimées" }
 });

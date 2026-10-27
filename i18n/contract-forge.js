@@ -153,5 +153,6 @@ I18N.phrases({
   "de": "Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät.",
   "pt": "Não. Funciona inteiramente no seu navegador, então seus arquivos e textos ficam no seu dispositivo.",
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
- }
+ },
+  "Jan van Eyck (c. 1390–1441)": { es: "Jan van Eyck (h. 1390–1441)", ar: "يان فان إيك (نحو 1390–1441)", zh: "扬·凡·艾克（约 1390–1441）", sw: "Jan van Eyck (takriban 1390–1441)", sv: "Jan van Eyck (ca 1390–1441)", de: "Jan van Eyck (um 1390–1441)", pt: "Jan van Eyck (c. 1390–1441)", fr: "Jan van Eyck (v. 1390–1441)" }
 });

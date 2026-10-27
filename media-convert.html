@@ -56,9 +56,9 @@ async function speechOnDevice(lang){
 let speechCloudOk=false;
 $('startSpeech').onclick=async()=>{if(!recognition)return note('speechStatus','Speech recognition is not available in this browser. Try Chrome on the computer, or use the Transcribe a file tab.');const lang=$('speechLang').value;recognition.lang=lang;$('startSpeech').disabled=true;
   try{const local=await speechOnDevice(lang);
-    if(!local&&!speechCloudOk){if(!confirm('This browser cannot recognise speech on this device for this language, so your voice would be sent to its online speech service (Google in Chrome) to turn it into text.\n\nPress OK to continue, or Cancel and use the Transcribe a file tab, which stays on this device.'))return note('speechStatus','Not started. Nothing was sent.');speechCloudOk=true}
+    if(!local&&!speechCloudOk){if(!confirm((t=>window.I18N&&I18N.tr?I18N.tr(t):t)('This browser cannot recognise speech on this device for this language, so your voice would be sent to its online speech service (Google in Chrome) to turn it into text.\n\nPress OK to continue, or Cancel and use the Transcribe a file tab, which stays on this device.')))return note('speechStatus','Not started. Nothing was sent.');speechCloudOk=true}
     recognition.start();note('speechStatus',local?'Listening privately on this device… allow microphone access if asked.':'Listening with the online speech service… allow microphone access if asked.')}
-  catch(e){note('speechStatus','Could not start listening: '+(e.message||e))}finally{$('startSpeech').disabled=false}};
+  catch(e){note('speechStatus',(window.I18N&&I18N.tr?I18N.tr('Could not start listening: {err}'):'Could not start listening: {err}').replace('{err}',e.message||e))}finally{$('startSpeech').disabled=false}};
 $('toFiletx').onclick=e=>{e.preventDefault();document.querySelector('.tab[data-mode="filetx"]').click()};
 $('stopSpeech').onclick=()=>recognition&&recognition.stop();$('copyTranscript').onclick=()=>navigator.clipboard.writeText($('transcript').value);$('saveTranscript').onclick=()=>download(new Blob([$('transcript').value],{type:'text/plain'}),'migabuilder-transcript.txt');
 </script><script src="miga-progress.js"></script>
