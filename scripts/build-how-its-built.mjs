@@ -58,7 +58,8 @@ const data = {
   pullRequests: prs.length,
   tools: tools.length,
   videos: videos.length,
-  languages: 6,
+  // Count the languages offered in the picker in i18n.js.
+  languages: (read('i18n.js').match(/var LANGUAGES = \[([\s\S]*?)\];/)[1].match(/code: '/g) || []).length,
   workflows,
   recent: prs.slice(0, 15).map(p => ({ ...p, tool: toolFor(p.title) }))
 };
