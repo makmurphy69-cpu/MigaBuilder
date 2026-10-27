@@ -257,6 +257,35 @@ S('noise-forge.html', {
   }
 });
 
+S('tune-forge.html', {
+  title: 'Tune Forge', subtitle: 'Tuner, metronome and sound level meter for musicians',
+  intro: 'Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.',
+  async run(h, page) {
+    await h.step('Pick your instrument and tuning: guitar, bass, ukulele, violin, cello, mandolin, banjo, or chromatic for any instrument or voice.', () => h.point('#inst'));
+    await h.step('Press Start microphone and play one string. Here we use the demo sound, a guitar string being tuned up, so no microphone is needed.', () => h.click('#demoBtn'));
+    await h.step('The tuner finds the string by itself. The needle on the left means the string is too low, so tighten it until the needle reaches the green middle.', () => h.point('#gauge'));
+    await h.wait(2500);
+    await h.step('Now it says In tune. Press any string button to hear its note, or to tune only that string.', () => h.point('#strings'));
+    await h.step('The line below shows the pitch over time, so you can see how steady your note is.', () => h.scroll('#tHist', 'center'));
+    await h.sampleShot('#app', 'Tuner screen from this video');
+    await h.click('#demoBtn');
+    await h.step('Next, the metronome. Set the tempo with the buttons or the slider, or tap it in.', async () => { await h.scroll('#app'); await h.click('#tab-metro'); await h.click('[data-nudge="-5"]'); await h.click('[data-nudge="-5"]'); });
+    await h.step('Press Start. The first beat is accented, and you can press any beat to change its accent or silence it.', () => h.click('#metroBtn'));
+    await h.wait(1500);
+    await h.step('Choose odd time signatures and triplets or swing. The speed trainer adds a few beats per minute every few bars, and the gap trainer goes silent to test your timing.', () => h.point('#trOn'));
+    await h.click('#metroBtn');
+    await h.step('The sound level meter shows how loud it is in decibels, like a real meter, and how long your ears are safe at that level each day.', async () => { await h.scroll('#app'); await h.click('#tab-level'); await h.click('#demoBtn'); await h.point('#dbNow'); });
+    await h.wait(1500);
+    await h.step('Set your own limit. When the sound goes above it, a clear warning appears, and the noise dose adds up your exposure over the day.', async () => { await h.select('#alarm', '70'); await h.point('#lvlWarn'); });
+    await h.step('For recording, the input meter warns you when the level is so high that it clips and distorts. You can also calibrate the meter and download a log.', () => h.point('#clipLamp'));
+    await h.click('#demoBtn');
+    await h.step('Finally, play a reference note to tune by ear, or hold a drone to practise scales in tune.', async () => { await h.scroll('#app'); await h.click('#tab-tones'); await h.click('[data-t="9"]'); await h.click('#droneBtn'); });
+    await h.wait(1500);
+    await h.click('#droneBtn');
+    await h.step('Below the tools you will find tips for tuning, a table of how loud is too loud, and how to practise with a metronome.', () => h.scroll('#guideLoud'));
+  }
+});
+
 S('go-forge.html', {
   title: 'Go Forge', subtitle: 'Learn Go and play with a coach',
   intro: 'Welcome to Go Forge. Learn the game of Go step by step, then play the computer with a coach at your side.',

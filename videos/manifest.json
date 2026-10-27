@@ -1745,6 +1745,34 @@
    "kind": "image"
   }
  },
+ "tune-forge.html": {
+  "title": "Tune Forge",
+  "video": "https://videos.migabuilder.com/tune-forge.mp4?v=408f0c04",
+  "poster": "https://videos.migabuilder.com/tune-forge.jpg?v=e7e584d8",
+  "duration": 132,
+  "transcript": [
+   "Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.",
+   "Pick your instrument and tuning: guitar, bass, ukulele, violin, cello, mandolin, banjo, or chromatic for any instrument or voice.",
+   "Press Start microphone and play one string. Here we use the demo sound, a guitar string being tuned up, so no microphone is needed.",
+   "The tuner finds the string by itself. The needle on the left means the string is too low, so tighten it until the needle reaches the green middle.",
+   "Now it says In tune. Press any string button to hear its note, or to tune only that string.",
+   "The line below shows the pitch over time, so you can see how steady your note is.",
+   "Next, the metronome. Set the tempo with the buttons or the slider, or tap it in.",
+   "Press Start. The first beat is accented, and you can press any beat to change its accent or silence it.",
+   "Choose odd time signatures and triplets or swing. The speed trainer adds a few beats per minute every few bars, and the gap trainer goes silent to test your timing.",
+   "The sound level meter shows how loud it is in decibels, like a real meter, and how long your ears are safe at that level each day.",
+   "Set your own limit. When the sound goes above it, a clear warning appears, and the noise dose adds up your exposure over the day.",
+   "For recording, the input meter warns you when the level is so high that it clips and distorts. You can also calibrate the meter and download a log.",
+   "Finally, play a reference note to tune by ear, or hold a drone to practise scales in tune.",
+   "Below the tools you will find tips for tuning, a table of how loud is too loud, and how to practise with a metronome.",
+   "Now it is your turn. Open Tune Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/tune-forge.png",
+   "label": "Tuner screen from this video",
+   "kind": "image"
+  }
+ },
  "utility-forge.html": {
   "title": "Utility Forge",
   "video": "https://videos.migabuilder.com/utility-forge.mp4?v=98291cf9",
