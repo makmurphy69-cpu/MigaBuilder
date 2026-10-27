@@ -75,15 +75,15 @@ footer.site-foot{max-width:1120px;margin:0 auto;padding:0 18px 40px;font-size:13
 
 <section class="panel">
   <h2>The idea in one paragraph</h2>
-  <p class="lead">MigaBuilder is run by one person who does not write the code by hand. The owner describes what a tool should do in a chat. <strong>Claude</strong>, Anthropic's AI, working through <strong>Claude Code</strong>, writes the code, records a narrated video guide, runs the tests and opens a pull request. The owner tries it, asks for changes and merges it, and then it is live. Everything is open source, so you can check every claim on this page against the <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pulls?q=is%3Apr+is%3Amerged" rel="noopener">history of merged pull requests</a>.</p>
+  <p class="lead" data-i18n-block>MigaBuilder is run by one person who does not write the code by hand. The owner describes what a tool should do in a chat. <strong>Claude</strong>, Anthropic's AI, working through <strong>Claude Code</strong>, writes the code, records a narrated video guide, runs the tests and opens a pull request. The owner tries it, asks for changes and merges it, and then it is live. Everything is open source, so you can check every claim on this page against the <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pulls?q=is%3Apr+is%3Amerged" rel="noopener">history of merged pull requests</a>.</p>
 </section>
 
 <section class="panel" id="setup">
   <h2>The setup: copy it for your own site</h2>
   <p>Six pieces. Most of them are free, and none of them needs a server you look after yourself.</p>
   <ol class="setup">
-    <li><strong>One GitHub repository, no build step</strong><p>Plain HTML, CSS and JavaScript, one <code>.html</code> page per tool. There is nothing to compile, so every change can be read in the pull request and tested by opening the page.</p></li>
-    <li><strong>Free hosting from the main branch</strong><p>GitHub Pages serves the <code>main</code> branch at migabuilder.com. That means merging a pull request is the same as publishing it.</p></li>
+    <li><strong>One GitHub repository, no build step</strong><p data-i18n-block>Plain HTML, CSS and JavaScript, one <code>.html</code> page per tool. There is nothing to compile, so every change can be read in the pull request and tested by opening the page.</p></li>
+    <li><strong>Free hosting from the main branch</strong><p data-i18n-block>GitHub Pages serves the <code>main</code> branch at migabuilder.com. That means merging a pull request is the same as publishing it.</p></li>
     <li><strong>Claude Code on the web</strong><p>Claude works in a fresh cloud copy of the repository on its own branch, so the owner can start a job from a phone and come back later to a finished pull request.</p></li>
     <li><strong>A written rulebook: <code>CLAUDE.md</code></strong><p>Claude reads it at the start of every session. It holds the checklist for a new tool: the page, every list it must appear in, a narrated video, the tests to run. A new session starts with no memory of earlier ones, so anything not written down gets forgotten.</p></li>
     <li><strong>Automatic checks on every pull request</strong><p>GitHub Actions opens every page in a real browser, tests the files each tool makes and checks that every tool has its video. A weekly check-up looks for outdated libraries and broken links.</p></li>
@@ -95,12 +95,12 @@ footer.site-foot{max-width:1120px;margin:0 auto;padding:0 18px 40px;font-size:13
   <h2>From idea to live tool</h2>
   <p>Every tool goes through the same six steps, in one pull request.</p>
   <ol class="flow">
-    <li><span aria-hidden="true">💬</span><strong>Ask</strong>The owner describes the tool in plain words, or picks an idea from the feedback.<small>Owner</small></li>
-    <li><span aria-hidden="true">🛠️</span><strong>Build</strong>Claude writes the page and adds it to the homepage, search, sitemap and README.<small>Claude</small></li>
-    <li><span aria-hidden="true">🎬</span><strong>Explain</strong>Claude scripts a walkthrough, records it with a synthetic voice and checks the frames.<small>Claude</small></li>
-    <li><span aria-hidden="true">🧪</span><strong>Check</strong>The smoke test, result tests and video check run before anyone looks at it.<small>Automatic</small></li>
-    <li><span aria-hidden="true">👀</span><strong>Review</strong>The owner tries the new tool and asks for changes until it is right.<small>Owner</small></li>
-    <li><span aria-hidden="true">🚀</span><strong>Live</strong>Merging to <code>main</code> publishes it at migabuilder.com.<small>Owner merges</small></li>
+    <li data-i18n-block><span aria-hidden="true">💬</span><strong>Ask</strong>The owner describes the tool in plain words, or picks an idea from the feedback.<small>Owner</small></li>
+    <li data-i18n-block><span aria-hidden="true">🛠️</span><strong>Build</strong>Claude writes the page and adds it to the homepage, search, sitemap and README.<small>Claude</small></li>
+    <li data-i18n-block><span aria-hidden="true">🎬</span><strong>Explain</strong>Claude scripts a walkthrough, records it with a synthetic voice and checks the frames.<small>Claude</small></li>
+    <li data-i18n-block><span aria-hidden="true">🧪</span><strong>Check</strong>The smoke test, result tests and video check run before anyone looks at it.<small>Automatic</small></li>
+    <li data-i18n-block><span aria-hidden="true">👀</span><strong>Review</strong>The owner tries the new tool and asks for changes until it is right.<small>Owner</small></li>
+    <li data-i18n-block><span aria-hidden="true">🚀</span><strong>Live</strong>Merging to <code>main</code> publishes it at migabuilder.com.<small>Owner merges</small></li>
   </ol>
 </section>
 
@@ -120,16 +120,16 @@ footer.site-foot{max-width:1120px;margin:0 auto;padding:0 18px 40px;font-size:13
   <h2>Recently shipped</h2>
   <p>The latest pull requests merged into the live site, each built with Claude.</p>
   <ul class="changes" id="changes">
-    <li><time>2026-10-12</time><span>Homepage task search with step-by-step recipes; sitemap.xml and robots.txt in Website Builder zip</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/162" rel="noopener">#162</a></span></li>
-    <li><time>2026-10-12</time><span>Shop: five €3 template packs and a €9 All Templates bundle</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/158" rel="noopener">#158</a></span></li>
-    <li><time>2026-10-11</time><span>Website Builder: start step, Check &amp; fix, style panel; privacy labels on every tool card</span><span class="links"><a href="website-builder.html">Open tool</a> · <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/161" rel="noopener">#161</a></span></li>
+    <li data-i18n-block><time>2026-10-12</time><span>Homepage task search with step-by-step recipes; sitemap.xml and robots.txt in Website Builder zip</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/162" rel="noopener">#162</a></span></li>
+    <li data-i18n-block><time>2026-10-12</time><span>Shop: five €3 template packs and a €9 All Templates bundle</span><span class="links"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/158" rel="noopener">#158</a></span></li>
+    <li data-i18n-block><time>2026-10-11</time><span>Website Builder: start step, Check &amp; fix, style panel; privacy labels on every tool card</span><span class="links"><a href="website-builder.html">Open tool</a> · <a href="https://github.com/makmurphy69-cpu/MigaBuilder/pull/161" rel="noopener">#161</a></span></li>
   </ul>
 </section>
 
 <section class="note" aria-labelledby="noteTitle">
   <span class="label">Written by Claude</span>
   <h2 id="noteTitle">A note from the builder</h2>
-  <p>I'm Claude, and I write most of the code on this site. I don't remember earlier sessions: each one starts with me reading <code>CLAUDE.md</code> and the code as it is today. That is why the rules on this page are written down instead of kept in anyone's head, and it turns out to be a good habit for any project. When the checklist is on paper, the seventieth tool gets the same care as the first.</p>
+  <p data-i18n-block>I'm Claude, and I write most of the code on this site. I don't remember earlier sessions: each one starts with me reading <code>CLAUDE.md</code> and the code as it is today. That is why the rules on this page are written down instead of kept in anyone's head, and it turns out to be a good habit for any project. When the checklist is on paper, the seventieth tool gets the same care as the first.</p>
   <p>The part of this setup I'd recommend most is that nothing depends on trusting me. The smoke test opens every page, the result tests check the files the tools make, and a person tries every change before it goes live. I do get things wrong. When I do, one of those catches it, and the fix is in the public history for anyone to read.</p>
 </section>
 
@@ -139,11 +139,11 @@ footer.site-foot{max-width:1120px;margin:0 auto;padding:0 18px 40px;font-size:13
     <dt>Does a person check the code?</dt>
     <dd>Yes. The automatic checks run first, then the owner tries every change and decides whether to merge it. Nothing reaches the live site without that.</dd>
     <dt>Who decides what gets built?</dt>
-    <dd>The owner, often from ideas sent through the <a href="feedback.html">feedback page</a>. A weekly scout also suggests ideas, but only as drafts the owner can take or leave.</dd>
+    <dd data-i18n-block>The owner, often from ideas sent through the <a href="feedback.html">feedback page</a>. A weekly scout also suggests ideas, but only as drafts the owner can take or leave.</dd>
     <dt>Can I see how a tool was made?</dt>
-    <dd>Yes. Every change is a public pull request on <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>, with a description of what changed and the checks it passed.</dd>
+    <dd data-i18n-block>Yes. Every change is a public pull request on <a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener">GitHub</a>, with a description of what changed and the checks it passed.</dd>
     <dt>Can I use this setup for my own project?</dt>
-    <dd>Yes. Start with a small repository with no build step, write the rules you care about into a <code>CLAUDE.md</code>, and add one automatic check that opens your pages in a browser. You can add the rest later.</dd>
+    <dd data-i18n-block>Yes. Start with a small repository with no build step, write the rules you care about into a <code>CLAUDE.md</code>, and add one automatic check that opens your pages in a browser. You can add the rest later.</dd>
   </dl>
   <div class="cta">
     <a class="primary" href="index.html">Try the free tools</a>

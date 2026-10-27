@@ -1,4 +1,6 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><meta name="theme-color" content="#081826"><meta name="robots" content="noindex"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Thank You: Your MigaBuilder Download</title><meta name="description" content="Download the templates you bought from the MigaBuilder shop."><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="local-tools.css">
+<script src="i18n.js"></script>
+<script src="i18n/thanks.js"></script>
 </head><body>
 <header class="masthead"><div><h1>Thank you!</h1><p>Your order from the MigaBuilder shop.</p></div></header>
 <main>
@@ -6,8 +8,8 @@
   <h2 id="heading">Checking your order…</h2>
   <p id="message" class="muted">This takes a second.</p>
   <div id="items"></div>
-  <p class="muted" id="help" hidden>Keep this page bookmarked: the download link works for 30 days. Problems? Email <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a> with your receipt number.</p>
-  <p class="muted" id="next" hidden>Next: watch the <a href="shop.html#how-it-works">2-minute how-to video</a>, then load the zip into the free <a href="website-builder.html">Website Builder</a>. <strong>START-HERE.html</strong> in the zip has every step written down.</p>
+  <p class="muted" id="help" hidden data-i18n-block>Keep this page bookmarked: the download link works for 30 days. Problems? Email <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a> with your receipt number.</p>
+  <p class="muted" id="next" hidden data-i18n-block>Next: watch the <a href="shop.html#how-it-works">2-minute how-to video</a>, then load the zip into the free <a href="website-builder.html">Website Builder</a>. <strong>START-HERE.html</strong> in the zip has every step written down.</p>
 </section>
 </main>
 <footer><a href="shop.html">Back to the shop</a> · <a href="index.html">All free tools</a></footer>
@@ -37,7 +39,7 @@
       if (!data.ok) { fail(data.error || 'Something went wrong. Please reload in a minute.'); return; }
       if (!data.items || !data.items.length) { fail('Your payment went through, but we could not match the product. Contact us and we will send it.'); return; }
       heading.textContent = 'Your download is ready';
-      message.textContent = data.email ? 'A receipt was sent to ' + data.email + '.' : 'Your receipt is on its way by email.';
+      if (data.email) { message.textContent = ''; var lead = document.createElement('span'); lead.textContent = 'A receipt was sent to:'; var mail = document.createElement('b'); mail.setAttribute('data-no-i18n', ''); mail.textContent = ' ' + data.email; message.append(lead, mail); } else message.textContent = 'Your receipt is on its way by email.';
       data.items.forEach(function (item) {
         const row = document.createElement('div');
         row.className = 'item';
