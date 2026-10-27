@@ -918,7 +918,7 @@
         <button type="button" class="health-fix" id="healthFixBtn">✨ Fix all</button>
         <button type="button" id="healthAiBtn">🤖 Ask the AI to fix the rest</button>
       </div>
-      <p class="hint">The same checks as <a href="site-checkup.html">Website Checkup</a>, run in your browser. “Fix all” repairs titles, descriptions, headings, image descriptions, page language and the mobile viewport on every page — read the new wording, and ↶ Undo takes it back.</p>
+      <p class="hint" data-i18n-block>The same checks as <a href="site-checkup.html">Website Checkup</a>, run in your browser. “Fix all” repairs titles, descriptions, headings, image descriptions, page language and the mobile viewport on every page — read the new wording, and ↶ Undo takes it back.</p>
     </div>
     <div class="style-panel" id="stylePanel" hidden>
       <div class="style-head">
@@ -997,7 +997,7 @@
     <div class="field" style="margin-top:14px;">
       <label style="color: var(--paper);">Instant hosting, no domain needed (optional)</label>
       <button type="button" class="draft-btn" id="downloadZipBtn" disabled>⬇ Download all pages as .zip</button>
-      <label style="color: var(--paper); font-size: 13px; margin-top: 8px; display: grid; gap: 4px;">Web address once it is live (optional — adds a <code>sitemap.xml</code> for Google)<input type="url" id="zipSiteUrl" placeholder="https://www.example.com" autocomplete="url"></label>
+      <label style="color: var(--paper); font-size: 13px; margin-top: 8px; display: grid; gap: 4px;"><span data-i18n-block>Web address once it is live (optional — adds a <code>sitemap.xml</code> for Google)</span><input type="url" id="zipSiteUrl" placeholder="https://www.example.com" autocomplete="url"></label>
       <label class="check-row" style="color: var(--paper); font-size: 13px; margin-top: 8px;"><input type="checkbox" id="zipSplitAssets" checked> <span>Tidy project: put styles in <code>style.css</code> and pictures in an <code>images/</code> folder</span></label>
       <p class="hint" style="color: rgba(237,234,224,0.55);">Unzip it, then drag the folder onto <a href="https://app.netlify.com/drop" target="_blank" rel="noopener">Netlify Drop</a> or upload it in the <a href="https://developers.cloudflare.com/pages/get-started/direct-upload/" target="_blank" rel="noopener">Cloudflare Pages dashboard</a> — both give you a live public link in seconds, free, no domain purchase or GitHub account required.</p>
     </div>
@@ -1498,13 +1498,13 @@
         size: '1024x1024'
       })
     });
-    if (!response.ok) throw new Error('Image generation failed for: ' + description);
+    if (!response.ok) throw new Error((window.I18N&&I18N.tr?I18N.tr('Image generation failed for: {what}'):'Image generation failed for: {what}').replace('{what}', description));
     const data = await response.json();
     const item = data.data && data.data[0];
     let dataUrl = null;
     if (item && item.b64_json) dataUrl = 'data:image/png;base64,' + item.b64_json;
     else if (item && item.url) dataUrl = item.url;
-    if (!dataUrl) throw new Error('No image returned for: ' + description);
+    if (!dataUrl) throw new Error((window.I18N&&I18N.tr?I18N.tr('No image returned for: {what}'):'No image returned for: {what}').replace('{what}', description));
     aiImageCache[description] = dataUrl;
     return dataUrl;
   }
@@ -2784,7 +2784,7 @@
   }
   function refreshFormEndpointStatus() {
     const e = formEndpoint();
-    formEndpointStatus.textContent = e === null ? '⚠️ That does not look like a form ID or an https:// link.' : e ? '✓ Forms will post to ' + e : '';
+    formEndpointStatus.textContent = e === null ? '⚠️ That does not look like a form ID or an https:// link.' : e ? (window.I18N&&I18N.tr?I18N.tr('✓ Forms will post to {url}'):'✓ Forms will post to {url}').replace('{url}', e) : '';
     formEndpointStatus.style.color = e === null ? 'var(--error, #e07a6f)' : 'var(--success, #4e9e73)';
   }
   formEndpointInput.addEventListener('input', refreshFormEndpointStatus);
@@ -3096,7 +3096,7 @@
         });
         if (!createRes.ok) {
           const body = await createRes.json().catch(() => null);
-          throw new Error('Could not create the repo: ' + (body && body.message ? body.message : createRes.status));
+          throw new Error((window.I18N&&I18N.tr?I18N.tr('Could not create the repo: {err}'):'Could not create the repo: {err}').replace('{err}', body && body.message ? body.message : createRes.status));
         }
         await new Promise(resolve => setTimeout(resolve, 1500)); // let GitHub finish setting up the new repo
       } else if (!repoCheck.ok) {
@@ -3128,7 +3128,7 @@
         });
         if (!putRes.ok) {
           const body = await putRes.json().catch(() => null);
-          throw new Error('Failed to push ' + path + ': ' + (body && body.message ? body.message : putRes.status));
+          throw new Error((window.I18N&&I18N.tr?I18N.tr('Failed to push {path}: {err}'):'Failed to push {path}: {err}').replace('{path}', path).replace('{err}', body && body.message ? body.message : putRes.status));
         }
       }
 

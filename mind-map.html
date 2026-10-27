@@ -297,7 +297,7 @@ MigaAI.mount($('aiBox'));
 const SYS='You make mind maps. Reply with JSON only: {"title":"short centre topic","children":[{"title":"branch (1-4 words)","children":[{"title":"idea (1-6 words)"}]}]}. Give 4 to 6 branches with 2 to 4 ideas each. Use the language the user writes in.';
 $('aiMake').onclick=async()=>{const t=$('topic').value.trim();if(!t)return note('Type a topic first.');const b=$('aiMake');b.disabled=true;note('The AI is making your map…');
   try{const j=MigaAI.json(await MigaAI.ask(SYS,'Topic: '+t));if(!j||!Array.isArray(j.children))throw new Error('The AI did not send a map. Try a shorter topic.');snap();fromTree(j);note('Map made. Change anything: double-click to edit, Tab to add, Delete to remove.')}
-  catch(e){note('The AI could not make a map: '+(e.message||e)+'. You can also paste a list instead.')}finally{b.disabled=false}};
+  catch(e){note((window.I18N&&I18N.tr?I18N.tr('The AI could not make a map: {err}. You can also paste a list instead.'):'The AI could not make a map: {err}. You can also paste a list instead.').replace('{err}',e.message||e))}finally{b.disabled=false}};
 
 // ---------- files: save, open, PNG, SVG, outline ----------
 function download(name,blob){const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500)}

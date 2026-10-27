@@ -251,5 +251,6 @@ I18N.phrases({
   "de": "Nur wenn du die KI-Funktionen nutzt: Dann wird der Text, den du der KI gibst, über den kostenlosen KI-Dienst von MigaBuilder oder deinen eigenen Gemini-Schlüssel an Googles Gemini-Modell gesendet. Alles andere bleibt in deinem Browser.",
   "pt": "Só quando você usa os recursos de IA: aí o texto que você dá à IA é enviado ao modelo Gemini do Google pelo serviço gratuito de IA do MigaBuilder ou pela sua própria chave do Gemini. Todo o resto fica no seu navegador.",
   "fr": "Seulement si vous utilisez ses fonctions d'IA : le texte que vous donnez à l'IA est alors envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder ou votre propre clé Gemini. Tout le reste reste dans votre navigateur."
- }
+ },
+  "Paste the responsibilities, requirements, and preferred qualifications.": { es: "Pega las responsabilidades, los requisitos y las cualificaciones deseadas.", ar: "الصق المسؤوليات والمتطلبات والمؤهلات المفضلة.", zh: "粘贴岗位职责、要求和优先条件。", sw: "Bandika majukumu, mahitaji na sifa zinazopendelewa.", sv: "Klistra in ansvarsområden, krav och önskade meriter.", de: "Füge Aufgaben, Anforderungen und gewünschte Qualifikationen ein.", pt: "Cole as responsabilidades, os requisitos e as qualificações desejadas.", fr: "Collez les missions, les exigences et les qualifications souhaitées." }
 });

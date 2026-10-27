@@ -218,5 +218,6 @@ I18N.phrases({
   "de": "Nur der Text, den du der KI gibst, verlässt dein Gerät: Er wird über den kostenlosen KI-Dienst von MigaBuilder an Googles Gemini-Modell gesendet, oder über deinen eigenen Gemini-Schlüssel, wenn du einen hinzufügst. Bearbeitung, Vorschau und Downloads passieren alle in deinem Browser.",
   "pt": "Só o texto que você dá à IA sai do seu dispositivo: ele é enviado ao modelo Gemini do Google pelo serviço gratuito de IA do MigaBuilder, ou pela sua própria chave do Gemini, se você adicionar uma. Edição, prévias e downloads acontecem todos no seu navegador.",
   "fr": "Seul le texte que vous donnez à l'IA quitte votre appareil : il est envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder, ou via votre propre clé Gemini si vous en ajoutez une. L'édition, les aperçus et les téléchargements se font tous dans votre navigateur."
- }
+ },
+  "STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN": { es: "JUEGO DE INICIO — SKY DASH · AJÚSTALO, CAMBIA LAS IMÁGENES O DESCRIBE EL TUYO", ar: "لعبة البداية — SKY DASH · اضبطها أو بدّل الصور أو صِف لعبتك", zh: "入门游戏——SKY DASH · 调整它、换图片，或描述你自己的游戏", sw: "MCHEZO WA KUANZIA — SKY DASH · URUKEBISHE, BADILISHA PICHA, AU ELEZA WAKO", sv: "STARTSPEL — SKY DASH · JUSTERA DET, BYT BILDERNA ELLER BESKRIV DITT EGET", de: "STARTSPIEL — SKY DASH · ANPASSEN, BILDER TAUSCHEN ODER EIGENES BESCHREIBEN", pt: "JOGO INICIAL — SKY DASH · AJUSTE, TROQUE AS IMAGENS OU DESCREVA O SEU", fr: "JEU DE DÉPART — SKY DASH · RÉGLEZ-LE, CHANGEZ LES IMAGES OU DÉCRIVEZ LE VÔTRE" }
 });
