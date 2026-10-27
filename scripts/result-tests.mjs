@@ -997,7 +997,9 @@ test('tune-forge: the demo string is tuned to E2 and the sound level log downloa
   const at = rows.indexOf('Time,Seconds,Leq 1 s (dB),Max 1 s (dB),Peak (dBFS)');
   const data = rows.slice(at + 1).map(r => r.split(','));
   expect(at > 0 && data.length >= 3, 'the CSV has no measurements');
-  expect(data.every(r => r.length === 5 && +r[2] > 40 && +r[2] < 130 && +r[4] <= 0), 'a measurement row is wrong: ' + rows.slice(at + 1, at + 4).join(' | '));
+  // the first second can still be near-silent while the demo starts; levels never go below the 20 dB floor
+  expect(data.every(r => r.length === 5 && +r[2] >= 20 && +r[2] < 130 && +r[4] <= 0), 'a measurement row is wrong: ' + rows.slice(at + 1, at + 4).join(' | '));
+  expect(data.some(r => +r[2] > 40), 'no measurement picked up the demo sound: ' + rows.slice(at + 1, at + 4).join(' | '));
 });
 
 // ---------- runner ----------
