@@ -98,6 +98,16 @@
     translate: 'clip grammar', chat: 'bot meet', letter: 'writing document', word: 'document writing', gif: 'media convert', compress: 'pdf media' };
   const HISTORY = 'migabuilder-tool-history';
   const read = k => { try { return JSON.parse(localStorage.getItem(k) || '[]'); } catch (e) { return []; } };
+  // Translations of the palette's own text and the tool descriptions (built by scripts/build-palette-i18n.mjs),
+  // loaded the first time the palette or the "what next" card opens on a page shown in another language.
+  const tr = (s, v) => { let o = window.I18N && I18N.tr ? I18N.tr(s) : s; if (v) o = o.replace(/\{(\w+)\}/g, (m, k) => v[k] != null ? v[k] : m); return o; };
+  let i18nState = 0;
+  function loadI18n(done) {
+    const lang = window.I18N && I18N.getLang ? I18N.getLang() : 'en';
+    if (lang === 'en' || i18nState === 2 || !window.I18N) return done && done();
+    if (i18nState === 0) { i18nState = 1; const sc = document.createElement('script'); sc.src = '/i18n/palette.js'; sc.onload = sc.onerror = () => { i18nState = 2; document.dispatchEvent(new CustomEvent('miga-palette-i18n')); }; document.head.appendChild(sc); }
+    if (done) document.addEventListener('miga-palette-i18n', () => done(), { once: true });
+  }
   const here = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   // Remember this visit so the palette (and the home page's "Recently used") can offer it first.
   if (TOOLS.some(t => t[0] === here)) {
@@ -112,21 +122,21 @@
   async function install() {
     if (installEvent) { installEvent.prompt(); try { await installEvent.userChoice; } catch (e) {} installEvent = null; document.dispatchEvent(new CustomEvent('miga-installable')); return; }
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    alert(standalone() ? 'MigaBuilder is already installed and running as an app.' : ios
+    alert(tr(standalone() ? 'MigaBuilder is already installed and running as an app.' : ios
       ? 'On iPhone or iPad: tap the Share button in Safari, then “Add to Home Screen”. MigaBuilder then opens like an app and the tools you have used work offline.'
-      : 'Use your browser menu: “Install MigaBuilder…” or “Add to Home screen”. (In Chrome and Edge it is also the small install icon at the right of the address bar.) Tools you have opened once then work offline.');
+      : 'Use your browser menu: “Install MigaBuilder…” or “Add to Home screen”. (In Chrome and Edge it is also the small install icon at the right of the address bar.) Tools you have opened once then work offline.'));
   }
   window.MigaInstall = { install, available: () => !!installEvent, installed: standalone };
   async function saveOffline() {
     const sw = 'serviceWorker' in navigator && await Promise.race([navigator.serviceWorker.ready, new Promise(r => setTimeout(() => r(null), 3000))]);
-    if (!sw || !sw.active) { alert('Offline saving needs a browser with service workers, on https://migabuilder.com.'); return; }
+    if (!sw || !sw.active) { alert(tr('Offline saving needs a browser with service workers, on https://migabuilder.com.')); return; }
     const toast = document.createElement('div');
     toast.style.cssText = 'position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:10001;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.5);border-radius:10px;padding:10px 14px;font:14px system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35)';
-    toast.textContent = '⏳ Saving ' + TOOLS.length + ' tools for offline use…';
+    toast.textContent = tr('⏳ Saving {n} tools for offline use…', { n: TOOLS.length });
     document.body.appendChild(toast);
     const ch = new MessageChannel();
     ch.port1.onmessage = e => {
-      toast.textContent = '✓ ' + e.data.saved + ' of ' + e.data.total + ' tools saved. They now open without internet (AI features and big add-ons still need one online visit).';
+      toast.textContent = tr('✓ {saved} of {total} tools saved. They now open without internet (AI features and big add-ons still need one online visit).', { saved: e.data.saved, total: e.data.total });
       setTimeout(() => toast.remove(), 7000);
     };
     sw.active.postMessage({ type: 'precache', urls: ['/', '/index.html'].concat(TOOLS.map(t => '/' + t[0])) }, [ch.port2]);
@@ -159,7 +169,7 @@
   }
   function score(item, words) {
     if (!words.length) return 1;
-    const name = item.name.toLowerCase(), hay = (item.name + ' ' + item.desc + ' ' + (item.words || '')).toLowerCase();
+    const name = item.name.toLowerCase(), hay = (item.name + ' ' + item.desc + ' ' + tr(item.name) + ' ' + tr(item.desc) + ' ' + (item.words || '')).toLowerCase();
     let total = 0;
     for (const w of words) {
       let s = 0;
@@ -199,7 +209,7 @@
         items.push({ it, li }); list.appendChild(li);
       });
     });
-    if (!items.length) list.innerHTML = '<li class="mp-empty" role="presentation">No tool matches “' + q.replace(/[<>&]/g, '') + '”. Try “pdf”, “video”, “cv” or “game”.</li>';
+    if (!items.length) list.innerHTML = '<li class="mp-empty" role="presentation">' + tr('No tool matches “{q}”. Try “pdf”, “video”, “cv” or “game”.', { q: q.replace(/[<>&]/g, '') }) + '</li>';
     sel = 0; mark();
   }
   function mark() {
@@ -231,6 +241,7 @@
       else if (e.key === 'Tab') e.preventDefault();
     });
     build(); input.focus();
+    loadI18n(() => { if (back) build(); });
   }
   function close() {
     if (!back) return;
@@ -343,6 +354,7 @@
       picks.map(t => '<a href="' + t[0] + '" data-next="' + t[0] + '"><span>' + e(t[1]) + '</span><span style="width:auto;font-size:inherit;text-align:left"><b>' + e(t[2]) + '</b><small>' + e(t[3]) + '</small></span></a>').join('');
     card.querySelector('.mn-x').onclick = () => card.remove();
     document.body.appendChild(card);
+    loadI18n();
     let idle = setTimeout(() => card.remove(), 25000);
     card.addEventListener('mouseenter', () => clearTimeout(idle));
   }

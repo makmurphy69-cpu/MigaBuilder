@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="i18n.js"></script>
+<script src="i18n/tune-forge.js"></script>
 <style>
 .hidden{display:none!important}
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
@@ -244,7 +246,7 @@ table.pick td.c1{background:#e9f6ee}table.pick td.c2{background:#fff7dd}table.pi
 
   <!-- ============ TONES ============ -->
   <div id="pane-tones" role="tabpanel" aria-labelledby="tab-tones" class="hidden">
-    <p class="cap" style="font-size:13.5px">Play a reference note to tune by ear, or hold a steady <b>drone</b> to practise scales and intonation against it.</p>
+    <p class="cap" style="font-size:13.5px" data-i18n-block>Play a reference note to tune by ear, or hold a steady <b>drone</b> to practise scales and intonation against it.</p>
     <div class="tonegrid" id="toneGrid"></div>
     <div class="row">
       <label for="toneOct">Octave <select id="toneOct"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
@@ -260,10 +262,10 @@ table.pick td.c1{background:#e9f6ee}table.pick td.c2{background:#fff7dd}table.pi
 <section class="panel" id="guideTune">
   <h2>How to tune your instrument</h2>
   <div class="how">
-    <details open><summary>🎸 Guitar, bass and ukulele</summary><ol><li>Pick your instrument and tuning, then press Start microphone.</li><li>Pluck one string firmly and let it ring. The tuner shows which string it hears.</li><li>Needle on the left (flat): tighten the string. On the right (sharp): loosen it.</li><li>Stop when the needle is in the green middle and it says <b>In tune</b>. Then do the next string.</li><li>Go through all strings twice: tuning one string slightly changes the tension on the others.</li></ol></details>
-    <details open><summary>⬆️ Always tune <i>up</i> to the note</summary><p>If a string is sharp, go a little below the note and come back up. That way the string settles against the peg and stays in tune longer. New strings stretch for a few days, so they need tuning often.</p></details>
+    <details open><summary>🎸 Guitar, bass and ukulele</summary><ol><li>Pick your instrument and tuning, then press Start microphone.</li><li>Pluck one string firmly and let it ring. The tuner shows which string it hears.</li><li>Needle on the left (flat): tighten the string. On the right (sharp): loosen it.</li><li data-i18n-block>Stop when the needle is in the green middle and it says <b>In tune</b>. Then do the next string.</li><li>Go through all strings twice: tuning one string slightly changes the tension on the others.</li></ol></details>
+    <details open><summary data-i18n-block>⬆️ Always tune <i>up</i> to the note</summary><p>If a string is sharp, go a little below the note and come back up. That way the string settles against the peg and stays in tune longer. New strings stretch for a few days, so they need tuning often.</p></details>
     <details><summary>🎻 Violin, viola, cello and double bass</summary><p>Tune the A string first, usually with the peg, then the others with the fine tuners. Bow gently in the middle of the string — a steady, quiet sound gives the steadiest reading. Many orchestras tune to A = 442 Hz; set it above.</p></details>
-    <details><summary>🎺 Wind instruments and voice</summary><p>Choose <b>Chromatic</b>. Play a long, steady note at a normal volume. Trumpet, clarinet and tenor sax players can switch the note names to B♭, alto sax to E♭ and horn to F, so the tuner shows the note on your sheet music. Warm up first: a cold instrument plays flat.</p></details>
+    <details><summary>🎺 Wind instruments and voice</summary><p data-i18n-block>Choose <b>Chromatic</b>. Play a long, steady note at a normal volume. Trumpet, clarinet and tenor sax players can switch the note names to B♭, alto sax to E♭ and horn to F, so the tuner shows the note on your sheet music. Warm up first: a cold instrument plays flat.</p></details>
     <details><summary>🎚️ Alternate tunings</summary><p>Drop D lowers the lowest guitar string to D for heavy riffs. DADGAD and the open tunings make a chord when you strum the open strings — great for slide and folk. “Half step down” matches many rock records. The tuner’s target notes change with the tuning you pick.</p></details>
     <details><summary>🔢 What are cents?</summary><p>A cent is a hundredth of a semitone (the step between two piano keys). Most people cannot hear a difference below about 5 cents, which is why the green zone is ±5 cents. A4 = 440 Hz is the international standard; baroque groups often use 415 Hz.</p></details>
   </div>
@@ -271,7 +273,7 @@ table.pick td.c1{background:#e9f6ee}table.pick td.c2{background:#fff7dd}table.pi
 
 <section class="panel" id="guideLoud">
   <h2>How loud is too loud?</h2>
-  <p>Hearing damage depends on <b>how loud</b> and <b>how long</b>. Following the US NIOSH recommendation, 85 dB(A) is safe for 8 hours a day, and every 3 dB more halves the safe time. Damage is permanent and builds up silently — ringing ears or muffled hearing after playing are warning signs.</p>
+  <p data-i18n-block>Hearing damage depends on <b>how loud</b> and <b>how long</b>. Following the US NIOSH recommendation, 85 dB(A) is safe for 8 hours a day, and every 3 dB more halves the safe time. Damage is permanent and builds up silently — ringing ears or muffled hearing after playing are warning signs.</p>
   <div class="table-wrap"><table class="pick">
     <tr><th>Level</th><th>Sounds like</th><th>Safe time per day</th></tr>
     <tr><td class="c1">60 dB</td><td>Normal conversation, a quiet acoustic guitar</td><td>No limit</td></tr>
@@ -286,9 +288,9 @@ table.pick td.c1{background:#e9f6ee}table.pick td.c2{background:#fff7dd}table.pi
     <tr><td class="c4">110 dB+</td><td>The front of a rock concert, a drummer’s cymbals</td><td>About 1 minute</td></tr>
   </table></div>
   <ul>
-    <li><b>Musicians’ earplugs</b> lower every pitch evenly (by 9, 15 or 25 dB), so music still sounds clear. Foam plugs work too but make it sound muffled.</li>
-    <li><b>Take breaks</b> in a quiet place, turn amps down and point them at you rather than at your ears from behind.</li>
-    <li><b>The noise dose</b> on this page adds up your exposure like NIOSH does: 100% is a full safe day.</li>
+    <li data-i18n-block><b>Musicians’ earplugs</b> lower every pitch evenly (by 9, 15 or 25 dB), so music still sounds clear. Foam plugs work too but make it sound muffled.</li>
+    <li data-i18n-block><b>Take breaks</b> in a quiet place, turn amps down and point them at you rather than at your ears from behind.</li>
+    <li data-i18n-block><b>The noise dose</b> on this page adds up your exposure like NIOSH does: 100% is a full safe day.</li>
     <li>This page helps you notice loud sound; it is not a certified meter or medical advice. If you have ringing or hearing loss, see an audiologist.</li>
   </ul>
 </section>
@@ -326,6 +328,7 @@ table.pick td.c1{background:#e9f6ee}table.pick td.c2{background:#fff7dd}table.pi
 (function(){'use strict';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tr=(s,v)=>{let o=window.I18N&&I18N.tr?I18N.tr(s):s;if(v)o=o.replace(/\{(\w+)\}/g,(m,k)=>v[k]!=null?v[k]:m);return o};
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const S=Object.assign({inst:'guitar',tuning:0,a4:440,names:'sharp',transp:0,bpm:100,sig:'4/4',subdiv:'1',snd:'click',mVol:.8,flash:true,wt:'A',resp:'F',alarm:85,cal:105,toneOct:3,toneWave:'pluck',toneVol:.5,tab:'tuner'},store.get('tuneForge',{}));
 const save=()=>store.set('tuneForge',S);
@@ -425,9 +428,9 @@ async function startMic(){
     const dev=$('micSel').value;
     const s=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false,deviceId:dev?{exact:dev}:undefined}});
     stopMic(true);micStream=s;micSrc=ctx.createMediaStreamSource(s);micSrc.connect(inputBus);
-    $('micBtn').textContent='■ Stop microphone';inStatus('Listening… '+(s.getAudioTracks()[0].label||'microphone'));
+    $('micBtn').textContent='■ Stop microphone';inStatus(tr('Listening… {mic}',{mic:s.getAudioTracks()[0].label||tr('microphone')}));
     resetLevel();refreshWake();listDevices();
-  }catch(e){inStatus(e&&e.name==='NotAllowedError'?'The microphone is blocked. Allow it from the icon in the address bar, or try the demo sound.':'No microphone found ('+(e&&e.message||e)+'). Try the demo sound.',true)}
+  }catch(e){inStatus(e&&e.name==='NotAllowedError'?'The microphone is blocked. Allow it from the icon in the address bar, or try the demo sound.':tr('No microphone found ({err}). Try the demo sound.',{err:e&&e.message||e}),true)}
 }
 function stopMic(quiet){if(micSrc)try{micSrc.disconnect()}catch(e){}if(micStream)micStream.getTracks().forEach(t=>t.stop());micStream=micSrc=null;$('micBtn').textContent='🎤 Start microphone';if(!quiet){inStatus('Microphone off.');refreshWake()}}
 async function listDevices(){try{const d=(await navigator.mediaDevices.enumerateDevices()).filter(x=>x.kind==='audioinput'&&x.deviceId);const sel=$('micSel'),cur=micStream&&micStream.getAudioTracks()[0].getSettings().deviceId;
@@ -472,7 +475,7 @@ drawGaugeTicks();
 function fillTunings(){const sel=$('tuning');sel.innerHTML='';INST[S.inst].tunings.forEach((t,i)=>sel.add(new Option(t.name,i)));if(S.tuning>=INST[S.inst].tunings.length)S.tuning=0;sel.value=S.tuning;
   $('tuning').closest('label').classList.toggle('hidden',S.inst==='chromatic');$('transpWrap').classList.toggle('hidden',S.inst!=='chromatic');locked=null;drawStrings()}
 function drawStrings(){const t=curT(),n=t.notes.length;
-  $('strings').innerHTML=t.notes.map((m,i)=>'<button type="button" data-s="'+i+'" title="'+esc(nm(m)+oct(m))+' · '+freqOf(m).toFixed(2)+' Hz">'+esc(nm(m))+'<sub style="font-size:11px">'+oct(m)+'</sub><small>string '+(n-i)+'</small></button>').join('');
+  $('strings').innerHTML=t.notes.map((m,i)=>'<button type="button" data-s="'+i+'" title="'+esc(nm(m)+oct(m))+' · '+freqOf(m).toFixed(2)+' Hz">'+esc(nm(m))+'<sub style="font-size:11px">'+oct(m)+'</sub><small>'+esc(tr('string {n}',{n:n-i}))+'</small></button>').join('');
   $('strings').querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.s;
     if(locked===i){locked=null;$('autoStr').checked=true}else{locked=i;$('autoStr').checked=false}
     if($('refTone').checked)playRef(t.notes[i]);markStrings(curStr,curOk)});
@@ -530,25 +533,25 @@ function tunerTick(){
 }
 let state={};
 function show(f,target,cents,si,heardM){
-  const tr=S.inst==='chromatic'?+S.transp:0,m=target+tr;
+  const shift=S.inst==='chromatic'?+S.transp:0,m=target+shift;
   $('note').innerHTML=esc(nm(m))+'<sub>'+oct(m)+'</sub>';
   const c=Math.round(cents),ac=Math.abs(cents);
-  $('cents').textContent=(c>0?'+':'')+c+' cents · '+f.toFixed(1)+' Hz';
+  $('cents').textContent=tr('{c} cents · {hz} Hz',{c:(c>0?'+':'')+c,hz:f.toFixed(1)});
   const deg=Math.max(-62,Math.min(62,cents/50*60));$('needle').style.transform='rotate('+deg.toFixed(1)+'deg)';
   const ok=ac<5,near=ac<15;$('needle').setAttribute('stroke',ok?'#2f7d52':near?'#a87a12':'#b2412c');
   const h=$('hint');h.className='hint '+(ok?'ok':near?'near':'off');
   h.textContent=ok?'✓ In tune':ac>100?(cents<0?'⬆ Much too low — tighten':'⬇ Much too high — loosen'):cents<0?'⬆ Too low — tune up':'⬇ Too high — tune down';
-  $('heard').textContent=si>=0?'Heard '+nm(heardM)+oct(heardM)+' · target '+nm(target)+oct(target)+' ('+freqOf(target).toFixed(2)+' Hz), string '+(curT().notes.length-si)+(locked!=null?' (locked)':''):'Target '+freqOf(target).toFixed(2)+' Hz at A4 = '+S.a4+' Hz';
+  $('heard').textContent=si>=0?tr(locked!=null?'Heard {heard} · target {target} ({hz} Hz), string {n} (locked)':'Heard {heard} · target {target} ({hz} Hz), string {n}',{heard:nm(heardM)+oct(heardM),target:nm(target)+oct(target),hz:freqOf(target).toFixed(2),n:curT().notes.length-si}):tr('Target {hz} Hz at A4 = {a4} Hz',{hz:freqOf(target).toFixed(2),a4:S.a4});
   markStrings(si,ok);
   state={freq:+f.toFixed(2),note:nm(target)+oct(target),cents:+cents.toFixed(1),string:si,inTune:ok};
 }
 function drawTrace(){
   const cv=$('tHist'),g=cv.getContext('2d'),W=cv.width,H=cv.height,mid=H/2,sc=H/2/50*.92;
-  g.fillStyle='#0E2A47';g.fillRect(0,0,W,H);g.fillStyle='rgba(124,199,155,.25)';g.fillRect(0,mid-5*sc,W,10*sc);
+  g.direction='ltr';g.fillStyle='#0E2A47';g.fillRect(0,0,W,H);g.fillStyle='rgba(124,199,155,.25)';g.fillRect(0,mid-5*sc,W,10*sc);
   g.strokeStyle='rgba(237,234,224,.35)';g.setLineDash([6,6]);g.beginPath();g.moveTo(0,mid);g.lineTo(W,mid);g.stroke();g.setLineDash([]);
   g.strokeStyle='#E2A63B';g.lineWidth=3;g.beginPath();let pen=false;const dx=W/220;
   tTrace.forEach((v,i)=>{const x=W-(tTrace.length-i)*dx;if(v==null){pen=false;return}const y=mid-v*sc;pen?g.lineTo(x,y):g.moveTo(x,y);pen=true});g.stroke();
-  g.fillStyle='rgba(237,234,224,.7)';g.font='20px IBM Plex Sans';g.fillText('sharp',8,22);g.fillText('flat',8,H-8);
+  g.fillStyle='rgba(237,234,224,.7)';g.font='20px IBM Plex Sans';g.fillText(tr('sharp'),8,22);g.fillText(tr('flat'),8,H-8);
 }
 
 /* ================= sound level ================= */
@@ -579,18 +582,18 @@ function levelTick(){
   $('meterCover').style.width=(100-pos(L)).toFixed(1)+'%';
   if(L>lv.holdV||now-lv.holdT>2000){lv.holdV=L;lv.holdT=now}$('meterHold').style.left=pos(lv.holdV).toFixed(1)+'%';
   $('sAvg').textContent=Math.round(leq);$('sMax').textContent=lv.max>-1e8?Math.round(lv.max):'--';$('sMin').textContent=lv.min<1e8?Math.round(lv.min):'--';
-  $('sSafe').textContent=fmtDur(safeSec(L));$('sDose').textContent=(lv.dose<10?lv.dose.toFixed(1):Math.round(lv.dose))+'%';
+  $('sSafe').textContent=tr(fmtDur(safeSec(L)));$('sDose').textContent=(lv.dose<10?lv.dose.toFixed(1):Math.round(lv.dose))+'%';
   const el=Math.floor((now-lv.t0)/1000);$('sTime').textContent=Math.floor(el/60)+':'+String(el%60).padStart(2,'0');
   // warning
   const al=+S.alarm,w=$('lvlWarn');
-  if(L>=al||lv.dose>=100){lv.warnT=now;w.classList.remove('hidden');w.textContent=lv.dose>=100?'⚠️ You have reached a full day’s safe noise dose. Rest your ears in a quiet place.':'⚠️ Too loud: '+Math.round(L)+' dB is above your '+al+' dB limit. '+(safeSec(L)<24*3600?'At this level your ears are safe for only about '+fmtDur(safeSec(L))+' a day — turn it down or wear earplugs.':'Turn it down a little if you can.');
+  if(L>=al||lv.dose>=100){lv.warnT=now;w.classList.remove('hidden');w.textContent=lv.dose>=100?tr('⚠️ You have reached a full day’s safe noise dose. Rest your ears in a quiet place.'):tr(safeSec(L)<24*3600?'⚠️ Too loud: {db} dB is above your {limit} dB limit. At this level your ears are safe for only about {time} a day — turn it down or wear earplugs.':'⚠️ Too loud: {db} dB is above your {limit} dB limit. Turn it down a little if you can.',{db:Math.round(L),limit:al,time:tr(fmtDur(safeSec(L)))});
     if($('alarmBeep').checked&&now-lv.warnBeep>3000){lv.warnBeep=now;const o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=1760;g.gain.setValueAtTime(.12,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.25);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.3)}}
   else if(now-(lv.warnT||0)>5000)w.classList.add('hidden');
   // recording input (sample peak in dBFS)
   const pdb=20*Math.log10(Math.max(pk,1e-6));if(pdb>lv.inHold||now-lv.inHoldT>1500){lv.inHold=pdb;lv.inHoldT=now}
   $('inCover').style.width=(100-Math.max(0,Math.min(100,(lv.inHold+60)/60*100))).toFixed(1)+'%';
   if(pk>=.99)lv.clipT=now;$('clipLamp').classList.toggle('on',now-lv.clipT<2000);
-  $('inHint').textContent=now-lv.clipT<2000?'🔴 Clipping! Turn the input gain down or move the microphone back — this distorts a recording.':lv.inHold>-6?'🟠 Hot: peaks near '+Math.round(lv.inHold)+' dBFS. Leave a little more headroom.':lv.inHold>-30?'🟢 Good recording level: peaks around '+Math.round(lv.inHold)+' dBFS.':'⚪ Quiet: peaks around '+Math.round(lv.inHold)+' dBFS. Move closer or raise the input gain for recording.';
+  {const v={db:Math.round(lv.inHold)};$('inHint').textContent=now-lv.clipT<2000?tr('🔴 Clipping! Turn the input gain down or move the microphone back — this distorts a recording.'):lv.inHold>-6?tr('🟠 Hot: peaks near {db} dBFS. Leave a little more headroom.',v):lv.inHold>-30?tr('🟢 Good recording level: peaks around {db} dBFS.',v):tr('⚪ Quiet: peaks around {db} dBFS. Move closer or raise the input gain for recording.',v)}
   // history and per-second log
   lTrace.push(L);if(lTrace.length>1200)lTrace.shift();
   sec.e+=ms*dt;sec.n+=dt;sec.max=Math.max(sec.max,Li);sec.pk=Math.max(sec.pk,pdb);
@@ -601,7 +604,7 @@ function levelTick(){
 let lvState={};
 function drawLevel(){
   const cv=$('lHist'),g=cv.getContext('2d'),W=cv.width,H=cv.height,y=v=>H-(Math.max(30,Math.min(130,v))-30)/100*H;
-  g.fillStyle='#0E2A47';g.fillRect(0,0,W,H);g.font='18px IBM Plex Mono';
+  g.direction='ltr';g.fillStyle='#0E2A47';g.fillRect(0,0,W,H);g.font='18px IBM Plex Mono';
   for(let v=40;v<=120;v+=20){g.strokeStyle='rgba(237,234,224,.12)';g.beginPath();g.moveTo(0,y(v));g.lineTo(W,y(v));g.stroke();g.fillStyle='rgba(237,234,224,.55)';g.fillText(v,6,y(v)-4)}
   g.strokeStyle='#D8604A';g.setLineDash([10,8]);g.lineWidth=2;g.beginPath();g.moveTo(0,y(+S.alarm));g.lineTo(W,y(+S.alarm));g.stroke();g.setLineDash([]);
   const dx=W/1200;g.beginPath();lTrace.forEach((v,i)=>{const x=W-(lTrace.length-i)*dx;i?g.lineTo(x,y(v)):g.moveTo(x,y(v))});g.lineTo(W,H);g.lineTo(W-lTrace.length*dx,H);g.closePath();
@@ -611,11 +614,12 @@ function drawScale(){$('scale').innerHTML=[30,50,70,85,100,115,130].map(v=>'<spa
 $('lvlReset').onclick=resetLevel;
 $('lvlCsv').onclick=()=>{
   const leq=lv.tSum?Math.max(20,10*Math.log10(Math.max(lv.eSum/lv.tSum,1e-12))+(+S.cal)):NaN;
-  const head=[['Tune Forge sound level log'],['Weighting','dB('+S.wt+')'],['Calibration offset (dB)',S.cal],['Measured for (s)',Math.round(lv.tSum)],['Average Leq',isFinite(leq)?leq.toFixed(1):''],['Loudest',lv.max>-1e8?lv.max.toFixed(1):''],['Quietest',lv.min<1e8?lv.min.toFixed(1):''],['Noise dose (NIOSH %)',lv.dose.toFixed(2)],[],['Time','Seconds','Leq 1 s (dB)','Max 1 s (dB)','Peak (dBFS)']];
+  const q=x=>/[",]/.test(x)?'"'+String(x).replace(/"/g,'""')+'"':x;
+  const head=[[tr('Tune Forge sound level log')],[tr('Weighting'),'dB('+S.wt+')'],[tr('Calibration offset (dB)'),S.cal],[tr('Measured for (s)'),Math.round(lv.tSum)],[tr('Average Leq'),isFinite(leq)?leq.toFixed(1):''],[tr('Loudest'),lv.max>-1e8?lv.max.toFixed(1):''],[tr('Quietest'),lv.min<1e8?lv.min.toFixed(1):''],[tr('Noise dose (NIOSH %)'),lv.dose.toFixed(2)],[],[tr('Time'),tr('Seconds'),tr('Leq 1 s (dB)'),tr('Max 1 s (dB)'),tr('Peak (dBFS)')]].map(r=>r.map(q));
   const csv=head.concat(log).map(r=>r.join(',')).join('\r\n')+'\r\n';
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='sound-level-log.csv';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
 };
-$('calBtn').onclick=()=>{const real=+$('calReal').value;if(!real||!eF){alert('Start the microphone (or the demo) and type the real meter’s reading first.');return}
+$('calBtn').onclick=()=>{const real=+$('calReal').value;if(!real||!eF){alert(tr('Start the microphone (or the demo) and type the real meter’s reading first.'));return}
   const cur=10*Math.log10(Math.max(eF,1e-12));S.cal=Math.round((real-cur)*2)/2;$('calOff').value=S.cal;save();resetLevel()};
 $('calOff').onchange=()=>{S.cal=+$('calOff').value||105;save()};
 $('calReset').onclick=()=>{S.cal=105;$('calOff').value=105;save()};
@@ -625,7 +629,7 @@ const SIGS={'1/4':[1,[0]],'2/4':[2,[0]],'3/4':[3,[0]],'4/4':[4,[0]],'5/4':[5,[0,
 for(const k in SIGS)$('sig').add(new Option(k,k));
 const metro={on:false,accents:[],beat:0,sub:0,bar:0,next:0,queue:[],t0:0,worker:null};
 function setSig(){const s=SIGS[S.sig]||SIGS['4/4'];metro.accents=Array.from({length:s[0]},(_,i)=>i===0?3:s[1].includes(i)?2:1);drawBeats()}
-function drawBeats(){$('beats').innerHTML=metro.accents.map((lv,i)=>'<button type="button" data-b="'+i+'" data-lv="'+lv+'" aria-label="Beat '+(i+1)+'">'+(i+1)+'</button>').join('');
+function drawBeats(){$('beats').innerHTML=metro.accents.map((lv,i)=>'<button type="button" data-b="'+i+'" data-lv="'+lv+'" aria-label="'+esc(tr('Beat {n}',{n:i+1}))+'">'+(i+1)+'</button>').join('');
   $('beats').querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=+b.dataset.b;metro.accents[i]=[2,3,0,1][metro.accents[i]];b.dataset.lv=metro.accents[i]})}
 const TEMPI=[[40,'Grave — very slow'],[60,'Largo — broad'],[66,'Larghetto — fairly slow'],[76,'Adagio — slow'],[108,'Andante — walking pace'],[120,'Moderato — moderate'],[156,'Allegro — fast'],[176,'Vivace — lively'],[200,'Presto — very fast'],[999,'Prestissimo — as fast as possible']];
 function setBpm(v,keep){S.bpm=Math.max(20,Math.min(300,Math.round(v)));$('bpm').textContent=S.bpm;$('bpmRange').value=S.bpm;$('tname').textContent=TEMPI.find(t=>S.bpm<t[0])[1];if(!keep)save()}
@@ -674,14 +678,14 @@ function metroDraw(){
   if(!metro.on)return;const now=ctx.currentTime;let cur=null;
   while(metro.queue.length&&metro.queue[0].t<=now)cur=metro.queue.shift();
   if(cur){lastBeatShown=cur;const bs=$('beats').querySelectorAll('button');bs.forEach((b,i)=>b.classList.toggle('now',i===cur.beat&&$('flash').checked));$('beats').classList.toggle('gap',cur.gap);
-    const el=Math.floor(now-metro.t0);$('mElapsed').textContent=Math.floor(el/60)+':'+String(el%60).padStart(2,'0')+' · bar '+(cur.bar+1)+(cur.gap?' · silent':'');
+    const el=Math.floor(now-metro.t0);$('mElapsed').textContent=tr(cur.gap?'{time} · bar {bar} · silent':'{time} · bar {bar}',{time:Math.floor(el/60)+':'+String(el%60).padStart(2,'0'),bar:cur.bar+1});
     const lim=+$('mTimer').value;if(lim&&el>=lim*60){stopMetro();$('mstat').textContent='⏱ Practice time is up — well done!';return}}
   else if(lastBeatShown&&now-lastBeatShown.t>Math.min(.15,30/S.bpm))$('beats').querySelectorAll('.now').forEach(b=>b.classList.remove('now'));
   requestAnimationFrame(metroDraw);
 }
 let taps=[];
 $('tapBtn').onclick=()=>{const t=performance.now();if(taps.length&&t-taps[taps.length-1]>2000)taps=[];taps.push(t);if(taps.length>6)taps.shift();
-  if(taps.length>=2){const iv=(taps[taps.length-1]-taps[0])/(taps.length-1);setBpm(60000/iv)}$('mstat').textContent='Tapped '+taps.length+(taps.length<2?' — keep tapping':' times · '+S.bpm+' BPM')};
+  if(taps.length>=2){const iv=(taps[taps.length-1]-taps[0])/(taps.length-1);setBpm(60000/iv)}$('mstat').textContent=taps.length<2?tr('Tapped once — keep tapping'):tr('Tapped {n} times · {bpm} BPM',{n:taps.length,bpm:S.bpm})};
 document.querySelectorAll('[data-nudge]').forEach(b=>b.onclick=()=>setBpm(S.bpm+(+b.dataset.nudge)));
 $('bpmRange').oninput=()=>setBpm(+$('bpmRange').value);
 document.addEventListener('keydown',e=>{if($('pane-metro').classList.contains('hidden')||/INPUT|SELECT|TEXTAREA|BUTTON/.test((e.target||{}).tagName||''))return;
@@ -728,6 +732,7 @@ $('wt').value=S.wt;$('resp').value=S.resp;$('alarm').value=S.alarm;$('calOff').v
 fillTunings();setSig();setBpm(S.bpm,true);drawTones();drawScale();drawTrace();drawLevel();
 showTab((location.hash||'').slice(1)||S.tab);
 
+if(window.I18N&&I18N.onChange)I18N.onChange(()=>{drawStrings();setSig();drawTrace();drawLevel()});
 setInterval(()=>{if(!ctx)return;if(!$('pane-tuner').classList.contains('hidden'))tunerTick();levelTick()},50);
 window.__tuneForge={tuner:()=>state,level:()=>lvState,metro:()=>({on:metro.on,bpm:S.bpm,beats:metro.accents.slice(),bar:metro.bar}),startDemo,stopDemo};
 })();

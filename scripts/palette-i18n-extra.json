@@ -1,0 +1,442 @@
+{
+ "Search tools and actions — try “web”, “pdf”, “game”…": {
+  "es": "Busca herramientas y acciones: prueba «web», «pdf», «juego»…",
+  "ar": "ابحث عن الأدوات والإجراءات — جرّب «ويب» أو «pdf» أو «لعبة»…",
+  "zh": "搜索工具和操作——试试“网站”“pdf”“游戏”…",
+  "sw": "Tafuta zana na vitendo — jaribu “tovuti”, “pdf”, “mchezo”…",
+  "sv": "Sök verktyg och åtgärder — prova ”webb”, ”pdf”, ”spel”…",
+  "de": "Werkzeuge und Aktionen suchen — probier „Web“, „PDF“, „Spiel“…",
+  "pt": "Busque ferramentas e ações — experimente “site”, “pdf”, “jogo”…",
+  "fr": "Cherchez des outils et actions — essayez « web », « pdf », « jeu »…"
+ },
+ "Jump to a tool": {
+  "es": "Ir a una herramienta",
+  "ar": "انتقل إلى أداة",
+  "zh": "跳转到工具",
+  "sw": "Nenda kwenye zana",
+  "sv": "Gå till ett verktyg",
+  "de": "Zu einem Werkzeug springen",
+  "pt": "Ir para uma ferramenta",
+  "fr": "Aller à un outil"
+ },
+ "Recent": {
+  "es": "Recientes",
+  "ar": "الأخيرة",
+  "zh": "最近使用",
+  "sw": "Za hivi karibuni",
+  "sv": "Senaste",
+  "de": "Zuletzt",
+  "pt": "Recentes",
+  "fr": "Récents"
+ },
+ "Actions": {
+  "es": "Acciones",
+  "ar": "الإجراءات",
+  "zh": "操作",
+  "sw": "Vitendo",
+  "sv": "Åtgärder",
+  "de": "Aktionen",
+  "pt": "Ações",
+  "fr": "Actions"
+ },
+ "All tools": {
+  "es": "Todas las herramientas",
+  "ar": "كل الأدوات",
+  "zh": "全部工具",
+  "sw": "Zana zote",
+  "sv": "Alla verktyg",
+  "de": "Alle Werkzeuge",
+  "pt": "Todas as ferramentas",
+  "fr": "Tous les outils"
+ },
+ "Results": {
+  "es": "Resultados",
+  "ar": "النتائج",
+  "zh": "结果",
+  "sw": "Matokeo",
+  "sv": "Resultat",
+  "de": "Ergebnisse",
+  "pt": "Resultados",
+  "fr": "Résultats"
+ },
+ "you are here": {
+  "es": "estás aquí",
+  "ar": "أنت هنا",
+  "zh": "当前页面",
+  "sw": "uko hapa",
+  "sv": "du är här",
+  "de": "du bist hier",
+  "pt": "você está aqui",
+  "fr": "vous êtes ici"
+ },
+ "action": {
+  "es": "acción",
+  "ar": "إجراء",
+  "zh": "操作",
+  "sw": "kitendo",
+  "sv": "åtgärd",
+  "de": "Aktion",
+  "pt": "ação",
+  "fr": "action"
+ },
+ "move": {
+  "es": "mover",
+  "ar": "تنقّل",
+  "zh": "移动",
+  "sw": "sogeza",
+  "sv": "flytta",
+  "de": "bewegen",
+  "pt": "mover",
+  "fr": "déplacer"
+ },
+ "open": {
+  "es": "abrir",
+  "ar": "فتح",
+  "zh": "打开",
+  "sw": "fungua",
+  "sv": "öppna",
+  "de": "öffnen",
+  "pt": "abrir",
+  "fr": "ouvrir"
+ },
+ "new tab": {
+  "es": "pestaña nueva",
+  "ar": "علامة تبويب جديدة",
+  "zh": "新标签页",
+  "sw": "kichupo kipya",
+  "sv": "ny flik",
+  "de": "neuer Tab",
+  "pt": "nova aba",
+  "fr": "nouvel onglet"
+ },
+ "close": {
+  "es": "cerrar",
+  "ar": "إغلاق",
+  "zh": "关闭",
+  "sw": "funga",
+  "sv": "stäng",
+  "de": "schließen",
+  "pt": "fechar",
+  "fr": "fermer"
+ },
+ "No tool matches “{q}”. Try “pdf”, “video”, “cv” or “game”.": {
+  "es": "Ninguna herramienta coincide con «{q}». Prueba «pdf», «vídeo», «cv» o «juego».",
+  "ar": "لا توجد أداة تطابق «{q}». جرّب «pdf» أو «فيديو» أو «سيرة» أو «لعبة».",
+  "zh": "没有与“{q}”匹配的工具。试试“pdf”“视频”“简历”或“游戏”。",
+  "sw": "Hakuna zana inayolingana na “{q}”. Jaribu “pdf”, “video”, “cv” au “mchezo”.",
+  "sv": "Inget verktyg matchar ”{q}”. Prova ”pdf”, ”video”, ”cv” eller ”spel”.",
+  "de": "Kein Werkzeug passt zu „{q}“. Probier „PDF“, „Video“, „Lebenslauf“ oder „Spiel“.",
+  "pt": "Nenhuma ferramenta corresponde a “{q}”. Experimente “pdf”, “vídeo”, “cv” ou “jogo”.",
+  "fr": "Aucun outil ne correspond à « {q} ». Essayez « pdf », « vidéo », « cv » ou « jeu »."
+ },
+ "Switch dark / light mode": {
+  "es": "Cambiar a modo oscuro / claro",
+  "ar": "التبديل بين الوضع الداكن والفاتح",
+  "zh": "切换深色 / 浅色模式",
+  "sw": "Badili hali ya giza / mwanga",
+  "sv": "Växla mörkt / ljust läge",
+  "de": "Dunkel- / Hellmodus wechseln",
+  "pt": "Alternar modo escuro / claro",
+  "fr": "Basculer mode sombre / clair"
+ },
+ "Easier on the eyes at night": {
+  "es": "Más cómodo para la vista de noche",
+  "ar": "أريح للعينين ليلًا",
+  "zh": "夜间看起来更舒服",
+  "sw": "Rahisi kwa macho usiku",
+  "sv": "Skonsammare för ögonen på kvällen",
+  "de": "Angenehmer für die Augen bei Nacht",
+  "pt": "Mais confortável para os olhos à noite",
+  "fr": "Plus doux pour les yeux la nuit"
+ },
+ "Open the on-screen keyboard": {
+  "es": "Abrir el teclado en pantalla",
+  "ar": "افتح لوحة المفاتيح على الشاشة",
+  "zh": "打开屏幕键盘",
+  "sw": "Fungua kibodi ya skrini",
+  "sv": "Öppna skärmtangentbordet",
+  "de": "Bildschirmtastatur öffnen",
+  "pt": "Abrir o teclado na tela",
+  "fr": "Ouvrir le clavier à l’écran"
+ },
+ "Type in Arabic, Russian, Chinese, Hindi, Korean, accents…": {
+  "es": "Escribe en árabe, ruso, chino, hindi, coreano, con acentos…",
+  "ar": "اكتب بالعربية والروسية والصينية والهندية والكورية والحروف المشكّلة…",
+  "zh": "输入阿拉伯文、俄文、中文、印地文、韩文、带重音的字母…",
+  "sw": "Andika kwa Kiarabu, Kirusi, Kichina, Kihindi, Kikorea, lafudhi…",
+  "sv": "Skriv på arabiska, ryska, kinesiska, hindi, koreanska, accenter…",
+  "de": "Schreib auf Arabisch, Russisch, Chinesisch, Hindi, Koreanisch, mit Akzenten…",
+  "pt": "Digite em árabe, russo, chinês, hindi, coreano, acentos…",
+  "fr": "Écrivez en arabe, russe, chinois, hindi, coréen, accents…"
+ },
+ "Install MigaBuilder as an app": {
+  "es": "Instalar MigaBuilder como app",
+  "ar": "ثبّت MigaBuilder كتطبيق",
+  "zh": "将 MigaBuilder 安装为应用",
+  "sw": "Sakinisha MigaBuilder kama programu",
+  "sv": "Installera MigaBuilder som app",
+  "de": "MigaBuilder als App installieren",
+  "pt": "Instalar o MigaBuilder como app",
+  "fr": "Installer MigaBuilder comme application"
+ },
+ "Adds it to your computer or phone — works offline": {
+  "es": "Lo añade a tu ordenador o móvil y funciona sin conexión",
+  "ar": "يضيفه إلى حاسوبك أو هاتفك — يعمل دون اتصال",
+  "zh": "添加到电脑或手机——可离线使用",
+  "sw": "Inaiongeza kwenye kompyuta au simu yako — inafanya kazi bila mtandao",
+  "sv": "Lägger till den på datorn eller telefonen — fungerar offline",
+  "de": "Fügt es zu Computer oder Handy hinzu — funktioniert offline",
+  "pt": "Adiciona ao computador ou celular — funciona offline",
+  "fr": "L’ajoute à votre ordinateur ou téléphone — fonctionne hors ligne"
+ },
+ "Add it to your home screen or desktop — works offline": {
+  "es": "Añádelo a la pantalla de inicio o al escritorio; funciona sin conexión",
+  "ar": "أضفه إلى الشاشة الرئيسية أو سطح المكتب — يعمل دون اتصال",
+  "zh": "添加到主屏幕或桌面——可离线使用",
+  "sw": "Iongeze kwenye skrini ya mwanzo au eneo-kazi — inafanya kazi bila mtandao",
+  "sv": "Lägg till den på hemskärmen eller skrivbordet — fungerar offline",
+  "de": "Zum Startbildschirm oder Desktop hinzufügen — funktioniert offline",
+  "pt": "Adicione à tela inicial ou à área de trabalho — funciona offline",
+  "fr": "Ajoutez-le à l’écran d’accueil ou au bureau — fonctionne hors ligne"
+ },
+ "Save every tool for offline use": {
+  "es": "Guardar todas las herramientas para usarlas sin conexión",
+  "ar": "احفظ كل الأدوات للاستخدام دون اتصال",
+  "zh": "保存所有工具以便离线使用",
+  "sw": "Hifadhi kila zana kwa matumizi bila mtandao",
+  "sv": "Spara alla verktyg för offlinebruk",
+  "de": "Alle Werkzeuge für die Offline-Nutzung speichern",
+  "pt": "Salvar todas as ferramentas para uso offline",
+  "fr": "Enregistrer tous les outils pour le hors-ligne"
+ },
+ "Download all tool pages now so they open on a plane or with no signal": {
+  "es": "Descarga ahora todas las páginas para abrirlas en un avión o sin cobertura",
+  "ar": "نزّل كل صفحات الأدوات الآن لتفتح في الطائرة أو دون إشارة",
+  "zh": "现在下载所有工具页面，在飞机上或没有信号时也能打开",
+  "sw": "Pakua kurasa zote za zana sasa ili zifunguke ukiwa ndegeni au bila mtandao",
+  "sv": "Ladda ner alla verktygssidor nu så att de öppnas på ett plan eller utan täckning",
+  "de": "Lade jetzt alle Werkzeugseiten herunter, damit sie im Flugzeug oder ohne Netz öffnen",
+  "pt": "Baixe agora todas as páginas para abri-las no avião ou sem sinal",
+  "fr": "Téléchargez toutes les pages maintenant pour les ouvrir en avion ou sans réseau"
+ },
+ "All tools (home page)": {
+  "es": "Todas las herramientas (inicio)",
+  "ar": "كل الأدوات (الصفحة الرئيسية)",
+  "zh": "全部工具（首页）",
+  "sw": "Zana zote (ukurasa wa mwanzo)",
+  "sv": "Alla verktyg (startsidan)",
+  "de": "Alle Werkzeuge (Startseite)",
+  "pt": "Todas as ferramentas (início)",
+  "fr": "Tous les outils (accueil)"
+ },
+ "Browse every tool by category": {
+  "es": "Explora todas las herramientas por categoría",
+  "ar": "تصفّح كل الأدوات حسب الفئة",
+  "zh": "按类别浏览所有工具",
+  "sw": "Vinjari kila zana kwa kategoria",
+  "sv": "Bläddra bland alla verktyg efter kategori",
+  "de": "Alle Werkzeuge nach Kategorie durchsuchen",
+  "pt": "Navegue por todas as ferramentas por categoria",
+  "fr": "Parcourir tous les outils par catégorie"
+ },
+ "MigaBuilder is already installed and running as an app.": {
+  "es": "MigaBuilder ya está instalado y funciona como app.",
+  "ar": "MigaBuilder مثبّت بالفعل ويعمل كتطبيق.",
+  "zh": "MigaBuilder 已安装并以应用方式运行。",
+  "sw": "MigaBuilder tayari imesakinishwa na inaendeshwa kama programu.",
+  "sv": "MigaBuilder är redan installerat och körs som app.",
+  "de": "MigaBuilder ist schon installiert und läuft als App.",
+  "pt": "O MigaBuilder já está instalado e funcionando como app.",
+  "fr": "MigaBuilder est déjà installé et fonctionne comme une application."
+ },
+ "On iPhone or iPad: tap the Share button in Safari, then “Add to Home Screen”. MigaBuilder then opens like an app and the tools you have used work offline.": {
+  "es": "En iPhone o iPad: toca el botón Compartir en Safari y luego «Añadir a pantalla de inicio». MigaBuilder se abrirá como una app y las herramientas que hayas usado funcionarán sin conexión.",
+  "ar": "على iPhone أو iPad: اضغط زر المشاركة في Safari، ثم «إضافة إلى الشاشة الرئيسية». يفتح MigaBuilder بعدها كتطبيق وتعمل الأدوات التي استخدمتها دون اتصال.",
+  "zh": "在 iPhone 或 iPad 上：点 Safari 的“共享”按钮，然后选“添加到主屏幕”。之后 MigaBuilder 会像应用一样打开，用过的工具可离线使用。",
+  "sw": "Kwenye iPhone au iPad: gusa kitufe cha Shiriki katika Safari, kisha “Ongeza kwenye Skrini ya Mwanzo”. Kisha MigaBuilder itafunguka kama programu na zana ulizotumia zitafanya kazi bila mtandao.",
+  "sv": "På iPhone eller iPad: tryck på Dela i Safari och sedan ”Lägg till på hemskärmen”. Då öppnas MigaBuilder som en app och verktygen du har använt fungerar offline.",
+  "de": "Auf iPhone oder iPad: Tippe in Safari auf Teilen und dann auf „Zum Home-Bildschirm“. MigaBuilder öffnet sich dann wie eine App, und genutzte Werkzeuge funktionieren offline.",
+  "pt": "No iPhone ou iPad: toque no botão Compartilhar do Safari e depois em “Adicionar à Tela de Início”. O MigaBuilder abrirá como um app e as ferramentas que você usou funcionarão offline.",
+  "fr": "Sur iPhone ou iPad : touchez le bouton Partager dans Safari, puis « Sur l’écran d’accueil ». MigaBuilder s’ouvre alors comme une application et les outils déjà utilisés fonctionnent hors ligne."
+ },
+ "Use your browser menu: “Install MigaBuilder…” or “Add to Home screen”. (In Chrome and Edge it is also the small install icon at the right of the address bar.) Tools you have opened once then work offline.": {
+  "es": "Usa el menú del navegador: «Instalar MigaBuilder…» o «Añadir a pantalla de inicio». (En Chrome y Edge también es el pequeño icono de instalar a la derecha de la barra de direcciones). Las herramientas que hayas abierto una vez funcionarán sin conexión.",
+  "ar": "استخدم قائمة المتصفح: «تثبيت MigaBuilder…» أو «إضافة إلى الشاشة الرئيسية». (في Chrome وEdge توجد أيضًا أيقونة تثبيت صغيرة يمين شريط العنوان.) بعدها تعمل الأدوات التي فتحتها مرة واحدة دون اتصال.",
+  "zh": "使用浏览器菜单：“安装 MigaBuilder…”或“添加到主屏幕”。（在 Chrome 和 Edge 中，地址栏右侧也有一个小的安装图标。）打开过一次的工具之后就能离线使用。",
+  "sw": "Tumia menyu ya kivinjari chako: “Sakinisha MigaBuilder…” au “Ongeza kwenye Skrini ya Mwanzo”. (Katika Chrome na Edge pia ni ikoni ndogo ya kusakinisha kulia mwa upau wa anwani.) Zana ulizofungua mara moja zitafanya kazi bila mtandao.",
+  "sv": "Använd webbläsarens meny: ”Installera MigaBuilder…” eller ”Lägg till på hemskärmen”. (I Chrome och Edge finns också en liten installationsikon till höger i adressfältet.) Verktyg du har öppnat en gång fungerar sedan offline.",
+  "de": "Nutze das Browsermenü: „MigaBuilder installieren…“ oder „Zum Startbildschirm hinzufügen“. (In Chrome und Edge gibt es auch das kleine Installieren-Symbol rechts in der Adressleiste.) Werkzeuge, die du einmal geöffnet hast, funktionieren dann offline.",
+  "pt": "Use o menu do navegador: “Instalar MigaBuilder…” ou “Adicionar à tela inicial”. (No Chrome e no Edge também há um pequeno ícone de instalar à direita da barra de endereço.) As ferramentas que você abriu uma vez funcionarão offline.",
+  "fr": "Utilisez le menu du navigateur : « Installer MigaBuilder… » ou « Ajouter à l’écran d’accueil ». (Dans Chrome et Edge, c’est aussi la petite icône d’installation à droite de la barre d’adresse.) Les outils ouverts une fois fonctionnent ensuite hors ligne."
+ },
+ "Offline saving needs a browser with service workers, on https://migabuilder.com.": {
+  "es": "Guardar sin conexión requiere un navegador con service workers, en https://migabuilder.com.",
+  "ar": "يتطلب الحفظ دون اتصال متصفحًا يدعم service workers على https://migabuilder.com.",
+  "zh": "离线保存需要支持 service worker 的浏览器，并在 https://migabuilder.com 上使用。",
+  "sw": "Kuhifadhi bila mtandao kunahitaji kivinjari chenye service workers, kwenye https://migabuilder.com.",
+  "sv": "Offlinesparande kräver en webbläsare med service workers, på https://migabuilder.com.",
+  "de": "Offline-Speichern braucht einen Browser mit Service Workers, auf https://migabuilder.com.",
+  "pt": "Salvar offline exige um navegador com service workers, em https://migabuilder.com.",
+  "fr": "L’enregistrement hors ligne nécessite un navigateur avec service workers, sur https://migabuilder.com."
+ },
+ "⏳ Saving {n} tools for offline use…": {
+  "es": "⏳ Guardando {n} herramientas para usarlas sin conexión…",
+  "ar": "⏳ جارٍ حفظ {n} أداة للاستخدام دون اتصال…",
+  "zh": "⏳ 正在保存 {n} 个工具以便离线使用…",
+  "sw": "⏳ Inahifadhi zana {n} kwa matumizi bila mtandao…",
+  "sv": "⏳ Sparar {n} verktyg för offlinebruk…",
+  "de": "⏳ {n} Werkzeuge werden für die Offline-Nutzung gespeichert…",
+  "pt": "⏳ Salvando {n} ferramentas para uso offline…",
+  "fr": "⏳ Enregistrement de {n} outils pour le hors-ligne…"
+ },
+ "✓ {saved} of {total} tools saved. They now open without internet (AI features and big add-ons still need one online visit).": {
+  "es": "✓ {saved} de {total} herramientas guardadas. Ya se abren sin internet (las funciones de IA y los complementos grandes aún necesitan una visita con conexión).",
+  "ar": "✓ حُفظت {saved} من {total} أداة. أصبحت تفتح دون إنترنت (ميزات الذكاء الاصطناعي والإضافات الكبيرة ما زالت تحتاج زيارة واحدة متصلة).",
+  "zh": "✓ 已保存 {saved}/{total} 个工具。现在无需联网即可打开（AI 功能和大型附加组件仍需联网访问一次）。",
+  "sw": "✓ Zana {saved} kati ya {total} zimehifadhiwa. Sasa zinafunguka bila intaneti (vipengele vya AI na nyongeza kubwa bado vinahitaji ziara moja mtandaoni).",
+  "sv": "✓ {saved} av {total} verktyg sparade. De öppnas nu utan internet (AI-funktioner och stora tillägg behöver fortfarande ett besök online).",
+  "de": "✓ {saved} von {total} Werkzeugen gespeichert. Sie öffnen jetzt ohne Internet (KI-Funktionen und große Zusätze brauchen noch einen Online-Besuch).",
+  "pt": "✓ {saved} de {total} ferramentas salvas. Agora abrem sem internet (recursos de IA e complementos grandes ainda precisam de uma visita online).",
+  "fr": "✓ {saved} outils sur {total} enregistrés. Ils s’ouvrent désormais sans internet (les fonctions d’IA et les gros modules nécessitent encore une visite en ligne)."
+ },
+ "What to try next": {
+  "es": "Qué probar después",
+  "ar": "ماذا تجرّب بعد ذلك",
+  "zh": "接下来试试什么",
+  "sw": "Cha kujaribu baadaye",
+  "sv": "Vad du kan prova härnäst",
+  "de": "Was du als Nächstes probieren kannst",
+  "pt": "O que experimentar a seguir",
+  "fr": "Que essayer ensuite"
+ },
+ "✅ File ready — what next?": {
+  "es": "✅ Archivo listo: ¿y ahora qué?",
+  "ar": "✅ الملف جاهز — ماذا بعد؟",
+  "zh": "✅ 文件已就绪——下一步做什么？",
+  "sw": "✅ Faili iko tayari — nini kinafuata?",
+  "sv": "✅ Filen är klar — vad nu?",
+  "de": "✅ Datei fertig — was nun?",
+  "pt": "✅ Arquivo pronto — e agora?",
+  "fr": "✅ Fichier prêt — et ensuite ?"
+ },
+ "Close": {
+  "es": "Cerrar",
+  "ar": "إغلاق",
+  "zh": "关闭",
+  "sw": "Funga",
+  "sv": "Stäng",
+  "de": "Schließen",
+  "pt": "Fechar",
+  "fr": "Fermer"
+ },
+ "Compress, trim and convert video, make GIFs and MP3s, extract audio and transcribe speech.": {
+  "es": "Comprime, recorta y convierte vídeo, crea GIF y MP3, extrae audio y transcribe voz.",
+  "ar": "اضغط الفيديو وقصّه وحوّله، واصنع صور GIF وملفات MP3، واستخرج الصوت وحوّل الكلام إلى نص.",
+  "zh": "压缩、剪辑和转换视频，制作 GIF 和 MP3，提取音频并转写语音。",
+  "sw": "Bana, kata na badilisha video, tengeneza GIF na MP3, toa sauti na andika maneno yaliyozungumzwa.",
+  "sv": "Komprimera, klipp och konvertera video, gör GIF:ar och MP3:or, extrahera ljud och transkribera tal.",
+  "de": "Video komprimieren, schneiden und umwandeln, GIFs und MP3s erstellen, Audio extrahieren und Sprache transkribieren.",
+  "pt": "Comprima, corte e converta vídeos, crie GIFs e MP3s, extraia áudio e transcreva falas.",
+  "fr": "Compressez, coupez et convertissez des vidéos, créez des GIF et MP3, extrayez l’audio et transcrivez la parole."
+ },
+ "Print answer sheets, photograph each student's paper and download everyone's marks.": {
+  "es": "Imprime hojas de respuestas, fotografía la hoja de cada alumno y descarga las notas de todos.",
+  "ar": "اطبع أوراق الإجابة، وصوّر ورقة كل طالب، ونزّل درجات الجميع.",
+  "zh": "打印答题卡，拍下每个学生的答卷，下载所有人的成绩。",
+  "sw": "Chapisha karatasi za majibu, piga picha karatasi ya kila mwanafunzi na pakua alama za wote.",
+  "sv": "Skriv ut svarsblad, fotografera varje elevs papper och ladda ner allas resultat.",
+  "de": "Antwortbögen drucken, jedes Blatt fotografieren und alle Noten herunterladen.",
+  "pt": "Imprima folhas de respostas, fotografe a prova de cada aluno e baixe as notas de todos.",
+  "fr": "Imprimez des feuilles de réponses, photographiez la copie de chaque élève et téléchargez toutes les notes."
+ },
+ "Record several clips and play them side by side or one after another: a band, a duet or a conversation.": {
+  "es": "Graba varios clips y reprodúcelos lado a lado o uno tras otro: una banda, un dúo o una conversación.",
+  "ar": "سجّل عدة مقاطع وشغّلها جنبًا إلى جنب أو واحدًا تلو الآخر: فرقة أو ثنائي أو محادثة.",
+  "zh": "录制多个片段，并排或依次播放：乐队、二重奏或对话。",
+  "sw": "Rekodi klipu kadhaa na zicheze bega kwa bega au moja baada ya nyingine: bendi, wimbo wa wawili au mazungumzo.",
+  "sv": "Spela in flera klipp och spela upp dem bredvid varandra eller efter varandra: ett band, en duett eller ett samtal.",
+  "de": "Mehrere Clips aufnehmen und nebeneinander oder nacheinander abspielen: eine Band, ein Duett oder ein Gespräch.",
+  "pt": "Grave vários clipes e reproduza-os lado a lado ou um após o outro: uma banda, um dueto ou uma conversa.",
+  "fr": "Enregistrez plusieurs clips et lisez-les côte à côte ou l’un après l’autre : un groupe, un duo ou une conversation."
+ },
+ "Hide API keys, passwords and personal data in logs before you share them.": {
+  "es": "Oculta claves API, contraseñas y datos personales en registros antes de compartirlos.",
+  "ar": "أخفِ مفاتيح API وكلمات المرور والبيانات الشخصية في السجلات قبل مشاركتها.",
+  "zh": "在分享日志之前隐藏其中的 API 密钥、密码和个人数据。",
+  "sw": "Ficha funguo za API, nywila na data binafsi kwenye kumbukumbu kabla ya kuzishiriki.",
+  "sv": "Dölj API-nycklar, lösenord och personuppgifter i loggar innan du delar dem.",
+  "de": "API-Schlüssel, Passwörter und persönliche Daten in Logs verbergen, bevor du sie teilst.",
+  "pt": "Oculte chaves de API, senhas e dados pessoais em logs antes de compartilhá-los.",
+  "fr": "Masquez clés API, mots de passe et données personnelles dans les journaux avant de les partager."
+ },
+ "Privacy policy, cookie policy, consent banner, terms and disclosures for your website.": {
+  "es": "Política de privacidad, política de cookies, banner de consentimiento, condiciones y avisos para tu web.",
+  "ar": "سياسة الخصوصية وسياسة ملفات تعريف الارتباط وشريط الموافقة والشروط والإفصاحات لموقعك.",
+  "zh": "为你的网站生成隐私政策、Cookie 政策、同意横幅、条款和声明。",
+  "sw": "Sera ya faragha, sera ya vidakuzi, bango la ridhaa, masharti na maelezo kwa tovuti yako.",
+  "sv": "Integritetspolicy, cookiepolicy, samtyckesbanner, villkor och upplysningar för din webbplats.",
+  "de": "Datenschutzerklärung, Cookie-Richtlinie, Einwilligungsbanner, Nutzungsbedingungen und Hinweise für deine Website.",
+  "pt": "Política de privacidade, política de cookies, banner de consentimento, termos e avisos para o seu site.",
+  "fr": "Politique de confidentialité, politique de cookies, bandeau de consentement, conditions et mentions pour votre site."
+ },
+ "Pomodoro focus timer with tasks, calm sounds and daily focus stats.": {
+  "es": "Temporizador Pomodoro con tareas, sonidos relajantes y estadísticas diarias de concentración.",
+  "ar": "مؤقّت بومودورو للتركيز مع مهام وأصوات هادئة وإحصاءات تركيز يومية.",
+  "zh": "番茄专注计时器，带任务、舒缓声音和每日专注统计。",
+  "sw": "Kipima muda cha Pomodoro chenye kazi, sauti tulivu na takwimu za umakini za kila siku.",
+  "sv": "Pomodoro-timer med uppgifter, lugna ljud och daglig fokusstatistik.",
+  "de": "Pomodoro-Fokustimer mit Aufgaben, ruhigen Klängen und täglicher Fokusstatistik.",
+  "pt": "Timer Pomodoro com tarefas, sons calmos e estatísticas diárias de foco.",
+  "fr": "Minuteur Pomodoro avec tâches, sons apaisants et statistiques de concentration quotidiennes."
+ },
+ "Memory training with levels: number and symbol cards, timed or untimed, chimp test, pairs, n-back, word lists, memory palace and Major system trainers.": {
+  "es": "Entrenamiento de memoria por niveles: cartas de números y símbolos, con o sin tiempo, test del chimpancé, parejas, n-back, listas de palabras, palacio de la memoria y sistema mayor.",
+  "ar": "تدريب الذاكرة بمستويات: بطاقات أرقام ورموز، بوقت أو دونه، اختبار الشمبانزي، الأزواج، n-back، قوائم الكلمات، قصر الذاكرة ومدرّبا النظام الرئيسي.",
+  "zh": "分级记忆训练：数字和符号卡片（计时或不计时）、黑猩猩测试、配对、n-back、单词表、记忆宫殿和数字编码（Major 系统）训练。",
+  "sw": "Mafunzo ya kumbukumbu kwa viwango: kadi za namba na alama, kwa muda au bila muda, jaribio la sokwe, jozi, n-back, orodha za maneno, jumba la kumbukumbu na mfumo wa Major.",
+  "sv": "Minnesträning i nivåer: siffer- och symbolkort, med eller utan tid, schimpanstest, par, n-back, ordlistor, minnespalats och Major-systemet.",
+  "de": "Gedächtnistraining mit Stufen: Zahlen- und Symbolkarten, mit oder ohne Zeit, Schimpansentest, Paare, n-back, Wortlisten, Gedächtnispalast und Major-System.",
+  "pt": "Treino de memória com níveis: cartas de números e símbolos, com ou sem tempo, teste do chimpanzé, pares, n-back, listas de palavras, palácio da memória e sistema Major.",
+  "fr": "Entraînement de la mémoire par niveaux : cartes de chiffres et de symboles, chronométrées ou non, test du chimpanzé, paires, n-back, listes de mots, palais de mémoire et système Major."
+ },
+ "Ready-made starting points for the tools.": {
+  "es": "Puntos de partida listos para las herramientas.",
+  "ar": "نقاط بداية جاهزة للأدوات.",
+  "zh": "各工具的现成起点模板。",
+  "sw": "Vianzio tayari kwa zana.",
+  "sv": "Färdiga startpunkter för verktygen.",
+  "de": "Fertige Ausgangspunkte für die Werkzeuge.",
+  "pt": "Pontos de partida prontos para as ferramentas.",
+  "fr": "Points de départ prêts à l’emploi pour les outils."
+ },
+ "Watch every tool being used and open the sample it made.": {
+  "es": "Mira cómo se usa cada herramienta y abre el ejemplo que creó.",
+  "ar": "شاهد كل أداة أثناء استخدامها وافتح المثال الذي صنعته.",
+  "zh": "观看每个工具的使用过程，并打开它做出的示例。",
+  "sw": "Tazama kila zana ikitumika na ufungue sampuli iliyotengeneza.",
+  "sv": "Se varje verktyg användas och öppna exemplet det gjorde.",
+  "de": "Sieh dir jedes Werkzeug im Einsatz an und öffne das Beispiel, das es erstellt hat.",
+  "pt": "Veja cada ferramenta sendo usada e abra o exemplo que ela criou.",
+  "fr": "Regardez chaque outil en action et ouvrez l’exemple qu’il a créé."
+ },
+ "The setup behind the site: one owner, Claude and automatic checks.": {
+  "es": "Cómo funciona el sitio por dentro: una persona, Claude y comprobaciones automáticas.",
+  "ar": "الإعداد وراء الموقع: مالك واحد وClaude وفحوص تلقائية.",
+  "zh": "网站背后的运作方式：一位站长、Claude 和自动检查。",
+  "sw": "Mpangilio nyuma ya tovuti: mmiliki mmoja, Claude na ukaguzi wa kiotomatiki.",
+  "sv": "Uppsättningen bakom sajten: en ägare, Claude och automatiska kontroller.",
+  "de": "So entsteht die Seite: eine Person, Claude und automatische Prüfungen.",
+  "pt": "A estrutura por trás do site: um dono, o Claude e verificações automáticas.",
+  "fr": "Les coulisses du site : un propriétaire, Claude et des vérifications automatiques."
+ },
+ "Report a bug or suggest an idea.": {
+  "es": "Informa de un error o sugiere una idea.",
+  "ar": "أبلغ عن خطأ أو اقترح فكرة.",
+  "zh": "报告问题或提出想法。",
+  "sw": "Ripoti hitilafu au pendekeza wazo.",
+  "sv": "Rapportera en bugg eller föreslå en idé.",
+  "de": "Melde einen Fehler oder schlag eine Idee vor.",
+  "pt": "Relate um erro ou sugira uma ideia.",
+  "fr": "Signalez un bug ou proposez une idée."
+ }
+}
