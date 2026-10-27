@@ -16,7 +16,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - Original AI pictures from a written description, changed afterwards with plain words
 - Logos, palettes, QR codes and layered image edits
 - Presentations, invoices, quotes and contracts
-- Merged, split, compressed and signed PDFs, Word files and photos
+- Merged, split, compressed and signed PDFs, Word files and photos, and PDF pages saved as JPG or PNG images
 - Interactive world geography lessons and quizzes
 - Driving, boating and flying practice in a vehicle simulator
 - Boat designs with a 3D hull, lines plan, stability check and plywood panels
