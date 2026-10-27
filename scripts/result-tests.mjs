@@ -959,6 +959,23 @@ test('noise-forge: a mix plays without errors and downloads as a WAV file', 'noi
   expect(rms > 0.03 && peak < 0.99, 'the sound level is wrong: rms ' + rms.toFixed(3) + ', peak ' + peak.toFixed(2));
 });
 
+test('tune-forge: the demo string is tuned to E2 and the sound level log downloads as CSV', 'tune-forge.html', async (page) => {
+  await page.click('#demoBtn'); // a plucked string tuned up step by step — no microphone needed
+  await page.waitForFunction(() => { const s = window.__tuneForge.tuner(); return s.note === 'E2' && s.inTune; }, null, { timeout: 20000 });
+  const st = await page.evaluate(() => window.__tuneForge.tuner());
+  expect(Math.abs(st.freq - 82.41) < 0.6 && st.string === 0, 'the tuner reads the low E string wrongly: ' + JSON.stringify(st));
+  await page.click('#tab-level');
+  await page.waitForFunction(() => window.__tuneForge.level().rows >= 3, null, { timeout: 15000 });
+  const out = await downloadOf(page, () => page.click('#lvlCsv'));
+  const csv = out.buf.toString('utf8'), rows = csv.trim().split(/\r\n/);
+  expect(out.name === 'sound-level-log.csv', 'unexpected file name ' + out.name);
+  expect(rows[0] === 'Tune Forge sound level log' && /^Weighting,dB\(A\)$/.test(rows[1]), 'the CSV header is wrong: ' + rows.slice(0, 2).join(' | '));
+  const at = rows.indexOf('Time,Seconds,Leq 1 s (dB),Max 1 s (dB),Peak (dBFS)');
+  const data = rows.slice(at + 1).map(r => r.split(','));
+  expect(at > 0 && data.length >= 3, 'the CSV has no measurements');
+  expect(data.every(r => r.length === 5 && +r[2] > 40 && +r[2] < 130 && +r[4] <= 0), 'a measurement row is wrong: ' + rows.slice(at + 1, at + 4).join(' | '));
+});
+
 // ---------- runner ----------
 const words = process.argv.slice(2).map(w => w.toLowerCase());
 const chosen = TESTS.filter(t => !words.length || words.every(w => t.name.toLowerCase().includes(w)));
