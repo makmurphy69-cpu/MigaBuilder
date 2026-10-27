@@ -302,6 +302,10 @@
   var SKIP_SELECTOR = 'script,style,noscript,[contenteditable=""],[contenteditable="true"],[data-no-i18n],[data-i18n],[data-i18n-html],.lang-switcher';
   // Their placeholder/title is translated, but never the text inside (user input, code samples).
   var NO_TEXT_SELECTOR = 'textarea,code,pre';
+  // A block marked data-i18n-block is translated as a whole (its inner HTML, bold words and all),
+  // so a sentence keeps its word order in every language. Its phrase entry is the English HTML.
+  var BLOCK_SELECTOR = '[data-i18n-block]';
+  var blockOriginals = new WeakMap();
   var observer = null;
   var applying = false;
 
@@ -372,10 +376,28 @@
     attrOriginals.set(el, saved);
   }
 
+  function translateBlock(el) {
+    var saved = blockOriginals.get(el);
+    var current = el.innerHTML;
+    var english = (saved && saved.shown === current) ? saved.en : current;
+    var out = currentLang === FALLBACK_LANG ? null : lookup(english);
+    if (out == null) {
+      if (saved && saved.shown === current && current !== english) el.innerHTML = english;
+      blockOriginals.delete(el);
+      return;
+    }
+    if (saved && saved.shown === current && saved.en === english && saved.lang === currentLang) return;
+    el.innerHTML = out;
+    blockOriginals.set(el, { en: english, shown: el.innerHTML, lang: currentLang });
+  }
+
   function applyPhrases(root) {
     if (!root) return;
     applying = true;
     try {
+      var host = root.nodeType === 1 ? root : root.parentElement;
+      var block = host && host.closest && host.closest(BLOCK_SELECTOR);
+      if (block) { if (!skipped(block.parentElement)) translateBlock(block); return; }
       if (root.nodeType === 3) { if (!textSkipped(root.parentElement)) translateTextNode(root); return; }
       if (root.nodeType !== 1 || skipped(root)) return;
       if (root.closest(NO_TEXT_SELECTOR)) { if (root.matches(NO_TEXT_SELECTOR)) translateAttrs(root); return; }
@@ -383,6 +405,7 @@
         acceptNode: function (n) {
           if (n.nodeType !== 1) return NodeFilter.FILTER_ACCEPT;
           if (n.matches(SKIP_SELECTOR)) return NodeFilter.FILTER_REJECT;
+          if (n.matches(BLOCK_SELECTOR)) { translateBlock(n); return NodeFilter.FILTER_REJECT; }
           if (n.matches(NO_TEXT_SELECTOR)) { translateAttrs(n); return NodeFilter.FILTER_REJECT; }
           return NodeFilter.FILTER_ACCEPT;
         }

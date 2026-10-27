@@ -64,6 +64,8 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
   .lesson-side .actions button{flex:1 1 auto;min-height:44px}}
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I learn to play Go?","acceptedAnswer":{"@type":"Answer","text":"Start with the lessons: liberties, capturing, atari, connecting, eyes, ko and counting. Each lesson has small puzzles on a real board. Then play the capture game and small 9×9 games against the easiest computer level, and press Advice or Feedback whenever you are unsure."}},{"@type":"Question","name":"Can I get hints while I play Go?","acceptedAnswer":{"@type":"Answer","text":"Yes. Press Advice for my next move to see the computer's best idea and why, or Feedback on my last move to see how good your move was and what would have been better. You can also ask the coach to warn you before a big mistake."}},{"@type":"Question","name":"Which board size should a beginner use?","acceptedAnswer":{"@type":"Answer","text":"Start on 9×9: games take about ten minutes and every principle of the big board already appears. Move to 13×13 and then 19×19 when 9×9 feels comfortable."}},{"@type":"Question","name":"Is Go Forge free?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free with no account, and the computer opponent runs on your own device, so it also works offline."}}]}</script>
+<script src="i18n.js"></script>
+<script src="i18n/go-forge.js"></script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Go Forge</span></nav>
@@ -85,10 +87,10 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
       <div class="lesson-body">
         <div class="board-box"><svg class="goban" id="lessonBoard" role="img" aria-label="Lesson board"></svg></div>
         <div class="lesson-side">
-          <div class="lesson-text" id="lessonText"></div>
+          <div class="lesson-text" id="lessonText" data-i18n-block></div>
           <div class="ex-dots" id="exDots"></div>
-          <div class="goal" id="exGoal"></div>
-          <div id="exMsg" class="msg">Tap a point on the board.</div>
+          <div class="goal" id="exGoal" data-i18n-block></div>
+          <div id="exMsg" class="msg" data-i18n-block>Tap a point on the board.</div>
           <div class="actions">
             <button class="secondary" type="button" id="exHint">💡 Hint</button>
             <button class="secondary" type="button" id="exShow">👀 Show the answer</button>
@@ -127,7 +129,7 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
         <button class="primary btn-big" type="button" id="feedbackBtn">🔍 Feedback on my last move</button>
       </div>
       <div id="confirmBox" class="confirm hidden"></div>
-      <div class="coach" id="coach"><h3>Your coach</h3><p>Choose a board and a level and press <b>New game</b>. While you play, press <b>Advice</b> before a move or <b>Feedback</b> after one.</p></div>
+      <div class="coach" id="coach"><h3>Your coach</h3><p data-i18n-block>Choose a board and a level and press <b>New game</b>. While you play, press <b>Advice</b> before a move or <b>Feedback</b> after one.</p></div>
       <div id="engineProgress"></div>
       <div class="row">
         <button class="secondary" type="button" id="undoBtn">↶ Undo</button>
@@ -161,26 +163,26 @@ details.box{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6p
 <section class="panel hidden" id="guidePanel">
   <h2>The rules of Go on one page</h2>
   <div class="lesson-text">
-    <p><b>1.</b> Two players, Black and White, take turns putting one stone on an empty <b>intersection</b>. Black goes first. Stones never move.</p>
-    <p><b>2.</b> The empty points next to a stone along the lines are its <b>liberties</b>. Stones next to each other along the lines form a <b>group</b> and share their liberties.</p>
-    <p><b>3.</b> When you take a group’s last liberty, you <b>capture</b> it: remove those stones from the board.</p>
-    <p><b>4.</b> You may not play where your stone would have no liberties, unless that move captures (<b>no suicide</b>).</p>
-    <p><b>5.</b> <b>Ko</b>: you may not take back a single stone straight away if that would repeat the position. Play elsewhere first.</p>
-    <p><b>6.</b> You may <b>pass</b> instead of playing. When both players pass one after the other, the game ends. Stones that could not avoid capture are removed as <b>dead</b>.</p>
-    <p><b>7.</b> Count your <b>area</b>: your stones on the board plus the empty points only you surround. White adds <b>komi</b> (7.5 points here) for playing second. The bigger total wins.</p>
+    <p data-i18n-block><b>1.</b> Two players, Black and White, take turns putting one stone on an empty <b>intersection</b>. Black goes first. Stones never move.</p>
+    <p data-i18n-block><b>2.</b> The empty points next to a stone along the lines are its <b>liberties</b>. Stones next to each other along the lines form a <b>group</b> and share their liberties.</p>
+    <p data-i18n-block><b>3.</b> When you take a group’s last liberty, you <b>capture</b> it: remove those stones from the board.</p>
+    <p data-i18n-block><b>4.</b> You may not play where your stone would have no liberties, unless that move captures (<b>no suicide</b>).</p>
+    <p data-i18n-block><b>5.</b> <b>Ko</b>: you may not take back a single stone straight away if that would repeat the position. Play elsewhere first.</p>
+    <p data-i18n-block><b>6.</b> You may <b>pass</b> instead of playing. When both players pass one after the other, the game ends. Stones that could not avoid capture are removed as <b>dead</b>.</p>
+    <p data-i18n-block><b>7.</b> Count your <b>area</b>: your stones on the board plus the empty points only you surround. White adds <b>komi</b> (7.5 points here) for playing second. The bigger total wins.</p>
   </div>
   <h2 style="margin-top:18px">Ten tips for your first 20 games</h2>
   <ol class="lesson-text">
-    <li><b>Corners first, then sides, then the centre.</b> Corners need the fewest stones to surround space.</li>
-    <li><b>Check for ataris after every move</b> — your stones and your opponent’s. Turn on “Mark stones in atari” while you learn.</li>
-    <li><b>Do not chase a stone that can escape</b>; chase it towards your own stones or the edge.</li>
-    <li><b>Keep your stones connected</b>, cut your opponent’s apart.</li>
-    <li><b>A group needs two eyes</b> (two separate inside points) to be safe forever.</li>
-    <li><b>Do not save stones that are already lost</b> — if they are caught in a ladder or a net, play elsewhere.</li>
-    <li><b>Answer a contact play</b> (a stone touching yours) — it usually starts a fight.</li>
-    <li><b>Big before small</b>: an open corner or side is worth more than one more stone in a closed area.</li>
-    <li><b>Play the “capture game” first</b> if counting feels hard: whoever captures first wins.</li>
-    <li><b>Review your games.</b> The review shows your three to five biggest mistakes — learning those is the fastest way to improve.</li>
+    <li data-i18n-block><b>Corners first, then sides, then the centre.</b> Corners need the fewest stones to surround space.</li>
+    <li data-i18n-block><b>Check for ataris after every move</b> — your stones and your opponent’s. Turn on “Mark stones in atari” while you learn.</li>
+    <li data-i18n-block><b>Do not chase a stone that can escape</b>; chase it towards your own stones or the edge.</li>
+    <li data-i18n-block><b>Keep your stones connected</b>, cut your opponent’s apart.</li>
+    <li data-i18n-block><b>A group needs two eyes</b> (two separate inside points) to be safe forever.</li>
+    <li data-i18n-block><b>Do not save stones that are already lost</b> — if they are caught in a ladder or a net, play elsewhere.</li>
+    <li data-i18n-block><b>Answer a contact play</b> (a stone touching yours) — it usually starts a fight.</li>
+    <li data-i18n-block><b>Big before small</b>: an open corner or side is worth more than one more stone in a closed area.</li>
+    <li data-i18n-block><b>Play the “capture game” first</b> if counting feels hard: whoever captures first wins.</li>
+    <li data-i18n-block><b>Review your games.</b> The review shows your three to five biggest mistakes — learning those is the fastest way to improve.</li>
   </ol>
   <h2 style="margin-top:18px">Words Go players use</h2>
   <div class="glossary" id="glossary"></div>
@@ -422,7 +424,7 @@ function renderLessonList() {
   $('lessonList').querySelectorAll('button').forEach(btn => btn.onclick = () => { openLesson(+btn.dataset.l, 0); if (matchMedia('(max-width:860px)').matches) $('lessonTitle').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
   const on = $('lessonList').querySelector('.on'); if (on) $('lessonList').scrollLeft = Math.max(0, on.offsetLeft - 20);
   const n = Object.keys(progress.done).length;
-  $('lessonProgress').textContent = n + ' of ' + LESSONS.length + ' lessons done' + (n === LESSONS.length ? ' — you know the rules! Try a game.' : '');
+  $('lessonProgress').innerHTML = '<span>' + n + ' of ' + LESSONS.length + ' lessons done</span>' + (n === LESSONS.length ? ' — <span>you know the rules! Try a game.</span>' : '');
 }
 function openLesson(i, e) {
   L.i = i; L.e = e || 0; L.step = 0; L.solved = false; L.marks = [];
@@ -554,7 +556,7 @@ const LEVELS = [
   { name: '6 · Strongest', po: 25000, timeMs: 9000, temp: 0, info: 'Thinks up to 9 seconds a move. Still well below a strong human on 19×19.' }
 ];
 $('gLevel').innerHTML = LEVELS.map((l, i) => '<option value="' + (i + 1) + '">' + l.name + '</option>').join('');
-function showLevel() { const l = LEVELS[+$('gLevel').value - 1]; $('levelInfo').textContent = 'Level ' + l.name + ': ' + l.info + ($('gMode').value === 'capture' ? ' Capture game: whoever captures the first stone wins — the best way to practise ataris.' : ''); }
+function showLevel() { const l = LEVELS[+$('gLevel').value - 1]; $('levelInfo').innerHTML = '<span>Level ' + esc(l.name) + ':</span> <span>' + esc(l.info) + '</span>' + ($('gMode').value === 'capture' ? ' <span>Capture game: whoever captures the first stone wins — the best way to practise ataris.</span>' : ''); }
 $('gLevel').onchange = showLevel; $('gMode').onchange = showLevel;
 
 let worker = null, workerOk = true, reqId = 0;
@@ -598,7 +600,7 @@ function newGame(opts) {
   Object.assign(game, opts || {});
   viewAt = null; overlay = null; lastAnalysis = null; pendingMove = -1;
   $('endBox').classList.add('hidden'); $('reviewOut').innerHTML = '';
-  coach('', '<h3>New game</h3><p>You play <b>' + colName(game.user) + '</b> on ' + n + '×' + n + ' against level ' + game.level + '.' + (game.mode === 'capture' ? ' Capture game: the first player to capture a stone wins.' : (game.handicap ? ' You have ' + game.handicap + ' handicap stones.' : '')) + '</p><p>Press <b>💡 Advice</b> whenever you are unsure what to play.</p>');
+  coach('', '<h3>New game</h3><p data-i18n-block>You play <b>' + colName(game.user) + '</b> on ' + n + '×' + n + ' against level ' + game.level + '.' + (game.mode === 'capture' ? ' Capture game: the first player to capture a stone wins.' : (game.handicap ? ' You have ' + game.handicap + ' handicap stones.' : '')) + '</p><p data-i18n-block>Press <b>💡 Advice</b> whenever you are unsure what to play.</p>');
   save(); render();
   maybeComputer();
 }
