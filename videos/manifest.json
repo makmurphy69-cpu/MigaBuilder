@@ -1647,6 +1647,30 @@
    "kind": "download"
   }
  },
+ "species-atlas.html": {
+  "title": "Species Atlas",
+  "video": "https://videos.migabuilder.com/species-atlas.mp4?v=24fe7922",
+  "poster": "https://videos.migabuilder.com/species-atlas.jpg?v=bc566dac",
+  "duration": 112,
+  "transcript": [
+   "Welcome to Species Atlas. Look up any animal, plant, fungus or microbe, and see its photos, names, family tree, conservation status, and where it lives.",
+   "The page opens at the very top of the tree of life: the kingdoms. Click any group to go further down.",
+   "Or just search. Type an everyday name or a scientific one, and pick from the suggestions.",
+   "Here is the lion, with photos shared by nature lovers. Each photo shows who took it.",
+   "You get a short description, and exactly where it sits in the tree of life, from kingdom down to species.",
+   "Its conservation status. Lions are vulnerable. And the months, and the places, where people see it.",
+   "On the left are its close relatives. Click one to open it. Here is the tiger.",
+   "Add any species to your list, for a school project or a nature walk, and download a printable list or fact sheet.",
+   "Now the game. You see a real photo, and pick the right name. Challenge mode gives you twenty seconds, with bonus points for speed and streaks.",
+   "Pick an answer. You learn what it is either way, and your best score is saved.",
+   "Now it is your turn. Open Species Atlas on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/species-atlas.html",
+   "label": "Fact sheet made in this video",
+   "kind": "html"
+  }
+ },
  "strength-compass.html": {
   "title": "Strength Compass",
   "video": "https://videos.migabuilder.com/strength-compass.mp4",

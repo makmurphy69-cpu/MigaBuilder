@@ -64,7 +64,8 @@ main{max-width:1320px}
 .hidden{display:none!important}
 @media(max-width:980px){.explorer{grid-template-columns:1fr}.explorer>div:first-child{position:static}#net{height:460px}.qgrid,.opts{grid-template-columns:1fr}}
 </style>
-<script src="i18n.js"></script><script src="i18n/psychology-atlas.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/psychology-atlas.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is there a quiz?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A timed, scored quiz game with an explanation after every answer, so you can try to beat your best score."}}, {"@type": "Question", "name": "Is Psychology Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser."}}]}</script>
 </head>
 <body>
@@ -221,15 +222,15 @@ function drawTimeline(){
 }
 
 // ---------- list ----------
-function drawList(){$('list').innerHTML=IDEAS.filter(i=>!kindFilter||i.kind===kindFilter).sort((a,b)=>a.start-b.start).map(i=>'<button class="lcard" data-id="'+i.id+'" style="border-left-color:'+COLOR[i.kind]+'"><b>'+(seen.has(i.id)?'✓ ':'')+esc(i.name)+'</b><small>'+esc(KIND[i.kind])+' · '+esc(i.era)+'</small></button>').join('');$('list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>select(b.dataset.id))}
+function drawList(){$('list').innerHTML=IDEAS.filter(i=>!kindFilter||i.kind===kindFilter).sort((a,b)=>a.start-b.start).map(i=>'<button class="lcard" data-id="'+i.id+'" style="border-left-color:'+COLOR[i.kind]+'"><b>'+(seen.has(i.id)?'✓ ':'')+esc(i.name)+'</b><small><span>'+esc(KIND[i.kind])+'</span> · '+esc(i.era)+'</small></button>').join('');$('list').querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>select(b.dataset.id))}
 
 // ---------- detail ----------
 function chip(id,cls){return '<a class="'+(cls||'')+'" data-go="'+id+'">'+esc(BY[id].name)+'</a>'}
 function select(id,noScroll){
   const x=BY[id];if(!x)return;selected=id;seen.add(id);store.set('psychSeen',[...seen]);$('seenCount').textContent=seen.size;
-  $('info').innerHTML='<span class="badge" style="background:'+COLOR[x.kind]+'">'+KIND[x.kind]+'</span><h2>'+esc(x.name)+'</h2><div class="meta">Began: '+esc(x.era)+' · '+esc(x.region)+'</div><p style="line-height:1.55;margin:0">'+esc(x.summary)+'</p>'+
+  $('info').innerHTML='<span class="badge" style="background:'+COLOR[x.kind]+'">'+KIND[x.kind]+'</span><h2>'+esc(x.name)+'</h2><div class="meta"><span>Began:</span> '+esc(x.era)+' · '+esc(x.region)+'</div><p style="line-height:1.55;margin:0">'+esc(x.summary)+'</p>'+
    '<div class="sect"><h3>Core ideas</h3><ul>'+x.ideas.map(i=>'<li>'+esc(i)+'</li>').join('')+'</ul></div>'+
-   '<div class="sect"><h3>Key psychologists &amp; thinkers</h3>'+x.thinkers.map(t=>'<div class="thinker"><b>'+esc(t[0])+'</b> <span class="muted">('+esc(t[1])+')</span><br>'+esc(t[2])+(t[3]&&t[3]!=='—'?'<br><i>Key work: '+esc(t[3])+'</i>':'')+'</div>').join('')+'</div>'+
+   '<div class="sect"><h3>Key psychologists &amp; thinkers</h3>'+x.thinkers.map(t=>'<div class="thinker"><b>'+esc(t[0])+'</b> <span class="muted">('+esc(t[1])+')</span><br>'+esc(t[2])+(t[3]&&t[3]!=='—'?'<br><i><span>Key work:</span> '+esc(t[3])+'</i>':'')+'</div>').join('')+'</div>'+
    '<div class="sect"><h3>History</h3><ul class="hist">'+x.history.map(h=>'<li><b>'+yr(h[0])+'</b> '+esc(h[1])+'</li>').join('')+'</ul></div>'+
    '<div class="sect links"><h3>Connections</h3>'+(x.from.length?'<p style="margin:4px 0"><b>Drew on:</b> '+x.from.map(f=>chip(f)).join('')+'</p>':'')+(x.to.length?'<p style="margin:4px 0"><b>Influenced:</b> '+x.to.map(f=>chip(f)).join('')+'</p>':'')+(x.rv.size?'<p style="margin:4px 0"><b>Rivals &amp; critics:</b> '+[...x.rv].map(f=>chip(f,'rv')).join('')+'</p>':'')+'<div class="critic"><b>What critics say:</b> '+esc(x.critics)+'</div></div>'+
    '<div class="actions" style="margin-top:12px"><button class="primary" id="quizThis">🏆 Quiz me on this and its connections</button><button class="secondary" id="askAi">🤖 Explain it simply</button></div><div id="aiAns" class="explain hidden"></div>';
@@ -276,8 +277,8 @@ function sourceIdeas(){const s=$('qSource').value;
   if(s==='selected'){if(!selected)return null;const x=BY[selected];return [x,...[...new Set([...x.from,...x.to,...x.rv])].map(i=>BY[i])]}
   return IDEAS.slice();}
 function generate(){
-  const src=sourceIdeas();if(!src){alert($('qSource').value==='seen'?'Explore at least 3 circles first, or choose another source.':'Select a circle on the map first.');return null}
-  const types=[...document.querySelectorAll('#qTypes input:checked')].map(c=>c.value);if(!types.length){alert('Tick at least one question type.');return null}
+  const src=sourceIdeas();if(!src){alert(I18N.tr($('qSource').value==='seen'?'Explore at least 3 circles first, or choose another source.':'Select a circle on the map first.'));return null}
+  const types=[...document.querySelectorAll('#qTypes input:checked')].map(c=>c.value);if(!types.length){alert(I18N.tr('Tick at least one question type.'));return null}
   const n=+$('qCount').value,out=[],keys=new Set();let guard=0;
   while(out.length<n&&guard++<600){const x=$('qSource').value==='selected'&&Math.random()<.5?BY[selected]:rnd(src);const q=makeQ(rnd(types),x);if(!q||q.opts.length<3)continue;const k=q.q+'|'+q.a;if(keys.has(k))continue;keys.add(k);q.opts=shuffle([q.a,...q.opts.slice(0,3)]);out.push(q)}
   return out.length?out:null;
@@ -291,7 +292,7 @@ function mult(){return streak>=5?2:streak>=3?1.5:1}
 function show(){const q=quiz[qi];answered=false;
   $('qProg').textContent='Question '+(qi+1)+' / '+quiz.length;$('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak+(challenge&&mult()>1?' · ×'+mult():''):'';
   $('qText').textContent=q.q;$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
-  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(o)+'</button>').join('');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-no-i18n data-i="'+i+'">'+esc(o)+'</button>').join('');
   $('qOpts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(q.opts[+b.dataset.i],b));
   clearInterval(timer);if(challenge){left=20;$('timerFill').style.width='100%';$('timerFill').style.background='#4E9E73';timer=setInterval(()=>{left-=.25;$('timerFill').style.width=Math.max(0,left/20*100)+'%';if(left<6)$('timerFill').style.background='#D8604A';if(left<=0){clearInterval(timer);answer(null,null)}},250)}
 }
@@ -299,7 +300,7 @@ function answer(choice,btn){if(answered)return;answered=true;clearInterval(timer
   let gained=0;if(ok){score++;streak++;bestStreak=Math.max(bestStreak,streak);if(challenge){gained=Math.round((100+Math.max(0,Math.ceil(left))*5)*mult());points+=gained}}else{streak=0;missed.push(q)}
   q.ok=ok;q.given=choice;
   $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
-  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'⏱️ Time is up. ':'❌ ')+esc(q.why)+(q.idea?' <a data-go="'+q.idea+'" style="cursor:pointer;font-weight:600;color:#0E2A47">Open '+esc(BY[q.idea].name)+' →</a>':'');$('qExplain').classList.remove('hidden');
+  $('qExplain').innerHTML=(ok?'<span class="pop">✅ Correct'+(gained?' +'+gained:'')+'</span> ':choice===null?'<span>⏱️ Time is up.</span> ':'❌ ')+esc(q.why)+(q.idea?' <a data-go="'+q.idea+'" style="cursor:pointer;font-weight:600;color:#0E2A47"><span>Open</span> '+esc(BY[q.idea].name)+' →</a>':'');$('qExplain').classList.remove('hidden');
   const go=$('qExplain').querySelector('[data-go]');if(go)go.onclick=()=>{select(go.dataset.go,true);$('info').scrollIntoView({behavior:'smooth'})};
   $('qScore').textContent=challenge?'⭐ '+points+' points':'Score: '+score;$('qStreak').textContent=streak>=2?'🔥 Streak '+streak:'';
   $('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
@@ -310,9 +311,9 @@ function finish(){clearInterval(timer);$('quizArea').classList.add('hidden');$('
   const pct=Math.round(score/quiz.length*100),rank=RANKS.find(r=>pct>=r[0])[1];
   const best=store.get('psychBest',{points:0,pct:0});const newBest=challenge?points>best.points:pct>best.pct;
   if(challenge&&points>best.points)best.points=points;if(pct>best.pct)best.pct=pct;store.set('psychBest',best);
-  $('doneTitle').textContent=score+' / '+quiz.length+' correct ('+pct+'%) — '+rank;
-  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · best streak '+bestStreak+' · ':'')+(newBest?'🎉 New personal best!':'Personal best: '+(challenge?best.points+' points':best.pct+'%'));
-  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small>Answer: '+esc(q.a)+(q.ok?'':' · you chose: '+esc(q.given==null?'(no answer)':q.given))+'</small></li>').join('');
+  $('doneTitle').innerHTML='<span>'+score+' / '+quiz.length+' correct ('+pct+'%)</span> — <span>'+esc(rank)+'</span>';
+  $('doneSub').innerHTML=(challenge?'<b>'+points+' points</b> · <span>best streak '+bestStreak+'</span> · ':'')+(newBest?'<span>🎉 New personal best!</span>':'<span>Personal best:</span> <span>'+(challenge?best.points+' points':best.pct+'%')+'</span>');
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+esc(q.q)+'<br><small><span>Answer:</span> '+esc(q.a)+(q.ok?'':' · <span>you chose:</span> '+(q.given==null?'<span>(no answer)</span>':esc(q.given)))+'</small></li>').join('');
   $('retryWrong').classList.toggle('hidden',!missed.length);showBest()}
 $('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
 $('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined,opts:shuffle(q.opts.slice())})));
@@ -327,8 +328,8 @@ $('aiQuiz').onclick=async()=>{const topic=$('aiTopic').value.trim();if(!topic){$
   try{const d=MigaAI.json(await MigaAI.ask('You write accurate, balanced multiple-choice quizzes about psychology, its history, theories, experiments and key researchers. Reply with ONE JSON array only.',
     'Write '+$('qCount').value+' '+$('aiLevel').value+'-level multiple-choice questions about psychology: '+topic+'.\nFormat: [{"question":"...","options":["A","B","C","D"],"answer":"exact text of the correct option","explanation":"1-2 sentences"}]\nEach question must have exactly one correct answer and plausible wrong options.'));
     const qs=(Array.isArray(d)?d:d.questions||[]).filter(q=>q&&q.question&&Array.isArray(q.options)&&q.options.includes(q.answer)).map(q=>({q:q.question,a:q.answer,opts:shuffle(q.options.slice(0,4)),why:q.explanation||''}));
-    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.textContent='Quiz ready — '+qs.length+' AI questions. Good luck!';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
-  catch(e){st.textContent='Could not create the quiz: '+e.message}$('aiQuiz').disabled=false};
+    if(!qs.length)throw new Error('The AI did not return usable questions. Try again.');st.innerHTML='<span>Quiz ready —</span> '+qs.length+' <span>AI questions. Good luck!</span>';start(qs);$('quizArea').scrollIntoView({behavior:'smooth'})}
+  catch(e){st.innerHTML='<span>Could not create the quiz:</span> '+esc(e.message)}$('aiQuiz').disabled=false};
 
 // ---------- start ----------
 $('seenCount').textContent=seen.size;drawList();
