@@ -598,6 +598,8 @@
       setLang(detectInitialLang());
     },
     phrases: addPhrases,
+    // Translate one English phrase for text that is not on the page (alerts, confirms, downloads).
+    tr: function (text) { var out = currentLang === FALLBACK_LANG ? null : lookup(text); return out == null ? text : out; },
     t: t,
     getLang: function () { return currentLang; },
     setLang: setLang,

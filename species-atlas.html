@@ -83,6 +83,7 @@ main{max-width:1320px}
 @media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr)}}
 </style>
 <script src="i18n.js"></script>
+<script src="i18n/species-atlas.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Where do the photos and facts come from?", "acceptedAnswer": {"@type": "Answer", "text": "From iNaturalist, a free nature project run by the California Academy of Sciences and National Geographic, where millions of people share photos of the living things they find. The short descriptions come from Wikipedia and the conservation status mostly from the IUCN Red List."}}, {"@type": "Question", "name": "Is Species Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Is anything about me sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "Only the words you search for and the species you open are sent to iNaturalist to look them up. Your species list and quiz scores stay in your browser."}}]}</script>
 </head>
 <body>
@@ -165,21 +166,25 @@ const rich=s=>esc(String(s||'').replace(/<(?!\/?(b|i)>)[^>]*>/g,'')).replace(/&l
 const cap=s=>s?s.charAt(0).toUpperCase()+s.slice(1):'';
 const num=n=>Number(n||0).toLocaleString('en');
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-const locale=(document.documentElement.lang||'en').slice(0,2);
+const tr=s=>window.I18N&&I18N.tr?I18N.tr(s):s;
+const INAT_LOCALE={zh:'zh-CN',pt:'pt-BR'};
+const lang=()=>(window.I18N&&I18N.getLang?I18N.getLang():(document.documentElement.lang||'en')).slice(0,2);
+const locale=()=>INAT_LOCALE[lang()]||lang();
 
 const GROUPS=[['🐾','Animals',1],['🌿','Plants',47126],['🍄','Fungi',47170],['🐦','Birds',3],['🦁','Mammals',40151],['🦋','Insects',47158],['🐟','Fish',47178],['🦎','Reptiles',26036],['🐸','Amphibians',20978],['🕷️','Spiders',47118],['🐚','Molluscs',47115],['🦠','Bacteria',67333]];
 const ICON={Animalia:'🐾',Plantae:'🌿',Fungi:'🍄',Aves:'🐦',Mammalia:'🦁',Insecta:'🦋',Actinopterygii:'🐟',Reptilia:'🦎',Amphibia:'🐸',Arachnida:'🕷️',Mollusca:'🐚',Protozoa:'🔬',Chromista:'🌊'};
 const IUCN={LC:['Least concern','#4E9E73'],NT:['Near threatened','#8fa83a'],VU:['Vulnerable','#c9922a'],EN:['Endangered','#d8734a'],CR:['Critically endangered','#c0392b'],EW:['Extinct in the wild','#6b2f6b'],EX:['Extinct','#222'],DD:['Data deficient','#7f8c8d'],NE:['Not evaluated','#7f8c8d']};
-const MONTHS=['J','F','M','A','M','J','J','A','S','O','N','D'];
+const months=()=>{try{const f=new Intl.DateTimeFormat(lang(),{month:'short'});return Array.from({length:12},(_,i)=>f.format(new Date(2026,i,15)))}catch(e){return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']}};
 
 // ---------- talking to iNaturalist ----------
 const cache=new Map();
-async function get(path,signal){
-  if(cache.has(path))return cache.get(path);
-  const r=await fetch(API+path+(path.includes('?')?'&':'?')+'locale='+locale,{signal});
-  if(r.status===429)throw new Error('iNaturalist is busy right now — wait a few seconds and try again.');
-  if(!r.ok)throw new Error('iNaturalist answered with error '+r.status+'. Try again in a moment.');
-  const j=await r.json();cache.set(path,j);return j;
+async function get(path,signal,loc){
+  loc=loc||locale();const key=path+'|'+loc;
+  if(cache.has(key))return cache.get(key);
+  const r=await fetch(API+path+(path.includes('?')?'&':'?')+'locale='+loc,{signal});
+  if(r.status===429)throw new Error(tr('iNaturalist is busy right now — wait a few seconds and try again.'));
+  if(!r.ok)throw new Error(tr('iNaturalist answered with an error. Try again in a moment.')+' ('+r.status+')');
+  const j=await r.json();cache.set(key,j);return j;
 }
 const nameOf=t=>cap(t.preferred_common_name)||t.name;
 const isSpeciesLevel=t=>t.rank_level<=10;
@@ -189,7 +194,7 @@ const iconFor=t=>ICON[t.name]||ICON[t.iconic_taxon_name]||'🧬';
 // ---------- quick group buttons ----------
 $('quick').innerHTML='<button class="chip" data-id="'+LIFE+'">🌍 All life</button>'+GROUPS.map(g=>'<button class="chip" data-id="'+g[2]+'">'+g[0]+' '+g[1]+'</button>').join('');
 $('quick').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id)});
-get('taxa?rank=species&is_active=true&photos=true&per_page=0').then(j=>{$('counter').textContent=num(j.total_results)+' species with photos to explore. Scientists have named about 2 million species, and think around 8.7 million plants, animals and fungi exist. Photos and facts come live from iNaturalist.'}).catch(()=>{});
+get('taxa?rank=species&is_active=true&photos=true&per_page=0').then(j=>{$('counter').innerHTML='<b>'+num(j.total_results)+'</b> <span>species with photos to explore.</span> <span>Scientists have named about 2 million species, and think around 8.7 million plants, animals and fungi exist.</span> <span>Photos and facts come live from iNaturalist.</span>'}).catch(()=>{});
 
 // ---------- search with suggestions ----------
 let sugCtl=null,sugTimer=0,sugItems=[],sugOn=-1;
@@ -207,7 +212,7 @@ async function suggest(q,openFirst){
     sugItems=j.results||[];sugOn=-1;
     if(openFirst&&sugItems[0]){pick(sugItems[0]);return}
     const box=$('sugg');
-    box.innerHTML=sugItems.length?sugItems.map((t,i)=>'<button type="button" role="option" data-i="'+i+'">'+(photo(t,'square')?'<img src="'+esc(photo(t,'square'))+'" alt="" loading="lazy">':'<span class="ph"></span>')+'<span><b>'+esc(nameOf(t))+'</b><small><i>'+esc(t.name)+'</i> · '+esc(t.rank)+(t.matched_term&&t.matched_term.toLowerCase()!==String(t.preferred_common_name||'').toLowerCase()&&t.matched_term!==t.name?' · “'+esc(t.matched_term)+'”':'')+'</small></span></button>').join(''):'<button type="button" disabled>No match — try another spelling or the scientific name</button>';
+    box.innerHTML=sugItems.length?sugItems.map((t,i)=>'<button type="button" role="option" data-i="'+i+'">'+(photo(t,'square')?'<img src="'+esc(photo(t,'square'))+'" alt="" loading="lazy">':'<span class="ph"></span>')+'<span><b data-no-i18n>'+esc(nameOf(t))+'</b><small><i>'+esc(t.name)+'</i> · <span>'+esc(t.rank)+'</span>'+(t.matched_term&&t.matched_term.toLowerCase()!==String(t.preferred_common_name||'').toLowerCase()&&t.matched_term!==t.name?' · “'+esc(t.matched_term)+'”':'')+'</small></span></button>').join(''):'<button type="button" disabled>'+esc(tr('No match — try another spelling or the scientific name'))+'</button>';
     box.classList.remove('hidden');
   }catch(e){if(e.name!=='AbortError'){$('sugg').innerHTML='<button type="button" disabled>'+esc(e.message)+'</button>';$('sugg').classList.remove('hidden')}}
 }
@@ -217,20 +222,22 @@ function hideSugg(){$('sugg').classList.add('hidden');sugItems=[];sugOn=-1}
 function pick(t){hideSugg();$('search').value=nameOf(t);openTaxon(t.id)}
 
 // ---------- open a taxon ----------
-let current=null,openSeq=0;
+let current=null,openSeq=0,lastId=null;
 async function openTaxon(id,opts){
-  opts=opts||{};const seq=++openSeq;
+  opts=opts||{};const seq=++openSeq;lastId=id;
   $('info').classList.add('loading');$('browse').classList.add('loading');
   try{
-    const j=await get('taxa/'+id);const t=j.results&&j.results[0];
-    if(!t)throw new Error('That species could not be found.');
+    const j=await get('taxa/'+id);let t=j.results&&j.results[0];
+    if(!t)throw new Error(tr('That species could not be found.'));
+    // Not every language's Wikipedia has an article: fall back to the English one.
+    if(lang()!=='en'&&String(t.wikipedia_summary||'').replace(/<[^>]*>/g,'').length<80){try{const en=(await get('taxa/'+id,null,'en')).results[0];if(en&&en.wikipedia_summary){t=Object.assign({},t,{wikipedia_summary:en.wikipedia_summary,summaryEn:true,wikipedia_url:t.wikipedia_url||en.wikipedia_url})}}catch(e){}}
     if(seq!==openSeq)return;
     current=t;showInfo(t);loadGrid(t);
     if(!opts.noHash)try{history.replaceState(null,'','#taxon='+t.id)}catch(e){}
     if(opts.scroll!==false&&window.innerWidth<980&&opts.fromGrid)$('info').scrollIntoView({behavior:'smooth',block:'start'});
   }catch(e){
     if(seq!==openSeq)return;
-    $('info').innerHTML='<div class="err">'+esc(e.message||'Could not reach iNaturalist. Check your connection and try again.')+'</div>';
+    $('info').innerHTML='<div class="err">'+esc(e.message||tr('Could not reach iNaturalist. Check your connection and try again.'))+'</div>';
   }finally{if(seq===openSeq){$('info').classList.remove('loading');$('browse').classList.remove('loading')}}
 }
 
@@ -240,7 +247,7 @@ function crumbsFor(t){
 }
 function renderCrumbs(t){
   const c=crumbsFor(t);
-  $('crumbs').innerHTML=c.map((a,i)=>i===c.length-1?'<b class="here">'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</b>':'<button data-id="'+a.id+'">'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</button><span>›</span>').join('');
+  $('crumbs').innerHTML=c.map((a,i)=>i===c.length-1?'<b class="here"'+(a.id===LIFE?'':' data-no-i18n')+'>'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</b>':'<button data-id="'+a.id+'"'+(a.id===LIFE?'':' data-no-i18n')+'>'+esc(a.id===LIFE?'🌍 Life':nameOf(a))+'</button><span>›</span>').join('');
 }
 $('crumbs').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id)});
 
@@ -252,7 +259,7 @@ async function loadGrid(t,more){
   const parentId=isSpeciesLevel(t)&&t.parent_id?t.parent_id:t.id;
   if(!more){gridParent=parentId;gridPage=1;$('grid').innerHTML=''}
   const parentName=parentId===t.id?(t.id===LIFE?'Life':nameOf(t)):nameOf((t.ancestors||[]).find(a=>a.id===parentId)||{name:'its group'});
-  $('gridTitle').textContent=parentId===t.id?(t.id===LIFE?'The kingdoms of life':'Groups and species inside '+parentName):'Relatives — also in '+parentName;
+  $('gridTitle').innerHTML=parentId===t.id?(t.id===LIFE?'<span>The kingdoms of life</span>':'<span>Groups and species inside</span> '+esc(parentName)):'<span>Relatives — also in</span> '+esc(parentName);
   try{
     const j=await get('taxa?is_active=true&order_by=observations_count&per_page=30&page='+gridPage+'&parent_id='+parentId);
     if(gridParent!==parentId)return;
@@ -260,14 +267,14 @@ async function loadGrid(t,more){
     const list=j.results||[];
     if(!list.length&&!more){$('grid').innerHTML='<p style="color:var(--paper);grid-column:1/-1">Nothing has been recorded inside this group yet.</p>'}
     $('grid').insertAdjacentHTML('beforeend',list.map(c=>card(c,c.id===t.id)).join(''));
-    $('gridNote').textContent=gridTotal?'Most-seen first · '+num(Math.min(gridPage*30,gridTotal))+' of '+num(gridTotal):'';
+    $('gridNote').innerHTML=gridTotal?'<span>Most-seen first</span> · <span>'+num(Math.min(gridPage*30,gridTotal))+' of '+num(gridTotal)+'</span>':'';
     $('moreBtn').classList.toggle('hidden',gridPage*30>=gridTotal);
   }catch(e){$('grid').innerHTML='<div class="err" style="grid-column:1/-1">'+esc(e.message)+'</div>'}
 }
 function card(c,here){
   const img=photo(c,'small');
-  const sub=c.rank_level>10?(c.complete_species_count?num(c.complete_species_count)+' species':cap(c.rank)):'';
-  return '<button class="tcard" data-id="'+c.id+'"'+(here?' style="border-color:#E2A63B"':'')+'><span class="img" style="'+(img?'background-image:url(&quot;'+esc(img)+'&quot;)':'')+'">'+(img?'':iconFor(c))+'</span><span class="t"><b>'+esc(nameOf(c))+'</b>'+(c.preferred_common_name?'<i>'+esc(c.name)+'</i>':'')+'<small>'+esc(cap(c.rank)+(sub&&sub!==cap(c.rank)?' · '+sub:''))+'</small></span></button>';
+  const sub=c.rank_level>10&&c.complete_species_count?num(c.complete_species_count)+' species':'';
+  return '<button class="tcard" data-id="'+c.id+'"'+(here?' style="border-color:#E2A63B"':'')+'><span class="img" style="'+(img?'background-image:url(&quot;'+esc(img)+'&quot;)':'')+'">'+(img?'':iconFor(c))+'</span><span class="t"><b data-no-i18n>'+esc(nameOf(c))+'</b>'+(c.preferred_common_name?'<i data-no-i18n>'+esc(c.name)+'</i>':'')+'<small><span>'+esc(cap(c.rank))+'</span>'+(sub?' · <span>'+esc(sub)+'</span>':'')+'</small></span></button>';
 }
 $('grid').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openTaxon(+b.dataset.id,{fromGrid:true})});
 $('moreBtn').addEventListener('click',()=>{if(current){gridPage++;loadGrid(current,true)}});
@@ -275,11 +282,11 @@ $('moreBtn').addEventListener('click',()=>{if(current){gridPage++;loadGrid(curre
 // ---------- the information panel ----------
 function statusOf(t){
   const s=t.conservation_status;
-  if(t.extinct)return ['EX','Extinct','#222',''];
+  if(t.extinct)return ['EX','Extinct','#222','',''];
   if(!s)return null;
   const code=String(s.status||'').toUpperCase();
   const known=IUCN[code];
-  return [code,known?known[0]:cap(s.status_name||s.status),known?known[1]:'#3d6b8c',(s.authority||'')+(s.place&&s.place.name?' · in '+s.place.name:'')];
+  return [code,known?known[0]:cap(s.status_name||s.status),known?known[1]:'#3d6b8c',s.authority||'',s.place&&s.place.name||''];
 }
 function showInfo(t){
   const photos=(t.taxon_photos||[]).map(p=>p.photo).filter(Boolean).slice(0,10);
@@ -291,33 +298,33 @@ function showInfo(t){
     (main?'<figure class="hero"><img id="heroImg" src="'+esc(main.medium_url)+'" alt="'+esc(nameOf(t))+'"><figcaption id="heroCap">'+esc(main.attribution)+'</figcaption></figure>':'<div class="hero" style="height:120px;display:flex;align-items:center;justify-content:center;font-size:54px">'+iconFor(t)+'</div>')+
     (photos.length>1?'<div class="thumbs" id="thumbs">'+photos.map((p,i)=>'<button data-i="'+i+'" class="'+(i?'':'on')+'" style="background-image:url(&quot;'+esc(p.square_url)+'&quot;)" aria-label="Photo '+(i+1)+'"></button>').join('')+'</div>':'')+
     '<span class="badge">'+esc(t.id===LIFE?'All living things':cap(t.rank))+'</span>'+(st?'<span class="badge" style="background:'+st[2]+'">'+esc(st[1])+'</span>':'')+
-    '<h2>'+esc(t.id===LIFE?'Life on Earth':nameOf(t))+'</h2>'+(t.preferred_common_name||t.id===LIFE?'<div class="sci">'+esc(t.name)+'</div>':'')+
+    (t.id===LIFE?'<h2>Life on Earth</h2>':'<h2 data-no-i18n>'+esc(nameOf(t))+'</h2>')+(t.preferred_common_name||t.id===LIFE?'<div class="sci" data-no-i18n>'+esc(t.name)+'</div>':'')+
     '<div class="actions" style="margin-top:10px"><button class="secondary" id="starBtn">'+(inList?'★ In my list':'☆ Add to my list')+'</button><button class="secondary" id="sheetBtn">⬇ Fact sheet</button><button class="secondary" id="linkBtn">🔗 Copy link</button></div>'+
-    (t.wikipedia_summary?'<div class="sect"><h3>About</h3><p>'+rich(t.wikipedia_summary)+'</p></div>':'')+
+    (t.wikipedia_summary?'<div class="sect"><h3>About</h3>'+(t.summaryEn?'<p class="note">Only available in English.</p>':'')+'<p data-no-i18n'+(t.summaryEn?' lang="en" dir="ltr"':'')+'>'+rich(t.wikipedia_summary)+'</p></div>':'')+
     '<div class="sect"><h3>Numbers</h3><div class="stats">'+
       (t.rank_level>10&&t.complete_species_count?'<div><b>'+num(t.complete_species_count)+'</b>known species inside</div>':'')+
       '<div><b>'+num(t.observations_count)+'</b>sightings shared</div>'+
       (anc.length?'<div><b>'+anc.length+'</b>levels below Life</div>':'')+
     '</div></div>'+
-    (anc.length?'<div class="sect"><h3>Where it sits in the tree of life</h3><ul class="lineage">'+anc.map((a,i)=>'<li style="--d:'+Math.min(i,8)+'"><span class="rk">'+esc(a.rank)+'</span>'+(a.id===t.id?'<b>'+esc(nameOf(a))+'</b>':'<a data-id="'+a.id+'">'+esc(nameOf(a))+'</a>')+(a.preferred_common_name?' <i style="color:rgba(22,32,43,.6);font-size:12px">'+esc(a.name)+'</i>':'')+'</li>').join('')+'</ul></div>':'')+
-    (st?'<div class="sect"><h3>Conservation status</h3><p><span class="status-pill" style="background:'+st[2]+'">'+esc(st[1])+'</span> '+(st[3]?'<span class="note">'+esc(st[3])+'</span>':'')+'</p></div>':'')+
-    (t.id!==LIFE?'<div class="sect"><h3>When people see it</h3><div class="months" id="months"></div><div class="mlabels">'+MONTHS.map(m=>'<span>'+m+'</span>').join('')+'</div><p class="note">Sightings shared on iNaturalist, by month — taller means seen more often then.</p></div>'+
+    (anc.length?'<div class="sect"><h3>Where it sits in the tree of life</h3><ul class="lineage">'+anc.map((a,i)=>'<li style="--d:'+Math.min(i,8)+'"><span class="rk">'+esc(cap(a.rank))+'</span>'+(a.id===t.id?'<b data-no-i18n>'+esc(nameOf(a))+'</b>':'<a data-no-i18n data-id="'+a.id+'">'+esc(nameOf(a))+'</a>')+(a.preferred_common_name?' <i style="color:rgba(22,32,43,.6);font-size:12px">'+esc(a.name)+'</i>':'')+'</li>').join('')+'</ul></div>':'')+
+    (st?'<div class="sect"><h3>Conservation status</h3><p><span class="status-pill" style="background:'+st[2]+'">'+esc(st[1])+'</span> '+(st[3]?'<span class="note">'+esc(st[3])+'</span>':'')+(st[4]?' <span class="note">· <span>in</span> '+esc(st[4])+'</span>':'')+'</p></div>':'')+
+    (t.id!==LIFE?'<div class="sect"><h3>When people see it</h3><div class="months" id="months"></div><div class="mlabels">'+months().map(m=>'<span data-no-i18n>'+esc(m)+'</span>').join('')+'</div><p class="note">Sightings shared on iNaturalist, by month — taller means seen more often then.</p></div>'+
     '<div class="sect"><h3>Where it has been seen</h3><div class="worldmap">'+[[0,0],[1,0],[0,1],[1,1]].map(([x,y])=>'<div><img src="https://tile.openstreetmap.org/1/'+x+'/'+y+'.png" alt="" loading="lazy"><img src="'+API+'grid/1/'+x+'/'+y+'.png?taxon_id='+t.id+'&color=%23d8604a" alt="" loading="lazy" onerror="this.remove()"></div>').join('')+'</div><p class="note">Red squares show places where it has been photographed. Map © OpenStreetMap contributors.</p></div>':'')+
     '<div class="sect ext"><h3>Read more</h3><p><a href="https://www.inaturalist.org/taxa/'+t.id+'" target="_blank" rel="noopener">iNaturalist page</a>'+(t.wikipedia_url?' · <a href="'+esc(t.wikipedia_url)+'" target="_blank" rel="noopener">Wikipedia</a>':'')+(t.conservation_status&&t.conservation_status.url&&/^https?:/.test(t.conservation_status.url)?' · <a href="'+esc(t.conservation_status.url)+'" target="_blank" rel="noopener">Red List assessment</a>':'')+'</p></div>';
   if($('thumbs'))$('thumbs').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(!b)return;const p=photos[+b.dataset.i];$('heroImg').src=p.medium_url;$('heroCap').textContent=p.attribution;[...$('thumbs').children].forEach(x=>x.classList.toggle('on',x===b))});
   $('info').querySelectorAll('.lineage a').forEach(a=>a.addEventListener('click',()=>openTaxon(+a.dataset.id)));
   $('starBtn').addEventListener('click',()=>toggleList(t));
   $('sheetBtn').addEventListener('click',()=>downloadSheet(t));
-  $('linkBtn').addEventListener('click',()=>{const u=location.href.split('#')[0]+'#taxon='+t.id;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('linkBtn').textContent='✓ Link copied'},()=>{prompt('Copy this link:',u)})});
+  $('linkBtn').addEventListener('click',()=>{const u=location.href.split('#')[0]+'#taxon='+t.id;(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('linkBtn').textContent=tr('✓ Link copied')},()=>{prompt(tr('Copy this link:'),u)})});
   if(t.id!==LIFE)loadMonths(t.id);
 }
 async function loadMonths(id){
   try{
     const j=await get('observations/histogram?date_field=observed&interval=month_of_year&verifiable=true&taxon_id='+id);
     if(!current||current.id!==id||!$('months'))return;
-    const m=(j.results&&j.results.month_of_year)||{};const vals=MONTHS.map((_,i)=>m[i+1]||0),max=Math.max(1,...vals);
+    const m=(j.results&&j.results.month_of_year)||{};const vals=Array.from({length:12},(_,i)=>m[i+1]||0),max=Math.max(1,...vals);
     $('months').innerHTML=vals.map((v,i)=>'<div style="height:'+Math.max(2,Math.round(v/max*100))+'%" title="'+num(v)+' sightings"></div>').join('');
-  }catch(e){if($('months'))$('months').innerHTML='<span class="note" style="grid-column:1/-1">Could not load the season chart.</span>'}
+  }catch(e){if($('months'))$('months').innerHTML='<span class="note" style="grid-column:1/-1">'+esc(tr('Could not load the season chart.'))+'</span>'}
 }
 
 // ---------- my species list ----------
@@ -327,28 +334,28 @@ function toggleList(t){
   const i=myList.findIndex(x=>x.id===t.id);
   if(i>=0)myList.splice(i,1);else myList.unshift(brief(t));
   store.set('speciesList',myList);renderList();
-  if(current&&current.id===t.id&&$('starBtn'))$('starBtn').textContent=i>=0?'☆ Add to my list':'★ In my list';
+  if(current&&current.id===t.id&&$('starBtn'))$('starBtn').textContent=tr(i>=0?'☆ Add to my list':'★ In my list');
 }
 function renderList(){
-  $('mylist').innerHTML=myList.length?myList.map(x=>'<button class="tcard" data-id="'+x.id+'"><span class="img" style="'+(x.photo?'background-image:url(&quot;'+esc(x.photo)+'&quot;)':'')+'">'+(x.photo?'':'🧬')+'</span><span class="t"><b>'+esc(cap(x.common)||x.name)+'</b>'+(x.common?'<i>'+esc(x.name)+'</i>':'')+'</span></button>').join(''):'<p class="muted" style="grid-column:1/-1">Your list is empty.</p>';
+  $('mylist').innerHTML=myList.length?myList.map(x=>'<button class="tcard" data-id="'+x.id+'"><span class="img" style="'+(x.photo?'background-image:url(&quot;'+esc(x.photo)+'&quot;)':'')+'">'+(x.photo?'':'🧬')+'</span><span class="t"><b data-no-i18n>'+esc(cap(x.common)||x.name)+'</b>'+(x.common?'<i>'+esc(x.name)+'</i>':'')+'</span></button>').join(''):'<p class="muted" style="grid-column:1/-1">'+esc(tr('Your list is empty.'))+'</p>';
   $('dlList').disabled=!myList.length;$('clearList').disabled=!myList.length;
 }
 $('mylist').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){openTaxon(+b.dataset.id);$('search').scrollIntoView({behavior:'smooth'})}});
-$('clearList').addEventListener('click',()=>{if(confirm('Remove all '+myList.length+' species from your list?')){myList=[];store.set('speciesList',myList);renderList();if(current)showInfo(current)}});
+$('clearList').addEventListener('click',()=>{if(confirm(tr('Remove every species from your list?'))){myList=[];store.set('speciesList',myList);renderList();if(current)showInfo(current)}});
 renderList();
 
 // ---------- printable files ----------
 const SHEET_CSS='body{font:15px/1.5 Georgia,serif;max-width:820px;margin:28px auto;padding:0 20px;color:#16202B}h1{font:700 26px Arial,sans-serif;margin:0 0 4px}.sp{display:grid;grid-template-columns:220px 1fr;gap:16px;border-top:1px solid #ccc;padding:16px 0;break-inside:avoid}.sp img{width:220px;height:170px;object-fit:cover;border-radius:4px}.sp h2{font:700 19px Arial,sans-serif;margin:0}.sci{font-style:italic;color:#555}.cr{font-size:11px;color:#777}.ln{font-size:13px;color:#444}.st{display:inline-block;font:700 12px Arial,sans-serif;padding:2px 8px;border-radius:3px;background:#eee;margin:4px 0}.foot{font-size:12px;color:#666;border-top:1px solid #ccc;padding-top:8px;margin-top:10px}@media(max-width:600px){.sp{grid-template-columns:1fr}.sp img{width:100%;height:auto}}';
 function entry(x){
-  return '<div class="sp">'+(x.photo?'<div><img src="'+esc(x.photo)+'" alt=""><div class="cr">'+esc(x.credit)+'</div></div>':'<div></div>')+'<div><h2>'+esc(cap(x.common)||x.name)+'</h2>'+(x.common?'<div class="sci">'+esc(x.name)+'</div>':'')+(x.status?'<span class="st">'+esc(x.status)+'</span>':'')+(x.lineage.length?'<div class="ln">'+x.lineage.map(l=>esc(cap(l[0]))+': '+esc(l[1])).join(' › ')+'</div>':'')+(x.summary?'<p>'+esc(x.summary.length>700?x.summary.slice(0,700).replace(/\s\S*$/,'')+'…':x.summary)+'</p>':'')+'<div class="cr">https://www.inaturalist.org/taxa/'+x.id+'</div></div></div>';
+  return '<div class="sp">'+(x.photo?'<div><img src="'+esc(x.photo)+'" alt=""><div class="cr">'+esc(x.credit)+'</div></div>':'<div></div>')+'<div><h2>'+esc(cap(x.common)||x.name)+'</h2>'+(x.common?'<div class="sci">'+esc(x.name)+'</div>':'')+(x.status?'<span class="st">'+esc(x.status)+'</span>':'')+(x.lineage.length?'<div class="ln">'+x.lineage.map(l=>esc(tr(cap(l[0])))+': '+esc(l[1])).join(' › ')+'</div>':'')+(x.summary?'<p>'+esc(x.summary.length>700?x.summary.slice(0,700).replace(/\s\S*$/,'')+'…':x.summary)+'</p>':'')+'<div class="cr">https://www.inaturalist.org/taxa/'+x.id+'</div></div></div>';
 }
 function saveHtml(name,title,body){
-  const html='<!doctype html><html><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+SHEET_CSS+'</style></head><body><h1>'+esc(title)+'</h1>'+body+'<p class="foot">Made with Species Atlas on MigaBuilder · Data and photos from iNaturalist (photos © their owners, under the licence shown) · Descriptions from Wikipedia.</p></body></html>';
+  const html='<!doctype html><html lang="'+lang()+'"'+(lang()==='ar'?' dir="rtl"':'')+'><head><meta charset="utf-8"><title>'+esc(title)+'</title><style>'+SHEET_CSS+'</style></head><body><h1>'+esc(title)+'</h1>'+body+'<p class="foot">'+esc(tr('Made with Species Atlas on MigaBuilder · Data and photos from iNaturalist (photos © their owners, under the licence shown) · Descriptions from Wikipedia.'))+'</p></body></html>';
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
 }
 const slug=s=>String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'species';
-function downloadSheet(t){const x=brief(t);saveHtml(slug(x.common||x.name)+'-fact-sheet.html',(cap(x.common)||x.name)+' — fact sheet',entry(x))}
-$('dlList').addEventListener('click',()=>{if(myList.length)saveHtml('my-species-list.html','My species list ('+myList.length+')','<p>Date: ____________ &nbsp; Place: ______________________</p>'+myList.map(entry).join(''))});
+function downloadSheet(t){const x=brief(t);saveHtml(slug(x.common||x.name)+'-fact-sheet.html',(cap(x.common)||x.name)+' — '+tr('fact sheet'),entry(x))}
+$('dlList').addEventListener('click',()=>{if(myList.length)saveHtml('my-species-list.html',tr('My species list')+' ('+myList.length+')','<p>'+esc(tr('Date:'))+' ____________ &nbsp; '+esc(tr('Place:'))+' ______________________</p>'+myList.map(entry).join(''))});
 
 // ---------- random species ----------
 $('randomBtn').addEventListener('click',async()=>{
@@ -368,14 +375,14 @@ const best=()=>store.get('speciesQuizBest',0);
 function bestLine(){$('bestLine').textContent=best()?'Your best score: '+best():''}
 bestLine();
 async function startQuiz(){
-  $('quizStatus').textContent='Picking photos…';$('makeQuiz').disabled=true;
+  $('quizStatus').textContent=tr('Picking photos…');$('makeQuiz').disabled=true;
   try{
     const g=$('qGroup').value,pages=+$('qLevel').value;
     const pageA=1+Math.floor(Math.random()*pages);
     const j=await get('taxa?rank=species&is_active=true&photos=true&order_by=observations_count&per_page=50&page='+pageA+(g?'&taxon_id='+g:''));
     const seen=new Set();
     const pool=(j.results||[]).filter(t=>t.default_photo&&t.preferred_common_name&&!seen.has(nameOf(t).toLowerCase())&&seen.add(nameOf(t).toLowerCase()));
-    if(pool.length<6)throw new Error('Not enough photos came back — try again or pick another group.');
+    if(pool.length<6)throw new Error(tr('Not enough photos came back — try again or pick another group.'));
     const shuffled=pool.slice().sort(()=>Math.random()-.5);
     const qs=shuffled.slice(0,Math.min(10,pool.length)).map(t=>{
       // Wrong answers from the same group (same class, else same kingdom) make it fairer.
@@ -392,7 +399,7 @@ function showQ(){
   const q=Q.qs[Q.i];clearInterval(timerId);
   $('qProg').textContent='Photo '+(Q.i+1)+' of '+Q.qs.length;$('qScore').textContent='Score: '+Q.score;$('qStreak').textContent=Q.streak>1?'🔥 Streak ×'+Q.streak:'';
   $('qImg').src=photo(q.t,'medium');
-  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-i="'+i+'">'+esc(nameOf(o))+'<small>'+esc(o.name)+'</small></button>').join('');
+  $('qOpts').innerHTML=q.opts.map((o,i)=>'<button class="opt" data-no-i18n data-i="'+i+'">'+esc(nameOf(o))+'<small>'+esc(o.name)+'</small></button>').join('');
   $('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');
   $('timerBar').classList.toggle('hidden',!Q.timed);
   if(Q.timed){Q.left=20;$('timerFill').style.width='100%';timerId=setInterval(()=>{Q.left-=.25;$('timerFill').style.width=Math.max(0,Q.left/20*100)+'%';if(Q.left<=0)answer(-1)},250)}
@@ -404,16 +411,16 @@ function answer(i){
   if(ok){Q.streak++;Q.right++;pts=Q.timed?Math.round((100+Math.max(0,Q.left)*5)*Math.min(3,1+(Q.streak-1)*.5)):100;Q.score+=pts}else Q.streak=0;
   Q.log.push({t:q.t,ok,picked:i>=0?q.opts[i]:null});
   const crumbs=crumbsFor(q.t).filter(a=>['class','order','family'].includes(a.rank)).map(a=>nameOf(a)).join(' › ');
-  $('qExplain').innerHTML=(ok?'✅ Right'+(pts?' (+'+pts+')':'')+'! ':i<0?'⏰ Time is up. ':'❌ Not quite. ')+'This is the <b>'+esc(nameOf(q.t))+'</b> (<i>'+esc(q.t.name)+'</i>)'+(crumbs?' — '+esc(crumbs):'')+'. <a data-open="'+q.t.id+'">Open it in the atlas</a><br><span class="note">Photo: '+esc(q.t.default_photo.attribution)+'</span>';
+  $('qExplain').innerHTML='<b>'+(ok?'✅ Right!':i<0?'⏰ Time is up.':'❌ Not quite.')+'</b>'+(ok&&pts?' <span>+'+pts+'</span>':'')+' <span>This is:</span> <b>'+esc(nameOf(q.t))+'</b> (<i>'+esc(q.t.name)+'</i>)'+(crumbs?' — '+esc(crumbs):'')+' <a data-open="'+q.t.id+'">Open it in the atlas</a><br><span class="note"><span>Photo:</span> '+esc(q.t.default_photo.attribution)+'</span>';
   $('qExplain').classList.remove('hidden');$('qNext').classList.remove('hidden');$('qNext').textContent=Q.i+1<Q.qs.length?'Next photo →':'See my score';$('qScore').textContent='Score: '+Q.score;
   $('qNext').focus();
 }
 function finish(){
   clearInterval(timerId);$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');
   const nb=Q.score>best();if(nb)store.set('speciesQuizBest',Q.score);bestLine();
-  $('doneTitle').textContent=(nb?'🎉 New best! ':'')+Q.right+' of '+Q.log.length+' right · '+Q.score+' points';
+  $('doneTitle').innerHTML=(nb?'<span>🎉 New best!</span> ':'')+'<span>'+Q.right+' of '+Q.log.length+' right · '+Q.score+' points</span>';
   $('doneSub').textContent=Q.right===Q.log.length?'A perfect round — try a harder level.':'Click any name below to read about it.';
-  $('review').innerHTML=Q.log.map(l=>'<li class="'+(l.ok?'good':'bad')+'">'+(l.ok?'✓ ':'✗ ')+'<a data-open="'+l.t.id+'" style="cursor:pointer;color:inherit;font-weight:700">'+esc(nameOf(l.t))+'</a>'+(l.ok?'':l.picked?' — you said '+esc(nameOf(l.picked)):' — no answer')+'</li>').join('');
+  $('review').innerHTML=Q.log.map(l=>'<li class="'+(l.ok?'good':'bad')+'">'+(l.ok?'✓ ':'✗ ')+'<a data-open="'+l.t.id+'" style="cursor:pointer;color:inherit;font-weight:700">'+esc(nameOf(l.t))+'</a>'+(l.ok?'':l.picked?' — <span>you said</span> '+esc(nameOf(l.picked)):' — <span>no answer</span>')+'</li>').join('');
 }
 $('makeQuiz').addEventListener('click',startQuiz);$('newQuiz').addEventListener('click',startQuiz);
 $('qOpts').addEventListener('click',e=>{const b=e.target.closest('[data-i]');if(b&&!b.disabled)answer(+b.dataset.i)});
@@ -421,6 +428,12 @@ $('qNext').addEventListener('click',()=>{if(++Q.i<Q.qs.length)showQ();else finis
 $('qQuit').addEventListener('click',()=>{if(Q&&Q.log.length)finish();else{clearInterval(timerId);$('quizArea').classList.add('hidden')}});
 document.getElementById('quizPanel').addEventListener('click',e=>{const a=e.target.closest('[data-open]');if(a){openTaxon(+a.dataset.open);$('search').scrollIntoView({behavior:'smooth'})}});
 
+// ---------- language: names and descriptions come from iNaturalist in the chosen language ----------
+let shownLocale='en';
+document.addEventListener('i18n:change',()=>{
+  if(locale()===shownLocale)return;shownLocale=locale();
+  if(lastId!=null)openTaxon(lastId,{noHash:true,scroll:false});
+});
 // ---------- start ----------
 const m=/taxon=(\d+)/.exec(location.hash);
 openTaxon(m?+m[1]:LIFE,{noHash:!m});
