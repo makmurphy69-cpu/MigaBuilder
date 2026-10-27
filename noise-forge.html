@@ -56,6 +56,8 @@
 @media(max-width:600px){.transport input[type=range]{width:120px}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is the difference between white, pink and brown noise?", "acceptedAnswer": {"@type": "Answer", "text": "White noise has the same energy at every frequency and sounds like a bright hiss. Pink noise has less energy in the high notes, so it sounds softer, like steady rain. Brown noise has even less, so it sounds like a deep rumble, like a waterfall or strong wind."}}, {"@type": "Question", "name": "Which noise is best for sleep?", "acceptedAnswer": {"@type": "Answer", "text": "Most people find pink or brown noise, or rain, the most pleasant for sleep because they are less hissy than white noise. All of them help mainly by masking sudden sounds that wake you. Keep the volume low and use the sleep timer."}}, {"@type": "Question", "name": "Can I mix noise with rain and other sounds?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Switch on any number of noises and nature sounds, set each one's volume, save the mix, share it as a link or download it as a WAV file."}}, {"@type": "Question", "name": "Is Noise Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free, with no account. All sounds are made on your device, so nothing is streamed or uploaded."}}]}</script>
+<script src="i18n.js"></script>
+<script src="i18n/noise-forge.js"></script>
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Noise Forge</span></nav>
@@ -92,14 +94,14 @@
 
 <section class="panel" id="explain">
   <h2>The colours of noise — what each one does</h2>
-  <p>“Noise” here means a steady sound with no melody or words. Its <b>colour</b> describes how its energy is spread over low and high notes, a bit like light: white light has every colour, white noise has every pitch equally. The little graph on each card shows that spread — low notes on the left, high notes on the right. The evidence badge says how well the claimed effect has been studied.</p>
+  <p data-i18n-block>“Noise” here means a steady sound with no melody or words. Its <b>colour</b> describes how its energy is spread over low and high notes, a bit like light: white light has every colour, white noise has every pitch equally. The little graph on each card shows that spread — low notes on the left, high notes on the right. The evidence badge says how well the claimed effect has been studied.</p>
   <div class="explain" id="explainCards"></div>
 </section>
 
 <section class="panel" id="activate">
   <h2>What does noise “activate” in the brain and body?</h2>
   <div class="how">
-    <details open><summary>🛡️ Masking: it hides the sounds that wake you</summary><p>You are rarely woken by a noise itself, but by a <b>change</b>: a door, a car, a dog. Your brain keeps listening during sleep and reacts to sudden differences. A steady sound raises the background level, so those changes stand out less and are less likely to trigger the brain’s alarm (the “orienting response”). This is the best-supported reason noise helps.</p></details>
+    <details open><summary>🛡️ Masking: it hides the sounds that wake you</summary><p data-i18n-block>You are rarely woken by a noise itself, but by a <b>change</b>: a door, a car, a dog. Your brain keeps listening during sleep and reacts to sudden differences. A steady sound raises the background level, so those changes stand out less and are less likely to trigger the brain’s alarm (the “orienting response”). This is the best-supported reason noise helps.</p></details>
     <details open><summary>🧠 Less to notice, less to think about</summary><p>Steady noise carries no information — no words, no rhythm — so the brain soon treats it as safe and tunes it out. That is why noise can be easier to work to than a busy office or music with lyrics, which keep pulling your attention.</p></details>
     <details><summary>⚡ A little arousal for a busy brain (ADHD)</summary><p>The “moderate brain arousal” idea says that some under-stimulated brains, such as many with ADHD, work better with a bit of extra background input — like a radio signal that becomes clearer with a little static (stochastic resonance). In studies by Söderlund and colleagues, white noise improved memory and attention in inattentive children but made attentive children slightly worse. It is promising but based on small studies, and the right volume differs from person to person.</p></details>
     <details><summary>🌊 Slow waves in deep sleep</summary><p>Deep sleep is made of slow brain waves. In lab studies, short bursts of pink noise played exactly in time with those waves made them stronger and improved memory the next morning, including in older adults (for example Ngo 2013, Papalambros 2017). That needs special equipment that reads your brain waves — continuous noise from a speaker does not do the same thing, so treat claims about it with care.</p></details>
@@ -121,17 +123,17 @@
 
 <section class="panel" id="beats">
   <h2>Brainwave (binaural) beats</h2>
-  <p>Each ear gets a slightly different tone — for example 200 Hz on the left and 206 Hz on the right. Your brain hears a slow “beat” at the difference (6 Hz). The idea is that the brain’s own rhythm drifts towards that beat: <b>delta</b> (1–4 Hz) is the rhythm of deep sleep, <b>theta</b> (4–8 Hz) of drowsiness and daydreaming, <b>alpha</b> (8–12 Hz) of relaxed alertness, <b>beta</b> (13–30 Hz) of active thinking and <b>gamma</b> (30–45 Hz) of intense focus.</p>
+  <p data-i18n-block>Each ear gets a slightly different tone — for example 200 Hz on the left and 206 Hz on the right. Your brain hears a slow “beat” at the difference (6 Hz). The idea is that the brain’s own rhythm drifts towards that beat: <b>delta</b> (1–4 Hz) is the rhythm of deep sleep, <b>theta</b> (4–8 Hz) of drowsiness and daydreaming, <b>alpha</b> (8–12 Hz) of relaxed alertness, <b>beta</b> (13–30 Hz) of active thinking and <b>gamma</b> (30–45 Hz) of intense focus.</p>
   <p>The evidence is mixed: a 2019 review of many studies (Garcia-Argibay and colleagues) found small to medium effects on anxiety, memory and attention, but the studies differ a lot and some find nothing. Use headphones — without them the beat disappears. If you have epilepsy, ask your doctor first.</p>
 </section>
 
 <section class="panel" id="safety">
   <h2>Use it safely</h2>
   <ul>
-    <li><b>Quiet is enough.</b> Noise works best a little softer than a normal conversation. If you have to raise your voice over it, it is too loud.</li>
-    <li><b>Babies:</b> paediatricians advise keeping a sound machine at least 2 metres (7 feet) from the cot, below about 50 decibels (like a quiet dishwasher) and using a timer — some machines tested at full volume were loud enough to risk hearing damage.</li>
-    <li><b>All night?</b> Use the sleep timer if you only need help falling asleep. Your ears also rest better in quiet.</li>
-    <li><b>Headphones:</b> keep the volume low, especially for long sessions.</li>
+    <li data-i18n-block><b>Quiet is enough.</b> Noise works best a little softer than a normal conversation. If you have to raise your voice over it, it is too loud.</li>
+    <li data-i18n-block><b>Babies:</b> paediatricians advise keeping a sound machine at least 2 metres (7 feet) from the cot, below about 50 decibels (like a quiet dishwasher) and using a timer — some machines tested at full volume were loud enough to risk hearing damage.</li>
+    <li data-i18n-block><b>All night?</b> Use the sleep timer if you only need help falling asleep. Your ears also rest better in quiet.</li>
+    <li data-i18n-block><b>Headphones:</b> keep the volume low, especially for long sessions.</li>
     <li>This page explains sounds; it is not medical advice. For tinnitus, sleep problems or ADHD, talk to a doctor or audiologist.</li>
   </ul>
 </section>
@@ -378,7 +380,7 @@ function curve(slope){const pts=[];for(let i=0;i<=40;i++){const x=i/40;let y;if(
 $('explainCards').innerHTML=EX.map(e=>'<article class="ex" id="ex-'+e.k+'" style="--c:'+e.c+'"><h3>'+esc(CH[e.k].name)+'<button type="button" class="secondary" data-solo="'+e.k+'">▶ Listen</button></h3>'+
   '<svg viewBox="0 0 300 62" role="img" aria-label="How the energy of '+esc(CH[e.k].name)+' is spread from low to high notes"><polyline points="0,60 '+curve(e.slope)+' 300,60" fill="'+e.c+'" fill-opacity=".35" stroke="'+(e.k==='white'?'#9aa3ad':e.c)+'" stroke-width="2"/><text x="2" y="58" font-size="9" fill="#555">low</text><text x="298" y="58" font-size="9" fill="#555" text-anchor="end">high</text></svg>'+
   '<dl><dt>Sounds like</dt><dd>'+esc(e.like)+'</dd><dt>How its sound is spread</dt><dd>'+esc(e.spread)+'</dd><dt>Good for</dt><dd>'+esc(e.good)+'</dd><dt>What it does in you</dt><dd>'+esc(e.act)+'</dd><dt>Evidence <span class="ev '+e.ev[0]+'">'+esc(e.ev[1])+'</span></dt><dt>Tip</dt><dd>'+esc(e.tip)+'</dd></dl></article>').join('')+
-  '<article class="ex" style="--c:#16202B"><h3>Black noise</h3><dl><dd>Black noise usually means <b>silence</b>, or near-silence with rare random sounds. Some people sleep best in quiet — earplugs or a quiet room are the “black noise” option. There is nothing to play here.</dd></dl></article>';
+  '<article class="ex" style="--c:#16202B"><h3>Black noise</h3><dl><dd data-i18n-block>Black noise usually means <b>silence</b>, or near-silence with rare random sounds. Some people sleep best in quiet — earplugs or a quiet room are the “black noise” option. There is nothing to play here.</dd></dl></article>';
 document.querySelectorAll('[data-solo]').forEach(b=>b.onclick=()=>{const k=b.dataset.solo,m={};m[k]=.5;applyMix(m);if(!playing)play();$('mixerPanel').scrollIntoView({behavior:'smooth'})});
 
 /* ---- start ---- */
