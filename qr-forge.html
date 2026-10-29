@@ -94,7 +94,13 @@
   .preview-card {
     background: var(--paper); border-radius: var(--radius); padding: 22px; display: flex; flex-direction: column; align-items: center; gap: 16px;
   }
-  #qrTarget { background: #fff; padding: 16px; border-radius: 4px; line-height: 0; }
+  #qrTarget { border-radius: 4px; line-height: 0; }
+  #qrTarget .qr-hidden { display: none; }
+  .warn-box { margin-top: 12px; padding: 10px 12px; background: rgba(226,166,59,.16); border-left: 3px solid var(--amber); font-size: 13px; color: #4A3410; display: none; }
+  .warn-box.show { display: block; }
+  .dl-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .dl-row .draft-btn { flex: 1; }
+  input[type="datetime-local"], input[type="number"] { width: 100%; }
   #qrTarget img, #qrTarget canvas { display: block; max-width: 100%; height: auto; }
   .preview-empty { color: rgba(22, 32, 43, 0.72); font-size: 13.5px; text-align: center; padding: 40px 20px; }
 
@@ -137,6 +143,9 @@
         <option value="vcard" data-i18n="typeOptVcard">Contact card (vCard)</option>
         <option value="phone" data-i18n="typeOptPhone">Phone number</option>
         <option value="email" data-i18n="typeOptEmail">Email address</option>
+        <option value="sms" data-i18n="typeOptSms">Text message (SMS)</option>
+        <option value="geo" data-i18n="typeOptGeo">Location on a map</option>
+        <option value="event" data-i18n="typeOptEvent">Calendar event</option>
       </select>
     </div>
     <div class="field" id="fieldsText">
@@ -176,6 +185,16 @@
           <input type="text" id="vcardEmail" placeholder="jane@example.com">
         </div>
       </div>
+      <div class="row-2" style="margin-top:10px;">
+        <div>
+          <label for="vcardOrg" data-i18n="vcardOrgLabel">Company (optional)</label>
+          <input type="text" id="vcardOrg" placeholder="Sunrise Bakery">
+        </div>
+        <div>
+          <label for="vcardUrl" data-i18n="vcardUrlLabel">Website (optional)</label>
+          <input type="text" id="vcardUrl" placeholder="https://…">
+        </div>
+      </div>
       <p class="hint" data-i18n="vcardHint">Scanning saves this as a new contact.</p>
     </div>
     <div class="field" id="fieldsPhone" style="display:none;">
@@ -186,7 +205,36 @@
     <div class="field" id="fieldsEmail" style="display:none;">
       <label for="emailAddress" data-i18n="emailAddressLabel">Email address</label>
       <input type="text" id="emailAddress" placeholder="jane@example.com">
+      <label for="emailSubject" data-i18n="emailSubjectLabel" style="margin-top:10px;">Subject (optional)</label>
+      <input type="text" id="emailSubject" placeholder="">
       <p class="hint" data-i18n="emailHint">Scanning opens a new email addressed to this.</p>
+    </div>
+    <div class="field" id="fieldsSms" style="display:none;">
+      <label for="smsNumber" data-i18n="smsNumberLabel">Phone number</label>
+      <input type="text" id="smsNumber" placeholder="+1 555 0100">
+      <label for="smsMessage" data-i18n="smsMessageLabel" style="margin-top:10px;">Message (optional)</label>
+      <input type="text" id="smsMessage" placeholder="">
+      <p class="hint" data-i18n="smsHint">Scanning opens a text message to this number, ready to send.</p>
+    </div>
+    <div class="field" id="fieldsGeo" style="display:none;">
+      <label for="geoLink" data-i18n="geoLinkLabel">Paste a map link, or type the coordinates</label>
+      <input type="text" id="geoLink" placeholder="https://maps.google.com/…@-1.2864,36.8172 or -1.2864, 36.8172">
+      <div class="row-2" style="margin-top:10px;">
+        <div><label for="geoLat" data-i18n="geoLatLabel">Latitude</label><input type="number" id="geoLat" step="any" placeholder="-1.2864"></div>
+        <div><label for="geoLng" data-i18n="geoLngLabel">Longitude</label><input type="number" id="geoLng" step="any" placeholder="36.8172"></div>
+      </div>
+      <p class="hint" data-i18n="geoHint">Scanning opens this place in the phone's map app.</p>
+    </div>
+    <div class="field" id="fieldsEvent" style="display:none;">
+      <label for="evTitle" data-i18n="evTitleLabel">Event name</label>
+      <input type="text" id="evTitle" placeholder="Summer party">
+      <div class="row-2" style="margin-top:10px;">
+        <div><label for="evStart" data-i18n="evStartLabel">Starts</label><input type="datetime-local" id="evStart"></div>
+        <div><label for="evEnd" data-i18n="evEndLabel">Ends</label><input type="datetime-local" id="evEnd"></div>
+      </div>
+      <label for="evPlace" data-i18n="evPlaceLabel" style="margin-top:10px;">Place (optional)</label>
+      <input type="text" id="evPlace" placeholder="">
+      <p class="hint" data-i18n="evHint">Scanning adds the event to the phone's calendar.</p>
     </div>
 
     <div class="section-title" data-i18n="logoHeading">Logo overlay (optional)</div>
@@ -205,6 +253,8 @@
           <option value="200" data-i18n="size200">200 × 200 (web)</option>
           <option value="400" selected data-i18n="size400">400 × 400 (standard)</option>
           <option value="800" data-i18n="size800">800 × 800 (print)</option>
+          <option value="1200" data-i18n="size1200">1200 × 1200 (large print)</option>
+          <option value="2000" data-i18n="size2000">2000 × 2000 (poster)</option>
         </select>
       </div>
       <div>
@@ -228,8 +278,26 @@
         <input type="color" id="qrLight" value="#ffffff">
       </div>
     </div>
+    <div class="field row-2">
+      <div>
+        <label for="qrDots" data-i18n="dotsLabel">Dot shape</label>
+        <select id="qrDots"><option value="square" data-i18n="shapeSquare">Square</option><option value="rounded" data-i18n="shapeRounded">Rounded</option><option value="dots" data-i18n="shapeDots">Dots</option></select>
+      </div>
+      <div>
+        <label for="qrCorners" data-i18n="cornersLabel">Corner shape</label>
+        <select id="qrCorners"><option value="square" data-i18n="shapeSquare">Square</option><option value="rounded" data-i18n="shapeRounded">Rounded</option><option value="dot" data-i18n="shapeCircle">Circle</option></select>
+      </div>
+    </div>
+    <div class="field">
+      <label for="qrCaption" data-i18n="captionLabel">Text under the code (optional)</label>
+      <input type="text" id="qrCaption" maxlength="40" data-i18n-placeholder="captionPlaceholder" placeholder="Scan me">
+    </div>
 
-    <button type="button" class="draft-btn" id="downloadBtn" data-i18n="downloadBtnLabel">Download PNG</button>
+    <div class="dl-row">
+      <button type="button" class="draft-btn" id="downloadBtn" data-i18n="downloadBtnLabel">Download PNG</button>
+      <button type="button" class="draft-btn" id="svgBtn" data-i18n="svgBtnLabel">Download SVG</button>
+    </div>
+    <div class="warn-box" id="warnBox" data-i18n="contrastWarn">The code is too light against its background. Many phones will not scan it. Use a dark code on a light background.</div>
     <div class="error-box" id="errorBox"></div>
   </div>
 
@@ -241,7 +309,7 @@
 
 <section class="miga-about" aria-labelledby="miga-about-h">
   <h2 id="miga-about-h">About QR Forge</h2>
-  <p>QR Forge turns any link or text into a QR code you can download.</p>
+  <p>QR Forge turns a link, text, Wi-Fi network, contact card, phone number, email, text message, map location or calendar event into a QR code. Choose the colours, dot and corner shapes, add your logo and a line of text such as “Scan me”, and download it as PNG or SVG. Every code has the blank border scanners need.</p>
   <h3>How to use QR Forge</h3>
   <ol><li>Paste the destination link or text and choose the QR style.</li><li>Press “Create QR code”.</li><li>Scan-test it and download the final code.</li></ol>
   <h3>Do the QR codes expire?</h3>
@@ -253,7 +321,7 @@
   <p class="miga-about-rel">Related tools: <a href="logo-forge.html">Logo Forge</a> · <a href="form-forge.html">Form Forge</a> · <a href="invoice-forge.html">Invoice Forge</a></p>
 </section>
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a>. Everything is generated locally — nothing you type is sent anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
-<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/qr-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/qr-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
 
 <script>
 (function(){
@@ -285,6 +353,10 @@
   const qrTarget = document.getElementById('qrTarget');
   const downloadBtn = document.getElementById('downloadBtn');
   const errorBox = document.getElementById('errorBox');
+  const g = id => document.getElementById(id);
+  const vcardOrg = g('vcardOrg'), vcardUrl = g('vcardUrl'), emailSubject = g('emailSubject'), smsNumber = g('smsNumber'), smsMessage = g('smsMessage'),
+    geoLink = g('geoLink'), geoLat = g('geoLat'), geoLng = g('geoLng'), evTitle = g('evTitle'), evStart = g('evStart'), evEnd = g('evEnd'), evPlace = g('evPlace'),
+    qrDots = g('qrDots'), qrCorners = g('qrCorners'), qrCaption = g('qrCaption'), svgBtn = g('svgBtn'), warnBox = g('warnBox');
 
   function showError(message) { errorBox.textContent = message; errorBox.classList.add('show'); }
   function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
@@ -300,6 +372,10 @@
     fieldsVcard.style.display = type === 'vcard' ? 'block' : 'none';
     fieldsPhone.style.display = type === 'phone' ? 'block' : 'none';
     fieldsEmail.style.display = type === 'email' ? 'block' : 'none';
+    g('fieldsSms').style.display = type === 'sms' ? 'block' : 'none';
+    g('fieldsGeo').style.display = type === 'geo' ? 'block' : 'none';
+    g('fieldsEvent').style.display = type === 'event' ? 'block' : 'none';
+    if (type === 'event' && !evStart.value) { const d = new Date(Date.now() + 864e5); d.setMinutes(0, 0, 0); d.setHours(18); const local = new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 16); evStart.value = local; const e = new Date(d.getTime() + 2 * 36e5); evEnd.value = new Date(e.getTime() - e.getTimezoneOffset() * 6e4).toISOString().slice(0, 16); }
   }
   qrType.addEventListener('change', () => { updateTypeFields(); render(); });
   updateTypeFields();
@@ -316,9 +392,14 @@
     if (type === 'vcard') {
       const name = vcardName.value.trim();
       if (!name) return '';
-      const lines = ['BEGIN:VCARD', 'VERSION:3.0', 'FN:' + name];
-      if (vcardPhone.value.trim()) lines.push('TEL:' + vcardPhone.value.trim());
+      // vCard 3.0 needs both N (last;first) and FN; commas and semicolons in values must be escaped.
+      const vEsc = v => v.replace(/\\/g, '\\\\').replace(/([,;])/g, '\\$1');
+      const parts = name.split(/\s+/), last = parts.length > 1 ? parts.pop() : '', first = parts.join(' ');
+      const lines = ['BEGIN:VCARD', 'VERSION:3.0', 'N:' + vEsc(last) + ';' + vEsc(first || name) + ';;;', 'FN:' + vEsc(name)];
+      if (vcardOrg.value.trim()) lines.push('ORG:' + vEsc(vcardOrg.value.trim()));
+      if (vcardPhone.value.trim()) lines.push('TEL;TYPE=CELL:' + vcardPhone.value.trim());
       if (vcardEmail.value.trim()) lines.push('EMAIL:' + vcardEmail.value.trim());
+      if (vcardUrl.value.trim()) lines.push('URL:' + vcardUrl.value.trim());
       lines.push('END:VCARD');
       return lines.join('\n');
     }
@@ -328,10 +409,36 @@
     }
     if (type === 'email') {
       const addr = emailAddress.value.trim();
-      return addr ? 'mailto:' + addr : '';
+      return addr ? 'mailto:' + addr + (emailSubject.value.trim() ? '?subject=' + encodeURIComponent(emailSubject.value.trim()) : '') : '';
+    }
+    if (type === 'sms') {
+      const num = smsNumber.value.trim().replace(/[^0-9+]/g, '');
+      return num ? 'SMSTO:' + num + ':' + smsMessage.value.trim() : '';
+    }
+    if (type === 'geo') {
+      const lat = parseFloat(geoLat.value), lng = parseFloat(geoLng.value);
+      return isFinite(lat) && isFinite(lng) && Math.abs(lat) <= 90 && Math.abs(lng) <= 180 ? 'geo:' + lat + ',' + lng : '';
+    }
+    if (type === 'event') {
+      const title = evTitle.value.trim();
+      if (!title || !evStart.value) return '';
+      const utc = v => new Date(v).toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
+      const icsEsc = v => v.replace(/\\/g, '\\\\').replace(/([,;])/g, '\\$1');
+      const lines = ['BEGIN:VEVENT', 'SUMMARY:' + icsEsc(title), 'DTSTART:' + utc(evStart.value)];
+      if (evEnd.value && new Date(evEnd.value) > new Date(evStart.value)) lines.push('DTEND:' + utc(evEnd.value));
+      if (evPlace.value.trim()) lines.push('LOCATION:' + icsEsc(evPlace.value.trim()));
+      lines.push('END:VEVENT');
+      return lines.join('\n');
     }
     return qrText.value.trim();
   }
+
+  // A pasted Google Maps, Apple Maps or OpenStreetMap link (or "lat, lng") fills the coordinates.
+  geoLink.addEventListener('input', () => {
+    const t = geoLink.value;
+    const m = t.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/) || t.match(/[?&](?:q|ll|query|mlat)=(-?\d+\.\d+)(?:,|%2C|&mlon=)(-?\d+\.\d+)/i) || t.match(/#map=\d+\/(-?\d+\.\d+)\/(-?\d+\.\d+)/) || t.match(/^\s*(-?\d{1,2}\.\d+)\s*[,; ]\s*(-?\d{1,3}\.\d+)\s*$/);
+    if (m) { geoLat.value = m[1]; geoLng.value = m[2]; render(); }
+  });
 
   let logoImg = null;
 
@@ -360,58 +467,128 @@
     render();
   });
 
+  // The code is drawn here from the module grid (not by the library), so it gets a proper quiet zone,
+  // dot and corner shapes, a caption, and the same picture as an SVG.
+  let current = null;
+  function moduleGrid(text, level) {
+    const tmp = document.createElement('div'); tmp.className = 'qr-hidden';
+    const qr = new QRCode(tmp, { text: text, width: 64, height: 64, correctLevel: QRCode.CorrectLevel[LEVELS[level]] });
+    const m = qr._oQRCode, n = m.getModuleCount(), grid = [];
+    for (let r = 0; r < n; r++) { const row = []; for (let c = 0; c < n; c++) row.push(m.isDark(r, c)); grid.push(row); }
+    return grid;
+  }
+  const f = v => +v.toFixed(3);
+  function rrect(x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); if (r <= 0) return 'M' + f(x) + ' ' + f(y) + 'h' + f(w) + 'v' + f(h) + 'h' + f(-w) + 'z';
+    return 'M' + f(x + r) + ' ' + f(y) + 'h' + f(w - 2 * r) + 'a' + f(r) + ' ' + f(r) + ' 0 0 1 ' + f(r) + ' ' + f(r) + 'v' + f(h - 2 * r) + 'a' + f(r) + ' ' + f(r) + ' 0 0 1 ' + f(-r) + ' ' + f(r) + 'h' + f(-(w - 2 * r)) + 'a' + f(r) + ' ' + f(r) + ' 0 0 1 ' + f(-r) + ' ' + f(-r) + 'v' + f(-(h - 2 * r)) + 'a' + f(r) + ' ' + f(r) + ' 0 0 1 ' + f(r) + ' ' + f(-r) + 'z'; }
+  function circle(cx, cy, r) { return 'M' + f(cx - r) + ' ' + f(cy) + 'a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(2 * r) + ' 0a' + f(r) + ' ' + f(r) + ' 0 1 0 ' + f(-2 * r) + ' 0z'; }
+  // A module whose neighbours are dark stays square on that side, so rounded codes have no gaps for scanners to trip on.
+  function joined(grid, r, c, x, y) {
+    const n = grid.length, dark = (rr, cc) => rr >= 0 && cc >= 0 && rr < n && cc < n && grid[rr][cc];
+    const up = dark(r - 1, c), dn = dark(r + 1, c), lf = dark(r, c - 1), rt = dark(r, c + 1), R = 0.5;
+    const tl = !up && !lf ? R : 0, tr = !up && !rt ? R : 0, br = !dn && !rt ? R : 0, bl = !dn && !lf ? R : 0;
+    return 'M' + f(x + tl) + ' ' + f(y) + 'H' + f(x + 1 - tr) + (tr ? 'A' + R + ' ' + R + ' 0 0 1 ' + f(x + 1) + ' ' + f(y + tr) : '') +
+      'V' + f(y + 1 - br) + (br ? 'A' + R + ' ' + R + ' 0 0 1 ' + f(x + 1 - br) + ' ' + f(y + 1) : '') +
+      'H' + f(x + bl) + (bl ? 'A' + R + ' ' + R + ' 0 0 1 ' + f(x) + ' ' + f(y + 1 - bl) : '') +
+      'V' + f(y + tl) + (tl ? 'A' + R + ' ' + R + ' 0 0 1 ' + f(x + tl) + ' ' + f(y) : '') + 'Z';
+  }
+  function qrPath(grid, margin, dots, corners) {
+    const n = grid.length, inFinder = (r, c) => (r < 7 && c < 7) || (r < 7 && c >= n - 7) || (r >= n - 7 && c < 7);
+    let d = '';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+      if (!grid[r][c] || inFinder(r, c)) continue;
+      const x = c + margin, y = r + margin;
+      if (dots === 'dots') { d += circle(x + 0.5, y + 0.5, 0.5); continue; }
+      if (dots === 'rounded') { d += joined(grid, r, c, x, y); continue; }
+      d += rrect(x, y, 1.02, 1.02, 0);
+    }
+    [[0, 0], [0, n - 7], [n - 7, 0]].forEach(([r, c]) => {
+      const x = c + margin, y = r + margin;
+      if (corners === 'dot') d += circle(x + 3.5, y + 3.5, 3.5) + circle(x + 3.5, y + 3.5, 2.5) + circle(x + 3.5, y + 3.5, 1.5);
+      else { const rad = corners === 'rounded' ? 1 : 0; d += rrect(x, y, 7, 7, rad * 1.6) + rrect(x + 1, y + 1, 5, 5, rad) + rrect(x + 2, y + 2, 3, 3, rad * 0.8); }
+    });
+    return d;
+  }
+  function lum(hex) { const v = parseInt(hex.slice(1), 16), ch = [v >> 16 & 255, v >> 8 & 255, v & 255].map(x => { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); }); return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2]; }
+  function buildCurrent(text) {
+    const level = logoImg ? 'H' : qrLevel.value, grid = moduleGrid(text, level), margin = 4, n = grid.length, total = n + margin * 2;
+    const caption = qrCaption.value.trim(), capH = caption ? Math.max(5, total * 0.14) : 0;
+    return { text, grid, n, margin, total, caption, capH, path: qrPath(grid, margin, qrDots.value, qrCorners.value), dark: qrDark.value, light: qrLight.value, size: parseInt(qrSize.value, 10) };
+  }
+  function drawCanvas(q) {
+    const scale = q.size / q.total, canvas = document.createElement('canvas');
+    canvas.width = q.size; canvas.height = Math.round((q.total + q.capH) * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = q.light; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.save(); ctx.scale(scale, scale); ctx.fillStyle = q.dark; ctx.fill(new Path2D(q.path), 'evenodd'); ctx.restore();
+    if (logoImg) {
+      const code = q.n * scale, logoSize = code * 0.22, x = (q.size - logoSize) / 2, y = (q.total * scale - logoSize) / 2, pad = logoSize * 0.12;
+      ctx.fillStyle = q.light; ctx.fillRect(x - pad, y - pad, logoSize + pad * 2, logoSize + pad * 2);
+      ctx.drawImage(logoImg, x, y, logoSize, logoSize);
+    }
+    if (q.caption) {
+      ctx.fillStyle = q.dark; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      let fs = q.capH * scale * 0.62; ctx.font = '700 ' + fs + 'px Arial, Helvetica, sans-serif';
+      while (ctx.measureText(q.caption).width > q.size * 0.9 && fs > 8) { fs -= 1; ctx.font = '700 ' + fs + 'px Arial, Helvetica, sans-serif'; }
+      ctx.fillText(q.caption, q.size / 2, (q.total - q.margin * 0.45 + q.capH / 2) * scale);
+    }
+    return canvas;
+  }
+  function svgOf(q) {
+    const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+    const H = q.total + q.capH, code = q.n;
+    let logo = '';
+    if (logoImg) { const ls = code * 0.22, x = (q.total - ls) / 2, pad = ls * 0.12; let href = logoImg.src; try { const c = document.createElement('canvas'); c.width = logoImg.naturalWidth; c.height = logoImg.naturalHeight; c.getContext('2d').drawImage(logoImg, 0, 0); href = c.toDataURL('image/png'); } catch (e) {}
+      logo = '<rect x="' + f(x - pad) + '" y="' + f(x - pad) + '" width="' + f(ls + pad * 2) + '" height="' + f(ls + pad * 2) + '" fill="' + q.light + '"/><image x="' + f(x) + '" y="' + f(x) + '" width="' + f(ls) + '" height="' + f(ls) + '" href="' + href + '"/>'; }
+    const cap = q.caption ? '<text x="' + f(q.total / 2) + '" y="' + f(q.total - q.margin * 0.45 + q.capH / 2) + '" text-anchor="middle" dominant-baseline="middle" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="' + f(q.capH * 0.62) + '" textLength="' + f(Math.min(q.total * 0.9, q.caption.length * q.capH * 0.62 * 0.62)) + '" lengthAdjust="spacingAndGlyphs" fill="' + q.dark + '">' + esc(q.caption) + '</text>' : '';
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + q.total + ' ' + f(H) + '" width="' + q.size + '" height="' + Math.round(q.size * H / q.total) + '" shape-rendering="' + (qrDots.value === 'square' && qrCorners.value === 'square' ? 'crispEdges' : 'geometricPrecision') + '">' +
+      '<title>' + esc('QR code: ' + q.text.slice(0, 200)) + '</title><rect width="100%" height="100%" fill="' + q.light + '"/><path fill="' + q.dark + '" fill-rule="evenodd" d="' + q.path + '"/>' + logo + cap + '</svg>\n';
+  }
+
   function render() {
     clearError();
     const text = getEncodedText();
     qrTarget.innerHTML = '';
     qrLevel.disabled = !!logoImg;
     levelForcedHint.style.display = logoImg ? 'block' : 'none';
+    current = null;
+    // Scanners need a dark code on a light background with clear contrast.
+    const lightL = lum(qrLight.value), darkL = lum(qrDark.value);
+    warnBox.classList.toggle('show', (lightL + 0.05) / (darkL + 0.05) < 3);
     if (!text) {
       qrTarget.innerHTML = '<div class="preview-empty">' + I18N.t('previewEmpty') + '</div>';
-      downloadBtn.disabled = true;
+      downloadBtn.disabled = true; svgBtn.disabled = true;
       return;
     }
     try {
-      const size = parseInt(qrSize.value, 10);
-      const level = logoImg ? 'H' : qrLevel.value;
-      new QRCode(qrTarget, {
-        text: text,
-        width: size,
-        height: size,
-        colorDark: qrDark.value,
-        colorLight: qrLight.value,
-        correctLevel: QRCode.CorrectLevel[LEVELS[level]]
-      });
-      const qrImg = qrTarget.querySelector('img');
-      if (qrImg) qrImg.alt = 'QR code for ' + text;
-      if (logoImg) {
-        const canvas = qrTarget.querySelector('canvas');
-        if (canvas) {
-          const ctx = canvas.getContext('2d');
-          const logoSize = size * 0.22;
-          const x = (size - logoSize) / 2;
-          const y = (size - logoSize) / 2;
-          const pad = logoSize * 0.12;
-          ctx.fillStyle = qrLight.value;
-          ctx.fillRect(x - pad, y - pad, logoSize + pad * 2, logoSize + pad * 2);
-          ctx.drawImage(logoImg, x, y, logoSize, logoSize);
-        }
-      }
-      downloadBtn.disabled = false;
+      current = buildCurrent(text);
+      const canvas = drawCanvas(current);
+      canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', 'QR code for ' + text);
+      canvas.style.width = Math.min(current.size, 400) + 'px';
+      qrTarget.appendChild(canvas);
+      downloadBtn.disabled = false; svgBtn.disabled = false;
     } catch (err) {
       showError(I18N.t('errorGenerate'));
-      downloadBtn.disabled = true;
+      downloadBtn.disabled = true; svgBtn.disabled = true;
     }
   }
 
-  [qrText, qrSize, qrLevel, qrDark, qrLight, wifiSsid, wifiSecurity, wifiPassword, vcardName, vcardPhone, vcardEmail, phoneNumber, emailAddress].forEach(el => {
+  [qrText, qrSize, qrLevel, qrDark, qrLight, wifiSsid, wifiSecurity, wifiPassword, vcardName, vcardPhone, vcardEmail, phoneNumber, emailAddress,
+    vcardOrg, vcardUrl, emailSubject, smsNumber, smsMessage, geoLat, geoLng, evTitle, evStart, evEnd, evPlace, qrDots, qrCorners, qrCaption].forEach(el => {
     el.addEventListener('input', render);
     el.addEventListener('change', render);
   });
 
+  svgBtn.addEventListener('click', () => {
+    if (!current) { showError(I18N.t('errorNothingToDownload')); return; }
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([svgOf(current)], { type: 'image/svg+xml' }));
+    a.download = 'qr-code.svg';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  });
   downloadBtn.addEventListener('click', () => {
     const canvas = qrTarget.querySelector('canvas');
-    if (!canvas) { showError(I18N.t('errorNothingToDownload')); return; }
+    if (!canvas || !current) { showError(I18N.t('errorNothingToDownload')); return; }
     const url = canvas.toDataURL('image/png');
     const a = document.createElement('a');
     a.href = url;
@@ -424,6 +601,36 @@
   I18N.onChange(render);
   I18N.init({
     en: {
+      typeOptSms: "Text message (SMS)",
+      typeOptGeo: "Location on a map",
+      typeOptEvent: "Calendar event",
+      vcardOrgLabel: "Company (optional)",
+      vcardUrlLabel: "Website (optional)",
+      emailSubjectLabel: "Subject (optional)",
+      smsNumberLabel: "Phone number",
+      smsMessageLabel: "Message (optional)",
+      smsHint: "Scanning opens a text message to this number, ready to send.",
+      geoLinkLabel: "Paste a map link, or type the coordinates",
+      geoLatLabel: "Latitude",
+      geoLngLabel: "Longitude",
+      geoHint: "Scanning opens this place in the phone's map app.",
+      evTitleLabel: "Event name",
+      evStartLabel: "Starts",
+      evEndLabel: "Ends",
+      evPlaceLabel: "Place (optional)",
+      evHint: "Scanning adds the event to the phone's calendar.",
+      size1200: "1200 × 1200 (large print)",
+      size2000: "2000 × 2000 (poster)",
+      dotsLabel: "Dot shape",
+      cornersLabel: "Corner shape",
+      shapeSquare: "Square",
+      shapeRounded: "Rounded",
+      shapeDots: "Dots",
+      shapeCircle: "Circle",
+      captionLabel: "Text under the code (optional)",
+      captionPlaceholder: "Scan me",
+      svgBtnLabel: "Download SVG",
+      contrastWarn: "The code is too light against its background. Many phones will not scan it. Use a dark code on a light background.",
       heroSubtitle: 'Turn any link or text into a downloadable QR code — instantly, in your browser.',
       contentHeading: 'Content', typeLabel: 'Type',
       typeOptText: 'Link or plain text', typeOptWifi: 'Wi-Fi network', typeOptVcard: 'Contact card (vCard)', typeOptPhone: 'Phone number', typeOptEmail: 'Email address',
@@ -444,6 +651,36 @@
       footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything is generated locally — nothing you type is sent anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
     },
     es: {
+      typeOptSms: "Mensaje de texto (SMS)",
+      typeOptGeo: "Ubicación en un mapa",
+      typeOptEvent: "Evento de calendario",
+      vcardOrgLabel: "Empresa (opcional)",
+      vcardUrlLabel: "Sitio web (opcional)",
+      emailSubjectLabel: "Asunto (opcional)",
+      smsNumberLabel: "Número de teléfono",
+      smsMessageLabel: "Mensaje (opcional)",
+      smsHint: "Al escanearlo se abre un SMS a este número, listo para enviar.",
+      geoLinkLabel: "Pega un enlace de mapa o escribe las coordenadas",
+      geoLatLabel: "Latitud",
+      geoLngLabel: "Longitud",
+      geoHint: "Al escanearlo se abre este lugar en la app de mapas.",
+      evTitleLabel: "Nombre del evento",
+      evStartLabel: "Empieza",
+      evEndLabel: "Termina",
+      evPlaceLabel: "Lugar (opcional)",
+      evHint: "Al escanearlo se añade el evento al calendario del teléfono.",
+      size1200: "1200 × 1200 (impresión grande)",
+      size2000: "2000 × 2000 (póster)",
+      dotsLabel: "Forma de los puntos",
+      cornersLabel: "Forma de las esquinas",
+      shapeSquare: "Cuadrado",
+      shapeRounded: "Redondeado",
+      shapeDots: "Puntos",
+      shapeCircle: "Círculo",
+      captionLabel: "Texto debajo del código (opcional)",
+      captionPlaceholder: "Escanéame",
+      svgBtnLabel: "Descargar SVG",
+      contrastWarn: "El código es demasiado claro para su fondo. Muchos teléfonos no podrán leerlo. Usa un código oscuro sobre fondo claro.",
       heroSubtitle: 'Convierte cualquier enlace o texto en un código QR descargable — al instante, en tu navegador.',
       contentHeading: 'Contenido', typeLabel: 'Tipo',
       typeOptText: 'Enlace o texto plano', typeOptWifi: 'Red Wi-Fi', typeOptVcard: 'Tarjeta de contacto (vCard)', typeOptPhone: 'Número de teléfono', typeOptEmail: 'Dirección de correo',
@@ -464,6 +701,36 @@
       footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo se genera localmente — nada de lo que escribes se envía a ningún lugar. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
     },
     ar: {
+      typeOptSms: "رسالة نصية (SMS)",
+      typeOptGeo: "موقع على الخريطة",
+      typeOptEvent: "حدث في التقويم",
+      vcardOrgLabel: "الشركة (اختياري)",
+      vcardUrlLabel: "الموقع الإلكتروني (اختياري)",
+      emailSubjectLabel: "الموضوع (اختياري)",
+      smsNumberLabel: "رقم الهاتف",
+      smsMessageLabel: "الرسالة (اختياري)",
+      smsHint: "عند المسح تُفتح رسالة نصية إلى هذا الرقم جاهزة للإرسال.",
+      geoLinkLabel: "الصق رابط خريطة أو اكتب الإحداثيات",
+      geoLatLabel: "خط العرض",
+      geoLngLabel: "خط الطول",
+      geoHint: "عند المسح يُفتح هذا المكان في تطبيق الخرائط.",
+      evTitleLabel: "اسم الحدث",
+      evStartLabel: "يبدأ",
+      evEndLabel: "ينتهي",
+      evPlaceLabel: "المكان (اختياري)",
+      evHint: "عند المسح يُضاف الحدث إلى تقويم الهاتف.",
+      size1200: "1200 × 1200 (طباعة كبيرة)",
+      size2000: "2000 × 2000 (ملصق)",
+      dotsLabel: "شكل النقاط",
+      cornersLabel: "شكل الزوايا",
+      shapeSquare: "مربع",
+      shapeRounded: "مستدير",
+      shapeDots: "نقاط",
+      shapeCircle: "دائرة",
+      captionLabel: "نص أسفل الرمز (اختياري)",
+      captionPlaceholder: "امسحني",
+      svgBtnLabel: "تنزيل SVG",
+      contrastWarn: "الرمز فاتح جدًا مقارنة بخلفيته وقد لا تقرأه هواتف كثيرة. استخدم رمزًا داكنًا على خلفية فاتحة.",
       heroSubtitle: 'حوّل أي رابط أو نص إلى رمز QR قابل للتنزيل — فورًا، في متصفحك.',
       contentHeading: 'المحتوى', typeLabel: 'النوع',
       typeOptText: 'رابط أو نص عادي', typeOptWifi: 'شبكة Wi-Fi', typeOptVcard: 'بطاقة تواصل (vCard)', typeOptPhone: 'رقم هاتف', typeOptEmail: 'عنوان بريد إلكتروني',
@@ -484,6 +751,36 @@
       footerText: 'جزء من <a href="index.html">MigaBuilder</a>. يتم إنشاء كل شيء محليًا — لا يُرسل أي شيء تكتبه إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
     },
     zh: {
+      typeOptSms: "短信 (SMS)",
+      typeOptGeo: "地图位置",
+      typeOptEvent: "日历活动",
+      vcardOrgLabel: "公司（可选）",
+      vcardUrlLabel: "网站（可选）",
+      emailSubjectLabel: "主题（可选）",
+      smsNumberLabel: "电话号码",
+      smsMessageLabel: "短信内容（可选）",
+      smsHint: "扫码后会打开发往该号码的短信，可直接发送。",
+      geoLinkLabel: "粘贴地图链接，或输入坐标",
+      geoLatLabel: "纬度",
+      geoLngLabel: "经度",
+      geoHint: "扫码后会在手机地图中打开这个地点。",
+      evTitleLabel: "活动名称",
+      evStartLabel: "开始",
+      evEndLabel: "结束",
+      evPlaceLabel: "地点（可选）",
+      evHint: "扫码后会把活动添加到手机日历。",
+      size1200: "1200 × 1200（大尺寸打印）",
+      size2000: "2000 × 2000（海报）",
+      dotsLabel: "码点形状",
+      cornersLabel: "定位角形状",
+      shapeSquare: "方形",
+      shapeRounded: "圆角",
+      shapeDots: "圆点",
+      shapeCircle: "圆形",
+      captionLabel: "码下方文字（可选）",
+      captionPlaceholder: "扫一扫",
+      svgBtnLabel: "下载 SVG",
+      contrastWarn: "二维码颜色与背景太接近，很多手机无法识别。请使用浅色背景上的深色码。",
       heroSubtitle: '将任何链接或文本转换为可下载的二维码——就在你的浏览器中，即时完成。',
       contentHeading: '内容', typeLabel: '类型',
       typeOptText: '链接或纯文本', typeOptWifi: 'Wi-Fi 网络', typeOptVcard: '联系人名片（vCard）', typeOptPhone: '电话号码', typeOptEmail: '电子邮件地址',
@@ -504,6 +801,36 @@
       footerText: '隶属于 <a href="index.html">MigaBuilder</a>。一切都在本地生成——你输入的任何内容都不会被发送到任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
     },
     sw: {
+      typeOptSms: "Ujumbe mfupi (SMS)",
+      typeOptGeo: "Mahali kwenye ramani",
+      typeOptEvent: "Tukio la kalenda",
+      vcardOrgLabel: "Kampuni (si lazima)",
+      vcardUrlLabel: "Tovuti (si lazima)",
+      emailSubjectLabel: "Kichwa (si lazima)",
+      smsNumberLabel: "Namba ya simu",
+      smsMessageLabel: "Ujumbe (si lazima)",
+      smsHint: "Ukiskani, ujumbe mfupi kwa namba hii unafunguka, tayari kutumwa.",
+      geoLinkLabel: "Bandika kiungo cha ramani, au andika viwianishi",
+      geoLatLabel: "Latitudo",
+      geoLngLabel: "Longitudo",
+      geoHint: "Ukiskani, mahali hapa panafunguka kwenye programu ya ramani.",
+      evTitleLabel: "Jina la tukio",
+      evStartLabel: "Linaanza",
+      evEndLabel: "Linaisha",
+      evPlaceLabel: "Mahali (si lazima)",
+      evHint: "Ukiskani, tukio linaongezwa kwenye kalenda ya simu.",
+      size1200: "1200 × 1200 (chapa kubwa)",
+      size2000: "2000 × 2000 (bango)",
+      dotsLabel: "Umbo la vitone",
+      cornersLabel: "Umbo la pembe",
+      shapeSquare: "Mraba",
+      shapeRounded: "Mviringo",
+      shapeDots: "Vitone",
+      shapeCircle: "Duara",
+      captionLabel: "Maandishi chini ya msimbo (si lazima)",
+      captionPlaceholder: "Niskani",
+      svgBtnLabel: "Pakua SVG",
+      contrastWarn: "Msimbo ni mweupe mno ukilinganishwa na mandharinyuma. Simu nyingi hazitausoma. Tumia msimbo mweusi kwenye mandharinyuma meupe.",
       heroSubtitle: 'Geuza kiungo au maandishi yoyote kuwa msimbo wa QR unaoweza kupakuliwa — papo hapo, kwenye kivinjari chako.',
       contentHeading: 'Maudhui', typeLabel: 'Aina',
       typeOptText: 'Kiungo au maandishi wazi', typeOptWifi: 'Mtandao wa Wi-Fi', typeOptVcard: 'Kadi ya mawasiliano (vCard)', typeOptPhone: 'Nambari ya simu', typeOptEmail: 'Anwani ya barua pepe',
@@ -524,6 +851,36 @@
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu hutengenezwa ndani ya kivinjari chako — hakuna unachoandika kinachotumwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
     },
     sv: {
+      typeOptSms: "Sms",
+      typeOptGeo: "Plats på en karta",
+      typeOptEvent: "Kalenderhändelse",
+      vcardOrgLabel: "Företag (valfritt)",
+      vcardUrlLabel: "Webbplats (valfritt)",
+      emailSubjectLabel: "Ämne (valfritt)",
+      smsNumberLabel: "Telefonnummer",
+      smsMessageLabel: "Meddelande (valfritt)",
+      smsHint: "Skanning öppnar ett sms till numret, klart att skicka.",
+      geoLinkLabel: "Klistra in en kartlänk eller skriv koordinaterna",
+      geoLatLabel: "Latitud",
+      geoLngLabel: "Longitud",
+      geoHint: "Skanning öppnar platsen i telefonens kartapp.",
+      evTitleLabel: "Händelsens namn",
+      evStartLabel: "Börjar",
+      evEndLabel: "Slutar",
+      evPlaceLabel: "Plats (valfritt)",
+      evHint: "Skanning lägger till händelsen i telefonens kalender.",
+      size1200: "1200 × 1200 (stort tryck)",
+      size2000: "2000 × 2000 (affisch)",
+      dotsLabel: "Punktform",
+      cornersLabel: "Hörnform",
+      shapeSquare: "Fyrkant",
+      shapeRounded: "Rundad",
+      shapeDots: "Prickar",
+      shapeCircle: "Cirkel",
+      captionLabel: "Text under koden (valfritt)",
+      captionPlaceholder: "Skanna mig",
+      svgBtnLabel: "Ladda ner SVG",
+      contrastWarn: "Koden är för ljus mot bakgrunden. Många telefoner kan inte läsa den. Använd en mörk kod på ljus bakgrund.",
       heroSubtitle: "Gör om valfri länk eller text till en QR-kod som du kan ladda ner — direkt, i din webbläsare.",
       contentHeading: "Innehåll",
       typeLabel: "Typ",
@@ -576,6 +933,36 @@
       footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt skapas lokalt — ingenting du skriver skickas någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     },
     de: {
+      typeOptSms: "SMS",
+      typeOptGeo: "Ort auf einer Karte",
+      typeOptEvent: "Kalendertermin",
+      vcardOrgLabel: "Firma (optional)",
+      vcardUrlLabel: "Website (optional)",
+      emailSubjectLabel: "Betreff (optional)",
+      smsNumberLabel: "Telefonnummer",
+      smsMessageLabel: "Nachricht (optional)",
+      smsHint: "Beim Scannen öffnet sich eine SMS an diese Nummer, fertig zum Senden.",
+      geoLinkLabel: "Kartenlink einfügen oder Koordinaten eingeben",
+      geoLatLabel: "Breitengrad",
+      geoLngLabel: "Längengrad",
+      geoHint: "Beim Scannen öffnet sich der Ort in der Karten-App.",
+      evTitleLabel: "Name des Termins",
+      evStartLabel: "Beginn",
+      evEndLabel: "Ende",
+      evPlaceLabel: "Ort (optional)",
+      evHint: "Beim Scannen wird der Termin in den Kalender eingetragen.",
+      size1200: "1200 × 1200 (großer Druck)",
+      size2000: "2000 × 2000 (Poster)",
+      dotsLabel: "Punktform",
+      cornersLabel: "Eckenform",
+      shapeSquare: "Quadratisch",
+      shapeRounded: "Abgerundet",
+      shapeDots: "Punkte",
+      shapeCircle: "Kreis",
+      captionLabel: "Text unter dem Code (optional)",
+      captionPlaceholder: "Scan mich",
+      svgBtnLabel: "SVG herunterladen",
+      contrastWarn: "Der Code ist zu hell für seinen Hintergrund. Viele Handys können ihn nicht lesen. Nutze einen dunklen Code auf hellem Hintergrund.",
       heroSubtitle: "Mach aus jedem Link oder Text einen QR-Code zum Herunterladen — sofort, in deinem Browser.",
       contentHeading: "Inhalt",
       typeLabel: "Typ",
@@ -628,6 +1015,36 @@
       footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles wird lokal erzeugt — nichts, was du eingibst, wird irgendwohin gesendet. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
     },
     pt: {
+      typeOptSms: "Mensagem de texto (SMS)",
+      typeOptGeo: "Local no mapa",
+      typeOptEvent: "Evento de calendário",
+      vcardOrgLabel: "Empresa (opcional)",
+      vcardUrlLabel: "Site (opcional)",
+      emailSubjectLabel: "Assunto (opcional)",
+      smsNumberLabel: "Número de telefone",
+      smsMessageLabel: "Mensagem (opcional)",
+      smsHint: "Ao escanear, abre um SMS para este número, pronto para enviar.",
+      geoLinkLabel: "Cole um link de mapa ou digite as coordenadas",
+      geoLatLabel: "Latitude",
+      geoLngLabel: "Longitude",
+      geoHint: "Ao escanear, abre este lugar no app de mapas.",
+      evTitleLabel: "Nome do evento",
+      evStartLabel: "Começa",
+      evEndLabel: "Termina",
+      evPlaceLabel: "Local (opcional)",
+      evHint: "Ao escanear, o evento é adicionado à agenda do celular.",
+      size1200: "1200 × 1200 (impressão grande)",
+      size2000: "2000 × 2000 (pôster)",
+      dotsLabel: "Formato dos pontos",
+      cornersLabel: "Formato dos cantos",
+      shapeSquare: "Quadrado",
+      shapeRounded: "Arredondado",
+      shapeDots: "Pontos",
+      shapeCircle: "Círculo",
+      captionLabel: "Texto abaixo do código (opcional)",
+      captionPlaceholder: "Escaneie",
+      svgBtnLabel: "Baixar SVG",
+      contrastWarn: "O código está claro demais para o fundo. Muitos celulares não vão ler. Use um código escuro sobre fundo claro.",
       heroSubtitle: "Transforme qualquer link ou texto num QR code para baixar — na hora, no seu navegador.",
       contentHeading: "Conteúdo",
       typeLabel: "Tipo",
@@ -680,6 +1097,36 @@
       footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo é gerado localmente — nada do que você digita é enviado. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>"
     },
     fr: {
+      typeOptSms: "SMS",
+      typeOptGeo: "Lieu sur une carte",
+      typeOptEvent: "Événement d’agenda",
+      vcardOrgLabel: "Entreprise (facultatif)",
+      vcardUrlLabel: "Site web (facultatif)",
+      emailSubjectLabel: "Objet (facultatif)",
+      smsNumberLabel: "Numéro de téléphone",
+      smsMessageLabel: "Message (facultatif)",
+      smsHint: "Le scan ouvre un SMS vers ce numéro, prêt à envoyer.",
+      geoLinkLabel: "Collez un lien de carte ou saisissez les coordonnées",
+      geoLatLabel: "Latitude",
+      geoLngLabel: "Longitude",
+      geoHint: "Le scan ouvre ce lieu dans l’app de cartes.",
+      evTitleLabel: "Nom de l’événement",
+      evStartLabel: "Début",
+      evEndLabel: "Fin",
+      evPlaceLabel: "Lieu (facultatif)",
+      evHint: "Le scan ajoute l’événement à l’agenda du téléphone.",
+      size1200: "1200 × 1200 (grand format)",
+      size2000: "2000 × 2000 (affiche)",
+      dotsLabel: "Forme des points",
+      cornersLabel: "Forme des coins",
+      shapeSquare: "Carré",
+      shapeRounded: "Arrondi",
+      shapeDots: "Points",
+      shapeCircle: "Cercle",
+      captionLabel: "Texte sous le code (facultatif)",
+      captionPlaceholder: "Scannez-moi",
+      svgBtnLabel: "Télécharger le SVG",
+      contrastWarn: "Le code est trop clair par rapport au fond. Beaucoup de téléphones ne pourront pas le lire. Utilisez un code foncé sur fond clair.",
       heroSubtitle: "Transformez n'importe quel lien ou texte en QR code téléchargeable — instantanément, dans votre navigateur.",
       contentHeading: "Contenu",
       typeLabel: "Type",

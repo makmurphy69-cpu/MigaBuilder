@@ -441,6 +441,48 @@ test('cv-forge: Download PDF makes a PDF with the name in it', 'cv-forge.html', 
   expect(/Twelve years of artisan bread/.test(texts.join(' ')), 'the summary is not readable as text');
 });
 
+test('qr-forge: PNG and SVG keep their own white border and scan on a dark background (map location, rounded style)', 'qr-forge.html', async (page) => {
+  await page.selectOption('#qrType', 'geo');
+  await page.fill('#geoLink', 'https://www.google.com/maps/place/Nairobi/@-1.2864,36.8172,12z');
+  await page.selectOption('#qrDots', 'rounded');
+  await page.selectOption('#qrCorners', 'rounded');
+  await page.fill('#qrCaption', 'Scan me');
+  const png = await downloadOf(page, () => page.click('#downloadBtn'));
+  const svg = await downloadOf(page, () => page.click('#svgBtn'));
+  expect(magic(png.buf, 0x89, 0x50, 0x4e, 0x47) && svg.name === 'qr-code.svg' && /<svg[^>]+viewBox/.test(svg.buf.toString()), 'downloads are not a PNG and an SVG');
+  await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js' });
+  const read = (b64, type) => page.evaluate(async ({ b64, type }) => {
+    const img = new Image(); img.src = 'data:' + type + ';base64,' + b64; await img.decode();
+    const w = 400, h = Math.round(400 * img.naturalHeight / img.naturalWidth), c = document.createElement('canvas'); c.width = w + 80; c.height = h + 80;
+    const g = c.getContext('2d'); g.fillStyle = '#000'; g.fillRect(0, 0, c.width, c.height); g.drawImage(img, 40, 40, w, h); // a dark poster around the code
+    const r = jsQR(g.getImageData(0, 0, c.width, c.height).data, c.width, c.height);
+    return r ? r.data : null;
+  }, { b64, type });
+  const a = await read(png.buf.toString('base64'), 'image/png'), b = await read(svg.buf.toString('base64'), 'image/svg+xml');
+  expect(a === 'geo:-1.2864,36.8172', 'the PNG does not scan on a dark background: ' + a);
+  expect(b === 'geo:-1.2864,36.8172', 'the SVG does not scan on a dark background: ' + b);
+});
+
+test('strength-compass: all 60 choices can be answered and the report shows five strengths', 'strength-compass.html', async (page) => {
+  await page.click('#startBtn');
+  for (let i = 0; i < 60; i++) {
+    await page.click('.choice[data-value="' + [-2, -1, 1, 2][i % 4] + '"]');
+    await page.click('#nextBtn');
+  }
+  await page.waitForSelector('#results:not(.hidden)', { timeout: 5000 });
+  const text = await page.textContent('#results');
+  expect(/Strategic Vision|Analytical Clarity|Creative Exploration|Reliable Execution|Adaptive Momentum|Bold Initiative/.test(text), 'the report has no strengths: ' + text.slice(0, 200));
+});
+
+test('file-forge: before/after compare shows the new size, and file names are shown as plain text', 'file-forge.html', async (page) => {
+  await page.setInputFiles('#fileInput', [{ name: 'a&b <img src=x onerror=window.__hacked=1>.png', mimeType: 'image/png', buffer: fs.readFileSync(path.join(FIX, 'small-photo.png')) }]);
+  await page.selectOption('#formatSelect', 'image/webp');
+  await page.click('.cmp-btn');
+  await page.waitForFunction(() => /KB → .*KB \(/.test(document.getElementById('compareSizes').textContent), null, { timeout: 15000 });
+  expect(/^blob:/.test(await page.getAttribute('#cmpAfter', 'src')), 'the new version is not shown');
+  expect(await page.evaluate(() => !window.__hacked && document.querySelector('.file-name').textContent.includes('<img')), 'the file name was turned into HTML');
+});
+
 test('invoice-forge: download holds the business and client names', 'invoice-forge.html', async (page) => {
   await page.fill('#bizName', 'Sunrise Bakery');
   await page.fill('#clientName', 'Kilimani Cafe');
@@ -448,6 +490,32 @@ test('invoice-forge: download holds the business and client names', 'invoice-for
   const html = out.buf.toString('utf8');
   expect(/<html/i.test(html), 'download is not an HTML document: ' + out.name);
   expect(html.includes('Kilimani Cafe') && html.includes('Sunrise Bakery'), 'business or client name missing from the invoice');
+});
+
+test('invoice-forge: decimal commas, the currency, a fixed number and a searchable PDF', 'invoice-forge.html', async (page) => {
+  await page.selectOption('#docType', 'Invoice');
+  await page.selectOption('#currency', 'EUR');
+  expect(await page.inputValue('#docNumber') === 'INV-0001', 'the first invoice should be INV-0001, got ' + await page.inputValue('#docNumber'));
+  await page.fill('#bizName', 'Sunrise Bakery');
+  await page.fill('#clientName', 'Kilimani Cafe');
+  await page.fill('.item-row .i-qty', '2');
+  await page.fill('.item-row .i-rate', '1.234,50'); // European style: 1234.50
+  await page.fill('#shipping', '10,5');
+  await page.fill('#taxPct', '20');
+  await page.fill('#payDetails', 'IBAN DE89 3704 0044 0532 0130 00');
+  const line = await page.textContent('.item-row .i-line-total');
+  expect(/2,469\.00/.test(line) && /€/.test(line), 'the line total is wrong: ' + line);
+  const before = await page.frameLocator('#previewFrame').locator('body').innerText();
+  await page.fill('#notes', 'Thanks!');
+  const after = await page.frameLocator('#previewFrame').locator('body').innerText();
+  expect(/INV-0001/.test(before) && /INV-0001/.test(after), 'the number changed while typing');
+  // 2469.00 + 20% tax (493.80) + 10.50 shipping = 2973.30
+  expect(/2,973\.30/.test(after) && /Due/.test(after) && /IBAN DE89/.test(after), 'the preview totals or payment details are wrong: ' + after.replace(/\s+/g, ' ').slice(0, 400));
+  const out = await downloadOf(page, () => page.click('#pdfBtn'));
+  expect(out.name === 'invoice-INV-0001.pdf' && ascii(out.buf, 0, '%PDF'), 'download is not the PDF: ' + out.name);
+  const text = (await pdfPageTexts(page, out.buf)).join(' ');
+  for (const want of ['Sunrise Bakery', 'Kilimani Cafe', 'INV-0001', '2,973.30', 'IBAN DE89']) expect(text.includes(want), 'the PDF text is missing "' + want + '": ' + text.slice(0, 300));
+  await page.waitForFunction(() => document.getElementById('docNumber').value === 'INV-0002', null, { timeout: 5000 });
 });
 
 test('psychology-atlas: printable quiz has every question and an answer key', 'psychology-atlas.html', async (page) => {

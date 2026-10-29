@@ -156,6 +156,16 @@
     border-radius: var(--radius);
     padding: 8px 10px;
   }
+  .cmp-btn { border: 1px solid rgba(22,32,43,.25); background: #fff; border-radius: 3px; padding: 5px 9px; font-size: 12px; font-weight: 600; cursor: pointer; flex: none; }
+  .compare { margin-top: 14px; background: #fff; border: 1px solid rgba(22,32,43,.15); padding: 10px; border-radius: 4px; }
+  .compare[hidden] { display: none; }
+  .compare-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-size: 13px; margin-bottom: 8px; flex-wrap: wrap; }
+  .compare-stage { position: relative; overflow: hidden; background: repeating-conic-gradient(#eee 0% 25%, #fff 0% 50%) 50% / 16px 16px; line-height: 0; cursor: ew-resize; touch-action: none; }
+  .compare-stage img { width: 100%; height: auto; display: block; image-rendering: auto; }
+  .compare-stage .after { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+  .compare-stage .split { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #E2A63B; box-shadow: 0 0 0 1px rgba(0,0,0,.2); pointer-events: none; }
+  .compare-stage .tag { position: absolute; top: 8px; font: 700 11px/1 'IBM Plex Sans', sans-serif; background: rgba(8,24,38,.75); color: #fff; padding: 4px 6px; border-radius: 3px; }
+  .compare-zoom { display: flex; gap: 6px; align-items: center; font-size: 12.5px; margin-top: 8px; }
   .file-row img { width: 40px; height: 40px; object-fit: cover; border-radius: 2px; flex: none; background: #eee; }
   .file-row .file-meta { flex: 1; min-width: 0; }
   .file-row .file-name { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -218,6 +228,11 @@
       </label>
       <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
       <div class="file-list" id="fileList"></div>
+      <div class="compare" id="comparePanel" hidden>
+        <div class="compare-head"><b id="compareTitle"></b><span id="compareSizes"></span><button type="button" class="cmp-btn" id="compareClose">×</button></div>
+        <div class="compare-stage" id="compareStage"><img id="cmpBefore" alt=""><img class="after" id="cmpAfter" alt=""><div class="split" id="cmpSplit"></div><span class="tag" style="left:8px" data-i18n="cmpOriginal">Original</span><span class="tag" id="cmpAfterTag" style="right:8px" data-i18n="cmpNew">New</span></div>
+        <label class="compare-zoom"><input type="checkbox" id="cmpZoom"> <span data-i18n="cmpZoom">Zoom to 100% to see fine detail</span></label>
+      </div>
     </div>
 
     <div class="section-title" data-i18n="convertToHeading">Convert to</div>
@@ -278,7 +293,7 @@
   <p class="miga-about-rel">Related tools: <a href="image-studio.html">Image Studio</a> · <a href="vector-forge.html">Vector Forge</a> · <a href="pdf-forge.html">PDF Forge</a></p>
 </section>
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a>. Your images never leave your device — everything happens locally in the browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
-<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/file-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/file-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
 
 <script>
 (function(){
@@ -318,8 +333,14 @@
       img.src = f.previewUrl;
       const meta = document.createElement('div');
       meta.className = 'file-meta';
-      const estimateText = f.estimatedSize != null ? ' → <span class="estimate">~' + formatBytes(f.estimatedSize) + '</span>' : '';
-      meta.innerHTML = '<div class="file-name">' + f.file.name + '</div><div class="file-size">' + formatBytes(f.file.size) + estimateText + '</div>';
+      const pct = f.estimatedSize != null ? Math.round((f.estimatedSize / f.file.size - 1) * 100) : 0;
+      const estimateText = f.estimatedSize != null ? ' → <span class="estimate">~' + formatBytes(f.estimatedSize) + ' (' + (pct > 0 ? '+' : '') + pct + '%)</span>' : '';
+      const nameEl = document.createElement('div'); nameEl.className = 'file-name'; nameEl.textContent = f.file.name;
+      meta.innerHTML = '<div class="file-size">' + formatBytes(f.file.size) + estimateText + '</div>';
+      meta.prepend(nameEl);
+      const cmp = document.createElement('button');
+      cmp.type = 'button'; cmp.className = 'cmp-btn'; cmp.textContent = I18N.t('cmpBtn');
+      cmp.addEventListener('click', () => openCompare(f));
       const status = document.createElement('div');
       status.className = 'file-status';
       status.textContent = f.status || '';
@@ -329,6 +350,7 @@
       removeBtn.title = I18N.t('removeTitle');
       removeBtn.textContent = '×';
       removeBtn.addEventListener('click', () => {
+        if (compareEntry === f) closeCompare();
         URL.revokeObjectURL(f.previewUrl);
         files.splice(i, 1);
         renderFileList();
@@ -337,6 +359,7 @@
       row.appendChild(img);
       row.appendChild(meta);
       row.appendChild(status);
+      row.appendChild(cmp);
       row.appendChild(removeBtn);
       fileListEl.appendChild(row);
     });
@@ -477,6 +500,35 @@
       }
       renderFileList();
     }
+    if (compareEntry && token === estimateToken) refreshCompare();
+  }
+
+  // ---------- Before / after: drag across the picture to compare the original with the new file ----------
+  const comparePanel = document.getElementById('comparePanel'), cmpBefore = document.getElementById('cmpBefore'), cmpAfter = document.getElementById('cmpAfter'),
+    cmpSplit = document.getElementById('cmpSplit'), compareStage = document.getElementById('compareStage'), cmpZoom = document.getElementById('cmpZoom');
+  let compareEntry = null, compareUrl = '', compareToken = 0, splitAt = 50;
+  function setSplit(pct) { splitAt = Math.max(0, Math.min(100, pct)); cmpAfter.style.clipPath = 'inset(0 0 0 ' + splitAt + '%)'; cmpSplit.style.left = splitAt + '%'; }
+  function stagePct(e) { const r = compareStage.getBoundingClientRect(); return (e.clientX - r.left) / r.width * 100; }
+  compareStage.addEventListener('pointerdown', e => { compareStage.setPointerCapture(e.pointerId); setSplit(stagePct(e)); });
+  compareStage.addEventListener('pointermove', e => { if (e.buttons) setSplit(stagePct(e)); });
+  compareStage.tabIndex = 0; compareStage.setAttribute('role', 'slider'); compareStage.setAttribute('aria-label', 'Before and after');
+  compareStage.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') setSplit(splitAt - 5); if (e.key === 'ArrowRight') setSplit(splitAt + 5); });
+  cmpZoom.addEventListener('change', () => { [cmpBefore, cmpAfter].forEach(im => { im.style.width = cmpZoom.checked ? cmpBefore.naturalWidth + 'px' : '100%'; im.style.maxWidth = cmpZoom.checked ? 'none' : ''; }); compareStage.style.overflow = cmpZoom.checked ? 'auto' : 'hidden'; compareStage.style.maxHeight = cmpZoom.checked ? '520px' : ''; });
+  function closeCompare() { comparePanel.hidden = true; compareEntry = null; if (compareUrl) URL.revokeObjectURL(compareUrl); compareUrl = ''; }
+  document.getElementById('compareClose').addEventListener('click', closeCompare);
+  function openCompare(entry) { compareEntry = entry; comparePanel.hidden = false; document.getElementById('compareTitle').textContent = entry.file.name; cmpBefore.src = entry.previewUrl; setSplit(50); refreshCompare(); comparePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  async function refreshCompare() {
+    const entry = compareEntry; if (!entry) return;
+    const token = ++compareToken;
+    document.getElementById('compareSizes').textContent = I18N.t('cmpWorking');
+    try {
+      const blob = await convertOne(entry, formatSelect.value, parseInt(qualitySlider.value, 10) / 100, parseInt(maxDimensionSelect.value, 10) || 0, targetBytes());
+      if (token !== compareToken || entry !== compareEntry) return;
+      if (compareUrl) URL.revokeObjectURL(compareUrl);
+      compareUrl = URL.createObjectURL(blob); cmpAfter.src = compareUrl;
+      const pct = Math.round((blob.size / entry.file.size - 1) * 100);
+      document.getElementById('compareSizes').textContent = formatBytes(entry.file.size) + ' → ' + formatBytes(blob.size) + ' (' + (pct > 0 ? '+' : '') + pct + '%)';
+    } catch (e) { if (token === compareToken) document.getElementById('compareSizes').textContent = e.message; }
   }
 
   function downloadBlob(blob, filename) {
@@ -553,6 +605,11 @@
   I18N.onChange(renderFileList);
   I18N.init({
     en: {
+      cmpBtn: "Compare",
+      cmpOriginal: "Original",
+      cmpNew: "New",
+      cmpZoom: "Zoom to 100% to see fine detail",
+      cmpWorking: "Making the new version…",
       targetLabel: 'Keep each file under (KB) — optional', targetPlaceholder: 'No limit', targetHint: 'For forms that only take small photos (visa, exam and job sites often say 50 or 100 KB). Lowers the quality first, then the size, until each file fits.', statusOverLimit: '⚠ Smallest possible: {size}',
       heroSubtitle: 'Convert images between PNG, JPG, and WebP — entirely in your browser.',
       yourImagesHeading: 'Your images', uploadDropStrong: 'Click to choose files, or drag them here',
@@ -571,6 +628,11 @@
       footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your images never leave your device — everything happens locally in the browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
     },
     es: {
+      cmpBtn: "Comparar",
+      cmpOriginal: "Original",
+      cmpNew: "Nueva",
+      cmpZoom: "Ampliar al 100 % para ver los detalles",
+      cmpWorking: "Creando la nueva versión…",
       targetLabel: 'Mantener cada archivo por debajo de (KB) — opcional', targetPlaceholder: 'Sin límite', targetHint: 'Para formularios que solo aceptan fotos pequeñas (las webs de visados, exámenes y empleo suelen pedir 50 o 100 KB). Baja primero la calidad y después el tamaño hasta que cada archivo cabe.', statusOverLimit: '⚠ Lo más pequeño posible: {size}',
       heroSubtitle: 'Convierte imágenes entre PNG, JPG y WebP — completamente en tu navegador.',
       yourImagesHeading: 'Tus imágenes', uploadDropStrong: 'Haz clic para elegir archivos, o arrástralos aquí',
@@ -589,6 +651,11 @@
       footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tus imágenes nunca salen de tu dispositivo — todo ocurre localmente en el navegador. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
     },
     ar: {
+      cmpBtn: "قارن",
+      cmpOriginal: "الأصلية",
+      cmpNew: "الجديدة",
+      cmpZoom: "تكبير إلى 100% لرؤية التفاصيل",
+      cmpWorking: "جارٍ إنشاء النسخة الجديدة…",
       targetLabel: 'إبقاء كل ملف أقل من (كيلوبايت) — اختياري', targetPlaceholder: 'بلا حد', targetHint: 'للنماذج التي لا تقبل إلا صورًا صغيرة (مواقع التأشيرات والامتحانات والوظائف تطلب غالبًا 50 أو 100 كيلوبايت). تُخفَّض الجودة أولًا ثم الأبعاد حتى يناسب كل ملف الحد.', statusOverLimit: '⚠ أصغر حجم ممكن: {size}',
       heroSubtitle: 'حوّل الصور بين PNG وJPG وWebP — بالكامل داخل متصفحك.',
       yourImagesHeading: 'صورك', uploadDropStrong: 'انقر لاختيار الملفات، أو اسحبها هنا',
@@ -607,6 +674,11 @@
       footerText: 'جزء من <a href="index.html">MigaBuilder</a>. صورك لا تغادر جهازك أبدًا — كل شيء يحدث محليًا في المتصفح. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
     },
     zh: {
+      cmpBtn: "对比",
+      cmpOriginal: "原图",
+      cmpNew: "新图",
+      cmpZoom: "放大到 100% 查看细节",
+      cmpWorking: "正在生成新版本…",
       targetLabel: '每个文件不超过（KB）——可选', targetPlaceholder: '不限制', targetHint: '适用于只接受小照片的表格（签证、考试和求职网站常要求 50 或 100 KB）。先降低画质，再缩小尺寸，直到每个文件都符合要求。', statusOverLimit: '⚠ 已尽量缩小：{size}',
       heroSubtitle: '在 PNG、JPG 和 WebP 之间转换图片——完全在你的浏览器中完成。',
       yourImagesHeading: '你的图片', uploadDropStrong: '点击选择文件，或将文件拖到此处',
@@ -625,6 +697,11 @@
       footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的图片绝不会离开你的设备——一切都在浏览器本地完成。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
     },
     sw: {
+      cmpBtn: "Linganisha",
+      cmpOriginal: "Asili",
+      cmpNew: "Mpya",
+      cmpZoom: "Kuza hadi 100% kuona maelezo madogo",
+      cmpWorking: "Inatengeneza toleo jipya…",
       targetLabel: 'Weka kila faili chini ya (KB) — hiari', targetPlaceholder: 'Bila kikomo', targetHint: 'Kwa fomu zinazokubali picha ndogo tu (tovuti za viza, mitihani na kazi mara nyingi husema KB 50 au 100). Hupunguza ubora kwanza, kisha ukubwa, hadi kila faili litoshee.', statusOverLimit: '⚠ Ndogo kabisa iwezekanavyo: {size}',
       heroSubtitle: 'Geuza picha kati ya PNG, JPG, na WebP — yote ndani ya kivinjari chako.',
       yourImagesHeading: 'Picha zako', uploadDropStrong: 'Bofya kuchagua faili, au ziburute hapa',
@@ -643,6 +720,11 @@
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Picha zako haziondoki kwenye kifaa chako kamwe — kila kitu hufanyika ndani ya kivinjari. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
     },
     sv: {
+      cmpBtn: "Jämför",
+      cmpOriginal: "Original",
+      cmpNew: "Ny",
+      cmpZoom: "Zooma till 100 % för att se detaljer",
+      cmpWorking: "Skapar den nya versionen…",
       targetLabel: "Håll varje fil under (KB) — valfritt", targetPlaceholder: "Ingen gräns", targetHint: "För formulär som bara tar små foton (visum-, prov- och jobbsajter skriver ofta 50 eller 100 KB). Sänker först kvaliteten och sedan storleken tills varje fil får plats.", statusOverLimit: "⚠ Minsta möjliga: {size}",
       heroSubtitle: "Konvertera bilder mellan PNG, JPG och WebP — helt i din webbläsare.",
       yourImagesHeading: "Dina bilder",
@@ -675,6 +757,11 @@
       footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Dina bilder lämnar aldrig din enhet — allt sker lokalt i webbläsaren. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     },
     de: {
+      cmpBtn: "Vergleichen",
+      cmpOriginal: "Original",
+      cmpNew: "Neu",
+      cmpZoom: "Auf 100 % zoomen, um Details zu sehen",
+      cmpWorking: "Neue Version wird erstellt…",
       heroSubtitle: "Wandle Bilder zwischen PNG, JPG und WebP um — komplett in deinem Browser.",
       yourImagesHeading: "Deine Bilder",
       uploadDropStrong: "Klicke, um Dateien auszuwählen, oder ziehe sie hierher",
@@ -706,6 +793,11 @@
       footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Deine Bilder verlassen nie dein Gerät — alles passiert lokal im Browser. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
     },
     pt: {
+      cmpBtn: "Comparar",
+      cmpOriginal: "Original",
+      cmpNew: "Nova",
+      cmpZoom: "Ampliar para 100% para ver detalhes",
+      cmpWorking: "Criando a nova versão…",
       heroSubtitle: "Converta imagens entre PNG, JPG e WebP — tudo no seu navegador.",
       yourImagesHeading: "Suas imagens",
       uploadDropStrong: "Clique para escolher arquivos ou arraste-os para cá",
@@ -737,6 +829,11 @@
       footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Suas imagens nunca saem do seu dispositivo — tudo acontece localmente no navegador. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>"
     },
     fr: {
+      cmpBtn: "Comparer",
+      cmpOriginal: "Original",
+      cmpNew: "Nouveau",
+      cmpZoom: "Zoomer à 100 % pour voir les détails",
+      cmpWorking: "Création de la nouvelle version…",
       heroSubtitle: "Convertissez des images entre PNG, JPG et WebP — entièrement dans votre navigateur.",
       yourImagesHeading: "Vos images",
       uploadDropStrong: "Cliquez pour choisir des fichiers ou faites-les glisser ici",
