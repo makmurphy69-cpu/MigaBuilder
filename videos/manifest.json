@@ -622,14 +622,15 @@
  },
  "file-forge.html": {
   "title": "Image Forge",
-  "video": "https://videos.migabuilder.com/file-forge.mp4",
-  "poster": "https://videos.migabuilder.com/file-forge.jpg",
-  "duration": 37,
+  "video": "https://videos.migabuilder.com/file-forge.mp4?v=01b86514",
+  "poster": "https://videos.migabuilder.com/file-forge.jpg?v=d2835f6b",
+  "duration": 69,
   "transcript": [
    "Welcome to Image Forge. Convert, resize and compress many images at once, privately.",
    "Choose your images, or drag them onto the page. Here is a large landscape photo.",
    "Pick the new format. WebP makes much smaller files for websites.",
-   "Set the quality, and a maximum size if you want to shrink the image.",
+   "Set the quality, and a maximum size if you want to shrink the image. Each file shows how much smaller it gets.",
+   "Press Compare to see the original and the new version side by side. Drag across the picture to check the quality.",
    "Press Convert and download. Location data and other hidden details are removed too.",
    "Now it is your turn. Open Image Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
@@ -853,22 +854,24 @@
  },
  "invoice-forge.html": {
   "title": "Invoice Forge",
-  "video": "https://videos.migabuilder.com/invoice-forge.mp4",
-  "poster": "https://videos.migabuilder.com/invoice-forge.jpg",
-  "duration": 53,
+  "video": "https://videos.migabuilder.com/invoice-forge.mp4?v=4410552f",
+  "poster": "https://videos.migabuilder.com/invoice-forge.jpg?v=8437329d",
+  "duration": 85,
   "transcript": [
-   "Welcome to Invoice Forge. Let us make a professional invoice in about a minute.",
-   "Enter your business name and your client’s name.",
-   "Choose whether this is a quote or an invoice.",
-   "Add each line item with a quantity and price. The totals are calculated for you.",
-   "Add a discount or tax rate if you need one. The preview updates as you type.",
-   "When it looks right, print it, save it as a PDF, or download it.",
+   "Welcome to Invoice Forge. Let us make a professional invoice in about a minute, in your own currency.",
+   "Enter your business name and your client’s name. Your business details are remembered for next time.",
+   "Choose a quote, an invoice or a receipt. Each one gets a number, and the next number is suggested for you after you download.",
+   "Pick the date, when payment is due, and your currency.",
+   "Add each line item with a quantity and price. The totals are calculated for you, and decimal commas work too.",
+   "Add a discount, tax or shipping if you need them.",
+   "Tell your client how to pay you, and add a note. The preview updates as you type.",
+   "Download it as a PDF, print it, or download it as a web page.",
    "Now it is your turn. Open Invoice Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
-   "file": "samples/invoice-forge.html",
+   "file": "samples/invoice-forge.pdf",
    "label": "Invoice made in this video",
-   "kind": "html"
+   "kind": "pdf"
   }
  },
  "jam-forge.html": {
@@ -1458,15 +1461,16 @@
  },
  "qr-forge.html": {
   "title": "QR Forge",
-  "video": "https://videos.migabuilder.com/qr-forge.mp4",
-  "poster": "https://videos.migabuilder.com/qr-forge.jpg",
-  "duration": 53,
+  "video": "https://videos.migabuilder.com/qr-forge.mp4?v=68a12c90",
+  "poster": "https://videos.migabuilder.com/qr-forge.jpg?v=bce0b17e",
+  "duration": 77,
   "transcript": [
    "Welcome to QR Forge. Let us make a QR code that people can scan with their phone camera.",
-   "First choose what the code is for: a link or text, a Wi-Fi network, a contact card, a phone number or an email.",
+   "First choose what the code is for: a link, Wi-Fi, a contact card, a phone number, an email, a text message, a place on a map or a calendar event.",
    "Type the link you want people to open. The code updates instantly as you type.",
-   "Pick the size and colours. A dark code on a light background scans best.",
-   "Scan it with your phone to test it, then download the finished code as a picture.",
+   "Pick the size and colours. A dark code on a light background scans best, and you get a warning if the colours are too close.",
+   "Choose rounded dots and corners, and add a line of text under the code, like Scan me.",
+   "Scan it with your phone to test it, then download it as a picture, or as an SVG for sharp printing at any size.",
    "Now it is your turn. Open QR Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
   ],
   "sample": {
