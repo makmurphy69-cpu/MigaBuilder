@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explain this letter: bills, tax, council, landlord and legal letters in plain words — Letter Forge | MigaBuilder</title>
+<meta name="description" content="Free AI letter explainer. Paste or photograph a confusing letter — a bill, a tax or council letter, a landlord notice, a fine, a medical or legal letter — and get what it means, how urgent it is, the deadlines, what to do next, scam warning signs and a draft reply, in your own language. Your name, account numbers and address are hidden on your device before anything is sent.">
+<link rel="canonical" href="https://migabuilder.com/letter-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/letter-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Letter Forge — explain this letter in plain words | MigaBuilder">
+<meta property="og:description" content="What a confusing letter means, how urgent it is, the deadlines and what to do — with your personal details hidden before the AI sees it.">
+<meta property="og:url" content="https://migabuilder.com/letter-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<style>
+.hidden{display:none!important}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.drop{border:2px dashed rgba(22,32,43,.28);border-radius:6px;padding:14px;text-align:center;background:rgba(255,255,255,.45);margin-bottom:10px}
+.drop.on{border-color:var(--amber);background:rgba(226,166,59,.12)}
+#letter{min-height:260px;font-size:14px;line-height:1.5}
+.found{display:grid;gap:5px;margin:8px 0;max-height:260px;overflow:auto}
+.found label{display:flex;gap:8px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.13);padding:6px 9px;font-size:13px;cursor:pointer;min-width:0}.found small{white-space:nowrap}
+.found code{font:500 12px 'IBM Plex Mono';background:rgba(14,42,71,.08);padding:1px 5px;border-radius:3px;white-space:nowrap}
+.found .val{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;min-width:0}
+.found label.off .val{text-decoration:line-through;opacity:.55}
+.preview{white-space:pre-wrap;background:#fff;border:1px solid rgba(22,32,43,.14);padding:12px;font-size:13px;line-height:1.55;max-height:300px;overflow:auto}
+.preview mark{background:#fde68a;color:#16202b;border-radius:3px;padding:0 3px;font:500 12px 'IBM Plex Mono'}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.row3 .field{margin-bottom:8px}
+.urg{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:4px;border-left:6px solid;margin-bottom:12px}
+.urg b{display:block;font:700 19px 'Space Grotesk';margin-bottom:2px}
+.urg-now{background:rgba(216,96,74,.13);border-color:var(--error)}
+.urg-soon{background:rgba(226,166,59,.16);border-color:var(--amber)}
+.urg-later,.urg-none{background:rgba(78,158,115,.12);border-color:var(--success)}
+.box{background:#fff;border:1px solid rgba(22,32,43,.13);padding:12px 14px;margin-bottom:10px}
+.box h3{font:700 15px 'Space Grotesk';margin:0 0 6px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.box p{margin:0 0 6px;line-height:1.55}
+.box ul,.box ol{margin:0;padding-left:20px;line-height:1.55}
+.box li{margin-bottom:3px}
+.steps li label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.steps li input{margin-top:4px}
+.steps{list-style:none;padding-left:0!important}
+.dl{width:100%;border-collapse:collapse;font-size:14px}
+.dl td{border-bottom:1px solid rgba(22,32,43,.1);padding:6px 4px;vertical-align:top}
+.dl td:first-child{font-weight:700;white-space:nowrap;padding-right:12px}
+.scam-low{border-left:5px solid var(--success)}.scam-medium{border-left:5px solid var(--amber)}.scam-high{border-left:5px solid var(--error);background:#fff6f4}
+.mini{padding:6px 10px!important;font-size:12.5px}
+.reply{white-space:pre-wrap;background:#fff;border:1px solid rgba(22,32,43,.14);padding:12px;font-size:14px;line-height:1.55;min-height:80px}
+.busy{display:inline-block;width:14px;height:14px;border:2px solid rgba(22,32,43,.25);border-top-color:var(--navy);border-radius:50%;animation:sp 1s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.err{color:#7b281d;font-weight:600}
+[dir=rtl] .box ul,[dir=rtl] .box ol{padding-left:0;padding-right:20px}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:620px){.found small{display:none}.row3{grid-template-columns:minmax(0,1fr)}.row3 .field{grid-column:auto!important}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my letter sent to an AI?", "acceptedAnswer": {"@type": "Answer", "text": "Only after your name, address, account and reference numbers, phone numbers, email addresses, bank and card numbers and dates of birth have been swapped for labels like [NAME 1] on your device. You can check exactly what will be sent before you press Explain. Your real details are put back into the answer on your device."}}, {"@type": "Question", "name": "Can I trust the explanation?", "acceptedAnswer": {"@type": "Answer", "text": "Use it as a first reading, not legal or medical advice. AI can misread a letter. Always check deadlines and amounts against the letter itself, and contact the sender or a free advice service if a lot depends on it."}}, {"@type": "Question", "name": "Is Letter Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Letter Forge</span></nav>
+<header class="masthead"><div><h1>Letter Forge</h1><p>What does this letter mean, and what do I have to do? Plain words, in your language.</p></div></header>
+<main>
+<div class="layout">
+<div>
+<section class="panel" id="inPanel">
+  <h2>1. The letter</h2>
+  <p>A bill, a tax or council letter, a landlord notice, a fine, a bank, insurance, medical, school or legal letter.</p>
+  <div class="drop" id="drop">
+    <div class="actions" style="justify-content:center"><label class="primary" for="file" style="cursor:pointer">📷 Photo or file</label><input id="file" type="file" accept="image/*,.pdf,.txt,text/plain,application/pdf" class="hidden"><button class="secondary" id="exampleBtn" type="button">Try an example letter</button></div>
+    <p class="muted" style="margin:8px 0 0">Take a photo, or drop a PDF or picture here. The text is read on your device.</p>
+    <div class="field" style="margin:8px auto 0;max-width:260px"><label for="ocrLang">Language of the letter (for photos)</label><select id="ocrLang"><option value="eng">English</option><option value="spa">Español</option><option value="fra">Français</option><option value="deu">Deutsch</option><option value="swe">Svenska</option><option value="nor">Norsk</option><option value="dan">Dansk</option><option value="nld">Nederlands</option><option value="ita">Italiano</option><option value="por">Português</option><option value="pol">Polski</option><option value="fin">Suomi</option><option value="tur">Türkçe</option><option value="ara">العربية</option><option value="chi_sim">中文</option><option value="swa">Kiswahili</option></select></div>
+  </div>
+  <p class="status" id="readStatus"></p>
+  <div class="field"><label for="letter">Or paste the text of the letter</label><textarea id="letter" placeholder="Paste the letter here…"></textarea></div>
+</section>
+
+<section class="panel" id="hidePanel">
+  <h2>2. Hide your details</h2>
+  <p class="privacy">🔒 Before anything goes to the AI, your personal details are swapped for labels like <code>[NAME 1]</code> on this device. Your real details are put back into the answer here, so the AI never sees them.</p>
+  <div class="field"><label for="extra">Also hide these words (your name, street, anything else) — one per line</label><textarea id="extra" style="min-height:60px" placeholder="Sam Rivera&#10;14 Elm Street"></textarea></div>
+  <div id="foundWrap"><p class="muted" id="foundNote">Paste a letter to see what will be hidden.</p><div class="found" id="found"></div></div>
+  <details><summary style="cursor:pointer;font-weight:700;margin:6px 0">See exactly what the AI will get</summary><div class="preview" id="preview"></div></details>
+</section>
+</div>
+
+<div>
+<section class="panel" id="askPanel">
+  <h2>3. Explain it</h2>
+  <div class="row3">
+    <div class="field"><label for="outLang">Explain in</label><select id="outLang"></select></div>
+    <div class="field"><label for="level">How simple</label><select id="level"><option value="simple">Very simple</option><option value="normal" selected>Plain and clear</option><option value="detail">More detail</option></select></div>
+    <div class="field"><label for="country">Where you live (optional)</label><input id="country" placeholder="e.g. UK, Sweden, Texas"></div>
+  </div>
+  <div class="actions"><button class="primary" id="explainBtn" type="button">Explain this letter</button></div>
+  <p class="muted" id="askStatus" aria-live="polite"></p>
+  <details style="margin-top:8px"><summary style="cursor:pointer;font-weight:700">AI settings</summary><div id="aiBox"></div></details>
+</section>
+
+<section class="panel hidden" id="outPanel" aria-live="polite">
+  <div id="out"></div>
+  <div class="actions" style="margin-top:6px">
+    <button class="secondary" id="dlTxt" type="button">Download the explanation</button>
+    <button class="secondary" id="dlIcs" type="button">Add deadlines to my calendar</button>
+    <button class="secondary" id="copyOut" type="button">Copy</button>
+  </div>
+  <p class="muted" style="margin-top:10px">This is a first reading, not legal, money or medical advice. AI can misread a letter: check every date and amount against the letter itself.</p>
+</section>
+
+<section class="panel hidden" id="followPanel">
+  <h2>Ask about this letter</h2>
+  <div class="field"><label for="question">Your question</label><textarea id="question" style="min-height:60px" placeholder="e.g. What happens if I pay a week late? Can I pay in parts?"></textarea></div>
+  <div class="actions"><button class="primary" id="askBtn" type="button">Ask</button></div>
+  <div class="reply hidden" id="answer" style="margin-top:10px"></div>
+
+  <h2 style="margin-top:20px">Write a reply</h2>
+  <div class="row3">
+    <div class="field" style="grid-column:span 2"><label for="goal">I want to</label><select id="goal"><option>Ask for more time</option><option>Ask to pay in instalments</option><option>Say I disagree and ask them to check again</option><option>Ask them to explain something</option><option>Confirm that I have paid or done what they asked</option><option>Tell them my details have changed</option><option>Make a formal complaint</option></select></div>
+    <div class="field"><label for="replyLang">Reply in</label><select id="replyLang"><option value="letter">The letter's language</option><option value="explain">My language</option></select></div>
+  </div>
+  <div class="field"><label for="notes">Anything to add (optional)</label><input id="notes" placeholder="e.g. I was in hospital in October; I can pay 50 a month"></div>
+  <div class="actions"><button class="primary" id="replyBtn" type="button">Write my reply</button><button class="secondary hidden" id="copyReply" type="button">Copy the reply</button><button class="secondary hidden" id="dlReply" type="button">Download the reply</button></div>
+  <div class="reply hidden" id="reply" style="margin-top:10px"></div>
+</section>
+</div>
+</div>
+</main>
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Letter Forge</h2>
+  <p>Letter Forge explains a confusing letter in plain words: what it is, who sent it, how urgent it is, the deadlines and amounts, what to do next, what the difficult words mean, signs that it might be a scam, and where to get free help. You can ask follow-up questions and get a polite reply written for you — asking for more time, a payment plan, a second look or an explanation. It works in your own language, even when the letter is in another one.</p>
+  <h3>How to use Letter Forge</h3>
+  <ol><li>Take a photo of the letter, open a PDF, or paste the text.</li><li>Check what will be hidden, and add your name or street if they were missed.</li><li>Choose your language and press “Explain this letter”. Tick off the steps as you do them, add the deadlines to your calendar, and write a reply if you need one.</li></ol>
+  <h3>Is my letter sent to an AI?</h3>
+  <p>Only after your name, address, account and reference numbers, phone numbers, email addresses, bank and card numbers and dates of birth have been swapped for labels like [NAME 1] on your device. You can check exactly what will be sent before you press Explain. Your real details are put back into the answer on your device. Photos and PDFs are read on your device too.</p>
+  <h3>Can I trust the explanation?</h3>
+  <p>Use it as a first reading, not legal or medical advice. AI can misread a letter. Always check deadlines and amounts against the letter itself, and contact the sender or a free advice service if a lot depends on it. If a letter asks you to pay by gift card, crypto or an unusual bank transfer, or to click a link and log in, treat it as a possible scam and contact the sender using details from their official website.</p>
+  <h3>Is Letter Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <p class="miga-about-rel">Related tools: <a href="ocr-forge.html">OCR Forge</a> · <a href="redact-forge.html">Redact Forge</a> · <a href="contract-forge.html">Contract Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Personal details are hidden on your device before any AI step. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const LANGS=['English','Español','Français','Deutsch','Svenska','Norsk','Dansk','Suomi','Nederlands','Italiano','Português','Polski','Română','Українська','Русский','Türkçe','العربية','فارسی','اردو','हिन्दी','বাংলা','中文','Tiếng Việt','Tagalog','Kiswahili','Soomaali','አማርኛ','Tigrinya','Kurdî','Shqip','Bosanski/Hrvatski/Srpski','Ελληνικά'];
+const RTL=/العربية|فارسی|اردو/;
+
+// ---------- finding personal details (on this device) ----------
+const luhn=d=>{let s=0,alt=false;for(let i=d.length-1;i>=0;i--){let n=+d[i];if(alt){n*=2;if(n>9)n-=9}s+=n;alt=!alt}return s%10===0};
+const ibanOK=s=>{s=s.replace(/\s/g,'').toUpperCase();if(s.length<15||s.length>34)return false;const r=s.slice(4)+s.slice(0,4);let m=0;for(const ch of r){const v=/[A-Z]/.test(ch)?ch.charCodeAt(0)-55:+ch;for(const dd of String(v))m=(m*10+ +dd)%97}return m===1};
+const NAME_WORD="[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'’\\-]+";
+const TITLES='(?:Mr|Mrs|Ms|Miss|Mx|Dr|Herr|Frau|Sr|Sra|M|Mme|Hr|Fru)\\.?';
+// Each rule: tag, what it is called, a pattern, and (optionally) which group holds the value and a check.
+const RULES=[
+  {tag:'EMAIL',label:'Email address',re:/[A-Za-z0-9._%+\-]+@[A-Za-z0-9\-]+(?:\.[A-Za-z0-9\-]+)*\.[A-Za-z]{2,}/g},
+  {tag:'IBAN',label:'Bank account (IBAN)',re:/\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]){11,30}\b/g,ok:ibanOK},
+  {tag:'CARD',label:'Card number',re:/\b\d(?:[ -]?\d){12,18}\b/g,ok:m=>{const d=m.replace(/\D/g,'');return d.length>=13&&d.length<=19&&luhn(d)}},
+  {tag:'ID',label:'ID number',re:/\b(?!000|666|9\d\d)\d{3}-(?!00)\d{2}-(?!0000)\d{4}\b/g},
+  {tag:'ID',label:'National Insurance number',re:/\b[A-CEGHJ-PR-TW-Z]{2} ?\d{2} ?\d{2} ?\d{2} ?[A-D]\b/g},
+  {tag:'ID',label:'Personal ID number',re:/\b(?:19|20)?\d{6}[-+]\d{4}\b/g},
+  {tag:'DOB',label:'Date of birth',re:/\b(?:date of birth|birth ?date|DOB|born(?: on)?|födelsedatum|geboren(?: am)?|fecha de nacimiento|né\(?e?\)? le)\s*[:\-]?\s*(?<v>\d{1,2}[\/.\- ]\d{1,2}[\/.\- ]\d{2,4}|\d{4}-\d{2}-\d{2}|\d{1,2} [A-Za-zäéû]+ \d{4}|[A-Z][a-z]+ \d{1,2},? \d{4})/gi},
+  {tag:'REF',label:'Account or reference number',re:/\b(?:account|acct|customer|client|reference|ref|policy|patient|member(?:ship)?|case|claim|invoice|contract|tax ?payer|NHS|NI|passport|licen[cs]e|meter|tenant|tenancy|booking|order|kundnummer|kund-?nr|ärende(?:nummer)?|referens|OCR|personnummer|aktenzeichen|kundennummer|vertragsnummer|referencia|n[ºo°] de cliente|numéro de client)\b\.?(?:\s*(?:no\.?|nr\.?|number|num|#|id|code|ref(?:erence)?)\b\.?)?\s*[:#]?\s*(?<v>(?=[A-Z0-9\-\/ ]*\d)[A-Z0-9](?:[A-Z0-9\-\/]|\s(?=\d)){3,30}[A-Z0-9])/gi,ok:v=>(v.match(/\d/g)||[]).length>=3},
+  {tag:'PHONE',label:'Phone number',re:/(?<![\w.:\/-])(?:(?:\+|00)\d{1,3}[ \-.]?(?:\(\d{1,4}\)[ \-.]?)?\d[\d \-.]{5,}\d|\(?0\d{1,4}\)?[ \-]\d{2,4}(?:[ \-]\d{2,4}){1,3}|\(\d{3}\) ?\d{3}-\d{4}|\b\d{3}-\d{3}-\d{4}\b)(?![\w.:\/-])/g,ok:m=>{const n=m.replace(/\D/g,'').length;return n>=8&&n<=15&&!/^\d{1,2} \d{1,2} \d{4}$/.test(m.trim())}},
+  {tag:'NAME',label:'Name',re:new RegExp('\\b(?:Dear|Hello|Hi|Hej|Hallo|Hola|Bonjour|Estimado|Estimada|Sehr geehrte[rs]?|Liebe[rs]?|Cher|Chère)\\s+(?:'+TITLES+'\\s+)?(?<v>'+NAME_WORD+'(?:\\s+'+NAME_WORD+'){0,2})','g'),skip:v=>/^(Sir|Madam|Customer|Resident|Tenant|Patient|Parent|Occupier|Member|Kund|Kunde|Kundin|Client|Cliente|Damen|Herren)\b/i.test(v)},
+  {tag:'NAME',label:'Name',re:new RegExp('\\b'+TITLES+'\\s+(?<v>'+NAME_WORD+'(?:\\s+'+NAME_WORD+')?)','g')},
+  {tag:'NAME',label:'Name',re:new RegExp('\\b(?:Name|Namn|Nombre|Nom|Patient|Tenant|Account holder|Policyholder|Customer)\\s*:\\s*(?<v>'+NAME_WORD+'(?:\\s+'+NAME_WORD+'){0,3})','g')},
+  {tag:'ADDRESS',label:'Street address',re:/\b\d{1,5}[A-Za-z]?,?\s+(?:[A-Z][a-z]+\s){1,4}(?:Street|St|Road|Rd|Avenue|Ave|Lane|Ln|Drive|Dr|Close|Way|Court|Ct|Place|Pl|Boulevard|Blvd|Crescent|Terrace|Gardens|Square|Grove|Hill|Park|Row|Mews|Walk|Parkway|Circle|Highway)\b\.?(?:,?\s*(?:Apt|Apartment|Flat|Unit|Suite)\.?\s*\w+)?/g},
+  {tag:'ADDRESS',label:'Street address',re:/\b(?:Flat|Apartment|Apt|Unit)\s+\d+[A-Za-z]?\b/g},
+  {tag:'ADDRESS',label:'Street address',re:/\b[A-ZÅÄÖÆØÜ][a-zåäöæøüß]+(?:gatan|vägen|gränd|stigen|torget|allén|backen|gade|vej|veien|gata|straße|strasse|weg|platz|gasse|allee|laan|straat)\s+\d+\s?[A-Za-z]?\b/g},
+  {tag:'ADDRESS',label:'Street address',re:/\b(?:Calle|Avenida|Av\.|Rue|Avenue|Boulevard|Via|Viale|Rua|Plaza|Paseo|Carrer)\s+(?:[A-Za-zÀ-ÿ'’]+\s){0,4}[A-Za-zÀ-ÿ'’]+,?\s+\d{1,5}\b/g},
+  {tag:'POSTCODE',label:'Postcode',re:/\b[A-Z]{1,2}\d[A-Z\d]? ?\d[A-Z]{2}\b/g},
+  {tag:'POSTCODE',label:'Postcode',re:/\b[A-Z]{2} \d{5}(?:-\d{4})?\b/g},
+  {tag:'POSTCODE',label:'Postcode and town',re:/^[ \t]*(?:[A-Z]{1,2}-)?\d{3} ?\d{2}[ \t]+[A-ZÅÄÖÆØÜ][\wÀ-ÿ\- ]*$/gm},
+  {tag:'POSTCODE',label:'Postcode and town',re:/^[ \t]*\d{4,5}[ \t]+[A-ZÄÖÜÀ-Þ][a-zäöüßà-ÿ\- ]+$/gm}
+];
+function custom(){return $('extra').value.split('\n').map(s=>s.trim()).filter(s=>s.length>=2)}
+let found=[],kept=new Set(),map={};
+function findDetails(text){
+  const spans=[];
+  const add=(start,end,tag,label)=>{if(end<=start)return;if(spans.some(s=>start<s.end&&end>s.start))return;spans.push({start,end,tag,label,value:text.slice(start,end)})};
+  // The words people type themselves win over everything else.
+  custom().forEach(w=>{const re=new RegExp('(?<![\\p{L}\\p{N}])'+w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\p{L}\\p{N}])','giu');let m;while((m=re.exec(text)))add(m.index,m.index+m[0].length,/^\d|\d\s*$/.test(w)&&/[a-z]/i.test(w)?'ADDRESS':'NAME','Your words')});
+  RULES.forEach(r=>{const re=new RegExp(r.re.source,r.re.flags.includes('d')?r.re.flags:r.re.flags+'d');let m,g=0;while((m=re.exec(text))&&g++<500){if(!m[0]){re.lastIndex++;continue}const has=m.groups&&m.groups.v!=null;const v=has?m.groups.v:m[0];const at=has?m.indices.groups.v[0]:m.index;if(r.ok&&!r.ok(v))continue;if(r.skip&&r.skip(v))continue;add(at,at+v.trimEnd().length,r.tag,r.label)}});
+  // Once a name is found, hide every other place it appears (and the surname on its own).
+  spans.filter(s=>s.tag==='NAME').map(s=>s.value).forEach(name=>{const parts=[name,...name.split(/\s+/).filter(p=>p.length>=3).slice(-1)];parts.forEach(p=>{const re=new RegExp('(?<![\\p{L}])'+p.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?![\\p{L}])','gu');let m;while((m=re.exec(text)))add(m.index,m.index+m[0].length,'NAME','Name')})});
+  return spans.sort((a,b)=>a.start-b.start);
+}
+function redact(){
+  const text=$('letter').value;found=findDetails(text);map={};
+  const ids={},counters={},out=[];let pos=0;
+  found.forEach(s=>{const key=s.tag+'|'+s.value.toLowerCase().replace(/\s+/g,' ');s.key=key;if(kept.has(key)){s.ph=null;return}
+    if(!ids[key]){counters[s.tag]=(counters[s.tag]||0)+1;ids[key]='['+s.tag+' '+counters[s.tag]+']';map[ids[key]]=s.value}
+    s.ph=ids[key];out.push(text.slice(pos,s.start),s.ph);pos=s.end});
+  out.push(text.slice(pos));
+  return out.join('');
+}
+function restore(s){return String(s==null?'':s).replace(/\[([A-Z]+) ?(\d+)\]/g,(m,t,n)=>map['['+t+' '+n+']']||m)}
+
+let safeText='';
+function refresh(){
+  safeText=redact();
+  const uniq=[];const seen=new Set();found.forEach(s=>{if(!seen.has(s.key)){seen.add(s.key);uniq.push(s)}});
+  $('foundNote').textContent=!$('letter').value.trim()?'Paste a letter to see what will be hidden.':uniq.length?uniq.length+' detail'+(uniq.length===1?'':'s')+' will be hidden. Untick one to send it as it is (for example the sender’s company name).':'Nothing personal found automatically. Add your name and street above if they are in the letter.';
+  $('found').innerHTML=uniq.map(s=>{const off=kept.has(s.key);return '<label class="'+(off?'off':'')+'"><input type="checkbox" data-key="'+esc(s.key)+'"'+(off?'':' checked')+'><code>'+esc(s.ph||'['+s.tag+']')+'</code><span class="val" title="'+esc(s.value)+'">'+esc(s.value)+'</span><small>'+esc(s.label)+'</small></label>'}).join('');
+  $('preview').innerHTML=esc(safeText).replace(/\[([A-Z]+) (\d+)\]/g,'<mark>[$1 $2]</mark>')||'<span class="muted">Nothing yet.</span>';
+}
+$('found').addEventListener('change',e=>{const k=e.target.dataset.key;if(!k)return;if(e.target.checked)kept.delete(k);else kept.add(k);refresh()});
+let tmr;const later=()=>{clearTimeout(tmr);tmr=setTimeout(refresh,250)};
+$('letter').addEventListener('input',()=>{kept.clear();later()});
+$('extra').addEventListener('input',later);
+
+// ---------- reading photos and PDFs (on this device) ----------
+const st=(t,cls)=>{const s=$('readStatus');s.innerHTML=t;s.className='status'+(t?' show':'')+(cls?' '+cls:'')};
+const loadScript=src=>new Promise((ok,no)=>{if(document.querySelector('script[src="'+src+'"]'))return ok();const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>no(new Error('Could not load a reader. Check your connection and try again.'));document.head.appendChild(s)});
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',TESS='https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js';
+let worker=null,workerLang='';
+async function ocr(img){
+  await loadScript(TESS);const lang=$('ocrLang').value;
+  if(!worker||workerLang!==lang){if(worker)await worker.terminate();st('<span class="busy"></span>Getting the text reader ready (downloads once)…');worker=await Tesseract.createWorker(lang,1,{logger:m=>{if(m.status==='recognizing text')st('<span class="busy"></span>Reading the text… '+Math.round(m.progress*100)+'%')}});workerLang=lang}
+  const r=await worker.recognize(img);return r.data.text;
+}
+async function readFile(f){
+  try{
+    if(/^text\//.test(f.type)||/\.txt$/i.test(f.name)){ $('letter').value=await f.text() }
+    else if(f.type==='application/pdf'||/\.pdf$/i.test(f.name)){
+      st('<span class="busy"></span>Opening the PDF…');await loadScript(PDFJS);pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      const doc=await pdfjsLib.getDocument({data:new Uint8Array(await f.arrayBuffer())}).promise;const pages=[];
+      for(let i=1;i<=Math.min(doc.numPages,10);i++){const pg=await doc.getPage(i);const tc=await pg.getTextContent();let t='',lastY=null;tc.items.forEach(it=>{const y=it.transform[5];if(lastY!==null&&Math.abs(y-lastY)>2)t+='\n';else if(t&&!t.endsWith(' '))t+=' ';t+=it.str;lastY=y});
+        if(t.replace(/\s/g,'').length<40){const vp=pg.getViewport({scale:2});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;t=await ocr(c)}pages.push(t.trim())}
+      $('letter').value=pages.join('\n\n');if(doc.numPages>10)st('Read the first 10 pages.');
+    } else if(/^image\//.test(f.type)||/\.(jpe?g|png|webp|gif|bmp)$/i.test(f.name)){
+      st('<span class="busy"></span>Reading the photo…');$('letter').value=(await ocr(f)).trim();
+    } else throw new Error('Open a photo, a PDF or a text file.');
+    kept.clear();refresh();
+    st($('letter').value.trim()?'✓ Done. Check the text below — photos can have small mistakes.':'No text found. Try a sharper photo in good light, or type the important parts.');
+  }catch(e){st(esc(e.message||e),'err')}
+}
+$('file').addEventListener('change',e=>{const f=e.target.files[0];if(f)readFile(f);e.target.value=''});
+const drop=$('drop');['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add('on')}));['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('on')}));drop.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)readFile(f)});
+
+// ---------- the AI steps (only the hidden-details text is sent) ----------
+const SYS=`You explain official and everyday letters to ordinary people in plain words. The reader may be stressed, may not be a native speaker, and may not know the system.
+Personal details in the letter have been replaced with labels like [NAME 1], [REF 2], [ADDRESS 1]. Keep those labels exactly as written when you refer to them. Never guess what they stand for.
+Rules:
+- Only use what the letter says. Do not invent deadlines, amounts or consequences. If something is unclear, say so in "unclear".
+- If a deadline is relative ("within 14 days of the date of this letter"), give the calculated date only if the letter date is shown, and say how you worked it out.
+- Short sentences, everyday words. Explain any official words in "terms".
+- Check honestly for scam signs (pressure, unusual payment methods like gift cards or crypto, links to log in, mismatched sender details, spelling errors) but do not scare people when there are none.
+- In "help", name the kind of free help that fits (for example a citizens advice service, a tenants' union, a debt charity, the sender's own helpline) for the place the reader lives, if given.
+Reply with JSON only, no other text, in this shape:
+{"type":"short name of the kind of letter","from":"who sent it","summary":"2-4 sentences: what this letter is about and what it wants","urgency":"now|soon|later|none","urgency_reason":"one sentence","deadlines":[{"date":"YYYY-MM-DD if known, else as written","what":"what must happen by then"}],"money":[{"amount":"as written, with currency","what":"what it is for"}],"actions":["step 1","step 2"],"if_ignored":"what is likely to happen if the reader does nothing, only if the letter says or it is clear","terms":[{"term":"word from the letter","meaning":"plain meaning"}],"scam":{"risk":"low|medium|high","signs":["sign"],"check":"how to check the letter is real"},"questions":["useful question to ask the sender"],"help":"who can help for free","unclear":["anything unclear or that you could not read"]}
+"urgency": now = something must be done within about a week or there is a serious risk; soon = within about a month; later = no rush; none = just information.`;
+const levelText={simple:'Use very simple words, like for a 10-year-old or someone learning the language. Very short sentences.',normal:'Use plain, clear everyday language.',detail:'Use plain language, but include more detail and the reasons behind things.'};
+let result=null,abort=null;
+function aStatus(t,err){$('askStatus').innerHTML=t?(err?'<span class="err">'+esc(t)+'</span>':'<span class="busy"></span>'+esc(t)):''}
+async function explain(){
+  refresh();
+  if(safeText.trim().length<30){aStatus('Paste or open a letter first.',true);return}
+  const lang=$('outLang').value;store.set('migaLetterLang',lang);
+  abort&&abort.abort();abort=new AbortController();
+  $('explainBtn').disabled=true;aStatus('Reading the letter… this takes about 10–30 seconds');
+  try{
+    const user='Answer in: '+lang+'. Every text value in the JSON must be in '+lang+' (keep the labels like [NAME 1] as they are).\n'+levelText[$('level').value]+($('country').value.trim()?'\nThe reader lives in: '+$('country').value.trim()+'.':'')+'\nToday is '+new Date().toISOString().slice(0,10)+'.\n\nTHE LETTER:\n"""\n'+safeText.slice(0,14000)+'\n"""';
+    const reply=await MigaAI.ask(SYS,user,{signal:abort.signal});
+    const j=MigaAI.json(reply);if(!j||typeof j!=='object'||!j.summary)throw new Error('The AI answer was incomplete. Please try again.');
+    result=j;render();aStatus('');
+    $('followPanel').classList.remove('hidden');
+    $('outPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  }catch(e){if(e.name!=='AbortError')aStatus(e.message||String(e),true)}
+  finally{$('explainBtn').disabled=false}
+}
+$('explainBtn').onclick=explain;
+
+const arr=a=>Array.isArray(a)?a.filter(x=>x!=null&&x!==''):[];
+const R=s=>esc(restore(s));
+function render(){
+  const j=result,rtl=RTL.test($('outLang').value);
+  const U={now:['urg-now','⏰','Act now'],soon:['urg-soon','📅','Act soon'],later:['urg-later','🕊️','No rush'],none:['urg-none','ℹ️','Just information']}[j.urgency]||['urg-soon','📅','Check the dates'];
+  let h='<div class="urg '+U[0]+'"><span style="font-size:28px">'+U[1]+'</span><div><b>'+U[2]+(j.type?' · '+R(j.type):'')+'</b>'+R(j.urgency_reason)+'</div></div>';
+  h+='<div class="box"><h3>What this letter says</h3>'+(j.from?'<p><b>From:</b> '+R(j.from)+'</p>':'')+'<p>'+R(j.summary)+'</p></div>';
+  const dl=arr(j.deadlines),money=arr(j.money);
+  if(dl.length||money.length)h+='<div class="box"><h3>Dates and money</h3><table class="dl">'+dl.map(d=>'<tr><td>📅 '+R(d.date)+'</td><td>'+R(d.what)+'</td></tr>').join('')+money.map(m=>'<tr><td>💶 '+R(m.amount)+'</td><td>'+R(m.what)+'</td></tr>').join('')+'</table></div>';
+  const acts=arr(j.actions);
+  if(acts.length)h+='<div class="box"><h3>What to do</h3><ol class="steps">'+acts.map((a,i)=>'<li><label><input type="checkbox" data-step="'+i+'"> <span>'+(i+1)+'. '+R(a)+'</span></label></li>').join('')+'</ol>'+(j.if_ignored?'<p style="margin-top:8px"><b>If you do nothing:</b> '+R(j.if_ignored)+'</p>':'')+'</div>';
+  const terms=arr(j.terms);
+  if(terms.length)h+='<div class="box"><h3>Words explained</h3><table class="dl">'+terms.map(t=>'<tr><td>'+R(t.term)+'</td><td>'+R(t.meaning)+'</td></tr>').join('')+'</table></div>';
+  const sc=j.scam||{};const risk=['low','medium','high'].includes(sc.risk)?sc.risk:'low';
+  h+='<div class="box scam-'+risk+'"><h3>Could it be a scam? <span>'+({low:'🟢 Low risk',medium:'🟠 Check first',high:'🔴 Warning signs'})[risk]+'</span></h3>'+(arr(sc.signs).length?'<ul>'+arr(sc.signs).map(s=>'<li>'+R(s)+'</li>').join('')+'</ul>':'')+(sc.check?'<p style="margin-top:6px">'+R(sc.check)+'</p>':'')+'</div>';
+  const qs=arr(j.questions);
+  if(qs.length)h+='<div class="box"><h3>Questions you could ask them</h3><ul>'+qs.map(q=>'<li>'+R(q)+'</li>').join('')+'</ul></div>';
+  if(j.help)h+='<div class="box"><h3>Free help</h3><p>'+R(j.help)+'</p></div>';
+  const un=arr(j.unclear);
+  if(un.length)h+='<div class="box"><h3>Not clear from the letter</h3><ul>'+un.map(q=>'<li>'+R(q)+'</li>').join('')+'</ul></div>';
+  $('out').innerHTML=h;$('out').dir=rtl?'rtl':'ltr';
+  $('outPanel').classList.remove('hidden');
+  $('dlIcs').classList.toggle('hidden',!dl.some(d=>/^\d{4}-\d{2}-\d{2}$/.test(String(d.date).trim())));
+}
+
+function asText(){
+  const j=result;if(!j)return '';const L=[];const add=(h,lines)=>{lines=lines.filter(Boolean);if(lines.length)L.push('',h.toUpperCase(),...lines)};
+  L.push('LETTER EXPLAINED'+(j.type?' — '+restore(j.type):''));
+  if(j.from)L.push('From: '+restore(j.from));
+  L.push('Urgency: '+({now:'Act now',soon:'Act soon',later:'No rush',none:'Just information'}[j.urgency]||j.urgency||'')+(j.urgency_reason?' — '+restore(j.urgency_reason):''));
+  add('What this letter says',[restore(j.summary)]);
+  add('Dates and money',[...arr(j.deadlines).map(d=>'- '+restore(d.date)+': '+restore(d.what)),...arr(j.money).map(m=>'- '+restore(m.amount)+': '+restore(m.what))]);
+  add('What to do',[...arr(j.actions).map((a,i)=>(i+1)+'. '+restore(a)),j.if_ignored&&'If you do nothing: '+restore(j.if_ignored)]);
+  add('Words explained',arr(j.terms).map(t=>'- '+restore(t.term)+': '+restore(t.meaning)));
+  if(j.scam)add('Could it be a scam? ('+(j.scam.risk||'low')+' risk)',[...arr(j.scam.signs).map(s=>'- '+restore(s)),j.scam.check&&restore(j.scam.check)]);
+  add('Questions you could ask them',arr(j.questions).map(q=>'- '+restore(q)));
+  add('Free help',[j.help&&restore(j.help)]);
+  add('Not clear from the letter',arr(j.unclear).map(q=>'- '+restore(q)));
+  L.push('','This is a first reading, not legal, money or medical advice. Check every date and amount against the letter itself.','Made with Letter Forge — migabuilder.com/letter-forge.html');
+  return L.join('\n');
+}
+function download(name,text,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:type||'text/plain;charset=utf-8'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},600)}
+$('dlTxt').onclick=()=>download('letter-explained.txt',asText());
+$('copyOut').onclick=async()=>{try{await navigator.clipboard.writeText(asText());$('copyOut').textContent='Copied';setTimeout(()=>$('copyOut').textContent='Copy',1300)}catch(e){}};
+$('dlIcs').onclick=()=>{
+  const icsEsc=s=>String(s).replace(/\\/g,'\\\\').replace(/\n/g,'\\n').replace(/[,;]/g,m=>'\\'+m);
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+Z$/,'Z');
+  const ev=arr(result.deadlines).filter(d=>/^\d{4}-\d{2}-\d{2}$/.test(String(d.date).trim())).map((d,i)=>{const day=d.date.trim().replace(/-/g,'');const nx=new Date(d.date.trim()+'T12:00:00Z');nx.setUTCDate(nx.getUTCDate()+1);
+    return ['BEGIN:VEVENT','UID:letter-forge-'+Date.now()+'-'+i+'@migabuilder.com','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+day,'DTEND;VALUE=DATE:'+nx.toISOString().slice(0,10).replace(/-/g,''),'SUMMARY:'+icsEsc('Deadline: '+restore(d.what)),'DESCRIPTION:'+icsEsc((result.from?'From '+restore(result.from)+'. ':'')+restore(result.summary||'')),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+icsEsc('Letter deadline'),'TRIGGER:-P3D','END:VALARM','END:VEVENT'].join('\r\n')});
+  download('letter-deadlines.ics',['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MigaBuilder//Letter Forge//EN',...ev,'END:VCALENDAR'].join('\r\n')+'\r\n','text/calendar');
+};
+
+$('askBtn').onclick=async()=>{
+  const q=$('question').value.trim();if(!q||!result)return;const b=$('askBtn');b.disabled=true;const out=$('answer');out.classList.remove('hidden');out.innerHTML='<span class="busy"></span>Thinking…';
+  try{const a=await MigaAI.ask('You answer questions about a letter in plain words, in '+$('outLang').value+'. Personal details are replaced with labels like [NAME 1]; keep them as written. Only use what the letter says plus well-known general facts, say clearly when something depends on details you do not have, and suggest who to ask. Be brief: at most about 150 words. Not legal advice.','THE LETTER:\n"""\n'+safeText.slice(0,14000)+'\n"""\n'+($('country').value.trim()?'The reader lives in: '+$('country').value.trim()+'.\n':'')+'\nQUESTION: '+q);
+    out.textContent=restore(a.trim());out.dir=RTL.test($('outLang').value)?'rtl':'ltr'}
+  catch(e){out.innerHTML='<span class="err">'+esc(e.message||e)+'</span>'}finally{b.disabled=false}
+};
+let replyText='';
+$('replyBtn').onclick=async()=>{
+  if(!result)return;const b=$('replyBtn');b.disabled=true;const out=$('reply');out.classList.remove('hidden');out.innerHTML='<span class="busy"></span>Writing…';
+  const inLang=$('replyLang').value==='explain'?$('outLang').value:'the same language as the letter';
+  try{const a=await MigaAI.ask('You write short, polite, firm replies to letters for ordinary people. Write in '+inLang+'. Use the labels like [NAME 1], [REF 1], [ADDRESS 1] wherever the writer\'s name, address or reference numbers belong, exactly as written in the letter; never invent names, numbers, dates or facts — use [brackets] like [your phone number] for anything you do not know. Quote the reference number at the top if the letter has one. No admissions of fault unless asked. Plain text only, ready to send, with no comments before or after.','THE LETTER I RECEIVED:\n"""\n'+safeText.slice(0,14000)+'\n"""\n\nWHAT I WANT: '+$('goal').value+($('notes').value.trim()?'\nMORE DETAILS: '+$('notes').value.trim():''));
+    replyText=restore(a.trim().replace(/^```\w*\s*|\s*```$/g,''));out.textContent=replyText;$('copyReply').classList.remove('hidden');$('dlReply').classList.remove('hidden')}
+  catch(e){out.innerHTML='<span class="err">'+esc(e.message||e)+'</span>'}finally{b.disabled=false}
+};
+$('copyReply').onclick=async()=>{try{await navigator.clipboard.writeText(replyText);$('copyReply').textContent='Copied';setTimeout(()=>$('copyReply').textContent='Copy the reply',1300)}catch(e){}};
+$('dlReply').onclick=()=>download('reply.txt',replyText);
+
+const EXAMPLE=`Riverside Borough Council
+Council Tax Department
+PO Box 417, Riverside RV1 2AB
+Phone 0300 123 4567
+
+Mr Sam Rivera
+Flat 3, 14 Elm Street
+Riverside
+RV4 7QT
+
+Account number: 50128847
+Date: 20 October 2026
+
+FINAL NOTICE — Council Tax 2026/27
+
+Dear Mr Rivera,
+
+Our records show that you have not paid the instalments of £142.00 due on 1 September and 1 October 2026 for the property above. The total amount now overdue is £284.00.
+
+As you have not paid as required, you have lost the right to pay by instalments. Unless the full outstanding balance for the year of £1,136.00 is paid within 7 days of the date of this notice, we will apply to the Magistrates' Court for a liability order. If a liability order is granted, costs of up to £95.00 will be added to your account and we may pass your debt to enforcement agents or ask your employer to deduct it from your wages (an attachment of earnings).
+
+If you pay the overdue £284.00 within 7 days, your instalments will be restored.
+
+If you are having difficulty paying, please contact us as soon as possible on the number above or at counciltax@riverside.example.gov.uk. You may be entitled to a Council Tax Reduction.
+
+Yours sincerely,
+
+Revenues Manager`;
+$('exampleBtn').onclick=()=>{$('letter').value=EXAMPLE;$('extra').value='';kept.clear();refresh();st('')};
+
+MigaAI.mount($('aiBox'));
+$('outLang').innerHTML=LANGS.map(l=>'<option>'+esc(l)+'</option>').join('');
+const savedLang=store.get('migaLetterLang');if(savedLang&&LANGS.includes(savedLang))$('outLang').value=savedLang;
+refresh();
+window.__letterForge={safe:()=>safeText,found:()=>found.map(s=>({tag:s.tag,value:s.value,ph:s.ph})),text:asText};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

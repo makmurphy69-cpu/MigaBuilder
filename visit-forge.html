@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Doctor appointment prep sheet: symptoms, medicines and questions on one page — Visit Forge | MigaBuilder</title>
+<meta name="description" content="Free, private doctor visit planner. Write down your symptoms, a timeline, your medicines and allergies, and your top questions, get a 30-second opening to say first, and print or download a one-page summary to hand to your doctor. Nothing is uploaded.">
+<link rel="canonical" href="https://migabuilder.com/visit-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/visit-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Visit Forge — get ready for a doctor's appointment | MigaBuilder">
+<meta property="og:description" content="Symptoms, timeline, medicines and your top questions on one page to hand to your doctor. Private — it never leaves your device.">
+<meta property="og:url" content="https://migabuilder.com/visit-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:18px;align-items:start}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.steps button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:8px 13px;cursor:pointer;font:700 13.5px 'Space Grotesk';color:var(--ink)}
+.steps button[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.steps button .n{display:inline-block;min-width:18px;font-size:11px;background:rgba(226,166,59,.9);color:#3b2a0c;border-radius:999px;margin-left:5px;padding:0 5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.card2{background:#fff;border:1px solid rgba(22,32,43,.14);padding:10px;margin-bottom:8px;position:relative}
+.card2 .del{position:absolute;top:6px;right:6px;border:0;background:none;font-size:18px;cursor:pointer;color:#7b281d}
+.card2 .field{margin-bottom:7px}
+.card2 .field label{font-size:11.5px}
+.card2 input,.card2 select,.card2 textarea{padding:7px!important;font-size:13.5px}
+.sev{display:flex;align-items:center;gap:8px}.sev input{flex:1}.sev b{min-width:34px;text-align:center;font:700 15px 'Space Grotesk'}
+.qlist{display:grid;gap:6px}
+.q{display:grid;grid-template-columns:30px 1fr 30px 30px 28px;gap:4px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.14);padding:5px}
+.q input{border:1px solid rgba(22,32,43,.2);padding:7px;border-radius:3px;width:100%}
+.q button{border:0;background:none;cursor:pointer;font-size:16px;padding:4px}
+.q .star{font-size:18px;filter:grayscale(1);opacity:.45}.q .star.on{filter:none;opacity:1}
+.ideas{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.ideas button{border:1px dashed rgba(22,32,43,.35);background:#fff;border-radius:999px;padding:6px 10px;cursor:pointer;font-size:12.5px;color:var(--ink);text-align:left}
+.ideas button:disabled{opacity:.4;cursor:default}
+.urgent{padding:12px 14px;background:rgba(216,96,74,.14);border-left:5px solid var(--error);margin-bottom:12px;line-height:1.5;font-size:14px}
+.opening{background:#fff;border:1px solid rgba(22,32,43,.14);border-left:5px solid var(--amber);padding:12px 14px;line-height:1.6;font-size:15px}
+.sheet{background:#fff;color:#16202b;border:1px solid rgba(22,32,43,.18);padding:22px 24px;font-size:13px;line-height:1.45;box-shadow:0 2px 0 rgba(0,0,0,.04)}
+.sheet h3{font:700 18px 'Space Grotesk';margin:0 0 2px}
+.sheet .meta{color:#59636c;font-size:12px;margin-bottom:10px}
+.sheet h4{font:700 12px 'Space Grotesk';letter-spacing:.06em;text-transform:uppercase;color:#0e2a47;margin:12px 0 4px;border-bottom:1px solid #e3e6ea;padding-bottom:2px}
+.sheet ul,.sheet ol{margin:0;padding-left:18px}
+.sheet table{width:100%;border-collapse:collapse;font-size:12.5px;table-layout:fixed;overflow-wrap:anywhere}
+.sheet td,.sheet th{border-bottom:1px solid #eef0f2;padding:3px 4px;text-align:left;vertical-align:top}
+.sheet .main{font-size:14px;font-weight:600}
+.sheet .empty{color:#8a96a3;font-style:italic}
+.tip{font-size:12.5px;color:rgba(22,32,43,.75);line-height:1.5;margin:4px 0 10px}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:620px){.two{grid-template-columns:minmax(0,1fr)}.sheet{padding:14px 12px}}
+@media print{body{background:#fff!important}body *{visibility:hidden}#sheet,#sheet *{visibility:visible}#sheet{position:absolute;left:0;top:0;width:100%;border:0;box-shadow:none;padding:0}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is my health information uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device."}}, {"@type": "Question", "name": "Does Visit Forge give medical advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. It helps you describe what is happening and ask good questions. Only a doctor or nurse can tell you what it is and what to do."}}, {"@type": "Question", "name": "Is Visit Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Visit Forge</span></nav>
+<header class="masthead"><div><h1>Visit Forge</h1><p>Get ready for a doctor's appointment: symptoms, medicines and your questions on one page.</p></div></header>
+<main>
+<section class="panel">
+  <p class="privacy">🔒 Private: there is no AI and no server here. What you type stays in this browser, and the PDF is made on your device. Use <b>Start again</b> on a shared computer.</p>
+  <div class="actions"><button class="secondary" id="exampleBtn" type="button">Try an example</button><button class="secondary" id="resetBtn" type="button">Start again</button></div>
+</section>
+<div id="urgent" class="urgent hidden" role="alert"></div>
+
+<div class="layout">
+<section class="panel" id="formPanel">
+  <div class="steps" role="tablist" id="steps">
+    <button role="tab" data-s="why" aria-selected="true" id="tab-why">1. Why I'm going</button>
+    <button role="tab" data-s="sym" aria-selected="false" id="tab-sym">2. Symptoms<span class="n" id="nSym">0</span></button>
+    <button role="tab" data-s="med" aria-selected="false" id="tab-med">3. Medicines<span class="n" id="nMed">0</span></button>
+    <button role="tab" data-s="q" aria-selected="false" id="tab-q">4. Questions<span class="n" id="nQ">0</span></button>
+    <button role="tab" data-s="after" aria-selected="false" id="tab-after">5. After the visit</button>
+  </div>
+
+  <div data-pane="why">
+    <div class="two">
+      <div class="field"><label for="who">Who is the visit for?</label><input id="who" placeholder="e.g. Me, or my son Leo (6)"></div>
+      <div class="field"><label for="when">Appointment</label><input id="when" placeholder="e.g. Tue 4 Nov, 9:20, Dr Okafor"></div>
+    </div>
+    <div class="field"><label for="main">The one thing I most want help with</label><input id="main" placeholder="e.g. Headaches most mornings for 3 weeks"><p class="tip">Say this first. Doctors often decide what the visit is about in the first minute.</p></div>
+    <div class="field"><label for="worry">What I'm worried it might be (optional)</label><input id="worry" placeholder="e.g. My blood pressure, because my dad had a stroke"><p class="tip">It is fine to say this out loud. It helps the doctor check for it or put your mind at rest.</p></div>
+    <div class="field"><label for="impact">How it affects daily life</label><textarea id="impact" style="min-height:70px" placeholder="e.g. Missed 2 days of work, waking up at night, stopped going to the gym"></textarea></div>
+    <div class="field"><label for="tried">What I have tried already</label><textarea id="tried" style="min-height:60px" placeholder="e.g. Paracetamol helps for a few hours; less screen time made no difference"></textarea></div>
+    <div class="field"><label for="history">Conditions, operations and family history that might matter</label><textarea id="history" style="min-height:60px" placeholder="e.g. Asthma since childhood. Father: high blood pressure, stroke at 60"></textarea></div>
+    <div class="field"><label for="want">What I'd like from this visit</label><select id="want"><option value="">— choose —</option><option>To find out what is causing it</option><option>Tests or a scan</option><option>Treatment or a prescription</option><option>A referral to a specialist</option><option>A sick note or a letter</option><option>Reassurance that it's nothing serious</option><option>A review of my medicines</option></select></div>
+  </div>
+
+  <div data-pane="sym" class="hidden">
+    <p class="tip">One card per symptom. Write it the way you would say it. Dates can be rough (“about 3 weeks ago”).</p>
+    <div id="symList"></div>
+    <div class="actions"><button class="secondary" id="addSym" type="button">+ Add a symptom</button></div>
+    <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 6px">Timeline (optional)</h3>
+    <p class="tip">Things that happened in order: when it started, visits, test results, changes in medicine.</p>
+    <div id="tlList"></div>
+    <div class="actions"><button class="secondary" id="addTl" type="button">+ Add to the timeline</button></div>
+  </div>
+
+  <div data-pane="med" class="hidden">
+    <p class="tip">Include tablets, inhalers, creams, the pill, vitamins, herbal remedies and anything you buy without a prescription.</p>
+    <div id="medList"></div>
+    <div class="actions"><button class="secondary" id="addMed" type="button">+ Add a medicine</button></div>
+    <div class="field" style="margin-top:14px"><label for="allergies">Allergies and bad reactions</label><input id="allergies" placeholder="e.g. Penicillin — rash. None known"></div>
+  </div>
+
+  <div data-pane="q" class="hidden">
+    <p class="tip">Write your questions, then press ⭐ on the three that matter most — they go to the top so you ask them first.</p>
+    <div class="qlist" id="qList"></div>
+    <div class="actions" style="margin-top:8px"><button class="secondary" id="addQ" type="button">+ Add a question</button></div>
+    <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 4px">Good questions to ask</h3>
+    <div class="ideas" id="ideas"></div>
+  </div>
+
+  <div data-pane="after" class="hidden">
+    <p class="tip">Write these down during or right after the visit, while you remember. It is fine to ask the doctor to repeat something or write it down.</p>
+    <div class="field"><label for="said">What the doctor thinks it is</label><textarea id="said" style="min-height:60px"></textarea></div>
+    <div class="field"><label for="plan">The plan: tests, medicines, changes</label><textarea id="plan" style="min-height:60px"></textarea></div>
+    <div class="field"><label for="watch">Warning signs to watch for, and who to call</label><textarea id="watch" style="min-height:60px"></textarea></div>
+    <div class="field"><label for="next">Next appointment or when to come back</label><input id="next"></div>
+  </div>
+</section>
+
+<section class="panel" id="outPanel">
+  <h2>What to say first</h2>
+  <p class="tip">Read this out at the start. It takes about 30 seconds.</p>
+  <div class="opening" id="opening">Fill in “The one thing I most want help with” to get your opening.</div>
+  <h2 style="margin-top:18px">Your one-page summary</h2>
+  <p class="tip">Print it or download it, and hand it to the doctor or nurse at the start.</p>
+  <div class="actions" style="margin-bottom:10px">
+    <button class="primary" id="pdfBtn" type="button">Download PDF</button>
+    <button class="secondary" id="printBtn" type="button">Print</button>
+    <button class="secondary" id="copyBtn" type="button">Copy as text</button>
+  </div>
+  <div class="sheet" id="sheet"></div>
+  <p class="status" id="status"></p>
+</section>
+</div>
+</main>
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Visit Forge</h2>
+  <p>Visit Forge helps you get the most out of a short doctor's appointment. Write down the main reason you are going, each symptom (when it started, how often, how bad, what makes it better or worse), a timeline, your medicines and allergies, and your questions. It turns them into a 30-second opening to say first and a clear one-page summary to print or hand over, with your three most important questions at the top. After the visit, write down what the doctor said and the plan.</p>
+  <h3>How to use Visit Forge</h3>
+  <ol><li>Start with the one thing you most want help with.</li><li>Add your symptoms, medicines and questions, and star your top three questions.</li><li>Download or print the one-page summary, read the opening out first, and fill in “After the visit” on your way out.</li></ol>
+  <h3>Tips for a short appointment</h3>
+  <ul>
+    <li>Say your main worry first, even if it feels embarrassing.</li>
+    <li>Bring your medicines, or a photo of their boxes.</li>
+    <li>Ask “What should I watch for, and when should I come back?” before you leave.</li>
+    <li>Take someone with you if you can. A second pair of ears helps.</li>
+  </ul>
+  <h3>Is my health information uploaded?</h3>
+  <p>No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.</p>
+  <h3>Does Visit Forge give medical advice?</h3>
+  <p>No. It helps you describe what is happening and ask good questions. Only a doctor or nurse can tell you what it is and what to do. If you think it is an emergency, call your local emergency number now.</p>
+  <h3>Is Visit Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <p class="miga-about-rel">Related tools: <a href="body-map.html">Body Map</a> · <a href="letter-forge.html">Letter Forge</a> · <a href="focus-forge.html">Focus Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Visit Forge runs entirely in your browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const KEY='migaVisitForge';
+const store={get(){try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}},set(v){try{localStorage.setItem(KEY,JSON.stringify(v))}catch(e){}},del(){try{localStorage.removeItem(KEY)}catch(e){}}};
+const FIELDS=['who','when','main','worry','impact','tried','history','want','allergies','said','plan','watch','next'];
+const IDEAS=['What do you think is causing this?','What else could it be?','Do I need any tests? What will they show?','What are my treatment options, and their side effects?','What happens if I wait and do nothing?','How long until I should feel better?','What should I watch for, and when should I come back or call?','Is there anything I should stop or change?','Can this medicine be taken with my other medicines?','Can I get a copy of my results, and when will I hear?','Should I see a specialist?','Can I have this written down?'];
+// Words that mean "do not wait for an appointment".
+const URGENT=[/chest (pain|tight)/i,/can'?t breathe|cannot breathe|struggling to breathe|short(ness)? of breath at rest/i,/face (droop|drooping)|slurred speech|one side (of my body )?(weak|numb)/i,/(severe|heavy|won'?t stop) bleeding|coughing (up )?blood|vomiting blood/i,/suicid|kill myself|end my life|self[- ]harm/i,/worst headache (of my life|ever)/i,/fainted|passed out|unconscious|\bseizures?\b|\bhaving (a )?fits?\b/i,/stiff neck.*(fever|rash)|rash.*doesn'?t fade/i];
+let st={sym:[],tl:[],med:[],q:[]};
+
+const blankSym=()=>({what:'',where:'',since:'',often:'',sev:5,trend:'',better:'',worse:''});
+const blankMed=()=>({name:'',dose:'',often:'',why:''});
+const blankTl=()=>({when:'',what:''});
+
+function renderSym(){$('symList').innerHTML=st.sym.map((s,i)=>'<div class="card2" data-l="sym" data-i="'+i+'"><button class="del" type="button" aria-label="Remove">×</button>'+
+  '<div class="two"><div class="field"><label>Symptom</label><input data-k="what" value="'+esc(s.what)+'" placeholder="e.g. Headache"></div><div class="field"><label>Where</label><input data-k="where" value="'+esc(s.where)+'" placeholder="e.g. Behind the eyes, both sides"></div>'+
+  '<div class="field"><label>Started</label><input data-k="since" value="'+esc(s.since)+'" placeholder="e.g. About 3 weeks ago"></div><div class="field"><label>How often / how long</label><input data-k="often" value="'+esc(s.often)+'" placeholder="e.g. Most mornings, 2–3 hours"></div></div>'+
+  '<div class="two"><div class="field"><label>How bad (0–10)</label><div class="sev"><input type="range" min="0" max="10" data-k="sev" value="'+esc(s.sev)+'"><b>'+esc(s.sev)+'</b></div></div><div class="field"><label>Getting</label><select data-k="trend"><option value="">—</option>'+['Worse','Better','The same','Comes and goes'].map(o=>'<option'+(s.trend===o?' selected':'')+'>'+o+'</option>').join('')+'</select></div>'+
+  '<div class="field"><label>Better with</label><input data-k="better" value="'+esc(s.better)+'" placeholder="e.g. Lying down, paracetamol"></div><div class="field"><label>Worse with</label><input data-k="worse" value="'+esc(s.worse)+'" placeholder="e.g. Bending over, screens"></div></div></div>').join('')}
+function renderMed(){$('medList').innerHTML=st.med.map((m,i)=>'<div class="card2" data-l="med" data-i="'+i+'"><button class="del" type="button" aria-label="Remove">×</button><div class="two">'+
+  '<div class="field"><label>Medicine</label><input data-k="name" value="'+esc(m.name)+'" placeholder="e.g. Salbutamol inhaler"></div><div class="field"><label>Dose</label><input data-k="dose" value="'+esc(m.dose)+'" placeholder="e.g. 100 mcg, 2 puffs"></div>'+
+  '<div class="field"><label>How often</label><input data-k="often" value="'+esc(m.often)+'" placeholder="e.g. When needed, about twice a week"></div><div class="field"><label>What for</label><input data-k="why" value="'+esc(m.why)+'" placeholder="e.g. Asthma"></div></div></div>').join('')}
+function renderTl(){$('tlList').innerHTML=st.tl.map((t,i)=>'<div class="card2" data-l="tl" data-i="'+i+'"><button class="del" type="button" aria-label="Remove">×</button><div class="two"><div class="field"><label>When</label><input data-k="when" value="'+esc(t.when)+'" placeholder="e.g. 12 Oct"></div><div class="field"><label>What happened</label><input data-k="what" value="'+esc(t.what)+'" placeholder="e.g. First headache after a cold"></div></div></div>').join('')}
+function renderQ(){
+  const order=st.q.map((q,i)=>i);
+  $('qList').innerHTML=order.map(i=>{const q=st.q[i];return '<div class="q" data-l="q" data-i="'+i+'"><button class="star'+(q.top?' on':'')+'" type="button" title="One of my top 3" aria-label="Top question" aria-pressed="'+!!q.top+'">⭐</button><input data-k="text" value="'+esc(q.text)+'" placeholder="Your question"><button type="button" class="up" title="Move up" aria-label="Move up">↑</button><button type="button" class="down" title="Move down" aria-label="Move down">↓</button><button type="button" class="del" title="Remove" aria-label="Remove" style="color:#7b281d">×</button></div>'}).join('');
+  const have=new Set(st.q.map(q=>q.text.trim()));
+  $('ideas').innerHTML=IDEAS.map(t=>'<button type="button"'+(have.has(t)?' disabled':'')+'>+ '+esc(t)+'</button>').join('');
+}
+function renderAll(){renderSym();renderMed();renderTl();renderQ();update()}
+
+document.addEventListener('input',e=>{const card=e.target.closest('[data-l]');if(!card||!e.target.dataset.k)return;const list=st[card.dataset.l],it=list[+card.dataset.i];it[e.target.dataset.k]=e.target.type==='range'?+e.target.value:e.target.value;if(e.target.type==='range')e.target.nextElementSibling.textContent=e.target.value;update()});
+document.addEventListener('change',e=>{const card=e.target.closest('[data-l]');if(card&&e.target.tagName==='SELECT'){st[card.dataset.l][+card.dataset.i][e.target.dataset.k]=e.target.value;update()}});
+document.addEventListener('click',e=>{
+  const card=e.target.closest('[data-l]');if(!card)return;const l=card.dataset.l,i=+card.dataset.i,list=st[l];
+  if(e.target.closest('.del')){list.splice(i,1);({sym:renderSym,med:renderMed,tl:renderTl,q:renderQ})[l]();update();return}
+  if(l!=='q')return;
+  if(e.target.closest('.star')){const on=!list[i].top;if(on&&list.filter(q=>q.top).length>=3){flash('You already have 3 top questions. Un-star one first.');return}list[i].top=on;sortQ();renderQ();update()}
+  else if(e.target.closest('.up')&&i>0){[list[i-1],list[i]]=[list[i],list[i-1]];sortQ();renderQ();update()}
+  else if(e.target.closest('.down')&&i<list.length-1){[list[i+1],list[i]]=[list[i],list[i+1]];sortQ();renderQ();update()}
+});
+function sortQ(){st.q=st.q.filter(q=>q.top).concat(st.q.filter(q=>!q.top))}
+$('ideas').addEventListener('click',e=>{const b=e.target.closest('button');if(!b||b.disabled)return;st.q.push({text:b.textContent.replace(/^\+ /,''),top:false});renderQ();update()});
+$('addSym').onclick=()=>{st.sym.push(blankSym());renderSym();update();focusLast('symList')};
+$('addMed').onclick=()=>{st.med.push(blankMed());renderMed();update();focusLast('medList')};
+$('addTl').onclick=()=>{st.tl.push(blankTl());renderTl();update();focusLast('tlList')};
+$('addQ').onclick=()=>{st.q.push({text:'',top:false});renderQ();update();focusLast('qList')};
+function focusLast(id){const c=$(id).lastElementChild;if(c)c.querySelector('input').focus()}
+FIELDS.forEach(k=>$(k).addEventListener('input',update));$('want').addEventListener('change',update);
+
+$('steps').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;showStep(b.dataset.s)});
+function showStep(s){document.querySelectorAll('#steps [data-s]').forEach(b=>b.setAttribute('aria-selected',b.dataset.s===s));document.querySelectorAll('[data-pane]').forEach(p=>p.classList.toggle('hidden',p.dataset.pane!==s))}
+
+const v=k=>$(k).value.trim();
+const lc=s=>s?s.charAt(0).toLowerCase()+s.slice(1):s;
+function opening(){
+  if(!v('main'))return '';
+  const s=st.sym.find(x=>x.what.trim());
+  let t='The main reason I’m here is '+lc(v('main')).replace(/[.!]+$/,'')+'.';
+  if(s){const bits=[];if(s.since.trim())bits.push('it started '+lc(s.since.trim()));if(s.often.trim())bits.push('it happens '+lc(s.often.trim()).replace(/^happens /,''));if(s.trend)bits.push(s.trend==='The same'?'it’s staying the same':s.trend==='Comes and goes'?'it comes and goes':'it’s getting '+s.trend.toLowerCase());if(bits.length)t+=' '+bits.join(', ').replace(/^./,c=>c.toUpperCase())+'.';t+=' I’d rate it '+s.sev+' out of 10.'}
+  if(v('impact'))t+=' It’s affecting me: '+lc(v('impact')).replace(/[.!]+$/,'')+'.';
+  if(v('worry'))t+=' I’m worried it might be '+lc(v('worry')).replace(/[.!]+$/,'')+'.';
+  if(v('want'))t+=' What I’d like today: '+lc(v('want'))+'.';
+  return t;
+}
+function topQs(){const qs=st.q.filter(q=>q.text.trim());return qs}
+
+function sheetHtml(){
+  const sec=(h,body)=>'<h4>'+h+'</h4>'+body;
+  const none='<span class="empty">—</span>';
+  let h='<h3>Visit summary'+(v('who')?' — '+esc(v('who')):'')+'</h3><div class="meta">'+(v('when')?esc(v('when'))+' · ':'')+'Prepared with Visit Forge</div>';
+  h+=sec('Main reason for the visit','<div class="main">'+(v('main')?esc(v('main')):none)+'</div>'+(v('worry')?'<div>Worried it might be: '+esc(v('worry'))+'</div>':'')+(v('want')?'<div>Hoping for: '+esc(v('want'))+'</div>':''));
+  const sy=st.sym.filter(s=>s.what.trim());
+  if(sy.length)h+=sec('Symptoms','<table><tr><th>Symptom</th><th>Started</th><th>How often</th><th>0–10</th><th>Trend</th><th>Better / worse with</th></tr>'+sy.map(s=>'<tr><td><b>'+esc(s.what)+'</b>'+(s.where?'<br>'+esc(s.where):'')+'</td><td>'+esc(s.since)+'</td><td>'+esc(s.often)+'</td><td>'+esc(s.sev)+'</td><td>'+esc(s.trend)+'</td><td>'+(s.better?'+ '+esc(s.better):'')+(s.better&&s.worse?'<br>':'')+(s.worse?'− '+esc(s.worse):'')+'</td></tr>').join('')+'</table>');
+  const tl=st.tl.filter(t=>t.what.trim());
+  if(tl.length)h+=sec('Timeline','<ul>'+tl.map(t=>'<li><b>'+esc(t.when)+'</b> '+esc(t.what)+'</li>').join('')+'</ul>');
+  if(v('impact'))h+=sec('Effect on daily life','<div>'+esc(v('impact'))+'</div>');
+  if(v('tried'))h+=sec('Already tried','<div>'+esc(v('tried'))+'</div>');
+  const md=st.med.filter(m=>m.name.trim());
+  h+=sec('Medicines and allergies',(md.length?'<table><tr><th>Medicine</th><th>Dose</th><th>How often</th><th>For</th></tr>'+md.map(m=>'<tr><td><b>'+esc(m.name)+'</b></td><td>'+esc(m.dose)+'</td><td>'+esc(m.often)+'</td><td>'+esc(m.why)+'</td></tr>').join('')+'</table>':'<div>Medicines: '+none+'</div>')+'<div><b>Allergies:</b> '+(v('allergies')?esc(v('allergies')):none)+'</div>');
+  if(v('history'))h+=sec('Medical and family history','<div>'+esc(v('history'))+'</div>');
+  const qs=topQs();
+  if(qs.length)h+=sec('My questions','<ol>'+qs.map(q=>'<li>'+(q.top?'<b>⭐ '+esc(q.text)+'</b>':esc(q.text))+'</li>').join('')+'</ol>');
+  if(v('said')||v('plan')||v('watch')||v('next'))h+=sec('After the visit',(v('said')?'<div><b>What it might be:</b> '+esc(v('said'))+'</div>':'')+(v('plan')?'<div><b>Plan:</b> '+esc(v('plan'))+'</div>':'')+(v('watch')?'<div><b>Watch for:</b> '+esc(v('watch'))+'</div>':'')+(v('next')?'<div><b>Next:</b> '+esc(v('next'))+'</div>':''));
+  return h;
+}
+function sheetText(){
+  const L=[];const add=(h,lines)=>{if(!lines.length)return;L.push('',h.toUpperCase(),...lines)};
+  L.push('VISIT SUMMARY'+(v('who')?' — '+v('who'):''));if(v('when'))L.push(v('when'));
+  add('Main reason for the visit',[v('main')||'—',...(v('worry')?['Worried it might be: '+v('worry')]:[]),...(v('want')?['Hoping for: '+v('want')]:[])]);
+  add('Symptoms',st.sym.filter(s=>s.what.trim()).map(s=>'- '+s.what+(s.where?' ('+s.where+')':'')+[s.since&&'started '+s.since,s.often&&s.often,'severity '+s.sev+'/10',s.trend&&s.trend.toLowerCase(),s.better&&'better with '+s.better,s.worse&&'worse with '+s.worse].filter(Boolean).map(x=>'; '+x).join('')));
+  add('Timeline',st.tl.filter(t=>t.what.trim()).map(t=>'- '+(t.when?t.when+': ':'')+t.what));
+  add('Effect on daily life',v('impact')?[v('impact')]:[]);
+  add('Already tried',v('tried')?[v('tried')]:[]);
+  add('Medicines and allergies',[...st.med.filter(m=>m.name.trim()).map(m=>'- '+[m.name,m.dose,m.often,m.why&&'for '+m.why].filter(Boolean).join(', ')),'Allergies: '+(v('allergies')||'—')]);
+  add('Medical and family history',v('history')?[v('history')]:[]);
+  add('My questions',topQs().map((q,i)=>(i+1)+'. '+(q.top?'[TOP] ':'')+q.text));
+  add('After the visit',[v('said')&&'What it might be: '+v('said'),v('plan')&&'Plan: '+v('plan'),v('watch')&&'Watch for: '+v('watch'),v('next')&&'Next: '+v('next')].filter(Boolean));
+  return L.join('\n');
+}
+
+function update(){
+  $('nSym').textContent=st.sym.filter(s=>s.what.trim()).length;$('nMed').textContent=st.med.filter(m=>m.name.trim()).length;$('nQ').textContent=st.q.filter(q=>q.text.trim()).length;
+  const op=opening();$('opening').textContent=op||'Fill in “The one thing I most want help with” to get your opening.';
+  $('sheet').innerHTML=sheetHtml();
+  const all=[v('main'),v('worry'),v('impact'),...st.sym.map(s=>[s.what,s.where,s.often,s.worse].join(' ')),...st.tl.map(t=>t.what)].join(' \n ');
+  const hit=URGENT.some(re=>re.test(all));
+  $('urgent').classList.toggle('hidden',!hit);
+  if(hit)$('urgent').innerHTML='<b>Some of what you wrote can be an emergency.</b> If it is happening now or is new and severe, do not wait for this appointment: call your local emergency number (for example 911, 112 or 999) or go to an emergency department. If you are thinking about ending your life, please call a crisis line or emergency services now.';
+  save();
+}
+function save(){const o={st};FIELDS.forEach(k=>o[k]=$(k).value);store.set(o)}
+function load(){const o=store.get();if(!o)return false;FIELDS.forEach(k=>{if(o[k]!=null)$(k).value=o[k]});if(o.st)st=Object.assign({sym:[],tl:[],med:[],q:[]},o.st);return true}
+function flash(t){const s=$('status');s.textContent=t;s.classList.add('show');clearTimeout(flash.t);flash.t=setTimeout(()=>s.classList.remove('show'),3500)}
+
+// ---------- PDF (made on this device with pdf-lib) ----------
+function loadPdfLib(){return window.PDFLib?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';s.onload=ok;s.onerror=()=>no(new Error('Could not load the PDF maker. Check your connection, or use Print instead.'));document.head.appendChild(s)})}
+// The built-in PDF fonts only know Western European letters; swap the rest for close matches.
+const winAnsi=s=>String(s).replace(/[‘’]/g,"'").replace(/[“”]/g,'"').replace(/[–—]/g,'-').replace(/…/g,'...').replace(/⭐/g,'*').replace(/[−]/g,'-').normalize('NFC').replace(/[^\x20-\x7E\xA0-\xFF\n€•]/g,'?');
+async function makePdf(){
+  await loadPdfLib();
+  const {PDFDocument,StandardFonts,rgb}=PDFLib;
+  const doc=await PDFDocument.create();doc.setTitle('Visit summary'+(v('who')?' - '+winAnsi(v('who')):''));doc.setCreator('Visit Forge - migabuilder.com');
+  const font=await doc.embedFont(StandardFonts.Helvetica),bold=await doc.embedFont(StandardFonts.HelveticaBold);
+  const W=595.28,H=841.89,M=46;let page=doc.addPage([W,H]),y=H-M;
+  let size=10;const navy=rgb(.055,.165,.278),grey=rgb(.35,.39,.42);
+  const newPage=()=>{page=doc.addPage([W,H]);y=H-M};
+  const wrap=(text,f,sz,width)=>{const out=[];String(text).split('\n').forEach(par=>{let line='';par.split(/\s+/).forEach(w=>{const t=line?line+' '+w:w;if(f.widthOfTextAtSize(t,sz)>width&&line){out.push(line);line=w}else line=t});out.push(line)});return out};
+  const write=(text,o={})=>{const f=o.bold?bold:font,sz=o.size||size,x=M+(o.indent||0);wrap(winAnsi(text),f,sz,W-M-x).forEach(l=>{if(y<M+sz){newPage()}page.drawText(l,{x,y:y-sz,size:sz,font:f,color:o.color||rgb(.09,.13,.17)});y-=sz*1.35})};
+  const head=t=>{y-=6;if(y<M+40)newPage();page.drawText(winAnsi(t.toUpperCase()),{x:M,y:y-9,size:9,font:bold,color:navy});y-=13;page.drawLine({start:{x:M,y},end:{x:W-M,y},thickness:.6,color:rgb(.85,.87,.89)});y-=5};
+  write('Visit summary'+(v('who')?' - '+v('who'):''),{bold:true,size:17,color:navy});
+  if(v('when'))write(v('when'),{color:grey});
+  head('Main reason for the visit');write(v('main')||'-',{bold:true,size:11.5});if(v('worry'))write('Worried it might be: '+v('worry'));if(v('want'))write('Hoping for: '+v('want'));
+  const sy=st.sym.filter(s=>s.what.trim());
+  if(sy.length){head('Symptoms');sy.forEach(s=>{write('- '+s.what+(s.where?' ('+s.where+')':'')+'  -  '+s.sev+'/10'+(s.trend?', '+s.trend.toLowerCase():''),{bold:true});const d=[s.since&&'Started: '+s.since,s.often&&'How often: '+s.often,s.better&&'Better with: '+s.better,s.worse&&'Worse with: '+s.worse].filter(Boolean).join('   ');if(d)write(d,{indent:10})})}
+  const tl=st.tl.filter(t=>t.what.trim());if(tl.length){head('Timeline');tl.forEach(t=>write('- '+(t.when?t.when+': ':'')+t.what))}
+  if(v('impact')){head('Effect on daily life');write(v('impact'))}
+  if(v('tried')){head('Already tried');write(v('tried'))}
+  head('Medicines and allergies');const md=st.med.filter(m=>m.name.trim());if(md.length)md.forEach(m=>write('- '+[m.name,m.dose,m.often,m.why&&'for '+m.why].filter(Boolean).join(', ')));else write('Medicines: none listed');write('Allergies: '+(v('allergies')||'none listed'),{bold:true});
+  if(v('history')){head('Medical and family history');write(v('history'))}
+  const qs=topQs();if(qs.length){head('My questions');qs.forEach((q,i)=>write((i+1)+'. '+(q.top?'* ':'')+q.text,{bold:!!q.top}))}
+  if(v('said')||v('plan')||v('watch')||v('next')){head('After the visit');if(v('said'))write('What it might be: '+v('said'));if(v('plan'))write('Plan: '+v('plan'));if(v('watch'))write('Watch for: '+v('watch'));if(v('next'))write('Next: '+v('next'))}
+  return doc.save();
+}
+$('pdfBtn').onclick=async()=>{const b=$('pdfBtn');b.disabled=true;b.textContent='Making PDF…';try{const bytes=await makePdf();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));a.download='visit-summary.pdf';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},800);flash('Saved visit-summary.pdf.')}catch(e){flash(e.message)}finally{b.disabled=false;b.textContent='Download PDF'}};
+$('printBtn').onclick=()=>window.print();
+$('copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(sheetText());flash('Copied. Paste it into an email or a patient portal message.')}catch(e){flash('Copying was blocked by the browser. Select the summary and copy it instead.')}};
+
+function example(){
+  const o={who:'Sam Rivera',when:'Tue 4 Nov, 9:20 — Dr Okafor, Riverside Clinic',main:'Headaches most mornings for the last 3 weeks',worry:'My blood pressure, because my dad had a stroke',impact:'Missed 2 days of work and I wake up with it at 5 am',tried:'Paracetamol helps for a few hours. Less screen time made no difference',history:'Asthma since childhood. Father: high blood pressure, stroke at 60',want:'To find out what is causing it',allergies:'Penicillin — rash',said:'',plan:'',watch:'',next:''};
+  FIELDS.forEach(k=>$(k).value=o[k]);
+  st={sym:[{what:'Headache',where:'Behind the eyes, both sides',since:'About 3 weeks ago',often:'Most mornings, 2–3 hours',sev:6,trend:'Worse',better:'Paracetamol, lying in the dark',worse:'Bending over, bright light'},{what:'Blurry vision',where:'Both eyes',since:'Last week',often:'With the headaches',sev:3,trend:'The same',better:'',worse:''}],
+    tl:[{when:'12 Oct',what:'First headache, after a cold'},{when:'20 Oct',what:'Started waking up with it every morning'}],
+    med:[{name:'Salbutamol inhaler',dose:'100 mcg, 2 puffs',often:'When needed, about twice a week',why:'Asthma'},{name:'Paracetamol',dose:'1 g',often:'Most days for 2 weeks',why:'Headache'}],
+    q:[{text:'Could this be my blood pressure?',top:true},{text:'Do I need any tests? What will they show?',top:true},{text:'What should I watch for, and when should I come back or call?',top:true},{text:'Is it safe to keep taking paracetamol every day?',top:false}]};
+  renderAll();showStep('why');
+}
+$('exampleBtn').onclick=example;
+$('resetBtn').onclick=()=>{if(!confirm('Clear everything you typed on this device?'))return;FIELDS.forEach(k=>$(k).value='');st={sym:[blankSym()],tl:[],med:[blankMed()],q:[]};store.del();renderAll();showStep('why')};
+
+if(!load()){st={sym:[blankSym()],tl:[],med:[blankMed()],q:[]}}
+renderAll();
+window.__visitForge={opening,text:sheetText};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
