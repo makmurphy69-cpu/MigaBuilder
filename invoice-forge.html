@@ -5,15 +5,15 @@
 <script src="/usage-counter.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Free quote &amp; invoice generator — Invoice Forge | MigaBuilder</title>
-<meta name="description" content="Fill in line items, quantities, tax and a client name, get a clean quote or invoice document — preview it live, print it, or download it as HTML. No account, no AI call, right in your browser.">
+<meta name="description" content="Fill in line items, quantities, tax and a client name, get a clean quote, invoice or receipt in any currency with numbering, due dates and payment details — preview it live and download a PDF. No account, no AI call, right in your browser.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Invoice Forge — free quote &amp; invoice generator">
-<meta property="og:description" content="Fill in line items, quantities, tax and a client name, get a clean quote or invoice document — preview it live, print it, or download it as HTML. No account, no AI call, right in your browser.">
+<meta property="og:description" content="Fill in line items, quantities, tax and a client name, get a clean quote, invoice or receipt in any currency with numbering, due dates and payment details — preview it live and download a PDF. No account, no AI call, right in your browser.">
 <meta property="og:image" content="https://migabuilder.com/assets/og/invoice-forge.jpg">
 <meta property="og:url" content="https://migabuilder.com/invoice-forge.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Invoice Forge — free quote &amp; invoice generator">
-<meta name="twitter:description" content="Fill in line items, quantities, tax and a client name, get a clean quote or invoice document — preview it live, print it, or download it as HTML. No account, no AI call, right in your browser.">
+<meta name="twitter:description" content="Fill in line items, quantities, tax and a client name, get a clean quote, invoice or receipt in any currency with numbering, due dates and payment details — preview it live and download a PDF. No account, no AI call, right in your browser.">
 <meta name="twitter:image" content="https://migabuilder.com/assets/og/invoice-forge.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,7 +77,7 @@
 
   .field { margin-bottom: 16px; }
   .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+  .hint, .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
 
   .section-title {
     font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
@@ -85,7 +85,7 @@
   }
   .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
 
-  input[type="text"], select, textarea {
+  input[type="text"], input[type="date"], input[type="email"], select, textarea {
     width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 9px 10px;
     border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
   }
@@ -125,7 +125,8 @@
   }
 
   .totals-row { display: flex; gap: 10px; }
-  .totals-row .field { flex: 1; }
+  .totals-row .field { flex: 1; min-width: 0; }
+  @media (max-width: 520px) { .totals-row { flex-wrap: wrap; } .totals-row .field { flex: 1 1 140px; } }
 
   .table {
     background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
@@ -151,7 +152,7 @@
   footer a { color: rgba(237, 234, 224, 0.7); }
 </style>
 <link rel="stylesheet" href="tutorials.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I save the invoice as a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Print it and choose Save as PDF in the print dialog, or download it as an HTML file."}}, {"@type": "Question", "name": "Is Invoice Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I save the invoice as a PDF?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Press Download PDF. The text in the PDF can be selected and searched. You can also print it or download it as an HTML file."}}, {"@type": "Question", "name": "Is Invoice Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head>
 <body>
 
@@ -202,7 +203,43 @@
       <select id="docType">
         <option value="Quote" data-i18n="docTypeQuote">Quote / Estimate</option>
         <option value="Invoice" data-i18n="docTypeInvoice">Invoice</option>
+        <option value="Receipt" data-i18n="docTypeReceipt">Receipt (paid)</option>
       </select>
+    </div>
+    <div class="field">
+      <label for="clientEmail" data-i18n="clientEmailLabel">Client email (optional)</label>
+      <input type="email" id="clientEmail" placeholder="name@example.com">
+    </div>
+    <div class="totals-row">
+      <div class="field">
+        <label for="docNumber" data-i18n="numberLabel">Number</label>
+        <input type="text" id="docNumber" placeholder="INV-0001">
+      </div>
+      <div class="field">
+        <label for="issueDate" data-i18n="issueDateLabel">Date</label>
+        <input type="date" id="issueDate">
+      </div>
+    </div>
+    <div class="totals-row">
+      <div class="field" id="dueField">
+        <label for="dueSel" data-i18n="dueLabel">Payment due</label>
+        <select id="dueSel">
+          <option value="0" data-i18n="dueOnReceipt">On receipt</option>
+          <option value="7">7</option>
+          <option value="14">14</option>
+          <option value="30" selected>30</option>
+          <option value="60">60</option>
+          <option value="custom" data-i18n="dueCustom">Pick a date</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="currency" data-i18n="currencyLabel">Currency</label>
+        <select id="currency"></select>
+      </div>
+    </div>
+    <div class="field" id="dueDateField" style="display:none;">
+      <label for="dueDate" data-i18n="dueDateLabel">Due date</label>
+      <input type="date" id="dueDate">
     </div>
 
     <div class="section-title" data-i18n="lineItemsHeading">Line items</div>
@@ -222,12 +259,27 @@
         <label for="taxPct" data-i18n="taxLabel">Tax rate (%)</label>
         <input type="text" id="taxPct" placeholder="0">
       </div>
+      <div class="field">
+        <label for="shipping" data-i18n="shippingLabel">Shipping</label>
+        <input type="text" id="shipping" placeholder="0">
+      </div>
+    </div>
+
+    <div class="section-title" data-i18n="paymentHeading">Payment &amp; notes</div>
+    <div class="field">
+      <label for="payDetails" data-i18n="payDetailsLabel">How to pay you (remembered)</label>
+      <textarea id="payDetails" data-i18n-placeholder="payDetailsPlaceholder" placeholder="Bank: Example Bank&#10;IBAN: …  ·  Swish / PayPal / M-Pesa: …"></textarea>
+    </div>
+    <div class="field">
+      <label for="notes" data-i18n="notesLabel">Notes or terms (optional)</label>
+      <textarea id="notes" data-i18n-placeholder="notesPlaceholder" placeholder="Thank you for your business! Please quote the invoice number when you pay."></textarea>
     </div>
 
     <div class="error-box" id="errorBox"></div>
     <div class="btn-row" style="margin-top:18px;">
+      <button type="button" class="draft-btn" id="pdfBtn" data-i18n="pdfBtnLabel">⬇ Download PDF</button>
       <button type="button" class="draft-btn secondary" id="printBtn" data-i18n="printBtnLabel">🖨️ Print now</button>
-      <button type="button" class="draft-btn" id="downloadBtn" data-i18n="downloadBtnLabel">⬇ Download HTML</button>
+      <button type="button" class="draft-btn secondary" id="downloadBtn" data-i18n="downloadBtnLabel">⬇ Download HTML</button>
     </div>
     <p class="hint" data-i18n="instantHint">Instant, no AI call — updates live as you type. "Print now" opens your browser's print dialog directly, good for a one-off copy or saving as a PDF.</p>
   </section>
@@ -239,11 +291,11 @@
 </main>
 <section class="miga-about" aria-labelledby="miga-about-h">
   <h2 id="miga-about-h">About Invoice Forge</h2>
-  <p>Invoice Forge makes clean quotes and invoices. Enter your business, your client and the line items, and it adds up the tax and totals.</p>
+  <p>Invoice Forge makes clean quotes, invoices and receipts. Enter your business, your client and the line items, and it adds up the discount, tax, shipping and total in your currency. It numbers each document, adds the date and the due date, shows how to pay you, and downloads a PDF.</p>
   <h3>How to use Invoice Forge</h3>
-  <ol><li>Enter the seller, customer, line items, prices, and payment terms.</li><li>Press “Create invoice”.</li><li>Verify the totals and download or print the invoice.</li></ol>
+  <ol><li>Enter your business, the client and the line items. Choose the currency, the number, the date and when payment is due.</li><li>Add how to pay you and any notes.</li><li>Check the live preview and press “Download PDF”, print it, or download it as HTML. The next number is suggested for you next time.</li></ol>
   <h3>Can I save the invoice as a PDF?</h3>
-  <p>Yes. Print it and choose Save as PDF in the print dialog, or download it as an HTML file.</p>
+  <p>Yes. Press Download PDF. The text in the PDF can be selected and searched. You can also print it or download it as an HTML file.</p>
   <h3>Is Invoice Forge free?</h3>
   <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
   <h3>Are my files uploaded?</h3>
@@ -253,7 +305,7 @@
 
 
 <footer data-i18n-html="footerText">Part of <a href="index.html">MigaBuilder</a>. Everything you enter stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
-<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/cloudflare.com-products-registrar/blob/main/invoice-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/invoice-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
 
 <script>
 (function () {
@@ -274,6 +326,12 @@
   const printBtn = document.getElementById('printBtn');
   const downloadBtn = document.getElementById('downloadBtn');
   const previewFrame = document.getElementById('previewFrame');
+  const $id = id => document.getElementById(id);
+  const clientEmail = $id('clientEmail'), docNumberInput = $id('docNumber'), issueDate = $id('issueDate'), dueSel = $id('dueSel'),
+    dueDate = $id('dueDate'), dueDateField = $id('dueDateField'), currencySel = $id('currency'), shippingInput = $id('shipping'),
+    payDetails = $id('payDetails'), notesInput = $id('notes'), pdfBtn = $id('pdfBtn');
+  const NUM_KEY = 'invoiceForgeNumbers_v1';
+  const CURRENCIES = ['USD','EUR','GBP','SEK','NOK','DKK','CHF','CAD','AUD','NZD','JPY','CNY','INR','PKR','BDT','PHP','IDR','MYR','SGD','HKD','KRW','THB','VND','AED','SAR','EGP','MAD','NGN','GHS','KES','TZS','UGX','RWF','ETB','ZAR','XOF','XAF','BRL','MXN','ARS','COP','CLP','PEN','PLN','CZK','HUF','RON','TRY','UAH','ILS'];
 
   let logoDataUrl = '';
   let logoHintState = null; // null | 'remembered' | { name }
@@ -292,7 +350,10 @@
       localStorage.setItem(PROFILE_KEY, JSON.stringify({
         bizName: bizNameInput.value,
         bizAddress: bizAddressInput.value,
-        logoDataUrl: logoDataUrl
+        logoDataUrl: logoDataUrl,
+        payDetails: payDetails.value,
+        currency: currencySel.value,
+        taxPct: taxPctInput.value
       }));
     } catch (e) {}
   }
@@ -304,6 +365,9 @@
       const profile = JSON.parse(raw);
       if (profile.bizName) bizNameInput.value = profile.bizName;
       if (profile.bizAddress) bizAddressInput.value = profile.bizAddress;
+      if (profile.payDetails) payDetails.value = profile.payDetails;
+      if (profile.currency && CURRENCIES.includes(profile.currency)) currencySel.value = profile.currency;
+      if (profile.taxPct) taxPctInput.value = profile.taxPct;
       if (profile.logoDataUrl) {
         logoDataUrl = profile.logoDataUrl;
         logoHintState = 'remembered';
@@ -326,15 +390,26 @@
     reader.readAsDataURL(file);
   });
 
+  // Reads 1234.5, 1,234.50, 1.234,50, 12,50 and 1 234,50 the way people mean them.
   function parseNumber(str, fallback) {
-    const n = parseFloat(String(str == null ? '' : str).replace(/[^0-9.\-]/g, ''));
+    let t = String(str == null ? '' : str).replace(/[\s\u00a0\u202f']/g, '').replace(/[^0-9.,\-]/g, '');
+    const lastDot = t.lastIndexOf('.'), lastComma = t.lastIndexOf(',');
+    if (lastComma > -1 && lastDot > -1) {
+      if (lastComma > lastDot) t = t.replace(/\./g, '').replace(',', '.');
+      else t = t.replace(/,/g, '');
+    } else if (lastComma > -1) {
+      // one comma followed by exactly 3 digits and nothing else is a thousands separator (1,500); otherwise a decimal comma (12,50)
+      t = /^-?\d{1,3}(,\d{3})+$/.test(t) ? t.replace(/,/g, '') : t.replace(/,/g, '.');
+      if ((t.match(/\./g) || []).length > 1) t = t.replace(/\.(?=.*\.)/g, '');
+    } else if ((t.match(/\./g) || []).length > 1) t = t.replace(/\./g, '');
+    const n = parseFloat(t);
     return isNaN(n) ? fallback : n;
   }
 
   function updateRowLineTotal(row) {
     const qty = parseNumber(row.querySelector('.i-qty').value, 1);
     const rate = parseNumber(row.querySelector('.i-rate').value, 0);
-    row.querySelector('.i-line-total').textContent = '$' + (qty * rate).toFixed(2);
+    row.querySelector('.i-line-total').textContent = money(qty * rate);
   }
 
   function addRow(desc, qty, rate) {
@@ -344,7 +419,7 @@
       '<input type="text" class="i-desc" value="' + (desc || '').replace(/"/g, '&quot;') + '">' +
       '<input type="text" class="i-qty" value="' + (qty != null ? qty : 1) + '">' +
       '<input type="text" class="i-rate" value="' + (rate != null ? rate : '') + '">' +
-      '<span class="i-line-total">$0.00</span>' +
+      '<span class="i-line-total"></span>' +
       '<button type="button" class="i-remove">✕</button>';
     row.querySelector('.i-desc').placeholder = I18N.t('itemDescPlaceholder');
     row.querySelector('.i-qty').placeholder = I18N.t('itemQtyPlaceholder');
@@ -367,10 +442,40 @@
     });
   }
 
-  [bizNameInput, bizAddressInput, clientName, clientAddress, docType, discountPctInput, taxPctInput].forEach(el => el.addEventListener('input', renderPreview));
-  [bizNameInput, bizAddressInput].forEach(el => el.addEventListener('input', saveProfile));
+  [bizNameInput, bizAddressInput, clientName, clientAddress, clientEmail, docType, discountPctInput, taxPctInput, shippingInput, docNumberInput, issueDate, dueDate, payDetails, notesInput].forEach(el => el.addEventListener('input', renderPreview));
+  [bizNameInput, bizAddressInput, payDetails, taxPctInput].forEach(el => el.addEventListener('input', saveProfile));
+  dueSel.addEventListener('change', function () { dueDateField.style.display = dueSel.value === 'custom' ? '' : 'none'; if (dueSel.value === 'custom' && !dueDate.value) dueDate.value = addDays(issueDate.value || todayIso(), 30); renderPreview(); });
+  currencySel.addEventListener('change', function () { saveProfile(); itemRowsEl.querySelectorAll('.item-row').forEach(updateRowLineTotal); renderPreview(); });
+  docType.addEventListener('change', function () { suggestNumber(true); renderPreview(); });
 
-  function money(n) { return '$' + n.toFixed(2); }
+  const fmtCache = {};
+  function money(n) {
+    const c = currencySel.value || 'USD', lang = (window.I18N && I18N.getLang && I18N.getLang()) || undefined;
+    const key = c + '|' + lang;
+    try { if (!fmtCache[key]) fmtCache[key] = new Intl.NumberFormat(lang, { style: 'currency', currency: c }); return fmtCache[key].format(n); }
+    catch (e) { return c + ' ' + n.toFixed(2); }
+  }
+  function todayIso() { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 10); }
+  function addDays(iso, n) { const d = new Date(iso + 'T12:00:00'); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10); }
+  function showDate(iso) { if (!iso) return ''; const d = new Date(iso + 'T12:00:00'); if (isNaN(d)) return iso; try { return d.toLocaleDateString((window.I18N && I18N.getLang && I18N.getLang()) || undefined, { year: 'numeric', month: 'long', day: 'numeric' }); } catch (e) { return iso; } }
+
+  // Numbers: INV-0001, Q-0001, R-0001 — the next one is suggested after each download.
+  const PREFIX = { Invoice: 'INV-', Quote: 'Q-', Receipt: 'R-' };
+  function readNums() { try { return JSON.parse(localStorage.getItem(NUM_KEY) || '{}'); } catch (e) { return {}; } }
+  function nextAfter(num) { const m = String(num).match(/^(.*?)(\d+)(\D*)$/); if (!m) return num + '-2'; const n = String(+m[2] + 1).padStart(m[2].length, '0'); return m[1] + n + m[3]; }
+  let numberTyped = false;
+  docNumberInput.addEventListener('input', function () { numberTyped = true; });
+  function suggestNumber(force) {
+    if (numberTyped && !force) return;
+    const last = readNums()[docType.value];
+    docNumberInput.value = last ? nextAfter(last) : PREFIX[docType.value] + '0001';
+    numberTyped = false;
+  }
+  function rememberNumber() {
+    const nums = readNums(); nums[docType.value] = docNumberInput.value.trim() || nums[docType.value];
+    try { localStorage.setItem(NUM_KEY, JSON.stringify(nums)); } catch (e) {}
+  }
+  function afterSave() { rememberNumber(); setTimeout(function () { suggestNumber(true); renderPreview(); }, 1500); }
 
   function buildDocument() {
     const items = Array.from(itemRowsEl.querySelectorAll('.item-row')).map(row => {
@@ -382,11 +487,17 @@
     const bizName = bizNameInput.value.trim() || I18N.t('defaultBizName');
     const bizAddr = bizAddressInput.value.trim();
     const type = docType.value;
-    const typeWord = type === 'Invoice' ? I18N.t('docWordInvoice') : I18N.t('docWordQuote');
+    const typeWord = type === 'Invoice' ? I18N.t('docWordInvoice') : type === 'Receipt' ? I18N.t('docWordReceipt') : I18N.t('docWordQuote');
     const client = clientName.value.trim() || I18N.t('defaultClientName');
     const clientAddr = clientAddress.value.trim();
-    const date = new Date().toLocaleDateString();
-    const docNumber = type.slice(0, 1) + '-' + Date.now().toString().slice(-6);
+    const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    const issued = issueDate.value || todayIso();
+    const date = showDate(issued);
+    const docNumber = docNumberInput.value.trim() || (PREFIX[type] + '0001');
+    const dueIso = type === 'Receipt' ? '' : dueSel.value === 'custom' ? dueDate.value : dueSel.value === '0' ? '' : addDays(issued, +dueSel.value);
+    const dueText = type === 'Receipt' ? '' : (dueSel.value === '0' ? I18N.t('docDueOnReceipt') : (dueIso ? showDate(dueIso) : ''));
+    const shipping = Math.max(0, parseNumber(shippingInput.value, 0));
+    const email = clientEmail.value.trim(), pay = payDetails.value.trim(), notes = notesInput.value.trim();
 
     const subtotal = items.reduce((sum, i) => sum + i.lineTotal, 0);
     const discountPct = Math.max(0, parseNumber(discountPctInput.value, 0));
@@ -394,43 +505,53 @@
     const discountAmt = subtotal * (discountPct / 100);
     const taxable = subtotal - discountAmt;
     const taxAmt = taxable * (taxPct / 100);
-    const total = taxable + taxAmt;
+    const total = taxable + taxAmt + shipping;
 
     const rowsHtml = items.length
       ? items.map(i =>
-          '<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">' + i.desc.replace(/</g, '&lt;') + '</td>' +
+          '<tr><td style="padding:8px 0;border-bottom:1px solid #eee;">' + esc(i.desc) + '</td>' +
           '<td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;">' + i.qty + '</td>' +
           '<td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;">' + money(i.rate) + '</td>' +
           '<td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;">' + money(i.lineTotal) + '</td></tr>'
         ).join('')
       : '<tr><td colspan="4" style="padding:8px 0;color:#999;">' + I18N.t('docNoItems') + '</td></tr>';
     const logoBlock = logoDataUrl ? '<img src="' + logoDataUrl + '" style="max-width:120px;max-height:70px;margin-bottom:10px;">' : '';
-    const bizAddrBlock = bizAddr ? '<div style="white-space:pre-line;font-size:13px;color:#555;margin-top:2px;">' + bizAddr.replace(/</g, '&lt;') + '</div>' : '';
-    const clientAddrBlock = clientAddr ? '<div style="white-space:pre-line;">' + clientAddr.replace(/</g, '&lt;') + '</div>' : '';
+    const bizAddrBlock = bizAddr ? '<div style="white-space:pre-line;font-size:13px;color:#555;margin-top:2px;">' + bizAddr.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>' : '';
+    const clientAddrBlock = (clientAddr ? '<div style="white-space:pre-line;">' + esc(clientAddr) + '</div>' : '') + (email ? '<div>' + esc(email) + '</div>' : '');
 
     const totalsRows = [];
-    totalsRows.push('<tr><td style="padding:4px 0;text-align:right;color:#555;">' + I18N.t('docSubtotal') + '</td><td style="padding:4px 0;text-align:right;width:100px;">' + money(subtotal) + '</td></tr>');
-    if (discountAmt > 0) totalsRows.push('<tr><td style="padding:4px 0;text-align:right;color:#555;">' + I18N.t('docDiscount').replace('{pct}', discountPct) + '</td><td style="padding:4px 0;text-align:right;">-' + money(discountAmt) + '</td></tr>');
-    if (taxAmt > 0) totalsRows.push('<tr><td style="padding:4px 0;text-align:right;color:#555;">' + I18N.t('docTax').replace('{pct}', taxPct) + '</td><td style="padding:4px 0;text-align:right;">' + money(taxAmt) + '</td></tr>');
-    totalsRows.push('<tr><td style="padding:8px 0 0;text-align:right;font-size:18px;font-weight:bold;border-top:2px solid #16202B;">' + I18N.t('docTotal') + '</td><td style="padding:8px 0 0;text-align:right;font-size:18px;font-weight:bold;border-top:2px solid #16202B;">' + money(total) + '</td></tr>');
+    totalsRows.push('<tr><td style="padding:4px 16px 4px 0;text-align:right;color:#555;">' + I18N.t('docSubtotal') + '</td><td style="padding:4px 0;text-align:right;width:100px;">' + money(subtotal) + '</td></tr>');
+    if (discountAmt > 0) totalsRows.push('<tr><td style="padding:4px 16px 4px 0;text-align:right;color:#555;">' + I18N.t('docDiscount').replace('{pct}', discountPct) + '</td><td style="padding:4px 0;text-align:right;">-' + money(discountAmt) + '</td></tr>');
+    if (shipping > 0) totalsRows.push('<tr><td style="padding:4px 16px 4px 0;text-align:right;color:#555;">' + I18N.t('docShipping') + '</td><td style="padding:4px 0;text-align:right;">' + money(shipping) + '</td></tr>');
+    if (taxAmt > 0) totalsRows.push('<tr><td style="padding:4px 16px 4px 0;text-align:right;color:#555;">' + I18N.t('docTax').replace('{pct}', taxPct) + '</td><td style="padding:4px 0;text-align:right;">' + money(taxAmt) + '</td></tr>');
+    totalsRows.push('<tr><td style="padding:8px 16px 0 0;text-align:right;font-size:18px;font-weight:bold;border-top:2px solid #16202B;">' + (type === 'Invoice' ? I18N.t('docBalanceDue') : type === 'Receipt' ? I18N.t('docTotalPaid') : I18N.t('docTotal')) + '</td><td style="padding:8px 0 0;text-align:right;font-size:18px;font-weight:bold;border-top:2px solid #16202B;">' + money(total) + '</td></tr>');
 
-    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + typeWord + ' ' + docNumber + '</title>' +
-      '<style>body{font-family:Arial,sans-serif;color:#16202B;max-width:640px;margin:40px auto;padding:0 20px;}' +
-      'h1{font-size:22px;margin:0 0 4px;} .meta{color:#666;font-size:13px;margin-bottom:24px;}' +
-      'table{width:100%;border-collapse:collapse;margin-bottom:6px;} th{text-align:left;border-bottom:2px solid #16202B;padding-bottom:8px;font-size:13px;}' +
-      '.totals-table{width:auto;margin-left:auto;margin-top:10px;font-size:14px;}' +
-      '.parties{display:flex;justify-content:space-between;margin-bottom:28px;font-size:14px;gap:20px;}' +
-      '@media print{body{margin:0;}}</style></head><body>' +
-      logoBlock +
-      '<h1>' + bizName.replace(/</g, '&lt;') + '</h1>' +
-      bizAddrBlock +
-      '<div class="meta">' + typeWord + ' #' + docNumber + ' · ' + date + '</div>' +
-      '<div class="parties"><div><strong>' + I18N.t('docTo') + '</strong><br>' + client.replace(/</g, '&lt;') + clientAddrBlock + '</div></div>' +
+    const metaRows = '<div class="meta"><div><b>' + typeWord + ' ' + I18N.t('docNo') + '</b> ' + esc(docNumber) + '</div><div><b>' + I18N.t('docIssued') + '</b> ' + esc(date) + '</div>' +
+      (dueText ? '<div><b>' + I18N.t('docDue') + '</b> ' + esc(dueText) + '</div>' : '') + '</div>';
+    const stamp = type === 'Receipt' ? '<div class="stamp">' + I18N.t('docPaid') + '</div>' : '';
+    const extra = (pay && type !== 'Receipt' ? '<div class="box"><h3>' + I18N.t('docPayment') + '</h3><div style="white-space:pre-line;">' + esc(pay) + '</div>' +
+        (type === 'Invoice' ? '<div style="margin-top:6px;color:#555;">' + I18N.t('docQuoteNumber').replace('{n}', esc(docNumber)) + '</div>' : '') + '</div>' : '') +
+      (notes ? '<div class="box"><h3>' + I18N.t('docNotes') + '</h3><div style="white-space:pre-line;">' + esc(notes) + '</div></div>' : '');
+    const css = function (S) {
+      return (S || 'body') + '{font-family:Arial,Helvetica,sans-serif;color:#16202B;max-width:640px;margin:40px auto;padding:0 20px;position:relative;}' +
+        S + 'h1{font-size:22px;margin:0 0 4px;}' + S + '.head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px;}' +
+        S + '.doctype{font-size:26px;font-weight:bold;letter-spacing:.04em;text-transform:uppercase;color:#0E2A47;text-align:right;}' +
+        S + '.meta{font-size:13px;color:#333;text-align:right;line-height:1.6;}' +
+        S + 'table{width:100%;border-collapse:collapse;margin-bottom:6px;}' + S + 'th{text-align:left;border-bottom:2px solid #16202B;padding-bottom:8px;font-size:13px;}' +
+        S + '.totals-table{width:auto;margin-left:auto;margin-top:10px;font-size:14px;}' +
+        S + '.parties{display:flex;justify-content:space-between;margin-bottom:28px;font-size:14px;gap:20px;}' +
+        S + '.box{margin-top:22px;font-size:13px;line-height:1.5;border-top:1px solid #ddd;padding-top:10px;}' + S + '.box h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#0E2A47;margin:0 0 4px;}' +
+        S + '.stamp{position:absolute;top:120px;right:40px;transform:rotate(-14deg);border:4px solid #2f8f5b;color:#2f8f5b;font-size:34px;font-weight:bold;padding:4px 16px;border-radius:8px;letter-spacing:.1em;opacity:.85;}';
+    };
+    const bodyHtml = stamp + '<div class="head"><div>' + logoBlock + '<h1>' + esc(bizName) + '</h1>' + bizAddrBlock + '</div><div><div class="doctype">' + typeWord + '</div>' + metaRows + '</div></div>' +
+      '<div class="parties"><div><strong>' + I18N.t('docTo') + '</strong><br>' + esc(client) + clientAddrBlock + '</div></div>' +
       '<table><tr><th>' + I18N.t('colDescription') + '</th><th style="text-align:right;">' + I18N.t('colQty') + '</th><th style="text-align:right;">' + I18N.t('colRate') + '</th><th style="text-align:right;">' + I18N.t('colAmount') + '</th></tr>' + rowsHtml + '</table>' +
-      '<table class="totals-table">' + totalsRows.join('') + '</table>' +
-      '</body></html>';
+      '<table class="totals-table">' + totalsRows.join('') + '</table>' + extra;
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + typeWord + ' ' + esc(docNumber) + '</title>' +
+      '<style>' + css('') + '@media print{body{margin:0;}}</style></head><body>' + bodyHtml + '</body></html>';
+    const safeName = (type.toLowerCase() + '-' + docNumber).replace(/[^\w.\-]+/g, '-');
 
-    return { html: html, filename: type.toLowerCase() + '-' + docNumber + '.html', hasItems: items.length > 0 };
+    return { html: html, css: css, body: bodyHtml, filename: safeName + '.html', base: safeName, hasItems: items.length > 0, total: total };
   }
 
   function renderPreview() {
@@ -450,6 +571,7 @@
     win.focus();
     win.addEventListener('load', function () { win.print(); });
     setTimeout(function () { try { win.print(); } catch (e) {} }, 400);
+    afterSave();
   });
 
   downloadBtn.addEventListener('click', function () {
@@ -465,6 +587,44 @@
     a.click();
     document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+    afterSave();
+  });
+
+  // ---------- PDF: drawn from the same document, with an invisible text layer so it can be searched and copied ----------
+  function loadHtml2pdf() { return window.html2pdf ? Promise.resolve() : new Promise(function (ok, no) { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js'; sc.onload = ok; sc.onerror = function () { no(new Error(I18N.t('errorPdf'))); }; document.head.appendChild(sc); }); }
+  function textLines(root) {
+    const base = root.getBoundingClientRect(), words = [], walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let node;
+    while ((node = walker.nextNode())) { const el = node.parentElement; if (!el || !node.textContent.trim()) continue; const size = parseFloat(getComputedStyle(el).fontSize) || 12, re = /\S+/g; let m;
+      while ((m = re.exec(node.textContent))) { const r = document.createRange(); r.setStart(node, m.index); r.setEnd(node, m.index + m[0].length); const b = r.getClientRects()[0]; if (b && b.width) words.push({ t: m[0], x: b.left - base.left, y: b.top - base.top, h: b.height, size: size }); } }
+    words.sort(function (a, b) { return Math.abs(a.y - b.y) > a.h * 0.5 ? a.y - b.y : a.x - b.x; });
+    const lines = []; words.forEach(function (w) { const l = lines[lines.length - 1]; if (l && Math.abs(l.y - w.y) <= w.h * 0.5 && w.x >= l.end - 1 && w.x - l.end < w.size * 2) { l.t += ' ' + w.t; l.end = w.x + w.size * w.t.length * 0.5; } else lines.push({ t: w.t, x: w.x, y: w.y, size: w.size, end: w.x + w.size * w.t.length * 0.5 }); });
+    return lines;
+  }
+  function addTextLayer(pdf, lines, widthPx) {
+    const mm = 210 / widthPx, pageH = 297, pages = pdf.internal.getNumberOfPages(); pdf.setFont('helvetica', 'normal');
+    lines.forEach(function (l) { const text = l.t.replace(/[\u2013\u2014\u2212]/g, '-').replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"').replace(/\u20ac/g, 'EUR').replace(/[\u00a0\u202f]/g, ' ').replace(/[^\x20-\xFF]/g, ''); if (!text.trim()) return;
+      const y = l.y * mm, page = Math.min(pages, Math.floor(y / pageH) + 1); pdf.setPage(page); pdf.setFontSize(Math.max(4, l.size * mm * 72 / 25.4)); pdf.text(text, l.x * mm, y - (page - 1) * pageH, { baseline: 'top', renderingMode: 'invisible' }); });
+    pdf.setPage(1);
+  }
+  pdfBtn.addEventListener('click', async function () {
+    clearError();
+    const doc = buildDocument();
+    if (!doc.hasItems) { showError(I18N.t('errorNoItems')); return; }
+    const label = pdfBtn.textContent; pdfBtn.disabled = true; pdfBtn.textContent = I18N.t('pdfWorking');
+    const host = document.createElement('div');
+    host.style.cssText = 'position:fixed;left:-10000px;top:0;width:794px;background:#fff;';
+    host.innerHTML = '<style>' + doc.css('.inv-doc ') + '.inv-doc{margin:0 auto;padding:48px 56px;max-width:none;}</style><div class="inv-doc">' + doc.body + '</div>';
+    document.body.appendChild(host);
+    try {
+      await loadHtml2pdf();
+      const el = host.querySelector('.inv-doc'), lines = textLines(el);
+      const pdf = await html2pdf().set({ margin: 0, image: { type: 'jpeg', quality: 0.97 }, html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }, pagebreak: { mode: ['css', 'legacy'] } }).from(el).toPdf().get('pdf');
+      addTextLayer(pdf, lines, el.offsetWidth);
+      pdf.setProperties({ title: doc.base, creator: 'Invoice Forge - migabuilder.com' });
+      pdf.save(doc.base + '.pdf');
+      afterSave();
+    } catch (e) { showError(e.message || String(e)); }
+    finally { host.remove(); pdfBtn.disabled = false; pdfBtn.textContent = label; }
   });
 
   I18N.init({
@@ -479,7 +639,6 @@
       logoHintDefault: 'Made one in <a href="logo-forge.html" style="color:var(--navy);text-decoration:underline;">Logo Forge</a>? Upload it here to add it to the document.',
       logoHintRemembered: 'Logo remembered from last time.',
       logoHintAdded: 'Logo added: {name}',
-      profileSavedHint: 'Your business name, address and logo are remembered in this browser for next time.',
       clientDocHeading: 'Client & document',
       clientNameLabel: 'Client name',
       clientNamePlaceholder: 'Who this is for',
@@ -503,7 +662,6 @@
       taxLabel: 'Tax rate (%)',
       printBtnLabel: '🖨️ Print now',
       downloadBtnLabel: '⬇ Download HTML',
-      instantHint: 'Instant, no AI call — updates live as you type. "Print now" opens your browser\'s print dialog directly, good for a one-off copy or saving as a PDF.',
       previewTitle: 'INVOICE FORGE — LIVE PREVIEW',
       errorNoItems: 'Add at least one line item first.',
       errorPopupBlocked: 'Your browser blocked the print window — allow pop-ups for this site and try again.',
@@ -517,6 +675,39 @@
       docTax: 'Tax ({pct}%)',
       docTotal: 'Total',
       docTo: 'To:',
+      docTypeReceipt: "Receipt (paid)",
+      clientEmailLabel: "Client email (optional)",
+      numberLabel: "Number",
+      issueDateLabel: "Date",
+      dueLabel: "Payment due",
+      dueOnReceipt: "On receipt",
+      dueDays: "In {n} days",
+      dueCustom: "Pick a date",
+      currencyLabel: "Currency",
+      dueDateLabel: "Due date",
+      shippingLabel: "Shipping",
+      paymentHeading: "Payment & notes",
+      payDetailsLabel: "How to pay you (remembered)",
+      payDetailsPlaceholder: "Bank: Example Bank\nIBAN: …  ·  PayPal / Swish / M-Pesa: …",
+      notesLabel: "Notes or terms (optional)",
+      notesPlaceholder: "Thank you for your business!",
+      pdfBtnLabel: "⬇ Download PDF",
+      pdfWorking: "Making PDF…",
+      errorPdf: "Could not load the PDF maker. Check your connection, or use Print and choose Save as PDF.",
+      docWordReceipt: "Receipt",
+      docNo: "No.",
+      docIssued: "Date:",
+      docDue: "Due:",
+      docDueOnReceipt: "On receipt",
+      docShipping: "Shipping",
+      docBalanceDue: "Balance due",
+      docTotalPaid: "Total paid",
+      docPaid: "PAID",
+      docPayment: "How to pay",
+      docNotes: "Notes",
+      docQuoteNumber: "Please quote {n} with your payment.",
+      profileSavedHint: "Your business name, address, logo, payment details and currency are remembered in this browser for next time.",
+      instantHint: "Instant, no AI call — updates live as you type. The number goes up by one after each download.",
       footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything you enter stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
     },
     es: {
@@ -530,7 +721,6 @@
       logoHintDefault: '¿Hiciste uno en <a href="logo-forge.html" style="color:var(--navy);text-decoration:underline;">Logo Forge</a>? Súbelo aquí para añadirlo al documento.',
       logoHintRemembered: 'Logo recordado de la última vez.',
       logoHintAdded: 'Logo añadido: {name}',
-      profileSavedHint: 'El nombre, dirección y logo de tu negocio se recuerdan en este navegador para la próxima vez.',
       clientDocHeading: 'Cliente y documento',
       clientNameLabel: 'Nombre del cliente',
       clientNamePlaceholder: 'Para quién es esto',
@@ -554,7 +744,6 @@
       taxLabel: 'Impuesto (%)',
       printBtnLabel: '🖨️ Imprimir ahora',
       downloadBtnLabel: '⬇ Descargar HTML',
-      instantHint: 'Instantáneo, sin llamadas de IA — se actualiza en vivo mientras escribes. "Imprimir ahora" abre el diálogo de impresión de tu navegador directamente, ideal para una copia puntual o para guardar como PDF.',
       previewTitle: 'INVOICE FORGE — VISTA PREVIA EN VIVO',
       errorNoItems: 'Añade al menos un concepto primero.',
       errorPopupBlocked: 'Tu navegador bloqueó la ventana de impresión — permite ventanas emergentes para este sitio e inténtalo de nuevo.',
@@ -568,6 +757,39 @@
       docTax: 'Impuesto ({pct}%)',
       docTotal: 'Total',
       docTo: 'Para:',
+      docTypeReceipt: "Recibo (pagado)",
+      clientEmailLabel: "Correo del cliente (opcional)",
+      numberLabel: "Número",
+      issueDateLabel: "Fecha",
+      dueLabel: "Vencimiento del pago",
+      dueOnReceipt: "Al recibir",
+      dueDays: "En {n} días",
+      dueCustom: "Elegir una fecha",
+      currencyLabel: "Moneda",
+      dueDateLabel: "Fecha de vencimiento",
+      shippingLabel: "Envío",
+      paymentHeading: "Pago y notas",
+      payDetailsLabel: "Cómo pagarte (se recuerda)",
+      payDetailsPlaceholder: "Banco: Banco Ejemplo\nIBAN: …  ·  PayPal / Bizum: …",
+      notesLabel: "Notas o condiciones (opcional)",
+      notesPlaceholder: "¡Gracias por confiar en nosotros!",
+      pdfBtnLabel: "⬇ Descargar PDF",
+      pdfWorking: "Creando el PDF…",
+      errorPdf: "No se pudo cargar el creador de PDF. Revisa tu conexión o usa Imprimir y elige Guardar como PDF.",
+      docWordReceipt: "Recibo",
+      docNo: "N.º",
+      docIssued: "Fecha:",
+      docDue: "Vence:",
+      docDueOnReceipt: "Al recibir",
+      docShipping: "Envío",
+      docBalanceDue: "Saldo a pagar",
+      docTotalPaid: "Total pagado",
+      docPaid: "PAGADO",
+      docPayment: "Cómo pagar",
+      docNotes: "Notas",
+      docQuoteNumber: "Indica {n} al hacer el pago.",
+      profileSavedHint: "El nombre, la dirección, el logo, los datos de pago y la moneda de tu negocio se recuerdan en este navegador para la próxima vez.",
+      instantHint: "Instantáneo, sin IA: se actualiza mientras escribes. El número sube en uno después de cada descarga.",
       footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo lo que escribes permanece en tu navegador — nada se sube a ningún lugar. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
     },
     ar: {
@@ -581,7 +803,6 @@
       logoHintDefault: 'صنعت واحدًا في <a href="logo-forge.html" style="color:var(--navy);text-decoration:underline;">Logo Forge</a>؟ ارفعه هنا لإضافته إلى المستند.',
       logoHintRemembered: 'تم تذكر الشعار من المرة السابقة.',
       logoHintAdded: 'تمت إضافة الشعار: {name}',
-      profileSavedHint: 'يتم تذكر اسم عملك وعنوانه وشعاره في هذا المتصفح للمرة القادمة.',
       clientDocHeading: 'العميل والمستند',
       clientNameLabel: 'اسم العميل',
       clientNamePlaceholder: 'لمن هذا المستند',
@@ -605,7 +826,6 @@
       taxLabel: 'نسبة الضريبة (%)',
       printBtnLabel: '🖨️ اطبع الآن',
       downloadBtnLabel: '⬇ تنزيل HTML',
-      instantHint: 'فوري بدون أي استدعاء للذكاء الاصطناعي — يتحدث مباشرة أثناء الكتابة. يفتح "اطبع الآن" مربع حوار الطباعة في متصفحك مباشرة، مناسب لنسخة واحدة أو للحفظ كملف PDF.',
       previewTitle: 'INVOICE FORGE — معاينة مباشرة',
       errorNoItems: 'أضف بندًا واحدًا على الأقل أولاً.',
       errorPopupBlocked: 'منع متصفحك نافذة الطباعة — اسمح بالنوافذ المنبثقة لهذا الموقع وحاول مرة أخرى.',
@@ -619,6 +839,39 @@
       docTax: 'الضريبة ({pct}%)',
       docTotal: 'الإجمالي',
       docTo: 'إلى:',
+      docTypeReceipt: "إيصال (مدفوع)",
+      clientEmailLabel: "بريد العميل (اختياري)",
+      numberLabel: "الرقم",
+      issueDateLabel: "التاريخ",
+      dueLabel: "موعد الدفع",
+      dueOnReceipt: "عند الاستلام",
+      dueDays: "خلال {n} يومًا",
+      dueCustom: "اختر تاريخًا",
+      currencyLabel: "العملة",
+      dueDateLabel: "تاريخ الاستحقاق",
+      shippingLabel: "الشحن",
+      paymentHeading: "الدفع والملاحظات",
+      payDetailsLabel: "طريقة الدفع لك (تُحفظ)",
+      payDetailsPlaceholder: "البنك: بنك المثال\nIBAN: …",
+      notesLabel: "ملاحظات أو شروط (اختياري)",
+      notesPlaceholder: "شكرًا لتعاملكم معنا!",
+      pdfBtnLabel: "⬇ تنزيل PDF",
+      pdfWorking: "جارٍ إنشاء PDF…",
+      errorPdf: "تعذّر تحميل أداة PDF. تحقق من اتصالك أو استخدم الطباعة واختر الحفظ كـ PDF.",
+      docWordReceipt: "إيصال",
+      docNo: "رقم",
+      docIssued: "التاريخ:",
+      docDue: "الاستحقاق:",
+      docDueOnReceipt: "عند الاستلام",
+      docShipping: "الشحن",
+      docBalanceDue: "المبلغ المستحق",
+      docTotalPaid: "إجمالي المدفوع",
+      docPaid: "مدفوع",
+      docPayment: "طريقة الدفع",
+      docNotes: "ملاحظات",
+      docQuoteNumber: "يرجى ذكر {n} عند الدفع.",
+      profileSavedHint: "يُحفظ اسم نشاطك وعنوانه وشعاره وبيانات الدفع والعملة في هذا المتصفح للمرة القادمة.",
+      instantHint: "فوري وبدون ذكاء اصطناعي — يتحدّث أثناء الكتابة. يزيد الرقم بواحد بعد كل تنزيل.",
       footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل ما تدخله يبقى في متصفحك — لا يُرفع شيء إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
     },
     zh: {
@@ -632,7 +885,6 @@
       logoHintDefault: '在 <a href="logo-forge.html" style="color:var(--navy);text-decoration:underline;">Logo Forge</a> 中做了一个？在这里上传以将其添加到文档中。',
       logoHintRemembered: '已记住上次的徽标。',
       logoHintAdded: '已添加徽标：{name}',
-      profileSavedHint: '你的商家名称、地址和徽标会保存在此浏览器中，供下次使用。',
       clientDocHeading: '客户与文档',
       clientNameLabel: '客户名称',
       clientNamePlaceholder: '此文档面向谁',
@@ -656,7 +908,6 @@
       taxLabel: '税率 (%)',
       printBtnLabel: '🖨️ 立即打印',
       downloadBtnLabel: '⬇ 下载 HTML',
-      instantHint: '即时生成，无需调用 AI——随输入实时更新。"立即打印"会直接打开浏览器的打印对话框，适合打印单份副本或另存为 PDF。',
       previewTitle: 'INVOICE FORGE — 实时预览',
       errorNoItems: '请先添加至少一个条目。',
       errorPopupBlocked: '你的浏览器阻止了打印窗口 — 请允许此网站的弹出窗口后重试。',
@@ -670,6 +921,39 @@
       docTax: '税额 ({pct}%)',
       docTotal: '总计',
       docTo: '致：',
+      docTypeReceipt: "收据（已付款）",
+      clientEmailLabel: "客户邮箱（可选）",
+      numberLabel: "编号",
+      issueDateLabel: "日期",
+      dueLabel: "付款期限",
+      dueOnReceipt: "收到即付",
+      dueDays: "{n} 天内",
+      dueCustom: "选择日期",
+      currencyLabel: "货币",
+      dueDateLabel: "到期日",
+      shippingLabel: "运费",
+      paymentHeading: "付款与备注",
+      payDetailsLabel: "收款方式（会被记住）",
+      payDetailsPlaceholder: "银行：示例银行\n账号：…  ·  支付宝 / 微信：…",
+      notesLabel: "备注或条款（可选）",
+      notesPlaceholder: "感谢您的惠顾！",
+      pdfBtnLabel: "⬇ 下载 PDF",
+      pdfWorking: "正在生成 PDF…",
+      errorPdf: "无法加载 PDF 工具。请检查网络，或使用打印并选择“另存为 PDF”。",
+      docWordReceipt: "收据",
+      docNo: "编号",
+      docIssued: "日期：",
+      docDue: "到期：",
+      docDueOnReceipt: "收到即付",
+      docShipping: "运费",
+      docBalanceDue: "应付余额",
+      docTotalPaid: "已付总额",
+      docPaid: "已付款",
+      docPayment: "付款方式",
+      docNotes: "备注",
+      docQuoteNumber: "付款时请注明 {n}。",
+      profileSavedHint: "您的商家名称、地址、标志、收款方式和货币会保存在此浏览器中，方便下次使用。",
+      instantHint: "即时生成，无需 AI——边输入边更新。每次下载后编号自动加一。",
       footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你输入的所有内容都保留在浏览器中——不会上传到任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
     },
     sw: {
@@ -683,7 +967,6 @@
       logoHintDefault: 'Umetengeneza moja katika <a href="logo-forge.html" style="color:var(--navy);text-decoration:underline;">Logo Forge</a>? Ipakie hapa ili kuiongeza kwenye hati.',
       logoHintRemembered: 'Nembo imekumbukwa kutoka mara iliyopita.',
       logoHintAdded: 'Nembo imeongezwa: {name}',
-      profileSavedHint: 'Jina la biashara yako, anwani na nembo vinakumbukwa kwenye kivinjari hiki kwa mara ijayo.',
       clientDocHeading: 'Mteja na hati',
       clientNameLabel: 'Jina la mteja',
       clientNamePlaceholder: 'Hii ni ya nani',
@@ -707,7 +990,6 @@
       taxLabel: 'Kiwango cha kodi (%)',
       printBtnLabel: '🖨️ Chapisha sasa',
       downloadBtnLabel: '⬇ Pakua HTML',
-      instantHint: 'Papo hapo, hakuna wito wa AI — inasasishwa unapoandika. "Chapisha sasa" hufungua kisanduku cha mazungumzo cha kuchapisha cha kivinjari chako moja kwa moja, kizuri kwa nakala moja au kuhifadhi kama PDF.',
       previewTitle: 'INVOICE FORGE — MUONEKANO WA MOJA KWA MOJA',
       errorNoItems: 'Ongeza kipengele kimoja kwanza.',
       errorPopupBlocked: 'Kivinjari chako kimezuia dirisha la kuchapisha — ruhusu madirisha ibukizi kwa tovuti hii na ujaribu tena.',
@@ -721,6 +1003,39 @@
       docTax: 'Kodi ({pct}%)',
       docTotal: 'Jumla kuu',
       docTo: 'Kwa:',
+      docTypeReceipt: "Risiti (imelipwa)",
+      clientEmailLabel: "Barua pepe ya mteja (si lazima)",
+      numberLabel: "Namba",
+      issueDateLabel: "Tarehe",
+      dueLabel: "Malipo yanadaiwa",
+      dueOnReceipt: "Unapopokea",
+      dueDays: "Ndani ya siku {n}",
+      dueCustom: "Chagua tarehe",
+      currencyLabel: "Sarafu",
+      dueDateLabel: "Tarehe ya mwisho",
+      shippingLabel: "Usafirishaji",
+      paymentHeading: "Malipo na maelezo",
+      payDetailsLabel: "Jinsi ya kukulipa (inakumbukwa)",
+      payDetailsPlaceholder: "Benki: Benki ya Mfano\nM-Pesa Paybill: …  ·  Akaunti: …",
+      notesLabel: "Maelezo au masharti (si lazima)",
+      notesPlaceholder: "Asante kwa biashara yako!",
+      pdfBtnLabel: "⬇ Pakua PDF",
+      pdfWorking: "Inatengeneza PDF…",
+      errorPdf: "Imeshindwa kupakia kitengeneza PDF. Angalia mtandao, au tumia Chapisha na uchague Hifadhi kama PDF.",
+      docWordReceipt: "Risiti",
+      docNo: "Na.",
+      docIssued: "Tarehe:",
+      docDue: "Mwisho:",
+      docDueOnReceipt: "Unapopokea",
+      docShipping: "Usafirishaji",
+      docBalanceDue: "Kiasi kinachodaiwa",
+      docTotalPaid: "Jumla iliyolipwa",
+      docPaid: "IMELIPWA",
+      docPayment: "Jinsi ya kulipa",
+      docNotes: "Maelezo",
+      docQuoteNumber: "Tafadhali taja {n} unapolipa.",
+      profileSavedHint: "Jina, anwani, nembo, maelezo ya malipo na sarafu ya biashara yako yanakumbukwa kwenye kivinjari hiki kwa wakati ujao.",
+      instantHint: "Papo hapo, bila AI — inasasishwa unapoandika. Namba inaongezeka kwa moja baada ya kila upakuaji.",
       footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu unachoingiza kinabaki kwenye kivinjari chako — hakuna kinachopakiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
     },
     sv: {
@@ -734,7 +1049,6 @@
       logoHintDefault: "Har du gjort en i <a href=\"logo-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Logo Forge</a>? Ladda upp den här för att lägga till den i dokumentet.",
       logoHintRemembered: "Logotypen kommer ihåg från förra gången.",
       logoHintAdded: "Logotyp tillagd: {name}",
-      profileSavedHint: "Ditt företagsnamn, din adress och logotyp sparas i den här webbläsaren till nästa gång.",
       clientDocHeading: "Kund & dokument",
       clientNameLabel: "Kundens namn",
       clientNamePlaceholder: "Vem det gäller",
@@ -758,7 +1072,6 @@
       taxLabel: "Moms (%)",
       printBtnLabel: "🖨️ Skriv ut nu",
       downloadBtnLabel: "⬇ Ladda ner HTML",
-      instantHint: "Direkt, utan AI — uppdateras medan du skriver. \"Skriv ut nu\" öppnar webbläsarens utskriftsdialog direkt, bra för en enstaka kopia eller för att spara som PDF.",
       previewTitle: "INVOICE FORGE — FÖRHANDSVISNING",
       errorNoItems: "Lägg till minst en rad först.",
       errorPopupBlocked: "Webbläsaren blockerade utskriftsfönstret — tillåt popup-fönster för den här webbplatsen och försök igen.",
@@ -772,6 +1085,39 @@
       docTax: "Moms ({pct} %)",
       docTotal: "Totalt",
       docTo: "Till:",
+      docTypeReceipt: "Kvitto (betalt)",
+      clientEmailLabel: "Kundens e-post (valfritt)",
+      numberLabel: "Nummer",
+      issueDateLabel: "Datum",
+      dueLabel: "Betalning senast",
+      dueOnReceipt: "Vid mottagande",
+      dueDays: "Om {n} dagar",
+      dueCustom: "Välj ett datum",
+      currencyLabel: "Valuta",
+      dueDateLabel: "Förfallodatum",
+      shippingLabel: "Frakt",
+      paymentHeading: "Betalning och anteckningar",
+      payDetailsLabel: "Så betalar man dig (sparas)",
+      payDetailsPlaceholder: "Bankgiro: …\nIBAN: …  ·  Swish: …",
+      notesLabel: "Anteckningar eller villkor (valfritt)",
+      notesPlaceholder: "Tack för förtroendet!",
+      pdfBtnLabel: "⬇ Ladda ner PDF",
+      pdfWorking: "Skapar PDF…",
+      errorPdf: "Kunde inte ladda PDF-verktyget. Kontrollera anslutningen, eller använd Skriv ut och välj Spara som PDF.",
+      docWordReceipt: "Kvitto",
+      docNo: "Nr",
+      docIssued: "Datum:",
+      docDue: "Förfaller:",
+      docDueOnReceipt: "Vid mottagande",
+      docShipping: "Frakt",
+      docBalanceDue: "Att betala",
+      docTotalPaid: "Totalt betalt",
+      docPaid: "BETALD",
+      docPayment: "Så betalar du",
+      docNotes: "Anteckningar",
+      docQuoteNumber: "Ange {n} när du betalar.",
+      profileSavedHint: "Företagets namn, adress, logotyp, betalningsuppgifter och valuta sparas i den här webbläsaren till nästa gång.",
+      instantHint: "Direkt, utan AI — uppdateras medan du skriver. Numret ökar med ett efter varje nedladdning.",
       footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt du skriver stannar i din webbläsare — ingenting laddas upp någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
     },
     de: {
@@ -785,7 +1131,6 @@
       logoHintDefault: "Eins in <a href=\"logo-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Logo Forge<\/a> gemacht? Lade es hier hoch, um es zum Dokument hinzuzufügen.",
       logoHintRemembered: "Logo vom letzten Mal gemerkt.",
       logoHintAdded: "Logo hinzugefügt: {name}",
-      profileSavedHint: "Dein Firmenname, deine Adresse und dein Logo werden für das nächste Mal in diesem Browser gemerkt.",
       clientDocHeading: "Kunde & Dokument",
       clientNameLabel: "Name des Kunden",
       clientNamePlaceholder: "Für wen",
@@ -809,7 +1154,6 @@
       taxLabel: "Steuersatz (%)",
       printBtnLabel: "🖨️ Jetzt drucken",
       downloadBtnLabel: "⬇ HTML herunterladen",
-      instantHint: "Sofort, ohne KI-Aufruf — aktualisiert sich live beim Tippen. \"Jetzt drucken\" öffnet direkt den Druckdialog deines Browsers, gut für eine einzelne Kopie oder zum Speichern als PDF.",
       previewTitle: "INVOICE FORGE — LIVE-VORSCHAU",
       errorNoItems: "Füge zuerst mindestens eine Position hinzu.",
       errorPopupBlocked: "Dein Browser hat das Druckfenster blockiert — erlaube Pop-ups für diese Website und versuche es erneut.",
@@ -823,6 +1167,39 @@
       docTax: "Steuer ({pct} %)",
       docTotal: "Gesamt",
       docTo: "An:",
+      docTypeReceipt: "Quittung (bezahlt)",
+      clientEmailLabel: "E-Mail des Kunden (optional)",
+      numberLabel: "Nummer",
+      issueDateLabel: "Datum",
+      dueLabel: "Zahlbar",
+      dueOnReceipt: "Sofort",
+      dueDays: "In {n} Tagen",
+      dueCustom: "Datum wählen",
+      currencyLabel: "Währung",
+      dueDateLabel: "Fälligkeitsdatum",
+      shippingLabel: "Versand",
+      paymentHeading: "Zahlung & Hinweise",
+      payDetailsLabel: "So bezahlt man dich (wird gespeichert)",
+      payDetailsPlaceholder: "Bank: Beispielbank\nIBAN: …  ·  BIC: …  ·  PayPal: …",
+      notesLabel: "Hinweise oder Bedingungen (optional)",
+      notesPlaceholder: "Vielen Dank für Ihren Auftrag!",
+      pdfBtnLabel: "⬇ PDF herunterladen",
+      pdfWorking: "PDF wird erstellt…",
+      errorPdf: "Das PDF-Werkzeug konnte nicht geladen werden. Prüfe die Verbindung oder nutze Drucken und wähle „Als PDF speichern“.",
+      docWordReceipt: "Quittung",
+      docNo: "Nr.",
+      docIssued: "Datum:",
+      docDue: "Fällig:",
+      docDueOnReceipt: "Sofort",
+      docShipping: "Versand",
+      docBalanceDue: "Zu zahlender Betrag",
+      docTotalPaid: "Bezahlt gesamt",
+      docPaid: "BEZAHLT",
+      docPayment: "Zahlung",
+      docNotes: "Hinweise",
+      docQuoteNumber: "Bitte geben Sie bei der Zahlung {n} an.",
+      profileSavedHint: "Name, Adresse, Logo, Zahlungsdaten und Währung deines Unternehmens werden in diesem Browser für das nächste Mal gespeichert.",
+      instantHint: "Sofort, ohne KI — aktualisiert sich beim Tippen. Die Nummer erhöht sich nach jedem Download um eins.",
       footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles, was du eingibst, bleibt in deinem Browser — nichts wird irgendwohin hochgeladen. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
     },
     pt: {
@@ -836,7 +1213,6 @@
       logoHintDefault: "Fez um no <a href=\"logo-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Logo Forge<\/a>? Envie aqui para adicionar ao documento.",
       logoHintRemembered: "Logo lembrado da última vez.",
       logoHintAdded: "Logo adicionado: {name}",
-      profileSavedHint: "O nome da empresa, o endereço e o logo ficam lembrados neste navegador para a próxima vez.",
       clientDocHeading: "Cliente e documento",
       clientNameLabel: "Nome do cliente",
       clientNamePlaceholder: "Para quem é",
@@ -860,7 +1236,6 @@
       taxLabel: "Alíquota de imposto (%)",
       printBtnLabel: "🖨️ Imprimir agora",
       downloadBtnLabel: "⬇ Baixar HTML",
-      instantHint: "Instantâneo, sem IA — atualiza ao vivo enquanto você digita. \"Imprimir agora\" abre direto a janela de impressão do navegador, bom para uma cópia única ou para salvar como PDF.",
       previewTitle: "INVOICE FORGE — PRÉVIA AO VIVO",
       errorNoItems: "Adicione pelo menos um item primeiro.",
       errorPopupBlocked: "Seu navegador bloqueou a janela de impressão — permita pop-ups para este site e tente de novo.",
@@ -874,6 +1249,39 @@
       docTax: "Imposto ({pct}%)",
       docTotal: "Total",
       docTo: "Para:",
+      docTypeReceipt: "Recibo (pago)",
+      clientEmailLabel: "E-mail do cliente (opcional)",
+      numberLabel: "Número",
+      issueDateLabel: "Data",
+      dueLabel: "Vencimento",
+      dueOnReceipt: "No recebimento",
+      dueDays: "Em {n} dias",
+      dueCustom: "Escolher data",
+      currencyLabel: "Moeda",
+      dueDateLabel: "Data de vencimento",
+      shippingLabel: "Frete",
+      paymentHeading: "Pagamento e observações",
+      payDetailsLabel: "Como pagar você (fica salvo)",
+      payDetailsPlaceholder: "Banco: Banco Exemplo\nPix / IBAN: …",
+      notesLabel: "Observações ou termos (opcional)",
+      notesPlaceholder: "Obrigado pela preferência!",
+      pdfBtnLabel: "⬇ Baixar PDF",
+      pdfWorking: "Criando o PDF…",
+      errorPdf: "Não foi possível carregar o criador de PDF. Verifique a conexão ou use Imprimir e escolha Salvar como PDF.",
+      docWordReceipt: "Recibo",
+      docNo: "N.º",
+      docIssued: "Data:",
+      docDue: "Vence:",
+      docDueOnReceipt: "No recebimento",
+      docShipping: "Frete",
+      docBalanceDue: "Valor a pagar",
+      docTotalPaid: "Total pago",
+      docPaid: "PAGO",
+      docPayment: "Como pagar",
+      docNotes: "Observações",
+      docQuoteNumber: "Informe {n} ao pagar.",
+      profileSavedHint: "O nome, o endereço, o logotipo, os dados de pagamento e a moeda do seu negócio ficam salvos neste navegador para a próxima vez.",
+      instantHint: "Instantâneo, sem IA — atualiza enquanto você digita. O número aumenta em um após cada download.",
       footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo o que você digita fica no seu navegador — nada é enviado a lugar nenhum. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>"
     },
     fr: {
@@ -887,7 +1295,6 @@
       logoHintDefault: "Vous en avez créé un dans <a href=\"logo-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Logo Forge<\/a> ? Importez-le ici pour l'ajouter au document.",
       logoHintRemembered: "Logo mémorisé depuis la dernière fois.",
       logoHintAdded: "Logo ajouté : {name}",
-      profileSavedHint: "Le nom de votre entreprise, son adresse et son logo sont mémorisés dans ce navigateur pour la prochaine fois.",
       clientDocHeading: "Client et document",
       clientNameLabel: "Nom du client",
       clientNamePlaceholder: "Destinataire",
@@ -911,7 +1318,6 @@
       taxLabel: "Taux de taxe (%)",
       printBtnLabel: "🖨️ Imprimer maintenant",
       downloadBtnLabel: "⬇ Télécharger le HTML",
-      instantHint: "Instantané, sans appel IA — se met à jour pendant que vous tapez. \"Imprimer maintenant\" ouvre directement la fenêtre d'impression du navigateur, pratique pour une copie unique ou un enregistrement en PDF.",
       previewTitle: "INVOICE FORGE — APERÇU EN DIRECT",
       errorNoItems: "Ajoutez d'abord au moins une ligne.",
       errorPopupBlocked: "Votre navigateur a bloqué la fenêtre d'impression — autorisez les fenêtres pop-up pour ce site et réessayez.",
@@ -925,15 +1331,61 @@
       docTax: "Taxe ({pct} %)",
       docTotal: "Total",
       docTo: "À :",
+      docTypeReceipt: "Reçu (payé)",
+      clientEmailLabel: "E-mail du client (facultatif)",
+      numberLabel: "Numéro",
+      issueDateLabel: "Date",
+      dueLabel: "Paiement dû",
+      dueOnReceipt: "À réception",
+      dueDays: "Sous {n} jours",
+      dueCustom: "Choisir une date",
+      currencyLabel: "Devise",
+      dueDateLabel: "Date d’échéance",
+      shippingLabel: "Livraison",
+      paymentHeading: "Paiement et notes",
+      payDetailsLabel: "Comment vous payer (mémorisé)",
+      payDetailsPlaceholder: "Banque : Banque Exemple\nIBAN : …  ·  BIC : …",
+      notesLabel: "Notes ou conditions (facultatif)",
+      notesPlaceholder: "Merci de votre confiance !",
+      pdfBtnLabel: "⬇ Télécharger le PDF",
+      pdfWorking: "Création du PDF…",
+      errorPdf: "Impossible de charger l’outil PDF. Vérifiez votre connexion ou utilisez Imprimer puis Enregistrer en PDF.",
+      docWordReceipt: "Reçu",
+      docNo: "N°",
+      docIssued: "Date :",
+      docDue: "Échéance :",
+      docDueOnReceipt: "À réception",
+      docShipping: "Livraison",
+      docBalanceDue: "Solde à payer",
+      docTotalPaid: "Total payé",
+      docPaid: "PAYÉ",
+      docPayment: "Modalités de paiement",
+      docNotes: "Notes",
+      docQuoteNumber: "Merci d’indiquer {n} lors du paiement.",
+      profileSavedHint: "Le nom, l’adresse, le logo, les coordonnées de paiement et la devise de votre entreprise sont mémorisés dans ce navigateur pour la prochaine fois.",
+      instantHint: "Instantané, sans IA — se met à jour pendant la saisie. Le numéro augmente de un après chaque téléchargement.",
       footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Tout ce que vous saisissez reste dans votre navigateur — rien n'est envoyé nulle part. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>"
     }
   });
 
+  (function fillCurrencies() {
+    let names; try { names = new Intl.DisplayNames([(I18N.getLang && I18N.getLang()) || 'en'], { type: 'currency' }); } catch (e) {}
+    currencySel.innerHTML = CURRENCIES.map(function (c) { let n = c; try { n = names ? names.of(c) : c; } catch (e) {} return '<option value="' + c + '">' + c + ' — ' + n + '</option>'; }).join('');
+    let guess = 'USD';
+    try { const r = new Intl.Locale(navigator.language || 'en-US').maximize().region; const map = { GB: 'GBP', SE: 'SEK', NO: 'NOK', DK: 'DKK', CH: 'CHF', CA: 'CAD', AU: 'AUD', NZ: 'NZD', JP: 'JPY', CN: 'CNY', IN: 'INR', PK: 'PKR', PH: 'PHP', KE: 'KES', TZ: 'TZS', UG: 'UGX', NG: 'NGN', GH: 'GHS', ZA: 'ZAR', EG: 'EGP', AE: 'AED', SA: 'SAR', BR: 'BRL', MX: 'MXN', PL: 'PLN', TR: 'TRY' }; guess = map[r] || (['DE','FR','ES','IT','NL','BE','AT','IE','PT','FI','GR','LU','SK','SI','EE','LV','LT','HR','CY','MT'].includes(r) ? 'EUR' : 'USD'); } catch (e) {}
+    currencySel.value = guess;
+  })();
+  issueDate.value = todayIso();
   loadProfile();
+  suggestNumber(true);
   addRow('Design work', 1, '250');
   renderPreview();
 
+  function relabelDue() { dueSel.querySelectorAll('option').forEach(function (o) { if (/^\d+$/.test(o.value) && o.value !== '0') o.textContent = I18N.t('dueDays').replace('{n}', o.value); }); }
+  relabelDue();
   I18N.onChange(function () {
+    relabelDue();
+    itemRowsEl.querySelectorAll('.item-row').forEach(updateRowLineTotal);
     relocalizeRows();
     applyLogoHint();
     renderPreview();

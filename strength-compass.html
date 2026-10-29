@@ -96,7 +96,7 @@ function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(M
 function buildPairs(){
  var ids=themes.map(function(_,i){return i}),rounds=[];
  for(var round=0;round<10;round++){
-  var rotated=[ids[0]].concat(ids.slice(1+round%11),ids.length).concat(ids.slice(1,1+round%11));
+  var rotated=[ids[0]].concat(ids.slice(1+round%11)).concat(ids.slice(1,1+round%11));
   for(var i=0;i<6;i++){var a=rotated[i],b=rotated[11-i];rounds.push({a:a,b:b,sa:(round+i)%5,sb:(round+5-i)%5})}
  }
  return shuffle(rounds);

@@ -578,7 +578,7 @@ $('palTest').onclick=()=>{
   $('palOut').innerHTML='<p>Walk your route. What was at each spot?</p><table class="pal-table">'+palPairs.map(([s],i)=>'<tr><td>'+esc(s)+'</td><td><input id="palA'+i+'" autocomplete="off" autocapitalize="off" aria-label="Item at '+esc(s)+'"></td></tr>').join('')+'</table><div class="actions"><button class="primary" id="palCheck">✓ Check</button></div>';
   $('palA0').focus();
   $('palOut').querySelectorAll('input').forEach((inp,i,all)=>inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(all[i+1])all[i+1].focus();else $('palCheck').click()}});
-  $('palCheck').onclick=()=>{let ok=0;palPairs.forEach(([s,it],i)=>{const inp=$('palA'+i),hit=norm(inp.value)===norm(it);if(hit)ok++;const td=inp.parentNode;td.innerHTML=hit?'<span class="ok">✓ '+esc(it)+'</span>':'<span class="bad">✗ '+esc(it)+'</span>'+(inp.value.trim()?' <small class="muted">(you wrote '+esc(inp.value.trim())+')</small>':'')});
+  $('palCheck').onclick=()=>{if($('palCheck').disabled)return;$('palCheck').disabled=true;let ok=0;palPairs.forEach(([s,it],i)=>{const inp=$('palA'+i),hit=norm(inp.value)===norm(it);if(hit)ok++;const td=inp.parentNode;td.innerHTML=hit?'<span class="ok">✓ '+esc(it)+'</span>':'<span class="bad">✗ '+esc(it)+'</span>'+(inp.value.trim()?' <small class="muted">(you wrote '+esc(inp.value.trim())+')</small>':'')});
     $('palOut').insertAdjacentHTML('beforeend','<p class="bigmsg" style="font-size:20px">'+ok+' of '+palPairs.length+' remembered'+(ok===palPairs.length?' — perfect! Try more items or a timed Word list.':'. Make the missed pictures stranger and try again tomorrow.')+'</p>');
     if(ok===palPairs.length)good();$('palTest').disabled=true};
 };
