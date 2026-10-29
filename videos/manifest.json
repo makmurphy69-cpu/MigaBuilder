@@ -44,6 +44,32 @@
    "kind": "html"
   }
  },
+ "afford-forge.html": {
+  "title": "Afford Forge",
+  "video": "https://videos.migabuilder.com/afford-forge.mp4?v=a0b9d28c",
+  "poster": "https://videos.migabuilder.com/afford-forge.jpg?v=2d5bb762",
+  "duration": 142,
+  "transcript": [
+   "Welcome to Afford Forge. Before you buy a car, have a baby, move, or quit your job, check whether you can afford it, using your own numbers.",
+   "Start with your money each month: take-home pay, costs and savings. Rough numbers are fine. Here we use the example.",
+   "Then pick what you are thinking about: a car, a baby, a move, a home, quitting your job, going part-time, or a big purchase.",
+   "The list fills with the costs people often forget, like insurance and repairs. Type in your own amounts, and how long each one lasts.",
+   "Here is the answer. This car is tight: it is possible, but there is little room if something goes wrong.",
+   "You see what is left each month, how low your savings get, and how many months of essential costs they would cover.",
+   "It explains why, and what would make it work, like how much to save first and how long that takes.",
+   "The chart shows your savings for the next three years, with and without the change.",
+   "Now test bad luck. What if I lose my job for three months? With this car, the savings would run out.",
+   "Save this option, then try a cheaper car with no deposit and a smaller loan, and save that too.",
+   "Compare your options side by side. The cheaper car is affordable.",
+   "Download the plan month by month, or print it. Below you will find the rules of thumb it uses.",
+   "Now it is your turn. Open Afford Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/afford-forge.csv",
+   "label": "Month-by-month plan from this video",
+   "kind": "text"
+  }
+ },
  "alphabet-forge.html": {
   "title": "Alphabet Forge",
   "video": "https://videos.migabuilder.com/alphabet-forge.mp4?v=06f236c1",
@@ -1837,6 +1863,31 @@
    "file": "samples/video-forge.webm",
    "label": "Video made in this video",
    "kind": "video"
+  }
+ },
+ "visit-forge.html": {
+  "title": "Visit Forge",
+  "video": "https://videos.migabuilder.com/visit-forge.mp4?v=473dfa77",
+  "poster": "https://videos.migabuilder.com/visit-forge.jpg?v=fcff4e95",
+  "duration": 123,
+  "transcript": [
+   "Welcome to Visit Forge. Doctor's appointments are short. Visit Forge helps you say the important things first and remember your questions.",
+   "Start with the one thing you most want help with. Here we use the example.",
+   "Add what you are worried it might be, how it affects your daily life, and what you have tried.",
+   "Next, your symptoms: when each one started, how often, how bad from zero to ten, and what makes it better or worse.",
+   "Then your medicines and allergies, including things you buy without a prescription.",
+   "Write your questions, or add good ones from the list. Star the three that matter most, and they move to the top.",
+   "Visit Forge writes what to say first. Read it out at the start of the appointment. It takes about thirty seconds.",
+   "And here is your one-page summary to hand to the doctor, with your top questions marked.",
+   "Download it as a PDF, print it, or copy it into a message. There is no AI and no server, so it never leaves your device.",
+   "If something you write can be an emergency, like chest pain, a clear warning tells you not to wait for the appointment.",
+   "After the visit, write down what the doctor said, the plan, and what to watch for, while you still remember.",
+   "Now it is your turn. Open Visit Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/visit-forge.pdf",
+   "label": "Visit summary from this video",
+   "kind": "pdf"
   }
  },
  "voice-forge.html": {
