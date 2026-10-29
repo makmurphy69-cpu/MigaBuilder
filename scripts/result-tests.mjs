@@ -474,6 +474,15 @@ test('strength-compass: all 60 choices can be answered and the report shows five
   expect(/Strategic Vision|Analytical Clarity|Creative Exploration|Reliable Execution|Adaptive Momentum|Bold Initiative/.test(text), 'the report has no strengths: ' + text.slice(0, 200));
 });
 
+test('file-forge: before/after compare shows the new size, and file names are shown as plain text', 'file-forge.html', async (page) => {
+  await page.setInputFiles('#fileInput', [{ name: 'a&b <img src=x onerror=window.__hacked=1>.png', mimeType: 'image/png', buffer: fs.readFileSync(path.join(FIX, 'small-photo.png')) }]);
+  await page.selectOption('#formatSelect', 'image/webp');
+  await page.click('.cmp-btn');
+  await page.waitForFunction(() => /KB → .*KB \(/.test(document.getElementById('compareSizes').textContent), null, { timeout: 15000 });
+  expect(/^blob:/.test(await page.getAttribute('#cmpAfter', 'src')), 'the new version is not shown');
+  expect(await page.evaluate(() => !window.__hacked && document.querySelector('.file-name').textContent.includes('<img')), 'the file name was turned into HTML');
+});
+
 test('invoice-forge: download holds the business and client names', 'invoice-forge.html', async (page) => {
   await page.fill('#bizName', 'Sunrise Bakery');
   await page.fill('#clientName', 'Kilimani Cafe');
