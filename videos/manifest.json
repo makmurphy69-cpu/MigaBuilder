@@ -898,6 +898,35 @@
    "kind": "video"
   }
  },
+ "letter-forge.html": {
+  "title": "Letter Forge",
+  "video": "https://videos.migabuilder.com/letter-forge.mp4?v=656fba06",
+  "poster": "https://videos.migabuilder.com/letter-forge.jpg?v=849c4546",
+  "duration": 154,
+  "transcript": [
+   "Welcome to Letter Forge. It explains a confusing letter in plain words: what it means, how urgent it is, and what to do next, with your personal details hidden first.",
+   "Take a photo of the letter, open a PDF, or paste the text. The text is read on your device. Here we use an example: a council tax final notice.",
+   "Before anything goes to the AI, your name, address, account number, phone number and email are swapped for labels like NAME 1.",
+   "You can see exactly what the AI will get. Your real details stay on this device.",
+   "Choose the language for the explanation, how simple it should be, and where you live, so the advice fits your country.",
+   "Press Explain this letter.",
+   "First, how urgent it is. This one says act now, and why.",
+   "Then what the letter says, the dates and the money, with your real name and account number put back in.",
+   "Next, what to do, step by step. Tick each step off as you do it. You also see what happens if you do nothing.",
+   "Difficult words are explained, and it checks the letter for signs of a scam.",
+   "Add the deadlines to your calendar with one click, or download the whole explanation.",
+   "Ask your own question about the letter.",
+   "The answer comes in plain words.",
+   "Finally, it can write a polite reply for you, for example to ask to pay in instalments.",
+   "Check the reply, then copy it or download it and send it.",
+   "Now it is your turn. Open Letter Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/letter-forge.txt",
+   "label": "Letter explained in this video",
+   "kind": "text"
+  }
+ },
  "logo-forge.html": {
   "title": "Logo Forge",
   "video": "https://videos.migabuilder.com/logo-forge.mp4",

@@ -329,16 +329,18 @@ $('dlIcs').onclick=()=>{
 
 $('askBtn').onclick=async()=>{
   const q=$('question').value.trim();if(!q||!result)return;const b=$('askBtn');b.disabled=true;const out=$('answer');out.classList.remove('hidden');out.innerHTML='<span class="busy"></span>Thinking…';
-  try{const a=await MigaAI.ask('You answer questions about a letter in plain words, in '+$('outLang').value+'. Personal details are replaced with labels like [NAME 1]; keep them as written. Only use what the letter says plus well-known general facts, say clearly when something depends on details you do not have, and suggest who to ask. Be brief: at most about 150 words. Not legal advice.','THE LETTER:\n"""\n'+safeText.slice(0,14000)+'\n"""\n'+($('country').value.trim()?'The reader lives in: '+$('country').value.trim()+'.\n':'')+'\nQUESTION: '+q);
-    out.textContent=restore(a.trim());out.dir=RTL.test($('outLang').value)?'rtl':'ltr'}
+  try{const a=await MigaAI.ask('You answer questions about a letter in plain words, in '+$('outLang').value+'. Personal details are replaced with labels like [NAME 1]; keep them as written. Only use what the letter says plus well-known general facts, say clearly when something depends on details you do not have, and suggest who to ask. Be brief: at most about 150 words. Plain text only, no Markdown. Not legal advice.','THE LETTER:\n"""\n'+safeText.slice(0,14000)+'\n"""\n'+($('country').value.trim()?'The reader lives in: '+$('country').value.trim()+'.\n':'')+'\nQUESTION: '+q);
+    out.textContent=restore(plain(a));out.dir=RTL.test($('outLang').value)?'rtl':'ltr'}
   catch(e){out.innerHTML='<span class="err">'+esc(e.message||e)+'</span>'}finally{b.disabled=false}
 };
 let replyText='';
+// Models sometimes add Markdown anyway; show clean text.
+function plain(t){return String(t).trim().replace(/^```\w*\s*|\s*```$/g,'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/(^|\s)\*([^*\n]+)\*(?=\s|[.,;:!?]|$)/gm,'$1$2').replace(/^#{1,6}\s+/gm,'')}
 $('replyBtn').onclick=async()=>{
   if(!result)return;const b=$('replyBtn');b.disabled=true;const out=$('reply');out.classList.remove('hidden');out.innerHTML='<span class="busy"></span>Writing…';
   const inLang=$('replyLang').value==='explain'?$('outLang').value:'the same language as the letter';
   try{const a=await MigaAI.ask('You write short, polite, firm replies to letters for ordinary people. Write in '+inLang+'. Use the labels like [NAME 1], [REF 1], [ADDRESS 1] wherever the writer\'s name, address or reference numbers belong, exactly as written in the letter; never invent names, numbers, dates or facts — use [brackets] like [your phone number] for anything you do not know. Quote the reference number at the top if the letter has one. No admissions of fault unless asked. Plain text only, ready to send, with no comments before or after.','THE LETTER I RECEIVED:\n"""\n'+safeText.slice(0,14000)+'\n"""\n\nWHAT I WANT: '+$('goal').value+($('notes').value.trim()?'\nMORE DETAILS: '+$('notes').value.trim():''));
-    replyText=restore(a.trim().replace(/^```\w*\s*|\s*```$/g,''));out.textContent=replyText;$('copyReply').classList.remove('hidden');$('dlReply').classList.remove('hidden')}
+    replyText=restore(plain(a));out.textContent=replyText;$('copyReply').classList.remove('hidden');$('dlReply').classList.remove('hidden')}
   catch(e){out.innerHTML='<span class="err">'+esc(e.message||e)+'</span>'}finally{b.disabled=false}
 };
 $('copyReply').onclick=async()=>{try{await navigator.clipboard.writeText(replyText);$('copyReply').textContent='Copied';setTimeout(()=>$('copyReply').textContent='Copy the reply',1300)}catch(e){}};
