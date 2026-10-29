@@ -23,13 +23,14 @@ S('bug-scanner.html', {
 });
 
 S('qr-forge.html', {
-  title: 'QR Forge', subtitle: 'Make a QR code for a link, Wi-Fi or contact',
+  title: 'QR Forge', subtitle: 'Make a QR code for a link, Wi-Fi, contact, place or event',
   intro: 'Welcome to QR Forge. Let us make a QR code that people can scan with their phone camera.',
   async run(h) {
-    await h.step('First choose what the code is for: a link or text, a Wi-Fi network, a contact card, a phone number or an email.', () => h.point('#qrType'));
+    await h.step('First choose what the code is for: a link, Wi-Fi, a contact card, a phone number, an email, a text message, a place on a map or a calendar event.', () => h.point('#qrType'));
     await h.step('Type the link you want people to open. The code updates instantly as you type.', () => h.type('#qrText', 'https://migabuilder.com'));
-    await h.step('Pick the size and colours. A dark code on a light background scans best.', async () => { await h.select('#qrSize', '800'); await h.point('#qrDark'); });
-    await h.step('Scan it with your phone to test it, then download the finished code as a picture.', () => h.point('#downloadBtn'));
+    await h.step('Pick the size and colours. A dark code on a light background scans best, and you get a warning if the colours are too close.', async () => { await h.select('#qrSize', '800'); await h.point('#qrDark'); });
+    await h.step('Choose rounded dots and corners, and add a line of text under the code, like Scan me.', async () => { await h.scroll('#qrDots', 'center'); await h.select('#qrDots', 'rounded'); await h.select('#qrCorners', 'rounded'); await h.type('#qrCaption', 'Scan me'); });
+    await h.step('Scan it with your phone to test it, then download it as a picture, or as an SVG for sharp printing at any size.', () => h.point('#svgBtn'));
     await h.sampleDownload('#downloadBtn', 'QR code made in this video');
   }
 });
@@ -101,21 +102,22 @@ S('site-checkup.html', {
 });
 
 S('invoice-forge.html', {
-  title: 'Invoice Forge', subtitle: 'Quotes and invoices in a minute',
-  intro: 'Welcome to Invoice Forge. Let us make a professional invoice in about a minute.',
+  title: 'Invoice Forge', subtitle: 'Quotes, invoices and receipts in a minute',
+  intro: 'Welcome to Invoice Forge. Let us make a professional invoice in about a minute, in your own currency.',
   async run(h, page) {
-    await h.step('Enter your business name and your client’s name.', async () => { await h.type('#bizName', 'Sunrise Bakery'); await h.type('#clientName', 'Green Leaf Café'); });
-    await h.step('Choose whether this is a quote or an invoice.', () => h.select('#docType', 'Invoice'));
-    await h.step('Add each line item with a quantity and price. The totals are calculated for you.', async () => {
-      const row = page.locator('#itemsBody tr, .item-row, tbody tr').first();
+    await h.step('Enter your business name and your client’s name. Your business details are remembered for next time.', async () => { await h.type('#bizName', 'Sunrise Bakery'); await h.type('#clientName', 'Green Leaf Café'); });
+    await h.step('Choose a quote, an invoice or a receipt. Each one gets a number, and the next number is suggested for you after you download.', () => h.select('#docType', 'Invoice'));
+    await h.step('Pick the date, when payment is due, and your currency.', async () => { await h.select('#dueSel', '14'); await h.select('#currency', 'EUR'); });
+    await h.step('Add each line item with a quantity and price. The totals are calculated for you, and decimal commas work too.', async () => {
       const inputs = page.locator('input[placeholder="Description"]');
       await h.type(inputs.first(), 'Sourdough loaves');
       const q = page.locator('input[placeholder="1"]').first(); await h.fill(q, '20');
-      const pr = page.locator('input[placeholder="0.00"]').first(); await h.fill(pr, '3.50');
+      const pr = page.locator('input[placeholder="0.00"]').first(); await h.fill(pr, '3,50');
     });
-    await h.step('Add a discount or tax rate if you need one. The preview updates as you type.', async () => { await h.fill('#taxPct', '16'); await h.point('#previewFrame'); });
-    await h.step('When it looks right, print it, save it as a PDF, or download it.', () => h.point('#printBtn'));
-    await h.sampleDownload('#downloadBtn', 'Invoice made in this video');
+    await h.step('Add a discount, tax or shipping if you need them.', async () => { await h.fill('#taxPct', '16'); await h.fill('#shipping', '5'); });
+    await h.step('Tell your client how to pay you, and add a note. The preview updates as you type.', async () => { await h.scroll('#payDetails', 'center'); await h.type('#payDetails', 'IBAN: DE89 3704 0044 0532 0130 00'); await h.point('#previewFrame'); });
+    await h.sampleDownload('#pdfBtn', 'Invoice made in this video');
+    await h.step('Download it as a PDF, print it, or download it as a web page.', () => h.point('#pdfBtn'));
   }
 });
 
@@ -1052,9 +1054,10 @@ S('file-forge.html', {
   async run(h) {
     await h.step('Choose your images, or drag them onto the page. Here is a large landscape photo.', () => h.upload('#fileInput', 'landscape.jpg'));
     await h.step('Pick the new format. WebP makes much smaller files for websites.', () => h.select('#formatSelect', 'image/webp'));
-    await h.step('Set the quality, and a maximum size if you want to shrink the image.', async () => { await h.point('#qualitySlider'); await h.select('#maxDimension', '1280'); });
+    await h.step('Set the quality, and a maximum size if you want to shrink the image. Each file shows how much smaller it gets.', async () => { await h.point('#qualitySlider'); await h.select('#maxDimension', '1280'); await h.point('.file-row .file-size'); });
+    await h.step('Press Compare to see the original and the new version side by side. Drag across the picture to check the quality.', async () => { await h.click('.cmp-btn'); await h.page.waitForFunction(() => /→/.test(document.getElementById('compareSizes').textContent), null, { timeout: 20000 }); await h.point('#compareStage'); });
     await h.page.locator('#zipOutput').setChecked(false).catch(() => {});
-    await h.step('Press Convert and download. Location data and other hidden details are removed too.', () => h.point('#convertBtn'));
+    await h.step('Press Convert and download. Location data and other hidden details are removed too.', () => h.scroll('#convertBtn', 'center'));
     await h.sampleDownload('#convertBtn', 'Converted image from this video');
   }
 });

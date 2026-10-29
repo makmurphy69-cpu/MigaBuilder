@@ -6,9 +6,46 @@
  *  - 📋 paste a picture or file (Ctrl/⌘+V) into the tool's file picker;
  *  - ⛶ a full-screen button on games, cartoons, 3D models, maps and video previews (miga-fullscreen.js);
  *  - 🔎 Ctrl/⌘+K jumps to any tool (miga-palette.js) and 📲 installs MigaBuilder as an app.
+ *  - 📋 Copy buttons keep working when the browser refuses clipboard access: an older copy method is tried,
+ *    and if that fails too the text is shown in a box to copy by hand (instead of nothing happening).
  * Tools that already keep their own drafts are skipped for the auto-save part.
  * Everything stays in this browser.
  */
+// Copy fallback, installed before any tool code can call it.
+(function () {
+  'use strict';
+  if (window.__migaCopyFallback) return;
+  window.__migaCopyFallback = true;
+  function oldCopy(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;';
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); return ok;
+  }
+  function manualBox(text) {
+    const old = document.getElementById('miga-copy-box'); if (old) old.remove();
+    const box = document.createElement('div'); box.id = 'miga-copy-box'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-label', 'Copy this text');
+    box.style.cssText = 'position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10000;background:#fff;color:#16202B;border:2px solid #E2A63B;border-radius:8px;padding:14px;width:min(520px,92vw);box-shadow:0 18px 50px rgba(0,0,0,.35);font:14px "IBM Plex Sans",system-ui,sans-serif';
+    box.innerHTML = '<b style="display:block;margin-bottom:6px">Your browser blocked copying.</b><span style="font-size:13px">The text is selected below — press Ctrl+C (⌘+C on a Mac), or long-press and choose Copy.</span><textarea readonly style="display:block;width:100%;height:150px;margin:8px 0;font:13px/1.4 monospace;padding:8px;border:1px solid #ccc;border-radius:4px"></textarea><button type="button" style="background:#E2A63B;border:0;border-radius:4px;padding:8px 14px;font-weight:700;cursor:pointer">Close</button>';
+    const ta = box.querySelector('textarea'); ta.value = text;
+    box.querySelector('button').onclick = () => box.remove();
+    document.body.appendChild(box); ta.focus(); ta.select();
+  }
+  const cb = navigator.clipboard;
+  const native = cb && cb.writeText ? cb.writeText.bind(cb) : null;
+  const safe = function (text) {
+    text = String(text == null ? '' : text);
+    const fallback = () => { if (!oldCopy(text)) manualBox(text); };
+    if (!native) { fallback(); return Promise.resolve(); }
+    return native(text).catch(fallback);
+  };
+  try {
+    if (cb) cb.writeText = safe;
+    else Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText: safe } });
+  } catch (e) { /* some browsers lock the object; tools keep their own handling */ }
+})();
+
 (function () {
   'use strict';
   if (window.__migaExtras) return; window.__migaExtras = true;
