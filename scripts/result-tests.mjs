@@ -281,6 +281,44 @@ async function pdfPageTexts(page, buf) {
   }, buf.toString('base64'));
 }
 
+const docxFiles = (page, buf) => page.evaluate(async b64 => { const zip = await JSZip.loadAsync(b64, { base64: true }); const o = {}; for (const n of Object.keys(zip.files)) if (!zip.files[n].dir) o[n] = n.endsWith('.png') ? 'png' : await zip.file(n).async('string'); return o; }, buf.toString('base64'));
+
+test('document-forge: PDF to Word keeps headings, bold, italics and paragraphs', 'document-forge.html', async (page) => {
+  await page.setInputFiles('#file', path.join(FIX, 'newsletter.pdf'));
+  await page.waitForFunction(() => /Ready to convert/.test(document.querySelector('#status').textContent), null, { timeout: 60000 });
+  await page.selectOption('#output', 'docx');
+  const out = await downloadOf(page, () => page.click('#convert'));
+  expect(/\.docx$/.test(out.name), 'expected a .docx, got ' + out.name);
+  expect(magic(out.buf, 0x50, 0x4b), 'download is not a ZIP-based .docx');
+  const f = await docxFiles(page, out.buf);
+  for (const n of ['[Content_Types].xml', '_rels/.rels', 'word/document.xml', 'word/styles.xml']) expect(f[n], 'missing ' + n);
+  const doc = f['word/document.xml'];
+  const paras = doc.split('<w:p>').slice(1).map(p => ({ style: (p.match(/w:pStyle w:val="(\w+)"/) || [])[1] || '', text: [...p.matchAll(/<w:t[^>]*>([^<]*)</g)].map(m => m[1]).join('') }));
+  const find = t => paras.find(p => p.text.includes(t)) || {};
+  expect(find('Garden Club Newsletter').style === 'Heading1', 'the title is not Heading 1: ' + JSON.stringify(find('Garden Club')));
+  expect(find('What to bring').style === 'Heading2', 'the section heading is not Heading 2');
+  expect(find('Next meeting').style === 'Heading2', 'the page-2 heading is not Heading 2');
+  expect(find('Welcome to the spring issue').text.includes('harvest picnic in August'), 'the wrapped paragraph was split into several paragraphs');
+  expect(/<w:b\/><\/w:rPr><w:t[^>]*>[^<]*forty tomato seedlings/.test(doc), 'bold text lost');
+  expect(/<w:i\/><\/w:rPr><w:t[^>]*>[^<]*twelve rows of beans/.test(doc), 'italic text lost');
+  expect(find('Gloves and a trowel').text && find('A bottle of water').text && find('Gloves').text !== find('A bottle').text, 'list items should be separate paragraphs');
+  expect(doc.includes('w:type="page"'), 'no page break between the two pages');
+  await page.waitForFunction(() => /Garden Club Newsletter/.test(document.querySelector('#preview h1')?.textContent || ''), null, { timeout: 10000 });
+});
+
+test('document-forge: PDF to Word adds scanned pages as pictures', 'document-forge.html', async (page) => {
+  await page.setInputFiles('#file', path.join(FIX, 'scan.pdf'));
+  await page.waitForFunction(() => /Ready to convert/.test(document.querySelector('#status').textContent), null, { timeout: 60000 });
+  await page.selectOption('#output', 'docx');
+  const out = await downloadOf(page, () => page.click('#convert'));
+  const f = await docxFiles(page, out.buf);
+  const pics = Object.keys(f).filter(n => /^word\/media\/page\d+\.png$/.test(n));
+  expect(pics.length >= 1, 'no page pictures in the Word file');
+  expect((f['word/document.xml'].match(/<wp:inline/g) || []).length === pics.length, 'every page picture should be placed in the document');
+  expect(pics.every(n => f['word/_rels/document.xml.rels'].includes('media/' + n.split('/').pop())), 'a page picture has no relationship');
+  await page.waitForFunction(() => /scan/.test(document.querySelector('#status').textContent));
+});
+
 test('pdf-forge: reorder and remove pages with thumbnails', 'pdf-forge.html', async (page) => {
   await page.setInputFiles('#files', path.join(FIX, 'three-pages.pdf'));
   await page.waitForFunction(() => document.querySelectorAll('#thumbs li canvas').length === 3, null, { timeout: 60000 });

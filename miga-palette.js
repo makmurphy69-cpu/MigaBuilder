@@ -33,7 +33,7 @@
     ["post-forge.html", "📣", "Post Forge", "Prepare and publish social posts.", ""],
     ["repurpose-forge.html", "♻️", "Repurpose Forge", "Turn one idea into a complete publishing pack.", ""],
     ["form-forge.html", "📝", "Form Forge", "Create private downloadable forms and surveys.", ""],
-    ["document-forge.html", "📄", "Document Forge", "Convert documents, images and PDFs privately.", ""],
+    ["document-forge.html", "📄", "Document Forge", "Convert documents, images and PDFs privately.", "pdf to word pdf to docx word to pdf docx to pdf pdf to jpg"],
     ["pdf-forge.html", "📕", "PDF Forge", "Merge, split, number, watermark and create PDFs.", "remove pdf metadata author hidden data clean pdf privacy"],
     ["pdf-edit-forge.html", "✍️", "Sign Documents", "Sign PDFs, Word files and photos — draw, type or upload your signature.", ""],
     ["pdf-compress.html", "🗜️", "Compress PDF", "Shrink PDFs for email and upload limits.", ""],
