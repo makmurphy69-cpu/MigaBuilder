@@ -61,6 +61,10 @@ async function fakeAi(ctx, answer) {
   });
 }
 
+// Letter Forge: what the page sent to the AI, and a canned explanation that uses the labels.
+const letterSent = [];
+const LETTER_ANSWER = { type: 'Council Tax final notice', from: 'Riverside Borough Council, Council Tax Department', summary: '[NAME 1], you missed two Council Tax payments of £142.00. You now owe £284.00 on account [REF 1].', urgency: 'now', urgency_reason: 'You have 7 days, until 27 October 2026.', deadlines: [{ date: '2026-10-27', what: 'Pay £284.00 for account [REF 1] to keep paying in instalments' }], money: [{ amount: '£284.00', what: 'Overdue now' }, { amount: '£1,136.00', what: 'The whole year if you do not pay the £284.00 in time' }], actions: ['Pay £284.00 by 27 October 2026, quoting [REF 1].', 'If you cannot pay, call them and ask about a payment plan and Council Tax Reduction.'], if_ignored: 'They will ask a court for a liability order and up to £95.00 in costs can be added.', terms: [{ term: 'liability order', meaning: 'A court decision that you owe the money, so the council can collect it.' }], scam: { risk: 'low', signs: [], check: 'Call the number on the council website.' }, questions: ['Can I pay the overdue amount over a few weeks?'], help: 'Citizens Advice can help for free.', unclear: [] };
+
 const TESTS = [];
 const test = (name, file, run, opts) => TESTS.push(Object.assign({ name, file, run }, opts || {}));
 
@@ -1000,6 +1004,54 @@ test('tune-forge: the demo string is tuned to E2 and the sound level log downloa
   // the first second can still be near-silent while the demo starts; levels never go below the 20 dB floor
   expect(data.every(r => r.length === 5 && +r[2] >= 20 && +r[2] < 130 && +r[4] <= 0), 'a measurement row is wrong: ' + rows.slice(at + 1, at + 4).join(' | '));
   expect(data.some(r => +r[2] > 40), 'no measurement picked up the demo sound: ' + rows.slice(at + 1, at + 4).join(' | '));
+});
+
+test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
+  await page.click('#exampleBtn');
+  const st = await page.evaluate(() => window.__affordForge.state());
+  // 2800 in, 2080 out = 720 left; the car adds 490 a month; 6500 savings minus a 2500 deposit = 4000.
+  expect(st && st.level === 'tight' && st.leftNow === 720 && st.leftAfter === 230 && st.lowest === 4000, 'wrong answer for the example: ' + JSON.stringify(st));
+  await page.check('#sJob');
+  const bad = await page.evaluate(() => window.__affordForge.state());
+  expect(bad.level === 'no' && bad.firstNeg !== null, 'losing the job for 3 months should make it unaffordable: ' + JSON.stringify(bad));
+  await page.uncheck('#sJob');
+  const out = await downloadOf(page, () => page.click('#csvBtn'));
+  const rows = out.buf.toString('utf8').trim().split(/\r\n/);
+  expect(out.name === 'afford-forge-car.csv', 'unexpected file name ' + out.name);
+  expect(rows[0] === 'Afford Forge plan' && rows.includes('Verdict,Tight'), 'the CSV header is wrong: ' + rows.slice(0, 4).join(' | '));
+  const at = rows.indexOf('Month,Money in,Money out,Left over,Savings without the change,Savings with the change');
+  const data = rows.slice(at + 1).map(r => r.split(',').map(Number));
+  expect(at > 0 && data.length === 36, 'the CSV should have 36 months, has ' + data.length);
+  expect(data[0][0] === 1 && data[0][3] === 230 && data[0][5] === 4230 && data[35][5] === 4000 + 36 * 230, 'month rows are wrong: ' + rows.slice(at + 1, at + 3).join(' | '));
+});
+
+test('letter-forge: personal details never reach the AI, and come back in the downloaded explanation', 'letter-forge.html', async (page) => {
+  await page.click('#exampleBtn');
+  await page.click('#explainBtn');
+  await page.waitForSelector('#outPanel:not(.hidden) .urg', { timeout: 20000 });
+  const sent = letterSent.join('\n');
+  expect(sent.includes('£284.00') && sent.includes('20 October 2026'), 'the amounts and dates should still be sent');
+  for (const secret of ['Rivera', '50128847', 'Elm Street', 'RV4 7QT', 'counciltax@', '0300 123 4567'])
+    expect(!sent.includes(secret), 'the AI was sent "' + secret + '"');
+  expect(/\[NAME 1\]/.test(sent) && /\[REF 1\]/.test(sent), 'the labels are missing from what was sent');
+  const shown = await page.textContent('#out');
+  expect(shown.includes('Sam Rivera') && shown.includes('50128847') && !shown.includes('[NAME 1]'), 'the real details were not put back on the page: ' + shown.slice(0, 200));
+  const txt = (await downloadOf(page, () => page.click('#dlTxt'))).buf.toString('utf8');
+  expect(/^LETTER EXPLAINED — Council Tax final notice/.test(txt) && txt.includes('Urgency: Act now') && txt.includes('27 October') && txt.includes('Sam Rivera') && txt.includes('50128847'), 'the explanation download is wrong: ' + txt.slice(0, 300));
+  const ics = await downloadOf(page, () => page.click('#dlIcs'));
+  const cal = ics.buf.toString('utf8');
+  expect(ics.name === 'letter-deadlines.ics' && /BEGIN:VCALENDAR/.test(cal) && /DTSTART;VALUE=DATE:20261027/.test(cal) && cal.includes('50128847'), 'the calendar file is wrong: ' + cal.slice(0, 300));
+}, { setup: ctx => fakeAi(ctx, body => { letterSent.push(body.userPrompt); return JSON.stringify(LETTER_ANSWER); }) });
+
+test('visit-forge: the example summary downloads as a PDF with the reason and the top questions', 'visit-forge.html', async (page) => {
+  await page.click('#exampleBtn');
+  const opening = await page.evaluate(() => window.__visitForge.opening());
+  expect(/^The main reason I’m here is headaches most mornings/.test(opening) && /6 out of 10/.test(opening), 'the opening is wrong: ' + opening);
+  const out = await downloadOf(page, () => page.click('#pdfBtn'));
+  expect(out.name === 'visit-summary.pdf' && ascii(out.buf, 0, '%PDF'), 'download is not a PDF: ' + out.name);
+  const text = (await pdfPageTexts(page, out.buf)).join(' ');
+  for (const want of ['Visit summary - Sam Rivera', 'Headaches most mornings for the last 3 weeks', 'Salbutamol inhaler', 'Allergies: Penicillin - rash', '1. * Could this be my blood pressure?', '4. Is it safe to keep taking paracetamol every day?'])
+    expect(text.includes(want), 'the PDF is missing "' + want + '": ' + text.slice(0, 400));
 });
 
 // ---------- runner ----------

@@ -257,6 +257,71 @@ S('noise-forge.html', {
   }
 });
 
+S('letter-forge.html', {
+  title: 'Letter Forge', subtitle: 'Explain a confusing letter in plain words',
+  intro: 'Welcome to Letter Forge. It explains a confusing letter in plain words: what it means, how urgent it is, and what to do next, with your personal details hidden first.',
+  async run(h, page) {
+    await h.step('Take a photo of the letter, open a PDF, or paste the text. The text is read on your device. Here we use an example: a council tax final notice.', async () => { await h.point('#drop'); await h.click('#exampleBtn'); });
+    await h.step('Before anything goes to the AI, your name, address, account number, phone number and email are swapped for labels like NAME 1.', () => h.point('#found'));
+    await h.step('You can see exactly what the AI will get. Your real details stay on this device.', async () => { await h.click('#hidePanel summary'); await h.scroll('#preview', 'center'); await h.point('#preview'); });
+    await h.step('Choose the language for the explanation, how simple it should be, and where you live, so the advice fits your country.', async () => { await h.scroll('#askPanel'); await h.select('#outLang', 'English'); await h.type('#country', 'UK'); });
+    await h.step('Press Explain this letter.', () => h.click('#explainBtn'));
+    await h.skip('Skipping ahead while the AI reads the letter', () => page.waitForSelector('#outPanel:not(.hidden) .urg', { timeout: 120000 }));
+    await h.step('First, how urgent it is. This one says act now, and why.', async () => { await h.scroll('#outPanel'); await h.point('#out .urg'); });
+    await h.step('Then what the letter says, the dates and the money, with your real name and account number put back in.', () => h.point('#out .box:nth-of-type(2)'));
+    await h.step('Next, what to do, step by step. Tick each step off as you do it. You also see what happens if you do nothing.', async () => { await h.scroll('#out .steps', 'center'); await h.click('#out .steps input'); });
+    await h.step('Difficult words are explained, and it checks the letter for signs of a scam.', () => h.scroll('#out .scam-low, #out .scam-medium, #out .scam-high', 'center'));
+    await h.step('Add the deadlines to your calendar with one click, or download the whole explanation.', () => h.point('#dlIcs'));
+    await h.step('Ask your own question about the letter.', async () => { await h.scroll('#followPanel'); await h.type('#question', 'Can I pay the overdue amount in two parts?'); await h.click('#askBtn'); });
+    await h.skip('Skipping ahead while the AI answers', () => page.waitForFunction(() => { const a = document.getElementById('answer'); return a && !a.querySelector('.busy') && a.textContent.length > 20; }, null, { timeout: 120000 }));
+    await h.step('The answer comes in plain words.', () => h.point('#answer'));
+    await h.step('Finally, it can write a polite reply for you, for example to ask to pay in instalments.', async () => { await h.scroll('#goal', 'center'); await h.select('#goal', 'Ask to pay in instalments'); await h.type('#notes', 'I can pay 50 pounds a month'); await h.click('#replyBtn'); });
+    await h.skip('Skipping ahead while the AI writes the reply', () => page.waitForSelector('#copyReply:not(.hidden)', { timeout: 120000 }));
+    await h.step('Check the reply, then copy it or download it and send it.', async () => { await h.scroll('#reply', 'center'); await h.point('#reply'); });
+    await h.sampleDownload('#dlTxt', 'Letter explained in this video');
+  }
+});
+
+S('afford-forge.html', {
+  title: 'Afford Forge', subtitle: 'Can I afford it?',
+  intro: 'Welcome to Afford Forge. Before you buy a car, have a baby, move, or quit your job, check whether you can afford it, using your own numbers.',
+  async run(h, page) {
+    let saved = 0;
+    page.on('dialog', d => d.accept(++saved === 1 ? 'Car A: bigger loan' : 'Car B: cheaper, no deposit'));
+    await h.step('Start with your money each month: take-home pay, costs and savings. Rough numbers are fine. Here we use the example.', async () => { await h.click('#exampleBtn'); await h.point('#moneyPanel'); });
+    await h.step('Then pick what you are thinking about: a car, a baby, a move, a home, quitting your job, going part-time, or a big purchase.', async () => { await h.scroll('#decisionPanel'); await h.point('#presets'); });
+    await h.step('The list fills with the costs people often forget, like insurance and repairs. Type in your own amounts, and how long each one lasts.', () => h.point('#items'));
+    await h.step('Here is the answer. This car is tight: it is possible, but there is little room if something goes wrong.', async () => { await h.scroll('#resultPanel'); await h.point('#verdict'); });
+    await h.step('You see what is left each month, how low your savings get, and how many months of essential costs they would cover.', () => h.point('#nums'));
+    await h.step('It explains why, and what would make it work, like how much to save first and how long that takes.', () => h.scroll('#fix', 'center'));
+    await h.step('The chart shows your savings for the next three years, with and without the change.', () => h.scroll('#chart', 'center'));
+    await h.step('Now test bad luck. What if I lose my job for three months? With this car, the savings would run out.', async () => { await h.scroll('#resultPanel'); await h.check('#sJob'); await h.point('#verdict'); });
+    await h.click('#sJob');
+    await h.step('Save this option, then try a cheaper car with no deposit and a smaller loan, and save that too.', async () => { await h.click('#saveCmp'); await h.scroll('#decisionPanel'); await h.fill('.it[data-i="1"] input[data-k="amount"]', '140'); await h.fill('.it[data-i="0"] input[data-k="amount"]', '0'); await h.scroll('#resultPanel'); await h.click('#saveCmp'); });
+    await h.step('Compare your options side by side. The cheaper car is affordable.', async () => { await h.scroll('#cmpPanel'); await h.point('#cmpTable'); });
+    await h.sampleDownload('#csvBtn', 'Month-by-month plan from this video');
+    await h.step('Download the plan month by month, or print it. Below you will find the rules of thumb it uses.', async () => { await h.scroll('#resultPanel'); await h.point('#csvBtn'); });
+  }
+});
+
+S('visit-forge.html', {
+  title: 'Visit Forge', subtitle: "Get ready for a doctor's appointment",
+  intro: "Welcome to Visit Forge. Doctor's appointments are short. Visit Forge helps you say the important things first and remember your questions.",
+  async run(h, page) {
+    await h.step('Start with the one thing you most want help with. Here we use the example.', async () => { await h.click('#exampleBtn'); await h.point('#main'); });
+    await h.step('Add what you are worried it might be, how it affects your daily life, and what you have tried.', () => h.point('#worry'));
+    await h.step('Next, your symptoms: when each one started, how often, how bad from zero to ten, and what makes it better or worse.', async () => { await h.click('#tab-sym'); await h.point('#symList .card2'); });
+    await h.step('Then your medicines and allergies, including things you buy without a prescription.', async () => { await h.click('#tab-med'); await h.point('#medList'); });
+    await h.step('Write your questions, or add good ones from the list. Star the three that matter most, and they move to the top.', async () => { await h.click('#tab-q'); await h.click('#ideas button:nth-child(5)'); await h.point('#qList'); });
+    await h.step('Visit Forge writes what to say first. Read it out at the start of the appointment. It takes about thirty seconds.', async () => { await h.scroll('#outPanel'); await h.point('#opening'); });
+    await h.step('And here is your one-page summary to hand to the doctor, with your top questions marked.', () => h.scroll('#sheet', 'center'));
+    await h.sampleDownload('#pdfBtn', 'Visit summary from this video');
+    await h.step('Download it as a PDF, print it, or copy it into a message. There is no AI and no server, so it never leaves your device.', async () => { await h.scroll('#outPanel'); await h.point('#pdfBtn'); });
+    await h.step('If something you write can be an emergency, like chest pain, a clear warning tells you not to wait for the appointment.', async () => { await h.click('#tab-why'); await h.scroll('#formPanel'); await h.fill('#impact', 'Missed 2 days of work. Some chest pain when I climb stairs'); await h.point('#urgent'); });
+    await h.step('After the visit, write down what the doctor said, the plan, and what to watch for, while you still remember.', async () => { await h.fill('#impact', 'Missed 2 days of work and I wake up with it at 5 am'); await h.click('#tab-after'); await h.point('#said'); });
+  }
+});
+
 S('tune-forge.html', {
   title: 'Tune Forge', subtitle: 'Tuner, metronome and sound level meter for musicians',
   intro: 'Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.',

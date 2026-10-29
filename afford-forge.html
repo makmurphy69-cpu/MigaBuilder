@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Can I afford it? Calculator for a car, a baby, moving or quitting your job — Afford Forge | MigaBuilder</title>
+<meta name="description" content="Free, private calculator for big life decisions: buying a car, having a baby, moving, buying a home, going part-time or quitting your job. See your money month by month, how long your savings last, a clear verdict and what would make it work. No bank login — your numbers stay in your browser.">
+<link rel="canonical" href="https://migabuilder.com/afford-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/afford-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Afford Forge — can I afford it? | MigaBuilder">
+<meta property="og:description" content="Check a car, a baby, a move or quitting your job against your own numbers. Month-by-month savings, a clear verdict and what would make it work. No bank login.">
+<meta property="og:url" content="https://migabuilder.com/afford-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.money{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px}
+.money .field{margin-bottom:8px}
+.money .wide{grid-column:1/-1}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.presets button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:8px 13px;cursor:pointer;font-weight:600;color:var(--ink);font-size:13.5px}
+.presets button.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.items{display:grid;gap:6px}
+.it{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 66px 66px 28px;gap:6px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.13);padding:6px}.it .lbl{grid-column:1/-1;font-weight:600}
+.it input,.it select{width:100%;padding:7px;border:1px solid rgba(22,32,43,.25);border-radius:3px;background:#fff;font-size:13.5px}
+.it .del{border:0;background:none;cursor:pointer;font-size:17px;color:#7b281d}
+.it-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 66px 66px 28px;gap:6px;font-size:11px;font-weight:700;color:rgba(22,32,43,.7);padding:0 6px}
+.hint{font-size:12.5px;color:rgba(22,32,43,.72);margin:4px 0 0;line-height:1.45}
+.verdict{padding:16px;border-radius:4px;border-left:6px solid;margin-bottom:12px}
+.verdict h3{font:700 21px 'Space Grotesk';margin:0 0 4px}
+.verdict p{margin:0;line-height:1.5}
+.v-good{background:rgba(78,158,115,.13);border-color:var(--success)}
+.v-tight{background:rgba(226,166,59,.15);border-color:var(--amber)}
+.v-no{background:rgba(216,96,74,.12);border-color:var(--error)}
+.nums{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px}
+.nums div{background:#fff;border:1px solid rgba(22,32,43,.13);padding:10px}
+.nums strong{display:block;font:700 19px 'Space Grotesk'}
+.nums small{display:block}
+.nums .bad strong{color:#a33a28}.nums .ok strong{color:#246a47}
+.checks{list-style:none;padding:0;margin:0 0 12px;display:grid;gap:6px}
+.checks li{background:#fff;border:1px solid rgba(22,32,43,.13);padding:9px 10px 9px 36px;position:relative;font-size:14px;line-height:1.45}
+.checks li::before{position:absolute;left:10px;top:8px;font-size:15px}
+.checks li.pass::before{content:'✅'}.checks li.warn::before{content:'⚠️'}.checks li.fail::before{content:'❌'}
+.fix{background:#fff;border:1px dashed rgba(22,32,43,.3);padding:12px;margin-bottom:12px}
+.fix h4{margin:0 0 6px;font:700 15px 'Space Grotesk'}
+.fix ul{margin:0;padding-left:18px;line-height:1.55;font-size:14px}
+#chart{width:100%;height:auto;background:#fff;border:1px solid rgba(22,32,43,.13)}
+.legend{display:flex;gap:14px;font-size:12.5px;margin:6px 0 10px;flex-wrap:wrap}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:5px}
+.stress{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 12px}
+.stress label{display:flex;gap:6px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.16);border-radius:999px;padding:6px 11px;font-size:13px;cursor:pointer}
+table.cmp{width:100%;border-collapse:collapse;font-size:13.5px;background:#fff}
+table.cmp th,table.cmp td{border:1px solid rgba(22,32,43,.12);padding:7px 8px;text-align:left}
+table.cmp th{background:rgba(14,42,71,.06)}
+.tag{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;white-space:nowrap}
+.tag.good{background:rgba(78,158,115,.18);color:#246a47}.tag.tight{background:rgba(226,166,59,.22);color:#75530d}.tag.no{background:rgba(216,96,74,.18);color:#7b281d}
+@media(max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){.money{grid-template-columns:minmax(0,1fr)}.nums{grid-template-columns:minmax(0,1fr)}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Do I have to connect my bank account?", "acceptedAnswer": {"@type": "Answer", "text": "No. You type in your own rough numbers. Nothing is uploaded and there is no login."}}, {"@type": "Question", "name": "Is Afford Forge financial advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service."}}, {"@type": "Question", "name": "Is Afford Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Afford Forge</span></nav>
+<header class="masthead"><div><h1>Afford Forge</h1><p>Can I afford it? Check a car, a baby, a move or quitting your job against your own numbers.</p></div></header>
+<main>
+<section class="panel">
+  <p class="privacy">🔒 Your numbers stay in this browser. There is no bank login and nothing is uploaded. Rough numbers are fine — round to the nearest 50 or 100.</p>
+  <div class="actions"><button class="secondary" id="exampleBtn" type="button">Try an example (buying a car)</button><button class="secondary" id="resetBtn" type="button">Start again</button>
+  <label class="muted" style="display:flex;align-items:center;gap:6px">Currency <select id="currency" style="padding:7px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff"></select></label></div>
+</section>
+
+<div class="layout">
+<div>
+<section class="panel" id="moneyPanel">
+  <h2>1. Your money now</h2>
+  <p>Per month, after tax. Use what lands in your account, not your salary before tax.</p>
+  <div class="money">
+    <div class="field"><label for="income">Your take-home pay per month</label><input id="income" type="number" min="0" step="50" inputmode="decimal" placeholder="e.g. 2800"></div>
+    <div class="field"><label for="income2">Partner or other income per month</label><input id="income2" type="number" min="0" step="50" inputmode="decimal" placeholder="0"></div>
+    <div class="field"><label for="housing">Rent or mortgage</label><input id="housing" type="number" min="0" step="50" inputmode="decimal" placeholder="e.g. 950"></div>
+    <div class="field"><label for="bills">Bills (energy, water, phone, internet, insurance)</label><input id="bills" type="number" min="0" step="10" inputmode="decimal" placeholder="e.g. 250"></div>
+    <div class="field"><label for="food">Food and household</label><input id="food" type="number" min="0" step="10" inputmode="decimal" placeholder="e.g. 400"></div>
+    <div class="field"><label for="transport">Transport</label><input id="transport" type="number" min="0" step="10" inputmode="decimal" placeholder="e.g. 120"></div>
+    <div class="field"><label for="debt">Loan and card repayments</label><input id="debt" type="number" min="0" step="10" inputmode="decimal" placeholder="0"></div>
+    <div class="field"><label for="other">Everything else (eating out, clothes, hobbies, subscriptions)</label><input id="other" type="number" min="0" step="10" inputmode="decimal" placeholder="e.g. 300"></div>
+    <div class="field wide"><label for="savings">Savings you could use (cash, not pensions)</label><input id="savings" type="number" min="0" step="100" inputmode="decimal" placeholder="e.g. 6000"></div>
+  </div>
+  <p class="hint" id="nowLine"></p>
+</section>
+
+<section class="panel" id="decisionPanel">
+  <h2>2. What are you thinking about?</h2>
+  <div class="presets" id="presets"></div>
+  <p class="hint" id="presetHint"></p>
+  <div class="it-head" aria-hidden="true"><span>Amount</span><span>Type</span><span>From month</span><span>For months</span><span></span></div>
+  <div class="items" id="items"></div>
+  <div class="actions" style="margin-top:8px"><button class="secondary" id="addItem" type="button">+ Add a cost or change</button></div>
+  <p class="hint"><b>One-off</b> is paid once (a deposit, a pram, moving costs). <b>Monthly cost</b> is a new regular cost. <b>Less income</b> is money you stop earning each month. Leave <b>For months</b> empty if it goes on for good.</p>
+</section>
+</div>
+
+<div>
+<section class="panel" id="resultPanel" aria-live="polite">
+  <h2>3. The answer</h2>
+  <div id="verdict" class="verdict v-tight"><h3>Fill in your numbers</h3><p>Start with your take-home pay and costs on the left, then pick what you are thinking about.</p></div>
+  <div class="stress" id="stress">
+    <label><input type="checkbox" id="sIncome"> What if my income drops 20%?</label>
+    <label><input type="checkbox" id="sCosts"> What if prices rise 10%?</label>
+    <label><input type="checkbox" id="sJob"> What if I lose my job for 3 months?</label>
+  </div>
+  <div class="nums" id="nums"></div>
+  <ul class="checks" id="checks"></ul>
+  <div class="fix hidden" id="fix"><h4>What would make it work</h4><ul id="fixList"></ul></div>
+  <h3 style="font:700 16px 'Space Grotesk';margin:4px 0">Your savings over the next 3 years</h3>
+  <div class="legend"><span><i style="background:#8a96a3"></i>Without the change</span><span><i style="background:#0e2a47"></i>With the change</span><span><i style="background:#e2a63b"></i>3-month safety net</span></div>
+  <svg id="chart" viewBox="0 0 640 260" role="img" aria-label="Savings over 36 months with and without the change"></svg>
+  <div class="actions" style="margin-top:12px">
+    <button class="primary" id="saveCmp" type="button">Save to compare</button>
+    <button class="secondary" id="csvBtn" type="button">Download month by month (CSV)</button>
+    <button class="secondary" id="printBtn" type="button">Print or save as PDF</button>
+  </div>
+</section>
+
+<section class="panel hidden" id="cmpPanel">
+  <h2>Compare your options</h2>
+  <p>Saved here in this browser. Try a cheaper car, a later start or a part-time return and see which one works.</p>
+  <div style="overflow-x:auto"><table class="cmp" id="cmpTable"></table></div>
+  <div class="actions" style="margin-top:8px"><button class="secondary" id="cmpClear" type="button">Clear the comparison</button></div>
+</section>
+</div>
+</div>
+</main>
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Afford Forge</h2>
+  <p>Afford Forge checks a big decision against your own numbers: buying a car, having a baby, moving to a bigger place, buying a home, going part-time, quitting your job or taking a break, or any big purchase. It works out your money month by month for three years, how low your savings get, and how many months of essential costs they would cover. You get a clear answer — affordable, tight or not yet — and what would make it work.</p>
+  <h3>How to use Afford Forge</h3>
+  <ol><li>Fill in your take-home pay, your monthly costs and your savings. Rough numbers are fine.</li><li>Pick what you are thinking about. The list fills with the costs people often forget; type in your own amounts.</li><li>Read the answer, tick the “what if” boxes to test bad luck, and save options to compare them side by side.</li></ol>
+  <h3>The rules of thumb it uses</h3>
+  <ul>
+    <li><b>Safety net:</b> keep at least 3 months of essential costs (housing, bills, food, transport, debt repayments) in savings, and 6 months if your income is uncertain.</li>
+    <li><b>Something left over:</b> aim to have at least 10% of your take-home pay left each month after all costs.</li>
+    <li><b>Housing:</b> rent or mortgage above about a third of take-home pay usually feels tight.</li>
+    <li><b>Debt:</b> loan and card repayments above about 20% of take-home pay are a warning sign.</li>
+  </ul>
+  <p>These are common guidelines, not laws. Your situation may be different.</p>
+  <h3>Do I have to connect my bank account?</h3>
+  <p>No. You type in your own rough numbers. Nothing is uploaded and there is no login.</p>
+  <h3>Is Afford Forge financial advice?</h3>
+  <p>No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.</p>
+  <h3>Is Afford Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <p class="miga-about-rel">Related tools: <a href="invoice-forge.html">Invoice Forge</a> · <a href="everyday-forge.html">Everyday Forge</a> · <a href="letter-forge.html">Letter Forge</a></p>
+</section>
+<footer>Part of <a href="index.html">MigaBuilder</a>. Afford Forge runs entirely in your browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MONTHS=36;
+const KEY='migaAffordForge',CMP_KEY='migaAffordCompare';
+const store={get(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const CURRENCIES=[['USD','US dollar ($)'],['EUR','Euro (€)'],['GBP','Pound (£)'],['SEK','Swedish krona (kr)'],['NOK','Norwegian krone (kr)'],['DKK','Danish krone (kr)'],['CHF','Swiss franc'],['CAD','Canadian dollar'],['AUD','Australian dollar'],['NZD','New Zealand dollar'],['KES','Kenyan shilling'],['NGN','Naira (₦)'],['ZAR','Rand (R)'],['GHS','Ghana cedi'],['TZS','Tanzanian shilling'],['UGX','Ugandan shilling'],['INR','Indian rupee (₹)'],['PKR','Pakistani rupee'],['PHP','Peso (₱)'],['MXN','Mexican peso'],['BRL','Real (R$)'],['AED','Dirham'],['SAR','Riyal'],['EGP','Egyptian pound'],['CNY','Yuan (¥)'],['JPY','Yen (¥)'],['PLN','Złoty'],['TRY','Lira (₺)']];
+const MONEY_FIELDS=['income','income2','housing','bills','food','transport','debt','other','savings'];
+const ESSENTIAL=['housing','bills','food','transport','debt'];
+
+// What people are thinking about, with the costs they often forget.
+const PRESETS={
+  car:{icon:'🚗',name:'Buy a car',hint:'Count the whole cost of owning it, not just the price: insurance, fuel or charging, servicing, tax and parking add up.',items:[['Deposit or cash price','once',0],['Monthly loan or lease payment','monthly',0,1,''],['Insurance','monthly',0],['Fuel or charging (extra over what you pay now)','monthly',0],['Servicing, tyres and repairs','monthly',0],['Road tax, parking and tolls','monthly',0]]},
+  baby:{icon:'👶',name:'Have a baby',hint:'Set when parental leave starts and how long it lasts. Childcare often starts when leave ends — put its start month there.',items:[['Pram, cot, car seat and first things','once',0],['Nappies, clothes, food and extras','monthly',0],['Lost pay during parental leave','income',0,1,'12'],['Childcare after leave','monthly',0,13,''],['Bigger place or extra room (if needed)','monthly',0]]},
+  move:{icon:'🏠',name:'Move or rent a bigger place',hint:'Include the one-off costs of moving, and the difference in rent and bills, not the full new rent.',items:[['Deposit and agency fees','once',0],['Removals, van and furniture','once',0],['Extra rent per month','monthly',0],['Extra bills per month','monthly',0],['Extra travel to work','monthly',0]]},
+  home:{icon:'🔑',name:'Buy a home',hint:'Enter the change in monthly housing cost: new mortgage minus the rent you pay now. Add upkeep — about 1% of the price a year is a common guide.',items:[['Down payment','once',0],['Fees, taxes, survey and lawyer','once',0],['Mortgage minus current rent','monthly',0],['Upkeep and repairs','monthly',0],['Building insurance and service charges','monthly',0],['Furniture and moving','once',0]]},
+  quit:{icon:'🚪',name:'Quit my job or take a break',hint:'Put in your whole take-home pay as lost income, and how many months you expect to be without it. Health insurance or benefits you lose are monthly costs.',items:[['Lost pay','income',0,1,'6'],['Health insurance or benefits you lose','monthly',0,1,'6'],['Course, travel or start-up costs','once',0]]},
+  part:{icon:'⏳',name:'Go part-time',hint:'Lost pay is the difference between your full-time and part-time take-home pay.',items:[['Lost pay each month','income',0],['Savings on travel or childcare','monthly',0]]},
+  big:{icon:'🛍️',name:'A big purchase',hint:'A holiday, a wedding, a computer, a kitchen. If you would pay in instalments, use a monthly cost with the number of months.',items:[['Price','once',0],['Instalments','monthly',0,1,'12']]},
+  custom:{icon:'✏️',name:'Something else',hint:'Add each cost or change yourself.',items:[['','once',0]]}
+};
+
+let preset='car',items=[],cmp=store.get(CMP_KEY)||[];
+const fmtCache={};
+function fmt(n,signed){const c=$('currency').value||'USD';const f=fmtCache[c]||(fmtCache[c]=new Intl.NumberFormat(undefined,{style:'currency',currency:c,maximumFractionDigits:0}));const s=f.format(Math.round(Math.abs(n)));return (n<0?'−':signed&&n>0?'+':'')+s}
+const num=id=>{const v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0};
+
+function fillCurrencies(){const guess=(()=>{try{const loc=(navigator.language||'en-US');const r=new Intl.Locale(loc).maximize().region;return {US:'USD',GB:'GBP',SE:'SEK',NO:'NOK',DK:'DKK',CH:'CHF',CA:'CAD',AU:'AUD',NZ:'NZD',KE:'KES',NG:'NGN',ZA:'ZAR',GH:'GHS',TZ:'TZS',UG:'UGX',IN:'INR',PK:'PKR',PH:'PHP',MX:'MXN',BR:'BRL',AE:'AED',SA:'SAR',EG:'EGP',CN:'CNY',JP:'JPY',PL:'PLN',TR:'TRY'}[r]||(['DE','FR','ES','IT','NL','BE','AT','IE','PT','FI','GR'].includes(r)?'EUR':'USD')}catch(e){return 'USD'}})();
+  $('currency').innerHTML=CURRENCIES.map(([c,l])=>'<option value="'+c+'">'+esc(l)+'</option>').join('');$('currency').value=guess}
+
+function renderPresets(){$('presets').innerHTML=Object.entries(PRESETS).map(([k,p])=>'<button type="button" data-p="'+k+'" class="'+(k===preset?'on':'')+'">'+p.icon+' '+esc(p.name)+'</button>').join('');$('presetHint').textContent=PRESETS[preset].hint}
+function setPreset(k){preset=k;items=PRESETS[k].items.map(([label,kind,amount,start,months])=>({label,kind,amount:amount||'',start:start||1,months:months===undefined?(kind==='once'?'':''):months}));renderPresets();renderItems();update()}
+
+function renderItems(){
+  $('items').innerHTML=items.map((it,i)=>'<div class="it" data-i="'+i+'">'+
+    '<input class="lbl" aria-label="What" data-k="label" value="'+esc(it.label)+'" placeholder="What is it?">'+
+    '<input aria-label="Amount" data-k="amount" type="number" min="0" step="10" inputmode="decimal" value="'+esc(it.amount)+'" placeholder="0">'+
+    '<select aria-label="Type" data-k="kind"><option value="once"'+(it.kind==='once'?' selected':'')+'>One-off</option><option value="monthly"'+(it.kind==='monthly'?' selected':'')+'>Monthly cost</option><option value="income"'+(it.kind==='income'?' selected':'')+'>Less income per month</option><option value="saving"'+(it.kind==='saving'?' selected':'')+'>Monthly saving</option></select>'+
+    '<input aria-label="From month" data-k="start" type="number" min="1" max="36" value="'+esc(it.start)+'" title="Month it starts (1 = next month)">'+
+    '<input aria-label="For months" data-k="months" type="number" min="1" max="600" value="'+esc(it.months)+'" placeholder="∞" title="Leave empty if it goes on for good"'+(it.kind==='once'?' disabled':'')+'>'+
+    '<button class="del" type="button" aria-label="Remove" title="Remove">×</button></div>').join('');
+}
+$('items').addEventListener('input',e=>{const row=e.target.closest('.it');if(!row)return;const it=items[+row.dataset.i],k=e.target.dataset.k;it[k]=e.target.value;if(k==='kind'){renderItems()}update()});
+$('items').addEventListener('click',e=>{if(!e.target.classList.contains('del'))return;items.splice(+e.target.closest('.it').dataset.i,1);renderItems();update()});
+$('addItem').onclick=()=>{items.push({label:'',kind:'monthly',amount:'',start:1,months:''});renderItems();update();const rows=$('items').querySelectorAll('.lbl');rows[rows.length-1].focus()};
+$('presets').addEventListener('click',e=>{const b=e.target.closest('button[data-p]');if(b)setPreset(b.dataset.p)});
+
+// Month-by-month savings with and without the change.
+function simulate(opt){
+  const income=num('income')+num('income2'),ess=ESSENTIAL.reduce((s,k)=>s+num(k),0),other=num('other'),save0=num('savings');
+  const inc=opt.sIncome?income*0.8:income,costMul=opt.sCosts?1.1:1;
+  const it=items.map(x=>({label:x.label||'Unnamed',kind:x.kind,amount:Math.max(0,parseFloat(x.amount)||0),start:Math.max(1,parseInt(x.start)||1),months:parseInt(x.months)>0?parseInt(x.months):Infinity}));
+  const active=(x,m)=>m>=x.start&&m<x.start+x.months;
+  let base=save0,withC=save0;const rows=[];
+  const once0=it.filter(x=>x.kind==='once'&&x.start<=1).reduce((s,x)=>s+x.amount,0);
+  withC-=once0;
+  let lowest=withC,lowestM=0,firstNeg=withC<0?0:null,netMin=Infinity;
+  for(let m=1;m<=MONTHS;m++){
+    const jobLoss=opt.sJob&&m>=3&&m<6?num('income'):0;
+    const baseIn=inc-jobLoss,baseOut=(ess+other)*costMul;
+    let extraOut=0,lostIn=0,saved=0,once=0;
+    it.forEach(x=>{if(x.kind==='once'){if(x.start===m&&m>1)once+=x.amount;return}if(!active(x,m))return;if(x.kind==='monthly')extraOut+=x.amount*costMul;else if(x.kind==='income')lostIn+=x.amount;else if(x.kind==='saving')saved+=x.amount});
+    const baseNet=baseIn-baseOut,net=baseIn-lostIn-baseOut-extraOut+saved;
+    base+=baseNet;withC+=net-once;netMin=Math.min(netMin,net);
+    if(withC<lowest){lowest=withC;lowestM=m}
+    if(firstNeg===null&&withC<0)firstNeg=m;
+    rows.push({m,income:baseIn-lostIn,costs:baseOut+extraOut-saved+once,net:net-once,netNoOnce:net,base,withC});
+  }
+  // The long-run month: after temporary changes (leave, a break) have ended and new costs have started.
+  const lastRow=rows[MONTHS-1];
+  const leftNow=inc-(ess+other)*costMul;
+  const leftAfter=lastRow.netNoOnce;
+  const essAfter=ess*costMul+it.filter(x=>x.kind==='monthly'&&active(x,MONTHS)).reduce((s,x)=>s+x.amount*costMul,0);
+  const onceTotal=it.filter(x=>x.kind==='once').reduce((s,x)=>s+x.amount,0);
+  const monthlyTotal=it.filter(x=>x.kind==='monthly').reduce((s,x)=>s+x.amount,0);
+  const lostTotal=it.reduce((s,x)=>x.kind==='income'?s+x.amount*Math.min(x.months,MONTHS):s,0);
+  return {income:inc,ess:ess*costMul,other:other*costMul,savings:save0,leftNow,leftAfter,essAfter,lowest,lowestM,firstNeg,rows,onceTotal,monthlyTotal,lostTotal,netMin,end:withC,endBase:base,housing:num('housing'),debt:num('debt')+it.filter(x=>x.kind==='monthly'&&/loan|lease|instal|mortgage/i.test(x.label)).reduce((s,x)=>s+x.amount,0)};
+}
+
+function judge(r){
+  const checks=[],fixes=[];
+  const net3=r.essAfter*3,buffer=r.essAfter>0?r.lowest/r.essAfter:Infinity;
+  let level='good';const down=l=>{if(l==='no'||(l==='tight'&&level==='good'))level=l};
+  if(r.firstNeg!==null){checks.push(['fail','Your savings run out in month '+Math.max(1,r.firstNeg)+(r.firstNeg===0?' — the one-off costs are more than your savings.':'.')]);down('no')}
+  else if(buffer<3){checks.push(['warn','At the lowest point ('+(r.lowestM?'month '+r.lowestM:'right after the one-off costs')+') your savings cover only '+buffer.toFixed(1)+' months of essential costs. Aim for at least 3.']);down('tight')}
+  else checks.push(['pass','Your savings never drop below '+Math.floor(buffer)+' months of essential costs.']);
+  if(r.leftAfter<0){checks.push(['fail','After the change you spend '+fmt(-r.leftAfter)+' more than you earn every month.']);down('no')}
+  else if(r.income>0&&r.leftAfter<r.income*0.1){checks.push(['warn','After the change only '+fmt(r.leftAfter)+' is left each month — less than 10% of your pay ('+fmt(r.income*0.1)+').']);down('tight')}
+  else checks.push(['pass',fmt(r.leftAfter)+' is still left each month after the change.']);
+  if(r.income>0&&r.housing/r.income>0.36)checks.push(['warn','Rent or mortgage is '+Math.round(r.housing/r.income*100)+'% of your take-home pay. Above about a third often feels tight.']);
+  if(r.income>0&&r.debt/r.income>0.2){checks.push(['warn','Loan and card repayments are '+Math.round(r.debt/r.income*100)+'% of your take-home pay. Above 20% is a warning sign.']);down('tight')}
+  // What would make it work
+  if(level!=='good'){
+    const need=Math.max(0,net3-r.lowest);
+    if(need>0&&r.leftNow>0){const m=Math.ceil(need/r.leftNow);fixes.push('Save '+fmt(need)+' more first. At your current '+fmt(r.leftNow)+' a month left over, that takes about '+m+' month'+(m===1?'':'s')+'.')}
+    else if(need>0)fixes.push('Build up '+fmt(need)+' more in savings first — right now nothing is left over each month, so start by cutting a cost.');
+    if(r.leftAfter<r.income*0.1){const cut=r.income*0.1-r.leftAfter;fixes.push('Cut about '+fmt(cut)+' a month from the change or from other spending to keep 10% of your pay free.')}
+    if(r.onceTotal>0&&r.firstNeg!==null)fixes.push('Spread the one-off costs ('+fmt(r.onceTotal)+') or choose a cheaper option.');
+  }
+  if(r.income>0){const room=r.leftNow-r.income*0.1;fixes.push(room>0?'Without touching your safety net, you could take on about '+fmt(room)+' a month in new costs.':'Right now there is no room for new monthly costs while keeping 10% of your pay free.')}
+  return {level,checks,fixes,buffer};
+}
+
+function opts(){return {sIncome:$('sIncome').checked,sCosts:$('sCosts').checked,sJob:$('sJob').checked}}
+let last=null;
+function update(){
+  save();
+  const income=num('income')+num('income2'),ess=ESSENTIAL.reduce((s,k)=>s+num(k),0)+num('other');
+  $('nowLine').textContent=income?'Today: '+fmt(income)+' comes in, '+fmt(ess)+' goes out, so '+fmt(income-ess,true)+' is left each month.':'';
+  if(!income){last=null;$('verdict').className='verdict v-tight';$('verdict').innerHTML='<h3>Fill in your numbers</h3><p>Start with your take-home pay and costs, then pick what you are thinking about.</p>';$('nums').innerHTML='';$('checks').innerHTML='';$('fix').classList.add('hidden');$('chart').innerHTML='';return}
+  const r=simulate(opts()),j=judge(r);last={r,j};
+  const V={good:['v-good','✅ Looks affordable','You can do this and keep a safety net. Re-check with the “what if” boxes before you sign anything.'],tight:['v-tight','⚠️ Tight','You could do it, but there is little room if something goes wrong. See what would make it work below.'],no:['v-no','❌ Not affordable yet','With these numbers you would run short. See what would make it work below.']}[j.level];
+  $('verdict').className='verdict '+V[0];$('verdict').innerHTML='<h3>'+V[1]+'</h3><p>'+esc(V[2])+'</p>';
+  const cell=(v,l,cls)=>'<div class="'+(cls||'')+'"><strong>'+v+'</strong><small>'+l+'</small></div>';
+  $('nums').innerHTML=cell(fmt(r.leftNow,true),'left each month today',r.leftNow<0?'bad':'')+cell(fmt(r.leftAfter,true),'left each month after the change',r.leftAfter<0?'bad':r.leftAfter<r.income*.1?'':'ok')+cell(fmt(r.lowest),'lowest savings'+(r.lowestM?' (month '+r.lowestM+')':' (right after one-off costs)'),r.lowest<0?'bad':'')+cell(isFinite(j.buffer)?j.buffer.toFixed(1)+' months':'—','of essential costs covered at the lowest point',j.buffer<3?'bad':'ok')+cell(fmt(r.onceTotal),'one-off costs')+cell(fmt(r.end-r.endBase,true),'difference in savings after 3 years');
+  $('checks').innerHTML=j.checks.map(([c,t])=>'<li class="'+c+'">'+esc(t)+'</li>').join('');
+  $('fixList').innerHTML=j.fixes.map(t=>'<li>'+esc(t)+'</li>').join('');$('fix').classList.toggle('hidden',!j.fixes.length);
+  drawChart(r);
+}
+
+function drawChart(r){
+  const W=640,H=260,L=64,R=12,T=12,B=30;
+  const vals=[r.savings,...r.rows.map(x=>x.base),...r.rows.map(x=>x.withC),r.essAfter*3,0];
+  let lo=Math.min(...vals),hi=Math.max(...vals);if(hi-lo<1)hi=lo+1;const pad=(hi-lo)*.06;lo-=pad;hi+=pad;
+  const x=m=>L+(W-L-R)*m/MONTHS,y=v=>T+(H-T-B)*(1-(v-lo)/(hi-lo));
+  const line=(arr,col,w,dash)=>'<polyline fill="none" stroke="'+col+'" stroke-width="'+w+'"'+(dash?' stroke-dasharray="'+dash+'"':'')+' points="'+arr.map((v,i)=>x(i).toFixed(1)+','+y(v).toFixed(1)).join(' ')+'"/>';
+  let g='';
+  for(let i=0;i<=4;i++){const v=lo+(hi-lo)*i/4;g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="#e3e6ea"/><text x="'+(L-6)+'" y="'+(y(v)+4)+'" font-size="11" text-anchor="end" fill="#59636c">'+esc(fmt(v))+'</text>'}
+  for(let m=0;m<=MONTHS;m+=6)g+='<text x="'+x(m)+'" y="'+(H-10)+'" font-size="11" text-anchor="middle" fill="#59636c">'+(m===0?'now':m+' mo')+'</text>';
+  if(Math.min(...r.rows.map(x=>x.withC))<0)g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(0)+'" y2="'+y(0)+'" stroke="#d8604a" stroke-width="1.2"/>';
+  g+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y(r.essAfter*3)+'" y2="'+y(r.essAfter*3)+'" stroke="#e2a63b" stroke-width="2" stroke-dasharray="6 4"/>';
+  g+=line([r.savings,...r.rows.map(x=>x.base)],'#8a96a3',2,'4 3');
+  g+=line([r.savings,...r.rows.map(x=>x.withC)],'#0e2a47',3);
+  $('chart').innerHTML=g;
+}
+
+function csv(){
+  if(!last)return;const r=last.r,q=s=>/[",\n]/.test(s)?'"'+String(s).replace(/"/g,'""')+'"':s;
+  const lines=['Afford Forge plan','Decision,'+q(PRESETS[preset].name),'Currency,'+$('currency').value,'Verdict,'+({good:'Looks affordable',tight:'Tight',no:'Not affordable yet'})[last.j.level],'',
+    'Changes,Amount,Type,From month,For months',...items.map(it=>[q(it.label||'Unnamed'),Math.round(parseFloat(it.amount)||0),({once:'One-off',monthly:'Monthly cost',income:'Less income',saving:'Monthly saving'})[it.kind],it.start||1,it.kind==='once'?'':(it.months||'always')].join(',')),'',
+    'Month,Money in,Money out,Left over,Savings without the change,Savings with the change',...r.rows.map(x=>[x.m,Math.round(x.income),Math.round(x.costs),Math.round(x.net),Math.round(x.base),Math.round(x.withC)].join(','))];
+  const blob=new Blob([lines.join('\r\n')+'\r\n'],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='afford-forge-'+preset+'.csv';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+}
+$('csvBtn').onclick=csv;
+$('printBtn').onclick=()=>window.print();
+
+function renderCmp(){
+  $('cmpPanel').classList.toggle('hidden',!cmp.length);if(!cmp.length)return;
+  const tag={good:['good','Affordable'],tight:['tight','Tight'],no:['no','Not yet']};
+  $('cmpTable').innerHTML='<tr><th>Option</th><th>Answer</th><th>One-off</th><th>Left each month after</th><th>Lowest savings</th><th>Months covered</th><th></th></tr>'+cmp.map((c,i)=>'<tr><td>'+esc(c.name)+'</td><td><span class="tag '+tag[c.level][0]+'">'+tag[c.level][1]+'</span></td><td>'+esc(c.once)+'</td><td>'+esc(c.left)+'</td><td>'+esc(c.lowest)+'</td><td>'+esc(c.buffer)+'</td><td><button class="secondary" data-del="'+i+'" type="button" style="padding:4px 8px">×</button></td></tr>').join('');
+}
+$('saveCmp').onclick=()=>{if(!last)return;const nm=prompt('Name this option','Option '+(cmp.length+1)+': '+PRESETS[preset].name);if(nm===null)return;cmp.push({name:nm||PRESETS[preset].name,level:last.j.level,once:fmt(last.r.onceTotal),left:fmt(last.r.leftAfter,true),lowest:fmt(last.r.lowest),buffer:isFinite(last.j.buffer)?last.j.buffer.toFixed(1):'—'});store.set(CMP_KEY,cmp);renderCmp()};
+$('cmpTable').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;cmp.splice(+b.dataset.del,1);store.set(CMP_KEY,cmp);renderCmp()});
+$('cmpClear').onclick=()=>{cmp=[];store.set(CMP_KEY,cmp);renderCmp()};
+
+function save(){const v={};MONEY_FIELDS.forEach(k=>v[k]=$(k).value);store.set(KEY,{v,preset,items,currency:$('currency').value})}
+function load(){const s=store.get(KEY);if(!s)return false;MONEY_FIELDS.forEach(k=>{if(s.v&&s.v[k]!=null)$(k).value=s.v[k]});if(s.currency)$('currency').value=s.currency;preset=PRESETS[s.preset]?s.preset:'car';items=Array.isArray(s.items)?s.items:[];renderPresets();renderItems();return true}
+
+function example(){
+  const v={income:2800,income2:0,housing:950,bills:250,food:420,transport:110,debt:0,other:350,savings:6500};
+  MONEY_FIELDS.forEach(k=>$(k).value=v[k]||'');
+  preset='car';items=[{label:'Deposit',kind:'once',amount:2500,start:1,months:''},{label:'Monthly loan payment',kind:'monthly',amount:260,start:1,months:'48'},{label:'Insurance',kind:'monthly',amount:85,start:1,months:''},{label:'Fuel (extra over the bus pass)',kind:'monthly',amount:70,start:1,months:''},{label:'Servicing, tyres and repairs',kind:'monthly',amount:45,start:1,months:''},{label:'Road tax and parking',kind:'monthly',amount:30,start:1,months:''}];
+  ['sIncome','sCosts','sJob'].forEach(k=>$(k).checked=false);
+  renderPresets();renderItems();update();
+}
+$('exampleBtn').onclick=example;
+$('resetBtn').onclick=()=>{MONEY_FIELDS.forEach(k=>$(k).value='');['sIncome','sCosts','sJob'].forEach(k=>$(k).checked=false);setPreset('car')};
+MONEY_FIELDS.forEach(k=>$(k).addEventListener('input',update));
+['sIncome','sCosts','sJob'].forEach(k=>$(k).addEventListener('change',update));
+$('currency').addEventListener('change',()=>{update();renderCmp()});
+
+fillCurrencies();
+if(!load())setPreset('car');else update();
+renderCmp();
+window.__affordForge={state:()=>last&&{level:last.j.level,leftNow:Math.round(last.r.leftNow),leftAfter:Math.round(last.r.leftAfter),lowest:Math.round(last.r.lowest),lowestM:last.r.lowestM,firstNeg:last.r.firstNeg,buffer:last.j.buffer}};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
