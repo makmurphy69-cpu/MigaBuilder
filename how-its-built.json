@@ -1,13 +1,91 @@
 {
- "updated": "2026-10-26",
+ "updated": "2026-11-02",
  "firstCommit": "2026-09-13",
- "commits": 430,
- "pullRequests": 143,
- "tools": 77,
- "videos": 84,
+ "commits": 445,
+ "pullRequests": 156,
+ "tools": 83,
+ "videos": 90,
  "languages": 9,
  "workflows": 7,
  "recent": [
+  {
+   "number": 191,
+   "title": "Add a Ko-fi \"Support MigaBuilder\" button to the homepage footer",
+   "date": "2026-11-02",
+   "tool": null
+  },
+  {
+   "number": 190,
+   "title": "Site Visits: show the 14-day bars and space out the table headers",
+   "date": "2026-11-01",
+   "tool": null
+  },
+  {
+   "number": 189,
+   "title": "Document Forge: convert PDF to Word (.docx)",
+   "date": "2026-10-29",
+   "tool": "document-forge.html"
+  },
+  {
+   "number": 188,
+   "title": "Use the words people search for in 26 tool page titles",
+   "date": "2026-10-29",
+   "tool": null
+  },
+  {
+   "number": 187,
+   "title": "Fix bugs found by testing every tool; upgrade Invoice, QR and Image Forge",
+   "date": "2026-10-29",
+   "tool": null
+  },
+  {
+   "number": 186,
+   "title": "Add Letter Forge, Afford Forge and Visit Forge",
+   "date": "2026-10-29",
+   "tool": null
+  },
+  {
+   "number": 185,
+   "title": "Add Tune Forge: instrument tuner, metronome and sound level meter",
+   "date": "2026-10-27",
+   "tool": null
+  },
+  {
+   "number": 184,
+   "title": "PDF Forge: save PDF pages as JPG or PNG images",
+   "date": "2026-10-27",
+   "tool": "pdf-forge.html"
+  },
+  {
+   "number": 182,
+   "title": "Go Forge: explain each advice option and what it exposes",
+   "date": "2026-10-27",
+   "tool": "go-forge.html"
+  },
+  {
+   "number": 181,
+   "title": "How it's built: show 9 languages, counted from i18n.js",
+   "date": "2026-10-27",
+   "tool": null
+  },
+  {
+   "number": 180,
+   "title": "Add Species Atlas and translate every remaining page into all site languages",
+   "date": "2026-10-27",
+   "tool": null
+  },
+  {
+   "number": 179,
+   "title": "Translate Go, Noise, Coloring, Cipher Forge and Psychology Atlas into all 9 languages",
+   "date": "2026-10-26",
+   "tool": null
+  },
+  {
+   "number": 178,
+   "title": "Add Psychology Atlas: the history of psychology, its schools, thinkers and theories",
+   "date": "2026-10-26",
+   "tool": null
+  },
   {
    "number": 177,
    "title": "Go Forge: one tap plays a stone on phones",
@@ -19,84 +97,6 @@
    "title": "Go Forge: fit the lessons on phone screens",
    "date": "2026-10-22",
    "tool": "go-forge.html"
-  },
-  {
-   "number": 175,
-   "title": "Add Go Forge: learn Go and play the computer with a coach",
-   "date": "2026-10-22",
-   "tool": null
-  },
-  {
-   "number": 174,
-   "title": "Add Noise Forge, a 3,000+ picture library in Coloring Forge and a Chinese character dictionary in Alphabet Forge",
-   "date": "2026-10-21",
-   "tool": null
-  },
-  {
-   "number": 173,
-   "title": "Add German, Portuguese and French translations",
-   "date": "2026-10-20",
-   "tool": null
-  },
-  {
-   "number": 172,
-   "title": "File Forge: keep each file under a size limit (KB)",
-   "date": "2026-10-20",
-   "tool": null
-  },
-  {
-   "number": 170,
-   "title": "Turn off free shared AI pictures in Coloring Forge and Picture Forge",
-   "date": "2026-10-19",
-   "tool": null
-  },
-  {
-   "number": 169,
-   "title": "Add Cipher Forge and Coloring Forge",
-   "date": "2026-10-18",
-   "tool": null
-  },
-  {
-   "number": 168,
-   "title": "Add Markdown Forge; JSON viewer, Base64/JWT and lorem ipsum; gradients, shadows and photo palettes; loan and savings calculators",
-   "date": "2026-10-15",
-   "tool": null
-  },
-  {
-   "number": 167,
-   "title": "Full-screen button on every player; 3D Cartoon no longer scrolls the page",
-   "date": "2026-10-13",
-   "tool": null
-  },
-  {
-   "number": 166,
-   "title": "Paste a screenshot or copied file into any tool with Ctrl+V",
-   "date": "2026-10-13",
-   "tool": null
-  },
-  {
-   "number": 164,
-   "title": "Add Random Forge: one click makes a random creation you can build",
-   "date": "2026-10-13",
-   "tool": null
-  },
-  {
-   "number": 163,
-   "title": "Add \"How MigaBuilder is built\" setup guide page",
-   "date": "2026-10-12",
-   "tool": null
-  },
-  {
-   "number": 162,
-   "title": "Homepage task search with step-by-step recipes; sitemap.xml and robots.txt in Website Builder zip",
-   "date": "2026-10-12",
-   "tool": null
-  },
-  {
-   "number": 158,
-   "title": "Shop: five €3 template packs and a €9 All Templates bundle",
-   "date": "2026-10-12",
-   "tool": null
   }
  ]
 }
