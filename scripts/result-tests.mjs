@@ -361,6 +361,41 @@ test('pdf-forge: PDF to images saves one chosen page as a sharp PNG', 'pdf-forge
   expect(w > 1000 && h > 1000, '300 DPI page should be over 1000 px each way, got ' + w + '×' + h);
 });
 
+// Opens PDF bytes with the page's pdf.js; returns the page count, or the error name (PasswordException when locked).
+async function pdfOpens(page, buf, password) {
+  return page.evaluate(async ([b64, password]) => {
+    const data = Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+    try { return (await pdfjsLib.getDocument(password ? { data, password } : { data }).promise).numPages; } catch (e) { return e.name; }
+  }, [buf.toString('base64'), password || '']);
+}
+
+test('pdf-forge: Password locks a PDF with AES-256 and unlocks it only with the right password', 'pdf-forge.html', async (page) => {
+  await page.setInputFiles('#pwFile', path.join(FIX, 'three-pages.pdf'));
+  await page.fill('#pwNew', 'Tr1cky pass');
+  await page.fill('#pwAgain', 'Tr1cky pass');
+  const locked = await downloadOf(page, () => page.click('#pwBtn'), 90000);
+  expect(locked.name === 'three-pages-locked.pdf', 'expected three-pages-locked.pdf, got ' + locked.name);
+  expect(ascii(locked.buf, 0, '%PDF') && locked.buf.includes('/Encrypt'), 'locked download is not an encrypted PDF');
+  expect(await pdfOpens(page, locked.buf) === 'PasswordException', 'the locked PDF opened without a password');
+  expect(await pdfOpens(page, locked.buf, 'Tr1cky pass') === 3, 'the locked PDF should open with its password and keep 3 pages');
+
+  await page.check('#pwUnlock');
+  await page.setInputFiles('#pwFile', { name: 'three-pages-locked.pdf', mimeType: 'application/pdf', buffer: locked.buf });
+  await page.fill('#pwOld', 'wrong');
+  await page.click('#pwBtn');
+  await page.waitForSelector('#pwProgress .mp-panel.mp-err', { timeout: 30000 });
+  expect(/not right/.test(await page.textContent('#pwProgress .mp-label')), 'a wrong password should say so, got: ' + await page.textContent('#pwProgress .mp-label'));
+  await page.fill('#pwOld', 'Tr1cky pass');
+  const open = await downloadOf(page, () => page.click('#pwBtn'), 60000);
+  expect(open.name === 'three-pages-locked-unlocked.pdf', 'unexpected name ' + open.name);
+  expect(!open.buf.includes('/Encrypt'), 'the unlocked PDF still has /Encrypt');
+  expect(await pdfOpens(page, open.buf) === 3, 'the unlocked PDF should open without a password with 3 pages');
+
+  await page.setInputFiles('#pwFile', path.join(FIX, 'three-pages.pdf'));
+  await page.click('#pwBtn');
+  await page.waitForFunction(() => /no password/.test(document.querySelector('#pwProgress .mp-label').textContent), null, { timeout: 30000 });
+}, { timeout: 180000 });
+
 test('heic: a picked iPhone photo (HEIC) becomes a JPEG page in PDF Forge', 'pdf-forge.html', async (page) => {
   await page.setInputFiles('#images', path.join(FIX, 'photo.heic'));
   await page.waitForFunction(() => /\.jpg$/.test((document.querySelector('#images').files[0] || {}).name || ''), null, { timeout: 60000 });
