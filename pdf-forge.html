@@ -5,7 +5,7 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I merge PDF files?", "acceptedAnswer": {"@type": "Answer", "text": "Choose all the PDFs, drag the pages into the order you want, and press Merge / create PDF to download one file."}}, {"@type": "Question", "name": "Is PDF Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
 </head><body><nav aria-label="Tool navigation" style="max-width:1120px;margin:16px auto 0;padding:0 20px;display:flex;justify-content:space-between;gap:12px"><a href="index.html" style="color:#6FD1E0;font-weight:700;text-decoration:none">← All tools</a><span></span></nav>
 <header class="masthead"><div><h1>PDF Forge</h1><p>Organise, number, watermark and create PDFs locally.</p></div></header><style>.real-demo{max-width:1120px;margin:22px auto;padding:0 20px}.real-demo-inner{display:grid;grid-template-columns:minmax(230px,.75fr) minmax(0,1.4fr);gap:24px;align-items:center;padding:20px;background:#081826;border:1px solid rgba(111,209,224,.28);border-radius:10px;color:#EDEAE0}.real-demo h2{margin:8px 0 10px}.real-demo p{color:rgba(237,234,224,.72);line-height:1.55}.demo-kicker{color:#6FD1E0;font-size:12px;font-weight:800;letter-spacing:.11em}.real-demo video{display:block;width:100%;border-radius:8px;background:#000}@media(max-width:780px){.real-demo-inner{grid-template-columns:1fr;padding:15px}}</style><section class="real-demo" aria-label="Real demonstration"><div class="real-demo-inner"><div><span class="demo-kicker">REAL WALKTHROUGH</span><h2>Watch a real PDF being reorganised</h2><p>This walkthrough uploads a two-page PDF, reverses the page order, adds numbering, a footer and watermark, then downloads the result.</p></div><video controls playsinline preload="metadata"><source src="assets/demos/pdf-forge.mp4" type="video/mp4">Your browser does not support embedded video.</video></div></section><main><section class="panel"><p class="privacy">🔒 PDF files and images remain on this device and are never uploaded to MigaBuilder.</p><div class="field"><label for="files">PDF files</label><input id="files" type="file" accept="application/pdf" multiple></div><div id="fileList"></div><div id="thumbPanel" hidden><p class="muted" id="thumbHelp">Drag pages to reorder them, or use the arrow buttons. ✕ removes a page. The “Pages to keep or reorder” box below follows your changes.</p><div class="actions" style="margin:0 0 8px"><button type="button" class="secondary" id="thumbReset">Reset order</button></div><ol id="thumbs" class="pdf-thumbs" aria-label="Pages in output order"></ol></div><div class="grid" style="margin-top:15px"><div class="field"><label for="pages">Pages to keep or reorder</label><input id="pages" placeholder="Example: 1-3, 7, 5"><p class="muted">Leave blank to keep all pages. Omit a page number to remove it.</p></div><div class="field"><label for="rotation">Rotate every output page</label><select id="rotation"><option value="0">No rotation</option><option value="90">90° clockwise</option><option value="180">180°</option><option value="270">270° clockwise</option></select></div></div><div class="grid"><div class="field"><label for="footer">Optional footer or signature</label><input id="footer" placeholder="Approved by Alex Morgan"></div><div class="field"><label for="watermark">Optional watermark</label><input id="watermark" placeholder="DRAFT or CONFIDENTIAL"></div></div><label style="display:flex;gap:8px;align-items:center;margin:4px 0 15px"><input id="numbers" type="checkbox"> Add page numbers</label><div class="actions"><button class="primary" id="merge">Create PDF</button><button class="secondary" id="split">Split pages into ZIP</button></div><div class="status" id="status"></div></section>
-<section class="panel" id="cleanPanel"><h2>Remove hidden data</h2><p>PDFs often carry the author's name, the company, the program that made them and when it was edited. See what is stored and save a copy without it.</p><div class="field"><label for="cleanFile">PDF to clean</label><input id="cleanFile" type="file" accept="application/pdf,.pdf"></div><div id="cleanInfo" class="status"></div><div class="actions"><button class="primary" id="cleanBtn" disabled>Save a clean copy</button></div><p class="privacy">Removes the title, author, subject, keywords, creator program, producer, creation and change dates, and the hidden XMP metadata block. The page content is not changed — check the text itself for names before you share it.</p></section><section class="panel"><h2>Images to PDF</h2><p>Turn JPG or PNG images into a single A4 PDF. Each image becomes one page and is scaled to fit.</p><div class="field"><label for="images">Images in page order</label><input id="images" type="file" accept="image/jpeg,image/png" multiple></div><div class="actions"><button class="primary" id="imagesPdf">Create PDF from images</button></div><div class="status" id="imageStatus"></div></section><section class="panel" id="toImgPanel"><h2>PDF to images</h2><p>Save every page of a PDF as a JPG or PNG picture, for forms that only take images or for sharing a page.</p><div class="field"><label for="toImgFile">PDF to turn into images</label><input id="toImgFile" type="file" accept="application/pdf,.pdf"></div><div class="grid"><div class="field"><label for="toImgFormat">Image format</label><select id="toImgFormat"><option value="image/jpeg">JPG — smaller files</option><option value="image/png">PNG — sharpest, larger files</option></select></div><div class="field"><label for="toImgDpi">Sharpness</label><select id="toImgDpi"><option value="96">Screen (96 DPI)</option><option value="150" selected>Standard (150 DPI)</option><option value="300">Print (300 DPI)</option></select></div></div><div class="field"><label for="toImgPages">Pages (optional)</label><input id="toImgPages" placeholder="Example: 1-3, 7"><p class="muted">Leave blank for every page. One page downloads as an image; several come in a ZIP.</p></div><div class="actions"><button class="primary" id="toImgBtn" disabled>Save pages as images</button></div><div id="toImgProgress"></div></section></main>
+<section class="panel" id="cleanPanel"><h2>Remove hidden data</h2><p>PDFs often carry the author's name, the company, the program that made them and when it was edited. See what is stored and save a copy without it.</p><div class="field"><label for="cleanFile">PDF to clean</label><input id="cleanFile" type="file" accept="application/pdf,.pdf"></div><div id="cleanInfo" class="status"></div><div class="actions"><button class="primary" id="cleanBtn" disabled>Save a clean copy</button></div><p class="privacy">Removes the title, author, subject, keywords, creator program, producer, creation and change dates, and the hidden XMP metadata block. The page content is not changed — check the text itself for names before you share it.</p></section><section class="panel"><h2>Images to PDF</h2><p>Turn JPG or PNG images into a single A4 PDF. Each image becomes one page and is scaled to fit.</p><div class="field"><label for="images">Images in page order</label><input id="images" type="file" accept="image/jpeg,image/png" multiple></div><div class="actions"><button class="primary" id="imagesPdf">Create PDF from images</button></div><div class="status" id="imageStatus"></div></section><section class="panel" id="toImgPanel"><h2>PDF to images</h2><p>Save every page of a PDF as a JPG or PNG picture, for forms that only take images or for sharing a page.</p><div class="field"><label for="toImgFile">PDF to turn into images</label><input id="toImgFile" type="file" accept="application/pdf,.pdf"></div><div class="grid"><div class="field"><label for="toImgFormat">Image format</label><select id="toImgFormat"><option value="image/jpeg">JPG — smaller files</option><option value="image/png">PNG — sharpest, larger files</option></select></div><div class="field"><label for="toImgDpi">Sharpness</label><select id="toImgDpi"><option value="96">Screen (96 DPI)</option><option value="150" selected>Standard (150 DPI)</option><option value="300">Print (300 DPI)</option></select></div></div><div class="field"><label for="toImgPages">Pages (optional)</label><input id="toImgPages" placeholder="Example: 1-3, 7"><p class="muted">Leave blank for every page. One page downloads as an image; several come in a ZIP.</p></div><div class="actions"><button class="primary" id="toImgBtn" disabled>Save pages as images</button></div><div id="toImgProgress"></div></section><section class="panel" id="pwPanel" data-no-autosave><h2>Password</h2><p>Lock a PDF so it asks for a password when it is opened, or save a copy without the password when you know it.</p><div class="field"><label for="pwFile">PDF</label><input id="pwFile" type="file" accept="application/pdf,.pdf"></div><div class="field" role="radiogroup" aria-label="What to do"><label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="radio" name="pwMode" id="pwLock" value="lock" checked style="width:auto"> Lock with a password</label><label style="display:flex;gap:8px;align-items:center;font-weight:400"><input type="radio" name="pwMode" id="pwUnlock" value="unlock" style="width:auto"> Remove the password (you must know it)</label></div><div id="pwLockFields" class="grid"><div class="field"><label for="pwNew">New password</label><input id="pwNew" type="password" autocomplete="new-password"></div><div class="field"><label for="pwAgain">Type it again</label><input id="pwAgain" type="password" autocomplete="new-password"></div></div><div id="pwUnlockFields" class="field" hidden><label for="pwOld">The PDF's password</label><input id="pwOld" type="password" autocomplete="off"></div><div class="actions"><button class="primary" id="pwBtn" disabled>Lock PDF</button></div><div id="pwProgress"></div><p class="privacy">The file and the password stay on this device. The PDF engine (qpdf, about 1.4 MB) downloads the first time you use this. A locked PDF uses AES-256: keep the password safe, because nobody can recover it for you.</p></section></main>
 <section class="miga-about" aria-labelledby="miga-about-h">
   <h2 id="miga-about-h">About PDF Forge</h2>
   <p>PDF Forge merges, splits, reorders, rotates, numbers and watermarks PDFs, and creates PDFs from images.</p>
@@ -62,6 +62,74 @@
       if(job&&!cancelled){job.fail(e,['Choose Standard or Screen sharpness','Pick fewer pages','Close other tabs and try again'])}
     }finally{$('toImgBtn').disabled=!$('toImgFile').files.length}
   });
+})();
+</script><script>
+/* Password: lock a PDF with AES-256 or remove its password, with qpdf compiled to WebAssembly.
+   qpdf is loaded only when this section is used, and runs on this device. A fresh engine is made for each job. */
+(function(){
+  const $=id=>document.getElementById(id), BASE='https://cdn.jsdelivr.net/npm/@neslinesli93/qpdf-wasm@0.3.1/dist/';
+  let loader=null, cancelled=false;
+  const job=window.MigaProgress?MigaProgress.create($('pwProgress'),{onCancel:()=>{cancelled=true}}):null;
+  const mode=()=>$('pwUnlock').checked?'unlock':'lock';
+  function refresh(){const u=mode()==='unlock';$('pwLockFields').hidden=u;$('pwUnlockFields').hidden=!u;$('pwBtn').textContent=u?'Remove password':'Lock PDF';$('pwBtn').disabled=!$('pwFile').files.length}
+  ['pwFile','pwLock','pwUnlock'].forEach(id=>$(id).addEventListener('change',refresh));
+  function loadQpdf(){
+    if(!loader)loader=new Promise((res,rej)=>{const s=document.createElement('script');s.src=BASE+'qpdf.js';s.onload=()=>typeof window.Module==='function'?res(window.Module):rej(new Error('The PDF engine did not start.'));s.onerror=()=>{loader=null;rej(new Error('Failed to fetch the PDF engine.'))};document.head.appendChild(s)});
+    return loader;
+  }
+  // Runs one qpdf command on the given bytes; returns the exit code and /out.pdf if it was written.
+  async function qpdf(args,bytes){
+    const create=await loadQpdf();
+    const q=await create({locateFile:()=>BASE+'qpdf.wasm',print:()=>{},printErr:()=>{}});
+    q.FS.writeFile('/in.pdf',bytes);
+    let code;try{code=q.callMain(args)}catch(e){code=typeof e.status==='number'?e.status:2}
+    let out=null;try{out=q.FS.readFile('/out.pdf')}catch(e){}
+    return {code,out};
+  }
+  // This qpdf build cannot test a file for a password without one, so pdf.js (already on this page) checks it.
+  async function needsPassword(bytes){
+    pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    try{const d=await pdfjsLib.getDocument({data:bytes.slice()}).promise;d.destroy();return false}
+    catch(e){if(e&&e.name==='PasswordException')return true;throw new Error('This PDF could not be read. It may be damaged.')}
+  }
+  // A PDF that opens without a password can still be encrypted (only printing or copying limited).
+  function hasEncrypt(bytes){return new TextDecoder('latin1').decode(bytes).indexOf('/Encrypt')>=0}
+  function save(bytes,name){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000)}
+  $('pwBtn').addEventListener('click',async()=>{
+    const f=$('pwFile').files[0];if(!f)return;
+    const m=mode(),base=(f.name||'document.pdf').replace(/\.pdf$/i,'')||'document';
+    if(m==='lock'){
+      if(!$('pwNew').value){job&&job.fail(new Error('Type a password.'),[]);return}
+      if($('pwNew').value!==$('pwAgain').value){job&&job.fail(new Error('The two passwords are not the same.'),['Type the password again in both boxes']);return}
+    }else if(!$('pwOld').value){job&&job.fail(new Error("Type the PDF's password."),[]);return}
+    cancelled=false;$('pwBtn').disabled=true;
+    if(job)job.start('Loading the PDF engine…');
+    try{
+      const bytes=new Uint8Array(await f.arrayBuffer());
+      await loadQpdf();
+      if(cancelled)return;
+      if(job)job.update(0.5,m==='lock'?'Locking the PDF…':'Removing the password…');
+      const needs=await needsPassword(bytes);
+      if(cancelled)return;
+      let r;
+      if(m==='lock'){
+        if(needs)throw new Error('This PDF already has a password. Remove it first, then lock it again.');
+        const pw=$('pwNew').value;
+        r=await qpdf(['--encrypt',pw,pw,'256','--','/in.pdf','/out.pdf'],bytes);
+      }else{
+        if(!needs&&!hasEncrypt(bytes))throw new Error('This PDF has no password, so there is nothing to remove.');
+        r=await qpdf(['--password='+$('pwOld').value,'--decrypt','/in.pdf','/out.pdf'],bytes);
+        if(r.code===2&&!r.out)throw new Error('That password is not right for this PDF.');
+      }
+      if(cancelled)return;
+      if(!r.out||r.code===2)throw new Error('This PDF could not be read. It may be damaged.');
+      save(r.out,base+(m==='lock'?'-locked.pdf':'-unlocked.pdf'));
+      if(job)job.done(m==='lock'?'Locked PDF downloaded. It will ask for the password when opened.':'PDF without a password downloaded.');
+    }catch(e){
+      if(job&&!cancelled)job.fail(e,['Check the password: capitals and spaces count','Check your internet connection the first time, so the PDF engine can download']);
+    }finally{$('pwBtn').disabled=!$('pwFile').files.length}
+  });
+  refresh();
 })();
 </script><script>
 /* Page thumbnails for PDF Forge: shows every page of the chosen PDFs (in file order), lets you drag,
