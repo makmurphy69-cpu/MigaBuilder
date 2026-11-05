@@ -578,11 +578,15 @@ $('cw').addEventListener('mousedown',e=>{const el=e.target.closest('.x.l');if(!e
   // A second tap on the same square switches between across and down.
   if(cwCur.key===key&&c.words.length>1){e.preventDefault();const other=c.words.find(w=>w!==cwCur.word);cwFocus(key,other)}});
 $('cw').addEventListener('focusin',e=>{const el=e.target.closest('.x.l');if(!el||!cw)return;if(e.target.select)e.target.select();if(cwCur.key!==el.dataset.k)cwFocus(el.dataset.k,cw.cells.get(el.dataset.k).words.includes(cwCur.word)?cwCur.word:null)});
+// Chinese is typed through an input method (pinyin → 汉字), so wait until the character is chosen.
+// Phone keyboards such as Gboard also "compose" ordinary letters, so for other languages take each letter at once.
+const cwNeedsIme=()=>cw&&cw.placed.some(p=>p.L.some(ch=>/[\u2E80-\u9FFF\uAC00-\uD7AF]/.test(ch)));
 $('cw').addEventListener('input',e=>{
-  if(e.isComposing||!cw)return;const el=e.target.closest('.x.l');if(!el)return;
+  if(!cw||(e.isComposing&&cwNeedsIme()))return;const el=e.target.closest('.x.l');if(!el)return;
   const c=cw.cells.get(el.dataset.k),chars=letters(e.target.value);
   c.val=chars.length?chars[chars.length-1]:'';e.target.value=c.val;el.classList.remove('wrong','shown');
-  if(c.val)cwStep(1);cwMark();cwWinCheck();
+  // Only the square being typed in moves on; a late event from the square just left must not skip one.
+  if(c.val&&el.dataset.k===cwCur.key)cwStep(1);cwMark();cwWinCheck();
 });
 $('cw').addEventListener('compositionend',e=>{e.target.dispatchEvent(new Event('input',{bubbles:true}))});
 $('cw').addEventListener('keydown',e=>{
@@ -605,7 +609,10 @@ $('cwAll').onclick=()=>{if(cw)cwReveal([...cw.cells.keys()])};
 $('cwClear').onclick=()=>{if(!cw)return;cw.cells.forEach(c=>c.val='');cw.done=false;$('cwWin').classList.add('hidden');renderCrossword()};
 $('cwNew').onclick=newCrossword;
 $('cwPrintBtn').onclick=()=>{if(!cw)return;$('cwTitle').style.display='block';const cur=cwCur;cwCur={key:null,word:-1};cwMark();window.print();$('cwTitle').style.display='none';cwCur=cur;cwMark()};
-window.addEventListener('resize',()=>{if(cw&&!$('p-crossword').classList.contains('hidden'))renderCrossword()});
+// Redraw only when the width changes: a phone keyboard opening changes the height, and a redraw would close it again.
+let cwWidth=window.innerWidth;
+window.addEventListener('resize',()=>{if(window.innerWidth===cwWidth)return;cwWidth=window.innerWidth;
+  if(cw&&!$('p-crossword').classList.contains('hidden')){const had=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#cw');renderCrossword();if(had&&cwCur.key)cwFocus(cwCur.key,cwCur.word)}});
 
 /* =====================================================================
    YOUR WORDS
