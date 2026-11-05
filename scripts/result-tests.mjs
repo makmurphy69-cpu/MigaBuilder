@@ -1209,6 +1209,38 @@ test('dictionary-forge: a Spanish word is explained, saved and downloaded as CSV
   await fakeAi(ctx, () => JSON.stringify(DICT_AI));
 } });
 
+test('dictionary-forge: when Wiktionary is busy it says so, and Try again loads the meanings', 'dictionary-forge.html', async (page, ctx) => {
+  let busy = true;
+  await ctx.route(/en\.wiktionary\.org\/api\/rest_v1\/page\/definition\//, r => busy ? r.fulfill({ status: 429, headers: { 'Access-Control-Allow-Origin': '*' }, body: '' }) : r.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(DICT_WIKI) }));
+  await page.selectOption('#from', 'es');
+  await page.fill('#q', 'casa');
+  await page.click('#go');
+  await page.waitForSelector('#wikiRetry', { timeout: 15000 });
+  expect(/busy right now/.test(await page.textContent('#wikiOut')), 'the busy message is missing: ' + await page.textContent('#wikiOut'));
+  busy = false;
+  await page.click('#wikiRetry');
+  await page.waitForFunction(() => /house/.test(document.getElementById('wikiOut').textContent));
+}, { setup: ctx => fakeAi(ctx, () => JSON.stringify(DICT_AI)) });
+
+const aiModelsAsked = [];
+test('ai-client: when the free Gemini model is overloaded, the answer comes from Flash-Lite instead', 'dictionary-forge.html', async (page) => {
+  await page.selectOption('#from', 'es');
+  await page.fill('#q', 'casa');
+  await page.click('#go');
+  await page.waitForSelector('#aiOut .meaning, #aiOut .warn', { timeout: 20000 });
+  expect(await page.locator('#aiOut .meaning').count() === 1, 'no answer after the fallback: ' + await page.textContent('#aiOut'));
+  expect(aiModelsAsked.join(',') === 'gemini-3.5-flash,gemini-3.5-flash-lite', 'the models asked were ' + aiModelsAsked.join(','));
+}, { setup: async ctx => {
+  aiModelsAsked.length = 0;
+  await ctx.route(/en\.wiktionary\.org/, r => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(DICT_WIKI) }));
+  await ctx.route(/migabuilder-gemini/, async route => {
+    const body = JSON.parse(route.request().postData() || '{}');
+    aiModelsAsked.push(body.model);
+    if (body.model === 'gemini-3.5-flash') return route.fulfill({ status: 503, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ error: 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.' }) });
+    await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ candidates: [{ content: { parts: [{ text: JSON.stringify(DICT_AI) }] } }] }) });
+  });
+} });
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());

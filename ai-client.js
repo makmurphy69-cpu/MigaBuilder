@@ -90,21 +90,36 @@
     return new Error(msg || fallback + ' (HTTP ' + response.status + ')');
   }
 
+  // When a Gemini model is overloaded ("high demand", 503) or out of quota, try
+  // the other Gemini model once before giving up. A visitor sending too many
+  // requests (the proxy's own limit) is not helped by switching, so that is
+  // returned as it is.
+  async function withFallback(provider, model, send) {
+    const r = await send(model);
+    if (r.ok || ![429, 500, 502, 503, 504].includes(r.status)) return r;
+    const body = await r.clone().text().catch(() => '');
+    if (/Too many AI requests/i.test(body)) return r;
+    const other = MODELS[provider].map(m => m[0]).find(m => m !== model);
+    if (!other) return r;
+    const r2 = await send(other);
+    return r2.ok ? r2 : r;
+  }
+
   async function ask(system, user, opts) {
     const s = Object.assign(settings(), opts || {});
     const signal = opts && opts.signal;
     if (s.provider !== 'gemini' && !s.key) throw new Error('Add your ' + ({ openai: 'OpenAI', anthropic: 'Anthropic', geminikey: 'Gemini' }[s.provider]) + ' API key first, or switch back to free Gemini.');
     let text = '';
     if (s.provider === 'gemini') {
-      const r = await fetch(GEMINI_PROXY_URL, { method: 'POST', signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: s.model, systemPrompt: system, userPrompt: user }) });
+      const r = await withFallback(s.provider, s.model, model => fetch(GEMINI_PROXY_URL, { method: 'POST', signal, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model, systemPrompt: system, userPrompt: user }) }));
       if (!r.ok) throw await errorFrom(r, 'The free AI is busy or at its daily limit. Try again later or use your own key');
       const d = await r.json();
       const parts = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
       text = parts ? parts.map(p => p.text || '').join('') : '';
     } else if (s.provider === 'geminikey') {
-      const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + s.model + ':generateContent', { method: 'POST', signal,
+      const r = await withFallback(s.provider, s.model, model => fetch('https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent', { method: 'POST', signal,
         headers: { 'Content-Type': 'application/json', 'x-goog-api-key': s.key },
-        body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ parts: [{ text: user }] }] }) });
+        body: JSON.stringify({ systemInstruction: { parts: [{ text: system }] }, contents: [{ parts: [{ text: user }] }] }) }));
       if (!r.ok) throw await errorFrom(r, 'Gemini request failed');
       const d = await r.json();
       const parts = d.candidates && d.candidates[0] && d.candidates[0].content && d.candidates[0].content.parts;
