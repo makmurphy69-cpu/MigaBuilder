@@ -1183,6 +1183,22 @@ test('puzzle-forge: a crossword from your own words is valid and solves, and eve
   expect(/✓/.test(await page.textContent('#scMsg')), 'the scramble was not solved by its hints: ' + await page.textContent('#scMsg'));
 });
 
+test('puzzle-forge: on a phone the crossword keeps its square when the keyboard opens, and keyboard-composed letters fill in', 'puzzle-forge.html', async (page, ctx) => {
+  await page.setViewportSize({ width: 412, height: 860 });
+  await page.click('#tab-crossword');
+  await page.waitForSelector('#cw .x.l input');
+  const w = await page.evaluate(() => { const c = window.PuzzleForge.state().cw; return { key: c.placed[0].cells[0], word: c.placed[0].L.join('') }; });
+  await page.click('#cw [data-k="' + w.key + '"] input');
+  await page.setViewportSize({ width: 412, height: 470 }); // the on-screen keyboard opens
+  await page.waitForTimeout(300);
+  expect(await page.evaluate(k => document.activeElement.closest('.x.l')?.dataset.k === k, w.key), 'the square lost focus when the keyboard opened');
+  // Gboard and other phone keyboards send each letter as "composition" text.
+  const cdp = await ctx.newCDPSession(page);
+  for (const ch of w.word.slice(0, 2).toLowerCase()) { await cdp.send('Input.imeSetComposition', { text: ch, selectionStart: 1, selectionEnd: 1 }); await page.waitForTimeout(100); }
+  const got = await page.evaluate(() => { const c = window.PuzzleForge.state().cw; return c.placed[0].cells.map(k => c.cells.get(k).val || '_').join(''); });
+  expect(got.startsWith(w.word.slice(0, 2)) && got[2] === '_', 'phone typing filled ' + got + ' for ' + w.word);
+});
+
 const DICT_WIKI = { es: [{ partOfSpeech: 'Noun', language: 'Spanish', definitions: [{ definition: '<a rel="mw:WikiLink" href="/wiki/house" title="house">house</a>', parsedExamples: [{ example: 'Mi <b>casa</b> es tu casa.' }] }] }], pt: [{ partOfSpeech: 'Noun', language: 'Portuguese', definitions: [{ definition: 'house' }] }] };
 const DICT_AI = { found: true, word: 'casa', base: '', pronunciation: 'ˈka.sa', part_of_speech: 'noun', meaning: 'A building where people live.', short: 'a house or home', more: '', forms: 'plural: casas', examples: [{ text: 'Mi casa es pequeña.', translation: 'My house is small.' }], synonyms: ['hogar'], opposites: [], translations: { en: 'house', es: 'casa', ar: 'بيت', zh: '房子', sw: 'nyumba', sv: 'hus', de: 'Haus', pt: 'casa', fr: 'maison' }, tip: 'Casa is feminine: la casa.' };
 test('dictionary-forge: a Spanish word is explained, saved and downloaded as CSV, and becomes a crossword', 'dictionary-forge.html', async (page) => {
