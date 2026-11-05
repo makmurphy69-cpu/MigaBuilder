@@ -121,7 +121,7 @@ $('to').value=store.get('dictTo',siteLang&&CODES.includes(siteLang)?siteLang:'en
 $('autoAi').checked=store.get('dictAutoAi',true);
 MigaAI.mount($('aiBox'));
 
-let cur=null; // {word, from, to, wiki, ai}
+let cur=null,sugT=null; // cur: {word, from, to, wiki, ai}
 let seq=0;
 
 /* ---------- Wiktionary ---------- */
@@ -134,9 +134,9 @@ async function wikiLookup(word,from,signal){
     const url=WIKI+'/api/rest_v1/page/definition/'+encodeURIComponent(w.replace(/ /g,'_'));
     // Wikimedia asks apps to say who they are; a busy server gets one more try.
     const get=()=>fetch(url,{signal,headers:{Accept:'application/json','Api-User-Agent':'MigaBuilder Dictionary Forge (https://migabuilder.com)'}});
-    let r;try{r=await get();if(r.status===429||r.status>=500){await new Promise(ok=>setTimeout(ok,1500));r=await get()}}catch(e){if(e.name==='AbortError')throw e;return{error:true}}
+    let r;try{r=await get();if(r.status===429||r.status>=500){await new Promise(ok=>setTimeout(ok,2500));r=await get()}}catch(e){if(e.name==='AbortError')throw e;return{error:'offline'}}
     if(r.status===404)continue;
-    if(!r.ok)return{error:true};
+    if(!r.ok)return{error:r.status===429||r.status>=500?'busy':'offline'};
     const d=await r.json();
     if(d[from]&&d[from].length)return{title:w,entries:d[from],other:Object.keys(d).filter(k=>k!==from&&CODES.includes(k))};
     if(!any)any={title:w,entries:null,other:Object.keys(d).filter(k=>CODES.includes(k))};
@@ -172,7 +172,8 @@ function renderWiki(w){
   if(!w)return;
   const box=document.createElement('div');box.className='box';
   box.innerHTML='<h3>📖 Dictionary meanings <span class="src">from <a href="'+WIKI+'/wiki/'+encodeURIComponent((w.title||cur.word).replace(/ /g,'_'))+'#'+encodeURIComponent(NAMES[cur.from])+'" target="_blank" rel="noopener">Wiktionary</a> (CC BY-SA), in English</span></h3>';
-  if(w.error){box.insertAdjacentHTML('beforeend','<p class="muted">Wiktionary could not be reached. Check your connection — the simple explanation below still works.</p>');out.appendChild(box);return}
+  if(w.error){box.insertAdjacentHTML('beforeend','<p class="muted">'+(w.error==='busy'?'Wiktionary is busy right now (too many look-ups). Wait a minute and try again':'Wiktionary could not be reached. Check your connection')+' — the simple explanation still works. <button class="secondary" type="button" id="wikiRetry">Try again</button></p>');out.appendChild(box);
+    $('wikiRetry').onclick=async()=>{const me=cur;$('wikiRetry').disabled=true;const w2=await wikiLookup(me.word,me.from).catch(()=>({error:'offline'}));if(cur!==me)return;me.wiki=w2;renderWiki(w2);renderAlso(w2)};return}
   if(!w.entries){box.insertAdjacentHTML('beforeend','<p class="muted">Wiktionary has no '+esc(NAMES[cur.from])+' entry for “'+esc(cur.word)+'”. Check the spelling or the language'+(w.other.length?', or open it in another language below':'')+'.</p>');out.appendChild(box);return}
   w.entries.forEach(e=>{
     const defs=cleanDefs(e);if(!defs.length)return;
@@ -254,6 +255,7 @@ let abort=null;
 async function lookup(word){
   word=String(word||'').trim().replace(/\s+/g,' ');if(!word)return;
   const from=$('from').value,to=$('to').value,my=++seq;
+  clearTimeout(sugT); // no word suggestions once the search has started
   store.set('dictFrom',from);store.set('dictTo',to);
   if(abort)abort.abort();abort=new AbortController();
   cur={word,from,to,wiki:null,ai:null};const me=cur;
@@ -278,7 +280,6 @@ $('autoAi').onchange=()=>{store.set('dictAutoAi',$('autoAi').checked);if(cur&&!c
 $('sayBtn').onclick=()=>{if(!cur)return;try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(cur.word);u.lang=TTS[cur.from];u.rate=.85;speechSynthesis.speak(u)}catch(e){}};
 
 /* ---------- suggestions, history and example words ---------- */
-let sugT=null;
 $('q').addEventListener('input',()=>{clearTimeout(sugT);const v=$('q').value.trim();if(v.length<2)return;
   sugT=setTimeout(async()=>{try{const r=await fetch(WIKI+'/w/api.php?action=opensearch&format=json&origin=*&limit=8&namespace=0&search='+encodeURIComponent(v));const d=await r.json();
     $('sugg').innerHTML=(d[1]||[]).map(s=>'<option value="'+esc(s)+'">').join('')}catch(e){}},300)});

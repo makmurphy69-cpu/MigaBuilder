@@ -1209,6 +1209,19 @@ test('dictionary-forge: a Spanish word is explained, saved and downloaded as CSV
   await fakeAi(ctx, () => JSON.stringify(DICT_AI));
 } });
 
+test('dictionary-forge: when Wiktionary is busy it says so, and Try again loads the meanings', 'dictionary-forge.html', async (page, ctx) => {
+  let busy = true;
+  await ctx.route(/en\.wiktionary\.org\/api\/rest_v1\/page\/definition\//, r => busy ? r.fulfill({ status: 429, headers: { 'Access-Control-Allow-Origin': '*' }, body: '' }) : r.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(DICT_WIKI) }));
+  await page.selectOption('#from', 'es');
+  await page.fill('#q', 'casa');
+  await page.click('#go');
+  await page.waitForSelector('#wikiRetry', { timeout: 15000 });
+  expect(/busy right now/.test(await page.textContent('#wikiOut')), 'the busy message is missing: ' + await page.textContent('#wikiOut'));
+  busy = false;
+  await page.click('#wikiRetry');
+  await page.waitForFunction(() => /house/.test(document.getElementById('wikiOut').textContent));
+}, { setup: ctx => fakeAi(ctx, () => JSON.stringify(DICT_AI)) });
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());
