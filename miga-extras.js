@@ -105,6 +105,7 @@
     ['net', /bsky|atproto/, 'Posting to Bluesky sends your post and login to Bluesky, only when you press post.'],
     ['net', /api\.inaturalist\.org/, 'Species names, photos and maps are loaded from iNaturalist and OpenStreetMap; only what you search for and open is sent.'],
     ['net', /wikipedia/i, 'Some facts are loaded from Wikipedia.'],
+    ['net', /wiktionary\.org/, 'Dictionary meanings are loaded from Wiktionary; only the words you look up are sent.'],
     ['net', /loremflickr/, 'Stock photos, if you choose them, are loaded from LoremFlickr.']
   ];
   const facts = { dl: [], perm: [], net: [] };

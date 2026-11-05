@@ -1147,6 +1147,68 @@ test('tune-forge: the demo string is tuned to E2 and the sound level log downloa
   expect(data.some(r => +r[2] > 40), 'no measurement picked up the demo sound: ' + rows.slice(at + 1, at + 4).join(' | '));
 });
 
+test('puzzle-forge: a crossword from your own words is valid and solves, and every sudoku has one answer', 'puzzle-forge.html', async (page) => {
+  const gen = await page.evaluate(() => {
+    const P = window.PuzzleForge, out = {};
+    for (const [l, list] of Object.entries(MigaWords.words)) {
+      const c = P.makeCrossword(l === 'zh' ? list.concat(MigaWords.idioms.zh) : list, 12);
+      // Every placed letter must agree where words cross.
+      const grid = new Map(); let clash = 0;
+      c.placed.forEach(p => p.L.forEach((ch, k) => { const key = (p.x + (p.d === 'a' ? k : 0)) + ',' + (p.y + (p.d === 'd' ? k : 0)); if (grid.has(key) && grid.get(key) !== ch) clash++; grid.set(key, ch); }));
+      out[l] = { words: c.placed.length, clash };
+    }
+    out.sudoku = [[9, 'expert'], [6, 'hard'], [4, 'easy']].map(([n, lv]) => { const s = P.makeSudoku(n, lv); return { n, answers: P.solve(s.puzzle, n, 2), keeps: s.puzzle.every((v, i) => !v || v === s.solution[i]) }; });
+    return out;
+  });
+  for (const l of ['en', 'es', 'ar', 'zh', 'sw', 'sv', 'de', 'pt', 'fr']) expect(gen[l].clash === 0 && gen[l].words >= (l === 'zh' ? 5 : 10), 'the ' + l + ' crossword is wrong: ' + JSON.stringify(gen[l]));
+  expect(gen.sudoku.every(s => s.answers === 1 && s.keeps), 'a sudoku does not have exactly one answer: ' + JSON.stringify(gen.sudoku));
+  await page.click('#tab-words');
+  await page.fill('#wordsIn', 'volcano = A mountain that can erupt\nglacier = A slow river of ice\ndesert = A dry place with little rain\nisland = Land with water all around it\nvalley = Low land between hills\nlagoon = A lake cut off from the sea');
+  await page.click('#wCross');
+  await page.waitForSelector('#cw .x.l input');
+  const n = await page.locator('#clues li').count();
+  expect(n >= 4, 'only ' + n + ' of the 6 words went into the crossword');
+  // Type the first word, check it, then show the rest.
+  const first = await page.evaluate(() => { const s = window.PuzzleForge.state().cw; return { key: s.placed[0].cells[0], word: s.placed[0].L.join('') }; });
+  await page.click('#cw [data-k="' + first.key + '"] input');
+  await page.keyboard.type(first.word.toLowerCase());
+  expect(await page.locator('#clues li.solved').count() >= 1, 'typing ' + first.word + ' did not solve its clue');
+  await page.click('#cwAll');
+  expect(/Finished/.test(await page.textContent('#cwWin')), 'the finished crossword was not recognised');
+  // Word scramble: hints alone solve the word.
+  await page.click('#tab-scramble');
+  await page.selectOption('#lang', 'es');
+  const len = await page.locator('#scSlots .slot').count();
+  for (let i = 0; i < len; i++) await page.click('#scHint');
+  expect(/✓/.test(await page.textContent('#scMsg')), 'the scramble was not solved by its hints: ' + await page.textContent('#scMsg'));
+});
+
+const DICT_WIKI = { es: [{ partOfSpeech: 'Noun', language: 'Spanish', definitions: [{ definition: '<a rel="mw:WikiLink" href="/wiki/house" title="house">house</a>', parsedExamples: [{ example: 'Mi <b>casa</b> es tu casa.' }] }] }], pt: [{ partOfSpeech: 'Noun', language: 'Portuguese', definitions: [{ definition: 'house' }] }] };
+const DICT_AI = { found: true, word: 'casa', base: '', pronunciation: 'ˈka.sa', part_of_speech: 'noun', meaning: 'A building where people live.', short: 'a house or home', more: '', forms: 'plural: casas', examples: [{ text: 'Mi casa es pequeña.', translation: 'My house is small.' }], synonyms: ['hogar'], opposites: [], translations: { en: 'house', es: 'casa', ar: 'بيت', zh: '房子', sw: 'nyumba', sv: 'hus', de: 'Haus', pt: 'casa', fr: 'maison' }, tip: 'Casa is feminine: la casa.' };
+test('dictionary-forge: a Spanish word is explained, saved and downloaded as CSV, and becomes a crossword', 'dictionary-forge.html', async (page) => {
+  await page.selectOption('#from', 'es');
+  await page.selectOption('#to', 'en');
+  await page.fill('#q', 'casa');
+  await page.click('#go');
+  await page.waitForSelector('#aiOut .meaning');
+  expect(/house/.test(await page.textContent('#wikiOut')), 'the Wiktionary meaning is missing');
+  expect(/Português/.test(await page.textContent('#alsoChips')), 'the other languages are missing');
+  expect(await page.locator('#aiOut .tr button').count() === 8, 'the translations into the eight other languages are missing');
+  await page.click('#saveBtn');
+  const out = await downloadOf(page, () => page.click('#csvBtn'));
+  const rows = out.buf.toString('utf8').replace(/^﻿/, '').trim().split(/\r\n/);
+  expect(out.name === 'my-words.csv', 'unexpected file name ' + out.name);
+  expect(rows[0] === 'Word,Language,Meaning,Meaning language' && rows[1] === 'casa,Spanish,a house or home,English', 'the CSV is wrong: ' + rows.join(' | '));
+  // The saved word opens in Puzzle Forge as a word scramble, with its meaning as the clue.
+  await Promise.all([page.waitForURL(/puzzle-forge\.html#words=/), page.click('#toScr')]);
+  await page.waitForSelector('#scSlots .slot');
+  expect(await page.textContent('#scClue') === 'a house or home' && await page.locator('#scSlots .slot').count() === 4, 'the saved word did not reach Puzzle Forge: ' + await page.textContent('#scClue'));
+}, { setup: async ctx => {
+  await ctx.route(/en\.wiktionary\.org\/api\/rest_v1\/page\/definition\//, r => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify(DICT_WIKI) }));
+  await ctx.route(/en\.wiktionary\.org\/w\/api\.php/, r => r.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: '["casa",[],[],[]]' }));
+  await fakeAi(ctx, () => JSON.stringify(DICT_AI));
+} });
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());
