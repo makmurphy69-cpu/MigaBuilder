@@ -549,6 +549,32 @@
    "kind": "image"
   }
  },
+ "dictionary-forge.html": {
+  "title": "Dictionary Forge",
+  "video": "https://videos.migabuilder.com/dictionary-forge.mp4?v=6eb26375",
+  "poster": "https://videos.migabuilder.com/dictionary-forge.jpg?v=14d7cec2",
+  "duration": 79,
+  "transcript": [
+   "Welcome to Dictionary Forge. Look up a word in nine languages and get it explained simply, in your own language.",
+   "Type a word. Here we look up the Spanish word mariposa.",
+   "Choose the language the word is in, and the language you want it explained in.",
+   "Press Look it up.",
+   "You get a simple explanation, how to say it, its forms, and example sentences with translations. Press Listen to hear it.",
+   "Below are the dictionary meanings from Wiktionary, the free dictionary, and the same word in the eight other languages.",
+   "Tap a translation to look it up in that language. Here is the Swahili word.",
+   "Now let us have it explained in Arabic instead. Any of the nine languages works.",
+   "Press Save to keep a word in your list.",
+   "Save a few more words. Here we add the German word for butterfly.",
+   "Your words are listed with a short meaning. Download them as a spreadsheet.",
+   "Or press Make a crossword, and Puzzle Forge turns your words into a crossword or a word scramble to help you remember them.",
+   "Now it is your turn. Open Dictionary Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/dictionary-forge.csv",
+   "label": "Word list saved in this video",
+   "kind": "text"
+  }
+ },
  "document-forge.html": {
   "title": "Document Forge",
   "video": "https://videos.migabuilder.com/document-forge.mp4",
@@ -1457,6 +1483,36 @@
    "file": "samples/psychology-atlas.html",
    "label": "Printable quiz made in this video",
    "kind": "html"
+  }
+ },
+ "puzzle-forge.html": {
+  "title": "Puzzle Forge",
+  "video": "https://videos.migabuilder.com/puzzle-forge.mp4?v=09e990a0",
+  "poster": "https://videos.migabuilder.com/puzzle-forge.jpg?v=2b686331",
+  "duration": 159,
+  "transcript": [
+   "Welcome to Puzzle Forge. Play a word scramble, a sudoku or a crossword in nine languages, or make a crossword from your own words.",
+   "Pick a puzzle at the top: word scramble, sudoku or crossword. Then choose the language. There are nine, from English and Spanish to Arabic, Chinese and Swahili.",
+   "In the word scramble, read the clue, then tap the letters in the right order. You can also type them.",
+   "Right! Each answer adds to your score and your streak, and you hear the word spoken.",
+   "Now the same game in Spanish. Tick Show the English meaning if you are learning the language.",
+   "Stuck? A hint puts the next letter in place, and Show answer reveals the whole word.",
+   "Next, sudoku. Choose the size: four by four or six by six for children, or nine by nine from easy to expert. Every puzzle is new and has exactly one answer.",
+   "Tap a square, then a number. Squares that break the rules turn red.",
+   "Use notes to pencil in the numbers that could go in a square, undo a move, or ask for a hint. Your game is saved on this device.",
+   "Switch the symbols to Arabic or Chinese numerals, or to letters.",
+   "Now the crossword. A new one is made every time from the words of your language.",
+   "Tap a clue or a square, then type. Tap the same square again to switch between across and down.",
+   "Check marks wrong letters in red, and you can show one letter, a word or the whole answer.",
+   "You can also make a crossword from your own words, like a spelling list or a class topic. Type one word and its clue per line.",
+   "Press Make a crossword.",
+   "Print it to solve on paper, or copy a link to share your words with a class. There is no AI and no server, so everything stays on your device.",
+   "Now it is your turn. Open Puzzle Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/puzzle-forge.png",
+   "label": "Crossword made from a word list in this video",
+   "kind": "image"
   }
  },
  "qr-forge.html": {

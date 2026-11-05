@@ -324,6 +324,69 @@ S('visit-forge.html', {
   }
 });
 
+S('puzzle-forge.html', {
+  title: 'Puzzle Forge', subtitle: 'Word scramble, sudoku and crosswords in nine languages',
+  intro: 'Welcome to Puzzle Forge. Play a word scramble, a sudoku or a crossword in nine languages, or make a crossword from your own words.',
+  async run(h, page) {
+    // Tap the scramble's tiles in the right order.
+    const solveScramble = async () => {
+      const order = await page.evaluate(() => { const s = window.PuzzleForge.state().sc, used = new Set(); return s.ans.map(ch => { const i = s.tiles.findIndex((t, k) => !used.has(k) && !t.used && t.ch === ch); used.add(i); return i; }); });
+      for (const i of order) await h.click('#scTiles .tile[data-i="' + i + '"]', { after: 250 });
+    };
+    await h.step('Pick a puzzle at the top: word scramble, sudoku or crossword. Then choose the language. There are nine, from English and Spanish to Arabic, Chinese and Swahili.', () => h.point('#lang'));
+    await h.step('In the word scramble, read the clue, then tap the letters in the right order. You can also type them.', () => h.point('#scClue'));
+    await h.step('Right! Each answer adds to your score and your streak, and you hear the word spoken.', solveScramble);
+    await h.step('Now the same game in Spanish. Tick Show the English meaning if you are learning the language.', async () => { await h.select('#lang', 'es'); await h.check('#showEn'); await h.point('#scMeaning'); });
+    await h.step('Stuck? A hint puts the next letter in place, and Show answer reveals the whole word.', async () => { await h.click('#scHint'); await h.click('#scHint'); });
+    await h.step('Next, sudoku. Choose the size: four by four or six by six for children, or nine by nine from easy to expert. Every puzzle is new and has exactly one answer.', async () => { await h.scroll('#tabs', 'center'); await h.click('#tab-sudoku'); await h.point('#sdSize'); });
+    await h.step('Tap a square, then a number. Squares that break the rules turn red.', async () => {
+      const i = await page.evaluate(() => { const s = window.PuzzleForge.state().sd; return s.cells.findIndex(c => !c.given); });
+      await h.click('#sd .c[data-i="' + i + '"]');
+      const v = await page.evaluate(i => window.PuzzleForge.state().sd.solution[i], i);
+      await h.click('#pad button[data-v="' + v + '"]');
+    });
+    await h.step('Use notes to pencil in the numbers that could go in a square, undo a move, or ask for a hint. Your game is saved on this device.', async () => { await h.click('#sdNotes'); await h.point('#sdHint'); await h.click('#sdNotes'); });
+    await h.step('Switch the symbols to Arabic or Chinese numerals, or to letters.', () => h.select('#sdSym', 'arabic'));
+    await h.step('Now the crossword. A new one is made every time from the words of your language.', async () => { await h.scroll('#tabs', 'center'); await h.click('#tab-crossword'); await h.select('#lang', 'en'); await h.point('#cw'); });
+    await h.step('Tap a clue or a square, then type. Tap the same square again to switch between across and down.', async () => {
+      const w = await page.evaluate(() => { const c = window.PuzzleForge.state().cw; return { key: c.placed[0].cells[0], word: c.placed[0].L.join('').toLowerCase() }; });
+      await h.click('#clues li[data-w="0"]');
+      await page.keyboard.type(w.word, { delay: 120 });
+    });
+    await h.step('Check marks wrong letters in red, and you can show one letter, a word or the whole answer.', () => h.click('#cwLetter'));
+    await h.step('You can also make a crossword from your own words, like a spelling list or a class topic. Type one word and its clue per line.', async () => { await h.scroll('#tabs', 'center'); await h.click('#tab-words'); await h.click('#wExample'); await h.point('#wordsIn'); });
+    await h.step('Press Make a crossword.', async () => { await h.click('#wCross'); await h.point('#cw'); });
+    await h.sampleShot('#cwPrint', 'Crossword made from a word list in this video');
+    await h.step('Print it to solve on paper, or copy a link to share your words with a class. There is no AI and no server, so everything stays on your device.', () => h.point('#cwPrintBtn'));
+  }
+});
+
+S('dictionary-forge.html', {
+  title: 'Dictionary Forge', subtitle: 'Look up words in nine languages',
+  intro: 'Welcome to Dictionary Forge. Look up a word in nine languages and get it explained simply, in your own language.',
+  async run(h, page) {
+    await h.step('Type a word. Here we look up the Spanish word mariposa.', () => h.type('#q', 'mariposa'));
+    await h.step('Choose the language the word is in, and the language you want it explained in.', async () => { await h.select('#from', 'es'); await h.select('#to', 'en'); });
+    await h.step('Press Look it up.', () => h.click('#go'));
+    await h.skip('Writing the explanation', () => page.waitForSelector('#aiOut .meaning, #aiOut .warn', { timeout: 90000 }));
+    await h.step('You get a simple explanation, how to say it, its forms, and example sentences with translations. Press Listen to hear it.', () => h.point('#aiOut .meaning'));
+    await h.step('Below are the dictionary meanings from Wiktionary, the free dictionary, and the same word in the eight other languages.', async () => { await h.scroll('#wikiOut', 'center'); await h.point('#wikiOut .box'); });
+    await h.step('Tap a translation to look it up in that language. Here is the Swahili word.', async () => { await h.scroll('#aiOut .tr', 'center'); await h.click('#aiOut .tr button[data-l="sw"]'); });
+    await h.skip('Writing the explanation', () => page.waitForSelector('#aiOut .meaning, #aiOut .warn', { timeout: 90000 }));
+    await h.step('Now let us have it explained in Arabic instead. Any of the nine languages works.', async () => { await h.scroll('#form', 'center'); await h.select('#to', 'ar'); });
+    await h.skip('Writing the explanation', () => page.waitForSelector('#aiOut .meaning, #aiOut .warn', { timeout: 90000 }));
+    await h.step('Press Save to keep a word in your list.', async () => { await h.point('#aiOut .meaning'); await h.click('#saveBtn'); });
+    await h.step('Save a few more words. Here we add the German word for butterfly.', async () => {
+      await h.select('#to', 'en'); await h.select('#from', 'de'); await h.type('#q', 'Schmetterling'); await h.click('#go');
+    });
+    await h.skip('Writing the explanation', () => page.waitForSelector('#aiOut .meaning, #aiOut .warn', { timeout: 90000 }));
+    await h.click('#saveBtn');
+    await h.step('Your words are listed with a short meaning. Download them as a spreadsheet.', async () => { await h.scroll('#minePanel', 'center'); await h.point('#mineTable'); });
+    await h.sampleDownload('#csvBtn', 'Word list saved in this video');
+    await h.step('Or press Make a crossword, and Puzzle Forge turns your words into a crossword or a word scramble to help you remember them.', () => h.point('#toCross'));
+  }
+});
+
 S('tune-forge.html', {
   title: 'Tune Forge', subtitle: 'Tuner, metronome and sound level meter for musicians',
   intro: 'Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.',
