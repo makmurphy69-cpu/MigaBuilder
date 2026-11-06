@@ -554,14 +554,19 @@
   }
 
   // ---------- frame list ----------
+  let frameBatch = 0;
   drawingInput.addEventListener('change', function (e) {
     const files = Array.from(e.target.files || []);
-    files.forEach(file => {
+    // Pictures load at different speeds; keep them in the order they were picked (it is an animation).
+    const batch = ++frameBatch;
+    files.forEach((file, seq) => {
       const reader = new FileReader();
       reader.onload = function () {
         const img = new Image();
         img.onload = function () {
-          frames.push({ id: ++frameIdCounter, img, dataUrl: reader.result, name: file.name, duration: 3 });
+          const item = { id: ++frameIdCounter, img, dataUrl: reader.result, name: file.name, duration: 3, batch, seq };
+          const at = frames.findIndex(f => f.batch === batch && f.seq > seq);
+          if (at < 0) frames.push(item); else frames.splice(at, 0, item);
           renderFrameList();
         };
         img.src = reader.result;

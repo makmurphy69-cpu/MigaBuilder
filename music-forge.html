@@ -2841,7 +2841,7 @@
   }));
   $('fnNorm').addEventListener('change', schedule);
   $('fnLoop').addEventListener('change', () => { audio.loop = $('fnLoop').checked; });
-  $('fnReset').onclick = () => { resetEdits(); rebuild(false); };
+  $('fnReset').onclick = () => { if (!F.buf) return; resetEdits(); rebuild(false); };
   function resetEdits() { const d = F.buf.duration; ['fnStart', 'fnEnd'].forEach(id => { $(id).max = d.toFixed(1); }); $('fnStart').value = 0; $('fnEnd').value = d.toFixed(1); $('fnFadeIn').value = 0; $('fnFadeOut').value = 0; $('fnVol').value = 0; $('fnNorm').checked = true; labels(); }
 
   // Playback

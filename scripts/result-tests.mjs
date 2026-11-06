@@ -1452,6 +1452,40 @@ for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'i
   });
 }
 
+test('paint-forge: the whole canvas can be painted on a laptop-sized screen, and the export shows the strokes', 'paint-forge.html', async (page) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  const c = page.locator('#viewCanvas');
+  await c.scrollIntoViewIfNeeded();
+  const bb = await c.boundingBox();
+  // The left edge of the canvas must be on screen and under the pointer (it was cut off when the canvas was wider than its box).
+  const top = await page.evaluate(([x, y]) => document.elementFromPoint(x, y).id, [bb.x + 10, bb.y + 60]);
+  expect(top === 'viewCanvas', 'the left edge of the canvas is hidden under "' + top + '"');
+  await page.mouse.move(bb.x + 15, bb.y + 60); await page.mouse.down(); await page.mouse.move(bb.x + 220, bb.y + 220, { steps: 12 }); await page.mouse.up();
+  const out = await downloadOf(page, () => page.click('#exportPngBtn'));
+  const painted = await page.evaluate(async b64 => { const i = new Image(); i.src = 'data:image/png;base64,' + b64; await i.decode(); const c = document.createElement('canvas'); c.width = i.width; c.height = i.height; const x = c.getContext('2d'); x.drawImage(i, 0, 0); const d = x.getImageData(0, 0, 60, c.height).data; let n = 0; for (let k = 0; k < d.length; k += 4) if (d[k + 3] > 0 && d[k] < 200) n++; return n; }, out.buf.toString('base64'));
+  expect(painted > 100, 'the stroke near the left edge is missing from the export (' + painted + ' pixels)');
+});
+
+test('small fixes: Name Forge splits keywords, Contract Forge keeps one number, Merge and Video Forge keep the file order', 'name-forge.html', async (page) => {
+  await page.fill('#keywordInput', 'bakery, cardamom, fresh');
+  await page.click('#generateBtn');
+  const names = await page.$$eval('#nameList .name-text', e => e.map(x => x.textContent));
+  expect(names.length >= 6 && names.every(n => !/,/.test(n)) && names.some(n => /Cardamom/.test(n)) && names.some(n => /Fresh/.test(n)), 'Name Forge names: ' + names.join(' | '));
+  await page.goto(page.url().replace('name-forge.html', 'contract-forge.html'));
+  await page.fill('#otherParty', 'Ana Lopez'); await page.fill('#scope', 'Weekly delivery of buns.');
+  await page.waitForTimeout(300);
+  const shown = (await page.frameLocator('#previewFrame').locator('.meta').innerText()).match(/C-\d+/)[0];
+  const file = await downloadOf(page, () => page.click('#downloadBtn'));
+  expect(file.name.includes(shown) && file.buf.toString().includes(shown), 'the preview says ' + shown + ' but the download is ' + file.name);
+  for (const [tool, input, list, files] of [['merge-forge.html', '#mediaInput', '#mediaItemsList > *', ['clip.mp4', 'small-photo.png', 'clip.webm']], ['video-forge.html', '#drawingInput', '#frames > *', ['text-1.png', 'small-photo.png', 'text-2.png']]]) {
+    await page.goto(page.url().replace(/[a-z-]+\.html.*/, tool));
+    await page.setInputFiles(input, files.map(f => path.join(FIX, f)));
+    await page.waitForFunction(([sel, n]) => document.querySelectorAll(sel).length === n, [list, files.length], { timeout: 20000 });
+    const order = await page.$$eval(list, e => e.map(x => (x.textContent.match(/[\w-]+\.(mp4|png|webm)/) || [''])[0]));
+    expect(order.join() === files.join(), tool + ' changed the order: ' + order.join(' → '));
+  }
+});
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());
