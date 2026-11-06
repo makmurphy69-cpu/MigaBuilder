@@ -1477,7 +1477,7 @@ test('small fixes: Name Forge splits keywords, Contract Forge keeps one number, 
   const shown = (await page.frameLocator('#previewFrame').locator('.meta').innerText()).match(/C-\d+/)[0];
   const file = await downloadOf(page, () => page.click('#downloadBtn'));
   expect(file.name.includes(shown) && file.buf.toString().includes(shown), 'the preview says ' + shown + ' but the download is ' + file.name);
-  for (const [tool, input, list, files] of [['merge-forge.html', '#mediaInput', '#mediaItemsList > *', ['clip.mp4', 'small-photo.png', 'clip.webm']], ['video-forge.html', '#drawingInput', '#frames > *', ['text-1.png', 'small-photo.png', 'text-2.png']]]) {
+  for (const [tool, input, list, files] of [['merge-forge.html', '#mediaInput', '#mediaItemsList > *', ['clip.webm', 'small-photo.png', 'text-1.png']], ['video-forge.html', '#drawingInput', '#frames > *', ['text-1.png', 'small-photo.png', 'text-2.png']]]) {
     await page.goto(page.url().replace(/[a-z-]+\.html.*/, tool));
     await page.setInputFiles(input, files.map(f => path.join(FIX, f)));
     await page.waitForFunction(([sel, n]) => document.querySelectorAll(sel).length === n, [list, files.length], { timeout: 20000 });

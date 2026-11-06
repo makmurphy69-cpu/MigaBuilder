@@ -442,6 +442,10 @@
           });
           renderMediaItemsList();
         };
+        videoEl.onerror = function () {
+          URL.revokeObjectURL(objectUrl);
+          showError('This browser cannot play "' + file.name + '". Try converting it to MP4 (H.264) or WebM, for example with Clip Forge, then add it again.');
+        };
       } else {
         const reader = new FileReader();
         reader.onload = function () {
