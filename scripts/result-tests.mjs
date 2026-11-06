@@ -1169,8 +1169,9 @@ test('puzzle-forge: a crossword from your own words is valid and solves, and eve
   const n = await page.locator('#clues li').count();
   expect(n >= 4, 'only ' + n + ' of the 6 words went into the crossword');
   // Type the first word, check it, then show the rest.
-  const first = await page.evaluate(() => { const s = window.PuzzleForge.state().cw; return { key: s.placed[0].cells[0], word: s.placed[0].L.join('') }; });
-  await page.click('#cw [data-k="' + first.key + '"] input');
+  // Pick the word by its clue: tapping its first square is ambiguous when an across and a down word both start there.
+  const first = await page.evaluate(() => { const s = window.PuzzleForge.state().cw; return { word: s.placed[0].L.join('') }; });
+  await page.click('#clues li[data-w="0"]');
   await page.keyboard.type(first.word.toLowerCase());
   expect(await page.locator('#clues li.solved').count() >= 1, 'typing ' + first.word + ' did not solve its clue');
   await page.click('#cwAll');
@@ -1187,8 +1188,11 @@ test('puzzle-forge: on a phone the crossword keeps its square when the keyboard 
   await page.setViewportSize({ width: 412, height: 860 });
   await page.click('#tab-crossword');
   await page.waitForSelector('#cw .x.l input');
-  const w = await page.evaluate(() => { const c = window.PuzzleForge.state().cw; return { key: c.placed[0].cells[0], word: c.placed[0].L.join('') }; });
+  const w = await page.evaluate(() => { const c = window.PuzzleForge.state().cw, p = c.placed[0]; return { key: p.cells[0], word: p.L.join(''), label: p.n + ' ' + (p.d === 'a' ? 'across' : 'down') }; });
   await page.click('#cw [data-k="' + w.key + '"] input');
+  // When an across and a down word both start on this square, a second tap switches to the other one.
+  if (!(await page.textContent('#cwCur')).startsWith(w.label)) await page.click('#cw [data-k="' + w.key + '"] input');
+  expect((await page.textContent('#cwCur')).startsWith(w.label), 'tapping the square twice did not pick ' + w.label);
   await page.setViewportSize({ width: 412, height: 470 }); // the on-screen keyboard opens
   await page.waitForTimeout(300);
   expect(await page.evaluate(k => document.activeElement.closest('.x.l')?.dataset.k === k, w.key), 'the square lost focus when the keyboard opened');
