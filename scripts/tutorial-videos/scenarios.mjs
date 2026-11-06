@@ -324,6 +324,30 @@ S('visit-forge.html', {
   }
 });
 
+S('plane-forge.html', {
+  title: 'Plane Forge', subtitle: 'Design an airplane and its engine',
+  intro: 'Welcome to Plane Forge. Design an airplane, choose its engine, and find out how well it would fly.',
+  async run(h, page) {
+    const slide = async (sel, v) => { await h.point(sel); await page.$eval(sel, (e, v) => { e.value = v; e.dispatchEvent(new Event('input')); }, String(v)); await h.wait(600); };
+    await h.step('Start from a plane: a trainer, a glider, a microlight, a bush plane, an aerobatic plane, an electric trainer, a turboprop or a business jet. Here we pick the four-seat trainer.', async () => { await h.point('#presets'); await h.click('#preset-trainer'); });
+    await h.step('Press Take-off test. The plane rolls down the runway, lifts off at its take-off speed and climbs away.', async () => { await h.click('#runBtn'); await h.wait(19000); });
+    await h.step('Below, the verdict and scores tell you how well it flies: take-off distance, climb, speed, range, stability and glide.', async () => { await h.scroll('#verdict', 'start'); await h.wait(600); await h.point('#scores'); });
+    await h.step('You also get the stall speed, the climb rate, the ceiling, cruise speed, range with a reserve, and the landing distance.', () => h.point('#results'));
+    await h.step('Now shape the wing. A longer wingspan lowers the drag, so it climbs and glides better.', async () => { await h.scroll('.side', 'start'); await slide('#p_span', 13.5); });
+    await h.step('Change the engine. A turbo-normalised engine keeps its power in thin air, so the plane can fly higher, and a constant-speed propeller turns more of the power into thrust.', async () => { await h.select('#p_turbo', 'turbo'); await h.select('#p_prop', 'cs'); await h.click('#pinBtn'); });
+    await h.step('The thrust and drag chart shows where the plane can fly: wherever the orange thrust is above the blue drag.', async () => { await h.scroll('.viewtabs', 'start'); await h.click('#tabPerf'); await h.wait(700); await h.point('#perfBox'); });
+    await h.step('Climb and ceiling shows how the climb fades as the air gets thinner, up to the service ceiling.', async () => { await h.click('#tabClimb'); await h.wait(700); await h.point('#climbBox'); });
+    await h.step('Stability compares the centre of gravity with the neutral point. Move the weight too far back and the plane becomes unstable.', async () => { await h.click('#tabStab'); await h.scroll('#p_cg', 'center'); await slide('#p_cg', 56); await h.scroll('.viewtabs', 'start'); await h.point('#stabBox'); });
+    await h.step('The checks explain the problem in plain words. We move the weight forward again.', async () => { await h.scroll('#checks', 'center'); await h.point('#checks'); await h.scroll('#p_cg', 'center'); await slide('#p_cg', 34); });
+    await h.step('A glider has no engine. It is all about the glide ratio and how slowly it sinks, so it can stay up in rising air.', async () => { await h.scroll('.side', 'start'); await h.click('#preset-glider'); await h.point('#tab3d'); await page.evaluate(() => document.getElementById('tab3d').click()); await h.wait(800); await h.scroll('#verdict', 'start'); await h.point('#verdict'); });
+    await h.step('And a business jet with a swept wing cruises at nearly 900 kilometres an hour, high above the weather.', async () => { await h.scroll('.side', 'start'); await h.click('#preset-bizjet'); await h.click('#pinBtn'); await h.scroll('#verdict', 'start'); await h.point('#results'); });
+    await h.step('Pin designs to compare them side by side.', async () => { await h.scroll('.viewtabs', 'start'); await h.click('#tabCompare'); await h.point('#compareBox'); });
+    await h.click('#tabPerf');
+    await h.sampleDownload('#dlSpec', 'Spec sheet of the business jet made in this video');
+    await h.step('Download the spec sheet, the flight envelope, a picture or a 3D model. Everything is worked out in your browser.', () => h.point('#dlSpec'));
+  }
+});
+
 S('motor-forge.html', {
   title: 'Motor Forge', subtitle: 'Design a car or motorcycle and build its engine',
   intro: 'Welcome to Motor Forge. Design a car or a motorcycle, build its engine, and find out how well it would work.',
