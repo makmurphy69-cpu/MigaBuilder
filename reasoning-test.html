@@ -109,7 +109,7 @@ var bank={}, session=[], answers=[], index=0, startedAt=0, timerId=0, resultSubm
 var TEST_STATS_URL='https://migabuilder-visits.makmurphy69.workers.dev';
 function rng(seed){var x=seed|0;return function(){x=(x*1664525+1013904223)|0;return (x>>>0)/4294967296}}
 function shuffle(a,r){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(r()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
-function makeOptions(correct,wrong,r){var vals=[String(correct)].concat(wrong.map(String));vals=Array.from(new Set(vals));while(vals.length<4)vals.push(String(Number(correct)+vals.length+2));return shuffle(vals.slice(0,4),r)}
+function makeOptions(correct,wrong,r){var vals=[String(correct)].concat(wrong.map(String));vals=Array.from(new Set(vals));var extra=2;while(vals.length<4&&extra<50){var v=isNaN(Number(correct))?"None of these":String(Number(correct)+extra);extra++;if(vals.indexOf(v)<0)vals.push(v)}return shuffle(vals.slice(0,4),r)}
 function q(text,correct,wrong,explain,method,type,band,r){
  var opts=makeOptions(correct,wrong,r);return {text:text,options:opts,correct:String(correct),explain:explain,method:method,type:type,band:band};
 }
@@ -118,7 +118,7 @@ function numberQuestion(b,n,r){
  if(kind===0){var seq=[],x=a;for(var i=0;i<5;i++){seq.push(x);x+=d+i*(level>3?1:0)}var c=x;return q("What comes next? "+seq.join(", ")+", ?",c,[c+d,c-d,c+2], "The gaps are "+seq.slice(1).map(function(v,i){return v-seq[i]}).join(", ")+". Continuing that gap pattern gives "+c+".","Write the difference between each neighbouring pair. Then look for a pattern in those differences.","Number patterns",b,r)}
  if(kind===1){var ratio=2+Math.floor(level/3),s=[a,a*ratio,a*ratio*ratio,a*ratio*ratio*ratio],ans=s[3]*ratio;return q("Complete the sequence: "+s.join(" → ")+" → ?",ans,[ans+ratio,ans-ratio,s[3]+ratio],"Each number is multiplied by "+ratio+", so "+s[3]+" × "+ratio+" = "+ans+".","Test one simple operation against every step, not only the first step.","Number patterns",b,r)}
  if(kind===2){var base=3+Math.floor(r()*7),sq=base*base,ans2=(base+1)*(base+1);return q("Which number follows? "+(base-2)*(base-2)+", "+(base-1)*(base-1)+", "+sq+", ?",ans2,[sq+base,ans2+2,base+1],"These are consecutive square numbers: "+(base-2)+"², "+(base-1)+"², "+base+"², "+(base+1)+"².","Check whether the numbers are squares, cubes or products of nearby integers.","Number patterns",b,r)}
- if(kind===3){var p=a+d,m=p*(level>4?3:2),ans3=m-d;return q("Apply the same rule: "+a+" becomes "+((a+d)*(level>4?3:2)-d)+". What does "+p+" become?",ans3,[m,m+d,p+d],"The rule is add "+d+", multiply by "+(level>4?3:2)+", then subtract "+d+". Applied to "+p+", the result is "+ans3+".","Infer a rule from the example, then replay every operation in the same order.","Number patterns",b,r)}
+ if(kind===3){var k3=level>4?3:2,p=a+d,ans3=(p+d)*k3-d;return q("Apply the same rule: "+a+" becomes "+((a+d)*k3-d)+". What does "+p+" become?",ans3,[p*k3-d,(p+d)*k3,ans3+d],"The rule is add "+d+", multiply by "+k3+", then subtract "+d+". Applied to "+p+": ("+p+" + "+d+") × "+k3+" − "+d+" = "+ans3+".","Infer a rule from the example, then replay every operation in the same order.","Number patterns",b,r)}
  var u=2+Math.floor(r()*8),v=2+Math.floor(r()*8),ans4=u*v+d;return q("Find the missing value: "+u+" × "+v+" + "+d+" = ?",ans4,[u*(v+d),ans4-d,ans4+d],"Use multiplication before addition: "+u+" × "+v+" = "+(u*v)+", then add "+d+" to get "+ans4+".","Separate the expression into small steps and respect operation order.","Number patterns",b,r);
 }
 function logicQuestion(b,n,r){
