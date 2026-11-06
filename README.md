@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**85 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**86 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -46,6 +46,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Sign Documents** — sign PDFs, Word files and photos with a drawn, typed or uploaded signature
 - **Geography Forge** — click any country for its history, currency, languages, customs and government, then take a quiz
 - **CAD Forge** — draw walls, doors and windows on a floor plan, then get a 3D house with roof and timber framing, plan and elevation drawings, a material list and DXF, OBJ and STL exports
+- **Motor Forge** — design a car (hatchback, sedan, sports coupé, supercar, diesel SUV, V8 pickup, track car, electric car) or a motorcycle (scooter, naked twin, superbike, V-twin cruiser, adventure bike, dirt bike, electric motorcycle) and build its engine: petrol, diesel or electric, 1 to 16 cylinders inline, V or boxer, bore, stroke, compression ratio, rev limit, cam profile, turbo or supercharger boost. See the power and torque curve, then a full-throttle simulation with gear changes, wheelspin, weight transfer and wheelies gives 0–100 km/h, 0–60 mph, quarter mile, top speed, braking distance, cornering grip or lean angle, fuel or energy use, range and CO₂, with scores and plain-language checks (piston speed, knock, diesel compression, tip-over risk). A 3D model with an x-ray engine view and a 0–100 replay, gear table, weights, pinned designs to compare, spec sheet and test-run CSV, OBJ/STL and a printable spec sheet.
 - **Boat Forge** — start from a dinghy, flat-bottom skiff, V-hull runabout, plywood dory, canoe, sea kayak, keel sailboat, catamaran, pontoon or trawler, shape the hull with sliders (beam, depth, bow fullness, transom, deadrise, rocker, sheer, flare), add people, engine, fuel, keel and ballast, mast and sail, cabin and seats, and watch it float and heel in 3D; get the lines plan, hydrostatics (draft, trim, freeboard, GM, form coefficients), a righting-arm stability curve, speed estimates, unrolled stitch-and-glue plywood panels, station molds and offsets, with DXF, SVG, CSV, OBJ and STL downloads
 - **Bug Scanner** — paste code or drop a whole project in 30+ languages to see what it builds, what is wrong and exactly how to fix it
 - **Alphabet Forge** — tap any Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi or Georgian symbol to hear it, learn a word and why it sounds that way, then practise writing it — and type it with the built-in on-screen keyboard (Korean syllables join as you type, Japanese from romaji, Mandarin from pinyin), plus a typing challenge

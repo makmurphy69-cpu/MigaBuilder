@@ -25,6 +25,7 @@
     'model-forge.html': [['.viewport-canvas-wrap']],
     'cad-forge.html': [['#view3dWrap']],
     'boat-forge.html': [['#view3d']],
+    'motor-forge.html': [['#view3d']],
     'sim-forge.html': [['#stage', 1]],
     'geo-forge.html': [['#mapbox']],
     'body-map.html': [['#viewBody'], ['#viewNet']],

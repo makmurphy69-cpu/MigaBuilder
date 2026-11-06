@@ -1257,6 +1257,50 @@ test('ai-client: when the free Gemini model is overloaded, the answer comes from
   });
 } });
 
+test('motor-forge: a bigger engine makes a car quicker, the spec sheet downloads, and a saved design opens again', 'motor-forge.html', async (page) => {
+  const read = () => page.evaluate(() => { const G = window.MotorForge.G; return { hp: G.E.hp, t100: G.S.t100, top: G.top.v * 3.6, range: G.ec.range, mode: window.MotorForge.P.mode, fuel: window.MotorForge.P.fuel }; });
+  await page.click('#preset-sedan');
+  const before = await read();
+  expect(before.hp > 120 && before.hp < 180 && before.t100 > 6 && before.t100 < 11, 'the family sedan is not realistic: ' + JSON.stringify(before));
+  // A turbo and a longer stroke: more power, quicker to 100 km/h.
+  await page.selectOption('#p_induction', 'turbo');
+  await page.$eval('#p_stroke', e => { e.value = 95; e.dispatchEvent(new Event('input')); });
+  await page.waitForFunction(() => window.MotorForge.P.stroke === 95 && window.MotorForge.G.E.liters > 2.1);
+  const after = await read();
+  expect(after.hp > before.hp * 1.4 && after.t100 < before.t100 - 1, 'the turbo did not make it faster: ' + JSON.stringify([before, after]));
+  await page.click('#tabEngine');
+  expect(await page.locator('#engineBox svg path').count() >= 2, 'the power and torque curve is missing');
+  await page.click('#tabPerf');
+  const spec = await downloadOf(page, () => page.click('#dlSpec'));
+  const rows = spec.buf.toString('utf8').replace(/^\ufeff/, '').trim().split(/\r\n/).map(r => r.split(','));
+  const val = k => (rows.find(r => r[0] === k) || [])[1];
+  expect(/-spec\.csv$/.test(spec.name) && rows[0].join() === 'Item,Value,Unit', 'unexpected spec sheet: ' + spec.name + ' ' + rows[0]);
+  expect(Math.abs(+val('0-100 km/h') - after.t100) < 0.01 && Math.abs(+val('Top speed') - after.top) < 1, 'the spec sheet does not match the page: ' + rows.slice(0, 20).join(' | '));
+  const runCsv = await downloadOf(page, () => page.click('#dlCSV'));
+  expect(runCsv.buf.toString('utf8').split(/\r\n/).length > 100, 'the test run CSV is too short');
+  // Motorcycle: the superbike wheelies, an electric motor gives a range.
+  await page.click('#modeBike');
+  await page.click('#preset-superbike');
+  const bike = await read();
+  expect(bike.mode === 'bike' && bike.t100 < 4 && bike.top > 250, 'the superbike is not realistic: ' + JSON.stringify(bike));
+  expect(/wheelie/.test(await page.textContent('#checks')), 'the wheelie check is missing');
+  await page.selectOption('#p_fuel', 'electric');
+  await page.waitForFunction(() => window.MotorForge.G.E.electric);
+  const ev = await read();
+  expect(ev.fuel === 'electric' && ev.range > 50 && ev.range < 600 && /kWh/.test(await page.textContent('#results')), 'the electric motorcycle has no range: ' + JSON.stringify(ev));
+  // Save the design and open it again after a reset.
+  const saved = await downloadOf(page, () => page.click('#saveJson'));
+  const file = path.join(os.tmpdir(), 'motor-test.motor.json');
+  fs.writeFileSync(file, saved.buf);
+  await page.click('#modeCar');
+  await page.setInputFiles('#openJson', file);
+  await page.waitForFunction(() => window.MotorForge.P.mode === 'bike' && window.MotorForge.P.fuel === 'electric');
+  await page.click('#tab3d');
+  await page.click('#pinBtn');
+  await page.click('#tabCompare');
+  expect(await page.locator('#compareBox tr').count() === 2, 'the pinned design is not in the comparison');
+});
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());

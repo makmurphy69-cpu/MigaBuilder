@@ -266,6 +266,7 @@
     'biology-map': ['rousseau', 'axolotl', 'lens'],
     'body-map': ['michelangelo', 'yeti', 'book'],
     'boat-forge': ['renoir', 'nessie', 'wrench', 'cap'],
+    'motor-forge': ['lichtenstein', 'robot', 'wrench', 'cap'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
     'cad-forge': ['leonardo', 'golem', 'pencil'],

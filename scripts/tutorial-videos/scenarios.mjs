@@ -324,6 +324,30 @@ S('visit-forge.html', {
   }
 });
 
+S('motor-forge.html', {
+  title: 'Motor Forge', subtitle: 'Design a car or motorcycle and build its engine',
+  intro: 'Welcome to Motor Forge. Design a car or a motorcycle, build its engine, and find out how well it would work.',
+  async run(h, page) {
+    const slide = async (sel, v) => { await h.point(sel); await page.$eval(sel, (e, v) => { e.value = v; e.dispatchEvent(new Event('input')); }, String(v)); await h.wait(600); };
+    await h.step('Pick a car or a motorcycle, then a starting vehicle: from a city hatchback to a supercar, a pickup or an electric car. Here we start with a family sedan.', async () => { await h.point('.modes'); await h.click('#preset-sedan'); });
+    await h.step('Now build the engine. Choose petrol, diesel or electric, the number of cylinders and the layout. We give it eight cylinders in a V.', async () => { await h.select('#p_cyl', '8'); await h.select('#p_layout', 'v'); });
+    await h.step('Add a turbocharger, and set the bore, stroke, compression and rev limit with the sliders.', async () => { await h.select('#p_induction', 'turbo'); await slide('#p_boost', 0.7); await slide('#p_redline', 7200); });
+    await h.step('The Engine tab draws the torque and power your engine makes at every engine speed, with its size, power per litre and a drawing of the layout.', async () => { await h.scroll('.viewtabs', 'start'); await h.click('#tabEngine'); await h.wait(800); await h.point('#engineBox'); });
+    await h.step('The Performance tab runs a full-throttle test: speed against time, with every gear change, wheelspin and air drag.', async () => { await h.click('#tabPerf'); await h.wait(800); await h.point('#perfBox'); });
+    await h.step('Below, you get the verdict and scores: acceleration, top speed, cornering, braking and economy, then 0 to 100, the quarter mile, braking distance, fuel use and range.', async () => { await h.scroll('#verdict', 'start'); await h.wait(800); await h.point('#scores'); });
+    await h.step('The checks explain problems in plain words. Over 400 horsepower through the front wheels makes them spin and pull the steering.', async () => { await h.scroll('#checks', 'center'); await h.point('#checks'); });
+    await h.step('So we switch to all-wheel drive and sport tyres. Now the power gets to the road.', async () => { await h.scroll('.side', 'start'); await h.scroll('#p_drive', 'center'); await h.select('#p_drive', 'awd'); await h.select('#p_tyre', 'sport'); });
+    await h.step('Back in 3D, press Run the 0 to 100 test to watch the speed, gear and revs, and tick See the engine to look inside.', async () => { await h.scroll('.viewtabs', 'start'); await h.click('#tab3d'); await h.click('#runBtn'); await h.wait(5200); await h.check('#xray'); await h.click('#cam34'); });
+    await h.step('Pin the design to compare it with others later.', async () => { await h.check('#xray', false); await h.click('#pinBtn'); });
+    await h.step('Now a motorcycle. The superbike is so quick that the front wheel lifts, so a wheelie limits its acceleration.', async () => { await h.scroll('.side', 'start'); await h.click('#modeBike'); await h.click('#preset-superbike'); await h.wait(700); });
+    await h.step('Swap the engine for an electric motor, and you get its range and energy use instead of fuel.', async () => { await h.select('#p_fuel', 'electric'); await h.click('#pinBtn'); });
+    await h.step('The Compare tab lists your pinned designs side by side.', async () => { await h.scroll('.viewtabs', 'start'); await h.click('#tabCompare'); await h.point('#compareBox'); });
+    await h.click('#tabPerf');
+    await h.sampleDownload('#dlSpec', 'Spec sheet of the electric superbike made in this video');
+    await h.step('Download the spec sheet, the test run, a picture or a 3D model. Everything is worked out in your browser.', () => h.point('#dlSpec'));
+  }
+});
+
 S('puzzle-forge.html', {
   title: 'Puzzle Forge', subtitle: 'Word scramble, sudoku and crosswords in nine languages',
   intro: 'Welcome to Puzzle Forge. Play a word scramble, a sudoku or a crossword in nine languages, or make a crossword from your own words.',
