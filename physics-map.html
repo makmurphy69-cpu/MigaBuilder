@@ -591,7 +591,7 @@ const Q={
  const:[
   ()=>fixed('How fast does light travel in empty space?','About 300,000 km per second',['About 300 km per second','About 300,000 km per hour','About 3,000 km per second'],'Exactly 299,792,458 m/s.'),
   ()=>fixed('Which is the weakest of the four fundamental forces?','Gravity',['Electromagnetism','Strong nuclear force','Weak nuclear force'],'Gravity is about 10³⁹ times weaker than the strong force — a fridge magnet beats the whole Earth’s pull on a paper clip.'),
-  ()=>{const f=rnd(window.PHYS_FORCES);return {q:tr('Which force is carried by {0}?',tr(f[3])),a:tr(f[0]),opts:window.PHYS_FORCES.filter(x=>x!==f).map(x=>tr(x[0])),why:tr(f[0])+': '+tr(f[4])}},
+  ()=>{const f=rnd(window.PHYS_FORCES.filter(x=>!/\?/.test(x[3])));return {q:tr('Which force is carried by {0}?',tr(f[3])),a:tr(f[0]),opts:window.PHYS_FORCES.filter(x=>x!==f).map(x=>tr(x[0])),why:tr(f[0])+': '+tr(f[4])}},
   ()=>{const kg=rnd([50,60,70,80]),b=rnd(BODIES.filter(x=>['moon','mars','jupiter','mercury'].includes(x.id)));const w=v=>Math.round(v)+' kg';const a=w(kg*b.g/G0);return {q:tr('Someone who weighs {0} kg on Earth stands on a scale on {1}. About what does it read?',kg,nm(b)),a:a,opts:pickDistinct([kg*b.g/G0*2,kg*b.g/G0/2,kg,kg*1.5].map(w),3,[a]),why:tr('{0}’s gravity is {1} times Earth’s: {2} × {1} ≈ {3}.',nm(b),nice(b.g/9.8),kg,a),k:'body:'+b.id}},
   ()=>fixed('In E = mc², what does c stand for?','The speed of light',['The speed of sound','A constant equal to 1','The charge of an electron'],'c is the speed of light; squaring it makes the energy in a small mass enormous.','theory:special'),
   ()=>fixed('What is a light-year?','A distance — how far light goes in a year',['A unit of time','How bright a star is','The age of a star'],'About 9.46 trillion km.'),

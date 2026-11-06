@@ -257,14 +257,16 @@ function pickDistinct(pool,n,avoid){const out=[],seenV=new Set(avoid);shuffle(po
 function makeQ(type,x){
   const others=IDEAS.filter(o=>o.id!==x.id),sameKind=others.filter(o=>(o.kind==='philosophy')===(x.kind==='philosophy'));
   const nameOpts=(excl)=>pickDistinct((sameKind.length>=3?sameKind:others).filter(o=>!excl.includes(o.id)).map(o=>o.name),3,[x.name]);
-  if(type==='thinker'){const t=rnd(x.thinkers),ids=thinkerIdeas(t[0]);return {q:'Which tradition is '+t[0]+' ('+t[1]+') a key figure of?',a:x.name,opts:nameOpts(ids),why:t[0]+' — '+t[2]+(t[3]&&t[3]!=='—'?' (key work: '+t[3]+')':'')+'.',idea:x.id}}
+  if(type==='thinker'){const t=rnd(x.thinkers),ids=[...thinkerIdeas(t[0]),...x.from,...x.to];return {q:'Which tradition is '+t[0]+' ('+t[1]+') a key figure of?',a:x.name,opts:nameOpts(ids),why:t[0]+' — '+t[2]+(t[3]&&t[3]!=='—'?' (key work: '+t[3]+')':'')+'.',idea:x.id}}
   if(type==='work'){const ws=x.thinkers.filter(t=>t[3]&&t[3]!=='—'&&!/^(Wrote nothing|Teachings recorded)/.test(t[3]));if(!ws.length)return null;const t=rnd(ws);
     const pool=IDEAS.flatMap(o=>o.thinkers.map(z=>z[0])).filter(n=>n!==t[0]);return {q:'Who wrote or is known for “'+t[3]+'”?',a:t[0],opts:pickDistinct(pool,3,[t[0]]),why:t[0]+' ('+t[1]+'), a key figure of '+x.name+': '+t[2]+'.',idea:x.id}}
   if(type==='idea'){const i=rnd(x.ideas);return {q:'Which tradition is built around this idea: “'+i+'”?',a:x.name,opts:nameOpts([]),why:x.name+': '+x.summary,idea:x.id}}
   if(type==='connection'){if(!x.from.length&&!x.to.length)return null;
     if(x.from.length&&(Math.random()<.6||!x.to.length)){const f=BY[rnd(x.from)],bad=new Set([x.id,...x.from,...x.to]);return {q:'Which of these did '+x.name+' draw on?',a:f.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[f.name]),why:x.name+' drew on '+x.from.map(z=>BY[z].name).join(', ')+'.',idea:x.id}}
     const t=BY[rnd(x.to)],bad=new Set([x.id,...x.from,...x.to]);return {q:'Which of these was influenced by '+x.name+'?',a:t.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[t.name]),why:x.name+' influenced '+x.to.map(z=>BY[z].name).join(', ')+'.',idea:x.id}}
-  if(type==='rival'){if(!x.rv.size)return null;const r=BY[rnd([...x.rv])],bad=new Set([x.id,...x.rv,...x.from,...x.to]);return {q:'Which of these was a major rival or critic of '+x.name+'?',a:r.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[r.name]),why:x.name+' — '+x.critics,idea:x.id}}
+  if(type==='rival'){if(!x.rv.size)return null;const r=BY[rnd([...x.rv])],bad=new Set([x.id,...x.rv,...x.from,...x.to]);
+    // Ideas that grew out of a rival opposed it too (social democracy came from Marxism), so they can't be wrong answers.
+    IDEAS.forEach(o=>{if(o.from.some(f=>x.rv.has(f)))bad.add(o.id)});return {q:'Which of these was a major rival or critic of '+x.name+'?',a:r.name,opts:pickDistinct(IDEAS.filter(o=>!bad.has(o.id)).map(o=>o.name),3,[r.name]),why:x.name+' — '+x.critics,idea:x.id}}
   if(type==='era'){const pool=IDEAS.filter(o=>Math.abs(o.start-x.start)>60).map(o=>o.era);const opts=pickDistinct(pool,3,[x.era]);if(opts.length<3)return null;return {q:'When did '+x.name+' begin?',a:x.era,opts,why:x.name+' is usually dated from '+x.era+'. '+x.history[0][1]+' ('+yr(x.history[0][0])+').',idea:x.id}}
   if(type==='event'){const h=rnd(x.history),cands=new Set();[-40,-25,-15,15,25,40,60,-60,100,-100].forEach(d=>{const y=h[0]+d;if(y!==h[0]&&y!==0&&y<=2026)cands.add(yr(y))});
     return {q:'In what year? — '+h[1]+'.',a:yr(h[0]),opts:shuffle([...cands]).slice(0,3),why:'This happened in '+yr(h[0])+', in the history of '+x.name+'.',idea:x.id}}

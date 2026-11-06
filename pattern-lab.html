@@ -81,7 +81,7 @@ function buildBank(){
    var v1=base,v2=v1+step,v3=v2*2,v4=v3+step,correct4=v4*2;
    bank.push(item(categories[3],"The rule alternates +"+step+" and ×2. What comes next?\n"+v1+"   →   "+v2+"   →   "+v3+"   →   "+v4+"   →   ?",correct4,[v4+step,v4*2+step,v3*2],"The operations alternate: +"+step+", ×2, +"+step+", ×2. Therefore "+v4+" × 2 = "+correct4+".","Write the operation above each arrow. When one rule does not fit every step, test an alternating pair of rules."));
   }else if(mode===1){
-   var letters=["A","B","C","D","E","F","G","H","I","J","K","L"],start=t%5,jump=2+(t%3),l1=letters[start],l2=letters[start+jump],l3=letters[start+jump+1],l4=letters[start+jump+1+jump],answerL=letters[start+jump+1+jump+1];
+   var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),start=t%5,jump=2+(t%3),l1=letters[start],l2=letters[start+jump],l3=letters[start+jump+1],l4=letters[start+jump+1+jump],answerL=letters[start+jump+1+jump+1];
    bank.push(item(categories[3],"Letters alternate jumps of +"+jump+" and +1. Which comes next?\n"+l1+"   →   "+l2+"   →   "+l3+"   →   "+l4+"   →   ?",answerL,[letters[start+jump+1+jump],letters[start+jump+1+jump+2],l3],"The jumps alternate +"+jump+", +1, +"+jump+", +1. The next letter is "+answerL+".","Convert letters to alphabet positions, write the jumps, and look for a repeating cycle."));
   }else{
    var small=1+(t%4),large=small+2,third=small+large,nextA=small+1,nextB=large+2,answerN=nextA+nextB;

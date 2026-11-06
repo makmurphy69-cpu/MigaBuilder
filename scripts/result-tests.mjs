@@ -1301,6 +1301,118 @@ test('motor-forge: a bigger engine makes a car quicker, the spec sheet downloads
   expect(await page.locator('#compareBox tr').count() === 2, 'the pinned design is not in the comparison');
 });
 
+const fallbackModels = [];
+test('gemini-fallback: Game Forge (an older AI tool) switches to Flash-Lite when Gemini Flash is overloaded', 'game-forge.html', async (page) => {
+  await page.fill('#brief', 'A cat jumps between rooftops collecting fish.');
+  await page.click('#draftBtn');
+  await page.waitForFunction(() => !document.getElementById('draftBtn').disabled && /fish-game-ok/.test(document.getElementById('preview').srcdoc || ''), null, { timeout: 30000 });
+  expect(fallbackModels.join(',') === 'gemini-3.5-flash,gemini-3.5-flash-lite', 'the models asked were ' + fallbackModels.join(','));
+}, { setup: async ctx => {
+  fallbackModels.length = 0;
+  await ctx.route(/migabuilder-gemini/, async route => {
+    if (route.request().method() === 'OPTIONS') return route.fulfill({ status: 204, headers: { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*' } });
+    const body = JSON.parse(route.request().postData() || '{}');
+    fallbackModels.push(body.model);
+    if (body.model === 'gemini-3.5-flash') return route.fulfill({ status: 503, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ error: { code: 503, message: 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.' } }) });
+    const game = '<!doctype html><html><body><canvas width="400" height="300"></canvas><script>/* fish-game-ok */</script></body></html>';
+    await route.fulfill({ status: 200, contentType: 'application/json', headers: { 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ candidates: [{ content: { parts: [{ text: game }] } }] }) });
+  });
+} });
+
+// Question banks built in the page's own code: every answer key must be right and listed exactly once.
+function questionBank(file, start, end, globals) {
+  const src = fs.readFileSync(path.join(ROOT, file), 'utf8');
+  const js = src.slice(src.indexOf(start), src.indexOf(end));
+  return new Function(globals + js + ';buildBank();return bank;')();
+}
+test('reasoning-test: all 1,050 questions have one right answer among four different choices, and the rule questions are worked out correctly', 'reasoning-test.html', async () => {
+  const bank = questionBank('reasoning-test.html', 'function rng', 'function questionSignature', 'var bank={},BANDS=[80,90,100,110,120,130,140],PER_BAND=150;');
+  let n = 0;
+  for (const b of Object.keys(bank)) for (const q of bank[b]) {
+    n++;
+    expect(q.options.length === 4 && new Set(q.options).size === 4, 'choices repeat: ' + q.text + ' → ' + q.options.join(' / '));
+    expect(q.options.filter(o => o === q.correct).length === 1, 'the answer is not a choice: ' + q.text);
+    const m = q.text.match(/: (\d+) becomes (\d+)\. What does (\d+) become/);
+    if (m) { const r = q.explain.match(/add (\d+), multiply by (\d+)/); const d = +r[1], k = +r[2];
+      expect((+m[1] + d) * k - d === +m[2] && String((+m[3] + d) * k - d) === q.correct, 'wrong key: ' + q.text + ' → ' + q.correct); }
+  }
+  expect(n === 1050, 'expected 1,050 questions, found ' + n);
+});
+test('pattern-lab: every question has its answer among different choices, with no "undefined" letters', 'pattern-lab.html', async () => {
+  const bank = questionBank('pattern-lab.html', 'function shuffle', 'function signature', 'var categories=["Number sequences","Symbol patterns","Matrix rules","Rule transformations"],bank=[];');
+  for (const q of bank) {
+    expect(!/undefined|NaN/.test(q.text + q.options.join()), 'broken question: ' + q.text.replace(/\n/g, ' '));
+    expect(new Set(q.options).size === q.options.length && q.options.filter(o => o === q.correct).length === 1, 'bad choices: ' + q.text.replace(/\n/g, ' ') + ' → ' + q.options.join(' / '));
+  }
+});
+test('grammar-forge: a/an follows the sound (an hour, a university, an MBA) and common English slips are caught', 'grammar-forge.html', async (page) => {
+  const run = async t => { await page.fill('#editor', t); await page.click('#check'); await page.waitForTimeout(300); return (await page.textContent('#issues')).replace(/\s+/g, ' '); };
+  for (const ok of ['We waited an hour at a university.', 'It is an honest answer from a European user.', 'A one-time fee and an MBA for a unicorn.', 'Is there going to be a test? I liked their going early.'])
+    expect(!/Suggestion/.test(await run(ok)), 'a correct sentence got a suggestion: ' + ok);
+  const found = await run('I could of gone. Their going home. It was alot of fun. Your welcome. See you tomorow. I saw an big dog and a old cat.');
+  for (const fix of ['could have', "They're", 'a lot', "You're welcome", 'tomorrow', 'an → a', 'a → an']) expect(found.includes(fix), 'missed: ' + fix + ' in ' + found.slice(0, 300));
+});
+test('site-checkup: skipped heading levels are found even with text between them, and unlabelled form fields are flagged', 'site-checkup.html', async (page) => {
+  await page.fill('#htmlInput', '<!doctype html><html><head></head><body><h1>Shop</h1><p>Hi</p><h3>Cakes</h3><h2>About</h2><h4>Team</h4><form><label for="n">Name</label><input id="n"><input type="email"><label>City <input></label><input aria-label="Phone"></form></body></html>');
+  await page.click('#audit'); await page.waitForTimeout(300);
+  const r = (await page.textContent('#results')).replace(/\s+/g, ' ');
+  expect(/Fix: Heading order2 heading\(s\) skip a level/.test(r), 'skipped headings not found: ' + r.slice(0, 300));
+  expect(/Fix: Form labels1 form field/.test(r), 'the unlabelled field was not found: ' + r.slice(0, 400));
+  await page.click('#fix'); await page.waitForTimeout(500);
+  expect((await page.inputValue('#htmlInput')).match(/<h\d/g).join(' ') === '<h1 <h2 <h2 <h3', 'the headings were not renumbered: ' + (await page.inputValue('#htmlInput')).match(/<h\d/g).join(' '));
+});
+test('form-forge: the answer file a respondent saves is labelled with the questions', 'form-forge.html', async (page, ctx) => {
+  await page.fill('#title', 'Feedback'); await page.fill('#questions', 'Your name | short\nHow happy are you? | choice | Very, Somewhat\nAge | number');
+  const form = await downloadOf(page, () => page.click('#download'));
+  const tmp = path.join(os.tmpdir(), 'miga-form-test.html'); fs.writeFileSync(tmp, form.buf);
+  const f = await ctx.newPage(); await f.goto('file://' + tmp);
+  await f.fill('input[type=text]', 'Ana'); await f.selectOption('select', { index: 1 }); await f.fill('input[type=number]', '34');
+  const ans = JSON.parse((await downloadOf(f, () => f.click('button'))).buf.toString('utf8'));
+  expect(ans.form === 'Feedback' && ans.answers['Your name'] === 'Ana' && ans.answers['How happy are you?'] === 'Very' && ans.answers.Age === '34', 'the answers are not labelled: ' + JSON.stringify(ans.answers));
+});
+test('repurpose-forge: the pack is built from your own sentences, with your own hashtags', 'repurpose-forge.html', async (page) => {
+  await page.fill('#source', 'We are opening a new bakery in Malmö on 12 December. Sourdough, cinnamon buns and gluten-free cakes are baked every morning. The first 50 visitors get a free cinnamon bun.');
+  await page.fill('#goal', 'Come and taste it'); await page.click('#generate');
+  const out = await page.textContent('#outputs');
+  expect(!/MigaBuilder|#Productivity|A clearer problem|The problem/.test(out), 'stock phrases are still in the pack: ' + out.slice(0, 300));
+  expect(/• The first 50 visitors get a free cinnamon bun/.test(out) && /#Malmö/.test(out) && /#Cinnamon/.test(out), 'the pack does not use the text: ' + out.slice(0, 400));
+});
+test('pdf-edit-forge: a signature and a date added one after the other do not overlap', 'pdf-edit-forge.html', async (page) => {
+  await page.setInputFiles('#doc', path.join(FIX, 'three-pages.pdf'));
+  await page.waitForFunction(() => /3 pages/.test(document.getElementById('docInfo').textContent), null, { timeout: 20000 });
+  await page.locator('#pad').scrollIntoViewIfNeeded(); const bb = await page.locator('#pad').boundingBox();
+  await page.mouse.move(bb.x + 30, bb.y + bb.height * 0.6); await page.mouse.down();
+  for (let i = 0; i <= 20; i++) await page.mouse.move(bb.x + 30 + i * 12, bb.y + bb.height * (0.6 - 0.3 * Math.sin(i / 3)));
+  await page.mouse.up(); await page.click('#useSig'); await page.click('#addSig'); await page.waitForTimeout(400); await page.click('#addDate'); await page.waitForTimeout(400);
+  const boxes = await page.$$eval('.placed', els => els.map(e => e.getBoundingClientRect()).map(r => [r.top, r.bottom]));
+  expect(boxes.length === 2 && (boxes[0][1] <= boxes[1][0] + 1 || boxes[1][1] <= boxes[0][0] + 1), 'the date overlaps the signature: ' + JSON.stringify(boxes));
+});
+
+// The printable quiz + answer key of each map: every question must have its answer listed once among different choices.
+for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'idea-atlas', 'psychology-atlas']) {
+  test(map + ': printable quizzes have one right answer per question, among different choices', map + '.html', async (page) => {
+    await page.waitForTimeout(1500);
+    const btn = page.locator('button:visible').filter({ hasText: /Printable quiz/i }).first();
+    const strip = h => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+    let checked = 0;
+    for (let k = 0; k < 5; k++) {
+      const html = (await downloadOf(page, () => btn.click())).buf.toString('utf8');
+      const qs = [...html.slice(0, html.indexOf('<h2')).matchAll(/<li><p>([\s\S]*?)<\/p><ol type="A">([\s\S]*?)<\/ol><\/li>/g)].map(m => ({ q: strip(m[1]), opts: [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])) }));
+      const keys = [...html.slice(html.indexOf('Answer key')).matchAll(/<li>([A-Z])\) /g)].map(m => m[1].charCodeAt(0) - 65);
+      expect(qs.length && qs.length === keys.length, 'the answer key does not match the questions (' + qs.length + ' / ' + keys.length + ')');
+      qs.forEach((q, i) => {
+        const a = q.opts[keys[i]];
+        expect(a !== undefined && q.opts.filter(o => o === a).length === 1 && new Set(q.opts).size === q.opts.length, 'bad choices: ' + q.q + ' → ' + q.opts.join(' / '));
+        expect(!/undefined|NaN|\[object/.test(q.q + q.opts.join()), 'broken text: ' + q.q);
+        if (map === 'body-map' && /mainly affect|body system is the/.test(q.q)) expect(!q.q.toLowerCase().includes(a.toLowerCase().replace(/s$/, '')), 'the question gives the answer away: ' + q.q + ' → ' + a);
+        if (map === 'physics-map') expect(!/\?\s*\(/.test(q.q), 'garbled question: ' + q.q);
+        checked++;
+      });
+    }
+    expect(checked >= 40, 'only ' + checked + ' questions were checked');
+  });
+}
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());
