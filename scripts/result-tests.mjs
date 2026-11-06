@@ -1301,6 +1301,45 @@ test('motor-forge: a bigger engine makes a car quicker, the spec sheet downloads
   expect(await page.locator('#compareBox tr').count() === 2, 'the pinned design is not in the comparison');
 });
 
+test('plane-forge: a trainer flies like a real one, a heavier load and a tail-heavy CG are caught, and the spec sheet downloads', 'plane-forge.html', async (page) => {
+  const read = () => page.evaluate(() => { const G = window.PlaneForge.G; return { to: G.to.ok ? G.to.ground : null, roc: G.c0.roc * 196.85, vmax: G.c0.vmax * 1.944, ceil: G.ceiling * 3.281, sm: G.sm, ld: G.ld, range: G.range }; });
+  await page.click('#preset-trainer');
+  const tr = await read();
+  // Roughly a Cessna 172: 300 m take-off run, 700 ft/min, 120 kt, 14,000 ft.
+  expect(tr.to > 150 && tr.to < 350 && tr.roc > 500 && tr.roc < 1000 && tr.vmax > 105 && tr.vmax < 140 && tr.ceil > 11000 && tr.ceil < 20000 && tr.sm > 0.05 && tr.sm < 0.25, 'the trainer is not realistic: ' + JSON.stringify(tr));
+  await page.$eval('#p_structure', e => { e.value = 900; e.dispatchEvent(new Event('input')); });
+  await page.waitForFunction(() => window.PlaneForge.P.structure === 900 && window.PlaneForge.G.A.m > 1300);
+  const heavy = await read();
+  expect(heavy.to > tr.to * 1.3 && heavy.roc < tr.roc - 150, 'a heavier plane did not take off longer and climb slower: ' + JSON.stringify([tr, heavy]));
+  await page.$eval('#p_cg', e => { e.value = 58; e.dispatchEvent(new Event('input')); });
+  await page.waitForFunction(() => window.PlaneForge.P.cg === 58);
+  expect(/neutral point/.test(await page.textContent('#checks')) && (await read()).sm < 0, 'a tail-heavy plane was not called unstable');
+  // A glider glides far and a business jet flies high and fast.
+  await page.click('#preset-glider');
+  const gl = await read();
+  expect(gl.ld > 30 && /tow/.test(await page.textContent('#results')), 'the glider is wrong: ' + JSON.stringify(gl));
+  await page.click('#preset-bizjet');
+  const jet = await read();
+  expect(jet.vmax > 380 && jet.ceil > 35000 && jet.range > 1500, 'the business jet is wrong: ' + JSON.stringify(jet));
+  for (const t of ['#tabPerf', '#tabClimb', '#tabEngine', '#tabStab']) { await page.click(t); }
+  expect(await page.locator('#stabBox svg').count() === 1, 'the stability drawing is missing');
+  await page.click('#tabPerf');
+  expect(await page.locator('#perfBox svg path').count() >= 4, 'the thrust and drag curves are missing');
+  const spec = await downloadOf(page, () => page.click('#dlSpec'));
+  const rows = spec.buf.toString('utf8').replace(/^\ufeff/, '').trim().split(/\r\n/).map(r => r.split(','));
+  const val = k => (rows.find(r => r[0] === k) || [])[1];
+  expect(/-spec\.csv$/.test(spec.name) && Math.abs(+val('Service ceiling') - jet.ceil / 3.281) < 1 && +val('Range with reserve') === Math.round(jet.range), 'the spec sheet does not match the page: ' + rows.slice(0, 30).join(' | '));
+  const env = await downloadOf(page, () => page.click('#dlCSV'));
+  expect(env.buf.toString('utf8').split(/\r\n/).length > 100, 'the flight envelope CSV is too short');
+  // Save the jet, change it, and open it again.
+  const saved = await downloadOf(page, () => page.click('#saveJson'));
+  const file = path.join(os.tmpdir(), 'plane-test.plane.json');
+  fs.writeFileSync(file, saved.buf);
+  await page.click('#preset-micro');
+  await page.setInputFiles('#openJson', file);
+  await page.waitForFunction(() => window.PlaneForge.P.engine === 'jet' && window.PlaneForge.P.engines === 2);
+});
+
 test('afford-forge: the example car is "tight" and the month-by-month plan downloads as CSV', 'afford-forge.html', async (page) => {
   await page.click('#exampleBtn');
   const st = await page.evaluate(() => window.__affordForge.state());

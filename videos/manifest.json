@@ -1432,6 +1432,35 @@
    "kind": "image"
   }
  },
+ "plane-forge.html": {
+  "title": "Plane Forge",
+  "video": "https://videos.migabuilder.com/plane-forge.mp4?v=40e96ccd",
+  "poster": "https://videos.migabuilder.com/plane-forge.jpg?v=5a33cb2f",
+  "duration": 199,
+  "transcript": [
+   "Welcome to Plane Forge. Design an airplane, choose its engine, and find out how well it would fly.",
+   "Start from a plane: a trainer, a glider, a microlight, a bush plane, an aerobatic plane, an electric trainer, a turboprop or a business jet. Here we pick the four-seat trainer.",
+   "Press Take-off test. The plane rolls down the runway, lifts off at its take-off speed and climbs away.",
+   "Below, the verdict and scores tell you how well it flies: take-off distance, climb, speed, range, stability and glide.",
+   "You also get the stall speed, the climb rate, the ceiling, cruise speed, range with a reserve, and the landing distance.",
+   "Now shape the wing. A longer wingspan lowers the drag, so it climbs and glides better.",
+   "Change the engine. A turbo-normalised engine keeps its power in thin air, so the plane can fly higher, and a constant-speed propeller turns more of the power into thrust.",
+   "The thrust and drag chart shows where the plane can fly: wherever the orange thrust is above the blue drag.",
+   "Climb and ceiling shows how the climb fades as the air gets thinner, up to the service ceiling.",
+   "Stability compares the centre of gravity with the neutral point. Move the weight too far back and the plane becomes unstable.",
+   "The checks explain the problem in plain words. We move the weight forward again.",
+   "A glider has no engine. It is all about the glide ratio and how slowly it sinks, so it can stay up in rising air.",
+   "And a business jet with a swept wing cruises at nearly 900 kilometres an hour, high above the weather.",
+   "Pin designs to compare them side by side.",
+   "Download the spec sheet, the flight envelope, a picture or a 3D model. Everything is worked out in your browser.",
+   "Now it is your turn. Open Plane Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/plane-forge.csv",
+   "label": "Spec sheet of the business jet made in this video",
+   "kind": "text"
+  }
+ },
  "policy-forge.html": {
   "title": "Policy Forge",
   "video": "https://videos.migabuilder.com/policy-forge.mp4",

@@ -267,6 +267,7 @@
     'body-map': ['michelangelo', 'yeti', 'book'],
     'boat-forge': ['renoir', 'nessie', 'wrench', 'cap'],
     'motor-forge': ['lichtenstein', 'robot', 'wrench', 'cap'],
+    'plane-forge': ['leonardo', 'owl', 'pencil', 'cap'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
     'cad-forge': ['leonardo', 'golem', 'pencil'],
