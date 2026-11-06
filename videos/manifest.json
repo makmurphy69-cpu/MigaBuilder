@@ -1145,6 +1145,35 @@
    "kind": "image"
   }
  },
+ "motor-forge.html": {
+  "title": "Motor Forge",
+  "video": "https://videos.migabuilder.com/motor-forge.mp4?v=0c4ada80",
+  "poster": "https://videos.migabuilder.com/motor-forge.jpg?v=9b6b5318",
+  "duration": 145,
+  "transcript": [
+   "Welcome to Motor Forge. Design a car or a motorcycle, build its engine, and find out how well it would work.",
+   "Pick a car or a motorcycle, then a starting vehicle: from a city hatchback to a supercar, a pickup or an electric car. Here we start with a family sedan.",
+   "Now build the engine. Choose petrol, diesel or electric, the number of cylinders and the layout. We give it eight cylinders in a V.",
+   "Add a turbocharger, and set the bore, stroke, compression and rev limit with the sliders.",
+   "The Engine tab draws the torque and power your engine makes at every engine speed, with its size, power per litre and a drawing of the layout.",
+   "The Performance tab runs a full-throttle test: speed against time, with every gear change, wheelspin and air drag.",
+   "Below, you get the verdict and scores: acceleration, top speed, cornering, braking and economy, then 0 to 100, the quarter mile, braking distance, fuel use and range.",
+   "The checks explain problems in plain words. Over 400 horsepower through the front wheels makes them spin and pull the steering.",
+   "So we switch to all-wheel drive and sport tyres. Now the power gets to the road.",
+   "Back in 3D, press Run the 0 to 100 test to watch the speed, gear and revs, and tick See the engine to look inside.",
+   "Pin the design to compare it with others later.",
+   "Now a motorcycle. The superbike is so quick that the front wheel lifts, so a wheelie limits its acceleration.",
+   "Swap the engine for an electric motor, and you get its range and energy use instead of fuel.",
+   "The Compare tab lists your pinned designs side by side.",
+   "Download the spec sheet, the test run, a picture or a 3D model. Everything is worked out in your browser.",
+   "Now it is your turn. Open Motor Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/motor-forge.csv",
+   "label": "Spec sheet of the electric superbike made in this video",
+   "kind": "text"
+  }
+ },
  "music-forge.html": {
   "title": "Music Forge",
   "video": "https://videos.migabuilder.com/music-forge.mp4",
