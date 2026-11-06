@@ -609,8 +609,15 @@ const partNames=excl=>PARTS.filter(o=>!excl.includes(o.id)).map(o=>o.name);
 const allIlls=PARTS.flatMap(p=>p.ills.map(i=>({i,p})));
 function makeQ(type,p){
   if(type==='job')return {q:'Which body part does this job? “'+mask(p.job,[p.name])+'”',a:p.name,opts:pickDistinct(partNames([p.id]),3,[p.name]),why:p.name+': '+p.job,part:p.id};
-  if(type==='system'){const own=p.systems.map(s=>SYS[s][0]);return {q:'Which body system is the '+p.name.toLowerCase()+' part of?',a:own[0],opts:pickDistinct(Object.keys(SYS).filter(k=>!p.systems.includes(k)).map(k=>SYS[k][0]),3,own),why:'The '+p.name.toLowerCase()+' belongs to: '+own.join(' and ')+'.',part:p.id}}
-  if(type==='illness'){const i=rnd(p.ills);const bad=new Set(allIlls.filter(x=>x.i[0]===i[0]).map(x=>x.p.id));return {q:'Which body part does “'+i[0]+'” mainly affect?',a:p.name,opts:pickDistinct(partNames([...bad,...p.near]),3,[p.name]),why:i[0]+': '+i[1],part:p.id}}
+  if(type==='system'){const own=p.systems.map(s=>SYS[s][0]);
+    // Skip parts whose name already says the system ("Forearm muscles" → Muscles).
+    if(own.some(o=>o.toLowerCase().split(/[^a-z]+/).filter(w=>w.length>3).some(w=>p.name.toLowerCase().includes(w.replace(/s$/,'')))))return null;
+    return {q:'Which body system is the '+p.name.toLowerCase()+' part of?',a:own[0],opts:pickDistinct(Object.keys(SYS).filter(k=>!p.systems.includes(k)).map(k=>SYS[k][0]),3,own),why:'The '+p.name.toLowerCase()+' belongs to: '+own.join(' and ')+'.',part:p.id}}
+  if(type==='illness'){
+    // Skip illnesses whose name already says the answer ("Liver cancer" → liver).
+    const words=p.name.toLowerCase().replace(/\(.*?\)/g,' ').split(/[^a-z]+/).filter(w=>w.length>3).map(w=>w.replace(/s$/,''));
+    const fair=p.ills.filter(x=>!words.some(w=>x[0].toLowerCase().includes(w)));if(!fair.length)return null;
+    const i=rnd(fair);const bad=new Set(allIlls.filter(x=>x.i[0]===i[0]).map(x=>x.p.id));return {q:'Which body part does “'+i[0]+'” mainly affect?',a:p.name,opts:pickDistinct(partNames([...bad,...p.near]),3,[p.name]),why:i[0]+': '+i[1],part:p.id}}
   if(type==='signs'||type==='treat'){const i=rnd(p.ills),text=type==='signs'?i[2]:i[3];
     let pool=p.ills.filter(x=>x!==i).map(x=>x[0]);if(pool.length<3)pool=pool.concat(allIlls.filter(x=>x.p.id!==p.id).map(x=>x.i[0]));
     return {q:(type==='signs'?'Which condition has these signs? “':'Which condition is treated like this? “')+mask(text,[i[0]])+'”',a:i[0],opts:pickDistinct(pool,3,[i[0]]),why:i[0]+' ('+p.name+') — '+(type==='signs'?'treatment: '+i[3]:'signs: '+i[2]),part:p.id}}

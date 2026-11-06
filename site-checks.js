@@ -13,7 +13,19 @@
 (function () {
   'use strict';
   const text = el => (el && el.textContent || '').replace(/\s+/g, ' ').trim();
-  const SKIPPED = 'h1+h3,h1+h4,h2+h4,h2+h5,h3+h5,h3+h6,h4+h6';
+  // Headings that jump more than one level down from the heading before them in reading
+  // order (h2 → h4), even when other content sits between the two.
+  function skippedHeadings(doc) {
+    const out = []; let prev = 0;
+    doc.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(h => { const lv = +h.tagName[1]; if (prev && lv > prev + 1) out.push(h); prev = lv; });
+    return out;
+  }
+  // Form fields a screen reader cannot name: no <label>, aria-label, aria-labelledby or title.
+  function unlabelledFields(doc) {
+    return Array.from(doc.querySelectorAll('input:not([type=hidden]):not([type=submit]):not([type=button]):not([type=reset]):not([type=image]),select,textarea')).filter(el =>
+      !(el.id && doc.querySelector('label[for="' + el.id.replace(/"/g, '\\"') + '"]')) && !el.closest('label') &&
+      !(el.getAttribute('aria-label') || '').trim() && !el.getAttribute('aria-labelledby') && !(el.getAttribute('title') || '').trim());
+  }
   const VAGUE_LINK = /^\s*(click here|read more|more|here|learn more)\s*$/i;
   const TINY_TEXT = /font-size\s*:\s*[1-9](\.\d+)?px/i;
 
@@ -43,7 +55,10 @@
     add('viewport', !!viewport, 'Mobile viewport', viewport ? 'Viewport is present.' : 'Add a responsive viewport meta tag.', true);
     add('lang', !!lang, 'Page language', lang ? 'Language is set to ' + lang + '.' : 'Add lang to the html element.', true);
     add('canonical', !!canon, 'Canonical URL', canon ? 'Canonical link is present.' : 'Add a canonical link on public pages.', false);
-    add('headings', !doc.querySelectorAll(SKIPPED).length, 'Heading order', 'Avoid skipping heading levels.', true);
+    const skipped = skippedHeadings(doc);
+    add('headings', !skipped.length, 'Heading order', skipped.length ? skipped.length + ' heading(s) skip a level (for example ' + skipped[0].tagName.toLowerCase() + ' “' + clip(text(skipped[0]), 40) + '”). Go down one level at a time.' : 'Avoid skipping heading levels.', true);
+    const unlabelled = unlabelledFields(doc).length;
+    add('labels', !unlabelled, 'Form labels', unlabelled ? unlabelled + ' form field(s) have no label, so screen readers cannot say what to type. Add a <label for="…"> or aria-label.' : 'Every form field has a label.', false);
     const vague = links.filter(a => VAGUE_LINK.test(a.textContent)).length;
     add('links', !vague, 'Descriptive links', vague ? vague + ' link(s) say only “click here” or “read more”. Use link text that explains its destination.' : 'Use link text that explains its destination.', false);
     add('tiny', !Array.from(doc.querySelectorAll('[style]')).some(el => TINY_TEXT.test(el.getAttribute('style'))), 'Readable text', 'Avoid extremely small fixed text.', true);
@@ -112,11 +127,12 @@
       else if (!all.length && doc.querySelector('h2')) retag(doc.querySelector('h2'), 'h1');
     }
     if (todo.has('headings')) {
-      let guard = 0, el;
-      while ((el = doc.querySelector(SKIPPED)) && guard++ < 200) {
-        const prev = +el.previousElementSibling.tagName[1];
-        retag(el, 'h' + (prev + 1));
-      }
+      let prev = 0;
+      Array.from(doc.querySelectorAll('h1,h2,h3,h4,h5,h6')).forEach(h => {
+        let lv = +h.tagName[1];
+        if (prev && lv > prev + 1) { lv = prev + 1; retag(h, 'h' + lv); }
+        prev = lv;
+      });
     }
     if (todo.has('title')) {
       let t = doc.querySelector('title');

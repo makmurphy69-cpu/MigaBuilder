@@ -8,7 +8,7 @@ window.ELEMENTS_RAW=[[1,"H","Hydrogen",1.008,"nonmetal",1,1,1,1,[1],"1s1",2.2,-2
 [3,"Li","Lithium",6.94,"alkali",1,2,1,2,[2,1],"[He] 2s1",0.98,180.5,1329.8,0.534,"S","Johan August Arfwedson","s"],
 [4,"Be","Beryllium",9.012,"alkaline",2,2,2,2,[2,2],"[He] 2s2",1.57,1286.8,2468.8,1.85,"S","Louis Nicolas Vauquelin","s"],
 [5,"B","Boron",10.81,"metalloid",13,2,13,2,[2,3],"[He] 2s2 2p1",2.04,2075.8,3926.8,2.08,"S","Joseph Louis Gay-Lussac","p"],
-[6,"C","Carbon",12.011,"nonmetal",14,2,14,2,[2,4],"[He] 2s2 2p2",2.55,3642,3642,1.821,"S","Ancient Egypt","p"],
+[6,"C","Carbon",12.011,"nonmetal",14,2,14,2,[2,4],"[He] 2s2 2p2",2.55,3642,3642,2.267,"S","Ancient Egypt","p"],
 [7,"N","Nitrogen",14.007,"nonmetal",15,2,15,2,[2,5],"[He] 2s2 2p3",3.04,-210.0,-195.8,1.251,"G","Daniel Rutherford","p"],
 [8,"O","Oxygen",15.999,"nonmetal",16,2,16,2,[2,6],"[He] 2s2 2p4",3.44,-218.8,-183.0,1.429,"G","Carl Wilhelm Scheele","p"],
 [9,"F","Fluorine",18.998,"nonmetal",17,2,17,2,[2,7],"[He] 2s2 2p5",3.98,-219.7,-188.1,1.696,"G","André-Marie Ampère","p"],
