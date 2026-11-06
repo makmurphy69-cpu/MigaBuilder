@@ -1,0 +1,57 @@
+﻿Cube Forge — solution for your 3 × 3 × 3
+Made with Cube Forge on migabuilder.com
+
+How to hold it: white centre at the bottom, green in front (unless step 1 says to turn it).
+Notation: R = right side up, U = top to the left, F = front clockwise, ′ = the other way, 2 = half a turn, y = turn the whole cube so the right side comes to the front.
+
+Stickers (U L F R B D faces, top row first): U:YRY/GYR/WOW L:BYR/GRY/WGR F:BYB/BGW/BBY R:OYR/OOR/OWG B:GWO/BBO/ORG D:YOG/WWB/RGW
+
+Step 1 · White cross
+  Make a white cross on the bottom. Each white edge must also match the centre on its side. Put in one edge at a time.
+  - Put the white–green edge in place: D
+  - Put the white–orange edge in place: R'
+  - Put the white–blue edge in place: D L D' B
+  - Put the white–red edge in place: L'
+
+Step 2 · White corners
+  Finish the white layer. Turn the whole cube so the corner’s spot is at the front right, bring the corner above it, then repeat R U R' U' until it is in place with white at the bottom.
+  - Insert the white–red–green corner: y' R U R' U' R U R' U' R U R' U'
+  - Insert the white–green–orange corner: y R U R' U'
+  - Insert the white–orange–blue corner: y U' R U R' U' R U R' U' R U R' U'
+  - Insert the white–blue–red corner: y U' R U R' U' R U R' U' R U R' U'
+
+Step 3 · Middle layer
+  Find an edge on top without yellow. Turn the top until its front colour matches a centre, turn the cube so that centre is at the front, then send the edge right or left with the matching algorithm.
+  - Put the red–blue edge in the middle layer: U y
+  - Put the red–blue edge in the middle layer (to the left): U' L' U L U F U' F'
+  - Put the orange–green edge in the middle layer: y2
+  - Put the orange–green edge in the middle layer (to the left): U' L' U L U F U' F'
+  - Put the blue–orange edge in the middle layer: U y
+  - Put the blue–orange edge in the middle layer (to the left): U' L' U L U F U' F'
+
+Step 4 · Yellow cross
+  Make a yellow cross on top (the corners do not matter yet). Hold a yellow line left to right, or a yellow L at the back and left, and do F R U R' U' F'. Do it again until the cross is done.
+  - Yellow L: hold it at the back and left: U' F R U R' U' F'
+  - Yellow line: hold it left to right: F R U R' U' F'
+
+Step 5 · Yellow edges
+  Turn the top until two edges match their centres. Hold those two at the back and right and do R U R' U R U2 R'. Then turn the top to line everything up.
+  - Swap the yellow edges: y R U R' U R U2 R'
+
+Step 6 · Place yellow corners
+  Find a corner that is already in its spot (its colours match the three sides, even if it is twisted). Hold it at the front right and do U R U' L' U R' U' L until all corners are in their spots.
+  - Place the yellow corners: U R U' L' U R' U' L y U R U' L' U R' U' L y2 U R U' L' U R' U' L
+
+Step 7 · Twist yellow corners
+  Hold the cube with a wrong corner at the front right. Do R' D' R D two or four times until its yellow is on top, then turn only the top (U) to bring the next wrong corner to the front right. The bottom looks scrambled in between — it fixes itself at the end. Never turn the whole cube during this step.
+  - Hold a wrong corner at the front right: y'
+  - Twist the corner until yellow is on top: R' D' R D R' D' R D R' D' R D R' D' R D
+  - Turn the top to bring the next corner to the front right: U'
+  - Twist the corner until yellow is on top: R' D' R D R' D' R D
+
+Step 8 · Finish
+  Turn the top layer until it matches. Solved!
+  - Line up the top layer: U
+
+Total: 156 moves
+All moves: D R' D L D' B L' y' R U R' U' R U R' U' R U R' U' y R U R' U' y U' R U R' U' R U R' U' R U R' U' y U' R U R' U' R U R' U' R U R' U' U y U' L' U L U F U' F' y2 U' L' U L U F U' F' U y U' L' U L U F U' F' U' F R U R' U' F' F R U R' U' F' y R U R' U R U2 R' U R U' L' U R' U' L y U R U' L' U R' U' L y2 U R U' L' U R' U' L y' R' D' R D R' D' R D R' D' R D R' D' R D U' R' D' R D R' D' R D U

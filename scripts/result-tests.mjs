@@ -1340,6 +1340,57 @@ test('plane-forge: a trainer flies like a real one, a heavier load and a tail-he
   await page.waitForFunction(() => window.PlaneForge.P.engine === 'jet' && window.PlaneForge.P.engines === 2);
 });
 
+test('cube-forge: solves a scrambled 3×3 and 2×2 step by step, spots a flipped edge, takes back a 4×4, and the solution downloads', 'cube-forge.html', async (page) => {
+  const idle = () => page.evaluate(() => window.CubeForge.waitIdle());
+  const solveAll = async () => {
+    await page.click('#solveBtn');
+    await page.waitForSelector('#solveOut .mv');
+    const n = await page.locator('#solveOut .mv').count();
+    await page.locator('#solveOut .mv').nth(n - 1).click();
+    await page.click('#nextBtn'); await idle();
+    return n;
+  };
+  await page.click('#preset-c3');
+  const scramble = "R U R' F2 D L' B U2 R2 F' L D2 B' U";
+  await page.fill('#algInput', scramble);
+  await page.click('#algPlay'); await idle();
+  expect(!(await page.evaluate(() => window.CubeForge.isSolved())), 'the scramble did not scramble the cube');
+  await page.click('#solveBtn');
+  const titles = await page.locator('#solveOut .stage h4').allTextContents();
+  expect(['White cross', 'White corners', 'Middle layer', 'Twist yellow corners'].every(t => titles.some(x => x.includes(t))), 'the beginner steps are missing: ' + titles.join(' | '));
+  const out = await downloadOf(page, () => page.click('#dlSolution'));
+  const txt = out.buf.toString('utf8');
+  const moves = (/All moves: (.*)/.exec(txt) || [])[1];
+  expect(/-solution\.txt$/.test(out.name) && moves && /Step 1/.test(txt), 'the solution file is wrong: ' + txt.slice(0, 300));
+  expect(await page.evaluate(([s, m]) => { const E = window.CubeForge.E, p = new E.Puzzle([3, 3, 3]); p.apply(s); p.apply(m); return p.isSolved(); }, [scramble, moves.trim()]), 'the downloaded moves do not solve the cube');
+  const n3 = await solveAll();
+  expect(n3 > 20 && await page.evaluate(() => window.CubeForge.isSolved()) && /Solved/.test(await page.textContent('#badge')), 'playing the solution did not solve the 3×3');
+  // 2×2
+  await page.click('#preset-c2');
+  await page.click('#scrambleBtn'); await idle();
+  await solveAll();
+  expect(await page.evaluate(() => window.CubeForge.isSolved()), 'the 2×2 solution did not solve it');
+  // A flipped edge painted on a 3×3 is caught.
+  await page.click('#preset-c3');
+  await page.click('#tabNet');
+  const [a, b] = await page.evaluate(() => { const p = window.CubeForge.pz; return [p.slotAt([0, 2, 2], [0, 1, 0]), p.slotAt([0, 2, 2], [0, 0, 1])]; });
+  await page.click('#paint-green'); await page.click(`#netBox rect[data-slot="${a}"]`);
+  await page.click('#paint-yellow'); await page.click(`#netBox rect[data-slot="${b}"]`);
+  await page.click('#netSolve');
+  expect(/flipped/.test(await page.textContent('#solveOut')), 'a flipped edge was not reported: ' + await page.textContent('#solveOut'));
+  // 4×4: scramble, undo, then take back every turn.
+  await page.click('#paintOff').catch(() => {});
+  await page.click('#preset-c4');
+  await page.click('#scrambleBtn'); await idle();
+  await page.click('#pad button[data-f="R"][data-s=""]'); await idle();
+  await page.click('#undoBtn'); await idle();
+  await solveAll();
+  expect(await page.evaluate(() => window.CubeForge.isSolved()), 'taking back the 4×4 turns did not solve it');
+  // A cuboid only allows half turns on its non-square sides.
+  await page.click('#preset-domino');
+  expect(await page.locator('#pad button[data-f="R"][data-s=""]').isDisabled() && !(await page.locator('#pad button[data-f="U"][data-s=""]').isDisabled()), 'the 3×3×2 allows the wrong turns');
+});
+
 const fallbackModels = [];
 test('gemini-fallback: Game Forge (an older AI tool) switches to Flash-Lite when Gemini Flash is overloaded', 'game-forge.html', async (page) => {
   await page.fill('#brief', 'A cat jumps between rooftops collecting fish.');

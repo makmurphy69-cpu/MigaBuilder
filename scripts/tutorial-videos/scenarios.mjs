@@ -324,6 +324,37 @@ S('visit-forge.html', {
   }
 });
 
+S('cube-forge.html', {
+  title: 'Cube Forge', subtitle: 'Learn to solve a twisty cube in 3D',
+  intro: 'Welcome to Cube Forge. Choose how many layers your cube has, turn it in 3D, and learn to solve it one step at a time.',
+  async run(h, page) {
+    const speed = async v => page.$eval('#p_speed', (e, v) => { e.value = v; e.dispatchEvent(new Event('input')); }, String(v));
+    const idle = () => page.evaluate(() => window.CubeForge.waitIdle());
+    const drag = async (from, to) => {
+      const at = p => page.evaluate(p => { const R = window.CubeForge.R3, v = new THREE.Vector3(...p).project(R.cam), r = R.renderer.domElement.getBoundingClientRect(); return [r.left + (v.x + 1) / 2 * r.width, r.top + (1 - v.y) / 2 * r.height]; }, p);
+      const a = await at(from), b = await at(to);
+      await page.mouse.move(a[0], a[1], { steps: 8 }); await page.mouse.down(); await page.mouse.move(b[0], b[1], { steps: 12 }); await page.mouse.up(); await idle(); await h.wait(400);
+    };
+    await speed(7);
+    await h.step('Start with the classic three by three. You can also pick a two by two, big cubes up to ten by ten, or a cuboid.', async () => { await h.point('#presets'); await h.click('#preset-c3'); });
+    await h.step('Drag any sticker to turn its layer. Drag the background to look around the cube.', async () => { await h.scroll('#view3d', 'center'); await drag([2, 0, 3.01], [2, 2.4, 3.01]); await drag([0, 2, 3.01], [-2.4, 2, 3.01]); });
+    await h.step('Or use the move buttons. Each letter is a side: R is the right side, U the top, F the front. A dash means the other way, and a two means half a turn.', async () => { await h.click('#pad button[data-f="R"][data-s="\'"]'); await h.click('#pad button[data-f="U"][data-s="\'"]'); });
+    await h.step('Now press Scramble. The timer starts on your first turn, and stops when the cube is solved.', async () => { await h.click('#scrambleBtn'); await idle(); });
+    await h.step('Press Solve my cube. You get the beginner method in steps: the white cross, the white corners, the middle layer, and then the yellow side.', async () => { await h.click('#solveBtn'); await h.wait(500); await h.point('#solveOut'); });
+    await h.step('Every move is shown big on the cube, in plain words, and the layer that turns next is lit up. Press Next move to follow along with a real cube in your hands.', async () => { await h.scroll('#view3d', 'start'); await h.point('#cap'); await h.click('#nextBtn', { after: 700 }); await h.click('#nextBtn', { after: 700 }); });
+    await h.step('Or press Play this step to watch a whole step, like the white cross.', async () => { await speed(9); await h.click('#stageBtn'); await page.waitForFunction(() => !window.CubeForge.S.playing, null, { timeout: 60000 }); });
+    await h.step('Open Learn to study the method. Each step has the algorithm to remember and a Show me button.', async () => { await h.click('#tabLearn'); await h.scroll('#show3-ycross', 'center'); await h.point('#show3-ycross'); });
+    await h.step('Show me scrambles a cube, does the earlier steps for you, and then plays this step slowly: here, the yellow cross.', async () => { await speed(6); await h.click('#show3-ycross'); await page.waitForFunction(() => !window.CubeForge.S.playing, null, { timeout: 60000 }); });
+    await h.step('Choose how many layers the cube has with this slider. Here is a seven by seven.', async () => { await speed(9); await h.scroll('.side', 'start'); await h.point('#p_n'); await page.$eval('#p_n', e => { e.value = 7; e.dispatchEvent(new Event('input')); e.dispatchEvent(new Event('change')); }); await h.click('#scrambleBtn'); await idle(); await h.point('#view3d'); });
+    await h.step('Big cubes are solved by reduction: make the centres, pair the edges, then solve it like a three by three. The Learn tab shows the two parity algorithms too.', async () => { await h.click('#tabLearn'); await h.scroll('#show4-oll', 'center'); await h.point('#show4-oll'); });
+    await h.step('Cuboids work too, like this three by three by two. Sides that are not square can only turn halfway.', async () => { await h.scroll('.side', 'start'); await h.click('#preset-domino'); await h.click('#scrambleBtn'); await idle(); await h.point('#pad'); });
+    await h.step('To solve your own cube, open Flat view and paint. Pick a colour and tap the stickers to copy your cube, then press Solve these colours.', async () => { await h.click('#preset-c3'); await h.click('#scrambleBtn'); await idle(); await h.click('#tabNet'); await h.point('#palette'); await h.point('#netBox'); });
+    await h.click('#tabSolve');
+    await h.sampleDownload('#dlSolution', 'Step-by-step solution of the cube scrambled in this video');
+    await h.step('Download the solution, a picture, or print a solving guide. Everything runs in your browser.', () => h.point('#dlSolution'));
+  }
+});
+
 S('plane-forge.html', {
   title: 'Plane Forge', subtitle: 'Design an airplane and its engine',
   intro: 'Welcome to Plane Forge. Design an airplane, choose its engine, and find out how well it would fly.',

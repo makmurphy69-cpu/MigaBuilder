@@ -511,6 +511,35 @@
    "kind": "html"
   }
  },
+ "cube-forge.html": {
+  "title": "Cube Forge",
+  "video": "https://videos.migabuilder.com/cube-forge.mp4?v=23d2c7b4",
+  "poster": "https://videos.migabuilder.com/cube-forge.jpg?v=1c0d80fb",
+  "duration": 289,
+  "transcript": [
+   "Welcome to Cube Forge. Choose how many layers your cube has, turn it in 3D, and learn to solve it one step at a time.",
+   "Start with the classic three by three. You can also pick a two by two, big cubes up to ten by ten, or a cuboid.",
+   "Drag any sticker to turn its layer. Drag the background to look around the cube.",
+   "Or use the move buttons. Each letter is a side: R is the right side, U the top, F the front. A dash means the other way, and a two means half a turn.",
+   "Now press Scramble. The timer starts on your first turn, and stops when the cube is solved.",
+   "Press Solve my cube. You get the beginner method in steps: the white cross, the white corners, the middle layer, and then the yellow side.",
+   "Every move is shown big on the cube, in plain words, and the layer that turns next is lit up. Press Next move to follow along with a real cube in your hands.",
+   "Or press Play this step to watch a whole step, like the white cross.",
+   "Open Learn to study the method. Each step has the algorithm to remember and a Show me button.",
+   "Show me scrambles a cube, does the earlier steps for you, and then plays this step slowly: here, the yellow cross.",
+   "Choose how many layers the cube has with this slider. Here is a seven by seven.",
+   "Big cubes are solved by reduction: make the centres, pair the edges, then solve it like a three by three. The Learn tab shows the two parity algorithms too.",
+   "Cuboids work too, like this three by three by two. Sides that are not square can only turn halfway.",
+   "To solve your own cube, open Flat view and paint. Pick a colour and tap the stickers to copy your cube, then press Solve these colours.",
+   "Download the solution, a picture, or print a solving guide. Everything runs in your browser.",
+   "Now it is your turn. Open Cube Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/cube-forge.txt",
+   "label": "Step-by-step solution of the cube scrambled in this video",
+   "kind": "text"
+  }
+ },
  "cv-forge.html": {
   "title": "CV Forge",
   "video": "https://videos.migabuilder.com/cv-forge.mp4",
