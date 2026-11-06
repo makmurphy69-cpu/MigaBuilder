@@ -27,6 +27,7 @@
     'boat-forge.html': [['#view3d']],
     'motor-forge.html': [['#view3d']],
     'plane-forge.html': [['#view3d']],
+    'cube-forge.html': [['#view3d']],
     'sim-forge.html': [['#stage', 1]],
     'geo-forge.html': [['#mapbox']],
     'body-map.html': [['#viewBody'], ['#viewNet']],

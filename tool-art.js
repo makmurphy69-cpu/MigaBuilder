@@ -268,6 +268,7 @@
     'boat-forge': ['renoir', 'nessie', 'wrench', 'cap'],
     'motor-forge': ['lichtenstein', 'robot', 'wrench', 'cap'],
     'plane-forge': ['leonardo', 'owl', 'pencil', 'cap'],
+    'cube-forge': ['mondrian', 'robot', 'star', 'cap'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
     'cad-forge': ['leonardo', 'golem', 'pencil'],
