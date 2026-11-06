@@ -225,7 +225,11 @@ function init3D() {
     scene.add(R3.root); scene.add(R3.pivot);
     setupPointer(renderer.domElement);
     if (THREE.OrbitControls) { R3.controls = new THREE.OrbitControls(cam, renderer.domElement); R3.controls.enablePan = false; R3.controls.enableDamping = true; R3.controls.rotateSpeed = 0.8; }
-    const resize = () => { const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / Math.max(1, h); cam.updateProjectionMatrix(); };
+    const resize = () => {
+      const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / Math.max(1, h); cam.updateProjectionMatrix();
+      // Full screen or a turned phone changes the shape: keep the view direction, refit the whole cube.
+      if (R3 && R3.cubies.length) { const d = fitDistance(); cam.position.setLength(d); if (R3.controls) { R3.controls.maxDistance = Math.max(Math.max(...pz.dims) * 12, d * 2); R3.controls.update(); } }
+    };
     new ResizeObserver(resize).observe(box); resize();
     const loop = t => { requestAnimationFrame(loop); step(t); if (R3.controls) R3.controls.update(); renderer.render(scene, cam); };
     requestAnimationFrame(loop);
@@ -289,13 +293,18 @@ function recolor() {
   if (R3) for (const [slot, m] of R3.stickers) m.material.color.set(E.COLORS[pz.colors[slot]].hex);
   afterChange();
 }
+// Distance at which the whole puzzle fits the view, on whichever side is narrower (tall phones in full screen).
+function fitDistance() {
+  const r = Math.hypot(...pz.dims) * 1.08, vf = R3.cam.fov * Math.PI / 360, hf = Math.atan(Math.tan(vf) * R3.cam.aspect);
+  return r / Math.sin(Math.min(vf, hf));
+}
 function fitCamera(back) {
   if (!R3) return;
-  const big = Math.max(...pz.dims), d = big * 2 * 2.35 + 3;
+  const big = Math.max(...pz.dims), d = fitDistance();
   const v = new THREE.Vector3(0.95, 0.8, 1.25).normalize().multiplyScalar(d);
   if (back) v.set(-v.x, v.y, -v.z);
   R3.cam.position.copy(v); R3.cam.lookAt(0, 0, 0);
-  if (R3.controls) { R3.controls.target.set(0, 0, 0); R3.controls.minDistance = big * 2.2; R3.controls.maxDistance = big * 12; R3.controls.update(); }
+  if (R3.controls) { R3.controls.target.set(0, 0, 0); R3.controls.minDistance = big * 2.2; R3.controls.maxDistance = Math.max(big * 12, d * 2); R3.controls.update(); }
 }
 function highlight(tok) {
   if (!R3) return;
