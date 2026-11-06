@@ -220,7 +220,8 @@ function textImage(text,size,font){const c=document.createElement('canvas'),g=c.
 function initials(){const src=$('typed').value.trim();return src?src.split(/\s+/).map(w=>w[0].toUpperCase()).join('').slice(0,3):''}
 function addItem(src,widthFrac,at){if(!doc)return say('status','Choose a document first (step 1).');const img=new Image();img.onload=()=>{const p=doc.pages[pageIndex],aspect=img.naturalHeight/img.naturalWidth,fw=widthFrac,fh=fw*p.w*aspect/p.h;
   // New items go bottom-right (where signatures usually sit), stacked upward so they do not overlap.
-  const stack=items.filter(x=>x.page===pageIndex).length*.05,fx=at?Math.min(1-fw,Math.max(0,at[0]-fw/2)):Math.max(0,.92-fw),fy=at?Math.min(1-fh,Math.max(0,at[1]-fh/2)):Math.max(0,.88-fh-stack);
+  const onPage=items.filter(x=>x.page===pageIndex),top=onPage.length?Math.min(...onPage.map(x=>x.fy)):.88;
+  const fx=at?Math.min(1-fw,Math.max(0,at[0]-fw/2)):Math.max(0,.92-fw),fy=at?Math.min(1-fh,Math.max(0,at[1]-fh/2)):Math.max(0,Math.min(.88,top-.015)-fh);
   const it={id:nextId++,page:pageIndex,src,fx:Math.min(fx,1-fw),fy,fw,fh,aspect:aspect*p.w/p.h};items.push(it);makeEl(it);layoutItems();select(it)};img.src=src}
 function needSig(){if(!signature){say('status','Create your signature in step 2 first.');$('useSig').scrollIntoView({behavior:'smooth',block:'center'});return false}return true}
 $('addSig').onclick=()=>{if(needSig())addItem(signature,.28)};
