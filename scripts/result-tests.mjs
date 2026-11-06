@@ -1442,7 +1442,8 @@ for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'i
       qs.forEach((q, i) => {
         const a = q.opts[keys[i]];
         expect(a !== undefined && q.opts.filter(o => o === a).length === 1 && new Set(q.opts).size === q.opts.length, 'bad choices: ' + q.q + ' → ' + q.opts.join(' / '));
-        expect(!/undefined|NaN|\[object/.test(q.q + q.opts.join()), 'broken text: ' + q.q);
+        // Whole words only: sodium nitrate is NaNO₃.
+        expect(!/\bundefined\b|\bNaN\b|\[object/.test(q.q + ' ' + q.opts.join(' ')), 'broken text: ' + q.q + ' → ' + q.opts.join(' / '));
         if (map === 'body-map' && /mainly affect|body system is the/.test(q.q)) expect(!q.q.toLowerCase().includes(a.toLowerCase().replace(/s$/, '')), 'the question gives the answer away: ' + q.q + ' → ' + a);
         if (map === 'physics-map') expect(!/\?\s*\(/.test(q.q), 'garbled question: ' + q.q);
         checked++;
