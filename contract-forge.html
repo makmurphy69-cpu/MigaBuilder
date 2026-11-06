@@ -313,6 +313,7 @@
     return I18N.t('docWordService');
   }
 
+  let docNumberCache = '';
   function buildDocument() {
     const type = contractType.value;
     const typeWord = docTypeWord(type);
@@ -326,7 +327,9 @@
 
     const date = new Date().toLocaleDateString();
     const effectiveDateText = esc(effectiveDateInput.value.trim() || date);
-    const docNumber = 'C-' + Date.now().toString().slice(-6);
+    // One number per contract, so the preview, the print and the download match.
+    if (!docNumberCache) docNumberCache = 'C-' + Date.now().toString().slice(-6);
+    const docNumber = docNumberCache;
     const isNda = type === 'NDA';
 
     const bodyParagraphs = isNda

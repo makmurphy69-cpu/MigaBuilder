@@ -421,9 +421,13 @@
   }
 
   // ---------- media items (images + video clips) ----------
+  let batchCounter = 0;
   mediaInput.addEventListener('change', function (e) {
     const files = Array.from(e.target.files || []);
-    files.forEach(file => {
+    // Files load at different speeds; keep them in the order they were picked.
+    const batch = ++batchCounter;
+    const place = item => { const at = mediaItems.findIndex(m => m.batch === batch && m.seq > item.seq); if (at < 0) mediaItems.push(item); else mediaItems.splice(at, 0, item); };
+    files.forEach((file, seq) => {
       if (file.type.startsWith('video/')) {
         const objectUrl = URL.createObjectURL(file);
         const videoEl = document.createElement('video');
@@ -431,19 +435,23 @@
         videoEl.preload = 'auto';
         videoEl.playsInline = true;
         videoEl.onloadedmetadata = function () {
-          mediaItems.push({
+          place({
             id: ++itemIdCounter, kind: 'video', videoEl, objectUrl, name: file.name,
             trimStart: 0, trimEnd: videoEl.duration, naturalDuration: videoEl.duration,
-            mute: false, volume: 1
+            mute: false, volume: 1, batch, seq
           });
           renderMediaItemsList();
+        };
+        videoEl.onerror = function () {
+          URL.revokeObjectURL(objectUrl);
+          showError('This browser cannot play "' + file.name + '". Try converting it to MP4 (H.264) or WebM, for example with Clip Forge, then add it again.');
         };
       } else {
         const reader = new FileReader();
         reader.onload = function () {
           const img = new Image();
           img.onload = function () {
-            mediaItems.push({ id: ++itemIdCounter, kind: 'image', img, dataUrl: reader.result, name: file.name, duration: 3 });
+            place({ id: ++itemIdCounter, kind: 'image', img, dataUrl: reader.result, name: file.name, duration: 3, batch, seq });
             renderMediaItemsList();
           };
           img.src = reader.result;

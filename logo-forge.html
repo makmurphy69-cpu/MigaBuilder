@@ -481,6 +481,7 @@
       nameHint ? ('The business is named "' + nameHint + '" — use this exact name.') : 'Invent a fitting business name if one is not implied by the brief.',
       'Respond with ONLY valid JSON, no markdown fences, in exactly this shape:',
       '{"variants": [{"logoSvg": "<svg viewBox=\\"0 0 200 200\\" xmlns=\\"http://www.w3.org/2000/svg\\">...</svg>", "colors": ["#hex1","#hex2","#hex3"]}, {...}, {...}], "cardHtml": "<!DOCTYPE html>...a complete, self-contained, printable business-card-sized HTML page, 3.5in x 2in, with inline CSS, using the business name, slogan if any, and contact info if given"}',
+      'On the business card, use only contact details (address, email, phone, website, social handles) that appear in the brief, copied exactly. If a detail is not given, show an obvious placeholder such as "your@email.com", "Your address" or "+00 000 000" — never invent a real-looking address, email, phone number or handle.',
       'Each logo must be a simple geometric mark or monogram (not a photo), must look correct on a light background, and must use only its own given palette (each hex value must literally appear as a fill or stroke color in that logo\'s SVG, so it can be swapped later by find-and-replace). Keep each SVG under 2000 characters. Make the three concepts genuinely different from each other (e.g. different mark style, layout, or type treatment), not color variations of the same design.'
     ].join('\n');
 

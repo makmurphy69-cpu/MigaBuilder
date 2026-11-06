@@ -174,15 +174,19 @@
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
   function generateNames(keyword, style, count) {
-    var words = keyword.trim().split(/\s+/).filter(Boolean).map(capitalize);
-    if (!words.length) return [];
-    var base = words.join(' ');
-    var singleWord = words.join('');
+    // "bakery, cardamom, fresh" is three ideas: each name is built from one of them, and punctuation is dropped.
+    var groups = keyword.split(/[,;\/|]+/).map(function (g) {
+      return g.replace(/[^\p{L}\p{N}\s'&-]/gu, ' ').trim().split(/\s+/).filter(Boolean).map(capitalize);
+    }).filter(function (w) { return w.length; });
+    if (!groups.length) return [];
     var bank = WORD_BANKS[style] || WORD_BANKS.modern;
     var results = new Set();
     var attempts = 0;
     while (results.size < count && attempts < count * 12) {
       attempts++;
+      var words = groups[attempts % groups.length];
+      var base = words.join(' ');
+      var singleWord = words.join('');
       var strategy = Math.floor(Math.random() * 5);
       var name;
       if (strategy === 0) {
