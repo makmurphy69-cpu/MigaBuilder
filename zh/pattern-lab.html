@@ -1,0 +1,118 @@
+<!-- Generated from /pattern-lab.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="zh-Hans" data-en-title="Work Pattern Test with Explanations | MigaBuilder"><head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='zh';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script>
+<script src="usage-counter.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Work Pattern Test（含解析）| MigaBuilder</title>
+<meta name="description" content="Work Pattern Test 让你练习雇主常用的数字、符号、矩阵和规则变换类图形推理题，并为每道错题给出正确规则和分步解法。">
+<link rel="canonical" href="https://migabuilder.com/zh/pattern-lab.html">
+<meta property="og:image" content="https://videos.migabuilder.com/pattern-lab.jpg"><meta name="twitter:card" content="summary_large_image"><meta name="robots" content="index,follow">
+<meta property="og:title" content="Work Pattern Test（含解析）"><meta property="og:description" content="Work Pattern Test 让你练习雇主常用的数字、符号、矩阵和规则变换类图形推理题，并为每道错题给出正确规则和分步解法。"><meta property="og:url" content="https://migabuilder.com/zh/pattern-lab.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0e2a47;--deep:#081826;--paper:#edeae0;--ink:#16202b;--cyan:#6fd1e0;--amber:#e2a63b;--green:#4e9e73;--red:#d8604a;--line:rgba(111,209,224,.28)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:"IBM Plex Sans",system-ui,sans-serif;background:var(--navy);color:var(--paper)}body{background-image:linear-gradient(rgba(111,209,224,.13) 1px,transparent 1px),linear-gradient(90deg,rgba(111,209,224,.13) 1px,transparent 1px);background-size:28px 28px}a{color:var(--cyan)}button,select{font:inherit}button{cursor:pointer}.wrap{width:min(920px,calc(100% - 32px));margin:auto}
+header{padding:24px 0 18px;border-bottom:1px solid var(--line)}.brand{display:flex;justify-content:space-between}.brand a{text-decoration:none;color:var(--paper);font:700 20px "Space Grotesk"}.brand small{color:rgba(237,234,224,.62)}main{padding:34px 0 60px}.card{background:var(--paper);color:var(--ink);border-radius:5px;padding:clamp(20px,4vw,38px);box-shadow:0 16px 45px rgba(0,0,0,.22)}
+h1,h2,h3{font-family:"Space Grotesk";margin-top:0}h1{font-size:clamp(32px,6vw,52px);line-height:1.04;letter-spacing:-.04em}.lead{font-size:17px;line-height:1.6;color:#43505c}.bank{font:500 12px "IBM Plex Mono";color:#4e6a72;letter-spacing:.05em}.hidden{display:none!important}.notice{padding:13px 15px;background:#fff8df;border-left:4px solid var(--amber);font-size:13px;line-height:1.55;margin:20px 0}
+.setup{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}.setup div{background:#fff;padding:14px;border:1px solid #d2d1c9;border-radius:4px}.setup strong{display:block;font:700 22px "Space Grotesk"}.setup span{font-size:12px;color:#657078}.btn{border:0;border-radius:4px;padding:12px 18px;font-weight:700;background:var(--amber);color:#3d2b0c}.btn.secondary{background:transparent;border:1px solid #78858d;color:var(--ink)}.btn:disabled{opacity:.45}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.stat{background:#fff;padding:12px;border:1px solid #d2d1c9;border-radius:4px}.stat strong{display:block;font:700 20px "Space Grotesk"}.stat span{font-size:12px;color:#657078}.progress{height:8px;background:#d8d6cc;border-radius:99px;overflow:hidden;margin:18px 0}.progress span{display:block;height:100%;background:var(--cyan)}.qmeta{font:500 12px "IBM Plex Mono";color:#58717a;text-transform:uppercase}.question{font:700 clamp(23px,5vw,34px) "Space Grotesk";line-height:1.35;margin:24px 0;white-space:pre-line}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{min-height:64px;text-align:left;padding:14px;background:#fff;border:1px solid #c5c8c4;border-radius:4px;color:var(--ink);font-size:18px}.answer:hover,.answer.selected{border:2px solid #16758a;background:#e8f7fa}.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.breakdown{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.metric{background:#fff;border:1px solid #d2d1c9;padding:14px;border-radius:4px}.metric strong{font:700 24px "Space Grotesk";display:block}.metric span{font-size:12px;color:#657078}.review{border:1px solid #cac9c1;border-radius:4px;margin:12px 0;overflow:hidden}.review summary{padding:14px;background:#fff;cursor:pointer;font-weight:600}.review.wrong summary{border-left:5px solid var(--red)}.review.right summary{border-left:5px solid var(--green)}.review-body{padding:16px;line-height:1.55}.method{background:#eaf6f7;padding:12px;border-radius:4px}.privacy{font-size:12px;color:#525b62;margin-top:22px}
+@media(max-width:650px){.setup,.stats,.breakdown,.answers{grid-template-columns:1fr}.brand small{display:none}}
+@media print{header,.no-print{display:none}body{background:white}.card{box-shadow:none}.review{break-inside:avoid}.wrap{width:100%}}
+</style><link rel="stylesheet" href="tutorials.css">
+<script src="i18n.js"></script>
+<script src="i18n/pattern-lab.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"它对求职测评有帮助吗？","acceptedAnswer":{"@type":"Answer","text":"它练习的正是许多雇主使用的同类推理题，并演示每道题的解法。"}},{"@type":"Question","name":"Work Pattern Test 免费吗？","acceptedAnswer":{"@type":"Answer","text":"是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"}},{"@type":"Question","name":"我的文件会被上传吗？","acceptedAnswer":{"@type":"Answer","text":"不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。"}}],"inLanguage":"zh"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/pattern-lab.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/pattern-lab.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/pattern-lab.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/pattern-lab.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/pattern-lab.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/pattern-lab.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/pattern-lab.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/pattern-lab.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/pattern-lab.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/pattern-lab.html">
+<!-- /language versions -->
+</head><body>
+<header><div class="wrap brand"><a href="/zh/">MigaBuilder</a><small>Free tools · no signup · private by design</small></div></header>
+<main class="wrap">
+<section class="card" id="start"><p class="bank">EMPLOYER-STYLE APTITUDE PRACTICE</p><h1>Work Pattern Test</h1>
+<p class="lead">Practise the kinds of abstract and inductive pattern questions used in many recruitment processes: number sequences, symbol changes, matrices and changing-rule problems. Your report explains every answer and teaches a reusable solving method for the questions you missed.</p>
+<div class="setup"><div><strong>32</strong><span>randomised questions</span></div><div><strong>4</strong><span>work-test pattern categories</span></div></div>
+<div class="notice"><strong>Practice, not recruitment screening.</strong> This original educational test is not normed against a workforce population and should not be treated as an employment-selection score.</div>
+<button class="btn" id="startBtn">Start work-pattern practice</button><p class="privacy">Questions, answers and results stay in this browser.</p></section>
+<section class="card hidden" id="test"><div class="stats"><div class="stat"><strong id="position">1 / 32</strong><span>Question</span></div><div class="stat"><strong id="answered">0</strong><span>Answered</span></div><div class="stat"><strong id="timer">00:00</strong><span>Elapsed</span></div></div><div class="progress"><span id="progress"></span></div><div class="qmeta" id="category"></div><div class="question" id="question"></div><div class="answers" id="answers"></div><div class="nav"><button class="btn secondary" id="prevBtn">← Previous</button><button class="btn" id="nextBtn" disabled>Next →</button></div></section>
+<section class="card hidden" id="results"><p class="bank">YOUR WORK-PATTERN REPORT</p><h2 id="resultTitle">Your result</h2><p class="lead" id="resultCopy"></p><div class="breakdown" id="breakdown"></div><h3>Review and learn</h3><p>Incorrect answers are shown first. Open any item to see the rule and solving method.</p><div id="reviews"></div><div class="nav no-print"><button class="btn secondary" onclick="window.print()">Print report</button><button class="btn" id="restartBtn">Try a new set</button></div><p class="privacy">Performance can be affected by familiarity, language, fatigue and time pressure. Use the explanations to practise rather than treating one score as a fixed ability.</p></section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Work Pattern Test</h2>
+  <p>Work Pattern Test lets you practise employer-style number, symbol, matrix and rule-transformation patterns, with the correct rule and a step-by-step method for each mistake.</p>
+  <h3>How to use Work Pattern Test</h3>
+  <ol><li>Read the instructions and start when you are ready.</li><li>Press “Start work-pattern practice”.</li><li>Answer each pattern question, then read the worked explanations and print your report.</li></ol>
+  <h3>Does it help with job assessment tests?</h3>
+  <p>It practises the same kinds of pattern questions that many employers use, and shows how to solve each one.</p>
+  <h3>Is Work Pattern Test free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/zh/reasoning-test.html">Reasoning Test</a> · <a href="/zh/cv-forge.html">CV Forge</a> · <a href="/zh/strength-compass.html">Strength Compass</a></p>
+</section>
+
+<script>
+(function(){
+"use strict";
+var categories=["Number sequences","Symbol patterns","Matrix rules","Rule transformations"],bank=[],session=[],responses=[],index=0,started=0,timerId=0;
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function item(category,text,correct,wrong,rule,method){var count=bank.filter(function(x){return x.category===category}).length;return {category:category,text:text,correct:String(correct),options:shuffle([String(correct)].concat(wrong.map(String))),rule:rule,method:method,difficulty:1+(count%3)}}
+function buildBank(){
+ for(var n=0;n<24;n++){
+  var start=2+n%7,gap=2+Math.floor(n/3)%6,seq=[start],g=gap;
+  for(var i=0;i<4;i++){seq.push(seq[seq.length-1]+g);g+=(n%3)}
+  var ans=seq[4]+g;
+  bank.push(item(categories[0],"What comes next?\n"+seq.join("   →   ")+"   →   ?",ans,[ans-gap,ans+gap,seq[4]+g+1],"The gaps are "+seq.slice(1).map(function(v,i){return v-seq[i]}).join(", ")+". The next gap is "+g+", so the answer is "+ans+".","Write the differences between neighbouring numbers. If the gaps change, look for a pattern in the gaps."));
+ }
+ var symbols=["▲","●","■","◆","★","○"],arrows=["↑","→","↓","←"];
+ for(var s=0;s<24;s++){
+  if(s%2===0){var a=symbols[s%symbols.length],b=symbols[(s+1)%symbols.length],count=1+Math.floor(s/6)%3,next=count+1,correct=b.repeat(next);
+   bank.push(item(categories[1],"Continue the pattern:\n"+a.repeat(count)+"   "+b.repeat(count)+"   "+a.repeat(next)+"   ?",correct,[a.repeat(next),b.repeat(count),a+b],"The symbols alternate while the number of copies increases from "+count+" to "+next+".","Track each changing feature separately: symbol, quantity, direction, colour or position."));
+  }else{var st=s%4,turn=(Math.floor(s/4)%2)+1,arr=[arrows[st],arrows[(st+turn)%4],arrows[(st+2*turn)%4]],cor=arrows[(st+3*turn)%4];
+   bank.push(item(categories[1],"Which arrow comes next?\n"+arr.join("   →   ")+"   →   ?",cor,turn===1?[arrows[(st+1)%4],arrows[(st+2)%4],"↗"]:[arrows[(st+1)%4],arrows[(st+3)%4],"↗"],"Each arrow turns "+(turn===1?"90°":"180°")+" clockwise. Repeating that turn gives "+cor+".","Compare one symbol with the next and name the exact transformation before predicting another step."));}
+ }
+ for(var m=0;m<24;m++){
+  if(m%2===0){var x=2+m%6,y=3+Math.floor(m/3)%7,z=x+y,u=x+1,v=y+2,cor2=u+v;
+   bank.push(item(categories[2],"Complete the matrix. Each row follows one rule:\n"+x+"   |   "+y+"   |   "+z+"\n"+u+"   |   "+v+"   |   ?",cor2,[u*v,cor2-1,cor2+2],"In each row, the third value is the sum of the first two. "+u+" + "+v+" = "+cor2+".","Find a rule that explains every cell in the complete row, then apply it unchanged to the incomplete row."));
+  }else{var p=2+m%5,q=2+Math.floor(m/4)%5,prod=p*q,p2=p+1,q2=q+1,cor3=p2*q2;
+   bank.push(item(categories[2],"Complete the matrix. The third value is formed from the first two:\n"+p+"   |   "+q+"   |   "+prod+"\n"+p2+"   |   "+q2+"   |   ?",cor3,[p2+q2,cor3-p2,cor3+q2],"The first row uses multiplication: "+p+" × "+q+" = "+prod+". Therefore "+p2+" × "+q2+" = "+cor3+".","Test simple relationships—addition, subtraction, multiplication and division—against the complete row before choosing one."));
+  }
+ }
+ for(var t=0;t<24;t++){
+  var base=2+(t%6),step=1+(Math.floor(t/3)%4),mode=t%3;
+  if(mode===0){
+   var v1=base,v2=v1+step,v3=v2*2,v4=v3+step,correct4=v4*2;
+   bank.push(item(categories[3],"The rule alternates +"+step+" and ×2. What comes next?\n"+v1+"   →   "+v2+"   →   "+v3+"   →   "+v4+"   →   ?",correct4,[v4+step,v4*2+step,v3*2],"The operations alternate: +"+step+", ×2, +"+step+", ×2. Therefore "+v4+" × 2 = "+correct4+".","Write the operation above each arrow. When one rule does not fit every step, test an alternating pair of rules."));
+  }else if(mode===1){
+   var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),start=t%5,jump=2+(t%3),l1=letters[start],l2=letters[start+jump],l3=letters[start+jump+1],l4=letters[start+jump+1+jump],answerL=letters[start+jump+1+jump+1];
+   bank.push(item(categories[3],"Letters alternate jumps of +"+jump+" and +1. Which comes next?\n"+l1+"   →   "+l2+"   →   "+l3+"   →   "+l4+"   →   ?",answerL,[letters[start+jump+1+jump],letters[start+jump+1+jump+2],l3],"The jumps alternate +"+jump+", +1, +"+jump+", +1. The next letter is "+answerL+".","Convert letters to alphabet positions, write the jumps, and look for a repeating cycle."));
+  }else{
+   var small=1+(t%4),large=small+2,third=small+large,nextA=small+1,nextB=large+2,answerN=nextA+nextB;
+   bank.push(item(categories[3],"Apply the same relationship to the second group:\n"+small+" + "+large+" → "+third+"\n"+nextA+" + "+nextB+" → ?",answerN,[nextA*nextB,answerN-1,answerN+2],"Both groups use addition. "+nextA+" + "+nextB+" = "+answerN+".","Ignore surface changes and identify the relationship connecting the complete example; then transfer that exact relationship."));
+  }
+ }
+}
+function signature(q){return q.text.toLowerCase().replace(/[0-9]+/g,"#").replace(/[▲●■◆★○↑→↓←↗]+/g,"<symbol>").replace(/\s+/g," ")}
+function selectTest(){var out=[],seen=new Set();categories.forEach(function(c){var pool=shuffle(bank.filter(function(x){return x.category===c}));for(var i=0;i<pool.length&&out.filter(function(x){return x.category===c}).length<8;i++){var sig=c+"|"+signature(pool[i]);if(!seen.has(sig)){seen.add(sig);out.push(pool[i])}}for(var j=0;j<pool.length&&out.filter(function(x){return x.category===c}).length<8;j++){if(!out.includes(pool[j]))out.push(pool[j])}});return shuffle(out)}
+function el(id){return document.getElementById(id)}function show(id){["start","test","results"].forEach(function(x){el(x).classList.toggle("hidden",x!==id)})}
+function start(){session=selectTest();responses=new Array(session.length).fill(null);index=0;started=Date.now();show("test");render();clearInterval(timerId);timerId=setInterval(updateTime,1000);updateTime();scrollTo(0,0)}
+function updateTime(){var sec=Math.floor((Date.now()-started)/1000);el("timer").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")}
+function render(){var q=session[index];el("position").textContent=(index+1)+" / "+session.length;el("answered").textContent=responses.filter(function(x){return x!==null}).length;el("progress").style.width=(index/session.length*100)+"%";el("category").textContent=q.category+" · Difficulty "+q.difficulty+" of 3";el("question").textContent=q.text;el("answers").innerHTML="";q.options.forEach(function(o){var b=document.createElement("button");b.className="answer"+(responses[index]===o?" selected":"");b.textContent=o;b.onclick=function(){responses[index]=o;render()};el("answers").appendChild(b)});el("prevBtn").disabled=index===0;el("nextBtn").disabled=responses[index]===null;el("nextBtn").textContent=index===session.length-1?"Finish & learn":"Next →"}
+el("prevBtn").onclick=function(){if(index){index--;render()}};el("nextBtn").onclick=function(){if(responses[index]===null)return;if(index<session.length-1){index++;render();scrollTo(0,0)}else finish()};
+function escapeHtml(v){return String(v).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function finish(){clearInterval(timerId);var correct=0,stats={};categories.forEach(function(c){stats[c]=[0,0]});session.forEach(function(q,i){var ok=responses[i]===q.correct;if(ok)correct++;stats[q.category][1]++;if(ok)stats[q.category][0]++});var pct=Math.round(correct/session.length*100);el("resultTitle").textContent=pct+"% correct";el("resultCopy").textContent="You solved "+correct+" of "+session.length+" patterns. The review below is the most useful part: focus on the methods behind the categories you missed.";el("breakdown").innerHTML="";categories.forEach(function(c){var d=document.createElement("div"),x=stats[c];d.className="metric";d.innerHTML="<strong>"+x[0]+"/"+x[1]+"</strong><span>"+c+"</span>";el("breakdown").appendChild(d)});
+ var rows=session.map(function(q,i){return {q:q,i:i,ok:responses[i]===q.correct}}).sort(function(a,b){return Number(a.ok)-Number(b.ok)});el("reviews").innerHTML="";rows.forEach(function(row){var d=document.createElement("details");d.className="review "+(row.ok?"right":"wrong");d.innerHTML="<summary>"+(row.ok?"✓ Correct":"✗ Learn this rule")+" · "+row.q.category+"</summary><div class='review-body'><p><strong>Question:</strong><br>"+escapeHtml(row.q.text).replace(/\n/g,"<br>")+"</p><p><strong>Your answer:</strong> "+escapeHtml(responses[row.i])+"</p><p><strong>Correct answer:</strong> "+escapeHtml(row.q.correct)+"</p><p><strong>Hidden rule:</strong> "+escapeHtml(row.q.rule)+"</p><div class='method'><strong>How to think:</strong> "+escapeHtml(row.q.method)+"</div></div>";el("reviews").appendChild(d)});show("results");scrollTo(0,0)}
+el("startBtn").onclick=start;el("restartBtn").onclick=function(){show("start");scrollTo(0,0)};buildBank();
+})();
+</script><script src="tutorials.js" defer></script>
+</body></html>

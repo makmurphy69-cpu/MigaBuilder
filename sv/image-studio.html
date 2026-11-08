@@ -1,0 +1,126 @@
+<!-- Generated from /image-studio.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="sv" data-en-title="Free photo editor online — remove background, collage and meme maker — Image Studio | MigaBuilder"><head><meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sv/image-studio.html">
+<meta property="og:title" content="Gratis fotoredigerare online — ta bort bakgrund, collage och memes — Image Studio"><meta property="og:description" content="Image Studio tar bort eller byter bakgrund i bilder med AI som körs på din enhet, gör collage, memes och YouTube-miniatyrer och skalar upp foton."><meta property="og:url" content="https://migabuilder.com/sv/image-studio.html"><meta property="og:type" content="website"><meta property="og:image" content="https://videos.migabuilder.com/image-studio.jpg"><meta name="twitter:card" content="summary_large_image">
+<script src="usage-counter.js" defer></script><script src="heic-support.js" defer></script><script src="miga-progress.js" defer></script><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gratis fotoredigerare online — ta bort bakgrund, collage och memes — Image Studio | MigaBuilder</title><meta name="description" content="Image Studio tar bort eller byter bakgrund i bilder med AI som körs på din enhet, gör collage, memes och YouTube-miniatyrer och skalar upp foton.">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><script src="tutorials.js" defer></script><script src="brand-kit.js" defer></script><style>
+.workspace{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:18px;align-items:start}.preview{background:#081826;padding:14px;border-radius:4px;min-height:360px;display:grid;place-items:center}.preview canvas{max-width:100%;max-height:70vh;background:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.tabs button.active{background:#0e2a47;color:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field input[type=range]{width:100%}.swatches{display:flex;gap:8px;align-items:center}.notice{font-size:12px;color:#59636c;line-height:1.45}@media(max-width:850px){.workspace{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
+</style><script src="i18n.js"></script>
+<script src="i18n/image-studio.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Hur tar jag bort en bakgrund?","acceptedAnswer":{"@type":"Answer","text":"Öppna bilden på bakgrundsfliken och använd effekten. AI-modellen körs på din enhet, så fotot laddas inte upp."}},{"@type":"Question","name":"Är Image Studio gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."}},{"@type":"Question","name":"Kan jag göra en genomskinlig PNG?","acceptedAnswer":{"@type":"Answer","text":"Ja. Välj ”Transparent background” som resultat och ladda ner PNG-filen."}},{"@type":"Question","name":"Varför tar den första bakgrundsborttagningen längre tid?","acceptedAnswer":{"@type":"Answer","text":"AI-modellen laddas ner första gången (7 MB för människor, 115 MB för alla slags motiv) och körs sedan på din enhet, så nästa bilder går mycket snabbare."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/image-studio.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/image-studio.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/image-studio.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/image-studio.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/image-studio.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/image-studio.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/image-studio.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/image-studio.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/image-studio.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/image-studio.html">
+<!-- /language versions -->
+</head><body>
+<nav class="tool-nav"><a href="/sv/">← All tools</a><span>Image Studio</span></nav>
+<header class="masthead"><div><h1>Image Studio</h1><p>Six popular image jobs in one private browser tool.</p></div></header>
+<main><section class="panel"><p class="privacy">🔒 Images stay on this device. Processing happens in your browser.</p>
+<div class="tabs"><button class="secondary tab active" data-mode="background">Background</button><button class="secondary tab" data-mode="collage">Collage</button><button class="secondary tab" data-mode="meme">Meme</button><button class="secondary tab" data-mode="thumbnail">YouTube thumbnail</button><button class="secondary tab" data-mode="upscale">Upscale</button></div>
+<div class="workspace"><div>
+<div class="field"><label for="images">Choose image(s)</label><input id="images" type="file" accept="image/*" multiple></div>
+<div id="background" class="mode"><div class="field"><label for="bgMethod">How to find the background</label><select id="bgMethod"><option value="ai">✨ AI — detect the subject automatically</option><option value="colour">🎯 Colour — click the background to pick it</option></select></div><div id="aiControls"><div class="field"><label for="aiModel">Subject</label><select id="aiModel"><option value="people">People and portraits (fast, 7 MB download)</option><option value="any">Any object — products, pets, cars (115 MB download, needs a recent GPU)</option></select></div><p class="notice" id="aiNote">The AI model downloads once, then runs on this device. Your photo is never uploaded.</p></div><div class="field" id="colourControls" hidden><label for="tolerance">Background removal tolerance: <span id="tolValue">38</span></label><input id="tolerance" type="range" min="5" max="120" value="38"><p class="notice">Click the preview to choose the colour to remove. This works best with plain backgrounds. You can make it transparent, blur it or replace it.</p></div><div class="field"><label for="bgAction">Result</label><select id="bgAction"><option value="transparent">Transparent background</option><option value="blur">Blur background</option><option value="replace">Replace with colour</option></select></div><div class="field"><label for="replaceColor">Replacement colour</label><input id="replaceColor" type="color" value="#6fd1e0"></div><button class="primary" id="applyBackground">Apply background effect</button></div>
+<div id="collage" class="mode" hidden><div class="row"><div class="field"><label for="collageCols">Columns</label><select id="collageCols"><option>2</option><option>3</option><option>4</option></select></div><div class="field"><label for="gap">Gap</label><input id="gap" type="number" min="0" max="60" value="12"></div></div><button class="primary" id="makeCollage">Build collage</button></div>
+<div id="meme" class="mode" hidden><div class="field"><label for="topText">Top text</label><input id="topText" placeholder="WHEN THE BUILD FINALLY WORKS"></div><div class="field"><label for="bottomText">Bottom text</label><input id="bottomText" placeholder="ON THE FIRST TRY"></div><button class="primary" id="makeMeme">Make meme</button></div>
+<div id="thumbnail" class="mode" hidden><div class="field"><label for="thumbTitle">Headline</label><input id="thumbTitle" placeholder="BUILD A WEBSITE IN 5 MINUTES"></div><div class="field"><label for="thumbAccent">Accent colour</label><input id="thumbAccent" type="color" value="#e2a63b"></div><button class="primary" id="makeThumbnail">Create 1280 × 720 thumbnail</button></div>
+<div id="upscale" class="mode" hidden><div class="field"><label for="upMethod">How to upscale</label><select id="upMethod"><option value="ai2">✨ AI sharpen 2× — screenshots, logos, graphics (8 MB download)</option><option value="ai4">✨ AI sharpen 4× — photos (53 MB download)</option><option value="plain">Simple enlarge — no download</option></select></div><div id="plainControls" hidden><div class="field"><label for="scale">Scale</label><select id="scale"><option value="2">2×</option><option value="3">3×</option><option value="4">4×</option></select></div><label style="display:flex;gap:8px;align-items:center;margin-bottom:14px"><input id="smooth" type="checkbox" checked> Smooth enlarged image</label></div><button class="primary" id="makeUpscale">Upscale image</button><p class="notice" id="aiUpNote">The AI model downloads once, then runs on this device. Your photo is never uploaded. It sharpens edges and adds believable detail, so check faces and small text in the result.</p><p class="notice" id="plainUpNote" hidden>Simple enlarging makes the image bigger with smooth browser scaling. It cannot add detail that is not in the original.</p><div id="upProgress"></div></div>
+<div class="actions" style="margin-top:14px"><button class="secondary" id="download">Download PNG</button><button class="secondary" id="reset">Reset</button></div><div class="status" id="status"></div></div>
+<div class="preview"><canvas id="canvas" width="900" height="600" aria-label="Image preview"></canvas></div></div></section></main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Image Studio</h2>
+  <p>Image Studio removes or replaces image backgrounds with on-device AI, builds collages, memes and YouTube thumbnails, and upscales photos.</p>
+  <h3>How to use Image Studio</h3>
+  <ol><li>Choose one or more images and select the background, collage, meme, thumbnail, or upscale tab.</li><li>Press “Apply background effect”.</li><li>Check the live canvas and download the finished PNG.</li></ol>
+  <h3>How do I remove a background?</h3>
+  <p>Open the image in the background tab and apply the effect. The AI model runs on your device, so the photo is not uploaded.</p>
+  <h3>Is Image Studio free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <h3 class="miga-tips">Tips for better results</h3>
+  <ul><li>For portraits, choose “People and portraits”: it is a small download and very fast.</li><li>Use the Colour mode for products photographed on a plain background.</li><li>To upscale, use AI sharpen 4× for photos and 2× for screenshots, logos and graphics.</li></ul>
+  <h3>Can I make a transparent PNG?</h3>
+  <p>Yes. Choose “Transparent background” as the result and download the PNG.</p>
+  <h3>Why does the first background removal take longer?</h3>
+  <p>The AI model is downloaded the first time (7 MB for people, 115 MB for any object) and then runs on your device, so later images are much faster.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/picture-forge.html">Picture Forge</a> · <a href="/sv/file-forge.html">Image Forge</a> · <a href="/sv/post-forge.html">Post Forge</a></p>
+</section>
+
+<footer>Part of <a href="/sv/">MigaBuilder</a>. No account required.</footer>
+<script>
+const $=id=>document.getElementById(id),canvas=$('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});let loaded=[],base=null,picked=[255,255,255];
+function note(s){$('status').textContent=s;$('status').classList.add('show')}function fit(img,w,h){const r=Math.min(w/img.width,h/img.height);return{w:img.width*r,h:img.height*r}}
+function loadFile(f){return new Promise((ok,no)=>{const i=new Image;i.onload=()=>{URL.revokeObjectURL(i.src);ok(i)};i.onerror=no;i.src=URL.createObjectURL(f)})}
+async function readImages(){loaded=[];for(const f of $('images').files)loaded.push(await loadFile(f));if(!loaded.length)return;drawBase(loaded[0]);note(loaded.length+' image(s) loaded.')}function drawBase(img){canvas.width=img.naturalWidth||img.width;canvas.height=img.naturalHeight||img.height;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);base=ctx.getImageData(0,0,canvas.width,canvas.height)}
+$('images').onchange=readImages;
+// A picture handed over by Picture Forge ("Edit in Image Studio") waits in IndexedDB once.
+if(/[?&]from=picture-forge\b/.test(location.search)&&window.indexedDB){const rq=indexedDB.open('miga-handoff',1);rq.onupgradeneeded=()=>rq.result.createObjectStore('files',{keyPath:'id'});rq.onsuccess=()=>{const d=rq.result,t=d.transaction('files','readwrite'),st=t.objectStore('files'),g=st.get('image');g.onsuccess=async()=>{const it=g.result;st.delete('image');if(!it||!it.blob)return;try{loaded=[await loadFile(it.blob)];drawBase(loaded[0]);note('Your Picture Forge picture is loaded. Pick a tab to edit it.')}catch(e){note('Could not open the picture from Picture Forge.')}};t.oncomplete=()=>d.close()}}document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.mode').forEach(x=>x.hidden=x.id!==b.dataset.mode)});$('tolerance').oninput=()=>$('tolValue').textContent=$('tolerance').value;
+canvas.onclick=e=>{if(!base||$('bgMethod').value!=='colour')return;const r=canvas.getBoundingClientRect(),x=Math.floor((e.clientX-r.left)*canvas.width/r.width),y=Math.floor((e.clientY-r.top)*canvas.height/r.height),d=base.data,i=(y*canvas.width+x)*4;picked=[d[i],d[i+1],d[i+2]];note('Background colour sampled. Press Apply background effect.')};
+// Blend the chosen background effect into the image using a 0-255 subject mask (255 = keep).
+function applyMask(mask){const out=new ImageData(new Uint8ClampedArray(base.data),base.width,base.height),d=out.data,action=$('bgAction').value,hex=$('replaceColor').value,m=[parseInt(hex.slice(1,3),16),parseInt(hex.slice(3,5),16),parseInt(hex.slice(5),16)];let blurred;
+  if(action==='blur'){const c=document.createElement('canvas');c.width=base.width;c.height=base.height;const g=c.getContext('2d');g.filter='blur(16px)';g.drawImage(loaded[0],-18,-18,c.width+36,c.height+36);blurred=g.getImageData(0,0,c.width,c.height).data}
+  for(let i=0,p=0;i<d.length;i+=4,p++){const a=mask[p]/255;if(a>=1)continue;if(action==='transparent')d[i+3]=Math.round(d[i+3]*a);else{const bg=action==='replace'?m:[blurred[i],blurred[i+1],blurred[i+2]];for(let k=0;k<3;k++)d[i+k]=Math.round(d[i+k]*a+bg[k]*(1-a))}}
+  ctx.putImageData(out,0,0)}
+function colourMask(){const d=base.data,t=+$('tolerance').value,mask=new Uint8ClampedArray(d.length/4);for(let i=0,p=0;i<d.length;i+=4,p++)mask[p]=Math.hypot(d[i]-picked[0],d[i+1]-picked[1],d[i+2]-picked[2])<t?0:255;return mask}
+let tf=null,segmenters={},gpuF16=null,aiFallback=false;
+async function hasGpuF16(){if(gpuF16!==null)return gpuF16;try{const a=navigator.gpu&&await navigator.gpu.requestAdapter();gpuF16=!!(a&&a.features.has('shader-f16'))}catch(e){gpuF16=false}return gpuF16}
+async function segmenter(kind){if(segmenters[kind])return segmenters[kind];
+  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+  const progress=x=>{if(x.status==='progress'&&x.total>1e6)note('Downloading the AI model (first time only): '+Math.round(x.progress)+'%')};
+  const opts=kind==='any'?{device:'webgpu',dtype:'fp16',progress_callback:progress}:{device:'wasm',dtype:'q8',progress_callback:progress};
+  segmenters[kind]=await tf.pipeline('background-removal',kind==='any'?'onnx-community/BiRefNet_lite-ONNX':'Xenova/modnet',opts);return segmenters[kind]}
+async function aiMask(){let kind=$('aiModel').value;if(kind==='any'&&!(await hasGpuF16())){kind='people';$('aiModel').value='people';aiFallback=true}
+  const src=document.createElement('canvas');src.width=base.width;src.height=base.height;src.getContext('2d').putImageData(base,0,0);
+  const seg=await segmenter(kind);note('Finding the subject…');const res=await seg(tf.RawImage.fromCanvas(src)),img=Array.isArray(res)?res[0]:res;
+  // The model returns an RGBA image whose alpha is the subject mask; read it back at the original size.
+  const oc=img.toCanvas(),c=document.createElement('canvas');c.width=base.width;c.height=base.height;c.getContext('2d').drawImage(oc,0,0,c.width,c.height);const px=c.getContext('2d').getImageData(0,0,c.width,c.height).data,mask=new Uint8ClampedArray(px.length/4);for(let i=0;i<mask.length;i++)mask[i]=px[i*4+3];return mask}
+$('bgMethod').onchange=()=>{const ai=$('bgMethod').value==='ai';$('aiControls').hidden=!ai;$('colourControls').hidden=ai};
+$('applyBackground').onclick=async()=>{if(!base)return note('Choose an image first.');const btn=$('applyBackground');btn.disabled=true;
+  try{if($('bgMethod').value==='ai'){note('Loading the AI model…');aiFallback=false;applyMask(await aiMask());note(aiFallback?'This browser has no compatible GPU for the any-object model, so the people model was used. For products on plain backgrounds, try the Colour method.':'Background effect applied. The AI ran on this device — nothing was uploaded.')}else{applyMask(colourMask());note('Background effect applied locally.')}}
+  catch(e){note('The AI could not run here ('+(e.message||e)+'). Try the Colour method instead.');$('bgMethod').value='colour';$('bgMethod').onchange()}finally{btn.disabled=false}};
+$('makeCollage').onclick=()=>{if(!loaded.length)return note('Choose at least two images.');const cols=+$('collageCols').value,gap=+$('gap').value,cellW=500,cellH=360,rows=Math.ceil(loaded.length/cols);canvas.width=cols*cellW+(cols+1)*gap;canvas.height=rows*cellH+(rows+1)*gap;ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);loaded.forEach((im,n)=>{const x=gap+(n%cols)*(cellW+gap),y=gap+Math.floor(n/cols)*(cellH+gap),r=Math.max(cellW/im.width,cellH/im.height),w=im.width*r,h=im.height*r;ctx.save();ctx.beginPath();ctx.rect(x,y,cellW,cellH);ctx.clip();ctx.drawImage(im,x+(cellW-w)/2,y+(cellH-h)/2,w,h);ctx.restore()});note('Collage created.')};
+function outlined(text,y,size){ctx.font=`900 ${size}px Arial,sans-serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.lineWidth=Math.max(5,size/12);ctx.strokeStyle='#000';ctx.strokeText(text,canvas.width/2,y,canvas.width*.92);ctx.fillStyle='#fff';ctx.fillText(text,canvas.width/2,y,canvas.width*.92)}
+$('makeMeme').onclick=()=>{if(!loaded[0])return note('Choose an image first.');drawBase(loaded[0]);const s=Math.max(30,canvas.width/11);outlined($('topText').value.toUpperCase(),s*.75,s);outlined($('bottomText').value.toUpperCase(),canvas.height-s*.75,s);note('Meme created.')};
+$('makeThumbnail').onclick=()=>{const im=loaded[0],brand=window.MigaBrand?MigaBrand.get():null,primary=brand&&brand.configured?brand.primary:'#081826',secondary=brand&&brand.configured?brand.body:'#0e2a47',accent=brand&&brand.configured?brand.accent:$('thumbAccent').value;canvas.width=1280;canvas.height=720;const grad=ctx.createLinearGradient(0,0,1280,720);grad.addColorStop(0,primary);grad.addColorStop(1,secondary);ctx.fillStyle=grad;ctx.fillRect(0,0,1280,720);if(im){const r=Math.max(650/im.width,720/im.height),w=im.width*r,h=im.height*r;ctx.globalAlpha=.52;ctx.drawImage(im,630+(650-w)/2,(720-h)/2,w,h);ctx.globalAlpha=1;const shade=ctx.createLinearGradient(430,0,900,0);shade.addColorStop(0,'#081826');shade.addColorStop(1,'transparent');ctx.fillStyle=shade;ctx.fillRect(400,0,600,720)}ctx.fillStyle=accent;ctx.fillRect(72,90,170,13);ctx.fillStyle='#fff';ctx.font='900 84px Arial,sans-serif';ctx.textAlign='left';ctx.textBaseline='top';wrap($('thumbTitle').value.toUpperCase()||'YOUR TITLE',72,145,720,96);ctx.fillStyle=accent;ctx.font='700 30px Arial';ctx.fillText('BUILT WITH MIGABUILDER.COM',76,630);note('YouTube thumbnail created at 1280 × 720.')};
+function wrap(text,x,y,max,line){let words=text.split(/\s+/),row='';for(const w of words){const test=row?row+' '+w:w;if(ctx.measureText(test).width>max&&row){ctx.fillText(row,x,y);row=w;y+=line}else row=test}ctx.fillText(row,x,y)}
+// Upscaling: an on-device Swin2SR model (Transformers.js) sharpens the picture, or the browser simply enlarges it.
+// The AI works on overlapping tiles so big pictures fit in memory, and so Cancel and the progress bar can react between tiles.
+const UPSCALERS={ai2:{model:'Xenova/swin2SR-lightweight-x2-64',scale:2},ai4:{model:'Xenova/swin2SR-realworld-sr-x4-64-bsrgan-psnr',scale:4}},upscalers={},MAX_OUT=6000;
+let upJob=null,upCancelled=false;
+$('upMethod').onchange=()=>{const plain=$('upMethod').value==='plain';$('plainControls').hidden=!plain;$('plainUpNote').hidden=!plain;$('aiUpNote').hidden=plain};
+// The graphics card (WebGPU) is many times faster; without one, or if it fails, the processor (WASM) does the work.
+async function hasGpu(){try{return !!(navigator.gpu&&await navigator.gpu.requestAdapter())}catch(e){return false}}
+async function upscaler(kind,cpuOnly){const key=kind+(cpuOnly?':cpu':'');if(upscalers[key])return upscalers[key];
+  tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+  const progress=x=>{if(x.status==='progress'&&x.total>1e6&&upJob)upJob.update(x.progress/100*.3,'Downloading the AI model (first time only): '+Math.round(x.progress)+'%')};
+  const gpu=!cpuOnly&&await hasGpu();
+  try{upscalers[key]=await tf.pipeline('image-to-image',UPSCALERS[kind].model,{device:gpu?'webgpu':'wasm',dtype:'fp32',progress_callback:progress})}
+  catch(e){if(!gpu)throw e;return upscaler(kind,true)}
+  upscalers[key].onGpu=gpu;return upscalers[key]}
+async function aiUpscale(kind){const im=loaded[0],W=im.naturalWidth||im.width,H=im.naturalHeight||im.height,s=UPSCALERS[kind].scale;
+  if(Math.max(W,H)*s>MAX_OUT)throw new Error(`The result would be wider than ${MAX_OUT} pixels. Choose a smaller picture, or use Simple enlarge.`);
+  let up=await upscaler(kind);const T=128,P=12,cols=Math.ceil(W/T),rows=Math.ceil(H/T),total=cols*rows,out=document.createElement('canvas');out.width=W*s;out.height=H*s;const octx=out.getContext('2d');
+  const tile=document.createElement('canvas'),tctx=tile.getContext('2d');let n=0;
+  for(let ty=0;ty<H;ty+=T)for(let tx=0;tx<W;tx+=T){if(upCancelled)throw new Error('cancelled');
+    const x0=Math.max(0,tx-P),y0=Math.max(0,ty-P),x1=Math.min(W,tx+T+P),y1=Math.min(H,ty+T+P);tile.width=x1-x0;tile.height=y1-y0;tctx.drawImage(im,x0,y0,tile.width,tile.height,0,0,tile.width,tile.height);
+    let res;try{res=await up(tf.RawImage.fromCanvas(tile))}catch(e){if(!up.onGpu)throw e;up=await upscaler(kind,true);res=await up(tf.RawImage.fromCanvas(tile))}res=Array.isArray(res)?res[0]:res;
+    const w=Math.min(T,W-tx),h=Math.min(T,H-ty);octx.drawImage(res.toCanvas(),(tx-x0)*s,(ty-y0)*s,w*s,h*s,tx*s,ty*s,w*s,h*s);
+    n++;upJob.update(.3+.7*n/total,`Sharpening part ${n} of ${total}…`);await new Promise(r=>setTimeout(r))}
+  canvas.width=out.width;canvas.height=out.height;ctx.drawImage(out,0,0)}
+$('makeUpscale').onclick=async()=>{if(!loaded[0])return note('Choose an image first.');const im=loaded[0],kind=$('upMethod').value;
+  if(kind==='plain'){if(upJob)upJob.hide();const s=+$('scale').value;canvas.width=im.width*s;canvas.height=im.height*s;ctx.imageSmoothingEnabled=$('smooth').checked;ctx.imageSmoothingQuality='high';ctx.drawImage(im,0,0,canvas.width,canvas.height);return note(`Image enlarged to ${canvas.width} × ${canvas.height}.`)}
+  const btn=$('makeUpscale');btn.disabled=true;upCancelled=false;upJob=upJob||MigaProgress.create($('upProgress'),{onCancel:()=>{upCancelled=true}});upJob.start('Loading the AI model…');
+  try{await aiUpscale(kind);upJob.done(`Sharpened to ${canvas.width} × ${canvas.height}. The AI ran on this device — nothing was uploaded. Press Download PNG to save it.`);note(`Image sharpened to ${canvas.width} × ${canvas.height}.`)}
+  catch(e){if(upCancelled||e.message==='cancelled'){upJob.fail('Upscaling was cancelled.',[]);drawBase(im)}else upJob.fail(e,['Try AI sharpen 2× — it is smaller and faster','Use a smaller picture','Close other tabs to free memory','Use Simple enlarge, which works everywhere'])}
+  finally{btn.disabled=false}};
+$('download').onclick=()=>canvas.toBlob(b=>{if(!b)return note('Create an image first.');const a=document.createElement('a'),u=URL.createObjectURL(b);a.href=u;a.download='migabuilder-image.png';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)},'image/png');$('reset').onclick=()=>loaded[0]?drawBase(loaded[0]):ctx.clearRect(0,0,canvas.width,canvas.height);
+</script></body></html>

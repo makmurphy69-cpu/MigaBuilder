@@ -1,0 +1,161 @@
+<!-- Generated from /text-compare.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="de" data-en-title="Text Compare — find the difference between two texts | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Text Compare — den Unterschied zwischen zwei Texten finden | MigaBuilder</title>
+<meta name="description" content="Text Compare zeigt genau, was sich zwischen zwei Versionen eines Textes, Vertrags, Aufsatzes oder Codes geändert hat: was hinzugefügt, entfernt und geändert wurde, Zeile für Zeile und Wort für Wort.">
+<link rel="canonical" href="https://migabuilder.com/de/text-compare.html">
+<meta property="og:image" content="https://videos.migabuilder.com/text-compare.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Text Compare — den Unterschied zwischen zwei Texten finden">
+<meta property="og:description" content="Text Compare zeigt genau, was sich zwischen zwei Versionen eines Textes, Vertrags, Aufsatzes oder Codes geändert hat: was hinzugefügt, entfernt und geändert wurde, Zeile für Zeile und Wort für Wort.">
+<meta property="og:url" content="https://migabuilder.com/de/text-compare.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+main{max-width:1320px}
+textarea.src{min-height:240px;font:13px/1.5 'IBM Plex Mono',monospace}
+.opts{display:flex;gap:16px;flex-wrap:wrap;margin:6px 0 12px;font-size:14px}.opts label{display:flex;gap:6px;align-items:center}
+.summary{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}.summary span{padding:4px 10px;border-radius:999px;font-weight:700;font-size:13px}
+.s-add{background:#dff1e6;color:#1f5a3a}.s-del{background:#f8dcd6;color:#7b281d}.s-chg{background:#fff1cc;color:#6b4a0c}.s-same{background:#e7e9ec;color:#333}
+.diff{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:4px;overflow:auto;max-height:70vh;font:13px/1.55 'IBM Plex Mono',monospace}
+.diff table{border-collapse:collapse;width:100%}.diff td{vertical-align:top;padding:1px 8px;white-space:pre-wrap;word-break:break-word}
+.diff td.n{width:1%;color:#8a97a3;text-align:right;user-select:none;white-space:nowrap;border-right:1px solid #eee}
+.diff tr.add td.t{background:#e9f7ee}.diff tr.del td.t{background:#fdecea}.diff td.t.add{background:#e9f7ee}.diff td.t.del{background:#fdecea}
+.diff ins{background:#a8e2bd;text-decoration:none;border-radius:2px}.diff del{background:#f4b3a7;text-decoration:line-through;border-radius:2px}
+.diff .sign{width:1%;color:#8a97a3;user-select:none}
+.prose{padding:14px;line-height:1.8;font:15px/1.8 'IBM Plex Sans',sans-serif;white-space:pre-wrap}
+.hidden{display:none!important}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/text-compare.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann ich Code oder JSON vergleichen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Füge zwei beliebige Texte ein, auch Code und JSON, und lade einen Bericht der Unterschiede herunter."}},{"@type":"Question","name":"Ist Text Compare kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät."}},{"@type":"Question","name":"Kann ich zwei Word- oder PDF-Dateien vergleichen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Kopiere den Text aus jeder Datei und füge ihn in die beiden Felder ein. Um den Text zuerst aus einer PDF zu holen, nutze Document Forge."}},{"@type":"Question","name":"Was ist ein Unified Diff?","acceptedAnswer":{"@type":"Answer","text":"Das ist das übliche Format, mit dem Programmierer Änderungen zeigen: entfernte Zeilen beginnen mit −, hinzugefügte mit +. Drücke „Copy unified diff“, um es in ein Code-Review oder eine E-Mail einzufügen."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/text-compare.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/text-compare.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/text-compare.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/text-compare.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/text-compare.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/text-compare.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/text-compare.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/text-compare.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/text-compare.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/text-compare.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/de/">← All tools</a><span>Text Compare</span></nav>
+<header class="masthead"><div><h1>Text Compare</h1><p>Paste two versions and see exactly what was added, removed and changed.</p></div></header>
+<main>
+<section class="panel">
+  <div class="grid">
+    <div class="field"><label for="a">Original</label><textarea id="a" class="src" placeholder="Paste the original text, or drop a file here"></textarea><input type="file" id="fa" aria-label="Open the original from a file" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
+    <div class="field"><label for="b">Changed</label><textarea id="b" class="src" placeholder="Paste the new version, or drop a file here"></textarea><input type="file" id="fb" aria-label="Open the changed version from a file" accept=".txt,.md,.csv,.json,.html,.css,.js,.py,.xml,text/*"></div>
+  </div>
+  <div class="opts">
+    <label><input type="radio" name="view" value="split" checked> Side by side</label>
+    <label><input type="radio" name="view" value="unified"> One column</label>
+    <label><input type="radio" name="view" value="prose"> Words only (for essays)</label>
+    <label><input type="checkbox" id="ic"> Ignore upper/lower case</label>
+    <label><input type="checkbox" id="iw"> Ignore extra spaces</label>
+    <label><input type="checkbox" id="only"> Show changed lines only</label>
+    <label title="Pretty-prints both sides and sorts object keys, so only real data changes show up"><input type="checkbox" id="json"> JSON: format and sort keys first</label>
+  </div>
+  <div class="actions"><button class="primary" id="go" data-primary>Compare</button><button class="secondary" id="swap">⇄ Swap</button><button class="secondary" id="ex">Load example</button><button class="secondary" id="exJson">Load JSON example</button><button class="secondary" id="fmt" title="Pretty-print the JSON in both boxes">{ } Format JSON</button><button class="secondary" id="clr">Clear</button></div>
+  <p class="privacy" style="margin-top:12px">Nothing is uploaded — the comparison runs in your browser.</p>
+</section>
+<section class="panel hidden" id="out">
+  <h2>Differences</h2>
+  <div class="summary" id="sum"></div>
+  <div class="diff" id="diff"></div>
+  <div class="actions" style="margin-top:10px"><button class="secondary" id="dl">⬇ Download as HTML report</button><button class="secondary" id="patch">Copy unified diff</button></div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Text Compare</h2>
+  <p>Text Compare shows exactly what changed between two versions of a text, contract, essay or code: what was added, removed and changed, line by line and word by word.</p>
+  <h3>How to use Text Compare</h3>
+  <ol><li>Paste the original text on the left and the changed version on the right.</li><li>Press “Compare”.</li><li>Review the highlighted additions, removals and changes, then download the report.</li></ol>
+  <h3>Can I compare code or JSON?</h3>
+  <p>Yes. Paste any two texts, including code and JSON, and download a report of the differences.</p>
+  <h3>Is Text Compare free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <h3 class="miga-tips">Tips for better results</h3>
+  <ul><li>Press “Format JSON” before comparing JSON, so the differences line up neatly.</li><li>Press “Swap” if you pasted the two versions the wrong way round.</li><li>Download the HTML report to share the changes with someone who doesn’t use the tool.</li></ul>
+  <h3>Can I compare two Word or PDF files?</h3>
+  <p>Yes. Copy the text from each file and paste it into the two boxes. To get the text out of a PDF first, use Document Forge.</p>
+  <h3>What is a unified diff?</h3>
+  <p>It is the standard format programmers use to show changes: removed lines start with − and added lines with +. Press “Copy unified diff” to paste it into a code review or an email.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/grammar-forge.html">Grammar Forge</a> · <a href="/de/redact-forge.html">Redact Forge</a> · <a href="/de/utility-forge.html">Utility Forge</a></p>
+</section>
+
+<footer>Text Compare · MigaBuilder</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// Myers O(ND) diff on arrays, returning ops: [' '|'-'|'+', value]
+function diff(A,B,eq){
+  const n=A.length,m=B.length,max=n+m,v=new Int32Array(2*max+2),trace=[];
+  for(let d=0;d<=max;d++){trace.push(v.slice());for(let k=-d;k<=d;k+=2){let x=(k===-d||(k!==d&&v[k-1+max]<v[k+1+max]))?v[k+1+max]:v[k-1+max]+1,y=x-k;while(x<n&&y<m&&eq(A[x],B[y])){x++;y++}v[k+max]=x;if(x>=n&&y>=m)return back(trace,A,B,max,d)}}
+}
+function back(trace,A,B,max,D){const out=[];let x=A.length,y=B.length;
+  for(let d=D;d>0;d--){const v=trace[d],k=x-y,pk=(k===-d||(k!==d&&v[k-1+max]<v[k+1+max]))?k+1:k-1,px=v[pk+max],py=px-pk;while(x>px&&y>py){out.push([' ',A[--x],B[--y]])}if(x===px)out.push(['+',null,B[--y]]);else out.push(['-',A[--x],null])}
+  while(x>0&&y>0)out.push([' ',A[--x],B[--y]]);return out.reverse()}
+// JSON with sorted keys and 2-space indentation; null when the text is not JSON.
+function sortKeys(v){return Array.isArray(v)?v.map(sortKeys):v&&typeof v==='object'?Object.keys(v).sort().reduce((o,k)=>(o[k]=sortKeys(v[k]),o),{}):v}
+function prettyJSON(t,sort){try{const v=JSON.parse(t);return JSON.stringify(sort?sortKeys(v):v,null,2)}catch(e){return null}}
+function norm(s){if($('ic').checked)s=s.toLowerCase();if($('iw').checked)s=s.replace(/\s+/g,' ').trim();return s}
+const eqL=(a,b)=>norm(a)===norm(b);
+function words(s){return s.match(/\s+|[\p{L}\p{N}_]+|[^\s\p{L}\p{N}_]/gu)||[]}
+function inline(a,b){const ops=diff(words(a),words(b),(x,y)=>norm(x)===norm(y));let L='',R='';
+  ops.forEach(([o,x,y])=>{if(o===' '){L+=esc(x);R+=esc(y)}else if(o==='-')L+='<del>'+esc(x)+'</del>';else R+='<ins>'+esc(y)+'</ins>'});return [L,R]}
+let lastOps=null;
+function compare(){
+  let A=$('a').value.replace(/\r\n?/g,'\n'),B=$('b').value.replace(/\r\n?/g,'\n');if(!A&&!B)return;
+  let note='';if($('json').checked){const ja=A.trim()?prettyJSON(A,true):'',jb=B.trim()?prettyJSON(B,true):'';
+    if(ja==null||jb==null)note='<span class="s-del">'+(ja==null&&jb==null?'Neither side is':ja==null?'The original is not':'The changed version is not')+' valid JSON, so it is compared as plain text</span>';else{A=ja;B=jb;note='<span class="s-same">JSON formatted, keys sorted</span>'}}
+  const view=document.querySelector('[name=view]:checked').value;$('out').classList.remove('hidden');
+  if(view==='prose'){const ops=diff(words(A),words(B),(x,y)=>norm(x)===norm(y));let h='',ad=0,dl=0;ops.forEach(([o,x,y])=>{if(o===' ')h+=esc(y);else if(o==='-'){h+='<del>'+esc(x)+'</del>';if(x.trim())dl++}else{h+='<ins>'+esc(y)+'</ins>';if(y.trim())ad++}});
+    $('sum').innerHTML='<span class="s-add">+'+ad+' words added</span><span class="s-del">−'+dl+' words removed</span>'+note;$('diff').innerHTML='<div class="prose">'+h+'</div>';lastOps=null;return}
+  const la=A.split('\n'),lb=B.split('\n');if(la.length*lb.length>5e7&&Math.abs(la.length-lb.length)>20000){alert('These texts are too different and too long to compare line by line.');return}
+  let ops=diff(la,lb,eqL);
+  // pair up adjacent deletions and additions as "changed" lines for word-level highlighting
+  const rows=[];for(let i=0;i<ops.length;){if(ops[i][0]==='-'){const dels=[],adds=[];while(i<ops.length&&ops[i][0]==='-')dels.push(ops[i++]);while(i<ops.length&&ops[i][0]==='+')adds.push(ops[i++]);
+      for(let k=0;k<Math.max(dels.length,adds.length);k++)rows.push({t:dels[k]&&adds[k]?'chg':dels[k]?'del':'add',a:dels[k]&&dels[k][1],b:adds[k]&&adds[k][2]})}
+    else{rows.push({t:ops[i][0]==='+'?'add':'same',a:ops[i][1],b:ops[i][2]});i++}}
+  let na=0,nb=0;rows.forEach(r=>{if(r.a!=null)r.na=++na;if(r.b!=null)r.nb=++nb});
+  const c={add:0,del:0,chg:0,same:0};rows.forEach(r=>c[r.t]++);
+  $('sum').innerHTML='<span class="s-add">+'+c.add+' added</span><span class="s-del">−'+c.del+' removed</span><span class="s-chg">~'+c.chg+' changed</span><span class="s-same">'+c.same+' unchanged</span>'+(c.add+c.del+c.chg===0?'<span class="s-same">✓ The texts are identical'+($('ic').checked||$('iw').checked?' (with your ignore settings)':'')+'</span>':'')+note;
+  const only=$('only').checked;let shown=rows;if(only){const keep=new Set();rows.forEach((r,i)=>{if(r.t!=='same')for(let k=i-2;k<=i+2;k++)keep.add(k)});shown=rows.filter((r,i)=>keep.has(i))}
+  let h='<table>';
+  shown.forEach(r=>{let L=r.a!=null?esc(r.a):'',R=r.b!=null?esc(r.b):'';if(r.t==='chg')[L,R]=inline(r.a,r.b);
+    if(view==='split')h+='<tr><td class="n">'+(r.na||'')+'</td><td class="t '+(r.t==='del'||r.t==='chg'?'del':'')+'">'+L+'</td><td class="n">'+(r.nb||'')+'</td><td class="t '+(r.t==='add'||r.t==='chg'?'add':'')+'">'+R+'</td></tr>';
+    else{if(r.t==='same')h+='<tr><td class="n">'+r.na+'</td><td class="n">'+r.nb+'</td><td class="sign"> </td><td class="t">'+L+'</td></tr>';
+      if(r.a!=null&&r.t!=='same')h+='<tr class="del"><td class="n">'+r.na+'</td><td class="n"></td><td class="sign">−</td><td class="t">'+L+'</td></tr>';
+      if(r.b!=null&&r.t!=='same')h+='<tr class="add"><td class="n"></td><td class="n">'+r.nb+'</td><td class="sign">+</td><td class="t">'+R+'</td></tr>'}});
+  $('diff').innerHTML=h+'</table>';lastOps=rows;
+}
+$('go').onclick=compare;document.querySelectorAll('[name=view],#ic,#iw,#only,#json').forEach(e=>e.onchange=()=>{if(!$('out').classList.contains('hidden'))compare()});
+$('fmt').onclick=()=>{const bad=[];[['a','Original'],['b','Changed']].forEach(([id,n])=>{const v=$(id).value;if(!v.trim())return;const j=prettyJSON(v,false);if(j==null)bad.push(n);else $(id).value=j});if(bad.length)alert(bad.join(' and ')+(bad.length>1?' are':' is')+' not valid JSON.');else compare()};
+$('exJson').onclick=()=>{$('a').value='{"name":"Sunrise Bakery","plan":"basic","price":9,"features":["website","menu"],"owner":{"email":"anna@example.com","phone":"+46 70 123 45 67"}}';
+  $('b').value='{\n  "owner": {"phone": "+46 70 123 45 67", "email": "anna@sunrisebakery.com"},\n  "price": 12,\n  "name": "Sunrise Bakery",\n  "plan": "pro",\n  "features": ["website", "menu", "online orders"]\n}';
+  $('json').checked=true;compare()};
+$('swap').onclick=()=>{const t=$('a').value;$('a').value=$('b').value;$('b').value=t;compare()};
+$('clr').onclick=()=>{$('a').value=$('b').value='';$('out').classList.add('hidden')};
+$('ex').onclick=()=>{$('json').checked=false;$('a').value='Rental agreement\n\nThe tenant will pay 800 USD rent on the 1st day of each month.\nThe deposit is two months of rent.\nPets are not allowed.\nThe agreement lasts 12 months.';$('b').value='Rental agreement\n\nThe tenant will pay 850 USD rent on the 5th day of each month.\nThe deposit is two months of rent.\nThe agreement lasts 12 months and renews automatically.\nThe landlord must give 30 days notice before visits.';compare()};
+[['fa','a'],['fb','b']].forEach(([f,t])=>{$(f).onchange=async e=>{const x=e.target.files[0];if(x)$(t).value=await x.text()};const ta=$(t);ta.addEventListener('dragover',e=>e.preventDefault());ta.addEventListener('drop',async e=>{const x=e.dataTransfer.files[0];if(x){e.preventDefault();ta.value=await x.text()}})});
+$('dl').onclick=()=>{const html='<!doctype html><html><head><meta charset="utf-8"><title>Text comparison</title><style>body{font:14px sans-serif;margin:20px}table{border-collapse:collapse;width:100%;font:13px monospace}td{vertical-align:top;padding:1px 8px;white-space:pre-wrap}.n{color:#999;text-align:right}.del{background:#fdecea}.add{background:#e9f7ee}ins{background:#a8e2bd;text-decoration:none}del{background:#f4b3a7}.prose{line-height:1.8;white-space:pre-wrap}</style></head><body><h1>Text comparison</h1><p>'+$('sum').innerText+'</p>'+$('diff').innerHTML+'<p><small>Made with MigaBuilder Text Compare</small></p></body></html>';
+  const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download='text-comparison.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)};
+$('patch').onclick=e=>{if(!lastOps){alert('Choose side-by-side or one-column view first.');return}const t=['--- original','+++ changed'].concat(lastOps.flatMap(r=>r.t==='same'?[' '+r.a]:[].concat(r.a!=null?['-'+r.a]:[],r.b!=null?['+'+r.b]:[]))).join('\n');
+  navigator.clipboard.writeText(t).then(()=>{e.target.textContent='Copied ✓';setTimeout(()=>e.target.textContent='Copy unified diff',1400)})};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

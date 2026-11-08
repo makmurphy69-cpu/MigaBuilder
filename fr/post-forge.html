@@ -1,0 +1,1028 @@
+<!-- Generated from /post-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="fr" data-en-title="Post an announcement to Discord, Bluesky &amp; Mastodon at once — Post Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='fr';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/fr/post-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Publier une annonce sur Discord, Bluesky et Mastodon à la fois — Post Forge | MigaBuilder</title>
+<meta name="description" content="Post Forge vous permet d'écrire une annonce et de la publier à la fois sur vos comptes Discord, Bluesky et Mastodon.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Publier une annonce sur Discord, Bluesky et Mastodon à la fois — Post Forge">
+<meta property="og:description" content="Post Forge vous permet d'écrire une annonce et de la publier à la fois sur vos comptes Discord, Bluesky et Mastodon.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/post-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/fr/post-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Publier une annonce sur Discord, Bluesky et Mastodon à la fois — Post Forge">
+<meta name="twitter:description" content="Post Forge vous permet d'écrire une annonce et de la publier à la fois sur vos comptes Discord, Bluesky et Mastodon.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/post-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/post-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47; --navy-deep: #081826; --paper: #EDEAE0; --paper-dim: #E2DECE; --ink: #16202B;
+    --line-cyan: #6FD1E0; --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B; --amber-ink: #4A3410; --success: #4E9E73; --error: #D8604A; --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main { display: grid; grid-template-columns: minmax(340px, 420px) 1fr; gap: 24px; padding: 28px clamp(20px, 4vw, 48px) 56px; align-items: start; }
+  @media (max-width: 950px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px;
+    max-height: calc(100vh - 40px); overflow-y: auto; position: sticky; top: 20px;
+  }
+  @media (max-width: 950px) { .panel { position: static; max-height: none; } }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; }
+  .field .hint { font-size: 11.5px; color: rgba(22, 32, 43, 0.72); margin-top: 4px; line-height: 1.4; }
+
+  input[type="text"], input[type="password"], textarea {
+    width: 100%; font-size: 13px; padding: 7px 9px; border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.45; }
+
+  .platform-card {
+    background: #fff; border: 1px solid rgba(22,32,43,0.18); border-radius: var(--radius); padding: 12px; margin-bottom: 10px;
+  }
+  .platform-card-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .platform-card-head .ic { font-size: 18px; }
+  .platform-card-head .name { font-weight: 600; font-size: 13.5px; flex: 1; }
+  .conn-dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(22,32,43,0.25); flex: none; }
+  .conn-dot.ok { background: var(--success); }
+  .conn-dot.bad { background: var(--error); }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 13.5px; padding: 9px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .btn-row { display: flex; gap: 6px; }
+  .btn-row button { flex: 1; }
+
+  .platform-status { font-size: 11.5px; margin-top: 6px; line-height: 1.4; }
+  .platform-status.ok { color: #275238; }
+  .platform-status.bad { color: #6E2418; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .compose-card { background: #fff; color: var(--ink); border-radius: var(--radius); padding: 16px; }
+  .char-count { font-size: 11.5px; color: rgba(22,32,43,0.72); text-align: right; margin-top: 4px; }
+  .char-count.warn { color: var(--error); }
+
+  .target-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+  .target-chip { display: flex; align-items: center; gap: 6px; font-size: 12.5px; background: var(--paper-dim); padding: 6px 10px; border-radius: 20px; }
+  .target-chip input { width: auto; }
+
+  .error-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 12.5px; color: #6E2418; display: none; line-height: 1.4;
+  }
+  .error-box.show { display: block; }
+
+  .results-list { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+  .result-row { background: #fff; color: var(--ink); border-radius: var(--radius); padding: 8px 10px; font-size: 12.5px; display: flex; gap: 8px; align-items: center; }
+  .result-row .ic { flex: none; }
+
+  .history-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto; }
+  .history-item { background: rgba(237,234,224,0.06); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 8px 10px; font-size: 12px; color: rgba(237,234,224,0.75); }
+  .history-item .ts { color: rgba(237,234,224,0.45); font-size: 11px; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quels réseaux sociaux sont pris en charge ?","acceptedAnswer":{"@type":"Answer","text":"Discord, Bluesky et Mastodon, avec vos propres comptes. Vous pouvez aussi copier le texte pour n'importe quel autre réseau."}},{"@type":"Question","name":"Post Forge est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."}},{"@type":"Question","name":"Mes fichiers sont-ils envoyés ?","acceptedAnswer":{"@type":"Answer","text":"Votre publication va uniquement aux services choisis (Discord, Bluesky ou Mastodon), envoyée depuis votre navigateur avec vos propres identifiants. MigaBuilder ne publie pas à votre place."}}],"inLanguage":"fr"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/post-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/post-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/post-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/post-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/post-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/post-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/post-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/post-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/post-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/post-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Post Forge</h1>
+    <p data-i18n="heroSubtitle">Write one announcement, post it to Discord, Bluesky, and Mastodon at once.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="section-title" data-i18n="accountsHeading">Your accounts</div>
+    <p class="hint" data-i18n="accountsHint" style="margin-top:0;">Saved only in this browser (localStorage) — never sent anywhere except directly to each platform when you post. X/Twitter isn't included: posting there needs a paid API tier and server-side request signing, unlike these three.</p>
+
+    <div class="platform-card">
+      <div class="platform-card-head"><span class="ic">💬</span><span class="name">Discord</span><span class="conn-dot" id="discordDot"></span></div>
+      <div class="field">
+        <label for="discordWebhook" data-i18n="webhookUrlLabel">Webhook URL</label>
+        <input type="password" id="discordWebhook" placeholder="https://discord.com/api/webhooks/...">
+        <p class="hint" data-i18n="webhookHint">Server Settings → Integrations → Webhooks → New Webhook → Copy URL.</p>
+      </div>
+      <button type="button" class="draft-btn secondary" data-test="discord" data-i18n="testConnectionLabel">Test connection</button>
+      <div class="platform-status" id="discordStatus"></div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-card-head"><span class="ic">🦋</span><span class="name">Bluesky</span><span class="conn-dot" id="blueskyDot"></span></div>
+      <div class="field">
+        <label for="blueskyHandle" data-i18n="blueskyHandleLabel">Handle</label>
+        <input type="text" id="blueskyHandle" placeholder="yourname.bsky.social">
+      </div>
+      <div class="field">
+        <label for="blueskyPassword" data-i18n="appPasswordLabel">App password</label>
+        <input type="password" id="blueskyPassword" placeholder="xxxx-xxxx-xxxx-xxxx">
+        <p class="hint" data-i18n="appPasswordHint">Settings → App Passwords → Add app password. Not your main login password.</p>
+      </div>
+      <button type="button" class="draft-btn secondary" data-test="bluesky" data-i18n="testConnectionLabel">Test connection</button>
+      <div class="platform-status" id="blueskyStatus"></div>
+    </div>
+
+    <div class="platform-card">
+      <div class="platform-card-head"><span class="ic">🐘</span><span class="name">Mastodon</span><span class="conn-dot" id="mastodonDot"></span></div>
+      <div class="field">
+        <label for="mastodonInstance" data-i18n="instanceLabel">Instance</label>
+        <input type="text" id="mastodonInstance" placeholder="mastodon.social">
+      </div>
+      <div class="field">
+        <label for="mastodonToken" data-i18n="accessTokenLabel">Access token</label>
+        <input type="password" id="mastodonToken" placeholder="paste your token">
+        <p class="hint" data-i18n="accessTokenHint">Preferences → Development → New Application → check "write:statuses" → save, then copy "Your access token".</p>
+      </div>
+      <button type="button" class="draft-btn secondary" data-test="mastodon" data-i18n="testConnectionLabel">Test connection</button>
+      <div class="platform-status" id="mastodonStatus"></div>
+    </div>
+
+    <button type="button" class="draft-btn" id="saveBtn" data-i18n="saveBtnLabel" style="margin-top:8px;">💾 Save accounts</button>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="composeTitle">POST FORGE — COMPOSE</span>
+      <span id="titleBlockRight" data-i18n="statusReady">READY</span>
+    </div>
+
+    <div class="compose-card">
+      <div class="field">
+        <label for="postText" data-i18n="announcementLabel">Announcement</label>
+        <textarea id="postText" data-i18n-placeholder="announcementPlaceholder" placeholder="New tool just launched: Paint Forge — a free layered image editor, right in your browser."></textarea>
+        <div class="char-count" id="charCount">0 characters</div>
+      </div>
+      <div class="field">
+        <label for="postLink" data-i18n="linkLabel">Link (optional)</label>
+        <input type="text" id="postLink" placeholder="https://migabuilder.com/paint-forge.html">
+      </div>
+      <div class="field">
+        <label for="postImage" data-i18n="imageLabel">Attach an image (optional)</label>
+        <input type="file" id="postImage" accept="image/*">
+        <div id="imagePreviewWrap" style="display:none;margin-top:8px;">
+          <img id="imagePreview" style="max-width:160px;max-height:110px;border-radius:4px;display:block;">
+          <button type="button" id="removeImageBtn" data-i18n="removeImageLabel" style="margin-top:4px;background:none;border:none;color:var(--error);text-decoration:underline;cursor:pointer;padding:0;font-size:11.5px;">Remove image</button>
+        </div>
+      </div>
+      <div class="target-list" id="targetList"></div>
+      <div class="error-box" id="errorBox"></div>
+      <button type="button" class="draft-btn" id="postBtn" data-i18n="postBtnLabel" style="margin-top:14px;">🚀 Post now</button>
+      <div class="results-list" id="resultsList"></div>
+    </div>
+
+    <div class="section-title" data-i18n="recentPostsHeading" style="color: rgba(237,234,224,0.5);">Recent posts</div>
+    <div class="history-list" id="historyList"></div>
+    <p class="hint" style="color: rgba(237,234,224,0.55);" id="historyEmpty" data-i18n="historyEmptyText">Nothing posted yet.</p>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Post Forge</h2>
+  <p>Post Forge lets you write one announcement and post it to your own Discord, Bluesky and Mastodon accounts at once.</p>
+  <h3>How to use Post Forge</h3>
+  <ol><li>Choose the platform and describe the message, audience, and goal.</li><li>Press “Create post”.</li><li>Refine the wording and image, then copy or publish the post.</li></ol>
+  <h3>Which social networks does it support?</h3>
+  <p>Discord, Bluesky and Mastodon, using your own accounts. You can also copy the text for any other network.</p>
+  <h3>Is Post Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Your post goes only to the services you choose (Discord, Bluesky or Mastodon), sent from your browser with your own credentials. MigaBuilder does not post for you.</p>
+  <p class="miga-about-rel">Related tools: <a href="/fr/repurpose-forge.html">Repurpose Forge</a> · <a href="/fr/picture-forge.html">Picture Forge</a> · <a href="/fr/image-studio.html">Image Studio</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/fr/">MigaBuilder</a>. Your credentials and post history stay in this browser only. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/post-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  const STORAGE_KEY = 'postForgeAccounts_v1';
+  const HISTORY_KEY = 'postForgeHistory_v1';
+
+  const discordWebhook = document.getElementById('discordWebhook');
+  const blueskyHandle = document.getElementById('blueskyHandle');
+  const blueskyPassword = document.getElementById('blueskyPassword');
+  const mastodonInstance = document.getElementById('mastodonInstance');
+  const mastodonToken = document.getElementById('mastodonToken');
+  const saveBtn = document.getElementById('saveBtn');
+  const postText = document.getElementById('postText');
+  const postLink = document.getElementById('postLink');
+  const postImage = document.getElementById('postImage');
+  const imagePreviewWrap = document.getElementById('imagePreviewWrap');
+  const imagePreview = document.getElementById('imagePreview');
+  const removeImageBtn = document.getElementById('removeImageBtn');
+  const charCount = document.getElementById('charCount');
+  const targetList = document.getElementById('targetList');
+  const postBtn = document.getElementById('postBtn');
+  const errorBox = document.getElementById('errorBox');
+  const resultsList = document.getElementById('resultsList');
+  const historyList = document.getElementById('historyList');
+  const historyEmpty = document.getElementById('historyEmpty');
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  // ---------- persistence ----------
+  function loadAccounts() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) { return {}; }
+  }
+  function fillFromStorage() {
+    const a = loadAccounts();
+    discordWebhook.value = a.discordWebhook || '';
+    blueskyHandle.value = a.blueskyHandle || '';
+    blueskyPassword.value = a.blueskyPassword || '';
+    mastodonInstance.value = a.mastodonInstance || '';
+    mastodonToken.value = a.mastodonToken || '';
+  }
+  saveBtn.addEventListener('click', function () {
+    const a = {
+      discordWebhook: discordWebhook.value.trim(),
+      blueskyHandle: blueskyHandle.value.trim(),
+      blueskyPassword: blueskyPassword.value.trim(),
+      mastodonInstance: mastodonInstance.value.trim().replace(/^https?:\/\//, '').replace(/\/$/, ''),
+      mastodonToken: mastodonToken.value.trim()
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(a));
+    renderTargetList();
+    saveBtn.textContent = I18N.t('savedLabel');
+    setTimeout(() => { saveBtn.textContent = I18N.t('saveBtnLabel'); }, 1500);
+  });
+
+  function setDot(id, state) {
+    const dot = document.getElementById(id);
+    dot.className = 'conn-dot' + (state === 'ok' ? ' ok' : state === 'bad' ? ' bad' : '');
+  }
+  function setStatus(id, msg, ok) {
+    const el = document.getElementById(id);
+    el.textContent = msg;
+    el.className = 'platform-status ' + (ok ? 'ok' : 'bad');
+  }
+
+  // ---------- platform calls ----------
+  async function testDiscord() {
+    const url = discordWebhook.value.trim();
+    if (!url) throw new Error(I18N.t('errorNoWebhook'));
+    const res = await fetch(url, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: '✅ Post Forge is connected to this channel.' })
+    });
+    if (!res.ok && res.status !== 204) throw new Error(I18N.t('errorWebhookStatus').replace('{status}', res.status));
+  }
+  async function postDiscord(message, imageFile) {
+    const url = discordWebhook.value.trim();
+    let res;
+    if (imageFile) {
+      const form = new FormData();
+      form.append('payload_json', JSON.stringify({ content: message }));
+      form.append('files[0]', imageFile, imageFile.name || 'image.png');
+      res = await fetch(url, { method: 'POST', body: form });
+    } else {
+      res = await fetch(url, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: message })
+      });
+    }
+    if (!res.ok && res.status !== 204) {
+      const body = await res.text().catch(() => '');
+      throw new Error(I18N.t('errorDiscordStatus').replace('{status}', res.status) + (body ? ': ' + body.slice(0, 150) : ''));
+    }
+  }
+
+  async function blueskySession() {
+    const identifier = blueskyHandle.value.trim();
+    const password = blueskyPassword.value.trim();
+    if (!identifier || !password) throw new Error(I18N.t('errorNoBlueskyCreds'));
+    const res = await fetch('https://bsky.social/xrpc/com.atproto.server.createSession', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ identifier, password })
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.message) || I18N.t('errorBlueskySignIn'));
+    return data;
+  }
+  async function testBluesky() { await blueskySession(); }
+
+  async function uploadBlueskyBlob(session, imageFile) {
+    const res = await fetch('https://bsky.social/xrpc/com.atproto.repo.uploadBlob', {
+      method: 'POST',
+      headers: { 'Content-Type': imageFile.type || 'application/octet-stream', 'Authorization': 'Bearer ' + session.accessJwt },
+      body: imageFile
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.message) || I18N.t('errorBlueskyUpload'));
+    return data.blob;
+  }
+
+  async function postBluesky(message, imageFile) {
+    const session = await blueskySession();
+    const record = { text: message, createdAt: new Date().toISOString(), $type: 'app.bsky.feed.post' };
+    if (imageFile) {
+      const blob = await uploadBlueskyBlob(session, imageFile);
+      record.embed = { $type: 'app.bsky.embed.images', images: [{ image: blob, alt: '' }] };
+    }
+    const res = await fetch('https://bsky.social/xrpc/com.atproto.repo.createRecord', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + session.accessJwt },
+      body: JSON.stringify({ repo: session.did, collection: 'app.bsky.feed.post', record: record })
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.message) || I18N.t('errorBlueskyPost'));
+  }
+
+  function mastodonBase() {
+    const instance = mastodonInstance.value.trim().replace(/^https?:\/\//, '').replace(/\/$/, '');
+    if (!instance) throw new Error(I18N.t('errorNoMastodonInstance'));
+    return 'https://' + instance;
+  }
+  async function testMastodon() {
+    const token = mastodonToken.value.trim();
+    if (!token) throw new Error(I18N.t('errorNoMastodonToken'));
+    const res = await fetch(mastodonBase() + '/api/v1/accounts/verify_credentials', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.error) || I18N.t('errorMastodonVerify'));
+  }
+  async function uploadMastodonMedia(token, imageFile) {
+    const form = new FormData();
+    form.append('file', imageFile, imageFile.name || 'image.png');
+    const res = await fetch(mastodonBase() + '/api/v2/media', {
+      method: 'POST',
+      headers: { 'Authorization': 'Bearer ' + token },
+      body: form
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.error) || I18N.t('errorMastodonUpload'));
+    return data.id;
+  }
+
+  async function postMastodon(message, imageFile) {
+    const token = mastodonToken.value.trim();
+    const body = { status: message };
+    if (imageFile) body.media_ids = [await uploadMastodonMedia(token, imageFile)];
+    const res = await fetch(mastodonBase() + '/api/v1/statuses', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) throw new Error((data && data.error) || I18N.t('errorMastodonPost'));
+  }
+
+  const PLATFORMS = {
+    discord: { label: '💬 Discord', limit: 2000, test: testDiscord, post: postDiscord, configured: () => !!discordWebhook.value.trim() },
+    bluesky: { label: '🦋 Bluesky', limit: 300, test: testBluesky, post: postBluesky, configured: () => !!(blueskyHandle.value.trim() && blueskyPassword.value.trim()) },
+    mastodon: { label: '🐘 Mastodon', limit: 500, test: testMastodon, post: postMastodon, configured: () => !!(mastodonInstance.value.trim() && mastodonToken.value.trim()) }
+  };
+
+  // ---------- image attachment ----------
+  let attachedImage = null;
+  postImage.addEventListener('change', function (e) {
+    const file = (e.target.files || [])[0];
+    if (!file) return;
+    attachedImage = file;
+    imagePreview.src = URL.createObjectURL(file);
+    imagePreviewWrap.style.display = 'block';
+  });
+  removeImageBtn.addEventListener('click', function () {
+    attachedImage = null;
+    postImage.value = '';
+    imagePreviewWrap.style.display = 'none';
+  });
+
+  document.querySelectorAll('[data-test]').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      const key = btn.dataset.test;
+      const dotId = key + 'Dot', statusId = key + 'Status';
+      btn.disabled = true;
+      const original = btn.textContent;
+      btn.textContent = I18N.t('testingLabel');
+      try {
+        await PLATFORMS[key].test();
+        setDot(dotId, 'ok');
+        setStatus(statusId, I18N.t('connectedLabel'), true);
+      } catch (err) {
+        setDot(dotId, 'bad');
+        setStatus(statusId, err.message, false);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+        renderTargetList();
+      }
+    });
+  });
+
+  // ---------- compose ----------
+  function fullMessage() {
+    const text = postText.value.trim();
+    const link = postLink.value.trim();
+    return link ? text + '\n\n' + link : text;
+  }
+  postText.addEventListener('input', updateCharCount);
+  postLink.addEventListener('input', updateCharCount);
+  function selectedTargets() {
+    return Array.from(targetList.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.dataset.target);
+  }
+  function updateCharCount() {
+    const len = fullMessage().length;
+    const selected = selectedTargets();
+    const relevant = selected.length ? selected : Object.keys(PLATFORMS);
+    const parts = relevant.map(key => {
+      const over = len > PLATFORMS[key].limit;
+      return (over ? '<span style="color:var(--error);">' : '<span>') + PLATFORMS[key].label.split(' ')[0] + ' ' + len + '/' + PLATFORMS[key].limit + '</span>';
+    });
+    charCount.innerHTML = parts.join('  ·  ');
+    charCount.classList.toggle('warn', relevant.some(key => len > PLATFORMS[key].limit));
+  }
+
+  function renderTargetList() {
+    targetList.innerHTML = '';
+    Object.keys(PLATFORMS).forEach(key => {
+      const configured = PLATFORMS[key].configured();
+      const chip = document.createElement('label');
+      chip.className = 'target-chip';
+      chip.style.opacity = configured ? '1' : '0.4';
+      chip.innerHTML =
+        '<input type="checkbox" data-target="' + key + '"' + (configured ? ' checked' : ' disabled') + '>' +
+        PLATFORMS[key].label + (configured ? '' : ' ' + I18N.t('notConnectedSuffix'));
+      targetList.appendChild(chip);
+    });
+    targetList.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', updateCharCount));
+    updateCharCount();
+  }
+
+  // ---------- history ----------
+  function loadHistory() {
+    try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function renderHistory() {
+    const items = loadHistory();
+    historyList.innerHTML = '';
+    historyEmpty.style.display = items.length ? 'none' : 'block';
+    items.slice(0, 10).forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'history-item';
+      row.innerHTML = '<div class="ts">' + new Date(item.at).toLocaleString() + ' — ' + item.targets.join(', ') + '</div>' + item.text.replace(/</g, '&lt;');
+      historyList.appendChild(row);
+    });
+  }
+
+  // ---------- post ----------
+  postBtn.addEventListener('click', async function () {
+    clearError();
+    resultsList.innerHTML = '';
+    const message = fullMessage();
+    if (!postText.value.trim()) { showError(I18N.t('errorNoText')); return; }
+    const selected = selectedTargets();
+    if (!selected.length) { showError(I18N.t('errorNoPlatform')); return; }
+
+    postBtn.disabled = true;
+    postBtn.textContent = I18N.t('postingLabel');
+    const succeeded = [];
+    for (const key of selected) {
+      const row = document.createElement('div');
+      row.className = 'result-row';
+      if (message.length > PLATFORMS[key].limit) {
+        row.innerHTML = '<span class="ic">⚠️</span><span>' + PLATFORMS[key].label + ' — ' + I18N.t('resultSkipped').replace('{len}', message.length).replace('{limit}', PLATFORMS[key].limit) + '</span>';
+        resultsList.appendChild(row);
+        continue;
+      }
+      row.innerHTML = '<span class="ic">⏳</span><span>' + PLATFORMS[key].label + '…</span>';
+      resultsList.appendChild(row);
+      try {
+        await PLATFORMS[key].post(message, attachedImage);
+        row.innerHTML = '<span class="ic">✅</span><span>' + PLATFORMS[key].label + ' — ' + (attachedImage ? I18N.t('resultPostedWithImage') : I18N.t('resultPosted')) + '</span>';
+        succeeded.push(key);
+      } catch (err) {
+        row.innerHTML = '<span class="ic">❌</span><span>' + PLATFORMS[key].label + ' — ' + err.message + '</span>';
+      }
+    }
+    if (succeeded.length) {
+      const items = loadHistory();
+      items.unshift({ at: Date.now(), text: postText.value.trim(), targets: succeeded });
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(items.slice(0, 30)));
+      renderHistory();
+    }
+    postBtn.disabled = false;
+    postBtn.textContent = I18N.t('postBtnLabel');
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Write one announcement, post it to Discord, Bluesky, and Mastodon at once.',
+      accountsHeading: 'Your accounts',
+      accountsHint: "Saved only in this browser (localStorage) — never sent anywhere except directly to each platform when you post. X/Twitter isn't included: posting there needs a paid API tier and server-side request signing, unlike these three.",
+      webhookUrlLabel: 'Webhook URL',
+      webhookHint: 'Server Settings → Integrations → Webhooks → New Webhook → Copy URL.',
+      testConnectionLabel: 'Test connection',
+      blueskyHandleLabel: 'Handle',
+      appPasswordLabel: 'App password',
+      appPasswordHint: 'Settings → App Passwords → Add app password. Not your main login password.',
+      instanceLabel: 'Instance',
+      accessTokenLabel: 'Access token',
+      accessTokenHint: 'Preferences → Development → New Application → check "write:statuses" → save, then copy "Your access token".',
+      saveBtnLabel: '💾 Save accounts',
+      savedLabel: '✓ Saved',
+      composeTitle: 'POST FORGE — COMPOSE',
+      statusReady: 'READY',
+      announcementLabel: 'Announcement',
+      announcementPlaceholder: 'New tool just launched: Paint Forge — a free layered image editor, right in your browser.',
+      linkLabel: 'Link (optional)',
+      imageLabel: 'Attach an image (optional)',
+      removeImageLabel: 'Remove image',
+      postBtnLabel: '🚀 Post now',
+      postingLabel: 'Posting…',
+      recentPostsHeading: 'Recent posts',
+      historyEmptyText: 'Nothing posted yet.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your credentials and post history stay in this browser only. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      testingLabel: 'Testing…',
+      connectedLabel: '✓ Connected',
+      notConnectedSuffix: '(not connected)',
+      errorNoWebhook: 'Add a webhook URL first.',
+      errorWebhookStatus: 'Webhook responded with status {status}',
+      errorDiscordStatus: 'Discord responded with status {status}',
+      errorNoBlueskyCreds: 'Add your handle and app password first.',
+      errorBlueskySignIn: 'Could not sign in to Bluesky.',
+      errorBlueskyUpload: 'Bluesky image upload failed.',
+      errorBlueskyPost: 'Bluesky post failed.',
+      errorNoMastodonInstance: 'Add your Mastodon instance first.',
+      errorNoMastodonToken: 'Add your access token first.',
+      errorMastodonVerify: 'Could not verify Mastodon credentials.',
+      errorMastodonUpload: 'Mastodon image upload failed.',
+      errorMastodonPost: 'Mastodon post failed.',
+      errorNoText: 'Write something to post first.',
+      errorNoPlatform: 'Connect and check at least one platform first.',
+      resultSkipped: 'skipped, {len} characters exceeds its {limit} limit',
+      resultPosted: 'posted',
+      resultPostedWithImage: 'posted with image'
+    },
+    es: {
+      heroSubtitle: 'Escribe un anuncio y publícalo en Discord, Bluesky y Mastodon a la vez.',
+      accountsHeading: 'Tus cuentas',
+      accountsHint: 'Se guarda solo en este navegador (localStorage) — nunca se envía a ningún lugar excepto directamente a cada plataforma cuando publicas. X/Twitter no está incluido: publicar ahí requiere un nivel de API de pago y firma de solicitudes del lado del servidor, a diferencia de estas tres.',
+      webhookUrlLabel: 'URL del webhook',
+      webhookHint: 'Configuración del servidor → Integraciones → Webhooks → Nuevo Webhook → Copiar URL.',
+      testConnectionLabel: 'Probar conexión',
+      blueskyHandleLabel: 'Identificador',
+      appPasswordLabel: 'Contraseña de aplicación',
+      appPasswordHint: 'Configuración → Contraseñas de aplicación → Añadir contraseña de aplicación. No es tu contraseña principal.',
+      instanceLabel: 'Instancia',
+      accessTokenLabel: 'Token de acceso',
+      accessTokenHint: 'Preferencias → Desarrollo → Nueva aplicación → marca "write:statuses" → guarda, luego copia "Tu token de acceso".',
+      saveBtnLabel: '💾 Guardar cuentas',
+      savedLabel: '✓ Guardado',
+      composeTitle: 'POST FORGE — REDACTAR',
+      statusReady: 'LISTO',
+      announcementLabel: 'Anuncio',
+      announcementPlaceholder: 'Se acaba de lanzar una nueva herramienta: Paint Forge — un editor de imágenes por capas gratuito, directamente en tu navegador.',
+      linkLabel: 'Enlace (opcional)',
+      imageLabel: 'Adjuntar una imagen (opcional)',
+      removeImageLabel: 'Quitar imagen',
+      postBtnLabel: '🚀 Publicar ahora',
+      postingLabel: 'Publicando…',
+      recentPostsHeading: 'Publicaciones recientes',
+      historyEmptyText: 'Aún no se ha publicado nada.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tus credenciales e historial de publicaciones permanecen solo en este navegador. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      testingLabel: 'Probando…',
+      connectedLabel: '✓ Conectado',
+      notConnectedSuffix: '(no conectado)',
+      errorNoWebhook: 'Añade primero una URL de webhook.',
+      errorWebhookStatus: 'El webhook respondió con estado {status}',
+      errorDiscordStatus: 'Discord respondió con estado {status}',
+      errorNoBlueskyCreds: 'Añade primero tu identificador y contraseña de aplicación.',
+      errorBlueskySignIn: 'No se pudo iniciar sesión en Bluesky.',
+      errorBlueskyUpload: 'Falló la subida de la imagen a Bluesky.',
+      errorBlueskyPost: 'Falló la publicación en Bluesky.',
+      errorNoMastodonInstance: 'Añade primero tu instancia de Mastodon.',
+      errorNoMastodonToken: 'Añade primero tu token de acceso.',
+      errorMastodonVerify: 'No se pudieron verificar las credenciales de Mastodon.',
+      errorMastodonUpload: 'Falló la subida de la imagen a Mastodon.',
+      errorMastodonPost: 'Falló la publicación en Mastodon.',
+      errorNoText: 'Escribe algo para publicar primero.',
+      errorNoPlatform: 'Conecta y marca al menos una plataforma primero.',
+      resultSkipped: 'omitido, {len} caracteres supera su límite de {limit}',
+      resultPosted: 'publicado',
+      resultPostedWithImage: 'publicado con imagen'
+    },
+    ar: {
+      heroSubtitle: 'اكتب إعلانًا واحدًا وانشره على Discord وBluesky وMastodon في آن واحد.',
+      accountsHeading: 'حساباتك',
+      accountsHint: 'يُحفظ فقط في هذا المتصفح (localStorage) — لا يُرسل إلى أي مكان سوى مباشرة إلى كل منصة عند النشر. X/Twitter غير مشمول: النشر هناك يتطلب مستوى API مدفوعًا وتوقيع الطلبات من جانب الخادم، بخلاف هذه المنصات الثلاث.',
+      webhookUrlLabel: 'رابط الـ Webhook',
+      webhookHint: 'إعدادات الخادم ← التكاملات ← Webhooks ← Webhook جديد ← انسخ الرابط.',
+      testConnectionLabel: 'اختبار الاتصال',
+      blueskyHandleLabel: 'المعرّف',
+      appPasswordLabel: 'كلمة مرور التطبيق',
+      appPasswordHint: 'الإعدادات ← كلمات مرور التطبيقات ← إضافة كلمة مرور تطبيق. ليست كلمة مرور تسجيل الدخول الرئيسية.',
+      instanceLabel: 'الخادم (Instance)',
+      accessTokenLabel: 'رمز الوصول',
+      accessTokenHint: 'التفضيلات ← التطوير ← تطبيق جديد ← فعّل "write:statuses" ← احفظ، ثم انسخ "رمز الوصول الخاص بك".',
+      saveBtnLabel: '💾 حفظ الحسابات',
+      savedLabel: '✓ تم الحفظ',
+      composeTitle: 'POST FORGE — الإنشاء',
+      statusReady: 'جاهز',
+      announcementLabel: 'الإعلان',
+      announcementPlaceholder: 'تم إطلاق أداة جديدة للتو: Paint Forge — محرر صور بطبقات مجاني، مباشرة في متصفحك.',
+      linkLabel: 'الرابط (اختياري)',
+      imageLabel: 'إرفاق صورة (اختياري)',
+      removeImageLabel: 'إزالة الصورة',
+      postBtnLabel: '🚀 انشر الآن',
+      postingLabel: 'جارٍ النشر…',
+      recentPostsHeading: 'المنشورات الأخيرة',
+      historyEmptyText: 'لم يُنشر شيء بعد.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. تبقى بيانات اعتمادك وسجل منشوراتك في هذا المتصفح فقط. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      testingLabel: 'جارٍ الاختبار…',
+      connectedLabel: '✓ متصل',
+      notConnectedSuffix: '(غير متصل)',
+      errorNoWebhook: 'أضف رابط webhook أولاً.',
+      errorWebhookStatus: 'استجاب الـ webhook بالحالة {status}',
+      errorDiscordStatus: 'استجاب Discord بالحالة {status}',
+      errorNoBlueskyCreds: 'أضف معرّفك وكلمة مرور التطبيق أولاً.',
+      errorBlueskySignIn: 'تعذر تسجيل الدخول إلى Bluesky.',
+      errorBlueskyUpload: 'فشل رفع الصورة إلى Bluesky.',
+      errorBlueskyPost: 'فشل النشر على Bluesky.',
+      errorNoMastodonInstance: 'أضف خادم Mastodon الخاص بك أولاً.',
+      errorNoMastodonToken: 'أضف رمز الوصول الخاص بك أولاً.',
+      errorMastodonVerify: 'تعذر التحقق من بيانات اعتماد Mastodon.',
+      errorMastodonUpload: 'فشل رفع الصورة إلى Mastodon.',
+      errorMastodonPost: 'فشل النشر على Mastodon.',
+      errorNoText: 'اكتب شيئًا لنشره أولاً.',
+      errorNoPlatform: 'اتصل وحدد منصة واحدة على الأقل أولاً.',
+      resultSkipped: 'تم التخطي، {len} حرفًا يتجاوز حده البالغ {limit}',
+      resultPosted: 'تم النشر',
+      resultPostedWithImage: 'تم النشر مع صورة'
+    },
+    zh: {
+      heroSubtitle: '写一条公告，同时发布到 Discord、Bluesky 和 Mastodon。',
+      accountsHeading: '你的账户',
+      accountsHint: '仅保存在此浏览器（localStorage）中——发布时只会直接发送到各个平台，绝不发送到其他任何地方。不包含 X/Twitter：与这三个平台不同，在那里发布需要付费的 API 套餐和服务器端请求签名。',
+      webhookUrlLabel: 'Webhook 网址',
+      webhookHint: '服务器设置 → 整合 → Webhooks → 新建 Webhook → 复制网址。',
+      testConnectionLabel: '测试连接',
+      blueskyHandleLabel: '账号',
+      appPasswordLabel: '应用专用密码',
+      appPasswordHint: '设置 → 应用专用密码 → 添加应用专用密码。不是你的主登录密码。',
+      instanceLabel: '实例',
+      accessTokenLabel: '访问令牌',
+      accessTokenHint: '偏好设置 → 开发 → 新建应用 → 勾选"write:statuses" → 保存，然后复制"你的访问令牌"。',
+      saveBtnLabel: '💾 保存账户',
+      savedLabel: '✓ 已保存',
+      composeTitle: 'POST FORGE — 撰写',
+      statusReady: '就绪',
+      announcementLabel: '公告内容',
+      announcementPlaceholder: '新工具刚刚上线：Paint Forge——一款免费的分层图像编辑器，直接在你的浏览器中使用。',
+      linkLabel: '链接（可选）',
+      imageLabel: '附加图片（可选）',
+      removeImageLabel: '移除图片',
+      postBtnLabel: '🚀 立即发布',
+      postingLabel: '发布中…',
+      recentPostsHeading: '最近的发布',
+      historyEmptyText: '还没有发布过任何内容。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的凭据和发布记录仅保存在此浏览器中。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      testingLabel: '测试中…',
+      connectedLabel: '✓ 已连接',
+      notConnectedSuffix: '（未连接）',
+      errorNoWebhook: '请先添加 webhook 网址。',
+      errorWebhookStatus: 'Webhook 返回状态 {status}',
+      errorDiscordStatus: 'Discord 返回状态 {status}',
+      errorNoBlueskyCreds: '请先添加你的账号和应用专用密码。',
+      errorBlueskySignIn: '无法登录 Bluesky。',
+      errorBlueskyUpload: 'Bluesky 图片上传失败。',
+      errorBlueskyPost: 'Bluesky 发布失败。',
+      errorNoMastodonInstance: '请先添加你的 Mastodon 实例。',
+      errorNoMastodonToken: '请先添加你的访问令牌。',
+      errorMastodonVerify: '无法验证 Mastodon 凭据。',
+      errorMastodonUpload: 'Mastodon 图片上传失败。',
+      errorMastodonPost: 'Mastodon 发布失败。',
+      errorNoText: '请先写点内容再发布。',
+      errorNoPlatform: '请先连接并勾选至少一个平台。',
+      resultSkipped: '已跳过，{len} 个字符超过了其 {limit} 的限制',
+      resultPosted: '已发布',
+      resultPostedWithImage: '已发布（含图片）'
+    },
+    sw: {
+      heroSubtitle: 'Andika tangazo moja, ulichapishe kwenye Discord, Bluesky, na Mastodon kwa wakati mmoja.',
+      accountsHeading: 'Akaunti zako',
+      accountsHint: 'Huhifadhiwa tu kwenye kivinjari hiki (localStorage) — hakitumwi popote isipokuwa moja kwa moja kwa kila jukwaa unapochapisha. X/Twitter haijajumuishwa: kuchapisha huko kunahitaji kiwango cha API kinacholipiwa na usainiaji wa maombi upande wa seva, tofauti na haya matatu.',
+      webhookUrlLabel: 'URL ya Webhook',
+      webhookHint: 'Mipangilio ya Seva → Uunganishaji → Webhooks → Webhook Mpya → Nakili URL.',
+      testConnectionLabel: 'Jaribu muunganisho',
+      blueskyHandleLabel: 'Kitambulisho',
+      appPasswordLabel: 'Nenosiri la programu',
+      appPasswordHint: 'Mipangilio → Manenosiri ya Programu → Ongeza nenosiri la programu. Si nenosiri lako kuu la kuingia.',
+      instanceLabel: 'Kipengele (Instance)',
+      accessTokenLabel: 'Ishara ya ufikiaji',
+      accessTokenHint: 'Mapendeleo → Maendeleo → Programu Mpya → chagua "write:statuses" → hifadhi, kisha nakili "Ishara yako ya ufikiaji".',
+      saveBtnLabel: '💾 Hifadhi akaunti',
+      savedLabel: '✓ Imehifadhiwa',
+      composeTitle: 'POST FORGE — ANDIKA',
+      statusReady: 'TAYARI',
+      announcementLabel: 'Tangazo',
+      announcementPlaceholder: 'Chombo kipya kimezinduliwa: Paint Forge — kihariri cha picha chenye tabaka bila malipo, moja kwa moja kwenye kivinjari chako.',
+      linkLabel: 'Kiungo (hiari)',
+      imageLabel: 'Ambatanisha picha (hiari)',
+      removeImageLabel: 'Ondoa picha',
+      postBtnLabel: '🚀 Chapisha sasa',
+      postingLabel: 'Inachapisha…',
+      recentPostsHeading: 'Machapisho ya hivi karibuni',
+      historyEmptyText: 'Hakuna kilichochapishwa bado.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Vitambulisho vyako na historia ya machapisho vinabaki kwenye kivinjari hiki tu. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      testingLabel: 'Inajaribu…',
+      connectedLabel: '✓ Imeunganishwa',
+      notConnectedSuffix: '(haijaunganishwa)',
+      errorNoWebhook: 'Ongeza URL ya webhook kwanza.',
+      errorWebhookStatus: 'Webhook imejibu na hali {status}',
+      errorDiscordStatus: 'Discord imejibu na hali {status}',
+      errorNoBlueskyCreds: 'Ongeza kitambulisho chako na nenosiri la programu kwanza.',
+      errorBlueskySignIn: 'Imeshindwa kuingia Bluesky.',
+      errorBlueskyUpload: 'Imeshindwa kupakia picha kwenye Bluesky.',
+      errorBlueskyPost: 'Imeshindwa kuchapisha kwenye Bluesky.',
+      errorNoMastodonInstance: 'Ongeza kipengele chako cha Mastodon kwanza.',
+      errorNoMastodonToken: 'Ongeza ishara yako ya ufikiaji kwanza.',
+      errorMastodonVerify: 'Imeshindwa kuthibitisha vitambulisho vya Mastodon.',
+      errorMastodonUpload: 'Imeshindwa kupakia picha kwenye Mastodon.',
+      errorMastodonPost: 'Imeshindwa kuchapisha kwenye Mastodon.',
+      errorNoText: 'Andika kitu cha kuchapisha kwanza.',
+      errorNoPlatform: 'Unganisha na uchague jukwaa moja angalau kwanza.',
+      resultSkipped: 'imerukwa, herufi {len} zinazidi kikomo chake cha {limit}',
+      resultPosted: 'imechapishwa',
+      resultPostedWithImage: 'imechapishwa na picha'
+    },
+    sv: {
+      heroSubtitle: "Skriv ett meddelande och publicera det på Discord, Bluesky och Mastodon på en gång.",
+      accountsHeading: "Dina konton",
+      accountsHint: "Sparas bara i den här webbläsaren (localStorage) — skickas aldrig någonstans utom direkt till varje plattform när du publicerar. X/Twitter ingår inte: att publicera där kräver en betald API-nivå och serversignerade anrop, till skillnad från dessa tre.",
+      webhookUrlLabel: "Webhook-URL",
+      webhookHint: "Serverinställningar → Integrationer → Webhooks → Ny webhook → Kopiera URL.",
+      testConnectionLabel: "Testa anslutningen",
+      blueskyHandleLabel: "Användarnamn",
+      appPasswordLabel: "Applösenord",
+      appPasswordHint: "Inställningar → App Passwords → Add app password. Inte ditt vanliga inloggningslösenord.",
+      instanceLabel: "Instans",
+      accessTokenLabel: "Åtkomsttoken",
+      accessTokenHint: "Inställningar → Utveckling → Ny applikation → kryssa i \"write:statuses\" → spara och kopiera sedan \"Din åtkomsttoken\".",
+      saveBtnLabel: "💾 Spara konton",
+      savedLabel: "✓ Sparat",
+      composeTitle: "POST FORGE — SKRIV",
+      statusReady: "REDO",
+      announcementLabel: "Meddelande",
+      announcementPlaceholder: "Nytt verktyg lanserat: Paint Forge — en gratis bildredigerare med lager, direkt i webbläsaren.",
+      linkLabel: "Länk (valfritt)",
+      imageLabel: "Bifoga en bild (valfritt)",
+      removeImageLabel: "Ta bort bild",
+      postBtnLabel: "🚀 Publicera nu",
+      postingLabel: "Publicerar…",
+      recentPostsHeading: "Senaste inlägg",
+      historyEmptyText: "Inget publicerat ännu.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Dina inloggningsuppgifter och din inläggshistorik stannar bara i den här webbläsaren. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      testingLabel: "Testar…",
+      connectedLabel: "✓ Ansluten",
+      notConnectedSuffix: "(inte ansluten)",
+      errorNoWebhook: "Lägg till en webhook-URL först.",
+      errorWebhookStatus: "Webhooken svarade med status {status}",
+      errorDiscordStatus: "Discord svarade med status {status}",
+      errorNoBlueskyCreds: "Lägg till ditt användarnamn och applösenord först.",
+      errorBlueskySignIn: "Kunde inte logga in på Bluesky.",
+      errorBlueskyUpload: "Bilduppladdningen till Bluesky misslyckades.",
+      errorBlueskyPost: "Inlägget på Bluesky misslyckades.",
+      errorNoMastodonInstance: "Lägg till din Mastodon-instans först.",
+      errorNoMastodonToken: "Lägg till din åtkomsttoken först.",
+      errorMastodonVerify: "Kunde inte verifiera Mastodon-uppgifterna.",
+      errorMastodonUpload: "Bilduppladdningen till Mastodon misslyckades.",
+      errorMastodonPost: "Inlägget på Mastodon misslyckades.",
+      errorNoText: "Skriv något att publicera först.",
+      errorNoPlatform: "Anslut och markera minst en plattform först.",
+      resultSkipped: "hoppades över, {len} tecken överskrider gränsen på {limit}",
+      resultPosted: "publicerat",
+      resultPostedWithImage: "publicerat med bild"
+    },
+    de: {
+      heroSubtitle: "Schreib eine Ankündigung und poste sie gleichzeitig auf Discord, Bluesky und Mastodon.",
+      accountsHeading: "Deine Konten",
+      accountsHint: "Nur in diesem Browser gespeichert (localStorage) — nie irgendwohin gesendet außer beim Posten direkt an jede Plattform. X/Twitter ist nicht dabei: Posten dort braucht eine kostenpflichtige API-Stufe und serverseitiges Signieren von Anfragen, anders als diese drei.",
+      webhookUrlLabel: "Webhook-URL",
+      webhookHint: "Servereinstellungen → Integrationen → Webhooks → Neuer Webhook → URL kopieren.",
+      testConnectionLabel: "Verbindung testen",
+      blueskyHandleLabel: "Handle",
+      appPasswordLabel: "App-Passwort",
+      appPasswordHint: "Einstellungen → App-Passwörter → App-Passwort hinzufügen. Nicht dein normales Anmeldepasswort.",
+      instanceLabel: "Instanz",
+      accessTokenLabel: "Zugriffstoken",
+      accessTokenHint: "Einstellungen → Entwicklung → Neue Anwendung → \"write:statuses\" ankreuzen → speichern, dann \"Dein Zugriffstoken\" kopieren.",
+      saveBtnLabel: "💾 Konten speichern",
+      savedLabel: "✓ Gespeichert",
+      composeTitle: "POST FORGE — VERFASSEN",
+      statusReady: "BEREIT",
+      announcementLabel: "Ankündigung",
+      announcementPlaceholder: "Gerade neu gestartet: Paint Forge — ein kostenloser Bildeditor mit Ebenen, direkt im Browser.",
+      linkLabel: "Link (optional)",
+      imageLabel: "Bild anhängen (optional)",
+      removeImageLabel: "Bild entfernen",
+      postBtnLabel: "🚀 Jetzt posten",
+      postingLabel: "Wird gepostet…",
+      recentPostsHeading: "Letzte Beiträge",
+      historyEmptyText: "Noch nichts gepostet.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Deine Zugangsdaten und dein Postverlauf bleiben nur in diesem Browser. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      testingLabel: "Wird getestet…",
+      connectedLabel: "✓ Verbunden",
+      notConnectedSuffix: "(nicht verbunden)",
+      errorNoWebhook: "Füge zuerst eine Webhook-URL hinzu.",
+      errorWebhookStatus: "Webhook antwortete mit Status {status}",
+      errorDiscordStatus: "Discord antwortete mit Status {status}",
+      errorNoBlueskyCreds: "Füge zuerst dein Handle und App-Passwort hinzu.",
+      errorBlueskySignIn: "Anmeldung bei Bluesky fehlgeschlagen.",
+      errorBlueskyUpload: "Bild-Upload zu Bluesky fehlgeschlagen.",
+      errorBlueskyPost: "Beitrag auf Bluesky fehlgeschlagen.",
+      errorNoMastodonInstance: "Füge zuerst deine Mastodon-Instanz hinzu.",
+      errorNoMastodonToken: "Füge zuerst deinen Zugriffstoken hinzu.",
+      errorMastodonVerify: "Mastodon-Zugangsdaten konnten nicht geprüft werden.",
+      errorMastodonUpload: "Bild-Upload zu Mastodon fehlgeschlagen.",
+      errorMastodonPost: "Beitrag auf Mastodon fehlgeschlagen.",
+      errorNoText: "Schreib zuerst etwas zum Posten.",
+      errorNoPlatform: "Verbinde und markiere zuerst mindestens eine Plattform.",
+      resultSkipped: "übersprungen, {len} Zeichen überschreiten das Limit von {limit}",
+      resultPosted: "gepostet",
+      resultPostedWithImage: "mit Bild gepostet"
+    },
+    pt: {
+      heroSubtitle: "Escreva um anúncio e publique no Discord, Bluesky e Mastodon de uma vez.",
+      accountsHeading: "Suas contas",
+      accountsHint: "Salvo só neste navegador (localStorage) — nunca enviado a lugar nenhum, exceto direto a cada plataforma quando você publica. X/Twitter não está incluído: publicar lá exige um plano pago de API e assinatura de requisições no servidor, ao contrário destes três.",
+      webhookUrlLabel: "URL do webhook",
+      webhookHint: "Configurações do servidor → Integrações → Webhooks → Novo webhook → Copiar URL.",
+      testConnectionLabel: "Testar conexão",
+      blueskyHandleLabel: "Usuário (handle)",
+      appPasswordLabel: "Senha de app",
+      appPasswordHint: "Configurações → Senhas de app → Adicionar senha de app. Não é sua senha principal de login.",
+      instanceLabel: "Instância",
+      accessTokenLabel: "Token de acesso",
+      accessTokenHint: "Preferências → Desenvolvimento → Novo aplicativo → marque \"write:statuses\" → salve e copie \"Seu token de acesso\".",
+      saveBtnLabel: "💾 Salvar contas",
+      savedLabel: "✓ Salvo",
+      composeTitle: "POST FORGE — ESCREVER",
+      statusReady: "PRONTO",
+      announcementLabel: "Anúncio",
+      announcementPlaceholder: "Ferramenta nova acabou de sair: Paint Forge — um editor de imagens grátis com camadas, direto no navegador.",
+      linkLabel: "Link (opcional)",
+      imageLabel: "Anexar uma imagem (opcional)",
+      removeImageLabel: "Remover imagem",
+      postBtnLabel: "🚀 Publicar agora",
+      postingLabel: "Publicando…",
+      recentPostsHeading: "Posts recentes",
+      historyEmptyText: "Nada publicado ainda.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Suas credenciais e histórico de posts ficam só neste navegador. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      testingLabel: "Testando…",
+      connectedLabel: "✓ Conectado",
+      notConnectedSuffix: "(não conectado)",
+      errorNoWebhook: "Adicione uma URL de webhook primeiro.",
+      errorWebhookStatus: "O webhook respondeu com status {status}",
+      errorDiscordStatus: "O Discord respondeu com status {status}",
+      errorNoBlueskyCreds: "Adicione seu usuário e a senha de app primeiro.",
+      errorBlueskySignIn: "Não foi possível entrar no Bluesky.",
+      errorBlueskyUpload: "Falha no envio da imagem ao Bluesky.",
+      errorBlueskyPost: "Falha no post do Bluesky.",
+      errorNoMastodonInstance: "Adicione sua instância do Mastodon primeiro.",
+      errorNoMastodonToken: "Adicione seu token de acesso primeiro.",
+      errorMastodonVerify: "Não foi possível verificar as credenciais do Mastodon.",
+      errorMastodonUpload: "Falha no envio da imagem ao Mastodon.",
+      errorMastodonPost: "Falha no post do Mastodon.",
+      errorNoText: "Escreva algo para publicar primeiro.",
+      errorNoPlatform: "Conecte e marque pelo menos uma plataforma primeiro.",
+      resultSkipped: "pulado, {len} caracteres passam do limite de {limit}",
+      resultPosted: "publicado",
+      resultPostedWithImage: "publicado com imagem"
+    },
+    fr: {
+      heroSubtitle: "Écrivez une annonce et publiez-la sur Discord, Bluesky et Mastodon à la fois.",
+      accountsHeading: "Vos comptes",
+      accountsHint: "Enregistré uniquement dans ce navigateur (localStorage) — jamais envoyé ailleurs, sauf directement à chaque plateforme quand vous publiez. X/Twitter n'est pas inclus : y publier exige une offre d'API payante et une signature des requêtes côté serveur, contrairement à ces trois-là.",
+      webhookUrlLabel: "URL du webhook",
+      webhookHint: "Paramètres du serveur → Intégrations → Webhooks → Nouveau webhook → Copier l'URL.",
+      testConnectionLabel: "Tester la connexion",
+      blueskyHandleLabel: "Identifiant",
+      appPasswordLabel: "Mot de passe d'application",
+      appPasswordHint: "Paramètres → Mots de passe d'application → Ajouter. Pas votre mot de passe de connexion principal.",
+      instanceLabel: "Instance",
+      accessTokenLabel: "Jeton d'accès",
+      accessTokenHint: "Préférences → Développement → Nouvelle application → cochez \"write:statuses\" → enregistrez, puis copiez \"Votre jeton d'accès\".",
+      saveBtnLabel: "💾 Enregistrer les comptes",
+      savedLabel: "✓ Enregistré",
+      composeTitle: "POST FORGE — RÉDIGER",
+      statusReady: "PRÊT",
+      announcementLabel: "Annonce",
+      announcementPlaceholder: "Nouvel outil tout juste lancé : Paint Forge — un éditeur d'images à calques gratuit, directement dans votre navigateur.",
+      linkLabel: "Lien (facultatif)",
+      imageLabel: "Joindre une image (facultatif)",
+      removeImageLabel: "Retirer l'image",
+      postBtnLabel: "🚀 Publier maintenant",
+      postingLabel: "Publication…",
+      recentPostsHeading: "Publications récentes",
+      historyEmptyText: "Rien de publié pour l'instant.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Vos identifiants et l'historique de vos publications restent uniquement dans ce navigateur. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      testingLabel: "Test en cours…",
+      connectedLabel: "✓ Connecté",
+      notConnectedSuffix: "(non connecté)",
+      errorNoWebhook: "Ajoutez d'abord une URL de webhook.",
+      errorWebhookStatus: "Le webhook a répondu avec le statut {status}",
+      errorDiscordStatus: "Discord a répondu avec le statut {status}",
+      errorNoBlueskyCreds: "Ajoutez d'abord votre identifiant et votre mot de passe d'application.",
+      errorBlueskySignIn: "Connexion à Bluesky impossible.",
+      errorBlueskyUpload: "Échec de l'envoi de l'image sur Bluesky.",
+      errorBlueskyPost: "Échec de la publication sur Bluesky.",
+      errorNoMastodonInstance: "Ajoutez d'abord votre instance Mastodon.",
+      errorNoMastodonToken: "Ajoutez d'abord votre jeton d'accès.",
+      errorMastodonVerify: "Impossible de vérifier les identifiants Mastodon.",
+      errorMastodonUpload: "Échec de l'envoi de l'image sur Mastodon.",
+      errorMastodonPost: "Échec de la publication sur Mastodon.",
+      errorNoText: "Écrivez d'abord quelque chose à publier.",
+      errorNoPlatform: "Connectez et cochez d'abord au moins une plateforme.",
+      resultSkipped: "ignoré, {len} caractères dépassent sa limite de {limit}",
+      resultPosted: "publié",
+      resultPostedWithImage: "publié avec image"
+    }
+  });
+
+  fillFromStorage();
+  renderTargetList();
+  renderHistory();
+  I18N.onChange(renderTargetList);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

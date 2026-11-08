@@ -1,0 +1,403 @@
+<!-- Generated from /name-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="es" data-en-title="Free business name generator — Name Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='es';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/es/name-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Generador de nombres de negocio gratis — Name Forge | MigaBuilder</title>
+<meta name="description" content="Name Forge te da ideas de nombres de empresa al instante a partir de lo que hace tu negocio: prefijos, sufijos y mezclas con gancho.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Generador de nombres de negocio gratis — Name Forge">
+<meta property="og:description" content="Name Forge te da ideas de nombres de empresa al instante a partir de lo que hace tu negocio: prefijos, sufijos y mezclas con gancho.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/name-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/es/name-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Generador de nombres de negocio gratis — Name Forge">
+<meta name="twitter:description" content="Name Forge te da ideas de nombres de empresa al instante a partir de lo que hace tu negocio: prefijos, sufijos y mezclas con gancho.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/name-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/name-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .solo-wrap { max-width: 640px; margin: 0 auto; padding: 28px clamp(20px, 4vw, 48px) 56px; display: flex; flex-direction: column; gap: 20px; }
+
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; }
+  .field { margin-bottom: 18px; }
+  .field:last-child { margin-bottom: 0; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+
+  input[type="text"], select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 13px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+
+  .name-list { display: flex; flex-direction: column; gap: 8px; }
+  .name-row {
+    display: flex; align-items: center; justify-content: space-between; background: #fff; border: 1px solid rgba(22,32,43,0.18);
+    border-radius: var(--radius); padding: 12px 14px; cursor: pointer;
+  }
+  .name-row:hover { border-color: var(--navy); }
+  .name-text { font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; }
+  .name-copied { font-size: 11.5px; color: var(--success); opacity: 0; transition: opacity 0.15s; }
+  .name-copied.show { opacity: 1; }
+  .name-empty { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); padding: 10px 0; }
+
+  footer { padding: 0 clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 640px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Puedo comprobar si un dominio está libre?","acceptedAnswer":{"@type":"Answer","text":"Haz una lista con los nombres que te gusten y comprueba que el dominio y los nombres en redes sociales estén libres antes de decidir."}},{"@type":"Question","name":"¿Name Forge es gratis?","acceptedAnswer":{"@type":"Answer","text":"Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago."}},{"@type":"Question","name":"¿Se suben mis archivos?","acceptedAnswer":{"@type":"Answer","text":"No. Funciona por completo en tu navegador, así que tus archivos y textos se quedan en tu dispositivo."}}],"inLanguage":"es"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/name-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/name-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/name-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/name-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/name-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/name-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/name-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/name-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/name-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/name-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M9 28 L16 12 L23 28 M11.5 22 H20.5" stroke="#EDEAE0" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="30" cy="14" r="4.5" stroke="#E2A63B" stroke-width="2"/>
+  </svg>
+  <div>
+    <h1>Name Forge</h1>
+    <p data-i18n="heroSubtitle">Type what your business does and get instant, brandable name ideas — free, in your browser.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<div class="solo-wrap">
+  <div class="panel">
+    <div class="field">
+      <label for="keywordInput" data-i18n="keywordLabel">What's your business about?</label>
+      <input type="text" id="keywordInput" placeholder="coffee, dog walking, web design…" value="coffee">
+      <p class="hint" data-i18n="keywordHint">One or two words work best — a product, service, or industry.</p>
+    </div>
+    <div class="field">
+      <label for="styleInput" data-i18n="styleLabel">Style</label>
+      <select id="styleInput">
+        <option value="modern" selected data-i18n="styleModern">Modern &amp; bold</option>
+        <option value="playful" data-i18n="stylePlayful">Playful &amp; friendly</option>
+        <option value="classic" data-i18n="styleClassic">Classic &amp; trustworthy</option>
+      </select>
+    </div>
+    <button type="button" class="draft-btn" id="generateBtn" data-i18n="generateLabel">✨ Generate names</button>
+  </div>
+
+  <div class="panel">
+    <div class="name-list" id="nameList"></div>
+    <p class="name-empty" id="nameEmpty" data-i18n="nameEmptyText">Click "Generate names" above to get started.</p>
+    <button type="button" class="draft-btn secondary" id="regenerateBtn" style="margin-top:14px; display:none;" data-i18n="regenerateLabel">🔁 More ideas</button>
+  </div>
+</div>
+
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Name Forge</h2>
+  <p>Name Forge gives you instant business name ideas from what your business does: prefixes, suffixes and brandable blends.</p>
+  <h3>How to use Name Forge</h3>
+  <ol><li>Describe the business, audience, tone, and useful keywords.</li><li>Press “Generate names”.</li><li>Shortlist the strongest names and check their domains.</li></ol>
+  <h3>Can I check if a domain is free?</h3>
+  <p>Shortlist the names you like, then check that the domain and social media names are free before you decide.</p>
+  <h3>Is Name Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/es/logo-forge.html">Logo Forge</a> · <a href="/es/website-builder.html">Website Builder</a> · <a href="/es/palette-forge.html">Palette Forge</a></p>
+</section>
+<footer data-i18n-html="footerText">Part of <a href="/es/">MigaBuilder</a>. Everything happens in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/name-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  var keywordInput = document.getElementById('keywordInput');
+  var styleInput = document.getElementById('styleInput');
+  var nameList = document.getElementById('nameList');
+  var nameEmpty = document.getElementById('nameEmpty');
+  var regenerateBtn = document.getElementById('regenerateBtn');
+
+  var WORD_BANKS = {
+    modern: { prefixes: ['Nova', 'Prime', 'Urban', 'Bright', 'Swift', 'Bold', 'North', 'Axis', 'Vivid', 'Nex'], suffixes: ['Labs', 'Co', 'Hub', 'Works', 'Studio', 'HQ', 'Point'] },
+    playful: { prefixes: ['Happy', 'Sunny', 'Jolly', 'Zippy', 'Bubbly', 'Wonder', 'Peppy', 'Giggle', 'Merry'], suffixes: ['Buddy', 'Pal', 'Nest', 'Spot', 'Corner', 'Patch', 'Crew'] },
+    classic: { prefixes: ['Golden', 'Heritage', 'Royal', 'True', 'Noble', 'Grand', 'Union', 'Original'], suffixes: ['House', 'Co', 'Company', 'Guild', 'Collective', 'Group', 'Society'] }
+  };
+  var DOMAIN_SUFFIXES = ['ify', 'ly', 'io', 'go', 'now', 'able'];
+
+  function capitalize(w) { return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase(); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  function generateNames(keyword, style, count) {
+    // "bakery, cardamom, fresh" is three ideas: each name is built from one of them, and punctuation is dropped.
+    var groups = keyword.split(/[,;\/|]+/).map(function (g) {
+      return g.replace(/[^\p{L}\p{N}\s'&-]/gu, ' ').trim().split(/\s+/).filter(Boolean).map(capitalize);
+    }).filter(function (w) { return w.length; });
+    if (!groups.length) return [];
+    var bank = WORD_BANKS[style] || WORD_BANKS.modern;
+    var results = new Set();
+    var attempts = 0;
+    while (results.size < count && attempts < count * 12) {
+      attempts++;
+      var words = groups[attempts % groups.length];
+      var base = words.join(' ');
+      var singleWord = words.join('');
+      var strategy = Math.floor(Math.random() * 5);
+      var name;
+      if (strategy === 0) {
+        name = pick(bank.prefixes) + ' ' + base;
+      } else if (strategy === 1) {
+        name = base + ' ' + pick(bank.suffixes);
+      } else if (strategy === 2) {
+        name = pick(bank.prefixes) + singleWord;
+      } else if (strategy === 3 && singleWord.length >= 4) {
+        name = singleWord + capitalize(pick(DOMAIN_SUFFIXES));
+      } else {
+        name = singleWord + pick(bank.suffixes);
+      }
+      results.add(name);
+    }
+    return Array.from(results).slice(0, count);
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    return Promise.resolve();
+  }
+
+  function renderNames(names) {
+    nameList.innerHTML = '';
+    nameEmpty.style.display = names.length ? 'none' : 'block';
+    regenerateBtn.style.display = names.length ? 'block' : 'none';
+    names.forEach(function (name) {
+      var row = document.createElement('div');
+      row.className = 'name-row';
+      var text = document.createElement('span');
+      text.className = 'name-text';
+      text.textContent = name;
+      var copied = document.createElement('span');
+      copied.className = 'name-copied';
+      copied.setAttribute('data-i18n', 'copiedLabel');
+      copied.textContent = I18N.t('copiedLabel');
+      row.appendChild(text); row.appendChild(copied);
+      row.addEventListener('click', function () {
+        copyText(name);
+        copied.classList.add('show');
+        setTimeout(function () { copied.classList.remove('show'); }, 1200);
+      });
+      nameList.appendChild(row);
+    });
+  }
+
+  function generate() {
+    var keyword = keywordInput.value.trim();
+    if (!keyword) { renderNames([]); return; }
+    renderNames(generateNames(keyword, styleInput.value, 12));
+  }
+
+  document.getElementById('generateBtn').addEventListener('click', generate);
+  regenerateBtn.addEventListener('click', generate);
+  keywordInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') generate(); });
+
+  I18N.onChange(function () {
+    document.querySelectorAll('.name-copied').forEach(function (el) { el.textContent = I18N.t('copiedLabel'); });
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Type what your business does and get instant, brandable name ideas — free, in your browser.',
+      keywordLabel: "What's your business about?",
+      keywordHint: 'One or two words work best — a product, service, or industry.',
+      styleLabel: 'Style',
+      styleModern: 'Modern & bold',
+      stylePlayful: 'Playful & friendly',
+      styleClassic: 'Classic & trustworthy',
+      generateLabel: '✨ Generate names',
+      regenerateLabel: '🔁 More ideas',
+      nameEmptyText: 'Click "Generate names" above to get started.',
+      copiedLabel: 'Copied!',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything happens in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
+    },
+    es: {
+      heroSubtitle: 'Escribe a qué se dedica tu negocio y obtén ideas de nombres al instante — gratis, en tu navegador.',
+      keywordLabel: '¿A qué se dedica tu negocio?',
+      keywordHint: 'Una o dos palabras funcionan mejor — un producto, servicio o industria.',
+      styleLabel: 'Estilo',
+      styleModern: 'Moderno y audaz',
+      stylePlayful: 'Divertido y cercano',
+      styleClassic: 'Clásico y confiable',
+      generateLabel: '✨ Generar nombres',
+      regenerateLabel: '🔁 Más ideas',
+      nameEmptyText: 'Haz clic en "Generar nombres" arriba para empezar.',
+      copiedLabel: '¡Copiado!',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo ocurre en tu navegador — no se sube nada a ningún lado. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía comentarios →</a>'
+    },
+    ar: {
+      heroSubtitle: 'اكتب مجال عملك واحصل فورًا على أفكار أسماء قابلة للعلامة التجارية — مجانًا، في متصفحك.',
+      keywordLabel: 'ما هو مجال عملك؟',
+      keywordHint: 'كلمة أو كلمتان أفضل — منتج، خدمة، أو مجال صناعي.',
+      styleLabel: 'الأسلوب',
+      styleModern: 'عصري وجريء',
+      stylePlayful: 'مرح وودود',
+      styleClassic: 'كلاسيكي وموثوق',
+      generateLabel: '✨ إنشاء أسماء',
+      regenerateLabel: '🔁 المزيد من الأفكار',
+      nameEmptyText: 'انقر على "إنشاء أسماء" أعلاه للبدء.',
+      copiedLabel: 'تم النسخ!',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل شيء يحدث في متصفحك — لا يُرفع شيء إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
+    },
+    zh: {
+      heroSubtitle: '输入你的业务内容，即刻获得可用作品牌的名称创意——免费，就在你的浏览器中。',
+      keywordLabel: '你的业务是关于什么的？',
+      keywordHint: '一到两个词效果最好——一个产品、服务或行业。',
+      styleLabel: '风格',
+      styleModern: '现代大胆',
+      stylePlayful: '活泼亲切',
+      styleClassic: '经典可信',
+      generateLabel: '✨ 生成名称',
+      regenerateLabel: '🔁 更多创意',
+      nameEmptyText: '点击上方"生成名称"开始。',
+      copiedLabel: '已复制！',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。一切都在你的浏览器中完成——不会上传到任何地方。<a href="feedback.html">发现错误或有想法？发送反馈 →</a>'
+    },
+    sw: {
+      heroSubtitle: 'Andika kinachohusu biashara yako na upate mawazo ya majina papo hapo — bila malipo, kwenye kivinjari chako.',
+      keywordLabel: 'Biashara yako inahusu nini?',
+      keywordHint: 'Neno moja au mawili yanafanya kazi vizuri zaidi — bidhaa, huduma, au sekta.',
+      styleLabel: 'Mtindo',
+      styleModern: 'Wa kisasa na jasiri',
+      stylePlayful: 'Wa kuchezesha na wa kirafiki',
+      styleClassic: 'Wa asili na wa kuaminika',
+      generateLabel: '✨ Tengeneza majina',
+      regenerateLabel: '🔁 Mawazo zaidi',
+      nameEmptyText: 'Bofya "Tengeneza majina" hapo juu ili kuanza.',
+      copiedLabel: 'Imenakiliwa!',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu kinatokea kwenye kivinjari chako — hakuna kinachopakiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Skriv vad ditt företag gör och få direkt varumärkesvänliga namnförslag — gratis, i din webbläsare.",
+      keywordLabel: "Vad handlar ditt företag om?",
+      keywordHint: "Ett eller två ord fungerar bäst — en produkt, tjänst eller bransch.",
+      styleLabel: "Stil",
+      styleModern: "Modern & djärv",
+      stylePlayful: "Lekfull & vänlig",
+      styleClassic: "Klassisk & pålitlig",
+      generateLabel: "✨ Skapa namn",
+      regenerateLabel: "🔁 Fler idéer",
+      nameEmptyText: "Klicka på \"Skapa namn\" ovan för att komma igång.",
+      copiedLabel: "Kopierat!",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt sker i din webbläsare — ingenting laddas upp någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
+    },
+    de: {
+      heroSubtitle: "Gib ein, was dein Unternehmen macht, und bekomm sofort markentaugliche Namensideen — kostenlos, in deinem Browser.",
+      keywordLabel: "Worum geht es in deinem Unternehmen?",
+      keywordHint: "Ein oder zwei Wörter funktionieren am besten — ein Produkt, eine Dienstleistung oder Branche.",
+      styleLabel: "Stil",
+      styleModern: "Modern & kühn",
+      stylePlayful: "Verspielt & freundlich",
+      styleClassic: "Klassisch & vertrauenswürdig",
+      generateLabel: "✨ Namen erzeugen",
+      regenerateLabel: "🔁 Mehr Ideen",
+      nameEmptyText: "Klick oben auf \"Namen erzeugen\", um zu beginnen.",
+      copiedLabel: "Kopiert!",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles passiert in deinem Browser — nichts wird hochgeladen. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
+    },
+    pt: {
+      heroSubtitle: "Digite o que seu negócio faz e receba ideias de nome com cara de marca na hora — grátis, no seu navegador.",
+      keywordLabel: "Sobre o que é seu negócio?",
+      keywordHint: "Uma ou duas palavras funcionam melhor — um produto, serviço ou setor.",
+      styleLabel: "Estilo",
+      styleModern: "Moderno e ousado",
+      stylePlayful: "Divertido e amigável",
+      styleClassic: "Clássico e confiável",
+      generateLabel: "✨ Gerar nomes",
+      regenerateLabel: "🔁 Mais ideias",
+      nameEmptyText: "Clique em \"Gerar nomes\" acima para começar.",
+      copiedLabel: "Copiado!",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo acontece no seu navegador — nada é enviado. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>"
+    },
+    fr: {
+      heroSubtitle: "Tapez ce que fait votre entreprise et obtenez aussitôt des idées de noms qui sonnent comme une marque — gratuit, dans votre navigateur.",
+      keywordLabel: "De quoi parle votre entreprise ?",
+      keywordHint: "Un ou deux mots fonctionnent le mieux — un produit, un service ou un secteur.",
+      styleLabel: "Style",
+      styleModern: "Moderne et audacieux",
+      stylePlayful: "Ludique et sympathique",
+      styleClassic: "Classique et fiable",
+      generateLabel: "✨ Générer des noms",
+      regenerateLabel: "🔁 Plus d'idées",
+      nameEmptyText: "Cliquez sur \"Générer des noms\" ci-dessus pour commencer.",
+      copiedLabel: "Copié !",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Tout se passe dans votre navigateur — rien n'est envoyé. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>"
+    }
+  });
+
+  generate();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

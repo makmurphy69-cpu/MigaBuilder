@@ -1,0 +1,2233 @@
+<!-- Generated from /game-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="zh-Hans" data-en-title="Make a game with AI free — no coding — Game Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='zh';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><script src="gemini-fallback.js"></script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/zh/game-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>用 AI 免费制作游戏 — 无需编程 — Game Forge | MigaBuilder</title>
+<meta name="description" content="Game Forge 把文字构想变成可在浏览器中玩的游戏。描述游戏、操作方式和目标，AI 当着你的面把它写出来；然后试玩并提出修改。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="用 AI 免费制作游戏 — 无需编程 — Game Forge">
+<meta property="og:description" content="Game Forge 把文字构想变成可在浏览器中玩的游戏。描述游戏、操作方式和目标，AI 当着你的面把它写出来；然后试玩并提出修改。">
+<meta property="og:image" content="https://migabuilder.com/assets/og/game-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/zh/game-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="用 AI 免费制作游戏 — 无需编程 — Game Forge">
+<meta name="twitter:description" content="Game Forge 把文字构想变成可在浏览器中玩的游戏。描述游戏、操作方式和目标，AI 当着你的面把它写出来；然后试玩并提出修改。">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/game-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/game-forge.js"></script>
+<script src="sandbox-frame.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main { display: grid; grid-template-columns: minmax(300px, 380px) 1fr; gap: 24px; padding: 28px clamp(20px, 4vw, 48px) 56px; align-items: start; }
+  @media (max-width: 880px) { main { grid-template-columns: 1fr; } }
+
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; position: sticky; top: 20px; }
+  @media (max-width: 880px) { .panel { position: static; } }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 22px 0 12px; padding-top: 18px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="password"], input[type="text"], textarea, select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+  .key-row { display: flex; gap: 8px; }
+  .key-row input { flex: 1; }
+  .toggle-key {
+    background: transparent; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius);
+    padding: 0 12px; font-size: 12.5px; cursor: pointer; color: var(--ink);
+  }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 13px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+
+  .error-box {
+    margin-top: 16px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none;
+  }
+  .error-box.show { display: block; }
+
+  .table { background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 18px; min-height: 560px; display: flex; flex-direction: column; }
+  .title-block {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75);
+    padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim);
+  }
+  .sheet { flex: 1; background: #fff; border-radius: 2px; overflow: hidden; position: relative; min-height: 480px; display: flex; }
+  .sheet iframe { width: 100%; border: none; flex: 1; }
+  .sheet-empty { margin: auto; text-align: center; color: rgba(14, 42, 71, 0.45); font-size: 14px; max-width: 340px; padding: 20px; }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(14, 42, 71, 0.75); margin-bottom: 6px; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+
+  .chip-btn {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: 20px;
+    padding: 6px 13px; font-size: 12.5px; cursor: pointer;
+  }
+  .chip-btn:hover:not(:disabled) { border-color: var(--line-cyan); color: var(--line-cyan); }
+  .chip-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .add-audio-row { display: flex; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .upload-btn, .record-btn {
+    display: inline-block; background: #fff; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius);
+    padding: 8px 12px; font-size: 12.5px; cursor: pointer; color: var(--ink); font-family: inherit;
+  }
+  .record-btn.recording { background: rgba(216, 96, 74, 0.14); border-color: var(--error); color: #6E2418; }
+  .clip-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(22, 32, 43, 0.12); flex-wrap: wrap; }
+  .clip-row:last-child { border-bottom: none; }
+  .clip-row input[type="text"] { flex: 1; min-width: 90px; font-size: 13px; padding: 6px 8px; }
+  .clip-row select { flex: none; width: auto; font-size: 12px; padding: 6px 8px; }
+  .clip-row audio { height: 30px; max-width: 150px; }
+  .tune { margin-top: 14px; border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 14px; background: rgba(14, 42, 71, 0.55); }
+  .tune h3 { margin: 0 0 4px; font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: var(--paper); }
+  .tune .tune-hint { margin: 0 0 12px; font-size: 12.5px; color: rgba(237, 234, 224, 0.6); line-height: 1.45; }
+  .tune-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px 18px; }
+  .tune-row label { display: flex; justify-content: space-between; gap: 8px; font-size: 12.5px; color: var(--paper); margin-bottom: 3px; }
+  .tune-row output { font-family: 'IBM Plex Mono', monospace; color: var(--line-cyan); }
+  .tune-row input[type=range] { width: 100%; accent-color: var(--amber); }
+  .tune-empty { font-size: 13px; color: rgba(237, 234, 224, 0.7); }
+  .sfx-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+  .sfx-item { display: flex; align-items: center; gap: 4px; border: 1px solid var(--line-cyan-dim); border-radius: 6px; padding: 4px; }
+  .sfx-item button { background: transparent; border: 0; color: var(--paper); cursor: pointer; font: inherit; font-size: 13px; padding: 6px; border-radius: 4px; }
+  .sfx-item button:hover { background: rgba(111, 209, 224, 0.12); }
+  .sfx-item .sfx-play { flex: 1; text-align: left; }
+  .sfx-item.changed { border-color: var(--line-cyan); }
+  .sprite-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; color: var(--paper); font-size: 12.5px; }
+  .sprite-controls .asset-drop { flex: 1 1 220px; }
+  .sprite-controls input[type=number] { width: 70px; margin-left: 4px; }
+  .sprite-work { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 12px; margin-top: 12px; }
+  .sprite-work[hidden] { display: none; }
+  .sheet-view { overflow: auto; max-height: 340px; background: repeating-conic-gradient(#2a3a4a 0 25%, #1d2b39 0 50%) 0 0 / 16px 16px; border-radius: 6px; }
+  .sheet-view canvas { display: block; image-rendering: pixelated; cursor: crosshair; }
+  .anim-list { display: grid; gap: 8px; align-content: start; }
+  .anim-row { display: grid; grid-template-columns: auto auto 1fr 72px; gap: 8px; align-items: center; color: var(--paper); font-size: 13px; }
+  .anim-row input[type=text] { min-width: 0; }
+  .anim-row canvas { width: 72px; height: 72px; image-rendering: pixelated; background: rgba(255,255,255,.06); border-radius: 4px; }
+  @media (max-width: 700px) { .sprite-work { grid-template-columns: 1fr; } }
+  .asset-drops { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; margin-top: 14px; }
+  .asset-drop { display: flex; align-items: center; gap: 10px; border: 2px dashed var(--line-cyan-dim); border-radius: 6px; padding: 10px; cursor: pointer; color: var(--paper); font-size: 12.5px; min-height: 64px; transition: border-color .15s, background .15s; }
+  .asset-drop:hover, .asset-drop.over { border-color: var(--line-cyan); background: rgba(111, 209, 224, 0.08); }
+  .asset-drop .thumb { width: 44px; height: 44px; flex: none; border-radius: 4px; background: rgba(255,255,255,.08) center/contain no-repeat; display: grid; place-items: center; font-size: 22px; }
+  .asset-drop strong { display: block; font-size: 13px; }
+  .asset-drop small { color: rgba(237, 234, 224, 0.55); }
+  .asset-drop .clear-asset { margin-left: auto; background: transparent; border: 0; color: var(--error); font-size: 16px; cursor: pointer; }
+  .tune-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .clip-row .remove-clip { background: transparent; border: none; color: var(--error); cursor: pointer; font-size: 16px; line-height: 1; padding: 4px; }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"我可以下载自己做的游戏吗？","acceptedAnswer":{"@type":"Answer","text":"可以。满意后，把完成的游戏下载为 HTML 文件，它能在任何现代浏览器中运行，离线也可以。"}},{"@type":"Question","name":"Game Forge 免费吗？","acceptedAnswer":{"@type":"Answer","text":"是的。它可以免费使用，无需账号，没有水印，也没有付费墙。AI 使用共享的免费额度；如果繁忙或已达到每日上限，请稍后再试，或添加你自己的 Gemini 密钥。"}},{"@type":"Question","name":"我的文件会被上传吗？","acceptedAnswer":{"@type":"Answer","text":"只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。"}}],"inLanguage":"zh"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/game-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/game-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/game-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/game-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/game-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/game-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/game-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/game-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/game-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/game-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Game Forge</h1>
+    <p data-i18n="heroSubtitle">Describe a game. Get something playable — built live in your browser, the same way MigaBuilder writes a website.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="section-title" data-i18n="connectionHeading">Connection</div>
+    <div class="field">
+      <label for="provider" data-i18n="providerLabel">AI provider</label>
+      <select id="provider">
+        <option value="gemini" data-i18n="providerGemini" selected>Gemini — free, no key needed</option>
+        <option value="openai" data-i18n="providerOpenai">OpenAI</option>
+        <option value="anthropic" data-i18n="providerAnthropic">Anthropic (Claude)</option>
+      </select>
+    </div>
+    <div class="field" id="apiKeyField">
+      <label for="apiKey" id="apiKeyLabel">Your OpenAI API key</label>
+      <div class="key-row">
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+        <button type="button" class="toggle-key" id="toggleKey">Show</button>
+      </div>
+      <p class="hint" data-i18n="apiKeyHint">Used only to call the provider above directly from your browser. Never stored.</p>
+    </div>
+    <div class="field" id="freeNoticeField" style="display:none;">
+      <p class="hint" data-i18n="freeNoticeText" style="margin-top:0;">✓ Free to use — shared key with a limited daily capacity. If it stops working, try again tomorrow, or switch to OpenAI/Anthropic with your own key.</p>
+    </div>
+    <div class="field">
+      <label for="model" data-i18n="modelLabel">Text model</label>
+      <select id="model">
+        <option value="gpt-4o-mini" selected>gpt-4o-mini (fast, cheap)</option>
+        <option value="gpt-4o">gpt-4o (higher quality)</option>
+        <option value="gpt-4.1">gpt-4.1</option>
+      </select>
+    </div>
+
+    <div class="section-title" data-i18n="gameHeading">The game</div>
+    <div class="field">
+      <label for="genre" data-i18n="genreLabel">Genre</label>
+      <select id="genre">
+        <option value="auto" data-i18n="genreAuto" selected>Let the AI decide</option>
+        <option value="platformer" data-i18n="genrePlatformer">Platformer (jump/run)</option>
+        <option value="shooter" data-i18n="genreShooter">Top-down shooter</option>
+        <option value="runner" data-i18n="genreRunner">Endless runner / dodger</option>
+        <option value="puzzle" data-i18n="genrePuzzle">Puzzle / match grid</option>
+        <option value="racing" data-i18n="genreRacing">Racing / obstacle course</option>
+        <option value="tower" data-i18n="genreTower">Tower defense (lite)</option>
+        <option value="battle" data-i18n="genreBattle">Turn-based battle</option>
+      </select>
+      <p class="hint" data-i18n="genreHint">Picking a genre gives the AI real technical scaffolding for that kind of game (physics, spawning, grid logic) instead of guessing — usually the single biggest jump in quality.</p>
+    </div>
+    <div class="field">
+      <label for="difficulty" data-i18n="difficultyLabel">Difficulty curve</label>
+      <select id="difficulty">
+        <option value="normal" data-i18n="difficultyNormal" selected>Normal — balanced from the start</option>
+        <option value="easy" data-i18n="difficultyEasy">Easy — forgiving, good for testing</option>
+        <option value="hard" data-i18n="difficultyHard">Hard — punishing, tight timing</option>
+        <option value="escalating" data-i18n="difficultyEscalating">Escalating — starts easy, ramps up over time</option>
+      </select>
+    </div>
+    <div class="field">
+      <label data-i18n="extraFeaturesLabel">Extra features</label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:13.5px;margin-bottom:6px;"><input type="checkbox" id="featSound" checked style="width:auto;"> <span data-i18n="featSoundLabel">Procedural sound effects (Web Audio, no files)</span></label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:13.5px;margin-bottom:6px;"><input type="checkbox" id="featTouch" checked style="width:auto;"> <span data-i18n="featTouchLabel">On-screen touch controls for mobile</span></label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:13.5px;margin-bottom:6px;"><input type="checkbox" id="featHighscore" checked style="width:auto;"> <span data-i18n="featHighscoreLabel">Local high score (saved in the browser)</span></label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;font-size:13.5px;margin-bottom:0;"><input type="checkbox" id="featTwoPlayer" style="width:auto;"> <span data-i18n="featTwoPlayerLabel">Two-player, same keyboard</span></label>
+    </div>
+    <div class="field">
+      <label data-i18n="ownAudioLabel">Your own sound &amp; voice (optional)</label>
+      <p class="hint" data-i18n="ownAudioHint" style="margin-top:0;">Upload short clips or record your voice — they're baked directly into the game file and never sent anywhere, including to the AI provider. Give each one a short name; the AI uses the name to decide when to play it (e.g. "jump", "win", "taunt"). Keep clips short — they're embedded as-is.</p>
+      <div class="add-audio-row">
+        <label class="upload-btn" for="audioUploadInput" data-i18n="addSoundFilesLabel">+ Add sound files</label>
+        <input type="file" id="audioUploadInput" accept="audio/*" multiple style="display:none;">
+        <button type="button" class="record-btn" id="recordVoiceBtn" data-i18n="recordVoiceLabel">🎙️ Record voice</button>
+      </div>
+      <div id="clipsList"></div>
+    </div>
+    <div class="field">
+      <label for="brief" data-i18n="briefLabel">Describe the game you want</label>
+      <textarea id="brief" data-i18n-placeholder="briefPlaceholder" placeholder="e.g. A ninja who fights other ninjas — arrow keys to move, space to attack, best of 3 rounds wins"></textarea>
+      <p class="hint" data-i18n="briefHint">Be specific about controls and the win condition if you have one in mind — the AI follows what you give it. Expect simple, playable mechanics with shapes and emoji for characters, not illustrated art.</p>
+    </div>
+    <button type="button" class="draft-btn" id="draftBtn" data-i18n="generateBtnLabel">Generate game</button>
+    <p style="margin:10px 0 0;font-size:13px">Want a 3D game instead? Try <a href="/zh/3d-game-forge.html">3D Game Forge</a>: runner, racer, maze, platformer or arena, with a level editor.</p>
+    <div class="error-box" id="errorBox"></div>
+  </section>
+
+  <section class="table">
+    <div class="title-block" id="titleBlock" data-i18n="statusNotGenerated">GAME FORGE — NOTHING GENERATED YET</div>
+    <div class="sheet" id="sheet">
+      <div class="sheet-empty" id="sheetEmpty">
+        <strong data-i18n="sheetEmptyStrong">Nothing here yet.</strong>
+        <span data-i18n="sheetEmptyText">Describe a game on the left and click Generate — it'll show up here, ready to play.</span>
+      </div>
+      <iframe id="preview" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-pointer-lock allow-downloads" allow="autoplay; fullscreen; gamepad" style="display:none;" title="Generated game preview"></iframe>
+    </div>
+
+    <div class="tune" id="tunePanel">
+      <h3>🎛️ Tune the game — no code needed</h3>
+      <p class="tune-hint">Drag a slider and the game changes instantly while you play. Your settings are saved into the downloaded game.</p>
+      <div class="tune-grid" id="tuneSliders"><p class="tune-empty">Sliders appear here once a game is loaded.</p></div>
+      <div class="asset-drops">
+        <label class="asset-drop" data-asset="player"><span class="thumb">🧍</span><span><strong>Player picture</strong><small>Drop a PNG here or click to choose</small></span><input type="file" accept="image/*" hidden></label>
+        <label class="asset-drop" data-asset="background"><span class="thumb">🏞️</span><span><strong>Background picture</strong><small>Drop an image here or click to choose</small></span><input type="file" accept="image/*" hidden></label>
+      </div>
+      <div class="tune-actions">
+        <button type="button" class="chip-btn" id="resetTuneBtn" disabled>↺ Reset sliders</button>
+        <button type="button" class="chip-btn" id="addHooksBtn" hidden>✨ Add sliders &amp; picture slots to this game</button>
+        <button type="button" class="chip-btn" id="embedBtn" disabled>📋 Copy embed code</button>
+        <button type="button" class="chip-btn" id="starterBtn">🎮 Load the starter game</button>
+      </div>
+      <p class="tune-hint" id="tuneStatus" style="margin:10px 0 0;">Pictures are read on your device and baked into the game file — nothing is uploaded. The embed code is one self-contained block you can paste into any site that accepts HTML (WordPress, Wix, Blogger, Notion embeds…).</p>
+    </div>
+
+    <div class="tune" id="sfxPanel">
+      <h3>🔊 Retro sound effects — no files needed</h3>
+      <p class="tune-hint">8-bit sounds made from pure code with the browser's AudioContext. Press ▶ to hear one, 🎲 for a new variation you like better. Every game gets them built in — the game plays them with <code>sfx("jump")</code>, <code>sfx("coin")</code> and so on.</p>
+      <div class="sfx-grid" id="sfxGrid"></div>
+      <div class="tune-actions">
+        <button type="button" class="chip-btn" id="sfxWireBtn" disabled>🤖 Make the game use these sounds</button>
+        <button type="button" class="chip-btn" id="sfxResetBtn">↺ Reset all sounds</button>
+      </div>
+    </div>
+
+    <div class="tune" id="spritePanel">
+      <h3>🧍 Sprite sheet animator</h3>
+      <p class="tune-hint">Drop one PNG with all your character's poses in a grid, say how big each frame is, and pick which frames are Idle, Walk and Jump. The player then animates by itself — walking while an arrow key is held, jumping on Space/Up.</p>
+      <div class="sprite-controls">
+        <label class="asset-drop" id="sheetDrop"><span class="thumb">🗂️</span><span><strong>Sprite sheet</strong><small>Drop a PNG here or click to choose</small></span><input type="file" id="sheetInput" accept="image/png,image/gif,image/webp" hidden></label>
+        <label>Frame width <input type="number" id="frameW" min="4" max="1024" value="32" data-no-autosave></label>
+        <label>Frame height <input type="number" id="frameH" min="4" max="1024" value="32" data-no-autosave></label>
+        <label>Speed (frames/s) <input type="number" id="frameFps" min="1" max="30" value="8" data-no-autosave></label>
+      </div>
+      <div class="sprite-work" id="spriteWork" hidden>
+        <div class="sheet-view"><canvas id="sheetCanvas" title="Click a frame to add it to the selected animation"></canvas></div>
+        <div class="anim-list">
+          <label class="anim-row"><input type="radio" name="animPick" value="idle" checked> <strong>Idle</strong> <input type="text" id="animIdle" placeholder="0-3" data-no-autosave><canvas width="72" height="72"></canvas></label>
+          <label class="anim-row"><input type="radio" name="animPick" value="walk"> <strong>Walk</strong> <input type="text" id="animWalk" placeholder="4-9" data-no-autosave><canvas width="72" height="72"></canvas></label>
+          <label class="anim-row"><input type="radio" name="animPick" value="jump"> <strong>Jump</strong> <input type="text" id="animJump" placeholder="10,11" data-no-autosave><canvas width="72" height="72"></canvas></label>
+          <p class="tune-hint" style="margin:6px 0 0;">Type frame numbers like <code>0-3</code> or <code>4,5,6</code>, or click frames on the sheet to add them to the selected animation.</p>
+        </div>
+      </div>
+      <div class="tune-actions">
+        <button type="button" class="chip-btn" id="useSheetBtn" disabled>✓ Use as the player</button>
+        <button type="button" class="chip-btn" id="clearSheetBtn" disabled>✕ Remove from game</button>
+      </div>
+      <p class="tune-hint" id="spriteStatus" style="margin:10px 0 0;"></p>
+    </div>
+
+    <div class="field" style="margin-top:14px;">
+      <label for="refineInput" data-i18n="refineLabel" style="color: var(--paper);">Refine this game</label>
+      <div id="quickRefineChips" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px;"></div>
+      <textarea id="refineInput" data-i18n-placeholder="refinePlaceholder" placeholder="e.g. Make the ninjas move faster, add a health bar, make attacks have a cooldown" style="min-height:60px;"></textarea>
+      <button type="button" class="draft-btn" id="refineBtn" data-i18n="applyChangeBtnLabel" disabled style="margin-top:8px;">Apply change</button>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="viewSourceBtn" data-i18n="viewSourceLabel" disabled>View source</button>
+      <button type="button" id="downloadBtn" data-i18n="downloadBtnLabel" disabled>Download as HTML</button>
+      <button type="button" id="pwaBtn" disabled title="A .zip with the game, a manifest.json, icons and a service worker — upload it to any https host and players can install it on their phone and play offline">📲 Download as installable app (.zip)</button>
+    </div>
+    <div class="source-view" id="sourceView" style="display:none;margin-top:14px;">
+      <textarea id="sourceText" readonly style="width:100%;height:220px;font-family:'IBM Plex Mono',monospace;font-size:12px;background:var(--navy-deep);color:var(--paper);border:1px solid var(--line-cyan-dim);"></textarea>
+    </div>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Game Forge</h2>
+  <p>Game Forge turns a written idea into a playable browser game. Describe the game, its controls and goal, and the AI writes it while you watch; then play-test it and ask for changes.</p>
+  <h3>How to use Game Forge</h3>
+  <ol><li>Describe the game, controls, goal, art style, and difficulty.</li><li>Press “Generate game”.</li><li>Play-test it, request changes, and download the finished game.</li></ol>
+  <h3>Can I download the game I make?</h3>
+  <p>Yes. When you are happy with it, download the finished game as an HTML file that runs in any modern browser, offline too.</p>
+  <h3>Is Game Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/zh/3d-game-forge.html">3D Game Forge</a> · <a href="/zh/music-forge.html">Music Forge</a> · <a href="/zh/picture-forge.html">Picture Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/zh/">MigaBuilder</a>. Every game is freshly written by an AI model from your description — expect some to need a "refine" pass, exactly like a generated web page would. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/game-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function(){
+  "use strict";
+
+  const providerSelect = document.getElementById('provider');
+  const apiKeyField = document.getElementById('apiKeyField');
+  const apiKeyInput = document.getElementById('apiKey');
+  const apiKeyLabel = document.getElementById('apiKeyLabel');
+  const toggleKeyBtn = document.getElementById('toggleKey');
+  const freeNoticeField = document.getElementById('freeNoticeField');
+  const modelSelect = document.getElementById('model');
+  const genreSelect = document.getElementById('genre');
+  const difficultySelect = document.getElementById('difficulty');
+  const featSound = document.getElementById('featSound');
+  const featTouch = document.getElementById('featTouch');
+  const featHighscore = document.getElementById('featHighscore');
+  const featTwoPlayer = document.getElementById('featTwoPlayer');
+  const audioUploadInput = document.getElementById('audioUploadInput');
+  const recordVoiceBtn = document.getElementById('recordVoiceBtn');
+  const clipsList = document.getElementById('clipsList');
+  const briefInput = document.getElementById('brief');
+  const draftBtn = document.getElementById('draftBtn');
+  const errorBox = document.getElementById('errorBox');
+  const titleBlock = document.getElementById('titleBlock');
+  const sheetEmpty = document.getElementById('sheetEmpty');
+  const preview = document.getElementById('preview');
+  const refineInput = document.getElementById('refineInput');
+  const refineBtn = document.getElementById('refineBtn');
+  const quickRefineChips = document.getElementById('quickRefineChips');
+  const viewSourceBtn = document.getElementById('viewSourceBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const sourceView = document.getElementById('sourceView');
+  const sourceText = document.getElementById('sourceText');
+
+  function showError(message) { errorBox.textContent = message; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  toggleKeyBtn.addEventListener('click', function () {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleKeyBtn.textContent = isPassword ? I18N.t('hide') : I18N.t('show');
+  });
+
+  const modelOptions = {
+    gemini: [
+      { value: 'gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash-Lite (free tier)' },
+      { value: 'gemini-3.5-flash', label: 'Gemini 3.5 Flash (free tier, better quality)' }
+    ],
+    openai: [
+      { value: 'gpt-4o-mini', label: 'gpt-4o-mini (fast, cheap)' },
+      { value: 'gpt-4o', label: 'gpt-4o (higher quality)' },
+      { value: 'gpt-4.1', label: 'gpt-4.1' }
+    ],
+    anthropic: [
+      { value: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5 (fast, cheap)' },
+      { value: 'claude-sonnet-5', label: 'Claude Sonnet 5 (recommended)' },
+      { value: 'claude-opus-5', label: 'Claude Opus 5 (highest quality)' }
+    ]
+  };
+
+  function applyProvider() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      apiKeyField.style.display = 'none';
+      freeNoticeField.style.display = 'block';
+    } else {
+      apiKeyField.style.display = 'block';
+      freeNoticeField.style.display = 'none';
+      apiKeyLabel.textContent = provider === 'openai' ? I18N.t('apiKeyLabelOpenai') : I18N.t('apiKeyLabelAnthropic');
+      apiKeyInput.placeholder = provider === 'openai' ? 'sk-...' : 'sk-ant-...';
+    }
+    modelSelect.innerHTML = '';
+    const defaultIndex = provider === 'anthropic' ? 1 : (provider === 'gemini' ? 1 : 0);
+    modelOptions[provider].forEach((opt, i) => {
+      const el = document.createElement('option');
+      el.value = opt.value;
+      el.textContent = opt.label;
+      if (i === defaultIndex) el.selected = true;
+      modelSelect.appendChild(el);
+    });
+  }
+  providerSelect.addEventListener('change', applyProvider);
+
+  let customClips = []; // {id, name, kind: 'sfx'|'voice'|'music', dataUrl, label}
+  let clipIdCounter = 0;
+
+  function sanitizeClipName(raw, excludeId) {
+    let base = (raw || '').toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+    if (!base) base = 'clip';
+    let candidate = base;
+    let n = 2;
+    while (customClips.some(function (c) { return c.name === candidate && c.id !== excludeId; })) {
+      candidate = base + '_' + n;
+      n++;
+    }
+    return candidate;
+  }
+
+  function guessKindFromFilename(name) {
+    return /(music|bgm|loop|theme|ambient)/i.test(name) ? 'music' : 'sfx';
+  }
+
+  function addClip(dataUrl, rawName, kind) {
+    const id = 'clip_' + (++clipIdCounter);
+    const name = sanitizeClipName(rawName, id);
+    customClips.push({ id: id, name: name, kind: kind, dataUrl: dataUrl, label: rawName });
+    renderClipsList();
+  }
+
+  function renderClipsList() {
+    clipsList.innerHTML = '';
+    customClips.forEach(function (clip) {
+      const row = document.createElement('div');
+      row.className = 'clip-row';
+
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text';
+      nameInput.value = clip.name;
+      nameInput.title = I18N.t('clipNameTitle');
+      nameInput.addEventListener('change', function () {
+        clip.name = sanitizeClipName(nameInput.value, clip.id);
+        renderClipsList();
+      });
+
+      const kindSelect = document.createElement('select');
+      [['sfx', I18N.t('clipKindSfx')], ['voice', I18N.t('clipKindVoice')], ['music', I18N.t('clipKindMusic')]].forEach(function (opt) {
+        const el = document.createElement('option');
+        el.value = opt[0]; el.textContent = opt[1];
+        if (opt[0] === clip.kind) el.selected = true;
+        kindSelect.appendChild(el);
+      });
+      kindSelect.addEventListener('change', function () { clip.kind = kindSelect.value; });
+
+      const preview = document.createElement('audio');
+      preview.controls = true;
+      preview.src = clip.dataUrl;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'remove-clip';
+      removeBtn.textContent = '✕';
+      removeBtn.title = I18N.t('removeTitle');
+      removeBtn.addEventListener('click', function () {
+        customClips = customClips.filter(function (c) { return c.id !== clip.id; });
+        renderClipsList();
+      });
+
+      row.appendChild(nameInput);
+      row.appendChild(kindSelect);
+      row.appendChild(preview);
+      row.appendChild(removeBtn);
+      clipsList.appendChild(row);
+    });
+  }
+
+  audioUploadInput.addEventListener('change', function () {
+    Array.from(audioUploadInput.files || []).forEach(function (file) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const baseName = file.name.replace(/\.[^.]+$/, '');
+        addClip(String(reader.result), baseName, guessKindFromFilename(file.name));
+      };
+      reader.readAsDataURL(file);
+    });
+    audioUploadInput.value = '';
+  });
+
+  let voiceRecorder = null;
+  let voiceChunks = [];
+  let voiceStream = null;
+
+  recordVoiceBtn.addEventListener('click', async function () {
+    if (voiceRecorder && voiceRecorder.state === 'recording') {
+      voiceRecorder.stop();
+      return;
+    }
+    try {
+      voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch (err) {
+      showError(I18N.t('errorMicAccess').replace('{message}', err.message || err));
+      return;
+    }
+    voiceChunks = [];
+    voiceRecorder = new MediaRecorder(voiceStream);
+    voiceRecorder.ondataavailable = function (e) { if (e.data.size > 0) voiceChunks.push(e.data); };
+    voiceRecorder.onstop = function () {
+      voiceStream.getTracks().forEach(function (t) { t.stop(); });
+      recordVoiceBtn.textContent = I18N.t('recordVoiceLabel');
+      recordVoiceBtn.classList.remove('recording');
+      const blob = new Blob(voiceChunks, { type: 'audio/webm' });
+      const reader = new FileReader();
+      reader.onload = function () {
+        const voiceCount = customClips.filter(function (c) { return c.kind === 'voice'; }).length + 1;
+        addClip(String(reader.result), 'voice_' + voiceCount, 'voice');
+      };
+      reader.readAsDataURL(blob);
+    };
+    voiceRecorder.start();
+    recordVoiceBtn.textContent = I18N.t('stopRecordingLabel');
+    recordVoiceBtn.classList.add('recording');
+  });
+
+  function customAudioPromptSection() {
+    if (!customClips.length) return '';
+    const lines = ['CUSTOM AUDIO — the player supplied their own sound/voice clips, which are wired up automatically after your code runs. Do NOT write procedural sound for any moment covered below; instead call window.playCustomSound("<name>") at the exact right moment in your game logic — the function and audio elements already exist, you do not need to define or load anything.'];
+    customClips.filter(function (c) { return c.kind !== 'music'; }).forEach(function (c) {
+      lines.push('- window.playCustomSound("' + c.name + '") — a ' + (c.kind === 'voice' ? 'voice line' : 'sound effect') + ' named "' + c.name + '". Use the name as a strong hint for when it belongs (e.g. a clip named "jump" plays on jumping, "win" plays on winning); use your best judgement if the name is ambiguous.');
+    });
+    const music = customClips.filter(function (c) { return c.kind === 'music'; });
+    if (music.length) {
+      lines.push('- Background music ("' + music.map(function (c) { return c.name; }).join('", "') + '") already loops automatically once the player first interacts — do not trigger it yourself and do not add any other background music.');
+    }
+    return lines.join('\n');
+  }
+
+  const AUDIO_MARK_START = '<!-- migabuilder-custom-audio start -->';
+  const AUDIO_MARK_END = '<!-- migabuilder-custom-audio end -->';
+
+  function stripInjectedAudio(html) {
+    const startIdx = html.indexOf(AUDIO_MARK_START);
+    const endIdx = html.indexOf(AUDIO_MARK_END);
+    if (startIdx === -1 || endIdx === -1) return html;
+    return html.slice(0, startIdx) + html.slice(endIdx + AUDIO_MARK_END.length);
+  }
+
+  function injectCustomAudio(html) {
+    const clean = stripInjectedAudio(html);
+    if (!customClips.length) return clean;
+    const audioTags = customClips.map(function (clip) {
+      return '<audio id="ca_' + clip.name + '" preload="auto" style="display:none"' + (clip.kind === 'music' ? ' loop' : '') + '><source src="' + clip.dataUrl + '"></audio>';
+    }).join('\n');
+    const mapEntries = customClips.map(function (clip) {
+      return '"' + clip.name + '": document.getElementById("ca_' + clip.name + '")';
+    }).join(', ');
+    const hasMusic = customClips.some(function (c) { return c.kind === 'music'; });
+    const scriptLines = [
+      '<' + 'script>',
+      '(function(){',
+      '  window.__customAudio = { ' + mapEntries + ' };',
+      '  window.playCustomSound = function(name){',
+      '    var el = window.__customAudio[name];',
+      '    if (!el) return;',
+      '    try { var node = el.cloneNode(true); node.volume = el.volume; node.play().catch(function(){}); } catch(e){}',
+      '  };'
+    ];
+    if (hasMusic) {
+      scriptLines.push(
+        '  var bgmStarted = false;',
+        '  function startBgm(){',
+        '    if (bgmStarted) return;',
+        '    bgmStarted = true;',
+        '    Object.keys(window.__customAudio).forEach(function(k){ var el = window.__customAudio[k]; if (el.loop) { el.play().catch(function(){}); } });',
+        '    window.removeEventListener("keydown", startBgm);',
+        '    window.removeEventListener("pointerdown", startBgm);',
+        '  }',
+        '  window.addEventListener("keydown", startBgm);',
+        '  window.addEventListener("pointerdown", startBgm);'
+      );
+    }
+    scriptLines.push('})();', '<' + '/script>');
+    const block = AUDIO_MARK_START + '\n' + audioTags + '\n' + scriptLines.join('\n') + '\n' + AUDIO_MARK_END;
+    if (/<\/body>/i.test(clean)) return clean.replace(/<\/body>/i, block + '\n</body>');
+    return clean + '\n' + block;
+  }
+
+  // The real Gemini key lives server-side as a Cloudflare Worker secret — see
+  // cloudflare-worker/README.md. Never put an actual key on this line; this
+  // file is public and anyone can view its source.
+  const GEMINI_PROXY_URL = 'https://migabuilder-gemini.makmurphy69.workers.dev';
+
+  function currentTextApiKey() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') return 'via-proxy';
+    return apiKeyInput.value.trim();
+  }
+
+  function stripCodeFence(text) {
+    const trimmed = text.trim();
+    const fenceMatch = trimmed.match(/^```(?:html|json)?\s*([\s\S]*?)\s*```$/i);
+    return fenceMatch ? fenceMatch[1] : trimmed;
+  }
+
+  async function callChat(apiKey, model, systemPrompt, userPrompt) {
+    const provider = providerSelect.value;
+
+    if (provider === 'gemini') {
+      const response = await fetch(GEMINI_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, systemPrompt: systemPrompt, userPrompt: userPrompt })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        const msg = errBody && errBody.error && errBody.error.message
+          ? errBody.error.message
+          : (errBody && errBody.error) || I18N.t('errorRequestFailedFreeLimit').replace('{status}', response.status);
+        throw new Error(msg);
+      }
+      const data = await response.json();
+      const cand = data.candidates && data.candidates[0];
+      const raw = cand && cand.content && cand.content.parts && cand.content.parts[0]
+        ? cand.content.parts[0].text
+        : '';
+      if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+      return stripCodeFence(raw);
+    }
+
+    if (provider === 'anthropic') {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: model,
+          max_tokens: 8000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }]
+        })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        const msg = errBody && errBody.error && errBody.error.message
+          ? errBody.error.message
+          : I18N.t('errorRequestFailed').replace('{status}', response.status);
+        throw new Error(msg);
+      }
+      const data = await response.json();
+      const block = data.content && data.content.find(b => b.type === 'text');
+      const raw = block ? block.text : '';
+      if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+      return stripCodeFence(raw);
+    }
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.8
+      })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => null);
+      const msg = errBody && errBody.error && errBody.error.message
+        ? errBody.error.message
+        : I18N.t('errorRequestFailed').replace('{status}', response.status);
+      throw new Error(msg);
+    }
+    const data = await response.json();
+    const raw = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+    if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+    return stripCodeFence(raw);
+  }
+
+  let currentGameHtml = '';
+
+  // ---------- picture slots: player + background images baked into the game ----------
+  const SPRITE_MARK_START = '<!-- migabuilder-pictures start -->';
+  const SPRITE_MARK_END = '<!-- migabuilder-pictures end -->';
+  const gameAssets = { player: '', background: '' };
+  function stripInjectedSprites(html) {
+    const a = html.indexOf(SPRITE_MARK_START), b = html.indexOf(SPRITE_MARK_END);
+    if (a === -1 || b === -1) return html;
+    return html.slice(0, a) + html.slice(b + SPRITE_MARK_END.length);
+  }
+  function spriteBlock() {
+    const json = v => JSON.stringify(v).replace(/</g, '\\u003c');
+    return SPRITE_MARK_START + '\n<' + 'script>\nwindow.GAME_ASSETS = ' + json(gameAssets) + ';\n' +
+      'window.GAME_SFX = ' + json(gameSfx) + ';\n(' + sfxRuntime.toString() + ')();\n' +
+      (gameSheet ? 'window.GAME_SPRITESHEET = ' + json(gameSheet) + ';\n(' + spriteRuntime.toString() + ')();\n' : '') +
+      '(function(){var cache={};window.gameImage=function(n){if(n==="player"&&window.gameSpriteFrame){var f=window.gameSpriteFrame();if(f)return f;}var s=(window.GAME_ASSETS||{})[n];if(!s)return null;var c=cache[n];if(!c||c.dataset.src!==s){c=cache[n]=new Image();c.dataset.src=s;c.src=s;}return c.complete&&c.naturalWidth?c:null;};})();\n' +
+      '</' + 'script>\n' + SPRITE_MARK_END;
+  }
+  function injectSprites(html) {
+    const clean = stripInjectedSprites(html);
+    // Before the game's first script (so gameImage exists when it runs) but after <meta charset>,
+    // which browsers only honour near the top of the file.
+    let at = clean.search(/<script\b/i);
+    if (at === -1) at = clean.search(/<\/head>/i);
+    if (at === -1) return spriteBlock() + '\n' + clean;
+    return clean.slice(0, at) + spriteBlock() + '\n' + clean.slice(at);
+  }
+
+  // ---------- tuning sliders: read GAME_CONFIG from the running game ----------
+  const tuneSliders = document.getElementById('tuneSliders');
+  const resetTuneBtn = document.getElementById('resetTuneBtn');
+  const addHooksBtn = document.getElementById('addHooksBtn');
+  const embedBtn = document.getElementById('embedBtn');
+  const starterBtn = document.getElementById('starterBtn');
+  const tuneStatus = document.getElementById('tuneStatus');
+  let tuneDefaults = null;
+  let tuneSaveTimer = 0;
+  // The preview is sandboxed (no access to this page), so live values go through MigaSandbox messages.
+  let liveConfig = null;
+  const toGame = (op, args) => MigaSandbox.call(preview, op, args).catch(() => null);
+  function guessRange(v) {
+    const abs = Math.abs(v) || 1;
+    const max = v <= 0 ? 10 : Number.isInteger(v) && v <= 10 ? Math.max(10, v * 3) : v * 3;
+    const step = Number.isInteger(v) && abs >= 1 ? Math.max(1, Math.pow(10, Math.floor(Math.log10(abs)) - 1)) : Math.pow(10, Math.floor(Math.log10(abs)) - 1);
+    return { min: 0, max: max, step: step };
+  }
+  function prettyLabel(key) { return key.replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_-]+/g, ' ').replace(/^./, c => c.toUpperCase()); }
+  function formatValue(v, step) { const d = String(step).includes('.') ? String(step).split('.')[1].length : 0; return Number(v).toFixed(Math.min(d, 3)); }
+  async function readTuning() {
+    const got = await toGame('get', { name: 'GAME_CONFIG' });
+    const cfg = got && typeof got === 'object' && !Array.isArray(got) ? got : null;
+    liveConfig = cfg;
+    const keys = cfg ? Object.keys(cfg).filter(k => typeof cfg[k] === 'number' && isFinite(cfg[k])) : [];
+    tuneSliders.innerHTML = '';
+    addHooksBtn.hidden = !!keys.length;
+    resetTuneBtn.disabled = !keys.length;
+    if (!keys.length) {
+      tuneDefaults = null;
+      tuneSliders.innerHTML = '<p class="tune-empty">This game has no tuning sliders yet. Click “✨ Add sliders &amp; picture slots” below and the AI will add them.</p>';
+      return;
+    }
+    const gotUi = await toGame('get', { name: 'GAME_CONFIG_UI' });
+    const ui = (gotUi && typeof gotUi === 'object') ? gotUi : {};
+    if (!tuneDefaults) tuneDefaults = Object.assign({}, cfg);
+    keys.forEach(function (k) {
+      const meta = Object.assign(guessRange(tuneDefaults[k] != null ? tuneDefaults[k] : cfg[k]), ui[k] || {});
+      const row = document.createElement('div');
+      row.className = 'tune-row';
+      const id = 'tune_' + k.replace(/[^\w-]/g, '_');
+      row.innerHTML = '<label for="' + id + '"><span></span><output></output></label><input type="range" id="' + id + '" data-no-autosave>';
+      row.querySelector('span').textContent = meta.label || prettyLabel(k);
+      const input = row.querySelector('input'), out = row.querySelector('output');
+      input.min = Math.min(meta.min, cfg[k]); input.max = Math.max(meta.max, cfg[k]); input.step = meta.step || 'any'; input.value = cfg[k];
+      out.textContent = formatValue(cfg[k], input.step);
+      input.addEventListener('input', function () {
+        const v = Number(input.value);
+        if (liveConfig) liveConfig[k] = v;
+        toGame('set', { name: 'GAME_CONFIG', key: k, value: v });
+        out.textContent = formatValue(v, input.step);
+        scheduleTuneSave();
+      });
+      tuneSliders.appendChild(row);
+    });
+  }
+  // Write the live values back into the game's source so downloads and embeds keep them.
+  function scheduleTuneSave() {
+    clearTimeout(tuneSaveTimer);
+    tuneSaveTimer = setTimeout(function () {
+      if (!liveConfig) return;
+      const json = JSON.stringify(liveConfig);
+      const updated = currentGameHtml.replace(/(window\.GAME_CONFIG\s*=\s*)\{[\s\S]*?\}(\s*;)/, function (_, a, b) { return a + json + b; });
+      if (updated !== currentGameHtml) { currentGameHtml = updated; sourceText.value = updated; }
+    }, 250);
+  }
+  preview.addEventListener('load', function () { if (currentGameHtml) readTuning(); });
+  resetTuneBtn.addEventListener('click', function () {
+    if (!tuneDefaults || !liveConfig) return;
+    Object.assign(liveConfig, tuneDefaults);
+    toGame('assign', { name: 'GAME_CONFIG', value: tuneDefaults }).then(readTuning).then(scheduleTuneSave);
+  });
+  addHooksBtn.addEventListener('click', function () {
+    refineInput.value = 'Add the TUNING HOOKS (a <script id="game-config"> block with window.GAME_CONFIG and window.GAME_CONFIG_UI) and the PICTURE SLOTS (use gameImage("player") and gameImage("background") when drawing), reading the config values every frame. Do not change how the game plays otherwise.';
+    refineGame();
+  });
+
+  // Picture drop zones: FileReader turns the image into a data URL that lives inside the game file.
+  function setAsset(name, dataUrl) {
+    gameAssets[name] = dataUrl || '';
+    toGame('assets', { name: name, value: gameAssets[name] });
+    if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; }
+    renderAssetDrops();
+  }
+  function renderAssetDrops() {
+    document.querySelectorAll('.asset-drop[data-asset]').forEach(function (zone) {
+      const name = zone.dataset.asset, url = gameAssets[name], thumb = zone.querySelector('.thumb');
+      thumb.style.backgroundImage = url ? 'url("' + url + '")' : '';
+      thumb.textContent = url ? '' : (name === 'player' ? '🧍' : '🏞️');
+      let clear = zone.querySelector('.clear-asset');
+      if (url && !clear) {
+        clear = document.createElement('button'); clear.type = 'button'; clear.className = 'clear-asset'; clear.textContent = '✕'; clear.title = 'Remove this picture';
+        clear.addEventListener('click', function (e) { e.preventDefault(); e.stopPropagation(); setAsset(name, ''); });
+        zone.appendChild(clear);
+      } else if (!url && clear) clear.remove();
+    });
+  }
+  function readAssetFile(name, file) {
+    if (!file || !/^image\//.test(file.type)) { tuneStatus.textContent = 'That file is not an image — use a PNG, JPG, GIF, WebP or SVG.'; return; }
+    if (file.size > 3 * 1024 * 1024) { tuneStatus.textContent = 'That picture is over 3 MB — shrink it first (Image Forge can do this) so the game stays quick to load.'; return; }
+    const reader = new FileReader();
+    reader.onload = function () { setAsset(name, reader.result); tuneStatus.textContent = '✓ ' + file.name + ' is now the ' + name + ' picture.'; };
+    reader.readAsDataURL(file);
+  }
+  document.querySelectorAll('.asset-drop[data-asset]').forEach(function (zone) {
+    const input = zone.querySelector('input');
+    input.addEventListener('change', function () { readAssetFile(zone.dataset.asset, input.files[0]); input.value = ''; });
+    ['dragenter', 'dragover'].forEach(function (ev) { zone.addEventListener(ev, function (e) { e.preventDefault(); zone.classList.add('over'); }); });
+    ['dragleave', 'drop'].forEach(function (ev) { zone.addEventListener(ev, function () { zone.classList.remove('over'); }); });
+    zone.addEventListener('drop', function (e) { e.preventDefault(); readAssetFile(zone.dataset.asset, (e.dataTransfer.files || [])[0]); });
+  });
+
+  // "Embed me": one self-contained iframe block. srcdoc (not a data: URL) so the game keeps
+  // a normal origin and features such as saved high scores keep working on the host page.
+  embedBtn.addEventListener('click', async function () {
+    if (!currentGameHtml) return;
+    const snippet = '<iframe title="Game made with MigaBuilder" srcdoc="' + currentGameHtml.replace(/&/g, '&amp;').replace(/"/g, '&quot;') +
+      '" style="width:100%;max-width:820px;aspect-ratio:8/5;border:0;border-radius:8px" allow="autoplay; fullscreen" loading="lazy"></iframe>';
+    try {
+      await navigator.clipboard.writeText(snippet);
+      tuneStatus.textContent = '✓ Embed code copied (' + Math.round(snippet.length / 1024) + ' KB). Paste it into any page or site builder that accepts HTML.';
+    } catch (e) {
+      sourceView.style.display = 'block';
+      sourceText.value = snippet;
+      sourceText.select();
+      tuneStatus.textContent = 'Could not copy automatically — the embed code is selected in the box below; press Ctrl/Cmd+C.';
+    }
+  });
+
+  // ---------- retro sound effects: 8-bit sounds generated by AudioContext, no files ----------
+  // sfxRuntime and spriteRuntime run inside the game (they are copied in with toString()),
+  // so they must not use anything from this page. sfxRuntime also runs here for the ▶ buttons.
+  function sfxRuntime() {
+    var ac = null;
+    function ctx() {
+      if (!ac) { var A = window.AudioContext || window.webkitAudioContext; if (!A) return null; ac = new A(); }
+      if (ac.state === 'suspended') ac.resume();
+      return ac;
+    }
+    window.sfxMuted = false;
+    window.sfxMute = function (on) { window.sfxMuted = on === undefined ? !window.sfxMuted : !!on; return window.sfxMuted; };
+    window.sfx = function (name) {
+      var p = (window.GAME_SFX || {})[name], a;
+      if (!p || window.sfxMuted || !(a = ctx())) return;
+      var t = a.currentTime + 0.01, d = p.d, g = a.createGain();
+      g.connect(a.destination);
+      g.gain.setValueAtTime(p.v, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + d);
+      if (p.w === 'noise') {
+        var len = Math.max(1, Math.floor(a.sampleRate * d)), buf = a.createBuffer(1, len, a.sampleRate), data = buf.getChannelData(0);
+        for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+        var src = a.createBufferSource(), f = a.createBiquadFilter();
+        src.buffer = buf; f.type = 'lowpass';
+        f.frequency.setValueAtTime(p.f[0], t);
+        f.frequency.exponentialRampToValueAtTime(Math.max(40, p.f[1]), t + d);
+        src.connect(f); f.connect(g); src.start(t); src.stop(t + d);
+        return;
+      }
+      var o = a.createOscillator();
+      o.type = p.w;
+      o.frequency.setValueAtTime(p.f[0], t);
+      if (p.arp) p.arp.forEach(function (m, i) { o.frequency.setValueAtTime(p.f[0] * m, t + i * d / p.arp.length); });
+      else o.frequency.exponentialRampToValueAtTime(Math.max(20, p.f[1]), t + d);
+      o.connect(g); o.start(t); o.stop(t + d + 0.02);
+    };
+  }
+  const SFX_PRESETS = {
+    jump: { w: 'square', f: [260, 720], d: 0.18, v: 0.2 },
+    coin: { w: 'square', f: [988, 988], d: 0.18, v: 0.18, arp: [1, 1.335] },
+    shoot: { w: 'sawtooth', f: [900, 120], d: 0.14, v: 0.16 },
+    laser: { w: 'square', f: [1400, 180], d: 0.22, v: 0.14 },
+    explode: { w: 'noise', f: [3000, 60], d: 0.6, v: 0.5 },
+    hit: { w: 'noise', f: [1600, 200], d: 0.16, v: 0.4 },
+    powerup: { w: 'triangle', f: [330, 330], d: 0.42, v: 0.25, arp: [1, 1.25, 1.5, 2] },
+    win: { w: 'square', f: [523, 523], d: 0.7, v: 0.16, arp: [1, 1.26, 1.5, 2, 1.5, 2] },
+    lose: { w: 'triangle', f: [440, 90], d: 0.8, v: 0.3 },
+    blip: { w: 'square', f: [660, 660], d: 0.07, v: 0.15 }
+  };
+  const SFX_LABELS = { jump: '🦘 Jump', coin: '🪙 Coin', shoot: '🔫 Shoot', laser: '⚡ Laser', explode: '💥 Explosion', hit: '🤕 Hit', powerup: '⭐ Power-up', win: '🏆 Win', lose: '💀 Lose', blip: '🔘 Menu blip' };
+  const clone = o => JSON.parse(JSON.stringify(o));
+  let gameSfx = clone(SFX_PRESETS);
+  try { const saved = JSON.parse(localStorage.getItem('miga-game-sfx') || 'null'); if (saved) Object.keys(SFX_PRESETS).forEach(k => { if (saved[k] && saved[k].f) gameSfx[k] = saved[k]; }); } catch (e) {}
+  window.GAME_SFX = gameSfx;
+  sfxRuntime();
+  const sfxGrid = document.getElementById('sfxGrid');
+  function renderSfx() {
+    sfxGrid.innerHTML = Object.keys(SFX_PRESETS).map(k => '<div class="sfx-item' + (JSON.stringify(gameSfx[k]) !== JSON.stringify(SFX_PRESETS[k]) ? ' changed' : '') + '"><button type="button" class="sfx-play" data-sfx="' + k + '" title="Play — the game uses sfx(&quot;' + k + '&quot;)">▶ ' + SFX_LABELS[k] + '</button><button type="button" data-shuffle="' + k + '" title="New random variation">🎲</button></div>').join('');
+  }
+  function syncSfx() {
+    window.GAME_SFX = gameSfx;
+    try { localStorage.setItem('miga-game-sfx', JSON.stringify(gameSfx)); } catch (e) {}
+    toGame('assign', { name: 'GAME_SFX', value: clone(gameSfx) });
+    if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; }
+    renderSfx();
+  }
+  function mutate(p) {
+    const r = (a, b) => a + Math.random() * (b - a), q = clone(p);
+    const k = r(0.65, 1.5);
+    q.f = [Math.round(p.f[0] * k), Math.round(p.f[1] * k * r(0.8, 1.25))];
+    q.d = Math.round(p.d * r(0.75, 1.35) * 100) / 100;
+    if (q.w !== 'noise' && Math.random() < 0.35) q.w = ['square', 'sawtooth', 'triangle'][Math.floor(Math.random() * 3)];
+    return q;
+  }
+  sfxGrid.addEventListener('click', e => {
+    const play = e.target.closest('[data-sfx]'), shuffle = e.target.closest('[data-shuffle]');
+    if (play) window.sfx(play.dataset.sfx);
+    if (shuffle) { const k = shuffle.dataset.shuffle; gameSfx[k] = mutate(SFX_PRESETS[k]); syncSfx(); window.sfx(k); }
+  });
+  document.getElementById('sfxResetBtn').addEventListener('click', () => { gameSfx = clone(SFX_PRESETS); syncSfx(); });
+  const sfxWireBtn = document.getElementById('sfxWireBtn');
+  sfxWireBtn.addEventListener('click', () => {
+    refineInput.value = 'Use the built-in sound effects: the page already defines window.sfx(name) with the sounds ' + Object.keys(SFX_PRESETS).map(k => '"' + k + '"').join(', ') +
+      '. Call sfx(...) at the matching moments (jumping, collecting, shooting, getting hit, exploding, power-ups, winning, losing, menu clicks). Remove any other Web Audio sound code so there is one source of sound. Mute button: call window.sfxMute() to toggle. Do not change how the game plays otherwise.';
+    refineGame();
+  });
+  renderSfx();
+
+  // ---------- sprite sheet animator: cut frames out of one PNG and animate the player ----------
+  function spriteRuntime() {
+    var S = window.GAME_SPRITESHEET;
+    if (!S || !S.src) return;
+    var img = new Image(); img.src = S.src;
+    var cv = document.createElement('canvas'); cv.width = S.fw; cv.height = S.fh;
+    var cx = cv.getContext('2d'), keys = {}, jumpAt = -1e9, left = false, manual = null, t0 = performance.now();
+    addEventListener('keydown', function (e) {
+      keys[e.key] = true;
+      if (/^( |ArrowUp|w|W)$/.test(e.key)) jumpAt = performance.now();
+      if (/^(ArrowLeft|a|A)$/.test(e.key)) left = true;
+      if (/^(ArrowRight|d|D)$/.test(e.key)) left = false;
+    });
+    addEventListener('keyup', function (e) { delete keys[e.key]; });
+    addEventListener('pointerdown', function () { jumpAt = performance.now(); });
+    // Games can take over: gameSetAnim('walk'), gameSetAnim('jump', true) to face left, gameSetAnim(null) for automatic.
+    window.gameSetAnim = function (name, faceLeft) { manual = name; if (faceLeft !== undefined) left = !!faceLeft; };
+    function current() {
+      if (manual && S.anims[manual]) return manual;
+      if (performance.now() - jumpAt < 450 && S.anims.jump && S.anims.jump.length) return 'jump';
+      if ((keys.ArrowLeft || keys.ArrowRight || keys.a || keys.d || keys.A || keys.D) && S.anims.walk && S.anims.walk.length) return 'walk';
+      return 'idle';
+    }
+    window.gameSpriteFrame = function () {
+      if (!img.complete || !img.naturalWidth) return null;
+      var list = S.anims[current()] || S.anims.idle || [0];
+      if (!list.length) list = [0];
+      var i = list[Math.floor((performance.now() - t0) / 1000 * S.fps) % list.length];
+      var cols = Math.max(1, Math.floor(img.naturalWidth / S.fw));
+      cx.clearRect(0, 0, S.fw, S.fh);
+      cx.save();
+      if (left && S.flip !== false) { cx.translate(S.fw, 0); cx.scale(-1, 1); }
+      cx.drawImage(img, (i % cols) * S.fw, Math.floor(i / cols) * S.fh, S.fw, S.fh, 0, 0, S.fw, S.fh);
+      cx.restore();
+      return cv;
+    };
+  }
+  let gameSheet = null; // {src, fw, fh, fps, anims}
+  const sheetInput = document.getElementById('sheetInput'), sheetDrop = document.getElementById('sheetDrop');
+  const frameW = document.getElementById('frameW'), frameH = document.getElementById('frameH'), frameFps = document.getElementById('frameFps');
+  const sheetCanvas = document.getElementById('sheetCanvas'), spriteWork = document.getElementById('spriteWork'), spriteStatus = document.getElementById('spriteStatus');
+  const useSheetBtn = document.getElementById('useSheetBtn'), clearSheetBtn = document.getElementById('clearSheetBtn');
+  const animInputs = { idle: document.getElementById('animIdle'), walk: document.getElementById('animWalk'), jump: document.getElementById('animJump') };
+  let sheetImg = null, sheetSrc = '', sheetZoom = 1;
+  function parseFrames(text, max) {
+    const out = [];
+    String(text || '').split(/[\s,;]+/).forEach(part => {
+      const m = /^(\d+)(?:-(\d+))?$/.exec(part);
+      if (!m) return;
+      const a = +m[1], b = m[2] === undefined ? a : +m[2];
+      for (let i = a; a <= b ? i <= b : i >= b; i += a <= b ? 1 : -1) if (i < max && out.length < 64) out.push(i);
+    });
+    return out;
+  }
+  function sheetGrid() {
+    const fw = Math.max(1, +frameW.value || 32), fh = Math.max(1, +frameH.value || 32);
+    const cols = Math.max(1, Math.floor(sheetImg.naturalWidth / fw)), rows = Math.max(1, Math.floor(sheetImg.naturalHeight / fh));
+    return { fw, fh, cols, rows, count: cols * rows };
+  }
+  function currentAnims() {
+    const g = sheetGrid(), a = {};
+    Object.keys(animInputs).forEach(k => { a[k] = parseFrames(animInputs[k].value, g.count); });
+    if (!a.idle.length) a.idle = [0];
+    return a;
+  }
+  function drawSheet() {
+    if (!sheetImg) return;
+    const g = sheetGrid();
+    sheetZoom = Math.max(1, Math.min(4, Math.floor(420 / sheetImg.naturalWidth) || 1));
+    sheetCanvas.width = sheetImg.naturalWidth * sheetZoom; sheetCanvas.height = sheetImg.naturalHeight * sheetZoom;
+    const c = sheetCanvas.getContext('2d');
+    c.imageSmoothingEnabled = false;
+    c.drawImage(sheetImg, 0, 0, sheetCanvas.width, sheetCanvas.height);
+    const used = currentAnims(), pick = (document.querySelector('input[name=animPick]:checked') || {}).value;
+    c.font = Math.max(9, Math.min(13, g.fw * sheetZoom / 3)) + 'px monospace';
+    for (let i = 0; i < g.count; i++) {
+      const x = (i % g.cols) * g.fw * sheetZoom, y = Math.floor(i / g.cols) * g.fh * sheetZoom;
+      if ((used[pick] || []).includes(i)) { c.fillStyle = 'rgba(226,166,59,.28)'; c.fillRect(x, y, g.fw * sheetZoom, g.fh * sheetZoom); }
+      c.strokeStyle = 'rgba(111,209,224,.75)'; c.strokeRect(x + .5, y + .5, g.fw * sheetZoom - 1, g.fh * sheetZoom - 1);
+      c.fillStyle = '#fff'; c.strokeStyle = '#000'; c.lineWidth = 3; c.strokeText(i, x + 3, y + 12); c.fillText(i, x + 3, y + 12); c.lineWidth = 1;
+    }
+  }
+  // Guess sensible animations: one row per animation if there are several rows, otherwise split the single row.
+  function guessAnims() {
+    const g = sheetGrid(), row = r => r * g.cols + '-' + (r * g.cols + g.cols - 1);
+    if (g.rows >= 2) { animInputs.idle.value = row(0); animInputs.walk.value = row(1); animInputs.jump.value = g.rows >= 3 ? row(2) : String(g.cols); }
+    else { animInputs.idle.value = '0'; animInputs.walk.value = g.count > 1 ? '0-' + (g.count - 1) : '0'; animInputs.jump.value = String(g.count - 1); }
+  }
+  function loadSheet(file) {
+    if (!file || !/^image\//.test(file.type)) { spriteStatus.textContent = 'Use a PNG, GIF or WebP sprite sheet.'; return; }
+    if (file.size > 3 * 1024 * 1024) { spriteStatus.textContent = 'That sheet is over 3 MB — shrink it first so the game stays quick to load.'; return; }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => {
+        sheetImg = img; sheetSrc = reader.result;
+        // A square-frame strip is the most common layout: guess frame size = the sheet height.
+        if (img.naturalWidth > img.naturalHeight && img.naturalWidth % img.naturalHeight === 0) { frameW.value = frameH.value = img.naturalHeight; }
+        spriteWork.hidden = false; useSheetBtn.disabled = false;
+        sheetDrop.querySelector('.thumb').style.backgroundImage = 'url("' + sheetSrc + '")'; sheetDrop.querySelector('.thumb').textContent = '';
+        guessAnims(); drawSheet();
+        const g = sheetGrid();
+        spriteStatus.textContent = '✓ ' + file.name + ' — ' + img.naturalWidth + '×' + img.naturalHeight + ' px, ' + g.cols + ' × ' + g.rows + ' frames. Check the frame size, then click “Use as the player”.';
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  }
+  sheetInput.addEventListener('change', () => { loadSheet(sheetInput.files[0]); sheetInput.value = ''; });
+  ['dragenter', 'dragover'].forEach(ev => sheetDrop.addEventListener(ev, e => { e.preventDefault(); sheetDrop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => sheetDrop.addEventListener(ev, () => sheetDrop.classList.remove('over')));
+  sheetDrop.addEventListener('drop', e => { e.preventDefault(); loadSheet((e.dataTransfer.files || [])[0]); });
+  [frameW, frameH].forEach(el => el.addEventListener('change', () => { if (sheetImg) { guessAnims(); drawSheet(); } }));
+  Object.values(animInputs).forEach(el => {
+    el.addEventListener('input', drawSheet);
+    el.addEventListener('focus', () => { el.closest('.anim-row').querySelector('input[type=radio]').checked = true; drawSheet(); });
+  });
+  document.querySelectorAll('input[name=animPick]').forEach(r => r.addEventListener('change', drawSheet));
+  sheetCanvas.addEventListener('click', e => {
+    if (!sheetImg) return;
+    const g = sheetGrid(), r = sheetCanvas.getBoundingClientRect();
+    const x = (e.clientX - r.left) * sheetCanvas.width / r.width / sheetZoom, y = (e.clientY - r.top) * sheetCanvas.height / r.height / sheetZoom;
+    const i = Math.floor(y / g.fh) * g.cols + Math.floor(x / g.fw);
+    if (i < 0 || i >= g.count) return;
+    const pick = (document.querySelector('input[name=animPick]:checked') || {}).value || 'idle', box = animInputs[pick];
+    box.value = (box.value.trim() ? box.value.trim() + ', ' : '') + i;
+    drawSheet();
+  });
+  // Little looping previews next to each animation.
+  (function animatePreviews() {
+    if (sheetImg && !spriteWork.hidden) {
+      const g = sheetGrid(), anims = currentAnims(), fps = Math.max(1, +frameFps.value || 8);
+      Object.keys(animInputs).forEach(k => {
+        const cv = animInputs[k].parentNode.querySelector('canvas'), c = cv.getContext('2d'), list = anims[k].length ? anims[k] : [0];
+        const i = list[Math.floor(performance.now() / 1000 * fps) % list.length], s = Math.min(cv.width / g.fw, cv.height / g.fh);
+        c.clearRect(0, 0, cv.width, cv.height); c.imageSmoothingEnabled = false;
+        c.drawImage(sheetImg, (i % g.cols) * g.fw, Math.floor(i / g.cols) * g.fh, g.fw, g.fh, (cv.width - g.fw * s) / 2, (cv.height - g.fh * s) / 2, g.fw * s, g.fh * s);
+      });
+    }
+    requestAnimationFrame(animatePreviews);
+  })();
+  function applySheet(sheet) {
+    gameSheet = sheet;
+    clearSheetBtn.disabled = !sheet;
+    if (currentGameHtml) { currentGameHtml = injectSprites(currentGameHtml); sourceText.value = currentGameHtml; preview.srcdoc = MigaSandbox.prepare(currentGameHtml); }
+  }
+  useSheetBtn.addEventListener('click', () => {
+    if (!sheetImg) return;
+    const g = sheetGrid();
+    applySheet({ src: sheetSrc, fw: g.fw, fh: g.fh, fps: Math.max(1, Math.min(30, +frameFps.value || 8)), anims: currentAnims() });
+    spriteStatus.textContent = '✓ The player now animates in the game. If it still shows the old shape, click “✨ Add sliders & picture slots” above so the game draws gameImage("player").';
+  });
+  clearSheetBtn.addEventListener('click', () => { applySheet(null); spriteStatus.textContent = 'Sprite sheet removed from the game.'; });
+
+  // ---------- installable offline game: .zip with manifest.json, icons and a service worker ----------
+  const pwaBtn = document.getElementById('pwaBtn');
+  function loadJsZip() {
+    if (window.JSZip) return Promise.resolve(window.JSZip);
+    return new Promise((resolve, reject) => {
+      const sc = document.createElement('script');
+      sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+      sc.onload = () => resolve(window.JSZip); sc.onerror = () => reject(new Error('The zip library could not load — check your connection.'));
+      document.head.appendChild(sc);
+    });
+  }
+  function drawIcon(size, title) {
+    const c = document.createElement('canvas'); c.width = c.height = size;
+    const x = c.getContext('2d'), grad = x.createLinearGradient(0, 0, size, size);
+    grad.addColorStop(0, '#1f3b73'); grad.addColorStop(1, '#6a2c91');
+    x.fillStyle = grad; x.fillRect(0, 0, size, size);
+    const pic = (gameSheet && sheetImg) ? null : gameAssets.player;
+    return new Promise(resolve => {
+      const finish = () => resolve(new Promise(r => c.toBlob(r, 'image/png')));
+      const drawCentered = (img, sx, sy, sw, sh) => { const s = size * 0.62 / Math.max(sw, sh); x.imageSmoothingEnabled = sw > 64; x.drawImage(img, sx, sy, sw, sh, (size - sw * s) / 2, (size - sh * s) / 2, sw * s, sh * s); };
+      if (gameSheet && sheetImg) { drawCentered(sheetImg, 0, 0, gameSheet.fw, gameSheet.fh); return finish(); }
+      if (pic) { const im = new Image(); im.onload = () => { drawCentered(im, 0, 0, im.naturalWidth, im.naturalHeight); finish(); }; im.onerror = finish; im.src = pic; return; }
+      x.textAlign = 'center'; x.textBaseline = 'middle'; x.font = Math.round(size * 0.42) + 'px system-ui, sans-serif';
+      x.fillText('🎮', size / 2, size * 0.44);
+      x.fillStyle = '#fff'; x.font = '700 ' + Math.round(size * 0.14) + 'px system-ui, sans-serif';
+      x.fillText(title.slice(0, 12), size / 2, size * 0.82);
+      finish();
+    });
+  }
+  pwaBtn.addEventListener('click', async () => {
+    if (!currentGameHtml) return;
+    pwaBtn.disabled = true; const label = pwaBtn.textContent; pwaBtn.textContent = 'Packing…';
+    try {
+      const Zip = await loadJsZip(), zip = new Zip();
+      const raw = (/<title>([^<]*)<\/title>/i.exec(currentGameHtml) || [])[1] || 'My game';
+      const title = raw.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+[—–|-]\s+.*$/, '').trim() || 'My game';
+      const short = title.length > 12 ? title.slice(0, 12).trim() : title;
+      const head = '<link rel="manifest" href="manifest.json">\n<meta name="theme-color" content="#1f3b73">\n<link rel="icon" href="icon-192.png">\n<link rel="apple-touch-icon" href="icon-192.png">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="mobile-web-app-capable" content="yes">\n';
+      const reg = '<script>if ("serviceWorker" in navigator) addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });</' + 'script>\n';
+      let html = currentGameHtml;
+      html = /<\/head>/i.test(html) ? html.replace(/<\/head>/i, head + '</head>') : head + html;
+      html = /<\/body>/i.test(html) ? html.replace(/<\/body>(?![\s\S]*<\/body>)/i, reg + '</body>') : html + reg;
+      zip.file('index.html', html);
+      zip.file('manifest.json', JSON.stringify({
+        name: title, short_name: short, description: 'A game made with MigaBuilder Game Forge. Plays offline.',
+        start_url: './', scope: './', display: 'fullscreen', orientation: 'any', background_color: '#000000', theme_color: '#1f3b73',
+        icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }]
+      }, null, 2));
+      zip.file('sw.js', "// Offline support: everything the game needs is cached on first visit.\nconst CACHE = 'game-" + Date.now().toString(36) + "';\nconst FILES = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png'];\n" +
+        "self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)).then(() => self.skipWaiting())); });\n" +
+        "self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });\n" +
+        "self.addEventListener('fetch', e => { if (e.request.method !== 'GET') return; e.respondWith(caches.match(e.request, { ignoreSearch: true }).then(hit => hit || fetch(e.request).catch(() => caches.match('./index.html')))); });\n");
+      zip.file('icon-192.png', await drawIcon(192, short));
+      zip.file('icon-512.png', await drawIcon(512, short));
+      zip.file('README.txt', title + ' — installable offline game\n\n' +
+        '1. Upload this whole folder to any https web host: drag it onto app.netlify.com/drop, or push it to a GitHub repo and turn on GitHub Pages.\n' +
+        '2. Open the link on your phone. Chrome/Android: menu → "Install app" or "Add to Home screen". iPhone Safari: Share → "Add to Home Screen".\n' +
+        '3. The game now has its own icon and plays offline, even in flight mode.\n\n' +
+        'Opening index.html straight from your computer works too, but installing needs https (browsers only allow service workers on secure sites).\n');
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob), a = document.createElement('a');
+      a.href = url; a.download = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '-app.zip' || 'game-app.zip';
+      document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+      tuneStatus.textContent = '✓ App .zip downloaded. Upload the folder to Netlify Drop or GitHub Pages, open it on your phone and choose “Add to Home screen” — it then plays offline.';
+    } catch (err) {
+      tuneStatus.textContent = 'Could not build the app .zip: ' + err.message;
+    } finally { pwaBtn.disabled = false; pwaBtn.textContent = label; }
+  });
+
+  const STARTER_GAME = "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"UTF-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>Sky Dash \u2014 a MigaBuilder starter game<\/title>\n<script id=\"game-config\">\nwindow.GAME_CONFIG = {\"gravity\": 2200, \"jumpPower\": 820, \"gameSpeed\": 330, \"speedUp\": 6, \"jumps\": 2, \"obstacleGap\": 1, \"coinChance\": 0.6};\nwindow.GAME_CONFIG_UI = {\"gravity\": {\"label\": \"Gravity\", \"min\": 400, \"max\": 5000, \"step\": 50}, \"jumpPower\": {\"label\": \"Jump height\", \"min\": 300, \"max\": 1600, \"step\": 10}, \"gameSpeed\": {\"label\": \"Game speed\", \"min\": 100, \"max\": 900, \"step\": 10}, \"speedUp\": {\"label\": \"Speed-up per second\", \"min\": 0, \"max\": 40, \"step\": 1}, \"jumps\": {\"label\": \"Jumps in the air\", \"min\": 1, \"max\": 4, \"step\": 1}, \"obstacleGap\": {\"label\": \"Space between obstacles\", \"min\": 0.5, \"max\": 2.5, \"step\": 0.05}, \"coinChance\": {\"label\": \"Coin chance\", \"min\": 0, \"max\": 1, \"step\": 0.05}};\n<\/script>\n<style>\n  html, body { margin: 0; height: 100%; background: #0b1d33; font-family: system-ui, sans-serif; color: #fff; overflow: hidden; }\n  #wrap { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }\n  canvas { width: 100%; max-width: 960px; aspect-ratio: 8 / 5; max-height: 100%; display: block; border-radius: 8px; touch-action: manipulation; background: #87c7ef; }\n  #legend { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); font-size: 12px; opacity: .8; pointer-events: none; text-shadow: 0 1px 2px #000; white-space: nowrap; }\n<\/style>\n<\/head>\n<body>\n<div id=\"wrap\"><canvas id=\"game\" width=\"800\" height=\"500\" aria-label=\"Sky Dash game\"><\/canvas><div id=\"legend\">Space / \u2191 / tap to jump \u00b7 jump again in the air \u00b7 P to pause<\/div><\/div>\n<script>\n(function () {\n  'use strict';\n  var C = function () { return window.GAME_CONFIG; };\n  var img = function (name) { return window.gameImage ? window.gameImage(name) : null; };\n  var cv = document.getElementById('game'), ctx = cv.getContext('2d');\n  var W = 800, H = 500, GROUND = 430;\n  var best = 0; try { best = +localStorage.getItem('skyDashBest') || 0; } catch (e) {}\n  var audio = null;\n  function beep(freq, dur, type, vol) {\n    try {\n      audio = audio || new (window.AudioContext || window.webkitAudioContext)();\n      var o = audio.createOscillator(), g = audio.createGain();\n      o.type = type || 'square'; o.frequency.value = freq;\n      g.gain.setValueAtTime(vol || 0.08, audio.currentTime); g.gain.exponentialRampToValueAtTime(0.001, audio.currentTime + dur);\n      o.connect(g); g.connect(audio.destination); o.start(); o.stop(audio.currentTime + dur);\n    } catch (e) {}\n  }\n  var state, player, obstacles, coins, clouds, dist, score, speed, elapsed, coinsGot, nextObstacle, paused;\n  function reset() {\n    state = 'ready'; paused = false;\n    player = { x: 130, y: GROUND - 46, w: 46, h: 46, vy: 0, jumpsUsed: 0, onGround: true };\n    obstacles = []; coins = []; dist = 0; score = 0; elapsed = 0; coinsGot = 0; speed = C().gameSpeed; nextObstacle = 500;\n    clouds = [0, 1, 2, 3, 4].map(function (i) { return { x: i * 190 + Math.random() * 80, y: 40 + Math.random() * 140, s: 0.6 + Math.random() * 0.8 }; });\n  }\n  function jump() {\n    if (state === 'over') { reset(); return; }\n    if (state === 'ready') state = 'play';\n    if (paused) return;\n    var maxJumps = Math.max(1, Math.round(C().jumps));\n    if (player.onGround || player.jumpsUsed < maxJumps) {\n      player.vy = -C().jumpPower; player.onGround = false; player.jumpsUsed++;\n      if (window.sfx) sfx('jump'); else beep(520 + player.jumpsUsed * 120, 0.12, 'square');\n    }\n  }\n  function spawn() {\n    var kind = Math.random();\n    var o;\n    if (kind < 0.45) o = { type: 'crate', w: 44, h: 44 };\n    else if (kind < 0.75) o = { type: 'spikes', w: 70, h: 26 };\n    else o = { type: 'tall', w: 38, h: 86 };\n    o.x = W + 20; o.y = GROUND - o.h; obstacles.push(o);\n    if (Math.random() < C().coinChance) {\n      var n = 3 + Math.floor(Math.random() * 3), cy = GROUND - o.h - 70 - Math.random() * 80;\n      for (var i = 0; i < n; i++) coins.push({ x: o.x - 30 + i * 34, y: cy - Math.sin(i / (n - 1) * Math.PI) * 40, r: 11, got: false });\n    }\n    nextObstacle = (320 + Math.random() * 360) * C().obstacleGap;\n  }\n  function hit(a, b) { return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y; }\n  function update(dt) {\n    var cfg = C();\n    clouds.forEach(function (c) { c.x -= (state === 'play' && !paused ? speed : C().gameSpeed * 0.4) * 0.15 * c.s * dt; if (c.x < -120) { c.x = W + 40; c.y = 40 + Math.random() * 140; } });\n    if (state !== 'play' || paused) return;\n    elapsed += dt; speed = Math.min(cfg.gameSpeed + cfg.speedUp * elapsed, 2000);\n    var dx = speed * dt; dist += dx; score = Math.floor(dist / 10) + coinsGot;\n    player.vy += cfg.gravity * dt; player.y += player.vy * dt;\n    if (player.y + player.h >= GROUND) { player.y = GROUND - player.h; player.vy = 0; player.onGround = true; player.jumpsUsed = 0; }\n    nextObstacle -= dx; if (nextObstacle <= 0) spawn();\n    obstacles.forEach(function (o) { o.x -= dx; });\n    obstacles = obstacles.filter(function (o) { return o.x + o.w > -10; });\n    coins.forEach(function (c) { c.x -= dx; if (!c.got && Math.hypot(c.x - (player.x + player.w / 2), c.y - (player.y + player.h / 2)) < c.r + player.w / 2) { c.got = true; coinsGot += 5; if (window.sfx) sfx('coin'); else beep(990, 0.09, 'triangle', 0.1); } });\n    coins = coins.filter(function (c) { return c.x > -20 && !c.got; });\n    var box = { x: player.x + 6, y: player.y + 6, w: player.w - 12, h: player.h - 8 };\n    for (var i = 0; i < obstacles.length; i++) {\n      var o = obstacles[i], ob = o.type === 'spikes' ? { x: o.x + 6, y: o.y + 8, w: o.w - 12, h: o.h - 8 } : o;\n      if (hit(box, ob)) {\n        state = 'over'; if (window.sfx) sfx('lose'); else beep(140, 0.45, 'sawtooth', 0.12);\n        if (score > best) { best = score; try { localStorage.setItem('skyDashBest', best); } catch (e) {} }\n        break;\n      }\n    }\n  }\n  function drawPlayer() {\n    var p = player, sprite = img('player');\n    if (sprite) { ctx.drawImage(sprite, p.x, p.y, p.w, p.h); return; }\n    ctx.save(); ctx.translate(p.x + p.w / 2, p.y + p.h / 2); ctx.rotate(p.onGround ? 0 : Math.min(0.5, p.vy / 2000));\n    ctx.fillStyle = '#ff8a3d'; ctx.beginPath(); ctx.roundRect(-p.w / 2, -p.h / 2, p.w, p.h, 10); ctx.fill();\n    ctx.fillStyle = '#fff'; ctx.fillRect(4, -10, 12, 12); ctx.fillStyle = '#16202b'; ctx.fillRect(10, -7, 5, 6);\n    ctx.fillStyle = '#c94f12'; ctx.fillRect(-p.w / 2, 6, p.w, 6);\n    ctx.restore();\n  }\n  function draw() {\n    var bg = img('background');\n    if (bg) ctx.drawImage(bg, 0, 0, W, H);\n    else {\n      var g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, '#6fb8ea'); g.addColorStop(1, '#cdeafc');\n      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);\n      ctx.fillStyle = 'rgba(255,255,255,.9)';\n      clouds.forEach(function (c) { ctx.beginPath(); ctx.ellipse(c.x, c.y, 46 * c.s, 18 * c.s, 0, 0, 7); ctx.ellipse(c.x + 26 * c.s, c.y - 10 * c.s, 30 * c.s, 16 * c.s, 0, 0, 7); ctx.fill(); });\n    }\n    ctx.fillStyle = '#4e9e53'; ctx.fillRect(0, GROUND, W, 12);\n    ctx.fillStyle = '#8b5a2b'; ctx.fillRect(0, GROUND + 12, W, H - GROUND);\n    ctx.fillStyle = 'rgba(0,0,0,.12)'; for (var s = -(dist % 40); s < W; s += 40) ctx.fillRect(s, GROUND + 22, 20, 6);\n    obstacles.forEach(function (o) {\n      if (o.type === 'spikes') {\n        ctx.fillStyle = '#6b7784';\n        for (var i = 0; i < o.w; i += 14) { ctx.beginPath(); ctx.moveTo(o.x + i, GROUND); ctx.lineTo(o.x + i + 7, o.y); ctx.lineTo(o.x + i + 14, GROUND); ctx.fill(); }\n      } else {\n        ctx.fillStyle = o.type === 'tall' ? '#5a3e8c' : '#b07a3a'; ctx.fillRect(o.x, o.y, o.w, o.h);\n        ctx.strokeStyle = 'rgba(0,0,0,.35)'; ctx.lineWidth = 3; ctx.strokeRect(o.x + 1.5, o.y + 1.5, o.w - 3, o.h - 3);\n        if (o.type === 'crate') { ctx.beginPath(); ctx.moveTo(o.x, o.y); ctx.lineTo(o.x + o.w, o.y + o.h); ctx.stroke(); }\n      }\n    });\n    coins.forEach(function (c) { ctx.fillStyle = '#ffd23f'; ctx.beginPath(); ctx.arc(c.x, c.y, c.r, 0, 7); ctx.fill(); ctx.fillStyle = '#e0a800'; ctx.beginPath(); ctx.arc(c.x, c.y, c.r * 0.5, 0, 7); ctx.fill(); });\n    drawPlayer();\n    ctx.fillStyle = '#16202b'; ctx.font = 'bold 22px system-ui, sans-serif'; ctx.textAlign = 'left';\n    ctx.fillText('Score ' + score, 18, 34); ctx.font = '15px system-ui, sans-serif'; ctx.fillText('Best ' + best, 18, 56);\n    ctx.textAlign = 'center';\n    if (state !== 'play' || paused) {\n      ctx.fillStyle = 'rgba(8,24,38,.55)'; ctx.fillRect(0, 0, W, H);\n      ctx.fillStyle = '#fff'; ctx.font = 'bold 42px system-ui, sans-serif';\n      ctx.fillText(state === 'over' ? 'Game over' : paused ? 'Paused' : 'Sky Dash', W / 2, H / 2 - 20);\n      ctx.font = '18px system-ui, sans-serif';\n      ctx.fillText(state === 'over' ? 'Score ' + score + ' \u2014 press Space or tap to play again' : paused ? 'Press P to continue' : 'Press Space or tap to start', W / 2, H / 2 + 20);\n    }\n  }\n  var last = performance.now();\n  function loop(now) {\n    var dt = Math.min(0.033, (now - last) / 1000); last = now;\n    update(dt); draw(); requestAnimationFrame(loop);\n  }\n  addEventListener('keydown', function (e) {\n    if (e.code === 'Space' || e.code === 'ArrowUp' || e.code === 'KeyW') { e.preventDefault(); if (!e.repeat) jump(); }\n    if (e.code === 'KeyP' && state === 'play') paused = !paused;\n  });\n  cv.addEventListener('pointerdown', function (e) { e.preventDefault(); jump(); });\n  reset(); requestAnimationFrame(loop);\n})();\n<\/script>\n<\/body>\n<\/html>\n";
+  starterBtn.addEventListener('click', function () {
+    if (currentGameHtml && currentGameHtml.indexOf('<title>Sky Dash') === -1 && !confirm('Replace the current game with the starter game?')) return;
+    showGame(injectSprites(STARTER_GAME));
+    titleBlock.textContent = 'STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN';
+  });
+
+  function showGame(html) {
+    tuneDefaults = null;
+    currentGameHtml = html;
+    embedBtn.disabled = false;
+    sheetEmpty.style.display = 'none';
+    preview.style.display = 'block';
+    preview.srcdoc = MigaSandbox.prepare(html);
+    sourceText.value = html;
+    viewSourceBtn.disabled = false;
+    downloadBtn.disabled = false;
+    refineBtn.disabled = false;
+    setQuickRefineChipsEnabled(true);
+    pwaBtn.disabled = false;
+    sfxWireBtn.disabled = false;
+  }
+
+  // Every game exposes its balance numbers and two picture slots so the sliders and
+  // picture drop zones under the preview work without any code.
+  const TUNING_RULES = [
+    'TUNING HOOKS (required): put the game\'s key balance numbers in a script in <head>, before any other script, in exactly this shape (valid JSON inside, no comments or functions):',
+    '<script id="game-config">',
+    'window.GAME_CONFIG = {"gravity": 2000, "jumpPower": 750, "gameSpeed": 300};',
+    'window.GAME_CONFIG_UI = {"gravity": {"label": "Gravity", "min": 0, "max": 4000, "step": 50}, "jumpPower": {"label": "Jump height", "min": 200, "max": 1500, "step": 10}, "gameSpeed": {"label": "Game speed", "min": 50, "max": 900, "step": 10}};',
+    '</' + 'script>',
+    '- Choose 3 to 7 numbers that really matter for THIS game (for example gravity, jumpPower, playerSpeed, enemySpeed, spawnRate, gameSpeed, lives, bulletSpeed) with sensible ranges and short plain-English labels.',
+    '- Read them from window.GAME_CONFIG every frame or at the moment they are used (never copy them into constants at startup) so a changed value takes effect immediately while playing.',
+    'PICTURE SLOTS (required): the page defines window.gameImage(name) before your code runs. It returns a loaded image or null. Every frame: if gameImage("background") returns an image, draw it stretched over the whole canvas first; when drawing the player, if gameImage("player") returns an image, draw it with ctx.drawImage(img, x, y, width, height) in place of the shape/emoji. Always keep the shape/emoji as the fallback. Call it as (window.gameImage ? gameImage("player") : null). Never define gameImage or GAME_ASSETS yourself.'
+  ].join('\n');
+
+  const GAME_RULES_BASE = [
+    'You are a senior browser game developer. Given a short description, write ONE complete, self-contained HTML document implementing that game, playable immediately.',
+    'Requirements:',
+    '- A single <canvas> element, roughly 800x500 (responsive down to smaller screens), redrawn via requestAnimationFrame with delta-time-based movement (not fixed per-frame steps) so speed is consistent across refresh rates.',
+    '- All CSS and JavaScript inline in this one document. No external scripts, fonts, images, or network calls of any kind.',
+    '- Implement real, working mechanics that match the description: movement, the main action (attack/jump/shoot/collect/etc. as fitting), a clear win/lose or score condition, and a visible "Play again" control once the game ends.',
+    '- Keyboard controls (arrow keys or WASD for movement, Space or another key for the main action) — show the controls in a small on-screen legend.',
+    '- Draw characters and objects as clear canvas shapes combined with relevant emoji rendered via ctx.font + fillText (e.g. "🥷", "⚔️", "👾", "🏆") — this reads far better than plain rectangles with zero art assets.',
+    '- Use proper collision detection (AABB or distance-based, whichever fits) rather than approximate guessing, and clamp entities so they never move fully off-canvas unless the design calls for it.',
+    '- Keep logic self-contained and robust: no external asset loading, no external libraries, no eval.',
+    '- Output ONLY the complete HTML document — no markdown fences, no commentary, no explanation.'
+  ].join('\n') + '\n\n' + TUNING_RULES;
+
+  const GENRE_RULES = {
+    auto: '',
+    platformer: [
+      'GENRE: Platformer.',
+      '- Implement real gravity (constant downward acceleration), a jump impulse, and ground/platform collision that stops falling only when landing on a surface from above.',
+      '- Build at least 3-4 platforms/ledges at varying heights the player must navigate, plus at least one hazard (spikes, gap, or enemy) that ends the run or costs a life on contact.',
+      '- Coyote-time (a few frames of jump grace after leaving a ledge) is a nice touch if it fits naturally.'
+    ].join('\n'),
+    shooter: [
+      'GENRE: Top-down shooter.',
+      '- Player aims/moves in a top-down view; the main action fires a projectile that travels in a straight line and is removed on hit or leaving the canvas.',
+      '- Spawn enemies on a timer/wave system with increasing frequency or toughness over time; track and display remaining enemies or wave number.',
+      '- Use simple object pooling logic (reuse arrays of active bullets/enemies, splice out dead ones) rather than leaking unbounded objects.'
+    ].join('\n'),
+    runner: [
+      'GENRE: Endless runner / dodger.',
+      '- The world scrolls or obstacles move toward the player continuously; speed should increase gradually the longer the run lasts.',
+      '- The player has one clear evasive action (jump, lane-switch, or duck) with an unmistakable game-over the instant they touch an obstacle.',
+      '- Track and display distance or survival time as the score, and persist/show the best run in-session.'
+    ].join('\n'),
+    puzzle: [
+      'GENRE: Puzzle / match grid.',
+      '- Model the board as a real 2D array (rows x cols) of typed cells, not just visual shapes with no underlying data.',
+      '- Implement actual match/clear detection logic (e.g. 3-in-a-row, or the specific rule described) that mutates the grid array and refills/settles it afterward.',
+      '- Give the player a clear input method (click/tap two adjacent cells to swap, or click to select then click destination) and prevent illegal moves.'
+    ].join('\n'),
+    racing: [
+      'GENRE: Racing / obstacle course.',
+      '- The player controls a vehicle/character that steers left-right (and optionally accelerates/brakes) while the track or obstacles scroll past.',
+      '- Increase obstacle density or scroll speed over time to build difficulty, and end the run cleanly on collision.',
+      '- Track distance traveled or time survived as the score.'
+    ].join('\n'),
+    tower: [
+      'GENRE: Tower defense (lite).',
+      '- Enemies follow a fixed path (array of waypoints) from start to end; reaching the end costs the player a life.',
+      '- The player places a small number of tower types (at least 2, with different range/damage/cost tradeoffs) by clicking grid cells; towers auto-target and fire at enemies in range on a cooldown.',
+      '- Implement a simple currency (earned per kill) and a wave counter that increases enemy count/speed each wave.'
+    ].join('\n'),
+    battle: [
+      'GENRE: Turn-based battle.',
+      '- Implement real turn order: player picks an action from a visible menu (attack/defend/special/etc.), it resolves, then the opponent (simple AI) takes a turn, alternating until one side\'s HP reaches 0.',
+      '- Show HP bars for both sides that update immediately after each action, and log the last couple of actions as short text so the player can follow what happened.',
+      '- Keep the opponent AI simple but not purely random — e.g. favor its strongest move when the player is low, or defend when itself is low.'
+    ].join('\n')
+  };
+
+  const DIFFICULTY_RULES = {
+    normal: 'DIFFICULTY: Balanced — a competent first-time player should be able to win or make real progress within a couple of tries.',
+    easy: 'DIFFICULTY: Easy — slower enemy/obstacle speed, more forgiving hit detection and timing windows, generous lives or health. This should be very winnable.',
+    hard: 'DIFFICULTY: Hard — faster pace, tighter timing windows, less margin for error. A skilled player should still be able to win, but it should take real effort.',
+    escalating: 'DIFFICULTY: Escalating — start noticeably easy so new players get a feel for the controls, then ramp speed/spawn-rate/enemy toughness up smoothly over time (by score, wave, or elapsed time) so late play is genuinely challenging.'
+  };
+
+  function featureRules() {
+    const rules = [];
+    if (featSound.checked) {
+      rules.push([
+        'FEATURE — Sound effects: the page already defines window.sfx(name), which plays a retro 8-bit sound made with the Web Audio API — no audio files. Available names: jump, coin, shoot, laser, explode, hit, powerup, win, lose, blip. Call it as (window.sfx && sfx("jump")) at the matching moments: at least the main action, taking damage/losing, and winning/scoring, for any of these not already covered by one of the player\'s own custom clips (listed separately below, if any). Never define sfx or GAME_SFX yourself and do not write other Web Audio code. Include a mute/unmute button that calls window.sfxMute() (it toggles and returns true when muted).'
+      ].join(''));
+    }
+    if (featTouch.checked) {
+      rules.push([
+        'FEATURE — Touch controls: add on-screen touch controls (buttons or a D-pad, styled simply with divs/CSS, positioned below or overlaying the canvas) that trigger the exact same input handlers as the keyboard, shown always (not only detected via media query) so the game is fully playable by tap alone on a phone.'
+      ].join(''));
+    }
+    if (featHighscore.checked) {
+      rules.push([
+        'FEATURE — Local high score: on game over, read/write a high score using localStorage (pick a clear unique key), display both the current run\'s score and the best score, and update the stored best when beaten.'
+      ].join(''));
+    }
+    if (featTwoPlayer.checked) {
+      rules.push([
+        'FEATURE — Two players, one keyboard: support a second local player with a distinct key set (commonly WASD + a nearby action key for player 2, arrow keys + a different action key for player 1) — this may mean two characters, or a simple alternating-turns setup for a battle/puzzle genre, whichever fits the description. Clearly label which controls belong to which player in the on-screen legend.'
+      ].join(''));
+    }
+    return rules;
+  }
+
+  const UI_LANGUAGE_NAMES = { en: 'English', es: 'Spanish', ar: 'Arabic', zh: 'Mandarin Chinese', sw: 'Swahili', sv: 'Swedish', de: 'German', pt: 'Portuguese', fr: 'French' };
+  function gameLanguageInstruction() {
+    const lang = window.I18N ? I18N.getLang() : 'en';
+    if (lang === 'en') return '';
+    return 'LANGUAGE: Write all in-game text (labels, legends, UI, "Play again", HP/score displays, etc.) in ' + UI_LANGUAGE_NAMES[lang] + '.';
+  }
+
+  function buildGameSystemPrompt() {
+    const parts = [GAME_RULES_BASE];
+    const genreRule = GENRE_RULES[genreSelect.value];
+    if (genreRule) parts.push(genreRule);
+    parts.push(DIFFICULTY_RULES[difficultySelect.value]);
+    parts.push.apply(parts, featureRules());
+    const audioSection = customAudioPromptSection();
+    if (audioSection) parts.push(audioSection);
+    const langInstruction = gameLanguageInstruction();
+    if (langInstruction) parts.push(langInstruction);
+    return parts.join('\n\n');
+  }
+
+  async function generateGame() {
+    clearError();
+    const key = currentTextApiKey();
+    const brief = briefInput.value.trim();
+    if (!key) { showError(I18N.t('errorNoApiKey')); return; }
+    if (!brief) { showError(I18N.t('errorNoBrief')); return; }
+
+    draftBtn.disabled = true;
+    draftBtn.textContent = I18N.t('buildingLabel');
+    titleBlock.textContent = I18N.t('statusBuilding');
+    try {
+      const model = modelSelect.value;
+      const html = await callChat(key, model, buildGameSystemPrompt(), brief);
+      showGame(injectSprites(injectCustomAudio(html)));
+      titleBlock.textContent = I18N.t('statusReady');
+    } catch (err) {
+      showError(err.message || I18N.t('errorCouldNotGenerate'));
+      titleBlock.textContent = I18N.t('statusFailed');
+    } finally {
+      draftBtn.disabled = false;
+      draftBtn.textContent = I18N.t('generateBtnLabel');
+    }
+  }
+  draftBtn.addEventListener('click', generateGame);
+
+  const QUICK_REFINE_PRESET_KEYS = [
+    { labelKey: 'presetSoundLabel', textKey: 'presetSoundText' },
+    { labelKey: 'presetTouchLabel', textKey: 'presetTouchText' },
+    { labelKey: 'presetHighscoreLabel', textKey: 'presetHighscoreText' },
+    { labelKey: 'presetTwoPlayerLabel', textKey: 'presetTwoPlayerText' },
+    { labelKey: 'presetHarderLabel', textKey: 'presetHarderText' },
+    { labelKey: 'presetLevelsLabel', textKey: 'presetLevelsText' }
+  ];
+  function renderQuickRefineChips() {
+    quickRefineChips.innerHTML = '';
+    const wasEnabled = !!currentGameHtml;
+    QUICK_REFINE_PRESET_KEYS.forEach(function (preset) {
+      const chip = document.createElement('button');
+      chip.type = 'button';
+      chip.className = 'chip-btn';
+      chip.textContent = I18N.t(preset.labelKey);
+      chip.disabled = !wasEnabled;
+      chip.addEventListener('click', function () {
+        refineInput.value = I18N.t(preset.textKey);
+        refineGame();
+      });
+      quickRefineChips.appendChild(chip);
+    });
+  }
+  function setQuickRefineChipsEnabled(enabled) {
+    quickRefineChips.querySelectorAll('.chip-btn').forEach(function (chip) { chip.disabled = !enabled; });
+  }
+
+  async function refineGame() {
+    clearError();
+    const key = currentTextApiKey();
+    const instruction = refineInput.value.trim();
+    if (!key) { showError(I18N.t('errorNoApiKey')); return; }
+    if (!currentGameHtml) { showError(I18N.t('errorNoGame')); return; }
+    if (!instruction) { showError(I18N.t('errorNoInstruction')); return; }
+
+    refineBtn.disabled = true;
+    refineBtn.textContent = I18N.t('applyingLabel');
+    const model = modelSelect.value;
+    const rulesParts = [
+      'You are editing an existing browser game.',
+      'Below is the current complete HTML document, followed by a requested change.',
+      'Apply ONLY the requested change. Keep everything else about the game the same unless the change requires it to differ.',
+      'Keep following the original rules: single self-contained HTML document, inline canvas game, no external assets, output ONLY the complete updated HTML document with no markdown fences or commentary.',
+      TUNING_RULES,
+      'If the <script id="game-config"> block already exists, keep it and its current values unless the change is about them.'
+    ];
+    const audioSection = customAudioPromptSection();
+    if (audioSection) rulesParts.push(audioSection);
+    const langInstruction = gameLanguageInstruction();
+    if (langInstruction) rulesParts.push(langInstruction);
+    const rules = rulesParts.join('\n');
+    const userMsg = 'CURRENT GAME HTML:\n' + stripInjectedSprites(stripInjectedAudio(currentGameHtml)) + '\n\nREQUESTED CHANGE:\n' + instruction;
+
+    try {
+      const html = await callChat(key, model, rules, userMsg);
+      showGame(injectSprites(injectCustomAudio(html)));
+      refineInput.value = '';
+    } catch (err) {
+      showError(err.message || I18N.t('errorCouldNotApply'));
+    } finally {
+      refineBtn.disabled = false;
+      refineBtn.textContent = I18N.t('applyChangeBtnLabel');
+    }
+  }
+  refineBtn.addEventListener('click', refineGame);
+
+  viewSourceBtn.addEventListener('click', function () {
+    sourceView.style.display = sourceView.style.display === 'none' ? 'block' : 'none';
+    viewSourceBtn.textContent = sourceView.style.display === 'block' ? I18N.t('hideSourceLabel') : I18N.t('viewSourceLabel');
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    if (!currentGameHtml) return;
+    const blob = new Blob([currentGameHtml], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'game.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Describe a game. Get something playable — built live in your browser, the same way MigaBuilder writes a website.',
+      connectionHeading: 'Connection',
+      providerLabel: 'AI provider',
+      apiKeyLabelOpenai: 'Your OpenAI API key',
+      apiKeyLabelAnthropic: 'Your Anthropic API key',
+      apiKeyHint: 'Used only to call the provider above directly from your browser. Never stored.',
+      freeNoticeText: '✓ Free to use — shared key with a limited daily capacity. If it stops working, try again tomorrow, or switch to OpenAI/Anthropic with your own key.',
+      modelLabel: 'Text model',
+      gameHeading: 'The game',
+      genreLabel: 'Genre',
+      genreAuto: 'Let the AI decide',
+      genrePlatformer: 'Platformer (jump/run)',
+      genreShooter: 'Top-down shooter',
+      genreRunner: 'Endless runner / dodger',
+      genrePuzzle: 'Puzzle / match grid',
+      genreRacing: 'Racing / obstacle course',
+      genreTower: 'Tower defense (lite)',
+      genreBattle: 'Turn-based battle',
+      genreHint: 'Picking a genre gives the AI real technical scaffolding for that kind of game (physics, spawning, grid logic) instead of guessing — usually the single biggest jump in quality.',
+      difficultyLabel: 'Difficulty curve',
+      difficultyNormal: 'Normal — balanced from the start',
+      difficultyEasy: 'Easy — forgiving, good for testing',
+      difficultyHard: 'Hard — punishing, tight timing',
+      difficultyEscalating: 'Escalating — starts easy, ramps up over time',
+      extraFeaturesLabel: 'Extra features',
+      featSoundLabel: 'Procedural sound effects (Web Audio, no files)',
+      featTouchLabel: 'On-screen touch controls for mobile',
+      featHighscoreLabel: 'Local high score (saved in the browser)',
+      featTwoPlayerLabel: 'Two-player, same keyboard',
+      ownAudioLabel: 'Your own sound & voice (optional)',
+      ownAudioHint: 'Upload short clips or record your voice — they\'re baked directly into the game file and never sent anywhere, including to the AI provider. Give each one a short name; the AI uses the name to decide when to play it (e.g. "jump", "win", "taunt"). Keep clips short — they\'re embedded as-is.',
+      addSoundFilesLabel: '+ Add sound files',
+      recordVoiceLabel: '🎙️ Record voice',
+      stopRecordingLabel: '⏹ Stop recording',
+      briefLabel: 'Describe the game you want',
+      briefPlaceholder: 'e.g. A ninja who fights other ninjas — arrow keys to move, space to attack, best of 3 rounds wins',
+      briefHint: 'Be specific about controls and the win condition if you have one in mind — the AI follows what you give it. Expect simple, playable mechanics with shapes and emoji for characters, not illustrated art.',
+      generateBtnLabel: 'Generate game',
+      statusNotGenerated: 'GAME FORGE — NOTHING GENERATED YET',
+      sheetEmptyStrong: 'Nothing here yet.',
+      sheetEmptyText: "Describe a game on the left and click Generate — it'll show up here, ready to play.",
+      refineLabel: 'Refine this game',
+      refinePlaceholder: 'e.g. Make the ninjas move faster, add a health bar, make attacks have a cooldown',
+      applyChangeBtnLabel: 'Apply change',
+      viewSourceLabel: 'View source',
+      hideSourceLabel: 'Hide source',
+      downloadBtnLabel: 'Download as HTML',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Every game is freshly written by an AI model from your description — expect some to need a "refine" pass, exactly like a generated web page would. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      errorRequestFailedFreeLimit: 'Request failed with status {status} — the free daily limit may have been reached.',
+      errorRequestFailed: 'Request failed with status {status}',
+      errorEmptyResponse: 'The model returned an empty response.',
+      clipNameTitle: 'Trigger name the AI uses to play this clip',
+      clipKindSfx: 'Sound effect',
+      clipKindVoice: 'Voice line',
+      clipKindMusic: 'Background music (loops)',
+      removeTitle: 'Remove',
+      errorMicAccess: 'Could not access the microphone: {message}',
+      errorNoApiKey: 'Add your API key first.',
+      errorNoBrief: 'Describe the game you want.',
+      buildingLabel: 'Building…',
+      statusBuilding: 'GAME FORGE — BUILDING…',
+      statusReady: 'GAME FORGE — READY TO PLAY',
+      statusFailed: 'GAME FORGE — GENERATION FAILED',
+      errorCouldNotGenerate: 'Could not generate that game.',
+      presetSoundLabel: '+ Sound effects',
+      presetSoundText: 'Add Web Audio procedural sound effects (no audio files) for the main action, taking damage, and winning, plus a mute button.',
+      presetTouchLabel: '+ Touch controls',
+      presetTouchText: 'Add always-visible on-screen touch controls (buttons/D-pad) below the canvas that trigger the same actions as the keyboard, so it is fully playable on a phone.',
+      presetHighscoreLabel: '+ High score',
+      presetHighscoreText: 'Add a local high score saved with localStorage, shown alongside the current score, updated whenever the player beats it.',
+      presetTwoPlayerLabel: '+ Two-player',
+      presetTwoPlayerText: 'Add a second local player on a separate key set (WASD for one, arrow keys for the other) sharing the same keyboard, clearly labeled in the on-screen controls legend.',
+      presetHarderLabel: 'Make it harder',
+      presetHarderText: 'Increase the difficulty: faster pace, tighter timing windows, tougher or more frequent enemies/obstacles, less margin for error.',
+      presetLevelsLabel: 'Add more levels',
+      presetLevelsText: 'Add progressively harder levels or waves that advance automatically once the current one is cleared, with a brief on-screen indicator of the current level/wave number.',
+      errorNoGame: 'Generate a game first.',
+      errorNoInstruction: 'Say what you want changed.',
+      applyingLabel: 'Applying…',
+      errorCouldNotApply: 'Could not apply that change.'
+    },
+    es: {
+      heroSubtitle: 'Describe un juego. Obtén algo jugable — construido en vivo en tu navegador, de la misma forma en que MigaBuilder escribe un sitio web.',
+      connectionHeading: 'Conexión',
+      providerLabel: 'Proveedor de IA',
+      apiKeyLabelOpenai: 'Tu clave API de OpenAI',
+      apiKeyLabelAnthropic: 'Tu clave API de Anthropic',
+      apiKeyHint: 'Se usa solo para llamar al proveedor anterior directamente desde tu navegador. Nunca se almacena.',
+      freeNoticeText: '✓ Gratis para usar — clave compartida con una capacidad diaria limitada. Si deja de funcionar, intenta de nuevo mañana, o cambia a OpenAI/Anthropic con tu propia clave.',
+      modelLabel: 'Modelo de texto',
+      gameHeading: 'El juego',
+      genreLabel: 'Género',
+      genreAuto: 'Deja que la IA decida',
+      genrePlatformer: 'Plataformas (saltar/correr)',
+      genreShooter: 'Disparos cenital',
+      genreRunner: 'Corredor infinito / esquiva',
+      genrePuzzle: 'Rompecabezas / cuadrícula de combinación',
+      genreRacing: 'Carreras / carrera de obstáculos',
+      genreTower: 'Defensa de torres (ligero)',
+      genreBattle: 'Batalla por turnos',
+      genreHint: 'Elegir un género le da a la IA una base técnica real para ese tipo de juego (física, generación, lógica de cuadrícula) en lugar de adivinar — normalmente el mayor salto en calidad.',
+      difficultyLabel: 'Curva de dificultad',
+      difficultyNormal: 'Normal — equilibrado desde el inicio',
+      difficultyEasy: 'Fácil — indulgente, bueno para probar',
+      difficultyHard: 'Difícil — implacable, ritmo ajustado',
+      difficultyEscalating: 'Progresiva — empieza fácil, aumenta con el tiempo',
+      extraFeaturesLabel: 'Funciones adicionales',
+      featSoundLabel: 'Efectos de sonido procedurales (Web Audio, sin archivos)',
+      featTouchLabel: 'Controles táctiles en pantalla para móviles',
+      featHighscoreLabel: 'Puntuación máxima local (guardada en el navegador)',
+      featTwoPlayerLabel: 'Dos jugadores, mismo teclado',
+      ownAudioLabel: 'Tu propio sonido y voz (opcional)',
+      ownAudioHint: 'Sube clips cortos o graba tu voz — se incorporan directamente en el archivo del juego y nunca se envían a ningún lugar, incluido el proveedor de IA. Dale a cada uno un nombre corto; la IA usa el nombre para decidir cuándo reproducirlo (p. ej. "salto", "ganar", "burla"). Mantén los clips cortos — se incrustan tal cual.',
+      addSoundFilesLabel: '+ Añadir archivos de sonido',
+      recordVoiceLabel: '🎙️ Grabar voz',
+      stopRecordingLabel: '⏹ Detener grabación',
+      briefLabel: 'Describe el juego que quieres',
+      briefPlaceholder: 'p. ej. Un ninja que lucha contra otros ninjas — flechas para moverse, espacio para atacar, el mejor de 3 rondas gana',
+      briefHint: 'Sé específico sobre los controles y la condición de victoria si tienes una en mente — la IA sigue lo que le indiques. Espera mecánicas simples y jugables con formas y emojis para los personajes, no arte ilustrado.',
+      generateBtnLabel: 'Generar juego',
+      statusNotGenerated: 'GAME FORGE — NADA GENERADO AÚN',
+      sheetEmptyStrong: 'Nada aquí todavía.',
+      sheetEmptyText: 'Describe un juego a la izquierda y haz clic en Generar — aparecerá aquí, listo para jugar.',
+      refineLabel: 'Perfeccionar este juego',
+      refinePlaceholder: 'p. ej. Haz que los ninjas se muevan más rápido, añade una barra de vida, haz que los ataques tengan un tiempo de reutilización',
+      applyChangeBtnLabel: 'Aplicar cambio',
+      viewSourceLabel: 'Ver código fuente',
+      hideSourceLabel: 'Ocultar código fuente',
+      downloadBtnLabel: 'Descargar como HTML',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Cada juego es escrito de nuevo por un modelo de IA a partir de tu descripción — espera que algunos necesiten un ajuste de "perfeccionar", igual que una página web generada. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      errorRequestFailedFreeLimit: 'La solicitud falló con estado {status} — es posible que se haya alcanzado el límite diario gratuito.',
+      errorRequestFailed: 'La solicitud falló con estado {status}',
+      errorEmptyResponse: 'El modelo devolvió una respuesta vacía.',
+      clipNameTitle: 'Nombre disparador que la IA usa para reproducir este clip',
+      clipKindSfx: 'Efecto de sonido',
+      clipKindVoice: 'Línea de voz',
+      clipKindMusic: 'Música de fondo (en bucle)',
+      removeTitle: 'Eliminar',
+      errorMicAccess: 'No se pudo acceder al micrófono: {message}',
+      errorNoApiKey: 'Añade primero tu clave API.',
+      errorNoBrief: 'Describe el juego que quieres.',
+      buildingLabel: 'Construyendo…',
+      statusBuilding: 'GAME FORGE — CONSTRUYENDO…',
+      statusReady: 'GAME FORGE — LISTO PARA JUGAR',
+      statusFailed: 'GAME FORGE — GENERACIÓN FALLIDA',
+      errorCouldNotGenerate: 'No se pudo generar ese juego.',
+      presetSoundLabel: '+ Efectos de sonido',
+      presetSoundText: 'Añade efectos de sonido procedurales de Web Audio (sin archivos de audio) para la acción principal, recibir daño y ganar, más un botón de silencio.',
+      presetTouchLabel: '+ Controles táctiles',
+      presetTouchText: 'Añade controles táctiles en pantalla siempre visibles (botones/D-pad) debajo del canvas que activen las mismas acciones que el teclado, para que sea totalmente jugable en un teléfono.',
+      presetHighscoreLabel: '+ Puntuación máxima',
+      presetHighscoreText: 'Añade una puntuación máxima local guardada con localStorage, mostrada junto a la puntuación actual, actualizada cuando el jugador la supere.',
+      presetTwoPlayerLabel: '+ Dos jugadores',
+      presetTwoPlayerText: 'Añade un segundo jugador local con un conjunto de teclas separado (WASD para uno, flechas para el otro) compartiendo el mismo teclado, claramente etiquetado en la leyenda de controles en pantalla.',
+      presetHarderLabel: 'Hazlo más difícil',
+      presetHarderText: 'Aumenta la dificultad: ritmo más rápido, ventanas de tiempo más ajustadas, enemigos/obstáculos más duros o frecuentes, menos margen de error.',
+      presetLevelsLabel: 'Añadir más niveles',
+      presetLevelsText: 'Añade niveles u oleadas progresivamente más difíciles que avancen automáticamente una vez superado el actual, con un breve indicador en pantalla del nivel/oleada actual.',
+      errorNoGame: 'Genera un juego primero.',
+      errorNoInstruction: 'Indica qué quieres cambiar.',
+      applyingLabel: 'Aplicando…',
+      errorCouldNotApply: 'No se pudo aplicar ese cambio.'
+    },
+    ar: {
+      heroSubtitle: 'صف لعبة. احصل على شيء قابل للعب — يُبنى مباشرة في متصفحك، بنفس الطريقة التي يكتب بها MigaBuilder موقعًا إلكترونيًا.',
+      connectionHeading: 'الاتصال',
+      providerLabel: 'مزوّد الذكاء الاصطناعي',
+      apiKeyLabelOpenai: 'مفتاح OpenAI API الخاص بك',
+      apiKeyLabelAnthropic: 'مفتاح Anthropic API الخاص بك',
+      apiKeyHint: 'يُستخدم فقط لاستدعاء المزوّد أعلاه مباشرة من متصفحك. لا يُخزَّن أبدًا.',
+      freeNoticeText: '✓ مجاني للاستخدام — مفتاح مشترك بسعة يومية محدودة. إذا توقف عن العمل، حاول مرة أخرى غدًا، أو انتقل إلى OpenAI/Anthropic بمفتاحك الخاص.',
+      modelLabel: 'نموذج النص',
+      gameHeading: 'اللعبة',
+      genreLabel: 'النوع',
+      genreAuto: 'دع الذكاء الاصطناعي يقرر',
+      genrePlatformer: 'منصات (قفز/جري)',
+      genreShooter: 'إطلاق نار من أعلى',
+      genreRunner: 'جري لا نهائي / مراوغة',
+      genrePuzzle: 'أحجية / شبكة مطابقة',
+      genreRacing: 'سباق / مسار عوائق',
+      genreTower: 'دفاع الأبراج (خفيف)',
+      genreBattle: 'معركة بالأدوار',
+      genreHint: 'اختيار نوع يمنح الذكاء الاصطناعي إطارًا تقنيًا حقيقيًا لذلك النوع من الألعاب (الفيزياء، التوليد، منطق الشبكة) بدلاً من التخمين — عادةً أكبر قفزة في الجودة.',
+      difficultyLabel: 'منحنى الصعوبة',
+      difficultyNormal: 'عادي — متوازن منذ البداية',
+      difficultyEasy: 'سهل — متساهل، جيد للاختبار',
+      difficultyHard: 'صعب — قاسٍ، توقيت دقيق',
+      difficultyEscalating: 'تصاعدي — يبدأ سهلاً، يتصاعد مع الوقت',
+      extraFeaturesLabel: 'ميزات إضافية',
+      featSoundLabel: 'مؤثرات صوتية إجرائية (Web Audio، بدون ملفات)',
+      featTouchLabel: 'أدوات تحكم لمسية على الشاشة للهاتف المحمول',
+      featHighscoreLabel: 'أعلى نتيجة محلية (محفوظة في المتصفح)',
+      featTwoPlayerLabel: 'لاعبان، نفس لوحة المفاتيح',
+      ownAudioLabel: 'صوتك الخاص (اختياري)',
+      ownAudioHint: 'ارفع مقاطع قصيرة أو سجّل صوتك — تُدمج مباشرة في ملف اللعبة ولا تُرسل إلى أي مكان، بما في ذلك مزوّد الذكاء الاصطناعي. أعط كل واحد اسمًا قصيرًا؛ يستخدم الذكاء الاصطناعي الاسم لتحديد متى يشغّله (مثل "قفز"، "فوز"، "استفزاز"). اجعل المقاطع قصيرة — تُضمَّن كما هي.',
+      addSoundFilesLabel: '+ إضافة ملفات صوتية',
+      recordVoiceLabel: '🎙️ تسجيل صوت',
+      stopRecordingLabel: '⏹ إيقاف التسجيل',
+      briefLabel: 'صف اللعبة التي تريدها',
+      briefPlaceholder: 'مثال: نينجا يقاتل نينجات آخرين — أسهم الاتجاه للحركة، مسافة للهجوم، الفائز بأفضل 3 من 5 جولات',
+      briefHint: 'كن محددًا بشأن أدوات التحكم وشرط الفوز إن كان لديك واحد في ذهنك — يتبع الذكاء الاصطناعي ما تقدمه له. توقع آليات بسيطة وقابلة للعب بأشكال ورموز تعبيرية للشخصيات، وليس فنًا مرسومًا.',
+      generateBtnLabel: 'إنشاء اللعبة',
+      statusNotGenerated: 'GAME FORGE — لم يُنشأ شيء بعد',
+      sheetEmptyStrong: 'لا يوجد شيء هنا بعد.',
+      sheetEmptyText: 'صف لعبة على اليسار وانقر على إنشاء — ستظهر هنا، جاهزة للعب.',
+      refineLabel: 'تحسين هذه اللعبة',
+      refinePlaceholder: 'مثال: اجعل النينجا يتحركون أسرع، أضف شريط صحة، اجعل الهجمات لها فترة تهدئة',
+      applyChangeBtnLabel: 'تطبيق التغيير',
+      viewSourceLabel: 'عرض المصدر',
+      hideSourceLabel: 'إخفاء المصدر',
+      downloadBtnLabel: 'تنزيل كـ HTML',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل لعبة تُكتب حديثًا بواسطة نموذج ذكاء اصطناعي من وصفك — توقع أن يحتاج بعضها إلى جولة "تحسين"، تمامًا مثل صفحة ويب مُنشأة. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      errorRequestFailedFreeLimit: 'فشل الطلب بالحالة {status} — ربما تم الوصول إلى الحد اليومي المجاني.',
+      errorRequestFailed: 'فشل الطلب بالحالة {status}',
+      errorEmptyResponse: 'أعاد النموذج استجابة فارغة.',
+      clipNameTitle: 'اسم المشغّل الذي يستخدمه الذكاء الاصطناعي لتشغيل هذا المقطع',
+      clipKindSfx: 'مؤثر صوتي',
+      clipKindVoice: 'سطر صوتي',
+      clipKindMusic: 'موسيقى خلفية (تتكرر)',
+      removeTitle: 'إزالة',
+      errorMicAccess: 'تعذر الوصول إلى الميكروفون: {message}',
+      errorNoApiKey: 'أضف مفتاح API الخاص بك أولاً.',
+      errorNoBrief: 'صف اللعبة التي تريدها.',
+      buildingLabel: 'جارٍ البناء…',
+      statusBuilding: 'GAME FORGE — جارٍ البناء…',
+      statusReady: 'GAME FORGE — جاهزة للعب',
+      statusFailed: 'GAME FORGE — فشل الإنشاء',
+      errorCouldNotGenerate: 'تعذر إنشاء تلك اللعبة.',
+      presetSoundLabel: '+ مؤثرات صوتية',
+      presetSoundText: 'أضف مؤثرات صوتية إجرائية بـ Web Audio (بدون ملفات صوتية) للحركة الرئيسية، وتلقي الضرر، والفوز، بالإضافة إلى زر كتم الصوت.',
+      presetTouchLabel: '+ أدوات تحكم لمسية',
+      presetTouchText: 'أضف أدوات تحكم لمسية على الشاشة دائمة الظهور (أزرار/لوحة اتجاهات) أسفل اللوحة تُفعّل نفس إجراءات لوحة المفاتيح، لتكون قابلة للعب بالكامل باللمس على الهاتف.',
+      presetHighscoreLabel: '+ أعلى نتيجة',
+      presetHighscoreText: 'أضف أعلى نتيجة محلية محفوظة بـ localStorage، تُعرض بجانب النتيجة الحالية، وتُحدَّث عندما يتفوق عليها اللاعب.',
+      presetTwoPlayerLabel: '+ لاعبان',
+      presetTwoPlayerText: 'أضف لاعبًا محليًا ثانيًا بمجموعة مفاتيح منفصلة (WASD لأحدهما، أسهم الاتجاه للآخر) يشتركان في نفس لوحة المفاتيح، موضّحة بجلاء في وسيلة إيضاح أدوات التحكم على الشاشة.',
+      presetHarderLabel: 'اجعلها أصعب',
+      presetHarderText: 'زد الصعوبة: وتيرة أسرع، فترات توقيت أضيق، أعداء/عوائق أقوى أو أكثر تكرارًا، هامش خطأ أقل.',
+      presetLevelsLabel: 'إضافة المزيد من المستويات',
+      presetLevelsText: 'أضف مستويات أو موجات تتزايد صعوبتها تدريجيًا وتتقدم تلقائيًا بمجرد اجتياز الحالية، مع مؤشر موجز على الشاشة للمستوى/الموجة الحالية.',
+      errorNoGame: 'أنشئ لعبة أولاً.',
+      errorNoInstruction: 'حدد ما تريد تغييره.',
+      applyingLabel: 'جارٍ التطبيق…',
+      errorCouldNotApply: 'تعذر تطبيق ذلك التغيير.'
+    },
+    zh: {
+      heroSubtitle: '描述一个游戏。获得可玩的内容——直接在你的浏览器中构建，就像 MigaBuilder 编写网站一样。',
+      connectionHeading: '连接',
+      providerLabel: 'AI 提供商',
+      apiKeyLabelOpenai: '你的 OpenAI API 密钥',
+      apiKeyLabelAnthropic: '你的 Anthropic API 密钥',
+      apiKeyHint: '仅用于从你的浏览器直接调用上述提供商。绝不存储。',
+      freeNoticeText: '✓ 免费使用——共享密钥，每日额度有限。如果停止工作，请明天再试，或切换到 OpenAI/Anthropic 并使用你自己的密钥。',
+      modelLabel: '文本模型',
+      gameHeading: '游戏',
+      genreLabel: '类型',
+      genreAuto: '让 AI 决定',
+      genrePlatformer: '平台跳跃（跳跃/奔跑）',
+      genreShooter: '俯视角射击',
+      genreRunner: '无尽跑酷 / 躲避',
+      genrePuzzle: '益智 / 消除网格',
+      genreRacing: '赛车 / 障碍赛道',
+      genreTower: '塔防（简版）',
+      genreBattle: '回合制战斗',
+      genreHint: '选择一个类型能让 AI 获得该类型游戏的真实技术框架（物理、生成、网格逻辑），而不是靠猜测——通常是提升质量的最大关键。',
+      difficultyLabel: '难度曲线',
+      difficultyNormal: '普通——从一开始就平衡',
+      difficultyEasy: '简单——宽容，适合测试',
+      difficultyHard: '困难——严苛，节奏紧凑',
+      difficultyEscalating: '递增——开始简单，随时间提升',
+      extraFeaturesLabel: '额外功能',
+      featSoundLabel: '程序化音效（Web Audio，无需文件）',
+      featTouchLabel: '移动端屏幕触控控制',
+      featHighscoreLabel: '本地最高分（保存在浏览器中）',
+      featTwoPlayerLabel: '双人，共用同一键盘',
+      ownAudioLabel: '你自己的声音（可选）',
+      ownAudioHint: '上传短音频片段或录制你的声音——它们会直接嵌入游戏文件，绝不会发送到任何地方，包括 AI 提供商。为每个片段起一个简短的名字；AI 会用这个名字来决定何时播放它（例如"跳跃"、"胜利"、"挑衅"）。保持片段简短——它们会按原样嵌入。',
+      addSoundFilesLabel: '+ 添加声音文件',
+      recordVoiceLabel: '🎙️ 录制声音',
+      stopRecordingLabel: '⏹ 停止录制',
+      briefLabel: '描述你想要的游戏',
+      briefPlaceholder: '例如：一个忍者与其他忍者战斗——方向键移动，空格键攻击，三局两胜',
+      briefHint: '如果你心中有具体的控制方式和获胜条件，请具体说明——AI 会遵循你给出的内容。预期是使用形状和表情符号表现角色的简单可玩机制，而非插画艺术。',
+      generateBtnLabel: '生成游戏',
+      statusNotGenerated: 'GAME FORGE — 尚未生成任何内容',
+      sheetEmptyStrong: '这里还没有内容。',
+      sheetEmptyText: '在左侧描述一个游戏并点击生成——它会出现在这里，随时可玩。',
+      refineLabel: '完善这个游戏',
+      refinePlaceholder: '例如：让忍者移动得更快，添加一个生命值条，让攻击有冷却时间',
+      applyChangeBtnLabel: '应用更改',
+      viewSourceLabel: '查看源代码',
+      hideSourceLabel: '隐藏源代码',
+      downloadBtnLabel: '下载为 HTML',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。每个游戏都是根据你的描述由 AI 模型全新编写的——有些可能需要一次"完善"，就像生成的网页一样。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      errorRequestFailedFreeLimit: '请求失败，状态码 {status}——可能已达到每日免费额度上限。',
+      errorRequestFailed: '请求失败，状态码 {status}',
+      errorEmptyResponse: '模型返回了空响应。',
+      clipNameTitle: 'AI 用来播放此片段的触发名称',
+      clipKindSfx: '音效',
+      clipKindVoice: '语音台词',
+      clipKindMusic: '背景音乐（循环）',
+      removeTitle: '移除',
+      errorMicAccess: '无法访问麦克风：{message}',
+      errorNoApiKey: '请先添加你的 API 密钥。',
+      errorNoBrief: '请描述你想要的游戏。',
+      buildingLabel: '构建中…',
+      statusBuilding: 'GAME FORGE — 构建中…',
+      statusReady: 'GAME FORGE — 可以开始游玩',
+      statusFailed: 'GAME FORGE — 生成失败',
+      errorCouldNotGenerate: '无法生成该游戏。',
+      presetSoundLabel: '+ 音效',
+      presetSoundText: '为主要动作、受到伤害和获胜添加 Web Audio 程序化音效（无需音频文件），并加一个静音按钮。',
+      presetTouchLabel: '+ 触控控制',
+      presetTouchText: '在画布下方添加始终可见的屏幕触控控制（按钮/方向键），触发与键盘相同的动作，使其在手机上完全可玩。',
+      presetHighscoreLabel: '+ 最高分',
+      presetHighscoreText: '添加一个用 localStorage 保存的本地最高分，与当前分数一起显示，当玩家打破记录时更新。',
+      presetTwoPlayerLabel: '+ 双人模式',
+      presetTwoPlayerText: '添加第二个本地玩家，使用单独的按键组（一个用 WASD，另一个用方向键）共用同一键盘，在屏幕控制说明中清楚标注。',
+      presetHarderLabel: '增加难度',
+      presetHarderText: '提高难度：更快的节奏、更紧凑的时机窗口、更强或更频繁的敌人/障碍，容错空间更小。',
+      presetLevelsLabel: '添加更多关卡',
+      presetLevelsText: '添加逐渐变难的关卡或波次，在当前关卡清除后自动推进，并在屏幕上简要显示当前关卡/波次编号。',
+      errorNoGame: '请先生成一个游戏。',
+      errorNoInstruction: '请说明你想更改什么。',
+      applyingLabel: '应用中…',
+      errorCouldNotApply: '无法应用该更改。'
+    },
+    sw: {
+      heroSubtitle: 'Eleza mchezo. Pata kitu kinachochezeka — kilichojengwa moja kwa moja kwenye kivinjari chako, kwa njia ile ile MigaBuilder inavyoandika tovuti.',
+      connectionHeading: 'Muunganisho',
+      providerLabel: 'Mtoa huduma wa AI',
+      apiKeyLabelOpenai: 'Ufunguo wako wa API wa OpenAI',
+      apiKeyLabelAnthropic: 'Ufunguo wako wa API wa Anthropic',
+      apiKeyHint: 'Hutumika tu kuwasiliana na mtoa huduma aliye hapo juu moja kwa moja kutoka kwenye kivinjari chako. Haihifadhiwi kamwe.',
+      freeNoticeText: '✓ Bure kutumia — ufunguo unaoshirikiwa na uwezo mdogo wa kila siku. Ikiwa itaacha kufanya kazi, jaribu tena kesho, au badilisha kwenda OpenAI/Anthropic kwa ufunguo wako mwenyewe.',
+      modelLabel: 'Kielelezo cha maandishi',
+      gameHeading: 'Mchezo',
+      genreLabel: 'Aina',
+      genreAuto: 'Acha AI iamue',
+      genrePlatformer: 'Platfomu (kuruka/kukimbia)',
+      genreShooter: 'Upigaji risasi wa juu chini',
+      genreRunner: 'Mkimbiaji usio na mwisho / kukwepa',
+      genrePuzzle: 'Fumbo / gridi ya kulinganisha',
+      genreRacing: 'Mashindano / njia ya vikwazo',
+      genreTower: 'Ulinzi wa minara (nyepesi)',
+      genreBattle: 'Vita vya zamu',
+      genreHint: 'Kuchagua aina humpa AI msingi halisi wa kiufundi kwa aina hiyo ya mchezo (fizikia, uzalishaji, mantiki ya gridi) badala ya kukisia — kwa kawaida ndio uboreshaji mkubwa zaidi wa ubora.',
+      difficultyLabel: 'Kiwango cha ugumu',
+      difficultyNormal: 'Kawaida — sawa tangu mwanzo',
+      difficultyEasy: 'Rahisi — inayosamehe, nzuri kwa majaribio',
+      difficultyHard: 'Ngumu — kali, muda mchache',
+      difficultyEscalating: 'Inayoongezeka — huanza rahisi, huongezeka kwa muda',
+      extraFeaturesLabel: 'Vipengele vya ziada',
+      featSoundLabel: 'Athari za sauti za kiotomatiki (Web Audio, hakuna faili)',
+      featTouchLabel: 'Vidhibiti vya kugusa skrini kwa simu',
+      featHighscoreLabel: 'Alama ya juu ya ndani (imehifadhiwa kwenye kivinjari)',
+      featTwoPlayerLabel: 'Wachezaji wawili, kibodi moja',
+      ownAudioLabel: 'Sauti yako mwenyewe (hiari)',
+      ownAudioHint: 'Pakia klipu fupi au rekodi sauti yako — zinapachikwa moja kwa moja kwenye faili la mchezo na hazitumwi popote, ikiwemo kwa mtoa huduma wa AI. Ipe kila moja jina fupi; AI hutumia jina kuamua wakati wa kuicheza (mfano "ruka", "shinda", "dhihaka"). Weka klipu fupi — zinapachikwa jinsi zilivyo.',
+      addSoundFilesLabel: '+ Ongeza faili za sauti',
+      recordVoiceLabel: '🎙️ Rekodi sauti',
+      stopRecordingLabel: '⏹ Simamisha kurekodi',
+      briefLabel: 'Eleza mchezo unaotaka',
+      briefPlaceholder: 'mfano: Ninja anayepigana na ninja wengine — vitufe vya mshale kusogea, nafasi kushambulia, bora wa raundi 3 kati ya 5 hushinda',
+      briefHint: 'Kuwa maalum kuhusu vidhibiti na sharti la kushinda ikiwa una moja akilini — AI hufuata unachompa. Tarajia mifumo rahisi, inayochezeka yenye maumbo na emoji kwa wahusika, si sanaa iliyochorwa.',
+      generateBtnLabel: 'Tengeneza mchezo',
+      statusNotGenerated: 'GAME FORGE — HAKUNA KILICHOTENGENEZWA BADO',
+      sheetEmptyStrong: 'Hakuna kitu hapa bado.',
+      sheetEmptyText: 'Eleza mchezo upande wa kushoto kisha bofya Tengeneza — utaonekana hapa, tayari kuchezwa.',
+      refineLabel: 'Boresha mchezo huu',
+      refinePlaceholder: 'mfano: Fanya ninja wasogee haraka zaidi, ongeza upau wa afya, fanya mashambulizi yawe na muda wa kusubiri',
+      applyChangeBtnLabel: 'Tumia mabadiliko',
+      viewSourceLabel: 'Angalia msimbo chanzo',
+      hideSourceLabel: 'Ficha msimbo chanzo',
+      downloadBtnLabel: 'Pakua kama HTML',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila mchezo umeandikwa upya na kielelezo cha AI kutoka kwa maelezo yako — tarajia baadhi kuhitaji hatua ya "kuboresha", sawa na ukurasa wa wavuti uliotengenezwa. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      errorRequestFailedFreeLimit: 'Ombi limeshindwa na hali {status} — kikomo cha bure cha kila siku kinaweza kuwa kimefikiwa.',
+      errorRequestFailed: 'Ombi limeshindwa na hali {status}',
+      errorEmptyResponse: 'Kielelezo kimerejesha jibu tupu.',
+      clipNameTitle: 'Jina la kichocheo ambalo AI hutumia kucheza klipu hii',
+      clipKindSfx: 'Athari ya sauti',
+      clipKindVoice: 'Mstari wa sauti',
+      clipKindMusic: 'Muziki wa nyuma (unaorudia)',
+      removeTitle: 'Ondoa',
+      errorMicAccess: 'Imeshindwa kufikia maikrofoni: {message}',
+      errorNoApiKey: 'Ongeza ufunguo wako wa API kwanza.',
+      errorNoBrief: 'Eleza mchezo unaotaka.',
+      buildingLabel: 'Inajenga…',
+      statusBuilding: 'GAME FORGE — INAJENGA…',
+      statusReady: 'GAME FORGE — TAYARI KUCHEZA',
+      statusFailed: 'GAME FORGE — UTENGENEZAJI UMESHINDWA',
+      errorCouldNotGenerate: 'Imeshindwa kutengeneza mchezo huo.',
+      presetSoundLabel: '+ Athari za sauti',
+      presetSoundText: 'Ongeza athari za sauti za kiotomatiki za Web Audio (hakuna faili za sauti) kwa kitendo kikuu, kupata madhara, na kushinda, pamoja na kitufe cha kunyamazisha.',
+      presetTouchLabel: '+ Vidhibiti vya kugusa',
+      presetTouchText: 'Ongeza vidhibiti vya kugusa skrini vinavyoonekana kila wakati (vitufe/D-pad) chini ya kanvasi vinavyochochea vitendo sawa na kibodi, ili kichezwe kikamilifu kwa kugusa kwenye simu.',
+      presetHighscoreLabel: '+ Alama ya juu',
+      presetHighscoreText: 'Ongeza alama ya juu ya ndani iliyohifadhiwa na localStorage, inayoonyeshwa pamoja na alama ya sasa, inayosasishwa wakati wowote mchezaji anapoipita.',
+      presetTwoPlayerLabel: '+ Wachezaji wawili',
+      presetTwoPlayerText: 'Ongeza mchezaji wa pili wa ndani kwenye seti tofauti ya vitufe (WASD kwa mmoja, vitufe vya mshale kwa mwingine) wakishiriki kibodi moja, ikiwa imeandikwa wazi katika maelezo ya vidhibiti kwenye skrini.',
+      presetHarderLabel: 'Fanya iwe ngumu zaidi',
+      presetHarderText: 'Ongeza ugumu: kasi zaidi, muda mchache zaidi, maadui/vikwazo vigumu zaidi au vya mara kwa mara, nafasi ndogo ya makosa.',
+      presetLevelsLabel: 'Ongeza viwango zaidi',
+      presetLevelsText: 'Ongeza viwango au mawimbi yanayozidi kuwa magumu ambayo huendelea kiotomatiki mara kiwango cha sasa kinapomalizika, na kiashiria kifupi kwenye skrini cha nambari ya kiwango/wimbi la sasa.',
+      errorNoGame: 'Tengeneza mchezo kwanza.',
+      errorNoInstruction: 'Sema unachotaka kubadilishwa.',
+      applyingLabel: 'Inatumika…',
+      errorCouldNotApply: 'Imeshindwa kutumia mabadiliko hayo.'
+    },
+    sv: {
+      heroSubtitle: "Beskriv ett spel. Få något spelbart — byggt direkt i din webbläsare, på samma sätt som MigaBuilder skriver en webbplats.",
+      connectionHeading: "Anslutning",
+      providerLabel: "AI-leverantör",
+      apiKeyLabelOpenai: "Din OpenAI API-nyckel",
+      apiKeyLabelAnthropic: "Din Anthropic API-nyckel",
+      apiKeyHint: "Används bara för att anropa leverantören ovan direkt från din webbläsare. Sparas aldrig.",
+      freeNoticeText: "✓ Gratis att använda — delad nyckel med begränsad daglig kapacitet. Om den slutar fungera, försök igen i morgon eller byt till OpenAI/Anthropic med din egen nyckel.",
+      modelLabel: "Textmodell",
+      gameHeading: "Spelet",
+      genreLabel: "Genre",
+      genreAuto: "Låt AI:n bestämma",
+      genrePlatformer: "Plattformsspel (hoppa/springa)",
+      genreShooter: "Skjutspel ovanifrån",
+      genreRunner: "Ändlös löpare / undvik hinder",
+      genrePuzzle: "Pussel / matcha rutor",
+      genreRacing: "Racing / hinderbana",
+      genreTower: "Tornförsvar (light)",
+      genreBattle: "Turordningsbaserad strid",
+      genreHint: "Om du väljer en genre får AI:n riktig teknisk grund för den sortens spel (fysik, fiender som dyker upp, rutnätslogik) i stället för att gissa — oftast den största kvalitetsförbättringen.",
+      difficultyLabel: "Svårighetskurva",
+      difficultyNormal: "Normal — balanserad från start",
+      difficultyEasy: "Lätt — förlåtande, bra för att testa",
+      difficultyHard: "Svår — straffande, snäv timing",
+      difficultyEscalating: "Stigande — börjar lätt, blir svårare med tiden",
+      extraFeaturesLabel: "Extra funktioner",
+      featSoundLabel: "Genererade ljudeffekter (Web Audio, inga filer)",
+      featTouchLabel: "Pekkontroller på skärmen för mobil",
+      featHighscoreLabel: "Lokalt rekord (sparas i webbläsaren)",
+      featTwoPlayerLabel: "Två spelare, samma tangentbord",
+      ownAudioLabel: "Egna ljud & din röst (valfritt)",
+      ownAudioHint: "Ladda upp korta klipp eller spela in din röst — de bakas in direkt i spelfilen och skickas aldrig någonstans, inte heller till AI-leverantören. Ge varje klipp ett kort namn; AI:n använder namnet för att avgöra när det ska spelas (t.ex. \"hopp\", \"vinst\", \"hån\"). Håll klippen korta — de bäddas in som de är.",
+      addSoundFilesLabel: "+ Lägg till ljudfiler",
+      recordVoiceLabel: "🎙️ Spela in röst",
+      stopRecordingLabel: "⏹ Stoppa inspelningen",
+      briefLabel: "Beskriv spelet du vill ha",
+      briefPlaceholder: "t.ex. En ninja som slåss mot andra ninjor — piltangenterna för att röra sig, mellanslag för att attackera, bäst av 3 ronder vinner",
+      briefHint: "Var tydlig med kontroller och hur man vinner om du har något i tankarna — AI:n följer det du ger den. Räkna med enkel, spelbar mekanik med former och emoji som figurer, inte illustrerad grafik.",
+      generateBtnLabel: "Skapa spel",
+      statusNotGenerated: "GAME FORGE — INGET SKAPAT ÄNNU",
+      sheetEmptyStrong: "Inget här ännu.",
+      sheetEmptyText: "Beskriv ett spel till vänster och klicka på Skapa — det dyker upp här, redo att spela.",
+      refineLabel: "Förbättra spelet",
+      refinePlaceholder: "t.ex. Låt ninjorna röra sig snabbare, lägg till en hälsomätare, ge attackerna en nedkylningstid",
+      applyChangeBtnLabel: "Verkställ ändring",
+      viewSourceLabel: "Visa källkod",
+      hideSourceLabel: "Dölj källkod",
+      downloadBtnLabel: "Ladda ner som HTML",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Varje spel skrivs från grunden av en AI-modell utifrån din beskrivning — räkna med att vissa behöver en förbättringsrunda, precis som en genererad webbsida. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      errorRequestFailedFreeLimit: "Anropet misslyckades med status {status} — den dagliga gratisgränsen kan ha nåtts.",
+      errorRequestFailed: "Anropet misslyckades med status {status}",
+      errorEmptyResponse: "Modellen returnerade ett tomt svar.",
+      clipNameTitle: "Namnet AI:n använder för att spela klippet",
+      clipKindSfx: "Ljudeffekt",
+      clipKindVoice: "Replik",
+      clipKindMusic: "Bakgrundsmusik (loopar)",
+      removeTitle: "Ta bort",
+      errorMicAccess: "Kunde inte komma åt mikrofonen: {message}",
+      errorNoApiKey: "Lägg till din API-nyckel först.",
+      errorNoBrief: "Beskriv spelet du vill ha.",
+      buildingLabel: "Bygger…",
+      statusBuilding: "GAME FORGE — BYGGER…",
+      statusReady: "GAME FORGE — REDO ATT SPELA",
+      statusFailed: "GAME FORGE — MISSLYCKADES",
+      errorCouldNotGenerate: "Kunde inte skapa det spelet.",
+      presetSoundLabel: "+ Ljudeffekter",
+      presetSoundText: "Add Web Audio procedural sound effects (no audio files) for the main action, taking damage, and winning, plus a mute button.",
+      presetTouchLabel: "+ Pekkontroller",
+      presetTouchText: "Add always-visible on-screen touch controls (buttons/D-pad) below the canvas that trigger the same actions as the keyboard, so it is fully playable on a phone.",
+      presetHighscoreLabel: "+ Rekord",
+      presetHighscoreText: "Add a local high score saved with localStorage, shown alongside the current score, updated whenever the player beats it.",
+      presetTwoPlayerLabel: "+ Två spelare",
+      presetTwoPlayerText: "Add a second local player on a separate key set (WASD for one, arrow keys for the other) sharing the same keyboard, clearly labeled in the on-screen controls legend.",
+      presetHarderLabel: "Gör det svårare",
+      presetHarderText: "Increase the difficulty: faster pace, tighter timing windows, tougher or more frequent enemies/obstacles, less margin for error.",
+      presetLevelsLabel: "Lägg till fler nivåer",
+      presetLevelsText: "Add progressively harder levels or waves that advance automatically once the current one is cleared, with a brief on-screen indicator of the current level/wave number.",
+      errorNoGame: "Skapa ett spel först.",
+      errorNoInstruction: "Skriv vad du vill ändra.",
+      applyingLabel: "Verkställer…",
+      errorCouldNotApply: "Kunde inte verkställa ändringen."
+    },
+    de: {
+      heroSubtitle: "Beschreibe ein Spiel. Erhalte etwas Spielbares — live in deinem Browser gebaut, so wie MigaBuilder eine Website schreibt.",
+      connectionHeading: "Verbindung",
+      providerLabel: "KI-Anbieter",
+      apiKeyLabelOpenai: "Dein OpenAI-API-Schlüssel",
+      apiKeyLabelAnthropic: "Dein Anthropic-API-Schlüssel",
+      apiKeyHint: "Wird nur verwendet, um den oben gewählten Anbieter direkt aus deinem Browser aufzurufen. Wird nie gespeichert.",
+      freeNoticeText: "✓ Kostenlos nutzbar — gemeinsamer Schlüssel mit begrenzter Tageskapazität. Funktioniert es nicht mehr, versuche es morgen erneut oder wechsle zu OpenAI/Anthropic mit deinem eigenen Schlüssel.",
+      modelLabel: "Textmodell",
+      gameHeading: "Das Spiel",
+      genreLabel: "Genre",
+      genreAuto: "Die KI entscheiden lassen",
+      genrePlatformer: "Jump 'n' Run (springen/laufen)",
+      genreShooter: "Shooter von oben",
+      genreRunner: "Endlos-Läufer / Ausweichen",
+      genrePuzzle: "Puzzle / Felder kombinieren",
+      genreRacing: "Rennen / Hindernisparcours",
+      genreTower: "Tower Defense (light)",
+      genreBattle: "Rundenbasierter Kampf",
+      genreHint: "Ein gewähltes Genre gibt der KI ein echtes technisches Gerüst für diese Art Spiel (Physik, Spawnen, Rasterlogik), statt zu raten — meist der größte Qualitätssprung.",
+      difficultyLabel: "Schwierigkeitskurve",
+      difficultyNormal: "Normal — von Anfang an ausgewogen",
+      difficultyEasy: "Leicht — nachsichtig, gut zum Testen",
+      difficultyHard: "Schwer — gnadenlos, knappes Timing",
+      difficultyEscalating: "Steigend — beginnt leicht, wird mit der Zeit schwerer",
+      extraFeaturesLabel: "Zusatzfunktionen",
+      featSoundLabel: "Prozedurale Soundeffekte (Web Audio, keine Dateien)",
+      featTouchLabel: "Touch-Steuerung auf dem Bildschirm für Mobilgeräte",
+      featHighscoreLabel: "Lokaler Highscore (im Browser gespeichert)",
+      featTwoPlayerLabel: "Zwei Spieler, gleiche Tastatur",
+      ownAudioLabel: "Eigene Sounds & Stimme (optional)",
+      ownAudioHint: "Lade kurze Clips hoch oder nimm deine Stimme auf — sie werden direkt in die Spieldatei eingebaut und nirgendwohin gesendet, auch nicht an den KI-Anbieter. Gib jedem einen kurzen Namen; die KI entscheidet anhand des Namens, wann er abgespielt wird (z. B. \"jump\", \"win\", \"taunt\"). Halte die Clips kurz — sie werden unverändert eingebettet.",
+      addSoundFilesLabel: "+ Sounddateien hinzufügen",
+      recordVoiceLabel: "🎙️ Stimme aufnehmen",
+      stopRecordingLabel: "⏹ Aufnahme stoppen",
+      briefLabel: "Beschreibe das gewünschte Spiel",
+      briefPlaceholder: "z. B. Ein Ninja, der gegen andere Ninjas kämpft — Pfeiltasten zum Bewegen, Leertaste zum Angreifen, wer 2 von 3 Runden gewinnt, siegt",
+      briefHint: "Sei genau bei Steuerung und Siegbedingung, falls du eine im Kopf hast — die KI folgt deinen Vorgaben. Erwarte einfache, spielbare Mechaniken mit Formen und Emojis als Figuren, keine gezeichneten Illustrationen.",
+      generateBtnLabel: "Spiel erstellen",
+      statusNotGenerated: "GAME FORGE — NOCH NICHTS ERSTELLT",
+      sheetEmptyStrong: "Hier ist noch nichts.",
+      sheetEmptyText: "Beschreibe links ein Spiel und klicke auf Erstellen — es erscheint dann hier, bereit zum Spielen.",
+      refineLabel: "Dieses Spiel verbessern",
+      refinePlaceholder: "z. B. Lass die Ninjas schneller laufen, füge eine Lebensleiste hinzu, gib Angriffen eine Abklingzeit",
+      applyChangeBtnLabel: "Änderung anwenden",
+      viewSourceLabel: "Quelltext anzeigen",
+      hideSourceLabel: "Quelltext ausblenden",
+      downloadBtnLabel: "Als HTML herunterladen",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Jedes Spiel wird von einem KI-Modell frisch aus deiner Beschreibung geschrieben — manche brauchen einen \"Verbessern\"-Durchgang, genau wie eine erzeugte Webseite. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      errorRequestFailedFreeLimit: "Anfrage mit Status {status} fehlgeschlagen — das kostenlose Tageslimit ist eventuell erreicht.",
+      errorRequestFailed: "Anfrage mit Status {status} fehlgeschlagen",
+      errorEmptyResponse: "Das Modell hat eine leere Antwort zurückgegeben.",
+      clipNameTitle: "Auslösername, mit dem die KI diesen Clip abspielt",
+      clipKindSfx: "Soundeffekt",
+      clipKindVoice: "Sprachzeile",
+      clipKindMusic: "Hintergrundmusik (in Schleife)",
+      removeTitle: "Entfernen",
+      errorMicAccess: "Kein Zugriff auf das Mikrofon: {message}",
+      errorNoApiKey: "Füge zuerst deinen API-Schlüssel hinzu.",
+      errorNoBrief: "Beschreibe das gewünschte Spiel.",
+      buildingLabel: "Wird gebaut…",
+      statusBuilding: "GAME FORGE — WIRD GEBAUT…",
+      statusReady: "GAME FORGE — SPIELBEREIT",
+      statusFailed: "GAME FORGE — ERSTELLUNG FEHLGESCHLAGEN",
+      errorCouldNotGenerate: "Dieses Spiel konnte nicht erstellt werden.",
+      presetSoundLabel: "+ Soundeffekte",
+      presetSoundText: "Füge prozedurale Web-Audio-Soundeffekte (keine Audiodateien) für die Hauptaktion, das Einstecken von Schaden und den Sieg hinzu, dazu einen Stumm-Knopf.",
+      presetTouchLabel: "+ Touch-Steuerung",
+      presetTouchText: "Füge immer sichtbare Touch-Steuerelemente (Knöpfe/Steuerkreuz) unter dem Canvas hinzu, die dieselben Aktionen wie die Tastatur auslösen, damit es auf dem Handy voll spielbar ist.",
+      presetHighscoreLabel: "+ Highscore",
+      presetHighscoreText: "Füge einen lokalen Highscore hinzu, der mit localStorage gespeichert, neben dem aktuellen Punktestand angezeigt und aktualisiert wird, sobald der Spieler ihn übertrifft.",
+      presetTwoPlayerLabel: "+ Zwei Spieler",
+      presetTwoPlayerText: "Füge einen zweiten lokalen Spieler mit eigenen Tasten hinzu (WASD für den einen, Pfeiltasten für den anderen), auf derselben Tastatur, klar beschriftet in der Steuerungslegende auf dem Bildschirm.",
+      presetHarderLabel: "Mach es schwerer",
+      presetHarderText: "Erhöhe die Schwierigkeit: höheres Tempo, knappere Zeitfenster, härtere oder häufigere Gegner/Hindernisse, weniger Spielraum für Fehler.",
+      presetLevelsLabel: "Mehr Level hinzufügen",
+      presetLevelsText: "Füge immer schwerere Level oder Wellen hinzu, die automatisch weitergehen, sobald die aktuelle geschafft ist, mit einer kurzen Anzeige der aktuellen Level-/Wellennummer auf dem Bildschirm.",
+      errorNoGame: "Erstelle zuerst ein Spiel.",
+      errorNoInstruction: "Sag, was geändert werden soll.",
+      applyingLabel: "Wird angewendet…",
+      errorCouldNotApply: "Die Änderung konnte nicht angewendet werden."
+    },
+    pt: {
+      heroSubtitle: "Descreva um jogo. Receba algo jogável — criado ao vivo no seu navegador, do mesmo jeito que o MigaBuilder escreve um site.",
+      connectionHeading: "Conexão",
+      providerLabel: "Provedor de IA",
+      apiKeyLabelOpenai: "Sua chave de API da OpenAI",
+      apiKeyLabelAnthropic: "Sua chave de API da Anthropic",
+      apiKeyHint: "Usada apenas para chamar o provedor acima diretamente do seu navegador. Nunca é armazenada.",
+      freeNoticeText: "✓ Uso gratuito — chave compartilhada com capacidade diária limitada. Se parar de funcionar, tente amanhã ou mude para OpenAI/Anthropic com sua própria chave.",
+      modelLabel: "Modelo de texto",
+      gameHeading: "O jogo",
+      genreLabel: "Gênero",
+      genreAuto: "Deixar a IA decidir",
+      genrePlatformer: "Plataforma (pular/correr)",
+      genreShooter: "Tiro com visão de cima",
+      genreRunner: "Corrida infinita / desviar",
+      genrePuzzle: "Quebra-cabeça / combinar peças",
+      genreRacing: "Corrida / percurso de obstáculos",
+      genreTower: "Defesa de torres (simples)",
+      genreBattle: "Batalha por turnos",
+      genreHint: "Escolher um gênero dá à IA uma estrutura técnica real para esse tipo de jogo (física, geração de inimigos, lógica de grade) em vez de adivinhar — geralmente o maior salto de qualidade.",
+      difficultyLabel: "Curva de dificuldade",
+      difficultyNormal: "Normal — equilibrado desde o início",
+      difficultyEasy: "Fácil — tolerante, bom para testar",
+      difficultyHard: "Difícil — punitivo, tempo apertado",
+      difficultyEscalating: "Progressivo — começa fácil e fica mais difícil com o tempo",
+      extraFeaturesLabel: "Recursos extras",
+      featSoundLabel: "Efeitos sonoros procedurais (Web Audio, sem arquivos)",
+      featTouchLabel: "Controles de toque na tela para celular",
+      featHighscoreLabel: "Recorde local (salvo no navegador)",
+      featTwoPlayerLabel: "Dois jogadores, mesmo teclado",
+      ownAudioLabel: "Seus próprios sons e voz (opcional)",
+      ownAudioHint: "Envie clipes curtos ou grave sua voz — eles são embutidos direto no arquivo do jogo e nunca enviados a lugar nenhum, nem ao provedor de IA. Dê a cada um um nome curto; a IA usa o nome para decidir quando tocá-lo (ex.: \"jump\", \"win\", \"taunt\"). Mantenha os clipes curtos — eles são embutidos como estão.",
+      addSoundFilesLabel: "+ Adicionar arquivos de som",
+      recordVoiceLabel: "🎙️ Gravar voz",
+      stopRecordingLabel: "⏹ Parar gravação",
+      briefLabel: "Descreva o jogo que você quer",
+      briefPlaceholder: "ex.: Um ninja que luta contra outros ninjas — setas para mover, espaço para atacar, vence quem ganhar 2 de 3 rodadas",
+      briefHint: "Seja específico sobre os controles e a condição de vitória, se tiver uma em mente — a IA segue o que você der. Espere mecânicas simples e jogáveis, com formas e emojis como personagens, não arte ilustrada.",
+      generateBtnLabel: "Gerar jogo",
+      statusNotGenerated: "GAME FORGE — NADA GERADO AINDA",
+      sheetEmptyStrong: "Nada aqui ainda.",
+      sheetEmptyText: "Descreva um jogo à esquerda e clique em Gerar — ele aparecerá aqui, pronto para jogar.",
+      refineLabel: "Refinar este jogo",
+      refinePlaceholder: "ex.: Faça os ninjas se moverem mais rápido, adicione uma barra de vida, dê um tempo de recarga aos ataques",
+      applyChangeBtnLabel: "Aplicar mudança",
+      viewSourceLabel: "Ver código-fonte",
+      hideSourceLabel: "Ocultar código-fonte",
+      downloadBtnLabel: "Baixar como HTML",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Cada jogo é escrito do zero por um modelo de IA a partir da sua descrição — alguns vão precisar de uma rodada de \"refinar\", exatamente como uma página web gerada. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>",
+      errorRequestFailedFreeLimit: "A solicitação falhou com status {status} — o limite diário gratuito pode ter sido atingido.",
+      errorRequestFailed: "A solicitação falhou com status {status}",
+      errorEmptyResponse: "O modelo retornou uma resposta vazia.",
+      clipNameTitle: "Nome de gatilho que a IA usa para tocar este clipe",
+      clipKindSfx: "Efeito sonoro",
+      clipKindVoice: "Fala",
+      clipKindMusic: "Música de fundo (em loop)",
+      removeTitle: "Remover",
+      errorMicAccess: "Não foi possível acessar o microfone: {message}",
+      errorNoApiKey: "Adicione sua chave de API primeiro.",
+      errorNoBrief: "Descreva o jogo que você quer.",
+      buildingLabel: "Criando…",
+      statusBuilding: "GAME FORGE — CRIANDO…",
+      statusReady: "GAME FORGE — PRONTO PARA JOGAR",
+      statusFailed: "GAME FORGE — FALHA NA GERAÇÃO",
+      errorCouldNotGenerate: "Não foi possível gerar esse jogo.",
+      presetSoundLabel: "+ Efeitos sonoros",
+      presetSoundText: "Adicione efeitos sonoros procedurais com Web Audio (sem arquivos de áudio) para a ação principal, ao levar dano e ao vencer, além de um botão de silenciar.",
+      presetTouchLabel: "+ Controles de toque",
+      presetTouchText: "Adicione controles de toque sempre visíveis (botões/direcional) abaixo do canvas que acionem as mesmas ações do teclado, para que seja totalmente jogável no celular.",
+      presetHighscoreLabel: "+ Recorde",
+      presetHighscoreText: "Adicione um recorde local salvo com localStorage, exibido ao lado da pontuação atual e atualizado sempre que o jogador o superar.",
+      presetTwoPlayerLabel: "+ Dois jogadores",
+      presetTwoPlayerText: "Adicione um segundo jogador local com um conjunto de teclas separado (WASD para um, setas para o outro) no mesmo teclado, claramente indicado na legenda de controles na tela.",
+      presetHarderLabel: "Deixar mais difícil",
+      presetHarderText: "Aumente a dificuldade: ritmo mais rápido, janelas de tempo mais curtas, inimigos/obstáculos mais fortes ou frequentes, menos margem para erro.",
+      presetLevelsLabel: "Adicionar mais níveis",
+      presetLevelsText: "Adicione níveis ou ondas cada vez mais difíceis que avançam automaticamente quando o atual é concluído, com um breve indicador na tela do número do nível/onda atual.",
+      errorNoGame: "Gere um jogo primeiro.",
+      errorNoInstruction: "Diga o que você quer mudar.",
+      applyingLabel: "Aplicando…",
+      errorCouldNotApply: "Não foi possível aplicar essa mudança."
+    },
+    fr: {
+      heroSubtitle: "Décrivez un jeu. Obtenez quelque chose de jouable — créé en direct dans votre navigateur, comme MigaBuilder écrit un site web.",
+      connectionHeading: "Connexion",
+      providerLabel: "Fournisseur d'IA",
+      apiKeyLabelOpenai: "Votre clé API OpenAI",
+      apiKeyLabelAnthropic: "Votre clé API Anthropic",
+      apiKeyHint: "Utilisée uniquement pour appeler le fournisseur ci-dessus directement depuis votre navigateur. Jamais enregistrée.",
+      freeNoticeText: "✓ Gratuit — clé partagée avec une capacité quotidienne limitée. Si cela cesse de fonctionner, réessayez demain ou passez à OpenAI/Anthropic avec votre propre clé.",
+      modelLabel: "Modèle de texte",
+      gameHeading: "Le jeu",
+      genreLabel: "Genre",
+      genreAuto: "Laisser l'IA décider",
+      genrePlatformer: "Plateforme (sauter/courir)",
+      genreShooter: "Jeu de tir vu de dessus",
+      genreRunner: "Course sans fin / esquive",
+      genrePuzzle: "Puzzle / grille d'association",
+      genreRacing: "Course / parcours d'obstacles",
+      genreTower: "Tower defense (léger)",
+      genreBattle: "Combat au tour par tour",
+      genreHint: "Choisir un genre donne à l'IA une vraie base technique pour ce type de jeu (physique, apparition d'ennemis, logique de grille) au lieu de deviner — c'est souvent le plus grand gain de qualité.",
+      difficultyLabel: "Courbe de difficulté",
+      difficultyNormal: "Normal — équilibré dès le départ",
+      difficultyEasy: "Facile — indulgent, idéal pour tester",
+      difficultyHard: "Difficile — exigeant, timing serré",
+      difficultyEscalating: "Progressif — commence facile, se corse avec le temps",
+      extraFeaturesLabel: "Fonctions supplémentaires",
+      featSoundLabel: "Effets sonores procéduraux (Web Audio, sans fichiers)",
+      featTouchLabel: "Commandes tactiles à l'écran pour mobile",
+      featHighscoreLabel: "Meilleur score local (enregistré dans le navigateur)",
+      featTwoPlayerLabel: "Deux joueurs, même clavier",
+      ownAudioLabel: "Vos propres sons et voix (facultatif)",
+      ownAudioHint: "Importez de courts extraits ou enregistrez votre voix — ils sont intégrés directement dans le fichier du jeu et ne sont envoyés nulle part, pas même au fournisseur d'IA. Donnez à chacun un nom court ; l'IA utilise ce nom pour décider quand le jouer (ex. \"jump\", \"win\", \"taunt\"). Gardez les extraits courts — ils sont intégrés tels quels.",
+      addSoundFilesLabel: "+ Ajouter des fichiers audio",
+      recordVoiceLabel: "🎙️ Enregistrer la voix",
+      stopRecordingLabel: "⏹ Arrêter l'enregistrement",
+      briefLabel: "Décrivez le jeu que vous voulez",
+      briefPlaceholder: "ex. : Un ninja qui affronte d'autres ninjas — flèches pour se déplacer, espace pour attaquer, le premier à 2 manches gagnantes l'emporte",
+      briefHint: "Précisez les commandes et la condition de victoire si vous en avez une en tête — l'IA suit ce que vous lui donnez. Attendez-vous à des mécaniques simples et jouables, avec des formes et des emojis comme personnages, pas à des illustrations.",
+      generateBtnLabel: "Générer le jeu",
+      statusNotGenerated: "GAME FORGE — RIEN DE GÉNÉRÉ",
+      sheetEmptyStrong: "Rien ici pour l'instant.",
+      sheetEmptyText: "Décrivez un jeu à gauche et cliquez sur Générer — il apparaîtra ici, prêt à jouer.",
+      refineLabel: "Améliorer ce jeu",
+      refinePlaceholder: "ex. : Rendre les ninjas plus rapides, ajouter une barre de vie, ajouter un temps de recharge aux attaques",
+      applyChangeBtnLabel: "Appliquer la modification",
+      viewSourceLabel: "Voir le code source",
+      hideSourceLabel: "Masquer le code source",
+      downloadBtnLabel: "Télécharger en HTML",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Chaque jeu est écrit à neuf par un modèle d'IA à partir de votre description — certains auront besoin d'une passe \"améliorer\", exactement comme une page web générée. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>",
+      errorRequestFailedFreeLimit: "La requête a échoué avec le statut {status} — la limite quotidienne gratuite est peut-être atteinte.",
+      errorRequestFailed: "La requête a échoué avec le statut {status}",
+      errorEmptyResponse: "Le modèle a renvoyé une réponse vide.",
+      clipNameTitle: "Nom de déclencheur utilisé par l'IA pour jouer cet extrait",
+      clipKindSfx: "Effet sonore",
+      clipKindVoice: "Réplique",
+      clipKindMusic: "Musique de fond (en boucle)",
+      removeTitle: "Supprimer",
+      errorMicAccess: "Impossible d'accéder au microphone : {message}",
+      errorNoApiKey: "Ajoutez d'abord votre clé API.",
+      errorNoBrief: "Décrivez le jeu que vous voulez.",
+      buildingLabel: "Création…",
+      statusBuilding: "GAME FORGE — CRÉATION…",
+      statusReady: "GAME FORGE — PRÊT À JOUER",
+      statusFailed: "GAME FORGE — ÉCHEC DE LA GÉNÉRATION",
+      errorCouldNotGenerate: "Impossible de générer ce jeu.",
+      presetSoundLabel: "+ Effets sonores",
+      presetSoundText: "Ajoute des effets sonores procéduraux Web Audio (sans fichiers audio) pour l'action principale, les dégâts subis et la victoire, ainsi qu'un bouton pour couper le son.",
+      presetTouchLabel: "+ Commandes tactiles",
+      presetTouchText: "Ajoute des commandes tactiles toujours visibles (boutons/croix directionnelle) sous le canvas, qui déclenchent les mêmes actions que le clavier, pour que le jeu soit entièrement jouable sur téléphone.",
+      presetHighscoreLabel: "+ Meilleur score",
+      presetHighscoreText: "Ajoute un meilleur score local enregistré avec localStorage, affiché à côté du score actuel et mis à jour chaque fois que le joueur le bat.",
+      presetTwoPlayerLabel: "+ Deux joueurs",
+      presetTwoPlayerText: "Ajoute un second joueur local avec ses propres touches (ZQSD/WASD pour l'un, flèches pour l'autre) sur le même clavier, clairement indiqué dans la légende des commandes à l'écran.",
+      presetHarderLabel: "Rendre plus difficile",
+      presetHarderText: "Augmente la difficulté : rythme plus rapide, fenêtres de timing plus serrées, ennemis/obstacles plus coriaces ou plus fréquents, moins de marge d'erreur.",
+      presetLevelsLabel: "Ajouter des niveaux",
+      presetLevelsText: "Ajoute des niveaux ou des vagues de plus en plus difficiles qui s'enchaînent automatiquement une fois l'actuel terminé, avec un bref indicateur à l'écran du numéro de niveau/vague.",
+      errorNoGame: "Générez d'abord un jeu.",
+      errorNoInstruction: "Dites ce que vous voulez modifier.",
+      applyingLabel: "Application…",
+      errorCouldNotApply: "Impossible d'appliquer cette modification."
+    }
+  });
+
+  applyProvider();
+  renderQuickRefineChips();
+  I18N.onChange(renderQuickRefineChips);
+  // Open with a playable, tunable game instead of an empty table.
+  showGame(injectSprites(STARTER_GAME));
+  titleBlock.textContent = 'STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN';
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

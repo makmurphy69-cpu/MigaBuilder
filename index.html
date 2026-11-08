@@ -713,6 +713,18 @@
   }
 </style>
 <link rel="stylesheet" href="tutorials.css">
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/">
+<!-- /language versions -->
 </head>
 <body>
 
@@ -1006,7 +1018,7 @@
     // A recipe that would list only one tool adds nothing over the matching card below.
     const found=words.length?RECIPES.filter(r=>r.need.every(list=>hasWord(words,list))).map(r=>({r,steps:r.steps.filter(st=>!st.when||hasWord(words,st.when))})).filter(x=>x.steps.length>1).slice(0,2):[];
     box.hidden=!found.length;
-    box.innerHTML=found.map(({r,steps})=>'<div class="task-recipe"><h4><span>'+esc(t('recipeLabel','Step by step'))+'</span>'+esc(t('recipe:'+r.id,r.title))+'</h4><ol>'+steps.map(st=>'<li><a href="'+st.href+'">'+esc(st.name)+'</a> — '+esc(t('recipe:'+r.id+':'+st.href.replace(/\.html.*/,''),st.note))+'</li>').join('')+'</ol></div>').join('');
+    box.innerHTML=found.map(({r,steps})=>'<div class="task-recipe"><h4><span>'+esc(t('recipeLabel','Step by step'))+'</span>'+esc(t('recipe:'+r.id,r.title))+'</h4><ol>'+steps.map(st=>'<li><a href="'+((cards.find(c=>hrefOf(c)===st.href.replace(/#.*/,''))&&LP&&cards.find(c=>hrefOf(c)===st.href.replace(/#.*/,'')).getAttribute('href').startsWith(LP))?LP+st.href:st.href)+'">'+esc(st.name)+'</a> — '+esc(t('recipe:'+r.id+':'+st.href.replace(/\.html.*/,''),st.note))+'</li>').join('')+'</ol></div>').join('');
   }
   function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
   let best=null;
@@ -1014,12 +1026,15 @@
   search.addEventListener('keydown',e=>{if(e.key==='Enter'&&best){e.preventDefault();best.card.click()}else if(e.key==='Escape'){search.value='';apply()}});
   document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!/^(input|textarea|select)$/i.test(document.activeElement?.tagName||'')&&!document.activeElement?.isContentEditable){e.preventDefault();search.focus();search.select()}});
   const key='migabuilder-tool-history',favKey='migabuilder-tool-favourites';
+  // Language homepages (/es/ …) link to /es/x.html for translated tools; history, favourites and lists use the plain file name.
+  const LP=window.MIGA_PAGE_LANG?'/'+window.MIGA_PAGE_LANG+'/':'';
+  const hrefOf=c=>c.getAttribute('href').replace(/^\/[a-z]{2}\//,'');
   const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return[]}};
   const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-  function cardData(c){return{href:c.getAttribute('href'),html:c.innerHTML.replace(/<span class="fav-toggle"[\s\S]*?<\/span>/,'')}}
-  function cloneFor(item){const a=document.createElement('a');a.className='tool-card';a.href=item.href;a.innerHTML=item.html;return a}
+  function cardData(c){return{href:hrefOf(c),link:c.getAttribute('href'),html:c.innerHTML.replace(/<span class="fav-toggle"[\s\S]*?<\/span>/,'')}}
+  function cloneFor(item){const a=document.createElement('a');a.className='tool-card';a.href=item.link;a.innerHTML=item.html;return a}
   function render(){
-    const map=new Map(cards.map(c=>[c.getAttribute('href'),cardData(c)]));
+    const map=new Map(cards.map(c=>[hrefOf(c),cardData(c)]));
     const popular=['image-studio.html','grammar-forge.html','slide-forge.html','contract-forge.html','music-forge.html','cartoon-forge.html'].map(x=>map.get(x)).filter(Boolean);
     document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
     document.getElementById('newTools').replaceChildren(...['cube-forge.html','plane-forge.html','motor-forge.html','puzzle-forge.html','dictionary-forge.html','letter-forge.html','afford-forge.html','visit-forge.html','tune-forge.html','species-atlas.html','psychology-atlas.html','go-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
@@ -1027,7 +1042,7 @@
     document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
     document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));
   }
-  cards.forEach(c=>{const href=c.getAttribute('href');const star=document.createElement('span');star.className='fav-toggle';star.setAttribute('role','button');star.setAttribute('tabindex','0');star.setAttribute('aria-label','Add to favourites');star.setAttribute('data-i18n-title','favAdd');const sync=()=>star.textContent=read(favKey).includes(href)?'★':'☆';const toggle=e=>{e.preventDefault();e.stopPropagation();let a=read(favKey);a=a.includes(href)?a.filter(x=>x!==href):[href,...a];write(favKey,a.slice(0,12));sync();render()};star.addEventListener('click',toggle);star.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){toggle(e)}});c.appendChild(star);sync();c.addEventListener('click',e=>{if(e.defaultPrevented)return;let a=read(key).filter(x=>x!==href);write(key,[href,...a].slice(0,8))})});
+  cards.forEach(c=>{const href=hrefOf(c);const star=document.createElement('span');star.className='fav-toggle';star.setAttribute('role','button');star.setAttribute('tabindex','0');star.setAttribute('aria-label','Add to favourites');star.setAttribute('data-i18n-title','favAdd');const sync=()=>star.textContent=read(favKey).includes(href)?'★':'☆';const toggle=e=>{e.preventDefault();e.stopPropagation();let a=read(favKey);a=a.includes(href)?a.filter(x=>x!==href):[href,...a];write(favKey,a.slice(0,12));sync();render()};star.addEventListener('click',toggle);star.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){toggle(e)}});c.appendChild(star);sync();c.addEventListener('click',e=>{if(e.defaultPrevented)return;let a=read(key).filter(x=>x!==href);write(key,[href,...a].slice(0,8))})});
   // Privacy label on every card, matching the badge on the tool's own page (checked by scripts/smoke-test.mjs).
   const PRIV={local:['privLocal','🔒 Runs in your browser'],ai:['privAi','🌐 AI steps go online'],online:['privOnline','🔗 Some features go online']};
   cards.forEach(c=>{const kind=c.dataset.privacy||'local',info=PRIV[kind]||PRIV.local,box=c.querySelector('.tool-icon+span');if(!box)return;const tag=document.createElement('span');tag.className='tool-privacy tp-'+kind;tag.setAttribute('data-i18n',info[0]);tag.textContent=info[1];box.appendChild(tag)});

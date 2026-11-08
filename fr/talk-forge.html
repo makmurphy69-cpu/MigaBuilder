@@ -1,0 +1,1808 @@
+<!-- Generated from /talk-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="fr" data-en-title="Make a photo talk from a script — Talk Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='fr';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/fr/talk-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Faire parler une photo à partir d'un script — Talk Forge | MigaBuilder</title>
+<meta name="description" content="Talk Forge fait parler une photo : importez la photo d'une ou plusieurs personnes, écrivez un script, et leurs bouches bougent et leurs yeux clignent en rythme avec la voix générée dans votre navigateur.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Faire parler une photo à partir d'un script — Talk Forge">
+<meta property="og:description" content="Talk Forge fait parler une photo : importez la photo d'une ou plusieurs personnes, écrivez un script, et leurs bouches bougent et leurs yeux clignent en rythme avec la voix générée dans votre navigateur.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/talk-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/fr/talk-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Faire parler une photo à partir d'un script — Talk Forge">
+<meta name="twitter:description" content="Talk Forge fait parler une photo : importez la photo d'une ou plusieurs personnes, écrivez un script, et leurs bouches bougent et leurs yeux clignent en rythme avec la voix générée dans votre navigateur.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/talk-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/dist/face-api.min.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/talk-forge.js"></script>
+<script src="media-utils.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid; grid-template-columns: minmax(340px, 420px) 1fr; gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px; align-items: start;
+  }
+  @media (max-width: 950px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 22px 22px 26px; max-height: calc(100vh - 40px); overflow-y: auto; position: sticky; top: 20px;
+  }
+  @media (max-width: 950px) { .panel { position: static; max-height: none; } }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12px; color: rgba(22, 32, 43, 0.72); margin-top: 5px; line-height: 1.45; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  input[type="text"], input[type="number"], select, textarea {
+    width: 100%; font-size: 13.5px; padding: 8px 9px; border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 50px; line-height: 1.4; }
+  input[type="range"] { width: 100%; }
+
+  .upload-btn {
+    display: inline-block; background: #fff; border: 1px dashed rgba(22, 32, 43, 0.35); border-radius: var(--radius);
+    padding: 9px 11px; font-size: 13px; cursor: pointer; text-align: center; width: 100%;
+  }
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 14px; padding: 11px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .draft-btn.danger { background: var(--error); color: #fff; }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row button { flex: 1; }
+
+  .error-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 12.5px; color: #6E2418; display: none; line-height: 1.4;
+  }
+  .error-box.show { display: block; }
+  .status-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(78,158,115,0.14); border: 1px solid rgba(78,158,115,0.4);
+    border-radius: var(--radius); font-size: 12.5px; color: #244731; display: none; line-height: 1.4;
+  }
+  .status-box.show { display: block; }
+
+  .face-item {
+    display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid rgba(22,32,43,0.18);
+    border-radius: var(--radius); padding: 7px 9px; margin-bottom: 6px;
+  }
+  .face-dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+  .face-item input[type="text"] { flex: 1; font-size: 12.5px; padding: 5px 7px; }
+  .face-item button { background: transparent; border: none; cursor: pointer; font-size: 12px; padding: 2px 5px; color: var(--ink); }
+  .face-item button.remove { color: var(--error); }
+  .faces-empty { font-size: 12.5px; color: rgba(22,32,43,0.72); padding: 6px 0; }
+  .scene-tab {
+    display: flex; align-items: center; gap: 6px; background: #fff; border: 2px solid transparent; border-radius: var(--radius);
+    padding: 4px 8px 4px 4px; cursor: pointer; font-size: 12px;
+  }
+  .scene-tab.active { border-color: var(--amber); }
+  .scene-tab img { width: 28px; height: 28px; object-fit: cover; border-radius: 2px; }
+  .scene-tab button { background: transparent; border: none; cursor: pointer; color: var(--error); font-size: 12px; padding: 0 2px; }
+
+  .line-row {
+    background: #fff; border: 1px solid rgba(22,32,43,0.18); border-radius: var(--radius); padding: 10px; margin-bottom: 8px;
+  }
+  .line-row-head { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+  .line-row-head select { flex: 1; }
+  .line-row-head button { background: transparent; border: none; cursor: pointer; font-size: 13px; color: var(--error); flex: none; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .stage-wrap { background: #000; border-radius: 2px; display: flex; align-items: center; justify-content: center; overflow: hidden; flex: 1; position: relative; }
+  #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  /* width:auto + max-width/max-height keeps the photo's shape when the height cap applies
+     (width:100% stretched it sideways on wide screens). Clicks map with separate x/y scales. */
+  #stageCanvas { width: auto; height: auto; max-width: 100%; max-height: 62vh; display: block; margin: 0 auto; }
+  .sheet-empty { margin: auto; text-align: center; color: rgba(237,234,224,0.45); font-size: 14px; max-width: 340px; padding: 40px 20px; }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(237,234,224,0.75); margin-bottom: 6px; }
+  .manual-hint {
+    position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: rgba(14,42,71,0.9);
+    color: #fff; padding: 8px 16px; border-radius: var(--radius); font-size: 13px; display: none; z-index: 5;
+  }
+  .manual-hint.show { display: block; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer; flex: 1;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Talk Forge utilise-t-il un modèle vidéo IA ?","acceptedAnswer":{"@type":"Answer","text":"Non. Le mouvement des lèvres et la voix sont créés dans votre navigateur, donc aucun compte ni service vidéo IA n'est nécessaire."}},{"@type":"Question","name":"Talk Forge est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."}},{"@type":"Question","name":"Mes fichiers sont-ils envoyés ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."}}],"inLanguage":"fr"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/talk-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/talk-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/talk-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/talk-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/talk-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/talk-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/talk-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/talk-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/talk-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/talk-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Talk Forge</h1>
+    <p data-i18n="heroSubtitle">Upload a photo, write a script, and watch it talk — mouths move and eyes blink in sync with real speech.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+
+    <div class="section-title" data-i18n="photosSceneHeading">Photos / scenes</div>
+    <div class="field">
+      <label class="upload-btn" for="photoInput" data-i18n="addPhotoLabel">+ Add a photo (new scene)</label>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;">
+      <p class="hint" id="photoHint" data-i18n="photoHintDefault">Each photo becomes its own scene. Add more than one to cut between people or locations mid-conversation — a script line picks which scene is on screen while it plays.</p>
+    </div>
+    <div id="sceneStrip" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+
+    <div class="section-title" id="facesTitle" data-i18n="facesHeadingDefault">Faces</div>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="autoDetectBtn" data-i18n="autoDetectBtnLabel" disabled>🔍 Auto-detect faces</button>
+      <button type="button" class="draft-btn secondary" id="manualAddBtn" data-i18n="placeManuallyLabel" disabled>+ Place manually</button>
+    </div>
+    <p class="hint" data-i18n="autoDetectHint">Auto-detect uses a small face-recognition model loaded from a CDN (nothing about your photo is ever uploaded anywhere). If it misses someone, place that face manually — click their left eye, right eye, then mouth.</p>
+    <div id="facesList" style="margin-top:10px;"></div>
+    <p class="faces-empty" id="facesEmpty" data-i18n="facesEmptyDefault">No faces yet.</p>
+
+    <div class="section-title" data-i18n="scriptHeading">Script</div>
+    <div id="linesList"></div>
+    <button type="button" class="draft-btn secondary" id="addLineBtn" data-i18n="addLineBtnLabel">+ Add line</button>
+
+    <div class="section-title" data-i18n="voiceHeading">Voice</div>
+    <div class="field">
+      <label for="voiceSelect" data-i18n="voiceLabel">Voice</label>
+      <select id="voiceSelect"></select>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="rateSlider"><span data-i18n="rateLabel">Rate</span> <span id="rateVal">1.0</span></label>
+        <input type="range" id="rateSlider" min="0.6" max="1.6" step="0.05" value="1">
+      </div>
+      <div class="field">
+        <label for="pitchSlider"><span data-i18n="pitchLabel">Pitch</span> <span id="pitchVal">1.0</span></label>
+        <input type="range" id="pitchSlider" min="0.5" max="1.8" step="0.05" value="1">
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="previewBtn" data-i18n="previewBtnLabel" disabled>▶ Preview (no recording)</button>
+      <button type="button" class="draft-btn secondary" id="stopPreviewBtn" data-i18n="stopBtnLabel" disabled>■ Stop</button>
+    </div>
+    <div class="error-box" id="errorBox"></div>
+    <div class="status-box" id="statusBox"></div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="previewTitle">TALK FORGE — PREVIEW</span>
+      <span id="titleBlockRight" data-i18n="statusNotStarted">NOT STARTED</span>
+    </div>
+
+    <div class="stage-wrap" id="stageWrap">
+      <div class="sheet-empty" id="stageEmpty">
+        <strong data-i18n="stageEmptyStrong">No photo yet.</strong>
+        <span data-i18n="stageEmptyText">Upload a photo on the left to get started.</span>
+      </div>
+      <div class="manual-hint" id="manualHint"></div>
+      <canvas id="stageCanvas" style="display:none;"></canvas>
+      <video id="resultVideo" controls style="display:none;"></video>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="recordBtn" data-i18n="recordVideoLabel" disabled>🔴 Record video</button>
+      <button type="button" id="downloadBtn" data-i18n="downloadVideoLabel" disabled class="primary">⬇ Download video (.webm)</button>
+    </div>
+    <div class="table-actions">
+      <button type="button" id="recordAudioBtn" data-i18n="recordAudioLabel" disabled>🎙️ Record audio only</button>
+      <button type="button" id="downloadAudioBtn" data-i18n="downloadAudioLabel" disabled>⬇ Download audio (.webm)</button>
+    </div>
+    <p class="hint" data-i18n="recordingDisclaimerHint" style="color: rgba(237,234,224,0.55); margin-top: 8px;">This is a simple, stylized talking effect (mouth stretch + blinking), not photorealistic lip-sync or full-body movement — that would need a paid cloud video-AI model, which this free tool intentionally doesn't use. Recording asks you to share "this tab" with audio, so it can capture the generated speech into the video — it never sees or sends your photo anywhere.</p>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Talk Forge</h2>
+  <p>Talk Forge makes a photo speak: upload a photo of one or more people, write a script, and their mouths move and eyes blink in sync with speech generated in your browser.</p>
+  <h3>How to use Talk Forge</h3>
+  <ol><li>Upload a photo and add or record the spoken audio.</li><li>Press “Create talking photo”.</li><li>Preview the lip movement and export the finished video.</li></ol>
+  <h3>Does Talk Forge use an AI video model?</h3>
+  <p>No. The lip movement and the speech are made right in your browser, so no account or AI video service is needed.</p>
+  <h3>Is Talk Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/fr/voice-forge.html">Voice Forge</a> · <a href="/fr/clip-forge.html">Clip Forge</a> · <a href="/fr/post-forge.html">Post Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/fr/">MigaBuilder</a>. Your photo and script stay in your browser — only the face-detection model's code is fetched from a CDN, never your image. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/talk-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  const photoInput = document.getElementById('photoInput');
+  const photoHint = document.getElementById('photoHint');
+  const autoDetectBtn = document.getElementById('autoDetectBtn');
+  const manualAddBtn = document.getElementById('manualAddBtn');
+  const facesList = document.getElementById('facesList');
+  const facesEmpty = document.getElementById('facesEmpty');
+  const linesList = document.getElementById('linesList');
+  const addLineBtn = document.getElementById('addLineBtn');
+  const voiceSelect = document.getElementById('voiceSelect');
+  const rateSlider = document.getElementById('rateSlider');
+  const pitchSlider = document.getElementById('pitchSlider');
+  const previewBtn = document.getElementById('previewBtn');
+  const stopPreviewBtn = document.getElementById('stopPreviewBtn');
+  const errorBox = document.getElementById('errorBox');
+  const statusBox = document.getElementById('statusBox');
+  const stageWrap = document.getElementById('stageWrap');
+  const stageEmpty = document.getElementById('stageEmpty');
+  const manualHint = document.getElementById('manualHint');
+  const stageCanvas = document.getElementById('stageCanvas');
+  const resultVideo = document.getElementById('resultVideo');
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const recordBtn = document.getElementById('recordBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const recordAudioBtn = document.getElementById('recordAudioBtn');
+  const downloadAudioBtn = document.getElementById('downloadAudioBtn');
+  const sceneStrip = document.getElementById('sceneStrip');
+  const facesTitle = document.getElementById('facesTitle');
+
+  const ctx = stageCanvas.getContext('2d');
+
+  function showError(msg) { statusBox.classList.remove('show'); errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+  function showStatus(msg) { clearError(); statusBox.textContent = msg; statusBox.classList.add('show'); }
+
+  // ================= state =================
+  // Multi-scene: each uploaded photo is its own scene with its own faces, so a
+  // script line can pick which scene (photo) is on screen while it plays —
+  // enabling a cut between two different people/photos mid-conversation.
+  let scenes = []; // {id, img, canvasWidth, canvasHeight, faces: [...]}
+  let sceneIdCounter = 0;
+  let activeSceneId = null; // which scene is shown/edited outside of playback
+  let playbackSceneId = null; // set while a line is speaking, overrides activeSceneId for rendering
+  let modelsLoaded = false;
+  const FACE_COLORS = ['#E2A63B', '#6FD1E0', '#4E9E73', '#D8604A', '#9B7FD4', '#E288B0'];
+  let faceIdCounter = 0; // unique across all scenes
+  let lines = []; // {id, sceneId, faceId: number|'narrator', text}
+  let lineIdCounter = 0;
+
+  let manualMode = null; // {step: 0|1|2, points: []}
+  let adjustMode = null; // {sceneId, faceId} — dragging an existing face's boxes
+
+  function activeScene() { return scenes.find(s => s.id === activeSceneId) || null; }
+  function currentRenderScene() {
+    const id = playbackSceneId != null ? playbackSceneId : activeSceneId;
+    return scenes.find(s => s.id === id) || null;
+  }
+  function findFaceScene(faceId) {
+    return scenes.find(s => s.faces.some(f => f.id === faceId)) || null;
+  }
+
+  // ================= photo upload (adds a new scene) =================
+  photoInput.addEventListener('change', function (e) {
+    const file = (e.target.files || [])[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      const img = new Image();
+      img.onload = function () {
+        const maxW = 1000;
+        const scale = Math.min(1, maxW / img.width);
+        const scene = {
+          id: ++sceneIdCounter, img: img, name: file.name,
+          canvasWidth: Math.round(img.width * scale), canvasHeight: Math.round(img.height * scale),
+          faces: []
+        };
+        scenes.push(scene);
+        setActiveScene(scene.id);
+        stageEmpty.style.display = 'none';
+        resultVideo.style.display = 'none';
+        stageCanvas.style.display = 'block';
+        autoDetectBtn.disabled = false;
+        manualAddBtn.disabled = false;
+        renderSceneStrip();
+        renderFacesList();
+        adoptLines();
+        renderLinesList();
+        refreshActionButtons();
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    photoInput.value = '';
+  });
+
+  function setActiveScene(id) {
+    activeSceneId = id;
+    const scene = activeScene();
+    if (!scene) return;
+    stageCanvas.width = scene.canvasWidth;
+    stageCanvas.height = scene.canvasHeight;
+    const scenesCountText = scenes.length === 1 ? I18N.t('sceneCountOne') : I18N.t('sceneCountMany').replace('{count}', scenes.length);
+    photoHint.textContent = I18N.t('photoHintEditing').replace('{scenesCount}', scenesCountText).replace('{name}', scene.name).replace('{w}', scene.img.width).replace('{h}', scene.img.height);
+    facesTitle.textContent = I18N.t('facesHeadingScene').replace('{scene}', sceneLabel(scene.id));
+    drawFrame();
+  }
+
+  function sceneLabel(id) {
+    const idx = scenes.findIndex(s => s.id === id);
+    return idx === -1 ? I18N.t('sceneWord') : I18N.t('sceneNumbered').replace('{n}', idx + 1);
+  }
+
+  function renderSceneStrip() {
+    sceneStrip.innerHTML = '';
+    if (scenes.length < 2) return; // no need to show a switcher for a single scene
+    scenes.forEach(scene => {
+      const tab = document.createElement('div');
+      tab.className = 'scene-tab' + (scene.id === activeSceneId ? ' active' : '');
+      const thumb = document.createElement('img');
+      thumb.src = scene.img.src;
+      const label = document.createElement('span');
+      label.textContent = sceneLabel(scene.id);
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button'; removeBtn.textContent = '✕'; removeBtn.title = I18N.t('removeSceneTitle');
+      removeBtn.addEventListener('click', (e) => { e.stopPropagation(); removeScene(scene.id); });
+      tab.appendChild(thumb); tab.appendChild(label); tab.appendChild(removeBtn);
+      tab.addEventListener('click', () => { setActiveScene(scene.id); renderSceneStrip(); renderFacesList(); });
+      sceneStrip.appendChild(tab);
+    });
+  }
+
+  function removeScene(id) {
+    scenes = scenes.filter(s => s.id !== id);
+    lines.forEach(l => {
+      if (l.sceneId === id) {
+        l.sceneId = scenes[0] ? scenes[0].id : null;
+        l.faceId = 'narrator';
+      }
+    });
+    if (activeSceneId === id) activeSceneId = scenes[0] ? scenes[0].id : null;
+    if (scenes.length) {
+      setActiveScene(activeSceneId);
+    } else {
+      stageEmpty.style.display = 'block';
+      stageCanvas.style.display = 'none';
+      autoDetectBtn.disabled = true;
+      manualAddBtn.disabled = true;
+      photoHint.textContent = I18N.t('photoHintNoScenes');
+      facesTitle.textContent = I18N.t('facesHeadingDefault');
+    }
+    renderSceneStrip();
+    renderFacesList();
+    renderLinesList();
+    refreshActionButtons();
+  }
+
+  function imgToCanvasScale() {
+    const scene = activeScene();
+    return scene ? stageCanvas.width / scene.img.width : 1;
+  }
+
+  // ================= face detection (auto) =================
+  const MODEL_URL = 'https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights';
+  async function ensureModelsLoaded() {
+    if (modelsLoaded) return;
+    if (typeof faceapi === 'undefined') throw new Error(I18N.t('errorFaceLibFailed'));
+    await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL);
+    await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL);
+    modelsLoaded = true;
+  }
+
+  function boxFromPoints(points, padX, padY) {
+    const xs = points.map(p => p.x), ys = points.map(p => p.y);
+    const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+    return { x: minX - padX, y: minY - padY, w: (maxX - minX) + padX * 2, h: (maxY - minY) + padY * 2 };
+  }
+
+  autoDetectBtn.addEventListener('click', async function () {
+    clearError();
+    const scene = activeScene();
+    if (!scene) return;
+    autoDetectBtn.disabled = true;
+    autoDetectBtn.textContent = I18N.t('loadingModelLabel');
+    try {
+      await ensureModelsLoaded();
+      autoDetectBtn.textContent = I18N.t('detectingLabel');
+      const detections = await faceapi.detectAllFaces(scene.img, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks();
+      if (!detections.length) {
+        showError(I18N.t('errorNoFacesFound'));
+      } else {
+        detections.forEach(det => {
+          const mouthPts = det.landmarks.getMouth();
+          const leftEyePts = det.landmarks.getLeftEye();
+          const rightEyePts = det.landmarks.getRightEye();
+          addFace({
+            mouth: boxFromPoints(mouthPts, 6, 6),
+            leftEye: boxFromPoints(leftEyePts, 4, 4),
+            rightEye: boxFromPoints(rightEyePts, 4, 4)
+          });
+        });
+        showStatus(detections.length === 1 ? I18N.t('foundFacesOne') : I18N.t('foundFacesMany').replace('{count}', detections.length));
+      }
+    } catch (err) {
+      showError(err.message || I18N.t('errorCouldNotDetect'));
+    } finally {
+      autoDetectBtn.disabled = false;
+      autoDetectBtn.textContent = I18N.t('autoDetectBtnLabel');
+    }
+  });
+
+  function addFace(boxesInImageSpace) {
+    const scene = activeScene();
+    if (!scene) return;
+    const id = ++faceIdCounter;
+    scene.faces.push({
+      id, label: I18N.t('faceNumbered').replace('{n}', scene.faces.length + 1),
+      mouth: boxesInImageSpace.mouth, leftEye: boxesInImageSpace.leftEye, rightEye: boxesInImageSpace.rightEye,
+      nextBlinkAt: performance.now() + 1500 + Math.random() * 3000, blinkUntil: 0
+    });
+    renderFacesList();
+    adoptLines();
+    renderLinesList();
+    drawFrame();
+    refreshActionButtons();
+  }
+
+  // ================= manual placement =================
+  manualAddBtn.addEventListener('click', function () {
+    if (!activeScene()) return;
+    clearError();
+    adjustMode = null;
+    manualMode = { step: 0, points: [] };
+    manualHint.textContent = I18N.t('manualHintLeftEye');
+    manualHint.classList.add('show');
+  });
+  stageCanvas.addEventListener('click', function (e) {
+    if (!manualMode) return;
+    const rect = stageCanvas.getBoundingClientRect();
+    const scaleX = stageCanvas.width / rect.width, scaleY = stageCanvas.height / rect.height;
+    const cx = (e.clientX - rect.left) * scaleX, cy = (e.clientY - rect.top) * scaleY;
+    const scale = imgToCanvasScale();
+    manualMode.points.push({ x: cx / scale, y: cy / scale }); // store in image-space coords
+    manualMode.step++;
+    if (manualMode.step === 1) {
+      manualHint.textContent = I18N.t('manualHintRightEye');
+    } else if (manualMode.step === 2) {
+      manualHint.textContent = I18N.t('manualHintMouth');
+    } else {
+      const [leftEyePt, rightEyePt, mouthPt] = manualMode.points;
+      const eyeDist = Math.hypot(rightEyePt.x - leftEyePt.x, rightEyePt.y - leftEyePt.y);
+      const eyeW = eyeDist * 0.32, eyeH = eyeDist * 0.2;
+      const mouthW = eyeDist * 0.85, mouthH = eyeDist * 0.42;
+      addFace({
+        leftEye: { x: leftEyePt.x - eyeW / 2, y: leftEyePt.y - eyeH / 2, w: eyeW, h: eyeH },
+        rightEye: { x: rightEyePt.x - eyeW / 2, y: rightEyePt.y - eyeH / 2, w: eyeW, h: eyeH },
+        mouth: { x: mouthPt.x - mouthW / 2, y: mouthPt.y - mouthH / 2, w: mouthW, h: mouthH }
+      });
+      manualMode = null;
+      manualHint.classList.remove('show');
+    }
+  });
+
+  function renderFacesList() {
+    facesList.innerHTML = '';
+    const scene = activeScene();
+    const faces = scene ? scene.faces : [];
+    facesEmpty.style.display = faces.length ? 'none' : 'block';
+    facesEmpty.textContent = scene ? I18N.t('facesEmptyDefault') : I18N.t('facesEmptyNoPhoto');
+    faces.forEach((face, i) => {
+      const row = document.createElement('div');
+      row.className = 'face-item';
+      const dot = document.createElement('span');
+      dot.className = 'face-dot';
+      dot.style.background = FACE_COLORS[i % FACE_COLORS.length];
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text'; nameInput.value = face.label;
+      nameInput.addEventListener('input', () => { face.label = nameInput.value; renderLinesList(); });
+      const adjustBtn = document.createElement('button');
+      const isAdjustingThis = adjustMode && adjustMode.faceId === face.id;
+      adjustBtn.type = 'button'; adjustBtn.textContent = isAdjustingThis ? I18N.t('doneLabel') : '✥';
+      adjustBtn.title = I18N.t('adjustBtnTitle');
+      adjustBtn.addEventListener('click', () => {
+        if (isAdjustingThis) {
+          adjustMode = null;
+          manualHint.classList.remove('show');
+        } else {
+          manualMode = null;
+          adjustMode = { sceneId: scene.id, faceId: face.id };
+          manualHint.textContent = I18N.t('adjustDragHint');
+          manualHint.classList.add('show');
+        }
+        renderFacesList();
+      });
+      const redoBtn = document.createElement('button');
+      redoBtn.type = 'button'; redoBtn.textContent = '↺'; redoBtn.title = I18N.t('redoBtnTitle');
+      redoBtn.addEventListener('click', () => {
+        scene.faces = scene.faces.filter(f => f.id !== face.id);
+        adjustMode = null;
+        renderFacesList(); renderLinesList(); drawFrame();
+        manualMode = { step: 0, points: [] };
+        manualHint.textContent = I18N.t('manualHintLeftEye');
+        manualHint.classList.add('show');
+      });
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button'; removeBtn.className = 'remove'; removeBtn.textContent = '✕';
+      removeBtn.addEventListener('click', () => {
+        scene.faces = scene.faces.filter(f => f.id !== face.id);
+        if (adjustMode && adjustMode.faceId === face.id) adjustMode = null;
+        renderFacesList(); renderLinesList(); drawFrame();
+      });
+      row.appendChild(dot); row.appendChild(nameInput); row.appendChild(adjustBtn); row.appendChild(redoBtn); row.appendChild(removeBtn);
+      facesList.appendChild(row);
+    });
+  }
+
+  // ---- drag-to-adjust an existing face's eye/mouth boxes ----
+  function hitTestAdjust(face, imgX, imgY) {
+    const parts = ['leftEye', 'rightEye', 'mouth'];
+    for (const part of parts) {
+      const b = face[part];
+      const handleSize = Math.max(6, b.w * 0.25);
+      if (imgX >= b.x + b.w - handleSize && imgX <= b.x + b.w + handleSize &&
+          imgY >= b.y + b.h - handleSize && imgY <= b.y + b.h + handleSize) {
+        return { part: part, mode: 'resize' };
+      }
+      if (imgX >= b.x && imgX <= b.x + b.w && imgY >= b.y && imgY <= b.y + b.h) {
+        return { part: part, mode: 'move' };
+      }
+    }
+    return null;
+  }
+  let adjustDrag = null;
+  function canvasEventToImagePos(e) {
+    const rect = stageCanvas.getBoundingClientRect();
+    const scaleX = stageCanvas.width / rect.width, scaleY = stageCanvas.height / rect.height;
+    const cx = (e.clientX - rect.left) * scaleX, cy = (e.clientY - rect.top) * scaleY;
+    const scale = imgToCanvasScale();
+    return { x: cx / scale, y: cy / scale };
+  }
+  stageCanvas.addEventListener('mousedown', function (e) {
+    if (!adjustMode) return;
+    const scene = scenes.find(s => s.id === adjustMode.sceneId);
+    const face = scene && scene.faces.find(f => f.id === adjustMode.faceId);
+    if (!face) return;
+    const pos = canvasEventToImagePos(e);
+    const hit = hitTestAdjust(face, pos.x, pos.y);
+    if (!hit) return;
+    const b = face[hit.part];
+    adjustDrag = { face: face, part: hit.part, mode: hit.mode, startImgX: pos.x, startImgY: pos.y, orig: { x: b.x, y: b.y, w: b.w, h: b.h } };
+    e.preventDefault();
+  });
+  stageCanvas.addEventListener('mousemove', function (e) {
+    if (!adjustDrag) return;
+    const pos = canvasEventToImagePos(e);
+    const dx = pos.x - adjustDrag.startImgX, dy = pos.y - adjustDrag.startImgY;
+    const b = adjustDrag.face[adjustDrag.part];
+    if (adjustDrag.mode === 'move') {
+      b.x = adjustDrag.orig.x + dx;
+      b.y = adjustDrag.orig.y + dy;
+    } else {
+      b.w = Math.max(6, adjustDrag.orig.w + dx);
+      b.h = Math.max(6, adjustDrag.orig.h + dy);
+    }
+  });
+  window.addEventListener('mouseup', function () { adjustDrag = null; });
+
+  function drawAdjustOverlay(face, scale) {
+    ['leftEye', 'rightEye', 'mouth'].forEach(part => {
+      const b = face[part];
+      const x = b.x * scale, y = b.y * scale, w = b.w * scale, h = b.h * scale;
+      ctx.save();
+      ctx.strokeStyle = '#E2A63B';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 3]);
+      ctx.strokeRect(x, y, w, h);
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#E2A63B';
+      ctx.fillRect(x + w - 5, y + h - 5, 10, 10);
+      ctx.restore();
+    });
+  }
+
+  // ================= script lines =================
+  function addLine(sceneId, faceId, text) {
+    const scene = sceneId != null ? scenes.find(s => s.id === sceneId) : activeScene();
+    const resolvedSceneId = scene ? scene.id : (scenes[0] ? scenes[0].id : null);
+    const resolvedScene = scenes.find(s => s.id === resolvedSceneId);
+    const resolvedFaceId = faceId !== undefined ? faceId : (resolvedScene && resolvedScene.faces[0] ? resolvedScene.faces[0].id : 'narrator');
+    lines.push({ id: ++lineIdCounter, sceneId: resolvedSceneId, faceId: resolvedFaceId, autoFace: faceId === undefined, text: text || '' });
+    renderLinesList();
+    refreshActionButtons();
+  }
+  addLineBtn.addEventListener('click', () => addLine());
+
+  // The first line is created before any photo exists. Move lines without a valid scene onto
+  // the active photo, and give lines whose speaker was never picked by hand that photo's first
+  // face, so typing a line and pressing Preview makes the face talk.
+  function adoptLines() {
+    const fallback = activeScene() || scenes[0];
+    lines.forEach(line => {
+      if (fallback && !scenes.some(sc => sc.id === line.sceneId)) line.sceneId = fallback.id;
+      const scene = scenes.find(sc => sc.id === line.sceneId);
+      if (line.autoFace && line.faceId === 'narrator' && scene && scene.faces[0]) line.faceId = scene.faces[0].id;
+    });
+  }
+
+  function renderLinesList() {
+    linesList.innerHTML = '';
+    lines.forEach(line => {
+      const row = document.createElement('div');
+      row.className = 'line-row';
+      const head = document.createElement('div');
+      head.className = 'line-row-head';
+
+      const sceneSelect = document.createElement('select');
+      sceneSelect.style.flex = 'none';
+      sceneSelect.style.width = '90px';
+      sceneSelect.setAttribute('aria-label', 'Photo for this line');
+      if (!scenes.length) {
+        const opt = document.createElement('option');
+        opt.value = ''; opt.textContent = I18N.t('noPhotoOption');
+        sceneSelect.appendChild(opt);
+        sceneSelect.disabled = true;
+      } else {
+        scenes.forEach(sc => {
+          const opt = document.createElement('option');
+          opt.value = String(sc.id); opt.textContent = sceneLabel(sc.id);
+          if (sc.id === line.sceneId) opt.selected = true;
+          sceneSelect.appendChild(opt);
+        });
+      }
+
+      const faceSelect = document.createElement('select');
+      faceSelect.className = 'line-face-select';
+      faceSelect.setAttribute('aria-label', 'Who says this line');
+      function populateFaceSelect() {
+        faceSelect.innerHTML = '';
+        const scene = scenes.find(s => s.id === line.sceneId);
+        (scene ? scene.faces : []).forEach(f => {
+          const opt = document.createElement('option');
+          opt.value = String(f.id); opt.textContent = f.label;
+          if (f.id === line.faceId) opt.selected = true;
+          faceSelect.appendChild(opt);
+        });
+        const narratorOpt = document.createElement('option');
+        narratorOpt.value = 'narrator'; narratorOpt.textContent = I18N.t('narratorOption');
+        if (line.faceId === 'narrator') narratorOpt.selected = true;
+        faceSelect.appendChild(narratorOpt);
+      }
+      populateFaceSelect();
+
+      sceneSelect.addEventListener('change', () => {
+        line.sceneId = Number(sceneSelect.value);
+        const scene = scenes.find(s => s.id === line.sceneId);
+        line.faceId = scene && scene.faces[0] ? scene.faces[0].id : 'narrator';
+        populateFaceSelect();
+      });
+      faceSelect.addEventListener('change', () => { line.faceId = faceSelect.value === 'narrator' ? 'narrator' : Number(faceSelect.value); line.autoFace = false; });
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button'; removeBtn.textContent = '✕';
+      removeBtn.addEventListener('click', () => { lines = lines.filter(l => l.id !== line.id); renderLinesList(); refreshActionButtons(); });
+      head.appendChild(sceneSelect); head.appendChild(faceSelect); head.appendChild(removeBtn);
+
+      const textArea = document.createElement('textarea');
+      textArea.value = line.text;
+      textArea.placeholder = I18N.t('lineTextPlaceholder');
+      textArea.addEventListener('input', () => { line.text = textArea.value; refreshActionButtons(); });
+
+      row.appendChild(head); row.appendChild(textArea);
+      linesList.appendChild(row);
+    });
+  }
+
+  // ================= voices =================
+  function populateVoices() {
+    const voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+    voiceSelect.innerHTML = '';
+    voices.forEach((v, i) => {
+      const opt = document.createElement('option');
+      opt.value = String(i); opt.textContent = v.name + ' (' + v.lang + ')';
+      voiceSelect.appendChild(opt);
+    });
+  }
+  if (window.speechSynthesis) {
+    populateVoices();
+    speechSynthesis.onvoiceschanged = populateVoices;
+  }
+  rateSlider.addEventListener('input', () => { document.getElementById('rateVal').textContent = parseFloat(rateSlider.value).toFixed(2); });
+  pitchSlider.addEventListener('input', () => { document.getElementById('pitchVal').textContent = parseFloat(pitchSlider.value).toFixed(2); });
+
+  function totalFaceCount() { return scenes.reduce((sum, s) => sum + s.faces.length, 0); }
+
+  function refreshActionButtons() {
+    const ready = scenes.length > 0 && totalFaceCount() > 0 && lines.some(l => l.text.trim());
+    previewBtn.disabled = !ready;
+    recordBtn.disabled = !ready;
+    recordAudioBtn.disabled = !ready;
+  }
+
+  // ================= rendering =================
+  function drawFrame() {
+    const scene = currentRenderScene();
+    if (!scene) return;
+    if (stageCanvas.width !== scene.canvasWidth || stageCanvas.height !== scene.canvasHeight) {
+      stageCanvas.width = scene.canvasWidth;
+      stageCanvas.height = scene.canvasHeight;
+    }
+    const scale = scene.canvasWidth / scene.img.width;
+    ctx.clearRect(0, 0, stageCanvas.width, stageCanvas.height);
+    ctx.drawImage(scene.img, 0, 0, stageCanvas.width, stageCanvas.height);
+    const now = performance.now();
+    scene.faces.forEach(face => drawFaceAnimation(face, scale, now, scene.img));
+    if (adjustMode && adjustMode.sceneId === scene.id) {
+      const face = scene.faces.find(f => f.id === adjustMode.faceId);
+      if (face) drawAdjustOverlay(face, scale);
+    }
+  }
+
+  function drawFaceAnimation(face, scale, now, sourceImg) {
+    // blink scheduling
+    if (now > face.nextBlinkAt && face.blinkUntil < now) {
+      face.blinkUntil = now + 160;
+      face.nextBlinkAt = now + 2500 + Math.random() * 3500;
+    }
+    const blinking = now < face.blinkUntil;
+    [face.leftEye, face.rightEye].forEach(eye => {
+      const x = eye.x * scale, y = eye.y * scale, w = eye.w * scale, h = eye.h * scale;
+      if (blinking) {
+        // squish the eye region vertically to ~15% height, simulating a closed eyelid
+        const squishH = Math.max(1, h * 0.15);
+        ctx.drawImage(sourceImg, eye.x, eye.y, eye.w, eye.h, x, y + (h - squishH) / 2, w, squishH);
+      }
+    });
+
+    const openness = face.mouthOpenness || 0; // 0..1, driven by speech
+    const m = face.mouth;
+    const x = m.x * scale, y = m.y * scale, w = m.w * scale, h = m.h * scale;
+    const extra = h * openness * 0.9;
+    ctx.drawImage(sourceImg, m.x, m.y, m.w, m.h, x, y, w, h + extra);
+    if (openness > 0.15) {
+      ctx.save();
+      ctx.globalAlpha = Math.min(0.55, openness * 0.6);
+      ctx.fillStyle = '#3a1414';
+      ctx.beginPath();
+      ctx.ellipse(x + w / 2, y + h * 0.55, w * 0.28, (h + extra) * 0.32, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+  }
+
+  let animRaf = null;
+  function startAnimLoop() {
+    if (animRaf) return;
+    function step() {
+      drawFrame();
+      animRaf = requestAnimationFrame(step);
+    }
+    animRaf = requestAnimationFrame(step);
+  }
+  function stopAnimLoop() {
+    if (animRaf) cancelAnimationFrame(animRaf);
+    animRaf = null;
+  }
+  startAnimLoop();
+
+  // ================= speech playback (shared by preview + record) =================
+  let currentUtterances = [];
+  let mouthDecayTimers = new Map();
+
+  function pulseMouth(face) {
+    face.mouthOpenness = 0.55 + Math.random() * 0.4;
+    clearTimeout(mouthDecayTimers.get(face.id));
+    const t = setTimeout(() => { face.mouthOpenness = 0; }, 140 + Math.random() * 80);
+    mouthDecayTimers.set(face.id, t);
+  }
+
+  function speakLines(playLines, onDone, onLineStart) {
+    if (!window.speechSynthesis) { showError(I18N.t('errorNoSpeechSynthesis')); onDone(); return; }
+    speechSynthesis.cancel();
+    const voices = speechSynthesis.getVoices();
+    const chosenVoice = voices[parseInt(voiceSelect.value, 10)] || null;
+    let idx = 0;
+
+    function speakNext() {
+      if (idx >= playLines.length) { onDone(); return; }
+      const line = playLines[idx];
+      idx++;
+      playbackSceneId = line.sceneId != null ? line.sceneId : playbackSceneId;
+      const scene = scenes.find(s => s.id === line.sceneId);
+      const face = scene ? scene.faces.find(f => f.id === line.faceId) : null;
+      if (onLineStart) onLineStart(line, face);
+      if (!line.text.trim()) { speakNext(); return; }
+      const utter = new SpeechSynthesisUtterance(line.text);
+      if (chosenVoice) utter.voice = chosenVoice;
+      utter.rate = parseFloat(rateSlider.value) || 1;
+      utter.pitch = parseFloat(pitchSlider.value) || 1;
+
+      let gotBoundary = false;
+      utter.onboundary = function (ev) {
+        gotBoundary = true;
+        if (face) pulseMouth(face);
+      };
+      let fallbackInterval = null;
+      utter.onstart = function () {
+        // fallback animation for browsers without reliable boundary events
+        fallbackInterval = setInterval(() => {
+          if (!gotBoundary && face) pulseMouth(face);
+        }, 180);
+      };
+      utter.onend = function () {
+        if (fallbackInterval) clearInterval(fallbackInterval);
+        speakNext();
+      };
+      utter.onerror = function () {
+        if (fallbackInterval) clearInterval(fallbackInterval);
+        speakNext();
+      };
+      currentUtterances.push(utter);
+      speechSynthesis.speak(utter);
+    }
+    speakNext();
+  }
+
+  function facesReadyText() {
+    const n = totalFaceCount();
+    return n === 1 ? I18N.t('facesReadyOne') : I18N.t('facesReadyMany').replace('{count}', n);
+  }
+
+  previewBtn.addEventListener('click', function () {
+    clearError();
+    const playLines = lines.filter(l => l.text.trim());
+    if (!playLines.length) { showError(I18N.t('errorNoLineText')); return; }
+    previewBtn.disabled = true;
+    stopPreviewBtn.disabled = false;
+    titleBlockRight.textContent = I18N.t('statusPreviewing');
+    speakLines(playLines, function () {
+      playbackSceneId = null;
+      drawFrame();
+      previewBtn.disabled = false;
+      stopPreviewBtn.disabled = true;
+      titleBlockRight.textContent = facesReadyText();
+    });
+  });
+  stopPreviewBtn.addEventListener('click', function () {
+    if (window.speechSynthesis) speechSynthesis.cancel();
+    playbackSceneId = null;
+    drawFrame();
+    previewBtn.disabled = false;
+    stopPreviewBtn.disabled = true;
+    titleBlockRight.textContent = facesReadyText();
+  });
+
+  // ================= recording =================
+  let recordedBlob = null;
+
+  recordBtn.addEventListener('click', async function () {
+    clearError();
+    const playLines = lines.filter(l => l.text.trim());
+    if (!playLines.length) { showError(I18N.t('errorNoLineText')); return; }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      showError(I18N.t('errorNeedsDesktopBrowser'));
+      return;
+    }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoRecordingFormat')); return; }
+
+    let displayStream;
+    try {
+      showStatus(I18N.t('shareTabAudioHintVideo'));
+      displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    } catch (err) {
+      showError(I18N.t('errorScreenSharingNotStarted').replace('{message}', err.message || err.name));
+      return;
+    }
+
+    const audioTracks = displayStream.getAudioTracks();
+    if (!audioTracks.length) {
+      showError(I18N.t('errorNoTabAudio'));
+      displayStream.getTracks().forEach(t => t.stop());
+      return;
+    }
+
+    const canvasStream = stageCanvas.captureStream(30);
+    const combined = new MediaStream([...canvasStream.getVideoTracks(), ...audioTracks]);
+    const recorder = new MediaRecorder(combined, { mimeType, videoBitsPerSecond: 6000000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+
+    recordBtn.disabled = true;
+    previewBtn.disabled = true;
+    downloadBtn.disabled = true;
+    titleBlockRight.textContent = I18N.t('statusRecording');
+
+    recorder.onstop = function () {
+      recordedBlob = new Blob(chunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(recordedBlob);
+      resultVideo.src = url;
+      resultVideo.style.display = 'block';
+      stageCanvas.style.display = 'none';
+      downloadBtn.disabled = false;
+      recordBtn.disabled = false;
+      previewBtn.disabled = false;
+      titleBlockRight.textContent = I18N.t('statusRecordingSaved');
+      displayStream.getTracks().forEach(t => t.stop());
+      clearError();
+      showStatus(playLines.length === 1 ? I18N.t('recordingCompleteOne') : I18N.t('recordingCompleteMany').replace('{count}', playLines.length));
+    };
+
+    recorder.start(1000);
+    speakLines(playLines, function () {
+      setTimeout(function () { recorder.stop(); }, 300);
+    });
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    if (!recordedBlob) return;
+    const url = URL.createObjectURL(recordedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'talk-forge.webm';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  // ================= standalone audio export =================
+  let recordedAudioBlob = null;
+  function pickAudioMimeType() {
+    const candidates = ['audio/webm;codecs=opus', 'audio/webm'];
+    for (const c of candidates) { if (window.MediaRecorder && MediaRecorder.isTypeSupported(c)) return c; }
+    return '';
+  }
+
+  recordAudioBtn.addEventListener('click', async function () {
+    clearError();
+    const playLines = lines.filter(l => l.text.trim());
+    if (!playLines.length) { showError(I18N.t('errorNoLineText')); return; }
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      showError(I18N.t('errorNeedsDesktopBrowser'));
+      return;
+    }
+    const mimeType = pickAudioMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoAudioFormat')); return; }
+
+    let displayStream;
+    try {
+      showStatus(I18N.t('shareTabAudioHintAudio'));
+      displayStream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    } catch (err) {
+      showError(I18N.t('errorScreenSharingNotStarted').replace('{message}', err.message || err.name));
+      return;
+    }
+
+    const audioTracks = displayStream.getAudioTracks();
+    if (!audioTracks.length) {
+      showError(I18N.t('errorNoTabAudio'));
+      displayStream.getTracks().forEach(t => t.stop());
+      return;
+    }
+    displayStream.getVideoTracks().forEach(t => t.stop());
+
+    const recorder = new MediaRecorder(new MediaStream(audioTracks), { mimeType });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+
+    recordAudioBtn.disabled = true;
+    recordBtn.disabled = true;
+    previewBtn.disabled = true;
+    downloadAudioBtn.disabled = true;
+    titleBlockRight.textContent = I18N.t('statusRecordingAudio');
+
+    recorder.onstop = function () {
+      recordedAudioBlob = new Blob(chunks, { type: 'audio/webm' });
+      downloadAudioBtn.disabled = false;
+      recordAudioBtn.disabled = false;
+      recordBtn.disabled = false;
+      previewBtn.disabled = false;
+      titleBlockRight.textContent = I18N.t('statusAudioSaved');
+      displayStream.getTracks().forEach(t => t.stop());
+      clearError();
+      showStatus(playLines.length === 1 ? I18N.t('audioRecordedOne') : I18N.t('audioRecordedMany').replace('{count}', playLines.length));
+    };
+
+    recorder.start(500);
+    speakLines(playLines, function () {
+      playbackSceneId = null;
+      setTimeout(function () { recorder.stop(); }, 300);
+    });
+  });
+
+  downloadAudioBtn.addEventListener('click', function () {
+    if (!recordedAudioBlob) return;
+    const url = URL.createObjectURL(recordedAudioBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'talk-forge-audio.webm';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Upload a photo, write a script, and watch it talk — mouths move and eyes blink in sync with real speech.',
+      photosSceneHeading: 'Photos / scenes',
+      addPhotoLabel: '+ Add a photo (new scene)',
+      photoHintDefault: 'Each photo becomes its own scene. Add more than one to cut between people or locations mid-conversation — a script line picks which scene is on screen while it plays.',
+      photoHintNoScenes: 'One photo, one or more people. A front-facing, well-lit photo detects best.',
+      photoHintEditing: '{scenesCount} — editing "{name}" ({w}×{h})',
+      sceneCountOne: '1 scene',
+      sceneCountMany: '{count} scenes',
+      facesHeadingDefault: 'Faces',
+      facesHeadingScene: 'Faces — {scene}',
+      sceneWord: 'Scene',
+      sceneNumbered: 'Scene {n}',
+      autoDetectBtnLabel: '🔍 Auto-detect faces',
+      placeManuallyLabel: '+ Place manually',
+      autoDetectHint: "Auto-detect uses a small face-recognition model loaded from a CDN (nothing about your photo is ever uploaded anywhere). If it misses someone, place that face manually — click their left eye, right eye, then mouth.",
+      facesEmptyDefault: 'No faces yet.',
+      facesEmptyNoPhoto: 'Add a photo above first.',
+      scriptHeading: 'Script',
+      addLineBtnLabel: '+ Add line',
+      voiceHeading: 'Voice',
+      voiceLabel: 'Voice',
+      rateLabel: 'Rate',
+      pitchLabel: 'Pitch',
+      previewBtnLabel: '▶ Preview (no recording)',
+      stopBtnLabel: '■ Stop',
+      previewTitle: 'TALK FORGE — PREVIEW',
+      statusNotStarted: 'NOT STARTED',
+      stageEmptyStrong: 'No photo yet.',
+      stageEmptyText: 'Upload a photo on the left to get started.',
+      recordVideoLabel: '🔴 Record video',
+      downloadVideoLabel: '⬇ Download video (.webm)',
+      recordAudioLabel: '🎙️ Record audio only',
+      downloadAudioLabel: '⬇ Download audio (.webm)',
+      recordingDisclaimerHint: 'This is a simple, stylized talking effect (mouth stretch + blinking), not photorealistic lip-sync or full-body movement — that would need a paid cloud video-AI model, which this free tool intentionally doesn\'t use. Recording asks you to share "this tab" with audio, so it can capture the generated speech into the video — it never sees or sends your photo anywhere.',
+      footerText: "Part of <a href=\"index.html\">MigaBuilder</a>. Your photo and script stay in your browser — only the face-detection model's code is fetched from a CDN, never your image. <a href=\"feedback.html\">Found a bug or have an idea? Send feedback →</a>",
+      removeSceneTitle: 'Remove scene',
+      loadingModelLabel: 'Loading model…',
+      detectingLabel: 'Detecting…',
+      errorNoFacesFound: 'No faces found automatically. Try "Place manually" instead.',
+      foundFacesOne: 'Found 1 face.',
+      foundFacesMany: 'Found {count} faces.',
+      errorCouldNotDetect: 'Could not detect faces.',
+      errorFaceLibFailed: 'The face-detection library failed to load — check your internet connection and reload the page.',
+      faceNumbered: 'Face {n}',
+      manualHintLeftEye: 'Click the LEFT eye (their left, your right)',
+      manualHintRightEye: 'Click the RIGHT eye',
+      manualHintMouth: 'Click the mouth',
+      doneLabel: '✓ Done',
+      adjustBtnTitle: "Drag to nudge or resize this face's eye/mouth boxes",
+      adjustDragHint: 'Drag inside a box to move it, drag its bottom-right corner to resize. Click "✓ Done" in the list when finished.',
+      redoBtnTitle: 'Re-place manually from scratch',
+      noPhotoOption: 'No photo',
+      narratorOption: 'Off-screen narrator',
+      lineTextPlaceholder: 'What they say…',
+      errorNoSpeechSynthesis: 'Your browser does not support speech synthesis.',
+      errorNoLineText: 'Add at least one script line with text.',
+      statusPreviewing: 'PREVIEWING',
+      facesReadyOne: '1 face ready',
+      facesReadyMany: '{count} faces ready',
+      errorNeedsDesktopBrowser: 'Recording needs a desktop browser (Chrome, Edge, or Firefox).',
+      errorNoRecordingFormat: 'No supported recording format found in this browser.',
+      shareTabAudioHintVideo: 'Choose "This Tab" and check "Share tab audio" in the picker — that lets us capture the generated speech.',
+      errorScreenSharingNotStarted: 'Screen sharing was not started: {message}',
+      errorNoTabAudio: 'No tab audio was shared — make sure to check "Share tab audio" in the picker and try again.',
+      statusRecording: 'RECORDING',
+      statusRecordingSaved: 'RECORDING SAVED',
+      recordingCompleteOne: 'Recording complete — 1 line.',
+      recordingCompleteMany: 'Recording complete — {count} lines.',
+      errorNoAudioFormat: 'No supported audio recording format found in this browser.',
+      shareTabAudioHintAudio: 'Choose "This Tab" and check "Share tab audio" — video isn\'t needed here, only the audio is kept.',
+      statusRecordingAudio: 'RECORDING AUDIO',
+      statusAudioSaved: 'AUDIO SAVED',
+      audioRecordedOne: 'Audio recorded — 1 line.',
+      audioRecordedMany: 'Audio recorded — {count} lines.'
+    },
+    es: {
+      heroSubtitle: 'Sube una foto, escribe un guion, y míralo hablar — las bocas se mueven y los ojos parpadean en sincronía con voz real.',
+      photosSceneHeading: 'Fotos / escenas',
+      addPhotoLabel: '+ Añadir una foto (nueva escena)',
+      photoHintDefault: 'Cada foto se convierte en su propia escena. Añade más de una para cortar entre personas o lugares a mitad de conversación — una línea del guion elige qué escena está en pantalla mientras se reproduce.',
+      photoHintNoScenes: 'Una foto, una o más personas. Una foto de frente y bien iluminada se detecta mejor.',
+      photoHintEditing: '{scenesCount} — editando "{name}" ({w}×{h})',
+      sceneCountOne: '1 escena',
+      sceneCountMany: '{count} escenas',
+      facesHeadingDefault: 'Caras',
+      facesHeadingScene: 'Caras — {scene}',
+      sceneWord: 'Escena',
+      sceneNumbered: 'Escena {n}',
+      autoDetectBtnLabel: '🔍 Detectar caras automáticamente',
+      placeManuallyLabel: '+ Colocar manualmente',
+      autoDetectHint: 'La detección automática usa un pequeño modelo de reconocimiento facial cargado desde un CDN (nada de tu foto se sube nunca a ningún lugar). Si se le pasa a alguien, coloca esa cara manualmente — haz clic en su ojo izquierdo, ojo derecho, luego boca.',
+      facesEmptyDefault: 'Aún no hay caras.',
+      facesEmptyNoPhoto: 'Añade una foto arriba primero.',
+      scriptHeading: 'Guion',
+      addLineBtnLabel: '+ Añadir línea',
+      voiceHeading: 'Voz',
+      voiceLabel: 'Voz',
+      rateLabel: 'Velocidad',
+      pitchLabel: 'Tono',
+      previewBtnLabel: '▶ Vista previa (sin grabar)',
+      stopBtnLabel: '■ Detener',
+      previewTitle: 'TALK FORGE — VISTA PREVIA',
+      statusNotStarted: 'SIN INICIAR',
+      stageEmptyStrong: 'Aún no hay foto.',
+      stageEmptyText: 'Sube una foto a la izquierda para empezar.',
+      recordVideoLabel: '🔴 Grabar video',
+      downloadVideoLabel: '⬇ Descargar video (.webm)',
+      recordAudioLabel: '🎙️ Grabar solo audio',
+      downloadAudioLabel: '⬇ Descargar audio (.webm)',
+      recordingDisclaimerHint: 'Este es un efecto de habla simple y estilizado (estiramiento de boca + parpadeo), no sincronización labial fotorrealista ni movimiento de cuerpo completo — eso necesitaría un modelo de video-IA en la nube de pago, que esta herramienta gratuita intencionalmente no usa. La grabación te pide compartir "esta pestaña" con audio, para poder capturar la voz generada en el video — nunca ve ni envía tu foto a ningún lugar.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tu foto y guion permanecen en tu navegador — solo el código del modelo de detección facial se obtiene de un CDN, nunca tu imagen. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      removeSceneTitle: 'Eliminar escena',
+      loadingModelLabel: 'Cargando modelo…',
+      detectingLabel: 'Detectando…',
+      errorNoFacesFound: 'No se encontraron caras automáticamente. Prueba "Colocar manualmente" en su lugar.',
+      foundFacesOne: 'Se encontró 1 cara.',
+      foundFacesMany: 'Se encontraron {count} caras.',
+      errorCouldNotDetect: 'No se pudieron detectar caras.',
+      errorFaceLibFailed: 'La librería de detección facial no se cargó — revisa tu conexión a internet y recarga la página.',
+      faceNumbered: 'Cara {n}',
+      manualHintLeftEye: 'Haz clic en el ojo IZQUIERDO (el suyo izquierdo, tu derecho)',
+      manualHintRightEye: 'Haz clic en el ojo DERECHO',
+      manualHintMouth: 'Haz clic en la boca',
+      doneLabel: '✓ Hecho',
+      adjustBtnTitle: 'Arrastra para ajustar o redimensionar los recuadros de ojos/boca de esta cara',
+      adjustDragHint: 'Arrastra dentro de un recuadro para moverlo, arrastra su esquina inferior derecha para redimensionar. Haz clic en "✓ Hecho" en la lista cuando termines.',
+      redoBtnTitle: 'Volver a colocar manualmente desde cero',
+      noPhotoOption: 'Sin foto',
+      narratorOption: 'Narrador fuera de pantalla',
+      lineTextPlaceholder: 'Qué dicen…',
+      errorNoSpeechSynthesis: 'Tu navegador no admite síntesis de voz.',
+      errorNoLineText: 'Añade al menos una línea de guion con texto.',
+      statusPreviewing: 'PREVISUALIZANDO',
+      facesReadyOne: '1 cara lista',
+      facesReadyMany: '{count} caras listas',
+      errorNeedsDesktopBrowser: 'La grabación requiere un navegador de escritorio (Chrome, Edge o Firefox).',
+      errorNoRecordingFormat: 'No se encontró un formato de grabación compatible en este navegador.',
+      shareTabAudioHintVideo: 'Elige "Esta pestaña" y marca "Compartir audio de la pestaña" en el selector — eso nos permite capturar la voz generada.',
+      errorScreenSharingNotStarted: 'No se inició la compartición de pantalla: {message}',
+      errorNoTabAudio: 'No se compartió audio de la pestaña — asegúrate de marcar "Compartir audio de la pestaña" en el selector e inténtalo de nuevo.',
+      statusRecording: 'GRABANDO',
+      statusRecordingSaved: 'GRABACIÓN GUARDADA',
+      recordingCompleteOne: 'Grabación completa — 1 línea.',
+      recordingCompleteMany: 'Grabación completa — {count} líneas.',
+      errorNoAudioFormat: 'No se encontró un formato de audio compatible en este navegador.',
+      shareTabAudioHintAudio: 'Elige "Esta pestaña" y marca "Compartir audio de la pestaña" — el video no es necesario aquí, solo se conserva el audio.',
+      statusRecordingAudio: 'GRABANDO AUDIO',
+      statusAudioSaved: 'AUDIO GUARDADO',
+      audioRecordedOne: 'Audio grabado — 1 línea.',
+      audioRecordedMany: 'Audio grabado — {count} líneas.'
+    },
+    ar: {
+      heroSubtitle: 'ارفع صورة، اكتب نصًا، وشاهدها تتحدث — الأفواه تتحرك والعيون ترمش بتزامن مع كلام حقيقي.',
+      photosSceneHeading: 'الصور / المشاهد',
+      addPhotoLabel: '+ إضافة صورة (مشهد جديد)',
+      photoHintDefault: 'تصبح كل صورة مشهدًا خاصًا بها. أضف أكثر من واحدة للتنقل بين الأشخاص أو الأماكن في منتصف المحادثة — يختار سطر النص أي مشهد يظهر على الشاشة أثناء تشغيله.',
+      photoHintNoScenes: 'صورة واحدة، شخص واحد أو أكثر. الصورة الأمامية جيدة الإضاءة تُكتشف بشكل أفضل.',
+      photoHintEditing: '{scenesCount} — تحرير "{name}" ({w}×{h})',
+      sceneCountOne: 'مشهد واحد',
+      sceneCountMany: '{count} مشاهد',
+      facesHeadingDefault: 'الوجوه',
+      facesHeadingScene: 'الوجوه — {scene}',
+      sceneWord: 'مشهد',
+      sceneNumbered: 'مشهد {n}',
+      autoDetectBtnLabel: '🔍 اكتشاف الوجوه تلقائيًا',
+      placeManuallyLabel: '+ وضع يدوي',
+      autoDetectHint: 'يستخدم الاكتشاف التلقائي نموذجًا صغيرًا للتعرف على الوجوه محملًا من CDN (لا شيء من صورتك يُرفع إلى أي مكان أبدًا). إذا فاته شخص ما، ضع ذلك الوجه يدويًا — انقر على عينه اليسرى، ثم اليمنى، ثم الفم.',
+      facesEmptyDefault: 'لا توجد وجوه بعد.',
+      facesEmptyNoPhoto: 'أضف صورة أعلاه أولاً.',
+      scriptHeading: 'النص',
+      addLineBtnLabel: '+ إضافة سطر',
+      voiceHeading: 'الصوت',
+      voiceLabel: 'الصوت',
+      rateLabel: 'السرعة',
+      pitchLabel: 'طبقة الصوت',
+      previewBtnLabel: '▶ معاينة (بدون تسجيل)',
+      stopBtnLabel: '■ إيقاف',
+      previewTitle: 'TALK FORGE — معاينة',
+      statusNotStarted: 'لم يبدأ',
+      stageEmptyStrong: 'لا توجد صورة بعد.',
+      stageEmptyText: 'ارفع صورة على اليسار للبدء.',
+      recordVideoLabel: '🔴 تسجيل فيديو',
+      downloadVideoLabel: '⬇ تنزيل الفيديو (.webm)',
+      recordAudioLabel: '🎙️ تسجيل الصوت فقط',
+      downloadAudioLabel: '⬇ تنزيل الصوت (.webm)',
+      recordingDisclaimerHint: 'هذا تأثير كلام بسيط ومُصمم (تمدد الفم + الرمش)، وليس مزامنة شفاه واقعية أو حركة كاملة للجسم — سيحتاج ذلك إلى نموذج ذكاء اصطناعي مدفوع للفيديو السحابي، وهو ما لا تستخدمه هذه الأداة المجانية عن قصد. يطلب منك التسجيل مشاركة "هذا التبويب" مع الصوت، حتى يتمكن من التقاط الكلام المُنشأ في الفيديو — لا يرى أو يرسل صورتك إلى أي مكان أبدًا.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. تبقى صورتك ونصك في متصفحك — يُجلب فقط كود نموذج اكتشاف الوجوه من CDN، وليس صورتك أبدًا. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      removeSceneTitle: 'إزالة المشهد',
+      loadingModelLabel: 'جارٍ تحميل النموذج…',
+      detectingLabel: 'جارٍ الاكتشاف…',
+      errorNoFacesFound: 'لم يتم العثور على وجوه تلقائيًا. جرّب "وضع يدوي" بدلاً من ذلك.',
+      foundFacesOne: 'تم العثور على وجه واحد.',
+      foundFacesMany: 'تم العثور على {count} وجوه.',
+      errorCouldNotDetect: 'تعذر اكتشاف الوجوه.',
+      errorFaceLibFailed: 'فشل تحميل مكتبة اكتشاف الوجوه — تحقق من اتصالك بالإنترنت وأعد تحميل الصفحة.',
+      faceNumbered: 'وجه {n}',
+      manualHintLeftEye: 'انقر على العين اليسرى (يسارهم، يمينك)',
+      manualHintRightEye: 'انقر على العين اليمنى',
+      manualHintMouth: 'انقر على الفم',
+      doneLabel: '✓ تم',
+      adjustBtnTitle: 'اسحب لتحريك أو تغيير حجم مربعات العين/الفم لهذا الوجه',
+      adjustDragHint: 'اسحب داخل مربع لتحريكه، اسحب زاويته السفلية اليمنى لتغيير حجمه. انقر على "✓ تم" في القائمة عند الانتهاء.',
+      redoBtnTitle: 'إعادة الوضع يدويًا من الصفر',
+      noPhotoOption: 'لا توجد صورة',
+      narratorOption: 'راوٍ خارج الشاشة',
+      lineTextPlaceholder: 'ماذا يقولون…',
+      errorNoSpeechSynthesis: 'متصفحك لا يدعم تحويل النص إلى كلام.',
+      errorNoLineText: 'أضف سطرًا واحدًا على الأقل من النص يحتوي على كلام.',
+      statusPreviewing: 'جارٍ المعاينة',
+      facesReadyOne: 'وجه واحد جاهز',
+      facesReadyMany: '{count} وجوه جاهزة',
+      errorNeedsDesktopBrowser: 'يتطلب التسجيل متصفح سطح مكتب (Chrome أو Edge أو Firefox).',
+      errorNoRecordingFormat: 'لم يتم العثور على تنسيق تسجيل مدعوم في هذا المتصفح.',
+      shareTabAudioHintVideo: 'اختر "هذا التبويب" وفعّل "مشاركة صوت التبويب" في المحدد — يتيح لنا ذلك التقاط الكلام المُنشأ.',
+      errorScreenSharingNotStarted: 'لم تبدأ مشاركة الشاشة: {message}',
+      errorNoTabAudio: 'لم تتم مشاركة صوت التبويب — تأكد من تفعيل "مشاركة صوت التبويب" في المحدد وحاول مرة أخرى.',
+      statusRecording: 'جارٍ التسجيل',
+      statusRecordingSaved: 'تم حفظ التسجيل',
+      recordingCompleteOne: 'اكتمل التسجيل — سطر واحد.',
+      recordingCompleteMany: 'اكتمل التسجيل — {count} أسطر.',
+      errorNoAudioFormat: 'لم يتم العثور على تنسيق صوت مدعوم في هذا المتصفح.',
+      shareTabAudioHintAudio: 'اختر "هذا التبويب" وفعّل "مشاركة صوت التبويب" — الفيديو غير مطلوب هنا، يُحتفظ بالصوت فقط.',
+      statusRecordingAudio: 'جارٍ تسجيل الصوت',
+      statusAudioSaved: 'تم حفظ الصوت',
+      audioRecordedOne: 'تم تسجيل الصوت — سطر واحد.',
+      audioRecordedMany: 'تم تسجيل الصوت — {count} أسطر.'
+    },
+    zh: {
+      heroSubtitle: '上传一张照片，编写一段脚本，看它开口说话——嘴巴移动，眼睛眨动，与真实语音同步。',
+      photosSceneHeading: '照片 / 场景',
+      addPhotoLabel: '+ 添加照片（新场景）',
+      photoHintDefault: '每张照片都会成为独立的场景。添加多张照片可以在对话中途在不同的人或地点之间切换——脚本行会选择播放时屏幕上显示哪个场景。',
+      photoHintNoScenes: '一张照片，一个或多个人。正面、光线良好的照片检测效果最佳。',
+      photoHintEditing: '{scenesCount} — 正在编辑"{name}"（{w}×{h}）',
+      sceneCountOne: '1 个场景',
+      sceneCountMany: '{count} 个场景',
+      facesHeadingDefault: '面孔',
+      facesHeadingScene: '面孔 — {scene}',
+      sceneWord: '场景',
+      sceneNumbered: '场景 {n}',
+      autoDetectBtnLabel: '🔍 自动检测面孔',
+      placeManuallyLabel: '+ 手动放置',
+      autoDetectHint: '自动检测使用从 CDN 加载的小型人脸识别模型（你照片的任何内容都绝不会上传到任何地方）。如果它漏掉了某人，请手动放置该面孔——依次点击对方的左眼、右眼，然后是嘴巴。',
+      facesEmptyDefault: '还没有面孔。',
+      facesEmptyNoPhoto: '请先在上方添加照片。',
+      scriptHeading: '脚本',
+      addLineBtnLabel: '+ 添加台词',
+      voiceHeading: '语音',
+      voiceLabel: '语音',
+      rateLabel: '语速',
+      pitchLabel: '音调',
+      previewBtnLabel: '▶ 预览（不录制）',
+      stopBtnLabel: '■ 停止',
+      previewTitle: 'TALK FORGE — 预览',
+      statusNotStarted: '尚未开始',
+      stageEmptyStrong: '还没有照片。',
+      stageEmptyText: '在左侧上传照片以开始。',
+      recordVideoLabel: '🔴 录制视频',
+      downloadVideoLabel: '⬇ 下载视频（.webm）',
+      recordAudioLabel: '🎙️ 仅录制音频',
+      downloadAudioLabel: '⬇ 下载音频（.webm）',
+      recordingDisclaimerHint: '这是一种简单的风格化说话效果（嘴部伸展+眨眼），不是逼真的唇形同步或全身动作——那需要付费的云端视频 AI 模型，而这个免费工具刻意不使用它。录制时会要求你共享带音频的"此标签页"，以便将生成的语音捕获到视频中——它绝不会查看或发送你的照片到任何地方。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的照片和脚本保留在浏览器中——只有人脸检测模型的代码是从 CDN 获取的，绝不会获取你的图像。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      removeSceneTitle: '移除场景',
+      loadingModelLabel: '正在加载模型…',
+      detectingLabel: '检测中…',
+      errorNoFacesFound: '未能自动找到面孔。请尝试改用"手动放置"。',
+      foundFacesOne: '找到 1 张面孔。',
+      foundFacesMany: '找到 {count} 张面孔。',
+      errorCouldNotDetect: '无法检测面孔。',
+      errorFaceLibFailed: '人脸检测库加载失败——请检查你的网络连接并重新加载页面。',
+      faceNumbered: '面孔 {n}',
+      manualHintLeftEye: '点击左眼（对方的左眼，你的右侧）',
+      manualHintRightEye: '点击右眼',
+      manualHintMouth: '点击嘴巴',
+      doneLabel: '✓ 完成',
+      adjustBtnTitle: '拖动以微调或调整此面孔的眼睛/嘴巴框大小',
+      adjustDragHint: '在框内拖动可移动它，拖动其右下角可调整大小。完成后点击列表中的"✓ 完成"。',
+      redoBtnTitle: '从头开始重新手动放置',
+      noPhotoOption: '无照片',
+      narratorOption: '画外音旁白',
+      lineTextPlaceholder: '他们说的话…',
+      errorNoSpeechSynthesis: '你的浏览器不支持语音合成。',
+      errorNoLineText: '请至少添加一行带文字的脚本。',
+      statusPreviewing: '预览中',
+      facesReadyOne: '1 张面孔已就绪',
+      facesReadyMany: '{count} 张面孔已就绪',
+      errorNeedsDesktopBrowser: '录制需要桌面浏览器（Chrome、Edge 或 Firefox）。',
+      errorNoRecordingFormat: '此浏览器未找到支持的录制格式。',
+      shareTabAudioHintVideo: '在选择器中选择"此标签页"并勾选"共享标签页音频"——这样我们才能捕获生成的语音。',
+      errorScreenSharingNotStarted: '屏幕共享未启动：{message}',
+      errorNoTabAudio: '未共享标签页音频——请确保在选择器中勾选"共享标签页音频"后重试。',
+      statusRecording: '录制中',
+      statusRecordingSaved: '录制已保存',
+      recordingCompleteOne: '录制完成——1 行。',
+      recordingCompleteMany: '录制完成——{count} 行。',
+      errorNoAudioFormat: '此浏览器未找到支持的音频录制格式。',
+      shareTabAudioHintAudio: '选择"此标签页"并勾选"共享标签页音频"——这里不需要视频，只保留音频。',
+      statusRecordingAudio: '正在录制音频',
+      statusAudioSaved: '音频已保存',
+      audioRecordedOne: '音频已录制——1 行。',
+      audioRecordedMany: '音频已录制——{count} 行。'
+    },
+    sw: {
+      heroSubtitle: 'Pakia picha, andika hati, na uione ikizungumza — midomo husogea na macho hupepesa kwa mpangilio na sauti halisi.',
+      photosSceneHeading: 'Picha / matukio',
+      addPhotoLabel: '+ Ongeza picha (tukio jipya)',
+      photoHintDefault: 'Kila picha inakuwa tukio lake mwenyewe. Ongeza zaidi ya moja ili kubadili kati ya watu au maeneo katikati ya mazungumzo — mstari wa hati huchagua tukio gani liko kwenye skrini wakati unachezwa.',
+      photoHintNoScenes: 'Picha moja, mtu mmoja au zaidi. Picha inayoelekea mbele, yenye mwanga mzuri hugundulika vizuri zaidi.',
+      photoHintEditing: '{scenesCount} — inahariri "{name}" ({w}×{h})',
+      sceneCountOne: 'Tukio 1',
+      sceneCountMany: 'Matukio {count}',
+      facesHeadingDefault: 'Nyuso',
+      facesHeadingScene: 'Nyuso — {scene}',
+      sceneWord: 'Tukio',
+      sceneNumbered: 'Tukio {n}',
+      autoDetectBtnLabel: '🔍 Gundua nyuso kiotomatiki',
+      placeManuallyLabel: '+ Weka kwa mkono',
+      autoDetectHint: 'Ugunduzi wa kiotomatiki hutumia kielelezo kidogo cha kutambua nyuso kilichopakiwa kutoka CDN (hakuna chochote kuhusu picha yako kinachopakiwa popote kamwe). Ikiwa itamkosa mtu, weka uso huo kwa mkono — bofya jicho lake la kushoto, la kulia, kisha mdomo.',
+      facesEmptyDefault: 'Hakuna nyuso bado.',
+      facesEmptyNoPhoto: 'Ongeza picha hapo juu kwanza.',
+      scriptHeading: 'Hati',
+      addLineBtnLabel: '+ Ongeza mstari',
+      voiceHeading: 'Sauti',
+      voiceLabel: 'Sauti',
+      rateLabel: 'Kasi',
+      pitchLabel: 'Mtindo wa sauti',
+      previewBtnLabel: '▶ Onyesho la awali (bila kurekodi)',
+      stopBtnLabel: '■ Simamisha',
+      previewTitle: 'TALK FORGE — MUONEKANO',
+      statusNotStarted: 'HAIJAANZA',
+      stageEmptyStrong: 'Hakuna picha bado.',
+      stageEmptyText: 'Pakia picha upande wa kushoto kuanza.',
+      recordVideoLabel: '🔴 Rekodi video',
+      downloadVideoLabel: '⬇ Pakua video (.webm)',
+      recordAudioLabel: '🎙️ Rekodi sauti tu',
+      downloadAudioLabel: '⬇ Pakua sauti (.webm)',
+      recordingDisclaimerHint: 'Huu ni mfano rahisi, wa kimtindo wa kuzungumza (kunyoosha mdomo + kupepesa), si mazungumzo halisi ya midomo au mwendo wa mwili mzima — hilo lingehitaji kielelezo cha AI cha video cha wingu kinacholipiwa, ambacho chombo hiki cha bure hakikitumii kwa makusudi. Kurekodi kunakuomba kushiriki "kichupo hiki" na sauti, ili kiweze kunasa hotuba iliyotengenezwa kwenye video — kamwe hakioni au kutuma picha yako popote.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Picha yako na hati vinabaki kwenye kivinjari chako — ni msimbo wa kielelezo cha kutambua nyuso tu unaopatikana kutoka CDN, si picha yako kamwe. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      removeSceneTitle: 'Ondoa tukio',
+      loadingModelLabel: 'Inapakia kielelezo…',
+      detectingLabel: 'Inagundua…',
+      errorNoFacesFound: 'Hakuna nyuso zilizopatikana kiotomatiki. Jaribu "Weka kwa mkono" badala yake.',
+      foundFacesOne: 'Uso 1 umepatikana.',
+      foundFacesMany: 'Nyuso {count} zimepatikana.',
+      errorCouldNotDetect: 'Imeshindwa kugundua nyuso.',
+      errorFaceLibFailed: 'Maktaba ya kutambua nyuso imeshindwa kupakia — angalia muunganisho wako wa intaneti na upakie upya ukurasa.',
+      faceNumbered: 'Uso {n}',
+      manualHintLeftEye: 'Bofya jicho la KUSHOTO (lao la kushoto, lako la kulia)',
+      manualHintRightEye: 'Bofya jicho la KULIA',
+      manualHintMouth: 'Bofya mdomo',
+      doneLabel: '✓ Imekamilika',
+      adjustBtnTitle: 'Buruta ili kusogeza au kubadilisha ukubwa wa masanduku ya jicho/mdomo ya uso huu',
+      adjustDragHint: 'Buruta ndani ya sanduku kulisogeza, buruta kona yake ya chini kulia kubadilisha ukubwa. Bofya "✓ Imekamilika" kwenye orodha ukimaliza.',
+      redoBtnTitle: 'Weka tena kwa mkono kutoka mwanzo',
+      noPhotoOption: 'Hakuna picha',
+      narratorOption: 'Msimulizi wa nje ya skrini',
+      lineTextPlaceholder: 'Wanachosema…',
+      errorNoSpeechSynthesis: 'Kivinjari chako hakitumii usanisi wa hotuba.',
+      errorNoLineText: 'Ongeza angalau mstari mmoja wa hati wenye maandishi.',
+      statusPreviewing: 'INAONYESHA AWALI',
+      facesReadyOne: 'Uso 1 tayari',
+      facesReadyMany: 'Nyuso {count} tayari',
+      errorNeedsDesktopBrowser: 'Kurekodi kunahitaji kivinjari cha eneo-kazi (Chrome, Edge, au Firefox).',
+      errorNoRecordingFormat: 'Hakuna muundo wa kurekodi unaotumika uliopatikana kwenye kivinjari hiki.',
+      shareTabAudioHintVideo: 'Chagua "Kichupo Hiki" na uchague "Shiriki sauti ya kichupo" kwenye kichaguzi — hiyo inaturuhusu kunasa hotuba iliyotengenezwa.',
+      errorScreenSharingNotStarted: 'Kushiriki skrini hakukuanzishwa: {message}',
+      errorNoTabAudio: 'Hakuna sauti ya kichupo iliyoshirikiwa — hakikisha umechagua "Shiriki sauti ya kichupo" kwenye kichaguzi na ujaribu tena.',
+      statusRecording: 'INAREKODI',
+      statusRecordingSaved: 'REKODI IMEHIFADHIWA',
+      recordingCompleteOne: 'Kurekodi kumekamilika — mstari 1.',
+      recordingCompleteMany: 'Kurekodi kumekamilika — mistari {count}.',
+      errorNoAudioFormat: 'Hakuna muundo wa sauti unaotumika uliopatikana kwenye kivinjari hiki.',
+      shareTabAudioHintAudio: 'Chagua "Kichupo Hiki" na uchague "Shiriki sauti ya kichupo" — video haihitajiki hapa, sauti tu ndiyo inayohifadhiwa.',
+      statusRecordingAudio: 'INAREKODI SAUTI',
+      statusAudioSaved: 'SAUTI IMEHIFADHIWA',
+      audioRecordedOne: 'Sauti imerekodiwa — mstari 1.',
+      audioRecordedMany: 'Sauti imerekodiwa — mistari {count}.'
+    },
+    sv: {
+      heroSubtitle: "Ladda upp ett foto, skriv ett manus och se det prata — munnar rör sig och ögon blinkar i takt med riktigt tal.",
+      photosSceneHeading: "Foton / scener",
+      addPhotoLabel: "+ Lägg till ett foto (ny scen)",
+      photoHintDefault: "Varje foto blir en egen scen. Lägg till fler än ett för att klippa mellan personer eller platser mitt i samtalet — en manusrad väljer vilken scen som visas medan den spelas.",
+      photoHintNoScenes: "Ett foto, en eller flera personer. Ett välbelyst foto rakt framifrån fungerar bäst.",
+      photoHintEditing: "{scenesCount} — redigerar \"{name}\" ({w}×{h})",
+      sceneCountOne: "1 scen",
+      sceneCountMany: "{count} scener",
+      facesHeadingDefault: "Ansikten",
+      facesHeadingScene: "Ansikten — {scene}",
+      sceneWord: "Scen",
+      sceneNumbered: "Scen {n}",
+      autoDetectBtnLabel: "🔍 Hitta ansikten automatiskt",
+      placeManuallyLabel: "+ Placera manuellt",
+      autoDetectHint: "Automatisk sökning använder en liten ansiktsigenkänningsmodell som laddas från ett CDN (ingenting om ditt foto laddas någonsin upp). Om den missar någon, placera ansiktet manuellt — klicka på vänster öga, höger öga och sedan munnen.",
+      facesEmptyDefault: "Inga ansikten ännu.",
+      facesEmptyNoPhoto: "Lägg till ett foto ovan först.",
+      scriptHeading: "Manus",
+      addLineBtnLabel: "+ Lägg till rad",
+      voiceHeading: "Röst",
+      voiceLabel: "Röst",
+      rateLabel: "Hastighet",
+      pitchLabel: "Tonhöjd",
+      previewBtnLabel: "▶ Förhandsvisa (ingen inspelning)",
+      stopBtnLabel: "■ Stopp",
+      previewTitle: "TALK FORGE — FÖRHANDSVISNING",
+      statusNotStarted: "INTE PÅBÖRJAD",
+      stageEmptyStrong: "Inget foto ännu.",
+      stageEmptyText: "Ladda upp ett foto till vänster för att komma igång.",
+      recordVideoLabel: "🔴 Spela in video",
+      downloadVideoLabel: "⬇ Ladda ner video (.webm)",
+      recordAudioLabel: "🎙️ Spela bara in ljud",
+      downloadAudioLabel: "⬇ Ladda ner ljud (.webm)",
+      recordingDisclaimerHint: "Det här är en enkel, stiliserad pratande effekt (munrörelse + blinkningar), inte fotorealistisk läppsynk eller helkroppsrörelse — det skulle kräva en betald video-AI i molnet, vilket det här gratisverktyget medvetet inte använder. Inspelningen ber dig dela \"den här fliken\" med ljud så att det genererade talet kommer med i videon — den ser eller skickar aldrig ditt foto någonstans.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Ditt foto och manus stannar i din webbläsare — bara ansiktsigenkänningsmodellens kod hämtas från ett CDN, aldrig din bild. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      removeSceneTitle: "Ta bort scen",
+      loadingModelLabel: "Laddar modell…",
+      detectingLabel: "Söker…",
+      errorNoFacesFound: "Inga ansikten hittades automatiskt. Prova \"Placera manuellt\" i stället.",
+      foundFacesOne: "Hittade 1 ansikte.",
+      foundFacesMany: "Hittade {count} ansikten.",
+      errorCouldNotDetect: "Kunde inte hitta ansikten.",
+      errorFaceLibFailed: "Ansiktsigenkänningsbiblioteket kunde inte laddas — kontrollera din internetanslutning och ladda om sidan.",
+      faceNumbered: "Ansikte {n}",
+      manualHintLeftEye: "Klicka på VÄNSTER öga (personens vänstra, ditt högra)",
+      manualHintRightEye: "Klicka på HÖGER öga",
+      manualHintMouth: "Klicka på munnen",
+      doneLabel: "✓ Klar",
+      adjustBtnTitle: "Dra för att flytta eller ändra storlek på ögon-/munrutorna",
+      adjustDragHint: "Dra inuti en ruta för att flytta den, dra i dess nedre högra hörn för att ändra storlek. Klicka på \"✓ Klar\" i listan när du är färdig.",
+      redoBtnTitle: "Placera om manuellt från början",
+      noPhotoOption: "Inget foto",
+      narratorOption: "Berättare utanför bild",
+      lineTextPlaceholder: "Vad de säger…",
+      errorNoSpeechSynthesis: "Din webbläsare stöder inte talsyntes.",
+      errorNoLineText: "Lägg till minst en manusrad med text.",
+      statusPreviewing: "FÖRHANDSVISAR",
+      facesReadyOne: "1 ansikte redo",
+      facesReadyMany: "{count} ansikten redo",
+      errorNeedsDesktopBrowser: "Inspelning kräver en webbläsare på dator (Chrome, Edge eller Firefox).",
+      errorNoRecordingFormat: "Inget inspelningsformat som stöds hittades i den här webbläsaren.",
+      shareTabAudioHintVideo: "Välj \"Den här fliken\" och kryssa i \"Dela flikens ljud\" i väljaren — då kan vi fånga det genererade talet.",
+      errorScreenSharingNotStarted: "Skärmdelningen startades inte: {message}",
+      errorNoTabAudio: "Inget flikljud delades — kryssa i \"Dela flikens ljud\" i väljaren och försök igen.",
+      statusRecording: "SPELAR IN",
+      statusRecordingSaved: "INSPELNING SPARAD",
+      recordingCompleteOne: "Inspelningen är klar — 1 rad.",
+      recordingCompleteMany: "Inspelningen är klar — {count} rader.",
+      errorNoAudioFormat: "Inget ljudinspelningsformat som stöds hittades i den här webbläsaren.",
+      shareTabAudioHintAudio: "Välj \"Den här fliken\" och kryssa i \"Dela flikens ljud\" — video behövs inte här, bara ljudet sparas.",
+      statusRecordingAudio: "SPELAR IN LJUD",
+      statusAudioSaved: "LJUD SPARAT",
+      audioRecordedOne: "Ljud inspelat — 1 rad.",
+      audioRecordedMany: "Ljud inspelat — {count} rader."
+    },
+    de: {
+      heroSubtitle: "Lade ein Foto hoch, schreib ein Skript und sieh es sprechen — Münder bewegen sich und Augen blinzeln synchron zu echter Sprache.",
+      photosSceneHeading: "Fotos / Szenen",
+      addPhotoLabel: "+ Foto hinzufügen (neue Szene)",
+      photoHintDefault: "Jedes Foto wird eine eigene Szene. Füge mehrere hinzu, um mitten im Gespräch zwischen Personen oder Orten zu schneiden — eine Skriptzeile bestimmt, welche Szene beim Abspielen zu sehen ist.",
+      photoHintNoScenes: "Ein Foto, eine oder mehrere Personen. Ein frontales, gut beleuchtetes Foto wird am besten erkannt.",
+      photoHintEditing: "{scenesCount} — bearbeite \"{name}\" ({w}×{h})",
+      sceneCountOne: "1 Szene",
+      sceneCountMany: "{count} Szenen",
+      facesHeadingDefault: "Gesichter",
+      facesHeadingScene: "Gesichter — {scene}",
+      sceneWord: "Szene",
+      sceneNumbered: "Szene {n}",
+      autoDetectBtnLabel: "🔍 Gesichter automatisch erkennen",
+      placeManuallyLabel: "+ Manuell setzen",
+      autoDetectHint: "Die automatische Erkennung nutzt ein kleines Gesichtserkennungsmodell von einem CDN (nichts von deinem Foto wird je hochgeladen). Wenn es jemanden übersieht, setz das Gesicht manuell — klick auf das linke Auge, das rechte Auge und dann den Mund.",
+      facesEmptyDefault: "Noch keine Gesichter.",
+      facesEmptyNoPhoto: "Füge zuerst oben ein Foto hinzu.",
+      scriptHeading: "Drehbuch",
+      addLineBtnLabel: "+ Zeile hinzufügen",
+      voiceHeading: "Stimme",
+      voiceLabel: "Stimme",
+      rateLabel: "Tempo",
+      pitchLabel: "Tonhöhe",
+      previewBtnLabel: "▶ Vorschau (ohne Aufnahme)",
+      stopBtnLabel: "■ Stopp",
+      previewTitle: "TALK FORGE — VORSCHAU",
+      statusNotStarted: "NICHT GESTARTET",
+      stageEmptyStrong: "Noch kein Foto.",
+      stageEmptyText: "Lade links ein Foto hoch, um zu beginnen.",
+      recordVideoLabel: "🔴 Video aufnehmen",
+      downloadVideoLabel: "⬇ Video herunterladen (.webm)",
+      recordAudioLabel: "🎙️ Nur Ton aufnehmen",
+      downloadAudioLabel: "⬇ Ton herunterladen (.webm)",
+      recordingDisclaimerHint: "Das ist ein einfacher, stilisierter Sprecheffekt (Mund dehnen + Blinzeln), keine fotorealistische Lippensynchronisation oder Ganzkörperbewegung — dafür bräuchte es ein kostenpflichtiges Cloud-Video-KI-Modell, das dieses kostenlose Werkzeug bewusst nicht nutzt. Die Aufnahme bittet dich, \"diesen Tab\" mit Ton zu teilen, damit die erzeugte Sprache ins Video kommt — dein Foto wird dabei nie gesehen oder gesendet.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Dein Foto und Skript bleiben in deinem Browser — nur der Code des Gesichtserkennungsmodells wird von einem CDN geladen, nie dein Bild. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      removeSceneTitle: "Szene entfernen",
+      loadingModelLabel: "Modell wird geladen…",
+      detectingLabel: "Wird erkannt…",
+      errorNoFacesFound: "Keine Gesichter automatisch gefunden. Versuch stattdessen \"Manuell setzen\".",
+      foundFacesOne: "1 Gesicht gefunden.",
+      foundFacesMany: "{count} Gesichter gefunden.",
+      errorCouldNotDetect: "Gesichter konnten nicht erkannt werden.",
+      errorFaceLibFailed: "Die Gesichtserkennungsbibliothek konnte nicht geladen werden — prüfe deine Internetverbindung und lade die Seite neu.",
+      faceNumbered: "Gesicht {n}",
+      manualHintLeftEye: "Klick auf das LINKE Auge (ihr linkes, dein rechtes)",
+      manualHintRightEye: "Klick auf das RECHTE Auge",
+      manualHintMouth: "Klick auf den Mund",
+      doneLabel: "✓ Fertig",
+      adjustBtnTitle: "Ziehen, um die Augen-/Mundfelder dieses Gesichts zu verschieben oder zu skalieren",
+      adjustDragHint: "Zieh innerhalb eines Felds, um es zu verschieben, zieh an der unteren rechten Ecke für die Größe. Klick in der Liste auf \"✓ Fertig\", wenn du fertig bist.",
+      redoBtnTitle: "Von vorn manuell neu setzen",
+      noPhotoOption: "Kein Foto",
+      narratorOption: "Erzähler außerhalb des Bildes",
+      lineTextPlaceholder: "Was gesagt wird…",
+      errorNoSpeechSynthesis: "Dein Browser unterstützt keine Sprachausgabe.",
+      errorNoLineText: "Füge mindestens eine Skriptzeile mit Text hinzu.",
+      statusPreviewing: "VORSCHAU LÄUFT",
+      facesReadyOne: "1 Gesicht bereit",
+      facesReadyMany: "{count} Gesichter bereit",
+      errorNeedsDesktopBrowser: "Aufnehmen braucht einen Desktop-Browser (Chrome, Edge oder Firefox).",
+      errorNoRecordingFormat: "In diesem Browser wurde kein unterstütztes Aufnahmeformat gefunden.",
+      shareTabAudioHintVideo: "Wähle \"Dieser Tab\" und kreuze in der Auswahl \"Tab-Audio teilen\" an — so können wir die erzeugte Sprache aufnehmen.",
+      errorScreenSharingNotStarted: "Bildschirmteilen wurde nicht gestartet: {message}",
+      errorNoTabAudio: "Es wurde kein Tab-Ton geteilt — kreuze in der Auswahl unbedingt \"Tab-Audio teilen\" an und versuch es erneut.",
+      statusRecording: "AUFNAHME",
+      statusRecordingSaved: "AUFNAHME GESPEICHERT",
+      recordingCompleteOne: "Aufnahme fertig — 1 Zeile.",
+      recordingCompleteMany: "Aufnahme fertig — {count} Zeilen.",
+      errorNoAudioFormat: "In diesem Browser wurde kein unterstütztes Tonaufnahmeformat gefunden.",
+      shareTabAudioHintAudio: "Wähle \"Dieser Tab\" und kreuze \"Tab-Audio teilen\" an — Video wird hier nicht gebraucht, nur der Ton wird behalten.",
+      statusRecordingAudio: "TON WIRD AUFGENOMMEN",
+      statusAudioSaved: "TON GESPEICHERT",
+      audioRecordedOne: "Ton aufgenommen — 1 Zeile.",
+      audioRecordedMany: "Ton aufgenommen — {count} Zeilen."
+    },
+    pt: {
+      heroSubtitle: "Envie uma foto, escreva um roteiro e veja falar — bocas se mexem e olhos piscam em sincronia com a fala.",
+      photosSceneHeading: "Fotos / cenas",
+      addPhotoLabel: "+ Adicionar uma foto (nova cena)",
+      photoHintDefault: "Cada foto vira uma cena. Adicione mais de uma para alternar entre pessoas ou lugares no meio da conversa — cada fala do roteiro escolhe qual cena aparece enquanto toca.",
+      photoHintNoScenes: "Uma foto, uma ou mais pessoas. Uma foto de frente e bem iluminada é detectada melhor.",
+      photoHintEditing: "{scenesCount} — editando \"{name}\" ({w}×{h})",
+      sceneCountOne: "1 cena",
+      sceneCountMany: "{count} cenas",
+      facesHeadingDefault: "Rostos",
+      facesHeadingScene: "Rostos — {scene}",
+      sceneWord: "Cena",
+      sceneNumbered: "Cena {n}",
+      autoDetectBtnLabel: "🔍 Detectar rostos automaticamente",
+      placeManuallyLabel: "+ Marcar manualmente",
+      autoDetectHint: "A detecção automática usa um pequeno modelo de reconhecimento facial carregado de uma CDN (nada da sua foto é enviado). Se faltar alguém, marque o rosto à mão — clique no olho esquerdo, no direito e depois na boca.",
+      facesEmptyDefault: "Nenhum rosto ainda.",
+      facesEmptyNoPhoto: "Adicione uma foto acima primeiro.",
+      scriptHeading: "Roteiro",
+      addLineBtnLabel: "+ Adicionar fala",
+      voiceHeading: "Voz",
+      voiceLabel: "Voz",
+      rateLabel: "Velocidade",
+      pitchLabel: "Tom",
+      previewBtnLabel: "▶ Prévia (sem gravar)",
+      stopBtnLabel: "■ Parar",
+      previewTitle: "TALK FORGE — PRÉVIA",
+      statusNotStarted: "NÃO INICIADO",
+      stageEmptyStrong: "Nenhuma foto ainda.",
+      stageEmptyText: "Envie uma foto à esquerda para começar.",
+      recordVideoLabel: "🔴 Gravar vídeo",
+      downloadVideoLabel: "⬇ Baixar vídeo (.webm)",
+      recordAudioLabel: "🎙️ Gravar só o áudio",
+      downloadAudioLabel: "⬇ Baixar áudio (.webm)",
+      recordingDisclaimerHint: "É um efeito simples e estilizado de fala (boca esticando + piscadas), não sincronia labial fotorrealista nem movimento do corpo — isso exigiria um modelo de vídeo de IA pago na nuvem, que esta ferramenta grátis de propósito não usa. A gravação pede para compartilhar \"esta aba\" com áudio, para capturar a fala gerada no vídeo — ela nunca vê nem envia sua foto.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Sua foto e roteiro ficam no seu navegador — só o código do modelo de detecção facial vem de uma CDN, nunca sua imagem. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      removeSceneTitle: "Remover cena",
+      loadingModelLabel: "Carregando modelo…",
+      detectingLabel: "Detectando…",
+      errorNoFacesFound: "Nenhum rosto encontrado automaticamente. Tente \"Marcar manualmente\".",
+      foundFacesOne: "1 rosto encontrado.",
+      foundFacesMany: "{count} rostos encontrados.",
+      errorCouldNotDetect: "Não foi possível detectar rostos.",
+      errorFaceLibFailed: "A biblioteca de detecção facial não carregou — verifique sua conexão e recarregue a página.",
+      faceNumbered: "Rosto {n}",
+      manualHintLeftEye: "Clique no olho ESQUERDO (o esquerdo da pessoa, o seu direito)",
+      manualHintRightEye: "Clique no olho DIREITO",
+      manualHintMouth: "Clique na boca",
+      doneLabel: "✓ Pronto",
+      adjustBtnTitle: "Arraste para mover ou redimensionar as caixas de olhos/boca deste rosto",
+      adjustDragHint: "Arraste dentro de uma caixa para mover, arraste o canto inferior direito para redimensionar. Clique em \"✓ Pronto\" na lista quando terminar.",
+      redoBtnTitle: "Marcar de novo manualmente do zero",
+      noPhotoOption: "Sem foto",
+      narratorOption: "Narrador fora de cena",
+      lineTextPlaceholder: "O que dizem…",
+      errorNoSpeechSynthesis: "Seu navegador não suporta síntese de voz.",
+      errorNoLineText: "Adicione pelo menos uma fala do roteiro com texto.",
+      statusPreviewing: "PRÉVIA EM ANDAMENTO",
+      facesReadyOne: "1 rosto pronto",
+      facesReadyMany: "{count} rostos prontos",
+      errorNeedsDesktopBrowser: "Gravar exige um navegador de computador (Chrome, Edge ou Firefox).",
+      errorNoRecordingFormat: "Nenhum formato de gravação suportado neste navegador.",
+      shareTabAudioHintVideo: "Escolha \"Esta aba\" e marque \"Compartilhar áudio da aba\" no seletor — assim conseguimos capturar a fala gerada.",
+      errorScreenSharingNotStarted: "O compartilhamento de tela não começou: {message}",
+      errorNoTabAudio: "Nenhum áudio da aba foi compartilhado — marque \"Compartilhar áudio da aba\" no seletor e tente de novo.",
+      statusRecording: "GRAVANDO",
+      statusRecordingSaved: "GRAVAÇÃO SALVA",
+      recordingCompleteOne: "Gravação concluída — 1 fala.",
+      recordingCompleteMany: "Gravação concluída — {count} falas.",
+      errorNoAudioFormat: "Nenhum formato de gravação de áudio suportado neste navegador.",
+      shareTabAudioHintAudio: "Escolha \"Esta aba\" e marque \"Compartilhar áudio da aba\" — vídeo não é necessário aqui, só o áudio é guardado.",
+      statusRecordingAudio: "GRAVANDO ÁUDIO",
+      statusAudioSaved: "ÁUDIO SALVO",
+      audioRecordedOne: "Áudio gravado — 1 fala.",
+      audioRecordedMany: "Áudio gravado — {count} falas."
+    },
+    fr: {
+      heroSubtitle: "Importez une photo, écrivez un script et regardez-la parler — les bouches bougent et les yeux clignent en rythme avec la voix.",
+      photosSceneHeading: "Photos / scènes",
+      addPhotoLabel: "+ Ajouter une photo (nouvelle scène)",
+      photoHintDefault: "Chaque photo devient sa propre scène. Ajoutez-en plusieurs pour alterner entre personnes ou lieux en pleine conversation — chaque réplique choisit la scène affichée pendant sa lecture.",
+      photoHintNoScenes: "Une photo, une ou plusieurs personnes. Une photo de face et bien éclairée est mieux détectée.",
+      photoHintEditing: "{scenesCount} — modification de \"{name}\" ({w}×{h})",
+      sceneCountOne: "1 scène",
+      sceneCountMany: "{count} scènes",
+      facesHeadingDefault: "Visages",
+      facesHeadingScene: "Visages — {scene}",
+      sceneWord: "Scène",
+      sceneNumbered: "Scène {n}",
+      autoDetectBtnLabel: "🔍 Détecter les visages automatiquement",
+      placeManuallyLabel: "+ Placer manuellement",
+      autoDetectHint: "La détection automatique utilise un petit modèle de reconnaissance faciale chargé depuis un CDN (rien de votre photo n'est jamais envoyé). S'il manque quelqu'un, placez ce visage à la main — cliquez sur l'œil gauche, l'œil droit, puis la bouche.",
+      facesEmptyDefault: "Pas encore de visages.",
+      facesEmptyNoPhoto: "Ajoutez d'abord une photo ci-dessus.",
+      scriptHeading: "Scénario",
+      addLineBtnLabel: "+ Ajouter une réplique",
+      voiceHeading: "Voix",
+      voiceLabel: "Voix",
+      rateLabel: "Débit",
+      pitchLabel: "Hauteur",
+      previewBtnLabel: "▶ Aperçu (sans enregistrement)",
+      stopBtnLabel: "■ Arrêter",
+      previewTitle: "TALK FORGE — APERÇU",
+      statusNotStarted: "NON COMMENCÉ",
+      stageEmptyStrong: "Pas encore de photo.",
+      stageEmptyText: "Importez une photo à gauche pour commencer.",
+      recordVideoLabel: "🔴 Enregistrer la vidéo",
+      downloadVideoLabel: "⬇ Télécharger la vidéo (.webm)",
+      recordAudioLabel: "🎙️ Enregistrer le son seulement",
+      downloadAudioLabel: "⬇ Télécharger l'audio (.webm)",
+      recordingDisclaimerHint: "C'est un effet de parole simple et stylisé (bouche qui s'étire + clignements), pas une synchronisation labiale photoréaliste ni un mouvement du corps — cela nécessiterait un modèle vidéo IA payant dans le cloud, que cet outil gratuit n'utilise volontairement pas. L'enregistrement vous demande de partager \"cet onglet\" avec le son, pour capter la voix générée dans la vidéo — il ne voit ni n'envoie jamais votre photo.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Votre photo et votre script restent dans votre navigateur — seul le code du modèle de détection faciale est chargé depuis un CDN, jamais votre image. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      removeSceneTitle: "Supprimer la scène",
+      loadingModelLabel: "Chargement du modèle…",
+      detectingLabel: "Détection…",
+      errorNoFacesFound: "Aucun visage trouvé automatiquement. Essayez plutôt \"Placer manuellement\".",
+      foundFacesOne: "1 visage trouvé.",
+      foundFacesMany: "{count} visages trouvés.",
+      errorCouldNotDetect: "Impossible de détecter les visages.",
+      errorFaceLibFailed: "La bibliothèque de détection faciale n'a pas pu se charger — vérifiez votre connexion internet et rechargez la page.",
+      faceNumbered: "Visage {n}",
+      manualHintLeftEye: "Cliquez sur l'œil GAUCHE (le sien, à votre droite)",
+      manualHintRightEye: "Cliquez sur l'œil DROIT",
+      manualHintMouth: "Cliquez sur la bouche",
+      doneLabel: "✓ Terminé",
+      adjustBtnTitle: "Faites glisser pour déplacer ou redimensionner les cadres yeux/bouche de ce visage",
+      adjustDragHint: "Faites glisser à l'intérieur d'un cadre pour le déplacer, tirez son coin inférieur droit pour le redimensionner. Cliquez sur \"✓ Terminé\" dans la liste quand c'est fini.",
+      redoBtnTitle: "Replacer manuellement depuis le début",
+      noPhotoOption: "Pas de photo",
+      narratorOption: "Narrateur hors champ",
+      lineTextPlaceholder: "Ce qu'ils disent…",
+      errorNoSpeechSynthesis: "Votre navigateur ne prend pas en charge la synthèse vocale.",
+      errorNoLineText: "Ajoutez au moins une réplique avec du texte.",
+      statusPreviewing: "APERÇU EN COURS",
+      facesReadyOne: "1 visage prêt",
+      facesReadyMany: "{count} visages prêts",
+      errorNeedsDesktopBrowser: "L'enregistrement nécessite un navigateur de bureau (Chrome, Edge ou Firefox).",
+      errorNoRecordingFormat: "Aucun format d'enregistrement pris en charge dans ce navigateur.",
+      shareTabAudioHintVideo: "Choisissez \"Cet onglet\" et cochez \"Partager l'audio de l'onglet\" dans le sélecteur — cela permet de capter la voix générée.",
+      errorScreenSharingNotStarted: "Le partage d'écran n'a pas démarré : {message}",
+      errorNoTabAudio: "Aucun son d'onglet n'a été partagé — cochez bien \"Partager l'audio de l'onglet\" dans le sélecteur et réessayez.",
+      statusRecording: "ENREGISTREMENT",
+      statusRecordingSaved: "ENREGISTREMENT SAUVEGARDÉ",
+      recordingCompleteOne: "Enregistrement terminé — 1 réplique.",
+      recordingCompleteMany: "Enregistrement terminé — {count} répliques.",
+      errorNoAudioFormat: "Aucun format d'enregistrement audio pris en charge dans ce navigateur.",
+      shareTabAudioHintAudio: "Choisissez \"Cet onglet\" et cochez \"Partager l'audio de l'onglet\" — la vidéo n'est pas nécessaire ici, seul le son est gardé.",
+      statusRecordingAudio: "ENREGISTREMENT AUDIO",
+      statusAudioSaved: "AUDIO SAUVEGARDÉ",
+      audioRecordedOne: "Audio enregistré — 1 réplique.",
+      audioRecordedMany: "Audio enregistré — {count} répliques."
+    }
+  });
+
+  addLine();
+  I18N.onChange(function () {
+    renderSceneStrip();
+    renderFacesList();
+    renderLinesList();
+    if (activeSceneId != null) setActiveScene(activeSceneId);
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!-- Generated from /alphabet-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="de" data-en-title="Hear, learn and write the world’s alphabets — Alphabet Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Die Alphabete der Welt hören, lernen und schreiben — Alphabet Forge | MigaBuilder</title>
+<meta name="description" content="Alphabet Forge lehrt die Schriftsysteme der Welt: Tippe auf einen Buchstaben in Thai, Arabisch, Mandarin, Japanisch, Koreanisch, Griechisch, Russisch, Hebräisch, Hindi, Georgisch und mehr, um ihn zu hören und ein Beispielwort zu sehen, und übe dann, ihn zu schreiben.">
+<link rel="canonical" href="https://migabuilder.com/de/alphabet-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/alphabet-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Die Alphabete der Welt hören, lernen und schreiben — Alphabet Forge">
+<meta property="og:description" content="Alphabet Forge lehrt die Schriftsysteme der Welt: Tippe auf einen Buchstaben in Thai, Arabisch, Mandarin, Japanisch, Koreanisch, Griechisch, Russisch, Hebräisch, Hindi, Georgisch und mehr, um ihn zu hören und ein Beispielwort zu sehen, und übe dann, ihn zu schreiben.">
+<meta property="og:url" content="https://migabuilder.com/de/alphabet-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=Noto+Sans:wght@400;600&family=Noto+Sans+Thai:wght@400;600&family=Noto+Naskh+Arabic:wght@400;600&family=Noto+Sans+SC:wght@400;600&family=Noto+Sans+JP:wght@400;600&family=Noto+Sans+KR:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600&family=Noto+Sans+Devanagari:wght@400;600&family=Noto+Sans+Georgian:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<script src="alphabet-data.js"></script>
+<script src="script-keyboard.js"></script>
+<style>
+main{max-width:1320px}
+.scripts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.script-card{background:#fff;border:2px solid rgba(22,32,43,.12);border-radius:6px;padding:10px;cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.script-card:hover{border-color:#0E2A47}.script-card.active{border-color:var(--amber);background:#fff7e6}
+.script-card b{display:block;font:700 14px 'Space Grotesk'}.script-card span{display:block;font-size:18px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.script-card small{display:block;color:rgba(22,32,43,.72);font-size:11px;margin-top:2px}
+.layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,1fr);gap:16px;align-items:start}
+.layout>aside{position:sticky;top:10px}
+.intro{line-height:1.55;font-size:15px}
+.tips{margin:8px 0 0 18px;padding:0;font-size:14px;line-height:1.5}
+.sections{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 10px}
+.chip{border:1px solid rgba(14,42,71,.3);background:#fff;border-radius:999px;padding:7px 12px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink)}.chip.active{background:#0E2A47;color:#fff}
+.grid-sym{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:6px}
+.sym{aspect-ratio:1;background:#fff;border:1px solid rgba(22,32,43,.18);border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;padding:4px;color:var(--ink);font:inherit}
+.sym:hover,.sym:focus{border-color:#0E2A47;box-shadow:0 0 0 2px rgba(14,42,71,.15);outline:none}.sym.active{background:#0E2A47;color:#fff}
+.sym .g{font-size:32px;line-height:1.2;white-space:nowrap}.sym .r{font-size:11px;opacity:.7;margin-top:2px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sym .dot{position:absolute;top:4px;right:5px;width:8px;height:8px;border-radius:50%}
+.detail{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:16px}
+.big{font-size:96px;line-height:1.15;text-align:center;margin:4px 0}
+.forms{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:4px 0 8px}
+.forms div{text-align:center;background:#f6f4ee;border-radius:4px;padding:6px 10px}.forms b{display:block;font-size:34px;font-weight:400}.forms small{font-size:11px;color:rgba(22,32,43,.72)}
+.meta{text-align:center;color:rgba(22,32,43,.72);margin-bottom:10px}
+.say{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0 12px}
+.word{background:#f6f4ee;border-radius:4px;padding:10px 12px;margin:8px 0;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.word .w{font-size:26px}.word small{display:block;color:rgba(22,32,43,.72)}
+.why{background:rgba(14,42,71,.06);border-left:3px solid #0E2A47;padding:10px 12px;line-height:1.55;font-size:14.5px;margin:10px 0}
+.voice-note{font-size:12.5px;background:#fff7e6;border-left:3px solid var(--amber);padding:8px 10px;margin:6px 0}
+.pad-wrap{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start}
+.pad{position:relative;width:min(320px,86vw);aspect-ratio:1;background:#fff;border:1px solid rgba(22,32,43,.25);border-radius:6px;touch-action:none;background-image:linear-gradient(rgba(14,42,71,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(14,42,71,.08) 1px,transparent 1px);background-size:50% 50%;background-position:center}
+.pad canvas{position:absolute;inset:0;width:100%;height:100%}
+.pad .hz{position:absolute;inset:0}
+.target{font-size:64px;line-height:1.1}
+.result-score{font:700 22px 'Space Grotesk';margin:8px 0}
+.q{font:600 18px 'Space Grotesk';margin:8px 0}.qglyph{font-size:72px;text-align:center;line-height:1.2}
+.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;cursor:pointer;font-size:18px;color:var(--ink)}
+.opt.big-g{font-size:40px}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.progress{height:6px;background:rgba(22,32,43,.12);border-radius:3px;overflow:hidden;margin:6px 0}.progress i{display:block;height:100%;background:var(--amber)}
+.ai-out{line-height:1.55;font-size:14.5px}.ai-out h4{margin:10px 0 4px;font:700 15px 'Space Grotesk'}
+.typebox{width:100%;min-height:110px;padding:12px;font-size:26px;line-height:1.4;border:1px solid rgba(22,32,43,.28);border-radius:6px;background:#fff;color:var(--ink);resize:vertical}
+.breakdown{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.breakdown button{background:#fff;border:1px solid rgba(22,32,43,.18);border-radius:6px;padding:6px 8px;cursor:pointer;text-align:center;color:var(--ink);min-width:48px}
+.breakdown button b{display:block;font-size:24px;font-weight:400;line-height:1.2}.breakdown button small{display:block;font-size:11px;color:rgba(22,32,43,.72)}.breakdown button.unk{opacity:.55}
+.tc-card{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:14px;margin-top:10px}.tc-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tc-row input{flex:1;min-width:200px;padding:10px;font-size:24px;border:1px solid rgba(22,32,43,.3);border-radius:4px}
+.diff span{font-size:28px;padding:0 1px;border-radius:3px}.diff .ok{background:#dff1e6}.diff .bad{background:#f8dcd6}.diff .miss{background:#fff2cc;opacity:.8}
+body.kb-open{padding-bottom:330px}
+.dict-bar{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.dict-bar input,.dict-bar select{padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff;color:var(--ink)}.dict-bar input{flex:1;min-width:200px}
+.dgrid{max-height:720px;overflow:auto;padding:2px;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+.dch{background:#fff;border:1px solid rgba(22,32,43,.18);border-radius:6px;padding:6px 4px;cursor:pointer;text-align:center;color:var(--ink);font:inherit;min-width:0}
+.dch:hover,.dch:focus-visible{border-color:#0E2A47}.dch.active{background:#0E2A47;color:#fff}
+.dch b{display:block;font:400 34px/1.2 'Noto Sans SC',sans-serif}.dch i{display:block;font-style:normal;font-size:12px;font-weight:600}.dch small{display:block;font-size:11px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbig{font:400 110px/1.15 'Noto Sans SC',sans-serif;text-align:center}
+.dsec{margin:12px 0 0}.dsec h4{margin:0 0 4px;font:700 14px 'Space Grotesk';text-transform:uppercase;letter-spacing:.5px;color:rgba(22,32,43,.7)}.dsec p{margin:0;line-height:1.55}
+.dparts{display:flex;gap:6px;flex-wrap:wrap}.dparts button{background:#f6f4ee;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:4px 10px;cursor:pointer;color:var(--ink);text-align:left}.dparts button b{font:400 24px 'Noto Sans SC',sans-serif;margin-right:6px;vertical-align:middle}
+.dword{display:flex;gap:10px;align-items:center;background:#f6f4ee;border-radius:4px;padding:6px 10px;margin-top:6px}.dword b{font:400 24px 'Noto Sans SC',sans-serif}.dword span{flex:1;font-size:13.5px}
+.hidden{display:none!important}
+.rtl{direction:rtl}
+@media(max-width:980px){.layout{grid-template-columns:1fr}.layout>aside{position:static}.pad-wrap{grid-template-columns:1fr}}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/alphabet-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann ich das Schreiben der Buchstaben üben?","acceptedAnswer":{"@type":"Answer","text":"Ja. Fahre jedes Symbol auf dem Schreibfeld nach oder schreib es ab und drück auf Prüfen für eine Bewertung, dann mach das Hörquiz."}},{"@type":"Question","name":"What do the Chinese characters mean?","acceptedAnswer":{"@type":"Answer","text":"Choose Mandarin Chinese and open the character dictionary: more than 7,700 characters, most used first, each with pinyin, its English meaning, how it is built and common words that use it."}},{"@type":"Question","name":"Ist Alphabet Forge kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke. Die KI nutzt ein kostenloses gemeinsames Kontingent; ist es ausgelastet oder am Tageslimit, versuche es später erneut oder füge deinen eigenen Gemini-Schlüssel hinzu."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nur wenn du die KI-Funktionen nutzt: Dann wird der Text, den du der KI gibst, über den kostenlosen KI-Dienst von MigaBuilder oder deinen eigenen Gemini-Schlüssel an Googles Gemini-Modell gesendet. Alles andere bleibt in deinem Browser."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/alphabet-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/alphabet-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/alphabet-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/alphabet-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/alphabet-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/alphabet-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/alphabet-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/alphabet-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/alphabet-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/alphabet-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/de/">← All tools</a><span>Alphabet Forge</span></nav>
+<header class="masthead"><div><h1>Alphabet Forge</h1><p>Tap any symbol to hear it, see a real word, learn why it sounds that way — then practise writing and typing it with the built-in keyboard.</p></div></header>
+<main>
+<section class="panel">
+  <h2>Choose a writing system</h2>
+  <div class="scripts" id="scriptList"></div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-weight:700">🌍 Another alphabet or language — build its chart with AI</summary>
+    <p class="muted">Pick or type any script or language (Armenian, Tamil, Amharic, Khmer, Swahili…). The AI builds a chart in the same format. AI charts can contain mistakes — check them against a trusted source.</p>
+    <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><input id="otherScript" list="presetList" placeholder="e.g. Armenian" style="flex:1;min-width:200px;padding:10px;border:1px solid rgba(22,32,43,.28);border-radius:3px"><datalist id="presetList"></datalist><button class="primary" id="buildScript">Build chart</button></div>
+    <div id="aiBox" style="margin-top:10px"></div><p class="status" id="buildStatus"></p>
+  </details>
+</section>
+
+<div class="layout">
+<section class="panel" id="scriptPanel">
+  <h2 id="sName"></h2>
+  <p class="muted" id="sType" style="margin:0 0 8px"></p>
+  <p class="intro" id="sIntro"></p>
+  <details><summary style="cursor:pointer;font-weight:700">✍️ How to write <span id="sName2"></span></summary><ul class="tips" id="sTips"></ul></details>
+  <div class="sections" id="sections"></div>
+  <p class="muted" id="sectionNote" style="margin:0 0 8px">Tap a square to hear it and see the explanation. Coloured dots show your progress: 🟢 mastered, 🟡 practised.</p>
+  <div class="grid-sym" id="grid" role="list"></div>
+</section>
+<aside class="panel" id="detailPanel">
+  <div class="detail" id="detail" aria-live="polite"><p class="muted" style="text-align:center;padding:40px 0">Choose a symbol to see its sound, a word and how to write it.</p></div>
+</aside>
+</div>
+
+<section class="panel hidden" id="dictPanel">
+  <h2>📖 Chinese character dictionary — every character explained in English</h2>
+  <p>Chinese has no alphabet: each character is a syllable with its own meaning. Here are <b id="dictTotal">7,700+</b> characters in order of how often they are used, each with its pinyin, its English meaning, how it is built (picture, idea or sound + meaning) and common words that use it. The 1,000 most common characters cover about 90% of everyday Chinese text.</p>
+  <div class="dict-bar"><input id="dictSearch" type="search" placeholder="Search: 水, shui, water…" aria-label="Search by character, pinyin or English meaning" autocomplete="off">
+    <select id="dictLevel" aria-label="How many characters"><option value="100">100 most common</option><option value="500" selected>500 most common</option><option value="1000">1,000 most common</option><option value="2000">2,000 most common</option><option value="3500">3,500 (everyday Chinese)</option><option value="0">All characters</option></select></div>
+  <p class="muted" id="dictCount">Loading the dictionary…</p>
+  <div class="layout">
+    <div><div class="dgrid" id="dictGrid" role="list"></div><div class="actions" style="margin-top:8px"><button class="secondary" id="dictMore" hidden>Show more</button></div></div>
+    <aside class="detail" id="dictDetail" aria-live="polite"><p class="muted" style="text-align:center;padding:30px 0">Tap a character to see what it means.</p></aside>
+  </div>
+  <p class="muted" style="margin-top:10px">Meanings and how characters are built: Make Me a Hanzi (LGPL). Example words: CC-CEDICT (CC BY-SA 4.0). Order: Jun Da’s character frequency list.</p>
+</section>
+
+<section class="panel" id="practice">
+  <h2>✍️ Writing practice</h2>
+  <p>Write the symbol in the square with your finger, pen or mouse. <b>Trace</b> shows a faint guide, <b>Copy</b> shows it beside the pad, and <b>From memory</b> only plays the sound and shows the romanisation. Press <b>Check</b> to get a score.</p>
+  <div class="actions" style="margin-bottom:10px">
+    <button class="chip active" data-mode="trace">Trace</button><button class="chip" data-mode="copy">Copy</button><button class="chip" data-mode="memory">From memory</button>
+    <button class="chip" data-mode="drill">Drill: 10 random symbols</button>
+  </div>
+  <div class="pad-wrap">
+    <div>
+      <div class="pad" id="pad"><canvas id="guide"></canvas><canvas id="ink"></canvas><div class="hz hidden" id="hanzi"></div></div>
+      <div class="actions" style="margin-top:8px"><button class="secondary" id="clearPad">Clear</button><button class="secondary" id="undoPad">Undo stroke</button><button class="primary" id="checkPad">Check</button><button class="secondary" id="nextPad">Next ›</button></div>
+    </div>
+    <div>
+      <div id="padTarget"></div>
+      <div id="padResult"></div>
+      <div id="strokeBox" class="hidden" style="margin-top:10px"><button class="secondary" id="animStrokes">▶ Show stroke order</button> <button class="secondary" id="quizStrokes">✍️ Stroke-by-stroke quiz</button><p class="muted">Stroke order data for Chinese characters comes from the open-source Hanzi Writer project.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="typePanel">
+  <h2>⌨️ Type in <span id="tName"></span></h2>
+  <p>No <span id="tName2"></span> keyboard on your device? Open the on-screen keyboard and tap the letters — or turn on <b>🖮 My keys type it</b> and your own keys type the script by position (the small grey letters show which key to press). Korean letters join into syllables as you type, Japanese can be typed in romaji and Mandarin in pinyin.</p>
+  <div class="actions" style="margin-bottom:8px"><button class="primary" id="kbOpen">⌨️ Open keyboard</button><button class="secondary" id="typeSay">🔊 Read aloud</button><button class="secondary" id="typeCopy">📋 Copy</button><button class="secondary" id="typeClear">Clear</button></div>
+  <textarea class="typebox" id="typeBox" dir="auto" placeholder="Type here…" spellcheck="false" aria-label="Type in the chosen script"></textarea>
+  <p class="muted" style="margin:8px 0 0">Letter by letter — tap any letter to hear it and open its explanation:</p>
+  <div class="breakdown" id="typeBreak"></div>
+  <div class="tc-card">
+    <h3 style="margin:0 0 4px;font:700 17px 'Space Grotesk'">🏁 Typing challenge</h3>
+    <p class="muted" style="margin:0 0 8px">You hear a word and see what it means — type it in the script. Use <b>Hint</b> to reveal the next letter.</p>
+    <div class="actions"><button class="primary" id="tcStart">▶ Start: 10 words</button></div>
+    <div id="tcArea" style="margin-top:10px"></div>
+  </div>
+</section>
+
+<section class="panel" id="quizPanel">
+  <h2>🎧 Listening and reading quiz</h2>
+  <p>Test yourself on the section you are viewing. Listening: hear a sound and pick the symbol. Reading: see a symbol and pick its sound.</p>
+  <div class="actions"><button class="primary" id="quizListen">🎧 Listening quiz</button><button class="secondary" id="quizRead">👁 Reading quiz</button><button class="secondary" id="quizWord">📖 Word meaning quiz</button></div>
+  <div id="quizArea" class="hidden" style="margin-top:12px"></div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Alphabet Forge</h2>
+  <p>Alphabet Forge teaches the world&#x27;s writing systems: tap any letter of Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi, Georgian and more to hear it and see an example word, then practise writing it.</p>
+  <h3>How to use Alphabet Forge</h3>
+  <ol><li>Choose a writing system such as Thai, Arabic or Mandarin and tap any symbol to hear it.</li><li>Press “Practise writing it”.</li><li>Trace or copy the symbol on the writing pad, press Check for a score, then take the listening quiz.</li></ol>
+  <h3>Can I practise writing the letters?</h3>
+  <p>Yes. Trace or copy each symbol on the writing pad and press Check for a score, then take the listening quiz.</p>
+  <h3>What do the Chinese characters mean?</h3>
+  <p>Choose Mandarin Chinese and scroll to the character dictionary: more than 7,700 characters, most used first, each with its pinyin and tone, its English meaning, how it is built (a picture, an idea, or a sound part plus a meaning part) and common words that use it. Search by character, pinyin (with or without tones) or an English word, hear each character and practise writing it.</p>
+  <h3>Is Alphabet Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/flashcard-forge.html">Flashcard Forge</a> · <a href="/de/voice-forge.html">Voice Forge</a> · <a href="/de/memory-forge.html">Memory Forge</a></p>
+</section>
+
+<footer>Alphabet Forge · MigaBuilder · Sounds use your device’s built-in voices. The on-screen keyboard runs entirely in your browser.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+MigaAI.mount($('aiBox'));
+let scripts=ALPHABETS.slice();
+const safeScript=s=>{s.font="'Noto Sans'";s.dir=s.dir==='rtl'?'rtl':'ltr';s.lang=/^[A-Za-z]{2,3}(-[A-Za-z0-9]{2,8})*$/.test(s.lang||'')?s.lang:'en-US';return s};
+store.get('alphabetCustom',[]).forEach(s=>{safeScript(s);s.custom=true;s.why=it=>it.y||'';scripts.push(s)});
+$('presetList').innerHTML=ALPHABET_PRESETS.map(p=>'<option value="'+esc(p)+'">').join('');
+let cur=null,sec=0,sel=null;
+let progress=store.get('alphabetProgress',{});
+function prog(s,g){return (progress[s]||{})[g]||0}
+function setProg(g,v){const p=progress[cur.id]=progress[cur.id]||{};p[g]=Math.max(p[g]||0,v);store.set('alphabetProgress',progress);const b=document.querySelector('.sym[data-i="'+items().indexOf(itemByGlyph(g))+'"] .dot');if(b)b.style.background=dotColor(p[g])}
+const dotColor=v=>v>=2?'#4E9E73':v>=1?'#E2A63B':'transparent';
+
+// ---------- speech ----------
+let voices=[];function loadVoices(){voices=('speechSynthesis' in window)?speechSynthesis.getVoices():[]}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.onvoiceschanged=loadVoices}
+function voiceFor(lang){const l=lang.toLowerCase(),base=l.split('-')[0];return voices.find(v=>v.lang.toLowerCase().replace('_','-')===l)||voices.find(v=>v.lang.toLowerCase().startsWith(base))}
+function speak(text,lang,rate){
+  if(!('speechSynthesis' in window)){noVoice(lang,true);return}
+  speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=rate||.8;const v=voiceFor(lang);if(v)u.voice=v;else noVoice(lang);speechSynthesis.speak(u);
+}
+function noVoice(lang,none){const n=$('voiceNote');if(!n)return;n.classList.remove('hidden');n.innerHTML=none?'This browser cannot play speech. Try Chrome, Edge or Safari.':'No '+esc(cur.name)+' voice ('+esc(lang)+') is installed on this device, so the sound may be missing or read with the wrong accent. Add one in your device settings: <b>Windows</b> Settings → Time &amp; language → Speech → Add voices · <b>Android</b> Settings → Text-to-speech → Install voice data · <b>iPhone/Mac</b> Settings → Accessibility → Spoken Content → Voices. Chrome on desktop includes many languages online.'}
+
+// ---------- script list ----------
+function renderScripts(){
+  $('scriptList').innerHTML=scripts.map((s,i)=>'<button class="script-card'+(cur===s?' active':'')+'" data-s="'+i+'"><b>'+esc(s.name)+(s.custom?' ✨':'')+'</b><span style="font-family:'+(s.font||'inherit')+',sans-serif" dir="'+(s.dir||'ltr')+'">'+esc(s.native)+'</span><small>'+esc(s.region||(s.custom?'AI-generated chart':''))+'</small></button>').join('');
+  $('scriptList').querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{choose(scripts[+b.dataset.s]);$('scriptPanel').scrollIntoView({behavior:'smooth'})});
+}
+function items(){return cur.sections[sec].items}
+function itemByGlyph(g){for(const s of cur.sections)for(const it of s.items)if(it.g===g)return it;return null}
+function fontOf(it){return it&&it.font==='latin'?"'IBM Plex Sans',sans-serif":(cur.font||'inherit')+',sans-serif'}
+function choose(s){
+  cur=s;sec=0;sel=null;renderScripts();
+  $('sName').textContent=s.name+' — '+s.native;$('sName2').textContent=s.name;$('sType').textContent=s.type+(s.custom?' · AI-generated chart, may contain mistakes':'');
+  $('sIntro').textContent=s.intro;$('sTips').innerHTML=(s.writing||[]).map(t=>'<li>'+esc(t)+'</li>').join('');
+  $('sections').innerHTML=s.sections.map((x,i)=>'<button class="chip'+(i===0?' active':'')+'" data-sec="'+i+'">'+esc(x.title)+'</button>').join('')+(s.custom?'<button class="chip" id="rmScript" style="border-color:#D8604A">Remove this chart</button>':'');
+  $('sections').querySelectorAll('[data-sec]').forEach(b=>b.onclick=()=>{sec=+b.dataset.sec;$('sections').querySelectorAll('[data-sec]').forEach(x=>x.classList.toggle('active',x===b));renderGrid();pick(items()[0])});
+  if($('rmScript'))$('rmScript').onclick=()=>{const c=store.get('alphabetCustom',[]).filter(x=>x.id!==s.id);store.set('alphabetCustom',c);scripts=scripts.filter(x=>x!==s);choose(scripts[0])};
+  renderGrid();pick(items()[0],true);setPad(items()[0]);
+  try{history.replaceState(null,'','#'+s.id)}catch(e){}
+  prepKeyboard();if(tc){tc=null;$('tcArea').innerHTML=''}
+  dictToggle();
+}
+function renderGrid(){
+  $('grid').className='grid-sym'+(cur.dir==='rtl'?' rtl':'');
+  $('grid').innerHTML=items().map((it,i)=>'<button class="sym" role="listitem" data-i="'+i+'" aria-label="'+esc(it.g+' '+(it.r||''))+'"><span class="dot" style="background:'+dotColor(prog(cur.id,it.g))+'"></span><span class="g" style="font-family:'+fontOf(it)+'">'+esc(it.g)+'</span><span class="r">'+esc((it.r||'').split(' (')[0])+'</span></button>').join('');
+  $('grid').querySelectorAll('.sym').forEach(b=>b.onclick=()=>{pick(items()[+b.dataset.i]);if(matchMedia('(max-width:980px)').matches)$('detailPanel').scrollIntoView({behavior:'smooth'})});
+}
+
+// ---------- detail ----------
+const ARABIC_NONJOIN=new Set('ادذرزو'.split(''));
+function formsHtml(it){
+  if(cur.id!=='arabic')return '';
+  const g=it.g,z='‍',nj=ARABIC_NONJOIN.has(g);
+  const f=[['On its own',g],['Start',nj?g:g+z],['Middle',nj?z+g:z+g+z],['End',z+g]];
+  return '<div class="forms" dir="rtl">'+f.map(([l,c])=>'<div><b style="font-family:'+fontOf(it)+'">'+c+'</b><small>'+l+'</small></div>').join('')+'</div>';
+}
+function pick(it,silent){
+  if(!it)return;sel=it;
+  document.querySelectorAll('.sym').forEach(b=>b.classList.toggle('active',items()[+b.dataset.i]===it));
+  const why=(cur.why?cur.why(it,cur):it.y)||'';
+  $('detail').innerHTML='<div class="big" style="font-family:'+fontOf(it)+'" dir="'+(cur.dir||'ltr')+'">'+esc(it.g)+'</div>'+formsHtml(it)+
+    '<div class="meta"><b>'+esc(it.n||it.r)+'</b>'+(it.r&&it.n!==it.r?' · sounds like <b>'+esc(it.r)+'</b>':'')+(it.s?'<br><small>'+esc(it.s)+'</small>':'')+'</div>'+
+    '<div class="say"><button class="primary" id="playSym">🔊 Play sound</button><button class="secondary" id="playSlow">🐢 Slowly</button>'+(it.w?'<button class="secondary" id="playWord">🔊 Play word</button>':'')+'</div>'+
+    '<div class="voice-note hidden" id="voiceNote"></div>'+
+    (it.w?'<div class="word"><div><span class="w" style="font-family:'+fontOf({})+'" dir="'+(cur.dir||'ltr')+'">'+esc(it.w)+'</span><small>'+esc(it.wr||'')+' — “'+esc(it.wm||it.m||'')+'”</small></div></div>':'')+
+    '<div class="why"><b>Why it sounds like this:</b> '+esc(why)+'</div>'+
+    '<div class="actions"><button class="secondary" id="practiseThis">✍️ Practise writing it</button><button class="secondary" id="aiMore">🤖 Explain more</button></div><div class="ai-out" id="aiOut"></div>';
+  const lang=cur.lang||'en-US';
+  $('playSym').onclick=()=>speak(it.say||it.g,lang);$('playSlow').onclick=()=>speak(it.say||it.g,lang,.5);
+  if($('playWord'))$('playWord').onclick=()=>speak(it.w.replace(/\(.*?\)/g,''),lang,.75);
+  $('practiseThis').onclick=()=>{setPad(it);$('practice').scrollIntoView({behavior:'smooth'})};
+  $('aiMore').onclick=()=>explainMore(it);
+  if(!silent)speak(it.say||it.g,lang);
+  if(!voiceFor(lang)&&voices.length)noVoice(lang);
+  if(!silent)setPad(it,true);
+}
+async function explainMore(it){
+  const out=$('aiOut');out.innerHTML='<p class="muted">Asking the AI…</p>';
+  try{
+    const r=MigaAI.json(await MigaAI.ask('You are a friendly, accurate language teacher. Reply with ONE JSON object only.',
+      'Script: '+cur.name+'. Symbol: '+it.g+' (romanised '+(it.r||'')+', name '+(it.n||'')+').\nReturn {"pronunciation":"how to make the sound with mouth, tongue and lips, compared with English sounds","why":"why it sounds this way: history, origin of the shape and sound rules","how_to_write":["step 1","step 2", "..."],"examples":[{"word":"native script","romanised":"...","meaning":"..."}],"common_mistakes":"..."}\nGive 3 example words. Be accurate; if unsure of something, say so.'));
+    out.innerHTML='<h4>How to say it</h4><p>'+esc(r.pronunciation)+'</p><h4>Why</h4><p>'+esc(r.why)+'</p><h4>How to write it</h4><ol>'+(r.how_to_write||[]).map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol><h4>More words</h4><ul>'+(r.examples||[]).map(e=>'<li><button class="chip" data-say="'+esc(e.word)+'">🔊</button> <span style="font-size:20px;font-family:'+fontOf({})+'">'+esc(e.word)+'</span> — '+esc(e.romanised)+' — '+esc(e.meaning)+'</li>').join('')+'</ul>'+(r.common_mistakes?'<h4>Common mistakes</h4><p>'+esc(r.common_mistakes)+'</p>':'')+'<p class="muted">AI explanation — may contain mistakes.</p>';
+    out.querySelectorAll('[data-say]').forEach(b=>b.onclick=()=>speak(b.dataset.say,cur.lang));
+  }catch(e){out.innerHTML='<p style="color:#9b3322">'+esc(e.message)+'</p>'}
+}
+
+// ---------- AI-built charts for other scripts ----------
+$('buildScript').onclick=async()=>{
+  const name=$('otherScript').value.trim();if(!name){$('otherScript').focus();return}
+  const st=$('buildStatus');st.classList.add('show');st.textContent='Building the '+name+' chart… this can take up to a minute.';$('buildScript').disabled=true;
+  try{
+    const d=MigaAI.json(await MigaAI.ask('You are an expert linguist and writing-system teacher. You are accurate and never invent letters or words. Reply with ONE JSON object only.',
+      'Build a learner’s chart for the writing system / alphabet of: '+name+'.\nReturn {"name":"English name","native":"name in its own script","lang":"BCP-47 code for text-to-speech, e.g. hy-AM","dir":"ltr or rtl","type":"kind of writing system","region":"where it is used","intro":"3-4 sentences on how it works","writing":["tips on how to write it"],"sections":[{"title":"section name","items":[{"g":"symbol (capital and small separated by a space if both exist)","n":"its name","r":"romanisation","s":"sound compared with English","say":"text to send to a text-to-speech voice so it pronounces the letter (usually its name in the language)","w":"common example word containing it, in the script","wr":"romanised word","m":"English meaning","y":"why it sounds this way: mouth position, history or spelling rule"}]}]}\nInclude EVERY basic letter (for large syllabaries include the base forms and the vowel signs as separate sections). Keep each field short.',{maxTokens:16000}));
+    if(!d.sections||!d.sections.length)throw new Error('The AI did not return any letters. Try again or pick another model.');
+    d.id='ai-'+String(d.name||name).toLowerCase().replace(/[^a-z0-9]+/g,'-');d.custom=true;safeScript(d);
+    d.sections.forEach(s=>s.items=(s.items||[]).filter(it=>it&&it.g));
+    const saved=store.get('alphabetCustom',[]).filter(x=>x.id!==d.id);saved.push(d);store.set('alphabetCustom',saved);
+    scripts=scripts.filter(x=>x.id!==d.id);d.why=it=>it.y||'';scripts.push(d);choose(d);st.textContent='Chart built. It is saved in this browser.';
+    $('scriptPanel').scrollIntoView({behavior:'smooth'});
+  }catch(e){st.textContent='Could not build the chart: '+e.message}
+  $('buildScript').disabled=false;
+};
+
+// ---------- writing pad ----------
+let mode='trace',padItem=null,padGlyph='',strokes=[],drill=null,hw=null;
+const guide=$('guide'),ink=$('ink'),pad=$('pad');
+function sizeCanvases(){const r=pad.getBoundingClientRect(),d=window.devicePixelRatio||1;[guide,ink].forEach(c=>{c.width=Math.round(r.width*d);c.height=Math.round(r.height*d)});drawGuide();redraw()}
+function writeForms(it){const s=it.g.replace(/[–◌]/g,cur.id==='thai'?'อ':'').trim();return s.split(/\s+/).filter(Boolean)}
+function setPad(it,quiet){
+  padItem=it;const forms=writeForms(it);padGlyph=forms[forms.length>1?1:0]||it.g;
+  strokes=[];$('padResult').innerHTML='';
+  const hanzi=cur.hanzi&&it.font!=='latin'&&/^[一-鿿]$/.test(padGlyph);
+  $('strokeBox').classList.toggle('hidden',!hanzi);$('hanzi').classList.add('hidden');$('ink').style.display='';
+  $('padTarget').innerHTML=(drill?'<p class="muted">Drill: symbol '+(drill.i+1)+' of '+drill.list.length+' · score so far '+drill.score+'</p>':'')+
+    (mode==='memory'?'<p class="q">Write the symbol for: <b>'+esc(it.r||it.n)+'</b>'+(it.w?' <small class="muted">(as in '+esc(it.wr||'')+' — '+esc(it.wm||it.m||'')+')</small>':'')+'</p><button class="secondary" id="padSay">🔊 Hear it again</button>':
+     '<p class="q">Write: <span class="target" style="font-family:'+fontOf(it)+'">'+esc(mode==='copy'?padGlyph:'')+'</span>'+(mode==='trace'?'<b style="font-size:28px;font-family:'+fontOf(it)+'">'+esc(padGlyph)+'</b>':'')+' <small class="muted">'+esc(it.r||'')+'</small></p>')+
+    (forms.length>1?'<div class="actions">'+forms.map(f=>'<button class="chip'+(f===padGlyph?' active':'')+'" data-form="'+esc(f)+'" style="font-family:'+fontOf(it)+'">'+esc(f)+'</button>').join('')+'</div>':'')+
+    '<div class="why" style="font-size:13.5px">'+esc((cur.writing||[])[0]||'')+'</div>';
+  document.querySelectorAll('[data-form]').forEach(b=>b.onclick=()=>{padGlyph=b.dataset.form;strokes=[];setPadKeep()});
+  if($('padSay'))$('padSay').onclick=()=>speak(it.say||it.g,cur.lang);
+  if(mode==='memory'&&!quiet)speak(it.say||it.g,cur.lang);
+  sizeCanvases();
+  if(document.fonts&&document.fonts.load){const g=padGlyph;document.fonts.load('48px '+fontOf(it),g).then(()=>{if(padGlyph===g)drawGuide()}).catch(()=>{})}
+}
+function setPadKeep(){const g=padGlyph;setPad(padItem,true);padGlyph=g;document.querySelectorAll('[data-form]').forEach(b=>b.classList.toggle('active',b.dataset.form===g));drawGuide();redraw();const t=document.querySelector('#padTarget b');if(t)t.textContent=g;const t2=document.querySelector('#padTarget .target');if(t2&&mode==='copy')t2.textContent=g}
+function glyphFont(ctx,size){ctx.font=size+'px '+fontOf(padItem)}
+function renderGlyph(ctx,w,h,color){
+  ctx.clearRect(0,0,w,h);ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='alphabetic';
+  let size=h*.62;glyphFont(ctx,size);let m=ctx.measureText(padGlyph);
+  const tw=m.width,th=(m.actualBoundingBoxAscent||size*.8)+(m.actualBoundingBoxDescent||size*.2);
+  const k=Math.min(w*.72/Math.max(tw,1),h*.72/Math.max(th,1),1.4);size*=k;glyphFont(ctx,size);m=ctx.measureText(padGlyph);
+  const asc=m.actualBoundingBoxAscent||size*.8,desc=m.actualBoundingBoxDescent||size*.2;
+  const left=m.actualBoundingBoxLeft||m.width/2,right=m.actualBoundingBoxRight||m.width/2;
+  ctx.direction=cur&&cur.dir==='rtl'?'rtl':'ltr';
+  ctx.fillText(padGlyph,w/2+(left-right)/2,h/2+(asc-desc)/2);
+}
+function drawGuide(){const c=guide.getContext('2d');if(!padItem)return;if(mode==='trace')renderGlyph(c,guide.width,guide.height,'rgba(14,42,71,.16)');else c.clearRect(0,0,guide.width,guide.height)}
+function redraw(){const c=ink.getContext('2d'),d=window.devicePixelRatio||1;c.clearRect(0,0,ink.width,ink.height);c.lineCap='round';c.lineJoin='round';c.strokeStyle='#16202B';c.lineWidth=ink.width*.035;
+  strokes.forEach(s=>{c.beginPath();s.forEach((p,i)=>i?c.lineTo(p[0]*ink.width,p[1]*ink.height):c.moveTo(p[0]*ink.width,p[1]*ink.height));if(s.length===1)c.lineTo(s[0][0]*ink.width+.1,s[0][1]*ink.height);c.stroke()})}
+let drawing=null;
+ink.addEventListener('pointerdown',e=>{e.preventDefault();ink.setPointerCapture(e.pointerId);const r=ink.getBoundingClientRect();drawing=[[(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]];strokes.push(drawing);redraw()});
+ink.addEventListener('pointermove',e=>{if(!drawing)return;const r=ink.getBoundingClientRect();drawing.push([(e.clientX-r.left)/r.width,(e.clientY-r.top)/r.height]);redraw()});
+['pointerup','pointercancel','pointerleave'].forEach(t=>ink.addEventListener(t,()=>drawing=null));
+$('clearPad').onclick=()=>{strokes=[];redraw();$('padResult').innerHTML=''};
+$('undoPad').onclick=()=>{strokes.pop();redraw()};
+function maskOf(canvas,N){const t=document.createElement('canvas');t.width=t.height=N;const c=t.getContext('2d');c.drawImage(canvas,0,0,N,N);const d=c.getImageData(0,0,N,N).data,m=new Uint8Array(N*N);for(let i=0;i<N*N;i++)m[i]=d[i*4+3]>40?1:0;return m}
+function bbox(m,N){let x0=N,y0=N,x1=-1,y1=-1;for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(m[y*N+x]){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y}return x1<0?null:[x0,y0,x1,y1]}
+function dilate(m,N,r){const o=new Uint8Array(N*N);for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(m[y*N+x])for(let dy=-r;dy<=r;dy++)for(let dx=-r;dx<=r;dx++){const X=x+dx,Y=y+dy;if(X>=0&&Y>=0&&X<N&&Y<N)o[Y*N+X]=1}return o}
+function scoreDrawing(){
+  const N=96,tmp=document.createElement('canvas');tmp.width=tmp.height=400;renderGlyph(tmp.getContext('2d'),400,400,'#000');
+  const G=maskOf(tmp,N),I0=maskOf(ink,N),gb=bbox(G,N),ib=bbox(I0,N);if(!ib||!gb)return null;
+  // Move and scale the drawing onto the reference box, so copy and memory modes don't need exact placement.
+  const I=new Uint8Array(N*N),sx=(gb[2]-gb[0]+1)/(ib[2]-ib[0]+1),sy=(gb[3]-gb[1]+1)/(ib[3]-ib[1]+1);
+  const fix=mode==='trace'?null:[sx,sy];
+  for(let y=0;y<N;y++)for(let x=0;x<N;x++)if(I0[y*N+x]){const X=fix?Math.round(gb[0]+(x-ib[0])*sx):x,Y=fix?Math.round(gb[1]+(y-ib[1])*sy):y;if(X>=0&&Y>=0&&X<N&&Y<N)I[Y*N+X]=1}
+  const Id=dilate(I,N,3),Gd=dilate(G,N,4);let g=0,gc=0,i=0,ic=0;
+  for(let k=0;k<N*N;k++){if(G[k]){g++;if(Id[k])gc++}if(I[k]){i++;if(Gd[k])ic++}}
+  const cov=gc/g,prec=ic/i;return Math.round(100*2*cov*prec/Math.max(cov+prec,1e-6));
+}
+$('checkPad').onclick=()=>{
+  if(!strokes.length){$('padResult').innerHTML='<p class="muted">Draw the symbol first.</p>';return}
+  const s=scoreDrawing();if(s==null)return;
+  const stars=s>=85?'⭐⭐⭐':s>=70?'⭐⭐':s>=50?'⭐':'';
+  $('padResult').innerHTML='<div class="result-score">'+s+'/100 '+stars+'</div><p>'+(s>=85?'Excellent — that matches the shape closely.':s>=70?'Good! The shape is recognisable. Compare it with the model below and tidy the proportions.':s>=50?'Getting there. Check the parts shown in the model that are missing or extra.':'Not quite yet. Look at the model, then try Trace mode first.')+'</p><div style="display:flex;gap:12px;align-items:center"><span style="font-size:64px;font-family:'+fontOf(padItem)+'">'+esc(padGlyph)+'</span><span class="muted">Model</span></div>';
+  if(mode!=='trace'&&mode!=='drill-trace')drawGuideOverlay();
+  setProg(padItem.g,s>=85?2:s>=60?1:0);
+  if(drill){drill.score+=s>=70?1:0;drill.results.push([padItem,s])}
+};
+function drawGuideOverlay(){renderGlyph(guide.getContext('2d'),guide.width,guide.height,'rgba(78,158,115,.25)')}
+$('nextPad').onclick=()=>{
+  if(drill){drill.i++;if(drill.i>=drill.list.length){finishDrill();return}setPad(drill.list[drill.i]);return}
+  const list=items(),i=list.indexOf(padItem);setPad(list[(i+1)%list.length]);
+};
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('active',x===b));
+  if(b.dataset.mode==='drill'){mode='memory';const pool=items().slice().sort(()=>Math.random()-.5).slice(0,10);drill={list:pool,i:0,score:0,results:[]};setPad(pool[0]);return}
+  drill=null;mode=b.dataset.mode;setPad(padItem||items()[0],true);
+});
+function finishDrill(){const d=drill;drill=null;$('padTarget').innerHTML='<p class="result-score">Drill finished: '+d.score+' / '+d.list.length+' written well</p><ul>'+d.results.map(([it,s])=>'<li><span style="font-size:22px;font-family:'+fontOf(it)+'">'+esc(it.g)+'</span> '+esc(it.r||'')+' — '+s+'/100</li>').join('')+'</ul>';$('padResult').innerHTML='';strokes=[];redraw()}
+// Chinese stroke order via Hanzi Writer (loaded only when needed)
+let hwReady=null;function loadHW(){hwReady=hwReady||new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/hanzi-writer@3.7.2/dist/hanzi-writer.min.js';s.onload=res;s.onerror=()=>rej(new Error('Could not load stroke-order data.'));document.head.appendChild(s)});return hwReady}
+async function hanzi(kind){
+  try{await loadHW()}catch(e){$('padResult').textContent=e.message;return}
+  const box=$('hanzi');box.innerHTML='';box.classList.remove('hidden');$('ink').style.display='none';guide.getContext('2d').clearRect(0,0,guide.width,guide.height);
+  const size=pad.getBoundingClientRect().width;
+  hw=HanziWriter.create(box,padGlyph,{width:size,height:size,padding:18,showOutline:true,strokeAnimationSpeed:1,delayBetweenStrokes:250,drawingWidth:22,showHintAfterMisses:2});
+  if(kind==='anim')hw.animateCharacter({onComplete:()=>{}});
+  else{let mistakes=0;$('padResult').innerHTML='<p class="muted">Draw each stroke in order. After two misses a hint appears.</p>';
+    hw.quiz({onMistake:()=>mistakes++,onComplete:s=>{const total=s.totalMistakes;$('padResult').innerHTML='<div class="result-score">'+(total===0?'Perfect stroke order! ⭐⭐⭐':total<=2?'Well done ⭐⭐ — '+total+' mistake(s)':'Finished with '+total+' mistakes ⭐')+'</div>';setProg(padItem.g,total<=2?2:1)}})}
+}
+$('animStrokes').onclick=()=>hanzi('anim');$('quizStrokes').onclick=()=>hanzi('quiz');
+window.addEventListener('resize',()=>{if($('hanzi').classList.contains('hidden'))sizeCanvases()});
+// ---------- Chinese character dictionary (hanzi-dictionary.json, loaded when Mandarin is chosen) ----------
+// Each entry: c character, p pinyin, m meaning, f frequency rank, t type (p picture, i idea, s sound + meaning),
+// h hint, sm meaning part, ph sound part, k parts, rd radical, w example words [word, pinyin, English].
+let DICT=null,dictList=[],dictShown=0,dictSel=null;const DICT_STEP=150;
+// A link like alphabet-forge.html#mandarin-水 opens that character.
+const dictWant=(()=>{try{return decodeURIComponent((location.hash.match(/^#mandarin-(.+)$/)||[])[1]||'')}catch(e){return ''}})();
+const plain=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ü/g,'u').toLowerCase();
+function dictToggle(){const on=cur&&cur.id==='mandarin';$('dictPanel').classList.toggle('hidden',!on);if(!on)return;
+  if(!$('dictChip')){const b=document.createElement('button');b.className='chip';b.id='dictChip';b.textContent='📖 All characters (dictionary)';b.onclick=()=>$('dictPanel').scrollIntoView({behavior:'smooth'});$('sections').appendChild(b)}
+  loadDict()}
+async function loadDict(){if(DICT)return DICT;try{const r=await fetch('hanzi-dictionary.json');if(!r.ok)throw 0;DICT=(await r.json()).chars}catch(e){$('dictCount').textContent='The dictionary could not be loaded. Check your internet connection and reload the page.';return null}
+  DICT.forEach(d=>{d.pp=plain(d.p).replace(/,/g,' ');d.mm=d.m.toLowerCase()});DICT.byChar=new Map(DICT.map(d=>[d.c,d]));
+  $('dictTotal').textContent=DICT.length.toLocaleString('en');dictFilter();
+  if(dictWant&&DICT.byChar.has(dictWant)){dictPick(DICT.byChar.get(dictWant),true);setTimeout(()=>$('dictPanel').scrollIntoView(),300)}return DICT}
+function dictFilter(){if(!DICT)return;const q=$('dictSearch').value.trim(),lv=+$('dictLevel').value;
+  if(!q){dictList=lv?DICT.slice(0,lv):DICT}
+  else if(/[\u3400-\u9fff]/.test(q)){const cs=[...new Set([...q].filter(c=>DICT.byChar.has(c)))];dictList=cs.map(c=>DICT.byChar.get(c));
+    // Also characters that are built from what was typed.
+    if(cs.length===1)dictList=dictList.concat(DICT.filter(d=>d.c!==cs[0]&&(d.k||'').includes(cs[0])).slice(0,60))}
+  else{const pq=plain(q),parts=pq.split(/\s+/),re=new RegExp('\\b'+pq.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'i');
+    const toned=/[\u0300-\u036f]/.test(q.normalize('NFD'))&&parts.length===1?q.toLowerCase():'';
+    const score=d=>{if(toned)return d.p.split(/,\s*/).includes(toned)?0:9;if(d.pp.split(' ').includes(pq.replace(/[1-5]/g,'')))return 0;if(re.test(d.mm))return 1;if(parts.length===1&&d.pp.split(' ').some(x=>x.startsWith(pq)))return 2;if(d.mm.includes(pq))return 3;return 9};
+    dictList=DICT.map(d=>[score(d),d]).filter(x=>x[0]<9).sort((a,b)=>a[0]-b[0]||a[1].f-b[1].f).map(x=>x[1]).slice(0,600)}
+  dictShown=0;$('dictGrid').innerHTML='';dictMore();
+  $('dictCount').textContent=dictList.length?(q?dictList.length+(dictList.length===1?' character':' characters')+' found.':'The '+dictList.length.toLocaleString('en')+' most common characters, most used first.')+' Tap one to see what it means.':'Nothing found. Try a single English word, pinyin like “ma” or a character.'}
+function dictMore(){const part=dictList.slice(dictShown,dictShown+DICT_STEP),start=dictShown;dictShown+=part.length;
+  $('dictGrid').insertAdjacentHTML('beforeend',part.map((d,j)=>'<button class="dch'+(d===dictSel?' active':'')+'" role="listitem" data-d="'+(start+j)+'" aria-label="'+esc(d.c+' '+d.p+': '+d.m)+'"><b>'+esc(d.c)+'</b><i>'+esc(d.p.split(',')[0])+'</i><small>'+esc(d.m.split(/[;,]/)[0])+'</small></button>').join(''));
+  $('dictMore').hidden=dictShown>=dictList.length}
+$('dictMore').onclick=dictMore;
+let dictTimer=0;$('dictSearch').oninput=()=>{clearTimeout(dictTimer);dictTimer=setTimeout(dictFilter,250)};$('dictLevel').onchange=()=>{$('dictSearch').value='';dictFilter()};
+$('dictGrid').onclick=e=>{const b=e.target.closest('[data-d]');if(!b)return;dictPick(dictList[+b.dataset.d]);if(matchMedia('(max-width:980px)').matches)$('dictDetail').scrollIntoView({behavior:'smooth'})};
+const TONE_TXT={1:'1st tone — high and level',2:'2nd tone — rising, like a question',3:'3rd tone — dips low, then rises',4:'4th tone — sharply falling',5:'neutral tone — short and light'};
+function toneNum(p){if(/[āēīōūǖ]/.test(p))return 1;if(/[áéíóúǘ]/.test(p))return 2;if(/[ǎěǐǒǔǚ]/.test(p))return 3;if(/[àèìòùǜ]/.test(p))return 4;return 5}
+function dictItem(d){const w=(d.w||[])[0],py=d.p.split(',')[0].trim();return{g:d.c,r:py,n:py,m:d.m,say:d.c,y:d.h||'',w:w&&w[0],wr:w&&w[1],wm:w&&w[2]}}
+function builtHtml(d){const part=c=>{const x=DICT.byChar.get(c);return '<button data-goto="'+esc(c)+'"><b>'+esc(c)+'</b>'+(x?esc(x.p.split(',')[0])+' — '+esc(x.m.split(/[;,]/)[0]):'')+'</button>'};
+  let t='';if(d.t==='p')t='<b>Picture character.</b> It began as a drawing of the thing it means'+(d.h?': '+esc(d.h)+'.':'.');
+  else if(d.t==='i')t='<b>Idea character.</b> Its parts are put together to show the meaning'+(d.h?': '+esc(d.h)+'.':'.');
+  else if(d.t==='s')t='<b>Sound + meaning character.</b> '+(d.sm?'The part '+esc(d.sm)+' hints at the meaning'+(d.h?' (“'+esc(d.h)+'”)':'')+'. ':'')+(d.ph?'The part '+esc(d.ph)+' hints at the sound'+(DICT.byChar.get(d.ph)?' ('+esc(DICT.byChar.get(d.ph).p.split(',')[0])+')':'')+'.':'');
+  const parts=[...(d.k||'')];return (t?'<p>'+t+'</p>':'')+(parts.length?'<div class="dparts" style="margin-top:6px">'+parts.map(part).join('')+'</div>':'')+(d.rd?'<p class="muted" style="margin-top:6px">Radical (the part dictionaries sort it by): '+esc(d.rd)+'</p>':'')}
+function dictPick(d,quiet){if(!d)return;dictSel=d;document.querySelectorAll('.dch').forEach(b=>b.classList.toggle('active',dictList[+b.dataset.d]===d));
+  const pys=d.p.split(',').map(x=>x.trim()),built=builtHtml(d);
+  $('dictDetail').innerHTML='<div class="dbig" lang="zh-CN">'+esc(d.c)+'</div><div class="meta"><b style="font-size:20px">'+esc(d.p)+'</b><br><small>'+pys.map(p=>esc(p)+': '+TONE_TXT[toneNum(p)]).join(' · ')+'</small><br><small>No. '+d.f.toLocaleString('en')+' of the most used characters</small></div>'+
+    '<div class="say"><button class="primary" id="dSay">🔊 Hear it</button><button class="secondary" id="dSlow">🐢 Slowly</button></div><div class="voice-note hidden" id="voiceNote"></div>'+
+    '<div class="dsec"><h4>Meaning</h4><p style="font-size:17px">'+esc(d.m)+'</p></div>'+
+    (built?'<div class="dsec"><h4>How it is built</h4>'+built+'</div>':'')+
+    (d.w&&d.w.length?'<div class="dsec"><h4>Common words with '+esc(d.c)+'</h4>'+d.w.map((w,i)=>'<div class="dword"><b lang="zh-CN">'+esc(w[0])+'</b><span>'+esc(w[1])+' — '+esc(w[2])+'</span><button class="chip" data-sayw="'+i+'" aria-label="Hear '+esc(w[0])+'">🔊</button></div>').join('')+'</div>':'')+
+    '<div class="actions" style="margin-top:12px"><button class="secondary" id="dWrite">✍️ Practise writing it</button><button class="secondary" id="dStrokes">▶ Stroke order</button><button class="secondary" id="dLink">🔗 Copy link</button></div>';
+  $('dSay').onclick=()=>speak(d.c,'zh-CN');$('dSlow').onclick=()=>speak(d.c,'zh-CN',.5);
+  $('dictDetail').querySelectorAll('[data-sayw]').forEach(b=>b.onclick=()=>speak(d.w[+b.dataset.sayw][0],'zh-CN',.75));
+  $('dictDetail').querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>{const x=DICT.byChar.get(b.dataset.goto);if(x)dictPick(x)});
+  const toPad=()=>{setPad(dictItem(d));$('practice').scrollIntoView({behavior:'smooth'})};
+  $('dWrite').onclick=toPad;$('dStrokes').onclick=()=>{toPad();hanzi('anim')};
+  $('dLink').onclick=()=>{const u=location.origin+location.pathname+'#mandarin-'+encodeURIComponent(d.c);(navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).then(()=>{$('dLink').textContent='✓ Link copied'},()=>prompt('Copy this link:',u))};
+  try{history.replaceState(null,'','#mandarin-'+encodeURIComponent(d.c))}catch(e){}
+  if(!quiet)speak(d.c,'zh-CN');if(!voiceFor('zh-CN')&&voices.length)noVoice('zh-CN');}
+
+
+// ---------- quizzes ----------
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+let quiz=null;
+function startQuiz(kind){
+  let pool=items().filter(it=>kind!=='word'||it.w);if(pool.length<4){alert('This section has too few symbols for a quiz. Choose a bigger section.');return}
+  const qs=shuffle(pool.slice()).slice(0,Math.min(10,pool.length)).map(it=>{const others=shuffle(pool.filter(x=>x!==it&&(kind==='read'?x.r!==it.r:x.g!==it.g))).slice(0,3);return {it,opts:shuffle([it,...others])}});
+  quiz={kind,qs,i:0,score:0,missed:[]};showQ();
+}
+function showQ(){
+  const q=quiz.qs[quiz.i],a=$('quizArea');a.classList.remove('hidden');
+  const head='<div class="progress"><i style="width:'+(quiz.i/quiz.qs.length*100)+'%"></i></div><p class="muted">Question '+(quiz.i+1)+' of '+quiz.qs.length+' · score '+quiz.score+'</p>';
+  if(quiz.kind==='listen'){a.innerHTML=head+'<p class="q">Which symbol did you hear?</p><button class="primary" id="qPlay">🔊 Play again</button><div class="opts">'+q.opts.map((o,i)=>'<button class="opt big-g" data-o="'+i+'" style="font-family:'+fontOf(o)+'">'+esc(o.g)+'</button>').join('')+'</div>';speak(q.it.say||q.it.g,cur.lang);$('qPlay').onclick=()=>speak(q.it.say||q.it.g,cur.lang)}
+  else if(quiz.kind==='read')a.innerHTML=head+'<p class="q">How is this symbol pronounced?</p><div class="qglyph" style="font-family:'+fontOf(q.it)+'">'+esc(q.it.g)+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" data-o="'+i+'">'+esc(o.r||o.n)+'</button>').join('')+'</div>';
+  else a.innerHTML=head+'<p class="q">What does this word mean?</p><div class="qglyph" style="font-size:44px;font-family:'+fontOf({})+'">'+esc(q.it.w)+'</div><div class="opts">'+q.opts.map((o,i)=>'<button class="opt" data-o="'+i+'">'+esc(o.wm||o.m)+'</button>').join('')+'</div>';
+  a.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>answer(q,q.opts[+b.dataset.o],b));
+}
+function answer(q,o,btn){
+  const a=$('quizArea');if(a.dataset.lock==='1')return;a.dataset.lock='1';const ok=o===q.it;if(ok){quiz.score++;setProg(q.it.g,1)}else quiz.missed.push(q.it);
+  a.querySelectorAll('[data-o]').forEach(b=>{const x=q.opts[+b.dataset.o];b.disabled=true;if(x===q.it)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  const exp=document.createElement('div');exp.className='why';exp.innerHTML=(ok?'✅ Correct! ':'❌ It was <b style="font-family:'+fontOf(q.it)+'">'+esc(q.it.g)+'</b> — '+esc(q.it.r||'')+'. ')+esc((cur.why?cur.why(q.it,cur):q.it.y)||'');a.appendChild(exp);
+  const nb=document.createElement('button');nb.className='primary';nb.textContent=quiz.i<quiz.qs.length-1?'Next question →':'See results';nb.onclick=()=>{a.dataset.lock='0';if(++quiz.i<quiz.qs.length)showQ();else endQuiz()};a.appendChild(nb);nb.focus();
+  speak(q.it.say||q.it.g,cur.lang);
+}
+function endQuiz(){const pct=Math.round(quiz.score/quiz.qs.length*100);const best=store.get('alphabetBest',{}),k=cur.id+'|'+quiz.kind;const prev=best[k]||0;if(pct>prev){best[k]=pct;store.set('alphabetBest',best)}
+  $('quizArea').innerHTML='<p class="result-score">You scored '+quiz.score+' / '+quiz.qs.length+' ('+pct+'%) '+(pct>=90?'🏆':pct>=70?'🎉':'📚')+'</p><p class="muted">Best for this quiz: '+Math.max(pct,prev)+'%</p>'+(quiz.missed.length?'<p>Practise these:</p><div class="grid-sym">'+quiz.missed.map(it=>'<button class="sym" data-g="'+esc(it.g)+'"><span class="g" style="font-family:'+fontOf(it)+'">'+esc(it.g)+'</span><span class="r">'+esc(it.r||'')+'</span></button>').join('')+'</div>':'')+'<div class="actions" style="margin-top:10px"><button class="primary" id="againQ">Try again</button></div>';
+  $('quizArea').querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{pick(itemByGlyph(b.dataset.g));$('detailPanel').scrollIntoView({behavior:'smooth'})});
+  const kind=quiz.kind;$('againQ').onclick=()=>startQuiz(kind)}
+$('quizListen').onclick=()=>startQuiz('listen');$('quizRead').onclick=()=>startQuiz('read');$('quizWord').onclick=()=>startQuiz('word');
+
+// ---------- typing with the on-screen keyboard ----------
+const KB={thai:'thai',arabic:'arabic',mandarin:'mandarin',hiragana:'hiragana',katakana:'katakana',hangul:'hangul',greek:'greek',cyrillic:'russian',hebrew:'hebrew',devanagari:'devanagari',georgian:'georgian'};
+const allItems=()=>cur.sections.reduce((a,s)=>a.concat(s.items),[]);
+function kbLayout(s){
+  s=s||cur;if(KB[s.id])return KB[s.id];
+  const id='chart-'+s.id,base=MigaKeyboard.forLang(s.lang),lay={name:s.name+' (chart)',lang:s.lang,dir:s.dir,font:s.font,chart:MigaKeyboard.keysFromGlyphs(allItems().map(it=>it.g))};
+  MigaKeyboard.registerLayout(id,lay);return id;
+}
+let glyphMap=new Map();
+function prepKeyboard(){
+  const id=kbLayout();
+  if(!/^(hiragana|katakana)$/.test(cur.id)&&KB[cur.id])MigaKeyboard.setChartKeys(id,MigaKeyboard.keysFromGlyphs(allItems().filter(it=>it.font!=='latin').map(it=>it.g)));
+  glyphMap=new Map();allItems().forEach(it=>{if(it.font==='latin')return;MigaKeyboard.keysFromGlyphs([it.g]).forEach(k=>{if(!glyphMap.has(k))glyphMap.set(k,it)});if(!glyphMap.has(it.g))glyphMap.set(it.g,it)});
+  $('tName').textContent=cur.name;$('tName2').textContent=cur.name;
+  $('typeBox').dir=cur.dir||'ltr';$('typeBox').style.fontFamily=(cur.font||'inherit')+',sans-serif';$('typeBox').lang=cur.lang||'';
+  if(MigaKeyboard.isOpen())MigaKeyboard.setLayout(id);
+  renderBreakdown();
+}
+MigaKeyboard.layoutFor(el=>el.closest('#typePanel')?kbLayout():null);
+document.addEventListener('migakeyboard',e=>document.body.classList.toggle('kb-open',e.detail.open));
+$('kbOpen').onclick=()=>MigaKeyboard.open({layout:kbLayout(),target:$('typeBox'),view:cur.id==='mandarin'?'std':'abc'});
+$('typeSay').onclick=()=>{const t=$('typeBox').value.trim();if(t)speak(t,cur.lang,.8)};
+$('typeCopy').onclick=async()=>{try{await navigator.clipboard.writeText($('typeBox').value);$('typeCopy').textContent='✅ Copied'}catch(e){$('typeBox').select();document.execCommand('copy')}setTimeout(()=>$('typeCopy').textContent='📋 Copy',1500)};
+$('typeClear').onclick=()=>{$('typeBox').value='';renderBreakdown();$('typeBox').focus()};
+$('typeBox').addEventListener('input',renderBreakdown);
+function lookup(ch){
+  if(glyphMap.has(ch))return glyphMap.get(ch);
+  const low=ch.toLowerCase(),up=ch.toUpperCase();for(const [k,it] of glyphMap)if(k===low||k===up)return it;
+  return null;
+}
+function renderBreakdown(){
+  const text=$('typeBox').value.slice(0,300),out=[];
+  Array.from(text).forEach(ch=>{
+    if(/\s/.test(ch))return;
+    const parts=cur.id==='hangul'&&MigaKeyboard.decomposeHangul(ch);
+    if(parts){out.push({ch,label:parts.map(p=>{const it=lookup(p);return it?(it.r||'').split(/[ /(]/)[0]:p}).join('·'),it:lookup(parts[0]),parts:parts.join(' ')});return}
+    const it=lookup(ch);out.push({ch,label:it?(it.r||it.n||'').split(' (')[0]:'',it});
+  });
+  $('typeBreak').innerHTML=out.length?out.map((o,i)=>'<button type="button" class="'+(o.it?'':'unk')+'" data-b="'+i+'" title="'+esc(o.parts||'')+'"><b style="font-family:'+fontOf(o.it||{})+'">'+esc(o.ch)+'</b><small>'+esc(o.label||'?')+'</small></button>').join(''):'<span class="muted">Your letters appear here with their sounds.</span>';
+  $('typeBreak').querySelectorAll('[data-b]').forEach(b=>b.onclick=()=>{const o=out[+b.dataset.b];speak(o.ch,cur.lang,.7);if(o.it){const si=cur.sections.findIndex(s=>s.items.includes(o.it));if(si>=0&&si!==sec){sec=si;$('sections').querySelectorAll('[data-sec]').forEach(x=>x.classList.toggle('active',+x.dataset.sec===si));renderGrid()}pick(o.it,true)}});
+}
+// Typing challenge
+let tc=null;
+const cleanWord=w=>String(w||'').replace(/\(.*?\)/g,'').trim();
+const normWord=w=>{let s=cleanWord(w).normalize('NFC').replace(/\s+/g,'');if(cur.id==='arabic'||cur.id==='hebrew')s=s.replace(/\p{M}/gu,'');return cur.noCase?s:s.toLowerCase()};
+$('tcStart').onclick=()=>{
+  const pool=allItems().filter(it=>it.w&&cleanWord(it.w)&&!/[A-Za-z]/.test(cleanWord(it.w)));
+  const seen=new Set(),uniq=pool.filter(it=>{const k=cleanWord(it.w);if(seen.has(k))return false;seen.add(k);return true});
+  if(uniq.length<3){$('tcArea').innerHTML='<p class="muted">This chart has too few example words for a challenge.</p>';return}
+  tc={list:shuffle(uniq.slice()).slice(0,10),i:0,score:0,hints:0,res:[]};tcShow();
+};
+function tcShow(){
+  const it=tc.list[tc.i],w=cleanWord(it.w);
+  $('tcArea').innerHTML='<div class="progress"><i style="width:'+(tc.i/tc.list.length*100)+'%"></i></div><p class="muted">Word '+(tc.i+1)+' of '+tc.list.length+' · score '+tc.score+'</p>'+
+    '<p class="q">Type the word for “'+esc(it.wm||it.m||'')+'”'+(it.wr?' <small class="muted">('+esc(it.wr)+')</small>':'')+'</p>'+
+    '<div class="tc-row"><input id="tcIn" dir="'+(cur.dir||'ltr')+'" lang="'+esc(cur.lang||'')+'" autocomplete="off" spellcheck="false" style="font-family:'+fontOf({})+'" aria-label="Your answer"><button class="secondary" id="tcKb" title="On-screen keyboard">⌨️</button><button class="secondary" id="tcPlay">🔊</button><button class="secondary" id="tcHint">💡 Hint</button><button class="primary" id="tcCheck">Check</button></div><div id="tcFb" style="margin-top:8px"></div>';
+  const inp=$('tcIn');
+  $('tcPlay').onclick=()=>speak(w,cur.lang,.75);$('tcKb').onclick=()=>MigaKeyboard.open({layout:kbLayout(),target:inp,view:cur.id==='mandarin'?'std':'abc'});
+  $('tcHint').onclick=()=>{const a=Array.from(w),v=Array.from(inp.value);let k=0;while(k<v.length&&k<a.length&&v[k]===a[k])k++;inp.value=a.slice(0,k+1).join('');tc.hints++;inp.focus();inp.setSelectionRange(inp.value.length,inp.value.length)};
+  $('tcCheck').onclick=tcCheck;inp.onkeydown=e=>{if(e.key==='Enter'&&!e.defaultPrevented)tcCheck()};
+  speak(w,cur.lang,.75);
+  if(MigaKeyboard.isOpen())MigaKeyboard.open({layout:kbLayout(),target:inp});else inp.focus();
+}
+function tcCheck(){
+  const it=tc.list[tc.i],w=cleanWord(it.w),v=$('tcIn').value;if(!v.trim()||tc.done)return;tc.done=true;
+  const ok=normWord(v)===normWord(w);if(ok)tc.score++;tc.res.push([it,ok]);if(ok)setProg(it.g,1);
+  const a=Array.from(cleanWord(w).replace(/\s+/g,'')),b=Array.from(v.trim().replace(/\s+/g,''));
+  const diff=a.map((c,k)=>'<span class="'+(b[k]===undefined?'miss':(b[k].normalize('NFC')===c||(!cur.noCase&&b[k].toLowerCase()===c.toLowerCase()))?'ok':'bad')+'">'+esc(b[k]===undefined?c:b[k])+'</span>').join('')+(b.length>a.length?'<span class="bad">'+esc(b.slice(a.length).join(''))+'</span>':'');
+  $('tcFb').innerHTML=(ok?'<p class="result-score" style="color:#2f6b49">✅ Correct!</p>':'<p class="result-score" style="color:#9b3322">❌ Not quite</p>')+
+    '<div class="diff" dir="'+(cur.dir||'ltr')+'" style="font-family:'+fontOf({})+'">'+diff+'</div><p>Answer: <b style="font-size:24px;font-family:'+fontOf({})+'">'+esc(w)+'</b> — '+esc(it.wr||'')+' — '+esc(it.wm||it.m||'')+'</p><button class="primary" id="tcNext">'+(tc.i<tc.list.length-1?'Next word →':'See results')+'</button>';
+  $('tcNext').onclick=()=>{tc.done=false;if(++tc.i<tc.list.length)tcShow();else tcEnd()};$('tcNext').focus();
+}
+function tcEnd(){
+  const pct=Math.round(tc.score/tc.list.length*100),best=store.get('alphabetBest',{}),k=cur.id+'|typing',prev=best[k]||0;if(pct>prev){best[k]=pct;store.set('alphabetBest',best)}
+  $('tcArea').innerHTML='<p class="result-score">You typed '+tc.score+' / '+tc.list.length+' words correctly ('+pct+'%) '+(pct>=90?'🏆':pct>=70?'🎉':'📚')+'</p><p class="muted">Best: '+Math.max(pct,prev)+'% · hints used: '+tc.hints+'</p><ul>'+tc.res.map(([it,ok])=>'<li>'+(ok?'✅':'❌')+' <span style="font-size:22px;font-family:'+fontOf({})+'">'+esc(cleanWord(it.w))+'</span> — '+esc(it.wm||it.m||'')+'</li>').join('')+'</ul>';
+  tc=null;
+}
+
+// ---------- start ----------
+const start=scripts.find(s=>'#'+s.id===location.hash)||(dictWant?scripts.find(s=>s.id==='mandarin'):null)||scripts[0];
+renderScripts();
+(document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>choose(start));
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

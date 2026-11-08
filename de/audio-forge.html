@@ -1,0 +1,204 @@
+<!-- Generated from /audio-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="de" data-en-title="Trim, join, speed up and convert audio privately — Audio Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Audio privat schneiden, verbinden, beschleunigen und umwandeln — Audio Forge | MigaBuilder</title>
+<meta name="description" content="Audio Forge ist ein Audio-Editor in deinem Browser: schneiden und kürzen, Dateien verbinden, Lautstärke und Tempo ändern, ein-/ausblenden, umkehren, normalisieren, deine Stimme aufnehmen und exportieren.">
+<link rel="canonical" href="https://migabuilder.com/de/audio-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/audio-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Audio privat schneiden, verbinden, beschleunigen und umwandeln — Audio Forge">
+<meta property="og:description" content="Audio Forge ist ein Audio-Editor in deinem Browser: schneiden und kürzen, Dateien verbinden, Lautstärke und Tempo ändern, ein-/ausblenden, umkehren, normalisieren, deine Stimme aufnehmen und exportieren.">
+<meta property="og:url" content="https://migabuilder.com/de/audio-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.wave-wrap{position:relative;background:#0b1e30;border-radius:4px;height:180px;touch-action:none;cursor:crosshair;user-select:none}
+.wave-wrap canvas{position:absolute;inset:0;width:100%;height:100%}
+.times{display:flex;justify-content:space-between;font:13px 'IBM Plex Sans';color:rgba(22,32,43,.7);margin:6px 0 10px}
+.tools{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-top:10px}
+.tools button{padding:10px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;cursor:pointer;font-weight:600;text-align:left}
+.tools button:hover{border-color:#0E2A47}.tools button:disabled{opacity:.45;cursor:not-allowed}
+.tools small{display:block;font-weight:400;color:rgba(22,32,43,.72);font-size:12px}
+.slider{display:flex;gap:10px;align-items:center}.slider input{flex:1}
+.drop{border:2px dashed rgba(14,42,71,.35);border-radius:6px;padding:26px;text-align:center;background:rgba(255,255,255,.5)}
+.drop.over{border-color:var(--amber);background:#fff7e6}
+.hidden{display:none!important}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/audio-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kann ich meine eigene Stimme aufnehmen?","acceptedAnswer":{"@type":"Answer","text":"Ja. Nimm über dein Mikrofon auf, bearbeite die Aufnahme auf der Wellenform und lade sie als MP3 oder WAV herunter."}},{"@type":"Question","name":"Ist Audio Forge kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/audio-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/audio-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/audio-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/audio-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/audio-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/audio-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/audio-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/audio-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/audio-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/audio-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/de/">← All tools</a><span>Audio Forge</span></nav>
+<header class="masthead"><div><h1>Audio Forge</h1><p>Trim, join, fade, speed up, reverse and convert audio — privately, in your browser.</p></div></header>
+<main>
+<section class="panel">
+  <h2>1. Open or record audio</h2>
+  <div class="drop" id="drop">Drop an audio or video file here (MP3, WAV, M4A, OGG, WebM, MP4…)<br><br>
+    <label class="primary" style="display:inline-block;cursor:pointer"><input type="file" id="file" accept="audio/*,video/*" hidden>Choose file</label>
+    <button class="secondary" id="recBtn">🎙️ Record from microphone</button></div>
+  <p class="privacy" style="margin-top:12px">Everything happens on this device. Your audio is never uploaded.</p>
+</section>
+
+<section class="panel hidden" id="editor">
+  <h2>2. Edit</h2>
+  <p class="muted" style="margin-top:0">Drag across the waveform to select part of the audio. Tools work on the selection, or on everything when nothing is selected.</p>
+  <div class="wave-wrap" id="wave"><canvas id="waveCanvas"></canvas></div>
+  <div class="times"><span id="tSel">Nothing selected</span><span id="tLen"></span></div>
+  <div class="actions">
+    <button class="primary" id="play">▶ Play</button><button class="secondary" id="selAll">Select all</button><button class="secondary" id="selNone">Clear selection</button>
+    <button class="secondary" id="undo" disabled>↶ Undo</button>
+  </div>
+  <div class="tools">
+    <button id="trim">✂️ Keep selection<small>Trim everything else away</small></button>
+    <button id="cut">🗑️ Delete selection<small>Remove the selected part</small></button>
+    <button id="fadeIn">📈 Fade in<small>Start of selection (or first 2 s)</small></button>
+    <button id="fadeOut">📉 Fade out<small>End of selection (or last 2 s)</small></button>
+    <button id="normalize">📊 Normalise<small>Make the loudest peak full volume</small></button>
+    <button id="reverse">🔁 Reverse<small>Play backwards</small></button>
+    <button id="silence">🔇 Silence<small>Mute the selection</small></button>
+    <button id="mono">🎧 Stereo → mono<small>Mix channels together</small></button>
+    <label class="tools-join" style="display:contents"><button id="joinBtn">➕ Join another file<small>Add it to the end</small></button></label>
+  </div>
+  <input type="file" id="joinFile" accept="audio/*,video/*" hidden>
+  <div class="grid" style="margin-top:14px">
+    <div class="field"><label for="vol">Volume: <b id="volV">100%</b></label><div class="slider"><input type="range" id="vol" min="0" max="300" value="100"><button class="secondary" id="applyVol">Apply</button></div></div>
+    <div class="field"><label for="speed">Speed: <b id="speedV">1.00×</b> <span class="muted">(also changes pitch, like a record)</span></label><div class="slider"><input type="range" id="speed" min="50" max="200" value="100"><button class="secondary" id="applySpeed">Apply</button></div></div>
+  </div>
+</section>
+
+<section class="panel hidden" id="exportPanel">
+  <h2>3. Download</h2>
+  <div class="grid">
+    <div class="field"><label for="fmt">Format</label><select id="fmt"><option value="mp3">MP3 (small, plays everywhere)</option><option value="wav">WAV (lossless, large)</option></select></div>
+    <div class="field"><label for="kbps">MP3 quality</label><select id="kbps"><option>96</option><option>128</option><option selected>192</option><option>256</option><option>320</option></select></div>
+  </div>
+  <div class="field"><label for="name">File name</label><input id="name" value="edited-audio"></div>
+  <div class="actions"><button class="primary" id="export">⬇ Download</button></div>
+  <p class="status" id="status"></p>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Audio Forge</h2>
+  <p>Audio Forge is an audio editor in your browser: trim and cut, join files, change volume and speed, fade, reverse, normalise, record your voice and export.</p>
+  <h3>How to use Audio Forge</h3>
+  <ol><li>Open an audio or video file, or record from your microphone.</li><li>Press “Keep selection”.</li><li>Drag across the waveform to select a part, apply fades, volume or speed, then download MP3 or WAV.</li></ol>
+  <h3>Can I record my own voice?</h3>
+  <p>Yes. Record from your microphone, edit the recording on the waveform and download it as MP3 or WAV.</p>
+  <h3>Is Audio Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/music-forge.html">Music Forge</a> · <a href="/de/voice-forge.html">Voice Forge</a> · <a href="/de/media-convert.html">Media Convert</a></p>
+</section>
+
+<footer>Audio Forge · MigaBuilder · Private, in-browser audio editing.</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+let ctx=null,buf=null,history=[],sel=null,src=null,playStart=0,playOffset=0,raf=0;
+const AC=()=>ctx||(ctx=new (window.AudioContext||window.webkitAudioContext)());
+function status(t){$('status').textContent=t;$('status').classList.toggle('show',!!t)}
+async function decode(file){const data=await file.arrayBuffer();try{return await AC().decodeAudioData(data)}catch(e){throw new Error('This file could not be read as audio. Try MP3, WAV, M4A, OGG or a video file with sound.')}}
+async function open(file){try{stop();buf=await decode(file);history=[];sel=null;$('name').value=(file.name||'recording').replace(/\.[^.]+$/,'')+'-edited';show()}catch(e){alert(e.message)}}
+$('file').onchange=e=>{if(e.target.files[0])open(e.target.files[0]);e.target.value=''};
+const drop=$('drop');['dragenter','dragover'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.add('over')}));['dragleave','drop'].forEach(t=>drop.addEventListener(t,e=>{e.preventDefault();drop.classList.remove('over')}));drop.addEventListener('drop',e=>{if(e.dataTransfer.files[0])open(e.dataTransfer.files[0])});
+
+// recording
+let rec=null,chunks=[];
+$('recBtn').onclick=async()=>{
+  if(rec){rec.stop();return}
+  try{const stream=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];rec=new MediaRecorder(stream);rec.ondataavailable=e=>chunks.push(e.data);
+    rec.onstop=()=>{stream.getTracks().forEach(t=>t.stop());rec=null;$('recBtn').textContent='🎙️ Record from microphone';open(new File(chunks,'recording.webm',{type:chunks[0]&&chunks[0].type||'audio/webm'}))};
+    rec.start();$('recBtn').textContent='■ Stop recording';}catch(e){alert('Microphone not available: '+e.message)}
+};
+
+// helpers
+const fmt=s=>{const m=Math.floor(s/60),r=(s%60).toFixed(2).padStart(5,'0');return m+':'+r};
+function newBuf(ch,len,rate){return AC().createBuffer(ch,Math.max(1,len),rate||buf.sampleRate)}
+function range(){if(!sel||sel[1]-sel[0]<0.01)return [0,buf.length];return [Math.floor(sel[0]*buf.sampleRate),Math.floor(sel[1]*buf.sampleRate)]}
+function commit(nb){history.push(buf);if(history.length>20)history.shift();buf=nb;$('undo').disabled=false;show()}
+function copyBuf(){const nb=newBuf(buf.numberOfChannels,buf.length);for(let c=0;c<buf.numberOfChannels;c++)nb.getChannelData(c).set(buf.getChannelData(c));return nb}
+function show(){$('editor').classList.remove('hidden');$('exportPanel').classList.remove('hidden');if(sel&&sel[1]>buf.duration)sel=null;$('tLen').textContent='Length '+fmt(buf.duration)+' · '+buf.numberOfChannels+' channel'+(buf.numberOfChannels>1?'s':'')+' · '+buf.sampleRate+' Hz';$('tSel').textContent=sel?'Selected '+fmt(sel[0])+' – '+fmt(sel[1])+' ('+(sel[1]-sel[0]).toFixed(2)+' s)':'Nothing selected';draw()}
+
+// waveform
+const cv=$('waveCanvas');
+function draw(pos){
+  const r=cv.getBoundingClientRect(),d=devicePixelRatio||1;cv.width=r.width*d;cv.height=r.height*d;const c=cv.getContext('2d'),W=cv.width,H=cv.height;c.clearRect(0,0,W,H);
+  if(sel){c.fillStyle='rgba(226,166,59,.28)';c.fillRect(sel[0]/buf.duration*W,0,(sel[1]-sel[0])/buf.duration*W,H)}
+  const data=buf.getChannelData(0),step=Math.max(1,Math.floor(data.length/W));c.fillStyle='#6FD1E0';
+  for(let x=0;x<W;x++){let mn=1,mx=-1;const s=x*step;for(let i=0;i<step;i+=Math.max(1,step>>6)){const v=data[s+i]||0;if(v<mn)mn=v;if(v>mx)mx=v}c.fillRect(x,(1-mx)*H/2,1,Math.max(1,(mx-mn)*H/2))}
+  c.fillStyle='rgba(237,234,224,.25)';c.fillRect(0,H/2,W,1);
+  if(pos!=null){c.fillStyle='#E2A63B';c.fillRect(pos/buf.duration*W-1,0,2*d,H)}
+}
+let dragFrom=null;const wave=$('wave');
+const tAt=e=>{const r=wave.getBoundingClientRect();return Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*buf.duration};
+wave.addEventListener('pointerdown',e=>{wave.setPointerCapture(e.pointerId);dragFrom=tAt(e);sel=null;show()});
+wave.addEventListener('pointermove',e=>{if(dragFrom==null)return;const t=tAt(e);sel=[Math.min(dragFrom,t),Math.max(dragFrom,t)];show()});
+wave.addEventListener('pointerup',()=>{if(sel&&sel[1]-sel[0]<0.02){playOffset=sel[0];sel=null;show()}dragFrom=null});
+window.addEventListener('resize',()=>buf&&draw());
+$('selAll').onclick=()=>{sel=[0,buf.duration];show()};$('selNone').onclick=()=>{sel=null;show()};
+$('undo').onclick=()=>{if(!history.length)return;stop();buf=history.pop();$('undo').disabled=!history.length;show()};
+
+// playback
+function stop(){if(src){try{src.stop()}catch(e){}src.onended=null;src=null}cancelAnimationFrame(raf);$('play').textContent='▶ Play';if(buf)draw()}
+$('play').onclick=()=>{if(src){stop();return}const a=sel?sel[0]:0,b=sel?sel[1]:buf.duration;src=AC().createBufferSource();src.buffer=buf;src.connect(AC().destination);src.start(0,a,b-a);playStart=AC().currentTime;src.onended=stop;$('play').textContent='■ Stop';
+  const tick=()=>{if(!src)return;draw(a+AC().currentTime-playStart);raf=requestAnimationFrame(tick)};tick()};
+
+// edits
+function slice(from,to){const nb=newBuf(buf.numberOfChannels,to-from);for(let c=0;c<buf.numberOfChannels;c++)nb.getChannelData(c).set(buf.getChannelData(c).subarray(from,to));return nb}
+$('trim').onclick=()=>{if(!sel)return alert('Select the part you want to keep first.');stop();const [a,b]=range();sel=null;commit(slice(a,b))};
+$('cut').onclick=()=>{if(!sel)return alert('Select the part you want to delete first.');stop();const [a,b]=range(),nb=newBuf(buf.numberOfChannels,buf.length-(b-a));
+  for(let c=0;c<buf.numberOfChannels;c++){const s=buf.getChannelData(c),d=nb.getChannelData(c);d.set(s.subarray(0,a));d.set(s.subarray(b),a)}sel=null;commit(nb)};
+function mapRange(fn,a,b){stop();const nb=copyBuf();[a,b]=a==null?range():[a,b];for(let c=0;c<nb.numberOfChannels;c++){const d=nb.getChannelData(c);for(let i=a;i<b;i++)d[i]=fn(d[i],i-a,b-a)}commit(nb)}
+$('fadeIn').onclick=()=>{const [a,b]=sel?range():[0,Math.min(buf.length,2*buf.sampleRate)];mapRange((v,i,n)=>v*(i/n),a,b)};
+$('fadeOut').onclick=()=>{const [a,b]=sel?range():[Math.max(0,buf.length-2*buf.sampleRate),buf.length];mapRange((v,i,n)=>v*(1-i/n),a,b)};
+$('silence').onclick=()=>{if(!sel)return alert('Select the part to mute first.');mapRange(()=>0)};
+$('normalize').onclick=()=>{const [a,b]=range();let peak=0;for(let c=0;c<buf.numberOfChannels;c++){const d=buf.getChannelData(c);for(let i=a;i<b;i++)peak=Math.max(peak,Math.abs(d[i]))}if(!peak)return;const g=0.99/peak;mapRange(v=>v*g)};
+$('reverse').onclick=()=>{stop();const [a,b]=range(),nb=copyBuf();for(let c=0;c<nb.numberOfChannels;c++)nb.getChannelData(c).subarray(a,b).reverse();commit(nb)};
+$('mono').onclick=()=>{if(buf.numberOfChannels<2)return alert('This audio is already mono.');stop();const nb=newBuf(1,buf.length),d=nb.getChannelData(0),n=buf.numberOfChannels;for(let c=0;c<n;c++){const s=buf.getChannelData(c);for(let i=0;i<s.length;i++)d[i]+=s[i]/n}commit(nb)};
+$('vol').oninput=()=>$('volV').textContent=$('vol').value+'%';
+$('applyVol').onclick=()=>{const g=$('vol').value/100;mapRange(v=>Math.max(-1,Math.min(1,v*g)));$('vol').value=100;$('volV').textContent='100%'};
+$('speed').oninput=()=>$('speedV').textContent=($('speed').value/100).toFixed(2)+'×';
+$('applySpeed').onclick=async()=>{const r=$('speed').value/100;if(r===1)return;stop();
+  const off=new OfflineAudioContext(buf.numberOfChannels,Math.ceil(buf.length/r),buf.sampleRate),s=off.createBufferSource();s.buffer=buf;s.playbackRate.value=r;s.connect(off.destination);s.start();
+  const out=await off.startRendering();sel=null;commit(out);$('speed').value=100;$('speedV').textContent='1.00×'};
+$('joinBtn').onclick=()=>$('joinFile').click();
+$('joinFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{stop();let add=await decode(f);
+  if(add.sampleRate!==buf.sampleRate){const off=new OfflineAudioContext(add.numberOfChannels,Math.ceil(add.duration*buf.sampleRate),buf.sampleRate),s=off.createBufferSource();s.buffer=add;s.connect(off.destination);s.start();add=await off.startRendering()}
+  const ch=Math.max(buf.numberOfChannels,add.numberOfChannels),nb=newBuf(ch,buf.length+add.length);
+  for(let c=0;c<ch;c++){const d=nb.getChannelData(c);d.set(buf.getChannelData(Math.min(c,buf.numberOfChannels-1)));d.set(add.getChannelData(Math.min(c,add.numberOfChannels-1)),buf.length)}commit(nb)}catch(err){alert(err.message)}};
+
+// export
+function wav(b){const ch=b.numberOfChannels,len=b.length,out=new DataView(new ArrayBuffer(44+len*ch*2));let p=0;const s=t=>{for(const c of t)out.setUint8(p++,c.charCodeAt(0))},u32=v=>{out.setUint32(p,v,true);p+=4},u16=v=>{out.setUint16(p,v,true);p+=2};
+  s('RIFF');u32(36+len*ch*2);s('WAVE');s('fmt ');u32(16);u16(1);u16(ch);u32(b.sampleRate);u32(b.sampleRate*ch*2);u16(ch*2);u16(16);s('data');u32(len*ch*2);
+  const data=[...Array(ch)].map((_,c)=>b.getChannelData(c));for(let i=0;i<len;i++)for(let c=0;c<ch;c++){const v=Math.max(-1,Math.min(1,data[c][i]));out.setInt16(p,v<0?v*0x8000:v*0x7fff,true);p+=2}return new Blob([out],{type:'audio/wav'})}
+let lameReady=null;function loadLame(){return lameReady=lameReady||new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js';s.onload=res;s.onerror=()=>rej(new Error('Could not load the MP3 encoder. Check your connection or choose WAV.'));document.head.appendChild(s)})}
+async function mp3(b,kbps){await loadLame();const ch=Math.min(2,b.numberOfChannels),enc=new lamejs.Mp3Encoder(ch,b.sampleRate,kbps),parts=[],B=1152;
+  const toI=f=>{const o=new Int16Array(f.length);for(let i=0;i<f.length;i++){const v=Math.max(-1,Math.min(1,f[i]));o[i]=v<0?v*0x8000:v*0x7fff}return o};
+  const L=toI(b.getChannelData(0)),R=ch>1?toI(b.getChannelData(1)):null;
+  for(let i=0;i<L.length;i+=B){const m=ch>1?enc.encodeBuffer(L.subarray(i,i+B),R.subarray(i,i+B)):enc.encodeBuffer(L.subarray(i,i+B));if(m.length)parts.push(new Uint8Array(m));if(i%(B*400)===0){status('Encoding MP3… '+Math.round(i/L.length*100)+'%');await new Promise(r=>setTimeout(r))}}
+  const e=enc.flush();if(e.length)parts.push(new Uint8Array(e));return new Blob(parts,{type:'audio/mpeg'})}
+$('export').onclick=async()=>{if(!buf)return;$('export').disabled=true;try{const f=$('fmt').value,blob=f==='wav'?wav(buf):await mp3(buf,+$('kbps').value);
+  const a=document.createElement('a'),u=URL.createObjectURL(blob);a.href=u;a.download=($('name').value.trim()||'audio')+'.'+f;a.click();setTimeout(()=>URL.revokeObjectURL(u),2000);status('Downloaded '+a.download+' ('+(blob.size/1048576).toFixed(2)+' MB).')}catch(e){status(e.message)}$('export').disabled=false};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

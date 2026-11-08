@@ -1,0 +1,963 @@
+<!-- Generated from /contract-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="fr" data-en-title="Free contract &amp; NDA generator — Contract Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='fr';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/fr/contract-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Générateur gratuit de contrats et NDA — Contract Forge | MigaBuilder</title>
+<meta name="description" content="Contract Forge rédige des contrats en langage clair : prestation de services, NDA ou contrat de prestataire indépendant.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Générateur gratuit de contrats et NDA — Contract Forge">
+<meta property="og:description" content="Contract Forge rédige des contrats en langage clair : prestation de services, NDA ou contrat de prestataire indépendant.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/contract-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/fr/contract-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Générateur gratuit de contrats et NDA — Contract Forge">
+<meta name="twitter:description" content="Contract Forge rédige des contrats en langage clair : prestation de services, NDA ou contrat de prestataire indépendant.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/contract-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/contract-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 22px 22px 26px; max-height: calc(100vh - 40px); overflow-y: auto;
+    position: sticky; top: 20px;
+  }
+  @media (max-width: 900px) { .panel { position: static; max-height: none; } }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="text"], select, textarea {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 9px 10px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 70px; line-height: 1.5; }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 12px; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .draft-btn { flex: 1; }
+
+  .error-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .preview-wrap { background: #fff; border-radius: 2px; flex: 1; min-height: 460px; overflow: hidden; }
+  #previewFrame { width: 100%; height: 100%; min-height: 460px; border: 0; display: block; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Le contrat est-il un conseil juridique ?","acceptedAnswer":{"@type":"Answer","text":"Non. Il vous donne un premier brouillon clair. Lisez chaque clause et faites vérifier tout point important par un avocat avant de signer."}},{"@type":"Question","name":"Contract Forge est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."}},{"@type":"Question","name":"Mes fichiers sont-ils envoyés ?","acceptedAnswer":{"@type":"Answer","text":"Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."}}],"inLanguage":"fr"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/contract-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/contract-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/contract-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/contract-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/contract-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/contract-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/contract-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/contract-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/contract-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/contract-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Contract Forge</h1>
+    <p data-i18n="heroSubtitle">Fill in the details, preview it live, then print or download a plain-language agreement.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+
+    <div class="section-title" data-i18n="yourBusinessHeading">Your business</div>
+    <div class="field">
+      <label for="bizName" data-i18n="bizNameLabel">Business name</label>
+      <input type="text" id="bizName" data-i18n-placeholder="bizNamePlaceholder" placeholder="Your Business">
+    </div>
+
+    <div class="section-title" data-i18n="agreementHeading">Agreement</div>
+    <div class="field">
+      <label for="contractType" data-i18n="contractTypeLabel">Contract type</label>
+      <select id="contractType">
+        <option value="Service Agreement" data-i18n="contractTypeService">Service agreement</option>
+        <option value="NDA" data-i18n="contractTypeNda">Non-disclosure agreement (NDA)</option>
+        <option value="Independent Contractor Agreement" data-i18n="contractTypeContractor">Independent contractor agreement</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="otherParty" data-i18n="otherPartyLabel">Other party's name</label>
+      <input type="text" id="otherParty" data-i18n-placeholder="otherPartyPlaceholder" placeholder="Client or contractor name">
+    </div>
+    <div class="field">
+      <label for="effectiveDate" data-i18n="effectiveDateLabel">Effective date</label>
+      <input type="text" id="effectiveDate" data-i18n-placeholder="effectiveDatePlaceholder" placeholder="Defaults to today if left blank">
+    </div>
+    <div class="field">
+      <label for="scope" data-i18n="scopeLabel">Scope of work / purpose</label>
+      <textarea id="scope" data-i18n-placeholder="scopePlaceholder" placeholder="e.g. Weekly lawn mowing and hedge trimming at 123 Main St, April–October"></textarea>
+    </div>
+    <div class="field">
+      <label for="terms" data-i18n="termsLabel">Payment &amp; terms</label>
+      <textarea id="terms" data-i18n-placeholder="termsPlaceholder" placeholder="e.g. $150/visit, due within 7 days of service. Either party may cancel with 14 days' written notice."></textarea>
+    </div>
+    <div class="field">
+      <label for="governingLaw" data-i18n="governingLawLabel">Governing law (optional)</label>
+      <input type="text" id="governingLaw" data-i18n-placeholder="governingLawPlaceholder" placeholder="e.g. State of Texas">
+    </div>
+
+    <div class="section-title" data-i18n="signaturesHeading">Signatures (optional)</div>
+    <div class="field">
+      <label data-i18n="yourSigLabel">Your signature</label>
+      <canvas id="sigCanvasBiz" width="300" height="100" style="border:1px solid rgba(22,32,43,0.28);border-radius:var(--radius);background:#fff;touch-action:none;cursor:crosshair;display:block;width:100%;height:100px;"></canvas>
+      <button type="button" class="draft-btn secondary" id="clearSigBiz" data-i18n="clearBtnLabel" style="margin-top:6px;">Clear</button>
+    </div>
+    <div class="field">
+      <label data-i18n="otherSigLabel">Other party's signature</label>
+      <canvas id="sigCanvasOther" width="300" height="100" style="border:1px solid rgba(22,32,43,0.28);border-radius:var(--radius);background:#fff;touch-action:none;cursor:crosshair;display:block;width:100%;height:100px;"></canvas>
+      <button type="button" class="draft-btn secondary" id="clearSigOther" data-i18n="clearBtnLabel" style="margin-top:6px;">Clear</button>
+      <p class="hint" data-i18n="sigHint">Sign with a mouse or finger — handy if you're filling this out together with the other party. Otherwise leave blank and print or download for a signature later.</p>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+    <div class="btn-row" style="margin-top:18px;">
+      <button type="button" class="draft-btn secondary" id="printBtn" data-i18n="printBtnLabel">🖨️ Print now</button>
+      <button type="button" class="draft-btn" id="downloadBtn" data-i18n="downloadBtnLabel">⬇ Download HTML</button>
+    </div>
+    <p class="hint" data-i18n="instantHint">Instant, no AI call — updates live as you type. A plain-language template with signature lines for both parties; not a substitute for a lawyer on anything high-stakes, but solid for straightforward local business agreements.</p>
+  </section>
+
+  <section class="table">
+    <div class="title-block"><span data-i18n="previewTitle">CONTRACT FORGE — LIVE PREVIEW</span></div>
+    <div class="preview-wrap"><iframe id="previewFrame" title="Document preview" sandbox></iframe></div>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Contract Forge</h2>
+  <p>Contract Forge drafts plain-language agreements: a service agreement, an NDA or a contractor agreement.</p>
+  <h3>How to use Contract Forge</h3>
+  <ol><li>Choose the agreement type and enter the real parties and terms.</li><li>Press “Draft contract”.</li><li>Review every clause carefully, edit it, and export the document.</li></ol>
+  <h3>Is the contract legal advice?</h3>
+  <p>No. It gives you a clear starting draft. Read every clause and have a lawyer check anything important before you sign.</p>
+  <h3>Is Contract Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/fr/pdf-edit-forge.html">Sign Documents</a> · <a href="/fr/invoice-forge.html">Invoice Forge</a> · <a href="/fr/policy-forge.html">Policy Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/fr/">MigaBuilder</a>. Everything you enter stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/contract-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  const bizNameInput = document.getElementById('bizName');
+  const contractType = document.getElementById('contractType');
+  const otherParty = document.getElementById('otherParty');
+  const effectiveDateInput = document.getElementById('effectiveDate');
+  const scope = document.getElementById('scope');
+  const terms = document.getElementById('terms');
+  const governingLawInput = document.getElementById('governingLaw');
+  const errorBox = document.getElementById('errorBox');
+  const printBtn = document.getElementById('printBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const previewFrame = document.getElementById('previewFrame');
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  // ---------- draft autosave ----------
+  const DRAFT_KEY = 'contractForgeDraft_v1';
+  const draftFields = [bizNameInput, contractType, otherParty, effectiveDateInput, scope, terms, governingLawInput];
+
+  function saveDraft() {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        bizName: bizNameInput.value, contractType: contractType.value, otherParty: otherParty.value,
+        effectiveDate: effectiveDateInput.value, scope: scope.value, terms: terms.value, governingLaw: governingLawInput.value
+      }));
+    } catch (e) {}
+  }
+  function loadDraft() {
+    try {
+      const raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      if (d.bizName) bizNameInput.value = d.bizName;
+      if (d.contractType) contractType.value = d.contractType;
+      if (d.otherParty) otherParty.value = d.otherParty;
+      if (d.effectiveDate) effectiveDateInput.value = d.effectiveDate;
+      if (d.scope) scope.value = d.scope;
+      if (d.terms) terms.value = d.terms;
+      if (d.governingLaw) governingLawInput.value = d.governingLaw;
+    } catch (e) {}
+  }
+
+  // ---------- signature pads ----------
+  function setupSignaturePad(canvas) {
+    const ctx = canvas.getContext('2d');
+    ctx.lineWidth = 2; ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = '#16202B';
+    let drawing = false, hasContent = false, lastX = 0, lastY = 0;
+    function pos(e) {
+      const rect = canvas.getBoundingClientRect();
+      return { x: (e.clientX - rect.left) * (canvas.width / rect.width), y: (e.clientY - rect.top) * (canvas.height / rect.height) };
+    }
+    canvas.addEventListener('pointerdown', (e) => {
+      drawing = true; hasContent = true;
+      const p = pos(e); lastX = p.x; lastY = p.y;
+      try { canvas.setPointerCapture(e.pointerId); } catch (err) {}
+      e.preventDefault();
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (!drawing) return;
+      const p = pos(e);
+      ctx.beginPath(); ctx.moveTo(lastX, lastY); ctx.lineTo(p.x, p.y); ctx.stroke();
+      lastX = p.x; lastY = p.y;
+    });
+    function stop() { if (drawing) { drawing = false; renderPreview(); } }
+    canvas.addEventListener('pointerup', stop);
+    canvas.addEventListener('pointerleave', stop);
+    canvas.addEventListener('pointercancel', stop);
+    return {
+      isEmpty: () => !hasContent,
+      clear: () => { ctx.clearRect(0, 0, canvas.width, canvas.height); hasContent = false; renderPreview(); },
+      toDataUrl: () => hasContent ? canvas.toDataURL('image/png') : ''
+    };
+  }
+  const sigPadBiz = setupSignaturePad(document.getElementById('sigCanvasBiz'));
+  const sigPadOther = setupSignaturePad(document.getElementById('sigCanvasOther'));
+  document.getElementById('clearSigBiz').addEventListener('click', () => sigPadBiz.clear());
+  document.getElementById('clearSigOther').addEventListener('click', () => sigPadOther.clear());
+
+  draftFields.forEach(el => el.addEventListener('input', () => { renderPreview(); saveDraft(); }));
+
+  function docTypeWord(type) {
+    if (type === 'NDA') return I18N.t('docWordNda');
+    if (type === 'Independent Contractor Agreement') return I18N.t('docWordContractor');
+    return I18N.t('docWordService');
+  }
+
+  let docNumberCache = '';
+  function buildDocument() {
+    const type = contractType.value;
+    const typeWord = docTypeWord(type);
+    // Typed text is shown as text, never as HTML ("R&D <Team>" stays readable and pasted markup cannot run).
+    const esc = v => String(v).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const bizName = esc(bizNameInput.value.trim() || I18N.t('defaultBizName'));
+    const other = esc(otherParty.value.trim() || I18N.t('defaultOtherParty'));
+    const scopeText = esc(scope.value.trim() || I18N.t('defaultScopeText'));
+    const termsText = esc(terms.value.trim());
+    const governingLawText = esc(governingLawInput.value.trim());
+
+    const date = new Date().toLocaleDateString();
+    const effectiveDateText = esc(effectiveDateInput.value.trim() || date);
+    // One number per contract, so the preview, the print and the download match.
+    if (!docNumberCache) docNumberCache = 'C-' + Date.now().toString().slice(-6);
+    const docNumber = docNumberCache;
+    const isNda = type === 'NDA';
+
+    const bodyParagraphs = isNda
+      ? [
+          I18N.t('ndaIntro').replace('{date}', effectiveDateText).replace('{biz}', bizName).replace('{other}', other),
+          '<strong>' + I18N.t('labelPurpose') + '</strong> ' + scopeText,
+          '<strong>' + I18N.t('labelConfidentiality') + '</strong> ' + I18N.t('confidentialityText'),
+          termsText ? '<strong>' + I18N.t('labelAdditionalTerms') + '</strong> ' + termsText : '',
+          '<strong>' + I18N.t('labelTerm') + '</strong> ' + I18N.t('ndaTermText'),
+          governingLawText ? '<strong>' + I18N.t('labelGoverningLaw') + '</strong> ' + I18N.t('governingLawText').replace('{law}', governingLawText) : ''
+        ]
+      : [
+          I18N.t('otherIntro').replace('{type}', typeWord).replace('{date}', effectiveDateText).replace('{biz}', bizName).replace('{other}', other),
+          '<strong>' + I18N.t('labelScope') + '</strong> ' + scopeText,
+          termsText ? '<strong>' + I18N.t('labelPaymentTerms') + '</strong> ' + termsText : '',
+          '<strong>' + I18N.t('labelIndependentRelationship') + '</strong> ' + I18N.t('independentRelationshipText'),
+          '<strong>' + I18N.t('labelTermination') + '</strong> ' + I18N.t('terminationText'),
+          governingLawText ? '<strong>' + I18N.t('labelGoverningLaw') + '</strong> ' + I18N.t('governingLawText').replace('{law}', governingLawText) : ''
+        ];
+    const bodyHtml = bodyParagraphs.filter(Boolean).map(p => '<p>' + p + '</p>').join('');
+
+    const bizSigImg = sigPadBiz.toDataUrl();
+    const otherSigImg = sigPadOther.toDataUrl();
+    const bizSigBlock = bizSigImg ? '<img src="' + bizSigImg + '" style="height:60px;display:block;">' : '';
+    const otherSigBlock = otherSigImg ? '<img src="' + otherSigImg + '" style="height:60px;display:block;">' : '';
+
+    const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + typeWord + ' ' + docNumber + '</title>' +
+      '<style>body{font-family:Arial,sans-serif;color:#16202B;max-width:680px;margin:40px auto;padding:0 20px;line-height:1.6;}' +
+      'h1{font-size:20px;margin:0 0 4px;} .meta{color:#666;font-size:13px;margin-bottom:24px;}' +
+      'p{font-size:14px;margin:0 0 14px;}' +
+      '.sign-block{display:flex;gap:40px;margin-top:48px;}' +
+      '.sign{flex:1;} .sign-line{border-top:1px solid #16202B;margin-top:8px;padding-top:6px;font-size:12.5px;color:#666;}' +
+      '@media print{body{margin:0;}}</style></head><body>' +
+      '<h1>' + typeWord + '</h1>' +
+      '<div class="meta">#' + docNumber + ' · ' + I18N.t('docGenerated').replace('{date}', date) + '</div>' +
+      bodyHtml +
+      '<div class="sign-block">' +
+      '<div class="sign">' + bizSigBlock + '<div class="sign-line">' + bizName + ' — ' + I18N.t('docSigLine') + '</div></div>' +
+      '<div class="sign">' + otherSigBlock + '<div class="sign-line">' + other + ' — ' + I18N.t('docSigLine') + '</div></div>' +
+      '</div>' +
+      '</body></html>';
+
+    return { html: html, filename: type.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + docNumber + '.html' };
+  }
+
+  function renderPreview() {
+    const doc = buildDocument();
+    previewFrame.srcdoc = doc.html;
+  }
+
+  function validate() {
+    if (!otherParty.value.trim()) { showError(I18N.t('errorMissingOtherParty')); return false; }
+    if (!scope.value.trim()) { showError(I18N.t('errorMissingScope')); return false; }
+    return true;
+  }
+
+  printBtn.addEventListener('click', function () {
+    clearError();
+    if (!validate()) return;
+    const doc = buildDocument();
+    const win = window.open('', '_blank');
+    if (!win) { showError(I18N.t('errorPopupBlocked')); return; }
+    win.document.open();
+    win.document.write(doc.html);
+    win.document.close();
+    win.focus();
+    win.addEventListener('load', function () { win.print(); });
+    setTimeout(function () { try { win.print(); } catch (e) {} }, 400);
+  });
+
+  downloadBtn.addEventListener('click', function () {
+    clearError();
+    if (!validate()) return;
+    const doc = buildDocument();
+    const blob = new Blob([doc.html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = doc.filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Fill in the details, preview it live, then print or download a plain-language agreement.',
+      yourBusinessHeading: 'Your business',
+      bizNameLabel: 'Business name',
+      bizNamePlaceholder: 'Your Business',
+      agreementHeading: 'Agreement',
+      contractTypeLabel: 'Contract type',
+      contractTypeService: 'Service agreement',
+      contractTypeNda: 'Non-disclosure agreement (NDA)',
+      contractTypeContractor: 'Independent contractor agreement',
+      otherPartyLabel: "Other party's name",
+      otherPartyPlaceholder: 'Client or contractor name',
+      effectiveDateLabel: 'Effective date',
+      effectiveDatePlaceholder: 'Defaults to today if left blank',
+      scopeLabel: 'Scope of work / purpose',
+      scopePlaceholder: 'e.g. Weekly lawn mowing and hedge trimming at 123 Main St, April–October',
+      termsLabel: 'Payment & terms',
+      termsPlaceholder: "e.g. $150/visit, due within 7 days of service. Either party may cancel with 14 days' written notice.",
+      governingLawLabel: 'Governing law (optional)',
+      governingLawPlaceholder: 'e.g. State of Texas',
+      signaturesHeading: 'Signatures (optional)',
+      yourSigLabel: 'Your signature',
+      clearBtnLabel: 'Clear',
+      otherSigLabel: "Other party's signature",
+      sigHint: "Sign with a mouse or finger — handy if you're filling this out together with the other party. Otherwise leave blank and print or download for a signature later.",
+      printBtnLabel: '🖨️ Print now',
+      downloadBtnLabel: '⬇ Download HTML',
+      instantHint: 'Instant, no AI call — updates live as you type. A plain-language template with signature lines for both parties; not a substitute for a lawyer on anything high-stakes, but solid for straightforward local business agreements.',
+      previewTitle: 'CONTRACT FORGE — LIVE PREVIEW',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything you enter stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      errorMissingOtherParty: "Add the other party's name.",
+      errorMissingScope: 'Describe the scope of work or purpose.',
+      errorPopupBlocked: 'Your browser blocked the print window — allow pop-ups for this site and try again.',
+      defaultBizName: 'Your Business',
+      defaultOtherParty: "[other party's name]",
+      defaultScopeText: '[describe the scope of work or purpose]',
+      docWordNda: 'Non-Disclosure Agreement',
+      docWordContractor: 'Independent Contractor Agreement',
+      docWordService: 'Service Agreement',
+      ndaIntro: 'This Non-Disclosure Agreement ("Agreement") is entered into on {date} between {biz} ("Disclosing Party") and {other} ("Receiving Party").',
+      labelPurpose: 'Purpose.',
+      labelConfidentiality: 'Confidentiality.',
+      confidentialityText: 'The Receiving Party agrees to keep confidential all non-public information shared in connection with the above purpose, and not to disclose it to third parties without prior written consent.',
+      labelAdditionalTerms: 'Additional terms.',
+      labelTerm: 'Term.',
+      ndaTermText: 'This Agreement remains in effect until the information no longer qualifies as confidential, or either party terminates it in writing.',
+      labelGoverningLaw: 'Governing law.',
+      governingLawText: 'This Agreement is governed by the laws of {law}.',
+      otherIntro: 'This {type} ("Agreement") is entered into on {date} between {biz} and {other}.',
+      labelScope: 'Scope.',
+      labelPaymentTerms: 'Payment & terms.',
+      labelIndependentRelationship: 'Independent relationship.',
+      independentRelationshipText: 'Nothing in this Agreement creates an employment, partnership, or joint-venture relationship between the parties.',
+      labelTermination: 'Termination.',
+      terminationText: "Either party may terminate this Agreement as described in the terms above, or with 14 days' written notice if no other period is specified.",
+      docGenerated: 'Generated {date}',
+      docSigLine: 'Signature & date'
+    },
+    es: {
+      heroSubtitle: 'Completa los detalles, previsualízalo en vivo y luego imprime o descarga un acuerdo en lenguaje sencillo.',
+      yourBusinessHeading: 'Tu negocio',
+      bizNameLabel: 'Nombre del negocio',
+      bizNamePlaceholder: 'Tu Negocio',
+      agreementHeading: 'Acuerdo',
+      contractTypeLabel: 'Tipo de contrato',
+      contractTypeService: 'Contrato de servicios',
+      contractTypeNda: 'Acuerdo de confidencialidad (NDA)',
+      contractTypeContractor: 'Acuerdo de contratista independiente',
+      otherPartyLabel: 'Nombre de la otra parte',
+      otherPartyPlaceholder: 'Nombre del cliente o contratista',
+      effectiveDateLabel: 'Fecha de vigencia',
+      effectiveDatePlaceholder: 'Por defecto es hoy si se deja en blanco',
+      scopeLabel: 'Alcance del trabajo / propósito',
+      scopePlaceholder: 'p. ej. Corte de césped semanal y poda de setos en Calle Principal 123, abril–octubre',
+      termsLabel: 'Pago y condiciones',
+      termsPlaceholder: 'p. ej. $150/visita, pagadero dentro de 7 días del servicio. Cualquiera de las partes puede cancelar con 14 días de aviso por escrito.',
+      governingLawLabel: 'Ley aplicable (opcional)',
+      governingLawPlaceholder: 'p. ej. Estado de Texas',
+      signaturesHeading: 'Firmas (opcional)',
+      yourSigLabel: 'Tu firma',
+      clearBtnLabel: 'Borrar',
+      otherSigLabel: 'Firma de la otra parte',
+      sigHint: 'Firma con el ratón o el dedo — útil si estás completando esto junto con la otra parte. De lo contrario, déjalo en blanco e imprime o descarga para firmar más tarde.',
+      printBtnLabel: '🖨️ Imprimir ahora',
+      downloadBtnLabel: '⬇ Descargar HTML',
+      instantHint: 'Instantáneo, sin llamadas de IA — se actualiza en vivo mientras escribes. Una plantilla en lenguaje sencillo con líneas de firma para ambas partes; no sustituye a un abogado en asuntos de alto riesgo, pero es sólida para acuerdos comerciales locales sencillos.',
+      previewTitle: 'CONTRACT FORGE — VISTA PREVIA EN VIVO',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo lo que escribes permanece en tu navegador — nada se sube a ningún lugar. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      errorMissingOtherParty: 'Añade el nombre de la otra parte.',
+      errorMissingScope: 'Describe el alcance del trabajo o el propósito.',
+      errorPopupBlocked: 'Tu navegador bloqueó la ventana de impresión — permite ventanas emergentes para este sitio e inténtalo de nuevo.',
+      defaultBizName: 'Tu Negocio',
+      defaultOtherParty: '[nombre de la otra parte]',
+      defaultScopeText: '[describe el alcance del trabajo o el propósito]',
+      docWordNda: 'Acuerdo de Confidencialidad',
+      docWordContractor: 'Acuerdo de Contratista Independiente',
+      docWordService: 'Contrato de Servicios',
+      ndaIntro: 'Este Acuerdo de Confidencialidad ("Acuerdo") se celebra el {date} entre {biz} ("Parte Reveladora") y {other} ("Parte Receptora").',
+      labelPurpose: 'Propósito.',
+      labelConfidentiality: 'Confidencialidad.',
+      confidentialityText: 'La Parte Receptora se compromete a mantener confidencial toda la información no pública compartida en relación con el propósito anterior, y a no divulgarla a terceros sin consentimiento previo por escrito.',
+      labelAdditionalTerms: 'Condiciones adicionales.',
+      labelTerm: 'Vigencia.',
+      ndaTermText: 'Este Acuerdo permanece en vigor hasta que la información deje de calificar como confidencial, o cualquiera de las partes lo termine por escrito.',
+      labelGoverningLaw: 'Ley aplicable.',
+      governingLawText: 'Este Acuerdo se rige por las leyes de {law}.',
+      otherIntro: 'Este {type} ("Acuerdo") se celebra el {date} entre {biz} y {other}.',
+      labelScope: 'Alcance.',
+      labelPaymentTerms: 'Pago y condiciones.',
+      labelIndependentRelationship: 'Relación independiente.',
+      independentRelationshipText: 'Nada en este Acuerdo crea una relación de empleo, sociedad o negocio conjunto entre las partes.',
+      labelTermination: 'Terminación.',
+      terminationText: 'Cualquiera de las partes puede terminar este Acuerdo según lo descrito en las condiciones anteriores, o con 14 días de aviso por escrito si no se especifica otro plazo.',
+      docGenerated: 'Generado el {date}',
+      docSigLine: 'Firma y fecha'
+    },
+    ar: {
+      heroSubtitle: 'أدخل التفاصيل، عاينها مباشرة، ثم اطبع أو نزّل اتفاقية بلغة واضحة.',
+      yourBusinessHeading: 'عملك',
+      bizNameLabel: 'اسم العمل',
+      bizNamePlaceholder: 'اسم عملك',
+      agreementHeading: 'الاتفاقية',
+      contractTypeLabel: 'نوع العقد',
+      contractTypeService: 'اتفاقية خدمة',
+      contractTypeNda: 'اتفاقية عدم إفصاح (NDA)',
+      contractTypeContractor: 'اتفاقية مقاول مستقل',
+      otherPartyLabel: 'اسم الطرف الآخر',
+      otherPartyPlaceholder: 'اسم العميل أو المقاول',
+      effectiveDateLabel: 'تاريخ السريان',
+      effectiveDatePlaceholder: 'يكون اليوم افتراضيًا إذا تُرك فارغًا',
+      scopeLabel: 'نطاق العمل / الغرض',
+      scopePlaceholder: 'مثال: قص العشب الأسبوعي وتقليم الشجيرات في شارع رئيسي 123، أبريل–أكتوبر',
+      termsLabel: 'الدفع والشروط',
+      termsPlaceholder: 'مثال: 150 دولارًا لكل زيارة، تُستحق خلال 7 أيام من الخدمة. يجوز لأي طرف الإلغاء بإشعار كتابي مدته 14 يومًا.',
+      governingLawLabel: 'القانون الحاكم (اختياري)',
+      governingLawPlaceholder: 'مثال: ولاية تكساس',
+      signaturesHeading: 'التوقيعات (اختياري)',
+      yourSigLabel: 'توقيعك',
+      clearBtnLabel: 'مسح',
+      otherSigLabel: 'توقيع الطرف الآخر',
+      sigHint: 'وقّع باستخدام الماوس أو إصبعك — مفيد إذا كنت تملأ هذا مع الطرف الآخر معًا. وإلا اتركه فارغًا واطبع أو نزّل للتوقيع لاحقًا.',
+      printBtnLabel: '🖨️ اطبع الآن',
+      downloadBtnLabel: '⬇ تنزيل HTML',
+      instantHint: 'فوري بدون أي استدعاء للذكاء الاصطناعي — يتحدث مباشرة أثناء الكتابة. نموذج بلغة واضحة مع أسطر توقيع لكلا الطرفين؛ ليس بديلاً عن محامٍ في أي أمر عالي المخاطر، لكنه مناسب للاتفاقيات التجارية المحلية البسيطة.',
+      previewTitle: 'CONTRACT FORGE — معاينة مباشرة',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل ما تدخله يبقى في متصفحك — لا يُرفع شيء إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      errorMissingOtherParty: 'أضف اسم الطرف الآخر.',
+      errorMissingScope: 'صف نطاق العمل أو الغرض.',
+      errorPopupBlocked: 'منع متصفحك نافذة الطباعة — اسمح بالنوافذ المنبثقة لهذا الموقع وحاول مرة أخرى.',
+      defaultBizName: 'اسم عملك',
+      defaultOtherParty: '[اسم الطرف الآخر]',
+      defaultScopeText: '[صف نطاق العمل أو الغرض]',
+      docWordNda: 'اتفاقية عدم إفصاح',
+      docWordContractor: 'اتفاقية مقاول مستقل',
+      docWordService: 'اتفاقية خدمة',
+      ndaIntro: 'أُبرمت اتفاقية عدم الإفصاح هذه ("الاتفاقية") في {date} بين {biz} ("الطرف المُفصِح") و{other} ("الطرف المُتلقّي").',
+      labelPurpose: 'الغرض.',
+      labelConfidentiality: 'السرية.',
+      confidentialityText: 'يوافق الطرف المتلقي على الحفاظ على سرية جميع المعلومات غير العامة التي تتم مشاركتها فيما يتعلق بالغرض المذكور أعلاه، وعدم الإفصاح عنها لأطراف ثالثة دون موافقة كتابية مسبقة.',
+      labelAdditionalTerms: 'شروط إضافية.',
+      labelTerm: 'المدة.',
+      ndaTermText: 'تظل هذه الاتفاقية سارية حتى تتوقف المعلومات عن اعتبارها سرية، أو ينهيها أي طرف كتابيًا.',
+      labelGoverningLaw: 'القانون الحاكم.',
+      governingLawText: 'تخضع هذه الاتفاقية لقوانين {law}.',
+      otherIntro: 'أُبرمت هذه الـ{type} ("الاتفاقية") في {date} بين {biz} و{other}.',
+      labelScope: 'النطاق.',
+      labelPaymentTerms: 'الدفع والشروط.',
+      labelIndependentRelationship: 'العلاقة المستقلة.',
+      independentRelationshipText: 'لا شيء في هذه الاتفاقية ينشئ علاقة توظيف أو شراكة أو مشروع مشترك بين الطرفين.',
+      labelTermination: 'الإنهاء.',
+      terminationText: 'يجوز لأي طرف إنهاء هذه الاتفاقية على النحو الموصوف في الشروط أعلاه، أو بإشعار كتابي مدته 14 يومًا إذا لم تُحدد مدة أخرى.',
+      docGenerated: 'أُنشئ في {date}',
+      docSigLine: 'التوقيع والتاريخ'
+    },
+    zh: {
+      heroSubtitle: '填写详细信息，实时预览，然后打印或下载一份通俗易懂的协议。',
+      yourBusinessHeading: '你的商家',
+      bizNameLabel: '商家名称',
+      bizNamePlaceholder: '你的商家',
+      agreementHeading: '协议',
+      contractTypeLabel: '合同类型',
+      contractTypeService: '服务协议',
+      contractTypeNda: '保密协议（NDA）',
+      contractTypeContractor: '独立承包商协议',
+      otherPartyLabel: '对方姓名',
+      otherPartyPlaceholder: '客户或承包商姓名',
+      effectiveDateLabel: '生效日期',
+      effectiveDatePlaceholder: '留空则默认为今天',
+      scopeLabel: '工作范围 / 目的',
+      scopePlaceholder: '例如：每周在主街123号进行割草和修剪树篱，4月至10月',
+      termsLabel: '付款与条款',
+      termsPlaceholder: '例如：每次上门150美元，服务后7天内支付。任何一方均可提前14天书面通知取消。',
+      governingLawLabel: '适用法律（可选）',
+      governingLawPlaceholder: '例如：德克萨斯州',
+      signaturesHeading: '签名（可选）',
+      yourSigLabel: '你的签名',
+      clearBtnLabel: '清除',
+      otherSigLabel: '对方签名',
+      sigHint: '用鼠标或手指签名——如果你和对方一起填写此表格会很方便。否则留空，稍后打印或下载以便签名。',
+      printBtnLabel: '🖨️ 立即打印',
+      downloadBtnLabel: '⬇ 下载 HTML',
+      instantHint: '即时生成，无需调用 AI——随输入实时更新。一份带有双方签名栏的通俗语言模板；不能替代律师处理高风险事务，但适用于简单的本地商业协议。',
+      previewTitle: 'CONTRACT FORGE — 实时预览',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你输入的所有内容都保留在浏览器中——不会上传到任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      errorMissingOtherParty: '请添加对方姓名。',
+      errorMissingScope: '请描述工作范围或目的。',
+      errorPopupBlocked: '你的浏览器阻止了打印窗口 — 请允许此网站的弹出窗口后重试。',
+      defaultBizName: '你的商家',
+      defaultOtherParty: '[对方姓名]',
+      defaultScopeText: '[描述工作范围或目的]',
+      docWordNda: '保密协议',
+      docWordContractor: '独立承包商协议',
+      docWordService: '服务协议',
+      ndaIntro: '本保密协议（"协议"）于 {date} 由 {biz}（"披露方"）与 {other}（"接收方"）签订。',
+      labelPurpose: '目的。',
+      labelConfidentiality: '保密。',
+      confidentialityText: '接收方同意对与上述目的相关而共享的所有非公开信息保密，未经事先书面同意不得向第三方披露。',
+      labelAdditionalTerms: '附加条款。',
+      labelTerm: '期限。',
+      ndaTermText: '本协议持续有效，直至相关信息不再具有保密性，或任一方以书面方式终止本协议。',
+      labelGoverningLaw: '适用法律。',
+      governingLawText: '本协议受 {law} 法律管辖。',
+      otherIntro: '本{type}（"协议"）于 {date} 由 {biz} 与 {other} 签订。',
+      labelScope: '范围。',
+      labelPaymentTerms: '付款与条款。',
+      labelIndependentRelationship: '独立关系。',
+      independentRelationshipText: '本协议不构成双方之间的雇佣、合伙或合资关系。',
+      labelTermination: '终止。',
+      terminationText: '任何一方均可按照上述条款终止本协议，若未另行规定期限，则须提前14天书面通知。',
+      docGenerated: '生成于 {date}',
+      docSigLine: '签名与日期'
+    },
+    sw: {
+      heroSubtitle: 'Jaza maelezo, tazama moja kwa moja, kisha chapisha au pakua makubaliano kwa lugha rahisi.',
+      yourBusinessHeading: 'Biashara yako',
+      bizNameLabel: 'Jina la biashara',
+      bizNamePlaceholder: 'Biashara Yako',
+      agreementHeading: 'Makubaliano',
+      contractTypeLabel: 'Aina ya mkataba',
+      contractTypeService: 'Makubaliano ya huduma',
+      contractTypeNda: 'Makubaliano ya usiri (NDA)',
+      contractTypeContractor: 'Makubaliano ya mkandarasi huru',
+      otherPartyLabel: 'Jina la upande mwingine',
+      otherPartyPlaceholder: 'Jina la mteja au mkandarasi',
+      effectiveDateLabel: 'Tarehe ya kuanza kutumika',
+      effectiveDatePlaceholder: 'Hujaza leo kama umeacha wazi',
+      scopeLabel: 'Wigo wa kazi / kusudi',
+      scopePlaceholder: 'mfano: Kukata nyasi kila wiki na kupogoa vichaka katika Barabara Kuu 123, Aprili–Oktoba',
+      termsLabel: 'Malipo na masharti',
+      termsPlaceholder: "mfano: $150/ziara, inayolipwa ndani ya siku 7 baada ya huduma. Upande wowote unaweza kughairi kwa taarifa ya maandishi ya siku 14.",
+      governingLawLabel: 'Sheria inayotawala (hiari)',
+      governingLawPlaceholder: 'mfano: Jimbo la Texas',
+      signaturesHeading: 'Saini (hiari)',
+      yourSigLabel: 'Saini yako',
+      clearBtnLabel: 'Futa',
+      otherSigLabel: 'Saini ya upande mwingine',
+      sigHint: 'Tia saini kwa kutumia kipanya au kidole — inafaa ikiwa unajaza hii pamoja na upande mwingine. Vinginevyo acha wazi na uchapishe au upakue kwa ajili ya saini baadaye.',
+      printBtnLabel: '🖨️ Chapisha sasa',
+      downloadBtnLabel: '⬇ Pakua HTML',
+      instantHint: 'Papo hapo, hakuna wito wa AI — inasasishwa unapoandika. Kiolezo cha lugha rahisi chenye mistari ya saini kwa pande zote mbili; si mbadala wa wakili kwa mambo ya hatari kubwa, lakini kinafaa kwa makubaliano rahisi ya biashara za mtaani.',
+      previewTitle: 'CONTRACT FORGE — MUONEKANO WA MOJA KWA MOJA',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu unachoingiza kinabaki kwenye kivinjari chako — hakuna kinachopakiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      errorMissingOtherParty: 'Ongeza jina la upande mwingine.',
+      errorMissingScope: 'Eleza wigo wa kazi au kusudi.',
+      errorPopupBlocked: 'Kivinjari chako kimezuia dirisha la kuchapisha — ruhusu madirisha ibukizi kwa tovuti hii na ujaribu tena.',
+      defaultBizName: 'Biashara Yako',
+      defaultOtherParty: '[jina la upande mwingine]',
+      defaultScopeText: '[eleza wigo wa kazi au kusudi]',
+      docWordNda: 'Makubaliano ya Usiri',
+      docWordContractor: 'Makubaliano ya Mkandarasi Huru',
+      docWordService: 'Makubaliano ya Huduma',
+      ndaIntro: 'Makubaliano haya ya Usiri ("Makubaliano") yameingiwa tarehe {date} kati ya {biz} ("Mtoa Taarifa") na {other} ("Mpokeaji").',
+      labelPurpose: 'Kusudi.',
+      labelConfidentiality: 'Usiri.',
+      confidentialityText: 'Mpokeaji anakubali kutunza kwa usiri taarifa zote zisizo za umma zilizoshirikiwa kuhusiana na kusudi lililotajwa hapo juu, na kutozifichua kwa wahusika wengine bila idhini ya maandishi ya awali.',
+      labelAdditionalTerms: 'Masharti ya ziada.',
+      labelTerm: 'Muda.',
+      ndaTermText: 'Makubaliano haya yanaendelea kuwa halali hadi taarifa hizo ziache kustahiki kuwa za siri, au upande wowote uyamalize kwa maandishi.',
+      labelGoverningLaw: 'Sheria inayotawala.',
+      governingLawText: 'Makubaliano haya yanatawaliwa na sheria za {law}.',
+      otherIntro: '{type} haya ("Makubaliano") yameingiwa tarehe {date} kati ya {biz} na {other}.',
+      labelScope: 'Wigo.',
+      labelPaymentTerms: 'Malipo na masharti.',
+      labelIndependentRelationship: 'Uhusiano huru.',
+      independentRelationshipText: 'Hakuna kitu katika Makubaliano haya kinachounda uhusiano wa ajira, ushirikiano, au ubia kati ya pande hizo.',
+      labelTermination: 'Kumaliza.',
+      terminationText: 'Upande wowote unaweza kumaliza Makubaliano haya kama ilivyoelezwa katika masharti hapo juu, au kwa taarifa ya maandishi ya siku 14 kama hakuna muda mwingine uliobainishwa.',
+      docGenerated: 'Imetengenezwa {date}',
+      docSigLine: 'Saini na tarehe'
+    },
+    sv: {
+      heroSubtitle: "Fyll i uppgifterna, förhandsgranska direkt och skriv sedan ut eller ladda ner ett avtal på enkelt språk.",
+      yourBusinessHeading: "Ditt företag",
+      bizNameLabel: "Företagsnamn",
+      bizNamePlaceholder: "Ditt företag",
+      agreementHeading: "Avtal",
+      contractTypeLabel: "Avtalstyp",
+      contractTypeService: "Tjänsteavtal",
+      contractTypeNda: "Sekretessavtal (NDA)",
+      contractTypeContractor: "Avtal med uppdragstagare",
+      otherPartyLabel: "Motpartens namn",
+      otherPartyPlaceholder: "Kundens eller uppdragstagarens namn",
+      effectiveDateLabel: "Giltigt från",
+      effectiveDatePlaceholder: "Dagens datum om fältet lämnas tomt",
+      scopeLabel: "Arbetets omfattning / syfte",
+      scopePlaceholder: "t.ex. Gräsklippning och häckklippning varje vecka på Storgatan 1, april–oktober",
+      termsLabel: "Betalning & villkor",
+      termsPlaceholder: "t.ex. 1 500 kr/besök, betalas inom 7 dagar efter utfört arbete. Båda parter kan säga upp avtalet med 14 dagars skriftligt varsel.",
+      governingLawLabel: "Tillämplig lag (valfritt)",
+      governingLawPlaceholder: "t.ex. Sverige",
+      signaturesHeading: "Underskrifter (valfritt)",
+      yourSigLabel: "Din underskrift",
+      clearBtnLabel: "Rensa",
+      otherSigLabel: "Motpartens underskrift",
+      sigHint: "Skriv under med musen eller fingret — praktiskt om ni fyller i det här tillsammans. Annars lämna tomt och skriv ut eller ladda ner för underskrift senare.",
+      printBtnLabel: "🖨️ Skriv ut nu",
+      downloadBtnLabel: "⬇ Ladda ner HTML",
+      instantHint: "Direkt, utan AI — uppdateras medan du skriver. En mall på enkelt språk med underskriftsrader för båda parter; ersätter inte en jurist när mycket står på spel, men fungerar bra för enkla lokala företagsavtal.",
+      previewTitle: "CONTRACT FORGE — FÖRHANDSVISNING",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt du skriver stannar i din webbläsare — ingenting laddas upp någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      errorMissingOtherParty: "Fyll i motpartens namn.",
+      errorMissingScope: "Beskriv arbetets omfattning eller syfte.",
+      errorPopupBlocked: "Webbläsaren blockerade utskriftsfönstret — tillåt popup-fönster för den här webbplatsen och försök igen.",
+      defaultBizName: "Ditt företag",
+      defaultOtherParty: "[motpartens namn]",
+      defaultScopeText: "[beskriv arbetets omfattning eller syfte]",
+      docWordNda: "Sekretessavtal",
+      docWordContractor: "Avtal med uppdragstagare",
+      docWordService: "Tjänsteavtal",
+      ndaIntro: "Detta sekretessavtal (\"Avtalet\") ingås den {date} mellan {biz} (\"Den utlämnande parten\") och {other} (\"Den mottagande parten\").",
+      labelPurpose: "Syfte.",
+      labelConfidentiality: "Sekretess.",
+      confidentialityText: "Den mottagande parten förbinder sig att hålla all icke-offentlig information som delas i samband med ovanstående syfte konfidentiell, och att inte lämna ut den till tredje part utan föregående skriftligt medgivande.",
+      labelAdditionalTerms: "Ytterligare villkor.",
+      labelTerm: "Giltighetstid.",
+      ndaTermText: "Detta avtal gäller tills informationen inte längre är konfidentiell, eller tills någon av parterna skriftligen säger upp det.",
+      labelGoverningLaw: "Tillämplig lag.",
+      governingLawText: "Detta avtal regleras av lagarna i {law}.",
+      otherIntro: "Detta {type} (\"Avtalet\") ingås den {date} mellan {biz} och {other}.",
+      labelScope: "Omfattning.",
+      labelPaymentTerms: "Betalning & villkor.",
+      labelIndependentRelationship: "Självständigt förhållande.",
+      independentRelationshipText: "Inget i detta avtal skapar ett anställnings-, kompanjonskaps- eller samriskförhållande mellan parterna.",
+      labelTermination: "Uppsägning.",
+      terminationText: "Båda parter kan säga upp detta avtal enligt villkoren ovan, eller med 14 dagars skriftligt varsel om ingen annan period anges.",
+      docGenerated: "Skapat {date}",
+      docSigLine: "Underskrift & datum"
+    },
+    de: {
+      heroSubtitle: "Fülle die Angaben aus, sieh dir die Live-Vorschau an und drucke dann eine Vereinbarung in klarer Sprache oder lade sie herunter.",
+      yourBusinessHeading: "Dein Unternehmen",
+      bizNameLabel: "Name des Unternehmens",
+      bizNamePlaceholder: "Dein Unternehmen",
+      agreementHeading: "Vereinbarung",
+      contractTypeLabel: "Vertragsart",
+      contractTypeService: "Dienstleistungsvertrag",
+      contractTypeNda: "Geheimhaltungsvereinbarung (NDA)",
+      contractTypeContractor: "Vertrag mit freien Mitarbeitern",
+      otherPartyLabel: "Name der anderen Partei",
+      otherPartyPlaceholder: "Name des Kunden oder Auftragnehmers",
+      effectiveDateLabel: "Gültig ab",
+      effectiveDatePlaceholder: "Bei leerem Feld wird das heutige Datum verwendet",
+      scopeLabel: "Leistungsumfang / Zweck",
+      scopePlaceholder: "z. B. Wöchentliches Rasenmähen und Heckenschneiden in der Hauptstraße 123, April–Oktober",
+      termsLabel: "Zahlung & Bedingungen",
+      termsPlaceholder: "z. B. 150 € pro Einsatz, fällig innerhalb von 7 Tagen nach der Leistung. Jede Partei kann mit einer schriftlichen Frist von 14 Tagen kündigen.",
+      governingLawLabel: "Anwendbares Recht (optional)",
+      governingLawPlaceholder: "z. B. Deutschland",
+      signaturesHeading: "Unterschriften (optional)",
+      yourSigLabel: "Deine Unterschrift",
+      clearBtnLabel: "Löschen",
+      otherSigLabel: "Unterschrift der anderen Partei",
+      sigHint: "Unterschreibe mit Maus oder Finger — praktisch, wenn ihr das gemeinsam ausfüllt. Ansonsten leer lassen und für eine spätere Unterschrift drucken oder herunterladen.",
+      printBtnLabel: "🖨️ Jetzt drucken",
+      downloadBtnLabel: "⬇ HTML herunterladen",
+      instantHint: "Sofort, ohne KI-Aufruf — aktualisiert sich live beim Tippen. Eine Vorlage in klarer Sprache mit Unterschriftszeilen für beide Parteien; kein Ersatz für einen Anwalt bei wichtigen Angelegenheiten, aber solide für einfache Vereinbarungen kleiner Unternehmen.",
+      previewTitle: "CONTRACT FORGE — LIVE-VORSCHAU",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles, was du eingibst, bleibt in deinem Browser — nichts wird irgendwohin hochgeladen. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      errorMissingOtherParty: "Gib den Namen der anderen Partei ein.",
+      errorMissingScope: "Beschreibe den Leistungsumfang oder Zweck.",
+      errorPopupBlocked: "Dein Browser hat das Druckfenster blockiert — erlaube Pop-ups für diese Website und versuche es erneut.",
+      defaultBizName: "Dein Unternehmen",
+      defaultOtherParty: "[Name der anderen Partei]",
+      defaultScopeText: "[Leistungsumfang oder Zweck beschreiben]",
+      docWordNda: "Geheimhaltungsvereinbarung",
+      docWordContractor: "Vertrag über freie Mitarbeit",
+      docWordService: "Dienstleistungsvertrag",
+      ndaIntro: "Diese Geheimhaltungsvereinbarung (\"Vereinbarung\") wird am {date} zwischen {biz} (\"offenlegende Partei\") und {other} (\"empfangende Partei\") geschlossen.",
+      labelPurpose: "Zweck.",
+      labelConfidentiality: "Vertraulichkeit.",
+      confidentialityText: "Die empfangende Partei verpflichtet sich, alle nicht öffentlichen Informationen, die im Zusammenhang mit dem obigen Zweck geteilt werden, vertraulich zu behandeln und ohne vorherige schriftliche Zustimmung nicht an Dritte weiterzugeben.",
+      labelAdditionalTerms: "Weitere Bedingungen.",
+      labelTerm: "Laufzeit.",
+      ndaTermText: "Diese Vereinbarung bleibt in Kraft, bis die Informationen nicht mehr als vertraulich gelten oder eine der Parteien sie schriftlich kündigt.",
+      labelGoverningLaw: "Anwendbares Recht.",
+      governingLawText: "Diese Vereinbarung unterliegt dem Recht von {law}.",
+      otherIntro: "Dieser Vertrag – {type} (\"Vereinbarung\") – wird am {date} zwischen {biz} und {other} geschlossen.",
+      labelScope: "Umfang.",
+      labelPaymentTerms: "Zahlung & Bedingungen.",
+      labelIndependentRelationship: "Unabhängiges Verhältnis.",
+      independentRelationshipText: "Nichts in dieser Vereinbarung begründet ein Arbeits-, Gesellschafts- oder Joint-Venture-Verhältnis zwischen den Parteien.",
+      labelTermination: "Kündigung.",
+      terminationText: "Jede Partei kann diese Vereinbarung wie in den obigen Bedingungen beschrieben kündigen oder, falls keine andere Frist angegeben ist, mit einer schriftlichen Frist von 14 Tagen.",
+      docGenerated: "Erstellt am {date}",
+      docSigLine: "Unterschrift & Datum"
+    },
+    pt: {
+      heroSubtitle: "Preencha os dados, veja a prévia ao vivo e depois imprima ou baixe um contrato em linguagem simples.",
+      yourBusinessHeading: "Seu negócio",
+      bizNameLabel: "Nome do negócio",
+      bizNamePlaceholder: "Sua empresa",
+      agreementHeading: "Contrato",
+      contractTypeLabel: "Tipo de contrato",
+      contractTypeService: "Contrato de prestação de serviços",
+      contractTypeNda: "Acordo de confidencialidade (NDA)",
+      contractTypeContractor: "Contrato de prestador autônomo",
+      otherPartyLabel: "Nome da outra parte",
+      otherPartyPlaceholder: "Nome do cliente ou prestador",
+      effectiveDateLabel: "Data de vigência",
+      effectiveDatePlaceholder: "Usa a data de hoje se ficar em branco",
+      scopeLabel: "Escopo do trabalho / finalidade",
+      scopePlaceholder: "ex.: Corte semanal de grama e poda de cerca viva na Rua Principal, 123, de abril a outubro",
+      termsLabel: "Pagamento e condições",
+      termsPlaceholder: "ex.: R$ 150 por visita, a pagar em até 7 dias após o serviço. Qualquer parte pode cancelar com aviso por escrito de 14 dias.",
+      governingLawLabel: "Lei aplicável (opcional)",
+      governingLawPlaceholder: "ex.: Brasil",
+      signaturesHeading: "Assinaturas (opcional)",
+      yourSigLabel: "Sua assinatura",
+      clearBtnLabel: "Limpar",
+      otherSigLabel: "Assinatura da outra parte",
+      sigHint: "Assine com o mouse ou o dedo — útil se estiver preenchendo junto com a outra parte. Caso contrário, deixe em branco e imprima ou baixe para assinar depois.",
+      printBtnLabel: "🖨️ Imprimir agora",
+      downloadBtnLabel: "⬇ Baixar HTML",
+      instantHint: "Instantâneo, sem IA — atualiza ao vivo enquanto você digita. Um modelo em linguagem simples com linhas de assinatura para as duas partes; não substitui um advogado em assuntos importantes, mas é sólido para contratos simples de pequenos negócios locais.",
+      previewTitle: "CONTRACT FORGE — PRÉVIA AO VIVO",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo o que você digita fica no seu navegador — nada é enviado a lugar nenhum. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>",
+      errorMissingOtherParty: "Adicione o nome da outra parte.",
+      errorMissingScope: "Descreva o escopo do trabalho ou a finalidade.",
+      errorPopupBlocked: "Seu navegador bloqueou a janela de impressão — permita pop-ups para este site e tente de novo.",
+      defaultBizName: "Sua empresa",
+      defaultOtherParty: "[nome da outra parte]",
+      defaultScopeText: "[descreva o escopo do trabalho ou a finalidade]",
+      docWordNda: "Acordo de Confidencialidade",
+      docWordContractor: "Contrato de Prestador Autônomo",
+      docWordService: "Contrato de Prestação de Serviços",
+      ndaIntro: "Este Acordo de Confidencialidade (\"Acordo\") é celebrado em {date} entre {biz} (\"Parte Divulgadora\") e {other} (\"Parte Receptora\").",
+      labelPurpose: "Finalidade.",
+      labelConfidentiality: "Confidencialidade.",
+      confidentialityText: "A Parte Receptora concorda em manter em sigilo todas as informações não públicas compartilhadas em relação à finalidade acima e em não divulgá-las a terceiros sem consentimento prévio por escrito.",
+      labelAdditionalTerms: "Condições adicionais.",
+      labelTerm: "Vigência.",
+      ndaTermText: "Este Acordo permanece em vigor até que as informações deixem de ser confidenciais ou que qualquer das partes o rescinda por escrito.",
+      labelGoverningLaw: "Lei aplicável.",
+      governingLawText: "Este Acordo é regido pelas leis de {law}.",
+      otherIntro: "Este {type} (\"Contrato\") é celebrado em {date} entre {biz} e {other}.",
+      labelScope: "Escopo.",
+      labelPaymentTerms: "Pagamento e condições.",
+      labelIndependentRelationship: "Relação independente.",
+      independentRelationshipText: "Nada neste Contrato cria uma relação de emprego, sociedade ou joint venture entre as partes.",
+      labelTermination: "Rescisão.",
+      terminationText: "Qualquer parte pode rescindir este Contrato conforme as condições acima ou, se nenhum outro prazo for especificado, com aviso por escrito de 14 dias.",
+      docGenerated: "Gerado em {date}",
+      docSigLine: "Assinatura e data"
+    },
+    fr: {
+      heroSubtitle: "Remplissez les informations, prévisualisez en direct, puis imprimez ou téléchargez un contrat en langage clair.",
+      yourBusinessHeading: "Votre entreprise",
+      bizNameLabel: "Nom de l'entreprise",
+      bizNamePlaceholder: "Votre entreprise",
+      agreementHeading: "Contrat",
+      contractTypeLabel: "Type de contrat",
+      contractTypeService: "Contrat de prestation de services",
+      contractTypeNda: "Accord de confidentialité (NDA)",
+      contractTypeContractor: "Contrat de prestataire indépendant",
+      otherPartyLabel: "Nom de l'autre partie",
+      otherPartyPlaceholder: "Nom du client ou du prestataire",
+      effectiveDateLabel: "Date d'entrée en vigueur",
+      effectiveDatePlaceholder: "Date du jour si laissé vide",
+      scopeLabel: "Étendue des travaux / objet",
+      scopePlaceholder: "ex. : Tonte hebdomadaire de la pelouse et taille des haies au 123 rue Principale, d'avril à octobre",
+      termsLabel: "Paiement et conditions",
+      termsPlaceholder: "ex. : 150 € par intervention, payables sous 7 jours après le service. Chaque partie peut résilier avec un préavis écrit de 14 jours.",
+      governingLawLabel: "Droit applicable (facultatif)",
+      governingLawPlaceholder: "ex. : France",
+      signaturesHeading: "Signatures (facultatif)",
+      yourSigLabel: "Votre signature",
+      clearBtnLabel: "Effacer",
+      otherSigLabel: "Signature de l'autre partie",
+      sigHint: "Signez avec la souris ou le doigt — pratique si vous remplissez ce document avec l'autre partie. Sinon, laissez vide et imprimez ou téléchargez pour signer plus tard.",
+      printBtnLabel: "🖨️ Imprimer maintenant",
+      downloadBtnLabel: "⬇ Télécharger le HTML",
+      instantHint: "Instantané, sans appel à l'IA — mise à jour en direct pendant la saisie. Un modèle en langage clair avec des lignes de signature pour les deux parties ; ne remplace pas un avocat pour les enjeux importants, mais fiable pour les accords simples d'entreprises locales.",
+      previewTitle: "CONTRACT FORGE — APERÇU EN DIRECT",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Tout ce que vous saisissez reste dans votre navigateur — rien n'est envoyé nulle part. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>",
+      errorMissingOtherParty: "Ajoutez le nom de l'autre partie.",
+      errorMissingScope: "Décrivez l'étendue des travaux ou l'objet.",
+      errorPopupBlocked: "Votre navigateur a bloqué la fenêtre d'impression — autorisez les fenêtres pop-up pour ce site et réessayez.",
+      defaultBizName: "Votre entreprise",
+      defaultOtherParty: "[nom de l'autre partie]",
+      defaultScopeText: "[décrivez l'étendue des travaux ou l'objet]",
+      docWordNda: "Accord de confidentialité",
+      docWordContractor: "Contrat de prestataire indépendant",
+      docWordService: "Contrat de prestation de services",
+      ndaIntro: "Le présent accord de confidentialité (\"Accord\") est conclu le {date} entre {biz} (\"Partie divulgatrice\") et {other} (\"Partie destinataire\").",
+      labelPurpose: "Objet.",
+      labelConfidentiality: "Confidentialité.",
+      confidentialityText: "La Partie destinataire s'engage à garder confidentielles toutes les informations non publiques partagées dans le cadre de l'objet ci-dessus, et à ne pas les divulguer à des tiers sans consentement écrit préalable.",
+      labelAdditionalTerms: "Conditions supplémentaires.",
+      labelTerm: "Durée.",
+      ndaTermText: "Le présent Accord reste en vigueur jusqu'à ce que les informations ne soient plus confidentielles, ou jusqu'à sa résiliation écrite par l'une des parties.",
+      labelGoverningLaw: "Droit applicable.",
+      governingLawText: "Le présent Accord est régi par le droit de {law}.",
+      otherIntro: "Le présent document – {type} (\"Contrat\") – est conclu le {date} entre {biz} et {other}.",
+      labelScope: "Étendue.",
+      labelPaymentTerms: "Paiement et conditions.",
+      labelIndependentRelationship: "Relation indépendante.",
+      independentRelationshipText: "Rien dans le présent Contrat ne crée de relation de travail, d'association ou de coentreprise entre les parties.",
+      labelTermination: "Résiliation.",
+      terminationText: "Chaque partie peut résilier le présent Contrat comme indiqué dans les conditions ci-dessus ou, à défaut d'autre délai, avec un préavis écrit de 14 jours.",
+      docGenerated: "Généré le {date}",
+      docSigLine: "Signature et date"
+    }
+  });
+
+  loadDraft();
+  renderPreview();
+  I18N.onChange(renderPreview);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

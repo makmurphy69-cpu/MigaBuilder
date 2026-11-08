@@ -278,6 +278,8 @@
   }
 
   function detectInitialLang() {
+    // Language pages (/es/…, /ar/… — see scripts/build-language-pages.mjs) open in their own language.
+    if (window.MIGA_PAGE_LANG && strings[window.MIGA_PAGE_LANG]) return window.MIGA_PAGE_LANG;
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
       if (stored && strings[stored]) return stored;
@@ -419,10 +421,16 @@
   }
 
   function translateTitle() {
-    if (!document.__i18nTitle) document.__i18nTitle = { en: document.title, shown: document.title };
+    // A language page's <title> is already translated; data-en-title keeps the English original.
+    if (!document.__i18nTitle) {
+      var enTitle = document.documentElement.getAttribute('data-en-title');
+      document.__i18nTitle = { en: enTitle || document.title, shown: document.title, page: enTitle ? document.title : null, pageEn: enTitle };
+    }
     var saved = document.__i18nTitle;
     if (document.title !== saved.shown) saved.en = document.title;
     var out = currentLang === FALLBACK_LANG ? null : lookup(saved.en);
+    // No phrase for it: keep the language page's own translated title while it shows its own language.
+    if (out == null && saved.page && saved.en === saved.pageEn && currentLang === window.MIGA_PAGE_LANG) out = saved.page;
     saved.shown = out == null ? saved.en : out;
     if (document.title !== saved.shown) document.title = saved.shown;
   }

@@ -1,0 +1,1914 @@
+<!-- Generated from /merge-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sv" data-en-title="Combine images, clips and music into one video — Merge Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sv/merge-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kombinera bilder, klipp och musik till en video — Merge Forge | MigaBuilder</title>
+<meta name="description" content="Merge Forge fogar ihop bildspelsbilder, videoklipp, musik och textöverlägg till en video, med mjuka ljudtoningar och liveförhandsvisning.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kombinera bilder, klipp och musik till en video — Merge Forge">
+<meta property="og:description" content="Merge Forge fogar ihop bildspelsbilder, videoklipp, musik och textöverlägg till en video, med mjuka ljudtoningar och liveförhandsvisning.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/merge-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/sv/merge-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kombinera bilder, klipp och musik till en video — Merge Forge">
+<meta name="twitter:description" content="Merge Forge fogar ihop bildspelsbilder, videoklipp, musik och textöverlägg till en video, med mjuka ljudtoningar och liveförhandsvisning.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/merge-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/merge-forge.js"></script>
+<script src="media-utils.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 22px 22px 26px; max-height: calc(100vh - 40px); overflow-y: auto;
+    position: sticky; top: 20px;
+  }
+  @media (max-width: 900px) { .panel { position: static; max-height: none; } }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 9px 10px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+
+  .check-row { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; }
+  .check-row input { margin-top: 3px; flex: none; width: auto; }
+
+  .upload-btn {
+    display: inline-block; background: #fff; border: 1px dashed rgba(22, 32, 43, 0.35); border-radius: var(--radius);
+    padding: 10px 12px; font-size: 13px; cursor: pointer; text-align: center; width: 100%;
+  }
+  .upload-btn:hover { border-color: rgba(22, 32, 43, 0.55); }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 12px; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .draft-btn { flex: 1; }
+
+  .error-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+
+  .items { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .item-row {
+    display: grid; grid-template-columns: 46px 1fr auto; gap: 10px; align-items: start;
+    background: #fff; border: 1px solid rgba(22, 32, 43, 0.18); border-radius: var(--radius); padding: 8px;
+  }
+  .item-row .thumb { width: 46px; height: 46px; object-fit: cover; border-radius: 2px; background: var(--paper-dim); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .item-row img.thumb { object-fit: cover; }
+  .item-meta { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .item-meta .item-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .item-controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .item-controls input[type="number"] { width: 52px; padding: 4px 6px; font-size: 11.5px; }
+  .item-controls input[type="range"] { width: 60px; }
+  .item-actions { display: flex; flex-direction: column; gap: 3px; }
+  .item-actions button { background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; color: var(--ink); }
+  .item-actions button.remove { color: var(--error); }
+  .items-empty { font-size: 12.5px; color: rgba(22,32,43,0.72); padding: 10px 0; }
+
+  .clip-row {
+    display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: start;
+    background: #fff; border: 1px solid rgba(22, 32, 43, 0.18); border-radius: var(--radius); padding: 9px;
+  }
+  .clip-icon { width: 34px; height: 34px; border-radius: 2px; background: var(--paper-dim); display: flex; align-items: center; justify-content: center; font-size: 15px; flex: none; }
+  .clip-meta { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .clip-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clip-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .clip-controls > label { display: flex; align-items: center; gap: 4px; }
+  .clip-controls select, .clip-controls input[type="number"] { width: auto; padding: 4px 6px; font-size: 11.5px; }
+  .clip-controls input[type="range"] { width: 70px; }
+  .clip-actions { display: flex; flex-direction: column; gap: 3px; }
+  .clip-actions button { background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; color: var(--error); }
+  .stock-track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .stage-wrap { background: #000; border-radius: 2px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #stageCanvas, #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  .sheet-empty { margin: auto; text-align: center; color: rgba(237,234,224,0.45); font-size: 14px; max-width: 340px; padding: 40px 20px; }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(237,234,224,0.75); margin-bottom: 6px; }
+
+  .progress-wrap { margin-top: 14px; display: none; }
+  .progress-wrap.show { display: block; }
+  .progress-label { font-size: 12.5px; color: rgba(237,234,224,0.7); margin-bottom: 6px; display:flex; justify-content:space-between; }
+  .progress-track { height: 8px; border-radius: 4px; background: rgba(237,234,224,0.15); overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--line-cyan); transition: width 0.1s linear; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .table-actions button.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+
+  details.ppt-help summary { cursor: pointer; color: var(--ink); font-weight: 600; font-size: 13px; }
+  details.ppt-help ol { margin: 8px 0 0; padding-left: 18px; line-height: 1.6; font-size: 12.5px; color: rgba(22,32,43,0.7); }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan jag kombinera klipp från andra MigaBuilder-verktyg?","acceptedAnswer":{"@type":"Answer","text":"Ja. Lägg till videor gjorda i Video Forge, Record Forge eller Clip Forge tillsammans med bilder och musik, sätt dem i ordning och exportera en video."}},{"@type":"Question","name":"Är Merge Forge gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/merge-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/merge-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/merge-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/merge-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/merge-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/merge-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/merge-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/merge-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/merge-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/merge-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Merge Forge</h1>
+    <p data-i18n="heroSubtitle">Drop in images, video clips, music, and text overlays — arrange them, preview live, then merge into one final video with smooth audio fades.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+
+    <div class="section-title" data-i18n="pptHelpHeading">Turning a PowerPoint into a video?</div>
+    <details class="ppt-help">
+      <summary data-i18n="pptHelpSummary">Click here first — one quick export step</summary>
+      <ol data-i18n-html="pptHelpStepsHtml">
+        <li>Open your presentation in PowerPoint, Keynote, or Google Slides.</li>
+        <li>Use <strong>File → Export → Images</strong> (PowerPoint/Keynote) or <strong>File → Download → PNG image (current slide)</strong> repeated per slide, or <strong>File → Download → JPEG</strong> zipped in Google Slides — every tool has a one-click "export slides as images" option.</li>
+        <li>Upload the resulting image files below, in slide order.</li>
+      </ol>
+      <p class="hint" data-i18n="pptHelpHint">Browsers can't open or render a raw .pptx file directly — there's no PowerPoint engine built into a webpage — so this one export step stands in for that. Everything after this is automatic.</p>
+    </details>
+
+    <div class="section-title" data-i18n="mediaHeading">Your images &amp; video clips</div>
+    <div class="field">
+      <label class="upload-btn" for="mediaInput" data-i18n="mediaUploadLabel">+ Add images and/or video clips (in order)</label>
+      <input type="file" id="mediaInput" accept="image/*,video/*" multiple style="display:none;">
+      <p class="hint" data-i18n="mediaHint">Mix and match — slide images, drawings, clips from Clip Forge or Video Forge. Reorder with the arrows.</p>
+    </div>
+    <div class="items" id="mediaItemsList"></div>
+    <p class="items-empty" id="mediaItemsEmpty" data-i18n="mediaItemsEmptyText">Nothing added yet.</p>
+
+    <div class="section-title" data-i18n="transitionHeading">Transition between images</div>
+    <div class="field">
+      <select id="transitionSelect" aria-label="Transition between images">
+        <option value="fade" selected data-i18n="transitionCrossfade">Crossfade</option>
+        <option value="none" data-i18n="transitionHardCut">Hard cut</option>
+      </select>
+      <p class="hint" data-i18n="transitionHint">Applies between two consecutive images only — video clips always cut in and out cleanly, like a real edit.</p>
+    </div>
+
+    <div class="section-title" data-i18n="outputHeading">Output</div>
+    <div class="field">
+      <label for="aspectSelect" data-i18n="aspectLabel">Aspect ratio</label>
+      <select id="aspectSelect">
+        <option value="1280x720" selected data-i18n="aspect16x9">16:9 landscape</option>
+        <option value="720x1280" data-i18n="aspect9x16">9:16 vertical</option>
+        <option value="1080x1080" data-i18n="aspect1x1">1:1 square</option>
+      </select>
+    </div>
+
+    <div class="section-title" data-i18n="captionHeading">Text overlay (optional)</div>
+    <div class="field">
+      <p class="hint" style="margin:0 0 8px;" data-i18n="captionIntroHint">Add lines of text that appear over the video — handy for quotes, captions, or credits.</p>
+      <label for="captionTextInput" data-i18n="captionTextLabel">Text</label>
+      <input type="text" id="captionTextInput" placeholder="e.g. Believe in yourself" data-i18n-placeholder="captionTextPlaceholder">
+      <div class="row-2" style="margin-top:8px;">
+        <div><label for="captionStartInput" data-i18n="captionStartLabel">Starts at (s)</label><input type="number" id="captionStartInput" value="0" min="0" step="0.5"></div>
+        <div><label for="captionDurationInput" data-i18n="captionDurationLabel">Duration (s)</label><input type="number" id="captionDurationInput" value="3" min="0.5" step="0.5"></div>
+      </div>
+      <label for="captionPositionInput" style="margin-top:8px;" data-i18n="captionPositionLabel">Position</label>
+      <select id="captionPositionInput">
+        <option value="bottom" selected data-i18n="positionBottom">Bottom</option>
+        <option value="middle" data-i18n="positionMiddle">Middle</option>
+        <option value="top" data-i18n="positionTop">Top</option>
+      </select>
+      <button type="button" class="draft-btn secondary" id="addCaptionBtn" style="margin-top:8px;" data-i18n="addCaptionBtnLabel">+ Add text overlay</button>
+    </div>
+    <div class="items" id="captionsList"></div>
+    <p class="items-empty" id="captionsEmpty" data-i18n="captionsEmptyText">No text overlays added.</p>
+
+    <div class="section-title" data-i18n="musicHeading">Music &amp; sound (optional)</div>
+    <div class="field">
+      <p class="hint" style="margin:0 0 8px;" data-i18n-html="musicIntroHintHtml">Layer in music or narration on top of everything above — upload a track (e.g. one you made in Music Forge), record narration live, or use a generated stock track. Got a screen recording from <a href="/sv/record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a>? Add it as a clip above.</p>
+      <div class="btn-row">
+        <label class="upload-btn" for="soundInput" style="flex:1;" data-i18n="uploadClipsLabel">+ Upload clip(s)</label>
+        <button type="button" class="draft-btn secondary" id="recordClipBtn" style="flex:1;" data-i18n="recordClipLabel">🎙️ Record a clip</button>
+      </div>
+      <input type="file" id="soundInput" accept="audio/*" multiple style="display:none;">
+    </div>
+    <div class="field">
+      <label data-i18n="stockTrackLabel">Or use a generated stock track</label>
+      <div class="stock-track-grid" id="stockTrackRow">
+        <button type="button" class="draft-btn secondary" data-stock="cheerful" data-i18n="stockCheerful">🎉 Cheerful</button>
+        <button type="button" class="draft-btn secondary" data-stock="calm" data-i18n="stockCalm">🌙 Calm</button>
+        <button type="button" class="draft-btn secondary" data-stock="playful" data-i18n="stockPlayful">🎈 Playful</button>
+        <button type="button" class="draft-btn secondary" data-stock="cinematic" data-i18n="stockCinematic">🎬 Cinematic</button>
+      </div>
+      <p class="hint" data-i18n-html="stockHintHtml">Want more control over mood/tempo/length? Make one in <a href="/sv/music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> and upload the .wav here instead.</p>
+    </div>
+    <div class="frames" id="soundClips" style="display:flex;flex-direction:column;gap:8px;margin-top:10px;"></div>
+    <p class="items-empty" id="soundClipsEmpty" data-i18n="soundClipsEmptyText">No music or sound added — the merged video will use each clip's own original audio only.</p>
+    <div class="field">
+      <label data-i18n="fadeHeading">Fade the combined audio mix</label>
+      <div class="row-2">
+        <div><label for="fadeInInput" style="font-weight:400;font-size:12px;" data-i18n="fadeInLabel">Fade in (s)</label><input type="number" id="fadeInInput" value="0" min="0" max="10" step="0.5"></div>
+        <div><label for="fadeOutInput" style="font-weight:400;font-size:12px;" data-i18n="fadeOutLabel">Fade out (s)</label><input type="number" id="fadeOutInput" value="0" min="0" max="10" step="0.5"></div>
+      </div>
+      <p class="hint" data-i18n="fadeHint">Smooths the start/end of the merged audio (music, narration, and video clip audio together) instead of cutting in or out abruptly.</p>
+    </div>
+
+    <button type="button" class="draft-btn" id="renderBtn" style="margin-top:6px;" data-i18n="renderBtnLabel">🎬 Merge &amp; render video</button>
+    <div class="error-box" id="errorBox"></div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="previewTitle">MERGE FORGE — PREVIEW</span>
+      <span id="titleBlockRight" data-i18n="statusNotStarted">NOT STARTED</span>
+    </div>
+
+    <div class="stage-wrap" id="stageWrap">
+      <div class="sheet-empty" id="stageEmpty">
+        <strong data-i18n="stageEmptyStrong">Nothing to merge yet.</strong>
+        <span data-i18n="stageEmptyText">Add at least one image or video clip on the left, then hit Merge &amp; render.</span>
+      </div>
+      <canvas id="stageCanvas" width="1280" height="720" style="display:none;"></canvas>
+      <video id="resultVideo" controls style="display:none;"></video>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-label"><span id="progressLabel" data-i18n="progressRendering">Rendering…</span><span id="progressPct">0%</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="playPreviewBtn" data-i18n="playPreviewLabel">▶ Play preview</button>
+      <button type="button" id="stopPreviewBtn" disabled data-i18n="stopPreviewLabel">■ Stop preview</button>
+      <button type="button" id="cancelRenderBtn" style="display:none;" data-i18n="cancelRenderLabel">✕ Cancel render</button>
+      <button type="button" id="downloadVideoBtn" disabled class="primary" data-i18n="downloadVideoLabel">⬇ Download video (.webm)</button>
+    </div>
+    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n="previewDisclaimerHint">Play preview plays the timeline live, right here, with no export — a quick way to check pacing, transitions, captions, and audio before committing to a full render. Rendering itself happens in real time in your browser, plus a brief moment up front to line up any video clips. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari's support is limited.</p>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Merge Forge</h2>
+  <p>Merge Forge joins slide images, video clips, music and text overlays into one video, with smooth audio fades and a live preview.</p>
+  <h3>How to use Merge Forge</h3>
+  <ol><li>Add clips, images, text, and music in the order you want.</li><li>Press “Merge media”.</li><li>Preview the timeline and export the combined video.</li></ol>
+  <h3>Can I combine clips from other MigaBuilder tools?</h3>
+  <p>Yes. Add videos made in Video Forge, Record Forge or Clip Forge together with images and music, put them in order and export one video.</p>
+  <h3>Is Merge Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/clip-forge.html">Clip Forge</a> · <a href="/sv/music-forge.html">Music Forge</a> · <a href="/sv/media-convert.html">Media Convert</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/sv/">MigaBuilder</a>. Everything you add stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/merge-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- element refs ----------
+  const mediaInput = document.getElementById('mediaInput');
+  const mediaItemsList = document.getElementById('mediaItemsList');
+  const mediaItemsEmpty = document.getElementById('mediaItemsEmpty');
+  const transitionSelect = document.getElementById('transitionSelect');
+  const aspectSelect = document.getElementById('aspectSelect');
+  const captionTextInput = document.getElementById('captionTextInput');
+  const captionStartInput = document.getElementById('captionStartInput');
+  const captionDurationInput = document.getElementById('captionDurationInput');
+  const captionPositionInput = document.getElementById('captionPositionInput');
+  const addCaptionBtn = document.getElementById('addCaptionBtn');
+  const captionsListEl = document.getElementById('captionsList');
+  const captionsEmpty = document.getElementById('captionsEmpty');
+  const soundInput = document.getElementById('soundInput');
+  const recordClipBtn = document.getElementById('recordClipBtn');
+  const soundClipsEl = document.getElementById('soundClips');
+  const soundClipsEmpty = document.getElementById('soundClipsEmpty');
+  const fadeInInput = document.getElementById('fadeInInput');
+  const fadeOutInput = document.getElementById('fadeOutInput');
+  const renderBtn = document.getElementById('renderBtn');
+  const errorBox = document.getElementById('errorBox');
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const stageEmpty = document.getElementById('stageEmpty');
+  const stageCanvas = document.getElementById('stageCanvas');
+  const resultVideo = document.getElementById('resultVideo');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressPct = document.getElementById('progressPct');
+  const progressFill = document.getElementById('progressFill');
+  const playPreviewBtn = document.getElementById('playPreviewBtn');
+  const stopPreviewBtn = document.getElementById('stopPreviewBtn');
+  const cancelRenderBtn = document.getElementById('cancelRenderBtn');
+  const downloadVideoBtn = document.getElementById('downloadVideoBtn');
+
+  const ctx = stageCanvas.getContext('2d');
+
+  // ---------- state ----------
+  let mediaItems = []; // {id, kind:'image'|'video', img, videoEl, objectUrl, name, duration, trimStart, trimEnd, naturalDuration, mute, volume, seed}
+  let itemIdCounter = 0;
+  let captions = []; // {id, text, start, duration, position}
+  let captionIdCounter = 0;
+  let soundClips = [];
+  let clipIdCounter = 0;
+  let mediaRecorderMic = null;
+  let micChunks = [];
+  let isRecordingClip = false;
+  let renderedVideoBlob = null;
+  let renderState = null;
+  let sharedAudioCtx = null;
+  let previewRaf = null;
+  let previewStart = null;
+  let previewMasterGain = null;
+  const mediaSourceNodes = new Map(); // videoEl -> MediaElementSourceNode
+
+  const KENBURNS_PATTERNS = [
+    { zFrom: 1.00, zTo: 1.18, xFrom: -0.05, yFrom: -0.03, xTo: 0.05, yTo: 0.03 },
+    { zFrom: 1.18, zTo: 1.00, xFrom: 0.05, yFrom: 0.03, xTo: -0.05, yTo: -0.03 },
+    { zFrom: 1.00, zTo: 1.15, xFrom: 0.05, yFrom: -0.04, xTo: -0.05, yTo: 0.04 },
+    { zFrom: 1.15, zTo: 1.00, xFrom: -0.05, yFrom: 0.04, xTo: 0.05, yTo: -0.04 }
+  ];
+  const TRANSITION_DUR = 0.6;
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function currentSize() {
+    const [w, h] = aspectSelect.value.split('x').map(Number);
+    return { w, h };
+  }
+
+  // ---------- media items (images + video clips) ----------
+  let batchCounter = 0;
+  mediaInput.addEventListener('change', function (e) {
+    const files = Array.from(e.target.files || []);
+    // Files load at different speeds; keep them in the order they were picked.
+    const batch = ++batchCounter;
+    const place = item => { const at = mediaItems.findIndex(m => m.batch === batch && m.seq > item.seq); if (at < 0) mediaItems.push(item); else mediaItems.splice(at, 0, item); };
+    files.forEach((file, seq) => {
+      if (file.type.startsWith('video/')) {
+        const objectUrl = URL.createObjectURL(file);
+        const videoEl = document.createElement('video');
+        videoEl.src = objectUrl;
+        videoEl.preload = 'auto';
+        videoEl.playsInline = true;
+        videoEl.onloadedmetadata = function () {
+          place({
+            id: ++itemIdCounter, kind: 'video', videoEl, objectUrl, name: file.name,
+            trimStart: 0, trimEnd: videoEl.duration, naturalDuration: videoEl.duration,
+            mute: false, volume: 1, batch, seq
+          });
+          renderMediaItemsList();
+        };
+        videoEl.onerror = function () {
+          URL.revokeObjectURL(objectUrl);
+          showError('This browser cannot play "' + file.name + '". Try converting it to MP4 (H.264) or WebM, for example with Clip Forge, then add it again.');
+        };
+      } else {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const img = new Image();
+          img.onload = function () {
+            place({ id: ++itemIdCounter, kind: 'image', img, dataUrl: reader.result, name: file.name, duration: 3, batch, seq });
+            renderMediaItemsList();
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    mediaInput.value = '';
+  });
+
+  function renderMediaItemsList() {
+    mediaItemsList.innerHTML = '';
+    mediaItemsEmpty.style.display = mediaItems.length ? 'none' : 'block';
+    mediaItems.forEach(item => {
+      const row = document.createElement('div');
+      row.className = 'item-row';
+      const thumb = item.kind === 'image'
+        ? '<img class="thumb" src="' + item.dataUrl + '" alt="">'
+        : '<div class="thumb">🎬</div>';
+      const controls = item.kind === 'image'
+        ? '<span class="item-controls">' + I18N.t('itemSecondsLabel') + ' <input type="number" class="item-duration" data-id="' + item.id + '" min="0.3" max="30" step="0.1" value="' + item.duration + '"></span>'
+        : '<span class="item-controls">' +
+            I18N.t('itemTrimLabel') + ' <input type="number" class="item-trimstart" data-id="' + item.id + '" min="0" step="0.1" value="' + item.trimStart.toFixed(1) + '" style="width:46px;">–' +
+            '<input type="number" class="item-trimend" data-id="' + item.id + '" min="0" step="0.1" value="' + item.trimEnd.toFixed(1) + '" style="width:46px;">s' +
+            ' <label><input type="checkbox" class="item-mute" data-id="' + item.id + '" style="width:auto;"' + (item.mute ? ' checked' : '') + '> ' + I18N.t('itemMuteLabel') + '</label>' +
+            ' ' + I18N.t('itemVolLabel') + ' <input type="range" class="item-volume" data-id="' + item.id + '" min="0" max="1" step="0.05" value="' + item.volume + '">' +
+          '</span>';
+      row.innerHTML =
+        thumb +
+        '<div class="item-meta">' +
+          '<span class="item-name">' + (item.kind === 'video' ? '🎬 ' : '🖼️ ') + item.name.replace(/</g, '&lt;') + '</span>' +
+          controls +
+        '</div>' +
+        '<div class="item-actions">' +
+          '<button type="button" data-up="' + item.id + '">▲</button>' +
+          '<button type="button" data-down="' + item.id + '">▼</button>' +
+          '<button type="button" class="remove" data-remove="' + item.id + '">✕</button>' +
+        '</div>';
+      mediaItemsList.appendChild(row);
+      row.querySelector('[data-up="' + item.id + '"]').title = I18N.t('moveUpTitle');
+      row.querySelector('[data-down="' + item.id + '"]').title = I18N.t('moveDownTitle');
+      row.querySelector('[data-remove="' + item.id + '"]').title = I18N.t('removeTitle');
+    });
+    mediaItemsList.querySelectorAll('.item-duration').forEach(inp => inp.addEventListener('change', () => {
+      const item = mediaItems.find(x => x.id === Number(inp.dataset.id));
+      if (item) item.duration = Math.max(0.3, parseFloat(inp.value) || 3);
+    }));
+    mediaItemsList.querySelectorAll('.item-trimstart').forEach(inp => inp.addEventListener('change', () => {
+      const item = mediaItems.find(x => x.id === Number(inp.dataset.id));
+      if (item) item.trimStart = Math.max(0, Math.min(parseFloat(inp.value) || 0, item.trimEnd - 0.2));
+    }));
+    mediaItemsList.querySelectorAll('.item-trimend').forEach(inp => inp.addEventListener('change', () => {
+      const item = mediaItems.find(x => x.id === Number(inp.dataset.id));
+      if (item) item.trimEnd = Math.min(item.naturalDuration, Math.max(parseFloat(inp.value) || item.naturalDuration, item.trimStart + 0.2));
+    }));
+    mediaItemsList.querySelectorAll('.item-mute').forEach(inp => inp.addEventListener('change', () => {
+      const item = mediaItems.find(x => x.id === Number(inp.dataset.id));
+      if (item) item.mute = inp.checked;
+    }));
+    mediaItemsList.querySelectorAll('.item-volume').forEach(inp => inp.addEventListener('input', () => {
+      const item = mediaItems.find(x => x.id === Number(inp.dataset.id));
+      if (item) item.volume = parseFloat(inp.value);
+    }));
+    mediaItemsList.querySelectorAll('[data-up]').forEach(btn => btn.addEventListener('click', () => moveItem(Number(btn.dataset.up), -1)));
+    mediaItemsList.querySelectorAll('[data-down]').forEach(btn => btn.addEventListener('click', () => moveItem(Number(btn.dataset.down), 1)));
+    mediaItemsList.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      mediaItems = mediaItems.filter(x => x.id !== Number(btn.dataset.remove));
+      renderMediaItemsList();
+    }));
+  }
+  function moveItem(id, dir) {
+    const i = mediaItems.findIndex(x => x.id === id);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= mediaItems.length) return;
+    const tmp = mediaItems[i]; mediaItems[i] = mediaItems[j]; mediaItems[j] = tmp;
+    renderMediaItemsList();
+  }
+
+  // ---------- text overlays / captions (identical pattern to Video Forge) ----------
+  addCaptionBtn.addEventListener('click', function () {
+    clearError();
+    const text = captionTextInput.value.trim();
+    if (!text) { showError(I18N.t('errorAddTextFirst')); return; }
+    captions.push({
+      id: ++captionIdCounter,
+      text,
+      start: Math.max(0, parseFloat(captionStartInput.value) || 0),
+      duration: Math.max(0.5, parseFloat(captionDurationInput.value) || 3),
+      position: captionPositionInput.value
+    });
+    captionTextInput.value = '';
+    renderCaptionsList();
+  });
+
+  function renderCaptionsList() {
+    captionsListEl.innerHTML = '';
+    captionsEmpty.style.display = captions.length ? 'none' : 'block';
+    captions.forEach(cap => {
+      const row = document.createElement('div');
+      row.className = 'clip-row';
+      row.innerHTML =
+        '<div class="clip-icon">💬</div>' +
+        '<div class="clip-meta">' +
+          '<span class="clip-name">"' + cap.text.replace(/</g, '&lt;') + '"</span>' +
+          '<div class="clip-controls">' +
+            '<label>' + I18N.t('capFromLabel') + ' <input type="number" class="cap-start" data-id="' + cap.id + '" value="' + cap.start + '" min="0" step="0.5" style="width:52px;">s</label>' +
+            '<label>' + I18N.t('capForLabel') + ' <input type="number" class="cap-duration" data-id="' + cap.id + '" value="' + cap.duration + '" min="0.5" step="0.5" style="width:52px;">s</label>' +
+            '<label>' + I18N.t('capAtLabel') + ' <select class="cap-position" data-id="' + cap.id + '">' +
+              '<option value="bottom"' + (cap.position === 'bottom' ? ' selected' : '') + '>' + I18N.t('positionBottom') + '</option>' +
+              '<option value="middle"' + (cap.position === 'middle' ? ' selected' : '') + '>' + I18N.t('positionMiddle') + '</option>' +
+              '<option value="top"' + (cap.position === 'top' ? ' selected' : '') + '>' + I18N.t('positionTop') + '</option>' +
+            '</select></label>' +
+          '</div>' +
+        '</div>' +
+        '<div class="clip-actions"><button type="button" data-remove="' + cap.id + '">✕</button></div>';
+      captionsListEl.appendChild(row);
+      row.querySelector('[data-remove="' + cap.id + '"]').title = I18N.t('removeTitle');
+    });
+    captionsListEl.querySelectorAll('.cap-start').forEach(inp => inp.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(inp.dataset.id));
+      if (cap) cap.start = Math.max(0, parseFloat(inp.value) || 0);
+    }));
+    captionsListEl.querySelectorAll('.cap-duration').forEach(inp => inp.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(inp.dataset.id));
+      if (cap) cap.duration = Math.max(0.5, parseFloat(inp.value) || 3);
+    }));
+    captionsListEl.querySelectorAll('.cap-position').forEach(sel => sel.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(sel.dataset.id));
+      if (cap) cap.position = sel.value;
+    }));
+    captionsListEl.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      captions = captions.filter(c => c.id !== Number(btn.dataset.remove));
+      renderCaptionsList();
+    }));
+  }
+
+  function wrapCanvasText(g, text, maxWidth) {
+    const words = text.split(/\s+/);
+    const lines = [];
+    let line = '';
+    words.forEach(word => {
+      const test = line ? line + ' ' + word : word;
+      if (line && g.measureText(test).width > maxWidth) { lines.push(line); line = word; } else { line = test; }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function drawCaptionsAt(g, cw, ch, t) {
+    const active = captions.filter(c => t >= c.start && t < c.start + c.duration);
+    if (!active.length) return;
+    const fontSize = Math.round(ch * 0.045);
+    g.font = '700 ' + fontSize + 'px "IBM Plex Sans", sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    const maxWidth = cw * 0.86;
+    const lineHeight = fontSize * 1.3;
+    active.forEach(cap => {
+      const lines = wrapCanvasText(g, cap.text, maxWidth);
+      const anchorY = cap.position === 'top' ? ch * 0.14 : cap.position === 'bottom' ? ch * 0.86 : ch * 0.5;
+      const blockHeight = lines.length * lineHeight;
+      const firstLineY = anchorY - blockHeight / 2 + lineHeight / 2;
+      let maxLineWidth = 0;
+      lines.forEach(line => { maxLineWidth = Math.max(maxLineWidth, g.measureText(line).width); });
+      g.save();
+      g.fillStyle = 'rgba(0, 0, 0, 0.55)';
+      const boxPadX = 18, boxPadY = 12;
+      g.fillRect(cw / 2 - maxLineWidth / 2 - boxPadX, anchorY - blockHeight / 2 - boxPadY, maxLineWidth + boxPadX * 2, blockHeight + boxPadY * 2);
+      g.fillStyle = '#fff';
+      lines.forEach((line, i) => g.fillText(line, cw / 2, firstLineY + i * lineHeight));
+      g.restore();
+    });
+  }
+
+  // ---------- sound clips (identical pattern to Video Forge) ----------
+  async function decodeAudioFile(fileOrBlob) {
+    const arrayBuffer = await fileOrBlob.arrayBuffer();
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    try { return await ac.decodeAudioData(arrayBuffer); } finally { ac.close(); }
+  }
+  function addSoundClip(name, buffer, type) {
+    soundClips.push({ id: ++clipIdCounter, name, buffer, type: type || 'music', start: 0, volume: type === 'narration' ? 1 : 0.5, loop: type === 'music' });
+    renderSoundClipsList();
+  }
+  soundInput.addEventListener('change', async function (e) {
+    const files = Array.from(e.target.files || []);
+    for (const file of files) {
+      try { addSoundClip(file.name, await decodeAudioFile(file), 'music'); }
+      catch (err) { showError(I18N.t('soundReadErrorPrefix') + ' "' + file.name + '": ' + err.message); }
+    }
+    soundInput.value = '';
+  });
+  recordClipBtn.addEventListener('click', async function () {
+    if (isRecordingClip) { mediaRecorderMic.stop(); return; }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micChunks = [];
+      mediaRecorderMic = new MediaRecorder(stream);
+      mediaRecorderMic.ondataavailable = e => { if (e.data.size) micChunks.push(e.data); };
+      mediaRecorderMic.onstop = async function () {
+        stream.getTracks().forEach(t => t.stop());
+        isRecordingClip = false;
+        recordClipBtn.textContent = I18N.t('recordClipLabel');
+        const blob = new Blob(micChunks, { type: 'audio/webm' });
+        try { addSoundClip(I18N.t('recordedNarrationPrefix') + ' ' + (soundClips.length + 1), await decodeAudioFile(blob), 'narration'); }
+        catch (err) { showError(I18N.t('recordProcessErrorPrefix') + ' ' + err.message); }
+      };
+      mediaRecorderMic.start();
+      isRecordingClip = true;
+      recordClipBtn.textContent = I18N.t('stopRecordingLabel');
+    } catch (err) { showError(I18N.t('micErrorPrefix') + ' ' + err.message); }
+  });
+  function renderSoundClipsList() {
+    soundClipsEl.innerHTML = '';
+    soundClipsEmpty.style.display = soundClips.length ? 'none' : 'block';
+    soundClips.forEach(clip => {
+      const row = document.createElement('div');
+      row.className = 'clip-row';
+      row.innerHTML =
+        '<div class="clip-icon">' + (clip.type === 'narration' ? '🎙️' : '🎵') + '</div>' +
+        '<div class="clip-meta">' +
+          '<span class="clip-name">' + clip.name.replace(/</g, '&lt;') + ' (' + clip.buffer.duration.toFixed(1) + 's)</span>' +
+          '<div class="clip-controls">' +
+            '<label>' + I18N.t('clipStartsAtLabel') + ' <input type="number" class="clip-start" data-id="' + clip.id + '" value="' + clip.start + '" min="0" step="0.5" style="width:52px;">s</label>' +
+            '<label>' + I18N.t('clipVolLabel') + ' <input type="range" class="clip-volume" data-id="' + clip.id + '" min="0" max="1" step="0.05" value="' + clip.volume + '"></label>' +
+            '<label><input type="checkbox" class="clip-loop" data-id="' + clip.id + '" style="width:auto;"' + (clip.loop ? ' checked' : '') + '> ' + I18N.t('clipLoopLabel') + '</label>' +
+          '</div>' +
+        '</div>' +
+        '<div class="clip-actions"><button type="button" data-remove="' + clip.id + '">✕</button></div>';
+      soundClipsEl.appendChild(row);
+      row.querySelector('[data-remove="' + clip.id + '"]').title = I18N.t('removeTitle');
+    });
+    soundClipsEl.querySelectorAll('.clip-start').forEach(inp => inp.addEventListener('change', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.start = Math.max(0, parseFloat(inp.value) || 0);
+    }));
+    soundClipsEl.querySelectorAll('.clip-volume').forEach(inp => inp.addEventListener('input', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.volume = parseFloat(inp.value);
+    }));
+    soundClipsEl.querySelectorAll('.clip-loop').forEach(inp => inp.addEventListener('change', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.loop = inp.checked;
+    }));
+    soundClipsEl.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      soundClips = soundClips.filter(c => c.id !== Number(btn.dataset.remove));
+      renderSoundClipsList();
+    }));
+  }
+
+  const STOCK_TRACKS = MediaUtils.STOCK_TRACKS;
+  document.querySelectorAll('#stockTrackRow [data-stock]').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      clearError();
+      const cfg = STOCK_TRACKS.find(t => t.id === btn.dataset.stock);
+      if (!cfg || !(window.OfflineAudioContext || window.webkitOfflineAudioContext)) return;
+      const original = btn.textContent;
+      btn.disabled = true; btn.textContent = I18N.t('stockGeneratingLabel');
+      try { addSoundClip(I18N.t(cfg.labelKey) + ' (' + I18N.t('generatedSuffix') + ')', await MediaUtils.generateStockTrack(cfg), 'music'); }
+      catch (err) { showError(I18N.t('stockGenerateErrorPrefix') + ' ' + err.message); }
+      finally { btn.disabled = false; btn.textContent = original; }
+    });
+  });
+
+  function scheduleAudioSources(audioCtx, destNode, totalDuration) {
+    soundClips.forEach(clip => {
+      if (!clip.buffer) return;
+      const remaining = totalDuration - clip.start;
+      if (remaining <= 0) return;
+      const src = audioCtx.createBufferSource();
+      src.buffer = clip.buffer;
+      src.loop = !!clip.loop && clip.buffer.duration < remaining;
+      const gain = audioCtx.createGain();
+      gain.gain.value = clip.volume;
+      src.connect(gain).connect(destNode);
+      const when = audioCtx.currentTime + clip.start;
+      src.start(when);
+      if (!src.loop) { try { src.stop(when + remaining); } catch (e) {} }
+    });
+  }
+
+  // ---------- timeline ----------
+  function buildTimeline() {
+    const segments = mediaItems.map((item, i) => item.kind === 'image'
+      ? { type: 'image', item, duration: item.duration, seed: i }
+      : { type: 'video', item, duration: Math.max(0.2, item.trimEnd - item.trimStart) });
+    const transition = transitionSelect.value;
+    const starts = new Array(segments.length).fill(0);
+    for (let i = 0; i < segments.length; i++) {
+      let overlap = 0;
+      if (i > 0 && transition !== 'none' && segments[i - 1].type === 'image' && segments[i].type === 'image') {
+        overlap = Math.min(TRANSITION_DUR, segments[i - 1].duration * 0.5, segments[i].duration * 0.5);
+      }
+      segments[i].overlapPrev = overlap;
+      starts[i] = i === 0 ? 0 : starts[i - 1] + segments[i - 1].duration - overlap;
+    }
+    const total = segments.length ? starts[segments.length - 1] + segments[segments.length - 1].duration : 0;
+    return { segments, starts, total, transition };
+  }
+
+  function drawCover(g, el, naturalW, naturalH, cw, ch, zoom, offXFrac, offYFrac) {
+    if (!naturalW || !naturalH) return;
+    const ir = naturalW / naturalH, cr = cw / ch;
+    let dw, dh;
+    if (ir > cr) { dh = ch * zoom; dw = dh * ir; } else { dw = cw * zoom; dh = dw / ir; }
+    const cx = cw / 2 + offXFrac * cw, cy = ch / 2 + offYFrac * ch;
+    const dx = Math.max(Math.min(cx - dw / 2, 0), cw - dw);
+    const dy = Math.max(Math.min(cy - dh / 2, 0), ch - dh);
+    g.drawImage(el, dx, dy, dw, dh);
+  }
+
+  function drawSegmentContent(g, cw, ch, seg, localT) {
+    if (seg.type === 'image') {
+      const p = KENBURNS_PATTERNS[seg.seed % KENBURNS_PATTERNS.length];
+      const t = seg.duration > 0 ? localT / seg.duration : 0;
+      const zoom = p.zFrom + (p.zTo - p.zFrom) * t;
+      const offX = p.xFrom + (p.xTo - p.xFrom) * t;
+      const offY = p.yFrom + (p.yTo - p.yFrom) * t;
+      drawCover(g, seg.item.img, seg.item.img.width, seg.item.img.height, cw, ch, zoom, offX, offY);
+    } else {
+      drawCover(g, seg.item.videoEl, seg.item.videoEl.videoWidth, seg.item.videoEl.videoHeight, cw, ch, 1, 0, 0);
+    }
+  }
+
+  function findSegmentIndexAt(timeline, t) {
+    const { starts, segments } = timeline;
+    let idx = 0;
+    for (let i = 0; i < segments.length; i++) { if (starts[i] <= t) idx = i; else break; }
+    return idx;
+  }
+
+  function drawTimelineAt(timeline, g, cw, ch, t) {
+    const { segments, starts, transition } = timeline;
+    if (!segments.length) return;
+    const i = findSegmentIndexAt(timeline, t);
+    const seg = segments[i];
+    const localT = Math.min(seg.duration, Math.max(0, t - starts[i]));
+    const next = segments[i + 1];
+
+    g.fillStyle = '#000';
+    g.fillRect(0, 0, cw, ch);
+
+    if (next && transition !== 'none' && next.overlapPrev > 0) {
+      const overlapStart = seg.duration - next.overlapPrev;
+      if (localT >= overlapStart) {
+        const progress = Math.max(0, Math.min(1, (localT - overlapStart) / next.overlapPrev));
+        const nextLocalT = Math.max(0, t - starts[i + 1]);
+        g.save(); g.globalAlpha = 1; drawSegmentContent(g, cw, ch, seg, localT); g.restore();
+        g.save(); g.globalAlpha = progress; drawSegmentContent(g, cw, ch, next, nextLocalT); g.restore();
+        drawCaptionsAt(g, cw, ch, t);
+        return;
+      }
+    }
+    drawSegmentContent(g, cw, ch, seg, localT);
+    drawCaptionsAt(g, cw, ch, t);
+  }
+
+  function applyFadeEnvelope(audioCtx, gainNode, totalDuration) {
+    const maxFade = totalDuration / 2;
+    const fadeIn = Math.min(Math.max(0, parseFloat(fadeInInput.value) || 0), maxFade);
+    const fadeOut = Math.min(Math.max(0, parseFloat(fadeOutInput.value) || 0), maxFade);
+    const now = audioCtx.currentTime;
+    gainNode.gain.cancelScheduledValues(now);
+    gainNode.gain.setValueAtTime(fadeIn > 0 ? 0 : 1, now);
+    if (fadeIn > 0) gainNode.gain.linearRampToValueAtTime(1, now + fadeIn);
+    if (fadeOut > 0) {
+      const fadeOutStart = now + Math.max(fadeIn, totalDuration - fadeOut);
+      gainNode.gain.setValueAtTime(1, fadeOutStart);
+      gainNode.gain.linearRampToValueAtTime(0, now + totalDuration);
+    }
+  }
+
+  // ---------- lightweight live preview (no export) ----------
+  function stopPreview() {
+    if (previewRaf) cancelAnimationFrame(previewRaf);
+    previewRaf = null;
+    mediaItems.forEach(item => { if (item.kind === 'video') item.videoEl.pause(); });
+    if (previewMasterGain) { try { previewMasterGain.disconnect(); } catch (e) {} previewMasterGain = null; }
+    playPreviewBtn.disabled = false;
+    stopPreviewBtn.disabled = true;
+  }
+
+  playPreviewBtn.addEventListener('click', function () {
+    clearError();
+    if (!mediaItems.length) { showError(I18N.t('errorAddMediaFirst')); return; }
+    const timeline = buildTimeline();
+    if (!timeline.total) { showError(I18N.t('errorNothingToPreview')); return; }
+    const { w, h } = currentSize();
+    stageCanvas.width = w; stageCanvas.height = h;
+    stageEmpty.style.display = 'none';
+    resultVideo.style.display = 'none';
+    stageCanvas.style.display = 'block';
+
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = sharedAudioCtx;
+    previewMasterGain = audioCtx.createGain();
+    previewMasterGain.connect(audioCtx.destination);
+    applyFadeEnvelope(audioCtx, previewMasterGain, timeline.total);
+    scheduleAudioSources(audioCtx, previewMasterGain, timeline.total);
+    mediaItems.forEach(item => {
+      if (item.kind !== 'video') return;
+      const sourceNode = getSourceNode(audioCtx, item.videoEl);
+      sourceNode.disconnect();
+      const gain = audioCtx.createGain();
+      gain.gain.value = item.mute ? 0 : item.volume;
+      sourceNode.connect(gain).connect(previewMasterGain);
+      item.videoEl.muted = true; // routed through the Web Audio graph above, not the element itself
+    });
+
+    playPreviewBtn.disabled = true;
+    stopPreviewBtn.disabled = false;
+    previewStart = performance.now();
+    titleBlockRight.textContent = I18N.t('statusPreviewing');
+    let activeVideoItem = null;
+    function step() {
+      const elapsed = (performance.now() - previewStart) / 1000;
+      if (elapsed >= timeline.total) {
+        drawTimelineAt(timeline, ctx, w, h, timeline.total - 0.001);
+        stopPreview();
+        titleBlockRight.textContent = I18N.t('statusPreviewDone');
+        return;
+      }
+      const idx = findSegmentIndexAt(timeline, elapsed);
+      const seg = timeline.segments[idx];
+      if (seg.type === 'video' && activeVideoItem !== seg.item) {
+        if (activeVideoItem) activeVideoItem.videoEl.pause();
+        activeVideoItem = seg.item;
+        activeVideoItem.videoEl.currentTime = activeVideoItem.trimStart;
+        activeVideoItem.videoEl.play().catch(() => {});
+      } else if (seg.type !== 'video' && activeVideoItem) {
+        activeVideoItem.videoEl.pause();
+        activeVideoItem = null;
+      }
+      drawTimelineAt(timeline, ctx, w, h, elapsed);
+      previewRaf = requestAnimationFrame(step);
+    }
+    previewRaf = requestAnimationFrame(step);
+  });
+
+  stopPreviewBtn.addEventListener('click', function () {
+    stopPreview();
+    titleBlockRight.textContent = I18N.t('statusStopped');
+  });
+
+  // ---------- render ----------
+  function getSourceNode(audioCtx, videoEl) {
+    if (!mediaSourceNodes.has(videoEl)) mediaSourceNodes.set(videoEl, audioCtx.createMediaElementSource(videoEl));
+    return mediaSourceNodes.get(videoEl);
+  }
+
+  renderBtn.addEventListener('click', async function () {
+    clearError();
+    if (!mediaItems.length) { showError(I18N.t('errorAddMediaFirst')); return; }
+    if (!window.MediaRecorder || !stageCanvas.captureStream) {
+      showError(I18N.t('errorNoRecordingSupport'));
+      return;
+    }
+    stopPreview();
+    const timeline = buildTimeline();
+    if (!timeline.total) { showError(I18N.t('errorNothingToRender')); return; }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoVideoFormat')); return; }
+
+    const { w, h } = currentSize();
+    stageCanvas.width = w; stageCanvas.height = h;
+    stageEmpty.style.display = 'none';
+    resultVideo.style.display = 'none';
+    stageCanvas.style.display = 'block';
+    downloadVideoBtn.disabled = true;
+    renderedVideoBlob = null;
+
+    renderBtn.disabled = true;
+    playPreviewBtn.disabled = true;
+    progressWrap.classList.add('show');
+    progressLabel.textContent = I18N.t('progressLiningUp');
+    progressFill.style.width = '0%';
+    progressPct.textContent = '0%';
+    titleBlockRight.textContent = I18N.t('statusPreparing');
+
+    // pre-seek every video clip to its trim start so it can begin instantly when its segment starts
+    for (const item of mediaItems) {
+      if (item.kind !== 'video') continue;
+      item.videoEl.pause();
+      await new Promise(resolve => {
+        item.videoEl.onseeked = resolve;
+        item.videoEl.currentTime = item.trimStart;
+      });
+    }
+
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = sharedAudioCtx;
+    const dest = audioCtx.createMediaStreamDestination();
+    const masterGain = audioCtx.createGain();
+    masterGain.connect(dest);
+    applyFadeEnvelope(audioCtx, masterGain, timeline.total);
+    scheduleAudioSources(audioCtx, masterGain, timeline.total);
+    mediaItems.forEach(item => {
+      if (item.kind !== 'video') return;
+      const sourceNode = getSourceNode(audioCtx, item.videoEl);
+      sourceNode.disconnect();
+      const gain = audioCtx.createGain();
+      gain.gain.value = item.mute ? 0 : item.volume;
+      sourceNode.connect(gain).connect(masterGain);
+      item.videoEl.muted = true;
+    });
+
+    const canvasStream = stageCanvas.captureStream(30);
+    const combined = new MediaStream([...canvasStream.getVideoTracks(), ...dest.stream.getAudioTracks()]);
+    const recorder = new MediaRecorder(combined, { mimeType, videoBitsPerSecond: 8000000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+
+    cancelRenderBtn.style.display = 'inline-block';
+    progressLabel.textContent = I18N.t('progressRendering');
+    titleBlockRight.textContent = I18N.t('statusRendering');
+
+    let cancelled = false;
+    let rafId = null;
+    let activeVideoItem = null;
+    const startTs = performance.now();
+
+    function finish() {
+      progressWrap.classList.remove('show');
+      cancelRenderBtn.style.display = 'none';
+      renderBtn.disabled = false;
+      playPreviewBtn.disabled = false;
+      mediaItems.forEach(item => { if (item.kind === 'video') item.videoEl.pause(); });
+      renderState = null;
+    }
+
+    recorder.onstop = function () {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (cancelled) { finish(); titleBlockRight.textContent = I18N.t('statusCancelled'); return; }
+      renderedVideoBlob = new Blob(chunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(renderedVideoBlob);
+      resultVideo.src = url;
+      resultVideo.style.display = 'block';
+      stageCanvas.style.display = 'none';
+      downloadVideoBtn.disabled = false;
+      titleBlockRight.textContent = I18N.t('statusRenderComplete');
+      finish();
+    };
+
+    recorder.start();
+    function step() {
+      if (cancelled) { recorder.stop(); return; }
+      const elapsed = (performance.now() - startTs) / 1000;
+      if (elapsed >= timeline.total) {
+        drawTimelineAt(timeline, ctx, w, h, timeline.total - 0.001);
+        recorder.stop();
+        return;
+      }
+      const idx = findSegmentIndexAt(timeline, elapsed);
+      const seg = timeline.segments[idx];
+      if (seg.type === 'video' && activeVideoItem !== seg.item) {
+        if (activeVideoItem) activeVideoItem.videoEl.pause();
+        activeVideoItem = seg.item;
+        seg.item.videoEl.play().catch(() => {});
+      } else if (seg.type !== 'video' && activeVideoItem) {
+        activeVideoItem.videoEl.pause();
+        activeVideoItem = null;
+      }
+      drawTimelineAt(timeline, ctx, w, h, elapsed);
+      const pct = Math.round((elapsed / timeline.total) * 100);
+      progressFill.style.width = pct + '%';
+      progressPct.textContent = pct + '%';
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+
+    renderState = { cancel: function () { cancelled = true; } };
+  });
+
+  cancelRenderBtn.addEventListener('click', function () { if (renderState) renderState.cancel(); });
+
+  downloadVideoBtn.addEventListener('click', function () {
+    if (!renderedVideoBlob) return;
+    const url = URL.createObjectURL(renderedVideoBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'merge-forge.webm';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  I18N.onChange(function () {
+    renderMediaItemsList();
+    renderCaptionsList();
+    renderSoundClipsList();
+    recordClipBtn.textContent = isRecordingClip ? I18N.t('stopRecordingLabel') : I18N.t('recordClipLabel');
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Drop in images, video clips, music, and text overlays — arrange them, preview live, then merge into one final video with smooth audio fades.',
+      pptHelpHeading: 'Turning a PowerPoint into a video?',
+      pptHelpSummary: 'Click here first — one quick export step',
+      pptHelpStepsHtml: '<li>Open your presentation in PowerPoint, Keynote, or Google Slides.</li><li>Use <strong>File → Export → Images</strong> (PowerPoint/Keynote) or <strong>File → Download → PNG image (current slide)</strong> repeated per slide, or <strong>File → Download → JPEG</strong> zipped in Google Slides — every tool has a one-click "export slides as images" option.</li><li>Upload the resulting image files below, in slide order.</li>',
+      pptHelpHint: 'Browsers can\'t open or render a raw .pptx file directly — there\'s no PowerPoint engine built into a webpage — so this one export step stands in for that. Everything after this is automatic.',
+      mediaHeading: 'Your images & video clips',
+      mediaUploadLabel: '+ Add images and/or video clips (in order)',
+      mediaHint: 'Mix and match — slide images, drawings, clips from Clip Forge or Video Forge. Reorder with the arrows.',
+      mediaItemsEmptyText: 'Nothing added yet.',
+      transitionHeading: 'Transition between images',
+      transitionCrossfade: 'Crossfade',
+      transitionHardCut: 'Hard cut',
+      transitionHint: 'Applies between two consecutive images only — video clips always cut in and out cleanly, like a real edit.',
+      outputHeading: 'Output',
+      aspectLabel: 'Aspect ratio',
+      aspect16x9: '16:9 landscape',
+      aspect9x16: '9:16 vertical',
+      aspect1x1: '1:1 square',
+      captionHeading: 'Text overlay (optional)',
+      captionIntroHint: 'Add lines of text that appear over the video — handy for quotes, captions, or credits.',
+      captionTextLabel: 'Text',
+      captionTextPlaceholder: 'e.g. Believe in yourself',
+      captionStartLabel: 'Starts at (s)',
+      captionDurationLabel: 'Duration (s)',
+      captionPositionLabel: 'Position',
+      positionBottom: 'Bottom',
+      positionMiddle: 'Middle',
+      positionTop: 'Top',
+      addCaptionBtnLabel: '+ Add text overlay',
+      captionsEmptyText: 'No text overlays added.',
+      musicHeading: 'Music & sound (optional)',
+      musicIntroHintHtml: 'Layer in music or narration on top of everything above — upload a track (e.g. one you made in Music Forge), record narration live, or use a generated stock track. Got a screen recording from <a href="record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a>? Add it as a clip above.',
+      uploadClipsLabel: '+ Upload clip(s)',
+      recordClipLabel: '🎙️ Record a clip',
+      stopRecordingLabel: '⏹ Stop recording',
+      stockTrackLabel: 'Or use a generated stock track',
+      stockCheerful: '🎉 Cheerful',
+      stockCalm: '🌙 Calm',
+      stockPlayful: '🎈 Playful',
+      stockCinematic: '🎬 Cinematic',
+      generatedSuffix: 'generated',
+      stockHintHtml: 'Want more control over mood/tempo/length? Make one in <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> and upload the .wav here instead.',
+      soundClipsEmptyText: 'No music or sound added — the merged video will use each clip\'s own original audio only.',
+      fadeHeading: 'Fade the combined audio mix',
+      fadeInLabel: 'Fade in (s)',
+      fadeOutLabel: 'Fade out (s)',
+      fadeHint: 'Smooths the start/end of the merged audio (music, narration, and video clip audio together) instead of cutting in or out abruptly.',
+      renderBtnLabel: '🎬 Merge & render video',
+      previewTitle: 'MERGE FORGE — PREVIEW',
+      statusNotStarted: 'NOT STARTED',
+      stageEmptyStrong: 'Nothing to merge yet.',
+      stageEmptyText: 'Add at least one image or video clip on the left, then hit Merge & render.',
+      progressRendering: 'Rendering…',
+      playPreviewLabel: '▶ Play preview',
+      stopPreviewLabel: '■ Stop preview',
+      cancelRenderLabel: '✕ Cancel render',
+      downloadVideoLabel: '⬇ Download video (.webm)',
+      previewDisclaimerHint: 'Play preview plays the timeline live, right here, with no export — a quick way to check pacing, transitions, captions, and audio before committing to a full render. Rendering itself happens in real time in your browser, plus a brief moment up front to line up any video clips. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari\'s support is limited.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything you add stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      errorAddTextFirst: 'Type some text first.',
+      itemSecondsLabel: 'Seconds:',
+      itemTrimLabel: 'Trim:',
+      itemMuteLabel: 'Mute',
+      itemVolLabel: 'Vol:',
+      moveUpTitle: 'Move up',
+      moveDownTitle: 'Move down',
+      removeTitle: 'Remove',
+      capFromLabel: 'From:',
+      capForLabel: 'For:',
+      capAtLabel: 'At:',
+      clipStartsAtLabel: 'Starts at:',
+      clipVolLabel: 'Vol:',
+      clipLoopLabel: 'Loop',
+      soundReadErrorPrefix: 'Could not read',
+      recordedNarrationPrefix: 'Recorded narration',
+      recordProcessErrorPrefix: 'Could not process the recorded clip:',
+      micErrorPrefix: 'Could not access your microphone:',
+      stockGeneratingLabel: 'Generating…',
+      stockGenerateErrorPrefix: 'Could not generate that track:',
+      errorAddMediaFirst: 'Add at least one image or video clip first.',
+      errorNothingToPreview: 'Nothing to preview.',
+      errorNothingToRender: 'Nothing to render.',
+      errorNoRecordingSupport: 'Your browser does not support recording canvas to video. Try the latest Chrome, Edge, or Firefox.',
+      errorNoVideoFormat: 'No supported video format found in this browser.',
+      statusPreviewing: 'PREVIEWING',
+      statusPreviewDone: 'PREVIEW DONE',
+      statusStopped: 'STOPPED',
+      statusPreparing: 'PREPARING',
+      statusRendering: 'RENDERING',
+      statusCancelled: 'CANCELLED',
+      statusRenderComplete: 'RENDER COMPLETE',
+      progressLiningUp: 'Lining up clips…'
+    },
+    es: {
+      heroSubtitle: 'Agrega imágenes, clips de video, música y superposiciones de texto — organízalos, previsualiza en vivo y luego combina todo en un video final con fundidos de audio suaves.',
+      pptHelpHeading: '¿Vas a convertir una presentación de PowerPoint en video?',
+      pptHelpSummary: 'Haz clic aquí primero — un paso rápido de exportación',
+      pptHelpStepsHtml: '<li>Abre tu presentación en PowerPoint, Keynote o Google Slides.</li><li>Usa <strong>Archivo → Exportar → Imágenes</strong> (PowerPoint/Keynote) o <strong>Archivo → Descargar → Imagen PNG (diapositiva actual)</strong> repetido por diapositiva, o <strong>Archivo → Descargar → JPEG</strong> comprimido en Google Slides — cada herramienta tiene una opción de un clic para "exportar diapositivas como imágenes".</li><li>Sube los archivos de imagen resultantes abajo, en el orden de las diapositivas.</li>',
+      pptHelpHint: 'Los navegadores no pueden abrir ni renderizar un archivo .pptx crudo directamente — no hay un motor de PowerPoint integrado en una página web — así que este paso de exportación lo sustituye. Todo lo demás después de esto es automático.',
+      mediaHeading: 'Tus imágenes y clips de video',
+      mediaUploadLabel: '+ Agregar imágenes y/o clips de video (en orden)',
+      mediaHint: 'Combina libremente — imágenes de diapositivas, dibujos, clips de Clip Forge o Video Forge. Reordena con las flechas.',
+      mediaItemsEmptyText: 'Nada agregado todavía.',
+      transitionHeading: 'Transición entre imágenes',
+      transitionCrossfade: 'Fundido cruzado',
+      transitionHardCut: 'Corte directo',
+      transitionHint: 'Se aplica solo entre dos imágenes consecutivas — los clips de video siempre entran y salen limpiamente, como una edición real.',
+      outputHeading: 'Salida',
+      aspectLabel: 'Relación de aspecto',
+      aspect16x9: '16:9 horizontal',
+      aspect9x16: '9:16 vertical',
+      aspect1x1: '1:1 cuadrado',
+      captionHeading: 'Superposición de texto (opcional)',
+      captionIntroHint: 'Agrega líneas de texto que aparecen sobre el video — útil para citas, subtítulos o créditos.',
+      captionTextLabel: 'Texto',
+      captionTextPlaceholder: 'p. ej. Cree en ti mismo',
+      captionStartLabel: 'Comienza en (s)',
+      captionDurationLabel: 'Duración (s)',
+      captionPositionLabel: 'Posición',
+      positionBottom: 'Abajo',
+      positionMiddle: 'Medio',
+      positionTop: 'Arriba',
+      addCaptionBtnLabel: '+ Agregar superposición de texto',
+      captionsEmptyText: 'No se agregaron superposiciones de texto.',
+      musicHeading: 'Música y sonido (opcional)',
+      musicIntroHintHtml: 'Añade música o narración sobre todo lo anterior — sube una pista (por ejemplo, una que hiciste en Music Forge), graba narración en vivo, o usa una pista de stock generada. ¿Tienes una grabación de pantalla de <a href="record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a>? Agrégala como un clip arriba.',
+      uploadClipsLabel: '+ Subir clip(s)',
+      recordClipLabel: '🎙️ Grabar un clip',
+      stopRecordingLabel: '⏹ Detener grabación',
+      stockTrackLabel: 'O usa una pista de stock generada',
+      stockCheerful: '🎉 Alegre',
+      stockCalm: '🌙 Calmada',
+      stockPlayful: '🎈 Juguetona',
+      stockCinematic: '🎬 Cinematográfica',
+      generatedSuffix: 'generada',
+      stockHintHtml: '¿Quieres más control sobre el ambiente/tempo/duración? Crea una en <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> y sube el .wav aquí en su lugar.',
+      soundClipsEmptyText: 'No se agregó música o sonido — el video combinado usará solo el audio original de cada clip.',
+      fadeHeading: 'Fundido de la mezcla de audio combinada',
+      fadeInLabel: 'Entrada (s)',
+      fadeOutLabel: 'Salida (s)',
+      fadeHint: 'Suaviza el inicio/final del audio combinado (música, narración y audio de los clips de video juntos) en vez de cortar abruptamente.',
+      renderBtnLabel: '🎬 Combinar y renderizar video',
+      previewTitle: 'MERGE FORGE — VISTA PREVIA',
+      statusNotStarted: 'SIN INICIAR',
+      stageEmptyStrong: 'Nada para combinar todavía.',
+      stageEmptyText: 'Agrega al menos una imagen o clip de video a la izquierda, luego pulsa Combinar y renderizar.',
+      progressRendering: 'Renderizando…',
+      playPreviewLabel: '▶ Reproducir vista previa',
+      stopPreviewLabel: '■ Detener vista previa',
+      cancelRenderLabel: '✕ Cancelar renderizado',
+      downloadVideoLabel: '⬇ Descargar video (.webm)',
+      previewDisclaimerHint: 'Reproducir vista previa muestra la línea de tiempo en vivo, aquí mismo, sin exportar — una forma rápida de revisar el ritmo, las transiciones, los subtítulos y el audio antes de comprometerte a un renderizado completo. El renderizado ocurre en tiempo real en tu navegador, más un breve momento inicial para preparar los clips de video. La mayoría de los navegadores de escritorio (Chrome, Edge, Firefox) lo admiten; el soporte de Safari es limitado.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo lo que agregas permanece en tu navegador — nada se sube a ningún lado. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      errorAddTextFirst: 'Escribe algo de texto primero.',
+      itemSecondsLabel: 'Segundos:',
+      itemTrimLabel: 'Recorte:',
+      itemMuteLabel: 'Silenciar',
+      itemVolLabel: 'Vol:',
+      moveUpTitle: 'Subir',
+      moveDownTitle: 'Bajar',
+      removeTitle: 'Eliminar',
+      capFromLabel: 'Desde:',
+      capForLabel: 'Por:',
+      capAtLabel: 'En:',
+      clipStartsAtLabel: 'Comienza en:',
+      clipVolLabel: 'Vol:',
+      clipLoopLabel: 'Repetir',
+      soundReadErrorPrefix: 'No se pudo leer',
+      recordedNarrationPrefix: 'Narración grabada',
+      recordProcessErrorPrefix: 'No se pudo procesar el clip grabado:',
+      micErrorPrefix: 'No se pudo acceder a tu micrófono:',
+      stockGeneratingLabel: 'Generando…',
+      stockGenerateErrorPrefix: 'No se pudo generar esa pista:',
+      errorAddMediaFirst: 'Agrega al menos una imagen o clip de video primero.',
+      errorNothingToPreview: 'Nada para previsualizar.',
+      errorNothingToRender: 'Nada para renderizar.',
+      errorNoRecordingSupport: 'Tu navegador no admite grabar el lienzo como video. Prueba la última versión de Chrome, Edge o Firefox.',
+      errorNoVideoFormat: 'No se encontró un formato de video compatible en este navegador.',
+      statusPreviewing: 'PREVISUALIZANDO',
+      statusPreviewDone: 'VISTA PREVIA LISTA',
+      statusStopped: 'DETENIDO',
+      statusPreparing: 'PREPARANDO',
+      statusRendering: 'RENDERIZANDO',
+      statusCancelled: 'CANCELADO',
+      statusRenderComplete: 'RENDERIZADO COMPLETO',
+      progressLiningUp: 'Preparando clips…'
+    },
+    ar: {
+      heroSubtitle: 'أضف الصور ومقاطع الفيديو والموسيقى والتراكبات النصية — رتّبها، عاين مباشرةً، ثم ادمجها في فيديو نهائي واحد بتلاشي صوتي سلس.',
+      pptHelpHeading: 'هل تحوّل عرض باوربوينت إلى فيديو؟',
+      pptHelpSummary: 'انقر هنا أولاً — خطوة تصدير سريعة واحدة',
+      pptHelpStepsHtml: '<li>افتح عرضك التقديمي في PowerPoint أو Keynote أو Google Slides.</li><li>استخدم <strong>ملف ← تصدير ← صور</strong> (PowerPoint/Keynote) أو <strong>ملف ← تنزيل ← صورة PNG (الشريحة الحالية)</strong> مكررة لكل شريحة، أو <strong>ملف ← تنزيل ← JPEG</strong> مضغوطة في Google Slides — تحتوي كل أداة على خيار بنقرة واحدة "تصدير الشرائح كصور".</li><li>ارفع ملفات الصور الناتجة أدناه، بترتيب الشرائح.</li>',
+      pptHelpHint: 'لا يمكن للمتصفحات فتح أو عرض ملف .pptx خامًا مباشرةً — فلا يوجد محرك PowerPoint مدمج في صفحة ويب — لذا فإن خطوة التصدير هذه تحل محل ذلك. كل شيء بعد ذلك تلقائي.',
+      mediaHeading: 'صورك ومقاطع الفيديو',
+      mediaUploadLabel: '+ إضافة صور و/أو مقاطع فيديو (بالترتيب)',
+      mediaHint: 'امزج بحرية — صور شرائح، رسومات، مقاطع من Clip Forge أو Video Forge. أعد الترتيب باستخدام الأسهم.',
+      mediaItemsEmptyText: 'لم تتم إضافة شيء بعد.',
+      transitionHeading: 'الانتقال بين الصور',
+      transitionCrossfade: 'تلاشٍ متقاطع',
+      transitionHardCut: 'قطع مباشر',
+      transitionHint: 'يُطبَّق فقط بين صورتين متتاليتين — مقاطع الفيديو تدخل وتخرج دائمًا بشكل نظيف، كما في التحرير الحقيقي.',
+      outputHeading: 'الإخراج',
+      aspectLabel: 'نسبة العرض إلى الارتفاع',
+      aspect16x9: '16:9 أفقي',
+      aspect9x16: '9:16 عمودي',
+      aspect1x1: '1:1 مربع',
+      captionHeading: 'تراكب نصي (اختياري)',
+      captionIntroHint: 'أضف أسطر نص تظهر فوق الفيديو — مفيدة للاقتباسات أو التسميات التوضيحية أو الاعتمادات.',
+      captionTextLabel: 'النص',
+      captionTextPlaceholder: 'مثال: آمن بنفسك',
+      captionStartLabel: 'يبدأ عند (ث)',
+      captionDurationLabel: 'المدة (ث)',
+      captionPositionLabel: 'الموضع',
+      positionBottom: 'أسفل',
+      positionMiddle: 'وسط',
+      positionTop: 'أعلى',
+      addCaptionBtnLabel: '+ إضافة تراكب نصي',
+      captionsEmptyText: 'لم تتم إضافة أي تراكبات نصية.',
+      musicHeading: 'الموسيقى والصوت (اختياري)',
+      musicIntroHintHtml: 'أضف موسيقى أو سردًا فوق كل ما سبق — ارفع مقطعًا (مثل ما صنعته في Music Forge)، أو سجّل سردًا مباشرة، أو استخدم مقطعًا جاهزًا مُولَّدًا. هل لديك تسجيل شاشة من <a href="record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a>؟ أضفه كمقطع أعلاه.',
+      uploadClipsLabel: '+ رفع مقطع/مقاطع',
+      recordClipLabel: '🎙️ تسجيل مقطع',
+      stopRecordingLabel: '⏹ إيقاف التسجيل',
+      stockTrackLabel: 'أو استخدم مقطعًا جاهزًا مُولَّدًا',
+      stockCheerful: '🎉 مرح',
+      stockCalm: '🌙 هادئ',
+      stockPlayful: '🎈 مرِح',
+      stockCinematic: '🎬 سينمائي',
+      generatedSuffix: 'مُولَّد',
+      stockHintHtml: 'تريد تحكمًا أكبر في المزاج/الإيقاع/المدة؟ اصنع واحدًا في <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> وارفع ملف .wav هنا بدلاً من ذلك.',
+      soundClipsEmptyText: 'لم تُضَف موسيقى أو صوت — سيستخدم الفيديو المدمج صوت كل مقطع الأصلي فقط.',
+      fadeHeading: 'تلاشي مزيج الصوت المدمج',
+      fadeInLabel: 'التلاشي الداخل (ث)',
+      fadeOutLabel: 'التلاشي الخارج (ث)',
+      fadeHint: 'يُنعّم بداية/نهاية الصوت المدمج (الموسيقى والسرد وصوت مقاطع الفيديو معًا) بدلاً من القطع المفاجئ.',
+      renderBtnLabel: '🎬 دمج وعرض الفيديو',
+      previewTitle: 'MERGE FORGE — معاينة',
+      statusNotStarted: 'لم يبدأ',
+      stageEmptyStrong: 'لا شيء لدمجه بعد.',
+      stageEmptyText: 'أضف صورة أو مقطع فيديو واحدًا على الأقل يسارًا، ثم اضغط دمج وعرض.',
+      progressRendering: 'جارٍ العرض…',
+      playPreviewLabel: '▶ تشغيل المعاينة',
+      stopPreviewLabel: '■ إيقاف المعاينة',
+      cancelRenderLabel: '✕ إلغاء العرض',
+      downloadVideoLabel: '⬇ تنزيل الفيديو (.webm)',
+      previewDisclaimerHint: 'يعرض تشغيل المعاينة الجدول الزمني مباشرةً هنا بدون تصدير — طريقة سريعة للتحقق من الإيقاع والانتقالات والتسميات التوضيحية والصوت قبل الالتزام بعرض كامل. يحدث العرض نفسه في الوقت الفعلي في متصفحك، بالإضافة إلى لحظة قصيرة في البداية لتجهيز أي مقاطع فيديو. تدعم معظم متصفحات سطح المكتب (Chrome وEdge وFirefox) ذلك؛ دعم Safari محدود.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل ما تضيفه يبقى في متصفحك — لا يُرفع شيء إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      errorAddTextFirst: 'اكتب بعض النص أولاً.',
+      itemSecondsLabel: 'ثوانٍ:',
+      itemTrimLabel: 'تقليم:',
+      itemMuteLabel: 'كتم',
+      itemVolLabel: 'الصوت:',
+      moveUpTitle: 'تحريك لأعلى',
+      moveDownTitle: 'تحريك لأسفل',
+      removeTitle: 'إزالة',
+      capFromLabel: 'من:',
+      capForLabel: 'لمدة:',
+      capAtLabel: 'عند:',
+      clipStartsAtLabel: 'يبدأ عند:',
+      clipVolLabel: 'الصوت:',
+      clipLoopLabel: 'تكرار',
+      soundReadErrorPrefix: 'تعذّرت قراءة',
+      recordedNarrationPrefix: 'سرد مسجَّل',
+      recordProcessErrorPrefix: 'تعذّرت معالجة المقطع المسجَّل:',
+      micErrorPrefix: 'تعذّر الوصول إلى الميكروفون:',
+      stockGeneratingLabel: 'جارٍ التوليد…',
+      stockGenerateErrorPrefix: 'تعذّر توليد هذا المقطع:',
+      errorAddMediaFirst: 'أضف صورة أو مقطع فيديو واحدًا على الأقل أولاً.',
+      errorNothingToPreview: 'لا شيء لمعاينته.',
+      errorNothingToRender: 'لا شيء لعرضه.',
+      errorNoRecordingSupport: 'متصفحك لا يدعم تسجيل اللوحة القماشية كفيديو. جرّب أحدث إصدار من Chrome أو Edge أو Firefox.',
+      errorNoVideoFormat: 'لم يُعثر على تنسيق فيديو مدعوم في هذا المتصفح.',
+      statusPreviewing: 'جارٍ المعاينة',
+      statusPreviewDone: 'انتهت المعاينة',
+      statusStopped: 'تم الإيقاف',
+      statusPreparing: 'جارٍ التحضير',
+      statusRendering: 'جارٍ العرض',
+      statusCancelled: 'أُلغي',
+      statusRenderComplete: 'اكتمل العرض',
+      progressLiningUp: 'جارٍ تجهيز المقاطع…'
+    },
+    zh: {
+      heroSubtitle: '添加图片、视频片段、音乐和文字叠加——排列它们，实时预览，然后合并成一个带平滑音频淡入淡出的最终视频。',
+      pptHelpHeading: '要把 PowerPoint 转换成视频吗？',
+      pptHelpSummary: '先点这里——一步快速导出',
+      pptHelpStepsHtml: '<li>在 PowerPoint、Keynote 或 Google 幻灯片中打开你的演示文稿。</li><li>使用<strong>文件 → 导出 → 图像</strong>（PowerPoint/Keynote），或对每张幻灯片重复<strong>文件 → 下载 → PNG 图片（当前幻灯片）</strong>，或在 Google 幻灯片中使用<strong>文件 → 下载 → JPEG</strong>压缩包——每个工具都有一键"将幻灯片导出为图片"的选项。</li><li>按幻灯片顺序在下方上传生成的图片文件。</li>',
+      pptHelpHint: '浏览器无法直接打开或渲染原始的 .pptx 文件——网页里没有内置 PowerPoint 引擎——所以这一步导出可以替代它。此后的一切都是自动完成的。',
+      mediaHeading: '你的图片和视频片段',
+      mediaUploadLabel: '+ 添加图片和/或视频片段（按顺序）',
+      mediaHint: '可以混合使用——幻灯片图片、绘图、来自 Clip Forge 或 Video Forge 的片段。用箭头重新排序。',
+      mediaItemsEmptyText: '还没有添加任何内容。',
+      transitionHeading: '图片之间的过渡',
+      transitionCrossfade: '交叉淡化',
+      transitionHardCut: '硬切',
+      transitionHint: '仅在两张连续图片之间生效——视频片段始终干净利落地切入切出，就像真正的剪辑一样。',
+      outputHeading: '输出',
+      aspectLabel: '宽高比',
+      aspect16x9: '16:9 横向',
+      aspect9x16: '9:16 竖向',
+      aspect1x1: '1:1 正方形',
+      captionHeading: '文字叠加（可选）',
+      captionIntroHint: '添加显示在视频上的文字——适合引用语、字幕或制作人员名单。',
+      captionTextLabel: '文字',
+      captionTextPlaceholder: '例如：相信自己',
+      captionStartLabel: '开始时间（秒）',
+      captionDurationLabel: '持续时间（秒）',
+      captionPositionLabel: '位置',
+      positionBottom: '底部',
+      positionMiddle: '居中',
+      positionTop: '顶部',
+      addCaptionBtnLabel: '+ 添加文字叠加',
+      captionsEmptyText: '尚未添加文字叠加。',
+      musicHeading: '音乐与声音（可选）',
+      musicIntroHintHtml: '在以上所有内容之上叠加音乐或旁白——上传一段音轨（例如在 Music Forge 中制作的）、实时录制旁白，或使用生成的库存音轨。有来自 <a href="record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a> 的屏幕录制吗？把它作为片段添加到上方。',
+      uploadClipsLabel: '+ 上传片段',
+      recordClipLabel: '🎙️ 录制一段',
+      stopRecordingLabel: '⏹ 停止录制',
+      stockTrackLabel: '或使用生成的库存音轨',
+      stockCheerful: '🎉 欢快',
+      stockCalm: '🌙 平静',
+      stockPlayful: '🎈 俏皮',
+      stockCinematic: '🎬 电影感',
+      generatedSuffix: '已生成',
+      stockHintHtml: '想要更好地控制情绪/节奏/长度？在 <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> 中制作一段，然后改为在此处上传 .wav 文件。',
+      soundClipsEmptyText: '未添加音乐或声音——合并后的视频将只使用每个片段自身的原始音频。',
+      fadeHeading: '合成音频混音的淡入淡出',
+      fadeInLabel: '淡入（秒）',
+      fadeOutLabel: '淡出（秒）',
+      fadeHint: '使合并音频（音乐、旁白和视频片段音频合在一起）的开头/结尾更平滑，而不是突然切断。',
+      renderBtnLabel: '🎬 合并并渲染视频',
+      previewTitle: 'MERGE FORGE — 预览',
+      statusNotStarted: '尚未开始',
+      stageEmptyStrong: '还没有可合并的内容。',
+      stageEmptyText: '在左侧至少添加一张图片或一个视频片段，然后点击合并并渲染。',
+      progressRendering: '渲染中…',
+      playPreviewLabel: '▶ 播放预览',
+      stopPreviewLabel: '■ 停止预览',
+      cancelRenderLabel: '✕ 取消渲染',
+      downloadVideoLabel: '⬇ 下载视频（.webm）',
+      previewDisclaimerHint: '播放预览会在此处实时播放时间轴，无需导出——是在正式渲染之前快速检查节奏、过渡效果、字幕和音频的好方法。渲染本身会在浏览器中实时进行，加上前期用于对齐视频片段的短暂准备时间。大多数桌面浏览器（Chrome、Edge、Firefox）都支持此功能；Safari 的支持有限。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你添加的所有内容都保留在浏览器中——不会上传到任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      errorAddTextFirst: '请先输入一些文字。',
+      itemSecondsLabel: '秒数：',
+      itemTrimLabel: '裁剪：',
+      itemMuteLabel: '静音',
+      itemVolLabel: '音量：',
+      moveUpTitle: '上移',
+      moveDownTitle: '下移',
+      removeTitle: '移除',
+      capFromLabel: '起始：',
+      capForLabel: '持续：',
+      capAtLabel: '位置：',
+      clipStartsAtLabel: '起始于：',
+      clipVolLabel: '音量：',
+      clipLoopLabel: '循环',
+      soundReadErrorPrefix: '无法读取',
+      recordedNarrationPrefix: '录制的旁白',
+      recordProcessErrorPrefix: '无法处理录制的片段：',
+      micErrorPrefix: '无法访问你的麦克风：',
+      stockGeneratingLabel: '生成中…',
+      stockGenerateErrorPrefix: '无法生成该音轨：',
+      errorAddMediaFirst: '请先至少添加一张图片或一个视频片段。',
+      errorNothingToPreview: '没有可预览的内容。',
+      errorNothingToRender: '没有可渲染的内容。',
+      errorNoRecordingSupport: '你的浏览器不支持将画布录制为视频。请尝试最新版的 Chrome、Edge 或 Firefox。',
+      errorNoVideoFormat: '在此浏览器中未找到受支持的视频格式。',
+      statusPreviewing: '预览中',
+      statusPreviewDone: '预览完成',
+      statusStopped: '已停止',
+      statusPreparing: '准备中',
+      statusRendering: '渲染中',
+      statusCancelled: '已取消',
+      statusRenderComplete: '渲染完成',
+      progressLiningUp: '正在对齐片段…'
+    },
+    sw: {
+      heroSubtitle: 'Weka picha, klipu za video, muziki, na maandishi ya juu — panga, hakiki moja kwa moja, kisha unganisha kuwa video moja ya mwisho yenye mabadiliko laini ya sauti.',
+      pptHelpHeading: 'Unabadilisha PowerPoint kuwa video?',
+      pptHelpSummary: 'Bofya hapa kwanza — hatua moja ya haraka ya kuhamisha',
+      pptHelpStepsHtml: '<li>Fungua wasilisho lako katika PowerPoint, Keynote, au Google Slides.</li><li>Tumia <strong>Faili → Hamisha → Picha</strong> (PowerPoint/Keynote) au <strong>Faili → Pakua → Picha ya PNG (slaidi ya sasa)</strong> ikirudiwa kwa kila slaidi, au <strong>Faili → Pakua → JPEG</strong> iliyobanwa katika Google Slides — kila zana ina chaguo la kubofya mara moja la "kuhamisha slaidi kama picha".</li><li>Pakia faili za picha zinazotokana hapa chini, kwa mpangilio wa slaidi.</li>',
+      pptHelpHint: 'Vivinjari haviwezi kufungua au kuonyesha faili ghafi ya .pptx moja kwa moja — hakuna injini ya PowerPoint iliyojengwa ndani ya ukurasa wa wavuti — hivyo hatua hii moja ya kuhamisha inachukua nafasi ya hilo. Kila kitu baada ya hapa ni cha kiotomatiki.',
+      mediaHeading: 'Picha na klipu zako za video',
+      mediaUploadLabel: '+ Ongeza picha na/au klipu za video (kwa mpangilio)',
+      mediaHint: 'Changanya kwa uhuru — picha za slaidi, michoro, klipu kutoka Clip Forge au Video Forge. Panga upya kwa mishale.',
+      mediaItemsEmptyText: 'Hakuna kilichoongezwa bado.',
+      transitionHeading: 'Mpito kati ya picha',
+      transitionCrossfade: 'Mchanganyiko wa kufifia',
+      transitionHardCut: 'Kukatika moja kwa moja',
+      transitionHint: 'Inatumika tu kati ya picha mbili zinazofuatana — klipu za video daima huanza na kuisha kwa usafi, kama uhariri halisi.',
+      outputHeading: 'Matokeo',
+      aspectLabel: 'Uwiano wa vipimo',
+      aspect16x9: '16:9 mlalo',
+      aspect9x16: '9:16 wima',
+      aspect1x1: '1:1 mraba',
+      captionHeading: 'Maandishi ya juu (hiari)',
+      captionIntroHint: 'Ongeza mistari ya maandishi inayoonekana juu ya video — inafaa kwa nukuu, manukuu, au sifa.',
+      captionTextLabel: 'Maandishi',
+      captionTextPlaceholder: 'mfano: Amini katika nafsi yako',
+      captionStartLabel: 'Huanza saa (s)',
+      captionDurationLabel: 'Muda (s)',
+      captionPositionLabel: 'Nafasi',
+      positionBottom: 'Chini',
+      positionMiddle: 'Katikati',
+      positionTop: 'Juu',
+      addCaptionBtnLabel: '+ Ongeza maandishi ya juu',
+      captionsEmptyText: 'Hakuna maandishi ya juu yaliyoongezwa.',
+      musicHeading: 'Muziki na sauti (hiari)',
+      musicIntroHintHtml: 'Ongeza muziki au usimulizi juu ya kila kitu hapo juu — pakia wimbo (kwa mfano uliotengenezwa katika Music Forge), rekodi usimulizi moja kwa moja, au tumia wimbo wa hisa uliotengenezwa. Una rekodi ya skrini kutoka <a href="record-forge.html" style="color:var(--navy);text-decoration:underline;">Record Forge</a>? Iongeze kama klipu hapo juu.',
+      uploadClipsLabel: '+ Pakia klipu',
+      recordClipLabel: '🎙️ Rekodi klipu',
+      stopRecordingLabel: '⏹ Simamisha kurekodi',
+      stockTrackLabel: 'Au tumia wimbo wa hisa uliotengenezwa',
+      stockCheerful: '🎉 Wa furaha',
+      stockCalm: '🌙 Wa utulivu',
+      stockPlayful: '🎈 Wa kuchezacheza',
+      stockCinematic: '🎬 Wa kisinema',
+      generatedSuffix: 'umetengenezwa',
+      stockHintHtml: 'Unataka udhibiti zaidi wa hali/mwendo/urefu? Tengeneza mmoja katika <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> na pakia .wav hapa badala yake.',
+      soundClipsEmptyText: 'Hakuna muziki au sauti iliyoongezwa — video iliyounganishwa itatumia sauti asili ya kila klipu pekee.',
+      fadeHeading: 'Fifisha mchanganyiko wa sauti ulioungana',
+      fadeInLabel: 'Kufifia kuingia (s)',
+      fadeOutLabel: 'Kufifia kutoka (s)',
+      fadeHint: 'Hulainisha mwanzo/mwisho wa sauti iliyounganishwa (muziki, usimulizi, na sauti ya klipu za video pamoja) badala ya kukatika ghafla.',
+      renderBtnLabel: '🎬 Unganisha na toa video',
+      previewTitle: 'MERGE FORGE — HAKIKISHO',
+      statusNotStarted: 'HAIJAANZA',
+      stageEmptyStrong: 'Hakuna cha kuunganisha bado.',
+      stageEmptyText: 'Ongeza picha au klipu ya video angalau moja upande wa kushoto, kisha bofya Unganisha na toa.',
+      progressRendering: 'Inatoa…',
+      playPreviewLabel: '▶ Cheza hakikisho',
+      stopPreviewLabel: '■ Simamisha hakikisho',
+      cancelRenderLabel: '✕ Ghairi utoaji',
+      downloadVideoLabel: '⬇ Pakua video (.webm)',
+      previewDisclaimerHint: 'Kucheza hakikisho huonyesha ratiba ya matukio moja kwa moja, papa hapa, bila kuhamisha — njia ya haraka ya kuangalia mwendo, mipito, manukuu, na sauti kabla ya kujitolea kwa utoaji kamili. Utoaji wenyewe hufanyika kwa wakati halisi kwenye kivinjari chako, pamoja na muda mfupi mwanzoni wa kupanga klipu zozote za video. Vivinjari vingi vya kompyuta (Chrome, Edge, Firefox) vinaunga mkono hili; msaada wa Safari ni mdogo.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu unachoongeza kinabaki kwenye kivinjari chako — hakuna kinachopakiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      errorAddTextFirst: 'Andika maandishi kwanza.',
+      itemSecondsLabel: 'Sekunde:',
+      itemTrimLabel: 'Punguza:',
+      itemMuteLabel: 'Zima sauti',
+      itemVolLabel: 'Sauti:',
+      moveUpTitle: 'Panda juu',
+      moveDownTitle: 'Shuka chini',
+      removeTitle: 'Ondoa',
+      capFromLabel: 'Kutoka:',
+      capForLabel: 'Kwa:',
+      capAtLabel: 'Saa:',
+      clipStartsAtLabel: 'Huanza saa:',
+      clipVolLabel: 'Sauti:',
+      clipLoopLabel: 'Rudia',
+      soundReadErrorPrefix: 'Imeshindwa kusoma',
+      recordedNarrationPrefix: 'Usimulizi uliorekodiwa',
+      recordProcessErrorPrefix: 'Imeshindwa kuchakata klipu iliyorekodiwa:',
+      micErrorPrefix: 'Imeshindwa kufikia kipaza sauti chako:',
+      stockGeneratingLabel: 'Inatengeneza…',
+      stockGenerateErrorPrefix: 'Imeshindwa kutengeneza wimbo huo:',
+      errorAddMediaFirst: 'Ongeza picha au klipu ya video angalau moja kwanza.',
+      errorNothingToPreview: 'Hakuna cha kuhakiki.',
+      errorNothingToRender: 'Hakuna cha kutoa.',
+      errorNoRecordingSupport: 'Kivinjari chako hakiungi mkono kurekodi turubai kuwa video. Jaribu toleo jipya la Chrome, Edge, au Firefox.',
+      errorNoVideoFormat: 'Hakuna muundo wa video unaotumika uliopatikana katika kivinjari hiki.',
+      statusPreviewing: 'INAHAKIKI',
+      statusPreviewDone: 'HAKIKISHO LIMEKAMILIKA',
+      statusStopped: 'IMESIMAMA',
+      statusPreparing: 'INAANDAA',
+      statusRendering: 'INATOA',
+      statusCancelled: 'IMEGHAIRIWA',
+      statusRenderComplete: 'UTOAJI UMEKAMILIKA',
+      progressLiningUp: 'Inapanga klipu…'
+    },
+    sv: {
+      heroSubtitle: "Släpp in bilder, videoklipp, musik och textöverlägg — ordna dem, förhandsgranska direkt och slå sedan ihop allt till en färdig video med mjuka ljudtoningar.",
+      pptHelpHeading: "Gör du om en PowerPoint till video?",
+      pptHelpSummary: "Klicka här först — ett snabbt exportsteg",
+      pptHelpStepsHtml: "<li>Öppna presentationen i PowerPoint, Keynote eller Google Presentationer.</li><li>Använd <strong>Arkiv → Exportera → Bilder</strong> (PowerPoint/Keynote) eller <strong>Arkiv → Ladda ned → PNG-bild (aktuell bild)</strong> för varje bild, eller <strong>Arkiv → Ladda ned → JPEG</strong> som zip i Google Presentationer — alla verktyg har ett alternativ för att \"exportera bilder som bildfiler\" med ett klick.</li><li>Ladda upp bildfilerna nedan, i samma ordning som i presentationen.</li>",
+      pptHelpHint: "Webbläsare kan inte öppna eller visa en .pptx-fil direkt — det finns ingen PowerPoint-motor inbyggd i en webbsida — så det här exportsteget ersätter det. Allt efter detta sker automatiskt.",
+      mediaHeading: "Dina bilder & videoklipp",
+      mediaUploadLabel: "+ Lägg till bilder och/eller videoklipp (i ordning)",
+      mediaHint: "Blanda fritt — presentationsbilder, teckningar, klipp från Clip Forge eller Video Forge. Ändra ordning med pilarna.",
+      mediaItemsEmptyText: "Inget tillagt ännu.",
+      transitionHeading: "Övergång mellan bilder",
+      transitionCrossfade: "Övertoning",
+      transitionHardCut: "Hårt klipp",
+      transitionHint: "Gäller bara mellan två bilder i följd — videoklipp klipps alltid in och ut rent, som vid riktig redigering.",
+      outputHeading: "Utdata",
+      aspectLabel: "Bildformat",
+      aspect16x9: "16:9 liggande",
+      aspect9x16: "9:16 stående",
+      aspect1x1: "1:1 kvadrat",
+      captionHeading: "Textöverlägg (valfritt)",
+      captionIntroHint: "Lägg till textrader som visas över videon — praktiskt för citat, bildtexter eller eftertexter.",
+      captionTextLabel: "Text",
+      captionTextPlaceholder: "t.ex. Tro på dig själv",
+      captionStartLabel: "Börjar vid (s)",
+      captionDurationLabel: "Längd (s)",
+      captionPositionLabel: "Placering",
+      positionBottom: "Nederst",
+      positionMiddle: "Mitten",
+      positionTop: "Överst",
+      addCaptionBtnLabel: "+ Lägg till textöverlägg",
+      captionsEmptyText: "Inga textöverlägg tillagda.",
+      musicHeading: "Musik & ljud (valfritt)",
+      musicIntroHintHtml: "Lägg musik eller berättarröst ovanpå allt ovan — ladda upp ett spår (t.ex. ett du gjort i Music Forge), spela in berättarröst direkt eller använd ett genererat bakgrundsspår. Har du en skärminspelning från <a href=\"record-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Record Forge</a>? Lägg till den som ett klipp ovan.",
+      uploadClipsLabel: "+ Ladda upp klipp",
+      recordClipLabel: "🎙️ Spela in ett klipp",
+      stopRecordingLabel: "⏹ Stoppa inspelningen",
+      stockTrackLabel: "Eller använd ett genererat bakgrundsspår",
+      stockCheerful: "🎉 Glad",
+      stockCalm: "🌙 Lugn",
+      stockPlayful: "🎈 Lekfull",
+      stockCinematic: "🎬 Filmisk",
+      generatedSuffix: "genererat",
+      stockHintHtml: "Vill du ha mer kontroll över stämning/tempo/längd? Gör ett spår i <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge</a> och ladda upp .wav-filen här i stället.",
+      soundClipsEmptyText: "Ingen musik eller ljud tillagt — den sammanslagna videon använder bara varje klipps eget originalljud.",
+      fadeHeading: "Tona den samlade ljudmixen",
+      fadeInLabel: "Tona in (s)",
+      fadeOutLabel: "Tona ut (s)",
+      fadeHint: "Mjukar upp början/slutet av det sammanslagna ljudet (musik, berättarröst och videoklippens ljud tillsammans) i stället för att klippa tvärt.",
+      renderBtnLabel: "🎬 Slå ihop & rendera video",
+      previewTitle: "MERGE FORGE — FÖRHANDSVISNING",
+      statusNotStarted: "INTE PÅBÖRJAD",
+      stageEmptyStrong: "Inget att slå ihop ännu.",
+      stageEmptyText: "Lägg till minst en bild eller ett videoklipp till vänster och tryck sedan på Slå ihop & rendera.",
+      progressRendering: "Renderar…",
+      playPreviewLabel: "▶ Spela förhandsvisning",
+      stopPreviewLabel: "■ Stoppa förhandsvisning",
+      cancelRenderLabel: "✕ Avbryt rendering",
+      downloadVideoLabel: "⬇ Ladda ner video (.webm)",
+      previewDisclaimerHint: "Förhandsvisningen spelar tidslinjen direkt här, utan export — ett snabbt sätt att kontrollera tempo, övergångar, texter och ljud innan du gör en fullständig rendering. Själva renderingen sker i realtid i din webbläsare, plus en kort stund i början för att förbereda videoklippen. De flesta webbläsare på dator (Chrome, Edge, Firefox) stöder detta; stödet i Safari är begränsat.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt du lägger till stannar i din webbläsare — ingenting laddas upp någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      errorAddTextFirst: "Skriv lite text först.",
+      itemSecondsLabel: "Sekunder:",
+      itemTrimLabel: "Klipp:",
+      itemMuteLabel: "Ljud av",
+      itemVolLabel: "Vol:",
+      moveUpTitle: "Flytta upp",
+      moveDownTitle: "Flytta ner",
+      removeTitle: "Ta bort",
+      capFromLabel: "Från:",
+      capForLabel: "I:",
+      capAtLabel: "Vid:",
+      clipStartsAtLabel: "Börjar vid:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Loopa",
+      soundReadErrorPrefix: "Kunde inte läsa",
+      recordedNarrationPrefix: "Inspelad berättarröst",
+      recordProcessErrorPrefix: "Kunde inte bearbeta det inspelade klippet:",
+      micErrorPrefix: "Kunde inte komma åt mikrofonen:",
+      stockGeneratingLabel: "Genererar…",
+      stockGenerateErrorPrefix: "Kunde inte generera spåret:",
+      errorAddMediaFirst: "Lägg till minst en bild eller ett videoklipp först.",
+      errorNothingToPreview: "Inget att förhandsvisa.",
+      errorNothingToRender: "Inget att rendera.",
+      errorNoRecordingSupport: "Din webbläsare stöder inte inspelning av canvas till video. Prova senaste Chrome, Edge eller Firefox.",
+      errorNoVideoFormat: "Inget videoformat som stöds hittades i den här webbläsaren.",
+      statusPreviewing: "FÖRHANDSVISAR",
+      statusPreviewDone: "FÖRHANDSVISNING KLAR",
+      statusStopped: "STOPPAD",
+      statusPreparing: "FÖRBEREDER",
+      statusRendering: "RENDERAR",
+      statusCancelled: "AVBRUTEN",
+      statusRenderComplete: "RENDERING KLAR",
+      progressLiningUp: "Förbereder klipp…"
+    },
+    de: {
+      heroSubtitle: "Bilder, Videoclips, Musik und Texteinblendungen hineinziehen — anordnen, live ansehen und dann zu einem fertigen Video mit weichen Tonübergängen zusammenfügen.",
+      pptHelpHeading: "Eine PowerPoint in ein Video verwandeln?",
+      pptHelpSummary: "Klick zuerst hier — ein kurzer Exportschritt",
+      pptHelpStepsHtml: "<li>Öffne deine Präsentation in PowerPoint, Keynote oder Google Präsentationen.<\/li><li>Nutze <strong>Datei → Exportieren → Bilder<\/strong> (PowerPoint/Keynote) oder <strong>Datei → Herunterladen → PNG-Bild (aktuelle Folie)<\/strong> für jede Folie, oder <strong>Datei → Herunterladen → JPEG<\/strong> als ZIP in Google Präsentationen — jedes Programm hat eine Ein-Klick-Option \"Folien als Bilder exportieren\".<\/li><li>Lade die entstandenen Bilddateien unten in Folienreihenfolge hoch.<\/li>",
+      pptHelpHint: "Browser können eine rohe .pptx-Datei nicht direkt öffnen oder darstellen — in eine Webseite ist keine PowerPoint-Engine eingebaut —, daher ersetzt dieser eine Exportschritt das. Alles danach geht automatisch.",
+      mediaHeading: "Deine Bilder & Videoclips",
+      mediaUploadLabel: "+ Bilder und/oder Videoclips hinzufügen (in Reihenfolge)",
+      mediaHint: "Kombiniere frei — Folienbilder, Zeichnungen, Clips aus Clip Forge oder Video Forge. Mit den Pfeilen umsortieren.",
+      mediaItemsEmptyText: "Noch nichts hinzugefügt.",
+      transitionHeading: "Übergang zwischen Bildern",
+      transitionCrossfade: "Überblendung",
+      transitionHardCut: "Harter Schnitt",
+      transitionHint: "Gilt nur zwischen zwei aufeinanderfolgenden Bildern — Videoclips werden immer sauber hinein- und herausgeschnitten, wie bei einem echten Schnitt.",
+      outputHeading: "Ausgabe",
+      aspectLabel: "Seitenverhältnis",
+      aspect16x9: "16:9 Querformat",
+      aspect9x16: "9:16 Hochformat",
+      aspect1x1: "1:1 Quadrat",
+      captionHeading: "Texteinblendung (optional)",
+      captionIntroHint: "Füge Textzeilen hinzu, die über dem Video erscheinen — praktisch für Zitate, Untertitel oder Abspann.",
+      captionTextLabel: "Text",
+      captionTextPlaceholder: "z. B. Glaub an dich",
+      captionStartLabel: "Beginnt bei (s)",
+      captionDurationLabel: "Dauer (s)",
+      captionPositionLabel: "Position",
+      positionBottom: "Unten",
+      positionMiddle: "Mitte",
+      positionTop: "Oben",
+      addCaptionBtnLabel: "+ Texteinblendung hinzufügen",
+      captionsEmptyText: "Keine Texteinblendungen hinzugefügt.",
+      musicHeading: "Musik & Ton (optional)",
+      musicIntroHintHtml: "Lege Musik oder Erzählstimme über alles oben — lade einen Track hoch (z. B. einen aus Music Forge), nimm live eine Erzählung auf oder nutze einen erzeugten Stock-Track. Hast du eine Bildschirmaufnahme aus <a href=\"record-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Record Forge<\/a>? Füge sie oben als Clip hinzu.",
+      uploadClipsLabel: "+ Clip(s) hochladen",
+      recordClipLabel: "🎙️ Clip aufnehmen",
+      stopRecordingLabel: "⏹ Aufnahme stoppen",
+      stockTrackLabel: "Oder einen erzeugten Stock-Track nutzen",
+      stockCheerful: "🎉 Fröhlich",
+      stockCalm: "🌙 Ruhig",
+      stockPlayful: "🎈 Verspielt",
+      stockCinematic: "🎬 Filmisch",
+      generatedSuffix: "erzeugt",
+      stockHintHtml: "Mehr Kontrolle über Stimmung/Tempo/Länge? Mach einen Track in <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> und lade die .wav stattdessen hier hoch.",
+      soundClipsEmptyText: "Keine Musik und kein Ton hinzugefügt — das zusammengefügte Video nutzt nur den Originalton jedes Clips.",
+      fadeHeading: "Den gesamten Tonmix ein-/ausblenden",
+      fadeInLabel: "Einblenden (s)",
+      fadeOutLabel: "Ausblenden (s)",
+      fadeHint: "Glättet Anfang/Ende des zusammengefügten Tons (Musik, Erzählung und Clip-Ton zusammen), statt abrupt ein- oder auszusetzen.",
+      renderBtnLabel: "🎬 Zusammenfügen & Video rendern",
+      previewTitle: "MERGE FORGE — VORSCHAU",
+      statusNotStarted: "NICHT GESTARTET",
+      stageEmptyStrong: "Noch nichts zum Zusammenfügen.",
+      stageEmptyText: "Füge links mindestens ein Bild oder einen Videoclip hinzu und drücke dann Zusammenfügen & rendern.",
+      progressRendering: "Wird gerendert…",
+      playPreviewLabel: "▶ Vorschau abspielen",
+      stopPreviewLabel: "■ Vorschau stoppen",
+      cancelRenderLabel: "✕ Rendern abbrechen",
+      downloadVideoLabel: "⬇ Video herunterladen (.webm)",
+      previewDisclaimerHint: "Vorschau abspielen spielt die Zeitleiste live hier ab, ohne Export — schnell, um Tempo, Übergänge, Untertitel und Ton vor dem vollen Rendern zu prüfen. Das Rendern selbst läuft in Echtzeit in deinem Browser, plus einen kurzen Moment vorab, um Videoclips vorzubereiten. Die meisten Desktop-Browser (Chrome, Edge, Firefox) unterstützen das; Safari nur eingeschränkt.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles, was du hinzufügst, bleibt in deinem Browser — nichts wird hochgeladen. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      errorAddTextFirst: "Gib zuerst etwas Text ein.",
+      itemSecondsLabel: "Sekunden:",
+      itemTrimLabel: "Kürzen:",
+      itemMuteLabel: "Stumm",
+      itemVolLabel: "Vol:",
+      moveUpTitle: "Nach oben",
+      moveDownTitle: "Nach unten",
+      removeTitle: "Entfernen",
+      capFromLabel: "Von:",
+      capForLabel: "Für:",
+      capAtLabel: "Bei:",
+      clipStartsAtLabel: "Beginnt bei:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Schleife",
+      soundReadErrorPrefix: "Konnte nicht lesen:",
+      recordedNarrationPrefix: "Aufgenommene Erzählung",
+      recordProcessErrorPrefix: "Der aufgenommene Clip konnte nicht verarbeitet werden:",
+      micErrorPrefix: "Kein Zugriff auf dein Mikrofon:",
+      stockGeneratingLabel: "Wird erzeugt…",
+      stockGenerateErrorPrefix: "Dieser Track konnte nicht erzeugt werden:",
+      errorAddMediaFirst: "Füge zuerst mindestens ein Bild oder einen Videoclip hinzu.",
+      errorNothingToPreview: "Nichts zum Ansehen.",
+      errorNothingToRender: "Nichts zum Rendern.",
+      errorNoRecordingSupport: "Dein Browser kann Canvas nicht als Video aufnehmen. Probiere die neueste Version von Chrome, Edge oder Firefox.",
+      errorNoVideoFormat: "In diesem Browser wurde kein unterstütztes Videoformat gefunden.",
+      statusPreviewing: "VORSCHAU LÄUFT",
+      statusPreviewDone: "VORSCHAU FERTIG",
+      statusStopped: "GESTOPPT",
+      statusPreparing: "WIRD VORBEREITET",
+      statusRendering: "WIRD GERENDERT",
+      statusCancelled: "ABGEBROCHEN",
+      statusRenderComplete: "RENDERN FERTIG",
+      progressLiningUp: "Clips werden vorbereitet…"
+    },
+    pt: {
+      heroSubtitle: "Solte imagens, clipes, música e textos sobrepostos — organize, veja a prévia ao vivo e junte num vídeo final com transições de áudio suaves.",
+      pptHelpHeading: "Transformando um PowerPoint em vídeo?",
+      pptHelpSummary: "Clique aqui primeiro — um passo rápido de exportação",
+      pptHelpStepsHtml: "<li>Abra sua apresentação no PowerPoint, Keynote ou Google Apresentações.<\/li><li>Use <strong>Arquivo → Exportar → Imagens<\/strong> (PowerPoint/Keynote) ou <strong>Arquivo → Fazer download → Imagem PNG (slide atual)<\/strong> repetido em cada slide, ou <strong>Arquivo → Fazer download → JPEG<\/strong> zipado no Google Apresentações — toda ferramenta tem uma opção de um clique para \"exportar slides como imagens\".<\/li><li>Envie os arquivos de imagem resultantes abaixo, na ordem dos slides.<\/li>",
+      pptHelpHint: "Navegadores não conseguem abrir nem renderizar um .pptx direto — não há um motor de PowerPoint numa página web — então este passo de exportação substitui isso. Tudo depois disso é automático.",
+      mediaHeading: "Suas imagens e clipes de vídeo",
+      mediaUploadLabel: "+ Adicionar imagens e/ou clipes de vídeo (em ordem)",
+      mediaHint: "Misture à vontade — imagens de slides, desenhos, clipes do Clip Forge ou Video Forge. Reordene com as setas.",
+      mediaItemsEmptyText: "Nada adicionado ainda.",
+      transitionHeading: "Transição entre imagens",
+      transitionCrossfade: "Dissolver",
+      transitionHardCut: "Corte seco",
+      transitionHint: "Vale só entre duas imagens seguidas — clipes de vídeo sempre entram e saem com corte limpo, como numa edição de verdade.",
+      outputHeading: "Saída",
+      aspectLabel: "Proporção",
+      aspect16x9: "16:9 horizontal",
+      aspect9x16: "9:16 vertical",
+      aspect1x1: "1:1 quadrado",
+      captionHeading: "Texto sobreposto (opcional)",
+      captionIntroHint: "Adicione linhas de texto que aparecem sobre o vídeo — útil para citações, legendas ou créditos.",
+      captionTextLabel: "Texto",
+      captionTextPlaceholder: "ex.: Acredite em você",
+      captionStartLabel: "Começa em (s)",
+      captionDurationLabel: "Duração (s)",
+      captionPositionLabel: "Posição",
+      positionBottom: "Embaixo",
+      positionMiddle: "Meio",
+      positionTop: "Em cima",
+      addCaptionBtnLabel: "+ Adicionar texto sobreposto",
+      captionsEmptyText: "Nenhum texto sobreposto adicionado.",
+      musicHeading: "Música e som (opcional)",
+      musicIntroHintHtml: "Coloque música ou narração por cima de tudo acima — envie uma faixa (ex.: uma feita no Music Forge), grave narração ao vivo ou use uma faixa gerada. Tem uma gravação de tela do <a href=\"record-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Record Forge<\/a>? Adicione como clipe acima.",
+      uploadClipsLabel: "+ Enviar clipe(s)",
+      recordClipLabel: "🎙️ Gravar um clipe",
+      stopRecordingLabel: "⏹ Parar gravação",
+      stockTrackLabel: "Ou use uma faixa gerada",
+      stockCheerful: "🎉 Alegre",
+      stockCalm: "🌙 Calma",
+      stockPlayful: "🎈 Brincalhona",
+      stockCinematic: "🎬 Cinematográfico",
+      generatedSuffix: "gerada",
+      stockHintHtml: "Quer mais controle sobre clima/ritmo/duração? Faça uma no <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> e envie o .wav aqui.",
+      soundClipsEmptyText: "Nenhuma música ou som adicionado — o vídeo final vai usar só o áudio original de cada clipe.",
+      fadeHeading: "Aplicar fade no áudio combinado",
+      fadeInLabel: "Fade in (s)",
+      fadeOutLabel: "Fade out (s)",
+      fadeHint: "Suaviza o início/fim do áudio combinado (música, narração e áudio dos clipes juntos) em vez de entrar ou sair de repente.",
+      renderBtnLabel: "🎬 Juntar e renderizar vídeo",
+      previewTitle: "MERGE FORGE — PRÉVIA",
+      statusNotStarted: "NÃO INICIADO",
+      stageEmptyStrong: "Nada para juntar ainda.",
+      stageEmptyText: "Adicione pelo menos uma imagem ou clipe à esquerda e aperte Juntar e renderizar.",
+      progressRendering: "Renderizando…",
+      playPreviewLabel: "▶ Reproduzir prévia",
+      stopPreviewLabel: "■ Parar prévia",
+      cancelRenderLabel: "✕ Cancelar renderização",
+      downloadVideoLabel: "⬇ Baixar vídeo (.webm)",
+      previewDisclaimerHint: "Reproduzir prévia toca a linha do tempo ao vivo aqui, sem exportar — um jeito rápido de conferir ritmo, transições, legendas e áudio antes de renderizar tudo. A renderização em si acontece em tempo real no seu navegador, mais um instante no começo para alinhar os clipes. A maioria dos navegadores de computador (Chrome, Edge, Firefox) suporta; o Safari tem suporte limitado.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo o que você adiciona fica no seu navegador — nada é enviado. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      errorAddTextFirst: "Digite algum texto primeiro.",
+      itemSecondsLabel: "Segundos:",
+      itemTrimLabel: "Cortar:",
+      itemMuteLabel: "Mudo",
+      itemVolLabel: "Vol:",
+      moveUpTitle: "Mover para cima",
+      moveDownTitle: "Mover para baixo",
+      removeTitle: "Remover",
+      capFromLabel: "De:",
+      capForLabel: "Por:",
+      capAtLabel: "Em:",
+      clipStartsAtLabel: "Começa em:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Repetir",
+      soundReadErrorPrefix: "Não foi possível ler",
+      recordedNarrationPrefix: "Narração gravada",
+      recordProcessErrorPrefix: "Não foi possível processar o clipe gravado:",
+      micErrorPrefix: "Não foi possível acessar seu microfone:",
+      stockGeneratingLabel: "Gerando…",
+      stockGenerateErrorPrefix: "Não foi possível gerar essa faixa:",
+      errorAddMediaFirst: "Adicione pelo menos uma imagem ou clipe primeiro.",
+      errorNothingToPreview: "Nada para prévia.",
+      errorNothingToRender: "Nada para renderizar.",
+      errorNoRecordingSupport: "Seu navegador não suporta gravar o canvas em vídeo. Experimente a versão mais recente do Chrome, Edge ou Firefox.",
+      errorNoVideoFormat: "Nenhum formato de vídeo suportado foi encontrado neste navegador.",
+      statusPreviewing: "PRÉVIA EM ANDAMENTO",
+      statusPreviewDone: "PRÉVIA CONCLUÍDA",
+      statusStopped: "PARADO",
+      statusPreparing: "PREPARANDO",
+      statusRendering: "RENDERIZANDO",
+      statusCancelled: "CANCELADO",
+      statusRenderComplete: "RENDERIZAÇÃO CONCLUÍDA",
+      progressLiningUp: "Alinhando os clipes…"
+    },
+    fr: {
+      heroSubtitle: "Déposez images, clips vidéo, musique et textes superposés — organisez-les, prévisualisez en direct, puis fusionnez en une vidéo finale avec des fondus audio doux.",
+      pptHelpHeading: "Transformer un PowerPoint en vidéo ?",
+      pptHelpSummary: "Cliquez d'abord ici — une étape d'export rapide",
+      pptHelpStepsHtml: "<li>Ouvrez votre présentation dans PowerPoint, Keynote ou Google Slides.<\/li><li>Utilisez <strong>Fichier → Exporter → Images<\/strong> (PowerPoint/Keynote) ou <strong>Fichier → Télécharger → Image PNG (diapositive actuelle)<\/strong> pour chaque diapositive, ou <strong>Fichier → Télécharger → JPEG<\/strong> en ZIP dans Google Slides — chaque outil a une option en un clic \"exporter les diapositives en images\".<\/li><li>Importez les fichiers image obtenus ci-dessous, dans l'ordre des diapositives.<\/li>",
+      pptHelpHint: "Les navigateurs ne peuvent pas ouvrir ni afficher un fichier .pptx brut — aucune page web n'intègre de moteur PowerPoint — donc cette étape d'export le remplace. Tout le reste est automatique.",
+      mediaHeading: "Vos images et clips vidéo",
+      mediaUploadLabel: "+ Ajouter des images et/ou clips vidéo (dans l'ordre)",
+      mediaHint: "Mélangez librement — images de diapositives, dessins, clips de Clip Forge ou Video Forge. Réordonnez avec les flèches.",
+      mediaItemsEmptyText: "Rien d'ajouté pour l'instant.",
+      transitionHeading: "Transition entre les images",
+      transitionCrossfade: "Fondu enchaîné",
+      transitionHardCut: "Coupe franche",
+      transitionHint: "S'applique seulement entre deux images consécutives — les clips vidéo entrent et sortent toujours proprement, comme un vrai montage.",
+      outputHeading: "Sortie",
+      aspectLabel: "Format d'image",
+      aspect16x9: "16:9 paysage",
+      aspect9x16: "9:16 vertical",
+      aspect1x1: "1:1 carré",
+      captionHeading: "Texte superposé (facultatif)",
+      captionIntroHint: "Ajoutez des lignes de texte qui apparaissent sur la vidéo — pratique pour les citations, sous-titres ou crédits.",
+      captionTextLabel: "Texte",
+      captionTextPlaceholder: "ex. : Crois en toi",
+      captionStartLabel: "Commence à (s)",
+      captionDurationLabel: "Durée (s)",
+      captionPositionLabel: "Position",
+      positionBottom: "En bas",
+      positionMiddle: "Milieu",
+      positionTop: "En haut",
+      addCaptionBtnLabel: "+ Ajouter un texte superposé",
+      captionsEmptyText: "Aucun texte superposé ajouté.",
+      musicHeading: "Musique et son (facultatif)",
+      musicIntroHintHtml: "Ajoutez de la musique ou une narration par-dessus tout le reste — importez une piste (ex. : une créée dans Music Forge), enregistrez une narration en direct, ou utilisez une piste générée. Vous avez un enregistrement d'écran de <a href=\"record-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Record Forge<\/a> ? Ajoutez-le comme clip ci-dessus.",
+      uploadClipsLabel: "+ Importer des clips",
+      recordClipLabel: "🎙️ Enregistrer un clip",
+      stopRecordingLabel: "⏹ Arrêter l'enregistrement",
+      stockTrackLabel: "Ou utiliser une piste générée",
+      stockCheerful: "🎉 Joyeuse",
+      stockCalm: "🌙 Calme",
+      stockPlayful: "🎈 Espiègle",
+      stockCinematic: "🎬 Cinématographique",
+      generatedSuffix: "générée",
+      stockHintHtml: "Envie de plus de contrôle sur l'ambiance, le tempo ou la durée ? Créez une piste dans <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> et importez plutôt le .wav ici.",
+      soundClipsEmptyText: "Aucune musique ni son ajouté — la vidéo fusionnée utilisera seulement l'audio d'origine de chaque clip.",
+      fadeHeading: "Fondu sur le mixage audio combiné",
+      fadeInLabel: "Fondu d'entrée (s)",
+      fadeOutLabel: "Fondu de sortie (s)",
+      fadeHint: "Adoucit le début et la fin de l'audio fusionné (musique, narration et son des clips ensemble) au lieu de couper brusquement.",
+      renderBtnLabel: "🎬 Fusionner et générer la vidéo",
+      previewTitle: "MERGE FORGE — APERÇU",
+      statusNotStarted: "NON COMMENCÉ",
+      stageEmptyStrong: "Rien à fusionner pour l'instant.",
+      stageEmptyText: "Ajoutez au moins une image ou un clip vidéo à gauche, puis appuyez sur Fusionner et générer.",
+      progressRendering: "Rendu en cours…",
+      playPreviewLabel: "▶ Lire l'aperçu",
+      stopPreviewLabel: "■ Arrêter l'aperçu",
+      cancelRenderLabel: "✕ Annuler le rendu",
+      downloadVideoLabel: "⬇ Télécharger la vidéo (.webm)",
+      previewDisclaimerHint: "Lire l'aperçu joue la chronologie en direct, ici, sans export — un moyen rapide de vérifier rythme, transitions, sous-titres et son avant un rendu complet. Le rendu lui-même se fait en temps réel dans votre navigateur, plus un court instant au début pour préparer les clips. La plupart des navigateurs de bureau (Chrome, Edge, Firefox) le gèrent ; Safari de façon limitée.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Tout ce que vous ajoutez reste dans votre navigateur — rien n'est envoyé. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      errorAddTextFirst: "Saisissez d'abord du texte.",
+      itemSecondsLabel: "Secondes :",
+      itemTrimLabel: "Couper :",
+      itemMuteLabel: "Muet",
+      itemVolLabel: "Vol:",
+      moveUpTitle: "Monter",
+      moveDownTitle: "Descendre",
+      removeTitle: "Supprimer",
+      capFromLabel: "De :",
+      capForLabel: "Pendant :",
+      capAtLabel: "À :",
+      clipStartsAtLabel: "Début à :",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Boucle",
+      soundReadErrorPrefix: "Impossible de lire",
+      recordedNarrationPrefix: "Narration enregistrée",
+      recordProcessErrorPrefix: "Impossible de traiter le clip enregistré :",
+      micErrorPrefix: "Impossible d'accéder à votre micro :",
+      stockGeneratingLabel: "Génération…",
+      stockGenerateErrorPrefix: "Impossible de générer cette piste :",
+      errorAddMediaFirst: "Ajoutez d'abord au moins une image ou un clip vidéo.",
+      errorNothingToPreview: "Rien à prévisualiser.",
+      errorNothingToRender: "Rien à générer.",
+      errorNoRecordingSupport: "Votre navigateur ne permet pas d'enregistrer le canvas en vidéo. Essayez la dernière version de Chrome, Edge ou Firefox.",
+      errorNoVideoFormat: "Aucun format vidéo pris en charge dans ce navigateur.",
+      statusPreviewing: "APERÇU EN COURS",
+      statusPreviewDone: "APERÇU TERMINÉ",
+      statusStopped: "ARRÊTÉ",
+      statusPreparing: "PRÉPARATION",
+      statusRendering: "RENDU EN COURS",
+      statusCancelled: "ANNULÉ",
+      statusRenderComplete: "RENDU TERMINÉ",
+      progressLiningUp: "Préparation des clips…"
+    }
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

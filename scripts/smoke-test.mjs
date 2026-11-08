@@ -3,6 +3,7 @@
  *
  *   node scripts/smoke-test.mjs              # every *.html page in the repo root
  *   node scripts/smoke-test.mjs game-forge   # only the pages named
+ *   node scripts/smoke-test.mjs es/game-forge   # a language page (scripts/build-language-pages.mjs)
  *
  * A page fails when it throws an uncaught error, logs a console error from
  * one of our own files, or a file of ours (script, style, data) is missing.
@@ -88,6 +89,12 @@ for (const file of pages) {
   try {
     await page.goto(base + '/' + file, { waitUntil: 'load', timeout: 30000 });
     await page.waitForTimeout(SETTLE_MS);
+    // Language pages (/es/…, made by build-language-pages.mjs) must open in their own language.
+    const pageLang = (file.match(/^(es|ar|zh|sw|sv|de|pt|fr)\//) || [])[1];
+    if (pageLang) {
+      const shown = await page.evaluate(() => window.I18N && I18N.getLang());
+      if (shown !== pageLang) errors.push('language page opened in "' + shown + '" instead of "' + pageLang + '"');
+    }
     const label = homeLabels.has(file) && await page.evaluate(() => window.MigaPrivacy && window.MigaPrivacy.label);
     if (label && label !== homeLabels.get(file)) errors.push('privacy label: the homepage card says "' + homeLabels.get(file) + '" but the page itself says "' + label + '" — set data-privacy' + (label === 'local' ? ' off' : '="' + label + '"') + ' on its tool-card in index.html');
   } catch (e) {

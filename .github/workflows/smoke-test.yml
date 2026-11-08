@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      # /es/, /ar/ … are copies of the English pages; this fails when an English page changed
+      # without running: node scripts/build-language-pages.mjs
+      - name: Language pages are up to date
+        run: node scripts/build-language-pages.mjs --check
       - name: Install Playwright and Chromium
         run: |
           npm install -g playwright@1.56.1
@@ -30,3 +34,5 @@ jobs:
           done
       - name: Every page loads without JavaScript errors
         run: node scripts/smoke-test.mjs
+      - name: Language pages open in their own language
+        run: node scripts/smoke-test.mjs es/index es/pdf-compress ar/index ar/qr-forge zh/cv-forge sw/image-studio sv/invoice-forge de/grammar-forge pt/voice-forge fr/document-forge

@@ -1,0 +1,1499 @@
+<!-- Generated from /app-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sv" data-en-title="Free app generator — App Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><script src="gemini-fallback.js"></script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sv/app-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gratis appgenerator — App Forge | MigaBuilder</title>
+<meta name="description" content="App Forge bygger en fungerande app utifrån en beskrivning: en installerbar webbapp, ett litet verktyg eller ett startprojekt för en riktig Android- eller iOS-app.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gratis appgenerator — App Forge">
+<meta property="og:description" content="App Forge bygger en fungerande app utifrån en beskrivning: en installerbar webbapp, ett litet verktyg eller ett startprojekt för en riktig Android- eller iOS-app.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/app-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/sv/app-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gratis appgenerator — App Forge">
+<meta name="twitter:description" content="App Forge bygger en fungerande app utifrån en beskrivning: en installerbar webbapp, ett litet verktyg eller ett startprojekt för en riktig Android- eller iOS-app.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/app-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/app-forge.js"></script>
+<script src="sandbox-frame.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47; --navy-deep: #081826; --paper: #EDEAE0; --paper-dim: #E2DECE; --ink: #16202B;
+    --line-cyan: #6FD1E0; --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B; --amber-ink: #4A3410; --success: #4E9E73; --error: #D8604A; --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .mode-toggle-wrap { max-width: 1300px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+  .mode-toggle { display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+  .mode-btn {
+    flex: 1; min-width: 200px; background: rgba(237,234,224,0.08); color: var(--paper); border: 1px solid var(--line-cyan-dim);
+    border-radius: var(--radius); padding: 12px; font-size: 13.5px; font-weight: 600; cursor: pointer; text-align: center;
+  }
+  .mode-btn.active { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); }
+  .mode-note {
+    max-width: 1300px; margin: 0 auto 20px; padding: 0 clamp(20px, 4vw, 48px);
+    font-size: 12.5px; color: rgba(237,234,224,0.6); line-height: 1.5;
+  }
+
+  main { display: grid; grid-template-columns: minmax(340px, 420px) 1fr; gap: 24px; padding: 0 clamp(20px, 4vw, 48px) 56px; align-items: start; max-width: 1300px; margin: 0 auto; }
+  @media (max-width: 950px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px;
+    max-height: calc(100vh - 40px); overflow-y: auto; position: sticky; top: 20px;
+  }
+  @media (max-width: 950px) { .panel { position: static; max-height: none; } }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .field { margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12px; color: rgba(22, 32, 43, 0.72); margin-top: 5px; line-height: 1.45; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  input[type="password"], input[type="text"], select, textarea {
+    width: 100%; font-size: 13.5px; padding: 8px 9px; border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.45; }
+  input[type="color"] { width: 100%; height: 34px; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); padding: 2px; background: #fff; }
+
+  .key-row { display: flex; gap: 8px; }
+  .key-row input { flex: 1; }
+  .toggle-key { background: transparent; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); padding: 0 12px; font-size: 12.5px; cursor: pointer; color: var(--ink); }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 14px; padding: 11px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row button { flex: 1; }
+
+  .warn-box {
+    margin-top: 8px; padding: 10px 12px; background: rgba(226, 166, 59, 0.16); border: 1px solid rgba(226, 166, 59, 0.5);
+    border-radius: var(--radius); font-size: 12px; color: #4A3410; line-height: 1.45;
+  }
+  .error-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 12.5px; color: #6E2418; display: none; line-height: 1.4;
+  }
+  .error-box.show { display: block; }
+  .status-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(78,158,115,0.14); border: 1px solid rgba(78,158,115,0.4);
+    border-radius: var(--radius); font-size: 12.5px; color: #244731; display: none; line-height: 1.4;
+  }
+  .status-box.show { display: block; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .stage-wrap { background: #fff; border-radius: 2px; flex: 1; min-height: 460px; overflow: hidden; position: relative; }
+  #previewFrame { width: 100%; height: 100%; min-height: 460px; border: 0; display: block; }
+  .sheet-empty {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    color: rgba(22,32,43,0.72); font-size: 14px; padding: 40px 20px;
+  }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(22,32,43,0.72); margin-bottom: 6px; }
+
+  .refine-row { display: flex; gap: 8px; margin-top: 12px; }
+  .refine-row input { flex: 1; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer; flex: 1;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 1300px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan jag installera appen på mobilen?","acceptedAnswer":{"@type":"Answer","text":"Webbappar du gör kan laddas ner som ett installerbart paket och läggas till på mobilens hemskärm som en vanlig app."}},{"@type":"Question","name":"Är App Forge gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/app-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/app-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/app-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/app-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/app-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/app-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/app-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/app-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/app-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/app-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>App Forge</h1>
+    <p data-i18n="heroSubtitle">Describe an app. Choose what kind of output you need, then build and refine it.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<div class="mode-toggle-wrap">
+  <div class="mode-toggle">
+    <button type="button" class="mode-btn active" id="modeWebBtn" data-i18n="modeWebLabel">📱 Installable web app (PWA)</button>
+    <button type="button" class="mode-btn" id="modeUtilityBtn" data-i18n="modeUtilityLabel">🧰 Small utility app</button>
+    <button type="button" class="mode-btn" id="modeMobileBtn" data-i18n="modeMobileLabel">📦 Mobile app starter project</button>
+  </div>
+</div>
+<p class="mode-note" id="modeNote"></p>
+
+<main>
+  <section class="panel">
+
+    <div class="section-title" data-i18n="connectionHeading">Connection</div>
+    <div class="field">
+      <label for="provider" data-i18n="providerLabel">AI provider</label>
+      <select id="provider">
+        <option value="gemini" data-i18n="providerGemini" selected>Gemini — free, no key needed</option>
+        <option value="openai" data-i18n="providerOpenai">OpenAI</option>
+        <option value="anthropic" data-i18n="providerAnthropic">Anthropic (Claude)</option>
+      </select>
+    </div>
+    <div class="field" id="apiKeyField">
+      <label for="apiKey" id="apiKeyLabel">Your OpenAI API key</label>
+      <div class="key-row">
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off">
+        <button type="button" class="toggle-key" id="toggleKey">Show</button>
+      </div>
+      <p class="hint" data-i18n="apiKeyHint">Used only to call the provider above directly from your browser. Never stored.</p>
+    </div>
+    <div class="field" id="freeNoticeField" style="display:none;">
+      <p class="hint" data-i18n="freeNoticeText" style="margin-top:0;">✓ Free to use — shares a limited daily capacity. Switch to OpenAI/Anthropic above with your own key if it stops working.</p>
+    </div>
+    <div class="field">
+      <label for="model" data-i18n="modelLabel">Text model</label>
+      <select id="model"></select>
+    </div>
+
+    <div class="section-title" data-i18n="yourAppHeading">Your app</div>
+    <div class="field">
+      <label for="appName" data-i18n="appNameLabel">App name</label>
+      <input type="text" id="appName" data-i18n-placeholder="appNamePlaceholder" placeholder="Chore Tracker">
+    </div>
+    <div class="field">
+      <label for="appBrief" data-i18n="appBriefLabel">Describe what it should do</label>
+      <textarea id="appBrief" data-i18n-placeholder="appBriefPlaceholder" placeholder="e.g. A simple weekly chore tracker for a household of 4 — assign chores to people, check them off, and reset every Monday. Remember everything between visits."></textarea>
+    </div>
+    <div class="field" id="themeColorField">
+      <label for="themeColor" data-i18n="themeColorLabel">Theme color</label>
+      <input type="color" id="themeColor" value="#0E2A47">
+    </div>
+    <div class="field" id="iconUploadField">
+      <label data-i18n="iconLabel">App icon (optional)</label>
+      <input type="file" id="iconInput" accept="image/*" style="display:none;">
+      <label class="draft-btn secondary" for="iconInput" style="display:block;text-align:center;cursor:pointer;" id="iconUploadLabel" data-i18n="iconUploadLabel">+ Upload an icon</label>
+      <div id="iconPreviewWrap" style="display:none;align-items:center;gap:8px;margin-top:8px;">
+        <img id="iconPreview" style="width:40px;height:40px;border-radius:8px;object-fit:cover;">
+        <button type="button" id="removeIconBtn" data-i18n="removeLabel" style="background:none;border:none;color:var(--error);text-decoration:underline;cursor:pointer;font-size:12px;padding:0;">Remove</button>
+      </div>
+      <p class="hint" data-i18n="iconHint">Leave blank to auto-generate a simple lettermark icon from the app name.</p>
+    </div>
+    <div class="field" id="packageIdField" style="display:none;">
+      <label for="packageId" data-i18n="packageIdLabel">Package / bundle ID</label>
+      <input type="text" id="packageId" placeholder="com.example.appname">
+      <p class="hint" data-i18n="packageIdHint">The Android/iOS app identifier — pick something unique (reverse-domain style) before publishing. Leave blank to use com.example.&lt;app-slug&gt;.</p>
+    </div>
+
+    <button type="button" class="draft-btn" id="generateBtn" data-i18n="generateBtnLabel">✨ Generate app</button>
+    <div class="error-box" id="errorBox"></div>
+    <div class="status-box" id="statusBox"></div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="previewTitle">APP FORGE — PREVIEW</span>
+      <span id="titleBlockRight" data-i18n="statusNotStarted">NOT STARTED</span>
+    </div>
+
+    <div class="stage-wrap" id="stageWrap">
+      <div class="sheet-empty" id="stageEmpty">
+        <div>
+          <strong data-i18n="stageEmptyStrong">Nothing built yet.</strong>
+          <span data-i18n="stageEmptyText">Describe your app on the left and click Generate.</span>
+        </div>
+      </div>
+      <iframe id="previewFrame" title="App preview" sandbox="allow-scripts allow-forms allow-modals allow-popups allow-pointer-lock allow-downloads" allow="autoplay; fullscreen" style="display:none;"></iframe>
+    </div>
+
+    <div class="refine-row" id="refineRow" style="display:none;">
+      <input type="text" id="refineInput" data-i18n-placeholder="refinePlaceholder" placeholder="Ask for a change, e.g. 'add a dark mode toggle'">
+      <button type="button" class="draft-btn secondary" id="refineBtn" data-i18n="applyBtnLabel" style="width:auto;">Apply</button>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="undoBtn" data-i18n="undoBtnLabel" disabled>↶ Undo</button>
+      <button type="button" id="downloadBtn" disabled class="primary">⬇ Download</button>
+    </div>
+    <p class="hint" id="modeHint" style="color: rgba(237,234,224,0.55); margin-top: 8px;"></p>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About App Forge</h2>
+  <p>App Forge builds a working app from a description: an installable web app, a small utility tool or a starter project for a real Android or iOS app.</p>
+  <h3>How to use App Forge</h3>
+  <ol><li>Describe the browser app and the result it should produce.</li><li>Press “Generate app”.</li><li>Test the app, refine it, and download the finished HTML.</li></ol>
+  <h3>Can I install the app on my phone?</h3>
+  <p>Web apps you make can be downloaded as an installable package, so they can be added to a phone&#x27;s home screen like a normal app.</p>
+  <h3>Is App Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/bug-scanner.html">Bug Scanner</a> · <a href="/sv/website-builder.html">Website Builder</a> · <a href="/sv/logo-forge.html">Logo Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/sv/">MigaBuilder</a> — free to use, no account needed. Nothing you type here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/app-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // ================= mode state =================
+  const MODES = {
+    web: { noteKey: 'modeWebNote', hintKey: 'modeWebHint' },
+    utility: { noteKey: 'modeUtilityNote', hintKey: 'modeUtilityHint' },
+    mobile: { noteKey: 'modeMobileNote', hintKey: 'modeMobileHint' }
+  };
+  let currentMode = 'web';
+
+  const modeWebBtn = document.getElementById('modeWebBtn');
+  const modeUtilityBtn = document.getElementById('modeUtilityBtn');
+  const modeMobileBtn = document.getElementById('modeMobileBtn');
+  const modeNote = document.getElementById('modeNote');
+  const modeHint = document.getElementById('modeHint');
+  const themeColorField = document.getElementById('themeColorField');
+  const packageIdField = document.getElementById('packageIdField');
+  const packageId = document.getElementById('packageId');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const undoBtn = document.getElementById('undoBtn');
+
+  function setMode(mode) {
+    currentMode = mode;
+    modeWebBtn.classList.toggle('active', mode === 'web');
+    modeUtilityBtn.classList.toggle('active', mode === 'utility');
+    modeMobileBtn.classList.toggle('active', mode === 'mobile');
+    modeNote.textContent = I18N.t(MODES[mode].noteKey);
+    modeHint.textContent = I18N.t(MODES[mode].hintKey);
+    themeColorField.style.display = mode === 'utility' ? 'none' : 'block';
+    packageIdField.style.display = mode === 'mobile' ? 'block' : 'none';
+    downloadBtn.textContent = mode === 'utility' ? I18N.t('downloadHtmlLabel') : I18N.t('downloadZipLabel');
+  }
+  modeWebBtn.addEventListener('click', () => setMode('web'));
+  modeUtilityBtn.addEventListener('click', () => setMode('utility'));
+  modeMobileBtn.addEventListener('click', () => setMode('mobile'));
+
+  // ================= connection (same pattern as Slide Forge / Game Forge) =================
+  const providerSelect = document.getElementById('provider');
+  const apiKeyField = document.getElementById('apiKeyField');
+  const apiKeyInput = document.getElementById('apiKey');
+  const apiKeyLabel = document.getElementById('apiKeyLabel');
+  const toggleKeyBtn = document.getElementById('toggleKey');
+  const freeNoticeField = document.getElementById('freeNoticeField');
+  const modelSelect = document.getElementById('model');
+  const appName = document.getElementById('appName');
+  const appBrief = document.getElementById('appBrief');
+  const themeColor = document.getElementById('themeColor');
+  const generateBtn = document.getElementById('generateBtn');
+  const errorBox = document.getElementById('errorBox');
+  const statusBox = document.getElementById('statusBox');
+  const stageEmpty = document.getElementById('stageEmpty');
+  const previewFrame = document.getElementById('previewFrame');
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const refineRow = document.getElementById('refineRow');
+  const refineInput = document.getElementById('refineInput');
+  const refineBtn = document.getElementById('refineBtn');
+
+  function showError(msg) { statusBox.classList.remove('show'); errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+  function showStatus(msg) { clearError(); statusBox.textContent = msg; statusBox.classList.add('show'); }
+
+  toggleKeyBtn.addEventListener('click', function () {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleKeyBtn.textContent = isPassword ? I18N.t('hide') : I18N.t('show');
+  });
+
+  const modelOptions = {
+    gemini: [
+      { value: 'gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash-Lite (free tier)' },
+      { value: 'gemini-3.5-flash', label: 'Gemini 3.5 Flash (free tier)' }
+    ],
+    openai: [
+      { value: 'gpt-4o-mini', label: 'gpt-4o-mini (fast, cheap)' },
+      { value: 'gpt-4o', label: 'gpt-4o (higher quality)' },
+      { value: 'gpt-4.1', label: 'gpt-4.1' }
+    ],
+    anthropic: [
+      { value: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5 (fast, cheap)' },
+      { value: 'claude-sonnet-5', label: 'Claude Sonnet 5 (recommended)' },
+      { value: 'claude-opus-5', label: 'Claude Opus 5 (highest quality)' }
+    ]
+  };
+  function applyProvider() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') { apiKeyField.style.display = 'none'; freeNoticeField.style.display = 'block'; }
+    else {
+      apiKeyField.style.display = 'block'; freeNoticeField.style.display = 'none';
+      apiKeyLabel.textContent = provider === 'openai' ? I18N.t('apiKeyLabelOpenai') : I18N.t('apiKeyLabelAnthropic');
+      apiKeyInput.placeholder = provider === 'openai' ? 'sk-...' : 'sk-ant-...';
+    }
+    modelSelect.innerHTML = '';
+    const defaultIndex = provider === 'anthropic' ? 1 : 0;
+    modelOptions[provider].forEach((opt, i) => {
+      const el = document.createElement('option');
+      el.value = opt.value; el.textContent = opt.label;
+      if (i === defaultIndex) el.selected = true;
+      modelSelect.appendChild(el);
+    });
+  }
+  providerSelect.addEventListener('change', applyProvider);
+
+  const GEMINI_PROXY_URL = 'https://migabuilder-gemini.makmurphy69.workers.dev';
+  function currentTextApiKey() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') return 'via-proxy';
+    return apiKeyInput.value.trim();
+  }
+  function stripCodeFence(text) {
+    const trimmed = text.trim();
+    const fenceMatch = trimmed.match(/^```(?:html|json)?\s*([\s\S]*?)\s*```$/i);
+    return fenceMatch ? fenceMatch[1] : trimmed;
+  }
+  async function callChat(apiKey, model, systemPrompt, userPrompt) {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      const response = await fetch(GEMINI_PROXY_URL, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, systemPrompt: systemPrompt, userPrompt: userPrompt })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        throw new Error((errBody && errBody.error && errBody.error.message) || (errBody && errBody.error) || I18N.t('errorRequestFailedFreeLimit').replace('{status}', response.status));
+      }
+      const data = await response.json();
+      const cand = data.candidates && data.candidates[0];
+      const raw = cand && cand.content && cand.content.parts && cand.content.parts[0] ? cand.content.parts[0].text : '';
+      if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+      return stripCodeFence(raw);
+    }
+    if (provider === 'anthropic') {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: model, max_tokens: 16000, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        throw new Error((errBody && errBody.error && errBody.error.message) || I18N.t('errorRequestFailed').replace('{status}', response.status));
+      }
+      const data = await response.json();
+      const block = data.content && data.content.find(b => b.type === 'text');
+      const raw = block ? block.text : '';
+      if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+      return stripCodeFence(raw);
+    }
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+      body: JSON.stringify({ model: model, messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }], temperature: 0.6 })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => null);
+      throw new Error((errBody && errBody.error && errBody.error.message) || I18N.t('errorRequestFailed').replace('{status}', response.status));
+    }
+    const data = await response.json();
+    const raw = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+    if (!raw) throw new Error(I18N.t('errorEmptyResponse'));
+    return stripCodeFence(raw);
+  }
+
+  // ================= app generation =================
+  const UI_LANGUAGE_NAMES = { en: 'English', es: 'Spanish', ar: 'Arabic', zh: 'Mandarin Chinese', sw: 'Swahili', sv: 'Swedish', de: 'German', pt: 'Portuguese', fr: 'French' };
+  function appLanguageInstruction() {
+    const lang = window.I18N ? I18N.getLang() : 'en';
+    if (lang === 'en') return '';
+    return '\n- Write all user-facing text in the app in ' + UI_LANGUAGE_NAMES[lang] + '.';
+  }
+  // ================= Miga UI: a small built-in design system for generated apps =================
+  // Generated apps get this stylesheet (in the page, so they still work offline), and the AI is told to
+  // build with its classes. Every app then looks polished and consistent, and the theme colour applies.
+  const KIT_ID = 'miga-ui';
+  function kitHexToRgb(hex) { const n = parseInt(hex.slice(1), 16); return [n >> 16 & 255, n >> 8 & 255, n & 255]; }
+  function kitLum(hex) { return kitHexToRgb(hex).map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }).reduce((a, v, i) => a + v * [0.2126, 0.7152, 0.0722][i], 0); }
+  function kitMix(a, b, t) { const x = kitHexToRgb(a), y = kitHexToRgb(b); return '#' + x.map((v, i) => Math.round(v + (y[i] - v) * t).toString(16).padStart(2, '0')).join(''); }
+  function uiKitCss(color) {
+    let c = /^#[0-9a-f]{6}$/i.test(color || '') ? color.toLowerCase() : '#2563eb';
+    if (kitLum(c) > 0.5) c = kitMix(c, '#000000', 0.45); // keep buttons readable with a very light theme colour
+    const ink = kitLum(c) > 0.45 ? '#111418' : '#ffffff';
+    const darkPrimary = kitLum(c) < 0.08 ? kitMix(c, '#ffffff', 0.45) : c; // a near-black colour would vanish in dark mode
+    return [
+      ':root{--primary:' + c + ';--primary-ink:' + ink + ';--primary-soft:' + kitMix('#ffffff', c, 0.1) + ';--bg:#f6f7f9;--surface:#ffffff;--surface-2:#f1f3f6;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--danger:#dc2626;--success:#16a34a;--warning:#d97706;',
+      '--radius:12px;--radius-lg:18px;--shadow-sm:0 1px 2px rgba(16,24,40,.06),0 1px 3px rgba(16,24,40,.1);--shadow:0 12px 32px -12px rgba(16,24,40,.22);--font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light dark}',
+      '@media (prefers-color-scheme:dark){:root{--primary:' + darkPrimary + ';--primary-soft:' + kitMix('#0b0f17', darkPrimary, 0.22) + ';--bg:#0b0f17;--surface:#131926;--surface-2:#1a2131;--text:#e8ecf3;--muted:#98a2b3;--border:#273043;--shadow-sm:0 1px 2px rgba(0,0,0,.4);--shadow:0 16px 36px -14px rgba(0,0,0,.6)}}',
+      '*,*::before,*::after{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font:15px/1.55 var(--font);-webkit-font-smoothing:antialiased}',
+      'h1,h2,h3{margin:0 0 .4em;line-height:1.2;letter-spacing:-.015em}h1{font-size:1.6rem;font-weight:750}h2{font-size:1.2rem;font-weight:700}h3{font-size:1rem;font-weight:650}p{margin:0 0 .8em}.muted{color:var(--muted)}.small{font-size:.86rem}',
+      '.app{max-width:720px;margin:0 auto;padding:20px 16px 48px}.app.wide{max-width:1100px}',
+      '.app-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}.app-title{display:flex;align-items:center;gap:10px}.app-title .logo{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--primary);color:var(--primary-ink);font-size:1.2rem;box-shadow:var(--shadow-sm)}',
+      '.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px;box-shadow:var(--shadow-sm)}.card+.card{margin-top:14px}',
+      '.stack{display:flex;flex-direction:column;gap:12px}.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.spread{justify-content:space-between}.grow{flex:1 1 auto;min-width:0}.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr))}',
+      '.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:0 16px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text);font:600 .95rem var(--font);cursor:pointer;transition:transform .12s,background .15s,box-shadow .15s;user-select:none}',
+      '.btn:hover{background:var(--surface-2)}.btn:active{transform:scale(.97)}.btn:disabled{opacity:.5;cursor:not-allowed}.btn:focus-visible,.input:focus-visible{outline:3px solid var(--primary-soft);outline-offset:1px}',
+      '.btn-primary{background:var(--primary);border-color:var(--primary);color:var(--primary-ink);box-shadow:0 6px 16px -8px var(--primary)}.btn-primary:hover{background:var(--primary);filter:brightness(1.08)}',
+      '.btn-danger{color:var(--danger)}.btn-ghost{background:transparent;border-color:transparent}.btn-ghost:hover{background:var(--surface-2)}.btn-lg{min-height:52px;padding:0 22px;font-size:1.05rem}.btn-icon{width:38px;min-height:38px;padding:0}.btn-block{width:100%}',
+      '.input,.select,.textarea{width:100%;min-height:42px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--text);font:inherit;transition:border-color .15s,box-shadow .15s}',
+      '.input:focus,.select:focus,.textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--primary-soft)}.textarea{min-height:96px;resize:vertical}',
+      '.field{display:grid;gap:6px}.field>label,.label{font-size:.86rem;font-weight:600;color:var(--muted)}',
+      '.list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}.list-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);transition:box-shadow .15s}.list-item:hover{box-shadow:var(--shadow-sm)}',
+      '.badge{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:.76rem;font-weight:700;background:var(--primary-soft);color:var(--primary)}.badge.success{background:rgba(22,163,74,.12);color:var(--success)}.badge.danger{background:rgba(220,38,38,.12);color:var(--danger)}.badge.warning{background:rgba(217,119,6,.14);color:var(--warning)}',
+      '.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}.stat .value{font-size:1.6rem;font-weight:800;letter-spacing:-.02em}.stat .label{font-size:.8rem}',
+      '.tabs{display:flex;gap:4px;padding:4px;background:var(--surface-2);border-radius:var(--radius);overflow-x:auto}.tab{flex:1;white-space:nowrap;min-height:36px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:var(--muted);font:600 .9rem var(--font);cursor:pointer}.tab.active,.tab[aria-selected=true]{background:var(--surface);color:var(--text);box-shadow:var(--shadow-sm)}',
+      '.empty{text-align:center;padding:36px 16px;color:var(--muted);border:1.5px dashed var(--border);border-radius:var(--radius-lg)}.empty .icon{font-size:2.2rem;margin-bottom:6px}',
+      '.progress{height:8px;border-radius:999px;background:var(--surface-2);overflow:hidden}.progress>span{display:block;height:100%;background:var(--primary);border-radius:inherit;transition:width .3s}',
+      '.check{display:inline-flex;align-items:center;gap:8px;cursor:pointer}.check input{width:20px;height:20px;accent-color:var(--primary)}.done{text-decoration:line-through;color:var(--muted)}',
+      'dialog.modal{border:0;border-radius:var(--radius-lg);padding:20px;width:min(92vw,440px);background:var(--surface);color:var(--text);box-shadow:var(--shadow)}dialog.modal::backdrop{background:rgba(10,14,22,.45);backdrop-filter:blur(2px)}',
+      '.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;padding:11px 16px;border-radius:var(--radius);background:#111827;color:#fff;font-weight:600;box-shadow:var(--shadow);transition:all .25s;pointer-events:none;z-index:1000}.toast.show{opacity:1;transform:translate(-50%,0)}',
+      '.fade-in{animation:kitIn .25s ease both}@keyframes kitIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}',
+      '@media (max-width:520px){.app{padding:14px 12px 40px}h1{font-size:1.35rem}}@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}'
+    ].join('\n');
+  }
+  const KIT_TAG = /<style id="miga-ui">[\s\S]*?<\/style>\s*/i;
+  // Put the kit first in <head> so the app's own styles can still override it.
+  function withKit(html) {
+    const kit = '<style id="' + KIT_ID + '">\n' + uiKitCss(themeColor.value) + '\n</style>\n';
+    html = String(html || '').replace(KIT_TAG, '');
+    if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, m => m + '\n' + kit);
+    if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, m => m + '\n<head>' + kit + '</head>');
+    return kit + html;
+  }
+  const withoutKit = html => String(html || '').replace(KIT_TAG, '');
+
+  const UI_KIT_GUIDE = [
+    'DESIGN SYSTEM — a stylesheet called Miga UI is added to <head> automatically (light and dark mode, theme colour included). Build the interface with its classes instead of writing your own base styles:',
+    '- Page: <div class="app"> (add "wide" for dashboards) holding <header class="app-header"><div class="app-title"><span class="logo">emoji</span><h1>Name</h1></div>…actions…</header>.',
+    '- Surfaces: .card; layout helpers .stack (vertical gap), .row (horizontal), .spread, .grow, .grid (responsive tiles).',
+    '- Buttons: <button class="btn btn-primary">, .btn (secondary), .btn-ghost, .btn-danger, sizes .btn-lg / .btn-icon / .btn-block.',
+    '- Forms: <div class="field"><label for="x">Label</label><input id="x" class="input"></div>; .select, .textarea; checkboxes as <label class="check"><input type="checkbox"> text</label>.',
+    '- Lists: <ul class="list"><li class="list-item">…</li></ul>; .done for completed text; .badge (.success, .danger, .warning) for status.',
+    '- Numbers: <div class="stat"><div class="value">12</div><div class="label muted">Today</div></div>; .progress><span style="width:40%">.',
+    '- Tabs: <div class="tabs"><button class="tab active">…</button></div>. Empty states: <div class="empty"><div class="icon">emoji</div><p>…</p></div>.',
+    '- Dialogs: <dialog class="modal">. Feedback: a <div class="toast"> you show by adding the class "show" for 2 seconds. Use .fade-in on newly added items.',
+    '- Colours come from CSS variables: var(--primary), var(--primary-soft), var(--surface), var(--surface-2), var(--text), var(--muted), var(--border), var(--danger), var(--success). Never hard-code a white background or black text, so dark mode keeps working.',
+    'You may add a small <style> for layout specific to this app, using those variables.'
+  ].join('\n');
+
+  function APP_RULES() {
+    return [
+      'You are a senior product engineer and UI designer. Given a short description, write ONE complete, self-contained HTML document implementing that app, fully working immediately, with the polish of a well-funded startup product.',
+      'Requirements:',
+      '- All CSS and JavaScript inline in this one document. No external scripts, fonts, images, or network calls of any kind — it must work fully offline.',
+      '- Implement real, working functionality matching the description, not a static mockup. Every button does something.',
+      '- If the app should remember anything between visits (list items, settings, entries), persist it with localStorage (wrap reads in try/catch).',
+      '- On the very first run, show helpful example data or a friendly empty state that explains what to do, never a blank screen.',
+      '- Product polish: clear hierarchy, generous spacing, mobile-first layout that also looks good on desktop, Enter submits forms, confirm before deleting, a toast for feedback instead of alert(), visible focus states, aria-labels on icon-only buttons.',
+      '- Use emoji or small inline SVG for icons. Use system fonts only (no @import or Google Fonts).',
+      '- Keep logic self-contained and robust: no external libraries, no eval, no external asset loading, no errors in the console.',
+      UI_KIT_GUIDE,
+      '- Output ONLY the complete HTML document, starting with <!DOCTYPE html> and ending with </html> — no markdown fences, no commentary, no explanation.' + appLanguageInstruction()
+    ].join('\n');
+  }
+
+  // ================= self-check: run the app and fix startup errors =================
+  // The preview reports uncaught errors from its first seconds; one automatic repair round follows.
+  const CHECK_SCRIPT = '(function(){var errs=[];function add(m){m=String(m||"").slice(0,300);if(m&&errs.indexOf(m)<0&&errs.length<8)errs.push(m)}' +
+    'window.addEventListener("error",function(e){add((e.message||"Error")+(e.lineno?" (line "+e.lineno+")":""))});' +
+    'window.addEventListener("unhandledrejection",function(e){add("Unhandled promise rejection: "+((e.reason&&e.reason.message)||e.reason))});' +
+    'var ce=console.error;console.error=function(){try{add([].map.call(arguments,String).join(" "))}catch(x){}return ce.apply(console,arguments)};' +
+    'window.addEventListener("load",function(){setTimeout(function(){var empty=!document.body||!document.body.innerText.trim()&&!document.querySelector("canvas,svg,img,input,button");if(empty)add("The page shows nothing after loading.");parent.postMessage({__migaAppCheck:1,errors:errs},"*")},1500)})})();';
+  function checkApp(html) {
+    const problems = [];
+    if (!/<\/html>\s*$/i.test(html.trim())) problems.push('The document is cut off before </html> (it was too long). Write a more compact complete version.');
+    return new Promise(resolve => {
+      const frame = document.createElement('iframe');
+      MigaSandbox.lock(frame);
+      frame.style.cssText = 'position:fixed;left:-9999px;top:0;width:400px;height:700px;opacity:0;pointer-events:none';
+      let done = false;
+      const finish = errors => {
+        if (done) return; done = true;
+        window.removeEventListener('message', onMsg); clearTimeout(timer); frame.remove();
+        resolve(problems.concat(errors || []));
+      };
+      const onMsg = e => { if (e.source === frame.contentWindow && e.data && e.data.__migaAppCheck === 1) finish(Array.isArray(e.data.errors) ? e.data.errors.map(String) : []); };
+      window.addEventListener('message', onMsg);
+      const timer = setTimeout(() => finish([]), 6000);
+      document.body.appendChild(frame);
+      const prepared = MigaSandbox.prepare(html);
+      frame.srcdoc = /<head[^>]*>/i.test(prepared) ? prepared.replace(/<head[^>]*>/i, m => m + '<script>' + CHECK_SCRIPT + '<\/script>') : '<script>' + CHECK_SCRIPT + '<\/script>' + prepared;
+    });
+  }
+  async function checkAndFix(key, model, html) {
+    const problems = await checkApp(html);
+    if (!problems.length) return { html: html, fixed: false };
+    showStatus(I18N.t('statusFixing'));
+    const rules = [
+      'You are fixing a self-contained web app that has errors. Keep its features, layout and look; change only what is needed to fix every problem listed.',
+      UI_KIT_GUIDE,
+      'Output ONLY the complete fixed HTML document, starting with <!DOCTYPE html> and ending with </html> — no markdown fences, no commentary.' + appLanguageInstruction()
+    ].join('\n');
+    try {
+      const fixed = withKit(await callChat(key, model, rules, 'PROBLEMS FOUND WHEN RUNNING IT:\n- ' + problems.join('\n- ') + '\n\nCURRENT APP HTML:\n' + withoutKit(html)));
+      return { html: fixed, fixed: true };
+    } catch (e) {
+      return { html: html, fixed: false }; // keep the first version rather than failing the whole build
+    }
+  }
+
+  let currentAppHtml = '';
+  let appHistory = [];
+
+  function showPreview(html) {
+    currentAppHtml = html;
+    stageEmpty.style.display = 'none';
+    previewFrame.style.display = 'block';
+    previewFrame.srcdoc = MigaSandbox.prepare(html);
+    refineRow.style.display = 'flex';
+    downloadBtn.disabled = false;
+  }
+
+  // Picking another theme colour recolours the built app straight away (the kit holds the colours).
+  let recolorTimer = 0;
+  themeColor.addEventListener('input', function () {
+    clearTimeout(recolorTimer);
+    recolorTimer = setTimeout(function () { if (currentAppHtml && KIT_TAG.test(currentAppHtml)) showPreview(withKit(currentAppHtml)); }, 250);
+  });
+
+  function pushHistory() {
+    if (!currentAppHtml) return;
+    appHistory.push(currentAppHtml);
+    undoBtn.disabled = false;
+  }
+  undoBtn.addEventListener('click', function () {
+    if (!appHistory.length) return;
+    showPreview(appHistory.pop());
+    undoBtn.disabled = !appHistory.length;
+    showStatus(I18N.t('statusReverted'));
+  });
+
+  // ================= icon upload =================
+  const iconInput = document.getElementById('iconInput');
+  const iconUploadLabel = document.getElementById('iconUploadLabel');
+  const iconPreviewWrap = document.getElementById('iconPreviewWrap');
+  const iconPreview = document.getElementById('iconPreview');
+  const removeIconBtn = document.getElementById('removeIconBtn');
+  let customIconDataUrl = '';
+
+  iconInput.addEventListener('change', function (e) {
+    const file = (e.target.files || [])[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      customIconDataUrl = reader.result;
+      iconPreview.src = customIconDataUrl;
+      iconPreviewWrap.style.display = 'flex';
+      iconUploadLabel.textContent = I18N.t('replaceIconLabel');
+    };
+    reader.readAsDataURL(file);
+  });
+  removeIconBtn.addEventListener('click', function () {
+    customIconDataUrl = '';
+    iconInput.value = '';
+    iconPreviewWrap.style.display = 'none';
+    iconUploadLabel.textContent = I18N.t('iconUploadLabel');
+  });
+
+  function loadImage(src) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(I18N.t('errorIconLoad')));
+      img.src = src;
+    });
+  }
+  async function resizeIconDataUrl(dataUrl, size) {
+    const img = await loadImage(dataUrl);
+    const canvas = document.createElement('canvas');
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const scale = Math.max(size / img.width, size / img.height);
+    const w = img.width * scale, h = img.height * scale;
+    ctx.drawImage(img, (size - w) / 2, (size - h) / 2, w, h);
+    return canvas.toDataURL('image/png');
+  }
+
+  async function generateApp() {
+    clearError();
+    const key = currentTextApiKey();
+    const brief = appBrief.value.trim();
+    if (!key) { showError(I18N.t('errorNoApiKey')); return; }
+    if (!brief) { showError(I18N.t('errorNoBrief')); return; }
+
+    generateBtn.disabled = true;
+    generateBtn.textContent = I18N.t('buildingLabel');
+    titleBlockRight.textContent = I18N.t('statusBuilding');
+    try {
+      const model = modelSelect.value;
+      const checked = await checkAndFix(key, model, withKit(await callChat(key, model, APP_RULES(), brief)));
+      pushHistory();
+      showPreview(checked.html);
+      titleBlockRight.textContent = I18N.t('statusReady');
+      showStatus(I18N.t(checked.fixed ? 'statusFixed' : 'statusBuilt'));
+    } catch (err) {
+      showError(err.message || I18N.t('errorCouldNotGenerate'));
+      titleBlockRight.textContent = I18N.t('statusFailed');
+    } finally {
+      generateBtn.disabled = false;
+      generateBtn.textContent = I18N.t('generateBtnLabel');
+    }
+  }
+  generateBtn.addEventListener('click', generateApp);
+
+  async function refineApp() {
+    clearError();
+    const key = currentTextApiKey();
+    const instruction = refineInput.value.trim();
+    if (!key) { showError(I18N.t('errorNoApiKey')); return; }
+    if (!currentAppHtml) { showError(I18N.t('errorNoApp')); return; }
+    if (!instruction) { showError(I18N.t('errorNoInstruction')); return; }
+
+    refineBtn.disabled = true;
+    refineBtn.textContent = I18N.t('applyingLabel');
+    const model = modelSelect.value;
+    const rules = [
+      'You are editing an existing self-contained web app.',
+      'Below is the current complete HTML document, followed by a requested change.',
+      'Apply ONLY the requested change. Keep everything else the same unless the change requires it to differ.',
+      'Keep following the original rules: one self-contained HTML document, no external assets or network calls, localStorage for anything that should persist, output ONLY the complete updated HTML document with no markdown fences or commentary.' + appLanguageInstruction(),
+      UI_KIT_GUIDE
+    ].join('\n');
+    const userMsg = 'CURRENT APP HTML:\n' + withoutKit(currentAppHtml) + '\n\nREQUESTED CHANGE:\n' + instruction;
+    try {
+      const checked = await checkAndFix(key, model, withKit(await callChat(key, model, rules, userMsg)));
+      pushHistory();
+      showPreview(checked.html);
+      refineInput.value = '';
+      showStatus(I18N.t('statusUpdated'));
+    } catch (err) {
+      showError(err.message || I18N.t('errorCouldNotApply'));
+    } finally {
+      refineBtn.disabled = false;
+      refineBtn.textContent = I18N.t('applyBtnLabel');
+    }
+  }
+  refineBtn.addEventListener('click', refineApp);
+  refineInput.addEventListener('keydown', e => { if (e.key === 'Enter') refineApp(); });
+
+  // ================= packaging: icon generation =================
+  function makeIconDataUrl(size, name, color) {
+    const canvas = document.createElement('canvas');
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    const radius = size * 0.2;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(radius, 0);
+    ctx.arcTo(size, 0, size, size, radius);
+    ctx.arcTo(size, size, 0, size, radius);
+    ctx.arcTo(0, size, 0, 0, radius);
+    ctx.arcTo(0, 0, size, 0, radius);
+    ctx.closePath();
+    ctx.fill();
+    const letter = (name.trim()[0] || 'A').toUpperCase();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold ' + Math.round(size * 0.55) + 'px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(letter, size / 2, size / 2 + size * 0.04);
+    return canvas.toDataURL('image/png');
+  }
+  function dataUrlToBlob(dataUrl) {
+    const parts = dataUrl.split(',');
+    const bin = atob(parts[1]);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return new Blob([arr], { type: 'image/png' });
+  }
+
+  function injectIntoHead(html, snippet) {
+    if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, m => m + snippet);
+    return snippet + html;
+  }
+  function injectBeforeBodyClose(html, snippet) {
+    if (/<\/body>/i.test(html)) return html.replace(/<\/body>/i, snippet + '</body>');
+    return html + snippet;
+  }
+  function slugify(name) {
+    return (name || 'my-app').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'my-app';
+  }
+
+  // ================= download =================
+  downloadBtn.addEventListener('click', async function () {
+    if (!currentAppHtml) return;
+    clearError();
+    const name = appName.value.trim() || I18N.t('defaultAppName');
+    const slug = slugify(name);
+    const color = themeColor.value;
+
+    if (currentMode === 'utility') {
+      const blob = new Blob([currentAppHtml], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = slug + '.html';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      return;
+    }
+
+    if (typeof JSZip === 'undefined') { showError(I18N.t('errorZipLoad')); return; }
+    downloadBtn.disabled = true;
+    downloadBtn.textContent = I18N.t('zippingLabel');
+    try {
+      const icon192 = customIconDataUrl ? await resizeIconDataUrl(customIconDataUrl, 192) : makeIconDataUrl(192, name, color);
+      const icon512 = customIconDataUrl ? await resizeIconDataUrl(customIconDataUrl, 512) : makeIconDataUrl(512, name, color);
+      const zip = new JSZip();
+
+      if (currentMode === 'web') {
+        const manifest = {
+          name: name, short_name: name.slice(0, 12), start_url: './index.html', display: 'standalone',
+          background_color: color, theme_color: color,
+          icons: [{ src: 'icon-192.png', sizes: '192x192', type: 'image/png' }, { src: 'icon-512.png', sizes: '512x512', type: 'image/png' }]
+        };
+        const sw = "const CACHE_NAME='app-cache-v1';const FILES=['./','./index.html','./manifest.json','./icon-192.png','./icon-512.png'];" +
+          "self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(FILES)));});" +
+          "self.addEventListener('fetch',e=>{e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});";
+        let html = injectIntoHead(currentAppHtml, '<link rel="manifest" href="manifest.json"><meta name="theme-color" content="' + color + '">');
+        html = injectBeforeBodyClose(html, '<script>if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js");}</' + 'script>');
+        zip.file('index.html', html);
+        zip.file('manifest.json', JSON.stringify(manifest, null, 2));
+        zip.file('sw.js', sw);
+        zip.file('icon-192.png', dataUrlToBlob(icon192));
+        zip.file('icon-512.png', dataUrlToBlob(icon512));
+        zip.file('README.md',
+          '# ' + name + '\n\nA generated installable web app (PWA).\n\n## To publish it\n\n' +
+          '1. Upload every file in this folder (keeping them together, same folder) to any static host over **HTTPS** — GitHub Pages, Netlify, Cloudflare Pages, or your own domain.\n' +
+          '2. Open index.html\'s URL on a phone or desktop browser — you\'ll be able to "Add to Home Screen" / "Install" it like a real app.\n' +
+          '3. It works offline after the first visit, thanks to sw.js caching its files.\n');
+      } else {
+        // mobile starter project (Capacitor)
+        zip.file('www/index.html', currentAppHtml);
+        zip.file('www/icon-192.png', dataUrlToBlob(icon192));
+        zip.file('www/icon-512.png', dataUrlToBlob(icon512));
+        zip.file('package.json', JSON.stringify({
+          name: slug, version: '1.0.0', private: true,
+          scripts: { sync: 'npx cap sync' },
+          dependencies: { '@capacitor/core': '^6.0.0', '@capacitor/android': '^6.0.0', '@capacitor/ios': '^6.0.0' },
+          devDependencies: { '@capacitor/cli': '^6.0.0' }
+        }, null, 2));
+        const appId = packageId.value.trim() || ('com.example.' + slug.replace(/-/g, ''));
+        zip.file('capacitor.config.json', JSON.stringify({ appId: appId, appName: name, webDir: 'www' }, null, 2));
+        zip.file('README.md',
+          '# ' + name + ' — mobile app starter project\n\n' +
+          'This is a real starting point, not a finished app-store app — no browser can compile a native ' +
+          'Android/iOS binary directly. Finishing it needs free tools outside the browser:\n\n' +
+          '## What you need\n- [Node.js](https://nodejs.org) installed\n' +
+          '- For Android: [Android Studio](https://developer.android.com/studio) (free)\n' +
+          '- For iOS: a Mac with [Xcode](https://developer.apple.com/xcode/) (free, but you need a Mac)\n\n' +
+          '## Steps\n1. Unzip this folder and open a terminal in it.\n2. Run `npm install`.\n' +
+          '3. Run `npx cap add android` (and/or `npx cap add ios`).\n' +
+          '4. Run `npx cap open android` (or `ios`) — this opens the real native project.\n' +
+          '5. Build and run it from Android Studio / Xcode like any native app.\n\n' +
+          '## Publishing for real\n- **Android**: needs a one-time $25 Google Play Console account, then submit your build there.\n' +
+          '- **iOS**: needs a $99/year Apple Developer account, then submit via Xcode/App Store Connect.\n\n' +
+          'Your app\'s actual content lives in `www/index.html` — re-run `npx cap sync` after changing it.\n');
+      }
+
+      const blob = await zip.generateAsync({ type: 'blob' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = slug + (currentMode === 'mobile' ? '-mobile-starter' : '-pwa') + '.zip';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      showStatus(I18N.t('statusDownloaded').replace('{filename}', a.download));
+    } catch (err) {
+      showError(I18N.t('errorDownloadBuild').replace('{message}', err.message));
+    } finally {
+      downloadBtn.disabled = false;
+      downloadBtn.textContent = currentMode === 'utility' ? I18N.t('downloadHtmlLabel') : I18N.t('downloadZipLabel');
+    }
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Describe an app. Choose what kind of output you need, then build and refine it.',
+      modeWebLabel: '📱 Installable web app (PWA)',
+      modeUtilityLabel: '🧰 Small utility app',
+      modeMobileLabel: '📦 Mobile app starter project',
+      modeWebNote: 'Builds a real installable web app: a working page, a manifest, offline caching via a service worker, and app icons — download the .zip and host the files anywhere over HTTPS (GitHub Pages, Netlify, Cloudflare Pages, your own domain). Visitors can "Add to Home Screen" for an app-like icon.',
+      modeWebHint: 'Unzip and upload all the files together to any static host over HTTPS — PWAs require it. Nothing here needs a server beyond plain file hosting.',
+      modeUtilityNote: 'Builds one self-contained HTML file — a working little tool, no install, no hosting required. Just open the file, or host it anywhere.',
+      modeUtilityHint: 'Downloads a single .html file. Open it directly, or upload it anywhere to share it.',
+      modeMobileNote: 'No browser can compile a real installable Android/iOS app directly — that needs Android Studio or Xcode. This instead builds a real starter project (using Capacitor, a standard tool for wrapping web apps as native apps) with your generated app already wired in, plus a step-by-step README for finishing the build with free tools outside the browser.',
+      modeMobileHint: 'Downloads a project folder as .zip. See its README.md for the remaining steps (Node.js + Android Studio/Xcode, building, and publishing).',
+      connectionHeading: 'Connection',
+      providerLabel: 'AI provider',
+      apiKeyLabelOpenai: 'Your OpenAI API key',
+      apiKeyLabelAnthropic: 'Your Anthropic API key',
+      apiKeyHint: 'Used only to call the provider above directly from your browser. Never stored.',
+      freeNoticeText: '✓ Free to use — shares a limited daily capacity. Switch to OpenAI/Anthropic above with your own key if it stops working.',
+      modelLabel: 'Text model',
+      yourAppHeading: 'Your app',
+      appNameLabel: 'App name',
+      appNamePlaceholder: 'Chore Tracker',
+      appBriefLabel: 'Describe what it should do',
+      appBriefPlaceholder: 'e.g. A simple weekly chore tracker for a household of 4 — assign chores to people, check them off, and reset every Monday. Remember everything between visits.',
+      themeColorLabel: 'Theme color',
+      iconLabel: 'App icon (optional)',
+      iconUploadLabel: '+ Upload an icon',
+      replaceIconLabel: 'Replace icon',
+      removeLabel: 'Remove',
+      iconHint: 'Leave blank to auto-generate a simple lettermark icon from the app name.',
+      packageIdLabel: 'Package / bundle ID',
+      packageIdHint: 'The Android/iOS app identifier — pick something unique (reverse-domain style) before publishing. Leave blank to use com.example.<app-slug>.',
+      generateBtnLabel: '✨ Generate app',
+      previewTitle: 'APP FORGE — PREVIEW',
+      statusNotStarted: 'NOT STARTED',
+      statusBuilding: 'BUILDING',
+      statusReady: 'READY',
+      statusFailed: 'GENERATION FAILED',
+      stageEmptyStrong: 'Nothing built yet.',
+      stageEmptyText: 'Describe your app on the left and click Generate.',
+      refinePlaceholder: "Ask for a change, e.g. 'add a dark mode toggle'",
+      applyBtnLabel: 'Apply',
+      applyingLabel: 'Applying…',
+      undoBtnLabel: '↶ Undo',
+      downloadZipLabel: '⬇ Download .zip',
+      downloadHtmlLabel: '⬇ Download app.html',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a> — free to use, no account needed. Nothing you type here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      buildingLabel: 'Building…',
+      errorNoApiKey: 'Add your API key first.',
+      errorNoBrief: 'Describe the app you want.',
+      statusFixing: 'Found a problem in the app — fixing it…',
+      statusFixed: 'Built, checked and fixed. Try it on the right, ask for changes below, or download it.',
+      statusBuilt: 'Built. Try it on the right, ask for changes below, or download it.',
+      errorCouldNotGenerate: 'Could not generate that app.',
+      errorNoApp: 'Generate an app first.',
+      errorNoInstruction: 'Say what you want changed.',
+      statusUpdated: 'Updated.',
+      errorCouldNotApply: 'Could not apply that change.',
+      statusReverted: 'Reverted to the previous version.',
+      errorIconLoad: 'Could not load the uploaded icon.',
+      errorZipLoad: 'The zip library failed to load — check your internet connection and reload the page.',
+      zippingLabel: 'Zipping…',
+      statusDownloaded: 'Downloaded {filename}.',
+      errorDownloadBuild: 'Could not build the download: {message}',
+      defaultAppName: 'My App',
+      errorRequestFailedFreeLimit: 'Request failed with status {status} — the free daily limit may have been reached.',
+      errorRequestFailed: 'Request failed with status {status}',
+      errorEmptyResponse: 'The model returned an empty response.'
+    },
+    es: {
+      heroSubtitle: 'Describe una app. Elige el tipo de resultado que necesitas y luego constrúyela y perfecciónala.',
+      modeWebLabel: '📱 App web instalable (PWA)',
+      modeUtilityLabel: '🧰 Pequeña app utilitaria',
+      modeMobileLabel: '📦 Proyecto inicial de app móvil',
+      modeWebNote: 'Construye una app web instalable real: una página funcional, un manifiesto, caché sin conexión mediante un service worker e íconos de app — descarga el .zip y aloja los archivos en cualquier lugar por HTTPS (GitHub Pages, Netlify, Cloudflare Pages, tu propio dominio). Los visitantes pueden "Añadir a pantalla de inicio" para obtener un ícono tipo app.',
+      modeWebHint: 'Descomprime y sube todos los archivos juntos a cualquier alojamiento estático por HTTPS — las PWA lo requieren. Nada aquí necesita un servidor más allá de un simple alojamiento de archivos.',
+      modeUtilityNote: 'Construye un único archivo HTML autónomo — una pequeña herramienta funcional, sin instalación ni alojamiento necesarios. Solo abre el archivo, o alójalo donde quieras.',
+      modeUtilityHint: 'Descarga un único archivo .html. Ábrelo directamente, o súbelo a cualquier lugar para compartirlo.',
+      modeMobileNote: 'Ningún navegador puede compilar directamente una app real instalable para Android/iOS — eso requiere Android Studio o Xcode. En su lugar, esto construye un proyecto inicial real (usando Capacitor, una herramienta estándar para envolver apps web como apps nativas) con tu app generada ya integrada, más un README paso a paso para terminar la construcción con herramientas gratuitas fuera del navegador.',
+      modeMobileHint: 'Descarga una carpeta de proyecto como .zip. Consulta su README.md para los pasos restantes (Node.js + Android Studio/Xcode, compilación y publicación).',
+      connectionHeading: 'Conexión',
+      providerLabel: 'Proveedor de IA',
+      apiKeyLabelOpenai: 'Tu clave API de OpenAI',
+      apiKeyLabelAnthropic: 'Tu clave API de Anthropic',
+      apiKeyHint: 'Se usa solo para llamar al proveedor anterior directamente desde tu navegador. Nunca se almacena.',
+      freeNoticeText: '✓ Gratis para usar — comparte una capacidad diaria limitada. Cambia a OpenAI/Anthropic arriba con tu propia clave si deja de funcionar.',
+      modelLabel: 'Modelo de texto',
+      yourAppHeading: 'Tu app',
+      appNameLabel: 'Nombre de la app',
+      appNamePlaceholder: 'Rastreador de Tareas',
+      appBriefLabel: 'Describe qué debería hacer',
+      appBriefPlaceholder: 'p. ej. Un rastreador semanal simple de tareas domésticas para una familia de 4 — asigna tareas a personas, márcalas como hechas y reinicia cada lunes. Recuerda todo entre visitas.',
+      themeColorLabel: 'Color del tema',
+      iconLabel: 'Ícono de la app (opcional)',
+      iconUploadLabel: '+ Subir un ícono',
+      replaceIconLabel: 'Reemplazar ícono',
+      removeLabel: 'Eliminar',
+      iconHint: 'Déjalo en blanco para generar automáticamente un ícono simple con la inicial del nombre de la app.',
+      packageIdLabel: 'ID de paquete',
+      packageIdHint: 'El identificador de la app Android/iOS — elige algo único (estilo dominio inverso) antes de publicar. Déjalo en blanco para usar com.example.<slug-de-la-app>.',
+      generateBtnLabel: '✨ Generar app',
+      previewTitle: 'APP FORGE — VISTA PREVIA',
+      statusNotStarted: 'SIN INICIAR',
+      statusBuilding: 'CONSTRUYENDO',
+      statusReady: 'LISTO',
+      statusFailed: 'GENERACIÓN FALLIDA',
+      stageEmptyStrong: 'Aún no se ha construido nada.',
+      stageEmptyText: 'Describe tu app a la izquierda y haz clic en Generar.',
+      refinePlaceholder: "Pide un cambio, p. ej. 'añade un modo oscuro'",
+      applyBtnLabel: 'Aplicar',
+      applyingLabel: 'Aplicando…',
+      undoBtnLabel: '↶ Deshacer',
+      downloadZipLabel: '⬇ Descargar .zip',
+      downloadHtmlLabel: '⬇ Descargar app.html',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a> — gratis, sin necesidad de cuenta. Nada de lo que escribes aquí se almacena en ningún lugar. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      buildingLabel: 'Construyendo…',
+      errorNoApiKey: 'Añade primero tu clave API.',
+      errorNoBrief: 'Describe la app que quieres.',
+      statusFixing: 'Encontramos un problema en la app; corrigiéndolo…',
+      statusFixed: 'Construida, revisada y corregida. Pruébala a la derecha, pide cambios abajo, o descárgala.',
+      statusBuilt: 'Construida. Pruébala a la derecha, pide cambios abajo, o descárgala.',
+      errorCouldNotGenerate: 'No se pudo generar esa app.',
+      errorNoApp: 'Genera una app primero.',
+      errorNoInstruction: 'Indica qué quieres cambiar.',
+      statusUpdated: 'Actualizado.',
+      errorCouldNotApply: 'No se pudo aplicar ese cambio.',
+      statusReverted: 'Se revirtió a la versión anterior.',
+      errorIconLoad: 'No se pudo cargar el ícono subido.',
+      errorZipLoad: 'La librería de compresión no se cargó — revisa tu conexión a internet y recarga la página.',
+      zippingLabel: 'Comprimiendo…',
+      statusDownloaded: 'Descargado {filename}.',
+      errorDownloadBuild: 'No se pudo generar la descarga: {message}',
+      defaultAppName: 'Mi App',
+      errorRequestFailedFreeLimit: 'La solicitud falló con estado {status} — es posible que se haya alcanzado el límite diario gratuito.',
+      errorRequestFailed: 'La solicitud falló con estado {status}',
+      errorEmptyResponse: 'El modelo devolvió una respuesta vacía.'
+    },
+    ar: {
+      heroSubtitle: 'صف تطبيقًا. اختر نوع الناتج الذي تحتاجه، ثم قم ببنائه وتحسينه.',
+      modeWebLabel: '📱 تطبيق ويب قابل للتثبيت (PWA)',
+      modeUtilityLabel: '🧰 تطبيق أداة صغير',
+      modeMobileLabel: '📦 مشروع بداية لتطبيق جوال',
+      modeWebNote: 'يبني تطبيق ويب حقيقيًا قابلاً للتثبيت: صفحة تعمل، بيان (manifest)، تخزين مؤقت دون اتصال عبر service worker، وأيقونات تطبيق — نزّل الـ .zip واستضف الملفات في أي مكان عبر HTTPS (GitHub Pages، Netlify، Cloudflare Pages، أو نطاقك الخاص). يمكن للزوار "إضافة إلى الشاشة الرئيسية" للحصول على أيقونة تشبه التطبيق.',
+      modeWebHint: 'فك الضغط وارفع كل الملفات معًا إلى أي استضافة ثابتة عبر HTTPS — تطبيقات PWA تتطلب ذلك. لا شيء هنا يحتاج إلى خادم أكثر من استضافة ملفات عادية.',
+      modeUtilityNote: 'يبني ملف HTML واحدًا مستقلاً بذاته — أداة صغيرة تعمل، بدون تثبيت أو استضافة مطلوبة. فقط افتح الملف، أو استضفه في أي مكان.',
+      modeUtilityHint: 'ينزّل ملف .html واحدًا. افتحه مباشرة، أو ارفعه إلى أي مكان لمشاركته.',
+      modeMobileNote: 'لا يمكن لأي متصفح تجميع تطبيق Android/iOS حقيقي قابل للتثبيت مباشرة — يتطلب ذلك Android Studio أو Xcode. بدلاً من ذلك، يبني هذا مشروع بداية حقيقي (باستخدام Capacitor، أداة قياسية لتغليف تطبيقات الويب كتطبيقات أصلية) مع تطبيقك الذي تم إنشاؤه متصلاً بالفعل، بالإضافة إلى README خطوة بخطوة لإنهاء البناء بأدوات مجانية خارج المتصفح.',
+      modeMobileHint: 'ينزّل مجلد مشروع كـ .zip. راجع ملف README.md الخاص به للخطوات المتبقية (Node.js + Android Studio/Xcode، البناء، والنشر).',
+      connectionHeading: 'الاتصال',
+      providerLabel: 'مزوّد الذكاء الاصطناعي',
+      apiKeyLabelOpenai: 'مفتاح OpenAI API الخاص بك',
+      apiKeyLabelAnthropic: 'مفتاح Anthropic API الخاص بك',
+      apiKeyHint: 'يُستخدم فقط لاستدعاء المزوّد أعلاه مباشرة من متصفحك. لا يُخزَّن أبدًا.',
+      freeNoticeText: '✓ مجاني للاستخدام — يشارك سعة يومية محدودة. انتقل إلى OpenAI/Anthropic أعلاه بمفتاحك الخاص إذا توقف عن العمل.',
+      modelLabel: 'نموذج النص',
+      yourAppHeading: 'تطبيقك',
+      appNameLabel: 'اسم التطبيق',
+      appNamePlaceholder: 'متعقب المهام',
+      appBriefLabel: 'صف ما يجب أن يفعله',
+      appBriefPlaceholder: 'مثال: متعقب بسيط للمهام المنزلية الأسبوعية لعائلة من 4 أفراد — أسند المهام للأشخاص، ضع علامة عليها عند الإنجاز، وأعد التعيين كل يوم اثنين. تذكّر كل شيء بين الزيارات.',
+      themeColorLabel: 'لون السمة',
+      iconLabel: 'أيقونة التطبيق (اختياري)',
+      iconUploadLabel: '+ تحميل أيقونة',
+      replaceIconLabel: 'استبدال الأيقونة',
+      removeLabel: 'إزالة',
+      iconHint: 'اتركه فارغًا لإنشاء أيقونة بسيطة تلقائيًا من الحرف الأول لاسم التطبيق.',
+      packageIdLabel: 'معرّف الحزمة',
+      packageIdHint: 'معرّف تطبيق Android/iOS — اختر شيئًا فريدًا (بأسلوب النطاق المعكوس) قبل النشر. اتركه فارغًا لاستخدام com.example.<اسم-التطبيق>.',
+      generateBtnLabel: '✨ إنشاء التطبيق',
+      previewTitle: 'APP FORGE — معاينة',
+      statusNotStarted: 'لم يبدأ',
+      statusBuilding: 'جارٍ البناء',
+      statusReady: 'جاهز',
+      statusFailed: 'فشل الإنشاء',
+      stageEmptyStrong: 'لم يُبنَ شيء بعد.',
+      stageEmptyText: 'صف تطبيقك على اليسار وانقر على إنشاء.',
+      refinePlaceholder: "اطلب تغييرًا، مثال: 'أضف وضعًا داكنًا'",
+      applyBtnLabel: 'تطبيق',
+      applyingLabel: 'جارٍ التطبيق…',
+      undoBtnLabel: '↶ تراجع',
+      downloadZipLabel: '⬇ تنزيل .zip',
+      downloadHtmlLabel: '⬇ تنزيل app.html',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a> — مجاني الاستخدام، بدون الحاجة لحساب. لا شيء مما تكتبه هنا يُخزَّن في أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      buildingLabel: 'جارٍ البناء…',
+      errorNoApiKey: 'أضف مفتاح API الخاص بك أولاً.',
+      errorNoBrief: 'صف التطبيق الذي تريده.',
+      statusFixing: 'وُجدت مشكلة في التطبيق — جارٍ إصلاحها…',
+      statusFixed: 'تم البناء والفحص والإصلاح. جرّبه على اليمين، اطلب تغييرات أدناه، أو نزّله.',
+      statusBuilt: 'تم البناء. جرّبه على اليمين، اطلب تغييرات أدناه، أو نزّله.',
+      errorCouldNotGenerate: 'تعذر إنشاء ذلك التطبيق.',
+      errorNoApp: 'أنشئ تطبيقًا أولاً.',
+      errorNoInstruction: 'حدد ما تريد تغييره.',
+      statusUpdated: 'تم التحديث.',
+      errorCouldNotApply: 'تعذر تطبيق ذلك التغيير.',
+      statusReverted: 'تمت العودة إلى الإصدار السابق.',
+      errorIconLoad: 'تعذر تحميل الأيقونة المرفوعة.',
+      errorZipLoad: 'فشل تحميل مكتبة الضغط — تحقق من اتصالك بالإنترنت وأعد تحميل الصفحة.',
+      zippingLabel: 'جارٍ الضغط…',
+      statusDownloaded: 'تم تنزيل {filename}.',
+      errorDownloadBuild: 'تعذر إنشاء التنزيل: {message}',
+      defaultAppName: 'تطبيقي',
+      errorRequestFailedFreeLimit: 'فشل الطلب بالحالة {status} — ربما تم الوصول إلى الحد اليومي المجاني.',
+      errorRequestFailed: 'فشل الطلب بالحالة {status}',
+      errorEmptyResponse: 'أعاد النموذج استجابة فارغة.'
+    },
+    zh: {
+      heroSubtitle: '描述一个应用。选择你需要的输出类型，然后构建并完善它。',
+      modeWebLabel: '📱 可安装的网页应用（PWA）',
+      modeUtilityLabel: '🧰 小型实用工具应用',
+      modeMobileLabel: '📦 移动应用起始项目',
+      modeWebNote: '构建一个真正可安装的网页应用：一个可运行的页面、一个清单文件、通过 service worker 实现的离线缓存，以及应用图标——下载 .zip 并通过 HTTPS 将文件托管在任何地方（GitHub Pages、Netlify、Cloudflare Pages 或你自己的域名）。访客可以"添加到主屏幕"获得类似应用的图标。',
+      modeWebHint: '解压并将所有文件一起上传到任何通过 HTTPS 提供服务的静态托管——PWA 需要这样做。这里的一切都只需要普通的文件托管，无需服务器。',
+      modeUtilityNote: '构建一个独立的 HTML 文件——一个可运行的小工具，无需安装或托管。只需打开文件，或将其托管在任何地方。',
+      modeUtilityHint: '下载一个单独的 .html 文件。直接打开它，或上传到任何地方进行分享。',
+      modeMobileNote: '没有浏览器可以直接编译真正可安装的 Android/iOS 应用——那需要 Android Studio 或 Xcode。因此，这会构建一个真正的起始项目（使用 Capacitor，一种将网页应用封装为原生应用的标准工具），已经接入你生成的应用，外加一份逐步说明的 README，用于在浏览器之外使用免费工具完成构建。',
+      modeMobileHint: '以 .zip 形式下载一个项目文件夹。查看其 README.md 了解剩余步骤（Node.js + Android Studio/Xcode、构建和发布）。',
+      connectionHeading: '连接',
+      providerLabel: 'AI 提供商',
+      apiKeyLabelOpenai: '你的 OpenAI API 密钥',
+      apiKeyLabelAnthropic: '你的 Anthropic API 密钥',
+      apiKeyHint: '仅用于从你的浏览器直接调用上述提供商。绝不存储。',
+      freeNoticeText: '✓ 免费使用——共享有限的每日额度。如果停止工作，请切换到上方的 OpenAI/Anthropic 并使用你自己的密钥。',
+      modelLabel: '文本模型',
+      yourAppHeading: '你的应用',
+      appNameLabel: '应用名称',
+      appNamePlaceholder: '家务追踪器',
+      appBriefLabel: '描述它应该做什么',
+      appBriefPlaceholder: '例如：一个简单的每周家务追踪器，适用于4口之家——把家务分配给不同的人，完成后打勾，每周一重置。在多次访问之间记住所有内容。',
+      themeColorLabel: '主题颜色',
+      iconLabel: '应用图标（可选）',
+      iconUploadLabel: '+ 上传图标',
+      replaceIconLabel: '替换图标',
+      removeLabel: '移除',
+      iconHint: '留空则根据应用名称自动生成一个简单的字母图标。',
+      packageIdLabel: '包 / Bundle ID',
+      packageIdHint: 'Android/iOS 应用标识符——发布前请选择唯一的标识符（反向域名风格）。留空则使用 com.example.<应用标识>。',
+      generateBtnLabel: '✨ 生成应用',
+      previewTitle: 'APP FORGE — 预览',
+      statusNotStarted: '尚未开始',
+      statusBuilding: '构建中',
+      statusReady: '就绪',
+      statusFailed: '生成失败',
+      stageEmptyStrong: '尚未构建任何内容。',
+      stageEmptyText: '在左侧描述你的应用，然后点击生成。',
+      refinePlaceholder: '请求更改，例如"添加深色模式切换"',
+      applyBtnLabel: '应用',
+      applyingLabel: '应用中…',
+      undoBtnLabel: '↶ 撤销',
+      downloadZipLabel: '⬇ 下载 .zip',
+      downloadHtmlLabel: '⬇ 下载 app.html',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a> —— 免费使用，无需账号。你在此输入的内容不会存储在任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      buildingLabel: '构建中…',
+      errorNoApiKey: '请先添加你的 API 密钥。',
+      errorNoBrief: '请描述你想要的应用。',
+      statusFixing: '发现应用中的问题，正在修复…',
+      statusFixed: '已构建、检查并修复。可以在右侧试用，在下方请求更改，或下载它。',
+      statusBuilt: '已构建。可以在右侧试用，在下方请求更改，或下载它。',
+      errorCouldNotGenerate: '无法生成该应用。',
+      errorNoApp: '请先生成一个应用。',
+      errorNoInstruction: '请说明你想更改什么。',
+      statusUpdated: '已更新。',
+      errorCouldNotApply: '无法应用该更改。',
+      statusReverted: '已恢复到上一个版本。',
+      errorIconLoad: '无法加载上传的图标。',
+      errorZipLoad: '压缩库加载失败——请检查你的网络连接并重新加载页面。',
+      zippingLabel: '正在压缩…',
+      statusDownloaded: '已下载 {filename}。',
+      errorDownloadBuild: '无法生成下载内容：{message}',
+      defaultAppName: '我的应用',
+      errorRequestFailedFreeLimit: '请求失败，状态码 {status}——可能已达到每日免费额度上限。',
+      errorRequestFailed: '请求失败，状态码 {status}',
+      errorEmptyResponse: '模型返回了空响应。'
+    },
+    sw: {
+      heroSubtitle: 'Eleza programu. Chagua aina ya matokeo unayohitaji, kisha uijenge na kuiboresha.',
+      modeWebLabel: '📱 Programu ya wavuti inayowekwa (PWA)',
+      modeUtilityLabel: '🧰 Programu ndogo ya matumizi',
+      modeMobileLabel: '📦 Mradi wa mwanzo wa programu ya simu',
+      modeWebNote: 'Inajenga programu halisi ya wavuti inayowekwa: ukurasa unaofanya kazi, manifest, hifadhi ya nje ya mtandao kupitia service worker, na alama za programu — pakua .zip na uhifadhi faili popote kupitia HTTPS (GitHub Pages, Netlify, Cloudflare Pages, kikoa chako mwenyewe). Wageni wanaweza "Ongeza kwenye Skrini ya Nyumbani" kupata alama kama ya programu.',
+      modeWebHint: 'Fungua na upakie faili zote pamoja kwenye mwenyeji wowote tuli kupitia HTTPS — PWA zinahitaji hilo. Hakuna kitu hapa kinachohitaji seva zaidi ya uhifadhi wa kawaida wa faili.',
+      modeUtilityNote: 'Inajenga faili moja ya HTML inayojitegemea — chombo kidogo kinachofanya kazi, hakuna usakinishaji au uhifadhi unaohitajika. Fungua tu faili, au uihifadhi popote.',
+      modeUtilityHint: 'Inapakua faili moja ya .html. Ifungue moja kwa moja, au uipakie popote kuishiriki.',
+      modeMobileNote: 'Hakuna kivinjari kinachoweza kukusanya programu halisi inayowekwa ya Android/iOS moja kwa moja — hilo linahitaji Android Studio au Xcode. Badala yake, hii inajenga mradi halisi wa mwanzo (kwa kutumia Capacitor, chombo cha kawaida cha kufunga programu za wavuti kama programu asili) na programu yako iliyotengenezwa tayari imeunganishwa, pamoja na README ya hatua kwa hatua ya kumaliza ujenzi kwa vifaa vya bure nje ya kivinjari.',
+      modeMobileHint: 'Inapakua folda ya mradi kama .zip. Angalia README.md yake kwa hatua zilizobaki (Node.js + Android Studio/Xcode, kujenga, na kuchapisha).',
+      connectionHeading: 'Muunganisho',
+      providerLabel: 'Mtoa huduma wa AI',
+      apiKeyLabelOpenai: 'Ufunguo wako wa API wa OpenAI',
+      apiKeyLabelAnthropic: 'Ufunguo wako wa API wa Anthropic',
+      apiKeyHint: 'Hutumika tu kuwasiliana na mtoa huduma aliye hapo juu moja kwa moja kutoka kwenye kivinjari chako. Haihifadhiwi kamwe.',
+      freeNoticeText: '✓ Bure kutumia — inashiriki uwezo mdogo wa kila siku. Badilisha kwenda OpenAI/Anthropic hapo juu kwa ufunguo wako mwenyewe ikiwa itaacha kufanya kazi.',
+      modelLabel: 'Kielelezo cha maandishi',
+      yourAppHeading: 'Programu yako',
+      appNameLabel: 'Jina la programu',
+      appNamePlaceholder: 'Kifuatiliaji cha Kazi',
+      appBriefLabel: 'Eleza inapaswa kufanya nini',
+      appBriefPlaceholder: 'mfano: Kifuatiliaji rahisi cha kazi za nyumbani cha kila wiki kwa familia ya watu 4 — gawa kazi kwa watu, ziangalie zikikamilika, na uanze upya kila Jumatatu. Kumbuka kila kitu kati ya ziara.',
+      themeColorLabel: 'Rangi ya mandhari',
+      iconLabel: 'Alama ya programu (hiari)',
+      iconUploadLabel: '+ Pakia alama',
+      replaceIconLabel: 'Badilisha alama',
+      removeLabel: 'Ondoa',
+      iconHint: 'Acha wazi ili kutengeneza kiotomatiki alama rahisi ya herufi kutoka kwa jina la programu.',
+      packageIdLabel: 'Kitambulisho cha kifurushi',
+      packageIdHint: 'Kitambulisho cha programu ya Android/iOS — chagua kitu cha kipekee (mtindo wa kikoa kilichogeuzwa) kabla ya kuchapisha. Acha wazi kutumia com.example.<jina-la-programu>.',
+      generateBtnLabel: '✨ Tengeneza programu',
+      previewTitle: 'APP FORGE — MUONEKANO',
+      statusNotStarted: 'HAIJAANZA',
+      statusBuilding: 'INAJENGWA',
+      statusReady: 'TAYARI',
+      statusFailed: 'UTENGENEZAJI UMESHINDWA',
+      stageEmptyStrong: 'Hakuna kilichojengwa bado.',
+      stageEmptyText: 'Eleza programu yako upande wa kushoto kisha bofya Tengeneza.',
+      refinePlaceholder: "Omba mabadiliko, mfano: 'ongeza hali ya giza'",
+      applyBtnLabel: 'Tumia',
+      applyingLabel: 'Inatumika…',
+      undoBtnLabel: '↶ Tengua',
+      downloadZipLabel: '⬇ Pakua .zip',
+      downloadHtmlLabel: '⬇ Pakua app.html',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a> — bure kutumia, hakuna akaunti inayohitajika. Hakuna unachoandika hapa kinachohifadhiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      buildingLabel: 'Inajenga…',
+      errorNoApiKey: 'Ongeza ufunguo wako wa API kwanza.',
+      errorNoBrief: 'Eleza programu unayotaka.',
+      statusFixing: 'Tatizo limepatikana kwenye programu — linarekebishwa…',
+      statusFixed: 'Imejengwa, imekaguliwa na kurekebishwa. Ijaribu upande wa kulia, omba mabadiliko chini, au uipakue.',
+      statusBuilt: 'Imejengwa. Ijaribu upande wa kulia, omba mabadiliko chini, au uipakue.',
+      errorCouldNotGenerate: 'Imeshindwa kutengeneza programu hiyo.',
+      errorNoApp: 'Tengeneza programu kwanza.',
+      errorNoInstruction: 'Sema unachotaka kubadilishwa.',
+      statusUpdated: 'Imesasishwa.',
+      errorCouldNotApply: 'Imeshindwa kutumia mabadiliko hayo.',
+      statusReverted: 'Imerudishwa kwenye toleo lililopita.',
+      errorIconLoad: 'Imeshindwa kupakia alama iliyopakiwa.',
+      errorZipLoad: 'Maktaba ya kubana imeshindwa kupakia — angalia muunganisho wako wa intaneti na upakie upya ukurasa.',
+      zippingLabel: 'Inabana…',
+      statusDownloaded: 'Imepakua {filename}.',
+      errorDownloadBuild: 'Imeshindwa kutengeneza upakuaji: {message}',
+      defaultAppName: 'Programu Yangu',
+      errorRequestFailedFreeLimit: 'Ombi limeshindwa na hali {status} — kikomo cha bure cha kila siku kinaweza kuwa kimefikiwa.',
+      errorRequestFailed: 'Ombi limeshindwa na hali {status}',
+      errorEmptyResponse: 'Kielelezo kimerejesha jibu tupu.'
+    },
+    sv: {
+      heroSubtitle: "Beskriv en app. Välj vilken sorts resultat du behöver och bygg och förbättra den sedan.",
+      modeWebLabel: "📱 Installerbar webbapp (PWA)",
+      modeUtilityLabel: "🧰 Liten verktygsapp",
+      modeMobileLabel: "📦 Startprojekt för mobilapp",
+      modeWebNote: "Bygger en riktig installerbar webbapp: en fungerande sida, ett manifest, offlinecache via en service worker och appikoner — ladda ner .zip-filen och lägg filerna var som helst via HTTPS (GitHub Pages, Netlify, Cloudflare Pages, din egen domän). Besökare kan välja \"Lägg till på hemskärmen\" för en appliknande ikon.",
+      modeWebHint: "Packa upp och ladda upp alla filer tillsammans till valfri statisk webbhotell via HTTPS — PWA:er kräver det. Inget här behöver någon server utöver vanlig filhosting.",
+      modeUtilityNote: "Bygger en fristående HTML-fil — ett fungerande litet verktyg, ingen installation och ingen hosting krävs. Öppna bara filen, eller lägg upp den var som helst.",
+      modeUtilityHint: "Laddar ner en enda .html-fil. Öppna den direkt, eller ladda upp den var som helst för att dela den.",
+      modeMobileNote: "Ingen webbläsare kan kompilera en riktig installerbar Android/iOS-app direkt — det kräver Android Studio eller Xcode. I stället byggs ett riktigt startprojekt (med Capacitor, ett standardverktyg för att paketera webbappar som native-appar) med din genererade app redan inkopplad, plus en steg-för-steg-README för att slutföra bygget med gratisverktyg utanför webbläsaren.",
+      modeMobileHint: "Laddar ner en projektmapp som .zip. Se dess README.md för de återstående stegen (Node.js + Android Studio/Xcode, bygga och publicera).",
+      connectionHeading: "Anslutning",
+      providerLabel: "AI-leverantör",
+      apiKeyLabelOpenai: "Din OpenAI API-nyckel",
+      apiKeyLabelAnthropic: "Din Anthropic API-nyckel",
+      apiKeyHint: "Används bara för att anropa leverantören ovan direkt från din webbläsare. Sparas aldrig.",
+      freeNoticeText: "✓ Gratis att använda — delar en begränsad daglig kapacitet. Byt till OpenAI/Anthropic ovan med din egen nyckel om den slutar fungera.",
+      modelLabel: "Textmodell",
+      yourAppHeading: "Din app",
+      appNameLabel: "Appens namn",
+      appNamePlaceholder: "Sysslolistan",
+      appBriefLabel: "Beskriv vad den ska göra",
+      appBriefPlaceholder: "t.ex. En enkel veckolista för hushållssysslor för ett hushåll på 4 — tilldela sysslor till personer, bocka av dem och nollställ varje måndag. Kom ihåg allt mellan besöken.",
+      themeColorLabel: "Temafärg",
+      iconLabel: "Appikon (valfritt)",
+      iconUploadLabel: "+ Ladda upp en ikon",
+      replaceIconLabel: "Byt ikon",
+      removeLabel: "Ta bort",
+      iconHint: "Lämna tomt för att automatiskt skapa en enkel bokstavsikon av appens namn.",
+      packageIdLabel: "Paket-/bundle-ID",
+      packageIdHint: "Android/iOS-appens identifierare — välj något unikt (omvänd domän-stil) innan du publicerar. Lämna tomt för att använda com.example.<app-slug>.",
+      generateBtnLabel: "✨ Skapa app",
+      previewTitle: "APP FORGE — FÖRHANDSVISNING",
+      statusNotStarted: "INTE PÅBÖRJAD",
+      statusBuilding: "BYGGER",
+      statusReady: "REDO",
+      statusFailed: "MISSLYCKADES",
+      stageEmptyStrong: "Inget byggt ännu.",
+      stageEmptyText: "Beskriv din app till vänster och klicka på Skapa.",
+      refinePlaceholder: "Be om en ändring, t.ex. 'lägg till mörkt läge'",
+      applyBtnLabel: "Verkställ",
+      applyingLabel: "Verkställer…",
+      undoBtnLabel: "↶ Ångra",
+      downloadZipLabel: "⬇ Ladda ner .zip",
+      downloadHtmlLabel: "⬇ Ladda ner app.html",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a> — gratis att använda, inget konto behövs. Ingenting du skriver här sparas någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      buildingLabel: "Bygger…",
+      errorNoApiKey: "Lägg till din API-nyckel först.",
+      errorNoBrief: "Beskriv appen du vill ha.",
+      statusFixing: "Hittade ett problem i appen — åtgärdar det…",
+      statusFixed: "Byggd, kontrollerad och åtgärdad. Prova den till höger, be om ändringar nedan eller ladda ner den.",
+      statusBuilt: "Byggd. Prova den till höger, be om ändringar nedan eller ladda ner den.",
+      errorCouldNotGenerate: "Kunde inte skapa den appen.",
+      errorNoApp: "Skapa en app först.",
+      errorNoInstruction: "Skriv vad du vill ändra.",
+      statusUpdated: "Uppdaterad.",
+      errorCouldNotApply: "Kunde inte verkställa ändringen.",
+      statusReverted: "Återställd till föregående version.",
+      errorIconLoad: "Kunde inte ladda den uppladdade ikonen.",
+      errorZipLoad: "Zip-biblioteket kunde inte laddas — kontrollera din internetanslutning och ladda om sidan.",
+      zippingLabel: "Packar…",
+      statusDownloaded: "Laddade ner {filename}.",
+      errorDownloadBuild: "Kunde inte skapa nedladdningen: {message}",
+      defaultAppName: "Min app",
+      errorRequestFailedFreeLimit: "Anropet misslyckades med status {status} — den dagliga gratisgränsen kan ha nåtts.",
+      errorRequestFailed: "Anropet misslyckades med status {status}",
+      errorEmptyResponse: "Modellen returnerade ett tomt svar."
+    },
+    de: {
+      heroSubtitle: "Beschreibe eine App. Wähle, welche Art von Ergebnis du brauchst, und baue und verfeinere sie dann.",
+      modeWebLabel: "📱 Installierbare Web-App (PWA)",
+      modeUtilityLabel: "🧰 Kleine Hilfs-App",
+      modeMobileLabel: "📦 Starterprojekt für eine Mobil-App",
+      modeWebNote: "Erstellt eine echte installierbare Web-App: eine funktionierende Seite, ein Manifest, Offline-Caching über einen Service Worker und App-Symbole — lade die .zip herunter und hoste die Dateien irgendwo über HTTPS (GitHub Pages, Netlify, Cloudflare Pages, deine eigene Domain). Besucher können sie mit \"Zum Startbildschirm hinzufügen\" wie eine App ablegen.",
+      modeWebHint: "Entpacke alle Dateien und lade sie zusammen auf einen beliebigen statischen Host mit HTTPS hoch — PWAs setzen das voraus. Mehr als einfaches Datei-Hosting wird nicht benötigt.",
+      modeUtilityNote: "Erstellt eine einzige, eigenständige HTML-Datei — ein funktionierendes kleines Werkzeug, ohne Installation und ohne Hosting. Öffne einfach die Datei oder hoste sie irgendwo.",
+      modeUtilityHint: "Lädt eine einzelne .html-Datei herunter. Öffne sie direkt oder lade sie irgendwo hoch, um sie zu teilen.",
+      modeMobileNote: "Kein Browser kann direkt eine echte installierbare Android-/iOS-App kompilieren — dafür braucht man Android Studio oder Xcode. Stattdessen wird hier ein echtes Starterprojekt erstellt (mit Capacitor, einem Standardwerkzeug, um Web-Apps als native Apps zu verpacken), in das deine erzeugte App bereits eingebunden ist, plus eine Schritt-für-Schritt-README, um den Build mit kostenlosen Werkzeugen außerhalb des Browsers abzuschließen.",
+      modeMobileHint: "Lädt einen Projektordner als .zip herunter. Die übrigen Schritte stehen in der README.md (Node.js + Android Studio/Xcode, Build und Veröffentlichung).",
+      connectionHeading: "Verbindung",
+      providerLabel: "KI-Anbieter",
+      apiKeyLabelOpenai: "Dein OpenAI-API-Schlüssel",
+      apiKeyLabelAnthropic: "Dein Anthropic-API-Schlüssel",
+      apiKeyHint: "Wird nur verwendet, um den oben gewählten Anbieter direkt aus deinem Browser aufzurufen. Wird nie gespeichert.",
+      freeNoticeText: "✓ Kostenlos nutzbar — teilt sich eine begrenzte Tageskapazität. Wechsle oben zu OpenAI/Anthropic mit deinem eigenen Schlüssel, falls es nicht mehr funktioniert.",
+      modelLabel: "Textmodell",
+      yourAppHeading: "Deine App",
+      appNameLabel: "App-Name",
+      appNamePlaceholder: "Haushaltsplaner",
+      appBriefLabel: "Beschreibe, was sie tun soll",
+      appBriefPlaceholder: "z. B. Ein einfacher Wochenplan für Hausarbeiten in einem 4-Personen-Haushalt — Aufgaben an Personen verteilen, abhaken und jeden Montag zurücksetzen. Alles zwischen den Besuchen merken.",
+      themeColorLabel: "Designfarbe",
+      iconLabel: "App-Symbol (optional)",
+      iconUploadLabel: "+ Symbol hochladen",
+      replaceIconLabel: "Symbol ersetzen",
+      removeLabel: "Entfernen",
+      iconHint: "Leer lassen, um automatisch ein einfaches Buchstaben-Symbol aus dem App-Namen zu erzeugen.",
+      packageIdLabel: "Paket-/Bundle-ID",
+      packageIdHint: "Die Android-/iOS-App-Kennung — wähle vor der Veröffentlichung etwas Eindeutiges (umgekehrte Domain-Schreibweise). Leer lassen, um com.example.<app-slug> zu verwenden.",
+      generateBtnLabel: "✨ App erstellen",
+      previewTitle: "APP FORGE — VORSCHAU",
+      statusNotStarted: "NICHT GESTARTET",
+      statusBuilding: "WIRD GEBAUT",
+      statusReady: "BEREIT",
+      statusFailed: "FEHLGESCHLAGEN",
+      stageEmptyStrong: "Noch nichts gebaut.",
+      stageEmptyText: "Beschreibe deine App links und klicke auf Erstellen.",
+      refinePlaceholder: "Bitte um eine Änderung, z. B. 'füge einen Dunkelmodus-Schalter hinzu'",
+      applyBtnLabel: "Anwenden",
+      applyingLabel: "Wird angewendet…",
+      undoBtnLabel: "↶ Rückgängig",
+      downloadZipLabel: "⬇ .zip herunterladen",
+      downloadHtmlLabel: "⬇ app.html herunterladen",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a> — kostenlos, kein Konto nötig. Nichts, was du hier eingibst, wird irgendwo gespeichert. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      buildingLabel: "Wird gebaut…",
+      errorNoApiKey: "Füge zuerst deinen API-Schlüssel hinzu.",
+      errorNoBrief: "Beschreibe die gewünschte App.",
+      statusFixing: "Ein Problem in der App gefunden — wird behoben…",
+      statusFixed: "Gebaut, geprüft und korrigiert. Probiere sie rechts aus, bitte unten um Änderungen oder lade sie herunter.",
+      statusBuilt: "Gebaut. Probiere sie rechts aus, bitte unten um Änderungen oder lade sie herunter.",
+      errorCouldNotGenerate: "Diese App konnte nicht erstellt werden.",
+      errorNoApp: "Erstelle zuerst eine App.",
+      errorNoInstruction: "Sag, was geändert werden soll.",
+      statusUpdated: "Aktualisiert.",
+      errorCouldNotApply: "Die Änderung konnte nicht angewendet werden.",
+      statusReverted: "Zur vorherigen Version zurückgekehrt.",
+      errorIconLoad: "Das hochgeladene Symbol konnte nicht geladen werden.",
+      errorZipLoad: "Die Zip-Bibliothek konnte nicht geladen werden — prüfe deine Internetverbindung und lade die Seite neu.",
+      zippingLabel: "Wird gepackt…",
+      statusDownloaded: "{filename} heruntergeladen.",
+      errorDownloadBuild: "Der Download konnte nicht erstellt werden: {message}",
+      defaultAppName: "Meine App",
+      errorRequestFailedFreeLimit: "Anfrage mit Status {status} fehlgeschlagen — das kostenlose Tageslimit ist eventuell erreicht.",
+      errorRequestFailed: "Anfrage mit Status {status} fehlgeschlagen",
+      errorEmptyResponse: "Das Modell hat eine leere Antwort zurückgegeben."
+    },
+    pt: {
+      heroSubtitle: "Descreva um app. Escolha o tipo de resultado de que precisa e depois crie e refine-o.",
+      modeWebLabel: "📱 App web instalável (PWA)",
+      modeUtilityLabel: "🧰 Pequeno app utilitário",
+      modeMobileLabel: "📦 Projeto inicial de app móvel",
+      modeWebNote: "Cria um app web instalável de verdade: uma página funcional, um manifesto, cache offline por service worker e ícones do app — baixe o .zip e hospede os arquivos em qualquer lugar com HTTPS (GitHub Pages, Netlify, Cloudflare Pages, seu próprio domínio). Os visitantes podem usar \"Adicionar à tela inicial\" para ter um ícone como de app.",
+      modeWebHint: "Descompacte e envie todos os arquivos juntos para qualquer hospedagem estática com HTTPS — os PWAs exigem isso. Nada aqui precisa de servidor além de uma hospedagem simples de arquivos.",
+      modeUtilityNote: "Cria um único arquivo HTML independente — uma pequena ferramenta funcional, sem instalação nem hospedagem. Basta abrir o arquivo ou hospedá-lo onde quiser.",
+      modeUtilityHint: "Baixa um único arquivo .html. Abra-o diretamente ou envie-o para qualquer lugar para compartilhar.",
+      modeMobileNote: "Nenhum navegador consegue compilar diretamente um app Android/iOS instalável de verdade — isso exige Android Studio ou Xcode. Em vez disso, aqui é criado um projeto inicial real (com Capacitor, uma ferramenta padrão para empacotar apps web como apps nativos) com o app gerado já integrado, mais um README passo a passo para concluir a compilação com ferramentas gratuitas fora do navegador.",
+      modeMobileHint: "Baixa uma pasta de projeto em .zip. Veja o README.md para os passos restantes (Node.js + Android Studio/Xcode, compilação e publicação).",
+      connectionHeading: "Conexão",
+      providerLabel: "Provedor de IA",
+      apiKeyLabelOpenai: "Sua chave de API da OpenAI",
+      apiKeyLabelAnthropic: "Sua chave de API da Anthropic",
+      apiKeyHint: "Usada apenas para chamar o provedor acima diretamente do seu navegador. Nunca é armazenada.",
+      freeNoticeText: "✓ Uso gratuito — compartilha uma capacidade diária limitada. Mude acima para OpenAI/Anthropic com sua própria chave se parar de funcionar.",
+      modelLabel: "Modelo de texto",
+      yourAppHeading: "Seu app",
+      appNameLabel: "Nome do app",
+      appNamePlaceholder: "Controle de Tarefas",
+      appBriefLabel: "Descreva o que ele deve fazer",
+      appBriefPlaceholder: "ex.: Um controle semanal simples de tarefas domésticas para uma casa de 4 pessoas — atribua tarefas, marque como feitas e reinicie toda segunda-feira. Lembre tudo entre as visitas.",
+      themeColorLabel: "Cor do tema",
+      iconLabel: "Ícone do app (opcional)",
+      iconUploadLabel: "+ Enviar um ícone",
+      replaceIconLabel: "Substituir ícone",
+      removeLabel: "Remover",
+      iconHint: "Deixe em branco para gerar automaticamente um ícone simples com a inicial do nome do app.",
+      packageIdLabel: "ID do pacote / bundle",
+      packageIdHint: "O identificador do app Android/iOS — escolha algo único (estilo de domínio invertido) antes de publicar. Deixe em branco para usar com.example.<app-slug>.",
+      generateBtnLabel: "✨ Gerar app",
+      previewTitle: "APP FORGE — PRÉVIA",
+      statusNotStarted: "NÃO INICIADO",
+      statusBuilding: "CRIANDO",
+      statusReady: "PRONTO",
+      statusFailed: "FALHOU",
+      stageEmptyStrong: "Nada criado ainda.",
+      stageEmptyText: "Descreva seu app à esquerda e clique em Gerar.",
+      refinePlaceholder: "Peça uma mudança, ex.: 'adicione um botão de modo escuro'",
+      applyBtnLabel: "Aplicar",
+      applyingLabel: "Aplicando…",
+      undoBtnLabel: "↶ Desfazer",
+      downloadZipLabel: "⬇ Baixar .zip",
+      downloadHtmlLabel: "⬇ Baixar app.html",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a> — gratuito, sem precisar de conta. Nada do que você digita aqui é armazenado. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>",
+      buildingLabel: "Criando…",
+      errorNoApiKey: "Adicione sua chave de API primeiro.",
+      errorNoBrief: "Descreva o app que você quer.",
+      statusFixing: "Encontrei um problema no app — corrigindo…",
+      statusFixed: "Criado, verificado e corrigido. Experimente à direita, peça mudanças abaixo ou baixe.",
+      statusBuilt: "Criado. Experimente à direita, peça mudanças abaixo ou baixe.",
+      errorCouldNotGenerate: "Não foi possível gerar esse app.",
+      errorNoApp: "Gere um app primeiro.",
+      errorNoInstruction: "Diga o que você quer mudar.",
+      statusUpdated: "Atualizado.",
+      errorCouldNotApply: "Não foi possível aplicar essa mudança.",
+      statusReverted: "Voltou à versão anterior.",
+      errorIconLoad: "Não foi possível carregar o ícone enviado.",
+      errorZipLoad: "A biblioteca zip não carregou — verifique sua conexão com a internet e recarregue a página.",
+      zippingLabel: "Compactando…",
+      statusDownloaded: "{filename} baixado.",
+      errorDownloadBuild: "Não foi possível criar o download: {message}",
+      defaultAppName: "Meu app",
+      errorRequestFailedFreeLimit: "A solicitação falhou com status {status} — o limite diário gratuito pode ter sido atingido.",
+      errorRequestFailed: "A solicitação falhou com status {status}",
+      errorEmptyResponse: "O modelo retornou uma resposta vazia."
+    },
+    fr: {
+      heroSubtitle: "Décrivez une application. Choisissez le type de résultat souhaité, puis créez-la et affinez-la.",
+      modeWebLabel: "📱 Application web installable (PWA)",
+      modeUtilityLabel: "🧰 Petite application utilitaire",
+      modeMobileLabel: "📦 Projet de démarrage d'application mobile",
+      modeWebNote: "Crée une véritable application web installable : une page fonctionnelle, un manifeste, une mise en cache hors ligne via un service worker et des icônes d'application — téléchargez le .zip et hébergez les fichiers n'importe où en HTTPS (GitHub Pages, Netlify, Cloudflare Pages, votre propre domaine). Les visiteurs peuvent faire \"Ajouter à l'écran d'accueil\" pour obtenir une icône comme une application.",
+      modeWebHint: "Décompressez et téléversez tous les fichiers ensemble sur n'importe quel hébergeur statique en HTTPS — les PWA l'exigent. Rien ici ne nécessite de serveur au-delà d'un simple hébergement de fichiers.",
+      modeUtilityNote: "Crée un seul fichier HTML autonome — un petit outil fonctionnel, sans installation ni hébergement. Ouvrez simplement le fichier ou hébergez-le où vous voulez.",
+      modeUtilityHint: "Télécharge un seul fichier .html. Ouvrez-le directement ou mettez-le en ligne n'importe où pour le partager.",
+      modeMobileNote: "Aucun navigateur ne peut compiler directement une véritable application Android/iOS installable — il faut Android Studio ou Xcode. Ici, on crée plutôt un vrai projet de démarrage (avec Capacitor, un outil standard pour transformer des applications web en applications natives) dans lequel votre application générée est déjà intégrée, plus un README pas à pas pour terminer la compilation avec des outils gratuits en dehors du navigateur.",
+      modeMobileHint: "Télécharge un dossier de projet en .zip. Consultez son README.md pour les étapes restantes (Node.js + Android Studio/Xcode, compilation et publication).",
+      connectionHeading: "Connexion",
+      providerLabel: "Fournisseur d'IA",
+      apiKeyLabelOpenai: "Votre clé API OpenAI",
+      apiKeyLabelAnthropic: "Votre clé API Anthropic",
+      apiKeyHint: "Utilisée uniquement pour appeler le fournisseur ci-dessus directement depuis votre navigateur. Jamais enregistrée.",
+      freeNoticeText: "✓ Gratuit — partage une capacité quotidienne limitée. Passez à OpenAI/Anthropic ci-dessus avec votre propre clé si cela cesse de fonctionner.",
+      modelLabel: "Modèle de texte",
+      yourAppHeading: "Votre application",
+      appNameLabel: "Nom de l'application",
+      appNamePlaceholder: "Suivi des corvées",
+      appBriefLabel: "Décrivez ce qu'elle doit faire",
+      appBriefPlaceholder: "ex. : Un suivi hebdomadaire simple des corvées pour un foyer de 4 personnes — attribuer les tâches, les cocher et tout remettre à zéro chaque lundi. Tout mémoriser entre les visites.",
+      themeColorLabel: "Couleur du thème",
+      iconLabel: "Icône de l'application (facultatif)",
+      iconUploadLabel: "+ Importer une icône",
+      replaceIconLabel: "Remplacer l'icône",
+      removeLabel: "Supprimer",
+      iconHint: "Laissez vide pour générer automatiquement une icône simple avec l'initiale du nom de l'application.",
+      packageIdLabel: "ID de paquet / bundle",
+      packageIdHint: "L'identifiant de l'application Android/iOS — choisissez quelque chose d'unique (style domaine inversé) avant de publier. Laissez vide pour utiliser com.example.<app-slug>.",
+      generateBtnLabel: "✨ Générer l'application",
+      previewTitle: "APP FORGE — APERÇU",
+      statusNotStarted: "NON COMMENCÉ",
+      statusBuilding: "CONSTRUCTION",
+      statusReady: "PRÊT",
+      statusFailed: "ÉCHEC",
+      stageEmptyStrong: "Rien de créé pour l'instant.",
+      stageEmptyText: "Décrivez votre application à gauche et cliquez sur Générer.",
+      refinePlaceholder: "Demandez une modification, ex. : 'ajoute un bouton de mode sombre'",
+      applyBtnLabel: "Appliquer",
+      applyingLabel: "Application…",
+      undoBtnLabel: "↶ Annuler",
+      downloadZipLabel: "⬇ Télécharger le .zip",
+      downloadHtmlLabel: "⬇ Télécharger app.html",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a> — gratuit, sans compte. Rien de ce que vous saisissez ici n'est enregistré. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>",
+      buildingLabel: "Création…",
+      errorNoApiKey: "Ajoutez d'abord votre clé API.",
+      errorNoBrief: "Décrivez l'application souhaitée.",
+      statusFixing: "Problème trouvé dans l'application — correction en cours…",
+      statusFixed: "Créée, vérifiée et corrigée. Essayez-la à droite, demandez des modifications ci-dessous ou téléchargez-la.",
+      statusBuilt: "Créée. Essayez-la à droite, demandez des modifications ci-dessous ou téléchargez-la.",
+      errorCouldNotGenerate: "Impossible de générer cette application.",
+      errorNoApp: "Générez d'abord une application.",
+      errorNoInstruction: "Dites ce que vous voulez modifier.",
+      statusUpdated: "Mis à jour.",
+      errorCouldNotApply: "Impossible d'appliquer cette modification.",
+      statusReverted: "Retour à la version précédente.",
+      errorIconLoad: "Impossible de charger l'icône importée.",
+      errorZipLoad: "La bibliothèque zip n'a pas pu se charger — vérifiez votre connexion internet et rechargez la page.",
+      zippingLabel: "Compression…",
+      statusDownloaded: "{filename} téléchargé.",
+      errorDownloadBuild: "Impossible de créer le téléchargement : {message}",
+      defaultAppName: "Mon application",
+      errorRequestFailedFreeLimit: "La requête a échoué avec le statut {status} — la limite quotidienne gratuite est peut-être atteinte.",
+      errorRequestFailed: "La requête a échoué avec le statut {status}",
+      errorEmptyResponse: "Le modèle a renvoyé une réponse vide."
+    }
+  });
+
+  applyProvider();
+  setMode('web');
+  I18N.onChange(function () {
+    applyProvider();
+    setMode(currentMode);
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

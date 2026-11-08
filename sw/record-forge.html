@@ -1,0 +1,1663 @@
+<!-- Generated from /record-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sw" data-en-title="Free screen recorder online with voice — no download — Record Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sw';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sw/record-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kirekodi skrini mtandaoni bure chenye sauti — bila kupakua — Record Forge | MigaBuilder</title>
+<meta name="description" content="Record Forge hurekodi skrini yako pamoja na maelezo ya sauti moja kwa moja kwenye kivinjari chako, ili utengeneze mafunzo na maonyesho bila kusakinisha chochote.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kirekodi skrini mtandaoni bure chenye sauti — bila kupakua — Record Forge">
+<meta property="og:description" content="Record Forge hurekodi skrini yako pamoja na maelezo ya sauti moja kwa moja kwenye kivinjari chako, ili utengeneze mafunzo na maonyesho bila kusakinisha chochote.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/record-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/sw/record-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kirekodi skrini mtandaoni bure chenye sauti — bila kupakua — Record Forge">
+<meta name="twitter:description" content="Record Forge hurekodi skrini yako pamoja na maelezo ya sauti moja kwa moja kwenye kivinjari chako, ili utengeneze mafunzo na maonyesho bila kusakinisha chochote.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/record-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="i18n.js"></script>
+<script src="i18n/record-forge.js"></script>
+<script src="media-utils.js"></script>
+<script src="youtube-upload.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 22px 22px 26px; max-height: calc(100vh - 40px); overflow-y: auto;
+    position: sticky; top: 20px;
+  }
+  @media (max-width: 900px) { .panel { position: static; max-height: none; } }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="text"], input[type="number"], textarea, select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 9px 10px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+
+  .check-row { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; margin-bottom: 12px; }
+  .check-row input { margin-top: 3px; flex: none; width: auto; }
+  .check-row .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.72); margin-top: 2px; }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 12px; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .draft-btn.danger { background: var(--error); color: #fff; }
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .draft-btn { flex: 1; }
+
+  .error-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+  .status-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(78,158,115,0.14); border: 1px solid rgba(78,158,115,0.4);
+    border-radius: var(--radius); font-size: 13px; color: #244731; display: none; line-height: 1.5;
+  }
+  .status-box.show { display: block; }
+
+  .rec-status { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; margin-top: 4px; }
+  .rec-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(22,32,43,0.25); flex: none; }
+  .rec-status.live .rec-dot { background: var(--error); animation: pulse 1.4s ease-in-out infinite; }
+  .rec-status.paused .rec-dot { background: var(--amber); }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .stage-wrap { background: #000; border-radius: 2px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #liveView, #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  .sheet-empty { margin: auto; text-align: center; color: rgba(237,234,224,0.45); font-size: 14px; max-width: 340px; padding: 40px 20px; }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(237,234,224,0.75); margin-bottom: 6px; }
+
+  .progress-wrap { margin-top: 14px; display: none; }
+  .progress-wrap.show { display: block; }
+  .progress-label { font-size: 12.5px; color: rgba(237,234,224,0.7); margin-bottom: 6px; display:flex; justify-content:space-between; }
+  .progress-track { height: 8px; border-radius: 4px; background: rgba(237,234,224,0.15); overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--line-cyan); transition: width 0.1s linear; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .table-actions button.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+
+  .trim-section { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line-cyan-dim); display: none; }
+  .trim-section.show { display: block; }
+  .trim-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 14px; margin: 0 0 10px; color: rgba(237,234,224,0.9); }
+  .trim-section label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: rgba(237,234,224,0.85); }
+  .trim-section input { font-size: 13.5px; padding: 8px 10px; border-radius: var(--radius); border: 1px solid var(--line-cyan-dim); background: var(--navy); color: var(--paper); width: 100%; }
+  .trim-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .trim-hint { font-size: 12px; color: rgba(237,234,224,0.55); line-height: 1.5; margin-top: 4px; }
+
+  .yt-panel { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line-cyan-dim); }
+  .yt-panel h2 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; margin: 0 0 10px; color: rgba(237,234,224,0.9); }
+  .yt-field { margin-bottom: 12px; }
+  .yt-field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: rgba(237,234,224,0.85); }
+  .yt-field input, .yt-field textarea, .yt-field select {
+    width: 100%; font-size: 13.5px; padding: 8px 10px; border-radius: var(--radius);
+    border: 1px solid var(--line-cyan-dim); background: var(--navy); color: var(--paper);
+  }
+  .yt-hint { font-size: 12px; color: rgba(237,234,224,0.55); line-height: 1.5; margin-top: 4px; }
+  .yt-hint a { color: var(--line-cyan); }
+  details.yt-setup summary { cursor: pointer; color: var(--paper); font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+  details.yt-setup ol { margin: 10px 0 0; padding-left: 20px; line-height: 1.7; color: rgba(237,234,224,0.75); font-size: 13px; }
+  details.yt-setup code { background: rgba(237,234,224,0.1); padding: 1px 5px; border-radius: 3px; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ninaweza kufanya nini na rekodi?","acceptedAnswer":{"@type":"Answer","text":"Ipunguze, ipakue kama video ya WebM, ipakie YouTube, au iunganishe na klipu nyingine katika Merge Forge."}},{"@type":"Question","name":"Je, Record Forge ni bure?","acceptedAnswer":{"@type":"Answer","text":"Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."}},{"@type":"Question","name":"Je, faili zangu zinapakiwa?","acceptedAnswer":{"@type":"Answer","text":"Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako."}}],"inLanguage":"sw"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/record-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/record-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/record-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/record-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/record-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/record-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/record-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/record-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/record-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/record-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Record Forge</h1>
+    <p data-i18n="heroSubtitle">Record your screen with live voice narration — trim it, save it, or send it straight to YouTube.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+
+    <div class="section-title" data-i18n="captureOptionsHeading">Capture options</div>
+    <label class="check-row">
+      <input type="checkbox" id="micCheckbox" checked>
+      <span data-i18n-html="micLabelHtml">🎙️ Record my voice while capturing
+        <span class="opt-sub">Narrate what you're doing as you record — your microphone is mixed into the video's audio track.</span>
+      </span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="sysAudioCheckbox">
+      <span data-i18n-html="sysAudioLabelHtml">🔊 Include tab/system audio
+        <span class="opt-sub">Only works if you choose to share a browser tab (and check "Share tab audio" in the picker) — whole-desktop audio isn't supported on every OS.</span>
+      </span>
+    </label>
+    <label class="check-row">
+      <input type="checkbox" id="facecamCheckbox">
+      <span data-i18n-html="facecamLabelHtml">📷 Show my webcam in a corner bubble
+        <span class="opt-sub">Composites a small circular webcam feed into the bottom-right corner of the recording — Loom-style, good for tutorials.</span>
+      </span>
+    </label>
+    <p class="hint" data-i18n="startClickHint" style="margin: 0 0 14px;">When you click Start, your browser will ask which screen, window, or tab to share.</p>
+    <p class="hint" data-i18n-html="otherTabHintHtml" style="margin: 0 0 14px;"><strong>Need to show something on another MigaBuilder page while recording?</strong> Open it in a new tab (right-click a link → "Open in new tab", or Ctrl/Cmd+click) instead of clicking away from this tab — navigating this tab to another page ends the recording and loses it, since the recording only exists in this page's memory. Screen sharing lets you switch to any other tab or window without stopping the recording, as long as this tab itself stays open.</p>
+
+    <button type="button" class="draft-btn" id="startBtn" data-i18n="startBtnLabel">🔴 Start recording</button>
+    <div class="btn-row" id="activeControls" style="display:none; margin-top:8px;">
+      <button type="button" class="draft-btn secondary" id="pauseBtn" data-i18n="pauseBtnLabel">⏸ Pause</button>
+      <button type="button" class="draft-btn secondary" id="muteMicBtn" data-i18n="muteMicLabel" style="display:none;">🔇 Mute mic</button>
+      <button type="button" class="draft-btn danger" id="stopBtn" data-i18n="stopBtnLabel">⏹ Stop</button>
+    </div>
+    <div class="rec-status" id="recStatus" style="display:none;"><span class="rec-dot"></span><span id="recStatusText">00:00</span></div>
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="section-title" data-i18n="trimHeading">Trim</div>
+    <p class="hint" id="trimPlaceholderHint" data-i18n="trimPlaceholderHintText">Record something first, then trim it here.</p>
+    <div id="trimControlsWrap" style="display:none;">
+      <div class="field">
+        <div class="row-2">
+          <div>
+            <label for="trimStartInput" data-i18n="trimStartLabel">Start (s)</label>
+            <input type="number" id="trimStartInput" value="0" min="0" step="0.1">
+            <button type="button" class="draft-btn secondary" id="setStartBtn" data-i18n="useCurrentPositionLabel" style="margin-top:6px;">Use current position</button>
+          </div>
+          <div>
+            <label for="trimEndInput" data-i18n="trimEndLabel">End (s)</label>
+            <input type="number" id="trimEndInput" value="0" min="0" step="0.1">
+            <button type="button" class="draft-btn secondary" id="setEndBtn" data-i18n="useCurrentPositionLabel" style="margin-top:6px;">Use current position</button>
+          </div>
+        </div>
+        <p class="hint" data-i18n="trimPlayHint">Play the recording on the right and pause where you want each point, then click "Use current position".</p>
+      </div>
+      <div class="btn-row">
+        <button type="button" class="draft-btn secondary" id="applyTrimBtn" data-i18n="applyTrimLabel">✂️ Apply trim</button>
+        <button type="button" class="draft-btn secondary" id="resetTrimBtn" data-i18n="resetTrimLabel">↺ Reset</button>
+      </div>
+      <p class="hint" data-i18n-html="trimMoreHintHtml">Need captions, translation, a watermark, or speed changes too? Download below, then open it in <a href="/sw/clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a>. Combining several recordings into one video? Use <a href="/sw/merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a> — it can patch multiple clips together and trim each one.</p>
+    </div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="previewTitle">RECORD FORGE — PREVIEW</span>
+      <span id="titleBlockRight" data-i18n="statusNotStarted">NOT STARTED</span>
+    </div>
+
+    <div class="stage-wrap" id="stageWrap">
+      <div class="sheet-empty" id="stageEmpty">
+        <strong data-i18n="stageEmptyStrong">Nothing recorded yet.</strong>
+        <span data-i18n="stageEmptyText">Choose your capture options on the left, then hit Start recording.</span>
+      </div>
+      <video id="liveView" autoplay muted playsinline style="display:none;"></video>
+      <video id="resultVideo" controls style="display:none;"></video>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-label"><span id="progressLabel" data-i18n="progressWorking">Working…</span><span id="progressPct">0%</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="cancelTrimBtn" data-i18n="cancelLabel" style="display:none;">✕ Cancel</button>
+      <button type="button" id="downloadVideoBtn" disabled class="primary" data-i18n="downloadBtnLabel">⬇ Download recording (.webm)</button>
+    </div>
+    <p class="hint" data-i18n="recordingHint" style="color: rgba(237,234,224,0.55); margin-top: 8px;">Recording happens live in your browser and never leaves it unless you use the YouTube button below. Screen recording needs a desktop browser (Chrome, Edge, or Firefox) — it isn't supported on mobile.</p>
+
+    <div class="yt-panel">
+      <h2 data-i18n="ytHeading">Upload straight to YouTube</h2>
+      <div class="yt-field">
+        <label for="ytClientId" data-i18n="ytClientIdLabel">Your Google OAuth Client ID</label>
+        <input type="text" id="ytClientId" placeholder="xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com">
+        <p class="yt-hint" data-i18n="ytClientIdHint">This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Record Forge only sends it to Google, never anywhere else.</p>
+      </div>
+      <button type="button" class="draft-btn secondary" id="connectYtBtn" data-i18n="connectGoogleLabel">Connect Google account</button>
+      <div class="status-box" id="ytConnectedBox" data-i18n="ytConnectedText">✓ Connected to your Google account.</div>
+
+      <div id="ytUploadFields" style="display:none; margin-top:14px;">
+        <div class="yt-field"><label for="ytTitle" data-i18n="ytTitleLabel">Video title</label><input type="text" id="ytTitle" data-i18n-placeholder="ytTitlePlaceholder" placeholder="How to set up my project"></div>
+        <div class="yt-field"><label for="ytDesc" data-i18n="ytDescLabel">Description</label><textarea id="ytDesc" data-i18n-placeholder="ytDescPlaceholder" placeholder="Screen recording made with Record Forge."></textarea></div>
+        <div class="yt-field"><label for="ytTags" data-i18n="ytTagsLabel">Tags (comma separated)</label><input type="text" id="ytTags" data-i18n-placeholder="ytTagsPlaceholder" placeholder="tutorial, screen recording, how-to"></div>
+        <div class="row-2" style="margin-bottom:12px;">
+          <div class="yt-field" style="margin-bottom:0;">
+            <label for="ytPrivacy" data-i18n="ytPrivacyLabel">Privacy</label>
+            <select id="ytPrivacy">
+              <option value="private" data-i18n="privacyPrivate" selected>Private</option>
+              <option value="unlisted" data-i18n="privacyUnlisted">Unlisted</option>
+              <option value="public" data-i18n="privacyPublic">Public</option>
+            </select>
+          </div>
+          <div class="yt-field" style="margin-bottom:0;">
+            <label for="ytCategory" data-i18n="ytCategoryLabel">Category</label>
+            <select id="ytCategory">
+              <option value="27" data-i18n="categoryEducation" selected>Education</option>
+              <option value="26" data-i18n="categoryHowto">Howto &amp; Style</option>
+              <option value="28" data-i18n="categoryScience">Science &amp; Technology</option>
+              <option value="22" data-i18n="categoryPeople">People &amp; Blogs</option>
+              <option value="24" data-i18n="categoryEntertainment">Entertainment</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="draft-btn" id="uploadYtBtn" data-i18n="uploadToYoutubeLabel" disabled>Upload to YouTube</button>
+        <p class="yt-hint" data-i18n="ytUploadHint">Record something first, then upload it here. Uploads go directly from your browser to Google using your own account — this tool never sees or stores the video or your login.</p>
+      </div>
+      <div class="status-box" id="ytResultBox"></div>
+      <div class="error-box" id="ytErrorBox"></div>
+
+      <details class="yt-setup" style="margin-top:16px;">
+        <summary data-i18n="ytSetupSummary">One-time setup: get a Google OAuth Client ID (click to expand)</summary>
+        <ol data-i18n-html="ytSetupStepsHtml">
+          <li>Go to the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, create (or pick) a project, and enable the <strong>YouTube Data API v3</strong>.</li>
+          <li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, set it up as "External", add the <code>youtube.upload</code> scope, and add your own Google account under "Test users" (this avoids needing Google's full app-verification review, since only you will use it).</li>
+          <li>Under <strong>APIs &amp; Services → Credentials</strong>, create an <strong>OAuth client ID</strong> of type "Web application". Add the exact URL this page is running at (e.g. <code>https://your-username.github.io</code>) under "Authorized JavaScript origins".</li>
+          <li>Copy the generated Client ID (it ends in <code>.apps.googleusercontent.com</code>) into the field above.</li>
+          <li>Click "Connect Google account" and approve access — Google will warn that the app is unverified, which is expected for a personal project; click through as the test user you added.</li>
+        </ol>
+        <p class="yt-hint" data-i18n-html="ytSetupFallbackHtml" style="margin-top:10px;">If any step here fails or your browser blocks the upload, you can always fall back to downloading the video file above and uploading it manually at <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.</p>
+      </details>
+    </div>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Record Forge</h2>
+  <p>Record Forge records your screen with live voice narration, right in your browser, so you can make tutorials and demos without installing anything.</p>
+  <h3>How to use Record Forge</h3>
+  <ol><li>Choose the screen or tab, microphone, and recording quality.</li><li>Press “Start recording”.</li><li>Demonstrate the task, stop the recording, and download the WebM file.</li></ol>
+  <h3>What can I do with the recording?</h3>
+  <p>Trim it, download it as a WebM video, upload it to YouTube, or combine it with other clips in Merge Forge.</p>
+  <h3>Is Record Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sw/clip-forge.html">Clip Forge</a> · <a href="/sw/media-convert.html">Media Convert</a> · <a href="/sw/voice-forge.html">Voice Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/sw/">MigaBuilder</a>. Your screen recording and microphone audio stay in your browser — nothing is uploaded unless you use the YouTube button, and that goes straight from your browser to your own Google account. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/record-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<video id="trimSourceVideo" style="display:none;" playsinline></video>
+<canvas id="trimCanvas" style="display:none;"></canvas>
+<video id="displaySourceVideo" style="display:none;" playsinline muted></video>
+<video id="webcamSourceVideo" style="display:none;" playsinline muted></video>
+<canvas id="facecamCanvas" style="display:none;"></canvas>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- element refs ----------
+  const micCheckbox = document.getElementById('micCheckbox');
+  const sysAudioCheckbox = document.getElementById('sysAudioCheckbox');
+  const facecamCheckbox = document.getElementById('facecamCheckbox');
+  const startBtn = document.getElementById('startBtn');
+  const activeControls = document.getElementById('activeControls');
+  const pauseBtn = document.getElementById('pauseBtn');
+  const muteMicBtn = document.getElementById('muteMicBtn');
+  const stopBtn = document.getElementById('stopBtn');
+  const displaySourceVideo = document.getElementById('displaySourceVideo');
+  const webcamSourceVideo = document.getElementById('webcamSourceVideo');
+  const facecamCanvas = document.getElementById('facecamCanvas');
+  const facecamCtx = facecamCanvas.getContext('2d');
+  const recStatus = document.getElementById('recStatus');
+  const recStatusText = document.getElementById('recStatusText');
+  const errorBox = document.getElementById('errorBox');
+
+  const trimPlaceholderHint = document.getElementById('trimPlaceholderHint');
+  const trimControlsWrap = document.getElementById('trimControlsWrap');
+  const trimStartInput = document.getElementById('trimStartInput');
+  const trimEndInput = document.getElementById('trimEndInput');
+  const setStartBtn = document.getElementById('setStartBtn');
+  const setEndBtn = document.getElementById('setEndBtn');
+  const applyTrimBtn = document.getElementById('applyTrimBtn');
+  const resetTrimBtn = document.getElementById('resetTrimBtn');
+
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const stageEmpty = document.getElementById('stageEmpty');
+  const liveView = document.getElementById('liveView');
+  const resultVideo = document.getElementById('resultVideo');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressPct = document.getElementById('progressPct');
+  const progressFill = document.getElementById('progressFill');
+  const cancelTrimBtn = document.getElementById('cancelTrimBtn');
+  const downloadVideoBtn = document.getElementById('downloadVideoBtn');
+
+  const trimSourceVideo = document.getElementById('trimSourceVideo');
+  const trimCanvas = document.getElementById('trimCanvas');
+  const trimCtx = trimCanvas.getContext('2d');
+
+
+  // ---------- state ----------
+  let displayStream = null;
+  let micStream = null;
+  let webcamStream = null;
+  let facecamAnimId = null;
+  let micMuted = false;
+  let mixedStream = null;
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let rawBlob = null;       // the untouched original recording, for "Reset"
+  let exportBlob = null;    // current blob backing the preview/download/upload
+  let recordingDuration = 0;
+  let recordingSeconds = 0;
+  let timerInterval = null;
+  let isPaused = false;
+  let sharedAudioCtx = null;
+  let trimVideoSourceNode = null; // an element can only ever be wrapped once, so this is created lazily and reused
+  let trimState = null;
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function formatTime(totalSeconds) {
+    const m = Math.floor(totalSeconds / 60);
+    const s = Math.floor(totalSeconds % 60);
+    return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+  }
+
+  // Chromium's MediaRecorder output doesn't embed a duration in the WebM
+  // container, so a freshly recorded blob reports Infinity until the
+  // browser is forced to compute it by seeking past the end once.
+  function resolveVideoDuration(videoEl) {
+    return new Promise(function (resolve) {
+      if (isFinite(videoEl.duration)) { resolve(videoEl.duration); return; }
+      videoEl.ontimeupdate = function () {
+        videoEl.ontimeupdate = null;
+        videoEl.currentTime = 0;
+        resolve(isFinite(videoEl.duration) ? videoEl.duration : 0);
+      };
+      videoEl.currentTime = 1e101;
+    });
+  }
+
+  // ---------- recording ----------
+  function stopMediaTracks() {
+    if (displayStream) { displayStream.getTracks().forEach(t => t.stop()); displayStream = null; }
+    if (micStream) { micStream.getTracks().forEach(t => t.stop()); micStream = null; }
+    if (webcamStream) { webcamStream.getTracks().forEach(t => t.stop()); webcamStream = null; }
+    if (facecamAnimId) { cancelAnimationFrame(facecamAnimId); facecamAnimId = null; }
+    displaySourceVideo.srcObject = null;
+    webcamSourceVideo.srcObject = null;
+  }
+
+  // Navigating this tab away — including to another MigaBuilder page — tears
+  // down this page's JS entirely, which silently destroys an in-progress
+  // recording or an unsaved one sitting in memory. Warn before that happens.
+  function hasWorkToLose() {
+    return (mediaRecorder && mediaRecorder.state !== 'inactive') || !!exportBlob;
+  }
+  window.addEventListener('beforeunload', function (e) {
+    if (hasWorkToLose()) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  startBtn.addEventListener('click', async function () {
+    clearError();
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getDisplayMedia) {
+      showError(I18N.t('errorNoScreenRecording'));
+      return;
+    }
+    if (!window.MediaRecorder) {
+      showError(I18N.t('errorNoMediaRecorder'));
+      return;
+    }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoRecordingFormat')); return; }
+
+    try {
+      displayStream = await navigator.mediaDevices.getDisplayMedia({
+        video: { frameRate: { ideal: 30 }, cursor: 'always' },
+        audio: sysAudioCheckbox.checked
+      });
+    } catch (err) {
+      showError(I18N.t('errorScreenSharingNotStarted').replace('{message}', err.message || err.name));
+      return;
+    }
+
+    if (micCheckbox.checked) {
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      } catch (err) {
+        showError(I18N.t('errorMicAccess').replace('{message}', err.message || err.name));
+        micStream = null;
+      }
+    }
+
+    if (facecamCheckbox.checked) {
+      try {
+        webcamStream = await navigator.mediaDevices.getUserMedia({ video: { width: 320, height: 240 } });
+      } catch (err) {
+        showError(I18N.t('errorWebcamAccess').replace('{message}', err.message || err.name));
+        webcamStream = null;
+      }
+    }
+
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = sharedAudioCtx;
+    const dest = audioCtx.createMediaStreamDestination();
+    let hasAudio = false;
+    const sysAudioTracks = displayStream.getAudioTracks();
+    if (sysAudioTracks.length) {
+      const sysSource = audioCtx.createMediaStreamSource(new MediaStream([sysAudioTracks[0]]));
+      sysSource.connect(dest);
+      hasAudio = true;
+    }
+    if (micStream) {
+      const micSource = audioCtx.createMediaStreamSource(micStream);
+      micSource.connect(dest);
+      hasAudio = true;
+    }
+
+    const videoTrack = displayStream.getVideoTracks()[0];
+    let finalVideoTrack = videoTrack;
+
+    if (webcamStream) {
+      const settings = videoTrack.getSettings();
+      const cw = settings.width || 1280, ch = settings.height || 720;
+      displaySourceVideo.srcObject = displayStream;
+      webcamSourceVideo.srcObject = webcamStream;
+      await Promise.all([
+        new Promise(function (resolve) { displaySourceVideo.onloadedmetadata = function () { displaySourceVideo.play().then(resolve).catch(resolve); }; }),
+        new Promise(function (resolve) { webcamSourceVideo.onloadedmetadata = function () { webcamSourceVideo.play().then(resolve).catch(resolve); }; })
+      ]);
+      facecamCanvas.width = cw;
+      facecamCanvas.height = ch;
+      const bubbleSize = Math.round(Math.min(cw, ch) * 0.22);
+      const margin = Math.round(bubbleSize * 0.12);
+      (function drawFacecamFrame() {
+        facecamCtx.drawImage(displaySourceVideo, 0, 0, cw, ch);
+        const bx = cw - bubbleSize - margin, by = ch - bubbleSize - margin;
+        facecamCtx.save();
+        facecamCtx.beginPath();
+        facecamCtx.arc(bx + bubbleSize / 2, by + bubbleSize / 2, bubbleSize / 2, 0, Math.PI * 2);
+        facecamCtx.closePath();
+        facecamCtx.clip();
+        const vw = webcamSourceVideo.videoWidth || 320, vh = webcamSourceVideo.videoHeight || 240;
+        const scale = Math.max(bubbleSize / vw, bubbleSize / vh);
+        const dw = vw * scale, dh = vh * scale;
+        facecamCtx.drawImage(webcamSourceVideo, bx + (bubbleSize - dw) / 2, by + (bubbleSize - dh) / 2, dw, dh);
+        facecamCtx.restore();
+        facecamCtx.beginPath();
+        facecamCtx.arc(bx + bubbleSize / 2, by + bubbleSize / 2, bubbleSize / 2, 0, Math.PI * 2);
+        facecamCtx.lineWidth = 3;
+        facecamCtx.strokeStyle = '#EDEAE0';
+        facecamCtx.stroke();
+        facecamAnimId = requestAnimationFrame(drawFacecamFrame);
+      })();
+      finalVideoTrack = facecamCanvas.captureStream(30).getVideoTracks()[0];
+    }
+
+    const combinedTracks = [finalVideoTrack];
+    if (hasAudio) combinedTracks.push(...dest.stream.getAudioTracks());
+    mixedStream = new MediaStream(combinedTracks);
+
+    videoTrack.onended = function () {
+      if (mediaRecorder && mediaRecorder.state !== 'inactive') stopRecording();
+    };
+
+    liveView.srcObject = mixedStream;
+    liveView.style.display = 'block';
+    stageEmpty.style.display = 'none';
+    resultVideo.style.display = 'none';
+    downloadVideoBtn.disabled = true;
+    trimControlsWrap.style.display = 'none';
+    trimPlaceholderHint.style.display = 'block';
+
+    recordedChunks = [];
+    mediaRecorder = new MediaRecorder(mixedStream, { mimeType, videoBitsPerSecond: 8000000 });
+    mediaRecorder.ondataavailable = function (e) { if (e.data.size) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = function () {
+      rawBlob = new Blob(recordedChunks, { type: 'video/webm' });
+      exportBlob = rawBlob;
+      showResult(exportBlob);
+      stopMediaTracks();
+    };
+    mediaRecorder.start(1000);
+
+    recordingSeconds = 0;
+    isPaused = false;
+    recStatusText.textContent = formatTime(0);
+    recStatus.style.display = 'flex';
+    recStatus.classList.add('live');
+    recStatus.classList.remove('paused');
+    timerInterval = setInterval(function () {
+      if (!isPaused) { recordingSeconds++; recStatusText.textContent = formatTime(recordingSeconds); }
+    }, 1000);
+
+    startBtn.style.display = 'none';
+    activeControls.style.display = 'flex';
+    pauseBtn.textContent = I18N.t('pauseBtnLabel');
+    micMuted = false;
+    muteMicBtn.textContent = I18N.t('muteMicLabel');
+    muteMicBtn.style.display = micStream ? 'inline-block' : 'none';
+    titleBlockRight.textContent = I18N.t('statusRecording');
+  });
+
+  muteMicBtn.addEventListener('click', function () {
+    if (!micStream) return;
+    micMuted = !micMuted;
+    micStream.getAudioTracks().forEach(function (t) { t.enabled = !micMuted; });
+    muteMicBtn.textContent = micMuted ? I18N.t('unmuteMicLabel') : I18N.t('muteMicLabel');
+  });
+
+  pauseBtn.addEventListener('click', function () {
+    if (!mediaRecorder) return;
+    if (isPaused) {
+      mediaRecorder.resume();
+      isPaused = false;
+      pauseBtn.textContent = I18N.t('pauseBtnLabel');
+      recStatus.classList.add('live');
+      recStatus.classList.remove('paused');
+      titleBlockRight.textContent = I18N.t('statusRecording');
+    } else {
+      mediaRecorder.pause();
+      isPaused = true;
+      pauseBtn.textContent = I18N.t('resumeBtnLabel');
+      recStatus.classList.remove('live');
+      recStatus.classList.add('paused');
+      titleBlockRight.textContent = I18N.t('statusPaused');
+    }
+  });
+
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+    if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+    recStatus.style.display = 'none';
+    activeControls.style.display = 'none';
+    muteMicBtn.style.display = 'none';
+    startBtn.style.display = 'block';
+    startBtn.textContent = I18N.t('startBtnLabel');
+  }
+  stopBtn.addEventListener('click', stopRecording);
+
+  function showResult(blob) {
+    liveView.style.display = 'none';
+    liveView.srcObject = null;
+    const url = URL.createObjectURL(blob);
+    resultVideo.src = url;
+    resultVideo.style.display = 'block';
+    downloadVideoBtn.disabled = false;
+    titleBlockRight.textContent = I18N.t('statusRecordingSaved');
+    refreshUploadEnabled();
+    resultVideo.onloadedmetadata = async function () {
+      recordingDuration = await resolveVideoDuration(resultVideo);
+      trimStartInput.value = '0';
+      trimEndInput.value = recordingDuration.toFixed(1);
+      trimPlaceholderHint.style.display = 'none';
+      trimControlsWrap.style.display = 'block';
+    };
+  }
+
+  setStartBtn.addEventListener('click', function () { trimStartInput.value = resultVideo.currentTime.toFixed(2); });
+  setEndBtn.addEventListener('click', function () { trimEndInput.value = resultVideo.currentTime.toFixed(2); });
+
+  resetTrimBtn.addEventListener('click', function () {
+    if (!rawBlob) return;
+    exportBlob = rawBlob;
+    const url = URL.createObjectURL(exportBlob);
+    resultVideo.src = url;
+    resultVideo.onloadedmetadata = async function () {
+      recordingDuration = await resolveVideoDuration(resultVideo);
+      trimStartInput.value = '0';
+      trimEndInput.value = recordingDuration.toFixed(1);
+    };
+    titleBlockRight.textContent = I18N.t('statusRecordingSaved');
+    refreshUploadEnabled();
+  });
+
+  // ---------- trim (re-encodes through a hidden canvas, same technique as Clip Forge) ----------
+  applyTrimBtn.addEventListener('click', async function () {
+    clearError();
+    if (!exportBlob) return;
+    const trimStart = Math.max(0, parseFloat(trimStartInput.value) || 0);
+    const trimEnd = Math.min(recordingDuration, parseFloat(trimEndInput.value) || recordingDuration);
+    if (trimEnd <= trimStart) { showError(I18N.t('errorTrimEndBeforeStart')); return; }
+    if (trimStart <= 0.05 && trimEnd >= recordingDuration - 0.05) { showError(I18N.t('errorNothingToTrim')); return; }
+    if (!window.MediaRecorder || !trimCanvas.captureStream) {
+      showError(I18N.t('errorNoReencodeSupport'));
+      return;
+    }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoVideoFormat')); return; }
+
+    resultVideo.pause();
+    trimSourceVideo.src = URL.createObjectURL(exportBlob);
+    await new Promise(function (resolve) { trimSourceVideo.onloadedmetadata = resolve; });
+    const cw = trimSourceVideo.videoWidth, ch = trimSourceVideo.videoHeight;
+    trimCanvas.width = cw; trimCanvas.height = ch;
+
+    if (!sharedAudioCtx) sharedAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioCtx = sharedAudioCtx;
+    const dest = audioCtx.createMediaStreamDestination();
+    if (!trimVideoSourceNode) trimVideoSourceNode = audioCtx.createMediaElementSource(trimSourceVideo);
+    trimVideoSourceNode.disconnect();
+    trimVideoSourceNode.connect(dest);
+    trimSourceVideo.muted = true;
+
+    const canvasStream = trimCanvas.captureStream(30);
+    const combined = new MediaStream([...canvasStream.getVideoTracks(), ...dest.stream.getAudioTracks()]);
+    const recorder = new MediaRecorder(combined, { mimeType, videoBitsPerSecond: 8000000 });
+    const chunks = [];
+    recorder.ondataavailable = function (e) { if (e.data.size) chunks.push(e.data); };
+
+    applyTrimBtn.disabled = true;
+    resetTrimBtn.disabled = true;
+    cancelTrimBtn.style.display = 'inline-block';
+    progressWrap.classList.add('show');
+    progressLabel.textContent = I18N.t('progressTrimming');
+    progressFill.style.width = '0%';
+    progressPct.textContent = '0%';
+    titleBlockRight.textContent = I18N.t('statusTrimming');
+
+    let cancelled = false;
+    let rafId = null;
+    const outputDuration = trimEnd - trimStart;
+
+    function finish() {
+      progressWrap.classList.remove('show');
+      cancelTrimBtn.style.display = 'none';
+      applyTrimBtn.disabled = false;
+      resetTrimBtn.disabled = false;
+      trimVideoSourceNode.disconnect();
+      trimState = null;
+    }
+
+    recorder.onstop = function () {
+      if (rafId) cancelAnimationFrame(rafId);
+      trimSourceVideo.pause();
+      if (cancelled) { finish(); titleBlockRight.textContent = I18N.t('statusRecordingSaved'); return; }
+      exportBlob = new Blob(chunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(exportBlob);
+      resultVideo.src = url;
+      resultVideo.style.display = 'block';
+      recordingDuration = outputDuration;
+      trimStartInput.value = '0';
+      trimEndInput.value = recordingDuration.toFixed(1);
+      titleBlockRight.textContent = I18N.t('statusTrimApplied');
+      refreshUploadEnabled();
+      finish();
+    };
+
+    function step() {
+      if (cancelled) { recorder.stop(); return; }
+      if (trimSourceVideo.currentTime >= trimEnd || trimSourceVideo.ended) { recorder.stop(); return; }
+      trimCtx.drawImage(trimSourceVideo, 0, 0, cw, ch);
+      const outT = trimSourceVideo.currentTime - trimStart;
+      const pct = Math.min(100, Math.round((outT / outputDuration) * 100));
+      progressFill.style.width = pct + '%';
+      progressPct.textContent = pct + '%';
+      rafId = requestAnimationFrame(step);
+    }
+
+    try {
+      trimSourceVideo.currentTime = trimStart;
+      await new Promise(function (resolve) { trimSourceVideo.onseeked = resolve; });
+      await trimSourceVideo.play();
+      recorder.start();
+      rafId = requestAnimationFrame(step);
+    } catch (err) {
+      showError(I18N.t('errorCouldNotStartTrimming').replace('{message}', err.message));
+      finish();
+      return;
+    }
+
+    trimState = { cancel: function () { cancelled = true; } };
+  });
+
+  cancelTrimBtn.addEventListener('click', function () { if (trimState) trimState.cancel(); });
+
+  downloadVideoBtn.addEventListener('click', function () {
+    if (!exportBlob) return;
+    const url = URL.createObjectURL(exportBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'record-forge.webm';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  });
+
+  // ---------- YouTube upload (shared module; same flow as Clip Forge / Video Forge) ----------
+  const ytUpload = YouTubeUpload.init({ getBlob: function () { return exportBlob; }, noBlobErrorKey: 'ytErrorRecordFirst' });
+  function refreshUploadEnabled() { ytUpload.refreshUploadEnabled(); }
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Record your screen with live voice narration — trim it, save it, or send it straight to YouTube.',
+      captureOptionsHeading: 'Capture options',
+      micLabelHtml: '🎙️ Record my voice while capturing<span class="opt-sub">Narrate what you\'re doing as you record — your microphone is mixed into the video\'s audio track.</span>',
+      sysAudioLabelHtml: '🔊 Include tab/system audio<span class="opt-sub">Only works if you choose to share a browser tab (and check "Share tab audio" in the picker) — whole-desktop audio isn\'t supported on every OS.</span>',
+      facecamLabelHtml: '📷 Show my webcam in a corner bubble<span class="opt-sub">Composites a small circular webcam feed into the bottom-right corner of the recording — Loom-style, good for tutorials.</span>',
+      startClickHint: 'When you click Start, your browser will ask which screen, window, or tab to share.',
+      otherTabHintHtml: '<strong>Need to show something on another MigaBuilder page while recording?</strong> Open it in a new tab (right-click a link → "Open in new tab", or Ctrl/Cmd+click) instead of clicking away from this tab — navigating this tab to another page ends the recording and loses it, since the recording only exists in this page\'s memory. Screen sharing lets you switch to any other tab or window without stopping the recording, as long as this tab itself stays open.',
+      startBtnLabel: '🔴 Start recording',
+      pauseBtnLabel: '⏸ Pause',
+      resumeBtnLabel: '▶ Resume',
+      muteMicLabel: '🔇 Mute mic',
+      unmuteMicLabel: '🔊 Unmute mic',
+      stopBtnLabel: '⏹ Stop',
+      trimHeading: 'Trim',
+      trimPlaceholderHintText: 'Record something first, then trim it here.',
+      trimStartLabel: 'Start (s)',
+      trimEndLabel: 'End (s)',
+      useCurrentPositionLabel: 'Use current position',
+      trimPlayHint: 'Play the recording on the right and pause where you want each point, then click "Use current position".',
+      applyTrimLabel: '✂️ Apply trim',
+      resetTrimLabel: '↺ Reset',
+      trimMoreHintHtml: 'Need captions, translation, a watermark, or speed changes too? Download below, then open it in <a href="clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a>. Combining several recordings into one video? Use <a href="merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a> — it can patch multiple clips together and trim each one.',
+      previewTitle: 'RECORD FORGE — PREVIEW',
+      statusNotStarted: 'NOT STARTED',
+      stageEmptyStrong: 'Nothing recorded yet.',
+      stageEmptyText: 'Choose your capture options on the left, then hit Start recording.',
+      progressWorking: 'Working…',
+      cancelLabel: '✕ Cancel',
+      downloadBtnLabel: '⬇ Download recording (.webm)',
+      recordingHint: "Recording happens live in your browser and never leaves it unless you use the YouTube button below. Screen recording needs a desktop browser (Chrome, Edge, or Firefox) — it isn't supported on mobile.",
+      ytHeading: 'Upload straight to YouTube',
+      ytClientIdLabel: 'Your Google OAuth Client ID',
+      ytClientIdHint: 'This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Record Forge only sends it to Google, never anywhere else.',
+      connectGoogleLabel: 'Connect Google account',
+      ytConnectedText: '✓ Connected to your Google account.',
+      ytTitleLabel: 'Video title',
+      ytTitlePlaceholder: 'How to set up my project',
+      ytDescLabel: 'Description',
+      ytDescPlaceholder: 'Screen recording made with Record Forge.',
+      ytTagsLabel: 'Tags (comma separated)',
+      ytTagsPlaceholder: 'tutorial, screen recording, how-to',
+      ytPrivacyLabel: 'Privacy',
+      privacyPrivate: 'Private',
+      privacyUnlisted: 'Unlisted',
+      privacyPublic: 'Public',
+      ytCategoryLabel: 'Category',
+      categoryEducation: 'Education',
+      categoryHowto: 'Howto & Style',
+      categoryScience: 'Science & Technology',
+      categoryPeople: 'People & Blogs',
+      categoryEntertainment: 'Entertainment',
+      uploadToYoutubeLabel: 'Upload to YouTube',
+      ytUploadHint: 'Record something first, then upload it here. Uploads go directly from your browser to Google using your own account — this tool never sees or stores the video or your login.',
+      ytSetupSummary: 'One-time setup: get a Google OAuth Client ID (click to expand)',
+      ytSetupStepsHtml: '<li>Go to the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, create (or pick) a project, and enable the <strong>YouTube Data API v3</strong>.</li><li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, set it up as "External", add the <code>youtube.upload</code> scope, and add your own Google account under "Test users" (this avoids needing Google\'s full app-verification review, since only you will use it).</li><li>Under <strong>APIs &amp; Services → Credentials</strong>, create an <strong>OAuth client ID</strong> of type "Web application". Add the exact URL this page is running at (e.g. <code>https://your-username.github.io</code>) under "Authorized JavaScript origins".</li><li>Copy the generated Client ID (it ends in <code>.apps.googleusercontent.com</code>) into the field above.</li><li>Click "Connect Google account" and approve access — Google will warn that the app is unverified, which is expected for a personal project; click through as the test user you added.</li>',
+      ytSetupFallbackHtml: 'If any step here fails or your browser blocks the upload, you can always fall back to downloading the video file above and uploading it manually at <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your screen recording and microphone audio stay in your browser — nothing is uploaded unless you use the YouTube button, and that goes straight from your browser to your own Google account. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      errorNoScreenRecording: 'Screen recording is not supported in this browser. Try the latest Chrome, Edge, or Firefox on desktop.',
+      errorNoMediaRecorder: 'Your browser does not support MediaRecorder. Try the latest Chrome, Edge, or Firefox.',
+      errorNoRecordingFormat: 'No supported recording format found in this browser.',
+      errorScreenSharingNotStarted: 'Screen sharing was not started: {message}',
+      errorMicAccess: 'Could not access your microphone ({message}) — recording without narration.',
+      errorWebcamAccess: 'Could not access your webcam ({message}) — recording without the facecam bubble.',
+      statusRecording: 'RECORDING',
+      statusPaused: 'PAUSED',
+      statusRecordingSaved: 'RECORDING SAVED',
+      statusTrimming: 'TRIMMING',
+      statusTrimApplied: 'TRIM APPLIED',
+      progressTrimming: 'Trimming…',
+      errorTrimEndBeforeStart: 'The end point must be after the start point.',
+      errorNothingToTrim: 'Adjust the start or end point first — there is nothing to trim.',
+      errorNoReencodeSupport: 'Your browser does not support re-encoding video. Try the latest Chrome, Edge, or Firefox.',
+      errorNoVideoFormat: 'No supported video format found in this browser.',
+      errorCouldNotStartTrimming: 'Could not start trimming: {message}',
+      ytErrorSignInFailed: 'Google sign-in failed: {error}',
+      ytErrorNoClientId: 'Paste your Google OAuth Client ID first — see the setup steps below.',
+      ytErrorLibraryNotLoaded: "Google's sign-in library hasn't finished loading yet — wait a second and try again.",
+      ytErrorRecordFirst: 'Record something first.',
+      ytErrorConnectFirst: 'Connect your Google account first.',
+      ytDefaultTitle: 'Record Forge upload',
+      startingUploadLabel: 'Starting upload…',
+      uploadingLabel: 'Uploading to YouTube…',
+      ytErrorRequestFailed: 'Request failed with status {status}',
+      ytErrorNoUploadUrl: 'Google did not return an upload session URL — your browser or an extension may be blocking it. Try downloading the video and uploading it manually at studio.youtube.com instead.',
+      ytErrorResponseUnreadable: 'Upload finished but the response could not be read.',
+      ytErrorUploadFailedStatus: 'Upload failed with status {status}: {text}',
+      ytErrorNetwork: 'A network error interrupted the upload — this can happen if a browser extension blocks requests to Google.',
+      ytErrorGeneric: 'Upload failed.',
+      ytSuccessUploadedPrefix: 'Uploaded!',
+      ytWatchLinkLabel: 'Watch it on YouTube',
+      ytPrivacyNotePrivate: 'private — only you can see it'
+    },
+    es: {
+      heroSubtitle: 'Graba tu pantalla con narración de voz en vivo — recórtala, guárdala, o envíala directamente a YouTube.',
+      captureOptionsHeading: 'Opciones de captura',
+      micLabelHtml: '🎙️ Grabar mi voz mientras capturo<span class="opt-sub">Narra lo que haces mientras grabas — tu micrófono se mezcla en la pista de audio del video.</span>',
+      sysAudioLabelHtml: '🔊 Incluir audio de pestaña/sistema<span class="opt-sub">Solo funciona si eliges compartir una pestaña del navegador (y marcas "Compartir audio de la pestaña" en el selector) — el audio de todo el escritorio no es compatible en todos los sistemas operativos.</span>',
+      facecamLabelHtml: '📷 Mostrar mi cámara web en una burbuja en la esquina<span class="opt-sub">Superpone una pequeña imagen circular de la cámara web en la esquina inferior derecha de la grabación — estilo Loom, bueno para tutoriales.</span>',
+      startClickHint: 'Al hacer clic en Iniciar, tu navegador te preguntará qué pantalla, ventana o pestaña compartir.',
+      otherTabHintHtml: '<strong>¿Necesitas mostrar algo en otra página de MigaBuilder mientras grabas?</strong> Ábrelo en una pestaña nueva (clic derecho en un enlace → "Abrir en pestaña nueva", o Ctrl/Cmd+clic) en lugar de salir de esta pestaña — navegar en esta pestaña a otra página termina la grabación y la pierde, ya que la grabación solo existe en la memoria de esta página. Compartir pantalla te permite cambiar a cualquier otra pestaña o ventana sin detener la grabación, siempre que esta pestaña permanezca abierta.',
+      startBtnLabel: '🔴 Iniciar grabación',
+      pauseBtnLabel: '⏸ Pausar',
+      resumeBtnLabel: '▶ Reanudar',
+      muteMicLabel: '🔇 Silenciar micrófono',
+      unmuteMicLabel: '🔊 Activar micrófono',
+      stopBtnLabel: '⏹ Detener',
+      trimHeading: 'Recortar',
+      trimPlaceholderHintText: 'Graba algo primero, luego recórtalo aquí.',
+      trimStartLabel: 'Inicio (s)',
+      trimEndLabel: 'Fin (s)',
+      useCurrentPositionLabel: 'Usar posición actual',
+      trimPlayHint: 'Reproduce la grabación a la derecha y pausa donde quieras cada punto, luego haz clic en "Usar posición actual".',
+      applyTrimLabel: '✂️ Aplicar recorte',
+      resetTrimLabel: '↺ Restablecer',
+      trimMoreHintHtml: '¿También necesitas subtítulos, traducción, una marca de agua o cambios de velocidad? Descarga abajo, luego ábrelo en <a href="clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a>. ¿Combinando varias grabaciones en un video? Usa <a href="merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a> — puede unir varios clips y recortar cada uno.',
+      previewTitle: 'RECORD FORGE — VISTA PREVIA',
+      statusNotStarted: 'SIN INICIAR',
+      stageEmptyStrong: 'Aún no se ha grabado nada.',
+      stageEmptyText: 'Elige tus opciones de captura a la izquierda, luego pulsa Iniciar grabación.',
+      progressWorking: 'Trabajando…',
+      cancelLabel: '✕ Cancelar',
+      downloadBtnLabel: '⬇ Descargar grabación (.webm)',
+      recordingHint: 'La grabación ocurre en vivo en tu navegador y nunca sale de él a menos que uses el botón de YouTube abajo. La grabación de pantalla requiere un navegador de escritorio (Chrome, Edge o Firefox) — no es compatible en móviles.',
+      ytHeading: 'Subir directamente a YouTube',
+      ytClientIdLabel: 'Tu ID de cliente OAuth de Google',
+      ytClientIdHint: 'Este es un identificador público de tu propio proyecto de Google Cloud, no un secreto — consulta los pasos de configuración abajo. Record Forge solo lo envía a Google, nunca a ningún otro lugar.',
+      connectGoogleLabel: 'Conectar cuenta de Google',
+      ytConnectedText: '✓ Conectado a tu cuenta de Google.',
+      ytTitleLabel: 'Título del video',
+      ytTitlePlaceholder: 'Cómo configurar mi proyecto',
+      ytDescLabel: 'Descripción',
+      ytDescPlaceholder: 'Grabación de pantalla hecha con Record Forge.',
+      ytTagsLabel: 'Etiquetas (separadas por comas)',
+      ytTagsPlaceholder: 'tutorial, grabación de pantalla, cómo hacer',
+      ytPrivacyLabel: 'Privacidad',
+      privacyPrivate: 'Privado',
+      privacyUnlisted: 'Oculto',
+      privacyPublic: 'Público',
+      ytCategoryLabel: 'Categoría',
+      categoryEducation: 'Educación',
+      categoryHowto: 'Cómo hacer y estilo',
+      categoryScience: 'Ciencia y tecnología',
+      categoryPeople: 'Personas y blogs',
+      categoryEntertainment: 'Entretenimiento',
+      uploadToYoutubeLabel: 'Subir a YouTube',
+      ytUploadHint: 'Graba algo primero, luego súbelo aquí. Las subidas van directamente desde tu navegador a Google usando tu propia cuenta — esta herramienta nunca ve ni almacena el video o tu inicio de sesión.',
+      ytSetupSummary: 'Configuración única: obtén un ID de cliente OAuth de Google (clic para expandir)',
+      ytSetupStepsHtml: '<li>Ve a la <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Consola de Google Cloud</a>, crea (o elige) un proyecto, y activa la <strong>API de datos de YouTube v3</strong>.</li><li>En <strong>APIs y servicios → Pantalla de consentimiento de OAuth</strong>, configúralo como "Externo", añade el alcance <code>youtube.upload</code>, y añade tu propia cuenta de Google en "Usuarios de prueba" (esto evita necesitar la revisión completa de verificación de Google, ya que solo tú lo usarás).</li><li>En <strong>APIs y servicios → Credenciales</strong>, crea un <strong>ID de cliente OAuth</strong> de tipo "Aplicación web". Añade la URL exacta donde se ejecuta esta página (p. ej. <code>https://tu-usuario.github.io</code>) en "Orígenes de JavaScript autorizados".</li><li>Copia el ID de cliente generado (termina en <code>.apps.googleusercontent.com</code>) en el campo de arriba.</li><li>Haz clic en "Conectar cuenta de Google" y aprueba el acceso — Google advertirá que la app no está verificada, lo cual es esperado para un proyecto personal; continúa como el usuario de prueba que añadiste.</li>',
+      ytSetupFallbackHtml: 'Si algún paso falla aquí o tu navegador bloquea la subida, siempre puedes recurrir a descargar el archivo de video arriba y subirlo manualmente en <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tu grabación de pantalla y audio del micrófono permanecen en tu navegador — nada se sube a menos que uses el botón de YouTube, y eso va directamente desde tu navegador a tu propia cuenta de Google. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      errorNoScreenRecording: 'La grabación de pantalla no es compatible en este navegador. Prueba con la última versión de Chrome, Edge o Firefox en escritorio.',
+      errorNoMediaRecorder: 'Tu navegador no admite MediaRecorder. Prueba con la última versión de Chrome, Edge o Firefox.',
+      errorNoRecordingFormat: 'No se encontró un formato de grabación compatible en este navegador.',
+      errorScreenSharingNotStarted: 'No se inició la compartición de pantalla: {message}',
+      errorMicAccess: 'No se pudo acceder a tu micrófono ({message}) — grabando sin narración.',
+      errorWebcamAccess: 'No se pudo acceder a tu cámara web ({message}) — grabando sin la burbuja de cámara.',
+      statusRecording: 'GRABANDO',
+      statusPaused: 'PAUSADO',
+      statusRecordingSaved: 'GRABACIÓN GUARDADA',
+      statusTrimming: 'RECORTANDO',
+      statusTrimApplied: 'RECORTE APLICADO',
+      progressTrimming: 'Recortando…',
+      errorTrimEndBeforeStart: 'El punto final debe estar después del punto inicial.',
+      errorNothingToTrim: 'Ajusta primero el punto de inicio o fin — no hay nada que recortar.',
+      errorNoReencodeSupport: 'Tu navegador no admite la recodificación de video. Prueba con la última versión de Chrome, Edge o Firefox.',
+      errorNoVideoFormat: 'No se encontró un formato de video compatible en este navegador.',
+      errorCouldNotStartTrimming: 'No se pudo iniciar el recorte: {message}',
+      ytErrorSignInFailed: 'Falló el inicio de sesión de Google: {error}',
+      ytErrorNoClientId: 'Pega primero tu ID de cliente OAuth de Google — consulta los pasos de configuración abajo.',
+      ytErrorLibraryNotLoaded: 'La librería de inicio de sesión de Google no ha terminado de cargar — espera un segundo e inténtalo de nuevo.',
+      ytErrorRecordFirst: 'Graba algo primero.',
+      ytErrorConnectFirst: 'Conecta tu cuenta de Google primero.',
+      ytDefaultTitle: 'Subida de Record Forge',
+      startingUploadLabel: 'Iniciando subida…',
+      uploadingLabel: 'Subiendo a YouTube…',
+      ytErrorRequestFailed: 'La solicitud falló con estado {status}',
+      ytErrorNoUploadUrl: 'Google no devolvió una URL de sesión de subida — tu navegador o una extensión puede estar bloqueándola. Intenta descargar el video y subirlo manualmente en studio.youtube.com en su lugar.',
+      ytErrorResponseUnreadable: 'La subida terminó pero no se pudo leer la respuesta.',
+      ytErrorUploadFailedStatus: 'La subida falló con estado {status}: {text}',
+      ytErrorNetwork: 'Un error de red interrumpió la subida — esto puede ocurrir si una extensión del navegador bloquea las solicitudes a Google.',
+      ytErrorGeneric: 'La subida falló.',
+      ytSuccessUploadedPrefix: '¡Subido!',
+      ytWatchLinkLabel: 'Míralo en YouTube',
+      ytPrivacyNotePrivate: 'privado — solo tú puedes verlo'
+    },
+    ar: {
+      heroSubtitle: 'سجّل شاشتك مع سرد صوتي مباشر — قصّه، احفظه، أو أرسله مباشرة إلى YouTube.',
+      captureOptionsHeading: 'خيارات الالتقاط',
+      micLabelHtml: '🎙️ تسجيل صوتي أثناء الالتقاط<span class="opt-sub">اسرد ما تفعله أثناء التسجيل — يُمزج ميكروفونك في مسار صوت الفيديو.</span>',
+      sysAudioLabelHtml: '🔊 تضمين صوت التبويب/النظام<span class="opt-sub">يعمل فقط إذا اخترت مشاركة تبويب متصفح (وفعّلت "مشاركة صوت التبويب" في المحدد) — صوت سطح المكتب بالكامل غير مدعوم على كل نظام تشغيل.</span>',
+      facecamLabelHtml: '📷 إظهار كاميرا الويب في فقاعة بالزاوية<span class="opt-sub">يدمج بثًا دائريًا صغيرًا من كاميرا الويب في الزاوية السفلية اليمنى من التسجيل — بأسلوب Loom، جيد للدروس التعليمية.</span>',
+      startClickHint: 'عند النقر على "بدء"، سيسألك متصفحك عن الشاشة أو النافذة أو التبويب المراد مشاركته.',
+      otherTabHintHtml: '<strong>تحتاج لعرض شيء ما في صفحة MigaBuilder أخرى أثناء التسجيل؟</strong> افتحها في تبويب جديد (انقر بزر الفأرة الأيمن على رابط ← "فتح في تبويب جديد"، أو Ctrl/Cmd+نقر) بدلاً من الانتقال بعيدًا عن هذا التبويب — الانتقال بهذا التبويب إلى صفحة أخرى ينهي التسجيل ويفقده، لأن التسجيل موجود فقط في ذاكرة هذه الصفحة. تتيح لك مشاركة الشاشة التبديل إلى أي تبويب أو نافذة أخرى دون إيقاف التسجيل، طالما بقي هذا التبويب مفتوحًا.',
+      startBtnLabel: '🔴 بدء التسجيل',
+      pauseBtnLabel: '⏸ إيقاف مؤقت',
+      resumeBtnLabel: '▶ استئناف',
+      muteMicLabel: '🔇 كتم الميكروفون',
+      unmuteMicLabel: '🔊 إلغاء كتم الميكروفون',
+      stopBtnLabel: '⏹ إيقاف',
+      trimHeading: 'القص',
+      trimPlaceholderHintText: 'سجّل شيئًا أولاً، ثم قصّه هنا.',
+      trimStartLabel: 'البداية (ث)',
+      trimEndLabel: 'النهاية (ث)',
+      useCurrentPositionLabel: 'استخدام الموضع الحالي',
+      trimPlayHint: 'شغّل التسجيل على اليمين وأوقفه مؤقتًا حيث تريد كل نقطة، ثم انقر على "استخدام الموضع الحالي".',
+      applyTrimLabel: '✂️ تطبيق القص',
+      resetTrimLabel: '↺ إعادة تعيين',
+      trimMoreHintHtml: 'تحتاج أيضًا إلى ترجمات أو ترجمة أو علامة مائية أو تغييرات في السرعة؟ نزّل أدناه، ثم افتحه في <a href="clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a>. تجمع عدة تسجيلات في فيديو واحد؟ استخدم <a href="merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a> — يمكنه دمج عدة مقاطع معًا وقص كل منها.',
+      previewTitle: 'RECORD FORGE — معاينة',
+      statusNotStarted: 'لم يبدأ',
+      stageEmptyStrong: 'لم يُسجَّل شيء بعد.',
+      stageEmptyText: 'اختر خيارات الالتقاط على اليسار، ثم اضغط بدء التسجيل.',
+      progressWorking: 'جارٍ العمل…',
+      cancelLabel: '✕ إلغاء',
+      downloadBtnLabel: '⬇ تنزيل التسجيل (.webm)',
+      recordingHint: 'يحدث التسجيل مباشرة في متصفحك ولا يغادره أبدًا ما لم تستخدم زر YouTube أدناه. يتطلب تسجيل الشاشة متصفح سطح مكتب (Chrome أو Edge أو Firefox) — غير مدعوم على الهاتف المحمول.',
+      ytHeading: 'الرفع مباشرة إلى YouTube',
+      ytClientIdLabel: 'معرّف عميل OAuth من Google الخاص بك',
+      ytClientIdHint: 'هذا معرّف عام لمشروع Google Cloud الخاص بك، وليس سرًا — راجع خطوات الإعداد أدناه. يرسله Record Forge فقط إلى Google، ولا يرسله إلى أي مكان آخر أبدًا.',
+      connectGoogleLabel: 'ربط حساب Google',
+      ytConnectedText: '✓ تم الربط بحساب Google الخاص بك.',
+      ytTitleLabel: 'عنوان الفيديو',
+      ytTitlePlaceholder: 'كيفية إعداد مشروعي',
+      ytDescLabel: 'الوصف',
+      ytDescPlaceholder: 'تسجيل شاشة تم إنشاؤه باستخدام Record Forge.',
+      ytTagsLabel: 'الوسوم (مفصولة بفواصل)',
+      ytTagsPlaceholder: 'شرح، تسجيل شاشة، كيفية',
+      ytPrivacyLabel: 'الخصوصية',
+      privacyPrivate: 'خاص',
+      privacyUnlisted: 'غير مدرج',
+      privacyPublic: 'عام',
+      ytCategoryLabel: 'الفئة',
+      categoryEducation: 'تعليم',
+      categoryHowto: 'كيفية وأسلوب',
+      categoryScience: 'علوم وتكنولوجيا',
+      categoryPeople: 'أشخاص ومدونات',
+      categoryEntertainment: 'ترفيه',
+      uploadToYoutubeLabel: 'الرفع إلى YouTube',
+      ytUploadHint: 'سجّل شيئًا أولاً، ثم ارفعه هنا. تتم عمليات الرفع مباشرة من متصفحك إلى Google باستخدام حسابك الخاص — هذه الأداة لا ترى أو تخزن الفيديو أو بيانات تسجيل دخولك أبدًا.',
+      ytSetupSummary: 'إعداد لمرة واحدة: احصل على معرّف عميل OAuth من Google (انقر للتوسيع)',
+      ytSetupStepsHtml: '<li>اذهب إلى <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">وحدة تحكم Google Cloud</a>، أنشئ (أو اختر) مشروعًا، وفعّل <strong>YouTube Data API v3</strong>.</li><li>ضمن <strong>واجهات برمجة التطبيقات والخدمات ← شاشة موافقة OAuth</strong>، قم بإعدادها كـ"خارجي"، وأضف نطاق <code>youtube.upload</code>، وأضف حساب Google الخاص بك ضمن "مستخدمو الاختبار" (يتجنب هذا الحاجة إلى مراجعة التحقق الكاملة من Google، لأنك أنت فقط من سيستخدمه).</li><li>ضمن <strong>واجهات برمجة التطبيقات والخدمات ← بيانات الاعتماد</strong>، أنشئ <strong>معرّف عميل OAuth</strong> من نوع "تطبيق ويب". أضف الرابط الدقيق الذي تعمل عليه هذه الصفحة (مثل <code>https://your-username.github.io</code>) ضمن "أصول JavaScript المعتمدة".</li><li>انسخ معرّف العميل الذي تم إنشاؤه (ينتهي بـ <code>.apps.googleusercontent.com</code>) في الحقل أعلاه.</li><li>انقر على "ربط حساب Google" ووافق على الوصول — سيحذر Google من أن التطبيق غير موثّق، وهذا متوقع لمشروع شخصي؛ تابع كمستخدم الاختبار الذي أضفته.</li>',
+      ytSetupFallbackHtml: 'إذا فشلت أي خطوة هنا أو حظر متصفحك الرفع، يمكنك دائمًا اللجوء إلى تنزيل ملف الفيديو أعلاه ورفعه يدويًا على <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. يبقى تسجيل شاشتك وصوت الميكروفون في متصفحك — لا يُرفع شيء ما لم تستخدم زر YouTube، وذلك ينتقل مباشرة من متصفحك إلى حساب Google الخاص بك. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      errorNoScreenRecording: 'تسجيل الشاشة غير مدعوم في هذا المتصفح. جرّب أحدث إصدار من Chrome أو Edge أو Firefox على سطح المكتب.',
+      errorNoMediaRecorder: 'متصفحك لا يدعم MediaRecorder. جرّب أحدث إصدار من Chrome أو Edge أو Firefox.',
+      errorNoRecordingFormat: 'لم يتم العثور على تنسيق تسجيل مدعوم في هذا المتصفح.',
+      errorScreenSharingNotStarted: 'لم تبدأ مشاركة الشاشة: {message}',
+      errorMicAccess: 'تعذر الوصول إلى الميكروفون ({message}) — التسجيل بدون سرد.',
+      errorWebcamAccess: 'تعذر الوصول إلى كاميرا الويب ({message}) — التسجيل بدون فقاعة الكاميرا.',
+      statusRecording: 'جارٍ التسجيل',
+      statusPaused: 'متوقف مؤقتًا',
+      statusRecordingSaved: 'تم حفظ التسجيل',
+      statusTrimming: 'جارٍ القص',
+      statusTrimApplied: 'تم تطبيق القص',
+      progressTrimming: 'جارٍ القص…',
+      errorTrimEndBeforeStart: 'يجب أن تكون نقطة النهاية بعد نقطة البداية.',
+      errorNothingToTrim: 'اضبط نقطة البداية أو النهاية أولاً — لا يوجد شيء لقصه.',
+      errorNoReencodeSupport: 'متصفحك لا يدعم إعادة ترميز الفيديو. جرّب أحدث إصدار من Chrome أو Edge أو Firefox.',
+      errorNoVideoFormat: 'لم يتم العثور على تنسيق فيديو مدعوم في هذا المتصفح.',
+      errorCouldNotStartTrimming: 'تعذر بدء القص: {message}',
+      ytErrorSignInFailed: 'فشل تسجيل الدخول إلى Google: {error}',
+      ytErrorNoClientId: 'الصق معرّف عميل OAuth من Google أولاً — راجع خطوات الإعداد أدناه.',
+      ytErrorLibraryNotLoaded: 'لم تنتهِ مكتبة تسجيل الدخول من Google من التحميل بعد — انتظر لحظة وحاول مرة أخرى.',
+      ytErrorRecordFirst: 'سجّل شيئًا أولاً.',
+      ytErrorConnectFirst: 'اربط حساب Google الخاص بك أولاً.',
+      ytDefaultTitle: 'رفعة من Record Forge',
+      startingUploadLabel: 'جارٍ بدء الرفع…',
+      uploadingLabel: 'جارٍ الرفع إلى YouTube…',
+      ytErrorRequestFailed: 'فشل الطلب بالحالة {status}',
+      ytErrorNoUploadUrl: 'لم يُرجع Google رابط جلسة رفع — قد يكون متصفحك أو أحد الإضافات يحظره. حاول تنزيل الفيديو ورفعه يدويًا على studio.youtube.com بدلاً من ذلك.',
+      ytErrorResponseUnreadable: 'انتهى الرفع لكن تعذرت قراءة الاستجابة.',
+      ytErrorUploadFailedStatus: 'فشل الرفع بالحالة {status}: {text}',
+      ytErrorNetwork: 'قاطع خطأ في الشبكة عملية الرفع — يمكن أن يحدث هذا إذا حظرت إضافة متصفح الطلبات إلى Google.',
+      ytErrorGeneric: 'فشل الرفع.',
+      ytSuccessUploadedPrefix: 'تم الرفع!',
+      ytWatchLinkLabel: 'شاهده على YouTube',
+      ytPrivacyNotePrivate: 'خاص — أنت فقط من يمكنه رؤيته'
+    },
+    zh: {
+      heroSubtitle: '录制屏幕并配以实时语音旁白——剪辑、保存，或直接发送到 YouTube。',
+      captureOptionsHeading: '捕获选项',
+      micLabelHtml: '🎙️ 捕获时录制我的声音<span class="opt-sub">在录制时讲述你正在做的事情——你的麦克风会混合到视频的音轨中。</span>',
+      sysAudioLabelHtml: '🔊 包含标签页/系统音频<span class="opt-sub">仅在你选择共享浏览器标签页时有效（并在选择器中勾选"共享标签页音频"）——并非所有操作系统都支持整个桌面的音频。</span>',
+      facecamLabelHtml: '📷 在角落气泡中显示我的摄像头<span class="opt-sub">在录制的右下角合成一个小的圆形摄像头画面——类似 Loom 风格，适合教程。</span>',
+      startClickHint: '点击"开始"后，浏览器会询问要共享哪个屏幕、窗口或标签页。',
+      otherTabHintHtml: '<strong>录制时需要展示 MigaBuilder 的另一个页面？</strong> 在新标签页中打开它（右键点击链接 →"在新标签页中打开"，或按 Ctrl/Cmd+点击），而不是离开此标签页——将此标签页导航到另一个页面会结束录制并丢失它，因为录制内容只存在于此页面的内存中。屏幕共享允许你切换到任何其他标签页或窗口而不停止录制，只要此标签页本身保持打开状态。',
+      startBtnLabel: '🔴 开始录制',
+      pauseBtnLabel: '⏸ 暂停',
+      resumeBtnLabel: '▶ 继续',
+      muteMicLabel: '🔇 静音麦克风',
+      unmuteMicLabel: '🔊 取消静音麦克风',
+      stopBtnLabel: '⏹ 停止',
+      trimHeading: '剪辑',
+      trimPlaceholderHintText: '先录制一些内容，然后在此处剪辑。',
+      trimStartLabel: '开始（秒）',
+      trimEndLabel: '结束（秒）',
+      useCurrentPositionLabel: '使用当前位置',
+      trimPlayHint: '在右侧播放录制内容，在你想要的每个点暂停，然后点击"使用当前位置"。',
+      applyTrimLabel: '✂️ 应用剪辑',
+      resetTrimLabel: '↺ 重置',
+      trimMoreHintHtml: '还需要字幕、翻译、水印或速度更改？在下方下载，然后在 <a href="clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a> 中打开。要将多个录制内容合并成一个视频？使用 <a href="merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a>——它可以拼接多个片段并分别剪辑。',
+      previewTitle: 'RECORD FORGE — 预览',
+      statusNotStarted: '尚未开始',
+      stageEmptyStrong: '还没有录制任何内容。',
+      stageEmptyText: '在左侧选择捕获选项，然后点击开始录制。',
+      progressWorking: '处理中…',
+      cancelLabel: '✕ 取消',
+      downloadBtnLabel: '⬇ 下载录制内容（.webm）',
+      recordingHint: '录制在你的浏览器中实时进行，除非你使用下方的 YouTube 按钮，否则绝不会离开浏览器。屏幕录制需要桌面浏览器（Chrome、Edge 或 Firefox）——不支持移动设备。',
+      ytHeading: '直接上传到 YouTube',
+      ytClientIdLabel: '你的 Google OAuth 客户端 ID',
+      ytClientIdHint: '这是你自己 Google Cloud 项目的公开标识符，不是秘密——请参阅下方的设置步骤。Record Forge 只会将其发送给 Google，绝不发送到其他任何地方。',
+      connectGoogleLabel: '连接 Google 账户',
+      ytConnectedText: '✓ 已连接到你的 Google 账户。',
+      ytTitleLabel: '视频标题',
+      ytTitlePlaceholder: '如何设置我的项目',
+      ytDescLabel: '描述',
+      ytDescPlaceholder: '使用 Record Forge 制作的屏幕录制。',
+      ytTagsLabel: '标签（用逗号分隔）',
+      ytTagsPlaceholder: '教程, 屏幕录制, 操作指南',
+      ytPrivacyLabel: '隐私设置',
+      privacyPrivate: '私享',
+      privacyUnlisted: '不公开列出',
+      privacyPublic: '公开',
+      ytCategoryLabel: '类别',
+      categoryEducation: '教育',
+      categoryHowto: '操作指南与风格',
+      categoryScience: '科学与技术',
+      categoryPeople: '人物与博客',
+      categoryEntertainment: '娱乐',
+      uploadToYoutubeLabel: '上传到 YouTube',
+      ytUploadHint: '先录制一些内容，然后在此处上传。上传会使用你自己的账户直接从浏览器发送到 Google——此工具绝不会查看或存储视频或你的登录信息。',
+      ytSetupSummary: '一次性设置：获取 Google OAuth 客户端 ID（点击展开）',
+      ytSetupStepsHtml: '<li>前往 <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud 控制台</a>，创建（或选择）一个项目，并启用 <strong>YouTube Data API v3</strong>。</li><li>在<strong>API 和服务 → OAuth 同意屏幕</strong>下，将其设置为"外部"，添加 <code>youtube.upload</code> 权限范围，并在"测试用户"下添加你自己的 Google 账户（这样可以避免需要 Google 的完整应用验证审核，因为只有你会使用它）。</li><li>在<strong>API 和服务 → 凭据</strong>下，创建一个类型为"Web 应用"的 <strong>OAuth 客户端 ID</strong>。在"已获授权的 JavaScript 来源"下添加此页面运行的确切网址（例如 <code>https://your-username.github.io</code>）。</li><li>将生成的客户端 ID（以 <code>.apps.googleusercontent.com</code> 结尾）复制到上方的字段中。</li><li>点击"连接 Google 账户"并批准访问——Google 会警告该应用未经验证，这对于个人项目来说是正常的；以你添加的测试用户身份继续操作。</li>',
+      ytSetupFallbackHtml: '如果这里的任何步骤失败，或者你的浏览器阻止了上传，你始终可以退而求其次，下载上方的视频文件并在 <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a> 手动上传。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的屏幕录制和麦克风音频保留在浏览器中——除非你使用 YouTube 按钮，否则不会上传任何内容，而且那会直接从你的浏览器发送到你自己的 Google 账户。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      errorNoScreenRecording: '此浏览器不支持屏幕录制。请尝试桌面版最新的 Chrome、Edge 或 Firefox。',
+      errorNoMediaRecorder: '你的浏览器不支持 MediaRecorder。请尝试最新版本的 Chrome、Edge 或 Firefox。',
+      errorNoRecordingFormat: '此浏览器未找到支持的录制格式。',
+      errorScreenSharingNotStarted: '屏幕共享未启动：{message}',
+      errorMicAccess: '无法访问你的麦克风（{message}）——将不带旁白进行录制。',
+      errorWebcamAccess: '无法访问你的摄像头（{message}）——将不带摄像头气泡进行录制。',
+      statusRecording: '录制中',
+      statusPaused: '已暂停',
+      statusRecordingSaved: '录制已保存',
+      statusTrimming: '剪辑中',
+      statusTrimApplied: '已应用剪辑',
+      progressTrimming: '剪辑中…',
+      errorTrimEndBeforeStart: '结束点必须在开始点之后。',
+      errorNothingToTrim: '请先调整开始点或结束点——没有可剪辑的内容。',
+      errorNoReencodeSupport: '你的浏览器不支持视频重新编码。请尝试最新版本的 Chrome、Edge 或 Firefox。',
+      errorNoVideoFormat: '此浏览器未找到支持的视频格式。',
+      errorCouldNotStartTrimming: '无法开始剪辑：{message}',
+      ytErrorSignInFailed: 'Google 登录失败：{error}',
+      ytErrorNoClientId: '请先粘贴你的 Google OAuth 客户端 ID——请参阅下方的设置步骤。',
+      ytErrorLibraryNotLoaded: 'Google 登录库尚未加载完成——请稍等片刻再试。',
+      ytErrorRecordFirst: '请先录制一些内容。',
+      ytErrorConnectFirst: '请先连接你的 Google 账户。',
+      ytDefaultTitle: 'Record Forge 上传',
+      startingUploadLabel: '正在开始上传…',
+      uploadingLabel: '正在上传到 YouTube…',
+      ytErrorRequestFailed: '请求失败，状态码 {status}',
+      ytErrorNoUploadUrl: 'Google 没有返回上传会话网址——你的浏览器或某个扩展程序可能正在阻止它。请改为下载视频并在 studio.youtube.com 手动上传。',
+      ytErrorResponseUnreadable: '上传已完成，但无法读取响应。',
+      ytErrorUploadFailedStatus: '上传失败，状态码 {status}：{text}',
+      ytErrorNetwork: '网络错误中断了上传——如果浏览器扩展程序阻止了对 Google 的请求，可能会发生这种情况。',
+      ytErrorGeneric: '上传失败。',
+      ytSuccessUploadedPrefix: '已上传！',
+      ytWatchLinkLabel: '在 YouTube 上观看',
+      ytPrivacyNotePrivate: '私享——只有你能看到'
+    },
+    sw: {
+      heroSubtitle: 'Rekodi skrini yako na maelezo ya sauti moja kwa moja — ikate, ihifadhi, au uipeleke moja kwa moja kwa YouTube.',
+      captureOptionsHeading: 'Chaguo za kunasa',
+      micLabelHtml: '🎙️ Rekodi sauti yangu wakati wa kunasa<span class="opt-sub">Eleza unachofanya unaporekodi — maikrofoni yako inachanganywa kwenye wimbo wa sauti wa video.</span>',
+      sysAudioLabelHtml: '🔊 Jumuisha sauti ya kichupo/mfumo<span class="opt-sub">Hufanya kazi tu ikiwa unachagua kushiriki kichupo cha kivinjari (na kuchagua "Shiriki sauti ya kichupo" kwenye kichaguzi) — sauti ya eneo-kazi lote haitumiki kwenye kila mfumo wa uendeshaji.</span>',
+      facecamLabelHtml: '📷 Onyesha kamera yangu ya wavuti kwenye kiputo cha kona<span class="opt-sub">Huchanganya mtiririko mdogo wa duara wa kamera ya wavuti kwenye kona ya chini kulia ya rekodi — mtindo wa Loom, mzuri kwa mafunzo.</span>',
+      startClickHint: 'Unapobofya Anza, kivinjari chako kitauliza ni skrini, dirisha, au kichupo gani cha kushiriki.',
+      otherTabHintHtml: '<strong>Unahitaji kuonyesha kitu kwenye ukurasa mwingine wa MigaBuilder wakati wa kurekodi?</strong> Kifungue kwenye kichupo kipya (bofya-kulia kiungo → "Fungua kwenye kichupo kipya", au Ctrl/Cmd+bofya) badala ya kuondoka kwenye kichupo hiki — kuelekeza kichupo hiki kwenye ukurasa mwingine humaliza rekodi na kuipoteza, kwani rekodi ipo tu kwenye kumbukumbu ya ukurasa huu. Kushiriki skrini kunakuruhusu kubadili kwenda kichupo au dirisha lingine lolote bila kusimamisha rekodi, mradi kichupo hiki chenyewe kinabaki wazi.',
+      startBtnLabel: '🔴 Anza kurekodi',
+      pauseBtnLabel: '⏸ Sitisha',
+      resumeBtnLabel: '▶ Endelea',
+      muteMicLabel: '🔇 Nyamazisha maikrofoni',
+      unmuteMicLabel: '🔊 Rudisha sauti ya maikrofoni',
+      stopBtnLabel: '⏹ Simamisha',
+      trimHeading: 'Kata',
+      trimPlaceholderHintText: 'Rekodi kitu kwanza, kisha ukikate hapa.',
+      trimStartLabel: 'Mwanzo (s)',
+      trimEndLabel: 'Mwisho (s)',
+      useCurrentPositionLabel: 'Tumia nafasi ya sasa',
+      trimPlayHint: 'Cheza rekodi upande wa kulia na usitishe pale unapotaka kila hatua, kisha bofya "Tumia nafasi ya sasa".',
+      applyTrimLabel: '✂️ Tumia ukataji',
+      resetTrimLabel: '↺ Weka upya',
+      trimMoreHintHtml: 'Unahitaji manukuu, tafsiri, alama ya maji, au mabadiliko ya kasi pia? Pakua hapa chini, kisha ufungue katika <a href="clip-forge.html" style="color:var(--navy);text-decoration:underline;">Clip Forge</a>. Unachanganya rekodi kadhaa kuwa video moja? Tumia <a href="merge-forge.html" style="color:var(--navy);text-decoration:underline;">Merge Forge</a> — inaweza kuunganisha klipu kadhaa pamoja na kukata kila moja.',
+      previewTitle: 'RECORD FORGE — MUONEKANO',
+      statusNotStarted: 'HAIJAANZA',
+      stageEmptyStrong: 'Hakuna kilichorekodiwa bado.',
+      stageEmptyText: 'Chagua chaguo zako za kunasa upande wa kushoto, kisha bofya Anza kurekodi.',
+      progressWorking: 'Inafanya kazi…',
+      cancelLabel: '✕ Ghairi',
+      downloadBtnLabel: '⬇ Pakua rekodi (.webm)',
+      recordingHint: 'Kurekodi hufanyika moja kwa moja kwenye kivinjari chako na hakuondoki kamwe isipokuwa utumie kitufe cha YouTube hapa chini. Kurekodi skrini kunahitaji kivinjari cha eneo-kazi (Chrome, Edge, au Firefox) — hakitumiki kwenye simu.',
+      ytHeading: 'Pakia moja kwa moja kwenye YouTube',
+      ytClientIdLabel: 'Kitambulisho chako cha Mteja wa Google OAuth',
+      ytClientIdHint: 'Hiki ni kitambulisho cha umma cha mradi wako mwenyewe wa Google Cloud, si siri — angalia hatua za usanidi hapa chini. Record Forge hukituma tu kwa Google, kamwe si mahali pengine popote.',
+      connectGoogleLabel: 'Unganisha akaunti ya Google',
+      ytConnectedText: '✓ Umeunganishwa na akaunti yako ya Google.',
+      ytTitleLabel: 'Kichwa cha video',
+      ytTitlePlaceholder: 'Jinsi ya kusanidi mradi wangu',
+      ytDescLabel: 'Maelezo',
+      ytDescPlaceholder: 'Rekodi ya skrini iliyotengenezwa na Record Forge.',
+      ytTagsLabel: 'Lebo (zilizotenganishwa na koma)',
+      ytTagsPlaceholder: 'mafunzo, kurekodi skrini, jinsi ya',
+      ytPrivacyLabel: 'Faragha',
+      privacyPrivate: 'Faragha',
+      privacyUnlisted: 'Isiyoorodheshwa',
+      privacyPublic: 'Ya umma',
+      ytCategoryLabel: 'Jamii',
+      categoryEducation: 'Elimu',
+      categoryHowto: 'Jinsi ya kufanya na mtindo',
+      categoryScience: 'Sayansi na Teknolojia',
+      categoryPeople: 'Watu na Blogu',
+      categoryEntertainment: 'Burudani',
+      uploadToYoutubeLabel: 'Pakia kwenye YouTube',
+      ytUploadHint: 'Rekodi kitu kwanza, kisha ukipakie hapa. Upakiaji huenda moja kwa moja kutoka kwenye kivinjari chako hadi Google ukitumia akaunti yako mwenyewe — chombo hiki hakioni au kuhifadhi video au kuingia kwako kamwe.',
+      ytSetupSummary: 'Usanidi wa mara moja: pata Kitambulisho cha Mteja wa Google OAuth (bofya kupanua)',
+      ytSetupStepsHtml: '<li>Nenda kwenye <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, unda (au chagua) mradi, na uwezeshe <strong>YouTube Data API v3</strong>.</li><li>Chini ya <strong>APIs & Services → OAuth consent screen</strong>, isanidi kama "External", ongeza wigo wa <code>youtube.upload</code>, na uongeze akaunti yako mwenyewe ya Google chini ya "Test users" (hii inaepuka kuhitaji ukaguzi kamili wa uthibitishaji wa programu wa Google, kwa kuwa wewe tu ndiye utakayeitumia).</li><li>Chini ya <strong>APIs & Services → Credentials</strong>, unda <strong>Kitambulisho cha Mteja wa OAuth</strong> cha aina "Programu ya wavuti". Ongeza URL hasa inayoendesha ukurasa huu (mfano <code>https://your-username.github.io</code>) chini ya "Authorized JavaScript origins".</li><li>Nakili Kitambulisho cha Mteja kilichotengenezwa (kinaishia na <code>.apps.googleusercontent.com</code>) kwenye sehemu iliyo hapo juu.</li><li>Bofya "Unganisha akaunti ya Google" na ukubali ufikiaji — Google itaonya kwamba programu haijathibitishwa, ambayo ni jambo la kawaida kwa mradi wa kibinafsi; endelea kama mtumiaji wa jaribio uliyemwongeza.</li>',
+      ytSetupFallbackHtml: 'Ikiwa hatua yoyote hapa itashindwa au kivinjari chako kikizuia upakiaji, unaweza kila wakati kurudi kwenye kupakua faili la video hapo juu na kulipakia kwa mkono kwenye <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Rekodi yako ya skrini na sauti ya maikrofoni hubaki kwenye kivinjari chako — hakuna kinachopakiwa isipokuwa utumie kitufe cha YouTube, na hicho huenda moja kwa moja kutoka kivinjari chako hadi akaunti yako mwenyewe ya Google. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      errorNoScreenRecording: 'Kurekodi skrini hakutumiki kwenye kivinjari hiki. Jaribu toleo jipya zaidi la Chrome, Edge, au Firefox kwenye eneo-kazi.',
+      errorNoMediaRecorder: 'Kivinjari chako hakitumii MediaRecorder. Jaribu toleo jipya zaidi la Chrome, Edge, au Firefox.',
+      errorNoRecordingFormat: 'Hakuna muundo wa kurekodi unaotumika uliopatikana kwenye kivinjari hiki.',
+      errorScreenSharingNotStarted: 'Kushiriki skrini hakukuanzishwa: {message}',
+      errorMicAccess: 'Imeshindwa kufikia maikrofoni yako ({message}) — inarekodi bila maelezo.',
+      errorWebcamAccess: 'Imeshindwa kufikia kamera yako ya wavuti ({message}) — inarekodi bila kiputo cha kamera.',
+      statusRecording: 'INAREKODI',
+      statusPaused: 'IMESITISHWA',
+      statusRecordingSaved: 'REKODI IMEHIFADHIWA',
+      statusTrimming: 'INAKATA',
+      statusTrimApplied: 'UKATAJI UMETUMIKA',
+      progressTrimming: 'Inakata…',
+      errorTrimEndBeforeStart: 'Sehemu ya mwisho lazima iwe baada ya sehemu ya mwanzo.',
+      errorNothingToTrim: 'Rekebisha sehemu ya mwanzo au mwisho kwanza — hakuna cha kukata.',
+      errorNoReencodeSupport: 'Kivinjari chako hakitumii kusimba upya video. Jaribu toleo jipya zaidi la Chrome, Edge, au Firefox.',
+      errorNoVideoFormat: 'Hakuna muundo wa video unaotumika uliopatikana kwenye kivinjari hiki.',
+      errorCouldNotStartTrimming: 'Imeshindwa kuanzisha ukataji: {message}',
+      ytErrorSignInFailed: 'Kuingia kwa Google kumeshindwa: {error}',
+      ytErrorNoClientId: 'Bandika kwanza Kitambulisho chako cha Mteja wa Google OAuth — angalia hatua za usanidi hapa chini.',
+      ytErrorLibraryNotLoaded: 'Maktaba ya kuingia ya Google haijamaliza kupakia — subiri sekunde na ujaribu tena.',
+      ytErrorRecordFirst: 'Rekodi kitu kwanza.',
+      ytErrorConnectFirst: 'Unganisha akaunti yako ya Google kwanza.',
+      ytDefaultTitle: 'Upakiaji wa Record Forge',
+      startingUploadLabel: 'Inaanza kupakia…',
+      uploadingLabel: 'Inapakia kwenye YouTube…',
+      ytErrorRequestFailed: 'Ombi limeshindwa na hali {status}',
+      ytErrorNoUploadUrl: 'Google haikurudisha URL ya kipindi cha kupakia — kivinjari chako au kiendelezi kinaweza kuwa kinakizuia. Jaribu kupakua video na kuipakia kwa mkono kwenye studio.youtube.com badala yake.',
+      ytErrorResponseUnreadable: 'Upakiaji umekamilika lakini jibu halikuweza kusomwa.',
+      ytErrorUploadFailedStatus: 'Upakiaji umeshindwa na hali {status}: {text}',
+      ytErrorNetwork: 'Hitilafu ya mtandao imekatiza upakiaji — hii inaweza kutokea ikiwa kiendelezi cha kivinjari kinazuia maombi kwenda Google.',
+      ytErrorGeneric: 'Upakiaji umeshindwa.',
+      ytSuccessUploadedPrefix: 'Imepakiwa!',
+      ytWatchLinkLabel: 'Iangalie kwenye YouTube',
+      ytPrivacyNotePrivate: 'faragha — wewe tu ndiye unaweza kuiona'
+    },
+    sv: {
+      heroSubtitle: "Spela in skärmen med berättarröst i realtid — klipp den, spara den eller skicka den direkt till YouTube.",
+      captureOptionsHeading: "Inspelningsalternativ",
+      micLabelHtml: "🎙️ Spela in min röst under inspelningen<span class=\"opt-sub\">Berätta vad du gör medan du spelar in — mikrofonen mixas in i videons ljudspår.</span>",
+      sysAudioLabelHtml: "🔊 Ta med flik-/systemljud<span class=\"opt-sub\">Fungerar bara om du väljer att dela en webbläsarflik (och kryssar i \"Dela flikens ljud\" i väljaren) — ljud från hela skrivbordet stöds inte på alla operativsystem.</span>",
+      facecamLabelHtml: "📷 Visa min webbkamera i en bubbla i hörnet<span class=\"opt-sub\">Lägger in en liten rund webbkamerabild i nedre högra hörnet av inspelningen — i Loom-stil, bra för guider.</span>",
+      startClickHint: "När du klickar på Starta frågar webbläsaren vilken skärm, vilket fönster eller vilken flik du vill dela.",
+      otherTabHintHtml: "<strong>Behöver du visa något på en annan MigaBuilder-sida under inspelningen?</strong> Öppna den i en ny flik (högerklicka på en länk → \"Öppna i ny flik\", eller Ctrl/Cmd+klick) i stället för att klicka bort från den här fliken — om den här fliken går till en annan sida avslutas inspelningen och går förlorad, eftersom den bara finns i den här sidans minne. Med skärmdelning kan du byta till vilken annan flik eller vilket fönster som helst utan att stoppa inspelningen, så länge den här fliken är öppen.",
+      startBtnLabel: "🔴 Starta inspelning",
+      pauseBtnLabel: "⏸ Pausa",
+      resumeBtnLabel: "▶ Fortsätt",
+      muteMicLabel: "🔇 Stäng av mikrofonen",
+      unmuteMicLabel: "🔊 Slå på mikrofonen",
+      stopBtnLabel: "⏹ Stopp",
+      trimHeading: "Klipp",
+      trimPlaceholderHintText: "Spela in något först och klipp det sedan här.",
+      trimStartLabel: "Start (s)",
+      trimEndLabel: "Slut (s)",
+      useCurrentPositionLabel: "Använd aktuell position",
+      trimPlayHint: "Spela upp inspelningen till höger, pausa där du vill ha varje punkt och klicka sedan på \"Använd aktuell position\".",
+      applyTrimLabel: "✂️ Verkställ klipp",
+      resetTrimLabel: "↺ Återställ",
+      trimMoreHintHtml: "Behöver du även undertexter, översättning, vattenstämpel eller ändrad hastighet? Ladda ner nedan och öppna filen i <a href=\"clip-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Clip Forge</a>. Vill du slå ihop flera inspelningar till en video? Använd <a href=\"merge-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Merge Forge</a> — den kan foga ihop flera klipp och klippa vart och ett.",
+      previewTitle: "RECORD FORGE — FÖRHANDSVISNING",
+      statusNotStarted: "INTE PÅBÖRJAD",
+      stageEmptyStrong: "Inget inspelat ännu.",
+      stageEmptyText: "Välj inspelningsalternativ till vänster och tryck sedan på Starta inspelning.",
+      progressWorking: "Arbetar…",
+      cancelLabel: "✕ Avbryt",
+      downloadBtnLabel: "⬇ Ladda ner inspelningen (.webm)",
+      recordingHint: "Inspelningen sker direkt i din webbläsare och lämnar den aldrig om du inte använder YouTube-knappen nedan. Skärminspelning kräver en webbläsare på dator (Chrome, Edge eller Firefox) — det stöds inte på mobil.",
+      ytHeading: "Ladda upp direkt till YouTube",
+      ytClientIdLabel: "Ditt Google OAuth Client ID",
+      ytClientIdHint: "Det här är en offentlig identifierare för ditt eget Google Cloud-projekt, ingen hemlighet — se inställningsstegen nedan. Record Forge skickar det bara till Google, aldrig någon annanstans.",
+      connectGoogleLabel: "Anslut Google-konto",
+      ytConnectedText: "✓ Ansluten till ditt Google-konto.",
+      ytTitleLabel: "Videons titel",
+      ytTitlePlaceholder: "Så här konfigurerar jag mitt projekt",
+      ytDescLabel: "Beskrivning",
+      ytDescPlaceholder: "Skärminspelning gjord med Record Forge.",
+      ytTagsLabel: "Taggar (kommaseparerade)",
+      ytTagsPlaceholder: "guide, skärminspelning, så gör du",
+      ytPrivacyLabel: "Sekretess",
+      privacyPrivate: "Privat",
+      privacyUnlisted: "Olistad",
+      privacyPublic: "Offentlig",
+      ytCategoryLabel: "Kategori",
+      categoryEducation: "Utbildning",
+      categoryHowto: "Instruktioner & stil",
+      categoryScience: "Vetenskap & teknik",
+      categoryPeople: "Människor & bloggar",
+      categoryEntertainment: "Underhållning",
+      uploadToYoutubeLabel: "Ladda upp till YouTube",
+      ytUploadHint: "Spela in något först och ladda sedan upp det här. Uppladdningen går direkt från din webbläsare till Google med ditt eget konto — verktyget ser eller sparar aldrig videon eller din inloggning.",
+      ytSetupSummary: "Engångsinställning: skaffa ett Google OAuth Client ID (klicka för att visa)",
+      ytSetupStepsHtml: "<li>Gå till <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console</a>, skapa (eller välj) ett projekt och aktivera <strong>YouTube Data API v3</strong>.</li><li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, ställ in den som \"External\", lägg till scopet <code>youtube.upload</code> och lägg till ditt eget Google-konto under \"Test users\" (då slipper du Googles fullständiga granskning av appen, eftersom bara du använder den).</li><li>Under <strong>APIs &amp; Services → Credentials</strong>, skapa ett <strong>OAuth client ID</strong> av typen \"Web application\". Lägg till den exakta adressen som den här sidan körs på (t.ex. <code>https://your-username.github.io</code>) under \"Authorized JavaScript origins\".</li><li>Kopiera det genererade Client ID:t (det slutar på <code>.apps.googleusercontent.com</code>) till fältet ovan.</li><li>Klicka på \"Anslut Google-konto\" och godkänn åtkomsten — Google varnar för att appen inte är verifierad, vilket är väntat för ett personligt projekt; klicka dig vidare som testanvändaren du lade till.</li>",
+      ytSetupFallbackHtml: "Om något steg misslyckas eller webbläsaren blockerar uppladdningen kan du alltid ladda ner videofilen ovan och ladda upp den manuellt på <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com</a>.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Din skärminspelning och ditt mikrofonljud stannar i webbläsaren — ingenting laddas upp om du inte använder YouTube-knappen, och då går det direkt från din webbläsare till ditt eget Google-konto. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      errorNoScreenRecording: "Skärminspelning stöds inte i den här webbläsaren. Prova senaste Chrome, Edge eller Firefox på dator.",
+      errorNoMediaRecorder: "Din webbläsare stöder inte MediaRecorder. Prova senaste Chrome, Edge eller Firefox.",
+      errorNoRecordingFormat: "Inget inspelningsformat som stöds hittades i den här webbläsaren.",
+      errorScreenSharingNotStarted: "Skärmdelningen startades inte: {message}",
+      errorMicAccess: "Kunde inte komma åt mikrofonen ({message}) — spelar in utan berättarröst.",
+      errorWebcamAccess: "Kunde inte komma åt webbkameran ({message}) — spelar in utan kamerabubblan.",
+      statusRecording: "SPELAR IN",
+      statusPaused: "PAUSAD",
+      statusRecordingSaved: "INSPELNING SPARAD",
+      statusTrimming: "KLIPPER",
+      statusTrimApplied: "KLIPP VERKSTÄLLT",
+      progressTrimming: "Klipper…",
+      errorTrimEndBeforeStart: "Slutpunkten måste ligga efter startpunkten.",
+      errorNothingToTrim: "Justera start- eller slutpunkten först — det finns inget att klippa.",
+      errorNoReencodeSupport: "Din webbläsare stöder inte omkodning av video. Prova senaste Chrome, Edge eller Firefox.",
+      errorNoVideoFormat: "Inget videoformat som stöds hittades i den här webbläsaren.",
+      errorCouldNotStartTrimming: "Kunde inte börja klippa: {message}",
+      ytErrorSignInFailed: "Inloggningen hos Google misslyckades: {error}",
+      ytErrorNoClientId: "Klistra in ditt Google OAuth Client ID först — se inställningsstegen nedan.",
+      ytErrorLibraryNotLoaded: "Googles inloggningsbibliotek har inte laddats klart ännu — vänta en sekund och försök igen.",
+      ytErrorRecordFirst: "Spela in något först.",
+      ytErrorConnectFirst: "Anslut ditt Google-konto först.",
+      ytDefaultTitle: "Uppladdning från Record Forge",
+      startingUploadLabel: "Startar uppladdningen…",
+      uploadingLabel: "Laddar upp till YouTube…",
+      ytErrorRequestFailed: "Anropet misslyckades med status {status}",
+      ytErrorNoUploadUrl: "Google returnerade ingen adress för uppladdningen — din webbläsare eller ett tillägg kan blockera den. Prova att ladda ner videon och ladda upp den manuellt på studio.youtube.com i stället.",
+      ytErrorResponseUnreadable: "Uppladdningen blev klar men svaret kunde inte läsas.",
+      ytErrorUploadFailedStatus: "Uppladdningen misslyckades med status {status}: {text}",
+      ytErrorNetwork: "Ett nätverksfel avbröt uppladdningen — det kan hända om ett webbläsartillägg blockerar anrop till Google.",
+      ytErrorGeneric: "Uppladdningen misslyckades.",
+      ytSuccessUploadedPrefix: "Uppladdad!",
+      ytWatchLinkLabel: "Titta på YouTube",
+      ytPrivacyNotePrivate: "privat — bara du kan se den"
+    },
+    de: {
+      heroSubtitle: "Nimm deinen Bildschirm mit Live-Erzählung auf — kürze es, speichere es oder schick es direkt an YouTube.",
+      captureOptionsHeading: "Aufnahmeoptionen",
+      micLabelHtml: "🎙️ Meine Stimme beim Aufnehmen aufzeichnen<span class=\"opt-sub\">Erkläre beim Aufnehmen, was du tust — dein Mikrofon wird in die Tonspur des Videos gemischt.<\/span>",
+      sysAudioLabelHtml: "🔊 Tab-/Systemton einschließen<span class=\"opt-sub\">Funktioniert nur, wenn du einen Browser-Tab teilst (und in der Auswahl \"Tab-Audio teilen\" ankreuzt) — Ton des ganzen Desktops wird nicht auf jedem Betriebssystem unterstützt.<\/span>",
+      facecamLabelHtml: "📷 Meine Webcam in einer Eckblase zeigen<span class=\"opt-sub\">Blendet ein kleines rundes Webcam-Bild unten rechts in die Aufnahme ein — wie bei Loom, gut für Tutorials.<\/span>",
+      startClickHint: "Wenn du auf Start klickst, fragt dein Browser, welcher Bildschirm, welches Fenster oder welcher Tab geteilt werden soll.",
+      otherTabHintHtml: "<strong>Musst du beim Aufnehmen etwas auf einer anderen MigaBuilder-Seite zeigen?<\/strong> Öffne sie in einem neuen Tab (Rechtsklick auf einen Link → \"In neuem Tab öffnen\" oder Strg/Cmd+Klick), statt von diesem Tab wegzuklicken — wenn dieser Tab zu einer anderen Seite wechselt, endet die Aufnahme und geht verloren, da sie nur im Speicher dieser Seite existiert. Beim Bildschirmteilen kannst du zu jedem anderen Tab oder Fenster wechseln, ohne die Aufnahme zu stoppen, solange dieser Tab offen bleibt.",
+      startBtnLabel: "🔴 Aufnahme starten",
+      pauseBtnLabel: "⏸ Pause",
+      resumeBtnLabel: "▶ Fortsetzen",
+      muteMicLabel: "🔇 Mikro stummschalten",
+      unmuteMicLabel: "🔊 Mikro einschalten",
+      stopBtnLabel: "⏹ Stopp",
+      trimHeading: "Schneiden",
+      trimPlaceholderHintText: "Nimm zuerst etwas auf und kürze es dann hier.",
+      trimStartLabel: "Start (s)",
+      trimEndLabel: "Ende (s)",
+      useCurrentPositionLabel: "Aktuelle Position verwenden",
+      trimPlayHint: "Spiel die Aufnahme rechts ab, pausiere an den gewünschten Punkten und klick dann auf \"Aktuelle Position nutzen\".",
+      applyTrimLabel: "✂️ Kürzen anwenden",
+      resetTrimLabel: "↺ Zurücksetzen",
+      trimMoreHintHtml: "Brauchst du auch Untertitel, Übersetzung, ein Wasserzeichen oder Tempoänderungen? Lade unten herunter und öffne es dann in <a href=\"clip-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Clip Forge<\/a>. Mehrere Aufnahmen zu einem Video kombinieren? Nutze <a href=\"merge-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Merge Forge<\/a> — es kann mehrere Clips zusammensetzen und jeden kürzen.",
+      previewTitle: "RECORD FORGE — VORSCHAU",
+      statusNotStarted: "NICHT GESTARTET",
+      stageEmptyStrong: "Noch nichts aufgenommen.",
+      stageEmptyText: "Wähle links deine Aufnahmeoptionen und drücke dann Aufnahme starten.",
+      progressWorking: "Arbeitet…",
+      cancelLabel: "✕ Abbrechen",
+      downloadBtnLabel: "⬇ Aufnahme herunterladen (.webm)",
+      recordingHint: "Die Aufnahme geschieht live in deinem Browser und verlässt ihn nie, außer du nutzt den YouTube-Knopf unten. Bildschirmaufnahme braucht einen Desktop-Browser (Chrome, Edge oder Firefox) — auf Mobilgeräten wird sie nicht unterstützt.",
+      ytHeading: "Direkt auf YouTube hochladen",
+      ytClientIdLabel: "Deine Google-OAuth-Client-ID",
+      ytClientIdHint: "Das ist eine öffentliche Kennung für dein eigenes Google-Cloud-Projekt, kein Geheimnis — siehe die Einrichtungsschritte unten. Record Forge sendet sie nur an Google, nie woandershin.",
+      connectGoogleLabel: "Google-Konto verbinden",
+      ytConnectedText: "✓ Mit deinem Google-Konto verbunden.",
+      ytTitleLabel: "Videotitel",
+      ytTitlePlaceholder: "So richte ich mein Projekt ein",
+      ytDescLabel: "Beschreibung",
+      ytDescPlaceholder: "Bildschirmaufnahme, erstellt mit Record Forge.",
+      ytTagsLabel: "Tags (durch Kommas getrennt)",
+      ytTagsPlaceholder: "Tutorial, Bildschirmaufnahme, Anleitung",
+      ytPrivacyLabel: "Datenschutz",
+      privacyPrivate: "Privat",
+      privacyUnlisted: "Nicht gelistet",
+      privacyPublic: "Öffentlich",
+      ytCategoryLabel: "Kategorie",
+      categoryEducation: "Bildung",
+      categoryHowto: "Praktische Tipps & Styling",
+      categoryScience: "Wissenschaft & Technik",
+      categoryPeople: "Menschen & Blogs",
+      categoryEntertainment: "Unterhaltung",
+      uploadToYoutubeLabel: "Auf YouTube hochladen",
+      ytUploadHint: "Nimm zuerst etwas auf und lade es dann hier hoch. Uploads gehen direkt von deinem Browser über dein eigenes Konto zu Google — dieses Werkzeug sieht oder speichert weder das Video noch deine Anmeldung.",
+      ytSetupSummary: "Einmalige Einrichtung: eine Google-OAuth-Client-ID besorgen (zum Aufklappen klicken)",
+      ytSetupStepsHtml: "<li>Öffne die <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, erstelle (oder wähle) ein Projekt und aktiviere die <strong>YouTube Data API v3<\/strong>.<\/li><li>Richte unter <strong>APIs &amp; Dienste → OAuth-Zustimmungsbildschirm<\/strong> den Typ \"Extern\" ein, füge den Bereich <code>youtube.upload<\/code> hinzu und trage dein eigenes Google-Konto unter \"Testnutzer\" ein (so entfällt Googles vollständige App-Überprüfung, da nur du es nutzt).<\/li><li>Erstelle unter <strong>APIs &amp; Dienste → Anmeldedaten<\/strong> eine <strong>OAuth-Client-ID<\/strong> vom Typ \"Webanwendung\". Füge die genaue URL, unter der diese Seite läuft (z. B. <code>https://your-username.github.io<\/code>), unter \"Autorisierte JavaScript-Quellen\" hinzu.<\/li><li>Kopiere die erzeugte Client-ID (sie endet auf <code>.apps.googleusercontent.com<\/code>) in das Feld oben.<\/li><li>Klicke auf \"Google-Konto verbinden\" und erlaube den Zugriff — Google warnt, dass die App nicht überprüft ist; das ist bei einem privaten Projekt normal. Klicke dich als der hinzugefügte Testnutzer durch.<\/li>",
+      ytSetupFallbackHtml: "Wenn hier ein Schritt fehlschlägt oder dein Browser den Upload blockiert, kannst du jederzeit die Videodatei oben herunterladen und sie manuell auf <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a> hochladen.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Deine Bildschirmaufnahme und dein Mikrofonton bleiben in deinem Browser — nichts wird hochgeladen, außer du nutzt den YouTube-Knopf, und das geht direkt von deinem Browser zu deinem eigenen Google-Konto. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      errorNoScreenRecording: "Bildschirmaufnahme wird in diesem Browser nicht unterstützt. Versuch das neueste Chrome, Edge oder Firefox auf dem Desktop.",
+      errorNoMediaRecorder: "Dein Browser unterstützt MediaRecorder nicht. Versuch das neueste Chrome, Edge oder Firefox.",
+      errorNoRecordingFormat: "In diesem Browser wurde kein unterstütztes Aufnahmeformat gefunden.",
+      errorScreenSharingNotStarted: "Bildschirmteilen wurde nicht gestartet: {message}",
+      errorMicAccess: "Kein Zugriff auf dein Mikrofon ({message}) — Aufnahme ohne Erzählung.",
+      errorWebcamAccess: "Kein Zugriff auf deine Webcam ({message}) — Aufnahme ohne Kamerablase.",
+      statusRecording: "AUFNAHME",
+      statusPaused: "PAUSIERT",
+      statusRecordingSaved: "AUFNAHME GESPEICHERT",
+      statusTrimming: "WIRD GEKÜRZT",
+      statusTrimApplied: "GEKÜRZT",
+      progressTrimming: "Wird gekürzt…",
+      errorTrimEndBeforeStart: "Der Endpunkt muss nach dem Startpunkt liegen.",
+      errorNothingToTrim: "Verschiebe zuerst Start- oder Endpunkt — es gibt nichts zu kürzen.",
+      errorNoReencodeSupport: "Dein Browser unterstützt kein Neukodieren von Video. Versuch das neueste Chrome, Edge oder Firefox.",
+      errorNoVideoFormat: "In diesem Browser wurde kein unterstütztes Videoformat gefunden.",
+      errorCouldNotStartTrimming: "Kürzen konnte nicht starten: {message}",
+      ytErrorSignInFailed: "Google-Anmeldung fehlgeschlagen: {error}",
+      ytErrorNoClientId: "Füge zuerst deine Google-OAuth-Client-ID ein — siehe die Einrichtungsschritte unten.",
+      ytErrorLibraryNotLoaded: "Googles Anmeldebibliothek ist noch nicht fertig geladen — warte kurz und versuche es erneut.",
+      ytErrorRecordFirst: "Nimm zuerst etwas auf.",
+      ytErrorConnectFirst: "Verbinde zuerst dein Google-Konto.",
+      ytDefaultTitle: "Upload aus Record Forge",
+      startingUploadLabel: "Upload wird gestartet…",
+      uploadingLabel: "Wird auf YouTube hochgeladen…",
+      ytErrorRequestFailed: "Anfrage mit Status {status} fehlgeschlagen",
+      ytErrorNoUploadUrl: "Google hat keine Upload-Sitzungs-URL zurückgegeben — dein Browser oder eine Erweiterung blockiert sie eventuell. Lade das Video stattdessen herunter und lade es manuell auf studio.youtube.com hoch.",
+      ytErrorResponseUnreadable: "Upload abgeschlossen, aber die Antwort konnte nicht gelesen werden.",
+      ytErrorUploadFailedStatus: "Upload mit Status {status} fehlgeschlagen: {text}",
+      ytErrorNetwork: "Ein Netzwerkfehler hat den Upload unterbrochen — das kann passieren, wenn eine Browser-Erweiterung Anfragen an Google blockiert.",
+      ytErrorGeneric: "Upload fehlgeschlagen.",
+      ytSuccessUploadedPrefix: "Hochgeladen!",
+      ytWatchLinkLabel: "Auf YouTube ansehen",
+      ytPrivacyNotePrivate: "privat — nur du kannst es sehen"
+    },
+    pt: {
+      heroSubtitle: "Grave sua tela com narração ao vivo — corte, salve ou mande direto para o YouTube.",
+      captureOptionsHeading: "Opções de captura",
+      micLabelHtml: "🎙️ Gravar minha voz durante a captura<span class=\"opt-sub\">Narre o que está fazendo enquanto grava — seu microfone é mixado na faixa de áudio do vídeo.<\/span>",
+      sysAudioLabelHtml: "🔊 Incluir áudio da aba/sistema<span class=\"opt-sub\">Só funciona se você compartilhar uma aba do navegador (e marcar \"Compartilhar áudio da aba\" no seletor) — áudio da área de trabalho inteira não é suportado em todo sistema.<\/span>",
+      facecamLabelHtml: "📷 Mostrar minha webcam num balão no canto<span class=\"opt-sub\">Coloca uma pequena imagem circular da webcam no canto inferior direito da gravação — no estilo Loom, bom para tutoriais.<\/span>",
+      startClickHint: "Ao clicar em Iniciar, o navegador vai perguntar qual tela, janela ou aba compartilhar.",
+      otherTabHintHtml: "<strong>Precisa mostrar algo em outra página do MigaBuilder enquanto grava?<\/strong> Abra numa nova aba (clique com o botão direito num link → \"Abrir em nova aba\", ou Ctrl/Cmd+clique) em vez de sair desta aba — navegar esta aba para outra página encerra a gravação e a perde, pois ela só existe na memória desta página. O compartilhamento de tela deixa você trocar para qualquer outra aba ou janela sem parar a gravação, desde que esta aba continue aberta.",
+      startBtnLabel: "🔴 Iniciar gravação",
+      pauseBtnLabel: "⏸ Pausar",
+      resumeBtnLabel: "▶ Continuar",
+      muteMicLabel: "🔇 Silenciar microfone",
+      unmuteMicLabel: "🔊 Ativar microfone",
+      stopBtnLabel: "⏹ Parar",
+      trimHeading: "Cortar",
+      trimPlaceholderHintText: "Grave algo primeiro, depois corte aqui.",
+      trimStartLabel: "Início (s)",
+      trimEndLabel: "Fim (s)",
+      useCurrentPositionLabel: "Usar posição atual",
+      trimPlayHint: "Toque a gravação à direita, pause onde quer cada ponto e clique em \"Usar posição atual\".",
+      applyTrimLabel: "✂️ Aplicar corte",
+      resetTrimLabel: "↺ Redefinir",
+      trimMoreHintHtml: "Precisa também de legendas, tradução, marca d'água ou mudança de velocidade? Baixe abaixo e abra no <a href=\"clip-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Clip Forge<\/a>. Juntar várias gravações num vídeo? Use o <a href=\"merge-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Merge Forge<\/a> — ele junta vários clipes e corta cada um.",
+      previewTitle: "RECORD FORGE — PRÉVIA",
+      statusNotStarted: "NÃO INICIADO",
+      stageEmptyStrong: "Nada gravado ainda.",
+      stageEmptyText: "Escolha as opções de captura à esquerda e aperte Iniciar gravação.",
+      progressWorking: "Trabalhando…",
+      cancelLabel: "✕ Cancelar",
+      downloadBtnLabel: "⬇ Baixar gravação (.webm)",
+      recordingHint: "A gravação acontece ao vivo no seu navegador e nunca sai dele, a menos que você use o botão do YouTube abaixo. Gravar a tela exige um navegador de computador (Chrome, Edge ou Firefox) — não funciona no celular.",
+      ytHeading: "Enviar direto para o YouTube",
+      ytClientIdLabel: "Seu ID de cliente OAuth do Google",
+      ytClientIdHint: "É um identificador público do seu próprio projeto no Google Cloud, não um segredo — veja os passos de configuração abaixo. O Record Forge só o envia ao Google, nunca a outro lugar.",
+      connectGoogleLabel: "Conectar conta do Google",
+      ytConnectedText: "✓ Conectado à sua conta do Google.",
+      ytTitleLabel: "Título do vídeo",
+      ytTitlePlaceholder: "Como configurar meu projeto",
+      ytDescLabel: "Descrição",
+      ytDescPlaceholder: "Gravação de tela feita com o Record Forge.",
+      ytTagsLabel: "Tags (separadas por vírgula)",
+      ytTagsPlaceholder: "tutorial, gravação de tela, passo a passo",
+      ytPrivacyLabel: "Privacidade",
+      privacyPrivate: "Privado",
+      privacyUnlisted: "Não listado",
+      privacyPublic: "Público",
+      ytCategoryLabel: "Categoria",
+      categoryEducation: "Educação",
+      categoryHowto: "Guias e estilo",
+      categoryScience: "Ciência e tecnologia",
+      categoryPeople: "Pessoas e blogs",
+      categoryEntertainment: "Entretenimento",
+      uploadToYoutubeLabel: "Enviar para o YouTube",
+      ytUploadHint: "Grave algo primeiro, depois envie aqui. Os envios vão direto do seu navegador ao Google com sua própria conta — esta ferramenta nunca vê nem guarda o vídeo ou seu login.",
+      ytSetupSummary: "Configuração única: obtenha um ID de cliente OAuth do Google (clique para expandir)",
+      ytSetupStepsHtml: "<li>Acesse o <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, crie (ou escolha) um projeto e ative a <strong>YouTube Data API v3<\/strong>.<\/li><li>Em <strong>APIs e serviços → Tela de consentimento OAuth<\/strong>, configure como \"Externo\", adicione o escopo <code>youtube.upload<\/code> e adicione sua própria conta do Google em \"Usuários de teste\" (isso evita a revisão completa de verificação de apps do Google, já que só você vai usar).<\/li><li>Em <strong>APIs e serviços → Credenciais<\/strong>, crie um <strong>ID do cliente OAuth<\/strong> do tipo \"Aplicativo da Web\". Adicione o URL exato em que esta página está rodando (ex.: <code>https://your-username.github.io<\/code>) em \"Origens JavaScript autorizadas\".<\/li><li>Copie o ID do cliente gerado (termina em <code>.apps.googleusercontent.com<\/code>) para o campo acima.<\/li><li>Clique em \"Conectar conta do Google\" e aprove o acesso — o Google vai avisar que o app não é verificado, o que é esperado para um projeto pessoal; continue como o usuário de teste que você adicionou.<\/li>",
+      ytSetupFallbackHtml: "Se algum passo falhar ou seu navegador bloquear o envio, você sempre pode baixar o arquivo de vídeo acima e enviá-lo manualmente em <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a>.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Sua gravação de tela e o áudio do microfone ficam no seu navegador — nada é enviado a menos que você use o botão do YouTube, e isso vai direto do seu navegador para sua própria conta Google. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      errorNoScreenRecording: "A gravação de tela não é suportada neste navegador. Tente a versão mais recente do Chrome, Edge ou Firefox no computador.",
+      errorNoMediaRecorder: "Seu navegador não suporta MediaRecorder. Tente a versão mais recente do Chrome, Edge ou Firefox.",
+      errorNoRecordingFormat: "Nenhum formato de gravação suportado neste navegador.",
+      errorScreenSharingNotStarted: "O compartilhamento de tela não começou: {message}",
+      errorMicAccess: "Não foi possível acessar seu microfone ({message}) — gravando sem narração.",
+      errorWebcamAccess: "Não foi possível acessar sua webcam ({message}) — gravando sem o balão da câmera.",
+      statusRecording: "GRAVANDO",
+      statusPaused: "PAUSADO",
+      statusRecordingSaved: "GRAVAÇÃO SALVA",
+      statusTrimming: "CORTANDO",
+      statusTrimApplied: "CORTE APLICADO",
+      progressTrimming: "Cortando…",
+      errorTrimEndBeforeStart: "O ponto final deve vir depois do ponto inicial.",
+      errorNothingToTrim: "Ajuste o ponto inicial ou final primeiro — não há nada para cortar.",
+      errorNoReencodeSupport: "Seu navegador não suporta recodificar vídeo. Tente a versão mais recente do Chrome, Edge ou Firefox.",
+      errorNoVideoFormat: "Nenhum formato de vídeo suportado foi encontrado neste navegador.",
+      errorCouldNotStartTrimming: "Não foi possível começar o corte: {message}",
+      ytErrorSignInFailed: "Falha no login do Google: {error}",
+      ytErrorNoClientId: "Cole primeiro seu ID de cliente OAuth do Google — veja os passos de configuração abaixo.",
+      ytErrorLibraryNotLoaded: "A biblioteca de login do Google ainda não terminou de carregar — espere um segundo e tente de novo.",
+      ytErrorRecordFirst: "Grave algo primeiro.",
+      ytErrorConnectFirst: "Conecte sua conta do Google primeiro.",
+      ytDefaultTitle: "Envio do Record Forge",
+      startingUploadLabel: "Iniciando o envio…",
+      uploadingLabel: "Enviando para o YouTube…",
+      ytErrorRequestFailed: "A solicitação falhou com status {status}",
+      ytErrorNoUploadUrl: "O Google não retornou um URL de sessão de envio — seu navegador ou uma extensão pode estar bloqueando. Tente baixar o vídeo e enviá-lo manualmente em studio.youtube.com.",
+      ytErrorResponseUnreadable: "Envio concluído, mas a resposta não pôde ser lida.",
+      ytErrorUploadFailedStatus: "O envio falhou com status {status}: {text}",
+      ytErrorNetwork: "Um erro de rede interrompeu o envio — isso pode acontecer se uma extensão do navegador bloquear solicitações ao Google.",
+      ytErrorGeneric: "O envio falhou.",
+      ytSuccessUploadedPrefix: "Enviado!",
+      ytWatchLinkLabel: "Assistir no YouTube",
+      ytPrivacyNotePrivate: "privado — só você pode ver"
+    },
+    fr: {
+      heroSubtitle: "Enregistrez votre écran avec narration en direct — coupez-le, enregistrez-le ou envoyez-le directement sur YouTube.",
+      captureOptionsHeading: "Options de capture",
+      micLabelHtml: "🎙️ Enregistrer ma voix pendant la capture<span class=\"opt-sub\">Commentez ce que vous faites pendant l'enregistrement — votre micro est mixé dans la piste audio de la vidéo.<\/span>",
+      sysAudioLabelHtml: "🔊 Inclure le son de l'onglet/du système<span class=\"opt-sub\">Ne fonctionne que si vous partagez un onglet du navigateur (et cochez \"Partager l'audio de l'onglet\" dans le sélecteur) — le son de tout le bureau n'est pas pris en charge partout.<\/span>",
+      facecamLabelHtml: "📷 Afficher ma webcam dans une bulle d'angle<span class=\"opt-sub\">Incruste un petit flux webcam rond en bas à droite de l'enregistrement — façon Loom, idéal pour les tutoriels.<\/span>",
+      startClickHint: "Quand vous cliquez sur Démarrer, votre navigateur demande quel écran, quelle fenêtre ou quel onglet partager.",
+      otherTabHintHtml: "<strong>Besoin de montrer quelque chose sur une autre page MigaBuilder pendant l'enregistrement ?<\/strong> Ouvrez-la dans un nouvel onglet (clic droit sur un lien → \"Ouvrir dans un nouvel onglet\", ou Ctrl/Cmd+clic) au lieu de quitter cet onglet — changer de page dans cet onglet arrête l'enregistrement et le perd, car il n'existe que dans la mémoire de cette page. Le partage d'écran vous permet de passer à n'importe quel autre onglet ou fenêtre sans arrêter l'enregistrement, tant que cet onglet reste ouvert.",
+      startBtnLabel: "🔴 Démarrer l'enregistrement",
+      pauseBtnLabel: "⏸ Pause",
+      resumeBtnLabel: "▶ Reprendre",
+      muteMicLabel: "🔇 Couper le micro",
+      unmuteMicLabel: "🔊 Réactiver le micro",
+      stopBtnLabel: "⏹ Arrêter",
+      trimHeading: "Couper",
+      trimPlaceholderHintText: "Enregistrez d'abord quelque chose, puis coupez-le ici.",
+      trimStartLabel: "Début (s)",
+      trimEndLabel: "Fin (s)",
+      useCurrentPositionLabel: "Utiliser la position actuelle",
+      trimPlayHint: "Lisez l'enregistrement à droite, mettez en pause là où vous voulez chaque point, puis cliquez sur \"Utiliser la position actuelle\".",
+      applyTrimLabel: "✂️ Appliquer la coupe",
+      resetTrimLabel: "↺ Réinitialiser",
+      trimMoreHintHtml: "Besoin aussi de sous-titres, d'une traduction, d'un filigrane ou d'un changement de vitesse ? Téléchargez ci-dessous, puis ouvrez dans <a href=\"clip-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Clip Forge<\/a>. Combiner plusieurs enregistrements en une vidéo ? Utilisez <a href=\"merge-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Merge Forge<\/a> — il assemble plusieurs clips et coupe chacun.",
+      previewTitle: "RECORD FORGE — APERÇU",
+      statusNotStarted: "NON COMMENCÉ",
+      stageEmptyStrong: "Rien d'enregistré pour l'instant.",
+      stageEmptyText: "Choisissez vos options de capture à gauche, puis appuyez sur Démarrer l'enregistrement.",
+      progressWorking: "En cours…",
+      cancelLabel: "✕ Annuler",
+      downloadBtnLabel: "⬇ Télécharger l'enregistrement (.webm)",
+      recordingHint: "L'enregistrement se fait en direct dans votre navigateur et n'en sort jamais, sauf si vous utilisez le bouton YouTube ci-dessous. L'enregistrement d'écran nécessite un navigateur de bureau (Chrome, Edge ou Firefox) — il n'est pas pris en charge sur mobile.",
+      ytHeading: "Envoyer directement sur YouTube",
+      ytClientIdLabel: "Votre ID client OAuth Google",
+      ytClientIdHint: "C'est un identifiant public de votre propre projet Google Cloud, pas un secret — voir les étapes de configuration ci-dessous. Record Forge ne l'envoie qu'à Google, jamais ailleurs.",
+      connectGoogleLabel: "Connecter le compte Google",
+      ytConnectedText: "✓ Connecté à votre compte Google.",
+      ytTitleLabel: "Titre de la vidéo",
+      ytTitlePlaceholder: "Comment configurer mon projet",
+      ytDescLabel: "Description",
+      ytDescPlaceholder: "Enregistrement d'écran réalisé avec Record Forge.",
+      ytTagsLabel: "Tags (séparés par des virgules)",
+      ytTagsPlaceholder: "tutoriel, enregistrement d'écran, guide pratique",
+      ytPrivacyLabel: "Confidentialité",
+      privacyPrivate: "Privée",
+      privacyUnlisted: "Non répertoriée",
+      privacyPublic: "Publique",
+      ytCategoryLabel: "Catégorie",
+      categoryEducation: "Éducation",
+      categoryHowto: "Vie pratique et style",
+      categoryScience: "Science et technologie",
+      categoryPeople: "People et blogs",
+      categoryEntertainment: "Divertissement",
+      uploadToYoutubeLabel: "Envoyer sur YouTube",
+      ytUploadHint: "Enregistrez d'abord quelque chose, puis publiez-le ici. Les envois vont directement de votre navigateur à Google avec votre propre compte — cet outil ne voit ni ne stocke jamais la vidéo ou votre connexion.",
+      ytSetupSummary: "Configuration unique : obtenir un ID client OAuth Google (cliquez pour développer)",
+      ytSetupStepsHtml: "<li>Allez dans la <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, créez (ou choisissez) un projet et activez la <strong>YouTube Data API v3<\/strong>.<\/li><li>Dans <strong>API et services → Écran de consentement OAuth<\/strong>, choisissez \"Externe\", ajoutez le champ d'application <code>youtube.upload<\/code> et ajoutez votre propre compte Google dans \"Utilisateurs test\" (cela évite l'examen complet de validation d'application de Google, puisque vous seul l'utiliserez).<\/li><li>Dans <strong>API et services → Identifiants<\/strong>, créez un <strong>ID client OAuth<\/strong> de type \"Application Web\". Ajoutez l'URL exacte de cette page (ex. <code>https://your-username.github.io<\/code>) dans \"Origines JavaScript autorisées\".<\/li><li>Copiez l'ID client généré (il se termine par <code>.apps.googleusercontent.com<\/code>) dans le champ ci-dessus.<\/li><li>Cliquez sur \"Connecter le compte Google\" et autorisez l'accès — Google avertira que l'application n'est pas validée, ce qui est normal pour un projet personnel ; continuez en tant qu'utilisateur test ajouté.<\/li>",
+      ytSetupFallbackHtml: "Si une étape échoue ou si votre navigateur bloque l'envoi, vous pouvez toujours télécharger le fichier vidéo ci-dessus et l'envoyer manuellement sur <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a>.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Votre enregistrement d'écran et le son du micro restent dans votre navigateur — rien n'est envoyé sauf si vous utilisez le bouton YouTube, et cela va directement de votre navigateur à votre propre compte Google. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      errorNoScreenRecording: "L'enregistrement d'écran n'est pas pris en charge dans ce navigateur. Essayez la dernière version de Chrome, Edge ou Firefox sur ordinateur.",
+      errorNoMediaRecorder: "Votre navigateur ne prend pas en charge MediaRecorder. Essayez la dernière version de Chrome, Edge ou Firefox.",
+      errorNoRecordingFormat: "Aucun format d'enregistrement pris en charge dans ce navigateur.",
+      errorScreenSharingNotStarted: "Le partage d'écran n'a pas démarré : {message}",
+      errorMicAccess: "Impossible d'accéder au micro ({message}) — enregistrement sans narration.",
+      errorWebcamAccess: "Impossible d'accéder à la webcam ({message}) — enregistrement sans la bulle caméra.",
+      statusRecording: "ENREGISTREMENT",
+      statusPaused: "EN PAUSE",
+      statusRecordingSaved: "ENREGISTREMENT SAUVEGARDÉ",
+      statusTrimming: "COUPE EN COURS",
+      statusTrimApplied: "COUPE APPLIQUÉE",
+      progressTrimming: "Coupe…",
+      errorTrimEndBeforeStart: "Le point de fin doit se trouver après le point de début.",
+      errorNothingToTrim: "Ajustez d'abord le début ou la fin — il n'y a rien à couper.",
+      errorNoReencodeSupport: "Votre navigateur ne prend pas en charge le réencodage vidéo. Essayez la dernière version de Chrome, Edge ou Firefox.",
+      errorNoVideoFormat: "Aucun format vidéo pris en charge dans ce navigateur.",
+      errorCouldNotStartTrimming: "Impossible de démarrer la coupe : {message}",
+      ytErrorSignInFailed: "Échec de la connexion Google : {error}",
+      ytErrorNoClientId: "Collez d'abord votre ID client OAuth Google — voir les étapes de configuration ci-dessous.",
+      ytErrorLibraryNotLoaded: "La bibliothèque de connexion de Google n'a pas fini de charger — patientez une seconde et réessayez.",
+      ytErrorRecordFirst: "Enregistrez d'abord quelque chose.",
+      ytErrorConnectFirst: "Connectez d'abord votre compte Google.",
+      ytDefaultTitle: "Envoi depuis Record Forge",
+      startingUploadLabel: "Démarrage de l'envoi…",
+      uploadingLabel: "Envoi sur YouTube…",
+      ytErrorRequestFailed: "La requête a échoué avec le statut {status}",
+      ytErrorNoUploadUrl: "Google n'a pas renvoyé d'URL de session d'envoi — votre navigateur ou une extension la bloque peut-être. Téléchargez plutôt la vidéo et envoyez-la manuellement sur studio.youtube.com.",
+      ytErrorResponseUnreadable: "Envoi terminé, mais la réponse n'a pas pu être lue.",
+      ytErrorUploadFailedStatus: "L'envoi a échoué avec le statut {status} : {text}",
+      ytErrorNetwork: "Une erreur réseau a interrompu l'envoi — cela peut arriver si une extension du navigateur bloque les requêtes vers Google.",
+      ytErrorGeneric: "L'envoi a échoué.",
+      ytSuccessUploadedPrefix: "Envoyée !",
+      ytWatchLinkLabel: "Regarder sur YouTube",
+      ytPrivacyNotePrivate: "privée — vous seul pouvez la voir"
+    }
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

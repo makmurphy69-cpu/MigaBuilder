@@ -1,0 +1,891 @@
+<!-- Generated from /file-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sw" data-en-title="PNG to JPG, JPG to PNG and WebP converter — free, no upload — Image Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sw';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sw/file-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kigeuzi cha PNG kuwa JPG, JPG kuwa PNG na WebP — bure, bila kupakia — Image Forge | MigaBuilder</title>
+<meta name="description" content="Image Forge hugeuza, hubadilisha ukubwa na hubana picha, na huondoa metadata zake zilizofichwa.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kigeuzi cha PNG kuwa JPG, JPG kuwa PNG na WebP — bure, bila kupakia — Image Forge">
+<meta property="og:description" content="Image Forge hugeuza, hubadilisha ukubwa na hubana picha, na huondoa metadata zake zilizofichwa.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/file-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/sw/file-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kigeuzi cha PNG kuwa JPG, JPG kuwa PNG na WebP — bure, bila kupakia — Image Forge">
+<meta name="twitter:description" content="Image Forge hugeuza, hubadilisha ukubwa na hubana picha, na huondoa metadata zake zilizofichwa.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/file-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/file-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--navy);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+  }
+
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--line-cyan);
+    outline-offset: 2px;
+  }
+
+  header.masthead {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 26px clamp(20px, 4vw, 48px) 22px;
+    position: relative;
+  }
+  header.masthead::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--line-cyan) 0, var(--line-cyan) 1px,
+      transparent 1px, transparent 9px
+    );
+    opacity: 0.55;
+  }
+
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .solo-wrap { max-width: 560px; margin: 0 auto; padding: 28px clamp(20px, 4vw, 48px) 56px; }
+
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; }
+
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72);
+    margin: 22px 0 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  select, input[type="range"], input[type="number"] {
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+  }
+  input[type="range"] { padding: 0; height: 36px; }
+
+  .upload-drop {
+    display: block;
+    background: #fff;
+    border: 2px dashed rgba(22, 32, 43, 0.3);
+    border-radius: var(--radius);
+    padding: 28px 16px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: rgba(22, 32, 43, 0.7);
+  }
+  .upload-drop.dragover { border-color: var(--line-cyan); background: rgba(111, 209, 224, 0.08); }
+  .upload-drop strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 15px; color: var(--ink); margin-bottom: 4px; }
+
+  .file-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+  .file-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 1px solid rgba(22, 32, 43, 0.18);
+    border-radius: var(--radius);
+    padding: 8px 10px;
+  }
+  .cmp-btn { border: 1px solid rgba(22,32,43,.25); background: #fff; border-radius: 3px; padding: 5px 9px; font-size: 12px; font-weight: 600; cursor: pointer; flex: none; }
+  .compare { margin-top: 14px; background: #fff; border: 1px solid rgba(22,32,43,.15); padding: 10px; border-radius: 4px; }
+  .compare[hidden] { display: none; }
+  .compare-head { display: flex; justify-content: space-between; gap: 8px; align-items: center; font-size: 13px; margin-bottom: 8px; flex-wrap: wrap; }
+  .compare-stage { position: relative; overflow: hidden; background: repeating-conic-gradient(#eee 0% 25%, #fff 0% 50%) 50% / 16px 16px; line-height: 0; cursor: ew-resize; touch-action: none; }
+  .compare-stage img { width: 100%; height: auto; display: block; image-rendering: auto; }
+  .compare-stage .after { position: absolute; inset: 0; clip-path: inset(0 0 0 50%); }
+  .compare-stage .split { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #E2A63B; box-shadow: 0 0 0 1px rgba(0,0,0,.2); pointer-events: none; }
+  .compare-stage .tag { position: absolute; top: 8px; font: 700 11px/1 'IBM Plex Sans', sans-serif; background: rgba(8,24,38,.75); color: #fff; padding: 4px 6px; border-radius: 3px; }
+  .compare-zoom { display: flex; gap: 6px; align-items: center; font-size: 12.5px; margin-top: 8px; }
+  .file-row img { width: 40px; height: 40px; object-fit: cover; border-radius: 2px; flex: none; background: #eee; }
+  .file-row .file-meta { flex: 1; min-width: 0; }
+  .file-row .file-name { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .file-row .file-size { font-size: 11.5px; color: rgba(22, 32, 43, 0.72); }
+  .file-row .file-size .estimate { color: rgba(22, 32, 43, 0.72); }
+  .file-row .file-status { font-size: 11.5px; flex: none; }
+  .file-row .remove-file { background: transparent; border: none; color: var(--error); font-size: 16px; cursor: pointer; flex: none; padding: 2px 6px; }
+
+  .draft-btn {
+    width: 100%;
+    background: var(--amber);
+    color: var(--amber-ink);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px;
+    cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .error-box {
+    margin-top: 16px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14);
+    border: 1px solid rgba(216, 96, 74, 0.4); border-radius: var(--radius);
+    font-size: 13px; color: #6E2418; display: none;
+  }
+  .error-box.show { display: block; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 560px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ninaweza kugeuza kati ya miundo gani?","acceptedAnswer":{"@type":"Answer","text":"PNG, JPG na WebP. Chagua muundo au ukubwa mpya na upakue faili lililogeuzwa."}},{"@type":"Question","name":"Je, Image Forge ni bure?","acceptedAnswer":{"@type":"Answer","text":"Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."}},{"@type":"Question","name":"Je, faili zangu zinapakiwa?","acceptedAnswer":{"@type":"Answer","text":"Hapana. Inafanya kazi kikamilifu kwenye kivinjari chako, hivyo faili na maandishi yako hubaki kwenye kifaa chako."}},{"@type":"Question","name":"Je, naweza kubadilisha picha kadhaa kwa pamoja?","acceptedAnswer":{"@type":"Answer","text":"Ndiyo. Ongeza faili kadhaa na ubonyeze “Convert & download all” ili kuzipata zote katika muundo mpya."}},{"@type":"Question","name":"WebP ni nini?","acceptedAnswer":{"@type":"Answer","text":"WebP ni muundo wa kisasa wa picha unaofanya faili kuwa ndogo kuliko JPG na PNG kwa ubora unaofanana, na unaruhusu uwazi. Vivinjari vyote vya kisasa vinaweza kuuonyesha."}}],"inLanguage":"sw"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/file-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/file-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/file-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/file-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/file-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/file-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/file-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/file-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/file-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/file-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Image Forge</h1>
+    <p data-i18n="heroSubtitle">Convert images between PNG, JPG, and WebP — entirely in your browser.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<div class="solo-wrap">
+  <div class="panel">
+
+    <div class="section-title" data-i18n="yourImagesHeading">Your images</div>
+    <div class="field">
+      <label class="upload-drop" for="fileInput" id="dropZone">
+        <strong data-i18n="uploadDropStrong">Click to choose files, or drag them here</strong>
+        <span data-i18n="uploadDropSub">PNG, JPG, WebP, GIF, or BMP — as many as you like</span>
+      </label>
+      <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+      <div class="file-list" id="fileList"></div>
+      <div class="compare" id="comparePanel" hidden>
+        <div class="compare-head"><b id="compareTitle"></b><span id="compareSizes"></span><button type="button" class="cmp-btn" id="compareClose">×</button></div>
+        <div class="compare-stage" id="compareStage"><img id="cmpBefore" alt=""><img class="after" id="cmpAfter" alt=""><div class="split" id="cmpSplit"></div><span class="tag" style="left:8px" data-i18n="cmpOriginal">Original</span><span class="tag" id="cmpAfterTag" style="right:8px" data-i18n="cmpNew">New</span></div>
+        <label class="compare-zoom"><input type="checkbox" id="cmpZoom"> <span data-i18n="cmpZoom">Zoom to 100% to see fine detail</span></label>
+      </div>
+    </div>
+
+    <div class="section-title" data-i18n="convertToHeading">Convert to</div>
+    <p class="hint" style="margin:-4px 0 16px;padding:10px;background:rgba(78,158,115,.1);border-left:3px solid #4E9E73;">Re-exporting removes embedded camera and location metadata. Processing stays on this device.</p>
+    <div class="field">
+      <label for="formatSelect" data-i18n="formatLabel">Output format</label>
+      <select id="formatSelect">
+        <option value="image/png" data-i18n="formatPng">PNG — lossless, supports transparency</option>
+        <option value="image/jpeg" selected data-i18n="formatJpg">JPG — smaller, no transparency</option>
+        <option value="image/webp" data-i18n="formatWebp">WebP — smaller still, supports transparency</option>
+      </select>
+    </div>
+    <div class="field" id="qualityField">
+      <label for="qualitySlider"><span data-i18n="qualityLabelPrefix">Quality: </span><span id="qualityValue">85%</span></label>
+      <input type="range" id="qualitySlider" min="10" max="100" value="85" step="5">
+      <p class="hint" data-i18n="qualityHint">Lower quality means a smaller file. 100% keeps the most detail.</p>
+    </div>
+    <div class="field">
+      <label for="maxDimension" data-i18n="resizeLabel">Resize — max width or height (optional)</label>
+      <select id="maxDimension">
+        <option value="0" selected data-i18n="resizeKeep">Keep original size</option>
+        <option value="3840" data-i18n="resize4k">3840px (4K)</option>
+        <option value="1920">1920px</option>
+        <option value="1280">1280px</option>
+        <option value="800">800px</option>
+        <option value="500">500px</option>
+      </select>
+      <p class="hint" data-i18n="resizeHint">Scales the longer side down to fit if the image is bigger — the shorter side follows to keep proportions. Never scales up.</p>
+    </div>
+    <div class="field">
+      <label for="targetKb" data-i18n="targetLabel">Keep each file under (KB) — optional</label>
+      <input type="number" id="targetKb" min="5" max="50000" step="1" list="targetKbList" placeholder="No limit" data-i18n-placeholder="targetPlaceholder" inputmode="numeric">
+      <datalist id="targetKbList"><option value="20"></option><option value="50"></option><option value="100"></option><option value="200"></option><option value="500"></option><option value="1000"></option></datalist>
+      <p class="hint" data-i18n="targetHint">For forms that only take small photos (visa, exam and job sites often say 50 or 100 KB). Lowers the quality first, then the size, until each file fits.</p>
+    </div>
+    <div class="field" style="margin-bottom:8px;">
+      <label style="display:flex;align-items:center;gap:8px;font-weight:400;cursor:pointer;"><input type="checkbox" id="zipOutput" checked style="width:auto;"> <span data-i18n="zipCheckboxLabel">Bundle results into one .zip file</span></label>
+      <p class="hint" data-i18n="zipHint">Off downloads each file separately instead — handy for just one or two images.</p>
+    </div>
+
+    <button type="button" class="draft-btn" id="convertBtn" disabled data-i18n="convertBtnLabel">Convert &amp; download all</button>
+    <div class="error-box" id="errorBox"></div>
+  </div>
+</div>
+
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Image Forge</h2>
+  <p>Image Forge converts, resizes and compresses images and removes their hidden metadata.</p>
+  <h3>How to use Image Forge</h3>
+  <ol><li>Upload an image and choose the new format or size.</li><li>Press “Convert file”.</li><li>Check the preview and download the converted file.</li></ol>
+  <h3>Which formats can I convert between?</h3>
+  <p>PNG, JPG and WebP. Choose the new format or size and download the converted file.</p>
+  <h3>Is Image Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <h3 class="miga-tips">Tips for better results</h3>
+  <ul><li>Choose JPG for photos you want small, and PNG for logos, screenshots and pictures with transparency.</li><li>Pick a maximum width such as 1920px to make large phone photos quicker to send and upload.</li><li>Use “Keep each file under (KB)” when a website or form has an upload limit.</li></ul>
+  <h3>Can I convert several images at once?</h3>
+  <p>Yes. Add several files and press “Convert &amp; download all” to get them all in the new format.</p>
+  <h3>What is WebP?</h3>
+  <p>WebP is a modern image format that makes files smaller than JPG and PNG at similar quality, and it supports transparency. All modern browsers can show it.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sw/image-studio.html">Image Studio</a> · <a href="/sw/vector-forge.html">Vector Forge</a> · <a href="/sw/pdf-forge.html">PDF Forge</a></p>
+</section>
+<footer data-i18n-html="footerText">Part of <a href="/sw/">MigaBuilder</a>. Your images never leave your device — everything happens locally in the browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/file-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function(){
+  "use strict";
+
+  const fileInput = document.getElementById('fileInput');
+  const dropZone = document.getElementById('dropZone');
+  const fileListEl = document.getElementById('fileList');
+  const formatSelect = document.getElementById('formatSelect');
+  const qualityField = document.getElementById('qualityField');
+  const qualitySlider = document.getElementById('qualitySlider');
+  const qualityValue = document.getElementById('qualityValue');
+  const maxDimensionSelect = document.getElementById('maxDimension');
+  const targetKbInput = document.getElementById('targetKb');
+  const zipOutputCheckbox = document.getElementById('zipOutput');
+  const convertBtn = document.getElementById('convertBtn');
+  const errorBox = document.getElementById('errorBox');
+
+  let files = [];
+  let estimateToken = 0;
+
+  function showError(message) { errorBox.textContent = message; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function renderFileList() {
+    fileListEl.innerHTML = '';
+    files.forEach((f, i) => {
+      const row = document.createElement('div');
+      row.className = 'file-row';
+      const img = document.createElement('img');
+      img.src = f.previewUrl;
+      const meta = document.createElement('div');
+      meta.className = 'file-meta';
+      const pct = f.estimatedSize != null ? Math.round((f.estimatedSize / f.file.size - 1) * 100) : 0;
+      const estimateText = f.estimatedSize != null ? ' → <span class="estimate">~' + formatBytes(f.estimatedSize) + ' (' + (pct > 0 ? '+' : '') + pct + '%)</span>' : '';
+      const nameEl = document.createElement('div'); nameEl.className = 'file-name'; nameEl.textContent = f.file.name;
+      meta.innerHTML = '<div class="file-size">' + formatBytes(f.file.size) + estimateText + '</div>';
+      meta.prepend(nameEl);
+      const cmp = document.createElement('button');
+      cmp.type = 'button'; cmp.className = 'cmp-btn'; cmp.textContent = I18N.t('cmpBtn');
+      cmp.addEventListener('click', () => openCompare(f));
+      const status = document.createElement('div');
+      status.className = 'file-status';
+      status.textContent = f.status || '';
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'remove-file';
+      removeBtn.title = I18N.t('removeTitle');
+      removeBtn.textContent = '×';
+      removeBtn.addEventListener('click', () => {
+        if (compareEntry === f) closeCompare();
+        URL.revokeObjectURL(f.previewUrl);
+        files.splice(i, 1);
+        renderFileList();
+        convertBtn.disabled = files.length === 0;
+      });
+      row.appendChild(img);
+      row.appendChild(meta);
+      row.appendChild(status);
+      row.appendChild(cmp);
+      row.appendChild(removeBtn);
+      fileListEl.appendChild(row);
+    });
+  }
+
+  function addFiles(fileListArg) {
+    clearError();
+    const incoming = Array.from(fileListArg).filter(f => f.type.startsWith('image/'));
+    if (!incoming.length) { showError(I18N.t('errorNoImages')); return; }
+    incoming.forEach(file => {
+      files.push({ file: file, previewUrl: URL.createObjectURL(file), status: '', estimatedSize: null });
+    });
+    renderFileList();
+    convertBtn.disabled = files.length === 0;
+    scheduleEstimate();
+  }
+
+  fileInput.addEventListener('change', (e) => addFiles(e.target.files));
+
+  dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+  });
+
+  function updateQualityVisibility() {
+    qualityField.style.display = formatSelect.value === 'image/png' ? 'none' : 'block';
+  }
+  formatSelect.addEventListener('change', () => { updateQualityVisibility(); scheduleEstimate(); });
+  updateQualityVisibility();
+
+  qualitySlider.addEventListener('input', () => { qualityValue.textContent = qualitySlider.value + '%'; scheduleEstimate(); });
+  maxDimensionSelect.addEventListener('change', scheduleEstimate);
+  targetKbInput.addEventListener('input', scheduleEstimate);
+  // 1 KB is counted as 1000 bytes, so the file fits whichever way a form counts kilobytes.
+  function targetBytes() { const kb = parseFloat(targetKbInput.value); return kb >= 5 ? Math.floor(kb * 1000) : 0; }
+
+  function extensionFor(mime) {
+    if (mime === 'image/png') return 'png';
+    if (mime === 'image/webp') return 'webp';
+    return 'jpg';
+  }
+
+  function scaledDimensions(width, height, maxDimension) {
+    if (!maxDimension || (width <= maxDimension && height <= maxDimension)) return { width: width, height: height };
+    const scale = maxDimension / Math.max(width, height);
+    return { width: Math.max(1, Math.round(width * scale)), height: Math.max(1, Math.round(height * scale)) };
+  }
+
+  function loadImage(entry) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error(I18N.t('errorCouldNotRead').replace('{name}', entry.file.name)));
+      img.src = entry.previewUrl;
+    });
+  }
+
+  function encode(entry, img, mime, quality, width, height) {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      if (mime === 'image/jpeg') {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob((blob) => {
+        if (!blob) { reject(new Error(I18N.t('errorConversionFailed').replace('{name}', entry.file.name))); return; }
+        resolve(blob);
+      }, mime, quality);
+    });
+  }
+
+  // With a size limit: lower the quality first (JPG and WebP), then shrink the picture, until it fits.
+  // The quality slider is the highest quality used. A file that cannot fit comes back as small as possible, marked overLimit.
+  async function convertOne(entry, mime, quality, maxDimension, limit) {
+    const img = await loadImage(entry);
+    const size = scaledDimensions(img.naturalWidth, img.naturalHeight, maxDimension);
+    let w = size.width, h = size.height;
+    let blob = await encode(entry, img, mime, quality, w, h);
+    if (!limit || blob.size <= limit) return blob;
+    const lossy = mime !== 'image/png';
+    const floor = Math.min(0.3, quality);
+    let best = blob;
+    for (let round = 0; round < 12; round++) {
+      if (lossy && quality > floor) {
+        const low = await encode(entry, img, mime, floor, w, h);
+        if (low.size <= limit) {
+          let lo = floor, hi = quality, fit = low;
+          for (let i = 0; i < 6; i++) {
+            const mid = (lo + hi) / 2;
+            const b = await encode(entry, img, mime, mid, w, h);
+            if (b.size <= limit) { fit = b; lo = mid; } else hi = mid;
+          }
+          return fit;
+        }
+        if (low.size < best.size) best = low;
+      }
+      if (Math.max(w, h) <= 32) break;
+      const factor = Math.max(0.5, Math.min(0.9, Math.sqrt(limit / best.size) * 0.95));
+      w = Math.max(1, Math.round(w * factor));
+      h = Math.max(1, Math.round(h * factor));
+      blob = await encode(entry, img, mime, quality, w, h);
+      if (blob.size <= limit) return blob;
+      if (blob.size < best.size) best = blob;
+    }
+    best.overLimit = true;
+    return best;
+  }
+
+  let estimateTimer = null;
+  function scheduleEstimate() {
+    if (estimateTimer) clearTimeout(estimateTimer);
+    estimateTimer = setTimeout(runEstimate, 350);
+  }
+
+  async function runEstimate() {
+    if (!files.length) return;
+    const token = ++estimateToken;
+    const mime = formatSelect.value;
+    const quality = parseInt(qualitySlider.value, 10) / 100;
+    const maxDimension = parseInt(maxDimensionSelect.value, 10) || 0;
+    const limit = targetBytes();
+    for (const entry of files) {
+      if (token !== estimateToken) return; // superseded by a newer change
+      try {
+        const blob = await convertOne(entry, mime, quality, maxDimension, limit);
+        if (token !== estimateToken) return;
+        entry.estimatedSize = blob.size;
+      } catch (e) {
+        if (token !== estimateToken) return;
+        entry.estimatedSize = null;
+      }
+      renderFileList();
+    }
+    if (compareEntry && token === estimateToken) refreshCompare();
+  }
+
+  // ---------- Before / after: drag across the picture to compare the original with the new file ----------
+  const comparePanel = document.getElementById('comparePanel'), cmpBefore = document.getElementById('cmpBefore'), cmpAfter = document.getElementById('cmpAfter'),
+    cmpSplit = document.getElementById('cmpSplit'), compareStage = document.getElementById('compareStage'), cmpZoom = document.getElementById('cmpZoom');
+  let compareEntry = null, compareUrl = '', compareToken = 0, splitAt = 50;
+  function setSplit(pct) { splitAt = Math.max(0, Math.min(100, pct)); cmpAfter.style.clipPath = 'inset(0 0 0 ' + splitAt + '%)'; cmpSplit.style.left = splitAt + '%'; }
+  function stagePct(e) { const r = compareStage.getBoundingClientRect(); return (e.clientX - r.left) / r.width * 100; }
+  compareStage.addEventListener('pointerdown', e => { compareStage.setPointerCapture(e.pointerId); setSplit(stagePct(e)); });
+  compareStage.addEventListener('pointermove', e => { if (e.buttons) setSplit(stagePct(e)); });
+  compareStage.tabIndex = 0; compareStage.setAttribute('role', 'slider'); compareStage.setAttribute('aria-label', 'Before and after');
+  compareStage.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') setSplit(splitAt - 5); if (e.key === 'ArrowRight') setSplit(splitAt + 5); });
+  cmpZoom.addEventListener('change', () => { [cmpBefore, cmpAfter].forEach(im => { im.style.width = cmpZoom.checked ? cmpBefore.naturalWidth + 'px' : '100%'; im.style.maxWidth = cmpZoom.checked ? 'none' : ''; }); compareStage.style.overflow = cmpZoom.checked ? 'auto' : 'hidden'; compareStage.style.maxHeight = cmpZoom.checked ? '520px' : ''; });
+  function closeCompare() { comparePanel.hidden = true; compareEntry = null; if (compareUrl) URL.revokeObjectURL(compareUrl); compareUrl = ''; }
+  document.getElementById('compareClose').addEventListener('click', closeCompare);
+  function openCompare(entry) { compareEntry = entry; comparePanel.hidden = false; document.getElementById('compareTitle').textContent = entry.file.name; cmpBefore.src = entry.previewUrl; setSplit(50); refreshCompare(); comparePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+  async function refreshCompare() {
+    const entry = compareEntry; if (!entry) return;
+    const token = ++compareToken;
+    document.getElementById('compareSizes').textContent = I18N.t('cmpWorking');
+    try {
+      const blob = await convertOne(entry, formatSelect.value, parseInt(qualitySlider.value, 10) / 100, parseInt(maxDimensionSelect.value, 10) || 0, targetBytes());
+      if (token !== compareToken || entry !== compareEntry) return;
+      if (compareUrl) URL.revokeObjectURL(compareUrl);
+      compareUrl = URL.createObjectURL(blob); cmpAfter.src = compareUrl;
+      const pct = Math.round((blob.size / entry.file.size - 1) * 100);
+      document.getElementById('compareSizes').textContent = formatBytes(entry.file.size) + ' → ' + formatBytes(blob.size) + ' (' + (pct > 0 ? '+' : '') + pct + '%)';
+    } catch (e) { if (token === compareToken) document.getElementById('compareSizes').textContent = e.message; }
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  function uniqueName(baseName, ext, usedNames) {
+    let name = baseName + '.' + ext;
+    let n = 2;
+    while (usedNames.has(name)) { name = baseName + '-' + n + '.' + ext; n++; }
+    usedNames.add(name);
+    return name;
+  }
+
+  convertBtn.addEventListener('click', async () => {
+    clearError();
+    if (!files.length) return;
+    convertBtn.disabled = true;
+    convertBtn.textContent = I18N.t('convertBtnLoading');
+    const mime = formatSelect.value;
+    const quality = parseInt(qualitySlider.value, 10) / 100;
+    const maxDimension = parseInt(maxDimensionSelect.value, 10) || 0;
+    const limit = targetBytes();
+    const ext = extensionFor(mime);
+    const useZip = zipOutputCheckbox.checked && typeof JSZip !== 'undefined';
+
+    const zip = useZip ? new JSZip() : null;
+    const usedNames = new Set();
+    let failCount = 0;
+    for (let i = 0; i < files.length; i++) {
+      const entry = files[i];
+      entry.status = I18N.t('statusConverting');
+      renderFileList();
+      try {
+        const blob = await convertOne(entry, mime, quality, maxDimension, limit);
+        const baseName = entry.file.name.replace(/\.[^.]+$/, '');
+        const filename = uniqueName(baseName, ext, usedNames);
+        if (zip) {
+          zip.file(filename, blob);
+        } else {
+          downloadBlob(blob, filename);
+        }
+        entry.estimatedSize = blob.size;
+        entry.status = blob.overLimit ? I18N.t('statusOverLimit').replace('{size}', formatBytes(blob.size)) : I18N.t('statusDone');
+      } catch (err) {
+        entry.status = I18N.t('statusFailed');
+        failCount++;
+      }
+      renderFileList();
+      if (!zip) await new Promise(r => setTimeout(r, 250)); // avoid overwhelming the browser's download prompts
+    }
+
+    if (zip) {
+      try {
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        downloadBlob(zipBlob, 'file-forge-converted.zip');
+      } catch (err) {
+        showError(I18N.t('errorZipBuild').replace('{message}', err.message));
+      }
+    }
+
+    convertBtn.disabled = false;
+    convertBtn.textContent = I18N.t('convertBtnLabel');
+    if (failCount) showError(I18N.t('errorSomeFailed').replace('{count}', failCount));
+  });
+
+  I18N.onChange(renderFileList);
+  I18N.init({
+    en: {
+      cmpBtn: "Compare",
+      cmpOriginal: "Original",
+      cmpNew: "New",
+      cmpZoom: "Zoom to 100% to see fine detail",
+      cmpWorking: "Making the new version…",
+      targetLabel: 'Keep each file under (KB) — optional', targetPlaceholder: 'No limit', targetHint: 'For forms that only take small photos (visa, exam and job sites often say 50 or 100 KB). Lowers the quality first, then the size, until each file fits.', statusOverLimit: '⚠ Smallest possible: {size}',
+      heroSubtitle: 'Convert images between PNG, JPG, and WebP — entirely in your browser.',
+      yourImagesHeading: 'Your images', uploadDropStrong: 'Click to choose files, or drag them here',
+      uploadDropSub: 'PNG, JPG, WebP, GIF, or BMP — as many as you like',
+      convertToHeading: 'Convert to', formatLabel: 'Output format',
+      formatPng: 'PNG — lossless, supports transparency', formatJpg: 'JPG — smaller, no transparency', formatWebp: 'WebP — smaller still, supports transparency',
+      qualityLabelPrefix: 'Quality: ', qualityHint: 'Lower quality means a smaller file. 100% keeps the most detail.',
+      resizeLabel: 'Resize — max width or height (optional)', resizeKeep: 'Keep original size', resize4k: '3840px (4K)',
+      resizeHint: 'Scales the longer side down to fit if the image is bigger — the shorter side follows to keep proportions. Never scales up.',
+      zipCheckboxLabel: 'Bundle results into one .zip file', zipHint: 'Off downloads each file separately instead — handy for just one or two images.',
+      convertBtnLabel: 'Convert & download all', convertBtnLoading: 'Converting…',
+      removeTitle: 'Remove', statusConverting: 'Converting…', statusDone: '✓ Done', statusFailed: '✗ Failed',
+      errorNoImages: 'Please choose image files (PNG, JPG, WebP, GIF, or BMP).',
+      errorConversionFailed: 'Conversion failed for {name}', errorCouldNotRead: 'Could not read {name} — it may be corrupted or an unsupported format.',
+      errorZipBuild: 'Could not build the .zip file: {message}', errorSomeFailed: '{count} file(s) could not be converted — see status next to each file.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your images never leave your device — everything happens locally in the browser. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
+    },
+    es: {
+      cmpBtn: "Comparar",
+      cmpOriginal: "Original",
+      cmpNew: "Nueva",
+      cmpZoom: "Ampliar al 100 % para ver los detalles",
+      cmpWorking: "Creando la nueva versión…",
+      targetLabel: 'Mantener cada archivo por debajo de (KB) — opcional', targetPlaceholder: 'Sin límite', targetHint: 'Para formularios que solo aceptan fotos pequeñas (las webs de visados, exámenes y empleo suelen pedir 50 o 100 KB). Baja primero la calidad y después el tamaño hasta que cada archivo cabe.', statusOverLimit: '⚠ Lo más pequeño posible: {size}',
+      heroSubtitle: 'Convierte imágenes entre PNG, JPG y WebP — completamente en tu navegador.',
+      yourImagesHeading: 'Tus imágenes', uploadDropStrong: 'Haz clic para elegir archivos, o arrástralos aquí',
+      uploadDropSub: 'PNG, JPG, WebP, GIF o BMP — tantos como quieras',
+      convertToHeading: 'Convertir a', formatLabel: 'Formato de salida',
+      formatPng: 'PNG — sin pérdida, admite transparencia', formatJpg: 'JPG — más pequeño, sin transparencia', formatWebp: 'WebP — aún más pequeño, admite transparencia',
+      qualityLabelPrefix: 'Calidad: ', qualityHint: 'Una calidad menor significa un archivo más pequeño. 100% conserva el máximo detalle.',
+      resizeLabel: 'Redimensionar — ancho o alto máximo (opcional)', resizeKeep: 'Mantener tamaño original', resize4k: '3840px (4K)',
+      resizeHint: 'Reduce el lado más largo para que quepa si la imagen es más grande — el lado más corto se ajusta para mantener las proporciones. Nunca amplía.',
+      zipCheckboxLabel: 'Agrupar los resultados en un archivo .zip', zipHint: 'Desactivado descarga cada archivo por separado — útil para una o dos imágenes.',
+      convertBtnLabel: 'Convertir y descargar todo', convertBtnLoading: 'Convirtiendo…',
+      removeTitle: 'Quitar', statusConverting: 'Convirtiendo…', statusDone: '✓ Listo', statusFailed: '✗ Falló',
+      errorNoImages: 'Elige archivos de imagen (PNG, JPG, WebP, GIF o BMP).',
+      errorConversionFailed: 'La conversión falló para {name}', errorCouldNotRead: 'No se pudo leer {name} — puede estar dañado o tener un formato no compatible.',
+      errorZipBuild: 'No se pudo crear el archivo .zip: {message}', errorSomeFailed: '{count} archivo(s) no se pudieron convertir — consulta el estado junto a cada archivo.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tus imágenes nunca salen de tu dispositivo — todo ocurre localmente en el navegador. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
+    },
+    ar: {
+      cmpBtn: "قارن",
+      cmpOriginal: "الأصلية",
+      cmpNew: "الجديدة",
+      cmpZoom: "تكبير إلى 100% لرؤية التفاصيل",
+      cmpWorking: "جارٍ إنشاء النسخة الجديدة…",
+      targetLabel: 'إبقاء كل ملف أقل من (كيلوبايت) — اختياري', targetPlaceholder: 'بلا حد', targetHint: 'للنماذج التي لا تقبل إلا صورًا صغيرة (مواقع التأشيرات والامتحانات والوظائف تطلب غالبًا 50 أو 100 كيلوبايت). تُخفَّض الجودة أولًا ثم الأبعاد حتى يناسب كل ملف الحد.', statusOverLimit: '⚠ أصغر حجم ممكن: {size}',
+      heroSubtitle: 'حوّل الصور بين PNG وJPG وWebP — بالكامل داخل متصفحك.',
+      yourImagesHeading: 'صورك', uploadDropStrong: 'انقر لاختيار الملفات، أو اسحبها هنا',
+      uploadDropSub: 'PNG أو JPG أو WebP أو GIF أو BMP — بقدر ما تريد',
+      convertToHeading: 'التحويل إلى', formatLabel: 'تنسيق الإخراج',
+      formatPng: 'PNG — بلا فقدان، يدعم الشفافية', formatJpg: 'JPG — أصغر، بدون شفافية', formatWebp: 'WebP — أصغر حتى، يدعم الشفافية',
+      qualityLabelPrefix: 'الجودة: ', qualityHint: 'الجودة الأقل تعني ملفًا أصغر. 100% يحافظ على أكبر قدر من التفاصيل.',
+      resizeLabel: 'تغيير الحجم — أقصى عرض أو ارتفاع (اختياري)', resizeKeep: 'الاحتفاظ بالحجم الأصلي', resize4k: '3840 بكسل (4K)',
+      resizeHint: 'يُصغّر الجانب الأطول ليناسب الحجم إذا كانت الصورة أكبر — ويتبعه الجانب الأقصر للحفاظ على النسب. لا يُكبّر أبدًا.',
+      zipCheckboxLabel: 'تجميع النتائج في ملف .zip واحد', zipHint: 'عند الإيقاف، يُنزّل كل ملف على حدة — مفيد لصورة أو صورتين فقط.',
+      convertBtnLabel: 'تحويل وتنزيل الكل', convertBtnLoading: 'جارٍ التحويل…',
+      removeTitle: 'إزالة', statusConverting: 'جارٍ التحويل…', statusDone: '✓ تم', statusFailed: '✗ فشل',
+      errorNoImages: 'يرجى اختيار ملفات صور (PNG أو JPG أو WebP أو GIF أو BMP).',
+      errorConversionFailed: 'فشل التحويل لـ {name}', errorCouldNotRead: 'تعذّرت قراءة {name} — قد تكون تالفة أو بتنسيق غير مدعوم.',
+      errorZipBuild: 'تعذّر إنشاء ملف .zip: {message}', errorSomeFailed: 'تعذّر تحويل {count} ملف(ات) — راجع الحالة بجانب كل ملف.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. صورك لا تغادر جهازك أبدًا — كل شيء يحدث محليًا في المتصفح. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
+    },
+    zh: {
+      cmpBtn: "对比",
+      cmpOriginal: "原图",
+      cmpNew: "新图",
+      cmpZoom: "放大到 100% 查看细节",
+      cmpWorking: "正在生成新版本…",
+      targetLabel: '每个文件不超过（KB）——可选', targetPlaceholder: '不限制', targetHint: '适用于只接受小照片的表格（签证、考试和求职网站常要求 50 或 100 KB）。先降低画质，再缩小尺寸，直到每个文件都符合要求。', statusOverLimit: '⚠ 已尽量缩小：{size}',
+      heroSubtitle: '在 PNG、JPG 和 WebP 之间转换图片——完全在你的浏览器中完成。',
+      yourImagesHeading: '你的图片', uploadDropStrong: '点击选择文件，或将文件拖到此处',
+      uploadDropSub: 'PNG、JPG、WebP、GIF 或 BMP——数量不限',
+      convertToHeading: '转换为', formatLabel: '输出格式',
+      formatPng: 'PNG——无损，支持透明度', formatJpg: 'JPG——更小，不支持透明度', formatWebp: 'WebP——更小，支持透明度',
+      qualityLabelPrefix: '质量：', qualityHint: '质量越低，文件越小。100% 保留最多细节。',
+      resizeLabel: '调整大小——最大宽度或高度（可选）', resizeKeep: '保持原始大小', resize4k: '3840 像素（4K）',
+      resizeHint: '如果图片更大，会缩小较长边以适应——较短边会按比例跟随缩小。绝不会放大。',
+      zipCheckboxLabel: '将结果打包成一个 .zip 文件', zipHint: '关闭则分别下载每个文件——适合只有一两张图片时使用。',
+      convertBtnLabel: '转换并下载全部', convertBtnLoading: '转换中…',
+      removeTitle: '移除', statusConverting: '转换中…', statusDone: '✓ 已完成', statusFailed: '✗ 失败',
+      errorNoImages: '请选择图片文件（PNG、JPG、WebP、GIF 或 BMP）。',
+      errorConversionFailed: '{name} 转换失败', errorCouldNotRead: '无法读取 {name}——它可能已损坏或格式不受支持。',
+      errorZipBuild: '无法生成 .zip 文件：{message}', errorSomeFailed: '{count} 个文件无法转换——请查看每个文件旁边的状态。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的图片绝不会离开你的设备——一切都在浏览器本地完成。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
+    },
+    sw: {
+      cmpBtn: "Linganisha",
+      cmpOriginal: "Asili",
+      cmpNew: "Mpya",
+      cmpZoom: "Kuza hadi 100% kuona maelezo madogo",
+      cmpWorking: "Inatengeneza toleo jipya…",
+      targetLabel: 'Weka kila faili chini ya (KB) — hiari', targetPlaceholder: 'Bila kikomo', targetHint: 'Kwa fomu zinazokubali picha ndogo tu (tovuti za viza, mitihani na kazi mara nyingi husema KB 50 au 100). Hupunguza ubora kwanza, kisha ukubwa, hadi kila faili litoshee.', statusOverLimit: '⚠ Ndogo kabisa iwezekanavyo: {size}',
+      heroSubtitle: 'Geuza picha kati ya PNG, JPG, na WebP — yote ndani ya kivinjari chako.',
+      yourImagesHeading: 'Picha zako', uploadDropStrong: 'Bofya kuchagua faili, au ziburute hapa',
+      uploadDropSub: 'PNG, JPG, WebP, GIF, au BMP — nyingi kadri unavyotaka',
+      convertToHeading: 'Geuza kuwa', formatLabel: 'Aina ya matokeo',
+      formatPng: 'PNG — haipotezi ubora, inasaidia uwazi', formatJpg: 'JPG — ndogo zaidi, hakuna uwazi', formatWebp: 'WebP — ndogo zaidi, inasaidia uwazi',
+      qualityLabelPrefix: 'Ubora: ', qualityHint: 'Ubora wa chini humaanisha faili ndogo. 100% huhifadhi maelezo mengi zaidi.',
+      resizeLabel: 'Badilisha ukubwa — upana au urefu wa juu zaidi (hiari)', resizeKeep: 'Weka ukubwa wa asili', resize4k: 'px 3840 (4K)',
+      resizeHint: 'Hupunguza upande mrefu zaidi ili kutoshea ikiwa picha ni kubwa zaidi — upande mfupi hufuata ili kudumisha uwiano. Haiongezi ukubwa kamwe.',
+      zipCheckboxLabel: 'Kusanya matokeo katika faili moja ya .zip', zipHint: 'Ikizimwa, hupakua kila faili tofauti — inafaa kwa picha moja au mbili tu.',
+      convertBtnLabel: 'Geuza na upakue vyote', convertBtnLoading: 'Inageuza…',
+      removeTitle: 'Ondoa', statusConverting: 'Inageuza…', statusDone: '✓ Imekamilika', statusFailed: '✗ Imeshindwa',
+      errorNoImages: 'Tafadhali chagua faili za picha (PNG, JPG, WebP, GIF, au BMP).',
+      errorConversionFailed: 'Kugeuza kumeshindwa kwa {name}', errorCouldNotRead: 'Imeshindwa kusoma {name} — huenda imeharibika au ina aina isiyotumika.',
+      errorZipBuild: 'Imeshindwa kutengeneza faili ya .zip: {message}', errorSomeFailed: 'Faili {count} hazikuweza kugeuzwa — angalia hali karibu na kila faili.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Picha zako haziondoki kwenye kifaa chako kamwe — kila kitu hufanyika ndani ya kivinjari. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      cmpBtn: "Jämför",
+      cmpOriginal: "Original",
+      cmpNew: "Ny",
+      cmpZoom: "Zooma till 100 % för att se detaljer",
+      cmpWorking: "Skapar den nya versionen…",
+      targetLabel: "Håll varje fil under (KB) — valfritt", targetPlaceholder: "Ingen gräns", targetHint: "För formulär som bara tar små foton (visum-, prov- och jobbsajter skriver ofta 50 eller 100 KB). Sänker först kvaliteten och sedan storleken tills varje fil får plats.", statusOverLimit: "⚠ Minsta möjliga: {size}",
+      heroSubtitle: "Konvertera bilder mellan PNG, JPG och WebP — helt i din webbläsare.",
+      yourImagesHeading: "Dina bilder",
+      uploadDropStrong: "Klicka för att välja filer, eller dra hit dem",
+      uploadDropSub: "PNG, JPG, WebP, GIF eller BMP — så många du vill",
+      convertToHeading: "Konvertera till",
+      formatLabel: "Utdataformat",
+      formatPng: "PNG — förlustfri, stöder transparens",
+      formatJpg: "JPG — mindre, ingen transparens",
+      formatWebp: "WebP — ännu mindre, stöder transparens",
+      qualityLabelPrefix: "Kvalitet: ",
+      qualityHint: "Lägre kvalitet ger en mindre fil. 100 % behåller flest detaljer.",
+      resizeLabel: "Ändra storlek — största bredd eller höjd (valfritt)",
+      resizeKeep: "Behåll originalstorlek",
+      resize4k: "3840 px (4K)",
+      resizeHint: "Skalar ner den längre sidan om bilden är större — den kortare sidan följer med så proportionerna behålls. Skalar aldrig upp.",
+      zipCheckboxLabel: "Samla resultaten i en .zip-fil",
+      zipHint: "Avstängt laddar ner varje fil separat — praktiskt för bara en eller två bilder.",
+      convertBtnLabel: "Konvertera & ladda ner alla",
+      convertBtnLoading: "Konverterar…",
+      removeTitle: "Ta bort",
+      statusConverting: "Konverterar…",
+      statusDone: "✓ Klar",
+      statusFailed: "✗ Misslyckades",
+      errorNoImages: "Välj bildfiler (PNG, JPG, WebP, GIF eller BMP).",
+      errorConversionFailed: "Konverteringen misslyckades för {name}",
+      errorCouldNotRead: "Kunde inte läsa {name} — filen kan vara skadad eller i ett format som inte stöds.",
+      errorZipBuild: "Kunde inte skapa .zip-filen: {message}",
+      errorSomeFailed: "{count} fil(er) kunde inte konverteras — se status bredvid varje fil.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Dina bilder lämnar aldrig din enhet — allt sker lokalt i webbläsaren. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
+    },
+    de: {
+      cmpBtn: "Vergleichen",
+      cmpOriginal: "Original",
+      cmpNew: "Neu",
+      cmpZoom: "Auf 100 % zoomen, um Details zu sehen",
+      cmpWorking: "Neue Version wird erstellt…",
+      heroSubtitle: "Wandle Bilder zwischen PNG, JPG und WebP um — komplett in deinem Browser.",
+      yourImagesHeading: "Deine Bilder",
+      uploadDropStrong: "Klicke, um Dateien auszuwählen, oder ziehe sie hierher",
+      uploadDropSub: "PNG, JPG, WebP, GIF oder BMP — so viele du willst",
+      convertToHeading: "Umwandeln in",
+      formatLabel: "Ausgabeformat",
+      formatPng: "PNG — verlustfrei, unterstützt Transparenz",
+      formatJpg: "JPG — kleiner, keine Transparenz",
+      formatWebp: "WebP — noch kleiner, unterstützt Transparenz",
+      qualityLabelPrefix: "Qualität: ",
+      qualityHint: "Geringere Qualität bedeutet eine kleinere Datei. 100 % erhält die meisten Details.",
+      resizeLabel: "Größe ändern — max. Breite oder Höhe (optional)",
+      resizeKeep: "Originalgröße behalten",
+      resize4k: "3840 px (4K)",
+      resizeHint: "Verkleinert die längere Seite passend, wenn das Bild größer ist — die kürzere Seite folgt, damit die Proportionen erhalten bleiben. Vergrößert nie.",
+      zipCheckboxLabel: "Ergebnisse in einer .zip-Datei bündeln",
+      zipHint: "Ausgeschaltet wird jede Datei einzeln heruntergeladen — praktisch bei nur ein oder zwei Bildern.",
+      convertBtnLabel: "Alle umwandeln & herunterladen",
+      convertBtnLoading: "Wird umgewandelt…",
+      removeTitle: "Entfernen",
+      statusConverting: "Wird umgewandelt…",
+      statusDone: "✓ Fertig",
+      statusFailed: "✗ Fehlgeschlagen",
+      errorNoImages: "Bitte wähle Bilddateien (PNG, JPG, WebP, GIF oder BMP).",
+      errorConversionFailed: "Umwandlung fehlgeschlagen für {name}",
+      errorCouldNotRead: "{name} konnte nicht gelesen werden — die Datei ist eventuell beschädigt oder hat ein nicht unterstütztes Format.",
+      errorZipBuild: "Die .zip-Datei konnte nicht erstellt werden: {message}",
+      errorSomeFailed: "{count} Datei(en) konnten nicht umgewandelt werden — siehe Status neben jeder Datei.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Deine Bilder verlassen nie dein Gerät — alles passiert lokal im Browser. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
+    },
+    pt: {
+      cmpBtn: "Comparar",
+      cmpOriginal: "Original",
+      cmpNew: "Nova",
+      cmpZoom: "Ampliar para 100% para ver detalhes",
+      cmpWorking: "Criando a nova versão…",
+      heroSubtitle: "Converta imagens entre PNG, JPG e WebP — tudo no seu navegador.",
+      yourImagesHeading: "Suas imagens",
+      uploadDropStrong: "Clique para escolher arquivos ou arraste-os para cá",
+      uploadDropSub: "PNG, JPG, WebP, GIF ou BMP — quantos quiser",
+      convertToHeading: "Converter para",
+      formatLabel: "Formato de saída",
+      formatPng: "PNG — sem perdas, suporta transparência",
+      formatJpg: "JPG — menor, sem transparência",
+      formatWebp: "WebP — menor ainda, suporta transparência",
+      qualityLabelPrefix: "Qualidade: ",
+      qualityHint: "Qualidade menor significa arquivo menor. 100% mantém o máximo de detalhes.",
+      resizeLabel: "Redimensionar — largura ou altura máxima (opcional)",
+      resizeKeep: "Manter tamanho original",
+      resize4k: "3840 px (4K)",
+      resizeHint: "Reduz o lado maior para caber se a imagem for maior — o lado menor acompanha para manter as proporções. Nunca amplia.",
+      zipCheckboxLabel: "Juntar os resultados em um único arquivo .zip",
+      zipHint: "Desligado, cada arquivo é baixado separadamente — prático para uma ou duas imagens.",
+      convertBtnLabel: "Converter e baixar tudo",
+      convertBtnLoading: "Convertendo…",
+      removeTitle: "Remover",
+      statusConverting: "Convertendo…",
+      statusDone: "✓ Pronto",
+      statusFailed: "✗ Falhou",
+      errorNoImages: "Escolha arquivos de imagem (PNG, JPG, WebP, GIF ou BMP).",
+      errorConversionFailed: "A conversão falhou para {name}",
+      errorCouldNotRead: "Não foi possível ler {name} — o arquivo pode estar corrompido ou ter um formato não suportado.",
+      errorZipBuild: "Não foi possível criar o arquivo .zip: {message}",
+      errorSomeFailed: "{count} arquivo(s) não puderam ser convertidos — veja o status ao lado de cada arquivo.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Suas imagens nunca saem do seu dispositivo — tudo acontece localmente no navegador. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>"
+    },
+    fr: {
+      cmpBtn: "Comparer",
+      cmpOriginal: "Original",
+      cmpNew: "Nouveau",
+      cmpZoom: "Zoomer à 100 % pour voir les détails",
+      cmpWorking: "Création de la nouvelle version…",
+      heroSubtitle: "Convertissez des images entre PNG, JPG et WebP — entièrement dans votre navigateur.",
+      yourImagesHeading: "Vos images",
+      uploadDropStrong: "Cliquez pour choisir des fichiers ou faites-les glisser ici",
+      uploadDropSub: "PNG, JPG, WebP, GIF ou BMP — autant que vous voulez",
+      convertToHeading: "Convertir en",
+      formatLabel: "Format de sortie",
+      formatPng: "PNG — sans perte, gère la transparence",
+      formatJpg: "JPG — plus léger, sans transparence",
+      formatWebp: "WebP — encore plus léger, gère la transparence",
+      qualityLabelPrefix: "Qualité : ",
+      qualityHint: "Une qualité plus basse donne un fichier plus léger. 100 % conserve le plus de détails.",
+      resizeLabel: "Redimensionner — largeur ou hauteur max. (facultatif)",
+      resizeKeep: "Garder la taille d'origine",
+      resize4k: "3840 px (4K)",
+      resizeHint: "Réduit le côté le plus long s'il dépasse — le côté le plus court suit pour garder les proportions. N'agrandit jamais.",
+      zipCheckboxLabel: "Regrouper les résultats dans un seul fichier .zip",
+      zipHint: "Désactivé, chaque fichier est téléchargé séparément — pratique pour une ou deux images.",
+      convertBtnLabel: "Tout convertir et télécharger",
+      convertBtnLoading: "Conversion…",
+      removeTitle: "Supprimer",
+      statusConverting: "Conversion…",
+      statusDone: "✓ Terminé",
+      statusFailed: "✗ Échec",
+      errorNoImages: "Choisissez des fichiers image (PNG, JPG, WebP, GIF ou BMP).",
+      errorConversionFailed: "Échec de la conversion pour {name}",
+      errorCouldNotRead: "Impossible de lire {name} — le fichier est peut-être endommagé ou dans un format non pris en charge.",
+      errorZipBuild: "Impossible de créer le fichier .zip : {message}",
+      errorSomeFailed: "{count} fichier(s) n'ont pas pu être convertis — voir l'état à côté de chaque fichier.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Vos images ne quittent jamais votre appareil — tout se passe localement dans le navigateur. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>"
+    }
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script><script src="heic-support.js" defer></script>
+</body>
+</html>
