@@ -1,0 +1,573 @@
+<!-- Generated from /plane-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="ar" dir="rtl" data-en-title="Design an airplane and its engine: stall speed, takeoff, climb, ceiling and range — Plane Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='ar';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plane Forge — صمّم طائرة: شكّل الجناح والذيل، واختر محركها، وحمّلها،… | MigaBuilder</title>
+<meta name="description" content="Plane Forge أداة لتصميم الطائرات: ابدأ من طائرة شراعية أو خفيفة جدًا أو تدريب أو أدغال أو استعراضية أو تدريب كهربائية أو توربينية مروحية أو نفاثة لرجال الأعمال، وغيّر الجناح والذيل والمحرك والحمولة، وانظر كيف ستطير.">
+<link rel="canonical" href="https://migabuilder.com/ar/plane-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/plane-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Plane Forge — صمّم طائرة: شكّل الجناح والذيل، واختر محركها، وحمّلها،…">
+<meta property="og:description" content="Plane Forge أداة لتصميم الطائرات: ابدأ من طائرة شراعية أو خفيفة جدًا أو تدريب أو أدغال أو استعراضية أو تدريب كهربائية أو توربينية مروحية أو نفاثة لرجال الأعمال، وغيّر الجناح والذيل والمحرك والحمولة، وانظر كيف ستطير.">
+<meta property="og:url" content="https://migabuilder.com/ar/plane-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+main.pf-main{max-width:1400px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px;align-items:start}
+.side{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;padding:16px}
+.side h3{font:700 13px 'Space Grotesk';text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:#35516b;border-top:1px solid rgba(22,32,43,.12);padding-top:12px}
+.side h3:first-of-type{border-top:0;padding-top:0;margin-top:4px}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.presets button{background:#fff;border:1.5px solid rgba(22,32,43,.15);border-radius:6px;padding:7px 6px;text-align:left;font-size:12.5px;cursor:pointer;color:var(--ink);line-height:1.2}
+.presets button b{font-size:18px;margin-right:3px}.presets button.active{border-color:var(--amber);background:#fff7e6}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin-bottom:8px;font-size:12.5px}
+.sl[hidden]{display:none}
+.sl label{font-weight:600}.sl output{font:500 12px 'IBM Plex Mono';color:#35516b}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:#0E2A47}
+.sl2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sel{margin-bottom:8px;font-size:12.5px}.sel label{display:block;font-weight:600;margin-bottom:3px}.sel select,.sel input{width:100%;padding:6px;border:1px solid rgba(22,32,43,.25);border-radius:4px;background:#fff}
+.viewtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.viewtabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 13px;font-weight:700;cursor:pointer;color:var(--ink);font-size:13px}
+.viewtabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+#view3d{position:relative;height:min(58vh,520px);min-height:320px;border-radius:6px;overflow:hidden;background:linear-gradient(#9fc8ea,#e6f1f8)}
+#view3d canvas{display:block;width:100%;height:100%}
+.ov{position:absolute;left:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.ov button,.ov label{background:rgba(255,255,255,.9);border:1px solid rgba(22,32,43,.2);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink);display:flex;gap:5px;align-items:center}
+.dash{position:absolute;right:10px;bottom:10px;background:rgba(10,20,32,.86);color:#fff;border-radius:10px;padding:10px 14px;z-index:2;min-width:190px;font:500 12px 'IBM Plex Mono'}
+.dash b{display:block;font:700 28px 'Space Grotesk';line-height:1.05}
+.dash .row{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+.no3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#35516b}
+.svgbox{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;overflow:auto;min-height:220px}
+.svgbox svg{display:block;width:100%;height:auto}
+.hydro{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.hv{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px}
+.hv b{display:block;font:700 18px 'Space Grotesk'}.hv span{font-size:11.5px;color:rgba(22,32,43,.72)}.hv i{font-style:normal;font-size:11px;color:#35516b}
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px 16px;margin-top:10px}
+.score{font-size:12.5px}.score div{display:flex;justify-content:space-between;font-weight:600}.score .track{height:8px;background:#e7ebee;border-radius:4px;overflow:hidden;margin-top:3px}.score .track i{display:block;height:100%;background:linear-gradient(90deg,#D8604A,#E2A63B,#4E9E73)}
+.verdict{font-size:15px;line-height:1.5;margin:6px 0 0;padding:10px 12px;background:#f1efe8;border-radius:6px}
+.checks{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.checks li{padding:8px 10px;border-radius:5px;font-size:13px;line-height:1.4}
+.checks .ok{background:#eef8f1;border-left:4px solid #4E9E73}.checks .warn{background:#fff6e0;border-left:4px solid #E2A63B}.checks .bad{background:#fdeeea;border-left:4px solid #D8604A}.checks .info{background:#eef4fa;border-left:4px solid #5b8fc0}
+table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}table.t th,table.t td{border:1px solid rgba(22,32,43,.14);padding:5px 7px;text-align:right}table.t th{background:#f1efe8;text-align:center}table.t td:first-child{text-align:left}
+.tablewrap{overflow:auto;max-height:520px}
+.explain{font-size:13px;line-height:1.55;color:rgba(22,32,43,.78)}
+.engnums{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:10px 0}
+@media(max-width:980px){main.pf-main{grid-template-columns:1fr}.side{position:static;max-height:none}}
+@media print{.tool-nav,.masthead,.side,.viewtabs,.ov,footer,.miga-bar,.miga-float{display:none!important}body{background:#fff}main.pf-main{display:block}.panel{box-shadow:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does Plane Forge work out whether my plane flies?","acceptedAnswer":{"@type":"Answer","text":"It adds up the weight, then compares lift and drag from the wing area, span and drag coefficient with the thrust of your engine and propeller in a standard atmosphere. From that it simulates the takeoff run and works out stall speed, rate of climb at every altitude, ceiling, top speed, cruise, range, glide ratio and static stability."}},{"@type":"Question","name":"هل يمكنني تصميم طائرة شراعية أو كهربائية؟","acceptedAnswer":{"@type":"Answer","text":"Yes. Pick No engine for a glider to see its glide ratio and sink rate, or Electric motor and a battery size to see endurance and range."}},{"@type":"Question","name":"هل Plane Forge مجاني؟","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to use, with no account, no watermark and no paywall, and everything is calculated in your browser."}}],"inLanguage":"ar"}</script>
+<script src="i18n.js"></script>
+<script src="i18n/plane-forge.js"></script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/plane-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/plane-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/plane-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/plane-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/plane-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/plane-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/plane-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/plane-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/plane-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/plane-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/ar/">← All tools</a><span>Plane Forge</span></nav>
+<header class="masthead"><div><h1>Plane Forge</h1><p>Design an airplane: shape the wing and tail, choose its engine, load it up, and find out whether it takes off, how high it climbs, how fast and how far it flies, and whether it is stable.</p></div></header>
+<main class="pf-main">
+<aside class="panel side" aria-label="Plane design controls">
+  <h3>1 · Start from a plane</h3>
+  <div class="presets" id="presets"></div>
+  <h3>2 · Engine</h3>
+  <div class="sl2">
+    <div class="sel"><label for="p_engine">Engine</label><select id="p_engine"><option value="none">No engine (glider)</option><option value="piston">Piston + propeller</option><option value="turboprop">Turboprop</option><option value="jet">Jet (turbofan)</option><option value="electric">Electric + propeller</option></select></div>
+    <div class="sel eng"><label for="p_engines">How many</label><select id="p_engines"><option value="1">One</option><option value="2">Two</option></select></div>
+  </div>
+  <div class="sl2 piston">
+    <div class="sel"><label for="p_cyl">Cylinders</label><select id="p_cyl"><option>2</option><option>4</option><option>6</option><option>7</option><option>9</option><option>12</option></select></div>
+    <div class="sel"><label for="p_layout">Layout</label><select id="p_layout"><option value="boxer">Boxer (flat)</option><option value="inline">Inline</option><option value="radial">Radial (star)</option><option value="v">V</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel piston"><label for="p_turbo">Air supply</label><select id="p_turbo"><option value="na">Naturally aspirated</option><option value="turbo">Turbo-normalised</option></select></div>
+    <div class="sel prop"><label for="p_prop">Propeller</label><select id="p_prop"><option value="fixed">Fixed pitch</option><option value="cs">Constant speed</option></select></div>
+  </div>
+  <div id="engineSliders"></div>
+  <h3>3 · Wing, tail and body</h3>
+  <div class="sl2">
+    <div class="sel"><label for="p_wing">Wing position</label><select id="p_wing"><option value="high">High wing</option><option value="mid">Mid wing</option><option value="low">Low wing</option></select></div>
+    <div class="sel"><label for="p_sweep">Wing shape</label><select id="p_sweep"><option value="straight">Straight</option><option value="swept">Swept (for jets)</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel"><label for="p_flaps">Flaps</label><select id="p_flaps"><option value="none">None</option><option value="plain">Plain</option><option value="slotted">Slotted</option><option value="fowler">Fowler (big)</option></select></div>
+    <div class="sel"><label for="p_tail">Tail</label><select id="p_tail"><option value="conventional">Conventional</option><option value="t">T-tail</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel"><label for="p_gear">Landing gear</label><select id="p_gear"><option value="fixed">Fixed</option><option value="retract">Retractable</option></select></div>
+    <div class="sel"><label for="p_gearType">Wheels</label><select id="p_gearType"><option value="tricycle">Nose wheel</option><option value="taildragger">Tail wheel</option></select></div>
+  </div>
+  <div id="wingSliders"></div>
+  <h3>4 · Load and flight</h3>
+  <div class="sl2">
+    <div class="sel"><label for="p_category">Strength</label><select id="p_category"><option value="normal">Normal (3.8 g)</option><option value="utility">Utility (4.4 g)</option><option value="aerobatic">Aerobatic (6 g)</option></select></div>
+    <div class="sel"><label for="p_color">Colour</label><input type="color" id="p_color"></div>
+  </div>
+  <div id="loadSliders"></div>
+  <h3>5 · Save</h3>
+  <div class="actions"><button class="secondary" id="saveJson">💾 Save design</button><label class="secondary" style="cursor:pointer">📂 Open<input type="file" id="openJson" accept=".json" hidden></label><button class="secondary" id="resetBtn">↺ Reset</button></div>
+  <p class="privacy" style="margin-top:10px">🔒 Everything is calculated in your browser and saved on this device.</p>
+</aside>
+
+<div>
+  <section class="panel">
+    <div class="viewtabs" role="group" aria-label="View">
+      <button class="active" data-view="v3d" id="tab3d">✈️ 3D</button>
+      <button data-view="vperf" id="tabPerf">📈 Thrust &amp; drag</button>
+      <button data-view="vclimb" id="tabClimb">⛰️ Climb &amp; ceiling</button>
+      <button data-view="vengine" id="tabEngine">⚙️ Engine</button>
+      <button data-view="vstab" id="tabStab">⚖️ Stability</button>
+      <button data-view="vweights" id="tabWeights">🏋️ Weights</button>
+      <button data-view="vcompare" id="tabCompare">📊 Compare</button>
+    </div>
+    <div id="v3d" class="view">
+      <div id="view3d"><div class="ov"><button id="camSide">Side</button><button id="camFront">Front</button><button id="camTop">Top</button><button id="cam34">3/4</button></div>
+        <div class="dash" id="dash"><span id="dashT">Ready</span><b id="dashV">0 km/h</b><div class="row"><span id="dashAlt">0 m</span><span id="dashPhase">on the runway</span></div></div></div>
+      <div class="actions" style="margin-top:10px"><button class="primary" id="runBtn">▶ Take-off test</button><button class="secondary" id="pinBtn">📌 Pin to compare</button><button class="secondary" id="dlPNG">⬇ Picture</button><button class="secondary" id="dlOBJ">⬇ OBJ</button><button class="secondary" id="dlSTL">⬇ STL (3D print)</button><button class="secondary" id="printBtn">🖨 Spec sheet</button></div>
+    </div>
+    <div id="vperf" class="view hidden">
+      <p class="explain">The plane can fly level wherever the <b>thrust</b> (orange) is above the <b>drag</b> (blue). Drag is high when slow (the wing needs a big angle to lift the weight) and when fast (air resistance). The gap between them is what you have for climbing. Solid lines at sea level, dashed at your cruise altitude.</p>
+      <div class="svgbox" id="perfBox"></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlCSV">⬇ Flight envelope CSV</button><button class="secondary" id="dlSpec">⬇ Spec sheet CSV</button></div>
+    </div>
+    <div id="vclimb" class="view hidden">
+      <p class="explain">How fast the plane climbs at full power at each altitude. The air gets thinner as you go up, so engines without a turbo lose power and the wing needs more speed. The <b>service ceiling</b> is where the climb falls to 30 m (100 ft) per minute.</p>
+      <div class="svgbox" id="climbBox"></div>
+      <div class="tablewrap" id="climbTable" style="margin-top:10px"></div>
+    </div>
+    <div id="vengine" class="view hidden">
+      <p class="explain">The power (or thrust for a jet) your engines give at full throttle as you climb. A turbo-normalised piston engine keeps its sea-level power up high; a turboprop is flat-rated; an electric motor does not care about thin air, but the propeller still does.</p>
+      <div class="svgbox" id="engineBox"></div>
+      <div class="engnums" id="engineNums"></div>
+    </div>
+    <div id="vstab" class="view hidden">
+      <p class="explain">A plane is stable in pitch when its <b>centre of gravity</b> (CG) is ahead of the <b>neutral point</b> (where the wing and tail together act). The distance between them is the <b>static margin</b>: 5–20% of the wing chord is comfortable. Too little and it is twitchy or unflyable; too much and it is nose-heavy and hard to flare for landing. A bigger tail moves the neutral point back.</p>
+      <div class="svgbox" id="stabBox"></div>
+    </div>
+    <div id="vweights" class="view hidden">
+      <p class="explain">Every weight in the plane. Wing loading (weight per square metre of wing) sets the stall speed; power loading sets the climb.</p>
+      <div class="tablewrap" id="weightsBox"></div>
+    </div>
+    <div id="vcompare" class="view hidden">
+      <p class="explain">Press <b>📌 Pin to compare</b> to keep a design here, then change it and pin again. Up to six designs, saved on this device.</p>
+      <div class="tablewrap" id="compareBox"></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2 id="planeTitle">How well it flies</h2>
+    <p class="verdict" id="verdict"></p>
+    <div class="scores" id="scores"></div>
+    <div class="hydro" id="results"></div>
+    <ul class="checks" id="checks"></ul>
+  </section>
+  <section class="panel">
+    <h2>How Plane Forge works</h2>
+    <div class="explain">
+      <p><b>Air:</b> it uses the International Standard Atmosphere — the air is about a third thinner at 3,000 m than at sea level. <b>Lift</b> is ½·ρ·v²·S·C<sub>L</sub>; the wing stalls at its maximum lift coefficient, which flaps raise. <b>Drag</b> is the body drag (C<sub>D0</sub>) plus induced drag, which falls with a longer, slimmer wing (higher aspect ratio), plus wave drag near the speed of sound.</p>
+      <p><b>Engines:</b> piston power comes from the displacement, compression and revs, and falls with altitude unless it is turbo-normalised. A propeller turns power into thrust; its static thrust comes from momentum theory and its efficiency is about 80% in cruise. Jets give thrust directly, falling with thinner air and speed.</p>
+      <p><b>Performance:</b> the takeoff run is simulated step by step with rolling friction until the plane reaches lift-off speed, then climbs over a 15 m (50 ft) obstacle. Rate of climb is the extra power divided by the weight, worked out at every speed and altitude. Range keeps a 45-minute reserve. Stability uses the tail volume, wing aspect ratio and downwash to find the neutral point.</p>
+      <p>These are estimates for learning and comparing designs, usually within 10–20% of real aircraft. A real aircraft needs a qualified designer, structural testing and approval from the aviation authority.</p>
+    </div>
+  </section>
+</div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Plane Forge</h2>
+  <p>Plane Forge is an airplane design tool: start from a glider, microlight, trainer, bush plane, aerobatic plane, electric trainer, turboprop or business jet, change the wing, tail, engine and load, and see how well it would fly.</p>
+  <h3>How to use Plane Forge</h3>
+  <ol><li>Pick a starting plane, then change the wingspan, wing area, flaps and tail.</li><li>Choose the engine — piston, turboprop, jet or electric — and press “Take-off test”.</li><li>Read the stall speed, takeoff distance, climb, ceiling, cruise, range and stability checks, look at the charts, and pin designs to compare them.</li></ol>
+  <h3>Can I design a glider or an electric plane?</h3>
+  <p>Yes. Choose No engine for a glider to see its glide ratio and sink rate, or Electric for endurance and range from a battery.</p>
+  <h3>Is Plane Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your designs stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/ar/motor-forge.html">Motor Forge</a> · <a href="/ar/boat-forge.html">Boat Forge</a> · <a href="/ar/sim-forge.html">Vehicle Simulator</a></p>
+</section>
+
+<footer>Plane Forge is a design and learning tool. Its numbers are estimates — never build or fly an aircraft based on them alone.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/STLExporter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const G0=9.81,KMH=3.6,KT=1.94384,FT=3.28084;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+// ------------------------------------------------------------------ presets
+const BASE={name:'Trainer',type:'trainer',engine:'piston',engines:1,cyl:4,layout:'boxer',bore:130,stroke:111,cr:8.5,rpm:2700,turbo:'na',shaftKw:600,thrustKn:10,motorKw:60,battery:25,prop:'fixed',propD:1.9,
+  span:11,area:16.2,length:8.3,wing:'high',sweep:'straight',flaps:'slotted',gear:'fixed',gearType:'tricycle',tail:'conventional',cd0:0.024,category:'normal',
+  structure:590,people:2,baggage:20,fuel:200,cg:34,vh:0.65,vv:0.04,cruiseAlt:2500,cruisePct:75,color:'#2b6cb0'};
+const PRESETS={
+  trainer:{ico:'🛩️',label:'Four-seat trainer',p:{}},
+  glider:{ico:'🪁',label:'Glider',p:{engine:'none',span:15,area:10.5,length:6.7,wing:'mid',flaps:'none',gear:'retract',gearType:'tricycle',tail:'t',cd0:0.0105,structure:250,people:1,baggage:5,fuel:0,cg:38,vh:0.55,vv:0.03,category:'utility',color:'#f4f4f0'}},
+  micro:{ico:'🪽',label:'Microlight',p:{cyl:4,bore:84,stroke:61,cr:10.8,rpm:5800,span:8.1,area:9.8,length:6.1,wing:'low',flaps:'plain',cd0:0.024,structure:225,people:2,baggage:10,fuel:65,propD:1.7,cg:33,color:'#e2a63b'}},
+  bush:{ico:'🏕️',label:'Bush plane',p:{bore:130,stroke:98.4,cr:8.5,span:10.7,area:16.6,length:6.9,flaps:'fowler',gearType:'taildragger',cd0:0.034,structure:380,people:2,baggage:25,fuel:136,propD:1.9,cg:34,category:'utility',color:'#e8c33a'}},
+  aero:{ico:'🎪',label:'Aerobatic plane',p:{cyl:6,bore:130.2,stroke:111,cr:8.7,span:8,area:11,length:7.1,wing:'low',flaps:'none',gearType:'taildragger',prop:'cs',propD:1.98,cd0:0.019,structure:470,people:1,baggage:0,fuel:120,cg:37,vh:0.7,vv:0.07,category:'aerobatic',cruiseAlt:1500,color:'#d8604a'}},
+  ev:{ico:'🔋',label:'Electric trainer',p:{engine:'electric',motorKw:57,battery:24.8,span:10.7,area:9.5,length:6.5,wing:'high',flaps:'plain',cd0:0.02,structure:255,people:2,baggage:0,fuel:0,propD:1.65,cg:36,cruiseAlt:1000,cruisePct:45,color:'#4E9E73'}},
+  turboprop:{ico:'🛫',label:'Turboprop',p:{engine:'turboprop',shaftKw:895,span:16.3,area:25.8,length:14.4,wing:'low',flaps:'fowler',gear:'retract',tail:'t',prop:'cs',propD:2.67,cd0:0.021,structure:2500,people:8,baggage:180,fuel:1520,cg:34,vh:0.75,vv:0.05,cruiseAlt:7600,cruisePct:85,color:'#f0f0f0'}},
+  bizjet:{ico:'✈️',label:'Business jet',p:{engine:'jet',engines:2,thrustKn:12.6,span:15.5,area:24.6,length:15.6,wing:'low',sweep:'swept',flaps:'fowler',gear:'retract',tail:'t',cd0:0.021,structure:3800,people:7,baggage:150,fuel:2500,cg:36,vh:0.85,vv:0.07,cruiseAlt:12000,cruisePct:85,color:'#e8e8ea'}}
+};
+const FLAP={none:[0,0],plain:[0.35,0.008],slotted:[0.65,0.012],fowler:[0.95,0.018]};// extra CLmax and extra drag with full flap
+
+// ------------------------------------------------------------------ sliders
+const PIS=P=>P.engine==='piston',TP=P=>P.engine==='turboprop',JET=P=>P.engine==='jet',ELE=P=>P.engine==='electric',PROP=P=>PIS(P)||TP(P)||ELE(P),FUEL=P=>PIS(P)||TP(P)||JET(P),POW=P=>P.engine!=='none';
+const SLIDERS={
+  engineSliders:[['bore','Bore',60,160,0.5,'mm',PIS],['stroke','Stroke',50,160,0.5,'mm',PIS],['cr','Compression ratio',6,12,0.1,':1',PIS],['rpm','Engine speed (full power)',1800,7000,50,'rpm',PIS],
+    ['shaftKw','Shaft power (each)',150,3000,5,'kW',TP],['thrustKn','Thrust (each)',2,60,0.1,'kN',JET],['motorKw','Motor power (each)',10,600,1,'kW',ELE],['battery','Battery',5,300,0.5,'kWh',ELE],
+    ['propD','Propeller diameter',1,4.2,0.01,'m',PROP]],
+  wingSliders:[['span','Wingspan',5,30,0.05,'m'],['area','Wing area',5,60,0.1,'m²'],['length','Fuselage length',4,20,0.05,'m'],['cd0','Body drag (Cd0)',0.008,0.06,0.0005,''],
+    ['vh','Horizontal tail size (volume)',0.25,1.2,0.01,''],['vv','Fin size (volume)',0.01,0.12,0.002,'']],
+  loadSliders:[['structure','Airframe weight (no engine)',80,6000,5,'kg'],['people','People on board',1,10,1,''],['baggage','Baggage',0,500,5,'kg'],['fuel','Fuel',0,4000,5,'L',FUEL],
+    ['cg','Centre of gravity (% of wing chord)',10,60,0.5,'%'],['cruiseAlt','Cruise altitude',300,14000,100,'m',POW],['cruisePct','Cruise power',40,100,1,'%',POW]]
+};
+let P,G=null;
+function loadP(){try{const s=JSON.parse(localStorage.getItem('miga-plane-v1'));if(s&&s.span)return Object.assign({},BASE,s)}catch(e){}return Object.assign({},BASE)}
+P=loadP();
+function saveP(){try{localStorage.setItem('miga-plane-v1',JSON.stringify(P))}catch(e){}}
+function fmt(v,step){const d=step<0.001?4:step<0.01?3:step<0.1?2:step<1?1:0;return (+v).toFixed(d)}
+function buildSliders(){
+  for(const box in SLIDERS){$(box).innerHTML=SLIDERS[box].map(([k,lab,mn,mx,st])=>'<div class="sl" id="row_'+k+'"><label for="p_'+k+'">'+lab+'</label><output id="o_'+k+'"></output><input type="range" id="p_'+k+'" min="'+mn+'" max="'+mx+'" step="'+st+'"></div>').join('');
+    SLIDERS[box].forEach(([k,,,,st,u])=>{const el=$('p_'+k);el.oninput=()=>{P[k]=+el.value;$('o_'+k).textContent=fmt(P[k],st)+' '+u;custom();schedule()}})}
+}
+function custom(){if(PRESETS[P.type])P.name='My '+PRESETS[P.type].label.toLowerCase();P.type='custom';markPreset()}
+function refreshVisibility(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,,,show])=>{const r=$('row_'+k);if(r)r.hidden=!!(show&&!show(P))});
+  document.querySelectorAll('.piston').forEach(e=>e.classList.toggle('hidden',!PIS(P)));document.querySelectorAll('.prop').forEach(e=>e.classList.toggle('hidden',!PROP(P)));document.querySelectorAll('.eng').forEach(e=>e.classList.toggle('hidden',!POW(P)))}
+const SEL=['engine','engines','cyl','layout','turbo','prop','wing','sweep','flaps','tail','gear','gearType','category'];
+function syncControls(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,st,u])=>{$('p_'+k).value=P[k];$('o_'+k).textContent=fmt(P[k],st)+' '+u});
+  SEL.forEach(k=>$('p_'+k).value=String(P[k]));$('p_color').value=P.color;refreshVisibility();markPreset()}
+SEL.forEach(k=>$('p_'+k).onchange=()=>{const v=$('p_'+k).value;P[k]=/^\d+$/.test(v)?+v:v;
+  if(k==='engine'){if(v==='none')P.fuel=0;else if(v!=='electric'&&P.fuel<20)P.fuel=Math.round(clamp(P.area*10,40,3000));if(v==='jet')P.sweep=P.sweep;if(v==='turboprop'||v==='jet')P.prop='cs'}
+  if(k==='layout'&&v==='radial'&&P.cyl<5)P.cyl=7;if(k==='layout'&&v!=='radial'&&P.cyl%2)P.cyl=P.cyl>6?6:4;if(k==='cyl'&&P.cyl%2)P.layout='radial';
+  custom();syncControls();schedule()});
+$('p_color').oninput=()=>{P.color=$('p_color').value;schedule()};
+function renderPresets(){$('presets').innerHTML=Object.entries(PRESETS).map(([k,v])=>'<button data-p="'+k+'" id="preset-'+k+'"><b>'+v.ico+'</b>'+v.label+'</button>').join('');
+  $('presets').querySelectorAll('button').forEach(b=>b.onclick=()=>applyPreset(b.dataset.p));markPreset()}
+function applyPreset(k){const pr=PRESETS[k];P=Object.assign({},BASE,pr.p,{type:k,name:pr.label});syncControls();update();fitCamera()}
+function markPreset(){$('presets').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.p===P.type))}
+let tmr=0;function schedule(){clearTimeout(tmr);tmr=setTimeout(update,40)}
+
+// ------------------------------------------------------------------ atmosphere and engine
+function atm(h){h=Math.max(0,h);let T,rho;if(h<11000){T=288.15-0.0065*h;rho=1.225*Math.pow(T/288.15,4.2559)}else{T=216.65;rho=0.3639*Math.exp(-(h-11000)/6341.6)}return {rho,sigma:rho/1.225,a:Math.sqrt(1.4*287.05*T),T}}
+function engineModel(){const E={kind:P.engine,n:POW(P)?P.engines:0,list:[]};
+  if(PIS(P)){const B=P.bore/1000,S=P.stroke/1000,Vd=P.cyl*Math.PI/4*B*B*S,eff=c=>1-Math.pow(c,-0.3),crf=eff(P.cr)/eff(8.5),sp=2*S*P.rpm/60,fr=(1-0.00035*sp*sp)/(1-0.035);
+    E.Vd=Vd;E.L=Vd*1000;E.pistonSpeed=sp;E.kW=10.2e5*crf*Vd*P.rpm/120/1000*fr;
+    E.reduction=P.rpm>3200?P.rpm/2400:1;E.propRpm=P.rpm/E.reduction;
+    E.mass=(30+15*E.L+3*P.cyl)*(P.layout==='radial'?1.12:1)+(P.turbo==='turbo'?15:0)+(E.reduction>1?6:0);
+    E.lapse=h=>{const s=atm(h).sigma;const na=x=>clamp((x-0.12)/0.88,0,1);if(P.turbo==='turbo'){const hc=5500;return h<=hc?1:na(s)/na(atm(hc).sigma)}return na(s)};
+    E.fuel='avgas';E.dens=0.72}
+  else if(TP(P)){E.kW=P.shaftKw;E.propRpm=1700;E.mass=40+0.14*P.shaftKw;E.lapse=h=>Math.min(1,1.3*Math.pow(atm(h).sigma,0.8));E.fuel='Jet A';E.dens=0.8}
+  else if(ELE(P)){E.kW=P.motorKw;E.propRpm=2300;E.mass=5+0.25*P.motorKw;E.lapse=h=>Math.sqrt(atm(h).sigma);E.batteryKg=6.2*P.battery}
+  else if(JET(P)){E.T0=P.thrustKn*1000;E.mass=15+19*P.thrustKn;E.fuel='Jet A';E.dens=0.8;E.kW=0}
+  else{E.kW=0;E.mass=0}
+  E.hp=E.kW*1.341;return E}
+// thrust of all engines (N) at speed v (m/s), altitude h and throttle tau
+function thrust(E,v,h,tau){if(!E.n)return 0;const A=atm(h);
+  if(E.kind==='jet'){const M=v/A.a;return E.n*E.T0*Math.pow(A.sigma,0.8)*(1-0.45*M+0.25*M*M)*tau}
+  const Pw=E.kW*1000*E.lapse(h)*tau;if(Pw<=0)return 0;const D=P.propD,Ad=Math.PI*D*D/4;
+  let eta=(P.prop==='cs'?0.84:0.78)*(0.9+0.1*A.sigma)*(1-Math.exp(-Math.max(v,0.01)/(P.prop==='cs'?18:25)));// a propeller is inefficient at low speedconst tip=Math.hypot(Math.PI*D*E.propRpm/60,v)/A.a;if(tip>0.88)eta*=clamp(1-(tip-0.88)*2.5,0.3,1);
+  const Ts=(P.prop==='cs'?0.58:0.5)*Math.cbrt(2*A.rho*Ad*Pw*Pw),Tc=eta*Pw/Math.max(v,0.01);return E.n*Math.pow(Math.pow(Ts,-3)+Math.pow(Tc,-3),-1/3)}
+function propTip(E){return E.propRpm?Math.PI*P.propD*E.propRpm/60/340.3:0}
+
+// ------------------------------------------------------------------ airframe
+function airframe(E){const A={},list=[];
+  list.push(['Airframe (wing, body, tail, gear, seats)',P.structure]);if(E.n){list.push([(E.n>1?E.n+' × ':'')+engineName()+' ('+Math.round(E.mass)+' kg each)',E.mass*E.n]);if(E.batteryKg)list.push(['Battery ('+P.battery+' kWh)',E.batteryKg])}
+  const fuelKg=FUEL(P)?P.fuel*E.dens:0;if(fuelKg)list.push(['Fuel ('+P.fuel+' L '+E.fuel+')',fuelKg]);list.push([P.people===1?'Pilot':P.people+' people',P.people*80]);if(P.baggage)list.push(['Baggage',P.baggage]);
+  A.list=list;A.m=list.reduce((a,b)=>a+b[1],0);A.W=A.m*G0;A.fuelKg=fuelKg;A.empty=A.m-fuelKg-P.people*80-P.baggage;
+  A.S=P.area;A.b=P.span;A.AR=A.b*A.b/A.S;A.c=A.S/A.b;A.e=clamp(0.78+0.005*Math.min(A.AR,28),0.7,0.92);A.k=1/(Math.PI*A.e*A.AR);
+  A.cd0=P.cd0+(P.gear==='fixed'?(P.gearType==='taildragger'?0.006:0.008):0);
+  A.Mcrit=P.sweep==='swept'?0.8:0.7;A.clmax=(P.sweep==='swept'?1.3:1.5)+0.0;A.clTO=A.clmax+FLAP[P.flaps][0]*0.6;A.clL=A.clmax+FLAP[P.flaps][0];
+  A.nLimit={normal:3.8,utility:4.4,aerobatic:6}[P.category];A.rf=fusR();return A}
+function fusR(){return clamp((JET(P)||TP(P)?0.55:0.3)+0.045*P.people+(P.engine==='none'?-0.06:0),0.28,1.1)}
+function drag(A,v,h,n,extraCd){const at=atm(h),q=0.5*at.rho*v*v;if(q<1)return 0;const CL=(n||1)*A.W/(q*A.S),M=v/at.a;let cd=A.cd0+(extraCd||0)+A.k*CL*CL;if(M>A.Mcrit)cd+=20*Math.pow(M-A.Mcrit,4);return q*A.S*cd}
+const vStall=(A,h,cl)=>Math.sqrt(2*A.W/(atm(h).rho*A.S*cl));
+function climbAt(E,A,h){const vs=vStall(A,h,A.clmax),a=atm(h).a;let best=-1e9,vy=0,vmax=0;
+  for(let v=vs*1.1;v<a*0.95;v+=0.5){const ex=(thrust(E,v,h,1)-drag(A,v,h))*v/A.W;if(ex>best){best=ex;vy=v}if(ex>=0)vmax=v;else if(vmax&&v>vy)break}
+  return {roc:best,vy,vmax,vs}}
+function takeoff(E,A){const dt=0.02,m=A.m,vlof=1.1*vStall(A,0,A.clTO),clg=P.gearType==='taildragger'?0.2:0.35,mu=0.04,flapCd=FLAP[P.flaps][1]*0.5;let v=0,s=0,t=0;const samples=[];
+  if(!E.n)return {ok:false,tow:true,vlof,samples};
+  while(v<vlof){const q=0.5*1.225*v*v,L=q*A.S*clg,D=q*A.S*(A.cd0+flapCd+A.k*clg*clg),F=thrust(E,v,0,1)-D-mu*Math.max(0,A.W-L),a=F/m;
+    if(a<=0.02||t>240)return {ok:false,vlof,v,samples};v+=a*dt;s+=v*dt;t+=dt;if(Math.round(t/dt)%5===0)samples.push([t,v,0,s])}
+  const v2=1.2*vStall(A,0,A.clTO),gam=(thrust(E,v2,0,1)-drag(A,v2,0,1,flapCd))/A.W;
+  const air=gam>0.005?15/gam+v2*v2/(0.15*G0)*gam*0.5:Infinity;
+  return {ok:gam>0.005,ground:s,air,total:s+air,t,vlof,gam,samples,climbOut:gam<=0.005}}
+function compute(){const E=engineModel(),A=airframe(E);const R={E,A};
+  R.vs1=vStall(A,0,A.clmax);R.vs0=vStall(A,0,A.clL);R.va=R.vs1*Math.sqrt(A.nLimit);
+  R.to=takeoff(E,A);
+  // climb at each altitude and the ceilings
+  R.alt=[];let ceil=0,abs=0;for(let h=0;h<=15000;h+=250){const c=E.n?climbAt(E,A,h):{roc:-1,vy:0,vmax:0,vs:vStall(A,h,A.clmax)};R.alt.push([h,c.roc,c.vmax,c.vs,c.vy]);if(c.roc>=0.508)ceil=h;if(c.roc>0)abs=h;if(c.roc<0&&h>0)break}
+  R.ceiling=E.n?ceil:0;R.absCeil=abs;R.c0=E.n?climbAt(E,A,0):{roc:0,vy:0,vmax:0};
+  // cruise
+  R.hc=E.n?Math.min(P.cruiseAlt,Math.max(0,R.ceiling*0.95)):0;R.cruiseLimited=E.n&&P.cruiseAlt>R.ceiling*0.95;
+  let tau=E.lapse&&E.lapse(R.hc)>0?Math.min(1,P.cruisePct/100/E.lapse(R.hc)):P.cruisePct/100,vc=0;const vsC=vStall(A,R.hc,A.clmax),aC=atm(R.hc).a;
+  const findV=t=>{let vv=0;for(let v=vsC*1.15;v<aC*0.95;v+=0.25){if(thrust(E,v,R.hc,t)>=drag(A,v,R.hc))vv=v;else if(vv)break}return vv};
+  if(E.n){vc=findV(tau);if(!vc){tau=1;vc=findV(1)}}
+  R.vc=vc;R.tau=tau;R.pct=E.lapse?tau*E.lapse(R.hc):tau;R.Mc=vc/aC;
+  if(E.n&&vc){const Pc=E.lapse?E.kW*E.lapse(R.hc)*tau*E.n:0;// kW actually used
+    if(E.kind==='jet'){const T=drag(A,vc,R.hc);R.flow=(0.55+0.3*R.Mc)/G0*T;R.Tc=T}// kg/h
+    else if(E.kind==='electric'){R.kWc=Pc/0.9}
+    else R.flow=(E.kind==='piston'?(Pc<=0.76*E.kW*E.n?0.27:0.32):0.34)*Pc;
+    R.Pc=Pc;
+    if(E.kind==='electric'){const use=P.battery*0.85-R.kWc*(20/60);R.endur=Math.max(0,use/R.kWc);R.reserveMin=20}
+    else{const use=A.fuelKg-R.flow*0.75;R.endur=Math.max(0,use/R.flow);R.reserveMin=45}
+    R.range=R.endur*vc*KMH}
+  else{R.endur=0;R.range=0}
+  // glide
+  const cls=Math.sqrt(A.cd0/A.k);R.ld=cls/(2*A.cd0);R.vbg=Math.sqrt(2*A.W/(1.225*A.S*cls));const clm=Math.sqrt(3*A.cd0/A.k),vms=Math.sqrt(2*A.W/(1.225*A.S*clm));R.sink=vms*(4*A.cd0)/clm;R.vms=vms;
+  // landing
+  const vtd=1.15*R.vs0;R.landGround=vtd*vtd/(2*0.35*G0)*1.25;R.landTotal=R.landGround+15/Math.tan(3*Math.PI/180)*0.8;
+  // stability: the tail moves the neutral point back, the fuselage moves it forward (Munk)
+  const aw=2*Math.PI*A.AR/(A.AR+2),at=2*Math.PI*4/6,deps=2*aw/(Math.PI*A.AR),eta=P.tail==='t'?1:0.9;R.hn=0.25+eta*P.vh*(at/aw)*(1-deps)-0.69*Math.pow(2*A.rf,2)*P.length/(A.S*A.c*aw);R.sm=R.hn-P.cg/100;
+  R.ws=A.m/A.S;R.pl=E.kW?A.m/(E.kW*E.n):0;R.tw=E.kind==='jet'?E.n*E.T0/A.W:0;R.tip=propTip(E);
+  return R}
+function engineName(){if(PIS(P))return P.cyl+'-cylinder '+({boxer:'flat',inline:'inline',radial:'radial',v:'V'}[P.layout])+' piston engine';if(TP(P))return 'turboprop';if(JET(P))return 'turbofan';if(ELE(P))return 'electric motor';return 'no engine'}
+
+// ------------------------------------------------------------------ results
+const kmh=v=>Math.round(v*KMH)+' km/h',kt=v=>Math.round(v*KT)+' kt';
+function scoreBars(){const R=G,sc=(v,a,b)=>clamp((v-a)/(b-a)*10,0,10);
+  G.scores={'Short takeoff':R.to.ok?sc(R.to.total,1500,150):0,Climb:sc(R.c0.roc,0.5,15),Speed:sc(Math.log(Math.max(R.vc,R.c0.vmax,1)*KMH),Math.log(90),Math.log(900)),Range:sc(Math.log(Math.max(R.range,1)),Math.log(80),Math.log(3500)),Stability:R.sm<0?0:R.sm<0.05?R.sm/0.05*6:R.sm<=0.2?10:Math.max(3,10-(R.sm-0.2)*40),Glide:sc(R.ld,6,45)};
+  if(!POW(P)){delete G.scores['Short takeoff'];delete G.scores.Climb;delete G.scores.Speed;delete G.scores.Range}
+  $('scores').innerHTML=Object.entries(G.scores).map(([k,v])=>'<div class="score"><div><span>'+k+'</span><span>'+v.toFixed(1)+'/10</span></div><div class="track"><i style="width:'+(v*10)+'%"></i></div></div>').join('')}
+function renderResults(){const R=G,{E,A}=R,pw=POW(P);
+  $('planeTitle').textContent=(PRESETS[P.type]?PRESETS[P.type].label:P.name||'Custom plane')+' — how well it flies';
+  const hv=(v,l,sub)=>'<div class="hv"><b>'+v+'</b><span>'+l+'</span>'+(sub?'<br><i>'+sub+'</i>':'')+'</div>';
+  const items=[hv(Math.round(A.m).toLocaleString()+' kg','Take-off weight',Math.round(A.m*2.2046).toLocaleString()+' lb · empty '+Math.round(A.empty)+' kg'),
+    hv(Math.round(R.ws)+' kg/m²','Wing loading','aspect ratio '+A.AR.toFixed(1)),
+    pw?(E.kind==='jet'?hv((E.n*P.thrustKn).toFixed(1)+' kN','Total thrust','thrust/weight '+R.tw.toFixed(2)):hv(Math.round(E.hp*E.n)+' hp','Total power',Math.round(E.kW*E.n)+' kW · '+R.pl.toFixed(1)+' kg per kW')):'',
+    hv(kmh(R.vs0),'Stall speed, flaps down',kt(R.vs0)+' · clean '+kmh(R.vs1)),
+    pw?hv(R.to.ok?Math.round(R.to.ground)+' m':'cannot','Take-off run',R.to.ok?Math.round(R.to.total)+' m over a 15 m obstacle':R.to.climbOut?'lifts off but cannot climb':'not enough thrust'):hv('tow','Take-off','needs a winch or a tow plane'),
+    pw?hv(Math.round(R.c0.roc*60)+' m/min','Climb at sea level',Math.round(R.c0.roc*196.85)+' ft/min at '+kmh(R.c0.vy)):'',
+    pw?hv(Math.round(R.ceiling).toLocaleString()+(R.ceiling>=15000?'+':'')+' m','Service ceiling',Math.round(R.ceiling*FT).toLocaleString()+(R.ceiling>=15000?'+':'')+' ft'):'',
+    pw?hv(R.vc?kmh(R.vc):'—','Cruise speed',R.vc?kt(R.vc)+' at '+Math.round(R.hc).toLocaleString()+' m, '+Math.round(R.pct*100)+'% power'+(R.Mc>0.5?' · Mach '+R.Mc.toFixed(2):''):''):'',
+    pw?hv(kmh(Math.max(...R.alt.map(a=>a[2]))),'Top speed',kt(Math.max(...R.alt.map(a=>a[2]))) ):'',
+    pw?hv(Math.round(R.range).toLocaleString()+' km','Range',Math.round(R.range/1.852)+' nm · '+R.endur.toFixed(1)+' h, keeping '+R.reserveMin+' min reserve'):'',
+    pw&&R.flow?hv(Math.round(R.flow/E.dens)+' L/h','Fuel burn in cruise',Math.round(R.flow)+' kg/h of '+E.fuel):'',
+    pw&&R.kWc?hv(Math.round(R.kWc)+' kW','Battery power in cruise',P.battery+' kWh battery'):'',
+    hv(R.ld.toFixed(1)+' : 1','Best glide ratio','at '+kmh(R.vbg)+' · '+(R.ld).toFixed(0)+' km from 1,000 m'),
+    hv(R.sink.toFixed(2)+' m/s','Minimum sink','at '+kmh(R.vms)),
+    hv(Math.round(R.landTotal)+' m','Landing over 15 m','ground roll '+Math.round(R.landGround)+' m'),
+    hv((R.sm*100).toFixed(0)+'%','Static margin',R.sm<0?'unstable':R.sm<0.05?'twitchy':R.sm<=0.25?'stable':'very nose-heavy'),
+    hv(kmh(R.va),'Manoeuvring speed','full controls OK below this · '+A.nLimit+' g')].filter(Boolean);
+  $('results').innerHTML=items.join('');scoreBars();
+  const best=Object.entries(G.scores).filter(e=>e[0]!=='Stability').sort((a,b)=>b[1]-a[1]),worst=best[best.length-1];
+  $('verdict').innerHTML=pw?(R.to.ok?'It takes off in <b>'+Math.round(R.to.ground)+' m</b>, climbs at <b>'+Math.round(R.c0.roc*196.85)+' ft/min</b>, cruises at <b>'+(R.vc?kmh(R.vc):'—')+'</b> and flies about <b>'+Math.round(R.range).toLocaleString()+' km</b>.':'<b>It cannot take off</b> as designed — see the checks below.')+' Its strongest point is <b>'+best[0][0].toLowerCase()+'</b>; its weakest is <b>'+worst[0].toLowerCase()+'</b>.':
+    'A glider with a best glide of <b>'+R.ld.toFixed(0)+' : 1</b> — from 1,000 m up it can glide about <b>'+R.ld.toFixed(0)+' km</b> in still air — and a minimum sink of <b>'+R.sink.toFixed(2)+' m/s</b>, so it stays up in thermals rising faster than that.';
+  const C=[];const add=(k,t)=>C.push('<li class="'+k+'">'+t+'</li>');
+  if(pw){if(!R.to.ok)add('bad',R.to.climbOut?'❌ It reaches lift-off speed but has too little spare thrust to climb. More power, a bigger wing or less weight.':'❌ Not enough thrust to reach lift-off speed ('+kmh(R.to.vlof)+'). More power, a bigger propeller or a lighter plane.');
+    else if(R.to.total>1200)add('warn','⚠️ Needs '+Math.round(R.to.total)+' m to clear a 15 m obstacle — only big airports. More power, flaps or wing area shorten it.');
+    else if(R.to.total<250)add('ok','✅ Short take-off: '+Math.round(R.to.total)+' m over a 15 m obstacle — fine for grass strips.');
+    else add('ok','✅ Take-off over 15 m in '+Math.round(R.to.total)+' m.');
+    if(R.to.ok&&R.c0.roc<2.5)add('warn','⚠️ Weak climb ('+Math.round(R.c0.roc*196.85)+' ft/min). Rules for light planes ask for at least about 300 ft/min; on a hot day it will be worse.');
+    if(R.cruiseLimited&&R.ceiling>0)add('warn','⚠️ It cannot reach '+P.cruiseAlt.toLocaleString()+' m — the ceiling is '+Math.round(R.ceiling).toLocaleString()+' m, so it cruises lower. A turbo or more power helps.');
+    if(R.range<=0&&R.to.ok)add('bad','❌ Not enough '+(ELE(P)?'battery':'fuel')+' to keep the '+R.reserveMin+'-minute reserve. Add '+(ELE(P)?'battery':'fuel')+'.');
+    else if(ELE(P)&&R.endur<1)add('info','ℹ️ About '+Math.round(R.endur*60)+' minutes of flying — typical of electric planes today. Batteries hold about 1/40 of the energy of fuel per kilogram.');
+    if(R.tip>0.88)add('warn','⚠️ Propeller tips at Mach '+R.tip.toFixed(2)+': loud and inefficient. Use a smaller propeller or a reduction gearbox.');
+    if(PIS(P)&&E.pistonSpeed>16)add('warn','⚠️ Mean piston speed '+E.pistonSpeed.toFixed(1)+' m/s at full power — aircraft engines run long hours at full power and usually stay under about 14 m/s.');
+    if(R.pl>14)add('warn','⚠️ '+R.pl.toFixed(1)+' kg per kW of power is underpowered: slow climb, long take-off.');
+    if(JET(P)&&R.Mc>A.Mcrit)add('info','ℹ️ Cruising at Mach '+R.Mc.toFixed(2)+', above where shock waves add drag (Mach '+A.Mcrit.toFixed(2)+')'+(P.sweep==='swept'?'.':' — a swept wing pushes that higher.'));
+    if((PIS(P)||ELE(P))&&R.ceiling>3800)add('info','ℹ️ The engine could climb to '+Math.round(R.ceiling).toLocaleString()+' m, but above about 3,800 m (12,500 ft) the pilot needs oxygen, and above about 7,600 m a pressurised cabin.');
+    if(JET(P)&&P.sweep==='straight')add('info','ℹ️ Jets cruise fast and high; a swept wing delays the drag rise near the speed of sound.')}
+  else add('info','ℹ️ No engine: it needs a winch launch or a tow behind another plane, then it climbs in rising air (thermals and ridge lift).');
+  const single=POW(P)&&P.engines===1&&!JET(P)&&!TP(P);
+  if(single&&R.vs0>113/KMH)add('warn','⚠️ Stall speed '+kt(R.vs0)+' is above the 61-knot limit for small single-engine planes (CS-23 / FAR 23). Add wing area or bigger flaps, or make it lighter.');
+  if(A.m<=600&&R.vs0<=83/KMH&&P.people<=2&&POW(P)&&!JET(P))add('ok','✅ Fits the 600 kg microlight / ultralight class (stall at or below 45 knots).');
+  if(R.sm<0)add('bad','❌ The centre of gravity is behind the neutral point: the plane would pitch up or down out of control. Move the CG forward or make the tail bigger.');
+  else if(R.sm<0.05)add('warn','⚠️ Static margin only '+(R.sm*100).toFixed(0)+'%: very twitchy in pitch. Move the CG forward or enlarge the tail.');
+  else if(R.sm>0.3)add('warn','⚠️ Static margin '+(R.sm*100).toFixed(0)+'%: very nose-heavy — it may not be able to raise the nose to flare for landing. Move the CG back.');
+  else add('ok','✅ Stable in pitch: static margin '+(R.sm*100).toFixed(0)+'% of the wing chord.');
+  if(P.vh<0.4)add('warn','⚠️ The horizontal tail is small (volume '+P.vh.toFixed(2)+'). Most planes use 0.5–0.8.');
+  if(P.vv<0.025)add('warn','⚠️ The fin is small (volume '+P.vv.toFixed(3)+'): it will wander from side to side. Most planes use 0.03–0.08.');
+  if(A.AR>32)add('warn','⚠️ Aspect ratio '+A.AR.toFixed(0)+' is extreme: the wing would need to be very strong and stiff to not flex too much.');
+  if(A.AR<4.5)add('info','ℹ️ A short, stubby wing (aspect ratio '+A.AR.toFixed(1)+') rolls fast but has high induced drag and a poor glide.');
+  if(!POW(P)&&R.ld>40)add('ok','✅ Glide ratio '+R.ld.toFixed(0)+':1 — competition glider territory.');
+  if(P.category==='aerobatic'&&R.pl>9)add('warn','⚠️ Aerobatic planes need plenty of power to climb back up after manoeuvres; this one has '+R.pl.toFixed(1)+' kg per kW.');
+  if(P.gearType==='taildragger')add('info','ℹ️ Tail-wheel planes are lighter and handle rough strips well, but are trickier to keep straight on the runway.');
+  $('checks').innerHTML=C.join('')}
+
+// ------------------------------------------------------------------ charts
+const nice=v=>{const p=Math.pow(10,Math.floor(Math.log10(v))),f=v/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p};
+function axes(w,h,pad,xMax,yMax,xl,yl,xs){let s='<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="11">';
+  for(let i=0;i<=5;i++){const y=pad.t+(h-pad.t-pad.b)*i/5;s+='<line x1="'+pad.l+'" x2="'+(w-pad.r)+'" y1="'+y+'" y2="'+y+'" stroke="#e3e7ea"/><text x="'+(pad.l-6)+'" y="'+(y+4)+'" text-anchor="end" fill="#35516b">'+Math.round(yMax*(1-i/5)).toLocaleString()+'</text>'}
+  const X=x=>pad.l+x/xMax*(w-pad.l-pad.r);for(let x=0;x<=xMax+1e-9;x+=xs)s+='<text x="'+X(x)+'" y="'+(h-pad.b+16)+'" text-anchor="middle" fill="#35516b">'+Math.round(x).toLocaleString()+'</text>';
+  s+='<text x="'+(w/2)+'" y="'+(h-6)+'" text-anchor="middle" fill="#35516b">'+xl+'</text><text x="'+(pad.l-6)+'" y="14" text-anchor="end" fill="#35516b" font-weight="700">'+yl+'</text>';return s}
+function envelope(h){const {E,A}=G,vs=vStall(A,h,A.clmax),a=atm(h).a,rows=[];for(let v=Math.max(5,vs*0.9);v<Math.min(a*0.95,(G.c0.vmax||G.vbg*2.5)*1.35+20);v+=1)rows.push([v,thrust(E,v,h,1),drag(A,v,h)]);return rows}
+function renderPerf(){const w=760,h=360,pad={l:62,r:20,t:24,b:40};const sl=envelope(0),cr=POW(P)?envelope(G.hc):[];
+  const xMax=Math.ceil(Math.max(...sl.map(r=>r[0]),...cr.map(r=>r[0]))*KMH/50)*50,yMax=nice(Math.max(...sl.map(r=>Math.min(r[2],r[1]*1.4+1)),...sl.map(r=>r[1]),1)*1.1);
+  const X=v=>pad.l+v*KMH/xMax*(w-pad.l-pad.r),Y=y=>h-pad.b-Math.min(y,yMax)/yMax*(h-pad.t-pad.b);
+  let s=axes(w,h,pad,xMax,yMax,'airspeed (km/h)','N',xMax>600?100:50);
+  const line=(rows,i,col,dash)=>'<path d="'+rows.map((r,k)=>(k?'L':'M')+X(r[0]).toFixed(1)+' '+Y(r[i]).toFixed(1)).join(' ')+'" fill="none" stroke="'+col+'" stroke-width="3"'+(dash?' stroke-dasharray="7 5"':'')+'/>';
+  s+=line(sl,2,'#2b6cb0');if(POW(P))s+=line(sl,1,'#e08a1e');if(cr.length){s+=line(cr,2,'#2b6cb0',1);s+=line(cr,1,'#e08a1e',1)}
+  const vs=G.vs1;s+='<line x1="'+X(vs)+'" x2="'+X(vs)+'" y1="'+pad.t+'" y2="'+(h-pad.b)+'" stroke="#D8604A" stroke-width="2" stroke-dasharray="4 4"/><text x="'+(X(vs)+4)+'" y="'+(pad.t+12)+'" fill="#D8604A" font-weight="700">stall '+Math.round(vs*KMH)+'</text>';
+  if(G.c0.vmax){s+='<circle cx="'+X(G.c0.vmax)+'" cy="'+Y(drag(G.A,G.c0.vmax,0))+'" r="5" fill="#16202b"/><text x="'+(X(G.c0.vmax)-6)+'" y="'+(Y(drag(G.A,G.c0.vmax,0))-8)+'" text-anchor="end" fill="#16202b" font-weight="700">top '+Math.round(G.c0.vmax*KMH)+' km/h</text>'}
+  s+='<rect x="'+(w-250)+'" y="'+(pad.t)+'" width="230" height="44" fill="#fff" opacity=".9"/><line x1="'+(w-244)+'" x2="'+(w-220)+'" y1="'+(pad.t+12)+'" y2="'+(pad.t+12)+'" stroke="#e08a1e" stroke-width="3"/><text x="'+(w-214)+'" y="'+(pad.t+16)+'" fill="#35516b">thrust</text><line x1="'+(w-160)+'" x2="'+(w-136)+'" y1="'+(pad.t+12)+'" y2="'+(pad.t+12)+'" stroke="#2b6cb0" stroke-width="3"/><text x="'+(w-130)+'" y="'+(pad.t+16)+'" fill="#35516b">drag</text><text x="'+(w-244)+'" y="'+(pad.t+36)+'" fill="#35516b">solid: sea level · dashed: '+Math.round(G.hc).toLocaleString()+' m</text>';
+  s+='</svg>';$('perfBox').innerHTML=s;G.perfSVG=s}
+function renderClimb(){const w=760,h=360,pad={l:62,r:20,t:24,b:40},rows=G.alt.filter(r=>r[1]>-0.5);
+  if(!POW(P)){$('climbBox').innerHTML='<p class="muted" style="padding:16px">A glider has no engine to climb with — it gains height in rising air. Its minimum sink is '+G.sink.toFixed(2)+' m/s, so any thermal rising faster than that lifts it.</p>';$('climbTable').innerHTML='';return}
+  const xMax=nice(Math.max(1,...rows.map(r=>r[1]*60))*1.1),yMax=Math.ceil(Math.max(1000,...rows.map(r=>r[0]))/1000)*1000;
+  const X=v=>pad.l+Math.max(0,v)/xMax*(w-pad.l-pad.r),Y=y=>h-pad.b-y/yMax*(h-pad.t-pad.b);
+  let s=axes(w,h,pad,xMax,yMax,'rate of climb at full power (m/min)','altitude m',xMax/5);
+  s+='<path d="'+rows.map((r,k)=>(k?'L':'M')+X(r[1]*60).toFixed(1)+' '+Y(r[0]).toFixed(1)).join(' ')+'" fill="none" stroke="#4E9E73" stroke-width="3"/>';
+  [[G.ceiling,'service ceiling '+Math.round(G.ceiling).toLocaleString()+' m','#D8604A'],[G.hc,'cruise '+Math.round(G.hc).toLocaleString()+' m','#2b6cb0']].forEach(([a,l,c])=>{s+='<line x1="'+pad.l+'" x2="'+(w-pad.r)+'" y1="'+Y(a)+'" y2="'+Y(a)+'" stroke="'+c+'" stroke-dasharray="5 4"/><text x="'+(w-pad.r-4)+'" y="'+(Y(a)-5)+'" text-anchor="end" fill="'+c+'" font-weight="700">'+l+'</text>'});
+  s+='</svg>';$('climbBox').innerHTML=s;G.climbSVG=s;
+  $('climbTable').innerHTML='<table class="t"><tr><th>Altitude</th><th>Climb</th><th>Top speed</th><th>Stall speed (clean)</th><th>Air density</th></tr>'+G.alt.filter((r,i)=>r[0]%1000===0&&r[1]>-0.5).map(r=>'<tr><td>'+r[0].toLocaleString()+' m ('+Math.round(r[0]*FT).toLocaleString()+' ft)</td><td>'+Math.round(r[1]*196.85)+' ft/min</td><td>'+(r[2]?Math.round(r[2]*KMH)+' km/h':'—')+'</td><td>'+Math.round(r[3]*KMH)+' km/h</td><td>'+Math.round(atm(r[0]).sigma*100)+'%</td></tr>').join('')+'</table>'}
+function renderEngine(){const {E}=G,w=760,h=300,pad={l:62,r:20,t:24,b:40};
+  if(!E.n){$('engineBox').innerHTML='<p class="muted" style="padding:16px">No engine: this is a glider.</p>';$('engineNums').innerHTML='';return}
+  const jet=E.kind==='jet',f=hh=>jet?E.n*E.T0*Math.pow(atm(hh).sigma,0.8)/1000:E.n*E.kW*E.lapse(hh)*1.341,yMax=nice(f(0)*1.15),xMax=14000;
+  const X=x=>pad.l+x/xMax*(w-pad.l-pad.r),Y=y=>h-pad.b-y/yMax*(h-pad.t-pad.b);let s=axes(w,h,pad,xMax,yMax,'altitude (m)',jet?'kN':'hp',2000);
+  const pts=[];for(let a=0;a<=xMax;a+=250)pts.push([a,f(a)]);s+='<path d="'+pts.map((p,k)=>(k?'L':'M')+X(p[0]).toFixed(1)+' '+Y(p[1]).toFixed(1)).join(' ')+'" fill="none" stroke="#e08a1e" stroke-width="3"/></svg>';
+  $('engineBox').innerHTML=s;G.engineSVG=s;const hv=(v,l)=>'<div class="hv"><b>'+v+'</b><span>'+l+'</span></div>';
+  const n=[];if(PIS(P)){n.push(hv(Math.round(E.L*1000).toLocaleString()+' cc',E.L.toFixed(2)+' litres, '+P.cyl+' cylinders'),hv(Math.round(E.hp)+' hp','Power each at '+P.rpm+' rpm'),hv(E.pistonSpeed.toFixed(1)+' m/s','Mean piston speed'),hv(E.reduction>1?E.reduction.toFixed(2)+' : 1':'direct','Propeller gearbox'),hv(Math.round(E.propRpm)+' rpm','Propeller speed'))}
+  if(TP(P))n.push(hv(P.shaftKw+' kW','Shaft power each'),hv(Math.round(E.propRpm)+' rpm','Propeller speed'));if(ELE(P))n.push(hv(P.motorKw+' kW','Motor power each'),hv(P.battery+' kWh','Battery'),hv(Math.round(E.batteryKg)+' kg','Battery weight'));
+  if(JET(P))n.push(hv(P.thrustKn+' kN','Thrust each'),hv(Math.round(P.thrustKn*224.8).toLocaleString()+' lbf','Thrust each'));
+  if(PROP(P))n.push(hv('Mach '+G.tip.toFixed(2),'Propeller tip speed'),hv(Math.round(thrust(E,0,0,1)).toLocaleString()+' N','Static thrust (all)'));n.push(hv(Math.round(E.mass)+' kg','Engine weight each'));
+  $('engineNums').innerHTML=n.join('')}
+function renderStab(){const w=760,h=220,c=G.A.c,x0=120,sc=480,toX=f=>x0+f*sc;const cg=P.cg/100,np=G.hn;
+  let s='<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="12">';
+  s+='<path d="M'+x0+' 110 C '+(x0+40)+' 70, '+(x0+200)+' 72, '+(x0+sc)+' 108 C '+(x0+200)+' 122, '+(x0+40)+' 126, '+x0+' 110 Z" fill="#dfe8f0" stroke="#35516b" stroke-width="2"/>';
+  s+='<text x="'+x0+'" y="160" fill="#35516b">leading edge</text><text x="'+(x0+sc)+'" y="160" text-anchor="end" fill="#35516b">trailing edge · chord '+c.toFixed(2)+' m</text>';
+  const okCol=G.sm<0?'#D8604A':G.sm<0.05||G.sm>0.3?'#E2A63B':'#4E9E73';
+  s+='<rect x="'+Math.min(toX(cg),toX(np))+'" y="96" width="'+Math.abs(toX(np)-toX(cg))+'" height="28" fill="'+okCol+'" opacity=".35"/>';
+  s+='<g><circle cx="'+toX(cg)+'" cy="110" r="10" fill="#fff" stroke="#16202b" stroke-width="2"/><path d="M'+toX(cg)+' 100 v20 M'+(toX(cg)-10)+' 110 h20" stroke="#16202b" stroke-width="2"/><text x="'+toX(cg)+'" y="60" text-anchor="middle" font-weight="700">CG '+(cg*100).toFixed(0)+'%</text><line x1="'+toX(cg)+'" x2="'+toX(cg)+'" y1="64" y2="98" stroke="#16202b"/></g>';
+  s+='<g><path d="M'+toX(np)+' 96 l-8 -14 h16 z" fill="#2b6cb0"/><text x="'+toX(np)+'" y="200" text-anchor="middle" fill="#2b6cb0" font-weight="700">neutral point '+(np*100).toFixed(0)+'%</text><line x1="'+toX(np)+'" x2="'+toX(np)+'" y1="124" y2="186" stroke="#2b6cb0"/></g>';
+  s+='<text x="'+(w-16)+'" y="30" text-anchor="end" font-weight="700" fill="'+okCol+'">static margin '+(G.sm*100).toFixed(0)+'%</text></svg>';$('stabBox').innerHTML=s}
+function renderWeights(){const {A}=G;$('weightsBox').innerHTML='<table class="t"><tr><th>Item</th><th>Weight kg</th><th>Share</th></tr>'+A.list.map(w=>'<tr><td>'+esc(w[0])+'</td><td>'+w[1].toFixed(0)+'</td><td>'+(w[1]/A.m*100).toFixed(0)+'%</td></tr>').join('')+
+  '<tr><th style="text-align:left">Total</th><th>'+A.m.toFixed(0)+'</th><th></th></tr></table><p class="muted">Wing loading '+G.ws.toFixed(0)+' kg/m² · aspect ratio '+A.AR.toFixed(1)+' · mean chord '+A.c.toFixed(2)+' m · drag with gear Cd0 '+A.cd0.toFixed(4)+' · span efficiency '+A.e.toFixed(2)+'.</p>'}
+// ---- compare
+const PINKEY='miga-plane-pins';
+function pins(){try{return JSON.parse(localStorage.getItem(PINKEY))||[]}catch(e){return []}}
+function snapshot(){const R=G;return {name:P.name||'Design',kg:Math.round(R.A.m),stall:Math.round(R.vs0*KMH),to:R.to.ok?Math.round(R.to.total):null,climb:Math.round(R.c0.roc*196.85),ceil:Math.round(R.ceiling),cruise:Math.round(R.vc*KMH),range:Math.round(R.range),ld:R.ld.toFixed(0),sm:Math.round(R.sm*100)+'%',design:Object.assign({},P)}}
+function renderCompare(){const ps=pins();if(!ps.length){$('compareBox').innerHTML='<p class="muted">Nothing pinned yet.</p>';return}
+  const cols=[['kg','Weight kg'],['stall','Stall km/h'],['to','Take-off m'],['climb','Climb ft/min'],['ceil','Ceiling m'],['cruise','Cruise km/h'],['range','Range km'],['ld','Glide'],['sm','Margin']];
+  $('compareBox').innerHTML='<table class="t"><tr><th>Design</th>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'<th></th></tr>'+ps.map((p,i)=>'<tr><td>'+esc(p.name)+'</td>'+cols.map(c=>'<td>'+(p[c[0]]==null?'—':esc(p[c[0]]))+'</td>').join('')+'<td><button class="secondary" data-open="'+i+'">Open</button> <button class="secondary" data-del="'+i+'">✕</button></td></tr>').join('')+'</table>';
+  $('compareBox').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const p=pins();p.splice(+b.dataset.del,1);try{localStorage.setItem(PINKEY,JSON.stringify(p))}catch(e){}renderCompare()});
+  $('compareBox').querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const d=pins()[+b.dataset.open];if(d&&d.design){P=Object.assign({},BASE,d.design);syncControls();update();fitCamera()}})}
+$('pinBtn').onclick=()=>{const p=pins(),s=snapshot();let n=s.name,k=2;while(p.some(x=>x.name===n))n=s.name+' ('+(k++)+')';s.name=n;p.push(s);while(p.length>6)p.shift();try{localStorage.setItem(PINKEY,JSON.stringify(p))}catch(e){}
+  $('pinBtn').textContent='📌 Pinned ('+p.length+')';setTimeout(()=>$('pinBtn').textContent='📌 Pin to compare',1500);if(activeView()==='vcompare')renderCompare()};
+
+function update(){saveP();G=compute();renderResults();build3D();resetDash();const v=activeView();if(v==='vperf')renderPerf();if(v==='vclimb')renderClimb();if(v==='vengine')renderEngine();if(v==='vstab')renderStab();if(v==='vweights')renderWeights();if(v==='vcompare')renderCompare()}
+function activeView(){const b=document.querySelector('.viewtabs button.active');return b?b.dataset.view:'v3d'}
+document.querySelectorAll('.viewtabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtabs button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.view));update();if(b.dataset.view==='v3d')resize3D()});
+
+// ------------------------------------------------------------------ 3D
+let R3=null,flight=null;
+function init3D(){if(!window.THREE){$('view3d').insertAdjacentHTML('beforeend','<div class="no3d">The 3D view needs WebGL and the three.js library, which could not load. All the numbers and charts still work.</div>');return}
+  const el=$('view3d'),renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));el.insertBefore(renderer.domElement,el.firstChild);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0xb9d8ef);scene.fog=new THREE.Fog(0xb9d8ef,60,320);
+  const cam=new THREE.PerspectiveCamera(38,1,0.05,1200);const ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI*0.495;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x667788,0.8));const sun=new THREE.DirectionalLight(0xffffff,0.8);sun.position.set(10,20,8);scene.add(sun);
+  const world=new THREE.Group();scene.add(world);
+  const grass=new THREE.Mesh(new THREE.PlaneGeometry(2400,2400),new THREE.MeshStandardMaterial({color:0x8fb36e,roughness:1}));grass.rotation.x=-Math.PI/2;grass.position.y=-0.02;world.add(grass);
+  const rw=new THREE.Mesh(new THREE.PlaneGeometry(1600,30),new THREE.MeshStandardMaterial({color:0x50565e,roughness:0.95}));rw.rotation.x=-Math.PI/2;world.add(rw);
+  const lines=new THREE.Group(),lm=new THREE.MeshBasicMaterial({color:0xf4f4f0});for(let i=-60;i<60;i++){const d=new THREE.Mesh(new THREE.PlaneGeometry(9,0.5),lm);d.rotation.x=-Math.PI/2;d.position.set(i*15,0.01,0);lines.add(d)}
+  [-14,14].forEach(z=>{const e=new THREE.Mesh(new THREE.PlaneGeometry(1600,0.4),lm);e.rotation.x=-Math.PI/2;e.position.set(0,0.01,z);world.add(e)});world.add(lines);
+  for(let i=0;i<40;i++){const t=new THREE.Mesh(new THREE.ConeGeometry(2+Math.random()*2,7+Math.random()*6,7),new THREE.MeshStandardMaterial({color:0x4f7a46}));const a=Math.random()*Math.PI*2,r=60+Math.random()*300;t.position.set(Math.cos(a)*r,4,Math.sin(a)*r+(Math.sin(a)>0?30:-30));world.add(t)}
+  const pivot=new THREE.Group();scene.add(pivot);R3={renderer,scene,cam,ctl,pivot,world,lines,plane:null,props:[],last:performance.now()};
+  window.addEventListener('resize',resize3D);resize3D();animate()}
+function resize3D(){if(!R3)return;const el=$('view3d'),w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;R3.renderer.setSize(w,h,false);R3.cam.aspect=w/h;R3.cam.updateProjectionMatrix()}
+function animate(){requestAnimationFrame(animate);if(!R3)return;const now=performance.now(),dt=Math.min(0.05,(now-R3.last)/1000);R3.last=now;let v=0,alt=0,pitch=0;
+  if(flight){flight.t+=dt;const s=flight.samples,i=Math.min(s.length-1,Math.floor(flight.t/0.1)),p=s[i];v=p[1];alt=p[2];pitch=p[4]||0;showDash(p,flight);if(i>=s.length-1){flight.hold-=dt;if(flight.hold<=0){flight=null;$('runBtn').textContent='▶ Take-off test';R3.world.position.y=0;resetDash()}}}
+  R3.lines.position.x=((R3.lines.position.x-v*dt)%15+15)%15-15;R3.world.position.y=-alt;R3.pivot.rotation.z+=(pitch-R3.pivot.rotation.z)*0.08;
+  if(R3.gear)R3.gear.visible=!(flight&&alt>15&&P.gear==='retract');
+  const spin=POW(P)?(flight?60:18):0;R3.props.forEach(p=>p.rotation.x+=spin*dt);
+  R3.ctl.update();R3.renderer.render(R3.scene,R3.cam)}
+function resetDash(){if(!G)return;$('dashT').textContent=G.to.ok?'Take-off run '+Math.round(G.to.ground)+' m':POW(P)?'Cannot take off':'Glider — needs a tow';$('dashV').textContent='0 km/h';$('dashAlt').textContent='0 m';$('dashPhase').textContent='on the runway'}
+function showDash(p,f){$('dashT').textContent=p[0].toFixed(1)+' s · '+Math.round(p[3])+' m';$('dashV').textContent=Math.round(p[1]*KMH)+' km/h';$('dashAlt').textContent=Math.round(p[2])+' m up';$('dashPhase').textContent=p[2]<0.5?(p[1]>=f.vlof*0.97?'rotate!':'rolling'):p[2]<15?'lift-off':'climbing'}
+function flightSamples(){const to=G.to,s=to.samples.map(x=>[x[0],x[1],0,x[3],0]);if(!to.ok)return s;let t=to.t,d=to.ground,alt=0;const v2=1.2*vStall(G.A,0,G.A.clTO),gam=to.gam;
+  for(let k=0;k<160;k++){t+=0.1;d+=v2*0.1;alt+=v2*gam*0.1;s.push([t,v2,alt,d,Math.atan(gam)+0.08])}return s}
+$('runBtn').onclick=()=>{if(!G)return;if(!POW(P)){$('dashPhase').textContent='needs a tow plane';return}const s=flightSamples();if(!R3){showDash(s[s.length-1],{vlof:G.to.vlof});return}
+  flight={t:0,samples:s,hold:1.5,vlof:G.to.vlof};$('runBtn').textContent='⏱ Flying…';fitCamera('chase')};
+function disposeGroup(g){g.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose())})}
+function mat(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:0.45},o||{}))}
+// a tapered slab from root (z=0) to tip (z=half span); x is forward, chord runs backward from the leading edge
+function slab(cr,ct,half,thick,sweep,dihedral,m){const g=new THREE.BoxGeometry(1,1,1,1,1,4),p=g.attributes.position;
+  for(let i=0;i<p.count;i++){const x=p.getX(i),y=p.getY(i),zf=p.getZ(i)+0.5,c=cr+(ct-cr)*zf;p.setXYZ(i,(x-0.5)*c-sweep*zf+c*0.25,y*thick*c*(x>0.2?0.6:1)+dihedral*zf,zf*half)}g.computeVertexNormals();return new THREE.Mesh(g,m)}
+function build3D(){if(!R3)return;if(R3.plane){R3.pivot.remove(R3.plane);disposeGroup(R3.plane)}R3.props=[];
+  const pl=new THREE.Group(),A=G.A,E=G.E,body=mat(new THREE.Color(P.color),{metalness:0.2}),trim=mat(0x2a3440),glass=mat(0x1d2a38,{roughness:0.1,metalness:0.5,transparent:true,opacity:0.85}),metal=mat(0xc0c6cc,{metalness:0.7,roughness:0.3});
+  const Lf=P.length,rf=fusR();
+  // fuselage: a lathe from tail (u=0) to nose (u=1)
+  const prof=[];for(let i=0;i<=40;i++){const u=i/40;let r;if(u<0.62){const t=u/0.62;r=rf*(0.12+0.88*Math.pow(Math.sin(t*Math.PI/2),1.3))}else{const t=(u-0.62)/0.38;r=rf*Math.sqrt(Math.max(0.0001,1-Math.pow(t,2.2)))*(PROP(P)&&P.engines===1?0.5+0.5*Math.sqrt(1-t*0.9):1)}prof.push(new THREE.Vector2(Math.max(0.005,r),u*Lf-Lf/2))}
+  const fg=new THREE.LatheGeometry(prof,24);fg.rotateZ(-Math.PI/2);const fus=new THREE.Mesh(fg,body);pl.add(fus);
+  const canL=P.engine==='none'?Lf*0.22:Math.min(Lf*0.2,1.2+0.15*P.people),can=new THREE.Mesh(new THREE.SphereGeometry(1,18,12),glass);can.scale.set(canL/2,rf*0.55,rf*0.75);can.position.set(Lf*(P.engine==='none'?0.2:JET(P)||TP(P)?0.37:0.18),rf*(JET(P)||TP(P)?0.45:0.62),0);pl.add(can);
+  if(JET(P)||TP(P)){for(let i=0;i<Math.min(8,P.people);i++){const w=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.18,rf*2.02),glass);w.position.set(Lf*0.05-i*0.65,rf*0.25,0);pl.add(w)}}
+  // wing
+  const half=A.b/2,lam=P.engine==='none'?0.45:JET(P)?0.35:0.7,cr=2*A.S/(A.b*(1+lam)),ct=cr*lam,sw=P.sweep==='swept'?Math.tan(28*Math.PI/180)*half:0,wy=P.wing==='high'?rf*0.92:P.wing==='low'?-rf*0.7:0,dih=half*Math.tan((P.wing==='low'?5:P.wing==='mid'?3:1.5)*Math.PI/180),wx=JET(P)?-Lf*0.06:Lf*0.08;
+  [1,-1].forEach(s=>{const w=slab(cr,ct,half,P.engine==='none'?0.13:0.14,sw,dih,body);w.scale.z=s;w.position.set(wx,wy,0);pl.add(w);if(P.flaps!=='none'){const f=slab(cr*0.22,ct*0.22,half*0.55,0.05,sw*0.55,dih*0.55,trim);f.scale.z=s;f.position.set(wx-cr*0.62,wy-0.02,s*0.05);pl.add(f)}});
+  if(P.wing==='high'&&!(JET(P)||TP(P))){[1,-1].forEach(s=>{const a=new THREE.Vector3(wx-cr*0.15,-rf*0.45,s*rf*0.8),b=new THREE.Vector3(wx-cr*0.15,wy+dih*0.45-0.03,s*half*0.45),d=new THREE.Vector3().subVectors(b,a),st=new THREE.Mesh(new THREE.CylinderGeometry(0.025,0.025,d.length(),8),metal);st.position.copy(a).add(b).multiplyScalar(0.5);st.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());pl.add(st)})}
+  // tail
+  const lt=Lf*0.46,Sh=P.vh*A.S*A.c/lt,bh=Math.sqrt(4*Sh),ch=Sh/bh,Sv=P.vv*A.S*A.b/lt,hv=Math.sqrt(1.4*Sv),cv=Sv/hv,tx=-Lf/2+cv*0.65;
+  const fin=slab(cv*1.25,cv*0.7,hv,0.12,cv*0.5,0,body);fin.rotation.x=-Math.PI/2;fin.position.set(tx+cv*0.1,rf*0.05,0);pl.add(fin);
+  const hy=P.tail==='t'?rf*0.05+hv*0.95:rf*0.1,hx=P.tail==='t'?tx-cv*0.35:-Lf/2+ch*0.9;[1,-1].forEach(s=>{const t=slab(ch*1.1,ch*0.75,bh/2,0.1,ch*0.2,0,body);t.scale.z=s;t.position.set(hx,hy,0);pl.add(t)});
+  // engines and propellers
+  const prop=(x,y,z,D,n)=>{const g=new THREE.Group(),sp=new THREE.Mesh(new THREE.ConeGeometry(Math.max(0.09,D*0.09),Math.max(0.2,D*0.18),16),metal);sp.rotation.z=-Math.PI/2;sp.position.x=0.05;g.add(sp);
+    const blades=new THREE.Group();for(let i=0;i<n;i++){const b=new THREE.Mesh(new THREE.BoxGeometry(0.03,D/2,Math.max(0.07,D*0.06)),mat(0x23272d));b.position.y=D/4;const holder=new THREE.Group();holder.rotation.x=i*Math.PI*2/n;holder.add(b);blades.add(holder)}g.add(blades);g.position.set(x,y,z);pl.add(g);R3.props.push(blades)};
+  const nb=TP(P)?4:P.prop==='cs'?3:2;
+  if(PROP(P)){if(P.engines===1){if(P.layout==='radial'&&PIS(P)){const cw=new THREE.Mesh(new THREE.CylinderGeometry(rf*1.05,rf*1.05,0.55,24,1,true),trim);cw.rotation.z=Math.PI/2;cw.position.set(Lf/2-0.3,0,0);pl.add(cw)}prop(Lf/2+0.02,0,0,P.propD,nb)}
+    else[1,-1].forEach(s=>{const z=s*Math.max(rf+P.propD/2+0.2,half*0.32),nac=new THREE.Mesh(new THREE.CylinderGeometry(0.28,0.2,cr*1.3,14),body);nac.rotation.z=Math.PI/2;nac.position.set(wx+cr*0.25,wy-0.05,z);pl.add(nac);prop(wx+cr*0.9+0.1,wy-0.05,z,P.propD,nb)})}
+  if(JET(P)){const r=0.22+0.045*Math.sqrt(P.thrustKn),l=r*4.2,pod=(x,y,z)=>{const g=new THREE.Mesh(new THREE.CylinderGeometry(r,r*0.85,l,18),mat(0xd8dde2,{metalness:0.4}));g.rotation.z=Math.PI/2;g.position.set(x,y,z);pl.add(g);const inl=new THREE.Mesh(new THREE.CircleGeometry(r*0.85,18),trim);inl.rotation.y=Math.PI/2;inl.position.set(x+l/2+0.01,y,z);pl.add(inl)};
+    if(P.engines===2)[1,-1].forEach(s=>pod(-Lf*0.28,rf*0.45,s*(rf+r+0.15)));else pod(-Lf*0.25,rf+r*0.6,0)}
+  if(ELE(P)){const bat=new THREE.Mesh(new THREE.BoxGeometry(0.5,0.25,0.3),mat(0x4E9E73));bat.position.set(Lf*0.35,-rf*0.2,0);bat.visible=false;pl.add(bat)}
+  // landing gear
+  const gear=new THREE.Group(),wr=clamp(0.12+0.0045*Math.sqrt(A.m),0.15,0.4),gh=Math.max(wr*2+0.15,(PROP(P)&&P.engines===1?P.propD/2+0.2-rf:0.5));
+  const leg=(x,z,len)=>{const s=new THREE.Mesh(new THREE.CylinderGeometry(0.035,0.035,len,8),metal);s.position.set(x,-rf-len/2+0.2,z);gear.add(s);const w=new THREE.Mesh(new THREE.CylinderGeometry(wr,wr,wr*0.7,18),mat(0x1b1d20,{roughness:0.9}));w.rotation.x=Math.PI/2;w.position.set(x,-rf-len+0.2+wr*0.1,z);gear.add(w)};
+  const track=Math.max(rf*1.6,A.b*0.12),mx=P.gearType==='taildragger'?wx+cr*0.35:wx-cr*0.45;[1,-1].forEach(s=>leg(mx,s*track/2,gh));
+  if(P.gearType==='taildragger'){const tw=new THREE.Mesh(new THREE.CylinderGeometry(wr*0.5,wr*0.5,wr*0.4,12),mat(0x1b1d20));tw.rotation.x=Math.PI/2;tw.position.set(-Lf/2+0.25,-rf*0.15-wr*0.3,0);gear.add(tw)}else leg(Lf/2-Math.max(0.6,P.propD*0.35),0,gh);
+  if(P.engine==='none'){gear.clear();const w=new THREE.Mesh(new THREE.CylinderGeometry(0.18,0.18,0.12,16),mat(0x1b1d20));w.rotation.x=Math.PI/2;w.position.set(wx-cr*0.2,-rf-0.12,0);gear.add(w)}
+  pl.add(gear);R3.gear=gear;
+  // sit on the ground: tail-wheel planes sit nose-up
+  const lowest=P.engine==='none'?rf+0.3:rf+gh-0.2+wr*0.9;pl.position.y=lowest;if(P.gearType==='taildragger'&&P.engine!=='none')pl.rotation.z=Math.atan2(lowest-rf*0.15-wr*0.3,Math.abs(mx+Lf/2))*0.6;
+  if(P.engine==='none')pl.rotation.x=0.06;
+  R3.pivot.add(pl);R3.plane=pl}
+function fitCamera(view){if(!R3)return;const d=Math.max(P.length,P.span)*1.15,ty=1.2;const v=view||'34';R3.ctl.target.set(0,ty,0);
+  if(v==='side')R3.cam.position.set(0,ty+0.5,d*1.5);else if(v==='top')R3.cam.position.set(0,d*1.8,0.01);else if(v==='front')R3.cam.position.set(d*1.5,ty+0.6,0);else if(v==='chase')R3.cam.position.set(-d*1.1,ty+d*0.35,d*0.9);else R3.cam.position.set(d*0.9,d*0.45,d*1.0);R3.cam.lookAt(0,ty,0)}
+$('camSide').onclick=()=>fitCamera('side');$('camTop').onclick=()=>fitCamera('top');$('camFront').onclick=()=>fitCamera('front');$('cam34').onclick=()=>fitCamera('34');
+
+// ------------------------------------------------------------------ exports
+function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:type||'text/plain'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const slug=()=>(P.name||'plane').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'plane';
+const csv=rows=>'﻿'+rows.map(r=>r.map(c=>{c=String(c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(',')).join('\r\n');
+function specRows(){const R=G,{E,A}=R,rows=[['Item','Value','Unit']],add=(a,b,c)=>rows.push([a,b,c||'']);
+  add('Design',P.name);add('Engine',(POW(P)&&P.engines>1?P.engines+' x ':'')+engineName());if(PIS(P)){add('Displacement each',Math.round(E.L*1000),'cc');add('Power each',Math.round(E.hp),'hp')}if(TP(P))add('Shaft power each',P.shaftKw,'kW');if(JET(P))add('Thrust each',P.thrustKn,'kN');if(ELE(P)){add('Motor power each',P.motorKw,'kW');add('Battery',P.battery,'kWh')}
+  add('Wingspan',P.span,'m');add('Wing area',P.area,'m2');add('Aspect ratio',A.AR.toFixed(1),'');add('Take-off weight',Math.round(A.m),'kg');add('Wing loading',Math.round(R.ws),'kg/m2');
+  add('Stall speed flaps down',Math.round(R.vs0*KMH),'km/h');add('Stall speed clean',Math.round(R.vs1*KMH),'km/h');
+  if(POW(P)){add('Take-off run',R.to.ok?Math.round(R.to.ground):'cannot take off','m');add('Take-off over 15 m',R.to.ok?Math.round(R.to.total):'','m');add('Climb at sea level',Math.round(R.c0.roc*196.85),'ft/min');add('Service ceiling',Math.round(R.ceiling),'m');add('Top speed',Math.round(R.c0.vmax*KMH),'km/h');
+    add('Cruise speed',Math.round(R.vc*KMH),'km/h');add('Cruise altitude',Math.round(R.hc),'m');add('Range with reserve',Math.round(R.range),'km');add('Endurance with reserve',R.endur.toFixed(2),'h')}
+  add('Best glide ratio',R.ld.toFixed(1),':1');add('Minimum sink',R.sink.toFixed(2),'m/s');add('Landing over 15 m',Math.round(R.landTotal),'m');add('Static margin',(R.sm*100).toFixed(1),'%');add('Manoeuvring speed',Math.round(R.va*KMH),'km/h');
+  Object.entries(G.scores).forEach(([k,v])=>add('Score: '+k,v.toFixed(1),'/10'));return rows}
+$('dlSpec').onclick=()=>download(slug()+'-spec.csv',csv(specRows()),'text/csv');
+$('dlCSV').onclick=()=>{const sl=envelope(0),cr=envelope(G.hc),rows=[['Altitude m','Speed km/h','Thrust N','Drag N','Climb ft/min']];[[0,sl],[Math.round(G.hc),cr]].forEach(([h,rs])=>rs.forEach(r=>rows.push([h,Math.round(r[0]*KMH),Math.round(r[1]),Math.round(r[2]),Math.round((r[1]-r[2])*r[0]/G.A.W*196.85)])));download(slug()+'-flight-envelope.csv',csv(rows),'text/csv')};
+function exportGroup(){if(!R3||!R3.plane)return null;const g=R3.plane.clone();g.position.set(0,0,0);g.rotation.set(0,0,0);g.updateMatrixWorld(true);return g}
+$('dlOBJ').onclick=()=>{const g=exportGroup();if(!g||!THREE.OBJExporter)return alert('3D export needs the 3D view.');download(slug()+'.obj',new THREE.OBJExporter().parse(g),'text/plain')};
+$('dlSTL').onclick=()=>{const g=exportGroup();if(!g||!THREE.STLExporter)return alert('3D export needs the 3D view.');download(slug()+'.stl',new THREE.STLExporter().parse(g,{binary:true}),'model/stl')};
+$('dlPNG').onclick=()=>{if(!R3)return;R3.renderer.render(R3.scene,R3.cam);R3.renderer.domElement.toBlob(b=>download(slug()+'.png',b),'image/png')};
+$('printBtn').onclick=()=>{renderPerf();renderClimb();const w=window.open('','_blank');if(!w)return alert('Allow pop-ups to print the spec sheet.');
+  w.document.write('<!doctype html><title>'+esc(P.name)+' — spec sheet</title><style>body{font:13px Arial;margin:24px;color:#16202b}h1{font-size:22px}.hydro{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.hv{border:1px solid #ddd;padding:6px}.hv b{display:block;font-size:15px}svg{max-width:100%}</style><h1>'+esc(P.name)+' — Plane Forge spec sheet</h1><p>'+$('verdict').innerHTML+'</p>'+
+    '<div class="hydro">'+$('results').innerHTML+'</div><h2>Checks</h2><ul>'+$('checks').innerHTML+'</ul><h2>Thrust and drag</h2>'+G.perfSVG+(G.climbSVG&&POW(P)?'<h2>Climb</h2>'+G.climbSVG:'')+'<p>Made with Plane Forge — migabuilder.com. Estimates for design and learning.</p>');w.document.close();setTimeout(()=>w.print(),400)};
+$('saveJson').onclick=()=>download(slug()+'.plane.json',JSON.stringify(Object.assign({app:'MigaBuilder Plane Forge',version:1},P),null,1),'application/json');
+$('openJson').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const d=JSON.parse(await f.text());if(!d.span||!d.area)throw new Error('not a Plane Forge design');P=Object.assign({},BASE,d);delete P.app;delete P.version;syncControls();update();fitCamera()}catch(err){alert('Could not open this file: '+err.message)}};
+$('resetBtn').onclick=()=>applyPreset('trainer');
+
+// ------------------------------------------------------------------ start
+renderPresets();buildSliders();syncControls();init3D();update();fitCamera();
+window.PlaneForge={get P(){return P},get G(){return G},update,applyPreset};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

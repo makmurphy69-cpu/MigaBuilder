@@ -219,6 +219,116 @@
    }
   }
  },
+ "afford-forge.html": {
+  "src": {
+   "title": "Can I afford it? Calculator for a car, a baby, moving or quitting your job — Afford Forge | MigaBuilder",
+   "description": "Free, private calculator for big life decisions: buying a car, having a baby, moving, buying a home, going part-time or quitting your job. See your money month by month, how long your savings last, a clear verdict and what would make it work. No bank login — your numbers stay in your browser.",
+   "faq": [
+    "Do I have to connect my bank account?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.",
+    "Is Afford Forge financial advice?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.",
+    "Is Afford Forge free?",
+    "Yes. It is free to use, with no account, no watermark and no paywall."
+   ]
+  },
+  "es": {
+   "title": "Afford Forge — ¿Me lo puedo permitir? | MigaBuilder",
+   "description": "Afford Forge comprueba una gran decisión con tus propias cifras: comprar un coche, tener un bebé, mudarte a algo más grande, comprar una vivienda, pasar a media jornada, dejar el trabajo o tomarte un descanso, o cualquier compra grande. Calcula tu dinero mes a mes durante tres años, hasta dónde…",
+   "faq": {
+    "Do I have to connect my bank account?": "¿Tengo que conectar mi cuenta bancaria?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "No. Escribes tus propias cifras aproximadas. No se sube nada y no hay inicio de sesión.",
+    "Is Afford Forge financial advice?": "¿Afford Forge es asesoramiento financiero?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "No. Es una calculadora que usa reglas prácticas habituales. Para una decisión grande, revisa el resultado con un asesor financiero independiente o un servicio gratuito de orientación sobre deudas y dinero.",
+    "Is Afford Forge free?": "¿Afford Forge es gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago."
+   }
+  },
+  "ar": {
+   "title": "Afford Forge — هل أستطيع تحمّل التكلفة؟ اختبر شراء سيارة أو إنجاب طفل… | MigaBuilder",
+   "description": "يختبر Afford Forge قرارًا كبيرًا بأرقامك الخاصة: شراء سيارة، إنجاب طفل، الانتقال إلى مكان أكبر، شراء منزل، العمل بدوام جزئي، ترك العمل أو أخذ استراحة، أو أي مشتريات كبيرة. يحسب أموالك شهرًا بشهر لثلاث سنوات، وإلى أي حد تنخفض مدخراتك، وكم شهرًا من التكاليف الأساسية ستغطي. تحصل على إجابة واضحة —…",
+   "faq": {
+    "Do I have to connect my bank account?": "هل يجب أن أربط حسابي المصرفي؟",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "لا. تكتب أرقامك التقريبية بنفسك. لا يُرفع شيء ولا يوجد تسجيل دخول.",
+    "Is Afford Forge financial advice?": "هل Afford Forge استشارة مالية؟",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "لا. إنه حاسبة تستخدم قواعد عامة شائعة. لقرار كبير، راجع النتيجة مع مستشار مالي مستقل أو خدمة مجانية للاستشارات المالية والديون.",
+    "Is Afford Forge free?": "هل Afford Forge مجاني؟",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع."
+   }
+  },
+  "zh": {
+   "title": "Afford Forge — 我负担得起吗？ | MigaBuilder",
+   "description": "Afford Forge 用你自己的数字来检验一个重大决定：买车、生孩子、搬到更大的地方、买房、改为兼职、辞职或休息，或任何大额消费。它会逐月计算你三年的资金、储蓄最低会降到多少，以及能覆盖几个月的基本开支。你会得到一个清晰的答案——负担得起、勉强或暂时不行——以及怎样才能行得通。",
+   "faq": {
+    "Do I have to connect my bank account?": "我需要连接银行账户吗？",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "不需要。你自己输入大概的数字。不会上传任何内容，也无需登录。",
+    "Is Afford Forge financial advice?": "Afford Forge 是理财建议吗？",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "不是。它是一个使用常见经验法则的计算器。做重大决定时，请找只收咨询费的理财顾问或免费的债务与理财咨询服务核对结果。",
+    "Is Afford Forge free?": "Afford Forge 免费吗？",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"
+   }
+  },
+  "sw": {
+   "title": "Afford Forge — Je, naweza kumudu? | MigaBuilder",
+   "description": "Afford Forge inapima uamuzi mkubwa kwa namba zako mwenyewe: kununua gari, kupata mtoto, kuhamia mahali pakubwa, kununua nyumba, kufanya kazi kwa muda mfupi, kuacha kazi au kupumzika, au ununuzi wowote mkubwa. Inakokotoa pesa zako mwezi kwa mwezi kwa miaka mitatu, jinsi akiba yako inavyoshuka, na…",
+   "faq": {
+    "Do I have to connect my bank account?": "Je, lazima niunganishe akaunti yangu ya benki?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "Hapana. Unaandika namba zako za takriban mwenyewe. Hakuna kinachopakiwa na hakuna kuingia.",
+    "Is Afford Forge financial advice?": "Je, Afford Forge ni ushauri wa kifedha?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "Hapana. Ni kikokotoo kinachotumia kanuni za jumla za kawaida. Kwa uamuzi mkubwa, kagua matokeo na mshauri wa fedha huru au huduma ya bure ya ushauri wa madeni na pesa.",
+    "Is Afford Forge free?": "Je, Afford Forge ni bure?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."
+   }
+  },
+  "sv": {
+   "title": "Afford Forge — Har jag råd? | MigaBuilder",
+   "description": "Afford Forge prövar ett stort beslut mot dina egna siffror: köpa bil, skaffa barn, flytta till något större, köpa bostad, gå ner i tid, säga upp dig eller ta en paus, eller ett stort köp. Den räknar ut din ekonomi månad för månad i tre år, hur lågt sparandet går och hur många månaders nödvändiga…",
+   "faq": {
+    "Do I have to connect my bank account?": "Måste jag koppla mitt bankkonto?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "Nej. Du skriver in dina egna ungefärliga siffror. Inget laddas upp och ingen inloggning behövs.",
+    "Is Afford Forge financial advice?": "Är Afford Forge ekonomisk rådgivning?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "Nej. Det är en kalkylator som använder vanliga tumregler. Inför ett stort beslut, stäm av resultatet med en oberoende rådgivare eller en kostnadsfri budget- och skuldrådgivning.",
+    "Is Afford Forge free?": "Är Afford Forge gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+   }
+  },
+  "de": {
+   "title": "Afford Forge — Kann ich mir das leisten? | MigaBuilder",
+   "description": "Afford Forge prüft eine große Entscheidung mit deinen eigenen Zahlen: ein Auto kaufen, ein Baby bekommen, größer wohnen, eine Wohnung kaufen, in Teilzeit gehen, kündigen oder eine Pause machen oder eine große Anschaffung. Es rechnet dein Geld drei Jahre lang Monat für Monat durch, zeigt, wie…",
+   "faq": {
+    "Do I have to connect my bank account?": "Muss ich mein Bankkonto verbinden?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "Nein. Du gibst deine eigenen groben Zahlen ein. Nichts wird hochgeladen, es gibt kein Login.",
+    "Is Afford Forge financial advice?": "Ist Afford Forge eine Finanzberatung?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "Nein. Es ist ein Rechner mit gängigen Faustregeln. Prüfe bei einer großen Entscheidung das Ergebnis mit einer unabhängigen Honorarberatung oder einer kostenlosen Schuldner- und Budgetberatung.",
+    "Is Afford Forge free?": "Ist Afford Forge kostenlos?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."
+   }
+  },
+  "pt": {
+   "title": "Afford Forge — Posso pagar? | MigaBuilder",
+   "description": "O Afford Forge testa uma grande decisão com seus próprios números: comprar um carro, ter um bebê, mudar para um lugar maior, comprar uma casa, trabalhar meio período, sair do emprego ou dar uma pausa, ou qualquer compra grande. Ele calcula seu dinheiro mês a mês por três anos, quanto suas…",
+   "faq": {
+    "Do I have to connect my bank account?": "Preciso conectar minha conta bancária?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "Não. Você digita seus próprios números aproximados. Nada é enviado e não há login.",
+    "Is Afford Forge financial advice?": "O Afford Forge é aconselhamento financeiro?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "Não. É uma calculadora que usa regras práticas comuns. Para uma decisão grande, confira o resultado com um consultor financeiro independente ou um serviço gratuito de orientação sobre dívidas e dinheiro.",
+    "Is Afford Forge free?": "O Afford Forge é grátis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sim. É gratuito, sem conta, sem marca d'água e sem cobrança."
+   }
+  },
+  "fr": {
+   "title": "Afford Forge — Est-ce que je peux me le permettre ? | MigaBuilder",
+   "description": "Afford Forge teste une grande décision avec vos propres chiffres : acheter une voiture, avoir un bébé, déménager plus grand, acheter un logement, passer à temps partiel, quitter votre emploi ou faire une pause, ou tout gros achat. Il calcule votre argent mois par mois sur trois ans, jusqu’où…",
+   "faq": {
+    "Do I have to connect my bank account?": "Dois-je connecter mon compte bancaire ?",
+    "No. You type in your own rough numbers. Nothing is uploaded and there is no login.": "Non. Vous saisissez vos propres chiffres approximatifs. Rien n’est envoyé et il n’y a pas de connexion.",
+    "Is Afford Forge financial advice?": "Afford Forge est-il un conseil financier ?",
+    "No. It is a calculator that uses common rules of thumb. For a big decision, check the result with a fee-only financial adviser or a free debt and money advice service.": "Non. C’est un calculateur fondé sur des règles empiriques courantes. Pour une grande décision, vérifiez le résultat avec un conseiller indépendant ou un service gratuit d’aide budgétaire et de surendettement.",
+    "Is Afford Forge free?": "Afford Forge est-il gratuit ?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."
+   }
+  }
+ },
  "alphabet-forge.html": {
   "src": {
    "title": "Hear, learn and write the world’s alphabets — Alphabet Forge | MigaBuilder",
@@ -2079,6 +2189,78 @@
    }
   }
  },
+ "cube-forge.html": {
+  "src": {
+   "title": "Learn to solve a Rubik’s cube in 3D: 2×2 to 10×10, step by step — Cube Forge | MigaBuilder",
+   "description": "Free 3D cube trainer in your browser: choose 2 to 10 layers or a cuboid like the 3×3×2, turn it by dragging or with the notation buttons, learn the beginner method with step-by-step lessons, and get a solution for your own scrambled 3×3 or 2×2 that explains every move. No signup.",
+   "faq": [
+    "How do I learn to solve a Rubik’s cube with Cube Forge?",
+    "Open the Learn tab and follow the beginner method in seven steps: white cross, white corners, middle layer, yellow cross, yellow edges, yellow corners in place and twisting the yellow corners. Each step has a Show me button that plays it on the 3D cube, and Solve with me gives a step-by-step solution for any scrambled 3×3 or 2×2.",
+    "Can I choose how many layers the cube has?",
+    "Yes. Pick anything from a 2×2 to a 10×10 cube, or a cuboid such as the 3×3×2 domino, 2×2×3 tower or 3×3×1 floppy cube by choosing the number of layers on each side.",
+    "Can it solve my real cube?",
+    "Yes, for the 3×3 and the 2×2. Paint the colours of your cube on the flat view or on the 3D model, then press Solve my cube to get a solution that explains every step.",
+    "Is Cube Forge free?",
+    "Yes. It is free, with no account, no watermark and no paywall, and it runs in your browser."
+   ]
+  },
+  "es": {
+   "title": "Cube Forge — Aprende a resolver un cubo de rompecabezas en 3D | MigaBuilder",
+   "description": "Cube Forge es un entrenador de cubos tipo Rubik en 3D: elige un cubo de 2×2 a 10×10 o un cuboide, gíralo, aprende la notación y el método para principiantes, y obtén una solución paso a paso para tu propio 3×3 o 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "¿Cube Forge es gratis?"
+   }
+  },
+  "ar": {
+   "title": "Cube Forge — تعلّم حلّ مكعب الألغاز ثلاثي الأبعاد | MigaBuilder",
+   "description": "Cube Forge مدرّب ثلاثي الأبعاد لمكعبات على طراز روبيك: اختر مكعبًا من 2×2 إلى 10×10 أو متوازي مستطيلات، وأدِره، وتعلّم الترميز وطريقة المبتدئين، واحصل على حل خطوة بخطوة لمكعبك 3×3 أو 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "هل Cube Forge مجاني؟"
+   }
+  },
+  "zh": {
+   "title": "Cube Forge — 学习在 3D 中还原魔方 | MigaBuilder",
+   "description": "Cube Forge 是一款 3D 魔方训练器：选择 2×2 到 10×10 的魔方或长方体魔方，转动它，学习记号和入门解法，并为你自己的 3×3 或 2×2 获得分步解法。",
+   "faq": {
+    "Is Cube Forge free?": "Cube Forge 免费吗？"
+   }
+  },
+  "sw": {
+   "title": "Cube Forge — Jifunze kutatua mchemraba unaozunguka kwa 3D | MigaBuilder",
+   "description": "Cube Forge ni mkufunzi wa 3D wa michemraba ya mtindo wa Rubik: chagua mchemraba kuanzia 2×2 hadi 10×10 au mstatili, uzungushe, jifunze alama na mbinu ya mwanzo, na upate suluhisho la hatua kwa hatua kwa 3×3 au 2×2 yako mwenyewe.",
+   "faq": {
+    "Is Cube Forge free?": "Je, Cube Forge ni bure?"
+   }
+  },
+  "sv": {
+   "title": "Cube Forge — Lär dig lösa en vridkub i 3D | MigaBuilder",
+   "description": "Cube Forge är en 3D-tränare för kuber i Rubik-stil: välj en kub från 2×2 till 10×10 eller en kuboid, vrid den, lär dig notationen och nybörjarmetoden och få en lösning steg för steg för din egen 3×3 eller 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "Är Cube Forge gratis?"
+   }
+  },
+  "de": {
+   "title": "Cube Forge — Lerne, einen Zauberwürfel in 3D zu lösen | MigaBuilder",
+   "description": "Cube Forge ist ein 3D-Trainer für Zauberwürfel: Wähle einen Würfel von 2×2 bis 10×10 oder einen Quader, dreh ihn, lerne die Notation und die Anfängermethode und bekomme eine Schritt-für-Schritt-Lösung für deinen eigenen 3×3 oder 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "Ist Cube Forge kostenlos?"
+   }
+  },
+  "pt": {
+   "title": "Cube Forge — Aprenda a resolver um cubo mágico em 3D | MigaBuilder",
+   "description": "O Cube Forge é um treinador 3D de cubos estilo Rubik: escolha um cubo de 2×2 a 10×10 ou um cuboide, gire, aprenda a notação e o método para iniciantes e receba uma solução passo a passo para o seu próprio 3×3 ou 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "O Cube Forge é grátis?"
+   }
+  },
+  "fr": {
+   "title": "Cube Forge — Apprenez à résoudre un casse-tête cubique en 3D | MigaBuilder",
+   "description": "Cube Forge est un entraîneur 3D pour cubes de type Rubik : choisissez un cube du 2×2 au 10×10 ou un pavé, tournez-le, apprenez la notation et la méthode débutant, et obtenez une solution pas à pas pour votre propre 3×3 ou 2×2.",
+   "faq": {
+    "Is Cube Forge free?": "Cube Forge est-il gratuit ?"
+   }
+  }
+ },
  "cv-forge.html": {
   "src": {
    "title": "Free resume builder — CV maker with PDF download, no sign up — CV Forge | MigaBuilder",
@@ -2187,6 +2369,60 @@
     "Are my files uploaded?": "Mes fichiers sont-ils envoyés ?",
     "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": "Seulement si vous utilisez ses fonctions d'IA : le texte que vous donnez à l'IA est alors envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder ou votre propre clé Gemini. Tout le reste reste dans votre navigateur."
    }
+  }
+ },
+ "dictionary-forge.html": {
+  "src": {
+   "title": "Online dictionary in 9 languages with simple explanations — Dictionary Forge | MigaBuilder",
+   "description": "Free dictionary for English, Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese and French. Look up any word and get its meanings, a simple explanation in your language, examples, pronunciation and translations. Save words and turn them into a crossword.",
+   "faq": [
+    "Which languages does it cover?",
+    "English, Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese and French. You can look up a word in any of them and have it explained in any of them.",
+    "Where do the meanings come from?",
+    "The dictionary meanings come from Wiktionary, the free dictionary written by volunteers. The simple explanation, examples and translations are written by the AI you choose (free Gemini by default) and can contain mistakes.",
+    "Can I save words to learn?",
+    "Yes. Press Save on any word. Your list stays on this device, downloads as a spreadsheet (CSV), and turns into a crossword or word scramble in Puzzle Forge with one click."
+   ]
+  },
+  "es": {
+   "title": "Dictionary Forge — Busca una palabra en nueve idiomas y recibe una… | MigaBuilder",
+   "description": "Busca una palabra en nueve idiomas y recibe una explicación sencilla en tu idioma.",
+   "faq": {}
+  },
+  "ar": {
+   "title": "Dictionary Forge — ابحث عن كلمة في تسع لغات واحصل على شرح بسيط لها بلغتك | MigaBuilder",
+   "description": "ابحث عن كلمة في تسع لغات واحصل على شرح بسيط لها بلغتك.",
+   "faq": {}
+  },
+  "zh": {
+   "title": "Dictionary Forge — 用九种语言查词，并用你的语言获得简单的解释 | MigaBuilder",
+   "description": "用九种语言查词，并用你的语言获得简单的解释。",
+   "faq": {}
+  },
+  "sw": {
+   "title": "Dictionary Forge — Tafuta neno katika lugha tisa na upate maelezo rahisi… | MigaBuilder",
+   "description": "Tafuta neno katika lugha tisa na upate maelezo rahisi kwa lugha yako.",
+   "faq": {}
+  },
+  "sv": {
+   "title": "Dictionary Forge — Slå upp ett ord på nio språk och få det enkelt förklarat… | MigaBuilder",
+   "description": "Slå upp ett ord på nio språk och få det enkelt förklarat på ditt språk.",
+   "faq": {}
+  },
+  "de": {
+   "title": "Dictionary Forge — Schlag ein Wort in neun Sprachen nach und lass es dir… | MigaBuilder",
+   "description": "Schlag ein Wort in neun Sprachen nach und lass es dir einfach in deiner Sprache erklären.",
+   "faq": {}
+  },
+  "pt": {
+   "title": "Dictionary Forge — Procure uma palavra em nove idiomas e receba uma… | MigaBuilder",
+   "description": "Procure uma palavra em nove idiomas e receba uma explicação simples no seu idioma.",
+   "faq": {}
+  },
+  "fr": {
+   "title": "Dictionary Forge — Cherchez un mot dans neuf langues et obtenez une… | MigaBuilder",
+   "description": "Cherchez un mot dans neuf langues et obtenez une explication simple dans votre langue.",
+   "faq": {}
   }
  },
  "document-forge.html": {
@@ -4040,6 +4276,100 @@
    }
   }
  },
+ "letter-forge.html": {
+  "src": {
+   "title": "Explain this letter: bills, tax, council, landlord and legal letters in plain words — Letter Forge | MigaBuilder",
+   "description": "Free AI letter explainer. Paste or photograph a confusing letter — a bill, a tax or council letter, a landlord notice, a fine, a medical or legal letter — and get what it means, how urgent it is, the deadlines, what to do next, scam warning signs and a draft reply, in your own language. Your name, account numbers and address are hidden on your device before anything is sent.",
+   "faq": [
+    "Is my letter sent to an AI?",
+    "Only after your name, address, account and reference numbers, phone numbers, email addresses, bank and card numbers and dates of birth have been swapped for labels like [NAME 1] on your device. You can check exactly what will be sent before you press Explain. Your real details are put back into the answer on your device.",
+    "Can I trust the explanation?",
+    "Use it as a first reading, not legal or medical advice. AI can misread a letter. Always check deadlines and amounts against the letter itself, and contact the sender or a free advice service if a lot depends on it.",
+    "Is Letter Forge free?",
+    "Yes. It is free to use, with no account, no watermark and no paywall."
+   ]
+  },
+  "es": {
+   "title": "Letter Forge — ¿Qué significa esta carta y qué tengo que hacer? | MigaBuilder",
+   "description": "Letter Forge explica una carta confusa con palabras sencillas: qué es, quién la envía, lo urgente que es, los plazos e importes, qué hacer después, qué significan las palabras difíciles, señales de posible estafa y dónde conseguir ayuda gratuita. Puedes hacer más preguntas y obtener una…",
+   "faq": {
+    "Is my letter sent to an AI?": "¿Se envía mi carta a una IA?",
+    "Can I trust the explanation?": "¿Puedo fiarme de la explicación?",
+    "Is Letter Forge free?": "¿Letter Forge es gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago."
+   }
+  },
+  "ar": {
+   "title": "Letter Forge — ماذا تعني هذه الرسالة، وما الذي عليّ فعله؟ كلمات بسيطة،… | MigaBuilder",
+   "description": "يشرح Letter Forge الرسالة المربكة بكلمات بسيطة: ما هي، ومن أرسلها، ومدى إلحاحها، والمواعيد النهائية والمبالغ، وما الذي تفعله بعد ذلك، ومعنى الكلمات الصعبة، وعلامات احتمال الاحتيال، وأين تجد مساعدة مجانية. يمكنك طرح أسئلة إضافية والحصول على رد مهذب مكتوب لك — لطلب مهلة أو خطة سداد أو مراجعة ثانية…",
+   "faq": {
+    "Is my letter sent to an AI?": "هل تُرسل رسالتي إلى ذكاء اصطناعي؟",
+    "Can I trust the explanation?": "هل يمكنني الوثوق بالشرح؟",
+    "Is Letter Forge free?": "هل Letter Forge مجاني؟",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع."
+   }
+  },
+  "zh": {
+   "title": "Letter Forge — 这封信是什么意思？ | MigaBuilder",
+   "description": "Letter Forge 用简单的话解释一封看不懂的信：它是什么、谁寄的、有多紧急、截止日期和金额、下一步做什么、难词是什么意思、可能是诈骗的迹象，以及哪里可以获得免费帮助。你还可以继续提问，并获得一封替你写好的礼貌回信——申请延期、分期付款、重新审核或请对方解释。即使信是另一种语言，也能用你的语言来解释。",
+   "faq": {
+    "Is my letter sent to an AI?": "我的信会发给 AI 吗？",
+    "Can I trust the explanation?": "我能相信这个解释吗？",
+    "Is Letter Forge free?": "Letter Forge 免费吗？",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"
+   }
+  },
+  "sw": {
+   "title": "Letter Forge — Barua hii inamaanisha nini, na nifanye nini? | MigaBuilder",
+   "description": "Letter Forge inaeleza barua inayochanganya kwa maneno rahisi: ni nini, nani aliituma, ni ya dharura kiasi gani, tarehe za mwisho na kiasi, nini cha kufanya kisha, maana ya maneno magumu, dalili kwamba inaweza kuwa utapeli, na wapi pa kupata msaada wa bure. Unaweza kuuliza maswali zaidi na kupata…",
+   "faq": {
+    "Is my letter sent to an AI?": "Je, barua yangu inatumwa kwa AI?",
+    "Can I trust the explanation?": "Je, naweza kuamini maelezo?",
+    "Is Letter Forge free?": "Je, Letter Forge ni bure?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."
+   }
+  },
+  "sv": {
+   "title": "Letter Forge — Vad betyder brevet och vad måste jag göra? | MigaBuilder",
+   "description": "Letter Forge förklarar ett krångligt brev med enkla ord: vad det är, vem som skickat det, hur bråttom det är, datum och belopp, vad du ska göra härnäst, vad svåra ord betyder, tecken på bedrägeri och var du får gratis hjälp. Du kan ställa följdfrågor och få ett artigt svar skrivet åt dig — om…",
+   "faq": {
+    "Is my letter sent to an AI?": "Skickas mitt brev till en AI?",
+    "Can I trust the explanation?": "Kan jag lita på förklaringen?",
+    "Is Letter Forge free?": "Är Letter Forge gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+   }
+  },
+  "de": {
+   "title": "Letter Forge — Was bedeutet dieser Brief, und was muss ich tun? | MigaBuilder",
+   "description": "Letter Forge erklärt einen verwirrenden Brief in einfachen Worten: was er ist, wer ihn geschickt hat, wie dringend er ist, Fristen und Beträge, was als Nächstes zu tun ist, was schwierige Wörter bedeuten, Anzeichen für Betrug und wo es kostenlose Hilfe gibt. Du kannst Nachfragen stellen und dir…",
+   "faq": {
+    "Is my letter sent to an AI?": "Wird mein Brief an eine KI geschickt?",
+    "Can I trust the explanation?": "Kann ich der Erklärung vertrauen?",
+    "Is Letter Forge free?": "Ist Letter Forge kostenlos?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."
+   }
+  },
+  "pt": {
+   "title": "Letter Forge — O que esta carta quer dizer e o que eu preciso fazer? | MigaBuilder",
+   "description": "O Letter Forge explica uma carta confusa em palavras simples: o que é, quem enviou, quão urgente é, os prazos e valores, o que fazer em seguida, o que significam as palavras difíceis, sinais de que pode ser golpe e onde conseguir ajuda gratuita. Você pode fazer mais perguntas e receber uma…",
+   "faq": {
+    "Is my letter sent to an AI?": "Minha carta é enviada para uma IA?",
+    "Can I trust the explanation?": "Posso confiar na explicação?",
+    "Is Letter Forge free?": "O Letter Forge é grátis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sim. É gratuito, sem conta, sem marca d'água e sem cobrança."
+   }
+  },
+  "fr": {
+   "title": "Letter Forge — Que veut dire cette lettre et que dois-je faire ? | MigaBuilder",
+   "description": "Letter Forge explique une lettre confuse avec des mots simples : de quoi il s’agit, qui l’envoie, son degré d’urgence, les échéances et montants, quoi faire ensuite, le sens des mots difficiles, les signes d’arnaque possible et où trouver de l’aide gratuite. Vous pouvez poser d’autres questions…",
+   "faq": {
+    "Is my letter sent to an AI?": "Ma lettre est-elle envoyée à une IA ?",
+    "Can I trust the explanation?": "Puis-je me fier à l’explication ?",
+    "Is Letter Forge free?": "Letter Forge est-il gratuit ?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."
+   }
+  }
+ },
  "logo-forge.html": {
   "src": {
    "title": "Logo maker free — logo and favicon generator — Logo Forge | MigaBuilder",
@@ -4953,6 +5283,76 @@
     "Yes. It is free to use, with no account, no watermark and no paywall.": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement.",
     "Are my files uploaded?": "Mes fichiers sont-ils envoyés ?",
     "No. It runs entirely in your browser, so your files and text stay on your device.": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
+   }
+  }
+ },
+ "motor-forge.html": {
+  "src": {
+   "title": "Design a car or motorcycle and build its engine: 0–100, top speed and fuel use — Motor Forge | MigaBuilder",
+   "description": "Free car and motorcycle design tool in your browser: start from a hatchback, sports car, SUV, pickup, electric car, scooter, sport bike, cruiser or dirt bike, build the engine (cylinders, bore, stroke, compression, turbo) and see its power and torque curve, then get 0–100 km/h, quarter mile, top speed, braking, cornering, fuel use and range. 3D model, no signup.",
+   "faq": [
+    "How does Motor Forge work out the power of my engine?",
+    "It works out the displacement from the bore, stroke and number of cylinders, then uses typical brake mean effective pressures for petrol, diesel, turbocharged and supercharged engines, the compression ratio and the cam profile to draw a torque and power curve from idle to the rev limit.",
+    "How accurate are the 0-100 km/h and top speed figures?",
+    "They come from a step-by-step simulation with gear changes, wheelspin, weight transfer, wheelies, air drag and rolling resistance. They are estimates for comparing designs, usually within about 10–20% of real vehicles, not test results.",
+    "Is Motor Forge free?",
+    "Yes. It is free to use, with no account, no watermark and no paywall, and everything is calculated in your browser."
+   ]
+  },
+  "es": {
+   "title": "Motor Forge — Diseña un coche o una moto y construye su motor | MigaBuilder",
+   "description": "Motor Forge es una herramienta de diseño de coches y motos: parte de un compacto, un deportivo, un SUV, un pickup, un eléctrico, un escúter, una moto deportiva, una custom o una de campo, construye su motor y mira cómo funcionaría.",
+   "faq": {
+    "Is Motor Forge free?": "¿Motor Forge es gratis?"
+   }
+  },
+  "ar": {
+   "title": "Motor Forge — صمّم سيارة أو دراجة نارية وابنِ محركها | MigaBuilder",
+   "description": "Motor Forge أداة لتصميم السيارات والدراجات النارية: ابدأ من هاتشباك أو سيارة رياضية أو SUV أو بيك أب أو سيارة كهربائية أو سكوتر أو دراجة رياضية أو كروزر أو دراجة طرق وعرة، وابنِ محركها وانظر مدى جودة أدائها.",
+   "faq": {
+    "Is Motor Forge free?": "هل Motor Forge مجاني؟"
+   }
+  },
+  "zh": {
+   "title": "Motor Forge — 设计一辆汽车或摩托车并打造它的发动机 | MigaBuilder",
+   "description": "Motor Forge 是一款汽车和摩托车设计工具：从两厢车、跑车、SUV、皮卡、电动车、踏板车、运动摩托、巡航车或越野摩托开始，打造它的发动机，看看表现如何。",
+   "faq": {
+    "Is Motor Forge free?": "Motor Forge 免费吗？"
+   }
+  },
+  "sw": {
+   "title": "Motor Forge — Buni gari au pikipiki na ujenge injini yake | MigaBuilder",
+   "description": "Motor Forge ni zana ya kubuni magari na pikipiki: anza na hatchback, gari la michezo, SUV, pickup, gari la umeme, skuta, pikipiki ya michezo, cruiser au pikipiki ya porini, jenga injini yake na uone ingefanya kazi vizuri kiasi gani.",
+   "faq": {
+    "Is Motor Forge free?": "Je, Motor Forge ni bure?"
+   }
+  },
+  "sv": {
+   "title": "Motor Forge — Konstruera en bil eller motorcykel och bygg dess motor | MigaBuilder",
+   "description": "Motor Forge är ett verktyg för att konstruera bilar och motorcyklar: börja från en halvkombi, sportbil, SUV, pickup, elbil, skoter, sportmotorcykel, cruiser eller crossmotorcykel, bygg motorn och se hur bra den skulle fungera.",
+   "faq": {
+    "Is Motor Forge free?": "Är Motor Forge gratis?"
+   }
+  },
+  "de": {
+   "title": "Motor Forge — Entwirf ein Auto oder ein Motorrad und bau seinen Motor | MigaBuilder",
+   "description": "Motor Forge ist ein Werkzeug zum Entwerfen von Autos und Motorrädern: Starte mit einem Kleinwagen, Sportwagen, SUV, Pickup, Elektroauto, Roller, Sportmotorrad, Cruiser oder Geländemotorrad, bau den Motor und sieh, wie gut es funktionieren würde.",
+   "faq": {
+    "Is Motor Forge free?": "Ist Motor Forge kostenlos?"
+   }
+  },
+  "pt": {
+   "title": "Motor Forge — Projete um carro ou uma moto e construa o motor | MigaBuilder",
+   "description": "O Motor Forge é uma ferramenta de projeto de carros e motos: comece de um hatch, esportivo, SUV, picape, carro elétrico, scooter, moto esportiva, custom ou moto de trilha, construa o motor e veja como funcionaria.",
+   "faq": {
+    "Is Motor Forge free?": "O Motor Forge é grátis?"
+   }
+  },
+  "fr": {
+   "title": "Motor Forge — Concevez une voiture ou une moto et construisez son moteur | MigaBuilder",
+   "description": "Motor Forge est un outil de conception de voitures et de motos : partez d’une compacte, d’une sportive, d’un SUV, d’un pick-up, d’une voiture électrique, d’un scooter, d’une moto sportive, d’une custom ou d’une moto tout-terrain, construisez son moteur et voyez ce qu’elle vaudrait.",
+   "faq": {
+    "Is Motor Forge free?": "Motor Forge est-il gratuit ?"
    }
   }
  },
@@ -6376,6 +6776,84 @@
    }
   }
  },
+ "plane-forge.html": {
+  "src": {
+   "title": "Design an airplane and its engine: stall speed, takeoff, climb, ceiling and range — Plane Forge | MigaBuilder",
+   "description": "Free airplane design tool in your browser: start from a glider, microlight, trainer, bush plane, aerobatic plane, electric trainer, turboprop or business jet, shape the wing and tail, pick a piston, turboprop, jet or electric engine, and see stall speed, takeoff distance, rate of climb, ceiling, top speed, range, glide ratio and stability in 3D. No signup.",
+   "faq": [
+    "How does Plane Forge work out whether my plane flies?",
+    "It adds up the weight, then compares lift and drag from the wing area, span and drag coefficient with the thrust of your engine and propeller in a standard atmosphere. From that it simulates the takeoff run and works out stall speed, rate of climb at every altitude, ceiling, top speed, cruise, range, glide ratio and static stability.",
+    "Can I design a glider or an electric plane?",
+    "Yes. Pick No engine for a glider to see its glide ratio and sink rate, or Electric motor and a battery size to see endurance and range.",
+    "Is Plane Forge free?",
+    "Yes. It is free to use, with no account, no watermark and no paywall, and everything is calculated in your browser."
+   ]
+  },
+  "es": {
+   "title": "Plane Forge — Diseña un avión: da forma al ala y la cola | MigaBuilder",
+   "description": "Plane Forge es una herramienta de diseño de aviones: parte de un planeador, ultraligero, avioneta, avión de monte, acrobático, eléctrico, turbohélice o jet ejecutivo, cambia el ala, la cola, el motor y la carga, y mira cómo volaría.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "¿Puedo diseñar un planeador o un avión eléctrico?",
+    "Is Plane Forge free?": "¿Plane Forge es gratis?"
+   }
+  },
+  "ar": {
+   "title": "Plane Forge — صمّم طائرة: شكّل الجناح والذيل، واختر محركها، وحمّلها،… | MigaBuilder",
+   "description": "Plane Forge أداة لتصميم الطائرات: ابدأ من طائرة شراعية أو خفيفة جدًا أو تدريب أو أدغال أو استعراضية أو تدريب كهربائية أو توربينية مروحية أو نفاثة لرجال الأعمال، وغيّر الجناح والذيل والمحرك والحمولة، وانظر كيف ستطير.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "هل يمكنني تصميم طائرة شراعية أو كهربائية؟",
+    "Is Plane Forge free?": "هل Plane Forge مجاني؟"
+   }
+  },
+  "zh": {
+   "title": "Plane Forge — 设计一架飞机：塑造机翼和尾翼，选择发动机，装好载荷，看看它能否起飞、能爬多高、飞多快多远，以及是否稳定 | MigaBuilder",
+   "description": "Plane Forge 是一款飞机设计工具：从滑翔机、超轻型飞机、教练机、丛林飞机、特技飞机、电动教练机、涡桨飞机或公务机开始，修改机翼、尾翼、发动机和载荷，看看它飞得怎么样。",
+   "faq": {
+    "Can I design a glider or an electric plane?": "可以设计滑翔机或电动飞机吗？",
+    "Is Plane Forge free?": "Plane Forge 免费吗？"
+   }
+  },
+  "sw": {
+   "title": "Plane Forge — Buni ndege: unda bawa na mkia | MigaBuilder",
+   "description": "Plane Forge ni zana ya kubuni ndege: anza na ndege isiyo na injini, nyepesi sana, ya mafunzo, ya porini, ya sarakasi, ya mafunzo ya umeme, turboprop au ya biashara, badilisha bawa, mkia, injini na mzigo, na uone ingeruka vizuri kiasi gani.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "Je, naweza kubuni ndege isiyo na injini au ya umeme?",
+    "Is Plane Forge free?": "Je, Plane Forge ni bure?"
+   }
+  },
+  "sv": {
+   "title": "Plane Forge — Konstruera ett flygplan: forma vingen och stjärten | MigaBuilder",
+   "description": "Plane Forge är ett verktyg för att konstruera flygplan: börja från ett segelflygplan, ultralätt, skolflygplan, bushflygplan, aerobatikflygplan, elektriskt skolflygplan, turboprop eller affärsjet, ändra vinge, stjärt, motor och last och se hur bra det skulle flyga.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "Kan jag konstruera ett segelflygplan eller ett elflygplan?",
+    "Is Plane Forge free?": "Är Plane Forge gratis?"
+   }
+  },
+  "de": {
+   "title": "Plane Forge — Entwirf ein Flugzeug: Forme Flügel und Leitwerk | MigaBuilder",
+   "description": "Plane Forge ist ein Werkzeug zum Flugzeugentwurf: Starte mit einem Segelflugzeug, Ultraleicht, Trainer, Buschflugzeug, Kunstflugzeug, Elektro-Trainer, Turboprop oder Businessjet, ändere Flügel, Leitwerk, Antrieb und Beladung und sieh, wie gut es fliegen würde.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "Kann ich ein Segelflugzeug oder ein Elektroflugzeug entwerfen?",
+    "Is Plane Forge free?": "Ist Plane Forge kostenlos?"
+   }
+  },
+  "pt": {
+   "title": "Plane Forge — Projete um avião: modele a asa e a cauda | MigaBuilder",
+   "description": "O Plane Forge é uma ferramenta de projeto de aviões: comece de um planador, ultraleve, avião de treino, avião de mato, acrobático, treino elétrico, turboélice ou jato executivo, mude a asa, a cauda, o motor e a carga, e veja como ele voaria.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "Posso projetar um planador ou um avião elétrico?",
+    "Is Plane Forge free?": "O Plane Forge é grátis?"
+   }
+  },
+  "fr": {
+   "title": "Plane Forge — Concevez un avion : dessinez l’aile et l’empennage | MigaBuilder",
+   "description": "Plane Forge est un outil de conception d’avions : partez d’un planeur, d’un ULM, d’un avion école, d’un avion de brousse, de voltige, d’un avion école électrique, d’un turbopropulseur ou d’un jet d’affaires, modifiez l’aile, l’empennage, le moteur et le chargement, et voyez comment il volerait.",
+   "faq": {
+    "Can I design a glider or an electric plane?": "Puis-je concevoir un planeur ou un avion électrique ?",
+    "Is Plane Forge free?": "Plane Forge est-il gratuit ?"
+   }
+  }
+ },
  "policy-forge.html": {
   "src": {
    "title": "Free privacy policy, cookie policy and GDPR generator for your website — Policy Forge | MigaBuilder",
@@ -6751,6 +7229,62 @@
     "Are my files uploaded?": "Mes fichiers sont-ils envoyés ?",
     "Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.": "Seulement si vous utilisez ses fonctions d'IA : le texte que vous donnez à l'IA est alors envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder ou votre propre clé Gemini. Tout le reste reste dans votre navigateur."
    }
+  }
+ },
+ "puzzle-forge.html": {
+  "src": {
+   "title": "Word scramble, sudoku and crossword puzzles in 9 languages — Puzzle Forge | MigaBuilder",
+   "description": "Free word scramble, sudoku and crossword puzzles in English, Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese and French. New puzzles every time, hints, printable, and crosswords from your own word list. No signup.",
+   "faq": [
+    "Which languages can I play in?",
+    "Word scrambles and crosswords come in English, Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese and French, with clues in the same language and the English meaning for learners. Sudoku works with ordinary digits, Arabic digits, Chinese numerals or letters.",
+    "Can I make a crossword from my own words?",
+    "Yes. Open Your words, type one word and its clue per line, and press Make a crossword. You can print it or share a link. Dictionary Forge can send the words you saved straight here.",
+    "Does each sudoku have one answer?",
+    "Yes. Every sudoku is made fresh in your browser and checked to have exactly one solution. Choose 4×4 or 6×6 for children, or 9×9 from easy to expert.",
+    "Is anything uploaded?",
+    "No. Puzzle Forge has no AI and no server. Puzzles are made and checked on your device."
+   ]
+  },
+  "es": {
+   "title": "Puzzle Forge — Letras desordenadas, sudoku y crucigramas en nueve… | MigaBuilder",
+   "description": "Letras desordenadas, sudoku y crucigramas en nueve idiomas, o con tus propias palabras.",
+   "faq": {}
+  },
+  "ar": {
+   "title": "Puzzle Forge — ترتيب الحروف والسودوكو والكلمات المتقاطعة بتسع لغات | MigaBuilder",
+   "description": "ترتيب الحروف والسودوكو والكلمات المتقاطعة بتسع لغات — أو من كلماتك الخاصة.",
+   "faq": {}
+  },
+  "zh": {
+   "title": "Puzzle Forge — 九种语言的字母重组、数独和填字游戏 | MigaBuilder",
+   "description": "九种语言的字母重组、数独和填字游戏——也可以用你自己的词。",
+   "faq": {}
+  },
+  "sw": {
+   "title": "Puzzle Forge — Kupanga herufi, sudoku na chemsha bongo za maneno katika… | MigaBuilder",
+   "description": "Kupanga herufi, sudoku na chemsha bongo za maneno katika lugha tisa — au kutoka kwa maneno yako mwenyewe.",
+   "faq": {}
+  },
+  "sv": {
+   "title": "Puzzle Forge — Ordpussel, sudoku och korsord på nio språk | MigaBuilder",
+   "description": "Ordpussel, sudoku och korsord på nio språk — eller av dina egna ord.",
+   "faq": {}
+  },
+  "de": {
+   "title": "Puzzle Forge — Buchstabensalat, Sudoku und Kreuzworträtsel in neun… | MigaBuilder",
+   "description": "Buchstabensalat, Sudoku und Kreuzworträtsel in neun Sprachen – oder aus deinen eigenen Wörtern.",
+   "faq": {}
+  },
+  "pt": {
+   "title": "Puzzle Forge — Letras embaralhadas, sudoku e palavras cruzadas em nove… | MigaBuilder",
+   "description": "Letras embaralhadas, sudoku e palavras cruzadas em nove idiomas — ou com suas próprias palavras.",
+   "faq": {}
+  },
+  "fr": {
+   "title": "Puzzle Forge — Lettres mélangées, sudoku et mots croisés en neuf langues | MigaBuilder",
+   "description": "Lettres mélangées, sudoku et mots croisés en neuf langues — ou avec vos propres mots.",
+   "faq": {}
   }
  },
  "qr-forge.html": {
@@ -8401,6 +8935,144 @@
    }
   }
  },
+ "tune-forge.html": {
+  "src": {
+   "title": "Guitar tuner online free — plus metronome and decibel meter — Tune Forge | MigaBuilder",
+   "description": "Free online tuner for guitar, bass, ukulele, violin, cello, mandolin, banjo and any instrument, with a metronome (tap tempo, speed and gap trainer), a decibel meter that warns you when it gets too loud for your ears, recording levels, reference tones and a drone. Uses your microphone; nothing is uploaded.",
+   "faq": [
+    "How do I tune my guitar with this online tuner?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.",
+    "Is the decibel meter accurate?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.",
+    "How loud is too loud for my ears?",
+    "The US National Institute for Occupational Safety and Health (NIOSH) recommends at most 8 hours a day at 85 dB(A). Every 3 dB more halves the safe time: 88 dB is 4 hours, 91 dB is 2 hours, 100 dB only 15 minutes. Drums, brass and amplified bands easily reach 100 dB, so musicians should use earplugs.",
+    "Should I tune to A = 440 Hz or 432 Hz?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.",
+    "Is Tune Forge free and private?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded."
+   ]
+  },
+  "es": {
+   "title": "Tune Forge — Un afinador para guitarra | MigaBuilder",
+   "description": "Tune Forge es un afinador en línea gratuito para guitarra, bajo, ukelele, violín, viola, violonchelo, contrabajo, mandolina, banjo, balalaica y cualquier otro instrumento o voz, con metrónomo, medidor de sonido para músicos, tonos de referencia y bordón.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "¿Cómo afino mi guitarra con este afinador en línea?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Pulsa Activar micrófono y permítelo. Elige Guitarra y la afinación, por ejemplo Estándar (E A D G B E). Pulsa una cuerda y deja que suene: el afinador encuentra la cuerda y la aguja muestra si está baja (izquierda) o alta (derecha). Gira la clavija hasta que la aguja esté en el centro verde y la pantalla diga Afinado.",
+    "Is the decibel meter accurate?": "¿Es preciso el medidor de decibelios?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "Es una buena estimación, no un sonómetro certificado. Los micrófonos de móviles y portátiles varían, así que las lecturas pueden desviarse varios decibelios. Para más precisión, calibra una vez con un sonómetro real o un sonido conocido.",
+    "How loud is too loud for my ears?": "¿Qué volumen es demasiado para mis oídos?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "¿Debo afinar a La = 440 Hz o 432 Hz?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz es el estándar internacional y lo que usan otros músicos, los pianos y las grabaciones. Algunos grupos barrocos usan 415 Hz y algunas orquestas 442 o 443 Hz. 432 Hz es una preferencia personal; no hay pruebas científicas de que suene más sano.",
+    "Is Tune Forge free and private?": "¿Tune Forge es gratis y privado?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Sí. Es gratis y sin cuenta. El sonido del micrófono se analiza en tu dispositivo y nunca se graba ni se sube."
+   }
+  },
+  "ar": {
+   "title": "Tune Forge — موالف للغيتار والباص واليوكوليلي والكمان وأي آلة،… | MigaBuilder",
+   "description": "Tune Forge موالف مجاني عبر الإنترنت للغيتار والباص واليوكوليلي والكمان والفيولا والتشيلو والكونترباص والماندولين والبانجو والبالالايكا وأي آلة أو صوت آخر، مع مترونوم ومقياس صوت للموسيقيين ونغمات مرجعية ودندنة ثابتة.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "كيف أدوزن غيتاري بهذا الموالف عبر الإنترنت؟",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "اضغط «تشغيل الميكروفون» واسمح به. اختر الغيتار والدوزان، مثل القياسي (E A D G B E). انقر وترًا واتركه يرن: يجد الموالف الوتر وتُظهر الإبرة إن كان منخفضًا (يسار) أو مرتفعًا (يمين). أدِر مفتاح الدوزان حتى تصبح الإبرة في المنتصف الأخضر وتعرض الشاشة «مضبوط».",
+    "Is the decibel meter accurate?": "هل مقياس الديسيبل دقيق؟",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "إنه تقدير جيد، وليس مقياس صوت معتمدًا. تختلف ميكروفونات الهواتف والحواسيب المحمولة، لذا قد تنحرف القراءات بعدة ديسيبلات. لدقة أفضل، اضبط المعايرة مرة واحدة باستخدام مقياس صوت حقيقي أو صوت معروف.",
+    "How loud is too loud for my ears?": "ما مستوى الصوت الذي يعدّ عاليًا جدًا على أذنيّ؟",
+    "Should I tune to A = 440 Hz or 432 Hz?": "هل أدوزن على لا = 440 هرتز أم 432 هرتز؟",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 هرتز هو المعيار الدولي وما يستخدمه العازفون الآخرون والبيانوهات والتسجيلات. بعض فرق الباروك تستخدم 415 هرتز وبعض الأوركسترات 442 أو 443 هرتز. أما 432 هرتز فتفضيل شخصي؛ ولا يوجد دليل علمي على أنه أكثر صحة.",
+    "Is Tune Forge free and private?": "هل Tune Forge مجاني وخاص؟",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "نعم. إنه مجاني وبدون حساب. يُحلَّل صوت الميكروفون على جهازك ولا يُسجَّل أو يُرفع أبدًا."
+   }
+  },
+  "zh": {
+   "title": "Tune Forge — 适用于吉他、贝斯、尤克里里、小提琴及任何乐器的调音器，一个练习用节拍器，以及一个在声音对耳朵来说过响时提醒你的声级计 | MigaBuilder",
+   "description": "Tune Forge 是一款免费的在线调音器，适用于吉他、贝斯、尤克里里、小提琴、中提琴、大提琴、低音提琴、曼陀林、班卓琴、巴拉莱卡琴及任何其他乐器或人声，还带有节拍器、面向音乐人的声级计、基准音和持续音。",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "如何用这个在线调音器给吉他调音？",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "点“启动麦克风”并允许使用。选择吉他和调弦方式，例如标准（E A D G B E）。拨一根弦让它持续发声：调音器会识别琴弦，指针显示偏低（左）或偏高（右）。转动弦钮，直到指针处于中间绿色区，屏幕显示“音准”。",
+    "Is the decibel meter accurate?": "分贝计准确吗？",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "它是不错的估计，但不是认证的声级计。手机和笔记本的麦克风各不相同，读数可能偏差几分贝。想更准确，可用真实声级计或已知声音校准一次。",
+    "How loud is too loud for my ears?": "多响会伤耳朵？",
+    "Should I tune to A = 440 Hz or 432 Hz?": "我该把 A 调到 440 Hz 还是 432 Hz？",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz 是国际标准，也是其他乐手、钢琴和录音所用的。有些巴洛克乐团用 415 Hz，有些管弦乐团用 442 或 443 Hz。432 Hz 只是个人偏好；没有科学证据表明它听起来更健康。",
+    "Is Tune Forge free and private?": "Tune Forge 免费且私密吗？",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "是的。免费且无需账号。麦克风声音在你的设备上分析，绝不会被录音或上传。"
+   }
+  },
+  "sw": {
+   "title": "Tune Forge — Kirekebishaji sauti cha gitaa | MigaBuilder",
+   "description": "Tune Forge ni kirekebishaji sauti cha mtandaoni cha bure kwa gitaa, besi, ukulele, fidla, viola, selo, besi kubwa, mandolini, banjo, balalaika na ala nyingine yoyote au sauti, pamoja na metronomu, kipima sauti kwa wanamuziki, toni za rejea na sauti endelevu.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "Ninarekebishaje gitaa langu kwa kirekebishaji hiki cha mtandaoni?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Bonyeza Washa maikrofoni na uiruhusu. Chagua Gitaa na mpangilio, kama Kawaida (E A D G B E). Piga uzi mmoja na uuache ulie: kirekebishaji hupata uzi na sindano huonyesha kama uko chini (kushoto) au juu (kulia). Zungusha kigingi hadi sindano iwe katikati kwenye kijani na skrini iseme Sahihi.",
+    "Is the decibel meter accurate?": "Je, kipima desibeli ni sahihi?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "Ni makadirio mazuri, si kipima sauti kilichothibitishwa. Maikrofoni za simu na kompyuta mpakato hutofautiana, kwa hivyo vipimo vinaweza kupotoka kwa desibeli kadhaa. Kwa usahihi zaidi, rekebisha mara moja ukitumia kipima sauti halisi au sauti inayojulikana.",
+    "How loud is too loud for my ears?": "Sauti kubwa kiasi gani ni nyingi mno kwa masikio yangu?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "Je, nirekebishe kwa A = 440 Hz au 432 Hz?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz ni kiwango cha kimataifa na ndicho wanachotumia wapigaji wengine, piano na rekodi. Baadhi ya vikundi vya baroque hutumia 415 Hz na baadhi ya okestra 442 au 443 Hz. 432 Hz ni upendeleo binafsi; hakuna ushahidi wa kisayansi kwamba ni bora kwa afya.",
+    "Is Tune Forge free and private?": "Je, Tune Forge ni bure na ya faragha?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Ndiyo. Ni bure bila akaunti. Sauti ya maikrofoni huchambuliwa kwenye kifaa chako na hairekodiwi wala kupakiwa kamwe."
+   }
+  },
+  "sv": {
+   "title": "Tune Forge — En stämapparat för gitarr | MigaBuilder",
+   "description": "Tune Forge är en gratis stämapparat på nätet för gitarr, bas, ukulele, fiol, altfiol, cello, kontrabas, mandolin, banjo, balalajka och alla andra instrument eller röst, med metronom, ljudnivåmätare för musiker, referenstoner och bordun.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "Hur stämmer jag gitarren med den här stämapparaten?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Tryck på Starta mikrofonen och tillåt mikrofonen. Välj Gitarr och stämning, till exempel Standard (E A D G B E). Knäpp en sträng och låt den klinga: stämapparaten hittar strängen och nålen visar om den är för låg (vänster) eller för hög (höger). Vrid på stämskruven tills nålen är i det gröna i mitten och det står Stämd.",
+    "Is the decibel meter accurate?": "Är decibelmätaren exakt?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "Det är en bra uppskattning, inte en certifierad ljudnivåmätare. Mikrofoner i mobiler och laptops skiljer sig åt, så värdena kan slå fel med flera decibel. För bättre precision, kalibrera en gång mot en riktig ljudnivåmätare eller ett känt ljud.",
+    "How loud is too loud for my ears?": "Hur högt är för högt för mina öron?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "Ska jag stämma till A = 440 Hz eller 432 Hz?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz är internationell standard och det som andra musiker, pianon och inspelningar använder. Vissa barockensembler använder 415 Hz och vissa orkestrar 442 eller 443 Hz. 432 Hz är en smaksak; det finns inga vetenskapliga belägg för att det låter hälsosammare.",
+    "Is Tune Forge free and private?": "Är Tune Forge gratis och privat?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Ja. Det är gratis utan konto. Mikrofonljudet analyseras på din enhet och spelas aldrig in eller laddas upp."
+   }
+  },
+  "de": {
+   "title": "Tune Forge — Ein Stimmgerät für Gitarre | MigaBuilder",
+   "description": "Tune Forge ist ein kostenloses Online-Stimmgerät für Gitarre, Bass, Ukulele, Geige, Bratsche, Cello, Kontrabass, Mandoline, Banjo, Balalaika und jedes andere Instrument oder die Stimme, mit Metronom, Schallpegelmesser für Musiker, Referenztönen und Bordun.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "Wie stimme ich meine Gitarre mit diesem Online-Stimmgerät?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Drücke „Mikrofon starten“ und erlaube das Mikrofon. Wähle Gitarre und die Stimmung, etwa Standard (E A D G B E). Zupf eine Saite an und lass sie klingen: Das Stimmgerät erkennt die Saite, und die Nadel zeigt, ob sie zu tief (links) oder zu hoch (rechts) ist. Dreh den Wirbel, bis die Nadel in der grünen Mitte steht und „Gestimmt“ erscheint.",
+    "Is the decibel meter accurate?": "Ist der Dezibelmesser genau?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "Er ist eine gute Schätzung, kein geeichter Schallpegelmesser. Handy- und Laptopmikrofone unterscheiden sich, daher können die Werte um einige Dezibel abweichen. Für mehr Genauigkeit kalibriere einmal mit einem echten Schallpegelmesser oder einem bekannten Ton.",
+    "How loud is too loud for my ears?": "Wie laut ist zu laut für meine Ohren?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "Soll ich auf A = 440 Hz oder 432 Hz stimmen?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz ist der internationale Standard und das, was andere Musiker, Klaviere und Aufnahmen nutzen. Manche Barockensembles nehmen 415 Hz, manche Orchester 442 oder 443 Hz. 432 Hz ist Geschmackssache; es gibt keinen wissenschaftlichen Beleg, dass es gesünder klingt.",
+    "Is Tune Forge free and private?": "Ist Tune Forge kostenlos und privat?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Ja. Es ist kostenlos und ohne Konto. Der Mikrofonton wird auf deinem Gerät ausgewertet und nie aufgenommen oder hochgeladen."
+   }
+  },
+  "pt": {
+   "title": "Tune Forge — Um afinador para violão | MigaBuilder",
+   "description": "O Tune Forge é um afinador online grátis para violão, baixo, ukulele, violino, viola, violoncelo, contrabaixo, bandolim, banjo, balalaica e qualquer outro instrumento ou voz, com metrônomo, medidor de nível sonoro para músicos, tons de referência e bordão.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "Como afino meu violão com este afinador online?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Toque em Ligar microfone e permita o acesso. Escolha Violão e a afinação, como Padrão (E A D G B E). Toque uma corda e deixe soar: o afinador encontra a corda e a agulha mostra se está baixa (esquerda) ou alta (direita). Gire a tarraxa até a agulha ficar no meio verde e a tela mostrar Afinado.",
+    "Is the decibel meter accurate?": "O medidor de decibéis é preciso?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "É uma boa estimativa, não um medidor certificado. Microfones de celulares e notebooks variam, então as leituras podem errar alguns decibéis. Para mais precisão, calibre uma vez com um medidor real ou um som conhecido.",
+    "How loud is too loud for my ears?": "Que volume é alto demais para meus ouvidos?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "Devo afinar em Lá = 440 Hz ou 432 Hz?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz é o padrão internacional e o que outros músicos, pianos e gravações usam. Alguns grupos barrocos usam 415 Hz e algumas orquestras 442 ou 443 Hz. 432 Hz é preferência pessoal; não há evidência científica de que soe mais saudável.",
+    "Is Tune Forge free and private?": "O Tune Forge é grátis e privado?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Sim. É grátis e sem conta. O som do microfone é analisado no seu aparelho e nunca é gravado nem enviado."
+   }
+  },
+  "fr": {
+   "title": "Tune Forge — Un accordeur pour guitare | MigaBuilder",
+   "description": "Tune Forge est un accordeur en ligne gratuit pour guitare, basse, ukulélé, violon, alto, violoncelle, contrebasse, mandoline, banjo, balalaïka et tout autre instrument ou voix, avec métronome, sonomètre pour musiciens, notes de référence et bourdon.",
+   "faq": {
+    "How do I tune my guitar with this online tuner?": "Comment accorder ma guitare avec cet accordeur en ligne ?",
+    "Press Start microphone and allow the microphone. Pick Guitar and the tuning, such as Standard (E A D G B E). Pluck one string and let it ring: the tuner finds the string and the needle shows if it is flat (left) or sharp (right). Turn the tuning peg until the needle is in the green middle and the screen says In tune.": "Appuyez sur Activer le micro et autorisez-le. Choisissez Guitare et l’accordage, par exemple Standard (E A D G B E). Pincez une corde et laissez-la sonner : l’accordeur trouve la corde et l’aiguille indique si elle est trop basse (gauche) ou trop haute (droite). Tournez la mécanique jusqu’à ce que l’aiguille soit au milieu dans le vert et que l’écran affiche Juste.",
+    "Is the decibel meter accurate?": "Le décibelmètre est-il précis ?",
+    "It is a good estimate, not a certified sound level meter. Phone and laptop microphones differ, so readings can be off by several decibels. For better accuracy, set the calibration once using a real sound level meter or a known sound.": "C’est une bonne estimation, pas un sonomètre certifié. Les micros des téléphones et portables varient : les mesures peuvent s’écarter de plusieurs décibels. Pour plus de précision, étalonnez une fois avec un vrai sonomètre ou un son connu.",
+    "How loud is too loud for my ears?": "À partir de quel volume est-ce trop fort pour mes oreilles ?",
+    "Should I tune to A = 440 Hz or 432 Hz?": "Faut-il s’accorder à la = 440 Hz ou 432 Hz ?",
+    "440 Hz is the international standard and what other players, pianos and recordings use. Some baroque groups use 415 Hz and some orchestras 442 or 443 Hz. 432 Hz is a personal preference; there is no scientific evidence that it sounds healthier.": "440 Hz est la norme internationale, utilisée par les autres musiciens, les pianos et les enregistrements. Certains ensembles baroques utilisent 415 Hz et certains orchestres 442 ou 443 Hz. 432 Hz est une préférence personnelle ; aucune preuve scientifique ne montre qu’il serait plus sain.",
+    "Is Tune Forge free and private?": "Tune Forge est-il gratuit et privé ?",
+    "Yes. It is free with no account. The microphone sound is analysed on your device and is never recorded or uploaded.": "Oui. Il est gratuit et sans compte. Le son du micro est analysé sur votre appareil et n’est jamais enregistré ni envoyé."
+   }
+  }
+ },
  "utility-forge.html": {
   "src": {
    "title": "JSON formatter and validator, Base64 and CSV tools — free — Utility Forge | MigaBuilder",
@@ -8764,6 +9436,108 @@
     "Yes. It is free to use, with no account, no watermark and no paywall.": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement.",
     "Are my files uploaded?": "Mes fichiers sont-ils envoyés ?",
     "No. It runs entirely in your browser, so your files and text stay on your device.": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
+   }
+  }
+ },
+ "visit-forge.html": {
+  "src": {
+   "title": "Doctor appointment prep sheet: symptoms, medicines and questions on one page — Visit Forge | MigaBuilder",
+   "description": "Free, private doctor visit planner. Write down your symptoms, a timeline, your medicines and allergies, and your top questions, get a 30-second opening to say first, and print or download a one-page summary to hand to your doctor. Nothing is uploaded.",
+   "faq": [
+    "Is my health information uploaded?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.",
+    "Does Visit Forge give medical advice?",
+    "No. It helps you describe what is happening and ask good questions. Only a doctor or nurse can tell you what it is and what to do.",
+    "Is Visit Forge free?",
+    "Yes. It is free to use, with no account, no watermark and no paywall."
+   ]
+  },
+  "es": {
+   "title": "Visit Forge — Prepárate para la cita médica: síntomas | MigaBuilder",
+   "description": "Visit Forge te ayuda a aprovechar al máximo una cita médica corta. Anota el motivo principal, cada síntoma (cuándo empezó, con qué frecuencia, cuánto molesta, qué lo mejora o empeora), una cronología, tus medicamentos y alergias, y tus preguntas. Lo convierte en una introducción de 30 segundos…",
+   "faq": {
+    "Is my health information uploaded?": "¿Se suben mis datos de salud?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "No. Visit Forge no tiene IA ni servidor. Todo lo que escribes se queda en este navegador y el PDF se crea en tu dispositivo.",
+    "Does Visit Forge give medical advice?": "¿Visit Forge da consejos médicos?",
+    "Is Visit Forge free?": "¿Visit Forge es gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sí. Es gratis, sin cuenta, sin marca de agua y sin muro de pago."
+   }
+  },
+  "ar": {
+   "title": "Visit Forge — استعد لموعد الطبيب: الأعراض والأدوية وأسئلتك في صفحة واحدة | MigaBuilder",
+   "description": "يساعدك Visit Forge على الاستفادة القصوى من موعد قصير مع الطبيب. دوّن السبب الرئيسي لذهابك، وكل عَرَض (متى بدأ، وكم مرة، وشدته، وما الذي يحسّنه أو يسوئه)، وتسلسلًا زمنيًا، وأدويتك وحساسيتك، وأسئلتك. يحوّلها إلى افتتاحية مدتها 30 ثانية تقولها أولًا وملخص واضح من صفحة واحدة للطباعة أو التسليم، مع…",
+   "faq": {
+    "Is my health information uploaded?": "هل تُرفع معلوماتي الصحية؟",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "لا. لا يحتوي Visit Forge على ذكاء اصطناعي ولا خادم. كل ما تكتبه يبقى في هذا المتصفح، ويُنشأ ملف PDF على جهازك.",
+    "Does Visit Forge give medical advice?": "هل يقدّم Visit Forge نصائح طبية؟",
+    "Is Visit Forge free?": "هل Visit Forge مجاني؟",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "نعم. إنه مجاني، بلا حساب ولا علامة مائية ولا اشتراك مدفوع."
+   }
+  },
+  "zh": {
+   "title": "Visit Forge — 为看医生做好准备：症状、用药和你的问题都在一页上 | MigaBuilder",
+   "description": "Visit Forge 帮你充分利用短暂的看诊时间。写下就诊的主要原因、每个症状（何时开始、多久一次、多严重、什么让它好转或加重）、时间线、用药和过敏，以及你的问题。它会把这些变成一段先说的 30 秒开场白，以及一份清晰的一页摘要供打印或交给医生，最重要的三个问题排在最前面。就诊后，记下医生说了什么以及治疗计划。",
+   "faq": {
+    "Is my health information uploaded?": "我的健康信息会被上传吗？",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "不会。Visit Forge 没有 AI，也没有服务器。你输入的一切都留在此浏览器中，PDF 在你的设备上生成。",
+    "Does Visit Forge give medical advice?": "Visit Forge 提供医疗建议吗？",
+    "Is Visit Forge free?": "Visit Forge 免费吗？",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"
+   }
+  },
+  "sw": {
+   "title": "Visit Forge — Jitayarishe kwa miadi ya daktari: dalili | MigaBuilder",
+   "description": "Visit Forge inakusaidia kunufaika zaidi na miadi fupi ya daktari. Andika sababu kuu ya kwenda, kila dalili (ilipoanza, mara ngapi, ukali, kinachoipunguza au kuizidisha), mfuatano wa matukio, dawa na mzio wako, na maswali yako. Inayageuza kuwa utangulizi wa sekunde 30 wa kusema kwanza na…",
+   "faq": {
+    "Is my health information uploaded?": "Je, taarifa zangu za afya zinapakiwa?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "Hapana. Visit Forge haina AI wala seva. Kila unachoandika kinabaki kwenye kivinjari hiki, na PDF inatengenezwa kwenye kifaa chako.",
+    "Does Visit Forge give medical advice?": "Je, Visit Forge inatoa ushauri wa kitabibu?",
+    "Is Visit Forge free?": "Je, Visit Forge ni bure?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."
+   }
+  },
+  "sv": {
+   "title": "Visit Forge — Förbered dig inför läkarbesöket: symtom | MigaBuilder",
+   "description": "Visit Forge hjälper dig att få ut mest av ett kort läkarbesök. Skriv ner huvudorsaken till besöket, varje symtom (när det började, hur ofta, hur illa, vad som gör det bättre eller sämre), en tidslinje, dina mediciner och allergier och dina frågor. Det blir en inledning på 30 sekunder att säga…",
+   "faq": {
+    "Is my health information uploaded?": "Laddas min hälsoinformation upp?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "Nej. Visit Forge har ingen AI och ingen server. Allt du skriver stannar i webbläsaren och PDF:en skapas på din enhet.",
+    "Does Visit Forge give medical advice?": "Ger Visit Forge medicinska råd?",
+    "Is Visit Forge free?": "Är Visit Forge gratis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."
+   }
+  },
+  "de": {
+   "title": "Visit Forge — Bereite dich auf den Arzttermin vor: Beschwerden | MigaBuilder",
+   "description": "Visit Forge hilft dir, das Beste aus einem kurzen Arzttermin zu machen. Schreib den Hauptgrund auf, jede Beschwerde (wann sie begann, wie oft, wie stark, was sie bessert oder verschlimmert), einen Zeitverlauf, deine Medikamente und Allergien und deine Fragen. Daraus entstehen ein…",
+   "faq": {
+    "Is my health information uploaded?": "Werden meine Gesundheitsdaten hochgeladen?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "Nein. Visit Forge hat keine KI und keinen Server. Alles, was du eintippst, bleibt in diesem Browser, und die PDF entsteht auf deinem Gerät.",
+    "Does Visit Forge give medical advice?": "Gibt Visit Forge medizinischen Rat?",
+    "Is Visit Forge free?": "Ist Visit Forge kostenlos?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."
+   }
+  },
+  "pt": {
+   "title": "Visit Forge — Prepare-se para a consulta médica: sintomas | MigaBuilder",
+   "description": "O Visit Forge ajuda você a aproveitar ao máximo uma consulta curta. Anote o motivo principal, cada sintoma (quando começou, com que frequência, quão forte, o que melhora ou piora), uma linha do tempo, seus remédios e alergias e suas perguntas. Ele transforma isso numa abertura de 30 segundos…",
+   "faq": {
+    "Is my health information uploaded?": "Minhas informações de saúde são enviadas?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "Não. O Visit Forge não tem IA nem servidor. Tudo o que você digita fica neste navegador, e o PDF é gerado no seu aparelho.",
+    "Does Visit Forge give medical advice?": "O Visit Forge dá conselhos médicos?",
+    "Is Visit Forge free?": "O Visit Forge é grátis?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Sim. É gratuito, sem conta, sem marca d'água e sem cobrança."
+   }
+  },
+  "fr": {
+   "title": "Visit Forge — Préparez votre rendez-vous médical : symptômes | MigaBuilder",
+   "description": "Visit Forge vous aide à tirer le meilleur d’un court rendez-vous médical. Notez le motif principal, chaque symptôme (début, fréquence, intensité, ce qui l’améliore ou l’aggrave), une chronologie, vos médicaments et allergies, et vos questions. Il en fait une introduction de 30 secondes à dire en…",
+   "faq": {
+    "Is my health information uploaded?": "Mes informations de santé sont-elles envoyées ?",
+    "No. Visit Forge has no AI and no server. Everything you type stays in this browser, and the PDF is made on your device.": "Non. Visit Forge n’a ni IA ni serveur. Tout ce que vous tapez reste dans ce navigateur et le PDF est créé sur votre appareil.",
+    "Does Visit Forge give medical advice?": "Visit Forge donne-t-il des conseils médicaux ?",
+    "Is Visit Forge free?": "Visit Forge est-il gratuit ?",
+    "Yes. It is free to use, with no account, no watermark and no paywall.": "Oui. Il est gratuit, sans compte, sans filigrane et sans paiement."
    }
   }
  },

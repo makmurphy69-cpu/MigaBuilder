@@ -87,6 +87,20 @@ table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}tab
 @media print{.tool-nav,.masthead,.side,.viewtabs,.ov,footer,.miga-bar,.miga-float{display:none!important}body{background:#fff}main.cf-main{display:block}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I learn to solve a Rubik’s cube with Cube Forge?", "acceptedAnswer": {"@type": "Answer", "text": "Open the Learn tab and follow the beginner method in seven steps: white cross, white corners, middle layer, yellow cross, yellow edges, yellow corners in place and twisting the yellow corners. Each step has a Show me button that plays it on the 3D cube, and Solve with me gives a step-by-step solution for any scrambled 3×3 or 2×2."}}, {"@type": "Question", "name": "Can I choose how many layers the cube has?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Pick anything from a 2×2 to a 10×10 cube, or a cuboid such as the 3×3×2 domino, 2×2×3 tower or 3×3×1 floppy cube by choosing the number of layers on each side."}}, {"@type": "Question", "name": "Can it solve my real cube?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, for the 3×3 and the 2×2. Paint the colours of your cube on the flat view or on the 3D model, then press Solve my cube to get a solution that explains every step."}}, {"@type": "Question", "name": "Is Cube Forge free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free, with no account, no watermark and no paywall, and it runs in your browser."}}]}</script>
+<script src="i18n.js"></script>
+<script src="i18n/cube-forge.js"></script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/cube-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/cube-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/cube-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/cube-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/cube-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/cube-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/cube-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/cube-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/cube-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/cube-forge.html">
+<!-- /language versions -->
 </head>
 <body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Cube Forge</span></nav>
@@ -600,7 +614,7 @@ function markSolve() {
   $('solveOut').querySelectorAll('.stage').forEach((el, si) => el.classList.toggle('cur', cur ? cur.si === si : false));
   $('solProgress').textContent = i >= sol.flat.length ? 'Done — solved!' : 'Move ' + (i + 1) + ' of ' + sol.flat.length;
   $('playBtn').textContent = S.playing ? '⏸ Pause' : '▶ Play';
-  if (cur) { const st = sol.stages[cur.si]; showCap(cur.t, 'Step ' + (cur.si + 1) + ' · ' + st.title + ' — ' + st.parts[cur.pi].note); highlight(cur.t); }
+  if (cur) { const st = sol.stages[cur.si], tr = x => (window.I18N && I18N.tr ? I18N.tr(x) : x); showCap(cur.t, tr('Step ' + (cur.si + 1)) + ' · ' + tr(st.title) + ' — ' + tr(st.parts[cur.pi].note)); highlight(cur.t); }
   else { showCap(null); highlight(null); }
 }
 function showCap(tok, stepText) {

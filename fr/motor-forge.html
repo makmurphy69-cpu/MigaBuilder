@@ -1,0 +1,645 @@
+<!-- Generated from /motor-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="fr" data-en-title="Design a car or motorcycle and build its engine: 0–100, top speed and fuel use — Motor Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='fr';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Motor Forge — Concevez une voiture ou une moto et construisez son moteur | MigaBuilder</title>
+<meta name="description" content="Motor Forge est un outil de conception de voitures et de motos : partez d’une compacte, d’une sportive, d’un SUV, d’un pick-up, d’une voiture électrique, d’un scooter, d’une moto sportive, d’une custom ou d’une moto tout-terrain, construisez son moteur et voyez ce qu’elle vaudrait.">
+<link rel="canonical" href="https://migabuilder.com/fr/motor-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/motor-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Motor Forge — Concevez une voiture ou une moto et construisez son moteur">
+<meta property="og:description" content="Motor Forge est un outil de conception de voitures et de motos : partez d’une compacte, d’une sportive, d’un SUV, d’un pick-up, d’une voiture électrique, d’un scooter, d’une moto sportive, d’une custom ou d’une moto tout-terrain, construisez son moteur et voyez ce qu’elle vaudrait.">
+<meta property="og:url" content="https://migabuilder.com/fr/motor-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+main.mf-main{max-width:1400px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px;align-items:start}
+.side{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;padding:16px}
+.side h3{font:700 13px 'Space Grotesk';text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:#35516b;border-top:1px solid rgba(22,32,43,.12);padding-top:12px}
+.side h3:first-of-type{border-top:0;padding-top:0;margin-top:4px}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.modes button{border:1.5px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:8px;font-weight:700;cursor:pointer;color:var(--ink)}
+.modes button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.presets button{background:#fff;border:1.5px solid rgba(22,32,43,.15);border-radius:6px;padding:7px 6px;text-align:left;font-size:12.5px;cursor:pointer;color:var(--ink);line-height:1.2}
+.presets button b{font-size:18px;margin-right:3px}.presets button.active{border-color:var(--amber);background:#fff7e6}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin-bottom:8px;font-size:12.5px}
+.sl label{font-weight:600}.sl output{font:500 12px 'IBM Plex Mono';color:#35516b}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:#0E2A47}
+.sl[hidden]{display:none}
+.sl2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sel{margin-bottom:8px;font-size:12.5px}.sel label{display:block;font-weight:600;margin-bottom:3px}.sel select,.sel input{width:100%;padding:6px;border:1px solid rgba(22,32,43,.25);border-radius:4px;background:#fff}
+.viewtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.viewtabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 13px;font-weight:700;cursor:pointer;color:var(--ink);font-size:13px}
+.viewtabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+#view3d{position:relative;height:min(58vh,520px);min-height:320px;border-radius:6px;overflow:hidden;background:linear-gradient(#cfe3f1,#f2f6f8)}
+#view3d canvas{display:block;width:100%;height:100%}
+.ov{position:absolute;left:10px;top:10px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.ov button,.ov label{background:rgba(255,255,255,.9);border:1px solid rgba(22,32,43,.2);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink);display:flex;gap:5px;align-items:center}
+.dash{position:absolute;right:10px;bottom:10px;background:rgba(10,20,32,.86);color:#fff;border-radius:10px;padding:10px 14px;z-index:2;min-width:190px;font:500 12px 'IBM Plex Mono'}
+.dash b{display:block;font:700 30px 'Space Grotesk';line-height:1}
+.dash .row{display:flex;justify-content:space-between;gap:12px;margin-top:4px}
+.dash .bar{height:6px;background:rgba(255,255,255,.2);border-radius:3px;margin-top:6px;overflow:hidden}.dash .bar i{display:block;height:100%;background:#E2A63B;width:0}
+.no3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#35516b}
+.svgbox{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;overflow:auto;min-height:260px}
+.svgbox svg{display:block;width:100%;height:auto}
+.hydro{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:12px}
+.hv{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px}
+.hv b{display:block;font:700 18px 'Space Grotesk'}.hv span{font-size:11.5px;color:rgba(22,32,43,.72)}.hv i{font-style:normal;font-size:11px;color:#35516b}
+.scores{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:6px 16px;margin-top:10px}
+.score{font-size:12.5px}.score div{display:flex;justify-content:space-between;font-weight:600}.score .track{height:8px;background:#e7ebee;border-radius:4px;overflow:hidden;margin-top:3px}.score .track i{display:block;height:100%;background:linear-gradient(90deg,#D8604A,#E2A63B,#4E9E73)}
+.verdict{font-size:15px;line-height:1.5;margin:6px 0 0;padding:10px 12px;background:#f1efe8;border-radius:6px}
+.checks{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.checks li{padding:8px 10px;border-radius:5px;font-size:13px;line-height:1.4}
+.checks .ok{background:#eef8f1;border-left:4px solid #4E9E73}.checks .warn{background:#fff6e0;border-left:4px solid #E2A63B}.checks .bad{background:#fdeeea;border-left:4px solid #D8604A}.checks .info{background:#eef4fa;border-left:4px solid #5b8fc0}
+table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}table.t th,table.t td{border:1px solid rgba(22,32,43,.14);padding:5px 7px;text-align:right}table.t th{background:#f1efe8;text-align:center}table.t td:first-child{text-align:left}
+.tablewrap{overflow:auto;max-height:520px}
+.explain{font-size:13px;line-height:1.55;color:rgba(22,32,43,.78)}
+.addons label.chk{display:flex;gap:6px;align-items:center;font-size:12.5px;font-weight:600}
+.engnums{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px;margin:10px 0}
+@media(max-width:980px){main.mf-main{grid-template-columns:1fr}.side{position:static;max-height:none}}
+@media print{.tool-nav,.masthead,.side,.viewtabs,.ov,footer,.miga-bar,.miga-float{display:none!important}body{background:#fff}main.mf-main{display:block}.panel{box-shadow:none}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does Motor Forge work out the power of my engine?","acceptedAnswer":{"@type":"Answer","text":"It works out the displacement from the bore, stroke and number of cylinders, then uses typical brake mean effective pressures for petrol, diesel, turbocharged and supercharged engines, the compression ratio and the cam profile to draw a torque and power curve from idle to the rev limit."}},{"@type":"Question","name":"How accurate are the 0-100 km/h and top speed figures?","acceptedAnswer":{"@type":"Answer","text":"They come from a step-by-step simulation with gear changes, wheelspin, weight transfer, wheelies, air drag and rolling resistance. They are estimates for comparing designs, usually within about 10–20% of real vehicles, not test results."}},{"@type":"Question","name":"Motor Forge est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free to use, with no account, no watermark and no paywall, and everything is calculated in your browser."}}],"inLanguage":"fr"}</script>
+<script src="i18n.js"></script>
+<script src="i18n/motor-forge.js"></script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/motor-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/motor-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/motor-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/motor-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/motor-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/motor-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/motor-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/motor-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/motor-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/motor-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/fr/">← All tools</a><span>Motor Forge</span></nav>
+<header class="masthead"><div><h1>Motor Forge</h1><p>Design a car or a motorcycle and build its engine. See its power curve, then find out how fast it accelerates, how fast it goes, how well it brakes and corners, and how much fuel it uses.</p></div></header>
+<main class="mf-main">
+<aside class="panel side" aria-label="Vehicle design controls">
+  <h3>1 · Start from a vehicle</h3>
+  <div class="modes" role="group" aria-label="Vehicle type"><button id="modeCar" data-mode="car">🚗 Car</button><button id="modeBike" data-mode="bike">🏍️ Motorcycle</button></div>
+  <div class="presets" id="presets"></div>
+  <h3>2 · Engine</h3>
+  <div class="sl2">
+    <div class="sel"><label for="p_fuel">Power</label><select id="p_fuel"><option value="petrol">Petrol engine</option><option value="diesel">Diesel engine</option><option value="electric">Electric motor</option></select></div>
+    <div class="sel ice"><label for="p_induction">Air supply</label><select id="p_induction"><option value="na">Naturally aspirated</option><option value="turbo">Turbocharger</option><option value="super">Supercharger</option></select></div>
+  </div>
+  <div class="sl2 ice">
+    <div class="sel"><label for="p_cyl">Cylinders</label><select id="p_cyl"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>8</option><option>10</option><option>12</option><option>16</option></select></div>
+    <div class="sel"><label for="p_layout">Layout</label><select id="p_layout"><option value="inline">Inline (in a row)</option><option value="v">V</option><option value="boxer">Boxer (flat)</option></select></div>
+  </div>
+  <div class="sel ice"><label for="p_cam">Camshaft</label><select id="p_cam"><option value="mild">Mild — strong low down, quiet</option><option value="street">Street — all-round</option><option value="race">Race — power high up</option></select></div>
+  <div id="engineSliders"></div>
+  <h3>3 · Body and chassis</h3>
+  <div class="sl2">
+    <div class="sel carOnly"><label for="p_body">Body</label><select id="p_body"><option value="hatch">Hatchback</option><option value="sedan">Sedan</option><option value="coupe">Coupé</option><option value="suv">SUV</option><option value="pickup">Pickup</option><option value="roadster">Roadster (open)</option></select></div>
+    <div class="sel bikeOnly"><label for="p_style">Style</label><select id="p_style"><option value="naked">Naked</option><option value="sport">Sport (fairing)</option><option value="cruiser">Cruiser</option><option value="adventure">Adventure</option><option value="dirt">Dirt bike</option><option value="scooter">Scooter</option></select></div>
+    <div class="sel"><label for="p_color">Colour</label><input type="color" id="p_color"></div>
+  </div>
+  <div id="bodySliders"></div>
+  <h3>4 · Drivetrain, tyres and aero</h3>
+  <div class="sl2">
+    <div class="sel carOnly"><label for="p_drive">Driven wheels</label><select id="p_drive"><option value="fwd">Front (FWD)</option><option value="rwd">Rear (RWD)</option><option value="awd">All (AWD)</option></select></div>
+    <div class="sel carOnly"><label for="p_enginePos">Engine position</label><select id="p_enginePos"><option value="front">Front</option><option value="mid">Middle</option><option value="rear">Rear</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel"><label for="p_gearbox">Gearbox</label><select id="p_gearbox"><option value="manual">Manual</option><option value="auto">Automatic</option><option value="dct">Dual-clutch (fast)</option><option value="cvt">CVT (no steps)</option></select></div>
+    <div class="sel"><label for="p_gearing">Gearing</label><select id="p_gearing"><option value="short">Short — quicker</option><option value="normal">Normal</option><option value="tall">Tall — calmer, saves fuel</option></select></div>
+  </div>
+  <div class="sl2">
+    <div class="sel"><label for="p_tyre">Tyres</label><select id="p_tyre"><option value="eco">Eco (low rolling resistance)</option><option value="road">Road</option><option value="sport">Sport</option><option value="semi">Semi-slick (track day)</option><option value="slick">Racing slick</option><option value="knobbly">Off-road knobbly</option></select></div>
+    <div class="sel carOnly"><label for="p_aero">Wing / downforce</label><select id="p_aero"><option value="none">None</option><option value="lip">Small spoiler</option><option value="wing">Rear wing</option><option value="race">Race aero</option></select></div>
+  </div>
+  <div id="driveSliders"></div>
+  <h3>5 · Save</h3>
+  <div class="actions"><button class="secondary" id="saveJson">💾 Save design</button><label class="secondary" style="cursor:pointer">📂 Open<input type="file" id="openJson" accept=".json" hidden></label><button class="secondary" id="resetBtn">↺ Reset</button></div>
+  <p class="privacy" style="margin-top:10px">🔒 Everything is calculated in your browser and saved on this device.</p>
+</aside>
+
+<div>
+  <section class="panel">
+    <div class="viewtabs" role="group" aria-label="View">
+      <button class="active" data-view="v3d" id="tab3d">🚗 3D</button>
+      <button data-view="vengine" id="tabEngine">⚙️ Engine</button>
+      <button data-view="vperf" id="tabPerf">⏱️ Performance</button>
+      <button data-view="vgears" id="tabGears">🔧 Gears</button>
+      <button data-view="vweights" id="tabWeights">🏋️ Weights</button>
+      <button data-view="vcompare" id="tabCompare">📊 Compare</button>
+    </div>
+    <div id="v3d" class="view">
+      <div id="view3d"><div class="ov"><button id="camSide">Side</button><button id="camFront">Front</button><button id="camTop">Top</button><button id="cam34">3/4</button><label><input type="checkbox" id="xray"> See the engine</label></div>
+        <div class="dash" id="dash"><span id="dashT">Ready</span><b id="dashV">0 km/h</b><div class="row"><span id="dashGear">gear –</span><span id="dashRpm">– rpm</span></div><div class="bar"><i id="dashBar"></i></div></div></div>
+      <div class="actions" style="margin-top:10px"><button class="primary" id="runBtn">▶ Run the 0–100 test</button><button class="secondary" id="pinBtn">📌 Pin to compare</button><button class="secondary" id="dlPNG">⬇ Picture</button><button class="secondary" id="dlOBJ">⬇ OBJ</button><button class="secondary" id="dlSTL">⬇ STL (3D print)</button><button class="secondary" id="printBtn">🖨 Spec sheet</button></div>
+    </div>
+    <div id="vengine" class="view hidden">
+      <p class="explain">The <b>torque</b> (pulling force, blue) and <b>power</b> (torque × revs, orange) your engine makes at full throttle, from idle to the rev limit (red line). Turbos add power once they spin up; a race cam moves the power higher up the rev range.</p>
+      <div class="svgbox" id="engineBox"></div>
+      <div class="engnums" id="engineNums"></div>
+      <div class="svgbox" id="layoutBox" style="min-height:0"></div>
+    </div>
+    <div id="vperf" class="view hidden">
+      <p class="explain">A full-throttle run from standstill: speed against time, coloured by gear. Each flat step is a gear change. It includes wheelspin, weight moving to the back wheels, wheelies, air drag and rolling resistance.</p>
+      <div class="svgbox" id="perfBox"></div>
+      <div class="actions" style="margin-top:10px"><button class="secondary" id="dlCSV">⬇ Test run CSV</button><button class="secondary" id="dlSpec">⬇ Spec sheet CSV</button></div>
+    </div>
+    <div id="vgears" class="view hidden">
+      <p class="explain">The gear ratios worked out for your engine, wheels and gearing choice, with the speed each gear reaches at the rev limit and the revs at 100 km/h.</p>
+      <div class="tablewrap" id="gearsBox"></div>
+    </div>
+    <div id="vweights" class="view hidden">
+      <p class="explain">Every weight in the vehicle. More weight on the driven wheels means less wheelspin; a low centre of gravity means less body roll and fewer wheelies.</p>
+      <div class="tablewrap" id="weightsBox"></div>
+    </div>
+    <div id="vcompare" class="view hidden">
+      <p class="explain">Press <b>📌 Pin to compare</b> to keep a design here, then change it and pin again. Up to six designs, saved on this device.</p>
+      <div class="tablewrap" id="compareBox"></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2 id="vehTitle">How well it works</h2>
+    <p class="verdict" id="verdict"></p>
+    <div class="scores" id="scores"></div>
+    <div class="hydro" id="results"></div>
+    <ul class="checks" id="checks"></ul>
+  </section>
+  <section class="panel">
+    <h2>How Motor Forge works</h2>
+    <div class="explain">
+      <p><b>Engine:</b> the size (displacement) comes from the bore, stroke and number of cylinders. Torque is the size times a typical cylinder pressure (BMEP) for that kind of engine — about 12–13 bar for a petrol engine without a turbo, and roughly double with boost. Higher compression burns the fuel more efficiently. The cam profile shapes where the engine breathes best, and friction grows with piston speed. Power is torque × revs.</p>
+      <p><b>Performance:</b> a simulation steps through a full-throttle run a hundredth of a second at a time. At each moment it picks the best gear, works out the pushing force at the wheels, limits it by tyre grip (with weight moving backwards as you accelerate, and wheelies on a motorcycle), and subtracts air drag (½·ρ·Cd·A·v²) and rolling resistance. Braking is limited by grip, and on a motorcycle by the rear wheel lifting. Fuel use comes from the power needed at a steady 100 km/h and how efficient the engine is at that light load.</p>
+      <p>These are estimates for learning and comparing designs, usually within 10–20% of real vehicles. Real cars and motorcycles also need crash safety, cooling, emissions and road approval.</p>
+    </div>
+  </section>
+</div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Motor Forge</h2>
+  <p>Motor Forge is a car and motorcycle design tool: start from a hatchback, sports car, SUV, pickup, electric car, scooter, sport bike, cruiser or dirt bike, build its engine and see how well it would work.</p>
+  <h3>How to use Motor Forge</h3>
+  <ol><li>Pick Car or Motorcycle and a starting vehicle, then change the engine: cylinders, bore, stroke, compression, revs and turbo.</li><li>Open the “Engine” tab to see the power and torque curve.</li><li>Change the weight, tyres, gearbox and aero, run the 0–100 test, read the results and checks, and pin designs to compare them.</li></ol>
+  <h3>Can I design an electric car or motorbike?</h3>
+  <p>Yes. Choose Electric motor, then set the motor power and battery size. You get acceleration, top speed, energy use and range.</p>
+  <h3>Is Motor Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your designs stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/fr/plane-forge.html">Plane Forge</a> · <a href="/fr/boat-forge.html">Boat Forge</a> · <a href="/fr/physics-map.html">Physics Map</a></p>
+</section>
+
+<footer>Motor Forge is a design and learning tool. Its numbers are estimates — never modify a real vehicle based on them alone, and always ride and drive within the law.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/STLExporter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const G0=9.81,RHO=1.2,KMH=3.6,MPH=2.23694;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+
+// ------------------------------------------------------------------ presets
+const BASE={name:'City hatchback',type:'hatch',mode:'car',fuel:'petrol',induction:'turbo',cyl:4,layout:'inline',cam:'street',bore:74.5,stroke:80,cr:10,redline:6500,boost:0.9,motorKw:150,battery:60,
+  body:'hatch',style:'naked',color:'#c0392b',chassis:860,length:4.1,width:1.78,height:1.45,wheelbase:2.6,cd:0.31,cda:0.45,cgH:0.52,frontPct:61,lean:45,
+  drive:'fwd',enginePos:'front',gearbox:'manual',gearing:'normal',gears:6,tyre:'road',tyreW:205,wheelIn:16,aero:'none',people:1,tank:45};
+const PRESETS={
+  hatch:{mode:'car',ico:'🚗',label:'City hatchback',p:{}},
+  sedan:{mode:'car',ico:'🚘',label:'Family sedan',p:{induction:'na',bore:86,stroke:86,cr:11,redline:6800,boost:0,body:'sedan',chassis:1010,length:4.7,width:1.82,height:1.45,wheelbase:2.75,cd:0.28,cgH:0.53,frontPct:60,gearbox:'auto',gears:8,tyreW:215,wheelIn:17,tank:55,color:'#5f6b78'}},
+  sports:{mode:'car',ico:'🏎️',label:'Sports coupé',p:{cyl:6,layout:'boxer',bore:91,stroke:76.4,cr:10.2,redline:7400,boost:0.9,body:'coupe',chassis:1000,length:4.5,width:1.85,height:1.3,wheelbase:2.45,cd:0.31,cgH:0.46,frontPct:40,drive:'rwd',enginePos:'rear',gearbox:'dct',gears:8,tyre:'sport',tyreW:295,wheelIn:20,aero:'lip',tank:64,color:'#e2a63b'}},
+  supercar:{mode:'car',ico:'🏁',label:'Supercar',p:{cyl:8,layout:'v',cam:'race',bore:84,stroke:76,cr:9.6,redline:8200,boost:1.0,body:'coupe',chassis:960,length:4.6,width:1.95,height:1.2,wheelbase:2.67,cd:0.34,cgH:0.42,frontPct:42,drive:'rwd',enginePos:'mid',gearbox:'dct',gears:7,tyre:'semi',tyreW:305,wheelIn:20,aero:'wing',tank:72,color:'#f0f0f0'}},
+  suv:{mode:'car',ico:'🚙',label:'Diesel SUV',p:{fuel:'diesel',cyl:4,bore:81,stroke:95.5,cr:16.2,redline:4700,boost:1.6,cam:'mild',body:'suv',chassis:1360,length:4.7,width:1.88,height:1.7,wheelbase:2.8,cd:0.34,cgH:0.64,frontPct:58,drive:'awd',gearbox:'auto',gears:8,tyreW:235,wheelIn:19,tank:65,people:1,color:'#2b4d6f'}},
+  pickup:{mode:'car',ico:'🛻',label:'V8 pickup',p:{induction:'na',cyl:8,layout:'v',cam:'mild',bore:93,stroke:92.7,cr:10.5,redline:6000,boost:0,body:'pickup',chassis:1830,length:5.9,width:2.03,height:1.92,wheelbase:3.68,cd:0.45,cgH:0.72,frontPct:57,drive:'rwd',gearbox:'auto',gears:10,tyre:'road',tyreW:275,wheelIn:20,tank:98,color:'#7a2a22'}},
+  track:{mode:'car',ico:'🏆',label:'Track car',p:{cam:'race',bore:86,stroke:86,cr:9.5,redline:7500,boost:1.5,body:'roadster',chassis:520,length:3.9,width:1.8,height:1.12,wheelbase:2.4,cd:0.48,cgH:0.38,frontPct:42,drive:'rwd',enginePos:'mid',gearbox:'manual',gears:6,gearing:'short',tyre:'slick',tyreW:255,wheelIn:17,aero:'race',tank:40,color:'#1f6f4f'}},
+  ev:{mode:'car',ico:'🔋',label:'Electric car',p:{fuel:'electric',motorKw:240,battery:75,body:'sedan',chassis:1150,length:4.7,width:1.85,height:1.44,wheelbase:2.87,cd:0.23,cgH:0.47,frontPct:48,drive:'rwd',enginePos:'rear',gearbox:'auto',gears:1,tyreW:235,wheelIn:18,tyre:'road',color:'#e8e8ea'}},
+  scooter:{mode:'bike',ico:'🛵',label:'Scooter 125',p:{cyl:1,induction:'na',cam:'mild',bore:52.4,stroke:57.8,cr:11,redline:9000,boost:0,style:'scooter',chassis:105,wheelbase:1.3,cda:0.45,cgH:0.55,frontPct:42,lean:38,gearbox:'cvt',gears:1,tyre:'road',tyreW:130,wheelIn:13,tank:8,color:'#4E9E73'}},
+  naked:{mode:'bike',ico:'🏍️',label:'Naked twin',p:{cyl:2,induction:'na',bore:80,stroke:68.6,cr:11.5,redline:10000,boost:0,style:'naked',chassis:140,wheelbase:1.42,cda:0.45,cgH:0.68,frontPct:50,lean:47,gearbox:'manual',gears:6,tyre:'road',tyreW:180,wheelIn:17,tank:14,color:'#2b6cb0'}},
+  superbike:{mode:'bike',ico:'🏁',label:'Superbike',p:{cyl:4,induction:'na',cam:'race',bore:80,stroke:49.7,cr:13.3,redline:14500,boost:0,style:'sport',chassis:126,wheelbase:1.41,cda:0.3,cgH:0.68,frontPct:51,lean:56,gearbox:'manual',gears:6,tyre:'sport',tyreW:200,wheelIn:17,tank:17,color:'#d8604a'}},
+  cruiser:{mode:'bike',ico:'🛣️',label:'V-twin cruiser',p:{cyl:2,layout:'v',induction:'na',cam:'mild',bore:102,stroke:114.3,cr:10,redline:5600,boost:0,style:'cruiser',chassis:220,wheelbase:1.67,cda:0.6,cgH:0.6,frontPct:45,lean:31,gearbox:'manual',gears:6,gearing:'tall',tyre:'road',tyreW:180,wheelIn:16,tank:19,color:'#222a33'}},
+  adventure:{mode:'bike',ico:'🏔️',label:'Adventure bike',p:{cyl:2,layout:'boxer',induction:'na',bore:102.5,stroke:76,cr:13.1,redline:9000,boost:0,style:'adventure',chassis:175,wheelbase:1.52,cda:0.55,cgH:0.75,frontPct:50,lean:45,gearbox:'manual',gears:6,tyre:'road',tyreW:170,wheelIn:17,tank:20,color:'#e8e8ea'}},
+  dirt:{mode:'bike',ico:'🏜️',label:'Dirt bike',p:{cyl:1,induction:'na',cam:'race',bore:97,stroke:60.8,cr:12.8,redline:12000,boost:0,style:'dirt',chassis:80,wheelbase:1.48,cda:0.5,cgH:0.8,frontPct:47,lean:40,gearbox:'manual',gears:5,gearing:'short',tyre:'knobbly',tyreW:120,wheelIn:19,tank:7,color:'#e2a63b'}},
+  ebike:{mode:'bike',ico:'⚡',label:'Electric motorcycle',p:{fuel:'electric',motorKw:60,battery:17,style:'naked',chassis:120,wheelbase:1.45,cda:0.45,cgH:0.66,frontPct:50,lean:45,gearbox:'auto',gears:1,tyre:'road',tyreW:180,wheelIn:17,color:'#0f8b8d'}}
+};
+const BIKE_BASE={people:1,drive:'rwd',enginePos:'mid',aero:'none',induction:'na',layout:'inline',cam:'street',gearing:'normal',boost:0,fuel:'petrol'};
+const TYRES={eco:[0.9,0.0075,'Eco'],road:[1.0,0.0095,'Road'],sport:[1.1,0.011,'Sport'],semi:[1.25,0.012,'Semi-slick'],slick:[1.5,0.013,'Slick'],knobbly:[0.75,0.02,'Knobbly']};
+const AERO={none:[0,0,'none'],lip:[0.15,0.02,'small spoiler'],wing:[0.6,0.1,'rear wing'],race:[1.8,0.32,'race aero']};// [lift area ClA m², extra drag area m²]
+
+// ------------------------------------------------------------------ sliders
+const ICE=P=>P.fuel!=='electric',EL=P=>P.fuel==='electric',CAR=P=>P.mode==='car',BIKE=P=>P.mode==='bike';
+const SLIDERS={
+  engineSliders:[['bore','Bore (cylinder width)',40,130,0.5,'mm',ICE],['stroke','Stroke (piston travel)',40,130,0.5,'mm',ICE],['cr','Compression ratio',7,23,0.1,':1',ICE],
+    ['redline','Rev limit',3000,18000,100,'rpm',ICE],['boost','Boost pressure',0.2,3,0.05,'bar',P=>ICE(P)&&P.induction!=='na'],
+    ['motorKw','Motor power',5,800,1,'kW',EL],['battery','Battery size',2,150,0.5,'kWh',EL]],
+  bodySliders:[['chassis','Body and chassis weight (no engine)',50,3000,5,'kg'],['length','Length',2.5,6.5,0.05,'m',CAR],['width','Width',1.4,2.2,0.01,'m',CAR],['height','Height',1.0,2.2,0.01,'m',CAR],
+    ['wheelbase','Wheelbase (axle to axle)',1.1,4,0.01,'m'],['cd','Drag coefficient Cd',0.2,0.7,0.005,'',CAR],['cda','Drag area (Cd × frontal area)',0.2,0.9,0.01,'m²',BIKE],
+    ['cgH','Centre of gravity height',0.25,1.1,0.01,'m'],['frontPct','Weight on the front wheel'+'s',30,70,1,'%'],['lean','Max lean angle (ground clearance)',20,62,1,'°',BIKE],
+    ['people','People on board',1,7,1,'',CAR],['tank','Fuel tank',3,150,1,'L',ICE]],
+  driveSliders:[['gears','Number of gears',1,10,1,'',P=>P.gearbox!=='cvt'&&ICE(P)],['tyreW','Tyre width (driven)',90,345,5,'mm'],['wheelIn','Wheel size',10,22,1,'in']]
+};
+let P,G=null;
+function loadP(){try{const s=JSON.parse(localStorage.getItem('miga-motor-v1'));if(s&&s.mode)return Object.assign({},BASE,s)}catch(e){}return Object.assign({},BASE)}
+P=loadP();
+function saveP(){try{localStorage.setItem('miga-motor-v1',JSON.stringify(P))}catch(e){}}
+function fmt(v,step){const d=step<0.01?3:step<0.1?2:step<1?1:0;return (+v).toFixed(d)}
+function buildSliders(){
+  for(const box in SLIDERS){$(box).innerHTML=SLIDERS[box].map(([k,lab,mn,mx,st,u])=>'<div class="sl" id="row_'+k+'"><label for="p_'+k+'">'+lab+'</label><output id="o_'+k+'"></output><input type="range" id="p_'+k+'" min="'+mn+'" max="'+mx+'" step="'+st+'"></div>').join('');
+    SLIDERS[box].forEach(([k,,,,st,u])=>{const el=$('p_'+k);el.oninput=()=>{P[k]=+el.value;$('o_'+k).textContent=fmt(P[k],st)+' '+u;custom();schedule()}})}
+}
+function custom(){if(PRESETS[P.type]){P.name='My '+PRESETS[P.type].label.toLowerCase().replace(/^my /,'')}P.type='custom';markPreset()}
+function refreshVisibility(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,,,show])=>{const r=$('row_'+k);if(r)r.hidden=!!(show&&!show(P))});
+  document.querySelectorAll('.ice').forEach(e=>e.classList.toggle('hidden',!ICE(P)));document.querySelectorAll('.carOnly').forEach(e=>e.classList.toggle('hidden',!CAR(P)));document.querySelectorAll('.bikeOnly').forEach(e=>e.classList.toggle('hidden',!BIKE(P)));
+  $('modeCar').classList.toggle('active',CAR(P));$('modeBike').classList.toggle('active',BIKE(P));$('tab3d').textContent=CAR(P)?'🚗 3D':'🏍️ 3D'}
+const SEL=['fuel','induction','cyl','layout','cam','body','style','drive','enginePos','gearbox','gearing','tyre','aero'];
+function syncControls(){for(const box in SLIDERS)SLIDERS[box].forEach(([k,,,,st,u])=>{$('p_'+k).value=P[k];$('o_'+k).textContent=fmt(P[k],st)+' '+u});
+  SEL.forEach(k=>$('p_'+k).value=String(P[k]));$('p_color').value=P.color;refreshVisibility();renderPresets()}
+SEL.forEach(k=>$('p_'+k).onchange=()=>{const v=$('p_'+k).value;P[k]=/^\d+$/.test(v)?+v:v;
+  if(k==='cyl'||k==='layout'){if(P.layout!=='inline'&&(P.cyl%2||P.cyl<2))P.layout='inline';$('p_layout').value=P.layout}
+  if(k==='induction'&&v!=='na'&&P.boost<0.2)P.boost=P.fuel==='diesel'?1.4:0.8;
+  if(k==='fuel'){if(v==='diesel'){P.cr=Math.max(P.cr,16);P.redline=Math.min(P.redline,4800);if(P.induction==='na'){P.induction='turbo';P.boost=1.4}}else if(v==='petrol'){P.cr=Math.min(P.cr,11);P.redline=Math.max(P.redline,6000)}else if(G&&!G.E.electric){P.motorKw=clamp(Math.round(G.E.Ppk),5,800);P.battery=CAR(P)?Math.round(clamp(G.V.m/20,30,100)):15}P.gears=v==='electric'?1:Math.max(P.gears,CAR(P)?6:5);if(v!=='electric'&&P.gearbox==='auto'&&P.gears<4)P.gears=8}
+  if(k==='gearbox'&&v!=='cvt'&&P.gears<2&&ICE(P))P.gears=6;
+  if(k==='enginePos')P.frontPct={front:61,mid:42,rear:39}[v];
+  custom();syncControls();schedule()});
+$('p_color').oninput=()=>{P.color=$('p_color').value;schedule()};
+function renderPresets(){$('presets').innerHTML=Object.entries(PRESETS).filter(([,v])=>v.mode===P.mode).map(([k,v])=>'<button data-p="'+k+'" id="preset-'+k+'"><b>'+v.ico+'</b>'+v.label+'</button>').join('');
+  $('presets').querySelectorAll('button').forEach(b=>b.onclick=()=>applyPreset(b.dataset.p));markPreset()}
+function applyPreset(k){const pr=PRESETS[k];P=Object.assign({},BASE,pr.mode==='bike'?BIKE_BASE:{},pr.p,{type:k,name:pr.label,mode:pr.mode});syncControls();update();fitCamera()}
+function markPreset(){$('presets').querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.p===P.type))}
+document.querySelectorAll('.modes button').forEach(b=>b.onclick=()=>{if(P.mode!==b.dataset.mode)applyPreset(b.dataset.mode==='car'?'hatch':'naked')});
+let tmr=0;function schedule(){clearTimeout(tmr);tmr=setTimeout(update,40)}
+
+// ------------------------------------------------------------------ engine model
+function engineModel(){
+  const E={electric:EL(P)};
+  if(E.electric){const maxRpm=CAR(P)?18000:11000,base=maxRpm*0.3,Pw=P.motorKw*1000,Tmax=Pw/(base*Math.PI/30);
+    E.redline=maxRpm;E.idle=0;E.launch=0;E.Tmax=Tmax;E.liters=0;
+    E.T=r=>{r=Math.max(r,1);if(r<=base)return Tmax;let p=Pw;if(r>0.8*maxRpm)p*=1-0.25*(r-0.8*maxRpm)/(0.2*maxRpm);return p/(r*Math.PI/30)};
+    E.mass=15+0.3*P.motorKw+(CAR(P)?6.2:7)*P.battery;E.massList=[['Electric motor and inverter',15+0.3*P.motorKw],['Battery ('+P.battery+' kWh)',(CAR(P)?6.2:7)*P.battery]];
+  }else{
+    const cyl=P.cyl,B=P.bore/1000,S=P.stroke/1000,Vd=cyl*Math.PI/4*B*B*S,diesel=P.fuel==='diesel',cam=P.cam;
+    const eff=c=>1-Math.pow(c,-0.3),crf=eff(P.cr)/eff(diesel?17:10);
+    const base=(diesel?10:{mild:11.6,street:12.5,race:13.4}[cam])*crf;
+    const forced=P.induction!=='na',PR=1+(forced?P.boost:0),k=P.induction==='super'?0.75:0.85;
+    const rl=P.redline,rp=rl*(diesel?0.45:{mild:0.5,street:0.65,race:0.78}[cam]),w=rl*(diesel?0.7:{mild:0.62,street:0.5,race:0.4}[cam]);
+    const spool=rl*(diesel?0.33:0.36);
+    const ve=r=>{const x=(r-rp)/w;return Math.max(0.25,1-(r<rp?0.45:0.5)*x*x)};
+    const sp=r=>2*S*r/60,fr=r=>1-0.00035*sp(r)*sp(r);
+    const boostFrac=r=>!forced?0:P.induction==='super'?0.55+0.45*r/rl:(()=>{const a=spool*0.5,b=spool;const t=clamp((r-a)/(b-a),0,1);return t*t*(3-2*t)})();
+    E.idle=diesel?750:BIKE(P)?1200:800;E.redline=rl;E.liters=Vd*1000;E.PR=PR;E.forced=forced;E.diesel=diesel;E.Vd=Vd;E.rpTorque=rp;
+    E.T=r=>{r=clamp(r,E.idle,rl);const bm=base*(1+(PR-1)*k*boostFrac(r))*ve(r)*fr(r)/fr(rp);return bm*1e5*Vd/(4*Math.PI)};
+    E.pistonSpeed=sp(rl);E.knock=diesel?0:P.cr*Math.pow(PR,0.45);
+    const L=Vd*1000,core=(20+38*L+3.5*cyl)*(diesel?1.35:1)+(P.induction==='turbo'?12:P.induction==='super'?15:0),extra=CAR(P)?25+10*L:8;
+    E.mass=core+extra;E.massList=[['Engine ('+L.toFixed(1)+' L '+layoutName()+')',core],[CAR(P)?'Radiator, exhaust and ancillaries':'Exhaust and radiator',extra]];
+  }
+  // sample the curve
+  const pts=[],r0=E.electric?0:E.idle,step=Math.max(50,Math.round((E.redline-r0)/120/50)*50);let Tpk=0,rT=0,Ppk=0,rP=0;
+  for(let r=Math.max(r0,E.electric?100:r0);r<=E.redline+1;r+=step){const T=E.T(r),Pk=T*r*Math.PI/30/1000;pts.push([r,T,Pk]);if(T>Tpk){Tpk=T;rT=r}if(Pk>Ppk){Ppk=Pk;rP=r}}
+  E.curve=pts;E.Tpk=Tpk;E.rT=rT;E.Ppk=Ppk;E.rP=rP;E.hp=Ppk*1.341;
+  E.launch=E.electric?0:Math.min(E.redline*0.7,Math.max(E.idle*2,rT*0.75));
+  E.Pat=r=>E.T(r)*r*Math.PI/30/1000;
+  return E}
+function layoutName(){if(EL(P))return 'electric';const c=P.cyl;if(c===1)return 'single';const l={inline:c===2?'parallel twin':'inline-'+c,v:'V'+c,boxer:'flat-'+c}[P.layout];return l}
+
+// ------------------------------------------------------------------ vehicle model
+function vehicleModel(E){
+  const car=CAR(P),V={},list=[];
+  list.push([car?'Body, chassis, suspension and interior':'Frame, suspension, wheels and bodywork',P.chassis]);E.massList.forEach(x=>list.push(x));
+  const fuelKg=ICE(P)?P.tank*(P.fuel==='diesel'?0.84:0.745):0;if(fuelKg)list.push(['Fuel (full tank, '+P.tank+' L)',fuelKg]);
+  const ppl=car?P.people:1;list.push([car?(ppl===1?'Driver':ppl+' people'):'Rider (with gear)',ppl*(car?75:85)]);
+  V.list=list;V.m=list.reduce((a,b)=>a+b[1],0);V.kerb=V.m-ppl*(car?75:85);
+  V.f=P.frontPct/100;V.h=P.cgH;V.wb=P.wheelbase;
+  V.r=(P.wheelIn*0.0254)/2+P.tyreW/1000*(car?0.5:P.style==='dirt'?0.85:0.6);
+  const ty=TYRES[P.tyre];V.mu=ty[0]*(1+(P.tyreW-(car?205:160))/1000*0.6);V.mu=clamp(V.mu,0.6,1.7);V.crr=ty[1];
+  const ae=car?AERO[P.aero]:[0,0];V.clA=ae[0];V.area=car?P.width*P.height*0.84:P.cda/0.6;V.cdA=car?P.cd*V.area+ae[1]:P.cda+(P.people>1?0.05:0);
+  V.drive=car?P.drive:'rwd';
+  V.eta=E.electric?0.95:P.gearbox==='cvt'?0.86:car?{fwd:0.92,rwd:0.9,awd:0.86}[V.drive]:0.92;
+  V.shift=E.electric||P.gearbox==='cvt'?0:{manual:car?0.35:0.15,auto:0.22,dct:0.08}[P.gearbox];
+  V.track=car?P.width*0.86:0;
+  // gearing: top gear puts peak power at the power-limited top speed
+  const res=v=>0.5*RHO*V.cdA*v*v+V.crr*V.m*G0;let vP=10;for(let v=5;v<160;v+=0.25){if(res(v)*v>=E.Ppk*1000*V.eta){vP=v;break}vP=v}
+  const tgt=E.electric?E.redline/{short:0.62,normal:0.74,tall:0.9}[P.gearing]:Math.min(E.redline*0.985,E.rP*{short:1.08,normal:1.0,tall:0.8}[P.gearing]);
+  const Gtop=(tgt*Math.PI/30)*V.r/vP;
+  const mg=V.m*G0,mh=V.mu*V.h/V.wb;let Ftr=V.drive==='awd'?V.mu*mg:V.drive==='fwd'?V.mu*mg*V.f/(1+mh):Math.min(V.mu*mg,V.mu*mg*(1-V.f)/Math.max(0.05,1-mh));
+  if(!car)Ftr=Math.min(Ftr,mg*V.f*V.wb/V.h);V.Ftr=Ftr;
+  let G1=Ftr*1.1*V.r/(E.Tpk*V.eta);
+  const n=E.electric?1:P.gearbox==='cvt'?1:P.gears;
+  if(n>1)G1=clamp(G1,Gtop*(car?(n>=5?3:n>=4?2.6:2):(n>=5?2.3:2)),Gtop*(car?5.5:3.4));
+  const ratios=[];if(E.electric)ratios.push(Gtop);else if(P.gearbox==='cvt'){ratios.push(Math.max(G1,Gtop*2.5))}else if(n===1)ratios.push(Gtop*1.3);else for(let i=0;i<n;i++)ratios.push(G1*Math.pow(Gtop/G1,i/(n-1)));
+  V.ratios=ratios;V.Gtop=P.gearbox==='cvt'&&!E.electric?Gtop:ratios[ratios.length-1];V.cvt=P.gearbox==='cvt'&&!E.electric;V.cvtLow=ratios[0];
+  V.res=res;return V}
+const rpmOf=(v,G,V)=>v*G/V.r*30/Math.PI;
+function tractionF(V,a,v){const D=0.5*RHO*V.clA*v*v,W=V.m*G0+D,tr=V.m*a*V.h/V.wb;
+  const Wf=V.f*W-tr,Wr=(1-V.f)*W+tr;let F=V.drive==='awd'?V.mu*W:V.drive==='fwd'?V.mu*Math.max(0,Wf):V.mu*Wr;return {F,W,D}}
+function driveForce(E,V,v){// best engine force at the wheels over all gears (or the CVT), and which gear
+  let best=0,gi=0,rpm=0;
+  if(V.cvt){const want=E.rP;let G=want*Math.PI/30*V.r/Math.max(v,0.1);G=clamp(G,V.Gtop,V.cvtLow);let r=rpmOf(v,G,V);if(r<E.launch)r=E.launch;if(r>E.redline)return {F:0,g:0,rpm:E.redline};return {F:E.T(r)*G*V.eta/V.r,g:0,rpm:r}}
+  V.ratios.forEach((G,i)=>{let r=rpmOf(v,G,V);if(r>E.redline*1.0001)return;const slip=r<E.launch;if(slip&&i>0)return;if(slip)r=E.launch;const F=E.T(r)*G*V.eta/V.r;if(F>best){best=F;gi=i;rpm=r}});
+  return {F:best,g:gi,rpm}}
+function simulate(E,V){
+  const dt=0.01,me=V.m*1.05,bike=BIKE(P);let t=0,v=0,d=0,a=0,gear=0,shiftT=0;const S={samples:[],t100:null,t60:null,t200:null,tq:null,vq:null,spinTo:0,wheelieTo:0,shifts:[]};
+  let lastRec=-1;
+  while(t<70){
+    const df=driveForce(E,V,v);let Fe=df.F;
+    if(!V.cvt&&df.g>gear){gear=df.g;shiftT=V.shift;S.shifts.push([t,v])}
+    if(shiftT>0){Fe=0;shiftT-=dt}
+    // grip depends on the weight moved by this moment's acceleration, so settle the two together
+    let tf,F,R,spin=false,wh=false;for(let it=0;it<4;it++){tf=tractionF(V,Math.max(a,0),v);F=Math.min(Fe,tf.F);spin=Fe>tf.F*1.02;wh=false;
+      if(bike){const amax=V.f*tf.W*V.wb/(V.m*V.h);if(F/V.m>amax){F=amax*V.m;wh=true;spin=false}}
+      R=0.5*RHO*V.cdA*v*v+V.crr*tf.W;a=(F-R)/me}
+    if(spin&&shiftT<=0)S.spinTo=v;if(wh)S.wheelieTo=v;if(v<0.01&&a<0)a=0;
+    v+=a*dt;d+=v*dt;t+=dt;
+    const rpm=V.cvt?df.rpm:Math.max(E.electric?0:E.launch,rpmOf(v,V.ratios[gear],V));
+    if(Math.floor(t*20)!==lastRec){lastRec=Math.floor(t*20);S.samples.push([+t.toFixed(2),v,gear+1,Math.min(rpm,E.redline),d])}
+    if(S.t60===null&&v>=26.8224)S.t60=t;if(S.t100===null&&v>=100/KMH)S.t100=t;if(S.t200===null&&v>=200/KMH)S.t200=t;
+    if(S.tq===null&&d>=402.336){S.tq=t;S.vq=v}
+    if(t>8&&a<0.02&&S.tq!==null)break}
+  S.vEnd=v;return S}
+function topSpeed(E,V){let vmax=0,gearAt=0;for(let v=1;v<150;v+=0.1){const df=driveForce(E,V,v),tf=tractionF(V,0,v);const F=Math.min(df.F,tf.F);if(F>=0.5*RHO*V.cdA*v*v+V.crr*tf.W){vmax=v;gearAt=df.g}else if(v>5)break}return {v:vmax,g:gearAt}}
+function braking(V){const v0=100/KMH;let v=v0,d=0;const dt=0.005,bike=BIKE(P);let lim='grip';
+  while(v>0){const D=0.5*RHO*V.clA*v*v;let dec=V.mu*(G0+D/V.m)*0.98;if(bike){const st=G0*V.wb*(1-V.f)/V.h*0.95;if(st<dec){dec=st;lim='stoppie'}}dec+=0.5*RHO*V.cdA*v*v/V.m;v-=dec*dt;d+=Math.max(v,0)*dt}return {d,lim}}
+function cornering(V){const v=100/KMH,D=0.5*RHO*V.clA*v*v;if(BIKE(P)){const lean=Math.min(Math.atan(V.mu*0.92)/Math.PI*180,P.lean);return {g:Math.tan(lean*Math.PI/180),lean,lim:lean>=P.lean-0.01?'clearance':'grip'}}
+  const g=V.mu*0.92*(1+D/(V.m*G0));const ssf=V.track/(2*V.h);return {g:Math.min(g,ssf),ssf,roll:ssf<g}}
+function economy(E,V){const v=100/KMH,Pr=(0.5*RHO*V.cdA*v*v+V.crr*V.m*G0)*v/V.eta/1000;// kW at the engine
+  if(E.electric){const per100=Pr/0.88*(100/(v*KMH))+(CAR(P)?2:0.5);return {kwh100:per100,mixed:per100*0.92,range:P.battery*0.92/(per100*0.92)*100,rangeHwy:P.battery*0.92/per100*100,Pr}}
+  let rpm=V.cvt?Math.max(E.idle*1.6,E.rT*0.6):rpmOf(v,V.Gtop,V);rpm=clamp(rpm,E.idle*1.3,E.redline);const avail=E.Pat(rpm),load=clamp(Pr/avail,0.02,1);
+  const Pf=1e5*E.Vd*rpm/120/1000*(1+0.5*Math.pow(rpm/E.redline,2)),isfc=(E.diesel?188:E.forced?212:218)*(P.cam==='race'?1.06:P.cam==='mild'?0.98:1)*(E.diesel?1:1+0.25*Math.pow(1-load,2));// friction power + indicated fuel use (petrol throttling losses)
+  const dens=E.diesel?832:745,L100=(Pr+Pf)*isfc/dens/(v*KMH)*100,mixed=L100*(CAR(P)?1.25:1.5);
+  return {L100,mixed,rpm,load,Pr,co2:mixed*(E.diesel?26.4:23.1),range:P.tank/mixed*100}}
+function compute(){const E=engineModel(),V=vehicleModel(E),S=simulate(E,V),top=topSpeed(E,V),br=braking(V),co=cornering(V),ec=economy(E,V);const firstTop=V.cvt||E.electric?0:E.redline*Math.PI/30*V.r/V.ratios[0];return {E,V,S,top,br,co,ec,firstTop}}
+
+// ------------------------------------------------------------------ results
+const r1=v=>v==null?'—':v.toFixed(1);
+function scoreBars(){const {S,top,br,co,ec,E}=G;const sc=(v,a,b)=>clamp((v-a)/(b-a)*10,0,10);
+  const acc=S.t100?sc(S.t100,16,2.3):0,spd=sc(top.v*KMH,100,350),hnd=sc(co.g,0.65,1.6),brk=sc(br.d,52,30),eco=E.electric?sc(ec.mixed,32,10):sc(ec.mixed,20,2.5);
+  G.scores={Acceleration:acc,'Top speed':spd,Cornering:hnd,Braking:brk,Economy:eco};
+  $('scores').innerHTML=Object.entries(G.scores).map(([k,v])=>'<div class="score"><div><span>'+k+'</span><span>'+v.toFixed(1)+'/10</span></div><div class="track"><i style="width:'+(v*10)+'%"></i></div></div>').join('')}
+function classify(){const {E,V}=G,pw=E.hp/(V.m/1000);const car=CAR(P);
+  const lv=car?[[70,'slow but simple'],[110,'everyday'],[170,'brisk'],[260,'sporty'],[420,'supercar-fast'],[1e9,'hypercar-fast']]:[[90,'gentle'],[180,'lively'],[350,'fast'],[600,'very fast'],[1e9,'superbike-fast']];return lv.find(x=>pw<x[0])[1]}
+function renderResults(){const {E,V,S,top,br,co,ec}=G,car=CAR(P),noun=car?'car':'motorcycle';
+  $('vehTitle').textContent=(PRESETS[P.type]?PRESETS[P.type].label:P.name||'Custom '+noun)+' — how well it works';
+  const hv=(v,l,sub)=>'<div class="hv"><b>'+v+'</b><span>'+l+'</span>'+(sub?'<br><i>'+sub+'</i>':'')+'</div>';
+  const pw=E.hp/(V.m/1000);
+  const items=[hv(Math.round(E.hp)+' hp',E.electric?'Motor power':'Peak power',Math.round(E.Ppk)+' kW'+(E.electric?'':' at '+E.rP.toLocaleString()+' rpm')),
+    hv(Math.round(E.Tpk)+' Nm','Peak torque',Math.round(E.Tpk*0.7376)+' lb-ft'+(E.electric?' from standstill':' at '+E.rT.toLocaleString()+' rpm')),
+    hv(Math.round(V.m).toLocaleString()+' kg','Weight with '+(car?'driver':'rider'),Math.round(V.m*2.2046).toLocaleString()+' lb · '+Math.round(V.f*100)+'% front'),
+    hv(Math.round(pw)+' hp/t','Power to weight',Math.round(V.m/E.hp*10)/10+' kg per hp'),
+    hv(S.t100?r1(S.t100)+' s':'never','0–100 km/h','0–60 mph '+r1(S.t60)+' s'),
+    hv(S.tq?r1(S.tq)+' s':'—','Quarter mile (402 m)',S.vq?Math.round(S.vq*KMH)+' km/h at the end':''),
+    hv(Math.round(top.v*KMH)+' km/h','Top speed',Math.round(top.v*MPH)+' mph · in '+(V.cvt||E.electric?'drive':'gear '+(top.g+1))),
+    hv(S.t200?r1(S.t200)+' s':'—','0–200 km/h',''),
+    hv(Math.round(br.d)+' m','Braking 100–0 km/h',br.lim==='stoppie'?'limited by the rear wheel lifting':'with ABS, '+TYRES[P.tyre][2].toLowerCase()+' tyres'),
+    car?hv(co.g.toFixed(2)+' g','Cornering grip',co.roll?'tips over before the tyres slide':'tip-over limit '+co.ssf.toFixed(2)+' g'):hv(Math.round(co.lean)+'°','Max lean angle',co.g.toFixed(2)+' g cornering · limited by '+co.lim),
+    E.electric?hv(ec.mixed.toFixed(1)+' kWh','Energy per 100 km (mixed)',ec.kwh100.toFixed(1)+' kWh at a steady 100 km/h'):hv(ec.mixed.toFixed(1)+' L','Fuel per 100 km (mixed)',(235.2/ec.mixed).toFixed(0)+' mpg (US) · '+ec.L100.toFixed(1)+' L at 100 km/h'),
+    hv(Math.round(ec.range)+' km','Range',E.electric?Math.round(ec.rangeHwy)+' km on the motorway':'on a full '+P.tank+' L tank'),
+    E.electric?hv('0 g/km','CO₂ from the exhaust','charging emissions depend on your electricity'):hv(Math.round(ec.co2)+' g/km','CO₂ from the exhaust',E.diesel?'diesel':'petrol'),
+    E.electric?'':hv(Math.round(ec.rpm).toLocaleString()+' rpm','Revs at 100 km/h in top',Math.round(ec.load*100)+'% of the power available there')].filter(Boolean);
+  $('results').innerHTML=items.join('');scoreBars();
+  // verdict
+  const best=Object.entries(G.scores).sort((a,b)=>b[1]-a[1]),worst=best[best.length-1];
+  $('verdict').innerHTML='This is a <b>'+classify()+' '+noun+'</b>: '+(S.t100?'0–100 km/h in <b>'+r1(S.t100)+' s</b>':'it cannot reach 100 km/h')+', a top speed of <b>'+Math.round(top.v*KMH)+' km/h</b> and '+(E.electric?'a range of <b>'+Math.round(ec.range)+' km</b>':'about <b>'+ec.mixed.toFixed(1)+' L/100 km</b>')+'. Its strongest point is <b>'+best[0][0].toLowerCase()+'</b>; its weakest is <b>'+worst[0].toLowerCase()+'</b>.';
+  // checks
+  const C=[];const add=(k,t)=>C.push('<li class="'+k+'">'+t+'</li>');
+  if(!E.electric){
+    if(E.pistonSpeed>28)add('bad','❌ The pistons move at '+E.pistonSpeed.toFixed(1)+' m/s at the rev limit — faster than even Formula 1 engines. It would break. Lower the rev limit or use a shorter stroke.');
+    else if(E.pistonSpeed>22.5)add('warn','⚠️ Mean piston speed '+E.pistonSpeed.toFixed(1)+' m/s: race-engine territory. Expect a short life and frequent rebuilds.');
+    else add('ok','✅ Mean piston speed '+E.pistonSpeed.toFixed(1)+' m/s at the rev limit — the engine can live with that.');
+    if(E.diesel){if(P.cr<14)add('bad','❌ A diesel needs a compression ratio of about 14–22 to ignite its fuel. At '+P.cr.toFixed(1)+':1 it would not start.');
+      if(P.redline>5500)add('bad','❌ Diesel fuel burns too slowly for '+P.redline+' rpm. Diesels rarely rev past 5,000 rpm.');
+      if(P.induction==='na')add('info','ℹ️ Almost every modern diesel has a turbo: it roughly doubles the power for little extra weight.')}
+    else{if(E.knock>15)add('bad','❌ Compression '+P.cr.toFixed(1)+':1 with '+P.boost.toFixed(2)+' bar of boost would make the engine knock and burn its pistons. Lower the compression or the boost.');
+      else if(E.knock>13.6)add('warn','⚠️ High compression and boost: it needs high-octane (98+) or race fuel.');
+      if(P.cr<8&&!E.forced)add('warn','⚠️ Low compression for an engine without a turbo — it wastes fuel. Petrol engines usually run 10–13:1.')}
+    const bs=P.bore/P.stroke,cc=E.liters/P.cyl*1000;
+    if(cc>1100)add('warn','⚠️ '+Math.round(cc)+' cc per cylinder is huge: it would run roughly and not rev well. Use more, smaller cylinders.');
+    if(bs>1.6||bs<0.7)add('warn','⚠️ Bore/stroke ratio '+bs.toFixed(2)+' is extreme. Engines are usually between 0.8 (torquey) and 1.4 (revvy).');
+    if(P.boost>2.5&&E.forced)add('warn','⚠️ '+P.boost.toFixed(1)+' bar of boost is drag-racing level; the engine would need forged parts.');
+    const smooth=P.cyl>=12||(P.cyl===6&&P.layout!=='v')||(P.cyl===8&&P.layout==='v')||(P.layout==='boxer'&&P.cyl>=4);
+    add('info','ℹ️ '+layoutName()[0].toUpperCase()+layoutName().slice(1)+': '+(smooth?'very smooth, little vibration.':P.cyl<=2?'lots of character and vibration.':'some vibration, normal for this layout.'));
+  }else{if(ec.range<150)add('warn','⚠️ Range only '+Math.round(ec.range)+' km. Fine for town; a bigger battery adds range but also weight.');else add('ok','✅ Range about '+Math.round(ec.range)+' km.')}
+  if(S.spinTo>(G.firstTop?G.firstTop*1.02:80/KMH)&&S.spinTo>40/KMH)add('warn','⚠️ Too much power for the tyres: the wheels spin up to '+Math.round(S.spinTo*KMH)+' km/h. Grippier or wider tyres, more weight on the driven wheels'+(car?' or all-wheel drive':'')+' would help.');
+  else add('ok','✅ The tyres can put the power down'+(S.spinTo>0?' after a little wheelspin at the start':'')+'.');
+  if(BIKE(P)&&S.wheelieTo>40/KMH)add(P.style==='dirt'?'info':'warn',(P.style==='dirt'?'ℹ️ ':'⚠️ ')+'It wants to wheelie up to '+Math.round(S.wheelieTo*KMH)+' km/h at full throttle — acceleration is limited by the front wheel lifting. A longer wheelbase or lower centre of gravity helps.');
+  if(car&&V.drive==='fwd'&&E.hp>280)add('warn','⚠️ '+Math.round(E.hp)+' hp through the front wheels causes torque steer: the steering pulls when you accelerate hard.');
+  if(car&&co.roll)add('bad','❌ The centre of gravity is high for its width: in a hard turn it would tip over before the tyres slide. Make it lower or wider, or use less grippy tyres.');
+  else if(car&&co.ssf<V.mu*1.15)add('warn','⚠️ Tall for its width (stability factor '+co.ssf.toFixed(2)+'): it leans a lot in corners and needs good stability control.');
+  if(!E.electric&&!V.cvt&&top.g<V.ratios.length-1)add('info','ℹ️ Top speed comes in gear '+(top.g+1)+'; top gear is an overdrive for quiet, economical cruising.');
+  if(car&&!E.electric&&ec.rpm>0.55*E.redline)add('warn','⚠️ '+Math.round(ec.rpm)+' rpm at 100 km/h is loud and thirsty on the motorway. Taller gearing or more gears help.');
+  if(!E.electric&&ec.range<(CAR(P)?400:180))add('warn','⚠️ Range only '+Math.round(ec.range)+' km on a tank. A bigger tank helps.');
+  if(car&&V.kerb<700)add('info','ℹ️ Very light for a car ('+Math.round(V.kerb)+' kg). Road cars need crash structures and safety equipment that add weight.');
+  if(car&&P.aero!=='none')add('info','ℹ️ The '+AERO[P.aero][2]+' presses the car down with about '+Math.round(0.5*RHO*V.clA*Math.pow(200/KMH,2)/G0)+' kg at 200 km/h — more grip in fast corners, at the cost of drag.');
+  if(BIKE(P)&&co.lim==='clearance')add('info','ℹ️ Cornering is limited by ground clearance at '+P.lean+'° of lean before the tyres run out of grip.');
+  if(S.t100&&S.t100<2.6)add('info','ℹ️ Under 2.6 s to 100 km/h is the limit of road tyres; faster needs slicks, downforce or a drag strip.');
+  $('checks').innerHTML=C.join('')}
+
+// ------------------------------------------------------------------ charts
+function chart(w,h,pad,xr,yr,y2r){const X=x=>pad.l+(x-xr[0])/(xr[1]-xr[0])*(w-pad.l-pad.r),Y=y=>h-pad.b-(y-yr[0])/(yr[1]-yr[0])*(h-pad.t-pad.b),Y2=y2r?y=>h-pad.b-(y-y2r[0])/(y2r[1]-y2r[0])*(h-pad.t-pad.b):null;return {X,Y,Y2}}
+const nice=v=>{const p=Math.pow(10,Math.floor(Math.log10(v))),f=v/p;return (f<=1?1:f<=2?2:f<=5?5:10)*p};
+function renderEngine(){const {E}=G,w=760,h=360,pad={l:56,r:60,t:20,b:40};const tMax=nice(E.Tpk*1.15)/1,pMax=nice(E.hp*1.15),xr=[0,Math.ceil(E.redline*1.05/1000)*1000];
+  const c=chart(w,h,pad,xr,[0,tMax],[0,pMax]);let s='<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="11">';
+  for(let i=0;i<=5;i++){const y=pad.t+(h-pad.t-pad.b)*i/5;s+='<line x1="'+pad.l+'" x2="'+(w-pad.r)+'" y1="'+y+'" y2="'+y+'" stroke="#e3e7ea"/><text x="'+(pad.l-6)+'" y="'+(y+4)+'" text-anchor="end" fill="#2b6cb0">'+Math.round(tMax*(1-i/5))+'</text><text x="'+(w-pad.r+6)+'" y="'+(y+4)+'" fill="#c46a12">'+Math.round(pMax*(1-i/5))+'</text>'}
+  const xs=xr[1]>12000?2000:1000;for(let x=0;x<=xr[1];x+=xs)s+='<text x="'+c.X(x)+'" y="'+(h-pad.b+16)+'" text-anchor="middle" fill="#35516b">'+(x/1000)+'k</text>';
+  s+='<text x="'+(w/2)+'" y="'+(h-6)+'" text-anchor="middle" fill="#35516b">engine speed (rpm)</text><text x="14" y="'+(pad.t+4)+'" fill="#2b6cb0" font-weight="700">Nm</text><text x="'+(w-30)+'" y="'+(pad.t+4)+'" fill="#c46a12" font-weight="700">hp</text>';
+  s+='<line x1="'+c.X(E.redline)+'" x2="'+c.X(E.redline)+'" y1="'+pad.t+'" y2="'+(h-pad.b)+'" stroke="#D8604A" stroke-width="2" stroke-dasharray="5 4"/>';
+  const path=(f,Y)=>E.curve.map((p,i)=>(i?'L':'M')+c.X(p[0]).toFixed(1)+' '+Y(f(p)).toFixed(1)).join(' ');
+  s+='<path d="'+path(p=>p[1],c.Y)+'" fill="none" stroke="#2b6cb0" stroke-width="3"/><path d="'+path(p=>p[2]*1.341,c.Y2)+'" fill="none" stroke="#e08a1e" stroke-width="3"/>';
+  s+='<circle cx="'+c.X(E.rT)+'" cy="'+c.Y(E.Tpk)+'" r="4" fill="#2b6cb0"/><circle cx="'+c.X(E.rP)+'" cy="'+c.Y2(E.hp)+'" r="4" fill="#e08a1e"/>';
+  s+='<text x="'+(c.X(E.rP)-6)+'" y="'+(c.Y2(E.hp)-8)+'" text-anchor="end" fill="#c46a12" font-weight="700">'+Math.round(E.hp)+' hp</text><text x="'+(c.X(E.rT)+6)+'" y="'+(c.Y(E.Tpk)-8)+'" fill="#2b6cb0" font-weight="700">'+Math.round(E.Tpk)+' Nm</text></svg>';
+  $('engineBox').innerHTML=s;G.engineSVG=s;
+  const hv=(v,l)=>'<div class="hv"><b>'+v+'</b><span>'+l+'</span></div>';
+  $('engineNums').innerHTML=E.electric?[hv(P.motorKw+' kW','Motor power'),hv(Math.round(E.Tmax)+' Nm','Torque from 0 rpm'),hv(P.battery+' kWh','Battery'),hv(Math.round(E.mass)+' kg','Motor + battery weight'),hv(E.redline.toLocaleString(),'Max motor rpm')].join(''):
+    [hv(Math.round(E.liters*1000).toLocaleString()+' cc',(E.liters).toFixed(2)+' litres'),hv(layoutName(),P.bore+' × '+P.stroke+' mm'),hv(Math.round(E.hp/E.liters)+' hp/L','Power per litre'),hv(E.pistonSpeed.toFixed(1)+' m/s','Piston speed at the limit'),hv(Math.round(E.massList[0][1])+' kg','Engine weight'),hv((P.bore/P.stroke).toFixed(2),'Bore / stroke'+(P.bore>P.stroke?' (revvy)':' (torquey)')),E.forced?hv(P.boost.toFixed(2)+' bar',P.induction==='turbo'?'Turbo boost':'Supercharger boost'):''].join('');
+  $('layoutBox').innerHTML=layoutSVG()}
+function layoutSVG(){if(EL(P))return '<svg viewBox="0 0 760 120" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="12"><rect x="40" y="30" width="360" height="60" rx="8" fill="#e7f3ee" stroke="#4E9E73" stroke-width="2"/>'+Array.from({length:12},(_,i)=>'<rect x="'+(50+i*29)+'" y="40" width="22" height="40" rx="3" fill="#4E9E73"/>').join('')+'<text x="220" y="110" text-anchor="middle" fill="#35516b">Battery '+P.battery+' kWh</text><circle cx="560" cy="60" r="40" fill="#eef4fa" stroke="#2b6cb0" stroke-width="3"/><circle cx="560" cy="60" r="14" fill="#2b6cb0"/><line x1="400" y1="60" x2="520" y2="60" stroke="#E2A63B" stroke-width="5"/><text x="560" y="115" text-anchor="middle" fill="#35516b">Motor '+P.motorKw+' kW</text></svg>';
+  const n=P.cyl,lay=P.cyl===1?'inline':P.layout,w=760,h=170,cw=Math.min(70,520/(lay==='inline'?n:n/2)),bw=cw*0.8,ph=48;let s='<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="12">';
+  const cylDraw=(x,y,ang,k)=>{const off=((k*0.618)%1)*ph*0.5;return '<g transform="translate('+x+' '+y+') rotate('+ang+')"><rect x="'+(-bw/2-4)+'" y="'+(-ph-34)+'" width="'+(bw+8)+'" height="'+(ph+34)+'" rx="4" fill="#dfe5ea" stroke="#5a6a7a"/><rect x="'+(-bw/2)+'" y="'+(-ph-24+off)+'" width="'+bw+'" height="18" rx="2" fill="#8a96a3"/><line x1="0" y1="'+(-ph-6+off)+'" x2="0" y2="0" stroke="#5a6a7a" stroke-width="4"/><rect x="'+(-bw/2-4)+'" y="'+(-ph-44)+'" width="'+(bw+8)+'" height="10" fill="#b8424a"/></g>'};
+  const cx=w/2,cy=lay==='boxer'?95:130;
+  if(lay==='inline'){for(let i=0;i<n;i++)s+=cylDraw(cx+(i-(n-1)/2)*cw,cy,0,i)}
+  else{const half=n/2,ang=lay==='v'?(n<=2?45:30):90;for(let i=0;i<half;i++){const x=cx+(i-(half-1)/2)*cw;s+=cylDraw(x-(lay==='boxer'?0:0),cy,-ang,i*2)+cylDraw(x,cy,ang,i*2+1)}}
+  s+='<rect x="'+(cx-Math.max(60,(lay==='inline'?n:n/2)*cw/2+10))+'" y="'+(cy-6)+'" width="'+(2*Math.max(60,(lay==='inline'?n:n/2)*cw/2+10))+'" height="20" rx="8" fill="#3a4250"/>';
+  s+='<text x="12" y="20" fill="#35516b" font-weight="700">'+esc(layoutName())+(lay!=='inline'?' — seen from the front':' — seen from the side')+'</text>';
+  if(P.induction==='turbo')s+='<g transform="translate(690 60)"><circle r="22" fill="#e9d7b5" stroke="#8a6a24" stroke-width="2"/><path d="M-14 0 A14 14 0 0 1 14 0 M0 -14 A14 14 0 0 1 0 14" stroke="#8a6a24" stroke-width="2" fill="none"/><text y="40" text-anchor="middle" fill="#35516b">turbo</text></g>';
+  if(P.induction==='super')s+='<g transform="translate(690 50)"><rect x="-26" y="-14" width="52" height="28" rx="6" fill="#e9d7b5" stroke="#8a6a24" stroke-width="2"/><text y="40" text-anchor="middle" fill="#35516b">supercharger</text></g>';
+  return s+'</svg>'}
+const GEARCOL=['#2b6cb0','#4E9E73','#e2a63b','#d8604a','#8a3ab8','#0f8b8d','#5f6b78','#b8424a','#2f9fd0','#7a5230'];
+function renderPerf(){const {S,top}=G,w=760,h=370,pad={l:56,r:20,t:30,b:40};const tEnd=Math.min(S.samples[S.samples.length-1][0],Math.max(15,(S.t200||S.tq||20)*1.15)),vMax=Math.ceil(Math.max(top.v,S.vEnd)*KMH*1.06/50)*50;
+  const c=chart(w,h,pad,[0,tEnd],[0,vMax]);let s='<svg viewBox="0 0 '+w+' '+h+'" xmlns="http://www.w3.org/2000/svg" font-family="IBM Plex Sans,Arial" font-size="11">';
+  for(let i=0;i<=5;i++){const y=pad.t+(h-pad.t-pad.b)*i/5;s+='<line x1="'+pad.l+'" x2="'+(w-pad.r)+'" y1="'+y+'" y2="'+y+'" stroke="#e3e7ea"/><text x="'+(pad.l-6)+'" y="'+(y+4)+'" text-anchor="end" fill="#35516b">'+Math.round(vMax*(1-i/5))+'</text>'}
+  const ts=tEnd>40?10:tEnd>20?5:2;for(let x=0;x<=tEnd;x+=ts)s+='<text x="'+c.X(x)+'" y="'+(h-pad.b+16)+'" text-anchor="middle" fill="#35516b">'+x+' s</text>';
+  s+='<text x="'+(pad.l-6)+'" y="14" text-anchor="end" fill="#35516b" font-weight="700">km/h</text>';
+  [[100,'100 km/h',S.t100],[200,'200 km/h',S.t200]].forEach(([v,l,t])=>{if(v<vMax){s+='<line x1="'+pad.l+'" x2="'+(w-pad.r)+'" y1="'+c.Y(v)+'" y2="'+c.Y(v)+'" stroke="#9aa6b2" stroke-dasharray="4 4"/>';if(t)s+='<text x="'+(c.X(t)+6)+'" y="'+(c.Y(v)+14)+'" fill="#16202b" font-weight="700">'+l+' in '+t.toFixed(1)+' s</text>'}});
+  let seg=[],cur=-1;const segs=[];S.samples.filter(p=>p[0]<=tEnd).forEach(p=>{if(p[2]!==cur){if(seg.length)segs.push([cur,seg]);seg=seg.length?[seg[seg.length-1]]:[];cur=p[2]}seg.push(p)});if(seg.length)segs.push([cur,seg]);
+  segs.forEach(([g,pts])=>{s+='<path d="'+pts.map((p,i)=>(i?'L':'M')+c.X(p[0]).toFixed(1)+' '+c.Y(p[1]*KMH).toFixed(1)).join(' ')+'" fill="none" stroke="'+GEARCOL[(g-1)%10]+'" stroke-width="3"/>'});
+  if(S.tq&&S.tq<=tEnd)s+='<circle cx="'+c.X(S.tq)+'" cy="'+c.Y(S.vq*KMH)+'" r="5" fill="#16202b"/><text x="'+(c.X(S.tq)+8)+'" y="'+(c.Y(S.vq*KMH)+4)+'" fill="#16202b">¼ mile '+S.tq.toFixed(1)+' s</text>';
+  const ng=G.V.cvt||G.E.electric?1:G.V.ratios.length;s+=Array.from({length:ng},(_,i)=>'<rect x="'+(w-pad.r-ng*44+i*44)+'" y="'+(h-pad.b-22)+'" width="12" height="10" fill="'+GEARCOL[i%10]+'"/><text x="'+(w-pad.r-ng*44+i*44+15)+'" y="'+(h-pad.b-13)+'" fill="#35516b">'+(ng===1?'drive':'G'+(i+1))+'</text>').join('');
+  s+='</svg>';$('perfBox').innerHTML=s;G.perfSVG=s}
+function renderGears(){const {E,V}=G;let rows;
+  if(V.cvt)rows=[['CVT',V.cvtLow.toFixed(2)+' → '+V.Gtop.toFixed(2),'—','—']];
+  else rows=V.ratios.map((g,i)=>[E.electric?'Single gear':'Gear '+(i+1),g.toFixed(2),Math.round(E.redline*Math.PI/30*V.r/g*KMH)+' km/h',Math.round(rpmOf(100/KMH,g,V)).toLocaleString()+' rpm']);
+  $('gearsBox').innerHTML='<table class="t"><tr><th>Gear</th><th>Overall ratio (incl. final drive)</th><th>Speed at the rev limit</th><th>Revs at 100 km/h</th></tr>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</table><p class="muted">Wheel radius '+(V.r*100).toFixed(1)+' cm · drivetrain efficiency '+Math.round(V.eta*100)+'% · gear change '+(V.shift*1000)+' ms · tyre grip μ '+V.mu.toFixed(2)+'.</p>'}
+function renderWeights(){const {V}=G;$('weightsBox').innerHTML='<table class="t"><tr><th>Item</th><th>Weight kg</th><th>Share</th></tr>'+V.list.map(w=>'<tr><td>'+esc(w[0])+'</td><td>'+w[1].toFixed(0)+'</td><td>'+(w[1]/V.m*100).toFixed(0)+'%</td></tr>').join('')+
+  '<tr><th style="text-align:left">Total</th><th>'+V.m.toFixed(0)+'</th><th>'+Math.round(V.f*100)+'% front / '+Math.round((1-V.f)*100)+'% rear</th></tr></table><p class="muted">Centre of gravity '+(V.h*100).toFixed(0)+' cm above the road · wheelbase '+V.wb.toFixed(2)+' m · drag area CdA '+V.cdA.toFixed(3)+' m².</p>'}
+// ---- compare
+const PINKEY='miga-motor-pins';
+function pins(){try{return JSON.parse(localStorage.getItem(PINKEY))||[]}catch(e){return []}}
+function snapshot(){const {E,V,S,top,br,co,ec}=G;return {name:P.name||'Design',mode:P.mode,hp:Math.round(E.hp),nm:Math.round(E.Tpk),kg:Math.round(V.m),t100:S.t100?+S.t100.toFixed(1):null,tq:S.tq?+S.tq.toFixed(1):null,top:Math.round(top.v*KMH),brake:Math.round(br.d),corner:CAR(P)?co.g.toFixed(2)+' g':Math.round(co.lean)+'°',use:E.electric?ec.mixed.toFixed(1)+' kWh':ec.mixed.toFixed(1)+' L',range:Math.round(ec.range),design:Object.assign({},P)}}
+function renderCompare(){const ps=pins();if(!ps.length){$('compareBox').innerHTML='<p class="muted">Nothing pinned yet.</p>';return}
+  const cols=[['hp','Power hp'],['nm','Torque Nm'],['kg','Weight kg'],['t100','0–100 s'],['tq','¼ mile s'],['top','Top km/h'],['brake','100–0 m'],['corner','Cornering'],['use','Use /100 km'],['range','Range km']];
+  $('compareBox').innerHTML='<table class="t"><tr><th>Design</th>'+cols.map(c=>'<th>'+c[1]+'</th>').join('')+'<th></th></tr>'+ps.map((p,i)=>'<tr><td>'+esc(p.name)+'</td>'+cols.map(c=>'<td>'+(p[c[0]]==null?'—':esc(p[c[0]]))+'</td>').join('')+'<td><button class="secondary" data-open="'+i+'">Open</button> <button class="secondary" data-del="'+i+'">✕</button></td></tr>').join('')+'</table>';
+  $('compareBox').querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>{const p=pins();p.splice(+b.dataset.del,1);try{localStorage.setItem(PINKEY,JSON.stringify(p))}catch(e){}renderCompare()});
+  $('compareBox').querySelectorAll('[data-open]').forEach(b=>b.onclick=()=>{const d=pins()[+b.dataset.open];if(d&&d.design){P=Object.assign({},BASE,d.design);syncControls();update();fitCamera()}})}
+$('pinBtn').onclick=()=>{const p=pins();const s=snapshot();let n=s.name,k=2;while(p.some(x=>x.name===n))n=s.name+' ('+(k++)+')';s.name=n;p.push(s);while(p.length>6)p.shift();try{localStorage.setItem(PINKEY,JSON.stringify(p))}catch(e){}
+  $('pinBtn').textContent='📌 Pinned ('+p.length+')';setTimeout(()=>$('pinBtn').textContent='📌 Pin to compare',1500);if(activeView()==='vcompare')renderCompare()};
+
+function update(){saveP();G=compute();renderResults();build3D();resetDash();const v=activeView();if(v==='vengine')renderEngine();if(v==='vperf')renderPerf();if(v==='vgears')renderGears();if(v==='vweights')renderWeights();if(v==='vcompare')renderCompare()}
+function activeView(){const b=document.querySelector('.viewtabs button.active');return b?b.dataset.view:'v3d'}
+document.querySelectorAll('.viewtabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.viewtabs button').forEach(x=>x.classList.toggle('active',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==b.dataset.view));update();if(b.dataset.view==='v3d')resize3D()});
+
+// ------------------------------------------------------------------ 3D
+let R=null,run=null,spin=0;
+function init3D(){if(!window.THREE){$('view3d').insertAdjacentHTML('beforeend','<div class="no3d">The 3D view needs WebGL and the three.js library, which could not load. The engine curve, performance and all numbers still work.</div>');return}
+  const el=$('view3d'),renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(2,window.devicePixelRatio||1));el.insertBefore(renderer.domElement,el.firstChild);
+  const scene=new THREE.Scene();scene.background=new THREE.Color(0xdfeaf2);scene.fog=new THREE.Fog(0xdfeaf2,30,110);
+  const cam=new THREE.PerspectiveCamera(38,1,0.05,400);const ctl=new THREE.OrbitControls(cam,renderer.domElement);ctl.enableDamping=true;ctl.maxPolarAngle=Math.PI*0.495;
+  scene.add(new THREE.HemisphereLight(0xffffff,0x667788,0.75));const sun=new THREE.DirectionalLight(0xffffff,0.85);sun.position.set(6,12,8);scene.add(sun);
+  const road=new THREE.Mesh(new THREE.PlaneGeometry(400,9),new THREE.MeshStandardMaterial({color:0x4a5058,roughness:0.95}));road.rotation.x=-Math.PI/2;scene.add(road);
+  const grass=new THREE.Mesh(new THREE.PlaneGeometry(400,200),new THREE.MeshStandardMaterial({color:0x9bbf7a,roughness:1}));grass.rotation.x=-Math.PI/2;grass.position.y=-0.01;scene.add(grass);
+  const lines=new THREE.Group(),lm=new THREE.MeshBasicMaterial({color:0xf4f4f0});for(let i=-40;i<40;i++){const d=new THREE.Mesh(new THREE.PlaneGeometry(2.4,0.14),lm);d.rotation.x=-Math.PI/2;d.position.set(i*5,0.005,0);lines.add(d);
+    [-4.3,4.3].forEach(z=>{const e=new THREE.Mesh(new THREE.PlaneGeometry(5,0.12),lm);e.rotation.x=-Math.PI/2;e.position.set(i*5,0.005,z);lines.add(e)})}
+  lines.position.z=-2.2;scene.add(lines);
+  const pivot=new THREE.Group();scene.add(pivot);R={renderer,scene,cam,ctl,pivot,lines,veh:null,wheels:[],t0:performance.now(),last:performance.now()};
+  window.addEventListener('resize',resize3D);resize3D();animate()}
+function resize3D(){if(!R)return;const el=$('view3d'),w=el.clientWidth,h=el.clientHeight;if(!w||!h)return;R.renderer.setSize(w,h,false);R.cam.aspect=w/h;R.cam.updateProjectionMatrix()}
+function animate(){requestAnimationFrame(animate);if(!R)return;const now=performance.now(),dt=Math.min(0.05,(now-R.last)/1000);R.last=now;
+  let v=0;if(run){run.t+=dt;const s=G.S.samples,i=Math.min(s.length-1,Math.floor(run.t*20));const p=s[i];v=p[1];showDash(p);if(p[1]*KMH>=100&&!run.done){run.done=true;run.hold=1.6}if(run.done){run.hold-=dt;if(run.hold<=0){run=null;$('runBtn').textContent='▶ Run the 0–100 test'}}}
+  R.lines.position.x=((R.lines.position.x-v*dt)%5+5)%5-5;spin+=v*dt/(G?G.V.r:0.3);R.wheels.forEach(w=>w.rotation.z=-spin);
+  if(R.veh){const pitch=run&&!run.done?-0.012*Math.min(1,v/20+0.3):0;R.pivot.rotation.z+= (pitch-R.pivot.rotation.z)*0.1}
+  R.ctl.update();R.renderer.render(R.scene,R.cam)}
+function resetDash(){$('dashT').textContent=G.S.t100?'0–100 km/h: '+G.S.t100.toFixed(1)+' s':'Ready';$('dashV').textContent='0 km/h';$('dashGear').textContent='gear –';$('dashRpm').textContent='– rpm';$('dashBar').style.width='0'}
+function showDash(p){$('dashT').textContent=p[0].toFixed(1)+' s';$('dashV').textContent=Math.round(p[1]*KMH)+' km/h';$('dashGear').textContent=G.V.cvt||G.E.electric?'drive':'gear '+p[2];$('dashRpm').textContent=Math.round(p[3]).toLocaleString()+' rpm';$('dashBar').style.width=Math.min(100,p[3]/G.E.redline*100)+'%'}
+$('runBtn').onclick=()=>{if(!G)return;if(!R){const s=G.S.samples,i=s.findIndex(p=>p[1]*KMH>=100);showDash(s[i<0?s.length-1:i]);return}run={t:0,done:false};$('runBtn').textContent='⏱ Running…';fitCamera('side')};
+function disposeGroup(g){g.traverse(o=>{if(o.geometry)o.geometry.dispose();if(o.material)(Array.isArray(o.material)?o.material:[o.material]).forEach(m=>m.dispose())})}
+function mat(c,o){return new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:0.5},o||{}))}
+function wheel(r,wid,rimC){const g=new THREE.Group();const tyre=new THREE.Mesh(new THREE.CylinderGeometry(r,r,wid,28,1),mat(0x1b1d20,{roughness:0.9}));tyre.rotation.x=Math.PI/2;g.add(tyre);
+  const rim=new THREE.Mesh(new THREE.CylinderGeometry(r*0.68,r*0.68,wid*1.02,20),mat(rimC||0xb8c2cc,{metalness:0.7,roughness:0.3}));rim.rotation.x=Math.PI/2;g.add(rim);
+  for(let k=0;k<5;k++){const sp=new THREE.Mesh(new THREE.BoxGeometry(r*1.25,r*0.12,wid*1.06),mat(0x8a96a3,{metalness:0.6}));sp.rotation.z=k*Math.PI/5;g.add(sp)}R.wheels.push(g);return g}
+function engineMesh(sc){const g=new THREE.Group(),E=G.E,m=mat(0x8a96a3,{metalness:0.5,roughness:0.4}),dark=mat(0x3a4250);
+  if(E.electric){g.add(new THREE.Mesh(new THREE.CylinderGeometry(0.16*sc,0.16*sc,0.3*sc,20),mat(0x2b6cb0,{metalness:0.4})));return g}
+  const n=P.cyl,L=E.liters,cs=Math.cbrt(L/n)*0.13*sc+0.03,lay=n===1?'inline':P.layout,rows=lay==='inline'?1:2,per=Math.ceil(n/rows),len=per*cs*1.15+0.05;
+  const block=new THREE.Mesh(new THREE.BoxGeometry(len,cs*1.4,cs*1.3*(rows===2&&lay==='boxer'?1.6:1)),dark);g.add(block);
+  for(let r=0;r<rows;r++)for(let i=0;i<per;i++){const c=new THREE.Mesh(new THREE.BoxGeometry(cs,cs*1.8,cs*1.05),m),x=(i-(per-1)/2)*cs*1.15;
+    if(rows===1)c.position.set(x,cs*1.4,0);else{const a=lay==='v'?(n===2?0.75:0.55):Math.PI/2,s=r?1:-1;c.position.set(x,cs*0.7+Math.cos(a)*cs*1.1,s*Math.sin(a)*cs*1.1);c.rotation.x=-s*a}g.add(c)}
+  if(P.induction==='turbo'){const t=new THREE.Mesh(new THREE.TorusGeometry(cs*0.5,cs*0.22,8,16),mat(0xc8a040,{metalness:0.7}));t.position.set(len/2+cs*0.4,cs,0);g.add(t)}
+  if(P.induction==='super'){const t=new THREE.Mesh(new THREE.BoxGeometry(len*0.8,cs*0.6,cs*0.8),mat(0xc8a040,{metalness:0.7}));t.position.set(0,cs*2.6,0);g.add(t)}
+  return g}
+function personMesh(c,seated){const g=new THREE.Group(),skin=mat(0xe0b088),shirt=mat(c);const b=new THREE.Mesh(new THREE.CylinderGeometry(0.15,0.18,0.55,10),shirt);b.position.y=0.3;g.add(b);const h=new THREE.Mesh(new THREE.SphereGeometry(0.11,12,10),skin);h.position.y=0.68;g.add(h);
+  if(seated){const lg=new THREE.Mesh(new THREE.BoxGeometry(0.45,0.14,0.32),mat(0x2a3440));lg.position.set(0.2,0.02,0);g.add(lg)}return g}
+function build3D(){if(!R)return;if(R.veh){R.pivot.remove(R.veh);disposeGroup(R.veh)}R.wheels=[];
+  const veh=new THREE.Group();veh.userData.export=true;const xray=$('xray').checked,body=mat(new THREE.Color(P.color),{roughness:0.35,metalness:0.25,transparent:xray,opacity:xray?0.22:1}),glass=mat(0x1d2a38,{roughness:0.1,metalness:0.4,transparent:true,opacity:xray?0.15:0.85}),dark=mat(0x23272d);
+  const V=G.V,r=V.r;
+  if(CAR(P)){const L=P.length,W=P.width,H=P.height,gc=Math.max(0.1,Math.min(0.22,0.13+(P.body==='suv'||P.body==='pickup'?0.08:0)-(P.type==='track'?0.04:0))),belt=gc+(H-gc)*(P.body==='roadster'?0.62:P.body==='suv'||P.body==='pickup'?0.56:0.52);
+    const xr=(L-V.wb)*0.47,xf=xr+V.wb;// axle positions from the rear
+    const lower=new THREE.Shape(),nose=belt-0.1-(P.body==='coupe'||P.body==='roadster'?0.08:0);
+    lower.moveTo(0.05,gc);lower.lineTo(L-0.12,gc);lower.quadraticCurveTo(L,gc,L,gc+0.12);lower.lineTo(L,nose-0.05);lower.quadraticCurveTo(L-0.02,nose,L-0.25,nose+0.02);lower.lineTo(L*0.7,belt);lower.lineTo(0.1,belt);lower.quadraticCurveTo(0,belt,0,belt-0.1);lower.lineTo(0,gc+0.1);lower.quadraticCurveTo(0,gc,0.05,gc);
+    const lg=new THREE.ExtrudeGeometry(lower,{depth:W-0.08,bevelEnabled:true,bevelThickness:0.04,bevelSize:0.04,bevelSegments:2,curveSegments:8});lg.translate(-L/2,0,-(W-0.08)/2);veh.add(new THREE.Mesh(lg,body));
+    const cab={hatch:[0.02,0.08,0.56,0.72],sedan:[0.12,0.27,0.62,0.75],coupe:[0.1,0.32,0.58,0.74],suv:[0.02,0.05,0.62,0.74],pickup:[0.44,0.46,0.68,0.76],roadster:[0.3,0.32,0.5,0.58]}[P.body];
+    const roof=P.body==='roadster'?belt+0.28:H;const cs=new THREE.Shape();cs.moveTo(L*cab[0],belt);cs.lineTo(L*cab[1],roof);cs.lineTo(L*cab[2],roof);cs.lineTo(L*cab[3],belt);cs.lineTo(L*cab[0],belt);
+    const cw=W*(P.body==='roadster'?0.8:0.84),cg=new THREE.ExtrudeGeometry(cs,{depth:cw,bevelEnabled:true,bevelThickness:0.03,bevelSize:0.03,bevelSegments:1});cg.translate(-L/2,-0.01,-cw/2);veh.add(new THREE.Mesh(cg,P.body==='roadster'?glass:glass));
+    if(P.body!=='roadster'){const rs=new THREE.Shape(),inset=0.06;rs.moveTo(L*(cab[1]+0.01),roof-0.02);rs.lineTo(L*(cab[2]-0.01),roof-0.02);rs.lineTo(L*(cab[2]-0.01),roof+0.015);rs.lineTo(L*(cab[1]+0.01),roof+0.015);const rg=new THREE.ExtrudeGeometry(rs,{depth:cw+0.02,bevelEnabled:false});rg.translate(-L/2,0,-(cw+0.02)/2);veh.add(new THREE.Mesh(rg,body));
+      // pillars between the windows
+      [0.5].forEach(f=>{const x=L*(cab[1]+(cab[2]-cab[1])*f),pl=new THREE.Mesh(new THREE.BoxGeometry(0.08,roof-belt,cw+0.07),body);pl.position.set(x-L/2,(roof+belt)/2,0);veh.add(pl)})}
+    if(P.body==='pickup'){const bed=new THREE.Mesh(new THREE.BoxGeometry(L*0.4,0.06,W*0.9),dark);bed.position.set(-L/2+L*0.22,belt-0.02,0);veh.add(bed)}
+    // lights
+    const hl=mat(0xfff6d8,{emissive:0x665a30}),tl=mat(0xd02020,{emissive:0x400000});[-1,1].forEach(s=>{const h=new THREE.Mesh(new THREE.BoxGeometry(0.06,0.08,0.28),hl);h.position.set(L/2+0.02,nose-0.08,s*(W/2-0.22));veh.add(h);const t=new THREE.Mesh(new THREE.BoxGeometry(0.06,0.08,0.3),tl);t.position.set(-L/2-0.02,belt-0.12,s*(W/2-0.2));veh.add(t)});
+    // wheels
+    const tw=P.tyreW/1000,ft=V.drive==='rwd'?Math.max(0.185,tw*0.85):tw;[[xf,ft],[xr,tw]].forEach(([x,w])=>[-1,1].forEach(s=>{const wh=wheel(r,w);wh.position.set(x-L/2,r,s*(W/2-w/2+0.03));veh.add(wh);const arch=new THREE.Mesh(new THREE.CylinderGeometry(r*1.12,r*1.12,w+0.06,20,1,true,0,Math.PI),mat(0x15171a,{side:THREE.DoubleSide}));arch.rotation.x=Math.PI/2;arch.position.set(x-L/2,r,s*(W/2-w/2+0.02));veh.add(arch)}));
+    // wing
+    if(P.aero==='wing'||P.aero==='race'){const span=W*(P.aero==='race'?0.95:0.8),wg=new THREE.Mesh(new THREE.BoxGeometry(0.32,0.03,span),dark);wg.position.set(-L/2+0.2,belt+(P.aero==='race'?0.42:0.28),0);veh.add(wg);[-1,1].forEach(s=>{const post=new THREE.Mesh(new THREE.BoxGeometry(0.05,P.aero==='race'?0.42:0.28,0.03),dark);post.position.set(-L/2+0.22,belt+(P.aero==='race'?0.21:0.14),s*span*0.3);veh.add(post)});
+      if(P.aero==='race'){const sp=new THREE.Mesh(new THREE.BoxGeometry(0.35,0.025,W*0.98),dark);sp.position.set(L/2-0.05,gc-0.02,0);veh.add(sp)}}
+    if(P.aero==='lip'){const sp=new THREE.Mesh(new THREE.BoxGeometry(0.12,0.04,W*0.7),body);sp.position.set(-L/2+0.06,belt+0.03,0);veh.add(sp)}
+    // engine (visible with x-ray)
+    const ep={front:xf+0.05,mid:xr+0.75,rear:xr-0.2}[P.enginePos]-L/2,en=engineMesh(1.6);en.position.set(ep,gc+0.2,0);en.visible=xray;en.rotation.y=P.enginePos==='front'&&P.drive!=='fwd'?0:Math.PI/2;veh.add(en);
+    // people
+    const seats=[[L*(cab[2]-0.08),0.25],[L*(cab[2]-0.08),-0.25],[L*(cab[1]+0.08),0.25],[L*(cab[1]+0.08),-0.25],[L*(cab[1]+0.08),0]];for(let i=0;i<Math.min(P.people,5);i++){const pm=personMesh([0x2b6cb0,0xd8604a,0x4e9e73,0xe2a63b,0x8a3ab8][i],true);pm.scale.setScalar(Math.min(1,(roof-belt+0.35)/0.85));pm.position.set(seats[i][0]-L/2-0.2,belt-0.35,seats[i][1]*W*1.1);veh.add(pm)}
+  }else{
+    const wb=V.wb,st=P.style,fr=r*(st==='dirt'?1.05:st==='scooter'?1:1.0),rr=r,xr=-wb/2,xf=wb/2;
+    const fw=wheel(fr,Math.max(0.08,P.tyreW/1000*0.65),0x2a3440),rw=wheel(rr,P.tyreW/1000,0x2a3440);fw.position.set(xf,fr,0);rw.position.set(xr,rr,0);veh.add(fw,rw);
+    const frameM=mat(st==='dirt'?0xd8d8d8:0x2a3440,{metalness:0.5}),bodyM=body,seatM=mat(0x1b1d20,{roughness:0.9});
+    const tube=(a,b,rad,m)=>{const d=new THREE.Vector3().subVectors(b,a),len=d.length(),c=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,len,10),m||frameM);c.position.copy(a).add(b).multiplyScalar(0.5);c.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());veh.add(c);return c};
+    const V3=(x,y)=>new THREE.Vector3(x,y,0),rake=(st==='cruiser'?33:st==='sport'?24:27)*Math.PI/180,head=V3(xf-Math.tan(rake)*(fr+0.55+(st==='dirt'?0.2:0))-0.02,fr+0.62+(st==='dirt'?0.22:0)+(st==='adventure'?0.1:0));
+    if(st==='scooter'){const deck=new THREE.Mesh(new THREE.BoxGeometry(wb*0.55,0.06,0.32),bodyM);deck.position.set(0,0.3,0);veh.add(deck);
+      const shield=new THREE.Mesh(new THREE.BoxGeometry(0.1,0.65,0.42),bodyM);shield.position.set(head.x+0.05,0.62,0);shield.rotation.z=-0.25;veh.add(shield);
+      const rear=new THREE.Mesh(new THREE.SphereGeometry(0.35,16,12),bodyM);rear.scale.set(1.3,0.75,0.75);rear.position.set(xr+0.25,0.62,0);veh.add(rear);
+      const seat=new THREE.Mesh(new THREE.BoxGeometry(0.62,0.08,0.3),seatM);seat.position.set(xr+0.3,0.88,0);veh.add(seat);if(ICE(P)){const en=engineMesh(1.1);en.position.set(xr+0.3,0.3,0.05);en.visible=xray;veh.add(en)}}
+    else{const piv=V3(xr+wb*0.33,fr+0.1);tube(head,piv,0.03);tube(head,V3(piv.x+0.05,piv.y+0.35),0.03);tube(V3(xr,rr),piv,0.03);tube(V3(xr,rr),V3(piv.x-0.15,piv.y+0.42),0.02);
+      const tank=new THREE.Mesh(new THREE.SphereGeometry(0.22,16,12),bodyM);tank.scale.set(1.5,0.7,0.85);tank.position.set(head.x-0.32,head.y-0.05,0);veh.add(tank);
+      const sy=st==='cruiser'?0.66:st==='sport'?0.82:st==='dirt'?0.95:0.84,seat=new THREE.Mesh(new THREE.BoxGeometry(st==='cruiser'?0.45:0.6,0.08,0.28),seatM);seat.position.set(head.x-0.75,sy,0);veh.add(seat);
+      const tail=new THREE.Mesh(new THREE.BoxGeometry(0.42,0.12,0.2),bodyM);tail.position.set(head.x-1.05,sy+0.06,0);tail.rotation.z=st==='sport'?0.25:0.1;if(st!=='cruiser')veh.add(tail);
+      if(st==='sport'||st==='adventure'){const fa=new THREE.Mesh(new THREE.SphereGeometry(0.3,18,12,0,Math.PI*2,0,Math.PI/2),bodyM);fa.scale.set(0.85,0.75,0.6);fa.rotation.z=-Math.PI/2+0.35;fa.position.set(head.x+0.05,head.y-0.18,0);veh.add(fa);
+        const scr=new THREE.Mesh(new THREE.BoxGeometry(0.02,0.25,0.32),mat(0x9fd0e8,{transparent:true,opacity:0.5}));scr.position.set(head.x+0.05,head.y+0.15,0);scr.rotation.z=0.5;veh.add(scr);
+        if(st==='sport'){const low=new THREE.Mesh(new THREE.BoxGeometry(0.75,0.32,0.36),bodyM);low.position.set(head.x-0.35,0.45,0);veh.add(low)}}
+      const en=engineMesh(1.1);en.position.set(head.x-0.45,0.32,0);en.rotation.y=P.layout==='v'&&P.cyl===2?0:Math.PI/2;if(P.layout==='v'&&P.cyl===2)en.rotation.y=Math.PI/2;veh.add(en);
+      const ex=tube(V3(head.x-0.4,0.3),V3(xr-0.05,st==='sport'?0.55:0.38),0.045,mat(0xb8c2cc,{metalness:0.8,roughness:0.25}));ex.position.z=0.17}
+    // forks, bars, light
+    [-1,1].forEach(s=>{const fk=tube(head,V3(xf,fr),0.025,mat(0xc8ccd0,{metalness:0.8}));fk.position.z=s*0.09});
+    const barY=head.y+(st==='cruiser'?0.25:st==='sport'?0.0:0.15),bar=new THREE.Mesh(new THREE.CylinderGeometry(0.014,0.014,st==='sport'?0.55:0.75,8),mat(0x2a3440));bar.rotation.x=Math.PI/2;bar.position.set(head.x-0.05,barY,0);veh.add(bar);
+    const hlm=new THREE.Mesh(new THREE.SphereGeometry(0.08,12,10),mat(0xfff6d8,{emissive:0x665a30}));hlm.position.set(head.x+0.14,head.y-0.05,0);veh.add(hlm);
+    const fend=new THREE.Mesh(new THREE.TorusGeometry(fr*1.05,0.035,6,16,Math.PI*0.6),bodyM);fend.position.set(xf,fr,0);fend.rotation.z=Math.PI*0.25;veh.add(fend);
+    if(EL(P)){const bat=new THREE.Mesh(new THREE.BoxGeometry(0.55,0.32,0.3),mat(0x3a4250));bat.position.set(head.x-0.45,0.42,0);veh.add(bat)}
+    // rider: torso leans by riding style, arms reach the bars, feet on the pegs
+    const seatX=st==='scooter'?xr+0.3:head.x-0.75,seatY=(st==='scooter'?0.88:st==='cruiser'?0.66:st==='sport'?0.82:st==='dirt'?0.95:0.84)+0.06;
+    const ang={sport:0.85,naked:0.3,cruiser:-0.12,adventure:0.12,dirt:0.45,scooter:0}[st],P3=(x,y,z)=>new THREE.Vector3(x,y,z),suit=mat(0x16202b),skin=mat(0x2a3440);
+    const tube3=(a,b,rad,m)=>{const d=new THREE.Vector3().subVectors(b,a),c=new THREE.Mesh(new THREE.CylinderGeometry(rad,rad,d.length(),10),m);c.position.copy(a).add(b).multiplyScalar(0.5);c.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());veh.add(c);return c};
+    const hip=P3(seatX,seatY+0.05,0),sh=P3(hip.x+Math.sin(ang)*0.55,hip.y+Math.cos(ang)*0.55,0);tube3(hip,sh,0.16,suit);
+    const helm=new THREE.Mesh(new THREE.SphereGeometry(0.14,14,12),mat(new THREE.Color(P.color).offsetHSL(0.5,0,0),{roughness:0.25}));helm.position.set(sh.x+Math.sin(ang)*0.2+0.03,sh.y+Math.cos(ang)*0.2,0);veh.add(helm);
+    const peg=st==='cruiser'?[seatX+0.62,0.32]:st==='scooter'?[seatX+0.42,0.36]:[seatX+0.12,0.33];
+    [-1,1].forEach(z=>{const grip=P3(head.x-0.06,barY,z*(st==='sport'?0.26:0.34)),shz=P3(sh.x,sh.y-0.05,z*0.19);tube3(shz,grip,0.045,suit);
+      const hp=P3(hip.x,hip.y-0.02,z*0.13),ft=P3(peg[0],peg[1],z*0.17),knee=P3(Math.max(hp.x,ft.x)+(st==='cruiser'?0.05:0.2),Math.max(ft.y+0.2,(hp.y+ft.y)/2+0.12),z*0.17);tube3(hp,knee,0.07,suit);tube3(knee,ft,0.06,suit);
+      const boot=new THREE.Mesh(new THREE.BoxGeometry(0.22,0.08,0.1),skin);boot.position.set(ft.x+0.06,ft.y,z*0.17);veh.add(boot)});
+  }
+  R.pivot.add(veh);R.veh=veh}
+function fitCamera(view){if(!R)return;const L=CAR(P)?P.length:P.wheelbase+0.8,d=Math.max(L,2)*1.35,ty=CAR(P)?P.height*0.45:0.6;const v=view||'34';R.ctl.target.set(0,ty,0);
+  if(v==='side')R.cam.position.set(0,ty+0.2,d*1.4);else if(v==='top')R.cam.position.set(0,d*1.7,0.01);else if(v==='front')R.cam.position.set(d*1.4,ty+0.3,0);else R.cam.position.set(d*0.85,d*0.42,d*0.95);R.cam.lookAt(0,ty,0)}
+$('camSide').onclick=()=>fitCamera('side');$('camTop').onclick=()=>fitCamera('top');$('camFront').onclick=()=>fitCamera('front');$('cam34').onclick=()=>fitCamera('34');$('xray').onchange=()=>build3D();
+
+// ------------------------------------------------------------------ exports
+function download(name,data,type){const a=document.createElement('a');a.href=URL.createObjectURL(data instanceof Blob?data:new Blob([data],{type:type||'text/plain'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+const slug=()=>(P.name||'vehicle').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'vehicle';
+const csv=rows=>'﻿'+rows.map(r=>r.map(c=>{c=String(c);return /[",\n]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(',')).join('\r\n');
+function specRows(){const {E,V,S,top,br,co,ec}=G,car=CAR(P),rows=[['Item','Value','Unit']];const add=(a,b,c)=>rows.push([a,b,c||'']);
+  add('Design',P.name);add('Type',car?'Car':'Motorcycle');add('Power source',E.electric?'Electric':P.fuel);
+  if(E.electric){add('Motor power',P.motorKw,'kW');add('Battery',P.battery,'kWh')}else{add('Engine',layoutName()+' '+(P.induction==='na'?'naturally aspirated':P.induction));add('Displacement',Math.round(E.liters*1000),'cc');add('Bore x stroke',P.bore+' x '+P.stroke,'mm');add('Compression ratio',P.cr,':1');add('Rev limit',P.redline,'rpm');if(E.forced)add('Boost',P.boost,'bar')}
+  add('Peak power',Math.round(E.hp),'hp');add('Peak power',Math.round(E.Ppk),'kW');add('Peak torque',Math.round(E.Tpk),'Nm');add('Weight with '+(car?'driver':'rider'),Math.round(V.m),'kg');add('Weight on front',Math.round(V.f*100),'%');
+  add('0-100 km/h',S.t100?S.t100.toFixed(2):'not reached','s');add('0-60 mph',S.t60?S.t60.toFixed(2):'not reached','s');add('Quarter mile',S.tq?S.tq.toFixed(2):'','s');add('Quarter mile end speed',S.vq?Math.round(S.vq*KMH):'','km/h');add('Top speed',Math.round(top.v*KMH),'km/h');
+  add('Braking 100-0 km/h',Math.round(br.d),'m');if(car)add('Cornering grip',co.g.toFixed(2),'g');else add('Max lean angle',Math.round(co.lean),'deg');
+  if(E.electric){add('Energy use (mixed)',ec.mixed.toFixed(1),'kWh/100 km');add('Range',Math.round(ec.range),'km')}else{add('Fuel use (mixed)',ec.mixed.toFixed(1),'L/100 km');add('Fuel use at 100 km/h',ec.L100.toFixed(1),'L/100 km');add('Range',Math.round(ec.range),'km');add('CO2',Math.round(ec.co2),'g/km')}
+  Object.entries(G.scores).forEach(([k,v])=>add('Score: '+k,v.toFixed(1),'/10'));return rows}
+$('dlSpec').onclick=()=>download(slug()+'-spec.csv',csv(specRows()),'text/csv');
+$('dlCSV').onclick=()=>download(slug()+'-test-run.csv',csv([['Time s','Speed km/h','Gear','Engine rpm','Distance m']].concat(G.S.samples.map(p=>[p[0],(p[1]*KMH).toFixed(1),p[2],Math.round(p[3]),p[4].toFixed(1)]))),'text/csv');
+function exportGroup(){if(!R||!R.veh)return null;const g=R.veh.clone();g.updateMatrixWorld(true);return g}
+$('dlOBJ').onclick=()=>{const g=exportGroup();if(!g||!THREE.OBJExporter)return alert('3D export needs the 3D view.');download(slug()+'.obj',new THREE.OBJExporter().parse(g),'text/plain')};
+$('dlSTL').onclick=()=>{const g=exportGroup();if(!g||!THREE.STLExporter)return alert('3D export needs the 3D view.');download(slug()+'.stl',new THREE.STLExporter().parse(g,{binary:true}),'model/stl')};
+$('dlPNG').onclick=()=>{if(!R)return;R.renderer.render(R.scene,R.cam);R.renderer.domElement.toBlob(b=>download(slug()+'.png',b),'image/png')};
+$('printBtn').onclick=()=>{renderEngine();renderPerf();const w=window.open('','_blank');if(!w)return alert('Allow pop-ups to print the spec sheet.');
+  w.document.write('<!doctype html><title>'+esc(P.name)+' — spec sheet</title><style>body{font:13px Arial;margin:24px;color:#16202b}h1{font-size:22px}table{border-collapse:collapse;width:100%;margin:10px 0}td,th{border:1px solid #ccc;padding:4px 6px;text-align:left}.hydro{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.hv{border:1px solid #ddd;padding:6px}.hv b{display:block;font-size:15px}svg{max-width:100%}</style><h1>'+esc(P.name)+' — Motor Forge spec sheet</h1><p>'+$('verdict').innerHTML+'</p>'+
+    '<div class="hydro">'+$('results').innerHTML+'</div><h2>Checks</h2><ul>'+$('checks').innerHTML+'</ul><h2>Engine</h2>'+G.engineSVG+'<h2>Acceleration</h2>'+G.perfSVG+'<p>Made with Motor Forge — migabuilder.com. Estimates for design and learning.</p>');w.document.close();setTimeout(()=>w.print(),400)};
+$('saveJson').onclick=()=>download(slug()+'.motor.json',JSON.stringify(Object.assign({app:'MigaBuilder Motor Forge',version:1},P),null,1),'application/json');
+$('openJson').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const d=JSON.parse(await f.text());if(!d.mode)throw new Error('not a Motor Forge design');P=Object.assign({},BASE,d);delete P.app;delete P.version;syncControls();update();fitCamera()}catch(err){alert('Could not open this file: '+err.message)}};
+$('resetBtn').onclick=()=>applyPreset(P.mode==='bike'?'naked':'hatch');
+
+// ------------------------------------------------------------------ start
+buildSliders();syncControls();init3D();update();fitCamera();
+window.MotorForge={get P(){return P},get G(){return G},update,applyPreset};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!-- Generated from /puzzle-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="zh-Hans" data-en-title="Word scramble, sudoku and crossword puzzles in 9 languages — Puzzle Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='zh';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Puzzle Forge — 九种语言的字母重组、数独和填字游戏 | MigaBuilder</title>
+<meta name="description" content="九种语言的字母重组、数独和填字游戏——也可以用你自己的词。">
+<link rel="canonical" href="https://migabuilder.com/zh/puzzle-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/puzzle-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Puzzle Forge — 九种语言的字母重组、数独和填字游戏">
+<meta property="og:description" content="九种语言的字母重组、数独和填字游戏——也可以用你自己的词。">
+<meta property="og:url" content="https://migabuilder.com/zh/puzzle-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="puzzle-words.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which languages can I play in?","acceptedAnswer":{"@type":"Answer","text":"Word scrambles and crosswords come in English, Spanish, Arabic, Chinese, Swahili, Swedish, German, Portuguese and French, with clues in the same language and the English meaning for learners. Sudoku works with ordinary digits, Arabic digits, Chinese numerals or letters."}},{"@type":"Question","name":"Can I make a crossword from my own words?","acceptedAnswer":{"@type":"Answer","text":"Yes. Open Your words, type one word and its clue per line, and press Make a crossword. You can print it or share a link. Dictionary Forge can send the words you saved straight here."}},{"@type":"Question","name":"Does each sudoku have one answer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every sudoku is made fresh in your browser and checked to have exactly one solution. Choose 4×4 or 6×6 for children, or 9×9 from easy to expert."}},{"@type":"Question","name":"Is anything uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Puzzle Forge has no AI and no server. Puzzles are made and checked on your device."}}],"inLanguage":"zh"}</script>
+<style>
+main{max-width:1180px}
+.hidden{display:none!important}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}
+.tabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:9px 15px;cursor:pointer;font:700 14px 'Space Grotesk';color:var(--ink)}
+.tabs button[aria-selected=true]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;margin-bottom:12px}
+.bar .field{margin:0;min-width:150px}
+.bar label.chk{display:inline-flex;gap:6px;align-items:center;font-size:13px;padding-bottom:10px}
+.stats{display:flex;gap:14px;flex-wrap:wrap;font:600 14px 'Space Grotesk';color:var(--navy);margin:6px 0 10px}
+.stats span b{font-size:18px}
+/* scramble */
+.scr{background:#fff;border:1px solid rgba(22,32,43,.14);padding:20px;text-align:center}
+.scr .clue{font-size:18px;line-height:1.45;margin:0 0 4px;color:var(--ink)}
+.scr .meaning{font-size:13px;color:rgba(22,32,43,.65);min-height:18px}
+.slots,.tiles{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:16px 0}
+.slot,.tile{width:50px;height:56px;display:inline-flex;align-items:center;justify-content:center;font:700 26px 'Space Grotesk',system-ui,sans-serif;border-radius:6px;user-select:none}
+.slot{border:2px dashed rgba(22,32,43,.3);background:#fbfaf6;cursor:pointer;color:var(--navy)}
+.slot.filled{border-style:solid;border-color:var(--navy)}
+.slot.hint{background:#fff3d6;border-color:var(--amber)}
+.tile{border:0;background:var(--navy);color:#fff;cursor:pointer;box-shadow:0 3px 0 #081826}
+.tile:disabled{opacity:.18;cursor:default;box-shadow:none}
+.scr.ok .slot{background:rgba(78,158,115,.18);border-color:var(--success)}
+.scr.bad .slots{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.scr .msg{min-height:24px;font-weight:700;margin:6px 0}
+.scr .msg.ok{color:#2e7a52}.scr .msg.bad{color:#9b3322}
+/* sudoku */
+.sd-wrap{display:grid;grid-template-columns:minmax(0,auto) 1fr;gap:20px;align-items:start}
+.sd{--n:9;display:grid;grid-template-columns:repeat(var(--n),1fr);grid-template-rows:repeat(var(--n),1fr);width:min(468px,calc(100vw - 80px));aspect-ratio:1;border:3px solid var(--ink);background:#fff;user-select:none}
+.sd .c{position:relative;display:flex;align-items:center;justify-content:center;border-right:1px solid #c9cdd2;border-bottom:1px solid #c9cdd2;font:600 clamp(16px,4.6vw,26px) 'Space Grotesk',system-ui,sans-serif;color:#1f5fa8;cursor:pointer;background:#fff}
+.sd .c.given{color:var(--ink);font-weight:700}
+.sd .c.br{border-right:2px solid var(--ink)}.sd .c.bb{border-bottom:2px solid var(--ink)}
+.sd .c.peer{background:#eef3f8}.sd .c.same{background:#d9e6f3}.sd .c.sel{background:#ffe7a8}
+.sd .c.conflict{color:#c0392b;background:#fbe3df}
+.sd .c.wrong{color:#c0392b;text-decoration:line-through}
+.sd .c .notes{position:absolute;inset:2px;display:grid;font:500 clamp(7px,1.6vw,11px) 'IBM Plex Mono',monospace;color:#5d6873}
+.sd .c .notes span{display:flex;align-items:center;justify-content:center}
+.pad{display:grid;grid-template-columns:repeat(3,62px);gap:8px;margin-bottom:12px}
+.pad button{height:56px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:6px;font:700 22px 'Space Grotesk';cursor:pointer;color:var(--navy)}
+.pad button.done{opacity:.35}
+.sd-tools{display:flex;gap:8px;flex-wrap:wrap}
+.sd-tools button.on{background:var(--navy);color:#fff}
+/* crossword */
+.cw-wrap{display:grid;grid-template-columns:minmax(0,auto) minmax(260px,1fr);gap:20px;align-items:start}
+.cw{--cs:34px;display:grid;gap:0;width:max-content;max-width:100%;overflow:auto}
+.cw .x{width:var(--cs);height:var(--cs)}
+.cw .x.b{background:transparent}
+.cw .x.l{position:relative;background:#fff;outline:1px solid #2b3742;z-index:0}
+.cw .x.l input{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent;text-align:center;font:700 calc(var(--cs)*.52) 'Space Grotesk',system-ui,sans-serif;color:var(--ink);padding:calc(var(--cs)*.14) 0 0;text-transform:uppercase;caret-color:transparent;cursor:pointer}
+.cw .x.l input:focus{outline:none}
+.cw .x.l.word{background:#e5eef7}.cw .x.l.cur{background:#ffe08a}
+.cw .x.l.wrong input{color:#c0392b}.cw .x.l.shown input{color:#1f5fa8}
+.cw .x.l .num{position:absolute;top:1px;inset-inline-start:2px;font:600 calc(var(--cs)*.27) 'IBM Plex Sans',sans-serif;color:#45505a;pointer-events:none;z-index:1}
+.clues{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.clues h3{font:700 15px 'Space Grotesk';margin:0 0 6px}
+.clues ol{list-style:none;margin:0;padding:0;font-size:14px;line-height:1.4}
+.clues li{padding:5px 7px;border-radius:4px;cursor:pointer}
+.clues li b{display:inline-block;min-width:22px}
+.clues li.on{background:#ffe08a}
+.clues li.solved{color:rgba(22,32,43,.45);text-decoration:line-through}
+.clues li small{display:block;color:rgba(22,32,43,.55);font-size:12px}
+.curclue{min-height:22px;font-weight:600;margin:0 0 8px;color:var(--navy)}
+.win{padding:12px 14px;background:rgba(78,158,115,.16);border-left:5px solid var(--success);font-weight:700;margin:10px 0}
+#wordsIn{min-height:220px;font:15px/1.6 'IBM Plex Mono',monospace}
+.ex{font:13px 'IBM Plex Mono',monospace;background:#f4f2ec;padding:8px 10px;border-radius:3px;white-space:pre-wrap}
+[dir=rtl] .clues ol,[dir=rtl].clues{text-align:right}
+@media(max-width:900px){.sd-wrap,.cw-wrap{grid-template-columns:minmax(0,1fr)}.clues{grid-template-columns:1fr}}
+@media(max-width:520px){.slot,.tile{width:40px;height:46px;font-size:21px}.pad{grid-template-columns:repeat(5,1fr)}.pad button{height:48px}}
+@media print{
+  body{background:#fff!important}
+  body *{visibility:hidden}
+  .printable,.printable *{visibility:visible}
+  .printable{position:absolute;left:0;top:0;width:100%}
+  .printable .noprint{display:none!important}
+  .cw .x.l.word,.cw .x.l.cur{background:#fff!important}
+  .sd .c{background:#fff!important}
+}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/puzzle-forge.js"></script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/puzzle-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/puzzle-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/puzzle-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/puzzle-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/puzzle-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/puzzle-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/puzzle-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/puzzle-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/puzzle-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/puzzle-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/zh/">← All tools</a><span>Puzzle Forge</span></nav>
+<header class="masthead"><div><h1>Puzzle Forge</h1><p>Word scramble, sudoku and crosswords in nine languages — or from your own words.</p></div></header>
+<main>
+<section class="panel">
+  <p class="privacy">🔒 Private: there is no AI and no server here. Every puzzle is made and checked in this browser.</p>
+  <div class="tabs" role="tablist" id="tabs">
+    <button role="tab" id="tab-scramble" data-t="scramble" aria-selected="true">🔀 Word scramble</button>
+    <button role="tab" id="tab-sudoku" data-t="sudoku" aria-selected="false">🔢 Sudoku</button>
+    <button role="tab" id="tab-crossword" data-t="crossword" aria-selected="false">✏️ Crossword</button>
+    <button role="tab" id="tab-words" data-t="words" aria-selected="false">📝 Your words</button>
+  </div>
+  <div class="bar" id="langBar">
+    <div class="field"><label for="lang">Puzzle language</label><select id="lang"></select></div>
+    <label class="chk"><input type="checkbox" id="foldAcc" checked> Accents don't matter (e = é)</label>
+    <label class="chk"><input type="checkbox" id="showEn"> Show the English meaning</label>
+  </div>
+</section>
+
+<!-- WORD SCRAMBLE -->
+<section class="panel" id="p-scramble">
+  <h2>Word scramble</h2>
+  <p>Put the letters back in the right order. Tap the letters or type them. The clue tells you what the word means.</p>
+  <div class="stats"><span>Score <b id="scScore">0</b></span><span>Solved <b id="scSolved">0</b></span><span>Streak <b id="scStreak">0</b></span><span>Best streak <b id="scBest">0</b></span></div>
+  <div class="scr" id="scr">
+    <p class="clue" id="scClue"></p>
+    <div class="meaning" id="scMeaning"></div>
+    <div class="slots" id="scSlots" aria-label="Your answer"></div>
+    <div class="tiles" id="scTiles" aria-label="Letters to use"></div>
+    <div class="msg" id="scMsg" role="status" aria-live="polite"></div>
+    <div class="actions" style="justify-content:center">
+      <button class="secondary" id="scHint" type="button">💡 Hint (−3)</button>
+      <button class="secondary" id="scShuffle" type="button">🔀 Shuffle</button>
+      <button class="secondary" id="scClear" type="button">↩ Clear</button>
+      <button class="secondary" id="scSay" type="button" title="Hear the word">🔊 Say it</button>
+      <button class="secondary" id="scSkip" type="button">⏭ Show answer</button>
+      <button class="primary" id="scNext" type="button">Next word →</button>
+    </div>
+  </div>
+</section>
+
+<!-- SUDOKU -->
+<section class="panel hidden" id="p-sudoku">
+  <h2>Sudoku</h2>
+  <p>Fill every row, column and box with each symbol once. Every puzzle is new and has exactly one answer.</p>
+  <div class="bar">
+    <div class="field"><label for="sdSize">Size</label><select id="sdSize"><option value="9">9 × 9</option><option value="6">6 × 6 (children)</option><option value="4">4 × 4 (young children)</option></select></div>
+    <div class="field"><label for="sdLevel">Level</label><select id="sdLevel"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option><option value="expert">Expert</option></select></div>
+    <div class="field"><label for="sdSym">Symbols</label><select id="sdSym"><option value="digits">1 2 3 … 9</option><option value="arabic">١ ٢ ٣ … ٩ (Arabic)</option><option value="chinese">一 二 三 … 九 (Chinese)</option><option value="letters">A B C … I</option></select></div>
+    <button class="primary" id="sdNew" type="button">New sudoku</button>
+  </div>
+  <div class="stats"><span>Time <b id="sdTime">0:00</b></span><span>Mistakes found <b id="sdMist">0</b></span><span>Hints <b id="sdHints">0</b></span></div>
+  <div id="sdWin" class="win hidden" role="status"></div>
+  <div class="sd-wrap printable" id="sdPrint">
+    <div class="sd" id="sd" role="grid" aria-label="Sudoku board" tabindex="0"></div>
+    <div class="noprint">
+      <div class="pad" id="pad"></div>
+      <div class="sd-tools">
+        <button class="secondary" id="sdNotes" type="button" title="Write small pencil marks (N)">✏️ Notes: off</button>
+        <button class="secondary" id="sdErase" type="button">⌫ Erase</button>
+        <button class="secondary" id="sdUndo" type="button">↶ Undo</button>
+        <button class="secondary" id="sdHint" type="button">💡 Hint</button>
+        <button class="secondary" id="sdCheck" type="button">✔ Check</button>
+        <button class="secondary" id="sdRestart" type="button">⟲ Start again</button>
+        <button class="secondary" id="sdPrintBtn" type="button">🖨 Print</button>
+      </div>
+      <p class="muted" style="margin-top:10px">Keyboard: arrow keys to move, numbers to fill, N for notes, Backspace to erase. Your game is saved on this device.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CROSSWORD -->
+<section class="panel hidden" id="p-crossword">
+  <h2>Crossword</h2>
+  <p>A new crossword every time. Tap a square, then type. Tap the same square again to switch between across and down.</p>
+  <div class="bar">
+    <div class="field"><label for="cwSize">Words</label><select id="cwSize"><option value="8">8 (quick)</option><option value="12" selected>12</option><option value="16">16 (big)</option></select></div>
+    <button class="primary" id="cwNew" type="button">New crossword</button>
+  </div>
+  <div id="cwWin" class="win hidden" role="status"></div>
+  <div class="printable" id="cwPrint">
+    <h3 id="cwTitle" style="font:700 18px 'Space Grotesk';margin:0 0 8px;display:none">Crossword</h3>
+    <div class="curclue noprint" id="cwCur" aria-live="polite"></div>
+    <div class="cw-wrap">
+      <div class="cw" id="cw"></div>
+      <div class="clues" id="clues">
+        <div><h3>Across</h3><ol id="cluesA"></ol></div>
+        <div><h3>Down</h3><ol id="cluesD"></ol></div>
+      </div>
+    </div>
+    <div class="actions noprint" style="margin-top:14px">
+      <button class="secondary" id="cwCheck" type="button">✔ Check</button>
+      <button class="secondary" id="cwLetter" type="button">💡 Show a letter</button>
+      <button class="secondary" id="cwWord" type="button">Show this word</button>
+      <button class="secondary" id="cwAll" type="button">Show all</button>
+      <button class="secondary" id="cwClear" type="button">Clear</button>
+      <button class="secondary" id="cwPrintBtn" type="button">🖨 Print</button>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR WORDS -->
+<section class="panel hidden" id="p-words">
+  <h2>Your words</h2>
+  <p>Make a scramble or crossword from your own spelling list, vocabulary or class topic. One word per line, then <b>=</b> and the clue. Any language works.</p>
+  <div class="ex">volcano = A mountain that can erupt
+glacier = A slow river of ice
+desert = A dry place with little rain</div>
+  <div class="field" style="margin-top:12px"><label for="wordsIn">Words and clues</label><textarea id="wordsIn" placeholder="word = clue"></textarea></div>
+  <div class="actions">
+    <button class="primary" id="wCross" type="button">Make a crossword</button>
+    <button class="secondary" id="wScr" type="button">Play as word scramble</button>
+    <button class="secondary" id="wShare" type="button">🔗 Copy a link to these words</button>
+    <button class="secondary" id="wExample" type="button">Try an example list</button>
+  </div>
+  <div class="status" id="wStatus" role="status"></div>
+  <p class="muted" style="margin-top:12px">Tip: in <a href="/zh/dictionary-forge.html">Dictionary Forge</a>, save the words you look up and press <b>Make a crossword</b> to bring them here with their meanings.</p>
+</section>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const W=window.MigaWords;
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const rnd=n=>Math.floor(Math.random()*n);
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- letters ---------- */
+// The letters of a word, one per square. Spaces, hyphens and apostrophes are left out.
+const letters=w=>Array.from(String(w).normalize('NFC')).filter(ch=>/[\p{L}\p{N}]/u.test(ch)).map(ch=>ch.toLocaleUpperCase());
+// Compare letters, optionally ignoring accents (é = e, أ = ا).
+const fold=ch=>$('foldAcc').checked?ch.normalize('NFD').replace(/\p{M}/gu,'').normalize('NFC').toLocaleUpperCase():ch.toLocaleUpperCase();
+const same=(a,b)=>!!a&&!!b&&fold(a)===fold(b);
+
+/* ---------- language and word lists ---------- */
+const LANG_TTS={en:'en-GB',es:'es-ES',ar:'ar-SA',zh:'zh-CN',sw:'sw-KE',sv:'sv-SE',de:'de-DE',pt:'pt-BR',fr:'fr-FR'};
+let custom=[];
+function fillLangs(){
+  const sel=$('lang'),cur=sel.value;
+  sel.innerHTML=W.langs.map(([c,n])=>'<option value="'+c+'">'+n+'</option>').join('')+(custom.length>=1?'<option value="custom">📝 Your words ('+custom.length+')</option>':'');
+  sel.value=cur&&[...sel.options].some(o=>o.value===cur)?cur:(store.get('puzzleForgeLang')||(()=>{try{return localStorage.getItem('migabuilderLang')}catch(e){return null}})()||'en');
+  if(!sel.value)sel.value='en';
+}
+const lang=()=>$('lang').value;
+const isRtl=()=>!!W.rtl[lang()]||(lang()==='custom'&&custom.some(e=>/[֐-ࣿ]/.test(e[0])));
+function entries(kind){
+  if(lang()==='custom')return custom;
+  const base=W.words[lang()]||W.words.en;
+  if(lang()==='zh')return kind==='scramble'?W.idioms.zh.concat(base.filter(e=>letters(e[0]).length>=3)):base.concat(W.idioms.zh);
+  return base;
+}
+function speak(word,l){
+  try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(word).toLocaleLowerCase());u.lang=LANG_TTS[l]||'en-GB';u.rate=.85;speechSynthesis.speak(u)}catch(e){}
+}
+
+/* ---------- tabs ---------- */
+function showTab(t){
+  document.querySelectorAll('#tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.t===t)));
+  ['scramble','sudoku','crossword','words'].forEach(x=>$('p-'+x).classList.toggle('hidden',x!==t));
+  $('langBar').classList.toggle('hidden',t==='sudoku'||t==='words');
+  store.set('puzzleForgeTab',t);
+  if(t==='crossword'&&!cw)newCrossword();
+  if(t==='sudoku'&&!sd)loadOrNewSudoku();
+}
+$('tabs').addEventListener('click',e=>{const b=e.target.closest('button[data-t]');if(b)showTab(b.dataset.t)});
+
+/* =====================================================================
+   WORD SCRAMBLE
+   ===================================================================== */
+let sc=null,scStats=store.get('puzzleForgeScramble')||{score:0,solved:0,streak:0,best:0},scRecent=[];
+function scSave(){store.set('puzzleForgeScramble',scStats);$('scScore').textContent=scStats.score;$('scSolved').textContent=scStats.solved;$('scStreak').textContent=scStats.streak;$('scBest').textContent=scStats.best}
+function newScramble(){
+  const list=entries('scramble').filter(e=>letters(e[0]).length>=3);
+  if(!list.length){$('scClue').textContent='Add at least one word with three or more letters in Your words.';$('scSlots').innerHTML=$('scTiles').innerHTML='';return}
+  let pick,guard=0;do{pick=list[rnd(list.length)];guard++}while(scRecent.includes(pick[0])&&guard<40);
+  scRecent.push(pick[0]);if(scRecent.length>Math.min(10,list.length-1))scRecent.shift();
+  const ans=letters(pick[0]);
+  let order=shuffle(ans.map((_,i)=>i)),g=0;
+  while(order.map(i=>ans[i]).join('')===ans.join('')&&g++<20)order=shuffle(order);
+  sc={entry:pick,ans,tiles:order.map(i=>({ch:ans[i],used:false})),slots:ans.map(()=>null),hints:0,done:false,lang:lang()};
+  $('scr').className='scr';$('scMsg').textContent='';$('scMsg').className='msg';
+  renderScramble();
+}
+function renderScramble(){
+  if(!sc)return;
+  const rtl=isRtl();
+  $('scClue').textContent=sc.entry[1]||'(no clue)';
+  $('scClue').dir=rtl?'rtl':'auto';
+  $('scMeaning').textContent=(sc.done||$('showEn').checked)&&sc.entry[2]&&lang()!=='en'?'English: '+sc.entry[2]:'';
+  $('scSlots').dir=rtl?'rtl':'ltr';$('scTiles').dir=rtl?'rtl':'ltr';
+  $('scSlots').innerHTML=sc.slots.map((s,i)=>'<div class="slot'+(s!=null?' filled':'')+(s!=null&&s.hint?' hint':'')+'" data-i="'+i+'" role="button" aria-label="Letter '+(i+1)+'">'+(s!=null?esc(sc.tiles[s.t].ch):'')+'</div>').join('');
+  $('scTiles').innerHTML=sc.tiles.map((t,i)=>'<button type="button" class="tile" data-i="'+i+'"'+(t.used||sc.done?' disabled':'')+'>'+esc(t.ch)+'</button>').join('');
+}
+function scPlace(ti,hint){
+  const slot=sc.slots.indexOf(null);if(slot<0||sc.tiles[ti].used)return;
+  sc.tiles[ti].used=true;sc.slots[slot]={t:ti,hint:!!hint};renderScramble();scCheck();
+}
+function scCheck(){
+  if(sc.slots.includes(null))return;
+  const guess=sc.slots.map(s=>sc.tiles[s.t].ch);
+  if(guess.every((ch,i)=>same(ch,sc.ans[i]))){
+    sc.done=true;const pts=Math.max(2,10-sc.hints*3);
+    scStats.score+=pts;scStats.solved++;scStats.streak++;scStats.best=Math.max(scStats.best,scStats.streak);scSave();
+    $('scr').className='scr ok';$('scMsg').className='msg ok';$('scMsg').textContent='✓ Right! '+sc.entry[0]+' (+'+pts+')';
+    renderScramble();speak(sc.entry[0],sc.lang);
+  }else{
+    $('scr').className='scr bad';$('scMsg').className='msg bad';$('scMsg').textContent='Not quite — tap a letter in the answer to take it back.';
+    setTimeout(()=>{if(!sc.done)$('scr').className='scr'},400);
+  }
+}
+$('scTiles').addEventListener('click',e=>{const b=e.target.closest('.tile');if(b&&sc&&!sc.done)scPlace(+b.dataset.i)});
+$('scSlots').addEventListener('click',e=>{const d=e.target.closest('.slot');if(!d||!sc||sc.done)return;const i=+d.dataset.i,s=sc.slots[i];if(!s||s.hint)return;sc.tiles[s.t].used=false;sc.slots[i]=null;$('scMsg').textContent='';renderScramble()});
+$('scHint').onclick=()=>{
+  if(!sc||sc.done)return;
+  // Take back any wrong letters, then put the next right one in place.
+  sc.slots.forEach((s,i)=>{if(s&&!same(sc.tiles[s.t].ch,sc.ans[i])){sc.tiles[s.t].used=false;sc.slots[i]=null}});
+  const i=sc.slots.indexOf(null);if(i<0)return;
+  // Empty slots before i keep their order: fill exactly slot i.
+  const ti=sc.tiles.findIndex(t=>!t.used&&same(t.ch,sc.ans[i]));if(ti<0)return;
+  sc.tiles[ti].used=true;sc.slots[i]={t:ti,hint:true};sc.hints++;$('scMsg').textContent='';renderScramble();scCheck();
+};
+$('scShuffle').onclick=()=>{if(!sc||sc.done)return;const free=sc.tiles.map((t,i)=>i).filter(i=>!sc.tiles[i].used);const mixed=shuffle(free.map(i=>sc.tiles[i]));
+  // Keep the tiles already placed where they are.
+  free.forEach((i,k)=>{sc.tiles[i]=mixed[k]});renderScramble()};
+$('scClear').onclick=()=>{if(!sc||sc.done)return;sc.slots.forEach((s,i)=>{if(s&&!s.hint){sc.tiles[s.t].used=false;sc.slots[i]=null}});$('scMsg').textContent='';renderScramble()};
+$('scSkip').onclick=()=>{if(!sc||sc.done)return;sc.done=true;scStats.streak=0;scSave();
+  sc.tiles.forEach(t=>t.used=false);sc.slots=sc.ans.map(ch=>{const ti=sc.tiles.findIndex(t=>!t.used&&t.ch===ch);sc.tiles[ti].used=true;return{t:ti,hint:true}});
+  $('scMsg').className='msg';$('scMsg').textContent='The answer is '+sc.entry[0]+'.';renderScramble();speak(sc.entry[0],sc.lang)};
+$('scSay').onclick=()=>{if(!sc)return;if(sc.done)speak(sc.entry[0],sc.lang);else{$('scMsg').className='msg';$('scMsg').textContent='Solve it first — or press Show answer to hear it.'}};
+$('scNext').onclick=newScramble;
+document.addEventListener('keydown',e=>{
+  if($('p-scramble').classList.contains('hidden')||!sc||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(/^(input|textarea|select)$/i.test(document.activeElement.tagName))return;
+  if(e.key==='Enter'&&sc.done){e.preventDefault();newScramble();return}
+  if(sc.done)return;
+  if(e.key==='Backspace'){e.preventDefault();for(let i=sc.slots.length-1;i>=0;i--){const s=sc.slots[i];if(s&&!s.hint){sc.tiles[s.t].used=false;sc.slots[i]=null;renderScramble();break}}return}
+  if(Array.from(e.key).length!==1)return;
+  const ti=sc.tiles.findIndex(t=>!t.used&&same(t.ch,e.key));if(ti>=0){e.preventDefault();scPlace(ti)}
+});
+
+/* =====================================================================
+   SUDOKU
+   ===================================================================== */
+const SYMS={digits:'123456789',arabic:'١٢٣٤٥٦٧٨٩',chinese:'一二三四五六七八九',letters:'ABCDEFGHI'};
+const BOX={4:[2,2],6:[2,3],9:[3,3]}; // [box rows, box columns]
+// Peers of each cell for an n×n board.
+function peersOf(n){const [br,bc]=BOX[n],P=[];for(let i=0;i<n*n;i++){const r=Math.floor(i/n),c=i%n,s=new Set();for(let k=0;k<n;k++){s.add(r*n+k);s.add(k*n+c)}const r0=r-r%br,c0=c-c%bc;for(let a=0;a<br;a++)for(let b=0;b<bc;b++)s.add((r0+a)*n+c0+b);s.delete(i);P.push([...s])}return P}
+const PEERS={4:peersOf(4),6:peersOf(6),9:peersOf(9)};
+// Count solutions (stops at `limit`). grid: array of 0..n. Fills `out` with the first solution.
+function solve(grid,n,limit,out,random){
+  const g=grid.slice(),P=PEERS[n],full=(1<<n)-1;let count=0;
+  function cand(i){let m=0;for(const p of P[i])if(g[p])m|=1<<(g[p]-1);return full&~m}
+  function rec(){
+    let best=-1,bm=0,bc=99;
+    for(let i=0;i<g.length;i++)if(!g[i]){const m=cand(i);let c=0;for(let x=m;x;x&=x-1)c++;if(c<bc){bc=c;best=i;bm=m;if(c<=1)break}}
+    if(best<0){count++;if(out&&count===1)out.splice(0,out.length,...g);return count>=limit}
+    if(!bc)return false;
+    let vals=[];for(let v=1;v<=n;v++)if(bm&(1<<(v-1)))vals.push(v);if(random)vals=shuffle(vals);
+    for(const v of vals){g[best]=v;if(rec())return true}
+    g[best]=0;return false;
+  }
+  rec();return count;
+}
+const GIVENS={9:{easy:40,medium:33,hard:28,expert:24},6:{easy:22,medium:18,hard:15,expert:13},4:{easy:9,medium:7,hard:6,expert:5}};
+function makeSudoku(n,level){
+  const sol=[];solve(new Array(n*n).fill(0),n,1,sol,true);
+  const puz=sol.slice(),target=GIVENS[n][level]||GIVENS[n].medium;let givens=n*n;
+  for(const i of shuffle([...Array(n*n).keys()])){
+    if(givens<=target)break;
+    const keep=puz[i];puz[i]=0;
+    if(solve(puz,n,2)!==1)puz[i]=keep;else givens--;
+  }
+  return{n,level,puzzle:puz,solution:sol};
+}
+let sd=null,sdSel=-1,sdNotesOn=false,sdTimer=null;
+function sdSym(v){return v?SYMS[$('sdSym').value][v-1]:''}
+function sdSave(){if(sd)store.set('puzzleForgeSudoku',sd)}
+function sdStart(game){
+  sd=game;sdSel=sd.cells.findIndex(c=>!c.given);
+  $('sdWin').classList.add('hidden');renderSudoku();sdTick();
+}
+function newSudoku(){
+  const n=+$('sdSize').value,level=$('sdLevel').value;
+  const g=makeSudoku(n,level);
+  sdStart({n,level,sym:$('sdSym').value,solution:g.solution,cells:g.puzzle.map(v=>({v,given:!!v,notes:[]})),undo:[],secs:0,mistakes:0,hints:0,done:false});
+  sdSave();
+}
+function loadOrNewSudoku(){
+  const s=store.get('puzzleForgeSudoku');
+  if(s&&s.cells&&!s.done&&PEERS[s.n]){$('sdSize').value=s.n;$('sdLevel').value=s.level;if(s.sym)$('sdSym').value=s.sym;sdStart(s)}else newSudoku();
+}
+function sdTick(){clearInterval(sdTimer);sdTimer=setInterval(()=>{if(!sd||sd.done||document.hidden||$('p-sudoku').classList.contains('hidden'))return;sd.secs++;$('sdTime').textContent=fmtTime(sd.secs);if(sd.secs%5===0)sdSave()},1000)}
+const fmtTime=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+function renderSudoku(){
+  if(!sd)return;
+  const n=sd.n,[br,bc]=BOX[n],P=PEERS[n],el=$('sd');
+  el.style.setProperty('--n',n);
+  const selV=sdSel>=0?sd.cells[sdSel].v:0;
+  let html='';
+  sd.cells.forEach((c,i)=>{
+    const r=Math.floor(i/n),col=i%n,cls=['c'];
+    if(c.given)cls.push('given');
+    if((col+1)%bc===0&&col<n-1)cls.push('br');if((r+1)%br===0&&r<n-1)cls.push('bb');
+    if(i===sdSel)cls.push('sel');else if(selV&&c.v===selV)cls.push('same');else if(sdSel>=0&&P[sdSel].includes(i))cls.push('peer');
+    if(c.v&&P[i].some(p=>sd.cells[p].v===c.v))cls.push('conflict');
+    if(c.wrong&&c.v)cls.push('wrong');
+    let inner=sdSym(c.v);
+    if(!c.v&&c.notes.length){const cols=n===9?3:n===6?3:2;inner='<div class="notes" style="grid-template-columns:repeat('+cols+',1fr)">'+[...Array(n).keys()].map(k=>'<span>'+(c.notes.includes(k+1)?sdSym(k+1):'')+'</span>').join('')+'</div>'}
+    html+='<div class="'+cls.join(' ')+'" data-i="'+i+'" role="gridcell" aria-label="Row '+(r+1)+', column '+(col+1)+(c.v?', '+sdSym(c.v):', empty')+'">'+inner+'</div>';
+  });
+  el.innerHTML=html;
+  const counts=new Array(n+1).fill(0);sd.cells.forEach(c=>{if(c.v)counts[c.v]++});
+  $('pad').style.gridTemplateColumns=window.innerWidth<=520?'':'repeat('+(n===4?2:3)+',62px)';
+  $('pad').innerHTML=[...Array(n).keys()].map(k=>'<button type="button" data-v="'+(k+1)+'"'+(counts[k+1]>=n?' class="done"':'')+'>'+sdSym(k+1)+'</button>').join('');
+  $('sdTime').textContent=fmtTime(sd.secs);$('sdMist').textContent=sd.mistakes;$('sdHints').textContent=sd.hints;
+  $('sdNotes').textContent='✏️ Notes: '+(sdNotesOn?'on':'off');$('sdNotes').classList.toggle('on',sdNotesOn);
+}
+function sdSet(v){
+  if(!sd||sd.done||sdSel<0)return;const c=sd.cells[sdSel];if(c.given)return;
+  sd.undo.push({i:sdSel,v:c.v,notes:c.notes.slice()});if(sd.undo.length>300)sd.undo.shift();
+  if(sdNotesOn&&v){c.v=0;c.notes=c.notes.includes(v)?c.notes.filter(x=>x!==v):c.notes.concat(v).sort()}
+  else{c.v=c.v===v?0:v;c.notes=[];c.wrong=false;
+    // Remove this symbol from the notes of the cells it now rules out.
+    if(c.v)PEERS[sd.n][sdSel].forEach(p=>{const pc=sd.cells[p];if(pc.notes.length)pc.notes=pc.notes.filter(x=>x!==c.v)})}
+  renderSudoku();sdWinCheck();sdSave();
+}
+function sdWinCheck(){
+  if(sd.cells.every((c,i)=>c.v===sd.solution[i])){
+    sd.done=true;sdSave();const lv={easy:'easy',medium:'medium',hard:'hard',expert:'expert'}[sd.level];
+    $('sdWin').textContent='🎉 Solved! '+sd.n+'×'+sd.n+' '+lv+' in '+fmtTime(sd.secs)+(sd.hints?' with '+sd.hints+' hint'+(sd.hints>1?'s':''):' with no hints')+'. Press New sudoku for another one.';
+    $('sdWin').classList.remove('hidden');
+  }
+}
+$('sd').addEventListener('click',e=>{const d=e.target.closest('.c');if(!d)return;sdSel=+d.dataset.i;renderSudoku();$('sd').focus({preventScroll:true})});
+$('pad').addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(b)sdSet(+b.dataset.v)});
+$('sdErase').onclick=()=>{if(!sd||sdSel<0)return;const c=sd.cells[sdSel];if(c.given||sd.done)return;sd.undo.push({i:sdSel,v:c.v,notes:c.notes.slice()});c.v=0;c.notes=[];c.wrong=false;renderSudoku();sdSave()};
+$('sdNotes').onclick=()=>{sdNotesOn=!sdNotesOn;renderSudoku()};
+$('sdUndo').onclick=()=>{if(!sd||sd.done)return;const u=sd.undo.pop();if(!u)return;const c=sd.cells[u.i];c.v=u.v;c.notes=u.notes;sdSel=u.i;renderSudoku();sdSave()};
+$('sdHint').onclick=()=>{
+  if(!sd||sd.done)return;
+  let i=sdSel>=0&&!sd.cells[sdSel].given&&sd.cells[sdSel].v!==sd.solution[sdSel]?sdSel:-1;
+  if(i<0){const open=sd.cells.map((c,k)=>k).filter(k=>sd.cells[k].v!==sd.solution[k]);if(!open.length)return;
+    // Prefer the cell with the fewest possibilities, like a person would.
+    i=open.sort((a,b)=>PEERS[sd.n][b].filter(p=>sd.cells[p].v).length-PEERS[sd.n][a].filter(p=>sd.cells[p].v).length)[0]}
+  const c=sd.cells[i];sd.undo.push({i,v:c.v,notes:c.notes.slice()});c.v=sd.solution[i];c.notes=[];c.wrong=false;sd.hints++;sdSel=i;
+  PEERS[sd.n][i].forEach(p=>{const pc=sd.cells[p];if(pc.notes.length)pc.notes=pc.notes.filter(x=>x!==c.v)});
+  renderSudoku();sdWinCheck();sdSave();
+};
+$('sdCheck').onclick=()=>{if(!sd)return;let bad=0;sd.cells.forEach((c,i)=>{if(c.v&&!c.given&&c.v!==sd.solution[i]){c.wrong=true;bad++}});sd.mistakes+=bad;renderSudoku();sdSave();
+  $('sdWin').textContent=bad?'✗ '+bad+' square'+(bad>1?'s are':' is')+' wrong (crossed out).':'✓ Everything so far is right.';$('sdWin').classList.remove('hidden');setTimeout(()=>{if(sd&&!sd.done)$('sdWin').classList.add('hidden')},3500)};
+$('sdRestart').onclick=()=>{if(!sd)return;sd.cells.forEach(c=>{if(!c.given){c.v=0;c.notes=[];c.wrong=false}});sd.undo=[];sd.secs=0;sd.done=false;sd.hints=0;sd.mistakes=0;$('sdWin').classList.add('hidden');renderSudoku();sdSave()};
+$('sdNew').onclick=newSudoku;
+$('sdSym').onchange=()=>{if(sd){sd.sym=$('sdSym').value;renderSudoku();sdSave()}};
+$('sdPrintBtn').onclick=()=>{const prev=sdSel;sdSel=-1;renderSudoku();window.print();sdSel=prev;renderSudoku()};
+$('sd').addEventListener('keydown',e=>{
+  if(!sd)return;const n=sd.n;
+  const mv={ArrowUp:-n,ArrowDown:n,ArrowLeft:-1,ArrowRight:1}[e.key];
+  if(mv){e.preventDefault();if(sdSel<0)sdSel=0;else{const r=Math.floor(sdSel/n),c=sdSel%n;if(mv===-1&&c>0||mv===1&&c<n-1||mv===-n&&r>0||mv===n&&r<n-1)sdSel+=mv}renderSudoku();return}
+  if(e.key==='Backspace'||e.key==='Delete'||e.key==='0'){e.preventDefault();$('sdErase').click();return}
+  if(e.key==='n'||e.key==='N'){sdNotesOn=!sdNotesOn;renderSudoku();return}
+  if(e.ctrlKey&&e.key==='z'){e.preventDefault();$('sdUndo').click();return}
+  let v=+e.key;const sy=SYMS[$('sdSym').value],k=sy.indexOf(e.key.toUpperCase());if(!(v>=1&&v<=n)&&k>=0)v=k+1;
+  if(v>=1&&v<=n){e.preventDefault();sdSet(v)}
+});
+
+/* =====================================================================
+   CROSSWORD
+   ===================================================================== */
+// Builds a crossword from [word, clue, meaning] entries. Returns placed words with x, y, dir ('a' or 'd').
+function makeCrossword(list,want,tries){
+  const pool=list.map(e=>({e,L:letters(e[0])})).filter(o=>o.L.length>=2&&o.L.length<=13);
+  // Drop duplicates.
+  const seen=new Set();const uniq=pool.filter(o=>{const k=o.L.join('');if(seen.has(k))return false;seen.add(k);return true});
+  let best=null;
+  for(let t=0;t<(tries||40);t++){
+    const pick=shuffle(uniq).slice(0,Math.min(uniq.length,Math.max(Math.round(want*2.5),40))).sort((a,b)=>b.L.length-a.L.length+(Math.random()-.5)*2);
+    const grid=new Map(),placed=[];
+    const at=(x,y)=>grid.get(x+','+y);
+    const fits=(L,x,y,d)=>{
+      const dx=d==='a'?1:0,dy=d==='a'?0:1;let cross=0;
+      if(at(x-dx,y-dy)||at(x+dx*L.length,y+dy*L.length))return -1;
+      for(let k=0;k<L.length;k++){
+        const cx=x+dx*k,cy=y+dy*k,g=at(cx,cy);
+        if(g){if(g.ch!==L[k]||g[d])return -1;cross++}
+        else if(at(cx+dy,cy+dx)||at(cx-dy,cy-dx))return -1; // no side-by-side letters
+      }
+      return cross;
+    };
+    const put=(o,x,y,d)=>{const dx=d==='a'?1:0,dy=d==='a'?0:1;o.L.forEach((ch,k)=>{const key=(x+dx*k)+','+(y+dy*k);const g=grid.get(key)||{ch};g[d]=true;grid.set(key,g)});placed.push({e:o.e,L:o.L,x,y,d})};
+    // Start with a long word that shares letters with many others.
+    const links=o=>pick.filter(q=>q!==o&&q.L.some(ch=>o.L.includes(ch))).length;
+    const first=pick.reduce((b,o)=>{const v=links(o)*2+o.L.length+Math.random()*3;return v>b.v?{o,v}:b},{o:pick[0],v:-1}).o;
+    pick.splice(pick.indexOf(first),1);pick.unshift(first);
+    put(pick[0],0,0,Math.random()<.5?'a':'d');
+    // Words that do not fit yet may fit after others are placed, so go round a few times.
+    let left=pick.slice(1),progress=true;
+    for(let pass=0;pass<4&&progress&&placed.length<want;pass++){progress=false;const next=[];
+    for(const o of left){
+      if(placed.length>=want)break;
+      let opts=[];
+      for(const [key,g] of grid){const [gx,gy]=key.split(',').map(Number);
+        o.L.forEach((ch,k)=>{if(ch!==g.ch)return;
+          for(const d of ['a','d']){if(g[d])continue;const x=d==='a'?gx-k:gx,y=d==='a'?gy:gy-k;const c=fits(o.L,x,y,d);if(c>0)opts.push({x,y,d,c})}})}
+      if(!opts.length){next.push(o);continue}
+      // Prefer more crossings and keeping the grid square.
+      const box=()=>{let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const k of grid.keys()){const [x,y]=k.split(',').map(Number);x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)}return[x0,x1,y0,y1]};
+      const [x0,x1,y0,y1]=box();
+      opts.forEach(p=>{const ex=p.d==='a'?p.x+o.L.length-1:p.x,ey=p.d==='d'?p.y+o.L.length-1:p.y;const w=Math.max(x1,ex)-Math.min(x0,p.x)+1,h=Math.max(y1,ey)-Math.min(y0,p.y)+1;p.s=p.c*10-Math.max(w,h)-Math.abs(w-h)*.5+Math.random()});
+      opts.sort((a,b)=>b.s-a.s);const p=opts[0];put(o,p.x,p.y,p.d);progress=true;
+    }
+    left=next}
+    let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;for(const k of grid.keys()){const [x,y]=k.split(',').map(Number);x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)}
+    const w=x1-x0+1,h=y1-y0+1,score=placed.length*100-Math.max(w,h)*3-w*h/20;
+    if(!best||score>best.score)best={score,placed:placed.map(p=>({...p,x:p.x-x0,y:p.y-y0})),w,h};
+    if(best.placed.length>=want&&t>12)break;
+  }
+  if(!best)return null;
+  // Number the words in reading order.
+  const starts=new Map();
+  best.placed.slice().sort((a,b)=>a.y-b.y||a.x-b.x).forEach(p=>{const k=p.x+','+p.y;if(!starts.has(k))starts.set(k,starts.size+1);p.n=starts.get(k)});
+  best.placed.sort((a,b)=>a.n-b.n);
+  return best;
+}
+let cw=null,cwCur={i:-1,word:-1},cwDir='a';
+function newCrossword(){
+  const list=entries('crossword');
+  if(list.length<2){$('cw').innerHTML='<p class="muted">Add at least two words in Your words.</p>';$('cluesA').innerHTML=$('cluesD').innerHTML='';return}
+  const want=+$('cwSize').value,b=makeCrossword(list,Math.min(want,list.length));
+  if(!b){return}
+  const cells=new Map();
+  b.placed.forEach((p,wi)=>{p.cells=p.L.map((ch,k)=>{const x=p.x+(p.d==='a'?k:0),y=p.y+(p.d==='d'?k:0),key=x+','+y;let c=cells.get(key);if(!c){c={x,y,ch,val:'',words:[]};cells.set(key,c)}c.words.push(wi);return key})});
+  cw={...b,cells,lang:lang(),rtl:isRtl(),done:false};
+  $('cwWin').classList.add('hidden');renderCrossword();
+}
+function renderCrossword(){
+  const g=$('cw'),room=Math.min($('cwPrint').clientWidth||600,640),cs=Math.max(16,Math.min(38,Math.floor((room-4)/cw.w)));
+  g.style.setProperty('--cs',cs+'px');g.style.gridTemplateColumns='repeat('+cw.w+',var(--cs))';g.dir=cw.rtl?'rtl':'ltr';
+  const nums=new Map();cw.placed.forEach(p=>nums.set(p.x+','+p.y,p.n));
+  let html='';
+  for(let y=0;y<cw.h;y++)for(let x=0;x<cw.w;x++){const key=x+','+y,c=cw.cells.get(key);
+    if(!c){html+='<div class="x b"></div>';continue}
+    html+='<div class="x l" data-k="'+key+'">'+(nums.has(key)?'<span class="num">'+nums.get(key)+'</span>':'')+'<input aria-label="Square" autocomplete="off" autocapitalize="characters" spellcheck="false" value="'+esc(c.val)+'"></div>'}
+  g.innerHTML=html;
+  const li=(p,wi)=>'<li data-w="'+wi+'"><b>'+p.n+'</b> '+esc(p.e[1]||'')+' <span class="muted">('+p.L.length+')</span>'+($('showEn').checked&&p.e[2]&&cw.lang!=='en'?'<small>'+esc(p.e[2])+'</small>':'')+'</li>';
+  $('cluesA').innerHTML=cw.placed.map((p,i)=>p.d==='a'?li(p,i):'').join('');
+  $('cluesD').innerHTML=cw.placed.map((p,i)=>p.d==='d'?li(p,i):'').join('');
+  $('clues').dir=cw.rtl?'rtl':'ltr';
+  $('cwTitle').textContent='Crossword — '+($('lang').selectedOptions[0]||{}).text;
+  cwMark();
+}
+const cwInput=key=>$('cw').querySelector('[data-k="'+key+'"] input');
+function cwMark(){
+  if(!cw)return;
+  $('cw').querySelectorAll('.x.l').forEach(el=>{el.classList.remove('word','cur')});
+  document.querySelectorAll('#clues li').forEach(l=>{const p=cw.placed[+l.dataset.w];l.classList.toggle('on',+l.dataset.w===cwCur.word);l.classList.toggle('solved',p.cells.every((k,i)=>same(cw.cells.get(k).val,p.L[i])))});
+  if(cwCur.word<0){$('cwCur').textContent='';return}
+  const p=cw.placed[cwCur.word];
+  p.cells.forEach(k=>$('cw').querySelector('[data-k="'+k+'"]').classList.add('word'));
+  const cur=$('cw').querySelector('[data-k="'+cwCur.key+'"]');if(cur)cur.classList.add('cur');
+  $('cwCur').textContent=p.n+' '+(p.d==='a'?'across':'down')+': '+(p.e[1]||'');
+  $('cwCur').dir=cw.rtl?'rtl':'auto';
+}
+function cwFocus(key,word){
+  const c=cw.cells.get(key);if(!c)return;
+  if(word==null||!c.words.includes(word)){word=c.words.find(w=>cw.placed[w].d===cwDir);if(word==null)word=c.words[0]}
+  cwDir=cw.placed[word].d;cwCur={key,word};cwMark();
+  const inp=cwInput(key);if(inp&&document.activeElement!==inp)inp.focus({preventScroll:false});
+}
+function cwStep(delta){
+  const p=cw.placed[cwCur.word];if(!p)return;const k=p.cells.indexOf(cwCur.key)+delta;
+  if(k>=0&&k<p.cells.length)cwFocus(p.cells[k],cwCur.word);
+}
+function cwWinCheck(){
+  if(!cw||cw.done)return;
+  if([...cw.cells.values()].every(c=>same(c.val,c.ch))){cw.done=true;$('cwWin').textContent='🎉 Finished! Every word is right. Press New crossword for another one.';$('cwWin').classList.remove('hidden')}
+}
+$('cw').addEventListener('mousedown',e=>{const el=e.target.closest('.x.l');if(!el||!cw)return;
+  const key=el.dataset.k,c=cw.cells.get(key);
+  // A second tap on the same square switches between across and down.
+  if(cwCur.key===key&&c.words.length>1){e.preventDefault();const other=c.words.find(w=>w!==cwCur.word);cwFocus(key,other)}});
+$('cw').addEventListener('focusin',e=>{const el=e.target.closest('.x.l');if(!el||!cw)return;if(e.target.select)e.target.select();if(cwCur.key!==el.dataset.k)cwFocus(el.dataset.k,cw.cells.get(el.dataset.k).words.includes(cwCur.word)?cwCur.word:null)});
+// Chinese is typed through an input method (pinyin → 汉字), so wait until the character is chosen.
+// Phone keyboards such as Gboard also "compose" ordinary letters, so for other languages take each letter at once.
+const cwNeedsIme=()=>cw&&cw.placed.some(p=>p.L.some(ch=>/[\u2E80-\u9FFF\uAC00-\uD7AF]/.test(ch)));
+$('cw').addEventListener('input',e=>{
+  if(!cw||(e.isComposing&&cwNeedsIme()))return;const el=e.target.closest('.x.l');if(!el)return;
+  const c=cw.cells.get(el.dataset.k),chars=letters(e.target.value);
+  c.val=chars.length?chars[chars.length-1]:'';e.target.value=c.val;el.classList.remove('wrong','shown');
+  // Only the square being typed in moves on; a late event from the square just left must not skip one.
+  if(c.val&&el.dataset.k===cwCur.key)cwStep(1);cwMark();cwWinCheck();
+});
+$('cw').addEventListener('compositionend',e=>{e.target.dispatchEvent(new Event('input',{bubbles:true}))});
+$('cw').addEventListener('keydown',e=>{
+  if(!cw||cwCur.word<0)return;const p=cw.placed[cwCur.word];
+  if(e.key==='Backspace'){const c=cw.cells.get(cwCur.key);if(!c.val){e.preventDefault();cwStep(-1);const c2=cw.cells.get(cwCur.key);c2.val='';cwInput(cwCur.key).value=''}else{c.val='';e.target.value='';e.preventDefault()}cwMark();return}
+  const [x,y]=cwCur.key.split(',').map(Number);
+  let dx=0,dy=0;if(e.key==='ArrowUp')dy=-1;else if(e.key==='ArrowDown')dy=1;else if(e.key==='ArrowLeft')dx=cw.rtl?1:-1;else if(e.key==='ArrowRight')dx=cw.rtl?-1:1;
+  if(dx||dy){e.preventDefault();const want=dx?'a':'d';if(p.d!==want&&cw.cells.get(cwCur.key).words.some(w=>cw.placed[w].d===want)){cwDir=want;cwFocus(cwCur.key)}else{const k=(x+dx)+','+(y+dy);if(cw.cells.has(k)){cwDir=want;cwFocus(k)}}return}
+  if(e.key==='Tab'){e.preventDefault();const nw=(cwCur.word+(e.shiftKey?-1:1)+cw.placed.length)%cw.placed.length;cwFocus(cw.placed[nw].cells[0],nw)}
+});
+$('clues').addEventListener('click',e=>{const l=e.target.closest('li[data-w]');if(!l||!cw)return;const w=+l.dataset.w,p=cw.placed[w];const k=p.cells.find(k=>!cw.cells.get(k).val)||p.cells[0];cwFocus(k,w)});
+function cwReveal(keys){keys.forEach(k=>{const c=cw.cells.get(k);if(same(c.val,c.ch))return;c.val=c.ch;const i=cwInput(k);i.value=c.ch;i.parentElement.classList.add('shown');i.parentElement.classList.remove('wrong')});cwMark();cwWinCheck()}
+$('cwCheck').onclick=()=>{if(!cw)return;let bad=0,empty=0;cw.cells.forEach((c,k)=>{const el=cwInput(k).parentElement;if(!c.val){empty++;return}const ok=same(c.val,c.ch);el.classList.toggle('wrong',!ok);if(!ok)bad++});
+  $('cwWin').textContent=bad?'✗ '+bad+' letter'+(bad>1?'s are':' is')+' wrong (shown in red).'+(empty?' '+empty+' still empty.':''):empty?'✓ No mistakes so far. '+empty+' squares to go.':'';$('cwWin').classList.toggle('hidden',!$('cwWin').textContent);cwWinCheck()};
+$('cwLetter').onclick=()=>{if(!cw)return;let k=cwCur.key&&!same(cw.cells.get(cwCur.key).val,cw.cells.get(cwCur.key).ch)?cwCur.key:null;
+  if(!k&&cwCur.word>=0)k=cw.placed[cwCur.word].cells.find(k=>!same(cw.cells.get(k).val,cw.cells.get(k).ch));
+  if(!k)k=[...cw.cells.keys()].find(k=>!same(cw.cells.get(k).val,cw.cells.get(k).ch));if(k)cwReveal([k])};
+$('cwWord').onclick=()=>{if(!cw)return;if(cwCur.word<0){$('cwCur').textContent='Tap a square or a clue first.';return}cwReveal(cw.placed[cwCur.word].cells)};
+$('cwAll').onclick=()=>{if(cw)cwReveal([...cw.cells.keys()])};
+$('cwClear').onclick=()=>{if(!cw)return;cw.cells.forEach(c=>c.val='');cw.done=false;$('cwWin').classList.add('hidden');renderCrossword()};
+$('cwNew').onclick=newCrossword;
+$('cwPrintBtn').onclick=()=>{if(!cw)return;$('cwTitle').style.display='block';const cur=cwCur;cwCur={key:null,word:-1};cwMark();window.print();$('cwTitle').style.display='none';cwCur=cur;cwMark()};
+// Redraw only when the width changes: a phone keyboard opening changes the height, and a redraw would close it again.
+let cwWidth=window.innerWidth;
+window.addEventListener('resize',()=>{if(window.innerWidth===cwWidth)return;cwWidth=window.innerWidth;
+  if(cw&&!$('p-crossword').classList.contains('hidden')){const had=document.activeElement&&document.activeElement.closest&&document.activeElement.closest('#cw');renderCrossword();if(had&&cwCur.key)cwFocus(cwCur.key,cwCur.word)}});
+
+/* =====================================================================
+   YOUR WORDS
+   ===================================================================== */
+function parseWords(text){
+  return text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>{const m=l.match(/^(.+?)\s*(?:=|\t|\s[-–—:]\s)\s*(.*)$/);return m?[m[1].trim(),m[2].trim(),'']:[l,'','']}).filter(e=>letters(e[0]).length>=2);
+}
+function useWords(min){
+  custom=parseWords($('wordsIn').value);store.set('puzzleForgeWords',$('wordsIn').value);
+  if(custom.length<(min||2)){status('Type at least '+(min===1?'one word':'two words')+', one per line, like:  volcano = A mountain that can erupt');return false}
+  const noClue=custom.filter(e=>!e[1]).length;
+  fillLangs(true);$('lang').value='custom';
+  status('Using your '+custom.length+' words.'+(noClue?' '+noClue+' have no clue yet — the crossword will show the word length only.':''));
+  return true;
+}
+function status(t){$('wStatus').textContent=t;$('wStatus').classList.add('show')}
+$('wCross').onclick=()=>{if(useWords()){showTab('crossword');newCrossword()}};
+$('wScr').onclick=()=>{if(useWords(1)){showTab('scramble');newScramble()}};
+$('wExample').onclick=()=>{$('wordsIn').value='volcano = A mountain that can erupt\nglacier = A slow river of ice\ndesert = A dry place with little rain\nisland = Land with water all around it\nvalley = Low land between hills\nwaterfall = A river falling over a cliff\ncanyon = A deep valley with steep sides\nlagoon = A lake cut off from the sea by sand\nvolcanic = Made by a volcano\ncoast = Where the land meets the sea';status('Example loaded. Press Make a crossword.')};
+$('wShare').onclick=async()=>{const t=$('wordsIn').value.trim();if(!t){status('Type your words first.');return}const url=location.origin+location.pathname+'#words='+encodeURIComponent(t);
+  try{await navigator.clipboard.writeText(url);status('Link copied. Anyone who opens it gets these words.')}catch(e){status(url)}};
+function fromHash(){
+  const m=location.hash.match(/words=([^&]*)/);if(!m)return false;
+  try{$('wordsIn').value=decodeURIComponent(m[1])}catch(e){return false}
+  const t=/[#&]play=scramble/.test(location.hash)?'scramble':'crossword';
+  if(useWords(t==='scramble'?1:2)){showTab(t);t==='crossword'?newCrossword():newScramble();return true}
+  showTab('words');return true;
+}
+
+/* ---------- start ---------- */
+$('wordsIn').value=store.get('puzzleForgeWords')||'';
+custom=parseWords($('wordsIn').value);
+fillLangs();
+$('lang').onchange=()=>{if(lang()!=='custom')store.set('puzzleForgeLang',lang());newScramble();if(!$('p-crossword').classList.contains('hidden')||cw)newCrossword()};
+$('showEn').onchange=()=>{renderScramble();if(cw)renderCrossword()};
+scSave();
+if(!fromHash()){newScramble();showTab(store.get('puzzleForgeTab')||'scramble')}
+window.addEventListener('hashchange',fromHash);
+window.PuzzleForge={letters,makeCrossword,makeSudoku,solve,parseWords,state:()=>({sc,sd,cw})};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
