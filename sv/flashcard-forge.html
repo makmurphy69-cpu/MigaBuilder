@@ -1,0 +1,514 @@
+<!-- Generated from /flashcard-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="sv" data-en-title="Flashcards with spaced repetition, images, games and stats — Flashcard Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flashcards med repetition med intervall, bilder, spel och statistik — Flashcard Forge | MigaBuilder</title>
+<meta name="description" content="Flashcard Forge gör kortlekar genom att du skriver, klistrar in eller låter AI göra om dina anteckningar till kort, och schemalägger repetitioner med Anki-liknande spridd repetition.">
+<link rel="canonical" href="https://migabuilder.com/sv/flashcard-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/flashcard-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Flashcards med repetition med intervall, bilder, spel och statistik — Flashcard Forge">
+<meta property="og:description" content="Flashcard Forge gör kortlekar genom att du skriver, klistrar in eller låter AI göra om dina anteckningar till kort, och schemalägger repetitioner med Anki-liknande spridd repetition.">
+<meta property="og:url" content="https://migabuilder.com/sv/flashcard-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="ai-client.js"></script>
+<script src="script-keyboard.js"></script>
+<style>
+.decks{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
+.deck{background:#fff;border:2px solid rgba(22,32,43,.12);border-radius:6px;padding:12px;cursor:pointer;text-align:left;font:inherit;color:var(--ink);position:relative}
+.deck.active{border-color:var(--amber);background:#fff7e6}.deck b{display:block;font:700 15px 'Space Grotesk';padding-right:40px}.deck small{color:rgba(22,32,43,.72)}
+.deck .due{position:absolute;top:10px;right:10px;background:#D8604A;color:#fff;border-radius:999px;padding:1px 8px;font-size:12px;font-weight:700}.deck .due.zero{background:#4E9E73}
+.streak{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin:0 0 12px;font-size:14px}.streak b{font:700 20px 'Space Grotesk'}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid rgba(22,32,43,.15);margin:10px 0 14px}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:700;cursor:pointer;color:rgba(22,32,43,.72);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button.active{color:var(--ink);border-bottom-color:var(--amber)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;font-size:13.5px}
+.toolbar select,.toolbar input[type=search]{padding:8px;border:1px solid rgba(22,32,43,.25);border-radius:4px;background:#fff;font-size:13.5px}
+.toolbar label{display:flex;gap:5px;align-items:center}
+.card-list{display:grid;gap:8px}
+.crow{display:grid;grid-template-columns:1fr 1fr 150px auto;gap:8px;align-items:start;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px}
+.crow textarea,.crow input{width:100%;min-height:44px;padding:8px;border:1px solid rgba(22,32,43,.2);border-radius:3px;font:inherit;resize:vertical;background:#fff}
+.crow input{min-height:0}.crow .meta{font-size:11.5px;color:rgba(22,32,43,.72);grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.crow .btns{display:flex;flex-direction:column;gap:4px}.crow .btns button{padding:6px 9px;border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:4px;cursor:pointer}
+.crow img{max-height:60px;border-radius:4px;vertical-align:middle}
+.star-on{color:#b7831d}
+.flash{perspective:1400px;max-width:680px;margin:0 auto}
+.flash-inner{position:relative;min-height:280px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.flash.flipped .flash-inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:30px 26px;text-align:center;font:600 25px/1.35 'Space Grotesk';box-shadow:0 8px 24px rgba(8,24,38,.12);overflow:auto;white-space:pre-wrap}
+.face.back{transform:rotateY(180deg);font:500 20px/1.5 'IBM Plex Sans';background:#fbfaf6}
+.face .lbl{position:absolute;top:10px;left:14px;font:600 11px 'IBM Plex Sans';color:rgba(22,32,43,.72);text-transform:uppercase;letter-spacing:.06em}
+.face .tagline{position:absolute;bottom:8px;left:0;right:0;font:500 11px 'IBM Plex Sans';color:rgba(22,32,43,.72)}
+.face img{max-width:100%;max-height:150px;border-radius:6px;object-fit:contain}
+.face .q-small{font:500 15px 'IBM Plex Sans';color:rgba(22,32,43,.72)}
+.cloze{background:#fff2cc;border-bottom:2px solid #E2A63B;padding:0 6px;border-radius:3px}.cloze-a{background:#dff1e6;padding:0 4px;border-radius:3px}
+.card-tools{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}.card-tools button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:6px 12px;cursor:pointer;font-size:13px;color:var(--ink)}
+.grade{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:680px;margin:14px auto 0}
+.grade button{padding:12px 6px;border-radius:6px;border:0;font-weight:700;cursor:pointer;color:#fff}
+.g1{background:#D8604A}.g2{background:#b7831d}.g3{background:#4E9E73}.g4{background:#2a8fa3}
+.grade small{display:block;font-weight:400;opacity:.9;font-size:11px}
+.bar{height:8px;background:rgba(22,32,43,.12);border-radius:4px;overflow:hidden;display:flex;margin:6px 0}.bar i{display:block;height:100%}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;max-width:680px;margin:12px auto}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;cursor:pointer;text-align:left;font-size:15px;color:var(--ink)}
+.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dcd6;border-color:#D8604A}
+.center{text-align:center}.big{font:700 22px 'Space Grotesk'}
+.typed{max-width:680px;margin:12px auto;display:flex;gap:8px;flex-wrap:wrap}.typed input{flex:1;min-width:200px;padding:12px;font-size:17px;border:1px solid rgba(22,32,43,.3);border-radius:4px}
+.diff span{padding:0 1px;border-radius:2px}.diff .ok{background:#dff1e6}.diff .bad{background:#f8dcd6;text-decoration:line-through}.diff .add{background:#fff2cc}
+.match{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:760px;margin:12px auto}
+.match button{min-height:84px;padding:10px;border:1px solid rgba(22,32,43,.2);border-radius:8px;background:#fff;cursor:pointer;font-size:14px;color:var(--ink);transition:transform .15s,opacity .3s}
+.match button.sel{border-color:#0E2A47;box-shadow:0 0 0 3px rgba(14,42,71,.2)}.match button.done{opacity:0;pointer-events:none}.match button.bad{background:#f8dcd6;transform:rotate(-2deg)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:12px}.stat b{display:block;font:700 24px 'Space Grotesk'}.stat small{color:rgba(22,32,43,.72)}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,12px);grid-auto-columns:12px;gap:3px;overflow-x:auto;padding-bottom:4px}.heat i{width:12px;height:12px;border-radius:2px;background:rgba(22,32,43,.08)}
+.fc{display:flex;align-items:flex-end;gap:4px;height:120px;border-bottom:1px solid rgba(22,32,43,.2);padding-top:10px}
+.fc div{flex:1;background:#2a8fa3;border-radius:3px 3px 0 0;position:relative;min-height:1px}.fc div span{position:absolute;top:-16px;left:0;right:0;text-align:center;font-size:10px;color:rgba(22,32,43,.7)}
+.fc-l{display:flex;gap:4px;font-size:10px;color:rgba(22,32,43,.72)}.fc-l span{flex:1;text-align:center}
+.pill{display:inline-block;background:rgba(14,42,71,.08);border-radius:999px;padding:1px 8px;font-size:11.5px;margin:1px}
+.hidden{display:none!important}
+body.kb-open{padding-bottom:330px}
+@media(max-width:760px){.crow{grid-template-columns:1fr}.crow .btns{flex-direction:row}.opts,.grade{grid-template-columns:1fr 1fr}.match{grid-template-columns:repeat(3,1fr)}}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/flashcard-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan jag dela en kortlek?","acceptedAnswer":{"@type":"Answer","text":"Ja. Dela en kortlek med en länk så att andra kan plugga den utan konto."}},{"@type":"Question","name":"Är Flashcard Forge gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg. AI:n använder en gemensam gratiskvot; om den är upptagen eller har nått dagens gräns kan du försöka senare eller lägga till en egen Gemini-nyckel."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Bara när du använder dess AI-funktioner: då skickas texten du ger AI:n till Googles Gemini-modell via MigaBuilders gratis AI-tjänst eller din egen Gemini-nyckel. Allt annat stannar i webbläsaren."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/flashcard-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/flashcard-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/flashcard-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/flashcard-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/flashcard-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/flashcard-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/flashcard-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/flashcard-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/flashcard-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/flashcard-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/sv/">← All tools</a><span>Flashcard Forge</span></nav>
+<header class="masthead"><div><h1>Flashcard Forge</h1><p>Make flashcards in seconds, then remember them for good with spaced repetition, games and tests.</p></div></header>
+<main>
+<section class="panel">
+  <h2>Your decks</h2>
+  <div class="streak" id="streak"></div>
+  <div class="decks" id="decks"></div>
+  <div class="actions" style="margin-top:10px"><button class="primary" id="newDeck">+ New deck</button><label class="secondary" style="cursor:pointer"><input type="file" id="importFile" accept=".csv,.txt,.tsv,.json,.miga" hidden>⬆ Import CSV / Anki / Quizlet / backup</label><button class="secondary" id="studyAll">🧠 Study all due cards</button></div>
+  <p class="privacy" style="margin-top:12px">🔒 Decks are saved only in this browser (IndexedDB) — nothing is uploaded. Export a backup or share a link to move a deck to another device.</p>
+</section>
+
+<section class="panel hidden" id="deckPanel">
+  <div class="toolbar" style="margin:0"><input id="deckName" style="flex:1;min-width:200px;font:700 20px 'Space Grotesk';padding:8px;border:1px solid rgba(22,32,43,.2);border-radius:3px" aria-label="Deck name">
+    <select id="lang" aria-label="Language of the front"><option value="">Front language: none</option></select>
+    <select id="backLang" aria-label="Language of the back"><option value="">Back language: none</option></select>
+    <button class="secondary" id="kbBtn" title="On-screen keyboard for the deck's languages">⌨️ Keyboard</button></div>
+  <div class="bar" id="bar"></div><p class="muted" id="deckStats" style="margin:0"></p>
+  <div class="tabs"><button class="active" data-tab="study">🧠 Study</button><button data-tab="test">✅ Test &amp; games</button><button data-tab="edit">✏️ Cards</button><button data-tab="ai">🤖 Make cards with AI</button><button data-tab="stats">📈 Stats</button><button data-tab="share">⬇ Export &amp; share</button></div>
+
+  <div data-pane="study">
+    <div class="toolbar">
+      <select id="studyMode" aria-label="What to study"><option value="due">Due cards (spaced repetition)</option><option value="new">Only new cards</option><option value="hard">Hardest cards first</option><option value="star">★ Starred cards</option><option value="cram">Cram: every card, shuffled</option></select>
+      <select id="studyTag" aria-label="Tag"><option value="">All tags</option></select>
+      <select id="studyDir" aria-label="Direction"><option value="fwd">Front → back</option><option value="rev">Back → front</option><option value="mix">Mixed directions</option></select>
+      <label><input type="checkbox" id="studyType"> Type the answer</label>
+      <label><input type="checkbox" id="autoRead" checked> Read aloud</label>
+      <label title="Maximum new cards introduced per day">New/day <input type="number" id="newPerDay" min="1" max="999" value="20" style="width:62px;padding:6px"></label>
+    </div>
+    <div id="studyArea"></div>
+    <p class="muted center" style="margin-top:12px">Shortcuts: <b>Space</b> flip · <b>1–4</b> grade · <b>U</b> undo · <b>S</b> star · <b>R</b> read aloud · <b>E</b> edit</p>
+  </div>
+  <div data-pane="test" class="hidden">
+    <div class="actions"><button class="primary" id="mcTest">Multiple choice</button><button class="secondary" id="typeTest">Type the answer</button><button class="secondary" id="tfTest">True or false</button><button class="secondary" id="matchGame">🧩 Matching game</button><button class="secondary" id="listenTest">🎧 Listening (dictation)</button><button class="secondary" id="speakTest">🎙 Say the answer</button></div>
+    <div class="toolbar" style="margin-top:10px"><label><input type="checkbox" id="reverseTest"> Show the back, answer with the front</label><label>Questions <select id="testLen"><option>10</option><option selected>20</option><option>50</option><option value="999">All</option></select></label></div>
+    <div id="testArea" style="margin-top:12px"></div>
+  </div>
+  <div data-pane="edit" class="hidden">
+    <div class="toolbar"><input type="search" id="cardSearch" placeholder="Search cards…" style="flex:1;min-width:160px"><select id="cardTag"><option value="">All tags</option></select>
+      <select id="cardSort"><option value="order">Order added</option><option value="due">Due soonest</option><option value="hard">Hardest</option><option value="az">A → Z</option><option value="star">Starred first</option></select></div>
+    <p class="muted" style="margin:0 0 8px">Tip: write <code>{{word}}</code> in the front to make a fill-in-the-blank card. Use <code>**bold**</code> and <code>*italic*</code>. Tags are separated by commas.</p>
+    <div class="card-list" id="cardList"></div>
+    <div class="actions" style="margin-top:10px"><button class="secondary" id="addCard">+ Add card</button><button class="secondary" id="addReverse">⇄ Add reverse cards</button><button class="secondary" id="dedupe">🧹 Remove duplicates</button><button class="secondary" id="resetProgress">↺ Reset progress</button></div>
+    <details style="margin-top:14px"><summary style="cursor:pointer;font-weight:700">Paste many cards at once</summary>
+      <p class="muted">One card per line: <code>front - back</code>, <code>front ; back</code>, <code>front,back</code> or tab-separated (e.g. copied from a spreadsheet, Quizlet or Anki). An optional third column is used as tags.</p>
+      <textarea id="bulk" style="width:100%;min-height:120px;padding:10px" placeholder="bonjour - hello&#10;merci - thank you"></textarea><button class="secondary" id="bulkAdd">Add these cards</button></details>
+  </div>
+  <div data-pane="ai" class="hidden">
+    <p>Paste your notes, a textbook paragraph or a word list — or just type a topic — and the AI writes cards. You can also load a text file.</p>
+    <div class="field"><label for="aiText">Notes or topic</label><textarea id="aiText" placeholder="e.g. The causes of World War I… or: 30 common Swahili verbs"></textarea></div>
+    <div class="actions" style="margin:-4px 0 10px"><label class="secondary" style="cursor:pointer;padding:8px 12px"><input type="file" id="aiFile" accept=".txt,.md,.csv,.html,.srt,.vtt" hidden>📄 Load notes from a file</label></div>
+    <div class="grid"><div class="field"><label for="aiCount">Number of cards</label><select id="aiCount"><option>10</option><option selected>20</option><option>30</option><option>50</option></select></div>
+      <div class="field"><label for="aiStyle">Card style</label><select id="aiStyle"><option value="qa">Question → answer</option><option value="term">Term → definition</option><option value="vocab">Word → translation (languages)</option><option value="cloze">Fill in the blank</option><option value="example">Word → meaning + example sentence</option></select></div>
+      <div class="field"><label for="aiLevel">Level</label><select id="aiLevel"><option value="">Any</option><option>beginner</option><option>intermediate</option><option>advanced</option><option>exam revision</option></select></div>
+      <div class="field"><label for="aiTags">Tags for these cards</label><input id="aiTags" placeholder="e.g. chapter 3"></div></div>
+    <div id="aiBox"></div><button class="primary" id="aiGo">Make cards</button><p class="status" id="aiStatus"></p>
+  </div>
+  <div data-pane="stats" class="hidden"><div id="statsArea"></div></div>
+  <div data-pane="share" class="hidden">
+    <div class="actions"><button class="secondary" id="expCsv">⬇ CSV (Excel, Quizlet)</button><button class="secondary" id="expAnki">⬇ Anki text file</button><button class="secondary" id="expJson">⬇ Full backup of all decks</button><button class="secondary" id="printCards">🖨 Printable cards</button><button class="secondary" id="shareLink">🔗 Share this deck as a link</button><button class="danger" id="delDeck">Delete this deck</button></div>
+    <div id="shareOut" style="margin-top:12px"></div>
+  </div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Flashcard Forge</h2>
+  <p>Flashcard Forge makes flashcard decks by typing, pasting or letting AI turn your notes into cards, and schedules reviews with Anki-style spaced repetition.</p>
+  <h3>How to use Flashcard Forge</h3>
+  <ol><li>Create a deck and add cards by typing, pasting a list or letting AI write them from your notes.</li><li>Press “Make cards”.</li><li>Study the due cards, grade how well you remembered each one, then take a test.</li></ol>
+  <h3>Can I share a deck?</h3>
+  <p>Yes. Share a deck with a link, so others can study it without an account.</p>
+  <h3>Is Flashcard Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only when you use its AI features: then the text you give the AI is sent to Google’s Gemini model through MigaBuilder’s free AI service, or your own Gemini key. Everything else stays in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/memory-forge.html">Memory Forge</a> · <a href="/sv/focus-forge.html">Focus Forge</a> · <a href="/sv/exam-checker.html">Exam Checker</a></p>
+</section>
+
+<footer>Flashcard Forge · MigaBuilder · Scheduling based on the SM-2 spaced-repetition algorithm (the family used by Anki). Everything stays in your browser.</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+MigaAI.mount($('aiBox'));
+const DAY=864e5,MIN=6e4,now=()=>Date.now();
+const LEGACY_IVL=[0,1,3,7,16,35];
+const uid=()=>now().toString(36)+Math.random().toString(36).slice(2,7);
+function card(f,b,tags){return {id:uid(),f:String(f||''),b:String(b||''),tags:tags||[],due:0,ivl:0,ef:2.5,reps:0,lapses:0,seen:0,right:0,star:false,added:now()}}
+function upgrade(c){ // cards saved by the old Leitner version
+  if(!c.id)c.id=uid();if(!Array.isArray(c.tags))c.tags=[];
+  if(c.ef==null){const box=c.box||0;c.ivl=LEGACY_IVL[Math.min(5,box)];c.ef=2.5;c.reps=box;c.lapses=c.lapses||0}
+  delete c.box;c.seen=c.seen||0;c.right=c.right||0;c.due=c.due||0;return c}
+function upgradeDeck(d){d.id=d.id||uid();d.cards=(d.cards||[]).map(upgrade);d.lang=d.lang||'';d.backLang=d.backLang||'';return d}
+
+// ---------- storage: IndexedDB with localStorage fallback ----------
+const LKEY='flashcardDecks',LOGKEY='flashcardLog';
+const idb=(()=>{let db=null;function open(){return new Promise((res,rej)=>{if(!('indexedDB' in window))return rej(new Error('no idb'));const r=indexedDB.open('migaFlashcards',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>{db=r.result;res(db)};r.onerror=()=>rej(r.error)})}
+  const tx=(mode,fn)=>(db?Promise.resolve(db):open()).then(d=>new Promise((res,rej)=>{const t=d.transaction('kv',mode),s=t.objectStore('kv');const q=fn(s);t.oncomplete=()=>res(q&&q.result);t.onerror=()=>rej(t.error)}));
+  return {get:k=>tx('readonly',s=>s.get(k)),set:(k,v)=>tx('readwrite',s=>s.put(v,k))}})();
+let useIdb=true,decks=[],log={},cur=null,saveTimer=null;
+function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+function save(){clearTimeout(saveTimer);saveTimer=setTimeout(saveNow,250)}
+function saveNow(){
+  if(useIdb)idb.set('decks',decks).then(()=>idb.set('log',log)).catch(()=>{useIdb=false;saveNow()});
+  else try{localStorage.setItem(LKEY,JSON.stringify(decks));localStorage.setItem(LOGKEY,JSON.stringify(log))}catch(e){alert('Could not save — browser storage is full or disabled. Remove some images or export a backup.')}
+}
+window.addEventListener('pagehide',()=>{if(saveTimer){clearTimeout(saveTimer);saveNow()}});
+async function load(){
+  try{const d=await idb.get('decks');if(Array.isArray(d)&&d.length){decks=d;log=(await idb.get('log'))||{}}else{decks=lsGet(LKEY,[]);log=lsGet(LOGKEY,{});if(decks.length)await idb.set('decks',decks)}}
+  catch(e){useIdb=false;decks=lsGet(LKEY,[]);log=lsGet(LOGKEY,{})}
+  decks=decks.map(upgradeDeck);
+  if(!decks.length)decks=[upgradeDeck({id:'demo',name:'Example: world capitals',lang:'en-US',cards:[['Kenya','Nairobi','africa'],['Japan','Tokyo','asia'],['Brazil','Brasília','americas'],['Canada','Ottawa','americas'],['Australia','Canberra','oceania'],['Egypt','Cairo','africa'],['Thailand','Bangkok','asia'],['Sweden','Stockholm','europe'],['The capital of Norway is {{Oslo}}','','europe']].map(([f,b,t])=>card(f,b,[t]))})];
+}
+
+// ---------- scheduler (SM-2, like Anki) ----------
+const isNew=c=>c.reps===0&&c.lapses===0&&!c.due; // never graded in a study session
+const mature=c=>c.ivl>=21;
+function preview(c,g){ // returns the new state without changing the card
+  let {ivl,ef,reps,lapses}=c;
+  if(g===0){lapses++;reps=0;ivl=0;ef=Math.max(1.3,ef-.2)}
+  else if(g===1){ivl=Math.max(1,Math.round((ivl||1)*1.2));ef=Math.max(1.3,ef-.15);reps++}
+  else if(g===2){ivl=reps===0?1:reps===1?3:Math.max(ivl+1,Math.round(ivl*ef));reps++}
+  else{ivl=reps===0?4:Math.max(ivl+2,Math.round(ivl*ef*1.3));ef+=.15;reps++}
+  ivl=Math.min(ivl,3650);
+  return {ivl,ef,reps,lapses,due:g===0?now()+10*MIN:now()+ivl*DAY}}
+function fmtIvl(s){if(!s.ivl)return '10 min';const d=s.ivl;return d<30?d+' day'+(d>1?'s':''):d<365?Math.round(d/30)+' mo':(d/365).toFixed(1)+' yr'}
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const dayKey=t=>{const d=new Date(t);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+function logReview(ok,isNewCard){const k=today(),e=log[k]=log[k]||{n:0,ok:0,nw:0,ms:0};e.n++;if(ok)e.ok++;if(isNewCard)e.nw++}
+function newToday(){return (log[today()]||{}).nw||0}
+function streak(){let s=0;const d=new Date();if(!log[today()])d.setDate(d.getDate()-1);for(;;){const k=dayKey(d);if(log[k]&&log[k].n){s++;d.setDate(d.getDate()-1)}else break}return s}
+
+// ---------- rich text ----------
+function rich(s){return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/(^|[^*])\*(?!\s)(.+?)\*/g,'$1<i>$2</i>')}
+const hasCloze=s=>/\{\{.+?\}\}/.test(s);
+function clozeQ(s){return rich(s.replace(/\{\{(.+?)\}\}/g,'\u0001$1\u0002')).replace(/\u0001(.+?)\u0002/g,(m,a)=>'<span class="cloze">'+(a.includes('::')?'['+esc(a.split('::')[1])+']':'[ … ]')+'</span>')}
+function clozeA(s){return rich(s.replace(/\{\{(.+?)\}\}/g,'\u0001$1\u0002')).replace(/\u0001(.+?)\u0002/g,(m,a)=>'<span class="cloze-a">'+a.split('::')[0]+'</span>')}
+const clozeAnswer=s=>(s.match(/\{\{(.+?)\}\}/g)||[]).map(x=>x.slice(2,-2).split('::')[0]).join(', ');
+const plain=s=>String(s||'').replace(/\{\{(.+?)\}\}/g,(m,a)=>a.split('::')[0]).replace(/\*+/g,'');
+// q = what is asked, a = the answer, for a direction
+function sides(c,rev){
+  if(hasCloze(c.f))return {q:clozeQ(c.f),a:clozeA(c.f)+(c.b?'<div class="q-small">'+rich(c.b)+'</div>':''),qText:plain(c.f.replace(/\{\{.+?\}\}/g,'…')),aText:clozeAnswer(c.f),qLang:cur.lang,aLang:cur.lang,qImg:c.img,cloze:true};
+  return rev?{q:rich(c.b),a:rich(c.f),qText:plain(c.b),aText:plain(c.f),qLang:cur.backLang,aLang:cur.lang,aImg:c.img}:{q:rich(c.f),a:rich(c.b),qText:plain(c.f),aText:plain(c.b),qLang:cur.lang,aLang:cur.backLang,qImg:c.img};
+}
+
+// ---------- speech ----------
+function say(t,lang,rate){if(!lang||!t||!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t).slice(0,400));u.lang=lang;u.rate=rate||.9;const v=speechSynthesis.getVoices().find(v=>v.lang.replace('_','-').toLowerCase().startsWith(lang.toLowerCase().split('-')[0]));if(v)u.voice=v;speechSynthesis.speak(u)}
+const LANGS=[['en-US','English'],['es-ES','Spanish'],['fr-FR','French'],['de-DE','German'],['it-IT','Italian'],['pt-BR','Portuguese'],['nl-NL','Dutch'],['sv-SE','Swedish'],['nb-NO','Norwegian'],['da-DK','Danish'],['fi-FI','Finnish'],['pl-PL','Polish'],['tr-TR','Turkish'],['ru-RU','Russian'],['uk-UA','Ukrainian'],['el-GR','Greek'],['he-IL','Hebrew'],['ar-SA','Arabic'],['fa-IR','Persian'],['hi-IN','Hindi'],['th-TH','Thai'],['zh-CN','Mandarin'],['ja-JP','Japanese'],['ko-KR','Korean'],['ka-GE','Georgian'],['hy-AM','Armenian'],['sw-KE','Swahili'],['id-ID','Indonesian'],['vi-VN','Vietnamese']];
+$('lang').innerHTML+=LANGS.map(([v,l])=>'<option value="'+v+'">Front: '+l+'</option>').join('');
+$('backLang').innerHTML+=LANGS.map(([v,l])=>'<option value="'+v+'">Back: '+l+'</option>').join('');
+$('lang').onchange=()=>{cur.lang=$('lang').value;save()};$('backLang').onchange=()=>{cur.backLang=$('backLang').value;save()};
+
+// ---------- on-screen keyboard follows the side being typed ----------
+const kbFor=side=>MigaKeyboard.forLang(side==='b'?cur.backLang:cur.lang);
+MigaKeyboard.layoutFor(el=>{const s=el.dataset.side;return s?kbFor(s):null});
+document.addEventListener('migakeyboard',e=>document.body.classList.toggle('kb-open',e.detail.open));
+$('kbBtn').onclick=()=>{if(MigaKeyboard.isOpen()){MigaKeyboard.close();return}const a=document.activeElement,t=a&&(a.tagName==='TEXTAREA'||a.tagName==='INPUT')&&a.dataset.side?a:document.querySelector('[data-pane]:not(.hidden) [data-side]');MigaKeyboard.open({layout:t?kbFor(t.dataset.side):kbFor('f'),target:t||undefined})};
+
+// ---------- decks ----------
+function dueList(d){d=d||cur;return d.cards.filter(c=>!c.susp&&!isNew(c)&&c.due<=now())}
+function renderDecks(){
+  const s=streak(),t=log[today()]||{n:0,ok:0};
+  $('streak').innerHTML='<span>🔥 <b>'+s+'</b> day streak</span><span>📚 <b>'+t.n+'</b> reviews today</span><span>🎯 <b>'+(t.n?Math.round(t.ok/t.n*100):0)+'%</b> correct today</span><span>🗂 <b>'+decks.reduce((a,d)=>a+d.cards.length,0)+'</b> cards in '+decks.length+' deck'+(decks.length===1?'':'s')+'</span>';
+  $('decks').innerHTML=decks.map((d,i)=>{const due=dueList(d).length,nw=d.cards.filter(isNew).length,m=d.cards.filter(mature).length;return '<button class="deck'+(d===cur?' active':'')+'" data-d="'+i+'"><span class="due'+(due?'':' zero')+'">'+(due||'✓')+'</span><b>'+esc(d.name)+'</b><small>'+d.cards.length+' cards · '+due+' due · '+nw+' new · '+m+' mastered</small></button>'}).join('');
+  $('decks').querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{cur=decks[+b.dataset.d];openDeck()})}
+function allTags(){const s=new Set();cur.cards.forEach(c=>c.tags.forEach(t=>s.add(t)));return [...s].sort()}
+function openDeck(){renderDecks();$('deckPanel').classList.remove('hidden');$('deckName').value=cur.name;$('lang').value=cur.lang||'';$('backLang').value=cur.backLang||'';
+  const tags=allTags(),opt='<option value="">All tags</option>'+tags.map(t=>'<option>'+esc(t)+'</option>').join('');$('studyTag').innerHTML=opt;$('cardTag').innerHTML=opt;
+  $('newPerDay').value=cur.newPerDay||20;renderStats();renderCards();startStudy()}
+$('newDeck').onclick=()=>{const d=upgradeDeck({id:uid(),name:'New deck',cards:[]});decks.push(d);cur=d;save();openDeck();tab('ai');$('deckName').select()};
+$('deckName').oninput=()=>{cur.name=$('deckName').value||'Untitled';save();renderDecks()};
+$('newPerDay').onchange=()=>{cur.newPerDay=Math.max(1,+$('newPerDay').value||20);save();startStudy()};
+function renderStats(){const n=cur.cards.length||1,nw=cur.cards.filter(isNew).length,learn=cur.cards.filter(c=>!isNew(c)&&c.ivl<7).length,young=cur.cards.filter(c=>c.ivl>=7&&c.ivl<21).length,mat=cur.cards.filter(mature).length;
+  const parts=[[nw,'#c9ced4','new'],[learn,'#E2A63B','learning'],[young,'#b7c34a','young'],[mat,'#4E9E73','mastered']];
+  $('bar').innerHTML=parts.map(([v,c,l])=>'<i style="width:'+(v/n*100)+'%;background:'+c+'" title="'+v+' '+l+'"></i>').join('');
+  $('deckStats').textContent=cur.cards.length+' cards · '+dueList().length+' due now · '+nw+' new · '+learn+' learning · '+young+' young · '+mat+' mastered (21+ days)'}
+function tab(t){document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===t));document.querySelectorAll('[data-pane]').forEach(p=>p.classList.toggle('hidden',p.dataset.pane!==t));if(t==='study')startStudy();if(t==='stats')renderStatsPane();if(t==='edit')renderCards()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.tab));
+const paneOpen=p=>!$('deckPanel').classList.contains('hidden')&&!document.querySelector('[data-pane="'+p+'"]').classList.contains('hidden');
+
+// ---------- edit ----------
+let editFocus=null;
+function filteredCards(){
+  const q=$('cardSearch').value.trim().toLowerCase(),tag=$('cardTag').value,sort=$('cardSort').value;
+  let list=cur.cards.map((c,i)=>({c,i})).filter(({c})=>(!q||(c.f+' '+c.b+' '+c.tags.join(' ')).toLowerCase().includes(q))&&(!tag||c.tags.includes(tag)));
+  const by={due:(a,b)=>a.c.due-b.c.due,hard:(a,b)=>b.c.lapses-a.c.lapses||a.c.ef-b.c.ef,az:(a,b)=>plain(a.c.f).localeCompare(plain(b.c.f)),star:(a,b)=>(b.c.star?1:0)-(a.c.star?1:0)}[sort];
+  if(by)list.sort(by);return list}
+function renderCards(){
+  const list=filteredCards(),shown=list.slice(0,300);
+  $('cardList').innerHTML=cur.cards.length?shown.map(({c,i})=>'<div class="crow" data-row="'+i+'"><textarea data-i="'+i+'" data-k="f" data-side="f" aria-label="Front" placeholder="Front">'+esc(c.f)+'</textarea><textarea data-i="'+i+'" data-k="b" data-side="b" aria-label="Back" placeholder="Back">'+esc(c.b)+'</textarea><input data-i="'+i+'" data-k="tags" value="'+esc(c.tags.join(', '))+'" placeholder="tags" aria-label="Tags">'+
+    '<div class="btns"><button data-star="'+i+'" title="Star" class="'+(c.star?'star-on':'')+'">'+(c.star?'★':'☆')+'</button><label title="Add an image" style="cursor:pointer;padding:6px 9px;border:1px solid rgba(22,32,43,.2);border-radius:4px;text-align:center"><input type="file" accept="image/*" data-img="'+i+'" hidden>🖼</label><button data-rm="'+i+'" title="Delete card" style="color:#9b3322">✕</button></div>'+
+    '<div class="meta">'+(c.img?'<img src="'+esc(c.img)+'" alt=""> <button data-noimg="'+i+'" style="border:0;background:none;color:#9b3322;cursor:pointer">remove image</button>':'')+(isNew(c)?'<span class="pill">new</span>':'<span class="pill">every '+c.ivl+' d</span><span class="pill">due '+(c.due<=now()?'now':new Date(c.due).toLocaleDateString())+'</span><span class="pill">ease '+c.ef.toFixed(2)+'</span>')+(c.lapses?'<span class="pill">forgotten '+c.lapses+'×</span>':'')+(c.seen?'<span class="pill">'+Math.round(c.right/c.seen*100)+'% right</span>':'')+(hasCloze(c.f)?'<span class="pill">fill-in-the-blank</span>':'')+'</div></div>').join('')+(list.length>300?'<p class="muted">Showing 300 of '+list.length+' matching cards — search to narrow down.</p>':''):'<p class="muted">No cards yet. Add some, paste a list, or use the AI tab.</p>';
+  const L=$('cardList');
+  L.querySelectorAll('[data-k]').forEach(t=>t.oninput=()=>{const c=cur.cards[+t.dataset.i];if(t.dataset.k==='tags')c.tags=t.value.split(',').map(s=>s.trim()).filter(Boolean);else c[t.dataset.k]=t.value;save()});
+  L.querySelectorAll('[data-k="tags"]').forEach(t=>t.onchange=()=>{const v=$('studyTag').value;openTagsRefresh(v)});
+  L.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>{cur.cards.splice(+b.dataset.rm,1);save();renderCards();renderStats();renderDecks()});
+  L.querySelectorAll('[data-star]').forEach(b=>b.onclick=()=>{const c=cur.cards[+b.dataset.star];c.star=!c.star;save();renderCards()});
+  L.querySelectorAll('[data-noimg]').forEach(b=>b.onclick=()=>{delete cur.cards[+b.dataset.noimg].img;save();renderCards()});
+  L.querySelectorAll('[data-img]').forEach(inp=>inp.onchange=async()=>{const f=inp.files[0];if(!f)return;try{cur.cards[+inp.dataset.img].img=await shrinkImage(f);save();renderCards()}catch(e){alert('Could not read this image.')}});
+  if(editFocus!=null){const r=L.querySelector('[data-row="'+editFocus+'"] textarea');if(r){r.focus();r.scrollIntoView({block:'center'})}editFocus=null}
+}
+function openTagsRefresh(keep){const tags=allTags(),opt='<option value="">All tags</option>'+tags.map(t=>'<option>'+esc(t)+'</option>').join('');$('studyTag').innerHTML=opt;$('cardTag').innerHTML=opt;$('studyTag').value=keep||''}
+['cardSearch','cardTag','cardSort'].forEach(id=>$(id).addEventListener(id==='cardSearch'?'input':'change',renderCards));
+function shrinkImage(file){return new Promise((res,rej)=>{const img=new Image(),u=URL.createObjectURL(file);img.onload=()=>{const k=Math.min(1,480/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL('image/jpeg',.8))};img.onerror=()=>{URL.revokeObjectURL(u);rej(new Error('bad image'))};img.src=u})}
+$('addCard').onclick=()=>{cur.cards.push(card('','',$('cardTag').value?[$('cardTag').value]:[]));save();$('cardSearch').value='';$('cardSort').value='order';editFocus=cur.cards.length-1;renderCards();renderStats()};
+$('addReverse').onclick=()=>{const have=new Set(cur.cards.map(c=>c.f+'\u0000'+c.b));const add=cur.cards.filter(c=>c.b.trim()&&!hasCloze(c.f)&&!have.has(c.b+'\u0000'+c.f)).map(c=>card(c.b,c.f,c.tags.concat('reverse')));if(!add.length)return alert('Every card already has a reverse card.');if(!confirm('Add '+add.length+' reverse cards (back → front)?'))return;cur.cards.push(...add);save();openDeck();tab('edit')};
+$('dedupe').onclick=()=>{const seen=new Set(),before=cur.cards.length;cur.cards=cur.cards.filter(c=>{const k=plain(c.f).trim().toLowerCase()+'\u0000'+plain(c.b).trim().toLowerCase();if(seen.has(k))return false;seen.add(k);return true});const n=before-cur.cards.length;save();openDeck();tab('edit');alert(n?'Removed '+n+' duplicate card'+(n>1?'s':'')+'.':'No duplicates found.')};
+$('resetProgress').onclick=()=>{if(!confirm('Reset the study progress of every card in this deck? The cards themselves are kept.'))return;cur.cards.forEach(c=>Object.assign(c,{due:0,ivl:0,ef:2.5,reps:0,lapses:0,seen:0,right:0}));save();openDeck()};
+function parseLines(text){return text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).map(l=>{const m=l.split('\t').length>1?l.split('\t'):l.includes(' - ')?l.split(' - '):l.includes(' – ')?l.split(' – '):l.includes(';')?l.split(';'):l.split(',');return m.length>=2||hasCloze(l)?[m[0].trim().replace(/^"|"$/g,''),(m[1]||'').trim().replace(/^"|"$/g,''),(m[2]||'').split(/[ ,]+/).map(s=>s.trim()).filter(Boolean)]:null}).filter(Boolean)}
+$('bulkAdd').onclick=()=>{const p=parseLines($('bulk').value);if(!p.length)return alert('No cards found. Use one card per line, like: front - back');p.forEach(([f,b,t])=>cur.cards.push(card(f,b,t)));$('bulk').value='';save();openDeck();tab('edit')};
+
+// ---------- study ----------
+let queue=[],flipped=false,history=[],session=null,studyDecks=null;
+function buildQueue(){
+  const mode=$('studyMode').value,tag=$('studyTag').value;
+  const pool=(studyDecks||[cur]).flatMap(d=>d.cards.map(c=>({c,d}))).filter(({c})=>!c.susp&&(!tag||c.tags.includes(tag))&&(c.f.trim()||c.img));
+  const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+  if(mode==='cram')return shuffle(pool);
+  if(mode==='star')return shuffle(pool.filter(x=>x.c.star));
+  if(mode==='hard')return pool.filter(x=>x.c.lapses>0||x.c.ef<2.3).sort((a,b)=>b.c.lapses-a.c.lapses||a.c.ef-b.c.ef);
+  if(mode==='new')return pool.filter(x=>isNew(x.c)).slice(0,Math.max(0,(cur.newPerDay||20)-newToday())||0);
+  const due=pool.filter(x=>!isNew(x.c)&&x.c.due<=now()).sort((a,b)=>a.c.due-b.c.due);
+  const room=Math.max(0,(cur.newPerDay||20)-newToday());
+  const fresh=pool.filter(x=>isNew(x.c)).slice(0,room);
+  // Mix new cards in among the reviews.
+  const step=Math.max(1,Math.floor(due.length/(fresh.length+1))),out=[];let di=0;
+  fresh.forEach(x=>{for(let k=0;k<step&&di<due.length;k++)out.push(due[di++]);out.push(x)});while(di<due.length)out.push(due[di++]);return out}
+function startStudy(){queue=buildQueue();history=[];session={n:0,ok:0,start:now()};showStudy()}
+['studyMode','studyTag','studyDir'].forEach(id=>$(id).onchange=()=>{if(id!=='studyDir')startStudy();else showStudy()});
+$('studyType').onchange=showStudy;
+function showStudy(){renderStats();const a=$('studyArea');
+  if(!cur.cards.length&&!studyDecks){a.innerHTML='<p class="center muted">This deck is empty — add cards first.</p>';return}
+  if(!queue.length){
+    const future=(studyDecks||[cur]).flatMap(d=>d.cards).filter(c=>!isNew(c)&&c.due>now()).map(c=>c.due),next=future.length?Math.min(...future):0,left=(studyDecks||[cur]).flatMap(d=>d.cards).filter(isNew).length;
+    const acc=session&&session.n?Math.round(session.ok/session.n*100):null,mins=session?Math.max(1,Math.round((now()-session.start)/6e4)):0;
+    a.innerHTML='<div class="center"><p class="big">🎉 All done for now!</p>'+(session&&session.n?'<p>You reviewed <b>'+session.n+'</b> card'+(session.n>1?'s':'')+' in about '+mins+' min · <b>'+acc+'%</b> remembered · 🔥 '+streak()+' day streak</p>':'')+
+      '<p class="muted">'+(next?'Next review is due '+new Date(next).toLocaleString()+'. ':'')+(left?left+' new card'+(left>1?'s are':' is')+' waiting'+(newToday()>=(cur.newPerDay||20)?' — today’s new-card limit is reached.':'.'):'')+' Spaced repetition works best a little every day.</p>'+
+      '<div class="actions" style="justify-content:center"><button class="secondary" id="cram">Study all cards anyway</button>'+(left?'<button class="secondary" id="moreNew">Learn 10 more new cards</button>':'')+(studyDecks?'<button class="secondary" id="backDeck">Back to this deck</button>':'')+'</div></div>';
+    $('cram').onclick=()=>{$('studyMode').value='cram';startStudy()};
+    if($('moreNew'))$('moreNew').onclick=()=>{cur.newPerDay=(cur.newPerDay||20)+10;$('newPerDay').value=cur.newPerDay;save();startStudy()};
+    if($('backDeck'))$('backDeck').onclick=()=>{studyDecks=null;startStudy()};
+    return}
+  const {c,d}=queue[0],dir=$('studyDir').value,rev=dir==='rev'||(dir==='mix'&&(c.id.charCodeAt(c.id.length-1)+c.seen)%2===1);
+  const prevCur=cur;cur=d;const s=sides(c,rev);cur=prevCur;
+  flipped=false;queue[0].rev=rev;queue[0].s=s;
+  const typing=$('studyType').checked;
+  a.innerHTML='<p class="center muted">'+queue.length+' card'+(queue.length>1?'s':'')+' left'+(studyDecks?' · from “'+esc(d.name)+'”':'')+(isNew(c)?' · <span class="pill">new</span>':'')+'</p><div class="flash" id="flash"><div class="flash-inner"><div class="face front"><span class="lbl">'+(rev?'Back':'Front')+'</span>'+(s.qImg?'<img src="'+esc(s.qImg)+'" alt="">':'')+'<div>'+s.q+'</div>'+(c.tags.length?'<div class="tagline">'+c.tags.map(esc).join(' · ')+'</div>':'')+'</div><div class="face back"><span class="lbl">Answer</span>'+(s.aImg?'<img src="'+esc(s.aImg)+'" alt="">':'')+'<div>'+s.a+'</div><div id="typedFb"></div></div></div></div>'+
+   (typing?'<div class="typed" id="typedRow"><input id="studyTyped" data-side="'+(s.cloze||rev?'f':'b')+'" placeholder="Type your answer, then Enter" autocomplete="off" spellcheck="false"><button class="secondary" id="studyKb" title="On-screen keyboard">⌨️</button><button class="primary" id="studyCheck">Check</button></div>':'')+
+   '<p class="center muted" id="hint">'+(typing?'Type the answer — or tap the card to just reveal it':'Tap the card (or press Space) to see the answer')+'</p>'+
+   '<div class="grade hidden" id="grade">'+['Again','Hard','Good','Easy'].map((l,g)=>'<button class="g'+(g+1)+'" data-g="'+g+'">'+l+'<small>'+fmtIvl(preview(c,g))+'</small></button>').join('')+'</div>'+
+   '<div class="card-tools"><button id="tSay">🔊 Read</button><button id="tStar">'+(c.star?'★ Starred':'☆ Star')+'</button><button id="tEdit">✏️ Edit</button><button id="tExplain">🤖 Explain / memory trick</button><button id="tSkip">⏭ Skip</button><button id="tSusp">⏸ Suspend</button>'+(history.length?'<button id="tUndo">↶ Undo</button>':'')+'</div><div id="explainOut" class="center" style="max-width:680px;margin:10px auto;text-align:left"></div>';
+  $('flash').onclick=flip;a.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>grade(+b.dataset.g));
+  $('tSay').onclick=()=>say(flipped?s.aText:s.qText,flipped?s.aLang:s.qLang);
+  $('tStar').onclick=()=>{c.star=!c.star;save();$('tStar').textContent=c.star?'★ Starred':'☆ Star'};
+  $('tEdit').onclick=()=>editCard(c,d);$('tExplain').onclick=()=>explain(c,s);
+  $('tSkip').onclick=()=>{queue.push(queue.shift());showStudy()};
+  $('tSusp').onclick=()=>{if(!confirm('Suspend this card? It will not come up in studies until you find it in the Cards tab and unsuspend it by editing.'))return;c.susp=true;queue.shift();save();showStudy()};
+  if($('tUndo'))$('tUndo').onclick=undo;
+  if(typing){const inp=$('studyTyped'),go=()=>{if(flipped)return;const ok=close(inp.value,s.aText);$('typedFb').innerHTML='<div class="diff" style="font-size:16px;margin-top:8px">'+diffHtml(inp.value,s.aText)+'</div><p class="q-small">'+(ok?'✅ Correct — press Good or Easy':'❌ Compare and grade yourself honestly')+'</p>';flip();const gb=$('grade').querySelector('[data-g="'+(ok?2:0)+'"]');if(gb)gb.focus()};
+    $('studyCheck').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter'&&!e.defaultPrevented){e.preventDefault();go()}};
+    $('studyKb').onclick=()=>MigaKeyboard.open({layout:kbFor(inp.dataset.side),target:inp});
+    if(MigaKeyboard.isOpen())MigaKeyboard.open({layout:kbFor(inp.dataset.side),target:inp});else inp.focus()}
+  if($('autoRead').checked)say(s.qText,s.qLang)}
+function flip(){flipped=!flipped;$('flash').classList.toggle('flipped',flipped);$('grade').classList.toggle('hidden',!flipped);$('hint').classList.toggle('hidden',flipped);
+  const q=queue[0];if(flipped&&q&&$('autoRead').checked)say(q.s.aText,q.s.aLang)}
+function grade(g){
+  const item=queue.shift(),c=item.c,wasNew=isNew(c);history.push({item,before:JSON.parse(JSON.stringify(c)),logDay:today()});if(history.length>20)history.shift();
+  Object.assign(c,preview(c,g));c.seen++;if(g>0)c.right++;logReview(g>0,wasNew);session.n++;if(g>0)session.ok++;
+  if(g===0)queue.splice(Math.min(queue.length,3),0,item); // see it again soon in this session
+  save();renderDecks();showStudy()}
+function undo(){const h=history.pop();if(!h)return;const c=h.item.c,wasNew=isNew(h.before);
+  const e=log[h.logDay];if(e){e.n=Math.max(0,e.n-1);if(c.right>h.before.right)e.ok=Math.max(0,e.ok-1);if(wasNew)e.nw=Math.max(0,e.nw-1)}
+  const again=queue.indexOf(h.item);if(again>=0)queue.splice(again,1);
+  Object.assign(c,h.before);queue.unshift(h.item);session.n=Math.max(0,session.n-1);save();renderDecks();showStudy()}
+function editCard(c,d){if(d!==cur){cur=d;openDeck()}$('cardSearch').value='';$('cardTag').value='';$('cardSort').value='order';editFocus=cur.cards.indexOf(c);if(c.susp&&confirm('This card is suspended. Unsuspend it?')){c.susp=false;save()}tab('edit')}
+async function explain(c,s){const out=$('explainOut');out.innerHTML='<p class="muted">Asking the AI…</p>';
+  try{const r=MigaAI.json(await MigaAI.ask('You are a patient tutor who writes short, accurate explanations and memorable mnemonics. Reply with ONE JSON object only.','Flashcard question: '+plain(c.f)+'\nAnswer: '+plain(c.b||clozeAnswer(c.f))+'\nReturn {"explanation":"2-3 sentences on why this is the answer","mnemonic":"a vivid memory trick","example":"one example sentence or use case"}'));
+    out.innerHTML='<p><b>Why:</b> '+esc(r.explanation)+'</p><p><b>Memory trick:</b> '+esc(r.mnemonic)+'</p>'+(r.example?'<p><b>Example:</b> '+esc(r.example)+'</p>':'')+'<p class="muted">AI explanation — may contain mistakes. <button class="secondary" id="keepExp" style="padding:4px 8px">Add the memory trick to the card</button></p>';
+    $('keepExp').onclick=()=>{c.b=(c.b?c.b+'\n\n':'')+'💡 '+r.mnemonic;save();$('keepExp').textContent='✅ Added'}}
+  catch(e){out.innerHTML='<p style="color:#9b3322">'+esc(e.message)+'</p>'}}
+$('studyAll').onclick=()=>{studyDecks=decks.slice();$('deckPanel').classList.remove('hidden');tab('study');$('studyMode').value='due';startStudy();$('deckPanel').scrollIntoView({behavior:'smooth'})};
+document.addEventListener('keydown',e=>{if(!paneOpen('study')||/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)||e.ctrlKey||e.metaKey||e.altKey)return;
+  if(e.key===' '&&$('flash')){e.preventDefault();flip()}else if(flipped&&'1234'.includes(e.key))grade(+e.key-1);
+  else if(e.key==='u'||e.key==='U'){if(history.length)undo()}else if((e.key==='s'||e.key==='S')&&$('tStar'))$('tStar').click();else if((e.key==='r'||e.key==='R')&&$('tSay'))$('tSay').click();else if((e.key==='e'||e.key==='E')&&$('tEdit'))$('tEdit').click()});
+
+// ---------- answer checking ----------
+function simplify(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^\p{L}\p{N}]+/gu,' ').trim()}
+function lev(a,b){const d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
+function close(v,ans){const x=simplify(v);if(!x)return false;const alts=[ans].concat(String(ans).split(/[,;/]| or /)).map(simplify).filter(Boolean);return alts.some(y=>x===y||y.length>=5&&lev(x,y)<=Math.max(1,Math.floor(y.length/8)))}
+function diffHtml(v,ans){ // character diff of the typed answer against the right one
+  const a=Array.from(String(v).trim()),b=Array.from(String(ans).trim()),n=a.length,m=b.length;
+  if(n*m>40000)return esc(v);
+  const L=Array.from({length:n+1},()=>new Array(m+1).fill(0));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=a[i].toLowerCase()===b[j].toLowerCase()?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  let i=0,j=0,out='';while(i<n&&j<m){if(a[i].toLowerCase()===b[j].toLowerCase()){out+='<span class="ok">'+esc(a[i])+'</span>';i++;j++}else if(L[i+1][j]>=L[i][j+1]){out+='<span class="bad">'+esc(a[i])+'</span>';i++}else{out+='<span class="add">'+esc(b[j])+'</span>';j++}}
+  while(i<n)out+='<span class="bad">'+esc(a[i++])+'</span>';while(j<m)out+='<span class="add">'+esc(b[j++])+'</span>';
+  return out+' <span class="muted" style="font-size:11px">(green = right, red = extra, yellow = missing)</span>'}
+
+// ---------- tests & games ----------
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+let test=null;
+const usable=()=>cur.cards.filter(c=>c.f.trim()&&(c.b.trim()||hasCloze(c.f)));
+function runTest(kind){const cards=usable(),need=kind==='mc'||kind==='tf'?4:kind==='match'?3:1;if(cards.length<need)return alert('This test needs at least '+need+' cards with a front and a back.');
+  if(kind==='listen'&&!(cur.lang||cur.backLang))return alert('Choose the deck’s language at the top first, so the cards can be read aloud.');
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(kind==='speak'&&!SR)return alert('Your browser cannot listen to speech. Try Chrome or Edge.');
+  if(kind==='match')return matchGame(cards);
+  test={kind,rev:$('reverseTest').checked,qs:shuffle(cards.slice()).slice(0,+$('testLen').value),i:0,score:0,miss:[],start:now()};showTest()}
+function showTest(){const a=$('testArea'),c=test.qs[test.i];if(!c)return endTest();
+  const s=sides(c,test.rev&&!hasCloze(c.f));test.s=s;test.done=false;
+  const head='<p class="muted">Question '+(test.i+1)+' of '+test.qs.length+' · score '+test.score+'</p>';
+  const cardHtml=q=>'<div class="flash"><div class="flash-inner" style="cursor:default;min-height:180px"><div class="face">'+(s.qImg?'<img src="'+esc(s.qImg)+'" alt="">':'')+'<div>'+q+'</div></div></div></div>';
+  if(test.kind==='mc'){const pool=[...new Set(usable().map(x=>sides(x,test.rev&&!hasCloze(x.f)).aText).filter(t=>t&&t!==s.aText))];const opts=shuffle([s.aText,...shuffle(pool).slice(0,3)]);
+    a.innerHTML=head+cardHtml(s.q)+'<div class="opts">'+opts.map((o,i)=>'<button class="opt" data-o="'+i+'">'+esc(o)+'</button>').join('')+'</div>';
+    a.querySelectorAll('.opt').forEach(b=>b.onclick=()=>check(opts[+b.dataset.o]===s.aText,b,opts))}
+  else if(test.kind==='tf'){const wrong=shuffle(usable().filter(x=>x!==c)).map(x=>sides(x,test.rev&&!hasCloze(x.f)).aText).find(t=>t&&t!==s.aText);const truth=Math.random()<.5||!wrong,shown=truth?s.aText:wrong;test.truth=truth;
+    a.innerHTML=head+cardHtml(s.q)+'<p class="center big" style="margin:14px 0">= '+esc(shown)+' ?</p><div class="opts"><button class="opt" data-tf="1" style="text-align:center">✅ True</button><button class="opt" data-tf="0" style="text-align:center">❌ False</button></div>';
+    a.querySelectorAll('[data-tf]').forEach(b=>b.onclick=()=>check((b.dataset.tf==='1')===truth,b))}
+  else if(test.kind==='speak'){a.innerHTML=head+cardHtml(s.q)+'<div class="center"><button class="primary" id="micBtn">🎙 Press, then say the answer</button><p class="muted" id="heard"></p></div><div id="fb" class="center"></div>';
+    $('micBtn').onclick=()=>listen(s)}
+  else{const listenMode=test.kind==='listen';const lang=listenMode?(s.qLang||s.aLang):null;
+    a.innerHTML=head+(listenMode?'<div class="center"><p class="big">🎧 Listen and type what you hear</p><button class="primary" id="replay">🔊 Play again</button> <button class="secondary" id="slow">🐢 Slowly</button></div>':cardHtml(s.q))+
+      '<div class="typed"><input id="typed" data-side="'+(listenMode?(test.rev?'b':'f'):(s.cloze?'f':test.rev?'f':'b'))+'" placeholder="Type your answer" autocomplete="off" spellcheck="false"><button class="secondary" id="testKb" title="On-screen keyboard">⌨️</button><button class="primary" id="chk">Check</button></div><div id="fb" class="center"></div>';
+    const target=listenMode?s.qText:s.aText;
+    if(listenMode){$('replay').onclick=()=>say(s.qText,lang);$('slow').onclick=()=>say(s.qText,lang,.55);say(s.qText,lang)}
+    const inp=$('typed'),go=()=>{if(test.done)return;const ok=close(inp.value,target);check(ok,null,null,inp.value,target)};$('chk').onclick=go;inp.onkeydown=e=>{if(e.key==='Enter'&&!e.defaultPrevented)go()};
+    $('testKb').onclick=()=>MigaKeyboard.open({layout:kbFor(inp.dataset.side),target:inp});
+    if(MigaKeyboard.isOpen())MigaKeyboard.open({layout:kbFor(inp.dataset.side),target:inp});else inp.focus()}
+  if(!test.rev&&test.kind!=='listen'&&$('autoRead').checked)say(s.qText,s.qLang)}
+function listen(s){const SR=window.SpeechRecognition||window.webkitSpeechRecognition,r=new SR();r.lang=s.aLang||cur.backLang||cur.lang||'en-US';r.maxAlternatives=5;r.interimResults=false;
+  $('micBtn').disabled=true;$('micBtn').textContent='🎙 Listening…';
+  r.onresult=e=>{const alts=Array.from(e.results[0]).map(x=>x.transcript);const ok=alts.some(t=>close(t,s.aText));$('heard').textContent='I heard: “'+alts[0]+'”';check(ok,null,null,alts[0],s.aText)};
+  r.onerror=e=>{$('heard').textContent='Could not hear you ('+e.error+'). Check microphone permission and try again.';$('micBtn').disabled=false;$('micBtn').textContent='🎙 Try again'};
+  r.onend=()=>{if(!test.done){$('micBtn').disabled=false;$('micBtn').textContent='🎙 Try again'}};r.start()}
+function check(ok,btn,opts,typed,target){if(test.done)return;test.done=true;const c=test.qs[test.i],s=test.s;if(ok)test.score++;else test.miss.push(c);c.seen++;if(ok)c.right++;save();
+  const a=$('testArea');
+  if(opts)a.querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===s.aText)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  else if(test.kind==='tf')a.querySelectorAll('[data-tf]').forEach(b=>{b.disabled=true;if((b.dataset.tf==='1')===test.truth)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  const fb=$('fb');
+  if(fb)fb.innerHTML=(ok?'<p class="big" style="color:#2f6b49">✅ Correct</p>':'<p class="big" style="color:#9b3322">❌ Not quite</p>')+(typed!=null?'<div class="diff" style="font-size:18px">'+diffHtml(typed,target)+'</div>':'')+'<p>Answer: <b>'+esc(target||s.aText)+'</b></p>'+(!ok&&typed!=null?'<button class="secondary" id="override">I was right</button>':'');
+  else if(test.kind==='tf'){const p=document.createElement('p');p.className='center';p.innerHTML='Answer: <b>'+esc(s.aText)+'</b>';a.appendChild(p)}
+  if($('override'))$('override').onclick=()=>{test.score++;test.miss.pop();c.right++;save();$('override').remove()};
+  const n=document.createElement('div');n.className='center';n.style.marginTop='10px';n.innerHTML='<button class="primary">'+(test.i<test.qs.length-1?'Next →':'See results')+'</button>';a.appendChild(n);const nb=n.firstChild;nb.onclick=()=>{test.i++;showTest()};nb.focus()}
+function endTest(){const p=Math.round(test.score/test.qs.length*100),secs=Math.round((now()-test.start)/1000),bestKey='flashBest|'+cur.id+'|'+test.kind,best=+(lsGet(bestKey,0));if(p>best)try{localStorage.setItem(bestKey,p)}catch(e){}
+  $('testArea').innerHTML='<div class="center"><p class="big">'+test.score+' / '+test.qs.length+' ('+p+'%) '+(p>=90?'🏆':p>=70?'🎉':'📚')+'</p><p class="muted">'+secs+' s · best for this test: '+Math.max(p,best)+'%</p>'+(test.miss.length?'<p>Review these:</p><ul style="display:inline-block;text-align:left">'+test.miss.map(c=>'<li><b>'+esc(plain(test.rev?c.b:c.f))+'</b> — '+esc(plain(test.rev?c.f:c.b)||clozeAnswer(c.f))+'</li>').join('')+'</ul><div class="actions" style="justify-content:center"><button class="primary" id="retryMiss">Retry the ones I missed</button><button class="secondary" id="starMiss">★ Star them for later</button></div>':'')+'</div>';
+  if($('retryMiss')){const miss=test.miss.slice(),kind=test.kind;$('retryMiss').onclick=()=>{test={kind,rev:$('reverseTest').checked,qs:shuffle(miss),i:0,score:0,miss:[],start:now()};showTest()};$('starMiss').onclick=()=>{miss.forEach(c=>c.star=true);save();$('starMiss').textContent='✅ Starred'}}}
+function matchGame(cards){
+  const pick=shuffle(cards.slice()).slice(0,6),tiles=shuffle(pick.flatMap(c=>[{c,t:plain(c.f.replace(/\{\{(.+?)\}\}/g,'…')),k:'f'},{c,t:plain(c.b)||clozeAnswer(c.f),k:'b'}]));
+  const start=now();let sel=null,left=pick.length,miss=0,timer=null;const a=$('testArea');
+  const best=+(lsGet('flashMatch|'+cur.id,0));
+  a.innerHTML='<p class="center"><b id="mTime">0.0 s</b> · match each front with its back'+(best?' · best '+(best/1000).toFixed(1)+' s':'')+'</p><div class="match">'+tiles.map((x,i)=>'<button data-m="'+i+'">'+esc(x.t)+'</button>').join('')+'</div>';
+  timer=setInterval(()=>{if(!$('mTime'))return clearInterval(timer);$('mTime').textContent=((now()-start)/1000).toFixed(1)+' s'},100);
+  a.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const x=tiles[+b.dataset.m];
+    if(!sel){sel={b,x};b.classList.add('sel');return}
+    if(sel.b===b){b.classList.remove('sel');sel=null;return}
+    if(sel.x.c===x.c&&sel.x.k!==x.k){sel.b.classList.add('done');b.classList.add('done');sel=null;if(--left===0){clearInterval(timer);const t=now()-start+miss*1000;if(!best||t<best)try{localStorage.setItem('flashMatch|'+cur.id,t)}catch(e){}
+      a.insertAdjacentHTML('beforeend','<div class="center"><p class="big">🧩 Done in '+(t/1000).toFixed(1)+' s'+(miss?' (incl. '+miss+' s penalty)':'')+(!best||t<best?' — new best!':'')+'</p><button class="primary" id="againM">Play again</button></div>');$('againM').onclick=()=>matchGame(usable())}}
+    else{b.classList.add('bad');sel.b.classList.add('bad');miss++;const p=sel.b;setTimeout(()=>{b.classList.remove('bad');p.classList.remove('bad','sel')},450);sel=null}})}
+$('mcTest').onclick=()=>runTest('mc');$('typeTest').onclick=()=>runTest('type');$('tfTest').onclick=()=>runTest('tf');$('matchGame').onclick=()=>runTest('match');$('listenTest').onclick=()=>runTest('listen');$('speakTest').onclick=()=>runTest('speak');
+
+// ---------- stats ----------
+function renderStatsPane(){
+  const cards=cur.cards,reviewed=cards.filter(c=>c.seen),acc=reviewed.reduce((a,c)=>a+c.right,0)/Math.max(1,reviewed.reduce((a,c)=>a+c.seen,0));
+  const days=Object.keys(log),last30=days.filter(k=>now()-new Date(k).getTime()<30*DAY).reduce((a,k)=>({n:a.n+log[k].n,ok:a.ok+log[k].ok}),{n:0,ok:0});
+  const total=days.reduce((a,k)=>a+log[k].n,0);
+  // 18-week heatmap of reviews (all decks)
+  const cells=[],end=new Date();end.setHours(0,0,0,0);const startD=new Date(end);startD.setDate(startD.getDate()-7*18+1-startD.getDay());
+  for(let d=new Date(startD);d<=end;d.setDate(d.getDate()+1)){const n=(log[dayKey(d)]||{}).n||0;const lvl=n===0?0:n<10?1:n<30?2:n<60?3:4;cells.push('<i title="'+dayKey(d)+': '+n+' reviews" style="background:'+['rgba(22,32,43,.08)','#c6e5d2','#8dcaa5','#4E9E73','#2f6b49'][lvl]+'"></i>')}
+  // 14-day forecast for this deck
+  const fc=Array.from({length:14},(_,i)=>{const a=new Date(end.getTime()+i*DAY),b=a.getTime()+DAY;return cards.filter(c=>!isNew(c)&&(i===0?c.due<b:c.due>=a.getTime()&&c.due<b)).length});
+  const mx=Math.max(1,...fc);
+  const hardest=cards.filter(c=>c.lapses>0).sort((a,b)=>b.lapses-a.lapses).slice(0,8);
+  $('statsArea').innerHTML='<div class="stats-grid"><div class="stat"><b>🔥 '+streak()+'</b><small>day streak (all decks)</small></div><div class="stat"><b>'+total+'</b><small>reviews in total</small></div><div class="stat"><b>'+(last30.n?Math.round(last30.ok/last30.n*100):0)+'%</b><small>remembered, last 30 days</small></div><div class="stat"><b>'+Math.round(acc*100)+'%</b><small>correct answers in this deck</small></div><div class="stat"><b>'+cards.filter(mature).length+' / '+cards.length+'</b><small>cards mastered (21+ day interval)</small></div><div class="stat"><b>'+(cards.length?(cards.reduce((a,c)=>a+c.ef,0)/cards.length).toFixed(2):'–')+'</b><small>average ease</small></div></div>'+
+    '<h3 style="font:700 16px \'Space Grotesk\';margin:6px 0">Reviews per day — last 18 weeks</h3><div class="heat">'+cells.join('')+'</div>'+
+    '<h3 style="font:700 16px \'Space Grotesk\';margin:16px 0 6px">Cards due in the next 14 days (this deck)</h3><div class="fc">'+fc.map(n=>'<div style="height:'+(n/mx*100)+'%"><span>'+(n||'')+'</span></div>').join('')+'</div><div class="fc-l">'+fc.map((_,i)=>'<span>'+(i===0?'today':new Date(end.getTime()+i*DAY).toLocaleDateString(undefined,{weekday:'short'}))+'</span>').join('')+'</div>'+
+    (hardest.length?'<h3 style="font:700 16px \'Space Grotesk\';margin:16px 0 6px">Your hardest cards</h3><ul>'+hardest.map(c=>'<li><b>'+esc(plain(c.f))+'</b> — '+esc(plain(c.b)||clozeAnswer(c.f))+' <span class="pill">forgotten '+c.lapses+'×</span></li>').join('')+'</ul><button class="secondary" id="studyHard">Study these now</button>':'');
+  if($('studyHard'))$('studyHard').onclick=()=>{$('studyMode').value='hard';tab('study')}}
+
+// ---------- AI ----------
+$('aiFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;let t=await f.text();if(/\.html?$/i.test(f.name))t=new DOMParser().parseFromString(t,'text/html').body.textContent;$('aiText').value=t.replace(/\n{3,}/g,'\n\n').slice(0,30000)};
+$('aiGo').onclick=async()=>{const text=$('aiText').value.trim();if(!text)return $('aiText').focus();const st=$('aiStatus');st.classList.add('show');st.textContent='Writing your cards…';$('aiGo').disabled=true;
+  const style={qa:'a clear question on the front and a short, complete answer on the back',term:'a key term on the front and a one-sentence definition on the back',vocab:'a word or short phrase in the target language on the front and its English translation on the back',cloze:'a full sentence on the front where the one key word or phrase is wrapped in double curly braces like {{this}} (it becomes the blank), and an optional short hint on the back',example:'a word in the target language on the front, and on the back its meaning followed by a short example sentence using it'}[$('aiStyle').value];
+  const lvl=$('aiLevel').value,tags=$('aiTags').value.split(',').map(s=>s.trim()).filter(Boolean);
+  try{const d=MigaAI.json(await MigaAI.ask('You create accurate, concise study flashcards. Reply with ONE JSON object only.','Create '+$('aiCount').value+' flashcards with '+style+'.'+(lvl?' Level: '+lvl+'.':'')+' Cover the most important facts; each card tests one thing. Keep backs under 30 words. Add 1-2 short topic tags per card.\nFormat: {"front_language":"BCP-47 code of the front text, e.g. es-ES","back_language":"BCP-47 code of the back text","cards":[{"front":"...","back":"...","tags":["..."]}]}\nSource notes or topic:\n'+text.slice(0,30000),{maxTokens:12000}));
+    const cards=(Array.isArray(d)?d:d.cards||[]).filter(c=>c&&c.front&&(c.back||/\{\{.+?\}\}/.test(c.front)));if(!cards.length)throw new Error('No cards came back. Try again.');
+    cards.forEach(c=>cur.cards.push(card(String(c.front),String(c.back||''),[...new Set(tags.concat(Array.isArray(c.tags)?c.tags.map(String):[]))].slice(0,4))));
+    const okLang=l=>typeof l==='string'&&/^[a-z]{2,3}(-[A-Za-z]{2,4})?$/.test(l)?(LANGS.find(([v])=>v.split('-')[0]===l.split('-')[0])||[''])[0]:'';
+    if(!cur.lang&&okLang(d.front_language))cur.lang=okLang(d.front_language);if(!cur.backLang&&okLang(d.back_language))cur.backLang=okLang(d.back_language);
+    if(cur.name==='New deck')cur.name=text.split('\n')[0].slice(0,40);save();openDeck();st.textContent='Added '+cards.length+' cards. Check them in the Cards tab — AI can make mistakes.';tab('study')}
+  catch(e){st.textContent='Could not make cards: '+e.message}$('aiGo').disabled=false};
+
+// ---------- import / export / share ----------
+function download(name,text,type){const a=document.createElement('a'),u=URL.createObjectURL(new Blob([text],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)}
+const csvCell=s=>'"'+String(s).replace(/"/g,'""')+'"';
+const fileName=()=>cur.name.replace(/[^\w-]+/g,'-').replace(/^-|-$/g,'')||'deck';
+$('expCsv').onclick=()=>download(fileName()+'.csv','﻿'+cur.cards.map(c=>csvCell(c.f)+','+csvCell(c.b)+','+csvCell(c.tags.join(' '))).join('\n'),'text/csv');
+$('expAnki').onclick=()=>download(fileName()+'-anki.txt','#separator:tab\n#html:true\n#tags column:3\n'+cur.cards.map(c=>{const f=hasCloze(c.f)?c.f.replace(/\{\{(.+?)\}\}/g,(m,a)=>'{{c1::'+a+'}}'):c.f;return [f,c.b,c.tags.join(' ')].map(x=>String(x).replace(/\t/g,' ').replace(/\n/g,'<br>')).join('\t')}).join('\n'),'text/plain');
+$('expJson').onclick=()=>download('flashcard-decks-backup.json',JSON.stringify({app:'MigaBuilder Flashcard Forge',version:2,decks,log},null,1),'application/json');
+$('printCards').onclick=()=>{const w=window.open('','_blank');if(!w)return alert('Allow pop-ups to print.');w.document.write('<!doctype html><title>'+esc(cur.name)+'</title><style>body{font:15px sans-serif}table{border-collapse:collapse;width:100%}td{border:1px dashed #999;width:50%;height:120px;text-align:center;padding:10px;vertical-align:middle}td img{max-height:80px;display:block;margin:0 auto 6px}tr{page-break-inside:avoid}</style><h2>'+esc(cur.name)+'</h2><p>Cut along the dashed lines and fold each row in half.</p><table>'+cur.cards.map(c=>'<tr><td>'+(c.img?'<img src="'+esc(c.img)+'">':'')+(hasCloze(c.f)?clozeQ(c.f):rich(c.f))+'</td><td>'+(hasCloze(c.f)?clozeA(c.f)+'<br>':'')+rich(c.b)+'</td></tr>').join('')+'</table>');w.document.close();w.print()};
+$('delDeck').onclick=()=>{if(!confirm('Delete the deck “'+cur.name+'” and all its cards?'))return;decks=decks.filter(d=>d!==cur);save();cur=decks[0]||null;if(cur)openDeck();else{$('deckPanel').classList.add('hidden');renderDecks()}};
+// Share: the deck (text only) is compressed into the link itself — no server involved.
+const b64u={enc:b=>{let s='';new Uint8Array(b).forEach(x=>s+=String.fromCharCode(x));return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')},dec:s=>{const t=atob(s.replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(t,c=>c.charCodeAt(0))}};
+async function pack(obj){const raw=new TextEncoder().encode(JSON.stringify(obj));if(!('CompressionStream' in window))return 'j'+b64u.enc(raw);const buf=await new Response(new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'))).arrayBuffer();return 'z'+b64u.enc(buf)}
+async function unpack(s){const bytes=b64u.dec(s.slice(1));if(s[0]==='z'){const buf=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer();return JSON.parse(new TextDecoder().decode(buf))}return JSON.parse(new TextDecoder().decode(bytes))}
+$('shareLink').onclick=async()=>{const data={n:cur.name,l:cur.lang,bl:cur.backLang,c:cur.cards.map(c=>c.tags.length?[c.f,c.b,c.tags]:[c.f,c.b])};const code=await pack(data);const url=location.origin+location.pathname+'#deck='+code;
+  $('shareOut').innerHTML='<p>'+(url.length>30000?'⚠️ This deck is large, so the link is very long ('+Math.round(url.length/1000)+'k characters). Some apps may cut it — use the backup file instead if it does not open.':'Anyone who opens this link gets a copy of the deck (images are not included). Nothing is stored on a server — the cards are inside the link.')+'</p><div class="typed" style="margin:0;max-width:none"><input id="shareUrl" readonly value="'+esc(url)+'"><button class="primary" id="copyShare">📋 Copy link</button></div>';
+  $('copyShare').onclick=async()=>{try{await navigator.clipboard.writeText(url);$('copyShare').textContent='✅ Copied'}catch(e){$('shareUrl').select();document.execCommand('copy')}}};
+async function importFromHash(){const m=location.hash.match(/deck=([\w-]+)/);if(!m)return;try{const d=await unpack(m[1]);history_replace();const n=(d.c||[]).length;if(!n)return;if(!confirm('Add the shared deck “'+d.n+'” ('+n+' cards) to your decks?'))return;
+  const deck=upgradeDeck({id:uid(),name:String(d.n||'Shared deck'),lang:d.l||'',backLang:d.bl||'',cards:d.c.map(x=>card(x[0],x[1],Array.isArray(x[2])?x[2]:[]))});decks.push(deck);cur=deck;save();openDeck()}catch(e){alert('This share link is damaged or incomplete.')}}
+function history_replace(){try{window.history.replaceState(null,'',location.pathname)}catch(e){}}
+$('importFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;const t=await f.text();
+  try{if(/\.(json|miga)$/i.test(f.name)){const d=JSON.parse(t);(d.decks||[]).forEach(x=>{x.id=uid();decks.push(upgradeDeck(x))});if(d.log&&typeof d.log==='object')Object.keys(d.log).forEach(k=>{if(!log[k])log[k]=d.log[k]});cur=decks[decks.length-1]}
+    else{let lines=t.replace(/^﻿/,'').split(/\r?\n/);let sep=null,tagCol=-1;
+      lines=lines.filter(l=>{const m=l.match(/^#(\w+[\w ]*):(.*)$/);if(m){if(m[1]==='separator')sep=m[2].trim()==='tab'?'\t':m[2].trim()==='comma'?',':m[2].trim();if(m[1]==='tags column')tagCol=+m[2]-1;return false}return l.trim()});
+      const rows=lines.map(l=>sep==='\t'||(!sep&&l.includes('\t'))?l.split('\t'):parseCsv(l)).filter(r=>r.length>=2&&r[0].trim());
+      const html=s=>String(s||'').replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\{\{c\d+::(.+?)(::.+?)?\}\}/g,'{{$1}}');
+      cur=upgradeDeck({id:uid(),name:f.name.replace(/\.\w+$/,''),cards:rows.map(r=>card(html(r[0]),html(r[1]),(r[tagCol>=0?tagCol:2]||'').split(/\s+/).filter(Boolean)))});decks.push(cur)}
+    save();openDeck()}catch(err){alert('Could not import this file: '+err.message)}};
+function parseCsv(line){const out=[];let c='',q=false;for(let i=0;i<line.length;i++){const ch=line[i];if(q){if(ch==='"'&&line[i+1]==='"'){c+='"';i++}else if(ch==='"')q=false;else c+=ch}else if(ch==='"')q=true;else if(ch===','||ch===';'){out.push(c);c=''}else c+=ch}out.push(c);return out}
+
+load().then(()=>{cur=decks[0];openDeck();importFromHash()});
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

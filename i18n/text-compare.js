@@ -180,3 +180,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "Press “Format JSON” before comparing JSON, so the differences line up neatly.": {
+  "es": "Pulsa “Format JSON” antes de comparar JSON, para que las diferencias queden bien alineadas.",
+  "ar": "اضغط «Format JSON» قبل مقارنة JSON حتى تصطف الفروق بشكل مرتب.",
+  "zh": "比较 JSON 前先点“Format JSON”，差异会对齐得更清楚。",
+  "sw": "Bonyeza “Format JSON” kabla ya kulinganisha JSON, ili tofauti zipangike vizuri.",
+  "sv": "Tryck på ”Format JSON” innan du jämför JSON, så hamnar skillnaderna snyggt i linje.",
+  "de": "Drücke vor dem Vergleich von JSON auf „Format JSON“, damit die Unterschiede sauber untereinander stehen.",
+  "pt": "Toque em “Format JSON” antes de comparar JSON, para que as diferenças fiquem bem alinhadas.",
+  "fr": "Appuyez sur « Format JSON » avant de comparer du JSON, pour que les différences s’alignent proprement."
+ },
+ "Press “Swap” if you pasted the two versions the wrong way round.": {
+  "es": "Pulsa “Swap” si pegaste las dos versiones al revés.",
+  "ar": "اضغط «Swap» إذا لصقت النسختين بالعكس.",
+  "zh": "如果两个版本贴反了，点“Swap”即可互换。",
+  "sw": "Bonyeza “Swap” ukibandika matoleo mawili kinyume.",
+  "sv": "Tryck på ”Swap” om du klistrade in versionerna åt fel håll.",
+  "de": "Drücke „Swap“, wenn du die beiden Fassungen vertauscht eingefügt hast.",
+  "pt": "Toque em “Swap” se colou as duas versões invertidas.",
+  "fr": "Appuyez sur « Swap » si vous avez collé les deux versions à l’envers."
+ },
+ "Download the HTML report to share the changes with someone who doesn’t use the tool.": {
+  "es": "Descarga el informe HTML para compartir los cambios con alguien que no use la herramienta.",
+  "ar": "نزّل تقرير HTML لمشاركة التغييرات مع شخص لا يستخدم الأداة.",
+  "zh": "下载 HTML 报告，就能把改动分享给不使用此工具的人。",
+  "sw": "Pakua ripoti ya HTML ili kushiriki mabadiliko na mtu asiyetumia zana hii.",
+  "sv": "Ladda ner HTML-rapporten för att dela ändringarna med någon som inte använder verktyget.",
+  "de": "Lade den HTML-Bericht herunter, um die Änderungen mit jemandem zu teilen, der das Werkzeug nicht nutzt.",
+  "pt": "Baixe o relatório HTML para compartilhar as mudanças com quem não usa a ferramenta.",
+  "fr": "Téléchargez le rapport HTML pour partager les modifications avec quelqu’un qui n’utilise pas l’outil."
+ },
+ "Can I compare two Word or PDF files?": {
+  "es": "¿Puedo comparar dos archivos de Word o PDF?",
+  "ar": "هل يمكنني مقارنة ملفي Word أو PDF؟",
+  "zh": "能比较两个 Word 或 PDF 文件吗？",
+  "sw": "Je, naweza kulinganisha faili mbili za Word au PDF?",
+  "sv": "Kan jag jämföra två Word- eller PDF-filer?",
+  "de": "Kann ich zwei Word- oder PDF-Dateien vergleichen?",
+  "pt": "Posso comparar dois arquivos Word ou PDF?",
+  "fr": "Puis-je comparer deux fichiers Word ou PDF ?"
+ },
+ "Yes. Copy the text from each file and paste it into the two boxes. To get the text out of a PDF first, use Document Forge.": {
+  "es": "Sí. Copia el texto de cada archivo y pégalo en los dos cuadros. Para sacar antes el texto de un PDF, usa Document Forge.",
+  "ar": "نعم. انسخ النص من كل ملف والصقه في المربعين. لاستخراج النص من ملف PDF أولًا، استخدم Document Forge.",
+  "zh": "可以。把两个文件的文字分别复制到两个框中。要先从 PDF 中提取文字，请使用 Document Forge。",
+  "sw": "Ndiyo. Nakili maandishi kutoka kila faili na uyabandike kwenye visanduku viwili. Ili kutoa maandishi kwenye PDF kwanza, tumia Document Forge.",
+  "sv": "Ja. Kopiera texten från varje fil och klistra in den i de två rutorna. Använd Document Forge för att först få ut texten ur en PDF.",
+  "de": "Ja. Kopiere den Text aus jeder Datei und füge ihn in die beiden Felder ein. Um den Text zuerst aus einer PDF zu holen, nutze Document Forge.",
+  "pt": "Sim. Copie o texto de cada arquivo e cole nas duas caixas. Para tirar antes o texto de um PDF, use o Document Forge.",
+  "fr": "Oui. Copiez le texte de chaque fichier et collez-le dans les deux cases. Pour extraire d’abord le texte d’un PDF, utilisez Document Forge."
+ },
+ "What is a unified diff?": {
+  "es": "¿Qué es un diff unificado?",
+  "ar": "ما هو الـ unified diff؟",
+  "zh": "什么是 unified diff？",
+  "sw": "Unified diff ni nini?",
+  "sv": "Vad är en unified diff?",
+  "de": "Was ist ein Unified Diff?",
+  "pt": "O que é um diff unificado?",
+  "fr": "Qu’est-ce qu’un diff unifié ?"
+ },
+ "It is the standard format programmers use to show changes: removed lines start with − and added lines with +. Press “Copy unified diff” to paste it into a code review or an email.": {
+  "es": "Es el formato estándar que usan los programadores para mostrar cambios: las líneas eliminadas empiezan con − y las añadidas con +. Pulsa “Copy unified diff” para pegarlo en una revisión de código o en un correo.",
+  "ar": "هو الصيغة المعتادة التي يستخدمها المبرمجون لعرض التغييرات: تبدأ الأسطر المحذوفة بـ − والمضافة بـ +. اضغط «Copy unified diff» للصقه في مراجعة كود أو رسالة بريد.",
+  "zh": "这是程序员展示改动的标准格式：删除的行以 − 开头，新增的行以 + 开头。点“Copy unified diff”即可粘贴到代码审查或邮件中。",
+  "sw": "Ni muundo wa kawaida ambao watengeneza programu hutumia kuonyesha mabadiliko: mistari iliyoondolewa huanza na − na iliyoongezwa huanza na +. Bonyeza “Copy unified diff” kuibandika kwenye ukaguzi wa msimbo au barua pepe.",
+  "sv": "Det är standardformatet som programmerare använder för att visa ändringar: borttagna rader börjar med − och tillagda med +. Tryck på ”Copy unified diff” för att klistra in den i en kodgranskning eller ett mejl.",
+  "de": "Das ist das übliche Format, mit dem Programmierer Änderungen zeigen: entfernte Zeilen beginnen mit −, hinzugefügte mit +. Drücke „Copy unified diff“, um es in ein Code-Review oder eine E-Mail einzufügen.",
+  "pt": "É o formato padrão que programadores usam para mostrar mudanças: linhas removidas começam com − e as adicionadas com +. Toque em “Copy unified diff” para colar numa revisão de código ou num e-mail.",
+  "fr": "C’est le format standard utilisé par les programmeurs pour montrer des modifications : les lignes supprimées commencent par − et les lignes ajoutées par +. Appuyez sur « Copy unified diff » pour le coller dans une revue de code ou un e-mail."
+ }
+});

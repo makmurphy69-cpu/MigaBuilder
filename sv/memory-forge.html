@@ -1,0 +1,639 @@
+<!-- Generated from /memory-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="sv" data-en-title="Memory test and memory training games — free — Memory Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Minnestest och minnesträningsspel — gratis — Memory Forge | MigaBuilder</title>
+<meta name="description" content="Memory Forge tränar ditt minne med siffer- och symbolkort i 30 nivåer, schimpanstestet, par, dual n-back, Corsi-sekvenser och ordlistor, plus en guide till minnestekniker.">
+<link rel="canonical" href="https://migabuilder.com/sv/memory-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/memory-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Minnestest och minnesträningsspel — gratis — Memory Forge">
+<meta property="og:description" content="Memory Forge tränar ditt minne med siffer- och symbolkort i 30 nivåer, schimpanstestet, par, dual n-back, Corsi-sekvenser och ordlistor, plus en guide till minnestekniker.">
+<meta property="og:url" content="https://migabuilder.com/sv/memory-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+.modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.mode{background:#fff;border:2px solid rgba(22,32,43,.12);border-radius:8px;padding:12px;text-align:left;cursor:pointer;color:var(--ink)}
+.mode b{display:block;font:700 15px 'Space Grotesk';margin-top:4px}.mode small{color:rgba(22,32,43,.72);font-size:12px;line-height:1.35;display:block;margin-top:3px}
+.mode .ico{font-size:24px}.mode.active{border-color:var(--amber);background:#fff7e6}
+.tabs{display:flex;gap:4px;border-bottom:2px solid rgba(22,32,43,.15);margin:4px 0 14px;flex-wrap:wrap}
+.tabs button{border:0;background:none;padding:10px 12px;font-weight:700;cursor:pointer;color:rgba(22,32,43,.72);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button.active{color:var(--ink);border-bottom-color:var(--amber)}
+.levels{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.lvl{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:6px;padding:8px 4px;cursor:pointer;text-align:center;font-weight:700;color:var(--ink)}
+.lvl small{display:block;font-size:11px;color:#b7831d;letter-spacing:1px;min-height:14px}
+.lvl.sel{outline:3px solid var(--amber)}.lvl.done{background:#eef8f1;border-color:#4E9E73}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.switch{display:inline-flex;border:1px solid rgba(22,32,43,.25);border-radius:999px;overflow:hidden;background:#fff}
+.switch button{border:0;background:none;padding:8px 14px;font-weight:700;cursor:pointer;color:var(--ink)}.switch button.on{background:var(--navy);color:#fff}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px 14px}
+.cgrid .field{margin:0}.cgrid .hint{font-size:11.5px;color:rgba(22,32,43,.72);margin-top:3px}
+.summary{font-size:13.5px;background:#fff;border:1px dashed rgba(22,32,43,.25);border-radius:6px;padding:10px 12px;margin:12px 0}
+#arena{min-height:120px}
+.hud{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;margin-bottom:12px}
+.hud .pill{background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:999px;padding:5px 12px;font:600 13px 'IBM Plex Mono'}
+.timebar{height:8px;background:#d9d7cd;border-radius:999px;overflow:hidden;margin-bottom:14px}.timebar i{display:block;height:100%;width:100%;background:var(--amber);transform-origin:left;transition:transform .1s linear}
+.cards{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.mcard{width:74px;height:98px;border-radius:10px;background:#fff;border:2px solid rgba(22,32,43,.16);display:flex;align-items:center;justify-content:center;font:700 40px 'Space Grotesk';box-shadow:0 4px 12px rgba(8,24,38,.12);position:relative;user-select:none}
+.mcard .ix{position:absolute;top:4px;left:7px;font:500 10px 'IBM Plex Mono';color:rgba(22,32,43,.72)}
+.mcard.big{width:150px;height:200px;font-size:92px}
+.mcard.slot{cursor:pointer;background:#f6f4ee;border-style:dashed}.mcard.slot.active{border-color:var(--amber);border-style:solid;background:#fff7e6}
+.mcard.ok{border-color:#4E9E73;background:#eef8f1}.mcard.bad{border-color:#D8604A;background:#fdeeea}
+.mcard .was{position:absolute;bottom:3px;right:6px;font-size:18px;opacity:.8}
+.palette{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:16px 0 6px}
+.palette button{min-width:52px;height:52px;border-radius:8px;border:1px solid rgba(22,32,43,.2);background:#fff;font:700 24px 'Space Grotesk';cursor:pointer;color:var(--ink)}
+.palette button.fn{font-size:14px;padding:0 12px;background:#f1efe8}
+.center{text-align:center}
+.bigmsg{font:700 26px 'Space Grotesk';margin:8px 0}
+.stars{font-size:30px;letter-spacing:4px;color:#e2a63b}
+.chimp{display:grid;gap:6px;margin:0 auto;max-width:640px}
+.chimp div{aspect-ratio:1;border-radius:8px;background:rgba(22,32,43,.05)}
+.chimp button{aspect-ratio:1;width:100%;border-radius:8px;border:0;background:#fff;box-shadow:0 2px 6px rgba(8,24,38,.18);font:700 24px 'Space Grotesk';cursor:pointer;color:var(--ink)}
+.chimp button.cover{background:var(--navy);color:transparent}.chimp button.gone{visibility:hidden}.chimp button.wrong{background:#D8604A;color:#fff}
+.pairs{display:grid;gap:8px;margin:0 auto;max-width:640px}
+.pc{aspect-ratio:3/4;border-radius:10px;border:0;cursor:pointer;font:700 30px 'Space Grotesk';background:var(--navy);color:transparent;box-shadow:0 3px 8px rgba(8,24,38,.2);transition:transform .2s}
+.pc.up{background:#fff;color:var(--ink);transform:rotateY(0)}.pc.matched{background:#eef8f1;color:#4E9E73;cursor:default}
+.nb{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:min(330px,90%);margin:0 auto}
+.nb div{aspect-ratio:1;border-radius:10px;background:rgba(22,32,43,.07);display:flex;align-items:center;justify-content:center;font:700 44px 'Space Grotesk'}
+.nb div.on{background:var(--navy);color:#fff}
+.nbbtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.nbbtns button{padding:14px 18px;font-weight:700;border-radius:8px;border:2px solid var(--navy);background:#fff;cursor:pointer;color:var(--ink)}
+.nbbtns button.hit{background:#4E9E73;color:#fff;border-color:#4E9E73}.nbbtns button.miss{background:#D8604A;color:#fff;border-color:#D8604A}
+.corsi{display:grid;gap:8px;margin:0 auto;max-width:420px}
+.corsi button{aspect-ratio:1;border-radius:10px;border:0;background:#5a7390;cursor:pointer}
+.corsi button.lit{background:#f2c640;box-shadow:0 0 18px #f2c640}.corsi button.tap{background:#6fd1e0}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}.stat b{display:block;font:700 22px 'Space Grotesk'}.stat span{font-size:12px;color:rgba(22,32,43,.72)}
+.wordlist{columns:3 150px;font:600 17px 'IBM Plex Sans';line-height:1.9;max-width:700px;margin:6px auto;padding-left:28px}
+.wordlist li.ok{color:#2f7a52}.wordlist li.bad{color:#b8432e}.wordlist small{font-weight:400;color:rgba(22,32,43,.72)}
+.tech{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tech details{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px}
+.tech summary{font-weight:700;cursor:pointer}.tech p,.tech li{font-size:13.5px;line-height:1.5}
+h3.tech-h{font:700 16px 'Space Grotesk';margin:18px 0 8px}
+.tech ul,.tech ol{margin:6px 0 0;padding-left:20px}
+.plan{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}.plan>div{background:#fff;border:1px solid rgba(22,32,43,.12);border-left:4px solid var(--amber);border-radius:6px;padding:10px 12px;font-size:13.5px}.plan ul{margin:6px 0 0;padding-left:18px;line-height:1.5}
+.tech-more{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:10px 12px;margin-top:10px;font-size:13.5px}
+table.milestones{border-collapse:collapse;font-size:13px;margin-top:8px;width:100%}table.milestones td,table.milestones th{border:1px solid rgba(22,32,43,.15);padding:5px 8px;text-align:left}
+.trainer{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:8px;padding:12px 14px;margin:0 0 14px}.trainer h3{font:700 16px 'Space Grotesk';margin:0 0 6px}
+.trainer textarea,.trainer input{width:100%;box-sizing:border-box}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.pal-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}.pal-table td{border-bottom:1px solid rgba(22,32,43,.1);padding:6px 4px;vertical-align:middle}.pal-table td:first-child{color:rgba(22,32,43,.72);width:40%}
+.pal-table input{padding:6px 8px}.pal-table .ok{color:#2f7a52;font-weight:700}.pal-table .bad{color:#b8432e;font-weight:700}
+.maj-out{font-size:15px;line-height:1.8}.maj-out span{display:inline-block;background:#fff7e6;border:1px solid #e9c77c;border-radius:6px;padding:2px 8px;margin:2px}
+.maj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:4px;font-size:13px;margin-top:8px}.maj-grid div{background:#f6f4ee;border-radius:4px;padding:3px 6px}.maj-grid b{font-family:'IBM Plex Mono';margin-right:4px}
+.rev-list{list-style:none;padding:0;margin:10px 0;display:flex;flex-wrap:wrap;gap:6px}.rev-list li{background:#eef4fb;border:1px solid #c6d8ee;border-radius:999px;padding:4px 12px;font-size:13px}
+table.major{border-collapse:collapse;font-size:13px}table.major td{border:1px solid rgba(22,32,43,.15);padding:4px 8px;text-align:center}
+@media(max-width:620px){.mcard{width:56px;height:76px;font-size:30px}.mcard.big{width:120px;height:160px;font-size:70px}.palette button{min-width:44px;height:46px}}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/memory-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Lär den ut minnestekniker?","acceptedAnswer":{"@type":"Answer","text":"Ja. En teknikguide med en 4-veckorsplan, plus tränare för minnespalatset och Major-systemet."}},{"@type":"Question","name":"Är Memory Forge gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/memory-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/memory-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/memory-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/memory-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/memory-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/memory-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/memory-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/memory-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/memory-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/memory-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/sv/">← All tools</a><span>Memory Forge</span></nav>
+<header class="masthead"><div><h1>Memory Forge</h1><p>Train your memory with number and symbol cards, the chimp test, pairs, n-back and sequences — 30 levels, timed or untimed, or your own settings.</p></div></header>
+<main>
+
+<section class="panel">
+  <h2>1. Choose a memory game</h2>
+  <p>Each game trains a different kind of memory. Card games train short-term memory for order; the chimp test and sequences train visual–spatial memory; n-back trains working memory; the word list is where you practise memory techniques.</p>
+  <div class="modes" id="modes"></div>
+</section>
+
+<section class="panel" id="setupPanel">
+  <h2>2. Pick a level or set it up yourself</h2>
+  <div class="tabs" role="group" aria-label="Mode"><button class="active" data-tab="levels" id="tabLevels">🏆 Levels</button><button data-tab="custom" id="tabCustom">⚙️ Custom</button></div>
+  <div class="row"><span style="font-weight:700;font-size:13px">Clock:</span>
+    <div class="switch" id="timeSwitch"><button data-timed="1" class="on" id="timedOn">⏱ With time</button><button data-timed="0" id="timedOff">🧘 Without time</button></div>
+    <span class="muted" id="timeHint"></span></div>
+  <div id="levelsBox">
+    <p class="muted">Pick any level — every level is open, so you can carry on where you left off on another device. Stars show how you did: ★ 70% · ★★ 90% (passed) · ★★★ perfect. Timed and untimed stars are kept separately.</p>
+    <div class="levels" id="levels"></div>
+  </div>
+  <div id="customBox" class="hidden">
+    <div class="cgrid" id="customFields"></div>
+  </div>
+  <div class="summary" id="summary"></div>
+  <div class="actions"><button class="primary" id="startBtn">▶ Start</button><label class="muted" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="soundOn" checked> Sounds</label></div>
+</section>
+
+<section class="panel hidden" id="playPanel">
+  <div class="hud"><strong id="hudTitle"></strong><span><span class="pill" id="hudInfo"></span> <span class="pill" id="hudClock">—</span></span><button class="secondary" id="quitBtn">✕ Stop</button></div>
+  <div class="timebar hidden" id="timebar"><i id="timefill"></i></div>
+  <div id="arena"></div>
+</section>
+
+<section class="panel">
+  <h2>Your progress</h2>
+  <div class="stat-grid" id="stats"></div>
+  <h3 style="font:700 15px 'Space Grotesk';margin:16px 0 6px">Last 30 games (accuracy)</h3>
+  <div id="chart"></div>
+  <div class="actions" style="margin-top:10px"><button class="secondary" id="exportBtn">⬇ Download my results (CSV)</button><button class="danger" id="resetBtn">Reset progress</button></div>
+  <p class="privacy" style="margin-top:12px">🔒 Everything runs and is saved only in this browser. Nothing is uploaded.</p>
+</section>
+
+<section class="panel" id="techniques">
+  <h2>Memory techniques that work</h2>
+  <p>World memory champions are not born with special memories — they use techniques like these. In one study, ordinary people who practised the memory palace for about 30 minutes a day for six weeks more than doubled how many words they could remember, and kept most of the gain four months later (Dresler et al., <i>Neuron</i>, 2017). Pick one technique, practise it with the <b>📝 Word list</b> game or the trainers below, then add the next.</p>
+  <h3 class="tech-h">Ways to remember things</h3>
+  <div class="tech">
+    <details open><summary>🧩 Chunking</summary><p>Group items into small blocks. “7 4 1 9 2 6” is six things; “741 · 926” is two. Most people can hold about four chunks at once, so bigger chunks mean more items. Phone numbers, card numbers and postcodes are already chunked for this reason.</p></details>
+    <details><summary>🏛️ Memory palace (method of loci)</summary><p>The strongest general technique. Pick a place you know well — your home — and a fixed route through it: front door, doormat, hall mirror, sofa… Put one vivid image of each item on each spot, then walk the route again to recall.</p>
+      <ul><li>Start with 10 spots in one room or house; add more palaces later (school, work, a street).</li><li>Make each image <b>interact</b> with its spot: the banana is squashed in the door, the dog is licking the mirror.</li><li>One or two items per spot. Keep the route in the same direction every time.</li><li>Wait a day before reusing a palace for new things, so old images fade.</li></ul>
+      <p><a href="#palaceTrainer">Try the memory palace trainer ↓</a></p></details>
+    <details><summary>🎭 Story (link) method</summary><p>Link each item to the next in a strange, moving little story: a ★ star falls on a ● ball that rolls into a ▲ tent… Great for short lists when you have no palace ready. Its weakness: if one link breaks, the rest of the story can go with it.</p></details>
+    <details><summary>🖐️ Peg systems</summary><p>Learn a fixed picture for each number once, then hook new items onto the pegs — useful when you need “what was number 7?”.</p>
+      <p><b>Rhyme pegs:</b> 1 bun · 2 shoe · 3 tree · 4 door · 5 hive · 6 sticks · 7 heaven · 8 gate · 9 line · 10 hen.<br><b>Shape pegs:</b> 1 candle · 2 swan · 3 handcuffs · 4 sailboat · 5 hook · 6 golf club · 7 cliff · 8 snowman · 9 balloon on a string · 10 bat and ball.</p>
+      <p>To remember “milk” as item 5, picture bees in a hive pouring milk.</p></details>
+    <details><summary>🔤 Major system for numbers</summary><p>Turn digits into consonant sounds, then add vowels to make words you can picture: 32 = M-N = “moon”, 94 = B-R = “bear”. Vowels and the letters w, h, y don't count; go by sound, not spelling (“knife” = N-F = 28).</p>
+      <table class="major"><tr><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr><tr><td>s z</td><td>t d</td><td>n</td><td>m</td><td>r</td><td>l</td><td>j sh ch</td><td>k g</td><td>f v</td><td>p b</td></tr></table>
+      <p>Memory hooks: <b>t</b> has 1 down-stroke, <b>n</b> 2, <b>m</b> 3; fou<b>r</b> ends in r; <b>L</b> is the Roman 50; a mirrored <b>J</b> looks like 6; a <b>K</b> is two 7s; a cursive <b>f</b> looks like 8; <b>P</b> is a mirrored 9; <b>z</b>ero starts with z. <a href="#majorTrainer">Major system trainer ↓</a></p></details>
+    <details><summary>🧑‍🎤 PAO and the Dominic system</summary><p>For long numbers and playing cards. Give every two-digit number a <b>P</b>erson, an <b>A</b>ction and an <b>O</b>bject (07 = James Bond · shooting · a tuxedo). Six digits then become one scene: the person from the first pair doing the action of the second pair with the object of the third. The <b>Dominic system</b> finds the people by turning digits into letters (1 = A, 2 = B … 9 = N, 0 = O), so 15 = A.E. = Albert Einstein. Build it slowly: 10 new people a day.</p></details>
+    <details><summary>👋 Names and faces</summary><ol><li>Really listen, then say the name back: “Nice to meet you, Maya.”</li><li>Pick one feature of the face (curly hair, big smile).</li><li>Turn the name into a picture (Maya → a <i>mayor</i>'s chain) and fix it to that feature.</li><li>Use the name once more before you leave, and review new names that evening.</li></ol></details>
+    <details><summary>🌍 Keyword method for languages</summary><p>Find an English word that sounds like the foreign word and link it to the meaning in one image. Spanish <i>pato</i> (duck) sounds like “pot” → a duck sitting in a cooking pot. Swahili <i>kitabu</i> (book) → a cat reading a book. Then say the real word aloud a few times.</p></details>
+    <details><summary>🔠 Acronyms and first-letter sentences</summary><p>Make a word or sentence from first letters: ROY G BIV for the rainbow, “My Very Educated Mother Just Served Us Nachos” for the planets. Best for short, fixed lists you need in order.</p></details>
+    <details><summary>✨ Make images that stick</summary><p>Plain pictures fade. Make them <b>big</b> or tiny, <b>moving</b>, <b>colourful</b>, loud, smelly, funny or a little absurd, and put yourself in the scene. Link items by action (the cat <i>kicks</i> the drum) rather than just placing them side by side.</p></details>
+  </div>
+  <h3 class="tech-h">Learn so it lasts</h3>
+  <div class="tech">
+    <details open><summary>🧪 Test yourself (retrieval practice)</summary><p>Trying to recall is what makes memories stronger — much more than reading again. Close the book and write down what you remember, then check. A big review of learning research (Dunlosky et al., 2013) rated practice testing and spaced practice the two most useful study methods, and rereading and highlighting among the least. <a href="/sv/flashcard-forge.html">Flashcard Forge</a> does this for you.</p></details>
+    <details><summary>📅 Space it out</summary><p>Review just before you would forget: after about 1 day, 3 days, 1 week, 2 weeks and 1 month. Each review takes less time than the last. The <a href="#reviewPlanner">review planner ↓</a> puts those dates in your calendar.</p></details>
+    <details><summary>🔀 Mix topics (interleaving)</summary><p>Instead of 30 minutes of one kind of problem, mix two or three kinds. It feels harder, but you learn to tell them apart and remember better.</p></details>
+    <details><summary>💬 Explain it simply</summary><p>Ask yourself “why?” and “how does this connect to what I know?”, or explain it out loud as if to a 10-year-old. Gaps in your explanation show you what to review.</p></details>
+    <details><summary>🖼️ Words + pictures</summary><p>Put the same idea in words and in a drawing, diagram or timeline. Two routes to one memory make it easier to find again. Quietly saying things aloud helps too.</p></details>
+    <details><summary>😴 Sleep, move, focus</summary><p>Sleep is when the brain stores the day's learning — practise, sleep, then test yourself the next day. Regular exercise helps memory, and one thing at a time beats multitasking: phones away while you learn.</p></details>
+  </div>
+  <h3 class="tech-h">How to master them: a 4-week plan</h3>
+  <p>About 15–20 minutes a day. Always <b>test first, then look</b>, and write your score down (your results are saved below).</p>
+  <div class="plan">
+    <div><b>Week 1 — Stories and chunks</b><ul><li>📝 Word list, 10 words, <i>untimed</i>: link them in a story.</li><li>🔢 Number cards: read them in chunks of 2–3.</li><li>Next morning: write yesterday's list without looking.</li></ul></div>
+    <div><b>Week 2 — Build memory palaces</b><ul><li>Write two routes of 10 spots in the <a href="#palaceTrainer">palace trainer</a>.</li><li>Place 10, then 15, then 20 words.</li><li>Use a palace for a real shopping list.</li></ul></div>
+    <div><b>Week 3 — Numbers into pictures</b><ul><li>Learn 10 Major-system words a day with the <a href="#majorTrainer">trainer</a>.</li><li>🔢 Two-digit number cards: see the word, not the number.</li><li>Remember a phone number or PIN hint this way.</li></ul></div>
+    <div><b>Week 4 — Combine and speed up</b><ul><li>Put Major words into your palaces: 20, then 40 digits.</li><li>📝 Word list levels, now <i>timed</i>.</li><li>Real life: 5 new names, a short speech, 10 words in another language.</li></ul></div>
+  </div>
+  <details class="tech-more"><summary><b>Milestones to aim for</b></summary><table class="milestones"><tr><th></th><th>Words (in order)</th><th>Digits</th><th>Other</th></tr><tr><td>Starting out</td><td>7–10</td><td>7–9</td><td>Remember 3 new names in a day</td></tr><tr><td>After 4 weeks</td><td>20–30</td><td>30–40 in 5 min</td><td>A 20-item shopping list</td></tr><tr><td>Strong</td><td>50+</td><td>80+ in 5 min</td><td>A deck of cards in under 10 min</td></tr></table><p class="muted">Memory competitors go much further (hundreds of digits in 5 minutes), but they train daily for months with exactly these methods.</p></details>
+  <details class="tech-more"><summary><b>Common mistakes</b></summary><ul><li>Images too plain or too similar — make each one strange and different.</li><li>Too many items on one spot of a palace.</li><li>Only rereading instead of testing yourself.</li><li>Never reviewing: without a review after a day, most of a new list is gone within a week.</li><li>Training only games: they train the skill you play; use the techniques on real things to feel the benefit.</li></ul></details>
+</section>
+
+<section class="panel" id="trainers">
+  <h2>Technique trainers</h2>
+  <div class="trainer" id="palaceTrainer">
+    <h3>🏛️ Memory palace trainer</h3>
+    <p class="muted">Write the spots of a route you know, one per line, in walking order. They stay in this browser.</p>
+    <div class="grid2">
+      <div class="field"><label for="palSpots">Your route (spots)</label><textarea id="palSpots" rows="8"></textarea></div>
+      <div class="field"><label for="palItems">Things to remember (one per line)</label><textarea id="palItems" rows="8" placeholder="Leave empty to get random words"></textarea></div>
+    </div>
+    <div class="actions"><button class="primary" id="palPlace">1. Place them</button><button class="secondary" id="palRandom">🎲 Random words</button><button class="secondary" id="palTest" disabled>2. Hide and test me</button></div>
+    <div id="palOut"></div>
+  </div>
+  <div class="trainer" id="majorTrainer">
+    <h3>🔤 Major system trainer</h3>
+    <div class="row"><div class="field" style="margin:0;flex:1;min-width:200px"><label for="majNum">Turn a number into pictures</label><input id="majNum" inputmode="numeric" placeholder="e.g. 3141592653" autocomplete="off"></div></div>
+    <p id="majOut" class="maj-out"></p>
+    <div class="actions"><button class="secondary" id="majQuiz">🎯 Quiz me (00–99)</button><button class="secondary" id="majTable">Show all 100 words</button></div>
+    <div id="majQuizBox"></div>
+    <div id="majTableBox" class="hidden"></div>
+  </div>
+  <div class="trainer" id="reviewPlanner">
+    <h3>📅 Review planner (spaced repetition)</h3>
+    <p class="muted">What did you learn today? Get review dates at 1, 3, 7, 14 and 30 days, and add them to your calendar.</p>
+    <div class="row"><div class="field" style="margin:0;flex:1;min-width:200px"><label for="revWhat">What to review</label><input id="revWhat" placeholder="e.g. Spanish words, chapter 3" maxlength="120"></div><div class="field" style="margin:0"><label for="revDate">Learned on</label><input id="revDate" type="date"></div></div>
+    <ul id="revList" class="rev-list"></ul>
+    <div class="actions"><button class="secondary" id="revIcs">⬇ Add to my calendar (.ics)</button></div>
+  </div>
+  <p class="privacy">🔒 Trainers run only in this browser. Nothing is uploaded.</p>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Memory Forge</h2>
+  <p>Memory Forge trains your memory with number and symbol cards across 30 levels, the chimp test, pairs, dual n-back, Corsi sequences and word lists, plus a guide to memory techniques.</p>
+  <h3>How to use Memory Forge</h3>
+  <ol><li>Choose a game such as Number cards, the Chimp test or the Word list, pick a level or set your own card counts and times, and choose with or without a clock.</li><li>Press “Start”.</li><li>Memorise the cards, put them back in order, check your stars and move on to the next level.</li></ol>
+  <h3>Does it teach memory techniques?</h3>
+  <p>Yes. A techniques guide with a 4-week plan, plus memory palace and Major system trainers.</p>
+  <h3>Is Memory Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/flashcard-forge.html">Flashcard Forge</a> · <a href="/sv/reasoning-test.html">Reasoning Test</a> · <a href="/sv/focus-forge.html">Focus Forge</a></p>
+</section>
+
+<footer>Memory Forge is a free practice tool, not a medical or cognitive assessment.</footer>
+
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const MAXL=30;
+const MODES={
+  numbers:{ico:'🔢',name:'Number cards',d:'Memorise a row of number cards, then put them back in order.'},
+  symbols:{ico:'🔣',name:'Symbol cards',d:'Memorise shapes, emoji, arrows or letters in order.'},
+  mixed:{ico:'🔀',name:'Numbers + symbols',d:'A mixed row of number and symbol cards.'},
+  chimp:{ico:'🐒',name:'Chimp test',d:'Numbers flash on a grid — tap them in order once they are hidden.'},
+  pairs:{ico:'🃏',name:'Pairs',d:'Turn cards two at a time and find every matching pair.'},
+  nback:{ico:'🔁',name:'N-back',d:'Does this match the one N steps back? Trains working memory.'},
+  corsi:{ico:'🟨',name:'Sequence',d:'Squares light up one by one — repeat the pattern (Corsi blocks).'},
+  words:{ico:'📝',name:'Word list',d:'Memorise a list of words, then type them back. Practise the story and memory palace methods here.'}
+};
+// Concrete, easy-to-picture words: the techniques below work best with things you can see.
+const WORDS='apple anchor balloon banana barrel basket bell bicycle blanket boat bone book boot bottle bowl box bread brick bridge broom bucket butterfly button cactus cake camel camera candle car carpet carrot castle cat chain chair cheese cherry chimney clock cloud coin comb cow crown cup curtain diamond dog doll dolphin door dragon drum duck eagle egg elephant envelope feather fence fire fish flag flower flute fork fox frog garden ghost giraffe glove goat guitar hammer hat helmet honey horse igloo island jacket jelly kangaroo kettle key kite knife ladder lamp leaf lemon lion lizard lock map mask mirror monkey moon mountain mouse mushroom nail necklace nest octopus onion orange owl paint pan parrot peach pencil penguin piano pillow pineapple pizza planet potato pumpkin queen rabbit rainbow ring robot rocket rope rose ruler sandwich saw scarf scissors shark sheep shell shoe snail snake snowman sock sofa spider spoon star statue strawberry sun swan sword table teapot telescope tent tiger toast tomato tooth torch tractor train tree trumpet turtle umbrella unicorn vase violin volcano wagon wallet watch whale wheel window wolf zebra'.split(' ');
+const SETS={
+  shapes:{name:'Coloured shapes',items:[['●','#D8604A','circle'],['■','#2b6cb0','square'],['▲','#4E9E73','triangle'],['◆','#8a3ab8','diamond'],['★','#e2a63b','star'],['♥','#d6336c','heart'],['✚','#16202b','cross'],['☾','#3a7ab8','moon'],['⬟','#c0781e','pentagon'],['⬢','#0f8b8d','hexagon'],['✿','#b83280','flower'],['⚑','#5a3b2c','flag']]},
+  emoji:{name:'Pictures',items:[['🍎','','apple'],['🐶','','dog'],['🚗','','car'],['⚽','','ball'],['🌙','','moon'],['🎈','','balloon'],['🔑','','key'],['🌵','','cactus'],['🐟','','fish'],['🎸','','guitar'],['☂️','','umbrella'],['🍕','','pizza']]},
+  arrows:{name:'Arrows',items:[['↑','#2b6cb0','up'],['→','#4E9E73','right'],['↓','#D8604A','down'],['←','#8a3ab8','left'],['↗','#e2a63b','up right'],['↘','#0f8b8d','down right'],['↙','#d6336c','down left'],['↖','#5a3b2c','up left']]},
+  greek:{name:'Greek letters',items:[['α','#2b6cb0','alpha'],['β','#4E9E73','beta'],['γ','#D8604A','gamma'],['δ','#8a3ab8','delta'],['λ','#e2a63b','lambda'],['π','#0f8b8d','pi'],['σ','#d6336c','sigma'],['Ω','#16202b','omega'],['Φ','#c0781e','phi'],['Ψ','#3a7ab8','psi'],['θ','#b83280','theta'],['μ','#5a3b2c','mu']]},
+  letters:{name:'Letters',items:'ABCDEFGHJKLMNPRSTUVWXYZ'.split('').slice(0,12).map(l=>[l,'#16202b',l])}
+};
+
+// ---------- storage ----------
+const KEY='miga-memory-v1';
+let store;try{store=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){store={}}
+store.stars=store.stars||{};store.history=store.history||[];store.days=store.days||[];store.settings=store.settings||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}}
+
+const DEF={mode:'numbers',tab:'levels',timed:true,level:1,sound:true,
+  numCount:7,symCount:5,numDigits:1,symSet:'shapes',symVariety:8,studyMode:'all',studySec:1.2,recallSec:0,present:'see',
+  chimpCount:6,chimpHideSec:3,pairsCount:8,pairsKind:'symbols',previewSec:3,pairsLimit:90,
+  nbackN:2,nbackDual:true,nbackPresent:'see',nbackInterval:2.5,nbackTrials:22,corsiLen:5,corsiGrid:4,corsiSpeed:0.7,corsiReverse:false,
+  wordCount:10,wordStudySec:3,wordOrder:'any',wordRecallSec:0};
+const S=Object.assign({},DEF,store.settings);
+function persist(){store.settings=S;save()}
+
+// ---------- level design ----------
+function starKey(){return S.mode+':'+(S.timed?'t':'u')}
+function levelCfg(mode,L,timed){
+  const c={level:L,timed};
+  const study=Math.max(0.5,1.6-0.035*L);
+  if(mode==='numbers'){Object.assign(c,{numCount:2+L,symCount:0,numDigits:L>20?2:1,studySec:study,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(8+3*(2+L)):0})}
+  else if(mode==='symbols'){Object.assign(c,{numCount:0,symCount:2+L,symVariety:Math.min(12,4+Math.floor(L/3)),studySec:study+0.2,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(10+3*(2+L)):0})}
+  else if(mode==='mixed'){const t=3+L;Object.assign(c,{numCount:Math.ceil(t/2),symCount:Math.floor(t/2),symVariety:Math.min(12,5+Math.floor(L/4)),numDigits:1,studySec:study+0.2,studyMode:L%5===0?'flash':'all',recallSec:timed?Math.round(10+3*t):0})}
+  else if(mode==='chimp'){Object.assign(c,{chimpCount:Math.min(40,3+L),chimpHideSec:Math.max(0.8,(3+L)*0.45-L*0.05)})}
+  else if(mode==='pairs'){const p=Math.min(18,2+L);Object.assign(c,{pairsCount:p,pairsKind:L%2?'symbols':'numbers',previewSec:timed?Math.max(0,4-L*0.15):0,pairsLimit:timed?Math.round(p*7):0})}
+  else if(mode==='nback'){Object.assign(c,{nbackN:Math.ceil(L/2),nbackDual:L%2===0,nbackTrials:20+Math.ceil(L/2)*2,nbackInterval:timed?Math.max(1.8,3-L*0.04):0})}
+  else if(mode==='corsi'){Object.assign(c,{corsiLen:2+L,corsiGrid:L<=4?3:L<=14?4:5,corsiSpeed:timed?Math.max(0.35,0.9-0.02*L):0.9,corsiReverse:L>20&&L%2===1})}
+  else if(mode==='words'){const n=3+L;Object.assign(c,{wordCount:n,wordStudySec:Math.max(1.5,4-0.08*L),studyMode:L%5===0?'flash':'all',wordOrder:L>15?'exact':'any',wordRecallSec:timed?Math.round(20+6*n):0})}
+  return c;
+}
+function currentCfg(){
+  if(S.tab==='levels'){const c=levelCfg(S.mode,S.level,S.timed);return Object.assign({},DEF,{symSet:S.symSet,present:S.present,nbackPresent:S.nbackPresent},c)}
+  const c=Object.assign({},S,{level:0});
+  if(!S.timed){c.recallSec=0;c.pairsLimit=0;c.previewSec=S.previewSec;c.nbackInterval=0;c.wordRecallSec=0}
+  if(S.mode==='numbers')c.symCount=0;if(S.mode==='symbols')c.numCount=0;
+  return c;
+}
+
+// ---------- UI: modes, tabs, levels, custom ----------
+function renderModes(){$('modes').innerHTML=Object.entries(MODES).map(([k,m])=>'<button class="mode'+(k===S.mode?' active':'')+'" data-mode="'+k+'" id="mode-'+k+'"><span class="ico">'+m.ico+'</span><b>'+m.name+'</b><small>'+m.d+'</small></button>').join('');
+  $('modes').querySelectorAll('.mode').forEach(b=>b.onclick=()=>{S.mode=b.dataset.mode;persist();renderAll()})}
+function renderLevels(){const st=store.stars[starKey()]||{};if(!(S.level>=1&&S.level<=MAXL))S.level=1;
+  $('levels').innerHTML=Array.from({length:MAXL},(_,i)=>{const L=i+1,s=st[L]||0;return '<button class="lvl'+(s>=2?' done':'')+(L===S.level?' sel':'')+'" data-l="'+L+'" id="lvl-'+L+'"'+'>'+L+'<small>'+'★'.repeat(s)+'</small></button>'}).join('');
+  $('levels').querySelectorAll('.lvl').forEach(b=>b.onclick=()=>{S.level=+b.dataset.l;persist();renderLevels();renderSummary()})}
+function f(id,label,html,hint){return '<div class="field"><label for="'+id+'">'+label+'</label>'+html+(hint?'<div class="hint">'+hint+'</div>':'')+'</div>'}
+function num(id,min,max,step){return '<input type="number" id="c_'+id+'" data-k="'+id+'" min="'+min+'" max="'+max+'" step="'+(step||1)+'" value="'+S[id]+'">'}
+function sel(id,opts){return '<select id="c_'+id+'" data-k="'+id+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(String(S[id])===String(o[0])?' selected':'')+'>'+o[1]+'</option>').join('')+'</select>'}
+const setOpts=()=>Object.entries(SETS).map(([k,v])=>[k,v.name]);
+function renderCustom(){
+  const m=S.mode,T=S.timed;let h='';
+  if(m==='numbers'||m==='mixed')h+=f('c_numCount','How many numbers',num('numCount',0,60),'Number cards to memorise')+f('c_numDigits','Digits on each card',sel('numDigits',[[1,'One digit (0–9)'],[2,'Two digits (00–99)'],[3,'Three digits (000–999)']]));
+  if(m==='symbols'||m==='mixed')h+=f('c_symCount','How many symbols',num('symCount',0,60),'Symbol cards to memorise')+f('c_symVariety','Different symbols to choose from',num('symVariety',2,12),'Fewer = easier');
+  if(m==='symbols'||m==='mixed'||m==='pairs')h+=f('c_symSet','Symbol set',sel('symSet',setOpts()));
+  if(m==='numbers'||m==='symbols'||m==='mixed'){
+    h+=f('c_studyMode','How cards are shown',sel('studyMode',[['all','All at once'],['flash','One at a time']]));
+    if(T)h+=f('c_studySec','Seconds to look at each card',num('studySec',0.2,30,0.1),'All at once: total time = this × number of cards');
+    if(T)h+=f('c_recallSec','Seconds to answer (0 = no limit)',num('recallSec',0,900));
+    h+=f('c_present','Presentation',sel('present',[['see','See the cards'],['hear','Hear them read aloud'],['both','See and hear']]));
+  }
+  if(m==='chimp'){h+=f('c_chimpCount','How many numbers',num('chimpCount',3,40));if(T)h+=f('c_chimpHideSec','Seconds before they hide',num('chimpHideSec',0.3,60,0.1),'Without time they hide when you tap 1')}
+  if(m==='pairs'){h+=f('c_pairsCount','How many pairs',num('pairsCount',2,18))+f('c_pairsKind','Cards show',sel('pairsKind',[['symbols','Symbols'],['numbers','Numbers'],['mixed','Numbers and symbols']]))+f('c_previewSec','Peek at all cards first (seconds)',num('previewSec',0,30,0.5));if(T)h+=f('c_pairsLimit','Time limit in seconds (0 = none)',num('pairsLimit',0,900))}
+  if(m==='nback'){h+=f('c_nbackN','N (how many steps back)',num('nbackN',1,9))+f('c_nbackDual','Track',sel('nbackDual',[['false','Card only'],['true','Card and position (dual)']]))+f('c_nbackPresent','Numbers are',sel('nbackPresent',[['see','Shown in the square'],['hear','Read aloud (classic dual n-back)'],['both','Shown and read aloud']]),'Read aloud keeps the number and the square on separate senses')+f('c_nbackTrials','Rounds',num('nbackTrials',10,100));if(T)h+=f('c_nbackInterval','Seconds per round',num('nbackInterval',1,10,0.1),'Without time each round waits for your answer')}
+  if(m==='corsi'){h+=f('c_corsiLen','Sequence length',num('corsiLen',2,30))+f('c_corsiGrid','Grid size',sel('corsiGrid',[[3,'3 × 3'],[4,'4 × 4'],[5,'5 × 5']]))+f('c_corsiSpeed','Seconds each square stays lit',num('corsiSpeed',0.2,3,0.05))+f('c_corsiReverse','Order',sel('corsiReverse',[['false','Same order'],['true','Backwards (harder)']]))}
+  if(m==='words'){h+=f('c_wordCount','How many words',num('wordCount',3,80))+f('c_studyMode','How words are shown',sel('studyMode',[['all','All at once'],['flash','One at a time']]))+f('c_wordOrder','Scoring',sel('wordOrder',[['any','Any order'],['exact','Exact order (harder)']]));
+    if(T)h+=f('c_wordStudySec','Seconds per word',num('wordStudySec',0.5,30,0.5),'All at once: total time = this × number of words')+f('c_wordRecallSec','Seconds to answer (0 = no limit)',num('wordRecallSec',0,900))}
+  $('customFields').innerHTML=h;
+  $('customFields').querySelectorAll('[data-k]').forEach(el=>el.onchange=el.oninput=()=>{const k=el.dataset.k;let v=el.value;if(el.type==='number'){v=parseFloat(v);if(isNaN(v))return;v=Math.max(+el.min,Math.min(+el.max,v))}else if(v==='true'||v==='false')v=v==='true';else if(/^\d+$/.test(v))v=+v;S[k]=v;persist();renderSummary()});
+}
+function describe(c){
+  const m=S.mode,parts=[];
+  if(m==='numbers'||m==='symbols'||m==='mixed'){
+    if(c.numCount)parts.push(c.numCount+' number card'+(c.numCount>1?'s':'')+(c.numDigits>1?' ('+c.numDigits+' digits each)':''));
+    if(c.symCount)parts.push(c.symCount+' symbol card'+(c.symCount>1?'s':'')+' from '+(c.symVariety||8)+' '+SETS[c.symSet||'shapes'].name.toLowerCase());
+    parts.push(c.studyMode==='flash'?'shown one at a time':'shown all at once');
+    parts.push(c.timed?(c.studySec.toFixed(1)+' s per card'+(c.recallSec?', '+c.recallSec+' s to answer':', no answer limit')):'look as long as you like, then answer with no clock');
+  } else if(m==='chimp')parts.push(c.chimpCount+' numbers on the grid',c.timed?'hidden after '+c.chimpHideSec.toFixed(1)+' s':'hidden when you tap 1');
+  else if(m==='pairs')parts.push(c.pairsCount+' pairs ('+c.pairsCount*2+' cards) of '+c.pairsKind,c.previewSec?'peek '+(+c.previewSec).toFixed(1)+' s':'no peek',c.timed&&c.pairsLimit?c.pairsLimit+' s limit':'no time limit');
+  else if(m==='nback')parts.push(c.nbackN+'-back',c.nbackDual?'card + position (dual)':'card only',c.nbackPresent==='hear'?'numbers read aloud':c.nbackPresent==='both'?'numbers shown and read aloud':'',c.nbackTrials+' rounds',c.timed&&c.nbackInterval?c.nbackInterval.toFixed(1)+' s each':'each round waits for you');
+  else if(m==='corsi')parts.push(c.corsiLen+' squares on a '+c.corsiGrid+'×'+c.corsiGrid+' grid',c.corsiReverse?'repeat it backwards':'repeat in the same order',(+c.corsiSpeed).toFixed(2)+' s per square',c.timed?'':'you may replay it once');
+  else if(m==='words')parts.push(c.wordCount+' words',c.studyMode==='flash'?'shown one at a time':'shown all at once',c.wordOrder==='exact'?'exact order counts':'any order',c.timed?(+c.wordStudySec).toFixed(1)+' s per word'+(c.wordRecallSec?', '+c.wordRecallSec+' s to answer':''):'no clock');
+  return parts.filter(Boolean).join(' · ');
+}
+function renderSummary(){const c=currentCfg();$('summary').innerHTML='<b>'+MODES[S.mode].ico+' '+MODES[S.mode].name+(S.tab==='levels'?' — Level '+S.level:' — Custom')+':</b> '+esc(describe(c));
+  $('timeHint').textContent=S.timed?'Cards hide after a set time, and you answer against the clock.':'No clock: study as long as you like, then answer when ready.'}
+function renderAll(){renderModes();document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.tab===S.tab));
+  $('levelsBox').classList.toggle('hidden',S.tab!=='levels');$('customBox').classList.toggle('hidden',S.tab!=='custom');
+  document.querySelectorAll('#timeSwitch button').forEach(b=>b.classList.toggle('on',(b.dataset.timed==='1')===S.timed));
+  renderLevels();renderCustom();renderSummary();renderStats()}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{S.tab=b.dataset.tab;persist();renderAll()});
+document.querySelectorAll('#timeSwitch button').forEach(b=>b.onclick=()=>{S.timed=b.dataset.timed==='1';persist();renderAll()});
+$('soundOn').checked=S.sound;$('soundOn').onchange=()=>{S.sound=$('soundOn').checked;persist()};
+
+// ---------- sound & speech ----------
+let actx;function beep(freq,dur,type){if(!S.sound)return;try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.type=type||'sine';o.frequency.value=freq;g.gain.setValueAtTime(.12,actx.currentTime);g.gain.exponentialRampToValueAtTime(.001,actx.currentTime+dur);o.connect(g).connect(actx.destination);o.start();o.stop(actx.currentTime+dur)}catch(e){}}
+const good=()=>beep(880,.12),bad=()=>beep(180,.25,'square'),tick=()=>beep(520,.05);
+function say(t){try{if(!('speechSynthesis' in window))return;const u=new SpeechSynthesisUtterance(t);u.rate=1.1;speechSynthesis.speak(u)}catch(e){}}
+
+// ---------- game plumbing ----------
+let timers=[],running=null;
+function later(fn,ms){const t=setTimeout(fn,ms);timers.push(t);return t}
+function every(fn,ms){const t=setInterval(fn,ms);timers.push(t);return t}
+function clearTimers(){timers.forEach(t=>{clearTimeout(t);clearInterval(t)});timers=[];try{speechSynthesis.cancel()}catch(e){}document.onkeydown=null}
+function clock(txt){$('hudClock').textContent=txt}
+function bar(frac){$('timebar').classList.toggle('hidden',frac==null);if(frac!=null)$('timefill').style.transform='scaleX('+Math.max(0,Math.min(1,frac))+')'}
+function countdown(sec,onEnd,label){const t0=performance.now();bar(1);const id=every(()=>{const left=sec-(performance.now()-t0)/1000;bar(left/sec);clock((label||'')+Math.max(0,left).toFixed(1)+' s');if(left<=0){clearInterval(id);bar(null);onEnd()}},100);return id}
+function stopwatch(label){const t0=performance.now();const id=every(()=>clock((label||'')+((performance.now()-t0)/1000).toFixed(1)+' s'),100);return ()=>{clearInterval(id);return performance.now()-t0}}
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const rnd=n=>Math.floor(Math.random()*n);
+function symItems(c){return SETS[c.symSet||'shapes'].items.slice(0,Math.max(2,Math.min(c.symVariety||8,SETS[c.symSet||'shapes'].items.length)))}
+function glyph(it){return it.t==='n'?'<span>'+esc(it.v)+'</span>':'<span style="color:'+(it.col||'inherit')+'">'+esc(it.v)+'</span>'}
+
+function start(){
+  clearTimers();const c=currentCfg();running={cfg:c,mode:S.mode,t0:Date.now()};
+  $('playPanel').classList.remove('hidden');$('hudTitle').textContent=MODES[S.mode].ico+' '+MODES[S.mode].name+(c.level?' · Level '+c.level:' · Custom');
+  $('hudInfo').textContent=S.timed?'⏱ timed':'🧘 untimed';clock('—');bar(null);
+  $('playPanel').scrollIntoView({behavior:'smooth',block:'start'});
+  ({numbers:cardGame,symbols:cardGame,mixed:cardGame,chimp:chimpGame,pairs:pairsGame,nback:nbackGame,corsi:corsiGame,words:wordGame})[S.mode](c);
+}
+$('startBtn').onclick=start;
+$('quitBtn').onclick=()=>{clearTimers();running=null;$('playPanel').classList.add('hidden');bar(null)};
+
+function finish(acc,detailHtml,extra){
+  clearTimers();bar(null);const c=running.cfg,stars=acc>=100?3:acc>=90?2:acc>=70?1:0;
+  const rec={t:Date.now(),mode:S.mode,level:c.level,timed:c.timed,acc:Math.round(acc),stars,ms:Date.now()-running.t0,items:extra&&extra.items||0};
+  store.history.push(rec);if(store.history.length>500)store.history=store.history.slice(-500);
+  const day=new Date().toISOString().slice(0,10);if(!store.days.includes(day))store.days.push(day);
+  let next='';
+  if(c.level){const k=starKey();store.stars[k]=store.stars[k]||{};store.stars[k][c.level]=Math.max(store.stars[k][c.level]||0,stars);
+    if(stars>=2&&c.level<MAXL){S.level=c.level+1;next='<button class="primary" id="nextBtn">▶ Level '+(c.level+1)+'</button>'}}
+  save();persist();
+  if(stars>=2)good();else bad();
+  $('arena').innerHTML='<div class="center"><div class="stars">'+('★'.repeat(stars)+'☆'.repeat(3-stars))+'</div><div class="bigmsg" id="resultMsg">'+(stars===3?'Perfect!':stars===2?'Level passed!':stars===1?'Nearly — try again':'Keep practising')+' '+Math.round(acc)+'%</div>'+(detailHtml||'')+
+    '<div class="actions" style="justify-content:center;margin-top:14px">'+next+'<button class="secondary" id="againBtn">↻ Try again</button><button class="secondary" id="setupBtn">⚙ Change settings</button></div></div>';
+  if($('nextBtn'))$('nextBtn').onclick=()=>{renderAll();start()};
+  $('againBtn').onclick=()=>{if(c.level)S.level=c.level;renderAll();start()};
+  $('setupBtn').onclick=()=>{renderAll();$('setupPanel').scrollIntoView({behavior:'smooth'})};
+  renderAll();
+}
+
+// ---------- 1. number / symbol cards ----------
+function makeSeq(c){
+  const out=[],syms=symItems(c),mx=Math.pow(10,c.numDigits||1);
+  for(let i=0;i<(c.numCount||0);i++){out.push({t:'n',v:String(rnd(mx)).padStart(c.numDigits||1,'0')})}
+  for(let i=0;i<(c.symCount||0);i++){const s=syms[rnd(syms.length)];out.push({t:'s',v:s[0],col:s[1],name:s[2]})}
+  return shuffle(out);
+}
+function cardGame(c){
+  const seq=makeSeq(c);if(!seq.length){$('arena').innerHTML='<p class="center">Add at least one number or symbol card in Custom.</p>';return}
+  running.seq=seq;const see=c.present!=='hear',hear=c.present!=='see';
+  const speak=it=>it.t==='n'?it.v.split('').join(' '):it.name;
+  if(c.studyMode==='flash'){
+    $('arena').innerHTML='<p class="center muted" id="flashInfo">Card <b id="fi">1</b> of '+seq.length+'</p><div class="cards"><div class="mcard big" id="flashCard"></div></div>'+(c.timed?'':'<div class="actions" style="justify-content:center;margin-top:14px"><button class="primary" id="nextCard">Next card →</button></div>');
+    let i=0;const show=()=>{const it=seq[i];$('fi').textContent=i+1;$('flashCard').innerHTML=see?glyph(it):'🔊';if(hear)say(speak(it));tick()};
+    const step=()=>{i++;if(i>=seq.length){recall(c,seq);return}show()};
+    show();
+    if(c.timed){const ms=Math.max(200,c.studySec*1000);const loop=()=>later(()=>{$('flashCard').innerHTML='';later(()=>{step();if(i<seq.length)loop()},120)},ms);loop();clock('studying')}
+    else{const stop=stopwatch('study ');$('nextCard').onclick=()=>{if(i===seq.length-1){stop();recall(c,seq)}else step()}}
+    return;
+  }
+  $('arena').innerHTML='<p class="center muted">Memorise these '+seq.length+' cards, left to right.</p><div class="cards" id="studyCards">'+seq.map((it,i)=>'<div class="mcard"><span class="ix">'+(i+1)+'</span>'+(see?glyph(it):'?')+'</div>').join('')+'</div>'+
+    (c.timed?'':'<div class="actions" style="justify-content:center;margin-top:16px"><button class="primary" id="readyBtn">I’ve memorised them →</button></div>');
+  if(hear){seq.forEach((it,i)=>later(()=>say(speak(it)),i*900))}
+  if(c.timed){const total=Math.max(1,c.studySec*seq.length+(hear?seq.length*0.4:0));countdown(total,()=>recall(c,seq),'study ')}
+  else{const stop=stopwatch('study ');$('readyBtn').onclick=()=>{stop();try{speechSynthesis.cancel()}catch(e){}recall(c,seq)}}
+}
+function recall(c,seq){
+  clearTimers();bar(null);const ans=seq.map(()=>null);let cur=0,partial='';const digits=c.numDigits||1;
+  const hasN=seq.some(x=>x.t==='n'),syms=seq.some(x=>x.t==='s')?symItems(c):[];
+  $('arena').innerHTML='<p class="center muted">Put the cards back in order. Tap a slot to change it; type digits on your keyboard too.</p><div class="cards" id="slots"></div><div class="palette" id="palette"></div><div class="actions" style="justify-content:center"><button class="primary" id="checkBtn">✓ Check</button></div>';
+  const pal=[];if(hasN)for(let d=0;d<10;d++)pal.push('<button data-n="'+d+'" id="key-'+d+'">'+d+'</button>');
+  syms.forEach((s,i)=>pal.push('<button data-s="'+i+'" id="sym-'+i+'" title="'+esc(s[2])+'" style="color:'+(s[1]||'inherit')+'">'+esc(s[0])+'</button>'));
+  pal.push('<button class="fn" data-f="back" id="keyBack">⌫ Back</button><button class="fn" data-f="clear">Clear</button>');
+  $('palette').innerHTML=pal.join('');
+  const draw=()=>{$('slots').innerHTML=ans.map((a,i)=>'<div class="mcard slot'+(i===cur?' active':'')+'" data-i="'+i+'"><span class="ix">'+(i+1)+'</span>'+(i===cur&&partial?'<span>'+partial+'</span>':a?glyph(a):'')+'</div>').join('');
+    $('slots').querySelectorAll('.slot').forEach(s=>s.onclick=()=>{cur=+s.dataset.i;partial='';draw()})};
+  const put=it=>{ans[cur]=it;partial='';cur=Math.min(ans.length-1,cur+1);tick();draw()};
+  const digit=d=>{partial+=d;if(partial.length>=digits)put({t:'n',v:partial});else draw()};
+  $('palette').querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.n!=null)digit(b.dataset.n);else if(b.dataset.s!=null){const s=syms[+b.dataset.s];put({t:'s',v:s[0],col:s[1],name:s[2]})}
+    else if(b.dataset.f==='back'){if(partial)partial=partial.slice(0,-1);else{if(!ans[cur]&&cur>0)cur--;ans[cur]=null}draw()}else{ans.fill(null);cur=0;partial='';draw()}});
+  document.onkeydown=e=>{if(/^\d$/.test(e.key)&&hasN){digit(e.key);e.preventDefault()}else if(e.key==='Backspace'){$('keyBack').click();e.preventDefault()}else if(e.key==='ArrowLeft'){cur=Math.max(0,cur-1);partial='';draw()}else if(e.key==='ArrowRight'){cur=Math.min(ans.length-1,cur+1);partial='';draw()}else if(e.key==='Enter'){check()}};
+  draw();
+  const stop=c.timed&&c.recallSec?null:stopwatch('answer ');
+  if(c.timed&&c.recallSec)countdown(c.recallSec,()=>check(),'answer ');
+  function check(){if(stop)stop();let ok=0;const res=seq.map((it,i)=>{const a=ans[i],r=a&&a.t===it.t&&a.v===it.v;if(r)ok++;return '<div class="mcard '+(r?'ok':'bad')+'"><span class="ix">'+(i+1)+'</span>'+glyph(it)+(r?'':'<span class="was">'+(a?esc(a.v):'–')+'</span>')+'</div>'}).join('');
+    finish(ok/seq.length*100,'<p>'+ok+' of '+seq.length+' cards in the right place. Red cards show the right card; the small mark is what you chose.</p><div class="cards">'+res+'</div>',{items:seq.length})}
+  $('checkBtn').onclick=check;
+}
+
+// ---------- 2. chimp test ----------
+function chimpGame(c){
+  const cols=c.chimpCount>24?8:c.chimpCount>12?7:5,rows=Math.ceil(Math.max(c.chimpCount*1.6,cols*3)/cols),cells=shuffle(Array.from({length:cols*rows},(_,i)=>i)).slice(0,c.chimpCount);
+  const pos={};cells.forEach((cell,i)=>pos[cell]=i+1);
+  $('arena').innerHTML='<p class="center muted">'+(c.timed?'Remember where each number is. They hide in a moment.':'Remember the numbers, then tap 1 — the rest hide.')+' Tap them from 1 upwards.</p><div class="chimp" id="chimp" style="grid-template-columns:repeat('+cols+',1fr)">'+Array.from({length:cols*rows},(_,i)=>pos[i]?'<button data-v="'+pos[i]+'" id="chimp-'+pos[i]+'">'+pos[i]+'</button>':'<div></div>').join('')+'</div>';
+  let next=1,hidden=false,errors=0;const hide=()=>{hidden=true;$('chimp').querySelectorAll('button').forEach(b=>b.classList.add('cover'))};
+  if(c.timed)countdown(c.chimpHideSec,hide,'hide in ');
+  const stop=stopwatch();
+  $('chimp').querySelectorAll('button').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;
+    if(v===next){if(!hidden&&!c.timed&&v===1)hide();if(!hidden&&c.timed)hide();b.classList.add('gone');tick();next++;if(next>c.chimpCount){const ms=stop();finish(100,'<p>All '+c.chimpCount+' in '+(ms/1000).toFixed(1)+' s.</p>',{items:c.chimpCount})}}
+    else{errors++;b.classList.add('wrong');b.classList.remove('cover');stop();$('chimp').querySelectorAll('button').forEach(x=>x.classList.remove('cover'));const acc=(next-1)/c.chimpCount*100;later(()=>finish(acc,'<p>You got '+(next-1)+' of '+c.chimpCount+' before tapping '+v+' instead of '+next+'.</p>',{items:c.chimpCount}),900)}});
+}
+
+// ---------- 3. pairs ----------
+function pairsGame(c){
+  const n=c.pairsCount,faces=[],syms=SETS[c.symSet||'shapes'].items;
+  const used=new Set();while(faces.length<n){let f;const kind=c.pairsKind==='mixed'?(faces.length%2?'numbers':'symbols'):c.pairsKind;
+    if(kind==='symbols'&&faces.filter(x=>x.t==='s').length<syms.length){const s=syms[rnd(syms.length)];f={t:'s',v:s[0],col:s[1]}}else f={t:'n',v:String(rnd(n>9||c.pairsKind!=='numbers'?100:10))};
+    if(used.has(f.v))continue;used.add(f.v);faces.push(f)}
+  const deck=shuffle(faces.concat(faces).map((f,i)=>Object.assign({id:i},f)));
+  const cols=deck.length<=8?4:deck.length<=20?5:6;
+  $('arena').innerHTML='<p class="center muted">Find all '+n+' pairs. <span id="pairInfo">Moves: 0</span></p><div class="pairs" id="pairs" style="grid-template-columns:repeat('+cols+',1fr)">'+deck.map((d,i)=>'<button class="pc" data-i="'+i+'" id="pc-'+i+'">'+glyph(d)+'</button>').join('')+'</div>';
+  const btns=[...$('pairs').querySelectorAll('.pc')];let open=[],moves=0,found=0,lock=true,stop;
+  const go=()=>{btns.forEach(b=>b.classList.remove('up'));lock=false;stop=stopwatch();if(c.timed&&c.pairsLimit)countdown(c.pairsLimit,()=>end(false),'left ')};
+  if(c.previewSec>0){btns.forEach(b=>b.classList.add('up'));clock('peek');later(go,c.previewSec*1000)}else go();
+  const end=done=>{const ms=stop?stop():0;const par=Math.ceil(n*1.6),acc=done?Math.min(100,par/moves*100):found/n*60;
+    finish(Math.min(100,acc),'<p>'+(done?'All pairs found in '+moves+' moves and '+(ms/1000).toFixed(1)+' s. A perfect score needs about '+par+' moves or fewer.':'Time is up: '+found+' of '+n+' pairs found.')+'</p>',{items:n})};
+  btns.forEach(b=>b.onclick=()=>{if(lock||b.classList.contains('up')||b.classList.contains('matched'))return;b.classList.add('up');tick();open.push(b);
+    if(open.length===2){moves++;$('pairInfo').textContent='Moves: '+moves;const [a,d]=open.map(x=>deck[+x.dataset.i]);
+      if(a.v===d.v){open.forEach(x=>x.classList.add('matched'));open=[];found++;good();if(found===n)later(()=>end(true),400)}
+      else{lock=true;later(()=>{open.forEach(x=>x.classList.remove('up'));open=[];lock=false},800)}}});
+}
+
+// ---------- 4. n-back ----------
+function nbackGame(c){
+  const N=c.nbackN,T=c.nbackTrials+N,dual=c.nbackDual,hear=c.nbackPresent&&c.nbackPresent!=='see'&&'speechSynthesis' in window,see=!hear||c.nbackPresent==='both',letters=['1','2','3','4','5','6','7','8'];
+  const seq=[];for(let i=0;i<T;i++){let p=rnd(9),l=letters[rnd(8)];
+    if(i>=N){if(Math.random()<0.3)l=seq[i-N].l;if(dual&&Math.random()<0.3)p=seq[i-N].p}seq.push({p,l})}
+  $('arena').innerHTML='<p class="center muted">Press <b>Card match</b> (key L) when the number you '+(see?'see':'hear')+' is the same as '+N+' step'+(N>1?'s':'')+' back'+(dual?', and <b>Position match</b> (key A) when the square is in the same place as '+N+' back':'')+'.'+(c.timed&&c.nbackInterval?'':' Press <b>Next</b> (Space) to move on.')+'</p><div class="nb" id="nb">'+Array.from({length:9},(_,i)=>'<div id="nb-'+i+'"></div>').join('')+'</div>'+
+    '<div class="nbbtns">'+(dual?'<button id="posBtn">Position match (A)</button>':'')+'<button id="cardBtn">Card match (L)</button>'+(c.timed&&c.nbackInterval?'':'<button id="nextNb" style="background:var(--amber);border-color:var(--amber)">Next (Space)</button>')+'</div>';
+  let i=-1,resp={p:false,l:false};const score={hit:0,miss:0,fa:0,cr:0};
+  const judge=()=>{if(i<N)return;const s=seq[i],tl=s.l===seq[i-N].l,tp=s.p===seq[i-N].p;
+    [['l',tl]].concat(dual?[['p',tp]]:[]).forEach(([k,t])=>{const r=resp[k];if(t&&r)score.hit++;else if(t)score.miss++;else if(r)score.fa++;else score.cr++})};
+  const show=()=>{judge();i++;resp={p:false,l:false};['posBtn','cardBtn'].forEach(id=>$(id)&&($(id).className=''));
+    document.querySelectorAll('#nb div').forEach(d=>{d.className='';d.textContent=''});
+    if(i>=T){// average of the match and no-match rates, so never pressing (or always pressing) scores 50%, not 60–70%
+      const rate=(a,b)=>a+b?a/(a+b):1,acc=(rate(score.hit,score.miss)+rate(score.cr,score.fa))/2*100;
+      finish(acc,'<p>Matches caught: '+score.hit+' · missed: '+score.miss+' · false alarms: '+score.fa+' · correct rejections: '+score.cr+'.</p><p class="muted">Score = average of matches caught and non-matches left alone, so guessing gets 50%.</p>',{items:T});return}
+    const s=seq[i],cell=$('nb-'+s.p);cell.className='on';if(see)cell.textContent=s.l;if(hear){try{speechSynthesis.cancel()}catch(e){}say(s.l)}else tick();clock('round '+(i+1)+'/'+T);
+    if(c.timed&&c.nbackInterval)later(()=>{cell.className='';cell.textContent=''},c.nbackInterval*1000*0.6)};
+  const press=k=>{if(i<0||i>=T||resp[k])return;resp[k]=true;const t=i>=N&&(k==='l'?seq[i].l===seq[i-N].l:seq[i].p===seq[i-N].p);const b=$(k==='l'?'cardBtn':'posBtn');if(b)b.className=t?'hit':'miss'};
+  $('cardBtn').onclick=()=>press('l');if(dual)$('posBtn').onclick=()=>press('p');
+  document.onkeydown=e=>{const k=e.key.toLowerCase();if(k==='l'){press('l');e.preventDefault()}else if(k==='a'&&dual){press('p');e.preventDefault()}else if(k===' '&&$('nextNb')){show();e.preventDefault()}};
+  if(c.timed&&c.nbackInterval){later(()=>{show();every(show,c.nbackInterval*1000)},800)}else{$('nextNb').onclick=show;show()}
+}
+
+// ---------- 5. Corsi sequence ----------
+function corsiGame(c){
+  const g=+c.corsiGrid,len=c.corsiLen,seq=[];for(let i=0;i<len;i++){let x;do{x=rnd(g*g)}while(x===seq[i-1]);seq.push(x)}
+  $('arena').innerHTML='<p class="center muted" id="corsiMsg">Watch the squares light up…</p><div class="corsi" id="corsi" style="grid-template-columns:repeat('+g+',1fr)">'+Array.from({length:g*g},(_,i)=>'<button data-i="'+i+'" id="cb-'+i+'"></button>').join('')+'</div><div class="actions" style="justify-content:center;margin-top:12px"><button class="secondary hidden" id="replayBtn">↻ Show again (once)</button></div>';
+  const bs=[...$('corsi').querySelectorAll('button')];let accept=false,pos=0,replays=0;const target=c.corsiReverse?seq.slice().reverse():seq;
+  const play=()=>{accept=false;$('corsiMsg').textContent='Watch…';const ms=c.corsiSpeed*1000;
+    seq.forEach((x,k)=>{later(()=>{bs[x].classList.add('lit');tick()},k*(ms+250)+400);later(()=>bs[x].classList.remove('lit'),k*(ms+250)+400+ms)});
+    later(()=>{accept=true;$('corsiMsg').textContent='Now tap the squares '+(c.corsiReverse?'in REVERSE order':'in the same order')+'.';if(!c.timed&&!replays)$('replayBtn').classList.remove('hidden')},len*(ms+250)+400)};
+  $('replayBtn').onclick=()=>{replays++;$('replayBtn').classList.add('hidden');pos=0;play()};
+  bs.forEach(b=>b.onclick=()=>{if(!accept)return;const i=+b.dataset.i;b.classList.add('tap');later(()=>b.classList.remove('tap'),200);
+    if(i===target[pos]){pos++;tick();if(pos===len)finish(replays?95:100,'<p>You repeated all '+len+' squares'+(replays?' (with one replay)':'')+'.</p>',{items:len})}
+    else{accept=false;bs[target[pos]].classList.add('lit');finish(pos/len*100,'<p>'+pos+' of '+len+' correct. The lit square was the next one.</p>',{items:len})}});
+  play();
+}
+
+// ---------- 6. word list ----------
+// Plurals count: "boxes" matches box, "horses" matches horse.
+const WORDSET=new Set(WORDS);
+const norm=w=>{const n=w.toLowerCase().replace(/[^a-z]/g,'');return n.endsWith('es')&&WORDSET.has(n.slice(0,-2))?n.slice(0,-2):n.endsWith('s')&&!WORDSET.has(n)?n.slice(0,-1):n};
+function wordGame(c){
+  const list=shuffle(WORDS.slice()).slice(0,Math.min(WORDS.length,c.wordCount));running.seq=list;
+  if(c.studyMode==='flash'){
+    $('arena').innerHTML='<p class="center muted">Word <b id="wi">1</b> of '+list.length+' — make a picture for each one.</p><div class="cards"><div class="mcard big" id="wordCard" style="width:min(320px,90%);font-size:34px"></div></div>'+(c.timed?'':'<div class="actions" style="justify-content:center;margin-top:14px"><button class="primary" id="nextWord">Next word →</button></div>');
+    let i=0;const show=()=>{$('wi').textContent=i+1;$('wordCard').textContent=list[i];tick()};show();
+    if(c.timed){const loop=()=>later(()=>{i++;if(i>=list.length){wordRecall(c,list);return}show();loop()},Math.max(300,c.wordStudySec*1000));loop();clock('studying')}
+    else{const stop=stopwatch('study ');$('nextWord').onclick=()=>{if(i>=list.length-1){stop();wordRecall(c,list)}else{i++;show()}}}
+    return;
+  }
+  $('arena').innerHTML='<p class="center muted">Memorise these '+list.length+' words'+(c.wordOrder==='exact'?' in order':'')+'. Tip: link them in a story, or put each one on a spot in your memory palace.</p><ol class="wordlist" id="wordList">'+list.map(w=>'<li>'+esc(w)+'</li>').join('')+'</ol>'+
+    (c.timed?'':'<div class="actions" style="justify-content:center;margin-top:16px"><button class="primary" id="readyBtn">I’ve memorised them →</button></div>');
+  if(c.timed)countdown(Math.max(2,c.wordStudySec*list.length),()=>wordRecall(c,list),'study ');
+  else{const stop=stopwatch('study ');$('readyBtn').onclick=()=>{stop();wordRecall(c,list)}}
+}
+function wordRecall(c,list){
+  clearTimers();bar(null);
+  $('arena').innerHTML='<p class="center muted">Type every word you remember — one per line, or separated by commas'+(c.wordOrder==='exact'?', in the same order':'')+'.</p><textarea id="wordAnswer" rows="8" style="width:100%;font:16px \'IBM Plex Mono\',monospace" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Words you remember"></textarea><div class="actions" style="justify-content:center"><button class="primary" id="checkBtn">✓ Check</button></div>';
+  $('wordAnswer').focus();
+  const stop=c.timed&&c.wordRecallSec?null:stopwatch('answer ');
+  if(c.timed&&c.wordRecallSec)countdown(c.wordRecallSec,()=>check(),'answer ');
+  function check(){if(stop)stop();
+    const typed=$('wordAnswer').value.split(/[\n,;]+/).map(w=>w.trim()).filter(Boolean),tn=typed.map(norm);let ok=0;
+    const rows=list.map((w,i)=>{const hit=c.wordOrder==='exact'?tn[i]===norm(w):tn.includes(norm(w));if(hit)ok++;return '<li class="'+(hit?'ok':'bad')+'">'+esc(w)+(hit?' ✓':c.wordOrder==='exact'&&typed[i]?' <small>(you wrote '+esc(typed[i])+')</small>':' ✗')+'</li>'}).join('');
+    const extra=typed.filter(t=>!list.some(w=>norm(w)===norm(t)));
+    finish(ok/list.length*100,'<p>'+ok+' of '+list.length+' words'+(c.wordOrder==='exact'?' in the right place':'')+'.'+(extra.length?' Not on the list: '+esc(extra.slice(0,8).join(', '))+'.':'')+'</p><ol class="wordlist">'+rows+'</ol>',{items:list.length})}
+  $('checkBtn').onclick=check;
+}
+
+// ---------- stats ----------
+function renderStats(){
+  const h=store.history,best={};h.forEach(r=>{if(r.stars>=2&&r.level){const k=r.mode;best[k]=Math.max(best[k]||0,r.level)}});
+  const span=Math.max(0,...h.filter(r=>(r.mode==='numbers')&&r.acc===100).map(r=>r.items||0));
+  const days=store.days.slice().sort();let streak=0;{let d=new Date();for(;;){const s=d.toISOString().slice(0,10);if(days.includes(s)){streak++;d.setDate(d.getDate()-1)}else break}}
+  const avg=h.length?Math.round(h.slice(-20).reduce((a,r)=>a+r.acc,0)/Math.min(20,h.length)):0;
+  $('stats').innerHTML='<div class="stat"><b>'+h.length+'</b><span>games played</span></div><div class="stat"><b>'+streak+' 🔥</b><span>day streak</span></div><div class="stat"><b>'+avg+'%</b><span>average (last 20)</span></div><div class="stat"><b>'+(span||'—')+'</b><span>longest perfect number row</span></div>'+
+    Object.keys(MODES).map(k=>'<div class="stat"><b>'+(best[k]?'Lv '+best[k]:'—')+'</b><span>'+MODES[k].ico+' best '+MODES[k].name+'</span></div>').join('');
+  const last=h.slice(-30);
+  $('chart').innerHTML=last.length?'<svg viewBox="0 0 600 110" width="100%" height="110" role="img" aria-label="Accuracy of the last games"><line x1="0" y1="100" x2="600" y2="100" stroke="#bbb"/><line x1="0" y1="10" x2="600" y2="10" stroke="#e5e2d8" stroke-dasharray="4 4"/>'+
+    last.map((r,i)=>{const w=600/30,hgt=r.acc*0.9;return '<rect x="'+(i*w+2)+'" y="'+(100-hgt)+'" width="'+(w-4)+'" height="'+hgt+'" rx="2" fill="'+(r.stars>=2?'#4E9E73':r.stars?'#e2a63b':'#D8604A')+'"><title>'+MODES[r.mode].name+(r.level?' L'+r.level:' custom')+': '+r.acc+'%</title></rect>'}).join('')+'</svg>':'<p class="muted">Play a game to see your progress here.</p>';
+}
+$('exportBtn').onclick=()=>{const rows=[['date','game','level','timed','accuracy','stars','seconds','items']].concat(store.history.map(r=>[new Date(r.t).toISOString(),MODES[r.mode].name,r.level||'custom',r.timed?'yes':'no',r.acc,r.stars,Math.round(r.ms/1000),r.items]));
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([rows.map(r=>r.join(',')).join('\n')],{type:'text/csv'}));a.download='memory-forge-results.csv';a.click()};
+$('resetBtn').onclick=()=>{if(!confirm('Delete all your Memory Forge levels, stars and history?'))return;store.stars={};store.history=[];store.days=[];save();S.level=1;persist();renderAll()};
+
+// ---------- technique trainers ----------
+// Memory palace: pair each spot on the visitor's route with one item, then test spot by spot.
+const PAL_KEY='miga-memory-palace';
+const PAL_DEFAULT='Front door\nDoormat\nHall mirror\nCoat hooks\nKitchen table\nFridge\nSink\nSofa\nTV\nWindow';
+let palSpotsSaved='';try{palSpotsSaved=localStorage.getItem(PAL_KEY)||''}catch(e){}
+$('palSpots').value=palSpotsSaved||PAL_DEFAULT;
+$('palSpots').oninput=()=>{try{localStorage.setItem(PAL_KEY,$('palSpots').value)}catch(e){}};
+const lines=v=>v.split('\n').map(x=>x.trim()).filter(Boolean).slice(0,60);
+let palPairs=[];
+$('palRandom').onclick=()=>{const n=Math.max(3,lines($('palSpots').value).length);$('palItems').value=shuffle(WORDS.slice()).slice(0,n).join('\n')};
+$('palPlace').onclick=()=>{
+  const spots=lines($('palSpots').value);if(spots.length<3){$('palOut').innerHTML='<p class="muted">Write at least 3 spots of your route first.</p>';return}
+  let items=lines($('palItems').value);if(!items.length){$('palRandom').click();items=lines($('palItems').value)}
+  palPairs=spots.slice(0,items.length).map((s,i)=>[s,items[i]]);
+  $('palOut').innerHTML='<p>Walk the route slowly. At each spot, make a big, strange, moving picture of the item <b>doing something</b> to the spot. Take your time, then press “Hide and test me”.</p><table class="pal-table">'+palPairs.map(([s,it])=>'<tr><td>'+esc(s)+'</td><td><b>'+esc(it)+'</b></td></tr>').join('')+'</table>'+(items.length>spots.length?'<p class="muted">Only the first '+spots.length+' items fit your route. Add more spots for more items.</p>':'');
+  $('palTest').disabled=false;
+};
+$('palTest').onclick=()=>{
+  if(!palPairs.length)return;
+  $('palOut').innerHTML='<p>Walk your route. What was at each spot?</p><table class="pal-table">'+palPairs.map(([s],i)=>'<tr><td>'+esc(s)+'</td><td><input id="palA'+i+'" autocomplete="off" autocapitalize="off" aria-label="Item at '+esc(s)+'"></td></tr>').join('')+'</table><div class="actions"><button class="primary" id="palCheck">✓ Check</button></div>';
+  $('palA0').focus();
+  $('palOut').querySelectorAll('input').forEach((inp,i,all)=>inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();if(all[i+1])all[i+1].focus();else $('palCheck').click()}});
+  $('palCheck').onclick=()=>{if($('palCheck').disabled)return;$('palCheck').disabled=true;let ok=0;palPairs.forEach(([s,it],i)=>{const inp=$('palA'+i),hit=norm(inp.value)===norm(it);if(hit)ok++;const td=inp.parentNode;td.innerHTML=hit?'<span class="ok">✓ '+esc(it)+'</span>':'<span class="bad">✗ '+esc(it)+'</span>'+(inp.value.trim()?' <small class="muted">(you wrote '+esc(inp.value.trim())+')</small>':'')});
+    $('palOut').insertAdjacentHTML('beforeend','<p class="bigmsg" style="font-size:20px">'+ok+' of '+palPairs.length+' remembered'+(ok===palPairs.length?' — perfect! Try more items or a timed Word list.':'. Make the missed pictures stranger and try again tomorrow.')+'</p>');
+    if(ok===palPairs.length)good();$('palTest').disabled=true};
+};
+
+// Major system: digits to consonant sounds, with one picture word for every pair 00-99.
+const MAJOR='sauce seat sun sumo zero seal sash sock sofa soap toes dad tuna dome tire towel dish duck dove tuba nose net nun gnome Nero nail notch neck knife knob mouse mat moon mummy mower mail match mug movie mop rose rat rain ram rower roll roach rock roof rope lace light lion lime lorry lily leash log lava lip cheese sheet chain jam chair jail judge shack chef ship case cat coin comb car coal cage cake cave cap face foot fan foam fire file fish fog fife fob bus bat bone bomb bear bell beach book beef pipe'.split(' ');
+const MAJOR1=['zoo','tie','knee','ham','ray','owl','shoe','key','ivy','bee'];
+const SOUNDS=['s/z','t/d','n','m','r','l','j/sh/ch','k/g','f/v','p/b'];
+function majorWords(d){const out=[];for(let i=0;i<d.length;i+=2){const p=d.slice(i,i+2);out.push([p,p.length===2?MAJOR[+p]:MAJOR1[+p]])}return out}
+$('majNum').oninput=()=>{const d=$('majNum').value.replace(/\D/g,'').slice(0,60);
+  $('majOut').innerHTML=d?majorWords(d).map(([p,w])=>'<span><b>'+p+'</b> '+w+'</span>').join(' ')+'<br><small class="muted">Sounds: '+d.split('').map(x=>SOUNDS[+x]).join(' · ')+'. Link the pictures in a story or put them in your palace.</small>':''};
+$('majTable').onclick=()=>{const box=$('majTableBox');if(!box.innerHTML)box.innerHTML='<div class="maj-grid">'+MAJOR.map((w,i)=>'<div><b>'+String(i).padStart(2,'0')+'</b>'+w+'</div>').join('')+'</div><p class="muted">Single digits: '+MAJOR1.map((w,i)=>i+' '+w).join(' · ')+'. Swap any word for one you picture more easily — your own words stick best.</p>';
+  box.classList.toggle('hidden');$('majTable').textContent=box.classList.contains('hidden')?'Show all 100 words':'Hide the list'};
+let majScore=[0,0];
+function majQuestion(){const n=rnd(100),p=String(n).padStart(2,'0');
+  $('majQuizBox').innerHTML='<div class="row"><b style="font:700 28px \'IBM Plex Mono\'">'+p+'</b><input id="majGuess" placeholder="Your picture word" style="max-width:220px" autocomplete="off" autocapitalize="off"><button class="primary" id="majCheck">Check</button><span class="muted">'+majScore[0]+' / '+majScore[1]+'</span></div><p id="majFeedback" class="muted"></p>';
+  $('majGuess').focus();
+  const check=()=>{const g=$('majGuess').value.trim();if(!g)return;const right=norm(g)===norm(MAJOR[n]);majScore[1]++;if(right)majScore[0]++;
+    $('majFeedback').innerHTML=(right?'✓ Yes — ':'The list word is ')+'<b>'+MAJOR[n]+'</b> ('+p.split('').map(x=>SOUNDS[+x]).join(' + ')+').'+(right?'':' Your own word is fine if its consonant sounds match.')+' <button class="secondary" id="majNext">Next →</button>';
+    if(right)good();$('majNext').onclick=majQuestion;$('majNext').focus()};
+  $('majCheck').onclick=check;$('majGuess').onkeydown=e=>{if(e.key==='Enter')check()}}
+$('majQuiz').onclick=majQuestion;
+
+// Review planner: spaced reviews at 1, 3, 7, 14 and 30 days, downloadable as calendar events.
+const GAPS=[1,3,7,14,30];
+const pad=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+$('revDate').value=ymd(new Date());
+function reviewDates(){const base=new Date(($('revDate').value||ymd(new Date()))+'T12:00:00');return GAPS.map(g=>{const d=new Date(base);d.setDate(d.getDate()+g);return [g,d]})}
+function renderReviews(){$('revList').innerHTML=reviewDates().map(([g,d])=>'<li>+'+g+' day'+(g>1?'s':'')+': <b>'+d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})+'</b></li>').join('')}
+$('revDate').onchange=renderReviews;renderReviews();
+$('revIcs').onclick=()=>{
+  const what=($('revWhat').value.trim()||'what I learned').replace(/[\;,]/g,m=>'\\'+m).replace(/[\r\n]+/g,' ');
+  const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  const ev=reviewDates().map(([g,d],i)=>{const a=ymd(d).replace(/-/g,''),e=new Date(d);e.setDate(e.getDate()+1);
+    return ['BEGIN:VEVENT','UID:memory-forge-'+stamp+'-'+i+'@migabuilder.com','DTSTAMP:'+stamp,'DTSTART;VALUE=DATE:'+a,'DTEND;VALUE=DATE:'+ymd(e).replace(/-/g,''),'SUMMARY:Review: '+what+' (+'+g+' day'+(g>1?'s':'')+')','DESCRIPTION:Test yourself first\\, then check. Memory Forge – migabuilder.com/memory-forge.html','BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Review: '+what,'TRIGGER:PT9H','END:VALARM','END:VEVENT'].join('\r\n')}).join('\r\n');
+  const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//MigaBuilder//Memory Forge//EN\r\n'+ev+'\r\nEND:VCALENDAR\r\n';
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='memory-reviews.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+
+renderAll();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!-- Generated from /geo-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="sv" data-en-title="Interactive world map and country quiz — Geography Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Interaktiv världskarta och landsquiz — Geography Forge | MigaBuilder</title>
+<meta name="description" content="Geography Forge är en interaktiv världskarta: klicka på valfritt land för att läsa om dess historia, valuta, språk, seder och politiska system, och gör sedan ett quiz om det du utforskat.">
+<link rel="canonical" href="https://migabuilder.com/sv/geo-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/geo-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Interaktiv världskarta och landsquiz — Geography Forge">
+<meta property="og:description" content="Geography Forge är en interaktiv världskarta: klicka på valfritt land för att läsa om dess historia, valuta, språk, seder och politiska system, och gör sedan ett quiz om det du utforskat.">
+<meta property="og:url" content="https://migabuilder.com/sv/geo-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<style>
+main{max-width:1320px}
+.explorer{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:16px;align-items:start}.explorer>div:first-child{position:sticky;top:10px}
+.mapbox{position:relative;background:#0a2238;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.mapbox svg{display:block;width:100%;height:auto;cursor:grab;touch-action:none}.mapbox svg:active{cursor:grabbing}
+.land{fill:#3d6b8c;stroke:#0a2238;stroke-width:.4;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .12s}
+.land:hover,.land:focus{fill:#6FD1E0;outline:none}.land.seen{fill:#4E9E73}.land.sel{fill:#E2A63B}.land.nodata{fill:#2a4458;cursor:default}
+.land.q-right{fill:#4E9E73}.land.q-wrong{fill:#D8604A}
+.dot{fill:#6FD1E0;stroke:#0a2238;stroke-width:1;vector-effect:non-scaling-stroke;cursor:pointer}.dot.sel{fill:#E2A63B}.dot.seen{fill:#4E9E73}
+.graticule{fill:none;stroke:rgba(111,209,224,.12);stroke-width:.5;vector-effect:non-scaling-stroke}.sphere{fill:#0d2c47}
+.map-tools{position:absolute;right:10px;top:10px;display:flex;flex-direction:column;gap:6px}.map-tools button{width:36px;height:36px;border-radius:4px;border:1px solid var(--line);background:rgba(8,24,38,.85);color:var(--paper);font-size:18px;cursor:pointer}
+.map-tip{position:absolute;pointer-events:none;background:rgba(8,24,38,.92);color:var(--paper);padding:5px 9px;border-radius:4px;font-size:13px;display:none;white-space:nowrap}
+.map-legend{display:flex;gap:14px;flex-wrap:wrap;padding:8px 12px;font-size:12px;color:rgba(237,234,224,.75)}.map-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.searchrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}.searchrow input{flex:1 1 100%;min-width:180px;padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12px inherit}.chip.active{background:var(--cyan);color:#081826}
+.info h2{font:700 24px 'Space Grotesk';margin:0;display:flex;gap:10px;align-items:center}.info .flag{font-size:40px;line-height:1}.info .official{color:rgba(22,32,43,.72);font-size:13px;margin:2px 0 12px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.fact{background:#fff;border:1px solid rgba(22,32,43,.12);padding:9px 10px;border-radius:3px}.fact b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:rgba(22,32,43,.72);margin-bottom:3px}.fact span{font-size:14px;line-height:1.35}.fact.wide{grid-column:1/-1}
+.sect{margin-top:14px;border-top:1px solid rgba(22,32,43,.12);padding-top:12px}.sect h3{font:700 16px 'Space Grotesk';margin:0 0 6px;display:flex;justify-content:space-between;gap:8px;align-items:center}.sect p{margin:0 0 6px;line-height:1.55;font-size:14px}.sect .src{font-size:12px}
+.neighbours a{display:inline-block;margin:2px 6px 2px 0;color:#0E2A47;font-weight:600;cursor:pointer}
+.empty{color:rgba(22,32,43,.72);text-align:center;padding:40px 10px}
+.langpick{font-size:12px;padding:4px 6px;border:1px solid rgba(22,32,43,.28);border-radius:3px;background:#fff}
+.quiz-q{font:600 18px 'Space Grotesk';margin:8px 0 12px;line-height:1.35}.quiz-q .flagq{font-size:64px;display:block;margin:6px 0}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}.opt{padding:12px;border:1px solid rgba(22,32,43,.25);background:#fff;border-radius:4px;text-align:left;cursor:pointer;font-size:15px}.opt:hover:not(:disabled){border-color:var(--navy)}.opt.right{background:#dff1e6;border-color:#4E9E73}.opt.wrong{background:#f8dfda;border-color:#D8604A}
+.progress{height:6px;background:rgba(22,32,43,.12);border-radius:3px;overflow:hidden;margin:6px 0 4px}.progress i{display:block;height:100%;background:var(--amber);transition:width .2s}
+.qmeta{display:flex;justify-content:space-between;font-size:13px;color:rgba(22,32,43,.72)}
+.explain{margin-top:10px;padding:10px 12px;background:rgba(14,42,71,.06);border-left:3px solid var(--navy);font-size:14px;line-height:1.5}
+.checks{display:flex;flex-wrap:wrap;gap:8px 16px;margin:4px 0 12px}.checks label{display:flex;gap:6px;align-items:center;font-size:14px}
+.review li{margin-bottom:8px;line-height:1.45}.review .bad{color:#9b3322}.review .good{color:#2f6b49}
+.hidden{display:none!important}
+@media(max-width:900px){.explorer{grid-template-columns:1fr}.explorer>div:first-child{position:static}.opts{grid-template-columns:1fr}}
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/geo-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Kan jag göra ett quiz för en klass?","acceptedAnswer":{"@type":"Answer","text":"Ja. Skapa ett quiz från länderna du utforskat, svara på det och gå igenom frågorna du missade."}},{"@type":"Question","name":"Är Geography Forge gratis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Det är gratis, utan konto, utan vattenstämpel och utan betalvägg."}},{"@type":"Question","name":"Laddas mina filer upp?","acceptedAnswer":{"@type":"Answer","text":"Nej. Det körs helt i din webbläsare, så dina filer och texter stannar på din enhet."}}],"inLanguage":"sv"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/geo-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/geo-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/geo-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/geo-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/geo-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/geo-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/geo-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/geo-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/geo-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/geo-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/sv/">← All tools</a><span>Geography Forge</span></nav>
+<header class="masthead"><div><h1>Geography Forge</h1><p>Click any country to learn its history, currency, languages, customs and government — then turn what you explored into a quiz.</p></div></header>
+<main>
+<section class="explorer">
+  <div>
+    <div class="searchrow"><input id="search" list="countryList" placeholder="Search a country or capital…" aria-label="Search countries"><datalist id="countryList"></datalist>
+      <button class="chip active" data-region="">World</button><button class="chip" data-region="Africa">Africa</button><button class="chip" data-region="Americas">Americas</button><button class="chip" data-region="Asia">Asia</button><button class="chip" data-region="Europe">Europe</button><button class="chip" data-region="Oceania">Oceania</button></div>
+    <div class="mapbox" id="mapbox"><svg id="map" viewBox="0 0 960 500" role="img" aria-label="World map. Click a country to see its details."></svg>
+      <div class="map-tools"><button id="zoomIn" aria-label="Zoom in">+</button><button id="zoomOut" aria-label="Zoom out">−</button><button id="zoomReset" aria-label="Reset view">⟲</button></div><div class="map-tip" id="tip"></div></div>
+    <div class="map-legend"><span><i style="background:#3d6b8c"></i>Not explored</span><span><i style="background:#4E9E73"></i>Explored (<b id="seenCount">0</b>)</span><span><i style="background:#E2A63B"></i>Selected</span><span>Small islands appear as dots. Scroll or pinch to zoom.</span></div>
+  </div>
+  <article class="panel info" id="info" aria-live="polite"><div class="empty" id="emptyInfo">🌍<br><strong>Pick a country on the map</strong><br>or search above. Everything you open is added to your quiz pool.</div><div id="details" class="hidden"></div></article>
+</section>
+
+<section class="panel" id="quizPanel" style="margin-top:18px">
+  <h2>🧠 Quiz generator</h2>
+  <p>Build a quiz from the countries you explored, a region or the whole world.</p>
+  <div class="grid">
+    <div class="field"><label for="qSource">Questions about</label><select id="qSource"><option value="seen">Countries I explored</option><option value="Africa">Africa</option><option value="Americas">Americas</option><option value="Asia">Asia</option><option value="Europe">Europe</option><option value="Oceania">Oceania</option><option value="world">The whole world</option></select></div>
+    <div class="field"><label for="qCount">Number of questions</label><select id="qCount"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+  </div>
+  <div class="checks" id="qTypes">
+    <label><input type="checkbox" value="capital" checked> Capitals</label>
+    <label><input type="checkbox" value="currency" checked> Currencies</label>
+    <label><input type="checkbox" value="language" checked> Languages</label>
+    <label><input type="checkbox" value="government" checked> Government</label>
+    <label><input type="checkbox" value="flag" checked> Flags</label>
+    <label><input type="checkbox" value="map" checked> Find it on the map</label>
+    <label><input type="checkbox" value="history" checked> History (from pages you read)</label>
+    <label><input type="checkbox" value="customs" checked> Customs &amp; culture (from pages you read)</label>
+  </div>
+  <div class="actions"><button class="primary" id="makeQuiz">Generate quiz</button><button class="secondary" id="printQuiz">Download printable quiz</button></div>
+  <div class="status" id="quizStatus" role="status"></div>
+  <div id="quizArea" class="hidden" style="margin-top:14px">
+    <div class="qmeta"><span id="qNum"></span><span id="qScore"></span></div><div class="progress"><i id="qBar"></i></div>
+    <div class="quiz-q" id="qText"></div><div class="opts" id="qOpts"></div><div class="explain hidden" id="qExplain"></div>
+    <div class="actions" style="margin-top:12px"><button class="primary hidden" id="qNext">Next question →</button></div>
+  </div>
+  <div id="quizDone" class="hidden" style="margin-top:14px"><h3 id="doneTitle" style="font:700 20px 'Space Grotesk';margin:0 0 8px"></h3><ol class="review" id="review"></ol><div class="actions"><button class="primary" id="retryWrong">Retry the ones I missed</button><button class="secondary" id="newQuiz">New quiz</button></div></div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Geography Forge</h2>
+  <p>Geography Forge is an interactive world map: click any country to read its history, currency, languages, customs and political system, then play a quiz on what you explored.</p>
+  <h3>How to use Geography Forge</h3>
+  <ol><li>Click a country on the map or search for it to read its facts, history and customs.</li><li>Press “Generate quiz”.</li><li>Answer the questions and review the ones you missed.</li></ol>
+  <h3>Can I make a quiz for a class?</h3>
+  <p>Yes. Generate a quiz from the countries you explored, answer it, and review the questions you missed.</p>
+  <h3>Is Geography Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sv/flashcard-forge.html">Flashcard Forge</a> · <a href="/sv/idea-atlas.html">Idea Atlas</a> · <a href="/sv/physics-map.html">Physics Map</a></p>
+</section>
+
+<footer>Part of <a href="/sv/">MigaBuilder</a>. Country facts: <a href="https://github.com/mledoze/countries">mledoze/countries</a> (ODbL) and <a href="https://www.wikidata.org/">Wikidata</a> (CC0), <span id="geoUpdated">updated September 2026</span> and refreshed automatically every week — check current sources for anything important. Articles load live from <a href="https://www.wikipedia.org/">Wikipedia</a> (CC BY-SA). Map: <a href="https://github.com/topojson/world-atlas">Natural Earth / world-atlas</a>. Borders shown are not an endorsement of any territorial claim.</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const SEEN_KEY='miga-geo-seen';
+let seen=new Set();try{seen=new Set(JSON.parse(localStorage.getItem(SEEN_KEY)||'[]'))}catch(e){}
+function saveSeen(){try{localStorage.setItem(SEEN_KEY,JSON.stringify([...seen]))}catch(e){}$('seenCount').textContent=seen.size}
+let DATA={},byNum={},selected=null,region='';
+const texts={}; // cache: code -> {history:{lang:text}, culture:{...}, ...}
+const LANGS={en:'English',es:'Español',ar:'العربية',zh:'中文',sw:'Kiswahili'};
+let contentLang=(document.documentElement.lang||'en').slice(0,2);try{contentLang=localStorage.getItem('miga-geo-lang')||contentLang}catch(e){}if(!LANGS[contentLang])contentLang='en';
+
+/* ---------------- Map ---------------- */
+const svg=d3.select('#map'),W=960,H=500,g=svg.append('g');
+const projection=d3.geoNaturalEarth1().fitExtent([[6,6],[W-6,H-6]],{type:'Sphere'}),path=d3.geoPath(projection);
+g.append('path').datum({type:'Sphere'}).attr('class','sphere').attr('d',path);
+g.append('path').datum(d3.geoGraticule10()).attr('class','graticule').attr('d',path);
+const zoom=d3.zoom().scaleExtent([1,40]).translateExtent([[0,0],[W,H]]).on('zoom',e=>{g.attr('transform',e.transform);g.selectAll('.dot').attr('r',4/Math.sqrt(e.transform.k))});
+svg.call(zoom).on('dblclick.zoom',null);
+$('zoomIn').onclick=()=>svg.transition().call(zoom.scaleBy,1.8);$('zoomOut').onclick=()=>svg.transition().call(zoom.scaleBy,1/1.8);$('zoomReset').onclick=()=>svg.transition().call(zoom.transform,d3.zoomIdentity);
+const tip=$('tip');
+function showTip(e,text){const r=$('mapbox').getBoundingClientRect();tip.textContent=text;tip.style.display='block';tip.style.left=Math.min(r.width-tip.offsetWidth-6,e.clientX-r.left+12)+'px';tip.style.top=(e.clientY-r.top+12)+'px'}
+// Regions on the map without their own ISO code, mapped to the country data they belong with.
+const NAMED={'Kosovo':'XK','Somaliland':'SO','N. Cyprus':'CY'};
+let quizMapHandler=null;
+function onPick(code){if(quizMapHandler){quizMapHandler(code);return}if(code)select(code,true)}
+
+Promise.all([fetch('geo-data.json').then(r=>{if(!r.ok)throw new Error('data');return r.json()}),d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json')]).then(([data,world])=>{
+  DATA=data;Object.entries(DATA).forEach(([k,c])=>{c.code=k;if(c.id)byNum[c.id]=k});
+  const feats=topojson.feature(world,world.objects.countries).features;
+  feats.forEach(f=>{f.code=byNum[f.id]||NAMED[f.properties.name]||null});
+  g.selectAll('.land').data(feats).join('path').attr('class',d=>'land'+(d.code?'':' nodata')).attr('d',path).attr('data-code',d=>d.code||'')
+    .attr('tabindex',d=>d.code?0:null).attr('role',d=>d.code?'button':null).attr('aria-label',d=>d.code?DATA[d.code].n:null)
+    .on('mousemove',(e,d)=>showTip(e,d.code?(DATA[d.code].f+' '+DATA[d.code].n+(d.properties.name!==DATA[d.code].n&&NAMED[d.properties.name]?' ('+d.properties.name+')':'')):d.properties.name)).on('mouseleave',()=>tip.style.display='none')
+    .on('click',(e,d)=>{if(d.code)onPick(d.code)}).on('keydown',(e,d)=>{if(d.code&&(e.key==='Enter'||e.key===' ')){e.preventDefault();onPick(d.code)}});
+  // Dots for places too small to click (or missing) on the map.
+  const onMap=new Set(feats.map(f=>f.code));
+  const dots=Object.values(DATA).filter(c=>c.ll&&(c.area<2500||!onMap.has(c.code)));
+  g.selectAll('.dot').data(dots).join('circle').attr('class','dot').attr('r',4).attr('data-code',d=>d.code).attr('tabindex',0).attr('role','button').attr('aria-label',d=>d.n)
+    .attr('cx',d=>projection([d.ll[1],d.ll[0]])[0]).attr('cy',d=>projection([d.ll[1],d.ll[0]])[1])
+    .on('mousemove',(e,d)=>showTip(e,d.f+' '+d.n)).on('mouseleave',()=>tip.style.display='none').on('click',(e,d)=>onPick(d.code)).on('keydown',(e,d)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onPick(d.code)}});
+  $('countryList').innerHTML=Object.values(DATA).sort((a,b)=>a.n.localeCompare(b.n)).map(c=>'<option value="'+esc(c.n)+'">'+esc((c.c||[]).join(', '))+'</option>').join('');
+  paintSeen();saveSeen();
+  fetch('geo-data-meta.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(m=>{if(m&&/^\d{4}-\d\d-\d\d$/.test(m.updated))$('geoUpdated').textContent='updated '+new Date(m.updated+'T12:00:00Z').toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'})}).catch(()=>{});
+  const hash=decodeURIComponent(location.hash.slice(1)).toUpperCase();if(DATA[hash])select(hash,true);
+}).catch(()=>{$('emptyInfo').innerHTML='⚠️<br><strong>The map could not load.</strong><br>Check your internet connection and refresh.'});
+
+function paintSeen(){g.selectAll('.land,.dot').classed('seen',function(){return seen.has(this.getAttribute('data-code'))})}
+function zoomTo(code){const els=g.selectAll('.land').filter(d=>d.code===code);let b=null;
+  els.each(d=>{const bb=path.bounds(d);b=b?[[Math.min(b[0][0],bb[0][0]),Math.min(b[0][1],bb[0][1])],[Math.max(b[1][0],bb[1][0]),Math.max(b[1][1],bb[1][1])]]:bb});
+  const c=DATA[code];if(!b&&c.ll){const p=projection([c.ll[1],c.ll[0]]);b=[[p[0]-8,p[1]-8],[p[0]+8,p[1]+8]]}if(!b)return;
+  // Very wide shapes (Russia, USA, France with overseas regions) zoom to the country's centre point instead.
+  if(b[1][0]-b[0][0]>W*.45&&c.ll){const p=projection([c.ll[1],c.ll[0]]);b=[[p[0]-120,p[1]-70],[p[0]+120,p[1]+70]]}
+  const k=Math.min(6,.45/Math.max((b[1][0]-b[0][0])/W,(b[1][1]-b[0][1])/H)),cx=(b[0][0]+b[1][0])/2,cy=(b[0][1]+b[1][1])/2;
+  svg.transition().duration(650).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(Math.max(1,k)).translate(-cx,-cy))}
+function zoomRegion(r){if(!r)return svg.transition().duration(650).call(zoom.transform,d3.zoomIdentity);let b=null;
+  g.selectAll('.land').filter(d=>d.code&&DATA[d.code].r===r).each(d=>{const bb=path.bounds(d);if(bb[1][0]-bb[0][0]>W*.45)return;b=b?[[Math.min(b[0][0],bb[0][0]),Math.min(b[0][1],bb[0][1])],[Math.max(b[1][0],bb[1][0]),Math.max(b[1][1],bb[1][1])]]:bb});
+  if(!b)return;const k=Math.min(8,.92/Math.max((b[1][0]-b[0][0])/W,(b[1][1]-b[0][1])/H)),cx=(b[0][0]+b[1][0])/2,cy=(b[0][1]+b[1][1])/2;svg.transition().duration(650).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2).scale(Math.max(1,k)).translate(-cx,-cy))}
+document.querySelectorAll('.chip[data-region]').forEach(b=>b.onclick=()=>{region=b.dataset.region;document.querySelectorAll('.chip[data-region]').forEach(x=>x.classList.toggle('active',x===b));zoomRegion(region)});
+$('search').addEventListener('change',()=>{const q=$('search').value.trim().toLowerCase();if(!q)return;const all=Object.values(DATA);
+  const hit=all.find(c=>c.n.toLowerCase()===q)||all.find(c=>(c.c||[]).some(x=>x.toLowerCase()===q))||all.find(c=>c.n.toLowerCase().startsWith(q))||all.find(c=>c.o&&c.o.toLowerCase().includes(q))||all.find(c=>Object.values(c.nm||{}).some(x=>x&&x.toLowerCase()===q));
+  if(hit){select(hit.code,true);$('search').value=''}});
+
+/* ---------------- Country details ---------------- */
+const fmt=n=>n==null?'—':n>=1e9?(n/1e9).toFixed(2)+' billion':n>=1e6?(n/1e6).toFixed(1)+' million':Math.round(n).toLocaleString();
+function list(a){return a&&a.length?a.map(esc).join(', '):'—'}
+function name(c){return (contentLang!=='en'&&c.nm&&c.nm[contentLang])||c.n}
+function select(code,zoomIn){const c=DATA[code];if(!c)return;selected=code;seen.add(code);saveSeen();
+  g.selectAll('.land,.dot').classed('sel',function(){return this.getAttribute('data-code')===code});paintSeen();if(zoomIn)zoomTo(code);
+  history.replaceState(null,'','#'+code.toLowerCase());
+  const cur=(c.cur||[]).map(x=>esc(x[1])+' ('+esc(x[0])+(x[2]?', '+esc(x[2]):'')+')').join('<br>')||'—';
+  const nb=(c.b||[]).filter(x=>DATA[x]).map(x=>'<a data-go="'+x+'">'+DATA[x].f+' '+esc(DATA[x].n)+'</a>').join('')||(c.lk?'—':'None (island or coastal only)');
+  const status=c.ind===false?'<div class="fact wide"><b>Status</b><span>'+esc(c.st||'Territory')+(c.sov?' of '+esc(c.sov):'')+'</span></div>':'';
+  $('emptyInfo').classList.add('hidden');const d=$('details');d.classList.remove('hidden');
+  d.innerHTML='<h2><span class="flag" aria-hidden="true">'+c.f+'</span><span>'+esc(name(c))+'</span></h2><p class="official">'+esc(c.o||'')+(c.nm&&contentLang!=='en'&&c.nm[contentLang]?' · '+esc(c.n):'')+'</p>'
+   +'<div class="facts">'+status
+   +'<div class="fact"><b>Capital</b><span>'+list(c.c)+'</span></div><div class="fact"><b>Region</b><span>'+esc(c.s||c.r||'—')+'</span></div>'
+   +'<div class="fact"><b>Population</b><span>'+fmt(c.pop)+(c.popy?' <small class="muted">('+esc(c.popy)+')</small>':'')+'</span></div><div class="fact"><b>Area</b><span>'+(c.area?Math.round(c.area).toLocaleString()+' km²':'—')+'</span></div>'
+   +'<div class="fact wide"><b>💰 Currency</b><span>'+cur+'</span></div>'
+   +'<div class="fact wide"><b>🗣️ Languages</b><span>'+list(c.l)+'</span></div>'
+   +'<div class="fact wide"><b>🏛️ Political structure</b><span>'+list(c.g)+(c.leg&&c.leg.length?'<br><small>Legislature: '+list(c.leg)+'</small>':'')+'</span></div>'
+   +(c.hs||c.hg?'<div class="fact"><b>Head of state</b><span>'+list(c.hs)+'</span></div><div class="fact"><b>Head of government</b><span>'+list(c.hg)+'</span></div>':'')
+   +'<div class="fact"><b>People are called</b><span>'+esc(c.dem||'—')+'</span></div><div class="fact"><b>Drives on the</b><span>'+esc(c.drv||'—')+'</span></div>'
+   +'<div class="fact"><b>Calling code</b><span>'+esc(c.cc||'—')+'</span></div><div class="fact"><b>Web domain</b><span>'+esc(c.tld||'—')+'</span></div>'
+   +'<div class="fact wide neighbours"><b>Neighbours</b><span>'+nb+'</span></div></div>'
+   +'<div class="sect"><h3>Read in <select class="langpick" id="langPick" aria-label="Article language">'+Object.entries(LANGS).map(([k,v])=>'<option value="'+k+'"'+(k===contentLang?' selected':'')+'>'+v+'</option>').join('')+'</select></h3></div>'
+   +['overview:🌍 Overview','history:📜 History','culture:🎎 Customs &amp; culture','politics:⚖️ Politics'].map(s=>{const[k,t]=s.split(':');return '<div class="sect" data-sect="'+k+'"><h3>'+t+'</h3><p class="muted">Loading…</p></div>'}).join('');
+  d.querySelectorAll('[data-go]').forEach(a=>a.onclick=()=>select(a.dataset.go,true));
+  $('langPick').onchange=e=>{contentLang=e.target.value;try{localStorage.setItem('miga-geo-lang',contentLang)}catch(x){}select(code,false)};
+  loadArticles(code);
+  if(innerWidth<900)$('info').scrollIntoView({behavior:'smooth',block:'start'})}
+
+// Article titles for each section, per language. Politics articles are not linked in Wikidata, so English uses the usual title pattern.
+function titlesFor(c,sect,lang){const w=c.w||{},en=w.en||c.n;
+  if(sect==='overview')return[w[lang],w.en];
+  if(sect==='history')return[c.h&&c.h[lang],'History of '+en].filter((x,i)=>i===0||lang==='en'||!c.h||!c.h[lang]);
+  if(sect==='culture')return[c.cu&&c.cu[lang],'Culture of '+en];
+  if(sect==='politics')return lang==='en'?['Politics of '+en,'Government of '+en]:[w.en&&'Politics of '+en];
+  return[]}
+async function summary(lang,title){const key=lang+':'+title;if(summary.cache[key]!==undefined)return summary.cache[key];
+  let r;try{r=await fetch('https://'+lang+'.wikipedia.org/api/rest_v1/page/summary/'+encodeURIComponent(title.replace(/ /g,'_'))+'?redirect=true')}catch(e){summary.failed=true;return null}
+  // Only remember real answers; a busy or offline Wikipedia should be retried next time.
+  if(!r.ok){if(r.status!==404)summary.failed=true;else summary.cache[key]=null;return null}
+  try{const j=await r.json();
+    const v=j.type==='disambiguation'||!j.extract?null:{text:j.extract,url:j.content_urls&&j.content_urls.desktop.page,title:j.title};summary.cache[key]=v;return v}catch(e){summary.cache[key]=null;return null}}
+summary.cache={};
+async function loadArticles(code){const c=DATA[code],lang=contentLang;summary.failed=false;texts[code]=texts[code]||{};
+  await Promise.all(['overview','history','culture','politics'].map(async sect=>{
+    let got=null,usedLang=lang;
+    for(const t of titlesFor(c,sect,lang)){if(!t)continue;got=await summary(lang,t);if(got)break}
+    if(!got&&lang!=='en'){usedLang='en';for(const t of titlesFor(c,sect,'en')){if(!t)continue;got=await summary('en',t);if(got)break}}
+    if(selected!==code)return;const box=document.querySelector('[data-sect="'+sect+'"]');if(!box)return;
+    if(!got){box.querySelector('p').textContent=!navigator.onLine?'You are offline — articles need an internet connection.':summary.failed?'Wikipedia did not respond. Try again in a moment.':'No article found for this section.';return}
+    if(usedLang==='en')texts[code][sect]=got.text;
+    box.innerHTML=box.querySelector('h3').outerHTML+got.text.split(/\n+/).map(p=>'<p'+(usedLang==='ar'?' dir="rtl"':'')+'>'+esc(p)+'</p>').join('')+'<p class="src"><a href="'+esc(got.url)+'" target="_blank" rel="noopener">Read the full “'+esc(got.title)+'” article on Wikipedia'+(usedLang!==lang?' (English)':'')+' →</a></p>'}))}
+
+/* ---------------- Quiz ---------------- */
+let quiz=[],qi=0,score=0,answered=false,missed=[];
+function pool(){const src=$('qSource').value,all=Object.values(DATA).filter(c=>c.ind!==false||src==='seen');
+  if(src==='seen')return[...seen].map(k=>DATA[k]).filter(Boolean);if(src==='world')return all;return all.filter(c=>c.r===src)}
+function others(c,field,n,sameRegion){const pref=Object.values(DATA).filter(x=>x!==c&&x.ind!==false);let cand=sameRegion?pref.filter(x=>x.r===c.r):pref;if(cand.length<n+2)cand=pref;return shuffle(cand).slice(0,40)}
+function distinctOptions(answer,candidates,n){const out=[answer],seenV=new Set([String(answer).toLowerCase()]);for(const v of shuffle(candidates)){const k=String(v).toLowerCase();if(!v||seenV.has(k))continue;seenV.add(k);out.push(v);if(out.length>n)break}return out.length>=3?shuffle(out):null}
+function sentences(t){return(t||'').replace(/\s+/g,' ').match(/[^.!?]+[.!?]+/g)||[]}
+function maskCountry(text,c){let t=text;const words=[c.n,c.o,c.dem,...(c.c||[]),(c.w&&c.w.en)].filter(x=>x&&x.length>2).sort((a,b)=>b.length-a.length);
+  for(const w of words)t=t.replace(new RegExp(w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'),'_____');
+  // also hide adjectival forms ("Kenyan", "Japanese") that start with the country name's stem
+  const stem=c.n.split(' ')[0].slice(0,Math.max(4,c.n.split(' ')[0].length-2));if(stem.length>=4)t=t.replace(new RegExp('\\b'+stem.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\w*','gi'),'_____');return t}
+const makers={
+  capital:c=>{if(!c.c||!c.c.length)return null;const opts=distinctOptions(c.c[0],others(c,'c',3,true).map(x=>x.c&&x.c[0]),3);return opts&&{q:'What is the capital of '+c.f+' '+c.n+'?',opts,a:c.c[0],why:c.n+'’s capital is '+c.c.join(' and ')+'.'}},
+  currency:c=>{if(!c.cur||!c.cur.length)return null;const a=c.cur[0][1];const opts=distinctOptions(a,others(c,'cur',3,true).map(x=>x.cur&&x.cur[0]&&x.cur[0][1]).filter(x=>x!==a&&!(c.cur||[]).some(y=>y[1]===x)),3);return opts&&{q:'Which currency is used in '+c.f+' '+c.n+'?',opts,a,why:c.n+' uses the '+c.cur.map(x=>x[1]+' ('+x[0]+')').join(' and ')+'.'}},
+  language:c=>{if(!c.l||!c.l.length)return null;const a=c.l[0],own=new Set(c.l);const opts=distinctOptions(a,others(c,'l',3,false).flatMap(x=>x.l||[]).filter(x=>!own.has(x)),3);return opts&&{q:'Which of these is an official or widely used language in '+c.f+' '+c.n+'?',opts,a,why:'Languages of '+c.n+': '+c.l.join(', ')+'.'}},
+  government:c=>{if(!c.g||!c.g.length)return null;const a=c.g[0],own=new Set(c.g);const opts=distinctOptions(a,Object.values(DATA).flatMap(x=>x.g||[]).filter(x=>!own.has(x)),3);return opts&&{q:'How is '+c.f+' '+c.n+' governed?',opts,a,why:c.n+': '+c.g.join('; ')+(c.hs&&c.hs.length?'. Head of state: '+c.hs.join(', '):'')+'.'}},
+  flag:c=>{const opts=distinctOptions(c.n,others(c,'n',3,true).map(x=>x.n),3);return opts&&{q:'<span class="flagq" aria-label="flag">'+c.f+'</span>Which country has this flag?',html:true,opts,a:c.n,why:'That is the flag of '+c.n+'.'}},
+  map:c=>({q:'Click '+c.n+' on the map above.',map:true,a:c.code,why:(c.n+' is in '+(c.s||c.r)+'.')}),
+  history:c=>{const t=texts[c.code]&&texts[c.code].history;const cands=sentences(t).filter(s=>/\b(1[0-9]{3}|20[0-2][0-9])\b/.test(s)&&s.length<320);if(!cands.length)return null;const s=pick(cands).trim(),yr=s.match(/\b(1[0-9]{3}|20[0-2][0-9])\b/)[0],y=+yr;
+    const opts=distinctOptions(yr,shuffle([5,10,15,20,30,50,-5,-10,-15,-20,-30,-50]).map(d=>String(y+d)).filter(v=>+v<=new Date().getFullYear()),3);return opts&&{q:'History of '+c.f+' '+c.n+' — fill in the year:<br><em>“'+esc(s.replace(yr,'_____'))+'”</em>',html:true,opts,a:yr,why:'“'+s+'”'}},
+  customs:c=>{const t=texts[c.code]&&texts[c.code].culture;const cands=sentences(t).map(s=>s.trim()).filter(s=>s.length>60&&s.length<300);if(!cands.length)return null;const s=pick(cands);const opts=distinctOptions(c.n,others(c,'n',3,true).map(x=>x.n),3);
+    return opts&&{q:'Which country’s culture is this about?<br><em>“'+esc(maskCountry(s,c))+'”</em>',html:true,opts,a:c.n,why:'This describes the culture of '+c.n+'.'}}};
+function generate(onlyCodes){const types=[...document.querySelectorAll('#qTypes input:checked')].map(x=>x.value);if(!types.length){say('Choose at least one question type.');return null}
+  let p=onlyCodes?onlyCodes.map(k=>DATA[k]):pool();if(!p.length){say($('qSource').value==='seen'?'Explore a few countries on the map first, or pick a region.':'No countries found.');return null}
+  const n=+$('qCount').value,out=[],used=new Set();let guard=0;
+  while(out.length<n&&guard++<n*40){const c=pick(p),t=pick(types),k=c.code+t;if(used.has(k))continue;const q=makers[t](c);if(!q)continue;used.add(k);out.push(Object.assign(q,{country:c.code,type:t}))}
+  if(!out.length){say('Not enough information for those question types — open a few countries’ History or Customs sections first, or tick more types.');return null}
+  if(out.length<n)say('Made '+out.length+' questions from the information available. Explore more countries for a longer quiz.');else $('quizStatus').classList.remove('show');return out}
+function say(s){$('quizStatus').textContent=s;$('quizStatus').classList.add('show')}
+function start(qs){if(!qs)return;quiz=qs;qi=0;score=0;missed=[];$('quizDone').classList.add('hidden');$('quizArea').classList.remove('hidden');show();$('quizPanel').scrollIntoView({behavior:'smooth',block:'start'})}
+function show(){const q=quiz[qi];answered=false;$('qNum').textContent='Question '+(qi+1)+' of '+quiz.length;$('qScore').textContent='Score: '+score;$('qBar').style.width=(qi/quiz.length*100)+'%';
+  $('qText').innerHTML=q.html?q.q:esc(q.q);$('qExplain').classList.add('hidden');$('qNext').classList.add('hidden');$('qOpts').innerHTML='';clearMapMarks();
+  if(q.map){svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);g.selectAll('.land,.dot').classed('sel',false);quizMapHandler=code=>answer(code===q.a,code);$('qOpts').innerHTML='<button class="opt" id="skipMap">I don’t know — show me</button>';$('skipMap').onclick=()=>answer(false,null);$('mapbox').scrollIntoView({behavior:'smooth',block:'center'});return}
+  quizMapHandler=null;q.opts.forEach(o=>{const b=document.createElement('button');b.className='opt';b.textContent=o;b.onclick=()=>answer(o===q.a,o,b);$('qOpts').appendChild(b)})}
+function clearMapMarks(){g.selectAll('.land,.dot').classed('q-right',false).classed('q-wrong',false)}
+function answer(ok,choice,btn){if(answered)return;answered=true;const q=quiz[qi];if(ok)score++;else missed.push(q);q.given=choice;q.ok=ok;
+  if(q.map){quizMapHandler=null;g.selectAll('.land,.dot').filter(function(){return this.getAttribute('data-code')===q.a}).classed('q-right',true);if(choice&&!ok)g.selectAll('.land,.dot').filter(function(){return this.getAttribute('data-code')===choice}).classed('q-wrong',true);zoomTo(q.a);
+    $('qOpts').innerHTML='<p style="margin:0">'+(ok?'✅ Correct!':'❌ '+(choice?'That was '+esc(DATA[choice].n)+'.':'Here it is.')+' The green country is '+esc(DATA[q.a].n)+'.')+'</p>'}
+  else $('qOpts').querySelectorAll('.opt').forEach(b=>{b.disabled=true;if(b.textContent===q.a)b.classList.add('right');else if(b===btn)b.classList.add('wrong')});
+  $('qExplain').innerHTML=(ok?'✅ ':'💡 ')+esc(q.why)+' <a data-go="'+q.country+'" style="cursor:pointer;font-weight:600">Open '+esc(DATA[q.country].n)+' →</a>';$('qExplain').classList.remove('hidden');
+  $('qExplain').querySelector('[data-go]').onclick=()=>{select(q.country,true);$('info').scrollIntoView({behavior:'smooth'})};
+  $('qScore').textContent='Score: '+score;$('qNext').textContent=qi<quiz.length-1?'Next question →':'See results';$('qNext').classList.remove('hidden');$('qNext').focus({preventScroll:true})}
+$('qNext').onclick=()=>{clearMapMarks();if(++qi<quiz.length)show();else finish()};
+function finish(){quizMapHandler=null;$('quizArea').classList.add('hidden');$('quizDone').classList.remove('hidden');const pct=Math.round(score/quiz.length*100);
+  $('doneTitle').textContent='You scored '+score+' / '+quiz.length+' ('+pct+'%) '+(pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'📚');
+  $('review').innerHTML=quiz.map(q=>'<li class="'+(q.ok?'good':'bad')+'">'+(q.ok?'✓ ':'✗ ')+(q.map?'Find '+esc(DATA[q.a].n)+' on the map':(q.html?q.q.replace(/<span class="flagq"[^>]*>(.*?)<\/span>/,'$1 '):esc(q.q)))+'<br><small>Answer: '+esc(q.map?DATA[q.a].n:q.a)+(q.ok?'':' · you chose: '+esc(q.map?(q.given?DATA[q.given].n:'no answer'):q.given))+'</small></li>').join('');
+  $('retryWrong').classList.toggle('hidden',!missed.length)}
+$('makeQuiz').onclick=()=>start(generate());$('newQuiz').onclick=()=>start(generate());
+$('retryWrong').onclick=()=>start(missed.map(q=>Object.assign({},q,{ok:undefined,given:undefined})));
+$('printQuiz').onclick=()=>{const qs=generate();if(!qs)return;const printable=qs.map(q=>q.map?Object.assign({},q,{q:'Label '+DATA[q.a].n+' on a world map.',opts:null}):q);
+  const body='<h1>Geography quiz</h1><p>Name: ______________________ &nbsp; Date: ____________</p><ol>'+printable.map(q=>'<li><p>'+(q.html?q.q:esc(q.q))+'</p>'+(q.opts?'<ol type="A">'+q.opts.map(o=>'<li>'+esc(o)+'</li>').join('')+'</ol>':'')+'</li>').join('')+'</ol>'
+   +'<h2 style="page-break-before:always">Answer key</h2><ol>'+printable.map(q=>'<li>'+esc(q.map?DATA[q.a].n:(q.opts?String.fromCharCode(65+q.opts.indexOf(q.a))+') ':'')+q.a)+' — <small>'+esc(q.why)+'</small></li>').join('')+'</ol><p><small>Made with MigaBuilder Geography Forge · migabuilder.com/geo-forge.html</small></p>';
+  const html='<!doctype html><html><head><meta charset="utf-8"><title>Geography quiz</title><style>body{font:15px/1.5 Georgia,serif;max-width:760px;margin:30px auto;padding:0 20px}li{margin-bottom:10px}.flagq{font-size:48px;display:block}em{font-style:italic}</style></head><body>'+body+'</body></html>';
+  const a=document.createElement('a'),u=URL.createObjectURL(new Blob([html],{type:'text/html'}));a.href=u;a.download='geography-quiz.html';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500);say('Downloaded a printable quiz with an answer key. Open it and print, or save as PDF.')};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

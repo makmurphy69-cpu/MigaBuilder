@@ -1160,3 +1160,15 @@ window.HOME_I18N = {
     'd:meet-forge': "Animez des salons vidéo de groupe et des communautés thématiques."
   }
 };
+
+// Footer links to the About, Privacy and Terms pages.
+(function (T) {
+  var add = {
+    footAbout: { en: 'About', es: 'Acerca de', ar: 'من نحن', zh: '关于', sw: 'Kuhusu', sv: 'Om', de: 'Über uns', pt: 'Sobre', fr: 'À propos' },
+    footPrivacy: { en: 'Privacy', es: 'Privacidad', ar: 'الخصوصية', zh: '隐私', sw: 'Faragha', sv: 'Integritet', de: 'Datenschutz', pt: 'Privacidade', fr: 'Confidentialité' },
+    footTerms: { en: 'Terms', es: 'Condiciones', ar: 'الشروط', zh: '条款', sw: 'Masharti', sv: 'Villkor', de: 'Nutzungsbedingungen', pt: 'Termos', fr: 'Conditions' }
+  };
+  Object.keys(add).forEach(function (k) {
+    Object.keys(add[k]).forEach(function (l) { if (T[l]) T[l][k] = add[k][l]; });
+  });
+})(window.HOME_I18N);

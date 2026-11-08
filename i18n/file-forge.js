@@ -149,3 +149,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "Choose JPG for photos you want small, and PNG for logos, screenshots and pictures with transparency.": {
+  "es": "Elige JPG para fotos que quieras pequeñas, y PNG para logotipos, capturas e imágenes con transparencia.",
+  "ar": "اختر JPG للصور التي تريدها صغيرة، وPNG للشعارات ولقطات الشاشة والصور ذات الخلفية الشفافة.",
+  "zh": "想让照片变小就选 JPG；标志、截图和带透明背景的图片选 PNG。",
+  "sw": "Chagua JPG kwa picha unazotaka ziwe ndogo, na PNG kwa nembo, picha za skrini na picha zenye uwazi.",
+  "sv": "Välj JPG för foton som ska bli små, och PNG för logotyper, skärmbilder och bilder med genomskinlighet.",
+  "de": "Nimm JPG für Fotos, die klein sein sollen, und PNG für Logos, Screenshots und Bilder mit Transparenz.",
+  "pt": "Escolha JPG para fotos que você quer pequenas, e PNG para logos, capturas de tela e imagens com transparência.",
+  "fr": "Choisissez JPG pour des photos légères, et PNG pour les logos, captures d’écran et images avec transparence."
+ },
+ "Pick a maximum width such as 1920px to make large phone photos quicker to send and upload.": {
+  "es": "Elige un ancho máximo como 1920px para que las fotos grandes del móvil se envíen y suban más rápido.",
+  "ar": "اختر عرضًا أقصى مثل 1920px لتصبح صور الهاتف الكبيرة أسرع في الإرسال والرفع.",
+  "zh": "选择 1920px 等最大宽度，手机拍的大照片发送和上传会更快。",
+  "sw": "Chagua upana wa juu kama 1920px ili picha kubwa za simu zitumwe na kupakiwa haraka zaidi.",
+  "sv": "Välj en största bredd som 1920px så går stora mobilfoton snabbare att skicka och ladda upp.",
+  "de": "Wähle eine maximale Breite wie 1920px, damit große Handyfotos schneller verschickt und hochgeladen werden.",
+  "pt": "Escolha uma largura máxima como 1920px para que fotos grandes do celular sejam enviadas mais rápido.",
+  "fr": "Choisissez une largeur maximale comme 1920px pour envoyer et téléverser plus vite les grandes photos de téléphone."
+ },
+ "Use “Keep each file under (KB)” when a website or form has an upload limit.": {
+  "es": "Usa “Keep each file under (KB)” cuando una web o un formulario tenga un límite de subida.",
+  "ar": "استخدم «Keep each file under (KB)» عندما يكون لموقع أو نموذج حد للرفع.",
+  "zh": "网站或表格有上传大小限制时，使用“Keep each file under (KB)”。",
+  "sw": "Tumia “Keep each file under (KB)” tovuti au fomu inapokuwa na kikomo cha kupakia.",
+  "sv": "Använd ”Keep each file under (KB)” när en webbplats eller ett formulär har en gräns för uppladdning.",
+  "de": "Nutze „Keep each file under (KB)“, wenn eine Website oder ein Formular eine Upload-Grenze hat.",
+  "pt": "Use “Keep each file under (KB)” quando um site ou formulário tiver limite de envio.",
+  "fr": "Utilisez « Keep each file under (KB) » quand un site ou un formulaire limite la taille des fichiers."
+ },
+ "Can I convert several images at once?": {
+  "es": "¿Puedo convertir varias imágenes a la vez?",
+  "ar": "هل يمكنني تحويل عدة صور دفعة واحدة؟",
+  "zh": "能一次转换多张图片吗？",
+  "sw": "Je, naweza kubadilisha picha kadhaa kwa pamoja?",
+  "sv": "Kan jag konvertera flera bilder på en gång?",
+  "de": "Kann ich mehrere Bilder auf einmal umwandeln?",
+  "pt": "Posso converter várias imagens de uma vez?",
+  "fr": "Puis-je convertir plusieurs images à la fois ?"
+ },
+ "Yes. Add several files and press “Convert & download all” to get them all in the new format.": {
+  "es": "Sí. Añade varios archivos y pulsa “Convert & download all” para obtenerlos todos en el nuevo formato.",
+  "ar": "نعم. أضف عدة ملفات واضغط «Convert & download all» لتحصل عليها كلها بالصيغة الجديدة.",
+  "zh": "可以。添加多个文件，点“Convert & download all”，即可全部转换为新格式。",
+  "sw": "Ndiyo. Ongeza faili kadhaa na ubonyeze “Convert & download all” ili kuzipata zote katika muundo mpya.",
+  "sv": "Ja. Lägg till flera filer och tryck på ”Convert & download all” för att få alla i det nya formatet.",
+  "de": "Ja. Füge mehrere Dateien hinzu und drücke „Convert & download all“, um alle im neuen Format zu bekommen.",
+  "pt": "Sim. Adicione vários arquivos e toque em “Convert & download all” para obter todos no novo formato.",
+  "fr": "Oui. Ajoutez plusieurs fichiers et appuyez sur « Convert & download all » pour les obtenir tous dans le nouveau format."
+ },
+ "What is WebP?": {
+  "es": "¿Qué es WebP?",
+  "ar": "ما هي صيغة WebP؟",
+  "zh": "WebP 是什么？",
+  "sw": "WebP ni nini?",
+  "sv": "Vad är WebP?",
+  "de": "Was ist WebP?",
+  "pt": "O que é WebP?",
+  "fr": "Qu’est-ce que le WebP ?"
+ },
+ "WebP is a modern image format that makes files smaller than JPG and PNG at similar quality, and it supports transparency. All modern browsers can show it.": {
+  "es": "WebP es un formato de imagen moderno que crea archivos más pequeños que JPG y PNG con una calidad similar, y admite transparencia. Todos los navegadores modernos lo muestran.",
+  "ar": "WebP صيغة صور حديثة تجعل الملفات أصغر من JPG وPNG بجودة مماثلة، وتدعم الشفافية. تعرضها كل المتصفحات الحديثة.",
+  "zh": "WebP 是一种现代图片格式，在画质相近时比 JPG 和 PNG 更小，并支持透明背景。所有现代浏览器都能显示。",
+  "sw": "WebP ni muundo wa kisasa wa picha unaofanya faili kuwa ndogo kuliko JPG na PNG kwa ubora unaofanana, na unaruhusu uwazi. Vivinjari vyote vya kisasa vinaweza kuuonyesha.",
+  "sv": "WebP är ett modernt bildformat som ger mindre filer än JPG och PNG med liknande kvalitet, och det stöder genomskinlighet. Alla moderna webbläsare kan visa det.",
+  "de": "WebP ist ein modernes Bildformat, das bei ähnlicher Qualität kleinere Dateien als JPG und PNG erzeugt und Transparenz unterstützt. Alle modernen Browser können es anzeigen.",
+  "pt": "WebP é um formato de imagem moderno que gera arquivos menores que JPG e PNG com qualidade parecida e aceita transparência. Todos os navegadores modernos o exibem.",
+  "fr": "Le WebP est un format d’image moderne qui donne des fichiers plus légers que le JPG et le PNG à qualité comparable, et il gère la transparence. Tous les navigateurs modernes l’affichent."
+ }
+});

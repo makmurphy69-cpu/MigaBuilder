@@ -1,0 +1,2141 @@
+<!-- Generated from /paint-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="zh-Hans" data-en-title="Free layered image editor — Paint Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='zh';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/zh/paint-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>免费的分层图像编辑器 — Paint Forge | MigaBuilder</title>
+<meta name="description" content="Paint Forge 是一款支持图层的图像编辑器，有画笔、形状、文字、填充、选区、调整以及撤销/重做。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="免费的分层图像编辑器 — Paint Forge">
+<meta property="og:description" content="Paint Forge 是一款支持图层的图像编辑器，有画笔、形状、文字、填充、选区、调整以及撤销/重做。">
+<meta property="og:image" content="https://migabuilder.com/assets/og/paint-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/zh/paint-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="免费的分层图像编辑器 — Paint Forge">
+<meta name="twitter:description" content="Paint Forge 是一款支持图层的图像编辑器，有画笔、形状、文字、填充、选区、调整以及撤销/重做。">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/paint-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/paint-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main.paint-main {
+    display: grid; grid-template-columns: minmax(220px, 250px) minmax(0, 1fr) minmax(230px, 260px); gap: 18px;
+    padding: 24px clamp(16px, 3vw, 40px) 48px; align-items: start;
+  }
+  @media (max-width: 1100px) { main.paint-main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 16px 16px 20px; max-height: calc(100vh - 32px); overflow-y: auto; position: sticky; top: 16px;
+  }
+  @media (max-width: 1100px) { .panel { position: static; max-height: none; } }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 16px 0 10px; padding-top: 14px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+  .field .hint { font-size: 11px; color: rgba(22, 32, 43, 0.72); margin-top: 4px; line-height: 1.4; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  input[type="text"], input[type="number"], select {
+    width: 100%; font-size: 13px; padding: 7px 8px; border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  input[type="range"] { width: 100%; }
+  input[type="color"] { width: 100%; height: 32px; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); padding: 2px; background: #fff; }
+
+  .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .tool-btn {
+    background: #fff; border: 1px solid rgba(22,32,43,0.25); border-radius: var(--radius); padding: 8px 3px;
+    font-size: 10.5px; cursor: pointer; color: var(--ink); text-align: center; line-height: 1.3;
+  }
+  .tool-btn .ic { display: block; font-size: 16px; margin-bottom: 2px; }
+  .tool-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 13px; padding: 9px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .btn-row { display: flex; gap: 6px; }
+  .btn-row button { flex: 1; }
+
+  .upload-btn {
+    display: inline-block; background: #fff; border: 1px dashed rgba(22, 32, 43, 0.35); border-radius: var(--radius);
+    padding: 8px 8px; font-size: 12px; cursor: pointer; text-align: center; width: 100%;
+  }
+
+  .swatch-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 4px; margin-top: 6px; }
+  .swatch { width: 100%; aspect-ratio: 1; border-radius: 3px; border: 1px solid rgba(22,32,43,0.25); cursor: pointer; padding: 0; }
+
+  .check-row { display: flex; align-items: center; gap: 6px; font-size: 12px; cursor: pointer; margin-bottom: 8px; }
+  .check-row input { width: auto; }
+
+  .error-box {
+    margin-top: 10px; padding: 10px 12px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 12px; color: #6E2418; display: none; line-height: 1.4;
+  }
+  .error-box.show { display: block; }
+
+  .status-box {
+    margin-top: 0; margin-bottom: 12px; padding: 12px 14px; background: rgba(78,158,115,0.14); border: 1px solid rgba(78,158,115,0.4);
+    border-radius: var(--radius); font-size: 13px; color: #244731; display: none; line-height: 1.5;
+  }
+  .status-box.show { display: block; }
+
+  /* ---------- canvas area ---------- */
+  .canvas-table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 16px; min-height: 600px; min-width: 0; display: flex; flex-direction: column;
+  }
+  .canvas-toolbar {
+    display: flex; align-items: center; gap: 10px; font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+    color: rgba(111, 209, 224, 0.75); padding-bottom: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap;
+  }
+  .canvas-toolbar button { background: transparent; border: 1px solid var(--line-cyan-dim); color: var(--paper); border-radius: 2px; width: 24px; height: 24px; cursor: pointer; }
+  .canvas-scroll { flex: 1; overflow: auto; display: flex; align-items: flex-start; justify-content: flex-start; background: repeating-conic-gradient(#2a3a4d 0% 25%, #1c2836 0% 50%) 0 / 20px 20px; border-radius: 2px; }
+  #viewCanvas { display: block; cursor: crosshair; background: transparent; margin: 0 auto; flex: none; }
+
+  /* ---------- layers ---------- */
+  .layer-row {
+    display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid rgba(22,32,43,0.18);
+    border-radius: var(--radius); padding: 6px 8px; margin-bottom: 6px; cursor: pointer;
+  }
+  .layer-row.active { border-color: var(--amber); box-shadow: 0 0 0 1px var(--amber); }
+  .layer-row img { width: 32px; height: 32px; object-fit: contain; background: repeating-conic-gradient(#ddd 0% 25%, #eee 0% 50%) 0/8px 8px; border-radius: 2px; flex: none; }
+  .layer-row .layer-info { flex: 1; min-width: 0; }
+  .layer-row input[type="text"] { font-size: 11.5px; padding: 3px 5px; margin-bottom: 3px; }
+  .layer-row input[type="range"] { height: 12px; }
+  .layer-row .layer-actions { display: flex; flex-direction: column; gap: 2px; }
+  .layer-row .layer-actions button { background: transparent; border: none; cursor: pointer; font-size: 12px; padding: 1px 3px; color: var(--ink); }
+  .layer-actions-row { display: flex; gap: 5px; margin-top: 6px; }
+  .layer-actions-row button { flex: 1; font-size: 11px; padding: 6px; }
+
+  footer { padding: 20px clamp(16px, 3vw, 40px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"支持图层吗？","acceptedAnswer":{"@type":"Answer","text":"支持。使用图层编辑，然后导出完成的图片。"}},{"@type":"Question","name":"Paint Forge 免费吗？","acceptedAnswer":{"@type":"Answer","text":"是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"}},{"@type":"Question","name":"我的文件会被上传吗？","acceptedAnswer":{"@type":"Answer","text":"不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。"}}],"inLanguage":"zh"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/paint-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/paint-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/paint-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/paint-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/paint-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/paint-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/paint-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/paint-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/paint-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/paint-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Paint Forge</h1>
+    <p data-i18n="heroSubtitle">A layered image editor — brushes, shapes, text, fill, selection, filters, and undo/redo.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main class="paint-main">
+  <section class="panel">
+    <div class="status-box" id="ideaBanner"><span aria-hidden="true">✏️</span> <strong id="ideaText"></strong></div>
+    <div class="status-box" id="draftBanner">
+      <span id="draftBannerText"></span>
+      <div class="btn-row" style="margin-top:8px;">
+        <button type="button" class="draft-btn secondary" id="resumeDraftBtn" style="flex:1;" data-i18n="resumeDraftLabel">↺ Resume draft</button>
+        <button type="button" class="draft-btn secondary" id="discardDraftBtn" style="flex:1;" data-i18n="discardLabel">✕ Discard</button>
+      </div>
+    </div>
+    <p class="field hint" id="autosaveHint" style="margin:0 0 12px;"><span data-i18n="autosaveHintText">Your progress autosaves to this browser as you work, so a refresh won't lose it.</span> <span id="autosaveStatus"></span> <a href="#" id="clearDraftLink" style="color:var(--navy);text-decoration:underline;" data-i18n="clearDraftLinkText">Clear saved draft</a></p>
+
+    <div class="section-title" data-i18n="toolsHeading">Tools</div>
+    <div class="tool-grid" id="toolGrid"></div>
+
+    <div class="section-title" data-i18n="optionsHeading">Options</div>
+    <div id="toolOptions"></div>
+
+    <div class="section-title" data-i18n="colorHeading">Color</div>
+    <div class="field">
+      <input type="color" id="colorPicker" value="#0E2A47" aria-label="Colour">
+      <div class="swatch-grid" id="swatchGrid"></div>
+    </div>
+
+    <div class="section-title" data-i18n="canvasHeading">Canvas</div>
+    <div class="btn-row" style="margin-bottom:8px;">
+      <button type="button" class="draft-btn secondary" id="newCanvasBtn" data-i18n="newLabel">New</button>
+      <button type="button" class="draft-btn secondary" id="resizeCanvasBtn" data-i18n="resizeLabel">Resize</button>
+    </div>
+    <label class="upload-btn" for="importImageInput" data-i18n="importImageLabel">+ Import image as layer</label>
+    <input type="file" id="importImageInput" accept="image/*" style="display:none;">
+
+    <div class="section-title" data-i18n="historyHeading">History</div>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="undoBtn" disabled data-i18n="undoLabel">↺ Undo</button>
+      <button type="button" class="draft-btn secondary" id="redoBtn" disabled data-i18n="redoLabel">↻ Redo</button>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+  </section>
+
+  <section class="canvas-table">
+    <div class="canvas-toolbar">
+      <span data-i18n="canvasToolbarLabel">PAINT FORGE — CANVAS</span>
+      <span id="canvasSizeLabel">900 × 600</span>
+      <span style="flex:1;"></span>
+      <button type="button" id="zoomOutBtn">−</button>
+      <span id="zoomLabel">100%</span>
+      <button type="button" id="zoomInBtn">+</button>
+    </div>
+    <div class="canvas-scroll" tabindex="0" role="region" aria-label="Canvas">
+      <canvas id="viewCanvas" width="900" height="600"></canvas>
+    </div>
+    <div class="btn-row" style="margin-top:12px;">
+      <button type="button" class="draft-btn secondary" id="exportPngBtn" data-i18n="exportPngLabel">⬇ Export PNG</button>
+      <button type="button" class="draft-btn secondary" id="exportJpgBtn" data-i18n="exportJpgLabel">⬇ Export JPG</button>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="section-title" data-i18n="layersHeading">Layers</div>
+    <div id="layersList"></div>
+    <button type="button" class="draft-btn secondary" id="addLayerBtn" style="margin-top:6px;" data-i18n="addLayerLabel">+ Add layer</button>
+    <div class="layer-actions-row">
+      <button type="button" class="draft-btn secondary" id="dupLayerBtn" data-i18n="duplicateLabel">⧉ Duplicate</button>
+      <button type="button" class="draft-btn secondary" id="mergeDownBtn" data-i18n="mergeDownLabel">⬇ Merge down</button>
+      <button type="button" class="draft-btn secondary" id="deleteLayerBtn" data-i18n="deleteLabel">✕ Delete</button>
+    </div>
+
+    <div class="section-title" data-i18n="transformHeading">Transform (active layer)</div>
+    <div class="btn-row" style="margin-bottom:6px;">
+      <button type="button" class="draft-btn secondary" id="flipHBtn" data-i18n="flipHLabel">⇋ Flip H</button>
+      <button type="button" class="draft-btn secondary" id="flipVBtn" data-i18n="flipVLabel">⇵ Flip V</button>
+    </div>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="rotateCcwBtn" data-i18n="rotateCcwLabel">↺ Rotate CCW</button>
+      <button type="button" class="draft-btn secondary" id="rotateCwBtn" data-i18n="rotateCwLabel">↻ Rotate CW</button>
+    </div>
+    <p class="field hint" data-i18n="transformHint">Affects the active layer's pixels in place — content that no longer fits the frame is cropped.</p>
+
+    <div class="section-title" data-i18n="adjustmentsHeading">Adjustments (active layer)</div>
+    <div class="field">
+      <label for="brightnessSlider"><span data-i18n="brightnessLabel">Brightness</span> <span id="brightnessVal">0</span></label>
+      <input type="range" id="brightnessSlider" min="-100" max="100" value="0">
+    </div>
+    <div class="field">
+      <label for="contrastSlider"><span data-i18n="contrastLabel">Contrast</span> <span id="contrastVal">0</span></label>
+      <input type="range" id="contrastSlider" min="-100" max="100" value="0">
+    </div>
+    <div class="field">
+      <label for="saturationSlider"><span data-i18n="saturationLabel">Saturation</span> <span id="saturationVal">0</span></label>
+      <input type="range" id="saturationSlider" min="-100" max="100" value="0">
+    </div>
+    <div class="field">
+      <label for="blurSlider"><span data-i18n="blurLabel">Blur</span> <span id="blurVal">0px</span></label>
+      <input type="range" id="blurSlider" min="0" max="10" value="0">
+    </div>
+    <label class="check-row"><input type="checkbox" id="grayscaleCheck"> <span data-i18n="grayscaleLabel">Grayscale</span></label>
+    <label class="check-row"><input type="checkbox" id="invertCheck"> <span data-i18n="invertLabel">Invert</span></label>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="resetFilterBtn" data-i18n="resetLabel">Reset</button>
+      <button type="button" class="draft-btn" id="applyFilterBtn" data-i18n="applyLabel">Apply</button>
+    </div>
+    <p class="field hint" data-i18n="filterPreviewHint">Preview updates live on the active layer; "Apply" bakes it in permanently.</p>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Paint Forge</h2>
+  <p>Paint Forge is a layered image editor with brushes, shapes, text, fill, selection, adjustments and undo/redo.</p>
+  <h3>How to use Paint Forge</h3>
+  <ol><li>Open an image or blank canvas and choose the editing tools.</li><li>Press “Apply edit”.</li><li>Work with layers, compare the result, and export the image.</li></ol>
+  <h3>Does it support layers?</h3>
+  <p>Yes. Work with layers, then export the finished image.</p>
+  <h3>Is Paint Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/zh/image-studio.html">Image Studio</a> · <a href="/zh/file-forge.html">Image Forge</a> · <a href="/zh/vector-forge.html">Vector Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/zh/">MigaBuilder</a>. Everything you draw and import stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/paint-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // ================= state =================
+  let canvasWidth = 900, canvasHeight = 600, canvasBackground = 'white'; // 'white' | 'transparent'
+  let layers = []; // {id, name, canvas, ctx, visible, opacity}
+  let layerIdCounter = 0;
+  let activeLayerIndex = 0;
+  let currentTool = 'brush';
+  let currentColor = '#0E2A47';
+  const recentColors = [];
+
+  let brushSize = 12, brushOpacity = 1, brushHardness = 0.8;
+  let shapeFilled = false;
+  let fillTolerance = 32;
+  let textFontSize = 36, textFontFamily = 'IBM Plex Sans, sans-serif';
+  let zoom = 1;
+
+  let selection = null; // {x,y,w,h} in canvas pixel space
+  let clipboard = null; // {w,h,imageData}
+
+  let undoStack = [];
+  let redoStack = [];
+  const MAX_HISTORY = 25;
+
+  const viewCanvas = document.getElementById('viewCanvas');
+  const vctx = viewCanvas.getContext('2d');
+  const canvasScroll = document.querySelector('.canvas-scroll');
+  const errorBox = document.getElementById('errorBox');
+
+  const draftBanner = document.getElementById('draftBanner');
+  const draftBannerText = document.getElementById('draftBannerText');
+  const resumeDraftBtn = document.getElementById('resumeDraftBtn');
+  const discardDraftBtn = document.getElementById('discardDraftBtn');
+  const autosaveStatus = document.getElementById('autosaveStatus');
+  const clearDraftLink = document.getElementById('clearDraftLink');
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  // ================= layer helpers =================
+  function makeLayer(name) {
+    const canvas = document.createElement('canvas');
+    canvas.width = canvasWidth; canvas.height = canvasHeight;
+    return { id: ++layerIdCounter, name: name || (I18N.t('layerPrefix') + ' ' + (layers.length + 1)), canvas, ctx: canvas.getContext('2d'), visible: true, opacity: 1 };
+  }
+
+  function initCanvas(w, h, bg) {
+    canvasWidth = w; canvasHeight = h; canvasBackground = bg;
+    viewCanvas.width = w; viewCanvas.height = h;
+    applyZoomToCanvasElement();
+    const layer = makeLayer('Layer 1');
+    if (bg === 'white') { layer.ctx.fillStyle = '#ffffff'; layer.ctx.fillRect(0, 0, w, h); }
+    layers = [layer];
+    activeLayerIndex = 0;
+    undoStack = []; redoStack = [];
+    refreshHistoryButtons();
+    document.getElementById('canvasSizeLabel').textContent = w + ' × ' + h;
+    renderLayersList();
+    renderComposite();
+  }
+
+  function activeLayer() { return layers[activeLayerIndex]; }
+
+  // ================= history (undo/redo) =================
+  function snapshotState() {
+    return {
+      canvasWidth, canvasHeight, canvasBackground, activeLayerIndex,
+      layers: layers.map(l => ({ id: l.id, name: l.name, visible: l.visible, opacity: l.opacity, dataUrl: l.canvas.toDataURL() }))
+    };
+  }
+  function restoreState(state, done) {
+    canvasWidth = state.canvasWidth; canvasHeight = state.canvasHeight; canvasBackground = state.canvasBackground;
+    viewCanvas.width = canvasWidth; viewCanvas.height = canvasHeight;
+    applyZoomToCanvasElement();
+    document.getElementById('canvasSizeLabel').textContent = canvasWidth + ' × ' + canvasHeight;
+    let remaining = state.layers.length;
+    const restored = new Array(state.layers.length);
+    state.layers.forEach((ld, i) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = canvasWidth; canvas.height = canvasHeight;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+        restored[i] = { id: ld.id, name: ld.name, visible: ld.visible, opacity: ld.opacity, canvas, ctx };
+        remaining--;
+        if (remaining === 0) {
+          layers = restored;
+          activeLayerIndex = Math.min(state.activeLayerIndex, layers.length - 1);
+          renderLayersList();
+          renderComposite();
+          if (done) done();
+        }
+      };
+      img.src = ld.dataUrl;
+    });
+  }
+  function pushHistory() {
+    undoStack.push(snapshotState());
+    if (undoStack.length > MAX_HISTORY) undoStack.shift();
+    redoStack = [];
+    refreshHistoryButtons();
+    scheduleAutosave();
+  }
+  function refreshHistoryButtons() {
+    document.getElementById('undoBtn').disabled = undoStack.length === 0;
+    document.getElementById('redoBtn').disabled = redoStack.length === 0;
+  }
+  document.getElementById('undoBtn').addEventListener('click', function () {
+    if (!undoStack.length) return;
+    redoStack.push(snapshotState());
+    const state = undoStack.pop();
+    restoreState(state, function () { refreshHistoryButtons(); scheduleAutosave(); });
+  });
+  document.getElementById('redoBtn').addEventListener('click', function () {
+    if (!redoStack.length) return;
+    undoStack.push(snapshotState());
+    const state = redoStack.pop();
+    restoreState(state, function () { refreshHistoryButtons(); scheduleAutosave(); });
+  });
+
+  // ================= compositing =================
+  function currentFilterString() {
+    const b = parseInt(document.getElementById('brightnessSlider').value, 10);
+    const c = parseInt(document.getElementById('contrastSlider').value, 10);
+    const s = parseInt(document.getElementById('saturationSlider').value, 10);
+    const blur = parseInt(document.getElementById('blurSlider').value, 10);
+    const gray = document.getElementById('grayscaleCheck').checked;
+    const invert = document.getElementById('invertCheck').checked;
+    const parts = [];
+    parts.push('brightness(' + (1 + b / 100) + ')');
+    parts.push('contrast(' + (1 + c / 100) + ')');
+    parts.push('saturate(' + (1 + s / 100) + ')');
+    if (blur > 0) parts.push('blur(' + blur + 'px)');
+    if (gray) parts.push('grayscale(1)');
+    if (invert) parts.push('invert(1)');
+    return parts.join(' ');
+  }
+  function hasActiveFilterPreview() {
+    return document.getElementById('brightnessSlider').value != 0 ||
+      document.getElementById('contrastSlider').value != 0 ||
+      document.getElementById('saturationSlider').value != 0 ||
+      document.getElementById('blurSlider').value != 0 ||
+      document.getElementById('grayscaleCheck').checked ||
+      document.getElementById('invertCheck').checked;
+  }
+
+  let overlayDraw = null; // function(ctx) drawn on top during renderComposite, for live shape/selection previews
+
+  function renderComposite() {
+    vctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    layers.forEach((layer, idx) => {
+      if (!layer.visible) return;
+      vctx.save();
+      vctx.globalAlpha = layer.opacity;
+      if (idx === activeLayerIndex && hasActiveFilterPreview()) vctx.filter = currentFilterString();
+      vctx.drawImage(layer.canvas, 0, 0);
+      vctx.restore();
+    });
+    if (overlayDraw) overlayDraw(vctx);
+    if (selection) drawSelectionMarquee(vctx, selection);
+  }
+
+  function drawSelectionMarquee(ctx, sel) {
+    ctx.save();
+    ctx.strokeStyle = '#000';
+    ctx.setLineDash([5, 4]);
+    ctx.lineWidth = 1;
+    ctx.strokeRect(sel.x + 0.5, sel.y + 0.5, sel.w, sel.h);
+    ctx.strokeStyle = '#fff';
+    ctx.lineDashOffset = 5;
+    ctx.strokeRect(sel.x + 0.5, sel.y + 0.5, sel.w, sel.h);
+    ctx.restore();
+  }
+
+  // ================= zoom =================
+  function applyZoomToCanvasElement() {
+    viewCanvas.style.width = Math.round(canvasWidth * zoom) + 'px';
+    viewCanvas.style.height = Math.round(canvasHeight * zoom) + 'px';
+  }
+  document.getElementById('zoomInBtn').addEventListener('click', () => { zoom = Math.min(4, zoom + 0.25); applyZoomToCanvasElement(); document.getElementById('zoomLabel').textContent = Math.round(zoom * 100) + '%'; });
+  document.getElementById('zoomOutBtn').addEventListener('click', () => { zoom = Math.max(0.25, zoom - 0.25); applyZoomToCanvasElement(); document.getElementById('zoomLabel').textContent = Math.round(zoom * 100) + '%'; });
+
+  function getCanvasPos(evt) {
+    const rect = viewCanvas.getBoundingClientRect();
+    const scaleX = viewCanvas.width / rect.width;
+    const scaleY = viewCanvas.height / rect.height;
+    return { x: (evt.clientX - rect.left) * scaleX, y: (evt.clientY - rect.top) * scaleY };
+  }
+
+  // ================= tools =================
+  const TOOLS = [
+    { id: 'brush', labelKey: 'toolBrush', icon: '🖌' },
+    { id: 'eraser', labelKey: 'toolEraser', icon: '🧹' },
+    { id: 'line', labelKey: 'toolLine', icon: '📏' },
+    { id: 'rect', labelKey: 'toolRectangle', icon: '▭' },
+    { id: 'ellipse', labelKey: 'toolEllipse', icon: '⬭' },
+    { id: 'fill', labelKey: 'toolFill', icon: '🪣' },
+    { id: 'text', labelKey: 'toolText', icon: '🔤' },
+    { id: 'eyedropper', labelKey: 'toolEyedrop', icon: '💧' },
+    { id: 'select', labelKey: 'toolSelect', icon: '⬚' },
+    { id: 'move', labelKey: 'toolMove', icon: '✥' }
+  ];
+  const toolGrid = document.getElementById('toolGrid');
+  function renderToolGrid() {
+    toolGrid.innerHTML = '';
+    TOOLS.forEach(t => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'tool-btn' + (t.id === currentTool ? ' active' : '');
+      btn.dataset.tool = t.id;
+      btn.innerHTML = '<span class="ic">' + t.icon + '</span>' + I18N.t(t.labelKey);
+      btn.addEventListener('click', () => { currentTool = t.id; renderToolButtons(); renderToolOptions(); });
+      toolGrid.appendChild(btn);
+    });
+  }
+  renderToolGrid();
+  function renderToolButtons() {
+    toolGrid.querySelectorAll('.tool-btn').forEach(b => b.classList.toggle('active', b.dataset.tool === currentTool));
+  }
+
+  const toolOptionsEl = document.getElementById('toolOptions');
+  function renderToolOptions() {
+    toolOptionsEl.innerHTML = '';
+    function sliderField(labelText, min, max, step, val, onInput) {
+      const wrap = document.createElement('div');
+      wrap.className = 'field';
+      const label = document.createElement('label');
+      label.textContent = labelText;
+      const input = document.createElement('input');
+      input.type = 'range'; input.min = min; input.max = max; input.step = step || 1; input.value = val;
+      input.id = 'toolOpt' + toolOptionsEl.children.length; label.htmlFor = input.id;
+      input.addEventListener('input', () => onInput(parseFloat(input.value)));
+      wrap.appendChild(label); wrap.appendChild(input);
+      toolOptionsEl.appendChild(wrap);
+    }
+    if (currentTool === 'brush') {
+      sliderField(I18N.t('sizeLabel') + ' ' + brushSize + 'px', 1, 100, 1, brushSize, v => { brushSize = v; renderToolOptions(); });
+      sliderField(I18N.t('opacityLabel') + ' ' + Math.round(brushOpacity * 100) + '%', 0.05, 1, 0.05, brushOpacity, v => { brushOpacity = v; renderToolOptions(); });
+      sliderField(I18N.t('hardnessLabel') + ' ' + Math.round(brushHardness * 100) + '%', 0, 1, 0.05, brushHardness, v => { brushHardness = v; renderToolOptions(); });
+    } else if (currentTool === 'eraser') {
+      sliderField(I18N.t('sizeLabel') + ' ' + brushSize + 'px', 1, 150, 1, brushSize, v => { brushSize = v; renderToolOptions(); });
+    } else if (currentTool === 'line') {
+      sliderField(I18N.t('thicknessLabel') + ' ' + brushSize + 'px', 1, 60, 1, brushSize, v => { brushSize = v; renderToolOptions(); });
+    } else if (currentTool === 'rect' || currentTool === 'ellipse') {
+      sliderField(I18N.t('strokeWidthLabel') + ' ' + brushSize + 'px', 1, 60, 1, brushSize, v => { brushSize = v; renderToolOptions(); });
+      const label = document.createElement('label');
+      label.className = 'check-row';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.checked = shapeFilled;
+      cb.addEventListener('change', () => { shapeFilled = cb.checked; });
+      label.appendChild(cb); label.appendChild(document.createTextNode(' ' + I18N.t('filledLabel')));
+      toolOptionsEl.appendChild(label);
+    } else if (currentTool === 'fill') {
+      sliderField(I18N.t('toleranceLabel') + ' ' + fillTolerance, 0, 128, 1, fillTolerance, v => { fillTolerance = v; renderToolOptions(); });
+    } else if (currentTool === 'text') {
+      const sizeWrap = document.createElement('div');
+      sizeWrap.className = 'field';
+      const sizeLabelEl = document.createElement('label');
+      sizeLabelEl.textContent = I18N.t('fontSizeLabel');
+      sizeWrap.appendChild(sizeLabelEl);
+      const sizeInput = document.createElement('input');
+      sizeInput.type = 'number'; sizeInput.min = '8'; sizeInput.max = '200'; sizeInput.value = textFontSize;
+      sizeInput.id = 'textFontSize'; sizeLabelEl.htmlFor = sizeInput.id;
+      sizeInput.addEventListener('input', () => { textFontSize = parseInt(sizeInput.value, 10) || 36; });
+      sizeWrap.appendChild(sizeInput);
+      toolOptionsEl.appendChild(sizeWrap);
+
+      const fontWrap = document.createElement('div');
+      fontWrap.className = 'field';
+      const fontLabelEl = document.createElement('label');
+      fontLabelEl.textContent = I18N.t('fontLabel');
+      fontWrap.appendChild(fontLabelEl);
+      const fontSelect = document.createElement('select');
+      fontSelect.id = 'textFontFamily'; fontLabelEl.htmlFor = fontSelect.id;
+      [['IBM Plex Sans, sans-serif', 'fontSansSerif'], ['Georgia, serif', 'fontSerif'], ['IBM Plex Mono, monospace', 'fontMonospace']].forEach(([val, labelKey]) => {
+        const opt = document.createElement('option'); opt.value = val; opt.textContent = I18N.t(labelKey);
+        if (val === textFontFamily) opt.selected = true;
+        fontSelect.appendChild(opt);
+      });
+      fontSelect.addEventListener('change', () => { textFontFamily = fontSelect.value; });
+      fontWrap.appendChild(fontSelect);
+      toolOptionsEl.appendChild(fontWrap);
+      const hint = document.createElement('p');
+      hint.className = 'hint';
+      hint.textContent = I18N.t('textToolHint');
+      toolOptionsEl.appendChild(hint);
+    } else if (currentTool === 'eyedropper') {
+      const hint = document.createElement('p');
+      hint.className = 'hint';
+      hint.textContent = I18N.t('eyedropperHint');
+      toolOptionsEl.appendChild(hint);
+    } else if (currentTool === 'move') {
+      const hint = document.createElement('p');
+      hint.className = 'hint';
+      hint.textContent = I18N.t('moveToolHint');
+      toolOptionsEl.appendChild(hint);
+    } else if (currentTool === 'select') {
+      const hint = document.createElement('p');
+      hint.className = 'hint';
+      hint.textContent = I18N.t('selectToolHint');
+      toolOptionsEl.appendChild(hint);
+      const actions = document.createElement('div');
+      actions.className = 'btn-row';
+      actions.style.flexWrap = 'wrap';
+      [['Cut', 'actionCut'], ['Copy', 'actionCopy'], ['Paste', 'actionPaste'], ['Delete', 'actionDelete'], ['Crop to selection', 'actionCrop']].forEach(([action, labelKey]) => {
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'draft-btn secondary'; btn.style.flex = '1 1 45%'; btn.style.marginTop = '4px';
+        btn.textContent = I18N.t(labelKey);
+        btn.addEventListener('click', () => selectionAction(action));
+        actions.appendChild(btn);
+      });
+      toolOptionsEl.appendChild(actions);
+    }
+  }
+  renderToolOptions();
+
+  // ================= color =================
+  const colorPicker = document.getElementById('colorPicker');
+  colorPicker.addEventListener('input', () => { currentColor = colorPicker.value; });
+  const PRESET_SWATCHES = ['#16202B', '#0E2A47', '#EDEAE0', '#E2A63B', '#D8604A', '#4E9E73', '#6FD1E0', '#9B7FD4', '#FFFFFF', '#000000', '#E288B0', '#C9C24A'];
+  const swatchGrid = document.getElementById('swatchGrid');
+  function renderSwatches() {
+    swatchGrid.innerHTML = '';
+    PRESET_SWATCHES.concat(recentColors).forEach(hex => {
+      const btn = document.createElement('button');
+      btn.type = 'button'; btn.className = 'swatch'; btn.style.background = hex; btn.title = hex;
+      btn.addEventListener('click', () => { currentColor = hex; colorPicker.value = hex; });
+      swatchGrid.appendChild(btn);
+    });
+  }
+  renderSwatches();
+  function pushRecentColor(hex) {
+    if (recentColors.includes(hex) || PRESET_SWATCHES.includes(hex)) return;
+    recentColors.unshift(hex);
+    if (recentColors.length > 8) recentColors.pop();
+    renderSwatches();
+  }
+
+  // ================= drawing interaction =================
+  let isDrawing = false;
+  let lastPoint = null;
+  let dragStart = null;
+  let moveSnapshot = null;
+
+  function softBrushStamp(ctx, x, y, size, color, opacity, hardness) {
+    const r = size / 2;
+    const grad = ctx.createRadialGradient(x, y, r * hardness, x, y, r);
+    grad.addColorStop(0, hexToRgba(color, opacity));
+    grad.addColorStop(1, hexToRgba(color, 0));
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  function hexToRgba(hex, alpha) {
+    const h = hex.replace('#', '');
+    const bigint = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+    const r = (bigint >> 16) & 255, g = (bigint >> 8) & 255, b = bigint & 255;
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+  }
+
+  function drawBrushSegment(ctx, from, to, size, color, opacity, hardness, erase) {
+    const dist = Math.hypot(to.x - from.x, to.y - from.y);
+    const steps = Math.max(1, Math.ceil(dist / (size * 0.2)));
+    ctx.save();
+    if (erase) ctx.globalCompositeOperation = 'destination-out';
+    for (let i = 0; i <= steps; i++) {
+      const x = from.x + (to.x - from.x) * (i / steps);
+      const y = from.y + (to.y - from.y) * (i / steps);
+      softBrushStamp(ctx, x, y, size, erase ? '#000000' : color, erase ? 1 : opacity, hardness);
+    }
+    ctx.restore();
+  }
+
+  function updateLayerThumbnail(idx) { /* thumbnails regenerated in renderLayersList */ }
+
+  viewCanvas.addEventListener('mousedown', function (evt) {
+    if (evt.button !== 0) return;
+    const pos = getCanvasPos(evt);
+    const layer = activeLayer();
+    if (!layer) return;
+
+    if (currentTool === 'eyedropper') {
+      const data = vctx.getImageData(Math.round(pos.x), Math.round(pos.y), 1, 1).data;
+      const hex = '#' + [data[0], data[1], data[2]].map(v => v.toString(16).padStart(2, '0')).join('');
+      currentColor = hex; colorPicker.value = hex; pushRecentColor(hex);
+      return;
+    }
+    if (currentTool === 'text') {
+      const text = window.prompt(I18N.t('textToAddPrompt'), '');
+      if (text) {
+        pushHistory();
+        layer.ctx.fillStyle = currentColor;
+        layer.ctx.font = textFontSize + 'px ' + textFontFamily;
+        layer.ctx.textBaseline = 'top';
+        layer.ctx.fillText(text, pos.x, pos.y);
+        renderLayersList(); renderComposite();
+      }
+      return;
+    }
+    if (currentTool === 'fill') {
+      pushHistory();
+      floodFill(layer.ctx, Math.round(pos.x), Math.round(pos.y), currentColor, fillTolerance);
+      renderLayersList(); renderComposite();
+      return;
+    }
+    if (currentTool === 'select') {
+      dragStart = pos;
+      isDrawing = true;
+      overlayDraw = null;
+      return;
+    }
+    if (currentTool === 'move') {
+      pushHistory();
+      isDrawing = true;
+      dragStart = pos;
+      moveSnapshot = document.createElement('canvas');
+      moveSnapshot.width = canvasWidth; moveSnapshot.height = canvasHeight;
+      moveSnapshot.getContext('2d').drawImage(layer.canvas, 0, 0);
+      return;
+    }
+
+    // brush / eraser / line / rect / ellipse
+    pushHistory();
+    isDrawing = true;
+    dragStart = pos;
+    lastPoint = pos;
+    if (currentTool === 'brush' || currentTool === 'eraser') {
+      drawBrushSegment(layer.ctx, pos, pos, brushSize, currentColor, brushOpacity, brushHardness, currentTool === 'eraser');
+      renderComposite();
+    }
+  });
+
+  viewCanvas.addEventListener('mousemove', function (evt) {
+    if (!isDrawing) return;
+    const pos = getCanvasPos(evt);
+    const layer = activeLayer();
+
+    if (currentTool === 'brush' || currentTool === 'eraser') {
+      drawBrushSegment(layer.ctx, lastPoint, pos, brushSize, currentColor, brushOpacity, brushHardness, currentTool === 'eraser');
+      lastPoint = pos;
+      renderComposite();
+    } else if (currentTool === 'line') {
+      overlayDraw = function (ctx) {
+        ctx.save(); ctx.strokeStyle = currentColor; ctx.lineWidth = brushSize; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(dragStart.x, dragStart.y); ctx.lineTo(pos.x, pos.y); ctx.stroke(); ctx.restore();
+      };
+      renderComposite();
+    } else if (currentTool === 'rect') {
+      overlayDraw = function (ctx) {
+        ctx.save(); ctx.strokeStyle = currentColor; ctx.fillStyle = currentColor; ctx.lineWidth = brushSize;
+        const x = Math.min(dragStart.x, pos.x), y = Math.min(dragStart.y, pos.y), w = Math.abs(pos.x - dragStart.x), h = Math.abs(pos.y - dragStart.y);
+        if (shapeFilled) ctx.fillRect(x, y, w, h); else ctx.strokeRect(x, y, w, h);
+        ctx.restore();
+      };
+      renderComposite();
+    } else if (currentTool === 'ellipse') {
+      overlayDraw = function (ctx) {
+        ctx.save(); ctx.strokeStyle = currentColor; ctx.fillStyle = currentColor; ctx.lineWidth = brushSize;
+        const cx = (dragStart.x + pos.x) / 2, cy = (dragStart.y + pos.y) / 2;
+        const rx = Math.abs(pos.x - dragStart.x) / 2, ry = Math.abs(pos.y - dragStart.y) / 2;
+        ctx.beginPath(); ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+        if (shapeFilled) ctx.fill(); else ctx.stroke();
+        ctx.restore();
+      };
+      renderComposite();
+    } else if (currentTool === 'select') {
+      const x = Math.min(dragStart.x, pos.x), y = Math.min(dragStart.y, pos.y), w = Math.abs(pos.x - dragStart.x), h = Math.abs(pos.y - dragStart.y);
+      selection = { x, y, w, h };
+      renderComposite();
+    } else if (currentTool === 'move' && moveSnapshot) {
+      const dx = pos.x - dragStart.x, dy = pos.y - dragStart.y;
+      layer.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      layer.ctx.drawImage(moveSnapshot, dx, dy);
+      renderComposite();
+    }
+  });
+
+  window.addEventListener('mouseup', function (evt) {
+    if (!isDrawing) return;
+    isDrawing = false;
+    const layer = activeLayer();
+    if (!layer) return;
+    const pos = lastPoint ? lastPoint : dragStart;
+
+    if (currentTool === 'line' && overlayDraw) {
+      layer.ctx.save(); layer.ctx.strokeStyle = currentColor; layer.ctx.lineWidth = brushSize; layer.ctx.lineCap = 'round';
+      layer.ctx.beginPath(); layer.ctx.moveTo(dragStart.x, dragStart.y);
+      const endPos = lastEventPos || dragStart;
+      layer.ctx.lineTo(endPos.x, endPos.y); layer.ctx.stroke(); layer.ctx.restore();
+      overlayDraw = null;
+      renderLayersList(); renderComposite();
+    } else if ((currentTool === 'rect' || currentTool === 'ellipse') && overlayDraw) {
+      const endPos = lastEventPos || dragStart;
+      const x = Math.min(dragStart.x, endPos.x), y = Math.min(dragStart.y, endPos.y), w = Math.abs(endPos.x - dragStart.x), h = Math.abs(endPos.y - dragStart.y);
+      layer.ctx.save(); layer.ctx.strokeStyle = currentColor; layer.ctx.fillStyle = currentColor; layer.ctx.lineWidth = brushSize;
+      if (currentTool === 'rect') {
+        if (shapeFilled) layer.ctx.fillRect(x, y, w, h); else layer.ctx.strokeRect(x, y, w, h);
+      } else {
+        const cx = x + w / 2, cy = y + h / 2, rx = w / 2, ry = h / 2;
+        layer.ctx.beginPath(); layer.ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+        if (shapeFilled) layer.ctx.fill(); else layer.ctx.stroke();
+      }
+      layer.ctx.restore();
+      overlayDraw = null;
+      renderLayersList(); renderComposite();
+    } else if (currentTool === 'brush' || currentTool === 'eraser') {
+      renderLayersList();
+    } else if (currentTool === 'select') {
+      renderComposite();
+    } else if (currentTool === 'move') {
+      moveSnapshot = null;
+      renderLayersList();
+    }
+    dragStart = null; lastPoint = null;
+  });
+
+  // track last mouse pos on canvas for mouseup shape commit (mouseup may be outside canvas)
+  let lastEventPos = null;
+  viewCanvas.addEventListener('mousemove', function (evt) { lastEventPos = getCanvasPos(evt); });
+
+  // ================= flood fill =================
+  function floodFill(ctx, startX, startY, fillColorHex, tolerance) {
+    const w = canvasWidth, h = canvasHeight;
+    if (startX < 0 || startY < 0 || startX >= w || startY >= h) return;
+    const imgData = ctx.getImageData(0, 0, w, h);
+    const data = imgData.data;
+    const idx = (startY * w + startX) * 4;
+    const target = [data[idx], data[idx + 1], data[idx + 2], data[idx + 3]];
+    const fh = fillColorHex.replace('#', '');
+    const fr = parseInt(fh.substring(0, 2), 16), fg = parseInt(fh.substring(2, 4), 16), fb = parseInt(fh.substring(4, 6), 16);
+    if (Math.abs(target[0] - fr) <= tolerance && Math.abs(target[1] - fg) <= tolerance && Math.abs(target[2] - fb) <= tolerance && target[3] === 255) return;
+
+    function matches(i) {
+      return Math.abs(data[i] - target[0]) <= tolerance && Math.abs(data[i + 1] - target[1]) <= tolerance &&
+        Math.abs(data[i + 2] - target[2]) <= tolerance && Math.abs(data[i + 3] - target[3]) <= tolerance;
+    }
+    const stack = [[startX, startY]];
+    const visited = new Uint8Array(w * h);
+    while (stack.length) {
+      const [x, y] = stack.pop();
+      if (x < 0 || y < 0 || x >= w || y >= h) continue;
+      const pIdx = y * w + x;
+      if (visited[pIdx]) continue;
+      const i = pIdx * 4;
+      if (!matches(i)) continue;
+      visited[pIdx] = 1;
+      data[i] = fr; data[i + 1] = fg; data[i + 2] = fb; data[i + 3] = 255;
+      stack.push([x + 1, y]); stack.push([x - 1, y]); stack.push([x, y + 1]); stack.push([x, y - 1]);
+    }
+    ctx.putImageData(imgData, 0, 0);
+  }
+
+  // ================= selection actions =================
+  function selectionAction(action) {
+    if (!selection || selection.w < 1 || selection.h < 1) { showError(I18N.t('errorDragSelectionFirst')); return; }
+    clearError();
+    const layer = activeLayer();
+    const sx = Math.round(selection.x), sy = Math.round(selection.y), sw = Math.round(selection.w), sh = Math.round(selection.h);
+    if (action === 'Copy' || action === 'Cut') {
+      clipboard = { w: sw, h: sh, imageData: layer.ctx.getImageData(sx, sy, sw, sh) };
+      if (action === 'Cut') {
+        pushHistory();
+        layer.ctx.clearRect(sx, sy, sw, sh);
+        renderLayersList(); renderComposite();
+      }
+    } else if (action === 'Delete') {
+      pushHistory();
+      layer.ctx.clearRect(sx, sy, sw, sh);
+      renderLayersList(); renderComposite();
+    } else if (action === 'Paste') {
+      if (!clipboard) { showError(I18N.t('errorNothingCopied')); return; }
+      pushHistory();
+      layer.ctx.putImageData(clipboard.imageData, sx + 10, sy + 10);
+      renderLayersList(); renderComposite();
+    } else if (action === 'Crop to selection') {
+      pushHistory();
+      const newLayers = layers.map(l => {
+        const canvas = document.createElement('canvas');
+        canvas.width = sw; canvas.height = sh;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(l.canvas, sx, sy, sw, sh, 0, 0, sw, sh);
+        return { id: l.id, name: l.name, visible: l.visible, opacity: l.opacity, canvas, ctx };
+      });
+      layers = newLayers;
+      canvasWidth = sw; canvasHeight = sh;
+      viewCanvas.width = sw; viewCanvas.height = sh;
+      applyZoomToCanvasElement();
+      document.getElementById('canvasSizeLabel').textContent = sw + ' × ' + sh;
+      selection = null;
+      renderLayersList(); renderComposite();
+    }
+  }
+
+  // ================= layers UI =================
+  const layersListEl = document.getElementById('layersList');
+  function renderLayersList() {
+    layersListEl.innerHTML = '';
+    for (let idx = layers.length - 1; idx >= 0; idx--) {
+      const layer = layers[idx];
+      const row = document.createElement('div');
+      row.className = 'layer-row' + (idx === activeLayerIndex ? ' active' : '');
+      const visCheckbox = document.createElement('input');
+      visCheckbox.type = 'checkbox'; visCheckbox.setAttribute('aria-label', 'Show layer'); visCheckbox.checked = layer.visible; visCheckbox.style.width = 'auto';
+      visCheckbox.addEventListener('click', e => e.stopPropagation());
+      visCheckbox.addEventListener('change', (e) => { e.stopPropagation(); layer.visible = visCheckbox.checked; renderComposite(); scheduleAutosave(); });
+      const thumb = document.createElement('img');
+      thumb.src = layer.canvas.toDataURL();
+      thumb.alt = '';
+      const info = document.createElement('div');
+      info.className = 'layer-info';
+      const nameInput = document.createElement('input');
+      nameInput.type = 'text'; nameInput.setAttribute('aria-label', 'Layer name'); nameInput.value = layer.name;
+      nameInput.addEventListener('click', e => e.stopPropagation());
+      nameInput.addEventListener('input', () => { layer.name = nameInput.value; scheduleAutosave(); });
+      const opacitySlider = document.createElement('input');
+      opacitySlider.type = 'range'; opacitySlider.setAttribute('aria-label', 'Layer opacity'); opacitySlider.min = '0'; opacitySlider.max = '1'; opacitySlider.step = '0.05'; opacitySlider.value = layer.opacity;
+      opacitySlider.addEventListener('click', e => e.stopPropagation());
+      opacitySlider.addEventListener('input', () => { layer.opacity = parseFloat(opacitySlider.value); renderComposite(); scheduleAutosave(); });
+      info.appendChild(nameInput); info.appendChild(opacitySlider);
+
+      const actions = document.createElement('div');
+      actions.className = 'layer-actions';
+      const upBtn = document.createElement('button');
+      upBtn.type = 'button'; upBtn.textContent = '▲'; upBtn.title = I18N.t('moveUpTitle');
+      upBtn.addEventListener('click', (e) => { e.stopPropagation(); moveLayer(idx, 1); });
+      const downBtn = document.createElement('button');
+      downBtn.type = 'button'; downBtn.textContent = '▼'; downBtn.title = I18N.t('moveDownTitle');
+      downBtn.addEventListener('click', (e) => { e.stopPropagation(); moveLayer(idx, -1); });
+      actions.appendChild(upBtn); actions.appendChild(downBtn);
+
+      row.appendChild(visCheckbox); row.appendChild(thumb); row.appendChild(info); row.appendChild(actions);
+      row.addEventListener('click', () => { activeLayerIndex = idx; renderLayersList(); resetFilterSliders(); });
+      layersListEl.appendChild(row);
+    }
+  }
+
+  function moveLayer(idx, dir) {
+    const j = idx + dir;
+    if (j < 0 || j >= layers.length) return;
+    pushHistory();
+    const tmp = layers[idx]; layers[idx] = layers[j]; layers[j] = tmp;
+    if (activeLayerIndex === idx) activeLayerIndex = j;
+    else if (activeLayerIndex === j) activeLayerIndex = idx;
+    renderLayersList(); renderComposite();
+  }
+
+  document.getElementById('addLayerBtn').addEventListener('click', () => {
+    pushHistory();
+    const layer = makeLayer();
+    layers.push(layer);
+    activeLayerIndex = layers.length - 1;
+    renderLayersList(); renderComposite();
+  });
+  document.getElementById('dupLayerBtn').addEventListener('click', () => {
+    const src = activeLayer();
+    if (!src) return;
+    pushHistory();
+    const copy = makeLayer(src.name + ' ' + I18N.t('copySuffix'));
+    copy.ctx.drawImage(src.canvas, 0, 0);
+    copy.opacity = src.opacity;
+    layers.splice(activeLayerIndex + 1, 0, copy);
+    activeLayerIndex = activeLayerIndex + 1;
+    renderLayersList(); renderComposite();
+  });
+  document.getElementById('deleteLayerBtn').addEventListener('click', () => {
+    if (layers.length <= 1) { showError(I18N.t('errorNeedOneLayer')); return; }
+    pushHistory();
+    layers.splice(activeLayerIndex, 1);
+    activeLayerIndex = Math.max(0, activeLayerIndex - 1);
+    renderLayersList(); renderComposite();
+  });
+  document.getElementById('mergeDownBtn').addEventListener('click', () => {
+    if (activeLayerIndex === 0) { showError(I18N.t('errorNoLayerBelow')); return; }
+    pushHistory();
+    const below = layers[activeLayerIndex - 1];
+    const current = layers[activeLayerIndex];
+    below.ctx.save();
+    below.ctx.globalAlpha = current.opacity;
+    below.ctx.drawImage(current.canvas, 0, 0);
+    below.ctx.restore();
+    layers.splice(activeLayerIndex, 1);
+    activeLayerIndex = activeLayerIndex - 1;
+    renderLayersList(); renderComposite();
+  });
+
+  // ================= transform (active layer) =================
+  function transformActiveLayer(type) {
+    const layer = activeLayer();
+    if (!layer) return;
+    pushHistory();
+    const scratch = document.createElement('canvas');
+    scratch.width = canvasWidth; scratch.height = canvasHeight;
+    const sctx = scratch.getContext('2d');
+    sctx.save();
+    if (type === 'flipH') { sctx.translate(canvasWidth, 0); sctx.scale(-1, 1); }
+    else if (type === 'flipV') { sctx.translate(0, canvasHeight); sctx.scale(1, -1); }
+    else if (type === 'rotateCW' || type === 'rotateCCW') {
+      sctx.translate(canvasWidth / 2, canvasHeight / 2);
+      sctx.rotate((type === 'rotateCW' ? 1 : -1) * Math.PI / 2);
+      sctx.translate(-canvasWidth / 2, -canvasHeight / 2);
+    }
+    sctx.drawImage(layer.canvas, 0, 0);
+    sctx.restore();
+    layer.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    layer.ctx.drawImage(scratch, 0, 0);
+    renderLayersList(); renderComposite();
+  }
+  document.getElementById('flipHBtn').addEventListener('click', () => transformActiveLayer('flipH'));
+  document.getElementById('flipVBtn').addEventListener('click', () => transformActiveLayer('flipV'));
+  document.getElementById('rotateCwBtn').addEventListener('click', () => transformActiveLayer('rotateCW'));
+  document.getElementById('rotateCcwBtn').addEventListener('click', () => transformActiveLayer('rotateCCW'));
+
+  // ================= keyboard shortcuts =================
+  document.addEventListener('keydown', function (e) {
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+    if ((e.ctrlKey || e.metaKey) && !e.shiftKey && e.key.toLowerCase() === 'z') {
+      e.preventDefault();
+      document.getElementById('undoBtn').click();
+    } else if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) {
+      e.preventDefault();
+      document.getElementById('redoBtn').click();
+    } else if (e.key === '[') {
+      brushSize = Math.max(1, brushSize - (e.shiftKey ? 10 : 2));
+      renderToolOptions();
+    } else if (e.key === ']') {
+      brushSize = Math.min(200, brushSize + (e.shiftKey ? 10 : 2));
+      renderToolOptions();
+    } else if (e.key === 'Delete' || e.key === 'Backspace') {
+      if (currentTool === 'select' && selection && selection.w >= 1 && selection.h >= 1) {
+        e.preventDefault();
+        selectionAction('Delete');
+      } else {
+        e.preventDefault();
+      }
+    }
+  });
+
+  // ================= adjustments/filters =================
+  ['brightnessSlider', 'contrastSlider', 'saturationSlider', 'blurSlider'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => {
+      document.getElementById(id.replace('Slider', 'Val')).textContent = document.getElementById(id).value + (id === 'blurSlider' ? 'px' : '');
+      renderComposite();
+    });
+  });
+  document.getElementById('grayscaleCheck').addEventListener('change', renderComposite);
+  document.getElementById('invertCheck').addEventListener('change', renderComposite);
+
+  function resetFilterSliders() {
+    ['brightnessSlider', 'contrastSlider', 'saturationSlider', 'blurSlider'].forEach(id => {
+      document.getElementById(id).value = 0;
+      document.getElementById(id.replace('Slider', 'Val')).textContent = '0' + (id === 'blurSlider' ? 'px' : '');
+    });
+    document.getElementById('grayscaleCheck').checked = false;
+    document.getElementById('invertCheck').checked = false;
+    renderComposite();
+  }
+  document.getElementById('resetFilterBtn').addEventListener('click', resetFilterSliders);
+  document.getElementById('applyFilterBtn').addEventListener('click', function () {
+    if (!hasActiveFilterPreview()) return;
+    pushHistory();
+    const layer = activeLayer();
+    const filterStr = currentFilterString();
+    const scratch = document.createElement('canvas');
+    scratch.width = canvasWidth; scratch.height = canvasHeight;
+    const sctx = scratch.getContext('2d');
+    sctx.filter = filterStr;
+    sctx.drawImage(layer.canvas, 0, 0);
+    layer.ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    layer.ctx.drawImage(scratch, 0, 0);
+    resetFilterSliders();
+    renderLayersList(); renderComposite();
+  });
+
+  // ================= canvas setup =================
+  document.getElementById('newCanvasBtn').addEventListener('click', function () {
+    const wStr = window.prompt(I18N.t('canvasWidthPrompt'), String(canvasWidth));
+    if (!wStr) return;
+    const hStr = window.prompt(I18N.t('canvasHeightPrompt'), String(canvasHeight));
+    if (!hStr) return;
+    const w = Math.max(16, Math.min(4000, parseInt(wStr, 10) || canvasWidth));
+    const h = Math.max(16, Math.min(4000, parseInt(hStr, 10) || canvasHeight));
+    const bg = window.confirm(I18N.t('backgroundConfirmPrompt')) ? 'white' : 'transparent';
+    initCanvas(w, h, bg);
+    scheduleAutosave();
+  });
+  document.getElementById('resizeCanvasBtn').addEventListener('click', function () {
+    const wStr = window.prompt(I18N.t('newWidthPrompt'), String(canvasWidth));
+    if (!wStr) return;
+    const hStr = window.prompt(I18N.t('newHeightPrompt'), String(canvasHeight));
+    if (!hStr) return;
+    const w = Math.max(16, Math.min(4000, parseInt(wStr, 10) || canvasWidth));
+    const h = Math.max(16, Math.min(4000, parseInt(hStr, 10) || canvasHeight));
+    pushHistory();
+    layers.forEach(l => {
+      const canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(l.canvas, 0, 0);
+      l.canvas = canvas; l.ctx = ctx;
+    });
+    canvasWidth = w; canvasHeight = h;
+    viewCanvas.width = w; viewCanvas.height = h;
+    applyZoomToCanvasElement();
+    document.getElementById('canvasSizeLabel').textContent = w + ' × ' + h;
+    renderLayersList(); renderComposite();
+  });
+
+  document.getElementById('importImageInput').addEventListener('change', function (e) {
+    const file = (e.target.files || [])[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function () {
+      const img = new Image();
+      img.onload = function () {
+        pushHistory();
+        const layer = makeLayer(file.name.replace(/\.[^.]+$/, ''));
+        const scale = Math.min(canvasWidth / img.width, canvasHeight / img.height, 1);
+        const dw = img.width * scale, dh = img.height * scale;
+        const dx = (canvasWidth - dw) / 2, dy = (canvasHeight - dh) / 2;
+        layer.ctx.drawImage(img, dx, dy, dw, dh);
+        layers.push(layer);
+        activeLayerIndex = layers.length - 1;
+        renderLayersList(); renderComposite();
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  });
+
+  // ================= export =================
+  function flattenToCanvas(background) {
+    const out = document.createElement('canvas');
+    out.width = canvasWidth; out.height = canvasHeight;
+    const octx = out.getContext('2d');
+    if (background) { octx.fillStyle = background; octx.fillRect(0, 0, canvasWidth, canvasHeight); }
+    layers.forEach(layer => {
+      if (!layer.visible) return;
+      octx.save();
+      octx.globalAlpha = layer.opacity;
+      octx.drawImage(layer.canvas, 0, 0);
+      octx.restore();
+    });
+    return out;
+  }
+  function downloadCanvas(canvas, filename, mime) {
+    canvas.toBlob(function (blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+    }, mime, 0.92);
+  }
+  document.getElementById('exportPngBtn').addEventListener('click', function () {
+    downloadCanvas(flattenToCanvas(canvasBackground === 'transparent' ? null : '#ffffff'), 'paint-forge.png', 'image/png');
+  });
+  document.getElementById('exportJpgBtn').addEventListener('click', function () {
+    downloadCanvas(flattenToCanvas('#ffffff'), 'paint-forge.jpg', 'image/jpeg');
+  });
+
+  // ================= draft autosave / resume (localStorage) =================
+  const DRAFT_KEY = 'paintForgeDraft_v1';
+  let autosaveTimer = null;
+  let suppressAutosave = false; // true while a draft is being loaded, so loading it doesn't immediately re-save it
+
+  function scheduleAutosave() {
+    if (suppressAutosave) return;
+    if (autosaveTimer) clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(saveDraft, 900);
+  }
+
+  function saveDraft() {
+    try {
+      const state = { version: 1, savedAt: Date.now(), canvas: snapshotState() };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+      autosaveStatus.textContent = I18N.t('savedJustNowText');
+    } catch (err) {
+      autosaveStatus.textContent = I18N.t('autosaveFailedText');
+    }
+  }
+
+  function clearDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+    autosaveStatus.textContent = '';
+  }
+
+  function loadDraftIntoState(state) {
+    return new Promise(function (resolve) {
+      suppressAutosave = true;
+      const maxId = state.canvas.layers.reduce(function (m, l) { return Math.max(m, l.id); }, 0);
+      layerIdCounter = Math.max(layerIdCounter, maxId);
+      restoreState(state.canvas, function () {
+        refreshHistoryButtons();
+        suppressAutosave = false;
+        resolve();
+      });
+    });
+  }
+
+  function checkForSavedDraft() {
+    let raw;
+    try { raw = localStorage.getItem(DRAFT_KEY); } catch (e) { return; }
+    if (!raw) return;
+    let state;
+    try { state = JSON.parse(raw); } catch (e) { clearDraft(); return; }
+    if (!state.canvas || !Array.isArray(state.canvas.layers)) { clearDraft(); return; }
+    const layerCount = state.canvas.layers.length;
+    const when = new Date(state.savedAt || Date.now());
+    const layerKey = layerCount === 1 ? 'draftLayerOne' : 'draftLayersMany';
+    draftBannerText.textContent = I18N.t('draftBannerPrefix') + ' ' + when.toLocaleString() + ' (' + layerCount + ' ' + I18N.t(layerKey);
+    draftBanner.classList.add('show');
+    resumeDraftBtn.onclick = async function () {
+      clearError();
+      resumeDraftBtn.disabled = true;
+      resumeDraftBtn.textContent = I18N.t('loadingLabel');
+      try {
+        await loadDraftIntoState(state);
+        draftBanner.classList.remove('show');
+      } catch (err) {
+        showError(I18N.t('errorCouldNotLoadDraft') + ' ' + err.message);
+      } finally {
+        resumeDraftBtn.disabled = false;
+        resumeDraftBtn.textContent = I18N.t('resumeDraftLabel');
+      }
+    };
+    discardDraftBtn.onclick = function () {
+      clearDraft();
+      draftBanner.classList.remove('show');
+    };
+  }
+
+  clearDraftLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!window.confirm(I18N.t('clearDraftConfirm'))) return;
+    clearDraft();
+  });
+
+  // ================= init =================
+  initCanvas(canvasWidth, canvasHeight, canvasBackground);
+
+  I18N.onChange(function () {
+    renderToolGrid();
+    renderToolOptions();
+    renderLayersList();
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'A layered image editor — brushes, shapes, text, fill, selection, filters, and undo/redo.',
+      toolsHeading: 'Tools',
+      optionsHeading: 'Options',
+      colorHeading: 'Color',
+      canvasHeading: 'Canvas',
+      newLabel: 'New',
+      resizeLabel: 'Resize',
+      importImageLabel: '+ Import image as layer',
+      historyHeading: 'History',
+      undoLabel: '↺ Undo',
+      redoLabel: '↻ Redo',
+      canvasToolbarLabel: 'PAINT FORGE — CANVAS',
+      exportPngLabel: '⬇ Export PNG',
+      exportJpgLabel: '⬇ Export JPG',
+      layersHeading: 'Layers',
+      addLayerLabel: '+ Add layer',
+      duplicateLabel: '⧉ Duplicate',
+      mergeDownLabel: '⬇ Merge down',
+      deleteLabel: '✕ Delete',
+      transformHeading: 'Transform (active layer)',
+      flipHLabel: '⇋ Flip H',
+      flipVLabel: '⇵ Flip V',
+      rotateCcwLabel: '↺ Rotate CCW',
+      rotateCwLabel: '↻ Rotate CW',
+      transformHint: "Affects the active layer's pixels in place — content that no longer fits the frame is cropped.",
+      adjustmentsHeading: 'Adjustments (active layer)',
+      brightnessLabel: 'Brightness',
+      contrastLabel: 'Contrast',
+      saturationLabel: 'Saturation',
+      blurLabel: 'Blur',
+      grayscaleLabel: 'Grayscale',
+      invertLabel: 'Invert',
+      resetLabel: 'Reset',
+      applyLabel: 'Apply',
+      filterPreviewHint: 'Preview updates live on the active layer; "Apply" bakes it in permanently.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Everything you draw and import stays in your browser — nothing is uploaded anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      toolBrush: 'Brush',
+      toolEraser: 'Eraser',
+      toolLine: 'Line',
+      toolRectangle: 'Rectangle',
+      toolEllipse: 'Ellipse',
+      toolFill: 'Fill',
+      toolText: 'Text',
+      toolEyedrop: 'Eyedrop',
+      toolSelect: 'Select',
+      toolMove: 'Move',
+      sizeLabel: 'Size:',
+      opacityLabel: 'Opacity:',
+      hardnessLabel: 'Hardness:',
+      thicknessLabel: 'Thickness:',
+      strokeWidthLabel: 'Stroke width:',
+      filledLabel: 'Filled',
+      toleranceLabel: 'Tolerance:',
+      fontSizeLabel: 'Font size',
+      fontLabel: 'Font',
+      fontSansSerif: 'Sans-serif',
+      fontSerif: 'Serif',
+      fontMonospace: 'Monospace',
+      textToolHint: 'Click the canvas to place text.',
+      eyedropperHint: 'Click anywhere on the canvas to pick that color.',
+      moveToolHint: "Drag on the canvas to reposition the active layer's pixels.",
+      selectToolHint: 'Drag to select a rectangle, then use the actions below.',
+      actionCut: 'Cut',
+      actionCopy: 'Copy',
+      actionPaste: 'Paste',
+      actionDelete: 'Delete',
+      actionCrop: 'Crop to selection',
+      layerPrefix: 'Layer',
+      copySuffix: 'copy',
+      moveUpTitle: 'Move up',
+      moveDownTitle: 'Move down',
+      textToAddPrompt: 'Text to add:',
+      errorDragSelectionFirst: 'Drag a selection on the canvas first.',
+      errorNothingCopied: 'Nothing copied yet.',
+      errorNeedOneLayer: 'You need at least one layer.',
+      errorNoLayerBelow: 'There is no layer below this one.',
+      canvasWidthPrompt: 'Canvas width (px):',
+      canvasHeightPrompt: 'Canvas height (px):',
+      backgroundConfirmPrompt: 'Click OK for a white background, Cancel for transparent.',
+      newWidthPrompt: 'New width (px):',
+      newHeightPrompt: 'New height (px):',
+      resumeDraftLabel: '↺ Resume draft',
+      discardLabel: '✕ Discard',
+      autosaveHintText: "Your progress autosaves to this browser as you work, so a refresh won't lose it.",
+      clearDraftLinkText: 'Clear saved draft',
+      savedJustNowText: 'Saved just now.',
+      autosaveFailedText: "Couldn't autosave (your project may be too large for browser storage) — remember to download when you're done.",
+      draftBannerPrefix: 'You have an unsaved draft from',
+      draftLayerOne: 'layer).',
+      draftLayersMany: 'layers).',
+      loadingLabel: 'Loading…',
+      errorCouldNotLoadDraft: 'Could not load the saved draft:',
+      clearDraftConfirm: 'Clear the autosaved draft? This only removes the saved copy in this browser — anything currently on screen is untouched.'
+    },
+    es: {
+      heroSubtitle: 'Un editor de imágenes por capas — pinceles, formas, texto, relleno, selección, filtros y deshacer/rehacer.',
+      toolsHeading: 'Herramientas',
+      optionsHeading: 'Opciones',
+      colorHeading: 'Color',
+      canvasHeading: 'Lienzo',
+      newLabel: 'Nuevo',
+      resizeLabel: 'Redimensionar',
+      importImageLabel: '+ Importar imagen como capa',
+      historyHeading: 'Historial',
+      undoLabel: '↺ Deshacer',
+      redoLabel: '↻ Rehacer',
+      canvasToolbarLabel: 'PAINT FORGE — LIENZO',
+      exportPngLabel: '⬇ Exportar PNG',
+      exportJpgLabel: '⬇ Exportar JPG',
+      layersHeading: 'Capas',
+      addLayerLabel: '+ Agregar capa',
+      duplicateLabel: '⧉ Duplicar',
+      mergeDownLabel: '⬇ Combinar hacia abajo',
+      deleteLabel: '✕ Eliminar',
+      transformHeading: 'Transformar (capa activa)',
+      flipHLabel: '⇋ Voltear H',
+      flipVLabel: '⇵ Voltear V',
+      rotateCcwLabel: '↺ Rotar CCW',
+      rotateCwLabel: '↻ Rotar CW',
+      transformHint: 'Afecta los píxeles de la capa activa en el lugar — el contenido que ya no cabe en el marco se recorta.',
+      adjustmentsHeading: 'Ajustes (capa activa)',
+      brightnessLabel: 'Brillo',
+      contrastLabel: 'Contraste',
+      saturationLabel: 'Saturación',
+      blurLabel: 'Desenfoque',
+      grayscaleLabel: 'Escala de grises',
+      invertLabel: 'Invertir',
+      resetLabel: 'Restablecer',
+      applyLabel: 'Aplicar',
+      filterPreviewHint: 'La vista previa se actualiza en vivo en la capa activa; "Aplicar" lo fija permanentemente.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Todo lo que dibujas e importas permanece en tu navegador — nada se sube a ningún lado. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      toolBrush: 'Pincel',
+      toolEraser: 'Borrador',
+      toolLine: 'Línea',
+      toolRectangle: 'Rectángulo',
+      toolEllipse: 'Elipse',
+      toolFill: 'Relleno',
+      toolText: 'Texto',
+      toolEyedrop: 'Gotero',
+      toolSelect: 'Seleccionar',
+      toolMove: 'Mover',
+      sizeLabel: 'Tamaño:',
+      opacityLabel: 'Opacidad:',
+      hardnessLabel: 'Dureza:',
+      thicknessLabel: 'Grosor:',
+      strokeWidthLabel: 'Ancho de trazo:',
+      filledLabel: 'Relleno',
+      toleranceLabel: 'Tolerancia:',
+      fontSizeLabel: 'Tamaño de fuente',
+      fontLabel: 'Fuente',
+      fontSansSerif: 'Sans-serif',
+      fontSerif: 'Serif',
+      fontMonospace: 'Monoespaciada',
+      textToolHint: 'Haz clic en el lienzo para colocar texto.',
+      eyedropperHint: 'Haz clic en cualquier parte del lienzo para tomar ese color.',
+      moveToolHint: 'Arrastra en el lienzo para reposicionar los píxeles de la capa activa.',
+      selectToolHint: 'Arrastra para seleccionar un rectángulo, luego usa las acciones de abajo.',
+      actionCut: 'Cortar',
+      actionCopy: 'Copiar',
+      actionPaste: 'Pegar',
+      actionDelete: 'Eliminar',
+      actionCrop: 'Recortar a la selección',
+      layerPrefix: 'Capa',
+      copySuffix: 'copia',
+      moveUpTitle: 'Subir',
+      moveDownTitle: 'Bajar',
+      textToAddPrompt: 'Texto a agregar:',
+      errorDragSelectionFirst: 'Arrastra una selección en el lienzo primero.',
+      errorNothingCopied: 'Nada copiado todavía.',
+      errorNeedOneLayer: 'Necesitas al menos una capa.',
+      errorNoLayerBelow: 'No hay ninguna capa debajo de esta.',
+      canvasWidthPrompt: 'Ancho del lienzo (px):',
+      canvasHeightPrompt: 'Alto del lienzo (px):',
+      backgroundConfirmPrompt: 'Haz clic en Aceptar para un fondo blanco, Cancelar para transparente.',
+      newWidthPrompt: 'Nuevo ancho (px):',
+      newHeightPrompt: 'Nuevo alto (px):',
+      resumeDraftLabel: '↺ Reanudar borrador',
+      discardLabel: '✕ Descartar',
+      autosaveHintText: 'Tu progreso se autoguarda en este navegador mientras trabajas, así que una actualización no lo perderá.',
+      clearDraftLinkText: 'Borrar borrador guardado',
+      savedJustNowText: 'Guardado justo ahora.',
+      autosaveFailedText: 'No se pudo autoguardar (tu proyecto puede ser demasiado grande para el almacenamiento del navegador) — recuerda descargarlo cuando termines.',
+      draftBannerPrefix: 'Tienes un borrador sin guardar desde el',
+      draftLayerOne: 'capa).',
+      draftLayersMany: 'capas).',
+      loadingLabel: 'Cargando…',
+      errorCouldNotLoadDraft: 'No se pudo cargar el borrador guardado:',
+      clearDraftConfirm: 'Borrar el borrador autoguardado? Esto solo elimina la copia guardada en este navegador — todo lo que está actualmente en pantalla no se ve afectado.'
+    },
+    ar: {
+      heroSubtitle: 'محرر صور متعدد الطبقات — فرش، أشكال، نص، تعبئة، تحديد، مرشحات، وتراجع/إعادة.',
+      toolsHeading: 'الأدوات',
+      optionsHeading: 'الخيارات',
+      colorHeading: 'اللون',
+      canvasHeading: 'اللوحة',
+      newLabel: 'جديد',
+      resizeLabel: 'تغيير الحجم',
+      importImageLabel: '+ استيراد صورة كطبقة',
+      historyHeading: 'السجل',
+      undoLabel: '↺ تراجع',
+      redoLabel: '↻ إعادة',
+      canvasToolbarLabel: 'PAINT FORGE — اللوحة',
+      exportPngLabel: '⬇ تصدير PNG',
+      exportJpgLabel: '⬇ تصدير JPG',
+      layersHeading: 'الطبقات',
+      addLayerLabel: '+ إضافة طبقة',
+      duplicateLabel: '⧉ نسخ مطابق',
+      mergeDownLabel: '⬇ دمج للأسفل',
+      deleteLabel: '✕ حذف',
+      transformHeading: 'التحويل (الطبقة النشطة)',
+      flipHLabel: '⇋ قلب أفقي',
+      flipVLabel: '⇵ قلب رأسي',
+      rotateCcwLabel: '↺ تدوير عكس عقارب الساعة',
+      rotateCwLabel: '↻ تدوير مع عقارب الساعة',
+      transformHint: 'يؤثر على بكسلات الطبقة النشطة في مكانها — يُقص المحتوى الذي لم يعد يناسب الإطار.',
+      adjustmentsHeading: 'التعديلات (الطبقة النشطة)',
+      brightnessLabel: 'السطوع',
+      contrastLabel: 'التباين',
+      saturationLabel: 'التشبع',
+      blurLabel: 'التمويه',
+      grayscaleLabel: 'تدرج رمادي',
+      invertLabel: 'عكس الألوان',
+      resetLabel: 'إعادة تعيين',
+      applyLabel: 'تطبيق',
+      filterPreviewHint: 'تتحدث المعاينة مباشرة على الطبقة النشطة؛ "تطبيق" يثبتها بشكل دائم.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. كل ما ترسمه وتستورده يبقى في متصفحك — لا يُرفع شيء إلى أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      toolBrush: 'فرشاة',
+      toolEraser: 'ممحاة',
+      toolLine: 'خط',
+      toolRectangle: 'مستطيل',
+      toolEllipse: 'قطع ناقص',
+      toolFill: 'تعبئة',
+      toolText: 'نص',
+      toolEyedrop: 'قطارة',
+      toolSelect: 'تحديد',
+      toolMove: 'نقل',
+      sizeLabel: 'الحجم:',
+      opacityLabel: 'العتامة:',
+      hardnessLabel: 'الصلابة:',
+      thicknessLabel: 'السماكة:',
+      strokeWidthLabel: 'عرض الحد:',
+      filledLabel: 'معبأ',
+      toleranceLabel: 'التفاوت:',
+      fontSizeLabel: 'حجم الخط',
+      fontLabel: 'الخط',
+      fontSansSerif: 'بلا زوائد',
+      fontSerif: 'بزوائد',
+      fontMonospace: 'أحادي المسافة',
+      textToolHint: 'انقر على اللوحة لوضع النص.',
+      eyedropperHint: 'انقر في أي مكان على اللوحة لالتقاط ذلك اللون.',
+      moveToolHint: 'اسحب على اللوحة لإعادة وضع بكسلات الطبقة النشطة.',
+      selectToolHint: 'اسحب لتحديد مستطيل، ثم استخدم الإجراءات أدناه.',
+      actionCut: 'قص',
+      actionCopy: 'نسخ',
+      actionPaste: 'لصق',
+      actionDelete: 'حذف',
+      actionCrop: 'قص إلى التحديد',
+      layerPrefix: 'طبقة',
+      copySuffix: 'نسخة',
+      moveUpTitle: 'تحريك لأعلى',
+      moveDownTitle: 'تحريك لأسفل',
+      textToAddPrompt: 'النص المراد إضافته:',
+      errorDragSelectionFirst: 'اسحب تحديدًا على اللوحة أولاً.',
+      errorNothingCopied: 'لم يتم نسخ شيء بعد.',
+      errorNeedOneLayer: 'تحتاج إلى طبقة واحدة على الأقل.',
+      errorNoLayerBelow: 'لا توجد طبقة أسفل هذه.',
+      canvasWidthPrompt: 'عرض اللوحة (بكسل):',
+      canvasHeightPrompt: 'ارتفاع اللوحة (بكسل):',
+      backgroundConfirmPrompt: 'انقر موافق لخلفية بيضاء، إلغاء للشفافة.',
+      newWidthPrompt: 'العرض الجديد (بكسل):',
+      newHeightPrompt: 'الارتفاع الجديد (بكسل):',
+      resumeDraftLabel: '↺ استئناف المسودة',
+      discardLabel: '✕ تجاهل',
+      autosaveHintText: 'يُحفظ تقدمك تلقائيًا في هذا المتصفح أثناء عملك، لذا لن يؤدي التحديث إلى فقدانه.',
+      clearDraftLinkText: 'مسح المسودة المحفوظة',
+      savedJustNowText: 'تم الحفظ للتو.',
+      autosaveFailedText: 'تعذّر الحفظ التلقائي (قد يكون مشروعك كبيرًا جدًا على تخزين المتصفح) — تذكّر التنزيل عند الانتهاء.',
+      draftBannerPrefix: 'لديك مسودة غير محفوظة منذ',
+      draftLayerOne: 'طبقة واحدة).',
+      draftLayersMany: 'طبقات).',
+      loadingLabel: 'جارٍ التحميل…',
+      errorCouldNotLoadDraft: 'تعذّر تحميل المسودة المحفوظة:',
+      clearDraftConfirm: 'مسح المسودة المحفوظة تلقائيًا؟ هذا يزيل فقط النسخة المحفوظة في هذا المتصفح — أي شيء معروض حاليًا على الشاشة لن يتأثر.'
+    },
+    zh: {
+      heroSubtitle: '分层图像编辑器——画笔、形状、文字、填充、选区、滤镜和撤销/重做。',
+      toolsHeading: '工具',
+      optionsHeading: '选项',
+      colorHeading: '颜色',
+      canvasHeading: '画布',
+      newLabel: '新建',
+      resizeLabel: '调整大小',
+      importImageLabel: '+ 将图片导入为图层',
+      historyHeading: '历史记录',
+      undoLabel: '↺ 撤销',
+      redoLabel: '↻ 重做',
+      canvasToolbarLabel: 'PAINT FORGE — 画布',
+      exportPngLabel: '⬇ 导出 PNG',
+      exportJpgLabel: '⬇ 导出 JPG',
+      layersHeading: '图层',
+      addLayerLabel: '+ 添加图层',
+      duplicateLabel: '⧉ 复制',
+      mergeDownLabel: '⬇ 向下合并',
+      deleteLabel: '✕ 删除',
+      transformHeading: '变换（活动图层）',
+      flipHLabel: '⇋ 水平翻转',
+      flipVLabel: '⇵ 垂直翻转',
+      rotateCcwLabel: '↺ 逆时针旋转',
+      rotateCwLabel: '↻ 顺时针旋转',
+      transformHint: '就地影响活动图层的像素——不再适合画框的内容会被裁剪。',
+      adjustmentsHeading: '调整（活动图层）',
+      brightnessLabel: '亮度',
+      contrastLabel: '对比度',
+      saturationLabel: '饱和度',
+      blurLabel: '模糊',
+      grayscaleLabel: '灰度',
+      invertLabel: '反色',
+      resetLabel: '重置',
+      applyLabel: '应用',
+      filterPreviewHint: '预览会在活动图层上实时更新；"应用"会永久固定效果。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你绘制和导入的所有内容都保留在浏览器中——不会上传到任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      toolBrush: '画笔',
+      toolEraser: '橡皮擦',
+      toolLine: '直线',
+      toolRectangle: '矩形',
+      toolEllipse: '椭圆',
+      toolFill: '填充',
+      toolText: '文字',
+      toolEyedrop: '取色器',
+      toolSelect: '选择',
+      toolMove: '移动',
+      sizeLabel: '大小：',
+      opacityLabel: '不透明度：',
+      hardnessLabel: '硬度：',
+      thicknessLabel: '粗细：',
+      strokeWidthLabel: '描边宽度：',
+      filledLabel: '填充',
+      toleranceLabel: '容差：',
+      fontSizeLabel: '字号',
+      fontLabel: '字体',
+      fontSansSerif: '无衬线',
+      fontSerif: '衬线',
+      fontMonospace: '等宽',
+      textToolHint: '点击画布放置文字。',
+      eyedropperHint: '点击画布上的任意位置以拾取该颜色。',
+      moveToolHint: '在画布上拖动以重新定位活动图层的像素。',
+      selectToolHint: '拖动以选择一个矩形，然后使用下面的操作。',
+      actionCut: '剪切',
+      actionCopy: '复制',
+      actionPaste: '粘贴',
+      actionDelete: '删除',
+      actionCrop: '裁剪到选区',
+      layerPrefix: '图层',
+      copySuffix: '副本',
+      moveUpTitle: '上移',
+      moveDownTitle: '下移',
+      textToAddPrompt: '要添加的文字：',
+      errorDragSelectionFirst: '请先在画布上拖动出一个选区。',
+      errorNothingCopied: '尚未复制任何内容。',
+      errorNeedOneLayer: '你至少需要一个图层。',
+      errorNoLayerBelow: '此图层下方没有其他图层。',
+      canvasWidthPrompt: '画布宽度（像素）：',
+      canvasHeightPrompt: '画布高度（像素）：',
+      backgroundConfirmPrompt: '点击"确定"使用白色背景，点击"取消"使用透明背景。',
+      newWidthPrompt: '新宽度（像素）：',
+      newHeightPrompt: '新高度（像素）：',
+      resumeDraftLabel: '↺ 恢复草稿',
+      discardLabel: '✕ 丢弃',
+      autosaveHintText: '你的进度会在你操作时自动保存到此浏览器，因此刷新不会丢失它。',
+      clearDraftLinkText: '清除已保存的草稿',
+      savedJustNowText: '刚刚已保存。',
+      autosaveFailedText: '无法自动保存（你的项目可能对于浏览器存储来说太大了）——完成后记得下载。',
+      draftBannerPrefix: '你有一份未保存的草稿，来自',
+      draftLayerOne: '个图层）。',
+      draftLayersMany: '个图层）。',
+      loadingLabel: '加载中…',
+      errorCouldNotLoadDraft: '无法加载已保存的草稿：',
+      clearDraftConfirm: '清除自动保存的草稿？这只会移除此浏览器中保存的副本——当前屏幕上的任何内容不受影响。'
+    },
+    sw: {
+      heroSubtitle: 'Kihariri cha picha chenye tabaka — brashi, maumbo, maandishi, ujazo, uteuzi, vichujio, na tendua/rudia.',
+      toolsHeading: 'Zana',
+      optionsHeading: 'Chaguo',
+      colorHeading: 'Rangi',
+      canvasHeading: 'Turubai',
+      newLabel: 'Mpya',
+      resizeLabel: 'Badilisha ukubwa',
+      importImageLabel: '+ Ingiza picha kama tabaka',
+      historyHeading: 'Historia',
+      undoLabel: '↺ Tendua',
+      redoLabel: '↻ Rudia',
+      canvasToolbarLabel: 'PAINT FORGE — TURUBAI',
+      exportPngLabel: '⬇ Hamisha PNG',
+      exportJpgLabel: '⬇ Hamisha JPG',
+      layersHeading: 'Tabaka',
+      addLayerLabel: '+ Ongeza tabaka',
+      duplicateLabel: '⧉ Nakili',
+      mergeDownLabel: '⬇ Unganisha chini',
+      deleteLabel: '✕ Futa',
+      transformHeading: 'Badilisha (tabaka hai)',
+      flipHLabel: '⇋ Geuza H',
+      flipVLabel: '⇵ Geuza V',
+      rotateCcwLabel: '↺ Zungusha CCW',
+      rotateCwLabel: '↻ Zungusha CW',
+      transformHint: 'Huathiri pikseli za tabaka hai palepale — maudhui yasiyofaa tena fremu hukatwa.',
+      adjustmentsHeading: 'Marekebisho (tabaka hai)',
+      brightnessLabel: 'Mng\'ao',
+      contrastLabel: 'Utofautishaji',
+      saturationLabel: 'Uchangamfu wa rangi',
+      blurLabel: 'Ukungu',
+      grayscaleLabel: 'Kijivu',
+      invertLabel: 'Geuza rangi',
+      resetLabel: 'Weka upya',
+      applyLabel: 'Tumia',
+      filterPreviewHint: 'Muonekano husasishwa moja kwa moja kwenye tabaka hai; "Tumia" huufanya kudumu.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kila kitu unachochora na kuingiza kinabaki kwenye kivinjari chako — hakuna kinachopakiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      toolBrush: 'Brashi',
+      toolEraser: 'Kifutio',
+      toolLine: 'Mstari',
+      toolRectangle: 'Mstatili',
+      toolEllipse: 'Duaradufu',
+      toolFill: 'Jaza',
+      toolText: 'Maandishi',
+      toolEyedrop: 'Kichukua rangi',
+      toolSelect: 'Chagua',
+      toolMove: 'Hamisha',
+      sizeLabel: 'Ukubwa:',
+      opacityLabel: 'Uwazi:',
+      hardnessLabel: 'Ugumu:',
+      thicknessLabel: 'Unene:',
+      strokeWidthLabel: 'Upana wa mstari:',
+      filledLabel: 'Imejazwa',
+      toleranceLabel: 'Uvumilivu:',
+      fontSizeLabel: 'Ukubwa wa fonti',
+      fontLabel: 'Fonti',
+      fontSansSerif: 'Bila serif',
+      fontSerif: 'Serif',
+      fontMonospace: 'Nafasi sawa',
+      textToolHint: 'Bofya turubai kuweka maandishi.',
+      eyedropperHint: 'Bofya mahali popote kwenye turubai kuchukua rangi hiyo.',
+      moveToolHint: 'Buruta kwenye turubai kuweka upya pikseli za tabaka hai.',
+      selectToolHint: 'Buruta kuchagua mstatili, kisha tumia vitendo hapa chini.',
+      actionCut: 'Kata',
+      actionCopy: 'Nakili',
+      actionPaste: 'Bandika',
+      actionDelete: 'Futa',
+      actionCrop: 'Kata hadi uteuzi',
+      layerPrefix: 'Tabaka',
+      copySuffix: 'nakala',
+      moveUpTitle: 'Panda juu',
+      moveDownTitle: 'Shuka chini',
+      textToAddPrompt: 'Maandishi ya kuongeza:',
+      errorDragSelectionFirst: 'Buruta uteuzi kwenye turubai kwanza.',
+      errorNothingCopied: 'Hakuna kilichonakiliwa bado.',
+      errorNeedOneLayer: 'Unahitaji angalau tabaka moja.',
+      errorNoLayerBelow: 'Hakuna tabaka chini ya hili.',
+      canvasWidthPrompt: 'Upana wa turubai (px):',
+      canvasHeightPrompt: 'Urefu wa turubai (px):',
+      backgroundConfirmPrompt: 'Bofya Sawa kwa mandhari nyeupe, Ghairi kwa uwazi.',
+      newWidthPrompt: 'Upana mpya (px):',
+      newHeightPrompt: 'Urefu mpya (px):',
+      resumeDraftLabel: '↺ Endelea na rasimu',
+      discardLabel: '✕ Ondoa',
+      autosaveHintText: 'Maendeleo yako yanahifadhiwa kiotomatiki kwenye kivinjari hiki unapofanya kazi, hivyo kuonyesha upya hakutayapoteza.',
+      clearDraftLinkText: 'Futa rasimu iliyohifadhiwa',
+      savedJustNowText: 'Imehifadhiwa sasa hivi.',
+      autosaveFailedText: 'Imeshindwa kuhifadhi kiotomatiki (mradi wako unaweza kuwa mkubwa mno kwa hifadhi ya kivinjari) — kumbuka kupakua ukimaliza.',
+      draftBannerPrefix: 'Una rasimu isiyohifadhiwa kutoka',
+      draftLayerOne: 'tabaka).',
+      draftLayersMany: 'matabaka).',
+      loadingLabel: 'Inapakia…',
+      errorCouldNotLoadDraft: 'Imeshindwa kupakia rasimu iliyohifadhiwa:',
+      clearDraftConfirm: 'Futa rasimu iliyohifadhiwa kiotomatiki? Hii inaondoa tu nakala iliyohifadhiwa kwenye kivinjari hiki — chochote kilicho kwenye skrini kwa sasa hakiathiriwi.'
+    },
+    sv: {
+      heroSubtitle: "En bildredigerare med lager — penslar, former, text, fyllning, markering, filter och ångra/gör om.",
+      toolsHeading: "Verktyg",
+      optionsHeading: "Alternativ",
+      colorHeading: "Färg",
+      canvasHeading: "Duk",
+      newLabel: "Ny",
+      resizeLabel: "Ändra storlek",
+      importImageLabel: "+ Importera bild som lager",
+      historyHeading: "Historik",
+      undoLabel: "↺ Ångra",
+      redoLabel: "↻ Gör om",
+      canvasToolbarLabel: "PAINT FORGE — DUK",
+      exportPngLabel: "⬇ Exportera PNG",
+      exportJpgLabel: "⬇ Exportera JPG",
+      layersHeading: "Lager",
+      addLayerLabel: "+ Lägg till lager",
+      duplicateLabel: "⧉ Duplicera",
+      mergeDownLabel: "⬇ Slå ihop nedåt",
+      deleteLabel: "✕ Ta bort",
+      transformHeading: "Transformera (aktivt lager)",
+      flipHLabel: "⇋ Vänd vågrätt",
+      flipVLabel: "⇵ Vänd lodrätt",
+      rotateCcwLabel: "↺ Rotera moturs",
+      rotateCwLabel: "↻ Rotera medurs",
+      transformHint: "Påverkar det aktiva lagrets pixlar direkt — innehåll som inte längre får plats i ramen beskärs.",
+      adjustmentsHeading: "Justeringar (aktivt lager)",
+      brightnessLabel: "Ljusstyrka",
+      contrastLabel: "Kontrast",
+      saturationLabel: "Mättnad",
+      blurLabel: "Oskärpa",
+      grayscaleLabel: "Gråskala",
+      invertLabel: "Invertera",
+      resetLabel: "Återställ",
+      applyLabel: "Verkställ",
+      filterPreviewHint: "Förhandsvisningen uppdateras direkt på det aktiva lagret; \"Verkställ\" gör ändringen permanent.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Allt du ritar och importerar stannar i din webbläsare — ingenting laddas upp någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      toolBrush: "Pensel",
+      toolEraser: "Suddgummi",
+      toolLine: "Linje",
+      toolRectangle: "Rektangel",
+      toolEllipse: "Ellips",
+      toolFill: "Fyll",
+      toolText: "Text",
+      toolEyedrop: "Pipett",
+      toolSelect: "Markera",
+      toolMove: "Flytta",
+      sizeLabel: "Storlek:",
+      opacityLabel: "Opacitet:",
+      hardnessLabel: "Hårdhet:",
+      thicknessLabel: "Tjocklek:",
+      strokeWidthLabel: "Linjebredd:",
+      filledLabel: "Fylld",
+      toleranceLabel: "Tolerans:",
+      fontSizeLabel: "Teckenstorlek",
+      fontLabel: "Typsnitt",
+      fontSansSerif: "Sans-serif",
+      fontSerif: "Serif",
+      fontMonospace: "Monospace",
+      textToolHint: "Klicka på duken för att placera text.",
+      eyedropperHint: "Klicka var som helst på duken för att välja den färgen.",
+      moveToolHint: "Dra på duken för att flytta det aktiva lagrets pixlar.",
+      selectToolHint: "Dra för att markera en rektangel och använd sedan åtgärderna nedan.",
+      actionCut: "Klipp ut",
+      actionCopy: "Kopiera",
+      actionPaste: "Klistra in",
+      actionDelete: "Ta bort",
+      actionCrop: "Beskär till markering",
+      layerPrefix: "Lager",
+      copySuffix: "kopia",
+      moveUpTitle: "Flytta upp",
+      moveDownTitle: "Flytta ner",
+      textToAddPrompt: "Text att lägga till:",
+      errorDragSelectionFirst: "Dra en markering på duken först.",
+      errorNothingCopied: "Inget har kopierats ännu.",
+      errorNeedOneLayer: "Du behöver minst ett lager.",
+      errorNoLayerBelow: "Det finns inget lager under det här.",
+      canvasWidthPrompt: "Dukens bredd (px):",
+      canvasHeightPrompt: "Dukens höjd (px):",
+      backgroundConfirmPrompt: "Klicka på OK för vit bakgrund, Avbryt för transparent.",
+      newWidthPrompt: "Ny bredd (px):",
+      newHeightPrompt: "Ny höjd (px):",
+      resumeDraftLabel: "↺ Fortsätt med utkastet",
+      discardLabel: "✕ Släng",
+      autosaveHintText: "Ditt arbete sparas automatiskt i den här webbläsaren medan du jobbar, så en omladdning gör inte att du förlorar det.",
+      clearDraftLinkText: "Rensa sparat utkast",
+      savedJustNowText: "Sparat nyss.",
+      autosaveFailedText: "Kunde inte spara automatiskt (projektet kan vara för stort för webbläsarens lagring) — kom ihåg att ladda ner när du är klar.",
+      draftBannerPrefix: "Du har ett osparat utkast från",
+      draftLayerOne: "lager).",
+      draftLayersMany: "lager).",
+      loadingLabel: "Laddar…",
+      errorCouldNotLoadDraft: "Kunde inte ladda det sparade utkastet:",
+      clearDraftConfirm: "Rensa det automatiskt sparade utkastet? Detta tar bara bort den sparade kopian i den här webbläsaren — det som just nu visas på skärmen påverkas inte."
+    },
+    de: {
+      heroSubtitle: "Ein Bildeditor mit Ebenen — Pinsel, Formen, Text, Füllen, Auswahl, Filter und Rückgängig/Wiederholen.",
+      toolsHeading: "Werkzeuge",
+      optionsHeading: "Optionen",
+      colorHeading: "Farbe",
+      canvasHeading: "Leinwand",
+      newLabel: "Neu",
+      resizeLabel: "Größe ändern",
+      importImageLabel: "+ Bild als Ebene importieren",
+      historyHeading: "Verlauf",
+      undoLabel: "↺ Rückgängig",
+      redoLabel: "↻ Wiederholen",
+      canvasToolbarLabel: "PAINT FORGE — LEINWAND",
+      exportPngLabel: "⬇ PNG exportieren",
+      exportJpgLabel: "⬇ JPG exportieren",
+      layersHeading: "Ebenen",
+      addLayerLabel: "+ Ebene hinzufügen",
+      duplicateLabel: "⧉ Duplizieren",
+      mergeDownLabel: "⬇ Nach unten zusammenfügen",
+      deleteLabel: "✕ Löschen",
+      transformHeading: "Transformieren (aktive Ebene)",
+      flipHLabel: "⇋ Horizontal spiegeln",
+      flipVLabel: "⇵ Vertikal spiegeln",
+      rotateCcwLabel: "↺ Gegen den Uhrzeigersinn drehen",
+      rotateCwLabel: "↻ Im Uhrzeigersinn drehen",
+      transformHint: "Wirkt direkt auf die Pixel der aktiven Ebene — was nicht mehr in den Rahmen passt, wird abgeschnitten.",
+      adjustmentsHeading: "Anpassungen (aktive Ebene)",
+      brightnessLabel: "Helligkeit",
+      contrastLabel: "Kontrast",
+      saturationLabel: "Sättigung",
+      blurLabel: "Unschärfe",
+      grayscaleLabel: "Graustufen",
+      invertLabel: "Invertieren",
+      resetLabel: "Zurücksetzen",
+      applyLabel: "Anwenden",
+      filterPreviewHint: "Die Vorschau aktualisiert sich live auf der aktiven Ebene; \"Anwenden\" übernimmt es dauerhaft.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Alles, was du zeichnest und importierst, bleibt in deinem Browser — nichts wird hochgeladen. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      toolBrush: "Pinsel",
+      toolEraser: "Radierer",
+      toolLine: "Linie",
+      toolRectangle: "Rechteck",
+      toolEllipse: "Ellipse",
+      toolFill: "Füllen",
+      toolText: "Text",
+      toolEyedrop: "Pipette",
+      toolSelect: "Auswählen",
+      toolMove: "Verschieben",
+      sizeLabel: "Größe:",
+      opacityLabel: "Deckkraft:",
+      hardnessLabel: "Härte:",
+      thicknessLabel: "Dicke:",
+      strokeWidthLabel: "Strichstärke:",
+      filledLabel: "Gefüllt",
+      toleranceLabel: "Toleranz:",
+      fontSizeLabel: "Schriftgröße",
+      fontLabel: "Schrift",
+      fontSansSerif: "Sans-serif",
+      fontSerif: "Serif",
+      fontMonospace: "Monospace",
+      textToolHint: "Klick auf die Leinwand, um Text zu platzieren.",
+      eyedropperHint: "Klick irgendwo auf die Leinwand, um diese Farbe aufzunehmen.",
+      moveToolHint: "Zieh auf der Leinwand, um die Pixel der aktiven Ebene zu verschieben.",
+      selectToolHint: "Zieh ein Rechteck zum Auswählen und nutze dann die Aktionen unten.",
+      actionCut: "Ausschneiden",
+      actionCopy: "Kopieren",
+      actionPaste: "Einfügen",
+      actionDelete: "Löschen",
+      actionCrop: "Auf Auswahl zuschneiden",
+      layerPrefix: "Ebene",
+      copySuffix: "Kopie",
+      moveUpTitle: "Nach oben",
+      moveDownTitle: "Nach unten",
+      textToAddPrompt: "Text zum Hinzufügen:",
+      errorDragSelectionFirst: "Zieh zuerst eine Auswahl auf der Leinwand.",
+      errorNothingCopied: "Noch nichts kopiert.",
+      errorNeedOneLayer: "Du brauchst mindestens eine Ebene.",
+      errorNoLayerBelow: "Unter dieser Ebene gibt es keine.",
+      canvasWidthPrompt: "Leinwandbreite (px):",
+      canvasHeightPrompt: "Leinwandhöhe (px):",
+      backgroundConfirmPrompt: "Klick auf OK für weißen Hintergrund, Abbrechen für transparent.",
+      newWidthPrompt: "Neue Breite (px):",
+      newHeightPrompt: "Neue Höhe (px):",
+      resumeDraftLabel: "↺ Entwurf fortsetzen",
+      discardLabel: "✕ Verwerfen",
+      autosaveHintText: "Dein Fortschritt wird beim Arbeiten automatisch in diesem Browser gespeichert, ein Neuladen verliert ihn also nicht.",
+      clearDraftLinkText: "Gespeicherten Entwurf löschen",
+      savedJustNowText: "Gerade gespeichert.",
+      autosaveFailedText: "Automatisches Speichern fehlgeschlagen (dein Projekt ist vielleicht zu groß für den Browserspeicher) — denk daran, es am Ende herunterzuladen.",
+      draftBannerPrefix: "Du hast einen ungespeicherten Entwurf von",
+      draftLayerOne: "Ebene).",
+      draftLayersMany: "Ebenen).",
+      loadingLabel: "Wird geladen…",
+      errorCouldNotLoadDraft: "Der gespeicherte Entwurf konnte nicht geladen werden:",
+      clearDraftConfirm: "Den automatisch gespeicherten Entwurf löschen? Das entfernt nur die gespeicherte Kopie in diesem Browser — was gerade auf dem Bildschirm ist, bleibt unberührt."
+    },
+    pt: {
+      heroSubtitle: "Um editor de imagens com camadas — pincéis, formas, texto, preenchimento, seleção, filtros e desfazer/refazer.",
+      toolsHeading: "Ferramentas",
+      optionsHeading: "Opções",
+      colorHeading: "Cor",
+      canvasHeading: "Tela",
+      newLabel: "Novo",
+      resizeLabel: "Redimensionar",
+      importImageLabel: "+ Importar imagem como camada",
+      historyHeading: "Histórico",
+      undoLabel: "↺ Desfazer",
+      redoLabel: "↻ Refazer",
+      canvasToolbarLabel: "PAINT FORGE — TELA",
+      exportPngLabel: "⬇ Exportar PNG",
+      exportJpgLabel: "⬇ Exportar JPG",
+      layersHeading: "Camadas",
+      addLayerLabel: "+ Adicionar camada",
+      duplicateLabel: "⧉ Duplicar",
+      mergeDownLabel: "⬇ Mesclar para baixo",
+      deleteLabel: "✕ Excluir",
+      transformHeading: "Transformar (camada ativa)",
+      flipHLabel: "⇋ Espelhar horizontal",
+      flipVLabel: "⇵ Espelhar vertical",
+      rotateCcwLabel: "↺ Girar anti-horário",
+      rotateCwLabel: "↻ Girar horário",
+      transformHint: "Afeta os pixels da camada ativa no lugar — o que não couber mais no quadro é cortado.",
+      adjustmentsHeading: "Ajustes (camada ativa)",
+      brightnessLabel: "Brilho",
+      contrastLabel: "Contraste",
+      saturationLabel: "Saturação",
+      blurLabel: "Desfoque",
+      grayscaleLabel: "Tons de cinza",
+      invertLabel: "Inverter",
+      resetLabel: "Redefinir",
+      applyLabel: "Aplicar",
+      filterPreviewHint: "A prévia se atualiza ao vivo na camada ativa; \"Aplicar\" fixa de vez.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Tudo o que você desenha e importa fica no seu navegador — nada é enviado. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      toolBrush: "Pincel",
+      toolEraser: "Borracha",
+      toolLine: "Linha",
+      toolRectangle: "Retângulo",
+      toolEllipse: "Elipse",
+      toolFill: "Preencher",
+      toolText: "Texto",
+      toolEyedrop: "Conta-gotas",
+      toolSelect: "Selecionar",
+      toolMove: "Mover",
+      sizeLabel: "Tamanho:",
+      opacityLabel: "Opacidade:",
+      hardnessLabel: "Dureza:",
+      thicknessLabel: "Espessura:",
+      strokeWidthLabel: "Largura do traço:",
+      filledLabel: "Preenchido",
+      toleranceLabel: "Tolerância:",
+      fontSizeLabel: "Tamanho da fonte",
+      fontLabel: "Fonte",
+      fontSansSerif: "Sans-serif",
+      fontSerif: "Serif",
+      fontMonospace: "Monoespaçada",
+      textToolHint: "Clique na tela para colocar o texto.",
+      eyedropperHint: "Clique em qualquer lugar da tela para pegar essa cor.",
+      moveToolHint: "Arraste na tela para reposicionar os pixels da camada ativa.",
+      selectToolHint: "Arraste para selecionar um retângulo e use as ações abaixo.",
+      actionCut: "Recortar",
+      actionCopy: "Copiar",
+      actionPaste: "Colar",
+      actionDelete: "Excluir",
+      actionCrop: "Cortar na seleção",
+      layerPrefix: "Camada",
+      copySuffix: "cópia",
+      moveUpTitle: "Mover para cima",
+      moveDownTitle: "Mover para baixo",
+      textToAddPrompt: "Texto a adicionar:",
+      errorDragSelectionFirst: "Arraste uma seleção na tela primeiro.",
+      errorNothingCopied: "Nada copiado ainda.",
+      errorNeedOneLayer: "Você precisa de pelo menos uma camada.",
+      errorNoLayerBelow: "Não há camada abaixo desta.",
+      canvasWidthPrompt: "Largura da tela (px):",
+      canvasHeightPrompt: "Altura da tela (px):",
+      backgroundConfirmPrompt: "Clique em OK para fundo branco, Cancelar para transparente.",
+      newWidthPrompt: "Nova largura (px):",
+      newHeightPrompt: "Nova altura (px):",
+      resumeDraftLabel: "↺ Retomar rascunho",
+      discardLabel: "✕ Descartar",
+      autosaveHintText: "Seu progresso é salvo automaticamente neste navegador enquanto você trabalha, então recarregar não faz perder.",
+      clearDraftLinkText: "Apagar rascunho salvo",
+      savedJustNowText: "Salvo agora.",
+      autosaveFailedText: "Não foi possível salvar automaticamente (o projeto pode ser grande demais para o armazenamento do navegador) — lembre de baixar quando terminar.",
+      draftBannerPrefix: "Você tem um rascunho não salvo de",
+      draftLayerOne: "camada).",
+      draftLayersMany: "camadas).",
+      loadingLabel: "Carregando…",
+      errorCouldNotLoadDraft: "Não foi possível carregar o rascunho salvo:",
+      clearDraftConfirm: "Apagar o rascunho salvo automaticamente? Isso só remove a cópia salva neste navegador — o que está na tela não muda."
+    },
+    fr: {
+      heroSubtitle: "Un éditeur d'images à calques — pinceaux, formes, texte, remplissage, sélection, filtres et annuler/rétablir.",
+      toolsHeading: "Outils",
+      optionsHeading: "Options",
+      colorHeading: "Couleur",
+      canvasHeading: "Toile",
+      newLabel: "Nouveau",
+      resizeLabel: "Redimensionner",
+      importImageLabel: "+ Importer une image comme calque",
+      historyHeading: "Historique",
+      undoLabel: "↺ Annuler",
+      redoLabel: "↻ Rétablir",
+      canvasToolbarLabel: "PAINT FORGE — TOILE",
+      exportPngLabel: "⬇ Exporter en PNG",
+      exportJpgLabel: "⬇ Exporter en JPG",
+      layersHeading: "Calques",
+      addLayerLabel: "+ Ajouter un calque",
+      duplicateLabel: "⧉ Dupliquer",
+      mergeDownLabel: "⬇ Fusionner vers le bas",
+      deleteLabel: "✕ Supprimer",
+      transformHeading: "Transformer (calque actif)",
+      flipHLabel: "⇋ Retourner horizontalement",
+      flipVLabel: "⇵ Retourner verticalement",
+      rotateCcwLabel: "↺ Rotation antihoraire",
+      rotateCwLabel: "↻ Rotation horaire",
+      transformHint: "Agit directement sur les pixels du calque actif — ce qui ne tient plus dans le cadre est rogné.",
+      adjustmentsHeading: "Réglages (calque actif)",
+      brightnessLabel: "Luminosité",
+      contrastLabel: "Contraste",
+      saturationLabel: "Saturation",
+      blurLabel: "Flou",
+      grayscaleLabel: "Niveaux de gris",
+      invertLabel: "Inverser",
+      resetLabel: "Réinitialiser",
+      applyLabel: "Appliquer",
+      filterPreviewHint: "L'aperçu se met à jour en direct sur le calque actif ; \"Appliquer\" l'intègre définitivement.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Tout ce que vous dessinez et importez reste dans votre navigateur — rien n'est envoyé. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      toolBrush: "Pinceau",
+      toolEraser: "Gomme",
+      toolLine: "Ligne",
+      toolRectangle: "Rectangle",
+      toolEllipse: "Ellipse",
+      toolFill: "Remplir",
+      toolText: "Texte",
+      toolEyedrop: "Pipette",
+      toolSelect: "Sélectionner",
+      toolMove: "Déplacer",
+      sizeLabel: "Taille :",
+      opacityLabel: "Opacité :",
+      hardnessLabel: "Dureté :",
+      thicknessLabel: "Épaisseur :",
+      strokeWidthLabel: "Épaisseur du trait :",
+      filledLabel: "Rempli",
+      toleranceLabel: "Tolérance :",
+      fontSizeLabel: "Taille de police",
+      fontLabel: "Police",
+      fontSansSerif: "Sans-serif",
+      fontSerif: "Serif",
+      fontMonospace: "Monospace",
+      textToolHint: "Cliquez sur la toile pour placer le texte.",
+      eyedropperHint: "Cliquez n'importe où sur la toile pour prélever cette couleur.",
+      moveToolHint: "Faites glisser sur la toile pour déplacer les pixels du calque actif.",
+      selectToolHint: "Faites glisser pour sélectionner un rectangle, puis utilisez les actions ci-dessous.",
+      actionCut: "Couper",
+      actionCopy: "Copier",
+      actionPaste: "Coller",
+      actionDelete: "Supprimer",
+      actionCrop: "Recadrer à la sélection",
+      layerPrefix: "Calque",
+      copySuffix: "copie",
+      moveUpTitle: "Monter",
+      moveDownTitle: "Descendre",
+      textToAddPrompt: "Texte à ajouter :",
+      errorDragSelectionFirst: "Faites d'abord une sélection sur la toile.",
+      errorNothingCopied: "Rien de copié pour l'instant.",
+      errorNeedOneLayer: "Il faut au moins un calque.",
+      errorNoLayerBelow: "Il n'y a pas de calque sous celui-ci.",
+      canvasWidthPrompt: "Largeur de la toile (px) :",
+      canvasHeightPrompt: "Hauteur de la toile (px) :",
+      backgroundConfirmPrompt: "Cliquez sur OK pour un fond blanc, Annuler pour transparent.",
+      newWidthPrompt: "Nouvelle largeur (px) :",
+      newHeightPrompt: "Nouvelle hauteur (px) :",
+      resumeDraftLabel: "↺ Reprendre le brouillon",
+      discardLabel: "✕ Abandonner",
+      autosaveHintText: "Votre progression s'enregistre automatiquement dans ce navigateur pendant que vous travaillez, donc un rechargement ne la perd pas.",
+      clearDraftLinkText: "Effacer le brouillon enregistré",
+      savedJustNowText: "Enregistré à l'instant.",
+      autosaveFailedText: "Enregistrement auto impossible (votre projet est peut-être trop gros pour le stockage du navigateur) — pensez à le télécharger à la fin.",
+      draftBannerPrefix: "Vous avez un brouillon non enregistré du",
+      draftLayerOne: "calque).",
+      draftLayersMany: "calques).",
+      loadingLabel: "Chargement…",
+      errorCouldNotLoadDraft: "Impossible de charger le brouillon enregistré :",
+      clearDraftConfirm: "Effacer le brouillon enregistré automatiquement ? Cela ne supprime que la copie enregistrée dans ce navigateur — ce qui est à l'écran reste intact."
+    }
+  });
+
+  checkForSavedDraft();
+
+  // Random Forge (and other tools) can open Paint Forge with a drawing prompt to show: #idea=...
+  try {
+    const idea = (location.hash.match(/[#&]idea=([^&]*)/) || [])[1];
+    if (idea) { document.getElementById('ideaText').textContent = decodeURIComponent(idea).slice(0, 300); document.getElementById('ideaBanner').classList.add('show'); history.replaceState(null, '', location.pathname); }
+  } catch (e) { /* bad link */ }
+})();
+</script>
+<script src="tutorials.js" defer></script><script src="heic-support.js" defer></script>
+</body>
+</html>

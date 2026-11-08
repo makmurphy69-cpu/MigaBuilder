@@ -1,0 +1,925 @@
+<!-- Generated from /cube-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!doctype html>
+<html lang="sw" data-en-title="Learn to solve a Rubik’s cube in 3D: 2×2 to 10×10, step by step — Cube Forge | MigaBuilder">
+<head>
+<meta charset="utf-8"><base href="/"><script>window.MIGA_PAGE_LANG='sw';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cube Forge — Jifunze kutatua mchemraba unaozunguka kwa 3D | MigaBuilder</title>
+<meta name="description" content="Cube Forge ni mkufunzi wa 3D wa michemraba ya mtindo wa Rubik: chagua mchemraba kuanzia 2×2 hadi 10×10 au mstatili, uzungushe, jifunze alama na mbinu ya mwanzo, na upate suluhisho la hatua kwa hatua kwa 3×3 au 2×2 yako mwenyewe.">
+<link rel="canonical" href="https://migabuilder.com/sw/cube-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/cube-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Cube Forge — Jifunze kutatua mchemraba unaozunguka kwa 3D">
+<meta property="og:description" content="Cube Forge ni mkufunzi wa 3D wa michemraba ya mtindo wa Rubik: chagua mchemraba kuanzia 2×2 hadi 10×10 au mstatili, uzungushe, jifunze alama na mbinu ya mwanzo, na upate suluhisho la hatua kwa hatua kwa 3×3 au 2×2 yako mwenyewe.">
+<meta property="og:url" content="https://migabuilder.com/sw/cube-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+.hidden{display:none!important}
+main.cf-main{max-width:1400px;display:grid;grid-template-columns:330px minmax(0,1fr);gap:16px;align-items:start}
+.side{position:sticky;top:10px;max-height:calc(100vh - 20px);overflow:auto;padding:16px}
+.side h3{font:700 13px 'Space Grotesk';text-transform:uppercase;letter-spacing:.06em;margin:16px 0 8px;color:#35516b;border-top:1px solid rgba(22,32,43,.12);padding-top:12px}
+.side h3:first-of-type{border-top:0;padding-top:0;margin-top:4px}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+.presets button{background:#fff;border:1.5px solid rgba(22,32,43,.15);border-radius:6px;padding:7px 6px;text-align:left;font-size:12.5px;cursor:pointer;color:var(--ink);line-height:1.2}
+.presets button b{font:700 14px 'Space Grotesk';display:block}.presets button.active{border-color:var(--amber);background:#fff7e6}
+.sl{display:grid;grid-template-columns:1fr auto;gap:2px 8px;align-items:center;margin:10px 0 8px;font-size:12.5px}
+.sl label{font-weight:600}.sl output{font:500 12px 'IBM Plex Mono';color:#35516b}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:#0E2A47}
+.dims{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:12px}.dims label{font-weight:600;display:block;margin-bottom:2px}.dims select{width:100%;padding:5px;border:1px solid rgba(22,32,43,.25);border-radius:4px;background:#fff}
+details.more{margin-top:8px;font-size:12.5px}details.more summary{cursor:pointer;font-weight:700;color:#35516b}
+.pad{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.pad button,.chip{font:600 13px 'IBM Plex Mono';border:1px solid rgba(22,32,43,.22);background:#fff;border-radius:5px;padding:6px 0;cursor:pointer;color:var(--ink)}
+.pad button:hover,.chip:hover{border-color:var(--navy);background:#eef4fa}
+.pad button:disabled{opacity:.35;cursor:not-allowed}
+.pad .rot{background:#f1efe8}
+.padopts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:8px 0;font-size:12.5px}.padopts select{padding:4px;border:1px solid rgba(22,32,43,.25);border-radius:4px}
+.algrow{display:flex;gap:6px;margin-top:8px}.algrow input{flex:1;min-width:0;padding:7px;border:1px solid rgba(22,32,43,.25);border-radius:4px;font:500 13px 'IBM Plex Mono'}
+.hint{font-size:11.5px;color:rgba(22,32,43,.68);margin:6px 0 0;line-height:1.4}
+#view3d{position:relative;height:min(62vh,560px);min-height:320px;border-radius:6px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#2a4a68,#0b1724 75%);touch-action:none}
+#view3d canvas{display:block;width:100%;height:100%}
+.ov{position:absolute;left:10px;right:150px;top:10px;display:flex;gap:6px;flex-wrap:wrap;z-index:2}
+.ov button{background:rgba(255,255,255,.9);border:1px solid rgba(22,32,43,.2);border-radius:999px;padding:5px 10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--ink)}
+.badge{position:absolute;right:54px;top:12px;z-index:2;background:rgba(10,20,32,.8);color:#fff;border-radius:999px;padding:5px 12px;font:700 12px 'Space Grotesk'}
+.badge.ok{background:#2f7d55}
+.cap{position:absolute;left:10px;right:10px;bottom:10px;z-index:2;background:rgba(10,20,32,.88);color:#fff;border-radius:10px;padding:9px 14px;display:flex;gap:14px;align-items:center}
+.cap b{font:700 30px 'IBM Plex Mono';min-width:64px;text-align:center}.cap small{display:block;opacity:.75;font-size:11.5px}.cap span{font-size:13.5px;line-height:1.35}
+.no3d{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;color:#fff}
+.stat{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:10px;font-size:13px}
+.stat .clock{font:700 26px 'IBM Plex Mono'}
+.lastmoves:empty{display:none}#scrambleLine{max-height:3.2em;overflow:auto}
+.lastmoves{font:500 12.5px 'IBM Plex Mono';color:#35516b;margin-top:6px;word-break:break-word;min-height:18px}
+.viewtabs{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:10px}
+.viewtabs button{border:1px solid rgba(22,32,43,.2);background:#fff;border-radius:999px;padding:7px 13px;font-weight:700;cursor:pointer;color:var(--ink);font-size:13px}
+.viewtabs button.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.explain{font-size:13.5px;line-height:1.55;color:rgba(22,32,43,.82)}
+.stage{border:1px solid rgba(22,32,43,.12);border-radius:8px;padding:10px 12px;margin:8px 0;background:#fff}
+.stage h4{margin:0 0 4px;font:700 15px 'Space Grotesk'}.stage h4 span{color:#35516b;font-weight:500;font-size:12.5px;margin-left:6px}
+.stage.cur{border-color:var(--amber);box-shadow:0 0 0 2px rgba(226,166,59,.25)}
+.stage p{margin:0 0 6px;font-size:13px;line-height:1.45;color:rgba(22,32,43,.78)}
+.part{font-size:12.5px;margin:4px 0}.part em{font-style:normal;font-weight:600;display:block;margin-bottom:2px}
+.mv{display:inline-block;font:600 12.5px 'IBM Plex Mono';padding:2px 5px;margin:1px;border-radius:4px;background:#f1efe8;cursor:pointer}
+.mv.done{background:#dcefe3;color:#2f5f45}.mv.now{background:#E2A63B;color:#16202b}
+.player{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.err{background:#fdeeea;border-left:4px solid #D8604A;padding:8px 10px;border-radius:5px;font-size:13px}
+.okmsg{background:#eef8f1;border-left:4px solid #4E9E73;padding:8px 10px;border-radius:5px;font-size:13px}
+.lesson{border:1px solid rgba(22,32,43,.12);border-radius:8px;margin:8px 0;background:#fff}
+.lesson summary{cursor:pointer;padding:10px 12px;font:700 15px 'Space Grotesk'}
+.lesson .body{padding:0 12px 12px;font-size:13.5px;line-height:1.55}
+.step{border-left:4px solid #5b8fc0;background:#f6f9fc;padding:8px 10px;margin:10px 0;border-radius:0 6px 6px 0}
+.step h5{margin:0 0 4px;font:700 14px 'Space Grotesk'}
+.alg{font:600 13px 'IBM Plex Mono';background:#0E2A47;color:#fff;border:0;border-radius:5px;padding:4px 8px;cursor:pointer;margin:2px 2px 2px 0}
+.showme{font-weight:700;font-size:12.5px;border:1px solid var(--amber);background:#fff7e6;border-radius:999px;padding:4px 11px;cursor:pointer;color:var(--ink);margin-top:4px}
+table.t{border-collapse:collapse;width:100%;font-size:12.5px;background:#fff}table.t th,table.t td{border:1px solid rgba(22,32,43,.14);padding:5px 7px;text-align:left}table.t th{background:#f1efe8}
+.notgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin:8px 0}
+.notgrid button{text-align:left;background:#fff;border:1px solid rgba(22,32,43,.15);border-radius:6px;padding:6px 8px;cursor:pointer;font-size:12px;color:var(--ink)}
+.notgrid button b{font:700 15px 'IBM Plex Mono';display:block}
+.palette{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px;align-items:center}
+.palette button{width:34px;height:34px;border-radius:6px;border:2px solid rgba(22,32,43,.3);cursor:pointer}
+.palette button.active{outline:3px solid var(--amber);outline-offset:2px}
+.palette .off{width:auto;padding:0 10px;background:#fff;font-weight:700;font-size:12px}
+.netbox{background:#f6f4ee;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px;overflow:auto}
+.netbox svg{display:block;width:100%;max-width:640px;height:auto;margin:0 auto}
+.netbox rect.st{cursor:pointer}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin:10px 0}
+.facts div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px 10px}.facts b{display:block;font:700 18px 'Space Grotesk'}.facts span{font-size:11.5px;color:rgba(22,32,43,.72)}
+.bignum{font:500 12px 'IBM Plex Mono';word-break:break-all;background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:6px;padding:8px}
+@media(max-width:980px){main.cf-main{grid-template-columns:1fr}.side{position:static;max-height:none;order:2}#view3d{height:min(56vh,460px)}}
+@media print{.tool-nav,.masthead,.side,.viewtabs,.ov,footer,.miga-bar,.miga-float{display:none!important}body{background:#fff}main.cf-main{display:block}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I learn to solve a Rubik’s cube with Cube Forge?","acceptedAnswer":{"@type":"Answer","text":"Open the Learn tab and follow the beginner method in seven steps: white cross, white corners, middle layer, yellow cross, yellow edges, yellow corners in place and twisting the yellow corners. Each step has a Show me button that plays it on the 3D cube, and Solve with me gives a step-by-step solution for any scrambled 3×3 or 2×2."}},{"@type":"Question","name":"Can I choose how many layers the cube has?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pick anything from a 2×2 to a 10×10 cube, or a cuboid such as the 3×3×2 domino, 2×2×3 tower or 3×3×1 floppy cube by choosing the number of layers on each side."}},{"@type":"Question","name":"Can it solve my real cube?","acceptedAnswer":{"@type":"Answer","text":"Yes, for the 3×3 and the 2×2. Paint the colours of your cube on the flat view or on the 3D model, then press Solve my cube to get a solution that explains every step."}},{"@type":"Question","name":"Je, Cube Forge ni bure?","acceptedAnswer":{"@type":"Answer","text":"Yes. It is free, with no account, no watermark and no paywall, and it runs in your browser."}}],"inLanguage":"sw"}</script>
+<script src="i18n.js"></script>
+<script src="i18n/cube-forge.js"></script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/cube-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/cube-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/cube-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/cube-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/cube-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/cube-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/cube-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/cube-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/cube-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/cube-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+<nav class="tool-nav"><a href="/sw/">← All tools</a><span>Cube Forge</span></nav>
+<header class="masthead"><div><h1>Cube Forge</h1><p>Learn to solve a twisty cube in 3D. Choose how many layers it has — from a 2×2 to a 10×10, or a cuboid like the 3×3×2 — turn it by dragging or with the move buttons, learn the beginner method one step at a time, and let it solve your own cube with you.</p></div></header>
+<main class="cf-main">
+<aside class="panel side" aria-label="Cube controls">
+  <h3>1 · Choose the puzzle</h3>
+  <div class="presets" id="presets"></div>
+  <div class="sl"><label for="p_n">Layers (cube size)</label><output id="o_n">3 × 3 × 3</output><input type="range" id="p_n" min="2" max="10" step="1" value="3"></div>
+  <details class="more" id="cuboidBox"><summary>Cuboid: choose each side</summary>
+    <div class="dims" style="margin-top:8px">
+      <div><label for="p_x">Wide</label><select id="p_x"></select></div>
+      <div><label for="p_y">High</label><select id="p_y"></select></div>
+      <div><label for="p_z">Deep</label><select id="p_z"></select></div>
+    </div>
+    <p class="hint">A side that is not square (for example 3 × 2) can only turn halfway, like on a real cuboid.</p>
+  </details>
+  <h3>2 · Turn it</h3>
+  <div class="pad" id="pad"></div>
+  <div class="padopts" id="depthOpts"><label for="p_depth">Layer</label><select id="p_depth"></select><label><input type="checkbox" id="p_wide"> Wide (all layers up to it)</label></div>
+  <div class="algrow"><input id="algInput" aria-label="Type moves" placeholder="Type moves, e.g. R U R' U'" spellcheck="false"><button class="secondary" id="algPlay">▶ Play</button></div>
+  <p class="hint">Drag a sticker on the 3D cube to turn its layer, drag the background to look around. Keys: U D L R F B (Shift for ′), M E S, X Y Z, Ctrl+Z to undo.</p>
+  <div class="sl"><label for="p_speed">Turning speed</label><output id="o_speed">6</output><input type="range" id="p_speed" min="1" max="10" step="1" value="6"></div>
+  <h3>3 · Practise</h3>
+  <div class="actions"><button class="primary" id="scrambleBtn">🔀 Scramble</button><button class="secondary" id="resetBtn">↺ Solved</button><button class="secondary" id="undoBtn">↶ Undo</button><button class="secondary" id="redoBtn">↷ Redo</button></div>
+  <h3>4 · Save</h3>
+  <div class="actions"><button class="secondary" id="saveJson">💾 Save cube</button><label class="secondary" style="cursor:pointer">📂 Open<input type="file" id="openJson" accept=".json" hidden></label></div>
+  <p class="privacy" style="margin-top:10px">🔒 Everything runs in your browser. Your cube and times are saved on this device.</p>
+</aside>
+
+<div>
+  <section class="panel">
+    <div id="view3d"><div class="ov"><button id="camReset">Front view</button><button id="camBack">Back view</button><button id="labelsBtn">Show letters</button></div>
+      <div class="badge" id="badge">Solved</div>
+      <div class="cap hidden" id="cap"><b id="capMove">R</b><span><small id="capStep">Step</small><span id="capText"></span></span></div>
+    </div>
+    <div class="stat"><span class="clock" id="clock">0:00.00</span><span id="moveCount">0 moves</span><span id="timerNote">Press 🔀 Scramble, then the timer starts on your first turn.</span></div>
+    <div class="lastmoves" id="scrambleLine"></div>
+    <div class="lastmoves" id="lastMoves"></div>
+    <div class="actions" style="margin-top:8px"><button class="secondary" id="dlPNG">⬇ Picture</button><button class="secondary" id="dlSolution">⬇ Solution (TXT)</button><button class="secondary" id="printBtn">🖨 Print solving guide</button></div>
+  </section>
+  <section class="panel">
+    <div class="viewtabs" role="group" aria-label="View">
+      <button class="active" data-view="vsolve" id="tabSolve">🧭 Solve with me</button>
+      <button data-view="vlearn" id="tabLearn">📖 Learn</button>
+      <button data-view="vnet" id="tabNet">🎨 Flat view &amp; paint</button>
+      <button data-view="vtimes" id="tabTimes">⏱ Times</button>
+    </div>
+    <div id="vsolve" class="view">
+      <p class="explain" id="solveIntro">Scramble the cube (or paint the colours of your own cube in <b>🎨 Flat view &amp; paint</b>), then press <b>Solve my cube</b>. You get the beginner method step by step: every move is explained and highlighted on the cube, so you can follow along with a real cube in your hands.</p>
+      <div class="actions"><button class="primary" id="solveBtn">🧭 Solve my cube</button><button class="secondary" id="hintBtn">💡 What do I do next?</button></div>
+      <div class="player hidden" id="player"><button class="secondary" id="prevBtn">⏮ Back</button><button class="primary" id="playBtn">▶ Play</button><button class="secondary" id="nextBtn">⏭ Next move</button><button class="secondary" id="stageBtn">⏩ Play this step</button><span id="solProgress" class="hint"></span></div>
+      <div id="solveOut"></div>
+    </div>
+    <div id="vlearn" class="view hidden"></div>
+    <div id="vnet" class="view hidden">
+      <p class="explain">The whole cube unfolded: the top (U) is above the front (F), with left (L), right (R) and back (B) beside it and the bottom (D) underneath. To copy your own cube, hold it with <b>white at the bottom and green in front</b>, pick a colour and tap the stickers here or on the 3D cube.</p>
+      <div class="palette" id="palette"></div>
+      <div class="netbox" id="netBox"></div>
+      <div id="paintMsg" style="margin-top:8px"></div>
+      <div class="actions" style="margin-top:8px"><button class="secondary" id="netSolved">Start from a solved cube</button><button class="secondary" id="netSolve">🧭 Solve these colours</button></div>
+    </div>
+    <div id="vtimes" class="view hidden">
+      <p class="explain">Scramble, then the timer starts on your first turn and stops when the cube is solved. Solves that used <b>Solve with me</b> are not timed.</p>
+      <div id="timesBox"></div>
+      <div class="actions" style="margin-top:8px"><button class="secondary" id="clearTimes">Clear times</button></div>
+    </div>
+  </section>
+  <section class="panel">
+    <h2>How Cube Forge works</h2>
+    <div class="explain">
+      <p><b>Any size:</b> the puzzle is a grid of small cubes with a sticker on every outside face. A move turns one layer (or several) a quarter or half turn; on a cuboid a layer whose face is not square can only turn halfway. The colours follow the usual scheme: white opposite yellow, green opposite blue and red opposite orange.</p>
+      <p><b>Solve with me</b> uses the beginner layer-by-layer method, the way people learn it: a white cross, the white corners, the middle layer, then the yellow side in four short steps. It finds each piece, tells you where it goes and which algorithm to use. It is not the shortest solution (about 100–200 moves) but every move makes sense. On a 2×2 it does the same steps with only the corners.</p>
+      <p>Bigger cubes are solved by <b>reduction</b>: make the centres, pair up the edges, then solve it like a 3×3, with two extra algorithms for the parity cases — all in the Learn tab.</p>
+    </div>
+  </section>
+</div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Cube Forge</h2>
+  <p>Cube Forge is a 3D Rubik’s-style cube trainer: choose a cube from 2×2 to 10×10 or a cuboid, turn it, learn the notation and the beginner method, and get a step-by-step solution for your own 3×3 or 2×2.</p>
+  <h3>How to use Cube Forge</h3>
+  <ol><li>Pick a puzzle or move the Layers slider, then turn it by dragging the stickers or with the move buttons.</li><li>Open Learn and press “Show me” on each step of the beginner method to see it played on the cube.</li><li>Scramble the cube or paint the colours of your own, press “Solve my cube”, and follow the solution move by move.</li></ol>
+  <h3>Can it solve a 4×4 or bigger?</h3>
+  <p>It teaches the reduction method with the parity algorithms for big cubes, and ↶ Undo can take back every turn. The automatic step-by-step solver is for the 3×3 and the 2×2.</p>
+  <h3>Is Cube Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your cubes and times stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/sw/puzzle-forge.html">Puzzle Forge</a> · <a href="/sw/memory-forge.html">Memory Forge</a> · <a href="/sw/go-forge.html">Go Forge</a></p>
+</section>
+
+<footer>Cube Forge is a learning tool for twisty puzzles. Rubik’s Cube is a trademark of Spin Master; Cube Forge is not connected to it.</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="cube-engine.js"></script>
+<script>
+(function () {
+'use strict';
+const E = window.CubeEngine, $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const ls = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const PRESETS = [
+  { id: 'c2', d: [2, 2, 2], name: '2×2×2', note: 'Pocket cube' },
+  { id: 'c3', d: [3, 3, 3], name: '3×3×3', note: 'The classic' },
+  { id: 'c4', d: [4, 4, 4], name: '4×4×4', note: 'Revenge' },
+  { id: 'c5', d: [5, 5, 5], name: '5×5×5', note: 'Professor' },
+  { id: 'c6', d: [6, 6, 6], name: '6×6×6', note: 'V-Cube 6' },
+  { id: 'c7', d: [7, 7, 7], name: '7×7×7', note: 'V-Cube 7' },
+  { id: 'domino', d: [3, 2, 3], name: '3×3×2', note: 'Domino' },
+  { id: 'tower', d: [2, 3, 2], name: '2×2×3', note: 'Tower' },
+  { id: 'floppy', d: [3, 1, 3], name: '3×3×1', note: 'Floppy' },
+  { id: 'c334', d: [3, 4, 3], name: '3×3×4', note: 'Tall cuboid' }
+];
+const dimsName = d => d.join(' × ');
+let pz = new E.Puzzle([3, 3, 3]);
+const S = { history: [], redo: [], sol: null, solIdx: 0, playing: false, paint: -1, labels: false, timer: { state: 'idle', start: 0, end: 0, moves: 0 }, scramble: '', helped: false, lastSolvedAt: 0 };
+
+// ------------------------------------------------------------------ 3D
+let R3 = null;
+const Q = []; let anim = null;
+function init3D() {
+  const box = $('view3d');
+  try {
+    if (!window.THREE) throw new Error('3D library did not load');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    box.appendChild(renderer.domElement);
+    const scene = new THREE.Scene();
+    const cam = new THREE.PerspectiveCamera(32, 1, 0.1, 500);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 0.85));
+    const dl = new THREE.DirectionalLight(0xffffff, 0.55); dl.position.set(5, 9, 7); scene.add(dl);
+    const dl2 = new THREE.DirectionalLight(0xffffff, 0.25); dl2.position.set(-6, -3, -5); scene.add(dl2);
+    R3 = { renderer, scene, cam, root: new THREE.Group(), cubies: [], stickers: new Map(), pivot: new THREE.Group() };
+    scene.add(R3.root); scene.add(R3.pivot);
+    setupPointer(renderer.domElement);
+    if (THREE.OrbitControls) { R3.controls = new THREE.OrbitControls(cam, renderer.domElement); R3.controls.enablePan = false; R3.controls.enableDamping = true; R3.controls.rotateSpeed = 0.8; }
+    const resize = () => {
+      const w = box.clientWidth, h = box.clientHeight; renderer.setSize(w, h, false); cam.aspect = w / Math.max(1, h); cam.updateProjectionMatrix();
+      // Full screen or a turned phone changes the shape: keep the view direction, refit the whole cube.
+      if (R3 && R3.cubies.length) { const d = fitDistance(); cam.position.setLength(d); if (R3.controls) { R3.controls.maxDistance = Math.max(Math.max(...pz.dims) * 12, d * 2); R3.controls.update(); } }
+    };
+    new ResizeObserver(resize).observe(box); resize();
+    const loop = t => { requestAnimationFrame(loop); step(t); if (R3.controls) R3.controls.update(); renderer.render(scene, cam); };
+    requestAnimationFrame(loop);
+  } catch (e) {
+    R3 = null;
+    const d = document.createElement('div'); d.className = 'no3d'; d.textContent = 'The 3D view needs WebGL, which this browser does not offer. The flat view and the solver still work.'; box.appendChild(d);
+  }
+}
+function roundedSquare(size, r) {
+  const s = new THREE.Shape(), h = size / 2;
+  s.moveTo(-h + r, -h); s.lineTo(h - r, -h); s.quadraticCurveTo(h, -h, h, -h + r); s.lineTo(h, h - r); s.quadraticCurveTo(h, h, h - r, h);
+  s.lineTo(-h + r, h); s.quadraticCurveTo(-h, h, -h, h - r); s.lineTo(-h, -h + r); s.quadraticCurveTo(-h, -h, -h + r, -h);
+  return new THREE.ShapeGeometry(s, 4);
+}
+let labelTex = {};
+function letterTexture(ch) {
+  if (labelTex[ch]) return labelTex[ch];
+  const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+  g.fillStyle = 'rgba(0,0,0,0)'; g.fillRect(0, 0, 128, 128); g.fillStyle = 'rgba(10,20,32,.85)'; g.font = 'bold 84px Arial'; g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillText(ch, 64, 70);
+  return (labelTex[ch] = new THREE.CanvasTexture(c));
+}
+function build3D() {
+  if (!R3) return;
+  finishAnim(true);
+  R3.root.clear(); R3.cubies = []; R3.stickers = new Map();
+  const [X, Y, Z] = pz.dims, range = n => { const r = []; for (let i = -(n - 1); i <= n - 1; i += 2) r.push(i); return r; };
+  const body = new THREE.BoxGeometry(1.96, 1.96, 1.96), bodyMat = new THREE.MeshStandardMaterial({ color: 0x14181d, roughness: 0.55 });
+  const sGeo = roundedSquare(1.74, 0.28), lGeo = new THREE.PlaneGeometry(1.2, 1.2);
+  for (const x of range(X)) for (const y of range(Y)) for (const z of range(Z)) {
+    const p = [x, y, z], out = [];
+    for (let a = 0; a < 3; a++) { const d = pz.dims[a]; if (p[a] === d - 1) { const n = [0, 0, 0]; n[a] = 1; out.push(n); } if (p[a] === -(d - 1)) { const n = [0, 0, 0]; n[a] = -1; out.push(n); } }
+    if (!out.length) continue;
+    const g = new THREE.Group(); g.position.set(x, y, z); g.userData.p = p;
+    const b = new THREE.Mesh(body, bodyMat); b.userData.cubie = g; g.add(b);
+    for (const n of out) {
+      const slot = pz.slotAt(p, n);
+      const m = new THREE.Mesh(sGeo, new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.35, emissive: 0x000000 }));
+      const nv = new THREE.Vector3(...n);
+      m.position.copy(nv.clone().multiplyScalar(0.985)); m.lookAt(nv.clone().multiplyScalar(5));
+      m.userData = { slot, cubie: g, n };
+      g.add(m); R3.stickers.set(slot, m);
+    }
+    R3.root.add(g); R3.cubies.push(g);
+  }
+  addLabels();
+  recolor();
+  fitCamera();
+}
+function addLabels() {
+  if (!R3) return;
+  R3.root.children.filter(o => o.userData.label).forEach(o => R3.root.remove(o));
+  if (!S.labels) return;
+  for (const f of 'UDLRFB') {
+    const n = E.normalOf(f), [a, s] = E.FACES[f], pos = [0, 0, 0]; pos[a] = s * (pz.dims[a] + 0.02);
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(1.4, 1.4), new THREE.MeshBasicMaterial({ map: letterTexture(f), transparent: true, depthWrite: false }));
+    const nv = new THREE.Vector3(...n); m.position.set(...pos); m.lookAt(nv.clone().multiplyScalar(50)); m.userData.label = true; m.renderOrder = 2;
+    R3.root.add(m);
+  }
+}
+function recolor() {
+  if (R3) for (const [slot, m] of R3.stickers) m.material.color.set(E.COLORS[pz.colors[slot]].hex);
+  afterChange();
+}
+// Distance at which the whole puzzle fits the view, on whichever side is narrower (tall phones in full screen).
+function fitDistance() {
+  const r = Math.hypot(...pz.dims) * 1.08, vf = R3.cam.fov * Math.PI / 360, hf = Math.atan(Math.tan(vf) * R3.cam.aspect);
+  return r / Math.sin(Math.min(vf, hf));
+}
+function fitCamera(back) {
+  if (!R3) return;
+  const big = Math.max(...pz.dims), d = fitDistance();
+  const v = new THREE.Vector3(0.95, 0.8, 1.25).normalize().multiplyScalar(d);
+  if (back) v.set(-v.x, v.y, -v.z);
+  R3.cam.position.copy(v); R3.cam.lookAt(0, 0, 0);
+  if (R3.controls) { R3.controls.target.set(0, 0, 0); R3.controls.minDistance = big * 2.2; R3.controls.maxDistance = Math.max(big * 12, d * 2); R3.controls.update(); }
+}
+function highlight(tok) {
+  if (!R3) return;
+  for (const m of R3.stickers.values()) m.material.emissive.setHex(0x000000);
+  if (!tok) return;
+  let mv; try { mv = pz.parse(tok); } catch (e) { return; }
+  if (!mv || /^[xyz]/.test(tok)) return;
+  const L = new Set(mv.layers);
+  for (const m of R3.stickers.values()) if (L.has(m.userData.cubie.userData.p[mv.axis])) m.material.emissive.setHex(0x3a2a00);
+}
+function speedMs() { const s = +$('p_speed').value; return [0, 700, 560, 450, 360, 290, 230, 180, 130, 90, 55][s]; }
+// Queue a move. src: user, scramble, solve, undo, redo, show.
+function queue(tok, src, opts) {
+  let mv; try { mv = pz.parse(tok); } catch (e) { toast(e.message); return false; }
+  if (!mv) return true;
+  Q.push({ tok, mv, src, fast: opts && opts.fast });
+  if (!R3) while (Q.length) { const j = Q.shift(); commit(j); }
+  return true;
+}
+function step(t) {
+  if (!R3) return;
+  if (!anim && Q.length) {
+    const j = Q.shift();
+    const L = new Set(j.mv.layers);
+    R3.pivot.rotation.set(0, 0, 0); R3.pivot.updateMatrixWorld();
+    for (const g of R3.cubies) if (L.has(g.userData.p[j.mv.axis])) R3.pivot.attach(g);
+    const ang = (j.mv.q === 3 ? -1 : j.mv.q) * Math.PI / 2;
+    const base = j.fast ? Math.min(90, speedMs()) : speedMs();
+    anim = { j, t0: t, dur: base * (j.mv.q === 2 ? 1.45 : 1), ang };
+  }
+  if (anim) {
+    const k = Math.min(1, (t - anim.t0) / anim.dur), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    R3.pivot.rotation.set(0, 0, 0); R3.pivot.rotation['xyz'[anim.j.mv.axis]] = anim.ang * e;
+    if (k >= 1) finishAnim();
+  }
+}
+function finishAnim(all) {
+  if (!R3) return;
+  if (anim) {
+    const j = anim.j; anim = null;
+    [...R3.pivot.children].forEach(g => { R3.root.add(g); g.position.set(...g.userData.p); g.rotation.set(0, 0, 0); });
+    R3.pivot.rotation.set(0, 0, 0);
+    commit(j);
+  }
+  if (all) while (Q.length) commit(Q.shift());
+}
+// Apply a finished move to the real state.
+function commit(j) {
+  pz.applyMove(j.mv);
+  if (j.src === 'undo') S.redo.push(j.tok);
+  else if (j.src !== 'scramble') { S.history.push(j.tok); if (j.src !== 'redo') S.redo = []; }
+  if (j.src === 'solve') S.helped = true;
+  if (j.src !== 'solve' && j.src !== 'show' && S.sol && !j.keepSol) { S.sol = null; S.playing = false; solveNote('You turned the cube, so the solution was cleared. Press <b>Solve my cube</b> again for a new one.'); }
+  const T = S.timer;
+  if (j.src === 'user' || j.src === 'undo' || j.src === 'redo' || j.src === 'solve') {
+    if (T.state === 'ready' && j.src === 'user') { T.state = 'running'; T.start = performance.now(); T.moves = 0; }
+    if (T.state === 'running') T.moves++;
+  }
+  recolor();
+}
+function flushAll() { finishAnim(true); }
+function instant(alg, src) {
+  flushAll();
+  for (const t of pz.tokens(alg)) { const mv = pz.parse(t); if (mv) commit({ tok: t, mv, src: src || 'show' }); }
+}
+
+// ------------------------------------------------------------------ drag to turn
+function setupPointer(el) {
+  let down = null;
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2();
+  const pick = e => {
+    const r = el.getBoundingClientRect(); ndc.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ndc, R3.cam);
+    const hit = ray.intersectObjects(R3.root.children, true).find(h => h.object.userData.cubie);
+    return hit;
+  };
+  el.addEventListener('pointerdown', e => {
+    if (!R3 || e.button > 0) return;
+    const hit = pick(e);
+    if (!hit) return;
+    // a turn, not a camera move
+    if (R3.controls) R3.controls.enabled = false;
+    const g = hit.object.userData.cubie;
+    let n = hit.object.userData.n;
+    if (!n) { const fn = hit.face.normal.clone().transformDirection(hit.object.matrixWorld); const a = [Math.abs(fn.x), Math.abs(fn.y), Math.abs(fn.z)]; const ai = a.indexOf(Math.max(...a)); n = [0, 0, 0]; n[ai] = Math.sign([fn.x, fn.y, fn.z][ai]); }
+    down = { x: e.clientX, y: e.clientY, g, n, point: hit.point.clone(), slot: hit.object.userData.slot, id: e.pointerId, used: false };
+    try { el.setPointerCapture(e.pointerId); } catch (err) {}
+  }, true);
+  el.addEventListener('pointermove', e => {
+    if (!down || down.used || e.pointerId !== down.id) return;
+    const dx = e.clientX - down.x, dy = e.clientY - down.y;
+    if (Math.hypot(dx, dy) < 14) return;
+    down.used = true;
+    const na = down.n.findIndex(v => v), proj = v => { const a = v.clone().project(R3.cam); return a; };
+    const p0 = proj(down.point);
+    let best = null;
+    for (let t = 0; t < 3; t++) {
+      if (t === na) continue;
+      const dir = [0, 0, 0]; dir[t] = 1;
+      const p1 = proj(down.point.clone().add(new THREE.Vector3(...dir)));
+      const sx = p1.x - p0.x, sy = -(p1.y - p0.y), len = Math.hypot(sx, sy) || 1;
+      const dot = (dx * sx + dy * sy) / len / Math.hypot(dx, dy);
+      if (!best || Math.abs(dot) > Math.abs(best.dot)) best = { t, dot };
+    }
+    const tv = [0, 0, 0]; tv[best.t] = Math.sign(best.dot);
+    const n = down.n, k = [n[1] * tv[2] - n[2] * tv[1], n[2] * tv[0] - n[0] * tv[2], n[0] * tv[1] - n[1] * tv[0]];
+    const axis = k.findIndex(v => v), sgn = k[axis];
+    let q = sgn > 0 ? 1 : 3;
+    if (!pz.canQuarter(axis)) q = 2;
+    const tok = moveToken(axis, down.g.userData.p[axis], q);
+    queue(tok, 'user');
+  });
+  const up = e => {
+    if (down && !down.used && S.paint >= 0 && down.slot !== undefined && Math.hypot(e.clientX - down.x, e.clientY - down.y) < 8) paintSlot(down.slot);
+    down = null; if (R3 && R3.controls) R3.controls.enabled = true;
+  };
+  el.addEventListener('pointerup', up); el.addEventListener('pointercancel', up);
+}
+// Notation for one layer turn.
+function moveToken(axis, coord, q) {
+  const d = pz.dims[axis], kPos = ((d - 1) - coord) / 2 + 1, kNeg = (coord + (d - 1)) / 2 + 1;
+  let face, k, cw;
+  if (d === 3 && coord === 0 && pz.isCube) { face = 'MES'[axis]; k = 1; cw = axis === 2 ? 3 : 1; }
+  else if (kPos <= kNeg) { face = 'RUF'[axis]; k = kPos; cw = 3; } else { face = 'LDB'[axis]; k = kNeg; cw = 1; }
+  return (k > 1 ? k : '') + face + (q === 2 ? '2' : q === cw ? '' : "'");
+}
+
+// ------------------------------------------------------------------ move pad
+function padToken(f, suf) {
+  const depth = +$('p_depth').value || 1, wide = $('p_wide').checked;
+  if ('xyzMES'.includes(f)) return f + suf;
+  if (depth === 1) return f + suf;
+  return (wide ? (depth === 2 ? '' : depth) + f + 'w' : depth + f) + suf;
+}
+function renderPad() {
+  const big = Math.max(...pz.dims);
+  let h = '';
+  for (const suf of ['', "'", '2']) for (const f of 'UDLRFB') {
+    const a = E.FACES[f][0], ok = suf === '2' || pz.canQuarter(a);
+    h += `<button data-f="${f}" data-s="${suf}" ${ok ? '' : 'disabled title="This side is not square, so it only turns halfway"'}>${f}${suf.replace("'", '′')}</button>`;
+  }
+  for (const f of 'xyz') for (const suf of pz.canQuarter('xyz'.indexOf(f)) ? ['', "'"] : ['2']) h += `<button class="rot" data-f="${f}" data-s="${suf}" title="Turn the whole cube">${f}${suf.replace("'", '′')}</button>`;
+  const odd = pz.isCube && pz.n % 2 === 1 && pz.n >= 3;
+  if (odd) for (const suf of ['', "'"]) for (const f of 'MES') h += `<button class="rot" data-f="${f}" data-s="${suf}" title="Middle slice">${f}${suf.replace("'", '′')}</button>`;
+  $('pad').innerHTML = h;
+  $('pad').querySelectorAll('button').forEach(b => b.onclick = () => queue(padToken(b.dataset.f, b.dataset.s), 'user'));
+  const maxDepth = Math.floor(big / 2);
+  $('depthOpts').classList.toggle('hidden', maxDepth < 2);
+  const cur = +$('p_depth').value || 1;
+  $('p_depth').innerHTML = Array.from({ length: Math.max(1, maxDepth) }, (_, i) => `<option value="${i + 1}">${i === 0 ? 'Outer layer' : 'Layer ' + (i + 1)}</option>`).join('');
+  $('p_depth').value = Math.min(cur, Math.max(1, maxDepth));
+}
+
+// ------------------------------------------------------------------ puzzle choice
+function setDims(d, keepColors) {
+  flushAll();
+  d = d.map(v => Math.max(1, Math.min(10, v | 0)));
+  if (Math.max(...d) < 2) d = [2, 2, 2];
+  const old = pz;
+  pz = new E.Puzzle(d);
+  if (keepColors && keepColors.length === pz.colors.length) pz.colors = Uint8Array.from(keepColors);
+  S.history = []; S.redo = []; S.sol = null; S.playing = false; S.scramble = ''; $('scrambleLine').textContent = ''; S.timer.state = 'idle'; S.helped = false;
+  build3D(); renderPad(); syncControls(); renderSolve(); renderLearn(); highlight(null); showCap(null);
+}
+function syncControls() {
+  const d = pz.dims;
+  $('o_n').textContent = dimsName(d);
+  if (pz.isCube) $('p_n').value = d[0];
+  ['p_x', 'p_y', 'p_z'].forEach((id, i) => $(id).value = d[i]);
+  document.querySelectorAll('#presets button').forEach(b => b.classList.toggle('active', b.dataset.d === d.join(',')));
+}
+function renderPresets() {
+  $('presets').innerHTML = PRESETS.map(p => `<button id="preset-${p.id}" data-d="${p.d.join(',')}"><b>${p.name}</b>${p.note}</button>`).join('');
+  $('presets').querySelectorAll('button').forEach(b => b.onclick = () => setDims(b.dataset.d.split(',').map(Number)));
+  const opts = Array.from({ length: 10 }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('');
+  ['p_x', 'p_y', 'p_z'].forEach(id => { $(id).innerHTML = opts; $(id).onchange = () => setDims(['p_x', 'p_y', 'p_z'].map(k => +$(k).value)); });
+  $('p_n').oninput = () => { const n = +$('p_n').value; $('o_n').textContent = dimsName([n, n, n]); };
+  $('p_n').onchange = () => { const n = +$('p_n').value; setDims([n, n, n]); };
+}
+
+// ------------------------------------------------------------------ status, timer
+let tickTimer = null;
+function fmt(ms) { const s = ms / 1000, m = Math.floor(s / 60); return m + ':' + (s - m * 60).toFixed(2).padStart(5, '0'); }
+function afterChange() {
+  const solved = pz.isSolved(), T = S.timer;
+  $('badge').textContent = solved ? 'Solved ✓' : 'Not solved';
+  $('badge').classList.toggle('ok', solved);
+  if (solved && T.state === 'running') {
+    T.state = 'done'; T.end = performance.now();
+    if (!S.helped) {
+      const times = ls.get('cubeForgeTimes', []);
+      times.unshift({ size: dimsName(pz.dims), ms: Math.round(T.end - T.start), moves: T.moves, at: Date.now() });
+      ls.set('cubeForgeTimes', times.slice(0, 200)); renderTimes();
+      $('timerNote').textContent = '🎉 Solved in ' + fmt(T.end - T.start) + ' with ' + T.moves + ' moves!';
+    } else $('timerNote').textContent = '🎉 Solved! (Not timed, because Solve with me helped.)';
+  }
+  if (T.state === 'running' && !tickTimer) tickTimer = setInterval(() => { if (S.timer.state !== 'running') { clearInterval(tickTimer); tickTimer = null; } paintClock(); }, 50);
+  paintClock();
+  $('lastMoves').textContent = S.history.length ? 'Moves: ' + S.history.slice(-40).join(' ') + (S.history.length > 40 ? ' …' : '') : '';
+  if (!$('vnet').classList.contains('hidden')) renderNet();
+  save();
+}
+function paintClock() {
+  const T = S.timer, ms = T.state === 'running' ? performance.now() - T.start : T.state === 'done' ? T.end - T.start : 0;
+  $('clock').textContent = fmt(ms);
+  $('moveCount').textContent = (T.state === 'running' || T.state === 'done' ? T.moves : 0) + ' moves';
+  if (T.state === 'running') $('timerNote').textContent = 'Timing… solve it!';
+}
+let saveT = null;
+function save() { clearTimeout(saveT); saveT = setTimeout(() => ls.set('cubeForgeState', { dims: pz.dims, colors: Array.from(pz.colors), labels: S.labels }), 300); }
+let toastT = null;
+function toast(msg) {
+  let t = $('cfToast');
+  if (!t) { t = document.createElement('div'); t.id = 'cfToast'; t.setAttribute('role', 'status'); t.style.cssText = 'position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#16202b;color:#fff;padding:10px 16px;border-radius:8px;z-index:50;font-size:14px;max-width:90vw;box-shadow:0 6px 20px rgba(0,0,0,.25)'; document.body.appendChild(t); }
+  t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 3800);
+}
+
+// ------------------------------------------------------------------ scramble, undo
+function doScramble() {
+  flushAll(); stopPlay();
+  pz.reset(); S.history = []; S.redo = [];
+  const scr = E.scramble(pz);
+  S.scramble = scr; S.sol = null; S.helped = false;
+  const toks = pz.tokens(scr);
+  if (toks.length <= 30 && R3) toks.forEach(t => queue(t, 'scramble', { fast: true }));
+  else instant(scr, 'scramble');
+  S.timer = { state: 'ready', start: 0, end: 0, moves: 0 };
+  $('timerNote').textContent = 'Scrambled — the timer starts on your first turn.';
+  $('scrambleLine').textContent = 'Scramble (' + toks.length + ' moves): ' + scr;
+  renderSolve();
+}
+function waitIdle() { return new Promise(res => { const c = () => (!anim && !Q.length) ? res() : setTimeout(c, 30); c(); }); }
+function undo() {
+  if (anim || Q.length) return;
+  const t = S.history.pop(); if (!t) return toast('Nothing to undo.');
+  queue(E.invert(t), 'undo');
+  // the undo move is recorded as redo of the original
+  Q[Q.length - 1].tok = t; Q[Q.length - 1].mv = pz.parse(E.invert(t));
+}
+function redo() {
+  if (anim || Q.length) return;
+  const t = S.redo.pop(); if (!t) return toast('Nothing to redo.');
+  queue(t, 'redo');
+}
+
+// ------------------------------------------------------------------ solve with me
+function solveNote(html) { $('solveOut').innerHTML = '<p class="okmsg">' + html + '</p>'; $('player').classList.add('hidden'); showCap(null); highlight(null); }
+function canSolve() { const d = pz.dims.join('x'); return d === '3x3x3' || d === '2x2x2'; }
+function computeSolution() {
+  flushAll(); stopPlay();
+  if (pz.isSolved()) { S.sol = null; solveNote('The cube is already solved. Press <b>🔀 Scramble</b> first, or paint the colours of your own cube.'); return null; }
+  if (!canSolve()) {
+    // Big cubes and cuboids: take every turn back.
+    const toks = pz.tokens(E.invert((S.scramble + ' ' + S.history.join(' ')).trim()));
+    const st = [{ id: 'rewind', title: 'Take back every turn', text: 'There is no step-by-step method in the solver for a ' + dimsName(pz.dims) + ' yet, so this plays every turn made since the cube was solved, backwards. To learn to solve it yourself, see the Learn tab.', parts: [{ note: 'Turn back', moves: E.simplify(toks) }] }];
+    if (!toks.length) { $('solveOut').innerHTML = '<p class="err">The turns that scrambled this cube are not known (it was painted or opened from a file), so it cannot be taken back. The step-by-step solver works on the 3×3 and 2×2.</p>'; return null; }
+    return loadSolution(st);
+  }
+  let res;
+  try { res = E.solve(pz); }
+  catch (e) { S.sol = null; $('solveOut').innerHTML = '<p class="err">' + esc(e.message) + '</p>'; $('player').classList.add('hidden'); return null; }
+  return loadSolution(res.stages);
+}
+function loadSolution(stages) {
+  const flat = [];
+  stages.forEach((s, si) => s.parts.forEach((p, pi) => p.moves.forEach(t => flat.push({ t, si, pi }))));
+  S.sol = { stages, flat, dims: pz.dims.join('x'), start: Array.from(pz.colors) };
+  S.solIdx = 0;
+  renderSolve();
+  return S.sol;
+}
+function renderSolve() {
+  const sol = S.sol;
+  $('solveBtn').textContent = canSolve() ? '🧭 Solve my cube' : '🧭 Take back my turns';
+  if (!sol) { $('player').classList.add('hidden'); if (!$('solveOut').innerHTML.includes('okmsg') && !$('solveOut').innerHTML.includes('err')) $('solveOut').innerHTML = ''; return; }
+  $('player').classList.remove('hidden');
+  let k = 0, h = '<p class="hint">' + sol.flat.length + ' moves in ' + sol.stages.length + ' steps. Tap a move to jump to it.</p>';
+  sol.stages.forEach((s, si) => {
+    const n = s.parts.reduce((a, p) => a + p.moves.length, 0);
+    h += `<div class="stage" id="stage-${si}"><h4>${si + 1}. ${esc(s.title)}<span>${n} move${n === 1 ? '' : 's'}</span></h4><p>${esc(s.text)}</p>`;
+    s.parts.forEach(p => { h += `<div class="part"><em>${esc(p.note)}</em>` + p.moves.map(t => `<span class="mv" data-i="${k++}">${esc(t)}</span>`).join(' ') + '</div>'; });
+    h += '</div>';
+  });
+  $('solveOut').innerHTML = h;
+  $('solveOut').querySelectorAll('.mv').forEach(el => el.onclick = () => jumpTo(+el.dataset.i));
+  markSolve();
+}
+function markSolve() {
+  const sol = S.sol; if (!sol) return;
+  const i = S.solIdx;
+  $('solveOut').querySelectorAll('.mv').forEach(el => { const j = +el.dataset.i; el.classList.toggle('done', j < i); el.classList.toggle('now', j === i); });
+  const cur = sol.flat[i];
+  $('solveOut').querySelectorAll('.stage').forEach((el, si) => el.classList.toggle('cur', cur ? cur.si === si : false));
+  $('solProgress').textContent = i >= sol.flat.length ? 'Done — solved!' : 'Move ' + (i + 1) + ' of ' + sol.flat.length;
+  $('playBtn').textContent = S.playing ? '⏸ Pause' : '▶ Play';
+  if (cur) { const st = sol.stages[cur.si], tr = x => (window.I18N && I18N.tr ? I18N.tr(x) : x); showCap(cur.t, tr('Step ' + (cur.si + 1)) + ' · ' + tr(st.title) + ' — ' + tr(st.parts[cur.pi].note)); highlight(cur.t); }
+  else { showCap(null); highlight(null); }
+}
+function showCap(tok, stepText) {
+  if (!tok) { $('cap').classList.add('hidden'); return; }
+  $('cap').classList.remove('hidden');
+  $('capMove').textContent = tok.replace("'", '′'); $('capStep').textContent = stepText || ''; $('capText').textContent = E.describe(tok);
+}
+function solValid() { return S.sol && S.sol.dims === pz.dims.join('x'); }
+function nextMove() {
+  if (!solValid() || anim || Q.length) return false;
+  const m = S.sol.flat[S.solIdx]; if (!m) { stopPlay(); return false; }
+  queue(m.t, 'solve'); S.solIdx++;
+  waitIdle().then(markSolve);
+  return true;
+}
+function prevMove() {
+  if (!solValid() || anim || Q.length || S.solIdx === 0) return;
+  stopPlay();
+  S.solIdx--; queue(E.invert(S.sol.flat[S.solIdx].t), 'solve');
+  waitIdle().then(markSolve);
+}
+function jumpTo(i) {
+  if (!solValid()) return;
+  stopPlay(); flushAll();
+  while (S.solIdx < i) { const m = S.sol.flat[S.solIdx++]; commit({ tok: m.t, mv: pz.parse(m.t), src: 'solve' }); }
+  while (S.solIdx > i) { const m = S.sol.flat[--S.solIdx]; const t = E.invert(m.t); commit({ tok: t, mv: pz.parse(t), src: 'solve' }); }
+  markSolve();
+}
+function play(untilStage) {
+  if (!solValid()) return;
+  S.playing = true; markSolve();
+  const stage = untilStage ? (S.sol.flat[S.solIdx] || {}).si : null;
+  const go = () => {
+    if (!S.playing || !S.sol) return;
+    const m = S.sol.flat[S.solIdx];
+    if (!m || (stage != null && m.si !== stage)) { stopPlay(); return; }
+    nextMove(); waitIdle().then(() => setTimeout(go, Math.max(40, speedMs() * 0.6)));
+  };
+  go();
+}
+function stopPlay() { S.playing = false; if (S.sol) markSolve(); }
+function hint() {
+  if (pz.isSolved()) return toast('It is solved already!');
+  if (!canSolve()) return toast('Hints work on the 3×3 and 2×2. See the Learn tab for big cubes.');
+  try {
+    const r = E.solve(pz), st = r.stages.find(s => s.parts.length) || r.stages[0], p = st.parts[0];
+    $('solveOut').innerHTML = `<div class="stage cur"><h4>Next: ${esc(st.title)}</h4><p>${esc(st.text)}</p><div class="part"><em>${esc(p.note)}</em>${p.moves.map(t => `<span class="mv">${esc(t)}</span>`).join(' ')}</div></div>`;
+    $('player').classList.add('hidden');
+  } catch (e) { $('solveOut').innerHTML = '<p class="err">' + esc(e.message) + '</p>'; }
+}
+
+// ------------------------------------------------------------------ lessons
+const BEGINNER = [
+  ['cross', '1. White cross', 'Hold the cube with the white centre at the bottom. Find a white edge (a piece with two stickers, one of them white), and bring it down next to the white centre so its other colour matches the centre beside it. Do this for all four white edges. There is no algorithm: turn the sides until it fits — usually 1 to 4 moves per edge. If an edge sits upside down, turn it out of the bottom and bring it in again.', []],
+  ['corners', '2. White corners', 'Find a corner with white on it in the top layer. Turn the top (U) until it sits right above the spot where it belongs (between the two centres of its other colours), and turn the whole cube so that spot is at the front right. Then repeat the “sexy move” until the corner drops in with white at the bottom — 1, 3 or 5 times. A white corner stuck in the wrong spot at the bottom comes out with the same move once.', ["R U R' U'"]],
+  ['middle', '3. Middle layer', 'Turn the cube so white stays at the bottom. Find an edge in the top layer without yellow. Turn the top until its front colour matches the centre below it, so it makes an upside-down T. If the top colour of that edge matches the right centre, send it right; if it matches the left centre, send it left. An edge stuck in the wrong middle spot comes out with either algorithm.', ["U R U' R' U' F' U F", "U' L' U L U F U' F'"]],
+  ['ycross', '4. Yellow cross', 'Now yellow is on top. Look only at the yellow edges on top (ignore the corners). You see a dot, an L or a line. Hold the L at the back and left, or the line from left to right, and do the algorithm. Dot → L → line → cross.', ["F R U R' U' F'"]],
+  ['yedges', '5. Yellow edges', 'Turn the top until two edges match their side centres. If the two matching edges are next to each other, hold them at the back and the right and do the algorithm. If they are opposite each other, do the algorithm once from anywhere, then try again. Finish with U turns.', ["R U R' U R U2 R'"]],
+  ['cpos', '6. Yellow corners in place', 'Look for a corner whose three colours match the three centres around it — it may still be twisted. Hold it at the front right and do the algorithm one or two times until every corner is in its spot. If no corner is in place, do the algorithm once from anywhere first.', ["U R U' L' U R' U' L"]],
+  ['corient', '7. Twist the yellow corners', 'Hold the cube with an unfinished corner at the front right. Repeat R′ D′ R D until its yellow sticker is on top (2 or 4 times). The bottom gets messed up — don’t worry, and don’t turn the whole cube now. Turn only the top (U) to bring the next unfinished corner to the front right and repeat. When all are yellow on top, turn the top to finish. Solved!', ["R' D' R D"]]
+];
+const TWO = [
+  ['corners', '1. White layer', 'A 2×2 is a 3×3 with only corners. Pick a white corner and put it at the bottom. Then add the other three white corners next to it with the same move as step 2 of the 3×3, matching the colours with the corners you already have (there are no centres).', ["R U R' U'"]],
+  ['cpos', '2. Yellow corners in place', 'Turn the top until at least one corner is in its spot, hold it at the front right and do the algorithm until all four are in place.', ["U R U' L' U R' U' L"]],
+  ['corient', '3. Twist the yellow corners', 'Exactly like the 3×3: repeat R′ D′ R D on the front-right corner until yellow is on top, then turn only the top to the next corner. Finish by turning the top.', ["R' D' R D"]]
+];
+const NOTATION = [['R', 'Right side up'], ["R'", 'Right side down (′ = the other way)'], ['R2', 'Right side half a turn'], ['L', 'Left side down'], ['U', 'Top to the left'], ["U'", 'Top to the right'], ['D', 'Bottom to the right'], ['F', 'Front clockwise'], ['B', 'Back (clockwise seen from behind)'], ['M', 'Middle slice, like L'], ['E', 'Middle slice, like D'], ['S', 'Middle slice, like F'], ['x', 'Whole cube, like R'], ['y', 'Whole cube, like U'], ['z', 'Whole cube, like F'], ['Rw', 'Right two layers (wide)'], ['2R', 'Only the 2nd layer from the right'], ['3Rw', 'Right three layers']];
+function chip(a) { return `<button class="alg" data-alg="${esc(a)}" title="Play on the cube">${esc(a)}</button>`; }
+function fmtBig(n) {
+  const s = n.toString(); if (s.length < 7) return Number(n).toLocaleString('en');
+  const words = [[6, 'million'], [9, 'billion'], [12, 'trillion'], [15, 'quadrillion'], [18, 'quintillion'], [21, 'sextillion'], [24, 'septillion'], [27, 'octillion']];
+  const w = words.filter(x => s.length > x[0]).pop();
+  if (s.length <= 30 && w) return 'about ' + (+(s.slice(0, s.length - w[0]) + '.' + s.slice(s.length - w[0], s.length - w[0] + 1))).toLocaleString('en') + ' ' + w[1];
+  return 'about ' + s[0] + '.' + s.slice(1, 3) + ' × 10^' + (s.length - 1);
+}
+function renderLearn() {
+  const d = pz.dims, pc = E.pieceCount(d);
+  let facts = `<div class="facts"><div><b>${pc.total}</b><span>pieces you can see</span></div><div><b>${pc.corners}</b><span>corners (3 colours)</span></div><div><b>${pc.edges}</b><span>edges (2 colours)</span></div><div><b>${pc.centres}</b><span>centres (1 colour)</span></div><div><b>${pz.slots.length}</b><span>stickers</span></div></div>`;
+  if (pz.isCube) { const n = E.positions(d[0]); facts += `<p>Ways to scramble a ${dimsName(d)}: <b>${fmtBig(n)}</b></p><div class="bignum">${n.toLocaleString('en')}</div><p class="hint">Even so, any 3×3 can be solved in 20 moves or fewer (“God’s number”, proved in 2010). The beginner method takes more moves but is easy to remember.</p>`; }
+  const steps = (list, size) => list.map(([id, t, txt, algs]) => `<div class="step"><h5>${esc(t)}</h5><p>${esc(txt)}</p>${algs.map(chip).join(' ')}<div><button class="showme" data-show="${id}" data-size="${size}" id="show${size}-${id}">▶ Show me on a scrambled ${size}×${size}</button></div></div>`).join('');
+  $('vlearn').innerHTML = `
+  <details class="lesson" open><summary>🧊 This puzzle: ${dimsName(d)}</summary><div class="body">
+    <p>Pieces never change type: a <b>corner</b> stays a corner and an <b>edge</b> stays an edge. ${pz.isCube && d[0] % 2 ? 'On an odd cube the <b>centre</b> pieces never move, so the centre tells you the colour of each side.' : 'On an even cube there is no fixed centre, so you decide which colour goes where from the pieces you have already solved.'}</p>${facts}
+  </div></details>
+  <details class="lesson"><summary>🔤 Notation: how moves are written</summary><div class="body">
+    <p>Each letter is a side seen from the front: <b>U</b>p, <b>D</b>own, <b>L</b>eft, <b>R</b>ight, <b>F</b>ront, <b>B</b>ack. A letter alone is a quarter turn <b>clockwise</b>, as if you were looking straight at that side. A <b>′</b> (prime) means anticlockwise and a <b>2</b> means half a turn. Tap one to see it — press ↶ Undo to take it back.</p>
+    <div class="notgrid">${NOTATION.map(([m, t]) => `<button data-alg="${esc(m)}"><b>${esc(m)}</b>${esc(t)}</button>`).join('')}</div>
+    <p>An <b>algorithm</b> is a short list of moves that does one useful job, like moving a piece without breaking what you have built. You learn them by doing them many times: say them out loud, “R up, U left, R down, U right”.</p>
+  </div></details>
+  <details class="lesson"${d.join() === '3,3,3' ? ' open' : ''}><summary>🟨 Solve the 3×3: the beginner method in 7 steps</summary><div class="body">
+    <p>Layer by layer: first the white layer at the bottom, then the middle, then the yellow top. Every step has a “Show me” button: it scrambles a cube, does the earlier steps for you, and then plays this step slowly with every move explained.</p>
+    ${steps(BEGINNER, 3)}
+  </div></details>
+  <details class="lesson"${d.join() === '2,2,2' ? ' open' : ''}><summary>🟩 Solve the 2×2 in 3 steps</summary><div class="body">${steps(TWO, 2)}</div></details>
+  <details class="lesson"${pz.isCube && d[0] >= 4 ? ' open' : ''}><summary>🟦 Big cubes (4×4 and up): reduction</summary><div class="body">
+    <p>Make the big cube act like a 3×3, then solve it with the 3×3 method.</p>
+    <div class="step"><h5>1. Centres</h5><p>Build the white centre (all the inner stickers of one side), then the yellow centre opposite it, then the four side centres in the right order: going round, green, red, blue, orange with white at the bottom. Use inner-layer moves like <b>2R</b> and <b>Rw</b> to move centre pieces without breaking the centres you finished. Use the Layer choice in “Turn it” for these moves.</p>${chip("Rw U Rw'")} ${chip("2R U 2R'")}</div>
+    <div class="step"><h5>2. Pair the edges</h5><p>Each edge of a 3×3 is made of ${Math.max(1, (pz.isCube ? pz.n : 4) - 2)} pieces on this cube. Find two matching edge pieces, put them on the left and right of the front, turn an inner layer (Uw) to line them up, swap in an unpaired edge with the flip move, then turn the inner layer back.</p>${chip("Uw' R U R' F R' F' R Uw")}</div>
+    <div class="step"><h5>3. Solve it like a 3×3</h5><p>Treat the centres as one big centre and each paired edge as one edge, and use the 7 steps above with outer-layer moves only.</p></div>
+    <div class="step"><h5>4. Parity (even cubes)</h5><p>Sometimes a 4×4 ends with something a 3×3 can never have: one edge flipped on its own (<b>OLL parity</b>) or two edges swapped (<b>PLL parity</b>). These algorithms fix them — the first flips the front-top edge, the second swaps the front and back top edges.</p>${chip("2R U2 2R U2 2R' U2 2R U2 2L' U2 2R U2 2R' U2 2L 2R2 U2 2R'")}<br>${chip("2R2 U2 2R2 Uw2 2R2 Uw2 U2")}<div><button class="showme" id="show4-oll" data-par="oll">▶ Show the flipped-edge fix on a 4×4</button> <button class="showme" id="show4-pll" data-par="pll">▶ Show the swapped-edges fix on a 4×4</button></div></div>
+  </div></details>
+  <details class="lesson"${!pz.isCube ? ' open' : ''}><summary>🧱 Cuboids (3×3×2, 2×2×3, 3×3×1…)</summary><div class="body">
+    <p>On a cuboid only the square sides make quarter turns; the others only turn halfway (R2, F2). A <b>3×3×2</b> (domino) is solved like the top and bottom of a 3×3: put the pieces of one side together with U and D turns, then use half turns to swap pieces between the layers. A <b>3×3×1</b> (floppy) has only half turns on the sides, so practise moving pieces with R2, L2, F2 and B2. A <b>2×2×3</b> tower is solved by first matching the top and bottom like a 2×2, then fixing the middle layer with half turns.</p>
+    <p>${!pz.isCube ? 'Your puzzle now: ' + dimsName(d) + '. Disabled buttons in “Turn it” are the turns this shape cannot make.' : 'Pick one in “Choose the puzzle” to try it.'}</p>
+  </div></details>
+  <details class="lesson"><summary>💡 Tips to get faster</summary><div class="body">
+    <ul><li>Learn one step at a time. Use “Show me”, then do the step on your own cube until you can do it without looking.</li><li>Turn the top (U) with your index fingers instead of moving your whole hand.</li><li>Look ahead: while you do one piece, find the next one.</li><li>Use ⏱ Times to see your progress. Most people get under 2 minutes with the beginner method after a few weeks.</li><li>Next level: the CFOP method — the cross, then corner and edge together (F2L), then 2-look OLL and PLL.</li></ul>
+  </div></details>`;
+  $('vlearn').querySelectorAll('[data-alg]').forEach(b => b.onclick = () => playAlg(b.dataset.alg));
+  $('vlearn').querySelectorAll('.showme[data-show]').forEach(b => b.onclick = () => showMe(+b.dataset.size, b.dataset.show));
+  $('vlearn').querySelectorAll('.showme[data-par]').forEach(b => b.onclick = () => showParity(b.dataset.par));
+}
+function playAlg(alg) {
+  let toks;
+  try { toks = pz.tokens(alg); toks.forEach(t => pz.parse(t)); } catch (e) { toast(e.message + ' on this ' + dimsName(pz.dims) + '.'); return; }
+  toks.forEach(t => queue(t, 'user'));
+  toView();
+}
+function toView() { const r = $('view3d').getBoundingClientRect(); if (r.bottom < 60 || r.top > innerHeight - 120) $('view3d').scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+function showMe(size, id) {
+  if (pz.dims.join() !== [size, size, size].join()) setDims([size, size, size]);
+  flushAll(); stopPlay();
+  pz.reset();
+  let res = null;
+  for (let tries = 0; tries < 30; tries++) {
+    const t = pz.clone(); t.reset(); t.apply(E.scramble(t));
+    try { const r = E.solve(t); const si = r.stages.findIndex(s => s.id === id); if (si >= 0 && r.stages[si].parts.length) { res = { t, r, si }; break; } } catch (e) {}
+  }
+  if (!res) return toast('Could not set up that step — try again.');
+  pz.colors = res.t.colors.slice(); S.history = []; S.redo = []; S.scramble = ''; S.timer.state = 'idle';
+  recolor();
+  const before = res.r.stages.slice(0, res.si).flatMap(s => s.parts.flatMap(p => p.moves));
+  instant(before.join(' '), 'show');
+  S.history = [];
+  // load the remaining steps into the player and play this one
+  loadSolution(res.r.stages.slice(res.si));
+  switchView('vsolve');
+  toView();
+  play(true);
+}
+function showParity(kind) {
+  if (pz.dims.join() !== '4,4,4') setDims([4, 4, 4]);
+  flushAll(); stopPlay(); pz.reset(); S.history = []; recolor();
+  const alg = kind === 'oll' ? "2R U2 2R U2 2R' U2 2R U2 2L' U2 2R U2 2R' U2 2L 2R2 U2 2R'" : '2R2 U2 2R2 Uw2 2R2 Uw2 U2';
+  // start from the parity case, then fix it
+  instant(E.invert(alg), 'show');
+  loadSolution([{ id: kind, title: kind === 'oll' ? 'Flipped edge (OLL parity)' : 'Swapped edges (PLL parity)', text: kind === 'oll' ? 'One edge on top is flipped on its own. Hold it at the front and do the algorithm. Inner-layer moves (2R, 2L) turn only the second layer.' : 'The front and back edges on top are swapped. Do the algorithm with the swapped edges at the front and back.', parts: [{ note: 'Do the parity algorithm', moves: pz.tokens(alg) }] }]);
+  switchView('vsolve'); toView(); play(true);
+}
+
+// ------------------------------------------------------------------ flat view & paint
+function renderPalette() {
+  $('palette').innerHTML = '<button class="off" id="paintOff">✋ Just look</button>' + E.COLORS.map((c, i) => `<button data-c="${i}" id="paint-${c.name}" title="Paint ${c.name}" style="background:${c.hex}"></button>`).join('');
+  $('palette').querySelectorAll('button').forEach(b => b.onclick = () => { S.paint = b.dataset.c === undefined ? -1 : +b.dataset.c; markPalette(); });
+  markPalette();
+}
+function markPalette() { $('palette').querySelectorAll('button').forEach(b => b.classList.toggle('active', (b.dataset.c === undefined ? -1 : +b.dataset.c) === S.paint)); }
+function paintSlot(slot) {
+  if (S.paint < 0) return;
+  flushAll();
+  pz.colors[slot] = S.paint; S.history = []; S.redo = []; S.scramble = '';
+  if (S.sol) { S.sol = null; $('solveOut').innerHTML = ''; $('player').classList.add('hidden'); showCap(null); highlight(null); }
+  recolor(); renderNet();
+}
+function netSVG(interactive, colors) {
+  colors = colors || pz.colors;
+  const [X, Y, Z] = pz.dims, cell = 22, gap = 6;
+  const cols = [Z, X, Z, X], rowsH = [Z, Y, Z];
+  const colX = [0]; for (let i = 0; i < 4; i++) colX.push(colX[i] + cols[i] * cell + gap);
+  const rowY = [0]; for (let i = 0; i < 3; i++) rowY.push(rowY[i] + rowsH[i] * cell + gap);
+  const place = { U: [1, 0], L: [0, 1], F: [1, 1], R: [2, 1], B: [3, 1], D: [1, 2] };
+  let s = '';
+  for (const f of 'ULFRBD') {
+    const [c, r] = place[f], grid = pz.faceGrid(f);
+    grid.forEach((row, ri) => row.forEach((slot, ci) => {
+      s += `<rect class="${interactive ? 'st' : ''}" data-slot="${slot}" x="${colX[c] + ci * cell + 1}" y="${rowY[r] + ri * cell + 1}" width="${cell - 2}" height="${cell - 2}" rx="3" fill="${E.COLORS[colors[slot]].hex}" stroke="#16202b" stroke-width="1"/>`;
+    }));
+    const cx = colX[c] + grid[0].length * cell / 2, cy = rowY[r] + grid.length * cell / 2;
+    s += `<text x="${cx}" y="${cy + 5}" text-anchor="middle" font-family="Arial" font-weight="700" font-size="14" fill="rgba(0,0,0,.55)" pointer-events="none">${f}</text>`;
+  }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 ${colX[4] + 4} ${rowY[3] + 4}">${s}</svg>`;
+}
+function renderNet() {
+  $('netBox').innerHTML = netSVG(true);
+  $('netBox').querySelectorAll('rect.st').forEach(r => r.onclick = () => { if (S.paint < 0) return toast('Pick a colour above first.'); paintSlot(+r.dataset.slot); });
+  const msg = canSolve() ? E.checkColours(pz) : '';
+  $('paintMsg').innerHTML = msg ? '<p class="err">' + esc(msg) + '</p>' : canSolve() ? '<p class="okmsg">Colour count is right. Press <b>Solve these colours</b> to check the pieces and get a solution.</p>' : '';
+}
+
+// ------------------------------------------------------------------ times
+function renderTimes() {
+  const times = ls.get('cubeForgeTimes', []);
+  if (!times.length) { $('timesBox').innerHTML = '<p class="hint">No timed solves yet.</p>'; return; }
+  const by = {}; times.forEach(t => (by[t.size] = by[t.size] || []).push(t));
+  let h = '<table class="t"><tr><th>Puzzle</th><th>Best</th><th>Average of last 5</th><th>Solves</th></tr>';
+  for (const [k, list] of Object.entries(by)) { const best = Math.min(...list.map(t => t.ms)), last = list.slice(0, 5); h += `<tr><td>${esc(k)}</td><td>${fmt(best)}</td><td>${last.length >= 5 ? fmt(last.reduce((a, t) => a + t.ms, 0) / 5) : '—'}</td><td>${list.length}</td></tr>`; }
+  h += '</table><h3 style="margin-top:12px">Recent</h3><table class="t"><tr><th>When</th><th>Puzzle</th><th>Time</th><th>Moves</th></tr>' + times.slice(0, 20).map(t => `<tr><td>${new Date(t.at).toLocaleString()}</td><td>${esc(t.size)}</td><td>${fmt(t.ms)}</td><td>${t.moves}</td></tr>`).join('') + '</table>';
+  $('timesBox').innerHTML = h;
+}
+
+// ------------------------------------------------------------------ files
+function download(name, data, type) { const b = data instanceof Blob ? data : new Blob([data], { type: type || 'text/plain' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1500); }
+const slug = () => 'cube-' + pz.dims.join('x');
+function stickerString(colors) { return Array.from(colors || pz.colors, v => E.COLORS[v].key).join(''); }
+function solutionText() {
+  const sol = S.sol;
+  const lines = ['Cube Forge — solution for your ' + dimsName(pz.dims), 'Made with Cube Forge on migabuilder.com', ''];
+  lines.push('How to hold it: white centre at the bottom, green in front (unless step 1 says to turn it).');
+  lines.push('Notation: R = right side up, U = top to the left, F = front clockwise, ′ = the other way, 2 = half a turn, y = turn the whole cube so the right side comes to the front.', '');
+  lines.push('Stickers (U L F R B D faces, top row first): ' + ['U', 'L', 'F', 'R', 'B', 'D'].map(f => f + ':' + pz.faceGrid(f).map(r => r.map(s => E.COLORS[sol.start[s]].key).join('')).join('/')).join(' '), '');
+  sol.stages.forEach((s, i) => {
+    lines.push('Step ' + (i + 1) + ' · ' + s.title);
+    lines.push('  ' + s.text);
+    s.parts.forEach(p => lines.push('  - ' + p.note + ': ' + p.moves.join(' ')));
+    lines.push('');
+  });
+  lines.push('Total: ' + sol.flat.length + ' moves');
+  lines.push('All moves: ' + sol.flat.map(m => m.t).join(' '));
+  return lines.join('\r\n') + '\r\n';
+}
+$('dlSolution').onclick = () => {
+  if (!S.sol) computeSolution();
+  if (!S.sol) return toast('Scramble or paint the cube first, then there is a solution to download.');
+  download(slug() + '-solution.txt', '﻿' + solutionText(), 'text/plain');
+};
+$('dlPNG').onclick = () => { if (!R3) return toast('The picture needs the 3D view.'); R3.renderer.render(R3.scene, R3.cam); R3.renderer.domElement.toBlob(b => download(slug() + '.png', b), 'image/png'); };
+$('printBtn').onclick = () => {
+  const w = window.open('', '_blank'); if (!w) return toast('Allow pop-ups to print the guide.');
+  const sol = S.sol;
+  const steps = (pz.dims.join() === '2,2,2' ? TWO : BEGINNER).map(([, t, txt, algs]) => `<h3>${esc(t)}</h3><p>${esc(txt)}</p>${algs.length ? '<p class="a">' + algs.map(esc).join(' &nbsp;·&nbsp; ') + '</p>' : ''}`).join('');
+  w.document.write('<!doctype html><title>Cube Forge — solving guide</title><style>body{font:13px Arial;margin:24px;color:#16202b;max-width:800px}h1{font-size:22px}h3{margin:14px 0 4px}.a{font:bold 15px monospace;background:#f1efe8;padding:6px}svg{max-width:420px;display:block}.m{font:12px monospace}</style>' +
+    '<h1>Cube Forge — how to solve the ' + (pz.dims.join() === '2,2,2' ? '2×2' : '3×3') + '</h1><p><b>Notation:</b> R right side up · R′ right side down · U top to the left · U′ top to the right · F front clockwise · D bottom to the right · L left side down · 2 = half a turn · y = turn the whole cube so the right side comes to the front.</p>' + steps +
+    (sol ? '<h2>Your cube</h2>' + netSVG(false, sol.start) + '<h2>Your solution (' + sol.flat.length + ' moves)</h2>' + sol.stages.map((s, i) => '<h3>' + (i + 1) + '. ' + esc(s.title) + '</h3>' + s.parts.map(p => '<p>' + esc(p.note) + ': <span class="m">' + esc(p.moves.join(' ')) + '</span></p>').join('')).join('') : '') +
+    '<p>Made with Cube Forge — migabuilder.com</p>');
+  w.document.close(); setTimeout(() => w.print(), 400);
+};
+$('saveJson').onclick = () => download(slug() + '.cube.json', JSON.stringify({ app: 'MigaBuilder Cube Forge', version: 1, dims: pz.dims, stickers: stickerString() }, null, 1), 'application/json');
+$('openJson').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try {
+    const d = JSON.parse(await f.text());
+    if (!Array.isArray(d.dims) || typeof d.stickers !== 'string') throw new Error('not a Cube Forge file');
+    const keys = E.COLORS.map(c => c.key), cols = Array.from(d.stickers, ch => keys.indexOf(ch));
+    if (cols.some(v => v < 0)) throw new Error('unknown colour in the file');
+    setDims(d.dims, cols);
+    if (pz.colors.length !== cols.length) throw new Error('the sticker count does not match the size');
+    recolor(); toast('Opened ' + dimsName(pz.dims) + '.');
+  } catch (err) { toast('Could not open the file: ' + err.message); }
+};
+
+// ------------------------------------------------------------------ wiring
+function switchView(v) {
+  document.querySelectorAll('.viewtabs button').forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  document.querySelectorAll('.view').forEach(el => el.classList.toggle('hidden', el.id !== v));
+  if (v === 'vnet') renderNet();
+  if (v === 'vtimes') renderTimes();
+}
+document.querySelectorAll('.viewtabs button').forEach(b => b.onclick = () => switchView(b.dataset.view));
+$('scrambleBtn').onclick = doScramble;
+$('resetBtn').onclick = () => { flushAll(); $('scrambleLine').textContent = ''; stopPlay(); pz.reset(); S.history = []; S.redo = []; S.scramble = ''; S.sol = null; S.timer.state = 'idle'; $('timerNote').textContent = 'Press 🔀 Scramble, then the timer starts on your first turn.'; renderSolve(); $('solveOut').innerHTML = ''; showCap(null); highlight(null); recolor(); };
+$('undoBtn').onclick = undo; $('redoBtn').onclick = redo;
+$('algPlay').onclick = () => playAlg($('algInput').value);
+$('algInput').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); playAlg($('algInput').value); } };
+$('p_speed').oninput = () => $('o_speed').textContent = $('p_speed').value;
+$('p_depth').onchange = $('p_wide').onchange = () => renderPad();
+$('solveBtn').onclick = () => { if (computeSolution()) { toView(); } };
+$('netSolve').onclick = () => { switchView('vsolve'); if (computeSolution()) toView(); };
+$('netSolved').onclick = () => { flushAll(); pz.reset(); S.history = []; S.scramble = ''; recolor(); renderNet(); };
+$('hintBtn').onclick = hint;
+$('nextBtn').onclick = () => { stopPlay(); nextMove(); };
+$('prevBtn').onclick = prevMove;
+$('playBtn').onclick = () => S.playing ? stopPlay() : play(false);
+$('stageBtn').onclick = () => play(true);
+$('camReset').onclick = () => fitCamera(false);
+$('camBack').onclick = () => fitCamera(true);
+$('labelsBtn').onclick = () => { S.labels = !S.labels; $('labelsBtn').textContent = S.labels ? 'Hide letters' : 'Show letters'; addLabels(); save(); };
+$('clearTimes').onclick = () => { if (confirm('Delete all your times?')) { ls.set('cubeForgeTimes', []); renderTimes(); } };
+document.addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('input,textarea,select,[contenteditable]')) return;
+  if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); return; }
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.length === 1 ? e.key.toUpperCase() : '';
+  if (!k || !'UDLRFBMESXYZ'.includes(k)) return;
+  const f = 'XYZ'.includes(k) ? k.toLowerCase() : k;
+  if ('MES'.includes(f) && !(pz.isCube && pz.n % 2 && pz.n >= 3)) return;
+  const a = 'xyz'.includes(f) ? 'xyz'.indexOf(f) : 'MES'.includes(f) ? 'MES'.indexOf(f) : E.FACES[f][0];
+  const suf = !pz.canQuarter(a) ? '2' : e.shiftKey ? "'" : '';
+  e.preventDefault();
+  queue(padToken(f, suf), 'user');
+});
+
+// ------------------------------------------------------------------ start
+renderPresets(); renderPalette(); init3D();
+const saved = ls.get('cubeForgeState', null);
+S.labels = !!(saved && saved.labels); $('labelsBtn').textContent = S.labels ? 'Hide letters' : 'Show letters';
+if (saved && Array.isArray(saved.dims) && Array.isArray(saved.colors) && saved.colors.every(v => v >= 0 && v < 6)) setDims(saved.dims, saved.colors); else setDims([3, 3, 3]);
+renderTimes();
+window.CubeForge = {
+  get pz() { return pz; }, get S() { return S; }, get R3() { return R3; }, E,
+  instant, waitIdle, setDims, computeSolution, isSolved: () => pz.isSolved(),
+  stickers: () => stickerString(), solutionText: () => S.sol && solutionText()
+};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

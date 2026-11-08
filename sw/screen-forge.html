@@ -1,0 +1,1504 @@
+<!-- Generated from /screen-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sw" data-en-title="Help someone by watching their screen live — Screen Share Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sw';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/sw/screen-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Msaidie mtu kwa kutazama skrini yake moja kwa moja — Screen Share Forge | MigaBuilder</title>
+<meta name="description" content="Screen Share Forge hutoa msaada wa moja kwa moja wa mbali: tuma kiungo, pata msimbo, tazama skrini ya mtu mwingine na uzungumze unapomsaidia.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Msaidie mtu kwa kutazama skrini yake moja kwa moja — Screen Share Forge">
+<meta property="og:description" content="Screen Share Forge hutoa msaada wa moja kwa moja wa mbali: tuma kiungo, pata msimbo, tazama skrini ya mtu mwingine na uzungumze unapomsaidia.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/screen-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/sw/screen-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Msaidie mtu kwa kutazama skrini yake moja kwa moja — Screen Share Forge">
+<meta name="twitter:description" content="Screen Share Forge hutoa msaada wa moja kwa moja wa mbali: tuma kiungo, pata msimbo, tazama skrini ya mtu mwingine na uzungumze unapomsaidia.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/screen-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/screen-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .wrap { max-width: 620px; margin: 0 auto; padding: 28px clamp(20px, 4vw, 48px) 56px; }
+
+  .view { display: none; }
+  .view.active { display: block; }
+
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 24px 24px 28px; }
+  .panel h2 { font-family: 'Space Grotesk', sans-serif; font-size: 18px; margin: 0 0 14px; }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin: 6px 0 0; line-height: 1.5; }
+
+  input[type="text"] {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  .key-row { display: flex; gap: 8px; }
+  .key-row input { flex: 1; }
+  .key-row button {
+    background: #fff; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius);
+    padding: 0 14px; font-size: 13px; cursor: pointer; color: var(--ink);
+  }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 13px; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .draft-btn.danger { background: var(--error); color: #fff; }
+
+  .check-row { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; margin: 12px 0; }
+  .check-row input { margin-top: 3px; flex: none; width: auto; }
+  .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-row button { flex: 1; }
+
+  .code-display {
+    font-family: 'IBM Plex Mono', monospace; font-size: 32px; font-weight: 700; letter-spacing: 0.15em;
+    text-align: center; background: #fff; border: 1px solid rgba(22, 32, 43, 0.2); border-radius: var(--radius);
+    padding: 16px; margin: 12px 0;
+  }
+
+  .qr-wrap { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 14px 0; }
+  .qr-wrap > div { padding: 10px; background: #fff; border-radius: var(--radius); line-height: 0; }
+  .qr-wrap span { font-size: 12px; color: rgba(22, 32, 43, 0.72); }
+  .expiry-hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); text-align: center; margin: 0 0 12px; }
+  .expiry-hint.expiring { color: var(--error); font-weight: 600; }
+
+  .status-line { font-size: 13.5px; color: rgba(22, 32, 43, 0.75); margin: 12px 0; min-height: 1.4em; }
+
+  .video-frame { background: #000; border-radius: 4px; overflow: hidden; margin: 14px 0; position: relative; }
+  .video-frame video { width: 100%; display: block; max-height: 50vh; }
+  .video-frame .play-overlay {
+    position: absolute; inset: 0; background: rgba(0,0,0,0.55); color: #fff; border: none;
+    font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .pointer-dot {
+    position: absolute; width: 18px; height: 18px; border-radius: 50%; background: rgba(216, 96, 74, 0.85);
+    box-shadow: 0 0 0 5px rgba(216, 96, 74, 0.3); transform: translate(-50%, -50%); pointer-events: none;
+  }
+
+  .chat-box { margin-top: 14px; border: 1px solid rgba(22, 32, 43, 0.18); border-radius: var(--radius); background: #fff; display: flex; flex-direction: column; }
+  .chat-messages { max-height: 180px; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; }
+  .chat-msg { max-width: 82%; padding: 6px 10px; border-radius: 10px; background: var(--paper-dim); line-height: 1.4; }
+  .chat-msg.mine { align-self: flex-end; background: var(--line-cyan-dim); }
+  .chat-msg .who { display: block; font-size: 10.5px; font-weight: 600; opacity: 0.6; margin-bottom: 2px; }
+  .chat-input-row { display: flex; gap: 6px; padding: 8px; border-top: 1px solid rgba(22, 32, 43, 0.12); }
+  .chat-input-row input { flex: 1; }
+  .chat-input-row button { background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius); padding: 0 14px; font-size: 13px; cursor: pointer; }
+
+  .error-box {
+    margin-top: 16px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 620px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Je, mtu mwingine anahitaji kusakinisha chochote?","acceptedAnswer":{"@type":"Answer","text":"Hapana. Nyote wawili mnahitaji kivinjari tu; unashiriki kiungo na msimbo."}},{"@type":"Question","name":"Je, Screen Share Forge ni bure?","acceptedAnswer":{"@type":"Answer","text":"Ndiyo. Ni bure kutumia, bila akaunti, bila alama ya maji na bila malipo ya kufungua."}},{"@type":"Question","name":"Je, faili zangu zinapakiwa?","acceptedAnswer":{"@type":"Answer","text":"Skrini na mazungumzo husafiri moja kwa moja kati ya vivinjari viwili. Hakuna kinachosakinishwa na hakuna kinachorekodiwa."}}],"inLanguage":"sw"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/screen-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/screen-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/screen-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/screen-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/screen-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/screen-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/screen-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/screen-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/screen-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/screen-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Screen Share Forge</h1>
+    <p data-i18n="heroSubtitle">Send a link, get a code, and see someone's screen live so you can help them — no installs, nothing recorded.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="view active" id="view-choose">
+    <div class="panel">
+      <h2 data-i18n="chooseHeading">What do you need?</h2>
+      <button type="button" class="draft-btn" id="startHelperBtn" data-i18n="startHelperBtnLabel">🛠️ I want to help someone — start a session</button>
+      <p class="hint" data-i18n="startHelperHint">You'll get a link and a code. Send it to the person you're helping — once they open it and choose to share, their screen shows up here live.</p>
+
+      <button type="button" class="draft-btn secondary" id="startClientBtn" data-i18n="startClientBtnLabel" style="margin-top:18px;">🙋 Someone gave me a code — I need help</button>
+      <div class="field" id="manualCodeField" style="display:none; margin-top:12px;">
+        <label for="manualCodeInput" data-i18n="manualCodeLabel">Enter the code they gave you</label>
+        <input type="text" id="manualCodeInput" placeholder="e.g. 7K2P9Q" autocapitalize="characters" autocomplete="off">
+        <button type="button" class="draft-btn" id="manualCodeSubmitBtn" data-i18n="continueLabel" style="margin-top:8px;">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="view" id="view-helper">
+    <div class="panel">
+      <h2 data-i18n="helperHeading">Helping session</h2>
+      <div id="helperSetupBlock">
+        <p class="hint" data-i18n="helperSetupHint" style="margin-top:0;">Send this link to the person you're helping. When they open it and share their screen, it appears below.</p>
+        <div class="field">
+          <label for="helperLinkInput" data-i18n="shareLinkLabel">Share this link</label>
+          <div class="key-row"><input type="text" id="helperLinkInput" readonly><button type="button" id="copyLinkBtn" data-i18n="copyLabel">Copy</button></div>
+        </div>
+        <div class="field">
+          <label data-i18n="orReadCodeLabel">Or read them this code</label>
+          <div class="code-display" id="helperCodeEl">------</div>
+        </div>
+        <div class="qr-wrap">
+          <div id="helperQrCode"></div>
+          <span data-i18n="qrHintText">Or have them scan this with their phone camera</span>
+        </div>
+        <p class="expiry-hint" id="helperExpiryHint"><span data-i18n="expiryPrefix">This code expires in</span> <strong id="helperCountdown">10:00</strong> <span data-i18n="expirySuffix">if nobody joins.</span></p>
+      </div>
+      <p class="status-line" id="helperStatus" data-i18n="statusSettingUp">Setting up…</p>
+      <button type="button" class="draft-btn secondary" id="helperReconnectBtn" data-i18n="reconnectBtnLabel" style="display:none;">🔄 Try reconnecting</button>
+
+      <div class="video-frame" id="helperVideoFrame" style="display:none;">
+        <video id="remoteVideo" autoplay playsinline></video>
+        <button type="button" class="play-overlay" id="helperPlayOverlay" data-i18n="playOverlayLabel" style="display:none;">▶ Click to start viewing</button>
+      </div>
+      <label class="check-row" id="pointerToggleRow" style="display:none;">
+        <input type="checkbox" id="pointerToggle">
+        <span data-i18n="pointerToggleText">🔴 Point at things on their screen — move your mouse over the video above while this is checked. They'll see a red dot on their mini-preview.</span>
+      </label>
+      <div class="btn-row" style="margin-top:10px;">
+        <button type="button" class="draft-btn secondary" id="helperRecordBtn" data-i18n="recordBtnLabel" style="display:none;">🔴 Record this session</button>
+        <button type="button" class="draft-btn secondary" id="helperDownloadRecordingBtn" data-i18n="downloadRecordingLabel" style="display:none;">⬇ Download recording</button>
+      </div>
+      <p class="hint" id="helperRecordHint" data-i18n="recordHintText" style="display:none;">Recording saves locally to your device only — the call itself is never uploaded anywhere.</p>
+      <div id="helperChatSlot"></div>
+
+      <button type="button" class="draft-btn danger" id="helperEndBtn" data-i18n="endSessionLabel" style="margin-top:16px;">End session</button>
+    </div>
+  </div>
+
+  <div class="view" id="view-client">
+    <div class="panel">
+      <h2 data-i18n="clientHeading">Sharing your screen</h2>
+      <p class="hint" data-i18n="clientTrustHint" style="margin-top:0;">Someone wants to help you. Only continue if you know and trust who sent you this link or code.</p>
+      <div class="code-display" id="clientCodeEl"></div>
+      <p class="status-line" id="clientStatus" data-i18n="statusLookingForSession">Looking for the session…</p>
+      <button type="button" class="draft-btn secondary" id="clientReconnectBtn" data-i18n="reconnectBtnLabel" style="display:none;">🔄 Try reconnecting</button>
+
+      <button type="button" class="draft-btn" id="clientShareBtn" data-i18n="shareScreenBtnLabel" style="display:none;">🖥️ Share my screen</button>
+
+      <div class="video-frame" id="clientPreviewFrame" style="display:none;">
+        <video id="clientPreviewVideo" autoplay playsinline muted></video>
+        <div class="pointer-dot" id="clientPointerDot" hidden></div>
+      </div>
+      <p class="hint" id="pointerHint" data-i18n="pointerHintText" style="display:none;">This mini-preview is what you're sharing. If they point at something, you'll see a red dot on it here.</p>
+      <div class="btn-row" style="margin-top:10px;">
+        <button type="button" class="draft-btn secondary" id="clientRecordBtn" data-i18n="recordBtnLabel" style="display:none;">🔴 Record this session</button>
+        <button type="button" class="draft-btn secondary" id="clientDownloadRecordingBtn" data-i18n="downloadRecordingLabel" style="display:none;">⬇ Download recording</button>
+      </div>
+      <div id="clientChatSlot"></div>
+
+      <button type="button" class="draft-btn danger" id="clientStopBtn" data-i18n="stopSharingLabel" style="display:none; margin-top:16px;">Stop sharing</button>
+    </div>
+  </div>
+
+  <div class="error-box" id="errorBox"></div>
+</div>
+
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Screen Share Forge</h2>
+  <p>Screen Share Forge gives live remote help: send a link, get a code, watch the other person&#x27;s screen and chat while you help.</p>
+  <h3>How to use Screen Share Forge</h3>
+  <ol><li>Create a support session and choose what you want to share.</li><li>Press “Start session”.</li><li>Share the link safely and end the session when help is finished.</li></ol>
+  <h3>Does the other person need to install anything?</h3>
+  <p>No. Both of you only need a web browser; you share a link and a code.</p>
+  <h3>Is Screen Share Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>The screen and chat travel directly between the two browsers. Nothing is installed and nothing is recorded.</p>
+</section>
+<footer data-i18n-html="footerText">
+  Part of <a href="/sw/">MigaBuilder</a>. Once connected, video, audio and chat travel directly between the two
+  browsers (peer-to-peer) — this tool's server only relays the one-time connection handshake and never sees or
+  stores the call itself. Screen sharing always goes through your browser's own picker, and you (or they) can stop
+  it at any time. This needs a one-time setup by the site owner — see <code>cloudflare-worker/README.md</code>.
+ <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/screen-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // Deploy cloudflare-worker/screenshare-signal.js (see cloudflare-worker/README.md)
+  // and paste its URL here. window.__SIGNAL_URL_OVERRIDE is only used by tests.
+  const SIGNAL_URL = (typeof window !== 'undefined' && window.__SIGNAL_URL_OVERRIDE) || 'https://migabuilder-screenshare.makmurphy69.workers.dev';
+  const ICE_SERVERS = [{ urls: ['stun:stun.l.google.com:19302', 'stun:stun1.l.google.com:19302'] }];
+  const CODE_ALPHABET = '23456789ABCDEFGHJKMNPQRSTUVWXYZ'; // no 0/O/1/I/L — easier to read aloud
+  const SESSION_TTL_SECONDS = 600; // must match TTL_SECONDS in cloudflare-worker/screenshare-signal.js
+
+  // ---------- element refs ----------
+  const views = {
+    choose: document.getElementById('view-choose'),
+    helper: document.getElementById('view-helper'),
+    client: document.getElementById('view-client')
+  };
+  const errorBox = document.getElementById('errorBox');
+
+  const startHelperBtn = document.getElementById('startHelperBtn');
+  const startClientBtn = document.getElementById('startClientBtn');
+  const manualCodeField = document.getElementById('manualCodeField');
+  const manualCodeInput = document.getElementById('manualCodeInput');
+  const manualCodeSubmitBtn = document.getElementById('manualCodeSubmitBtn');
+
+  const helperSetupBlock = document.getElementById('helperSetupBlock');
+  const helperLinkInput = document.getElementById('helperLinkInput');
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  const helperCodeEl = document.getElementById('helperCodeEl');
+  const helperStatus = document.getElementById('helperStatus');
+  const helperVideoFrame = document.getElementById('helperVideoFrame');
+  const remoteVideo = document.getElementById('remoteVideo');
+  const helperPlayOverlay = document.getElementById('helperPlayOverlay');
+  const pointerToggleRow = document.getElementById('pointerToggleRow');
+  const pointerToggle = document.getElementById('pointerToggle');
+  const helperChatSlot = document.getElementById('helperChatSlot');
+  const helperEndBtn = document.getElementById('helperEndBtn');
+  const helperQrCode = document.getElementById('helperQrCode');
+  const helperExpiryHint = document.getElementById('helperExpiryHint');
+  const helperCountdown = document.getElementById('helperCountdown');
+  const helperReconnectBtn = document.getElementById('helperReconnectBtn');
+  const helperRecordBtn = document.getElementById('helperRecordBtn');
+  const helperDownloadRecordingBtn = document.getElementById('helperDownloadRecordingBtn');
+  const helperRecordHint = document.getElementById('helperRecordHint');
+
+  const clientCodeEl = document.getElementById('clientCodeEl');
+  const clientStatus = document.getElementById('clientStatus');
+  const clientShareBtn = document.getElementById('clientShareBtn');
+  const clientPreviewFrame = document.getElementById('clientPreviewFrame');
+  const clientPreviewVideo = document.getElementById('clientPreviewVideo');
+  const clientPointerDot = document.getElementById('clientPointerDot');
+  const pointerHint = document.getElementById('pointerHint');
+  const clientChatSlot = document.getElementById('clientChatSlot');
+  const clientStopBtn = document.getElementById('clientStopBtn');
+  const clientReconnectBtn = document.getElementById('clientReconnectBtn');
+  const clientRecordBtn = document.getElementById('clientRecordBtn');
+  const clientDownloadRecordingBtn = document.getElementById('clientDownloadRecordingBtn');
+
+  // ---------- state ----------
+  let role = null; // 'helper' | 'client'
+  let pc = null;
+  let dataChannel = null;
+  let localStream = null;
+  let currentCode = null;
+  let pollGuard = null; // { cancelled: false }
+  let countdownInterval = null;
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function showView(name) {
+    Object.keys(views).forEach(k => views[k].classList.toggle('active', k === name));
+  }
+
+  function signalConfigured() { return !/REPLACE-ME/.test(SIGNAL_URL); }
+
+  // ---------- signaling (relayed once through a small Worker, see cloudflare-worker/) ----------
+  async function putSignal(code, kind, desc) {
+    const res = await fetch(SIGNAL_URL.replace(/\/$/, '') + '/' + code + '/' + kind, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sdp: desc.sdp, type: desc.type })
+    });
+    if (!res.ok) throw new Error(I18N.t('errorSignalServer').replace('{status}', res.status));
+  }
+  async function getSignal(code, kind) {
+    const res = await fetch(SIGNAL_URL.replace(/\/$/, '') + '/' + code + '/' + kind);
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(I18N.t('errorSignalServer').replace('{status}', res.status));
+    return res.json();
+  }
+  async function pollSignal(code, kind, opts) {
+    opts = opts || {};
+    const intervalMs = opts.intervalMs || 1500;
+    const timeoutMs = opts.timeoutMs || 300000;
+    const guard = opts.guard;
+    const start = Date.now();
+    while (Date.now() - start < timeoutMs) {
+      if (guard && guard.cancelled) throw new Error('Cancelled');
+      const val = await getSignal(code, kind);
+      if (val) return val;
+      await new Promise(r => setTimeout(r, intervalMs));
+    }
+    throw new Error(I18N.t('errorTimedOut'));
+  }
+  function waitForIceGatheringComplete(peerConn) {
+    if (peerConn.iceGatheringState === 'complete') return Promise.resolve();
+    return new Promise(resolve => {
+      function check() {
+        if (peerConn.iceGatheringState === 'complete') {
+          peerConn.removeEventListener('icegatheringstatechange', check);
+          resolve();
+        }
+      }
+      peerConn.addEventListener('icegatheringstatechange', check);
+      setTimeout(resolve, 4000); // don't block forever on a slow/blocked network
+    });
+  }
+  function generateCode(len) {
+    let s = '';
+    const alphabetSize = CODE_ALPHABET.length;
+    const limit = Math.floor(0x100000000 / alphabetSize) * alphabetSize;
+    while (s.length < len) {
+      const values = new Uint32Array(Math.max(16, (len - s.length) * 2));
+      crypto.getRandomValues(values);
+      for (const value of values) {
+        if (value >= limit) continue; // rejection sampling avoids modulo bias
+        s += CODE_ALPHABET[value % alphabetSize];
+        if (s.length === len) break;
+      }
+    }
+    return s;
+  }
+
+  // ---------- chat (shared component, moved into whichever view is active) ----------
+  const chatSection = document.createElement('div');
+  chatSection.className = 'chat-box';
+  chatSection.innerHTML =
+    '<div class="chat-messages" id="chatMessages"></div>' +
+    '<div class="chat-input-row"><input type="text" id="chatInput"><button type="button" id="chatSendBtn"></button></div>';
+  const chatMessages = chatSection.querySelector('#chatMessages');
+  const chatInput = chatSection.querySelector('#chatInput');
+  const chatSendBtn = chatSection.querySelector('#chatSendBtn');
+
+  function applyChatTranslations() {
+    chatInput.placeholder = I18N.t('chatPlaceholder');
+    chatSendBtn.textContent = I18N.t('chatSendLabel');
+  }
+
+  function appendChatMessage(who, text, mine) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg' + (mine ? ' mine' : '');
+    div.innerHTML = '<span class="who">' + who + '</span>' + String(text).replace(/</g, '&lt;');
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+  function sendChat() {
+    const text = chatInput.value.trim();
+    if (!text || !dataChannel || dataChannel.readyState !== 'open') return;
+    dataChannel.send(JSON.stringify({ type: 'chat', text: text }));
+    appendChatMessage(I18N.t('chatWhoYou'), text, true);
+    chatInput.value = '';
+  }
+  chatSendBtn.addEventListener('click', sendChat);
+  chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendChat(); });
+
+  function wireDataChannel() {
+    dataChannel.onmessage = function (e) {
+      let msg;
+      try { msg = JSON.parse(e.data); } catch (err) { return; }
+      if (msg.type === 'chat') appendChatMessage(I18N.t('chatWhoThem'), msg.text, false);
+      else if (msg.type === 'pointer') showPointer(msg);
+    };
+  }
+  function showPointer(msg) {
+    if (role !== 'client') return;
+    if (!msg.visible) { clientPointerDot.hidden = true; return; }
+    const rect = clientPreviewFrame.getBoundingClientRect();
+    clientPointerDot.style.left = (msg.x * rect.width) + 'px';
+    clientPointerDot.style.top = (msg.y * rect.height) + 'px';
+    clientPointerDot.hidden = false;
+  }
+
+  // ---------- shared peer connection setup ----------
+  function createPeerConnection() {
+    const conn = new RTCPeerConnection({ iceServers: ICE_SERVERS });
+    conn.onconnectionstatechange = function () {
+      if (conn !== pc) return; // a stale connection from before a reconnect
+      if (['disconnected', 'failed', 'closed'].includes(conn.connectionState)) {
+        if (role === 'helper') {
+          helperStatus.textContent = I18N.t('statusConnectionLost');
+          if (currentCode) helperReconnectBtn.style.display = 'block';
+        } else if (role === 'client') {
+          clientStatus.textContent = I18N.t('statusConnectionLost');
+          if (currentCode) clientReconnectBtn.style.display = 'block';
+        }
+      }
+    };
+    return conn;
+  }
+
+  function formatMMSS(totalSeconds) {
+    const m = Math.floor(totalSeconds / 60);
+    const s = totalSeconds % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+  function startExpiryCountdown() {
+    stopExpiryCountdown();
+    const expiresAt = Date.now() + SESSION_TTL_SECONDS * 1000;
+    helperExpiryHint.classList.remove('expiring');
+    helperCountdown.textContent = formatMMSS(SESSION_TTL_SECONDS);
+    countdownInterval = setInterval(function () {
+      const remaining = Math.max(0, Math.round((expiresAt - Date.now()) / 1000));
+      helperCountdown.textContent = formatMMSS(remaining);
+      if (remaining <= 30) helperExpiryHint.classList.add('expiring');
+      if (remaining <= 0) {
+        stopExpiryCountdown();
+        if (pollGuard) pollGuard.cancelled = true;
+        helperStatus.textContent = I18N.t('statusExpired');
+      }
+    }, 1000);
+  }
+  function stopExpiryCountdown() {
+    if (countdownInterval) { clearInterval(countdownInterval); countdownInterval = null; }
+  }
+
+  function resetSession() {
+    if (pollGuard) pollGuard.cancelled = true;
+    stopExpiryCountdown();
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') { try { mediaRecorder.stop(); } catch (e) {} }
+    mediaRecorder = null;
+    helperRecording = false;
+    clientRecording = false;
+    if (recordedBlobUrl) { URL.revokeObjectURL(recordedBlobUrl); recordedBlobUrl = null; }
+    if (pc) { try { pc.close(); } catch (e) {} pc = null; }
+    if (localStream) { localStream.getTracks().forEach(t => t.stop()); localStream = null; }
+    dataChannel = null;
+    role = null;
+    currentCode = null;
+    chatMessages.innerHTML = '';
+    if (chatSection.parentNode) chatSection.parentNode.removeChild(chatSection);
+    remoteVideo.srcObject = null;
+    clientPreviewVideo.srcObject = null;
+    clientPointerDot.hidden = true;
+    pointerToggle.checked = false;
+    helperPlayOverlay.style.display = 'none';
+    helperExpiryHint.classList.remove('expiring');
+    helperQrCode.innerHTML = '';
+    clientPreviewFrame.style.display = 'none';
+    clientStopBtn.style.display = 'none';
+    clientShareBtn.style.display = 'none';
+    pointerHint.style.display = 'none';
+    helperReconnectBtn.style.display = 'none';
+    clientReconnectBtn.style.display = 'none';
+    helperRecordBtn.style.display = 'none';
+    helperRecordBtn.textContent = I18N.t('recordBtnLabel');
+    helperDownloadRecordingBtn.style.display = 'none';
+    helperRecordHint.style.display = 'none';
+    clientRecordBtn.style.display = 'none';
+    clientRecordBtn.textContent = I18N.t('recordBtnLabel');
+    clientDownloadRecordingBtn.style.display = 'none';
+  }
+
+  // ================= local recording (helper records what they see, client records what they share) =================
+  let mediaRecorder = null;
+  let recordedChunks = [];
+  let recordedBlobUrl = null;
+  let helperRecording = false;
+  let clientRecording = false;
+
+  function pickRecordMimeType() {
+    const candidates = ['video/webm;codecs=vp9,opus', 'video/webm;codecs=vp8,opus', 'video/webm'];
+    for (const c of candidates) { if (window.MediaRecorder && MediaRecorder.isTypeSupported(c)) return c; }
+    return '';
+  }
+  function startRecording(stream, downloadBtn) {
+    const mimeType = pickRecordMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoRecordingFormat')); return false; }
+    recordedChunks = [];
+    mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
+    mediaRecorder.ondataavailable = function (e) { if (e.data.size) recordedChunks.push(e.data); };
+    mediaRecorder.onstop = function () {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      if (recordedBlobUrl) URL.revokeObjectURL(recordedBlobUrl);
+      recordedBlobUrl = URL.createObjectURL(blob);
+      downloadBtn.style.display = 'inline-block';
+      downloadBtn.onclick = function () {
+        const a = document.createElement('a');
+        a.href = recordedBlobUrl; a.download = 'screen-forge-session.webm';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      };
+    };
+    mediaRecorder.start(1000);
+    return true;
+  }
+  function stopRecording() {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+  }
+
+  helperRecordBtn.addEventListener('click', function () {
+    if (!helperRecording) {
+      const stream = remoteVideo.captureStream ? remoteVideo.captureStream() : (remoteVideo.mozCaptureStream ? remoteVideo.mozCaptureStream() : null);
+      if (!stream) { showError(I18N.t('errorCannotRecordVideo')); return; }
+      if (!startRecording(stream, helperDownloadRecordingBtn)) return;
+      helperRecording = true;
+      helperRecordBtn.textContent = I18N.t('stopRecordingLabel');
+      helperRecordHint.style.display = 'block';
+    } else {
+      stopRecording();
+      helperRecording = false;
+      helperRecordBtn.textContent = I18N.t('recordBtnLabel');
+    }
+  });
+  clientRecordBtn.addEventListener('click', function () {
+    if (!clientRecording) {
+      if (!localStream) { showError(I18N.t('errorStartSharingFirst')); return; }
+      if (!startRecording(localStream, clientDownloadRecordingBtn)) return;
+      clientRecording = true;
+      clientRecordBtn.textContent = I18N.t('stopRecordingLabel');
+    } else {
+      stopRecording();
+      clientRecording = false;
+      clientRecordBtn.textContent = I18N.t('recordBtnLabel');
+    }
+  });
+
+  // ================= HELPER =================
+  async function startHelperSession() {
+    clearError();
+    if (!signalConfigured()) {
+      showError(I18N.t('errorNotConfigured'));
+      return;
+    }
+    resetSession();
+    role = 'helper';
+    showView('helper');
+    helperSetupBlock.style.display = 'block';
+    helperVideoFrame.style.display = 'none';
+    pointerToggleRow.style.display = 'none';
+    helperChatSlot.innerHTML = '';
+    helperStatus.textContent = I18N.t('statusSettingUp');
+
+    const code = generateCode(10);
+    currentCode = code;
+    const shareUrl = location.origin + location.pathname + '?code=' + code;
+    helperCodeEl.textContent = code;
+    helperLinkInput.value = shareUrl;
+    helperQrCode.innerHTML = '';
+    if (window.QRCode) {
+      try { new QRCode(helperQrCode, { text: shareUrl, width: 160, height: 160, correctLevel: QRCode.CorrectLevel.M }); } catch (e) {}
+    }
+
+    pc = createPeerConnection();
+    pc.addTransceiver('video', { direction: 'recvonly' });
+    pc.addTransceiver('audio', { direction: 'recvonly' });
+    dataChannel = pc.createDataChannel('chat');
+    wireDataChannel();
+    dataChannel.onopen = function () { helperChatSlot.appendChild(chatSection); };
+
+    pc.ontrack = function (e) {
+      remoteVideo.srcObject = e.streams[0];
+      helperVideoFrame.style.display = 'block';
+      pointerToggleRow.style.display = 'flex';
+      helperReconnectBtn.style.display = 'none';
+      helperRecordBtn.style.display = 'inline-block';
+      helperStatus.textContent = I18N.t('statusConnectedHelper');
+      stopExpiryCountdown();
+      remoteVideo.play().catch(function () { helperPlayOverlay.style.display = 'flex'; });
+    };
+
+    try {
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      await waitForIceGatheringComplete(pc);
+      await putSignal(code, 'offer', pc.localDescription);
+    } catch (err) {
+      showError(I18N.t('errorCouldNotStart').replace('{message}', err.message));
+      return;
+    }
+
+    helperStatus.textContent = I18N.t('statusWaitingForJoin');
+    startExpiryCountdown();
+    pollGuard = { cancelled: false };
+    try {
+      const answer = await pollSignal(code, 'answer', { timeoutMs: SESSION_TTL_SECONDS * 1000, guard: pollGuard });
+      await pc.setRemoteDescription(answer);
+    } catch (err) {
+      if (!pollGuard.cancelled) showError(err.message);
+    }
+  }
+
+  helperPlayOverlay.addEventListener('click', function () {
+    remoteVideo.play().then(function () { helperPlayOverlay.style.display = 'none'; }).catch(function () {});
+  });
+
+  pointerToggle.addEventListener('change', function () {
+    if (!pointerToggle.checked && dataChannel && dataChannel.readyState === 'open') {
+      dataChannel.send(JSON.stringify({ type: 'pointer', visible: false }));
+    }
+  });
+  remoteVideo.addEventListener('mousemove', function (e) {
+    if (!pointerToggle.checked || !dataChannel || dataChannel.readyState !== 'open') return;
+    const rect = remoteVideo.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    dataChannel.send(JSON.stringify({ type: 'pointer', x: x, y: y, visible: true }));
+  });
+  remoteVideo.addEventListener('mouseleave', function () {
+    if (dataChannel && dataChannel.readyState === 'open') {
+      dataChannel.send(JSON.stringify({ type: 'pointer', visible: false }));
+    }
+  });
+
+  helperEndBtn.addEventListener('click', function () {
+    resetSession();
+    showView('choose');
+  });
+
+  helperReconnectBtn.addEventListener('click', async function () {
+    clearError();
+    helperReconnectBtn.style.display = 'none';
+    helperStatus.textContent = I18N.t('statusReconnecting');
+    const code = currentCode;
+    if (pc) { try { pc.close(); } catch (e) {} }
+    pc = createPeerConnection();
+    pc.addTransceiver('video', { direction: 'recvonly' });
+    pc.addTransceiver('audio', { direction: 'recvonly' });
+    dataChannel = pc.createDataChannel('chat');
+    wireDataChannel();
+    dataChannel.onopen = function () { if (!chatSection.parentNode) helperChatSlot.appendChild(chatSection); };
+    pc.ontrack = function (e) {
+      remoteVideo.srcObject = e.streams[0];
+      helperVideoFrame.style.display = 'block';
+      pointerToggleRow.style.display = 'flex';
+      helperReconnectBtn.style.display = 'none';
+      helperRecordBtn.style.display = 'inline-block';
+      helperStatus.textContent = I18N.t('statusReconnectedHelper');
+      remoteVideo.play().catch(function () { helperPlayOverlay.style.display = 'flex'; });
+    };
+    try {
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      await waitForIceGatheringComplete(pc);
+      await putSignal(code, 'offer', pc.localDescription);
+      helperStatus.textContent = I18N.t('statusWaitingReconnect');
+      pollGuard = { cancelled: false };
+      const answer = await pollSignal(code, 'answer', { timeoutMs: 120000, guard: pollGuard });
+      await pc.setRemoteDescription(answer);
+    } catch (err) {
+      if (!pollGuard.cancelled) {
+        showError(I18N.t('errorCouldNotReconnect').replace('{message}', err.message));
+        helperReconnectBtn.style.display = 'block';
+      }
+    }
+  });
+
+  // ================= CLIENT =================
+  async function prepareClientConnection(code) {
+    clearError();
+    if (!signalConfigured()) {
+      showError(I18N.t('errorNotConfigured'));
+      return;
+    }
+    resetSession();
+    role = 'client';
+    currentCode = code;
+    showView('client');
+    clientCodeEl.textContent = code;
+    clientStatus.textContent = I18N.t('statusLookingForSession');
+    clientShareBtn.style.display = 'none';
+    clientChatSlot.innerHTML = '';
+
+    let offer;
+    pollGuard = { cancelled: false };
+    try {
+      offer = await pollSignal(code, 'offer', { timeoutMs: 120000, intervalMs: 1500, guard: pollGuard });
+    } catch (err) {
+      if (!pollGuard.cancelled) showError(I18N.t('errorCouldNotFindSession'));
+      return;
+    }
+
+    pc = createPeerConnection();
+    pc.ondatachannel = function (e) {
+      dataChannel = e.channel;
+      wireDataChannel();
+      dataChannel.onopen = function () { clientChatSlot.appendChild(chatSection); };
+    };
+
+    try {
+      await pc.setRemoteDescription(offer);
+    } catch (err) {
+      showError(I18N.t('errorCouldNotReadOffer').replace('{message}', err.message));
+      return;
+    }
+
+    if (!getDisplayMediaSupported()) {
+      clientStatus.textContent = I18N.t('statusNoDisplayMedia');
+      showError(I18N.t('errorNoScreenShareSupport'));
+      clientShareBtn.style.display = 'none';
+      return;
+    }
+    clientStatus.textContent = I18N.t('statusReadyToShare');
+    clientShareBtn.style.display = 'block';
+  }
+
+  function getDisplayMediaSupported() {
+    return !!(navigator.mediaDevices && typeof navigator.mediaDevices.getDisplayMedia === 'function');
+  }
+
+  async function shareScreenAsClient() {
+    clearError();
+    if (!getDisplayMediaSupported()) {
+      showError(I18N.t('errorNoScreenShareShort'));
+      return;
+    }
+    let stream;
+    try {
+      stream = await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true });
+    } catch (err) {
+      if (err.name === 'NotAllowedError') {
+        showError(I18N.t('errorScreenShareBlocked'));
+      } else {
+        showError(I18N.t('errorScreenShareFailed').replace('{message}', err.message || err.name));
+      }
+      return;
+    }
+    localStream = stream;
+    stream.getTracks().forEach(function (track) {
+      pc.addTrack(track, stream);
+      track.addEventListener('ended', stopClientSharing);
+    });
+    clientPreviewVideo.srcObject = stream;
+    clientPreviewFrame.style.display = 'block';
+    pointerHint.style.display = 'block';
+    clientShareBtn.style.display = 'none';
+    clientStopBtn.style.display = 'block';
+    clientRecordBtn.style.display = 'inline-block';
+
+    try {
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      await waitForIceGatheringComplete(pc);
+      await putSignal(currentCode, 'answer', pc.localDescription);
+      clientStatus.textContent = I18N.t('statusConnectedClient');
+    } catch (err) {
+      showError(I18N.t('errorCouldNotConnect').replace('{message}', err.message));
+    }
+  }
+
+  function stopClientSharing() {
+    resetSession();
+    showView('choose');
+  }
+
+  clientReconnectBtn.addEventListener('click', async function () {
+    clearError();
+    clientReconnectBtn.style.display = 'none';
+    clientStatus.textContent = I18N.t('statusReconnecting');
+    const code = currentCode;
+    if (pc) { try { pc.close(); } catch (e) {} }
+    pc = createPeerConnection();
+    pc.ondatachannel = function (e) {
+      dataChannel = e.channel;
+      wireDataChannel();
+      dataChannel.onopen = function () { if (!chatSection.parentNode) clientChatSlot.appendChild(chatSection); };
+    };
+    try {
+      clientStatus.textContent = I18N.t('statusWaitingNewSessionDetails');
+      pollGuard = { cancelled: false };
+      const offer = await pollSignal(code, 'offer', { timeoutMs: 120000, guard: pollGuard });
+      await pc.setRemoteDescription(offer);
+      if (localStream) {
+        localStream.getTracks().forEach(function (track) { pc.addTrack(track, localStream); });
+      }
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      await waitForIceGatheringComplete(pc);
+      await putSignal(code, 'answer', pc.localDescription);
+      clientStatus.textContent = I18N.t('statusReconnectedClient');
+    } catch (err) {
+      if (!pollGuard.cancelled) {
+        showError(I18N.t('errorCouldNotReconnect').replace('{message}', err.message));
+        clientReconnectBtn.style.display = 'block';
+      }
+    }
+  });
+
+  clientShareBtn.addEventListener('click', shareScreenAsClient);
+  clientStopBtn.addEventListener('click', stopClientSharing);
+
+  // ================= CHOOSER / ROUTING =================
+  startHelperBtn.addEventListener('click', startHelperSession);
+  startClientBtn.addEventListener('click', function () {
+    manualCodeField.style.display = manualCodeField.style.display === 'block' ? 'none' : 'block';
+  });
+  manualCodeSubmitBtn.addEventListener('click', function () {
+    const code = manualCodeInput.value.trim().toUpperCase();
+    if (!code) { showError(I18N.t('errorEnterCode')); return; }
+    prepareClientConnection(code);
+  });
+  copyLinkBtn.addEventListener('click', function () {
+    helperLinkInput.select();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(helperLinkInput.value).catch(function () {});
+    } else {
+      document.execCommand('copy');
+    }
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: "Send a link, get a code, and see someone's screen live so you can help them — no installs, nothing recorded.",
+      chooseHeading: 'What do you need?',
+      startHelperBtnLabel: '🛠️ I want to help someone — start a session',
+      startHelperHint: "You'll get a link and a code. Send it to the person you're helping — once they open it and choose to share, their screen shows up here live.",
+      startClientBtnLabel: '🙋 Someone gave me a code — I need help',
+      manualCodeLabel: 'Enter the code they gave you',
+      continueLabel: 'Continue',
+      helperHeading: 'Helping session',
+      helperSetupHint: "Send this link to the person you're helping. When they open it and share their screen, it appears below.",
+      shareLinkLabel: 'Share this link',
+      copyLabel: 'Copy',
+      orReadCodeLabel: 'Or read them this code',
+      qrHintText: 'Or have them scan this with their phone camera',
+      expiryPrefix: 'This code expires in',
+      expirySuffix: 'if nobody joins.',
+      reconnectBtnLabel: '🔄 Try reconnecting',
+      playOverlayLabel: '▶ Click to start viewing',
+      pointerToggleText: "🔴 Point at things on their screen — move your mouse over the video above while this is checked. They'll see a red dot on their mini-preview.",
+      recordBtnLabel: '🔴 Record this session',
+      stopRecordingLabel: '⏹ Stop recording',
+      downloadRecordingLabel: '⬇ Download recording',
+      recordHintText: 'Recording saves locally to your device only — the call itself is never uploaded anywhere.',
+      endSessionLabel: 'End session',
+      clientHeading: 'Sharing your screen',
+      clientTrustHint: 'Someone wants to help you. Only continue if you know and trust who sent you this link or code.',
+      shareScreenBtnLabel: '🖥️ Share my screen',
+      pointerHintText: "This mini-preview is what you're sharing. If they point at something, you'll see a red dot on it here.",
+      stopSharingLabel: 'Stop sharing',
+      chatPlaceholder: 'Type a message…',
+      chatSendLabel: 'Send',
+      chatWhoYou: 'You',
+      chatWhoThem: 'Them',
+      footerText: "Part of <a href=\"index.html\">MigaBuilder</a>. Once connected, video, audio and chat travel directly between the two browsers (peer-to-peer) — this tool's server only relays the one-time connection handshake and never sees or stores the call itself. Screen sharing always goes through your browser's own picker, and you (or they) can stop it at any time. This needs a one-time setup by the site owner — see <code>cloudflare-worker/README.md</code>. <a href=\"feedback.html\">Found a bug or have an idea? Send feedback →</a>",
+      statusSettingUp: 'Setting up…',
+      statusWaitingForJoin: 'Waiting for them to join — send the link or code above.',
+      statusConnectedHelper: 'Connected — viewing their screen.',
+      statusConnectionLost: 'Connection lost.',
+      statusExpired: 'This code expired before anyone joined — start a new session.',
+      statusReconnecting: 'Reconnecting…',
+      statusReconnectedHelper: 'Reconnected — viewing their screen.',
+      statusWaitingReconnect: 'Waiting for them to reconnect…',
+      errorNotConfigured: 'This tool needs a one-time setup by the site owner before it can connect people — see cloudflare-worker/README.md.',
+      errorSignalServer: 'Could not reach the signaling server (status {status}).',
+      errorTimedOut: 'Timed out waiting — the code may have expired. Try starting a new session.',
+      errorCouldNotStart: 'Could not start the session: {message}',
+      errorCouldNotReconnect: 'Could not reconnect: {message}',
+      errorNoRecordingFormat: 'No supported recording format found in this browser.',
+      errorCannotRecordVideo: 'This browser cannot record video playback.',
+      errorStartSharingFirst: 'Start sharing your screen first.',
+      statusLookingForSession: 'Looking for the session…',
+      errorEnterCode: 'Enter the code you were given.',
+      errorCouldNotFindSession: "Couldn't find that session — double-check the code, or ask them to start a new one.",
+      errorCouldNotReadOffer: 'Could not read the session offer: {message}',
+      statusNoDisplayMedia: "This device or browser can't share its screen.",
+      errorNoScreenShareSupport: "Most phone and tablet browsers don't support screen sharing. Try opening this link on a desktop or laptop instead — Chrome, Edge, Firefox, or Safari on a Mac all work.",
+      statusReadyToShare: 'Ready — click below to choose what to share.',
+      errorNoScreenShareShort: "This device or browser can't share its screen. Try opening this link on a desktop or laptop instead.",
+      errorScreenShareBlocked: 'Screen sharing was blocked or cancelled — click "Share my screen" and pick a screen, window, or tab to continue.',
+      errorScreenShareFailed: 'Could not start screen sharing: {message}',
+      statusConnectedClient: 'Connected — your screen is being shared.',
+      errorCouldNotConnect: 'Could not connect: {message}',
+      statusWaitingNewSessionDetails: 'Waiting for the new session details…',
+      statusReconnectedClient: 'Reconnected — your screen is being shared.',
+      errorNoWebRTC: 'Your browser does not support the technology this tool needs (WebRTC). Try the latest Chrome, Edge, or Firefox.'
+    },
+    es: {
+      heroSubtitle: 'Envía un enlace, obtén un código, y mira la pantalla de alguien en vivo para poder ayudarle — sin instalaciones, nada se graba.',
+      chooseHeading: '¿Qué necesitas?',
+      startHelperBtnLabel: '🛠️ Quiero ayudar a alguien — iniciar una sesión',
+      startHelperHint: 'Obtendrás un enlace y un código. Envíaselo a la persona que estás ayudando — una vez que lo abran y elijan compartir, su pantalla aparecerá aquí en vivo.',
+      startClientBtnLabel: '🙋 Alguien me dio un código — necesito ayuda',
+      manualCodeLabel: 'Introduce el código que te dieron',
+      continueLabel: 'Continuar',
+      helperHeading: 'Sesión de ayuda',
+      helperSetupHint: 'Envía este enlace a la persona que estás ayudando. Cuando lo abran y compartan su pantalla, aparecerá abajo.',
+      shareLinkLabel: 'Comparte este enlace',
+      copyLabel: 'Copiar',
+      orReadCodeLabel: 'O léeles este código',
+      qrHintText: 'O que lo escaneen con la cámara de su teléfono',
+      expiryPrefix: 'Este código expira en',
+      expirySuffix: 'si nadie se une.',
+      reconnectBtnLabel: '🔄 Intentar reconectar',
+      playOverlayLabel: '▶ Haz clic para empezar a ver',
+      pointerToggleText: 'Señala cosas en su pantalla — mueve tu ratón sobre el video de arriba mientras esto esté marcado. Verán un punto rojo en su mini-vista previa.',
+      recordBtnLabel: '🔴 Grabar esta sesión',
+      stopRecordingLabel: '⏹ Detener grabación',
+      downloadRecordingLabel: '⬇ Descargar grabación',
+      recordHintText: 'La grabación se guarda solo localmente en tu dispositivo — la llamada en sí nunca se sube a ningún lugar.',
+      endSessionLabel: 'Finalizar sesión',
+      clientHeading: 'Compartiendo tu pantalla',
+      clientTrustHint: 'Alguien quiere ayudarte. Continúa solo si conoces y confías en quien te envió este enlace o código.',
+      shareScreenBtnLabel: '🖥️ Compartir mi pantalla',
+      pointerHintText: 'Esta mini-vista previa es lo que estás compartiendo. Si señalan algo, verás un punto rojo aquí.',
+      stopSharingLabel: 'Dejar de compartir',
+      chatPlaceholder: 'Escribe un mensaje…',
+      chatSendLabel: 'Enviar',
+      chatWhoYou: 'Tú',
+      chatWhoThem: 'Ellos',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Una vez conectados, el video, audio y chat viajan directamente entre los dos navegadores (de igual a igual) — el servidor de esta herramienta solo transmite el intercambio inicial de conexión y nunca ve ni almacena la llamada en sí. Compartir pantalla siempre pasa por el selector propio de tu navegador, y tú (o ellos) pueden detenerlo en cualquier momento. Esto necesita una configuración inicial por parte del propietario del sitio — consulta <code>cloudflare-worker/README.md</code>. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      statusSettingUp: 'Configurando…',
+      statusWaitingForJoin: 'Esperando a que se unan — envía el enlace o código de arriba.',
+      statusConnectedHelper: 'Conectado — viendo su pantalla.',
+      statusConnectionLost: 'Conexión perdida.',
+      statusExpired: 'Este código expiró antes de que alguien se uniera — inicia una nueva sesión.',
+      statusReconnecting: 'Reconectando…',
+      statusReconnectedHelper: 'Reconectado — viendo su pantalla.',
+      statusWaitingReconnect: 'Esperando a que se reconecten…',
+      errorNotConfigured: 'Esta herramienta necesita una configuración inicial por parte del propietario del sitio antes de poder conectar a las personas — consulta cloudflare-worker/README.md.',
+      errorSignalServer: 'No se pudo contactar con el servidor de señalización (estado {status}).',
+      errorTimedOut: 'Tiempo de espera agotado — el código puede haber expirado. Intenta iniciar una nueva sesión.',
+      errorCouldNotStart: 'No se pudo iniciar la sesión: {message}',
+      errorCouldNotReconnect: 'No se pudo reconectar: {message}',
+      errorNoRecordingFormat: 'No se encontró un formato de grabación compatible en este navegador.',
+      errorCannotRecordVideo: 'Este navegador no puede grabar la reproducción de video.',
+      errorStartSharingFirst: 'Comparte tu pantalla primero.',
+      statusLookingForSession: 'Buscando la sesión…',
+      errorEnterCode: 'Introduce el código que te dieron.',
+      errorCouldNotFindSession: 'No se pudo encontrar esa sesión — verifica el código, o pídeles que inicien una nueva.',
+      errorCouldNotReadOffer: 'No se pudo leer la oferta de la sesión: {message}',
+      statusNoDisplayMedia: 'Este dispositivo o navegador no puede compartir su pantalla.',
+      errorNoScreenShareSupport: 'La mayoría de los navegadores de teléfonos y tabletas no admiten compartir pantalla. Intenta abrir este enlace en un escritorio o portátil — Chrome, Edge, Firefox, o Safari en una Mac funcionan.',
+      statusReadyToShare: 'Listo — haz clic abajo para elegir qué compartir.',
+      errorNoScreenShareShort: 'Este dispositivo o navegador no puede compartir su pantalla. Intenta abrir este enlace en un escritorio o portátil.',
+      errorScreenShareBlocked: 'Compartir pantalla fue bloqueado o cancelado — haz clic en "Compartir mi pantalla" y elige una pantalla, ventana o pestaña para continuar.',
+      errorScreenShareFailed: 'No se pudo iniciar el uso compartido de pantalla: {message}',
+      statusConnectedClient: 'Conectado — tu pantalla se está compartiendo.',
+      errorCouldNotConnect: 'No se pudo conectar: {message}',
+      statusWaitingNewSessionDetails: 'Esperando los nuevos detalles de la sesión…',
+      statusReconnectedClient: 'Reconectado — tu pantalla se está compartiendo.',
+      errorNoWebRTC: 'Tu navegador no admite la tecnología que necesita esta herramienta (WebRTC). Prueba con la última versión de Chrome, Edge o Firefox.'
+    },
+    ar: {
+      heroSubtitle: 'أرسل رابطًا، احصل على رمز، وشاهد شاشة شخص ما مباشرة حتى تتمكن من مساعدته — بدون تثبيت، ولا شيء يُسجَّل.',
+      chooseHeading: 'ماذا تحتاج؟',
+      startHelperBtnLabel: '🛠️ أريد مساعدة شخص ما — بدء جلسة',
+      startHelperHint: 'ستحصل على رابط ورمز. أرسلهما إلى الشخص الذي تساعده — بمجرد أن يفتحه ويختار المشاركة، ستظهر شاشته هنا مباشرة.',
+      startClientBtnLabel: '🙋 أعطاني شخص ما رمزًا — أحتاج مساعدة',
+      manualCodeLabel: 'أدخل الرمز الذي أعطوك إياه',
+      continueLabel: 'متابعة',
+      helperHeading: 'جلسة المساعدة',
+      helperSetupHint: 'أرسل هذا الرابط إلى الشخص الذي تساعده. عندما يفتحه ويشارك شاشته، ستظهر أدناه.',
+      shareLinkLabel: 'شارك هذا الرابط',
+      copyLabel: 'نسخ',
+      orReadCodeLabel: 'أو اقرأ لهم هذا الرمز',
+      qrHintText: 'أو دعهم يمسحونه بكاميرا هاتفهم',
+      expiryPrefix: 'ينتهي هذا الرمز خلال',
+      expirySuffix: 'إذا لم ينضم أحد.',
+      reconnectBtnLabel: '🔄 محاولة إعادة الاتصال',
+      playOverlayLabel: '▶ انقر لبدء المشاهدة',
+      pointerToggleText: '🔴 أشر إلى أشياء على شاشتهم — حرّك الفأرة فوق الفيديو أعلاه أثناء تفعيل هذا الخيار. سيرون نقطة حمراء على معاينتهم المصغرة.',
+      recordBtnLabel: '🔴 تسجيل هذه الجلسة',
+      stopRecordingLabel: '⏹ إيقاف التسجيل',
+      downloadRecordingLabel: '⬇ تنزيل التسجيل',
+      recordHintText: 'يُحفظ التسجيل محليًا على جهازك فقط — المكالمة نفسها لا تُرفع أبدًا إلى أي مكان.',
+      endSessionLabel: 'إنهاء الجلسة',
+      clientHeading: 'مشاركة شاشتك',
+      clientTrustHint: 'يريد شخص ما مساعدتك. تابع فقط إذا كنت تعرف وتثق بمن أرسل لك هذا الرابط أو الرمز.',
+      shareScreenBtnLabel: '🖥️ مشاركة شاشتي',
+      pointerHintText: 'هذه المعاينة المصغرة هي ما تشاركه. إذا أشاروا إلى شيء ما، سترى نقطة حمراء عليه هنا.',
+      stopSharingLabel: 'إيقاف المشاركة',
+      chatPlaceholder: 'اكتب رسالة…',
+      chatSendLabel: 'إرسال',
+      chatWhoYou: 'أنت',
+      chatWhoThem: 'هم',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. بمجرد الاتصال، ينتقل الفيديو والصوت والدردشة مباشرة بين المتصفحين (نظير إلى نظير) — يقوم خادم هذه الأداة فقط بترحيل مصافحة الاتصال لمرة واحدة ولا يرى أو يخزن المكالمة نفسها أبدًا. تمر مشاركة الشاشة دائمًا عبر أداة الاختيار الخاصة بمتصفحك، ويمكنك أنت (أو هم) إيقافها في أي وقت. يحتاج هذا إلى إعداد لمرة واحدة من قِبل مالك الموقع — راجع <code>cloudflare-worker/README.md</code>. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      statusSettingUp: 'جارٍ الإعداد…',
+      statusWaitingForJoin: 'في انتظار انضمامهم — أرسل الرابط أو الرمز أعلاه.',
+      statusConnectedHelper: 'متصل — يعرض شاشتهم.',
+      statusConnectionLost: 'انقطع الاتصال.',
+      statusExpired: 'انتهت صلاحية هذا الرمز قبل أن ينضم أحد — ابدأ جلسة جديدة.',
+      statusReconnecting: 'جارٍ إعادة الاتصال…',
+      statusReconnectedHelper: 'أُعيد الاتصال — يعرض شاشتهم.',
+      statusWaitingReconnect: 'في انتظار إعادة اتصالهم…',
+      errorNotConfigured: 'تحتاج هذه الأداة إلى إعداد لمرة واحدة من قِبل مالك الموقع قبل أن تتمكن من ربط الأشخاص — راجع cloudflare-worker/README.md.',
+      errorSignalServer: 'تعذر الوصول إلى خادم الإشارة (الحالة {status}).',
+      errorTimedOut: 'انتهت مهلة الانتظار — ربما انتهت صلاحية الرمز. حاول بدء جلسة جديدة.',
+      errorCouldNotStart: 'تعذر بدء الجلسة: {message}',
+      errorCouldNotReconnect: 'تعذر إعادة الاتصال: {message}',
+      errorNoRecordingFormat: 'لم يتم العثور على تنسيق تسجيل مدعوم في هذا المتصفح.',
+      errorCannotRecordVideo: 'لا يمكن لهذا المتصفح تسجيل تشغيل الفيديو.',
+      errorStartSharingFirst: 'شارك شاشتك أولاً.',
+      statusLookingForSession: 'جارٍ البحث عن الجلسة…',
+      errorEnterCode: 'أدخل الرمز الذي أُعطيته.',
+      errorCouldNotFindSession: 'تعذر العثور على تلك الجلسة — تحقق من الرمز، أو اطلب منهم بدء جلسة جديدة.',
+      errorCouldNotReadOffer: 'تعذر قراءة عرض الجلسة: {message}',
+      statusNoDisplayMedia: 'لا يمكن لهذا الجهاز أو المتصفح مشاركة شاشته.',
+      errorNoScreenShareSupport: 'معظم متصفحات الهواتف والأجهزة اللوحية لا تدعم مشاركة الشاشة. حاول فتح هذا الرابط على جهاز كمبيوتر مكتبي أو محمول بدلاً من ذلك — تعمل Chrome وEdge وFirefox أو Safari على Mac جميعها.',
+      statusReadyToShare: 'جاهز — انقر أدناه لاختيار ما تريد مشاركته.',
+      errorNoScreenShareShort: 'لا يمكن لهذا الجهاز أو المتصفح مشاركة شاشته. حاول فتح هذا الرابط على جهاز كمبيوتر مكتبي أو محمول بدلاً من ذلك.',
+      errorScreenShareBlocked: 'تم حظر مشاركة الشاشة أو إلغاؤها — انقر على "مشاركة شاشتي" واختر شاشة أو نافذة أو علامة تبويب للمتابعة.',
+      errorScreenShareFailed: 'تعذر بدء مشاركة الشاشة: {message}',
+      statusConnectedClient: 'متصل — يتم مشاركة شاشتك.',
+      errorCouldNotConnect: 'تعذر الاتصال: {message}',
+      statusWaitingNewSessionDetails: 'في انتظار تفاصيل الجلسة الجديدة…',
+      statusReconnectedClient: 'أُعيد الاتصال — يتم مشاركة شاشتك.',
+      errorNoWebRTC: 'متصفحك لا يدعم التقنية التي تحتاجها هذه الأداة (WebRTC). جرّب أحدث إصدار من Chrome أو Edge أو Firefox.'
+    },
+    zh: {
+      heroSubtitle: '发送一个链接，获取一个代码，实时查看对方的屏幕以便为其提供帮助——无需安装，不录制任何内容。',
+      chooseHeading: '你需要什么？',
+      startHelperBtnLabel: '🛠️ 我想帮助别人——开始一个会话',
+      startHelperHint: '你会获得一个链接和一个代码。把它发给你要帮助的人——一旦他们打开并选择共享，他们的屏幕就会实时显示在这里。',
+      startClientBtnLabel: '🙋 有人给了我一个代码——我需要帮助',
+      manualCodeLabel: '输入他们给你的代码',
+      continueLabel: '继续',
+      helperHeading: '帮助会话',
+      helperSetupHint: '把这个链接发给你要帮助的人。当他们打开并共享屏幕后，会显示在下面。',
+      shareLinkLabel: '分享这个链接',
+      copyLabel: '复制',
+      orReadCodeLabel: '或者把这个代码读给他们听',
+      qrHintText: '或者让他们用手机摄像头扫描这个',
+      expiryPrefix: '此代码将在',
+      expirySuffix: '后过期（如果没人加入）。',
+      reconnectBtnLabel: '🔄 尝试重新连接',
+      playOverlayLabel: '▶ 点击开始观看',
+      pointerToggleText: '🔴 在他们的屏幕上指点——勾选此项后，将鼠标移到上方视频上。他们会在自己的小预览上看到一个红点。',
+      recordBtnLabel: '🔴 录制此会话',
+      stopRecordingLabel: '⏹ 停止录制',
+      downloadRecordingLabel: '⬇ 下载录制内容',
+      recordHintText: '录制内容仅保存在你的设备本地——通话本身绝不会上传到任何地方。',
+      endSessionLabel: '结束会话',
+      clientHeading: '共享你的屏幕',
+      clientTrustHint: '有人想帮助你。只有在你认识并信任发给你这个链接或代码的人时才继续。',
+      shareScreenBtnLabel: '🖥️ 共享我的屏幕',
+      pointerHintText: '这个小预览是你正在共享的内容。如果他们指向某个地方，你会在这里看到一个红点。',
+      stopSharingLabel: '停止共享',
+      chatPlaceholder: '输入消息…',
+      chatSendLabel: '发送',
+      chatWhoYou: '你',
+      chatWhoThem: '对方',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。连接后，视频、音频和聊天直接在两个浏览器之间传输（点对点）——此工具的服务器仅转发一次性的连接握手，绝不会查看或存储通话本身。屏幕共享始终通过你浏览器自带的选择器进行，你（或对方）可以随时停止。这需要网站所有者先完成一次性设置——请参阅 <code>cloudflare-worker/README.md</code>。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      statusSettingUp: '设置中…',
+      statusWaitingForJoin: '正在等待对方加入——请发送上方的链接或代码。',
+      statusConnectedHelper: '已连接——正在查看对方屏幕。',
+      statusConnectionLost: '连接已断开。',
+      statusExpired: '此代码在有人加入之前已过期——请开始新的会话。',
+      statusReconnecting: '重新连接中…',
+      statusReconnectedHelper: '已重新连接——正在查看对方屏幕。',
+      statusWaitingReconnect: '正在等待对方重新连接…',
+      errorNotConfigured: '此工具需要网站所有者先完成一次性设置才能连接用户——请参阅 cloudflare-worker/README.md。',
+      errorSignalServer: '无法连接到信令服务器（状态 {status}）。',
+      errorTimedOut: '等待超时——代码可能已过期。请尝试开始新的会话。',
+      errorCouldNotStart: '无法开始会话：{message}',
+      errorCouldNotReconnect: '无法重新连接：{message}',
+      errorNoRecordingFormat: '此浏览器未找到支持的录制格式。',
+      errorCannotRecordVideo: '此浏览器无法录制视频播放。',
+      errorStartSharingFirst: '请先共享你的屏幕。',
+      statusLookingForSession: '正在查找会话…',
+      errorEnterCode: '请输入你收到的代码。',
+      errorCouldNotFindSession: '找不到该会话——请仔细检查代码，或请他们开始一个新的会话。',
+      errorCouldNotReadOffer: '无法读取会话提议：{message}',
+      statusNoDisplayMedia: '此设备或浏览器无法共享其屏幕。',
+      errorNoScreenShareSupport: '大多数手机和平板浏览器不支持屏幕共享。请尝试在桌面或笔记本电脑上打开此链接——Chrome、Edge、Firefox 或 Mac 上的 Safari 均可使用。',
+      statusReadyToShare: '已就绪——点击下方选择要共享的内容。',
+      errorNoScreenShareShort: '此设备或浏览器无法共享其屏幕。请尝试在桌面或笔记本电脑上打开此链接。',
+      errorScreenShareBlocked: '屏幕共享被阻止或取消——请点击"共享我的屏幕"并选择一个屏幕、窗口或标签页以继续。',
+      errorScreenShareFailed: '无法开始屏幕共享：{message}',
+      statusConnectedClient: '已连接——你的屏幕正在被共享。',
+      errorCouldNotConnect: '无法连接：{message}',
+      statusWaitingNewSessionDetails: '正在等待新的会话详情…',
+      statusReconnectedClient: '已重新连接——你的屏幕正在被共享。',
+      errorNoWebRTC: '你的浏览器不支持此工具所需的技术（WebRTC）。请尝试最新版本的 Chrome、Edge 或 Firefox。'
+    },
+    sw: {
+      heroSubtitle: 'Tuma kiungo, pata msimbo, na uone skrini ya mtu moja kwa moja ili uweze kumsaidia — hakuna usakinishaji, hakuna kinachorekodiwa.',
+      chooseHeading: 'Unahitaji nini?',
+      startHelperBtnLabel: '🛠️ Ninataka kumsaidia mtu — anzisha kipindi',
+      startHelperHint: 'Utapata kiungo na msimbo. Mtumie mtu unayemsaidia — mara tu anapokifungua na kuchagua kushiriki, skrini yake itaonekana hapa moja kwa moja.',
+      startClientBtnLabel: '🙋 Mtu amenipa msimbo — nahitaji msaada',
+      manualCodeLabel: 'Ingiza msimbo waliokupa',
+      continueLabel: 'Endelea',
+      helperHeading: 'Kipindi cha kusaidia',
+      helperSetupHint: 'Mtumie kiungo hiki mtu unayemsaidia. Wakati anapokifungua na kushiriki skrini yake, itaonekana hapa chini.',
+      shareLinkLabel: 'Shiriki kiungo hiki',
+      copyLabel: 'Nakili',
+      orReadCodeLabel: 'Au wasomee msimbo huu',
+      qrHintText: 'Au waache waskani kwa kamera ya simu yao',
+      expiryPrefix: 'Msimbo huu unaisha muda wake baada ya',
+      expirySuffix: 'ikiwa hakuna atakayejiunga.',
+      reconnectBtnLabel: '🔄 Jaribu kuunganisha tena',
+      playOverlayLabel: '▶ Bofya kuanza kutazama',
+      pointerToggleText: '🔴 Onyesha vitu kwenye skrini yao — sogeza kipanya chako juu ya video hapo juu wakati hii imechaguliwa. Wataona doti nyekundu kwenye muonekano wao mdogo.',
+      recordBtnLabel: '🔴 Rekodi kipindi hiki',
+      stopRecordingLabel: '⏹ Simamisha kurekodi',
+      downloadRecordingLabel: '⬇ Pakua rekodi',
+      recordHintText: 'Rekodi huhifadhiwa ndani ya kifaa chako pekee — simu yenyewe haipakiwi popote kamwe.',
+      endSessionLabel: 'Maliza kipindi',
+      clientHeading: 'Kushiriki skrini yako',
+      clientTrustHint: 'Mtu anataka kukusaidia. Endelea tu ikiwa unamjua na kumwamini aliyekutumia kiungo au msimbo huu.',
+      shareScreenBtnLabel: '🖥️ Shiriki skrini yangu',
+      pointerHintText: 'Muonekano huu mdogo ndio unachoshiriki. Ikiwa wataonyesha kitu, utaona doti nyekundu hapa.',
+      stopSharingLabel: 'Acha kushiriki',
+      chatPlaceholder: 'Andika ujumbe…',
+      chatSendLabel: 'Tuma',
+      chatWhoYou: 'Wewe',
+      chatWhoThem: 'Wao',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Mara tu imeunganishwa, video, sauti na mazungumzo husafiri moja kwa moja kati ya vivinjari viwili (rika kwa rika) — seva ya chombo hiki hupitisha tu mkono wa muunganisho wa mara moja na haioni au kuhifadhi simu yenyewe kamwe. Kushiriki skrini daima hupitia kichaguzi cha kivinjari chako mwenyewe, na wewe (au wao) mnaweza kukisimamisha wakati wowote. Hii inahitaji usanidi wa mara moja na mmiliki wa tovuti — angalia <code>cloudflare-worker/README.md</code>. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      statusSettingUp: 'Inaweka mipangilio…',
+      statusWaitingForJoin: 'Inasubiri wajiunge — tuma kiungo au msimbo hapo juu.',
+      statusConnectedHelper: 'Imeunganishwa — inaonyesha skrini yao.',
+      statusConnectionLost: 'Muunganisho umepotea.',
+      statusExpired: 'Msimbo huu uliisha muda wake kabla ya mtu yeyote kujiunga — anzisha kipindi kipya.',
+      statusReconnecting: 'Inaunganisha tena…',
+      statusReconnectedHelper: 'Imeunganishwa tena — inaonyesha skrini yao.',
+      statusWaitingReconnect: 'Inasubiri waunganishe tena…',
+      errorNotConfigured: 'Chombo hiki kinahitaji usanidi wa mara moja na mmiliki wa tovuti kabla ya kuweza kuunganisha watu — angalia cloudflare-worker/README.md.',
+      errorSignalServer: 'Imeshindwa kufikia seva ya ishara (hali {status}).',
+      errorTimedOut: 'Muda wa kusubiri umeisha — msimbo unaweza kuwa umeisha muda wake. Jaribu kuanzisha kipindi kipya.',
+      errorCouldNotStart: 'Imeshindwa kuanzisha kipindi: {message}',
+      errorCouldNotReconnect: 'Imeshindwa kuunganisha tena: {message}',
+      errorNoRecordingFormat: 'Hakuna muundo wa kurekodi unaotumika uliopatikana kwenye kivinjari hiki.',
+      errorCannotRecordVideo: 'Kivinjari hiki hakiwezi kurekodi uchezaji wa video.',
+      errorStartSharingFirst: 'Shiriki skrini yako kwanza.',
+      statusLookingForSession: 'Inatafuta kipindi…',
+      errorEnterCode: 'Ingiza msimbo uliopewa.',
+      errorCouldNotFindSession: 'Imeshindwa kupata kipindi hicho — angalia tena msimbo, au waombe waanzishe kipya.',
+      errorCouldNotReadOffer: 'Imeshindwa kusoma toleo la kipindi: {message}',
+      statusNoDisplayMedia: 'Kifaa au kivinjari hiki hakiwezi kushiriki skrini yake.',
+      errorNoScreenShareSupport: 'Vivinjari vingi vya simu na kompyuta kibao havitumii kushiriki skrini. Jaribu kufungua kiungo hiki kwenye kompyuta ya mezani au mkononi badala yake — Chrome, Edge, Firefox, au Safari kwenye Mac zote hufanya kazi.',
+      statusReadyToShare: 'Tayari — bofya hapa chini kuchagua cha kushiriki.',
+      errorNoScreenShareShort: 'Kifaa au kivinjari hiki hakiwezi kushiriki skrini yake. Jaribu kufungua kiungo hiki kwenye kompyuta ya mezani au mkononi badala yake.',
+      errorScreenShareBlocked: 'Kushiriki skrini kulizuiwa au kughairiwa — bofya "Shiriki skrini yangu" na uchague skrini, dirisha, au kichupo ili kuendelea.',
+      errorScreenShareFailed: 'Imeshindwa kuanzisha kushiriki skrini: {message}',
+      statusConnectedClient: 'Imeunganishwa — skrini yako inashirikiwa.',
+      errorCouldNotConnect: 'Imeshindwa kuunganisha: {message}',
+      statusWaitingNewSessionDetails: 'Inasubiri maelezo mapya ya kipindi…',
+      statusReconnectedClient: 'Imeunganishwa tena — skrini yako inashirikiwa.',
+      errorNoWebRTC: 'Kivinjari chako hakitumii teknolojia inayohitajika na chombo hiki (WebRTC). Jaribu toleo jipya zaidi la Chrome, Edge, au Firefox.'
+    },
+    sv: {
+      heroSubtitle: "Skicka en länk, få en kod och se någons skärm live så att du kan hjälpa dem — inga installationer, inget spelas in.",
+      chooseHeading: "Vad behöver du?",
+      startHelperBtnLabel: "🛠️ Jag vill hjälpa någon — starta en session",
+      startHelperHint: "Du får en länk och en kod. Skicka den till personen du hjälper — när de öppnar den och väljer att dela visas deras skärm här live.",
+      startClientBtnLabel: "🙋 Någon gav mig en kod — jag behöver hjälp",
+      manualCodeLabel: "Ange koden du fick",
+      continueLabel: "Fortsätt",
+      helperHeading: "Hjälpsession",
+      helperSetupHint: "Skicka den här länken till personen du hjälper. När de öppnar den och delar sin skärm visas den nedan.",
+      shareLinkLabel: "Dela den här länken",
+      copyLabel: "Kopiera",
+      orReadCodeLabel: "Eller läs upp den här koden",
+      qrHintText: "Eller låt dem skanna den här med mobilkameran",
+      expiryPrefix: "Koden går ut om",
+      expirySuffix: "om ingen ansluter.",
+      reconnectBtnLabel: "🔄 Försök ansluta igen",
+      playOverlayLabel: "▶ Klicka för att börja titta",
+      pointerToggleText: "🔴 Peka på saker på deras skärm — för musen över videon ovan medan detta är ikryssat. De ser en röd prick i sin miniförhandsvisning.",
+      recordBtnLabel: "🔴 Spela in sessionen",
+      stopRecordingLabel: "⏹ Stoppa inspelningen",
+      downloadRecordingLabel: "⬇ Ladda ner inspelningen",
+      recordHintText: "Inspelningen sparas bara lokalt på din enhet — själva samtalet laddas aldrig upp någonstans.",
+      endSessionLabel: "Avsluta sessionen",
+      clientHeading: "Du delar din skärm",
+      clientTrustHint: "Någon vill hjälpa dig. Fortsätt bara om du känner och litar på den som skickade länken eller koden.",
+      shareScreenBtnLabel: "🖥️ Dela min skärm",
+      pointerHintText: "Den här miniförhandsvisningen är det du delar. Om de pekar på något ser du en röd prick här.",
+      stopSharingLabel: "Sluta dela",
+      chatPlaceholder: "Skriv ett meddelande…",
+      chatSendLabel: "Skicka",
+      chatWhoYou: "Du",
+      chatWhoThem: "De",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. När ni är anslutna går video, ljud och chatt direkt mellan de två webbläsarna (peer-to-peer) — verktygets server förmedlar bara den första anslutningen och ser eller sparar aldrig själva samtalet. Skärmdelning går alltid via webbläsarens egen väljare, och du (eller de) kan stoppa den när som helst. Detta kräver en engångsinställning av webbplatsens ägare — se <code>cloudflare-worker/README.md</code>. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      statusSettingUp: "Förbereder…",
+      statusWaitingForJoin: "Väntar på att de ska ansluta — skicka länken eller koden ovan.",
+      statusConnectedHelper: "Ansluten — du ser deras skärm.",
+      statusConnectionLost: "Anslutningen bröts.",
+      statusExpired: "Koden gick ut innan någon anslöt — starta en ny session.",
+      statusReconnecting: "Ansluter igen…",
+      statusReconnectedHelper: "Ansluten igen — du ser deras skärm.",
+      statusWaitingReconnect: "Väntar på att de ska ansluta igen…",
+      errorNotConfigured: "Det här verktyget kräver en engångsinställning av webbplatsens ägare innan det kan koppla ihop personer — se cloudflare-worker/README.md.",
+      errorSignalServer: "Kunde inte nå signalservern (status {status}).",
+      errorTimedOut: "Tidsgränsen nåddes — koden kan ha gått ut. Prova att starta en ny session.",
+      errorCouldNotStart: "Kunde inte starta sessionen: {message}",
+      errorCouldNotReconnect: "Kunde inte ansluta igen: {message}",
+      errorNoRecordingFormat: "Inget inspelningsformat som stöds hittades i den här webbläsaren.",
+      errorCannotRecordVideo: "Den här webbläsaren kan inte spela in videouppspelning.",
+      errorStartSharingFirst: "Börja dela din skärm först.",
+      statusLookingForSession: "Letar efter sessionen…",
+      errorEnterCode: "Ange koden du fick.",
+      errorCouldNotFindSession: "Hittade inte den sessionen — kontrollera koden, eller be dem starta en ny.",
+      errorCouldNotReadOffer: "Kunde inte läsa sessionserbjudandet: {message}",
+      statusNoDisplayMedia: "Den här enheten eller webbläsaren kan inte dela skärmen.",
+      errorNoScreenShareSupport: "De flesta webbläsare i mobiler och surfplattor stöder inte skärmdelning. Prova att öppna länken på en stationär eller bärbar dator i stället — Chrome, Edge, Firefox eller Safari på Mac fungerar.",
+      statusReadyToShare: "Redo — klicka nedan för att välja vad du vill dela.",
+      errorNoScreenShareShort: "Den här enheten eller webbläsaren kan inte dela skärmen. Prova att öppna länken på en stationär eller bärbar dator i stället.",
+      errorScreenShareBlocked: "Skärmdelningen blockerades eller avbröts — klicka på \"Dela min skärm\" och välj en skärm, ett fönster eller en flik för att fortsätta.",
+      errorScreenShareFailed: "Kunde inte starta skärmdelning: {message}",
+      statusConnectedClient: "Ansluten — din skärm delas.",
+      errorCouldNotConnect: "Kunde inte ansluta: {message}",
+      statusWaitingNewSessionDetails: "Väntar på uppgifter om den nya sessionen…",
+      statusReconnectedClient: "Ansluten igen — din skärm delas.",
+      errorNoWebRTC: "Din webbläsare stöder inte tekniken som verktyget behöver (WebRTC). Prova senaste Chrome, Edge eller Firefox."
+    },
+    de: {
+      heroSubtitle: "Schick einen Link, bekomm einen Code und sieh den Bildschirm von jemandem live, um zu helfen — ohne Installation, ohne Aufnahme.",
+      chooseHeading: "Was brauchst du?",
+      startHelperBtnLabel: "🛠️ Ich will jemandem helfen — Sitzung starten",
+      startHelperHint: "Du bekommst einen Link und einen Code. Schick sie der Person, der du hilfst — sobald sie ihn öffnet und das Teilen wählt, erscheint ihr Bildschirm hier live.",
+      startClientBtnLabel: "🙋 Jemand hat mir einen Code gegeben — ich brauche Hilfe",
+      manualCodeLabel: "Gib den Code ein, den du bekommen hast",
+      continueLabel: "Weiter",
+      helperHeading: "Hilfesitzung",
+      helperSetupHint: "Schick diesen Link der Person, der du hilfst. Wenn sie ihn öffnet und ihren Bildschirm teilt, erscheint er unten.",
+      shareLinkLabel: "Diesen Link teilen",
+      copyLabel: "Kopieren",
+      orReadCodeLabel: "Oder lies ihr diesen Code vor",
+      qrHintText: "Oder lass sie das mit der Handykamera scannen",
+      expiryPrefix: "Dieser Code läuft ab in",
+      expirySuffix: "wenn niemand beitritt.",
+      reconnectBtnLabel: "🔄 Neu verbinden",
+      playOverlayLabel: "▶ Klicken, um zuzusehen",
+      pointerToggleText: "🔴 Auf Dinge auf ihrem Bildschirm zeigen — beweg die Maus über das Video oben, solange das angekreuzt ist. Sie sehen einen roten Punkt in ihrer Mini-Vorschau.",
+      recordBtnLabel: "🔴 Diese Sitzung aufnehmen",
+      stopRecordingLabel: "⏹ Aufnahme stoppen",
+      downloadRecordingLabel: "⬇ Aufnahme herunterladen",
+      recordHintText: "Die Aufnahme wird nur lokal auf deinem Gerät gespeichert — die Verbindung selbst wird nie hochgeladen.",
+      endSessionLabel: "Sitzung beenden",
+      clientHeading: "Du teilst deinen Bildschirm",
+      clientTrustHint: "Jemand will dir helfen. Mach nur weiter, wenn du weißt und vertraust, wer dir diesen Link oder Code geschickt hat.",
+      shareScreenBtnLabel: "🖥️ Meinen Bildschirm teilen",
+      pointerHintText: "Diese Mini-Vorschau zeigt, was du teilst. Wenn auf etwas gezeigt wird, siehst du hier einen roten Punkt.",
+      stopSharingLabel: "Teilen beenden",
+      chatPlaceholder: "Nachricht eingeben…",
+      chatSendLabel: "Senden",
+      chatWhoYou: "Du",
+      chatWhoThem: "Gegenüber",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Sobald verbunden, gehen Video, Ton und Chat direkt zwischen den beiden Browsern (Peer-to-Peer) — der Server dieses Werkzeugs vermittelt nur den einmaligen Verbindungsaufbau und sieht oder speichert das Gespräch nie. Bildschirmteilen läuft immer über die eigene Auswahl deines Browsers, und du (oder die andere Person) kannst es jederzeit beenden. Dafür ist eine einmalige Einrichtung durch den Betreiber der Website nötig — siehe <code>cloudflare-worker/README.md<\/code>. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      statusSettingUp: "Wird eingerichtet…",
+      statusWaitingForJoin: "Warte, bis sie beitreten — schick den Link oder Code oben.",
+      statusConnectedHelper: "Verbunden — du siehst ihren Bildschirm.",
+      statusConnectionLost: "Verbindung verloren.",
+      statusExpired: "Dieser Code ist abgelaufen, bevor jemand beigetreten ist — starte eine neue Sitzung.",
+      statusReconnecting: "Verbinde neu…",
+      statusReconnectedHelper: "Wieder verbunden — du siehst ihren Bildschirm.",
+      statusWaitingReconnect: "Warte, bis sie sich wieder verbinden…",
+      errorNotConfigured: "Dieses Werkzeug braucht eine einmalige Einrichtung durch den Betreiber der Website, bevor es Leute verbinden kann — siehe cloudflare-worker/README.md.",
+      errorSignalServer: "Der Signalisierungsserver war nicht erreichbar (Status {status}).",
+      errorTimedOut: "Zeitüberschreitung beim Warten — der Code ist vielleicht abgelaufen. Starte eine neue Sitzung.",
+      errorCouldNotStart: "Sitzung konnte nicht gestartet werden: {message}",
+      errorCouldNotReconnect: "Neu verbinden fehlgeschlagen: {message}",
+      errorNoRecordingFormat: "In diesem Browser wurde kein unterstütztes Aufnahmeformat gefunden.",
+      errorCannotRecordVideo: "Dieser Browser kann keine Videowiedergabe aufnehmen.",
+      errorStartSharingFirst: "Teile zuerst deinen Bildschirm.",
+      statusLookingForSession: "Sitzung wird gesucht…",
+      errorEnterCode: "Gib den Code ein, den du bekommen hast.",
+      errorCouldNotFindSession: "Diese Sitzung wurde nicht gefunden — prüfe den Code oder bitte um eine neue Sitzung.",
+      errorCouldNotReadOffer: "Das Sitzungsangebot konnte nicht gelesen werden: {message}",
+      statusNoDisplayMedia: "Dieses Gerät oder dieser Browser kann seinen Bildschirm nicht teilen.",
+      errorNoScreenShareSupport: "Die meisten Handy- und Tablet-Browser unterstützen kein Bildschirmteilen. Öffne diesen Link stattdessen auf einem Desktop oder Laptop — Chrome, Edge, Firefox oder Safari auf dem Mac funktionieren alle.",
+      statusReadyToShare: "Bereit — klick unten, um zu wählen, was du teilst.",
+      errorNoScreenShareShort: "Dieses Gerät oder dieser Browser kann seinen Bildschirm nicht teilen. Öffne diesen Link stattdessen auf einem Desktop oder Laptop.",
+      errorScreenShareBlocked: "Bildschirmteilen wurde blockiert oder abgebrochen — klick auf \"Meinen Bildschirm teilen\" und wähle einen Bildschirm, ein Fenster oder einen Tab, um fortzufahren.",
+      errorScreenShareFailed: "Bildschirmteilen konnte nicht starten: {message}",
+      statusConnectedClient: "Verbunden — dein Bildschirm wird geteilt.",
+      errorCouldNotConnect: "Verbindung fehlgeschlagen: {message}",
+      statusWaitingNewSessionDetails: "Warte auf die neuen Sitzungsdaten…",
+      statusReconnectedClient: "Wieder verbunden — dein Bildschirm wird geteilt.",
+      errorNoWebRTC: "Dein Browser unterstützt die nötige Technik (WebRTC) nicht. Versuch das neueste Chrome, Edge oder Firefox."
+    },
+    pt: {
+      heroSubtitle: "Envie um link, receba um código e veja a tela de alguém ao vivo para ajudar — sem instalar nada, sem gravar.",
+      chooseHeading: "Do que você precisa?",
+      startHelperBtnLabel: "🛠️ Quero ajudar alguém — iniciar sessão",
+      startHelperHint: "Você recebe um link e um código. Envie para a pessoa que vai ajudar — quando ela abrir e escolher compartilhar, a tela dela aparece aqui ao vivo.",
+      startClientBtnLabel: "🙋 Alguém me passou um código — preciso de ajuda",
+      manualCodeLabel: "Digite o código que recebeu",
+      continueLabel: "Continuar",
+      helperHeading: "Sessão de ajuda",
+      helperSetupHint: "Envie este link para a pessoa que vai ajudar. Quando ela abrir e compartilhar a tela, ela aparece abaixo.",
+      shareLinkLabel: "Compartilhe este link",
+      copyLabel: "Copiar",
+      orReadCodeLabel: "Ou leia este código para ela",
+      qrHintText: "Ou peça para escanear com a câmera do celular",
+      expiryPrefix: "Este código expira em",
+      expirySuffix: "se ninguém entrar.",
+      reconnectBtnLabel: "🔄 Tentar reconectar",
+      playOverlayLabel: "▶ Clique para começar a ver",
+      pointerToggleText: "🔴 Aponte coisas na tela dela — mova o mouse sobre o vídeo acima enquanto isto estiver marcado. Ela verá um ponto vermelho na mini-prévia.",
+      recordBtnLabel: "🔴 Gravar esta sessão",
+      stopRecordingLabel: "⏹ Parar gravação",
+      downloadRecordingLabel: "⬇ Baixar gravação",
+      recordHintText: "A gravação é salva só no seu dispositivo — a chamada em si nunca é enviada.",
+      endSessionLabel: "Encerrar sessão",
+      clientHeading: "Compartilhando sua tela",
+      clientTrustHint: "Alguém quer ajudar você. Só continue se souber e confiar em quem mandou este link ou código.",
+      shareScreenBtnLabel: "🖥️ Compartilhar minha tela",
+      pointerHintText: "Esta mini-prévia é o que você está compartilhando. Se apontarem algo, você verá um ponto vermelho aqui.",
+      stopSharingLabel: "Parar de compartilhar",
+      chatPlaceholder: "Digite uma mensagem…",
+      chatSendLabel: "Enviar",
+      chatWhoYou: "Você",
+      chatWhoThem: "A outra pessoa",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Depois de conectados, vídeo, áudio e chat vão direto entre os dois navegadores (ponto a ponto) — o servidor desta ferramenta só repassa o aperto de mão inicial da conexão e nunca vê nem guarda a chamada. O compartilhamento de tela sempre passa pelo seletor do próprio navegador, e você (ou a outra pessoa) pode parar a qualquer momento. Isto precisa de uma configuração única pelo dono do site — veja <code>cloudflare-worker/README.md<\/code>. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      statusSettingUp: "Configurando…",
+      statusWaitingForJoin: "Esperando a pessoa entrar — envie o link ou código acima.",
+      statusConnectedHelper: "Conectado — vendo a tela dela.",
+      statusConnectionLost: "Conexão perdida.",
+      statusExpired: "Este código expirou antes de alguém entrar — inicie uma nova sessão.",
+      statusReconnecting: "Reconectando…",
+      statusReconnectedHelper: "Reconectado — vendo a tela dela.",
+      statusWaitingReconnect: "Esperando a pessoa reconectar…",
+      errorNotConfigured: "Esta ferramenta precisa de uma configuração única pelo dono do site antes de conectar pessoas — veja cloudflare-worker/README.md.",
+      errorSignalServer: "Não foi possível falar com o servidor de sinalização (status {status}).",
+      errorTimedOut: "Tempo de espera esgotado — o código pode ter expirado. Tente iniciar uma nova sessão.",
+      errorCouldNotStart: "Não foi possível iniciar a sessão: {message}",
+      errorCouldNotReconnect: "Não foi possível reconectar: {message}",
+      errorNoRecordingFormat: "Nenhum formato de gravação suportado neste navegador.",
+      errorCannotRecordVideo: "Este navegador não consegue gravar a reprodução de vídeo.",
+      errorStartSharingFirst: "Comece a compartilhar sua tela primeiro.",
+      statusLookingForSession: "Procurando a sessão…",
+      errorEnterCode: "Digite o código que recebeu.",
+      errorCouldNotFindSession: "Não foi possível achar essa sessão — confira o código ou peça para iniciarem uma nova.",
+      errorCouldNotReadOffer: "Não foi possível ler a oferta da sessão: {message}",
+      statusNoDisplayMedia: "Este dispositivo ou navegador não consegue compartilhar a tela.",
+      errorNoScreenShareSupport: "A maioria dos navegadores de celular e tablet não suporta compartilhar a tela. Tente abrir este link num computador — Chrome, Edge, Firefox ou Safari no Mac funcionam.",
+      statusReadyToShare: "Pronto — clique abaixo para escolher o que compartilhar.",
+      errorNoScreenShareShort: "Este dispositivo ou navegador não consegue compartilhar a tela. Tente abrir este link num computador.",
+      errorScreenShareBlocked: "O compartilhamento foi bloqueado ou cancelado — clique em \"Compartilhar minha tela\" e escolha uma tela, janela ou aba para continuar.",
+      errorScreenShareFailed: "Não foi possível iniciar o compartilhamento: {message}",
+      statusConnectedClient: "Conectado — sua tela está sendo compartilhada.",
+      errorCouldNotConnect: "Não foi possível conectar: {message}",
+      statusWaitingNewSessionDetails: "Esperando os dados da nova sessão…",
+      statusReconnectedClient: "Reconectado — sua tela está sendo compartilhada.",
+      errorNoWebRTC: "Seu navegador não suporta a tecnologia de que esta ferramenta precisa (WebRTC). Tente a versão mais recente do Chrome, Edge ou Firefox."
+    },
+    fr: {
+      heroSubtitle: "Envoyez un lien, recevez un code et voyez l'écran de quelqu'un en direct pour l'aider — sans installation, sans enregistrement.",
+      chooseHeading: "De quoi avez-vous besoin ?",
+      startHelperBtnLabel: "🛠️ Je veux aider quelqu'un — démarrer une session",
+      startHelperHint: "Vous recevez un lien et un code. Envoyez-les à la personne que vous aidez — dès qu'elle l'ouvre et choisit de partager, son écran apparaît ici en direct.",
+      startClientBtnLabel: "🙋 Quelqu'un m'a donné un code — j'ai besoin d'aide",
+      manualCodeLabel: "Saisissez le code reçu",
+      continueLabel: "Continuer",
+      helperHeading: "Session d'aide",
+      helperSetupHint: "Envoyez ce lien à la personne que vous aidez. Quand elle l'ouvre et partage son écran, il apparaît ci-dessous.",
+      shareLinkLabel: "Partagez ce lien",
+      copyLabel: "Copier",
+      orReadCodeLabel: "Ou lisez-lui ce code",
+      qrHintText: "Ou faites-le scanner avec l'appareil photo de son téléphone",
+      expiryPrefix: "Ce code expire dans",
+      expirySuffix: "si personne ne rejoint.",
+      reconnectBtnLabel: "🔄 Essayer de se reconnecter",
+      playOverlayLabel: "▶ Cliquez pour commencer à regarder",
+      pointerToggleText: "🔴 Montrez des choses sur son écran — passez la souris sur la vidéo ci-dessus tant que c'est coché. La personne verra un point rouge sur son mini-aperçu.",
+      recordBtnLabel: "🔴 Enregistrer cette session",
+      stopRecordingLabel: "⏹ Arrêter l'enregistrement",
+      downloadRecordingLabel: "⬇ Télécharger l'enregistrement",
+      recordHintText: "L'enregistrement est sauvegardé uniquement sur votre appareil — l'appel lui-même n'est jamais envoyé.",
+      endSessionLabel: "Terminer la session",
+      clientHeading: "Partage de votre écran",
+      clientTrustHint: "Quelqu'un veut vous aider. Ne continuez que si vous connaissez et faites confiance à la personne qui vous a envoyé ce lien ou ce code.",
+      shareScreenBtnLabel: "🖥️ Partager mon écran",
+      pointerHintText: "Ce mini-aperçu est ce que vous partagez. Si on vous montre quelque chose, vous verrez un point rouge ici.",
+      stopSharingLabel: "Arrêter le partage",
+      chatPlaceholder: "Écrivez un message…",
+      chatSendLabel: "Envoyer",
+      chatWhoYou: "Vous",
+      chatWhoThem: "L'autre",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Une fois connectés, vidéo, son et chat passent directement entre les deux navigateurs (pair à pair) — le serveur de cet outil ne relaie que la poignée de main initiale et ne voit ni ne stocke jamais l'appel. Le partage d'écran passe toujours par le sélecteur de votre navigateur, et vous (ou l'autre) pouvez l'arrêter à tout moment. Cela nécessite une configuration unique par le propriétaire du site — voir <code>cloudflare-worker/README.md<\/code>. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      statusSettingUp: "Configuration…",
+      statusWaitingForJoin: "En attente qu'elle rejoigne — envoyez le lien ou le code ci-dessus.",
+      statusConnectedHelper: "Connecté — vous voyez son écran.",
+      statusConnectionLost: "Connexion perdue.",
+      statusExpired: "Ce code a expiré avant que quelqu'un rejoigne — démarrez une nouvelle session.",
+      statusReconnecting: "Reconnexion…",
+      statusReconnectedHelper: "Reconnecté — vous voyez son écran.",
+      statusWaitingReconnect: "En attente de sa reconnexion…",
+      errorNotConfigured: "Cet outil nécessite une configuration unique par le propriétaire du site avant de pouvoir connecter des personnes — voir cloudflare-worker/README.md.",
+      errorSignalServer: "Impossible de joindre le serveur de signalisation (statut {status}).",
+      errorTimedOut: "Délai d'attente dépassé — le code a peut-être expiré. Essayez de démarrer une nouvelle session.",
+      errorCouldNotStart: "Impossible de démarrer la session : {message}",
+      errorCouldNotReconnect: "Reconnexion impossible : {message}",
+      errorNoRecordingFormat: "Aucun format d'enregistrement pris en charge dans ce navigateur.",
+      errorCannotRecordVideo: "Ce navigateur ne peut pas enregistrer la lecture vidéo.",
+      errorStartSharingFirst: "Commencez d'abord à partager votre écran.",
+      statusLookingForSession: "Recherche de la session…",
+      errorEnterCode: "Saisissez le code reçu.",
+      errorCouldNotFindSession: "Session introuvable — vérifiez le code, ou demandez-en une nouvelle.",
+      errorCouldNotReadOffer: "Impossible de lire l'offre de session : {message}",
+      statusNoDisplayMedia: "Cet appareil ou ce navigateur ne peut pas partager son écran.",
+      errorNoScreenShareSupport: "La plupart des navigateurs de téléphone et de tablette ne permettent pas de partager l'écran. Ouvrez plutôt ce lien sur un ordinateur — Chrome, Edge, Firefox ou Safari sur Mac fonctionnent tous.",
+      statusReadyToShare: "Prêt — cliquez ci-dessous pour choisir quoi partager.",
+      errorNoScreenShareShort: "Cet appareil ou ce navigateur ne peut pas partager son écran. Ouvrez plutôt ce lien sur un ordinateur.",
+      errorScreenShareBlocked: "Le partage d'écran a été bloqué ou annulé — cliquez sur \"Partager mon écran\" et choisissez un écran, une fenêtre ou un onglet pour continuer.",
+      errorScreenShareFailed: "Impossible de démarrer le partage d'écran : {message}",
+      statusConnectedClient: "Connecté — votre écran est partagé.",
+      errorCouldNotConnect: "Connexion impossible : {message}",
+      statusWaitingNewSessionDetails: "En attente des détails de la nouvelle session…",
+      statusReconnectedClient: "Reconnecté — votre écran est partagé.",
+      errorNoWebRTC: "Votre navigateur ne prend pas en charge la technologie nécessaire (WebRTC). Essayez la dernière version de Chrome, Edge ou Firefox."
+    }
+  });
+
+  applyChatTranslations();
+  I18N.onChange(applyChatTranslations);
+
+  (function init() {
+    if (!('RTCPeerConnection' in window) || !navigator.mediaDevices) {
+      showError(I18N.t('errorNoWebRTC'));
+      return;
+    }
+    const params = new URLSearchParams(location.search);
+    const code = (params.get('code') || '').trim().toUpperCase();
+    if (code) prepareClientConnection(code);
+  })();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

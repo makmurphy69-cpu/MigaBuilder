@@ -46,9 +46,28 @@ A tool is not finished until **all** of these are done, in the same pull request
    The *Tool result tests* GitHub check runs them on every pull request. Long
    jobs should use the shared `miga-progress.js` panel (progress, time left,
    Cancel, what to try when it fails).
+7. Rebuild the language pages (see below): `node scripts/build-language-pages.mjs --meta <tool>`,
+   then `node scripts/build-language-pages.mjs`.
 
 When a tool changes in a way that makes its video wrong, update the scenario
 and record the video again.
+
+## Language pages (/es/, /ar/, /zh/, /sw/, /sv/, /de/, /pt/, /fr/)
+
+Each translated homepage tool, and the homepage, has a copy per language so
+search engines can index every language at its own address (with hreflang
+links and `sitemap-languages.xml`). The folders are **generated** — edit only
+the English page, then run:
+
+```bash
+node scripts/build-language-pages.mjs              # after changing index.html or any translated tool page
+node scripts/build-language-pages.mjs --meta <tool> # first, when its <title>, description or FAQ changed (needs Chromium)
+```
+
+The *Page smoke test* check runs `--check` and fails when the copies are out
+of date. Translated titles, descriptions and FAQ answers are kept in
+`i18n/page-meta.json`. Tools without translations (no `i18n.js`) get no
+language pages.
 
 ## Working with ChatGPT and Gemini
 

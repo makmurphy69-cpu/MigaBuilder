@@ -1,0 +1,1066 @@
+<!-- Generated from /index.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="sv" data-en-title="MigaBuilder — 88 Free Browser Tools to Create, Work and Learn">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='sv';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="/miga-palette.js" defer></script>
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MigaBuilder — Gratis verktyg som fungerar direkt i webbläsaren</title>
+<meta name="description" content="Gratis verktyg som fungerar direkt i webbläsaren — inget konto behövs. Redigera PDF:er, gör ett CV eller en faktura, fixa bilder och bygg webbplatser, videor och mycket mer.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://migabuilder.com/sv/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MigaBuilder">
+<meta property="og:title" content="MigaBuilder — Gratis verktyg som fungerar direkt i webbläsaren">
+<meta property="og:description" content="Gratis verktyg som fungerar direkt i webbläsaren — inget konto behövs. Redigera PDF:er, gör ett CV eller en faktura, fixa bilder och bygg webbplatser, videor och mycket mer.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/index.jpg">
+<meta property="og:url" content="https://migabuilder.com/sv/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MigaBuilder — Gratis verktyg som fungerar direkt i webbläsaren">
+<meta name="twitter:description" content="Gratis verktyg som fungerar direkt i webbläsaren — inget konto behövs. Redigera PDF:er, gör ett CV eller en faktura, fixa bilder och bygg webbplatser, videor och mycket mer.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/index.jpg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {"@type":"WebSite","@id":"https://migabuilder.com/#website","url":"https://migabuilder.com/","name":"MigaBuilder","description":"Create, convert and check files with 88 free browser tools. No signup.","inLanguage":["en","es","ar","zh","sw"]},
+    {"@type":"SoftwareApplication","@id":"https://migabuilder.com/#app","name":"MigaBuilder","url":"https://migabuilder.com/","applicationCategory":"DesignApplication","operatingSystem":"Any modern web browser","description":"A local-first toolkit for websites, files, documents, video and business assets.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["AI website builder","Local project hub","PDF toolkit","Private OCR","Website checkup","File utilities","Content repurposing","Form generator","Group video meetings","CV and résumé generator"]}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="i18n.js"></script>
+<script src="i18n/index.js"></script>
+
+<!--
+  OPTIONAL: to track how many people use MigaBuilder itself (not the sites it
+  generates), create a free property at https://analytics.google.com,
+  then uncomment these two tags and replace G-XXXXXXXXXX with your Measurement ID.
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+-->
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--navy);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    min-height: 100vh;
+  }
+
+  body {
+    background-image:
+      linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-position: -1px -1px;
+  }
+
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--line-cyan);
+    outline-offset: 2px;
+  }
+
+  header.masthead {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 26px clamp(20px, 4vw, 48px) 22px;
+    position: relative;
+  }
+  header.masthead::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 3px;
+    background-image: repeating-linear-gradient(
+      90deg,
+      var(--line-cyan) 0, var(--line-cyan) 1px,
+      transparent 1px, transparent 9px
+    );
+    opacity: 0.55;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    flex: none;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  }
+
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.005em;
+    margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  header.masthead p {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: rgba(237, 234, 224, 0.6);
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 22px 22px 26px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    position: sticky;
+    top: 20px;
+  }
+
+  @media (max-width: 880px) {
+    .panel { position: static; max-height: none; }
+  }
+
+  .field { margin-bottom: 18px; }
+
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .field .hint {
+    font-size: 12.5px;
+    color: rgba(22, 32, 43, 0.72);
+    margin-top: 6px;
+    line-height: 1.45;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72);
+    margin: 22px 0 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="password"],
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea {
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+
+  .key-row { display: flex; gap: 8px; }
+  .key-row input { flex: 1; }
+
+  .toggle-key {
+    background: transparent;
+    border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius);
+    padding: 0 12px;
+    font-size: 12.5px;
+    cursor: pointer;
+    color: var(--ink);
+  }
+
+  select {
+    width: 100%;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 14px;
+    padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .draft-btn {
+    width: 100%;
+    background: var(--amber);
+    color: var(--amber-ink);
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 13px;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .stages {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(22, 32, 43, 0.15);
+  }
+
+  .stage {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 7px 0;
+    font-size: 13.5px;
+  }
+  .stage .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: rgba(22, 32, 43, 0.72);
+    width: 20px;
+    flex: none;
+  }
+  .stage.active .num { color: var(--amber-ink); }
+  .stage.active span:last-child { font-weight: 600; }
+  .stage.done .num::after { content: " ✓"; }
+  .stage.done { color: rgba(22, 32, 43, 0.72); }
+
+  .error-box {
+    margin-top: 16px;
+    padding: 12px 14px;
+    background: rgba(216, 96, 74, 0.14);
+    border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: #6E2418;
+    display: none;
+  }
+  .error-box.show { display: block; }
+
+  /* checkbox row */
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 13.5px;
+    cursor: pointer;
+  }
+  .check-row input { margin-top: 3px; flex: none; }
+  .check-row .opt-sub {
+    display: block;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgba(22, 32, 43, 0.72);
+  }
+
+  /* image mode radios */
+  .radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-option { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; }
+  .radio-option input { margin-top: 3px; flex: none; }
+  .radio-option .opt-label { font-weight: 600; }
+  .radio-option .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.72); }
+
+  .upload-btn {
+    display: inline-block;
+    background: #fff;
+    border: 1px dashed rgba(22, 32, 43, 0.35);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    width: 100%;
+  }
+  .upload-btn:hover { border-color: rgba(22, 32, 43, 0.55); }
+
+  .thumbs { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .thumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    border: 1px solid rgba(22, 32, 43, 0.18);
+    border-radius: var(--radius);
+    padding: 6px;
+  }
+  .thumb img { width: 40px; height: 40px; object-fit: cover; border-radius: 2px; flex: none; }
+  .thumb input[type="text"] { flex: 1; padding: 6px 8px; font-size: 12.5px; }
+  .thumb .remove-thumb {
+    background: transparent; border: none; color: var(--error);
+    font-size: 16px; line-height: 1; cursor: pointer; padding: 4px 6px; flex: none;
+  }
+
+  /* product rows */
+  .product-row {
+    display: grid;
+    grid-template-columns: 1fr 70px 1fr auto;
+    gap: 6px;
+    margin-bottom: 8px;
+    align-items: center;
+  }
+  .product-row input { font-size: 12.5px; padding: 8px 9px; }
+  .product-row .remove-thumb { background: transparent; border: none; color: var(--error); font-size: 16px; cursor: pointer; }
+  .add-row-btn {
+    background: transparent;
+    border: 1px dashed rgba(22, 32, 43, 0.35);
+    border-radius: var(--radius);
+    padding: 8px 12px;
+    font-size: 12.5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  /* ---------- Drafting table / preview ---------- */
+
+  .table {
+    background: var(--navy-deep);
+    border: 1px solid var(--line-cyan-dim);
+    border-radius: var(--radius);
+    padding: 18px;
+    min-height: 560px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .title-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: rgba(111, 209, 224, 0.75);
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+    border-bottom: 1px solid var(--line-cyan-dim);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .page-tabs {
+    display: none;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .page-tabs.show { display: flex; }
+  .page-tabs button {
+    background: transparent;
+    border: 1px solid var(--line-cyan-dim);
+    color: var(--paper);
+    border-radius: var(--radius);
+    padding: 6px 11px;
+    font-size: 12.5px;
+    cursor: pointer;
+  }
+  .page-tabs button.active {
+    background: var(--line-cyan);
+    color: var(--navy-deep);
+    border-color: var(--line-cyan);
+    font-weight: 600;
+  }
+
+  .sheet {
+    flex: 1;
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+    min-height: 420px;
+    display: flex;
+  }
+  .sheet iframe { width: 100%; border: none; flex: 1; }
+
+  .sheet-empty {
+    margin: auto;
+    text-align: center;
+    color: rgba(14, 42, 71, 0.45);
+    font-size: 14px;
+    max-width: 340px;
+    padding: 20px;
+  }
+  .sheet-empty strong {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 17px;
+    color: rgba(14, 42, 71, 0.75);
+    margin-bottom: 6px;
+  }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid var(--line-cyan-dim);
+    border-radius: var(--radius);
+    padding: 9px 14px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .source-view { display: none; margin-top: 14px; }
+  .source-view.show { display: block; }
+  .source-view textarea {
+    width: 100%;
+    height: 260px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    background: var(--navy-deep);
+    color: var(--paper);
+    border: 1px solid var(--line-cyan-dim);
+  }
+
+  footer {
+    padding: 20px clamp(20px, 4vw, 48px) 40px;
+    font-size: 12.5px;
+    color: rgba(237, 234, 224, 0.45);
+    border-top: 1px solid var(--line-cyan-dim);
+  }
+
+  .showcase {
+    padding: 18px clamp(20px, 4vw, 48px) 4px;
+    border-bottom: 1px solid var(--line-cyan-dim);
+  }
+  .showcase-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .showcase-header h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: rgba(237, 234, 224, 0.85);
+  }
+  .showcase-header a {
+    font-size: 12.5px;
+  }
+  .showcase-grid {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-bottom: 18px;
+  }
+  .showcase-card {
+    background: var(--paper);
+    color: var(--ink);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 160px;
+  }
+  .showcase-card strong { font-size: 13.5px; }
+  .showcase-card span { font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .showcase-empty {
+    font-size: 13px;
+    color: rgba(237, 234, 224, 0.5);
+    padding-bottom: 18px;
+  }
+  .trust-explainer { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; padding:18px clamp(20px,4vw,48px) 4px; }
+  .trust-card { border:1px solid var(--line-cyan-dim); background:rgba(8,24,38,.76); border-radius:var(--radius); padding:16px; }
+  .trust-card strong { display:block; color:var(--paper); font:700 15px 'Space Grotesk',sans-serif; margin-bottom:6px; }
+  .trust-card span { display:block; color:rgba(237,234,224,.68); font-size:13px; line-height:1.5; }
+  .community-callout { border:1px dashed rgba(111,209,224,.42); background:rgba(111,209,224,.06); padding:16px; border-radius:var(--radius); color:rgba(237,234,224,.72); font-size:13px; line-height:1.5; }
+  .hero-copy { max-width: 760px; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+  .hero-actions a { display:inline-flex; align-items:center; min-height:40px; padding:9px 14px; border:1px solid var(--line-cyan-dim); border-radius:var(--radius); text-decoration:none; font-size:13px; font-weight:600; }
+  .hero-actions .primary-link { background:var(--amber); border-color:var(--amber); color:var(--amber-ink); }
+  .trust-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:13px; }
+  .trust-row span { padding:5px 9px; border-radius:999px; background:rgba(111,209,224,.1); border:1px solid var(--line-cyan-dim); color:rgba(237,234,224,.78); font-size:11.5px; }
+  .tool-hub { padding:28px clamp(20px,4vw,48px) 8px; }
+  .tool-hub-head { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom:16px; }
+  .tool-hub h2 { margin:0; font:700 clamp(23px,3vw,32px) 'Space Grotesk',sans-serif; letter-spacing:-.03em; }
+  .tool-hub-head p { margin:5px 0 0; color:rgba(237,234,224,.6); font-size:13px; }
+  .tool-search { width:min(300px,100%); background:rgba(8,24,38,.72); border-color:var(--line-cyan-dim); color:var(--paper); }
+  .tool-search::placeholder { color:rgba(237,234,224,.45); }
+  .tool-card.best-match { position:relative; box-shadow:0 0 0 2px rgba(111,209,224,.35); }
+  .tool-card.best-match::after { content:'↵ Enter'; position:absolute; right:10px; bottom:8px; font:600 10.5px 'IBM Plex Mono',monospace; color:var(--line-cyan); opacity:.8; }
+  .tool-groups { display:grid; grid-template-columns:1fr; gap:10px; }
+  .tool-group { background:rgba(8,24,38,.76); border:1px solid var(--line-cyan-dim); border-radius:var(--radius); padding:0; overflow:hidden; }
+  .tool-group h3 { margin:0; font:600 12px 'IBM Plex Mono',monospace; color:var(--line-cyan); text-transform:uppercase; letter-spacing:.08em; }
+  .tool-group-toggle { width:100%; display:flex; align-items:center; justify-content:space-between; gap:14px; padding:17px 18px; border:0; background:transparent; color:var(--line-cyan); cursor:pointer; text-align:left; font:700 14px 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+  .tool-group-toggle:hover { background:rgba(111,209,224,.07); }
+  .tool-group-toggle:focus-visible { outline:2px solid var(--line-cyan); outline-offset:-3px; }
+  .tool-group-toggle .chevron { width:28px; height:28px; display:grid; place-items:center; flex:none; border:1px solid rgba(111,209,224,.35); border-radius:50%; font:700 17px/1 system-ui; transition:transform .18s ease,background .18s ease; }
+  .tool-group.open .tool-group-toggle .chevron,.tool-group.search-open .tool-group-toggle .chevron { transform:rotate(180deg); background:rgba(111,209,224,.13); }
+  .tool-group-list { display:none; grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px 18px; padding:2px 18px 17px; border-top:1px solid rgba(111,209,224,.14); }
+  .tool-group.open .tool-group-list,.tool-group.search-open .tool-group-list { display:grid; }
+  #tools [hidden] { display:none !important; }
+  .search-empty { margin:12px 0; color:rgba(237,234,224,.7); }
+  .search-partial { margin:12px 0; color:rgba(237,234,224,.7); }
+  .task-recipes { display:grid; gap:12px; margin:12px 0 16px; }
+  .task-recipe { padding:14px 16px; border:1px solid var(--line-cyan-dim); border-radius:10px; background:rgba(8,24,38,.72); }
+  .task-recipe h4 { margin:0 0 8px; font-size:15px; color:var(--paper); }
+  .task-recipe h4 span { color:var(--line-cyan); font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; margin-inline-end:8px; }
+  .task-recipe ol { margin:0; padding-inline-start:22px; display:grid; gap:6px; color:rgba(237,234,224,.75); font-size:14px; }
+  .task-recipe a { color:var(--line-cyan); font-weight:700; }
+  .tool-card { display:flex; align-items:flex-start; gap:10px; padding:10px; margin:0 -5px 4px; color:var(--paper); text-decoration:none; border-radius:4px; transition:background .15s,transform .15s; }
+  .tool-card:hover { background:rgba(111,209,224,.09); transform:translateX(2px); }
+  .tool-icon { font-size:19px; line-height:1.2; flex:none; }
+  .tool-card strong { display:block; font-size:13px; }
+  .tool-privacy { display:inline-block; margin-top:4px; padding:1px 7px; border:1px solid rgba(159,224,184,.35); border-radius:999px; color:#9fe0b8; font:600 10.5px 'IBM Plex Sans',system-ui,sans-serif; }
+  .tool-privacy.tp-ai { color:#f3cf8a; border-color:rgba(243,207,138,.4); }
+  .tool-privacy.tp-online { color:#9fd3f3; border-color:rgba(159,211,243,.4); }
+  .privacy-legend { margin:0 auto 0 0; color:rgba(237,234,224,.72); font-size:12px; }
+  .tool-card small { display:block; margin-top:2px; color:rgba(237,234,224,.52); line-height:1.35; font-size:11px; }
+  .builder-intro { padding:32px clamp(20px,4vw,48px) 0; }
+  .builder-intro-inner { max-width:760px; }
+  .builder-intro h2 { margin:0; font:700 clamp(25px,3vw,34px) 'Space Grotesk',sans-serif; }
+  .builder-intro p { margin:8px 0 0; color:rgba(237,234,224,.62); line-height:1.55; }
+  @media(max-width:1050px){.tool-group-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:620px){.tool-hub-head{align-items:stretch;flex-direction:column}.tool-search{width:100%}.tool-group-list{grid-template-columns:1fr}.tool-group-toggle{padding:16px}.hero-actions a{width:100%;justify-content:center}.trust-explainer{grid-template-columns:1fr}}
+
+  .tool-card small{font-size:13px;color:rgba(237,234,224,.72);line-height:1.42}
+  .hub-controls{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+  .filter-chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:9px 14px;cursor:pointer;font:600 13px inherit}
+  .filter-chip.active{background:var(--line-cyan);color:#081826}
+  .quick-tools{margin:0 0 22px}.quick-tools h3{margin:0 0 10px;color:var(--line-cyan);font-size:13px;text-transform:uppercase;letter-spacing:.12em}
+  .quick-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+  .quick-grid .tool-card{min-height:76px}
+  .fav-toggle{margin-left:auto;color:#E2A63B;font-size:18px;line-height:1;padding:6px;cursor:pointer}
+  .home-tour{max-width:1240px;margin:18px auto 0;padding:0 48px}.home-tour details{border:1px solid rgba(111,209,224,.25);background:rgba(8,24,38,.76);border-radius:8px;padding:14px 18px}.home-tour summary{cursor:pointer;font-weight:700}.home-tour p{color:rgba(237,234,224,.72);line-height:1.55}
+  @media(max-width:900px){.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:620px){.home-tour{padding:0 20px}.quick-grid{grid-template-columns:1fr}.tool-card small{font-size:13px}}
+
+  /* ---- Home hero: logo as the "M", animated title, search, categories right below ---- */
+  header.masthead.home-hero { display:block; padding:30px clamp(20px,4vw,48px) 22px; text-align:center; overflow:hidden; }
+  header.masthead.home-hero::before { content:""; position:absolute; inset:-40% -10% auto; height:420px; background:radial-gradient(closest-side, rgba(111,209,224,.20), transparent 70%), radial-gradient(closest-side at 70% 60%, rgba(226,166,59,.14), transparent 70%); pointer-events:none; z-index:0; }
+  .home-hero > * { position:relative; z-index:1; }
+  .hero-lang { display:flex; justify-content:flex-end; margin:-12px 0 6px; }
+  .brand-title { display:inline-flex; align-items:center; gap:0; margin:4px 0 0; line-height:1; direction:ltr; }
+  header.masthead.home-hero h1.brand-title { font-size:clamp(44px,8.5vw,92px); letter-spacing:-.035em; background:none; color:inherit; }
+  .brand-m { width:1.06em; height:1.06em; flex:none; margin-right:.02em; transform:translateY(.02em); filter:drop-shadow(0 0 14px rgba(111,209,224,.55)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); animation:brandPulse 4.5s ease-in-out infinite; }
+  .brand-word { font-family:'Space Grotesk',sans-serif; font-weight:700; background:linear-gradient(100deg,#EDEAE0 0%,#6FD1E0 28%,#E2A63B 52%,#6FD1E0 76%,#EDEAE0 100%); background-size:220% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:brandShine 7s linear infinite; text-shadow:0 0 34px rgba(111,209,224,.22); }
+  @keyframes brandShine { from { background-position:0% 50%; } to { background-position:220% 50%; } }
+  @keyframes brandPulse { 0%,100% { filter:drop-shadow(0 0 10px rgba(111,209,224,.45)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); } 50% { filter:drop-shadow(0 0 22px rgba(226,166,59,.6)) drop-shadow(0 6px 14px rgba(0,0,0,.4)); } }
+  @media (prefers-reduced-motion: reduce) { .brand-m, .brand-word { animation:none; } }
+  header.masthead.home-hero p.hero-copy { max-width:720px; margin:14px auto 0; font-size:clamp(15px,1.6vw,18px); color:rgba(237,234,224,.78); line-height:1.5; }
+  .home-hero .trust-row { justify-content:center; margin-top:14px; }
+  header.masthead.home-hero p.hero-contact { margin:10px 0 0; font-size:13px; color:rgba(237,234,224,.72); }
+  .hero-contact a { color:var(--cyan); font-weight:600; text-decoration:none; }
+  .hero-contact a:hover { text-decoration:underline; }
+  .hero-search { position:relative; display:flex; gap:10px; max-width:760px; margin:20px auto 0; flex-wrap:wrap; }
+  .hero-search .search-icon { position:absolute; left:16px; top:14px; font-size:22px; line-height:1; color:var(--line-cyan); pointer-events:none; }
+  .hero-search .tool-search { flex:1 1 320px; width:auto; min-height:52px; padding:12px 16px 12px 46px; font-size:16px; border-radius:12px; border:1.5px solid rgba(111,209,224,.55); background:rgba(8,24,38,.85); box-shadow:0 0 0 4px rgba(111,209,224,.07), 0 10px 30px rgba(0,0,0,.25); }
+  .hero-search .tool-search:focus { border-color:var(--line-cyan); box-shadow:0 0 0 4px rgba(111,209,224,.22); outline:none; }
+  .cta-build, .cta-install { display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 20px; border-radius:12px; font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap; }
+  .cta-build { background:var(--amber); color:var(--amber-ink); box-shadow:0 8px 24px rgba(226,166,59,.28); }
+  .cta-build:hover { filter:brightness(1.07); }
+  .cta-install { border:1px solid var(--line-cyan-dim); color:var(--line-cyan); }
+  .cta-install[hidden] { display:none; }
+  [dir=rtl] .hero-search .search-icon { left:auto; right:16px; }
+  .start-here { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; max-width:940px; margin:14px auto 0; font-size:14px; }
+  .start-here span { color:rgba(237,234,224,.7); }
+  .start-here a { padding:7px 12px; border-radius:999px; border:1px solid rgba(111,209,224,.45); background:rgba(111,209,224,.08); color:#EDEAE0; text-decoration:none; }
+  .start-here a:hover, .start-here a:focus-visible { border-color:var(--line-cyan); background:rgba(111,209,224,.18); }
+  [dir=rtl] .hero-search .tool-search { padding:12px 46px 12px 16px; }
+  .search-hint { margin:10px auto 0 !important; font-size:13px !important; color:rgba(237,234,224,.7) !important; }
+  .tool-hub { padding-top:16px; }
+  .hub-bar { display:flex; justify-content:flex-end; align-items:center; gap:10px; flex-wrap:wrap; margin:0 0 8px; }
+  .toggle-all { background:none; border:0; color:var(--line-cyan); font:600 13px inherit; cursor:pointer; text-decoration:underline; padding:4px 2px; }
+  .tool-group-toggle { justify-content:flex-start; }
+  .tool-group-toggle .cat-icon { font-size:20px; line-height:1; }
+  .tool-group-toggle .cat-name { flex:1; }
+  .tool-group-toggle .cat-count { min-width:28px; padding:2px 8px; border-radius:999px; background:rgba(111,209,224,.12); color:rgba(237,234,224,.75); font:600 12px 'IBM Plex Mono',monospace; letter-spacing:0; }
+  .quick-wrap { padding:6px clamp(20px,4vw,48px) 0; }
+  .home-tour { max-width:none; padding:18px clamp(20px,4vw,48px) 0; }
+  .tour-inner { display:grid; grid-template-columns:minmax(220px,.8fr) minmax(0,1.4fr); gap:24px; align-items:center; padding:20px; border:1px solid rgba(111,209,224,.25); background:rgba(8,24,38,.76); border-radius:8px; }
+  .tour-copy h2 { margin:0 0 8px; font:700 clamp(20px,2.4vw,26px) 'Space Grotesk',sans-serif; }
+  .tour-video { width:100%; aspect-ratio:16/9; border-radius:8px; background:#050f18; border:1px solid rgba(111,209,224,.2); }
+  @media(max-width:760px){ .tour-inner { grid-template-columns:1fr; } .hero-lang { justify-content:center; margin-top:0; } .cta-build, .cta-install { flex:1 1 100%; } }
+
+  /* ---- Categories as a horizontal row of tiles; the chosen category's tools open in a panel underneath ---- */
+  .tool-groups { grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; }
+  .tool-group { display:contents; }
+  .tool-group-toggle { order:0; flex-direction:column; align-items:center; justify-content:center; gap:7px; min-height:122px; padding:16px 10px; text-align:center; background:rgba(8,24,38,.8); border:1px solid var(--line-cyan-dim); border-radius:12px; transition:transform .15s ease, border-color .15s ease, background .15s ease; }
+  .tool-group-toggle:hover { transform:translateY(-2px); border-color:rgba(111,209,224,.65); background:rgba(111,209,224,.08); }
+  .tool-group-toggle .cat-icon { font-size:30px; }
+  .tool-group-toggle .cat-name { flex:none; font-size:12.5px; line-height:1.3; letter-spacing:.06em; }
+  .tool-group-toggle .chevron { display:none; }
+  .tool-group.open .tool-group-toggle, .tool-group.search-open .tool-group-toggle { border-color:var(--line-cyan); background:rgba(111,209,224,.15); box-shadow:inset 0 0 0 1px var(--line-cyan), 0 6px 18px rgba(0,0,0,.25); }
+  .tool-group-list { order:1; grid-column:1/-1; background:rgba(8,24,38,.82); border:1px solid rgba(111,209,224,.45); border-radius:12px; padding:14px 18px 16px; }
+  .list-title { grid-column:1/-1; display:flex; gap:8px; align-items:center; margin:0 0 6px; padding-bottom:8px; border-bottom:1px solid rgba(111,209,224,.14); color:var(--line-cyan); font:700 13px 'IBM Plex Mono',monospace; text-transform:uppercase; letter-spacing:.08em; }
+  @media(max-width:900px){ .tool-groups { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+  @media(max-width:520px){ .tool-groups { grid-template-columns:repeat(2,minmax(0,1fr)); } .tool-group-toggle { min-height:100px; padding:12px 8px; } .tool-group-toggle .cat-icon { font-size:26px; } }
+
+  /* ---- 2026 homepage refresh ---- */
+  .home-hero::before { content:""; position:absolute; inset:-40px 0 auto; height:520px; pointer-events:none; z-index:-1;
+    background:radial-gradient(ellipse 50% 60% at 30% 20%, rgba(111,209,224,.16), transparent 70%), radial-gradient(ellipse 40% 50% at 72% 30%, rgba(226,166,59,.13), transparent 70%); }
+  .home-hero { isolation:isolate; }
+  .cta-tour { display:inline-flex; align-items:center; gap:10px; min-height:52px; padding:0 18px 0 8px; border-radius:12px; border:1.5px solid rgba(111,209,224,.45); background:rgba(8,24,38,.6); color:var(--paper); font-weight:700; font-size:15px; text-decoration:none; white-space:nowrap; transition:border-color .15s, background .15s; }
+  .cta-tour .play { display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:var(--amber); color:var(--amber-ink); font-size:13px; padding-left:2px; box-shadow:0 0 0 0 rgba(226,166,59,.55); animation:tourPulse 2.6s ease-out infinite; }
+  .cta-tour:hover { border-color:var(--amber); background:rgba(226,166,59,.08); }
+  @keyframes tourPulse { 0%{box-shadow:0 0 0 0 rgba(226,166,59,.5)} 70%,100%{box-shadow:0 0 0 12px rgba(226,166,59,0)} }
+  @media (prefers-reduced-motion: reduce) { .cta-tour .play { animation:none; } }
+  .quick-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+  .quick-grid .tool-card { min-height:0; margin:0; padding:12px 14px; border:1px solid rgba(111,209,224,.2); background:rgba(8,24,38,.62); border-radius:10px; }
+  .quick-grid .tool-card:hover { border-color:rgba(111,209,224,.6); background:rgba(111,209,224,.08); }
+  .results { padding:34px clamp(20px,4vw,48px) 30px; }
+  .results-head { display:flex; justify-content:space-between; align-items:end; gap:8px 24px; flex-wrap:wrap; margin-bottom:16px; }
+  .results-head h2 { margin:0; font:700 clamp(22px,2.6vw,30px) 'Space Grotesk',sans-serif; }
+  .results-head p { margin:0; max-width:520px; color:rgba(237,234,224,.78); line-height:1.5; }
+  .results-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+  .result-card { position:relative; display:flex; flex-direction:column; overflow:hidden; border-radius:12px; border:1px solid rgba(111,209,224,.22); background:rgba(8,24,38,.78); color:var(--paper); text-decoration:none; transition:transform .18s, border-color .18s, box-shadow .18s; }
+  .result-card:hover { transform:translateY(-3px); border-color:rgba(226,166,59,.7); box-shadow:0 14px 34px rgba(0,0,0,.35); }
+  .result-thumb { display:block; aspect-ratio:16/9; overflow:hidden; background:repeating-conic-gradient(#12324f 0 25%, #0d2740 0 50%) 0 0/18px 18px; }
+  .result-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s; }
+  .result-card:hover .result-thumb img { transform:scale(1.04); }
+  .result-text { display:grid; gap:3px; padding:12px 44px 14px 14px; }
+  .result-text strong { font-size:15px; }
+  .result-text span { font-size:13px; color:rgba(237,234,224,.72); }
+  .result-go { position:absolute; right:14px; bottom:14px; color:var(--amber); font-weight:700; transition:transform .18s; }
+  .result-card:hover .result-go { transform:translateX(3px); }
+  .home-tour .tour-inner { max-width:1080px; margin:0 auto; grid-template-columns:minmax(220px,1fr) minmax(0,1.25fr); }
+  .trust-explainer { padding-bottom:10px; }
+  @media(max-width:760px){ .home-tour .tour-inner { grid-template-columns:1fr; } }
+  .site-foot { display:flex; justify-content:space-between; align-items:flex-start; gap:18px 40px; flex-wrap:wrap; padding:28px clamp(20px,4vw,48px) 90px !important; margin-top:28px; color:rgba(237,234,224,.78) !important; font-size:13.5px !important; background:rgba(8,24,38,.55); }
+  .foot-brand { max-width:560px; }
+  .foot-brand strong { font:700 18px 'Space Grotesk',sans-serif; color:var(--paper); }
+  .foot-brand p { margin:6px 0 0; line-height:1.55; }
+  .foot-links { display:flex; flex-wrap:wrap; gap:10px 22px; }
+  .foot-links a { color:var(--line-cyan); text-decoration:none; font-weight:600; }
+  .foot-links a:hover { color:var(--paper); text-decoration:underline; }
+  .foot-links a.foot-support { color:var(--navy-deep); background:var(--amber,#E2A63B); padding:4px 12px; border-radius:999px; }
+  .foot-links a.foot-support:hover { color:var(--navy-deep); background:#f3cf8a; text-decoration:none; }
+  @media(max-width:900px){ .quick-grid, .results-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; } }
+  @media(max-width:620px){ .quick-grid { grid-template-columns:1fr !important; } .quick-grid .tool-card { padding:10px 12px; } .results-grid { grid-template-columns:1fr 1fr !important; gap:10px; } .result-text { padding:10px 12px 12px; } .result-text span { display:none; } .result-go { display:none; } .cta-tour { flex:1 1 100%; justify-content:center; } }
+  .hero-mini { display:flex; gap:8px; max-width:760px; margin:16px auto 0; justify-content:center; flex-wrap:wrap; }
+  .hero-mini .cta-tour, .hero-mini .cta-install { min-height:0; padding:5px 12px 5px 5px; border-radius:999px; font-size:13px; font-weight:600; gap:7px; flex:none !important; border:1px solid rgba(111,209,224,.4); background:rgba(8,24,38,.6); color:var(--paper); }
+  .hero-mini .cta-install { padding:5px 12px; }
+  .hero-mini .cta-random { display:inline-flex; align-items:center; text-decoration:none; border-color:rgba(226,166,59,.65); }
+  .hero-mini .cta-tour .play { width:22px; height:22px; font-size:9px; }
+  [dir=rtl] .hero-mini { justify-content:center; }
+  /* Phones: keep the search box and the first tools on the first screen. */
+  @media (max-width:620px) {
+    header.masthead.home-hero { padding:16px 16px 14px; }
+    .hero-lang { margin:0 0 4px; }
+    header.masthead.home-hero h1.brand-title { font-size:36px; }
+    header.masthead.home-hero p.hero-copy { margin-top:8px; font-size:14px; line-height:1.4; }
+    .hero-mini { margin-top:10px; }
+    .home-hero .trust-row, .home-hero .hero-contact { display:none; }
+    .hero-search { margin-top:12px; }
+    .hero-search .tool-search { min-height:46px; }
+    .start-here { flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; margin:10px -16px 0; padding:0 16px 4px; scrollbar-width:none; font-size:13px; }
+    .start-here::-webkit-scrollbar { display:none; }
+    .start-here a, .start-here span { flex:none; white-space:nowrap; }
+  }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead home-hero">
+  <div class="hero-lang" data-i18n-switcher></div>
+  <h1 class="brand-title" aria-label="MigaBuilder"><svg class="brand-m" aria-hidden="true" focusable="false" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg><span class="brand-word" aria-hidden="true">igaBuilder</span></h1>
+  <p class="hero-copy" data-i18n="heroSubtitle">Free tools that work right in your browser — no account needed. Edit PDFs, make a CV or invoice, fix images, and build websites, videos and more.</p>
+  <div class="hero-mini"><a class="cta-tour" href="#tour" id="tourBtn"><span class="play" aria-hidden="true">▶</span><span data-i18n="tourBtn">Tour site</span></a><a class="cta-install cta-random" href="/sv/random-forge.html" data-i18n="ctaRandom" title="One click mixes MigaBuilder's tools into a random game, picture, story or website">🎲 Create something random</a><a class="cta-install" href="#" id="installApp" hidden data-i18n="ctaInstall" title="Install MigaBuilder on this computer or phone — tools you have opened once then work offline">📲 Install the app</a></div>
+  <div class="trust-row"><span data-i18n="trustSignup">No signup</span><span data-i18n="trustOpen">Open source</span></div>
+  <p class="hero-contact"><span data-i18n="heroContact">Contact</span>: <a href="mailto:contact@migabuilder.com">contact@migabuilder.com</a></p>
+  <div class="hero-search">
+    <span class="search-icon" aria-hidden="true">⌕</span>
+    <input class="tool-search" id="toolSearch" type="search" placeholder="What do you want to make?" data-i18n-placeholder="searchPlaceholder" aria-label="Find a tool" title="Press / to search, or Ctrl+K (⌘K) on any page to jump straight to a tool · Enter opens the best match">
+  </div>
+  <nav class="start-here" aria-label="Start here"><span data-i18n="startHere">Start here:</span>
+    <a href="/sv/pdf-forge.html" data-i18n="startPdf">Merge or split a PDF</a><a href="/sv/cv-forge.html" data-i18n="startCv">Make a CV</a><a href="/sv/picture-forge.html" data-i18n="startPicture">Create a picture</a><a href="/sv/website-builder.html" data-i18n="startWebsite">Build a website</a><a href="/sv/music-forge.html" data-i18n="startMusic">Make music</a><a href="/sv/memory-forge.html" data-i18n="startMemory">Train your memory</a>
+  </nav>
+</header>
+
+<section class="tool-hub" id="tools" aria-label="All tools">
+  <div class="hub-bar"><p class="privacy-legend" data-i18n="privLegend">🔒 Runs in your browser · 🌐 AI steps send text to an AI service · 🔗 Some features go online</p><button type="button" class="toggle-all" id="toggleAll" data-i18n="expandAll">Open all categories</button></div>
+  <div class="task-recipes" id="taskRecipes" hidden aria-live="polite"></div>
+  <p class="search-partial" id="searchPartial" hidden data-i18n="searchPartial">No tool does all of that on its own. These match part of your search:</p>
+  <p class="search-empty" id="searchEmpty" hidden data-i18n="searchEmpty">No tools match your search. Try a shorter word, such as “pdf”, “video” or “cartoon”.</p>
+  <div class="tool-groups" id="toolGroups">
+    <div class="tool-group" data-category="create" data-icon="✨"><h3 data-i18n="catCreate">Create</h3>
+      <a class="tool-card" href="/sv/website-builder.html" data-privacy="ai"><span class="tool-icon">🌐</span><span><strong>Website Builder</strong><small data-i18n="d:website-builder">Generate a complete multi-page business site.</small></span></a>
+      <a class="tool-card" href="/sv/game-forge.html" data-privacy="ai"><span class="tool-icon">🥷</span><span><strong>Game Forge</strong><small data-i18n="d:game-forge">Turn a prompt into a playable browser game.</small></span></a>
+      <a class="tool-card" href="/sv/3d-game-forge.html" data-privacy="ai" data-keywords="3d game maker 3d game generator ai game three.js endless runner racing kart racer maze first person platformer arena shooter open world level editor share game no code"><span class="tool-icon">🕹️</span><span><strong>3D Game Forge</strong><small data-i18n="d:3d-game-forge">Describe a 3D game and play it: runner, racer, maze, platformer, arena or open world — edit the level and share it.</small></span></a>
+      <a class="tool-card" href="/sv/cartoon-forge.html" data-privacy="ai"><span class="tool-icon">🎞️</span><span><strong>Cartoon Forge</strong><small data-i18n="d:cartoon-forge">Create an animated story and record it as video.</small></span></a>
+      <a class="tool-card" href="/sv/3d-cartoon.html" data-privacy="ai" data-keywords="3d cartoon animation cel shaded toon movie three.js story characters ai video"><span class="tool-icon">🧸</span><span><strong>3D Cartoon</strong><small data-i18n="d:3d-cartoon">Describe a story and watch it play as a 3D cartoon with talking characters.</small></span></a>
+      <a class="tool-card" href="/sv/app-forge.html" data-privacy="ai"><span class="tool-icon">📱</span><span><strong>App Forge</strong><small data-i18n="d:app-forge">Build a self-contained browser app.</small></span></a>
+      <a class="tool-card" href="/sv/bot-forge.html" data-privacy="ai"><span class="tool-icon">🤖</span><span><strong>Bot Forge</strong><small data-i18n="d:bot-forge">Make a website FAQ and chat widget.</small></span></a>
+      <a class="tool-card" href="/sv/bug-scanner.html" data-privacy="ai" data-keywords="bug scanner code checker debug debugger error fix code review syntax python javascript html java c++ security lint"><span class="tool-icon">🐞</span><span><strong>Bug Scanner</strong><small data-i18n="d:bug-scanner">Find, explain and fix bugs in any code — and preview what it builds.</small></span></a>
+      <a class="tool-card" href="/sv/mind-map.html" data-privacy="ai" data-keywords="mind map mindmap brainstorm brainstorming whiteboard online whiteboard flowchart flow chart diagram concept map spider diagram sticky notes post-it draw sketch outline ideas plan study notes miro xmind lucidchart"><span class="tool-icon">🧠</span><span><strong>Mind Map</strong><small data-i18n="d:mind-map">Mind maps, flowcharts, sticky notes and a whiteboard to draw on.</small></span></a>
+      <a class="tool-card" href="/sv/random-forge.html" data-privacy="ai" data-keywords="random generator random idea generator game idea generator random game generator story prompt generator writing prompt drawing prompt generator art prompt random character random business idea website idea creative prompt inspiration surprise me daily challenge lock reroll mashup"><span class="tool-icon">🎲</span><span><strong>Random Forge</strong><small data-i18n="d:random-forge">Press one button for a random game, picture, story, drawing, website or idea — then build it.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="video" data-icon="🎬"><h3 data-i18n="catVideo">Video &amp; audio</h3>
+      <a class="tool-card" href="/sv/video-forge.html"><span class="tool-icon">🎬</span><span><strong>Video Forge</strong><small data-i18n="d:video-forge">Turn drawings and images into motion.</small></span></a>
+      <a class="tool-card" href="/sv/talk-forge.html"><span class="tool-icon">🗣️</span><span><strong>Talk Forge</strong><small data-i18n="d:talk-forge">Make a photo speak with your audio.</small></span></a>
+      <a class="tool-card" href="/sv/clip-forge.html" data-privacy="ai"><span class="tool-icon">✂️</span><span><strong>Clip Forge</strong><small data-i18n="d:clip-forge">Trim, caption and translate video, or auto-edit several clips into one.</small></span></a>
+      <a class="tool-card" href="/sv/merge-forge.html"><span class="tool-icon">🧩</span><span><strong>Merge Forge</strong><small data-i18n="d:merge-forge">Combine clips, images, text and music.</small></span></a>
+      <a class="tool-card" href="/sv/music-forge.html" data-privacy="ai" data-keywords="song singing vocals lyrics AI music generator Lyria beat instrumental background music"><span class="tool-icon">🎵</span><span><strong>Music Forge</strong><small data-i18n="d:music-forge">Describe music and get a free track, songs with singing, beats.</small></span></a>
+      <a class="tool-card" href="/sv/record-forge.html"><span class="tool-icon">⏺️</span><span><strong>Record Forge</strong><small data-i18n="d:record-forge">Record your screen with narration.</small></span></a>
+      <a class="tool-card" href="/sv/media-convert.html"><span class="tool-icon">🔄</span><span><strong>Media Convert</strong><small data-i18n="d:media-convert">Compress, trim and convert video, make GIFs and MP3s, extract audio, and turn recordings into text and subtitles privately.</small></span></a>
+      <a class="tool-card" href="/sv/jam-forge.html" data-keywords="join videos combine merge clips stitch upload existing videos in order split screen collab music video band duet acapella multitrack record several videos together side by side one after another sequence conversation sketch dialogue talking frog cartoon character clap sync count in metronome play along tiktok duet reels shorts collage"><span class="tool-icon">🎸</span><span><strong>Jam Forge</strong><small data-i18n="d:jam-forge">Record several clips and play them side by side or one after another — a band, a duet or a conversation.</small></span></a>
+      <a class="tool-card" href="/sv/voice-forge.html" data-keywords="text to speech tts voice generator voice over voiceover narration read aloud ai voice mp3 wav speech synthesis piper swedish spanish arabic chinese swahili offline free"><span class="tool-icon">🎙️</span><span><strong>Voice Forge</strong><small data-i18n="d:voice-forge">Turn a script into a natural voice-over in 35+ languages and download it as MP3.</small></span></a>
+      <a class="tool-card" href="/sv/audio-forge.html" data-keywords="audio editor trim cut join merge mp3 wav fade volume speed reverse voice recorder cutter"><span class="tool-icon">🎚️</span><span><strong>Audio Forge</strong><small data-i18n="d:audio-forge">Trim, join, fade, speed up and convert audio to MP3 or WAV.</small></span></a>
+      <a class="tool-card" href="/sv/tune-forge.html" data-keywords="tuner guitar tuner online tuner bass tuner ukulele tuner violin tuner cello viola mandolin banjo chromatic tuner drop d dadgad open g tuning pitch a440 432 hz metronome tap tempo bpm speed trainer gap trainer time signature decibel meter db meter sound level meter noise meter spl hearing protection too loud ear safety noise dose recording level clipping reference tone pitch pipe drone intonation practice musician"><span class="tool-icon">🎸</span><span><strong>Tune Forge</strong><small data-i18n="d:tune-forge">Tune guitar, bass, ukulele, violin and more, keep time with a metronome, and see when it gets too loud for your ears.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="business" data-icon="💼"><h3 data-i18n="catBusiness">Business</h3>
+      <a class="tool-card" href="/sv/logo-forge.html" data-privacy="ai"><span class="tool-icon">🎨</span><span><strong>Logo Forge</strong><small data-i18n="d:logo-forge">Create a logo, favicon and brand kit.</small></span></a>
+      <a class="tool-card" href="/sv/slide-forge.html" data-privacy="ai"><span class="tool-icon">📊</span><span><strong>Slide Forge</strong><small data-i18n="d:slide-forge">Generate a downloadable PowerPoint.</small></span></a>
+      <a class="tool-card" href="/sv/invoice-forge.html"><span class="tool-icon">🧾</span><span><strong>Invoice Forge</strong><small data-i18n="d:invoice-forge">Make quotes and printable invoices.</small></span></a>
+      <a class="tool-card" href="/sv/afford-forge.html" data-keywords="can i afford it affordability calculator can i afford a car car affordability calculator total cost of owning a car can i afford a baby cost of having a baby parental leave budget can i afford to quit my job career break sabbatical runway calculator emergency fund how many months savings last can i afford to move rent affordability can i afford a house mortgage down payment part time budget big purchase life decision budget planner what if calculator personal finance money planner"><span class="tool-icon">💸</span><span><strong>Afford Forge</strong><small data-i18n="d:afford-forge">Can I afford it? Check a car, a baby, a move or quitting your job against your own numbers.</small></span></a>
+      <a class="tool-card" href="/sv/contract-forge.html"><span class="tool-icon">📜</span><span><strong>Contract Forge</strong><small data-i18n="d:contract-forge">Draft straightforward agreements.</small></span></a>
+      <a class="tool-card" href="/sv/policy-forge.html" data-keywords="privacy policy generator gdpr cookie policy cookie banner consent ccpa terms of use terms and conditions disclaimer affiliate disclosure impressum accessibility statement website legal compliance dpa google analytics meta pixel"><span class="tool-icon">⚖️</span><span><strong>Policy Forge</strong><small data-i18n="d:policy-forge">Scan your site and get a privacy policy, cookie policy, consent banner, terms and disclosures.</small></span></a>
+      <a class="tool-card" href="/sv/cv-forge.html" data-privacy="ai" data-keywords="resume job application apply applying cover letter career"><span class="tool-icon">📄</span><span><strong>CV Forge</strong><small data-i18n="d:cv-forge">Create a professional CV and download it as PDF.</small></span></a>
+      <a class="tool-card" href="/sv/name-forge.html"><span class="tool-icon">✨</span><span><strong>Name Forge</strong><small data-i18n="d:name-forge">Find business names and domains.</small></span></a>
+      <a class="tool-card" href="/sv/post-forge.html" data-privacy="online"><span class="tool-icon">📣</span><span><strong>Post Forge</strong><small data-i18n="d:post-forge">Prepare and publish social posts.</small></span></a>
+      <a class="tool-card" href="/sv/repurpose-forge.html"><span class="tool-icon">♻️</span><span><strong>Repurpose Forge</strong><small data-i18n="d:repurpose-forge">Turn one idea into a complete publishing pack.</small></span></a>
+      <a class="tool-card" href="/sv/form-forge.html"><span class="tool-icon">📝</span><span><strong>Form Forge</strong><small data-i18n="d:form-forge">Create private downloadable forms and surveys.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="documents" data-icon="📄"><h3 data-i18n="catDocuments">Documents &amp; PDFs</h3>
+      <a class="tool-card" href="/sv/document-forge.html" data-keywords="pdf to word pdf to docx word to pdf docx to pdf pdf to jpg convert"><span class="tool-icon">📄</span><span><strong>Document Forge</strong><small data-i18n="d:document-forge">Convert documents, images and PDFs privately.</small></span></a>
+      <a class="tool-card" href="/sv/pdf-forge.html" data-keywords="remove pdf metadata author hidden data clean pdf"><span class="tool-icon">📕</span><span><strong>PDF Forge</strong><small data-i18n="d:pdf-forge">Merge, split, number, watermark and create PDFs.</small></span></a>
+      <a class="tool-card" href="/sv/pdf-edit-forge.html"><span class="tool-icon">✍️</span><span><strong>Sign Documents</strong><small data-i18n="d:pdf-edit-forge">Sign PDFs, Word files and photos — draw, type or upload your signature.</small></span></a>
+      <a class="tool-card" href="/sv/pdf-compress.html" data-keywords="shrink reduce smaller pdf size email upload limit"><span class="tool-icon">🗜️</span><span><strong>Compress PDF</strong><small data-i18n="d:pdf-compress">Shrink PDFs for email and upload limits.</small></span></a>
+      <a class="tool-card" href="/sv/ocr-forge.html"><span class="tool-icon">🔎</span><span><strong>OCR Forge</strong><small data-i18n="d:ocr-forge">Extract editable text from images privately.</small></span></a>
+      <a class="tool-card" href="/sv/letter-forge.html" data-privacy="ai" data-keywords="explain this letter explain my letter what does this letter mean letter explainer bill explained council tax letter tax letter irs letter hmrc letter skatteverket landlord letter eviction notice parking fine debt collection letter final notice medical bill explained insurance letter bank letter legal letter court letter immigration letter benefits letter school letter plain english translate letter scam check deadline reply to letter ask for more time payment plan letter ai privacy hide personal details"><span class="tool-icon">✉️</span><span><strong>Letter Forge</strong><small data-i18n="d:letter-forge">Explain a confusing letter in plain words: how urgent it is, deadlines, what to do and a reply.</small></span></a>
+      <a class="tool-card" href="/sv/visit-forge.html" data-keywords="doctor appointment prep doctor visit checklist prepare for doctor appointment questions to ask your doctor symptom tracker symptom diary symptom timeline medication list allergies health summary one page patient summary gp appointment specialist appointment chronic illness pain scale caregiver parent child visit notes after appointment printable pdf private"><span class="tool-icon">🩺</span><span><strong>Visit Forge</strong><small data-i18n="d:visit-forge">Get ready for a doctor's visit: symptoms, medicines and your top questions on one page.</small></span></a>
+      <a class="tool-card" href="/sv/grammar-forge.html"><span class="tool-icon">✓</span><span><strong>Grammar Forge</strong><small data-i18n="d:grammar-forge">Check writing privately in nine languages with actionable suggestions.</small></span></a>
+      <a class="tool-card" href="/sv/text-compare.html" data-keywords="text compare diff checker difference compare documents versions changes contract json diff compare json code"><span class="tool-icon">⚖️</span><span><strong>Text Compare</strong><small data-i18n="d:text-compare">See exactly what changed between two versions of a text.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="learn" data-icon="🎓"><h3 data-i18n="catLearn">Learn &amp; test yourself</h3>
+      <a class="tool-card" href="/sv/geo-forge.html" data-privacy="online"><span class="tool-icon">🗺️</span><span><strong>Geography Forge</strong><small data-i18n="d:geo-forge">Explore every country on a world map, then generate a quiz.</small></span></a>
+      <a class="tool-card" href="/sv/sim-forge.html"><span class="tool-icon">🚦</span><span><strong>Vehicle Simulator</strong><small data-i18n="d:sim-forge">Learn to drive, ride and steer, and fly a 3D plane or helicopter with a real instrument panel.</small></span></a>
+      <a class="tool-card" href="/sv/reasoning-test.html"><span class="tool-icon">🧠</span><span><strong>Reasoning Test</strong><small data-i18n="d:reasoning-test">Practice progressive reasoning questions with worked explanations.</small></span></a>
+      <a class="tool-card" href="/sv/pattern-lab.html"><span class="tool-icon">🔷</span><span><strong>Work Pattern Test</strong><small data-i18n="d:pattern-lab">Practise employer-style patterns and learn from worked explanations.</small></span></a>
+      <a class="tool-card" href="/sv/strength-compass.html"><span class="tool-icon">🧭</span><span><strong>Strength Compass</strong><small data-i18n="d:strength-compass">Discover your top five personal strengths privately.</small></span></a>
+      <a class="tool-card" href="/sv/big-five.html"><span class="tool-icon">🧩</span><span><strong>Big Five Personality</strong><small data-i18n="d:big-five">Explore five personality dimensions with a private 50-question report.</small></span></a>
+      <a class="tool-card" href="/sv/code-forge.html" data-privacy="ai"><span class="tool-icon">🧑‍💻</span><span><strong>Code Forge</strong><small data-i18n="d:code-forge">Learn Python and JavaScript.</small></span></a>
+      <a class="tool-card" href="/sv/alphabet-forge.html" data-privacy="ai" data-keywords="alphabet letters writing script language learn thai arabic chinese mandarin japanese hiragana katakana korean hangul greek russian cyrillic hebrew hindi devanagari georgian pronunciation keyboard typing on-screen keyboard"><span class="tool-icon">🔤</span><span><strong>Alphabet Forge</strong><small data-i18n="d:alphabet-forge">Hear, learn, write and type the world’s alphabets — with an on-screen keyboard.</small></span></a>
+      <a class="tool-card" href="/sv/idea-atlas.html" data-privacy="ai" data-keywords="philosophy politics ideology history thinkers quiz game liberalism socialism conservatism stoicism marxism feminism"><span class="tool-icon">🏛️</span><span><strong>Idea Atlas</strong><small data-i18n="d:idea-atlas">Explore philosophies and ideologies, their thinkers and connections, then play the quiz.</small></span></a>
+      <a class="tool-card" href="/sv/psychology-atlas.html" data-privacy="ai" data-keywords="psychology history of psychology psychologists freud jung skinner pavlov piaget behaviourism behaviorism psychoanalysis cognitive cbt therapy theories quiz game"><span class="tool-icon">🧠</span><span><strong>Psychology Atlas</strong><small data-i18n="d:psychology-atlas">Explore the history of psychology — its schools, theories, therapies and psychologists — then play the quiz.</small></span></a>
+      <a class="tool-card" href="/sv/species-atlas.html" data-privacy="online" data-keywords="species animals plants fungi wildlife nature field guide identify bird mammal insect tree flower mushroom photos scientific name taxonomy classification tree of life kingdom endangered conservation status iucn inaturalist biodiversity quiz"><span class="tool-icon">🦋</span><span><strong>Species Atlas</strong><small data-i18n="d:species-atlas">Look up any animal, plant or fungus: photos, names, classification, status and where it lives, plus a photo quiz.</small></span></a>
+      <a class="tool-card" href="/sv/biology-map.html" data-privacy="ai" data-keywords="biology dna genes genetics evolution tree of life species animals human chimpanzee similarity gene expression protein codon mutation natural selection ancestry ethnic groups human diversity migration out of africa neanderthal quiz"><span class="tool-icon">🧬</span><span><strong>Biology Map</strong><small data-i18n="d:biology-map">Tree of life and shared DNA, how DNA is built, gene expression, mutations, evolution and human diversity.</small></span></a>
+      <a class="tool-card" href="/sv/chemistry-map.html" data-privacy="ai" data-keywords="chemistry periodic table elements atoms atomic number symbols compounds molecules bonds ionic covalent metals materials alloys steel glass plastic battery molar mass formula calculator science quiz"><span class="tool-icon">⚗️</span><span><strong>Chemistry Map</strong><small data-i18n="d:chemistry-map">Interactive periodic table: every element’s atom, forms, uses and compounds, mixing, materials and quizzes.</small></span></a>
+      <a class="tool-card" href="/sv/physics-map.html" data-privacy="ai" data-keywords="physics astronomy space planets solar system sun moon mars jupiter saturn universe big bang cosmic timeline black holes event horizon relativity einstein newton gravity quantum mechanics string theory dark matter dark energy weight on mars light year speed of light e=mc2 time dilation calculator science quiz"><span class="tool-icon">🪐</span><span><strong>Physics Map</strong><small data-i18n="d:physics-map">Planets in motion, the history of the universe, black holes and physics theories, with calculators and quizzes.</small></span></a>
+      <a class="tool-card" href="/sv/body-map.html" data-privacy="ai" data-keywords="human body anatomy skeleton bones muscles tendons skin organs biology health illness disease symptoms treatment heart brain lungs liver digestion fasting nutrition quiz"><span class="tool-icon">🫀</span><span><strong>Body Map</strong><small data-i18n="d:body-map">Explore organs, bones, muscles, tendons and skin: how they work, illnesses and care, digestion, fasting and quizzes.</small></span></a>
+      <a class="tool-card" href="/sv/flashcard-forge.html" data-privacy="ai" data-keywords="flashcards flash cards study spaced repetition memorize revise quiz anki quizlet vocabulary cloze matching game stats share"><span class="tool-icon">🗂️</span><span><strong>Flashcard Forge</strong><small data-i18n="d:flashcard-forge">AI flashcards, Anki-style spaced repetition, games, stats and share links.</small></span></a>
+      <a class="tool-card" href="/sv/dictionary-forge.html" data-privacy="ai" data-keywords="dictionary online dictionary meaning definition what does this word mean define translate translation english spanish french german swedish arabic chinese swahili portuguese pronunciation pinyin ipa synonyms antonyms examples wiktionary vocabulary list word list language learning"><span class="tool-icon">📖</span><span><strong>Dictionary Forge</strong><small data-i18n="d:dictionary-forge">Look up a word in nine languages: meanings, a simple explanation in your language, examples and translations.</small></span></a>
+      <a class="tool-card" href="/sv/puzzle-forge.html" data-keywords="puzzle games word scramble word jumble unscramble anagram sudoku 4x4 6x6 9x9 sudoku printable crossword crossword maker crossword generator make your own crossword spelling list vocabulary game word games spanish french german swedish arabic chinese swahili portuguese language learning kids brain games"><span class="tool-icon">🧩</span><span><strong>Puzzle Forge</strong><small data-i18n="d:puzzle-forge">Word scramble, sudoku and crosswords in nine languages — or made from your own word list.</small></span></a>
+      <a class="tool-card" href="/sv/memory-forge.html" data-keywords="memory training brain game memorize numbers symbols cards digit span chimp test n-back dual n-back pairs concentration corsi sequence levels timer working memory memory palace method of loci major system peg system spaced repetition word list mnemonics"><span class="tool-icon">🧠</span><span><strong>Memory Forge</strong><small data-i18n="d:memory-forge">Memory training with levels, a word list for the memory palace, and a guide to techniques that work.</small></span></a>
+      <a class="tool-card" href="/sv/focus-forge.html" data-keywords="focus timer pomodoro study timer tomato productivity concentration deep work break reminder task list to do white noise brown noise rain sounds study with me streak"><span class="tool-icon">🍅</span><span><strong>Focus Forge</strong><small data-i18n="d:focus-forge">Pomodoro focus timer with tasks, calm rain and noise sounds, and daily focus stats.</small></span></a>
+      <a class="tool-card" href="/sv/cube-forge.html" data-keywords="rubiks cube rubik's cube how to solve a rubik's cube learn to solve cube solver 3x3 solver 2x2 solver 4x4 5x5 6x6 7x7 10x10 big cube cuboid 3x3x2 domino tower floppy cube speedcubing cube timer beginner method layer by layer cube notation algorithms parity twisty puzzle 3d cube simulator virtual cube"><span class="tool-icon">🧊</span><span><strong>Cube Forge</strong><small data-i18n="d:cube-forge">Learn to solve a Rubik’s-style cube in 3D: choose 2 to 10 layers or a cuboid, follow the steps, and solve your own cube.</small></span></a>
+      <a class="tool-card" href="/sv/go-forge.html" data-keywords="go baduk weiqi igo board game learn go how to play go go rules go tutorial go lessons play go against computer go ai go bot capture go atari go tsumego life and death ladder ko 9x9 13x13 19x19 sgf strategy game brain game"><span class="tool-icon">⚫</span><span><strong>Go Forge</strong><small data-i18n="d:go-forge">Learn Go with interactive lessons, then play the computer at six levels with advice and feedback on every move.</small></span></a>
+      <a class="tool-card" href="/sv/noise-forge.html" data-keywords="white noise pink noise brown noise blue noise violet noise grey noise green noise noise machine sound machine rain sounds thunderstorm ocean waves wind stream campfire birds crickets fan heartbeat binaural beats sleep sounds baby sleep tinnitus relief adhd focus sounds relaxing sounds ambient mixer sleep timer"><span class="tool-icon">🌧️</span><span><strong>Noise Forge</strong><small data-i18n="d:noise-forge">White, pink and brown noise mixed with rain, ocean, fire and birds — and what each sound does.</small></span></a>
+      <a class="tool-card" href="/sv/coloring-forge.html" data-privacy="ai" data-keywords="coloring pages free coloring pictures animals dinosaur unicorn flags of the world printable coloring book kids colouring pages worksheet letter tracing alphabet tracing name tracing handwriting practice chinese characters hanzi practice stroke order mi grid japanese hiragana korean hangul paint by numbers photo to coloring page mandala maze generator preschool kindergarten homeschool teacher"><span class="tool-icon">🖍️</span><span><strong>Coloring Forge</strong><small data-i18n="d:coloring-forge">3,000+ printable coloring pictures, tracing sheets, Chinese writing practice, paint by numbers and mazes.</small></span></a>
+      <a class="tool-card" href="/sv/exam-checker.html" data-privacy="ai" data-keywords="exam checker test marking grading grade answer sheet bubble sheet omr scan photo teacher quiz multiple choice zipgrade gradescope results excel"><span class="tool-icon">📝</span><span><strong>Exam Checker</strong><small data-i18n="d:exam-checker">Print answer sheets, photograph each student's paper and download everyone's marks.</small></span></a>
+    </div>
+    <div class="tool-group" data-category="utilities" data-icon="🛠️"><h3 data-i18n="catUtilities">Design &amp; utilities</h3>
+      <a class="tool-card" href="/sv/cipher-forge.html" data-keywords="secret code cipher decoder encoder caesar shift cipher rot13 atbash vigenere morse code translator pigpen number code a1z26 binary phone keypad rail fence decode crack hidden message steganography hide message in photo spy kids puzzle escape room"><span class="tool-icon">🕵️</span><span><strong>Cipher Forge</strong><small data-i18n="d:cipher-forge">Make and crack secret codes, and hide messages inside photos.</small></span></a>
+      <a class="tool-card" href="/sv/paint-forge.html"><span class="tool-icon">🖌️</span><span><strong>Paint Forge</strong><small data-i18n="d:paint-forge">Edit images with layers in the browser.</small></span></a>
+      <a class="tool-card" href="/sv/file-forge.html" data-keywords="remove exif gps location metadata photo privacy clean image resize compress shrink smaller jpg png webp heic convert"><span class="tool-icon">🖼️</span><span><strong>Image Forge</strong><small data-i18n="d:file-forge">Batch-convert, resize, compress and clean image metadata.</small></span></a>
+      <a class="tool-card" href="/sv/vector-forge.html" data-keywords="vector svg image to svg png to svg jpg to svg vectorize vectorizer trace bitmap potrace logo icon scalable convert"><span class="tool-icon">✒️</span><span><strong>Vector Forge</strong><small data-i18n="d:vector-forge">Turn a PNG or JPG logo, icon or drawing into a sharp SVG vector.</small></span></a>
+      <a class="tool-card" href="/sv/image-studio.html"><span class="tool-icon">🪄</span><span><strong>Image Studio</strong><small data-i18n="d:image-studio">Remove backgrounds with AI, make collages, memes and thumbnails.</small></span></a>
+      <a class="tool-card" href="/sv/picture-forge.html" data-privacy="ai" data-keywords="ai image generator text to image words picture art photo illustration Gemini Nano Banana"><span class="tool-icon">🌄</span><span><strong>Picture Forge</strong><small data-i18n="d:picture-forge">Turn a written description into an original AI picture.</small></span></a>
+      <a class="tool-card" href="/sv/everyday-forge.html" data-keywords="loan calculator mortgage calculator monthly payment amortization schedule compound interest calculator savings calculator investment growth margin calculator markup vat calculator sales tax percentage calculator percent change chart maker password generator unit converter currency converter"><span class="tool-icon">📈</span><span><strong>Everyday Forge</strong><small data-i18n="d:everyday-forge">Loan, savings and percentage calculators, charts, passwords, units and currencies.</small></span></a>
+      <a class="tool-card" href="/sv/utility-forge.html" data-keywords="json viewer json formatter json validator json beautifier pretty print json tree json minify base64 encode decode base64 to image image to base64 url encode url decode jwt decoder lorem ipsum generator placeholder text dummy text uuid generator guid unix timestamp epoch converter csv to json json to csv sha256 checksum hash md5 developer tools"><span class="tool-icon">🧰</span><span><strong>Utility Forge</strong><small data-i18n="d:utility-forge">JSON viewer and validator, Base64, URL and JWT decoding, lorem ipsum, UUIDs, timestamps and CSV ↔ JSON.</small></span></a>
+      <a class="tool-card" href="/sv/markdown-forge.html" data-keywords="markdown editor online markdown live preview md editor readme editor github markdown markdown to html markdown to pdf word to markdown html to markdown docx to markdown text editor notes writing table generator task list"><span class="tool-icon">📝</span><span><strong>Markdown Forge</strong><small data-i18n="d:markdown-forge">Write Markdown with a live preview, paste from Word, and export to .md, HTML or PDF.</small></span></a>
+      <a class="tool-card" href="/sv/redact-forge.html" data-keywords="redact anonymize anonymise log sanitizer remove api keys secrets tokens passwords personal data pii gdpr email ip address mask scrub before chatgpt claude bug report stack trace env file"><span class="tool-icon">🕶️</span><span><strong>Redact Forge</strong><small data-i18n="d:redact-forge">Hide API keys, passwords and personal data in logs before you share them or paste them into an AI.</small></span></a>
+      <a class="tool-card" href="/sv/regex-forge.html" data-privacy="ai" data-keywords="regex regexp regular expression tester test pattern match replace explain ai generator developer javascript python"><span class="tool-icon">🔣</span><span><strong>Regex Forge</strong><small data-i18n="d:regex-forge">Test regular expressions live, read them in plain English, or let AI write one.</small></span></a>
+      <a class="tool-card" href="/sv/site-checkup.html"><span class="tool-icon">✅</span><span><strong>Website Checkup</strong><small data-i18n="d:site-checkup">Check HTML for SEO and accessibility problems.</small></span></a>
+      <a class="tool-card" href="/sv/project-hub.html"><span class="tool-icon">🗂️</span><span><strong>Project Hub</strong><small data-i18n="d:project-hub">Manage and back up projects stored on this device.</small></span></a>
+      <a class="tool-card" href="/sv/model-forge.html"><span class="tool-icon">🧊</span><span><strong>Model Forge</strong><small data-i18n="d:model-forge">Design 3D models and printable forms.</small></span></a>
+      <a class="tool-card" href="/sv/cad-forge.html" data-keywords="cad house building design floor plan architecture walls roof framing elevation dxf blueprint"><span class="tool-icon">🏠</span><span><strong>CAD Forge</strong><small data-i18n="d:cad-forge">Draw a floor plan and get a 3D house, drawings and a material list.</small></span></a>
+      <a class="tool-card" href="/sv/plane-forge.html" data-keywords="airplane design aircraft design plane builder build a plane design an airplane aeroplane wing design glider microlight ultralight cessna trainer bush plane aerobatic turboprop business jet electric plane stall speed takeoff distance rate of climb service ceiling cruise speed range glide ratio lift drag thrust propeller engine static margin center of gravity aerodynamics flight physics"><span class="tool-icon">✈️</span><span><strong>Plane Forge</strong><small data-i18n="d:plane-forge">Design an airplane and its engine, and see stall speed, take-off, climb, ceiling, range and stability.</small></span></a>
+      <a class="tool-card" href="/sv/motor-forge.html" data-keywords="car design car builder build a car design a motorcycle motorbike builder engine builder engine simulator build an engine horsepower torque curve dyno bore stroke compression ratio turbo supercharger v8 v12 boxer 0-100 0-60 quarter mile top speed acceleration calculator gear ratio calculator fuel consumption range electric car ev motorcycle superbike scooter cruiser dirt bike drag race car physics"><span class="tool-icon">🏎️</span><span><strong>Motor Forge</strong><small data-i18n="d:motor-forge">Design a car or motorcycle, build its engine, and see 0–100, top speed, grip and fuel use.</small></span></a>
+      <a class="tool-card" href="/sv/boat-forge.html" data-keywords="boat design hull designer build a boat naval architecture dinghy skiff canoe kayak sailboat catamaran pontoon stitch and glue plywood panels lines plan hydrostatics stability displacement 3d dxf stl"><span class="tool-icon">⛵</span><span><strong>Boat Forge</strong><small data-i18n="d:boat-forge">Design a boat hull, see it float in 3D, check stability and speed, and get plywood panels.</small></span></a>
+      <a class="tool-card" href="/sv/palette-forge.html" data-keywords="color palette generator palette from image photo colors extract colors color picker css gradient generator linear gradient radial gradient background gradient box shadow generator css shadow contrast checker wcag accessibility"><span class="tool-icon">🌈</span><span><strong>Palette Forge</strong><small data-i18n="d:palette-forge">Build accessible color palettes, take colors from a photo, and make CSS gradients and shadows.</small></span></a>
+      <a class="tool-card" href="/sv/qr-forge.html"><span class="tool-icon">▦</span><span><strong>QR Forge</strong><small data-i18n="d:qr-forge">Create downloadable QR codes.</small></span></a>
+      <a class="tool-card" href="/sv/screen-forge.html" data-privacy="online"><span class="tool-icon">🤝</span><span><strong>Screen Share Forge</strong><small data-i18n="d:screen-forge">Get live remote help.</small></span></a>
+      <a class="tool-card" href="/sv/meet-forge.html" data-privacy="online"><span class="tool-icon">👥</span><span><strong>Meet Forge</strong><small data-i18n="d:meet-forge">Host group video rooms and topic communities.</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="quick-wrap" aria-label="Quick picks">
+  <div class="quick-tools" id="recentSection" hidden><h3 data-i18n="qRecent">Recently used</h3><div class="quick-grid" id="recentTools"></div></div>
+  <div class="quick-tools" id="favouriteSection" hidden><h3 data-i18n="qFavourites">Favourites</h3><div class="quick-grid" id="favouriteTools"></div></div>
+  <div class="quick-tools"><h3 data-i18n="qPopular">Popular tools</h3><div class="quick-grid" id="popularTools"></div></div>
+  <div class="quick-tools"><h3 data-i18n="qNew">New</h3><div class="quick-grid" id="newTools"></div></div>
+</section>
+
+<section class="results" aria-labelledby="resultsTitle">
+  <div class="results-head"><h2 id="resultsTitle" data-i18n="samplesHeading">Real results, made with these tools</h2></div>
+  <div class="results-grid">
+    <a class="result-card" href="sample-viewer.html?tool=website-builder.html"><span class="result-thumb"><img src="assets/results/website-builder.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s1Title">A business website</strong><span data-i18n="s1Text">Every page drafted, ready to publish</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=cartoon-forge.html"><span class="result-thumb"><img src="assets/results/cartoon-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s2Title">A cartoon you can play</strong><span data-i18n="s2Text">Story, scenes and voices from one idea</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=game-forge.html"><span class="result-thumb"><img src="assets/results/game-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s3Title">A game you can share</strong><span data-i18n="s3Text">Describe it, then play it in the browser</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=background-forge.html"><span class="result-thumb"><img src="assets/results/background-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s4Title">Background removed</strong><span data-i18n="s4Text">A photo cut out in seconds</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=cv-forge.html"><span class="result-thumb"><img src="assets/results/cv-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s5Title">A finished CV</strong><span data-i18n="s5Text">Filled in and downloaded as a real PDF</span></span><span class="result-go" aria-hidden="true">→</span></a>
+    <a class="result-card" href="sample-viewer.html?tool=pdf-forge.html"><span class="result-thumb"><img src="assets/results/pdf-forge.jpg" alt="" width="640" height="360" loading="lazy" decoding="async"></span><span class="result-text"><strong data-i18n="s6Title">An organised PDF</strong><span data-i18n="s6Text">Merged, numbered and watermarked</span></span><span class="result-go" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<section class="trust-explainer" aria-label="Why use MigaBuilder">
+  <div class="trust-card"><strong data-i18n="trust1Title">Private by default</strong><span data-i18n="trust1Text">File tools process on your device whenever possible. AI tools clearly tell you when an outside AI service is used.</span></div>
+  <div class="trust-card"><strong data-i18n="trust2Title">Free without the trap</strong><span data-i18n="trust2Text">Start, finish and download without creating an account or reaching a payment screen at the last step.</span></div>
+  <div class="trust-card"><strong data-i18n="trust3Title">Built to be checked</strong><span data-i18n="trust3Text">Preview the result before downloading, follow a narrated walkthrough, and inspect the open-source code.</span></div>
+</section>
+
+<section class="home-tour" id="tour" aria-labelledby="tourTitle">
+  <div class="tour-inner">
+    <div class="tour-copy"><h2 id="tourTitle" data-i18n="tourTitle">Tour MigaBuilder — find the right tool in one minute</h2><p data-i18n="tourText">Search by task, open a category, or start with a popular tool. Your recently opened and favourite tools are stored only in this browser.</p></div>
+    <video class="tour-video" controls playsinline preload="none" poster="https://videos.migabuilder.com/index.jpg" aria-label="Narrated tour of the MigaBuilder home page"><source src="https://videos.migabuilder.com/index.mp4" type="video/mp4"></video>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="foot-brand"><strong>MigaBuilder</strong><p data-i18n="footerText">Free browser tools. No account required, no watermark and no surprise paywall. Files stay on your device whenever the tool supports local processing.</p></div>
+  <nav class="foot-links" aria-label="Site links"><a href="#tools" data-i18n="footTools">All tools</a><a href="#tour" data-i18n="footTour">1-minute tour</a><a href="feedback.html" data-i18n="footFeedback">Feedback &amp; ideas</a><a href="shop.html">Shop</a><a href="how-its-built.html" data-i18n="footBuilt">How it's built</a><a href="https://github.com/makmurphy69-cpu/MigaBuilder" rel="noopener" data-i18n="footSource">Open source on GitHub</a><a href="about.html" data-i18n="footAbout">About</a><a href="privacy.html" data-i18n="footPrivacy">Privacy</a><a href="terms.html" data-i18n="footTerms">Terms</a><a href="mailto:contact@migabuilder.com" data-i18n="heroContact">Contact</a><a class="foot-support" href="https://ko-fi.com/migabuilder" target="_blank" rel="noopener" data-i18n="footSupport">Support MigaBuilder ☕</a></nav>
+</footer>
+<script>
+(function(){
+  const search=document.getElementById('toolSearch');
+  const groups=[...document.querySelectorAll('.tool-group')];
+  const cards=[...document.querySelectorAll('#toolGroups .tool-card')];
+  // English text of every card, so English words keep working when the page is shown in another language.
+  cards.forEach(c=>{c.dataset.en=c.textContent.replace(/\s+/g,' ').trim()});
+  groups.forEach((g,index)=>{
+    const heading=g.querySelector('h3'),list=document.createElement('div'),button=document.createElement('button');
+    list.className='tool-group-list';list.id='tool-category-'+index;
+    while(heading.nextSibling)list.appendChild(heading.nextSibling);
+    button.type='button';button.className='tool-group-toggle';button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',list.id);const name=document.createElement('span');name.className='cat-name';name.textContent=heading.textContent.trim();name.setAttribute('data-i18n',heading.getAttribute('data-i18n'));
+    button.innerHTML='<span class="cat-icon" aria-hidden="true">'+(g.dataset.icon||'')+'</span><span class="cat-count">'+list.querySelectorAll('.tool-card').length+'</span><span class="chevron" aria-hidden="true">⌄</span>';button.insertBefore(name,button.children[1]);
+    const title=document.createElement('div');title.className='list-title';title.innerHTML='<span aria-hidden="true">'+(g.dataset.icon||'')+'</span>';const titleName=document.createElement('span');titleName.textContent=name.textContent;titleName.setAttribute('data-i18n',name.getAttribute('data-i18n'));title.appendChild(titleName);list.insertBefore(title,list.firstChild);
+    heading.replaceWith(button);g.appendChild(list);
+    button.addEventListener('click',()=>{const willOpen=!g.classList.contains('open');groups.forEach(x=>{x.classList.toggle('open',x===g&&willOpen);x.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(x===g&&willOpen))});syncToggleAll();if(willOpen){const r=list.getBoundingClientRect();if(r.top>innerHeight-120)list.scrollIntoView({behavior:'smooth',block:'nearest'})}});
+  });
+  const toggleAll=document.getElementById('toggleAll');
+  function syncToggleAll(){const allOpen=groups.every(g=>g.classList.contains('open'));toggleAll.setAttribute('data-i18n',allOpen?'collapseAll':'expandAll');toggleAll.textContent=window.I18N?I18N.t(allOpen?'collapseAll':'expandAll'):(allOpen?'Close all categories':'Open all categories')}
+  toggleAll.addEventListener('click',()=>{const open=!groups.every(g=>g.classList.contains('open'));groups.forEach(g=>{g.classList.toggle('open',open);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(open))});syncToggleAll()});
+  const active='all';
+  function apply(){
+    const q=(search.value||'').trim().toLowerCase();
+    const words=contentWords(q);let total=0;
+    best=null;
+    renderRecipes(words);
+    // A sentence like "shrink this pdf and hide my details" rarely fits one tool: when no tool
+    // matches every word, show the tools that match the most words instead of nothing.
+    const allCards=[...document.querySelectorAll('#toolGroups .tool-card')];
+    let partial=0;
+    if(words.length>1&&!allCards.some(c=>matchScore(c,words)>0)){partial=Math.max(0,...allCards.map(c=>matchedCount(c,words)))}
+    document.getElementById('searchPartial').hidden=!partial;
+    const scoreOf=c=>partial?(matchedCount(c,words)===partial?partialScore(c,words):0):matchScore(c,words);
+    groups.forEach(g=>{const categoryOK=active==='all'||g.dataset.category===active;let shown=0;g.querySelectorAll('.tool-card').forEach(c=>{const score=categoryOK?scoreOf(c):0;const ok=score>0;c.hidden=!ok;c.classList.toggle('best-match',false);if(ok){shown++;if(words.length&&(!best||score>best.score))best={card:c,score}}});total+=shown;g.hidden=!shown;const expand=Boolean((q||active!=='all')&&shown);g.classList.toggle('search-open',expand);g.querySelector('.tool-group-toggle')?.setAttribute('aria-expanded',String(g.classList.contains('open')||expand))});
+    if(best)best.card.classList.add('best-match');
+    document.getElementById('searchEmpty').hidden=total>0||!document.getElementById('taskRecipes').hidden;
+  }
+  // Fuzzy search: exact words score highest, then everyday synonyms ("site" → website,
+  // "resume" → CV), then prefixes, then small typos ("vidoe", "invocie").
+  const SYNONYMS={site:'website web page',homepage:'website',resume:'cv',résumé:'cv',photo:'image picture',pic:'image',picture:'image',movie:'video',film:'video',clip:'video',mp4:'video',mp3:'audio',sound:'audio music',song:'music',voice:'audio record talk',sign:'signature pdf',signature:'sign',scan:'ocr',text:'ocr writing',bill:'invoice',quote:'invoice',receipt:'invoice',deck:'slide powerpoint',presentation:'slide powerpoint',ppt:'slide powerpoint',pptx:'slide',word:'document docx',docx:'document',excel:'csv',spreadsheet:'csv',colour:'color palette',color:'palette',brand:'logo',font:'logo design',animation:'cartoon video',anime:'cartoon',chatbot:'bot',chat:'bot',faq:'bot',flashcards:'flashcard',study:'flashcard quiz learn',exam:'quiz test',test:'quiz',typing:'keyboard alphabet',language:'alphabet translate',translate:'clip grammar',spelling:'grammar',compress:'pdf image',shrink:'compress',diff:'compare',debug:'bug',code:'bug code',house:'cad',floorplan:'cad',plan:'cad',print:'3d model',map:'geography',country:'geography',car:'vehicle simulator',drive:'vehicle simulator',meeting:'meet',call:'meet',share:'screen',remote:'screen',form:'survey',survey:'form',cv:'resume'};
+  const tokenCache=new Map();
+  function tokensOf(c){if(!tokenCache.has(c)){const text=(c.textContent.replace(c.querySelector('.tool-privacy')?.textContent||'','')+' '+(c.dataset.en||'')+' '+(c.dataset.keywords||'')).toLowerCase();tokenCache.set(c,{text,title:(c.querySelector('strong')?.textContent||'').toLowerCase(),tokens:text.split(/[^\p{L}\p{N}+#]+/u).filter(Boolean)})}return tokenCache.get(c)}
+  function editDistance(a,b){const d=[];for(let i=0;i<=a.length;i++){d[i]=[i];for(let j=1;j<=b.length;j++)d[i][j]=i?Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1),i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]?d[i-2][j-2]+1:99):j}return d[a.length][b.length]}
+  function wordScore(w,t){
+    if(t.title.split(/\s+/).some(x=>x.startsWith(w)))return 10;
+    if(t.text.includes(w))return 6;
+    if((SYNONYMS[w]||'').split(' ').some(x=>x&&t.text.includes(x)))return 5;
+    if(w.length<3)return 0;
+    const max=w.length>=7?2:w.length>=4?1:0;
+    if(!max)return 0;
+    const near=x=>Math.abs(x.length-w.length)<=max&&editDistance(w,x)<=max||x.length>w.length&&editDistance(w,x.slice(0,w.length))<=max;
+    if(t.title.split(/\s+/).some(near))return 4;
+    if(t.tokens.some(near))return 3;
+    return 0;
+  }
+  function matchScore(c,words){if(!words.length)return 1;const t=tokensOf(c);let sum=0;for(const w of words){const s=wordScore(w,t);if(!s)return 0;sum+=s}return sum}
+  function matchedCount(c,words){const t=tokensOf(c);return words.filter(w=>wordScore(w,t)>0).length}
+  function partialScore(c,words){const t=tokensOf(c);return words.reduce((sum,w)=>sum+wordScore(w,t),0)}
+  // Filler words are dropped so whole sentences work ("I need to make a CV for a job").
+  const STOP=new Set('i im i\'m me my mine we our us you your a an the this that these those it its to of for from in on at by with without and or but into onto so some any all is are be am was can could would should will want wanted need needs please how do does get got just like help make create one two few my own'.split(' '));
+  function contentWords(q){const all=q.split(/\s+/).filter(Boolean);const kept=all.filter(w=>!STOP.has(w.replace(/[^\p{L}\p{N}'+#]/gu,'')));return kept.length?kept:all}
+  // Tasks that need several tools in a row. A recipe shows when every "need" group has a word in
+  // the search; a step with "when" only shows if one of those words is in the search too.
+  const PRIVATE=['private','privacy','personal','metadata','hidden','author','clean','anonymous','anonymise','anonymize','details','info','information','identity','gps','location','exif','hide'];
+  const SHRINK=['shrink','compress','smaller','reduce','size','email','e-mail','big','large','upload'];
+  const RECIPES=[
+    {id:'pdfSafe',title:'Share a PDF safely',need:[['pdf','pdfs'],PRIVATE],steps:[
+      {href:'pdf-compress.html',name:'Compress PDF',note:'make it small enough to email or upload',when:SHRINK},
+      {href:'pdf-forge.html#cleanPanel',name:'PDF Forge',note:'“Remove hidden data” deletes the author, program and dates stored inside'},
+      {href:'pdf-edit-forge.html',name:'Sign Documents',note:'sign it before you send it',when:['sign','signature','signed']}]},
+    {id:'photoSafe',title:'Share photos without hidden location data',need:[['photo','photos','picture','pictures','image','images','jpg','jpeg','png','heic','pic','pics'],PRIVATE],steps:[
+      {href:'file-forge.html',name:'Image Forge',note:'saves a copy without camera, GPS location and date data — and can resize and compress at the same time'},
+      {href:'image-studio.html',name:'Image Studio',note:'remove or replace the background so the room behind you is not shown',when:['background','room','behind']}]},
+    {id:'signSend',title:'Sign a document and send it',need:[['sign','signature','signed'],['pdf','document','contract','word','docx','form','agreement','letter']],steps:[
+      {href:'pdf-edit-forge.html',name:'Sign Documents',note:'draw, type or upload your signature and place it'},
+      {href:'pdf-compress.html',name:'Compress PDF',note:'shrink it for email',when:SHRINK},
+      {href:'pdf-forge.html',name:'PDF Forge',note:'merge it with other pages',when:['merge','combine','join','add','pages']}]},
+    {id:'scanPdf',title:'Turn paper or photos into a PDF',need:[['scan','scanned','paper','photographed','photo','photos','picture','pictures','image','images','jpg','png'],['pdf','pdfs']],steps:[
+      {href:'pdf-forge.html',name:'PDF Forge',note:'“Images to PDF” puts each photo on its own page'},
+      {href:'ocr-forge.html',name:'OCR Forge',note:'copy the text out so you can edit it',when:['text','edit','editable','copy','word','type','typed','searchable']},
+      {href:'pdf-compress.html',name:'Compress PDF',note:'shrink it for email',when:SHRINK}]},
+    {id:'kidsPrint',title:'Printable activities for kids',need:[['kid','kids','child','children','toddler','preschool','kindergarten','homeschool','son','daughter'],['print','printable','coloring','colouring','worksheet','worksheets','tracing','maze','mazes','activity','activities','book']],steps:[
+      {href:'coloring-forge.html',name:'Coloring Forge',note:'coloring pages, tracing sheets, mazes and paint by numbers, collected into one printable book'},
+      {href:'cipher-forge.html',name:'Cipher Forge',note:'secret-code puzzles and treasure-hunt clues',when:['code','secret','puzzle','treasure','spy']},
+      {href:'flashcard-forge.html',name:'Flashcard Forge',note:'print flashcards for spelling or times tables',when:['flashcard','flashcards','spelling','words','times']}]},
+    {id:'business',title:'Start a small business',need:[['business','company','startup','start-up','shop','store','brand','side-hustle','freelance','freelancer']],steps:[
+      {href:'name-forge.html',name:'Name Forge',note:'find a name and check which domains are free'},
+      {href:'logo-forge.html',name:'Logo Forge',note:'logo, favicon and brand colours'},
+      {href:'website-builder.html',name:'Website Builder',note:'a complete site you download and own'},
+      {href:'policy-forge.html',name:'Policy Forge',note:'privacy policy, cookie banner and terms'},
+      {href:'invoice-forge.html',name:'Invoice Forge',note:'quotes and invoices for your first customers'}]},
+    {id:'website',title:'Get a website live',need:[['website','site','homepage','webpage','landing']],steps:[
+      {href:'logo-forge.html',name:'Logo Forge',note:'a logo and favicon to use on it',when:['logo','brand','favicon','icon']},
+      {href:'website-builder.html',name:'Website Builder',note:'describe it and download every page, with a sitemap for Google'},
+      {href:'policy-forge.html',name:'Policy Forge',note:'privacy policy and cookie banner',when:['policy','privacy','cookie','cookies','gdpr','terms','legal']},
+      {href:'site-checkup.html',name:'Website Checkup',note:'check it for SEO and accessibility problems',when:['seo','google','check','accessibility','fast','rank','ranking']}]},
+    {id:'job',title:'Apply for a job',need:[['job','jobs','apply','application','applying','interview','hiring','hired','career','vacancy']],steps:[
+      {href:'cv-forge.html',name:'CV Forge',note:'a professional CV as a PDF'},
+      {href:'grammar-forge.html',name:'Grammar Forge',note:'check your cover letter'},
+      {href:'pattern-lab.html',name:'Work Pattern Test',note:'practise the aptitude tests employers use'},
+      {href:'reasoning-test.html',name:'Reasoning Test',note:'more practice with worked answers',when:['test','tests','aptitude','assessment','reasoning','logic']}]},
+    {id:'aiSafe',title:'Ask an AI about your code or logs safely',need:[['log','logs','code','error','errors','stack','trace','bug','bugs','config','env'],['chatgpt','ai','claude','gemini','copilot','paste','share','secret','secrets','key','keys','password','passwords','token','tokens','safe','safely','private']],steps:[
+      {href:'redact-forge.html',name:'Redact Forge',note:'hide keys, passwords and personal data first'},
+      {href:'bug-scanner.html',name:'Bug Scanner',note:'or let it find and explain the bug for you',when:['bug','bugs','error','errors','fix','debug','broken']}]},
+    {id:'social',title:'Make a video for social media',need:[['video','videos','clip','clips','reel','reels','short','shorts'],['social','tiktok','youtube','instagram','facebook','linkedin','caption','captions','subtitle','subtitles','post','publish']],steps:[
+      {href:'clip-forge.html',name:'Clip Forge',note:'trim it and add captions'},
+      {href:'media-convert.html',name:'Media Convert',note:'compress it under the upload limit',when:SHRINK},
+      {href:'post-forge.html',name:'Post Forge',note:'write the post and publish it'}]},
+    {id:'tutorial',title:'Record a tutorial or demo',need:[['tutorial','tutorials','demo','screencast','walkthrough','explainer','how-to','lesson']],steps:[
+      {href:'record-forge.html',name:'Record Forge',note:'record your screen while you talk'},
+      {href:'voice-forge.html',name:'Voice Forge',note:'or write a script and get a natural voice-over',when:['voice','voiceover','voice-over','narration','narrate','script']},
+      {href:'clip-forge.html',name:'Clip Forge',note:'trim it and add captions'}]},
+    {id:'teacher',title:'Run a class or test',need:[['teacher','teach','teaching','class','classroom','students','pupils','school','lesson']],steps:[
+      {href:'flashcard-forge.html',name:'Flashcard Forge',note:'flashcards and games for revision'},
+      {href:'form-forge.html',name:'Form Forge',note:'a quiz or survey students fill in'},
+      {href:'exam-checker.html',name:'Exam Checker',note:'print answer sheets and mark them from photos',when:['exam','exams','test','tests','mark','marking','grade','grading','quiz']}]}
+  ];
+  function hasWord(words,list){return words.some(w=>{w=w.replace(/[^\p{L}\p{N}'+#-]/gu,'');return w&&list.some(k=>w===k||w.length>=4&&k.startsWith(w)||k.length>=4&&w.startsWith(k)&&w.length-k.length<=2)})}
+  function renderRecipes(words){
+    const box=document.getElementById('taskRecipes');
+    const t=(k,d)=>window.I18N?I18N.t(k,d):d;
+    // A recipe that would list only one tool adds nothing over the matching card below.
+    const found=words.length?RECIPES.filter(r=>r.need.every(list=>hasWord(words,list))).map(r=>({r,steps:r.steps.filter(st=>!st.when||hasWord(words,st.when))})).filter(x=>x.steps.length>1).slice(0,2):[];
+    box.hidden=!found.length;
+    box.innerHTML=found.map(({r,steps})=>'<div class="task-recipe"><h4><span>'+esc(t('recipeLabel','Step by step'))+'</span>'+esc(t('recipe:'+r.id,r.title))+'</h4><ol>'+steps.map(st=>'<li><a href="'+((cards.find(c=>hrefOf(c)===st.href.replace(/#.*/,''))&&LP&&cards.find(c=>hrefOf(c)===st.href.replace(/#.*/,'')).getAttribute('href').startsWith(LP))?LP+st.href:st.href)+'">'+esc(st.name)+'</a> — '+esc(t('recipe:'+r.id+':'+st.href.replace(/\.html.*/,''),st.note))+'</li>').join('')+'</ol></div>').join('');
+  }
+  function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+  let best=null;
+  search.addEventListener('input',apply);
+  search.addEventListener('keydown',e=>{if(e.key==='Enter'&&best){e.preventDefault();best.card.click()}else if(e.key==='Escape'){search.value='';apply()}});
+  document.addEventListener('keydown',e=>{if(e.key==='/'&&!e.ctrlKey&&!e.metaKey&&!/^(input|textarea|select)$/i.test(document.activeElement?.tagName||'')&&!document.activeElement?.isContentEditable){e.preventDefault();search.focus();search.select()}});
+  const key='migabuilder-tool-history',favKey='migabuilder-tool-favourites';
+  // Language homepages (/es/ …) link to /es/x.html for translated tools; history, favourites and lists use the plain file name.
+  const LP=window.MIGA_PAGE_LANG?'/'+window.MIGA_PAGE_LANG+'/':'';
+  const hrefOf=c=>c.getAttribute('href').replace(/^\/[a-z]{2}\//,'');
+  const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'[]')}catch(e){return[]}};
+  const write=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+  function cardData(c){return{href:hrefOf(c),link:c.getAttribute('href'),html:c.innerHTML.replace(/<span class="fav-toggle"[\s\S]*?<\/span>/,'')}}
+  function cloneFor(item){const a=document.createElement('a');a.className='tool-card';a.href=item.link;a.innerHTML=item.html;return a}
+  function render(){
+    const map=new Map(cards.map(c=>[hrefOf(c),cardData(c)]));
+    const popular=['image-studio.html','grammar-forge.html','slide-forge.html','contract-forge.html','music-forge.html','cartoon-forge.html'].map(x=>map.get(x)).filter(Boolean);
+    document.getElementById('popularTools').replaceChildren(...popular.map(cloneFor));
+    document.getElementById('newTools').replaceChildren(...['cube-forge.html','plane-forge.html','motor-forge.html','puzzle-forge.html','dictionary-forge.html','letter-forge.html','afford-forge.html','visit-forge.html','tune-forge.html','species-atlas.html','psychology-atlas.html','go-forge.html'].map(x=>map.get(x)).filter(Boolean).map(cloneFor));
+    const recent=read(key).map(x=>map.get(x)).filter(Boolean).slice(0,5),favs=read(favKey).map(x=>map.get(x)).filter(Boolean).slice(0,5);
+    document.getElementById('recentSection').hidden=!recent.length;document.getElementById('recentTools').replaceChildren(...recent.map(cloneFor));
+    document.getElementById('favouriteSection').hidden=!favs.length;document.getElementById('favouriteTools').replaceChildren(...favs.map(cloneFor));
+  }
+  cards.forEach(c=>{const href=hrefOf(c);const star=document.createElement('span');star.className='fav-toggle';star.setAttribute('role','button');star.setAttribute('tabindex','0');star.setAttribute('aria-label','Add to favourites');star.setAttribute('data-i18n-title','favAdd');const sync=()=>star.textContent=read(favKey).includes(href)?'★':'☆';const toggle=e=>{e.preventDefault();e.stopPropagation();let a=read(favKey);a=a.includes(href)?a.filter(x=>x!==href):[href,...a];write(favKey,a.slice(0,12));sync();render()};star.addEventListener('click',toggle);star.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){toggle(e)}});c.appendChild(star);sync();c.addEventListener('click',e=>{if(e.defaultPrevented)return;let a=read(key).filter(x=>x!==href);write(key,[href,...a].slice(0,8))})});
+  // Privacy label on every card, matching the badge on the tool's own page (checked by scripts/smoke-test.mjs).
+  const PRIV={local:['privLocal','🔒 Runs in your browser'],ai:['privAi','🌐 AI steps go online'],online:['privOnline','🔗 Some features go online']};
+  cards.forEach(c=>{const kind=c.dataset.privacy||'local',info=PRIV[kind]||PRIV.local,box=c.querySelector('.tool-icon+span');if(!box)return;const tag=document.createElement('span');tag.className='tool-privacy tp-'+kind;tag.setAttribute('data-i18n',info[0]);tag.textContent=info[1];box.appendChild(tag)});
+  render();apply();
+  // Translated text changes what the search matches, so rebuild the search index on a language change.
+  document.addEventListener('i18n:change',()=>{tokenCache.clear();apply();syncToggleAll();document.querySelectorAll('.fav-toggle').forEach(x=>x.setAttribute('aria-label',I18N.t('favAdd')))});
+  // Offer "Install the app" once the browser says MigaBuilder can be installed (see miga-palette.js).
+  // The hero's tour button scrolls to the tour and starts it.
+  document.getElementById('tourBtn').addEventListener('click',e=>{e.preventDefault();const t=document.getElementById('tour');t.scrollIntoView({behavior:'smooth',block:'center'});const v=t.querySelector('video');v&&v.play().catch(()=>{})});
+  const installLink=document.getElementById('installApp');
+  installLink.addEventListener('click',e=>{e.preventDefault();window.MigaInstall&&window.MigaInstall.install()});
+  document.addEventListener('miga-installable',()=>{installLink.hidden=!(window.MigaInstall&&window.MigaInstall.available())});
+})();
+</script>
+<script src="home-i18n.js?v=3"></script>
+<script>
+I18N.init(window.HOME_I18N, { vars: { n: document.querySelectorAll('#toolGroups .tool-card').length } });
+</script>
+</body>
+</html>

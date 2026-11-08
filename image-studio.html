@@ -7,7 +7,19 @@
 .workspace{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:18px;align-items:start}.preview{background:#081826;padding:14px;border-radius:4px;min-height:360px;display:grid;place-items:center}.preview canvas{max-width:100%;max-height:70vh;background:repeating-conic-gradient(#ddd 0 25%,#fff 0 50%) 0/20px 20px}.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.tabs button.active{background:#0e2a47;color:#fff}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field input[type=range]{width:100%}.swatches{display:flex;gap:8px;align-items:center}.notice{font-size:12px;color:#59636c;line-height:1.45}@media(max-width:850px){.workspace{grid-template-columns:1fr}.row{grid-template-columns:1fr}}
 </style><script src="i18n.js"></script>
 <script src="i18n/image-studio.js"></script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I remove a background?", "acceptedAnswer": {"@type": "Answer", "text": "Open the image in the background tab and apply the effect. The AI model runs on your device, so the photo is not uploaded."}}, {"@type": "Question", "name": "Is Image Studio free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I remove a background?", "acceptedAnswer": {"@type": "Answer", "text": "Open the image in the background tab and apply the effect. The AI model runs on your device, so the photo is not uploaded."}}, {"@type": "Question", "name": "Is Image Studio free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account, no watermark and no paywall."}}, {"@type": "Question", "name": "Are my files uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. It runs entirely in your browser, so your files and text stay on your device."}}, {"@type": "Question", "name": "Can I make a transparent PNG?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Choose “Transparent background” as the result and download the PNG."}}, {"@type": "Question", "name": "Why does the first background removal take longer?", "acceptedAnswer": {"@type": "Answer", "text": "The AI model is downloaded the first time (7 MB for people, 115 MB for any object) and then runs on your device, so later images are much faster."}}]}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/image-studio.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/image-studio.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/image-studio.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/image-studio.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/image-studio.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/image-studio.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/image-studio.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/image-studio.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/image-studio.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/image-studio.html">
+<!-- /language versions -->
 </head><body>
 <nav class="tool-nav"><a href="index.html">← All tools</a><span>Image Studio</span></nav>
 <header class="masthead"><div><h1>Image Studio</h1><p>Six popular image jobs in one private browser tool.</p></div></header>
@@ -33,6 +45,12 @@
   <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
   <h3>Are my files uploaded?</h3>
   <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <h3 class="miga-tips">Tips for better results</h3>
+  <ul><li>For portraits, choose “People and portraits”: it is a small download and very fast.</li><li>Use the Colour mode for products photographed on a plain background.</li><li>To upscale, use AI sharpen 4× for photos and 2× for screenshots, logos and graphics.</li></ul>
+  <h3>Can I make a transparent PNG?</h3>
+  <p>Yes. Choose “Transparent background” as the result and download the PNG.</p>
+  <h3>Why does the first background removal take longer?</h3>
+  <p>The AI model is downloaded the first time (7 MB for people, 115 MB for any object) and then runs on your device, so later images are much faster.</p>
   <p class="miga-about-rel">Related tools: <a href="picture-forge.html">Picture Forge</a> · <a href="file-forge.html">Image Forge</a> · <a href="post-forge.html">Post Forge</a></p>
 </section>
 

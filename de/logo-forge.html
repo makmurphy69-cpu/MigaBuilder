@@ -1,0 +1,892 @@
+<!-- Generated from /logo-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="de" data-en-title="Logo maker free — logo and favicon generator — Logo Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><script src="gemini-fallback.js"></script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/de/logo-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Logo erstellen kostenlos — Logo- und Favicon-Generator — Logo Forge | MigaBuilder</title>
+<meta name="description" content="Logo Forge erstellt ein einfaches Logo für dein Unternehmen, mit Farbpalette, druckbarer Visitenkarte und fertigen Favicon-Größen.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Logo erstellen kostenlos — Logo- und Favicon-Generator — Logo Forge">
+<meta property="og:description" content="Logo Forge erstellt ein einfaches Logo für dein Unternehmen, mit Farbpalette, druckbarer Visitenkarte und fertigen Favicon-Größen.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/logo-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/de/logo-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Logo erstellen kostenlos — Logo- und Favicon-Generator — Logo Forge">
+<meta name="twitter:description" content="Logo Forge erstellt ein einfaches Logo für dein Unternehmen, mit Farbpalette, druckbarer Visitenkarte und fertigen Favicon-Größen.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/logo-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/logo-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  .solo-wrap { max-width: 560px; margin: 0 auto; padding: 28px clamp(20px, 4vw, 48px) 56px; display: flex; flex-direction: column; gap: 20px; }
+
+  .panel { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px 22px 26px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 22px 0 12px; padding-top: 18px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="password"], input[type="text"], textarea, select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 10px 11px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 90px; line-height: 1.5; }
+  .key-row { display: flex; gap: 8px; }
+  .key-row input { flex: 1; }
+  .toggle-key {
+    background: transparent; border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius);
+    padding: 0 12px; font-size: 12.5px; cursor: pointer; color: var(--ink);
+  }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 13px; cursor: pointer;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+
+  .error-box {
+    margin-top: 16px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none;
+  }
+  .error-box.show { display: block; }
+
+  .result-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); padding: 22px; display: none; }
+  .result-card.show { display: block; }
+  .logo-preview { width: 96px; height: 96px; margin: 0 auto 16px; }
+  .logo-preview svg { width: 100%; height: 100%; }
+  .swatches { display: flex; gap: 8px; justify-content: center; margin-bottom: 12px; }
+  .swatch { width: 32px; height: 32px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.15); cursor: pointer; padding: 0; position: relative; overflow: hidden; }
+  .swatch input[type="color"] { position: absolute; inset: -4px; width: calc(100% + 8px); height: calc(100% + 8px); opacity: 0; cursor: pointer; border: none; padding: 0; }
+  .variant-strip { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .variant-thumb { width: 56px; height: 56px; padding: 4px; border-radius: 6px; border: 2px solid transparent; background: #fff; cursor: pointer; }
+  .variant-thumb svg { width: 100%; height: 100%; }
+  .variant-thumb.active { border-color: var(--amber); }
+
+  .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 420px) { .btn-grid { grid-template-columns: 1fr; } }
+
+  footer { padding: 0 clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); max-width: 560px; margin: 0 auto; }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was bekomme ich außer dem Logo?","acceptedAnswer":{"@type":"Answer","text":"Eine Farbpalette, eine druckbare Visitenkarte und Favicon-Größen für deine Website, alles bereit zum Herunterladen."}},{"@type":"Question","name":"Ist Logo Forge kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke. Die KI nutzt ein kostenloses gemeinsames Kontingent; ist es ausgelastet oder am Tageslimit, versuche es später erneut oder füge deinen eigenen Gemini-Schlüssel hinzu."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nur der Text, den du der KI gibst, verlässt dein Gerät: Er wird über den kostenlosen KI-Dienst von MigaBuilder an Googles Gemini-Modell gesendet, oder über deinen eigenen Gemini-Schlüssel, wenn du einen hinzufügst. Bearbeitung, Vorschau und Downloads passieren alle in deinem Browser."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/logo-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/logo-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/logo-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/logo-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/logo-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/logo-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/logo-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/logo-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/logo-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/logo-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Logo Forge</h1>
+    <p data-i18n="heroSubtitle">Describe a business. Get a logo, a palette, a business card, and favicon files — built live in your browser.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<div class="solo-wrap">
+  <div class="panel">
+    <div class="section-title" data-i18n="connectionHeading">Connection</div>
+    <div class="field">
+      <label for="provider" data-i18n="providerLabel">AI provider</label>
+      <select id="provider">
+        <option value="gemini" selected data-i18n="providerGemini">Gemini — free, no key needed</option>
+        <option value="openai" data-i18n="providerOpenai">OpenAI</option>
+        <option value="anthropic" data-i18n="providerAnthropic">Anthropic (Claude)</option>
+      </select>
+    </div>
+    <div class="field" id="apiKeyField">
+      <label for="apiKey" id="apiKeyLabel">Your OpenAI API key</label>
+      <div class="key-row">
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+        <button type="button" class="toggle-key" id="toggleKey" data-i18n="show">Show</button>
+      </div>
+      <p class="hint" data-i18n="apiKeyHint">Used only to call the provider above directly from your browser. Never stored, never sent anywhere else.</p>
+    </div>
+    <div class="field" id="freeNoticeField" style="display:none;">
+      <p class="hint" data-i18n="freeNoticeHint" style="margin-top:0;">✓ Free to use — this site includes a shared key with a limited daily capacity. If it stops working, it likely hit that daily limit; try again tomorrow, or switch to OpenAI/Anthropic above with your own key.</p>
+    </div>
+    <div class="field">
+      <label for="model" data-i18n="modelLabel">Text model</label>
+      <select id="model">
+        <option value="gpt-4o-mini" selected>gpt-4o-mini (fast, cheap)</option>
+        <option value="gpt-4o">gpt-4o (higher quality)</option>
+        <option value="gpt-4.1">gpt-4.1</option>
+      </select>
+    </div>
+
+    <div class="section-title" data-i18n="businessHeading">The business</div>
+    <div class="field">
+      <label for="brief" data-i18n="briefLabel">Describe the business</label>
+      <textarea id="brief" data-i18n-placeholder="briefPlaceholder" placeholder="e.g. A family-run plumbing company in Austin, TX. Friendly but no-nonsense tone."></textarea>
+    </div>
+    <div class="field">
+      <label for="bizName" data-i18n="bizNameLabel">Business name (optional)</label>
+      <input type="text" id="bizName" data-i18n-placeholder="bizNamePlaceholder" placeholder="Leave blank to let the AI suggest one in the logo">
+    </div>
+
+    <button type="button" class="draft-btn" id="brandKitBtn" data-i18n="brandKitBtnLabel">Generate a logo &amp; brand kit</button>
+    <div class="error-box" id="errorBox"></div>
+  </div>
+
+  <div class="result-card" id="resultCard">
+    <div class="variant-strip" id="variantStrip"></div>
+    <div class="logo-preview" id="logoPreview"></div>
+    <div class="swatches" id="swatches"></div>
+    <p class="hint" data-i18n="swatchHint" style="text-align:center;margin-top:-8px;margin-bottom:16px;">Click a color swatch to recolor the logo instantly — no AI call needed.</p>
+
+    <button type="button" class="draft-btn secondary" id="regenerateBtn" data-i18n="regenerateBtnLabel" style="margin-bottom:14px;">🔁 Regenerate (new designs)</button>
+
+    <div class="section-title" data-i18n="downloadsHeading" style="border-top:none;padding-top:0;margin-top:0;">Downloads</div>
+    <div class="btn-grid">
+      <button type="button" class="draft-btn secondary" id="downloadSvgBtn" data-i18n="downloadSvgLabel">Logo (.svg)</button>
+      <button type="button" class="draft-btn secondary" id="downloadCardBtn" data-i18n="downloadCardLabel">Business card (.html)</button>
+      <button type="button" class="draft-btn secondary" id="downloadFullPngBtn" data-i18n="downloadFullPngLabel">Full-res PNG (1024×1024)</button>
+      <button type="button" class="draft-btn secondary" id="downloadSocialBtn" data-i18n="downloadSocialLabel">Social banner (1200×630)</button>
+    </div>
+
+    <div class="section-title" data-i18n="faviconHeading">Favicon sizes</div>
+    <div class="btn-grid">
+      <button type="button" class="draft-btn secondary" data-size="32" data-i18n="favicon32">32×32 (browser tab)</button>
+      <button type="button" class="draft-btn secondary" data-size="180" data-i18n="favicon180">180×180 (Apple touch)</button>
+      <button type="button" class="draft-btn secondary" data-size="192" data-i18n="favicon192">192×192 (Android)</button>
+      <button type="button" class="draft-btn secondary" data-size="512" data-i18n="favicon512">512×512 (PWA / app store)</button>
+    </div>
+    <p class="hint" data-i18n-html="faviconHint">Each button downloads a PNG at that exact size. For a browser tab icon, save the 32×32 file as <code>favicon.png</code> and add <code>&lt;link rel="icon" href="favicon.png"&gt;</code> to your site's <code>&lt;head&gt;</code>.</p>
+  </div>
+</div>
+
+
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Logo Forge</h2>
+  <p>Logo Forge creates a simple logo for your business, with a colour palette, a printable business card and ready-to-use favicon sizes.</p>
+  <h3>How to use Logo Forge</h3>
+  <ol><li>Enter the brand name, industry, style, colors, and symbol ideas.</li><li>Press “Generate logo”.</li><li>Compare the result and download the logo, favicon, and brand kit.</li></ol>
+  <h3>What do I get besides the logo?</h3>
+  <p>A colour palette, a printable business card and favicon sizes for your website, all ready to download.</p>
+  <h3>Is Logo Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/palette-forge.html">Palette Forge</a> · <a href="/de/website-builder.html">Website Builder</a> · <a href="/de/invoice-forge.html">Invoice Forge</a></p>
+</section>
+<footer data-i18n-html="footerText">Part of <a href="/de/">MigaBuilder</a>. Nothing you type here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/logo-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function(){
+  "use strict";
+
+  const providerSelect = document.getElementById('provider');
+  const apiKeyField = document.getElementById('apiKeyField');
+  const apiKeyInput = document.getElementById('apiKey');
+  const apiKeyLabel = document.getElementById('apiKeyLabel');
+  const toggleKeyBtn = document.getElementById('toggleKey');
+  const freeNoticeField = document.getElementById('freeNoticeField');
+  const modelSelect = document.getElementById('model');
+  const briefInput = document.getElementById('brief');
+  const bizNameInput = document.getElementById('bizName');
+  const brandKitBtn = document.getElementById('brandKitBtn');
+  const errorBox = document.getElementById('errorBox');
+  const resultCard = document.getElementById('resultCard');
+  const variantStripEl = document.getElementById('variantStrip');
+  const logoPreview = document.getElementById('logoPreview');
+  const swatchesEl = document.getElementById('swatches');
+  const regenerateBtn = document.getElementById('regenerateBtn');
+  const downloadSvgBtn = document.getElementById('downloadSvgBtn');
+  const downloadCardBtn = document.getElementById('downloadCardBtn');
+  const downloadFullPngBtn = document.getElementById('downloadFullPngBtn');
+  const downloadSocialBtn = document.getElementById('downloadSocialBtn');
+
+  function showError(message) { errorBox.textContent = message; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  toggleKeyBtn.addEventListener('click', function () {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleKeyBtn.textContent = isPassword ? I18N.t('hide') : I18N.t('show');
+  });
+
+  const modelOptions = {
+    gemini: [
+      { value: 'gemini-3.5-flash-lite', label: 'Gemini 3.5 Flash-Lite (free tier)' },
+      { value: 'gemini-3.5-flash', label: 'Gemini 3.5 Flash (free tier)' }
+    ],
+    openai: [
+      { value: 'gpt-4o-mini', label: 'gpt-4o-mini (fast, cheap)' },
+      { value: 'gpt-4o', label: 'gpt-4o (higher quality)' },
+      { value: 'gpt-4.1', label: 'gpt-4.1' }
+    ],
+    anthropic: [
+      { value: 'claude-haiku-4-5-20251001', label: 'Claude Haiku 4.5 (fast, cheap)' },
+      { value: 'claude-sonnet-5', label: 'Claude Sonnet 5 (recommended)' },
+      { value: 'claude-opus-5', label: 'Claude Opus 5 (highest quality)' }
+    ]
+  };
+
+  function applyProvider() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      apiKeyField.style.display = 'none';
+      freeNoticeField.style.display = 'block';
+    } else {
+      apiKeyField.style.display = 'block';
+      freeNoticeField.style.display = 'none';
+      apiKeyLabel.textContent = provider === 'openai' ? I18N.t('apiKeyLabelOpenai') : I18N.t('apiKeyLabelAnthropic');
+      apiKeyInput.placeholder = provider === 'openai' ? 'sk-...' : 'sk-ant-...';
+    }
+    modelSelect.innerHTML = '';
+    const defaultIndex = provider === 'anthropic' ? 1 : 0;
+    modelOptions[provider].forEach((opt, i) => {
+      const el = document.createElement('option');
+      el.value = opt.value;
+      el.textContent = opt.label;
+      if (i === defaultIndex) el.selected = true;
+      modelSelect.appendChild(el);
+    });
+  }
+  providerSelect.addEventListener('change', applyProvider);
+
+  // The real Gemini key lives server-side as a Cloudflare Worker secret — see
+  // cloudflare-worker/README.md. Never put an actual key on this line; this
+  // file is public and anyone can view its source.
+  const GEMINI_PROXY_URL = 'https://migabuilder-gemini.makmurphy69.workers.dev';
+
+  function currentTextApiKey() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') return 'via-proxy';
+    return apiKeyInput.value.trim();
+  }
+
+  function stripCodeFence(text) {
+    const trimmed = text.trim();
+    const fenceMatch = trimmed.match(/^```(?:html|json)?\s*([\s\S]*?)\s*```$/i);
+    return fenceMatch ? fenceMatch[1] : trimmed;
+  }
+
+  async function callChat(apiKey, model, systemPrompt, userPrompt) {
+    const provider = providerSelect.value;
+
+    if (provider === 'gemini') {
+      const response = await fetch(GEMINI_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: model, systemPrompt: systemPrompt, userPrompt: userPrompt })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        const msg = errBody && errBody.error && errBody.error.message
+          ? errBody.error.message
+          : (errBody && errBody.error) || ('Request failed with status ' + response.status + ' — the free daily limit may have been reached.');
+        throw new Error(msg);
+      }
+      const data = await response.json();
+      const cand = data.candidates && data.candidates[0];
+      const raw = cand && cand.content && cand.content.parts && cand.content.parts[0]
+        ? cand.content.parts[0].text
+        : '';
+      if (!raw) throw new Error('The model returned an empty response.');
+      return stripCodeFence(raw);
+    }
+
+    if (provider === 'anthropic') {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: model,
+          max_tokens: 8000,
+          system: systemPrompt,
+          messages: [{ role: 'user', content: userPrompt }]
+        })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        const msg = errBody && errBody.error && errBody.error.message
+          ? errBody.error.message
+          : ('Request failed with status ' + response.status);
+        throw new Error(msg);
+      }
+      const data = await response.json();
+      const block = data.content && data.content.find(b => b.type === 'text');
+      const raw = block ? block.text : '';
+      if (!raw) throw new Error('The model returned an empty response.');
+      return stripCodeFence(raw);
+    }
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + apiKey
+      },
+      body: JSON.stringify({
+        model: model,
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userPrompt }
+        ],
+        temperature: 0.8
+      })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => null);
+      const msg = errBody && errBody.error && errBody.error.message
+        ? errBody.error.message
+        : ('Request failed with status ' + response.status);
+      throw new Error(msg);
+    }
+    const data = await response.json();
+    const raw = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+    if (!raw) throw new Error('The model returned an empty response.');
+    return stripCodeFence(raw);
+  }
+
+  function downloadTextAsFile(text, filename, mime) {
+    const blob = new Blob([text], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  let variants = []; // [{logoSvg, colors}]
+  let activeVariantIndex = 0;
+  let currentCardHtml = '';
+
+  function currentLogoSvg() {
+    return variants[activeVariantIndex] ? variants[activeVariantIndex].logoSvg : '';
+  }
+
+  function renderVariantStrip() {
+    variantStripEl.innerHTML = '';
+    if (variants.length < 2) return;
+    variants.forEach((v, i) => {
+      const thumb = document.createElement('button');
+      thumb.type = 'button';
+      thumb.className = 'variant-thumb' + (i === activeVariantIndex ? ' active' : '');
+      thumb.innerHTML = v.logoSvg;
+      thumb.title = 'Design ' + (i + 1);
+      thumb.addEventListener('click', () => { activeVariantIndex = i; renderActiveVariant(); });
+      variantStripEl.appendChild(thumb);
+    });
+  }
+
+  function renderActiveVariant() {
+    const v = variants[activeVariantIndex];
+    if (!v) return;
+    logoPreview.innerHTML = v.logoSvg;
+    swatchesEl.innerHTML = '';
+    (v.colors || []).forEach((hex, colorIdx) => {
+      const sw = document.createElement('button');
+      sw.type = 'button';
+      sw.className = 'swatch';
+      sw.style.background = hex;
+      sw.title = hex + ' — click to recolor';
+      const colorInput = document.createElement('input');
+      colorInput.type = 'color';
+      colorInput.value = hex;
+      colorInput.addEventListener('input', () => {
+        const newHex = colorInput.value;
+        const oldHex = v.colors[colorIdx];
+        const re = new RegExp(oldHex.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        v.logoSvg = v.logoSvg.replace(re, newHex);
+        v.colors[colorIdx] = newHex;
+        renderActiveVariant();
+        renderVariantStrip();
+      });
+      sw.appendChild(colorInput);
+      swatchesEl.appendChild(sw);
+    });
+    renderVariantStrip();
+  }
+
+  async function runBrandKit() {
+    clearError();
+    const key = currentTextApiKey();
+    const brief = briefInput.value.trim();
+    if (!key) { showError(I18N.t('errorNoKey')); return; }
+    if (!brief) { showError(I18N.t('errorNoBrief')); return; }
+
+    const isRegenerate = resultCard.classList.contains('show');
+    const activeBtn = isRegenerate ? regenerateBtn : brandKitBtn;
+    brandKitBtn.disabled = true;
+    regenerateBtn.disabled = true;
+    const originalLabel = activeBtn.textContent;
+    activeBtn.textContent = I18N.t('brandKitBtnLoading');
+    const model = modelSelect.value;
+    const nameHint = bizNameInput.value.trim();
+    const rules = [
+      'You are a brand designer. Given a business brief, design THREE distinct simple, professional wordmark-style logo concepts as inline SVG, each with its own 3-color palette, plus one printable business card using the first concept.',
+      nameHint ? ('The business is named "' + nameHint + '" — use this exact name.') : 'Invent a fitting business name if one is not implied by the brief.',
+      'Respond with ONLY valid JSON, no markdown fences, in exactly this shape:',
+      '{"variants": [{"logoSvg": "<svg viewBox=\\"0 0 200 200\\" xmlns=\\"http://www.w3.org/2000/svg\\">...</svg>", "colors": ["#hex1","#hex2","#hex3"]}, {...}, {...}], "cardHtml": "<!DOCTYPE html>...a complete, self-contained, printable business-card-sized HTML page, 3.5in x 2in, with inline CSS, using the business name, slogan if any, and contact info if given"}',
+      'On the business card, use only contact details (address, email, phone, website, social handles) that appear in the brief, copied exactly. If a detail is not given, show an obvious placeholder such as "your@email.com", "Your address" or "+00 000 000" — never invent a real-looking address, email, phone number or handle.',
+      'Each logo must be a simple geometric mark or monogram (not a photo), must look correct on a light background, and must use only its own given palette (each hex value must literally appear as a fill or stroke color in that logo\'s SVG, so it can be swapped later by find-and-replace). Keep each SVG under 2000 characters. Make the three concepts genuinely different from each other (e.g. different mark style, layout, or type treatment), not color variations of the same design.'
+    ].join('\n');
+
+    try {
+      const json = await callChat(key, model, rules, brief);
+      const kit = JSON.parse(json);
+      variants = kit.variants || (kit.logoSvg ? [{ logoSvg: kit.logoSvg, colors: kit.colors || [] }] : []);
+      if (!variants.length) throw new Error(I18N.t('errorNoDesigns'));
+      activeVariantIndex = 0;
+      currentCardHtml = kit.cardHtml || '';
+      renderActiveVariant();
+      resultCard.classList.add('show');
+    } catch (err) {
+      showError(err.message || I18N.t('errorGenericBrandKit'));
+    } finally {
+      brandKitBtn.disabled = false;
+      regenerateBtn.disabled = false;
+      brandKitBtn.textContent = I18N.t('brandKitBtnLabel');
+      regenerateBtn.textContent = I18N.t('regenerateBtnLabel');
+    }
+  }
+  brandKitBtn.addEventListener('click', runBrandKit);
+  regenerateBtn.addEventListener('click', runBrandKit);
+
+  downloadSvgBtn.addEventListener('click', () => {
+    if (currentLogoSvg()) downloadTextAsFile(currentLogoSvg(), 'logo.svg', 'image/svg+xml');
+  });
+  downloadCardBtn.addEventListener('click', () => {
+    if (currentCardHtml) downloadTextAsFile(currentCardHtml, 'business-card.html', 'text/html');
+  });
+
+  function renderLogoToCanvas(size, background) {
+    return new Promise((resolve, reject) => {
+      const svg = currentLogoSvg();
+      if (!svg) { reject(new Error(I18N.t('errorNoLogoYet'))); return; }
+      const svgBlob = new Blob([svg], { type: 'image/svg+xml' });
+      const url = URL.createObjectURL(svgBlob);
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width = size.width;
+        canvas.height = size.height;
+        const ctx = canvas.getContext('2d');
+        if (background) { ctx.fillStyle = background; ctx.fillRect(0, 0, canvas.width, canvas.height); }
+        URL.revokeObjectURL(url);
+        resolve({ canvas: canvas, ctx: ctx, img: img });
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error(I18N.t('errorRenderLogo'))); };
+      img.src = url;
+    });
+  }
+
+  downloadFullPngBtn.addEventListener('click', async () => {
+    try {
+      const { canvas, ctx, img } = await renderLogoToCanvas({ width: 1024, height: 1024 }, null);
+      ctx.drawImage(img, 0, 0, 1024, 1024);
+      canvas.toBlob((blob) => {
+        if (!blob) { showError(I18N.t('errorFullPng')); return; }
+        const dlUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = dlUrl; a.download = 'logo-1024x1024.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(dlUrl), 4000);
+      }, 'image/png');
+    } catch (err) { showError(err.message); }
+  });
+
+  downloadSocialBtn.addEventListener('click', async () => {
+    try {
+      const { canvas, ctx, img } = await renderLogoToCanvas({ width: 1200, height: 630 }, '#ffffff');
+      const logoSize = 380;
+      ctx.drawImage(img, (1200 - logoSize) / 2, (630 - logoSize) / 2, logoSize, logoSize);
+      canvas.toBlob((blob) => {
+        if (!blob) { showError(I18N.t('errorSocialBanner')); return; }
+        const dlUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = dlUrl; a.download = 'logo-social-banner-1200x630.png';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(dlUrl), 4000);
+      }, 'image/png');
+    } catch (err) { showError(err.message); }
+  });
+
+  function downloadFaviconSize(size) {
+    const svg = currentLogoSvg();
+    if (!svg) return;
+    const svgBlob = new Blob([svg], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      canvas.toBlob((blob) => {
+        if (!blob) { showError(I18N.t('errorFaviconSize')); return; }
+        const dlUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = dlUrl;
+        a.download = 'favicon-' + size + 'x' + size + '.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(dlUrl), 4000);
+      }, 'image/png');
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); showError(I18N.t('errorFaviconSize')); };
+    img.src = url;
+  }
+
+  document.querySelectorAll('[data-size]').forEach(btn => {
+    btn.addEventListener('click', () => downloadFaviconSize(parseInt(btn.getAttribute('data-size'), 10)));
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Describe a business. Get a logo, a palette, a business card, and favicon files — built live in your browser.',
+      connectionHeading: 'Connection', apiKeyLabelOpenai: 'Your OpenAI API key', apiKeyLabelAnthropic: 'Your Anthropic API key',
+      apiKeyHint: 'Used only to call the provider above directly from your browser. Never stored, never sent anywhere else.',
+      freeNoticeHint: '✓ Free to use — this site includes a shared key with a limited daily capacity. If it stops working, it likely hit that daily limit; try again tomorrow, or switch to OpenAI/Anthropic above with your own key.',
+      modelLabel: 'Text model', businessHeading: 'The business',
+      briefLabel: 'Describe the business', briefPlaceholder: 'e.g. A family-run plumbing company in Austin, TX. Friendly but no-nonsense tone.',
+      bizNameLabel: 'Business name (optional)', bizNamePlaceholder: 'Leave blank to let the AI suggest one in the logo',
+      brandKitBtnLabel: 'Generate a logo & brand kit', brandKitBtnLoading: 'Designing…',
+      swatchHint: 'Click a color swatch to recolor the logo instantly — no AI call needed.',
+      regenerateBtnLabel: '🔁 Regenerate (new designs)', downloadsHeading: 'Downloads',
+      downloadSvgLabel: 'Logo (.svg)', downloadCardLabel: 'Business card (.html)',
+      downloadFullPngLabel: 'Full-res PNG (1024×1024)', downloadSocialLabel: 'Social banner (1200×630)',
+      faviconHeading: 'Favicon sizes', favicon32: '32×32 (browser tab)', favicon180: '180×180 (Apple touch)',
+      favicon192: '192×192 (Android)', favicon512: '512×512 (PWA / app store)',
+      faviconHint: 'Each button downloads a PNG at that exact size. For a browser tab icon, save the 32×32 file as <code>favicon.png</code> and add <code>&lt;link rel="icon" href="favicon.png"&gt;</code> to your site\'s <code>&lt;head&gt;</code>.',
+      errorNoKey: 'Add your API key first.', errorNoBrief: 'Describe the business first.',
+      errorNoDesigns: 'The model did not return any logo designs.', errorGenericBrandKit: 'Could not generate a brand kit.',
+      errorNoLogoYet: 'Generate a logo first.', errorRenderLogo: 'Could not render the logo.',
+      errorFullPng: 'Could not render the full-res PNG.', errorSocialBanner: 'Could not render the social banner.',
+      errorFaviconSize: 'Could not render that favicon size.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Nothing you type here is stored anywhere. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
+    },
+    es: {
+      heroSubtitle: 'Describe un negocio. Obtén un logotipo, una paleta, una tarjeta de presentación y archivos de favicon — creado en vivo en tu navegador.',
+      connectionHeading: 'Conexión', apiKeyLabelOpenai: 'Tu clave de API de OpenAI', apiKeyLabelAnthropic: 'Tu clave de API de Anthropic',
+      apiKeyHint: 'Se usa solo para llamar al proveedor de arriba directamente desde tu navegador. Nunca se guarda, nunca se envía a ningún otro lugar.',
+      freeNoticeHint: '✓ Gratis para usar — este sitio incluye una clave compartida con una capacidad diaria limitada. Si deja de funcionar, probablemente alcanzó ese límite diario; inténtalo mañana, o cambia a OpenAI/Anthropic arriba con tu propia clave.',
+      modelLabel: 'Modelo de texto', businessHeading: 'El negocio',
+      briefLabel: 'Describe el negocio', briefPlaceholder: 'p. ej. Una empresa familiar de fontanería en Austin, TX. Tono amigable pero directo.',
+      bizNameLabel: 'Nombre del negocio (opcional)', bizNamePlaceholder: 'Déjalo en blanco para que la IA sugiera uno en el logotipo',
+      brandKitBtnLabel: 'Generar un logotipo y kit de marca', brandKitBtnLoading: 'Diseñando…',
+      swatchHint: 'Haz clic en un color para recolorear el logotipo al instante — sin necesidad de una llamada a la IA.',
+      regenerateBtnLabel: '🔁 Regenerar (nuevos diseños)', downloadsHeading: 'Descargas',
+      downloadSvgLabel: 'Logotipo (.svg)', downloadCardLabel: 'Tarjeta de presentación (.html)',
+      downloadFullPngLabel: 'PNG de alta resolución (1024×1024)', downloadSocialLabel: 'Banner social (1200×630)',
+      faviconHeading: 'Tamaños de favicon', favicon32: '32×32 (pestaña del navegador)', favicon180: '180×180 (Apple touch)',
+      favicon192: '192×192 (Android)', favicon512: '512×512 (PWA / tienda de apps)',
+      faviconHint: 'Cada botón descarga un PNG en ese tamaño exacto. Para el icono de la pestaña del navegador, guarda el archivo de 32×32 como <code>favicon.png</code> y añade <code>&lt;link rel="icon" href="favicon.png"&gt;</code> al <code>&lt;head&gt;</code> de tu sitio.',
+      errorNoKey: 'Añade tu clave de API primero.', errorNoBrief: 'Describe el negocio primero.',
+      errorNoDesigns: 'El modelo no devolvió ningún diseño de logotipo.', errorGenericBrandKit: 'No se pudo generar un kit de marca.',
+      errorNoLogoYet: 'Genera un logotipo primero.', errorRenderLogo: 'No se pudo renderizar el logotipo.',
+      errorFullPng: 'No se pudo renderizar el PNG de alta resolución.', errorSocialBanner: 'No se pudo renderizar el banner social.',
+      errorFaviconSize: 'No se pudo renderizar ese tamaño de favicon.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Nada de lo que escribes aquí se almacena en ningún lugar. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
+    },
+    ar: {
+      heroSubtitle: 'صِف نشاطًا تجاريًا. احصل على شعار، ولوحة ألوان، وبطاقة عمل، وملفات أيقونة مفضلة — تُنشأ مباشرة في متصفحك.',
+      connectionHeading: 'الاتصال', apiKeyLabelOpenai: 'مفتاح API الخاص بك في OpenAI', apiKeyLabelAnthropic: 'مفتاح API الخاص بك في Anthropic',
+      apiKeyHint: 'يُستخدم فقط لاستدعاء المزوّد أعلاه مباشرة من متصفحك. لا يُحفظ أبدًا ولا يُرسل إلى أي مكان آخر.',
+      freeNoticeHint: '✓ مجاني للاستخدام — يتضمن هذا الموقع مفتاحًا مشتركًا بسعة يومية محدودة. إذا توقف عن العمل، فمن المرجح أنه بلغ ذلك الحد اليومي؛ حاول مرة أخرى غدًا، أو انتقل إلى OpenAI/Anthropic أعلاه بمفتاحك الخاص.',
+      modelLabel: 'نموذج النص', businessHeading: 'النشاط التجاري',
+      briefLabel: 'صف النشاط التجاري', briefPlaceholder: 'مثال: شركة سباكة عائلية في أوستن، تكساس. نبرة ودية لكن مباشرة.',
+      bizNameLabel: 'اسم النشاط التجاري (اختياري)', bizNamePlaceholder: 'اتركه فارغًا ليقترح الذكاء الاصطناعي اسمًا في الشعار',
+      brandKitBtnLabel: 'إنشاء شعار وحقيبة علامة تجارية', brandKitBtnLoading: 'جارٍ التصميم…',
+      swatchHint: 'انقر على لون لإعادة تلوين الشعار فورًا — دون الحاجة لاستدعاء الذكاء الاصطناعي.',
+      regenerateBtnLabel: '🔁 إعادة الإنشاء (تصاميم جديدة)', downloadsHeading: 'التنزيلات',
+      downloadSvgLabel: 'الشعار (.svg)', downloadCardLabel: 'بطاقة العمل (.html)',
+      downloadFullPngLabel: 'PNG عالي الدقة (1024×1024)', downloadSocialLabel: 'شعار اجتماعي (1200×630)',
+      faviconHeading: 'أحجام أيقونة المفضلة', favicon32: '32×32 (تبويب المتصفح)', favicon180: '180×180 (Apple touch)',
+      favicon192: '192×192 (Android)', favicon512: '512×512 (PWA / متجر التطبيقات)',
+      faviconHint: 'كل زر يُنزّل صورة PNG بهذا الحجم بالضبط. لأيقونة تبويب المتصفح، احفظ ملف 32×32 باسم <code>favicon.png</code> وأضف <code>&lt;link rel="icon" href="favicon.png"&gt;</code> إلى <code>&lt;head&gt;</code> موقعك.',
+      errorNoKey: 'أضف مفتاح API الخاص بك أولاً.', errorNoBrief: 'صف النشاط التجاري أولاً.',
+      errorNoDesigns: 'لم يُرجع النموذج أي تصاميم شعارات.', errorGenericBrandKit: 'تعذّر إنشاء حقيبة العلامة التجارية.',
+      errorNoLogoYet: 'أنشئ شعارًا أولاً.', errorRenderLogo: 'تعذّر عرض الشعار.',
+      errorFullPng: 'تعذّر عرض PNG عالي الدقة.', errorSocialBanner: 'تعذّر عرض الشعار الاجتماعي.',
+      errorFaviconSize: 'تعذّر عرض حجم أيقونة المفضلة هذا.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. لا شيء تكتبه هنا يُخزَّن في أي مكان. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
+    },
+    zh: {
+      heroSubtitle: '描述一个企业。获得徽标、配色方案、名片和网站图标文件——就在你的浏览器中实时生成。',
+      connectionHeading: '连接', apiKeyLabelOpenai: '你的 OpenAI API 密钥', apiKeyLabelAnthropic: '你的 Anthropic API 密钥',
+      apiKeyHint: '仅用于直接从你的浏览器调用上方提供方。绝不会被存储，也不会发送到其他任何地方。',
+      freeNoticeHint: '✓ 免费使用——本网站包含一个共享密钥，每日额度有限。如果它停止工作，很可能是达到了每日限额；请明天再试，或在上方切换到 OpenAI/Anthropic 并使用你自己的密钥。',
+      modelLabel: '文本模型', businessHeading: '企业信息',
+      briefLabel: '描述该企业', briefPlaceholder: '例如：得克萨斯州奥斯汀市的一家家族水管维修公司。语气友好但直截了当。',
+      bizNameLabel: '企业名称（可选）', bizNamePlaceholder: '留空以让 AI 在徽标中建议一个名称',
+      brandKitBtnLabel: '生成徽标与品牌套件', brandKitBtnLoading: '设计中…',
+      swatchHint: '点击色块即可立即为徽标重新着色——无需调用 AI。',
+      regenerateBtnLabel: '🔁 重新生成（新设计）', downloadsHeading: '下载',
+      downloadSvgLabel: '徽标 (.svg)', downloadCardLabel: '名片 (.html)',
+      downloadFullPngLabel: '高分辨率 PNG（1024×1024）', downloadSocialLabel: '社交横幅（1200×630）',
+      faviconHeading: '网站图标尺寸', favicon32: '32×32（浏览器标签）', favicon180: '180×180（Apple touch）',
+      favicon192: '192×192（Android）', favicon512: '512×512（PWA / 应用商店）',
+      faviconHint: '每个按钮都会下载该确切尺寸的 PNG 文件。对于浏览器标签图标，请将 32×32 的文件保存为 <code>favicon.png</code>，并在你网站的 <code>&lt;head&gt;</code> 中添加 <code>&lt;link rel="icon" href="favicon.png"&gt;</code>。',
+      errorNoKey: '请先添加你的 API 密钥。', errorNoBrief: '请先描述该企业。',
+      errorNoDesigns: '模型没有返回任何徽标设计。', errorGenericBrandKit: '无法生成品牌套件。',
+      errorNoLogoYet: '请先生成一个徽标。', errorRenderLogo: '无法渲染该徽标。',
+      errorFullPng: '无法渲染高分辨率 PNG。', errorSocialBanner: '无法渲染社交横幅。',
+      errorFaviconSize: '无法渲染该网站图标尺寸。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你在此输入的任何内容都不会被存储在任何地方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
+    },
+    sw: {
+      heroSubtitle: 'Eleza biashara. Pata nembo, mpangilio wa rangi, kadi ya biashara, na faili za favicon — zinazotengenezwa moja kwa moja kwenye kivinjari chako.',
+      connectionHeading: 'Muunganisho', apiKeyLabelOpenai: 'Ufunguo wako wa API wa OpenAI', apiKeyLabelAnthropic: 'Ufunguo wako wa API wa Anthropic',
+      apiKeyHint: 'Hutumika tu kuita mtoa huduma aliye hapo juu moja kwa moja kutoka kwenye kivinjari chako. Haihifadhiwi kamwe, wala haitumwi mahali pengine popote.',
+      freeNoticeHint: '✓ Bure kutumia — tovuti hii inajumuisha ufunguo unaoshirikiwa wenye uwezo mdogo wa kila siku. Ikiwa itaacha kufanya kazi, huenda imefikia kikomo hicho cha kila siku; jaribu tena kesho, au badilisha kwenda OpenAI/Anthropic hapo juu ukitumia ufunguo wako mwenyewe.',
+      modelLabel: 'Modeli ya maandishi', businessHeading: 'Biashara',
+      briefLabel: 'Eleza biashara', briefPlaceholder: 'mfano: Kampuni ya familia ya mabomba huko Austin, TX. Sauti ya kirafiki lakini ya moja kwa moja.',
+      bizNameLabel: 'Jina la biashara (hiari)', bizNamePlaceholder: 'Acha wazi ili AI ipendekeze jina kwenye nembo',
+      brandKitBtnLabel: 'Tengeneza nembo na kifurushi cha chapa', brandKitBtnLoading: 'Inabuni…',
+      swatchHint: 'Bofya rangi kubadilisha rangi ya nembo papo hapo — hakuna hitaji la kuita AI.',
+      regenerateBtnLabel: '🔁 Tengeneza upya (miundo mipya)', downloadsHeading: 'Vipakuliwa',
+      downloadSvgLabel: 'Nembo (.svg)', downloadCardLabel: 'Kadi ya biashara (.html)',
+      downloadFullPngLabel: 'PNG ya ubora wa juu (1024×1024)', downloadSocialLabel: 'Bango la mitandao ya kijamii (1200×630)',
+      faviconHeading: 'Ukubwa wa favicon', favicon32: '32×32 (tabo ya kivinjari)', favicon180: '180×180 (Apple touch)',
+      favicon192: '192×192 (Android)', favicon512: '512×512 (PWA / duka la programu)',
+      faviconHint: 'Kila kitufe hupakua PNG kwa ukubwa huo hasa. Kwa aikoni ya tabo ya kivinjari, hifadhi faili ya 32×32 kama <code>favicon.png</code> na uongeze <code>&lt;link rel="icon" href="favicon.png"&gt;</code> kwenye <code>&lt;head&gt;</code> ya tovuti yako.',
+      errorNoKey: 'Ongeza ufunguo wako wa API kwanza.', errorNoBrief: 'Eleza biashara kwanza.',
+      errorNoDesigns: 'Modeli haikurudisha muundo wowote wa nembo.', errorGenericBrandKit: 'Imeshindwa kutengeneza kifurushi cha chapa.',
+      errorNoLogoYet: 'Tengeneza nembo kwanza.', errorRenderLogo: 'Imeshindwa kuonyesha nembo.',
+      errorFullPng: 'Imeshindwa kuonyesha PNG ya ubora wa juu.', errorSocialBanner: 'Imeshindwa kuonyesha bango la mitandao ya kijamii.',
+      errorFaviconSize: 'Imeshindwa kuonyesha ukubwa huo wa favicon.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Hakuna unachoandika hapa kinachohifadhiwa popote. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Beskriv ett företag. Få en logotyp, en färgpalett, ett visitkort och favicon-filer — skapade direkt i din webbläsare.",
+      connectionHeading: "Anslutning",
+      apiKeyLabelOpenai: "Din OpenAI API-nyckel",
+      apiKeyLabelAnthropic: "Din Anthropic API-nyckel",
+      apiKeyHint: "Används bara för att anropa leverantören ovan direkt från din webbläsare. Sparas aldrig och skickas aldrig någon annanstans.",
+      freeNoticeHint: "✓ Gratis att använda — webbplatsen har en delad nyckel med begränsad daglig kapacitet. Om den slutar fungera har den troligen nått gränsen för dagen; försök igen i morgon, eller byt till OpenAI/Anthropic ovan med din egen nyckel.",
+      modelLabel: "Textmodell",
+      businessHeading: "Företaget",
+      briefLabel: "Beskriv företaget",
+      briefPlaceholder: "t.ex. Ett familjeägt VVS-företag i Göteborg. Vänlig men rak ton.",
+      bizNameLabel: "Företagsnamn (valfritt)",
+      bizNamePlaceholder: "Lämna tomt så föreslår AI:n ett i logotypen",
+      brandKitBtnLabel: "Skapa logotyp & varumärkespaket",
+      brandKitBtnLoading: "Designar…",
+      swatchHint: "Klicka på en färgruta för att byta färg på logotypen direkt — inget AI-anrop behövs.",
+      regenerateBtnLabel: "🔁 Skapa nya (nya designer)",
+      downloadsHeading: "Nedladdningar",
+      downloadSvgLabel: "Logotyp (.svg)",
+      downloadCardLabel: "Visitkort (.html)",
+      downloadFullPngLabel: "PNG i full upplösning (1024×1024)",
+      downloadSocialLabel: "Banner för sociala medier (1200×630)",
+      faviconHeading: "Favicon-storlekar",
+      favicon32: "32×32 (webbläsarflik)",
+      favicon180: "180×180 (Apple touch)",
+      favicon192: "192×192 (Android)",
+      favicon512: "512×512 (PWA / appbutik)",
+      faviconHint: "Varje knapp laddar ner en PNG i exakt den storleken. För en ikon i webbläsarfliken, spara 32×32-filen som <code>favicon.png</code> och lägg till <code>&lt;link rel=\"icon\" href=\"favicon.png\"&gt;</code> i webbplatsens <code>&lt;head&gt;</code>.",
+      errorNoKey: "Lägg till din API-nyckel först.",
+      errorNoBrief: "Beskriv företaget först.",
+      errorNoDesigns: "Modellen returnerade inga logotypförslag.",
+      errorGenericBrandKit: "Kunde inte skapa ett varumärkespaket.",
+      errorNoLogoYet: "Skapa en logotyp först.",
+      errorRenderLogo: "Kunde inte rita logotypen.",
+      errorFullPng: "Kunde inte skapa PNG-filen i full upplösning.",
+      errorSocialBanner: "Kunde inte skapa bannern för sociala medier.",
+      errorFaviconSize: "Kunde inte skapa den favicon-storleken.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Ingenting du skriver här sparas någonstans. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
+    },
+    de: {
+      heroSubtitle: "Beschreibe ein Unternehmen. Bekomm ein Logo, eine Palette, eine Visitenkarte und Favicon-Dateien — live in deinem Browser gebaut.",
+      connectionHeading: "Verbindung",
+      apiKeyLabelOpenai: "Dein OpenAI-API-Schlüssel",
+      apiKeyLabelAnthropic: "Dein Anthropic-API-Schlüssel",
+      apiKeyHint: "Wird nur genutzt, um den Anbieter oben direkt aus deinem Browser aufzurufen. Nie gespeichert, nie anderswohin gesendet.",
+      freeNoticeHint: "✓ Kostenlos nutzbar — diese Seite enthält einen geteilten Schlüssel mit begrenzter Tageskapazität. Wenn er nicht mehr funktioniert, ist wahrscheinlich das Tageslimit erreicht; versuch es morgen erneut oder wechsle oben zu OpenAI/Anthropic mit deinem eigenen Schlüssel.",
+      modelLabel: "Textmodell",
+      businessHeading: "Das Unternehmen",
+      briefLabel: "Beschreibe das Unternehmen",
+      briefPlaceholder: "z. B. Ein familiengeführter Sanitärbetrieb in Austin, TX. Freundlicher, aber sachlicher Ton.",
+      bizNameLabel: "Firmenname (optional)",
+      bizNamePlaceholder: "Leer lassen, damit die KI einen im Logo vorschlägt",
+      brandKitBtnLabel: "Logo & Markenpaket erzeugen",
+      brandKitBtnLoading: "Wird gestaltet…",
+      swatchHint: "Klick auf ein Farbfeld, um das Logo sofort umzufärben — ohne KI-Aufruf.",
+      regenerateBtnLabel: "🔁 Neu erzeugen (neue Entwürfe)",
+      downloadsHeading: "Downloads",
+      downloadSvgLabel: "Logo (.svg)",
+      downloadCardLabel: "Visitenkarte (.html)",
+      downloadFullPngLabel: "PNG in voller Auflösung (1024×1024)",
+      downloadSocialLabel: "Social-Media-Banner (1200×630)",
+      faviconHeading: "Favicon-Größen",
+      favicon32: "32×32 (Browser-Tab)",
+      favicon180: "180×180 (Apple touch)",
+      favicon192: "192×192 (Android)",
+      favicon512: "512×512 (PWA / App-Store)",
+      faviconHint: "Jeder Knopf lädt ein PNG in genau dieser Größe herunter. Für ein Browser-Tab-Symbol speichere die 32×32-Datei als <code>favicon.png<\/code> und füge <code>&lt;link rel=\"icon\" href=\"favicon.png\"&gt;<\/code> in das <code>&lt;head&gt;<\/code> deiner Website ein.",
+      errorNoKey: "Füge zuerst deinen API-Schlüssel hinzu.",
+      errorNoBrief: "Beschreibe zuerst das Unternehmen.",
+      errorNoDesigns: "Das Modell hat keine Logo-Entwürfe geliefert.",
+      errorGenericBrandKit: "Das Markenpaket konnte nicht erzeugt werden.",
+      errorNoLogoYet: "Erzeuge zuerst ein Logo.",
+      errorRenderLogo: "Das Logo konnte nicht gezeichnet werden.",
+      errorFullPng: "Das PNG in voller Auflösung konnte nicht erstellt werden.",
+      errorSocialBanner: "Das Social-Media-Banner konnte nicht erstellt werden.",
+      errorFaviconSize: "Diese Favicon-Größe konnte nicht erstellt werden.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Nichts, was du hier eingibst, wird gespeichert. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
+    },
+    pt: {
+      heroSubtitle: "Descreva um negócio. Receba um logo, uma paleta, um cartão de visita e arquivos de favicon — criados ao vivo no seu navegador.",
+      connectionHeading: "Conexão",
+      apiKeyLabelOpenai: "Sua chave de API da OpenAI",
+      apiKeyLabelAnthropic: "Sua chave de API da Anthropic",
+      apiKeyHint: "Usada só para chamar o provedor acima direto do seu navegador. Nunca guardada, nunca enviada a outro lugar.",
+      freeNoticeHint: "✓ Grátis para usar — este site inclui uma chave compartilhada com capacidade diária limitada. Se parar de funcionar, provavelmente atingiu o limite diário; tente amanhã ou mude para OpenAI/Anthropic acima com sua própria chave.",
+      modelLabel: "Modelo de texto",
+      businessHeading: "O negócio",
+      briefLabel: "Descreva o negócio",
+      briefPlaceholder: "ex.: Uma empresa familiar de encanamento em Austin, TX. Tom amigável, mas direto.",
+      bizNameLabel: "Nome da empresa (opcional)",
+      bizNamePlaceholder: "Deixe em branco para a IA sugerir um no logotipo",
+      brandKitBtnLabel: "Gerar logo e kit de marca",
+      brandKitBtnLoading: "Criando…",
+      swatchHint: "Clique numa amostra de cor para recolorir o logo na hora — sem IA.",
+      regenerateBtnLabel: "🔁 Gerar de novo (novos designs)",
+      downloadsHeading: "Downloads",
+      downloadSvgLabel: "Logo (.svg)",
+      downloadCardLabel: "Cartão de visita (.html)",
+      downloadFullPngLabel: "PNG em resolução total (1024×1024)",
+      downloadSocialLabel: "Banner para redes sociais (1200×630)",
+      faviconHeading: "Tamanhos de favicon",
+      favicon32: "32×32 (aba do navegador)",
+      favicon180: "180×180 (Apple touch)",
+      favicon192: "192×192 (Android)",
+      favicon512: "512×512 (PWA / loja de apps)",
+      faviconHint: "Cada botão baixa um PNG nesse tamanho exato. Para um ícone de aba, salve o arquivo 32×32 como <code>favicon.png<\/code> e adicione <code>&lt;link rel=\"icon\" href=\"favicon.png\"&gt;<\/code> ao <code>&lt;head&gt;<\/code> do seu site.",
+      errorNoKey: "Adicione sua chave de API primeiro.",
+      errorNoBrief: "Descreva o negócio primeiro.",
+      errorNoDesigns: "O modelo não devolveu nenhum design de logo.",
+      errorGenericBrandKit: "Não foi possível gerar o kit de marca.",
+      errorNoLogoYet: "Gere um logo primeiro.",
+      errorRenderLogo: "Não foi possível desenhar o logo.",
+      errorFullPng: "Não foi possível gerar o PNG em resolução total.",
+      errorSocialBanner: "Não foi possível gerar o banner para redes sociais.",
+      errorFaviconSize: "Não foi possível gerar esse tamanho de favicon.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Nada do que você digita aqui é guardado. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>"
+    },
+    fr: {
+      heroSubtitle: "Décrivez une entreprise. Obtenez un logo, une palette, une carte de visite et des fichiers favicon — créés en direct dans votre navigateur.",
+      connectionHeading: "Connexion",
+      apiKeyLabelOpenai: "Votre clé API OpenAI",
+      apiKeyLabelAnthropic: "Votre clé API Anthropic",
+      apiKeyHint: "Utilisée uniquement pour appeler le fournisseur ci-dessus directement depuis votre navigateur. Jamais stockée, jamais envoyée ailleurs.",
+      freeNoticeHint: "✓ Gratuit — ce site inclut une clé partagée à capacité quotidienne limitée. Si elle ne fonctionne plus, la limite du jour est sans doute atteinte ; réessayez demain, ou passez à OpenAI/Anthropic ci-dessus avec votre propre clé.",
+      modelLabel: "Modèle de texte",
+      businessHeading: "L'entreprise",
+      briefLabel: "Décrivez l'entreprise",
+      briefPlaceholder: "ex. : Une entreprise familiale de plomberie à Austin (Texas). Ton chaleureux mais sérieux.",
+      bizNameLabel: "Nom de l'entreprise (facultatif)",
+      bizNamePlaceholder: "Laissez vide pour que l'IA en propose un dans le logo",
+      brandKitBtnLabel: "Générer un logo et un kit de marque",
+      brandKitBtnLoading: "Conception…",
+      swatchHint: "Cliquez sur une pastille de couleur pour recolorer le logo aussitôt — sans appel IA.",
+      regenerateBtnLabel: "🔁 Régénérer (nouveaux designs)",
+      downloadsHeading: "Téléchargements",
+      downloadSvgLabel: "Logo (.svg)",
+      downloadCardLabel: "Carte de visite (.html)",
+      downloadFullPngLabel: "PNG pleine résolution (1024×1024)",
+      downloadSocialLabel: "Bannière réseaux sociaux (1200×630)",
+      faviconHeading: "Tailles de favicon",
+      favicon32: "32×32 (onglet du navigateur)",
+      favicon180: "180×180 (Apple touch)",
+      favicon192: "192×192 (Android)",
+      favicon512: "512×512 (PWA / boutique d'applis)",
+      faviconHint: "Chaque bouton télécharge un PNG à cette taille exacte. Pour une icône d'onglet, enregistrez le fichier 32×32 sous <code>favicon.png<\/code> et ajoutez <code>&lt;link rel=\"icon\" href=\"favicon.png\"&gt;<\/code> au <code>&lt;head&gt;<\/code> de votre site.",
+      errorNoKey: "Ajoutez d'abord votre clé API.",
+      errorNoBrief: "Décrivez d'abord l'entreprise.",
+      errorNoDesigns: "Le modèle n'a renvoyé aucun design de logo.",
+      errorGenericBrandKit: "Impossible de générer le kit de marque.",
+      errorNoLogoYet: "Générez d'abord un logo.",
+      errorRenderLogo: "Impossible de dessiner le logo.",
+      errorFullPng: "Impossible de créer le PNG pleine résolution.",
+      errorSocialBanner: "Impossible de créer la bannière réseaux sociaux.",
+      errorFaviconSize: "Impossible de créer cette taille de favicon.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Rien de ce que vous tapez ici n'est stocké. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>"
+    }
+  });
+  applyProvider();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

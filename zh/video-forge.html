@@ -1,0 +1,2981 @@
+<!-- Generated from /video-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="zh-Hans" data-en-title="Turn your drawings into a video, ready for YouTube — Video Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='zh';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/zh/video-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>把你的画作变成视频，可直接发布到 YouTube — Video Forge | MigaBuilder</title>
+<meta name="description" content="Video Forge 把你自己的绘画和图片变成真正的视频，带有节奏、平移缩放、音乐和片头卡。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="把你的画作变成视频，可直接发布到 YouTube — Video Forge">
+<meta property="og:description" content="Video Forge 把你自己的绘画和图片变成真正的视频，带有节奏、平移缩放、音乐和片头卡。">
+<meta property="og:image" content="https://migabuilder.com/assets/og/video-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/zh/video-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="把你的画作变成视频，可直接发布到 YouTube — Video Forge">
+<meta name="twitter:description" content="Video Forge 把你自己的绘画和图片变成真正的视频，带有节奏、平移缩放、音乐和片头卡。">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/video-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="i18n.js"></script>
+<script src="i18n/video-forge.js"></script>
+<script src="media-utils.js"></script>
+<script src="youtube-upload.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(320px, 400px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 22px 22px 26px; max-height: calc(100vh - 40px); overflow-y: auto;
+    position: sticky; top: 20px;
+  }
+  @media (max-width: 900px) { .panel { position: static; max-height: none; } }
+
+  .field { margin-bottom: 16px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+  .field .hint { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); margin-top: 6px; line-height: 1.45; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 20px 0 12px; padding-top: 16px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-of-type { margin-top: 0; padding-top: 0; border-top: none; }
+
+  input[type="password"], input[type="text"], input[type="number"], textarea, select {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; padding: 9px 10px;
+    border: 1px solid rgba(22, 32, 43, 0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  textarea { resize: vertical; min-height: 60px; line-height: 1.5; }
+
+  .radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .radio-option { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; }
+  .radio-option input { margin-top: 3px; flex: none; width: auto; }
+  .radio-option .opt-label { font-weight: 600; }
+  .radio-option .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.72); }
+
+  .check-row { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; cursor: pointer; }
+  .check-row input { margin-top: 3px; flex: none; width: auto; }
+  .check-row .opt-sub { display: block; font-weight: 400; font-size: 12px; color: rgba(22, 32, 43, 0.72); }
+
+  .upload-btn {
+    display: inline-block; background: #fff; border: 1px dashed rgba(22, 32, 43, 0.35); border-radius: var(--radius);
+    padding: 10px 12px; font-size: 13px; cursor: pointer; text-align: center; width: 100%;
+  }
+  .upload-btn:hover { border-color: rgba(22, 32, 43, 0.55); }
+
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 15px; padding: 12px; cursor: pointer; transition: filter 0.15s ease;
+  }
+  .draft-btn:hover:not(:disabled) { filter: brightness(1.06); }
+  .draft-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .draft-btn.danger { background: var(--error); color: #fff; }
+
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .draft-btn { flex: 1; }
+
+  .error-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #6E2418; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+  .status-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(78,158,115,0.14); border: 1px solid rgba(78,158,115,0.4);
+    border-radius: var(--radius); font-size: 13px; color: #244731; display: none; line-height: 1.5;
+  }
+  .status-box.show { display: block; }
+
+  /* thumbnails / frame list */
+  .frames { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .frame-row {
+    display: grid; grid-template-columns: 46px 1fr auto; gap: 10px; align-items: center;
+    background: #fff; border: 1px solid rgba(22, 32, 43, 0.18); border-radius: var(--radius); padding: 7px;
+  }
+  .frame-row img { width: 46px; height: 46px; object-fit: cover; border-radius: 2px; }
+  .frame-meta { display: flex; flex-direction: column; gap: 4px; }
+  .frame-meta .frame-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 160px; }
+  .frame-dur { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .frame-dur input { width: 56px; padding: 4px 6px; font-size: 12px; }
+  .frame-actions { display: flex; flex-direction: column; gap: 3px; }
+  .frame-actions button {
+    background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; color: var(--ink);
+  }
+  .frame-actions button.remove { color: var(--error); }
+  .frames-empty { font-size: 12.5px; color: rgba(22,32,43,0.72); padding: 10px 0; }
+
+  /* sound clip list */
+  .clip-row {
+    display: grid; grid-template-columns: 34px 1fr auto; gap: 10px; align-items: start;
+    background: #fff; border: 1px solid rgba(22, 32, 43, 0.18); border-radius: var(--radius); padding: 9px;
+  }
+  .clip-icon { width: 34px; height: 34px; border-radius: 2px; background: var(--paper-dim); display: flex; align-items: center; justify-content: center; font-size: 15px; flex: none; }
+  .clip-meta { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .clip-name { font-size: 12px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .clip-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .clip-controls > label { display: flex; align-items: center; gap: 4px; }
+  .clip-controls select, .clip-controls input[type="number"] { width: auto; padding: 4px 6px; font-size: 11.5px; }
+  .clip-controls input[type="range"] { width: 70px; }
+  .clip-actions { display: flex; flex-direction: column; gap: 3px; }
+  .clip-actions button { background: transparent; border: none; cursor: pointer; font-size: 14px; padding: 2px 4px; color: var(--error); }
+
+  .stock-track-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* caption list */
+  .caption-row {
+    display: flex; flex-direction: column; gap: 6px; background: #fff; border: 1px solid rgba(22, 32, 43, 0.18);
+    border-radius: var(--radius); padding: 9px;
+  }
+  .caption-row .caption-text { font-size: 12.5px; font-weight: 600; }
+  .caption-row .caption-controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 11.5px; color: rgba(22,32,43,0.72); }
+  .caption-row .caption-controls select, .caption-row .caption-controls input[type="number"] { width: auto; padding: 4px 6px; font-size: 11.5px; }
+  .caption-row .remove-caption { align-self: flex-end; background: transparent; border: none; cursor: pointer; font-size: 14px; color: var(--error); }
+
+  /* ---------- Preview / stage ---------- */
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; min-height: 560px; display: flex; flex-direction: column;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+  .stage-wrap { background: #000; border-radius: 2px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #stageCanvas, #resultVideo { width: 100%; height: auto; display: block; max-height: 62vh; }
+  .sheet-empty { margin: auto; text-align: center; color: rgba(237,234,224,0.45); font-size: 14px; max-width: 340px; padding: 40px 20px; }
+  .sheet-empty strong { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 17px; color: rgba(237,234,224,0.75); margin-bottom: 6px; }
+
+  .progress-wrap { margin-top: 14px; display: none; }
+  .progress-wrap.show { display: block; }
+  .progress-label { font-size: 12.5px; color: rgba(237,234,224,0.7); margin-bottom: 6px; display:flex; justify-content:space-between; }
+  .progress-track { height: 8px; border-radius: 4px; background: rgba(237,234,224,0.15); overflow: hidden; }
+  .progress-fill { height: 100%; width: 0%; background: var(--line-cyan); transition: width 0.1s linear; }
+
+  .table-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .table-actions button {
+    background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 9px 14px; font-size: 13px; cursor: pointer;
+  }
+  .table-actions button:hover:not(:disabled) { border-color: var(--line-cyan); }
+  .table-actions button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .table-actions button.primary { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+
+  .yt-panel { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line-cyan-dim); }
+  .yt-panel h2 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; margin: 0 0 10px; color: rgba(237,234,224,0.9); }
+  .yt-field { margin-bottom: 12px; }
+  .yt-field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 5px; color: rgba(237,234,224,0.85); }
+  .yt-field input, .yt-field textarea, .yt-field select {
+    width: 100%; font-size: 13.5px; padding: 8px 10px; border-radius: var(--radius);
+    border: 1px solid var(--line-cyan-dim); background: var(--navy); color: var(--paper);
+  }
+  .yt-hint { font-size: 12px; color: rgba(237,234,224,0.55); line-height: 1.5; margin-top: 4px; }
+  .yt-hint a { color: var(--line-cyan); }
+  details.yt-setup summary { cursor: pointer; color: var(--paper); font-weight: 600; font-size: 13.5px; margin-bottom: 8px; }
+  details.yt-setup ol { margin: 10px 0 0; padding-left: 20px; line-height: 1.7; color: rgba(237,234,224,0.75); font-size: 13px; }
+  details.yt-setup code { background: rgba(237,234,224,0.1); padding: 1px 5px; border-radius: 3px; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"我可以把视频上传到 YouTube 吗？","acceptedAnswer":{"@type":"Answer","text":"可以。下载渲染好的视频文件，或直接从页面上传到你的 YouTube 频道。"}},{"@type":"Question","name":"Video Forge 免费吗？","acceptedAnswer":{"@type":"Answer","text":"是的。它可以免费使用，无需账号，没有水印，也没有付费墙。"}},{"@type":"Question","name":"我的文件会被上传吗？","acceptedAnswer":{"@type":"Answer","text":"不会。它完全在你的浏览器中运行，你的文件和文字都留在你的设备上。"}}],"inLanguage":"zh"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/video-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/video-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/video-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/video-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/video-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/video-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/video-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/video-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/video-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/video-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Video Forge</h1>
+    <p data-i18n="heroSubtitle">Upload your drawings, add pacing, music and a title card, then render a real video — right in your browser — and upload it straight to YouTube.</p>
+    <p><a href="examples/tutorial-how-it-works/index.html" style="color: var(--line-cyan);" data-i18n="tourLinkText">▶ Watch a 30-second tour of all these tools (made with Video Forge itself)</a></p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+
+    <div class="status-box" id="draftBanner" style="margin-top:0;">
+      <span id="draftBannerText"></span>
+      <div class="btn-row" style="margin-top:8px;">
+        <button type="button" class="draft-btn secondary" id="resumeDraftBtn" style="flex:1;" data-i18n="resumeDraftLabel">↺ Resume draft</button>
+        <button type="button" class="draft-btn secondary" id="discardDraftBtn" style="flex:1;" data-i18n="discardLabel">✕ Discard</button>
+      </div>
+    </div>
+    <p class="hint" id="autosaveHint" style="margin:0 0 16px;"><span data-i18n="autosaveHintText">Your progress autosaves to this browser as you work, so a refresh won't lose it.</span> <span id="autosaveStatus"></span> <a href="#" id="clearDraftLink" style="color:var(--navy);text-decoration:underline;" data-i18n="clearDraftLinkText">Clear saved draft</a></p>
+
+    <div class="section-title" data-i18n="drawingsHeading">Your drawings</div>
+    <div class="field">
+      <button type="button" class="draft-btn secondary" id="sampleBtn" data-i18n="trySampleLabel">▶ Try a sample first</button>
+      <p class="hint" data-i18n="trySampleHint">Loads 3 generated sample doodles, a title card, and a short generated tune, so you can see how everything fits together before uploading your own art.</p>
+    </div>
+    <div class="field">
+      <label class="upload-btn" for="drawingInput" data-i18n="addDrawingsLabel">+ Add drawings (photos or scans, in order)</label>
+      <input type="file" id="drawingInput" accept="image/*" multiple style="display:none;">
+      <p class="hint" data-i18n="addDrawingsHint">Add as many as you like. Reorder with the arrows, set how long each one stays on screen, or remove one.</p>
+    </div>
+    <div class="frames" id="frames"></div>
+    <p class="frames-empty" id="framesEmpty" data-i18n="framesEmptyText">No drawings added yet.</p>
+
+    <div class="section-title" data-i18n="motionStyleHeading">Motion &amp; style</div>
+    <div class="field">
+      <label for="modeSelect" data-i18n="animationStyleLabel">Animation style</label>
+      <select id="modeSelect">
+        <option value="kenburns" selected data-i18n="modeKenburns">Slow pan &amp; zoom (Ken Burns)</option>
+        <option value="cuts" data-i18n="modeCuts">Simple cuts (no motion)</option>
+        <option value="flipbook" data-i18n="modeFlipbook">Flipbook / stop-motion (fast frames)</option>
+      </select>
+      <p class="hint" id="modeHint">Each drawing slowly pans and zooms for a cinematic feel.</p>
+    </div>
+    <div class="field" id="transitionField">
+      <label for="transitionSelect" data-i18n="transitionLabel">Transition between drawings</label>
+      <select id="transitionSelect">
+        <option value="fade" selected data-i18n="transitionCrossfade">Crossfade</option>
+        <option value="slide" data-i18n="transitionSlide">Slide</option>
+        <option value="none" data-i18n="transitionHardCut">Hard cut</option>
+      </select>
+    </div>
+    <div class="field" id="fpsField" style="display:none;">
+      <label for="fpsInput" data-i18n="flipbookSpeedLabel">Flipbook speed (frames per second)</label>
+      <input type="number" id="fpsInput" value="10" min="2" max="30" step="1">
+    </div>
+    <div class="field" id="loopField" style="display:none;">
+      <label for="loopInput" data-i18n="loopCountLabel">Loop the sequence this many times</label>
+      <input type="number" id="loopInput" value="3" min="1" max="20" step="1">
+    </div>
+    <div class="field">
+      <label for="aspectSelect" data-i18n="aspectLabel">Aspect ratio</label>
+      <select id="aspectSelect">
+        <option value="1280x720" selected data-i18n="aspect16x9">16:9 landscape — standard YouTube</option>
+        <option value="720x1280" data-i18n="aspect9x16">9:16 vertical — YouTube Shorts / Reels</option>
+        <option value="1080x1080" data-i18n="aspect1x1">1:1 square</option>
+      </select>
+    </div>
+
+    <div class="section-title" data-i18n="titleCardHeading">Title card (optional)</div>
+    <div class="field">
+      <label class="check-row"><input type="checkbox" id="titleEnabled"><span data-i18n="showTitleScreenLabel">Show a title screen first</span></label>
+    </div>
+    <div id="titleFields" style="display:none;">
+      <div class="field"><label for="titleText" data-i18n="titleLabel">Title</label><input type="text" id="titleText" placeholder="e.g. My Dragon Adventure" data-i18n-placeholder="titlePlaceholder"></div>
+      <div class="field"><label for="titleSubtext" data-i18n="subtitleLabel">Subtitle (optional)</label><input type="text" id="titleSubtext" placeholder="e.g. Drawn by Alex, age 8" data-i18n-placeholder="subtitlePlaceholder"></div>
+      <div class="field"><label for="titleDuration" data-i18n="secondsOnScreenLabel">Seconds on screen</label><input type="number" id="titleDuration" value="3" min="1" max="10" step="0.5"></div>
+    </div>
+
+    <div class="section-title" data-i18n="captionHeading">Text overlay (optional)</div>
+    <div class="field">
+      <p class="hint" style="margin:0 0 8px;" data-i18n="captionIntroHint">Add lines of text that appear over the video — handy for quotes, captions, or credits.</p>
+      <label for="captionTextInput" data-i18n="captionTextLabel">Text</label>
+      <input type="text" id="captionTextInput" placeholder="e.g. Believe in yourself" data-i18n-placeholder="captionTextPlaceholder">
+      <div class="row-2" style="margin-top:8px;">
+        <div><label for="captionStartInput" data-i18n="captionStartLabel">Starts at (s)</label><input type="number" id="captionStartInput" value="0" min="0" step="0.5"></div>
+        <div><label for="captionDurationInput" data-i18n="captionDurationLabel">Duration (s)</label><input type="number" id="captionDurationInput" value="3" min="0.5" step="0.5"></div>
+      </div>
+      <label for="captionPositionInput" style="margin-top:8px;" data-i18n="captionPositionLabel">Position</label>
+      <select id="captionPositionInput">
+        <option value="bottom" selected data-i18n="positionBottom">Bottom</option>
+        <option value="middle" data-i18n="positionMiddle">Middle</option>
+        <option value="top" data-i18n="positionTop">Top</option>
+      </select>
+      <button type="button" class="draft-btn secondary" id="addCaptionBtn" style="margin-top:8px;" data-i18n="addCaptionBtnLabel">+ Add text overlay</button>
+    </div>
+    <div class="frames" id="captionsList"></div>
+    <p class="frames-empty" id="captionsEmpty" data-i18n="captionsEmptyText">No text overlays added.</p>
+
+    <div class="section-title" data-i18n="soundClipsHeading">Sound clips (optional)</div>
+    <div class="field">
+      <p class="hint" style="margin:0 0 8px;" data-i18n="soundClipsIntroHint">Add your own narration or music — upload sound clips you've already made yourself, or record narration live. Add as many as you like, and set when each one starts.</p>
+      <div class="btn-row">
+        <label class="upload-btn" for="soundInput" style="flex:1;" data-i18n="uploadClipsLabel">+ Upload clip(s)</label>
+        <button type="button" class="draft-btn secondary" id="recordClipBtn" style="flex:1;" data-i18n="recordClipLabel">🎙️ Record a clip</button>
+      </div>
+      <input type="file" id="soundInput" accept="audio/*" multiple style="display:none;">
+    </div>
+    <div class="field">
+      <label data-i18n="stockTrackLabel">Or use a generated stock track</label>
+      <div class="stock-track-grid" id="stockTrackRow">
+        <button type="button" class="draft-btn secondary" data-stock="cheerful" data-i18n="stockCheerful">🎉 Cheerful</button>
+        <button type="button" class="draft-btn secondary" data-stock="calm" data-i18n="stockCalm">🌙 Calm</button>
+        <button type="button" class="draft-btn secondary" data-stock="playful" data-i18n="stockPlayful">🎈 Playful</button>
+        <button type="button" class="draft-btn secondary" data-stock="cinematic" data-i18n="stockCinematic">🎬 Cinematic</button>
+      </div>
+      <p class="hint" data-i18n-html="stockHintHtml">Short original instrumental loops generated on the spot, right in your browser — free to use, no attribution needed, no files to download first. Want more control over mood, tempo, or length? Try <a href="/zh/music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> and upload the result here as a clip.</p>
+    </div>
+    <div class="frames" id="soundClips"></div>
+    <p class="frames-empty" id="soundClipsEmpty" data-i18n="soundClipsEmptyText">No sound clips added — the video will be silent unless you add one.</p>
+
+    <button type="button" class="draft-btn" id="renderBtn" style="margin-top:6px;" data-i18n="renderBtnLabel">🎬 Render video</button>
+    <div class="error-box" id="errorBox"></div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span data-i18n="previewTitle">VIDEO FORGE — LIVE PREVIEW</span>
+      <span id="titleBlockRight" data-i18n="statusNotStarted">NOT STARTED</span>
+    </div>
+
+    <div class="stage-wrap" id="stageWrap">
+      <div class="sheet-empty" id="stageEmpty">
+        <strong data-i18n="stageEmptyStrong">Nothing to preview yet.</strong>
+        <span data-i18n="stageEmptyText">Add at least one drawing on the left, then hit Play preview or Render video.</span>
+      </div>
+      <canvas id="stageCanvas" width="1280" height="720" style="display:none;"></canvas>
+      <video id="resultVideo" controls style="display:none;"></video>
+    </div>
+
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-label"><span id="progressLabel" data-i18n="progressRendering">Rendering…</span><span id="progressPct">0%</span></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+
+    <div class="table-actions">
+      <button type="button" id="playPreviewBtn" data-i18n="playPreviewLabel">▶ Play preview</button>
+      <button type="button" id="stopPreviewBtn" disabled data-i18n="stopPreviewLabel">■ Stop preview</button>
+      <button type="button" id="cancelRenderBtn" style="display:none;" data-i18n="cancelRenderLabel">✕ Cancel render</button>
+      <button type="button" id="downloadVideoBtn" disabled class="primary" data-i18n="downloadVideoLabel">⬇ Download video (.webm)</button>
+    </div>
+    <p class="hint" style="color: rgba(237,234,224,0.55); margin-top: 8px;" data-i18n-html="renderDisclaimerHtml">Rendering happens in real time in your browser (a 30-second video takes about 30 seconds to render) — nothing is uploaded anywhere unless you use the YouTube button below. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari's support is limited. Made more than one video this way? Combine them (and add more music) in <a href="/zh/merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>. Want a photo of people to actually talk instead of just pan and zoom? Try <a href="/zh/talk-forge.html" style="color:var(--line-cyan);">Talk Forge</a>.</p>
+
+    <div class="yt-panel">
+      <h2 data-i18n="ytHeading">Upload straight to YouTube</h2>
+      <div class="yt-field">
+        <label for="ytClientId" data-i18n="ytClientIdLabel">Your Google OAuth Client ID</label>
+        <input type="text" id="ytClientId" placeholder="xxxxxxxxxxxx-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.apps.googleusercontent.com">
+        <p class="yt-hint" data-i18n="ytClientIdHint">This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Video Forge only sends it to Google, never anywhere else.</p>
+      </div>
+      <button type="button" class="draft-btn secondary" id="connectYtBtn" data-i18n="connectGoogleLabel">Connect Google account</button>
+      <div class="status-box" id="ytConnectedBox" data-i18n="ytConnectedText">✓ Connected to your Google account.</div>
+
+      <div id="ytUploadFields" style="display:none; margin-top:14px;">
+        <div class="yt-field"><label for="ytTitle" data-i18n="ytTitleLabel">Video title</label><input type="text" id="ytTitle" placeholder="My Dragon Adventure" data-i18n-placeholder="ytTitlePlaceholder"></div>
+        <div class="yt-field"><label for="ytDesc" data-i18n="ytDescLabel">Description</label><textarea id="ytDesc" placeholder="Made with Video Forge from my own drawings." data-i18n-placeholder="ytDescPlaceholder"></textarea></div>
+        <div class="yt-field"><label for="ytTags" data-i18n="ytTagsLabel">Tags (comma separated)</label><input type="text" id="ytTags" placeholder="drawing, animation, kids art" data-i18n-placeholder="ytTagsPlaceholder"></div>
+        <div class="row-2" style="margin-bottom:12px;">
+          <div class="yt-field" style="margin-bottom:0;">
+            <label for="ytPrivacy" data-i18n="ytPrivacyLabel">Privacy</label>
+            <select id="ytPrivacy">
+              <option value="private" selected data-i18n="privacyPrivate">Private</option>
+              <option value="unlisted" data-i18n="privacyUnlisted">Unlisted</option>
+              <option value="public" data-i18n="privacyPublic">Public</option>
+            </select>
+          </div>
+          <div class="yt-field" style="margin-bottom:0;">
+            <label for="ytCategory" data-i18n="ytCategoryLabel">Category</label>
+            <select id="ytCategory">
+              <option value="1" data-i18n="categoryFilmAnimation">Film &amp; Animation</option>
+              <option value="24" data-i18n="categoryEntertainment">Entertainment</option>
+              <option value="22" selected data-i18n="categoryPeople">People &amp; Blogs</option>
+              <option value="27" data-i18n="categoryEducation">Education</option>
+              <option value="26" data-i18n="categoryHowto">Howto &amp; Style</option>
+            </select>
+          </div>
+        </div>
+        <button type="button" class="draft-btn" id="uploadYtBtn" disabled data-i18n="uploadToYoutubeLabel">Upload to YouTube</button>
+        <p class="yt-hint" data-i18n="ytUploadHint">Render a video first, then upload it here. Uploads go directly from your browser to Google using your own account — this tool never sees or stores the video or your login.</p>
+      </div>
+      <div class="status-box" id="ytResultBox"></div>
+      <div class="error-box" id="ytErrorBox"></div>
+
+      <details class="yt-setup" style="margin-top:16px;">
+        <summary data-i18n="ytSetupSummary">One-time setup: get a Google OAuth Client ID (click to expand)</summary>
+        <ol data-i18n-html="ytSetupStepsHtml">
+          <li>Go to the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, create (or pick) a project, and enable the <strong>YouTube Data API v3</strong>.</li>
+          <li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, set it up as "External", add the <code>youtube.upload</code> scope, and add your own Google account under "Test users" (this avoids needing Google's full app-verification review, since only you will use it).</li>
+          <li>Under <strong>APIs &amp; Services → Credentials</strong>, create an <strong>OAuth client ID</strong> of type "Web application". Add the exact URL this page is running at (e.g. <code>https://your-username.github.io</code>) under "Authorized JavaScript origins".</li>
+          <li>Copy the generated Client ID (it ends in <code>.apps.googleusercontent.com</code>) into the field above.</li>
+          <li>Click "Connect Google account" and approve access — Google will warn that the app is unverified, which is expected for a personal project; click through as the test user you added.</li>
+        </ol>
+        <p class="yt-hint" style="margin-top:10px;" data-i18n="ytSetupFallbackHtml">If any step here fails or your browser blocks the upload, you can always fall back to downloading the video file above and uploading it manually at <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.</p>
+      </details>
+    </div>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Video Forge</h2>
+  <p>Video Forge turns your own drawings and images into a real video, with pacing, pan and zoom, music and a title card.</p>
+  <h3>How to use Video Forge</h3>
+  <ol><li>Upload drawings or images and describe how they should move.</li><li>Press “Create video”.</li><li>Preview the motion, adjust it, and download the video.</li></ol>
+  <h3>Can I upload the video to YouTube?</h3>
+  <p>Yes. Download the rendered video file, or upload it straight to your YouTube channel from the page.</p>
+  <h3>Is Video Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/zh/music-forge.html">Music Forge</a> · <a href="/zh/clip-forge.html">Clip Forge</a> · <a href="/zh/merge-forge.html">Merge Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/zh/">MigaBuilder</a>. Your drawings, music and rendered video stay in your browser — nothing is uploaded unless you use the YouTube button, and that goes straight from your browser to your own Google account. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/video-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- element refs ----------
+  const drawingInput = document.getElementById('drawingInput');
+  const framesEl = document.getElementById('frames');
+  const framesEmpty = document.getElementById('framesEmpty');
+  const modeSelect = document.getElementById('modeSelect');
+  const modeHint = document.getElementById('modeHint');
+  const transitionField = document.getElementById('transitionField');
+  const transitionSelect = document.getElementById('transitionSelect');
+  const fpsField = document.getElementById('fpsField');
+  const fpsInput = document.getElementById('fpsInput');
+  const loopField = document.getElementById('loopField');
+  const loopInput = document.getElementById('loopInput');
+  const aspectSelect = document.getElementById('aspectSelect');
+  const titleEnabled = document.getElementById('titleEnabled');
+  const titleFields = document.getElementById('titleFields');
+  const titleText = document.getElementById('titleText');
+  const titleSubtext = document.getElementById('titleSubtext');
+  const titleDuration = document.getElementById('titleDuration');
+  const sampleBtn = document.getElementById('sampleBtn');
+  const captionTextInput = document.getElementById('captionTextInput');
+  const captionStartInput = document.getElementById('captionStartInput');
+  const captionDurationInput = document.getElementById('captionDurationInput');
+  const captionPositionInput = document.getElementById('captionPositionInput');
+  const addCaptionBtn = document.getElementById('addCaptionBtn');
+  const captionsListEl = document.getElementById('captionsList');
+  const captionsEmpty = document.getElementById('captionsEmpty');
+  const soundInput = document.getElementById('soundInput');
+  const recordClipBtn = document.getElementById('recordClipBtn');
+  const soundClipsEl = document.getElementById('soundClips');
+  const soundClipsEmpty = document.getElementById('soundClipsEmpty');
+  const renderBtn = document.getElementById('renderBtn');
+  const errorBox = document.getElementById('errorBox');
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const stageWrap = document.getElementById('stageWrap');
+  const stageEmpty = document.getElementById('stageEmpty');
+  const stageCanvas = document.getElementById('stageCanvas');
+  const resultVideo = document.getElementById('resultVideo');
+  const progressWrap = document.getElementById('progressWrap');
+  const progressLabel = document.getElementById('progressLabel');
+  const progressPct = document.getElementById('progressPct');
+  const progressFill = document.getElementById('progressFill');
+  const playPreviewBtn = document.getElementById('playPreviewBtn');
+  const stopPreviewBtn = document.getElementById('stopPreviewBtn');
+  const cancelRenderBtn = document.getElementById('cancelRenderBtn');
+  const downloadVideoBtn = document.getElementById('downloadVideoBtn');
+
+  const draftBanner = document.getElementById('draftBanner');
+  const draftBannerText = document.getElementById('draftBannerText');
+  const resumeDraftBtn = document.getElementById('resumeDraftBtn');
+  const discardDraftBtn = document.getElementById('discardDraftBtn');
+  const autosaveStatus = document.getElementById('autosaveStatus');
+  const clearDraftLink = document.getElementById('clearDraftLink');
+
+  const ctx = stageCanvas.getContext('2d');
+
+  // ---------- state ----------
+  let frames = []; // {id, img, name, duration}
+  let frameIdCounter = 0;
+  let captions = []; // {id, text, start, duration, position}
+  let captionIdCounter = 0;
+  let soundClips = []; // {id, name, type, buffer, start, volume, loop}
+  let clipIdCounter = 0;
+  let mediaRecorderMic = null;
+  let micChunks = [];
+  let isRecordingClip = false;
+  let previewRaf = null;
+  let previewStart = null;
+  let previewAudioCtx = null;
+  let renderState = null; // active render session
+  let renderedVideoBlob = null;
+
+  const KENBURNS_PATTERNS = [
+    { zFrom: 1.00, zTo: 1.18, xFrom: -0.05, yFrom: -0.03, xTo: 0.05, yTo: 0.03 },
+    { zFrom: 1.18, zTo: 1.00, xFrom: 0.05, yFrom: 0.03, xTo: -0.05, yTo: -0.03 },
+    { zFrom: 1.00, zTo: 1.15, xFrom: 0.05, yFrom: -0.04, xTo: -0.05, yTo: 0.04 },
+    { zFrom: 1.15, zTo: 1.00, xFrom: -0.05, yFrom: 0.04, xTo: 0.05, yTo: -0.04 }
+  ];
+  const TRANSITION_DUR = 0.6; // seconds
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function currentSize() {
+    const [w, h] = aspectSelect.value.split('x').map(Number);
+    return { w, h };
+  }
+
+  // ---------- frame list ----------
+  let frameBatch = 0;
+  drawingInput.addEventListener('change', function (e) {
+    const files = Array.from(e.target.files || []);
+    // Pictures load at different speeds; keep them in the order they were picked (it is an animation).
+    const batch = ++frameBatch;
+    files.forEach((file, seq) => {
+      const reader = new FileReader();
+      reader.onload = function () {
+        const img = new Image();
+        img.onload = function () {
+          const item = { id: ++frameIdCounter, img, dataUrl: reader.result, name: file.name, duration: 3, batch, seq };
+          const at = frames.findIndex(f => f.batch === batch && f.seq > seq);
+          if (at < 0) frames.push(item); else frames.splice(at, 0, item);
+          renderFrameList();
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+    drawingInput.value = '';
+  });
+
+  function renderFrameList() {
+    scheduleAutosave();
+    framesEl.innerHTML = '';
+    framesEmpty.style.display = frames.length ? 'none' : 'block';
+    frames.forEach((f, i) => {
+      const row = document.createElement('div');
+      row.className = 'frame-row';
+      row.innerHTML =
+        '<img src="' + f.dataUrl + '" alt="">' +
+        '<div class="frame-meta">' +
+          '<span class="frame-name">' + f.name.replace(/</g, '&lt;') + '</span>' +
+          '<span class="frame-dur">' + I18N.t('secondsLabel') + ' <input type="number" min="0.3" max="20" step="0.1" value="' + f.duration + '" data-id="' + f.id + '" class="dur-input"></span>' +
+        '</div>' +
+        '<div class="frame-actions">' +
+          '<button type="button" data-up="' + f.id + '">▲</button>' +
+          '<button type="button" data-down="' + f.id + '">▼</button>' +
+          '<button type="button" class="remove" data-remove="' + f.id + '">✕</button>' +
+        '</div>';
+      framesEl.appendChild(row);
+      row.querySelector('[data-up="' + f.id + '"]').title = I18N.t('moveUpTitle');
+      row.querySelector('[data-down="' + f.id + '"]').title = I18N.t('moveDownTitle');
+      row.querySelector('[data-remove="' + f.id + '"]').title = I18N.t('removeTitle');
+    });
+    framesEl.querySelectorAll('.dur-input').forEach(inp => {
+      inp.addEventListener('change', () => {
+        const f = frames.find(x => x.id === Number(inp.dataset.id));
+        if (f) f.duration = Math.max(0.3, parseFloat(inp.value) || 3);
+        scheduleAutosave();
+      });
+    });
+    framesEl.querySelectorAll('[data-up]').forEach(btn => btn.addEventListener('click', () => moveFrame(Number(btn.dataset.up), -1)));
+    framesEl.querySelectorAll('[data-down]').forEach(btn => btn.addEventListener('click', () => moveFrame(Number(btn.dataset.down), 1)));
+    framesEl.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      frames = frames.filter(x => x.id !== Number(btn.dataset.remove));
+      renderFrameList();
+    }));
+  }
+  function moveFrame(id, dir) {
+    const i = frames.findIndex(f => f.id === id);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= frames.length) return;
+    const tmp = frames[i]; frames[i] = frames[j]; frames[j] = tmp;
+    renderFrameList();
+  }
+
+  // ---------- text overlays / captions ----------
+  addCaptionBtn.addEventListener('click', function () {
+    clearError();
+    const text = captionTextInput.value.trim();
+    if (!text) { showError(I18N.t('errorAddTextFirst')); return; }
+    captions.push({
+      id: ++captionIdCounter,
+      text,
+      start: Math.max(0, parseFloat(captionStartInput.value) || 0),
+      duration: Math.max(0.5, parseFloat(captionDurationInput.value) || 3),
+      position: captionPositionInput.value
+    });
+    captionTextInput.value = '';
+    renderCaptionsList();
+  });
+
+  function renderCaptionsList() {
+    scheduleAutosave();
+    captionsListEl.innerHTML = '';
+    captionsEmpty.style.display = captions.length ? 'none' : 'block';
+    captions.forEach(cap => {
+      const row = document.createElement('div');
+      row.className = 'caption-row';
+      row.innerHTML =
+        '<span class="caption-text">"' + cap.text.replace(/</g, '&lt;') + '"</span>' +
+        '<div class="caption-controls">' +
+          '<label>' + I18N.t('capFromLabel') + ' <input type="number" class="cap-start" data-id="' + cap.id + '" value="' + cap.start + '" min="0" step="0.5" style="width:52px;">s</label>' +
+          '<label>' + I18N.t('capForLabel') + ' <input type="number" class="cap-duration" data-id="' + cap.id + '" value="' + cap.duration + '" min="0.5" step="0.5" style="width:52px;">s</label>' +
+          '<label>' + I18N.t('capAtLabel') + ' <select class="cap-position" data-id="' + cap.id + '">' +
+            '<option value="bottom"' + (cap.position === 'bottom' ? ' selected' : '') + '>' + I18N.t('positionBottom') + '</option>' +
+            '<option value="middle"' + (cap.position === 'middle' ? ' selected' : '') + '>' + I18N.t('positionMiddle') + '</option>' +
+            '<option value="top"' + (cap.position === 'top' ? ' selected' : '') + '>' + I18N.t('positionTop') + '</option>' +
+          '</select></label>' +
+        '</div>' +
+        '<button type="button" class="remove-caption" data-remove="' + cap.id + '">✕ ' + I18N.t('removeLabel') + '</button>';
+      captionsListEl.appendChild(row);
+    });
+    captionsListEl.querySelectorAll('.cap-start').forEach(inp => inp.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(inp.dataset.id));
+      if (cap) cap.start = Math.max(0, parseFloat(inp.value) || 0);
+      scheduleAutosave();
+    }));
+    captionsListEl.querySelectorAll('.cap-duration').forEach(inp => inp.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(inp.dataset.id));
+      if (cap) cap.duration = Math.max(0.5, parseFloat(inp.value) || 3);
+      scheduleAutosave();
+    }));
+    captionsListEl.querySelectorAll('.cap-position').forEach(sel => sel.addEventListener('change', () => {
+      const cap = captions.find(c => c.id === Number(sel.dataset.id));
+      if (cap) cap.position = sel.value;
+      scheduleAutosave();
+    }));
+    captionsListEl.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      captions = captions.filter(c => c.id !== Number(btn.dataset.remove));
+      renderCaptionsList();
+    }));
+  }
+
+  function wrapCanvasText(g, text, maxWidth) {
+    const words = text.split(/\s+/);
+    const lines = [];
+    let line = '';
+    words.forEach(word => {
+      const test = line ? line + ' ' + word : word;
+      if (line && g.measureText(test).width > maxWidth) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    });
+    if (line) lines.push(line);
+    return lines;
+  }
+
+  function drawCaptionsAt(g, cw, ch, t) {
+    const active = captions.filter(c => t >= c.start && t < c.start + c.duration);
+    if (!active.length) return;
+    const fontSize = Math.round(ch * 0.045);
+    g.font = '700 ' + fontSize + 'px "IBM Plex Sans", sans-serif';
+    g.textAlign = 'center';
+    g.textBaseline = 'middle';
+    const maxWidth = cw * 0.86;
+    const lineHeight = fontSize * 1.3;
+    active.forEach(cap => {
+      const lines = wrapCanvasText(g, cap.text, maxWidth);
+      const anchorY = cap.position === 'top' ? ch * 0.14 : cap.position === 'bottom' ? ch * 0.86 : ch * 0.5;
+      const blockHeight = lines.length * lineHeight;
+      const firstLineY = anchorY - blockHeight / 2 + lineHeight / 2;
+      let maxLineWidth = 0;
+      lines.forEach(line => { maxLineWidth = Math.max(maxLineWidth, g.measureText(line).width); });
+      g.save();
+      g.fillStyle = 'rgba(0, 0, 0, 0.55)';
+      const boxPadX = 18, boxPadY = 12;
+      g.fillRect(cw / 2 - maxLineWidth / 2 - boxPadX, anchorY - blockHeight / 2 - boxPadY, maxLineWidth + boxPadX * 2, blockHeight + boxPadY * 2);
+      g.fillStyle = '#fff';
+      lines.forEach((line, i) => g.fillText(line, cw / 2, firstLineY + i * lineHeight));
+      g.restore();
+    });
+  }
+
+  // ---------- sample content ----------
+  function loadImageFromCanvas(canvas) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.src = canvas.toDataURL('image/png');
+    });
+  }
+  function drawSampleCanvas(drawFn) {
+    const c = document.createElement('canvas');
+    c.width = 800; c.height = 600;
+    const g = c.getContext('2d');
+    g.fillStyle = '#FAF6EA'; g.fillRect(0, 0, c.width, c.height);
+    drawFn(g, c.width, c.height);
+    return c;
+  }
+  const SAMPLE_DRAWINGS = [
+    { nameKey: 'sampleNameSunny', draw(g, w, h) {
+      g.fillStyle = '#8FD3F4'; g.fillRect(0, 0, w, h * 0.7);
+      g.fillStyle = '#FFC93C'; g.beginPath(); g.arc(w * 0.78, h * 0.22, 70, 0, Math.PI * 2); g.fill();
+      g.fillStyle = '#7CC576'; g.fillRect(0, h * 0.7, w, h * 0.3);
+      g.strokeStyle = '#2E5339'; g.lineWidth = 6; g.beginPath();
+      g.moveTo(w * 0.2, h * 0.7); g.lineTo(w * 0.2, h * 0.5); g.stroke();
+      g.fillStyle = '#3E8E4F'; g.beginPath(); g.arc(w * 0.2, h * 0.42, 55, 0, Math.PI * 2); g.fill();
+    } },
+    { nameKey: 'sampleNameHouse', draw(g, w, h) {
+      g.fillStyle = '#8FD3F4'; g.fillRect(0, 0, w, h * 0.7);
+      g.fillStyle = '#7CC576'; g.fillRect(0, h * 0.7, w, h * 0.3);
+      g.fillStyle = '#E8C07D'; g.fillRect(w * 0.3, h * 0.4, w * 0.4, h * 0.3);
+      g.fillStyle = '#C1443C'; g.beginPath();
+      g.moveTo(w * 0.28, h * 0.4); g.lineTo(w * 0.5, h * 0.22); g.lineTo(w * 0.72, h * 0.4); g.closePath(); g.fill();
+      g.fillStyle = '#6B4226'; g.fillRect(w * 0.46, h * 0.55, w * 0.08, h * 0.15);
+      g.fillStyle = '#FDE74C'; g.fillRect(w * 0.34, h * 0.46, w * 0.08, w * 0.08);
+    } },
+    { nameKey: 'sampleNameWaving', draw(g, w, h) {
+      g.fillStyle = '#F6E7C7'; g.fillRect(0, 0, w, h);
+      g.strokeStyle = '#2B2118'; g.lineWidth = 8; g.lineCap = 'round';
+      g.beginPath(); g.arc(w * 0.5, h * 0.32, 45, 0, Math.PI * 2); g.stroke();
+      g.beginPath(); g.moveTo(w * 0.5, h * 0.38); g.lineTo(w * 0.5, h * 0.65); g.stroke();
+      g.beginPath(); g.moveTo(w * 0.5, h * 0.65); g.lineTo(w * 0.4, h * 0.85); g.stroke();
+      g.beginPath(); g.moveTo(w * 0.5, h * 0.65); g.lineTo(w * 0.6, h * 0.85); g.stroke();
+      g.beginPath(); g.moveTo(w * 0.5, h * 0.44); g.lineTo(w * 0.34, h * 0.3); g.stroke();
+      g.beginPath(); g.moveTo(w * 0.5, h * 0.44); g.lineTo(w * 0.68, h * 0.24); g.stroke();
+    } }
+  ];
+
+  async function generateSampleTune(durationSec) {
+    const AC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    const sampleRate = 44100;
+    const offlineCtx = new AC(2, Math.ceil(sampleRate * durationSec), sampleRate);
+    const notes = [261.63, 329.63, 392.0, 523.25];
+    const step = durationSec / notes.length;
+    notes.forEach((freq, i) => {
+      const osc = offlineCtx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+      const gain = offlineCtx.createGain();
+      const start = i * step;
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(0.35, start + 0.05);
+      gain.gain.linearRampToValueAtTime(0, start + step);
+      osc.connect(gain).connect(offlineCtx.destination);
+      osc.start(start);
+      osc.stop(start + step);
+    });
+    return offlineCtx.startRendering();
+  }
+
+  sampleBtn.addEventListener('click', async function () {
+    clearError();
+    if (frames.length && !window.confirm(I18N.t('replaceSampleConfirm'))) return;
+    sampleBtn.disabled = true;
+    sampleBtn.textContent = I18N.t('loadingSampleLabel');
+    try {
+      frames = [];
+      for (const sample of SAMPLE_DRAWINGS) {
+        const canvas = drawSampleCanvas(sample.draw);
+        const img = await loadImageFromCanvas(canvas);
+        frames.push({ id: ++frameIdCounter, img, dataUrl: canvas.toDataURL('image/png'), name: I18N.t(sample.nameKey), duration: 3 });
+      }
+      renderFrameList();
+
+      titleEnabled.checked = true;
+      titleFields.style.display = 'block';
+      titleText.value = I18N.t('sampleTitleText');
+      titleSubtext.value = I18N.t('sampleSubtitleText');
+
+      if (window.OfflineAudioContext || window.webkitOfflineAudioContext) {
+        const buffer = await generateSampleTune(9);
+        const sampleTuneName = I18N.t('sampleTuneName');
+        soundClips = soundClips.filter(c => c.name !== sampleTuneName);
+        soundClips.push({ id: ++clipIdCounter, name: sampleTuneName, type: 'music', buffer, start: 0, volume: 0.4, loop: true });
+        renderSoundClipsList();
+      }
+    } catch (err) {
+      showError(I18N.t('errorCouldNotLoadSample') + ' ' + err.message);
+    } finally {
+      sampleBtn.disabled = false;
+      sampleBtn.textContent = I18N.t('trySampleLabel');
+    }
+  });
+
+  // ---------- mode / UI toggles ----------
+  const MODE_HINT_KEYS = {
+    kenburns: 'modeHintKenburns',
+    cuts: 'modeHintCuts',
+    flipbook: 'modeHintFlipbook'
+  };
+  function applyMode() {
+    const mode = modeSelect.value;
+    modeHint.textContent = I18N.t(MODE_HINT_KEYS[mode]);
+    const isFlip = mode === 'flipbook';
+    fpsField.style.display = isFlip ? 'block' : 'none';
+    loopField.style.display = isFlip ? 'block' : 'none';
+    transitionField.style.display = isFlip ? 'none' : 'block';
+  }
+  modeSelect.addEventListener('change', function () { applyMode(); scheduleAutosave(); });
+  applyMode();
+
+  transitionSelect.addEventListener('change', scheduleAutosave);
+  fpsInput.addEventListener('change', scheduleAutosave);
+  loopInput.addEventListener('change', scheduleAutosave);
+  aspectSelect.addEventListener('change', scheduleAutosave);
+
+  titleEnabled.addEventListener('change', () => { titleFields.style.display = titleEnabled.checked ? 'block' : 'none'; scheduleAutosave(); });
+  titleText.addEventListener('input', scheduleAutosave);
+  titleSubtext.addEventListener('input', scheduleAutosave);
+  titleDuration.addEventListener('change', scheduleAutosave);
+
+  // ---------- sound clips (uploaded or recorded) ----------
+  async function decodeAudioFile(fileOrBlob) {
+    const arrayBuffer = await fileOrBlob.arrayBuffer();
+    const ac = new (window.AudioContext || window.webkitAudioContext)();
+    try {
+      return await ac.decodeAudioData(arrayBuffer);
+    } finally {
+      ac.close();
+    }
+  }
+
+  function addSoundClip(name, buffer, type) {
+    soundClips.push({ id: ++clipIdCounter, name, buffer, type: type || 'music', start: 0, volume: type === 'narration' ? 1 : 0.5, loop: type === 'music' });
+    renderSoundClipsList();
+  }
+
+  soundInput.addEventListener('change', async function (e) {
+    const files = Array.from(e.target.files || []);
+    for (const file of files) {
+      try {
+        const buffer = await decodeAudioFile(file);
+        addSoundClip(file.name, buffer, 'music');
+      } catch (err) {
+        showError(I18N.t('soundReadErrorPrefix') + ' "' + file.name + '": ' + err.message);
+      }
+    }
+    soundInput.value = '';
+  });
+
+  recordClipBtn.addEventListener('click', async function () {
+    if (isRecordingClip) {
+      mediaRecorderMic.stop();
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      micChunks = [];
+      mediaRecorderMic = new MediaRecorder(stream);
+      mediaRecorderMic.ondataavailable = e => { if (e.data.size) micChunks.push(e.data); };
+      mediaRecorderMic.onstop = async function () {
+        stream.getTracks().forEach(t => t.stop());
+        isRecordingClip = false;
+        recordClipBtn.textContent = I18N.t('recordClipLabel');
+        const blob = new Blob(micChunks, { type: 'audio/webm' });
+        try {
+          const buffer = await decodeAudioFile(blob);
+          addSoundClip(I18N.t('recordedNarrationPrefix') + ' ' + (soundClips.length + 1), buffer, 'narration');
+        } catch (err) {
+          showError(I18N.t('recordProcessErrorPrefix') + ' ' + err.message);
+        }
+      };
+      mediaRecorderMic.start();
+      isRecordingClip = true;
+      recordClipBtn.textContent = I18N.t('stopRecordingLabel');
+    } catch (err) {
+      showError(I18N.t('micErrorPrefix') + ' ' + err.message);
+    }
+  });
+
+  function renderSoundClipsList() {
+    scheduleAutosave();
+    soundClipsEl.innerHTML = '';
+    soundClipsEmpty.style.display = soundClips.length ? 'none' : 'block';
+    soundClips.forEach(clip => {
+      const row = document.createElement('div');
+      row.className = 'clip-row';
+      row.innerHTML =
+        '<div class="clip-icon">' + (clip.type === 'narration' ? '🎙️' : clip.type === 'sfx' ? '🔔' : '🎵') + '</div>' +
+        '<div class="clip-meta">' +
+          '<span class="clip-name">' + clip.name.replace(/</g, '&lt;') + ' (' + clip.buffer.duration.toFixed(1) + 's)</span>' +
+          '<div class="clip-controls">' +
+            '<label>' + I18N.t('clipTypeLabel') + ' <select class="clip-type" data-id="' + clip.id + '">' +
+              '<option value="music"' + (clip.type === 'music' ? ' selected' : '') + '>' + I18N.t('clipTypeMusic') + '</option>' +
+              '<option value="narration"' + (clip.type === 'narration' ? ' selected' : '') + '>' + I18N.t('clipTypeNarration') + '</option>' +
+              '<option value="sfx"' + (clip.type === 'sfx' ? ' selected' : '') + '>' + I18N.t('clipTypeSfx') + '</option>' +
+            '</select></label>' +
+            '<label>' + I18N.t('clipStartsAtLabel') + ' <input type="number" class="clip-start" data-id="' + clip.id + '" value="' + clip.start + '" min="0" step="0.5" style="width:52px;">s</label>' +
+            '<label>' + I18N.t('clipVolLabel') + ' <input type="range" class="clip-volume" data-id="' + clip.id + '" min="0" max="1" step="0.05" value="' + clip.volume + '"></label>' +
+            '<label><input type="checkbox" class="clip-loop" data-id="' + clip.id + '" style="width:auto;"' + (clip.loop ? ' checked' : '') + '> ' + I18N.t('clipLoopLabel') + '</label>' +
+          '</div>' +
+        '</div>' +
+        '<div class="clip-actions"><button type="button" data-remove="' + clip.id + '">✕</button></div>';
+      soundClipsEl.appendChild(row);
+      row.querySelector('[data-remove="' + clip.id + '"]').title = I18N.t('removeTitle');
+    });
+    soundClipsEl.querySelectorAll('.clip-type').forEach(sel => sel.addEventListener('change', () => {
+      const clip = soundClips.find(c => c.id === Number(sel.dataset.id));
+      if (clip) clip.type = sel.value;
+      scheduleAutosave();
+    }));
+    soundClipsEl.querySelectorAll('.clip-start').forEach(inp => inp.addEventListener('change', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.start = Math.max(0, parseFloat(inp.value) || 0);
+      scheduleAutosave();
+    }));
+    soundClipsEl.querySelectorAll('.clip-volume').forEach(inp => inp.addEventListener('input', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.volume = parseFloat(inp.value);
+      scheduleAutosave();
+    }));
+    soundClipsEl.querySelectorAll('.clip-loop').forEach(inp => inp.addEventListener('change', () => {
+      const clip = soundClips.find(c => c.id === Number(inp.dataset.id));
+      if (clip) clip.loop = inp.checked;
+      scheduleAutosave();
+    }));
+    soundClipsEl.querySelectorAll('[data-remove]').forEach(btn => btn.addEventListener('click', () => {
+      soundClips = soundClips.filter(c => c.id !== Number(btn.dataset.remove));
+      renderSoundClipsList();
+    }));
+  }
+
+  // ---------- stock music library (generated on the spot, not pre-recorded files) ----------
+  const STOCK_TRACKS = MediaUtils.STOCK_TRACKS;
+
+  document.querySelectorAll('#stockTrackRow [data-stock]').forEach(btn => {
+    btn.addEventListener('click', async function () {
+      clearError();
+      const cfg = STOCK_TRACKS.find(t => t.id === btn.dataset.stock);
+      if (!cfg || !(window.OfflineAudioContext || window.webkitOfflineAudioContext)) return;
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = I18N.t('stockGeneratingLabel');
+      try {
+        const buffer = await MediaUtils.generateStockTrack(cfg);
+        addSoundClip(I18N.t(cfg.labelKey) + ' (' + I18N.t('generatedSuffix') + ')', buffer, 'music');
+      } catch (err) {
+        showError(I18N.t('stockGenerateErrorPrefix') + ' ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  });
+
+  // ---------- timeline construction ----------
+  function buildTimeline() {
+    const segments = [];
+    if (titleEnabled.checked && (titleText.value.trim() || titleSubtext.value.trim())) {
+      segments.push({ type: 'title', duration: Math.max(0.5, parseFloat(titleDuration.value) || 3), text: titleText.value.trim(), sub: titleSubtext.value.trim() });
+    }
+    const mode = modeSelect.value;
+    if (mode === 'flipbook') {
+      const fps = Math.max(1, parseInt(fpsInput.value, 10) || 10);
+      const loops = Math.max(1, parseInt(loopInput.value, 10) || 1);
+      for (let l = 0; l < loops; l++) {
+        frames.forEach((f, i) => segments.push({ type: 'image', img: f.img, duration: 1 / fps, kenburns: false, seed: i }));
+      }
+    } else {
+      frames.forEach((f, i) => segments.push({ type: 'image', img: f.img, duration: f.duration, kenburns: mode === 'kenburns', seed: i }));
+    }
+    // compute overlaps / cumulative starts
+    const transition = mode === 'flipbook' ? 'none' : transitionSelect.value;
+    const starts = new Array(segments.length).fill(0);
+    for (let i = 0; i < segments.length; i++) {
+      let overlap = 0;
+      if (i > 0 && transition !== 'none' && segments[i - 1].type === 'image' && segments[i].type === 'image') {
+        overlap = Math.min(TRANSITION_DUR, segments[i - 1].duration * 0.5, segments[i].duration * 0.5);
+      }
+      segments[i].overlapPrev = overlap;
+      starts[i] = i === 0 ? 0 : starts[i - 1] + segments[i - 1].duration - overlap;
+    }
+    const total = segments.length ? starts[segments.length - 1] + segments[segments.length - 1].duration : 0;
+    return { segments, starts, total, transition };
+  }
+
+  function drawImageCover(g, img, cw, ch, zoom, offXFrac, offYFrac) {
+    const ir = img.width / img.height, cr = cw / ch;
+    let dw, dh;
+    if (ir > cr) { dh = ch * zoom; dw = dh * ir; } else { dw = cw * zoom; dh = dw / ir; }
+    const cx = cw / 2 + offXFrac * cw, cy = ch / 2 + offYFrac * ch;
+    const dx = Math.max(Math.min(cx - dw / 2, 0), cw - dw);
+    const dy = Math.max(Math.min(cy - dh / 2, 0), ch - dh);
+    g.drawImage(img, dx, dy, dw, dh);
+  }
+
+  function drawSegmentContent(g, cw, ch, seg, localT) {
+    if (seg.type === 'title') {
+      g.fillStyle = '#0E1B2E';
+      g.fillRect(0, 0, cw, ch);
+      const fadeT = Math.min(0.4, seg.duration * 0.3);
+      let alpha = 1;
+      if (localT < fadeT) alpha = localT / fadeT;
+      else if (localT > seg.duration - fadeT) alpha = (seg.duration - localT) / fadeT;
+      g.save();
+      g.globalAlpha = Math.max(0, Math.min(1, alpha));
+      g.fillStyle = '#EDEAE0';
+      g.textAlign = 'center';
+      g.textBaseline = 'middle';
+      g.font = '700 ' + Math.round(ch * 0.09) + 'px "Space Grotesk", sans-serif';
+      g.fillText(seg.text || '', cw / 2, ch / 2 - (seg.sub ? ch * 0.04 : 0), cw * 0.86);
+      if (seg.sub) {
+        g.font = '500 ' + Math.round(ch * 0.04) + 'px "IBM Plex Sans", sans-serif';
+        g.fillStyle = '#6FD1E0';
+        g.fillText(seg.sub, cw / 2, ch / 2 + ch * 0.08, cw * 0.86);
+      }
+      g.restore();
+      return;
+    }
+    // image segment
+    if (seg.kenburns) {
+      const p = KENBURNS_PATTERNS[seg.seed % KENBURNS_PATTERNS.length];
+      const t = seg.duration > 0 ? localT / seg.duration : 0;
+      const zoom = p.zFrom + (p.zTo - p.zFrom) * t;
+      const offX = p.xFrom + (p.xTo - p.xFrom) * t;
+      const offY = p.yFrom + (p.yTo - p.yFrom) * t;
+      drawImageCover(g, seg.img, cw, ch, zoom, offX, offY);
+    } else {
+      drawImageCover(g, seg.img, cw, ch, 1, 0, 0);
+    }
+  }
+
+  function findSegmentIndexAt(timeline, t) {
+    const { starts, segments } = timeline;
+    let idx = 0;
+    for (let i = 0; i < segments.length; i++) {
+      if (starts[i] <= t) idx = i; else break;
+    }
+    return idx;
+  }
+
+  function drawTimelineAt(timeline, g, cw, ch, t) {
+    const { segments, starts, transition } = timeline;
+    if (!segments.length) return;
+    const i = findSegmentIndexAt(timeline, t);
+    const seg = segments[i];
+    const localT = Math.min(seg.duration, Math.max(0, t - starts[i]));
+    const next = segments[i + 1];
+
+    g.clearRect(0, 0, cw, ch);
+    g.fillStyle = '#000';
+    g.fillRect(0, 0, cw, ch);
+
+    if (next && transition !== 'none' && next.overlapPrev > 0) {
+      const overlapStart = seg.duration - next.overlapPrev;
+      if (localT >= overlapStart) {
+        const progress = Math.max(0, Math.min(1, (localT - overlapStart) / next.overlapPrev));
+        const nextLocalT = Math.max(0, t - starts[i + 1]);
+        if (transition === 'fade') {
+          g.save(); g.globalAlpha = 1; drawSegmentContent(g, cw, ch, seg, localT); g.restore();
+          g.save(); g.globalAlpha = progress; drawSegmentContent(g, cw, ch, next, nextLocalT); g.restore();
+        } else if (transition === 'slide') {
+          g.save();
+          g.translate(-cw * progress, 0);
+          drawSegmentContent(g, cw, ch, seg, localT);
+          g.restore();
+          g.save();
+          g.translate(cw * (1 - progress), 0);
+          drawSegmentContent(g, cw, ch, next, nextLocalT);
+          g.restore();
+        }
+        drawCaptionsAt(g, cw, ch, t);
+        return;
+      }
+    }
+    drawSegmentContent(g, cw, ch, seg, localT);
+    drawCaptionsAt(g, cw, ch, t);
+  }
+
+  // ---------- preview playback (no recording) ----------
+  function stopPreview() {
+    if (previewRaf) cancelAnimationFrame(previewRaf);
+    previewRaf = null;
+    if (previewAudioCtx) { try { previewAudioCtx.close(); } catch (e) {} previewAudioCtx = null; }
+    playPreviewBtn.disabled = false;
+    stopPreviewBtn.disabled = true;
+  }
+  playPreviewBtn.addEventListener('click', function () {
+    clearError();
+    if (!frames.length) { showError(I18N.t('errorAddDrawingFirst')); return; }
+    const timeline = buildTimeline();
+    if (!timeline.total) { showError(I18N.t('errorNothingToPreview')); return; }
+    const { w, h } = currentSize();
+    stageCanvas.width = w; stageCanvas.height = h;
+    stageEmpty.style.display = 'none';
+    resultVideo.style.display = 'none';
+    stageCanvas.style.display = 'block';
+
+    previewAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    scheduleAudioSources(previewAudioCtx, previewAudioCtx.destination, timeline.total);
+
+    playPreviewBtn.disabled = true;
+    stopPreviewBtn.disabled = false;
+    previewStart = performance.now();
+    titleBlockRight.textContent = I18N.t('statusPreviewing');
+    function step() {
+      const elapsed = (performance.now() - previewStart) / 1000;
+      if (elapsed >= timeline.total) {
+        drawTimelineAt(timeline, ctx, w, h, timeline.total - 0.001);
+        stopPreview();
+        titleBlockRight.textContent = I18N.t('statusPreviewDone');
+        return;
+      }
+      drawTimelineAt(timeline, ctx, w, h, elapsed);
+      previewRaf = requestAnimationFrame(step);
+    }
+    previewRaf = requestAnimationFrame(step);
+  });
+  stopPreviewBtn.addEventListener('click', function () {
+    stopPreview();
+    titleBlockRight.textContent = I18N.t('statusStopped');
+  });
+
+  function scheduleAudioSources(audioCtx, destNode, totalDuration) {
+    soundClips.forEach(clip => {
+      if (!clip.buffer) return;
+      const remaining = totalDuration - clip.start;
+      if (remaining <= 0) return;
+      const src = audioCtx.createBufferSource();
+      src.buffer = clip.buffer;
+      src.loop = !!clip.loop && clip.buffer.duration < remaining;
+      const gain = audioCtx.createGain();
+      gain.gain.value = clip.volume;
+      src.connect(gain).connect(destNode);
+      const when = audioCtx.currentTime + clip.start;
+      src.start(when);
+      if (!src.loop) { try { src.stop(when + remaining); } catch (e) {} }
+    });
+  }
+
+  // ---------- render to video file ----------
+
+  renderBtn.addEventListener('click', function () {
+    clearError();
+    if (!frames.length) { showError(I18N.t('errorAddDrawingFirst')); return; }
+    if (!window.MediaRecorder || !stageCanvas.captureStream) {
+      showError(I18N.t('errorNoRecordingSupport'));
+      return;
+    }
+    stopPreview();
+    const timeline = buildTimeline();
+    if (!timeline.total) { showError(I18N.t('errorNothingToRender')); return; }
+    const mimeType = MediaUtils.pickMimeType();
+    if (!mimeType) { showError(I18N.t('errorNoVideoFormat')); return; }
+
+    const { w, h } = currentSize();
+    stageCanvas.width = w; stageCanvas.height = h;
+    stageEmpty.style.display = 'none';
+    resultVideo.style.display = 'none';
+    stageCanvas.style.display = 'block';
+    downloadVideoBtn.disabled = true;
+    renderedVideoBlob = null;
+    refreshUploadEnabled();
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const dest = audioCtx.createMediaStreamDestination();
+    scheduleAudioSources(audioCtx, dest, timeline.total);
+
+    const canvasStream = stageCanvas.captureStream(30);
+    const tracks = [...canvasStream.getVideoTracks()];
+    if (dest.stream.getAudioTracks().length) tracks.push(...dest.stream.getAudioTracks());
+    const combined = new MediaStream(tracks);
+
+    const recorder = new MediaRecorder(combined, { mimeType, videoBitsPerSecond: 6000000 });
+    const chunks = [];
+    recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+
+    renderBtn.disabled = true;
+    playPreviewBtn.disabled = true;
+    cancelRenderBtn.style.display = 'inline-block';
+    progressWrap.classList.add('show');
+    progressLabel.textContent = I18N.t('progressRendering');
+    titleBlockRight.textContent = I18N.t('statusRendering');
+
+    let cancelled = false;
+    let rafId = null;
+    const startTs = performance.now();
+
+    function finish() {
+      progressWrap.classList.remove('show');
+      cancelRenderBtn.style.display = 'none';
+      renderBtn.disabled = false;
+      playPreviewBtn.disabled = false;
+      try { audioCtx.close(); } catch (e) {}
+      renderState = null;
+    }
+
+    recorder.onstop = function () {
+      if (rafId) cancelAnimationFrame(rafId);
+      if (cancelled) { finish(); titleBlockRight.textContent = I18N.t('statusCancelled'); return; }
+      renderedVideoBlob = new Blob(chunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(renderedVideoBlob);
+      resultVideo.src = url;
+      resultVideo.style.display = 'block';
+      stageCanvas.style.display = 'none';
+      downloadVideoBtn.disabled = false;
+      refreshUploadEnabled();
+      titleBlockRight.textContent = I18N.t('statusRenderComplete');
+      finish();
+    };
+
+    recorder.start();
+    function step() {
+      if (cancelled) { recorder.stop(); return; }
+      const elapsed = (performance.now() - startTs) / 1000;
+      if (elapsed >= timeline.total) {
+        drawTimelineAt(timeline, ctx, w, h, timeline.total - 0.001);
+        recorder.stop();
+        return;
+      }
+      drawTimelineAt(timeline, ctx, w, h, elapsed);
+      const pct = Math.round((elapsed / timeline.total) * 100);
+      progressFill.style.width = pct + '%';
+      progressPct.textContent = pct + '%';
+      rafId = requestAnimationFrame(step);
+    }
+    rafId = requestAnimationFrame(step);
+
+    renderState = {
+      cancel: function () { cancelled = true; }
+    };
+  });
+
+  cancelRenderBtn.addEventListener('click', function () {
+    if (renderState) renderState.cancel();
+  });
+
+  downloadVideoBtn.addEventListener('click', function () {
+    if (!renderedVideoBlob) return;
+    const url = URL.createObjectURL(renderedVideoBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'video-forge.webm';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  });
+
+  // ---------- YouTube upload ----------
+  // ---------- YouTube upload (shared module; same flow as Clip Forge / Record Forge) ----------
+  const ytUpload = YouTubeUpload.init({ getBlob: function () { return renderedVideoBlob; }, noBlobErrorKey: 'ytErrorRenderFirst' });
+  function refreshUploadEnabled() { ytUpload.refreshUploadEnabled(); }
+
+  // ---------- draft autosave / resume (localStorage) ----------
+  const DRAFT_KEY = 'videoForgeDraft_v1';
+  let autosaveTimer = null;
+  let suppressAutosave = false; // true while a draft is being loaded, so loading it doesn't immediately re-save it
+
+  function collectDraftState() {
+    return {
+      version: 1,
+      savedAt: Date.now(),
+      settings: {
+        mode: modeSelect.value,
+        transition: transitionSelect.value,
+        fps: fpsInput.value,
+        loop: loopInput.value,
+        aspect: aspectSelect.value,
+        titleEnabled: titleEnabled.checked,
+        titleText: titleText.value,
+        titleSubtext: titleSubtext.value,
+        titleDuration: titleDuration.value
+      },
+      frames: frames.map(f => ({ dataUrl: f.dataUrl, name: f.name, duration: f.duration })),
+      captions: captions.map(c => ({ text: c.text, start: c.start, duration: c.duration, position: c.position })),
+      soundClips: [] // filled in asynchronously by saveDraft() before storing
+    };
+  }
+
+  function blobToDataUrl(blob) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => reject(new Error('Could not read audio for saving.'));
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  async function saveDraft() {
+    if (!frames.length && !captions.length && !soundClips.length) { clearDraft(); return; }
+    try {
+      const state = collectDraftState();
+      state.soundClips = await Promise.all(soundClips.map(async (c) => ({
+        name: c.name, type: c.type, start: c.start, volume: c.volume, loop: c.loop,
+        audioDataUrl: await blobToDataUrl(MediaUtils.audioBufferToWav(c.buffer))
+      })));
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(state));
+      autosaveStatus.textContent = I18N.t('savedJustNowText');
+    } catch (err) {
+      autosaveStatus.textContent = I18N.t('autosaveFailedText');
+    }
+  }
+
+  function scheduleAutosave() {
+    if (suppressAutosave) return;
+    if (autosaveTimer) clearTimeout(autosaveTimer);
+    autosaveTimer = setTimeout(saveDraft, 900);
+  }
+
+  function clearDraft() {
+    localStorage.removeItem(DRAFT_KEY);
+    autosaveStatus.textContent = '';
+  }
+
+  async function loadDraftIntoState(state) {
+    suppressAutosave = true;
+    try {
+      const loadedFrames = state.frames || [];
+      const newFrames = loadedFrames.map(f => ({ id: ++frameIdCounter, dataUrl: f.dataUrl, name: f.name, duration: f.duration, img: null }));
+      await Promise.all(newFrames.map(f => new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => { f.img = img; resolve(); };
+        img.onerror = () => resolve();
+        img.src = f.dataUrl;
+      })));
+      frames = newFrames;
+      renderFrameList();
+
+      captions = (state.captions || []).map(c => ({ id: ++captionIdCounter, text: c.text, start: c.start, duration: c.duration, position: c.position }));
+      renderCaptionsList();
+
+      const loadedClips = [];
+      for (const c of (state.soundClips || [])) {
+        try {
+          const resp = await fetch(c.audioDataUrl);
+          const blob = await resp.blob();
+          const buffer = await decodeAudioFile(blob);
+          loadedClips.push({ id: ++clipIdCounter, name: c.name, type: c.type, buffer, start: c.start, volume: c.volume, loop: c.loop });
+        } catch (e) { /* skip a clip that can't be decoded rather than failing the whole restore */ }
+      }
+      soundClips = loadedClips;
+      renderSoundClipsList();
+
+      const s = state.settings || {};
+      if (s.mode) modeSelect.value = s.mode;
+      applyMode();
+      if (s.transition) transitionSelect.value = s.transition;
+      if (s.fps) fpsInput.value = s.fps;
+      if (s.loop) loopInput.value = s.loop;
+      if (s.aspect) aspectSelect.value = s.aspect;
+      titleEnabled.checked = !!s.titleEnabled;
+      titleFields.style.display = titleEnabled.checked ? 'block' : 'none';
+      titleText.value = s.titleText || '';
+      titleSubtext.value = s.titleSubtext || '';
+      if (s.titleDuration) titleDuration.value = s.titleDuration;
+    } finally {
+      suppressAutosave = false;
+    }
+  }
+
+  function checkForSavedDraft() {
+    let raw;
+    try { raw = localStorage.getItem(DRAFT_KEY); } catch (e) { return; }
+    if (!raw) return;
+    let state;
+    try { state = JSON.parse(raw); } catch (e) { clearDraft(); return; }
+    const frameCount = (state.frames || []).length;
+    const when = new Date(state.savedAt || Date.now());
+    const drawingKey = frameCount === 1 ? 'draftDrawingOne' : 'draftDrawingsMany';
+    draftBannerText.textContent = I18N.t('draftBannerPrefix') + ' ' + when.toLocaleString() + ' (' + frameCount + ' ' + I18N.t(drawingKey) + ').';
+    draftBanner.classList.add('show');
+    resumeDraftBtn.onclick = async function () {
+      clearError();
+      resumeDraftBtn.disabled = true;
+      resumeDraftBtn.textContent = I18N.t('loadingLabel');
+      try {
+        await loadDraftIntoState(state);
+        draftBanner.classList.remove('show');
+      } catch (err) {
+        showError(I18N.t('errorCouldNotLoadDraft') + ' ' + err.message);
+      } finally {
+        resumeDraftBtn.disabled = false;
+        resumeDraftBtn.textContent = I18N.t('resumeDraftLabel');
+      }
+    };
+    discardDraftBtn.onclick = function () {
+      clearDraft();
+      draftBanner.classList.remove('show');
+    };
+  }
+
+  clearDraftLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (!window.confirm(I18N.t('clearDraftConfirm'))) return;
+    clearDraft();
+  });
+
+  checkForSavedDraft();
+
+  I18N.onChange(function () {
+    renderFrameList();
+    renderCaptionsList();
+    renderSoundClipsList();
+    applyMode();
+    recordClipBtn.textContent = isRecordingClip ? I18N.t('stopRecordingLabel') : I18N.t('recordClipLabel');
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Upload your drawings, add pacing, music and a title card, then render a real video — right in your browser — and upload it straight to YouTube.',
+      tourLinkText: '▶ Watch a 30-second tour of all these tools (made with Video Forge itself)',
+      resumeDraftLabel: '↺ Resume draft',
+      discardLabel: '✕ Discard',
+      autosaveHintText: "Your progress autosaves to this browser as you work, so a refresh won't lose it.",
+      clearDraftLinkText: 'Clear saved draft',
+      drawingsHeading: 'Your drawings',
+      trySampleLabel: '▶ Try a sample first',
+      trySampleHint: 'Loads 3 generated sample doodles, a title card, and a short generated tune, so you can see how everything fits together before uploading your own art.',
+      addDrawingsLabel: '+ Add drawings (photos or scans, in order)',
+      addDrawingsHint: 'Add as many as you like. Reorder with the arrows, set how long each one stays on screen, or remove one.',
+      framesEmptyText: 'No drawings added yet.',
+      motionStyleHeading: 'Motion & style',
+      animationStyleLabel: 'Animation style',
+      modeKenburns: 'Slow pan & zoom (Ken Burns)',
+      modeCuts: 'Simple cuts (no motion)',
+      modeFlipbook: 'Flipbook / stop-motion (fast frames)',
+      transitionLabel: 'Transition between drawings',
+      transitionCrossfade: 'Crossfade',
+      transitionSlide: 'Slide',
+      transitionHardCut: 'Hard cut',
+      flipbookSpeedLabel: 'Flipbook speed (frames per second)',
+      loopCountLabel: 'Loop the sequence this many times',
+      aspectLabel: 'Aspect ratio',
+      aspect16x9: '16:9 landscape — standard YouTube',
+      aspect9x16: '9:16 vertical — YouTube Shorts / Reels',
+      aspect1x1: '1:1 square',
+      titleCardHeading: 'Title card (optional)',
+      showTitleScreenLabel: 'Show a title screen first',
+      titleLabel: 'Title',
+      titlePlaceholder: 'e.g. My Dragon Adventure',
+      subtitleLabel: 'Subtitle (optional)',
+      subtitlePlaceholder: 'e.g. Drawn by Alex, age 8',
+      secondsOnScreenLabel: 'Seconds on screen',
+      captionHeading: 'Text overlay (optional)',
+      captionIntroHint: 'Add lines of text that appear over the video — handy for quotes, captions, or credits.',
+      captionTextLabel: 'Text',
+      captionTextPlaceholder: 'e.g. Believe in yourself',
+      captionStartLabel: 'Starts at (s)',
+      captionDurationLabel: 'Duration (s)',
+      captionPositionLabel: 'Position',
+      positionBottom: 'Bottom',
+      positionMiddle: 'Middle',
+      positionTop: 'Top',
+      addCaptionBtnLabel: '+ Add text overlay',
+      captionsEmptyText: 'No text overlays added.',
+      soundClipsHeading: 'Sound clips (optional)',
+      soundClipsIntroHint: "Add your own narration or music — upload sound clips you've already made yourself, or record narration live. Add as many as you like, and set when each one starts.",
+      uploadClipsLabel: '+ Upload clip(s)',
+      recordClipLabel: '🎙️ Record a clip',
+      stockTrackLabel: 'Or use a generated stock track',
+      stockCheerful: '🎉 Cheerful',
+      stockCalm: '🌙 Calm',
+      stockPlayful: '🎈 Playful',
+      stockCinematic: '🎬 Cinematic',
+      stockHintHtml: 'Short original instrumental loops generated on the spot, right in your browser — free to use, no attribution needed, no files to download first. Want more control over mood, tempo, or length? Try <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> and upload the result here as a clip.',
+      soundClipsEmptyText: 'No sound clips added — the video will be silent unless you add one.',
+      renderBtnLabel: '🎬 Render video',
+      previewTitle: 'VIDEO FORGE — LIVE PREVIEW',
+      statusNotStarted: 'NOT STARTED',
+      stageEmptyStrong: 'Nothing to preview yet.',
+      stageEmptyText: 'Add at least one drawing on the left, then hit Play preview or Render video.',
+      progressRendering: 'Rendering…',
+      playPreviewLabel: '▶ Play preview',
+      stopPreviewLabel: '■ Stop preview',
+      cancelRenderLabel: '✕ Cancel render',
+      downloadVideoLabel: '⬇ Download video (.webm)',
+      renderDisclaimerHtml: "Rendering happens in real time in your browser (a 30-second video takes about 30 seconds to render) — nothing is uploaded anywhere unless you use the YouTube button below. Most desktop browsers (Chrome, Edge, Firefox) support this; Safari's support is limited. Made more than one video this way? Combine them (and add more music) in <a href=\"merge-forge.html\" style=\"color:var(--line-cyan);\">Merge Forge</a>. Want a photo of people to actually talk instead of just pan and zoom? Try <a href=\"talk-forge.html\" style=\"color:var(--line-cyan);\">Talk Forge</a>.",
+      ytHeading: 'Upload straight to YouTube',
+      ytClientIdLabel: 'Your Google OAuth Client ID',
+      ytClientIdHint: 'This is a public identifier for your own Google Cloud project, not a secret — see the setup steps below. Video Forge only sends it to Google, never anywhere else.',
+      connectGoogleLabel: 'Connect Google account',
+      ytConnectedText: '✓ Connected to your Google account.',
+      ytTitleLabel: 'Video title',
+      ytTitlePlaceholder: 'My Dragon Adventure',
+      ytDescLabel: 'Description',
+      ytDescPlaceholder: 'Made with Video Forge from my own drawings.',
+      ytTagsLabel: 'Tags (comma separated)',
+      ytTagsPlaceholder: 'drawing, animation, kids art',
+      ytPrivacyLabel: 'Privacy',
+      privacyPrivate: 'Private',
+      privacyUnlisted: 'Unlisted',
+      privacyPublic: 'Public',
+      ytCategoryLabel: 'Category',
+      categoryFilmAnimation: 'Film & Animation',
+      categoryEntertainment: 'Entertainment',
+      categoryPeople: 'People & Blogs',
+      categoryEducation: 'Education',
+      categoryHowto: 'Howto & Style',
+      uploadToYoutubeLabel: 'Upload to YouTube',
+      ytUploadHint: 'Render a video first, then upload it here. Uploads go directly from your browser to Google using your own account — this tool never sees or stores the video or your login.',
+      ytSetupSummary: 'One-time setup: get a Google OAuth Client ID (click to expand)',
+      ytSetupStepsHtml: '<li>Go to the <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, create (or pick) a project, and enable the <strong>YouTube Data API v3</strong>.</li><li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, set it up as "External", add the <code>youtube.upload</code> scope, and add your own Google account under "Test users" (this avoids needing Google\'s full app-verification review, since only you will use it).</li><li>Under <strong>APIs &amp; Services → Credentials</strong>, create an <strong>OAuth client ID</strong> of type "Web application". Add the exact URL this page is running at (e.g. <code>https://your-username.github.io</code>) under "Authorized JavaScript origins".</li><li>Copy the generated Client ID (it ends in <code>.apps.googleusercontent.com</code>) into the field above.</li><li>Click "Connect Google account" and approve access — Google will warn that the app is unverified, which is expected for a personal project; click through as the test user you added.</li>',
+      ytSetupFallbackHtml: 'If any step here fails or your browser blocks the upload, you can always fall back to downloading the video file above and uploading it manually at <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your drawings, music and rendered video stay in your browser — nothing is uploaded unless you use the YouTube button, and that goes straight from your browser to your own Google account. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>',
+      secondsLabel: 'Seconds:',
+      moveUpTitle: 'Move up',
+      moveDownTitle: 'Move down',
+      removeTitle: 'Remove',
+      errorAddTextFirst: 'Type some text first.',
+      capFromLabel: 'From:',
+      capForLabel: 'For:',
+      capAtLabel: 'At:',
+      removeLabel: 'Remove',
+      sampleNameSunny: 'Sample: sunny day.png',
+      sampleNameHouse: 'Sample: my house.png',
+      sampleNameWaving: 'Sample: waving hello.png',
+      replaceSampleConfirm: "Replace your current drawings with the sample? This can't be undone.",
+      loadingSampleLabel: 'Loading sample…',
+      sampleTitleText: 'My Sample Adventure',
+      sampleSubtitleText: 'Made with Video Forge',
+      sampleTuneName: 'Sample tune (generated)',
+      errorCouldNotLoadSample: 'Could not load the sample:',
+      modeHintKenburns: 'Each drawing slowly pans and zooms for a cinematic feel.',
+      modeHintCuts: 'Each drawing holds still, then cuts straight to the next.',
+      modeHintFlipbook: 'Drawings flash by quickly like a hand-flipped flipbook or stop-motion loop — great for a short animated sequence.',
+      soundReadErrorPrefix: 'Could not read',
+      recordedNarrationPrefix: 'Recorded narration',
+      recordProcessErrorPrefix: 'Could not process the recorded clip:',
+      micErrorPrefix: 'Could not access your microphone:',
+      stopRecordingLabel: '⏹ Stop recording',
+      clipTypeLabel: 'Type:',
+      clipTypeMusic: 'Music',
+      clipTypeNarration: 'Narration / speech',
+      clipTypeSfx: 'Sound effect',
+      clipStartsAtLabel: 'Starts at:',
+      clipVolLabel: 'Vol:',
+      clipLoopLabel: 'Loop',
+      generatedSuffix: 'generated',
+      stockGeneratingLabel: 'Generating…',
+      stockGenerateErrorPrefix: 'Could not generate that track:',
+      errorAddDrawingFirst: 'Add at least one drawing first.',
+      errorNothingToPreview: 'Nothing to preview.',
+      statusPreviewing: 'PREVIEWING',
+      statusPreviewDone: 'PREVIEW DONE',
+      statusStopped: 'STOPPED',
+      errorNoRecordingSupport: 'Your browser does not support recording canvas to video. Try the latest Chrome, Edge, or Firefox.',
+      errorNothingToRender: 'Nothing to render.',
+      errorNoVideoFormat: 'No supported video format found in this browser.',
+      statusRendering: 'RENDERING',
+      statusCancelled: 'CANCELLED',
+      statusRenderComplete: 'RENDER COMPLETE',
+      ytErrorSignInFailed: 'Google sign-in failed: {error}',
+      ytErrorNoClientId: 'Paste your Google OAuth Client ID first — see the setup steps below.',
+      ytErrorLibraryNotLoaded: "Google's sign-in library hasn't finished loading yet — wait a second and try again.",
+      ytErrorRenderFirst: 'Render a video first.',
+      ytErrorConnectFirst: 'Connect your Google account first.',
+      ytDefaultTitle: 'Video Forge upload',
+      startingUploadLabel: 'Starting upload…',
+      uploadingLabel: 'Uploading to YouTube…',
+      ytErrorRequestFailed: 'Request failed with status {status}',
+      ytErrorNoUploadUrl: 'Google did not return an upload session URL — your browser or an extension may be blocking it. Try downloading the video and uploading it manually at studio.youtube.com instead.',
+      ytErrorResponseUnreadable: 'Upload finished but the response could not be read.',
+      ytErrorUploadFailedStatus: 'Upload failed with status {status}: {text}',
+      ytErrorNetwork: 'A network error interrupted the upload — this can happen if a browser extension blocks requests to Google.',
+      ytErrorGeneric: 'Upload failed.',
+      ytSuccessUploadedPrefix: 'Uploaded!',
+      ytWatchLinkLabel: 'Watch it on YouTube',
+      ytPrivacyNotePrivate: 'private — only you can see it',
+      savedJustNowText: 'Saved just now.',
+      autosaveFailedText: "Couldn't autosave (your project may be too large for browser storage) — remember to download when you're done.",
+      draftBannerPrefix: 'You have an unsaved draft from',
+      draftDrawingOne: 'drawing).',
+      draftDrawingsMany: 'drawings).',
+      loadingLabel: 'Loading…',
+      errorCouldNotLoadDraft: 'Could not load the saved draft:',
+      clearDraftConfirm: 'Clear the autosaved draft? This only removes the saved copy in this browser — anything currently on screen is untouched.'
+    },
+    es: {
+      heroSubtitle: 'Sube tus dibujos, agrega ritmo, música y una carátula de título, luego renderiza un video real — directamente en tu navegador — y súbelo directamente a YouTube.',
+      tourLinkText: '▶ Mira un recorrido de 30 segundos de todas estas herramientas (hecho con Video Forge)',
+      resumeDraftLabel: '↺ Reanudar borrador',
+      discardLabel: '✕ Descartar',
+      autosaveHintText: 'Tu progreso se autoguarda en este navegador mientras trabajas, así que una actualización no lo perderá.',
+      clearDraftLinkText: 'Borrar borrador guardado',
+      drawingsHeading: 'Tus dibujos',
+      trySampleLabel: '▶ Prueba primero una muestra',
+      trySampleHint: 'Carga 3 garabatos de muestra generados, una carátula de título y una breve melodía generada, para que veas cómo encaja todo antes de subir tu propio arte.',
+      addDrawingsLabel: '+ Agregar dibujos (fotos o escaneos, en orden)',
+      addDrawingsHint: 'Agrega tantos como quieras. Reordena con las flechas, ajusta cuánto dura cada uno en pantalla, o elimina uno.',
+      framesEmptyText: 'Ningún dibujo agregado todavía.',
+      motionStyleHeading: 'Movimiento y estilo',
+      animationStyleLabel: 'Estilo de animación',
+      modeKenburns: 'Paneo y zoom lento (Ken Burns)',
+      modeCuts: 'Cortes simples (sin movimiento)',
+      modeFlipbook: 'Libro animado / stop-motion (fotogramas rápidos)',
+      transitionLabel: 'Transición entre dibujos',
+      transitionCrossfade: 'Fundido cruzado',
+      transitionSlide: 'Deslizar',
+      transitionHardCut: 'Corte directo',
+      flipbookSpeedLabel: 'Velocidad del libro animado (fotogramas por segundo)',
+      loopCountLabel: 'Repetir la secuencia esta cantidad de veces',
+      aspectLabel: 'Relación de aspecto',
+      aspect16x9: '16:9 horizontal — YouTube estándar',
+      aspect9x16: '9:16 vertical — YouTube Shorts / Reels',
+      aspect1x1: '1:1 cuadrado',
+      titleCardHeading: 'Carátula de título (opcional)',
+      showTitleScreenLabel: 'Mostrar una pantalla de título primero',
+      titleLabel: 'Título',
+      titlePlaceholder: 'p. ej. Mi aventura del dragón',
+      subtitleLabel: 'Subtítulo (opcional)',
+      subtitlePlaceholder: 'p. ej. Dibujado por Alex, 8 años',
+      secondsOnScreenLabel: 'Segundos en pantalla',
+      captionHeading: 'Superposición de texto (opcional)',
+      captionIntroHint: 'Agrega líneas de texto que aparecen sobre el video — útil para citas, subtítulos o créditos.',
+      captionTextLabel: 'Texto',
+      captionTextPlaceholder: 'p. ej. Cree en ti mismo',
+      captionStartLabel: 'Comienza en (s)',
+      captionDurationLabel: 'Duración (s)',
+      captionPositionLabel: 'Posición',
+      positionBottom: 'Abajo',
+      positionMiddle: 'Medio',
+      positionTop: 'Arriba',
+      addCaptionBtnLabel: '+ Agregar superposición de texto',
+      captionsEmptyText: 'No se agregaron superposiciones de texto.',
+      soundClipsHeading: 'Clips de sonido (opcional)',
+      soundClipsIntroHint: 'Agrega tu propia narración o música — sube clips de sonido que ya hayas hecho tú mismo, o graba narración en vivo. Agrega tantos como quieras, y define cuándo comienza cada uno.',
+      uploadClipsLabel: '+ Subir clip(s)',
+      recordClipLabel: '🎙️ Grabar un clip',
+      stockTrackLabel: 'O usa una pista de stock generada',
+      stockCheerful: '🎉 Alegre',
+      stockCalm: '🌙 Calma',
+      stockPlayful: '🎈 Juguetona',
+      stockCinematic: '🎬 Cinematográfica',
+      stockHintHtml: '¿Bucles instrumentales originales cortos generados al instante, directamente en tu navegador — gratis de usar, sin necesidad de atribución, sin archivos que descargar primero. ¿Quieres más control sobre el ambiente, tempo o duración? Prueba <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> y sube el resultado aquí como un clip.',
+      soundClipsEmptyText: 'No se agregaron clips de sonido — el video estará en silencio a menos que agregues uno.',
+      renderBtnLabel: '🎬 Renderizar video',
+      previewTitle: 'VIDEO FORGE — VISTA PREVIA EN VIVO',
+      statusNotStarted: 'SIN INICIAR',
+      stageEmptyStrong: 'Nada para previsualizar todavía.',
+      stageEmptyText: 'Agrega al menos un dibujo a la izquierda, luego pulsa Reproducir vista previa o Renderizar video.',
+      progressRendering: 'Renderizando…',
+      playPreviewLabel: '▶ Reproducir vista previa',
+      stopPreviewLabel: '■ Detener vista previa',
+      cancelRenderLabel: '✕ Cancelar renderizado',
+      downloadVideoLabel: '⬇ Descargar video (.webm)',
+      renderDisclaimerHtml: 'El renderizado ocurre en tiempo real en tu navegador (un video de 30 segundos tarda unos 30 segundos en renderizarse) — no se sube nada a ningún lado a menos que uses el botón de YouTube abajo. La mayoría de los navegadores de escritorio (Chrome, Edge, Firefox) lo admiten; el soporte de Safari es limitado. ¿Hiciste más de un video así? Combínalos (y agrega más música) en <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>. ¿Quieres que una foto de personas realmente hable en vez de solo panear y hacer zoom? Prueba <a href="talk-forge.html" style="color:var(--line-cyan);">Talk Forge</a>.',
+      ytHeading: 'Subir directamente a YouTube',
+      ytClientIdLabel: 'Tu ID de cliente OAuth de Google',
+      ytClientIdHint: 'Este es un identificador público de tu propio proyecto de Google Cloud, no un secreto — consulta los pasos de configuración abajo. Video Forge solo lo envía a Google, nunca a ningún otro lugar.',
+      connectGoogleLabel: 'Conectar cuenta de Google',
+      ytConnectedText: '✓ Conectado a tu cuenta de Google.',
+      ytTitleLabel: 'Título del video',
+      ytTitlePlaceholder: 'Mi aventura del dragón',
+      ytDescLabel: 'Descripción',
+      ytDescPlaceholder: 'Hecho con Video Forge a partir de mis propios dibujos.',
+      ytTagsLabel: 'Etiquetas (separadas por comas)',
+      ytTagsPlaceholder: 'dibujo, animación, arte infantil',
+      ytPrivacyLabel: 'Privacidad',
+      privacyPrivate: 'Privado',
+      privacyUnlisted: 'Oculto',
+      privacyPublic: 'Público',
+      ytCategoryLabel: 'Categoría',
+      categoryFilmAnimation: 'Cine y animación',
+      categoryEntertainment: 'Entretenimiento',
+      categoryPeople: 'Personas y blogs',
+      categoryEducation: 'Educación',
+      categoryHowto: 'Cómo hacer y estilo',
+      uploadToYoutubeLabel: 'Subir a YouTube',
+      ytUploadHint: 'Renderiza un video primero, luego súbelo aquí. Las subidas van directamente desde tu navegador a Google usando tu propia cuenta — esta herramienta nunca ve ni almacena el video o tu inicio de sesión.',
+      ytSetupSummary: 'Configuración única: obtén un ID de cliente OAuth de Google (clic para expandir)',
+      ytSetupStepsHtml: '<li>Ve a la <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Consola de Google Cloud</a>, crea (o elige) un proyecto, y activa la <strong>API de datos de YouTube v3</strong>.</li><li>En <strong>APIs y servicios → Pantalla de consentimiento de OAuth</strong>, configúralo como "Externo", añade el alcance <code>youtube.upload</code>, y añade tu propia cuenta de Google en "Usuarios de prueba" (esto evita necesitar la revisión completa de verificación de Google, ya que solo tú lo usarás).</li><li>En <strong>APIs y servicios → Credenciales</strong>, crea un <strong>ID de cliente OAuth</strong> de tipo "Aplicación web". Añade la URL exacta donde se ejecuta esta página (p. ej. <code>https://tu-usuario.github.io</code>) en "Orígenes de JavaScript autorizados".</li><li>Copia el ID de cliente generado (termina en <code>.apps.googleusercontent.com</code>) en el campo de arriba.</li><li>Haz clic en "Conectar cuenta de Google" y aprueba el acceso — Google advertirá que la app no está verificada, lo cual es esperado para un proyecto personal; continúa como el usuario de prueba que añadiste.</li>',
+      ytSetupFallbackHtml: 'Si algún paso falla aquí o tu navegador bloquea la subida, siempre puedes recurrir a descargar el archivo de video arriba y subirlo manualmente en <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tus dibujos, música y video renderizado permanecen en tu navegador — nada se sube a menos que uses el botón de YouTube, y eso va directamente desde tu navegador a tu propia cuenta de Google. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>',
+      secondsLabel: 'Segundos:',
+      moveUpTitle: 'Subir',
+      moveDownTitle: 'Bajar',
+      removeTitle: 'Eliminar',
+      errorAddTextFirst: 'Escribe algo de texto primero.',
+      capFromLabel: 'Desde:',
+      capForLabel: 'Por:',
+      capAtLabel: 'En:',
+      removeLabel: 'Eliminar',
+      sampleNameSunny: 'Muestra: día soleado.png',
+      sampleNameHouse: 'Muestra: mi casa.png',
+      sampleNameWaving: 'Muestra: saludando.png',
+      replaceSampleConfirm: '¿Reemplazar tus dibujos actuales con la muestra? Esto no se puede deshacer.',
+      loadingSampleLabel: 'Cargando muestra…',
+      sampleTitleText: 'Mi aventura de muestra',
+      sampleSubtitleText: 'Hecho con Video Forge',
+      sampleTuneName: 'Melodía de muestra (generada)',
+      errorCouldNotLoadSample: 'No se pudo cargar la muestra:',
+      modeHintKenburns: 'Cada dibujo panea y hace zoom lentamente para un efecto cinematográfico.',
+      modeHintCuts: 'Cada dibujo se queda quieto, luego corta directo al siguiente.',
+      modeHintFlipbook: 'Los dibujos pasan rápido como un libro animado o un bucle de stop-motion — genial para una secuencia animada corta.',
+      soundReadErrorPrefix: 'No se pudo leer',
+      recordedNarrationPrefix: 'Narración grabada',
+      recordProcessErrorPrefix: 'No se pudo procesar el clip grabado:',
+      micErrorPrefix: 'No se pudo acceder a tu micrófono:',
+      stopRecordingLabel: '⏹ Detener grabación',
+      clipTypeLabel: 'Tipo:',
+      clipTypeMusic: 'Música',
+      clipTypeNarration: 'Narración / voz',
+      clipTypeSfx: 'Efecto de sonido',
+      clipStartsAtLabel: 'Comienza en:',
+      clipVolLabel: 'Vol:',
+      clipLoopLabel: 'Repetir',
+      generatedSuffix: 'generada',
+      stockGeneratingLabel: 'Generando…',
+      stockGenerateErrorPrefix: 'No se pudo generar esa pista:',
+      errorAddDrawingFirst: 'Agrega al menos un dibujo primero.',
+      errorNothingToPreview: 'Nada para previsualizar.',
+      statusPreviewing: 'PREVISUALIZANDO',
+      statusPreviewDone: 'VISTA PREVIA LISTA',
+      statusStopped: 'DETENIDO',
+      errorNoRecordingSupport: 'Tu navegador no admite grabar el lienzo como video. Prueba la última versión de Chrome, Edge o Firefox.',
+      errorNothingToRender: 'Nada para renderizar.',
+      errorNoVideoFormat: 'No se encontró un formato de video compatible en este navegador.',
+      statusRendering: 'RENDERIZANDO',
+      statusCancelled: 'CANCELADO',
+      statusRenderComplete: 'RENDERIZADO COMPLETO',
+      ytErrorSignInFailed: 'Falló el inicio de sesión de Google: {error}',
+      ytErrorNoClientId: 'Pega primero tu ID de cliente OAuth de Google — consulta los pasos de configuración abajo.',
+      ytErrorLibraryNotLoaded: 'La librería de inicio de sesión de Google no ha terminado de cargar — espera un segundo e inténtalo de nuevo.',
+      ytErrorRenderFirst: 'Renderiza un video primero.',
+      ytErrorConnectFirst: 'Conecta tu cuenta de Google primero.',
+      ytDefaultTitle: 'Subida de Video Forge',
+      startingUploadLabel: 'Iniciando subida…',
+      uploadingLabel: 'Subiendo a YouTube…',
+      ytErrorRequestFailed: 'La solicitud falló con estado {status}',
+      ytErrorNoUploadUrl: 'Google no devolvió una URL de sesión de subida — tu navegador o una extensión puede estar bloqueándola. Intenta descargar el video y subirlo manualmente en studio.youtube.com en su lugar.',
+      ytErrorResponseUnreadable: 'La subida terminó pero no se pudo leer la respuesta.',
+      ytErrorUploadFailedStatus: 'La subida falló con estado {status}: {text}',
+      ytErrorNetwork: 'Un error de red interrumpió la subida — esto puede ocurrir si una extensión del navegador bloquea las solicitudes a Google.',
+      ytErrorGeneric: 'La subida falló.',
+      ytSuccessUploadedPrefix: '¡Subido!',
+      ytWatchLinkLabel: 'Míralo en YouTube',
+      ytPrivacyNotePrivate: 'privado — solo tú puedes verlo',
+      savedJustNowText: 'Guardado justo ahora.',
+      autosaveFailedText: 'No se pudo autoguardar (tu proyecto puede ser demasiado grande para el almacenamiento del navegador) — recuerda descargarlo cuando termines.',
+      draftBannerPrefix: 'Tienes un borrador sin guardar desde el',
+      draftDrawingOne: 'dibujo).',
+      draftDrawingsMany: 'dibujos).',
+      loadingLabel: 'Cargando…',
+      errorCouldNotLoadDraft: 'No se pudo cargar el borrador guardado:',
+      clearDraftConfirm: 'Borrar el borrador autoguardado? Esto solo elimina la copia guardada en este navegador — todo lo que está actualmente en pantalla no se ve afectado.'
+    },
+    ar: {
+      heroSubtitle: 'ارفع رسوماتك، أضف الإيقاع والموسيقى وشاشة عنوان، ثم اعرض فيديو حقيقي — مباشرة في متصفحك — وارفعه مباشرة إلى YouTube.',
+      tourLinkText: '▶ شاهد جولة مدتها 30 ثانية على جميع هذه الأدوات (تم إنشاؤها باستخدام Video Forge نفسه)',
+      resumeDraftLabel: '↺ استئناف المسودة',
+      discardLabel: '✕ تجاهل',
+      autosaveHintText: 'يُحفظ تقدمك تلقائيًا في هذا المتصفح أثناء عملك، لذا لن يؤدي التحديث إلى فقدانه.',
+      clearDraftLinkText: 'مسح المسودة المحفوظة',
+      drawingsHeading: 'رسوماتك',
+      trySampleLabel: '▶ جرّب عينة أولاً',
+      trySampleHint: 'يحمّل 3 رسومات عينة مُولَّدة، وشاشة عنوان، ولحنًا قصيرًا مُولَّدًا، لترى كيف يتناسب كل شيء قبل رفع فنك الخاص.',
+      addDrawingsLabel: '+ إضافة رسومات (صور أو مسح ضوئي، بالترتيب)',
+      addDrawingsHint: 'أضف بقدر ما تريد. أعد الترتيب بالأسهم، اضبط مدة بقاء كل رسمة على الشاشة، أو أزل واحدة.',
+      framesEmptyText: 'لم تتم إضافة أي رسومات بعد.',
+      motionStyleHeading: 'الحركة والأسلوب',
+      animationStyleLabel: 'أسلوب الرسوم المتحركة',
+      modeKenburns: 'تحريك وتكبير بطيء (Ken Burns)',
+      modeCuts: 'قطعات بسيطة (بدون حركة)',
+      modeFlipbook: 'كتيّب متحرك / تحريك بالإيقاف (إطارات سريعة)',
+      transitionLabel: 'الانتقال بين الرسومات',
+      transitionCrossfade: 'تلاشٍ متقاطع',
+      transitionSlide: 'انزلاق',
+      transitionHardCut: 'قطع مباشر',
+      flipbookSpeedLabel: 'سرعة الكتيّب المتحرك (إطارات في الثانية)',
+      loopCountLabel: 'كرر التسلسل هذا العدد من المرات',
+      aspectLabel: 'نسبة العرض إلى الارتفاع',
+      aspect16x9: '16:9 أفقي — YouTube قياسي',
+      aspect9x16: '9:16 عمودي — YouTube Shorts / Reels',
+      aspect1x1: '1:1 مربع',
+      titleCardHeading: 'شاشة العنوان (اختياري)',
+      showTitleScreenLabel: 'إظهار شاشة عنوان أولاً',
+      titleLabel: 'العنوان',
+      titlePlaceholder: 'مثال: مغامرة تنيني',
+      subtitleLabel: 'العنوان الفرعي (اختياري)',
+      subtitlePlaceholder: 'مثال: رسمها أليكس، 8 سنوات',
+      secondsOnScreenLabel: 'الثواني على الشاشة',
+      captionHeading: 'تراكب نصي (اختياري)',
+      captionIntroHint: 'أضف أسطر نص تظهر فوق الفيديو — مفيدة للاقتباسات أو التسميات التوضيحية أو الاعتمادات.',
+      captionTextLabel: 'النص',
+      captionTextPlaceholder: 'مثال: آمن بنفسك',
+      captionStartLabel: 'يبدأ عند (ث)',
+      captionDurationLabel: 'المدة (ث)',
+      captionPositionLabel: 'الموضع',
+      positionBottom: 'أسفل',
+      positionMiddle: 'وسط',
+      positionTop: 'أعلى',
+      addCaptionBtnLabel: '+ إضافة تراكب نصي',
+      captionsEmptyText: 'لم تتم إضافة أي تراكبات نصية.',
+      soundClipsHeading: 'مقاطع صوتية (اختياري)',
+      soundClipsIntroHint: 'أضف سردك أو موسيقاك الخاصة — ارفع مقاطع صوتية صنعتها بنفسك، أو سجّل سردًا مباشرة. أضف بقدر ما تريد، وحدد وقت بدء كل مقطع.',
+      uploadClipsLabel: '+ رفع مقطع/مقاطع',
+      recordClipLabel: '🎙️ تسجيل مقطع',
+      stockTrackLabel: 'أو استخدم مقطعًا جاهزًا مُولَّدًا',
+      stockCheerful: '🎉 مرح',
+      stockCalm: '🌙 هادئ',
+      stockPlayful: '🎈 مرِح',
+      stockCinematic: '🎬 سينمائي',
+      stockHintHtml: 'حلقات آلية أصلية قصيرة تُولَّد فوريًا، مباشرة في متصفحك — مجانية الاستخدام، لا حاجة للنسب، لا ملفات لتنزيلها أولاً. تريد تحكمًا أكبر في المزاج أو الإيقاع أو المدة؟ جرّب <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> وارفع النتيجة هنا كمقطع.',
+      soundClipsEmptyText: 'لم تتم إضافة مقاطع صوتية — سيكون الفيديو صامتًا ما لم تضف واحدًا.',
+      renderBtnLabel: '🎬 عرض الفيديو',
+      previewTitle: 'VIDEO FORGE — معاينة مباشرة',
+      statusNotStarted: 'لم يبدأ',
+      stageEmptyStrong: 'لا شيء لمعاينته بعد.',
+      stageEmptyText: 'أضف رسمة واحدة على الأقل يسارًا، ثم اضغط تشغيل المعاينة أو عرض الفيديو.',
+      progressRendering: 'جارٍ العرض…',
+      playPreviewLabel: '▶ تشغيل المعاينة',
+      stopPreviewLabel: '■ إيقاف المعاينة',
+      cancelRenderLabel: '✕ إلغاء العرض',
+      downloadVideoLabel: '⬇ تنزيل الفيديو (.webm)',
+      renderDisclaimerHtml: 'يحدث العرض في الوقت الفعلي في متصفحك (يستغرق فيديو مدته 30 ثانية حوالي 30 ثانية للعرض) — لا يُرفع شيء إلى أي مكان ما لم تستخدم زر YouTube أدناه. تدعم معظم متصفحات سطح المكتب (Chrome وEdge وFirefox) ذلك؛ دعم Safari محدود. صنعت أكثر من فيديو بهذه الطريقة؟ ادمجها (وأضف المزيد من الموسيقى) في <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>. تريد أن تتحدث صورة أشخاص فعليًا بدلاً من مجرد التحريك والتكبير؟ جرّب <a href="talk-forge.html" style="color:var(--line-cyan);">Talk Forge</a>.',
+      ytHeading: 'الرفع مباشرة إلى YouTube',
+      ytClientIdLabel: 'معرّف عميل OAuth من Google الخاص بك',
+      ytClientIdHint: 'هذا معرّف عام لمشروع Google Cloud الخاص بك، وليس سرًا — راجع خطوات الإعداد أدناه. يرسله Video Forge فقط إلى Google، ولا يرسله إلى أي مكان آخر أبدًا.',
+      connectGoogleLabel: 'ربط حساب Google',
+      ytConnectedText: '✓ تم الربط بحساب Google الخاص بك.',
+      ytTitleLabel: 'عنوان الفيديو',
+      ytTitlePlaceholder: 'مغامرة تنيني',
+      ytDescLabel: 'الوصف',
+      ytDescPlaceholder: 'تم إنشاؤه باستخدام Video Forge من رسوماتي الخاصة.',
+      ytTagsLabel: 'الوسوم (مفصولة بفواصل)',
+      ytTagsPlaceholder: 'رسم، رسوم متحركة، فن أطفال',
+      ytPrivacyLabel: 'الخصوصية',
+      privacyPrivate: 'خاص',
+      privacyUnlisted: 'غير مدرج',
+      privacyPublic: 'عام',
+      ytCategoryLabel: 'الفئة',
+      categoryFilmAnimation: 'أفلام ورسوم متحركة',
+      categoryEntertainment: 'ترفيه',
+      categoryPeople: 'أشخاص ومدونات',
+      categoryEducation: 'تعليم',
+      categoryHowto: 'كيفية وأسلوب',
+      uploadToYoutubeLabel: 'الرفع إلى YouTube',
+      ytUploadHint: 'اعرض فيديو أولاً، ثم ارفعه هنا. تتم عمليات الرفع مباشرة من متصفحك إلى Google باستخدام حسابك الخاص — هذه الأداة لا ترى أو تخزن الفيديو أو بيانات تسجيل دخولك أبدًا.',
+      ytSetupSummary: 'إعداد لمرة واحدة: احصل على معرّف عميل OAuth من Google (انقر للتوسيع)',
+      ytSetupStepsHtml: '<li>اذهب إلى <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">وحدة تحكم Google Cloud</a>، أنشئ (أو اختر) مشروعًا، وفعّل <strong>YouTube Data API v3</strong>.</li><li>ضمن <strong>واجهات برمجة التطبيقات والخدمات ← شاشة موافقة OAuth</strong>، قم بإعدادها كـ"خارجي"، وأضف نطاق <code>youtube.upload</code>، وأضف حساب Google الخاص بك ضمن "مستخدمو الاختبار" (يتجنب هذا الحاجة إلى مراجعة التحقق الكاملة من Google، لأنك أنت فقط من سيستخدمه).</li><li>ضمن <strong>واجهات برمجة التطبيقات والخدمات ← بيانات الاعتماد</strong>، أنشئ <strong>معرّف عميل OAuth</strong> من نوع "تطبيق ويب". أضف الرابط الدقيق الذي تعمل عليه هذه الصفحة (مثل <code>https://your-username.github.io</code>) ضمن "أصول JavaScript المعتمدة".</li><li>انسخ معرّف العميل الذي تم إنشاؤه (ينتهي بـ <code>.apps.googleusercontent.com</code>) في الحقل أعلاه.</li><li>انقر على "ربط حساب Google" ووافق على الوصول — سيحذر Google من أن التطبيق غير موثّق، وهذا متوقع لمشروع شخصي؛ تابع كمستخدم الاختبار الذي أضفته.</li>',
+      ytSetupFallbackHtml: 'إذا فشلت أي خطوة هنا أو حظر متصفحك الرفع، يمكنك دائمًا اللجوء إلى تنزيل ملف الفيديو أعلاه ورفعه يدويًا على <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. تبقى رسوماتك وموسيقاك والفيديو المعروض في متصفحك — لا يُرفع شيء ما لم تستخدم زر YouTube، وذلك ينتقل مباشرة من متصفحك إلى حساب Google الخاص بك. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>',
+      secondsLabel: 'ثوانٍ:',
+      moveUpTitle: 'تحريك لأعلى',
+      moveDownTitle: 'تحريك لأسفل',
+      removeTitle: 'إزالة',
+      errorAddTextFirst: 'اكتب بعض النص أولاً.',
+      capFromLabel: 'من:',
+      capForLabel: 'لمدة:',
+      capAtLabel: 'عند:',
+      removeLabel: 'إزالة',
+      sampleNameSunny: 'عينة: يوم مشمس.png',
+      sampleNameHouse: 'عينة: منزلي.png',
+      sampleNameWaving: 'عينة: التلويح بالتحية.png',
+      replaceSampleConfirm: 'استبدال رسوماتك الحالية بالعينة؟ لا يمكن التراجع عن هذا.',
+      loadingSampleLabel: 'جارٍ تحميل العينة…',
+      sampleTitleText: 'مغامرتي التجريبية',
+      sampleSubtitleText: 'تم إنشاؤه باستخدام Video Forge',
+      sampleTuneName: 'لحن عينة (مُولَّد)',
+      errorCouldNotLoadSample: 'تعذّر تحميل العينة:',
+      modeHintKenburns: 'تتحرك كل رسمة وتتكبر ببطء لإحساس سينمائي.',
+      modeHintCuts: 'تبقى كل رسمة ثابتة، ثم تقطع مباشرة إلى التالية.',
+      modeHintFlipbook: 'تومض الرسومات بسرعة مثل كتيّب متحرك باليد أو حلقة تحريك بالإيقاف — رائع لتسلسل متحرك قصير.',
+      soundReadErrorPrefix: 'تعذّرت قراءة',
+      recordedNarrationPrefix: 'سرد مسجَّل',
+      recordProcessErrorPrefix: 'تعذّرت معالجة المقطع المسجَّل:',
+      micErrorPrefix: 'تعذّر الوصول إلى الميكروفون:',
+      stopRecordingLabel: '⏹ إيقاف التسجيل',
+      clipTypeLabel: 'النوع:',
+      clipTypeMusic: 'موسيقى',
+      clipTypeNarration: 'سرد / كلام',
+      clipTypeSfx: 'مؤثر صوتي',
+      clipStartsAtLabel: 'يبدأ عند:',
+      clipVolLabel: 'الصوت:',
+      clipLoopLabel: 'تكرار',
+      generatedSuffix: 'مُولَّد',
+      stockGeneratingLabel: 'جارٍ التوليد…',
+      stockGenerateErrorPrefix: 'تعذّر توليد هذا المقطع:',
+      errorAddDrawingFirst: 'أضف رسمة واحدة على الأقل أولاً.',
+      errorNothingToPreview: 'لا شيء لمعاينته.',
+      statusPreviewing: 'جارٍ المعاينة',
+      statusPreviewDone: 'انتهت المعاينة',
+      statusStopped: 'تم الإيقاف',
+      errorNoRecordingSupport: 'متصفحك لا يدعم تسجيل اللوحة القماشية كفيديو. جرّب أحدث إصدار من Chrome أو Edge أو Firefox.',
+      errorNothingToRender: 'لا شيء لعرضه.',
+      errorNoVideoFormat: 'لم يتم العثور على تنسيق فيديو مدعوم في هذا المتصفح.',
+      statusRendering: 'جارٍ العرض',
+      statusCancelled: 'أُلغي',
+      statusRenderComplete: 'اكتمل العرض',
+      ytErrorSignInFailed: 'فشل تسجيل الدخول إلى Google: {error}',
+      ytErrorNoClientId: 'الصق معرّف عميل OAuth من Google أولاً — راجع خطوات الإعداد أدناه.',
+      ytErrorLibraryNotLoaded: 'لم تنتهِ مكتبة تسجيل الدخول من Google من التحميل بعد — انتظر لحظة وحاول مرة أخرى.',
+      ytErrorRenderFirst: 'اعرض فيديو أولاً.',
+      ytErrorConnectFirst: 'اربط حساب Google الخاص بك أولاً.',
+      ytDefaultTitle: 'رفعة من Video Forge',
+      startingUploadLabel: 'جارٍ بدء الرفع…',
+      uploadingLabel: 'جارٍ الرفع إلى YouTube…',
+      ytErrorRequestFailed: 'فشل الطلب بالحالة {status}',
+      ytErrorNoUploadUrl: 'لم يُرجع Google رابط جلسة رفع — قد يكون متصفحك أو أحد الإضافات يحظره. حاول تنزيل الفيديو ورفعه يدويًا على studio.youtube.com بدلاً من ذلك.',
+      ytErrorResponseUnreadable: 'انتهى الرفع لكن تعذرت قراءة الاستجابة.',
+      ytErrorUploadFailedStatus: 'فشل الرفع بالحالة {status}: {text}',
+      ytErrorNetwork: 'قاطع خطأ في الشبكة عملية الرفع — يمكن أن يحدث هذا إذا حظرت إضافة متصفح الطلبات إلى Google.',
+      ytErrorGeneric: 'فشل الرفع.',
+      ytSuccessUploadedPrefix: 'تم الرفع!',
+      ytWatchLinkLabel: 'شاهده على YouTube',
+      ytPrivacyNotePrivate: 'خاص — أنت فقط من يمكنه رؤيته',
+      savedJustNowText: 'تم الحفظ للتو.',
+      autosaveFailedText: 'تعذّر الحفظ التلقائي (قد يكون مشروعك كبيرًا جدًا على تخزين المتصفح) — تذكّر التنزيل عند الانتهاء.',
+      draftBannerPrefix: 'لديك مسودة غير محفوظة منذ',
+      draftDrawingOne: 'رسمة واحدة).',
+      draftDrawingsMany: 'رسومات).',
+      loadingLabel: 'جارٍ التحميل…',
+      errorCouldNotLoadDraft: 'تعذّر تحميل المسودة المحفوظة:',
+      clearDraftConfirm: 'مسح المسودة المحفوظة تلقائيًا؟ هذا يزيل فقط النسخة المحفوظة في هذا المتصفح — أي شيء معروض حاليًا على الشاشة لن يتأثر.'
+    },
+    zh: {
+      heroSubtitle: '上传你的绘画，添加节奏、音乐和标题卡，然后直接在浏览器中渲染真实视频——并直接上传到 YouTube。',
+      tourLinkText: '▶ 观看这些工具的 30 秒导览（用 Video Forge 本身制作）',
+      resumeDraftLabel: '↺ 恢复草稿',
+      discardLabel: '✕ 丢弃',
+      autosaveHintText: '你的进度会在你操作时自动保存到此浏览器，因此刷新不会丢失它。',
+      clearDraftLinkText: '清除已保存的草稿',
+      drawingsHeading: '你的绘画',
+      trySampleLabel: '▶ 先试用示例',
+      trySampleHint: '加载 3 个生成的示例涂鸦、一张标题卡和一段简短的生成曲调，让你在上传自己的作品之前看看一切是如何组合在一起的。',
+      addDrawingsLabel: '+ 添加绘画（照片或扫描件，按顺序）',
+      addDrawingsHint: '想加多少就加多少。用箭头重新排序，设置每张停留的时长，或移除一张。',
+      framesEmptyText: '还没有添加绘画。',
+      motionStyleHeading: '运动与风格',
+      animationStyleLabel: '动画风格',
+      modeKenburns: '缓慢平移和缩放（Ken Burns）',
+      modeCuts: '简单剪切（无动效）',
+      modeFlipbook: '翻页书 / 定格动画（快速帧）',
+      transitionLabel: '绘画之间的过渡',
+      transitionCrossfade: '交叉淡化',
+      transitionSlide: '滑动',
+      transitionHardCut: '硬切',
+      flipbookSpeedLabel: '翻页书速度（每秒帧数）',
+      loopCountLabel: '将序列循环这么多次',
+      aspectLabel: '宽高比',
+      aspect16x9: '16:9 横向——标准 YouTube',
+      aspect9x16: '9:16 竖向——YouTube Shorts / Reels',
+      aspect1x1: '1:1 正方形',
+      titleCardHeading: '标题卡（可选）',
+      showTitleScreenLabel: '先显示标题画面',
+      titleLabel: '标题',
+      titlePlaceholder: '例如：我的巨龙历险记',
+      subtitleLabel: '副标题（可选）',
+      subtitlePlaceholder: '例如：由 8 岁的 Alex 绘制',
+      secondsOnScreenLabel: '屏幕停留秒数',
+      captionHeading: '文字叠加（可选）',
+      captionIntroHint: '添加显示在视频上的文字——适合引用语、字幕或制作人员名单。',
+      captionTextLabel: '文字',
+      captionTextPlaceholder: '例如：相信自己',
+      captionStartLabel: '开始时间（秒）',
+      captionDurationLabel: '持续时间（秒）',
+      captionPositionLabel: '位置',
+      positionBottom: '底部',
+      positionMiddle: '居中',
+      positionTop: '顶部',
+      addCaptionBtnLabel: '+ 添加文字叠加',
+      captionsEmptyText: '尚未添加文字叠加。',
+      soundClipsHeading: '声音片段（可选）',
+      soundClipsIntroHint: '添加你自己的旁白或音乐——上传你已经自己制作的声音片段，或实时录制旁白。想加多少就加多少，并设置每个片段的开始时间。',
+      uploadClipsLabel: '+ 上传片段',
+      recordClipLabel: '🎙️ 录制一段',
+      stockTrackLabel: '或使用生成的库存音轨',
+      stockCheerful: '🎉 欢快',
+      stockCalm: '🌙 平静',
+      stockPlayful: '🎈 俏皮',
+      stockCinematic: '🎬 电影感',
+      stockHintHtml: '直接在浏览器中即时生成的简短原创器乐循环——免费使用，无需署名，无需先下载文件。想要更好地控制情绪、节奏或长度？试试 <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a>，然后把结果作为片段上传到这里。',
+      soundClipsEmptyText: '未添加声音片段——除非你添加一个，否则视频将是静音的。',
+      renderBtnLabel: '🎬 渲染视频',
+      previewTitle: 'VIDEO FORGE — 实时预览',
+      statusNotStarted: '尚未开始',
+      stageEmptyStrong: '还没有可预览的内容。',
+      stageEmptyText: '在左侧至少添加一张绘画，然后点击播放预览或渲染视频。',
+      progressRendering: '渲染中…',
+      playPreviewLabel: '▶ 播放预览',
+      stopPreviewLabel: '■ 停止预览',
+      cancelRenderLabel: '✕ 取消渲染',
+      downloadVideoLabel: '⬇ 下载视频（.webm）',
+      renderDisclaimerHtml: '渲染会在浏览器中实时进行（一个 30 秒的视频渲染大约需要 30 秒）——除非你使用下方的 YouTube 按钮，否则不会上传到任何地方。大多数桌面浏览器（Chrome、Edge、Firefox）都支持此功能；Safari 的支持有限。用这种方式制作了不止一个视频？在 <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a> 中合并它们（并添加更多音乐）。想让人物照片真正说话，而不只是平移和缩放？试试 <a href="talk-forge.html" style="color:var(--line-cyan);">Talk Forge</a>。',
+      ytHeading: '直接上传到 YouTube',
+      ytClientIdLabel: '你的 Google OAuth 客户端 ID',
+      ytClientIdHint: '这是你自己 Google Cloud 项目的公开标识符，不是秘密——请参阅下方的设置步骤。Video Forge 只会将其发送给 Google，绝不发送到其他任何地方。',
+      connectGoogleLabel: '连接 Google 账户',
+      ytConnectedText: '✓ 已连接到你的 Google 账户。',
+      ytTitleLabel: '视频标题',
+      ytTitlePlaceholder: '我的巨龙历险记',
+      ytDescLabel: '描述',
+      ytDescPlaceholder: '用我自己的绘画和 Video Forge 制作。',
+      ytTagsLabel: '标签（用逗号分隔）',
+      ytTagsPlaceholder: '绘画, 动画, 儿童艺术',
+      ytPrivacyLabel: '隐私设置',
+      privacyPrivate: '私享',
+      privacyUnlisted: '不公开列出',
+      privacyPublic: '公开',
+      ytCategoryLabel: '类别',
+      categoryFilmAnimation: '影视与动画',
+      categoryEntertainment: '娱乐',
+      categoryPeople: '人物与博客',
+      categoryEducation: '教育',
+      categoryHowto: '操作指南与风格',
+      uploadToYoutubeLabel: '上传到 YouTube',
+      ytUploadHint: '先渲染一个视频，然后在此处上传。上传会使用你自己的账户直接从浏览器发送到 Google——此工具绝不会查看或存储视频或你的登录信息。',
+      ytSetupSummary: '一次性设置：获取 Google OAuth 客户端 ID（点击展开）',
+      ytSetupStepsHtml: '<li>前往 <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud 控制台</a>，创建（或选择）一个项目，并启用 <strong>YouTube Data API v3</strong>。</li><li>在<strong>API 和服务 → OAuth 同意屏幕</strong>下，将其设置为"外部"，添加 <code>youtube.upload</code> 权限范围，并在"测试用户"下添加你自己的 Google 账户（这样可以避免需要 Google 的完整应用验证审核，因为只有你会使用它）。</li><li>在<strong>API 和服务 → 凭据</strong>下，创建一个类型为"Web 应用"的 <strong>OAuth 客户端 ID</strong>。在"已获授权的 JavaScript 来源"下添加此页面运行的确切网址（例如 <code>https://your-username.github.io</code>）。</li><li>将生成的客户端 ID（以 <code>.apps.googleusercontent.com</code> 结尾）复制到上方的字段中。</li><li>点击"连接 Google 账户"并批准访问——Google 会警告该应用未经验证，这对于个人项目来说是正常的；以你添加的测试用户身份继续操作。</li>',
+      ytSetupFallbackHtml: '如果这里的任何步骤失败，或者你的浏览器阻止了上传，你始终可以退而求其次，下载上方的视频文件并在 <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a> 手动上传。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的绘画、音乐和渲染的视频都保留在浏览器中——除非你使用 YouTube 按钮，否则不会上传任何内容，而且那会直接从你的浏览器发送到你自己的 Google 账户。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>',
+      secondsLabel: '秒数：',
+      moveUpTitle: '上移',
+      moveDownTitle: '下移',
+      removeTitle: '移除',
+      errorAddTextFirst: '请先输入一些文字。',
+      capFromLabel: '起始：',
+      capForLabel: '持续：',
+      capAtLabel: '位置：',
+      removeLabel: '移除',
+      sampleNameSunny: '示例：晴天.png',
+      sampleNameHouse: '示例：我的房子.png',
+      sampleNameWaving: '示例：挥手问好.png',
+      replaceSampleConfirm: '用示例替换你当前的绘画吗？此操作无法撤销。',
+      loadingSampleLabel: '正在加载示例…',
+      sampleTitleText: '我的示例历险记',
+      sampleSubtitleText: '用 Video Forge 制作',
+      sampleTuneName: '示例曲调（已生成）',
+      errorCouldNotLoadSample: '无法加载示例：',
+      modeHintKenburns: '每张绘画缓慢平移和缩放，营造电影感。',
+      modeHintCuts: '每张绘画保持静止，然后直接切到下一张。',
+      modeHintFlipbook: '绘画像手翻书或定格动画循环一样快速闪过——非常适合简短的动画序列。',
+      soundReadErrorPrefix: '无法读取',
+      recordedNarrationPrefix: '录制的旁白',
+      recordProcessErrorPrefix: '无法处理录制的片段：',
+      micErrorPrefix: '无法访问你的麦克风：',
+      stopRecordingLabel: '⏹ 停止录制',
+      clipTypeLabel: '类型：',
+      clipTypeMusic: '音乐',
+      clipTypeNarration: '旁白 / 语音',
+      clipTypeSfx: '音效',
+      clipStartsAtLabel: '起始于：',
+      clipVolLabel: '音量：',
+      clipLoopLabel: '循环',
+      generatedSuffix: '已生成',
+      stockGeneratingLabel: '生成中…',
+      stockGenerateErrorPrefix: '无法生成该音轨：',
+      errorAddDrawingFirst: '请先至少添加一张绘画。',
+      errorNothingToPreview: '没有可预览的内容。',
+      statusPreviewing: '预览中',
+      statusPreviewDone: '预览完成',
+      statusStopped: '已停止',
+      errorNoRecordingSupport: '你的浏览器不支持将画布录制为视频。请尝试最新版的 Chrome、Edge 或 Firefox。',
+      errorNothingToRender: '没有可渲染的内容。',
+      errorNoVideoFormat: '在此浏览器中未找到受支持的视频格式。',
+      statusRendering: '渲染中',
+      statusCancelled: '已取消',
+      statusRenderComplete: '渲染完成',
+      ytErrorSignInFailed: 'Google 登录失败：{error}',
+      ytErrorNoClientId: '请先粘贴你的 Google OAuth 客户端 ID——请参阅下方的设置步骤。',
+      ytErrorLibraryNotLoaded: 'Google 登录库尚未加载完成——请稍等片刻再试。',
+      ytErrorRenderFirst: '请先渲染一个视频。',
+      ytErrorConnectFirst: '请先连接你的 Google 账户。',
+      ytDefaultTitle: 'Video Forge 上传',
+      startingUploadLabel: '正在开始上传…',
+      uploadingLabel: '正在上传到 YouTube…',
+      ytErrorRequestFailed: '请求失败，状态码 {status}',
+      ytErrorNoUploadUrl: 'Google 没有返回上传会话网址——你的浏览器或某个扩展程序可能正在阻止它。请改为下载视频并在 studio.youtube.com 手动上传。',
+      ytErrorResponseUnreadable: '上传已完成，但无法读取响应。',
+      ytErrorUploadFailedStatus: '上传失败，状态码 {status}：{text}',
+      ytErrorNetwork: '网络错误中断了上传——如果浏览器扩展程序阻止了对 Google 的请求，可能会发生这种情况。',
+      ytErrorGeneric: '上传失败。',
+      ytSuccessUploadedPrefix: '已上传！',
+      ytWatchLinkLabel: '在 YouTube 上观看',
+      ytPrivacyNotePrivate: '私享——只有你能看到',
+      savedJustNowText: '刚刚已保存。',
+      autosaveFailedText: '无法自动保存（你的项目可能对于浏览器存储来说太大了）——完成后记得下载。',
+      draftBannerPrefix: '你有一份未保存的草稿，来自',
+      draftDrawingOne: '张绘画）。',
+      draftDrawingsMany: '张绘画）。',
+      loadingLabel: '加载中…',
+      errorCouldNotLoadDraft: '无法加载已保存的草稿：',
+      clearDraftConfirm: '清除自动保存的草稿？这只会移除此浏览器中保存的副本——当前屏幕上的任何内容不受影响。'
+    },
+    sw: {
+      heroSubtitle: 'Pakia michoro yako, ongeza mwendo, muziki na kadi ya kichwa, kisha toa video halisi — moja kwa moja kwenye kivinjari chako — na uipakie moja kwa moja kwenye YouTube.',
+      tourLinkText: '▶ Tazama ziara ya sekunde 30 ya zana hizi zote (iliyotengenezwa na Video Forge yenyewe)',
+      resumeDraftLabel: '↺ Endelea na rasimu',
+      discardLabel: '✕ Ondoa',
+      autosaveHintText: 'Maendeleo yako yanahifadhiwa kiotomatiki kwenye kivinjari hiki unapofanya kazi, hivyo kuonyesha upya hakutayapoteza.',
+      clearDraftLinkText: 'Futa rasimu iliyohifadhiwa',
+      drawingsHeading: 'Michoro yako',
+      trySampleLabel: '▶ Jaribu mfano kwanza',
+      trySampleHint: 'Hupakia michoro 3 ya mfano iliyotengenezwa, kadi ya kichwa, na wimbo mfupi uliotengenezwa, ili uone jinsi kila kitu kinavyofaa kabla ya kupakia sanaa yako mwenyewe.',
+      addDrawingsLabel: '+ Ongeza michoro (picha au michoro iliyochanganuliwa, kwa mpangilio)',
+      addDrawingsHint: 'Ongeza nyingi upendavyo. Panga upya kwa mishale, weka muda wa kila moja kubaki kwenye skrini, au ondoa moja.',
+      framesEmptyText: 'Hakuna michoro iliyoongezwa bado.',
+      motionStyleHeading: 'Mwendo na mtindo',
+      animationStyleLabel: 'Mtindo wa uhuishaji',
+      modeKenburns: 'Mwendo na ukuzaji wa polepole (Ken Burns)',
+      modeCuts: 'Mikato rahisi (bila mwendo)',
+      modeFlipbook: 'Kitabu cha kugeuza / uhuishaji wa kusimama (fremu za haraka)',
+      transitionLabel: 'Mpito kati ya michoro',
+      transitionCrossfade: 'Mchanganyiko wa kufifia',
+      transitionSlide: 'Kuteleza',
+      transitionHardCut: 'Kukatika moja kwa moja',
+      flipbookSpeedLabel: 'Kasi ya kitabu cha kugeuza (fremu kwa sekunde)',
+      loopCountLabel: 'Rudia mfuatano mara hii nyingi',
+      aspectLabel: 'Uwiano wa vipimo',
+      aspect16x9: '16:9 mlalo — YouTube ya kawaida',
+      aspect9x16: '9:16 wima — YouTube Shorts / Reels',
+      aspect1x1: '1:1 mraba',
+      titleCardHeading: 'Kadi ya kichwa (hiari)',
+      showTitleScreenLabel: 'Onyesha skrini ya kichwa kwanza',
+      titleLabel: 'Kichwa',
+      titlePlaceholder: 'mfano: Safari Yangu ya Joka',
+      subtitleLabel: 'Kichwa kidogo (hiari)',
+      subtitlePlaceholder: 'mfano: Imechorwa na Alex, miaka 8',
+      secondsOnScreenLabel: 'Sekunde kwenye skrini',
+      captionHeading: 'Maandishi ya juu (hiari)',
+      captionIntroHint: 'Ongeza mistari ya maandishi inayoonekana juu ya video — inafaa kwa nukuu, manukuu, au sifa.',
+      captionTextLabel: 'Maandishi',
+      captionTextPlaceholder: 'mfano: Amini katika nafsi yako',
+      captionStartLabel: 'Huanza saa (s)',
+      captionDurationLabel: 'Muda (s)',
+      captionPositionLabel: 'Nafasi',
+      positionBottom: 'Chini',
+      positionMiddle: 'Katikati',
+      positionTop: 'Juu',
+      addCaptionBtnLabel: '+ Ongeza maandishi ya juu',
+      captionsEmptyText: 'Hakuna maandishi ya juu yaliyoongezwa.',
+      soundClipsHeading: 'Klipu za sauti (hiari)',
+      soundClipsIntroHint: 'Ongeza usimulizi au muziki wako mwenyewe — pakia klipu za sauti ulizoshatengeneza mwenyewe, au rekodi usimulizi moja kwa moja. Ongeza nyingi upendavyo, na weka wakati wa kuanza kwa kila moja.',
+      uploadClipsLabel: '+ Pakia klipu',
+      recordClipLabel: '🎙️ Rekodi klipu',
+      stockTrackLabel: 'Au tumia wimbo wa hisa uliotengenezwa',
+      stockCheerful: '🎉 Wa furaha',
+      stockCalm: '🌙 Wa utulivu',
+      stockPlayful: '🎈 Wa kuchezacheza',
+      stockCinematic: '🎬 Wa kisinema',
+      stockHintHtml: 'Mizunguko fupi ya asili ya ala inayotengenezwa papo hapo, moja kwa moja kwenye kivinjari chako — bure kutumia, hauhitaji kutaja chanzo, hakuna faili za kupakua kwanza. Unataka udhibiti zaidi wa hali/mwendo/urefu? Jaribu <a href="music-forge.html" style="color:var(--navy);text-decoration:underline;">Music Forge</a> na upakie matokeo hapa kama klipu.',
+      soundClipsEmptyText: 'Hakuna klipu za sauti zilizoongezwa — video itakuwa kimya isipokuwa uongeze moja.',
+      renderBtnLabel: '🎬 Toa video',
+      previewTitle: 'VIDEO FORGE — MUONEKANO WA MOJA KWA MOJA',
+      statusNotStarted: 'HAIJAANZA',
+      stageEmptyStrong: 'Hakuna cha kuhakiki bado.',
+      stageEmptyText: 'Ongeza mchoro mmoja angalau upande wa kushoto, kisha bofya Cheza hakikisho au Toa video.',
+      progressRendering: 'Inatoa…',
+      playPreviewLabel: '▶ Cheza hakikisho',
+      stopPreviewLabel: '■ Simamisha hakikisho',
+      cancelRenderLabel: '✕ Ghairi utoaji',
+      downloadVideoLabel: '⬇ Pakua video (.webm)',
+      renderDisclaimerHtml: 'Utoaji hufanyika kwa wakati halisi kwenye kivinjari chako (video ya sekunde 30 huchukua sekunde 30 hivi kutoa) — hakuna kinachopakiwa popote isipokuwa utumie kitufe cha YouTube hapa chini. Vivinjari vingi vya kompyuta (Chrome, Edge, Firefox) vinaunga mkono hili; msaada wa Safari ni mdogo. Umetengeneza zaidi ya video moja kwa njia hii? Ziunganishe (na uongeze muziki zaidi) katika <a href="merge-forge.html" style="color:var(--line-cyan);">Merge Forge</a>. Unataka picha ya watu izungumze kikweli badala ya kusonga na kukuza tu? Jaribu <a href="talk-forge.html" style="color:var(--line-cyan);">Talk Forge</a>.',
+      ytHeading: 'Pakia moja kwa moja kwenye YouTube',
+      ytClientIdLabel: 'Kitambulisho chako cha Mteja wa Google OAuth',
+      ytClientIdHint: 'Hiki ni kitambulisho cha umma cha mradi wako mwenyewe wa Google Cloud, si siri — angalia hatua za usanidi hapa chini. Video Forge hukituma tu kwa Google, kamwe si mahali pengine popote.',
+      connectGoogleLabel: 'Unganisha akaunti ya Google',
+      ytConnectedText: '✓ Umeunganishwa na akaunti yako ya Google.',
+      ytTitleLabel: 'Kichwa cha video',
+      ytTitlePlaceholder: 'Safari Yangu ya Joka',
+      ytDescLabel: 'Maelezo',
+      ytDescPlaceholder: 'Imetengenezwa na Video Forge kutoka michoro yangu mwenyewe.',
+      ytTagsLabel: 'Lebo (zilizotenganishwa na koma)',
+      ytTagsPlaceholder: 'mchoro, uhuishaji, sanaa ya watoto',
+      ytPrivacyLabel: 'Faragha',
+      privacyPrivate: 'Faragha',
+      privacyUnlisted: 'Isiyoorodheshwa',
+      privacyPublic: 'Ya umma',
+      ytCategoryLabel: 'Jamii',
+      categoryFilmAnimation: 'Filamu na Uhuishaji',
+      categoryEntertainment: 'Burudani',
+      categoryPeople: 'Watu na Blogu',
+      categoryEducation: 'Elimu',
+      categoryHowto: 'Jinsi ya kufanya na mtindo',
+      uploadToYoutubeLabel: 'Pakia kwenye YouTube',
+      ytUploadHint: 'Toa video kwanza, kisha uipakie hapa. Upakiaji huenda moja kwa moja kutoka kwenye kivinjari chako hadi Google ukitumia akaunti yako mwenyewe — chombo hiki hakioni au kuhifadhi video au kuingia kwako kamwe.',
+      ytSetupSummary: 'Usanidi wa mara moja: pata Kitambulisho cha Mteja wa Google OAuth (bofya kupanua)',
+      ytSetupStepsHtml: '<li>Nenda kwenye <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com" target="_blank" rel="noopener">Google Cloud Console</a>, unda (au chagua) mradi, na uwezeshe <strong>YouTube Data API v3</strong>.</li><li>Chini ya <strong>APIs & Services → OAuth consent screen</strong>, isanidi kama "External", ongeza wigo wa <code>youtube.upload</code>, na uongeze akaunti yako mwenyewe ya Google chini ya "Test users" (hii inaepuka kuhitaji ukaguzi kamili wa uthibitishaji wa programu wa Google, kwa kuwa wewe tu ndiye utakayeitumia).</li><li>Chini ya <strong>APIs & Services → Credentials</strong>, unda <strong>Kitambulisho cha Mteja wa OAuth</strong> cha aina "Programu ya wavuti". Ongeza URL hasa inayoendesha ukurasa huu (mfano <code>https://your-username.github.io</code>) chini ya "Authorized JavaScript origins".</li><li>Nakili Kitambulisho cha Mteja kilichotengenezwa (kinaishia na <code>.apps.googleusercontent.com</code>) kwenye sehemu iliyo hapo juu.</li><li>Bofya "Unganisha akaunti ya Google" na ukubali ufikiaji — Google itaonya kwamba programu haijathibitishwa, ambayo ni jambo la kawaida kwa mradi wa kibinafsi; endelea kama mtumiaji wa jaribio uliyemwongeza.</li>',
+      ytSetupFallbackHtml: 'Ikiwa hatua yoyote hapa itashindwa au kivinjari chako kikizuia upakiaji, unaweza kila wakati kurudi kwenye kupakua faili la video hapo juu na kulipakia kwa mkono kwenye <a href="https://studio.youtube.com" target="_blank" rel="noopener">studio.youtube.com</a>.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Michoro yako, muziki, na video iliyotolewa hubaki kwenye kivinjari chako — hakuna kinachopakiwa isipokuwa utumie kitufe cha YouTube, na hicho huenda moja kwa moja kutoka kivinjari chako hadi akaunti yako mwenyewe ya Google. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>',
+      secondsLabel: 'Sekunde:',
+      moveUpTitle: 'Panda juu',
+      moveDownTitle: 'Shuka chini',
+      removeTitle: 'Ondoa',
+      errorAddTextFirst: 'Andika maandishi kwanza.',
+      capFromLabel: 'Kutoka:',
+      capForLabel: 'Kwa:',
+      capAtLabel: 'Saa:',
+      removeLabel: 'Ondoa',
+      sampleNameSunny: 'Mfano: siku ya jua.png',
+      sampleNameHouse: 'Mfano: nyumba yangu.png',
+      sampleNameWaving: 'Mfano: kupunga mkono.png',
+      replaceSampleConfirm: 'Badilisha michoro yako ya sasa na mfano? Hii haiwezi kutenduliwa.',
+      loadingSampleLabel: 'Inapakia mfano…',
+      sampleTitleText: 'Safari Yangu ya Mfano',
+      sampleSubtitleText: 'Imetengenezwa na Video Forge',
+      sampleTuneName: 'Wimbo wa mfano (uliotengenezwa)',
+      errorCouldNotLoadSample: 'Imeshindwa kupakia mfano:',
+      modeHintKenburns: 'Kila mchoro husonga na kukuza polepole kwa hisia za kisinema.',
+      modeHintCuts: 'Kila mchoro hubaki kimya, kisha hukatika moja kwa moja hadi unaofuata.',
+      modeHintFlipbook: 'Michoro hupita haraka kama kitabu cha kugeuza kwa mkono au mzunguko wa uhuishaji wa kusimama — nzuri kwa mfuatano mfupi wa uhuishaji.',
+      soundReadErrorPrefix: 'Imeshindwa kusoma',
+      recordedNarrationPrefix: 'Usimulizi uliorekodiwa',
+      recordProcessErrorPrefix: 'Imeshindwa kuchakata klipu iliyorekodiwa:',
+      micErrorPrefix: 'Imeshindwa kufikia maikrofoni yako:',
+      stopRecordingLabel: '⏹ Simamisha kurekodi',
+      clipTypeLabel: 'Aina:',
+      clipTypeMusic: 'Muziki',
+      clipTypeNarration: 'Usimulizi / hotuba',
+      clipTypeSfx: 'Athari za sauti',
+      clipStartsAtLabel: 'Huanza saa:',
+      clipVolLabel: 'Sauti:',
+      clipLoopLabel: 'Rudia',
+      generatedSuffix: 'umetengenezwa',
+      stockGeneratingLabel: 'Inatengeneza…',
+      stockGenerateErrorPrefix: 'Imeshindwa kutengeneza wimbo huo:',
+      errorAddDrawingFirst: 'Ongeza mchoro mmoja angalau kwanza.',
+      errorNothingToPreview: 'Hakuna cha kuhakiki.',
+      statusPreviewing: 'INAHAKIKI',
+      statusPreviewDone: 'HAKIKISHO LIMEKAMILIKA',
+      statusStopped: 'IMESIMAMA',
+      errorNoRecordingSupport: 'Kivinjari chako hakiungi mkono kurekodi turubai kuwa video. Jaribu toleo jipya la Chrome, Edge, au Firefox.',
+      errorNothingToRender: 'Hakuna cha kutoa.',
+      errorNoVideoFormat: 'Hakuna muundo wa video unaotumika uliopatikana katika kivinjari hiki.',
+      statusRendering: 'INATOA',
+      statusCancelled: 'IMEGHAIRIWA',
+      statusRenderComplete: 'UTOAJI UMEKAMILIKA',
+      ytErrorSignInFailed: 'Kuingia kwa Google kumeshindwa: {error}',
+      ytErrorNoClientId: 'Bandika kwanza Kitambulisho chako cha Mteja wa Google OAuth — angalia hatua za usanidi hapa chini.',
+      ytErrorLibraryNotLoaded: 'Maktaba ya kuingia ya Google haijamaliza kupakia — subiri sekunde na ujaribu tena.',
+      ytErrorRenderFirst: 'Toa video kwanza.',
+      ytErrorConnectFirst: 'Unganisha akaunti yako ya Google kwanza.',
+      ytDefaultTitle: 'Upakiaji wa Video Forge',
+      startingUploadLabel: 'Inaanza kupakia…',
+      uploadingLabel: 'Inapakia kwenye YouTube…',
+      ytErrorRequestFailed: 'Ombi limeshindwa na hali {status}',
+      ytErrorNoUploadUrl: 'Google haikurudisha URL ya kipindi cha kupakia — kivinjari chako au kiendelezi kinaweza kuwa kinakizuia. Jaribu kupakua video na kuipakia kwa mkono kwenye studio.youtube.com badala yake.',
+      ytErrorResponseUnreadable: 'Upakiaji umekamilika lakini jibu halikuweza kusomwa.',
+      ytErrorUploadFailedStatus: 'Upakiaji umeshindwa na hali {status}: {text}',
+      ytErrorNetwork: 'Hitilafu ya mtandao imekatiza upakiaji — hii inaweza kutokea ikiwa kiendelezi cha kivinjari kinazuia maombi kwenda Google.',
+      ytErrorGeneric: 'Upakiaji umeshindwa.',
+      ytSuccessUploadedPrefix: 'Imepakiwa!',
+      ytWatchLinkLabel: 'Iangalie kwenye YouTube',
+      ytPrivacyNotePrivate: 'faragha — wewe tu ndiye unaweza kuiona',
+      savedJustNowText: 'Imehifadhiwa sasa hivi.',
+      autosaveFailedText: 'Imeshindwa kuhifadhi kiotomatiki (mradi wako unaweza kuwa mkubwa mno kwa hifadhi ya kivinjari) — kumbuka kupakua ukimaliza.',
+      draftBannerPrefix: 'Una rasimu isiyohifadhiwa kutoka',
+      draftDrawingOne: 'mchoro).',
+      draftDrawingsMany: 'michoro).',
+      loadingLabel: 'Inapakia…',
+      errorCouldNotLoadDraft: 'Imeshindwa kupakia rasimu iliyohifadhiwa:',
+      clearDraftConfirm: 'Futa rasimu iliyohifadhiwa kiotomatiki? Hii inaondoa tu nakala iliyohifadhiwa kwenye kivinjari hiki — chochote kilicho kwenye skrini kwa sasa hakiathiriwi.'
+    },
+    sv: {
+      heroSubtitle: "Ladda upp dina teckningar, välj tempo, musik och en titelskylt och rendera sedan en riktig video — direkt i webbläsaren — och ladda upp den direkt till YouTube.",
+      tourLinkText: "▶ Se en 30 sekunders rundtur bland alla verktygen (gjord med Video Forge själv)",
+      resumeDraftLabel: "↺ Fortsätt med utkastet",
+      discardLabel: "✕ Släng",
+      autosaveHintText: "Ditt arbete sparas automatiskt i den här webbläsaren medan du jobbar, så en omladdning gör inte att du förlorar det.",
+      clearDraftLinkText: "Rensa sparat utkast",
+      drawingsHeading: "Dina teckningar",
+      trySampleLabel: "▶ Prova ett exempel först",
+      trySampleHint: "Laddar 3 genererade exempelteckningar, en titelskylt och en kort genererad melodi, så att du ser hur allt hänger ihop innan du laddar upp dina egna bilder.",
+      addDrawingsLabel: "+ Lägg till teckningar (foton eller skanningar, i ordning)",
+      addDrawingsHint: "Lägg till så många du vill. Ändra ordning med pilarna, välj hur länge varje bild visas, eller ta bort en.",
+      framesEmptyText: "Inga teckningar tillagda ännu.",
+      motionStyleHeading: "Rörelse & stil",
+      animationStyleLabel: "Animationsstil",
+      modeKenburns: "Långsam panorering & zoom (Ken Burns)",
+      modeCuts: "Enkla klipp (ingen rörelse)",
+      modeFlipbook: "Blädderbok / stop-motion (snabba bildrutor)",
+      transitionLabel: "Övergång mellan teckningar",
+      transitionCrossfade: "Övertoning",
+      transitionSlide: "Glid",
+      transitionHardCut: "Hårt klipp",
+      flipbookSpeedLabel: "Blädderbokens hastighet (bildrutor per sekund)",
+      loopCountLabel: "Upprepa sekvensen så här många gånger",
+      aspectLabel: "Bildformat",
+      aspect16x9: "16:9 liggande — vanlig YouTube",
+      aspect9x16: "9:16 stående — YouTube Shorts / Reels",
+      aspect1x1: "1:1 kvadrat",
+      titleCardHeading: "Titelskylt (valfritt)",
+      showTitleScreenLabel: "Visa en titelskärm först",
+      titleLabel: "Titel",
+      titlePlaceholder: "t.ex. Mitt drakäventyr",
+      subtitleLabel: "Undertitel (valfritt)",
+      subtitlePlaceholder: "t.ex. Ritad av Alex, 8 år",
+      secondsOnScreenLabel: "Sekunder på skärmen",
+      captionHeading: "Textöverlägg (valfritt)",
+      captionIntroHint: "Lägg till textrader som visas över videon — praktiskt för citat, bildtexter eller eftertexter.",
+      captionTextLabel: "Text",
+      captionTextPlaceholder: "t.ex. Tro på dig själv",
+      captionStartLabel: "Börjar vid (s)",
+      captionDurationLabel: "Längd (s)",
+      captionPositionLabel: "Placering",
+      positionBottom: "Nederst",
+      positionMiddle: "Mitten",
+      positionTop: "Överst",
+      addCaptionBtnLabel: "+ Lägg till textöverlägg",
+      captionsEmptyText: "Inga textöverlägg tillagda.",
+      soundClipsHeading: "Ljudklipp (valfritt)",
+      soundClipsIntroHint: "Lägg till din egen berättarröst eller musik — ladda upp ljudklipp du redan gjort själv, eller spela in berättarröst direkt. Lägg till så många du vill och välj när vart och ett börjar.",
+      uploadClipsLabel: "+ Ladda upp klipp",
+      recordClipLabel: "🎙️ Spela in ett klipp",
+      stockTrackLabel: "Eller använd ett genererat bakgrundsspår",
+      stockCheerful: "🎉 Glad",
+      stockCalm: "🌙 Lugn",
+      stockPlayful: "🎈 Lekfull",
+      stockCinematic: "🎬 Filmisk",
+      stockHintHtml: "Korta, egna instrumentala loopar som skapas på plats i din webbläsare — fria att använda, ingen attribution behövs och inga filer att ladda ner först. Vill du ha mer kontroll över stämning, tempo eller längd? Prova <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge</a> och ladda upp resultatet här som ett klipp.",
+      soundClipsEmptyText: "Inga ljudklipp tillagda — videon blir tyst om du inte lägger till ett.",
+      renderBtnLabel: "🎬 Rendera video",
+      previewTitle: "VIDEO FORGE — FÖRHANDSVISNING",
+      statusNotStarted: "INTE PÅBÖRJAD",
+      stageEmptyStrong: "Inget att förhandsvisa ännu.",
+      stageEmptyText: "Lägg till minst en teckning till vänster och tryck sedan på Spela förhandsvisning eller Rendera video.",
+      progressRendering: "Renderar…",
+      playPreviewLabel: "▶ Spela förhandsvisning",
+      stopPreviewLabel: "■ Stoppa förhandsvisning",
+      cancelRenderLabel: "✕ Avbryt rendering",
+      downloadVideoLabel: "⬇ Ladda ner video (.webm)",
+      renderDisclaimerHtml: "Renderingen sker i realtid i din webbläsare (en 30 sekunders video tar ungefär 30 sekunder att rendera) — ingenting laddas upp någonstans om du inte använder YouTube-knappen nedan. De flesta webbläsare på dator (Chrome, Edge, Firefox) stöder detta; stödet i Safari är begränsat. Har du gjort fler än en video på det här sättet? Slå ihop dem (och lägg till mer musik) i <a href=\"merge-forge.html\" style=\"color:var(--line-cyan);\">Merge Forge</a>. Vill du att ett foto på personer faktiskt ska prata i stället för att bara panorera och zooma? Prova <a href=\"talk-forge.html\" style=\"color:var(--line-cyan);\">Talk Forge</a>.",
+      ytHeading: "Ladda upp direkt till YouTube",
+      ytClientIdLabel: "Ditt Google OAuth Client ID",
+      ytClientIdHint: "Det här är en offentlig identifierare för ditt eget Google Cloud-projekt, ingen hemlighet — se inställningsstegen nedan. Video Forge skickar det bara till Google, aldrig någon annanstans.",
+      connectGoogleLabel: "Anslut Google-konto",
+      ytConnectedText: "✓ Ansluten till ditt Google-konto.",
+      ytTitleLabel: "Videons titel",
+      ytTitlePlaceholder: "Mitt drakäventyr",
+      ytDescLabel: "Beskrivning",
+      ytDescPlaceholder: "Gjord med Video Forge av mina egna teckningar.",
+      ytTagsLabel: "Taggar (kommaseparerade)",
+      ytTagsPlaceholder: "teckning, animation, barnkonst",
+      ytPrivacyLabel: "Sekretess",
+      privacyPrivate: "Privat",
+      privacyUnlisted: "Olistad",
+      privacyPublic: "Offentlig",
+      ytCategoryLabel: "Kategori",
+      categoryFilmAnimation: "Film & animation",
+      categoryEntertainment: "Underhållning",
+      categoryPeople: "Människor & bloggar",
+      categoryEducation: "Utbildning",
+      categoryHowto: "Instruktioner & stil",
+      uploadToYoutubeLabel: "Ladda upp till YouTube",
+      ytUploadHint: "Rendera en video först och ladda sedan upp den här. Uppladdningen går direkt från din webbläsare till Google med ditt eget konto — verktyget ser eller sparar aldrig videon eller din inloggning.",
+      ytSetupSummary: "Engångsinställning: skaffa ett Google OAuth Client ID (klicka för att visa)",
+      ytSetupStepsHtml: "<li>Gå till <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console</a>, skapa (eller välj) ett projekt och aktivera <strong>YouTube Data API v3</strong>.</li><li>Under <strong>APIs &amp; Services → OAuth consent screen</strong>, ställ in den som \"External\", lägg till scopet <code>youtube.upload</code> och lägg till ditt eget Google-konto under \"Test users\" (då slipper du Googles fullständiga granskning av appen, eftersom bara du använder den).</li><li>Under <strong>APIs &amp; Services → Credentials</strong>, skapa ett <strong>OAuth client ID</strong> av typen \"Web application\". Lägg till den exakta adressen som den här sidan körs på (t.ex. <code>https://your-username.github.io</code>) under \"Authorized JavaScript origins\".</li><li>Kopiera det genererade Client ID:t (det slutar på <code>.apps.googleusercontent.com</code>) till fältet ovan.</li><li>Klicka på \"Anslut Google-konto\" och godkänn åtkomsten — Google varnar för att appen inte är verifierad, vilket är väntat för ett personligt projekt; klicka dig vidare som testanvändaren du lade till.</li>",
+      ytSetupFallbackHtml: "Om något steg misslyckas eller webbläsaren blockerar uppladdningen kan du alltid ladda ner videofilen ovan och ladda upp den manuellt på <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com</a>.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Dina teckningar, din musik och den renderade videon stannar i webbläsaren — ingenting laddas upp om du inte använder YouTube-knappen, och då går det direkt från din webbläsare till ditt eget Google-konto. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>",
+      secondsLabel: "Sekunder:",
+      moveUpTitle: "Flytta upp",
+      moveDownTitle: "Flytta ner",
+      removeTitle: "Ta bort",
+      errorAddTextFirst: "Skriv lite text först.",
+      capFromLabel: "Från:",
+      capForLabel: "I:",
+      capAtLabel: "Vid:",
+      removeLabel: "Ta bort",
+      sampleNameSunny: "Exempel: solig dag.png",
+      sampleNameHouse: "Exempel: mitt hus.png",
+      sampleNameWaving: "Exempel: vinkar hej.png",
+      replaceSampleConfirm: "Ersätta dina nuvarande teckningar med exemplet? Det går inte att ångra.",
+      loadingSampleLabel: "Laddar exempel…",
+      sampleTitleText: "Mitt exempeläventyr",
+      sampleSubtitleText: "Gjord med Video Forge",
+      sampleTuneName: "Exempelmelodi (genererad)",
+      errorCouldNotLoadSample: "Kunde inte ladda exemplet:",
+      modeHintKenburns: "Varje teckning panoreras och zoomas långsamt för en filmisk känsla.",
+      modeHintCuts: "Varje teckning står still och klipps sedan direkt till nästa.",
+      modeHintFlipbook: "Teckningarna blinkar förbi snabbt som en blädderbok eller en stop-motion-loop — perfekt för en kort animerad sekvens.",
+      soundReadErrorPrefix: "Kunde inte läsa",
+      recordedNarrationPrefix: "Inspelad berättarröst",
+      recordProcessErrorPrefix: "Kunde inte bearbeta det inspelade klippet:",
+      micErrorPrefix: "Kunde inte komma åt mikrofonen:",
+      stopRecordingLabel: "⏹ Stoppa inspelningen",
+      clipTypeLabel: "Typ:",
+      clipTypeMusic: "Musik",
+      clipTypeNarration: "Berättarröst / tal",
+      clipTypeSfx: "Ljudeffekt",
+      clipStartsAtLabel: "Börjar vid:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Loopa",
+      generatedSuffix: "genererat",
+      stockGeneratingLabel: "Skapar…",
+      stockGenerateErrorPrefix: "Kunde inte generera spåret:",
+      errorAddDrawingFirst: "Lägg till minst en teckning först.",
+      errorNothingToPreview: "Inget att förhandsvisa.",
+      statusPreviewing: "FÖRHANDSVISAR",
+      statusPreviewDone: "FÖRHANDSVISNING KLAR",
+      statusStopped: "STOPPAD",
+      errorNoRecordingSupport: "Din webbläsare stöder inte inspelning av canvas till video. Prova senaste Chrome, Edge eller Firefox.",
+      errorNothingToRender: "Inget att rendera.",
+      errorNoVideoFormat: "Inget videoformat som stöds hittades i den här webbläsaren.",
+      statusRendering: "RENDERAR",
+      statusCancelled: "AVBRUTEN",
+      statusRenderComplete: "RENDERING KLAR",
+      ytErrorSignInFailed: "Inloggningen hos Google misslyckades: {error}",
+      ytErrorNoClientId: "Klistra in ditt Google OAuth Client ID först — se inställningsstegen nedan.",
+      ytErrorLibraryNotLoaded: "Googles inloggningsbibliotek har inte laddats klart ännu — vänta en sekund och försök igen.",
+      ytErrorRenderFirst: "Rendera en video först.",
+      ytErrorConnectFirst: "Anslut ditt Google-konto först.",
+      ytDefaultTitle: "Uppladdning från Video Forge",
+      startingUploadLabel: "Startar uppladdningen…",
+      uploadingLabel: "Laddar upp till YouTube…",
+      ytErrorRequestFailed: "Anropet misslyckades med status {status}",
+      ytErrorNoUploadUrl: "Google returnerade ingen adress för uppladdningen — din webbläsare eller ett tillägg kan blockera den. Prova att ladda ner videon och ladda upp den manuellt på studio.youtube.com i stället.",
+      ytErrorResponseUnreadable: "Uppladdningen blev klar men svaret kunde inte läsas.",
+      ytErrorUploadFailedStatus: "Uppladdningen misslyckades med status {status}: {text}",
+      ytErrorNetwork: "Ett nätverksfel avbröt uppladdningen — det kan hända om ett webbläsartillägg blockerar anrop till Google.",
+      ytErrorGeneric: "Uppladdningen misslyckades.",
+      ytSuccessUploadedPrefix: "Uppladdad!",
+      ytWatchLinkLabel: "Titta på YouTube",
+      ytPrivacyNotePrivate: "privat — bara du kan se den",
+      savedJustNowText: "Sparat nyss.",
+      autosaveFailedText: "Kunde inte spara automatiskt (projektet kan vara för stort för webbläsarens lagring) — kom ihåg att ladda ner när du är klar.",
+      draftBannerPrefix: "Du har ett osparat utkast från",
+      draftDrawingOne: "teckning).",
+      draftDrawingsMany: "teckningar).",
+      loadingLabel: "Laddar…",
+      errorCouldNotLoadDraft: "Kunde inte ladda det sparade utkastet:",
+      clearDraftConfirm: "Rensa det automatiskt sparade utkastet? Detta tar bara bort den sparade kopian i den här webbläsaren — det som just nu visas på skärmen påverkas inte."
+    },
+    de: {
+      heroSubtitle: "Lade deine Zeichnungen hoch, füge Tempo, Musik und eine Titelkarte hinzu, render dann ein echtes Video — direkt im Browser — und lade es direkt auf YouTube hoch.",
+      tourLinkText: "▶ Sieh dir eine 30-Sekunden-Tour durch all diese Werkzeuge an (mit Video Forge selbst gemacht)",
+      resumeDraftLabel: "↺ Entwurf fortsetzen",
+      discardLabel: "✕ Verwerfen",
+      autosaveHintText: "Dein Fortschritt wird beim Arbeiten automatisch in diesem Browser gespeichert, ein Neuladen verliert ihn also nicht.",
+      clearDraftLinkText: "Gespeicherten Entwurf löschen",
+      drawingsHeading: "Deine Zeichnungen",
+      trySampleLabel: "▶ Erst ein Beispiel ausprobieren",
+      trySampleHint: "Lädt 3 erzeugte Beispielkritzeleien, eine Titelkarte und eine kurze erzeugte Melodie, damit du siehst, wie alles zusammenpasst, bevor du eigene Kunst hochlädst.",
+      addDrawingsLabel: "+ Zeichnungen hinzufügen (Fotos oder Scans, in Reihenfolge)",
+      addDrawingsHint: "Füge so viele hinzu, wie du willst. Mit den Pfeilen umsortieren, festlegen, wie lange jede auf dem Bildschirm bleibt, oder eine entfernen.",
+      framesEmptyText: "Noch keine Zeichnungen hinzugefügt.",
+      motionStyleHeading: "Bewegung & Stil",
+      animationStyleLabel: "Animationsstil",
+      modeKenburns: "Langsamer Schwenk & Zoom (Ken Burns)",
+      modeCuts: "Einfache Schnitte (ohne Bewegung)",
+      modeFlipbook: "Daumenkino / Stop-Motion (schnelle Bilder)",
+      transitionLabel: "Übergang zwischen Zeichnungen",
+      transitionCrossfade: "Überblendung",
+      transitionSlide: "Schieben",
+      transitionHardCut: "Harter Schnitt",
+      flipbookSpeedLabel: "Daumenkino-Tempo (Bilder pro Sekunde)",
+      loopCountLabel: "Die Abfolge so oft wiederholen",
+      aspectLabel: "Seitenverhältnis",
+      aspect16x9: "16:9 Querformat — Standard-YouTube",
+      aspect9x16: "9:16 Hochformat — YouTube Shorts / Reels",
+      aspect1x1: "1:1 Quadrat",
+      titleCardHeading: "Titelkarte (optional)",
+      showTitleScreenLabel: "Zuerst einen Titelbildschirm zeigen",
+      titleLabel: "Titel",
+      titlePlaceholder: "z. B. Mein Drachenabenteuer",
+      subtitleLabel: "Untertitel (optional)",
+      subtitlePlaceholder: "z. B. Gezeichnet von Alex, 8 Jahre",
+      secondsOnScreenLabel: "Sekunden auf dem Bildschirm",
+      captionHeading: "Texteinblendung (optional)",
+      captionIntroHint: "Füge Textzeilen hinzu, die über dem Video erscheinen — praktisch für Zitate, Untertitel oder Abspann.",
+      captionTextLabel: "Text",
+      captionTextPlaceholder: "z. B. Glaub an dich",
+      captionStartLabel: "Beginnt bei (s)",
+      captionDurationLabel: "Dauer (s)",
+      captionPositionLabel: "Position",
+      positionBottom: "Unten",
+      positionMiddle: "Mitte",
+      positionTop: "Oben",
+      addCaptionBtnLabel: "+ Texteinblendung hinzufügen",
+      captionsEmptyText: "Keine Texteinblendungen hinzugefügt.",
+      soundClipsHeading: "Tonclips (optional)",
+      soundClipsIntroHint: "Füge eigene Erzählung oder Musik hinzu — lade Tonclips hoch, die du schon selbst gemacht hast, oder nimm live eine Erzählung auf. Füge so viele hinzu, wie du willst, und leg fest, wann jeder beginnt.",
+      uploadClipsLabel: "+ Clip(s) hochladen",
+      recordClipLabel: "🎙️ Clip aufnehmen",
+      stockTrackLabel: "Oder einen erzeugten Stock-Track nutzen",
+      stockCheerful: "🎉 Fröhlich",
+      stockCalm: "🌙 Ruhig",
+      stockPlayful: "🎈 Verspielt",
+      stockCinematic: "🎬 Filmisch",
+      stockHintHtml: "Kurze eigene Instrumentalschleifen, vor Ort direkt in deinem Browser erzeugt — kostenlos nutzbar, ohne Namensnennung, ohne vorherigen Download. Mehr Kontrolle über Stimmung, Tempo oder Länge? Probier <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> und lade das Ergebnis hier als Clip hoch.",
+      soundClipsEmptyText: "Keine Tonclips hinzugefügt — das Video bleibt stumm, außer du fügst einen hinzu.",
+      renderBtnLabel: "🎬 Video rendern",
+      previewTitle: "VIDEO FORGE — LIVE-VORSCHAU",
+      statusNotStarted: "NICHT GESTARTET",
+      stageEmptyStrong: "Noch nichts zum Ansehen.",
+      stageEmptyText: "Füge links mindestens eine Zeichnung hinzu und drücke dann Vorschau abspielen oder Video rendern.",
+      progressRendering: "Wird gerendert…",
+      playPreviewLabel: "▶ Vorschau abspielen",
+      stopPreviewLabel: "■ Vorschau stoppen",
+      cancelRenderLabel: "✕ Rendern abbrechen",
+      downloadVideoLabel: "⬇ Video herunterladen (.webm)",
+      renderDisclaimerHtml: "Das Rendern läuft in Echtzeit in deinem Browser (ein 30-Sekunden-Video braucht etwa 30 Sekunden) — nichts wird hochgeladen, außer du nutzt den YouTube-Knopf unten. Die meisten Desktop-Browser (Chrome, Edge, Firefox) unterstützen das; Safari nur eingeschränkt. Mehrere Videos so gemacht? Kombiniere sie (und füge mehr Musik hinzu) in <a href=\"merge-forge.html\" style=\"color:var(--line-cyan);\">Merge Forge<\/a>. Soll ein Foto von Menschen wirklich sprechen statt nur zu schwenken und zu zoomen? Probier <a href=\"talk-forge.html\" style=\"color:var(--line-cyan);\">Talk Forge<\/a>.",
+      ytHeading: "Direkt auf YouTube hochladen",
+      ytClientIdLabel: "Deine Google-OAuth-Client-ID",
+      ytClientIdHint: "Das ist eine öffentliche Kennung für dein eigenes Google-Cloud-Projekt, kein Geheimnis — siehe die Einrichtungsschritte unten. Video Forge sendet sie nur an Google, nie woandershin.",
+      connectGoogleLabel: "Google-Konto verbinden",
+      ytConnectedText: "✓ Mit deinem Google-Konto verbunden.",
+      ytTitleLabel: "Videotitel",
+      ytTitlePlaceholder: "Mein Drachenabenteuer",
+      ytDescLabel: "Beschreibung",
+      ytDescPlaceholder: "Mit Video Forge aus meinen eigenen Zeichnungen gemacht.",
+      ytTagsLabel: "Tags (durch Kommas getrennt)",
+      ytTagsPlaceholder: "Zeichnung, Animation, Kinderkunst",
+      ytPrivacyLabel: "Datenschutz",
+      privacyPrivate: "Privat",
+      privacyUnlisted: "Nicht gelistet",
+      privacyPublic: "Öffentlich",
+      ytCategoryLabel: "Kategorie",
+      categoryFilmAnimation: "Film & Animation",
+      categoryEntertainment: "Unterhaltung",
+      categoryPeople: "Menschen & Blogs",
+      categoryEducation: "Bildung",
+      categoryHowto: "Praktische Tipps & Styling",
+      uploadToYoutubeLabel: "Auf YouTube hochladen",
+      ytUploadHint: "Render zuerst ein Video und lade es dann hier hoch. Uploads gehen direkt von deinem Browser über dein eigenes Konto zu Google — dieses Werkzeug sieht oder speichert weder das Video noch deine Anmeldung.",
+      ytSetupSummary: "Einmalige Einrichtung: eine Google-OAuth-Client-ID besorgen (zum Aufklappen klicken)",
+      ytSetupStepsHtml: "<li>Öffne die <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, erstelle (oder wähle) ein Projekt und aktiviere die <strong>YouTube Data API v3<\/strong>.<\/li><li>Richte unter <strong>APIs &amp; Dienste → OAuth-Zustimmungsbildschirm<\/strong> den Typ \"Extern\" ein, füge den Bereich <code>youtube.upload<\/code> hinzu und trage dein eigenes Google-Konto unter \"Testnutzer\" ein (so entfällt Googles vollständige App-Überprüfung, da nur du es nutzt).<\/li><li>Erstelle unter <strong>APIs &amp; Dienste → Anmeldedaten<\/strong> eine <strong>OAuth-Client-ID<\/strong> vom Typ \"Webanwendung\". Füge die genaue URL, unter der diese Seite läuft (z. B. <code>https://your-username.github.io<\/code>), unter \"Autorisierte JavaScript-Quellen\" hinzu.<\/li><li>Kopiere die erzeugte Client-ID (sie endet auf <code>.apps.googleusercontent.com<\/code>) in das Feld oben.<\/li><li>Klicke auf \"Google-Konto verbinden\" und erlaube den Zugriff — Google warnt, dass die App nicht überprüft ist; das ist bei einem privaten Projekt normal. Klicke dich als der hinzugefügte Testnutzer durch.<\/li>",
+      ytSetupFallbackHtml: "Wenn hier ein Schritt fehlschlägt oder dein Browser den Upload blockiert, kannst du jederzeit die Videodatei oben herunterladen und sie manuell auf <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a> hochladen.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Deine Zeichnungen, Musik und das gerenderte Video bleiben in deinem Browser — nichts wird hochgeladen, außer du nutzt den YouTube-Knopf, und das geht direkt von deinem Browser zu deinem eigenen Google-Konto. <a href=\"feedback.html\">Fehler gefunden oder eine Idee? Feedback senden →<\/a>",
+      secondsLabel: "Sekunden:",
+      moveUpTitle: "Nach oben",
+      moveDownTitle: "Nach unten",
+      removeTitle: "Entfernen",
+      errorAddTextFirst: "Gib zuerst etwas Text ein.",
+      capFromLabel: "Von:",
+      capForLabel: "Für:",
+      capAtLabel: "Bei:",
+      removeLabel: "Entfernen",
+      sampleNameSunny: "Beispiel: sonniger Tag.png",
+      sampleNameHouse: "Beispiel: mein Haus.png",
+      sampleNameWaving: "Beispiel: winkt hallo.png",
+      replaceSampleConfirm: "Deine aktuellen Zeichnungen durch das Beispiel ersetzen? Das lässt sich nicht rückgängig machen.",
+      loadingSampleLabel: "Beispiel wird geladen…",
+      sampleTitleText: "Mein Beispielabenteuer",
+      sampleSubtitleText: "Gemacht mit Video Forge",
+      sampleTuneName: "Beispielmelodie (erzeugt)",
+      errorCouldNotLoadSample: "Das Beispiel konnte nicht geladen werden:",
+      modeHintKenburns: "Jede Zeichnung schwenkt und zoomt langsam für einen filmischen Eindruck.",
+      modeHintCuts: "Jede Zeichnung steht still und schneidet dann direkt zur nächsten.",
+      modeHintFlipbook: "Zeichnungen blitzen schnell vorbei wie ein Daumenkino oder eine Stop-Motion-Schleife — toll für eine kurze animierte Sequenz.",
+      soundReadErrorPrefix: "Konnte nicht lesen:",
+      recordedNarrationPrefix: "Aufgenommene Erzählung",
+      recordProcessErrorPrefix: "Der aufgenommene Clip konnte nicht verarbeitet werden:",
+      micErrorPrefix: "Kein Zugriff auf dein Mikrofon:",
+      stopRecordingLabel: "⏹ Aufnahme stoppen",
+      clipTypeLabel: "Art:",
+      clipTypeMusic: "Musik",
+      clipTypeNarration: "Erzählung / Sprache",
+      clipTypeSfx: "Soundeffekt",
+      clipStartsAtLabel: "Beginnt bei:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Schleife",
+      generatedSuffix: "erzeugt",
+      stockGeneratingLabel: "Wird erzeugt…",
+      stockGenerateErrorPrefix: "Dieser Track konnte nicht erzeugt werden:",
+      errorAddDrawingFirst: "Füge zuerst mindestens eine Zeichnung hinzu.",
+      errorNothingToPreview: "Nichts zum Ansehen.",
+      statusPreviewing: "VORSCHAU LÄUFT",
+      statusPreviewDone: "VORSCHAU FERTIG",
+      statusStopped: "GESTOPPT",
+      errorNoRecordingSupport: "Dein Browser kann Canvas nicht als Video aufnehmen. Probiere die neueste Version von Chrome, Edge oder Firefox.",
+      errorNothingToRender: "Nichts zum Rendern.",
+      errorNoVideoFormat: "In diesem Browser wurde kein unterstütztes Videoformat gefunden.",
+      statusRendering: "WIRD GERENDERT",
+      statusCancelled: "ABGEBROCHEN",
+      statusRenderComplete: "RENDERN FERTIG",
+      ytErrorSignInFailed: "Google-Anmeldung fehlgeschlagen: {error}",
+      ytErrorNoClientId: "Füge zuerst deine Google-OAuth-Client-ID ein — siehe die Einrichtungsschritte unten.",
+      ytErrorLibraryNotLoaded: "Googles Anmeldebibliothek ist noch nicht fertig geladen — warte kurz und versuche es erneut.",
+      ytErrorRenderFirst: "Render zuerst ein Video.",
+      ytErrorConnectFirst: "Verbinde zuerst dein Google-Konto.",
+      ytDefaultTitle: "Upload aus Video Forge",
+      startingUploadLabel: "Upload wird gestartet…",
+      uploadingLabel: "Wird auf YouTube hochgeladen…",
+      ytErrorRequestFailed: "Anfrage mit Status {status} fehlgeschlagen",
+      ytErrorNoUploadUrl: "Google hat keine Upload-Sitzungs-URL zurückgegeben — dein Browser oder eine Erweiterung blockiert sie eventuell. Lade das Video stattdessen herunter und lade es manuell auf studio.youtube.com hoch.",
+      ytErrorResponseUnreadable: "Upload abgeschlossen, aber die Antwort konnte nicht gelesen werden.",
+      ytErrorUploadFailedStatus: "Upload mit Status {status} fehlgeschlagen: {text}",
+      ytErrorNetwork: "Ein Netzwerkfehler hat den Upload unterbrochen — das kann passieren, wenn eine Browser-Erweiterung Anfragen an Google blockiert.",
+      ytErrorGeneric: "Upload fehlgeschlagen.",
+      ytSuccessUploadedPrefix: "Hochgeladen!",
+      ytWatchLinkLabel: "Auf YouTube ansehen",
+      ytPrivacyNotePrivate: "privat — nur du kannst es sehen",
+      savedJustNowText: "Gerade gespeichert.",
+      autosaveFailedText: "Automatisches Speichern fehlgeschlagen (dein Projekt ist vielleicht zu groß für den Browserspeicher) — denk daran, es am Ende herunterzuladen.",
+      draftBannerPrefix: "Du hast einen ungespeicherten Entwurf von",
+      draftDrawingOne: "Zeichnung).",
+      draftDrawingsMany: "Zeichnungen).",
+      loadingLabel: "Wird geladen…",
+      errorCouldNotLoadDraft: "Der gespeicherte Entwurf konnte nicht geladen werden:",
+      clearDraftConfirm: "Den automatisch gespeicherten Entwurf löschen? Das entfernt nur die gespeicherte Kopie in diesem Browser — was gerade auf dem Bildschirm ist, bleibt unberührt."
+    },
+    pt: {
+      heroSubtitle: "Envie seus desenhos, adicione ritmo, música e cartela de título, renderize um vídeo de verdade — direto no navegador — e envie direto ao YouTube.",
+      tourLinkText: "▶ Veja um tour de 30 segundos por todas estas ferramentas (feito com o próprio Video Forge)",
+      resumeDraftLabel: "↺ Retomar rascunho",
+      discardLabel: "✕ Descartar",
+      autosaveHintText: "Seu progresso é salvo automaticamente neste navegador enquanto você trabalha, então recarregar não faz perder.",
+      clearDraftLinkText: "Apagar rascunho salvo",
+      drawingsHeading: "Seus desenhos",
+      trySampleLabel: "▶ Experimente um exemplo primeiro",
+      trySampleHint: "Carrega 3 rabiscos de exemplo gerados, uma cartela de título e uma melodia curta gerada, para você ver como tudo se encaixa antes de enviar sua arte.",
+      addDrawingsLabel: "+ Adicionar desenhos (fotos ou digitalizações, em ordem)",
+      addDrawingsHint: "Adicione quantos quiser. Reordene com as setas, defina quanto tempo cada um fica na tela, ou remova um.",
+      framesEmptyText: "Nenhum desenho adicionado ainda.",
+      motionStyleHeading: "Movimento e estilo",
+      animationStyleLabel: "Estilo de animação",
+      modeKenburns: "Pan e zoom lentos (Ken Burns)",
+      modeCuts: "Cortes simples (sem movimento)",
+      modeFlipbook: "Flipbook / stop-motion (quadros rápidos)",
+      transitionLabel: "Transição entre desenhos",
+      transitionCrossfade: "Dissolver",
+      transitionSlide: "Deslizar",
+      transitionHardCut: "Corte seco",
+      flipbookSpeedLabel: "Velocidade do flipbook (quadros por segundo)",
+      loopCountLabel: "Repetir a sequência esse número de vezes",
+      aspectLabel: "Proporção",
+      aspect16x9: "16:9 horizontal — YouTube padrão",
+      aspect9x16: "9:16 vertical — YouTube Shorts / Reels",
+      aspect1x1: "1:1 quadrado",
+      titleCardHeading: "Cartela de título (opcional)",
+      showTitleScreenLabel: "Mostrar uma tela de título primeiro",
+      titleLabel: "Título",
+      titlePlaceholder: "ex.: Minha aventura com o dragão",
+      subtitleLabel: "Subtítulo (opcional)",
+      subtitlePlaceholder: "ex.: Desenhado por Alex, 8 anos",
+      secondsOnScreenLabel: "Segundos na tela",
+      captionHeading: "Texto sobreposto (opcional)",
+      captionIntroHint: "Adicione linhas de texto que aparecem sobre o vídeo — útil para citações, legendas ou créditos.",
+      captionTextLabel: "Texto",
+      captionTextPlaceholder: "ex.: Acredite em você",
+      captionStartLabel: "Começa em (s)",
+      captionDurationLabel: "Duração (s)",
+      captionPositionLabel: "Posição",
+      positionBottom: "Embaixo",
+      positionMiddle: "Meio",
+      positionTop: "Em cima",
+      addCaptionBtnLabel: "+ Adicionar texto sobreposto",
+      captionsEmptyText: "Nenhum texto sobreposto adicionado.",
+      soundClipsHeading: "Clipes de som (opcional)",
+      soundClipsIntroHint: "Adicione sua narração ou música — envie clipes de som que você já fez, ou grave narração ao vivo. Adicione quantos quiser e defina quando cada um começa.",
+      uploadClipsLabel: "+ Enviar clipe(s)",
+      recordClipLabel: "🎙️ Gravar um clipe",
+      stockTrackLabel: "Ou use uma faixa gerada",
+      stockCheerful: "🎉 Alegre",
+      stockCalm: "🌙 Calma",
+      stockPlayful: "🎈 Brincalhona",
+      stockCinematic: "🎬 Cinematográfico",
+      stockHintHtml: "Loops instrumentais originais e curtos gerados na hora, direto no seu navegador — grátis para usar, sem crédito, sem baixar nada antes. Quer mais controle sobre clima, ritmo ou duração? Experimente o <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> e envie o resultado aqui como clipe.",
+      soundClipsEmptyText: "Nenhum clipe de som adicionado — o vídeo fica mudo a menos que você adicione um.",
+      renderBtnLabel: "🎬 Renderizar vídeo",
+      previewTitle: "VIDEO FORGE — PRÉVIA AO VIVO",
+      statusNotStarted: "NÃO INICIADO",
+      stageEmptyStrong: "Nada para prévia ainda.",
+      stageEmptyText: "Adicione pelo menos um desenho à esquerda e aperte Reproduzir prévia ou Renderizar vídeo.",
+      progressRendering: "Renderizando…",
+      playPreviewLabel: "▶ Reproduzir prévia",
+      stopPreviewLabel: "■ Parar prévia",
+      cancelRenderLabel: "✕ Cancelar renderização",
+      downloadVideoLabel: "⬇ Baixar vídeo (.webm)",
+      renderDisclaimerHtml: "A renderização acontece em tempo real no seu navegador (um vídeo de 30 segundos leva uns 30 segundos) — nada é enviado a menos que você use o botão do YouTube abaixo. A maioria dos navegadores de computador (Chrome, Edge, Firefox) suporta; o Safari tem suporte limitado. Fez mais de um vídeo assim? Junte todos (e adicione mais música) no <a href=\"merge-forge.html\" style=\"color:var(--line-cyan);\">Merge Forge<\/a>. Quer que uma foto de pessoas fale de verdade em vez de só pan e zoom? Experimente o <a href=\"talk-forge.html\" style=\"color:var(--line-cyan);\">Talk Forge<\/a>.",
+      ytHeading: "Enviar direto para o YouTube",
+      ytClientIdLabel: "Seu ID de cliente OAuth do Google",
+      ytClientIdHint: "É um identificador público do seu próprio projeto no Google Cloud, não um segredo — veja os passos de configuração abaixo. O Video Forge só o envia ao Google, nunca a outro lugar.",
+      connectGoogleLabel: "Conectar conta do Google",
+      ytConnectedText: "✓ Conectado à sua conta do Google.",
+      ytTitleLabel: "Título do vídeo",
+      ytTitlePlaceholder: "Minha aventura com o dragão",
+      ytDescLabel: "Descrição",
+      ytDescPlaceholder: "Feito com o Video Forge a partir dos meus desenhos.",
+      ytTagsLabel: "Tags (separadas por vírgula)",
+      ytTagsPlaceholder: "desenho, animação, arte infantil",
+      ytPrivacyLabel: "Privacidade",
+      privacyPrivate: "Privado",
+      privacyUnlisted: "Não listado",
+      privacyPublic: "Público",
+      ytCategoryLabel: "Categoria",
+      categoryFilmAnimation: "Filmes e animação",
+      categoryEntertainment: "Entretenimento",
+      categoryPeople: "Pessoas e blogs",
+      categoryEducation: "Educação",
+      categoryHowto: "Guias e estilo",
+      uploadToYoutubeLabel: "Enviar para o YouTube",
+      ytUploadHint: "Renderize um vídeo primeiro e depois envie aqui. Os envios vão direto do seu navegador ao Google com sua própria conta — esta ferramenta nunca vê nem guarda o vídeo ou seu login.",
+      ytSetupSummary: "Configuração única: obtenha um ID de cliente OAuth do Google (clique para expandir)",
+      ytSetupStepsHtml: "<li>Acesse o <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, crie (ou escolha) um projeto e ative a <strong>YouTube Data API v3<\/strong>.<\/li><li>Em <strong>APIs e serviços → Tela de consentimento OAuth<\/strong>, configure como \"Externo\", adicione o escopo <code>youtube.upload<\/code> e adicione sua própria conta do Google em \"Usuários de teste\" (isso evita a revisão completa de verificação de apps do Google, já que só você vai usar).<\/li><li>Em <strong>APIs e serviços → Credenciais<\/strong>, crie um <strong>ID do cliente OAuth<\/strong> do tipo \"Aplicativo da Web\". Adicione o URL exato em que esta página está rodando (ex.: <code>https://your-username.github.io<\/code>) em \"Origens JavaScript autorizadas\".<\/li><li>Copie o ID do cliente gerado (termina em <code>.apps.googleusercontent.com<\/code>) para o campo acima.<\/li><li>Clique em \"Conectar conta do Google\" e aprove o acesso — o Google vai avisar que o app não é verificado, o que é esperado para um projeto pessoal; continue como o usuário de teste que você adicionou.<\/li>",
+      ytSetupFallbackHtml: "Se algum passo falhar ou seu navegador bloquear o envio, você sempre pode baixar o arquivo de vídeo acima e enviá-lo manualmente em <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a>.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Seus desenhos, música e vídeo renderizado ficam no seu navegador — nada é enviado a menos que você use o botão do YouTube, e isso vai direto do seu navegador para sua própria conta Google. <a href=\"feedback.html\">Achou um bug ou tem uma ideia? Envie feedback →<\/a>",
+      secondsLabel: "Segundos:",
+      moveUpTitle: "Mover para cima",
+      moveDownTitle: "Mover para baixo",
+      removeTitle: "Remover",
+      errorAddTextFirst: "Digite algum texto primeiro.",
+      capFromLabel: "De:",
+      capForLabel: "Por:",
+      capAtLabel: "Em:",
+      removeLabel: "Remover",
+      sampleNameSunny: "Exemplo: dia de sol.png",
+      sampleNameHouse: "Exemplo: minha casa.png",
+      sampleNameWaving: "Exemplo: dando tchau.png",
+      replaceSampleConfirm: "Substituir seus desenhos atuais pelo exemplo? Isso não pode ser desfeito.",
+      loadingSampleLabel: "Carregando exemplo…",
+      sampleTitleText: "Minha aventura de exemplo",
+      sampleSubtitleText: "Feito com o Video Forge",
+      sampleTuneName: "Melodia de exemplo (gerada)",
+      errorCouldNotLoadSample: "Não foi possível carregar o exemplo:",
+      modeHintKenburns: "Cada desenho faz pan e zoom devagar para um ar de cinema.",
+      modeHintCuts: "Cada desenho fica parado e corta direto para o próximo.",
+      modeHintFlipbook: "Os desenhos passam rápido como um flipbook folheado à mão ou um loop de stop-motion — ótimo para uma sequência animada curta.",
+      soundReadErrorPrefix: "Não foi possível ler",
+      recordedNarrationPrefix: "Narração gravada",
+      recordProcessErrorPrefix: "Não foi possível processar o clipe gravado:",
+      micErrorPrefix: "Não foi possível acessar seu microfone:",
+      stopRecordingLabel: "⏹ Parar gravação",
+      clipTypeLabel: "Tipo:",
+      clipTypeMusic: "Música",
+      clipTypeNarration: "Narração / fala",
+      clipTypeSfx: "Efeito sonoro",
+      clipStartsAtLabel: "Começa em:",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Repetir",
+      generatedSuffix: "gerada",
+      stockGeneratingLabel: "Gerando…",
+      stockGenerateErrorPrefix: "Não foi possível gerar essa faixa:",
+      errorAddDrawingFirst: "Adicione pelo menos um desenho primeiro.",
+      errorNothingToPreview: "Nada para prévia.",
+      statusPreviewing: "PRÉVIA EM ANDAMENTO",
+      statusPreviewDone: "PRÉVIA CONCLUÍDA",
+      statusStopped: "PARADO",
+      errorNoRecordingSupport: "Seu navegador não suporta gravar o canvas em vídeo. Experimente a versão mais recente do Chrome, Edge ou Firefox.",
+      errorNothingToRender: "Nada para renderizar.",
+      errorNoVideoFormat: "Nenhum formato de vídeo suportado foi encontrado neste navegador.",
+      statusRendering: "RENDERIZANDO",
+      statusCancelled: "CANCELADO",
+      statusRenderComplete: "RENDERIZAÇÃO CONCLUÍDA",
+      ytErrorSignInFailed: "Falha no login do Google: {error}",
+      ytErrorNoClientId: "Cole primeiro seu ID de cliente OAuth do Google — veja os passos de configuração abaixo.",
+      ytErrorLibraryNotLoaded: "A biblioteca de login do Google ainda não terminou de carregar — espere um segundo e tente de novo.",
+      ytErrorRenderFirst: "Renderize um vídeo primeiro.",
+      ytErrorConnectFirst: "Conecte sua conta do Google primeiro.",
+      ytDefaultTitle: "Envio do Video Forge",
+      startingUploadLabel: "Iniciando o envio…",
+      uploadingLabel: "Enviando para o YouTube…",
+      ytErrorRequestFailed: "A solicitação falhou com status {status}",
+      ytErrorNoUploadUrl: "O Google não retornou um URL de sessão de envio — seu navegador ou uma extensão pode estar bloqueando. Tente baixar o vídeo e enviá-lo manualmente em studio.youtube.com.",
+      ytErrorResponseUnreadable: "Envio concluído, mas a resposta não pôde ser lida.",
+      ytErrorUploadFailedStatus: "O envio falhou com status {status}: {text}",
+      ytErrorNetwork: "Um erro de rede interrompeu o envio — isso pode acontecer se uma extensão do navegador bloquear solicitações ao Google.",
+      ytErrorGeneric: "O envio falhou.",
+      ytSuccessUploadedPrefix: "Enviado!",
+      ytWatchLinkLabel: "Assistir no YouTube",
+      ytPrivacyNotePrivate: "privado — só você pode ver",
+      savedJustNowText: "Salvo agora.",
+      autosaveFailedText: "Não foi possível salvar automaticamente (o projeto pode ser grande demais para o armazenamento do navegador) — lembre de baixar quando terminar.",
+      draftBannerPrefix: "Você tem um rascunho não salvo de",
+      draftDrawingOne: "desenho).",
+      draftDrawingsMany: "desenhos).",
+      loadingLabel: "Carregando…",
+      errorCouldNotLoadDraft: "Não foi possível carregar o rascunho salvo:",
+      clearDraftConfirm: "Apagar o rascunho salvo automaticamente? Isso só remove a cópia salva neste navegador — o que está na tela não muda."
+    },
+    fr: {
+      heroSubtitle: "Importez vos dessins, ajoutez rythme, musique et carton titre, puis générez une vraie vidéo — dans votre navigateur — et publiez-la directement sur YouTube.",
+      tourLinkText: "▶ Regardez une visite de 30 secondes de tous ces outils (faite avec Video Forge lui-même)",
+      resumeDraftLabel: "↺ Reprendre le brouillon",
+      discardLabel: "✕ Abandonner",
+      autosaveHintText: "Votre progression s'enregistre automatiquement dans ce navigateur pendant que vous travaillez, donc un rechargement ne la perd pas.",
+      clearDraftLinkText: "Effacer le brouillon enregistré",
+      drawingsHeading: "Vos dessins",
+      trySampleLabel: "▶ Essayez d'abord un exemple",
+      trySampleHint: "Charge 3 gribouillis d'exemple générés, un carton titre et un court air généré, pour voir comment tout s'assemble avant d'importer vos dessins.",
+      addDrawingsLabel: "+ Ajouter des dessins (photos ou scans, dans l'ordre)",
+      addDrawingsHint: "Ajoutez-en autant que vous voulez. Réordonnez avec les flèches, réglez la durée d'affichage de chacun, ou supprimez-en un.",
+      framesEmptyText: "Aucun dessin ajouté pour l'instant.",
+      motionStyleHeading: "Mouvement et style",
+      animationStyleLabel: "Style d'animation",
+      modeKenburns: "Panoramique et zoom lents (Ken Burns)",
+      modeCuts: "Coupes simples (sans mouvement)",
+      modeFlipbook: "Folioscope / stop-motion (images rapides)",
+      transitionLabel: "Transition entre les dessins",
+      transitionCrossfade: "Fondu enchaîné",
+      transitionSlide: "Glisser",
+      transitionHardCut: "Coupe franche",
+      flipbookSpeedLabel: "Vitesse du folioscope (images par seconde)",
+      loopCountLabel: "Répéter la séquence ce nombre de fois",
+      aspectLabel: "Format d'image",
+      aspect16x9: "16:9 paysage — YouTube standard",
+      aspect9x16: "9:16 vertical — YouTube Shorts / Reels",
+      aspect1x1: "1:1 carré",
+      titleCardHeading: "Carton titre (facultatif)",
+      showTitleScreenLabel: "Afficher d'abord un écran titre",
+      titleLabel: "Titre",
+      titlePlaceholder: "ex. : Mon aventure de dragon",
+      subtitleLabel: "Sous-titre (facultatif)",
+      subtitlePlaceholder: "ex. : Dessiné par Alex, 8 ans",
+      secondsOnScreenLabel: "Secondes à l'écran",
+      captionHeading: "Texte superposé (facultatif)",
+      captionIntroHint: "Ajoutez des lignes de texte qui apparaissent sur la vidéo — pratique pour les citations, sous-titres ou crédits.",
+      captionTextLabel: "Texte",
+      captionTextPlaceholder: "ex. : Crois en toi",
+      captionStartLabel: "Commence à (s)",
+      captionDurationLabel: "Durée (s)",
+      captionPositionLabel: "Position",
+      positionBottom: "En bas",
+      positionMiddle: "Milieu",
+      positionTop: "En haut",
+      addCaptionBtnLabel: "+ Ajouter un texte superposé",
+      captionsEmptyText: "Aucun texte superposé ajouté.",
+      soundClipsHeading: "Clips sonores (facultatif)",
+      soundClipsIntroHint: "Ajoutez votre narration ou musique — importez des clips sonores que vous avez déjà créés, ou enregistrez une narration en direct. Ajoutez-en autant que vous voulez, et réglez quand chacun commence.",
+      uploadClipsLabel: "+ Importer des clips",
+      recordClipLabel: "🎙️ Enregistrer un clip",
+      stockTrackLabel: "Ou utiliser une piste générée",
+      stockCheerful: "🎉 Joyeuse",
+      stockCalm: "🌙 Calme",
+      stockPlayful: "🎈 Espiègle",
+      stockCinematic: "🎬 Cinématographique",
+      stockHintHtml: "De courtes boucles instrumentales originales générées sur le moment, dans votre navigateur — libres d'utilisation, sans mention, sans rien télécharger avant. Envie de plus de contrôle sur l'ambiance, le tempo ou la durée ? Essayez <a href=\"music-forge.html\" style=\"color:var(--navy);text-decoration:underline;\">Music Forge<\/a> et importez le résultat ici comme clip.",
+      soundClipsEmptyText: "Aucun clip sonore ajouté — la vidéo sera muette sauf si vous en ajoutez un.",
+      renderBtnLabel: "🎬 Générer la vidéo",
+      previewTitle: "VIDEO FORGE — APERÇU EN DIRECT",
+      statusNotStarted: "NON COMMENCÉ",
+      stageEmptyStrong: "Rien à prévisualiser pour l'instant.",
+      stageEmptyText: "Ajoutez au moins un dessin à gauche, puis appuyez sur Lire l'aperçu ou Générer la vidéo.",
+      progressRendering: "Rendu en cours…",
+      playPreviewLabel: "▶ Lire l'aperçu",
+      stopPreviewLabel: "■ Arrêter l'aperçu",
+      cancelRenderLabel: "✕ Annuler le rendu",
+      downloadVideoLabel: "⬇ Télécharger la vidéo (.webm)",
+      renderDisclaimerHtml: "Le rendu se fait en temps réel dans votre navigateur (une vidéo de 30 secondes prend environ 30 secondes) — rien n'est envoyé sauf si vous utilisez le bouton YouTube ci-dessous. La plupart des navigateurs de bureau (Chrome, Edge, Firefox) le gèrent ; Safari de façon limitée. Plusieurs vidéos faites ainsi ? Combinez-les (et ajoutez de la musique) dans <a href=\"merge-forge.html\" style=\"color:var(--line-cyan);\">Merge Forge<\/a>. Envie qu'une photo de personnes parle vraiment au lieu de simplement bouger et zoomer ? Essayez <a href=\"talk-forge.html\" style=\"color:var(--line-cyan);\">Talk Forge<\/a>.",
+      ytHeading: "Envoyer directement sur YouTube",
+      ytClientIdLabel: "Votre ID client OAuth Google",
+      ytClientIdHint: "C'est un identifiant public de votre propre projet Google Cloud, pas un secret — voir les étapes de configuration ci-dessous. Video Forge ne l'envoie qu'à Google, jamais ailleurs.",
+      connectGoogleLabel: "Connecter le compte Google",
+      ytConnectedText: "✓ Connecté à votre compte Google.",
+      ytTitleLabel: "Titre de la vidéo",
+      ytTitlePlaceholder: "Mon aventure de dragon",
+      ytDescLabel: "Description",
+      ytDescPlaceholder: "Créé avec Video Forge à partir de mes propres dessins.",
+      ytTagsLabel: "Tags (séparés par des virgules)",
+      ytTagsPlaceholder: "dessin, animation, art d'enfant",
+      ytPrivacyLabel: "Confidentialité",
+      privacyPrivate: "Privée",
+      privacyUnlisted: "Non répertoriée",
+      privacyPublic: "Publique",
+      ytCategoryLabel: "Catégorie",
+      categoryFilmAnimation: "Films et animation",
+      categoryEntertainment: "Divertissement",
+      categoryPeople: "People et blogs",
+      categoryEducation: "Éducation",
+      categoryHowto: "Vie pratique et style",
+      uploadToYoutubeLabel: "Envoyer sur YouTube",
+      ytUploadHint: "Générez d'abord une vidéo, puis publiez-la ici. Les envois vont directement de votre navigateur à Google avec votre propre compte — cet outil ne voit ni ne stocke jamais la vidéo ou votre connexion.",
+      ytSetupSummary: "Configuration unique : obtenir un ID client OAuth Google (cliquez pour développer)",
+      ytSetupStepsHtml: "<li>Allez dans la <a href=\"https://console.cloud.google.com/apis/library/youtube.googleapis.com\" target=\"_blank\" rel=\"noopener\">Google Cloud Console<\/a>, créez (ou choisissez) un projet et activez la <strong>YouTube Data API v3<\/strong>.<\/li><li>Dans <strong>API et services → Écran de consentement OAuth<\/strong>, choisissez \"Externe\", ajoutez le champ d'application <code>youtube.upload<\/code> et ajoutez votre propre compte Google dans \"Utilisateurs test\" (cela évite l'examen complet de validation d'application de Google, puisque vous seul l'utiliserez).<\/li><li>Dans <strong>API et services → Identifiants<\/strong>, créez un <strong>ID client OAuth<\/strong> de type \"Application Web\". Ajoutez l'URL exacte de cette page (ex. <code>https://your-username.github.io<\/code>) dans \"Origines JavaScript autorisées\".<\/li><li>Copiez l'ID client généré (il se termine par <code>.apps.googleusercontent.com<\/code>) dans le champ ci-dessus.<\/li><li>Cliquez sur \"Connecter le compte Google\" et autorisez l'accès — Google avertira que l'application n'est pas validée, ce qui est normal pour un projet personnel ; continuez en tant qu'utilisateur test ajouté.<\/li>",
+      ytSetupFallbackHtml: "Si une étape échoue ou si votre navigateur bloque l'envoi, vous pouvez toujours télécharger le fichier vidéo ci-dessus et l'envoyer manuellement sur <a href=\"https://studio.youtube.com\" target=\"_blank\" rel=\"noopener\">studio.youtube.com<\/a>.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Vos dessins, votre musique et la vidéo générée restent dans votre navigateur — rien n'est envoyé sauf si vous utilisez le bouton YouTube, et cela va directement de votre navigateur à votre propre compte Google. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez un avis →<\/a>",
+      secondsLabel: "Secondes :",
+      moveUpTitle: "Monter",
+      moveDownTitle: "Descendre",
+      removeTitle: "Supprimer",
+      errorAddTextFirst: "Saisissez d'abord du texte.",
+      capFromLabel: "De :",
+      capForLabel: "Pendant :",
+      capAtLabel: "À :",
+      removeLabel: "Supprimer",
+      sampleNameSunny: "Exemple : journée ensoleillée.png",
+      sampleNameHouse: "Exemple : ma maison.png",
+      sampleNameWaving: "Exemple : coucou.png",
+      replaceSampleConfirm: "Remplacer vos dessins actuels par l'exemple ? C'est irréversible.",
+      loadingSampleLabel: "Chargement de l'exemple…",
+      sampleTitleText: "Mon aventure d'exemple",
+      sampleSubtitleText: "Créé avec Video Forge",
+      sampleTuneName: "Air d'exemple (généré)",
+      errorCouldNotLoadSample: "Impossible de charger l'exemple :",
+      modeHintKenburns: "Chaque dessin se déplace et zoome lentement pour un effet cinématographique.",
+      modeHintCuts: "Chaque dessin reste immobile, puis passe directement au suivant.",
+      modeHintFlipbook: "Les dessins défilent vite comme un folioscope feuilleté à la main ou une boucle en stop-motion — idéal pour une courte séquence animée.",
+      soundReadErrorPrefix: "Impossible de lire",
+      recordedNarrationPrefix: "Narration enregistrée",
+      recordProcessErrorPrefix: "Impossible de traiter le clip enregistré :",
+      micErrorPrefix: "Impossible d'accéder à votre micro :",
+      stopRecordingLabel: "⏹ Arrêter l'enregistrement",
+      clipTypeLabel: "Type :",
+      clipTypeMusic: "Musique",
+      clipTypeNarration: "Narration / voix",
+      clipTypeSfx: "Effet sonore",
+      clipStartsAtLabel: "Début à :",
+      clipVolLabel: "Vol:",
+      clipLoopLabel: "Boucle",
+      generatedSuffix: "générée",
+      stockGeneratingLabel: "Génération…",
+      stockGenerateErrorPrefix: "Impossible de générer cette piste :",
+      errorAddDrawingFirst: "Ajoutez d'abord au moins un dessin.",
+      errorNothingToPreview: "Rien à prévisualiser.",
+      statusPreviewing: "APERÇU EN COURS",
+      statusPreviewDone: "APERÇU TERMINÉ",
+      statusStopped: "ARRÊTÉ",
+      errorNoRecordingSupport: "Votre navigateur ne permet pas d'enregistrer le canvas en vidéo. Essayez la dernière version de Chrome, Edge ou Firefox.",
+      errorNothingToRender: "Rien à générer.",
+      errorNoVideoFormat: "Aucun format vidéo pris en charge dans ce navigateur.",
+      statusRendering: "RENDU EN COURS",
+      statusCancelled: "ANNULÉ",
+      statusRenderComplete: "RENDU TERMINÉ",
+      ytErrorSignInFailed: "Échec de la connexion Google : {error}",
+      ytErrorNoClientId: "Collez d'abord votre ID client OAuth Google — voir les étapes de configuration ci-dessous.",
+      ytErrorLibraryNotLoaded: "La bibliothèque de connexion de Google n'a pas fini de charger — patientez une seconde et réessayez.",
+      ytErrorRenderFirst: "Générez d'abord une vidéo.",
+      ytErrorConnectFirst: "Connectez d'abord votre compte Google.",
+      ytDefaultTitle: "Envoi depuis Video Forge",
+      startingUploadLabel: "Démarrage de l'envoi…",
+      uploadingLabel: "Envoi sur YouTube…",
+      ytErrorRequestFailed: "La requête a échoué avec le statut {status}",
+      ytErrorNoUploadUrl: "Google n'a pas renvoyé d'URL de session d'envoi — votre navigateur ou une extension la bloque peut-être. Téléchargez plutôt la vidéo et envoyez-la manuellement sur studio.youtube.com.",
+      ytErrorResponseUnreadable: "Envoi terminé, mais la réponse n'a pas pu être lue.",
+      ytErrorUploadFailedStatus: "L'envoi a échoué avec le statut {status} : {text}",
+      ytErrorNetwork: "Une erreur réseau a interrompu l'envoi — cela peut arriver si une extension du navigateur bloque les requêtes vers Google.",
+      ytErrorGeneric: "L'envoi a échoué.",
+      ytSuccessUploadedPrefix: "Envoyée !",
+      ytWatchLinkLabel: "Regarder sur YouTube",
+      ytPrivacyNotePrivate: "privée — vous seul pouvez la voir",
+      savedJustNowText: "Enregistré à l'instant.",
+      autosaveFailedText: "Enregistrement auto impossible (votre projet est peut-être trop gros pour le stockage du navigateur) — pensez à le télécharger à la fin.",
+      draftBannerPrefix: "Vous avez un brouillon non enregistré du",
+      draftDrawingOne: "dessin).",
+      draftDrawingsMany: "dessins).",
+      loadingLabel: "Chargement…",
+      errorCouldNotLoadDraft: "Impossible de charger le brouillon enregistré :",
+      clearDraftConfirm: "Effacer le brouillon enregistré automatiquement ? Cela ne supprime que la copie enregistrée dans ce navigateur — ce qui est à l'écran reste intact."
+    }
+  });
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

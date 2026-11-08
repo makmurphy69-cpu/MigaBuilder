@@ -1,0 +1,1385 @@
+<!-- Generated from /code-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="de" data-en-title="Learn Python and JavaScript by doing — Code Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8" /><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><script src="gemini-fallback.js"></script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><link rel="canonical" href="https://migabuilder.com/de/code-forge.html">
+<script src="/usage-counter.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Python und JavaScript durch Tun lernen — Code Forge | MigaBuilder</title>
+<meta name="description" content="Code Forge lehrt Python und JavaScript mit kurzen Übungen. Dein Code läuft wirklich in deinem Browser, mit sofortiger Rückmeldung, ob er stimmt, und einer KI-Erklärung.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Python und JavaScript durch Tun lernen — Code Forge">
+<meta property="og:description" content="Code Forge lehrt Python und JavaScript mit kurzen Übungen. Dein Code läuft wirklich in deinem Browser, mit sofortiger Rückmeldung, ob er stimmt, und einer KI-Erklärung.">
+<meta property="og:image" content="https://migabuilder.com/assets/og/code-forge.jpg">
+<meta property="og:url" content="https://migabuilder.com/de/code-forge.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Python und JavaScript durch Tun lernen — Code Forge">
+<meta name="twitter:description" content="Code Forge lehrt Python und JavaScript mit kurzen Übungen. Dein Code läuft wirklich in deinem Browser, mit sofortiger Rückmeldung, ob er stimmt, und einer KI-Erklärung.">
+<meta name="twitter:image" content="https://migabuilder.com/assets/og/code-forge.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script src="i18n.js"></script>
+<script src="i18n/code-forge.js"></script>
+
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --paper-dim: #E2DECE;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 26px clamp(20px, 4vw, 48px) 22px; position: relative; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35)); }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.6); }
+
+  main {
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) 1fr;
+    gap: 24px;
+    padding: 28px clamp(20px, 4vw, 48px) 56px;
+    align-items: start;
+  }
+  @media (max-width: 980px) { main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 20px 20px 24px; max-height: calc(100vh - 40px); overflow-y: auto;
+    position: sticky; top: 20px;
+  }
+  @media (max-width: 980px) { .panel { position: static; max-height: none; } }
+
+  .lang-toggle { display: flex; gap: 8px; margin-bottom: 18px; }
+  .lang-toggle button {
+    flex: 1; padding: 10px; border-radius: var(--radius); border: 1.5px solid rgba(22,32,43,0.28);
+    background: #fff; color: var(--ink); font-weight: 600; font-size: 13.5px; cursor: pointer;
+  }
+  .lang-toggle button.active { background: var(--navy); color: var(--paper); border-color: var(--navy); }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 18px 0 10px;
+  }
+  .section-title:first-of-type { margin-top: 0; }
+
+  .ex-list { display: flex; flex-direction: column; gap: 6px; }
+  .ex-item {
+    display: flex; align-items: center; gap: 10px; text-align: left; width: 100%;
+    background: #fff; border: 1px solid rgba(22,32,43,0.18); border-radius: var(--radius);
+    padding: 10px 12px; cursor: pointer; font-size: 13.5px; font-family: inherit; color: var(--ink);
+  }
+  .ex-item:hover { border-color: rgba(22,32,43,0.4); }
+  .ex-item.active { border-color: var(--navy); background: var(--paper-dim); font-weight: 600; }
+  .ex-item .ex-status { flex: none; width: 18px; text-align: center; }
+  .ex-item .ex-status.pass { color: var(--success); }
+
+  .prompt-card { background: #fff; color: var(--ink); border: 1px solid rgba(22,32,43,0.18); border-radius: var(--radius); padding: 14px 16px; margin-top: 4px; }
+  .prompt-card h2 { font-family: 'Space Grotesk', sans-serif; font-size: 15px; margin: 0 0 8px; color: var(--ink); }
+  .prompt-card p { font-size: 13.5px; line-height: 1.55; margin: 0 0 8px; color: rgba(22,32,43,0.85); }
+  .prompt-card .harness-note { font-size: 12.5px; color: rgba(22,32,43,0.72); font-style: italic; }
+
+  .hints-wrap { margin-top: 10px; }
+  .hint-line { background: rgba(226,166,59,0.14); border: 1px solid rgba(226,166,59,0.4); border-radius: var(--radius); padding: 8px 10px; font-size: 12.5px; margin-top: 6px; color: #4A3410; }
+  .hint-btn { background: transparent; border: 1px dashed rgba(22,32,43,0.35); border-radius: var(--radius); padding: 6px 10px; font-size: 12.5px; cursor: pointer; color: var(--ink); }
+  .hint-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .provider-field { margin-top: 18px; }
+  .provider-field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+  .provider-field select, .provider-field input {
+    width: 100%; font-family: 'IBM Plex Sans', sans-serif; font-size: 13.5px; padding: 8px 10px;
+    border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  .key-row { display: flex; gap: 8px; margin-top: 8px; }
+  .key-row input { flex: 1; }
+  .toggle-key { background: transparent; border: 1px solid rgba(22,32,43,0.28); border-radius: var(--radius); padding: 0 12px; font-size: 12px; cursor: pointer; }
+  .provider-hint { font-size: 12px; color: rgba(22,32,43,0.72); margin-top: 6px; line-height: 1.4; }
+
+  .table {
+    background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius);
+    padding: 18px; display: flex; flex-direction: column; min-height: 560px;
+  }
+  .title-block {
+    display: flex; justify-content: space-between; align-items: center; font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px; letter-spacing: 0.06em; color: rgba(111, 209, 224, 0.75); padding-bottom: 12px;
+    margin-bottom: 14px; border-bottom: 1px solid var(--line-cyan-dim); flex-wrap: wrap; gap: 8px;
+  }
+
+  .editor-wrap { position: relative; background: #0b1622; border: 1px solid var(--line-cyan-dim); border-radius: 3px; overflow: hidden; }
+  .editor-gutter {
+    position: absolute; left: 0; top: 0; bottom: 0; width: 40px; background: #081422; color: rgba(237,234,224,0.35);
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 21px; padding: 12px 0; text-align: right;
+    pointer-events: none; overflow: hidden; white-space: pre;
+  }
+  #codeEditor {
+    width: 100%; min-height: 260px; resize: vertical; background: transparent; color: #eceae0; border: none;
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px; line-height: 21px; padding: 12px 14px 12px 52px;
+    outline: none; tab-size: 4; direction: ltr; text-align: left;
+  }
+  /* Source code and its output read left-to-right by convention regardless
+     of UI language (the same approach GitHub and other dev tools use for
+     RTL locales) — only the surrounding instructional text mirrors. */
+  .editor-gutter { direction: ltr; }
+  .console-block pre { direction: ltr; text-align: left; }
+
+  .run-row { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .run-row button {
+    background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 14px; padding: 10px 18px; cursor: pointer;
+  }
+  .run-row button.secondary { background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); }
+  .run-row button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .result-wrap { margin-top: 16px; }
+  .result-banner { display: none; padding: 12px 16px; border-radius: var(--radius); font-weight: 600; font-size: 14px; margin-bottom: 10px; }
+  .result-banner.show { display: block; }
+  .result-banner.pass { background: rgba(78,158,115,0.18); color: #9fe8c1; border: 1px solid rgba(78,158,115,0.5); }
+  .result-banner.fail { background: rgba(216,96,74,0.18); color: #f3b7a8; border: 1px solid rgba(216,96,74,0.5); }
+  .result-banner.err { background: rgba(216,96,74,0.24); color: #ffd0c4; border: 1px solid rgba(216,96,74,0.6); }
+
+  .console-block { background: #05101a; border: 1px solid var(--line-cyan-dim); border-radius: 3px; padding: 12px 14px; }
+  .console-block h3 { font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(237,234,224,0.45); margin: 0 0 6px; }
+  .console-block pre { margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #eceae0; white-space: pre-wrap; word-break: break-word; min-height: 20px; }
+  .console-block + .console-block { margin-top: 10px; }
+
+  .explain-wrap { margin-top: 16px; }
+  .explain-box {
+    margin-top: 10px; padding: 14px 16px; background: rgba(111,209,224,0.1); border: 1px solid var(--line-cyan-dim);
+    border-radius: var(--radius); font-size: 13.5px; line-height: 1.6; color: rgba(237,234,224,0.92); display: none; white-space: pre-wrap;
+  }
+  .explain-box.show { display: block; }
+  .explain-btn { background: transparent; color: var(--line-cyan); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 9px 16px; font-size: 13.5px; cursor: pointer; }
+  .explain-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .error-box {
+    margin-top: 12px; padding: 12px 14px; background: rgba(216, 96, 74, 0.14); border: 1px solid rgba(216, 96, 74, 0.4);
+    border-radius: var(--radius); font-size: 13px; color: #f3b7a8; display: none; line-height: 1.5;
+  }
+  .error-box.show { display: block; }
+
+  footer { padding: 20px clamp(20px, 4vw, 48px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.45); border-top: 1px solid var(--line-cyan-dim); }
+  footer a { color: rgba(237, 234, 224, 0.7); }
+</style>
+<link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Muss ich Python installieren?","acceptedAnswer":{"@type":"Answer","text":"Nein. Python und JavaScript laufen beide direkt in deinem Browser."}},{"@type":"Question","name":"Ist Code Forge kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke. Die KI nutzt ein kostenloses gemeinsames Kontingent; ist es ausgelastet oder am Tageslimit, versuche es später erneut oder füge deinen eigenen Gemini-Schlüssel hinzu."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nur der Text, den du der KI gibst, verlässt dein Gerät: Er wird über den kostenlosen KI-Dienst von MigaBuilder an Googles Gemini-Modell gesendet, oder über deinen eigenen Gemini-Schlüssel, wenn du einen hinzufügst. Bearbeitung, Vorschau und Downloads passieren alle in deinem Browser."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/code-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/code-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/code-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/code-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/code-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/code-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/code-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/code-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/code-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/code-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M10 28V12L20 22L30 12V28" stroke="#EDEAE0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M28 10 L32.5 5.5" stroke="#E2A63B" stroke-width="2.4" stroke-linecap="round"/>
+    <circle cx="34" cy="4" r="2" fill="#E2A63B"/>
+  </svg>
+  <div>
+    <h1>Code Forge</h1>
+    <p data-i18n="heroSubtitle">Pick Python or JavaScript, work through short exercises, and run real code right in your browser — with instant pass/fail feedback and an optional AI explanation.</p>
+    <div data-i18n-switcher style="margin-top:10px;"></div>
+  </div>
+</header>
+
+<main>
+  <section class="panel">
+    <div class="lang-toggle">
+      <button type="button" id="langPython" class="active">🐍 Python</button>
+      <button type="button" id="langJs">⚡ JavaScript</button>
+    </div>
+
+    <div class="section-title" data-i18n="exercisesHeading">Exercises</div>
+    <div class="ex-list" id="exList"></div>
+
+    <div class="section-title" data-i18n="askAiHeading">Ask AI to explain</div>
+    <div class="provider-field">
+      <label for="provider" data-i18n="providerLabel">Provider</label>
+      <select id="provider">
+        <option value="gemini" selected data-i18n="providerGemini">Gemini — free, no key needed</option>
+        <option value="openai">OpenAI</option>
+        <option value="anthropic">Anthropic (Claude)</option>
+      </select>
+      <div class="key-row" id="apiKeyField" style="display:none;">
+        <input type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+        <button type="button" class="toggle-key" id="toggleKey">Show</button>
+      </div>
+      <p class="provider-hint" id="providerHint">Free to use — shares a limited daily capacity. Used only when you click "Explain this".</p>
+    </div>
+  </section>
+
+  <section class="table">
+    <div class="title-block">
+      <span>CODE FORGE — <span id="exTitle">LOADING</span></span>
+      <span id="titleBlockRight">NOT RUN YET</span>
+    </div>
+
+    <div class="prompt-card">
+      <h2 id="promptTitle"></h2>
+      <p id="promptText"></p>
+      <p class="harness-note" id="harnessNote"></p>
+      <div class="hints-wrap">
+        <button type="button" class="hint-btn" id="hintBtn">💡 Show a hint (0/0)</button>
+        <div id="hintsShown"></div>
+      </div>
+    </div>
+
+    <div class="editor-wrap" style="margin-top:16px;">
+      <div class="editor-gutter" id="editorGutter">1</div>
+      <textarea id="codeEditor" aria-label="Code" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+    </div>
+
+    <div class="run-row">
+      <button type="button" id="runBtn" data-i18n="runBtnLabel">▶ Run &amp; check</button>
+      <button type="button" class="secondary" id="resetBtn" data-i18n="resetBtnLabel">↺ Reset starter code</button>
+    </div>
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="result-wrap">
+      <div class="result-banner" id="resultBanner"></div>
+      <div class="console-block">
+        <h3 data-i18n="outputHeading">Output</h3>
+        <pre id="outputPre">Run your code to see output here.</pre>
+      </div>
+    </div>
+
+    <div class="explain-wrap">
+      <button type="button" class="explain-btn" id="explainBtn" disabled>🤖 Explain this (run your code first)</button>
+      <div class="explain-box" id="explainBox"></div>
+    </div>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Code Forge</h2>
+  <p>Code Forge teaches Python and JavaScript with short exercises. Your code runs for real in your browser, with instant pass or fail feedback and an AI explanation.</p>
+  <h3>How to use Code Forge</h3>
+  <ol><li>Choose Python or JavaScript and describe what you want to learn.</li><li>Press “Start lesson”.</li><li>Run the examples, answer the exercises, and continue at your pace.</li></ol>
+  <h3>Do I need to install Python?</h3>
+  <p>No. Python and JavaScript both run right in your browser.</p>
+  <h3>Is Code Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall. The AI uses a free shared allowance; if it is busy or at its daily limit, try again later or add your own Gemini key.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/bug-scanner.html">Bug Scanner</a> · <a href="/de/regex-forge.html">Regex Forge</a> · <a href="/de/app-forge.html">App Forge</a></p>
+</section>
+
+
+<footer data-i18n-html="footerText">Part of <a href="/de/">MigaBuilder</a>. Your code runs entirely in your own browser (Python via Pyodide/WebAssembly, JavaScript in a sandboxed Web Worker) — nothing is uploaded, except the short snippet you choose to send when you click "Explain this", which goes only to the AI provider you selected. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+<p style="text-align:center;margin:0;padding:0 20px 32px;font-size:11.5px;"><a href="https://github.com/makmurphy69-cpu/MigaBuilder/blob/main/code-forge.html" target="_blank" rel="noopener" data-i18n="viewSourceLink" style="color:rgba(237,234,224,0.45);">View source on GitHub (MIT licensed) &rarr;</a></p>
+
+<script>
+(function () {
+  "use strict";
+
+  // ---------- exercise data ----------
+  // Every exercise (after the first two intro ones) is function-based: the
+  // visible starter code defines a function, and a hidden "harness" (shown
+  // to the learner as a plain-English note, never as code) calls that
+  // function with fixed inputs and prints the results. Comparing the
+  // program's full stdout against a fixed expected string is what makes
+  // this checkable without a real test framework.
+  const EXERCISES = {
+    python: [
+      {
+        id: 'hello',
+        starter: 'print("Hello, world!")\n',
+        harness: '', expected: 'Hello, world!',
+        title: { en: 'Print', es: 'Imprimir', ar: 'الطباعة', zh: '打印', sw: 'Chapisha' },
+        prompt: { en: 'Print exactly: Hello, world!', es: 'Imprime exactamente: Hello, world!', ar: 'اطبع بالضبط: Hello, world!', zh: '请准确输出：Hello, world!', sw: 'Chapisha kwa usahihi: Hello, world!' },
+        harnessNote: { en: '', es: '', ar: '', zh: '', sw: '' },
+        hints: {
+          en: ['Python\'s print() function writes text to the output.', 'Put the text in quotes: print("Hello, world!")'],
+          es: ['La función print() de Python escribe texto en la salida.', 'Pon el texto entre comillas: print("Hello, world!")'],
+          ar: ['دالة print() في بايثون تكتب النص في المخرجات.', 'ضع النص بين علامتي اقتباس: print("Hello, world!")'],
+          zh: ['Python 的 print() 函数用于输出文本。', '将文本放在引号中：print("Hello, world!")'],
+          sw: ['Kazi ya print() ya Python huandika maandishi kwenye matokeo.', 'Weka maandishi ndani ya alama za nukuu: print("Hello, world!")']
+        }
+      },
+      {
+        id: 'vars',
+        starter: 'a = 6\nb = 7\n\n# print the product of a and b below\n',
+        harness: '', expected: '42',
+        title: { en: 'Variables & arithmetic', es: 'Variables y aritmética', ar: 'المتغيرات والعمليات الحسابية', zh: '变量与算术运算', sw: 'Vigezo na hesabu' },
+        prompt: {
+          en: 'Two variables are already set: a = 6 and b = 7. Print their product (a multiplied by b).',
+          es: 'Ya hay dos variables definidas: a = 6 y b = 7. Imprime su producto (a multiplicado por b).',
+          ar: 'تم بالفعل تعيين متغيرين: a = 6 و b = 7. اطبع حاصل ضربهما (a في b).',
+          zh: '已经设置了两个变量：a = 6，b = 7。请输出它们的乘积（a 乘以 b）。',
+          sw: 'Vigezo viwili tayari vimewekwa: a = 6 na b = 7. Chapisha jumuisho lao (a kuzidishwa na b).'
+        },
+        harnessNote: { en: '', es: '', ar: '', zh: '', sw: '' },
+        hints: {
+          en: ['Multiplication uses the * operator.', 'print(a * b)'],
+          es: ['La multiplicación usa el operador *.', 'print(a * b)'],
+          ar: ['الضرب يستخدم عامل التشغيل *.', 'print(a * b)'],
+          zh: ['乘法使用 * 运算符。', 'print(a * b)'],
+          sw: ['Kuzidisha hutumia alama ya *.', 'print(a * b)']
+        }
+      },
+      {
+        id: 'conditionals',
+        starter: 'def classify_age(age):\n    # return "Adult" if age >= 18, otherwise "Minor"\n    pass\n',
+        harness: 'print(classify_age(15))\nprint(classify_age(20))', expected: 'Minor\nAdult',
+        title: { en: 'Conditionals', es: 'Condicionales', ar: 'الجمل الشرطية', zh: '条件语句', sw: 'Masharti' },
+        prompt: {
+          en: 'Write a function classify_age(age) that returns "Adult" if age is 18 or older, otherwise "Minor".',
+          es: 'Escribe una función classify_age(age) que devuelva "Adult" si age es 18 o más, y "Minor" en caso contrario.',
+          ar: 'اكتب دالة classify_age(age) تُرجع "Adult" إذا كان العمر 18 أو أكثر، وإلا تُرجع "Minor".',
+          zh: '编写一个函数 classify_age(age)，若 age 大于等于 18 则返回 "Adult"，否则返回 "Minor"。',
+          sw: 'Andika kazi classify_age(age) inayorudisha "Adult" ikiwa age ni 18 au zaidi, la sivyo "Minor".'
+        },
+        harnessNote: {
+          en: "We'll call classify_age(15) and classify_age(20).", es: 'Llamaremos a classify_age(15) y classify_age(20).',
+          ar: 'سنستدعي classify_age(15) و classify_age(20).', zh: '我们会调用 classify_age(15) 和 classify_age(20)。',
+          sw: 'Tutaita classify_age(15) na classify_age(20).'
+        },
+        hints: {
+          en: ['Use if / else and the >= operator.', 'return "Adult" if age >= 18 else "Minor"'],
+          es: ['Usa if / else y el operador >=.', 'return "Adult" if age >= 18 else "Minor"'],
+          ar: ['استخدم if / else ومعامل المقارنة >=.', 'return "Adult" if age >= 18 else "Minor"'],
+          zh: ['使用 if / else 和 >= 运算符。', 'return "Adult" if age >= 18 else "Minor"'],
+          sw: ['Tumia if / else na alama ya >=.', 'return "Adult" if age >= 18 else "Minor"']
+        }
+      },
+      {
+        id: 'loops',
+        starter: 'def sum_to_n(n):\n    total = 0\n    # your loop here\n    return total\n',
+        harness: 'print(sum_to_n(5))\nprint(sum_to_n(10))', expected: '15\n55',
+        title: { en: 'Loops', es: 'Bucles', ar: 'الحلقات التكرارية', zh: '循环', sw: 'Mizunguko (Loops)' },
+        prompt: {
+          en: 'Write a function sum_to_n(n) that returns the sum of every whole number from 1 to n, inclusive.',
+          es: 'Escribe una función sum_to_n(n) que devuelva la suma de todos los números enteros del 1 al n, incluido n.',
+          ar: 'اكتب دالة sum_to_n(n) تُرجع مجموع كل الأعداد الصحيحة من 1 إلى n، شاملة n.',
+          zh: '编写一个函数 sum_to_n(n)，返回从 1 到 n（含 n）所有整数之和。',
+          sw: 'Andika kazi sum_to_n(n) inayorudisha jumla ya nambari zote kamili kutoka 1 hadi n, ikijumuisha n.'
+        },
+        harnessNote: {
+          en: "We'll call sum_to_n(5) and sum_to_n(10).", es: 'Llamaremos a sum_to_n(5) y sum_to_n(10).',
+          ar: 'سنستدعي sum_to_n(5) و sum_to_n(10).', zh: '我们会调用 sum_to_n(5) 和 sum_to_n(10)。',
+          sw: 'Tutaita sum_to_n(5) na sum_to_n(10).'
+        },
+        hints: {
+          en: ['range(1, n + 1) gives you every number from 1 to n.', 'for i in range(1, n + 1):\n    total += i'],
+          es: ['range(1, n + 1) te da todos los números del 1 al n.', 'for i in range(1, n + 1):\n    total += i'],
+          ar: ['range(1, n + 1) يمنحك كل رقم من 1 إلى n.', 'for i in range(1, n + 1):\n    total += i'],
+          zh: ['range(1, n + 1) 会给出从 1 到 n 的每一个数字。', 'for i in range(1, n + 1):\n    total += i'],
+          sw: ['range(1, n + 1) hukupa kila nambari kutoka 1 hadi n.', 'for i in range(1, n + 1):\n    total += i']
+        }
+      },
+      {
+        id: 'lists',
+        starter: 'def double_all(numbers):\n    # return a new list with every number doubled\n    pass\n',
+        harness: 'print(double_all([1, 2, 3]))\nprint(double_all([5, 10]))', expected: '[2, 4, 6]\n[10, 20]',
+        title: { en: 'Lists', es: 'Listas', ar: 'القوائم', zh: '列表', sw: 'Orodha' },
+        prompt: {
+          en: 'Write a function double_all(numbers) that returns a new list with every number doubled.',
+          es: 'Escribe una función double_all(numbers) que devuelva una nueva lista con cada número duplicado.',
+          ar: 'اكتب دالة double_all(numbers) تُرجع قائمة جديدة يكون كل رقم فيها مضاعفًا.',
+          zh: '编写一个函数 double_all(numbers)，返回一个新列表，其中每个数字都翻倍。',
+          sw: 'Andika kazi double_all(numbers) inayorudisha orodha mpya yenye kila nambari ikiwa imeongezwa mara mbili.'
+        },
+        harnessNote: {
+          en: "We'll call double_all([1, 2, 3]) and double_all([5, 10]).", es: 'Llamaremos a double_all([1, 2, 3]) y double_all([5, 10]).',
+          ar: 'سنستدعي double_all([1, 2, 3]) و double_all([5, 10]).', zh: '我们会调用 double_all([1, 2, 3]) 和 double_all([5, 10])。',
+          sw: 'Tutaita double_all([1, 2, 3]) na double_all([5, 10]).'
+        },
+        hints: {
+          en: ['A list comprehension can build a new list in one line.', 'return [n * 2 for n in numbers]'],
+          es: ['Una comprensión de listas puede crear una nueva lista en una sola línea.', 'return [n * 2 for n in numbers]'],
+          ar: ['يمكن لتعبير القائمة الشامل (list comprehension) بناء قائمة جديدة في سطر واحد.', 'return [n * 2 for n in numbers]'],
+          zh: ['列表推导式可以用一行代码构建新列表。', 'return [n * 2 for n in numbers]'],
+          sw: ['List comprehension inaweza kujenga orodha mpya kwa mstari mmoja.', 'return [n * 2 for n in numbers]']
+        }
+      },
+      {
+        id: 'functions',
+        starter: 'def is_even(n):\n    # return True if n is even, otherwise False\n    pass\n',
+        harness: 'print(is_even(4))\nprint(is_even(7))', expected: 'True\nFalse',
+        title: { en: 'Functions & booleans', es: 'Funciones y booleanos', ar: 'الدوال والقيم المنطقية', zh: '函数与布尔值', sw: 'Kazi (Functions) na booleans' },
+        prompt: {
+          en: 'Write a function is_even(n) that returns True if n is even, otherwise False.',
+          es: 'Escribe una función is_even(n) que devuelva True si n es par, y False en caso contrario.',
+          ar: 'اكتب دالة is_even(n) تُرجع True إذا كان n زوجيًا، وإلا تُرجع False.',
+          zh: '编写一个函数 is_even(n)，若 n 为偶数则返回 True，否则返回 False。',
+          sw: 'Andika kazi is_even(n) inayorudisha True ikiwa n ni namba shufwa, la sivyo False.'
+        },
+        harnessNote: {
+          en: "We'll call is_even(4) and is_even(7).", es: 'Llamaremos a is_even(4) y is_even(7).',
+          ar: 'سنستدعي is_even(4) و is_even(7).', zh: '我们会调用 is_even(4) 和 is_even(7)。',
+          sw: 'Tutaita is_even(4) na is_even(7).'
+        },
+        hints: {
+          en: ['The % operator gives you the remainder of a division.', 'return n % 2 == 0'],
+          es: ['El operador % te da el resto de una división.', 'return n % 2 == 0'],
+          ar: ['عامل التشغيل % يعطيك باقي القسمة.', 'return n % 2 == 0'],
+          zh: ['% 运算符可以得到除法的余数。', 'return n % 2 == 0'],
+          sw: ['Alama ya % hukupa baki la mgawanyo.', 'return n % 2 == 0']
+        }
+      },
+      {
+        id: 'strings',
+        starter: 'def shout(word):\n    # return the word in capitals, followed by "!!!"\n    pass\n',
+        harness: 'print(shout("hello"))\nprint(shout("code"))', expected: 'HELLO!!!\nCODE!!!',
+        title: { en: 'Strings', es: 'Cadenas de texto', ar: 'النصوص (Strings)', zh: '字符串', sw: 'Maneno (Strings)' },
+        prompt: {
+          en: 'Write a function shout(word) that returns the word in ALL CAPS followed by "!!!".',
+          es: 'Escribe una función shout(word) que devuelva la palabra en MAYÚSCULAS seguida de "!!!".',
+          ar: 'اكتب دالة shout(word) تُرجع الكلمة بأحرف كبيرة متبوعة بـ "!!!".',
+          zh: '编写一个函数 shout(word)，返回该单词的全大写形式，并在末尾加上 "!!!"。',
+          sw: 'Andika kazi shout(word) inayorudisha neno kwa herufi kubwa zote likifuatiwa na "!!!".'
+        },
+        harnessNote: {
+          en: 'We\'ll call shout("hello") and shout("code").', es: 'Llamaremos a shout("hello") y shout("code").',
+          ar: 'سنستدعي shout("hello") و shout("code").', zh: '我们会调用 shout("hello") 和 shout("code")。',
+          sw: 'Tutaita shout("hello") na shout("code").'
+        },
+        hints: {
+          en: ['Strings have an .upper() method.', 'return word.upper() + "!!!"'],
+          es: ['Las cadenas tienen un método .upper().', 'return word.upper() + "!!!"'],
+          ar: ['السلاسل النصية تمتلك دالة .upper().', 'return word.upper() + "!!!"'],
+          zh: ['字符串有一个 .upper() 方法。', 'return word.upper() + "!!!"'],
+          sw: ['Maneno (strings) yana kazi ya .upper().', 'return word.upper() + "!!!"']
+        }
+      },
+      {
+        id: 'dicts',
+        starter: 'def total_price(cart):\n    # return the sum of all the values in the cart dictionary\n    pass\n',
+        harness: "print(total_price({'apple': 2, 'bread': 3}))\nprint(total_price({'milk': 4, 'eggs': 5, 'butter': 6}))", expected: '5\n15',
+        title: { en: 'Dictionaries', es: 'Diccionarios', ar: 'القواميس', zh: '字典', sw: 'Kamusi (Dictionaries)' },
+        prompt: {
+          en: 'Write a function total_price(cart) where cart is a dictionary of item names to prices (e.g. {"apple": 2, "bread": 3}). Return the sum of all the prices.',
+          es: 'Escribe una función total_price(cart) donde cart es un diccionario de nombres de productos a precios (p. ej. {"apple": 2, "bread": 3}). Devuelve la suma de todos los precios.',
+          ar: 'اكتب دالة total_price(cart) حيث cart قاموس يربط أسماء المنتجات بأسعارها (مثل {"apple": 2, "bread": 3}). أعد مجموع كل الأسعار.',
+          zh: '编写一个函数 total_price(cart)，其中 cart 是一个商品名称到价格的字典（例如 {"apple": 2, "bread": 3}）。返回所有价格的总和。',
+          sw: 'Andika kazi total_price(cart) ambapo cart ni kamusi ya majina ya bidhaa kwa bei (mfano {"apple": 2, "bread": 3}). Rudisha jumla ya bei zote.'
+        },
+        harnessNote: {
+          en: "We'll call total_price with two different carts.", es: 'Llamaremos a total_price con dos carritos diferentes.',
+          ar: 'سنستدعي total_price بسلتين مختلفتين.', zh: '我们会用两个不同的购物车调用 total_price。',
+          sw: 'Tutaita total_price na vikapu viwili tofauti.'
+        },
+        hints: {
+          en: ["A dictionary's .values() gives you all the values.", 'return sum(cart.values())'],
+          es: ['El método .values() de un diccionario te da todos los valores.', 'return sum(cart.values())'],
+          ar: ['دالة .values() الخاصة بالقاموس تعطيك كل القيم.', 'return sum(cart.values())'],
+          zh: ['字典的 .values() 方法可以获取所有的值。', 'return sum(cart.values())'],
+          sw: ['Kazi ya .values() ya kamusi hukupa thamani zote.', 'return sum(cart.values())']
+        }
+      },
+      {
+        id: 'recursion',
+        starter: 'def factorial(n):\n    # base case: factorial(0) is 1\n    # recursive case: n * factorial(n - 1)\n    pass\n',
+        harness: 'print(factorial(5))\nprint(factorial(0))', expected: '120\n1',
+        title: { en: 'Recursion (bonus)', es: 'Recursión (bonus)', ar: 'العودية (Recursion) (إضافي)', zh: '递归（附加题）', sw: 'Urudiaji (Recursion) (ziada)' },
+        prompt: {
+          en: 'Write a function factorial(n) that returns n! (n factorial) using recursion — factorial(n) calls itself with a smaller n.',
+          es: 'Escribe una función factorial(n) que devuelva n! (n factorial) usando recursión — factorial(n) se llama a sí misma con un n menor.',
+          ar: 'اكتب دالة factorial(n) تُرجع !n (مضروب n) باستخدام العودية — تستدعي factorial(n) نفسها بقيمة n أصغر.',
+          zh: '编写一个函数 factorial(n)，使用递归返回 n 的阶乘（n!）——factorial(n) 用更小的 n 调用自身。',
+          sw: 'Andika kazi factorial(n) inayorudisha n! (factorial ya n) kwa kutumia urudiaji — factorial(n) hujiita yenyewe kwa n ndogo zaidi.'
+        },
+        harnessNote: {
+          en: "We'll call factorial(5) and factorial(0).", es: 'Llamaremos a factorial(5) y factorial(0).',
+          ar: 'سنستدعي factorial(5) و factorial(0).', zh: '我们会调用 factorial(5) 和 factorial(0)。',
+          sw: 'Tutaita factorial(5) na factorial(0).'
+        },
+        hints: {
+          en: ['Every recursive function needs a base case that stops the recursion.', 'if n == 0:\n    return 1\nreturn n * factorial(n - 1)'],
+          es: ['Toda función recursiva necesita un caso base que detenga la recursión.', 'if n == 0:\n    return 1\nreturn n * factorial(n - 1)'],
+          ar: ['كل دالة عودية تحتاج إلى حالة أساس توقف العودية.', 'if n == 0:\n    return 1\nreturn n * factorial(n - 1)'],
+          zh: ['每个递归函数都需要一个能终止递归的基本情况（base case）。', 'if n == 0:\n    return 1\nreturn n * factorial(n - 1)'],
+          sw: ['Kila kazi ya urudiaji inahitaji hali ya msingi (base case) inayosimamisha urudiaji.', 'if n == 0:\n    return 1\nreturn n * factorial(n - 1)']
+        }
+      }
+    ],
+    javascript: [
+      {
+        id: 'hello',
+        starter: 'console.log("Hello, world!");\n',
+        harness: '', expected: 'Hello, world!',
+        title: { en: 'Print', es: 'Imprimir', ar: 'الطباعة', zh: '打印', sw: 'Chapisha' },
+        prompt: { en: 'Print exactly: Hello, world!', es: 'Imprime exactamente: Hello, world!', ar: 'اطبع بالضبط: Hello, world!', zh: '请准确输出：Hello, world!', sw: 'Chapisha kwa usahihi: Hello, world!' },
+        harnessNote: { en: '', es: '', ar: '', zh: '', sw: '' },
+        hints: {
+          en: ['JavaScript\'s console.log() writes text to the output.', 'console.log("Hello, world!");'],
+          es: ['console.log() de JavaScript escribe texto en la salida.', 'console.log("Hello, world!");'],
+          ar: ['دالة console.log() في جافاسكريبت تكتب النص في المخرجات.', 'console.log("Hello, world!");'],
+          zh: ['JavaScript 的 console.log() 用于输出文本。', 'console.log("Hello, world!");'],
+          sw: ['Kazi ya console.log() ya JavaScript huandika maandishi kwenye matokeo.', 'console.log("Hello, world!");']
+        }
+      },
+      {
+        id: 'vars',
+        starter: 'let a = 6;\nlet b = 7;\n\n// print the product of a and b below\n',
+        harness: '', expected: '42',
+        title: { en: 'Variables & arithmetic', es: 'Variables y aritmética', ar: 'المتغيرات والعمليات الحسابية', zh: '变量与算术运算', sw: 'Vigezo na hesabu' },
+        prompt: {
+          en: 'Two variables are already set: a = 6 and b = 7. Print their product (a multiplied by b).',
+          es: 'Ya hay dos variables definidas: a = 6 y b = 7. Imprime su producto (a multiplicado por b).',
+          ar: 'تم بالفعل تعيين متغيرين: a = 6 و b = 7. اطبع حاصل ضربهما (a في b).',
+          zh: '已经设置了两个变量：a = 6，b = 7。请输出它们的乘积（a 乘以 b）。',
+          sw: 'Vigezo viwili tayari vimewekwa: a = 6 na b = 7. Chapisha jumuisho lao (a kuzidishwa na b).'
+        },
+        harnessNote: { en: '', es: '', ar: '', zh: '', sw: '' },
+        hints: {
+          en: ['Multiplication uses the * operator.', 'console.log(a * b);'],
+          es: ['La multiplicación usa el operador *.', 'console.log(a * b);'],
+          ar: ['الضرب يستخدم عامل التشغيل *.', 'console.log(a * b);'],
+          zh: ['乘法使用 * 运算符。', 'console.log(a * b);'],
+          sw: ['Kuzidisha hutumia alama ya *.', 'console.log(a * b);']
+        }
+      },
+      {
+        id: 'conditionals',
+        starter: 'function classifyAge(age) {\n  // return "Adult" if age >= 18, otherwise "Minor"\n}\n',
+        harness: 'console.log(classifyAge(15));\nconsole.log(classifyAge(20));', expected: 'Minor\nAdult',
+        title: { en: 'Conditionals', es: 'Condicionales', ar: 'الجمل الشرطية', zh: '条件语句', sw: 'Masharti' },
+        prompt: {
+          en: 'Write a function classifyAge(age) that returns "Adult" if age is 18 or older, otherwise "Minor".',
+          es: 'Escribe una función classifyAge(age) que devuelva "Adult" si age es 18 o más, y "Minor" en caso contrario.',
+          ar: 'اكتب دالة classifyAge(age) تُرجع "Adult" إذا كان العمر 18 أو أكثر، وإلا تُرجع "Minor".',
+          zh: '编写一个函数 classifyAge(age)，若 age 大于等于 18 则返回 "Adult"，否则返回 "Minor"。',
+          sw: 'Andika kazi classifyAge(age) inayorudisha "Adult" ikiwa age ni 18 au zaidi, la sivyo "Minor".'
+        },
+        harnessNote: {
+          en: "We'll call classifyAge(15) and classifyAge(20).", es: 'Llamaremos a classifyAge(15) y classifyAge(20).',
+          ar: 'سنستدعي classifyAge(15) و classifyAge(20).', zh: '我们会调用 classifyAge(15) 和 classifyAge(20)。',
+          sw: 'Tutaita classifyAge(15) na classifyAge(20).'
+        },
+        hints: {
+          en: ['Use if / else and the >= operator.', 'return age >= 18 ? "Adult" : "Minor";'],
+          es: ['Usa if / else y el operador >=.', 'return age >= 18 ? "Adult" : "Minor";'],
+          ar: ['استخدم if / else ومعامل المقارنة >=.', 'return age >= 18 ? "Adult" : "Minor";'],
+          zh: ['使用 if / else 和 >= 运算符。', 'return age >= 18 ? "Adult" : "Minor";'],
+          sw: ['Tumia if / else na alama ya >=.', 'return age >= 18 ? "Adult" : "Minor";']
+        }
+      },
+      {
+        id: 'loops',
+        starter: 'function sumToN(n) {\n  let total = 0;\n  // your loop here\n  return total;\n}\n',
+        harness: 'console.log(sumToN(5));\nconsole.log(sumToN(10));', expected: '15\n55',
+        title: { en: 'Loops', es: 'Bucles', ar: 'الحلقات التكرارية', zh: '循环', sw: 'Mizunguko (Loops)' },
+        prompt: {
+          en: 'Write a function sumToN(n) that returns the sum of every whole number from 1 to n, inclusive.',
+          es: 'Escribe una función sumToN(n) que devuelva la suma de todos los números enteros del 1 al n, incluido n.',
+          ar: 'اكتب دالة sumToN(n) تُرجع مجموع كل الأعداد الصحيحة من 1 إلى n، شاملة n.',
+          zh: '编写一个函数 sumToN(n)，返回从 1 到 n（含 n）所有整数之和。',
+          sw: 'Andika kazi sumToN(n) inayorudisha jumla ya nambari zote kamili kutoka 1 hadi n, ikijumuisha n.'
+        },
+        harnessNote: {
+          en: "We'll call sumToN(5) and sumToN(10).", es: 'Llamaremos a sumToN(5) y sumToN(10).',
+          ar: 'سنستدعي sumToN(5) و sumToN(10).', zh: '我们会调用 sumToN(5) 和 sumToN(10)。',
+          sw: 'Tutaita sumToN(5) na sumToN(10).'
+        },
+        hints: {
+          en: ['A for loop from 1 to n (inclusive) covers every number.', 'for (let i = 1; i <= n; i++) {\n  total += i;\n}'],
+          es: ['Un bucle for del 1 al n (inclusive) cubre todos los números.', 'for (let i = 1; i <= n; i++) {\n  total += i;\n}'],
+          ar: ['حلقة for من 1 إلى n (شاملة) تغطي كل الأرقام.', 'for (let i = 1; i <= n; i++) {\n  total += i;\n}'],
+          zh: ['从 1 到 n（含）的 for 循环可以覆盖每一个数字。', 'for (let i = 1; i <= n; i++) {\n  total += i;\n}'],
+          sw: ['Mzunguko wa for kutoka 1 hadi n (ikijumuisha) hufunika kila nambari.', 'for (let i = 1; i <= n; i++) {\n  total += i;\n}']
+        }
+      },
+      {
+        id: 'lists',
+        starter: 'function doubleAll(numbers) {\n  // return a new array with every number doubled\n}\n',
+        harness: 'console.log(doubleAll([1, 2, 3]));\nconsole.log(doubleAll([5, 10]));', expected: '[2, 4, 6]\n[10, 20]',
+        title: { en: 'Arrays', es: 'Arreglos', ar: 'المصفوفات', zh: '数组', sw: 'Safu (Arrays)' },
+        prompt: {
+          en: 'Write a function doubleAll(numbers) that returns a new array with every number doubled.',
+          es: 'Escribe una función doubleAll(numbers) que devuelva un nuevo arreglo con cada número duplicado.',
+          ar: 'اكتب دالة doubleAll(numbers) تُرجع مصفوفة جديدة يكون كل رقم فيها مضاعفًا.',
+          zh: '编写一个函数 doubleAll(numbers)，返回一个新数组，其中每个数字都翻倍。',
+          sw: 'Andika kazi doubleAll(numbers) inayorudisha safu mpya yenye kila nambari ikiwa imeongezwa mara mbili.'
+        },
+        harnessNote: {
+          en: "We'll call doubleAll([1, 2, 3]) and doubleAll([5, 10]).", es: 'Llamaremos a doubleAll([1, 2, 3]) y doubleAll([5, 10]).',
+          ar: 'سنستدعي doubleAll([1, 2, 3]) و doubleAll([5, 10]).', zh: '我们会调用 doubleAll([1, 2, 3]) 和 doubleAll([5, 10])。',
+          sw: 'Tutaita doubleAll([1, 2, 3]) na doubleAll([5, 10]).'
+        },
+        hints: {
+          en: ['Arrays have a .map() method that transforms every item.', 'return numbers.map(n => n * 2);'],
+          es: ['Los arreglos tienen un método .map() que transforma cada elemento.', 'return numbers.map(n => n * 2);'],
+          ar: ['تمتلك المصفوفات دالة .map() تُحوّل كل عنصر.', 'return numbers.map(n => n * 2);'],
+          zh: ['数组有一个 .map() 方法可以转换每个元素。', 'return numbers.map(n => n * 2);'],
+          sw: ['Safu (arrays) zina kazi ya .map() inayobadilisha kila kipengele.', 'return numbers.map(n => n * 2);']
+        }
+      },
+      {
+        id: 'functions',
+        starter: 'function isEven(n) {\n  // return true if n is even, otherwise false\n}\n',
+        harness: 'console.log(isEven(4));\nconsole.log(isEven(7));', expected: 'true\nfalse',
+        title: { en: 'Functions & booleans', es: 'Funciones y booleanos', ar: 'الدوال والقيم المنطقية', zh: '函数与布尔值', sw: 'Kazi (Functions) na booleans' },
+        prompt: {
+          en: 'Write a function isEven(n) that returns true if n is even, otherwise false.',
+          es: 'Escribe una función isEven(n) que devuelva true si n es par, y false en caso contrario.',
+          ar: 'اكتب دالة isEven(n) تُرجع true إذا كان n زوجيًا، وإلا تُرجع false.',
+          zh: '编写一个函数 isEven(n)，若 n 为偶数则返回 true，否则返回 false。',
+          sw: 'Andika kazi isEven(n) inayorudisha true ikiwa n ni namba shufwa, la sivyo false.'
+        },
+        harnessNote: {
+          en: "We'll call isEven(4) and isEven(7).", es: 'Llamaremos a isEven(4) y isEven(7).',
+          ar: 'سنستدعي isEven(4) و isEven(7).', zh: '我们会调用 isEven(4) 和 isEven(7)。',
+          sw: 'Tutaita isEven(4) na isEven(7).'
+        },
+        hints: {
+          en: ['The % operator gives you the remainder of a division.', 'return n % 2 === 0;'],
+          es: ['El operador % te da el resto de una división.', 'return n % 2 === 0;'],
+          ar: ['عامل التشغيل % يعطيك باقي القسمة.', 'return n % 2 === 0;'],
+          zh: ['% 运算符可以得到除法的余数。', 'return n % 2 === 0;'],
+          sw: ['Alama ya % hukupa baki la mgawanyo.', 'return n % 2 === 0;']
+        }
+      },
+      {
+        id: 'strings',
+        starter: 'function shout(word) {\n  // return the word in capitals, followed by "!!!"\n}\n',
+        harness: 'console.log(shout("hello"));\nconsole.log(shout("code"));', expected: 'HELLO!!!\nCODE!!!',
+        title: { en: 'Strings', es: 'Cadenas de texto', ar: 'النصوص (Strings)', zh: '字符串', sw: 'Maneno (Strings)' },
+        prompt: {
+          en: 'Write a function shout(word) that returns the word in ALL CAPS followed by "!!!".',
+          es: 'Escribe una función shout(word) que devuelva la palabra en MAYÚSCULAS seguida de "!!!".',
+          ar: 'اكتب دالة shout(word) تُرجع الكلمة بأحرف كبيرة متبوعة بـ "!!!".',
+          zh: '编写一个函数 shout(word)，返回该单词的全大写形式，并在末尾加上 "!!!"。',
+          sw: 'Andika kazi shout(word) inayorudisha neno kwa herufi kubwa zote likifuatiwa na "!!!".'
+        },
+        harnessNote: {
+          en: 'We\'ll call shout("hello") and shout("code").', es: 'Llamaremos a shout("hello") y shout("code").',
+          ar: 'سنستدعي shout("hello") و shout("code").', zh: '我们会调用 shout("hello") 和 shout("code")。',
+          sw: 'Tutaita shout("hello") na shout("code").'
+        },
+        hints: {
+          en: ['Strings have a .toUpperCase() method.', 'return word.toUpperCase() + "!!!";'],
+          es: ['Las cadenas tienen un método .toUpperCase().', 'return word.toUpperCase() + "!!!";'],
+          ar: ['السلاسل النصية تمتلك دالة .toUpperCase().', 'return word.toUpperCase() + "!!!";'],
+          zh: ['字符串有一个 .toUpperCase() 方法。', 'return word.toUpperCase() + "!!!";'],
+          sw: ['Maneno (strings) yana kazi ya .toUpperCase().', 'return word.toUpperCase() + "!!!";']
+        }
+      },
+      {
+        id: 'dicts',
+        starter: 'function totalPrice(cart) {\n  // return the sum of all the values in the cart object\n}\n',
+        harness: 'console.log(totalPrice({ apple: 2, bread: 3 }));\nconsole.log(totalPrice({ milk: 4, eggs: 5, butter: 6 }));', expected: '5\n15',
+        title: { en: 'Objects', es: 'Objetos', ar: 'الكائنات (Objects)', zh: '对象', sw: 'Vitu (Objects)' },
+        prompt: {
+          en: 'Write a function totalPrice(cart) where cart is an object of item names to prices (e.g. { apple: 2, bread: 3 }). Return the sum of all the prices.',
+          es: 'Escribe una función totalPrice(cart) donde cart es un objeto de nombres de productos a precios (p. ej. { apple: 2, bread: 3 }). Devuelve la suma de todos los precios.',
+          ar: 'اكتب دالة totalPrice(cart) حيث cart كائن يربط أسماء المنتجات بأسعارها (مثل { apple: 2, bread: 3 }). أعد مجموع كل الأسعار.',
+          zh: '编写一个函数 totalPrice(cart)，其中 cart 是一个商品名称到价格的对象（例如 { apple: 2, bread: 3 }）。返回所有价格的总和。',
+          sw: 'Andika kazi totalPrice(cart) ambapo cart ni kitu (object) cha majina ya bidhaa kwa bei (mfano { apple: 2, bread: 3 }). Rudisha jumla ya bei zote.'
+        },
+        harnessNote: {
+          en: "We'll call totalPrice with two different carts.", es: 'Llamaremos a totalPrice con dos carritos diferentes.',
+          ar: 'سنستدعي totalPrice بسلتين مختلفتين.', zh: '我们会用两个不同的购物车调用 totalPrice。',
+          sw: 'Tutaita totalPrice na vikapu viwili tofauti.'
+        },
+        hints: {
+          en: ['Object.values() gives you an array of all the values.', 'return Object.values(cart).reduce((sum, price) => sum + price, 0);'],
+          es: ['Object.values() te da un arreglo con todos los valores.', 'return Object.values(cart).reduce((sum, price) => sum + price, 0);'],
+          ar: ['Object.values() تعطيك مصفوفة بكل القيم.', 'return Object.values(cart).reduce((sum, price) => sum + price, 0);'],
+          zh: ['Object.values() 会返回一个包含所有值的数组。', 'return Object.values(cart).reduce((sum, price) => sum + price, 0);'],
+          sw: ['Object.values() hukupa safu ya thamani zote.', 'return Object.values(cart).reduce((sum, price) => sum + price, 0);']
+        }
+      },
+      {
+        id: 'recursion',
+        starter: 'function factorial(n) {\n  // base case: factorial(0) is 1\n  // recursive case: n * factorial(n - 1)\n}\n',
+        harness: 'console.log(factorial(5));\nconsole.log(factorial(0));', expected: '120\n1',
+        title: { en: 'Recursion (bonus)', es: 'Recursión (bonus)', ar: 'العودية (Recursion) (إضافي)', zh: '递归（附加题）', sw: 'Urudiaji (Recursion) (ziada)' },
+        prompt: {
+          en: 'Write a function factorial(n) that returns n! (n factorial) using recursion — factorial(n) calls itself with a smaller n.',
+          es: 'Escribe una función factorial(n) que devuelva n! (n factorial) usando recursión — factorial(n) se llama a sí misma con un n menor.',
+          ar: 'اكتب دالة factorial(n) تُرجع !n (مضروب n) باستخدام العودية — تستدعي factorial(n) نفسها بقيمة n أصغر.',
+          zh: '编写一个函数 factorial(n)，使用递归返回 n 的阶乘（n!）——factorial(n) 用更小的 n 调用自身。',
+          sw: 'Andika kazi factorial(n) inayorudisha n! (factorial ya n) kwa kutumia urudiaji — factorial(n) hujiita yenyewe kwa n ndogo zaidi.'
+        },
+        harnessNote: {
+          en: "We'll call factorial(5) and factorial(0).", es: 'Llamaremos a factorial(5) y factorial(0).',
+          ar: 'سنستدعي factorial(5) و factorial(0).', zh: '我们会调用 factorial(5) 和 factorial(0)。',
+          sw: 'Tutaita factorial(5) na factorial(0).'
+        },
+        hints: {
+          en: ['Every recursive function needs a base case that stops the recursion.', 'if (n === 0) return 1;\nreturn n * factorial(n - 1);'],
+          es: ['Toda función recursiva necesita un caso base que detenga la recursión.', 'if (n === 0) return 1;\nreturn n * factorial(n - 1);'],
+          ar: ['كل دالة عودية تحتاج إلى حالة أساس توقف العودية.', 'if (n === 0) return 1;\nreturn n * factorial(n - 1);'],
+          zh: ['每个递归函数都需要一个能终止递归的基本情况（base case）。', 'if (n === 0) return 1;\nreturn n * factorial(n - 1);'],
+          sw: ['Kila kazi ya urudiaji inahitaji hali ya msingi (base case) inayosimamisha urudiaji.', 'if (n === 0) return 1;\nreturn n * factorial(n - 1);']
+        }
+      }
+    ]
+  };
+
+  // ---------- element refs ----------
+  const langPythonBtn = document.getElementById('langPython');
+  const langJsBtn = document.getElementById('langJs');
+  const exListEl = document.getElementById('exList');
+  const exTitleEl = document.getElementById('exTitle');
+  const promptTitle = document.getElementById('promptTitle');
+  const promptText = document.getElementById('promptText');
+  const harnessNoteEl = document.getElementById('harnessNote');
+  const hintBtn = document.getElementById('hintBtn');
+  const hintsShown = document.getElementById('hintsShown');
+  const codeEditor = document.getElementById('codeEditor');
+  const editorGutter = document.getElementById('editorGutter');
+  const runBtn = document.getElementById('runBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const errorBox = document.getElementById('errorBox');
+  const resultBanner = document.getElementById('resultBanner');
+  const outputPre = document.getElementById('outputPre');
+  const titleBlockRight = document.getElementById('titleBlockRight');
+  const explainBtn = document.getElementById('explainBtn');
+  const explainBox = document.getElementById('explainBox');
+  const providerSelect = document.getElementById('provider');
+  const apiKeyField = document.getElementById('apiKeyField');
+  const apiKeyInput = document.getElementById('apiKey');
+  const apiKeyLabelHint = document.getElementById('providerHint');
+  const toggleKeyBtn = document.getElementById('toggleKey');
+
+  // ---------- state ----------
+  let currentLang = 'python';
+  let currentExIndex = 0;
+  let hintsRevealed = 0;
+  let progress = {}; // "lang:id" -> true (passed)
+  let lastRun = null; // { code, output, error, passed }
+  let jsWorker = null;
+  let pyWorker = null;
+  let pyWorkerReady = null; // becomes a promise once a python run has started loading
+
+  function showError(msg) { errorBox.textContent = msg; errorBox.classList.add('show'); }
+  function clearError() { errorBox.textContent = ''; errorBox.classList.remove('show'); }
+
+  function currentExercise() { return EXERCISES[currentLang][currentExIndex]; }
+
+  // ex[field] is an { en, es, ar, zh, sw } dictionary; pick the current UI
+  // language, falling back to English if a translation is ever missing.
+  function localized(ex, field) {
+    const uiLang = window.I18N ? I18N.getLang() : 'en';
+    const dict = ex[field];
+    if (!dict) return '';
+    return dict[uiLang] !== undefined ? dict[uiLang] : dict.en;
+  }
+
+  // ---------- exercise list / prompt rendering ----------
+  function renderExList() {
+    exListEl.innerHTML = '';
+    EXERCISES[currentLang].forEach((ex, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ex-item' + (i === currentExIndex ? ' active' : '');
+      const passed = progress[currentLang + ':' + ex.id];
+      btn.innerHTML = '<span class="ex-status' + (passed ? ' pass' : '') + '">' + (passed ? '✓' : '○') + '</span><span>' + (i + 1) + '. ' + localized(ex, 'title') + '</span>';
+      btn.addEventListener('click', () => selectExercise(i));
+      exListEl.appendChild(btn);
+    });
+  }
+
+  function updateGutter() {
+    const lines = codeEditor.value.split('\n').length;
+    let nums = '';
+    for (let i = 1; i <= lines; i++) nums += i + '\n';
+    editorGutter.textContent = nums;
+  }
+  codeEditor.addEventListener('input', updateGutter);
+  codeEditor.addEventListener('scroll', () => { editorGutter.scrollTop = codeEditor.scrollTop; });
+  codeEditor.addEventListener('keydown', function (e) {
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = codeEditor.selectionStart, end = codeEditor.selectionEnd;
+      codeEditor.value = codeEditor.value.slice(0, start) + '  ' + codeEditor.value.slice(end);
+      codeEditor.selectionStart = codeEditor.selectionEnd = start + 2;
+      updateGutter();
+    }
+  });
+
+  function hintButtonLabel(shown, total) {
+    return I18N.t('hintButtonLabel').replace('{shown}', shown).replace('{total}', total);
+  }
+
+  function selectExercise(i) {
+    currentExIndex = i;
+    hintsRevealed = 0;
+    lastRun = null;
+    const ex = currentExercise();
+    const hints = localized(ex, 'hints');
+    exTitleEl.textContent = localized(ex, 'title').toUpperCase();
+    promptTitle.textContent = (i + 1) + '. ' + localized(ex, 'title');
+    promptText.textContent = localized(ex, 'prompt');
+    harnessNoteEl.textContent = localized(ex, 'harnessNote') || '';
+    codeEditor.value = ex.starter;
+    updateGutter();
+    hintsShown.innerHTML = '';
+    hintBtn.textContent = hintButtonLabel(0, hints.length);
+    hintBtn.disabled = hints.length === 0;
+    resultBanner.className = 'result-banner';
+    resultBanner.textContent = '';
+    outputPre.textContent = I18N.t('outputPlaceholder');
+    titleBlockRight.textContent = I18N.t('titleNotRun');
+    explainBtn.disabled = true;
+    explainBtn.textContent = I18N.t('explainBtnInitial');
+    explainBox.classList.remove('show');
+    explainBox.textContent = '';
+    clearError();
+    renderExList();
+  }
+
+  hintBtn.addEventListener('click', function () {
+    const ex = currentExercise();
+    const hints = localized(ex, 'hints');
+    if (hintsRevealed >= hints.length) return;
+    const div = document.createElement('div');
+    div.className = 'hint-line';
+    div.textContent = hints[hintsRevealed];
+    hintsShown.appendChild(div);
+    hintsRevealed++;
+    hintBtn.textContent = hintButtonLabel(hintsRevealed, hints.length);
+    if (hintsRevealed >= hints.length) hintBtn.disabled = true;
+  });
+
+  resetBtn.addEventListener('click', function () {
+    codeEditor.value = currentExercise().starter;
+    updateGutter();
+  });
+
+  function setLang(lang) {
+    if (lang === currentLang) return;
+    currentLang = lang;
+    langPythonBtn.classList.toggle('active', lang === 'python');
+    langJsBtn.classList.toggle('active', lang === 'javascript');
+    selectExercise(0);
+  }
+  langPythonBtn.addEventListener('click', () => setLang('python'));
+  langJsBtn.addEventListener('click', () => setLang('javascript'));
+
+  // ---------- JavaScript sandbox (Web Worker) ----------
+  const JS_WORKER_SRC = [
+    'function formatArg(v) {',
+    '  if (typeof v === "string") return v;',
+    '  if (Array.isArray(v)) return "[" + v.map(formatArg).join(", ") + "]";',
+    '  if (v !== null && typeof v === "object") return "{" + Object.keys(v).map(function (k) { return k + ": " + formatArg(v[k]); }).join(", ") + "}";',
+    '  return String(v);',
+    '}',
+    'self.onmessage = function (e) {',
+    '  const logs = [];',
+    '  const console = { log: function () { logs.push(Array.prototype.slice.call(arguments).map(formatArg).join(" ")); } };',
+    '  try {',
+    '    (function (console) { "use strict"; eval(e.data.code); })(console);',
+    '    self.postMessage({ ok: true, output: logs.join("\\n") });',
+    '  } catch (err) {',
+    '    self.postMessage({ ok: false, output: logs.join("\\n"), error: (err && err.message) || String(err) });',
+    '  }',
+    '};'
+  ].join('\n');
+
+  function runJs(code, timeoutMs) {
+    return new Promise((resolve) => {
+      if (jsWorker) { try { jsWorker.terminate(); } catch (e) {} }
+      const blob = new Blob([JS_WORKER_SRC], { type: 'application/javascript' });
+      jsWorker = new Worker(URL.createObjectURL(blob));
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        try { jsWorker.terminate(); } catch (e) {}
+        resolve({ ok: false, output: '', error: I18N.t('timeoutMessage').replace('{s}', timeoutMs / 1000) });
+      }, timeoutMs);
+      jsWorker.onmessage = function (e) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve(e.data);
+      };
+      jsWorker.onerror = function (e) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve({ ok: false, output: '', error: e.message || 'Worker error' });
+      };
+      jsWorker.postMessage({ code: code });
+    });
+  }
+
+  // ---------- Python sandbox (Pyodide in a Web Worker) ----------
+  const PYODIDE_INDEX_URL = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+  const PY_WORKER_SRC = [
+    'importScripts("' + PYODIDE_INDEX_URL + 'pyodide.js");',
+    'let pyodideReadyPromise = loadPyodide({ indexURL: "' + PYODIDE_INDEX_URL + '" });',
+    'self.onmessage = async function (e) {',
+    '  try {',
+    '    const pyodide = await pyodideReadyPromise;',
+    '    const outputBuf = [];',
+    '    pyodide.setStdout({ batched: function (msg) { outputBuf.push(msg); } });',
+    '    pyodide.setStderr({ batched: function () {} });',
+    '    try {',
+    '      pyodide.runPython(e.data.code);',
+    '      self.postMessage({ ok: true, output: outputBuf.join("\\n") });',
+    '    } catch (err) {',
+    '      const msg = (err && err.message) || String(err);',
+    '      const lines = msg.split("\\n").map(function (l) { return l.trim(); }).filter(Boolean);',
+    '      const lastLine = lines.length ? lines[lines.length - 1] : msg;',
+    '      self.postMessage({ ok: false, output: outputBuf.join("\\n"), error: lastLine });',
+    '    }',
+    '  } catch (loadErr) {',
+    '    self.postMessage({ ok: false, output: "", error: "Could not start the Python runtime: " + ((loadErr && loadErr.message) || String(loadErr)) });',
+    '  }',
+    '};'
+  ].join('\n');
+
+  function ensurePyWorker() {
+    if (!pyWorker) {
+      const blob = new Blob([PY_WORKER_SRC], { type: 'application/javascript' });
+      pyWorker = new Worker(URL.createObjectURL(blob));
+    }
+    return pyWorker;
+  }
+
+  function runPython(code, timeoutMs) {
+    return new Promise((resolve) => {
+      const worker = ensurePyWorker();
+      let settled = false;
+      const timer = setTimeout(() => {
+        if (settled) return;
+        settled = true;
+        try { worker.terminate(); } catch (e) {}
+        pyWorker = null; // discard — a terminated worker can't be reused; a fresh one loads lazily next run
+        resolve({ ok: false, output: '', error: I18N.t('timeoutMessage').replace('{s}', timeoutMs / 1000) });
+      }, timeoutMs);
+      worker.onmessage = function (e) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve(e.data);
+      };
+      worker.onerror = function (e) {
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
+        resolve({ ok: false, output: '', error: e.message || 'Worker error' });
+      };
+      worker.postMessage({ code: code });
+    });
+  }
+
+  // ---------- run & check ----------
+  runBtn.addEventListener('click', async function () {
+    clearError();
+    const ex = currentExercise();
+    const userCode = codeEditor.value;
+    const fullCode = userCode + (ex.harness ? '\n' + ex.harness : '');
+
+    runBtn.disabled = true;
+    runBtn.textContent = currentLang === 'python' ? I18N.t('runBtnLoadingPy') : I18N.t('runBtnLoadingJs');
+    titleBlockRight.textContent = I18N.t('titleRunning');
+    resultBanner.className = 'result-banner';
+    outputPre.textContent = '…';
+
+    const timeoutMs = currentLang === 'python' ? 25000 : 3000;
+    let result;
+    try {
+      result = currentLang === 'python' ? await runPython(fullCode, timeoutMs) : await runJs(fullCode, timeoutMs);
+    } catch (err) {
+      result = { ok: false, output: '', error: err.message || String(err) };
+    }
+
+    runBtn.disabled = false;
+    runBtn.textContent = I18N.t('runBtnLabel');
+
+    const output = (result.output || '').replace(/\s+$/, '');
+    outputPre.textContent = output || (result.error ? '' : I18N.t('outputNoOutput'));
+
+    if (!result.ok) {
+      resultBanner.className = 'result-banner err show';
+      resultBanner.textContent = I18N.t('resultErrorBanner');
+      outputPre.textContent = (output ? output + '\n' : '') + I18N.t('outputErrorPrefix') + result.error;
+      titleBlockRight.textContent = I18N.t('titleError');
+      lastRun = { code: userCode, output: output, error: result.error, passed: false };
+    } else {
+      const passed = output.trim() === ex.expected.trim();
+      progress[currentLang + ':' + ex.id] = passed;
+      renderExList();
+      if (passed) {
+        resultBanner.className = 'result-banner pass show';
+        resultBanner.textContent = I18N.t('resultPassBanner');
+        titleBlockRight.textContent = I18N.t('titlePassed');
+      } else {
+        resultBanner.className = 'result-banner fail show';
+        resultBanner.textContent = I18N.t('resultFailBannerPrefix') + ex.expected;
+        titleBlockRight.textContent = I18N.t('titleNotYet');
+      }
+      lastRun = { code: userCode, output: output, error: null, passed: passed };
+    }
+    explainBtn.disabled = false;
+    explainBtn.textContent = I18N.t('explainBtnReady');
+  });
+
+  // ---------- AI explanation (same provider pattern as the rest of the site) ----------
+  function applyProvider() {
+    const provider = providerSelect.value;
+    if (provider === 'gemini') {
+      apiKeyField.style.display = 'none';
+      apiKeyLabelHint.textContent = I18N.t('providerHintGemini');
+    } else {
+      apiKeyField.style.display = 'flex';
+      apiKeyInput.placeholder = provider === 'openai' ? 'sk-...' : 'sk-ant-...';
+      apiKeyLabelHint.textContent = I18N.t('providerHintOther');
+    }
+  }
+  providerSelect.addEventListener('change', applyProvider);
+  toggleKeyBtn.addEventListener('click', function () {
+    const isPassword = apiKeyInput.type === 'password';
+    apiKeyInput.type = isPassword ? 'text' : 'password';
+    toggleKeyBtn.textContent = isPassword ? I18N.t('hide') : I18N.t('show');
+  });
+
+  const GEMINI_PROXY_URL = 'https://migabuilder-gemini.makmurphy69.workers.dev';
+
+  function stripCodeFence(text) {
+    const trimmed = text.trim();
+    const fenceMatch = trimmed.match(/^```(?:text)?\s*([\s\S]*?)\s*```$/i);
+    return (fenceMatch ? fenceMatch[1] : trimmed).replace(/^["']|["']$/g, '');
+  }
+
+  async function callChat(systemPrompt, userPrompt) {
+    const provider = providerSelect.value;
+    const apiKey = apiKeyInput.value.trim();
+
+    if (provider === 'gemini') {
+      const response = await fetch(GEMINI_PROXY_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ model: 'gemini-3.5-flash', systemPrompt: systemPrompt, userPrompt: userPrompt })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        throw new Error((errBody && errBody.error && errBody.error.message) || (errBody && errBody.error) || ('Request failed with status ' + response.status + ' — the free daily limit may have been reached.'));
+      }
+      const data = await response.json();
+      const cand = data.candidates && data.candidates[0];
+      const raw = cand && cand.content && cand.content.parts && cand.content.parts[0] ? cand.content.parts[0].text : '';
+      if (!raw) throw new Error('The model returned an empty response.');
+      return stripCodeFence(raw);
+    }
+
+    if (provider === 'anthropic') {
+      if (!apiKey) throw new Error('Add your Anthropic API key first.');
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: 'claude-sonnet-5', max_tokens: 400, system: systemPrompt, messages: [{ role: 'user', content: userPrompt }] })
+      });
+      if (!response.ok) {
+        const errBody = await response.json().catch(() => null);
+        throw new Error((errBody && errBody.error && errBody.error.message) || ('Request failed with status ' + response.status));
+      }
+      const data = await response.json();
+      const block = data.content && data.content.find(b => b.type === 'text');
+      if (!block) throw new Error('The model returned an empty response.');
+      return stripCodeFence(block.text);
+    }
+
+    if (!apiKey) throw new Error('Add your OpenAI API key first.');
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + apiKey },
+      body: JSON.stringify({ model: 'gpt-4o-mini', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: userPrompt }], temperature: 0.4 })
+    });
+    if (!response.ok) {
+      const errBody = await response.json().catch(() => null);
+      throw new Error((errBody && errBody.error && errBody.error.message) || ('Request failed with status ' + response.status));
+    }
+    const data = await response.json();
+    const raw = data.choices && data.choices[0] && data.choices[0].message ? data.choices[0].message.content : '';
+    if (!raw) throw new Error('The model returned an empty response.');
+    return stripCodeFence(raw);
+  }
+
+  const UI_LANGUAGE_NAMES = { en: 'English', es: 'Spanish', ar: 'Arabic', zh: 'Mandarin Chinese', sw: 'Swahili', sv: 'Swedish', de: 'German', pt: 'Portuguese', fr: 'French' };
+
+  explainBtn.addEventListener('click', async function () {
+    if (!lastRun) return;
+    clearError();
+    explainBtn.disabled = true;
+    explainBtn.textContent = I18N.t('explainBtnThinking');
+    explainBox.classList.remove('show');
+    const ex = currentExercise();
+    const uiLang = I18N.getLang();
+    const responseLanguage = UI_LANGUAGE_NAMES[uiLang] || 'English';
+    const systemPrompt = 'You are a friendly, encouraging programming tutor helping a beginner. You will be given an exercise, the learner\'s code, and what actually happened when it ran. Explain in plain language, in 3-5 short sentences: what they got right, what specifically is wrong (if anything), and a nudge toward the fix — without just handing over a complete corrected solution. Be warm and specific, referencing their actual code. Respond in ' + responseLanguage + ', regardless of what language the exercise text or code is in.';
+    const userPrompt =
+      'Programming language: ' + currentLang + '\n' +
+      'Exercise: ' + localized(ex, 'title') + ' — ' + localized(ex, 'prompt') + '\n' +
+      'Learner\'s code:\n' + lastRun.code + '\n\n' +
+      (lastRun.error ? ('It raised this error: ' + lastRun.error) : ('Their code\'s output was:\n' + (lastRun.output || '(nothing)') + '\n\nThe correct output should have been:\n' + ex.expected + '\n\nDid it match? ' + (lastRun.passed ? 'Yes, it passed.' : 'No, it did not match.')));
+    try {
+      const explanation = await callChat(systemPrompt, userPrompt);
+      explainBox.textContent = explanation;
+      explainBox.classList.add('show');
+    } catch (err) {
+      showError(I18N.t('explainErrorPrefix') + err.message);
+    } finally {
+      explainBtn.disabled = false;
+      explainBtn.textContent = I18N.t('explainBtnReady');
+    }
+  });
+
+  // ---------- i18n wiring ----------
+  I18N.onChange(function () {
+    applyProvider();
+    selectExercise(currentExIndex);
+  });
+
+  I18N.init({
+    en: {
+      heroSubtitle: 'Pick Python or JavaScript, work through short exercises, and run real code right in your browser — with instant pass/fail feedback and an optional AI explanation.',
+      exercisesHeading: 'Exercises', askAiHeading: 'Ask AI to explain', providerLabel: 'Provider',
+      hintButtonLabel: '💡 Show a hint ({shown}/{total})', outputHeading: 'Output',
+      resetBtnLabel: '↺ Reset starter code', runBtnLabel: '▶ Run & check',
+      runBtnLoadingJs: 'Running…', runBtnLoadingPy: 'Running… (first run loads Python, ~10-20s)',
+      outputPlaceholder: 'Run your code to see output here.', outputNoOutput: '(no output)', outputErrorPrefix: 'Error: ',
+      timeoutMessage: 'Your code took too long to run (possible infinite loop) and was stopped after {s}s.',
+      resultErrorBanner: '⚠ Your code hit an error — see the message below.',
+      resultPassBanner: '✓ Correct! Output matches exactly what we expected.',
+      resultFailBannerPrefix: '✗ Not quite — expected:\n',
+      titleNotRun: 'NOT RUN YET', titleRunning: 'RUNNING', titleError: 'ERROR', titlePassed: 'PASSED', titleNotYet: 'NOT YET',
+      explainBtnInitial: '🤖 Explain this (run your code first)', explainBtnReady: '🤖 Explain this', explainBtnThinking: 'Thinking…',
+      explainErrorPrefix: 'Could not get an explanation: ',
+      providerHintGemini: 'Free to use — shares a limited daily capacity. Used only when you click "Explain this".',
+      providerHintOther: 'Used only to call the provider directly from your browser when you click "Explain this". Never stored, never sent anywhere else.',
+      footerText: 'Part of <a href="index.html">MigaBuilder</a>. Your code runs entirely in your own browser (Python via Pyodide/WebAssembly, JavaScript in a sandboxed Web Worker) — nothing is uploaded, except the short snippet you choose to send when you click "Explain this", which goes only to the AI provider you selected. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a>'
+    },
+    es: {
+      heroSubtitle: 'Elige Python o JavaScript, resuelve ejercicios cortos y ejecuta código real directamente en tu navegador — con retroalimentación instantánea de acierto/error y una explicación de IA opcional.',
+      exercisesHeading: 'Ejercicios', askAiHeading: 'Pídele a la IA que te explique', providerLabel: 'Proveedor',
+      hintButtonLabel: '💡 Mostrar una pista ({shown}/{total})', outputHeading: 'Salida',
+      resetBtnLabel: '↺ Restablecer código inicial', runBtnLabel: '▶ Ejecutar y verificar',
+      runBtnLoadingJs: 'Ejecutando…', runBtnLoadingPy: 'Ejecutando… (la primera vez carga Python, ~10-20s)',
+      outputPlaceholder: 'Ejecuta tu código para ver la salida aquí.', outputNoOutput: '(sin salida)', outputErrorPrefix: 'Error: ',
+      timeoutMessage: 'Tu código tardó demasiado en ejecutarse (posible bucle infinito) y se detuvo tras {s}s.',
+      resultErrorBanner: '⚠ Tu código tuvo un error — revisa el mensaje de abajo.',
+      resultPassBanner: '✓ ¡Correcto! La salida coincide exactamente con lo esperado.',
+      resultFailBannerPrefix: '✗ Aún no — se esperaba:\n',
+      titleNotRun: 'SIN EJECUTAR', titleRunning: 'EJECUTANDO', titleError: 'ERROR', titlePassed: 'CORRECTO', titleNotYet: 'AÚN NO',
+      explainBtnInitial: '🤖 Explícame esto (ejecuta tu código primero)', explainBtnReady: '🤖 Explícame esto', explainBtnThinking: 'Pensando…',
+      explainErrorPrefix: 'No se pudo obtener una explicación: ',
+      providerHintGemini: 'Gratis — comparte una capacidad diaria limitada. Solo se usa al hacer clic en "Explícame esto".',
+      providerHintOther: 'Solo se usa para llamar al proveedor directamente desde tu navegador al hacer clic en "Explícame esto". Nunca se guarda ni se envía a ningún otro lugar.',
+      footerText: 'Parte de <a href="index.html">MigaBuilder</a>. Tu código se ejecuta enteramente en tu navegador (Python vía Pyodide/WebAssembly, JavaScript en un Web Worker aislado) — nada se sube, excepto el breve fragmento que decides enviar al hacer clic en "Explícame esto", que va solo al proveedor de IA que elegiste. <a href="feedback.html">¿Encontraste un error o tienes una idea? Envía tu opinión →</a>'
+    },
+    ar: {
+      heroSubtitle: 'اختر Python أو JavaScript، تدرّب على تمارين قصيرة، وشغّل كودًا حقيقيًا مباشرة في متصفحك — مع تقييم فوري للنجاح أو الخطأ وشرح اختياري بالذكاء الاصطناعي.',
+      exercisesHeading: 'التمارين', askAiHeading: 'اطلب من الذكاء الاصطناعي أن يشرح', providerLabel: 'المزوّد',
+      hintButtonLabel: '💡 إظهار تلميح ({shown}/{total})', outputHeading: 'المخرجات',
+      resetBtnLabel: '↺ إعادة تعيين الكود الأولي', runBtnLabel: '▶ تشغيل وتحقق',
+      runBtnLoadingJs: 'جارٍ التشغيل…', runBtnLoadingPy: 'جارٍ التشغيل… (أول تشغيل يحمّل Python، ~10-20 ثانية)',
+      outputPlaceholder: 'شغّل الكود لترى المخرجات هنا.', outputNoOutput: '(لا توجد مخرجات)', outputErrorPrefix: 'خطأ: ',
+      timeoutMessage: 'استغرق الكود وقتًا طويلاً جدًا (ربما حلقة لا نهائية) وتم إيقافه بعد {s} ثانية.',
+      resultErrorBanner: '⚠ حدث خطأ في الكود — راجع الرسالة أدناه.',
+      resultPassBanner: '✓ صحيح! المخرجات مطابقة تمامًا لما كنا نتوقعه.',
+      resultFailBannerPrefix: '✗ ليس تمامًا — كان المتوقع:\n',
+      titleNotRun: 'لم يُشغَّل بعد', titleRunning: 'قيد التشغيل', titleError: 'خطأ', titlePassed: 'ناجح', titleNotYet: 'ليس بعد',
+      explainBtnInitial: '🤖 اشرح هذا (شغّل الكود أولاً)', explainBtnReady: '🤖 اشرح هذا', explainBtnThinking: 'جارٍ التفكير…',
+      explainErrorPrefix: 'تعذّر الحصول على شرح: ',
+      providerHintGemini: 'مجاني للاستخدام — يشارك سعة يومية محدودة. يُستخدم فقط عند الضغط على "اشرح هذا".',
+      providerHintOther: 'يُستخدم فقط لاستدعاء المزوّد مباشرة من متصفحك عند الضغط على "اشرح هذا". لا يُحفظ أبدًا ولا يُرسل إلى أي مكان آخر.',
+      footerText: 'جزء من <a href="index.html">MigaBuilder</a>. يعمل الكود بالكامل داخل متصفحك (Python عبر Pyodide/WebAssembly، وJavaScript داخل Web Worker معزول) — لا يُرفع شيء، باستثناء المقتطف القصير الذي تختار إرساله عند الضغط على "اشرح هذا"، والذي يذهب فقط إلى مزوّد الذكاء الاصطناعي الذي اخترته. <a href="feedback.html">وجدت خطأ أو لديك فكرة؟ أرسل ملاحظاتك ←</a>'
+    },
+    zh: {
+      heroSubtitle: '选择 Python 或 JavaScript，完成简短的练习，并直接在浏览器中运行真实代码——获得即时的通过/未通过反馈，以及可选的 AI 讲解。',
+      exercisesHeading: '练习', askAiHeading: '请 AI 讲解', providerLabel: '提供方',
+      hintButtonLabel: '💡 显示提示 ({shown}/{total})', outputHeading: '输出',
+      resetBtnLabel: '↺ 重置初始代码', runBtnLabel: '▶ 运行并检查',
+      runBtnLoadingJs: '运行中…', runBtnLoadingPy: '运行中…（首次运行需加载 Python，约 10-20 秒）',
+      outputPlaceholder: '运行你的代码即可在此查看输出。', outputNoOutput: '（无输出）', outputErrorPrefix: '错误：',
+      timeoutMessage: '你的代码运行时间过长（可能是无限循环），已在 {s} 秒后被停止。',
+      resultErrorBanner: '⚠ 你的代码出现了错误——请查看下方消息。',
+      resultPassBanner: '✓ 正确！输出与预期完全一致。',
+      resultFailBannerPrefix: '✗ 还不对——期望的输出是：\n',
+      titleNotRun: '尚未运行', titleRunning: '运行中', titleError: '错误', titlePassed: '已通过', titleNotYet: '尚未通过',
+      explainBtnInitial: '🤖 讲解一下（请先运行你的代码）', explainBtnReady: '🤖 讲解一下', explainBtnThinking: '思考中…',
+      explainErrorPrefix: '无法获取讲解：',
+      providerHintGemini: '免费使用——共享有限的每日额度。仅在点击"讲解一下"时使用。',
+      providerHintOther: '仅在点击"讲解一下"时，直接从你的浏览器调用该提供方。绝不会被存储，也不会发送到其他任何地方。',
+      footerText: '隶属于 <a href="index.html">MigaBuilder</a>。你的代码完全在你自己的浏览器中运行（Python 通过 Pyodide/WebAssembly，JavaScript 运行在沙盒化的 Web Worker 中）——不会上传任何内容，除了你点击"讲解一下"时选择发送的那一小段代码，它只会发送给你选择的 AI 提供方。<a href="feedback.html">发现了错误或有新想法？发送反馈 →</a>'
+    },
+    sw: {
+      heroSubtitle: 'Chagua Python au JavaScript, fanya mazoezi mafupi, na endesha kanuni halisi moja kwa moja kwenye kivinjari chako — ukiwa na maoni ya papo hapo ya kufaulu/kutofaulu na maelezo ya hiari kutoka kwa AI.',
+      exercisesHeading: 'Mazoezi', askAiHeading: 'Muulize AI aeleze', providerLabel: 'Mtoa huduma',
+      hintButtonLabel: '💡 Onyesha dokezo ({shown}/{total})', outputHeading: 'Matokeo',
+      resetBtnLabel: '↺ Rejesha kanuni ya awali', runBtnLabel: '▶ Endesha na kagua',
+      runBtnLoadingJs: 'Inaendesha…', runBtnLoadingPy: 'Inaendesha… (mara ya kwanza hupakia Python, ~sekunde 10-20)',
+      outputPlaceholder: 'Endesha kanuni yako kuona matokeo hapa.', outputNoOutput: '(hakuna matokeo)', outputErrorPrefix: 'Hitilafu: ',
+      timeoutMessage: 'Kanuni yako ilichukua muda mrefu sana kuendesha (huenda ni mzunguko usio na mwisho) na ilisimamishwa baada ya sekunde {s}.',
+      resultErrorBanner: '⚠ Kanuni yako ilikuwa na hitilafu — angalia ujumbe hapa chini.',
+      resultPassBanner: '✓ Sahihi! Matokeo yanalingana kabisa na tulivyotarajia.',
+      resultFailBannerPrefix: '✗ Bado sio sahihi — matokeo yaliyotarajiwa:\n',
+      titleNotRun: 'HAIJAENDESHWA', titleRunning: 'INAENDESHA', titleError: 'HITILAFU', titlePassed: 'IMEFAULU', titleNotYet: 'BADO',
+      explainBtnInitial: '🤖 Eleza hii (endesha kanuni yako kwanza)', explainBtnReady: '🤖 Eleza hii', explainBtnThinking: 'Inafikiri…',
+      explainErrorPrefix: 'Imeshindwa kupata maelezo: ',
+      providerHintGemini: 'Bure kutumia — hushiriki uwezo mdogo wa kila siku. Hutumika tu unapobofya "Eleza hii".',
+      providerHintOther: 'Hutumika tu kuita mtoa huduma moja kwa moja kutoka kwenye kivinjari chako unapobofya "Eleza hii". Haihifadhiwi kamwe, wala haitumwi mahali pengine popote.',
+      footerText: 'Sehemu ya <a href="index.html">MigaBuilder</a>. Kanuni yako inaendesha ndani ya kivinjari chako pekee (Python kupitia Pyodide/WebAssembly, JavaScript ndani ya Web Worker iliyotengwa) — hakuna kinachopakiwa, isipokuwa kipande kifupi unachochagua kutuma unapobofya "Eleza hii", ambacho huenda tu kwa mtoa huduma wa AI uliyemchagua. <a href="feedback.html">Umepata hitilafu au una wazo? Tuma maoni →</a>'
+    },
+    sv: {
+      heroSubtitle: "Välj Python eller JavaScript, gör korta övningar och kör riktig kod direkt i webbläsaren — med omedelbar rätt/fel-återkoppling och en valfri AI-förklaring.",
+      exercisesHeading: "Övningar",
+      askAiHeading: "Be AI förklara",
+      providerLabel: "Leverantör",
+      hintButtonLabel: "💡 Visa en ledtråd ({shown}/{total})",
+      outputHeading: "Utdata",
+      resetBtnLabel: "↺ Återställ startkoden",
+      runBtnLabel: "▶ Kör & kontrollera",
+      runBtnLoadingJs: "Kör…",
+      runBtnLoadingPy: "Kör… (första körningen laddar Python, ~10–20 s)",
+      outputPlaceholder: "Kör din kod för att se utdata här.",
+      outputNoOutput: "(ingen utdata)",
+      outputErrorPrefix: "Fel: ",
+      timeoutMessage: "Din kod tog för lång tid (kanske en oändlig loop) och stoppades efter {s} s.",
+      resultErrorBanner: "⚠ Din kod stötte på ett fel — se meddelandet nedan.",
+      resultPassBanner: "✓ Rätt! Utdata stämmer exakt med det vi förväntade oss.",
+      resultFailBannerPrefix: "✗ Inte riktigt — förväntat:\n",
+      titleNotRun: "INTE KÖRD ÄN",
+      titleRunning: "KÖR",
+      titleError: "FEL",
+      titlePassed: "GODKÄND",
+      titleNotYet: "INTE ÄN",
+      explainBtnInitial: "🤖 Förklara (kör din kod först)",
+      explainBtnReady: "🤖 Förklara",
+      explainBtnThinking: "Tänker…",
+      explainErrorPrefix: "Kunde inte hämta en förklaring: ",
+      providerHintGemini: "Gratis att använda — delar en begränsad daglig kapacitet. Används bara när du klickar på \"Förklara\".",
+      providerHintOther: "Används bara för att anropa leverantören direkt från din webbläsare när du klickar på \"Förklara\". Sparas aldrig och skickas aldrig någon annanstans.",
+      footerText: "En del av <a href=\"index.html\">MigaBuilder</a>. Din kod körs helt i din egen webbläsare (Python via Pyodide/WebAssembly, JavaScript i en isolerad Web Worker) — ingenting laddas upp, förutom det korta kodavsnitt du väljer att skicka när du klickar på \"Förklara\", som bara går till den AI-leverantör du valt. <a href=\"feedback.html\">Hittat en bugg eller har en idé? Skicka feedback →</a>"
+    },
+    de: {
+      heroSubtitle: "Wähle Python oder JavaScript, löse kurze Übungen und führe echten Code direkt im Browser aus — mit sofortiger Rückmeldung, ob es stimmt, und optionaler KI-Erklärung.",
+      exercisesHeading: "Übungen",
+      askAiHeading: "KI um Erklärung bitten",
+      providerLabel: "Anbieter",
+      hintButtonLabel: "💡 Tipp anzeigen ({shown}/{total})",
+      outputHeading: "Ausgabe",
+      resetBtnLabel: "↺ Startcode zurücksetzen",
+      runBtnLabel: "▶ Ausführen & prüfen",
+      runBtnLoadingJs: "Läuft…",
+      runBtnLoadingPy: "Läuft… (beim ersten Mal wird Python geladen, ~10–20 s)",
+      outputPlaceholder: "Führe deinen Code aus, um hier die Ausgabe zu sehen.",
+      outputNoOutput: "(keine Ausgabe)",
+      outputErrorPrefix: "Fehler: ",
+      timeoutMessage: "Dein Code lief zu lange (möglicherweise eine Endlosschleife) und wurde nach {s} s gestoppt.",
+      resultErrorBanner: "⚠ Dein Code hat einen Fehler ausgelöst — siehe die Meldung unten.",
+      resultPassBanner: "✓ Richtig! Die Ausgabe stimmt genau mit dem Erwarteten überein.",
+      resultFailBannerPrefix: "✗ Nicht ganz — erwartet:\n",
+      titleNotRun: "NOCH NICHT AUSGEFÜHRT",
+      titleRunning: "LÄUFT",
+      titleError: "FEHLER",
+      titlePassed: "BESTANDEN",
+      titleNotYet: "NOCH NICHT",
+      explainBtnInitial: "🤖 Erklären (zuerst Code ausführen)",
+      explainBtnReady: "🤖 Erklären",
+      explainBtnThinking: "Denke nach…",
+      explainErrorPrefix: "Keine Erklärung erhalten: ",
+      providerHintGemini: "Kostenlos nutzbar — teilt sich eine begrenzte Tageskapazität. Wird nur verwendet, wenn du auf \"Erklären\" klickst.",
+      providerHintOther: "Wird nur verwendet, um den Anbieter direkt aus deinem Browser aufzurufen, wenn du auf \"Erklären\" klickst. Nie gespeichert, nie anderswohin gesendet.",
+      footerText: "Teil von <a href=\"index.html\">MigaBuilder<\/a>. Dein Code läuft komplett in deinem eigenen Browser (Python über Pyodide/WebAssembly, JavaScript in einem abgeschotteten Web Worker) — nichts wird hochgeladen, außer dem kurzen Ausschnitt, den du beim Klick auf \"Erklären\" sendest; der geht nur an den gewählten KI-Anbieter. <a href=\"feedback.html\">Einen Fehler gefunden oder eine Idee? Feedback senden →<\/a>"
+    },
+    pt: {
+      heroSubtitle: "Escolha Python ou JavaScript, resolva exercícios curtos e execute código de verdade no navegador — com retorno instantâneo de acerto/erro e uma explicação de IA opcional.",
+      exercisesHeading: "Exercícios",
+      askAiHeading: "Pedir explicação à IA",
+      providerLabel: "Provedor",
+      hintButtonLabel: "💡 Mostrar dica ({shown}/{total})",
+      outputHeading: "Saída",
+      resetBtnLabel: "↺ Restaurar código inicial",
+      runBtnLabel: "▶ Executar e verificar",
+      runBtnLoadingJs: "Executando…",
+      runBtnLoadingPy: "Executando… (a primeira execução carrega o Python, ~10-20 s)",
+      outputPlaceholder: "Execute seu código para ver a saída aqui.",
+      outputNoOutput: "(sem saída)",
+      outputErrorPrefix: "Erro: ",
+      timeoutMessage: "Seu código demorou demais (possível loop infinito) e foi interrompido após {s} s.",
+      resultErrorBanner: "⚠ Seu código encontrou um erro — veja a mensagem abaixo.",
+      resultPassBanner: "✓ Correto! A saída corresponde exatamente ao esperado.",
+      resultFailBannerPrefix: "✗ Quase — esperado:\n",
+      titleNotRun: "AINDA NÃO EXECUTADO",
+      titleRunning: "EXECUTANDO",
+      titleError: "ERRO",
+      titlePassed: "APROVADO",
+      titleNotYet: "AINDA NÃO",
+      explainBtnInitial: "🤖 Explicar (execute o código primeiro)",
+      explainBtnReady: "🤖 Explicar",
+      explainBtnThinking: "Pensando…",
+      explainErrorPrefix: "Não foi possível obter uma explicação: ",
+      providerHintGemini: "Uso gratuito — compartilha uma capacidade diária limitada. Só é usado quando você clica em \"Explicar\".",
+      providerHintOther: "Usada apenas para chamar o provedor diretamente do seu navegador quando você clica em \"Explicar\". Nunca é armazenada nem enviada a outro lugar.",
+      footerText: "Parte do <a href=\"index.html\">MigaBuilder<\/a>. Seu código roda inteiramente no seu navegador (Python via Pyodide/WebAssembly, JavaScript num Web Worker isolado) — nada é enviado, exceto o trecho curto que você escolhe mandar ao clicar em \"Explicar\", que vai apenas para o provedor de IA selecionado. <a href=\"feedback.html\">Encontrou um erro ou tem uma ideia? Envie sua opinião →<\/a>"
+    },
+    fr: {
+      heroSubtitle: "Choisissez Python ou JavaScript, faites de courts exercices et exécutez du vrai code dans votre navigateur — avec un retour immédiat réussi/échoué et une explication par IA facultative.",
+      exercisesHeading: "Exercices",
+      askAiHeading: "Demander une explication à l'IA",
+      providerLabel: "Fournisseur",
+      hintButtonLabel: "💡 Afficher un indice ({shown}/{total})",
+      outputHeading: "Sortie",
+      resetBtnLabel: "↺ Réinitialiser le code de départ",
+      runBtnLabel: "▶ Exécuter et vérifier",
+      runBtnLoadingJs: "Exécution…",
+      runBtnLoadingPy: "Exécution… (la première fois charge Python, ~10-20 s)",
+      outputPlaceholder: "Exécutez votre code pour voir la sortie ici.",
+      outputNoOutput: "(aucune sortie)",
+      outputErrorPrefix: "Erreur : ",
+      timeoutMessage: "Votre code a mis trop de temps (boucle infinie possible) et a été arrêté après {s} s.",
+      resultErrorBanner: "⚠ Votre code a rencontré une erreur — voir le message ci-dessous.",
+      resultPassBanner: "✓ Correct ! La sortie correspond exactement au résultat attendu.",
+      resultFailBannerPrefix: "✗ Pas tout à fait — attendu :\n",
+      titleNotRun: "PAS ENCORE EXÉCUTÉ",
+      titleRunning: "EN COURS",
+      titleError: "ERREUR",
+      titlePassed: "RÉUSSI",
+      titleNotYet: "PAS ENCORE",
+      explainBtnInitial: "🤖 Expliquer (exécutez d'abord le code)",
+      explainBtnReady: "🤖 Expliquer",
+      explainBtnThinking: "Réflexion…",
+      explainErrorPrefix: "Impossible d'obtenir une explication : ",
+      providerHintGemini: "Gratuit — partage une capacité quotidienne limitée. Utilisé uniquement quand vous cliquez sur \"Expliquer\".",
+      providerHintOther: "Utilisée uniquement pour appeler le fournisseur directement depuis votre navigateur quand vous cliquez sur \"Expliquer\". Jamais enregistrée, jamais envoyée ailleurs.",
+      footerText: "Fait partie de <a href=\"index.html\">MigaBuilder<\/a>. Votre code s'exécute entièrement dans votre navigateur (Python via Pyodide/WebAssembly, JavaScript dans un Web Worker isolé) — rien n'est envoyé, sauf le court extrait que vous choisissez d'envoyer en cliquant sur \"Expliquer\", qui ne va qu'au fournisseur d'IA choisi. <a href=\"feedback.html\">Un bug ou une idée ? Envoyez votre avis →<\/a>"
+    }
+  });
+  applyProvider();
+  selectExercise(0);
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

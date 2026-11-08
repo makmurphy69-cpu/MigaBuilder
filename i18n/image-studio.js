@@ -214,3 +214,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "For portraits, choose “People and portraits”: it is a small download and very fast.": {
+  "es": "Para retratos, elige “People and portraits”: es una descarga pequeña y muy rápida.",
+  "ar": "للصور الشخصية اختر «People and portraits»: تنزيله صغير وسريع جدًا.",
+  "zh": "人像照片选“People and portraits”：下载小，速度很快。",
+  "sw": "Kwa picha za watu, chagua “People and portraits”: ni upakuaji mdogo na wa haraka sana.",
+  "sv": "För porträtt, välj ”People and portraits”: den är liten att ladda ner och mycket snabb.",
+  "de": "Für Porträts wähle „People and portraits“: kleiner Download und sehr schnell.",
+  "pt": "Para retratos, escolha “People and portraits”: o download é pequeno e muito rápido.",
+  "fr": "Pour les portraits, choisissez « People and portraits » : le téléchargement est léger et très rapide."
+ },
+ "Use the Colour mode for products photographed on a plain background.": {
+  "es": "Usa el modo Color para productos fotografiados sobre un fondo liso.",
+  "ar": "استخدم وضع اللون للمنتجات المصوّرة على خلفية سادة.",
+  "zh": "在纯色背景上拍摄的产品，用“颜色”模式。",
+  "sw": "Tumia hali ya Rangi kwa bidhaa zilizopigwa picha kwenye mandharinyuma ya rangi moja.",
+  "sv": "Använd färgläget för produkter som är fotograferade mot en enfärgad bakgrund.",
+  "de": "Nutze den Farbmodus für Produkte, die vor einem einfarbigen Hintergrund fotografiert wurden.",
+  "pt": "Use o modo Cor para produtos fotografados em fundo liso.",
+  "fr": "Utilisez le mode Couleur pour les produits photographiés sur un fond uni."
+ },
+ "To upscale, use AI sharpen 4× for photos and 2× for screenshots, logos and graphics.": {
+  "es": "Para ampliar, usa el enfoque con IA 4× para fotos y 2× para capturas, logotipos y gráficos.",
+  "ar": "للتكبير استخدم التحسين بالذكاء الاصطناعي 4× للصور و2× للقطات الشاشة والشعارات والرسومات.",
+  "zh": "放大时，照片用 AI 锐化 4×，截图、标志和图形用 2×。",
+  "sw": "Kukuza, tumia AI sharpen 4× kwa picha na 2× kwa picha za skrini, nembo na michoro.",
+  "sv": "För uppskalning, använd AI-skärpa 4× för foton och 2× för skärmbilder, logotyper och grafik.",
+  "de": "Zum Vergrößern nimm KI-Schärfen 4× für Fotos und 2× für Screenshots, Logos und Grafiken.",
+  "pt": "Para ampliar, use a nitidez com IA 4× para fotos e 2× para capturas de tela, logos e gráficos.",
+  "fr": "Pour agrandir, utilisez la netteté IA 4× pour les photos et 2× pour les captures d’écran, logos et graphismes."
+ },
+ "Can I make a transparent PNG?": {
+  "es": "¿Puedo crear un PNG transparente?",
+  "ar": "هل يمكنني إنشاء PNG بخلفية شفافة؟",
+  "zh": "能做透明背景的 PNG 吗？",
+  "sw": "Je, naweza kutengeneza PNG yenye uwazi?",
+  "sv": "Kan jag göra en genomskinlig PNG?",
+  "de": "Kann ich ein transparentes PNG erstellen?",
+  "pt": "Posso criar um PNG transparente?",
+  "fr": "Puis-je créer un PNG transparent ?"
+ },
+ "Yes. Choose “Transparent background” as the result and download the PNG.": {
+  "es": "Sí. Elige “Transparent background” como resultado y descarga el PNG.",
+  "ar": "نعم. اختر «Transparent background» كنتيجة ثم نزّل ملف PNG.",
+  "zh": "可以。结果选择“Transparent background”，然后下载 PNG。",
+  "sw": "Ndiyo. Chagua “Transparent background” kama matokeo na upakue PNG.",
+  "sv": "Ja. Välj ”Transparent background” som resultat och ladda ner PNG-filen.",
+  "de": "Ja. Wähle „Transparent background“ als Ergebnis und lade das PNG herunter.",
+  "pt": "Sim. Escolha “Transparent background” como resultado e baixe o PNG.",
+  "fr": "Oui. Choisissez « Transparent background » comme résultat et téléchargez le PNG."
+ },
+ "Why does the first background removal take longer?": {
+  "es": "¿Por qué tarda más la primera vez que quito un fondo?",
+  "ar": "لماذا تستغرق إزالة الخلفية أول مرة وقتًا أطول؟",
+  "zh": "为什么第一次去背景比较慢？",
+  "sw": "Kwa nini kuondoa mandharinyuma mara ya kwanza kunachukua muda mrefu?",
+  "sv": "Varför tar den första bakgrundsborttagningen längre tid?",
+  "de": "Warum dauert das erste Entfernen des Hintergrunds länger?",
+  "pt": "Por que a primeira remoção de fundo demora mais?",
+  "fr": "Pourquoi la première suppression d’arrière-plan prend-elle plus de temps ?"
+ },
+ "The AI model is downloaded the first time (7 MB for people, 115 MB for any object) and then runs on your device, so later images are much faster.": {
+  "es": "El modelo de IA se descarga la primera vez (7 MB para personas, 115 MB para cualquier objeto) y luego funciona en tu dispositivo, así que las siguientes imágenes van mucho más rápido.",
+  "ar": "يُنزَّل نموذج الذكاء الاصطناعي في المرة الأولى (7 ميغابايت للأشخاص، و115 ميغابايت لأي جسم) ثم يعمل على جهازك، فتصبح الصور التالية أسرع بكثير.",
+  "zh": "第一次会下载 AI 模型（人像 7 MB，任意物体 115 MB），之后在你的设备上运行，后续图片会快得多。",
+  "sw": "Muundo wa AI unapakuliwa mara ya kwanza (MB 7 kwa watu, MB 115 kwa kitu chochote) kisha unafanya kazi kwenye kifaa chako, hivyo picha zinazofuata ni za haraka zaidi.",
+  "sv": "AI-modellen laddas ner första gången (7 MB för människor, 115 MB för alla slags motiv) och körs sedan på din enhet, så nästa bilder går mycket snabbare.",
+  "de": "Das KI-Modell wird beim ersten Mal heruntergeladen (7 MB für Personen, 115 MB für beliebige Objekte) und läuft dann auf deinem Gerät, sodass weitere Bilder viel schneller gehen.",
+  "pt": "O modelo de IA é baixado na primeira vez (7 MB para pessoas, 115 MB para qualquer objeto) e depois roda no seu aparelho, então as próximas imagens são bem mais rápidas.",
+  "fr": "Le modèle d’IA est téléchargé la première fois (7 Mo pour les personnes, 115 Mo pour tout objet), puis il fonctionne sur votre appareil : les images suivantes sont bien plus rapides."
+ }
+});

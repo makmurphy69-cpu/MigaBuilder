@@ -1,0 +1,1731 @@
+<!-- Generated from /cad-forge.html by scripts/build-language-pages.mjs. Edit the English page, then rebuild. -->
+<!DOCTYPE html>
+<html lang="de" data-en-title="Free house &amp; building design CAD in your browser — CAD Forge | MigaBuilder">
+<head>
+<meta charset="UTF-8"><base href="/"><script>window.MIGA_PAGE_LANG='de';addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href^="#"]');if(!a||e.defaultPrevented||a.target)return;e.preventDefault();var h=a.getAttribute('href');if(h.length>1)location.hash=h;});</script><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script><link rel="canonical" href="https://migabuilder.com/de/cad-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/cad-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kostenloses CAD für Haus- und Gebäudeentwurf im Browser — CAD Forge | MigaBuilder</title>
+<meta name="description" content="CAD Forge macht aus einem Grundriss ein 3D-Haus: Zeichne Wände, Türen und Fenster, und es baut Dach und Holzständerwerk, Grundriss- und Ansichtszeichnungen sowie eine Materialliste.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kostenloses CAD für Haus- und Gebäudeentwurf im Browser — CAD Forge">
+<meta property="og:description" content="CAD Forge macht aus einem Grundriss ein 3D-Haus: Zeichne Wände, Türen und Fenster, und es baut Dach und Holzständerwerk, Grundriss- und Ansichtszeichnungen sowie eine Materialliste.">
+<meta property="og:url" content="https://migabuilder.com/de/cad-forge.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tutorials.css">
+<style>
+  :root {
+    --navy: #0E2A47;
+    --navy-deep: #081826;
+    --paper: #EDEAE0;
+    --ink: #16202B;
+    --line-cyan: #6FD1E0;
+    --line-cyan-dim: rgba(111, 209, 224, 0.28);
+    --amber: #E2A63B;
+    --amber-ink: #4A3410;
+    --success: #4E9E73;
+    --error: #D8604A;
+    --radius: 3px;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--navy); color: var(--paper); font-family: 'IBM Plex Sans', system-ui, sans-serif; min-height: 100vh; }
+  body {
+    background-image: linear-gradient(rgba(111,209,224,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(111,209,224,.13) 1px, transparent 1px);
+    background-size: 28px 28px; background-position: -1px -1px;
+  }
+  a { color: var(--line-cyan); }
+  button, input, select { font-family: inherit; }
+  :focus-visible { outline: 2px solid var(--line-cyan); outline-offset: 2px; }
+
+  header.masthead { display: flex; align-items: center; gap: 16px; padding: 22px clamp(16px, 4vw, 48px) 18px; position: relative; flex-wrap: wrap; }
+  header.masthead::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 3px;
+    background-image: repeating-linear-gradient(90deg, var(--line-cyan) 0, var(--line-cyan) 1px, transparent 1px, transparent 9px);
+    opacity: 0.55;
+  }
+  .logo-mark { width: 42px; height: 42px; flex: none; }
+  header.masthead h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin: 0;
+    background: linear-gradient(90deg, var(--paper), var(--line-cyan) 140%); -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header.masthead p { margin: 2px 0 0; font-size: 14px; color: rgba(237, 234, 224, 0.65); max-width: 760px; }
+  .back-home { margin-left: auto; font-size: 13px; color: var(--paper); text-decoration: none; border: 1px solid var(--line-cyan-dim); padding: 6px 12px; border-radius: 20px; }
+
+  main.cad-main {
+    display: grid; grid-template-columns: 250px minmax(0, 1fr) 270px; gap: 16px;
+    padding: 18px clamp(12px, 2.4vw, 32px) 40px; align-items: start;
+  }
+  @media (max-width: 1180px) { main.cad-main { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--paper); color: var(--ink); border-radius: var(--radius);
+    padding: 14px 14px 18px; max-height: calc(100vh - 24px); overflow-y: auto; position: sticky; top: 12px;
+  }
+  @media (max-width: 1180px) { .panel { position: static; max-height: none; } }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+    color: rgba(22, 32, 43, 0.72); margin: 14px 0 8px; padding-top: 12px; border-top: 1px solid rgba(22, 32, 43, 0.14);
+  }
+  .section-title:first-child { margin-top: 0; padding-top: 0; border-top: none; }
+  .field { margin-bottom: 9px; }
+  .field label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 3px; }
+  .hint { font-size: 11.5px; color: rgba(22, 32, 43, 0.72); line-height: 1.45; margin: 4px 0 8px; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  input[type="text"], input[type="number"], select {
+    width: 100%; font-size: 13px; padding: 6px 7px; border: 1px solid rgba(22, 32, 43, 0.28);
+    border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  .check { display: flex; align-items: center; gap: 6px; font-size: 12.5px; margin: 6px 0; }
+  .draft-btn {
+    width: 100%; background: var(--amber); color: var(--amber-ink); border: none; border-radius: var(--radius);
+    font-weight: 600; font-size: 13px; padding: 8px; cursor: pointer; margin-bottom: 6px;
+  }
+  .draft-btn:hover { filter: brightness(1.06); }
+  .draft-btn.secondary { background: #fff; color: var(--ink); border: 1px solid rgba(22, 32, 43, 0.28); }
+  .draft-btn.danger { background: #fff; color: #8a2a1a; border: 1px solid rgba(216, 96, 74, 0.6); }
+  .btn-row { display: flex; gap: 6px; }
+  .btn-row > * { flex: 1; }
+
+  /* workspace */
+  .workspace { background: var(--navy-deep); border: 1px solid var(--line-cyan-dim); border-radius: var(--radius); padding: 10px; min-width: 0; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+  .tab { background: transparent; color: var(--paper); border: 1px solid var(--line-cyan-dim); padding: 6px 14px; border-radius: 2px; cursor: pointer; font-size: 13px; font-weight: 600; }
+  .tab.active { background: var(--line-cyan); color: var(--navy-deep); border-color: var(--line-cyan); }
+  .toolbar { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; padding-bottom: 8px; margin-bottom: 8px; border-bottom: 1px solid var(--line-cyan-dim); font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: rgba(111, 209, 224, 0.8); }
+  .toolbar button { background: transparent; border: 1px solid var(--line-cyan-dim); color: var(--paper); border-radius: 2px; padding: 5px 9px; cursor: pointer; font-size: 12px; font-family: 'IBM Plex Sans', sans-serif; }
+  .toolbar button.active { background: var(--amber); color: var(--amber-ink); border-color: var(--amber); font-weight: 600; }
+  .toolbar button:disabled { opacity: 0.4; cursor: default; }
+  .toolbar .sep { width: 1px; align-self: stretch; background: var(--line-cyan-dim); margin: 0 3px; }
+  .toolbar select { width: auto; font-size: 12px; padding: 3px 4px; background: var(--navy-deep); color: var(--paper); border-color: var(--line-cyan-dim); }
+  .toolbar label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
+  kbd { font-family: 'IBM Plex Mono', monospace; font-size: 10px; opacity: 0.7; }
+
+  .views { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .views.plan-only { grid-template-columns: 1fr; }
+  .views.plan-only .view3d-wrap { display: none; }
+  .views.three-only { grid-template-columns: 1fr; }
+  .views.three-only .plan-wrap { display: none; }
+  @media (max-width: 760px) { .views { grid-template-columns: 1fr; } }
+  .plan-wrap, .view3d-wrap { position: relative; height: min(66vh, 620px); min-height: 360px; border-radius: 2px; overflow: hidden; }
+  .plan-wrap { background: #f7f5ef; }
+  #plan { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; -webkit-user-select: none; }
+  #view3d { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
+  .hud { position: absolute; left: 8px; bottom: 8px; font: 500 11.5px 'IBM Plex Mono', monospace; background: rgba(8, 24, 38, 0.86); color: var(--paper); padding: 5px 8px; border-radius: 2px; pointer-events: none; max-width: calc(100% - 16px); }
+  .view-label { position: absolute; top: 6px; left: 8px; font: 500 10.5px 'IBM Plex Mono', monospace; color: rgba(22, 32, 43, 0.72); pointer-events: none; }
+  .view3d-wrap .view-label { color: rgba(237, 234, 224, 0.55); }
+  .view3d-tools { position: absolute; top: 6px; right: 6px; display: flex; gap: 4px; }
+  .view3d-tools button { background: rgba(8, 24, 38, 0.8); color: var(--paper); border: 1px solid var(--line-cyan-dim); border-radius: 2px; font-size: 11.5px; padding: 4px 8px; cursor: pointer; }
+  .view3d-tools button.active { background: var(--line-cyan); color: var(--navy-deep); }
+  .no3d { position: absolute; inset: 0; display: none; place-items: center; text-align: center; padding: 20px; color: rgba(237, 234, 224, 0.75); font-size: 13px; }
+
+  .sheet-wrap { background: #cfd6dc; padding: 12px; border-radius: 2px; overflow: auto; }
+  #sheet { width: 100%; height: auto; display: block; background: #fff; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35); min-width: 640px; }
+  .bom { background: var(--paper); color: var(--ink); border-radius: 2px; padding: 14px; overflow-x: auto; }
+  .bom table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .bom th, .bom td { text-align: left; padding: 6px 8px; border-bottom: 1px solid rgba(22, 32, 43, 0.12); }
+  .bom th { font-family: 'Space Grotesk', sans-serif; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.04em; color: rgba(22, 32, 43, 0.72); }
+  .bom td.num { text-align: right; font-family: 'IBM Plex Mono', monospace; }
+  .bom tr.group td { background: rgba(14, 42, 71, 0.07); font-weight: 600; font-family: 'Space Grotesk', sans-serif; }
+  .bom-head { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .bom-head h2 { margin: 0; font: 700 18px 'Space Grotesk', sans-serif; }
+  .bom-head .draft-btn { width: auto; padding: 7px 14px; margin: 0; }
+
+  .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .stat { background: #fff; border: 1px solid rgba(22, 32, 43, 0.14); border-radius: var(--radius); padding: 6px 8px; }
+  .stat b { display: block; font: 600 15px 'Space Grotesk', sans-serif; }
+  .stat span { font-size: 10.5px; color: rgba(22, 32, 43, 0.72); text-transform: uppercase; letter-spacing: 0.04em; }
+  .props-empty { font-size: 12.5px; color: rgba(22, 32, 43, 0.72); line-height: 1.5; }
+  .shortcuts { font-size: 11.5px; line-height: 1.7; color: rgba(22, 32, 43, 0.7); margin: 0; padding-left: 16px; }
+
+  .toast { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 9px 16px; border-radius: 3px; font-size: 13px; box-shadow: 0 6px 20px rgba(0,0,0,.4); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 50; max-width: 90vw; }
+  .toast.show { opacity: 1; }
+  .hidden { display: none !important; }
+  footer { padding: 16px clamp(16px, 3vw, 40px) 40px; font-size: 12.5px; color: rgba(237, 234, 224, 0.5); }
+  footer a { color: rgba(237, 234, 224, 0.75); }
+</style>
+<script src="i18n.js"></script>
+<script src="i18n/cad-forge.js"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Welche Dateien kann ich herunterladen?","acceptedAnswer":{"@type":"Answer","text":"Grundriss- und Ansichtszeichnungen, eine Materialliste sowie DXF-, SVG-, OBJ- und STL-Dateien."}},{"@type":"Question","name":"Ist CAD Forge kostenlos?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Nutzung ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke."}},{"@type":"Question","name":"Werden meine Dateien hochgeladen?","acceptedAnswer":{"@type":"Answer","text":"Nein. Es läuft komplett in deinem Browser, deine Dateien und Texte bleiben also auf deinem Gerät."}}],"inLanguage":"de"}</script>
+<!-- language versions (scripts/build-language-pages.mjs) -->
+<link rel="alternate" hreflang="en" href="https://migabuilder.com/cad-forge.html">
+<link rel="alternate" hreflang="es" href="https://migabuilder.com/es/cad-forge.html">
+<link rel="alternate" hreflang="ar" href="https://migabuilder.com/ar/cad-forge.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://migabuilder.com/zh/cad-forge.html">
+<link rel="alternate" hreflang="sw" href="https://migabuilder.com/sw/cad-forge.html">
+<link rel="alternate" hreflang="sv" href="https://migabuilder.com/sv/cad-forge.html">
+<link rel="alternate" hreflang="de" href="https://migabuilder.com/de/cad-forge.html">
+<link rel="alternate" hreflang="pt" href="https://migabuilder.com/pt/cad-forge.html">
+<link rel="alternate" hreflang="fr" href="https://migabuilder.com/fr/cad-forge.html">
+<link rel="alternate" hreflang="x-default" href="https://migabuilder.com/cad-forge.html">
+<!-- /language versions -->
+</head>
+<body>
+
+<header class="masthead">
+  <svg class="logo-mark" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <rect x="1" y="1" width="38" height="38" rx="9" fill="#081826" stroke="#6FD1E0" stroke-width="1.4"/>
+    <path d="M8 19 L20 9 L32 19" stroke="#E2A63B" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <path d="M11 17 V31 H29 V17" stroke="#EDEAE0" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M17 31 V24 H23 V31" stroke="#6FD1E0" stroke-width="1.8" stroke-linejoin="round"/>
+  </svg>
+  <div>
+    <h1>CAD Forge</h1>
+    <p>Draw a floor plan with walls, doors and windows. CAD Forge builds the 3D house, roof and timber frame from it, then makes plan and elevation drawings and a material list.</p>
+  </div>
+  <a class="back-home" href="/de/#tools">← All tools</a>
+</header>
+
+<main class="cad-main">
+  <!-- ============ left: project ============ -->
+  <section class="panel" aria-label="Project settings">
+    <div class="section-title">Start</div>
+    <button type="button" class="draft-btn" id="sampleBtn">Load sample house</button>
+    <div class="row-2">
+      <div class="field"><label for="quickW">Width (mm)</label><input type="number" id="quickW" value="10000" min="1000" step="100"></div>
+      <div class="field"><label for="quickD">Depth (mm)</label><input type="number" id="quickD" value="7000" min="1000" step="100"></div>
+    </div>
+    <button type="button" class="draft-btn secondary" id="quickRectBtn">Add rectangular outline</button>
+    <button type="button" class="draft-btn danger" id="clearBtn">Clear drawing</button>
+
+    <div class="section-title">Project</div>
+    <div class="field"><label for="projName">Project name</label><input type="text" id="projName" maxlength="80"></div>
+    <div class="row-2">
+      <div class="field"><label for="wallHeight">Wall height</label><input type="number" id="wallHeight" min="2000" max="6000" step="50"></div>
+      <div class="field"><label for="slabThk">Floor slab</label><input type="number" id="slabThk" min="50" max="600" step="10"></div>
+    </div>
+    <div class="row-2">
+      <div class="field"><label for="extThk">Outer wall</label><input type="number" id="extThk" min="80" max="600" step="10"></div>
+      <div class="field"><label for="intThk">Inner wall</label><input type="number" id="intThk" min="50" max="400" step="10"></div>
+    </div>
+    <div class="field"><label for="newWallKind">New walls are</label>
+      <select id="newWallKind"><option value="ext">Outer walls</option><option value="int">Inner walls</option></select>
+    </div>
+    <div class="field"><label for="studSpacing">Stud spacing</label>
+      <select id="studSpacing"><option value="400">400 mm centres</option><option value="600">600 mm centres</option></select>
+    </div>
+    <p class="hint">All sizes are in millimetres. Changing a thickness here updates every wall of that type.</p>
+
+    <div class="section-title">Roof</div>
+    <div class="field"><label for="roofType">Roof type</label>
+      <select id="roofType"><option value="gable">Gable</option><option value="hip">Hip</option><option value="shed">Mono-pitch (shed)</option><option value="flat">Flat</option><option value="none">No roof</option></select>
+    </div>
+    <div class="row-2">
+      <div class="field"><label for="roofPitch">Pitch (°)</label><input type="number" id="roofPitch" min="3" max="60" step="1"></div>
+      <div class="field"><label for="roofOverhang">Overhang</label><input type="number" id="roofOverhang" min="0" max="1500" step="50"></div>
+    </div>
+    <div class="field"><label for="roofRidge">Ridge direction</label>
+      <select id="roofRidge"><option value="auto">Along the longer side</option><option value="x">Left to right</option><option value="y">Front to back</option></select>
+    </div>
+    <p class="hint">The roof covers the outer rectangle of the building. Hip roofs always run their ridge along the longer side.</p>
+
+    <div class="section-title">Save</div>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="saveJsonBtn">Save project</button>
+      <button type="button" class="draft-btn secondary" id="openJsonBtn">Open…</button>
+    </div>
+    <input type="file" id="openJsonInput" accept=".json,application/json" class="hidden">
+    <p class="hint">Your drawing is also kept in this browser automatically.</p>
+  </section>
+
+  <!-- ============ centre: workspace ============ -->
+  <section class="workspace" aria-label="Design workspace">
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab active" data-tab="model" role="tab" aria-selected="true">Model</button>
+      <button type="button" class="tab" data-tab="drawings" role="tab" aria-selected="false">Drawings</button>
+      <button type="button" class="tab" data-tab="materials" role="tab" aria-selected="false">Material list</button>
+    </div>
+
+    <div id="tabModel">
+      <div class="toolbar" role="toolbar" aria-label="Drawing tools">
+        <button type="button" data-tool="select" class="active" title="Select, move and edit (V)">↖ Select <kbd>V</kbd></button>
+        <button type="button" data-tool="wall" title="Draw walls (W)">▭ Wall <kbd>W</kbd></button>
+        <button type="button" data-tool="door" title="Place a door on a wall (D)">🚪 Door <kbd>D</kbd></button>
+        <button type="button" data-tool="window" title="Place a window on a wall (N)">🪟 Window <kbd>N</kbd></button>
+        <span class="sep"></span>
+        <button type="button" id="undoBtn" title="Undo (Ctrl+Z)">↶ Undo</button>
+        <button type="button" id="redoBtn" title="Redo (Ctrl+Y)">↷ Redo</button>
+        <span class="sep"></span>
+        <label title="Grid snap">Grid
+          <select id="gridSel"><option value="10">10</option><option value="50">50</option><option value="100">100</option><option value="250">250</option><option value="500">500</option></select>
+        </label>
+        <label title="Lock walls to horizontal and vertical. Hold Shift to switch temporarily."><input type="checkbox" id="orthoChk" checked> Ortho</label>
+        <label><input type="checkbox" id="dimsChk" checked> Dimensions</label>
+        <span class="sep"></span>
+        <button type="button" data-layout="plan-only">Plan</button>
+        <button type="button" data-layout="" class="active">Split</button>
+        <button type="button" data-layout="three-only">3D</button>
+        <button type="button" id="fitBtn" title="Zoom to fit">⤢ Fit</button>
+      </div>
+      <div class="views" id="views">
+        <div class="plan-wrap">
+          <svg id="plan" xmlns="http://www.w3.org/2000/svg" aria-label="Floor plan editor"></svg>
+          <div class="view-label">PLAN</div>
+          <div class="hud" id="hud">Select tool</div>
+        </div>
+        <div class="view3d-wrap" id="view3dWrap">
+          <canvas id="view3d" aria-label="3D model view"></canvas>
+          <div class="view-label">3D — drag to orbit, scroll to zoom</div>
+          <div class="view3d-tools">
+            <button type="button" id="framingBtn" title="Show the timber frame instead of finished walls">Framing</button>
+            <button type="button" id="roofBtn" class="active" title="Show or hide the roof">Roof</button>
+            <button type="button" id="reset3dBtn">Reset view</button>
+          </div>
+          <div class="no3d" id="no3d">The 3D view needs WebGL, which is not available in this browser. The plan, drawings and material list still work.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="tabDrawings" class="hidden">
+      <div class="toolbar">
+        <span id="sheetInfo">A3 sheet</span>
+        <span class="sep"></span>
+        <label>Elevation
+          <select id="elevSel"><option value="front">Front + right side</option><option value="back">Back + left side</option></select>
+        </label>
+        <button type="button" id="dlSvgBtn">⬇ Sheet .svg</button>
+        <button type="button" id="printBtn">🖨 Print / PDF</button>
+      </div>
+      <div class="sheet-wrap"><svg id="sheet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 297" aria-label="Drawing sheet"></svg></div>
+    </div>
+
+    <div id="tabMaterials" class="hidden">
+      <div class="bom">
+        <div class="bom-head"><h2>Material list</h2><button type="button" class="draft-btn" id="dlCsvBtn">⬇ Download .csv</button></div>
+        <div id="bomTable"></div>
+        <p class="hint">Quantities are estimates for planning and pricing. Board counts include 10% for waste. Check them with your builder or supplier before ordering.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ right: properties ============ -->
+  <section class="panel" aria-label="Properties and export">
+    <div class="section-title">Properties</div>
+    <div id="props"></div>
+
+    <div class="section-title">Building</div>
+    <div class="stats" id="stats"></div>
+
+    <div class="section-title">Export</div>
+    <button type="button" class="draft-btn" id="dxfBtn">⬇ Floor plan .dxf</button>
+    <div class="btn-row">
+      <button type="button" class="draft-btn secondary" id="objBtn">⬇ 3D .obj</button>
+      <button type="button" class="draft-btn secondary" id="stlBtn">⬇ 3D .stl</button>
+    </div>
+    <button type="button" class="draft-btn secondary" id="pngBtn">⬇ 3D image .png</button>
+    <p class="hint">DXF opens in AutoCAD, LibreCAD, DraftSight and most CAD programs. Units are millimetres. OBJ and STL files use metres.</p>
+
+    <div class="section-title">Shortcuts</div>
+    <ul class="shortcuts">
+      <li><b>Wall tool:</b> click to start, click again for each corner. Type a length and press Enter for an exact wall.</li>
+      <li>Click the first corner to close the outline. Press <b>Esc</b> or right-click to stop.</li>
+      <li>Hold <b>Shift</b> to switch ortho lock.</li>
+      <li>Drag a corner to move it. Drag a wall to move it and stretch the walls joined to it.</li>
+      <li>Scroll to zoom. Drag empty space to pan.</li>
+      <li><b>Delete</b> removes the selected item.</li>
+    </ul>
+  </section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About CAD Forge</h2>
+  <p>CAD Forge turns a floor plan into a 3D house: draw walls, doors and windows, and it builds the roof and timber framing, plan and elevation drawings and a material list.</p>
+  <h3>How to use CAD Forge</h3>
+  <ol><li>Set the wall height, wall thickness and roof, then draw walls, doors and windows on the plan.</li><li>Press “Load sample house”.</li><li>Check the 3D house and timber frame, then download the drawings, material list and DXF file.</li></ol>
+  <h3>Which files can I download?</h3>
+  <p>Plan and elevation drawings, a material list, and DXF, SVG, OBJ and STL files.</p>
+  <h3>Is CAD Forge free?</h3>
+  <p>Yes. It is free to use, with no account, no watermark and no paywall.</p>
+  <h3>Are my files uploaded?</h3>
+  <p>No. It runs entirely in your browser, so your files and text stay on your device.</p>
+  <p class="miga-about-rel">Related tools: <a href="/de/model-forge.html">Model Forge</a> · <a href="/de/boat-forge.html">Boat Forge</a> · <a href="/de/pdf-forge.html">PDF Forge</a></p>
+</section>
+
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<footer>Part of <a href="/de/">MigaBuilder</a>. Everything you draw stays in your browser. Nothing is uploaded. <a href="feedback.html">Found a bug or have an idea? Send feedback →</a></footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/STLExporter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/exporters/OBJExporter.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var $ = function (id) { return document.getElementById(id); };
+  var STORE = 'migabuilder-cad-forge-v1';
+  var STUD = 45;          // stud / plate thickness (mm)
+  var HEADER = 195;       // lintel depth (mm)
+  var BOARD = 1.2 * 2.7;  // wall board area (m²)
+
+  function uid(p) { return p + Math.random().toString(36).slice(2, 9); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function num(v, d) { v = Number(v); return isFinite(v) ? v : d; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+  function r1(v) { return Math.round(v * 10) / 10; }
+  function r2(v) { return Math.round(v * 100) / 100; }
+  function m(v) { return (v / 1000).toFixed(2) + ' m'; }
+
+  // ================= model =================
+  function defaults() {
+    return {
+      name: 'My house', height: 2700, extThk: 300, intThk: 120, slabThk: 150, studSpacing: 600, grid: 100, newKind: 'ext',
+      roof: { type: 'gable', pitch: 30, overhang: 500, ridge: 'auto' },
+      walls: [], openings: [], rooms: []
+    };
+  }
+
+  function sampleHouse() {
+    var s = defaults();
+    s.name = 'Sample family house';
+    function w(x1, y1, x2, y2, kind) { var id = uid('w'); s.walls.push({ id: id, x1: x1, y1: y1, x2: x2, y2: y2, kind: kind, thk: kind === 'ext' ? s.extThk : s.intThk }); return id; }
+    function o(wallId, type, offset, width, height, sill, flip) { s.openings.push({ id: uid('o'), wallId: wallId, type: type, offset: offset, width: width, height: height, sill: sill, flip: flip || 0 }); }
+    var top = w(0, 0, 12000, 0, 'ext'), right = w(12000, 0, 12000, 8000, 'ext'), bottom = w(12000, 8000, 0, 8000, 'ext'), left = w(0, 8000, 0, 0, 'ext');
+    var i1 = w(5000, 0, 5000, 8000, 'int'), i2 = w(5000, 4000, 12000, 4000, 'int'), i3 = w(8500, 4000, 8500, 8000, 'int');
+    o(bottom, 'door', 9500, 1000, 2100, 0, 1);
+    o(bottom, 'window', 5250, 1500, 1200, 900);
+    o(top, 'window', 2500, 1800, 1200, 900);
+    o(top, 'window', 8500, 1800, 1200, 900);
+    o(right, 'window', 2000, 1500, 1200, 900);
+    o(right, 'window', 6250, 800, 600, 1500);
+    o(left, 'window', 4000, 2400, 1400, 700);
+    o(i1, 'door', 2800, 900, 2100, 0, 0);
+    o(i1, 'door', 6000, 900, 2100, 0, 2);
+    o(i2, 'door', 5000, 800, 2100, 0, 3);
+    s.rooms = [
+      { x: 2500, y: 4000, name: 'Living & kitchen' }, { x: 8500, y: 2000, name: 'Bedroom 1' },
+      { x: 6750, y: 6000, name: 'Bedroom 2' }, { x: 10250, y: 6000, name: 'Bathroom' }
+    ];
+    return s;
+  }
+
+  function normalise(raw) {
+    var s = defaults();
+    if (!raw || typeof raw !== 'object') return s;
+    s.name = String(raw.name || s.name).slice(0, 80);
+    s.height = clamp(num(raw.height, s.height), 2000, 6000);
+    s.extThk = clamp(num(raw.extThk, s.extThk), 80, 600);
+    s.intThk = clamp(num(raw.intThk, s.intThk), 50, 400);
+    s.slabThk = clamp(num(raw.slabThk, s.slabThk), 50, 600);
+    s.studSpacing = num(raw.studSpacing, 600) === 400 ? 400 : 600;
+    s.grid = [10, 50, 100, 250, 500].indexOf(num(raw.grid, 100)) >= 0 ? num(raw.grid, 100) : 100;
+    s.newKind = raw.newKind === 'int' ? 'int' : 'ext';
+    var r = raw.roof || {};
+    s.roof = {
+      type: ['gable', 'hip', 'shed', 'flat', 'none'].indexOf(r.type) >= 0 ? r.type : 'gable',
+      pitch: clamp(num(r.pitch, 30), 3, 60), overhang: clamp(num(r.overhang, 500), 0, 1500),
+      ridge: ['auto', 'x', 'y'].indexOf(r.ridge) >= 0 ? r.ridge : 'auto'
+    };
+    (Array.isArray(raw.walls) ? raw.walls : []).forEach(function (w) {
+      if (!w) return;
+      var x1 = num(w.x1, NaN), y1 = num(w.y1, NaN), x2 = num(w.x2, NaN), y2 = num(w.y2, NaN);
+      if (!isFinite(x1 + y1 + x2 + y2) || Math.hypot(x2 - x1, y2 - y1) < 10) return;
+      var kind = w.kind === 'int' ? 'int' : 'ext';
+      s.walls.push({ id: String(w.id || uid('w')), x1: x1, y1: y1, x2: x2, y2: y2, kind: kind, thk: clamp(num(w.thk, kind === 'ext' ? s.extThk : s.intThk), 50, 600) });
+    });
+    var ids = {}; s.walls.forEach(function (w) { ids[w.id] = 1; });
+    (Array.isArray(raw.openings) ? raw.openings : []).forEach(function (o) {
+      if (!o || !ids[o.wallId]) return;
+      var type = o.type === 'door' ? 'door' : 'window';
+      s.openings.push({
+        id: String(o.id || uid('o')), wallId: o.wallId, type: type, offset: num(o.offset, 500),
+        width: clamp(num(o.width, 900), 300, 6000), height: clamp(num(o.height, 1200), 200, 5000),
+        sill: type === 'door' ? 0 : clamp(num(o.sill, 900), 0, 4000), flip: clamp(Math.round(num(o.flip, 0)), 0, 3)
+      });
+    });
+    (Array.isArray(raw.rooms) ? raw.rooms : []).forEach(function (r) {
+      if (r && isFinite(num(r.x, NaN)) && isFinite(num(r.y, NaN)) && r.name) s.rooms.push({ x: num(r.x, 0), y: num(r.y, 0), name: String(r.name).slice(0, 40) });
+    });
+    return s;
+  }
+
+  var state = defaults();
+  try { var saved = localStorage.getItem(STORE); state = saved ? normalise(JSON.parse(saved)) : sampleHouse(); } catch (e) { state = sampleHouse(); }
+
+  // ================= geometry =================
+  function wlen(w) { return Math.hypot(w.x2 - w.x1, w.y2 - w.y1); }
+  function wdir(w) { var L = wlen(w) || 1; return { x: (w.x2 - w.x1) / L, y: (w.y2 - w.y1) / L }; }
+  function wallById(id) { for (var i = 0; i < state.walls.length; i++) if (state.walls[i].id === id) return state.walls[i]; return null; }
+  function openingsOf(w) { return state.openings.filter(function (o) { return o.wallId === w.id; }); }
+  function same(ax, ay, bx, by) { return Math.abs(ax - bx) < 1 && Math.abs(ay - by) < 1; }
+
+  // Opening span along its wall, clamped so it always fits inside the wall.
+  function openingSpan(o, w) {
+    var L = wlen(w), half = o.width / 2, lo = half + 20, hi = L - half - 20;
+    if (hi < lo) return null;
+    var c = clamp(o.offset, lo, hi);
+    return { a: c - half, b: c + half, c: c };
+  }
+  function openingHead(o) { return Math.min(o.type === 'door' ? o.height : o.sill + o.height, state.height - 50); }
+
+  // How far a wall end extends past its end point: half the thickness of the thickest wall joined there.
+  function endExtension(w, which) {
+    var x = which ? w.x2 : w.x1, y = which ? w.y2 : w.y1, e = 0;
+    state.walls.forEach(function (o) {
+      if (o === w) return;
+      if (same(o.x1, o.y1, x, y) || same(o.x2, o.y2, x, y)) e = Math.max(e, o.thk / 2);
+    });
+    return e;
+  }
+  function wallFrame(w) {
+    var d = wdir(w);
+    return { d: d, n: { x: -d.y, y: d.x }, L: wlen(w), e0: endExtension(w, 0), e1: endExtension(w, 1), h: w.thk / 2 };
+  }
+  function wallRect(w) {
+    var f = wallFrame(w), d = f.d, n = f.n, h = f.h;
+    var ax = w.x1 - d.x * f.e0, ay = w.y1 - d.y * f.e0, bx = w.x2 + d.x * f.e1, by = w.y2 + d.y * f.e1;
+    return [[ax + n.x * h, ay + n.y * h], [bx + n.x * h, by + n.y * h], [bx - n.x * h, by - n.y * h], [ax - n.x * h, ay - n.y * h]];
+  }
+  function wallPoint(w, s, across) { var f = wallFrame(w); return [w.x1 + f.d.x * s + f.n.x * (across || 0), w.y1 + f.d.y * s + f.n.y * (across || 0)]; }
+
+  function polyArea(p) { var a = 0; for (var i = 0; i < p.length; i++) { var q = p[(i + 1) % p.length]; a += p[i][0] * q[1] - q[0] * p[i][1]; } return a / 2; }
+  function polyCentroid(p) {
+    var a = 0, cx = 0, cy = 0;
+    for (var i = 0; i < p.length; i++) { var q = p[(i + 1) % p.length], c = p[i][0] * q[1] - q[0] * p[i][1]; a += c; cx += (p[i][0] + q[0]) * c; cy += (p[i][1] + q[1]) * c; }
+    if (Math.abs(a) < 1e-6) return p[0];
+    return [cx / (3 * a), cy / (3 * a)];
+  }
+  function pointInPoly(x, y, p) {
+    var inside = false;
+    for (var i = 0, j = p.length - 1; i < p.length; j = i++) {
+      if ((p[i][1] > y) !== (p[j][1] > y) && x < (p[j][0] - p[i][0]) * (y - p[i][1]) / (p[j][1] - p[i][1]) + p[i][0]) inside = !inside;
+    }
+    return inside;
+  }
+  function dropCollinear(p) {
+    var out = [];
+    for (var i = 0; i < p.length; i++) {
+      var a = p[(i - 1 + p.length) % p.length], b = p[i], c = p[(i + 1) % p.length];
+      var cross = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]);
+      if (Math.abs(cross) > 1e-3 * Math.hypot(b[0] - a[0], b[1] - a[1]) * Math.hypot(c[0] - b[0], c[1] - b[1]) + 1e-6) out.push(b);
+    }
+    return out.length >= 3 ? out : p;
+  }
+  // Mitred outward offset of a positive-area polygon.
+  function offsetPoly(p, d) {
+    var n = p.length, out = [];
+    function nrm(a, b) { var dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [dy / l, -dx / l]; }
+    for (var i = 0; i < n; i++) {
+      var prev = p[(i - 1 + n) % n], cur = p[i], next = p[(i + 1) % n];
+      var n1 = nrm(prev, cur), n2 = nrm(cur, next), k = 1 + n1[0] * n2[0] + n1[1] * n2[1];
+      if (k < 0.15) out.push([cur[0] + n2[0] * d, cur[1] + n2[1] * d]);
+      else out.push([cur[0] + (n1[0] + n2[0]) * d / k, cur[1] + (n1[1] + n2[1]) * d / k]);
+    }
+    return out;
+  }
+
+  // Rooms and building outline, found from the wall centre-lines as a planar graph.
+  // Walls that end part-way along another wall (T-junctions) split that wall into graph edges.
+  var topo = { rooms: [], outlines: [] };
+  function computeTopology() {
+    var nodes = [], map = {};
+    function key(x, y) { return Math.round(x) + ',' + Math.round(y); }
+    function node(x, y) { var k = key(x, y); if (!(k in map)) { map[k] = nodes.length; nodes.push({ x: Math.round(x), y: Math.round(y), out: [] }); } return map[k]; }
+    state.walls.forEach(function (w) { node(w.x1, w.y1); node(w.x2, w.y2); });
+    var seen = {};
+    state.walls.forEach(function (w) {
+      var L = wlen(w); if (L < 1) return;
+      var d = wdir(w), pts = [{ t: 0, i: map[key(w.x1, w.y1)] }, { t: L, i: map[key(w.x2, w.y2)] }];
+      nodes.forEach(function (nd, i) {
+        var t = (nd.x - w.x1) * d.x + (nd.y - w.y1) * d.y;
+        if (t <= 1 || t >= L - 1) return;
+        if (Math.abs(-(nd.x - w.x1) * d.y + (nd.y - w.y1) * d.x) < 2) pts.push({ t: t, i: i });
+      });
+      pts.sort(function (a, b) { return a.t - b.t; });
+      for (var k = 0; k < pts.length - 1; k++) {
+        var a = pts[k].i, b = pts[k + 1].i;
+        if (a === b) continue;
+        var ek = a < b ? a + '-' + b : b + '-' + a;
+        if (seen[ek]) continue;
+        seen[ek] = 1; nodes[a].out.push(b); nodes[b].out.push(a);
+      }
+    });
+    nodes.forEach(function (nd) {
+      nd.out.sort(function (p, q) { return Math.atan2(nodes[p].y - nd.y, nodes[p].x - nd.x) - Math.atan2(nodes[q].y - nd.y, nodes[q].x - nd.x); });
+    });
+    var visited = {}, rooms = [], outlines = [];
+    nodes.forEach(function (nd, u) {
+      nd.out.forEach(function (v) {
+        if (visited[u + '>' + v]) return;
+        var poly = [], a = u, b = v, guard = 0;
+        while (!visited[a + '>' + b] && guard++ < 5000) {
+          visited[a + '>' + b] = 1; poly.push([nodes[a].x, nodes[a].y]);
+          var outs = nodes[b].out, idx = outs.indexOf(a), nx = outs[(idx - 1 + outs.length) % outs.length];
+          a = b; b = nx;
+        }
+        var area = polyArea(poly);
+        if (Math.abs(area) < 5e5) return; // under 0.5 m²
+        // Bounded faces trace with positive area; the outside of each connected group traces negative.
+        if (area > 0) rooms.push({ poly: dropCollinear(poly), area: area });
+        else outlines.push(dropCollinear(poly.slice().reverse()));
+      });
+    });
+    rooms.forEach(function (r, i) {
+      var label = null;
+      state.rooms.forEach(function (l) { if (!label && pointInPoly(l.x, l.y, r.poly)) label = l; });
+      r.label = label;
+      r.name = label ? label.name : 'Room ' + (i + 1);
+      var c = polyCentroid(r.poly);
+      r.cx = label ? label.x : c[0]; r.cy = label ? label.y : c[1];
+      if (!label && !pointInPoly(r.cx, r.cy, r.poly)) { r.cx = r.poly[0][0]; r.cy = r.poly[0][1]; }
+    });
+    topo = { rooms: rooms, outlines: outlines.map(function (p) { return offsetPoly(p, state.extThk / 2); }) };
+  }
+
+  function buildingBox() {
+    var pts = [];
+    if (topo.outlines.length) topo.outlines.forEach(function (p) { pts = pts.concat(p); });
+    else state.walls.forEach(function (w) { pts = pts.concat(wallRect(w)); });
+    if (!pts.length) return null;
+    var b = { x0: Infinity, y0: Infinity, x1: -Infinity, y1: -Infinity };
+    pts.forEach(function (p) { b.x0 = Math.min(b.x0, p[0]); b.y0 = Math.min(b.y0, p[1]); b.x1 = Math.max(b.x1, p[0]); b.y1 = Math.max(b.y1, p[1]); });
+    return b;
+  }
+
+  // Roof as a list of 3D polygons in plan coordinates: [x, y, height].
+  function roofFaces() {
+    var r = state.roof, bb = buildingBox();
+    if (r.type === 'none' || !bb) return [];
+    var H = state.height, o = r.overhang, t = Math.tan(r.pitch * Math.PI / 180);
+    var axis = (r.ridge === 'auto' || r.type === 'hip') ? ((bb.x1 - bb.x0) >= (bb.y1 - bb.y0) ? 'x' : 'y') : r.ridge;
+    var a0, a1, b0, b1;
+    if (axis === 'x') { a0 = bb.x0; a1 = bb.x1; b0 = bb.y0; b1 = bb.y1; } else { a0 = bb.y0; a1 = bb.y1; b0 = bb.x0; b1 = bb.x1; }
+    function P(a, b, z) { return axis === 'x' ? [a, b, z] : [b, a, z]; }
+    var A0 = a0 - o, A1 = a1 + o, B0 = b0 - o, B1 = b1 + o, f = [];
+    if (r.type === 'flat') {
+      var z0 = H, z1 = H + 250;
+      f.push({ k: 'roof', p: [P(A0, B0, z1), P(A1, B0, z1), P(A1, B1, z1), P(A0, B1, z1)] });
+      f.push({ k: 'roof', p: [P(A0, B0, z0), P(A1, B0, z0), P(A1, B1, z0), P(A0, B1, z0)] });
+      f.push({ k: 'roof', p: [P(A0, B0, z0), P(A1, B0, z0), P(A1, B0, z1), P(A0, B0, z1)] });
+      f.push({ k: 'roof', p: [P(A0, B1, z0), P(A1, B1, z0), P(A1, B1, z1), P(A0, B1, z1)] });
+      f.push({ k: 'roof', p: [P(A0, B0, z0), P(A0, B1, z0), P(A0, B1, z1), P(A0, B0, z1)] });
+      f.push({ k: 'roof', p: [P(A1, B0, z0), P(A1, B1, z0), P(A1, B1, z1), P(A1, B0, z1)] });
+      return f;
+    }
+    var Hb = H - o * t, bc = (B0 + B1) / 2, Zr;
+    if (r.type === 'gable') {
+      Zr = Hb + (bc - B0) * t;
+      f.push({ k: 'roof', p: [P(A0, B0, Hb), P(A1, B0, Hb), P(A1, bc, Zr), P(A0, bc, Zr)] });
+      f.push({ k: 'roof', p: [P(A0, B1, Hb), P(A1, B1, Hb), P(A1, bc, Zr), P(A0, bc, Zr)] });
+      f.push({ k: 'gable', p: [P(a0, b0, H), P(a0, b1, H), P(a0, bc, Zr)] });
+      f.push({ k: 'gable', p: [P(a1, b0, H), P(a1, b1, H), P(a1, bc, Zr)] });
+    } else if (r.type === 'hip') {
+      var h = (B1 - B0) / 2, ra0 = A0 + h, ra1 = A1 - h;
+      Zr = Hb + h * t;
+      if (ra1 < ra0) { ra0 = ra1 = (A0 + A1) / 2; }
+      f.push({ k: 'roof', p: [P(A0, B0, Hb), P(A1, B0, Hb), P(ra1, bc, Zr), P(ra0, bc, Zr)] });
+      f.push({ k: 'roof', p: [P(A1, B1, Hb), P(A0, B1, Hb), P(ra0, bc, Zr), P(ra1, bc, Zr)] });
+      f.push({ k: 'roof', p: [P(A0, B1, Hb), P(A0, B0, Hb), P(ra0, bc, Zr)] });
+      f.push({ k: 'roof', p: [P(A1, B0, Hb), P(A1, B1, Hb), P(ra1, bc, Zr)] });
+    } else if (r.type === 'shed') {
+      var Zt = Hb + (B1 - B0) * t, Hh = H + (b1 - b0) * t;
+      f.push({ k: 'roof', p: [P(A0, B1, Hb), P(A1, B1, Hb), P(A1, B0, Zt), P(A0, B0, Zt)] });
+      f.push({ k: 'gable', p: [P(a0, b1, H), P(a0, b0, H), P(a0, b0, Hh)] });
+      f.push({ k: 'gable', p: [P(a1, b1, H), P(a1, b0, H), P(a1, b0, Hh)] });
+      f.push({ k: 'gable', p: [P(a0, b0, H), P(a1, b0, H), P(a1, b0, Hh), P(a0, b0, Hh)] });
+    }
+    return f;
+  }
+  function roofInfo() {
+    var r = state.roof, bb = buildingBox();
+    if (r.type === 'none' || !bb) return { area: 0, top: state.height, eavesLen: 0 };
+    var o = r.overhang, w = bb.x1 - bb.x0 + 2 * o, d = bb.y1 - bb.y0 + 2 * o, plan = w * d / 1e6;
+    var top = state.height;
+    roofFaces().forEach(function (f) { f.p.forEach(function (p) { top = Math.max(top, p[2]); }); });
+    return { area: r.type === 'flat' ? plan : plan / Math.cos(r.pitch * Math.PI / 180), top: top, eavesLen: 2 * (w + d) / 1000 };
+  }
+
+  // Timber frame members of one wall, in wall coordinates: s along the wall, z up.
+  function framing(w) {
+    var L = wlen(w), H = state.height, b = STUD, dep = w.kind === 'ext' ? 145 : 70, sp = state.studSpacing, out = [];
+    var zs = b, ze = H - 2 * b;
+    function add(kind, s0, s1, z0, z1) {
+      s0 = Math.max(0, s0); s1 = Math.min(L, s1);
+      if (s1 - s0 < 1 || z1 - z0 < 1) return;
+      out.push({ kind: kind, s0: s0, s1: s1, z0: z0, z1: z1, dep: dep });
+    }
+    add('plate', 0, L, 0, b); add('plate', 0, L, H - 2 * b, H - b); add('plate', 0, L, H - b, H);
+    var spans = [];
+    openingsOf(w).forEach(function (o) {
+      var s = openingSpan(o, w); if (!s) return;
+      var head = Math.min(openingHead(o), ze - HEADER - 10), a = s.a, e = s.b;
+      var sill = o.type === 'door' ? zs : clamp(o.sill, zs + b, head - 100);
+      spans.push([a - 2 * b, e + 2 * b]);
+      add('stud', a - 2 * b, a - b, zs, ze); add('stud', e + b, e + 2 * b, zs, ze);
+      add('stud', a - b, a, zs, head); add('stud', e, e + b, zs, head);
+      add('header', a - b, e + b, head, head + HEADER);
+      for (var x = Math.ceil(a / sp) * sp; x < e - b; x += sp) {
+        if (ze - head - HEADER > 40) add('stud', x, x + b, head + HEADER, ze);
+        if (o.type === 'window' && sill - b - zs > 40) add('stud', x, x + b, zs, sill - b);
+      }
+      if (o.type === 'window') add('sill', a, e, sill - b, sill);
+    });
+    var xs = [];
+    for (var x = 0; x < L - b; x += sp) xs.push(x);
+    xs.push(L - b);
+    xs.forEach(function (x) {
+      for (var i = 0; i < spans.length; i++) if (x + b > spans[i][0] && x < spans[i][1]) return;
+      add('stud', x, x + b, zs, ze);
+    });
+    return out;
+  }
+
+  // ================= materials =================
+  function computeBOM() {
+    var rows = [], H = state.height;
+    var studs = { ext: { n: 0, lm: 0 }, int: { n: 0, lm: 0 } }, plates = { ext: 0, int: 0 }, headers = { n: 0, lm: 0 }, sills = 0;
+    var extLen = 0, intLen = 0, extNet = 0, intNet = 0, openArea = 0;
+    state.walls.forEach(function (w) {
+      var L = wlen(w), gross = L * H / 1e6, cut = 0;
+      openingsOf(w).forEach(function (o) { var s = openingSpan(o, w); if (s) cut += (s.b - s.a) * (openingHead(o) - (o.type === 'door' ? 0 : o.sill)) / 1e6; });
+      if (w.kind === 'ext') { extLen += L; extNet += gross - cut; openArea += cut; } else { intLen += L; intNet += gross - cut; }
+      framing(w).forEach(function (f) {
+        var len = f.kind === 'stud' ? f.z1 - f.z0 : f.s1 - f.s0;
+        if (f.kind === 'stud') { studs[w.kind].n++; studs[w.kind].lm += len / 1000; }
+        else if (f.kind === 'plate') plates[w.kind] += len / 1000;
+        else if (f.kind === 'header') { headers.n++; headers.lm += 2 * len / 1000; }
+        else if (f.kind === 'sill') sills += len / 1000;
+      });
+    });
+    var slabArea = 0; topo.outlines.forEach(function (p) { slabArea += Math.abs(polyArea(p)) / 1e6; });
+    var roomArea = 0; topo.rooms.forEach(function (r) { roomArea += r.area / 1e6; });
+    var roof = roofInfo();
+    function row(group, item, qty, unit, note) { rows.push({ group: group, item: item, qty: qty, unit: unit, note: note || '' }); }
+    row('Foundation', 'Concrete floor slab', r2(slabArea), 'm²', state.slabThk + ' mm thick');
+    row('Foundation', 'Concrete volume', r2(slabArea * state.slabThk / 1000), 'm³', 'Order about 5% extra');
+    if (studs.ext.n) row('Wall framing', 'Studs 45×145 (outer walls)', studs.ext.n, 'pcs', r1(studs.ext.lm) + ' m total');
+    if (studs.int.n) row('Wall framing', 'Studs 45×70 (inner walls)', studs.int.n, 'pcs', r1(studs.int.lm) + ' m total');
+    if (plates.ext) row('Wall framing', 'Plates 45×145 (bottom + double top)', r1(plates.ext), 'm', '');
+    if (plates.int) row('Wall framing', 'Plates 45×70 (bottom + double top)', r1(plates.int), 'm', '');
+    if (headers.n) row('Wall framing', 'Lintels 2×45×195', headers.n, 'pcs', r1(headers.lm) + ' m of timber');
+    if (sills) row('Wall framing', 'Window sill trimmers', r1(sills), 'm', '');
+    row('Walls', 'Outer wall area (net of openings)', r2(extNet), 'm²', r1(extLen / 1000) + ' m of outer wall');
+    row('Walls', 'Sheathing boards 1200×2700', Math.ceil(extNet / BOARD * 1.1), 'pcs', 'Outside face of outer walls');
+    row('Walls', 'Wall insulation', r2(extNet), 'm²', 'Between outer wall studs');
+    row('Walls', 'Plasterboard 1200×2700', Math.ceil((extNet + 2 * intNet) / BOARD * 1.1), 'pcs', 'Inside of outer walls + both sides of inner walls');
+    if (state.roof.type !== 'none') {
+      row('Roof', 'Roof covering area', r2(roof.area), 'm²', state.roof.type === 'flat' ? 'Flat roof' : state.roof.pitch + '° ' + state.roof.type + ' roof');
+      row('Roof', 'Fascia / edge trim', r1(roof.eavesLen), 'm', 'Full roof perimeter');
+    }
+    var groups = {};
+    state.openings.forEach(function (o) {
+      var w = wallById(o.wallId); if (!w || !openingSpan(o, w)) return;
+      var k = o.type + ' ' + o.width + '×' + o.height;
+      groups[k] = groups[k] || { type: o.type, w: o.width, h: o.height, n: 0 };
+      groups[k].n++;
+    });
+    Object.keys(groups).sort().forEach(function (k) {
+      var g = groups[k];
+      row(g.type === 'door' ? 'Doors' : 'Windows', (g.type === 'door' ? 'Door ' : 'Window ') + g.w + ' × ' + g.h + ' mm', g.n, 'pcs', '');
+    });
+    return { rows: rows, extLen: extLen, intLen: intLen, slabArea: slabArea, roomArea: roomArea, roof: roof, openArea: openArea };
+  }
+
+  // ================= plan renderer (shared by editor and drawing sheet) =================
+  // u = drawing units (mm) per nominal pixel; controls line weights and text size.
+  function planContent(u, opts) {
+    opts = opts || {};
+    var s = '', bg = opts.bg || '#f7f5ef', ink = '#16202B', pid = opts.id || 'p';
+    s += '<defs><pattern id="' + pid + 'hatch" patternUnits="userSpaceOnUse" width="' + 7 * u + '" height="' + 7 * u + '" patternTransform="rotate(45)"><rect width="' + 7 * u + '" height="' + 7 * u + '" fill="#b8c2cc"/><line x1="0" y1="0" x2="0" y2="' + 7 * u + '" stroke="#6b7a88" stroke-width="' + 1.1 * u + '"/></pattern></defs>';
+    var sel = opts.sel || {};
+    topo.rooms.forEach(function (r, i) {
+      var hl = sel.type === 'room' && sel.idx === i;
+      s += '<polygon points="' + r.poly.map(function (p) { return p[0] + ',' + p[1]; }).join(' ') + '" fill="' + (hl ? 'rgba(226,166,59,0.22)' : (opts.print ? '#fff' : 'rgba(111,209,224,0.10)')) + '"/>';
+    });
+    var rects = state.walls.map(wallRect);
+    function pts(poly) { return poly.map(function (p) { return p[0] + ',' + p[1]; }).join(' '); }
+    // Draw every wall with a heavy outline first, then fill them all again. Only the outside edge of the joined walls stays visible.
+    rects.forEach(function (r) { s += '<polygon points="' + pts(r) + '" fill="' + ink + '" stroke="' + ink + '" stroke-width="' + 2.4 * u + '" stroke-linejoin="miter"/>'; });
+    state.walls.forEach(function (w, i) { s += '<polygon points="' + pts(rects[i]) + '" fill="' + (w.kind === 'ext' ? 'url(#' + pid + 'hatch)' : '#d5dbe1') + '"/>'; });
+    // openings
+    state.openings.forEach(function (o) {
+      var w = wallById(o.wallId); if (!w) return;
+      var sp = openingSpan(o, w); if (!sp) return;
+      s += openingSymbol(w, o, sp, u, bg, ink, sel.type === 'opening' && sel.id === o.id);
+    });
+    if (sel.type === 'wall') {
+      var sw = wallById(sel.id);
+      if (sw) s += '<polygon points="' + pts(wallRect(sw)) + '" fill="rgba(226,166,59,0.35)" stroke="#E2A63B" stroke-width="' + 2.5 * u + '"/>';
+    }
+    // room labels
+    topo.rooms.forEach(function (r) {
+      var fs = 12 * u;
+      s += '<text x="' + r.cx + '" y="' + r.cy + '" font-size="' + fs + '" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600" fill="' + ink + '">' + esc(r.name) + '</text>';
+      s += '<text x="' + r.cx + '" y="' + (r.cy + fs * 1.25) + '" font-size="' + fs * 0.85 + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" fill="#4b5966">' + (r.area / 1e6).toFixed(1) + ' m²</text>';
+    });
+    if (opts.dims) {
+      state.walls.forEach(function (w) {
+        var f = wallFrame(w), L = f.L; if (L < 200) return;
+        var off = f.h + 10 * u, mx = (w.x1 + w.x2) / 2 + f.n.x * off, my = (w.y1 + w.y2) / 2 + f.n.y * off;
+        var ang = Math.atan2(f.d.y, f.d.x) * 180 / Math.PI;
+        if (ang > 90.5 || ang < -89.5) ang += 180;
+        s += '<text x="' + mx + '" y="' + my + '" font-size="' + 10 * u + '" text-anchor="middle" dominant-baseline="middle" font-family="IBM Plex Mono, monospace" fill="#1f5a7a" stroke="' + bg + '" stroke-width="' + 3 * u + '" paint-order="stroke" transform="rotate(' + ang + ' ' + mx + ' ' + my + ')">' + Math.round(L) + '</text>';
+      });
+    }
+    if (opts.overall) s += overallDims(u, ink);
+    return s;
+  }
+
+  function openingSymbol(w, o, sp, u, bg, ink, hl) {
+    var f = wallFrame(w), h = f.h, s = '';
+    function P(along, across) { var p = wallPoint(w, along, across); return p[0] + ',' + p[1]; }
+    var ext = h + 1.6 * u;
+    s += '<polygon points="' + [P(sp.a, ext), P(sp.b, ext), P(sp.b, -ext), P(sp.a, -ext)].join(' ') + '" fill="' + bg + '"/>';
+    var lw = 1.1 * u;
+    s += '<line x1="' + P(sp.a, h).split(',')[0] + '" y1="' + P(sp.a, h).split(',')[1] + '" x2="' + P(sp.a, -h).split(',')[0] + '" y2="' + P(sp.a, -h).split(',')[1] + '" stroke="' + ink + '" stroke-width="' + 1.6 * u + '"/>';
+    s += '<line x1="' + P(sp.b, h).split(',')[0] + '" y1="' + P(sp.b, h).split(',')[1] + '" x2="' + P(sp.b, -h).split(',')[0] + '" y2="' + P(sp.b, -h).split(',')[1] + '" stroke="' + ink + '" stroke-width="' + 1.6 * u + '"/>';
+    if (o.type === 'window') {
+      [h, 0, -h].forEach(function (c, i) {
+        var a = P(sp.a, c).split(','), b = P(sp.b, c).split(',');
+        s += '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + b[0] + '" y2="' + b[1] + '" stroke="' + (i === 1 ? '#2d7fa6' : ink) + '" stroke-width="' + (i === 1 ? 1.4 : 1) * lw + '"/>';
+      });
+    } else {
+      // flip: bit 0 = hinge at the far jamb, bit 1 = swing to the other side
+      var hingeS = (o.flip & 1) ? sp.b : sp.a, freeS = (o.flip & 1) ? sp.a : sp.b, side = (o.flip & 2) ? -1 : 1;
+      var width = sp.b - sp.a, face = side * h;
+      var hinge = wallPoint(w, hingeS, face), leafEnd = wallPoint(w, hingeS, face + side * width), jamb = wallPoint(w, freeS, face);
+      s += '<line x1="' + hinge[0] + '" y1="' + hinge[1] + '" x2="' + leafEnd[0] + '" y2="' + leafEnd[1] + '" stroke="' + ink + '" stroke-width="' + 1.8 * u + '"/>';
+      var cross = (leafEnd[0] - hinge[0]) * (jamb[1] - hinge[1]) - (leafEnd[1] - hinge[1]) * (jamb[0] - hinge[0]);
+      s += '<path d="M' + leafEnd[0] + ' ' + leafEnd[1] + ' A ' + width + ' ' + width + ' 0 0 ' + (cross > 0 ? 1 : 0) + ' ' + jamb[0] + ' ' + jamb[1] + '" fill="none" stroke="' + ink + '" stroke-width="' + 0.8 * u + '" stroke-dasharray="' + 4 * u + ' ' + 3 * u + '"/>';
+    }
+    if (hl) s += '<polygon points="' + [P(sp.a, h + 4 * u), P(sp.b, h + 4 * u), P(sp.b, -h - 4 * u), P(sp.a, -h - 4 * u)].join(' ') + '" fill="rgba(226,166,59,0.25)" stroke="#E2A63B" stroke-width="' + 2 * u + '"/>';
+    return s;
+  }
+
+  function wallsBox() {
+    var b = null;
+    state.walls.forEach(function (w) {
+      wallRect(w).forEach(function (p) {
+        if (!b) b = { x0: p[0], y0: p[1], x1: p[0], y1: p[1] };
+        b.x0 = Math.min(b.x0, p[0]); b.y0 = Math.min(b.y0, p[1]); b.x1 = Math.max(b.x1, p[0]); b.y1 = Math.max(b.y1, p[1]);
+      });
+    });
+    return b;
+  }
+  function dimLine(x1, y1, x2, y2, text, u, ink, vertical) {
+    var s = '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '" stroke="' + ink + '" stroke-width="' + 0.8 * u + '"/>';
+    [[x1, y1], [x2, y2]].forEach(function (p) {
+      s += '<line x1="' + (p[0] - 4 * u) + '" y1="' + (p[1] + 4 * u) + '" x2="' + (p[0] + 4 * u) + '" y2="' + (p[1] - 4 * u) + '" stroke="' + ink + '" stroke-width="' + 1.4 * u + '"/>';
+    });
+    var mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    s += '<text x="' + mx + '" y="' + (my - 3 * u) + '" font-size="' + 10 * u + '" text-anchor="middle" font-family="IBM Plex Mono, monospace" fill="' + ink + '"' + (vertical ? ' transform="rotate(-90 ' + mx + ' ' + my + ')"' : '') + '>' + text + '</text>';
+    return s;
+  }
+  function overallDims(u, ink) {
+    var b = wallsBox(); if (!b) return '';
+    var gap = 28 * u, s = '';
+    s += dimLine(b.x0, b.y1 + gap, b.x1, b.y1 + gap, Math.round(b.x1 - b.x0), u, ink, false);
+    s += dimLine(b.x1 + gap, b.y0, b.x1 + gap, b.y1, Math.round(b.y1 - b.y0), u, ink, true);
+    [[b.x0, b.y1], [b.x1, b.y1]].forEach(function (p) { s += '<line x1="' + p[0] + '" y1="' + (p[1] + 5 * u) + '" x2="' + p[0] + '" y2="' + (p[1] + gap + 5 * u) + '" stroke="' + ink + '" stroke-width="' + 0.5 * u + '"/>'; });
+    [[b.x1, b.y0], [b.x1, b.y1]].forEach(function (p) { s += '<line x1="' + (p[0] + 5 * u) + '" y1="' + p[1] + '" x2="' + (p[0] + gap + 5 * u) + '" y2="' + p[1] + '" stroke="' + ink + '" stroke-width="' + 0.5 * u + '"/>'; });
+    return s;
+  }
+
+  // ================= elevations =================
+  var VIEW_AXES = {
+    front: { U: function (x, y) { return x; }, D: function (x, y) { return -y; }, ax: [1, 0], title: 'FRONT ELEVATION' },
+    back: { U: function (x, y) { return -x; }, D: function (x, y) { return y; }, ax: [-1, 0], title: 'BACK ELEVATION' },
+    left: { U: function (x, y) { return y; }, D: function (x, y) { return x; }, ax: [0, 1], title: 'LEFT ELEVATION' },
+    right: { U: function (x, y) { return -y; }, D: function (x, y) { return -x; }, ax: [0, -1], title: 'RIGHT ELEVATION' }
+  };
+  function elevation(view, u) {
+    var V = VIEW_AXES[view], H = state.height, items = [], ink = '#16202B', box = { u0: Infinity, u1: -Infinity, z1: H };
+    state.walls.forEach(function (w) {
+      var rect = wallRect(w), us = rect.map(function (p) { return V.U(p[0], p[1]); }), ds = rect.map(function (p) { return V.D(p[0], p[1]); });
+      var u0 = Math.min.apply(null, us), u1 = Math.max.apply(null, us);
+      box.u0 = Math.min(box.u0, u0); box.u1 = Math.max(box.u1, u1);
+      var s = '<rect x="' + u0 + '" y="' + (-H) + '" width="' + (u1 - u0) + '" height="' + H + '" fill="' + (w.kind === 'ext' ? '#ece6d8' : '#dcd6c8') + '" stroke="' + ink + '" stroke-width="' + 1.3 * u + '"/>';
+      var f = wallFrame(w), dot = Math.abs(f.d.x * V.ax[0] + f.d.y * V.ax[1]);
+      if (dot > 0.3) openingsOf(w).forEach(function (o) {
+        var sp = openingSpan(o, w); if (!sp) return;
+        var c = wallPoint(w, sp.c, 0), cu = V.U(c[0], c[1]), hw = (sp.b - sp.a) / 2 * dot;
+        var z0 = o.type === 'door' ? 0 : o.sill, z1 = openingHead(o);
+        if (o.type === 'window') {
+          s += '<rect x="' + (cu - hw) + '" y="' + (-z1) + '" width="' + 2 * hw + '" height="' + (z1 - z0) + '" fill="#bcdcea" stroke="' + ink + '" stroke-width="' + 1.2 * u + '"/>';
+          s += '<line x1="' + cu + '" y1="' + (-z1) + '" x2="' + cu + '" y2="' + (-z0) + '" stroke="' + ink + '" stroke-width="' + 0.8 * u + '"/>';
+          s += '<line x1="' + (cu - hw - 40) + '" y1="' + (-z0) + '" x2="' + (cu + hw + 40) + '" y2="' + (-z0) + '" stroke="' + ink + '" stroke-width="' + 2 * u + '"/>';
+        } else {
+          s += '<rect x="' + (cu - hw) + '" y="' + (-z1) + '" width="' + 2 * hw + '" height="' + (z1 - z0) + '" fill="#b98a5a" stroke="' + ink + '" stroke-width="' + 1.2 * u + '"/>';
+          var hx = (o.flip & 1) ? cu - hw * 0.75 : cu + hw * 0.75;
+          s += '<circle cx="' + hx + '" cy="' + (-1000) + '" r="' + Math.max(25, 2 * u) + '" fill="' + ink + '"/>';
+        }
+      });
+      items.push({ d: ds.reduce(function (a, b) { return a + b; }, 0) / 4, s: s });
+    });
+    items.sort(function (a, b) { return b.d - a.d; });
+    var out = items.map(function (i) { return i.s; }).join('');
+    var faces = roofFaces().map(function (f) {
+      var ds = f.p.map(function (p) { return V.D(p[0], p[1]); });
+      f.p.forEach(function (p) { var uu = V.U(p[0], p[1]); box.u0 = Math.min(box.u0, uu); box.u1 = Math.max(box.u1, uu); box.z1 = Math.max(box.z1, p[2]); });
+      return { d: ds.reduce(function (a, b) { return a + b; }, 0) / ds.length, f: f };
+    });
+    faces.sort(function (a, b) { return b.d - a.d; });
+    faces.forEach(function (it) {
+      var roof = it.f.k === 'roof';
+      out += '<polygon points="' + it.f.p.map(function (p) { return V.U(p[0], p[1]) + ',' + (-p[2]); }).join(' ') + '" fill="' + (roof ? '#8f4e3a' : '#ece6d8') + '" stroke="' + (roof ? '#4a261b' : ink) + '" stroke-width="' + (roof ? Math.max(120, 2 * u) : 1.3 * u) + '" stroke-linejoin="round"/>';
+    });
+    if (!isFinite(box.u0)) return { s: '', box: null };
+    out += '<line x1="' + (box.u0 - 1200) + '" y1="0" x2="' + (box.u1 + 1200) + '" y2="0" stroke="' + ink + '" stroke-width="' + 2.5 * u + '"/>';
+    // level markers
+    var levels = [[0, '±0.000 floor'], [H, '+' + (H / 1000).toFixed(3) + ' wall top']];
+    if (box.z1 > H + 50) levels.push([box.z1, '+' + (box.z1 / 1000).toFixed(3) + ' roof top']);
+    levels.forEach(function (l) {
+      var x = box.u1 + 500;
+      out += '<line x1="' + x + '" y1="' + (-l[0]) + '" x2="' + (x + 30 * u) + '" y2="' + (-l[0]) + '" stroke="#1f5a7a" stroke-width="' + 0.8 * u + '"/>';
+      out += '<path d="M' + x + ' ' + (-l[0]) + ' l' + 4 * u + ' ' + (-6 * u) + ' h' + (-8 * u) + ' z" fill="#1f5a7a"/>';
+      out += '<text x="' + (x + 2 * u) + '" y="' + (-l[0] - 8 * u) + '" font-size="' + 8 * u + '" font-family="IBM Plex Mono, monospace" fill="#1f5a7a">' + l[1] + '</text>';
+    });
+    box.u1 += 500 + 80 * u;
+    box.u0 -= 1200;
+    return { s: out, box: box };
+  }
+
+  // ================= editor =================
+  var svg = $('plan'), hud = $('hud');
+  var view = { cx: 6000, cy: 4000, scale: 0.05 };
+  var tool = 'select', sel = {}, drawing = null, hover = null, typed = '', drag = null, spaceDown = false, shiftDown = false;
+  var undoStack = [], redoStack = [];
+
+  function vb() {
+    var r = svg.getBoundingClientRect(), w = (r.width || 600) / view.scale, h = (r.height || 400) / view.scale;
+    return { x: view.cx - w / 2, y: view.cy - h / 2, w: w, h: h, r: r };
+  }
+  function toWorld(e) { var b = vb(); return { x: b.x + (e.clientX - b.r.left) / view.scale, y: b.y + (e.clientY - b.r.top) / view.scale }; }
+
+  function fitView() {
+    var b = wallsBox();
+    if (!b) { view.cx = 5000; view.cy = 4000; view.scale = 0.05; renderPlan(); return; }
+    var r = svg.getBoundingClientRect(), w = b.x1 - b.x0 + 3000, h = b.y1 - b.y0 + 3000;
+    view.cx = (b.x0 + b.x1) / 2; view.cy = (b.y0 + b.y1) / 2;
+    view.scale = Math.min((r.width || 600) / w, (r.height || 400) / h);
+    renderPlan();
+  }
+
+  function snap(p, from, exclude) {
+    var tol = 12 / view.scale, best = null;
+    state.walls.forEach(function (w) {
+      [[w.x1, w.y1, 0], [w.x2, w.y2, 1]].forEach(function (q) {
+        if (exclude && exclude.some(function (x) { return x.w === w && x.end === q[2]; })) return;
+        var d = Math.hypot(q[0] - p.x, q[1] - p.y);
+        if (d < tol && (!best || d < best.d)) best = { x: q[0], y: q[1], d: d, kind: 'end' };
+      });
+    });
+    if (best) return best;
+    var q = { x: p.x, y: p.y, kind: 'grid' }, ortho = from && ($('orthoChk').checked !== shiftDown), lock = null;
+    if (ortho) { if (Math.abs(q.x - from.x) >= Math.abs(q.y - from.y)) { q.y = from.y; lock = 'h'; } else { q.x = from.x; lock = 'v'; } }
+    // snap onto a wall centre-line (T-junctions)
+    var bestW = null;
+    state.walls.forEach(function (w) {
+      if (exclude && exclude.some(function (x) { return x.w === w; })) return;
+      var f = wallFrame(w), t = (q.x - w.x1) * f.d.x + (q.y - w.y1) * f.d.y;
+      if (t < 0 || t > f.L) return;
+      var dist = Math.abs(-(q.x - w.x1) * f.d.y + (q.y - w.y1) * f.d.x);
+      if (dist < Math.max(tol, f.h) && (!bestW || dist < bestW.dist)) bestW = { w: w, f: f, t: t, dist: dist };
+    });
+    if (bestW) {
+      var w = bestW.w, f = bestW.f;
+      if (lock) {
+        // intersect the locked line with the wall line
+        if (lock === 'h' && Math.abs(f.d.y) > 0.05) { var t1 = (q.y - w.y1) / f.d.y; if (t1 >= 0 && t1 <= f.L) return { x: w.x1 + f.d.x * t1, y: q.y, kind: 'on' }; }
+        if (lock === 'v' && Math.abs(f.d.x) > 0.05) { var t2 = (q.x - w.x1) / f.d.x; if (t2 >= 0 && t2 <= f.L) return { x: q.x, y: w.y1 + f.d.y * t2, kind: 'on' }; }
+      } else {
+        var tt = Math.round(bestW.t / 10) * 10;
+        return { x: w.x1 + f.d.x * tt, y: w.y1 + f.d.y * tt, kind: 'on' };
+      }
+    }
+    var g = state.grid;
+    if (lock !== 'v') q.x = Math.round(q.x / g) * g;
+    if (lock !== 'h') q.y = Math.round(q.y / g) * g;
+    return q;
+  }
+
+  function nearestWall(p, extra) {
+    var best = null;
+    state.walls.forEach(function (w) {
+      var f = wallFrame(w), t = (p.x - w.x1) * f.d.x + (p.y - w.y1) * f.d.y;
+      if (t < -f.e0 || t > f.L + f.e1) return;
+      var dist = Math.abs(-(p.x - w.x1) * f.d.y + (p.y - w.y1) * f.d.x);
+      if (dist <= f.h + extra && (!best || dist < best.dist)) best = { w: w, t: t, dist: dist, f: f };
+    });
+    return best;
+  }
+  function hitOpening(p) {
+    var tol = 6 / view.scale, hit = null;
+    state.openings.forEach(function (o) {
+      var w = wallById(o.wallId); if (!w) return;
+      var sp = openingSpan(o, w); if (!sp) return;
+      var f = wallFrame(w), t = (p.x - w.x1) * f.d.x + (p.y - w.y1) * f.d.y, dist = Math.abs(-(p.x - w.x1) * f.d.y + (p.y - w.y1) * f.d.x);
+      if (t >= sp.a - tol && t <= sp.b + tol && dist <= f.h + (o.type === 'door' ? sp.b - sp.a : tol)) {
+        // door swings are only a hit on the side they open to
+        if (dist > f.h + tol && o.type === 'door') {
+          var side = -(p.x - w.x1) * f.d.y + (p.y - w.y1) * f.d.x, swing = (o.flip & 2) ? -1 : 1;
+          if (side * swing < 0) return;
+        }
+        if (!hit) hit = o;
+      }
+    });
+    return hit;
+  }
+  function endpointRefs(x, y) {
+    var refs = [];
+    state.walls.forEach(function (w) {
+      if (same(w.x1, w.y1, x, y)) refs.push({ w: w, end: 0 });
+      if (same(w.x2, w.y2, x, y)) refs.push({ w: w, end: 1 });
+    });
+    return refs;
+  }
+  function setEnd(ref, x, y) { if (ref.end) { ref.w.x2 = x; ref.w.y2 = y; } else { ref.w.x1 = x; ref.w.y1 = y; } }
+
+  function openingPreview(p) {
+    var nw = nearestWall(p, 20 / view.scale); if (!nw) return null;
+    var isDoor = tool === 'door', w = nw.w;
+    var width = isDoor ? (w.kind === 'ext' ? 1000 : 900) : 1200;
+    var L = nw.f.L;
+    if (L < width + 80) return { w: w, bad: 'This wall is too short for a ' + width + ' mm ' + tool + '.' };
+    var c = clamp(Math.round(nw.t / 50) * 50, width / 2 + 40, L - width / 2 - 40);
+    var o = { id: 'preview', wallId: w.id, type: tool, offset: c, width: width, height: isDoor ? 2100 : 1200, sill: isDoor ? 0 : 900, flip: 0 };
+    var clash = openingsOf(w).some(function (x) { return Math.abs(x.offset - c) < (x.width + width) / 2 + 50; });
+    return { w: w, o: o, bad: clash ? 'That overlaps another opening on this wall.' : '' };
+  }
+
+  function renderPlan() {
+    var b = vb(), u = 1 / view.scale;
+    svg.setAttribute('viewBox', b.x + ' ' + b.y + ' ' + b.w + ' ' + b.h);
+    var g = state.grid; while (g * view.scale < 8) g *= 10;
+    var major = g * 10;
+    var s = '<defs><pattern id="gMinor" patternUnits="userSpaceOnUse" width="' + g + '" height="' + g + '"><path d="M' + g + ' 0 L0 0 0 ' + g + '" fill="none" stroke="rgba(14,42,71,0.08)" stroke-width="' + u + '"/></pattern>' +
+      '<pattern id="gMajor" patternUnits="userSpaceOnUse" width="' + major + '" height="' + major + '"><rect width="' + major + '" height="' + major + '" fill="url(#gMinor)"/><path d="M' + major + ' 0 L0 0 0 ' + major + '" fill="none" stroke="rgba(14,42,71,0.18)" stroke-width="' + u + '"/></pattern></defs>';
+    s += '<rect x="' + b.x + '" y="' + b.y + '" width="' + b.w + '" height="' + b.h + '" fill="url(#gMajor)"/>';
+    s += '<line x1="' + b.x + '" y1="0" x2="' + (b.x + b.w) + '" y2="0" stroke="rgba(216,96,74,0.25)" stroke-width="' + u + '"/><line x1="0" y1="' + b.y + '" x2="0" y2="' + (b.y + b.h) + '" stroke="rgba(78,158,115,0.3)" stroke-width="' + u + '"/>';
+    s += planContent(u, { sel: sel, dims: $('dimsChk').checked, id: 'ed' });
+    if (tool === 'select' && sel.type === 'wall') {
+      var sw = wallById(sel.id);
+      if (sw) [[sw.x1, sw.y1], [sw.x2, sw.y2]].forEach(function (p) { s += '<rect x="' + (p[0] - 5 * u) + '" y="' + (p[1] - 5 * u) + '" width="' + 10 * u + '" height="' + 10 * u + '" fill="#fff" stroke="#E2A63B" stroke-width="' + 2 * u + '"/>'; });
+    }
+    if (tool === 'wall' && drawing && hover) {
+      var tmp = { x1: drawing.start.x, y1: drawing.start.y, x2: hover.x, y2: hover.y, thk: state.newKind === 'ext' ? state.extThk : state.intThk, kind: state.newKind };
+      var L = wlen(tmp);
+      if (L > 1) {
+        var f = wallFrame(tmp), h = tmp.thk / 2;
+        var poly = [[tmp.x1 + f.n.x * h, tmp.y1 + f.n.y * h], [tmp.x2 + f.n.x * h, tmp.y2 + f.n.y * h], [tmp.x2 - f.n.x * h, tmp.y2 - f.n.y * h], [tmp.x1 - f.n.x * h, tmp.y1 - f.n.y * h]];
+        s += '<polygon points="' + poly.map(function (p) { return p[0] + ',' + p[1]; }).join(' ') + '" fill="rgba(226,166,59,0.35)" stroke="#b07a1a" stroke-width="' + 1.2 * u + '" stroke-dasharray="' + 5 * u + ' ' + 3 * u + '"/>';
+        var mx = (tmp.x1 + tmp.x2) / 2 + f.n.x * (h + 16 * u), my = (tmp.y1 + tmp.y2) / 2 + f.n.y * (h + 16 * u);
+        s += '<text x="' + mx + '" y="' + my + '" font-size="' + 12 * u + '" text-anchor="middle" dominant-baseline="middle" font-family="IBM Plex Mono, monospace" font-weight="600" fill="#8a5a0c" stroke="#fff" stroke-width="' + 3 * u + '" paint-order="stroke">' + (typed || Math.round(L)) + '</text>';
+      }
+    }
+    if ((tool === 'door' || tool === 'window') && hover && hover.prev) {
+      var pv = hover.prev;
+      if (pv.o) s += openingSymbol(pv.w, pv.o, openingSpan(pv.o, pv.w), u, pv.bad ? '#f6d4cc' : '#fbe9c4', '#16202B', false);
+      else s += '<polygon points="' + wallRect(pv.w).map(function (p) { return p[0] + ',' + p[1]; }).join(' ') + '" fill="rgba(216,96,74,0.3)"/>';
+    }
+    if (tool === 'wall' && hover) {
+      var col = hover.kind === 'end' ? '#D8604A' : hover.kind === 'on' ? '#2d7fa6' : '#b07a1a';
+      s += '<circle cx="' + hover.x + '" cy="' + hover.y + '" r="' + 5 * u + '" fill="none" stroke="' + col + '" stroke-width="' + 2 * u + '"/>';
+      s += '<line x1="' + (hover.x - 9 * u) + '" y1="' + hover.y + '" x2="' + (hover.x + 9 * u) + '" y2="' + hover.y + '" stroke="' + col + '" stroke-width="' + u + '"/><line x1="' + hover.x + '" y1="' + (hover.y - 9 * u) + '" x2="' + hover.x + '" y2="' + (hover.y + 9 * u) + '" stroke="' + col + '" stroke-width="' + u + '"/>';
+    }
+    svg.innerHTML = s;
+    updateHud();
+  }
+
+  function updateHud() {
+    var t = '';
+    if (tool === 'select') t = sel.type ? 'Selected: ' + sel.type + '. Drag to move, Delete to remove.' : 'Select tool. Click a wall, door, window or room.';
+    else if (tool === 'wall') {
+      t = drawing ? 'Click the next corner. Type a length' + (typed ? ': ' + typed + ' mm, Enter to place' : ' + Enter') + '. Esc to stop.' : 'Wall tool. Click to start a wall (' + (state.newKind === 'ext' ? 'outer' : 'inner') + ').';
+      if (hover) t += '  [' + Math.round(hover.x) + ', ' + Math.round(hover.y) + ']';
+    } else t = hover && hover.prev && hover.prev.bad ? hover.prev.bad : 'Click on a wall to place a ' + tool + '.';
+    hud.textContent = t;
+  }
+
+  // ---------- history ----------
+  function snapshot() { return JSON.stringify(state); }
+  function pushHistory(snap) { undoStack.push(snap); if (undoStack.length > 120) undoStack.shift(); redoStack = []; updateUndoButtons(); }
+  function mutate(fn) { pushHistory(snapshot()); fn(); changed(); }
+  function updateUndoButtons() { $('undoBtn').disabled = !undoStack.length; $('redoBtn').disabled = !redoStack.length; }
+  function undo() { if (!undoStack.length) return; redoStack.push(snapshot()); state = normalise(JSON.parse(undoStack.pop())); validateSel(); syncInputs(); changed(); updateUndoButtons(); }
+  function redo() { if (!redoStack.length) return; undoStack.push(snapshot()); state = normalise(JSON.parse(redoStack.pop())); validateSel(); syncInputs(); changed(); updateUndoButtons(); }
+  function validateSel() {
+    if (sel.type === 'wall' && !wallById(sel.id)) sel = {};
+    if (sel.type === 'opening' && !state.openings.some(function (o) { return o.id === sel.id; })) sel = {};
+    if (sel.type === 'room' && !topo.rooms[sel.idx]) sel = {};
+  }
+
+  var saveTimer = null;
+  function changed() {
+    computeTopology();
+    validateSel();
+    renderPlan();
+    renderProps();
+    renderStats();
+    schedule3D();
+    if (activeTab === 'drawings') renderSheet();
+    if (activeTab === 'materials') renderBOM();
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () { try { localStorage.setItem(STORE, snapshot()); } catch (e) { /* storage may be unavailable */ } }, 300);
+  }
+
+  // ---------- wall drawing ----------
+  function addWall(a, b) {
+    if (Math.hypot(b.x - a.x, b.y - a.y) < 50) return false;
+    var kind = state.newKind;
+    state.walls.push({ id: uid('w'), x1: Math.round(a.x), y1: Math.round(a.y), x2: Math.round(b.x), y2: Math.round(b.y), kind: kind, thk: kind === 'ext' ? state.extThk : state.intThk });
+    return true;
+  }
+  function placeWallTo(q) {
+    var a = drawing.start;
+    mutate(function () { addWall(a, q); });
+    typed = '';
+    if (same(q.x, q.y, drawing.chainStart.x, drawing.chainStart.y)) { drawing = null; toast('Outline closed.'); }
+    else drawing.start = { x: Math.round(q.x), y: Math.round(q.y) };
+    renderPlan();
+  }
+  function endDrawing() { drawing = null; typed = ''; renderPlan(); }
+
+  // ---------- pointer ----------
+  svg.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+  svg.addEventListener('pointerdown', function (e) {
+    svg.setPointerCapture(e.pointerId);
+    var p = toWorld(e);
+    if (e.button === 1 || (e.button === 0 && spaceDown)) { drag = { mode: 'pan', sx: e.clientX, sy: e.clientY, cx: view.cx, cy: view.cy }; return; }
+    if (e.button === 2) { if (drawing) endDrawing(); return; }
+    if (tool === 'wall') {
+      var q = snap(p, drawing ? drawing.start : null);
+      if (!drawing) { drawing = { start: { x: q.x, y: q.y }, chainStart: { x: q.x, y: q.y } }; hover = q; renderPlan(); }
+      else placeWallTo(q);
+      return;
+    }
+    if (tool === 'door' || tool === 'window') {
+      var pv = openingPreview(p);
+      if (!pv) { toast('Click on a wall to place the ' + tool + '.'); return; }
+      if (pv.bad) { toast(pv.bad); return; }
+      mutate(function () { pv.o.id = uid('o'); state.openings.push(pv.o); });
+      sel = { type: 'opening', id: pv.o.id };
+      renderPlan(); renderProps();
+      return;
+    }
+    // select tool
+    var tol = 8 / view.scale;
+    if (sel.type === 'wall') {
+      var sw = wallById(sel.id);
+      if (sw) {
+        var ends = [[sw.x1, sw.y1], [sw.x2, sw.y2]];
+        for (var i = 0; i < 2; i++) if (Math.hypot(ends[i][0] - p.x, ends[i][1] - p.y) < tol) {
+          drag = { mode: 'vertex', refs: endpointRefs(ends[i][0], ends[i][1]), snap: snapshot(), moved: false };
+          return;
+        }
+      }
+    }
+    var op = hitOpening(p);
+    if (op) { sel = { type: 'opening', id: op.id }; drag = { mode: 'opening', o: op, snap: snapshot(), moved: false }; renderPlan(); renderProps(); return; }
+    var nw = nearestWall(p, 4 / view.scale);
+    if (nw) {
+      sel = { type: 'wall', id: nw.w.id };
+      var refs = endpointRefs(nw.w.x1, nw.w.y1).concat(endpointRefs(nw.w.x2, nw.w.y2));
+      drag = { mode: 'wall', start: p, refs: refs.map(function (r) { return { w: r.w, end: r.end, x: r.end ? r.w.x2 : r.w.x1, y: r.end ? r.w.y2 : r.w.y1 }; }), snap: snapshot(), moved: false };
+      renderPlan(); renderProps(); return;
+    }
+    for (var k = 0; k < topo.rooms.length; k++) if (pointInPoly(p.x, p.y, topo.rooms[k].poly)) { sel = { type: 'room', idx: k }; renderPlan(); renderProps(); drag = { mode: 'pan', sx: e.clientX, sy: e.clientY, cx: view.cx, cy: view.cy }; return; }
+    sel = {}; renderPlan(); renderProps();
+    drag = { mode: 'pan', sx: e.clientX, sy: e.clientY, cx: view.cx, cy: view.cy };
+  });
+
+  svg.addEventListener('pointermove', function (e) {
+    var p = toWorld(e);
+    if (drag) {
+      if (drag.mode === 'pan') {
+        view.cx = drag.cx - (e.clientX - drag.sx) / view.scale; view.cy = drag.cy - (e.clientY - drag.sy) / view.scale; renderPlan(); return;
+      }
+      if (!drag.moved) { drag.moved = true; pushHistory(drag.snap); }
+      if (drag.mode === 'vertex') {
+        var q = snap(p, null, drag.refs);
+        drag.refs.forEach(function (r) { setEnd(r, Math.round(q.x), Math.round(q.y)); });
+      } else if (drag.mode === 'wall') {
+        var g = state.grid, dx = Math.round((p.x - drag.start.x) / g) * g, dy = Math.round((p.y - drag.start.y) / g) * g;
+        drag.refs.forEach(function (r) { setEnd(r, r.x + dx, r.y + dy); });
+      } else if (drag.mode === 'opening') {
+        var w = wallById(drag.o.wallId), f = wallFrame(w);
+        drag.o.offset = clamp(Math.round(((p.x - w.x1) * f.d.x + (p.y - w.y1) * f.d.y) / 10) * 10, drag.o.width / 2 + 20, f.L - drag.o.width / 2 - 20);
+      }
+      computeTopology(); renderPlan(); schedule3D();
+      return;
+    }
+    if (tool === 'wall') hover = snap(p, drawing ? drawing.start : null);
+    else if (tool === 'door' || tool === 'window') hover = { prev: openingPreview(p) };
+    else hover = null;
+    if (tool !== 'select') renderPlan();
+  });
+
+  svg.addEventListener('pointerup', function () {
+    if (drag && drag.moved) {
+      // remove walls collapsed to nothing by a drag
+      state.walls = state.walls.filter(function (w) { return wlen(w) >= 10; });
+      state.openings = state.openings.filter(function (o) { return wallById(o.wallId); });
+      changed();
+    }
+    drag = null;
+  });
+  svg.addEventListener('pointerleave', function () { if (!drag && tool !== 'wall') { hover = null; renderPlan(); } });
+  svg.addEventListener('dblclick', function () { if (tool === 'wall' && drawing) endDrawing(); });
+  svg.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    var p = toWorld(e), k = Math.exp(-e.deltaY * 0.0015), ns = clamp(view.scale * k, 0.004, 2);
+    var b = vb();
+    view.scale = ns;
+    // keep the point under the cursor fixed
+    var nx = (e.clientX - b.r.left) / ns, ny = (e.clientY - b.r.top) / ns;
+    var w = b.r.width / ns, h = b.r.height / ns;
+    view.cx = p.x - nx + w / 2; view.cy = p.y - ny + h / 2;
+    renderPlan();
+  }, { passive: false });
+
+  function setTool(t) {
+    tool = t; hover = null; drawing = null; typed = '';
+    document.querySelectorAll('[data-tool]').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-tool') === t); });
+    svg.style.cursor = t === 'select' ? 'default' : 'crosshair';
+    renderPlan();
+  }
+  document.querySelectorAll('[data-tool]').forEach(function (b) { b.addEventListener('click', function () { setTool(b.getAttribute('data-tool')); }); });
+
+  function deleteSelection() {
+    if (sel.type === 'wall') mutate(function () { var id = sel.id; state.walls = state.walls.filter(function (w) { return w.id !== id; }); state.openings = state.openings.filter(function (o) { return o.wallId !== id; }); sel = {}; });
+    else if (sel.type === 'opening') mutate(function () { var id = sel.id; state.openings = state.openings.filter(function (o) { return o.id !== id; }); sel = {}; });
+  }
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Shift') { shiftDown = true; }
+    var tag = (e.target && e.target.tagName) || '';
+    if (/INPUT|SELECT|TEXTAREA/.test(tag)) return;
+    if (activeTab !== 'model') return;
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') { e.preventDefault(); if (e.shiftKey) redo(); else undo(); return; }
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') { e.preventDefault(); redo(); return; }
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    if (e.key === ' ') { spaceDown = true; e.preventDefault(); return; }
+    if (tool === 'wall' && drawing) {
+      if (/^[0-9.]$/.test(e.key)) { typed += e.key; renderPlan(); e.preventDefault(); return; }
+      if (e.key === 'Backspace' && typed) { typed = typed.slice(0, -1); renderPlan(); e.preventDefault(); return; }
+      if (e.key === 'Enter' && typed) {
+        var len = parseFloat(typed), a = drawing.start, hv = hover || a, dx = hv.x - a.x, dy = hv.y - a.y, dl = Math.hypot(dx, dy);
+        if (!(len > 0) || dl < 1) { toast('Move the pointer to show the wall direction first.'); return; }
+        placeWallTo({ x: a.x + dx / dl * len, y: a.y + dy / dl * len });
+        e.preventDefault(); return;
+      }
+    }
+    if (e.key === 'Escape') { if (drawing) endDrawing(); else { sel = {}; renderPlan(); renderProps(); } return; }
+    if ((e.key === 'Delete' || e.key === 'Backspace') && tool === 'select') { deleteSelection(); e.preventDefault(); return; }
+    var k = e.key.toLowerCase();
+    if (k === 'v') setTool('select'); else if (k === 'w') setTool('wall'); else if (k === 'd') setTool('door'); else if (k === 'n') setTool('window');
+  });
+  document.addEventListener('keyup', function (e) { if (e.key === ' ') spaceDown = false; if (e.key === 'Shift') shiftDown = false; });
+  window.addEventListener('blur', function () { spaceDown = false; shiftDown = false; });
+
+  $('undoBtn').addEventListener('click', undo);
+  $('redoBtn').addEventListener('click', redo);
+  $('fitBtn').addEventListener('click', fitView);
+  $('dimsChk').addEventListener('change', renderPlan);
+  $('gridSel').addEventListener('change', function () { state.grid = Number(this.value); changed(); });
+  document.querySelectorAll('[data-layout]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-layout]').forEach(function (x) { x.classList.toggle('active', x === b); });
+      $('views').className = 'views ' + b.getAttribute('data-layout');
+      setTimeout(function () { renderPlan(); resize3D(); }, 0);
+    });
+  });
+
+  // ---------- properties ----------
+  function field(label, id, value, attrs) { return '<div class="field"><label for="' + id + '">' + label + '</label><input type="number" id="' + id + '" value="' + value + '" ' + (attrs || '') + '></div>'; }
+  function renderProps() {
+    var el = $('props'), h = '';
+    if (sel.type === 'wall') {
+      var w = wallById(sel.id);
+      if (w) {
+        var ang = Math.round(Math.atan2(w.y2 - w.y1, w.x2 - w.x1) * 180 / Math.PI);
+        h += '<div class="field"><label for="pKind">Wall type</label><select id="pKind"><option value="ext"' + (w.kind === 'ext' ? ' selected' : '') + '>Outer wall</option><option value="int"' + (w.kind === 'int' ? ' selected' : '') + '>Inner wall</option></select></div>';
+        h += '<div class="row-2">' + field('Length (mm)', 'pLen', Math.round(wlen(w)), 'min="50" step="10"') + field('Thickness', 'pThk', w.thk, 'min="50" max="600" step="10"') + '</div>';
+        h += '<p class="hint">Angle ' + ang + '°. ' + openingsOf(w).length + ' opening(s). Changing the length moves the end point and the walls joined to it.</p>';
+        h += '<button type="button" class="draft-btn secondary" id="pSplit">Split wall in half</button>';
+        h += '<button type="button" class="draft-btn danger" id="pDel">Delete wall</button>';
+      }
+    } else if (sel.type === 'opening') {
+      var o = state.openings.filter(function (x) { return x.id === sel.id; })[0], ow = o && wallById(o.wallId);
+      if (o && ow) {
+        var sp = openingSpan(o, ow);
+        h += '<div class="field"><label for="pType">Type</label><select id="pType"><option value="door"' + (o.type === 'door' ? ' selected' : '') + '>Door</option><option value="window"' + (o.type === 'window' ? ' selected' : '') + '>Window</option></select></div>';
+        h += '<div class="row-2">' + field('Width', 'pW', o.width, 'min="300" step="10"') + field('Height', 'pH', o.height, 'min="200" step="10"') + '</div>';
+        h += '<div class="row-2">' + (o.type === 'window' ? field('Sill height', 'pSill', o.sill, 'min="0" step="10"') : '') + field('From wall start', 'pOff', Math.round(sp ? sp.a : o.offset - o.width / 2), 'min="0" step="10"') + '</div>';
+        if (o.type === 'door') h += '<div class="btn-row"><button type="button" class="draft-btn secondary" id="pHinge">Swap hinge</button><button type="button" class="draft-btn secondary" id="pSwing">Swap swing</button></div>';
+        if (!sp) h += '<p class="hint" style="color:#8a2a1a">This wall is too short for this opening.</p>';
+        h += '<button type="button" class="draft-btn danger" id="pDel">Delete ' + o.type + '</button>';
+      }
+    } else if (sel.type === 'room') {
+      var r = topo.rooms[sel.idx];
+      if (r) {
+        h += '<div class="field"><label for="pRoom">Room name</label><input type="text" id="pRoom" maxlength="40" value="' + esc(r.label ? r.label.name : '') + '" placeholder="' + esc(r.name) + '"></div>';
+        h += '<p class="hint">Area ' + (r.area / 1e6).toFixed(2) + ' m², measured to the wall centre-lines.</p>';
+      }
+    }
+    if (!h) h = '<p class="props-empty">Nothing selected. Use the <b>Select</b> tool and click a wall, door, window or room to edit it.</p>';
+    el.innerHTML = h;
+    bindProps();
+  }
+  function bindProps() {
+    function on(id, fn) { var x = $(id); if (x) x.addEventListener('change', fn); }
+    function click(id, fn) { var x = $(id); if (x) x.addEventListener('click', fn); }
+    click('pDel', deleteSelection);
+    if (sel.type === 'wall') {
+      var w = wallById(sel.id);
+      on('pKind', function () { var v = this.value; mutate(function () { w.kind = v; w.thk = v === 'ext' ? state.extThk : state.intThk; }); });
+      on('pThk', function () { var v = clamp(num(this.value, w.thk), 50, 600); mutate(function () { w.thk = v; }); });
+      on('pLen', function () {
+        var v = num(this.value, 0); if (v < 50) { renderProps(); return; }
+        mutate(function () {
+          var d = wdir(w), refs = endpointRefs(w.x2, w.y2), nx = Math.round(w.x1 + d.x * v), ny = Math.round(w.y1 + d.y * v);
+          refs.forEach(function (r) { setEnd(r, nx, ny); });
+        });
+      });
+      click('pSplit', function () {
+        mutate(function () {
+          var mx = Math.round((w.x1 + w.x2) / 2), my = Math.round((w.y1 + w.y2) / 2), L = wlen(w);
+          var nw = { id: uid('w'), x1: mx, y1: my, x2: w.x2, y2: w.y2, kind: w.kind, thk: w.thk };
+          state.openings.forEach(function (o) { if (o.wallId === w.id && o.offset > L / 2) { o.wallId = nw.id; o.offset -= L / 2; } });
+          w.x2 = mx; w.y2 = my; state.walls.push(nw);
+        });
+      });
+    } else if (sel.type === 'opening') {
+      var o = state.openings.filter(function (x) { return x.id === sel.id; })[0];
+      on('pType', function () { var v = this.value; mutate(function () { o.type = v; if (v === 'door') { o.sill = 0; o.height = Math.max(o.height, 2000); } else { o.sill = 900; o.height = Math.min(o.height, 1500); } }); });
+      on('pW', function () { var v = clamp(num(this.value, o.width), 300, 6000); mutate(function () { o.width = v; }); });
+      on('pH', function () { var v = clamp(num(this.value, o.height), 200, 5000); mutate(function () { o.height = v; }); });
+      on('pSill', function () { var v = clamp(num(this.value, o.sill), 0, 4000); mutate(function () { o.sill = v; }); });
+      on('pOff', function () { var v = num(this.value, 0); mutate(function () { o.offset = v + o.width / 2; }); });
+      click('pHinge', function () { mutate(function () { o.flip ^= 1; }); });
+      click('pSwing', function () { mutate(function () { o.flip ^= 2; }); });
+    } else if (sel.type === 'room') {
+      on('pRoom', function () {
+        var v = this.value.trim().slice(0, 40), r = topo.rooms[sel.idx];
+        mutate(function () {
+          if (r.label) { var i = state.rooms.indexOf(r.label); if (!v) state.rooms.splice(i, 1); else r.label.name = v; }
+          else if (v) state.rooms.push({ x: Math.round(r.cx), y: Math.round(r.cy), name: v });
+        });
+      });
+    }
+  }
+
+  function renderStats() {
+    var b = computeBOM(), bb = wallsBox();
+    var items = [
+      [r1(b.slabArea) + ' m²', 'Floor area'], [topo.rooms.length, 'Rooms'],
+      [r1(b.extLen / 1000) + ' m', 'Outer walls'], [r1(b.intLen / 1000) + ' m', 'Inner walls'],
+      [bb ? m(bb.x1 - bb.x0) : '—', 'Width'], [bb ? m(bb.y1 - bb.y0) : '—', 'Depth'],
+      [m(b.roof.top), 'Total height'], [r1(b.roof.area) + ' m²', 'Roof area']
+    ];
+    $('stats').innerHTML = items.map(function (i) { return '<div class="stat"><b>' + i[0] + '</b><span>' + i[1] + '</span></div>'; }).join('');
+  }
+
+  // ---------- project inputs ----------
+  function syncInputs() {
+    $('projName').value = state.name; $('wallHeight').value = state.height; $('slabThk').value = state.slabThk;
+    $('extThk').value = state.extThk; $('intThk').value = state.intThk; $('newWallKind').value = state.newKind;
+    $('studSpacing').value = String(state.studSpacing); $('gridSel').value = String(state.grid);
+    $('roofType').value = state.roof.type; $('roofPitch').value = state.roof.pitch; $('roofOverhang').value = state.roof.overhang; $('roofRidge').value = state.roof.ridge;
+  }
+  function bindInput(id, fn) { $(id).addEventListener('change', function () { var v = this.value; mutate(function () { fn(v); }); syncInputs(); }); }
+  bindInput('projName', function (v) { state.name = v.trim().slice(0, 80) || 'My house'; });
+  bindInput('wallHeight', function (v) { state.height = clamp(num(v, state.height), 2000, 6000); });
+  bindInput('slabThk', function (v) { state.slabThk = clamp(num(v, state.slabThk), 50, 600); });
+  bindInput('extThk', function (v) { state.extThk = clamp(num(v, state.extThk), 80, 600); state.walls.forEach(function (w) { if (w.kind === 'ext') w.thk = state.extThk; }); });
+  bindInput('intThk', function (v) { state.intThk = clamp(num(v, state.intThk), 50, 400); state.walls.forEach(function (w) { if (w.kind === 'int') w.thk = state.intThk; }); });
+  bindInput('studSpacing', function (v) { state.studSpacing = Number(v) === 400 ? 400 : 600; });
+  bindInput('roofType', function (v) { state.roof.type = v; });
+  bindInput('roofPitch', function (v) { state.roof.pitch = clamp(num(v, 30), 3, 60); });
+  bindInput('roofOverhang', function (v) { state.roof.overhang = clamp(num(v, 500), 0, 1500); });
+  bindInput('roofRidge', function (v) { state.roof.ridge = v; });
+  $('newWallKind').addEventListener('change', function () { state.newKind = this.value === 'int' ? 'int' : 'ext'; changed(); });
+
+  $('sampleBtn').addEventListener('click', function () {
+    mutate(function () { state = sampleHouse(); });
+    sel = {}; syncInputs(); fitView(); reset3D(); toast('Sample house loaded. Press Undo to go back.');
+  });
+  $('quickRectBtn').addEventListener('click', function () {
+    var W = clamp(num($('quickW').value, 10000), 1000, 100000), D = clamp(num($('quickD').value, 7000), 1000, 100000);
+    var bb = wallsBox(), x0 = bb ? Math.ceil((bb.x1 + 3000) / 1000) * 1000 : 0, y0 = bb ? Math.round(bb.y0 / 100) * 100 : 0;
+    mutate(function () {
+      var c = [[x0, y0], [x0 + W, y0], [x0 + W, y0 + D], [x0, y0 + D]];
+      for (var i = 0; i < 4; i++) state.walls.push({ id: uid('w'), x1: c[i][0], y1: c[i][1], x2: c[(i + 1) % 4][0], y2: c[(i + 1) % 4][1], kind: 'ext', thk: state.extThk });
+    });
+    fitView(); reset3D(); toast('Outline added. Use the Wall tool with "Inner walls" to divide it into rooms.');
+  });
+  $('clearBtn').addEventListener('click', function () {
+    if (!state.walls.length) return;
+    mutate(function () { state.walls = []; state.openings = []; state.rooms = []; });
+    sel = {}; toast('Drawing cleared. Press Undo to bring it back.');
+  });
+  $('saveJsonBtn').addEventListener('click', function () { download(fileBase() + '.cadforge.json', JSON.stringify(state, null, 2), 'application/json'); });
+  $('openJsonBtn').addEventListener('click', function () { $('openJsonInput').click(); });
+  $('openJsonInput').addEventListener('change', function () {
+    var file = this.files && this.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      try { var data = normalise(JSON.parse(reader.result)); mutate(function () { state = data; }); sel = {}; syncInputs(); fitView(); reset3D(); toast('Project opened.'); }
+      catch (e) { toast('That file is not a CAD Forge project.'); }
+    };
+    reader.readAsText(file);
+    this.value = '';
+  });
+
+  // ================= 3D =================
+  var three = null, show = { framing: false, roof: true }, rebuildTimer = null;
+  function init3D() {
+    var canvas = $('view3d');
+    if (typeof THREE === 'undefined') { $('no3d').style.display = 'grid'; $('no3d').textContent = 'The 3D library could not load. Check your connection and reload the page. The plan, drawings and material list still work.'; return; }
+    var renderer;
+    try { renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, preserveDrawingBuffer: true }); }
+    catch (e) { $('no3d').style.display = 'grid'; return; }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.shadowMap.enabled = true;
+    var scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xcfe3ee);
+    var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 2000);
+    var controls = THREE.OrbitControls ? new THREE.OrbitControls(camera, renderer.domElement) : null;
+    if (controls) { controls.enableDamping = true; controls.maxPolarAngle = Math.PI * 0.495; }
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8a70, 0.75));
+    var sun = new THREE.DirectionalLight(0xffffff, 0.75);
+    sun.position.set(-18, 30, 22); sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0008; sun.shadow.normalBias = 0.03;
+    var sc = sun.shadow.camera; sc.left = -40; sc.right = 40; sc.top = 40; sc.bottom = -40; sc.far = 120;
+    scene.add(sun);
+    var ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400), new THREE.MeshStandardMaterial({ color: 0x9fbf7f, roughness: 1 }));
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.16; ground.receiveShadow = true;
+    scene.add(ground);
+    var root = new THREE.Group(); root.scale.setScalar(0.001);
+    scene.add(root);
+    var mats = {
+      ext: new THREE.MeshStandardMaterial({ color: 0xf1ece0, roughness: 0.9 }),
+      int: new THREE.MeshStandardMaterial({ color: 0xe0dbd0, roughness: 0.9 }),
+      slab: new THREE.MeshStandardMaterial({ color: 0xa7a9ab, roughness: 1 }),
+      roof: new THREE.MeshStandardMaterial({ color: 0x8f4e3a, roughness: 0.8, side: THREE.DoubleSide }),
+      gable: new THREE.MeshStandardMaterial({ color: 0xf1ece0, roughness: 0.9, side: THREE.DoubleSide }),
+      glass: new THREE.MeshStandardMaterial({ color: 0x86b8d4, roughness: 0.1, metalness: 0.2, transparent: true, opacity: 0.55 }),
+      door: new THREE.MeshStandardMaterial({ color: 0x9a6a3c, roughness: 0.7 }),
+      timber: new THREE.MeshStandardMaterial({ color: 0xd9b27a, roughness: 0.85 }),
+      header: new THREE.MeshStandardMaterial({ color: 0xc08a4a, roughness: 0.85 }),
+      edge: new THREE.LineBasicMaterial({ color: 0x55606a, transparent: true, opacity: 0.35 })
+    };
+    three = { renderer: renderer, scene: scene, camera: camera, controls: controls, root: root, mats: mats, fitted: false };
+    if (window.ResizeObserver) new ResizeObserver(resize3D).observe($('view3dWrap'));
+    resize3D();
+    (function loop() { requestAnimationFrame(loop); if (controls) controls.update(); renderer.render(scene, camera); })();
+  }
+  function resize3D() {
+    if (!three) return;
+    var wrap = $('view3dWrap'), w = wrap.clientWidth, h = wrap.clientHeight;
+    if (!w || !h) return;
+    three.renderer.setSize(w, h, false);
+    three.camera.aspect = w / h; three.camera.updateProjectionMatrix();
+  }
+  function schedule3D() { clearTimeout(rebuildTimer); rebuildTimer = setTimeout(rebuild3D, 60); }
+
+  function clearGroup(g) {
+    while (g.children.length) {
+      var c = g.children.pop();
+      if (c.children && c.children.length) clearGroup(c);
+      if (c.geometry) c.geometry.dispose();
+    }
+  }
+  function rebuild3D() {
+    if (!three) return;
+    var T = three, root = T.root, mats = T.mats, H = state.height;
+    clearGroup(root);
+    function box(w, s0, s1, z0, z1, a0, a1, mat, edges) {
+      if (s1 - s0 < 1 || z1 - z0 < 1) return;
+      var f = wallFrame(w), geo = new THREE.BoxGeometry(s1 - s0, z1 - z0, a1 - a0), mesh = new THREE.Mesh(geo, mat);
+      var sm = (s0 + s1) / 2, am = (a0 + a1) / 2;
+      mesh.position.set(w.x1 + f.d.x * sm + f.n.x * am, (z0 + z1) / 2, w.y1 + f.d.y * sm + f.n.y * am);
+      mesh.rotation.y = -Math.atan2(f.d.y, f.d.x);
+      mesh.castShadow = true; mesh.receiveShadow = true;
+      if (edges) mesh.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo), mats.edge));
+      root.add(mesh);
+    }
+    state.walls.forEach(function (w) {
+      var f = wallFrame(w), h = f.h, mat = w.kind === 'ext' ? mats.ext : mats.int;
+      var spans = openingsOf(w).map(function (o) { var s = openingSpan(o, w); return s ? { o: o, a: s.a, b: s.b } : null; }).filter(Boolean).sort(function (x, y) { return x.a - y.a; });
+      if (!show.framing) {
+        var cur = -f.e0;
+        spans.forEach(function (sp) {
+          box(w, cur, sp.a, 0, H, -h, h, mat, true);
+          var head = openingHead(sp.o), sill = sp.o.type === 'door' ? 0 : Math.min(sp.o.sill, head - 50);
+          box(w, sp.a, sp.b, 0, sill, -h, h, mat, true);
+          box(w, sp.a, sp.b, head, H, -h, h, mat, true);
+          cur = Math.max(cur, sp.b);
+        });
+        box(w, cur, f.L + f.e1, 0, H, -h, h, mat, true);
+      } else {
+        framing(w).forEach(function (m) { box(w, m.s0, m.s1, m.z0, m.z1, -m.dep / 2, m.dep / 2, m.kind === 'header' ? mats.header : mats.timber, true); });
+      }
+      spans.forEach(function (sp) {
+        var o = sp.o, head = openingHead(o);
+        if (o.type === 'window') box(w, sp.a, sp.b, o.sill, head, -12, 12, mats.glass, false);
+        else box(w, sp.a + 10, sp.b - 10, 0, head - 10, h - 60, h - 20, mats.door, true);
+      });
+    });
+    topo.outlines.forEach(function (poly) {
+      var shape = new THREE.Shape(poly.map(function (p) { return new THREE.Vector2(p[0], p[1]); }));
+      var geo = new THREE.ExtrudeGeometry(shape, { depth: state.slabThk, bevelEnabled: false });
+      var mesh = new THREE.Mesh(geo, mats.slab);
+      mesh.rotation.x = Math.PI / 2; mesh.receiveShadow = true;
+      root.add(mesh);
+    });
+    if (show.roof) {
+      roofFaces().forEach(function (f) {
+        var pos = [];
+        for (var i = 1; i < f.p.length - 1; i++) [f.p[0], f.p[i], f.p[i + 1]].forEach(function (p) { pos.push(p[0], p[2], p[1]); });
+        var geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+        geo.computeVertexNormals();
+        var mesh = new THREE.Mesh(geo, f.k === 'roof' ? mats.roof : mats.gable);
+        mesh.castShadow = true;
+        root.add(mesh);
+      });
+    }
+    if (!T.fitted && state.walls.length) { reset3D(); T.fitted = true; }
+  }
+  // Place a camera looking at the whole building from the front-left, far enough away for the given aspect ratio.
+  function fitCamera(cam, target) {
+    var bb = wallsBox() || { x0: 0, y0: 0, x1: 10000, y1: 8000 };
+    var cx = (bb.x0 + bb.x1) / 2000, cz = (bb.y0 + bb.y1) / 2000;
+    var radius = Math.max(Math.hypot(bb.x1 - bb.x0, bb.y1 - bb.y0, roofInfo().top) / 2000, 3);
+    var vfov = cam.fov * Math.PI / 180, hfov = 2 * Math.atan(Math.tan(vfov / 2) * cam.aspect);
+    var dist = radius / Math.sin(Math.min(vfov, hfov) / 2) * 1.05;
+    var dir = new THREE.Vector3(-0.5, 0.55, 0.85).normalize();
+    target.set(cx, 1.2, cz);
+    cam.position.copy(target).addScaledVector(dir, dist);
+    cam.lookAt(target);
+    cam.updateProjectionMatrix();
+  }
+  function reset3D() {
+    if (!three) return;
+    var target = three.controls ? three.controls.target : new THREE.Vector3();
+    fitCamera(three.camera, target);
+    if (three.controls) three.controls.update();
+  }
+  // Render the model at a chosen size without disturbing the on-screen view.
+  function snapshot3D(w, h, type) {
+    var r = three.renderer, old = r.getSize(new THREE.Vector2()), cam = three.camera.clone();
+    rebuild3D();
+    r.setSize(w, h, false);
+    cam.aspect = w / h;
+    fitCamera(cam, new THREE.Vector3());
+    r.render(three.scene, cam);
+    var url = r.domElement.toDataURL(type || 'image/png', 0.9);
+    r.setSize(old.x, old.y, false);
+    r.render(three.scene, three.camera);
+    return url;
+  }
+  $('framingBtn').addEventListener('click', function () { show.framing = !show.framing; this.classList.toggle('active', show.framing); if (show.framing && show.roof) { show.roof = false; $('roofBtn').classList.remove('active'); } rebuild3D(); });
+  $('roofBtn').addEventListener('click', function () { show.roof = !show.roof; this.classList.toggle('active', show.roof); rebuild3D(); });
+  $('reset3dBtn').addEventListener('click', reset3D);
+
+  // ================= drawing sheet =================
+  var SCALES = [20, 25, 50, 75, 100, 125, 150, 200, 250, 500, 1000, 2000];
+  function renderSheet() {
+    var sheet = $('sheet'), ink = '#16202B', pair = $('elevSel').value === 'back' ? ['back', 'left'] : ['front', 'right'];
+    var b = wallsBox();
+    var s = '<rect x="0" y="0" width="420" height="297" fill="#fff"/><rect x="5" y="5" width="410" height="287" fill="none" stroke="' + ink + '" stroke-width="0.6"/>';
+    if (!b) {
+      s += '<text x="210" y="148" font-size="7" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" fill="#667">Draw some walls on the Model tab to generate drawings.</text>';
+      sheet.innerHTML = s; $('sheetInfo').textContent = 'A3 sheet'; return;
+    }
+    var boxes = { plan: [10, 12, 236, 226], e1: [254, 12, 156, 88], e2: [254, 110, 156, 70], persp: [254, 188, 156, 50] };
+    var probeU = 1;
+    var planW = (b.x1 - b.x0) + 4000, planH = (b.y1 - b.y0) + 4000;
+    var ev = pair.map(function (v) { return elevation(v, probeU); });
+    var need = Math.max(planW / boxes.plan[2], planH / boxes.plan[3]);
+    [boxes.e1, boxes.e2].forEach(function (bx, i) {
+      var eb = ev[i].box; if (!eb) return;
+      need = Math.max(need, (eb.u1 - eb.u0 + 1500) / bx[2], (eb.z1 + 1600) / (bx[3] - 8));
+    });
+    var scale = SCALES.filter(function (x) { return x >= need; })[0] || Math.ceil(need / 100) * 100;
+    var u = 0.3 * scale; // 0.3 mm on paper per nominal pixel
+    // plan
+    var pw = boxes.plan[2] * scale, ph = boxes.plan[3] * scale, pcx = (b.x0 + b.x1) / 2 + 800, pcy = (b.y0 + b.y1) / 2 + 600;
+    s += '<svg x="' + boxes.plan[0] + '" y="' + boxes.plan[1] + '" width="' + boxes.plan[2] + '" height="' + boxes.plan[3] + '" viewBox="' + (pcx - pw / 2) + ' ' + (pcy - ph / 2) + ' ' + pw + ' ' + ph + '">' + planContent(u, { print: true, dims: true, overall: true, bg: '#fff', id: 'sh' }) + '</svg>';
+    s += viewTitle(boxes.plan[0], boxes.plan[1] + boxes.plan[3] + 6, 'GROUND FLOOR PLAN', scale);
+    // north arrow
+    s += '<g transform="translate(236 24)"><circle r="6" fill="none" stroke="' + ink + '" stroke-width="0.4"/><path d="M0 -5 L2.4 3 L0 1.6 L-2.4 3 Z" fill="' + ink + '"/><text y="-7.5" font-size="3.4" text-anchor="middle" font-family="IBM Plex Sans, sans-serif" font-weight="600">N</text></g>';
+    // elevations
+    [boxes.e1, boxes.e2].forEach(function (bx, i) {
+      var e = elevation(pair[i], u); if (!e.box) return;
+      var w = bx[2] * scale, h = bx[3] * scale, cx = (e.box.u0 + e.box.u1) / 2, cz = e.box.z1 / 2 + 300;
+      s += '<svg x="' + bx[0] + '" y="' + bx[1] + '" width="' + bx[2] + '" height="' + bx[3] + '" viewBox="' + (cx - w / 2) + ' ' + (-cz - h / 2) + ' ' + w + ' ' + h + '">' + e.s + '</svg>';
+      s += viewTitle(bx[0], bx[1] + bx[3] + 5, VIEW_AXES[pair[i]].title, scale);
+    });
+    // perspective snapshot
+    var pb = boxes.persp;
+    if (three) {
+      try {
+        var url = snapshot3D(Math.round(pb[2] * 8), Math.round(pb[3] * 8), 'image/jpeg');
+        s += '<image href="' + url + '" x="' + pb[0] + '" y="' + pb[1] + '" width="' + pb[2] + '" height="' + pb[3] + '" preserveAspectRatio="xMidYMid meet"/>';
+      } catch (err) { /* snapshot is optional */ }
+    }
+    s += '<rect x="' + pb[0] + '" y="' + pb[1] + '" width="' + pb[2] + '" height="' + pb[3] + '" fill="none" stroke="#9aa5ae" stroke-width="0.3"/>';
+    s += '<text x="' + pb[0] + '" y="' + (pb[1] + pb[3] + 5) + '" font-size="3.6" font-family="IBM Plex Sans, sans-serif" font-weight="600" fill="' + ink + '">3D VIEW</text>';
+    // title block
+    var bom = computeBOM(), tb = [10, 250, 400, 38];
+    s += '<rect x="' + tb[0] + '" y="' + tb[1] + '" width="' + tb[2] + '" height="' + tb[3] + '" fill="none" stroke="' + ink + '" stroke-width="0.5"/>';
+    [150, 250, 330].forEach(function (x) { s += '<line x1="' + x + '" y1="' + tb[1] + '" x2="' + x + '" y2="' + (tb[1] + tb[3]) + '" stroke="' + ink + '" stroke-width="0.3"/>'; });
+    function cell(x, y, label, value, big) {
+      return '<text x="' + x + '" y="' + y + '" font-size="2.6" font-family="IBM Plex Sans, sans-serif" fill="#667">' + label + '</text><text x="' + x + '" y="' + (y + (big ? 8 : 5.2)) + '" font-size="' + (big ? 7 : 4) + '" font-family="Space Grotesk, IBM Plex Sans, sans-serif" font-weight="600" fill="' + ink + '">' + esc(value) + '</text>';
+    }
+    s += cell(14, 257, 'PROJECT', state.name, true);
+    s += cell(14, 276, 'DRAWING', 'Plan, elevations and 3D view');
+    s += cell(154, 257, 'FLOOR AREA (SLAB)', r1(bom.slabArea) + ' m²');
+    s += cell(154, 270, 'ROOMS', topo.rooms.length + ' rooms, ' + r1(bom.roomArea) + ' m² to wall centres');
+    s += cell(254, 257, 'SCALE', '1:' + scale + ' at A3');
+    s += cell(254, 270, 'DATE', new Date().toISOString().slice(0, 10));
+    s += cell(334, 257, 'DIMENSIONS', 'millimetres');
+    s += cell(334, 270, 'MADE WITH', 'MigaBuilder CAD Forge');
+    sheet.innerHTML = s;
+    $('sheetInfo').textContent = 'A3 landscape · scale 1:' + scale;
+  }
+  function viewTitle(x, y, t, scale) {
+    return '<text x="' + x + '" y="' + y + '" font-size="3.6" font-family="IBM Plex Sans, sans-serif" font-weight="600" fill="#16202B">' + t + '<tspan font-weight="400" fill="#667">  1:' + scale + '</tspan></text>';
+  }
+  function sheetMarkup() {
+    renderSheet();
+    return '<?xml version="1.0" encoding="UTF-8"?>\n<svg xmlns="http://www.w3.org/2000/svg" width="420mm" height="297mm" viewBox="0 0 420 297">' + $('sheet').innerHTML + '</svg>';
+  }
+  $('elevSel').addEventListener('change', renderSheet);
+  $('dlSvgBtn').addEventListener('click', function () { download(fileBase() + '-drawings.svg', sheetMarkup(), 'image/svg+xml'); });
+  $('printBtn').addEventListener('click', function () {
+    var markup = sheetMarkup(), win = window.open('', '_blank');
+    if (!win) { toast('Allow pop-ups to print, or download the .svg sheet instead.'); return; }
+    win.document.write('<!DOCTYPE html><html><head><title>' + esc(state.name) + ' drawings</title><style>@page{size:A3 landscape;margin:0}html,body{margin:0}svg{width:420mm;height:297mm;display:block}</style></head><body>' + markup.replace(/^<\?xml[^>]*>\s*/, '') + '<script>window.onload=function(){setTimeout(function(){window.print()},300)}<\/script></body></html>');
+    win.document.close();
+  });
+
+  // ================= material list =================
+  function renderBOM() {
+    var b = computeBOM(), last = '', h = '<table><thead><tr><th>Item</th><th style="text-align:right">Quantity</th><th>Unit</th><th>Notes</th></tr></thead><tbody>';
+    if (!state.walls.length) { $('bomTable').innerHTML = '<p class="props-empty">Draw some walls on the Model tab to calculate materials.</p>'; return; }
+    b.rows.forEach(function (r) {
+      if (r.group !== last) { h += '<tr class="group"><td colspan="4">' + esc(r.group) + '</td></tr>'; last = r.group; }
+      h += '<tr><td>' + esc(r.item) + '</td><td class="num">' + r.qty + '</td><td>' + r.unit + '</td><td>' + esc(r.note) + '</td></tr>';
+    });
+    $('bomTable').innerHTML = h + '</tbody></table>';
+  }
+  $('dlCsvBtn').addEventListener('click', function () {
+    var rows = [['Group', 'Item', 'Quantity', 'Unit', 'Notes']].concat(computeBOM().rows.map(function (r) { return [r.group, r.item, r.qty, r.unit, r.note]; }));
+    download(fileBase() + '-materials.csv', rows.map(function (r) { return r.map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; }).join(','); }).join('\r\n'), 'text/csv');
+  });
+
+  // ================= exports =================
+  function fileBase() { return (state.name || 'house').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'house'; }
+  function download(name, data, type) {
+    var blob = data instanceof Blob ? data : new Blob([data], { type: type });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  }
+
+  function buildDXF() {
+    var out = ['0', 'SECTION', '2', 'HEADER', '9', '$ACADVER', '1', 'AC1009', '9', '$INSUNITS', '70', '4', '0', 'ENDSEC', '0', 'SECTION', '2', 'ENTITIES'];
+    function f(v) { return (Math.round(v * 100) / 100).toString(); }
+    function line(layer, a, b) { out.push('0', 'LINE', '8', layer, '10', f(a[0]), '20', f(-a[1]), '30', '0', '11', f(b[0]), '21', f(-b[1]), '31', '0'); }
+    function text(layer, p, h, str) { out.push('0', 'TEXT', '8', layer, '10', f(p[0]), '20', f(-p[1]), '30', '0', '40', f(h), '1', str.replace(/[\r\n]/g, ' ')); }
+    state.walls.forEach(function (w) {
+      var fr = wallFrame(w), cuts = openingsOf(w).map(function (o) { return openingSpan(o, w); }).filter(Boolean).sort(function (a, b) { return a.a - b.a; });
+      var layer = w.kind === 'ext' ? 'WALLS-OUTER' : 'WALLS-INNER';
+      [fr.h, -fr.h].forEach(function (side) {
+        var cur = -fr.e0;
+        cuts.forEach(function (c) { if (c.a > cur) line(layer, wallPoint(w, cur, side), wallPoint(w, c.a, side)); cur = Math.max(cur, c.b); });
+        if (fr.L + fr.e1 > cur) line(layer, wallPoint(w, cur, side), wallPoint(w, fr.L + fr.e1, side));
+      });
+      line(layer, wallPoint(w, -fr.e0, fr.h), wallPoint(w, -fr.e0, -fr.h));
+      line(layer, wallPoint(w, fr.L + fr.e1, fr.h), wallPoint(w, fr.L + fr.e1, -fr.h));
+      cuts.forEach(function (c) { line(layer, wallPoint(w, c.a, fr.h), wallPoint(w, c.a, -fr.h)); line(layer, wallPoint(w, c.b, fr.h), wallPoint(w, c.b, -fr.h)); });
+    });
+    state.openings.forEach(function (o) {
+      var w = wallById(o.wallId); if (!w) return;
+      var sp = openingSpan(o, w); if (!sp) return;
+      var fr = wallFrame(w);
+      if (o.type === 'window') {
+        [fr.h, 0, -fr.h].forEach(function (c) { line('WINDOWS', wallPoint(w, sp.a, c), wallPoint(w, sp.b, c)); });
+      } else {
+        var hingeS = (o.flip & 1) ? sp.b : sp.a, freeS = (o.flip & 1) ? sp.a : sp.b, side = (o.flip & 2) ? -1 : 1, width = sp.b - sp.a, face = side * fr.h;
+        var hinge = wallPoint(w, hingeS, face);
+        line('DOORS', hinge, wallPoint(w, hingeS, face + side * width));
+        var prev = null;
+        for (var i = 0; i <= 12; i++) {
+          var t = i / 12 * Math.PI / 2, along = hingeS + (freeS - hingeS) * Math.sin(t), acr = face + side * width * Math.cos(t);
+          var p = wallPoint(w, along, acr);
+          if (prev) line('DOORS', prev, p);
+          prev = p;
+        }
+      }
+    });
+    topo.rooms.forEach(function (r) {
+      text('ROOMS', [r.cx, r.cy], 200, r.name);
+      text('ROOMS', [r.cx, r.cy + 300], 150, (r.area / 1e6).toFixed(1) + ' m2');
+    });
+    out.push('0', 'ENDSEC', '0', 'EOF');
+    return out.join('\r\n') + '\r\n';
+  }
+  $('dxfBtn').addEventListener('click', function () {
+    if (!state.walls.length) { toast('Draw some walls first.'); return; }
+    download(fileBase() + '-plan.dxf', buildDXF(), 'application/dxf');
+  });
+  function exportModel(kind) {
+    if (!three) { toast('3D export needs the 3D view, which is not available here.'); return; }
+    if (!state.walls.length) { toast('Draw some walls first.'); return; }
+    rebuild3D();
+    three.root.updateMatrixWorld(true);
+    var exporter = kind === 'stl' ? (THREE.STLExporter && new THREE.STLExporter()) : (THREE.OBJExporter && new THREE.OBJExporter());
+    if (!exporter) { toast('The exporter could not load. Check your connection and reload the page.'); return; }
+    // edge outlines are for the screen only
+    var lines = [];
+    three.root.traverse(function (o) { if (o.isLineSegments) lines.push(o); });
+    lines.forEach(function (l) { l.visible = false; l.parent.remove(l); });
+    var data = kind === 'stl' ? exporter.parse(three.root, { binary: true }) : exporter.parse(three.root);
+    rebuild3D();
+    download(fileBase() + '.' + kind, kind === 'stl' ? new Blob([data], { type: 'model/stl' }) : data, kind === 'stl' ? 'model/stl' : 'text/plain');
+  }
+  $('objBtn').addEventListener('click', function () { exportModel('obj'); });
+  $('stlBtn').addEventListener('click', function () { exportModel('stl'); });
+  $('pngBtn').addEventListener('click', function () {
+    if (!three) { toast('The 3D view is not available here.'); return; }
+    three.renderer.render(three.scene, three.camera);
+    three.renderer.domElement.toBlob(function (blob) { if (blob) download(fileBase() + '-3d.png', blob); }, 'image/png');
+  });
+
+  // ================= tabs & misc =================
+  var activeTab = 'model';
+  document.querySelectorAll('.tab').forEach(function (t) {
+    t.addEventListener('click', function () {
+      activeTab = t.getAttribute('data-tab');
+      document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('active', x === t); x.setAttribute('aria-selected', String(x === t)); });
+      $('tabModel').classList.toggle('hidden', activeTab !== 'model');
+      $('tabDrawings').classList.toggle('hidden', activeTab !== 'drawings');
+      $('tabMaterials').classList.toggle('hidden', activeTab !== 'materials');
+      if (activeTab === 'drawings') renderSheet();
+      if (activeTab === 'materials') renderBOM();
+      if (activeTab === 'model') setTimeout(function () { renderPlan(); resize3D(); }, 0);
+    });
+  });
+  var toastTimer = null;
+  function toast(msg) { var t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove('show'); }, 3200); }
+  window.addEventListener('resize', function () { if (activeTab === 'model') renderPlan(); });
+
+  syncInputs();
+  updateUndoButtons();
+  computeTopology();
+  init3D();
+  fitView();
+  renderProps();
+  renderStats();
+  rebuild3D();
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
