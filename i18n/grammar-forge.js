@@ -177,3 +177,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "For long texts, check one section at a time so the suggestions are easy to review.": {
+  "es": "En textos largos, revisa una sección cada vez para que las sugerencias sean fáciles de repasar.",
+  "ar": "في النصوص الطويلة، افحص قسمًا واحدًا في كل مرة لتسهل مراجعة الاقتراحات.",
+  "zh": "长文本请分段检查，这样更容易逐条查看建议。",
+  "sw": "Kwa maandishi marefu, kagua sehemu moja kwa wakati ili mapendekezo yawe rahisi kupitia.",
+  "sv": "Kontrollera långa texter ett avsnitt i taget, så blir förslagen lätta att gå igenom.",
+  "de": "Prüfe lange Texte abschnittsweise, dann lassen sich die Vorschläge leichter durchgehen.",
+  "pt": "Em textos longos, verifique uma seção de cada vez para revisar as sugestões com facilidade.",
+  "fr": "Pour un long texte, vérifiez une partie à la fois afin de relire facilement les suggestions."
+ },
+ "Read each explanation before you accept a fix: names, brand words and technical terms can be flagged by mistake.": {
+  "es": "Lee cada explicación antes de aceptar una corrección: los nombres, marcas y términos técnicos pueden marcarse por error.",
+  "ar": "اقرأ كل شرح قبل قبول التصحيح: قد تُعلَّم الأسماء والعلامات التجارية والمصطلحات التقنية خطأً.",
+  "zh": "接受修改前先看说明：人名、品牌名和专业术语可能被误标。",
+  "sw": "Soma kila maelezo kabla ya kukubali marekebisho: majina, chapa na istilahi za kitaalamu zinaweza kuwekwa alama kimakosa.",
+  "sv": "Läs varje förklaring innan du godtar en ändring: namn, varumärken och fackord kan markeras av misstag.",
+  "de": "Lies jede Erklärung, bevor du eine Korrektur übernimmst: Namen, Marken und Fachbegriffe werden manchmal fälschlich markiert.",
+  "pt": "Leia cada explicação antes de aceitar uma correção: nomes, marcas e termos técnicos podem ser marcados por engano.",
+  "fr": "Lisez chaque explication avant d’accepter une correction : les noms, les marques et les termes techniques peuvent être signalés à tort."
+ },
+ "Use “Accept all safe fixes” for quick spelling and spacing corrections, then go through the rest yourself.": {
+  "es": "Usa “Accept all safe fixes” para corregir rápido la ortografía y los espacios, y luego revisa el resto tú mismo.",
+  "ar": "استخدم «Accept all safe fixes» لتصحيح الإملاء والمسافات بسرعة، ثم راجع الباقي بنفسك.",
+  "zh": "用“Accept all safe fixes”快速修正拼写和空格，其余建议再自己逐条处理。",
+  "sw": "Tumia “Accept all safe fixes” kwa marekebisho ya haraka ya tahajia na nafasi, kisha pitia yaliyobaki mwenyewe.",
+  "sv": "Använd ”Accept all safe fixes” för snabba rättelser av stavning och mellanslag, och gå sedan igenom resten själv.",
+  "de": "Nutze „Accept all safe fixes“ für schnelle Rechtschreib- und Leerzeichenkorrekturen und geh den Rest selbst durch.",
+  "pt": "Use “Accept all safe fixes” para correções rápidas de ortografia e espaços e depois revise o resto você mesmo.",
+  "fr": "Utilisez « Accept all safe fixes » pour corriger vite l’orthographe et les espaces, puis parcourez le reste vous-même."
+ },
+ "Can I use it for emails, essays and CVs?": {
+  "es": "¿Puedo usarlo para correos, redacciones y currículums?",
+  "ar": "هل يمكنني استخدامه للرسائل والمقالات والسير الذاتية؟",
+  "zh": "可以用来检查邮件、文章和简历吗？",
+  "sw": "Je, naweza kuitumia kwa barua pepe, insha na CV?",
+  "sv": "Kan jag använda den för mejl, uppsatser och CV?",
+  "de": "Kann ich es für E-Mails, Aufsätze und Lebensläufe nutzen?",
+  "pt": "Posso usar para e-mails, redações e currículos?",
+  "fr": "Puis-je l’utiliser pour des e-mails, des rédactions et des CV ?"
+ },
+ "Yes. Paste any text, check it and copy the corrected version back into your email, document or CV.": {
+  "es": "Sí. Pega cualquier texto, revísalo y copia la versión corregida en tu correo, documento o currículum.",
+  "ar": "نعم. الصق أي نص وافحصه، ثم انسخ النسخة المصححة إلى رسالتك أو مستندك أو سيرتك الذاتية.",
+  "zh": "可以。粘贴任意文字，检查后把修改好的版本复制回邮件、文档或简历中。",
+  "sw": "Ndiyo. Bandika maandishi yoyote, yakague na unakili toleo lililorekebishwa kurudi kwenye barua pepe, hati au CV yako.",
+  "sv": "Ja. Klistra in valfri text, kontrollera den och kopiera tillbaka den rättade versionen till ditt mejl, dokument eller CV.",
+  "de": "Ja. Füge einen beliebigen Text ein, prüfe ihn und kopiere die korrigierte Fassung zurück in deine E-Mail, dein Dokument oder deinen Lebenslauf.",
+  "pt": "Sim. Cole qualquer texto, verifique e copie a versão corrigida de volta para seu e-mail, documento ou currículo.",
+  "fr": "Oui. Collez n’importe quel texte, vérifiez-le et recopiez la version corrigée dans votre e-mail, document ou CV."
+ },
+ "Does it replace a proofreader?": {
+  "es": "¿Sustituye a un corrector humano?",
+  "ar": "هل يغني عن المدقق اللغوي؟",
+  "zh": "它能代替人工校对吗？",
+  "sw": "Je, inachukua nafasi ya msahihishaji?",
+  "sv": "Ersätter den en korrekturläsare?",
+  "de": "Ersetzt es ein Korrektorat?",
+  "pt": "Ele substitui um revisor?",
+  "fr": "Remplace-t-il un correcteur ?"
+ },
+ "No. It catches common spelling and grammar mistakes and explains them, but it can miss errors of meaning and style. Read important texts once more yourself.": {
+  "es": "No. Detecta errores comunes de ortografía y gramática y los explica, pero puede pasar por alto errores de sentido y estilo. Relee tú mismo los textos importantes.",
+  "ar": "لا. يكتشف الأخطاء الشائعة في الإملاء والقواعد ويشرحها، لكنه قد يفوّت أخطاء المعنى والأسلوب. أعد قراءة النصوص المهمة بنفسك.",
+  "zh": "不能。它能发现并解释常见的拼写和语法错误，但可能漏掉意思和文风上的问题。重要的文字请自己再读一遍。",
+  "sw": "Hapana. Inanasa makosa ya kawaida ya tahajia na sarufi na kuyaeleza, lakini inaweza kukosa makosa ya maana na mtindo. Soma tena maandishi muhimu mwenyewe.",
+  "sv": "Nej. Den hittar vanliga stav- och grammatikfel och förklarar dem, men kan missa fel i betydelse och stil. Läs viktiga texter en gång till själv.",
+  "de": "Nein. Es findet häufige Rechtschreib- und Grammatikfehler und erklärt sie, kann aber Fehler in Bedeutung und Stil übersehen. Lies wichtige Texte noch einmal selbst.",
+  "pt": "Não. Ele encontra erros comuns de ortografia e gramática e os explica, mas pode deixar passar erros de sentido e estilo. Releia você mesmo os textos importantes.",
+  "fr": "Non. Il repère et explique les fautes courantes d’orthographe et de grammaire, mais peut manquer des erreurs de sens et de style. Relisez vous-même les textes importants."
+ }
+});

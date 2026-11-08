@@ -155,3 +155,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "Add your logo once: your business name, address and logo are remembered in this browser.": {
+  "es": "Añade tu logotipo una vez: el nombre, la dirección y el logotipo de tu empresa se recuerdan en este navegador.",
+  "ar": "أضف شعارك مرة واحدة: يتذكر هذا المتصفح اسم نشاطك وعنوانه وشعاره.",
+  "zh": "只需添加一次标志：你的商家名称、地址和标志会保存在此浏览器中。",
+  "sw": "Ongeza nembo yako mara moja: jina, anwani na nembo ya biashara yako vinakumbukwa kwenye kivinjari hiki.",
+  "sv": "Lägg till din logotyp en gång: företagets namn, adress och logotyp sparas i den här webbläsaren.",
+  "de": "Füge dein Logo einmal hinzu: Firmenname, Adresse und Logo werden in diesem Browser gespeichert.",
+  "pt": "Adicione seu logo uma vez: o nome, o endereço e o logo da empresa ficam guardados neste navegador.",
+  "fr": "Ajoutez votre logo une seule fois : le nom, l’adresse et le logo de votre entreprise sont mémorisés dans ce navigateur."
+ },
+ "Choose Quote / Estimate for a price offer, Invoice to ask for payment, and Receipt to confirm a payment.": {
+  "es": "Elige Presupuesto para una oferta de precio, Factura para pedir el pago y Recibo para confirmar un pago.",
+  "ar": "اختر «عرض سعر» لتقديم سعر، و«فاتورة» لطلب الدفع، و«إيصال» لتأكيد الدفع.",
+  "zh": "报价选“报价单”，请款选“发票”，确认已付款选“收据”。",
+  "sw": "Chagua Nukuu kwa ofa ya bei, Ankara kuomba malipo, na Stakabadhi kuthibitisha malipo.",
+  "sv": "Välj Offert för ett prisförslag, Faktura för att begära betalning och Kvitto för att bekräfta en betalning.",
+  "de": "Wähle Angebot für einen Preisvorschlag, Rechnung, um Zahlung anzufordern, und Quittung, um eine Zahlung zu bestätigen.",
+  "pt": "Escolha Orçamento para uma proposta de preço, Fatura para pedir pagamento e Recibo para confirmar um pagamento.",
+  "fr": "Choisissez Devis pour une offre de prix, Facture pour demander un paiement et Reçu pour confirmer un paiement."
+ },
+ "Write clear payment details, such as your bank account or a payment link, in “How to pay you”.": {
+  "es": "Escribe datos de pago claros, como tu cuenta bancaria o un enlace de pago, en “Cómo pagarte”.",
+  "ar": "اكتب تفاصيل دفع واضحة، مثل حسابك المصرفي أو رابط دفع، في خانة «طريقة الدفع لك».",
+  "zh": "在“付款方式”中写清楚付款信息，例如银行账户或付款链接。",
+  "sw": "Andika maelezo ya malipo yaliyo wazi, kama akaunti yako ya benki au kiungo cha malipo, kwenye “Jinsi ya kukulipa”.",
+  "sv": "Skriv tydliga betalningsuppgifter, till exempel ditt bankkonto eller en betallänk, under ”Så betalar du mig”.",
+  "de": "Gib unter „So bezahlst du mich“ klare Zahlungsdaten an, etwa dein Bankkonto oder einen Zahlungslink.",
+  "pt": "Escreva dados de pagamento claros, como sua conta bancária ou um link de pagamento, em “Como pagar você”.",
+  "fr": "Indiquez des informations de paiement claires, comme votre compte bancaire ou un lien de paiement, dans « Comment vous payer »."
+ },
+ "Can I add tax and a discount?": {
+  "es": "¿Puedo añadir impuestos y un descuento?",
+  "ar": "هل يمكنني إضافة ضريبة وخصم؟",
+  "zh": "能添加税费和折扣吗？",
+  "sw": "Je, naweza kuongeza kodi na punguzo?",
+  "sv": "Kan jag lägga till moms och rabatt?",
+  "de": "Kann ich Steuern und einen Rabatt hinzufügen?",
+  "pt": "Posso adicionar imposto e desconto?",
+  "fr": "Puis-je ajouter une taxe et une remise ?"
+ },
+ "Yes. Enter a tax rate and a discount in percent, and add shipping if needed. The total is worked out for you.": {
+  "es": "Sí. Escribe un tipo de impuesto y un descuento en porcentaje, y añade el envío si hace falta. El total se calcula solo.",
+  "ar": "نعم. أدخل نسبة الضريبة والخصم بالمئة، وأضف الشحن عند الحاجة. يُحسب الإجمالي تلقائيًا.",
+  "zh": "可以。按百分比填写税率和折扣，需要时添加运费，总额会自动算好。",
+  "sw": "Ndiyo. Weka kiwango cha kodi na punguzo kwa asilimia, na uongeze usafirishaji ikihitajika. Jumla inakokotolewa kwa ajili yako.",
+  "sv": "Ja. Ange momssats och rabatt i procent, och lägg till frakt vid behov. Totalsumman räknas ut åt dig.",
+  "de": "Ja. Gib Steuersatz und Rabatt in Prozent ein und füge bei Bedarf Versandkosten hinzu. Die Summe wird für dich berechnet.",
+  "pt": "Sim. Informe a alíquota de imposto e o desconto em porcentagem e adicione o frete se precisar. O total é calculado para você.",
+  "fr": "Oui. Saisissez un taux de taxe et une remise en pourcentage, et ajoutez la livraison si besoin. Le total est calculé pour vous."
+ },
+ "Is it a valid invoice for my country?": {
+  "es": "¿Es una factura válida en mi país?",
+  "ar": "هل هي فاتورة صالحة في بلدي؟",
+  "zh": "它在我的国家算有效发票吗？",
+  "sw": "Je, ni ankara halali katika nchi yangu?",
+  "sv": "Är det en giltig faktura i mitt land?",
+  "de": "Ist das eine gültige Rechnung in meinem Land?",
+  "pt": "É uma fatura válida no meu país?",
+  "fr": "Est-ce une facture valable dans mon pays ?"
+ },
+ "It includes the usual details: number, dates, your business and client, items and totals. Rules differ between countries, for example for VAT or tax numbers, so add anything your country requires in the notes.": {
+  "es": "Incluye los datos habituales: número, fechas, tu empresa y el cliente, conceptos y totales. Las normas cambian según el país, por ejemplo con el NIF o el IVA, así que añade en las notas lo que exija tu país.",
+  "ar": "تتضمن البيانات المعتادة: الرقم والتواريخ ونشاطك والعميل والبنود والإجماليات. تختلف القواعد بين الدول، مثل الرقم الضريبي، فأضف في الملاحظات ما يشترطه بلدك.",
+  "zh": "它包含常见信息：编号、日期、你的商家和客户、项目和总额。各国规定不同，例如增值税号或税号，请在备注中补充你所在国家要求的内容。",
+  "sw": "Ina maelezo ya kawaida: namba, tarehe, biashara yako na mteja, bidhaa na jumla. Kanuni hutofautiana kati ya nchi, kwa mfano kuhusu namba ya VAT au kodi, kwa hivyo ongeza kwenye maelezo chochote ambacho nchi yako inahitaji.",
+  "sv": "Den har de vanliga uppgifterna: nummer, datum, ditt företag och kunden, rader och summor. Reglerna skiljer sig mellan länder, till exempel om momsregistreringsnummer, så lägg till det ditt land kräver under anteckningar.",
+  "de": "Sie enthält die üblichen Angaben: Nummer, Daten, deine Firma und den Kunden, Positionen und Summen. Die Regeln unterscheiden sich je nach Land, etwa bei USt-IdNr. oder Steuernummer, also ergänze in den Notizen, was dein Land verlangt.",
+  "pt": "Ela traz os dados de costume: número, datas, sua empresa e o cliente, itens e totais. As regras variam de país para país, por exemplo quanto ao número fiscal, então acrescente nas observações o que o seu país exigir.",
+  "fr": "Elle contient les mentions habituelles : numéro, dates, votre entreprise et le client, lignes et totaux. Les règles varient selon les pays, par exemple pour le numéro de TVA, alors ajoutez dans les notes ce que votre pays exige."
+ }
+});

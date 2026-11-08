@@ -186,3 +186,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "Use a sharp, straight photo with even light; blurry or tilted pictures give more mistakes.": {
+  "es": "Usa una foto nítida, recta y con luz uniforme; las imágenes borrosas o torcidas dan más errores.",
+  "ar": "استخدم صورة واضحة ومستقيمة وبإضاءة متساوية؛ فالصور الضبابية أو المائلة تعطي أخطاء أكثر.",
+  "zh": "使用清晰、端正、光线均匀的照片；模糊或倾斜的图片错误更多。",
+  "sw": "Tumia picha iliyo wazi, iliyonyooka na yenye mwanga sawa; picha zenye ukungu au zilizoinama huleta makosa zaidi.",
+  "sv": "Använd ett skarpt, rakt foto med jämnt ljus; suddiga eller sneda bilder ger fler fel.",
+  "de": "Nimm ein scharfes, gerades Foto mit gleichmäßigem Licht; unscharfe oder schiefe Bilder führen zu mehr Fehlern.",
+  "pt": "Use uma foto nítida, reta e com luz uniforme; imagens borradas ou tortas geram mais erros.",
+  "fr": "Utilisez une photo nette, droite et bien éclairée ; les images floues ou penchées donnent plus d’erreurs."
+ },
+ "Choose the document’s language before you start, so accents and special letters are read correctly.": {
+  "es": "Elige el idioma del documento antes de empezar, para que los acentos y las letras especiales se lean bien.",
+  "ar": "اختر لغة المستند قبل البدء، حتى تُقرأ العلامات والحروف الخاصة بشكل صحيح.",
+  "zh": "开始前先选择文档语言，这样重音符号和特殊字母才能被正确识别。",
+  "sw": "Chagua lugha ya hati kabla ya kuanza, ili alama na herufi maalum zisomwe kwa usahihi.",
+  "sv": "Välj dokumentets språk innan du börjar, så att accenter och specialtecken läses rätt.",
+  "de": "Wähle vor dem Start die Sprache des Dokuments, damit Akzente und Sonderzeichen richtig erkannt werden.",
+  "pt": "Escolha o idioma do documento antes de começar, para que acentos e letras especiais sejam lidos corretamente.",
+  "fr": "Choisissez la langue du document avant de commencer, pour que les accents et les lettres spéciales soient bien lus."
+ },
+ "Add several screenshots or pages at once; they are read in order and joined into one text.": {
+  "es": "Añade varias capturas o páginas a la vez; se leen en orden y se unen en un solo texto.",
+  "ar": "أضف عدة لقطات شاشة أو صفحات دفعة واحدة؛ تُقرأ بالترتيب وتُجمع في نص واحد.",
+  "zh": "可以一次添加多张截图或多页；它们会按顺序识别并合并成一段文字。",
+  "sw": "Ongeza picha za skrini au kurasa kadhaa kwa pamoja; zinasomwa kwa mpangilio na kuunganishwa kuwa maandishi moja.",
+  "sv": "Lägg till flera skärmbilder eller sidor på en gång; de läses i ordning och blir en enda text.",
+  "de": "Füge mehrere Screenshots oder Seiten auf einmal hinzu; sie werden der Reihe nach gelesen und zu einem Text verbunden.",
+  "pt": "Adicione várias capturas de tela ou páginas de uma vez; elas são lidas em ordem e unidas num só texto.",
+  "fr": "Ajoutez plusieurs captures d’écran ou pages à la fois : elles sont lues dans l’ordre et réunies en un seul texte."
+ },
+ "Can I turn a scan into a searchable PDF?": {
+  "es": "¿Puedo convertir un escaneo en un PDF con búsqueda?",
+  "ar": "هل يمكنني تحويل مستند ممسوح إلى PDF قابل للبحث؟",
+  "zh": "能把扫描件变成可搜索的 PDF 吗？",
+  "sw": "Je, naweza kugeuza nakala iliyoskaniwa kuwa PDF inayotafutika?",
+  "sv": "Kan jag göra en skanning till en sökbar PDF?",
+  "de": "Kann ich aus einem Scan eine durchsuchbare PDF machen?",
+  "pt": "Posso transformar uma digitalização em um PDF pesquisável?",
+  "fr": "Puis-je transformer un scan en PDF consultable ?"
+ },
+ "Yes. After reading the text, press “Download searchable PDF”. The pages look the same, but you can now search and copy the text.": {
+  "es": "Sí. Después de leer el texto, pulsa “Download searchable PDF”. Las páginas se ven igual, pero ahora puedes buscar y copiar el texto.",
+  "ar": "نعم. بعد قراءة النص اضغط «Download searchable PDF». تبدو الصفحات كما هي، لكن يمكنك الآن البحث في النص ونسخه.",
+  "zh": "可以。识别文字后，点击“Download searchable PDF”。页面外观不变，但现在可以搜索和复制文字。",
+  "sw": "Ndiyo. Baada ya kusoma maandishi, bonyeza “Download searchable PDF”. Kurasa zinaonekana vilevile, lakini sasa unaweza kutafuta na kunakili maandishi.",
+  "sv": "Ja. När texten är läst trycker du på ”Download searchable PDF”. Sidorna ser likadana ut, men nu kan du söka i och kopiera texten.",
+  "de": "Ja. Wenn der Text gelesen ist, drücke „Download searchable PDF“. Die Seiten sehen gleich aus, aber du kannst den Text jetzt durchsuchen und kopieren.",
+  "pt": "Sim. Depois de ler o texto, toque em “Download searchable PDF”. As páginas ficam iguais, mas agora você pode pesquisar e copiar o texto.",
+  "fr": "Oui. Une fois le texte lu, appuyez sur « Download searchable PDF ». Les pages restent identiques, mais vous pouvez maintenant rechercher et copier le texte."
+ },
+ "Does it read handwriting?": {
+  "es": "¿Lee la escritura a mano?",
+  "ar": "هل يقرأ الخط اليدوي؟",
+  "zh": "能识别手写字吗？",
+  "sw": "Je, inasoma mwandiko wa mkono?",
+  "sv": "Kan den läsa handskrift?",
+  "de": "Liest es auch Handschrift?",
+  "pt": "Ele lê letra manuscrita?",
+  "fr": "Lit-il l’écriture manuscrite ?"
+ },
+ "It is made for printed text. Neat handwriting sometimes works, but check the result carefully.": {
+  "es": "Está pensado para texto impreso. A veces funciona con letra a mano clara, pero revisa bien el resultado.",
+  "ar": "صُمّم للنص المطبوع. قد ينجح أحيانًا مع الخط اليدوي المرتب، لكن راجع النتيجة بعناية.",
+  "zh": "它主要用于印刷文字。工整的手写有时也能识别，但请仔细检查结果。",
+  "sw": "Imetengenezwa kwa maandishi yaliyochapishwa. Mwandiko nadhifu wakati mwingine hufanya kazi, lakini kagua matokeo kwa makini.",
+  "sv": "Den är gjord för tryckt text. Tydlig handskrift fungerar ibland, men kontrollera resultatet noga.",
+  "de": "Es ist für gedruckten Text gemacht. Saubere Handschrift klappt manchmal, aber prüfe das Ergebnis genau.",
+  "pt": "Ele foi feito para texto impresso. Letra caprichada às vezes funciona, mas confira o resultado com cuidado.",
+  "fr": "Il est conçu pour le texte imprimé. Une écriture soignée fonctionne parfois, mais vérifiez bien le résultat."
+ }
+});

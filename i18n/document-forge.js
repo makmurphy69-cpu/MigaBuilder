@@ -180,3 +180,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "For a scanned PDF, read it with OCR Forge first, then convert the text.": {
+  "es": "Si el PDF es un escaneo, léelo primero con OCR Forge y luego convierte el texto.",
+  "ar": "إذا كان ملف PDF ممسوحًا ضوئيًا، فاقرأه أولًا بـ OCR Forge ثم حوّل النص.",
+  "zh": "扫描版 PDF 请先用 OCR Forge 识别文字，再转换。",
+  "sw": "Kwa PDF iliyoskaniwa, isome kwanza kwa OCR Forge, kisha ubadilishe maandishi.",
+  "sv": "Är PDF:en skannad, läs den först med OCR Forge och konvertera sedan texten.",
+  "de": "Bei einer gescannten PDF lies sie zuerst mit OCR Forge aus und wandle dann den Text um.",
+  "pt": "Se o PDF for digitalizado, leia-o primeiro com o OCR Forge e depois converta o texto.",
+  "fr": "Pour un PDF scanné, lisez-le d’abord avec OCR Forge, puis convertissez le texte."
+ },
+ "Check headings and lists in the preview before you download.": {
+  "es": "Revisa los títulos y las listas en la vista previa antes de descargar.",
+  "ar": "راجع العناوين والقوائم في المعاينة قبل التنزيل.",
+  "zh": "下载前在预览中检查标题和列表。",
+  "sw": "Kagua vichwa na orodha kwenye onyesho la awali kabla ya kupakua.",
+  "sv": "Kontrollera rubriker och listor i förhandsvisningen innan du laddar ner.",
+  "de": "Prüfe Überschriften und Listen in der Vorschau, bevor du herunterlädst.",
+  "pt": "Confira títulos e listas na pré-visualização antes de baixar.",
+  "fr": "Vérifiez les titres et les listes dans l’aperçu avant de télécharger."
+ },
+ "Keep the original file: converting can change the layout, especially of tables and pictures.": {
+  "es": "Guarda el archivo original: la conversión puede cambiar el diseño, sobre todo de tablas e imágenes.",
+  "ar": "احتفظ بالملف الأصلي: قد يغيّر التحويل التنسيق، خاصة الجداول والصور.",
+  "zh": "请保留原文件：转换可能改变版式，尤其是表格和图片。",
+  "sw": "Hifadhi faili asili: kubadilisha kunaweza kubadilisha mpangilio, hasa wa majedwali na picha.",
+  "sv": "Spara originalfilen: konverteringen kan ändra layouten, särskilt för tabeller och bilder.",
+  "de": "Behalte die Originaldatei: Beim Umwandeln kann sich das Layout ändern, vor allem bei Tabellen und Bildern.",
+  "pt": "Guarde o arquivo original: a conversão pode mudar o layout, principalmente de tabelas e imagens.",
+  "fr": "Gardez le fichier d’origine : la conversion peut modifier la mise en page, surtout des tableaux et des images."
+ },
+ "Can I convert Word to PDF?": {
+  "es": "¿Puedo convertir Word a PDF?",
+  "ar": "هل يمكنني تحويل Word إلى PDF؟",
+  "zh": "能把 Word 转成 PDF 吗？",
+  "sw": "Je, naweza kubadilisha Word kuwa PDF?",
+  "sv": "Kan jag konvertera Word till PDF?",
+  "de": "Kann ich Word in PDF umwandeln?",
+  "pt": "Posso converter Word em PDF?",
+  "fr": "Puis-je convertir un Word en PDF ?"
+ },
+ "Yes. Add a .docx file and choose PDF as the output format.": {
+  "es": "Sí. Añade un archivo .docx y elige PDF como formato de salida.",
+  "ar": "نعم. أضف ملف ‎.docx واختر PDF كصيغة الإخراج.",
+  "zh": "可以。添加 .docx 文件，并选择 PDF 作为输出格式。",
+  "sw": "Ndiyo. Ongeza faili ya .docx na uchague PDF kama muundo wa matokeo.",
+  "sv": "Ja. Lägg till en .docx-fil och välj PDF som utdataformat.",
+  "de": "Ja. Füge eine .docx-Datei hinzu und wähle PDF als Ausgabeformat.",
+  "pt": "Sim. Adicione um arquivo .docx e escolha PDF como formato de saída.",
+  "fr": "Oui. Ajoutez un fichier .docx et choisissez PDF comme format de sortie."
+ },
+ "Is there a file size limit?": {
+  "es": "¿Hay un límite de tamaño de archivo?",
+  "ar": "هل يوجد حد لحجم الملف؟",
+  "zh": "有文件大小限制吗？",
+  "sw": "Je, kuna kikomo cha ukubwa wa faili?",
+  "sv": "Finns det en gräns för filstorlek?",
+  "de": "Gibt es eine Dateigrößenbegrenzung?",
+  "pt": "Existe limite de tamanho de arquivo?",
+  "fr": "Y a-t-il une limite de taille de fichier ?"
+ },
+ "There is no fixed limit, because your own device does the work. Very large files can be slow on older phones and computers.": {
+  "es": "No hay un límite fijo, porque el trabajo lo hace tu propio dispositivo. Los archivos muy grandes pueden ir lentos en móviles y ordenadores antiguos.",
+  "ar": "لا يوجد حد ثابت، لأن جهازك هو من يقوم بالعمل. قد تكون الملفات الكبيرة جدًا بطيئة على الهواتف والحواسيب القديمة.",
+  "zh": "没有固定限制，因为处理是在你自己的设备上完成的。超大文件在较旧的手机和电脑上可能较慢。",
+  "sw": "Hakuna kikomo maalum, kwa sababu kifaa chako mwenyewe ndicho kinachofanya kazi. Faili kubwa sana zinaweza kuwa za polepole kwenye simu na kompyuta za zamani.",
+  "sv": "Det finns ingen fast gräns, eftersom din egen enhet gör jobbet. Mycket stora filer kan gå långsamt på äldre telefoner och datorer.",
+  "de": "Es gibt keine feste Grenze, weil dein eigenes Gerät die Arbeit macht. Sehr große Dateien können auf älteren Handys und Computern langsam sein.",
+  "pt": "Não há limite fixo, porque o seu próprio aparelho faz o trabalho. Arquivos muito grandes podem ficar lentos em celulares e computadores mais antigos.",
+  "fr": "Il n’y a pas de limite fixe, car c’est votre appareil qui fait le travail. Les très gros fichiers peuvent être lents sur les téléphones et ordinateurs anciens."
+ }
+});

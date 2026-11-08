@@ -197,3 +197,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "If a voice reads numbers or abbreviations oddly, write them the way they should be spoken.": {
+  "es": "Si una voz lee raro los números o las abreviaturas, escríbelos tal como deben pronunciarse.",
+  "ar": "إذا نطق صوت الأرقام أو الاختصارات بشكل غريب، فاكتبها كما يجب أن تُلفظ.",
+  "zh": "如果语音读数字或缩写很奇怪，就按应该读出来的方式写出来。",
+  "sw": "Sauti ikisoma namba au vifupisho kwa njia isiyo ya kawaida, viandike jinsi vinavyopaswa kutamkwa.",
+  "sv": "Om en röst läser siffror eller förkortningar konstigt, skriv dem som de ska uttalas.",
+  "de": "Liest eine Stimme Zahlen oder Abkürzungen seltsam vor, schreib sie so, wie sie gesprochen werden sollen.",
+  "pt": "Se uma voz ler números ou abreviações de forma estranha, escreva-os do jeito que devem ser falados.",
+  "fr": "Si une voix lit mal des nombres ou des abréviations, écrivez-les comme ils doivent être prononcés."
+ },
+ "Use the pause between paragraphs to give listeners time to follow.": {
+  "es": "Usa la pausa entre párrafos para dar tiempo a quien escucha.",
+  "ar": "استخدم التوقف بين الفقرات لتمنح المستمعين وقتًا للمتابعة.",
+  "zh": "利用段落间的停顿，让听众有时间跟上。",
+  "sw": "Tumia kituo kati ya aya ili kuwapa wasikilizaji muda wa kufuatilia.",
+  "sv": "Använd pausen mellan stycken så hinner lyssnarna med.",
+  "de": "Nutze die Pause zwischen Absätzen, damit die Zuhörer mitkommen.",
+  "pt": "Use a pausa entre parágrafos para dar tempo a quem ouve.",
+  "fr": "Utilisez la pause entre les paragraphes pour laisser aux auditeurs le temps de suivre."
+ },
+ "Press “Hear a sample” to compare voices before you make the whole voice-over.": {
+  "es": "Pulsa “Hear a sample” para comparar voces antes de crear toda la locución.",
+  "ar": "اضغط «Hear a sample» لمقارنة الأصوات قبل إنشاء التعليق الصوتي كاملًا.",
+  "zh": "生成完整配音前，先点“Hear a sample”比较不同声音。",
+  "sw": "Bonyeza “Hear a sample” kulinganisha sauti kabla ya kutengeneza sauti nzima.",
+  "sv": "Tryck på ”Hear a sample” för att jämföra röster innan du gör hela speakerrösten.",
+  "de": "Drücke „Hear a sample“, um Stimmen zu vergleichen, bevor du die ganze Sprachaufnahme erstellst.",
+  "pt": "Toque em “Hear a sample” para comparar vozes antes de gerar a narração inteira.",
+  "fr": "Appuyez sur « Hear a sample » pour comparer les voix avant de créer toute la voix off."
+ },
+ "Why does the first voice-over take longer?": {
+  "es": "¿Por qué tarda más la primera locución?",
+  "ar": "لماذا يستغرق التعليق الصوتي الأول وقتًا أطول؟",
+  "zh": "为什么第一次生成配音比较慢？",
+  "sw": "Kwa nini sauti ya kwanza inachukua muda mrefu zaidi?",
+  "sv": "Varför tar den första speakerrösten längre tid?",
+  "de": "Warum dauert die erste Sprachaufnahme länger?",
+  "pt": "Por que a primeira narração demora mais?",
+  "fr": "Pourquoi la première voix off prend-elle plus de temps ?"
+ },
+ "The first time you use a voice, it is downloaded once (about 20–110 MB) and kept on this device. After that it starts much faster.": {
+  "es": "La primera vez que usas una voz, se descarga una sola vez (unos 20–110 MB) y se guarda en este dispositivo. Después arranca mucho más rápido.",
+  "ar": "في أول استخدام لصوت ما، يُنزَّل مرة واحدة (نحو 20–110 ميغابايت) ويُحفظ على هذا الجهاز. بعد ذلك يبدأ أسرع بكثير.",
+  "zh": "第一次使用某个声音时，会下载一次（约 20–110 MB）并保存在此设备上。之后启动会快得多。",
+  "sw": "Mara ya kwanza unapotumia sauti, inapakuliwa mara moja (karibu MB 20–110) na kuhifadhiwa kwenye kifaa hiki. Baada ya hapo inaanza haraka zaidi.",
+  "sv": "Första gången du använder en röst laddas den ner en gång (cirka 20–110 MB) och sparas på enheten. Sedan startar den mycket snabbare.",
+  "de": "Beim ersten Mal wird eine Stimme einmalig heruntergeladen (etwa 20–110 MB) und auf diesem Gerät gespeichert. Danach startet sie viel schneller.",
+  "pt": "Na primeira vez que você usa uma voz, ela é baixada uma vez (cerca de 20–110 MB) e fica neste aparelho. Depois disso, começa bem mais rápido.",
+  "fr": "La première fois que vous utilisez une voix, elle est téléchargée une seule fois (environ 20 à 110 Mo) et gardée sur cet appareil. Ensuite, elle démarre beaucoup plus vite."
+ },
+ "Is MP3 or WAV better?": {
+  "es": "¿Es mejor MP3 o WAV?",
+  "ar": "أيهما أفضل: MP3 أم WAV؟",
+  "zh": "MP3 和 WAV 哪个更好？",
+  "sw": "Ipi ni bora, MP3 au WAV?",
+  "sv": "Är MP3 eller WAV bäst?",
+  "de": "Ist MP3 oder WAV besser?",
+  "pt": "MP3 ou WAV, qual é melhor?",
+  "fr": "Vaut-il mieux du MP3 ou du WAV ?"
+ },
+ "MP3 is smaller and fine for most videos and podcasts. WAV is uncompressed, which is useful if you want to edit the sound further.": {
+  "es": "MP3 ocupa menos y sirve para la mayoría de vídeos y pódcast. WAV no tiene compresión, lo que es útil si quieres seguir editando el sonido.",
+  "ar": "MP3 أصغر حجمًا ومناسب لمعظم الفيديوهات والبودكاست. أما WAV فغير مضغوط، وهو مفيد إذا أردت تعديل الصوت لاحقًا.",
+  "zh": "MP3 体积更小，适合大多数视频和播客。WAV 未压缩，适合需要进一步编辑声音的情况。",
+  "sw": "MP3 ni ndogo na inafaa kwa video na podikasti nyingi. WAV haijabanwa, jambo linalosaidia ukitaka kuhariri sauti zaidi.",
+  "sv": "MP3 är mindre och duger för de flesta videor och poddar. WAV är okomprimerat, vilket är bra om du vill redigera ljudet vidare.",
+  "de": "MP3 ist kleiner und reicht für die meisten Videos und Podcasts. WAV ist unkomprimiert und praktisch, wenn du den Ton weiter bearbeiten willst.",
+  "pt": "MP3 é menor e serve para a maioria dos vídeos e podcasts. WAV não tem compressão, o que é útil se você quiser editar o som depois.",
+  "fr": "Le MP3 est plus léger et convient à la plupart des vidéos et podcasts. Le WAV n’est pas compressé, ce qui est utile pour retravailler le son."
+ }
+});

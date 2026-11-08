@@ -174,3 +174,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "Use Light for PDFs made from Word or a website; it keeps the text selectable.": {
+  "es": "Usa Ligera para PDF creados desde Word o una web; el texto sigue siendo seleccionable.",
+  "ar": "استخدم «خفيف» لملفات PDF المصنوعة من Word أو من موقع ويب؛ فهو يُبقي النص قابلًا للتحديد.",
+  "zh": "由 Word 或网页生成的 PDF 请用“轻度”，文字仍可选中。",
+  "sw": "Tumia Nyepesi kwa PDF zilizotengenezwa kutoka Word au tovuti; maandishi yanabaki yanaweza kuchaguliwa.",
+  "sv": "Använd Lätt för PDF:er gjorda i Word eller från en webbplats; texten går fortfarande att markera.",
+  "de": "Nimm „Leicht“ für PDFs aus Word oder von einer Website; der Text bleibt markierbar.",
+  "pt": "Use Leve para PDFs feitos no Word ou a partir de um site; o texto continua selecionável.",
+  "fr": "Choisissez Léger pour les PDF créés depuis Word ou un site web : le texte reste sélectionnable."
+ },
+ "Use Recommended or Strong for scans and photos, which is where the biggest savings are.": {
+  "es": "Usa Recomendada o Fuerte para escaneos y fotos: ahí es donde más se ahorra.",
+  "ar": "استخدم «موصى به» أو «قوي» للمستندات الممسوحة والصور، فهناك يكون التوفير الأكبر.",
+  "zh": "扫描件和照片请用“推荐”或“强力”，压缩效果最明显。",
+  "sw": "Tumia Inayopendekezwa au Kali kwa nakala zilizoskaniwa na picha, ambapo akiba ni kubwa zaidi.",
+  "sv": "Använd Rekommenderad eller Stark för skannade sidor och foton, där sparar du mest.",
+  "de": "Nimm „Empfohlen“ oder „Stark“ für Scans und Fotos – dort ist die Ersparnis am größten.",
+  "pt": "Use Recomendada ou Forte para digitalizações e fotos, onde a economia é maior.",
+  "fr": "Choisissez Recommandé ou Fort pour les scans et les photos : c’est là que le gain est le plus grand."
+ },
+ "Tick black and white when colour doesn’t matter, for example for forms and receipts.": {
+  "es": "Marca blanco y negro cuando el color no importe, por ejemplo en formularios y recibos.",
+  "ar": "فعّل الأبيض والأسود عندما لا يهم اللون، مثل النماذج والإيصالات.",
+  "zh": "颜色不重要时（例如表格和收据），勾选黑白。",
+  "sw": "Weka alama kwenye nyeusi na nyeupe pale rangi haijalishi, kwa mfano kwa fomu na stakabadhi.",
+  "sv": "Kryssa i svartvitt när färgen inte spelar någon roll, till exempel för blanketter och kvitton.",
+  "de": "Setze das Häkchen bei Schwarzweiß, wenn Farbe egal ist, etwa bei Formularen und Quittungen.",
+  "pt": "Marque preto e branco quando a cor não importar, por exemplo em formulários e recibos.",
+  "fr": "Cochez noir et blanc quand la couleur n’a pas d’importance, par exemple pour des formulaires et des reçus."
+ },
+ "How small will my PDF get?": {
+  "es": "¿Cuánto se reducirá mi PDF?",
+  "ar": "إلى أي حد سيصغر ملف PDF؟",
+  "zh": "我的 PDF 能压缩到多小？",
+  "sw": "PDF yangu itakuwa ndogo kiasi gani?",
+  "sv": "Hur liten blir min PDF?",
+  "de": "Wie klein wird meine PDF?",
+  "pt": "Quanto meu PDF vai diminuir?",
+  "fr": "Quelle taille fera mon PDF ?"
+ },
+ "It depends on what is inside. Scanned pages and photos often shrink by more than half, while PDFs that are mostly text are already small and shrink less. The tool shows the size before and after.": {
+  "es": "Depende de su contenido. Las páginas escaneadas y las fotos suelen reducirse a menos de la mitad; los PDF con sobre todo texto ya son pequeños y se reducen menos. La herramienta muestra el tamaño antes y después.",
+  "ar": "يعتمد ذلك على محتواه. الصفحات الممسوحة والصور تصغر غالبًا بأكثر من النصف، أما ملفات PDF النصية فهي صغيرة أصلًا وتصغر أقل. تعرض الأداة الحجم قبل الضغط وبعده.",
+  "zh": "取决于内容。扫描页和照片通常能缩小一半以上；以文字为主的 PDF 本来就小，缩小得较少。工具会显示压缩前后的大小。",
+  "sw": "Inategemea kilichomo. Kurasa zilizoskaniwa na picha mara nyingi hupungua kwa zaidi ya nusu, ilhali PDF zenye maandishi tu tayari ni ndogo na hupungua kidogo. Zana inaonyesha ukubwa kabla na baada.",
+  "sv": "Det beror på innehållet. Skannade sidor och foton krymper ofta till mindre än hälften, medan PDF:er med mest text redan är små och krymper mindre. Verktyget visar storleken före och efter.",
+  "de": "Das hängt vom Inhalt ab. Gescannte Seiten und Fotos schrumpfen oft um mehr als die Hälfte, reine Text-PDFs sind schon klein und schrumpfen weniger. Das Werkzeug zeigt die Größe vorher und nachher.",
+  "pt": "Depende do conteúdo. Páginas digitalizadas e fotos costumam diminuir mais da metade; PDFs com quase só texto já são pequenos e diminuem menos. A ferramenta mostra o tamanho antes e depois.",
+  "fr": "Cela dépend du contenu. Les pages scannées et les photos réduisent souvent de plus de moitié, tandis que les PDF surtout textuels sont déjà légers et réduisent moins. L’outil affiche la taille avant et après."
+ },
+ "Can I compress a password-protected PDF?": {
+  "es": "¿Puedo comprimir un PDF protegido con contraseña?",
+  "ar": "هل يمكنني ضغط ملف PDF محمي بكلمة مرور؟",
+  "zh": "能压缩有密码保护的 PDF 吗？",
+  "sw": "Je, naweza kubana PDF iliyolindwa kwa nenosiri?",
+  "sv": "Kan jag komprimera en lösenordsskyddad PDF?",
+  "de": "Kann ich eine passwortgeschützte PDF komprimieren?",
+  "pt": "Posso comprimir um PDF protegido por senha?",
+  "fr": "Puis-je compresser un PDF protégé par mot de passe ?"
+ },
+ "No. Open it with its password in your PDF reader, save a copy without the password, then compress that copy.": {
+  "es": "No. Ábrelo con su contraseña en tu lector de PDF, guarda una copia sin contraseña y comprime esa copia.",
+  "ar": "لا. افتحه بكلمة المرور في قارئ PDF، واحفظ نسخة بدون كلمة مرور، ثم اضغط تلك النسخة.",
+  "zh": "不能。请先在 PDF 阅读器中用密码打开，另存一份不带密码的副本，再压缩该副本。",
+  "sw": "Hapana. Lifungue kwa nenosiri lake kwenye kisomaji chako cha PDF, hifadhi nakala bila nenosiri, kisha ubane nakala hiyo.",
+  "sv": "Nej. Öppna den med lösenordet i din PDF-läsare, spara en kopia utan lösenord och komprimera sedan kopian.",
+  "de": "Nein. Öffne sie mit dem Passwort in deinem PDF-Programm, speichere eine Kopie ohne Passwort und komprimiere dann diese Kopie.",
+  "pt": "Não. Abra-o com a senha no seu leitor de PDF, salve uma cópia sem senha e comprima essa cópia.",
+  "fr": "Non. Ouvrez-le avec son mot de passe dans votre lecteur PDF, enregistrez une copie sans mot de passe, puis compressez cette copie."
+ }
+});

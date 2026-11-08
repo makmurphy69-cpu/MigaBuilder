@@ -212,3 +212,87 @@ I18N.phrases({
   "fr": "Non. Tout fonctionne dans votre navigateur, vos fichiers et textes restent donc sur votre appareil."
  }
 });
+
+// Tips and extra questions in the About section.
+I18N.phrases({
+ "Tips for better results": {
+  "es": "Consejos para obtener mejores resultados",
+  "ar": "نصائح لنتائج أفضل",
+  "zh": "获得更好效果的小贴士",
+  "sw": "Vidokezo vya matokeo bora",
+  "sv": "Tips för bättre resultat",
+  "de": "Tipps für bessere Ergebnisse",
+  "pt": "Dicas para melhores resultados",
+  "fr": "Conseils pour de meilleurs résultats"
+ },
+ "If you upload a photo of your signature, sign on white paper with a dark pen so the background is removed cleanly.": {
+  "es": "Si subes una foto de tu firma, firma en papel blanco con un bolígrafo oscuro para que el fondo se quite bien.",
+  "ar": "إذا رفعت صورة لتوقيعك، فوقّع على ورق أبيض بقلم داكن لتُزال الخلفية بشكل نظيف.",
+  "zh": "如果上传签名照片，请用深色笔在白纸上签名，背景会去除得更干净。",
+  "sw": "Ukipakia picha ya sahihi yako, tia sahihi kwenye karatasi nyeupe kwa kalamu yenye wino mzito ili mandharinyuma iondolewe vizuri.",
+  "sv": "Laddar du upp ett foto av din namnteckning, skriv på vitt papper med en mörk penna så tas bakgrunden bort snyggt.",
+  "de": "Wenn du ein Foto deiner Unterschrift hochlädst, unterschreibe mit dunklem Stift auf weißem Papier, damit der Hintergrund sauber entfernt wird.",
+  "pt": "Se enviar uma foto da sua assinatura, assine em papel branco com caneta escura para o fundo ser removido com perfeição.",
+  "fr": "Si vous importez une photo de votre signature, signez sur du papier blanc avec un stylo foncé pour que le fond soit bien retiré."
+ },
+ "Use “＋ Today’s date” and “＋ Text” to add the date and your printed name next to the signature.": {
+  "es": "Usa “＋ Today’s date” y “＋ Text” para añadir la fecha y tu nombre en letra de imprenta junto a la firma.",
+  "ar": "استخدم «＋ Today’s date» و«＋ Text» لإضافة التاريخ واسمك المطبوع بجانب التوقيع.",
+  "zh": "用“＋ Today’s date”和“＋ Text”在签名旁添加日期和印刷体姓名。",
+  "sw": "Tumia “＋ Today’s date” na “＋ Text” kuongeza tarehe na jina lako lililoandikwa kando ya sahihi.",
+  "sv": "Använd ”＋ Today’s date” och ”＋ Text” för att lägga till datum och ditt namnförtydligande bredvid namnteckningen.",
+  "de": "Mit „＋ Today’s date“ und „＋ Text“ fügst du Datum und deinen Namen in Druckschrift neben der Unterschrift ein.",
+  "pt": "Use “＋ Today’s date” e “＋ Text” para pôr a data e seu nome em letra de forma ao lado da assinatura.",
+  "fr": "Utilisez « ＋ Today’s date » et « ＋ Text » pour ajouter la date et votre nom en capitales à côté de la signature."
+ },
+ "Keep the original as a backup and check every page before you send the signed copy.": {
+  "es": "Guarda el original como copia de seguridad y revisa cada página antes de enviar la copia firmada.",
+  "ar": "احتفظ بالأصل كنسخة احتياطية وراجع كل صفحة قبل إرسال النسخة الموقعة.",
+  "zh": "保留原件作备份，发送签好的副本前检查每一页。",
+  "sw": "Hifadhi nakala asili kama akiba na kagua kila ukurasa kabla ya kutuma nakala iliyotiwa sahihi.",
+  "sv": "Spara originalet som säkerhetskopia och kontrollera varje sida innan du skickar den signerade kopian.",
+  "de": "Bewahre das Original als Sicherung auf und prüfe jede Seite, bevor du die unterschriebene Fassung verschickst.",
+  "pt": "Guarde o original como cópia de segurança e confira cada página antes de enviar a cópia assinada.",
+  "fr": "Gardez l’original en sauvegarde et vérifiez chaque page avant d’envoyer la copie signée."
+ },
+ "Is an electronic signature legally valid?": {
+  "es": "¿Es válida legalmente una firma electrónica?",
+  "ar": "هل التوقيع الإلكتروني صالح قانونيًا؟",
+  "zh": "电子签名有法律效力吗？",
+  "sw": "Je, sahihi ya kielektroniki ni halali kisheria?",
+  "sv": "Är en elektronisk underskrift juridiskt giltig?",
+  "de": "Ist eine elektronische Unterschrift rechtsgültig?",
+  "pt": "Uma assinatura eletrônica tem validade legal?",
+  "fr": "Une signature électronique est-elle juridiquement valable ?"
+ },
+ "In many countries a simple electronic signature is accepted for everyday agreements, but some documents need a qualified or witnessed signature. If you are unsure, ask whoever sent you the document.": {
+  "es": "En muchos países se acepta una firma electrónica simple para acuerdos cotidianos, pero algunos documentos necesitan una firma cualificada o con testigos. Si tienes dudas, pregunta a quien te envió el documento.",
+  "ar": "في كثير من الدول يُقبل التوقيع الإلكتروني البسيط في الاتفاقات اليومية، لكن بعض المستندات تحتاج إلى توقيع مؤهَّل أو بحضور شهود. إن لم تكن متأكدًا، فاسأل الجهة التي أرسلت إليك المستند.",
+  "zh": "在许多国家，简单电子签名可用于日常协议，但有些文件需要合格电子签名或见证签名。不确定时，请询问发送文件给你的一方。",
+  "sw": "Katika nchi nyingi sahihi rahisi ya kielektroniki inakubalika kwa makubaliano ya kila siku, lakini baadhi ya hati zinahitaji sahihi iliyoidhinishwa au yenye shahidi. Ukiwa na shaka, muulize aliyekutumia hati hiyo.",
+  "sv": "I många länder godtas en enkel elektronisk underskrift för vardagliga avtal, men vissa handlingar kräver en kvalificerad underskrift eller vittnen. Är du osäker, fråga den som skickade dokumentet.",
+  "de": "In vielen Ländern wird eine einfache elektronische Unterschrift für alltägliche Vereinbarungen anerkannt, manche Dokumente brauchen aber eine qualifizierte oder bezeugte Unterschrift. Frag im Zweifel bei der Stelle nach, die dir das Dokument geschickt hat.",
+  "pt": "Em muitos países, uma assinatura eletrônica simples é aceita para acordos do dia a dia, mas alguns documentos exigem assinatura qualificada ou com testemunhas. Se tiver dúvida, pergunte a quem enviou o documento.",
+  "fr": "Dans de nombreux pays, une signature électronique simple est acceptée pour les accords courants, mais certains documents exigent une signature qualifiée ou devant témoins. En cas de doute, demandez à l’expéditeur du document."
+ },
+ "Can I sign on my phone?": {
+  "es": "¿Puedo firmar en el móvil?",
+  "ar": "هل يمكنني التوقيع على هاتفي؟",
+  "zh": "能在手机上签名吗？",
+  "sw": "Je, naweza kutia sahihi kwenye simu yangu?",
+  "sv": "Kan jag skriva under på mobilen?",
+  "de": "Kann ich auf dem Handy unterschreiben?",
+  "pt": "Posso assinar no celular?",
+  "fr": "Puis-je signer sur mon téléphone ?"
+ },
+ "Yes. Draw your signature with your finger, then double-tap the page where it should go.": {
+  "es": "Sí. Dibuja tu firma con el dedo y luego toca dos veces la página donde debe ir.",
+  "ar": "نعم. ارسم توقيعك بإصبعك، ثم انقر مرتين على المكان المطلوب في الصفحة.",
+  "zh": "可以。用手指画出签名，然后在页面上要放签名的位置双击。",
+  "sw": "Ndiyo. Chora sahihi yako kwa kidole, kisha gusa mara mbili ukurasani mahali inapopaswa kwenda.",
+  "sv": "Ja. Rita din namnteckning med fingret och dubbeltryck sedan där på sidan den ska stå.",
+  "de": "Ja. Zeichne deine Unterschrift mit dem Finger und tippe dann doppelt auf die Stelle der Seite, wo sie hin soll.",
+  "pt": "Sim. Desenhe sua assinatura com o dedo e toque duas vezes na página onde ela deve ficar.",
+  "fr": "Oui. Dessinez votre signature avec le doigt, puis touchez deux fois la page à l’endroit voulu."
+ }
+});
