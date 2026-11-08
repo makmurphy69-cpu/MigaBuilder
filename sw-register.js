@@ -2,7 +2,7 @@
   'use strict';
   // Tool page artwork is loaded through the shared page script so new tools inherit it.
   // Pages can also be opened without ".html" (/model-forge), so skip only the homepage and 404.
-  if (!/^\/(index(\.html)?)?$|^\/404(\.html)?$/.test(location.pathname)) {
+  if (!/^\/(index(\.html)?)?$|^\/(404|about|privacy|terms)(\.html)?$/.test(location.pathname)) {
     var artStyle = document.createElement('link');
     artStyle.rel = 'stylesheet';
     artStyle.href = '/tool-art.css';
@@ -15,7 +15,7 @@
   // Pages with hand-written structured data keep their more specific version.
   // Many tool pages have their own header instead of .tool-nav, so this goes by path, and the
   // name comes from the <title> ("Name — what it does").
-  if (!/^\/(index(\.html)?)?$|^\/(404|visits|feedback|templates|sample-viewer)(\.html)?$/.test(location.pathname) &&
+  if (!/^\/(index(\.html)?)?$|^\/(404|visits|feedback|templates|sample-viewer|about|privacy|terms)(\.html)?$/.test(location.pathname) &&
       document.title && !document.querySelector('script[type="application/ld+json"]')) {
     var title = document.title.split(/\s+[—|–-]\s+/)[0].trim();
     var metaDescription = document.querySelector('meta[name="description"]');
