@@ -165,10 +165,14 @@
   // change event a pick would give, so each tool handles it exactly like a chosen file.
   const OWN_PASTE = ['picture-forge.html', 'vector-forge.html'];
   const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-  const PASTE_HINT = isMac ? '📋 Or paste a picture or file here with ⌘V.' : '📋 Or paste a picture or file here with Ctrl+V.';
+  const PASTE_HINT = isMac ? '📂 Or drag a file onto this page, or paste it with ⌘V.' : '📂 Or drag a file onto this page, or paste it with Ctrl+V.';
   if (window.I18N && I18N.phrases) I18N.phrases({
     '📋 Or paste a picture or file here with Ctrl+V.': { es: '📋 O pega aquí una imagen o un archivo con Ctrl+V.', ar: '📋 أو الصق صورة أو ملفًا هنا باستخدام Ctrl+V.', zh: '📋 也可以用 Ctrl+V 在这里粘贴图片或文件。', sw: '📋 Au bandika picha au faili hapa kwa Ctrl+V.', sv: '📋 Eller klistra in en bild eller fil här med Ctrl+V.', de: '📋 Oder füge hier mit Strg+V ein Bild oder eine Datei ein.', pt: '📋 Ou cole uma imagem ou arquivo aqui com Ctrl+V.', fr: '📋 Ou collez une image ou un fichier ici avec Ctrl+V.' },
     '📋 Or paste a picture or file here with ⌘V.': { es: '📋 O pega aquí una imagen o un archivo con ⌘V.', ar: '📋 أو الصق صورة أو ملفًا هنا باستخدام ⌘V.', zh: '📋 也可以用 ⌘V 在这里粘贴图片或文件。', sw: '📋 Au bandika picha au faili hapa kwa ⌘V.', sv: '📋 Eller klistra in en bild eller fil här med ⌘V.', de: '📋 Oder füge hier mit ⌘V ein Bild oder eine Datei ein.', pt: '📋 Ou cole uma imagem ou arquivo aqui com ⌘V.', fr: '📋 Ou collez une image ou un fichier ici avec ⌘V.' },
+    '📂 Or drag a file onto this page, or paste it with Ctrl+V.': { es: '📂 O arrastra un archivo a esta página, o pégalo con Ctrl+V.', ar: '📂 أو اسحب ملفًا إلى هذه الصفحة، أو الصقه باستخدام Ctrl+V.', zh: '📂 也可以把文件拖到此页面，或用 Ctrl+V 粘贴。', sw: '📂 Au buruta faili kwenye ukurasa huu, au libandike kwa Ctrl+V.', sv: '📂 Eller dra en fil till sidan, eller klistra in den med Ctrl+V.', de: '📂 Oder ziehe eine Datei auf diese Seite oder füge sie mit Strg+V ein.', pt: '📂 Ou arraste um arquivo para esta página, ou cole-o com Ctrl+V.', fr: '📂 Ou faites glisser un fichier sur cette page, ou collez-le avec Ctrl+V.' },
+    '📂 Or drag a file onto this page, or paste it with ⌘V.': { es: '📂 O arrastra un archivo a esta página, o pégalo con ⌘V.', ar: '📂 أو اسحب ملفًا إلى هذه الصفحة، أو الصقه باستخدام ⌘V.', zh: '📂 也可以把文件拖到此页面，或用 ⌘V 粘贴。', sw: '📂 Au buruta faili kwenye ukurasa huu, au libandike kwa ⌘V.', sv: '📂 Eller dra en fil till sidan, eller klistra in den med ⌘V.', de: '📂 Oder ziehe eine Datei auf diese Seite oder füge sie mit ⌘V ein.', pt: '📂 Ou arraste um arquivo para esta página, ou cole-o com ⌘V.', fr: '📂 Ou faites glisser un fichier sur cette page, ou collez-le avec ⌘V.' },
+    '📂 Drop your file to open it': { es: '📂 Suelta el archivo para abrirlo', ar: '📂 أفلت الملف لفتحه', zh: '📂 松开即可打开文件', sw: '📂 Achia faili lako ili kulifungua', sv: '📂 Släpp filen för att öppna den', de: '📂 Datei loslassen, um sie zu öffnen', pt: '📂 Solte o arquivo para abri-lo', fr: '📂 Déposez le fichier pour l’ouvrir' },
+    '📂 File added:': { es: '📂 Archivo añadido:', ar: '📂 أُضيف الملف:', zh: '📂 已添加文件：', sw: '📂 Faili limeongezwa:', sv: '📂 Fil tillagd:', de: '📂 Datei hinzugefügt:', pt: '📂 Arquivo adicionado:', fr: '📂 Fichier ajouté :' },
     '📋 Pasted file added:': { es: '📋 Archivo pegado añadido:', ar: '📋 أُضيف الملف الملصق:', zh: '📋 已添加粘贴的文件：', sw: '📋 Faili lililobandikwa limeongezwa:', sv: '📋 Inklistrad fil tillagd:', de: '📋 Eingefügte Datei hinzugefügt:', pt: '📋 Arquivo colado adicionado:', fr: '📋 Fichier collé ajouté :' },
     '📋 This tool cannot open that kind of file.': { es: '📋 Esta herramienta no puede abrir ese tipo de archivo.', ar: '📋 لا تستطيع هذه الأداة فتح هذا النوع من الملفات.', zh: '📋 此工具无法打开这种类型的文件。', sw: '📋 Zana hii haiwezi kufungua aina hiyo ya faili.', sv: '📋 Det här verktyget kan inte öppna den typen av fil.', de: '📋 Dieses Werkzeug kann diese Art von Datei nicht öffnen.', pt: '📋 Esta ferramenta não abre esse tipo de arquivo.', fr: '📋 Cet outil ne peut pas ouvrir ce type de fichier.' }
   });
@@ -238,6 +242,75 @@
       const box = first && (first.closest('.panel, section, .card') || first.parentElement);
       if (box) { const hint = document.createElement('small'); hint.className = 'miga-paste-note'; hint.textContent = PASTE_HINT; box.appendChild(hint); }
     }
+  }
+
+  // ---------- drag and drop a file anywhere on the page ----------
+  // Same route as a paste: the dropped file goes into the tool's own <input type=file>, followed
+  // by a change event. Pages with their own drop zones handle those drops first (they call
+  // preventDefault), and those drops are left alone here.
+  if (typeof DataTransfer === 'function') {
+    // Pages that style their own drop zones keep their look; drops elsewhere on them still work.
+    const OWN_DROP = ['audio-forge.html', 'bug-scanner.html', 'cv-forge.html', 'document-forge.html', 'exam-checker.html', 'file-forge.html', 'game-forge.html', 'jam-forge.html', 'letter-forge.html',
+      'markdown-forge.html', 'music-forge.html', 'palette-forge.html', 'pdf-forge.html', 'picture-forge.html', 'redact-forge.html', 'text-compare.html', 'vector-forge.html'];
+    const hasFiles = e => !!(e.dataTransfer && Array.from(e.dataTransfer.types || []).includes('Files'));
+    const dropCss = document.createElement('style');
+    dropCss.textContent = 'input[type=file].miga-drop-input{box-sizing:border-box;width:100%;max-width:100%;padding:16px;border:2px dashed rgba(45,74,98,.45);border-radius:10px;background:rgba(255,255,255,.55);cursor:pointer}' +
+      'input[type=file].miga-drop-input:hover{border-color:#2d4a62}input[type=file].miga-drop-hot{border-color:#E2A63B!important;background:rgba(226,166,59,.14)!important}' +
+      '.miga-drop-overlay{position:fixed;inset:8px;z-index:99998;pointer-events:none;border:3px dashed #E2A63B;border-radius:14px;background:rgba(8,24,38,.28);display:flex;align-items:flex-start;justify-content:center}' +
+      '.miga-drop-overlay span{margin-top:18px;padding:10px 18px;border-radius:999px;background:#0E2A47;color:#fff;font:600 15px "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.3)}';
+    document.head.appendChild(dropCss);
+    if (!OWN_DROP.includes(file)) {
+      Array.from(document.querySelectorAll('input[type=file]')).forEach(inp => {
+        if (shown(inp) && inp.offsetWidth >= 200 && !inp.closest('.drop-note,[data-no-paste]')) inp.classList.add('miga-drop-input');
+      });
+    }
+    let overlay = null, depth = 0, hot = null;
+    const setHot = inp => { if (hot === inp) return; if (hot) hot.classList.remove('miga-drop-hot'); hot = inp; if (hot && shown(hot)) hot.classList.add('miga-drop-hot'); };
+    const hide = () => { depth = 0; if (overlay) overlay.hidden = true; setHot(null); };
+    // A picker inside the box the file is dropped on wins over the page-wide choice.
+    function dropTarget(e, files) {
+      for (let el = e.target, i = 0; el && el.nodeType === 1 && i < 5; el = el.parentElement, i++) {
+        const near = Array.from(el.querySelectorAll('input[type=file]')).filter(inp => usable(inp) && (!files.length || files.some(f => accepts(inp, f))));
+        if (near.length === 1) return near[0];
+        if (near.length > 1) break;
+      }
+      return pasteTarget(files).input;
+    }
+    window.addEventListener('dragenter', e => {
+      if (!hasFiles(e) || !pasteTarget([]).any) return;
+      depth++;
+      if (!overlay) {
+        overlay = document.createElement('div'); overlay.className = 'miga-drop-overlay'; overlay.setAttribute('aria-hidden', 'true');
+        const label = document.createElement('span'); label.textContent = tr('📂 Drop your file to open it'); overlay.appendChild(label);
+        document.body.appendChild(overlay);
+      }
+      overlay.hidden = false;
+    });
+    window.addEventListener('dragleave', e => { if (hasFiles(e) && --depth <= 0) hide(); });
+    window.addEventListener('dragover', e => {
+      if (!hasFiles(e) || e.defaultPrevented || !pasteTarget([]).any) return;
+      // Without this the browser would open the file in the tab and the visitor's work would be lost.
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'copy';
+      setHot(dropTarget(e, []));
+    });
+    window.addEventListener('drop', e => {
+      if (!hasFiles(e)) return;
+      hide();
+      if (e.defaultPrevented) return;
+      e.preventDefault();
+      const files = Array.from(e.dataTransfer.files || []);
+      if (!files.length) return;
+      const input = dropTarget(e, files);
+      if (!input) { if (pasteTarget([]).any) sayPaste(tr('📋 This tool cannot open that kind of file.')); return; }
+      const dt = new DataTransfer();
+      files.filter(f => accepts(input, f)).slice(0, input.multiple ? files.length : 1).forEach(f => dt.items.add(f));
+      if (!dt.files.length) { sayPaste(tr('📋 This tool cannot open that kind of file.')); return; }
+      try { input.files = dt.files; } catch (err) { return; }
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+      sayPaste(tr('📂 File added:') + ' ' + Array.from(dt.files).map(f => f.name).join(', '));
+    });
   }
 
   // ---------- on-screen keyboard for any text field (loaded on demand) ----------
