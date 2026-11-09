@@ -1,13 +1,91 @@
 {
- "updated": "2026-11-02",
+ "updated": "2026-11-09",
  "firstCommit": "2026-09-13",
- "commits": 445,
- "pullRequests": 156,
- "tools": 83,
- "videos": 90,
+ "commits": 465,
+ "pullRequests": 169,
+ "tools": 88,
+ "videos": 95,
  "languages": 9,
  "workflows": 7,
  "recent": [
+  {
+   "number": 205,
+   "title": "SEO: language pages, privacy/terms/about, drag-and-drop, richer tool pages",
+   "date": "2026-11-08",
+   "tool": null
+  },
+  {
+   "number": 204,
+   "title": "Cube Forge: keep the whole cube in view in full screen on a phone",
+   "date": "2026-11-06",
+   "tool": "cube-forge.html"
+  },
+  {
+   "number": 203,
+   "title": "Fix the random Puzzle Forge crossword test failures",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 202,
+   "title": "Cube Forge: keep the Solved label clear of the full-screen and view buttons",
+   "date": "2026-11-06",
+   "tool": "cube-forge.html"
+  },
+  {
+   "number": 201,
+   "title": "Add Cube Forge: learn to solve a twisty cube in 3D, any size",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 200,
+   "title": "Fix bugs found by using every tool",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 199,
+   "title": "Add Plane Forge, and fix Boat Forge showing sliders that do not apply",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 198,
+   "title": "Fix wrong answers and outputs found by checking every tool's results",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 197,
+   "title": "Add Motor Forge: design a car or motorcycle and build its engine",
+   "date": "2026-11-06",
+   "tool": null
+  },
+  {
+   "number": 196,
+   "title": "Puzzle Forge: make the crossword typeable on phones",
+   "date": "2026-11-05",
+   "tool": "puzzle-forge.html"
+  },
+  {
+   "number": 195,
+   "title": "Fall back to the other Gemini model when one is overloaded; say when Wiktionary is busy",
+   "date": "2026-11-05",
+   "tool": null
+  },
+  {
+   "number": 194,
+   "title": "Add Puzzle Forge and Dictionary Forge",
+   "date": "2026-11-05",
+   "tool": null
+  },
+  {
+   "number": 193,
+   "title": "PDF Forge: lock a PDF with a password, or remove one you know",
+   "date": "2026-11-05",
+   "tool": "pdf-forge.html"
+  },
   {
    "number": 191,
    "title": "Add a Ko-fi \"Support MigaBuilder\" button to the homepage footer",
@@ -19,84 +97,6 @@
    "title": "Site Visits: show the 14-day bars and space out the table headers",
    "date": "2026-11-01",
    "tool": null
-  },
-  {
-   "number": 189,
-   "title": "Document Forge: convert PDF to Word (.docx)",
-   "date": "2026-10-29",
-   "tool": "document-forge.html"
-  },
-  {
-   "number": 188,
-   "title": "Use the words people search for in 26 tool page titles",
-   "date": "2026-10-29",
-   "tool": null
-  },
-  {
-   "number": 187,
-   "title": "Fix bugs found by testing every tool; upgrade Invoice, QR and Image Forge",
-   "date": "2026-10-29",
-   "tool": null
-  },
-  {
-   "number": 186,
-   "title": "Add Letter Forge, Afford Forge and Visit Forge",
-   "date": "2026-10-29",
-   "tool": null
-  },
-  {
-   "number": 185,
-   "title": "Add Tune Forge: instrument tuner, metronome and sound level meter",
-   "date": "2026-10-27",
-   "tool": null
-  },
-  {
-   "number": 184,
-   "title": "PDF Forge: save PDF pages as JPG or PNG images",
-   "date": "2026-10-27",
-   "tool": "pdf-forge.html"
-  },
-  {
-   "number": 182,
-   "title": "Go Forge: explain each advice option and what it exposes",
-   "date": "2026-10-27",
-   "tool": "go-forge.html"
-  },
-  {
-   "number": 181,
-   "title": "How it's built: show 9 languages, counted from i18n.js",
-   "date": "2026-10-27",
-   "tool": null
-  },
-  {
-   "number": 180,
-   "title": "Add Species Atlas and translate every remaining page into all site languages",
-   "date": "2026-10-27",
-   "tool": null
-  },
-  {
-   "number": 179,
-   "title": "Translate Go, Noise, Coloring, Cipher Forge and Psychology Atlas into all 9 languages",
-   "date": "2026-10-26",
-   "tool": null
-  },
-  {
-   "number": 178,
-   "title": "Add Psychology Atlas: the history of psychology, its schools, thinkers and theories",
-   "date": "2026-10-26",
-   "tool": null
-  },
-  {
-   "number": 177,
-   "title": "Go Forge: one tap plays a stone on phones",
-   "date": "2026-10-22",
-   "tool": "go-forge.html"
-  },
-  {
-   "number": 176,
-   "title": "Go Forge: fit the lessons on phone screens",
-   "date": "2026-10-22",
-   "tool": "go-forge.html"
   }
  ]
 }
