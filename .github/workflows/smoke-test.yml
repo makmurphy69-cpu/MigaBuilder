@@ -19,6 +19,9 @@ jobs:
       # without running: node scripts/build-language-pages.mjs
       - name: Language pages are up to date
         run: node scripts/build-language-pages.mjs --check
+      # llms.txt lists every homepage tool for AI assistants; rebuild with node scripts/build-llms-txt.mjs
+      - name: llms.txt is up to date
+        run: node scripts/build-llms-txt.mjs --check
       - name: Install Playwright and Chromium
         run: |
           npm install -g playwright@1.56.1

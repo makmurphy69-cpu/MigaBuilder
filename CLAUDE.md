@@ -12,7 +12,8 @@ A tool is not finished until **all** of these are done, in the same pull request
    like the other tool pages.
 2. Listed everywhere tools are listed: a `tool-card` in `index.html` (and the
    *New* row), `miga-palette.js`, `tutorials.js` (walkthrough entry),
-   `sitemap.xml`, the name map in `visits.html`, and `README.md`. Update the
+   `sitemap.xml`, the name map in `visits.html`, `README.md`, and `llms.txt`
+   (run `node scripts/build-llms-txt.mjs`). Update the
    tool count ("69 free … tools") in `README.md` and the `<meta>` descriptions
    of `index.html` (the homepage itself no longer shows the number).
    Give its `tool-card` `data-privacy="ai"` if it sends text to an AI, or
