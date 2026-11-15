@@ -466,6 +466,39 @@ S('dictionary-forge.html', {
   }
 });
 
+S('theory-forge.html', {
+  title: 'Theory Forge', subtitle: 'Learn music theory and use it on a real instrument',
+  intro: 'Welcome to Theory Forge. Learn music theory one short lesson at a time, hear every idea, and use it straight away on piano, guitar, bass, ukulele, mandolin or violin.',
+  async run(h, page) {
+    await h.step('At the top is an instrument you can play. Click the keys, tap them, or use your computer keyboard. Every lesson, scale and song lights up its notes here.', () => h.point('#instView'));
+    await h.step('The lessons follow a path in four levels, from the musical alphabet to writing your own song. Each one takes about five minutes.', () => h.point('#path'));
+    await h.step('Press a play button in a lesson to hear the idea. Here, the notes C to C, from the C major scale.', () => h.click('#lesson .try'));
+    await h.wait(1500);
+    await h.step('Every lesson ends with a box on how to use it in real life, and a short quiz. Pass it to tick the lesson off.', () => h.scroll('#lesson .real', 'center'));
+    await h.step('Now pick your instrument. Let’s choose guitar.', async () => { await h.scroll('#app'); await h.select('#inst', 'guitar'); });
+    await h.step('In Scales and chords, choose a root note and a scale. This is the A minor pentatonic, the scale most rock and blues solos use, shown on the whole neck.', async () => { await h.click('#tab-explore'); await h.click('#roots [data-r="A"]'); await h.select('#scaleSel', 'minpent'); });
+    await h.step('Press Play to hear it, with each note lit on the staff and on the fretboard.', () => h.click('#scalePlay'));
+    await h.wait(2500);
+    await h.step('Switch to C major and you get the seven chords that belong to the key, with their Roman numerals, and a circle of fifths to explore every key.', async () => { await h.click('#roots [data-r="C"]'); await h.select('#scaleSel', 'major'); await h.click('#dia button[data-sym="G"]'); });
+    await h.step('Chords shows the shapes for guitar, ukulele and mandolin. Click a shape to hear it.', async () => { await h.click('[data-view="chord"]'); await h.click('#chordBoxes figure'); });
+    await h.step('Progressions and jam loops famous chord progressions in any key. Play along, and improvise with the lit notes.', async () => { await h.click('[data-view="prog"]'); await h.click('#jamPlay'); });
+    await h.wait(3500);
+    await h.click('#jamPlay');
+    await h.step('Songs are traditional tunes, each teaching a piece of theory. Let’s open Amazing Grace.', async () => { await h.click('#tab-songs'); await h.click('#songGrid [data-s="amazing"]'); });
+    await h.step('You see the sheet music and the tab together, with the chords and their Roman numerals above.', () => h.point('#songScore'));
+    await h.step('Press Play. The note you are on lights up on the music and on the guitar.', () => h.click('#songPlay'));
+    await h.wait(4000);
+    await h.click('#songPlay');
+    await h.step('Press Practice, and the song waits for you to play each note: on the screen, a keyboard, or your real instrument through the microphone.', () => h.click('#songPractice'));
+    await h.step('You can also slow it down, transpose it to another key, and download the tab.', () => h.point('#songTab'));
+    await h.sampleDownload('#songTab', 'Guitar tab of Amazing Grace made in this video');
+    await h.step('Finally, ear training. Hear an interval, a chord or a scale and name it. The questions you miss come back more often, so a few minutes a day goes a long way.', async () => { await h.click('#tab-ear'); await h.click('#earPlay'); });
+    await h.wait(1500);
+    await h.click('#earAns button[data-k="7"]');
+    await h.wait(1200);
+  }
+});
+
 S('tune-forge.html', {
   title: 'Tune Forge', subtitle: 'Tuner, metronome and sound level meter for musicians',
   intro: 'Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.',

@@ -1947,6 +1947,37 @@
    "kind": "image"
   }
  },
+ "theory-forge.html": {
+  "title": "Theory Forge",
+  "video": "https://videos.migabuilder.com/theory-forge.mp4?v=a5bda9b8",
+  "poster": "https://videos.migabuilder.com/theory-forge.jpg?v=b3f89a66",
+  "duration": 190,
+  "transcript": [
+   "Welcome to Theory Forge. Learn music theory one short lesson at a time, hear every idea, and use it straight away on piano, guitar, bass, ukulele, mandolin or violin.",
+   "At the top is an instrument you can play. Click the keys, tap them, or use your computer keyboard. Every lesson, scale and song lights up its notes here.",
+   "The lessons follow a path in four levels, from the musical alphabet to writing your own song. Each one takes about five minutes.",
+   "Press a play button in a lesson to hear the idea. Here, the notes C to C, from the C major scale.",
+   "Every lesson ends with a box on how to use it in real life, and a short quiz. Pass it to tick the lesson off.",
+   "Now pick your instrument. Let’s choose guitar.",
+   "In Scales and chords, choose a root note and a scale. This is the A minor pentatonic, the scale most rock and blues solos use, shown on the whole neck.",
+   "Press Play to hear it, with each note lit on the staff and on the fretboard.",
+   "Switch to C major and you get the seven chords that belong to the key, with their Roman numerals, and a circle of fifths to explore every key.",
+   "Chords shows the shapes for guitar, ukulele and mandolin. Click a shape to hear it.",
+   "Progressions and jam loops famous chord progressions in any key. Play along, and improvise with the lit notes.",
+   "Songs are traditional tunes, each teaching a piece of theory. Let’s open Amazing Grace.",
+   "You see the sheet music and the tab together, with the chords and their Roman numerals above.",
+   "Press Play. The note you are on lights up on the music and on the guitar.",
+   "Press Practice, and the song waits for you to play each note: on the screen, a keyboard, or your real instrument through the microphone.",
+   "You can also slow it down, transpose it to another key, and download the tab.",
+   "Finally, ear training. Hear an interval, a chord or a scale and name it. The questions you miss come back more often, so a few minutes a day goes a long way.",
+   "Now it is your turn. Open Theory Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/theory-forge.txt",
+   "label": "Guitar tab of Amazing Grace made in this video",
+   "kind": "text"
+  }
+ },
  "tune-forge.html": {
   "title": "Tune Forge",
   "video": "https://videos.migabuilder.com/tune-forge.mp4?v=408f0c04",
