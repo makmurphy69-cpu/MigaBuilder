@@ -1128,6 +1128,36 @@ test('noise-forge: a mix plays without errors and downloads as a WAV file', 'noi
   expect(rms > 0.03 && peak < 0.99, 'the sound level is wrong: rms ' + rms.toFixed(3) + ', peak ' + peak.toFixed(2));
 });
 
+test('theory-forge: a song tab downloads with every note on the right string and fret, chords are spelled right and the instruments are in tune', 'theory-forge.html', async (page) => {
+  await page.selectOption('#inst', 'guitar');
+  await page.evaluate(() => window.__theoryForge.openSong('twinkle'));
+  // every tab position plays the written note
+  const chk = await page.evaluate(() => {
+    const TF = window.__theoryForge, TE = TF.engine, B = TF.buildSong(), T = TE.INSTRUMENTS.guitar.tuning;
+    const wrong = B.events.filter((e, i) => e.midi != null && (!B.path[i] || T[B.path[i].s] + B.path[i].f !== e.midi)).length;
+    const shapes = ['C', 'G', 'D', 'Am', 'F'].map(sym => { const c = TE.parseChord(sym), ch = TE.chord(c.root, c.q); return TE.voicings('guitar', ch.pcs, ch.pcs[0], 1)[0].frets.map(f => f < 0 ? 'x' : f).join(''); });
+    return { wrong, notes: B.events.length, shapes, f: TE.scale('F', 'major').map(n => n.name).join(' '), dia: TE.diatonic('G', 'major').map(c => c.roman + ':' + c.sym).join(' '), pitch: ['guitar', 'piano', 'ukulele'].map(s => TF.pitchOf(64, s)) };
+  });
+  expect(chk.notes === 42 && chk.wrong === 0, 'tab positions do not match the melody: ' + JSON.stringify(chk));
+  expect(chk.shapes.join(' ') === 'x32010 320003 xx0232 x02210 133211', 'wrong chord shapes: ' + chk.shapes.join(' '));
+  expect(chk.f === 'F G A Bb C D E' && chk.dia === 'I:G ii:Am iii:Bm IV:C V:D vi:Em vii°:F#dim', 'wrong spelling: ' + chk.f + ' | ' + chk.dia);
+  expect(chk.pitch.every(f => f && Math.abs(1200 * Math.log2(f / 329.63)) < 15), 'an instrument is out of tune: ' + chk.pitch.join(', '));
+  const out = await downloadOf(page, () => page.click('#songTab'));
+  const txt = out.buf.toString('utf8'), lines = txt.split('\n');
+  expect(out.name === 'twinkle-guitar-tab.txt', 'unexpected file name ' + out.name);
+  expect(/^Twinkle, Twinkle, Little Star/.test(lines[0]) && /tuning E A D G B e/.test(txt), 'the tab header is wrong: ' + lines.slice(0, 2).join(' | '));
+  const strings = lines.filter(l => /^[eBGDAE]\|/.test(l));
+  expect(strings.length >= 18 && strings.length % 6 === 0, 'the tab does not have six string lines per system: ' + strings.length);
+  expect(/x32010/.test(txt) && /\bF\b/.test(txt) && /\bG\b/.test(txt), 'chord names or shapes are missing from the tab');
+  // practice mode waits for the right note: C (A key) moves on, a wrong note does not
+  await page.click('#songPractice');
+  await page.keyboard.press('j');
+  const p1 = await page.evaluate(() => window.__theoryForge.songPlay.pos);
+  await page.keyboard.press('a'); await page.keyboard.press('a');
+  const p2 = await page.evaluate(() => window.__theoryForge.songPlay.pos);
+  expect(p1 === 0 && p2 === 2, 'practice mode did not wait for the right notes: ' + p1 + ', ' + p2);
+});
+
 test('tune-forge: the demo string is tuned to E2 and the sound level log downloads as CSV', 'tune-forge.html', async (page) => {
   await page.click('#demoBtn'); // a plucked string tuned up step by step — no microphone needed
   await page.waitForFunction(() => { const s = window.__tuneForge.tuner(); return s.note === 'E2' && s.inTune; }, null, { timeout: 20000 });
