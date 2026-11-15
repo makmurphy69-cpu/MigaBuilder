@@ -275,7 +275,7 @@
     var bottom = Math.min.apply(null, I.tuning), top = Math.max.apply(null, I.tuning) + I.frets, best = 0, bestCost = 1e9;
     for (var k = -3; k <= 2; k++) {
       var s = k * 12, cost = 0;
-      midis.forEach(function (m) { m += s; if (m < bottom || m > top) cost += 100; else { var f = 99; I.tuning.forEach(function (o) { if (m >= o && m - o < f) f = m - o; }); cost += f; } });
+      midis.forEach(function (m) { m += s; if (m < bottom || m > top) cost += 1000; else { var f = 99; I.tuning.forEach(function (o) { if (m >= o && m - o < f) f = m - o; }); cost += f; } });
       if (instKey === 'guitar' || instKey === 'bass') cost += Math.abs(k) * 0.1; // guitar melodies are read at written pitch
       if (cost < bestCost) { bestCost = cost; best = s; }
     }
