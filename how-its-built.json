@@ -1,13 +1,19 @@
 {
- "updated": "2026-11-09",
+ "updated": "2026-11-16",
  "firstCommit": "2026-09-13",
- "commits": 465,
- "pullRequests": 169,
- "tools": 88,
- "videos": 95,
+ "commits": 470,
+ "pullRequests": 170,
+ "tools": 89,
+ "videos": 96,
  "languages": 9,
  "workflows": 7,
  "recent": [
+  {
+   "number": 208,
+   "title": "Add Theory Forge: learn music theory with lessons, songs, tabs and playable instruments",
+   "date": "2026-11-15",
+   "tool": null
+  },
   {
    "number": 205,
    "title": "SEO: language pages, privacy/terms/about, drag-and-drop, richer tool pages",
@@ -90,12 +96,6 @@
    "number": 191,
    "title": "Add a Ko-fi \"Support MigaBuilder\" button to the homepage footer",
    "date": "2026-11-02",
-   "tool": null
-  },
-  {
-   "number": 190,
-   "title": "Site Visits: show the 14-day bars and space out the table headers",
-   "date": "2026-11-01",
    "tool": null
   }
  ]
