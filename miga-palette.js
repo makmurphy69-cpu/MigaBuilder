@@ -355,16 +355,27 @@
       '@keyframes mnIn{from{transform:translateY(16px);opacity:0}}@media (prefers-reduced-motion:reduce){.mn-card{animation:none}}' +
       '.mn-card h2{font:700 15px "Space Grotesk",system-ui,sans-serif;margin:0 26px 8px 0;color:#EDEAE0}.mn-card a{display:flex;gap:10px;align-items:center;padding:7px 8px;border-radius:7px;color:#EDEAE0;text-decoration:none}' +
       '.mn-card a:hover,.mn-card a:focus-visible{background:rgba(111,209,224,.14)}.mn-card a span{font-size:20px;width:26px;text-align:center}.mn-card a b{display:block;font-size:13.5px}.mn-card a small{display:block;font-size:11.5px;color:rgba(237,234,224,.72);line-height:1.3}' +
-      '.mn-card .mn-x{position:absolute;right:8px;top:6px;background:none;border:0;color:#EDEAE0;font-size:18px;cursor:pointer;padding:2px 6px}';
+      '.mn-card .mn-x{position:absolute;right:8px;top:6px;background:none;border:0;color:#EDEAE0;font-size:18px;cursor:pointer;padding:2px 6px}' +
+      '.mn-card .mn-more{background:none;border:0;padding:0;font:inherit;color:#6FD1E0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.mn-card:not(.open) a{display:none}' +
+      // Phones: a slim bar along the bottom that opens on tap, so it never covers the tool being used.
+      '@media (max-width:640px){.mn-card{left:10px;right:10px;bottom:10px;width:auto;padding:9px 12px;border-radius:9px}.mn-card:not(.open) h2{margin:0 30px 0 0;font-size:14px}.mn-card .mn-x{top:4px}}';
     document.head.appendChild(st);
     const card = document.createElement('aside'); card.className = 'mn-card'; card.setAttribute('aria-label', 'What to try next');
     const e = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    card.innerHTML = '<button type="button" class="mn-x" aria-label="Close">×</button><h2>✅ File ready — what next?</h2>' +
+    const phone = window.matchMedia && matchMedia('(max-width:640px)').matches;
+    card.innerHTML = '<button type="button" class="mn-x" aria-label="Close">×</button><h2>✅ File ready — <button type="button" class="mn-more" aria-expanded="' + !phone + '">what next? ' + (phone ? '▾' : '▴') + '</button></h2>' +
       picks.map(t => '<a href="' + t[0] + '" data-next="' + t[0] + '"><span>' + e(t[1]) + '</span><span style="width:auto;font-size:inherit;text-align:left"><b>' + e(t[2]) + '</b><small>' + e(t[3]) + '</small></span></a>').join('');
-    card.querySelector('.mn-x').onclick = () => card.remove();
+    if (!phone) card.classList.add('open');
+    const close = () => { card.remove(); document.removeEventListener('keydown', onKey); };
+    const onKey = ev => { if (ev.key === 'Escape') close(); };
+    const more = card.querySelector('.mn-more');
+    more.onclick = () => { const open = card.classList.toggle('open'); more.setAttribute('aria-expanded', open); more.textContent = 'what next? ' + (open ? '▴' : '▾'); clearTimeout(idle); };
+    card.querySelector('.mn-x').onclick = close;
+    document.addEventListener('keydown', onKey);
     document.body.appendChild(card);
-    let idle = setTimeout(() => card.remove(), 25000);
-    card.addEventListener('mouseenter', () => clearTimeout(idle));
+    // A phone gets a short look at the slim bar; opening it or touching it keeps it.
+    let idle = setTimeout(close, phone ? 8000 : 25000);
+    ['mouseenter', 'pointerdown', 'focusin'].forEach(t => card.addEventListener(t, () => clearTimeout(idle)));
   }
   // Tools save files by clicking a (usually detached) <a download>, so watch both kinds of click.
   // Work files (.miga) and the tour's own sample links don't count as a finished result.
