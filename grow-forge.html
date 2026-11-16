@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How to grow tomatoes, vegetables, fruit, herbs and plants at home — Grow Forge | MigaBuilder</title>
+<meta name="description" content="Free growing guides for 46 plants — tomatoes, peppers, potatoes, salad, herbs, strawberries, citrus, houseplants, mushrooms and trees. Step by step, with equipment and without, care, pests, harvest, a sowing calendar for your climate, a plant finder and your own grow plan. No signup.">
+<link rel="canonical" href="https://migabuilder.com/grow-forge.html">
+<meta property="og:image" content="https://videos.migabuilder.com/grow-forge.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Grow Forge — learn to grow food and plants at home or in nature | MigaBuilder">
+<meta property="og:description" content="Step-by-step growing guides with and without equipment, care and pest fixes, a sowing calendar, a plant finder and your own grow plan.">
+<meta property="og:url" content="https://migabuilder.com/grow-forge.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<style>
+main{max-width:1320px}
+.hidden{display:none!important}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.searchwrap{flex:1 1 300px}
+.searchwrap input{width:100%;padding:12px 13px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px;font-size:15px}
+.toolbar select{padding:10px;border:1px solid var(--line);background:rgba(8,24,38,.72);color:var(--paper);border-radius:3px}
+.chip{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.68);color:var(--paper);border-radius:999px;padding:7px 12px;cursor:pointer;font:600 12.5px 'IBM Plex Sans',sans-serif}
+.chip:hover{border-color:var(--cyan)}.chip[aria-pressed=true]{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.counter{font-size:13px;color:rgba(237,234,224,.8);margin:0 0 10px}
+.explorer{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.35fr);gap:16px;align-items:start}
+.explorer>*{min-width:0}
+.listbox{background:#0a2238;border:1px solid var(--line);border-radius:6px;padding:10px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;max-height:820px;overflow:auto}
+.pcard{background:#fff;color:var(--ink);border:2px solid transparent;border-radius:6px;cursor:pointer;text-align:left;padding:8px 9px;font:inherit;display:flex;gap:8px;align-items:center}
+.pcard:hover,.pcard:focus-visible{border-color:var(--amber);outline:none}.pcard.on{border-color:var(--amber);background:#fff8e8}
+.pcard .e{font-size:28px;line-height:1}.pcard b{display:block;font:700 14px 'Space Grotesk';line-height:1.2}.pcard small{display:block;font-size:11px;color:rgba(22,32,43,.65);margin-top:2px}
+.other{background:rgba(226,166,59,.12);border:1px dashed var(--amber);border-radius:6px;padding:12px;margin-top:10px;color:var(--paper);font-size:14px}
+.other select,.other input{padding:8px;border-radius:3px;border:1px solid var(--line);background:#fff;color:var(--ink);margin:6px 6px 0 0}
+.plant h2{font:700 28px 'Space Grotesk';margin:0;line-height:1.1;display:flex;gap:10px;align-items:center}
+.plant h2 .e{font-size:42px}
+.aka{color:rgba(22,32,43,.7);font-size:13.5px;margin:3px 0 10px}
+.badge{display:inline-block;padding:3px 9px;border-radius:999px;font-size:11.5px;font-weight:700;color:#fff;margin:0 5px 5px 0;background:#3d6b8c}
+.b-easy{background:#4E9E73}.b-med{background:#c98a1c}.b-hard{background:#c2553f}
+.intro{font-size:15px;line-height:1.6;margin:8px 0 12px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:6px;margin-bottom:12px}
+.facts div{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:6px 9px;font-size:12px;color:rgba(22,32,43,.7)}
+.facts b{display:block;font:700 14px 'Space Grotesk';color:#0E2A47}
+.cal{background:#fff;border:1px solid rgba(22,32,43,.12);border-radius:4px;padding:8px 10px;margin-bottom:12px;overflow-x:auto}
+.cal table{border-collapse:collapse;width:100%;min-width:480px;font-size:11.5px}
+.cal th{font-weight:600;color:rgba(22,32,43,.65);padding:2px}.cal td{padding:2px;height:20px}
+.cal td.lbl{white-space:nowrap;font-weight:600;padding-right:8px;color:var(--ink)}
+.cal i{display:block;height:14px;border-radius:3px}
+.c-in{background:#6FD1E0}.c-out{background:#4E9E73}.c-pick{background:#E2A63B}
+.cal .now{outline:2px solid #0E2A47;outline-offset:-1px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11.5px;margin-top:5px;color:rgba(22,32,43,.75)}.legend span{display:inline-flex;gap:4px;align-items:center}.legend i{width:14px;height:10px;border-radius:2px;display:inline-block}
+.climnote{font-size:13px;background:rgba(78,158,115,.12);border-left:3px solid var(--success);padding:7px 10px;margin:6px 0 0;line-height:1.5}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:2px solid rgba(22,32,43,.15);margin:6px 0 12px}
+.tabs button{border:0;background:none;padding:9px 12px;cursor:pointer;font:700 14px 'Space Grotesk';color:rgba(22,32,43,.65);border-bottom:3px solid transparent;margin-bottom:-2px}
+.tabs button[aria-selected=true]{color:#0E2A47;border-bottom-color:var(--amber)}
+.steps{counter-reset:s;list-style:none;margin:0;padding:0}
+.steps li{counter-increment:s;position:relative;padding:8px 10px 8px 44px;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:4px;margin-bottom:6px;line-height:1.5;font-size:14.5px}
+.steps li::before{content:counter(s);position:absolute;left:10px;top:8px;width:24px;height:24px;border-radius:50%;background:#0E2A47;color:#fff;font:700 12px/24px 'Space Grotesk';text-align:center}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.col h3{font:700 16px 'Space Grotesk';margin:0 0 6px}
+.item2{background:#fff;border:1px solid rgba(22,32,43,.1);border-left:4px solid #3d6b8c;border-radius:4px;padding:8px 10px;margin-bottom:6px;font-size:14px;line-height:1.45}
+.col.no .item2{border-left-color:#4E9E73}
+.item2 b{display:block;font-size:14px;margin-bottom:2px}
+.item2 small{display:block;color:rgba(22,32,43,.6);font-size:12px;margin-top:2px}
+.sect{margin-top:12px}.sect h3{font:700 16px 'Space Grotesk';margin:0 0 6px}
+.sect ul{margin:0;padding-left:18px;line-height:1.55;font-size:14.5px}
+.prob{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:0;background:#fff;border:1px solid rgba(22,32,43,.1);border-radius:4px;margin-bottom:6px;font-size:14px;line-height:1.45}
+.prob div{padding:8px 10px}.prob div:first-child{background:#fdf1ee;font-weight:600;color:#7b281d}
+.wildbox{background:rgba(78,158,115,.1);border-left:4px solid var(--success);padding:10px 12px;line-height:1.55;font-size:14.5px}
+.warn{background:#fdf1ee;border-left:4px solid var(--error);padding:10px 12px;line-height:1.55;font-size:14px;margin-top:8px}
+.addrow{display:flex;gap:8px;flex-wrap:wrap;align-items:end;margin:6px 0 4px}
+.addrow .field{margin:0}
+.empty{color:rgba(22,32,43,.72);text-align:center;padding:50px 10px;font-size:15px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.mcard{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:12px;position:relative}
+.mcard h4{margin:0 0 4px;font:700 16px 'Space Grotesk'}.mcard .del{position:absolute;top:6px;right:8px;border:0;background:none;font-size:18px;cursor:pointer;color:#7b281d}
+.mcard ul{margin:6px 0 0;padding-left:18px;font-size:13px;line-height:1.5}
+.bar{height:8px;background:rgba(22,32,43,.1);border-radius:4px;overflow:hidden;margin:6px 0}.bar i{display:block;height:100%;background:linear-gradient(90deg,#4E9E73,#E2A63B)}
+.finder{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.recs{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;margin-top:12px}
+.rec{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:6px;padding:10px;cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.rec:hover{border-color:#0E2A47}.rec b{font:700 15px 'Space Grotesk'}.rec small{display:block;color:rgba(22,32,43,.7);font-size:12.5px;margin-top:3px;line-height:1.4}
+.mcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mcards .item2 b{font:700 15px 'Space Grotesk'}
+@media(max-width:980px){.explorer{grid-template-columns:minmax(0,1fr)}.grid2{max-height:420px}.finder{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.cols{grid-template-columns:minmax(0,1fr)}.finder{grid-template-columns:1fr}.prob{grid-template-columns:1fr}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media print{body{background:#fff!important}.tool-nav,.masthead,.toolbar,.counter,.listbox,.miga-about,footer,.tabs,#finderPanel,#methodsPanel,#gardenPanel,.addrow,.noprint{display:none!important}.explorer{display:block}.panel{background:#fff}.tabpane{display:block!important}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which plants are easiest for beginners?", "acceptedAnswer": {"@type": "Answer", "text": "Radishes, salad leaves, microgreens, bush beans, potatoes in a bag, courgettes, mint, chives and strawberries. Use the Plant finder to get suggestions for your space, light and time."}}, {"@type": "Question", "name": "Can I grow food without buying equipment?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every guide has a “Without equipment” list: sunny windowsills, recycled containers, compost from kitchen scraps, rain water, mulch, seed saving, cuttings and methods like the Three Sisters and the Kratky jar."}}, {"@type": "Question", "name": "Is Grow Forge free and private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free with no account. All the guides are built into the page and your garden plan is kept only in your browser."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Grow Forge</span></nav>
+<header class="masthead"><div><h1>Grow Forge</h1><p>Learn how to grow tomatoes, vegetables, fruit, herbs, flowers, houseplants, mushrooms and trees — at home or in nature. Step-by-step guides with equipment and without, care, pests and fixes, harvest, and a sowing calendar for your climate.</p></div></header>
+<main>
+<div class="toolbar">
+  <div class="searchwrap"><input id="search" type="search" autocomplete="off" placeholder="Search a plant: tomato, basil, lemon, mushrooms…" aria-label="Search for a plant"></div>
+  <select id="where" aria-label="Where you grow"><option value="">Anywhere</option><option value="indoor">Indoors</option><option value="pot">Pots &amp; balcony</option><option value="garden">Garden</option><option value="wild">In nature</option></select>
+  <select id="diff" aria-label="Difficulty"><option value="">Any difficulty</option><option value="1">Easy only</option><option value="2">Easy &amp; medium</option></select>
+  <select id="climate" aria-label="Your climate"><option value="north">Temperate — northern hemisphere</option><option value="south">Temperate — southern hemisphere</option><option value="tropic">Tropical &amp; subtropical</option></select>
+</div>
+<div class="toolbar" id="cats" role="group" aria-label="Plant groups"></div>
+<p class="counter" id="counter"></p>
+<section class="explorer">
+  <div class="listbox">
+    <div class="grid2" id="list" aria-live="polite"></div>
+    <div class="other hidden" id="other">
+      <b>Not in the list?</b> Get a general guide for any plant — choose what kind of plant it is:<br>
+      <input id="otherName" placeholder="Plant name" aria-label="Plant name"><select id="otherType" aria-label="Kind of plant"></select><button class="chip" id="otherGo" style="background:var(--amber);color:#3b2a0b">Show guide</button>
+      <div style="margin-top:6px;font-size:12.5px">Not sure what it is? Look it up in <a id="atlasLink" href="species-atlas.html">Species Atlas</a>.</div>
+    </div>
+  </div>
+  <article class="panel plant" id="plant" aria-live="polite"><div class="empty">🌱<br><strong>Search for a plant</strong><br>or pick one from the list to see how to grow it.</div></article>
+</section>
+
+<section class="panel" id="finderPanel" style="margin-top:18px">
+  <h2>🧭 Plant finder — what should I grow?</h2>
+  <p>Tell us about your space and we recommend plants that will do well, easiest first.</p>
+  <div class="finder">
+    <div class="field"><label for="fWhere">Where will it grow?</label><select id="fWhere"><option value="indoor">Indoors / windowsill</option><option value="pot" selected>Pots on a balcony or patio</option><option value="garden">Garden or allotment</option><option value="wild">Wild land / nature</option></select></div>
+    <div class="field"><label for="fSun">Sunlight there</label><select id="fSun"><option value="full">6+ hours of direct sun</option><option value="part" selected>3–6 hours</option><option value="shade">Less than 3 hours</option></select></div>
+    <div class="field"><label for="fGoal">I want…</label><select id="fGoal"><option value="food">Food fast</option><option value="any" selected>Anything easy</option><option value="herb">Herbs for cooking</option><option value="flower">Flowers &amp; bees</option><option value="house">Green home / houseplants</option><option value="nature">To help nature</option></select></div>
+    <div class="field"><label for="fTime">Time I have</label><select id="fTime"><option value="1">A few minutes a week</option><option value="2" selected>An hour a week</option><option value="3">Lots — I love gardening</option></select></div>
+  </div>
+  <div class="actions"><button class="primary" id="findBtn">Recommend plants</button></div>
+  <div class="recs" id="recs"></div>
+</section>
+
+<section class="panel" id="gardenPanel" style="margin-top:18px">
+  <h2>🧺 My garden &amp; grow plan</h2>
+  <p>Press <b>＋ Add to my garden</b> on any plant to track it here: when it should sprout, when it is ready to pick, and what to do. Kept in this browser only.</p>
+  <div class="mgrid" id="garden"></div>
+  <div class="actions" style="margin-top:12px"><button class="primary" id="dlPlan">⬇ Download my grow plan</button><button class="secondary" id="printPlan">🖨 Print the open guide</button><button class="secondary" id="clearGarden">Clear garden</button></div>
+  <p class="status" id="gardenStatus"></p>
+</section>
+
+<section class="panel" id="methodsPanel" style="margin-top:18px">
+  <h2>🧰 With equipment or without?</h2>
+  <p>You can grow almost anything with no special kit. Equipment makes it faster, more reliable or possible in a harder climate.</p>
+  <div class="cols">
+    <div class="col"><h3>⚙️ With equipment</h3><div id="mGear"></div></div>
+    <div class="col no"><h3>🌿 Without equipment (free or almost free)</h3><div id="mNo"></div></div>
+  </div>
+</section>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Grow Forge</h2>
+  <p>Grow Forge is a free gardening guide for growing food and plants at home — on a windowsill, a balcony or in a garden — or out in nature. It covers 46 vegetables, fruits, herbs, flowers, houseplants, mushrooms, trees and wildflower meadows, each with a step-by-step method, what equipment helps and how to manage without it, care, common problems and fixes, when and how to harvest, and how the plant lives in the wild.</p>
+  <h3>How to use Grow Forge</h3>
+  <ol><li>Search for a plant or choose one from the list; filter by where you grow and how easy it is.</li><li>Pick your climate to see the right sowing and harvest months, then read the step-by-step guide, the equipment and no-equipment options, care and problems.</li><li>Add plants to My garden to see when they should sprout and be ready, and download your grow plan.</li></ol>
+  <h3>Which plants are easiest for beginners?</h3>
+  <p>Radishes, salad leaves, microgreens, bush beans, potatoes in a bag, courgettes, mint, chives and strawberries. Use the Plant finder to get suggestions for your space, light and time.</p>
+  <h3>Can I grow food without buying equipment?</h3>
+  <p>Yes. Every guide has a “Without equipment” list: sunny windowsills, recycled containers, compost from kitchen scraps, rain water, mulch, seed saving, cuttings and methods like the Three Sisters and the Kratky jar.</p>
+  <h3>Is Grow Forge free and private?</h3>
+  <p>Yes. It is free with no account. All the guides are built into the page and your garden plan is kept only in your browser.</p>
+  <p class="miga-about-rel">Related tools: <a href="species-atlas.html">Species Atlas</a> · <a href="biology-map.html">Biology Map</a> · <a href="focus-forge.html">Focus Forge</a></p>
+</section>
+
+<footer>Grow Forge · MigaBuilder · General guidance for home growers — local conditions vary, so check with local gardeners or extension services. Never eat a wild plant or mushroom unless you are certain what it is.</footer>
+<script src="grow-data.js"></script>
+<script>
+(function(){
+'use strict';
+const P=window.GROW_PLANTS, TYPES=window.GROW_TYPES, METHODS=window.GROW_METHODS;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const byId=Object.fromEntries(P.map(p=>[p.id,p]));
+const CATS=[['','All'],['veg','🥕 Vegetables'],['fruit','🍓 Fruit'],['herb','🌿 Herbs'],['flower','🌻 Flowers'],['house','🪴 Houseplants'],['nature','🌳 Trees, mushrooms & nature']];
+const CATNAME={veg:'Vegetable',fruit:'Fruit',herb:'Herb',flower:'Flower',house:'Houseplant',nature:'Nature'};
+const SUN={full:'☀️ Full sun',part:'⛅ Part sun',shade:'☁️ Shade OK'};
+const WATER={low:'💧 Low',medium:'💧💧 Medium',high:'💧💧💧 High'};
+const WHERE={indoor:'Indoors',pot:'Pots',garden:'Garden',wild:'Nature'};
+const DIFF=['','Easy','Medium','Harder'];
+const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const ls={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let cat='', current=null, tab='how';
+$('climate').value=ls.get('growForge.climate','north');
+
+// ---------- list & search ----------
+$('cats').innerHTML=CATS.map(([k,l])=>`<button class="chip" data-cat="${k}" aria-pressed="${k===cat}">${l}</button>`).join('');
+$('cats').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;cat=b.dataset.cat;$('cats').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderList()});
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+function matches(p,q){if(!q)return true;const hay=norm(p.name+' '+p.aka+' '+p.id+' '+CATNAME[p.cat]);return norm(q).split(/\s+/).filter(Boolean).every(w=>hay.includes(w)||hay.includes(w.replace(/(es|s)$/,'')))}
+function filtered(){const q=$('search').value.trim(),w=$('where').value,d=+$('diff').value||9;return P.filter(p=>(!cat||p.cat===cat)&&(!w||p.where.includes(w))&&p.diff<=d&&matches(p,q))}
+function renderList(){
+  const list=filtered(),q=$('search').value.trim();
+  $('list').innerHTML=list.map(p=>`<button class="pcard${current&&current.id===p.id?' on':''}" data-id="${p.id}"><span class="e">${p.emoji}</span><span><b>${esc(p.name)}</b><small>${DIFF[p.diff]} · ${SUN[p.sun].split(' ').slice(1).join(' ')} · ${p.where.map(x=>WHERE[x]).join(', ')}</small></span></button>`).join('')||`<div style="color:var(--paper);padding:10px">No plant in the list matches “${esc(q)}”.</div>`;
+  $('counter').textContent=list.length+' of '+P.length+' plants'+(q?' match “'+q+'”':'')+'. Pick one to see how to grow it.';
+  $('other').classList.toggle('hidden',!(q&&!list.length));
+  if(q)$('otherName').value=q;
+}
+$('list').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)open(b.dataset.id)});
+['search','where','diff'].forEach(id=>$(id).addEventListener('input',renderList));
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const f=filtered();if(f.length)open(f[0].id)}});
+$('climate').addEventListener('change',()=>{ls.set('growForge.climate',$('climate').value);if(current)renderPlant();renderGarden()});
+$('otherType').innerHTML=Object.entries(TYPES).map(([k,t])=>`<option value="${k}">${esc(t.label)}</option>`).join('');
+$('otherGo').addEventListener('click',()=>showGeneric($('otherName').value.trim()||'Your plant',$('otherType').value));
+
+// ---------- calendar ----------
+function shift(ms){return $('climate').value==='south'?ms.map(m=>(m+5)%12+1):ms}
+function climateNote(p){
+  const c=$('climate').value,t=parseFloat(p.temp);
+  if(c!=='tropic')return c==='south'?'Months are shifted by six months for the southern hemisphere. Check your local frost dates.':'Months are for a temperate climate. Plant out frost-tender plants after your last frost date.';
+  if(/cold winter|cold spell/.test(p.temp))return'In the tropics: this plant needs a cold winter. Look for “low-chill” varieties, grow it at altitude, or (garlic) chill the cloves in the fridge for 4–6 weeks before planting.';
+  if(p.cat==='house')return'In the tropics this plant can live outdoors in shade all year.';
+  if(t<16)return'In the tropics: grow it in the cooler, drier months or in the highlands, and give it afternoon shade — heat makes it bolt or stop growing.';
+  return'In the tropics you can grow it all year: sow at the start of the rainy season (or any time with watering), and avoid the wettest weeks for seed sowing.';
+}
+function calendar(p){
+  const rows=[['Sow indoors','c-in',p.sowIn],['Sow / plant outside','c-out',p.sowOut],[p.cat==='flower'||p.id==='meadow'?'Flowers':'Harvest','c-pick',p.pick]].filter(r=>r[2]&&r[2].length);
+  if(!rows.length)return'';
+  const now=new Date().getMonth()+1,trop=$('climate').value==='tropic';
+  if(trop)return `<p class="climnote" style="margin-bottom:12px">${esc(climateNote(p))}</p>`;
+  return `<div class="cal"><table><tr><th></th>${MON.map((m,i)=>`<th class="${i+1===now?'now':''}">${m}</th>`).join('')}</tr>${trop?'':rows.map(([l,c,ms])=>{const s=new Set(shift(ms));return `<tr><td class="lbl">${l}</td>${MON.map((m,i)=>`<td>${s.has(i+1)?`<i class="${c}" title="${l}: ${m}"></i>`:''}</td>`).join('')}</tr>`}).join('')}</table>${trop?'':`<div class="legend">${rows.map(([l,c])=>`<span><i class="${c}"></i>${l}</span>`).join('')}</div>`}<p class="climnote">${esc(climateNote(p))}</p></div>`;
+}
+
+// ---------- one plant ----------
+const TABS=[['how','🪜 How to grow'],['gear','🧰 Equipment or none'],['care','🩺 Care & problems'],['harvest','🧺 Harvest & nature']];
+function open(id,opts){const p=byId[id];if(!p)return;current=p;tab=(opts&&opts.tab)||'how';renderPlant();renderList();if(!(opts&&opts.noHash))history.replaceState(null,'','#plant='+id);if(!(opts&&opts.noScroll)&&window.innerWidth<980)$('plant').scrollIntoView({behavior:'smooth',block:'start'})}
+function dayText(r){if(!r||!r[1])return'—';const f=n=>n>=730?Math.round(n/365)+' years':n>=120?Math.round(n/30)+' months':n+' days';return r[0]===r[1]?f(r[0]):f(r[0])+' – '+f(r[1])}
+function renderPlant(){
+  const p=current,dc=['','b-easy','b-med','b-hard'][p.diff];
+  const items=(a,cls)=>a.map(x=>`<div class="item2"><b>${esc(x[0])}</b>${esc(x[1])}${x[2]?`<small>${esc(x[2])}</small>`:''}</div>`).join('');
+  const panes={
+    how:`<ol class="steps" id="stepsList">${p.steps.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`,
+    gear:`<div class="cols"><div class="col"><h3>⚙️ With equipment</h3>${items(p.gear)}</div><div class="col no"><h3>🌿 Without equipment</h3>${items(p.nogear)}</div></div>`,
+    care:`<div class="sect"><h3>How to manage it</h3><ul>${p.care.map(c=>`<li>${esc(c)}</li>`).join('')}</ul></div><div class="sect"><h3>Problems and how to fix them</h3>${p.problems.map(([a,b])=>`<div class="prob"><div>${esc(a)}</div><div>${esc(b)}</div></div>`).join('')}</div><div class="sect"><h3>Good neighbours</h3><ul><li><b>Grow it with:</b> ${esc(p.friends)}</li><li><b>Keep it away from:</b> ${esc(p.avoid)}</li></ul></div>`,
+    harvest:`<div class="sect"><h3>🧺 Harvest & storage</h3><p class="intro" style="margin:0">${esc(p.harvest)}</p></div><div class="sect"><h3>🌍 In nature</h3><div class="wildbox">${esc(p.wild)}</div></div>`
+  };
+  $('plant').innerHTML=`<h2><span class="e">${p.emoji}</span>${esc(p.name)}</h2><div class="aka">${esc(CATNAME[p.cat])} · also: ${esc(p.aka)}</div>
+  <div><span class="badge ${dc}">${DIFF[p.diff]}</span>${p.where.map(w=>`<span class="badge">${WHERE[w]}</span>`).join('')}</div>
+  <p class="intro">${esc(p.intro)}</p>
+  <div class="facts"><div>Light<b>${SUN[p.sun]}</b></div><div>Water<b>${WATER[p.water]}</b></div><div>Temperature<b>${esc(p.temp)}</b></div><div>Soil pH<b>${esc(p.ph)}</b></div><div>Spacing<b>${esc(p.space)}</b></div><div>Sow / plant depth<b>${esc(p.depth)}</b></div><div>Sprouts in<b>${dayText(p.germ)}</b></div><div>${p.cat==='flower'?'To flowers':'Ready in'}<b>${dayText(p.days)}</b></div></div>
+  ${calendar(p)}
+  <div class="addrow noprint"><div class="field"><label for="addDate">Sown or planted on</label><input type="date" id="addDate" value="${new Date().toISOString().slice(0,10)}"></div><button class="primary" id="addBtn">＋ Add to my garden</button></div>
+  <div class="tabs" role="tablist">${TABS.map(([k,l])=>`<button role="tab" data-tab="${k}" id="tab-${k}" aria-selected="${k===tab}">${l}</button>`).join('')}</div>
+  ${TABS.map(([k])=>`<div class="tabpane${k===tab?'':' hidden'}" data-pane="${k}">${panes[k]}</div>`).join('')}
+  ${p.id==='cassava'?'<div class="warn">⚠️ Raw cassava is poisonous. Always peel, soak and cook it thoroughly.</div>':''}`;
+  $('plant').querySelector('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;tab=b.dataset.tab;$('plant').querySelectorAll('[data-tab]').forEach(x=>x.setAttribute('aria-selected',x===b));$('plant').querySelectorAll('[data-pane]').forEach(x=>x.classList.toggle('hidden',x.dataset.pane!==tab))});
+  $('addBtn').addEventListener('click',()=>addToGarden(p.id,$('addDate').value));
+}
+function showGeneric(name,type){
+  const t=TYPES[type];current=null;renderList();
+  $('plant').innerHTML=`<h2><span class="e">🌱</span>${esc(name)}</h2><div class="aka">General guide · ${esc(t.label)}</div>
+  <p class="intro">We do not have a dedicated guide for this plant yet, so here is what works for most plants of this kind. Check the seed packet or plant label for spacing and timing.</p>
+  <div class="facts"><div>Light<b>${SUN[t.sun]}</b></div><div>Water<b>${WATER[t.water]}</b></div></div>
+  <div class="sect"><h3>How to grow it</h3><ul>${t.tips.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>
+  <div class="sect"><h3>The basics for every plant</h3><ul><li>Right place: match its light needs, and give it shelter from strong wind.</li><li>Good soil: add compost; make sure water drains away.</li><li>Water at the roots in the morning; deeply and less often is better than a little every day.</li><li>Watch for pests weekly, and act early — pick off, wash off, or use barriers before sprays.</li><li>Learn from local growers: neighbours, garden clubs and agricultural extension services know your conditions.</li></ul></div>
+  <div class="sect"><h3>With or without equipment</h3><p class="intro" style="margin:0">See <a href="#methodsPanel" style="color:#0E2A47;font-weight:700">With equipment or without?</a> below for the options that apply to every plant.</p></div>`;
+}
+
+// ---------- my garden ----------
+let garden=ls.get('growForge.garden',[]);
+const addDays=(d,n)=>{const x=new Date(d+'T12:00:00');x.setDate(x.getDate()+n);return x};
+const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+function plan(g){
+  const p=byId[g.id],start=g.date,today=new Date();
+  const sprout=[addDays(start,p.germ[0]),addDays(start,p.germ[1])];
+  const ready=p.days[1]?[addDays(start,p.days[0]),addDays(start,p.days[1])]:null;
+  const age=Math.max(0,Math.round((today-new Date(start+'T12:00:00'))/864e5));
+  const pct=ready?Math.min(100,Math.round(age/p.days[0]*100)):Math.min(100,Math.round(age/Math.max(1,p.germ[1])*100));
+  let stage=age<p.germ[0]?'Waiting to sprout':age<=p.germ[1]?'Sprouting now — keep it moist':ready&&age>=p.days[0]?(p.cat==='flower'?'Flowering time!':'Ready to harvest — check it'):ready?'Growing':'Growing — enjoy it';
+  return {p,sprout,ready,age,pct,stage};
+}
+function addToGarden(id,date){
+  if(!date)date=new Date().toISOString().slice(0,10);
+  garden.push({id,date,key:Date.now()+Math.random().toString(36).slice(2,6)});ls.set('growForge.garden',garden);renderGarden();
+  const s=$('gardenStatus');s.textContent='✓ '+byId[id].name+' added to My garden.';s.classList.add('show');
+}
+function renderGarden(){
+  $('garden').innerHTML=garden.length?garden.map(g=>{const x=plan(g);return `<div class="mcard" data-key="${g.key}"><button class="del" title="Remove" aria-label="Remove ${esc(x.p.name)}">×</button><h4>${x.p.emoji} ${esc(x.p.name)}</h4><small>Sown/planted ${fmt(new Date(g.date+'T12:00:00'))} · day ${x.age}</small><div class="bar"><i style="width:${x.pct}%"></i></div><b style="font-size:13.5px">${x.stage}</b><ul><li>Sprouts: ${fmt(x.sprout[0])} – ${fmt(x.sprout[1])}</li>${x.ready?`<li>${x.p.cat==='flower'?'Flowers':'Ready'}: ${fmt(x.ready[0])} – ${fmt(x.ready[1])}</li>`:''}<li>${WATER[x.p.water]} water · ${SUN[x.p.sun]}</li><li>${esc(x.p.care[0])}</li></ul><button class="chip" data-open="${x.p.id}" style="margin-top:6px;background:#fff;color:var(--ink);border-color:rgba(14,42,71,.3)">Open guide</button></div>`}).join(''):'<p class="muted">Nothing here yet — open a plant and press “＋ Add to my garden”.</p>';
+}
+$('garden').addEventListener('click',e=>{
+  const o=e.target.closest('[data-open]');if(o){open(o.dataset.open);$('plant').scrollIntoView({behavior:'smooth'});return}
+  const d=e.target.closest('.del');if(!d)return;const k=d.closest('.mcard').dataset.key;garden=garden.filter(g=>g.key!==k);ls.set('growForge.garden',garden);renderGarden();
+});
+$('clearGarden').addEventListener('click',()=>{if(!garden.length||confirm('Remove every plant from My garden?')){garden=[];ls.set('growForge.garden',garden);renderGarden()}});
+$('printPlan').addEventListener('click',()=>{if(!current){alert('Open a plant guide first.');return}window.print()});
+function planText(){
+  const clim=$('climate').selectedOptions[0].textContent,L=[];
+  L.push('MY GROW PLAN — Grow Forge (migabuilder.com/grow-forge.html)','Made '+fmt(new Date())+' · Climate: '+clim,'');
+  if(!garden.length)L.push('(No plants yet — add some in Grow Forge.)');
+  garden.forEach((g,i)=>{const x=plan(g),p=x.p;
+    L.push((i+1)+'. '+p.name.toUpperCase()+'  '+p.emoji,'   Sown/planted: '+fmt(new Date(g.date+'T12:00:00'))+'  (day '+x.age+': '+x.stage+')','   Expect sprouts: '+fmt(x.sprout[0])+' – '+fmt(x.sprout[1]));
+    if(x.ready)L.push('   '+(p.cat==='flower'?'Flowers':'First harvest')+': '+fmt(x.ready[0])+' – '+fmt(x.ready[1]));
+    L.push('   Light: '+SUN[p.sun].replace(/^\S+ /,'')+' · Water: '+p.water+' · Temperature: '+p.temp+' · Spacing: '+p.space,'   Steps:');
+    p.steps.forEach(s=>L.push('   [ ] '+s));
+    L.push('   Care:');p.care.forEach(c=>L.push('   - '+c));
+    L.push('   Watch for:');p.problems.forEach(([a,b])=>L.push('   - '+a+': '+b));
+    L.push('   Harvest: '+p.harvest,'');
+  });
+  L.push('General guidance — local conditions vary. Never eat a wild plant or mushroom unless you are sure what it is.');
+  return L.join('\n');
+}
+$('dlPlan').addEventListener('click',()=>{const b=new Blob([planText()],{type:'text/plain;charset=utf-8'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='my-grow-plan.txt';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)});
+
+// ---------- plant finder ----------
+function recommend(){
+  const w=$('fWhere').value,sun=$('fSun').value,goal=$('fGoal').value,time=+$('fTime').value;
+  const sunOk={full:['full','part','shade'],part:['part','shade'],shade:['shade']}[sun];
+  const out=[];
+  P.forEach(p=>{
+    let s=0;const why=[];
+    if(!p.where.includes(w)){if(w==='pot'&&p.where.includes('indoor'))s-=1;else return}
+    if(!sunOk.includes(p.sun)){if(sun==='part'&&p.sun==='full'&&['herb','veg'].includes(p.cat)&&p.diff===1)s-=2;else return}
+    else why.push(sun==='shade'?'copes with shade':'right for your light');
+    if(p.diff>time)return;
+    s+=(3-p.diff)*2;if(p.diff===1)why.push('easy');
+    if(goal==='food'&&['veg','fruit'].includes(p.cat)&&p.days[1]&&p.days[1]<=90){s+=6;why.push('ready in '+dayText(p.days))}
+    else if(goal==='food'&&['veg','fruit','herb'].includes(p.cat))s+=2;
+    if(goal==='herb'&&p.cat==='herb')s+=6;
+    if(goal==='flower'&&(p.cat==='flower'||p.id==='meadow')){s+=6;why.push('feeds bees')}
+    if(goal==='house'&&(p.cat==='house'||(p.where.includes('indoor')&&p.cat==='herb'))){s+=6}
+    if(goal==='nature'&&(p.cat==='nature'||p.id==='meadow'||p.id==='sunflower'||p.id==='lavender')){s+=6;why.push('good for wildlife')}
+    if(goal!=='any'&&s<6)s-=4;
+    if(p.water==='low'&&time===1){s+=1;why.push('needs little watering')}
+    out.push({p,s,why});
+  });
+  out.sort((a,b)=>b.s-a.s||a.p.diff-b.p.diff);
+  return out.slice(0,9);
+}
+$('findBtn').addEventListener('click',()=>{
+  const r=recommend();
+  $('recs').innerHTML=r.length?r.map(({p,why})=>`<button class="rec" data-id="${p.id}"><b>${p.emoji} ${esc(p.name)}</b><small>${esc(why.join(' · ')||DIFF[p.diff])}</small><small>${esc(p.intro.split('. ')[0])}.</small></button>`).join(''):'<p class="muted">Nothing fits all of that — try more light, more time, or a different place. Microgreens and pothos grow almost anywhere indoors.</p>';
+});
+$('recs').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){open(b.dataset.id);$('plant').scrollIntoView({behavior:'smooth'})}});
+
+// ---------- methods overview ----------
+$('mGear').innerHTML=METHODS.gear.map(([e,t,d,c])=>`<div class="item2"><b>${e} ${esc(t)}</b>${esc(d)}<small>About ${esc(c)}</small></div>`).join('');
+$('mNo').innerHTML=METHODS.nogear.map(([e,t,d])=>`<div class="item2"><b>${e} ${esc(t)}</b>${esc(d)}</div>`).join('');
+
+// ---------- start ----------
+renderList();renderGarden();
+const h=/plant=([a-z]+)/.exec(location.hash);
+open(h&&byId[h[1]]?h[1]:'tomato',{noHash:!h,noScroll:true});
+window.addEventListener('hashchange',()=>{const m=/plant=([a-z]+)/.exec(location.hash);if(m&&byId[m[1]]&&(!current||current.id!==m[1]))open(m[1],{noHash:true})});
+window.__growForge={plants:P,open,addToGarden,planText,recommend,get garden(){return garden},get current(){return current}};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

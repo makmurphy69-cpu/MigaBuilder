@@ -269,6 +269,7 @@
     'motor-forge': ['lichtenstein', 'robot', 'wrench', 'cap'],
     'plane-forge': ['leonardo', 'owl', 'pencil', 'cap'],
     'cube-forge': ['mondrian', 'robot', 'star', 'cap'],
+    'grow-forge': ['monet', 'frog', 'book', 'cap'],
     'theory-forge': ['kandinsky', 'owl', 'note', 'headphones'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
