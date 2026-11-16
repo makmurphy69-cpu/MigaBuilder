@@ -84,6 +84,9 @@ main{max-width:1320px}
 .mcards .item2 b{font:700 15px 'Space Grotesk'}
 @media(max-width:980px){.explorer{grid-template-columns:minmax(0,1fr)}.grid2{max-height:420px}.finder{grid-template-columns:1fr 1fr}}
 @media(max-width:620px){.cols{grid-template-columns:minmax(0,1fr)}.finder{grid-template-columns:1fr}.prob{grid-template-columns:1fr}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.cal .mS{display:none}
+@media(max-width:620px){.cal table{min-width:0;table-layout:fixed}.cal .mL{display:none}.cal .mS{display:inline}.cal td.lbl{width:68px;font-size:11px}.facts{grid-template-columns:1fr 1fr}.cal td,.cal th{padding:1px}}
+@media(pointer:coarse){.chip{min-height:40px;padding:9px 14px}.mcard .del{width:40px;height:40px;top:2px;right:2px}.tabs button{min-height:44px}.toolbar select{min-height:44px}}
 @media print{body{background:#fff!important}.tool-nav,.masthead,.toolbar,.counter,.listbox,.miga-about,footer,.tabs,#finderPanel,#methodsPanel,#gardenPanel,.addrow,.noprint{display:none!important}.explorer{display:block}.panel{background:#fff}.tabpane{display:block!important}}
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Which plants are easiest for beginners?", "acceptedAnswer": {"@type": "Answer", "text": "Radishes, salad leaves, microgreens, bush beans, potatoes in a bag, courgettes, mint, chives and strawberries. Use the Plant finder to get suggestions for your space, light and time."}}, {"@type": "Question", "name": "Can I grow food without buying equipment?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every guide has a “Without equipment” list: sunny windowsills, recycled containers, compost from kitchen scraps, rain water, mulch, seed saving, cuttings and methods like the Three Sisters and the Kratky jar."}}, {"@type": "Question", "name": "Is Grow Forge free and private?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free with no account. All the guides are built into the page and your garden plan is kept only in your browser."}}]}</script>
@@ -180,7 +183,9 @@ $('climate').value=ls.get('growForge.climate','north');
 $('cats').innerHTML=CATS.map(([k,l])=>`<button class="chip" data-cat="${k}" aria-pressed="${k===cat}">${l}</button>`).join('');
 $('cats').addEventListener('click',e=>{const b=e.target.closest('[data-cat]');if(!b)return;cat=b.dataset.cat;$('cats').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));renderList()});
 const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-function matches(p,q){if(!q)return true;const hay=norm(p.name+' '+p.aka+' '+p.id+' '+CATNAME[p.cat]);return norm(q).split(/\s+/).filter(Boolean).every(w=>hay.includes(w)||hay.includes(w.replace(/(es|s)$/,'')))}
+// Singular forms of a search word: strawberries → strawberry, tomatoes → tomato, leaves → leaf, beans → bean.
+const forms=w=>[w,w.replace(/ies$/,'y'),w.replace(/ves$/,'f'),w.replace(/oes$/,'o'),w.replace(/(ches|shes|xes)$/,m=>m.slice(0,-2)),w.replace(/s$/,'')].filter((x,i,a)=>x.length>1&&a.indexOf(x)===i);
+function matches(p,q){if(!q)return true;const hay=norm(p.name+' '+p.aka+' '+p.id+' '+CATNAME[p.cat]+' '+p.cat);return norm(q).replace(/[^\p{L}\p{N}\s]/gu,' ').split(/\s+/).filter(Boolean).every(w=>forms(w).some(f=>hay.includes(f)))}
 function filtered(){const q=$('search').value.trim(),w=$('where').value,d=+$('diff').value||9;return P.filter(p=>(!cat||p.cat===cat)&&(!w||p.where.includes(w))&&p.diff<=d&&matches(p,q))}
 function renderList(){
   const list=filtered(),q=$('search').value.trim();
@@ -211,7 +216,7 @@ function calendar(p){
   if(!rows.length)return'';
   const now=new Date().getMonth()+1,trop=$('climate').value==='tropic';
   if(trop)return `<p class="climnote" style="margin-bottom:12px">${esc(climateNote(p))}</p>`;
-  return `<div class="cal"><table><tr><th></th>${MON.map((m,i)=>`<th class="${i+1===now?'now':''}">${m}</th>`).join('')}</tr>${trop?'':rows.map(([l,c,ms])=>{const s=new Set(shift(ms));return `<tr><td class="lbl">${l}</td>${MON.map((m,i)=>`<td>${s.has(i+1)?`<i class="${c}" title="${l}: ${m}"></i>`:''}</td>`).join('')}</tr>`}).join('')}</table>${trop?'':`<div class="legend">${rows.map(([l,c])=>`<span><i class="${c}"></i>${l}</span>`).join('')}</div>`}<p class="climnote">${esc(climateNote(p))}</p></div>`;
+  return `<div class="cal"><table><tr><th></th>${MON.map((m,i)=>`<th class="${i+1===now?'now':''}"><span class="mL">${m}</span><span class="mS" aria-hidden="true">${m[0]}</span></th>`).join('')}</tr>${trop?'':rows.map(([l,c,ms])=>{const s=new Set(shift(ms));return `<tr><td class="lbl"><span class="mL">${l}</span><span class="mS">${({'Sow indoors':'Indoors','Sow / plant outside':'Outside'})[l]||l}</span></td>${MON.map((m,i)=>`<td>${s.has(i+1)?`<i class="${c}" title="${l}: ${m}"></i>`:''}</td>`).join('')}</tr>`}).join('')}</table>${trop?'':`<div class="legend">${rows.map(([l,c])=>`<span><i class="${c}"></i>${l}</span>`).join('')}</div>`}<p class="climnote">${esc(climateNote(p))}</p></div>`;
 }
 
 // ---------- one plant ----------

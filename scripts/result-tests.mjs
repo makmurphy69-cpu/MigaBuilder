@@ -1163,6 +1163,12 @@ test('grow-forge: search finds a plant, the calendar follows the hemisphere and 
   await page.fill('#search', 'tomatoes');
   const first = await page.textContent('#list .pcard b');
   expect(first === 'Tomato', 'searching "tomatoes" did not find Tomato first: ' + first);
+  for (const [q, want] of [['strawberries', 'Strawberry'], ['blueberries', 'Blueberry'], ['potatoes', 'Potato'], ['herbs', 'Basil']]) {
+    await page.fill('#search', q);
+    const names = await page.$$eval('#list .pcard b', b => b.map(x => x.textContent));
+    expect(names.includes(want), 'searching "' + q + '" did not find ' + want + ': ' + names.join(', '));
+  }
+  await page.fill('#search', 'tomatoes');
   await page.click('#list .pcard');
   const north = await page.$$eval('.cal tr:nth-child(2) td i', els => els.map(e => e.title).join(','));
   await page.selectOption('#climate', 'south');
