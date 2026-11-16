@@ -466,6 +466,28 @@ S('dictionary-forge.html', {
   }
 });
 
+S('grow-forge.html', {
+  title: 'Grow Forge', subtitle: 'Learn to grow food and plants at home or in nature',
+  intro: 'Welcome to Grow Forge. Learn how to grow tomatoes, vegetables, fruit, herbs, flowers, houseplants, mushrooms and trees, at home or in nature, with equipment or without.',
+  async run(h, page) {
+    await h.step('Search for any plant at the top. Let’s type tomato.', () => h.type('#search', 'tomato'));
+    await h.step('Or browse the list. Filter by group, by where you grow, indoors, in pots, in a garden or in nature, and by how easy it is.', async () => { await page.fill('#search', ''); await page.dispatchEvent('#search', 'input'); await h.point('#cats'); });
+    await h.step('Open a plant to see its guide. Here are the quick facts: light, water, temperature, soil, spacing, and how long until it sprouts and is ready.', async () => { await h.click('#list [data-id="tomato"]'); await h.point('#plant .facts'); });
+    await h.step('Choose your climate. The calendar shows when to sow indoors, plant outside and harvest, and moves six months for the southern hemisphere.', async () => { await h.select('#climate', 'south'); await h.point('#plant .cal'); });
+    await h.step('How to grow gives you every step, from seed to harvest.', () => h.scroll('#stepsList', 'center'));
+    await h.step('Equipment or none compares the two ways: grow lights, greenhouses and drip watering, or a sunny windowsill, recycled pots, compost and rain water.', async () => { await h.click('#tab-gear'); await h.point('#plant .cols'); });
+    await h.step('Care and problems shows how to manage the plant, what goes wrong, and how to fix it, plus which plants to grow next to it.', () => h.click('#tab-care'));
+    await h.step('Harvest and nature tells you when to pick and how to store it, and how the plant grows in the wild.', () => h.click('#tab-harvest'));
+    await h.step('Press Add to my garden to track it.', async () => { await h.scroll('#addBtn', 'center'); await h.click('#addBtn'); });
+    await h.step('Not sure what to grow? The plant finder recommends plants for your space, your light, your goal and your time.', async () => { await h.scroll('#finderPanel'); await h.select('#fWhere', 'indoor'); await h.click('#findBtn'); });
+    await h.wait(1200);
+    await h.step('My garden shows when each plant should sprout and be ready to pick. Download your grow plan with all the steps as a checklist.', async () => { await h.scroll('#gardenPanel'); await h.point('#garden'); });
+    await h.sampleDownload('#dlPlan', 'Grow plan made in this video');
+    await h.step('And at the bottom, every way to grow with equipment and without, side by side.', () => h.scroll('#methodsPanel'));
+    await h.wait(1200);
+  }
+});
+
 S('theory-forge.html', {
   title: 'Theory Forge', subtitle: 'Learn music theory and use it on a real instrument',
   intro: 'Welcome to Theory Forge. Learn music theory one short lesson at a time, hear every idea, and use it straight away on piano, guitar, bass, ukulele, mandolin or violin.',

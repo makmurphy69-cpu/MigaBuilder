@@ -1158,6 +1158,44 @@ test('theory-forge: a song tab downloads with every note on the right string and
   expect(p1 === 0 && p2 === 2, 'practice mode did not wait for the right notes: ' + p1 + ', ' + p2);
 });
 
+test('grow-forge: search finds a plant, the calendar follows the hemisphere and the grow plan downloads with dates and steps', 'grow-forge.html', async (page) => {
+  await page.evaluate(() => { try { localStorage.removeItem('growForge.garden'); } catch (e) {} });
+  await page.fill('#search', 'tomatoes');
+  const first = await page.textContent('#list .pcard b');
+  expect(first === 'Tomato', 'searching "tomatoes" did not find Tomato first: ' + first);
+  for (const [q, want] of [['strawberries', 'Strawberry'], ['blueberries', 'Blueberry'], ['potatoes', 'Potato'], ['herbs', 'Basil']]) {
+    await page.fill('#search', q);
+    const names = await page.$$eval('#list .pcard b', b => b.map(x => x.textContent));
+    expect(names.includes(want), 'searching "' + q + '" did not find ' + want + ': ' + names.join(', '));
+  }
+  await page.fill('#search', 'tomatoes');
+  await page.click('#list .pcard');
+  const north = await page.$$eval('.cal tr:nth-child(2) td i', els => els.map(e => e.title).join(','));
+  await page.selectOption('#climate', 'south');
+  const south = await page.$$eval('.cal tr:nth-child(2) td i', els => els.map(e => e.title).join(','));
+  expect(/Feb/.test(north) && /Aug/.test(south) && !/Feb/.test(south), 'sowing months did not move for the southern hemisphere: ' + north + ' | ' + south);
+  // every plant has the parts a guide needs
+  const bad = await page.evaluate(() => window.__growForge.plants.filter(p => !(p.steps.length >= 3 && p.gear.length && p.nogear.length && p.problems.length && p.harvest && p.wild && p.germ[0] <= p.germ[1] && p.days[0] <= p.days[1])).map(p => p.id));
+  expect(bad.length === 0, 'incomplete plant guides: ' + bad.join(', '));
+  await page.click('#tab-gear');
+  expect(await page.isVisible('.col.no .item2'), 'the without-equipment list is not shown');
+  await page.fill('#addDate', '2026-03-01');
+  await page.click('#addBtn');
+  // a plant that is not in the list gets a general guide
+  await page.fill('#search', 'mango');
+  await page.selectOption('#otherType', 'tropical');
+  await page.click('#otherGo');
+  expect(/mango/.test(await page.textContent('#plant h2')) && /rainy season/.test(await page.textContent('#plant')), 'no general guide for an unlisted plant');
+  await page.click('#findBtn');
+  expect(await page.$$eval('#recs .rec', r => r.length) >= 3, 'the plant finder recommended fewer than 3 plants');
+  const out = await downloadOf(page, () => page.click('#dlPlan'));
+  const txt = out.buf.toString('utf8');
+  expect(out.name === 'my-grow-plan.txt', 'unexpected file name ' + out.name);
+  expect(/^MY GROW PLAN/.test(txt) && /1\. TOMATO/.test(txt) && /Sown\/planted: 1 Mar 2026/.test(txt), 'plan header or plant missing: ' + txt.slice(0, 200));
+  expect(/Expect sprouts: 6 Mar 2026 – 11 Mar 2026/.test(txt) && /First harvest: 30 May 2026 – 29 Jun 2026/.test(txt), 'wrong sprout or harvest dates');
+  expect((txt.match(/\[ \] /g) || []).length === 9 && /Blossom end rot|blossom end rot/.test(txt), 'steps or problems missing from the plan');
+});
+
 test('tune-forge: the demo string is tuned to E2 and the sound level log downloads as CSV', 'tune-forge.html', async (page) => {
   await page.click('#demoBtn'); // a plucked string tuned up step by step — no microphone needed
   await page.waitForFunction(() => { const s = window.__tuneForge.tuner(); return s.note === 'E2' && s.inTune; }, null, { timeout: 20000 });
