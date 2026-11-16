@@ -610,7 +610,7 @@
   });
 
   // ---------- PDF: drawn from the same document, with an invisible text layer so it can be searched and copied ----------
-  function loadHtml2pdf() { return window.html2pdf ? Promise.resolve() : new Promise(function (ok, no) { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js'; sc.onload = ok; sc.onerror = function () { no(new Error(I18N.t('errorPdf'))); }; document.head.appendChild(sc); }); }
+  function loadHtml2pdf() { return window.html2pdf ? Promise.resolve() : new Promise(function (ok, no) { const sc = document.createElement('script'); sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js'; sc.onload = ok; sc.onerror = function () { no(new Error(I18N.t('errorPdf'))); }; document.head.appendChild(sc); }); }
   function textLines(root) {
     const base = root.getBoundingClientRect(), words = [], walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let node;
     while ((node = walker.nextNode())) { const el = node.parentElement; if (!el || !node.textContent.trim()) continue; const size = parseFloat(getComputedStyle(el).fontSize) || 12, re = /\S+/g; let m;
