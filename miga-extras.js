@@ -78,10 +78,17 @@
     '.miga-badge{cursor:help;position:relative}.miga-badge .s{display:none}.miga-pop{position:absolute;z-index:9999;top:calc(100% + 6px);right:0;width:min(300px,80vw);white-space:normal;background:#0E2A47;color:#EDEAE0;border:1px solid rgba(111,209,224,.35);border-radius:8px;padding:10px 12px;font:400 12.5px/1.45 "IBM Plex Sans",system-ui,sans-serif;box-shadow:0 12px 30px rgba(0,0,0,.35)}.miga-float .miga-pop{top:auto;bottom:calc(100% + 6px);left:0;right:auto}' +
     '.miga-local-note,.miga-paste-note{display:block;margin-top:10px;font-size:12px;color:inherit;opacity:.88}.miga-local-note+.miga-paste-note{margin-top:4px}' +
     '.miga-card strong{display:block;color:#6FD1E0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin:8px 0 3px}.miga-card strong:first-child{margin-top:0}.miga-card ul{margin:0;padding-left:16px}.miga-card li{margin:2px 0}.miga-card{width:min(340px,86vw);max-height:70vh;overflow:auto;cursor:auto}' +
-    '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}}';
+    '@media(max-width:620px){.miga-badge .l{display:none}.miga-badge .s{display:inline}' +
+    // Phones: icon-only buttons that are big enough to tap, and the floating pill stays on one row.
+    '.miga-bar{gap:6px}.miga-bar>button,.miga-bar>.miga-badge{min-height:36px;min-width:38px;display:inline-flex;align-items:center;justify-content:center}.miga-bar>button{padding:4px 9px}.miga-bar>button[hidden]{display:none}.miga-bar .miga-l{display:none}' +
+    // iPhones zoom the whole page when a text box or drop-down under 16px is tapped.
+    'input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=color]):not([type=file]),select,textarea{font-size:max(16px,1em)}' +
+    '.miga-float{flex-wrap:nowrap;max-width:calc(100vw - 20px);left:8px;bottom:8px;opacity:.94}body.miga-float-pad{padding-bottom:64px}}';
   document.head.appendChild(st);
 
   const bar = document.createElement('div'); bar.className = 'miga-bar' + (nav ? '' : ' miga-float');
+  // Toolbar buttons: an icon plus a word; on phones only the icon shows (the word stays for screen readers).
+  const setLabel = (btn, icon, text) => { btn.innerHTML = icon + '<span class="miga-l"> ' + text + '</span>'; btn.setAttribute('aria-label', text); };
   const lightPanels = !!document.querySelector('.panel');
   // Pages that can send text to an AI provider say so, instead of claiming everything stays here.
   const AI_RE = /ai-client\.js|migabuilder-gemini|api\.openai\.com|api\.anthropic\.com|generativelanguage\.googleapis/;
@@ -138,6 +145,8 @@
     : ['miga-badge', 'This tool works inside your browser. Your text and files are not uploaded unless you use a sharing feature.', nav ? 'Private · runs in your browser' : 'Private'];
   bar.innerHTML = '<span class="' + badge[0] + '" tabindex="0" role="button" aria-expanded="false" title="' + badge[1].replace(/"/g, '&quot;') + '">' + (usesAI ? '🌐 ' : '🔒 ') + '<span class="l">' + badge[2] + '</span><span class="s">' + (usesAI ? 'AI goes online' : 'Private') + '</span></span>' + (lightPanels ? '<button type="button" class="miga-theme" aria-label="Toggle dark mode"></button>' : '');
   (nav || document.body).appendChild(bar);
+  // Leave room under the floating pill so it never covers the end of a scrolling page.
+  if (!nav && document.documentElement.scrollHeight > innerHeight + 80) document.body.classList.add('miga-float-pad');
   // Tooltips do not work on phones, so tapping the badge shows the explanation.
   const badgeEl = bar.querySelector('.miga-badge');
   const togglePop = () => { const open = badgeEl.querySelector('.miga-pop'); if (open) { open.remove(); badgeEl.setAttribute('aria-expanded', 'false'); return; } const pop = buildCard(); badgeEl.appendChild(pop); if (badgeEl.getBoundingClientRect().left < innerWidth / 2) { pop.style.left = '0'; pop.style.right = 'auto'; } badgeEl.setAttribute('aria-expanded', 'true'); };
@@ -317,7 +326,7 @@
   let lastField = null;
   const typeable = el => el && (el.tagName === 'TEXTAREA' || el.tagName === 'INPUT' && /^(text|search|email|url|)$/i.test(el.type || '')) && !el.readOnly && !el.closest('.mkb');
   document.addEventListener('focusin', e => { if (typeable(e.target)) lastField = e.target; });
-  const kbBtn = document.createElement('button'); kbBtn.type = 'button'; kbBtn.textContent = '⌨️ Keyboard'; kbBtn.title = 'On-screen keyboard for other languages and alphabets (Arabic, Russian, Chinese, Hindi, Korean, accents…)';
+  const kbBtn = document.createElement('button'); kbBtn.type = 'button'; setLabel(kbBtn, '⌨️', 'Keyboard'); kbBtn.title = 'On-screen keyboard for other languages and alphabets (Arabic, Russian, Chinese, Hindi, Korean, accents…)';
   kbBtn.addEventListener('pointerdown', e => e.preventDefault());
   kbBtn.onclick = () => {
     const go = () => {
@@ -336,17 +345,17 @@
   if (!document.querySelector('script[src*="miga-fullscreen.js"]')) { const fs = document.createElement('script'); fs.src = 'miga-fullscreen.js'; document.head.appendChild(fs); }
   if (!document.querySelector('script[src*="miga-palette.js"]')) { const ps = document.createElement('script'); ps.src = 'miga-palette.js'; document.head.appendChild(ps); }
   const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-  const findBtn = document.createElement('button'); findBtn.type = 'button'; findBtn.textContent = '🔎 ' + (mac ? '⌘K' : 'Ctrl K'); findBtn.title = 'Jump to any MigaBuilder tool (' + (mac ? '⌘K' : 'Ctrl+K') + ')';
+  const findBtn = document.createElement('button'); findBtn.type = 'button'; setLabel(findBtn, '🔎', mac ? '⌘K' : 'Ctrl K'); findBtn.setAttribute('aria-label', 'Find a tool'); findBtn.title = 'Jump to any MigaBuilder tool (' + (mac ? '⌘K' : 'Ctrl+K') + ')';
   findBtn.onclick = () => window.MigaPalette && window.MigaPalette.open();
   bar.insertBefore(findBtn, kbBtn);
-  const installBtn = document.createElement('button'); installBtn.type = 'button'; installBtn.textContent = '📲 Install'; installBtn.title = 'Install MigaBuilder as an app — the tools you have used then work offline'; installBtn.hidden = true;
+  const installBtn = document.createElement('button'); installBtn.type = 'button'; setLabel(installBtn, '📲', 'Install'); installBtn.title = 'Install MigaBuilder as an app — the tools you have used then work offline'; installBtn.hidden = true;
   installBtn.onclick = () => window.MigaInstall && window.MigaInstall.install();
   document.addEventListener('miga-installable', () => { installBtn.hidden = !(window.MigaInstall && window.MigaInstall.available()); });
   bar.appendChild(installBtn);
 
   // ---------- dark mode ----------
   const themeBtn = bar.querySelector('.miga-theme') || document.createElement('button');
-  function applyTheme(dark) { document.documentElement.classList.toggle('miga-dark', dark && lightPanels); themeBtn.textContent = dark ? '☀️ Light' : '🌙 Dark'; }
+  function applyTheme(dark) { document.documentElement.classList.toggle('miga-dark', dark && lightPanels); setLabel(themeBtn, dark ? '☀️' : '🌙', dark ? 'Light' : 'Dark'); }
   applyTheme(ls.get('migaTheme', '') === 'dark');
   themeBtn.onclick = () => { const dark = !document.documentElement.classList.contains('miga-dark'); ls.set('migaTheme', dark ? 'dark' : 'light'); applyTheme(dark); };
 
@@ -398,7 +407,7 @@
   }
 
   // Menu: save / open a work file.
-  const workBtn = document.createElement('button'); workBtn.type = 'button'; workBtn.textContent = '💾 My work'; workBtn.setAttribute('aria-haspopup', 'true');
+  const workBtn = document.createElement('button'); workBtn.type = 'button'; setLabel(workBtn, '💾', 'My work'); workBtn.setAttribute('aria-haspopup', 'true');
   bar.appendChild(workBtn);
   let menu = null;
   workBtn.onclick = e => {
