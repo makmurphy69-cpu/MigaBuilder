@@ -488,6 +488,63 @@ S('grow-forge.html', {
   }
 });
 
+S('typing-test.html', {
+  title: 'Typing Forge', subtitle: 'Typing test and the skills tests employers set',
+  intro: 'Welcome to Typing Forge. Test your typing speed, get a certificate, and practise the tests employers use: 10-key, data entry, transcription, clerical checking and proofreading.',
+  async run(h, page) {
+    await page.evaluate(() => { try { localStorage.removeItem('typingForge.results'); } catch (e) {} });
+    await h.step('Choose how long the test lasts, and what to type: common words, paragraphs, business emails, numbers and symbols, or your own text.', async () => { await h.select('#tDur', '30'); await h.point('#tText'); });
+    const target = await page.evaluate(() => window.__typingForge.tt.st.target);
+    await h.step('Type the text in the box. The timer starts with your first key, and mistakes turn red.', async () => { await h.point('#tInput'); await page.click('#tInput'); await page.keyboard.type(target.slice(0, 45), { delay: 150 }); });
+    await h.skip('Typing for 30 seconds', async () => { await page.keyboard.type(target.slice(45, 150), { delay: 190 }); await page.waitForSelector('#tResult .result-card', { timeout: 60000 }); });
+    await h.step('Your result: net words per minute, which is what employers use, plus accuracy, keystrokes per hour and what that speed is good enough for.', () => h.point('#tResult .result-card'));
+    await h.step('Next, the 10-key test, for accounting, payroll and banking jobs. Type each number on the number pad and press Enter. It is scored in keystrokes per hour.', async () => {
+      await h.click('.tab[data-tab=tenkey]'); await h.click('#kStart');
+      for (let i = 0; i < 4; i++) { const src = await page.evaluate(i => window.__typingForge.K.rows[i].src, i); await page.keyboard.type(src, { delay: 120 }); await page.keyboard.press('Enter'); }
+    });
+    await h.step('The data entry test gives you customer records to copy into a form, exactly as written, using Tab and Enter, like the Prove It tests.', async () => {
+      await h.click('.tab[data-tab=dataentry]'); await h.click('#dStart');
+      const rec = await page.evaluate(() => window.__typingForge.D.rec);
+      await page.keyboard.type(rec.name, { delay: 90 }); await page.keyboard.press('Tab'); await page.keyboard.type(rec.address, { delay: 90 });
+    });
+    await h.step('Transcription plays a recording, such as a medical note, a legal letter or an emergency call. Type what you hear, and every missed word is shown.', async () => { await h.click('.tab[data-tab=audio]'); await h.select('#aKind', 'medical'); });
+    await h.step('Clerical checking: are the two lines exactly the same? Press S or D as fast as you can. Wrong answers cost a point.', async () => {
+      await h.click('.tab[data-tab=clerical]'); await h.click('#cStart');
+      for (let i = 0; i < 5; i++) { const same = await page.evaluate(() => { const C = window.__typingForge.C; return C.items[C.i].same; }); await page.keyboard.press(same ? 's' : 'd'); await h.wait(500); }
+    });
+    await h.step('Proofreading: click every word with a mistake, then check your answers.', async () => {
+      await h.click('.tab[data-tab=proof]');
+      const errs = await page.evaluate(() => window.__typingForge.proof.toks.map((t, k) => t.err ? k : -1).filter(k => k >= 0).slice(0, 4));
+      for (const k of errs) await h.click('#pBox [data-k="' + k + '"]', { after: 250 });
+      await h.click('#pCheck');
+    });
+    await h.step('Learn to type teaches touch typing row by row, with a colour for each finger, and then drills your weakest keys.', async () => { await h.click('.tab[data-tab=learn]'); await h.point('#kb'); });
+    await h.step('Job requirements shows the speed and accuracy common jobs ask for, and ticks the ones your best results already meet.', async () => { await h.click('.tab[data-tab=jobs]'); await h.point('#jobTable'); });
+    await h.step('Finally, type your name and download a certificate of your result to attach to a job application.', async () => { await h.type('#certName', 'Amina Otieno'); await h.select('#certWhich', 'last-typing'); });
+    await h.sampleDownload('#certBtn', 'Typing certificate made in this video');
+    await h.wait(800);
+  }
+});
+
+S('passport-photo.html', {
+  title: 'Passport Photo Forge', subtitle: 'Free passport, visa and ID photos',
+  intro: 'Welcome to Passport Photo Forge. Make passport, visa and ID photos for your country, and print them cheaply on one 4 by 6 sheet. Your photo never leaves your device.',
+  async run(h, page) {
+    await h.step('First, choose your country and document. Here, a United States passport, 2 by 2 inches. The rules for that photo appear underneath.', async () => { await h.select('#preset', 'us'); await h.point('#spec'); });
+    await h.step('Then add a photo, or use the camera. Stand in front of a plain, light wall, with even light on your face.', () => h.upload('#file', 'passport-portrait.png'));
+    await h.skip('Finding the face', () => page.waitForFunction(() => { const s = document.querySelector('#status').textContent; return s && !/Opening|Finding/.test(s); }, null, { timeout: 90000 }));
+    await h.step('The face is found on your device, and the photo is sized and centred to the rules. The red lines show where the top of the head must be, the green line is the chin, and the blue band is where the eyes go.', () => h.point('#frame'));
+    await h.step('The checks tell you what is right and what still needs fixing: head height, eye height, centring, tilt, sharpness and background.', () => h.point('#checks'));
+    await h.step('If needed, drag the photo, change its size or tilt, or place the head by hand: click the top of the hair, then the chin.', async () => { await h.point('#zoom'); await page.fill('#zoom', '104'); await page.dispatchEvent('#zoom', 'input'); await h.wait(400); await page.fill('#zoom', '100'); await page.dispatchEvent('#zoom', 'input'); });
+    await h.step('Background not plain enough? Choose Make it plain. An AI model runs on your device and puts you on white, off-white or light grey.', () => h.select('#bgMode', 'ai'));
+    await h.skip('Making the background plain', () => page.waitForFunction(() => /Plain background|could not run/.test(document.querySelector('#status').textContent), null, { timeout: 180000 }));
+    await h.step('Download the 4 by 6 inch sheet and order it as a normal photo print at a pharmacy or photo kiosk. Six passport photos for the price of one print.', () => h.scroll('#downloads', 'center'));
+    await h.sampleDownload('#dlSheet', 'Passport photo sheet made in this video');
+    await h.step('There is also a single photo, an A4 sheet for your own printer, and a digital photo under the size limit for online forms.', () => h.point('#dlDigital'));
+    await h.wait(800);
+  }
+});
+
 S('theory-forge.html', {
   title: 'Theory Forge', subtitle: 'Learn music theory and use it on a real instrument',
   intro: 'Welcome to Theory Forge. Learn music theory one short lesson at a time, hear every idea, and use it straight away on piano, guitar, bass, ukulele, mandolin or violin.',

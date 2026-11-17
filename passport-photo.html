@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Free Passport Photo Maker — 2×2, 35×45 mm, Visa &amp; ID Photos — Passport Photo Forge | MigaBuilder</title>
+<meta name="description" content="Make passport, visa and ID photos for free: US 2×2 inch, UK, Schengen/EU 35×45 mm, Canada, India, China and more. Automatic face sizing, a plain background, checks against the rules and a free printable 4×6 sheet. Your photo never leaves your device.">
+<link rel="canonical" href="https://migabuilder.com/passport-photo.html">
+<meta property="og:image" content="https://videos.migabuilder.com/passport-photo.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Passport Photo Forge — free passport and visa photos | MigaBuilder">
+<meta property="og:description" content="Passport, visa and ID photos sized to each country's rules, with a free printable 4×6 sheet. Runs on your device.">
+<meta property="og:url" content="https://migabuilder.com/passport-photo.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How do I print passport photos cheaply?", "acceptedAnswer": {"@type": "Answer", "text": "Download the 4×6 inch (10×15 cm) sheet and order it as a normal photo print at a pharmacy, supermarket kiosk or online photo lab. It usually costs less than a dollar and gives you several passport photos to cut out. Print at 100% size, without cropping or fit-to-page."}}, {"@type": "Question", "name": "What size is a US passport photo?", "acceptedAnswer": {"@type": "Answer", "text": "2 × 2 inches (51 × 51 mm). The head, from chin to the top of the hair, must be 1 to 1 3/8 inches (25–35 mm), with the eyes 1 1/8 to 1 3/8 inches (28–35 mm) from the bottom, on a plain white or off-white background."}}, {"@type": "Question", "name": "What size is a UK, EU or Schengen visa photo?", "acceptedAnswer": {"@type": "Answer", "text": "35 × 45 mm. The head is usually 29–34 mm for UK passports and 32–36 mm for Schengen visas and most EU passports, on a plain light background."}}, {"@type": "Question", "name": "Is my photo uploaded?", "acceptedAnswer": {"@type": "Answer", "text": "No. Face detection and the plain background run in your browser. The models are downloaded once, but your photo never leaves your device."}}, {"@type": "Question", "name": "Will my photo be accepted?", "acceptedAnswer": {"@type": "Answer", "text": "The tool checks the size, head height, eye position, tilt, resolution and background, but the passport office decides. Use even light without shadows, a neutral expression with your mouth closed, both eyes open, no glasses where they are not allowed, and check the official rules for your country."}}]}</script>
+<style>
+main{max-width:1180px}
+.hidden{display:none!important}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:18px;align-items:start}
+.layout>*{min-width:0}
+.steps h3{font:700 16px 'Space Grotesk';margin:16px 0 8px}
+.steps h3:first-child{margin-top:0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row .field{margin:0;flex:1 1 140px}
+.spec{font-size:13px;line-height:1.5;background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;padding:8px 10px;margin-top:8px}
+.stage{position:relative;background:#c9d3dc;border-radius:6px;padding:16px;display:flex;justify-content:center}
+.stage .frame{position:relative;box-shadow:0 4px 18px rgba(0,0,0,.25);line-height:0;touch-action:none}
+.stage canvas{display:block;max-width:100%;height:auto}
+#guide{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+#guide.pick{cursor:crosshair}
+.stage .empty{color:#16202b;text-align:center;padding:60px 10px;font-size:15px;line-height:1.6}
+.adj{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;align-items:center;font-size:13px;margin-top:8px}
+.adj input[type=range]{width:100%}
+.checks{list-style:none;padding:0;margin:8px 0 0;font-size:13.5px}
+.checks li{padding:6px 8px;border-radius:4px;margin-bottom:4px;background:#fff;border-left:4px solid #bbb}
+.checks li.ok{border-color:var(--success)}.checks li.warn{border-color:var(--amber)}.checks li.bad{border-color:var(--error)}
+.dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:8px}
+.dl button{text-align:left;padding:12px;line-height:1.35}
+.dl button small{display:block;font-weight:400;font-size:12px;color:rgba(74,52,16,.85)}
+.dl button.secondary small{color:rgba(22,32,43,.7)}
+.cam{margin-top:8px}
+.cam video{width:100%;max-height:380px;background:#000;border-radius:4px;transform:scaleX(-1)}
+.tips{columns:2;font-size:13.5px;line-height:1.5;padding-left:18px}
+.tips li{margin-bottom:5px;break-inside:avoid}
+.legend{font-size:12px;color:var(--paper);margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.tips{columns:1}.stage-col{order:-1}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Passport Photo Forge</span></nav>
+<header class="masthead"><div><h1>Passport Photo Forge</h1><p>Make passport, visa and ID photos for free: pick your country, add a photo, and the face is sized and centred to the rules. Get a plain background, see what still needs fixing, and download a printable 4×6 sheet. Your photo never leaves this device.</p></div></header>
+<main>
+<div class="layout">
+  <section class="panel steps">
+    <h3>1. Which photo do you need?</h3>
+    <div class="field"><label for="preset">Country and document</label><select id="preset"></select></div>
+    <div class="row hidden" id="customRow">
+      <div class="field"><label for="cW">Width (mm)</label><input id="cW" type="number" value="35" min="15" max="120"></div>
+      <div class="field"><label for="cH">Height (mm)</label><input id="cH" type="number" value="45" min="15" max="120"></div>
+      <div class="field"><label for="cHead">Head height (mm)</label><input id="cHead" type="number" value="34" min="8" max="100"></div>
+    </div>
+    <div class="spec" id="spec"></div>
+
+    <h3>2. Add a photo</h3>
+    <div class="row">
+      <label class="primary" for="file" style="display:inline-block" tabindex="0" role="button" id="fileBtn">📷 Choose a photo</label>
+      <input id="file" type="file" accept="image/*" class="hidden">
+      <button class="secondary" id="camBtn">🎥 Use the camera</button>
+    </div>
+    <div class="cam hidden" id="cam"><video id="video" playsinline muted></video><div class="row" style="margin-top:6px"><button class="primary" id="snap">Take photo (in 3 s)</button><button class="secondary" id="camStop">Close camera</button><span id="camCount" style="font:700 22px 'Space Grotesk'"></span></div><p class="muted">Stand about 1 m from the camera, facing a window or lamp, in front of a plain light wall. Look straight at the lens.</p></div>
+    <p class="muted">Use a sharp photo taken straight on, with your whole head, neck and the top of your shoulders. A phone photo is fine — ask someone else to take it.</p>
+
+    <h3>3. Background</h3>
+    <div class="row">
+      <div class="field"><label for="bgMode">Background</label><select id="bgMode"><option value="keep">Keep my background</option><option value="ai">Make it plain (AI on this device)</option></select></div>
+      <div class="field"><label for="bgColor">Colour</label><select id="bgColor"><option value="#ffffff">White</option><option value="#f2f2f0">Off-white</option><option value="#e6e6e6">Light grey</option><option value="#f3ecdc">Cream</option><option value="#dbe8f5">Light blue</option></select></div>
+    </div>
+    <p class="muted" id="bgNote">Some countries, including the United States, do not accept digitally changed photos. If you can, take the photo in front of a plain white or light wall and keep your background.</p>
+
+    <h3>4. Fine-tune</h3>
+    <p class="muted" style="margin:0">Drag the photo to move it. The coloured lines show where the top of the head, the eyes and the chin must be.</p>
+    <div class="adj">
+      <label for="zoom">Size</label><input id="zoom" type="range" min="70" max="140" value="100"><span id="zoomV">100%</span>
+      <label for="rot">Tilt</label><input id="rot" type="range" min="-15" max="15" step="0.5" value="0"><span id="rotV">0°</span>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="secondary" id="autoBtn">✨ Auto-fit again</button>
+      <button class="secondary" id="pickBtn">👆 Place by hand</button>
+      <label style="font-size:13px;display:flex;gap:5px;align-items:center"><input type="checkbox" id="showGuides" checked> Show guides</label>
+    </div>
+    <p class="muted hidden" id="pickNote" style="font-weight:700;color:#7b281d"></p>
+  </section>
+
+  <section class="stage-col">
+    <div class="stage" id="stage">
+      <div class="empty" id="empty">🛂<br><b>Your passport photo appears here</b><br>Choose a photo or use the camera.</div>
+      <div class="frame hidden" id="frame"><canvas id="out"></canvas><canvas id="guide"></canvas></div>
+    </div>
+    <div class="legend"><span><i style="background:#d8604a"></i>top of head (range)</span><span><i style="background:#2f7a52"></i>chin</span><span><i style="background:#2b7bbd"></i>eye line (range)</span><span><i style="background:#999"></i>centre</span></div>
+    <div class="status" id="status" role="status"></div>
+    <div class="panel" style="margin-top:12px;padding:16px">
+      <h2 style="font-size:17px">Checks</h2>
+      <ul class="checks" id="checks"><li>Add a photo to see the checks.</li></ul>
+    </div>
+  </section>
+</div>
+
+<section class="panel" id="downloads">
+  <h2>5. Download and print</h2>
+  <p>The single photo and the sheets are saved at 300 dpi, so they print at the exact size. To print cheaply, order the 4×6 inch (10×15 cm) sheet as a normal photo print at a pharmacy, supermarket kiosk or online lab — choose <b>no cropping / 100% size</b> — then cut along the lines.</p>
+  <div class="dl">
+    <button class="primary" id="dlSheet" disabled>⬇ Print sheet 4×6 in (10×15 cm)<small id="sheetInfo">JPG for photo printing</small></button>
+    <button class="secondary" id="dlA4" disabled>⬇ Print sheet A4 / Letter<small>For your own printer — print at 100% (actual size)</small></button>
+    <button class="secondary" id="dlOne" disabled>⬇ Single photo (JPG)<small id="oneInfo">300 dpi</small></button>
+    <button class="secondary" id="dlDigital" disabled>⬇ Digital photo for online forms<small id="digInfo">Sized in pixels</small></button>
+  </div>
+  <div class="row" style="margin-top:10px"><div class="field" style="max-width:220px"><label for="maxKb">Digital file: keep under (KB)</label><input id="maxKb" type="number" min="10" max="5000"></div></div>
+</section>
+
+<section class="panel">
+  <h2>How to take a photo that gets accepted</h2>
+  <ul class="tips">
+    <li><b>Light:</b> face a window or a lamp so the light is even, with no shadows on your face or behind you.</li>
+    <li><b>Background:</b> stand about half a metre in front of a plain white or light wall.</li>
+    <li><b>Camera:</b> at eye level, about 1–1.5 m away. Ask someone else to take it — selfies distort the face.</li>
+    <li><b>Expression:</b> neutral, mouth closed, both eyes open and looking at the camera.</li>
+    <li><b>Head:</b> straight, not tilted. Hair away from your eyes; the whole face and ears' outline visible if your country asks for it.</li>
+    <li><b>Glasses:</b> take them off — the US, UK and many others no longer allow them.</li>
+    <li><b>Head coverings:</b> only for religious or medical reasons, with the face fully visible from chin to forehead.</li>
+    <li><b>Recent:</b> most countries need a photo taken in the last 6 months, unedited (no filters or beauty retouching).</li>
+    <li><b>Children and babies:</b> lay a baby on a white sheet and photograph from above; eyes may be closed for newborns in most countries.</li>
+    <li><b>Check the rules:</b> requirements change. The passport or visa office's own website always has the final word.</li>
+  </ul>
+</section>
+</main>
+<footer>Passport Photo Forge · MigaBuilder · Face detection and backgrounds run in your browser — your photo is never uploaded. Sizes are taken from official guidance, but always check the latest rules for your document.</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// w,h mm; head [min,max] mm chin→top of hair; eye [min,max] mm from bottom (optional); bg; digital [w,h] px and max KB
+const PRESETS=[
+ ['us','United States — passport & visa (2×2 in)',{w:50.8,h:50.8,head:[25.4,34.9],eye:[28.6,34.9],bg:'#ffffff',dig:[600,600],kb:240,note:'Plain white or off-white background. No glasses. The photo must not be digitally changed, so keep your own background if you can.'}],
+ ['uk','United Kingdom — passport (35×45 mm)',{w:35,h:45,head:[29,34],bg:'#e6e6e6',dig:[600,750],kb:10000,note:'Plain cream or light grey background. No glasses. Head 29–34 mm from chin to crown.'}],
+ ['schengen','Schengen visa / EU passports (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#f2f2f0',dig:[413,531],kb:10000,note:'ICAO standard used by most EU and Schengen countries: head 32–36 mm (70–80% of the photo), plain light background.'}],
+ ['ca','Canada — passport (50×70 mm)',{w:50,h:70,head:[31,36],bg:'#ffffff',dig:[420,540],kb:4000,note:'Plain white or light background. Head 31–36 mm from chin to crown. A photographer usually has to stamp the back — check the rules.'}],
+ ['au','Australia — passport (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#ffffff',dig:[413,531],kb:10000,note:'Plain white or light grey background, head 32–36 mm.'}],
+ ['in','India — passport & visa (2×2 in)',{w:50.8,h:50.8,head:[25.4,34.9],eye:[28.6,34.9],bg:'#ffffff',dig:[600,600],kb:1000,note:'Plain white background, face centred, head 25–35 mm. Some Indian offices ask for 35×45 mm — check your form.'}],
+ ['in45','India — 35×45 mm (passport office / other forms)',{w:35,h:45,head:[25,35],bg:'#ffffff',dig:[413,531],kb:1000,note:'Plain white background, face covering about 80% of the photo.'}],
+ ['cn','China — visa (33×48 mm)',{w:33,h:48,head:[28,33],bg:'#ffffff',dig:[354,472],kb:120,note:'White background, head 28–33 mm, ears and eyebrows visible.'}],
+ ['jp','Japan — passport (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#f2f2f0',dig:[413,531],kb:10000,note:'Plain light background, head 32–36 mm.'}],
+ ['ng','Nigeria — passport (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#ffffff',dig:[413,531],kb:10000,note:'White background, ears visible, no glasses.'}],
+ ['ph','Philippines — passport (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#ffffff',dig:[413,531],kb:10000,note:'White background, no glasses or contact lenses that change eye colour.'}],
+ ['za','South Africa — passport & ID (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#ffffff',dig:[413,531],kb:10000,note:'Plain white background, head 32–36 mm.'}],
+ ['icao','Other country — ICAO standard (35×45 mm)',{w:35,h:45,head:[32,36],bg:'#f2f2f0',dig:[413,531],kb:10000,note:'The international standard used by most countries. Check your country\'s rules for background colour.'}],
+ ['custom','Custom size (ID card, licence, school, work)',{w:35,h:45,head:[30,36],bg:'#ffffff',dig:[413,531],kb:10000,note:'Type the size you need. The head height is set to the number you give, with a little tolerance.'}]];
+const DPI=300,PPM=DPI/25.4;
+$('preset').innerHTML=PRESETS.map(([k,n])=>'<option value="'+k+'">'+esc(n)+'</option>').join('');
+let P=null;
+function preset(){const k=$('preset').value,p=Object.assign({},PRESETS.find(x=>x[0]===k)[2]);if(k==='custom'){p.w=+$('cW').value||35;p.h=+$('cH').value||45;const hd=+$('cHead').value||p.h*.75;p.head=[hd*.95,hd*1.05];p.dig=[Math.round(p.w*PPM),Math.round(p.h*PPM)]}return p}
+function applyPreset(keepBg){P=preset();$('customRow').classList.toggle('hidden',$('preset').value!=='custom');
+  const inch=v=>(v/25.4).toFixed(2).replace(/\.?0+$/,'');
+  $('spec').innerHTML='<b>'+(P.w===50.8?'2 × 2 in (51 × 51 mm)':P.w+' × '+P.h+' mm')+'</b> · head '+Math.round(P.head[0])+'–'+Math.round(P.head[1])+' mm'+(P.eye?' · eyes '+Math.round(P.eye[0])+'–'+Math.round(P.eye[1])+' mm from the bottom':'')+'<br>'+esc(P.note);
+  if(!keepBg){[...$('bgColor').options].forEach(o=>o.selected=o.value===P.bg)}$('maxKb').value=P.kb;
+  $('oneInfo').textContent=Math.round(P.w*PPM)+' × '+Math.round(P.h*PPM)+' px at 300 dpi';$('digInfo').textContent=P.dig[0]+' × '+P.dig[1]+' px'+(P.kb<10000?', under '+P.kb+' KB':'');
+  const s=sheetLayout(1800,1200);$('sheetInfo').textContent=s.n+' photos on one 4×6 print';
+  try{localStorage.setItem('passportForge.preset',$('preset').value)}catch(e){}
+  if(src){autoFit();}else draw()}
+$('preset').addEventListener('change',()=>applyPreset(false));['cW','cH','cHead'].forEach(id=>$(id).addEventListener('input',()=>applyPreset(true)));
+
+// ---------- state ----------
+let src=null,work=null,face=null,mask=null,manual=null;
+const T={s:1,rot:0,x:0,y:0,base:1};
+const out=$('out'),guide=$('guide');
+function note(s){$('status').textContent=s;$('status').classList.toggle('show',!!s)}
+
+// ---------- load ----------
+async function loadBlob(blob){note('Opening the photo…');let bmp;try{bmp=await createImageBitmap(blob,{imageOrientation:'from-image'})}catch(e){const url=URL.createObjectURL(blob);bmp=await new Promise((ok,no)=>{const i=new Image;i.onload=()=>ok(i);i.onerror=()=>no(new Error('This file is not a picture the browser can open. Try a JPG or PNG.'));i.src=url})}
+  const max=2400,k=Math.min(1,max/Math.max(bmp.width,bmp.height)),c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+  src=c;work=c;mask=null;face=null;manual=null;$('empty').classList.add('hidden');$('frame').classList.remove('hidden');['dlSheet','dlA4','dlOne','dlDigital'].forEach(id=>$(id).disabled=false);
+  setupCanvas();fallbackFit();draw();await findFace();if($('bgMode').value==='ai')await makePlain();autoFit()}
+$('file').addEventListener('change',e=>{const f=e.target.files[0];if(f)loadBlob(f).catch(err=>note(err.message||String(err)))});
+$('fileBtn').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click()}});
+
+// ---------- camera ----------
+let stream=null;
+$('camBtn').addEventListener('click',async()=>{try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:1920},height:{ideal:1080}},audio:false});$('video').srcObject=stream;await $('video').play();$('cam').classList.remove('hidden')}catch(e){note('The camera could not start ('+(e.message||e.name)+'). Allow camera access, or choose a photo instead.')}});
+function stopCam(){if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;$('cam').classList.add('hidden')}
+$('camStop').addEventListener('click',stopCam);
+$('snap').addEventListener('click',()=>{let n=3;$('camCount').textContent=n;const t=setInterval(()=>{n--;$('camCount').textContent=n||'';if(n>0)return;clearInterval(t);const v=$('video'),c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;const g=c.getContext('2d');g.translate(c.width,0);g.scale(-1,1);g.drawImage(v,0,0);stopCam();c.toBlob(b=>loadBlob(b),'image/jpeg',.95)},1000)});
+
+// ---------- face detection (face-api.js, on device) ----------
+let faceLib=null;
+function loadFaceLib(){if(faceLib)return faceLib;faceLib=new Promise((ok,no)=>{if(window.faceapi)return ok();const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/dist/face-api.min.js';s.onload=ok;s.onerror=()=>no(new Error('The face finder could not load. Check your connection, or place the head by hand.'));document.head.appendChild(s)}).then(async()=>{const M='https://cdn.jsdelivr.net/gh/justadudewhohacks/face-api.js@0.22.2/weights';await faceapi.nets.tinyFaceDetector.loadFromUri(M);await faceapi.nets.faceLandmark68Net.loadFromUri(M)});faceLib.catch(()=>{faceLib=null});return faceLib}
+async function findFace(){note('Finding the face (first time: downloading a small model)…');try{await loadFaceLib();const k=Math.min(1,900/Math.max(src.width,src.height)),c=document.createElement('canvas');c.width=Math.round(src.width*k);c.height=Math.round(src.height*k);c.getContext('2d').drawImage(src,0,0,c.width,c.height);
+    const dets=await faceapi.detectAllFaces(c,new faceapi.TinyFaceDetectorOptions({inputSize:512,scoreThreshold:.35})).withFaceLandmarks();
+    if(!dets.length){face=null;note('No face was found. Press “Place by hand” and click the top of the head, then the chin.');return}
+    const d=dets.sort((a,b)=>b.detection.box.area-a.detection.box.area)[0],pts=d.landmarks.positions.map(p=>({x:p.x/k,y:p.y/k})),avg=a=>({x:a.reduce((s,p)=>s+p.x,0)/a.length,y:a.reduce((s,p)=>s+p.y,0)/a.length});
+    const eL=avg(pts.slice(36,42)),eR=avg(pts.slice(42,48)),brow=Math.min(...pts.slice(17,27).map(p=>p.y)),chin=pts[8];
+    face={eL,eR,chin,brow,auto:true,count:dets.length};manual=null;note(dets.length>1?'More than one face was found — the biggest one is used. A passport photo must show only you.':'Face found. The photo is sized to the rules — check the list of checks.')}
+  catch(e){face=null;note((e.message||String(e))+' You can still press “Place by hand”.')}}
+// Head geometry in source pixels: eye midpoint, tilt, crown and chin.
+function geom(){if(manual){const mid={x:(manual.top.x+manual.chin.x)/2,y:manual.top.y+(manual.chin.y-manual.top.y)*.5};return{mid,angle:Math.atan2(manual.chin.x-manual.top.x,manual.chin.y-manual.top.y)*-1,crown:manual.top,chin:manual.chin,head:Math.hypot(manual.chin.x-manual.top.x,manual.chin.y-manual.top.y)}}
+  if(!face)return null;const mid={x:(face.eL.x+face.eR.x)/2,y:(face.eL.y+face.eR.y)/2},angle=Math.atan2(face.eR.y-face.eL.y,face.eR.x-face.eL.x);
+  const span=face.chin.y-face.brow;let crownY=face.brow-.78*span;
+  if(mask){const x0=Math.round(mid.x-span*.35),x1=Math.round(mid.x+span*.35),y0=Math.max(0,Math.round(face.brow-1.4*span));for(let y=y0;y<face.brow;y++){let hit=0;for(let x=Math.max(0,x0);x<Math.min(src.width,x1);x+=2)if(mask[y*src.width+x]>140)hit++;if(hit>(x1-x0)/2*.12){crownY=Math.min(crownY,y);break}}crownY=Math.max(crownY,face.brow-1.25*span)}
+  const crown={x:mid.x,y:crownY};return{mid,angle,crown,chin:face.chin,head:face.chin.y-crownY}}
+
+// ---------- fit ----------
+function setupCanvas(){out.width=Math.round(P.w*PPM);out.height=Math.round(P.h*PPM);guide.width=out.width;guide.height=out.height;const disp=Math.min(420,window.innerWidth-80);out.style.width=guide.style.width=disp+'px';out.parentElement.style.width=disp+'px'}
+function fallbackFit(){T.rot=0;T.s=Math.max(out.width/src.width,out.height/src.height);T.base=T.s;T.x=out.width/2;T.y=out.height/2;T.cx=src.width/2;T.cy=src.height/2;syncSliders()}
+function autoFit(){setupCanvas();const g=geom();if(!g){fallbackFit();draw();return}
+  const target=(P.head[0]+P.head[1])/2*PPM;T.rot=-g.angle;T.s=target/g.head;T.base=T.s;T.cx=g.mid.x;T.cy=g.mid.y;T.x=out.width/2;
+  const crownOff=(g.crown.y-g.mid.y)*T.s*Math.cos(g.angle);// negative: crown is above the eyes
+  if(P.eye&&!manual){T.y=out.height-(P.eye[0]+P.eye[1])/2*PPM;if(T.y+crownOff<1.5*PPM)T.y=1.5*PPM-crownOff}
+  else T.y=(out.height-target)*.42-crownOff;
+  syncSliders();draw()}
+function syncSliders(){$('zoom').value=Math.round(T.s/T.base*100);$('zoomV').textContent=$('zoom').value+'%';$('rot').value=(T.rot*180/Math.PI).toFixed(1);$('rotV').textContent=(+$('rot').value).toFixed(1)+'°'}
+$('zoom').addEventListener('input',()=>{T.s=T.base*$('zoom').value/100;$('zoomV').textContent=$('zoom').value+'%';draw()});
+$('rot').addEventListener('input',()=>{T.rot=$('rot').value*Math.PI/180;$('rotV').textContent=(+$('rot').value).toFixed(1)+'°';draw()});
+$('autoBtn').addEventListener('click',()=>{if(src)autoFit()});
+
+// ---------- drawing ----------
+function bg(){return $('bgColor').value}
+function render(ctx,W,H){const k=W/out.width;ctx.fillStyle=bg();ctx.fillRect(0,0,W,H);if(!work)return;ctx.save();ctx.imageSmoothingQuality='high';ctx.translate(T.x*k,T.y*k);ctx.rotate(T.rot);ctx.scale(T.s*k,T.s*k);ctx.drawImage(work,-T.cx,-T.cy);ctx.restore()}
+function toOut(p){const dx=(p.x-T.cx)*T.s,dy=(p.y-T.cy)*T.s,c=Math.cos(T.rot),s=Math.sin(T.rot);return{x:T.x+dx*c-dy*s,y:T.y+dx*s+dy*c}}
+function toSrc(p){const dx=p.x-T.x,dy=p.y-T.y,c=Math.cos(-T.rot),s=Math.sin(-T.rot);return{x:T.cx+(dx*c-dy*s)/T.s,y:T.cy+(dx*s+dy*c)/T.s}}
+function draw(){if(!P)return;const ctx=out.getContext('2d');render(ctx,out.width,out.height);drawGuides();runChecks()}
+function drawGuides(){const g=guide.getContext('2d'),W=guide.width,H=guide.height;g.clearRect(0,0,W,H);if(!$('showGuides').checked||!src)return;const lw=Math.max(2,W/200);g.lineWidth=lw;g.setLineDash([lw*4,lw*3]);
+  const line=(y,c)=>{g.strokeStyle=c;g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()};
+  g.strokeStyle='rgba(120,120,120,.8)';g.beginPath();g.moveTo(W/2,0);g.lineTo(W/2,H);g.stroke();
+  const geo=geom();let chinY=H*.85;if(geo){chinY=toOut(geo.chin).y}else{chinY=H-(H-(P.head[1]*PPM))*.5}
+  g.fillStyle='rgba(216,96,74,.18)';g.fillRect(0,chinY-P.head[1]*PPM,W,(P.head[1]-P.head[0])*PPM);line(chinY-P.head[0]*PPM,'#d8604a');line(chinY-P.head[1]*PPM,'#d8604a');line(chinY,'#2f7a52');
+  if(P.eye){g.fillStyle='rgba(43,123,189,.15)';g.fillRect(0,H-P.eye[1]*PPM,W,(P.eye[1]-P.eye[0])*PPM);line(H-P.eye[0]*PPM,'#2b7bbd');line(H-P.eye[1]*PPM,'#2b7bbd')}
+  g.setLineDash([]);if(geo){const m=toOut(geo.mid),c=toOut(geo.crown);g.fillStyle='#2b7bbd';g.beginPath();g.arc(m.x,m.y,lw*2,0,7);g.fill();g.fillStyle='#d8604a';g.beginPath();g.arc(c.x,c.y,lw*2,0,7);g.fill()}
+  if(picking){g.fillStyle='rgba(8,24,38,.55)';g.fillRect(0,0,W,H*.11);g.fillStyle='#fff';g.font='700 '+Math.round(W/20)+'px IBM Plex Sans,Arial';g.textAlign='center';g.fillText(picking.step===0?'Click the TOP of the head (hair)':'Now click the CHIN',W/2,H*.075)}}
+$('showGuides').addEventListener('change',drawGuides);
+$('bgColor').addEventListener('change',async()=>{if(mask)await makePlain();draw()});
+$('bgMode').addEventListener('change',async()=>{if(!src)return;if($('bgMode').value==='ai'){await makePlain();autoFit()}else{work=src;draw()}});
+
+// ---------- plain background (MODNet portrait model, Transformers.js, on device) ----------
+let tf=null,seg=null;
+async function makePlain(){if(!src)return;try{if(!mask){note('Loading the background model (first time only, about 7 MB)…');tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+    seg=seg||await tf.pipeline('background-removal','Xenova/modnet',{device:'wasm',dtype:'q8',progress_callback:x=>{if(x.status==='progress'&&x.total>1e6)note('Downloading the background model (first time only): '+Math.round(x.progress)+'%')}});
+    note('Separating you from the background…');const res=await seg(tf.RawImage.fromCanvas(src)),img=Array.isArray(res)?res[0]:res,oc=img.toCanvas(),c=document.createElement('canvas');c.width=src.width;c.height=src.height;c.getContext('2d').drawImage(oc,0,0,c.width,c.height);const px=c.getContext('2d').getImageData(0,0,c.width,c.height).data;mask=new Uint8ClampedArray(px.length/4);for(let i=0;i<mask.length;i++)mask[i]=px[i*4+3]}
+  const c=document.createElement('canvas');c.width=src.width;c.height=src.height;const g=c.getContext('2d');g.drawImage(src,0,0);const id=g.getImageData(0,0,c.width,c.height),d=id.data,h=bg(),b=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+  // Firm up the soft edge so faint traces of the old background disappear, while hair stays smooth.
+  for(let i=0,p=0;i<d.length;i+=4,p++){const a=Math.min(1,Math.max(0,(mask[p]/255-.22)/.56));if(a>=.99)continue;for(let k=0;k<3;k++)d[i+k]=Math.round(d[i+k]*a+b[k]*(1-a))}g.putImageData(id,0,0);work=c;note('Plain background made on this device — nothing was uploaded. Check the edges around your hair.')}
+  catch(e){note('The background model could not run here ('+(e.message||e)+'). Keep your own background, or try another browser.');$('bgMode').value='keep';work=src}}
+
+// ---------- dragging and placing by hand ----------
+let drag=null,picking=null;
+function evPt(e){const r=guide.getBoundingClientRect();return{x:(e.clientX-r.left)*guide.width/r.width,y:(e.clientY-r.top)*guide.height/r.height}}
+guide.addEventListener('pointerdown',e=>{if(!src)return;const p=evPt(e);if(picking){const sp=toSrc(p);if(picking.step===0){picking.top=sp;picking.step=1;drawGuides()}else{manual={top:picking.top,chin:sp};picking=null;guide.classList.remove('pick');$('pickNote').classList.add('hidden');note('Head placed by hand.');autoFit()}return}
+  drag={p,x:T.x,y:T.y};guide.setPointerCapture(e.pointerId);guide.style.cursor='grabbing'});
+guide.addEventListener('pointermove',e=>{if(!drag)return;const p=evPt(e);T.x=drag.x+p.x-drag.p.x;T.y=drag.y+p.y-drag.p.y;draw()});
+guide.addEventListener('pointerup',()=>{drag=null;guide.style.cursor=''});
+guide.addEventListener('wheel',e=>{if(!src)return;e.preventDefault();const z=Math.max(70,Math.min(140,+$('zoom').value-Math.sign(e.deltaY)*2));$('zoom').value=z;$('zoom').dispatchEvent(new Event('input'))},{passive:false});
+$('pickBtn').addEventListener('click',()=>{if(!src)return note('Add a photo first.');manual=null;picking={step:0};guide.classList.add('pick');$('pickNote').textContent='Click the top of the head (top of the hair), then the chin, on the photo.';$('pickNote').classList.remove('hidden');fallbackFit();T.s=T.base;draw();$('frame').scrollIntoView({block:'nearest',behavior:'smooth'})});
+document.addEventListener('keydown',e=>{if(!src||e.target.matches('input,select,textarea'))return;const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(m){e.preventDefault();T.x+=m[0]*4;T.y+=m[1]*4;draw()}});
+
+// ---------- checks ----------
+let lastChecks=[];
+function runChecks(){if(!src){return}const L=[],add=(lvl,txt)=>L.push([lvl,txt]),geo=geom();
+  if(face&&!manual)add('ok','Face found automatically'+(face.count>1?' — but more than one face is in the photo':''));else if(manual)add('ok','Head placed by hand');else add('bad','No face found yet — press “Place by hand” and click the top of the head and the chin');
+  if(geo){const top=toOut(geo.crown),chin=toOut(geo.chin),head=Math.hypot(chin.x-top.x,chin.y-top.y)/PPM,ok=head>=P.head[0]-.3&&head<=P.head[1]+.3;add(ok?'ok':'bad','Head height '+head.toFixed(1)+' mm (needs '+Math.round(P.head[0])+'–'+Math.round(P.head[1])+' mm)'+(ok?'':' — use the Size slider'));
+    if(top.y<.8*PPM)add('bad','The top of the head is too close to the edge — drag the photo down');else add('ok','Space above the head');
+    if(chin.y>out.height-1.5*PPM)add('bad','The chin is too low — drag the photo up');
+    if(P.eye){const m=toOut(geo.mid),e=(out.height-m.y)/PPM,okE=e>=P.eye[0]-.3&&e<=P.eye[1]+.3;add(okE?'ok':'bad','Eyes '+e.toFixed(1)+' mm from the bottom (needs '+Math.round(P.eye[0])+'–'+Math.round(P.eye[1])+' mm)')}
+    const m=toOut(geo.mid),off=Math.abs(m.x-out.width/2)/PPM;add(off<1.5?'ok':'warn',off<1.5?'Face centred':'Face is '+off.toFixed(1)+' mm off centre — drag it to the middle line');
+    if(face&&!manual){const tilt=Math.abs((geo.angle+T.rot)*180/Math.PI);add(tilt<2?'ok':'warn',tilt<2?'Head straight (eyes level)':'Head tilted '+tilt.toFixed(1)+'° — press Auto-fit or use the Tilt slider')}}
+  const cov=[[0,0],[out.width,0],[0,out.height],[out.width,out.height]].every(([x,y])=>{const p=toSrc({x,y});return p.x>=-1&&p.y>=-1&&p.x<=work.width+1&&p.y<=work.height+1});add(cov?'ok':'bad',cov?'Photo fills the whole frame':'The photo does not fill the frame — drag it, or use a photo with more space around the head and shoulders');
+  const dpi=Math.round(DPI/Math.max(T.s,.01));add(T.s<=1.15?'ok':T.s<=1.6?'warn':'bad',T.s<=1.15?'Sharp enough to print (about '+Math.min(dpi,600)+' dpi)':'Low resolution (about '+dpi+' dpi) — it may print blurry. Use a sharper or closer photo.');
+  // background: top corners of the finished photo
+  const ctx=out.getContext('2d'),w=Math.round(out.width*.18),h=Math.round(out.height*.14),vals=[];let sat=0;[[0,0],[out.width-w,0]].forEach(([x,y])=>{const d=ctx.getImageData(x,y,w,h).data;for(let i=0;i<d.length;i+=16){vals.push(.299*d[i]+.587*d[i+1]+.114*d[i+2]);sat+=Math.max(d[i],d[i+1],d[i+2])-Math.min(d[i],d[i+1],d[i+2])}});sat/=vals.length;
+  const mean=vals.reduce((a,b)=>a+b,0)/vals.length,sd=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)*(b-mean),0)/vals.length);
+  if(mean>=195&&sd<16&&sat<=30)add('ok','Background plain and light');else if(mean>=195&&sd<16)add(work!==src&&bg()==='#dbe8f5'?'ok':'warn',work!==src&&bg()==='#dbe8f5'?'Light blue background (only where your country asks for it)':'Background is coloured — most countries need white, off-white or light grey. Choose “Make it plain”.');else add(mean>=170&&sd<28?'warn':'bad','Background '+(mean<170?'too dark':'not plain')+' — choose “Make it plain”, or retake against a light wall');
+  if(work!==src&&P===PRESETS[0][2])add('warn','The US does not accept digitally changed photos — the original background is safer if it is plain');
+  lastChecks=L;$('checks').innerHTML=L.map(([l,t])=>'<li class="'+l+'">'+(l==='ok'?'✅ ':l==='warn'?'⚠️ ':'❌ ')+esc(t)+'</li>').join('')+'<li>ℹ️ You check: neutral face, mouth closed, eyes open, no glasses, even light with no shadows.</li>'}
+
+// ---------- exports ----------
+function photoCanvas(W,H){const c=document.createElement('canvas');c.width=W;c.height=H;render(c.getContext('2d'),W,H);return c}
+function sheetLayout(W,H){const pw=Math.round(P.w*PPM),ph=Math.round(P.h*PPM);const fit=(gap,m,cap)=>{const cols=Math.max(0,Math.floor((W-2*m+gap)/(pw+gap))),rows=Math.max(0,Math.floor((H-2*m-cap+gap)/(ph+gap)));return{pw,ph,gap,cols,rows,n:cols*rows,cap}};
+  // Prefer cutting space and a caption; if that costs photos, pack them edge to edge like a photo-shop sheet.
+  const roomy=fit(Math.round(3*PPM),Math.round(4*PPM),50),tight=fit(0,0,0);return tight.n>roomy.n?tight:roomy}
+function sheet(W,H){const L=sheetLayout(W,H),c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,W,H);const one=photoCanvas(L.pw,L.ph),tw=L.cols*L.pw+(L.cols-1)*L.gap,th=L.rows*L.ph+(L.rows-1)*L.gap,x0=Math.round((W-tw)/2),y0=Math.round((H-L.cap-th)/2);
+  g.strokeStyle='#9aa4ad';g.lineWidth=2;g.setLineDash([10,8]);for(let r=0;r<L.rows;r++)for(let k=0;k<L.cols;k++){const x=x0+k*(L.pw+L.gap),y=y0+r*(L.ph+L.gap);g.drawImage(one,x,y);g.strokeRect(x+.5,y+.5,L.pw-1,L.ph-1)}
+  g.setLineDash([]);if(L.cap)g.fillStyle='#555',g.font='26px Arial',g.textAlign='center',g.fillText((P.w===50.8?'2 × 2 in':P.w+' × '+P.h+' mm')+' · print at 100% size (300 dpi) and cut along the dashed lines · migabuilder.com',W/2,H-24);return c}
+// Write 300 dpi into the JPEG (JFIF) header so printers keep the real size.
+async function jpeg(c,q){const b=await new Promise(r=>c.toBlob(r,'image/jpeg',q||.95)),a=new Uint8Array(await b.arrayBuffer());if(a[2]===0xFF&&a[3]===0xE0&&a[6]===0x4A&&a[7]===0x46){a[13]=1;a[14]=DPI>>8;a[15]=DPI&255;a[16]=DPI>>8;a[17]=DPI&255}return new Blob([a],{type:'image/jpeg'})}
+function save(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
+const slug=()=>$('preset').value;
+$('dlOne').addEventListener('click',async()=>save('passport-photo-'+slug()+'.jpg',await jpeg(photoCanvas(Math.round(P.w*PPM),Math.round(P.h*PPM)))));
+$('dlSheet').addEventListener('click',async()=>save('passport-photos-4x6-'+slug()+'.jpg',await jpeg(sheet(1800,1200))));
+$('dlA4').addEventListener('click',async()=>{const L=sheetLayout(2480,3300),pl=L.n<2?sheet(2480,3508):sheet(2480,3300);save('passport-photos-a4-letter-'+slug()+'.jpg',await jpeg(pl))});
+$('dlDigital').addEventListener('click',async()=>{const [w,h]=P.dig,maxKb=+$('maxKb').value||P.kb,c=photoCanvas(w,h);let q=.95,b=await jpeg(c,q);while(b.size>maxKb*1024&&q>.3){q-=.07;b=await jpeg(c,q)}save('passport-photo-digital-'+slug()+'.jpg',b);note('Digital photo: '+w+' × '+h+' px, '+Math.round(b.size/1024)+' KB'+(b.size>maxKb*1024?' — still over '+maxKb+' KB':'')+'.')});
+
+// ---------- start ----------
+try{const k=localStorage.getItem('passportForge.preset');if(k&&PRESETS.some(p=>p[0]===k))$('preset').value=k}catch(e){}
+applyPreset(false);
+addEventListener('resize',()=>{if(src){const w=Math.min(420,window.innerWidth-80);out.style.width=guide.style.width=w+'px';out.parentElement.style.width=w+'px'}});
+window.__passport={loadBlob,setManual(top,chin){manual={top,chin};autoFit()},get T(){return T},get face(){return face},get checks(){return lastChecks},geom,toOut,autoFit,sheetLayout,get P(){return P}};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

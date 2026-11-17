@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Typing Test, 10-Key &amp; Data Entry Tests for Jobs — Typing Forge | MigaBuilder</title>
+<meta name="description" content="Free typing speed test (WPM and accuracy) with a certificate, plus the tests employers use: 10-key (KPH), alphanumeric data entry, audio transcription, clerical checking and proofreading. Touch-typing lessons and the speeds jobs ask for. No signup.">
+<link rel="canonical" href="https://migabuilder.com/typing-test.html">
+<meta property="og:image" content="https://videos.migabuilder.com/typing-test.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Typing Forge — typing test and job skills tests | MigaBuilder">
+<meta property="og:description" content="Typing speed test with a certificate, 10-key, data entry, transcription, clerical checking and proofreading practice tests for jobs.">
+<meta property="og:url" content="https://migabuilder.com/typing-test.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How is typing speed (WPM) calculated?", "acceptedAnswer": {"@type": "Answer", "text": "Every 5 characters you type, spaces included, count as one word. Gross WPM is all you typed divided by the minutes. Net WPM takes off one word per minute for each mistake you leave uncorrected. Accuracy counts every keystroke, including mistakes you fixed."}}, {"@type": "Question", "name": "What typing speed do I need for a job?", "acceptedAnswer": {"@type": "Answer", "text": "Typical requirements are about 35–50 WPM for customer service, reception and 911 dispatch, 40–60 WPM for data entry and admin, 60–90 WPM for legal secretaries and 65–90 WPM for transcription, usually with 95% accuracy or more. Data entry jobs often ask for 8,000–10,000 keystrokes per hour (KPH). The job posting always has the final word."}}, {"@type": "Question", "name": "What is a 10-key test?", "acceptedAnswer": {"@type": "Answer", "text": "A 10-key test measures how fast and accurately you type numbers on the number pad. It is scored in keystrokes per hour (KPH). Accounting, payroll, banking and data entry jobs often ask for 8,000–12,000 KPH."}}, {"@type": "Question", "name": "Can I get a typing certificate?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. After a typing, 10-key or data entry test you can download a certificate with your name, speed, accuracy, test length and date. It is a self-taken practice result, so some employers will still ask you to take their own test."}}, {"@type": "Question", "name": "Is my typing sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. All tests run in your browser and your results are only saved on this device."}}]}</script>
+<style>
+main{max-width:1180px}
+.hidden{display:none!important}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.tab{border:1px solid rgba(111,209,224,.35);background:rgba(8,24,38,.7);color:var(--paper);border-radius:999px;padding:8px 13px;cursor:pointer;font:600 13px 'IBM Plex Sans',sans-serif}
+.tab:hover{border-color:var(--cyan)}.tab[aria-selected=true]{background:var(--amber);color:#3b2a0b;border-color:var(--amber)}
+.opts{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin:6px 0 12px}
+.opts .field{margin:0;min-width:150px}
+.opts label.ck{display:flex;gap:6px;align-items:center;font-size:13px;padding-bottom:10px}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.stat{background:#fff;border:1px solid rgba(22,32,43,.14);border-radius:4px;padding:8px 12px;min-width:96px}
+.stat b{display:block;font:700 24px 'Space Grotesk';line-height:1.1}.stat small{font-size:11.5px!important}
+.source{font:400 19px/1.7 'IBM Plex Mono',monospace;background:#fff;border:1px solid rgba(22,32,43,.16);border-radius:4px;padding:12px 14px;height:150px;overflow:hidden;white-space:pre-wrap;word-break:break-word;user-select:none}
+.source span.ok{color:#2f7a52}.source span.bad{color:#fff;background:#d8604a;border-radius:2px}.source span.cur{border-left:2px solid #e2a63b;margin-left:-2px;background:rgba(226,166,59,.22)}
+.source span.todo{color:#16202b}
+.typebox{width:100%;margin-top:8px;padding:12px;font:400 17px/1.5 'IBM Plex Mono',monospace;border:2px solid rgba(22,32,43,.25);border-radius:4px;min-height:84px;resize:vertical;background:#fffdf6;color:var(--ink)}
+.typebox:focus{border-color:var(--amber);outline:none}
+.result-card{background:#fff;border:2px solid var(--success);border-radius:6px;padding:14px;margin-top:12px}
+.result-card h3{margin:0 0 6px;font:700 18px 'Space Grotesk'}
+.verdict{font-size:14px;line-height:1.55}
+.sheet{width:100%;border-collapse:collapse;font:400 15px 'IBM Plex Mono',monospace;background:#fff}
+.sheet td,.sheet th{border:1px solid rgba(22,32,43,.18);padding:5px 8px;text-align:right}
+.sheet th{background:#eef3f7;font:600 12px 'IBM Plex Sans';text-align:center}
+.sheet tr.now td{background:#fff6df}.sheet tr.right td:last-child{color:#2f7a52}.sheet tr.wrong td:last-child{color:#b3412e;text-decoration:line-through}
+.sheet input{width:100%;font:inherit;text-align:right;border:2px solid var(--amber);padding:3px 6px;border-radius:3px}
+.sheetwrap{max-height:330px;overflow:auto;border:1px solid rgba(22,32,43,.18)}
+.de{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:14px;align-items:start}
+.record{background:#fffdf3;border:1px solid #d9cfae;border-radius:4px;padding:12px 14px;font:400 15px/1.75 'IBM Plex Mono',monospace;box-shadow:2px 2px 0 rgba(0,0,0,.08)}
+.record b{display:inline-block;min-width:118px;font:600 12px 'IBM Plex Sans';color:rgba(22,32,43,.65)}
+.deform .field{margin-bottom:7px}.deform input{font-family:'IBM Plex Mono',monospace}
+.pairs{display:grid;gap:6px}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:8px;align-items:center;background:#fff;border:1px solid rgba(22,32,43,.13);border-radius:4px;padding:8px 10px;font:400 15px 'IBM Plex Mono',monospace}
+.pair.now{border-color:var(--amber);box-shadow:0 0 0 2px rgba(226,166,59,.35)}
+.pair .btns{display:flex;gap:6px}.pair button{padding:7px 10px;min-width:44px}
+.pair.r-ok{background:#eaf6ef}.pair.r-bad{background:#fbe9e5}
+.proof{background:#fff;border:1px solid rgba(22,32,43,.16);border-radius:4px;padding:14px;font-size:17px;line-height:2}
+.proof .w{cursor:pointer;border-radius:3px;padding:1px 2px}.proof .w:hover{background:#eef3f7}
+.proof .w.mark{background:#ffe2a8;outline:1px solid #e2a63b}
+.proof .w.found{background:#cdebd8}.proof .w.miss{background:#f6c9bf}.proof .w.false{background:#e7e2f5;text-decoration:line-through}
+.proof sup{font-size:11px;color:#2f7a52;font-weight:700}
+.kb{display:grid;gap:5px;margin:10px 0;user-select:none}
+.kb .row{display:flex;gap:5px;justify-content:center}
+.kb .k{min-width:38px;height:38px;border-radius:5px;display:flex;align-items:center;justify-content:center;font:600 14px 'IBM Plex Mono';color:#16202b;border:1px solid rgba(0,0,0,.18)}
+.kb .k.next{outline:3px solid #16202b;transform:translateY(-2px)}
+.kb .k.weak{box-shadow:inset 0 -4px 0 #d8604a}
+.f0{background:#f6c9bf}.f1{background:#ffe2a8}.f2{background:#cdebd8}.f3{background:#cfe3f5}.f4{background:#e7e2f5}.f5{background:#eee}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:12px}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.jobs{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
+.jobs th,.jobs td{padding:8px;border-bottom:1px solid rgba(22,32,43,.12);text-align:left;vertical-align:top}
+.jobs th{font:600 12px 'IBM Plex Sans';background:#eef3f7}
+.yes{color:#2f7a52;font-weight:700}.no{color:#b3412e;font-weight:700}.na{color:rgba(22,32,43,.55)}
+.tablewrap{overflow-x:auto}
+.history{font-size:13px}
+.audio-ctl{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.diffout{background:#fff;border:1px solid rgba(22,32,43,.16);padding:12px;line-height:1.9;font-size:15px}
+.diffout .miss{background:#f6c9bf;text-decoration:line-through}.diffout .extra{background:#ffe2a8}
+.lessons{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.lessons button{padding:7px 11px}
+.lessons button.done::after{content:' ✓';color:#2f7a52}
+.countdown{font:700 30px 'Space Grotesk';color:var(--ink)}
+@media(max-width:760px){.de{grid-template-columns:1fr}.source{font-size:16px;height:140px}.pair{grid-template-columns:1fr}.kb .k{min-width:24px;height:32px;font-size:12px}}
+</style>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Typing Forge</span></nav>
+<header class="masthead"><div><h1>Typing Forge</h1><p>Typing speed test with a certificate, and practice for the skills tests employers set: 10-key, data entry, audio transcription, clerical checking and proofreading. Learn to touch-type and see what speed each job asks for.</p></div></header>
+<main>
+<div class="tabs" role="tablist" aria-label="Tests">
+  <button class="tab" role="tab" data-tab="typing" aria-selected="true">⌨️ Typing test</button>
+  <button class="tab" role="tab" data-tab="tenkey" aria-selected="false">🔢 10-key</button>
+  <button class="tab" role="tab" data-tab="dataentry" aria-selected="false">🗂️ Data entry</button>
+  <button class="tab" role="tab" data-tab="audio" aria-selected="false">🎧 Transcription</button>
+  <button class="tab" role="tab" data-tab="clerical" aria-selected="false">🔍 Clerical checking</button>
+  <button class="tab" role="tab" data-tab="proof" aria-selected="false">✏️ Proofreading</button>
+  <button class="tab" role="tab" data-tab="learn" aria-selected="false">🎓 Learn to type</button>
+  <button class="tab" role="tab" data-tab="jobs" aria-selected="false">💼 Job requirements</button>
+</div>
+
+<!-- ============ TYPING TEST ============ -->
+<section class="panel" id="p-typing">
+  <h2>Typing speed test</h2>
+  <p>Type the text in the box below. The timer starts with your first key. Gross WPM counts everything you type (5 characters = 1 word); net WPM takes off your uncorrected mistakes, which is what most employers use.</p>
+  <div class="opts">
+    <div class="field"><label for="tDur">Length</label><select id="tDur"><option value="30">30 seconds</option><option value="60" selected>1 minute</option><option value="120">2 minutes</option><option value="180">3 minutes</option><option value="300">5 minutes</option></select></div>
+    <div class="field"><label for="tText">Text</label><select id="tText"><option value="words">Common words</option><option value="prose" selected>Paragraphs</option><option value="business">Business &amp; email</option><option value="numbers">Numbers &amp; symbols</option><option value="custom">My own text</option></select></div>
+    <label class="ck"><input type="checkbox" id="tBack" checked> Allow Backspace</label>
+    <button class="secondary" id="tRestart">↻ New test</button>
+  </div>
+  <div class="field hidden" id="tCustomWrap"><label for="tCustom">Paste the text you want to practise (for example from a job posting's sample test)</label><textarea id="tCustom" placeholder="Paste text here, then press New test."></textarea></div>
+  <div class="stats">
+    <div class="stat"><b id="tTime">1:00</b><small>time left</small></div>
+    <div class="stat"><b id="tWpm">0</b><small>net WPM</small></div>
+    <div class="stat"><b id="tAcc">100%</b><small>accuracy</small></div>
+    <div class="stat"><b id="tErr">0</b><small>mistakes</small></div>
+  </div>
+  <div class="source" id="tSource" aria-label="Text to type"></div>
+  <textarea class="typebox" id="tInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Start typing here…" aria-label="Type the text here"></textarea>
+  <div id="tResult"></div>
+  <p class="muted">Copy and paste is turned off in the box, as in real tests. Results are only saved in this browser.</p>
+</section>
+
+<!-- ============ 10-KEY ============ -->
+<section class="panel hidden" id="p-tenkey">
+  <h2>10-key test (number pad)</h2>
+  <p>Used for accounting, payroll, banking and data entry jobs. Type each number using the number pad, then press <b>Enter</b>, <b>+</b> or <b>Tab</b> for the next one. Scored in keystrokes per hour (KPH): every digit, point and Enter of a correct entry counts.</p>
+  <div class="opts">
+    <div class="field"><label for="kDur">Length</label><select id="kDur"><option value="60">1 minute</option><option value="180" selected>3 minutes</option><option value="300">5 minutes</option></select></div>
+    <div class="field"><label for="kKind">Numbers</label><select id="kKind"><option value="int">Whole numbers</option><option value="dec">Money with decimals</option><option value="mix">Mixed lengths</option></select></div>
+    <button class="primary" id="kStart">Start 10-key test</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="kTime">3:00</b><small>time left</small></div>
+    <div class="stat"><b id="kKph">0</b><small>KPH</small></div>
+    <div class="stat"><b id="kAcc">100%</b><small>accuracy</small></div>
+    <div class="stat"><b id="kDone">0</b><small>entries</small></div>
+  </div>
+  <div class="sheetwrap"><table class="sheet" id="kSheet"><thead><tr><th>#</th><th>Source</th><th>You typed</th></tr></thead><tbody></tbody></table></div>
+  <div id="kResult"></div>
+</section>
+
+<!-- ============ DATA ENTRY ============ -->
+<section class="panel hidden" id="p-dataentry">
+  <h2>Alphanumeric data entry test</h2>
+  <p>Copy each customer record into the form, exactly as written. Press <b>Tab</b> to move between fields and <b>Enter</b> to save the record. Scored in KPH (correct characters per hour) and accuracy per field, like Prove It / Kenexa-style tests.</p>
+  <div class="opts">
+    <div class="field"><label for="dDur">Length</label><select id="dDur"><option value="120">2 minutes</option><option value="300" selected>5 minutes</option><option value="600">10 minutes</option></select></div>
+    <button class="primary" id="dStart">Start data entry test</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="dTime">5:00</b><small>time left</small></div>
+    <div class="stat"><b id="dKph">0</b><small>KPH</small></div>
+    <div class="stat"><b id="dAcc">100%</b><small>field accuracy</small></div>
+    <div class="stat"><b id="dDone">0</b><small>records</small></div>
+  </div>
+  <div class="de">
+    <div class="record" id="dRecord"><span class="muted">Press Start to see the first record.</span></div>
+    <form class="deform" id="dForm" autocomplete="off"></form>
+  </div>
+  <div id="dResult"></div>
+</section>
+
+<!-- ============ AUDIO TRANSCRIPTION ============ -->
+<section class="panel hidden" id="p-audio">
+  <h2>Audio transcription test</h2>
+  <p>For transcriptionist, captioning, medical scribe, legal and dispatcher jobs. Listen and type what you hear. Use <b>Ctrl + Space</b> to pause or play, and <b>Ctrl + ←</b> to hear the last sentence again. The voice is your device's own speech voice.</p>
+  <div class="opts">
+    <div class="field"><label for="aKind">Recording</label><select id="aKind"><option value="general">General dictation</option><option value="medical">Medical note</option><option value="legal">Legal letter</option><option value="call">Emergency call</option><option value="office">Office memo</option></select></div>
+    <div class="field"><label for="aRate">Speaking speed</label><select id="aRate"><option value="0.75">Slow</option><option value="0.9" selected>Normal</option><option value="1.1">Fast</option><option value="1.3">Very fast</option></select></div>
+  </div>
+  <div class="audio-ctl">
+    <button class="primary" id="aPlay">▶ Play</button><button class="secondary" id="aBack">⟲ Last sentence</button><span class="muted" id="aPos"></span>
+  </div>
+  <textarea class="typebox" id="aInput" autocomplete="off" spellcheck="false" placeholder="Type what you hear…" aria-label="Your transcript"></textarea>
+  <div class="actions" style="margin-top:8px"><button class="primary" id="aCheck">Check my transcript</button><button class="secondary" id="aShow">Show the script</button></div>
+  <div id="aResult"></div>
+</section>
+
+<!-- ============ CLERICAL ============ -->
+<section class="panel hidden" id="p-clerical">
+  <h2>Clerical checking test</h2>
+  <p>Common in government, civil service, bank, post office and admin tests. Compare each pair: are they exactly the <b>same</b> or <b>different</b>? Press <b>S</b> or <b>D</b> on the keyboard, or tap the buttons. Score = right answers minus wrong answers.</p>
+  <div class="opts">
+    <div class="field"><label for="cDur">Time</label><select id="cDur"><option value="60">1 minute</option><option value="120" selected>2 minutes</option><option value="180">3 minutes</option></select></div>
+    <button class="primary" id="cStart">Start clerical test</button>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="cTime">2:00</b><small>time left</small></div>
+    <div class="stat"><b id="cRight">0</b><small>right</small></div>
+    <div class="stat"><b id="cWrong">0</b><small>wrong</small></div>
+  </div>
+  <div class="pairs" id="cPairs"></div>
+  <div id="cResult"></div>
+</section>
+
+<!-- ============ PROOFREADING ============ -->
+<section class="panel hidden" id="p-proof">
+  <h2>Proofreading test</h2>
+  <p>For admin, legal, editing, marketing and customer service jobs. Click every word with a mistake: spelling, wrong word (their/there), repeated words, grammar or punctuation. Click again to unmark it. Then press Check.</p>
+  <div class="opts">
+    <div class="field"><label for="pText">Passage</label><select id="pText"></select></div>
+    <span class="muted" id="pClock" style="padding-bottom:10px"></span>
+  </div>
+  <div class="proof" id="pBox"></div>
+  <div class="actions" style="margin-top:10px"><button class="primary" id="pCheck">Check</button><button class="secondary" id="pReset">Start again</button></div>
+  <div id="pResult"></div>
+</section>
+
+<!-- ============ LEARN ============ -->
+<section class="panel hidden" id="p-learn">
+  <h2>Learn to touch-type</h2>
+  <p>Put your fingers on the home row (A S D F and J K L ;) — feel the bumps on F and J. Each colour shows which finger presses a key. Type without looking at your hands; speed comes after accuracy.</p>
+  <div class="lessons" id="lList"></div>
+  <div class="stats">
+    <div class="stat"><b id="lWpm">0</b><small>WPM</small></div>
+    <div class="stat"><b id="lAcc">100%</b><small>accuracy</small></div>
+  </div>
+  <div class="source" id="lSource" style="height:auto;min-height:70px"></div>
+  <textarea class="typebox" id="lInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type the line above…" aria-label="Lesson typing box"></textarea>
+  <div class="kb" id="kb" aria-hidden="true"></div>
+  <div class="legend"><span><i class="f0"></i>little fingers</span><span><i class="f1"></i>ring fingers</span><span><i class="f2"></i>middle fingers</span><span><i class="f3"></i>left index</span><span><i class="f4"></i>right index</span><span><i class="f5"></i>thumbs</span><span><i style="box-shadow:inset 0 -4px 0 #d8604a;background:#fff"></i>your weak keys</span></div>
+  <div id="lResult"></div>
+</section>
+
+<!-- ============ JOBS ============ -->
+<section class="panel hidden" id="p-jobs">
+  <h2>What speed do jobs ask for?</h2>
+  <p>Typical requirements seen in job postings and pre-employment tests. They vary by employer and country, so always check the job posting. The last column compares your best results saved in this browser.</p>
+  <div class="tablewrap"><table class="jobs" id="jobTable"></table></div>
+  <h2 style="margin-top:18px">Your best results</h2>
+  <div class="history" id="bests"></div>
+  <div class="actions" style="margin-top:10px"><button class="primary" id="dlReport">⬇ Download my results (TXT)</button><button class="secondary" id="clearAll">Clear saved results</button></div>
+  <p class="muted">Tips for the real test: warm up for 5 minutes first, use a full-size keyboard with a number pad for 10-key, sit straight with your wrists floating, and read the instructions on how to move between fields (Tab or Enter). Accuracy usually matters more than speed: many tests reject results under 95–98%.</p>
+</section>
+
+<section class="panel" id="certPanel">
+  <h2>🎓 Typing certificate</h2>
+  <p>Download a certificate for your last typing, 10-key or data entry result to attach to an application. It is a self-taken practice result, so an employer may still ask you to take their own test.</p>
+  <div class="opts">
+    <div class="field" style="min-width:240px"><label for="certName">Your full name</label><input id="certName" placeholder="Your name"></div>
+    <div class="field"><label for="certWhich">Result</label><select id="certWhich"></select></div>
+    <button class="primary" id="certBtn">⬇ Download certificate (PNG)</button>
+  </div>
+  <p class="muted" id="certNote">Take a test first.</p>
+</section>
+</main>
+<footer>Typing Forge · MigaBuilder · Everything runs in your browser. Job requirements are typical ranges, not official standards — check each job posting.</footer>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem('typingForge.'+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem('typingForge.'+k,JSON.stringify(v))}catch(e){}}};
+let seed=Date.now()%2147483647;const rnd=()=>(seed=seed*16807%2147483647)/2147483647;
+const pick=a=>a[Math.floor(rnd()*a.length)];
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const clock=s=>{s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const fmt=n=>Math.round(n).toLocaleString('en-US');
+const today=()=>new Date().toISOString().slice(0,10);
+
+// ---------- texts ----------
+const WORDS='the be to of and a in that have it for not on with he as you do at this but his by from they we say her she or an will my one all would there their what so up out if about who get which go me when make can like time no just him know take people into year your good some could them see other than then now look only come its over think also back after use two how our work first well way even new want because any these give day most us is was are had were been has more said made find here thing many where much through long down should call world school still try last ask need feel three never become between high really something another family own leave put old while mean keep student why let great same big group begin seem country help talk turn problem every start hand might show part against place such again few case week company system each right program hear question during play government run small number off always move night live point believe hold today bring happen next without before large million must home under water room write mother area national money story young fact month different lot study book eye job word business issue side kind four head far black long both little house yes since provide service around friend important father sit away until power hour game often yet line end among ever stand bad lose however member pay law meet car city almost include continue set later community much name five once white least president learn real change team minute best several idea kid body information nothing ago lead social understand whether watch together follow parent stop face anything create public already speak others read level allow add office spend door health person art sure war history party within grow result open morning walk reason low win research girl guy early food moment himself air teacher force offer enough education across although remember foot second boy maybe toward able age policy everything love process music including consider appear actually buy probably human wait serve market die send expect sense build stay fall oh nation plan cut college interest death course someone experience behind reach local kill six remain effect yeah suggest class control raise care perhaps late hard field else pass former sell major sometimes require along development themselves report role better economic effort decide rate strong possible heart drug show leader light voice wife whole police mind finally pull return free military price less according decision explain son hope develop view relationship carry town road drive arm true federal break difference thank receive value international building action full model join season society tax director position player agree especially record pick wear paper special space ground form support event official whose matter everyone center couple site project hit base activity star table need court produce eat american oil half situation easy cost industry figure street image itself phone either data cover quite picture clear practice piece land recent describe product doctor wall patient worker news test movie certain north personal simply third technology catch step baby computer type attention draw film tree source red nearly organization choose cause hair century evidence window difficult listen soon culture billion chance brother energy period summer realize hundred available plant likely opportunity term short letter condition choice single rule daughter administration south husband floor campaign material population economy medical hospital church close thousand risk current fire future wrong involve defense anyone increase security bank myself certainly west sport board seek per subject officer private rest behavior deal performance fight throw top quickly past goal bed order author fill represent focus foreign drop blood upon agency push nature color recently store reduce sound note fine before near movement page enter share than common poor natural race concern series significant similar hot language each usually response dead rise animal factor decade article shoot east save seven artist away scene stock career despite central eight thus treatment beyond happy exactly protect approach lie size dog fund serious occur media ready sign thought list individual simple quality pressure accept answer resource identify left meeting determine prepare disease whatever success argue cup particularly amount ability staff recognize indicate character growth loss degree wonder attack herself region television box training pretty trade deal election everybody physical lay general feeling standard bill message fail outside arrive analysis benefit sex forward lawyer present section environmental glass answer skill sister professor operation financial crime stage ok compare authority miss design sort one act ten knowledge gun station blue state strategy little clearly discuss indeed force truth song example democratic check environment leg dark public various rather laugh guess executive set study prove hang entire rock design enough forget since claim note remove manager help close sound enjoy network legal religious cold form final main science green memory card above seat cell establish nice trial expert that spring firm radio visit management care avoid imagine tonight huge ball no finish yourself talk theory impact respond statement maintain charge popular traditional onto reveal direction weapon employee cultural contain peace head control base pain apply play measure wide shake fly interview manage chair fish particular camera structure politics perform bit weight suddenly discover candidate top production treat trip evening affect inside conference unit best style adult worry range mention rather far deep front edge individual specific writer trouble necessary throughout challenge fear shoulder institution middle sea dream bar beautiful property instead improve stuff'.split(' ');
+const PROSE=[
+'Learning to type well is one of the most useful skills you can build. Most people look at the keys and use only two or three fingers. With a little practice each day, you can learn to keep your eyes on the screen and let your fingers find the keys on their own.',
+'The library opens at nine in the morning and closes at six in the evening. Visitors can borrow up to ten books at a time, use the computers for free, and join the reading club that meets every Thursday afternoon in the room next to the main desk.',
+'Rain had fallen for three days, and the river was higher than anyone in the village could remember. The farmers moved their animals to the hills, and the children watched from the bridge as branches and leaves rushed past below them.',
+'A good morning routine can make the whole day easier. Some people drink a glass of water, stretch for a few minutes, and write down the three most important tasks they want to finish before lunch. Small habits like these add up over time.',
+'The new bus line connects the train station with the hospital, the university and the shopping centre. Buses run every twelve minutes during the day and every twenty minutes at night, and tickets can be bought on the bus or with a phone.',
+'Plants need light, water and air to grow, but they also need the right soil. Before planting a garden, it helps to check whether the ground drains well after rain. Adding compost each spring keeps the soil loose and full of food for the roots.',
+'Our team finished the project two weeks early because everyone knew what they had to do. We met for fifteen minutes every morning, shared what was blocking us, and asked for help as soon as something went wrong instead of waiting until the end.',
+'When you cook rice, rinse it first to remove extra starch. Use about one and a half cups of water for each cup of rice, bring it to the boil, then cover the pot and turn the heat down low. Leave it for fifteen minutes and do not lift the lid.',
+'The museum has more than four thousand objects from all over the world, from ancient coins and pottery to modern paintings. Guided tours start every hour, and on the first Sunday of each month entry is free for everyone.',
+'Saving money is easier when you know where it goes. Write down everything you spend for one month, then sort it into groups such as rent, food, travel and fun. Many people are surprised by how much the small daily costs add up to.'];
+const BUSINESS=[
+'Dear Ms. Patel, thank you for your email of 14 March. I am pleased to confirm that your order has been shipped and should arrive within three to five working days. Please let me know if there is anything else we can help you with. Kind regards, James Carter, Customer Service Team.',
+'Hi everyone, a quick reminder that the quarterly review meeting has moved to Thursday at 10:30 in Conference Room B. Please send your updated sales figures to Maria by Wednesday at noon so she can prepare the summary slides. Thanks, Daniel.',
+'Following our phone call this morning, I have attached the revised quote for the office furniture. The total, including delivery and installation, comes to $4,850.00. The price is valid for thirty days. If you would like to go ahead, please sign the form and return it to me.',
+'Subject: Change to the holiday schedule. Please note that the office will be closed on Monday, 26 May. Support requests sent during the closure will be answered on Tuesday morning. For urgent problems, call the on-duty manager on 555-0142.',
+'Dear Hiring Manager, I am writing to apply for the position of Administrative Assistant advertised on your website. I have four years of experience in busy offices, where I managed calendars, answered phones, and prepared reports in Word and Excel. I type 65 words per minute with 98% accuracy.',
+'Thank you for contacting our support team. I have reviewed your account and can see that the payment of $129.99 was charged twice on 3 June. I have issued a refund for the second charge, which should appear on your statement within five to seven business days.'];
+const NUMSYM=()=>{const out=[];const f=[()=>'$'+(rnd()*9000+10).toFixed(2),()=>Math.floor(rnd()*900+100)+'-'+Math.floor(rnd()*9000+1000),()=>'#'+Math.floor(rnd()*90000+10000),()=>Math.floor(rnd()*99+1)+'%',()=>String(Math.floor(rnd()*28)+1).padStart(2,'0')+'/'+String(Math.floor(rnd()*12)+1).padStart(2,'0')+'/2026',()=>'(x'+Math.floor(rnd()*9+1)+')',()=>pick(['Order','Invoice','Room','Item','Ref','Unit','Box'])+' '+Math.floor(rnd()*900+10)+':',()=>pick(['a','b','c','d'])+'@'+pick(['mail','shop','office'])+'.com',()=>pick(WORDS.slice(0,200))+',',()=>Math.floor(rnd()*900+100)+'.'+Math.floor(rnd()*9)+'kg'];for(let i=0;i<160;i++)out.push(pick(f)());return out.join(' ')};
+
+function buildText(kind){
+  if(kind==='custom'){const t=$('tCustom').value.replace(/\s+/g,' ').trim();if(t.length>=20){let s=t;while(s.length<3000)s+=' '+t;return s}}
+  if(kind==='words'){const a=[];for(let i=0;i<700;i++)a.push(pick(WORDS.slice(0,420)));return a.join(' ')}
+  if(kind==='numbers')return NUMSYM();
+  const src=kind==='business'?BUSINESS:PROSE;let s='';while(s.length<3600)s+=(s?' ':'')+shuffle(src).join(' ');return s;
+}
+
+// ---------- tabs ----------
+let curTab='typing';
+function showTab(t){curTab=t;document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));document.querySelectorAll('main>section[id^="p-"]').forEach(s=>s.classList.toggle('hidden',s.id!=='p-'+t));if(t==='jobs')renderJobs();if(t==='learn'&&!lesson)startLesson(0);if(t==='proof'&&!proof)loadProof(0);try{history.replaceState(null,'','#'+t)}catch(e){}}
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+
+// ---------- results store ----------
+const results=store.get('results',[]);
+function saveResult(r){r.date=today();r.at=Date.now();results.push(r);while(results.length>200)results.shift();store.set('results',results);refreshCert()}
+const best=(test,key)=>results.filter(r=>r.test===test).reduce((m,r)=>Math.max(m,r[key]||0),0);
+const bestOf=(test,key,minAcc)=>results.filter(r=>r.test===test&&(r.acc||0)>=(minAcc||0)).reduce((m,r)=>Math.max(m,r[key]||0),0);
+
+// ---------- shared live-typing engine ----------
+function typer(opts){
+  const st={target:'',spans:[],typed:'',keys:0,mistakes:0,start:0,timer:null,done:false,dur:opts.dur||60};
+  const src=opts.source,inp=opts.input;
+  function render(text){st.target=text;src.innerHTML=text.split('').map(c=>'<span class="todo">'+esc(c)+'</span>').join('');st.spans=[...src.children];st.typed='';inp.value='';mark(0,0);src.scrollTop=0}
+  function mark(from,to){const t=st.typed;for(let i=from;i<to+1&&i<st.spans.length;i++){const s=st.spans[i];s.className=i<t.length?(t[i]===st.target[i]?'ok':'bad'):'todo'}
+    const cur=st.spans[t.length];if(cur)cur.classList.add('cur');if(cur){const top=cur.offsetTop-src.offsetTop;if(top-src.scrollTop>src.clientHeight-50||top<src.scrollTop)src.scrollTop=Math.max(0,top-34)}}
+  function stats(){const t=st.typed;let correct=0;for(let i=0;i<t.length;i++)if(t[i]===st.target[i])correct++;const el=st.start?Math.min(st.dur,(Date.now()-st.start)/1000):0,min=Math.max(el,1)/60,uncorr=t.length-correct;const gross=t.length/5/min,net=Math.max(0,gross-uncorr/min);return{gross,net,acc:st.keys?Math.max(0,(st.keys-st.mistakes)/st.keys*100):100,mistakes:st.mistakes,uncorr,correct,chars:t.length,elapsed:el,kph:correct/(Math.max(el,1)/3600)}}
+  inp.addEventListener('paste',e=>e.preventDefault());inp.addEventListener('drop',e=>e.preventDefault());
+  inp.addEventListener('keydown',e=>{if(st.done){e.preventDefault();return}if(e.key==='Backspace'&&opts.noBack&&opts.noBack()){e.preventDefault()}if(e.key==='Enter'){e.preventDefault()}});
+  inp.addEventListener('input',()=>{if(st.done){inp.value=st.typed;return}
+    let v=inp.value.replace(/\n/g,' ');if(v.length>st.target.length)v=v.slice(0,st.target.length);
+    if(!st.start&&v.length){st.start=Date.now();if(opts.timed!==false)st.timer=setInterval(tick,200);opts.onStart&&opts.onStart()}
+    const old=st.typed;let p=0;while(p<old.length&&p<v.length&&old[p]===v[p])p++;
+    for(let i=p;i<v.length;i++){st.keys++;if(v[i]!==st.target[i])st.mistakes++}
+    st.typed=v;if(inp.value!==v)inp.value=v;mark(Math.max(0,p-1),Math.max(old.length,v.length)+1);opts.onType&&opts.onType(stats());
+    if(v.length>=st.target.length)finish()});
+  function tick(){const s=stats();opts.onTick&&opts.onTick(s,st.dur-s.elapsed);if(s.elapsed>=st.dur)finish()}
+  function finish(){if(st.done)return;st.done=true;clearInterval(st.timer);inp.blur();opts.onDone&&opts.onDone(stats())}
+  function reset(text,dur){clearInterval(st.timer);Object.assign(st,{keys:0,mistakes:0,start:0,done:false,dur:dur||st.dur});render(text);opts.onTick&&opts.onTick(stats(),st.dur)}
+  return{reset,stats,finish,st}
+}
+
+// ---------- typing test ----------
+let lastTyping=null;
+const tt=typer({source:$('tSource'),input:$('tInput'),noBack:()=>!$('tBack').checked,
+  onTick:(s,left)=>{$('tTime').textContent=clock(left);$('tWpm').textContent=Math.round(s.net);$('tAcc').textContent=Math.round(s.acc)+'%';$('tErr').textContent=s.mistakes},
+  onType:s=>{$('tAcc').textContent=Math.round(s.acc)+'%';$('tErr').textContent=s.mistakes},
+  onDone:s=>{const dur=tt.st.dur;const r={test:'typing',wpm:Math.round(s.net),gross:Math.round(s.gross),acc:Math.round(s.acc*10)/10,mistakes:s.mistakes,uncorr:s.uncorr,kph:Math.round(s.correct/(Math.max(s.elapsed,1)/3600)),dur:Math.round(s.elapsed),text:$('tText').selectedOptions[0].textContent};
+    $('tWpm').textContent=r.wpm;$('tTime').textContent='0:00';lastTyping=r;saveResult(r);
+    $('tResult').innerHTML=resultCard('Your typing result',[[r.wpm,'net WPM'],[r.gross,'gross WPM'],[r.acc+'%','accuracy'],[fmt(r.kph),'KPH'],[r.uncorr,'uncorrected errors']],typingVerdict(r));}});
+function typingVerdict(r){const lv=r.wpm>=80?'excellent — fast enough for transcription and legal work':r.wpm>=60?'very good — meets most admin, legal secretary and data entry requirements':r.wpm>=40?'good — meets the usual 40 WPM requirement for office, data entry and customer service jobs':r.wpm>=30?'getting there — most office jobs ask for 35–40 WPM':'a starting point — practise in Learn to type for 10 minutes a day';
+  let s='<b>'+r.wpm+' WPM is '+lv+'.</b> ';s+=r.acc<95?'Your accuracy is under 95%, which many employers treat as a fail. Slow down a little — fewer mistakes raise your net speed. ':'Your accuracy of '+r.acc+'% is at or above the 95% most tests ask for. ';s+='Best so far: '+bestOf('typing','wpm')+' WPM. <a href="#jobs" data-goto="jobs">See which jobs this meets →</a>';return s}
+function resultCard(title,items,html){return '<div class="result-card"><h3>'+esc(title)+'</h3><div class="stats">'+items.map(([v,l])=>'<div class="stat"><b>'+esc(v)+'</b><small>'+esc(l)+'</small></div>').join('')+'</div><div class="verdict">'+html+'</div><div class="actions" style="margin-top:8px"><button class="secondary" data-cert="1">🎓 Certificate</button></div></div>'}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-goto]');if(g){e.preventDefault();showTab(g.dataset.goto);scrollTo({top:0,behavior:'smooth'})}if(e.target.closest('[data-cert]'))$('certPanel').scrollIntoView({behavior:'smooth'})});
+function newTyping(){$('tCustomWrap').classList.toggle('hidden',$('tText').value!=='custom');$('tResult').innerHTML='';tt.reset(buildText($('tText').value),+$('tDur').value);$('tInput').focus({preventScroll:true})}
+['tDur','tText'].forEach(id=>$(id).addEventListener('change',newTyping));$('tRestart').addEventListener('click',newTyping);
+
+// ---------- 10-key ----------
+const K={on:false,rows:[],i:0,keys:0,good:0,wrong:0,start:0,timer:null,dur:180};
+function tenNum(kind){if(kind==='dec')return (rnd()*(rnd()<.5?999:99999)).toFixed(2);if(kind==='mix'){const l=1+Math.floor(rnd()*7);return String(Math.floor(rnd()*Math.pow(10,l)))}return String(Math.floor(rnd()*90000)+(rnd()<.3?100:1000))}
+function tenRow(n){const tr=document.createElement('tr');tr.innerHTML='<td>'+(n+1)+'</td><td>'+K.rows[n].src+'</td><td></td>';return tr}
+function tenStart(){clearInterval(K.timer);Object.assign(K,{on:true,rows:[],i:0,keys:0,good:0,wrong:0,start:0,dur:+$('kDur').value});const kind=$('kKind').value;for(let i=0;i<400;i++)K.rows.push({src:tenNum(kind),typed:null});const tb=$('kSheet').tBodies[0];tb.innerHTML='';for(let i=0;i<12;i++)tb.appendChild(tenRow(i));$('kResult').innerHTML='';tenFocus();tenStats()}
+function tenFocus(){const tb=$('kSheet').tBodies[0],tr=tb.rows[K.i];if(!tr)return;[...tb.rows].forEach(r=>r.classList.remove('now'));tr.classList.add('now');tr.cells[2].innerHTML='<input inputmode="decimal" aria-label="Type '+K.rows[K.i].src+'">';const inp=tr.cells[2].firstChild;inp.addEventListener('keydown',tenKey);inp.addEventListener('input',()=>{if(!K.start){K.start=Date.now();K.timer=setInterval(tenTick,200)}inp.value=inp.value.replace(/[^0-9.,\-]/g,'')});inp.focus({preventScroll:true});const wrap=tb.closest('.sheetwrap');wrap.scrollTop=Math.max(0,tr.offsetTop-110)}
+function tenKey(e){if(!K.on){e.preventDefault();return}if(e.key==='Enter'||e.key==='+'||e.key==='Tab'||e.code==='NumpadAdd'||e.code==='NumpadEnter'){e.preventDefault();const v=e.target.value.trim();if(!v)return;tenSubmit(v)}}
+function tenSubmit(v){const row=K.rows[K.i];row.typed=v;const ok=v===row.src;if(ok){K.good++;K.keys+=v.length+1}else K.wrong++;const tr=$('kSheet').tBodies[0].rows[K.i];tr.cells[2].textContent=v;tr.className=ok?'right':'wrong';K.i++;const tb=$('kSheet').tBodies[0];if(tb.rows.length<K.i+8)tb.appendChild(tenRow(tb.rows.length));tenStats();tenFocus()}
+function tenStats(){const el=K.start?Math.min(K.dur,(Date.now()-K.start)/1000):0,kph=el?K.keys/(Math.max(el,1)/3600):0,acc=K.i?K.good/K.i*100:100;$('kTime').textContent=clock(K.dur-el);$('kKph').textContent=fmt(kph);$('kAcc').textContent=Math.round(acc)+'%';$('kDone').textContent=K.i;return{el,kph,acc}}
+function tenTick(){const s=tenStats();if(s.el>=K.dur)tenEnd()}
+function tenEnd(){if(!K.on)return;K.on=false;clearInterval(K.timer);const s=tenStats();const inp=$('kSheet').querySelector('input');if(inp)inp.disabled=true;const r={test:'tenkey',kph:Math.round(s.kph),acc:Math.round(s.acc*10)/10,entries:K.i,wrong:K.wrong,dur:Math.round(s.el)};saveResult(r);
+  const v=r.kph>=12000?'excellent — above what most accounting and payroll jobs ask for':r.kph>=10000?'very good — meets the 10,000 KPH many 10-key tests require':r.kph>=8000?'good — meets general data entry requirements (about 8,000 KPH)':'below most job requirements — aim for 8,000 KPH, using only the number pad and your right hand';
+  $('kResult').innerHTML=resultCard('Your 10-key result',[[fmt(r.kph),'KPH'],[r.acc+'%','accuracy'],[r.entries,'entries'],[r.wrong,'wrong']],'<b>'+fmt(r.kph)+' KPH is '+v+'.</b> '+(r.acc<98?'Most 10-key tests also expect about 98% accuracy, so check each number before pressing Enter.':'Your accuracy is excellent.'))}
+$('kStart').addEventListener('click',tenStart);
+
+// ---------- alphanumeric data entry ----------
+const FIRST=['Maria','James','Aisha','Chen','Olga','Luis','Fatima','Peter','Grace','Ahmed','Sofia','David','Amara','Kenji','Elena','Samuel','Priya','Noah','Zainab','Lucas','Hannah','Omar','Mei','Daniel'];
+const LAST=['Garcia','Smith','Okafor','Wang','Petrova','Hernandez','Khan','Johansson','Mwangi','Rossi','Nguyen','Brown','Schmidt','Dubois','Silva','Kowalski','Patel','Ali','Martin','Tanaka','OBrien','Novak','Haddad','Lopez'];
+const STREET=['Maple Avenue','Oak Street','River Road','Hillcrest Drive','Station Lane','Park Boulevard','Elm Court','Lakeview Terrace','Cedar Way','Market Street','Church Road','Sunset Place'];
+const CITY=[['Springfield','IL','627'],['Riverside','CA','925'],['Madison','WI','537'],['Franklin','TN','370'],['Greenville','SC','296'],['Salem','OR','973'],['Fairview','TX','750'],['Clinton','NY','133'],['Georgetown','KY','403'],['Arlington','VA','222']];
+const DF=[['name','Name'],['address','Street address'],['city','City'],['state','State'],['zip','ZIP code'],['phone','Phone'],['account','Account no.'],['amount','Amount']];
+function deRecord(){const c=pick(CITY),L='ABCDEFGHJKLMNPRSTUVWXYZ';return{name:pick(FIRST)+' '+(rnd()<.25?L[Math.floor(rnd()*L.length)]+'. ':'')+pick(LAST),address:(Math.floor(rnd()*9800)+12)+' '+pick(STREET)+(rnd()<.3?' Apt '+(Math.floor(rnd()*40)+1)+L[Math.floor(rnd()*6)]:''),city:c[0],state:c[1],zip:c[2]+String(Math.floor(rnd()*99)).padStart(2,'0'),phone:'('+(Math.floor(rnd()*800)+200)+') '+(Math.floor(rnd()*800)+200)+'-'+String(Math.floor(rnd()*10000)).padStart(4,'0'),account:L[Math.floor(rnd()*L.length)]+L[Math.floor(rnd()*L.length)]+'-'+Math.floor(rnd()*900000+100000)+'-'+Math.floor(rnd()*9),amount:'$'+(rnd()*4000+5).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/,',')}}
+const D={on:false,rec:null,n:0,good:0,fields:0,goodFields:0,start:0,timer:null,dur:300};
+$('dForm').innerHTML=DF.map(([k,l])=>'<div class="field"><label for="de-'+k+'">'+l+'</label><input id="de-'+k+'" name="'+k+'" disabled></div>').join('');
+function deShow(){D.rec=deRecord();$('dRecord').innerHTML='<div class="muted" style="margin-bottom:4px">Record '+(D.n+1)+'</div>'+DF.map(([k,l])=>'<div><b>'+l+'</b>'+esc(D.rec[k])+'</div>').join('');DF.forEach(([k])=>{const i=$('de-'+k);i.value='';i.disabled=false});$('de-name').focus({preventScroll:true})}
+function deStart(){clearInterval(D.timer);Object.assign(D,{on:true,n:0,good:0,fields:0,goodFields:0,start:0,dur:+$('dDur').value});$('dResult').innerHTML='';deShow();deStats()}
+function deSave(){if(!D.on)return;let filled=0;DF.forEach(([k])=>{const v=$('de-'+k).value.trim();if(v)filled++});if(!filled)return;DF.forEach(([k])=>{const v=$('de-'+k).value.trim(),ok=v===D.rec[k];D.fields++;if(ok){D.goodFields++;D.good+=v.length+1}});D.n++;deStats();deShow()}
+$('dForm').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(e.target.name==='amount'||e.ctrlKey)deSave();else{const i=DF.findIndex(([k])=>k===e.target.name);$('de-'+DF[i+1][0]).focus()}}});
+$('dForm').addEventListener('input',()=>{if(D.on&&!D.start){D.start=Date.now();D.timer=setInterval(()=>{if(deStats().el>=D.dur)deEnd()},250)}});
+$('dForm').addEventListener('paste',e=>e.preventDefault());
+function deStats(){const el=D.start?Math.min(D.dur,(Date.now()-D.start)/1000):0,kph=el?D.good/(Math.max(el,1)/3600):0,acc=D.fields?D.goodFields/D.fields*100:100;$('dTime').textContent=clock(D.dur-el);$('dKph').textContent=fmt(kph);$('dAcc').textContent=Math.round(acc)+'%';$('dDone').textContent=D.n;return{el,kph,acc}}
+function deEnd(){if(!D.on)return;D.on=false;clearInterval(D.timer);DF.forEach(([k])=>$('de-'+k).disabled=true);const s=deStats(),r={test:'dataentry',kph:Math.round(s.kph),acc:Math.round(s.acc*10)/10,records:D.n,dur:Math.round(s.el)};saveResult(r);
+  const v=r.kph>=10000?'excellent — above most data entry requirements':r.kph>=8000?'good — meets the 8,000 KPH most alphanumeric tests require':r.kph>=6000?'close — most tests ask for about 8,000 KPH':'below most job requirements — practise in the Typing test with Numbers & symbols';
+  $('dResult').innerHTML=resultCard('Your data entry result',[[fmt(r.kph),'KPH'],[r.acc+'%','field accuracy'],[r.records,'records']],'<b>'+fmt(r.kph)+' KPH is '+v+'.</b> Fields must match exactly — capitals, spaces and punctuation included. '+(r.acc<95?'Under 95% accuracy usually fails, so check each record before Enter.':''))}
+$('dStart').addEventListener('click',deStart);
+
+// ---------- audio transcription ----------
+const SCRIPTS={
+general:'Good morning everyone. Today I would like to talk about our plans for the summer. The community centre will be open from eight in the morning until eight at night. We are looking for volunteers to help with the reading programme for children. If you can give two hours a week, please speak to Sarah at the front desk. Thank you all for your hard work this year.',
+medical:'The patient is a fifty two year old woman who came to the clinic with a cough and a mild fever for five days. She has no history of asthma. Her temperature was thirty eight point one degrees. Blood pressure was one hundred and twenty over eighty. The lungs were clear on both sides. We started her on rest and fluids and asked her to return in one week if the cough does not improve.',
+legal:'Dear Mr. Thompson. We act on behalf of our client, Green Valley Homes, in connection with the lease of the property at forty two Station Road. Our client has asked us to remind you that the rent for March has not yet been paid. Please arrange payment within fourteen days of the date of this letter. If you have any questions, please contact our office. Yours sincerely, Clarke and Partners.',
+call:'Emergency, which service do you need? I need an ambulance please. My neighbour has fallen down the stairs and he is not moving. The address is eighteen Park Lane, flat three. He is about seventy years old. He is breathing but he will not answer me. Stay on the line with me. Help is on the way.',
+office:'This is a reminder to all staff that the office will move to the third floor next Monday. Please pack your desks by Friday afternoon and label every box with your name and team. The IT team will move the computers over the weekend. Parking will stay the same. If you need extra boxes, please ask the reception desk.'};
+const A={sent:[],i:0,playing:false,start:0};
+function aLoad(){speechSynthesis&&speechSynthesis.cancel();A.sent=SCRIPTS[$('aKind').value].match(/[^.?!]+[.?!]+/g).map(s=>s.trim());A.i=0;A.playing=false;A.start=0;$('aPlay').textContent='▶ Play';$('aPos').textContent='Sentence 1 of '+A.sent.length;$('aResult').innerHTML='';$('aInput').value=''}
+function aSpeak(){if(!('speechSynthesis' in window)){$('aResult').innerHTML='<p class="muted">This browser has no speech voice. Try Chrome, Edge or Safari, or use Show the script with a friend reading it aloud.</p>';return}
+  if(A.i>=A.sent.length){A.playing=false;$('aPlay').textContent='▶ Play again';$('aPos').textContent='Finished — check your transcript.';return}
+  const u=new SpeechSynthesisUtterance(A.sent[A.i]);u.lang='en-US';u.rate=+$('aRate').value;u.onend=()=>{if(!A.playing)return;A.i++;setTimeout(()=>{if(A.playing)aSpeak()},350)};$('aPos').textContent='Sentence '+(A.i+1)+' of '+A.sent.length;speechSynthesis.speak(u)}
+function aToggle(){if(A.playing){A.playing=false;speechSynthesis.cancel();$('aPlay').textContent='▶ Play'}else{if(A.i>=A.sent.length)A.i=0;A.playing=true;if(!A.start)A.start=Date.now();$('aPlay').textContent='⏸ Pause';aSpeak();$('aInput').focus({preventScroll:true})}}
+$('aPlay').addEventListener('click',aToggle);
+$('aBack').addEventListener('click',()=>{speechSynthesis.cancel();A.i=Math.max(0,A.i-(A.playing?1:1));if(A.playing)setTimeout(aSpeak,100);else $('aPos').textContent='Sentence '+(A.i+1)+' of '+A.sent.length});
+$('aInput').addEventListener('keydown',e=>{if(e.ctrlKey&&e.code==='Space'){e.preventDefault();aToggle()}if(e.ctrlKey&&e.key==='ArrowLeft'){e.preventDefault();$('aBack').click()}});
+$('aKind').addEventListener('change',aLoad);
+const norm=w=>w.toLowerCase().replace(/[^a-z0-9']/g,'');
+function wordDiff(ref,hyp){const a=ref.split(/\s+/).filter(Boolean),b=hyp.split(/\s+/).filter(Boolean),A2=a.map(norm),B2=b.map(norm),n=a.length,m=b.length,L=Array.from({length:n+1},()=>new Uint16Array(m+1));
+  for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)L[i][j]=A2[i]===B2[j]?L[i+1][j+1]+1:Math.max(L[i+1][j],L[i][j+1]);
+  const out=[];let i=0,j=0;while(i<n&&j<m){if(A2[i]===B2[j]){out.push(['ok',b[j]]);i++;j++}else if(L[i+1][j]>=L[i][j+1]){out.push(['miss',a[i]]);i++}else{out.push(['extra',b[j]]);j++}}while(i<n)out.push(['miss',a[i++]]);while(j<m)out.push(['extra',b[j++]]);
+  const match=L[0][0];return{out,match,refN:n,hypN:m,acc:n?match/Math.max(n,m)*100:0}}
+function aCheck(){const ref=SCRIPTS[$('aKind').value],hyp=$('aInput').value.trim();if(!hyp){$('aResult').innerHTML='<p class="muted">Type what you hear first.</p>';return null}
+  const d=wordDiff(ref,hyp),el=A.start?(Date.now()-A.start)/1000:0,wpm=el?d.hypN/(el/60):0,r={test:'audio',acc:Math.round(d.acc*10)/10,words:d.hypN,wpm:Math.round(wpm),kind:$('aKind').value};saveResult(r);
+  $('aResult').innerHTML='<div class="result-card"><h3>Your transcription result</h3><div class="stats"><div class="stat"><b>'+r.acc+'%</b><small>word accuracy</small></div><div class="stat"><b>'+d.match+' / '+d.refN+'</b><small>words right</small></div>'+(el?'<div class="stat"><b>'+r.wpm+'</b><small>words per minute</small></div>':'')+'</div><p class="verdict">'+(r.acc>=98?'<b>Excellent.</b> Transcription jobs usually expect 98% accuracy or more.':r.acc>=90?'<b>Good.</b> Most transcription jobs ask for about 98% — listen again to the parts marked in red.':'<b>Keep practising.</b> Pause more often and replay sentences you missed.')+'</p><p class="muted">Red = missed or misheard words from the script, yellow = extra words you typed.</p><div class="diffout">'+d.out.map(([k,w])=>k==='ok'?esc(w):'<span class="'+k+'">'+esc(w)+'</span>').join(' ')+'</div></div>';return r}
+$('aCheck').addEventListener('click',aCheck);
+$('aShow').addEventListener('click',()=>{$('aResult').innerHTML='<div class="result"><b>Script:</b> '+esc(SCRIPTS[$('aKind').value])+'</div>'});
+
+// ---------- clerical checking ----------
+function variant(s){const kind=Math.floor(rnd()*4),digits=[...s].map((c,i)=>/\d/.test(c)?i:-1).filter(i=>i>=0),letters=[...s].map((c,i)=>/[A-Za-z]/.test(c)?i:-1).filter(i=>i>=0);
+  if((kind===0||!letters.length)&&digits.length){const i=pick(digits);return s.slice(0,i)+((+s[i]+1+Math.floor(rnd()*8))%10)+s.slice(i+1)}
+  if(kind===1){const cls=c=>/\d/.test(c)?1:/[a-z]/.test(c)?2:/[A-Z]/.test(c)?3:0,ix=[...s].map((c,i)=>i<s.length-1&&cls(c)&&cls(c)===cls(s[i+1])&&c!==s[i+1]?i:-1).filter(i=>i>=0);if(ix.length){const i=pick(ix);return s.slice(0,i)+s[i+1]+s[i]+s.slice(i+2)}}
+  const sw={a:'o',o:'a',e:'c',c:'e',i:'l',l:'i',m:'n',n:'m',u:'v',v:'u',h:'b',b:'h',r:'n',t:'f',f:'t',s:'z',S:'Z',M:'N',N:'M',O:'Q',E:'F',P:'R',C:'G'};const ix=letters.filter(i=>sw[s[i]]);if(ix.length){const i=pick(ix);return s.slice(0,i)+sw[s[i]]+s.slice(i+1)}
+  const i=pick(letters.length?letters:[0]);return s.slice(0,i)+s.slice(i+1)}
+function clericalItem(){const k=Math.floor(rnd()*5),r=deRecord();return k===0?r.name:k===1?r.address:k===2?r.city+', '+r.state+' '+r.zip:k===3?r.phone:r.account}
+const C={on:false,items:[],i:0,right:0,wrong:0,start:0,timer:null,dur:120};
+function cStart(){clearInterval(C.timer);Object.assign(C,{on:true,items:[],i:0,right:0,wrong:0,start:Date.now(),dur:+$('cDur').value});for(let n=0;n<80;n++){const a=clericalItem(),same=rnd()<.5;let b=same?a:variant(a);if(b===a&&!same)b=a+'.';C.items.push({a,b,same:a===b,ans:null})}cRender();C.timer=setInterval(()=>{const el=(Date.now()-C.start)/1000;$('cTime').textContent=clock(C.dur-el);if(el>=C.dur)cEnd()},250);$('cResult').innerHTML='';$('cPairs').scrollIntoView({block:'nearest'})}
+function cRender(){const lo=Math.max(0,C.i-2),items=C.items.slice(lo,C.i+6);$('cPairs').innerHTML=items.map((it,k)=>{const n=lo+k,cl=n===C.i?' now':it.ans===null?'':(it.ans===it.same?' r-ok':' r-bad');return '<div class="pair'+cl+'"><span>'+esc(it.a)+'</span><span>'+esc(it.b)+'</span><span class="btns">'+(n===C.i&&C.on?'<button class="secondary" data-ans="s">Same</button><button class="secondary" data-ans="d">Different</button>':it.ans===null?'':'<small>'+(it.ans===it.same?'✓':'✗ '+(it.same?'same':'different'))+'</small>')+'</span></div>'}).join('');$('cRight').textContent=C.right;$('cWrong').textContent=C.wrong}
+function cAnswer(same){if(!C.on)return;const it=C.items[C.i];it.ans=same;if(same===it.same)C.right++;else C.wrong++;C.i++;if(C.i>=C.items.length)return cEnd();cRender()}
+$('cPairs').addEventListener('click',e=>{const b=e.target.closest('[data-ans]');if(b)cAnswer(b.dataset.ans==='s')});
+document.addEventListener('keydown',e=>{if(curTab!=='clerical'||!C.on||e.target.matches('input,textarea,select'))return;if(e.key==='s'||e.key==='S'){e.preventDefault();cAnswer(true)}if(e.key==='d'||e.key==='D'){e.preventDefault();cAnswer(false)}});
+function cEnd(){if(!C.on)return;C.on=false;clearInterval(C.timer);cRender();const done=C.right+C.wrong,el=Math.min(C.dur,(Date.now()-C.start)/1000),r={test:'clerical',score:C.right-C.wrong,right:C.right,wrong:C.wrong,acc:done?Math.round(C.right/done*1000)/10:0,perMin:Math.round(done/(Math.max(el,1)/60)*10)/10,dur:Math.round(el)};saveResult(r);
+  $('cResult').innerHTML='<div class="result-card"><h3>Your clerical checking result</h3><div class="stats"><div class="stat"><b>'+r.score+'</b><small>score (right − wrong)</small></div><div class="stat"><b>'+r.acc+'%</b><small>accuracy</small></div><div class="stat"><b>'+r.perMin+'</b><small>pairs per minute</small></div></div><p class="verdict">'+(r.acc>=95&&r.perMin>=12?'<b>Strong result.</b> You are both fast and careful.':r.acc<90?'<b>Slow down a little.</b> Wrong answers cost a point each, so read every character — numbers first, then letters.':'<b>Good accuracy.</b> To score higher, practise scanning the numbers in each pair first.')+'</p></div>'}
+$('cStart').addEventListener('click',cStart);
+
+// ---------- proofreading ----------
+const PROOFS=[
+['Office notice','Please remember that the [kitchin|kitchen] will be closed on Friday [wile|while] the new fridge is [instaled|installed]. [Their|There] will be coffee and tea in the meeting room [insted|instead]. We [appologise|apologise] for any [inconvenence|inconvenience] and thank you for your [paitence|patience]. If you have any questions, please [contact contact|contact] the office manager [befor|before] Thursday.'],
+['Customer email','Dear Mr Lee, thank you for [you|your] letter of 3 May. I am [sory|sorry] to hear that the parcel [arived|arrived] damaged. We have sent a [replacment|replacement] by express delivery, and it should [arrive arrive|arrive] tomorrow. You do not need to return the [broken|broken] item. Please accept [are|our] apologies, and let me know if [their|there] is anything else I can do. [Your\'s|Yours] sincerely, Anna Berg'],
+['Job advert','We are looking for a friendly and [reliabel|reliable] receptionist to join [our|our] busy dental [practise|practice]. The [sucessful|successful] candidate will answer phones, book [appointmants|appointments] and welcome patients. You will need good [comunication|communication] skills and [atleast|at least] one year of experience. The job is full time, Monday to Friday, and [it\'s|it\'s] based in the city centre. To apply, send your CV and a short [cover|cover] letter to [are|our] practice manager by 30 June.'],
+['Meeting minutes','The meeting started at 9:30 and [was|was] chaired by Ruth Adams. The team [discused|discussed] the budget for next year and agreed to spend [les|less] on travel. Tom will [recieve|receive] the final figures from finance [on on|on] Monday. [Its|It\'s] important that every manager [sends|sends] their report on time. The [nexed|next] meeting will be held on 12 [Febuary|February] in the main hall. The meeting ended at [10;45|10:45].']];
+let proof=null;
+$('pText').innerHTML=PROOFS.map((p,i)=>'<option value="'+i+'">'+esc(p[0])+'</option>').join('');
+function loadProof(i){const toks=[];PROOFS[i][1].replace(/\[([^|\]]+)\|([^\]]+)\]|(\S+)/g,(m,w,r,plain)=>{if(plain)toks.push({w:plain,err:false});else toks.push({w,err:w!==r,right:r});return m});proof={i,toks,start:Date.now(),done:false};
+  $('pBox').innerHTML=toks.map((t,k)=>'<span class="w" data-k="'+k+'">'+esc(t.w)+'</span>').join(' ');$('pResult').innerHTML='';$('pClock').textContent=toks.filter(t=>t.err).length+' mistakes are hidden in this passage.'}
+$('pBox').addEventListener('click',e=>{const s=e.target.closest('.w');if(!s||proof.done)return;s.classList.toggle('mark')});
+$('pText').addEventListener('change',()=>loadProof(+$('pText').value));$('pReset').addEventListener('click',()=>loadProof(+$('pText').value));
+function pCheck(){if(!proof||proof.done)return null;proof.done=true;let found=0,miss=0,fals=0;$('pBox').querySelectorAll('.w').forEach(s=>{const t=proof.toks[+s.dataset.k],m=s.classList.contains('mark');s.classList.remove('mark');if(t.err&&m){found++;s.classList.add('found');s.insertAdjacentHTML('beforeend','<sup> '+esc(t.right)+'</sup>')}else if(t.err){miss++;s.classList.add('miss');s.insertAdjacentHTML('beforeend','<sup> '+esc(t.right)+'</sup>')}else if(m){fals++;s.classList.add('false')}});
+  const total=found+miss,score=Math.max(0,Math.round((found-fals)/total*100)),el=Math.round((Date.now()-proof.start)/1000),r={test:'proof',score,found,miss,fals,total,acc:score,dur:el};saveResult(r);
+  $('pResult').innerHTML='<div class="result-card"><h3>Your proofreading result</h3><div class="stats"><div class="stat"><b>'+found+' / '+total+'</b><small>mistakes found</small></div><div class="stat"><b>'+fals+'</b><small>correct words marked</small></div><div class="stat"><b>'+score+'%</b><small>score</small></div><div class="stat"><b>'+clock(el)+'</b><small>time</small></div></div><p class="muted">Green = found, red = missed (correction shown), purple = a correct word you marked.</p></div>';return r}
+$('pCheck').addEventListener('click',pCheck);
+
+// ---------- learn to type ----------
+const ROWS=[['`1234567890-=','~!@#$%^&*()_+'],['qwertyuiop[]','QWERTYUIOP{}'],['asdfghjkl;\'','ASDFGHJKL:"'],['zxcvbnm,./','ZXCVBNM<>?']];
+const FINGER={};'`1qaz'.split('').forEach(c=>FINGER[c]=0);'2wsx'.split('').forEach(c=>FINGER[c]=1);'3edc'.split('').forEach(c=>FINGER[c]=2);'45rtfgvb'.split('').forEach(c=>FINGER[c]=3);'67yuhjnm'.split('').forEach(c=>FINGER[c]=4);'8ik,'.split('').forEach(c=>FINGER[c]=2);'9ol.'.split('').forEach(c=>FINGER[c]=1);'0p;/-=[]\''.split('').forEach(c=>FINGER[c]=0);
+const LESSONS=[['Home row','asdfjkl;'],['Home row + G H','asdfghjkl;'],['Top row: E I R U','asdfghjkl;eiru'],['Top row: all','asdfghjkl;qwertyuiop'],['Bottom row','asdfghjkl;qwertyuiopzxcvbnm,.'],['Capital letters','CAPS'],['Numbers','NUM'],['Punctuation','PUNCT'],['Real words','WORDS'],['My weak keys','WEAK']];
+const weak=store.get('weak',{}),doneL=store.get('lessonsDone',[]);
+function weakKeys(){return Object.entries(weak).filter(([k,v])=>v.n>=5).map(([k,v])=>[k,v.e/v.n]).filter(x=>x[1]>.06).sort((a,b)=>b[1]-a[1]).slice(0,6).map(x=>x[0])}
+function drill(keys){const out=[];const ws=WORDS.filter(w=>w.length>=2&&[...w].every(c=>keys.includes(c)));for(let i=0;i<14;i++){if(ws.length>4&&rnd()<.6)out.push(pick(ws));else{let w='';const l=2+Math.floor(rnd()*4);for(let j=0;j<l;j++)w+=pick([...keys.replace(/[;,.]/g,'')]);out.push(w)}}return out.join(' ')}
+function lessonText(i){const k=LESSONS[i][1];if(k==='CAPS')return shuffle(FIRST).slice(0,8).map(n=>n+' '+pick(WORDS.slice(0,150))).join(' ')+'.';if(k==='NUM')return Array.from({length:12},()=>String(Math.floor(rnd()*9000+10))).join(' ');if(k==='PUNCT')return 'Yes, it is. No; not yet. "Hello!" she said. Is it 5:30? (Maybe.) It costs $12.50 - or less. Email me: info@example.com';if(k==='WORDS')return shuffle(PROSE)[0];if(k==='WEAK'){const w=weakKeys();return w.length?drill(w.join('')+'asdfjkl'):'Take a few lessons or tests first — your weak keys will appear here. '+drill('asdfghjkl')}return drill(k)}
+let lesson=null;
+const lt=typer({source:$('lSource'),input:$('lInput'),timed:false,dur:3600,onType:s=>{$('lWpm').textContent=Math.round(s.net);$('lAcc').textContent=Math.round(s.acc)+'%';kbNext()},onDone:s=>{const r={test:'lesson',wpm:Math.round(s.net),acc:Math.round(s.acc*10)/10,lesson:LESSONS[lesson.i][0]};saveResult(r);if(r.acc>=92&&!doneL.includes(lesson.i)){doneL.push(lesson.i);store.set('lessonsDone',doneL);renderLessons()}
+  $('lResult').innerHTML='<div class="result-card"><h3>'+(r.acc>=92?'Lesson passed ✓':'Try once more')+'</h3><p class="verdict">'+r.wpm+' WPM at '+r.acc+'% accuracy. '+(r.acc>=92?'Move on to the next lesson, or repeat it to get faster.':'Aim for 92% accuracy before moving on — slow and steady.')+'</p><div class="actions"><button class="primary" id="lNext">Next lesson →</button><button class="secondary" id="lAgain">Repeat</button></div></div>';
+  $('lNext').onclick=()=>startLesson(Math.min(LESSONS.length-1,lesson.i+1));$('lAgain').onclick=()=>startLesson(lesson.i)}});
+$('lInput').addEventListener('input',()=>{const st=lt.st,i=st.typed.length-1;if(i<0)return;const want=st.target[i].toLowerCase();weak[want]=weak[want]||{n:0,e:0};weak[want].n++;if(st.typed[i]!==st.target[i])weak[want].e++;store.set('weak',weak)});
+function renderLessons(){$('lList').innerHTML=LESSONS.map((l,i)=>'<button class="secondary'+(doneL.includes(i)?' done':'')+'" data-l="'+i+'"'+(lesson&&lesson.i===i?' style="border-color:#e2a63b;background:#fff6df"':'')+'>'+(i+1)+'. '+esc(l[0])+'</button>').join('')}
+$('lList').addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(b)startLesson(+b.dataset.l)});
+function startLesson(i){lesson={i};renderLessons();$('lResult').innerHTML='';lt.reset(lessonText(i),3600);$('lWpm').textContent='0';$('lAcc').textContent='100%';kbRender();kbNext();$('lInput').focus({preventScroll:true})}
+function kbRender(){const w=weakKeys();$('kb').innerHTML=ROWS.map((r,ri)=>'<div class="row">'+[...r[0]].map(c=>'<span class="k f'+(FINGER[c]!=null?FINGER[c]:0)+(w.includes(c)?' weak':'')+'" data-key="'+esc(c)+'">'+esc(c.toUpperCase())+'</span>').join('')+'</div>').join('')+'<div class="row"><span class="k f5" data-key=" " style="min-width:260px">space</span></div>'}
+function kbNext(){$('kb').querySelectorAll('.next').forEach(k=>k.classList.remove('next'));const st=lt.st,c=st.target[st.typed.length];if(c==null)return;let base=c;ROWS.forEach(r=>{const j=r[1].indexOf(c);if(j>=0)base=r[0][j]});const el=$('kb').querySelector('[data-key="'+(base==='"'?'&quot;':base.replace(/(["\\])/g,'\\$1'))+'"]');if(el)el.classList.add('next')}
+
+// ---------- jobs ----------
+const JOBS=[
+['Data entry clerk',{wpm:40,kph:8000,acc:95},'40–60 WPM · 8,000–10,000 KPH · 95–98%',['typing','dataentry','tenkey']],
+['Accounts, payroll or bank clerk',{tenkey:10000,acc:98},'10-key 10,000–12,000+ KPH · 98%',['tenkey','clerical']],
+['Administrative assistant / office clerk',{wpm:45,acc:95},'40–60 WPM · 95%',['typing','proof','clerical']],
+['Receptionist',{wpm:35,acc:95},'35–50 WPM',['typing','dataentry']],
+['Customer service / call centre',{wpm:35,acc:90},'35–50 WPM · 90–95%',['typing','dataentry']],
+['911 / emergency dispatcher',{wpm:35,acc:90},'35–45 WPM · 90–95% (often while listening)',['typing','audio']],
+['Government / civil service clerk',{wpm:40,acc:95},'40–50 WPM · 95% · clerical checking',['typing','clerical']],
+['Legal secretary / legal assistant',{wpm:65,acc:95},'60–90 WPM · proofreading',['typing','proof','audio']],
+['Medical transcriptionist / scribe',{wpm:65,acc:98,audio:98},'65–90 WPM · 98% accuracy',['audio','typing']],
+['General transcriptionist / captioner',{wpm:60,acc:98,audio:98},'60–75+ WPM · 98%',['audio','typing']],
+['Proofreader / copy editor',{proof:90},'Finds almost every error',['proof']],
+['Court reporter (stenographer)',{},'225 WPM on a stenotype machine — a different keyboard; this site cannot test it',[]]];
+const TESTNAME={typing:'Typing test',tenkey:'10-key',dataentry:'Data entry',audio:'Transcription',clerical:'Clerical',proof:'Proofreading'};
+function meets(req){const parts=[];if(req.wpm)parts.push([bestOf('typing','wpm',req.acc||0)>=req.wpm,'typing '+req.wpm+' WPM'+(req.acc?' at '+req.acc+'%':''),best('typing','wpm')>0]);if(req.kph)parts.push([bestOf('dataentry','kph',95)>=req.kph,'data entry '+fmt(req.kph)+' KPH',best('dataentry','kph')>0]);if(req.tenkey)parts.push([bestOf('tenkey','kph',req.acc||0)>=req.tenkey,'10-key '+fmt(req.tenkey)+' KPH',best('tenkey','kph')>0]);if(req.audio)parts.push([best('audio','acc')>=req.audio,'transcription '+req.audio+'%',best('audio','acc')>0]);if(req.proof)parts.push([best('proof','score')>=req.proof,'proofreading '+req.proof+'%',best('proof','score')>0]);
+  if(!parts.length)return '<span class="na">—</span>';return parts.map(([ok,l,tried])=>tried?'<span class="'+(ok?'yes':'no')+'">'+(ok?'✓ ':'✗ ')+esc(l)+'</span>':'<span class="na">not tested: '+esc(l)+'</span>').join('<br>')}
+function renderJobs(){$('jobTable').innerHTML='<tr><th>Job</th><th>Typical requirement</th><th>Practise</th><th>You</th></tr>'+JOBS.map(([n,req,txt,tests])=>'<tr><td><b>'+esc(n)+'</b></td><td>'+esc(txt)+'</td><td>'+tests.map(t=>'<a href="#'+t+'" data-goto="'+t+'">'+TESTNAME[t]+'</a>').join(', ')+'</td><td>'+meets(req)+'</td></tr>').join('');$('bests').innerHTML=bestsHtml()}
+function bestsLines(){const L=[];const b=(t,k)=>best(t,k);if(b('typing','wpm'))L.push('Typing test: '+b('typing','wpm')+' net WPM (best accuracy '+b('typing','acc')+'%)');if(b('tenkey','kph'))L.push('10-key: '+fmt(b('tenkey','kph'))+' KPH');if(b('dataentry','kph'))L.push('Alphanumeric data entry: '+fmt(b('dataentry','kph'))+' KPH');if(b('audio','acc'))L.push('Audio transcription: '+b('audio','acc')+'% word accuracy');if(b('clerical','score'))L.push('Clerical checking: score '+b('clerical','score'));if(b('proof','score'))L.push('Proofreading: '+b('proof','score')+'%');return L}
+function bestsHtml(){const L=bestsLines();return L.length?'<ul>'+L.map(l=>'<li>'+esc(l)+'</li>').join('')+'</ul>':'<p class="muted">No results yet — take a test.</p>'}
+function reportText(){const L=['Typing Forge — my results','migabuilder.com/typing-test.html','Saved on '+today(),'','BEST RESULTS',...(bestsLines().length?bestsLines():['(none yet)']),'','ALL TESTS (newest first)'];results.slice().reverse().forEach(r=>{L.push(r.date+'  '+(TESTNAME[r.test]||'Lesson')+'  '+(r.wpm?r.wpm+' WPM  ':'')+(r.kph!=null?fmt(r.kph)+' KPH  ':'')+(r.score!=null?'score '+r.score+'  ':'')+(r.acc!=null?r.acc+'% accuracy  ':'')+(r.dur?clock(r.dur)+' min':''))});L.push('','Self-taken practice results. Requirements differ by employer — check the job posting.');return L.join('\n')}
+function download(name,blob){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
+$('dlReport').addEventListener('click',()=>download('typing-results.txt',new Blob([reportText()],{type:'text/plain'})));
+$('clearAll').addEventListener('click',()=>{if(!confirm('Delete all saved results and weak-key data on this device?'))return;results.length=0;store.set('results',[]);Object.keys(weak).forEach(k=>delete weak[k]);store.set('weak',{});renderJobs();refreshCert()});
+
+// ---------- certificate ----------
+$('certName').value=store.get('name','');$('certName').addEventListener('input',()=>store.set('name',$('certName').value));
+function certCandidates(){const c=[];['typing','tenkey','dataentry'].forEach(t=>{const rs=results.filter(r=>r.test===t&&(r.dur||0)>=30);if(!rs.length)return;const last=rs[rs.length-1],top=rs.reduce((a,b)=>(b.wpm||b.kph)>(a.wpm||a.kph)?b:a);c.push(['last-'+t,'Last '+TESTNAME[t]+': '+(last.wpm!=null?last.wpm+' WPM':fmt(last.kph)+' KPH'),last]);if(top!==last)c.push(['best-'+t,'Best '+TESTNAME[t]+': '+(top.wpm!=null?top.wpm+' WPM':fmt(top.kph)+' KPH'),top])});return c}
+function refreshCert(){const c=certCandidates();$('certWhich').innerHTML=c.map(x=>'<option value="'+x[0]+'">'+esc(x[1])+'</option>').join('');$('certBtn').disabled=!c.length;$('certNote').textContent=c.length?'The certificate shows your name, result, accuracy, test length and date.':'Finish a typing, 10-key or data entry test of 30 seconds or more first.';
+  const last=results[results.length-1];if(last){const m=c.find(x=>x[0]==='last-'+last.test);if(m)$('certWhich').value=m[0]}}
+function hashCode(s){let h=2166136261;for(const ch of s){h^=ch.charCodeAt(0);h=Math.imul(h,16777619)}return (h>>>0).toString(36).toUpperCase().padStart(7,'0')}
+function drawCert(r,name){const W=1600,H=1130,c=document.createElement('canvas');c.width=W;c.height=H;const g=c.getContext('2d');
+  g.fillStyle='#fdfbf4';g.fillRect(0,0,W,H);g.strokeStyle='#0e2a47';g.lineWidth=16;g.strokeRect(40,40,W-80,H-80);g.strokeStyle='#e2a63b';g.lineWidth=4;g.strokeRect(70,70,W-140,H-140);
+  g.textAlign='center';g.fillStyle='#0e2a47';g.font='700 34px "Space Grotesk",Arial';g.fillText('MIGABUILDER · TYPING FORGE',W/2,170);
+  g.font='700 84px "Space Grotesk",Georgia,serif';g.fillText(r.test==='typing'?'Typing Speed Certificate':r.test==='tenkey'?'10-Key Data Entry Certificate':'Data Entry Certificate',W/2,280);
+  g.font='400 32px "IBM Plex Sans",Arial';g.fillStyle='#3a4652';g.fillText('This certifies that',W/2,370);
+  g.font='italic 700 76px Georgia,serif';g.fillStyle='#16202b';g.fillText(name||'Your name',W/2,470,W-300);g.fillRect(W/2-420,495,840,3);
+  g.font='400 32px "IBM Plex Sans",Arial';g.fillStyle='#3a4652';g.fillText('completed a '+(r.dur>=60?Math.round(r.dur/60)+'-minute':(r.dur||0)+'-second')+' '+(r.test==='typing'?'typing test ('+(r.text||'text')+')':r.test==='tenkey'?'10-key number pad test':'alphanumeric data entry test')+' with the result',W/2,570);
+  g.font='700 120px "Space Grotesk",Arial';g.fillStyle='#0e2a47';g.fillText(r.test==='typing'?r.wpm+' WPM':fmt(r.kph)+' KPH',W/2,720);
+  g.font='600 36px "IBM Plex Sans",Arial';g.fillStyle='#2f7a52';g.fillText(r.acc+'% accuracy'+(r.test==='typing'?'  ·  '+r.gross+' gross WPM  ·  '+fmt(r.kph)+' KPH':r.test==='tenkey'?'  ·  '+r.entries+' entries':'  ·  '+r.records+' records'),W/2,790);
+  const date=new Date(r.at||Date.now()).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}),id=hashCode([name,r.test,r.wpm,r.kph,r.acc,r.at].join('|'));
+  g.font='400 28px "IBM Plex Sans",Arial';g.fillStyle='#3a4652';g.textAlign='left';g.fillText('Date: '+date,150,930);g.fillText('Result ID: '+id,150,975);g.textAlign='right';g.fillText('migabuilder.com/typing-test.html',W-150,930);g.fillText('Net WPM: 5 characters = 1 word, minus uncorrected errors',W-150,975);
+  g.textAlign='center';g.font='400 22px "IBM Plex Sans",Arial';g.fillStyle='#6b7580';g.fillText('Self-administered practice test taken in a web browser. Employers may ask you to repeat a test under their supervision.',W/2,1040);
+  g.beginPath();g.arc(W-250,720,85,0,Math.PI*2);g.fillStyle='#e2a63b';g.fill();g.fillStyle='#4a3410';g.font='700 26px "Space Grotesk",Arial';g.fillText('SELF-TEST',W-250,712);g.font='600 15px Arial';g.fillText('PRACTICE RESULT',W-250,740);return c}
+$('certBtn').addEventListener('click',()=>{const c=certCandidates().find(x=>x[0]===$('certWhich').value);if(!c)return;const name=$('certName').value.trim();if(!name){$('certNote').textContent='Type your name first.';$('certName').focus();return}
+  drawCert(c[2],name).toBlob(b=>download((c[2].test==='typing'?'typing':c[2].test)+'-certificate.png',b),'image/png')});
+
+// ---------- start ----------
+refreshCert();newTyping();aLoad();
+const h=(location.hash||'').slice(1);if(['tenkey','dataentry','audio','clerical','proof','learn','jobs'].includes(h))showTab(h);
+window.__typingForge={seed:n=>{seed=n},tt,tenSubmit,tenEnd,deSave,deEnd,get D(){return D},get K(){return K},get C(){return C},cAnswer,cEnd,pCheck,loadProof,get proof(){return proof},aCheck,wordDiff,results,reportText,drawCert,showTab,PROOFS};
+})();
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

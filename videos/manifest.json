@@ -1358,6 +1358,29 @@
    "kind": "image"
   }
  },
+ "passport-photo.html": {
+  "title": "Passport Photo Forge",
+  "video": "https://videos.migabuilder.com/passport-photo.mp4?v=386c1070",
+  "poster": "https://videos.migabuilder.com/passport-photo.jpg?v=9500f6f3",
+  "duration": 118,
+  "transcript": [
+   "Welcome to Passport Photo Forge. Make passport, visa and ID photos for your country, and print them cheaply on one 4 by 6 sheet. Your photo never leaves your device.",
+   "First, choose your country and document. Here, a United States passport, 2 by 2 inches. The rules for that photo appear underneath.",
+   "Then add a photo, or use the camera. Stand in front of a plain, light wall, with even light on your face.",
+   "The face is found on your device, and the photo is sized and centred to the rules. The red lines show where the top of the head must be, the green line is the chin, and the blue band is where the eyes go.",
+   "The checks tell you what is right and what still needs fixing: head height, eye height, centring, tilt, sharpness and background.",
+   "If needed, drag the photo, change its size or tilt, or place the head by hand: click the top of the hair, then the chin.",
+   "Background not plain enough? Choose Make it plain. An AI model runs on your device and puts you on white, off-white or light grey.",
+   "Download the 4 by 6 inch sheet and order it as a normal photo print at a pharmacy or photo kiosk. Six passport photos for the price of one print.",
+   "There is also a single photo, an A4 sheet for your own printer, and a digital photo under the size limit for online forms.",
+   "Now it is your turn. Open Passport Photo Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/passport-photo.jpg",
+   "label": "Passport photo sheet made in this video",
+   "kind": "image"
+  }
+ },
  "pattern-lab.html": {
   "title": "Work Pattern Test",
   "video": "https://videos.migabuilder.com/pattern-lab.mp4",
@@ -2030,6 +2053,32 @@
   "sample": {
    "file": "samples/tune-forge.png",
    "label": "Tuner screen from this video",
+   "kind": "image"
+  }
+ },
+ "typing-test.html": {
+  "title": "Typing Forge",
+  "video": "https://videos.migabuilder.com/typing-test.mp4?v=67a095ea",
+  "poster": "https://videos.migabuilder.com/typing-test.jpg?v=f2a3d27d",
+  "duration": 146,
+  "transcript": [
+   "Welcome to Typing Forge. Test your typing speed, get a certificate, and practise the tests employers use: 10-key, data entry, transcription, clerical checking and proofreading.",
+   "Choose how long the test lasts, and what to type: common words, paragraphs, business emails, numbers and symbols, or your own text.",
+   "Type the text in the box. The timer starts with your first key, and mistakes turn red.",
+   "Your result: net words per minute, which is what employers use, plus accuracy, keystrokes per hour and what that speed is good enough for.",
+   "Next, the 10-key test, for accounting, payroll and banking jobs. Type each number on the number pad and press Enter. It is scored in keystrokes per hour.",
+   "The data entry test gives you customer records to copy into a form, exactly as written, using Tab and Enter, like the Prove It tests.",
+   "Transcription plays a recording, such as a medical note, a legal letter or an emergency call. Type what you hear, and every missed word is shown.",
+   "Clerical checking: are the two lines exactly the same? Press S or D as fast as you can. Wrong answers cost a point.",
+   "Proofreading: click every word with a mistake, then check your answers.",
+   "Learn to type teaches touch typing row by row, with a colour for each finger, and then drills your weakest keys.",
+   "Job requirements shows the speed and accuracy common jobs ask for, and ticks the ones your best results already meet.",
+   "Finally, type your name and download a certificate of your result to attach to a job application.",
+   "Now it is your turn. Open Typing Forge on MigaBuilder and try it yourself. It is free, and there is nothing to sign up for."
+  ],
+  "sample": {
+   "file": "samples/typing-test.png",
+   "label": "Typing certificate made in this video",
    "kind": "image"
   }
  },
