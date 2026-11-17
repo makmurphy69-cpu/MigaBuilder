@@ -74,6 +74,10 @@ main{max-width:1180px}
 .lessons button{padding:7px 11px}
 .lessons button.done::after{content:' ✓';color:#2f7a52}
 .countdown{font:700 30px 'Space Grotesk';color:var(--ink)}
+@media(max-width:620px){.tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -18px 12px;padding:0 18px 4px;-webkit-overflow-scrolling:touch}.tabs::-webkit-scrollbar{display:none}.tab{flex:0 0 auto}
+.kb .row{gap:3px}.kb .k{flex:1 1 0;min-width:0!important;height:32px;font-size:11px;border-radius:4px}.kb .k[data-key=" "]{flex:0 0 60%}
+.jobs,.jobs tbody,.jobs tr,.jobs td{display:block;width:100%}.jobs tr:first-child{display:none}.jobs tr{border-bottom:2px solid rgba(22,32,43,.15);padding:6px 0}.jobs td{border:0;padding:3px 8px}.jobs td:nth-child(2)::before{content:'Needs: ';font-weight:600}.jobs td:nth-child(3)::before{content:'Practise: ';font-weight:600}
+.record{position:sticky;top:0;z-index:2;font-size:13px;line-height:1.5;padding:8px 10px}.record b{min-width:96px}}
 @media(max-width:760px){.de{grid-template-columns:1fr}.source{font-size:16px;height:140px}.pair{grid-template-columns:1fr}.kb .k{min-width:24px;height:32px;font-size:12px}}
 </style>
 </head>
@@ -131,6 +135,8 @@ main{max-width:1180px}
     <div class="stat"><b id="kDone">0</b><small>entries</small></div>
   </div>
   <div class="sheetwrap"><table class="sheet" id="kSheet"><thead><tr><th>#</th><th>Source</th><th>You typed</th></tr></thead><tbody></tbody></table></div>
+  <div class="actions" style="margin-top:8px"><button class="secondary" id="kNext">Next ⏎</button></div>
+  <p class="muted">On a phone, tap <b>Next</b> after each number. Real 10-key tests are taken on a computer with a number pad.</p>
   <div id="kResult"></div>
 </section>
 
@@ -150,7 +156,7 @@ main{max-width:1180px}
   </div>
   <div class="de">
     <div class="record" id="dRecord"><span class="muted">Press Start to see the first record.</span></div>
-    <form class="deform" id="dForm" autocomplete="off"></form>
+    <div><form class="deform" id="dForm" autocomplete="off"></form><button class="primary" id="dSave" type="button">Save record ⏎</button></div>
   </div>
   <div id="dResult"></div>
 </section>
@@ -284,7 +290,7 @@ function buildText(kind){
 
 // ---------- tabs ----------
 let curTab='typing';
-function showTab(t){curTab=t;document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===t));document.querySelectorAll('main>section[id^="p-"]').forEach(s=>s.classList.toggle('hidden',s.id!=='p-'+t));if(t==='jobs')renderJobs();if(t==='learn'&&!lesson)startLesson(0);if(t==='proof'&&!proof)loadProof(0);try{history.replaceState(null,'','#'+t)}catch(e){}}
+function showTab(t){curTab=t;document.querySelectorAll('.tab').forEach(b=>{b.setAttribute('aria-selected',b.dataset.tab===t);if(b.dataset.tab===t&&b.parentElement.scrollWidth>b.parentElement.clientWidth)b.parentElement.scrollTo({left:b.offsetLeft-40,behavior:'smooth'})});document.querySelectorAll('main>section[id^="p-"]').forEach(s=>s.classList.toggle('hidden',s.id!=='p-'+t));if(t==='jobs')renderJobs();if(t==='learn'&&!lesson)startLesson(0);if(t==='proof'&&!proof)loadProof(0);try{history.replaceState(null,'','#'+t)}catch(e){}}
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
 
 // ---------- results store ----------
@@ -345,6 +351,9 @@ function tenEnd(){if(!K.on)return;K.on=false;clearInterval(K.timer);const s=tenS
   const v=r.kph>=12000?'excellent — above what most accounting and payroll jobs ask for':r.kph>=10000?'very good — meets the 10,000 KPH many 10-key tests require':r.kph>=8000?'good — meets general data entry requirements (about 8,000 KPH)':'below most job requirements — aim for 8,000 KPH, using only the number pad and your right hand';
   $('kResult').innerHTML=resultCard('Your 10-key result',[[fmt(r.kph),'KPH'],[r.acc+'%','accuracy'],[r.entries,'entries'],[r.wrong,'wrong']],'<b>'+fmt(r.kph)+' KPH is '+v+'.</b> '+(r.acc<98?'Most 10-key tests also expect about 98% accuracy, so check each number before pressing Enter.':'Your accuracy is excellent.'))}
 $('kStart').addEventListener('click',tenStart);
+// Phone number pads have no Enter key, so a button moves to the next number.
+$('kNext').addEventListener('pointerdown',e=>e.preventDefault());
+$('kNext').addEventListener('click',()=>{const inp=$('kSheet').querySelector('tr.now input');if(K.on&&inp&&inp.value.trim())tenSubmit(inp.value.trim());else if(inp)inp.focus()});
 
 // ---------- alphanumeric data entry ----------
 const FIRST=['Maria','James','Aisha','Chen','Olga','Luis','Fatima','Peter','Grace','Ahmed','Sofia','David','Amara','Kenji','Elena','Samuel','Priya','Noah','Zainab','Lucas','Hannah','Omar','Mei','Daniel'];
@@ -366,6 +375,7 @@ function deEnd(){if(!D.on)return;D.on=false;clearInterval(D.timer);DF.forEach(([
   const v=r.kph>=10000?'excellent — above most data entry requirements':r.kph>=8000?'good — meets the 8,000 KPH most alphanumeric tests require':r.kph>=6000?'close — most tests ask for about 8,000 KPH':'below most job requirements — practise in the Typing test with Numbers & symbols';
   $('dResult').innerHTML=resultCard('Your data entry result',[[fmt(r.kph),'KPH'],[r.acc+'%','field accuracy'],[r.records,'records']],'<b>'+fmt(r.kph)+' KPH is '+v+'.</b> Fields must match exactly — capitals, spaces and punctuation included. '+(r.acc<95?'Under 95% accuracy usually fails, so check each record before Enter.':''))}
 $('dStart').addEventListener('click',deStart);
+$('dSave').addEventListener('click',deSave);
 
 // ---------- audio transcription ----------
 const SCRIPTS={

@@ -45,7 +45,7 @@ main{max-width:1180px}
 .tips li{margin-bottom:5px;break-inside:avoid}
 .legend{font-size:12px;color:var(--paper);margin-top:8px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .legend i{display:inline-block;width:14px;height:3px;vertical-align:middle;margin-right:4px}
-@media(max-width:860px){.layout{grid-template-columns:1fr}.tips{columns:1}.stage-col{order:-1}}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.tips{columns:1}}
 </style>
 </head>
 <body>
@@ -79,7 +79,17 @@ main{max-width:1180px}
     </div>
     <p class="muted" id="bgNote">Some countries, including the United States, do not accept digitally changed photos. If you can, take the photo in front of a plain white or light wall and keep your background.</p>
 
-    <h3>4. Fine-tune</h3>
+  </section>
+
+  <section class="stage-col">
+    <div class="stage" id="stage">
+      <div class="empty" id="empty">🛂<br><b>Your passport photo appears here</b><br>Choose a photo or use the camera.</div>
+      <div class="frame hidden" id="frame"><canvas id="out"></canvas><canvas id="guide"></canvas></div>
+    </div>
+    <div class="legend"><span><i style="background:#d8604a"></i>top of head (range)</span><span><i style="background:#2f7a52"></i>chin</span><span><i style="background:#2b7bbd"></i>eye line (range)</span><span><i style="background:#999"></i>centre</span></div>
+    <div class="status" id="status" role="status"></div>
+    <div class="panel hidden" id="tune" style="margin-top:12px;padding:16px">
+    <h3 style="font:700 16px 'Space Grotesk';margin:0 0 6px">4. Fine-tune</h3>
     <p class="muted" style="margin:0">Drag the photo to move it. The coloured lines show where the top of the head, the eyes and the chin must be.</p>
     <div class="adj">
       <label for="zoom">Size</label><input id="zoom" type="range" min="70" max="140" value="100"><span id="zoomV">100%</span>
@@ -91,15 +101,7 @@ main{max-width:1180px}
       <label style="font-size:13px;display:flex;gap:5px;align-items:center"><input type="checkbox" id="showGuides" checked> Show guides</label>
     </div>
     <p class="muted hidden" id="pickNote" style="font-weight:700;color:#7b281d"></p>
-  </section>
-
-  <section class="stage-col">
-    <div class="stage" id="stage">
-      <div class="empty" id="empty">🛂<br><b>Your passport photo appears here</b><br>Choose a photo or use the camera.</div>
-      <div class="frame hidden" id="frame"><canvas id="out"></canvas><canvas id="guide"></canvas></div>
     </div>
-    <div class="legend"><span><i style="background:#d8604a"></i>top of head (range)</span><span><i style="background:#2f7a52"></i>chin</span><span><i style="background:#2b7bbd"></i>eye line (range)</span><span><i style="background:#999"></i>centre</span></div>
-    <div class="status" id="status" role="status"></div>
     <div class="panel" style="margin-top:12px;padding:16px">
       <h2 style="font-size:17px">Checks</h2>
       <ul class="checks" id="checks"><li>Add a photo to see the checks.</li></ul>
@@ -180,7 +182,7 @@ function note(s){$('status').textContent=s;$('status').classList.toggle('show',!
 // ---------- load ----------
 async function loadBlob(blob){note('Opening the photo…');let bmp;try{bmp=await createImageBitmap(blob,{imageOrientation:'from-image'})}catch(e){const url=URL.createObjectURL(blob);bmp=await new Promise((ok,no)=>{const i=new Image;i.onload=()=>ok(i);i.onerror=()=>no(new Error('This file is not a picture the browser can open. Try a JPG or PNG.'));i.src=url})}
   const max=2400,k=Math.min(1,max/Math.max(bmp.width,bmp.height)),c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
-  src=c;work=c;mask=null;face=null;manual=null;$('empty').classList.add('hidden');$('frame').classList.remove('hidden');['dlSheet','dlA4','dlOne','dlDigital'].forEach(id=>$(id).disabled=false);
+  src=c;work=c;mask=null;face=null;manual=null;$('empty').classList.add('hidden');$('frame').classList.remove('hidden');$('tune').classList.remove('hidden');if(window.innerWidth<=860)$('stage').scrollIntoView({behavior:'smooth',block:'start'});['dlSheet','dlA4','dlOne','dlDigital'].forEach(id=>$(id).disabled=false);
   setupCanvas();fallbackFit();draw();await findFace();if($('bgMode').value==='ai')await makePlain();autoFit()}
 $('file').addEventListener('change',e=>{const f=e.target.files[0];if(f)loadBlob(f).catch(err=>note(err.message||String(err)))});
 $('fileBtn').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();$('file').click()}});
@@ -215,7 +217,7 @@ function fallbackFit(){T.rot=0;T.s=Math.max(out.width/src.width,out.height/src.h
 function autoFit(){setupCanvas();const g=geom();if(!g){fallbackFit();draw();return}
   const target=(P.head[0]+P.head[1])/2*PPM;T.rot=-g.angle;T.s=target/g.head;T.base=T.s;T.cx=g.mid.x;T.cy=g.mid.y;T.x=out.width/2;
   const crownOff=(g.crown.y-g.mid.y)*T.s*Math.cos(g.angle);// negative: crown is above the eyes
-  if(P.eye&&!manual){T.y=out.height-(P.eye[0]+P.eye[1])/2*PPM;if(T.y+crownOff<1.5*PPM)T.y=1.5*PPM-crownOff}
+  if(P.eye){T.y=out.height-(P.eye[0]+P.eye[1])/2*PPM;if(T.y+crownOff<1.5*PPM)T.y=1.5*PPM-crownOff}
   else T.y=(out.height-target)*.42-crownOff;
   syncSliders();draw()}
 function syncSliders(){$('zoom').value=Math.round(T.s/T.base*100);$('zoomV').textContent=$('zoom').value+'%';$('rot').value=(T.rot*180/Math.PI).toFixed(1);$('rotV').textContent=(+$('rot').value).toFixed(1)+'°'}
@@ -236,7 +238,7 @@ function drawGuides(){const g=guide.getContext('2d'),W=guide.width,H=guide.heigh
   g.fillStyle='rgba(216,96,74,.18)';g.fillRect(0,chinY-P.head[1]*PPM,W,(P.head[1]-P.head[0])*PPM);line(chinY-P.head[0]*PPM,'#d8604a');line(chinY-P.head[1]*PPM,'#d8604a');line(chinY,'#2f7a52');
   if(P.eye){g.fillStyle='rgba(43,123,189,.15)';g.fillRect(0,H-P.eye[1]*PPM,W,(P.eye[1]-P.eye[0])*PPM);line(H-P.eye[0]*PPM,'#2b7bbd');line(H-P.eye[1]*PPM,'#2b7bbd')}
   g.setLineDash([]);if(geo){const m=toOut(geo.mid),c=toOut(geo.crown);g.fillStyle='#2b7bbd';g.beginPath();g.arc(m.x,m.y,lw*2,0,7);g.fill();g.fillStyle='#d8604a';g.beginPath();g.arc(c.x,c.y,lw*2,0,7);g.fill()}
-  if(picking){g.fillStyle='rgba(8,24,38,.55)';g.fillRect(0,0,W,H*.11);g.fillStyle='#fff';g.font='700 '+Math.round(W/20)+'px IBM Plex Sans,Arial';g.textAlign='center';g.fillText(picking.step===0?'Click the TOP of the head (hair)':'Now click the CHIN',W/2,H*.075)}}
+  if(picking){g.fillStyle='rgba(8,24,38,.55)';g.fillRect(0,0,W,H*.11);g.fillStyle='#fff';g.font='700 '+Math.round(W/20)+'px IBM Plex Sans,Arial';g.textAlign='center';const v=matchMedia('(pointer: coarse)').matches?'Tap':'Click';g.fillText(picking.step===0?v+' the TOP of the head (hair)':'Now '+v.toLowerCase()+' the CHIN',W/2,H*.075)}}
 $('showGuides').addEventListener('change',drawGuides);
 $('bgColor').addEventListener('change',async()=>{if(mask)await makePlain();draw()});
 $('bgMode').addEventListener('change',async()=>{if(!src)return;if($('bgMode').value==='ai'){await makePlain();autoFit()}else{work=src;draw()}});
@@ -255,11 +257,11 @@ async function makePlain(){if(!src)return;try{if(!mask){note('Loading the backgr
 let drag=null,picking=null;
 function evPt(e){const r=guide.getBoundingClientRect();return{x:(e.clientX-r.left)*guide.width/r.width,y:(e.clientY-r.top)*guide.height/r.height}}
 guide.addEventListener('pointerdown',e=>{if(!src)return;const p=evPt(e);if(picking){const sp=toSrc(p);if(picking.step===0){picking.top=sp;picking.step=1;drawGuides()}else{manual={top:picking.top,chin:sp};picking=null;guide.classList.remove('pick');$('pickNote').classList.add('hidden');note('Head placed by hand.');autoFit()}return}
-  drag={p,x:T.x,y:T.y};guide.setPointerCapture(e.pointerId);guide.style.cursor='grabbing'});
+  drag={p,x:T.x,y:T.y};try{guide.setPointerCapture(e.pointerId)}catch(err){}guide.style.cursor='grabbing'});
 guide.addEventListener('pointermove',e=>{if(!drag)return;const p=evPt(e);T.x=drag.x+p.x-drag.p.x;T.y=drag.y+p.y-drag.p.y;draw()});
 guide.addEventListener('pointerup',()=>{drag=null;guide.style.cursor=''});
 guide.addEventListener('wheel',e=>{if(!src)return;e.preventDefault();const z=Math.max(70,Math.min(140,+$('zoom').value-Math.sign(e.deltaY)*2));$('zoom').value=z;$('zoom').dispatchEvent(new Event('input'))},{passive:false});
-$('pickBtn').addEventListener('click',()=>{if(!src)return note('Add a photo first.');manual=null;picking={step:0};guide.classList.add('pick');$('pickNote').textContent='Click the top of the head (top of the hair), then the chin, on the photo.';$('pickNote').classList.remove('hidden');fallbackFit();T.s=T.base;draw();$('frame').scrollIntoView({block:'nearest',behavior:'smooth'})});
+$('pickBtn').addEventListener('click',()=>{if(!src)return note('Add a photo first.');manual=null;picking={step:0};guide.classList.add('pick');$('pickNote').textContent=(matchMedia('(pointer: coarse)').matches?'Tap':'Click')+' the top of the head (top of the hair), then the chin, on the photo.';$('pickNote').classList.remove('hidden');fallbackFit();T.s=T.base;draw();$('frame').scrollIntoView({block:'nearest',behavior:'smooth'})});
 document.addEventListener('keydown',e=>{if(!src||e.target.matches('input,select,textarea'))return;const m={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]}[e.key];if(m){e.preventDefault();T.x+=m[0]*4;T.y+=m[1]*4;draw()}});
 
 // ---------- checks ----------
@@ -269,7 +271,7 @@ function runChecks(){if(!src){return}const L=[],add=(lvl,txt)=>L.push([lvl,txt])
   if(geo){const top=toOut(geo.crown),chin=toOut(geo.chin),head=Math.hypot(chin.x-top.x,chin.y-top.y)/PPM,ok=head>=P.head[0]-.3&&head<=P.head[1]+.3;add(ok?'ok':'bad','Head height '+head.toFixed(1)+' mm (needs '+Math.round(P.head[0])+'–'+Math.round(P.head[1])+' mm)'+(ok?'':' — use the Size slider'));
     if(top.y<.8*PPM)add('bad','The top of the head is too close to the edge — drag the photo down');else add('ok','Space above the head');
     if(chin.y>out.height-1.5*PPM)add('bad','The chin is too low — drag the photo up');
-    if(P.eye){const m=toOut(geo.mid),e=(out.height-m.y)/PPM,okE=e>=P.eye[0]-.3&&e<=P.eye[1]+.3;add(okE?'ok':'bad','Eyes '+e.toFixed(1)+' mm from the bottom (needs '+Math.round(P.eye[0])+'–'+Math.round(P.eye[1])+' mm)')}
+    if(P.eye){const m=toOut(geo.mid),e=(out.height-m.y)/PPM,okE=e>=P.eye[0]-.3&&e<=P.eye[1]+.3;add(okE?'ok':manual?'warn':'bad',(manual?'Eyes about ':'Eyes ')+e.toFixed(1)+' mm from the bottom (needs '+Math.round(P.eye[0])+'–'+Math.round(P.eye[1])+' mm)'+(manual?' — estimated, check that your eyes are inside the blue band':''))}
     const m=toOut(geo.mid),off=Math.abs(m.x-out.width/2)/PPM;add(off<1.5?'ok':'warn',off<1.5?'Face centred':'Face is '+off.toFixed(1)+' mm off centre — drag it to the middle line');
     if(face&&!manual){const tilt=Math.abs((geo.angle+T.rot)*180/Math.PI);add(tilt<2?'ok':'warn',tilt<2?'Head straight (eyes level)':'Head tilted '+tilt.toFixed(1)+'° — press Auto-fit or use the Tilt slider')}}
   const cov=[[0,0],[out.width,0],[0,out.height],[out.width,out.height]].every(([x,y])=>{const p=toSrc({x,y});return p.x>=-1&&p.y>=-1&&p.x<=work.width+1&&p.y<=work.height+1});add(cov?'ok':'bad',cov?'Photo fills the whole frame':'The photo does not fill the frame — drag it, or use a photo with more space around the head and shoulders');
