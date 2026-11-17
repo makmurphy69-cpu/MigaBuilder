@@ -65,7 +65,9 @@ node scripts/build-language-pages.mjs --meta <tool> # first, when its <title>, d
 ```
 
 The *Page smoke test* check runs `--check` and fails when the copies are out
-of date. Translated titles, descriptions and FAQ answers are kept in
+of date. `node scripts/check-translations.mjs [lang] [page]` lists English text
+that is still showing on a language page (it only reports); add any it finds to
+the page's `i18n/<page>.js`. Translated titles, descriptions and FAQ answers are kept in
 `i18n/page-meta.json`. Tools without translations (no `i18n.js`) get no
 language pages.
 
