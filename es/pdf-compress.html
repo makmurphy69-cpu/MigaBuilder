@@ -51,6 +51,8 @@
     <label class="level"><input type="radio" name="level" value="lossless"><strong>Light</strong><small class="muted">Cleans up the file structure. Text stays selectable; best for PDFs made from Word or a website.</small></label>
     <label class="level"><input type="radio" name="level" value="150:0.72" checked><strong>Recommended</strong><small class="muted">Clear on screen and in print (150 dpi). Big savings on scans and photos.</small></label>
     <label class="level"><input type="radio" name="level" value="96:0.55"><strong>Strong</strong><small class="muted">Smallest file (96 dpi). Good for email attachments and upload limits.</small></label>
+    <label class="level"><input type="radio" name="level" value="target"><strong>Fit under a size</strong><small class="muted">For forms with an upload limit. Keeps the best quality that still fits.</small>
+      <span style="display:flex;gap:6px;align-items:center;margin-top:6px"><input id="targetNum" type="number" min="1" step="any" value="1" inputmode="decimal" aria-label="Size limit" style="width:7em"><select id="targetUnit" aria-label="Unit"><option value="1000">KB</option><option value="1000000" selected>MB</option></select></span></label>
   </div>
   <label style="display:flex;gap:8px;align-items:center;margin-bottom:14px"><input id="gray" type="checkbox"> Convert to black and white (grayscale) for extra savings</label>
   <div class="actions"><button class="primary" id="go">Compress PDF</button><button class="secondary hidden" id="dl">Download compressed PDF</button></div>
@@ -89,23 +91,45 @@ pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/p
 const size=b=>b>=1048576?(b/1048576).toFixed(2)+' MB':Math.max(1,Math.round(b/1024))+' KB';
 function note(s){$('status').textContent=s;$('status').classList.add('show')}
 let file=null,output=null;
+['targetNum','targetUnit'].forEach(id=>$(id).addEventListener('focus',()=>{document.querySelector('input[name=level][value=target]').checked=true}));
+// 1 KB counts as 1000 bytes and 1 MB as 1,000,000, so the file fits however a form counts them.
+const limitBytes=()=>Math.floor((parseFloat($('targetNum').value)||0)*(+$('targetUnit').value));
 $('file').onchange=()=>{file=$('file').files[0];output=null;$('dl').classList.add('hidden');$('result').classList.add('hidden');$('status').classList.remove('show');$('info').textContent=file?file.name+' · '+size(file.size):''};
 function toJpegBytes(canvas,q){return new Promise(r=>canvas.toBlob(b=>b.arrayBuffer().then(a=>r(new Uint8Array(a))),'image/jpeg',q))}
-async function rasterize(bytes,dpi,quality,gray){const pdf=await pdfjsLib.getDocument({data:bytes.slice()}).promise,out=await PDFLib.PDFDocument.create(),n=pdf.numPages;
+async function rasterize(bytes,dpi,quality,gray,label){const pdf=await pdfjsLib.getDocument({data:bytes.slice()}).promise,out=await PDFLib.PDFDocument.create(),n=pdf.numPages;
   for(let i=1;i<=n;i++){const page=await pdf.getPage(i),base=page.getViewport({scale:1}),vp=page.getViewport({scale:dpi/72}),c=document.createElement('canvas');
     c.width=Math.ceil(vp.width);c.height=Math.ceil(vp.height);const g=c.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,c.width,c.height);
     await page.render({canvasContext:g,viewport:vp}).promise;
     if(gray){const im=g.getImageData(0,0,c.width,c.height),d=im.data;for(let j=0;j<d.length;j+=4){const l=.299*d[j]+.587*d[j+1]+.114*d[j+2];d[j]=d[j+1]=d[j+2]=l}g.putImageData(im,0,0)}
     const jpg=await out.embedJpg(await toJpegBytes(c,quality));out.addPage([base.width,base.height]).drawImage(jpg,{x:0,y:0,width:base.width,height:base.height});
-    c.width=c.height=0;page.cleanup();$('bar').style.width=(i/n*100)+'%';note('Compressing page '+i+' of '+n+'…')}
+    c.width=c.height=0;page.cleanup();$('bar').style.width=(i/n*100)+'%';note((label?label+' · ':'')+'Compressing page '+i+' of '+n+'…')}
   await pdf.destroy();return out.save({useObjectStreams:true})}
 async function lossless(bytes){const doc=await PDFLib.PDFDocument.load(bytes,{updateMetadata:false});$('bar').style.width='60%';return doc.save({useObjectStreams:true,addDefaultPage:false})}
+// Fit under a size: Light first (text stays selectable), then each step down in sharpness and quality until it fits.
+// Steps whose expected size is far above the limit are skipped; size grows about with dpi² and with JPEG quality.
+const STEPS=[[150,.72],[120,.62],[96,.55],[80,.45],[66,.38],[50,.3]],QF={.72:1,.62:.82,.55:.72,.45:.6,.38:.52,.3:.45};
+async function fitUnder(bytes,limit,gray){
+  let best=null;const keep=r=>{if(!best||r.length<best.length)best=r};
+  const light=await lossless(bytes);keep(light.length<bytes.length?light:bytes);
+  if(best.length<=limit)return{res:best,fits:true,text:true};
+  let ref=null;
+  for(let k=0;k<STEPS.length;k++){const[dpi,q]=STEPS[k];
+    if(ref&&k<STEPS.length-1&&ref.size*Math.pow(dpi/ref.dpi,2)*QF[q]/QF[ref.q]>limit*1.4)continue;
+    const r=await rasterize(bytes,dpi,q,gray,'Try '+(k+1)+' of '+STEPS.length);
+    ref={size:r.length,dpi,q};keep(r);if(r.length<=limit)return{res:r,fits:true,text:false};}
+  return{res:best,fits:false,text:best===light||best===bytes};
+}
 $('go').onclick=async()=>{if(!file)return note('Choose a PDF first.');const level=document.querySelector('input[name=level]:checked').value;$('go').disabled=true;$('dl').classList.add('hidden');$('result').classList.add('hidden');$('barWrap').classList.remove('hidden');$('bar').style.width='0';
-  try{const bytes=new Uint8Array(await file.arrayBuffer());let res;
-    if(level==='lossless')res=await lossless(bytes);else{const[dpi,q]=level.split(':').map(Number);res=await rasterize(bytes,dpi,q,$('gray').checked)}
+  try{const bytes=new Uint8Array(await file.arrayBuffer());let res,fit=null;
+    if(level==='target'){const limit=limitBytes();if(limit<1000)throw new Error('Type a size limit of at least 1 KB.');
+      if(file.size<=limit){$('bar').style.width='100%';output=null;note('This PDF is already under your limit. You can send it as it is.');return}
+      fit=await fitUnder(bytes,limit,$('gray').checked);res=fit.res}
+    else if(level==='lossless')res=await lossless(bytes);else{const[dpi,q]=level.split(':').map(Number);res=await rasterize(bytes,dpi,q,$('gray').checked)}
     $('bar').style.width='100%';$('before').textContent=size(file.size);$('after').textContent=size(res.length);
     const pct=Math.round((1-res.length/file.size)*100);$('saved').textContent=pct>0?pct+'%':'0%';$('result').classList.remove('hidden');
-    if(res.length<file.size){output=res;$('dl').classList.remove('hidden');note(pct<3?'Only '+size(file.size-res.length)+' smaller. For scans and photos, Recommended or Strong will save far more.':'Done — '+size(file.size-res.length)+' smaller. Check the result looks right before sending it.')}
+    if(fit&&res.length<file.size){output=res;$('dl').classList.remove('hidden');note(fit.fits?(fit.text?'Done — it fits, and the text is still selectable.':'Done — it fits. Check the pages still look clear before sending it.'):'Still over your limit at the smallest possible size (see Compressed above). Try black and white, or split the PDF into parts in PDF Forge.')}
+    else if(fit){output=null;note('This PDF cannot get smaller than it is. Split it into parts in PDF Forge to get under the limit.')}
+    else if(res.length<file.size){output=res;$('dl').classList.remove('hidden');note(pct<3?'Only '+size(file.size-res.length)+' smaller. For scans and photos, Recommended or Strong will save far more.':'Done — '+size(file.size-res.length)+' smaller. Check the result looks right before sending it.')}
     else{output=null;note(level==='lossless'?'This PDF is already well optimised. Try Recommended or Strong for scans and photos.':'This PDF is already smaller than the compressed version would be — it probably contains mostly text. Try Light instead.')}}
   catch(e){note(/encrypt|password/i.test(e.message||e.name)?'This PDF is password-protected. Remove the password first.':'Could not compress this PDF: '+(e.message||e))}
   finally{$('go').disabled=false;setTimeout(()=>$('barWrap').classList.add('hidden'),600)}};

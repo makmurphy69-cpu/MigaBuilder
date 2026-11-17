@@ -661,6 +661,34 @@ test('pdf-compress: output is a valid PDF with every page', 'pdf-compress.html',
   expect(out.buf.length < before, 'compressed PDF is not smaller (' + out.buf.length + ' vs ' + before + ' bytes)');
 });
 
+async function compressToLimit(page, fixture, kb) {
+  await page.setInputFiles('#file', path.join(FIX, fixture));
+  await page.check('input[name=level][value=target]');
+  await page.fill('#targetNum', String(kb));
+  await page.selectOption('#targetUnit', '1000');
+  await page.click('#go');
+  await page.waitForFunction(() => !document.getElementById('go').disabled && document.getElementById('status').textContent, null, { timeout: 120000 });
+  return page.textContent('#status');
+}
+
+test('pdf-compress: "Fit under a size" gets a photo PDF under 150 KB with every page', 'pdf-compress.html', async (page) => {
+  const said = await compressToLimit(page, 'photo-pages.pdf', 150);
+  expect(/it fits/.test(said), 'status should say it fits, got: ' + said);
+  const out = await downloadOf(page, () => page.click('#dl'));
+  expect(ascii(out.buf, 0, '%PDF') && out.buf.length <= 150000, 'download should be a PDF of at most 150,000 bytes, got ' + out.buf.length);
+  expect((await pdfPageTexts(page, out.buf)).length === 3, 'the PDF should keep 3 pages');
+});
+
+test('pdf-compress: "Fit under a size" keeps text selectable when Light is enough, and says when a limit is impossible', 'pdf-compress.html', async (page) => {
+  const said = await compressToLimit(page, 'newsletter.pdf', 25);
+  expect(/still selectable/.test(said), 'a text PDF that fits with Light should keep its text, got: ' + said);
+  const out = await downloadOf(page, () => page.click('#dl'));
+  expect(out.buf.length <= 25000, 'download should be at most 25,000 bytes, got ' + out.buf.length);
+  expect((await pdfPageTexts(page, out.buf)).join(' ').trim().length > 20, 'the text should still be in the PDF');
+  const tooSmall = await compressToLimit(page, 'photo-pages.pdf', 5);
+  expect(/over your limit/.test(tooSmall), 'an impossible limit should say how close it got, got: ' + tooSmall);
+});
+
 const SITE_PLAN = { siteName: 'Sunrise Bakery', tagline: 'Fresh bread every morning', pages: [{ slug: 'index', navLabel: 'Home', purpose: 'Homepage' }, { slug: 'menu', navLabel: 'Menu', purpose: 'Breads and cakes' }, { slug: 'contact', navLabel: 'Contact', purpose: 'Contact details and a form' }], design: { mood: 'warm', primary: '#b4530f', accent: '#f4b942', theme: 'light', headingFont: 'Fraunces', bodyFont: 'Inter', corners: 'round', ctaLabel: 'Order today' } };
 const SITE_PAGE = '<title>Sunrise Bakery</title>\n<meta name="description" content="Fresh bread.">\n<main><section class="hero hero-center"><div class="container"><h1>Real sourdough</h1><p class="lead">Baked at 4am.</p><div class="actions"><a class="btn btn-primary" href="menu.html">See the menu</a></div></div></section><section class="section"><div class="container"><div class="grid grid-3"><article class="card"><h3>Local flour</h3></article></div></div></section></main>';
 test('clip-forge: Auto Edit plans two clips with the AI and renders one video', 'clip-forge.html', async (page, ctx) => {
