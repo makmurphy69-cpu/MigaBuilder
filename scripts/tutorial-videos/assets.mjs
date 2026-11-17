@@ -35,6 +35,18 @@ const DRAW = {
     g.strokeStyle='#b36b4f';g.lineWidth=6;g.beginPath();g.moveTo(400,395);g.lineTo(388,440);g.lineTo(405,442);g.stroke();
     g.fillStyle='#a3413a';g.beginPath();g.ellipse(400,490,48,20,0,0,Math.PI);g.fill();
     g.fillStyle='rgba(230,120,120,.35)';[[300,440],[500,440]].forEach(([x,y])=>{g.beginPath();g.arc(x,y,26,0,Math.PI*2);g.fill()});`],
+  // Passport Forge: the same face further from the camera, in front of a plain light wall.
+  'passport-portrait.png': [900, 1100, `
+    g.fillStyle='#eef1f3';g.fillRect(0,0,900,1100);g.save();g.translate(150,240);g.scale(.75,.75);
+    g.fillStyle='#2f6f9f';g.beginPath();g.ellipse(400,820,250,190,0,Math.PI,0);g.fill();g.fillRect(150,820,500,400);
+    g.fillStyle='#e9b48f';g.fillRect(360,500,80,170);
+    g.beginPath();g.ellipse(400,380,165,195,0,0,Math.PI*2);g.fill();
+    g.fillStyle='#3b2416';g.beginPath();g.ellipse(400,245,175,100,0,Math.PI,0);g.fill();g.fillRect(228,240,40,130);g.fillRect(532,240,40,130);
+    g.fillStyle='#fff';[[335,370],[465,370]].forEach(([x,y])=>{g.beginPath();g.ellipse(x,y,30,22,0,0,Math.PI*2);g.fill()});
+    g.fillStyle='#2b1a10';[[338,372],[468,372]].forEach(([x,y])=>{g.beginPath();g.arc(x,y,12,0,Math.PI*2);g.fill()});
+    g.strokeStyle='#2b1a10';g.lineWidth=7;g.lineCap='round';[[300,322,370,318],[430,318,500,322]].forEach(([a,b,c,d])=>{g.beginPath();g.moveTo(a,b);g.lineTo(c,d);g.stroke()});
+    g.strokeStyle='#b36b4f';g.lineWidth=6;g.beginPath();g.moveTo(400,395);g.lineTo(388,440);g.lineTo(405,442);g.stroke();
+    g.strokeStyle='#a3413a';g.lineWidth=7;g.beginPath();g.moveTo(370,492);g.lineTo(430,492);g.stroke();g.restore();`],
   'drawing-house.png': [1000, 750, `
     g.fillStyle='#fffdf6';g.fillRect(0,0,1000,750);g.lineWidth=9;g.lineCap='round';g.lineJoin='round';
     g.fillStyle='#ffd43b';g.beginPath();g.arc(830,140,80,0,Math.PI*2);g.fill();g.strokeStyle='#f5a300';for(let i=0;i<12;i++){const a=i*Math.PI/6;g.beginPath();g.moveTo(830+Math.cos(a)*100,140+Math.sin(a)*100);g.lineTo(830+Math.cos(a)*140,140+Math.sin(a)*140);g.stroke()}

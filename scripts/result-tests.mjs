@@ -1658,6 +1658,118 @@ test('visit-forge: the example summary downloads as a PDF with the reason and th
     expect(text.includes(want), 'the PDF is missing "' + want + '": ' + text.slice(0, 400));
 });
 
+// Size of a JPEG from its start-of-frame marker.
+function jpegSize(buf) {
+  let i = 2;
+  while (i < buf.length) {
+    if (buf[i] !== 0xFF) { i++; continue; }
+    const m = buf[i + 1], len = buf.readUInt16BE(i + 2);
+    if (m >= 0xC0 && m <= 0xC3) return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+    i += 2 + len;
+  }
+  return null;
+}
+
+test('typing-test: a timed test scores net WPM, the job tests score KPH and accuracy, and the certificate and results download', 'typing-test.html', async (page) => {
+  await page.evaluate(() => { try { localStorage.removeItem('typingForge.results'); } catch (e) {} });
+  await page.selectOption('#tDur', '30');
+  const target = await page.evaluate(() => window.__typingForge.tt.st.target);
+  await page.click('#tInput');
+  await page.keyboard.type(target.slice(0, 40) + '#' + target.slice(41, 100)); // 100 characters, one mistake left in
+  // pretend the 30 seconds are over: 100 characters = 20 words in half a minute = 40 gross WPM, minus 2 for the error
+  await page.evaluate(() => { window.__typingForge.tt.st.start -= 30000; });
+  await page.waitForSelector('#tResult .result-card', { timeout: 5000 });
+  const r = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(r.test === 'typing' && r.gross === 40 && r.wpm === 38 && r.uncorr === 1, 'wrong typing score: ' + JSON.stringify(r));
+  expect(r.acc >= 98 && r.acc < 100, 'accuracy should count the one mistake: ' + r.acc);
+  // 10-key: two right, one wrong
+  await page.click('.tab[data-tab=tenkey]');
+  await page.selectOption('#kDur', '60');
+  await page.click('#kStart');
+  for (let i = 0; i < 3; i++) {
+    const src = await page.evaluate(i => window.__typingForge.K.rows[i].src, i);
+    await page.keyboard.type(i === 1 ? src + '9' : src);
+    await page.keyboard.press(i === 2 ? 'Tab' : 'Enter');
+  }
+  await page.evaluate(() => { window.__typingForge.K.start -= 60000; });
+  await page.waitForSelector('#kResult .result-card', { timeout: 5000 });
+  const k = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(k.test === 'tenkey' && k.entries === 3 && k.wrong === 1 && Math.abs(k.acc - 66.7) < 0.1 && k.kph > 0, 'wrong 10-key score: ' + JSON.stringify(k));
+  // data entry: one record typed exactly
+  await page.click('.tab[data-tab=dataentry]');
+  await page.click('#dStart');
+  const rec = await page.evaluate(() => window.__typingForge.D.rec);
+  for (const f of ['name', 'address', 'city', 'state', 'zip', 'phone', 'account']) { await page.keyboard.type(rec[f]); await page.keyboard.press('Tab'); }
+  await page.keyboard.type(rec.amount); await page.keyboard.press('Enter');
+  await page.evaluate(() => window.__typingForge.deEnd());
+  const d = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(d.test === 'dataentry' && d.records === 1 && d.acc === 100, 'wrong data entry score: ' + JSON.stringify(d));
+  // clerical checking: answer every pair right
+  await page.click('.tab[data-tab=clerical]');
+  await page.click('#cStart');
+  for (let i = 0; i < 6; i++) { const same = await page.evaluate(() => { const C = window.__typingForge.C; return C.items[C.i].same; }); await page.keyboard.press(same ? 's' : 'd'); }
+  await page.evaluate(() => window.__typingForge.cEnd());
+  const c = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(c.test === 'clerical' && c.right === 6 && c.wrong === 0, 'wrong clerical score: ' + JSON.stringify(c));
+  // proofreading: mark every hidden mistake
+  await page.click('.tab[data-tab=proof]');
+  await page.evaluate(() => window.__typingForge.proof.toks.forEach((t, k) => { if (t.err) document.querySelector('#pBox [data-k="' + k + '"]').classList.add('mark'); }));
+  await page.click('#pCheck');
+  const p = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(p.test === 'proof' && p.score === 100 && p.found === p.total && p.total >= 8, 'wrong proofreading score: ' + JSON.stringify(p));
+  // the transcription scorer counts matching words
+  const w = await page.evaluate(() => window.__typingForge.wordDiff('The patient is fifty two years old.', 'the patient is 52 years old'));
+  expect(w.match === 5 && w.refN === 7, 'transcription word matching is wrong: ' + JSON.stringify(w));
+  // certificate (PNG) for the typing result, and the results report
+  await page.fill('#certName', 'Test Person');
+  await page.selectOption('#certWhich', 'last-typing');
+  const cert = await downloadOf(page, () => page.click('#certBtn'));
+  expect(cert.name === 'typing-certificate.png' && magic(cert.buf, 0x89, 0x50, 0x4e, 0x47) && cert.buf.length > 30000, 'certificate is not a PNG: ' + cert.name + ' ' + cert.buf.length);
+  expect(cert.buf.readUInt32BE(16) === 1600 && cert.buf.readUInt32BE(20) === 1130, 'certificate has the wrong size');
+  await page.click('.tab[data-tab=jobs]');
+  expect(/✓ typing 35 WPM/.test(await page.textContent('#jobTable')), 'the job table does not compare the 38 WPM result');
+  const rep = await downloadOf(page, () => page.click('#dlReport'));
+  const txt = rep.buf.toString('utf8');
+  expect(rep.name === 'typing-results.txt' && /Typing test: 38 net WPM/.test(txt) && /10-key: [\d,]+ KPH/.test(txt) && /Proofreading: 100%/.test(txt), 'results report is wrong: ' + txt.slice(0, 300));
+});
+
+test('passport-photo: a head placed by hand is sized to the US rules, and the 4×6 sheet, photo and digital file download at 300 dpi', 'passport-photo.html', async (page) => {
+  await page.selectOption('#preset', 'us');
+  await page.setInputFiles('#file', path.join(FIX, 'passport-portrait.png'));
+  // automatic face finding needs the CDN; wait until it has answered either way
+  await page.waitForFunction(() => { const s = document.querySelector('#status').textContent; return s && !/Opening|Finding/.test(s); }, null, { timeout: 90000 });
+  await page.click('#pickBtn');
+  await page.locator('#guide').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(600); // the page scrolls the photo into view
+  // passport-portrait.png: top of the hair at (450, 349), chin at (450, 671)
+  for (const pt of [{ x: 450, y: 349 }, { x: 450, y: 671 }]) {
+    const xy = await page.evaluate(pt => { const o = window.__passport.toOut(pt), r = document.querySelector('#guide').getBoundingClientRect(), c = document.querySelector('#guide'); return [r.left + o.x * r.width / c.width, r.top + o.y * r.height / c.height]; }, pt);
+    await page.mouse.click(xy[0], xy[1]);
+  }
+  const checks = await page.evaluate(() => window.__passport.checks.map(c => c.join(' ')));
+  expect(checks.includes('ok Head placed by hand'), 'the head was not placed by hand: ' + checks.join(' | '));
+  const head = checks.find(c => /Head height/.test(c)) || '';
+  expect(/^ok Head height 30\.\d mm/.test(head), 'the head is not sized to 25–35 mm: ' + head);
+  expect(checks.some(c => c === 'ok Photo fills the whole frame') && checks.some(c => c === 'ok Background plain and light'), 'frame or background check failed: ' + checks.join(' | '));
+  const sheet = await downloadOf(page, () => page.click('#dlSheet'));
+  expect(sheet.name === 'passport-photos-4x6-us.jpg' && magic(sheet.buf, 0xFF, 0xD8), 'the sheet is not a JPG: ' + sheet.name);
+  const ss = jpegSize(sheet.buf);
+  expect(ss && ss.w === 1800 && ss.h === 1200, 'the 4×6 sheet is not 1800×1200: ' + JSON.stringify(ss));
+  expect(sheet.buf[13] === 1 && sheet.buf.readUInt16BE(14) === 300, 'the sheet is not marked 300 dpi');
+  expect(await page.evaluate(() => window.__passport.sheetLayout(1800, 1200).n) === 6, 'a 4×6 sheet should hold six 2×2 in photos');
+  const one = await downloadOf(page, () => page.click('#dlOne'));
+  const os = jpegSize(one.buf);
+  expect(os && os.w === 600 && os.h === 600, 'the single photo is not 600×600 (2×2 in at 300 dpi): ' + JSON.stringify(os));
+  await page.fill('#maxKb', '40');
+  const dig = await downloadOf(page, () => page.click('#dlDigital'));
+  expect(magic(dig.buf, 0xFF, 0xD8) && dig.buf.length <= 40 * 1024, 'the digital photo is over 40 KB: ' + dig.buf.length);
+  // the UK preset changes the size to 35×45 mm
+  await page.selectOption('#preset', 'uk');
+  const uk = await downloadOf(page, () => page.click('#dlOne'));
+  const us = jpegSize(uk.buf);
+  expect(us && us.w === 413 && us.h === 531, 'the UK photo is not 35×45 mm at 300 dpi: ' + JSON.stringify(us));
+});
+
 // ---------- runner ----------
 const words = process.argv.slice(2).map(w => w.toLowerCase());
 const chosen = TESTS.filter(t => !words.length || words.every(w => t.name.toLowerCase().includes(w)));

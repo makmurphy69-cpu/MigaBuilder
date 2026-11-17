@@ -270,6 +270,8 @@
     'plane-forge': ['leonardo', 'owl', 'pencil', 'cap'],
     'cube-forge': ['mondrian', 'robot', 'star', 'cap'],
     'grow-forge': ['monet', 'frog', 'book', 'cap'],
+    'typing-test': ['holzer', 'robot', 'laptop'],
+    'passport-photo': ['modigliani', 'owl', 'camera', 'bowler'],
     'theory-forge': ['kandinsky', 'owl', 'note', 'headphones'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
