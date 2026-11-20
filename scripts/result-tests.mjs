@@ -591,6 +591,26 @@ test('invoice-forge: decimal commas, the currency, a fixed number and a searchab
   await page.waitForFunction(() => document.getElementById('docNumber').value === 'INV-0002', null, { timeout: 5000 });
 });
 
+// The six history atlases share one engine (history-atlas.js): search opens an entry, and the printable
+// quiz for one era holds the requested number of questions, pictures included, with an answer key.
+for (const [atlas, query, heading, file] of [['weapons-atlas', 'counterweight trebuchet', 'Counterweight trebuchet', 'weapons-quiz.html'], ['surgery-atlas', 'hip replacement', 'Hip replacement', 'surgery-quiz.html'], ['medicine-atlas', 'penicillin', 'Penicillin', 'medicine-quiz.html'], ['castle-atlas', 'himeji', 'Himeji Castle', 'castle-quiz.html'], ['invention-atlas', 'printing press', 'Printing press', 'inventions-quiz.html'], ['space-atlas', 'apollo 11', 'Apollo 11: people on the Moon', 'space-quiz.html']]) {
+  test(atlas + ': search opens the entry, and the printable quiz has its questions, pictures and answer key', atlas + '.html', async (page) => {
+    await page.fill('#haQ', query);
+    await page.press('#haQ', 'Enter');
+    await page.waitForFunction(h => ((document.querySelector('#haInfo h2') || {}).textContent || '') === h, heading, { timeout: 5000 });
+    expect(await page.locator('#haInfo .ha-hero svg').count() === 1, 'the entry has no picture');
+    await page.selectOption('#qSource', 'all');
+    await page.selectOption('#qCount', '20');
+    const quiz = await downloadOf(page, () => page.click('#printQuiz'));
+    const html = quiz.buf.toString('utf8');
+    expect(quiz.name === file, 'unexpected quiz file name: ' + quiz.name);
+    const keyAt = html.indexOf('Answer key');
+    const questions = (html.slice(0, keyAt).match(/<li><p>/g) || []).length, answers = (html.slice(keyAt).match(/<li>[A-D]\) /g) || []).length;
+    expect(keyAt > 0 && questions === 20 && answers === 20, 'expected 20 questions and 20 answers, got ' + questions + ' and ' + answers);
+    expect(!/undefined|NaN|\[object/.test(html), 'the quiz has broken text');
+  });
+}
+
 test('psychology-atlas: printable quiz has every question and an answer key', 'psychology-atlas.html', async (page) => {
   await page.selectOption('#qSource', 'school');
   await page.selectOption('#qCount', '15');
@@ -1551,7 +1571,7 @@ test('pdf-edit-forge: a signature and a date added one after the other do not ov
 });
 
 // The printable quiz + answer key of each map: every question must have its answer listed once among different choices.
-for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'idea-atlas', 'psychology-atlas']) {
+for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'idea-atlas', 'psychology-atlas', 'weapons-atlas', 'surgery-atlas', 'medicine-atlas', 'castle-atlas', 'invention-atlas', 'space-atlas']) {
   test(map + ': printable quizzes have one right answer per question, among different choices', map + '.html', async (page) => {
     await page.waitForTimeout(1500);
     const btn = page.locator('button:visible').filter({ hasText: /Printable quiz/i }).first();
@@ -1559,7 +1579,7 @@ for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'i
     let checked = 0;
     for (let k = 0; k < 5; k++) {
       const html = (await downloadOf(page, () => btn.click())).buf.toString('utf8');
-      const qs = [...html.slice(0, html.indexOf('<h2')).matchAll(/<li><p>([\s\S]*?)<\/p><ol type="A">([\s\S]*?)<\/ol><\/li>/g)].map(m => ({ q: strip(m[1]), opts: [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])) }));
+      const qs = [...html.slice(0, html.indexOf('<h2')).matchAll(/<li><p>([\s\S]*?)<\/p>(?:<div class="pic">[\s\S]*?<\/div>)?<ol type="A">([\s\S]*?)<\/ol><\/li>/g)].map(m => ({ q: strip(m[1]), opts: [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])) }));
       const keys = [...html.slice(html.indexOf('Answer key')).matchAll(/<li>([A-Z])\) /g)].map(m => m[1].charCodeAt(0) - 65);
       expect(qs.length && qs.length === keys.length, 'the answer key does not match the questions (' + qs.length + ' / ' + keys.length + ')');
       qs.forEach((q, i) => {

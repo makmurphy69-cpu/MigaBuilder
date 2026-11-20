@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Invention Atlas — the inventions that changed the world, from fire to AI | MigaBuilder</title>
+<meta name="description" content="The inventions that changed the world, illustrated: fire, the wheel, writing, paper, printing, the compass, steam engines, electricity, the telephone, cars, planes, computers, the internet, smartphones and AI. Who invented each one, how it works and what it changed, on a timeline with a quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/invention-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/invention-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Invention Atlas — inventions that changed the world, from fire to AI | MigaBuilder">
+<meta property="og:description" content="From the wheel and writing to steam, electricity, computers and AI: who invented each one, how it works and what it changed, with a timeline and a quiz.">
+<meta property="og:url" content="https://migabuilder.com/invention-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does Invention Atlas cover?", "acceptedAnswer": {"@type": "Answer", "text": "Inventions in tools, farming, energy, transport, communication, computing, science, everyday life, materials and building — from stone tools to AI — each with who invented it, how it works and what it changed."}}, {"@type": "Question", "name": "Why do some inventions have several inventors?", "acceptedAnswer": {"@type": "Answer", "text": "Many inventions were made by several people at about the same time, or improved step by step. The atlas names the main people and explains who did what."}}, {"@type": "Question", "name": "Is Invention Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Invention Atlas</span></nav>
+<header class="masthead"><div><h1>Invention Atlas</h1><p>The inventions that changed the world, from fire and the wheel to smartphones and AI: who invented each one, how it works and what it changed.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Invention Atlas</h2>
+  <p>Invention Atlas tells the stories of inventions in tools and making, farming and food, energy and power, transport, communication, computing, science instruments, everyday life, materials and building. Each entry explains who invented it, how it works in plain words, what it changed, and a surprising fact — with credit to inventors from every part of the world.</p>
+  <h3>How to use Invention Atlas</h3>
+  <ol><li>Search an invention or an inventor, or pick a group such as Transport or Computing.</li><li>Open a card to read who invented it, how it works and what it changed.</li><li>Use the timeline to see what was invented in each era.</li><li>Play the quiz, or download a printable quiz with answers.</li></ol>
+  <h3>What does Invention Atlas cover?</h3>
+  <p>Inventions in tools, farming, energy, transport, communication, computing, science, everyday life, materials and building — from stone tools to AI — each with who invented it, how it works and what it changed.</p>
+  <h3>Why do some inventions have several inventors?</h3>
+  <p>Many inventions were made by several people at about the same time, or improved step by step. The atlas names the main people and explains who did what.</p>
+  <h3>Is Invention Atlas free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="space-atlas.html">Space Atlas</a> · <a href="physics-map.html">Physics Map</a> · <a href="chemistry-map.html">Chemistry Map</a> · <a href="weapons-atlas.html">Weapons Atlas</a></p>
+</section>
+<footer>Invention Atlas · MigaBuilder · Dates are the first working example or patent; many inventions grew from the work of many people.</footer>
+<script src="atlas-art.js"></script>
+<script src="invention-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: INVENTIONS, cats: INVENTION_CATS, eras: INVENTION_ERAS, title: "Invention Atlas", page: "invention-atlas.html",
+  key: "inventions",
+  word: ["invention", "inventions"],
+  searchHint: "Search an invention, an inventor or a country…",
+  emptyIcon: "💡",
+  sections: [["how", "⚙️ How it works"], ["impact", "🌍 What it changed"]],
+  whoLabel: "Who invented it",
+  whoQ: "Who invented “{n}”?",
+  whenQ: "When was “{n}” invented?",
+  picQ: "Which invention does this picture show?",
+  quizTitle: "Inventions quiz",
+  quizFile: "inventions-quiz.html",
+  ranks: [[90, "Genius inventor 💡"], [75, "Engineer ⚙️"], [55, "Tinkerer 🔧"], [0, "Apprentice 🌱"]],
+  note: ""
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

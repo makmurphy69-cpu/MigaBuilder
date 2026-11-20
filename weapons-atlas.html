@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weapons Atlas — the history of weapons from stone tools to drones, with a quiz | MigaBuilder</title>
+<meta name="description" content="The history of weapons and armour in 160 illustrated entries — from 2.6-million-year-old stone tools, bows, swords and siege engines to gunpowder, tanks, jets, missiles and drones. Who invented each one, how it worked, how it was used and what it changed, on a timeline, with a scored quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/weapons-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/weapons-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Weapons Atlas — the history of weapons, from stone tools to drones | MigaBuilder">
+<meta property="og:description" content="160 illustrated weapons, armour, siege engines, warships and aircraft through history: who invented them, how they worked and how they were used, with a timeline and a quiz.">
+<meta property="og:url" content="https://migabuilder.com/weapons-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does Weapons Atlas cover?", "acceptedAnswer": {"@type": "Answer", "text": "160 weapons, armour, siege engines, warships and aircraft from the first stone tools 2.6 million years ago to the drones of today, each with who invented it, how it worked, how it was used and a famous moment in history."}}, {"@type": "Question", "name": "Does it explain how to make weapons?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a history atlas, like a museum: it explains how each weapon worked in general terms and what it changed, never how to make or modify one."}}, {"@type": "Question", "name": "Is Weapons Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Weapons Atlas</span></nav>
+<header class="masthead"><div><h1>Weapons Atlas</h1><p>The history of weapons, from the first stone tools to drones: who invented each one, how it worked, how it was used and what it changed. Browse the cards or the timeline, then play the quiz.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Weapons Atlas</h2>
+  <p>Weapons Atlas tells the history of weapons and armour in 160 illustrated entries across nine eras: the Stone Age, the Bronze Age, the Iron Age and classical world, the Middle Ages, the age of gunpowder, the industrial age, the World Wars, the Cold War and today. It covers swords and daggers, clubs and axes, spears and polearms, bows and slings, siege engines, firearms, artillery and missiles, explosives, armour and shields, chariots and tanks, warships, aircraft and drones, and chemical, nuclear and cyber weapons — and the treaties that ban or limit some of them.</p>
+  <h3>How to use Weapons Atlas</h3>
+  <ol><li>Search, or pick a group such as Siege engines or Firearms, or an era.</li><li>Open any card to read who invented it, how it worked, how it was used and a famous moment. Use ← Older and Newer → to walk through history.</li><li>Switch to the timeline to see every era with a short introduction.</li><li>Press “Generate quiz” and try to beat your best score, or download a printable quiz with an answer key.</li></ol>
+  <h3>What does Weapons Atlas cover?</h3>
+  <p>160 weapons, armour, siege engines, warships and aircraft from the first stone tools 2.6 million years ago to the drones of today, each with who invented it, how it worked, how it was used and a famous moment in history.</p>
+  <h3>Does it explain how to make weapons?</h3>
+  <p>No. It is a history atlas, like a museum: it explains how each weapon worked in general terms and what it changed, never how to make or modify one.</p>
+  <h3>Is Weapons Atlas free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="castle-atlas.html">Castle Atlas</a> · <a href="invention-atlas.html">Invention Atlas</a> · <a href="space-atlas.html">Space Atlas</a> · <a href="geo-forge.html">Geography Forge</a></p>
+</section>
+<footer>Weapons Atlas · MigaBuilder · A history atlas for learning. Dates are the earliest well-documented examples; many weapons developed gradually in several places.</footer>
+<script src="atlas-art.js"></script>
+<script src="weapons-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: WEAPONS, cats: WEAPON_CATS, eras: WEAPON_ERAS, title: "Weapons Atlas", page: "weapons-atlas.html",
+  key: "weapons",
+  word: ["weapon", "weapons"],
+  searchHint: "Search a weapon, a battle, an inventor or a country…",
+  emptyIcon: "⚔️",
+  sections: [["how", "⚙️ How it worked"], ["use", "🗺️ How it was used"], ["ev", "📜 A famous moment"]],
+  whoLabel: "Who invented or used it",
+  whoQ: "Who invented or first used “{n}”?",
+  whenQ: "When was “{n}” first used?",
+  quizTitle: "History of weapons quiz",
+  quizFile: "weapons-quiz.html",
+  ranks: [[90, "Field marshal 🎖️"], [75, "General ⭐"], [55, "Captain 🛡️"], [0, "Recruit 🌱"]],
+  note: "Weapons Atlas is a history atlas. It explains how weapons worked in general terms and what they changed — it does not explain how to make or modify any weapon. Many weapons, from poison gas to land mines and blinding lasers, are now banned by international treaties."
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
