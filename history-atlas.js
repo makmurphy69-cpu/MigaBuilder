@@ -38,7 +38,7 @@
     // ---------- layout
     const catCount = {}; items.forEach(x => catCount[x.c] = (catCount[x.c] || 0) + 1);
     root.innerHTML =
-      '<div class="ha-stats"><span><b>' + items.length + '</b>' + esc(W[1]) + '</span><span><b>' + Object.keys(CATS).length + '</b>groups</span><span><b>' + eras.length + '</b>eras</span><span>' + esc(items[0]._d) + ' → ' + esc(items[items.length - 1]._d) + '</span><span>✓ <b id="haSeen">0</b>explored</span></div>' +
+      '<div class="ha-stats"><span><b>' + items.length + '</b>' + esc(W[1]) + '</span><span><b>' + Object.keys(CATS).length + '</b>groups</span><span><b>' + eras.length + '</b>eras</span><span>' + esc(fmtYear(items[0].y)) + ' → ' + esc(fmtYear(items[items.length - 1].y)) + '</span><span>✓ <b id="haSeen">0</b>explored</span></div>' +
       '<div class="ha-bar"><div class="ha-search"><input id="haQ" type="search" autocomplete="off" placeholder="' + esc(cfg.searchHint || 'Search…') + '" aria-label="Search"></div>' +
       '<select id="haEra" aria-label="Era"><option value="">All eras</option>' + eras.map(e => '<option value="' + e.i + '">' + esc(e.n) + '</option>').join('') + '</select>' +
       '<select id="haSort" aria-label="Sort"><option value="old">Oldest first</option><option value="new">Newest first</option><option value="az">A–Z</option></select>' +
