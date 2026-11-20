@@ -772,6 +772,103 @@ S('psychology-atlas.html', {
   }
 });
 
+// ---------------------------------------------------------------- history atlases (shared engine: history-atlas.js)
+async function atlasTour(h, page, o) {
+  await h.step(o.cards, () => h.point('#haGrid .ha-card >> nth=0'));
+  await h.step(o.group, () => h.click('[data-cat=' + o.cat + ']'));
+  await h.step(o.open, async () => { await h.click('[data-id="' + o.id + '"]'); await page.waitForSelector('#haInfo h2'); await h.point('#haInfo .ha-hero'); });
+  await h.step(o.read, async () => { await page.locator('#haInfo').evaluate(e => e.scrollTo({ top: 420, behavior: 'smooth' })); await h.wait(900); });
+  await h.step('At the bottom, Older and Newer walk you through history one step at a time, and See also jumps to related entries, even in the other atlases.', async () => { await page.locator('#haInfo').evaluate(e => e.scrollTo({ top: e.scrollHeight, behavior: 'smooth' })); await h.wait(900); await h.point('#haNext'); });
+  await h.step(o.timeline, async () => { await h.scroll('.ha-bar'); await h.click('[data-cat=""]'); await h.click('[data-view=tl]'); await h.wait(600); await page.locator('#haList').evaluate(e => e.scrollTo({ top: 0 })); });
+  await h.step('Now the game. Choose the questions and press Generate quiz. Challenge mode gives you twenty seconds per question, with bonus points for speed and streaks.', async () => { await h.scroll('#quizPanel'); await h.click('#makeQuiz'); });
+  await h.step('Pick an answer. You get an explanation every time, with a link to open that entry, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
+  await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+}
+
+S('weapons-atlas.html', {
+  title: 'Weapons Atlas', subtitle: 'The history of weapons, from stone tools to drones',
+  intro: 'Welcome to Weapons Atlas. It tells the history of weapons, from the first stone tools to the drones of today: who invented each one, how it worked, and how it changed history.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is one weapon, piece of armour, siege engine, warship or aircraft, with its own drawing. They start with stone tools two and a half million years old.',
+      group: 'Pick a group to narrow the list, like siege engines, or search for a weapon, a battle or an inventor.', cat: 'siege',
+      id: 'trebuchet-counterweight', open: 'Open a card. Here is the counterweight trebuchet. The drawing moves, to show how the falling weight swings the long arm.',
+      read: 'You read how it worked, how it was used, and a famous moment, like Edward the First and his giant trebuchet, Warwolf.',
+      timeline: 'Switch to the timeline to see all nine eras, from the Stone Age to today, each with a short introduction.'
+    });
+  }
+});
+
+S('surgery-atlas.html', {
+  title: 'Surgery Atlas', subtitle: 'How operations are done, and how surgery began',
+  intro: 'Welcome to Surgery Atlas. It explains how operations are done, and the history of surgery, from ancient skull drilling to robots.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is an operation or a milestone of surgery. The drawings show where in the body it happens, and the kind of instrument used. Nothing gory.',
+      group: 'Pick a group, like bones and joints, or search for an operation or a body part.', cat: 'bone',
+      id: 'hip-replacement', open: 'Open a card. Here is hip replacement, first done by John Charnley in 1962.',
+      read: 'You read why it is done, how it is done step by step, the recovery, the main risks, and its history. It is for learning, not medical advice.',
+      timeline: 'Switch to the timeline to follow surgery through six eras, from ancient Egypt and India to keyhole and robotic surgery.'
+    });
+  }
+});
+
+S('medicine-atlas.html', {
+  title: 'Medicine & Disease Atlas', subtitle: 'Plagues, vaccines and medicines through history',
+  intro: 'Welcome to the Medicine and Disease Atlas. It follows the great plagues and pandemics of history, and the vaccines, medicines and ideas that beat them.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a disease, a vaccine, a medicine, a discovery, a tool for diagnosis, or a public health milestone.',
+      group: 'Pick a group, like vaccines, or search for a disease, a medicine or a scientist.', cat: 'vaccine',
+      id: 'smallpox-vaccine', open: 'Open a card. Here is the smallpox vaccine. In 1796, Edward Jenner showed that cowpox protects against smallpox.',
+      read: 'You read how it works, and what it changed. The smallpox vaccine led to smallpox being wiped out completely in 1980.',
+      timeline: 'Switch to the timeline to follow medicine from ancient remedies to the mRNA vaccines of today.'
+    });
+  }
+});
+
+S('castle-atlas.html', {
+  title: 'Castle Atlas', subtitle: 'Castles, walls and forts through history',
+  intro: 'Welcome to Castle Atlas. Explore walls, castles and forts from every continent, how they defended, and the sieges that tested them.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a wall, a castle, a fortress, a castle part, or a siege, from the walls of Jericho eleven thousand years ago to Cold War bunkers.',
+      group: 'Pick a group, like the parts of a castle, or search for a castle or a country.', cat: 'part',
+      id: 'gatehouse', open: 'Open a card. Here is the gatehouse and its portcullis, the strongest part of a castle.',
+      read: 'You read how it defended, and a famous siege or story.',
+      timeline: 'Switch to the timeline to see how walls changed with every new weapon, from rams and trebuchets to cannon and bombs.'
+    });
+  }
+});
+
+S('invention-atlas.html', {
+  title: 'Invention Atlas', subtitle: 'The inventions that changed the world',
+  intro: 'Welcome to Invention Atlas. Discover the inventions that changed the world, from fire and the wheel to smartphones and artificial intelligence.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is one invention, with its own drawing, starting with stone tools more than three million years old.',
+      group: 'Pick a group, like communication, or search for an invention or an inventor.', cat: 'comm',
+      id: 'printing-press', open: 'Open a card. Here is Gutenberg’s printing press, from about 1440.',
+      read: 'You read who invented it, how it works, what it changed, and a surprising fact.',
+      timeline: 'Switch to the timeline to see what was invented in each era, from the Stone Age to the digital age.'
+    });
+  }
+});
+
+S('space-atlas.html', {
+  title: 'Space Atlas', subtitle: 'Astronomy and space exploration through history',
+  intro: 'Welcome to Space Atlas. Travel through the history of astronomy and space exploration, from ancient sky-watchers to the James Webb Space Telescope.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a discovery, a telescope, a rocket, a satellite, a crewed flight or a mission to the Moon and planets.',
+      group: 'Pick a group, like the Moon, or search for a mission, a planet or an astronomer.', cat: 'moon',
+      id: 'apollo-11', open: 'Open a card. Here is Apollo 11, when Neil Armstrong and Buzz Aldrin walked on the Moon in 1969.',
+      read: 'You read what happened, how it worked, and what we learned, with missions from many countries.',
+      timeline: 'Switch to the timeline to follow astronomy from Stonehenge to the new space age.'
+    });
+  }
+});
+
 S('species-atlas.html', {
   title: 'Species Atlas', subtitle: 'Photos and facts for over a million species',
   intro: 'Welcome to Species Atlas. Look up any animal, plant, fungus or microbe, and see its photos, names, family tree, conservation status, and where it lives.',

@@ -1,6 +1,6 @@
 # MigaBuilder
 
-**92 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
+**98 free, open-source browser tools for pictures, websites, games, cartoons, video, meetings, audio, documents, private OCR, grammar, design, coding and business.**
 
 [Try MigaBuilder](https://migabuilder.com/)
 
@@ -26,6 +26,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - 3D models and beginner coding projects
 - Code bug reports with plain-language fixes and live previews
 - Alphabet lessons with sounds and writing practice, and a philosophy & politics quiz game
+- Illustrated history atlases of weapons, surgery, medicine and disease, castles, inventions and space exploration, with timelines and quizzes
 - An interactive human body map — organs, skeleton, muscles, tendons and skin — with illnesses, treatments, digestion, fasting and quizzes
 - Growing guides for vegetables, fruit, herbs, houseplants, mushrooms and trees, with and without equipment
 - Typing speed tests with a certificate, and practice for the 10-key, data entry, transcription, clerical and proofreading tests employers set
@@ -57,6 +58,12 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Alphabet Forge** — tap any Thai, Arabic, Mandarin, Japanese, Korean, Greek, Russian, Hebrew, Hindi or Georgian symbol to hear it, learn a word and why it sounds that way, then practise writing it — and type it with the built-in on-screen keyboard (Korean syllables join as you type, Japanese from romaji, Mandarin from pinyin), plus a typing challenge
 - **Idea Atlas** — explore the history, key thinkers and connections of 37 philosophies and ideologies, then play a timed quiz game
 - **Psychology Atlas** — the history of psychology from ancient ideas of the mind to today: 44 schools, research fields and therapies (Wundt, Freud, behaviourism, Gestalt, humanistic, cognitive, neuroscience, CBT, positive psychology, the replication crisis…) with key psychologists, timelines and how they influenced each other, then a timed quiz game
+- **Weapons Atlas** — the history of weapons in 160 illustrated entries, from 2.6-million-year-old stone tools, bows, swords, siege engines and armour to gunpowder, tanks, warships, jets, missiles and drones: who invented each one, how it worked in general terms, how it was used and a famous moment; filter by 13 groups and nine eras, walk through history card by card or on a timeline, and play a timed quiz or download a printable one (museum-level history, never how to make a weapon)
+- **Surgery Atlas** — 124 operations and milestones of surgery with simple, non-graphic illustrations: why each operation is done, the main steps, recovery, risks and its history, from ancient skull drilling, Sushruta and Al-Zahrawi to ether, Lister, heart and transplant surgery, keyhole and robotic surgery, plus a quiz (for learning, not medical advice)
+- **Medicine & Disease Atlas** — 102 plagues and pandemics, vaccines, medicines, discoveries, diagnostic tools and public-health milestones, from malaria and the Black Death to germ theory, penicillin, insulin, DNA, CRISPR and mRNA vaccines, with a timeline and a quiz
+- **Castle Atlas** — 71 walls, castles and forts on every continent, the parts of a castle (moats, gatehouses, murder holes, arrow slits) and famous sieges, from the walls of Jericho and the Great Wall to concentric castles, Himeji, Great Zimbabwe, star forts and Cold War bunkers, with a quiz
+- **Invention Atlas** — 123 inventions that changed the world, from stone tools, fire and the wheel to printing, steam, electricity, computers, the web, smartphones and AI: who invented each one, how it works and what it changed, with a timeline and a quiz
+- **Space Atlas** — 111 milestones of astronomy and spaceflight, from Stonehenge, Aryabhata and Galileo to Sputnik, Gagarin, Apollo 11, Voyager, Mars rovers, Chandrayaan-3 and the James Webb telescope, with a timeline and a quiz
 - **Species Atlas** — search over a million species of animals, plants, fungi and microbes for photos, common and scientific names, the full classification from kingdom to species, a short description, conservation status, a sightings map and the months each is seen; browse the tree of life from “Life” down, open a random species, save a printable species list, then play a guess-the-species photo quiz (live data from iNaturalist)
 - **Biology Map** — explore a tree of life with 43 living things to see how long ago we shared an ancestor, how much DNA we share (and what each figure really measures) and what we both inherited; zoom from the body down to a single DNA letter, build a DNA strand, follow a gene being expressed and translate DNA with the real genetic code, make mutations in the human haemoglobin gene (including sickle cell), run a peppered-moth natural-selection simulator, follow humans out of Africa on a world map with local adaptations, then play a scored quiz
 - **Chemistry Map** — an interactive periodic table of all 118 elements, coloured by family, state at any temperature, electronegativity, density, melting point, discovery date or block; open any element for its animated atom, where it is found, its forms, uses and compounds; put elements in a mixing bowl to see how they bond and the formula they form, see which elements build steel, glass, plastics, batteries, chips and more, work out molar masses, then play a scored quiz
@@ -101,7 +108,7 @@ MigaBuilder is a practical creation suite that runs directly in the browser. The
 - **Media Convert** — trim, rotate, resize and compress video, or turn it into a GIF or MP3, with FFmpeg running in the browser (with progress, time left and a Cancel button), plus audio extraction, private transcription of audio and video files into text and SRT/VTT subtitles (Whisper running on your device, 99 languages, optional translation into English), and live transcription that stays on the device where the browser allows it
 - **Vehicle Simulator** — learn how a car, truck, motorcycle, boat, airplane or helicopter works, then practise guided missions with a live control panel, 3D flight, hazard scenarios, a narrator and a printable report card
 
-Explore all 83 tools at **[migabuilder.com](https://migabuilder.com/)**.
+Explore all 98 tools at **[migabuilder.com](https://migabuilder.com/)**.
 
 Every tool has a narrated **video guide** that shows it being used on a real example, plus the **sample made in that video** — browse them all on the [samples page](https://migabuilder.com/sample-viewer.html).
 
