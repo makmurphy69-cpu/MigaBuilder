@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Castle Atlas — castles, forts and fortifications through history, illustrated | MigaBuilder</title>
+<meta name="description" content="Castles and fortifications through history, illustrated: hillforts, Roman forts, the Great Wall, motte-and-bailey and concentric castles, Japanese castles, star forts and bunkers, plus moats, gatehouses, murder holes and the sieges that tested them. With a timeline and a quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/castle-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/castle-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Castle Atlas — castles and fortifications through history | MigaBuilder">
+<meta property="og:description" content="From hillforts and the Great Wall to concentric castles, star forts and bunkers: how they defended, the parts of a castle and the sieges that tested them.">
+<meta property="og:url" content="https://migabuilder.com/castle-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does Castle Atlas cover?", "acceptedAnswer": {"@type": "Answer", "text": "Town walls, hillforts, ancient walls, medieval castles, fortresses around the world, the parts of a castle, siege tactics, star forts and modern fortifications — each with how it defended and a famous siege or story."}}, {"@type": "Question", "name": "Can I see castles from outside Europe?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It includes fortresses and walls from Africa, Asia, the Middle East and the Americas, such as Great Zimbabwe, Benin City’s walls, Sacsayhuamán, Himeji Castle and Hwaseong Fortress."}}, {"@type": "Question", "name": "Is Castle Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Castle Atlas</span></nav>
+<header class="masthead"><div><h1>Castle Atlas</h1><p>Walls, castles and forts from the first town walls to Cold War bunkers: how each one defended, the parts of a castle, and the sieges that tested them.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Castle Atlas</h2>
+  <p>Castle Atlas covers fortifications on every continent: early town walls and hillforts, ancient walls from Mycenae and Babylon to the Great Wall of China and Hadrian’s Wall, medieval castles from motte-and-bailey to concentric castles, fortresses in Africa, Asia and the Americas, the parts of a castle such as moats, gatehouses, portcullises and murder holes, siege tactics, gunpowder-age star forts and modern lines and bunkers.</p>
+  <h3>How to use Castle Atlas</h3>
+  <ol><li>Search a castle, a country or a castle part, or pick a group such as Medieval castles or Castle parts.</li><li>Open a card to read how it defended and a famous siege.</li><li>Use the timeline to see how walls changed with each new weapon.</li><li>Play the quiz, or download a printable quiz with answers.</li></ol>
+  <h3>What does Castle Atlas cover?</h3>
+  <p>Town walls, hillforts, ancient walls, medieval castles, fortresses around the world, the parts of a castle, siege tactics, star forts and modern fortifications — each with how it defended and a famous siege or story.</p>
+  <h3>Can I see castles from outside Europe?</h3>
+  <p>Yes. It includes fortresses and walls from Africa, Asia, the Middle East and the Americas, such as Great Zimbabwe, Benin City’s walls, Sacsayhuamán, Himeji Castle and Hwaseong Fortress.</p>
+  <h3>Is Castle Atlas free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="weapons-atlas.html">Weapons Atlas</a> · <a href="cad-forge.html">CAD Forge</a> · <a href="geo-forge.html">Geography Forge</a> · <a href="invention-atlas.html">Invention Atlas</a></p>
+</section>
+<footer>Castle Atlas · MigaBuilder · A history atlas for learning. Building dates are when building began; most castles were changed many times.</footer>
+<script src="atlas-art.js"></script>
+<script src="castle-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: CASTLES, cats: CASTLE_CATS, eras: CASTLE_ERAS, title: "Castle Atlas", page: "castle-atlas.html",
+  key: "castles",
+  word: ["fortification", "fortifications"],
+  searchHint: "Search a castle, a country, a siege or a castle part…",
+  emptyIcon: "🏰",
+  sections: [["how", "🛡️ How it defended"], ["siege", "⚔️ Famous siege or story"]],
+  whoLabel: "Who built it",
+  whoQ: "Who built or designed “{n}”?",
+  whenQ: "When was “{n}” built?",
+  picQ: "Which castle, wall or castle part does this picture show?",
+  quizTitle: "Castles and fortifications quiz",
+  quizFile: "castle-quiz.html",
+  ranks: [[90, "Castellan 🏰"], [75, "Knight ⚔️"], [55, "Squire 🛡️"], [0, "Page 🌱"]],
+  note: ""
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

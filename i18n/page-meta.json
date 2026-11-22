@@ -3983,8 +3983,8 @@
  },
  "index.html": {
   "src": {
-   "title": "MigaBuilder — 90 Free Browser Tools to Create, Work and Learn",
-   "description": "Create pictures, websites, videos and music, work with PDFs and documents, and learn with interactive maps — 90 free browser tools. No signup, no watermark. Your files stay on your device whenever a tool can work locally.",
+   "title": "MigaBuilder — 98 Free Browser Tools to Create, Work and Learn",
+   "description": "Create pictures, websites, videos and music, work with PDFs and documents, and learn with interactive maps — 98 free browser tools. No signup, no watermark. Your files stay on your device whenever a tool can work locally.",
    "faq": []
   },
   "es": {
@@ -6676,103 +6676,111 @@
  },
  "picture-forge.html": {
   "src": {
-   "title": "Free AI image generator from text — no sign up — Picture Forge | MigaBuilder",
-   "description": "Free AI image generator: describe a picture and Google Gemini (Nano Banana) makes it. Pick a style and shape, edit your own photos, change the result with plain words, then download PNG, JPG or WebP. No sign up.",
+   "title": "AI image generator from text — no sign up, no watermark — Picture Forge | MigaBuilder",
+   "description": "AI image generator: describe a picture and Google Gemini (Nano Banana) makes it with your own Gemini key, about 7 US cents a picture. Pick a style and shape, edit your own photos, change the result with plain words, then download PNG, JPG or WebP. No sign up, no watermark.",
    "faq": [
     "Which formats can I download?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.",
     "Is Picture Forge free?",
-    "Yes. It is free to use, with no account, no watermark and no paywall. The page itself is free, but Google charges for every AI picture, so pictures need your own Gemini key with billing turned on (about 7 US cents each). Google gives no free picture credit.",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.",
     "Are my files uploaded?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser."
    ]
   },
   "es": {
-   "title": "Generador de imágenes con IA gratis a partir de texto — sin registro — Picture Forge | MigaBuilder",
+   "title": "Generador de imágenes con IA a partir de texto — sin registro, sin marca de agua — Picture Forge | MigaBuilder",
    "description": "Picture Forge crea una imagen original a partir de una descripción escrita con Google Gemini. Elige un estilo y una forma, añade tus fotos para editarlas o copiar un estilo, y cambia el resultado con palabras sencillas.",
    "faq": {
     "Which formats can I download?": "¿Qué formatos puedo descargar?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG o WebP. También puedes seguir editando la imagen en Image Studio.",
     "Is Picture Forge free?": "¿Picture Forge es gratis?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "La página es gratis, sin cuenta, sin marca de agua y sin muro de pago. Google cobra cada imagen hecha con IA y no da crédito gratuito para imágenes, así que las imágenes necesitan tu propia clave de Gemini con la facturación activada (unos 7 céntimos de dólar cada una). Las cuentas nuevas de Google Cloud suelen recibir crédito de prueba gratuito.",
     "Are my files uploaded?": "¿Se suben mis archivos?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Solo sale de tu dispositivo el texto que das a la IA: se envía al modelo Gemini de Google a través del servicio de IA gratuito de MigaBuilder, o con tu propia clave de Gemini si la añades. La edición, las vistas previas y las descargas ocurren en tu navegador."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Tu descripción y las fotos que añadas van directamente de tu navegador al modelo Gemini de Google con tu propia clave. El asistente Mejorar mis palabras envía solo tu texto, a través de la IA compartida gratuita de MigaBuilder. La edición, las vistas previas y las descargas ocurren en tu navegador."
    }
   },
   "ar": {
-   "title": "مولّد صور بالذكاء الاصطناعي مجاني من النص — بلا تسجيل — Picture Forge | MigaBuilder",
+   "title": "مولّد صور بالذكاء الاصطناعي من النص — بلا تسجيل ولا علامة مائية — Picture Forge | MigaBuilder",
    "description": "ينشئ Picture Forge صورة أصلية من وصف مكتوب باستخدام Google Gemini. اختر مظهرًا وشكلًا، وأضف صورك لتعديلها أو لنسخ أسلوب، وغيّر النتيجة بكلمات بسيطة.",
    "faq": {
     "Which formats can I download?": "ما الصيغ التي يمكنني تنزيلها؟",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG أو JPG أو WebP. ويمكنك أيضًا متابعة تعديل الصورة في Image Studio.",
     "Is Picture Forge free?": "هل Picture Forge مجاني؟",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "الصفحة مجانية، بلا حساب ولا علامة مائية ولا اشتراك مدفوع. تفرض Google رسومًا على كل صورة بالذكاء الاصطناعي ولا تمنح رصيدًا مجانيًا للصور، لذا تحتاج الصور إلى مفتاح Gemini خاص بك مع تفعيل الفوترة (نحو 7 سنتات أمريكية للصورة). غالبًا ما تحصل حسابات Google Cloud الجديدة على رصيد تجريبي مجاني.",
     "Are my files uploaded?": "هل تُرفع ملفاتي؟",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "لا يغادر جهازك سوى النص الذي تعطيه للذكاء الاصطناعي: يُرسل إلى نموذج Gemini من Google عبر خدمة الذكاء الاصطناعي المجانية في MigaBuilder، أو عبر مفتاح Gemini الخاص بك إن أضفته. أما التحرير والمعاينة والتنزيل فتتم كلها في متصفحك."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "يذهب وصفك وأي صور تضيفها مباشرة من متصفحك إلى نموذج Gemini من Google بمفتاحك الخاص. أما مساعد «حسّن كلماتي» فيرسل نصك فقط، عبر الذكاء الاصطناعي المشترك المجاني من MigaBuilder. يتم التحرير والمعاينة والتنزيل كلها في متصفحك."
    }
   },
   "zh": {
-   "title": "免费 AI 文字生成图片 — 无需注册 — Picture Forge | MigaBuilder",
+   "title": "AI 文字生成图片 — 无需注册，没有水印 — Picture Forge | MigaBuilder",
    "description": "Picture Forge 用 Google Gemini 根据文字描述生成原创图片。选择风格和画幅，添加你自己的照片来编辑或借用风格，再用简单的话修改结果。",
    "faq": {
     "Which formats can I download?": "我可以下载哪些格式？",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG、JPG 或 WebP。你也可以在 Image Studio 中继续编辑图片。",
     "Is Picture Forge free?": "Picture Forge 免费吗？",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "页面免费使用，无需账号，没有水印，也没有付费墙。Google 对每张 AI 图片收费，且不提供免费的图片额度，因此生成图片需要你自己的、已开通结算的 Gemini 密钥（每张约 7 美分）。新的 Google Cloud 账号通常会获得免费试用额度。",
     "Are my files uploaded?": "我的文件会被上传吗？",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "只有你交给 AI 的文字会离开你的设备：它通过 MigaBuilder 的免费 AI 服务发送到 Google 的 Gemini 模型，如果你添加了自己的 Gemini 密钥，则通过你的密钥发送。编辑、预览和下载都在你的浏览器中完成。"
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "你的描述和添加的照片会使用你自己的密钥，直接从浏览器发送到 Google 的 Gemini 模型。“润色我的描述”助手只发送你的文字，经由 MigaBuilder 的免费共享 AI。编辑、预览和下载都在你的浏览器中完成。"
    }
   },
   "sw": {
-   "title": "Kitengeneza picha cha AI bure kutoka maandishi — bila kujisajili — Picture Forge | MigaBuilder",
+   "title": "Kitengeneza picha kwa AI kutoka maandishi — bila kujisajili, bila alama ya maji — Picture Forge | MigaBuilder",
    "description": "Picture Forge hutengeneza picha asilia kutokana na maelezo yaliyoandikwa kwa Google Gemini. Chagua mwonekano na umbo, ongeza picha zako kuzihariri au kunakili mtindo, na ubadilishe matokeo kwa maneno rahisi.",
    "faq": {
     "Which formats can I download?": "Ninaweza kupakua miundo gani?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG au WebP. Unaweza pia kuendelea kuhariri picha katika Image Studio.",
     "Is Picture Forge free?": "Je, Picture Forge ni bure?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "Ukurasa ni bure, bila akaunti, bila alama ya maji na bila malipo ya kufungua. Google hutoza kila picha ya AI na haitoi salio la bure la picha, kwa hiyo picha zinahitaji ufunguo wako wa Gemini wenye malipo yamewashwa (takriban senti 7 za Marekani kila moja). Akaunti mpya za Google Cloud mara nyingi hupata salio la bure la majaribio.",
     "Are my files uploaded?": "Je, faili zangu zinapakiwa?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Ni maandishi unayoipa AI tu yanayotoka kwenye kifaa chako: hutumwa kwa modeli ya Gemini ya Google kupitia huduma ya bure ya AI ya MigaBuilder, au kupitia ufunguo wako wa Gemini ukiuongeza. Kuhariri, kuhakiki na kupakua vyote hufanyika kwenye kivinjari chako."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Maelezo yako na picha zozote unazoongeza huenda moja kwa moja kutoka kwenye kivinjari chako hadi kwa modeli ya Gemini ya Google kwa ufunguo wako mwenyewe. Msaidizi wa Boresha maneno yangu hutuma maandishi yako tu, kupitia AI ya bure inayoshirikiwa ya MigaBuilder. Kuhariri, kuhakiki na kupakua hufanyika kwenye kivinjari chako."
    }
   },
   "sv": {
-   "title": "Gratis AI-bildgenerator från text — ingen registrering — Picture Forge | MigaBuilder",
+   "title": "AI-bildgenerator från text — utan registrering, utan vattenstämpel — Picture Forge | MigaBuilder",
    "description": "Picture Forge skapar en originalbild utifrån en skriven beskrivning med Google Gemini. Välj stil och format, lägg till egna foton att redigera eller låna stil från, och ändra resultatet med vanliga ord.",
    "faq": {
     "Which formats can I download?": "Vilka format kan jag ladda ner?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG eller WebP. Du kan också fortsätta redigera bilden i Image Studio.",
     "Is Picture Forge free?": "Är Picture Forge gratis?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "Sidan är gratis, utan konto, utan vattenstämpel och utan betalvägg. Google tar betalt för varje AI-bild och ger ingen gratiskredit för bilder, så bilder kräver en egen Gemini-nyckel med fakturering påslagen (cirka 7 amerikanska cent styck). Nya Google Cloud-konton får ofta gratis provkredit.",
     "Are my files uploaded?": "Laddas mina filer upp?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Bara texten du ger AI:n lämnar din enhet: den skickas till Googles Gemini-modell via MigaBuilders gratis AI-tjänst, eller via din egen Gemini-nyckel om du lägger till en. Redigering, förhandsvisning och nedladdning sker i webbläsaren."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Din beskrivning och eventuella foton du lägger till går direkt från din webbläsare till Googles Gemini-modell med din egen nyckel. Hjälpen Förbättra mina ord skickar bara din text, via MigaBuilders gratis delade AI. Redigering, förhandsvisningar och nedladdningar sker i din webbläsare."
    }
   },
   "de": {
-   "title": "Kostenloser KI-Bildgenerator aus Text — ohne Anmeldung — Picture Forge | MigaBuilder",
+   "title": "KI-Bildgenerator aus Text — ohne Anmeldung, ohne Wasserzeichen — Picture Forge | MigaBuilder",
    "description": "Picture Forge erstellt mit Google Gemini ein eigenes Bild aus einer geschriebenen Beschreibung. Wähle Look und Format, füge eigene Fotos zum Bearbeiten oder als Stilvorlage hinzu und ändere das Ergebnis mit einfachen Worten.",
    "faq": {
     "Which formats can I download?": "Welche Formate kann ich herunterladen?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG oder WebP. Du kannst das Bild auch in Image Studio weiterbearbeiten.",
     "Is Picture Forge free?": "Ist Picture Forge kostenlos?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "Die Seite ist kostenlos, ohne Konto, ohne Wasserzeichen und ohne Bezahlschranke. Google berechnet jedes KI-Bild und gibt kein kostenloses Bildguthaben, daher brauchen Bilder deinen eigenen Gemini-Schlüssel mit aktivierter Abrechnung (etwa 7 US-Cent pro Bild). Neue Google-Cloud-Konten erhalten oft ein kostenloses Testguthaben.",
     "Are my files uploaded?": "Werden meine Dateien hochgeladen?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Nur der Text, den du der KI gibst, verlässt dein Gerät: Er wird über den kostenlosen KI-Dienst von MigaBuilder an Googles Gemini-Modell gesendet, oder über deinen eigenen Gemini-Schlüssel, wenn du einen hinzufügst. Bearbeitung, Vorschau und Downloads passieren alle in deinem Browser."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Deine Beschreibung und alle Fotos, die du hinzufügst, gehen direkt von deinem Browser mit deinem eigenen Schlüssel an Googles Gemini-Modell. Der Helfer „Meine Worte verbessern“ sendet nur deinen Text, über die kostenlose gemeinsame KI von MigaBuilder. Bearbeiten, Vorschauen und Downloads passieren in deinem Browser."
    }
   },
   "pt": {
-   "title": "Gerador de imagens com IA grátis a partir de texto — sem cadastro — Picture Forge | MigaBuilder",
+   "title": "Gerador de imagens com IA a partir de texto — sem cadastro, sem marca d'água — Picture Forge | MigaBuilder",
    "description": "O Picture Forge cria uma imagem original a partir de uma descrição escrita com o Google Gemini. Escolha um visual e um formato, adicione suas fotos para editar ou copiar um estilo, e mude o resultado com palavras simples.",
    "faq": {
     "Which formats can I download?": "Quais formatos posso baixar?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG ou WebP. Você também pode continuar editando a imagem no Image Studio.",
     "Is Picture Forge free?": "O Picture Forge é grátis?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "A página é gratuita, sem conta, sem marca d'água e sem cobrança. O Google cobra cada imagem feita com IA e não oferece crédito gratuito para imagens, então as imagens precisam da sua própria chave do Gemini com o faturamento ativado (cerca de 7 centavos de dólar cada). Contas novas do Google Cloud costumam receber crédito de teste gratuito.",
     "Are my files uploaded?": "Meus arquivos são enviados?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Só o texto que você dá à IA sai do seu dispositivo: ele é enviado ao modelo Gemini do Google pelo serviço gratuito de IA do MigaBuilder, ou pela sua própria chave do Gemini, se você adicionar uma. Edição, prévias e downloads acontecem todos no seu navegador."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Sua descrição e as fotos que você adicionar vão direto do seu navegador para o modelo Gemini do Google com a sua própria chave. O assistente Melhorar minhas palavras envia só o seu texto, pela IA compartilhada gratuita do MigaBuilder. Edição, pré-visualizações e downloads acontecem no seu navegador."
    }
   },
   "fr": {
-   "title": "Générateur d'images IA gratuit à partir de texte — sans inscription — Picture Forge | MigaBuilder",
+   "title": "Générateur d'images par IA à partir de texte — sans inscription, sans filigrane — Picture Forge | MigaBuilder",
    "description": "Picture Forge crée une image originale à partir d'une description écrite avec Google Gemini. Choisissez un style et un format, ajoutez vos photos pour les modifier ou copier un style, et changez le résultat avec des mots simples.",
    "faq": {
     "Which formats can I download?": "Quels formats puis-je télécharger ?",
     "PNG, JPG or WebP. You can also keep editing the picture in Image Studio.": "PNG, JPG ou WebP. Vous pouvez aussi continuer à modifier l'image dans Image Studio.",
     "Is Picture Forge free?": "Picture Forge est-il gratuit ?",
+    "The page is free, with no account, no watermark and no paywall. Google charges for every AI picture and gives no free picture credit, so pictures need your own Gemini key with billing turned on (about 7 US cents each). New Google Cloud accounts often get free trial credit.": "La page est gratuite, sans compte, sans filigrane et sans paiement. Google facture chaque image créée par IA et n'offre aucun crédit gratuit pour les images : il faut donc votre propre clé Gemini avec la facturation activée (environ 7 cents US par image). Les nouveaux comptes Google Cloud reçoivent souvent un crédit d'essai gratuit.",
     "Are my files uploaded?": "Mes fichiers sont-ils envoyés ?",
-    "Only the text you give the AI leaves your device: it is sent to Google’s Gemini model through MigaBuilder’s free AI service, or through your own Gemini key if you add one. Editing, previews and downloads all happen in your browser.": "Seul le texte que vous donnez à l'IA quitte votre appareil : il est envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder, ou via votre propre clé Gemini si vous en ajoutez une. L'édition, les aperçus et les téléchargements se font tous dans votre navigateur."
+    "Your description and any photos you add go straight from your browser to Google’s Gemini model with your own key. The Improve my words helper sends only your text, through MigaBuilder’s free shared AI. Editing, previews and downloads all happen in your browser.": "Votre description et les photos que vous ajoutez partent directement de votre navigateur vers le modèle Gemini de Google avec votre propre clé. L'assistant Améliorer mes mots n'envoie que votre texte, via l'IA partagée gratuite de MigaBuilder. L'édition, les aperçus et les téléchargements se font dans votre navigateur."
    }
   }
  },

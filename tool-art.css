@@ -121,10 +121,14 @@ section#start.card.miga-art { position: relative; overflow: hidden; isolation: i
 section#start.card.miga-art .miga-art-bg { height: 170px; bottom: auto; }
 section#start.card.miga-art .miga-figure { top: 26px; bottom: auto; right: 16px; width: 84px; }
 section#start.card.miga-art h1 { padding-right: 96px; }
-.miga-art-info.in-card { position: absolute; top: 176px; right: 12px; margin: 0; }
+.miga-art-info.in-card { position: relative; z-index: 30; margin: 4px 0 8px; }
 .miga-art-info.in-card .miga-art-card { width: min(380px, calc(100vw - 64px)); } /* the start card clips its overflow */
 @media (max-width: 600px) {
   header.masthead.miga-art { min-height: 124px; padding-right: 92px; }
   .miga-art .miga-figure { width: 76px; right: 8px; }
-  .miga-art-bg { -webkit-mask-image: linear-gradient(to right, transparent 45%, #000 85%); mask-image: linear-gradient(to right, transparent 45%, #000 85%); }
+  /* the title and text run across the picture on a phone: fade it more and give the words a dark halo */
+  .miga-art-bg { -webkit-mask-image: linear-gradient(to right, transparent 50%, rgba(0,0,0,.55) 78%, #000 100%); mask-image: linear-gradient(to right, transparent 50%, rgba(0,0,0,.55) 78%, #000 100%); }
+  header.masthead.miga-art p { text-shadow: 0 1px 2px rgba(8,24,38,.9), 0 0 10px rgba(8,24,38,.75); }
+  header.masthead.miga-art h1 { filter: drop-shadow(0 1px 2px rgba(8,24,38,.9)) drop-shadow(0 0 6px rgba(8,24,38,.6)); } /* works with gradient-filled titles too */
+  .miga-art-toggle { min-height: 36px; }
 }

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Space Atlas — the history of astronomy and space exploration, illustrated | MigaBuilder</title>
+<meta name="description" content="The history of astronomy and space exploration, illustrated: Stonehenge, Copernicus and Galileo, telescopes, rockets, Sputnik, Gagarin, Apollo 11, the Space Shuttle, the ISS, Mars rovers, Voyager, Hubble and James Webb, and discoveries from Neptune to black holes. With a timeline and a quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/space-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/space-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Space Atlas — astronomy and space exploration through history | MigaBuilder">
+<meta property="og:description" content="From ancient sky-watchers and Galileo to Sputnik, Apollo, Mars rovers, Voyager and the James Webb telescope, with a timeline and a quiz.">
+<meta property="og:url" content="https://migabuilder.com/space-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does Space Atlas cover?", "acceptedAnswer": {"@type": "Answer", "text": "Ancient astronomy, great astronomers and discoveries, telescopes and observatories, rockets, satellites, human spaceflight, the Moon, probes to the planets, space stations and today’s missions."}}, {"@type": "Question", "name": "Does it include missions from countries other than the USA?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It includes Soviet and Russian, European, Chinese, Indian and Japanese missions, as well as American ones."}}, {"@type": "Question", "name": "Is Space Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Space Atlas</span></nav>
+<header class="masthead"><div><h1>Space Atlas</h1><p>The history of astronomy and space exploration: ancient sky-watchers, telescopes and discoveries, rockets and satellites, astronauts, the Moon landings, probes to every planet and the great space telescopes.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Space Atlas</h2>
+  <p>Space Atlas covers astronomy and spaceflight from ancient observatories and the ideas of Aristarchus, Aryabhata, Copernicus, Galileo, Kepler and Newton, through the discovery of planets, galaxies, pulsars, exoplanets and black holes, to the space age: rockets, satellites, the first animals and people in space, the Moon landings, space stations, rovers and probes to every planet, and the Hubble and James Webb telescopes — with missions from the USA, the Soviet Union and Russia, Europe, China, India and Japan.</p>
+  <h3>How to use Space Atlas</h3>
+  <ol><li>Search a mission, a planet, a telescope or an astronomer, or pick a group such as The Moon or Human spaceflight.</li><li>Open a card to read what happened, how it worked and what we learned.</li><li>Use the timeline to follow astronomy from ancient times to today.</li><li>Play the quiz, or download a printable quiz with answers.</li></ol>
+  <h3>What does Space Atlas cover?</h3>
+  <p>Ancient astronomy, great astronomers and discoveries, telescopes and observatories, rockets, satellites, human spaceflight, the Moon, probes to the planets, space stations and today’s missions.</p>
+  <h3>Does it include missions from countries other than the USA?</h3>
+  <p>Yes. It includes Soviet and Russian, European, Chinese, Indian and Japanese missions, as well as American ones.</p>
+  <h3>Is Space Atlas free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="physics-map.html">Physics Map</a> · <a href="invention-atlas.html">Invention Atlas</a> · <a href="weapons-atlas.html">Weapons Atlas</a> · <a href="geo-forge.html">Geography Forge</a></p>
+</section>
+<footer>Space Atlas · MigaBuilder · A history atlas for learning. Mission dates are launch or arrival dates as noted.</footer>
+<script src="atlas-art.js"></script>
+<script src="space-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: SPACE, cats: SPACE_CATS, eras: SPACE_ERAS, title: "Space Atlas", page: "space-atlas.html",
+  key: "space",
+  word: ["milestone", "milestones"],
+  searchHint: "Search a mission, a planet, a telescope or an astronomer…",
+  emptyIcon: "🚀",
+  sections: [["how", "🛰️ How it worked"], ["impact", "🔭 What we learned"]],
+  whoLabel: "Who was involved",
+  whoQ: "Who is linked to “{n}”?",
+  whenQ: "When did “{n}” happen?",
+  picQ: "Which mission or discovery does this picture show?",
+  quizTitle: "Space and astronomy quiz",
+  quizFile: "space-quiz.html",
+  ranks: [[90, "Mission commander 🚀"], [75, "Astronaut 👩‍🚀"], [55, "Astronomer 🔭"], [0, "Cadet 🌱"]],
+  note: ""
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>
