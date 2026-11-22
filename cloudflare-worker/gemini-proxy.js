@@ -30,8 +30,10 @@ const ALLOWED_MODELS = [
   'gemini-3.1-flash-lite-image'
 ];
 
-// Picture Forge. The site owner pays for every picture made through this
-// Worker, so it allows only the two cheaper image models, up to 2K (4K and
+// Picture Forge. Pictures made through this Worker are billed to the
+// site owner's key; Picture Forge currently switches the shared option
+// off for pictures (visitors use their own key). The Worker still
+// allows only the two cheaper image models, up to 2K (4K and
 // the Pro model need the visitor's own key, which never comes here), and at
 // most 3 small reference photos per request.
 const IMAGE_MODELS = ['gemini-3.1-flash-image', 'gemini-3.1-flash-lite-image'];
