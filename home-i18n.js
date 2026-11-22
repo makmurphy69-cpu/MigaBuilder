@@ -70,6 +70,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': 'Explore the history of psychology — its schools, theories, therapies and psychologists — then play the quiz.',
     'd:species-atlas': 'Look up any animal, plant or fungus: photos, names, classification, status and where it lives, plus a photo quiz.',
     'd:tune-forge': 'Tune guitar, bass, ukulele, violin and more, keep time with a metronome, and see when it gets too loud for your ears.',
+    'd:theory-forge': 'Learn music theory with lessons, scales, chords, tabs and songs, on instruments you can play and hear.',
+    'd:grow-forge': 'Learn how to grow tomatoes, vegetables, fruit, herbs and plants at home or in nature, with and without equipment.',
+    'd:typing-test': 'Typing speed test with a certificate, plus 10-key, data entry, transcription and other job skills tests.',
+    'd:passport-photo': 'Make passport, visa and ID photos for any country, with a free printable 4×6 sheet. Your photo stays on your device.',
     'd:cube-forge': 'Learn to solve a Rubik’s-style cube in 3D: choose 2 to 10 layers or a cuboid, follow the steps, and solve your own cube.',
     'd:plane-forge': 'Design an airplane and its engine, and see stall speed, take-off, climb, ceiling, range and stability.',
     'd:motor-forge': 'Design a car or motorcycle, build its engine, and see 0–100, top speed, grip and fuel use.',
@@ -181,6 +185,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': 'Explora la historia de la psicología — escuelas, teorías, terapias y psicólogos — y juega al cuestionario.',
     'd:species-atlas': 'Busca cualquier animal, planta u hongo: fotos, nombres, clasificación, estado de conservación y dónde vive, con un cuestionario de fotos.',
     'd:tune-forge': 'Afina guitarra, bajo, ukelele, violín y más, lleva el ritmo con un metrónomo y mira cuándo el sonido es demasiado fuerte para tus oídos.',
+    'd:theory-forge': 'Aprende teoría musical con lecciones, escalas, acordes, tablaturas y canciones, en instrumentos que puedes tocar y escuchar.',
+    'd:grow-forge': 'Aprende a cultivar tomates, verduras, frutas, hierbas y plantas en casa o en la naturaleza, con y sin equipo.',
+    'd:typing-test': 'Test de velocidad de escritura con certificado, además de pruebas de teclado numérico, captura de datos, transcripción y otras pruebas para empleos.',
+    'd:passport-photo': 'Crea fotos de pasaporte, visado e identificación para cualquier país, con una hoja 4×6 imprimible gratis. Tu foto no sale de tu dispositivo.',
     'd:cube-forge': 'Aprende a resolver un cubo tipo Rubik en 3D: elige de 2 a 10 capas o un cuboide, sigue los pasos y resuelve tu propio cubo.',
     'd:plane-forge': 'Diseña un avión y su motor, y mira la velocidad de pérdida, el despegue, el ascenso, el techo, la autonomía y la estabilidad.',
     'd:motor-forge': 'Diseña un coche o una moto, construye su motor y mira el 0–100, la velocidad máxima, el agarre y el consumo.',
@@ -292,6 +300,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': 'استكشف تاريخ علم النفس — مدارسه ونظرياته وعلاجاته وعلماؤه — ثم العب الاختبار.',
     'd:species-atlas': 'ابحث عن أي حيوان أو نبات أو فطر: صور وأسماء وتصنيف وحالة الحفظ وأين يعيش، مع اختبار بالصور.',
     'd:tune-forge': 'اضبط الغيتار والباص والأوكوليلي والكمان وغيرها، وحافظ على الإيقاع بالمترونوم، واعرف متى يصبح الصوت عاليًا جدًا على أذنيك.',
+    'd:theory-forge': 'تعلّم نظرية الموسيقى بدروس وسلالم وأوتار (كوردات) وتابات وأغانٍ، على آلات يمكنك العزف عليها وسماعها.',
+    'd:grow-forge': 'تعلّم كيف تزرع الطماطم والخضروات والفواكه والأعشاب والنباتات في المنزل أو في الطبيعة، بمعدات أو بدونها.',
+    'd:typing-test': 'اختبار سرعة الكتابة مع شهادة، بالإضافة إلى اختبار لوحة الأرقام وإدخال البيانات والتفريغ الصوتي واختبارات مهارات أخرى للوظائف.',
+    'd:passport-photo': 'اصنع صور جواز السفر والتأشيرة والهوية لأي بلد، مع ورقة طباعة 4×6 مجانية. تبقى صورتك على جهازك.',
     'd:cube-forge': 'تعلّم حل مكعب على طريقة روبيك بالأبعاد الثلاثية: اختر من 2 إلى 10 طبقات أو متوازي مستطيلات، واتبع الخطوات وحلّ مكعبك.',
     'd:plane-forge': 'صمّم طائرة ومحركها، وشاهد سرعة الانهيار والإقلاع والصعود والسقف والمدى والثبات.',
     'd:motor-forge': 'صمّم سيارة أو دراجة نارية وابنِ محركها، وشاهد التسارع من 0 إلى 100 والسرعة القصوى والتماسك واستهلاك الوقود.',
@@ -403,6 +415,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': '探索心理学的历史——流派、理论、疗法和心理学家——然后玩测验。',
     'd:species-atlas': '查找任何动物、植物或真菌：照片、名称、分类、保护状况和分布地区，还有看图测验。',
     'd:tune-forge': '为吉他、贝斯、尤克里里、小提琴等调音，用节拍器练习节奏，并在音量过大伤耳时及时提醒。',
+    'd:theory-forge': '通过课程、音阶、和弦、六线谱和歌曲学习乐理，并在可以弹奏和聆听的乐器上练习。',
+    'd:grow-forge': '学习如何在家中或户外种植番茄、蔬菜、水果、香草和各种植物，有设备或没有设备都可以。',
+    'd:typing-test': '带证书的打字速度测试，另有数字小键盘、数据录入、听打转录等求职技能测试。',
+    'd:passport-photo': '为任何国家制作护照、签证和证件照，并免费生成可打印的 4×6 排版。照片不会离开你的设备。',
     'd:cube-forge': '在 3D 中学习还原魔方：选择 2 到 10 层或长方体魔方，按步骤操作，还原你自己的魔方。',
     'd:plane-forge': '设计一架飞机和它的发动机，查看失速速度、起飞、爬升、升限、航程和稳定性。',
     'd:motor-forge': '设计一辆汽车或摩托车并打造它的发动机，查看百公里加速、最高速度、抓地力和油耗。',
@@ -514,6 +530,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': 'Chunguza historia ya saikolojia — shule, nadharia, tiba na wanasaikolojia — kisha cheza chemsha bongo.',
     'd:species-atlas': 'Tafuta mnyama, mmea au kuvu yoyote: picha, majina, uainishaji, hali ya uhifadhi na mahali anapoishi, pamoja na chemsha bongo ya picha.',
     'd:tune-forge': 'Tuni gitaa, besi, ukulele, fidla na zaidi, fuata mdundo kwa metronomu, na uone sauti inapokuwa kubwa mno kwa masikio yako.',
+    'd:theory-forge': 'Jifunze nadharia ya muziki kwa masomo, skeli, kodi, tabu na nyimbo, kwenye ala unazoweza kupiga na kusikia.',
+    'd:grow-forge': 'Jifunze kulima nyanya, mboga, matunda, mitishamba na mimea nyumbani au porini, ukiwa na vifaa au bila vifaa.',
+    'd:typing-test': 'Jaribio la kasi ya kuandika na cheti, pamoja na majaribio ya namba (10-key), kuingiza data, kunukuu sauti na ujuzi mwingine wa kazi.',
+    'd:passport-photo': 'Tengeneza picha za pasipoti, viza na kitambulisho za nchi yoyote, pamoja na karatasi ya 4×6 ya kuchapisha bure. Picha yako inabaki kwenye kifaa chako.',
     'd:cube-forge': 'Jifunze kutatua mchemraba wa aina ya Rubik kwa 3D: chagua tabaka 2 hadi 10 au mchemraba mrefu, fuata hatua na utatue mchemraba wako.',
     'd:plane-forge': 'Buni ndege na injini yake, na uone kasi ya kuanguka, kuruka, kupanda, kimo cha juu, umbali na uthabiti.',
     'd:motor-forge': 'Buni gari au pikipiki, unda injini yake, na uone 0–100, kasi ya juu, mshiko na matumizi ya mafuta.',
@@ -664,6 +684,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': "Utforska psykologins historia — skolor, teorier, terapier och psykologer — och spela sedan quizet.",
     'd:species-atlas': "Slå upp vilket djur, växt eller svamp som helst: foton, namn, klassificering, hotstatus och var den lever, plus ett bildquiz.",
     'd:tune-forge': 'Stäm gitarr, bas, ukulele, fiol med mera, håll takten med en metronom och se när ljudet blir för starkt för öronen.',
+    'd:theory-forge': 'Lär dig musikteori med lektioner, skalor, ackord, tabulatur och låtar, på instrument du kan spela och höra.',
+    'd:grow-forge': 'Lär dig odla tomater, grönsaker, frukt, örter och växter hemma eller i naturen, med och utan utrustning.',
+    'd:typing-test': 'Skrivhastighetstest med certifikat, plus test av numeriskt tangentbord, dataregistrering, transkribering och andra färdighetstest för jobb.',
+    'd:passport-photo': 'Gör pass-, visum- och ID-foton för alla länder, med ett gratis utskriftsark i 10×15. Ditt foto stannar på din enhet.',
     'd:cube-forge': 'Lär dig lösa en Rubiks-liknande kub i 3D: välj 2 till 10 lager eller en rätblockskub, följ stegen och lös din egen kub.',
     'd:plane-forge': 'Designa ett flygplan och dess motor och se stallfart, start, stigning, topphöjd, räckvidd och stabilitet.',
     'd:motor-forge': 'Designa en bil eller motorcykel, bygg motorn och se 0–100, toppfart, väggrepp och bränsleförbrukning.',
@@ -814,6 +838,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': "Erkunde die Geschichte der Psychologie — Schulen, Theorien, Therapien und Psychologen — und spiele dann das Quiz.",
     'd:species-atlas': "Schlage jedes Tier, jede Pflanze und jeden Pilz nach: Fotos, Namen, Systematik, Gefährdung und Verbreitung, dazu ein Foto-Quiz.",
     'd:tune-forge': 'Stimme Gitarre, Bass, Ukulele, Geige und mehr, halte mit dem Metronom den Takt und sieh, wann es zu laut für deine Ohren wird.',
+    'd:theory-forge': 'Lerne Musiktheorie mit Lektionen, Tonleitern, Akkorden, Tabs und Liedern – auf Instrumenten, die du spielen und hören kannst.',
+    'd:grow-forge': 'Lerne, Tomaten, Gemüse, Obst, Kräuter und Pflanzen zu Hause oder in der Natur anzubauen – mit und ohne Ausrüstung.',
+    'd:typing-test': 'Tipptest mit Zertifikat, dazu Zehnerblock-, Dateneingabe-, Transkriptions- und weitere Eignungstests für Bewerbungen.',
+    'd:passport-photo': 'Erstelle Pass-, Visum- und Ausweisfotos für jedes Land, mit kostenlosem 10×15-Druckbogen. Dein Foto bleibt auf deinem Gerät.',
     'd:cube-forge': 'Lerne, einen Zauberwürfel in 3D zu lösen: wähle 2 bis 10 Schichten oder einen Quader, folge den Schritten und löse deinen eigenen Würfel.',
     'd:plane-forge': 'Entwirf ein Flugzeug und seinen Motor und sieh Überziehgeschwindigkeit, Start, Steigen, Gipfelhöhe, Reichweite und Stabilität.',
     'd:motor-forge': 'Entwirf ein Auto oder Motorrad, baue den Motor und sieh 0–100, Höchstgeschwindigkeit, Grip und Verbrauch.',
@@ -964,6 +992,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': "Explore a história da psicologia — escolas, teorias, terapias e psicólogos — e depois jogue o quiz.",
     'd:species-atlas': "Pesquise qualquer animal, planta ou fungo: fotos, nomes, classificação, estado de conservação e onde vive, com um quiz de fotos.",
     'd:tune-forge': 'Afine guitarra, baixo, ukulele, violino e mais, mantenha o ritmo com um metrônomo e veja quando o som fica alto demais para os ouvidos.',
+    'd:theory-forge': 'Aprenda teoria musical com lições, escalas, acordes, tablaturas e músicas, em instrumentos que você pode tocar e ouvir.',
+    'd:grow-forge': 'Aprenda a cultivar tomates, legumes, frutas, ervas e plantas em casa ou na natureza, com e sem equipamento.',
+    'd:typing-test': 'Teste de velocidade de digitação com certificado, além de testes de teclado numérico, entrada de dados, transcrição e outras habilidades para empregos.',
+    'd:passport-photo': 'Crie fotos para passaporte, visto e documento de identidade de qualquer país, com uma folha 4×6 grátis para imprimir. Sua foto fica no seu dispositivo.',
     'd:cube-forge': 'Aprenda a resolver um cubo tipo Rubik em 3D: escolha de 2 a 10 camadas ou um cuboide, siga os passos e resolva o seu próprio cubo.',
     'd:plane-forge': 'Projete um avião e o seu motor e veja a velocidade de perda, a descolagem, a subida, o teto, o alcance e a estabilidade.',
     'd:motor-forge': 'Projete um carro ou uma moto, monte o motor e veja o 0–100, a velocidade máxima, a aderência e o consumo.',
@@ -1114,6 +1146,10 @@ window.HOME_I18N = {
     'd:psychology-atlas': "Explorez l’histoire de la psychologie — écoles, théories, thérapies et psychologues — puis jouez au quiz.",
     'd:species-atlas': "Recherchez n’importe quel animal, plante ou champignon : photos, noms, classification, statut de conservation et répartition, plus un quiz photo.",
     'd:tune-forge': 'Accordez guitare, basse, ukulélé, violon et plus, gardez le tempo avec un métronome et voyez quand le son devient trop fort pour vos oreilles.',
+    'd:theory-forge': 'Apprenez la théorie musicale avec des leçons, gammes, accords, tablatures et chansons, sur des instruments que vous pouvez jouer et écouter.',
+    'd:grow-forge': 'Apprenez à cultiver tomates, légumes, fruits, herbes et plantes chez vous ou dans la nature, avec ou sans équipement.',
+    'd:typing-test': 'Test de vitesse de frappe avec certificat, plus des tests de pavé numérique, saisie de données, transcription et autres tests d’aptitude pour l’emploi.',
+    'd:passport-photo': 'Créez des photos d’identité pour passeport, visa et carte d’identité de tout pays, avec une planche 10×15 gratuite à imprimer. Votre photo reste sur votre appareil.',
     'd:cube-forge': 'Apprenez à résoudre un cube type Rubik en 3D : choisissez de 2 à 10 couches ou un pavé, suivez les étapes et résolvez votre propre cube.',
     'd:plane-forge': 'Concevez un avion et son moteur, et voyez la vitesse de décrochage, le décollage, la montée, le plafond, l’autonomie et la stabilité.',
     'd:motor-forge': 'Concevez une voiture ou une moto, construisez son moteur et voyez le 0–100, la vitesse maximale, l’adhérence et la consommation.',
@@ -1167,6 +1203,21 @@ window.HOME_I18N = {
     footAbout: { en: 'About', es: 'Acerca de', ar: 'من نحن', zh: '关于', sw: 'Kuhusu', sv: 'Om', de: 'Über uns', pt: 'Sobre', fr: 'À propos' },
     footPrivacy: { en: 'Privacy', es: 'Privacidad', ar: 'الخصوصية', zh: '隐私', sw: 'Faragha', sv: 'Integritet', de: 'Datenschutz', pt: 'Privacidade', fr: 'Confidentialité' },
     footTerms: { en: 'Terms', es: 'Condiciones', ar: 'الشروط', zh: '条款', sw: 'Masharti', sv: 'Villkor', de: 'Nutzungsbedingungen', pt: 'Termos', fr: 'Conditions' }
+  };
+  Object.keys(add).forEach(function (k) {
+    Object.keys(add[k]).forEach(function (l) { if (T[l]) T[l][k] = add[k][l]; });
+  });
+})(window.HOME_I18N);
+
+// The history atlases (Weapons, Surgery, Medicine & Disease, Castles, Inventions, Space).
+(function (T) {
+  var add = {
+    'd:weapons-atlas': {"en": "The history of weapons, from stone tools to drones: who invented each one, how it worked and how it was used, with a quiz.", "es": "La historia de las armas, de las herramientas de piedra a los drones: quién inventó cada una, cómo funcionaba y cómo se usó, con un cuestionario.", "ar": "تاريخ الأسلحة من الأدوات الحجرية إلى الطائرات المسيّرة: من اخترع كل سلاح، وكيف كان يعمل وكيف استُخدم، مع اختبار.", "zh": "武器的历史，从石器到无人机：每种武器由谁发明、如何运作、如何使用，并附测验。", "sw": "Historia ya silaha, kuanzia zana za mawe hadi ndege zisizo na rubani: nani alizivumbua, zilivyofanya kazi na zilivyotumika, pamoja na jaribio.", "sv": "Vapnens historia, från stenverktyg till drönare: vem som uppfann dem, hur de fungerade och hur de användes, med ett quiz.", "de": "Die Geschichte der Waffen, von Steinwerkzeugen bis zu Drohnen: wer sie erfand, wie sie funktionierten und wie sie eingesetzt wurden – mit Quiz.", "pt": "A história das armas, das ferramentas de pedra aos drones: quem inventou cada uma, como funcionava e como foi usada, com um quiz.", "fr": "L’histoire des armes, des outils de pierre aux drones : qui les a inventées, comment elles fonctionnaient et comment on les utilisait, avec un quiz."},
+    'd:surgery-atlas': {"en": "How operations are done and the history of surgery, with illustrations, steps, recovery, risks and a quiz.", "es": "Cómo se hacen las operaciones y la historia de la cirugía, con ilustraciones, pasos, recuperación, riesgos y un cuestionario.", "ar": "كيف تُجرى العمليات الجراحية وتاريخ الجراحة، مع رسوم توضيحية وخطوات والتعافي والمخاطر واختبار.", "zh": "手术是如何进行的以及外科的历史，配有插图、步骤、康复、风险和测验。", "sw": "Jinsi upasuaji unavyofanywa na historia ya upasuaji, pamoja na michoro, hatua, kupona, hatari na jaribio.", "sv": "Hur operationer går till och kirurgins historia, med illustrationer, steg, återhämtning, risker och ett quiz.", "de": "Wie Operationen ablaufen und die Geschichte der Chirurgie, mit Illustrationen, Schritten, Genesung, Risiken und Quiz.", "pt": "Como as cirurgias são feitas e a história da cirurgia, com ilustrações, etapas, recuperação, riscos e um quiz.", "fr": "Comment se déroulent les opérations et l’histoire de la chirurgie, avec illustrations, étapes, convalescence, risques et un quiz."},
+    'd:medicine-atlas': {"en": "Plagues, pandemics, vaccines and medicines through history, from the Black Death to mRNA, with a quiz.", "es": "Plagas, pandemias, vacunas y medicamentos a lo largo de la historia, de la peste negra al ARNm, con un cuestionario.", "ar": "الأوبئة والجوائح واللقاحات والأدوية عبر التاريخ، من الموت الأسود إلى لقاحات mRNA، مع اختبار.", "zh": "历史上的瘟疫、大流行、疫苗和药物，从黑死病到 mRNA 疫苗，并附测验。", "sw": "Tauni, magonjwa ya mlipuko, chanjo na dawa katika historia, kuanzia Kifo Cheusi hadi mRNA, pamoja na jaribio.", "sv": "Farsoter, pandemier, vacciner och läkemedel genom historien, från digerdöden till mRNA, med ett quiz.", "de": "Seuchen, Pandemien, Impfstoffe und Medikamente im Lauf der Geschichte, vom Schwarzen Tod bis zu mRNA – mit Quiz.", "pt": "Pestes, pandemias, vacinas e medicamentos ao longo da história, da Peste Negra ao mRNA, com um quiz.", "fr": "Épidémies, pandémies, vaccins et médicaments à travers l’histoire, de la peste noire à l’ARNm, avec un quiz."},
+    'd:castle-atlas': {"en": "Castles, walls and forts through history: how they defended, castle parts, famous sieges and a quiz.", "es": "Castillos, murallas y fuertes a lo largo de la historia: cómo se defendían, sus partes, asedios famosos y un cuestionario.", "ar": "القلاع والأسوار والحصون عبر التاريخ: كيف كانت تدافع عن نفسها، وأجزاء القلعة، وأشهر الحصارات، مع اختبار.", "zh": "历史上的城堡、城墙和要塞：如何防御、城堡的各个部分、著名的围城战，并附测验。", "sw": "Ngome, kuta na maboma katika historia: jinsi zilivyojilinda, sehemu za ngome, mazingiwa maarufu na jaribio.", "sv": "Borgar, murar och fästningar genom historien: hur de försvarades, borgens delar, kända belägringar och ett quiz.", "de": "Burgen, Mauern und Festungen im Lauf der Geschichte: wie sie verteidigt wurden, Burgteile, berühmte Belagerungen und Quiz.", "pt": "Castelos, muralhas e fortes ao longo da história: como se defendiam, as partes do castelo, cercos famosos e um quiz.", "fr": "Châteaux, remparts et forts à travers l’histoire : leur défense, les parties d’un château, des sièges célèbres et un quiz."},
+    'd:invention-atlas': {"en": "The inventions that changed the world, from fire and the wheel to smartphones and AI, with a quiz.", "es": "Los inventos que cambiaron el mundo, del fuego y la rueda a los teléfonos inteligentes y la IA, con un cuestionario.", "ar": "الاختراعات التي غيّرت العالم، من النار والعجلة إلى الهواتف الذكية والذكاء الاصطناعي، مع اختبار.", "zh": "改变世界的发明，从火和轮子到智能手机和人工智能，并附测验。", "sw": "Uvumbuzi uliobadilisha dunia, kuanzia moto na gurudumu hadi simu janja na akili bandia, pamoja na jaribio.", "sv": "Uppfinningarna som förändrade världen, från elden och hjulet till smartphones och AI, med ett quiz.", "de": "Die Erfindungen, die die Welt veränderten, vom Feuer und Rad bis zu Smartphones und KI – mit Quiz.", "pt": "As invenções que mudaram o mundo, do fogo e da roda aos smartphones e à IA, com um quiz.", "fr": "Les inventions qui ont changé le monde, du feu et de la roue aux smartphones et à l’IA, avec un quiz."},
+    'd:space-atlas': {"en": "The history of astronomy and space exploration, from Stonehenge to Apollo, Mars rovers and the Webb telescope.", "es": "La historia de la astronomía y la exploración espacial, de Stonehenge al Apolo, los róveres de Marte y el telescopio Webb.", "ar": "تاريخ علم الفلك واستكشاف الفضاء، من ستونهنج إلى أبولو ومركبات المريخ وتلسكوب ويب.", "zh": "天文学和太空探索的历史，从巨石阵到阿波罗登月、火星车和韦布望远镜。", "sw": "Historia ya elimu ya nyota na uchunguzi wa anga, kuanzia Stonehenge hadi Apollo, magari ya Mirihi na darubini ya Webb.", "sv": "Astronomins och rymdfartens historia, från Stonehenge till Apollo, Marsbilar och Webbteleskopet.", "de": "Die Geschichte der Astronomie und Raumfahrt, von Stonehenge über Apollo bis zu Marsrovern und dem Webb-Teleskop.", "pt": "A história da astronomia e da exploração espacial, de Stonehenge à Apollo, aos rovers de Marte e ao telescópio Webb.", "fr": "L’histoire de l’astronomie et de l’exploration spatiale, de Stonehenge à Apollo, aux rovers martiens et au télescope Webb."}
   };
   Object.keys(add).forEach(function (k) {
     Object.keys(add[k]).forEach(function (l) { if (T[l]) T[l][k] = add[k][l]; });

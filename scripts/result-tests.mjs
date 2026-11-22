@@ -591,6 +591,26 @@ test('invoice-forge: decimal commas, the currency, a fixed number and a searchab
   await page.waitForFunction(() => document.getElementById('docNumber').value === 'INV-0002', null, { timeout: 5000 });
 });
 
+// The six history atlases share one engine (history-atlas.js): search opens an entry, and the printable
+// quiz for one era holds the requested number of questions, pictures included, with an answer key.
+for (const [atlas, query, heading, file] of [['weapons-atlas', 'counterweight trebuchet', 'Counterweight trebuchet', 'weapons-quiz.html'], ['surgery-atlas', 'hip replacement', 'Hip replacement', 'surgery-quiz.html'], ['medicine-atlas', 'penicillin', 'Penicillin', 'medicine-quiz.html'], ['castle-atlas', 'himeji', 'Himeji Castle', 'castle-quiz.html'], ['invention-atlas', 'printing press', 'Printing press', 'inventions-quiz.html'], ['space-atlas', 'apollo 11', 'Apollo 11: people on the Moon', 'space-quiz.html']]) {
+  test(atlas + ': search opens the entry, and the printable quiz has its questions, pictures and answer key', atlas + '.html', async (page) => {
+    await page.fill('#haQ', query);
+    await page.press('#haQ', 'Enter');
+    await page.waitForFunction(h => ((document.querySelector('#haInfo h2') || {}).textContent || '') === h, heading, { timeout: 5000 });
+    expect(await page.locator('#haInfo .ha-hero svg').count() === 1, 'the entry has no picture');
+    await page.selectOption('#qSource', 'all');
+    await page.selectOption('#qCount', '20');
+    const quiz = await downloadOf(page, () => page.click('#printQuiz'));
+    const html = quiz.buf.toString('utf8');
+    expect(quiz.name === file, 'unexpected quiz file name: ' + quiz.name);
+    const keyAt = html.indexOf('Answer key');
+    const questions = (html.slice(0, keyAt).match(/<li><p>/g) || []).length, answers = (html.slice(keyAt).match(/<li>[A-D]\) /g) || []).length;
+    expect(keyAt > 0 && questions === 20 && answers === 20, 'expected 20 questions and 20 answers, got ' + questions + ' and ' + answers);
+    expect(!/undefined|NaN|\[object/.test(html), 'the quiz has broken text');
+  });
+}
+
 test('psychology-atlas: printable quiz has every question and an answer key', 'psychology-atlas.html', async (page) => {
   await page.selectOption('#qSource', 'school');
   await page.selectOption('#qCount', '15');
@@ -1156,6 +1176,74 @@ test('noise-forge: a mix plays without errors and downloads as a WAV file', 'noi
   expect(rms > 0.03 && peak < 0.99, 'the sound level is wrong: rms ' + rms.toFixed(3) + ', peak ' + peak.toFixed(2));
 });
 
+test('theory-forge: a song tab downloads with every note on the right string and fret, chords are spelled right and the instruments are in tune', 'theory-forge.html', async (page) => {
+  await page.selectOption('#inst', 'guitar');
+  await page.evaluate(() => window.__theoryForge.openSong('twinkle'));
+  // every tab position plays the written note
+  const chk = await page.evaluate(() => {
+    const TF = window.__theoryForge, TE = TF.engine, B = TF.buildSong(), T = TE.INSTRUMENTS.guitar.tuning;
+    const wrong = B.events.filter((e, i) => e.midi != null && (!B.path[i] || T[B.path[i].s] + B.path[i].f !== e.midi)).length;
+    const shapes = ['C', 'G', 'D', 'Am', 'F'].map(sym => { const c = TE.parseChord(sym), ch = TE.chord(c.root, c.q); return TE.voicings('guitar', ch.pcs, ch.pcs[0], 1)[0].frets.map(f => f < 0 ? 'x' : f).join(''); });
+    return { wrong, notes: B.events.length, shapes, f: TE.scale('F', 'major').map(n => n.name).join(' '), dia: TE.diatonic('G', 'major').map(c => c.roman + ':' + c.sym).join(' '), pitch: ['guitar', 'piano', 'ukulele'].map(s => TF.pitchOf(64, s)) };
+  });
+  expect(chk.notes === 42 && chk.wrong === 0, 'tab positions do not match the melody: ' + JSON.stringify(chk));
+  expect(chk.shapes.join(' ') === 'x32010 320003 xx0232 x02210 133211', 'wrong chord shapes: ' + chk.shapes.join(' '));
+  expect(chk.f === 'F G A Bb C D E' && chk.dia === 'I:G ii:Am iii:Bm IV:C V:D vi:Em vii°:F#dim', 'wrong spelling: ' + chk.f + ' | ' + chk.dia);
+  expect(chk.pitch.every(f => f && Math.abs(1200 * Math.log2(f / 329.63)) < 15), 'an instrument is out of tune: ' + chk.pitch.join(', '));
+  const out = await downloadOf(page, () => page.click('#songTab'));
+  const txt = out.buf.toString('utf8'), lines = txt.split('\n');
+  expect(out.name === 'twinkle-guitar-tab.txt', 'unexpected file name ' + out.name);
+  expect(/^Twinkle, Twinkle, Little Star/.test(lines[0]) && /tuning E A D G B e/.test(txt), 'the tab header is wrong: ' + lines.slice(0, 2).join(' | '));
+  const strings = lines.filter(l => /^[eBGDAE]\|/.test(l));
+  expect(strings.length >= 18 && strings.length % 6 === 0, 'the tab does not have six string lines per system: ' + strings.length);
+  expect(/x32010/.test(txt) && /\bF\b/.test(txt) && /\bG\b/.test(txt), 'chord names or shapes are missing from the tab');
+  // practice mode waits for the right note: C (A key) moves on, a wrong note does not
+  await page.click('#songPractice');
+  await page.keyboard.press('j');
+  const p1 = await page.evaluate(() => window.__theoryForge.songPlay.pos);
+  await page.keyboard.press('a'); await page.keyboard.press('a');
+  const p2 = await page.evaluate(() => window.__theoryForge.songPlay.pos);
+  expect(p1 === 0 && p2 === 2, 'practice mode did not wait for the right notes: ' + p1 + ', ' + p2);
+});
+
+test('grow-forge: search finds a plant, the calendar follows the hemisphere and the grow plan downloads with dates and steps', 'grow-forge.html', async (page) => {
+  await page.evaluate(() => { try { localStorage.removeItem('growForge.garden'); } catch (e) {} });
+  await page.fill('#search', 'tomatoes');
+  const first = await page.textContent('#list .pcard b');
+  expect(first === 'Tomato', 'searching "tomatoes" did not find Tomato first: ' + first);
+  for (const [q, want] of [['strawberries', 'Strawberry'], ['blueberries', 'Blueberry'], ['potatoes', 'Potato'], ['herbs', 'Basil']]) {
+    await page.fill('#search', q);
+    const names = await page.$$eval('#list .pcard b', b => b.map(x => x.textContent));
+    expect(names.includes(want), 'searching "' + q + '" did not find ' + want + ': ' + names.join(', '));
+  }
+  await page.fill('#search', 'tomatoes');
+  await page.click('#list .pcard');
+  const north = await page.$$eval('.cal tr:nth-child(2) td i', els => els.map(e => e.title).join(','));
+  await page.selectOption('#climate', 'south');
+  const south = await page.$$eval('.cal tr:nth-child(2) td i', els => els.map(e => e.title).join(','));
+  expect(/Feb/.test(north) && /Aug/.test(south) && !/Feb/.test(south), 'sowing months did not move for the southern hemisphere: ' + north + ' | ' + south);
+  // every plant has the parts a guide needs
+  const bad = await page.evaluate(() => window.__growForge.plants.filter(p => !(p.steps.length >= 3 && p.gear.length && p.nogear.length && p.problems.length && p.harvest && p.wild && p.germ[0] <= p.germ[1] && p.days[0] <= p.days[1])).map(p => p.id));
+  expect(bad.length === 0, 'incomplete plant guides: ' + bad.join(', '));
+  await page.click('#tab-gear');
+  expect(await page.isVisible('.col.no .item2'), 'the without-equipment list is not shown');
+  await page.fill('#addDate', '2026-03-01');
+  await page.click('#addBtn');
+  // a plant that is not in the list gets a general guide
+  await page.fill('#search', 'mango');
+  await page.selectOption('#otherType', 'tropical');
+  await page.click('#otherGo');
+  expect(/mango/.test(await page.textContent('#plant h2')) && /rainy season/.test(await page.textContent('#plant')), 'no general guide for an unlisted plant');
+  await page.click('#findBtn');
+  expect(await page.$$eval('#recs .rec', r => r.length) >= 3, 'the plant finder recommended fewer than 3 plants');
+  const out = await downloadOf(page, () => page.click('#dlPlan'));
+  const txt = out.buf.toString('utf8');
+  expect(out.name === 'my-grow-plan.txt', 'unexpected file name ' + out.name);
+  expect(/^MY GROW PLAN/.test(txt) && /1\. TOMATO/.test(txt) && /Sown\/planted: 1 Mar 2026/.test(txt), 'plan header or plant missing: ' + txt.slice(0, 200));
+  expect(/Expect sprouts: 6 Mar 2026 – 11 Mar 2026/.test(txt) && /First harvest: 30 May 2026 – 29 Jun 2026/.test(txt), 'wrong sprout or harvest dates');
+  expect((txt.match(/\[ \] /g) || []).length === 9 && /Blossom end rot|blossom end rot/.test(txt), 'steps or problems missing from the plan');
+});
+
 test('tune-forge: the demo string is tuned to E2 and the sound level log downloads as CSV', 'tune-forge.html', async (page) => {
   await page.click('#demoBtn'); // a plucked string tuned up step by step — no microphone needed
   await page.waitForFunction(() => { const s = window.__tuneForge.tuner(); return s.note === 'E2' && s.inTune; }, null, { timeout: 20000 });
@@ -1511,7 +1599,7 @@ test('pdf-edit-forge: a signature and a date added one after the other do not ov
 });
 
 // The printable quiz + answer key of each map: every question must have its answer listed once among different choices.
-for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'idea-atlas', 'psychology-atlas']) {
+for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'idea-atlas', 'psychology-atlas', 'weapons-atlas', 'surgery-atlas', 'medicine-atlas', 'castle-atlas', 'invention-atlas', 'space-atlas']) {
   test(map + ': printable quizzes have one right answer per question, among different choices', map + '.html', async (page) => {
     await page.waitForTimeout(1500);
     const btn = page.locator('button:visible').filter({ hasText: /Printable quiz/i }).first();
@@ -1519,7 +1607,7 @@ for (const map of ['chemistry-map', 'biology-map', 'body-map', 'physics-map', 'i
     let checked = 0;
     for (let k = 0; k < 5; k++) {
       const html = (await downloadOf(page, () => btn.click())).buf.toString('utf8');
-      const qs = [...html.slice(0, html.indexOf('<h2')).matchAll(/<li><p>([\s\S]*?)<\/p><ol type="A">([\s\S]*?)<\/ol><\/li>/g)].map(m => ({ q: strip(m[1]), opts: [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])) }));
+      const qs = [...html.slice(0, html.indexOf('<h2')).matchAll(/<li><p>([\s\S]*?)<\/p>(?:<div class="pic">[\s\S]*?<\/div>)?<ol type="A">([\s\S]*?)<\/ol><\/li>/g)].map(m => ({ q: strip(m[1]), opts: [...m[2].matchAll(/<li>([\s\S]*?)<\/li>/g)].map(x => strip(x[1])) }));
       const keys = [...html.slice(html.indexOf('Answer key')).matchAll(/<li>([A-Z])\) /g)].map(m => m[1].charCodeAt(0) - 65);
       expect(qs.length && qs.length === keys.length, 'the answer key does not match the questions (' + qs.length + ' / ' + keys.length + ')');
       qs.forEach((q, i) => {
@@ -1616,6 +1704,118 @@ test('visit-forge: the example summary downloads as a PDF with the reason and th
   const text = (await pdfPageTexts(page, out.buf)).join(' ');
   for (const want of ['Visit summary - Sam Rivera', 'Headaches most mornings for the last 3 weeks', 'Salbutamol inhaler', 'Allergies: Penicillin - rash', '1. * Could this be my blood pressure?', '4. Is it safe to keep taking paracetamol every day?'])
     expect(text.includes(want), 'the PDF is missing "' + want + '": ' + text.slice(0, 400));
+});
+
+// Size of a JPEG from its start-of-frame marker.
+function jpegSize(buf) {
+  let i = 2;
+  while (i < buf.length) {
+    if (buf[i] !== 0xFF) { i++; continue; }
+    const m = buf[i + 1], len = buf.readUInt16BE(i + 2);
+    if (m >= 0xC0 && m <= 0xC3) return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+    i += 2 + len;
+  }
+  return null;
+}
+
+test('typing-test: a timed test scores net WPM, the job tests score KPH and accuracy, and the certificate and results download', 'typing-test.html', async (page) => {
+  await page.evaluate(() => { try { localStorage.removeItem('typingForge.results'); } catch (e) {} });
+  await page.selectOption('#tDur', '30');
+  const target = await page.evaluate(() => window.__typingForge.tt.st.target);
+  await page.click('#tInput');
+  await page.keyboard.type(target.slice(0, 40) + '#' + target.slice(41, 100)); // 100 characters, one mistake left in
+  // pretend the 30 seconds are over: 100 characters = 20 words in half a minute = 40 gross WPM, minus 2 for the error
+  await page.evaluate(() => { window.__typingForge.tt.st.start -= 30000; });
+  await page.waitForSelector('#tResult .result-card', { timeout: 5000 });
+  const r = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(r.test === 'typing' && r.gross === 40 && r.wpm === 38 && r.uncorr === 1, 'wrong typing score: ' + JSON.stringify(r));
+  expect(r.acc >= 98 && r.acc < 100, 'accuracy should count the one mistake: ' + r.acc);
+  // 10-key: two right, one wrong
+  await page.click('.tab[data-tab=tenkey]');
+  await page.selectOption('#kDur', '60');
+  await page.click('#kStart');
+  for (let i = 0; i < 3; i++) {
+    const src = await page.evaluate(i => window.__typingForge.K.rows[i].src, i);
+    await page.keyboard.type(i === 1 ? src + '9' : src);
+    await page.keyboard.press(i === 2 ? 'Tab' : 'Enter');
+  }
+  await page.evaluate(() => { window.__typingForge.K.start -= 60000; });
+  await page.waitForSelector('#kResult .result-card', { timeout: 5000 });
+  const k = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(k.test === 'tenkey' && k.entries === 3 && k.wrong === 1 && Math.abs(k.acc - 66.7) < 0.1 && k.kph > 0, 'wrong 10-key score: ' + JSON.stringify(k));
+  // data entry: one record typed exactly
+  await page.click('.tab[data-tab=dataentry]');
+  await page.click('#dStart');
+  const rec = await page.evaluate(() => window.__typingForge.D.rec);
+  for (const f of ['name', 'address', 'city', 'state', 'zip', 'phone', 'account']) { await page.keyboard.type(rec[f]); await page.keyboard.press('Tab'); }
+  await page.keyboard.type(rec.amount); await page.keyboard.press('Enter');
+  await page.evaluate(() => window.__typingForge.deEnd());
+  const d = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(d.test === 'dataentry' && d.records === 1 && d.acc === 100, 'wrong data entry score: ' + JSON.stringify(d));
+  // clerical checking: answer every pair right
+  await page.click('.tab[data-tab=clerical]');
+  await page.click('#cStart');
+  for (let i = 0; i < 6; i++) { const same = await page.evaluate(() => { const C = window.__typingForge.C; return C.items[C.i].same; }); await page.keyboard.press(same ? 's' : 'd'); }
+  await page.evaluate(() => window.__typingForge.cEnd());
+  const c = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(c.test === 'clerical' && c.right === 6 && c.wrong === 0, 'wrong clerical score: ' + JSON.stringify(c));
+  // proofreading: mark every hidden mistake
+  await page.click('.tab[data-tab=proof]');
+  await page.evaluate(() => window.__typingForge.proof.toks.forEach((t, k) => { if (t.err) document.querySelector('#pBox [data-k="' + k + '"]').classList.add('mark'); }));
+  await page.click('#pCheck');
+  const p = await page.evaluate(() => window.__typingForge.results.at(-1));
+  expect(p.test === 'proof' && p.score === 100 && p.found === p.total && p.total >= 8, 'wrong proofreading score: ' + JSON.stringify(p));
+  // the transcription scorer counts matching words
+  const w = await page.evaluate(() => window.__typingForge.wordDiff('The patient is fifty two years old.', 'the patient is 52 years old'));
+  expect(w.match === 5 && w.refN === 7, 'transcription word matching is wrong: ' + JSON.stringify(w));
+  // certificate (PNG) for the typing result, and the results report
+  await page.fill('#certName', 'Test Person');
+  await page.selectOption('#certWhich', 'last-typing');
+  const cert = await downloadOf(page, () => page.click('#certBtn'));
+  expect(cert.name === 'typing-certificate.png' && magic(cert.buf, 0x89, 0x50, 0x4e, 0x47) && cert.buf.length > 30000, 'certificate is not a PNG: ' + cert.name + ' ' + cert.buf.length);
+  expect(cert.buf.readUInt32BE(16) === 1600 && cert.buf.readUInt32BE(20) === 1130, 'certificate has the wrong size');
+  await page.click('.tab[data-tab=jobs]');
+  expect(/✓ typing 35 WPM/.test(await page.textContent('#jobTable')), 'the job table does not compare the 38 WPM result');
+  const rep = await downloadOf(page, () => page.click('#dlReport'));
+  const txt = rep.buf.toString('utf8');
+  expect(rep.name === 'typing-results.txt' && /Typing test: 38 net WPM/.test(txt) && /10-key: [\d,]+ KPH/.test(txt) && /Proofreading: 100%/.test(txt), 'results report is wrong: ' + txt.slice(0, 300));
+});
+
+test('passport-photo: a head placed by hand is sized to the US rules, and the 4×6 sheet, photo and digital file download at 300 dpi', 'passport-photo.html', async (page) => {
+  await page.selectOption('#preset', 'us');
+  await page.setInputFiles('#file', path.join(FIX, 'passport-portrait.png'));
+  // automatic face finding needs the CDN; wait until it has answered either way
+  await page.waitForFunction(() => { const s = document.querySelector('#status').textContent; return s && !/Opening|Finding/.test(s); }, null, { timeout: 90000 });
+  await page.click('#pickBtn');
+  await page.locator('#guide').scrollIntoViewIfNeeded();
+  await page.waitForTimeout(600); // the page scrolls the photo into view
+  // passport-portrait.png: top of the hair at (450, 349), chin at (450, 671)
+  for (const pt of [{ x: 450, y: 349 }, { x: 450, y: 671 }]) {
+    const xy = await page.evaluate(pt => { const o = window.__passport.toOut(pt), r = document.querySelector('#guide').getBoundingClientRect(), c = document.querySelector('#guide'); return [r.left + o.x * r.width / c.width, r.top + o.y * r.height / c.height]; }, pt);
+    await page.mouse.click(xy[0], xy[1]);
+  }
+  const checks = await page.evaluate(() => window.__passport.checks.map(c => c.join(' ')));
+  expect(checks.includes('ok Head placed by hand'), 'the head was not placed by hand: ' + checks.join(' | '));
+  const head = checks.find(c => /Head height/.test(c)) || '';
+  expect(/^ok Head height 30\.\d mm/.test(head), 'the head is not sized to 25–35 mm: ' + head);
+  expect(checks.some(c => c === 'ok Photo fills the whole frame') && checks.some(c => c === 'ok Background plain and light'), 'frame or background check failed: ' + checks.join(' | '));
+  const sheet = await downloadOf(page, () => page.click('#dlSheet'));
+  expect(sheet.name === 'passport-photos-4x6-us.jpg' && magic(sheet.buf, 0xFF, 0xD8), 'the sheet is not a JPG: ' + sheet.name);
+  const ss = jpegSize(sheet.buf);
+  expect(ss && ss.w === 1800 && ss.h === 1200, 'the 4×6 sheet is not 1800×1200: ' + JSON.stringify(ss));
+  expect(sheet.buf[13] === 1 && sheet.buf.readUInt16BE(14) === 300, 'the sheet is not marked 300 dpi');
+  expect(await page.evaluate(() => window.__passport.sheetLayout(1800, 1200).n) === 6, 'a 4×6 sheet should hold six 2×2 in photos');
+  const one = await downloadOf(page, () => page.click('#dlOne'));
+  const os = jpegSize(one.buf);
+  expect(os && os.w === 600 && os.h === 600, 'the single photo is not 600×600 (2×2 in at 300 dpi): ' + JSON.stringify(os));
+  await page.fill('#maxKb', '40');
+  const dig = await downloadOf(page, () => page.click('#dlDigital'));
+  expect(magic(dig.buf, 0xFF, 0xD8) && dig.buf.length <= 40 * 1024, 'the digital photo is over 40 KB: ' + dig.buf.length);
+  // the UK preset changes the size to 35×45 mm
+  await page.selectOption('#preset', 'uk');
+  const uk = await downloadOf(page, () => page.click('#dlOne'));
+  const us = jpegSize(uk.buf);
+  expect(us && us.w === 413 && us.h === 531, 'the UK photo is not 35×45 mm at 300 dpi: ' + JSON.stringify(us));
 });
 
 // ---------- runner ----------

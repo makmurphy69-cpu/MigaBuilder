@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medicine &amp; Disease Atlas — pandemics, vaccines and medicines through history | MigaBuilder</title>
+<meta name="description" content="The history of medicine and disease in illustrated entries: the Black Death, smallpox, cholera, Spanish flu, HIV and COVID-19; the vaccines, medicines and discoveries that beat them, from willow bark and germ theory to penicillin, insulin, mRNA and CRISPR. With a timeline and a quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/medicine-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/medicine-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Medicine &amp; Disease Atlas — pandemics, vaccines and medicines through history | MigaBuilder">
+<meta property="og:description" content="Plagues and pandemics, and the vaccines, medicines, discoveries and public health ideas that beat them, on a timeline with a quiz.">
+<meta property="og:url" content="https://migabuilder.com/medicine-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is the Medicine & Disease Atlas medical advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is a history of medicine for learning. For your own health, ask a doctor, nurse or pharmacist."}}, {"@type": "Question", "name": "What does it cover?", "acceptedAnswer": {"@type": "Answer", "text": "Pandemics and diseases, vaccines, medicines, scientific discoveries, tools for diagnosis and public-health milestones, each with who was involved, how it works and what it changed."}}, {"@type": "Question", "name": "Is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Medicine &amp; Disease Atlas</span></nav>
+<header class="masthead"><div><h1>Medicine &amp; Disease Atlas</h1><p>Plagues and pandemics, and the vaccines, medicines, discoveries and public-health ideas that beat them — from ancient remedies to penicillin, mRNA vaccines and gene editing.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Medicine &amp; Disease Atlas</h2>
+  <p>Medicine &amp; Disease Atlas covers the great epidemics and pandemics of history, from the Plague of Athens and the Black Death to Spanish flu, HIV and COVID-19, and the people and ideas that fought them: vaccines from smallpox to mRNA, medicines from willow bark to antibiotics and insulin, scientific discoveries from Vesalius and germ theory to DNA and CRISPR, the tools doctors use to look inside the body, and public-health work such as clean water, sewers, nursing and the eradication of smallpox.</p>
+  <h3>How to use Medicine &amp; Disease Atlas</h3>
+  <ol><li>Search a disease, a medicine or a scientist, or pick a group such as Vaccines or Pandemics.</li><li>Open a card to read what it is, how it works or spreads, and what it changed.</li><li>Use the timeline to follow medicine from ancient times to today.</li><li>Play the quiz, or download a printable quiz with answers.</li></ol>
+  <h3>Is the Medicine &amp; Disease Atlas medical advice?</h3>
+  <p>No. It is a history of medicine for learning. For your own health, ask a doctor, nurse or pharmacist.</p>
+  <h3>What does it cover?</h3>
+  <p>Pandemics and diseases, vaccines, medicines, scientific discoveries, tools for diagnosis and public-health milestones, each with who was involved, how it works and what it changed.</p>
+  <h3>Is it free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="surgery-atlas.html">Surgery Atlas</a> · <a href="body-map.html">Body Map</a> · <a href="biology-map.html">Biology Map</a> · <a href="chemistry-map.html">Chemistry Map</a></p>
+</section>
+<footer>Medicine &amp; Disease Atlas · MigaBuilder · A history of medicine for learning, not medical advice.</footer>
+<script src="atlas-art.js"></script>
+<script src="medicine-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: MEDICINES, cats: MEDICINE_CATS, eras: MEDICINE_ERAS, title: "Medicine & Disease Atlas", page: "medicine-atlas.html",
+  key: "medicine",
+  word: ["entry", "entries"],
+  searchHint: "Search a disease, a vaccine, a medicine or a scientist…",
+  emptyIcon: "🧪",
+  sections: [["how", "🔬 How it works or spreads"], ["impact", "🌍 What it changed"]],
+  whoLabel: "Who was involved",
+  whoQ: "Who is linked to “{n}”?",
+  whenQ: "When does the story of “{n}” begin?",
+  picQ: "Which disease, medicine or discovery does this picture show?",
+  quizTitle: "History of medicine quiz",
+  quizFile: "medicine-quiz.html",
+  ranks: [[90, "Professor 🧪"], [75, "Doctor 🩺"], [55, "Nurse 💉"], [0, "Student 🌱"]],
+  note: "The Medicine & Disease Atlas is a history of medicine for learning. It is not medical advice: for your own health, ask a doctor, nurse or pharmacist."
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

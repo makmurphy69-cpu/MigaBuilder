@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#081826"><script src="/sw-register.js" defer></script><script src="/web-analytics.js" defer></script><script src="usage-counter.js" defer></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surgery Atlas — how operations are done and the history of surgery, illustrated | MigaBuilder</title>
+<meta name="description" content="124 operations and milestones in the history of surgery, illustrated: why each operation is done, the main steps, recovery and risks, and who first did it — from 7,000-year-old skull drilling to anaesthesia, heart transplants, keyhole and robotic surgery. With a timeline and a quiz. Free, no signup.">
+<link rel="canonical" href="https://migabuilder.com/surgery-atlas.html">
+<meta property="og:image" content="https://videos.migabuilder.com/surgery-atlas.jpg"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:title" content="Surgery Atlas — how operations are done, and how surgery began | MigaBuilder">
+<meta property="og:description" content="Illustrated operations from appendix removal to heart transplants: why they are done, the steps, recovery and risks, and their history from ancient skull drilling to robots.">
+<meta property="og:url" content="https://migabuilder.com/surgery-atlas.html"><meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="local-tools.css"><link rel="stylesheet" href="tutorials.css"><link rel="stylesheet" href="history-atlas.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Is Surgery Atlas medical advice?", "acceptedAnswer": {"@type": "Answer", "text": "No. It explains operations in general terms, like a hospital information leaflet, for learning. Every patient is different — ask your own doctor or surgeon about your care."}}, {"@type": "Question", "name": "Are the pictures graphic?", "acceptedAnswer": {"@type": "Answer", "text": "No. Each operation is shown with a simple drawing of the body, the organ involved and the kind of instrument used — nothing gory."}}, {"@type": "Question", "name": "Is Surgery Atlas free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded."}}]}</script>
+</head>
+<body>
+<nav class="tool-nav"><a href="index.html">← All tools</a><span>Surgery Atlas</span></nav>
+<header class="masthead"><div><h1>Surgery Atlas</h1><p>How operations are done and how surgery began: why each operation is needed, the main steps, recovery and risks, and the people who first did it. From ancient skull drilling to robots.</p></div></header>
+<main>
+<div id="atlas"></div>
+</main>
+<section class="miga-about" aria-labelledby="miga-about-h">
+  <h2 id="miga-about-h">About Surgery Atlas</h2>
+  <p>Surgery Atlas explains 124 operations and milestones of surgery across six eras, from ancient Egypt, India, Greece and China to anaesthesia and antisepsis, the first heart operations and transplants, and today’s keyhole, laser and robotic surgery. Each operation has a simple illustration of where it is done, why it is needed, the main steps, recovery, the main risks and its history — including the patients, nurses and technicians whose part was long forgotten.</p>
+  <h3>How to use Surgery Atlas</h3>
+  <ol><li>Search an operation or a body part, or pick a group such as Heart &amp; blood vessels or Transplants.</li><li>Open a card to see why it is done, how it is done step by step, recovery, risks and its history.</li><li>Use the timeline to follow surgery from ancient times to robots.</li><li>Play the quiz, or download a printable quiz with answers for a class.</li></ol>
+  <h3>Is Surgery Atlas medical advice?</h3>
+  <p>No. It explains operations in general terms, like a hospital information leaflet, for learning. Every patient is different — ask your own doctor or surgeon about your care.</p>
+  <h3>Are the pictures graphic?</h3>
+  <p>No. Each operation is shown with a simple drawing of the body, the organ involved and the kind of instrument used — nothing gory.</p>
+  <h3>Is Surgery Atlas free?</h3>
+  <p>Yes. It is free to use, with no account and no paywall. Everything runs in your browser and nothing is uploaded.</p>
+  <p class="miga-about-rel">Related tools: <a href="body-map.html">Body Map</a> · <a href="medicine-atlas.html">Medicine &amp; Disease Atlas</a> · <a href="visit-forge.html">Visit Forge</a> · <a href="flashcard-forge.html">Flashcard Forge</a></p>
+</section>
+<footer>Surgery Atlas · MigaBuilder · For learning only, not medical advice. Ask your own doctor or surgeon about your care.</footer>
+<script src="atlas-art.js"></script>
+<script src="surgery-data.js"></script>
+<script src="history-atlas.js"></script>
+<script>
+HistoryAtlas.init({
+  items: SURGERIES, cats: SURGERY_CATS, eras: SURGERY_ERAS, title: "Surgery Atlas", page: "surgery-atlas.html",
+  key: "surgery",
+  word: ["operation", "operations and milestones"],
+  searchHint: "Search an operation, a body part or a surgeon…",
+  emptyIcon: "🩺",
+  sections: [["why", "🎯 Why it is done"], ["steps", "🩺 How it is done"], ["rec", "🛏️ Recovery"], ["risk", "⚠️ Main risks", "warn"], ["then", "📜 History"]],
+  whoLabel: "Who first did it",
+  whoQ: "Who is linked to “{n}”?",
+  whenQ: "When was “{n}” first done?",
+  picQ: "Which operation or milestone does this picture show?",
+  quizTitle: "History of surgery quiz",
+  quizFile: "surgery-quiz.html",
+  ranks: [[90, "Chief surgeon 🩺"], [75, "Surgeon ⭐"], [55, "Junior doctor 📘"], [0, "Medical student 🌱"]],
+  note: "Surgery Atlas explains operations in general terms for learning, like a hospital information leaflet. It is not medical advice: every patient is different, so ask your own doctor or surgeon about your care."
+});
+</script>
+<script src="tutorials.js" defer></script>
+</body>
+</html>

@@ -466,6 +466,118 @@ S('dictionary-forge.html', {
   }
 });
 
+S('grow-forge.html', {
+  title: 'Grow Forge', subtitle: 'Learn to grow food and plants at home or in nature',
+  intro: 'Welcome to Grow Forge. Learn how to grow tomatoes, vegetables, fruit, herbs, flowers, houseplants, mushrooms and trees, at home or in nature, with equipment or without.',
+  async run(h, page) {
+    await h.step('Search for any plant at the top. Let’s type tomato.', () => h.type('#search', 'tomato'));
+    await h.step('Or browse the list. Filter by group, by where you grow, indoors, in pots, in a garden or in nature, and by how easy it is.', async () => { await page.fill('#search', ''); await page.dispatchEvent('#search', 'input'); await h.point('#cats'); });
+    await h.step('Open a plant to see its guide. Here are the quick facts: light, water, temperature, soil, spacing, and how long until it sprouts and is ready.', async () => { await h.click('#list [data-id="tomato"]'); await h.point('#plant .facts'); });
+    await h.step('Choose your climate. The calendar shows when to sow indoors, plant outside and harvest, and moves six months for the southern hemisphere.', async () => { await h.select('#climate', 'south'); await h.point('#plant .cal'); });
+    await h.step('How to grow gives you every step, from seed to harvest.', () => h.scroll('#stepsList', 'center'));
+    await h.step('Equipment or none compares the two ways: grow lights, greenhouses and drip watering, or a sunny windowsill, recycled pots, compost and rain water.', async () => { await h.click('#tab-gear'); await h.point('#plant .cols'); });
+    await h.step('Care and problems shows how to manage the plant, what goes wrong, and how to fix it, plus which plants to grow next to it.', () => h.click('#tab-care'));
+    await h.step('Harvest and nature tells you when to pick and how to store it, and how the plant grows in the wild.', () => h.click('#tab-harvest'));
+    await h.step('Press Add to my garden to track it.', async () => { await h.scroll('#addBtn', 'center'); await h.click('#addBtn'); });
+    await h.step('Not sure what to grow? The plant finder recommends plants for your space, your light, your goal and your time.', async () => { await h.scroll('#finderPanel'); await h.select('#fWhere', 'indoor'); await h.click('#findBtn'); });
+    await h.wait(1200);
+    await h.step('My garden shows when each plant should sprout and be ready to pick. Download your grow plan with all the steps as a checklist.', async () => { await h.scroll('#gardenPanel'); await h.point('#garden'); });
+    await h.sampleDownload('#dlPlan', 'Grow plan made in this video');
+    await h.step('And at the bottom, every way to grow with equipment and without, side by side.', () => h.scroll('#methodsPanel'));
+    await h.wait(1200);
+  }
+});
+
+S('typing-test.html', {
+  title: 'Typing Forge', subtitle: 'Typing test and the skills tests employers set',
+  intro: 'Welcome to Typing Forge. Test your typing speed, get a certificate, and practise the tests employers use: 10-key, data entry, transcription, clerical checking and proofreading.',
+  async run(h, page) {
+    await page.evaluate(() => { try { localStorage.removeItem('typingForge.results'); } catch (e) {} });
+    await h.step('Choose how long the test lasts, and what to type: common words, paragraphs, business emails, numbers and symbols, or your own text.', async () => { await h.select('#tDur', '30'); await h.point('#tText'); });
+    const target = await page.evaluate(() => window.__typingForge.tt.st.target);
+    await h.step('Type the text in the box. The timer starts with your first key, and mistakes turn red.', async () => { await h.point('#tInput'); await page.click('#tInput'); await page.keyboard.type(target.slice(0, 45), { delay: 150 }); });
+    await h.skip('Typing for 30 seconds', async () => { await page.keyboard.type(target.slice(45, 150), { delay: 190 }); await page.waitForSelector('#tResult .result-card', { timeout: 60000 }); });
+    await h.step('Your result: net words per minute, which is what employers use, plus accuracy, keystrokes per hour and what that speed is good enough for.', () => h.point('#tResult .result-card'));
+    await h.step('Next, the 10-key test, for accounting, payroll and banking jobs. Type each number on the number pad and press Enter. It is scored in keystrokes per hour.', async () => {
+      await h.click('.tab[data-tab=tenkey]'); await h.click('#kStart');
+      for (let i = 0; i < 4; i++) { const src = await page.evaluate(i => window.__typingForge.K.rows[i].src, i); await page.keyboard.type(src, { delay: 120 }); await page.keyboard.press('Enter'); }
+    });
+    await h.step('The data entry test gives you customer records to copy into a form, exactly as written, using Tab and Enter, like the Prove It tests.', async () => {
+      await h.click('.tab[data-tab=dataentry]'); await h.click('#dStart');
+      const rec = await page.evaluate(() => window.__typingForge.D.rec);
+      await page.keyboard.type(rec.name, { delay: 90 }); await page.keyboard.press('Tab'); await page.keyboard.type(rec.address, { delay: 90 });
+    });
+    await h.step('Transcription plays a recording, such as a medical note, a legal letter or an emergency call. Type what you hear, and every missed word is shown.', async () => { await h.click('.tab[data-tab=audio]'); await h.select('#aKind', 'medical'); });
+    await h.step('Clerical checking: are the two lines exactly the same? Press S or D as fast as you can. Wrong answers cost a point.', async () => {
+      await h.click('.tab[data-tab=clerical]'); await h.click('#cStart');
+      for (let i = 0; i < 5; i++) { const same = await page.evaluate(() => { const C = window.__typingForge.C; return C.items[C.i].same; }); await page.keyboard.press(same ? 's' : 'd'); await h.wait(500); }
+    });
+    await h.step('Proofreading: click every word with a mistake, then check your answers.', async () => {
+      await h.click('.tab[data-tab=proof]');
+      const errs = await page.evaluate(() => window.__typingForge.proof.toks.map((t, k) => t.err ? k : -1).filter(k => k >= 0).slice(0, 4));
+      for (const k of errs) await h.click('#pBox [data-k="' + k + '"]', { after: 250 });
+      await h.click('#pCheck');
+    });
+    await h.step('Learn to type teaches touch typing row by row, with a colour for each finger, and then drills your weakest keys.', async () => { await h.click('.tab[data-tab=learn]'); await h.point('#kb'); });
+    await h.step('Job requirements shows the speed and accuracy common jobs ask for, and ticks the ones your best results already meet.', async () => { await h.click('.tab[data-tab=jobs]'); await h.point('#jobTable'); });
+    await h.step('Finally, type your name and download a certificate of your result to attach to a job application.', async () => { await h.type('#certName', 'Amina Otieno'); await h.select('#certWhich', 'last-typing'); });
+    await h.sampleDownload('#certBtn', 'Typing certificate made in this video');
+    await h.wait(800);
+  }
+});
+
+S('passport-photo.html', {
+  title: 'Passport Photo Forge', subtitle: 'Free passport, visa and ID photos',
+  intro: 'Welcome to Passport Photo Forge. Make passport, visa and ID photos for your country, and print them cheaply on one 4 by 6 sheet. Your photo never leaves your device.',
+  async run(h, page) {
+    await h.step('First, choose your country and document. Here, a United States passport, 2 by 2 inches. The rules for that photo appear underneath.', async () => { await h.select('#preset', 'us'); await h.point('#spec'); });
+    await h.step('Then add a photo, or use the camera. Stand in front of a plain, light wall, with even light on your face.', () => h.upload('#file', 'passport-portrait.png'));
+    await h.skip('Finding the face', () => page.waitForFunction(() => { const s = document.querySelector('#status').textContent; return s && !/Opening|Finding/.test(s); }, null, { timeout: 90000 }));
+    await h.step('The face is found on your device, and the photo is sized and centred to the rules. The red lines show where the top of the head must be, the green line is the chin, and the blue band is where the eyes go.', () => h.point('#frame'));
+    await h.step('The checks tell you what is right and what still needs fixing: head height, eye height, centring, tilt, sharpness and background.', () => h.point('#checks'));
+    await h.step('If needed, drag the photo, change its size or tilt, or place the head by hand: click the top of the hair, then the chin.', async () => { await h.point('#zoom'); await page.fill('#zoom', '104'); await page.dispatchEvent('#zoom', 'input'); await h.wait(400); await page.fill('#zoom', '100'); await page.dispatchEvent('#zoom', 'input'); });
+    await h.step('Background not plain enough? Choose Make it plain. An AI model runs on your device and puts you on white, off-white or light grey.', () => h.select('#bgMode', 'ai'));
+    await h.skip('Making the background plain', () => page.waitForFunction(() => /Plain background|could not run/.test(document.querySelector('#status').textContent), null, { timeout: 180000 }));
+    await h.step('Download the 4 by 6 inch sheet and order it as a normal photo print at a pharmacy or photo kiosk. Six passport photos for the price of one print.', () => h.scroll('#downloads', 'center'));
+    await h.sampleDownload('#dlSheet', 'Passport photo sheet made in this video');
+    await h.step('There is also a single photo, an A4 sheet for your own printer, and a digital photo under the size limit for online forms.', () => h.point('#dlDigital'));
+    await h.wait(800);
+  }
+});
+
+S('theory-forge.html', {
+  title: 'Theory Forge', subtitle: 'Learn music theory and use it on a real instrument',
+  intro: 'Welcome to Theory Forge. Learn music theory one short lesson at a time, hear every idea, and use it straight away on piano, guitar, bass, ukulele, mandolin or violin.',
+  async run(h, page) {
+    await h.step('At the top is an instrument you can play. Click the keys, tap them, or use your computer keyboard. Every lesson, scale and song lights up its notes here.', () => h.point('#instView'));
+    await h.step('The lessons follow a path in four levels, from the musical alphabet to writing your own song. Each one takes about five minutes.', () => h.point('#path'));
+    await h.step('Press a play button in a lesson to hear the idea. Here, the notes C to C, from the C major scale.', () => h.click('#lesson .try'));
+    await h.wait(1500);
+    await h.step('Every lesson ends with a box on how to use it in real life, and a short quiz. Pass it to tick the lesson off.', () => h.scroll('#lesson .real', 'center'));
+    await h.step('Now pick your instrument. Let’s choose guitar.', async () => { await h.scroll('#app'); await h.select('#inst', 'guitar'); });
+    await h.step('In Scales and chords, choose a root note and a scale. This is the A minor pentatonic, the scale most rock and blues solos use, shown on the whole neck.', async () => { await h.click('#tab-explore'); await h.click('#roots [data-r="A"]'); await h.select('#scaleSel', 'minpent'); });
+    await h.step('Press Play to hear it, with each note lit on the staff and on the fretboard.', () => h.click('#scalePlay'));
+    await h.wait(2500);
+    await h.step('Switch to C major and you get the seven chords that belong to the key, with their Roman numerals, and a circle of fifths to explore every key.', async () => { await h.click('#roots [data-r="C"]'); await h.select('#scaleSel', 'major'); await h.click('#dia button[data-sym="G"]'); });
+    await h.step('Chords shows the shapes for guitar, ukulele and mandolin. Click a shape to hear it.', async () => { await h.click('[data-view="chord"]'); await h.click('#chordBoxes figure'); });
+    await h.step('Progressions and jam loops famous chord progressions in any key. Play along, and improvise with the lit notes.', async () => { await h.click('[data-view="prog"]'); await h.click('#jamPlay'); });
+    await h.wait(3500);
+    await h.click('#jamPlay');
+    await h.step('Songs are traditional tunes, each teaching a piece of theory. Let’s open Amazing Grace.', async () => { await h.click('#tab-songs'); await h.click('#songGrid [data-s="amazing"]'); });
+    await h.step('You see the sheet music and the tab together, with the chords and their Roman numerals above.', () => h.point('#songScore'));
+    await h.step('Press Play. The note you are on lights up on the music and on the guitar.', () => h.click('#songPlay'));
+    await h.wait(4000);
+    await h.click('#songPlay');
+    await h.step('Press Practice, and the song waits for you to play each note: on the screen, a keyboard, or your real instrument through the microphone.', () => h.click('#songPractice'));
+    await h.step('You can also slow it down, transpose it to another key, and download the tab.', () => h.point('#songTab'));
+    await h.sampleDownload('#songTab', 'Guitar tab of Amazing Grace made in this video');
+    await h.step('Finally, ear training. Hear an interval, a chord or a scale and name it. The questions you miss come back more often, so a few minutes a day goes a long way.', async () => { await h.click('#tab-ear'); await h.click('#earPlay'); });
+    await h.wait(1500);
+    await h.click('#earAns button[data-k="7"]');
+    await h.wait(1200);
+  }
+});
+
 S('tune-forge.html', {
   title: 'Tune Forge', subtitle: 'Tuner, metronome and sound level meter for musicians',
   intro: 'Welcome to Tune Forge. Tune your guitar or any instrument, practise with a metronome, and find out when your playing gets too loud for your ears.',
@@ -657,6 +769,103 @@ S('psychology-atlas.html', {
     await h.step('Now the game. Choose the questions and press Generate quiz. Challenge mode gives you twenty seconds per question, with bonus points for speed and streaks.', async () => { await h.scroll('#quizPanel'); await h.click('#makeQuiz'); });
     await h.step('Pick an answer. You get an explanation every time, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
     await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+  }
+});
+
+// ---------------------------------------------------------------- history atlases (shared engine: history-atlas.js)
+async function atlasTour(h, page, o) {
+  await h.step(o.cards, () => h.point('#haGrid .ha-card >> nth=0'));
+  await h.step(o.group, () => h.click('[data-cat=' + o.cat + ']'));
+  await h.step(o.open, async () => { await h.click('[data-id="' + o.id + '"]'); await page.waitForSelector('#haInfo h2'); await h.point('#haInfo .ha-hero'); });
+  await h.step(o.read, async () => { await page.locator('#haInfo').evaluate(e => e.scrollTo({ top: 420, behavior: 'smooth' })); await h.wait(900); });
+  await h.step('At the bottom, Older and Newer walk you through history one step at a time, and See also jumps to related entries, even in the other atlases.', async () => { await page.locator('#haInfo').evaluate(e => e.scrollTo({ top: e.scrollHeight, behavior: 'smooth' })); await h.wait(900); await h.point('#haNext'); });
+  await h.step(o.timeline, async () => { await h.scroll('.ha-bar'); await h.click('[data-cat=""]'); await h.click('[data-view=tl]'); await h.wait(600); await page.locator('#haList').evaluate(e => e.scrollTo({ top: 0 })); });
+  await h.step('Now the game. Choose the questions and press Generate quiz. Challenge mode gives you twenty seconds per question, with bonus points for speed and streaks.', async () => { await h.scroll('#quizPanel'); await h.click('#makeQuiz'); });
+  await h.step('Pick an answer. You get an explanation every time, with a link to open that entry, and your best score is saved.', () => h.click('#qOpts .opt >> nth=0'));
+  await h.sampleDownload('#printQuiz', 'Printable quiz made in this video');
+}
+
+S('weapons-atlas.html', {
+  title: 'Weapons Atlas', subtitle: 'The history of weapons, from stone tools to drones',
+  intro: 'Welcome to Weapons Atlas. It tells the history of weapons, from the first stone tools to the drones of today: who invented each one, how it worked, and how it changed history.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is one weapon, piece of armour, siege engine, warship or aircraft, with its own drawing. They start with stone tools two and a half million years old.',
+      group: 'Pick a group to narrow the list, like siege engines, or search for a weapon, a battle or an inventor.', cat: 'siege',
+      id: 'trebuchet-counterweight', open: 'Open a card. Here is the counterweight trebuchet. The drawing moves, to show how the falling weight swings the long arm.',
+      read: 'You read how it worked, how it was used, and a famous moment, like Edward the First and his giant trebuchet, Warwolf.',
+      timeline: 'Switch to the timeline to see all nine eras, from the Stone Age to today, each with a short introduction.'
+    });
+  }
+});
+
+S('surgery-atlas.html', {
+  title: 'Surgery Atlas', subtitle: 'How operations are done, and how surgery began',
+  intro: 'Welcome to Surgery Atlas. It explains how operations are done, and the history of surgery, from ancient skull drilling to robots.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is an operation or a milestone of surgery. The drawings show where in the body it happens, and the kind of instrument used. Nothing gory.',
+      group: 'Pick a group, like bones and joints, or search for an operation or a body part.', cat: 'bone',
+      id: 'hip-replacement', open: 'Open a card. Here is hip replacement, first done by John Charnley in 1962.',
+      read: 'You read why it is done, how it is done step by step, the recovery, the main risks, and its history. It is for learning, not medical advice.',
+      timeline: 'Switch to the timeline to follow surgery through six eras, from ancient Egypt and India to keyhole and robotic surgery.'
+    });
+  }
+});
+
+S('medicine-atlas.html', {
+  title: 'Medicine & Disease Atlas', subtitle: 'Plagues, vaccines and medicines through history',
+  intro: 'Welcome to the Medicine and Disease Atlas. It follows the great plagues and pandemics of history, and the vaccines, medicines and ideas that beat them.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a disease, a vaccine, a medicine, a discovery, a tool for diagnosis, or a public health milestone.',
+      group: 'Pick a group, like vaccines, or search for a disease, a medicine or a scientist.', cat: 'vaccine',
+      id: 'smallpox-vaccine', open: 'Open a card. Here is the smallpox vaccine. In 1796, Edward Jenner showed that cowpox protects against smallpox.',
+      read: 'You read how it works, and what it changed. The smallpox vaccine led to smallpox being wiped out completely in 1980.',
+      timeline: 'Switch to the timeline to follow medicine from ancient remedies to the mRNA vaccines of today.'
+    });
+  }
+});
+
+S('castle-atlas.html', {
+  title: 'Castle Atlas', subtitle: 'Castles, walls and forts through history',
+  intro: 'Welcome to Castle Atlas. Explore walls, castles and forts from every continent, how they defended, and the sieges that tested them.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a wall, a castle, a fortress, a castle part, or a siege, from the walls of Jericho eleven thousand years ago to Cold War bunkers.',
+      group: 'Pick a group, like the parts of a castle, or search for a castle or a country.', cat: 'part',
+      id: 'gatehouse', open: 'Open a card. Here is the gatehouse and its portcullis, the strongest part of a castle.',
+      read: 'You read how it defended, and a famous siege or story.',
+      timeline: 'Switch to the timeline to see how walls changed with every new weapon, from rams and trebuchets to cannon and bombs.'
+    });
+  }
+});
+
+S('invention-atlas.html', {
+  title: 'Invention Atlas', subtitle: 'The inventions that changed the world',
+  intro: 'Welcome to Invention Atlas. Discover the inventions that changed the world, from fire and the wheel to smartphones and artificial intelligence.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is one invention, with its own drawing, starting with stone tools more than three million years old.',
+      group: 'Pick a group, like communication, or search for an invention or an inventor.', cat: 'comm',
+      id: 'printing-press', open: 'Open a card. Here is Gutenberg’s printing press, from about 1440.',
+      read: 'You read who invented it, how it works, what it changed, and a surprising fact.',
+      timeline: 'Switch to the timeline to see what was invented in each era, from the Stone Age to the digital age.'
+    });
+  }
+});
+
+S('space-atlas.html', {
+  title: 'Space Atlas', subtitle: 'Astronomy and space exploration through history',
+  intro: 'Welcome to Space Atlas. Travel through the history of astronomy and space exploration, from ancient sky-watchers to the James Webb Space Telescope.',
+  async run(h, page) {
+    await atlasTour(h, page, {
+      cards: 'Each card is a discovery, a telescope, a rocket, a satellite, a crewed flight or a mission to the Moon and planets.',
+      group: 'Pick a group, like the Moon, or search for a mission, a planet or an astronomer.', cat: 'moon',
+      id: 'apollo-11', open: 'Open a card. Here is Apollo 11, when Neil Armstrong and Buzz Aldrin walked on the Moon in 1969.',
+      read: 'You read what happened, how it worked, and what we learned, with missions from many countries.',
+      timeline: 'Switch to the timeline to follow astronomy from Stonehenge to the new space age.'
+    });
   }
 });
 

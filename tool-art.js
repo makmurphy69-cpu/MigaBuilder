@@ -269,6 +269,16 @@
     'motor-forge': ['lichtenstein', 'robot', 'wrench', 'cap'],
     'plane-forge': ['leonardo', 'owl', 'pencil', 'cap'],
     'cube-forge': ['mondrian', 'robot', 'star', 'cap'],
+    'grow-forge': ['monet', 'frog', 'book', 'cap'],
+    'weapons-atlas': ['bosch', 'owl', 'book', 'cap'],
+    'surgery-atlas': ['vermeer', 'owl', 'lens', 'cap'],
+    'medicine-atlas': ['monet', 'owl', 'lens', 'cap'],
+    'castle-atlas': ['leonardo', 'owl', 'book', 'cap'],
+    'invention-atlas': ['leonardo', 'robot', 'pencil', 'cap'],
+    'space-atlas': ['kandinsky', 'robot', 'star', 'cap'],
+    'typing-test': ['holzer', 'robot', 'laptop'],
+    'passport-photo': ['modigliani', 'owl', 'camera', 'bowler'],
+    'theory-forge': ['kandinsky', 'owl', 'note', 'headphones'],
     'bot-forge': ['haring', 'jelly', 'bubble'],
     'bug-scanner': ['bosch', 'bat', 'lens'],
     'cad-forge': ['leonardo', 'golem', 'pencil'],
@@ -416,7 +426,7 @@
     btn.addEventListener('click', function () { set(!wrap.classList.contains('open')); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && wrap.classList.contains('open')) { set(false); btn.focus(); } });
     document.addEventListener('click', function (e) { if (wrap.classList.contains('open') && !wrap.contains(e.target)) set(false); });
-    if (header.tagName === 'SECTION') { wrap.classList.add('in-card'); header.appendChild(wrap); } // assessment start cards: the art is the card's top band
+    if (header.tagName === 'SECTION') { wrap.classList.add('in-card'); var h1 = header.querySelector('h1'); if (h1) h1.parentNode.insertBefore(wrap, h1.nextSibling); else header.appendChild(wrap); } // in the flow under the title, so it never covers the text // assessment start cards: the art is the card's top band
     else header.parentNode.insertBefore(wrap, header.nextSibling);
   }
   window.MigaArt = { build: build, tools: TOOLS, artists: A, info: INFO };
