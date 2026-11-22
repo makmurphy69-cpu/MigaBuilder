@@ -237,7 +237,9 @@
       '.lang-switcher .lang-more-link {',
       '  font-family: inherit; font-size: 12px; color: #6FD1E0; text-decoration: underline; white-space: nowrap;',
       '}',
-      '.lang-switcher .lang-more-link:hover { color: #EDEAE0; }'
+      '.lang-switcher .lang-more-link:hover { color: #EDEAE0; }',
+      // 16px on phones: iPhones zoom the whole page when a smaller drop-down is tapped.
+      '@media (max-width: 620px) { .lang-switcher select { font-size: 16px; min-height: 40px; } }'
     ].join('\n');
     document.head.appendChild(style);
   }
