@@ -1,13 +1,61 @@
 {
- "updated": "2026-11-16",
+ "updated": "2026-11-23",
  "firstCommit": "2026-09-13",
- "commits": 470,
- "pullRequests": 170,
- "tools": 89,
- "videos": 96,
+ "commits": 499,
+ "pullRequests": 178,
+ "tools": 98,
+ "videos": 105,
  "languages": 9,
  "workflows": 7,
  "recent": [
+  {
+   "number": 213,
+   "title": "Translate text still showing in English on the language pages",
+   "date": "2026-11-22",
+   "tool": null
+  },
+  {
+   "number": 207,
+   "title": "Compress PDF: \"Fit under a size\" for upload limits",
+   "date": "2026-11-22",
+   "tool": "pdf-compress.html"
+  },
+  {
+   "number": 217,
+   "title": "Finish loose ends: llms.txt, phone layout fixes, 30 fps videos, Picture Forge wording",
+   "date": "2026-11-22",
+   "tool": null
+  },
+  {
+   "number": 216,
+   "title": "History atlases: plain years in the date range",
+   "date": "2026-11-21",
+   "tool": null
+  },
+  {
+   "number": 215,
+   "title": "Add six history atlases: weapons, surgery, medicine, castles, inventions, space",
+   "date": "2026-11-21",
+   "tool": null
+  },
+  {
+   "number": 214,
+   "title": "Add Typing Forge and Passport Photo Forge",
+   "date": "2026-11-17",
+   "tool": null
+  },
+  {
+   "number": 210,
+   "title": "Add Grow Forge: learn to grow vegetables, fruit, herbs and plants at home or in nature",
+   "date": "2026-11-17",
+   "tool": null
+  },
+  {
+   "number": 209,
+   "title": "\"File ready\" card: a slim bar on phones that opens on tap",
+   "date": "2026-11-16",
+   "tool": null
+  },
   {
    "number": 208,
    "title": "Add Theory Forge: learn music theory with lessons, songs, tabs and playable instruments",
@@ -48,54 +96,6 @@
    "number": 200,
    "title": "Fix bugs found by using every tool",
    "date": "2026-11-06",
-   "tool": null
-  },
-  {
-   "number": 199,
-   "title": "Add Plane Forge, and fix Boat Forge showing sliders that do not apply",
-   "date": "2026-11-06",
-   "tool": null
-  },
-  {
-   "number": 198,
-   "title": "Fix wrong answers and outputs found by checking every tool's results",
-   "date": "2026-11-06",
-   "tool": null
-  },
-  {
-   "number": 197,
-   "title": "Add Motor Forge: design a car or motorcycle and build its engine",
-   "date": "2026-11-06",
-   "tool": null
-  },
-  {
-   "number": 196,
-   "title": "Puzzle Forge: make the crossword typeable on phones",
-   "date": "2026-11-05",
-   "tool": "puzzle-forge.html"
-  },
-  {
-   "number": 195,
-   "title": "Fall back to the other Gemini model when one is overloaded; say when Wiktionary is busy",
-   "date": "2026-11-05",
-   "tool": null
-  },
-  {
-   "number": 194,
-   "title": "Add Puzzle Forge and Dictionary Forge",
-   "date": "2026-11-05",
-   "tool": null
-  },
-  {
-   "number": 193,
-   "title": "PDF Forge: lock a PDF with a password, or remove one you know",
-   "date": "2026-11-05",
-   "tool": "pdf-forge.html"
-  },
-  {
-   "number": 191,
-   "title": "Add a Ko-fi \"Support MigaBuilder\" button to the homepage footer",
-   "date": "2026-11-02",
    "tool": null
   }
  ]
