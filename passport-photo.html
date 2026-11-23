@@ -245,7 +245,7 @@ $('bgMode').addEventListener('change',async()=>{if(!src)return;if($('bgMode').va
 
 // ---------- plain background (MODNet portrait model, Transformers.js, on device) ----------
 let tf=null,seg=null;
-async function makePlain(){if(!src)return;try{if(!mask){note('Loading the background model (first time only, about 7 MB)…');tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.0/dist/transformers.min.js');
+async function makePlain(){if(!src)return;try{if(!mask){note('Loading the background model (first time only, about 7 MB)…');tf=tf||await import('https://cdn.jsdelivr.net/npm/@huggingface/transformers@4.3.2/dist/transformers.min.js');
     seg=seg||await tf.pipeline('background-removal','Xenova/modnet',{device:'wasm',dtype:'q8',progress_callback:x=>{if(x.status==='progress'&&x.total>1e6)note('Downloading the background model (first time only): '+Math.round(x.progress)+'%')}});
     note('Separating you from the background…');const res=await seg(tf.RawImage.fromCanvas(src)),img=Array.isArray(res)?res[0]:res,oc=img.toCanvas(),c=document.createElement('canvas');c.width=src.width;c.height=src.height;c.getContext('2d').drawImage(oc,0,0,c.width,c.height);const px=c.getContext('2d').getImageData(0,0,c.width,c.height).data;mask=new Uint8ClampedArray(px.length/4);for(let i=0;i<mask.length;i++)mask[i]=px[i*4+3]}
   const c=document.createElement('canvas');c.width=src.width;c.height=src.height;const g=c.getContext('2d');g.drawImage(src,0,0);const id=g.getImageData(0,0,c.width,c.height),d=id.data,h=bg(),b=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
