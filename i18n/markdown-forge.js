@@ -69,3 +69,27 @@ I18N.phrases({
   "Is Markdown Forge free?": { es: "¿Markdown Forge es gratis?", ar: "هل Markdown Forge مجاني؟", zh: "Markdown Forge 免费吗？", sw: "Je, Markdown Forge ni bure?", sv: "Är Markdown Forge gratis?", de: "Ist Markdown Forge kostenlos?", pt: "O Markdown Forge é gratuito?", fr: "Markdown Forge est-il gratuit ?" },
   "Related tools:": { es: "Herramientas relacionadas:", ar: "أدوات ذات صلة:", zh: "相关工具：", sw: "Zana zinazohusiana:", sv: "Relaterade verktyg:", de: "Verwandte Werkzeuge:", pt: "Ferramentas relacionadas:", fr: "Outils associés :" }
 });
+
+/* Text that was still in English on the language pages (feature scout check, 2026-11-24). */
+I18N.phrases({
+ "Saved in this browser": {
+  "es": "Guardado en este navegador",
+  "ar": "محفوظ في هذا المتصفح",
+  "zh": "已保存在此浏览器中",
+  "sw": "Imehifadhiwa kwenye kivinjari hiki",
+  "sv": "Sparat i den här webbläsaren",
+  "de": "In diesem Browser gespeichert",
+  "pt": "Salvo neste navegador",
+  "fr": "Enregistré dans ce navigateur"
+ },
+ "Not saved: this browser blocks storage. Download your text to keep it.": {
+  "es": "No guardado: este navegador bloquea el almacenamiento. Descarga tu texto para conservarlo.",
+  "ar": "لم يُحفظ: هذا المتصفح يمنع التخزين. نزّل نصك للاحتفاظ به.",
+  "zh": "未保存：此浏览器禁止存储。请下载你的文本来保留它。",
+  "sw": "Haijahifadhiwa: kivinjari hiki kinazuia kuhifadhi. Pakua maandishi yako ili kuyaweka.",
+  "sv": "Inte sparat: den här webbläsaren blockerar lagring. Ladda ner din text för att behålla den.",
+  "de": "Nicht gespeichert: Dieser Browser blockiert das Speichern. Lade deinen Text herunter, um ihn zu behalten.",
+  "pt": "Não salvo: este navegador bloqueia o armazenamento. Baixe seu texto para guardá-lo.",
+  "fr": "Non enregistré : ce navigateur bloque le stockage. Téléchargez votre texte pour le garder."
+ }
+});

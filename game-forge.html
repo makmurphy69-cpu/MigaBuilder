@@ -1225,7 +1225,7 @@
   starterBtn.addEventListener('click', function () {
     if (currentGameHtml && currentGameHtml.indexOf('<title>Sky Dash') === -1 && !confirm('Replace the current game with the starter game?')) return;
     showGame(injectSprites(STARTER_GAME));
-    titleBlock.textContent = 'STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN';
+    titleBlock.textContent = (window.I18N ? I18N.tr : String)('STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN');
   });
 
   function showGame(html) {
@@ -2224,7 +2224,7 @@
   I18N.onChange(renderQuickRefineChips);
   // Open with a playable, tunable game instead of an empty table.
   showGame(injectSprites(STARTER_GAME));
-  titleBlock.textContent = 'STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN';
+  titleBlock.textContent = (window.I18N ? I18N.tr : String)('STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN');
 })();
 </script>
 <script src="tutorials.js" defer></script>

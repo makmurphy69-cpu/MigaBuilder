@@ -220,3 +220,17 @@ I18N.phrases({
   "fr": "Seul le texte que vous donnez à l'IA quitte votre appareil : il est envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder, ou via votre propre clé Gemini si vous en ajoutez une. L'édition, les aperçus et les téléchargements se font tous dans votre navigateur."
  }
 });
+
+/* Text that was still in English on the language pages (feature scout check, 2026-11-24). */
+I18N.phrases({
+ "STARTER GAME — SKY DASH · TUNE IT, SWAP THE PICTURES, OR DESCRIBE YOUR OWN": {
+  "es": "JUEGO INICIAL — SKY DASH · AJÚSTALO, CAMBIA LAS IMÁGENES O DESCRIBE EL TUYO",
+  "ar": "لعبة البداية — SKY DASH · عدّلها أو بدّل الصور أو صِف لعبتك",
+  "zh": "入门游戏 — SKY DASH · 调整它、换图片，或描述你自己的游戏",
+  "sw": "MCHEZO WA KUANZIA — SKY DASH · UREKEBISHE, BADILISHA PICHA AU ELEZA WAKO",
+  "sv": "STARTSPEL — SKY DASH · JUSTERA DET, BYT BILDERNA ELLER BESKRIV DITT EGET",
+  "de": "STARTSPIEL — SKY DASH · ANPASSEN, BILDER TAUSCHEN ODER EIGENES BESCHREIBEN",
+  "pt": "JOGO INICIAL — SKY DASH · AJUSTE, TROQUE AS IMAGENS OU DESCREVA O SEU",
+  "fr": "JEU DE DÉPART — SKY DASH · RÉGLEZ-LE, CHANGEZ LES IMAGES OU DÉCRIVEZ LE VÔTRE"
+ }
+});

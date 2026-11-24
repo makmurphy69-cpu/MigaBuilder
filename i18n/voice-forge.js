@@ -231,14 +231,14 @@ I18N.phrases({
   "fr": "Utilisez la pause entre les paragraphes pour laisser aux auditeurs le temps de suivre."
  },
  "Press “Hear a sample” to compare voices before you make the whole voice-over.": {
-  "es": "Pulsa “Hear a sample” para comparar voces antes de crear toda la locución.",
-  "ar": "اضغط «Hear a sample» لمقارنة الأصوات قبل إنشاء التعليق الصوتي كاملًا.",
-  "zh": "生成完整配音前，先点“Hear a sample”比较不同声音。",
-  "sw": "Bonyeza “Hear a sample” kulinganisha sauti kabla ya kutengeneza sauti nzima.",
+  "es": "Pulsa “Escuchar una muestra” para comparar voces antes de crear toda la locución.",
+  "ar": "اضغط «استمع إلى عينة» لمقارنة الأصوات قبل إنشاء التعليق الصوتي كاملًا.",
+  "zh": "生成完整配音前，先点“试听样本”比较不同声音。",
+  "sw": "Bonyeza “Sikiliza mfano” kulinganisha sauti kabla ya kutengeneza sauti nzima.",
   "sv": "Tryck på ”Hear a sample” för att jämföra röster innan du gör hela speakerrösten.",
-  "de": "Drücke „Hear a sample“, um Stimmen zu vergleichen, bevor du die ganze Sprachaufnahme erstellst.",
-  "pt": "Toque em “Hear a sample” para comparar vozes antes de gerar a narração inteira.",
-  "fr": "Appuyez sur « Hear a sample » pour comparer les voix avant de créer toute la voix off."
+  "de": "Drücke „Hörprobe“, um Stimmen zu vergleichen, bevor du die ganze Sprachaufnahme erstellst.",
+  "pt": "Toque em “Ouvir uma amostra” para comparar vozes antes de gerar a narração inteira.",
+  "fr": "Appuyez sur « Écouter un extrait » pour comparer les voix avant de créer toute la voix off."
  },
  "Why does the first voice-over take longer?": {
   "es": "¿Por qué tarda más la primera locución?",

@@ -183,14 +183,14 @@ I18N.phrases({
   "fr": "Choisissez une largeur maximale comme 1920px pour envoyer et téléverser plus vite les grandes photos de téléphone."
  },
  "Use “Keep each file under (KB)” when a website or form has an upload limit.": {
-  "es": "Usa “Keep each file under (KB)” cuando una web o un formulario tenga un límite de subida.",
-  "ar": "استخدم «Keep each file under (KB)» عندما يكون لموقع أو نموذج حد للرفع.",
-  "zh": "网站或表格有上传大小限制时，使用“Keep each file under (KB)”。",
-  "sw": "Tumia “Keep each file under (KB)” tovuti au fomu inapokuwa na kikomo cha kupakia.",
+  "es": "Usa “Mantener cada archivo por debajo de (KB)” cuando una web o un formulario tenga un límite de subida.",
+  "ar": "استخدم «إبقاء كل ملف أقل من (كيلوبايت)» عندما يكون لموقع أو نموذج حد للرفع.",
+  "zh": "网站或表格有上传大小限制时，使用“每个文件不超过（KB）”。",
+  "sw": "Tumia “Weka kila faili chini ya (KB)” tovuti au fomu inapokuwa na kikomo cha kupakia.",
   "sv": "Använd ”Keep each file under (KB)” när en webbplats eller ett formulär har en gräns för uppladdning.",
-  "de": "Nutze „Keep each file under (KB)“, wenn eine Website oder ein Formular eine Upload-Grenze hat.",
-  "pt": "Use “Keep each file under (KB)” quando um site ou formulário tiver limite de envio.",
-  "fr": "Utilisez « Keep each file under (KB) » quand un site ou un formulaire limite la taille des fichiers."
+  "de": "Nutze „Jede Datei unter (KB) halten“, wenn eine Website oder ein Formular eine Upload-Grenze hat.",
+  "pt": "Use “Manter cada arquivo abaixo de (KB)” quando um site ou formulário tiver limite de envio.",
+  "fr": "Utilisez « Garder chaque fichier sous (Ko) » quand un site ou un formulaire limite la taille des fichiers."
  },
  "Can I convert several images at once?": {
   "es": "¿Puedo convertir varias imágenes a la vez?",
@@ -203,14 +203,14 @@ I18N.phrases({
   "fr": "Puis-je convertir plusieurs images à la fois ?"
  },
  "Yes. Add several files and press “Convert & download all” to get them all in the new format.": {
-  "es": "Sí. Añade varios archivos y pulsa “Convert & download all” para obtenerlos todos en el nuevo formato.",
-  "ar": "نعم. أضف عدة ملفات واضغط «Convert & download all» لتحصل عليها كلها بالصيغة الجديدة.",
-  "zh": "可以。添加多个文件，点“Convert & download all”，即可全部转换为新格式。",
-  "sw": "Ndiyo. Ongeza faili kadhaa na ubonyeze “Convert & download all” ili kuzipata zote katika muundo mpya.",
+  "es": "Sí. Añade varios archivos y pulsa “Convertir y descargar todo” para obtenerlos todos en el nuevo formato.",
+  "ar": "نعم. أضف عدة ملفات واضغط «تحويل وتنزيل الكل» لتحصل عليها كلها بالصيغة الجديدة.",
+  "zh": "可以。添加多个文件，点“转换并下载全部”，即可全部转换为新格式。",
+  "sw": "Ndiyo. Ongeza faili kadhaa na ubonyeze “Geuza na upakue vyote” ili kuzipata zote katika muundo mpya.",
   "sv": "Ja. Lägg till flera filer och tryck på ”Convert & download all” för att få alla i det nya formatet.",
-  "de": "Ja. Füge mehrere Dateien hinzu und drücke „Convert & download all“, um alle im neuen Format zu bekommen.",
-  "pt": "Sim. Adicione vários arquivos e toque em “Convert & download all” para obter todos no novo formato.",
-  "fr": "Oui. Ajoutez plusieurs fichiers et appuyez sur « Convert & download all » pour les obtenir tous dans le nouveau format."
+  "de": "Ja. Füge mehrere Dateien hinzu und drücke „Alle umwandeln & herunterladen“, um alle im neuen Format zu bekommen.",
+  "pt": "Sim. Adicione vários arquivos e toque em “Converter e baixar tudo” para obter todos no novo formato.",
+  "fr": "Oui. Ajoutez plusieurs fichiers et appuyez sur « Tout convertir et télécharger » pour les obtenir tous dans le nouveau format."
  },
  "What is WebP?": {
   "es": "¿Qué es WebP?",
