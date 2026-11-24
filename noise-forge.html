@@ -139,6 +139,15 @@
   <p>The evidence is mixed: a 2019 review of many studies (Garcia-Argibay and colleagues) found small to medium effects on anxiety, memory and attention, but the studies differ a lot and some find nothing. Use headphones — without them the beat disappears. If you have epilepsy, ask your doctor first.</p>
 </section>
 
+<section class="panel" id="gamma40">
+  <h2>40 Hz sound pulses and Alzheimer’s research</h2>
+  <p data-i18n-block>The <b>40 Hz gamma pulses</b> sound is a 1,000 Hz tone switched on and off 40 times a second. Unlike binaural beats it does not need headphones — the rhythm is in the sound itself.</p>
+  <p data-i18n-block><b>The study:</b> in January 2026 researchers at the Kunming Institute of Zoology published a study in <i>PNAS</i> with nine elderly rhesus monkeys aged 26–31. The monkeys heard a 1,000 Hz tone in 40 Hz pulses at about 60 decibels (normal conversation), for 1 hour a day on 7 days in a row. Afterwards, amyloid-beta 42 in the fluid around the brain and spinal cord (cerebrospinal fluid) was about 206% higher and amyloid-beta 40 about 201% higher, and the levels were still raised 35 days after the last session. Amyloid-beta is the protein that clumps into plaques in Alzheimer’s disease; the researchers think more of it in the fluid means the brain is clearing more of it out.</p>
+  <p data-i18n-block><b>What it does not show:</b> this was nine monkeys, and memory was not tested. Earlier studies in mice found less amyloid after 40 Hz sound and light, and trials in people are still running. It is not a treatment for Alzheimer’s or dementia — if you are worried about memory, talk to a doctor. If you have epilepsy, ask your doctor before using pulsing sounds.</p>
+  <p><button type="button" class="primary" id="studyBtn">▶ Play with the study’s settings (1 hour)</button></p>
+  <p class="muted">Sets the 40 Hz pulses alone with a 1-hour timer. Keep the volume at about normal speaking loudness — never louder.</p>
+</section>
+
 <section class="panel" id="safety">
   <h2>Use it safely</h2>
   <ul>
@@ -262,7 +271,12 @@ const CH={
 
   beats:{group:'beats',name:'Binaural beats',icon:'🎧',sub:'A slow beat your brain makes from two tones',opt:['Delta 2 Hz — deep sleep','Theta 6 Hz — drowsy, dreamy','Alpha 10 Hz — relaxed','Beta 18 Hz — alert','Gamma 40 Hz — focused'],optDef:2,build(c,o,r,opt){
     const beat=[2,6,10,18,40][opt],base=opt<2?150:200,m=c.createChannelMerger(2),l=c.createOscillator(),rr=c.createOscillator(),gl=gainNode(c,.12),gr=gainNode(c,.12);
-    l.frequency.value=base;rr.frequency.value=base+beat;l.connect(gl);rr.connect(gr);gl.connect(m,0,0);gr.connect(m,0,1);m.connect(o);l.start();rr.start();return steady([l,rr])}}
+    l.frequency.value=base;rr.frequency.value=base+beat;l.connect(gl);rr.connect(gr);gl.connect(m,0,0);gr.connect(m,0,1);m.connect(o);l.start();rr.start();return steady([l,rr])}},
+  // 40 Hz sound pulses as in the 2026 PNAS monkey study: a 1,000 Hz tone switched on and off 40 times a second.
+  // A 40 Hz square wave (on half of each 25 ms cycle) opens and closes the tone; works on speakers too.
+  gamma40:{group:'beats',name:'40 Hz gamma pulses',icon:'🧠',sub:'A 1,000 Hz tone pulsed 40 times a second',build(c,o){
+    const t=c.createOscillator(),g=gainNode(c,.03),lfo=c.createOscillator(),lg=gainNode(c,.03);
+    t.frequency.value=1000;lfo.type='square';lfo.frequency.value=40;chain(lfo,lg,g.gain);chain(t,g,o);t.start();lfo.start();return steady([t,lfo])}}
 };
 const ORDER=Object.keys(CH);
 
@@ -346,6 +360,7 @@ function tick(){if(!endAt||!playing){$('timerLeft').textContent='';return}const 
   if(left<=30000&&!tick.fading){tick.fading=true;const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(master.gain.value,t);master.gain.linearRampToValueAtTime(0,t+left/1000)}
   if(left<=0){tick.fading=false;endAt=0;pause();$('timerLeft').textContent='Timer finished — sleep well.'}}
 $('timer').onchange=()=>{tick.fading=false;if(playing){const t=actx.currentTime;master.gain.cancelScheduledValues(t);master.gain.setValueAtTime(+$('masterVol').value,t)}startTimer();save()};
+$('studyBtn').onclick=()=>{applyMix({gamma40:.5});$('timer').value='60';$('timer').onchange();if(!playing)play();$('mixerPanel').scrollIntoView({behavior:'smooth'})};
 
 /* ---- live spectrum ---- */
 const scope=$('scope'),sc=scope.getContext('2d');
