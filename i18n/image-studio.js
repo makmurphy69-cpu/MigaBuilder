@@ -228,14 +228,14 @@ I18N.phrases({
   "fr": "Conseils pour de meilleurs résultats"
  },
  "For portraits, choose “People and portraits”: it is a small download and very fast.": {
-  "es": "Para retratos, elige “People and portraits”: es una descarga pequeña y muy rápida.",
-  "ar": "للصور الشخصية اختر «People and portraits»: تنزيله صغير وسريع جدًا.",
-  "zh": "人像照片选“People and portraits”：下载小，速度很快。",
-  "sw": "Kwa picha za watu, chagua “People and portraits”: ni upakuaji mdogo na wa haraka sana.",
+  "es": "Para retratos, elige “Personas y retratos”: es una descarga pequeña y muy rápida.",
+  "ar": "للصور الشخصية اختر «أشخاص وصور شخصية»: تنزيله صغير وسريع جدًا.",
+  "zh": "人像照片选“人物和肖像”：下载小，速度很快。",
+  "sw": "Kwa picha za watu, chagua “Watu na picha za uso”: ni upakuaji mdogo na wa haraka sana.",
   "sv": "För porträtt, välj ”People and portraits”: den är liten att ladda ner och mycket snabb.",
-  "de": "Für Porträts wähle „People and portraits“: kleiner Download und sehr schnell.",
-  "pt": "Para retratos, escolha “People and portraits”: o download é pequeno e muito rápido.",
-  "fr": "Pour les portraits, choisissez « People and portraits » : le téléchargement est léger et très rapide."
+  "de": "Für Porträts wähle „Menschen und Porträts“: kleiner Download und sehr schnell.",
+  "pt": "Para retratos, escolha “Pessoas e retratos”: o download é pequeno e muito rápido.",
+  "fr": "Pour les portraits, choisissez « Personnes et portraits » : le téléchargement est léger et très rapide."
  },
  "Use the Colour mode for products photographed on a plain background.": {
   "es": "Usa el modo Color para productos fotografiados sobre un fondo liso.",
@@ -268,14 +268,14 @@ I18N.phrases({
   "fr": "Puis-je créer un PNG transparent ?"
  },
  "Yes. Choose “Transparent background” as the result and download the PNG.": {
-  "es": "Sí. Elige “Transparent background” como resultado y descarga el PNG.",
-  "ar": "نعم. اختر «Transparent background» كنتيجة ثم نزّل ملف PNG.",
-  "zh": "可以。结果选择“Transparent background”，然后下载 PNG。",
-  "sw": "Ndiyo. Chagua “Transparent background” kama matokeo na upakue PNG.",
+  "es": "Sí. Elige “Fondo transparente” como resultado y descarga el PNG.",
+  "ar": "نعم. اختر «خلفية شفافة» كنتيجة ثم نزّل ملف PNG.",
+  "zh": "可以。结果选择“透明背景”，然后下载 PNG。",
+  "sw": "Ndiyo. Chagua “Mandharinyuma ya uwazi” kama matokeo na upakue PNG.",
   "sv": "Ja. Välj ”Transparent background” som resultat och ladda ner PNG-filen.",
-  "de": "Ja. Wähle „Transparent background“ als Ergebnis und lade das PNG herunter.",
-  "pt": "Sim. Escolha “Transparent background” como resultado e baixe o PNG.",
-  "fr": "Oui. Choisissez « Transparent background » comme résultat et téléchargez le PNG."
+  "de": "Ja. Wähle „Transparenter Hintergrund“ als Ergebnis und lade das PNG herunter.",
+  "pt": "Sim. Escolha “Fundo transparente” como resultado e baixe o PNG.",
+  "fr": "Oui. Choisissez « Arrière-plan transparent » comme résultat et téléchargez le PNG."
  },
  "Why does the first background removal take longer?": {
   "es": "¿Por qué tarda más la primera vez que quito un fondo?",

@@ -240,14 +240,14 @@ I18N.phrases({
   "fr": "Puis-je transformer un scan en PDF consultable ?"
  },
  "Yes. After reading the text, press “Download searchable PDF”. The pages look the same, but you can now search and copy the text.": {
-  "es": "Sí. Después de leer el texto, pulsa “Download searchable PDF”. Las páginas se ven igual, pero ahora puedes buscar y copiar el texto.",
-  "ar": "نعم. بعد قراءة النص اضغط «Download searchable PDF». تبدو الصفحات كما هي، لكن يمكنك الآن البحث في النص ونسخه.",
-  "zh": "可以。识别文字后，点击“Download searchable PDF”。页面外观不变，但现在可以搜索和复制文字。",
-  "sw": "Ndiyo. Baada ya kusoma maandishi, bonyeza “Download searchable PDF”. Kurasa zinaonekana vilevile, lakini sasa unaweza kutafuta na kunakili maandishi.",
+  "es": "Sí. Después de leer el texto, pulsa “Descargar PDF con búsqueda”. Las páginas se ven igual, pero ahora puedes buscar y copiar el texto.",
+  "ar": "نعم. بعد قراءة النص اضغط «تنزيل PDF قابل للبحث». تبدو الصفحات كما هي، لكن يمكنك الآن البحث في النص ونسخه.",
+  "zh": "可以。识别文字后，点击“下载可搜索的 PDF”。页面外观不变，但现在可以搜索和复制文字。",
+  "sw": "Ndiyo. Baada ya kusoma maandishi, bonyeza “Pakua PDF inayotafutika”. Kurasa zinaonekana vilevile, lakini sasa unaweza kutafuta na kunakili maandishi.",
   "sv": "Ja. När texten är läst trycker du på ”Download searchable PDF”. Sidorna ser likadana ut, men nu kan du söka i och kopiera texten.",
-  "de": "Ja. Wenn der Text gelesen ist, drücke „Download searchable PDF“. Die Seiten sehen gleich aus, aber du kannst den Text jetzt durchsuchen und kopieren.",
-  "pt": "Sim. Depois de ler o texto, toque em “Download searchable PDF”. As páginas ficam iguais, mas agora você pode pesquisar e copiar o texto.",
-  "fr": "Oui. Une fois le texte lu, appuyez sur « Download searchable PDF ». Les pages restent identiques, mais vous pouvez maintenant rechercher et copier le texte."
+  "de": "Ja. Wenn der Text gelesen ist, drücke „Durchsuchbares PDF herunterladen“. Die Seiten sehen gleich aus, aber du kannst den Text jetzt durchsuchen und kopieren.",
+  "pt": "Sim. Depois de ler o texto, toque em “Baixar PDF pesquisável”. As páginas ficam iguais, mas agora você pode pesquisar e copiar o texto.",
+  "fr": "Oui. Une fois le texte lu, appuyez sur « Télécharger un PDF consultable ». Les pages restent identiques, mais vous pouvez maintenant rechercher et copier le texte."
  },
  "Does it read handwriting?": {
   "es": "¿Lee la escritura a mano?",

@@ -211,14 +211,14 @@ I18N.phrases({
   "fr": "Lisez chaque explication avant d’accepter une correction : les noms, les marques et les termes techniques peuvent être signalés à tort."
  },
  "Use “Accept all safe fixes” for quick spelling and spacing corrections, then go through the rest yourself.": {
-  "es": "Usa “Accept all safe fixes” para corregir rápido la ortografía y los espacios, y luego revisa el resto tú mismo.",
-  "ar": "استخدم «Accept all safe fixes» لتصحيح الإملاء والمسافات بسرعة، ثم راجع الباقي بنفسك.",
-  "zh": "用“Accept all safe fixes”快速修正拼写和空格，其余建议再自己逐条处理。",
-  "sw": "Tumia “Accept all safe fixes” kwa marekebisho ya haraka ya tahajia na nafasi, kisha pitia yaliyobaki mwenyewe.",
+  "es": "Usa “Aceptar todas las correcciones seguras” para corregir rápido la ortografía y los espacios, y luego revisa el resto tú mismo.",
+  "ar": "استخدم «اقبل كل التصحيحات الآمنة» لتصحيح الإملاء والمسافات بسرعة، ثم راجع الباقي بنفسك.",
+  "zh": "用“接受所有安全的修改”快速修正拼写和空格，其余建议再自己逐条处理。",
+  "sw": "Tumia “Kubali marekebisho yote salama” kwa marekebisho ya haraka ya tahajia na nafasi, kisha pitia yaliyobaki mwenyewe.",
   "sv": "Använd ”Accept all safe fixes” för snabba rättelser av stavning och mellanslag, och gå sedan igenom resten själv.",
-  "de": "Nutze „Accept all safe fixes“ für schnelle Rechtschreib- und Leerzeichenkorrekturen und geh den Rest selbst durch.",
-  "pt": "Use “Accept all safe fixes” para correções rápidas de ortografia e espaços e depois revise o resto você mesmo.",
-  "fr": "Utilisez « Accept all safe fixes » pour corriger vite l’orthographe et les espaces, puis parcourez le reste vous-même."
+  "de": "Nutze „Alle sicheren Korrekturen übernehmen“ für schnelle Rechtschreib- und Leerzeichenkorrekturen und geh den Rest selbst durch.",
+  "pt": "Use “Aceitar todas as correções seguras” para correções rápidas de ortografia e espaços e depois revise o resto você mesmo.",
+  "fr": "Utilisez « Accepter toutes les corrections sûres » pour corriger vite l’orthographe et les espaces, puis parcourez le reste vous-même."
  },
  "Can I use it for emails, essays and CVs?": {
   "es": "¿Puedo usarlo para correos, redacciones y currículums?",

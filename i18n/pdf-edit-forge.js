@@ -236,14 +236,14 @@ I18N.phrases({
   "fr": "Si vous importez une photo de votre signature, signez sur du papier blanc avec un stylo foncé pour que le fond soit bien retiré."
  },
  "Use “＋ Today’s date” and “＋ Text” to add the date and your printed name next to the signature.": {
-  "es": "Usa “＋ Today’s date” y “＋ Text” para añadir la fecha y tu nombre en letra de imprenta junto a la firma.",
-  "ar": "استخدم «＋ Today’s date» و«＋ Text» لإضافة التاريخ واسمك المطبوع بجانب التوقيع.",
-  "zh": "用“＋ Today’s date”和“＋ Text”在签名旁添加日期和印刷体姓名。",
-  "sw": "Tumia “＋ Today’s date” na “＋ Text” kuongeza tarehe na jina lako lililoandikwa kando ya sahihi.",
+  "es": "Usa “＋ Fecha de hoy” y “＋ Texto” para añadir la fecha y tu nombre en letra de imprenta junto a la firma.",
+  "ar": "استخدم «＋ تاريخ اليوم» و«＋ نص» لإضافة التاريخ واسمك المطبوع بجانب التوقيع.",
+  "zh": "用“＋ 今天日期”和“＋ 文字”在签名旁添加日期和印刷体姓名。",
+  "sw": "Tumia “＋ Tarehe ya leo” na “＋ Maandishi” kuongeza tarehe na jina lako lililoandikwa kando ya sahihi.",
   "sv": "Använd ”＋ Today’s date” och ”＋ Text” för att lägga till datum och ditt namnförtydligande bredvid namnteckningen.",
-  "de": "Mit „＋ Today’s date“ und „＋ Text“ fügst du Datum und deinen Namen in Druckschrift neben der Unterschrift ein.",
-  "pt": "Use “＋ Today’s date” e “＋ Text” para pôr a data e seu nome em letra de forma ao lado da assinatura.",
-  "fr": "Utilisez « ＋ Today’s date » et « ＋ Text » pour ajouter la date et votre nom en capitales à côté de la signature."
+  "de": "Mit „＋ Heutiges Datum“ und „＋ Text“ fügst du Datum und deinen Namen in Druckschrift neben der Unterschrift ein.",
+  "pt": "Use “＋ Data de hoje” e “＋ Texto” para pôr a data e seu nome em letra de forma ao lado da assinatura.",
+  "fr": "Utilisez « ＋ Date du jour » et « ＋ Texte » pour ajouter la date et votre nom en capitales à côté de la signature."
  },
  "Keep the original as a backup and check every page before you send the signed copy.": {
   "es": "Guarda el original como copia de seguridad y revisa cada página antes de enviar la copia firmada.",

@@ -194,24 +194,24 @@ I18N.phrases({
   "fr": "Conseils pour de meilleurs résultats"
  },
  "Press “Format JSON” before comparing JSON, so the differences line up neatly.": {
-  "es": "Pulsa “Format JSON” antes de comparar JSON, para que las diferencias queden bien alineadas.",
-  "ar": "اضغط «Format JSON» قبل مقارنة JSON حتى تصطف الفروق بشكل مرتب.",
-  "zh": "比较 JSON 前先点“Format JSON”，差异会对齐得更清楚。",
-  "sw": "Bonyeza “Format JSON” kabla ya kulinganisha JSON, ili tofauti zipangike vizuri.",
+  "es": "Pulsa “Formatear JSON” antes de comparar JSON, para que las diferencias queden bien alineadas.",
+  "ar": "اضغط «تنسيق JSON» قبل مقارنة JSON حتى تصطف الفروق بشكل مرتب.",
+  "zh": "比较 JSON 前先点“格式化 JSON”，差异会对齐得更清楚。",
+  "sw": "Bonyeza “Panga JSON” kabla ya kulinganisha JSON, ili tofauti zipangike vizuri.",
   "sv": "Tryck på ”Format JSON” innan du jämför JSON, så hamnar skillnaderna snyggt i linje.",
-  "de": "Drücke vor dem Vergleich von JSON auf „Format JSON“, damit die Unterschiede sauber untereinander stehen.",
-  "pt": "Toque em “Format JSON” antes de comparar JSON, para que as diferenças fiquem bem alinhadas.",
-  "fr": "Appuyez sur « Format JSON » avant de comparer du JSON, pour que les différences s’alignent proprement."
+  "de": "Drücke vor dem Vergleich von JSON auf „JSON formatieren“, damit die Unterschiede sauber untereinander stehen.",
+  "pt": "Toque em “Formatar JSON” antes de comparar JSON, para que as diferenças fiquem bem alinhadas.",
+  "fr": "Appuyez sur « Formater le JSON » avant de comparer du JSON, pour que les différences s’alignent proprement."
  },
  "Press “Swap” if you pasted the two versions the wrong way round.": {
-  "es": "Pulsa “Swap” si pegaste las dos versiones al revés.",
-  "ar": "اضغط «Swap» إذا لصقت النسختين بالعكس.",
-  "zh": "如果两个版本贴反了，点“Swap”即可互换。",
-  "sw": "Bonyeza “Swap” ukibandika matoleo mawili kinyume.",
+  "es": "Pulsa “Intercambiar” si pegaste las dos versiones al revés.",
+  "ar": "اضغط «تبديل» إذا لصقت النسختين بالعكس.",
+  "zh": "如果两个版本贴反了，点“交换”即可互换。",
+  "sw": "Bonyeza “Badilishana” ukibandika matoleo mawili kinyume.",
   "sv": "Tryck på ”Swap” om du klistrade in versionerna åt fel håll.",
-  "de": "Drücke „Swap“, wenn du die beiden Fassungen vertauscht eingefügt hast.",
-  "pt": "Toque em “Swap” se colou as duas versões invertidas.",
-  "fr": "Appuyez sur « Swap » si vous avez collé les deux versions à l’envers."
+  "de": "Drücke „Tauschen“, wenn du die beiden Fassungen vertauscht eingefügt hast.",
+  "pt": "Toque em “Trocar” se colou as duas versões invertidas.",
+  "fr": "Appuyez sur « Inverser » si vous avez collé les deux versions à l’envers."
  },
  "Download the HTML report to share the changes with someone who doesn’t use the tool.": {
   "es": "Descarga el informe HTML para compartir los cambios con alguien que no use la herramienta.",
@@ -254,13 +254,13 @@ I18N.phrases({
   "fr": "Qu’est-ce qu’un diff unifié ?"
  },
  "It is the standard format programmers use to show changes: removed lines start with − and added lines with +. Press “Copy unified diff” to paste it into a code review or an email.": {
-  "es": "Es el formato estándar que usan los programadores para mostrar cambios: las líneas eliminadas empiezan con − y las añadidas con +. Pulsa “Copy unified diff” para pegarlo en una revisión de código o en un correo.",
-  "ar": "هو الصيغة المعتادة التي يستخدمها المبرمجون لعرض التغييرات: تبدأ الأسطر المحذوفة بـ − والمضافة بـ +. اضغط «Copy unified diff» للصقه في مراجعة كود أو رسالة بريد.",
-  "zh": "这是程序员展示改动的标准格式：删除的行以 − 开头，新增的行以 + 开头。点“Copy unified diff”即可粘贴到代码审查或邮件中。",
-  "sw": "Ni muundo wa kawaida ambao watengeneza programu hutumia kuonyesha mabadiliko: mistari iliyoondolewa huanza na − na iliyoongezwa huanza na +. Bonyeza “Copy unified diff” kuibandika kwenye ukaguzi wa msimbo au barua pepe.",
+  "es": "Es el formato estándar que usan los programadores para mostrar cambios: las líneas eliminadas empiezan con − y las añadidas con +. Pulsa “Copiar diff unificado” para pegarlo en una revisión de código o en un correo.",
+  "ar": "هو الصيغة المعتادة التي يستخدمها المبرمجون لعرض التغييرات: تبدأ الأسطر المحذوفة بـ − والمضافة بـ +. اضغط «نسخ الفرق الموحّد» للصقه في مراجعة كود أو رسالة بريد.",
+  "zh": "这是程序员展示改动的标准格式：删除的行以 − 开头，新增的行以 + 开头。点“复制统一格式差异”即可粘贴到代码审查或邮件中。",
+  "sw": "Ni muundo wa kawaida ambao watengeneza programu hutumia kuonyesha mabadiliko: mistari iliyoondolewa huanza na − na iliyoongezwa huanza na +. Bonyeza “Nakili diff iliyounganishwa” kuibandika kwenye ukaguzi wa msimbo au barua pepe.",
   "sv": "Det är standardformatet som programmerare använder för att visa ändringar: borttagna rader börjar med − och tillagda med +. Tryck på ”Copy unified diff” för att klistra in den i en kodgranskning eller ett mejl.",
-  "de": "Das ist das übliche Format, mit dem Programmierer Änderungen zeigen: entfernte Zeilen beginnen mit −, hinzugefügte mit +. Drücke „Copy unified diff“, um es in ein Code-Review oder eine E-Mail einzufügen.",
-  "pt": "É o formato padrão que programadores usam para mostrar mudanças: linhas removidas começam com − e as adicionadas com +. Toque em “Copy unified diff” para colar numa revisão de código ou num e-mail.",
-  "fr": "C’est le format standard utilisé par les programmeurs pour montrer des modifications : les lignes supprimées commencent par − et les lignes ajoutées par +. Appuyez sur « Copy unified diff » pour le coller dans une revue de code ou un e-mail."
+  "de": "Das ist das übliche Format, mit dem Programmierer Änderungen zeigen: entfernte Zeilen beginnen mit −, hinzugefügte mit +. Drücke „Unified Diff kopieren“, um es in ein Code-Review oder eine E-Mail einzufügen.",
+  "pt": "É o formato padrão que programadores usam para mostrar mudanças: linhas removidas começam com − e as adicionadas com +. Toque em “Copiar diff unificado” para colar numa revisão de código ou num e-mail.",
+  "fr": "C’est le format standard utilisé par les programmeurs pour montrer des modifications : les lignes supprimées commencent par − et les lignes ajoutées par +. Appuyez sur « Copier le diff unifié » pour le coller dans une revue de code ou un e-mail."
  }
 });

@@ -245,3 +245,37 @@ I18N.phrases({
   "fr": "Seulement si vous utilisez ses fonctions d'IA : le texte que vous donnez à l'IA est alors envoyé au modèle Gemini de Google via le service d'IA gratuit de MigaBuilder ou votre propre clé Gemini. Tout le reste reste dans votre navigateur."
  }
 });
+
+/* Text that was still in English on the language pages (feature scout check, 2026-11-24). */
+I18N.phrases({
+ "and your own keys type the script by position (the small grey letters show which key to press). Korean letters join into syllables as you type, Japanese can be typed in romaji and Mandarin in pinyin.": {
+  "es": "y tus propias teclas escribirán el alfabeto por posición (las letras grises pequeñas muestran qué tecla pulsar). Las letras coreanas se unen en sílabas mientras escribes; el japonés se puede escribir en romaji y el mandarín en pinyin.",
+  "ar": "فتكتب مفاتيحك الحروف حسب موضعها (تُظهر الحروف الرمادية الصغيرة المفتاح الذي تضغطه). تتجمع الحروف الكورية في مقاطع أثناء الكتابة، ويمكن كتابة اليابانية بالروماجي والصينية الماندرينية بالبينيين.",
+  "zh": "，你自己的键盘就会按位置输入这种文字（灰色小字母提示该按哪个键）。韩文字母会在输入时自动组合成音节，日语可以用罗马字输入，普通话可以用拼音输入。",
+  "sw": "na vitufe vyako mwenyewe vitaandika herufi kulingana na nafasi (herufi ndogo za kijivu zinaonyesha kitufe cha kubonyeza). Herufi za Kikorea huungana kuwa silabi unapoandika, Kijapani kinaweza kuandikwa kwa romaji na Kimandarini kwa pinyin.",
+  "sv": "så skriver dina egna tangenter skriften efter position (de små grå bokstäverna visar vilken tangent du ska trycka på). Koreanska bokstäver sätts ihop till stavelser medan du skriver, japanska kan skrivas med romaji och mandarin med pinyin.",
+  "de": "und deine eigenen Tasten schreiben die Schrift nach Position (die kleinen grauen Buchstaben zeigen, welche Taste du drücken musst). Koreanische Buchstaben verbinden sich beim Tippen zu Silben, Japanisch lässt sich in Romaji und Mandarin in Pinyin tippen.",
+  "pt": "e suas próprias teclas digitam a escrita por posição (as letrinhas cinzas mostram qual tecla apertar). As letras coreanas se juntam em sílabas enquanto você digita; o japonês pode ser digitado em romaji e o mandarim em pinyin.",
+  "fr": "et vos propres touches tapent l’écriture selon leur position (les petites lettres grises indiquent quelle touche appuyer). Les lettres coréennes se regroupent en syllabes pendant la frappe ; le japonais peut se taper en romaji et le mandarin en pinyin."
+ },
+ "What do the Chinese characters mean?": {
+  "es": "¿Qué significan los caracteres chinos?",
+  "ar": "ماذا تعني الحروف الصينية؟",
+  "zh": "汉字是什么意思？",
+  "sw": "Herufi za Kichina zina maana gani?",
+  "sv": "Vad betyder de kinesiska tecknen?",
+  "de": "Was bedeuten die chinesischen Schriftzeichen?",
+  "pt": "O que significam os caracteres chineses?",
+  "fr": "Que signifient les caractères chinois ?"
+ },
+ "Choose Mandarin Chinese and scroll to the character dictionary: more than 7,700 characters, most used first, each with its pinyin and tone, its English meaning, how it is built (a picture, an idea, or a sound part plus a meaning part) and common words that use it. Search by character, pinyin (with or without tones) or an English word, hear each character and practise writing it.": {
+  "es": "Elige chino mandarín y baja hasta el diccionario de caracteres: más de 7.700 caracteres, los más usados primero, cada uno con su pinyin y tono, su significado en inglés, cómo está formado (un dibujo, una idea, o una parte de sonido más una de significado) y palabras comunes que lo usan. Busca por carácter, pinyin (con o sin tonos) o una palabra en inglés, escucha cada carácter y practica su escritura.",
+  "ar": "اختر الصينية الماندرينية وانزل إلى قاموس الحروف: أكثر من 7700 حرف، الأكثر استخدامًا أولًا، ولكل منها البينيين والنغمة، ومعناه بالإنجليزية، وكيف يُبنى (صورة، أو فكرة، أو جزء صوتي مع جزء للمعنى) وكلمات شائعة تستخدمه. ابحث بالحرف أو بالبينيين (مع النغمات أو بدونها) أو بكلمة إنجليزية، واستمع إلى كل حرف وتدرّب على كتابته.",
+  "zh": "选择普通话，向下滚动到汉字字典：收录 7,700 多个汉字，常用字排在前面，每个字都有拼音和声调、英文释义、构字方式（象形、会意，或声旁加形旁）以及常用词语。可以按汉字、拼音（带或不带声调）或英文单词搜索，听每个字的读音并练习书写。",
+  "sw": "Chagua Kichina cha Mandarini na ushuke hadi kamusi ya herufi: zaidi ya herufi 7,700, zinazotumika zaidi kwanza, kila moja na pinyin na toni yake, maana yake kwa Kiingereza, jinsi ilivyoundwa (picha, wazo, au sehemu ya sauti pamoja na sehemu ya maana) na maneno ya kawaida yanayoitumia. Tafuta kwa herufi, pinyin (pamoja na au bila toni) au neno la Kiingereza, sikiliza kila herufi na ujizoeze kuiandika.",
+  "sv": "Välj mandarinkinesiska och skrolla till teckenordboken: mer än 7 700 tecken, de vanligaste först, vart och ett med pinyin och ton, betydelse på engelska, hur det är uppbyggt (en bild, en idé, eller en ljuddel plus en betydelsedel) och vanliga ord som använder det. Sök på tecken, pinyin (med eller utan toner) eller ett engelskt ord, lyssna på varje tecken och öva på att skriva det.",
+  "de": "Wähle Mandarin-Chinesisch und scrolle zum Zeichenwörterbuch: mehr als 7.700 Zeichen, die häufigsten zuerst, jedes mit Pinyin und Ton, englischer Bedeutung, Aufbau (ein Bild, eine Idee oder ein Lautteil plus ein Bedeutungsteil) und häufigen Wörtern, die es verwenden. Suche nach Zeichen, Pinyin (mit oder ohne Töne) oder einem englischen Wort, höre jedes Zeichen und übe, es zu schreiben.",
+  "pt": "Escolha chinês mandarim e role até o dicionário de caracteres: mais de 7.700 caracteres, os mais usados primeiro, cada um com seu pinyin e tom, seu significado em inglês, como é formado (um desenho, uma ideia, ou uma parte de som mais uma de significado) e palavras comuns que o usam. Pesquise por caractere, pinyin (com ou sem tons) ou uma palavra em inglês, ouça cada caractere e pratique a escrita.",
+  "fr": "Choisissez le chinois mandarin et descendez jusqu’au dictionnaire des caractères : plus de 7 700 caractères, les plus courants d’abord, chacun avec son pinyin et son ton, son sens en anglais, sa construction (un dessin, une idée, ou une partie sonore plus une partie de sens) et des mots courants qui l’utilisent. Cherchez par caractère, par pinyin (avec ou sans tons) ou par mot anglais, écoutez chaque caractère et entraînez-vous à l’écrire."
+ }
+});

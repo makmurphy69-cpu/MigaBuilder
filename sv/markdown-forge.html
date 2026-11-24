@@ -132,7 +132,7 @@ function render(){const md=ta.value;if(md===last)return;last=md;$('mdPreview').i
   $('mdPreview').querySelectorAll('input[type=checkbox]').forEach((cb,i)=>{cb.disabled=false;cb.onclick=()=>toggleTask(i)});
   const words=(md.replace(/[#*_>`~\[\]()|-]/g,' ').match(/[\p{L}\p{N}']+/gu)||[]).length;$('mdCount').textContent=words+' words · '+md.length+' characters · '+Math.max(1,Math.round(words/220))+' min read'}
 function toggleTask(n){let i=-1;ta.value=ta.value.replace(/^(\s*[-*+] \[)([ xX])(\])/gm,(m,a,b,c)=>{i++;return i===n?a+(b===' '?'x':' ')+c:m});changed()}
-let saveT;function changed(){render();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,ta.value);$('mdSaved').textContent='Saved in this browser '+new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})}catch(e){$('mdSaved').textContent='Not saved: this browser blocks storage. Download your text to keep it.'}},500)}
+let saveT;function changed(){render();clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,ta.value);const tm=document.createElement('span');tm.textContent=new Date().toLocaleTimeString(document.documentElement.lang||[], {hour:'2-digit',minute:'2-digit'});$('mdSaved').replaceChildren('Saved in this browser',' ',tm)}catch(e){$('mdSaved').textContent='Not saved: this browser blocks storage. Download your text to keep it.'}},500)}
 ta.addEventListener('input',changed);
 
 /* ---------- toolbar ---------- */
