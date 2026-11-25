@@ -38,7 +38,7 @@
 .chan input[type=range]{width:100%}
 .chan .row{display:flex;gap:6px;align-items:center;font-size:12px}
 .chan .row select{flex:1;padding:4px;border:1px solid rgba(22,32,43,.25);border-radius:3px;background:#fff;font-size:12px}
-.chan a{font-size:11.5px}
+.chan a{font-size:11.5px}.chan .opt-l{display:block;font-size:12px;font-weight:600;margin:6px 0 2px}
 #scope{width:100%;height:120px;background:#0E2A47;border-radius:6px;display:block;margin-top:14px}
 .scope-note{font-size:12px;color:rgba(22,32,43,.7);margin:4px 0 0}
 .saved{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.saved span{display:inline-flex;border:1px solid rgba(22,32,43,.2);border-radius:999px;background:#fff;overflow:hidden}.saved span button{border:0;background:none;padding:6px 10px;cursor:pointer;color:var(--ink)}.saved span button+button{border-left:1px solid rgba(22,32,43,.15);color:rgba(22,32,43,.6)}
@@ -245,7 +245,7 @@ const CH={
   violet:{group:'noise',name:'Violet noise',color:'#8e5bd6',sub:'Very high, thin hiss',build:colour('violet')},
   grey:{group:'noise',name:'Grey noise',color:'#9aa3ad',sub:'Sounds equally loud at every pitch',build:colour('white',(c,g)=>{const a=filt(c,'lowshelf',200,null,12),b=filt(c,'peaking',3500,.9,-10),d=filt(c,'highshelf',10000,null,4),v=gainNode(c,.7);chain(g,a,b,d,v);return v})},
   // Pink noise with a one-octave gap around the tinnitus pitch (as in "tailor-made notched music", Okamoto 2010).
-  notch:{group:'noise',more:'notch',name:'Notched noise (tinnitus)',color:'#c9a0b4',sub:'Pink noise with a gap at the pitch of your ringing',opt:NOTCH.map(f=>f.toLocaleString('en')+' Hz'),optDef:4,build(c,o,r,opt){
+  notch:{group:'noise',more:'notch',optLabel:'Pitch of your ringing',moreText:'Not sure of the pitch? Find it with the test tone ↓',name:'Notched noise (tinnitus)',color:'#c9a0b4',sub:'Pink noise with a gap at the pitch of your ringing',opt:NOTCH.map(f=>f.toLocaleString('en')+' Hz'),optDef:4,build(c,o,r,opt){
     const f=NOTCH[opt],g=gainNode(c,1),out=gainNode(c,1.25),lo=[],hi=[];
     for(let i=0;i<4;i++){lo.push(filt(c,'lowpass',f/Math.SQRT2,.707));hi.push(filt(c,'highpass',f*Math.SQRT2,.707))}
     chain(g,...lo,out);chain(g,...hi,out);out.connect(o);return steady([loop(c,'pink',g)])}},
@@ -332,8 +332,8 @@ document.addEventListener('keydown',e=>{if(e.code==='Space'&&!/INPUT|SELECT|TEXT
 function card(k){const c=CH[k];return '<div class="chan" id="ch-'+k+'"><div class="top">'+(c.color?'<span class="sw" style="background:'+c.color+'"></span>':'<span class="ic">'+c.icon+'</span>')+
   '<button type="button" class="tog" data-tog="'+k+'" aria-pressed="false">'+esc(c.name)+'<small>'+esc(c.sub)+'</small></button><span class="state" id="st-'+k+'">off</span></div>'+
   '<input type="range" min="0" max="1" step="0.01" data-vol="'+k+'" aria-label="'+esc(c.name)+' volume">'+
-  (c.opt?'<div class="row"><select data-opt="'+k+'" aria-label="'+esc(c.name)+' setting">'+c.opt.map((x,i)=>'<option value="'+i+'">'+esc(x)+'</option>').join('')+'</select></div>':'')+
-  (c.more?'<a href="#'+c.more+'">What it does ↓</a>':c.group==='noise'?'<a href="#ex-'+k+'">What it does ↓</a>':'')+'</div>'}
+  (c.optLabel?'<label class="opt-l" for="opt-'+k+'">'+esc(c.optLabel)+'</label>':'')+(c.opt?'<div class="row"><select id="opt-'+k+'" data-opt="'+k+'"'+(c.optLabel?'':' aria-label="'+esc(c.name)+' setting"')+'>'+c.opt.map((x,i)=>'<option value="'+i+'">'+esc(x)+'</option>').join('')+'</select></div>':'')+
+  (c.more?'<a href="#'+c.more+'">'+esc(c.moreText||'What it does ↓')+'</a>':c.group==='noise'?'<a href="#ex-'+k+'">What it does ↓</a>':'')+'</div>'}
 $('chNoise').innerHTML=ORDER.filter(k=>CH[k].group==='noise').map(card).join('');
 $('chNature').innerHTML=ORDER.filter(k=>CH[k].group==='nature').map(card).join('');
 $('chBeats').innerHTML=ORDER.filter(k=>CH[k].group==='beats').map(card).join('');
